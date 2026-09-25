@@ -46,7 +46,7 @@ func step(delta: float) -> bool:
 	for i in windows.size():
 		var w: Array = windows[i]
 		if elapsed >= w[0] and prev <= w[1]:
-			var first := prev < w[0] or (prev == 0.0 and w[0] == 0.0)
+			var first: bool = prev < w[0] or (prev == 0.0 and w[0] == 0.0)
 			if on_window.is_valid():
 				on_window.call(i, first)
 	if not released and release_t >= 0.0 and elapsed >= release_t:

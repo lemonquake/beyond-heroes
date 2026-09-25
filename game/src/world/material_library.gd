@@ -118,7 +118,7 @@ static func apply_environment(root: Node) -> void:
 		apply_environment(c)
 
 static func apply_character(meshes: Array, primary: Color) -> void:
-	for mi in meshes:
+	for mi: MeshInstance3D in meshes:
 		if mi.mesh == null:
 			continue
 		for i in mi.mesh.get_surface_count():
