@@ -28,7 +28,7 @@ static func actors_in_arc(world: World3D, origin: Vector3, facing: Vector3, reac
 	var out := []
 	var f := Vector3(facing.x, 0, facing.z).normalized()
 	var half := deg_to_rad(arc_deg) * 0.5
-	for a in actors_in_radius(world, origin, reach, layer_mask):
+	for a: Actor in actors_in_radius(world, origin, reach, layer_mask):
 		var to := a.global_position - origin
 		to.y = 0.0
 		var dist := to.length()
@@ -47,7 +47,7 @@ static func actors_in_line(world: World3D, origin: Vector3, dir: Vector3, length
 	var d := Vector3(dir.x, 0, dir.z).normalized()
 	var mid := origin + d * length * 0.5
 	var out := []
-	for a in actors_in_radius(world, mid, length * 0.5 + width, layer_mask):
+	for a: Actor in actors_in_radius(world, mid, length * 0.5 + width, layer_mask):
 		var to := a.global_position - origin
 		to.y = 0.0
 		var along := to.dot(d)

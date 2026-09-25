@@ -71,7 +71,7 @@ func _number(pos: Vector3, text: String, color: Color, scale := 1.0, rise := 1.2
 	tw.chain().tween_callback(func(): l.visible = false)
 
 func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> void:
-	var is_player_target := target is Actor and target.team == BH.Team.PLAYER
+	var is_player_target: bool = target is Actor and (target as Actor).team == BH.Team.PLAYER
 	if r.evaded:
 		_number(pos + Vector3.UP * 0.3, "Evade" if not is_player_target else "Dodged", Color(0.8, 0.85, 0.9), 0.8)
 		return
