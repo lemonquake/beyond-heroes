@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="44"><stop offset="0" stop-color="#000000" stop-opacity="0.55"/><stop offset="0.6" stop-color="#000000" stop-opacity="0.25"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="-3.12" y1="0" x2="3.12" y2="0"><stop offset="0" stop-color="#b07c50"/><stop offset="0.5" stop-color="#6a3e22"/><stop offset="1" stop-color="#2a160c"/></linearGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="-1" cy="21.03" r="7.1"><stop offset="0" stop-color="#ffe9a0"/><stop offset="0.6" stop-color="#c8962e"/><stop offset="1" stop-color="#5a3a0c"/></radialGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="-6.5" y1="0" x2="6.5" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="0.47" stop-color="#ced5de"/><stop offset="0.53" stop-color="#b4bfcc"/><stop offset="1" stop-color="#3a4250"/></linearGradient><linearGradient id="l5" gradientUnits="userSpaceOnUse" x1="0" y1="-6.25" x2="0" y2="3.25"><stop offset="0" stop-color="#ffe9a0"/><stop offset="0.5" stop-color="#c8962e"/><stop offset="1" stop-color="#5a3a0c"/></linearGradient><radialGradient id="r6" gradientUnits="userSpaceOnUse" cx="-20.5" cy="-4.5" r="5.2"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#5a3a0c"/></radialGradient><radialGradient id="r7" gradientUnits="userSpaceOnUse" cx="18.5" cy="-4.5" r="5.2"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#5a3a0c"/></radialGradient></defs>
+<g transform="translate(60 116) scale(1 0.14)">
+<circle cx="0" cy="0" r="44" fill="url(#r1)"/>
+</g>
+<g transform="translate(42 86) rotate(45) scale(1.12 1.12)">
+<path d="M-1.62,0 L1.62,0 Q3.12,0 3.12,1.5 L3.12,17.35 Q3.12,18.85 1.62,18.85 L-1.62,18.85 Q-3.12,18.85 -3.12,17.35 L-3.12,1.5 Q-3.12,0 -1.62,0 Z" fill="none" stroke="#0a0610" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-1.62,0 L1.62,0 Q3.12,0 3.12,1.5 L3.12,17.35 Q3.12,18.85 1.62,18.85 L-1.62,18.85 Q-3.12,18.85 -3.12,17.35 L-3.12,1.5 Q-3.12,0 -1.62,0 Z" fill="url(#l2)"/>
+<path d="M-3.12,2 L3.12,3.6" fill="none" stroke="#2a160c" stroke-width="0.9" opacity="0.9" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-3.12,5.2 L3.12,6.8" fill="none" stroke="#2a160c" stroke-width="0.9" opacity="0.9" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-3.12,8.4 L3.12,10" fill="none" stroke="#2a160c" stroke-width="0.9" opacity="0.9" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-3.12,11.6 L3.12,13.2" fill="none" stroke="#2a160c" stroke-width="0.9" opacity="0.9" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-3.12,14.8 L3.12,16.4" fill="none" stroke="#2a160c" stroke-width="0.9" opacity="0.9" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="0" cy="23.22" r="5.46" fill="url(#r3)" stroke="#0a0610" stroke-width="2"/>
+<path d="M-6.5,0 L-6.5,-26.88 L-6.5,-53.75 L0,-70 L6.5,-53.75 L6.5,-26.88 L6.5,0 Z" fill="none" stroke="#0a0610" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-6.5,0 L-6.5,-26.88 L-6.5,-53.75 L0,-70 L6.5,-53.75 L6.5,-26.88 L6.5,0 Z" fill="url(#l4)"/>
+<path d="M0,-2 L0,-51.75" fill="none" stroke="#636970" stroke-width="1.82" opacity="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-1.56,-2 L-1.56,-51.75" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-5.7,-3 L-5.7,-53.75 L-0.6,-67.5" fill="none" stroke="#ffffff" stroke-width="0.9" opacity="0.75" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-19.5,-6.25 C-18.57,-6.7 -14.82,-3.55 -11.7,-3.25 C-8.58,-2.95 8.58,-2.95 11.7,-3.25 C14.82,-3.55 18.57,-6.7 19.5,-6.25 C20.43,-5.8 21.78,0.3 21,1.25 C20.22,2.2 14.97,3.05 11.7,3.25 C8.43,3.45 -8.43,3.45 -11.7,3.25 C-14.97,3.05 -20.22,2.2 -21,1.25 C-21.78,0.3 -20.43,-5.8 -19.5,-6.25 Z" fill="none" stroke="#0a0610" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-19.5,-6.25 C-18.57,-6.7 -14.82,-3.55 -11.7,-3.25 C-8.58,-2.95 8.58,-2.95 11.7,-3.25 C14.82,-3.55 18.57,-6.7 19.5,-6.25 C20.43,-5.8 21.78,0.3 21,1.25 C20.22,2.2 14.97,3.05 11.7,3.25 C8.43,3.45 -8.43,3.45 -11.7,3.25 C-14.97,3.05 -20.22,2.2 -21,1.25 C-21.78,0.3 -20.43,-5.8 -19.5,-6.25 Z" fill="url(#l5)"/>
+<circle cx="-20" cy="-2.8" r="3.58" fill="url(#r6)" stroke="#0a0610" stroke-width="1.2"/>
+<circle cx="20" cy="-2.8" r="3.58" fill="url(#r7)" stroke="#0a0610" stroke-width="1.2"/>
+<circle cx="0" cy="0" r="3.58" fill="#a0182a" stroke="#0a0610" stroke-width="1"/>
+<circle cx="-0.6" cy="-0.8" r="1.3" fill="#ffffff" opacity="0.7"/>
+</g>
+</svg>

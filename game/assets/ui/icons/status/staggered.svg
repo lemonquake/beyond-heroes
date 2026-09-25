@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="64" cy="56" r="84"><stop offset="0" stop-color="#2a1a14"/><stop offset="0.6" stop-color="#160d0d"/><stop offset="1" stop-color="#050307"/></radialGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="-32" y1="-40" x2="32" y2="40"><stop offset="0" stop-color="#e8506a"/><stop offset="1" stop-color="#5a0a18"/></linearGradient><linearGradient id="l3" gradientUnits="userSpaceOnUse" x1="-32" y1="-40" x2="32" y2="40"><stop offset="0" stop-color="#e8506a"/><stop offset="1" stop-color="#5a0a18"/></linearGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="128" y2="128"><stop offset="0" stop-color="#dfa3a1"/><stop offset="0.45" stop-color="#b8322e"/><stop offset="1" stop-color="#4a1412"/></linearGradient></defs>
+<path d="M20,2 L108,2 Q126,2 126,20 L126,108 Q126,126 108,126 L20,126 Q2,126 2,108 L2,20 Q2,2 20,2 Z" fill="#050307"/>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="url(#r1)"/>
+<g transform="translate(64 64) scale(0.86) translate(-64 -64)">
+<g transform="translate(59 66) rotate(-9)">
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L-12.8,34.32 L-25.6,15.6 L-32,-9.36 L-32,-32.76 L-16,-35.76 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L-12.8,34.32 L-25.6,15.6 L-32,-9.36 L-32,-32.76 L-16,-35.76 Z" fill="url(#l2)"/>
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L-12.8,34.32 L-25.6,15.6 L-32,-9.36 L-32,-32.76 L-16,-35.76 Z" fill="none" stroke="#eef2f6" stroke-width="1.6" opacity="0.6" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g transform="translate(69 66) rotate(9)">
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L12.8,34.32 L25.6,15.6 L32,-9.36 L32,-32.76 L16,-35.76 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L12.8,34.32 L25.6,15.6 L32,-9.36 L32,-32.76 L16,-35.76 Z" fill="url(#l3)"/>
+<path d="M2,-36 L3.17,-24.48 L4.3,-12.97 L1.31,-1.66 L3.11,9.88 L2.91,21.33 L-0.78,32.6 L-2,44 L12.8,34.32 L25.6,15.6 L32,-9.36 L32,-32.76 L16,-35.76 Z" fill="none" stroke="#eef2f6" stroke-width="1.6" opacity="0.6" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<path d="M66,30 L67.17,41.52 L68.3,53.03 L65.31,64.34 L67.11,75.88 L66.91,87.33 L63.22,98.6 L62,110" fill="none" stroke="#ffe0a0" stroke-width="3" opacity="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21.46,46.39 L11.46,44.61 L11.29,45.08 L20.09,50.15 Z" fill="#ffd8a0" opacity="0.9"/>
+<path d="M42.73,23.16 L36.22,15.38 L35.78,15.63 L39.27,25.16 Z" fill="#ffd8a0" opacity="0.9"/>
+<path d="M88.73,25.16 L92.22,15.63 L91.78,15.38 L85.27,23.16 Z" fill="#ffd8a0" opacity="0.9"/>
+<path d="M107.91,50.15 L116.71,45.08 L116.54,44.61 L106.54,46.39 Z" fill="#ffd8a0" opacity="0.9"/>
+<path d="M102.84,88.73 L112.37,92.22 L112.62,91.78 L104.84,85.27 Z" fill="#ffd8a0" opacity="0.9"/>
+<path d="M23.16,85.27 L15.38,91.78 L15.63,92.22 L25.16,88.73 Z" fill="#ffd8a0" opacity="0.9"/>
+</g>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="none" stroke="url(#l4)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21.5,9.5 L106.5,9.5 Q118.5,9.5 118.5,21.5 L118.5,106.5 Q118.5,118.5 106.5,118.5 L21.5,118.5 Q9.5,118.5 9.5,106.5 L9.5,21.5 Q9.5,9.5 21.5,9.5 Z" fill="none" stroke="#000000" stroke-width="1.2" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21,3 L107,3 Q125,3 125,21 L125,107 Q125,125 107,125 L21,125 Q3,125 3,107 L3,21 Q3,3 21,3 Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

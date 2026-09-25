@@ -1,0 +1,21 @@
+# seam score = mean |first-last column/row| / mean interior neighbour diff (~1 == seamless)
+stone_blocks   seam(albedo x,y)=1.02,0.85  seam(normal x,y)=1.00,0.56  mean albedo=[0.41200000047683716, 0.39800000190734863, 0.35199999809265137]  2.7s
+stone_floor    seam(albedo x,y)=1.27,1.06  seam(normal x,y)=1.32,1.01  mean albedo=[0.4309999942779541, 0.4090000092983246, 0.36800000071525574]  2.7s
+cobblestone    seam(albedo x,y)=1.00,0.92  seam(normal x,y)=1.10,1.02  mean albedo=[0.3490000069141388, 0.33500000834465027, 0.3070000112056732]  2.2s
+brick          seam(albedo x,y)=1.02,0.97  seam(normal x,y)=1.09,0.63  mean albedo=[0.3610000014305115, 0.24500000476837158, 0.19699999690055847]  2.9s
+dirt           seam(albedo x,y)=1.01,1.01  seam(normal x,y)=1.02,1.01  mean albedo=[0.3330000042915344, 0.2669999897480011, 0.20000000298023224]  2.2s
+mud            seam(albedo x,y)=1.01,1.00  seam(normal x,y)=1.06,1.00  mean albedo=[0.25600001215934753, 0.20600000023841858, 0.1550000011920929]  1.7s
+grass          seam(albedo x,y)=0.60,0.64  seam(normal x,y)=0.95,0.65  mean albedo=[0.22499999403953552, 0.23100000619888306, 0.12600000202655792]  2.1s
+forest_floor   seam(albedo x,y)=0.83,0.75  seam(normal x,y)=1.10,0.69  mean albedo=[0.23199999332427979, 0.17299999296665192, 0.11400000005960464]  1.6s
+rock_cliff     seam(albedo x,y)=1.04,1.01  seam(normal x,y)=1.05,0.99  mean albedo=[0.3700000047683716, 0.35199999809265137, 0.3240000009536743]  2.9s
+wood_planks    seam(albedo x,y)=0.98,0.14  seam(normal x,y)=0.99,0.30  mean albedo=[0.3449999988079071, 0.2720000147819519, 0.1979999989271164]  2.8s
+bark           seam(albedo x,y)=1.03,0.98  seam(normal x,y)=0.99,0.99  mean albedo=[0.20499999821186066, 0.17100000381469727, 0.1379999965429306]  2.1s
+moss           seam(albedo x,y)=1.01,0.98  seam(normal x,y)=0.99,0.96  mean albedo=[0.20999999344348907, 0.2639999985694885, 0.1080000028014183]  2.5s
+metal_iron     seam(albedo x,y)=0.92,0.98  seam(normal x,y)=0.92,0.99  mean albedo=[0.27000001072883606, 0.24699999392032623, 0.23899999260902405]  2.2s
+cloth          seam(albedo x,y)=1.13,1.13  seam(normal x,y)=0.98,1.71  mean albedo=[0.4830000102519989, 0.4449999928474426, 0.3790000081062317]  2.1s
+thatch         seam(albedo x,y)=0.71,0.95  seam(normal x,y)=0.95,0.29  mean albedo=[0.3370000123977661, 0.3009999990463257, 0.2070000022649765]  2.3s
+sand_path      seam(albedo x,y)=1.00,1.00  seam(normal x,y)=0.98,1.01  mean albedo=[0.5009999871253967, 0.44200000166893005, 0.3449999988079071]  2.1s
+leaves_atlas   RGBA atlas (not tiled)  1.3s
+grass_blades   RGBA strip (not tiled)  1.2s
+# seam score = mean |first-last column/row| / mean interior neighbour diff (~1 == seamless)
+wood_grain     seam(albedo x,y)=1.01,1.06  seam(normal x,y)=1.00,0.96  mean albedo=[0.39399999380111694, 0.30399999022483826, 0.21299999952316284]  3.4s

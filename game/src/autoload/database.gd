@@ -1,0 +1,104 @@
+extends Node
+## Game database: loads every data definition once and offers typed lookups (autoload `DB`).
+
+var classes := {}
+var weapon_types := {}
+var item_bases := {}
+var affix_defs := {}
+var power_defs := {}
+var skills := {}
+var trees := {}
+var enemies := {}
+var elite_mods := {}
+var maps := {}
+var anim_meta := {}
+
+func _init() -> void:
+	for c in DataClasses.build():
+		classes[c.id] = c
+	for w in DataWeapons.build():
+		weapon_types[w.id] = w
+	for b in DataItems.bases():
+		item_bases[b.id] = b
+	for a in DataItems.affixes():
+		affix_defs[a.id] = a
+	for p in DataItems.powers():
+		power_defs[p.id] = p
+	for s in DataSkills.skills():
+		skills[s.id] = s
+	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage()]:
+		trees[t.id] = t
+	for e in DataEnemies.build():
+		enemies[e.id] = e
+	elite_mods = DataEnemies.elite_mods()
+	for m in DataMaps.build():
+		maps[m.id] = m
+	_load_anim_meta()
+
+func _load_anim_meta() -> void:
+	var path := "res://assets/characters/anim_meta.json"
+	if not FileAccess.file_exists(path):
+		return
+	var txt := FileAccess.get_file_as_string(path)
+	var parsed = JSON.parse_string(txt)
+	if parsed is Dictionary:
+		anim_meta = parsed.get("animations", {})
+
+func class_def(id: StringName) -> ClassDef:
+	return classes.get(id)
+
+func weapon_type(id: StringName) -> WeaponTypeDef:
+	return weapon_types.get(id)
+
+func item_base(id: StringName) -> ItemBaseDef:
+	return item_bases.get(id)
+
+func affix(id: StringName) -> AffixDef:
+	return affix_defs.get(id)
+
+func power(id: StringName) -> LegendaryPowerDef:
+	return power_defs.get(id)
+
+func skill(id: StringName) -> SkillDef:
+	return skills.get(id)
+
+func tree(id: StringName) -> TreeDef:
+	return trees.get(id)
+
+func enemy(id: StringName) -> EnemyDef:
+	return enemies.get(id)
+
+func map_def(id: StringName) -> MapDef:
+	return maps.get(id)
+
+func affixes_for(category: StringName) -> Array:
+	var out := []
+	for a in affix_defs.values():
+		if a.allows(category):
+			out.append(a)
+	out.sort_custom(func(x, y): return String(x.id) < String(y.id))
+	return out
+
+func powers_for(category: StringName) -> Array:
+	var out := []
+	for p in power_defs.values():
+		if p.categories.is_empty() or p.categories.has(category):
+			out.append(p)
+	out.sort_custom(func(x, y): return String(x.id) < String(y.id))
+	return out
+
+## Animation timing metadata; falls back to sensible defaults if an animation is missing from the sidecar.
+func anim(name: StringName) -> Dictionary:
+	var m: Dictionary = anim_meta.get(String(name), {})
+	if m.is_empty():
+		return {"length": 0.7, "loop": false, "hits": [[0.3, 0.4]], "cancel_after": 0.5, "release": 0.3}
+	return m
+
+func make_item(base_id: StringName, rarity := BH.Rarity.COMMON, ilvl := 1, seed_value := 0) -> ItemInstance:
+	var b := item_base(base_id)
+	if b == null:
+		push_error("Unknown item base %s" % base_id)
+		return null
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value if seed_value != 0 else hash(String(base_id) + str(Time.get_ticks_usec()))
+	return ItemGenerator.generate(b, ilvl, rarity, rng)

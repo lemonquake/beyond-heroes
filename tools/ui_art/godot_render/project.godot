@@ -1,0 +1,5 @@
+; Minimal throwaway project used only to rasterize SVGs through Godot's ThorVG (Image.load_svg_from_string).
+config_version=5
+
+[application]
+config/name="bh_ui_art_render"

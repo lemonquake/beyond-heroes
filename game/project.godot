@@ -1,0 +1,68 @@
+; Engine configuration file.
+; Beyond Heroes by Aljay Leodones
+
+config_version=5
+
+[application]
+
+config/name="Beyond Heroes"
+config/description="An atmospheric action RPG by Aljay Leodones."
+run/main_scene="res://src/main.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.03, 0.025, 0.03, 1)
+boot_splash/show_image=false
+
+[autoload]
+
+Events="*res://src/autoload/events.gd"
+DB="*res://src/autoload/database.gd"
+Settings="*res://src/autoload/settings.gd"
+InputSetup="*res://src/autoload/input_setup.gd"
+Audio="*res://src/autoload/audio_manager.gd"
+SaveSystem="*res://src/autoload/save_system.gd"
+Game="*res://src/autoload/game.gd"
+FX="*res://src/autoload/fx.gd"
+Dev="*res://src/autoload/dev_tools.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1600
+window/size/window_height_override=900
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=1
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="player"
+3d_physics/layer_3="enemy"
+3d_physics/layer_4="props"
+3d_physics/layer_5="debris"
+3d_physics/layer_6="interact"
+3d_physics/layer_7="ground"
+3d_physics/layer_8="hurtbox"
+
+[physics]
+
+common/physics_ticks_per_second=60
+common/max_physics_steps_per_frame=6
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=2
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/screen_space_aa=1
+environment/defaults/default_clear_color=Color(0.03, 0.03, 0.04, 1)
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
+anti_aliasing/quality/use_debanding=true

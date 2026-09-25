@@ -1,0 +1,23 @@
+extends Node
+## Global signal bus (autoload `Events`). Gameplay emits; UI, audio and FX listen.
+
+signal damage_dealt(target: Node, result: DamageResult, position: Vector3, attacker: Node)
+signal actor_died(actor: Node, killer: Node)
+signal player_spawned(player: Node)
+signal player_leveled(level: int, gained: int)
+signal xp_gained(amount: int)
+signal loot_dropped(item: ItemInstance, position: Vector3)
+signal loot_picked(item: ItemInstance)
+signal gold_picked(amount: int)
+signal impact(position: Vector3, strength: float, surface: StringName)
+signal camera_shake(trauma: float)
+signal hitstop(duration: float)
+signal boss_engaged(boss: Node)
+signal boss_phase(boss: Node, phase: int)
+signal boss_defeated(boss: Node)
+signal map_loaded(map_id: StringName)
+signal teleporter_discovered(map_id: StringName)
+signal notify(text: String, kind: StringName)
+signal ui_toggle(panel: StringName)
+signal interact_prompt(text: String)
+signal elite_spawned(enemy: Node)

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="60" cy="54" r="63.8"><stop offset="0" stop-color="#0b2037"/><stop offset="0.65" stop-color="#070f1a"/><stop offset="1" stop-color="#050307"/></radialGradient><radialGradient id="r2" gradientUnits="userSpaceOnUse" cx="64" cy="60" r="56"><stop offset="0" stop-color="#30c4d4" stop-opacity="0.35"/><stop offset="1" stop-color="#30c4d4" stop-opacity="0"/></radialGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="56.8" cy="65.2" r="43.2"><stop offset="0" stop-color="#76e2ea"/><stop offset="0.45" stop-color="#138a9c"/><stop offset="1" stop-color="#062a44"/></radialGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="20" y1="10" x2="108" y2="118"><stop offset="0" stop-color="#76e2ea"/><stop offset="0.45" stop-color="#138a9c"/><stop offset="1" stop-color="#062a44"/></linearGradient></defs>
+<circle cx="64" cy="64" r="61" fill="#050307"/>
+<circle cx="64" cy="64" r="58" fill="url(#r1)"/>
+<circle cx="64" cy="64" r="56" fill="url(#r2)"/>
+<path d="M64,12.4 C58,35.44 40,41.2 40,70 C40,88 50.8,94 64,94 C77.2,94 88,88 88,70 C88,41.2 70,35.44 64,12.4 Z" fill="none" stroke="#0a0610" stroke-width="5.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M64,12.4 C58,35.44 40,41.2 40,70 C40,88 50.8,94 64,94 C77.2,94 88,88 88,70 C88,41.2 70,35.44 64,12.4 Z" fill="url(#r3)"/>
+<path d="M59.2,40 C57.7,50.56 49.6,59.2 49.6,66.4 C49.6,70.9 52.3,72.4 55.6,72.4 C58.9,72.4 61.6,70.9 61.6,66.4 C61.6,59.2 60.7,50.56 59.2,40 Z" fill="#ffffff" opacity="0.7"/>
+<path d="M24,95 C25.67,96 30.67,101 34,101 C37.33,101 40.67,95 44,95 C47.33,95 50.67,101 54,101 C57.33,101 60.67,95 64,95 C67.33,95 70.67,101 74,101 C77.33,101 80.67,95 84,95 C87.33,95 90.67,101 94,101 C97.33,101 102.33,96 104,95" fill="none" stroke="#0a0610" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M24,95 C25.67,96 30.67,101 34,101 C37.33,101 40.67,95 44,95 C47.33,95 50.67,101 54,101 C57.33,101 60.67,95 64,95 C67.33,95 70.67,101 74,101 C77.33,101 80.67,95 84,95 C87.33,95 90.67,101 94,101 C97.33,101 102.33,96 104,95" fill="none" stroke="#76e2ea" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M24,103 C25.67,104 30.67,109 34,109 C37.33,109 40.67,103 44,103 C47.33,103 50.67,109 54,109 C57.33,109 60.67,103 64,103 C67.33,103 70.67,109 74,109 C77.33,109 80.67,103 84,103 C87.33,103 90.67,109 94,109 C97.33,109 102.33,104 104,103" fill="none" stroke="#0a0610" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M24,103 C25.67,104 30.67,109 34,109 C37.33,109 40.67,103 44,103 C47.33,103 50.67,109 54,109 C57.33,109 60.67,103 64,103 C67.33,103 70.67,109 74,109 C77.33,109 80.67,103 84,103 C87.33,103 90.67,109 94,109 C97.33,109 102.33,104 104,103" fill="none" stroke="#76e2ea" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="64" cy="64" r="58" fill="none" stroke="#000000" stroke-width="8"/>
+<circle cx="64" cy="64" r="58" fill="none" stroke="url(#l4)" stroke-width="5"/>
+<circle cx="64" cy="64" r="54.5" fill="none" stroke="#000000" stroke-width="1" opacity="0.7"/>
+</svg>

@@ -1,0 +1,6 @@
+interface:
+  display_name: "lemondev"
+  short_description: "Game development with blind review and validation"
+  default_prompt: "Use $lemondev to build and verify my game feature with the Gauntlet Loop."
+policy:
+  allow_implicit_invocation: true

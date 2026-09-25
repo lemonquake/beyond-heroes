@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="64" cy="56" r="84"><stop offset="0" stop-color="#0c2a14"/><stop offset="0.6" stop-color="#08150d"/><stop offset="1" stop-color="#050307"/></radialGradient><radialGradient id="r2" gradientUnits="userSpaceOnUse" cx="64" cy="64" r="50"><stop offset="0" stop-color="#40e060" stop-opacity="0.5"/><stop offset="0.35" stop-color="#40e060" stop-opacity="0.28"/><stop offset="0.7" stop-color="#40e060" stop-opacity="0.08"/><stop offset="1" stop-color="#40e060" stop-opacity="0"/></radialGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="45.4" cy="57.5" r="46.2"><stop offset="0" stop-color="#b0ffb8"/><stop offset="0.45" stop-color="#2ab04a"/><stop offset="1" stop-color="#0a4a1a"/></radialGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="92" y1="22" x2="92" y2="50"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#6ae07a"/></linearGradient><linearGradient id="l5" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="128" y2="128"><stop offset="0" stop-color="#a9e3b7"/><stop offset="0.45" stop-color="#40c060"/><stop offset="1" stop-color="#1a4d26"/></linearGradient></defs>
+<path d="M20,2 L108,2 Q126,2 126,20 L126,108 Q126,126 108,126 L20,126 Q2,126 2,108 L2,20 Q2,2 20,2 Z" fill="#050307"/>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="url(#r1)"/>
+<g transform="translate(64 64) scale(0.86) translate(-64 -64)">
+<circle cx="64" cy="64" r="50" fill="url(#r2)"/>
+<path d="M58,99.5 C47.5,89 22.3,72.2 24.4,55.4 C26.5,36.5 49.6,36.5 58,53.3 C66.4,36.5 89.5,36.5 91.6,55.4 C93.7,72.2 68.5,89 58,99.5 Z" fill="none" stroke="#0a0610" stroke-width="5.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M58,99.5 C47.5,89 22.3,72.2 24.4,55.4 C26.5,36.5 49.6,36.5 58,53.3 C66.4,36.5 89.5,36.5 91.6,55.4 C93.7,72.2 68.5,89 58,99.5 Z" fill="url(#r3)"/>
+<path d="M32.8,57.5 C33.5,55.75 34.55,48.92 37,47 C39.45,45.08 45.75,46.12 47.5,45.95" fill="none" stroke="#ffffff" stroke-width="3.15" opacity="0.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M88,22 L96,22 L96,32 L106,32 L106,40 L96,40 L96,50 L88,50 L88,40 L78,40 L78,32 L88,32 Z" fill="none" stroke="#0a0610" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M88,22 L96,22 L96,32 L106,32 L106,40 L96,40 L96,50 L88,50 L88,40 L78,40 L78,32 L88,32 Z" fill="url(#l4)"/>
+<path d="M28,27 L28.54,29.46 L31,30 L28.54,30.54 L28,33 L27.46,30.54 L25,30 L27.46,29.46 Z" fill="#d0ffd8" opacity="0.9"/>
+<path d="M100,92.5 L100.63,95.37 L103.5,96 L100.63,96.63 L100,99.5 L99.37,96.63 L96.5,96 L99.37,95.37 Z" fill="#d0ffd8" opacity="0.9"/>
+</g>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="none" stroke="url(#l5)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21.5,9.5 L106.5,9.5 Q118.5,9.5 118.5,21.5 L118.5,106.5 Q118.5,118.5 106.5,118.5 L21.5,118.5 Q9.5,118.5 9.5,106.5 L9.5,21.5 Q9.5,9.5 21.5,9.5 Z" fill="none" stroke="#000000" stroke-width="1.2" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21,3 L107,3 Q125,3 125,21 L125,107 Q125,125 107,125 L21,125 Q3,125 3,107 L3,21 Q3,3 21,3 Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
