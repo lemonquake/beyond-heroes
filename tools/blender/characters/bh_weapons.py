@@ -193,13 +193,31 @@ def bow():
 
 def arrow():
     parts = []
-    V, F = M.lathe([(0, -0.37), (0.004, -0.37), (0.0045, 0.32), (0, 0.325)], 6)
+    V, F = M.lathe([(0, -0.372), (0.0042, -0.372), (0.0046, -0.36), (0.0046, 0.3), (0.0042, 0.318), (0, 0.322)], 14)
     parts.append(M.Part(V, F, "BH_Wood", name="shaft"))
-    V, F = M.lathe([(0, 0.31), (0.009, 0.325), (0.0, 0.378)], 4)
+    # nock
+    V, F = M.lathe([(0, -0.382), (0.0052, -0.382), (0.006, -0.37), (0.0052, -0.358), (0, -0.356)], 14)
+    parts.append(M.Part(V, F, "BH_DarkSteel", name="nock"))
+    # bodkin-leaf head with a socket
+    V, F = M.lathe([(0, 0.3), (0.0062, 0.302), (0.0065, 0.318), (0.0, 0.322)], 14)
+    parts.append(M.Part(V, F, "BH_DarkSteel", name="socket"))
+    rings = []
+    for z, w, t in ((0.316, 0.006, 0.004), (0.33, 0.017, 0.0035), (0.35, 0.02, 0.003), (0.368, 0.01, 0.002),
+                    (0.38, 0.0008, 0.0006)):
+        rings.append(np.array([(w, 0, z), (0.3 * w, t, z), (-0.3 * w, t, z), (-w, 0, z), (-0.3 * w, -t, z),
+                               (0.3 * w, -t, z)]))
+    V, F = M.loft(rings)
     parts.append(M.Part(V, F, "BH_Steel", name="head"))
+    # three curved vanes + binding wraps
     for k in range(3):
-        V, F = M.prism([(0.004, -0.34), (0.02, -0.33), (0.016, -0.24), (0.004, -0.22)], 0.0012, axis="y")
-        parts.append(M.Part(V, F, "BH_Cloth_Primary", name="fletch").rot(Rz(120 * k)))
+        o = [(0.0045, -0.345), (0.012, -0.338), (0.021, -0.322), (0.022, -0.29), (0.018, -0.25), (0.0045, -0.228)]
+        V, F = M.prism(M.resample_closed(o, 18), 0.0014, axis="y")
+        vane = M.Part(V, F, "BH_Cloth_Primary", name="fletch")
+        vane.warp(lambda v: (v[0], v[1] + 0.02 * (v[2] + 0.29) ** 2 * 10, v[2]))
+        parts.append(vane.rot(Rz(120 * k + 30)))
+    for z in (-0.352, -0.222):
+        V, F = M.lathe([(0, z - 0.004), (0.0054, z - 0.004), (0.0056, z), (0.0054, z + 0.004), (0, z + 0.004)], 14)
+        parts.append(M.Part(V, F, "BH_Gold", name="wrap"))
     return parts
 
 
@@ -244,15 +262,32 @@ def staff():
 
 def wand():
     parts = []
-    prof = [(0, -0.1), (0.008, -0.1), (0.011, -0.09), (0.009, -0.07), (0.0095, 0.05), (0.0065, 0.2), (0.0, 0.215)]
-    V, F = M.lathe(prof, 8)
+    # slender tapered shaft with a slight organic wobble
+    pts, prof = [], []
+    for k in range(11):
+        u = k / 10
+        z = -0.09 + 0.29 * u
+        pts.append((0.0015 * math.sin(u * 7.0), 0.0012 * math.cos(u * 5.0), z))
+        r = 0.0095 - 0.0038 * u + 0.0008 * math.sin(u * 19)
+        prof.append((r, r))
+    V, F = M.tube(pts, prof, n=12, up=(0, -1, 0))
     parts.append(M.Part(V, F, "BH_Wood", name="wand"))
-    parts.append(_grip(-0.065, 0.05, 0.0105, 4))
-    V, F = M.lathe([(0, 0.19), (0.012, 0.2), (0.014, 0.215), (0.0, 0.225)], 8)
+    parts.append(_grip(-0.07, 0.04, 0.0105, 5))
+    for z in (0.045, 0.1):
+        V, F = M.lathe([(0, z - 0.004), (0.0098, z - 0.004), (0.0105, z), (0.0098, z + 0.004), (0, z + 0.004)], 12)
+        parts.append(M.Part(V, F, "BH_Gold", name="band"))
+    # claw setting holding the gem
+    V, F = M.lathe([(0, 0.188), (0.008, 0.19), (0.011, 0.2), (0.0, 0.205)], 12)
     parts.append(M.Part(V, F, "BH_Gold", name="setting"))
-    V, F = M.lathe([(0, 0.205), (0.013, 0.225), (0.012, 0.24), (0.0, 0.25)], 6)
+    for k in range(4):
+        a = math.radians(90 * k + 45)
+        claw = [(0.008 * math.cos(a), 0.008 * math.sin(a), 0.198), (0.013 * math.cos(a), 0.013 * math.sin(a), 0.215),
+                (0.007 * math.cos(a), 0.007 * math.sin(a), 0.232)]
+        V, F = M.tube(claw, [(0.0022, 0.0022), (0.0018, 0.0018), (0.001, 0.001)], n=5, up=(0, 0, 1))
+        parts.append(M.Part(V, F, "BH_Gold", name="claw"))
+    V, F = M.lathe([(0, 0.2), (0.0105, 0.212), (0.012, 0.222), (0.0085, 0.236), (0.0, 0.25)], 8)
     parts.append(M.Part(V, F, "BH_Emissive", name="gem"))
-    V, F = M.lathe([(0, -0.11), (0.012, -0.105), (0.013, -0.095), (0, -0.09)], 8)
+    V, F = M.lathe([(0, -0.11), (0.011, -0.106), (0.013, -0.097), (0.011, -0.09), (0, -0.088)], 12)
     parts.append(M.Part(V, F, "BH_Gold", name="cap"))
     return parts
 
@@ -345,9 +380,109 @@ def shield():
     return parts
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Aether variants: same silhouette family + glowing BH_Aether channels + a floating crystal element
+def _crystal(center, length, radius, sides=6, rot=(0, 0, 0), mat="BH_Aether"):
+    V, F = M.lathe([(0, -length / 2), (radius * 0.75, -length * 0.2), (radius, 0.0), (radius * 0.8, length * 0.16),
+                    (0, length / 2)], sides)
+    return M.Part(V, F, mat, name="crystal").rot(Rx(rot[0]) @ Ry(rot[1]) @ Rz(rot[2])).move(center)
+
+
+def _flat_channel(z0, z1, w0, w1, t, x=0.0, mat="BH_Aether"):
+    """Thin raised strip on both blade flats (+-Y) from z0 to z1 (tapering)."""
+    parts = []
+    for sy in (1, -1):
+        rings = []
+        for z in np.linspace(z0, z1, 6):
+            u = (z - z0) / (z1 - z0)
+            w = (w0 + (w1 - w0) * u) / 2
+            rings.append(np.array([(x - w, sy * t * 0.2, z), (x + w, sy * t * 0.2, z), (x + w, sy * (t + 0.0012), z),
+                                   (x - w, sy * (t + 0.0012), z)]))
+        V, F = M.loft(rings)
+        p = M.Part(V, F, mat, name="channel")
+        if sy < 0:
+            p.flip()
+        parts.append(p)
+    return parts
+
+
+def _ring(center, r, tube_r, axis="z", n=24, mat="BH_Aether"):
+    pts = []
+    for i in range(n + 1):
+        a = 2 * math.pi * i / n
+        if axis == "z":
+            pts.append((center[0] + r * math.cos(a), center[1] + r * math.sin(a), center[2]))
+        else:
+            pts.append((center[0] + r * math.cos(a), center[1], center[2] + r * math.sin(a)))
+    V, F = M.tube(pts, [(tube_r, tube_r)] * len(pts), n=5, up=(0, 0, 1) if axis == "y" else (1, 0, 0),
+                  cap0=False, cap1=False)
+    return M.Part(V, F, mat, name="ring")
+
+
+def sword_aether():
+    parts = sword()
+    for p in parts:
+        if p.name == "collar":
+            p.mat = "BH_DarkSteel"
+    # the fuller holds an aether channel on both flats
+    parts += _flat_channel(0.12, 0.70, 0.012, 0.004, 0.0065 * 0.55)
+    parts.append(_crystal((0, 0, 0.093), 0.034, 0.016, rot=(90, 0, 0)))          # gem through the guard
+    # floating crystals hovering beyond the guard tips
+    for sx in (1, -1):
+        parts.append(_crystal((sx * 0.148, 0, 0.122), 0.05, 0.011, rot=(0, -sx * 35, 0)))
+    return parts
+
+
+def greatsword_aether():
+    parts = greatsword()
+    parts += _flat_channel(0.17, 1.12, 0.016, 0.005, 0.0075 * 0.55)
+    parts.append(_crystal((0, 0, 0.14), 0.05, 0.02, rot=(90, 0, 0)))
+    for sx in (1, -1):   # floating shards beside the parrying lugs
+        parts.append(_crystal((sx * 0.1, 0, 0.29), 0.07, 0.014, rot=(0, sx * 18, 0)))
+    return parts
+
+
+def staff_aether():
+    parts = [p for p in staff() if p.name != "crystal"]
+    # larger free-floating aether crystal inside the prongs, with two orbit rings
+    parts.append(_crystal((0, 0, 0.7), 0.2, 0.042, sides=6, rot=(0, 0, 15)))
+    parts.append(_ring((0, 0, 0.7), 0.075, 0.003, axis="z", n=28))
+    parts.append(_ring((0, 0, 0.7), 0.068, 0.0025, axis="y", n=28).rot(Rz(35), center=(0, 0, 0.7)))
+    # spiral channel down the upper shaft
+    pts = []
+    for i in range(25):
+        u = i / 24
+        z = 0.48 - 0.5 * u
+        a = u * 4 * math.pi
+        r = 0.0245
+        pts.append((r * math.cos(a) + 0.012 * math.sin(((z + 1.05) / 1.62) * 9.0),
+                    r * math.sin(a) + 0.01 * math.cos(((z + 1.05) / 1.62) * 7.0), z))
+    V, F = M.tube(pts, [(0.003, 0.003)] * len(pts), n=5, up=(0, 0, 1))
+    parts.append(M.Part(V, F, "BH_Aether", name="spiral"))
+    return parts
+
+
+def wand_aether():
+    parts = [p for p in wand() if p.name != "gem"]
+    parts.append(_crystal((0, 0, 0.243), 0.042, 0.011, sides=5))
+    parts.append(_ring((0, 0, 0.24), 0.019, 0.0018, axis="z", n=20))
+    pts = []
+    for i in range(17):
+        u = i / 16
+        z = 0.18 - 0.2 * u
+        a = u * 3 * math.pi
+        r = 0.0092 - 0.0015 * (1 - u)
+        pts.append((r * math.cos(a), r * math.sin(a), z))
+    V, F = M.tube(pts, [(0.0018, 0.0018)] * len(pts), n=4, up=(0, 0, 1))
+    parts.append(M.Part(V, F, "BH_Aether", name="spiral"))
+    return parts
+
+
 WEAPONS = {
     "sword": sword, "greatsword": greatsword, "axe": axe, "spear": spear, "dagger": dagger, "bow": bow,
     "staff": staff, "wand": wand, "shield": shield, "arrow": arrow,
+    "sword_aether": sword_aether, "greatsword_aether": greatsword_aether, "staff_aether": staff_aether,
+    "wand_aether": wand_aether,
 }
 
 # Godot-side attachment (BoneAttachment3D child transform, Godot axes), verified in previews.

@@ -24,6 +24,13 @@ var current_map: StringName = &"sanctuary"
 var current_spawn: StringName = &"start"
 var play_time := 0.0
 var potion_belt := [&"health_potion", &"mana_potion"]
+var difficulty := 1
+## Per-NPC memory: npc id -> {"visited": {node_id: true}, "rel": int}. Relationship is reputation-ready (-100..100).
+var dialogue := {}
+## Free-form NPC state (met, gifts given, services used ...): npc id -> Dictionary.
+var npc_state := {}
+## Merchant state that must survive saving (stock, refresh clock, sold specials): shop id -> Shop.to_dict().
+var shops := {}
 
 func setup(p_cls: ClassDef, p_name: String) -> void:
 	cls = p_cls
@@ -208,6 +215,34 @@ func unequip_to_inventory(slot: StringName) -> String:
 		inventory.add(orphan)
 	return ""
 
+# ---- NPCs & dialogue ---------------------------------------------------------------------------------------
+
+const REL_MIN := -100
+const REL_MAX := 100
+
+func _npc_mem(npc_id: StringName) -> Dictionary:
+	if not dialogue.has(npc_id):
+		dialogue[npc_id] = {"visited": {}, "rel": 0}
+	return dialogue[npc_id]
+
+func dialogue_visited(npc_id: StringName, node_id: String) -> bool:
+	return dialogue.has(npc_id) and dialogue[npc_id].visited.has(node_id)
+
+func mark_dialogue_visited(npc_id: StringName, node_id: String) -> void:
+	_npc_mem(npc_id).visited[node_id] = true
+
+func relationship(npc_id: StringName) -> int:
+	return int(dialogue[npc_id].rel) if dialogue.has(npc_id) else 0
+
+func add_relationship(npc_id: StringName, delta: int) -> void:
+	var m := _npc_mem(npc_id)
+	m.rel = clampi(int(m.rel) + delta, REL_MIN, REL_MAX)
+
+func npc(npc_id: StringName) -> Dictionary:
+	if not npc_state.has(npc_id):
+		npc_state[npc_id] = {}
+	return npc_state[npc_id]
+
 # ---- Serialization ----------------------------------------------------------------------------------------
 
 func to_dict() -> Dictionary:
@@ -221,7 +256,20 @@ func to_dict() -> Dictionary:
 		"discovered_maps": discovered_maps.keys().map(func(k): return String(k)),
 		"teleporters": unlocked_teleporters.keys().map(func(k): return String(k)),
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
+		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
 	}
+
+func _dialogue_out() -> Dictionary:
+	var d := {}
+	for k in dialogue:
+		d[String(k)] = {"visited": dialogue[k].visited.keys(), "rel": int(dialogue[k].rel)}
+	return d
+
+static func _keyed_out(src: Dictionary) -> Dictionary:
+	var d := {}
+	for k in src:
+		d[String(k)] = src[k].duplicate(true)
+	return d
 
 func _flags_out() -> Dictionary:
 	var d := {}
@@ -254,4 +302,17 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.current_map = StringName(d.get("map", "sanctuary"))
 	h.current_spawn = StringName(d.get("spawn", "start"))
 	h.play_time = float(d.get("play_time", 0.0))
+	h.difficulty = int(d.get("difficulty", 1))
+	var dl: Dictionary = d.get("dialogue", {})
+	for k in dl:
+		var vis := {}
+		for n in dl[k].get("visited", []):
+			vis[String(n)] = true
+		h.dialogue[StringName(k)] = {"visited": vis, "rel": clampi(int(dl[k].get("rel", 0)), REL_MIN, REL_MAX)}
+	var ns: Dictionary = d.get("npcs", {})
+	for k in ns:
+		h.npc_state[StringName(k)] = (ns[k] as Dictionary).duplicate(true)
+	var sh: Dictionary = d.get("shops", {})
+	for k in sh:
+		h.shops[StringName(k)] = (sh[k] as Dictionary).duplicate(true)
 	return h

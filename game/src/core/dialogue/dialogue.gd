@@ -14,6 +14,8 @@ extends RefCounted
 ## Actions: {"set_flag": id, "value": v} {"give_item": base_id, "count": n, "rarity": r} {"take_item": base_id, "count": n}
 ##   {"give_gold": n} {"take_gold": n} {"give_xp": n} {"open_shop": shop_id} {"relationship": delta}
 ##   {"event": id, ...} (quest-ready hook) {"unlock_teleporter": id} {"heal": 1} {"skill_point": n} {"talent_point": n}
+##   {"service": "respec" | "heal"} (performed by the NPC service layer)
+## Branch node: {"branch": [[conditions, node_id], ...]} jumps to the first matching node without showing anything.
 ##
 ## Text may mark important words with **double asterisks**; the UI highlights them.
 
@@ -33,6 +35,23 @@ func entry_node(hero: HeroData) -> String:
 
 func node(id: String) -> Dictionary:
 	return graph.get("nodes", {}).get(id, {})
+
+## Follow branch nodes to the first real node (max depth guards against authoring loops).
+func resolve(id: String, hero: HeroData) -> String:
+	for i in 8:
+		var n := node(id)
+		if not n.has("branch"):
+			return id
+		var nxt := ""
+		for b in n.branch:
+			if check_all(b[0], hero):
+				nxt = String(b[1])
+				break
+		if nxt == "":
+			return ""
+		id = nxt
+	push_warning("Dialogue branch loop at %s" % id)
+	return ""
 
 func lines_of(n: Dictionary) -> PackedStringArray:
 	var t = n.get("text", "")
@@ -124,6 +143,8 @@ func run_actions(actions: Array, hero: HeroData) -> Dictionary:
 			hero.unlocked_teleporters[StringName(a.unlock_teleporter)] = true
 		elif a.has("heal"):
 			out["heal"] = true
+		elif a.has("service"):
+			out["service"] = StringName(a.service)
 		elif a.has("skill_point"):
 			hero.progress.skill_points += int(a.skill_point)
 			hero.progress.points_changed.emit()

@@ -86,17 +86,19 @@ def tip_speed(P):
     return v
 
 
-def refine_hits(P, windows, frac=0.55, pad=0.5):
-    """For each authored window (f0, f1), find the contiguous interval around the speed peak inside it where the tip
-    speed >= frac * peak. Returns list of (t0, t1) seconds."""
+def refine_hits(P, windows, frac=0.3, min_frames=3):
+    """For each authored strike window (f0, f1) (frames), find the contiguous run of frames around the tip-speed peak
+    where the tip moves at >= frac * peak: that is the visible sweep through the contact arc. The window spans from
+    the frame where that fast motion starts to the frame where it ends, widened symmetrically (toward the faster
+    neighbour) to at least `min_frames` frames so a 60 Hz game loop always samples it. Returns [(t0, t1)] seconds."""
     v = tip_speed(P)
+    n = len(v)
     out = []
     for (f0, f1) in windows:
-        i0, i1 = int(math.floor(f0)), int(math.ceil(f1))
-        i1 = min(i1, len(v) - 1)
+        i0, i1 = max(int(math.floor(f0)), 1), min(int(math.ceil(f1)) + 1, n - 1)
         seg = v[i0:i1 + 1]
         if len(seg) == 0:
-            out.append((f0 / FPS, f1 / FPS))
+            out.append((round(f0 / FPS, 3), round(f1 / FPS, 3)))
             continue
         pk = i0 + int(np.argmax(seg))
         thr = frac * v[pk]
@@ -106,11 +108,22 @@ def refine_hits(P, windows, frac=0.55, pad=0.5):
         b = pk
         while b + 1 <= i1 and v[b + 1] >= thr:
             b += 1
-        # velocity at frame i is the motion from i-1 to i
-        t0 = max(a - 1 + pad * 0.5, 0) / FPS
-        t1 = (b + pad * 0.5) / FPS
-        out.append((round(t0, 3), round(t1, 3)))
-    return out
+        s0, s1 = a - 1, b          # speed at frame i = motion from i-1 to i
+        while s1 - s0 < min_frames:
+            left = v[s0] if s0 >= 1 else -1.0
+            right = v[s1 + 1] if s1 + 1 < n else -1.0
+            if right >= left and s1 + 1 < n:
+                s1 += 1
+            elif s0 >= 1:
+                s0 -= 1
+            else:
+                break
+        out.append([s0, s1])
+    for k in range(len(out) - 1):          # multi-hit clips: windows never overlap
+        if out[k][1] > out[k + 1][0]:
+            m = (out[k][1] + out[k + 1][0]) // 2
+            out[k][1], out[k + 1][0] = m, m
+    return [(round(a / FPS, 3), round(b / FPS, 3)) for a, b in out]
 
 
 def ik_errors(frames, rig):

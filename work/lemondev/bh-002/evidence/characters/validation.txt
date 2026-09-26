@@ -1,0 +1,81 @@
+Beyond Heroes C6 validation (Blender re-import of the exported GLBs into a fresh scene)
+Blender 5.2.2 LTS; library: 117 animations; contract list: 117 names
+
+== knight.glb  (7.01 MB)
+  [ok]   one armature object named 'Armature': ['Armature']
+  [ok]   no cameras/lights: []
+  [ok]   skeleton: 26 bones, contract bones missing: []
+  [ok]   hierarchy matches contract (bad parents: [])
+  bones: root, hips, spine, chest, neck, head, shoulder.L, upper_arm.L, forearm.L, hand.L, weapon.L, shoulder.R, upper_arm.R, forearm.R, hand.R, weapon.R, thigh.L, shin.L, foot.L, toe.L, thigh.R, shin.R, foot.R, toe.R
+  extra bones: ['cape.1', 'cape.2']
+  [ok]   animations in glTF: 117 (library 117), missing: []
+  [ok]   no unexpected animations: []
+  [ok]   Blender actions after import: 117
+  [ok]   animation lengths match anim_meta.json: mismatches []
+  [ok]   anim_meta.json has every animation: missing []
+  [ok]   triangles: 18780 (8k-25k)
+  [ok]   materials: ['BH_Aether', 'BH_Cloth_Primary', 'BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Shadow', 'BH_Steel']
+  [ok]   uses BH_Aether (glowing aether channels)
+  height (rest bbox): 1.929 m, min z -1.000
+  [ok]   skin weights on deform bones only (21 weighted bones; non-deform weighted: [])
+  vertex colors (baked AO): True
+  animation names: idle idle_look idle_adjust idle_knight idle_mage idle_hurt idle_1h idle_shield idle_2h idle_spear idle_dagger idle_bow idle_staff idle_wand idle_dual idle_combat_hurt walk run walk_back strafe_l strafe_r run_combat walk_hurt run_hurt run_start run_stop turn_l turn_r dodge_roll dodge_step sword_1 sword_2 sword_3 sword_4 sword_heavy gs_1 gs_2 gs_3 gs_4 gs_heavy axe_1 axe_2 axe_3 axe_4 axe_heavy spear_1 spear_2 spear_3 spear_4 spear_heavy dagger_1 dagger_2 dagger_3 dagger_4 dagger_heavy dual_1 dual_2 dual_3 dual_4 dual_heavy staff_1 staff_2 staff_3 staff_4 staff_heavy wand_1 wand_2 wand_3 wand_4 wand_heavy bow_1 bow_2 bow_draw_hold bow_release charge_hold charge_release special_attack block_loop block_impact parry shield_bash cast_quick cast_heavy cast_channel cast_area cast_weapon cast_ultimate whirlwind leap_slam war_cry blink hit_light hit_heavy hit_front hit_back hit_left hit_right stagger_small stagger_heavy knockback launch wall_impact knockdown getup death revive interact_pickup interact_chest interact_talk interact_teleport alert taunt boss_slam boss_sweep boss_roar boss_charge boss_summon
+
+== mage.glb  (6.90 MB)
+  [ok]   one armature object named 'Armature': ['Armature']
+  [ok]   no cameras/lights: []
+  [ok]   skeleton: 26 bones, contract bones missing: []
+  [ok]   hierarchy matches contract (bad parents: [])
+  bones: root, hips, spine, chest, neck, head, shoulder.L, upper_arm.L, forearm.L, hand.L, weapon.L, shoulder.R, upper_arm.R, forearm.R, hand.R, weapon.R, thigh.L, shin.L, foot.L, toe.L, thigh.R, shin.R, foot.R, toe.R
+  extra bones: ['crystal.L', 'crystal.R']
+  [ok]   animations in glTF: 117 (library 117), missing: []
+  [ok]   no unexpected animations: []
+  [ok]   Blender actions after import: 117
+  [ok]   animation lengths match anim_meta.json: mismatches []
+  [ok]   anim_meta.json has every animation: missing []
+  [ok]   triangles: 16414 (8k-25k)
+  [ok]   materials: ['BH_Aether', 'BH_Bone', 'BH_Cloth_Primary', 'BH_Cloth_Secondary', 'BH_DarkSteel', 'BH_Gold', 'BH_Hair', 'BH_Leather', 'BH_Shadow', 'BH_Skin', 'BH_Steel']
+  [ok]   uses BH_Aether (glowing aether channels)
+  height (rest bbox): 1.875 m, min z -1.000
+  [ok]   skin weights on deform bones only (23 weighted bones; non-deform weighted: [])
+  vertex colors (baked AO): True
+  animation names: idle idle_look idle_adjust idle_knight idle_mage idle_hurt idle_1h idle_shield idle_2h idle_spear idle_dagger idle_bow idle_staff idle_wand idle_dual idle_combat_hurt walk run walk_back strafe_l strafe_r run_combat walk_hurt run_hurt run_start run_stop turn_l turn_r dodge_roll dodge_step sword_1 sword_2 sword_3 sword_4 sword_heavy gs_1 gs_2 gs_3 gs_4 gs_heavy axe_1 axe_2 axe_3 axe_4 axe_heavy spear_1 spear_2 spear_3 spear_4 spear_heavy dagger_1 dagger_2 dagger_3 dagger_4 dagger_heavy dual_1 dual_2 dual_3 dual_4 dual_heavy staff_1 staff_2 staff_3 staff_4 staff_heavy wand_1 wand_2 wand_3 wand_4 wand_heavy bow_1 bow_2 bow_draw_hold bow_release charge_hold charge_release special_attack block_loop block_impact parry shield_bash cast_quick cast_heavy cast_channel cast_area cast_weapon cast_ultimate whirlwind leap_slam war_cry blink hit_light hit_heavy hit_front hit_back hit_left hit_right stagger_small stagger_heavy knockback launch wall_impact knockdown getup death revive interact_pickup interact_chest interact_talk interact_teleport alert taunt boss_slam boss_sweep boss_roar boss_charge boss_summon
+
+== weapons
+  [ok] sword              tris  1024  length(Z) 1.005 m (contract 1.0)  X -0.119..+0.119  Y -0.021..+0.021  Z -0.125..+0.880  mats ['BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel']
+  [ok] greatsword         tris  1340  length(Z) 1.622 m (contract 1.6)  X -0.195..+0.195  Y -0.021..+0.021  Z -0.301..+1.320  mats ['BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel']
+  [ok] axe                tris   888  length(Z) 0.830 m (contract 0.8)  X -0.135..+0.232  Y -0.027..+0.027  Z -0.160..+0.670  mats ['BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel', 'BH_Wood']
+  [ok] spear              tris   776  length(Z) 2.200 m (contract 2.2)  X -0.039..+0.039  Y -0.023..+0.023  Z -0.900..+1.300  mats ['BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel', 'BH_Wood']
+  [ok] dagger             tris   844  length(Z) 0.408 m (contract 0.4)  X -0.063..+0.063  Y -0.015..+0.015  Z -0.078..+0.330  mats ['BH_Gold', 'BH_Leather', 'BH_Steel']
+  [ok] bow                tris   624  length(Z) 1.306 m (contract 1.3)  X -0.078..+0.037  Y -0.022..+0.022  Z -0.653..+0.653  mats ['BH_Cloth_Secondary', 'BH_Gold', 'BH_Leather', 'BH_Wood']
+  [ok] staff              tris  1014  length(Z) 1.900 m (contract 1.8)  X -0.075..+0.075  Y -0.075..+0.075  Z -1.080..+0.820  mats ['BH_DarkSteel', 'BH_Emissive', 'BH_Gold', 'BH_Leather', 'BH_Wood']
+  [ok] wand               tris   936  length(Z) 0.360 m (contract 0.35)  X -0.013..+0.013  Y -0.013..+0.013  Z -0.110..+0.250  mats ['BH_Emissive', 'BH_Gold', 'BH_Leather', 'BH_Wood']
+  [ok] shield             tris  3344  length(Z) 0.953 m (contract 0.9)  X -0.336..+0.336  Y -0.120..+0.031  Z -0.512..+0.441  mats ['BH_Cloth_Primary', 'BH_Gold', 'BH_Leather', 'BH_Steel', 'BH_Wood']
+  [ok] arrow              tris   684  length(Z) 0.762 m (contract None)  X -0.020..+0.020  Y -0.022..+0.012  Z -0.382..+0.380  mats ['BH_Cloth_Primary', 'BH_DarkSteel', 'BH_Gold', 'BH_Steel', 'BH_Wood']
+  [ok] sword_aether       tris  1228  length(Z) 1.005 m (contract 1.0)  X -0.162..+0.162  Y -0.021..+0.021  Z -0.125..+0.880  mats ['BH_Aether', 'BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel']
+  [ok] greatsword_aether  tris  1544  length(Z) 1.622 m (contract 1.6)  X -0.195..+0.195  Y -0.025..+0.025  Z -0.301..+1.320  mats ['BH_Aether', 'BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Steel']
+  [ok] staff_aether       tris  1824  length(Z) 1.882 m (contract 1.8)  X -0.078..+0.078  Y -0.076..+0.076  Z -1.080..+0.802  mats ['BH_Aether', 'BH_DarkSteel', 'BH_Gold', 'BH_Leather', 'BH_Wood']
+  [ok] wand_aether        tris  1254  length(Z) 0.374 m (contract 0.35)  X -0.021..+0.021  Y -0.020..+0.020  Z -0.110..+0.264  mats ['BH_Aether', 'BH_Gold', 'BH_Leather', 'BH_Wood']
+
+RESULT: ALL CHECKS PASSED
+
+== Godot import check (throwaway project /tmp/claude-0/c6/godot_check, Godot 4.7.2.stable.official.ed1daf0bf)
+  import errors: 0 []
+  GLB arrow.glb tris=684 materials=BH_Wood,BH_DarkSteel,BH_Steel,BH_Cloth_Primary,BH_Gold
+  GLB axe.glb tris=888 materials=BH_Wood,BH_Leather,BH_Steel,BH_DarkSteel,BH_Gold
+  GLB bow.glb tris=624 materials=BH_Wood,BH_Leather,BH_Gold,BH_Cloth_Secondary
+  GLB dagger.glb tris=844 materials=BH_Steel,BH_Gold,BH_Leather
+  GLB greatsword.glb tris=1340 materials=BH_Steel,BH_Gold,BH_Leather,BH_DarkSteel
+  GLB greatsword_aether.glb tris=1544 materials=BH_Steel,BH_Gold,BH_Leather,BH_DarkSteel,BH_Aether
+  GLB knight.glb tris=18700 materials=BH_Steel,BH_Gold,BH_DarkSteel,BH_Cloth_Primary,BH_Aether,BH_Leather,BH_Shadow skeleton=Skeleton3D bones=26 missing_bones=[] weapon.R(blade=(0.0, 0.0, 1.0) back=(0.0, 1.0, 0.0) ok) weapon.L(blade=(0.0, 0.0, 1.0) back=(0.0, 1.0, 0.0) ok) animations=117 missing_vs_meta=[] length_mismatch=[] sword_1_tracks=23 unresolved=0
+  GLB mage.glb tris=16334 materials=BH_Cloth_Secondary,BH_Leather,BH_Cloth_Primary,BH_Gold,BH_Aether,BH_DarkSteel,BH_Steel,BH_Skin,BH_Shadow,BH_Hair,BH_Bone skeleton=Skeleton3D bones=26 missing_bones=[] weapon.R(blade=(0.0, 0.0, 1.0) back=(0.0, 1.0, 0.0) ok) weapon.L(blade=(0.0, 0.0, 1.0) back=(0.0, 1.0, 0.0) ok) animations=117 missing_vs_meta=[] length_mismatch=[] sword_1_tracks=24 unresolved=0
+  GLB shield.glb tris=3344 materials=BH_Wood,BH_Cloth_Primary,BH_Steel,BH_Gold,BH_Leather
+  GLB spear.glb tris=776 materials=BH_Wood,BH_Leather,BH_Steel,BH_DarkSteel,BH_Gold
+  GLB staff.glb tris=1014 materials=BH_Wood,BH_Leather,BH_DarkSteel,BH_Emissive,BH_Gold
+  GLB staff_aether.glb tris=1824 materials=BH_Wood,BH_Leather,BH_DarkSteel,BH_Gold,BH_Aether
+  GLB sword.glb tris=1024 materials=BH_Steel,BH_Gold,BH_Leather,BH_DarkSteel
+  GLB sword_aether.glb tris=1228 materials=BH_Steel,BH_Gold,BH_Leather,BH_DarkSteel,BH_Aether
+  GLB wand.glb tris=936 materials=BH_Wood,BH_Leather,BH_Gold,BH_Emissive
+  GLB wand_aether.glb tris=1254 materials=BH_Wood,BH_Leather,BH_Gold,BH_Aether
+  GODOT_RESULT OK
+  runtime errors: 0 []

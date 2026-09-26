@@ -1,7 +1,7 @@
 extends Node
 ## Headless test runner. Usage:
 ##   godot --headless --path game res://tests/run_tests.tscn
-## Writes a JSON report to ../work/lemondev/bh-001/evidence/tests/report.json and exits with code 0/1.
+## Writes a JSON report to ../work/lemondev/bh-002/evidence/tests/report.json and exits with code 0/1.
 
 const DIR := "res://tests/unit/"
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 		print("  FAIL ", fl)
 	var report := {"engine": Engine.get_version_info().string, "checks": total_checks, "failures": Array(all_failures),
 		"suites": suites, "elapsed_ms": Time.get_ticks_msec() - t0, "timestamp": Time.get_datetime_string_from_system()}
-	var out_dir := ProjectSettings.globalize_path("res://").path_join("../work/lemondev/bh-001/evidence/tests")
+	var out_dir := ProjectSettings.globalize_path("res://").path_join("../work/lemondev/bh-002/evidence/tests")
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	var fa := FileAccess.open(out_dir.path_join("report.json"), FileAccess.WRITE)
 	if fa:

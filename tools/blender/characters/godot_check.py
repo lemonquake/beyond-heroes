@@ -69,6 +69,15 @@ func _init() -> void:
 			line += " skeleton=%s bones=%d missing_bones=%s" % [s3.name, s3.get_bone_count(), str(missing)]
 			if missing.size() > 0:
 				ok = false
+			# weapon sockets in rest pose: +Y = blade direction (forward = +Z in Godot), +Z = back of the hand (up)
+			for wb in ["weapon.R", "weapon.L"]:
+				var gp := s3.get_bone_global_rest(s3.find_bone(wb))
+				var blade := gp.basis.y.normalized()
+				var back := gp.basis.z.normalized()
+				var good := blade.dot(Vector3(0, 0, 1)) > 0.95 and back.dot(Vector3(0, 1, 0)) > 0.95
+				line += " %s(blade=%s back=%s %s)" % [wb, str(blade.snapped(Vector3.ONE * 0.01)), str(back.snapped(Vector3.ONE * 0.01)), "ok" if good else "BAD"]
+				if not good:
+					ok = false
 		if ap.size() > 0:
 			var p: AnimationPlayer = ap[0]
 			var names := p.get_animation_list()
@@ -121,6 +130,13 @@ def main():
         for fn in sorted(os.listdir(d)):
             if fn.endswith(".glb") or fn == "anim_meta.json":
                 shutil.copy(os.path.join(d, fn), proj)
+            elif fn.endswith(".glb.import"):
+                # mirror the game's import settings (e.g. use_name_suffixes=false keeps 'block_loop' intact)
+                txt = open(os.path.join(d, fn)).read()
+                txt = "\n".join(l for l in txt.splitlines() if not l.startswith(("uid=", "path=", "dest_files=")))
+                txt = re.sub(r'source_file="res://[^"]*/', 'source_file="res://', txt)
+                with open(os.path.join(proj, fn), "w") as f:
+                    f.write(txt + "\n")
     with open(os.path.join(proj, "check.gd"), "w") as f:
         f.write(GD)
     ver = subprocess.run([godot, "--version"], capture_output=True, text=True).stdout.strip()

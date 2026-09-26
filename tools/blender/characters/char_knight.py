@@ -104,6 +104,24 @@ def build(body: Body):
         p.warp(lambda v: (v[0], front_y(TORSO, v[0], v[2]) - 0.02 + (v[1]), v[2]))
         add(p, weights=chest_spine_w(1.24, 1.30))
 
+    # aether channels on the visible breastplate flanks + an aether core in the emblem ring
+    for sx in (1, -1):
+        pts = []
+        for t in np.linspace(0, 1, 9):
+            z = 1.455 - 0.22 * t
+            x = sx * (0.128 + 0.028 * math.sin(math.pi * t) + 0.01 * t)
+            pts.append((x, front_y(TORSO, x, z) - 0.0015, z))
+        add(aether_line(pts, 0.0042), weights=chest_spine_w(1.24, 1.30))
+        pts = []
+        for t in np.linspace(0, 1, 5):
+            z = 1.36 - 0.03 * t
+            x = sx * (0.155 + 0.03 * t)
+            pts.append((x, front_y(TORSO, x, z) - 0.0015, z))
+        add(aether_line(pts, 0.0035), weights=chest_spine_w(1.24, 1.30))
+    yc = front_y(TORSO, 0, 1.355) - 0.02 - 0.014
+    V, F = M.sphere(0.02, 10, 6, center=(0, yc, 1.355), scale=(1, 0.45, 1))
+    add(M.Part(V, F, "BH_Aether", name="core"), weights=chest_spine_w(1.24, 1.30))
+
     # ---------------- belt, faulds, mail skirt ----------------
     V, F = thick_band(TORSO, 1.025, 1.072, 0.03, 0.012, n=28)
     add(M.bevel(M.Part(V, F, "BH_Leather", name="belt"), 0.003, 1), "hips")
@@ -111,7 +129,7 @@ def build(body: Body):
     V, F = M.box(0.062, 0.016, 0.054, center=(0, by, 1.049))
     add(M.bevel(M.Part(V, F, "BH_Gold", name="buckle"), 0.005, 2), "hips")
     V, F = M.box(0.034, 0.02, 0.028, center=(0, by - 0.004, 1.049))
-    add(M.Part(V, F, "BH_DarkSteel", name="buckle_in"), "hips")
+    add(M.Part(V, F, "BH_Aether", name="buckle_in"), "hips")
     for (x, ang, sz) in ((-0.155, 0.62, (0.07, 0.045, 0.085)), (0.12, 0.37, (0.06, 0.04, 0.075)),
                          (0.165, 0.2, (0.045, 0.04, 0.09))):
         r = interp_rows(TORSO, 1.03)
@@ -171,6 +189,9 @@ def build(body: Body):
                        body.lpt(sh, [(0, 0.97 * 0.43, 0)])[0] + (0, 0, -0.006)],
                       [(0.056, 0.059), (0.056, 0.059)], n=14, up=(0, -1, 0))
         add_leg(M.Part(V, F, "BH_Gold", name="greave_rim"), sh)
+        kx, ky, kz = body.head(sh)
+        gl = [(kx, -0.075, kz - 0.09), (kx, -0.077, kz - 0.17), (kx, -0.066, kz - 0.26), (kx, -0.056, kz - 0.33)]
+        add_leg(aether_line(gl, 0.004), sh)
         for part, bone in sabaton(body, s):
             add_leg(part, bone)
 
@@ -198,6 +219,13 @@ def build(body: Body):
         am(M.Part(V, F, "BH_Gold", name="cuffrim"), ha)
         for prt in fist(body, s, "BH_Steel", "BH_DarkSteel"):
             am(prt, ha)
+        L = PROPS["fore_len"]
+        for off in (-0.016, 0.016):
+            am(aether_line(body.lpt(fa, [(off, u * L, 0.049 - 0.009 * u) for u in np.linspace(0.2, 0.8, 6)]),
+                           0.0035), fa)
+        A = body.axes("weapon." + s)
+        o = body.head("weapon." + s)
+        am(aether_line([o + A @ np.array([x, 0.0, 0.053]) for x in (0.07, 0.03, -0.005)], 0.0038), ha)  # L: knuckles -X
         for prt in pauldron(body, s):
             am(prt, ua)
 
@@ -210,6 +238,15 @@ def build(body: Body):
 
 
 # ---------------------------------------------------------------------------------------------------
+def aether_line(pts, r):
+    """Thin glowing aether channel (BH_Aether) along a polyline lying on a surface."""
+    pts = np.asarray(pts, float)
+    d = pts[-1] - pts[0]
+    up = (0, 0, 1) if abs(normalize(d)[2]) < 0.8 else (0, -1, 0)
+    V, F = M.tube(pts, [(r, r * 0.8)] * len(pts), n=5, up=up)
+    return M.Part(V, F, "BH_Aether", name="aether")
+
+
 def chest_spine_w(z0, z1):
     def wfn(V):
         s = smoothstep(z0, z1, V[:, 2])
@@ -336,6 +373,14 @@ def pauldron(body, s):
         rim.append(c + Rm @ (np.array([r * math.cos(a), r * math.sin(a) * 1.12, z]) * 1.0))
     V, F = M.tube(rim, [(0.008, 0.008)] * len(rim), n=6, up=axis, cap0=False, cap1=False)
     parts.append(M.Part(V, F, "BH_Gold", name="pauldron_rim"))
+    ring = []
+    for i in range(25):
+        a = 2 * math.pi * i / 24
+        r = 0.129 * math.sin(math.radians(46))
+        z = 0.129 * math.cos(math.radians(46))
+        ring.append(c + Rm @ np.array([r * math.cos(a), r * math.sin(a) * 1.12, z]))
+    V, F = M.tube(ring, [(0.0042, 0.0042)] * len(ring), n=6, up=axis, cap0=False, cap1=False)
+    parts.append(M.Part(V, F, "BH_Aether", name="pauldron_aether"))
     # lames down the arm (outer side)
     for i in range(3):
         t0 = 0.06 + 0.06 * i

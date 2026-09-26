@@ -14,6 +14,8 @@ var enemies := {}
 var elite_mods := {}
 var maps := {}
 var anim_meta := {}
+var npcs := {}
+var shops := {}
 
 func _init() -> void:
 	for c in DataClasses.build():
@@ -38,6 +40,10 @@ func _init() -> void:
 	elite_mods = DataEnemies.elite_mods()
 	for m in DataMaps.build():
 		maps[m.id] = m
+	for n in DataNpcs.build():
+		npcs[n.id] = n
+	for sh in DataShops.build():
+		shops[sh.id] = sh
 	_load_anim_meta()
 
 func _load_anim_meta() -> void:
@@ -78,6 +84,12 @@ func enemy(id: StringName) -> EnemyDef:
 
 func map_def(id: StringName) -> MapDef:
 	return maps.get(id)
+
+func npc(id: StringName) -> NpcDef:
+	return npcs.get(id)
+
+func shop(id: StringName) -> ShopDef:
+	return shops.get(id)
 
 func affixes_for(category: StringName) -> Array:
 	var out := []

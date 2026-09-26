@@ -22,7 +22,7 @@ import bh_skeleton as S
 
 CHARACTERS = {
     "knight": "char_knight",
-    # "mage": "char_mage",
+    "mage": "char_mage",
 }
 
 

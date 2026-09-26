@@ -266,6 +266,14 @@ func cleanse(ids: Array) -> int:
 			n += 1
 	return n
 
+## Remove every harmful status (debuffs). Returns how many were removed.
+func cleanse_harmful() -> int:
+	var ids := []
+	for id in statuses:
+		if StatusRules.is_debuff(id):
+			ids.append(id)
+	return cleanse(ids)
+
 func visible_statuses() -> Array:
 	var out := []
 	for id in statuses:

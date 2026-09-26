@@ -119,7 +119,7 @@ def compose(paths, labels, out, cols=6, title=None, cell=None):
     jp = out + ".job.json"
     with open(jp, "w") as f:
         json.dump(job, f)
-    py = os.environ.get("BH_PYTHON", "python")
+    py = os.environ.get("BH_PYTHON", "python3")
     try:
         subprocess.run([py, os.path.join(HERE, "compose_sheets.py"), jp], check=True)
         os.remove(jp)

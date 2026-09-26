@@ -102,8 +102,15 @@ def check_hero(path, meta, required, lines):
     zs = [(m.matrix_world @ Vector(c)).z for m in meshes for c in m.bound_box]
     lines.append(f"  height (rest bbox): {max(zs):.3f} m, min z {min(zs):.3f}")
     vg = sorted({g.name for m in meshes for g in m.vertex_groups})
-    nd = [g for g in vg if g in S.DEFORM_EXCLUDE]
-    check(not nd, f"skin groups on deform bones only ({len(vg)} groups; non-deform used: {nd})")
+    used = set()
+    for m in meshes:
+        names = {g.index: g.name for g in m.vertex_groups}
+        for v in m.data.vertices:
+            for ge in v.groups:
+                if ge.weight > 1e-4:
+                    used.add(names[ge.group])
+    nd = sorted(g for g in used if g in S.DEFORM_EXCLUDE)
+    check(not nd, f"skin weights on deform bones only ({len(used)} weighted bones; non-deform weighted: {nd})")
     col = any(len(m.data.color_attributes) for m in meshes)
     lines.append(f"  vertex colors (baked AO): {col}")
     lines.append(f"  animation names: {' '.join(anims)}")

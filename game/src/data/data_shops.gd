@@ -1,0 +1,61 @@
+class_name DataShops
+## Merchant catalogues. Each merchant specializes, so no two shops carry the same goods.
+
+const R := BH.Rarity
+
+static func build() -> Array:
+	return [
+		ShopDef.make(&"tovin_goods", "Tovin's Provisions", {"npc": &"tovin", "kind": &"consumables",
+			"specialties": [&"consumable", &"material"], "markup": 1.0, "sell_rate": 1.0, "refresh_minutes": 10.0,
+			"fixed": [
+				{"base": &"health_potion", "infinite": true},
+				{"base": &"mana_potion", "infinite": true},
+				{"base": &"antidote", "infinite": true},
+				{"base": &"return_scroll", "infinite": true, "level_min": 2},
+				{"base": &"greater_health_potion", "infinite": true, "level_min": 6},
+				{"base": &"greater_mana_potion", "infinite": true, "level_min": 6},
+				{"base": &"rejuvenation_elixir", "infinite": true, "level_min": 9},
+				{"base": &"iron_shard", "infinite": true},
+			],
+			"pools": [{"categories": [&"accessory"], "count": 2}],
+			"rare_chance": 0.05,
+			"specials": [{"id": "tovin_lucky_charm", "base": &"rune_charm", "rarity": R.ADVANCED, "level_min": 3}],
+		}),
+		ShopDef.make(&"brannoc_forge", "Brannoc's Forge", {"npc": &"brannoc", "kind": &"weapons",
+			"specialties": [&"weapon", &"shield", &"helm", &"armor", &"gloves", &"boots", &"inner_garment"],
+			"markup": 1.05, "sell_rate": 1.0, "refresh_minutes": 12.0,
+			"pools": [
+				{"categories": [&"weapon"], "weapon_types": [&"sword", &"greatsword", &"axe", &"spear", &"dagger", &"bow"], "count": 5, "class_hint": true},
+				{"categories": [&"shield"], "count": 1},
+				{"categories": [&"helm", &"armor", &"gloves", &"boots", &"inner_garment"], "count": 5, "class_hint": true},
+			],
+			"rare_chance": 0.2,
+			"specials": [
+				{"id": "brannoc_guardian_helm", "base": &"guardian_helm", "rarity": R.MASTER, "level_min": 8, "flag": &"catacombs_ritual_seen"},
+				{"id": "brannoc_tower", "base": &"tower_shield", "rarity": R.ELITE, "level_min": 12},
+			],
+		}),
+		ShopDef.make(&"seris_arcana", "Seris' Arcana", {"npc": &"seris", "kind": &"magic",
+			"specialties": [&"accessory"], "markup": 1.1, "sell_rate": 0.95, "refresh_minutes": 12.0,
+			"fixed": [
+				{"base": &"mana_potion", "infinite": true},
+				{"base": &"greater_mana_potion", "infinite": true, "level_min": 6},
+				{"base": &"arcane_dust", "infinite": true},
+			],
+			"pools": [
+				{"categories": [&"weapon"], "weapon_types": [&"staff", &"wand"], "count": 3, "class_hint": true},
+				{"categories": [&"accessory"], "count": 4},
+				{"categories": [&"helm", &"armor", &"inner_garment"], "count": 2, "class_hint": true},
+			],
+			"rare_chance": 0.2,
+			"specials": [{"id": "seris_sage_hood", "base": &"sage_hood", "rarity": R.MASTER, "level_min": 8, "flag": &"catacombs_ritual_seen"}],
+		}),
+		ShopDef.make(&"stranger_wares", "The Hooded Stranger", {"npc": &"stranger", "kind": &"rare",
+			"specialties": [], "markup": 1.6, "sell_rate": 0.8, "refresh_minutes": 20.0, "rarity_floor": R.ADVANCED,
+			"pools": [{"categories": [&"weapon", &"helm", &"armor", &"gloves", &"boots", &"accessory"], "count": 4, "class_hint": true}],
+			"rare_chance": 0.6,
+			"specials": [
+				{"id": "stranger_band", "base": &"u_band_of_stillness", "rarity": R.AETHER, "level_min": 10, "flag": &"boss_warden_defeated"},
+			],
+		}),
+	]
