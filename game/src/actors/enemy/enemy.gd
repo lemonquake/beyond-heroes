@@ -53,6 +53,21 @@ var _idle_sound_t := 0.0
 var _think_offset := 0.0
 var _phase_lock := 0.0
 var _anim_pref: StringName = &""
+# bh-003: deaths, corpses and signature traits
+const MAX_CORPSES := 24
+static var _corpses: Array = []           # oldest first; beyond MAX_CORPSES the oldest decays at once
+var _last_res: DamageResult
+var _last_req: DamageRequest
+var _reassembled := false
+var _reassembling := false
+var _decaying := false
+var _pool: Decal
+var _devour_cd := 0.0
+var _devour_target: Enemy
+var _stealth := 1.0
+var _stealth_reveal := 0.0
+var _stolen_gold := 0
+var _enrage_done := false
 
 func setup(p_def: EnemyDef, p_level: int, mods: Array = [], p_difficulty := {}) -> Enemy:
 	def = p_def
@@ -124,6 +139,9 @@ func _ready() -> void:
 	_strafe_dir = 1.0 if rng.randf() < 0.5 else -1.0
 	brain.go(EnemyBrain.State.PATROL if patrol_radius > 0.5 and not is_boss else EnemyBrain.State.IDLE)
 
+func has_trait(t: StringName) -> bool:
+	return def != null and def.traits.has(t)
+
 func _shape_fallback() -> void:
 	match def.body_shape:
 		&"quadruped":
@@ -182,6 +200,7 @@ func _physics_process(delta: float) -> void:
 	brain.tick(delta)
 	_tick_cooldowns(delta)
 	_elite_tick(delta)
+	_trait_tick(delta)
 	if target == null or not is_instance_valid(target):
 		target = Game.player as Player
 	_update_interrupts()
@@ -236,6 +255,8 @@ func _interrupt() -> void:
 	if action:
 		action.finish(false)
 		action = null
+	if visual and visual.current_action() == &"devour":
+		visual.stop_action()
 	_charge = {}
 	if CombatDirector.current:
 		CombatDirector.current.release_token(self)
@@ -343,6 +364,14 @@ func _combat_think() -> void:
 	if is_boss:
 		_boss_phase_check()
 	var arche := def.archetype
+	if _try_devour():
+		return
+	# Cowards flee when hurt and alone.
+	if has_trait(&"cowardly") and hp < max_hp() * 0.35 and _nearest_ally(8.0) == null:
+		brain.go(S.RETREAT)
+		if brain.time_in_state < 0.3 or _move_target == Vector3.INF or global_position.distance_to(_move_target) < 1.0:
+			_move_target = _retreat_point()
+		return
 	# Support: heal/buff allies before anything else.
 	if arche == &"support" and _try_ability():
 		return
@@ -528,12 +557,27 @@ func _start_attack(a: Dictionary) -> void:
 				act.on_release = func() -> void: _melee_hit(a, act, 0)
 		"projectile":
 			act.on_release = func() -> void: _fire(a)
+			if has_trait(&"aim_line") and windup > 0.0 and target:
+				var ad := (target.global_position - global_position).slide(Vector3.UP)
+				var tl := VFXLib.telegraph("line", Vector2(minf(ad.length() + 2.0, float(a.get("range", 15.0))), 0.22), windup, Color(1.0, 0.2, 0.15, 0.55))
+				FX.spawn(tl, global_position)
+				tl.rotation.y = atan2(ad.x, ad.z)
+				get_tree().create_timer(windup + 0.05, false).timeout.connect(tl.queue_free)
 		"aoe":
 			var center := global_position if a.get("self_centered", false) else aim_at
 			if a.has("offset"):
 				center = global_position + forward() * float(a.offset)
 			var total_delay: float = act.release_t if act.release_t >= 0.0 else (act.windows[0][0] if not act.windows.is_empty() else 0.8)
 			total_delay = maxf(total_delay, windup)
+			if a.has("lob"):
+				# thrown: the missile leaves the hand at the release frame and lands when the circle fills
+				var land := CombatQuery.ground_at(get_world_3d(), center)
+				var throw_at := act.release_t if act.release_t >= 0.0 else windup
+				total_delay = maxf(total_delay, throw_at + 0.55)
+				var flight := total_delay - throw_at
+				get_tree().create_timer(maxf(throw_at, 0.01), false).timeout.connect(func() -> void:
+					if alive:
+						Lob.throw(FX.world, String(a.lob), visual.weapon_point(&"main", 0.2) if visual else center(), land, flight))
 			_telegraph_aoe(a, center, total_delay)
 		"dash":
 			var dist := minf(float(a.get("dash", 5.0)), _dist)
@@ -575,7 +619,13 @@ func _melee_hit(a: Dictionary, act: TimedAction, w: int) -> void:
 		return
 	var req := _attack_request(a)
 	req.tags[&"push_dir"] = to.normalized()
-	target.receive_hit(req, self, target.center())
+	var res := target.receive_hit(req, self, target.center())
+	if has_trait(&"pickpocket") and res and not res.evaded and target.hero and target.hero.inventory.gold > 0:
+		var take := mini(target.hero.inventory.gold, clampi(int(target.hero.inventory.gold * 0.04) + 1, 1, 25))
+		target.hero.inventory.gold -= take
+		target.hero.inventory.changed.emit()
+		_stolen_gold += take
+		FX.text_popup(target.center() + Vector3.UP * 0.8, "-%d gold" % take, Color(1.0, 0.8, 0.3), 0.9)
 	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position)
 
 func _fire(a: Dictionary) -> void:
@@ -662,6 +712,8 @@ func _summon(a: Dictionary) -> void:
 	Audio.play_at(&"dark_cast", global_position)
 
 func _end_attack(completed: bool) -> void:
+	if visual and visual.current_action() == &"devour":
+		visual.stop_action()
 	action = null
 	current_attack = {}
 	if CombatDirector.current:
@@ -744,7 +796,9 @@ func _try_ability() -> bool:
 				for e in get_tree().get_nodes_in_group(&"enemy"):
 					if e != self and e.alive and e.brain.is_engaged() and e.global_position.distance_to(global_position) < float(ab.range):
 						allies.append(e)
-				if allies.size() >= 1:
+				if ab.get("self", false):
+					allies.append(self)
+				if allies.size() >= 1 and (not ab.get("self", false) or _dist < float(ab.range)):
 					_cast_ability(ab, func() -> void:
 						for e in allies:
 							if is_instance_valid(e) and e.alive:
@@ -868,12 +922,20 @@ func _prepare_incoming(req: DamageRequest, attacker: Node) -> void:
 			if req.heavy and req.poise >= def.guard_break * 0.6:
 				status.apply(&"staggered")
 				FX.text_popup(center() + Vector3.UP, "Guard Break", UITheme.GOLD, 1.1)
+				if has_trait(&"coffin_shield"):
+					# the coffin-lid shield splinters
+					FX.spawn(VFXLib.debris(1.0, Color(0.32, 0.22, 0.14)), center() + forward() * 0.5)
+					Audio.play_at(&"break_wood", global_position)
 			else:
 				req.guarding = true
 	if stats.has_flag(&"ward") and shield_hp > 0.0 and req.conversion.has(Elements.LIGHT):
 		req.tags[&"ward_light"] = true
 
 func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	_last_res = result
+	_last_req = req
+	if not result.evaded:
+		_stealth_reveal = maxf(_stealth_reveal, 2.0)
 	if shield_hp > 0.0 and req.tags.get(&"ward_light", false):
 		shield_hp = maxf(0.0, shield_hp - result.components.get(Elements.LIGHT, 0.0))
 	super._apply_result(result, req, attacker, hit_point)
@@ -899,7 +961,22 @@ func _on_damaged(result: DamageResult, req: DamageRequest) -> void:
 		return
 	var heavy := result.poise_damage > stats.get_stat(&"poise", 30.0) * 0.4 or result.is_crit
 	if action == null or heavy and not is_boss:
-		visual.play_reaction(&"hit_heavy" if heavy else &"hit", &"front")
+		visual.play_reaction(&"hit_heavy" if heavy else &"hit", _hit_side(last_attacker))
+
+## Which side a blow came from, for hit_front / hit_back / hit_left / hit_right reactions.
+func _hit_side(from: Node) -> StringName:
+	if not (from is Node3D) or not is_instance_valid(from):
+		return &"front"
+	var to := ((from as Node3D).global_position - global_position).slide(Vector3.UP)
+	if to.length() < 0.05:
+		return &"front"
+	var f := forward().dot(to.normalized())
+	var r := global_transform.basis.x.dot(to.normalized())
+	if f > 0.5:
+		return &"front"
+	if f < -0.5:
+		return &"back"
+	return &"left" if r > 0.0 else &"right"
 
 func _on_staggered(_broken: bool) -> void:
 	_interrupt()
@@ -933,6 +1010,7 @@ func die(killer: Node) -> void:
 	if not alive:
 		return
 	_interrupt()
+	_death_clip = _choose_death_clip(killer)
 	super.die(killer)
 	brain.go(EnemyBrain.State.DEAD)
 	if CombatDirector.current:
@@ -971,15 +1049,262 @@ func die(killer: Node) -> void:
 			Events.camera_shake.emit(0.35)
 	if is_boss:
 		Events.boss_defeated.emit(self)
-	# fade the corpse after a while
-	get_tree().create_timer(12.0 if not is_boss else 60.0, false).timeout.connect(_sink)
+	if _stolen_gold > 0:
+		Loot.spawn_gold(global_position, _stolen_gold)
+		_stolen_gold = 0
+	if has_trait(&"core_overload"):
+		_core_overload()
+	_begin_corpse()
 
-func _sink() -> void:
-	if not is_instance_valid(self):
+# ---- Deaths and corpses ---------------------------------------------------------------------------------------
+
+var _death_clip: StringName = &"death"
+
+## The killing blow decides the fall: blown back by heavy knockback, pitched forward by crits and backstabs.
+## Skeletons and constructs fold down where they stand.
+func _choose_death_clip(killer: Node) -> StringName:
+	if def.death_style in [&"crumple", &"collapse"]:
+		return &"death_crumple"
+	var kb := _last_res.knockback if _last_res else 0.0
+	var launched: bool = _last_req != null and float(_last_req.tags.get(&"launch", 0.0)) > 0.0
+	if kb >= HEAVY_KNOCK or launched:
+		return &"death_back"
+	if (_last_res and _last_res.is_crit) or _hit_side(killer) == &"back":
+		return &"death_fwd"
+	var r := rng.randf()
+	return &"death" if r < 0.5 else (&"death_back" if r < 0.75 else &"death_fwd")
+
+func death_clip() -> StringName:
+	return _death_clip
+
+func _begin_corpse() -> void:
+	match def.death_style:
+		&"implode":
+			_implode()
+			return
+		&"smoke":
+			_smoke_out()
+			return
+		&"ash":
+			_ash_burn()
+			return
+		&"collapse":
+			FX.spawn(VFXLib.debris(1.4, Color(0.5, 0.48, 0.44)), center())
+			FX.spawn(VFXLib.particles(Color(1.0, 0.8, 0.45, 1.0), 26, 0.4, true, 0.14, 8.0, 80.0, Vector3(0, -12, 0)), center())
+			if visual:
+				visual.set_decay(0.6, Color(0.3, 0.3, 0.3))   # the core light goes out
+		&"crumple":
+			FX.spawn(VFXLib.particles(Color(0.7, 0.68, 0.6, 0.5), 12, 1.0, true, 0.9, 1.2, 80.0, Vector3(0, 0.3, 0), 0.4, false), global_position + Vector3.UP * 0.3)
+	add_to_group(&"corpse")
+	_corpses.append(self)
+	while _corpses.size() > MAX_CORPSES:
+		var old = _corpses.pop_front()
+		if is_instance_valid(old) and old != self:
+			old._dissolve(1.2)
+	if Gore.bleeds(def.hit_material):
+		# the pool starts once the body has hit the ground
+		get_tree().create_timer(0.7, false).timeout.connect(func() -> void:
+			if is_instance_valid(self) and not _decaying and not alive:
+				_pool = FX.pool(global_position, def.blood, clampf(body_radius * 3.2, 1.2, 4.5), 7.0))
+	if has_trait(&"reassemble") and not _reassembled and _can_reassemble():
+		_reassembling = true
+		get_tree().create_timer(3.5, false).timeout.connect(_reassemble)
 		return
+	get_tree().create_timer(def.corpse_time, false).timeout.connect(_decay)
+
+## Stage 2: the body darkens and greys over several seconds (flesh draws flies), then dissolves.
+func _decay() -> void:
+	if not is_instance_valid(self) or alive or _decaying:
+		return
+	_decaying = true
+	if Gore.bleeds(def.hit_material):
+		var flies := VFXLib.particles(Color(0.05, 0.05, 0.04, 0.9), 8, 1.6, false, 0.05, 0.8, 180.0, Vector3.ZERO, 0.5, false)
+		flies.position = Vector3.UP * 0.4
+		add_child(flies)
+	if visual:
+		var tw := create_tween()
+		tw.tween_method(visual.set_decay, 0.0, 1.0, 8.0)
+	get_tree().create_timer(8.0, false).timeout.connect(_dissolve.bind(3.0))
+
+## Stage 3: dithered fade and a slow sink into the ground; the pool dries and fades; then the node is freed.
+func _dissolve(dur: float) -> void:
+	if not is_instance_valid(self) or alive or has_meta(&"dissolving"):
+		return
+	set_meta(&"dissolving", true)
+	_decaying = true
+	_reassembling = false
+	remove_from_group(&"corpse")
+	_corpses.erase(self)
 	var tw := create_tween()
-	tw.tween_property(self, "position:y", position.y - 1.5, 2.5)
+	if visual:
+		tw.tween_method(visual.set_opacity, 1.0, 0.0, dur)
+	tw.parallel().tween_property(self, "position:y", position.y - 0.5, dur)
+	if _pool and is_instance_valid(_pool):
+		var pl := _pool
+		tw.parallel().tween_property(pl, "modulate:a", 0.0, dur)
+		tw.tween_callback(pl.queue_free)
 	tw.tween_callback(queue_free)
+
+func is_fresh_corpse() -> bool:
+	return not alive and not _decaying and not _reassembling and is_in_group(&"corpse")
+
+## Consumed by a ghoul: the body is torn apart.
+func consume() -> void:
+	if not is_fresh_corpse():
+		return
+	if Settings.blood:
+		FX.spawn(Gore.hit(center(), Vector3.UP, def.hit_material, def.blood, 1.1, true), center())
+	FX.spawn(VFXLib.debris(0.8, def.blood.lightened(0.1)), center())
+	_dissolve(0.6)
+
+func _implode() -> void:
+	FX.spawn(VFXLib.light_flash(Color(0.55, 0.97, 1.0), 6.0, 7.0, 0.35), center())
+	FX.spawn(VFXLib.ring_wave(Color(0.55, 0.97, 1.0, 0.9), 2.4, 0.4, 0.5), global_position)
+	FX.spawn(VFXLib.particles(Color(0.6, 1.0, 1.0, 1.0), 36, 0.7, true, 0.18, 6.0, 180.0, Vector3(0, 0.5, 0), 0.3), center())
+	get_tree().create_timer(0.9, false).timeout.connect(queue_free)
+
+func _smoke_out() -> void:
+	FX.spawn(VFXLib.particles(Color(0.03, 0.02, 0.05, 0.8), 30, 1.4, true, 1.1, 1.4, 120.0, Vector3(0, 0.7, 0), 0.5, false), center())
+	FX.spawn(VFXLib.particles(Color(0.7, 0.35, 1.0, 1.0), 16, 0.6, true, 0.14, 3.0, 180.0), center())
+	if visual:
+		create_tween().tween_method(visual.set_opacity, 1.0, 0.0, 1.4)
+	get_tree().create_timer(1.6, false).timeout.connect(queue_free)
+
+## Ashen Circle: the body burns from within, crumbles to ash, and leaves a grey smear.
+func _ash_burn() -> void:
+	var embers := VFXLib.particles(Color(1.0, 0.45, 0.1, 1.0), 40, 1.2, false, 0.14, 1.6, 40.0, Vector3(0, 2.0, 0), 0.5)
+	embers.position = Vector3.UP * 0.4
+	add_child(embers)
+	FX.spawn(VFXLib.light_flash(Color(1.0, 0.5, 0.15), 3.0, 4.0, 1.2), center())
+	var tw := create_tween()
+	if visual:
+		tw.tween_interval(0.8)
+		tw.tween_method(func(v: float) -> void: visual.set_decay(v, Color(0.05, 0.04, 0.035)), 0.0, 1.0, 1.6)
+		tw.tween_callback(func() -> void:
+			embers.emitting = false
+			FX.spawn(VFXLib.particles(Color(0.35, 0.33, 0.3, 0.7), 24, 1.6, true, 0.6, 1.4, 90.0, Vector3(0, 0.6, 0), 0.5, false), center())
+			FX.stain(global_position, Color(0.12, 0.11, 0.1, 0.8), 1.8))
+		tw.tween_method(visual.set_opacity, 1.0, 0.0, 1.5)
+	tw.tween_callback(queue_free)
+
+## Temple constructs: the Aether core overloads a moment after the body falls.
+func _core_overload() -> void:
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.SPELL
+	req.attacker = stats
+	var rr := EnemyStats.attack_range(def, stats, 0.8)
+	req.base_min = rr.x
+	req.base_max = rr.y
+	req.conversion = {Elements.LIGHT: 1.0}
+	req.knockback = 8.0
+	req.label = "Core overload"
+	var b := AreaEffects.delayed(FX.world, global_position, 3.0, 1.4, req, null, BH.LAYER_PLAYER, Color(0.55, 0.95, 1.0, 0.7))
+	b.on_blast = func(pos: Vector3, _h: Array) -> void:
+		FX.spawn(VFXLib.ring_wave(Color(0.55, 0.97, 1.0), 3.0, 0.4), pos)
+		FX.spawn(VFXLib.light_flash(Color(0.55, 0.97, 1.0), 6.0, 8.0, 0.3), pos + Vector3.UP)
+		Audio.play_at(&"arcane_surge", pos)
+		Events.camera_shake.emit(0.25)
+
+## Hollow soldiers pull themselves back together once, unless fire, light or a crushing blow ended them.
+func _can_reassemble() -> bool:
+	if _last_res == null:
+		return rng.randf() < 0.4
+	for el in [Elements.FIRE, Elements.LIGHT]:
+		if float(_last_res.components.get(el, 0.0)) > 0.0:
+			return false
+	if _last_res.shattered or _last_res.knockback >= HEAVY_KNOCK or _last_res.total >= max_hp() * 0.8:
+		return false
+	return rng.randf() < 0.4
+
+func _reassemble() -> void:
+	if not is_instance_valid(self) or alive or not _reassembling:
+		return
+	_reassembling = false
+	_reassembled = true
+	remove_from_group(&"corpse")
+	_corpses.erase(self)
+	alive = true
+	hp = max_hp() * 0.4
+	brain = EnemyBrain.new()
+	collision_layer = BH.LAYER_ENEMY
+	collision_mask = BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS | BH.LAYER_PLAYER | BH.LAYER_ENEMY
+	add_to_group(&"enemy")
+	if _pool and is_instance_valid(_pool):
+		_pool.queue_free()
+	if visual:
+		visual.revive()
+	FX.spawn(VFXLib.particles(Color(0.45, 1.0, 0.85, 0.9), 30, 1.0, true, 0.2, 2.5, 180.0, Vector3(0, 1.5, 0), 0.5), center())
+	FX.text_popup(center() + Vector3.UP, "Reassembles!", Color(0.55, 1.0, 0.85), 1.1)
+	Audio.play_at(&"skeleton_rattle", global_position, 2.0)
+	bar = EnemyBar.new()
+	bar.setup(self)
+	add_child(bar)
+	health_changed.emit(hp, max_hp())
+	get_tree().create_timer(1.4, false).timeout.connect(func() -> void:
+		if is_instance_valid(self) and alive:
+			alert_to(target.global_position if target and is_instance_valid(target) else global_position))
+
+# ---- Signature traits (per frame) --------------------------------------------------------------------------------
+
+func _trait_tick(delta: float) -> void:
+	_devour_cd = maxf(0.0, _devour_cd - delta)
+	_stealth_reveal = maxf(0.0, _stealth_reveal - delta)
+	if has_trait(&"stealth") and visual:
+		# almost invisible while stalking; revealed while striking, when hit, or when disabled
+		var want := 0.14 if action == null and _stealth_reveal <= 0.0 and not status.is_disabled() else 1.0
+		_stealth = move_toward(_stealth, want, delta * (4.0 if want > _stealth else 1.2))
+		visual.set_opacity(_stealth)
+		if bar:
+			bar.visible = _stealth > 0.6 or Game.hover_target == self
+	if has_trait(&"enrage") and not _enrage_done and hp < max_hp() * 0.4:
+		_enrage_done = true
+		enraged = true
+		mark_stats_dirty()
+		status.apply(&"enraged", 0.0)
+		_interrupt()
+		visual.play_action(&"boss_roar", 1.0)
+		FX.text_popup(center() + Vector3.UP * 1.5, "Enraged!", Color(1.0, 0.35, 0.2), 1.2)
+		Audio.play_at(&"boss_roar", global_position)
+		Events.camera_shake.emit(0.25)
+
+## Ghoul brutes feed on the fallen mid-fight to heal. Returns true when it took over this think.
+func _try_devour() -> bool:
+	var S := EnemyBrain.State
+	if not has_trait(&"devour") or _devour_cd > 0.0 or hp > max_hp() * 0.65 or action != null:
+		return false
+	if _devour_target == null or not is_instance_valid(_devour_target) or not _devour_target.is_fresh_corpse():
+		_devour_target = null
+		var best := 64.0
+		for c in get_tree().get_nodes_in_group(&"corpse"):
+			if c is Enemy and c != self and c.is_fresh_corpse():
+				var d: float = c.global_position.distance_squared_to(global_position)
+				if d < best:
+					best = d
+					_devour_target = c
+		if _devour_target == null:
+			_devour_cd = 2.0
+			return false
+	if global_position.distance_to(_devour_target.global_position) > 1.8:
+		brain.go(S.CHASE)
+		_move_target = _devour_target.global_position
+		return true
+	if not brain.go(S.CAST):
+		return false
+	var corpse := _devour_target
+	var act := TimedAction.from_anim(&"devour", 1.0)
+	act.duration = 3.0
+	act.release_t = 2.6
+	act.on_release = func() -> void:
+		if alive and is_instance_valid(corpse) and corpse.is_fresh_corpse():
+			corpse.consume()
+			heal(max_hp() * 0.3)
+			FX.text_popup(center() + Vector3.UP, "Devours!", Color(0.6, 1.0, 0.4), 1.1)
+	action = act
+	visual.hold_action(&"devour")
+	_face_now(corpse.global_position)
+	Audio.play_at(&"ghoul_growl", global_position)
+	_devour_cd = 12.0
+	return true
 
 # ---- Elites, bosses, ambience -------------------------------------------------------------------------------------
 

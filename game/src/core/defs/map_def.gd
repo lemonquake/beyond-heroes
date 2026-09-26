@@ -16,3 +16,5 @@ extends Resource
 @export var world_map_pos := Vector2.ZERO    # position on the world map UI (0..1)
 @export var waypoint := true                 # has a waypoint shrine usable from the world map once discovered
 @export var loading_hint := ""
+@export var interior := false                # a building interior entered through a door (no loading screen, not on the world map)
+@export var parent_map: StringName = &""     # interiors: the map outside

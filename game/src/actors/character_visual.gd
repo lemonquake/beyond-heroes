@@ -108,6 +108,7 @@ func _collect_meshes(n: Node) -> void:
 	if n is MeshInstance3D:
 		_meshes.append(n)
 		n.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+		n.layers = 2   # characters: ground stains (Gore decals, cull mask 1) never project onto bodies
 	for c in n.get_children():
 		_collect_meshes(c)
 
@@ -285,6 +286,8 @@ func _process(delta: float) -> void:
 			_play_fidget()
 	if fallback:
 		_animate_fallback(delta)
+	if _floating:
+		_animate_floating(delta)
 	if _trail:
 		_trail.tick(delta)
 
@@ -323,12 +326,19 @@ func interrupt_fidget() -> void:
 	if _in_action and _is_fidget():
 		_end_action()
 
+## Length of a clip in seconds: the model's own clip when it has one (creatures with their own rigs), else metadata.
+func clip_length(n: StringName, fallback := 0.7) -> float:
+	if has_anim(n):
+		return anim_player.get_animation(n).length
+	return float(DB.anim(n).get("length", fallback))
+
 ## One-shot action (attack, cast, skill, interaction). Returns its duration in seconds at the given rate.
 func play_action(n: StringName, rate := 1.0, blend := BLEND) -> float:
 	if _dead:
 		return 0.0
-	var meta := DB.anim(n)
-	var length := float(meta.get("length", 0.7))
+	var length := clip_length(n)
+	if _floating:
+		_float_pulse = 1.0
 	_action = n
 	_action_loop = false
 	_in_action = true
@@ -402,8 +412,9 @@ func play_reaction(kind: StringName, direction := &"") -> void:
 		&"block": n = &"block_impact"
 		&"parry": n = &"parry"
 		_: n = kind
-	var meta := DB.anim(n)
-	var length := float(meta.get("length", 0.4))
+	var length := clip_length(n, 0.4)
+	if _floating:
+		_float_pulse = maxf(_float_pulse, 0.6)
 	if kind == &"hit" and _in_action and not _reaction and not _is_fidget():
 		flash(Color(1, 0.9, 0.85), 0.8)
 		return  # light hits don't interrupt actions; heavier reactions do
@@ -416,13 +427,15 @@ func play_reaction(kind: StringName, direction := &"") -> void:
 	if fallback:
 		_fb_react = length
 
-func play_death() -> void:
+func play_death(clip: StringName = &"death") -> void:
 	_dead = true
 	_in_action = true
 	_action_loop = true
 	_upper_target = 0.0
 	if tree:
-		_start_slot(&"death", 1.0, 0.1)
+		_start_slot(clip if has_anim(clip) else &"death", 1.0, 0.1)
+	elif _floating:
+		_float_dying = true
 	elif fallback and model:
 		var tw := create_tween()
 		tw.tween_property(model, "rotation:x", -PI / 2.0, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
@@ -667,3 +680,109 @@ func _animate_fallback(delta: float) -> void:
 		model.rotation.x = -0.25 if _fb_react > 0.0 else 0.0
 	else:
 		model.rotation.x = lerpf(model.rotation.x, 0.12 * _hurt, delta * 4.0)
+
+# ---- Per-instance materials: stealth shimmer, corpse darkening and dissolve ------------------------------------
+
+var _local_mats := {}               # MeshInstance3D -> Array[StandardMaterial3D] (instance copies of the overrides)
+var _opacity := 1.0
+
+func _ensure_local_materials() -> void:
+	if not _local_mats.is_empty():
+		return
+	for m in _meshes:
+		if not is_instance_valid(m) or m.mesh == null:
+			continue
+		var arr: Array = []
+		for i in m.mesh.get_surface_count():
+			var src := m.get_surface_override_material(i)
+			if src == null:
+				src = m.mesh.surface_get_material(i)
+			var c: Material = src.duplicate() if src else StandardMaterial3D.new()
+			if c is BaseMaterial3D:
+				(c as BaseMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_HASH
+			m.set_surface_override_material(i, c)
+			arr.append(c)
+		_local_mats[m] = arr
+
+## 1 = solid, 0 = gone. Dithered (alpha hash), so it stays depth-sorted and cheap.
+func set_opacity(a: float) -> void:
+	a = clampf(a, 0.0, 1.0)
+	if is_equal_approx(a, _opacity):
+		return
+	_opacity = a
+	_ensure_local_materials()
+	for arr in _local_mats.values():
+		for c in arr:
+			if c is BaseMaterial3D:
+				(c as BaseMaterial3D).albedo_color.a = a
+
+## Corpse decay: darken and desaturate the body toward `tint` by `amount` (0..1). Emission dies with it.
+func set_decay(amount: float, tint := Color(0.16, 0.14, 0.12)) -> void:
+	_ensure_local_materials()
+	for arr in _local_mats.values():
+		for c in arr:
+			if not c is BaseMaterial3D:
+				continue
+			var b := c as BaseMaterial3D
+			if not b.has_meta(&"base_albedo"):
+				b.set_meta(&"base_albedo", b.albedo_color)
+				b.set_meta(&"base_emission", b.emission_energy_multiplier)
+			var base: Color = b.get_meta(&"base_albedo")
+			var grey := base.get_luminance()
+			var c2 := base.lerp(Color(grey, grey, grey), amount * 0.6).lerp(tint, amount * 0.55)
+			c2.a = b.albedo_color.a
+			b.albedo_color = c2
+			b.emission_energy_multiplier = float(b.get_meta(&"base_emission")) * (1.0 - amount)
+
+# ---- Floating Aether creature (no skeleton: core + spinning shard rings + ribbons) ----------------------------
+
+var _floating := false
+var _float_t := 0.0
+var _float_pulse := 0.0
+var _float_dying := false
+var _float_rings: Array[Node3D] = []
+var _float_core: Node3D
+var _float_ribbons: Node3D
+var _float_light: OmniLight3D
+
+func _setup_floating() -> void:
+	_floating = true
+	_float_core = model.find_child("core", true, false) as Node3D
+	_float_ribbons = model.find_child("ribbons", true, false) as Node3D
+	for i in range(1, 6):
+		var r := model.find_child("ring_%d" % i, true, false) as Node3D
+		if r:
+			_float_rings.append(r)
+	_float_light = OmniLight3D.new()
+	_float_light.light_color = Color(0.5, 0.95, 1.0)
+	_float_light.light_energy = 1.4
+	_float_light.omni_range = 5.0
+	add_child(_float_light)
+	_float_t = _rng.randf() * 10.0
+
+func _animate_floating(delta: float) -> void:
+	_float_t += delta
+	_float_pulse = maxf(0.0, _float_pulse - delta * 1.6)
+	var hover := 1.2 * model_scale
+	if _float_dying:
+		# implode: rings collapse into the core, then everything winks out
+		model.scale = model.scale.lerp(Vector3.ONE * 0.01, 1.0 - exp(-5.0 * delta))
+		if _float_light:
+			_float_light.light_energy = lerpf(_float_light.light_energy, 0.0, 1.0 - exp(-4.0 * delta))
+		return
+	model.position.y = hover + sin(_float_t * 1.7) * 0.12 + _loco_pos.length() * 0.05
+	var spin := 1.0 + _float_pulse * 4.0 + _combat * 0.8
+	for i in _float_rings.size():
+		# each ring keeps its authored tilt and spins in its own plane (local +Y)
+		var r := _float_rings[i]
+		r.rotate_object_local(Vector3.UP, delta * (0.9 + 0.55 * i) * spin * (1.0 if i % 2 == 0 else -1.0))
+		var sc := 1.0 - 0.25 * _float_pulse
+		r.basis = r.basis.orthonormalized().scaled(Vector3.ONE * sc)
+	if _float_core:
+		_float_core.scale = Vector3.ONE * (1.0 + 0.08 * sin(_float_t * 5.0) + 0.35 * _float_pulse)
+	if _float_ribbons:
+		_float_ribbons.rotation.y += delta * 0.6
+		_float_ribbons.rotation.x = sin(_float_t * 1.3) * 0.12 - _loco_pos.y * 0.15
+	if _float_light:
+		_float_light.position.y = hover
+		_float_light.light_energy = 1.2 + 0.3 * sin(_float_t * 3.0) + 2.5 * _float_pulse

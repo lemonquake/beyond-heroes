@@ -120,5 +120,9 @@ def export_character(name, out_dir, export_fn, log=print):
         pb.location = (0, 0, 0)
     path = os.path.join(out_dir, name + ".glb")
     export_fn(path, [arm, mesh])
+    import build as _B
+    fps = 30.0
+    n = _B.check_clip_lengths(path, {k: (a.frame_range[1] - a.frame_range[0]) / fps for k, a in res["actions"].items()})
+    log(f"[{name}] clip lengths verified ({n} clips)")
     log(f"[{name}] -> {path} ({os.path.getsize(path) / 1e6:.1f} MB)")
     return res

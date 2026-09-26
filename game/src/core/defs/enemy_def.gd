@@ -53,6 +53,15 @@ extends Resource
 @export var status_immune: Array = []        # status ids (bosses: frozen, stunned)
 @export var stagger_resist := 1.0            # multiplier on poise (tanks > 1)
 @export var phases: Array = []               # bosses: [{hp: 0.66, name, adds: [...]}]
+# ---- presentation & signature traits (bh-003) --------------------------------------------------------------
+@export var hit_material: StringName = &"flesh"   # Gore material: flesh, ichor, bone, stone, aether, shadow
+@export var blood := Color(0.42, 0.02, 0.02)       # liquid colour for flesh / ichor
+## How it dies: "fall" (death variant chosen from the killing blow), "crumple" (bones/constructs fold down),
+## "ash" (burns away to embers and ash), "collapse" (construct breaks apart), "implode" (Aether: no corpse)
+@export var death_style := &"fall"
+## Signature mechanics: reassemble, devour, stealth, pickpocket, aim_line, cowardly, lob, ... (see Enemy)
+@export var traits: Array = []
+@export var corpse_time := 14.0              # seconds a corpse lies fresh before it starts to decay
 
 func scaled(level: int) -> float:
 	return 1.0 + level_scaling * float(maxi(level, 1) - 1)

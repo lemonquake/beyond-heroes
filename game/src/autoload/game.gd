@@ -211,6 +211,40 @@ func travel(id: StringName, spawn_id: StringName) -> void:
 	await _loading.hide_screen()
 	travelling = false
 
+## Walk through a door: fade to black, swap maps, fade back in (interiors are small, no loading screen).
+func door_travel(id: StringName, spawn_id: StringName) -> void:
+	if travelling:
+		return
+	travelling = true
+	var cover := _fade_cover()
+	var tw := cover.create_tween()
+	tw.tween_property(cover, "color:a", 1.0, 0.28)
+	await tw.finished
+	load_map(id, spawn_id)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if in_session:
+		save_now()
+	var tw2 := cover.create_tween()
+	tw2.tween_property(cover, "color:a", 0.0, 0.35)
+	await tw2.finished
+	travelling = false
+
+var _fade_layer: CanvasLayer
+var _fade_rect: ColorRect
+
+func _fade_cover() -> ColorRect:
+	if _fade_rect == null or not is_instance_valid(_fade_rect):
+		_fade_layer = CanvasLayer.new()
+		_fade_layer.layer = 90
+		add_child(_fade_layer)
+		_fade_rect = ColorRect.new()
+		_fade_rect.color = Color(0.01, 0.008, 0.012, 0.0)
+		_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_fade_layer.add_child(_fade_rect)
+	return _fade_rect
+
 func return_to_town() -> void:
 	travel(&"sanctuary", &"waypoint")
 

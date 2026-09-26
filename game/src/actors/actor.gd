@@ -231,6 +231,10 @@ func spend_mana(amount: float) -> bool:
 	mana_changed.emit(mana, max_mana())
 	return true
 
+## Which death animation to play (enemies choose one from the killing blow).
+func death_clip() -> StringName:
+	return &"death"
+
 func die(killer: Node) -> void:
 	if not alive:
 		return
@@ -240,7 +244,7 @@ func die(killer: Node) -> void:
 	set_meta(&"died_burning", status.has(&"burning"))
 	status.clear()
 	if visual:
-		visual.play_death()
+		visual.play_death(death_clip())
 	collision_layer = 0
 	collision_mask = BH.LAYER_WORLD
 	died.emit(killer)

@@ -20,6 +20,37 @@ static func _e(id: StringName, name: String, arche: StringName, d: Dictionary) -
 	return e
 
 static func build() -> Array:
+	var out := _defs()
+	for e in out:
+		var d: Dictionary = LOOK.get(e.id, {})
+		for k in d:
+			e.set(k, d[k])
+	return out
+
+## Presentation and signature traits per enemy (docs/LORE.md §7; Enemy implements the traits).
+const LOOK := {
+	&"hollow_soldier": {"hit_material": &"bone", "death_style": &"crumple", "traits": [&"reassemble"]},
+	&"bonewarden": {"hit_material": &"bone", "death_style": &"crumple", "traits": [&"coffin_shield"]},
+	&"grave_archer": {"hit_material": &"bone", "death_style": &"crumple", "traits": [&"aim_line"],
+		"lore": "The garrison's bowmen. They still keep their old firing lines, and a red thread of grave-light shows where they aim."},
+	&"boss_warden": {"hit_material": &"bone", "blood": Color(0.35, 0.12, 0.55), "death_style": &"crumple", "corpse_time": 60.0},
+	&"ashen_cultist": {"hit_material": &"flesh", "death_style": &"ash", "traits": [&"ash_death"]},
+	&"ashen_acolyte": {"hit_material": &"flesh", "death_style": &"ash", "traits": [&"ash_death"]},
+	&"ghoul_brute": {"hit_material": &"ichor", "blood": Color(0.1, 0.13, 0.04), "traits": [&"devour"]},
+	&"shade_stalker": {"hit_material": &"shadow", "death_style": &"smoke", "traits": [&"stealth"],
+		"lore": "A shadow with a knife. You see it only when it strikes, or when it bleeds smoke."},
+	&"bandit_cutthroat": {"traits": [&"pickpocket"]},
+	&"bandit_marksman": {"traits": [&"aim_line"],
+		"lore": "Road bandits with hunting bows. They take their time, and you can see the line of the shot before it comes."},
+	&"dire_wolf": {"blood": Color(0.38, 0.02, 0.02)},
+	&"aether_sentinel": {"hit_material": &"stone", "death_style": &"collapse", "traits": [&"core_overload"]},
+	&"aether_wisp": {"hit_material": &"aether", "death_style": &"implode"},
+	&"goblin_skulker": {"blood": Color(0.3, 0.05, 0.02), "traits": [&"cowardly"]},
+	&"orc_reaver": {"blood": Color(0.32, 0.03, 0.02)},
+	&"ogre_crusher": {"blood": Color(0.4, 0.04, 0.03), "traits": [&"enrage"], "corpse_time": 20.0},
+}
+
+static func _defs() -> Array:
 	return [
 		# ------------------------------------------------------------------ UNDEAD
 		_e(&"hollow_soldier", "Hollow Soldier", &"fodder", {"family": &"undead", "role_name": "Melee grunt",
@@ -121,8 +152,9 @@ static func build() -> Array:
 			"body_shape": &"quadruped", "hp": 30.0, "damage_min": 5.0, "damage_max": 8.0, "defense": 5.0, "flanker": true,
 			"evasion": 24.0, "accuracy": 34.0, "crit_chance": 0.08, "move_speed": 6.8, "weight": 0.9, "poise": 12.0,
 			"preferred_range": 1.4, "body_radius": 0.5, "body_height": 1.1, "hearing_range": 14.0,
-			"attacks": [{"id": &"bite", "anim": &"dagger_1", "range": 1.8, "mult": 1.0, "knockback": 1.5, "poise": 8.0, "cooldown": 1.3, "kind": "melee", "arc": 80.0, "status": {&"bleeding": 30.0}},
-				{"id": &"pounce", "anim": &"dagger_heavy", "range": 7.0, "min_range": 3.0, "mult": 1.3, "knockback": 5.0, "poise": 14.0, "cooldown": 5.0, "kind": "dash", "dash": 7.0, "arc": 80.0}],
+			"attacks": [{"id": &"bite", "anim": &"wolf_bite", "range": 1.8, "mult": 1.0, "knockback": 1.5, "poise": 8.0, "cooldown": 1.3, "kind": "melee", "arc": 80.0, "status": {&"bleeding": 30.0}},
+				{"id": &"pounce", "anim": &"wolf_pounce", "range": 7.0, "min_range": 3.0, "mult": 1.3, "knockback": 5.0, "poise": 14.0, "cooldown": 5.0, "kind": "dash", "dash": 7.0, "arc": 80.0}],
+			"abilities": [{"id": &"howl", "kind": "buff", "cooldown": 18.0, "range": 16.0, "status": &"haste", "duration": 6.0, "anim": &"wolf_howl", "self": true}],
 			"xp_mult": 0.9, "drop_chance": 0.25, "gold": Vector2i(0, 3), "loot": [[&"beast_hide", 0.55, 1, 2]],
 			"sounds": {"hurt": &"ghoul_growl", "death": &"body_fall", "idle": &"ghoul_growl"},
 			"lore": "The forest wolves grew bold and strange after the Aether broke. They hunt in threes now."}),
@@ -155,6 +187,41 @@ static func build() -> Array:
 			"xp_mult": 1.3, "drop_chance": 0.4, "loot": [[&"storm_essence", 0.35, 1, 1], [&"aether_shard", 0.05, 1, 1]],
 			"sounds": {"hurt": &"lightning_zap", "death": &"arcane_surge", "idle": &"teleporter_hum"},
 			"lore": "Loose Aether with a will of its own. It is drawn to anything carrying enchantments."}),
+		# ------------------------------------------------------------------ GREENSKINS & OGRES (bh-003)
+		_e(&"goblin_skulker", "Goblin Skulker", &"assassin", {"family": &"goblin", "role_name": "Skirmisher", "tint": Color(0.4, 0.45, 0.25),
+			"hp": 24.0, "damage_min": 3.0, "damage_max": 6.0, "defense": 4.0, "flanker": true,
+			"evasion": 30.0, "accuracy": 30.0, "crit_chance": 0.1, "move_speed": 5.4, "weight": 0.6, "poise": 8.0,
+			"preferred_range": 1.4, "body_radius": 0.35, "body_height": 1.2, "hearing_range": 12.0,
+			"attacks": [{"id": &"stab", "anim": &"dagger_1", "range": 1.5, "mult": 0.9, "knockback": 1.0, "poise": 5.0, "cooldown": 1.1, "kind": "melee", "arc": 80.0},
+				{"id": &"slash", "anim": &"dagger_2", "range": 1.6, "mult": 1.1, "knockback": 1.5, "poise": 6.0, "cooldown": 2.4, "kind": "melee", "arc": 90.0, "status": {&"bleeding": 25.0}},
+				{"id": &"firepot", "anim": &"cast_quick", "range": 11.0, "min_range": 3.5, "mult": 1.2, "element": Elements.FIRE, "knockback": 3.0, "poise": 8.0,
+					"cooldown": 7.0, "kind": "aoe", "radius": 2.0, "windup": 0.5, "telegraph": "circle", "lob": "firepot", "status": {&"burning": 70.0}}],
+			"xp_mult": 0.8, "drop_chance": 0.3, "gold": Vector2i(3, 10), "loot": [[&"iron_shard", 0.25, 1, 2]],
+			"sounds": {"hurt": &"hit_flesh", "death": &"body_fall", "idle": &"shade_hiss"},
+			"lore": "Scavengers that follow the dead to loot the fallen. Brave in threes, cowards alone. Mind the fire-pots."}),
+		_e(&"orc_reaver", "Orc Reaver", &"brute", {"family": &"orc", "role_name": "Raider", "tint": Color(0.35, 0.42, 0.3),
+			"hp": 110.0, "damage_min": 10.0, "damage_max": 16.0, "defense": 22.0, "stagger_resist": 1.3,
+			"evasion": 8.0, "accuracy": 38.0, "crit_chance": 0.06, "move_speed": 4.0, "weight": 2.2, "poise": 60.0, "knockback_res": 0.25,
+			"preferred_range": 2.1, "body_radius": 0.6, "body_height": 2.1,
+			"attacks": [{"id": &"hack", "anim": &"axe_1", "range": 2.5, "mult": 1.0, "knockback": 4.0, "poise": 18.0, "cooldown": 1.8, "kind": "melee", "arc": 110.0},
+				{"id": &"reap", "anim": &"axe_3", "range": 2.6, "mult": 1.3, "knockback": 6.0, "poise": 24.0, "cooldown": 4.0, "kind": "melee", "arc": 160.0},
+				{"id": &"cleave", "anim": &"axe_heavy", "range": 2.8, "mult": 2.0, "knockback": 10.0, "poise": 45.0, "cooldown": 7.0, "kind": "melee", "arc": 70.0, "windup": 0.45}],
+			"abilities": [{"id": &"warcry", "kind": "buff", "cooldown": 20.0, "range": 12.0, "status": &"empowered", "duration": 8.0, "anim": &"war_cry", "self": true}],
+			"xp_mult": 2.2, "drop_chance": 0.5, "gold": Vector2i(6, 18), "loot": [[&"iron_shard", 0.5, 1, 3], [&"beast_hide", 0.3, 1, 2]],
+			"sounds": {"hurt": &"hit_flesh", "death": &"ghoul_death", "idle": &"ghoul_growl"},
+			"lore": "A war-band sold to the Sulvane Theocracy, scouting Salmonan ahead of the Holy War. The red cloth on the arm is their price."}),
+		_e(&"ogre_crusher", "Ogre Crusher", &"brute", {"family": &"ogre", "role_name": "Juggernaut", "tint": Color(0.5, 0.42, 0.35),
+			"hp": 320.0, "damage_min": 18.0, "damage_max": 28.0, "defense": 30.0, "stagger_resist": 1.8,
+			"evasion": 0.0, "accuracy": 32.0, "move_speed": 3.0, "weight": 6.0, "poise": 160.0, "knockback_res": 0.6,
+			"preferred_range": 3.0, "body_radius": 1.1, "body_height": 3.0, "aggro_range": 16.0,
+			"attacks": [{"id": &"club", "anim": &"gs_1", "range": 3.6, "mult": 1.0, "knockback": 12.0, "poise": 40.0, "cooldown": 2.8, "kind": "melee", "arc": 140.0},
+				{"id": &"pound", "anim": &"boss_slam", "range": 4.0, "mult": 1.8, "element": Elements.EARTH, "knockback": 14.0, "poise": 60.0, "cooldown": 8.0, "kind": "aoe",
+					"radius": 4.4, "windup": 0.7, "telegraph": "circle", "self_centered": true, "status": {&"armor_broken": 60.0}},
+				{"id": &"boulder", "anim": &"cast_heavy", "range": 16.0, "min_range": 6.0, "mult": 1.6, "element": Elements.EARTH, "knockback": 10.0, "poise": 40.0,
+					"cooldown": 9.0, "kind": "aoe", "radius": 2.6, "windup": 1.0, "telegraph": "circle", "lob": "boulder"}],
+			"xp_mult": 5.0, "drop_chance": 0.8, "gold": Vector2i(20, 45), "loot": [[&"beast_hide", 0.6, 2, 3], [&"iron_shard", 0.5, 2, 4]],
+			"sounds": {"hurt": &"hit_flesh", "death": &"boss_roar", "idle": &"ghoul_growl"},
+			"lore": "Chained and driven by the orcs. When it cannot reach you, it throws the ground at you."}),
 		# ------------------------------------------------------------------ BOSS
 		_e(&"boss_warden", "Morthar, the Hollow Warden", &"boss", {"family": &"undead", "role_name": "Boss", "tint": Color(0.4, 0.38, 0.42),
 			"hp": 2400.0, "damage_min": 18.0, "damage_max": 28.0, "defense": 60.0,

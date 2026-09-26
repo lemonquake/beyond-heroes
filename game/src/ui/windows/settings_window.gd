@@ -159,6 +159,7 @@ func _controls(v: VBoxContainer) -> void:
 func _gameplay(v: VBoxContainer) -> void:
 	v.add_child(section("Combat"))
 	_check(v, "Damage Numbers", "damage_numbers")
+	_check(v, "Blood Effects", "blood")
 	_slider(v, "Screen Shake", "screen_shake", 0.0, 1.5, 0.05)
 	_check(v, "Enemy Health Bars", "show_enemy_bars")
 	_check(v, "Reduced Motion", "reduced_motion", "Removes screen shake and softens flashes.")

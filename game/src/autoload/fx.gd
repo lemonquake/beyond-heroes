@@ -3,11 +3,14 @@ extends Node
 ## The numbers shown come straight from DamageResult.total — the same value subtracted from HP.
 
 const NUMBER_POOL := 48
+const MAX_STAINS := 72               # ground blood / ichor stains alive at once (oldest fades first)
+const STAIN_LIFE := 45.0
 var world: Node3D                    # current map root; set by Game on map load
 var _numbers: Array[Label3D] = []
 var _next := 0
 var _hitstop_until := 0
 var _font: Font
+var _stains: Array[Decal] = []
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -102,7 +105,17 @@ func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> 
 	if target is Actor:
 		var rel := clampf(float(r.total) / maxf(1.0, target.max_hp()) * 4.0, 0.0, 1.0)
 		var strength := clampf(rel + (0.35 if r.is_crit else 0.0) + r.knockback / 30.0, 0.0, 1.2)
-		spawn(VFXLib.hit_burst(pos, r.dominant_element, strength, r.is_crit), pos)
+		var mat := hit_material(target)
+		var dir := Vector3.ZERO
+		if attacker is Node3D and is_instance_valid(attacker):
+			dir = (target.global_position - (attacker as Node3D).global_position)
+		if r.dominant_element != Elements.PHYSICAL or mat[0] == &"":
+			spawn(VFXLib.hit_burst(pos, r.dominant_element, strength, r.is_crit), pos)
+		if mat[0] != &"":
+			spawn(Gore.hit(pos, dir, mat[0], mat[1], strength, r.is_crit), pos)
+			if Gore.bleeds(mat[0]) and (strength > 0.18 or r.is_crit):
+				var d2 := dir.slide(Vector3.UP).normalized()
+				stain(target.global_position + d2 * randf_range(0.4, 1.4), mat[1], randf_range(0.7, 1.3) * (1.4 if r.is_crit else 1.0), atan2(d2.x, d2.z) - PI * 0.5)
 		if target.visual:
 			target.visual.flash(Color(1, 1, 1) if not is_player_target else Color(1, 0.3, 0.2), 0.9 if r.is_crit else 0.6)
 		if attacker is Actor and attacker.team == BH.Team.PLAYER:
@@ -116,6 +129,54 @@ func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> 
 		elif is_player_target:
 			Events.camera_shake.emit(clampf(rel * 0.6, 0.08, 0.35))
 			rumble(0.6, 0.3, 0.15)
+
+## [material, liquid colour] of what a target bleeds: enemies from their definition, the hero is flesh.
+func hit_material(target: Node) -> Array:
+	if target is Enemy and (target as Enemy).def:
+		var d := (target as Enemy).def
+		return [d.hit_material, d.blood]
+	if target is Actor:
+		return [Gore.FLESH, Color(0.42, 0.02, 0.02)]
+	return [&"", Color.BLACK]
+
+## Leave a stain on the ground at `at` (world). Bounded: the oldest stain fades out when the budget is full.
+func stain(at: Vector3, c: Color, size: float, yaw := 0.0) -> Decal:
+	if world == null or not is_instance_valid(world) or not Settings.blood:
+		return null
+	_stains = _stains.filter(func(d): return is_instance_valid(d))
+	while _stains.size() >= MAX_STAINS:
+		var old: Decal = _stains.pop_front()
+		old.queue_free()
+	var d := Gore.stain(c, size, randi(), yaw)
+	world.add_child(d)
+	d.global_position = at + Vector3.UP * 0.15
+	_stains.append(d)
+	d.modulate.a = 0.0
+	var tw := d.create_tween()
+	tw.tween_property(d, "modulate:a", c.a, 0.15)
+	tw.tween_interval(STAIN_LIFE)
+	tw.tween_property(d, "modulate:a", 0.0, 6.0)
+	tw.tween_callback(d.queue_free)
+	return d
+
+## A pool that spreads under a body over `grow` seconds. The caller (corpse) owns and frees it; it counts toward
+## the stain budget so pools and splatters share one bound.
+func pool(at: Vector3, c: Color, size: float, grow := 6.0) -> Decal:
+	if world == null or not is_instance_valid(world) or not Settings.blood:
+		return null
+	_stains = _stains.filter(func(d): return is_instance_valid(d))
+	while _stains.size() >= MAX_STAINS:
+		(_stains.pop_front() as Decal).queue_free()
+	var d := Gore.stain(c.darkened(0.15), 0.3, randi(), randf() * TAU)
+	world.add_child(d)
+	d.global_position = at + Vector3.UP * 0.15
+	_stains.append(d)
+	d.create_tween().tween_property(d, "size", Vector3(size, 1.2, size), grow).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	return d
+
+func stain_count() -> int:
+	_stains = _stains.filter(func(d): return is_instance_valid(d))
+	return _stains.size()
 
 func heal_number(pos: Vector3, amount: int) -> void:
 	_number(pos, "+%d" % amount, Color(0.45, 1.0, 0.5), 0.9, 1.0)

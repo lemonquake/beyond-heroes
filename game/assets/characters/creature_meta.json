@@ -1,0 +1,86 @@
+{
+ "fps": 30,
+ "generator": "tools/blender/creatures/build_wolf.py",
+ "notes": "dire_wolf clips (in place; hits = seconds where the jaws close / the body lands)",
+ "animations": {
+  "idle": {
+   "length": 3.0,
+   "loop": true
+  },
+  "idle_look": {
+   "length": 2.5,
+   "loop": false
+  },
+  "walk": {
+   "length": 1.0,
+   "loop": true,
+   "ground_speed": 1.25
+  },
+  "run": {
+   "length": 0.5,
+   "loop": true,
+   "ground_speed": 5.5
+  },
+  "run_combat": {
+   "length": 0.5,
+   "loop": true,
+   "ground_speed": 5.5
+  },
+  "hit_light": {
+   "length": 0.4,
+   "loop": false
+  },
+  "hit_heavy": {
+   "length": 0.6,
+   "loop": false
+  },
+  "stagger_small": {
+   "length": 0.8,
+   "loop": false
+  },
+  "knockback": {
+   "length": 0.9,
+   "loop": false
+  },
+  "death": {
+   "length": 1.5,
+   "loop": false
+  },
+  "death_back": {
+   "length": 1.5,
+   "loop": false
+  },
+  "alert": {
+   "length": 1.0,
+   "loop": false
+  },
+  "wolf_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.333,
+     0.433
+    ]
+   ]
+  },
+  "wolf_pounce": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.767,
+     0.9
+    ]
+   ]
+  },
+  "wolf_howl": {
+   "length": 2.5,
+   "loop": false
+  },
+  "devour": {
+   "length": 2.0,
+   "loop": true
+  }
+ }
+}

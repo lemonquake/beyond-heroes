@@ -54,6 +54,15 @@ func _load_anim_meta() -> void:
 	var parsed = JSON.parse_string(txt)
 	if parsed is Dictionary:
 		anim_meta = parsed.get("animations", {})
+	# non-humanoid creature clips (dire wolf ...): same schema, never overrides the humanoid library
+	var cpath := "res://assets/characters/creature_meta.json"
+	if FileAccess.file_exists(cpath):
+		var c = JSON.parse_string(FileAccess.get_file_as_string(cpath))
+		if c is Dictionary:
+			var ca: Dictionary = c.get("animations", {})
+			for k in ca:
+				if not anim_meta.has(k):
+					anim_meta[k] = ca[k]
 
 func class_def(id: StringName) -> ClassDef:
 	return classes.get(id)

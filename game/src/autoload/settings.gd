@@ -37,6 +37,7 @@ var guard_toggle := false           # false: hold to guard, true: press to toggl
 var attack_hold_repeat := true      # holding attack keeps the combo going
 # ---- GAMEPLAY
 var damage_numbers := true
+var blood := true                   # blood sprays, pools and gore on hits and corpses
 var screen_shake := 1.0
 var auto_loot_mode := 1             # AUTO_LOOT_NAMES
 var show_enemy_bars := true
@@ -48,7 +49,7 @@ var show_minimap := true
 
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
-	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "screen_shake",
+	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
 	"auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap"]
 
 # Derived switches read by the world builders.
@@ -138,7 +139,7 @@ const GROUPS := {
 	"video": ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality", "anti_aliasing", "render_scale"],
 	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume"],
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat"],
-	"gameplay": ["damage_numbers", "screen_shake", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
+	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
 		"reduced_motion", "ui_scale", "show_minimap"],
 }
 
