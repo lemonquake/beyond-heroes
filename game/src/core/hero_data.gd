@@ -65,7 +65,7 @@ func init_new() -> void:
 		skill_bar[i] = s
 		i += 1
 	for base_id in cls.starting_items:
-		var it := DB.make_item(base_id, BH.Rarity.COMMON, 1, hash(String(base_id)))
+		var it := DB.make_item(base_id, BH.Rarity.BEGINNER, 1, hash(String(base_id)))
 		var slot := equipment.auto_slot(it)
 		var res := equipment.equip(it, slot, progress.level, progress.base_attributes())
 		if not res.ok:

@@ -1,19 +1,26 @@
 class_name ItemInstance
 extends RefCounted
-## A concrete item: base + rarity + rolled affixes + legendary powers.
+## A concrete item: base + rarity + rolled affixes + powers (+ license, set membership, player flags).
 
 static var _uid_counter := 0
+
+const SELL_MULT := [0.5, 1.0, 1.6, 2.4, 3.4, 5.0, 7.5, 11.0, 16.0, 26.0]   # per rarity tier
 
 var uid := 0
 var base: ItemBaseDef
 var rarity := BH.Rarity.COMMON
 var ilvl := 1
 var quality := 0.0                         # +% to base damage/defense (0..0.2)
-var affixes: Array = []                    # [{id, tier, value}]
+var affixes: Array = []                    # [{id, tier, value, mw?}]  mw = masterwork (perfected) affix
 var powers: Array = []                     # [power id]
+var license: StringName = &""              # Licensed tier: faction license id
 var count := 1
 var custom_name := ""
 var seed_value := 0
+# Player-controlled flags (persisted).
+var locked := false                        # cannot be sold, dropped or destroyed
+var favorite := false                      # sorted first, protected like locked
+var junk := false                          # marked for "sell junk" at merchants
 
 func _init() -> void:
 	_uid_counter += 1
@@ -22,7 +29,10 @@ func _init() -> void:
 func display_name() -> String:
 	if custom_name != "":
 		return custom_name
-	if rarity == BH.Rarity.MAGIC and not affixes.is_empty():
+	if base.unique_name != "":
+		return base.unique_name
+	if rarity >= BH.Rarity.BASIC and rarity <= BH.Rarity.LICENSED and not affixes.is_empty():
+		# "Flaming Sword of Precision": first prefix + base + first suffix.
 		var pre := ""
 		var suf := ""
 		for a in affixes:
@@ -39,33 +49,42 @@ func display_name() -> String:
 func color() -> Color:
 	return BH.rarity_color(rarity)
 
+func rarity_name() -> String:
+	return BH.rarity_name(rarity)
+
 func category() -> StringName:
 	return base.category
 
 func is_equipment() -> bool:
 	return BH.CATEGORY_SLOTS.has(base.category)
 
+func is_protected() -> bool:
+	return locked or favorite
+
+func set_def() -> SetDef:
+	return DB.item_set(base.set_id) if base.set_id != &"" else null
+
+func icon() -> Texture2D:
+	var p := base.icon_path()
+	return load(p) if p != "" and ResourceLoader.exists(p) else null
+
+func _local(stat: StringName) -> float:
+	var t := 0.0
+	for a in affixes:
+		var def := DB.affix(StringName(a.id))
+		if def != null and def.stat == stat:
+			t += float(a.value)
+	return t
+
 func damage_range() -> Vector2:
 	var q := 1.0 + quality
-	var local_inc := 0.0
-	for a in affixes:
-		var def := DB.affix(StringName(a.id))
-		if def != null and def.stat == &"local_phys" :
-			local_inc += float(a.value)
-	return Vector2(base.damage_min, base.damage_max) * q * (1.0 + local_inc)
+	return Vector2(base.damage_min, base.damage_max) * q * (1.0 + _local(&"local_phys"))
 
 func defense_value() -> float:
-	var local_inc := 0.0
-	var local_flat := 0.0
-	for a in affixes:
-		var def := DB.affix(StringName(a.id))
-		if def == null:
-			continue
-		if def.stat == &"local_def":
-			local_inc += float(a.value)
-		elif def.stat == &"local_def_flat":
-			local_flat += float(a.value)
-	return (base.defense * (1.0 + quality) + local_flat) * (1.0 + local_inc)
+	return (base.defense * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
+
+func block_chance() -> float:
+	return base.block_chance
 
 ## All stat modifiers this item grants when equipped (local modifiers are folded into base values instead).
 func modifiers() -> Array:
@@ -73,19 +92,20 @@ func modifiers() -> Array:
 	var src := display_name()
 	for m in base.implicit:
 		out.append(StatModifier.new(m.stat, m.op, m.value, src))
-	if base.category != &"weapon" and base.category != &"shield":
+	for m in base.fixed_mods:
+		out.append(StatModifier.new(m.stat, m.op, m.value, src))
+	if base.category != &"weapon":
 		var dv := defense_value()
 		if dv > 0.0:
 			out.append(StatModifier.flat(&"defense", dv, src))
-	elif base.category == &"shield":
-		var dv2 := defense_value()
-		if dv2 > 0.0:
-			out.append(StatModifier.flat(&"defense", dv2, src))
 	for a in affixes:
 		var def := DB.affix(StringName(a.id))
 		if def == null or String(def.stat).begins_with("local_"):
 			continue
 		out.append(StatModifier.new(def.stat, def.op, float(a.value), src))
+	if license != &"":
+		for m in license_modifiers():
+			out.append(m)
 	for pid in powers:
 		var p := DB.power(StringName(pid))
 		if p == null:
@@ -95,9 +115,27 @@ func modifiers() -> Array:
 			out.append(StatModifier.new(m.stat, m.op, m.value, src))
 	return out
 
+## License bonus: fixed specialization modifiers that scale with item level.
+func license_modifiers() -> Array:
+	var out: Array = []
+	var lic: Dictionary = DB.licenses.get(license, {})
+	if lic.is_empty():
+		return out
+	var src := "%s license" % lic.get("name", "")
+	for m in lic.get("mods", []):
+		var v := float(m[2]) + float(m[3]) * float(ilvl - 1)
+		out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, v, src))
+	return out
+
+## Merchant buy price of one unit before merchant markup (ShopPricing applies markup/reputation).
+func base_value() -> float:
+	var affix_bonus := 1.0 + 0.12 * float(affixes.size()) + 0.35 * float(powers.size())
+	return float(base.value) * SELL_MULT[clampi(rarity, 0, SELL_MULT.size() - 1)] * (1.0 + float(ilvl) * 0.06) * affix_bonus * (1.0 + quality)
+
 func sell_value() -> int:
-	var mult: float = [1.0, 2.0, 4.0, 7.0, 15.0, 30.0][rarity]
-	return int(round(float(base.value) * mult * (1.0 + float(ilvl) * 0.05))) * count
+	if not base.sellable:
+		return 0
+	return maxi(1, int(round(base_value() * 0.25))) * count
 
 func affix_lines() -> PackedStringArray:
 	var out := PackedStringArray()
@@ -105,19 +143,32 @@ func affix_lines() -> PackedStringArray:
 		var def := DB.affix(StringName(a.id))
 		if def == null:
 			continue
+		var line: String
 		if def.stat == &"local_phys":
-			out.append("%d%% increased Physical Damage (local)" % roundi(float(a.value) * 100.0))
+			line = "%d%% increased Physical Damage" % roundi(float(a.value) * 100.0)
 		elif def.stat == &"local_def":
-			out.append("%d%% increased Defense (local)" % roundi(float(a.value) * 100.0))
+			line = "%d%% increased Defense" % roundi(float(a.value) * 100.0)
 		elif def.stat == &"local_def_flat":
-			out.append("+%d Defense (local)" % roundi(float(a.value)))
+			line = "+%d Defense" % roundi(float(a.value))
 		else:
-			out.append(StatDefs.format_modifier(def.stat, def.op, float(a.value)))
+			line = StatDefs.format_modifier(def.stat, def.op, float(a.value))
+		if a.get("mw", false):
+			line += "  (Masterwork)"
+		out.append(line)
 	return out
 
 func to_dict() -> Dictionary:
-	return {"base": String(base.id), "rarity": rarity, "ilvl": ilvl, "quality": quality, "affixes": affixes.duplicate(true),
+	var d := {"base": String(base.id), "rarity": rarity, "ilvl": ilvl, "quality": quality, "affixes": affixes.duplicate(true),
 		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value}
+	if license != &"":
+		d["license"] = String(license)
+	if locked:
+		d["locked"] = true
+	if favorite:
+		d["favorite"] = true
+	if junk:
+		d["junk"] = true
+	return d
 
 static func from_dict(d: Dictionary) -> ItemInstance:
 	var b := DB.item_base(StringName(d.get("base", "")))
@@ -126,19 +177,30 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 		return null
 	var it := ItemInstance.new()
 	it.base = b
-	it.rarity = clampi(int(d.get("rarity", 0)), 0, BH.Rarity.MYTHIC)
+	it.rarity = clampi(int(d.get("rarity", 0)), 0, BH.RARITY_COUNT - 1)
 	it.ilvl = int(d.get("ilvl", 1))
 	it.quality = float(d.get("quality", 0.0))
 	it.affixes = []
 	for a in d.get("affixes", []):
-		it.affixes.append({"id": String(a.get("id", "")), "tier": int(a.get("tier", 0)), "value": float(a.get("value", 0.0))})
+		var e := {"id": String(a.get("id", "")), "tier": int(a.get("tier", 0)), "value": float(a.get("value", 0.0))}
+		if a.get("mw", false):
+			e["mw"] = true
+		it.affixes.append(e)
 	it.powers = []
 	for p in d.get("powers", []):
 		it.powers.append(String(p))
+	it.license = StringName(d.get("license", ""))
 	it.count = maxi(1, int(d.get("count", 1)))
 	it.custom_name = String(d.get("name", ""))
 	it.seed_value = int(d.get("seed", 0))
+	it.locked = bool(d.get("locked", false))
+	it.favorite = bool(d.get("favorite", false))
+	it.junk = bool(d.get("junk", false))
 	return it
 
 func clone() -> ItemInstance:
 	return ItemInstance.from_dict(to_dict())
+
+## Same item kind for stacking purposes.
+func stacks_with(other: ItemInstance) -> bool:
+	return other != null and other.base == base and base.is_stackable() and other.rarity == rarity

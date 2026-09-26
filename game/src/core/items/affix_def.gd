@@ -12,6 +12,7 @@ extends Resource
 @export var group: StringName             # at most one affix per group on an item
 @export var weight := 100
 @export var integer := false              # round rolled values
+@export var min_rarity := 0               # lowest rarity tier that may roll this affix
 
 func allowed_tiers(ilvl: int) -> Array:
 	var out := []

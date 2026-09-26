@@ -3,13 +3,14 @@ extends Node
 ## Each file: {"version": N, "saved_at": unix, "hero": {...}, "settings": {...}}.
 ## Older versions are upgraded step-by-step through MIGRATIONS before loading.
 
-const CURRENT_VERSION := 2
+const CURRENT_VERSION := 3
 const SAVE_DIR := "user://saves"
 const SLOTS := 3
 
 ## version -> Callable(dict) -> dict  (upgrades from `version` to `version + 1`)
 var MIGRATIONS := {
 	1: _migrate_1_to_2,
+	2: _migrate_2_to_3,
 }
 
 func _ready() -> void:
@@ -85,5 +86,21 @@ func _migrate_1_to_2(d: Dictionary) -> Dictionary:
 		h.erase("hotbar")
 	if not h.has("play_time"):
 		h["play_time"] = 0.0
+	d["hero"] = h
+	return d
+
+# v2 used six rarities (Common, Magic, Rare, Epic, Legendary, Mythic); v3 uses the ten design tiers.
+const V2_RARITY_MAP := [1, 3, 5, 6, 8, 9]
+
+func _migrate_2_to_3(d: Dictionary) -> Dictionary:
+	var h: Dictionary = d.get("hero", {})
+	var remap := func(it):
+		if it is Dictionary and it.has("rarity"):
+			it["rarity"] = V2_RARITY_MAP[clampi(int(it["rarity"]), 0, V2_RARITY_MAP.size() - 1)]
+	for it in h.get("inventory", []):
+		remap.call(it)
+	var eq: Dictionary = h.get("equipment", {})
+	for k in eq:
+		remap.call(eq[k])
 	d["hero"] = h
 	return d

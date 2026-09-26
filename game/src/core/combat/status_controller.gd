@@ -18,6 +18,8 @@ class Instance:
 	var tick_timer := 0.0
 	var infinite := false
 	var modifiers: Array = []
+	var stacks := 1
+	var source_name := ""                # who applied it (tooltips)
 
 const DOT_TICK := 0.5
 const BUILDUP_DECAY := 12.0          # points per second
@@ -27,6 +29,7 @@ const POISE_RECOVER_RATE := 0.35     # fraction of poise per second
 const BURN_DPS_FRACTION := 0.25      # burning dps = 25% of the igniting hit's fire damage
 const BLEED_DPS_FRACTION := 0.2
 const CHILL_SLOW := 0.25
+const POISON_DPS_FRACTION := 0.35
 
 var statuses := {}                   # id -> Instance
 var buildup := {}                    # id -> float
@@ -34,6 +37,7 @@ var poise_meter := 0.0
 var status_res := 0.0
 var max_poise := 30.0
 var grants_stagger_window := false   # elites and bosses become Exposed after a poise break
+var immunities := {}                 # status id -> true (bosses: frozen, stunned)
 var _since_buildup := 0.0
 var _since_poise := 0.0
 
@@ -46,11 +50,25 @@ func magnitude(id: StringName, default_value := 0.0) -> float:
 func remaining(id: StringName) -> float:
 	return statuses[id].remaining if statuses.has(id) else 0.0
 
+func stacks(id: StringName) -> int:
+	return statuses[id].stacks if statuses.has(id) else 0
+
 func is_disabled() -> bool:
 	return has(&"frozen") or has(&"stunned") or has(&"staggered")
 
+func is_silenced() -> bool:
+	return has(&"silenced") or is_disabled()
+
+func is_immune(id: StringName) -> bool:
+	return immunities.has(id)
+
 ## Apply or refresh a status. Single instance per id: duration refreshes to the larger value, magnitude/dps keep the max.
 func apply(id: StringName, duration := -1.0, mag := 0.0, dps := 0.0, element := Elements.PHYSICAL, mods: Array = []) -> void:
+	if immunities.has(id):
+		# Bosses shrug off hard control: Freeze becomes a heavy Chill, Stun becomes a Stagger.
+		if id == &"frozen" and not immunities.has(&"chilled"):
+			apply(&"chilled", 3.0, CHILL_SLOW, 0.0, Elements.ICE, [StatModifier.more(&"move_speed", -CHILL_SLOW), StatModifier.more(&"attack_speed", -CHILL_SLOW)])
+		return
 	if id == &"frozen" and has(&"freeze_immune"):
 		return
 	if id == &"stunned" and has(&"stun_immune"):
@@ -70,8 +88,12 @@ func apply(id: StringName, duration := -1.0, mag := 0.0, dps := 0.0, element := 
 	inst.magnitude = maxf(inst.magnitude, mag)
 	inst.dps = maxf(inst.dps, dps)
 	inst.element = element
+	if not is_new and StatusRules.max_stacks(id) > 1:
+		inst.stacks = mini(inst.stacks + 1, StatusRules.max_stacks(id))
 	if not mods.is_empty():
 		inst.modifiers = mods
+	elif inst.modifiers.is_empty():
+		inst.modifiers = StatusRules.default_mods(id)
 	if is_new:
 		_on_added(id)
 		status_added.emit(id)
@@ -122,10 +144,16 @@ func receive_hit(result: DamageResult) -> void:
 			wet = false
 		remove(&"chilled")
 		buildup.erase(&"chilled")
+		if result.reactions.has(&"melt"):
+			remove(&"frozen")
+	if comp.get(Elements.ICE, 0.0) > 0.0 and has(&"burning"):
+		remove(&"burning")
 	if result.shattered:
 		remove(&"frozen")
 	if result.purified:
 		remove(&"cursed")
+	if result.reactions.has(&"umbral"):
+		remove(&"purged")
 	# Buildups.
 	for sid in result.buildup:
 		var amt: float = result.buildup[sid]
@@ -157,6 +185,11 @@ func receive_hit(result: DamageResult) -> void:
 				if buildup[sid] >= StatusRules.THRESHOLD:
 					buildup[sid] = 0.0
 					apply(&"bleeding", -1.0, 0.0, maxf(1.0, comp.get(Elements.PHYSICAL, 0.0) * BLEED_DPS_FRACTION), Elements.PHYSICAL)
+			&"poisoned":
+				_add_buildup(sid, amt)
+				if buildup[sid] >= StatusRules.THRESHOLD:
+					buildup[sid] = 0.0
+					apply(&"poisoned", -1.0, 0.0, maxf(1.0, float(result.total) * POISON_DPS_FRACTION), Elements.PHYSICAL)
 			&"wet":
 				apply(&"wet")
 			&"stunned":
@@ -216,8 +249,22 @@ func tick(dt: float) -> void:
 func stat_modifiers() -> Array:
 	var out: Array = []
 	for id in statuses:
-		out.append_array(statuses[id].modifiers)
+		var inst: Instance = statuses[id]
+		if inst.stacks <= 1:
+			out.append_array(inst.modifiers)
+		else:
+			for m in inst.modifiers:
+				out.append(StatModifier.new(m.stat, m.op, m.value * inst.stacks, m.source))
 	return out
+
+## Remove every debuff matching `ids` (cleanse). Returns how many were removed.
+func cleanse(ids: Array) -> int:
+	var n := 0
+	for id in ids:
+		if statuses.has(id):
+			remove(id)
+			n += 1
+	return n
 
 func visible_statuses() -> Array:
 	var out := []

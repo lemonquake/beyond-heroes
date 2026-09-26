@@ -50,14 +50,37 @@ const CATEGORY_SLOTS := {
 	&"accessory": [&"accessory_1", &"accessory_2", &"accessory_3", &"accessory_4"],
 }
 
-enum Rarity { COMMON, MAGIC, RARE, EPIC, LEGENDARY, MYTHIC }
-const RARITY_NAMES := ["Common", "Magic", "Rare", "Epic", "Legendary", "Mythic"]
+# Item rarity — the ten exact tiers from the design spec, lowest to highest.
+enum Rarity { BEGINNER, COMMON, BASIC, ADVANCED, LICENSED, ELITE, MASTER, MYTHICAL, LEGENDARY, AETHER }
+const RARITY_COUNT := 10
+const RARITY_NAMES := ["Beginner", "Common", "Basic", "Advanced", "Licensed", "Elite", "Master", "Mythical", "Legendary", "Aether"]
 const RARITY_COLORS := [
-	Color(0.82, 0.80, 0.76), Color(0.42, 0.62, 1.0), Color(1.0, 0.86, 0.32),
-	Color(0.72, 0.42, 1.0), Color(1.0, 0.55, 0.12), Color(1.0, 0.24, 0.30),
+	Color(0.64, 0.60, 0.54), Color(0.90, 0.89, 0.86), Color(0.47, 0.86, 0.40), Color(0.38, 0.64, 1.00),
+	Color(0.27, 0.87, 0.80), Color(1.00, 0.84, 0.30), Color(1.00, 0.58, 0.20), Color(0.86, 0.42, 1.00),
+	Color(1.00, 0.33, 0.22), Color(0.58, 0.98, 1.00),
 ]
+## One-line identity of each tier (tooltips, codex, docs).
+const RARITY_DESC := [
+	"Starting equipment. Simple and dependable.",
+	"Basic loot with no enchantments.",
+	"Improved equipment with one enchantment.",
+	"The first real build customization: two enchantments.",
+	"Specialized faction equipment carrying a guild license.",
+	"High-quality rare equipment with strong enchantments.",
+	"Masterwork gear: superior base quality and a perfected enchantment.",
+	"Extremely rare magical items with a mythical property.",
+	"Build-defining equipment with a legendary power.",
+	"The extraordinary tier. Aether items alter your abilities.",
+]
+## Loot presentation per tier: beam height (m, 0 = none), drop sound, label scale.
+const RARITY_BEAM := [0.0, 0.0, 0.0, 1.2, 1.6, 2.4, 3.2, 4.2, 5.5, 8.0]
+const RARITY_DROP_SOUND := [&"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop_rare", &"loot_drop_rare",
+	&"loot_drop_rare", &"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary"]
 
 const LEVEL_CAP := 60
 
 static func rarity_color(r: int) -> Color:
-	return RARITY_COLORS[clampi(r, 0, RARITY_COLORS.size() - 1)]
+	return RARITY_COLORS[clampi(r, 0, RARITY_COUNT - 1)]
+
+static func rarity_name(r: int) -> String:
+	return RARITY_NAMES[clampi(r, 0, RARITY_COUNT - 1)]

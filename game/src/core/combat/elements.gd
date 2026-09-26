@@ -18,17 +18,26 @@ const COLORS: Array[Color] = [
 	Color(0.20, 0.55, 1.0), Color(1.0, 0.95, 0.70), Color(0.66, 0.35, 0.95),
 ]
 ## Identity: the status each element builds up on hit.
-const STATUS_OF: Array[StringName] = [&"stagger", &"burning", &"chilled", &"shocked", &"stagger", &"windswept", &"wet", &"purged", &"cursed"]
+const STATUS_OF: Array[StringName] = [&"stagger", &"burning", &"chilled", &"shocked", &"armor_broken", &"windswept", &"wet", &"purged", &"cursed"]
 const IDENTITY: Array[String] = [
 	"Raw force. Mitigated by Defense; builds Stagger.",
 	"Burning: damage over time. Offensive pressure. Spreads with Wind.",
 	"Chill slows; Chill buildup becomes Freeze. Wet targets freeze twice as fast.",
 	"Shock: target takes more damage. High burst, can chain. Wet targets are shocked harder.",
-	"Stagger and impact. Ignores 25% of armor. Heavy hits stagger more.",
-	"Knockback x1.5 and mobility. Fans Burning onto nearby foes.",
+	"Armor Break (-40% Defense) and heavy stagger. Crushes armored targets harder.",
+	"Windswept: knockback x1.5 and slowed. Fans Burning onto nearby foes.",
 	"Wet: conducts Lightning, speeds Freeze, extinguishes Burning.",
-	"Radiant. Purges enemy regeneration and buffs; heals the caster on hit.",
-	"Curse amplifies all damage taken; Dark hits drain life.",
+	"Radiant. Purges enemy regeneration and buffs; purifies Curses for a burst.",
+	"Curse amplifies all damage taken; Dark hits drain life and rend Purged targets.",
+]
+## Audio identity: cast and impact sounds per element (names in assets/audio/sfx).
+const SFX_CAST: Array[StringName] = [&"swing_heavy", &"cast_fire", &"cast_ice", &"cast_lightning", &"cast_earth", &"wind_gust", &"water_wave", &"holy_chime", &"dark_cast"]
+const SFX_HIT: Array[StringName] = [&"hit_flesh", &"fire_explode", &"freeze", &"lightning_zap", &"rock_impact", &"wind_gust", &"water_splash", &"holy_strike", &"dark_curse"]
+## Visual identity: short description of each element's VFX language (docs + codex).
+const VFX_NOTES: Array[String] = [
+	"Dust, sparks and white impact flashes.", "Orange-white flames, embers and heat shimmer.", "Pale blue frost shards, mist and ice crystals.",
+	"Yellow-white forked arcs and bright flicker.", "Ochre rock chunks, dust clouds and ground cracks.", "Pale green swirling streaks and leaves.",
+	"Deep blue splashes, droplets and ripples.", "Warm golden radiance, halos and motes.", "Violet-black smoke, tendrils and drained sparks.",
 ]
 
 ## Affinity multiplier: AFFINITY[attack][defender_affinity].

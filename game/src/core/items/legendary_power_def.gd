@@ -1,6 +1,6 @@
 class_name LegendaryPowerDef
 extends Resource
-## A unique effect found on Legendary/Mythic items. Implemented as a flag (read by combat hooks) plus optional stats.
+## A unique effect found on Mythical, Legendary and Aether items. Implemented as a flag (read by combat hooks) plus optional stats.
 
 @export var id: StringName
 @export var display_name: String
@@ -10,3 +10,4 @@ extends Resource
 @export var modifiers: Array = []         # extra StatModifiers
 @export var categories: Array = []
 @export var class_hint: StringName = &""  # knight/mage preference for drop weighting
+@export var tier: StringName = &"legendary" # mythical / legendary / aether — which rarity tier can roll it

@@ -29,7 +29,7 @@ func add(item: ItemInstance) -> int:
 		return 0
 	if item.base.is_stackable():
 		for c in cells:
-			if c != null and c.base == item.base and c.count < c.base.stack_max:
+			if c != null and c.stacks_with(item) and c.count < c.base.stack_max:
 				var moved := mini(item.count, c.base.stack_max - c.count)
 				c.count += moved
 				item.count -= moved
@@ -59,7 +59,7 @@ func can_fit(item: ItemInstance) -> bool:
 	if item.base.is_stackable():
 		var room := 0
 		for c in cells:
-			if c != null and c.base == item.base:
+			if c != null and c.stacks_with(item):
 				room += c.base.stack_max - c.count
 		return room >= item.count
 	return false
@@ -114,15 +114,19 @@ func consume(base_id: StringName, n := 1) -> bool:
 	changed.emit()
 	return true
 
-const SORT_MODES := ["rarity", "type", "level", "name"]
-const CATEGORY_ORDER := [&"weapon", &"shield", &"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"accessory", &"consumable", &"material"]
+const SORT_MODES := ["rarity", "type", "level", "name", "value"]
+const CATEGORY_ORDER := [&"weapon", &"shield", &"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"accessory",
+	&"consumable", &"material", &"quest"]
 
+## Compacts and sorts the grid. Favorites always come first; locked items keep their relative order within a group.
 func sort(mode: String) -> void:
 	var items := []
 	for c in cells:
 		if c != null:
 			items.append(c)
 	items.sort_custom(func(a: ItemInstance, b: ItemInstance) -> bool:
+		if a.favorite != b.favorite:
+			return a.favorite
 		match mode:
 			"rarity":
 				if a.rarity != b.rarity: return a.rarity > b.rarity
@@ -132,6 +136,10 @@ func sort(mode: String) -> void:
 				if ca != cb: return ca < cb
 			"level":
 				if a.ilvl != b.ilvl: return a.ilvl > b.ilvl
+			"value":
+				var va := a.base_value()
+				var vb := b.base_value()
+				if va != vb: return va > vb
 			"name":
 				pass
 		var na := a.display_name()
@@ -147,14 +155,77 @@ const FILTERS := {
 	"weapons": [&"weapon", &"shield"],
 	"armor": [&"helm", &"armor", &"inner_garment", &"gloves", &"boots"],
 	"accessories": [&"accessory"],
-	"materials": [&"material", &"consumable"],
+	"consumables": [&"consumable"],
+	"materials": [&"material"],
+	"quest": [&"quest"],
 }
+const FILTER_NAMES := {"all": "All", "weapons": "Weapons", "armor": "Armor", "accessories": "Accessories",
+	"consumables": "Consumables", "materials": "Materials", "quest": "Quest"}
 
-static func matches_filter(item: ItemInstance, filter: String) -> bool:
+## Category filter + optional minimum rarity + free-text search on name, base name and enchantment text.
+static func matches_filter(item: ItemInstance, filter: String, min_rarity := 0, search := "") -> bool:
 	if item == null:
 		return false
 	var cats: Array = FILTERS.get(filter, [])
-	return cats.is_empty() or cats.has(item.base.category)
+	if not cats.is_empty() and not cats.has(item.base.category):
+		return false
+	if item.rarity < min_rarity:
+		return false
+	if search.strip_edges() != "":
+		var q := search.strip_edges().to_lower()
+		var hay := (item.display_name() + " " + item.base.display_name + " " + item.rarity_name() + " " + " ".join(item.affix_lines())).to_lower()
+		if hay.find(q) < 0:
+			return false
+	return true
+
+## Split `amount` off a stack into a free cell. Returns the new stack (or null if impossible).
+func split(index: int, amount: int) -> ItemInstance:
+	if index < 0 or index >= cells.size():
+		return null
+	var src: ItemInstance = cells[index]
+	if src == null or not src.base.is_stackable() or amount <= 0 or amount >= src.count:
+		return null
+	var free := cells.find(null)
+	if free < 0:
+		return null
+	var part := src.clone()
+	part.locked = false
+	part.favorite = false
+	part.count = amount
+	src.count -= amount
+	cells[free] = part
+	changed.emit()
+	return part
+
+## Merge the stack at `from` into the stack at `to` when compatible; otherwise swap the two cells.
+func move(from: int, to: int) -> void:
+	if from == to or from < 0 or to < 0 or from >= cells.size() or to >= cells.size():
+		return
+	var a: ItemInstance = cells[from]
+	var b: ItemInstance = cells[to]
+	if a != null and b != null and a.stacks_with(b) and b.count < b.base.stack_max:
+		var moved := mini(a.count, b.base.stack_max - b.count)
+		b.count += moved
+		a.count -= moved
+		if a.count <= 0:
+			cells[from] = null
+	else:
+		cells[from] = b
+		cells[to] = a
+	changed.emit()
+
+## Destroy an item (UI asks for confirmation first). Protected items refuse.
+func destroy(item: ItemInstance) -> bool:
+	if item == null or item.is_protected():
+		return false
+	return remove_item(item)
+
+func junk_items() -> Array:
+	var out := []
+	for c in cells:
+		if c != null and c.junk and not c.is_protected() and c.base.sellable:
+			out.append(c)
+	return out
 
 func to_array() -> Array:
 	var out := []

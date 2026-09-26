@@ -17,8 +17,8 @@ func test_attribute_contributions_knight_level1() -> void:
 	eq(s.get_stat(&"max_mana"), 50.0, "knight max mana")
 	# Defense = (20 + 14*0.5) * 1.10 (class inc) = 29.7 -> floor 29
 	eq(s.get_stat(&"defense"), 29.0, "knight defense")
-	# Crit = unarmed 5% + 10*0.08% = 5.8%
-	near(s.get_stat(&"crit_chance"), 0.058, 0.00001, "crit chance")
+	# Crit = unarmed 5% + DEX 10*0.08% + AGI 9*0.04% = 6.16%
+	near(s.get_stat(&"crit_chance"), 0.0616, 0.00001, "crit chance")
 	eq(s.get_stat(&"crit_damage"), 1.5, "default crit multiplier 1.5")
 	# Move = 5.2 * (1 + 9*0.25%) = 5.317
 	near(s.get_stat(&"move_speed"), 5.2 * 1.0225, 0.0001, "move speed")

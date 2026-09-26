@@ -6,6 +6,8 @@ var weapon_types := {}
 var item_bases := {}
 var affix_defs := {}
 var power_defs := {}
+var item_sets := {}
+var licenses := {}
 var skills := {}
 var trees := {}
 var enemies := {}
@@ -24,6 +26,9 @@ func _init() -> void:
 		affix_defs[a.id] = a
 	for p in DataItems.powers():
 		power_defs[p.id] = p
+	for st in DataItems.sets():
+		item_sets[st.id] = st
+	licenses = DataItems.licenses()
 	for s in DataSkills.skills():
 		skills[s.id] = s
 	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage()]:
@@ -58,6 +63,9 @@ func affix(id: StringName) -> AffixDef:
 
 func power(id: StringName) -> LegendaryPowerDef:
 	return power_defs.get(id)
+
+func item_set(id: StringName) -> SetDef:
+	return item_sets.get(id)
 
 func skill(id: StringName) -> SkillDef:
 	return skills.get(id)

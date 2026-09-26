@@ -58,6 +58,18 @@ const PROJ_SPEED_PER_DEX := 0.002
 const DODGE_CDR_PER_AGI := 0.002
 const DODGE_CDR_CAP := 0.4
 const POISE_PER_STR := 0.5
+const STAGGER_PER_STR := 0.004       # +0.4% stagger strength per Strength
+const CRIT_PER_AGI := 0.0004         # Agility's critical bonus: +0.04% critical chance per point (Dexterity is the main source)
+const DODGE_DIST_PER_AGI := 0.0015
+const DODGE_DIST_CAP := 0.30
+const BUFF_PER_WIS := 0.004
+const LIGHTDARK_PER_SPI := 0.0025    # Spirit attunes to Light and Dark: +0.25% damage, +0.1% resistance per point
+const LIGHTDARK_RES_PER_SPI := 0.001
+const PROJ_DMG_PER_DEX := 0.003
+const PARRY_BASE := 0.18
+const PARRY_PER_DEX := 0.0008
+const PARRY_MAX := 0.32
+const DEFAULT_ENEMY_EVASION_PER_LEVEL := 6.0   # reference target for the hit-chance display
 const UNARMED_MIN := 2.0
 const UNARMED_MAX := 4.0
 
@@ -97,6 +109,7 @@ static func soften(raw: float) -> float:
 	return raw / (1.0 + raw / SPEED_SOFTCAP)
 
 const ADDITIVE_INCREASE := {
+	&"stagger_power": true, &"projectile_damage": true, &"status_power": true,
 	&"phys_damage": true, &"magic_damage": true, &"elemental_damage": true, &"damage": true, &"weapon_damage": true,
 	&"heavy_damage": true, &"impact_damage": true, &"burn_damage": true, &"healing": true, &"buff_effect": true,
 	&"valor_gain": true, &"xp_gain": true, &"magic_find": true, &"gold_find": true, &"projectile_speed": true,
@@ -182,6 +195,9 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		var all_flat := agg.flat(&"res_all")
 		var v := WIS * RES_PER_WIS + agg.flat(rk) + all_flat
 		var lines := PackedStringArray(["Wisdom %d x %.2f%%" % [WIS, RES_PER_WIS * 100.0]])
+		if e == Elements.LIGHT or e == Elements.DARK:
+			v += SPI * LIGHTDARK_RES_PER_SPI
+			lines.append("Spirit %d x %.1f%%" % [SPI, LIGHTDARK_RES_PER_SPI * 100.0])
 		lines.append_array(agg.lines(rk))
 		lines.append_array(agg.lines(&"res_all"))
 		lines.append("Cap %d%%, floor %d%%" % [roundi(res_cap * 100), roundi(RES_FLOOR * 100)])
@@ -192,7 +208,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	_std(d, agg, &"accuracy", [["Dexterity %d x %.1f" % [DEX, ACCURACY_PER_DEX], DEX * ACCURACY_PER_DEX],
 		["Level %d x %.1f" % [level, ACCURACY_PER_LEVEL], L * ACCURACY_PER_LEVEL]], 1.0, INF, true)
 	var wcrit := d.loadout.main_crit if not d.loadout.is_unarmed() else 0.05
-	_std(d, agg, &"crit_chance", [["Weapon base", wcrit], ["Dexterity %d x %.2f%%" % [DEX, CRIT_PER_DEX * 100.0], DEX * CRIT_PER_DEX]], 0.0, CRIT_CAP)
+	_std(d, agg, &"crit_chance", [["Weapon base", wcrit], ["Dexterity %d x %.2f%%" % [DEX, CRIT_PER_DEX * 100.0], DEX * CRIT_PER_DEX],
+		["Agility %d x %.2f%%" % [AGI, CRIT_PER_AGI * 100.0], AGI * CRIT_PER_AGI]], 0.0, CRIT_CAP)
 	var cd := maxf(1.0, CRIT_DAMAGE_BASE + agg.flat(&"crit_damage")) * agg.more(&"crit_damage")
 	var cdl := PackedStringArray(["Base x%.2f" % CRIT_DAMAGE_BASE])
 	cdl.append_array(agg.lines(&"crit_damage"))
@@ -255,19 +272,49 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	_std(d, agg, &"magic_damage", [["Intelligence %d x %.1f%%" % [INT, MAGIC_PER_INT * 100.0], INT * MAGIC_PER_INT],
 		["Wisdom %d x %.1f%%" % [WIS, MAGIC_PER_WIS * 100.0], WIS * MAGIC_PER_WIS]], -0.9, INF)
 	_std(d, agg, &"elemental_damage", [["Intelligence %d x %.1f%%" % [INT, ELEM_PER_INT * 100.0], INT * ELEM_PER_INT]], -0.9, INF)
+	var pen_all := agg.flat(&"pen_elemental")
+	d.set_stat(&"pen_elemental", pen_all, agg.lines(&"pen_elemental"))
 	for e in Elements.ELEMENTAL:
-		_std(d, agg, Elements.dmg_key(e), [], -0.9, INF)
-		_std(d, agg, Elements.pen_key(e), [], 0.0, 1.0)
+		var dterms := []
+		if e == Elements.LIGHT or e == Elements.DARK:
+			dterms.append(["Spirit %d x %.2f%%" % [SPI, LIGHTDARK_PER_SPI * 100.0], SPI * LIGHTDARK_PER_SPI])
+		_std(d, agg, Elements.dmg_key(e), dterms, -0.9, INF)
+		_std(d, agg, Elements.pen_key(e), [["Elemental Penetration", pen_all]] if pen_all > 0.0 else [], 0.0, 1.0)
 		_std(d, agg, StringName("added_" + String(Elements.key(e))), [], 0.0, INF)
 	for wt in [&"sword", &"greatsword", &"axe", &"spear", &"dagger", &"bow", &"staff", &"wand"]:
 		if agg.buckets.has(StringName("dmg_wt_" + String(wt))):
 			_std(d, agg, StringName("dmg_wt_" + String(wt)), [], -0.9, INF)
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",
-			&"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical"]:
+			&"mana_leech", &"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical", &"status_power"]:
 		_std(d, agg, k, [], -0.9 if k != &"pen_armor" else 0.0, INF)
+	_std(d, agg, &"stagger_power", [["Strength %d x %.1f%%" % [STR, STAGGER_PER_STR * 100.0], STR * STAGGER_PER_STR]], -0.9, INF)
+	_std(d, agg, &"projectile_damage", [["Dexterity %d x %.1f%%" % [DEX, PROJ_DMG_PER_DEX * 100.0], DEX * PROJ_DMG_PER_DEX]], -0.9, INF)
 	_std(d, agg, &"healing", [["Spirit %d x %.1f%%" % [SPI, HEAL_PER_SPI * 100.0], SPI * HEAL_PER_SPI]], -0.9, INF)
-	_std(d, agg, &"buff_effect", [["Spirit %d x %.1f%%" % [SPI, BUFF_PER_SPI * 100.0], SPI * BUFF_PER_SPI]], -0.9, INF)
+	_std(d, agg, &"buff_effect", [["Wisdom %d x %.1f%%" % [WIS, BUFF_PER_WIS * 100.0], WIS * BUFF_PER_WIS],
+		["Spirit %d x %.1f%%" % [SPI, BUFF_PER_SPI * 100.0], SPI * BUFF_PER_SPI]], -0.9, INF)
 	_std(d, agg, &"projectile_speed", [["Dexterity %d x %.1f%%" % [DEX, PROJ_SPEED_PER_DEX * 100.0], DEX * PROJ_SPEED_PER_DEX]], -0.5, 2.0)
+	_std(d, agg, &"skill_levels", [], 0.0, 5.0, true)
+	var dodge_inc := minf(DODGE_DIST_CAP, AGI * DODGE_DIST_PER_AGI) + agg.inc(&"dodge_distance")
+	d.set_stat(&"dodge_distance", dodge_inc, PackedStringArray(["Agility %d x %.2f%% (max %d%%)" % [AGI, DODGE_DIST_PER_AGI * 100.0, roundi(DODGE_DIST_CAP * 100)]]))
+	var pw := minf(PARRY_MAX, PARRY_BASE + DEX * PARRY_PER_DEX + agg.flat(&"parry_window"))
+	d.set_stat(&"parry_window", pw, PackedStringArray(["Base %.2f s" % PARRY_BASE, "Dexterity %d x %.1f ms" % [DEX, PARRY_PER_DEX * 1000.0],
+		"Maximum %.2f s" % PARRY_MAX]))
+	# Global damage multipliers from buffs/debuffs (Weakened, Empowered, Overcharged, Fortified ...).
+	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))
+	d.set_stat(&"outgoing_damage", maxf(0.05, od), agg.lines(&"outgoing_damage"))
+	var dt := agg.more(&"damage_taken") * (1.0 + agg.inc(&"damage_taken"))
+	d.set_stat(&"damage_taken", maxf(0.05, dt), agg.lines(&"damage_taken"))
+	# Readable chances for the character sheet (same formulas as the damage pipeline, vs a same-level reference foe).
+	var ref_eva := DEFAULT_ENEMY_EVASION_PER_LEVEL * L + 6.0
+	var acc: float = d.get_stat(&"accuracy")
+	d.set_stat(&"accuracy_chance", 1.0 - minf(DamagePipeline.EVADE_CAP, ref_eva / (ref_eva + acc * DamagePipeline.EVADE_ACC_FACTOR)),
+		PackedStringArray(["Against a level %d enemy with %d Evasion" % [level, roundi(ref_eva)],
+		"Formula: 1 - Evasion / (Evasion + Accuracy x %d)" % roundi(DamagePipeline.EVADE_ACC_FACTOR)]))
+	var eva: float = d.get_stat(&"evasion")
+	var ref_acc := ACCURACY_PER_LEVEL * L * 4.0 + 20.0
+	d.set_stat(&"evade_chance", minf(DamagePipeline.EVADE_CAP, eva / (eva + ref_acc * DamagePipeline.EVADE_ACC_FACTOR)) if eva > 0.0 else 0.0,
+		PackedStringArray(["Against a level %d enemy with %d Accuracy" % [level, roundi(ref_acc)], "Cap %d%%" % roundi(DamagePipeline.EVADE_CAP * 100)]))
+	d.set_stat(&"physical_armor_dr", armor_dr, PackedStringArray(["Defense / (Defense + %d + %d x level)" % [ARMOR_K_BASE, ARMOR_K_LEVEL]]))
 	_std(d, agg, &"arcane_max", [["Base", 5.0]], 0.0, 10.0, true)
 
 	# Weapon damage ranges shown on the character sheet (same function the pipeline uses for base rolls).

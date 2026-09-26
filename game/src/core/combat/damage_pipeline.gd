@@ -25,6 +25,8 @@ const KB_BLOCKED_MULT := 0.3
 const WIND_KB_BONUS := 0.5
 const EARTH_POISE_BONUS := 0.5
 const DARK_DRAIN := 0.10
+const MELT_MULT := 1.5               # fire into a frozen target
+const UMBRAL_MULT := 1.3             # dark into a purged target (light/dark opposition)
 const MAX_KNOCKBACK := 28.0          # m/s hard cap per hit
 static var debug_enabled := false
 
@@ -127,8 +129,14 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 			inc += atk.get_stat(&"heavy_damage")
 		if req.kind == DamageRequest.Kind.IMPACT:
 			inc += atk.get_stat(&"impact_damage")
+		if req.tags.has(&"projectile"):
+			inc += atk.get_stat(&"projectile_damage")
 		_scale_all(comp, 1.0 + inc)
 		r.log_step("Increased damage +%.1f%% -> %.1f" % [inc * 100.0, _sum(comp)])
+		var od := atk.get_stat(&"outgoing_damage", 1.0)
+		if od != 1.0:
+			_scale_all(comp, od)
+			r.log_step("Damage dealt x%.2f (buffs/debuffs) -> %.1f" % [od, _sum(comp)])
 	for m in req.more:
 		_scale_all(comp, float(m[1]))
 		r.log_step("%s x%.2f -> %.1f" % [m[0], float(m[1]), _sum(comp)])
@@ -182,11 +190,27 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if st.has(&"frozen") and comp.get(Elements.PHYSICAL, 0.0) > 0.0 and (req.heavy or req.kind == DamageRequest.Kind.IMPACT):
 			comp[Elements.PHYSICAL] *= SHATTER_MULT
 			r.shattered = true
+			r.reactions.append(&"shatter")
 			r.log_step("SHATTER x%.2f" % SHATTER_MULT)
 		if st.has(&"cursed") and comp.get(Elements.LIGHT, 0.0) > 0.0:
 			comp[Elements.LIGHT] *= PURIFY_MULT
 			r.purified = true
+			r.reactions.append(&"purify")
 			r.log_step("PURIFY x%.2f" % PURIFY_MULT)
+		if st.has(&"purged") and comp.get(Elements.DARK, 0.0) > 0.0:
+			comp[Elements.DARK] *= UMBRAL_MULT
+			r.reactions.append(&"umbral")
+			r.log_step("UMBRAL REND x%.2f (Dark consumes Purged)" % UMBRAL_MULT)
+		if st.has(&"frozen") and comp.get(Elements.FIRE, 0.0) > 0.0:
+			comp[Elements.FIRE] *= MELT_MULT
+			r.reactions.append(&"melt")
+			r.log_step("MELT x%.2f (Fire thaws Frozen)" % MELT_MULT)
+		if wet and comp.get(Elements.LIGHTNING, 0.0) > 0.0:
+			r.reactions.append(&"conduct")
+		if st.has(&"burning") and (comp.get(Elements.WATER, 0.0) > 0.0 or comp.get(Elements.ICE, 0.0) > 0.0):
+			r.reactions.append(&"extinguish")
+		if st.has(&"burning") and comp.get(Elements.WIND, 0.0) > 0.0:
+			r.reactions.append(&"fan")
 		var taken := 0.0
 		if st.has(&"shocked"):
 			taken += st.magnitude(&"shocked", SHOCK_TAKEN)
@@ -197,6 +221,10 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if taken > 0.0:
 			_scale_all(comp, 1.0 + taken)
 			r.log_step("Status: +%.0f%% damage taken -> %.1f" % [taken * 100.0, _sum(comp)])
+	var taken_mult := tgt.get_stat(&"damage_taken", 1.0)
+	if taken_mult != 1.0 and req.kind != DamageRequest.Kind.DOT:
+		_scale_all(comp, taken_mult)
+		r.log_step("Damage taken x%.2f -> %.1f" % [taken_mult, _sum(comp)])
 	if req.positional_mult != 1.0:
 		_scale_all(comp, req.positional_mult)
 		r.log_step("Positional x%.2f" % req.positional_mult)
@@ -250,6 +278,8 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		r.log_step("Knockback %.1f m/s (weight %.1f)" % [r.knockback, req.target_weight])
 	if req.poise > 0.0:
 		var pd := req.poise * (1.0 + earth_share * EARTH_POISE_BONUS)
+		if atk != null:
+			pd *= 1.0 + atk.get_stat(&"stagger_power")
 		if r.is_crit:
 			pd *= 1.2
 		if r.blocked:
@@ -257,18 +287,20 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		r.poise_damage = pd
 	var max_hp := maxf(1.0, tgt.get_stat(&"max_hp", 100.0))
 	var sres := tgt.get_stat(&"status_res")
+	var spow := 1.0 + (atk.get_stat(&"status_power") if atk != null else 0.0)
 	for e in comp:
 		if e == Elements.PHYSICAL or comp[e] <= 0.0:
 			continue
 		var sid: StringName = Elements.STATUS_OF[e]
-		if sid == &"stagger" or sid == &"windswept":
+		if sid == &"stagger":
 			continue
-		var b: float = comp[e] / max_hp * 100.0 * 2.5 * req.status_power * (1.0 - sres)
+		var b: float = comp[e] / max_hp * 100.0 * 2.5 * req.status_power * spow * (1.0 - sres)
 		r.buildup[sid] = r.buildup.get(sid, 0.0) + b
 	for sid in req.direct_status:
-		r.buildup[sid] = r.buildup.get(sid, 0.0) + float(req.direct_status[sid]) * (1.0 - sres * 0.5)
+		r.buildup[sid] = r.buildup.get(sid, 0.0) + float(req.direct_status[sid]) * spow * (1.0 - sres * 0.5)
 	if atk != null and r.total > 0:
 		r.leech = r.total * atk.get_stat(&"life_leech") + comp.get(Elements.DARK, 0.0) * DARK_DRAIN
+		r.mana_leech = r.total * atk.get_stat(&"mana_leech")
 	_debug(r)
 	return r
 

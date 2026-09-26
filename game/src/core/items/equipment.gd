@@ -100,7 +100,36 @@ func modifiers() -> Array:
 		var it: ItemInstance = slots[s]
 		if it != null:
 			out.append_array(it.modifiers())
+	for set_id in set_counts():
+		var sd := DB.item_set(set_id)
+		if sd != null:
+			out.append_array(sd.modifiers_for(set_counts()[set_id]))
 	return out
+
+## Distinct equipped pieces per set: {set_id: count}. The same base in two slots (two rings) counts once.
+func set_counts() -> Dictionary:
+	var seen := {}
+	var out := {}
+	for s in BH.SLOTS:
+		var it: ItemInstance = slots[s]
+		if it == null or it.base.set_id == &"" or seen.has(it.base.id):
+			continue
+		seen[it.base.id] = true
+		out[it.base.set_id] = int(out.get(it.base.set_id, 0)) + 1
+	return out
+
+func equipped_items() -> Array:
+	var out := []
+	for s in BH.SLOTS:
+		if slots[s] != null:
+			out.append(slots[s])
+	return out
+
+func slot_of(item: ItemInstance) -> StringName:
+	for s in BH.SLOTS:
+		if slots[s] == item:
+			return s
+	return &""
 
 func loadout() -> WeaponLoadout:
 	var lo := WeaponLoadout.new()
