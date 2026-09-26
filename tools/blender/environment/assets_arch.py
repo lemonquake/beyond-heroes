@@ -470,3 +470,30 @@ def gate_iron(k):
     k.put(torus(0.08, 0.012, 12, 5), "BH_Iron", M=TRS(W / 2 - 0.2, -0.07, 1.05, 90, 0, 0))
     k.col_box(W, 0.1, H, T(0, 0, H / 2))
     return dict(recenter=False)
+
+
+@asset("wall_low", "architecture")
+def wall_low(k):
+    """Cutaway wall for camera-facing sides of interiors: 4 m long, 1.3 m tall, capped, same thickness/grid as walls."""
+    h = 1.3
+    wall_common(k, top=h - 0.2)
+    capstones(k, -WL / 2, WL / 2, h - 0.2, WT, 0.2, over=0.07)
+    moss_top(k, -1.8, 1.8, h, WT + 0.1, 2)
+    streaks(k, -2, 2, h)
+    k.col_box(WL, WT + 0.14, h, T(0, 0, h / 2))
+    return dict(recenter=False, damp=0.3, damp_h=0.6)
+
+
+@asset("wall_low_broken", "architecture")
+def wall_low_broken(k):
+    """Cutaway wall variant with a crumbled top and fallen blocks in front (toward -Y)."""
+    r = k.r
+
+    def prof(x):
+        return 1.15 + 0.35 * math.sin(x * 1.7 + 0.6) - (0.45 if -0.6 < x < 0.9 else 0.0)
+    wall_common(k, top=1.6, top_profile=prof)
+    fallen_blocks(k, 5, (-1.6, 1.6, -1.4, -0.5))
+    rubble_bits(k, 14, (-1.8, 1.8, -1.2, -0.45))
+    streaks(k, -2, 2, 1.5)
+    k.col_box(WL, WT, 1.2, T(0, 0, 0.6))
+    return dict(recenter=False, damp=0.3, damp_h=0.6)

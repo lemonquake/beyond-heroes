@@ -1,39 +1,45 @@
 {
-  "checks": 1083,
-  "elapsed_ms": 561,
+  "checks": 1418,
+  "elapsed_ms": 6793,
   "engine": "4.4.1-stable (official)",
   "failures": [],
   "suites": {
     "test_damage.gd": {
       "checks": 60,
       "failures": [],
-      "ms": 193.345,
+      "ms": 193.564,
       "tests": 13
     },
     "test_items.gd": {
       "checks": 822,
       "failures": [],
-      "ms": 122.477,
+      "ms": 132.785,
       "tests": 7
+    },
+    "test_maps.gd": {
+      "checks": 335,
+      "failures": [],
+      "ms": 6193.849,
+      "tests": 14
     },
     "test_progression.gd": {
       "checks": 51,
       "failures": [],
-      "ms": 4.681,
+      "ms": 6.448,
       "tests": 7
     },
     "test_stats.gd": {
       "checks": 126,
       "failures": [],
-      "ms": 12.54,
+      "ms": 16.255,
       "tests": 8
     },
     "test_status.gd": {
       "checks": 24,
       "failures": [],
-      "ms": 73.717,
+      "ms": 97.721,
       "tests": 8
     }
   },
-  "timestamp": "2026-09-26T04:40:37"
+  "timestamp": "2026-09-26T00:25:18"
 }

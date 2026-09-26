@@ -5,6 +5,13 @@ extends RefCounted
 var failures: PackedStringArray = []
 var checks := 0
 var _current := ""
+var host: Node                    # a node inside the scene tree that tests may parent nodes to (set by the runner)
+var strict := false               # strict suites must reach done() in every test; an aborted test is a failure
+var _done := 0
+
+## Call as the last statement of a test in a strict suite (proves the test body ran to completion).
+func done() -> void:
+	_done += 1
 
 func begin(name: String) -> void:
 	_current = name

@@ -1,0 +1,14 @@
+{
+  "build_ms": 751,
+  "mesh_instances": 156,
+  "nav_polygons": 1973,
+  "nodes": 685,
+  "omni_lights": 12,
+  "shadowed_omni": 5,
+  "spawns": [
+    "arrival",
+    "start",
+    "catacomb_gate"
+  ],
+  "teleporters": 2
+}

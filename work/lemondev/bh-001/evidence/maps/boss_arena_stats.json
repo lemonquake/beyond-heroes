@@ -1,0 +1,13 @@
+{
+  "build_ms": 165,
+  "mesh_instances": 201,
+  "nav_polygons": 229,
+  "nodes": 791,
+  "omni_lights": 21,
+  "shadowed_omni": 5,
+  "spawns": [
+    "arrival",
+    "start"
+  ],
+  "teleporters": 1
+}

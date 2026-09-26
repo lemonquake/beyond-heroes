@@ -17,6 +17,7 @@ func _ready() -> void:
 			continue
 		var script: GDScript = load(DIR + f)
 		var inst: TestCase = script.new()
+		inst.host = self
 		var methods := []
 		for m in script.get_script_method_list():
 			if String(m.name).begins_with("test_"):
@@ -25,7 +26,10 @@ func _ready() -> void:
 		var ts := Time.get_ticks_usec()
 		for m in methods:
 			inst.begin("%s.%s" % [f.get_basename(), m])
-			inst.call(m)
+			var d0 := inst._done
+			await inst.call(m)  # tests may be coroutines (e.g. waiting for a navigation sync)
+			if inst.strict and inst._done == d0:
+				inst.failures.append("%s.%s: aborted before done() (script error?)" % [f.get_basename(), m])
 		var dur := (Time.get_ticks_usec() - ts) / 1000.0
 		suites[f] = {"tests": methods.size(), "checks": inst.checks, "failures": Array(inst.failures), "ms": dur}
 		total_checks += inst.checks

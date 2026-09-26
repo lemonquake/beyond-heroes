@@ -32,7 +32,7 @@ const ENV := {
 	"BH_Rune": ["", Color(0.3, 0.8, 1.0), 0.4, 0.0, 1.0, Color(0.35, 0.8, 1.0), 4.0],
 	"BH_Corruption": ["", Color(0.4, 0.1, 0.6), 0.5, 0.0, 1.0, Color(0.6, 0.2, 1.0), 3.5],
 	"BH_Water": ["", Color(0.1, 0.35, 0.4), 0.05, 0.0, 1.0, Color(0.05, 0.25, 0.28), 0.5],
-	"BH_Glass": ["", Color(0.6, 0.75, 0.8), 0.1, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Glass": ["", Color(0.95, 0.8, 0.55), 0.1, 0.0, 1.0, Color(1.0, 0.72, 0.38), 2.2],  # lantern panes, lit from within
 	"BH_Thatch": ["thatch", Color(0.8, 0.72, 0.55), 0.95, 0.0, 0.8, Color.BLACK, 0.0],
 	"BH_Dirt": ["dirt", Color(0.8, 0.75, 0.7), 0.95, 0.0, 0.5, Color.BLACK, 0.0],
 }
@@ -95,6 +95,20 @@ static func env(name: String) -> Material:
 		m.alpha_scissor_threshold = 0.4
 		m.cull_mode = BaseMaterial3D.CULL_DISABLED
 		m.albedo_color = Color(0.55, 0.62, 0.42)
+	if key == "BH_Grass":
+		# grass clumps are alpha cards textured with the blade sheet (mesh UVs, not triplanar)
+		m.albedo_texture = load("res://assets/textures/grass_blades.png") if ResourceLoader.exists("res://assets/textures/grass_blades.png") else null
+		m.uv1_triplanar = false
+		m.uv1_world_triplanar = false
+		m.uv1_scale = Vector3.ONE
+		m.normal_enabled = false
+		m.roughness_texture = null
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+		m.alpha_scissor_threshold = 0.45
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
+		m.albedo_color = Color(0.62, 0.7, 0.45)
+		m.backlight_enabled = true
+		m.backlight = Color(0.25, 0.3, 0.15)
 	if key == "BH_Water":
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		m.albedo_color.a = 0.8
