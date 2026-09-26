@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="46"><stop offset="0" stop-color="#000000" stop-opacity="0.55"/><stop offset="0.6" stop-color="#000000" stop-opacity="0.25"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="29" y1="82" x2="99" y2="102"><stop offset="0" stop-color="#9a6ad8"/><stop offset="0.3" stop-color="#3a1a5a"/><stop offset="0.6" stop-color="#583c73"/><stop offset="1" stop-color="#0a0414"/></linearGradient><linearGradient id="l3" gradientUnits="userSpaceOnUse" x1="32" y1="64" x2="96" y2="84"><stop offset="0" stop-color="#9a6ad8"/><stop offset="0.3" stop-color="#3a1a5a"/><stop offset="0.6" stop-color="#583c73"/><stop offset="1" stop-color="#0a0414"/></linearGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="35" y1="46" x2="93" y2="66"><stop offset="0" stop-color="#9a6ad8"/><stop offset="0.3" stop-color="#3a1a5a"/><stop offset="0.6" stop-color="#583c73"/><stop offset="1" stop-color="#0a0414"/></linearGradient></defs>
+<g transform="translate(64 108) scale(1 0.15)">
+<circle cx="0" cy="0" r="46" fill="url(#r1)"/>
+</g>
+<path d="M29,88 C31.67,87.17 95.83,81.67 99,82 C102.17,82.33 107.67,95.17 105,96 C102.33,96.83 38.17,102.33 35,102 C31.83,101.67 26.33,88.83 29,88 Z" fill="none" stroke="#0a0610" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M29,88 C31.67,87.17 95.83,81.67 99,82 C102.17,82.33 107.67,95.17 105,96 C102.33,96.83 38.17,102.33 35,102 C31.83,101.67 26.33,88.83 29,88 Z" fill="url(#l2)"/>
+<path d="M37,92 C41.5,91.5 54.33,89.67 64,89 C73.67,88.33 89.83,88.17 95,88" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.35" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,70 C34.42,69.17 93.08,63.67 96,64 C98.92,64.33 104.42,77.17 102,78 C99.58,78.83 40.92,84.33 38,84 C35.08,83.67 29.58,70.83 32,70 Z" fill="none" stroke="#0a0610" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,70 C34.42,69.17 93.08,63.67 96,64 C98.92,64.33 104.42,77.17 102,78 C99.58,78.83 40.92,84.33 38,84 C35.08,83.67 29.58,70.83 32,70 Z" fill="url(#l3)"/>
+<path d="M40,74 C44,73.5 55.33,71.67 64,71 C72.67,70.33 87.33,70.17 92,70" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.35" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M35,52 C37.17,51.17 90.33,45.67 93,46 C95.67,46.33 101.17,59.17 99,60 C96.83,60.83 43.67,66.33 41,66 C38.33,65.67 32.83,52.83 35,52 Z" fill="none" stroke="#0a0610" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M35,52 C37.17,51.17 90.33,45.67 93,46 C95.67,46.33 101.17,59.17 99,60 C96.83,60.83 43.67,66.33 41,66 C38.33,65.67 32.83,52.83 35,52 Z" fill="url(#l4)"/>
+<path d="M43,56 C46.5,55.5 56.33,53.67 64,53 C71.67,52.33 84.83,52.17 89,52" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.35" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M93.14,64.1 L94.92,65.34 L97.42,66.87 L100.08,68.56 L102.53,70.33 L104.32,71.99 L105.08,73.02 L105.15,73.59 L104.72,75.29 L103.59,78.05 L102.03,81.38 L100.5,85.13 L99.5,89.28 L99.71,93.53 L101.08,97.31 L103.02,100.55 L105.21,103.37 L107.39,105.73 L109.29,107.54 L110.72,108.78 L113.28,107.22 L112.78,105.28 L111.78,102.81 L110.6,100.04 L109.5,97.2 L108.73,94.51 L108.49,92.39 L108.79,90.77 L109.68,88.51 L111.1,85.52 L112.74,82.07 L114.26,78.3 L115.14,73.99 L114.36,69.31 L111.92,65.49 L108.89,62.62 L105.71,60.29 L102.72,58.39 L100.35,56.94 L98.86,55.9 Z" fill="#3a1a5a" stroke="#0a0610" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="30" cy="40" r="4.22" fill="#6a2aa0" opacity="0.18"/>
+<path d="M30,37.71 L31.76,40 L30,42.29 L28.24,40 Z" fill="#c8a0ff" opacity="1"/>
+<circle cx="98" cy="36" r="3.7" fill="#6a2aa0" opacity="0.18"/>
+<path d="M98,34 L99.54,36 L98,38 L96.46,36 Z" fill="#c8a0ff" opacity="1"/>
+<circle cx="40" cy="104" r="3.17" fill="#6a2aa0" opacity="0.18"/>
+<path d="M40,102.28 L41.32,104 L40,105.72 L38.68,104 Z" fill="#c8a0ff" opacity="1"/>
+</svg>

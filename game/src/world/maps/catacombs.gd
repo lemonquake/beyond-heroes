@@ -201,7 +201,7 @@ func _ritual_chamber() -> void:
 	decor("skull_pile", Vector3(-12.3, 0, -46.4), 30.0, 1.0, false)
 	flag_trigger(&"catacombs_ritual_seen", c + Vector3(0, 1, 0), Vector3(6, 2, 6),
 		"The circle flares — far above, a seal cracks open.", 120)
-	enemy_zone("ritual", c, 8.0, [&"ashen_cultist", &"ghoul_brute", &"hollow_soldier"], 7, 0.35)
+	enemy_zone("ritual", c, 8.0, [&"ashen_cultist", &"ashen_acolyte", &"ghoul_brute", &"hollow_soldier"], 7, 0.35)
 
 func _exit_sanctum() -> void:
 	var r: Rect2 = ROOMS.exit

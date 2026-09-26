@@ -1,48 +1,86 @@
 class_name CharacterVisual
 extends Node3D
-## Presentation of a character: model, animation playback with crossfades, weapon attachment, hit flash,
-## status visuals and footstep events. Gameplay never reads state from here except animation timing metadata.
+## Presentation of a character: model, AnimationTree blending, weapon attachment, hit flash, status visuals.
+## Gameplay never reads state from here except animation timing metadata (DB.anim), so the simulation stays
+## deterministic whether or not a model is present.
+##
+## AnimationTree layout (built in code, driven through `parameters/...`):
+##
+##   relaxed_bs (BlendSpace2D: idle / walk / run)            ─┐
+##   combat_bs  (BlendSpace2D: stance idle, walk, run_combat,  ├ combat (Blend2) ─┐
+##               walk_back, strafe_l / strafe_r)              ─┘                  ├ hurt (Blend2) ─ loco_ts ─┐
+##   hurt_bs    (BlendSpace2D: idle_hurt / walk_hurt / run_hurt)─────────────────┘                          │
+##   upper_anim ─ upper_ts ─────────────────────────────── upper (Blend2, upper-body filter) ◄──────────────┘
+##   state (Transition, xfade): "loco" = upper output | "a" = anim_a ─ a_ts | "b" = anim_b ─ b_ts ─► output
+##
+## One-shot actions (attacks, casts, reactions, death, fidgets) alternate between slots A and B so consecutive
+## actions (combo chains) crossfade instead of snapping. Loops (block, channel, whirlwind) also use the slots.
 
-signal footstep
 signal action_finished(anim: StringName)
 
-const BLEND := 0.15
-const LOCO_BLEND := 0.22
+const BLEND := 0.12
+const REACTION_BLEND := 0.07
+const LOCO_RETURN_BLEND := 0.22
+const UPPER_BONES := ["spine", "chest", "neck", "head", "shoulder.L", "upper_arm.L", "forearm.L", "hand.L", "weapon.L",
+	"shoulder.R", "upper_arm.R", "forearm.R", "hand.R", "weapon.R", "cape.1", "cape.2"]
+const FIDGETS := {&"knight": [&"idle_look", &"idle_adjust", &"idle_knight"], &"mage": [&"idle_look", &"idle_adjust", &"idle_mage"]}
 
 var model: Node3D
 var anim_player: AnimationPlayer
+var tree: AnimationTree
 var skeleton: Skeleton3D
 var fallback := false
 var model_scale := 1.0
 var ground_speed_walk := 1.6
 var ground_speed_run := 5.0
-var idle_anim: StringName = &"idle"
+var ground_speed_strafe := 3.2
+var ground_speed_back := 1.8
+var personality: StringName = &""          # knight / mage fidget set
+var tint_primary := Color.WHITE
+
+var _slot := &"a"                           # slot that holds the current (or last) action
 var _action := &""
 var _action_left := 0.0
-var _reaction_left := 0.0
-var _loco := &""
-var _last_loco_pos := 0.0
+var _action_loop := false
+var _in_action := false
+var _reaction := false
 var _dead := false
+var _combat := 0.0                          # smoothed 0..1
+var _combat_target := 0.0
+var _hurt := 0.0
+var _hurt_target := 0.0
+var _upper := 0.0
+var _upper_target := 0.0
+var _upper_anim := &""
+var _stance_idle := &"idle_1h"
+var _idle_time := 0.0
+var _fidget_at := 8.0
+var _loco_pos := Vector2.ZERO
 var _overlay: ShaderMaterial
 var _flash_tw: Tween
 var _status_nodes := {}
 var _weapon_nodes := {}
-var tint_primary := Color.WHITE
 var _meshes: Array[MeshInstance3D] = []
+var _trail: WeaponTrail
+var _rng := RandomNumberGenerator.new()
 
 static var _overlay_shader: Shader
 
-func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE) -> void:
+func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE, p_personality := &"") -> void:
 	model_scale = scale_factor
 	tint_primary = primary_tint
-	if ResourceLoader.exists(model_path):
+	personality = p_personality
+	_rng.seed = hash(model_path) ^ get_instance_id()
+	if model_path != "" and ResourceLoader.exists(model_path):
 		var ps: PackedScene = load(model_path)
 		model = ps.instantiate()
 		add_child(model)
 		model.scale = Vector3.ONE * scale_factor
 		anim_player = _find(model, "AnimationPlayer") as AnimationPlayer
 		skeleton = _find(model, "Skeleton3D") as Skeleton3D
-		_prepare_animations()
+		if anim_player:
+			_prepare_animations()
+			_build_tree()
 	else:
 		fallback = true
 		model = _build_fallback()
@@ -51,10 +89,11 @@ func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE)
 	_collect_meshes(model)
 	MaterialLibrary.apply_character(_meshes, primary_tint)
 	_setup_overlay()
-	var walk := DB.anim(&"walk")
-	var run := DB.anim(&"run")
-	ground_speed_walk = float(walk.get("ground_speed", 1.6)) * scale_factor
-	ground_speed_run = float(run.get("ground_speed", 5.0)) * scale_factor
+	ground_speed_walk = float(DB.anim(&"walk").get("ground_speed", 1.6)) * scale_factor
+	ground_speed_run = float(DB.anim(&"run").get("ground_speed", 5.0)) * scale_factor
+	ground_speed_strafe = float(DB.anim(&"strafe_l").get("ground_speed", 3.2)) * scale_factor
+	ground_speed_back = float(DB.anim(&"walk_back").get("ground_speed", 1.8)) * scale_factor
+	_fidget_at = _rng.randf_range(7.0, 12.0)
 
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:
@@ -73,18 +112,338 @@ func _collect_meshes(n: Node) -> void:
 		_collect_meshes(c)
 
 func _prepare_animations() -> void:
-	if anim_player == null:
-		return
-	anim_player.playback_default_blend_time = BLEND
 	for lib_name in anim_player.get_animation_library_list():
 		var lib := anim_player.get_animation_library(lib_name)
 		for an in lib.get_animation_list():
 			var meta := DB.anim(an)
-			var a := lib.get_animation(an)
-			a.loop_mode = Animation.LOOP_LINEAR if meta.get("loop", false) else Animation.LOOP_NONE
+			lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if meta.get("loop", false) else Animation.LOOP_NONE
 
 func has_anim(n: StringName) -> bool:
-	return anim_player != null and anim_player.has_animation(n)
+	if anim_player == null:
+		return false
+	return anim_player.has_animation(n)
+
+## First available name from a preference list (lets data ask for "sword_4" and fall back to "sword_1").
+func pick(names: Array) -> StringName:
+	for n in names:
+		if has_anim(n):
+			return n
+	return names[0] if not names.is_empty() else &""
+
+# ---- AnimationTree -----------------------------------------------------------------------------------------
+
+func _anim_node(n: StringName) -> AnimationNodeAnimation:
+	var a := AnimationNodeAnimation.new()
+	a.animation = n if has_anim(n) else &"idle"
+	return a
+
+func _bs(points: Array) -> AnimationNodeBlendSpace2D:
+	var bs := AnimationNodeBlendSpace2D.new()
+	bs.min_space = Vector2(-2.0, -2.0)
+	bs.max_space = Vector2(2.0, 2.0)
+	bs.sync = true
+	for p in points:
+		bs.add_blend_point(_anim_node(p[0]), p[1])
+	return bs
+
+func _build_tree() -> void:
+	tree = AnimationTree.new()
+	tree.name = "AnimTree"
+	anim_player.get_parent().add_child(tree)
+	tree.anim_player = tree.get_path_to(anim_player)
+	tree.root_node = anim_player.root_node
+	var root := AnimationNodeBlendTree.new()
+	var relaxed := _bs([[&"idle", Vector2.ZERO], [&"walk", Vector2(0, 1)], [&"run", Vector2(0, 2)], [&"walk_back", Vector2(0, -1)],
+		[&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)]])
+	var combat := _bs([[_stance_idle, Vector2.ZERO], [&"walk", Vector2(0, 1)], [&"run_combat", Vector2(0, 2)],
+		[&"walk_back", Vector2(0, -1)], [&"walk_back", Vector2(0, -2)], [&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)],
+		[&"strafe_l", Vector2(-2, 0)], [&"strafe_r", Vector2(2, 0)]])
+	var hurt := _bs([[&"idle_hurt", Vector2.ZERO], [&"walk_hurt", Vector2(0, 1)], [&"run_hurt", Vector2(0, 2)],
+		[&"walk_back", Vector2(0, -1)], [&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)]])
+	root.add_node(&"relaxed_bs", relaxed, Vector2(0, 0))
+	root.add_node(&"combat_bs", combat, Vector2(0, 200))
+	root.add_node(&"hurt_bs", hurt, Vector2(0, 400))
+	root.add_node(&"combat", AnimationNodeBlend2.new(), Vector2(300, 100))
+	root.add_node(&"hurt", AnimationNodeBlend2.new(), Vector2(500, 200))
+	root.add_node(&"loco_ts", AnimationNodeTimeScale.new(), Vector2(700, 200))
+	var upper := AnimationNodeBlend2.new()
+	upper.filter_enabled = true
+	for p in _upper_filter_paths():
+		upper.set_filter_path(p, true)
+	root.add_node(&"upper", upper, Vector2(900, 200))
+	root.add_node(&"upper_anim", _anim_node(&"block_loop"), Vector2(500, 500))
+	root.add_node(&"upper_ts", AnimationNodeTimeScale.new(), Vector2(700, 500))
+	root.add_node(&"anim_a", _anim_node(&"idle"), Vector2(900, 400))
+	root.add_node(&"a_ts", AnimationNodeTimeScale.new(), Vector2(1100, 400))
+	root.add_node(&"anim_b", _anim_node(&"idle"), Vector2(900, 600))
+	root.add_node(&"b_ts", AnimationNodeTimeScale.new(), Vector2(1100, 600))
+	var state := AnimationNodeTransition.new()
+	state.xfade_time = BLEND
+	state.allow_transition_to_self = true
+	state.add_input("loco")
+	state.add_input("a")
+	state.add_input("b")
+	root.add_node(&"state", state, Vector2(1300, 300))
+	root.connect_node(&"combat", 0, &"relaxed_bs")
+	root.connect_node(&"combat", 1, &"combat_bs")
+	root.connect_node(&"hurt", 0, &"combat")
+	root.connect_node(&"hurt", 1, &"hurt_bs")
+	root.connect_node(&"loco_ts", 0, &"hurt")
+	root.connect_node(&"upper", 0, &"loco_ts")
+	root.connect_node(&"upper_ts", 0, &"upper_anim")
+	root.connect_node(&"upper", 1, &"upper_ts")
+	root.connect_node(&"a_ts", 0, &"anim_a")
+	root.connect_node(&"b_ts", 0, &"anim_b")
+	root.connect_node(&"state", 0, &"upper")
+	root.connect_node(&"state", 1, &"a_ts")
+	root.connect_node(&"state", 2, &"b_ts")
+	root.connect_node(&"output", 0, &"state")
+	tree.tree_root = root
+	tree.active = true
+	for p in ["loco_ts", "upper_ts", "a_ts", "b_ts"]:
+		tree.set("parameters/%s/scale" % p, 1.0)
+	tree.set("parameters/combat/blend_amount", 0.0)
+	tree.set("parameters/hurt/blend_amount", 0.0)
+	tree.set("parameters/upper/blend_amount", 0.0)
+	tree.set("parameters/state/transition_request", "loco")
+
+## Track paths of upper-body bones (taken from a real animation so the NodePath format matches the import).
+func _upper_filter_paths() -> Array:
+	var out := []
+	var sample := &"idle" if has_anim(&"idle") else (anim_player.get_animation_list()[0] if not anim_player.get_animation_list().is_empty() else &"")
+	if sample == &"":
+		return out
+	var a := anim_player.get_animation(sample)
+	for i in a.get_track_count():
+		var p := a.track_get_path(i)
+		if p.get_subname_count() > 0 and UPPER_BONES.has(String(p.get_subname(0))):
+			out.append(p)
+	return out
+
+func _root() -> AnimationNodeBlendTree:
+	return tree.tree_root as AnimationNodeBlendTree
+
+## Weapon stance idle used by the combat blend space ("idle_shield", "idle_2h", "idle_staff", ...).
+func set_stance(idle_anim: StringName) -> void:
+	_stance_idle = idle_anim
+	if tree == null:
+		return
+	var bs := _root().get_node(&"combat_bs") as AnimationNodeBlendSpace2D
+	var n := bs.get_blend_point_node(0) as AnimationNodeAnimation
+	n.animation = idle_anim if has_anim(idle_anim) else &"idle"
+
+## Locomotion input: local velocity (x = right, y = forward in m/s), combat stance flag, hurt amount 0..1.
+func update_locomotion(local_velocity: Vector2, combat_stance: bool, hurt_amount := 0.0, delta := 0.016) -> void:
+	_combat_target = 1.0 if combat_stance else 0.0
+	_hurt_target = clampf(hurt_amount, 0.0, 1.0)
+	var speed := local_velocity.length()
+	var dir := local_velocity / speed if speed > 0.001 else Vector2.ZERO
+	var fwd := maxf(0.0, dir.y)
+	var ref_walk := lerpf(ground_speed_walk, ground_speed_back, maxf(0.0, -dir.y))
+	ref_walk = lerpf(ref_walk, ground_speed_strafe * 0.5, absf(dir.x))
+	var ref_run := lerpf(ground_speed_run, ground_speed_strafe, absf(dir.x) * (1.0 - fwd))
+	var n := 0.0
+	if speed <= ref_walk:
+		n = speed / maxf(ref_walk, 0.01)
+	else:
+		n = 1.0 + (speed - ref_walk) / maxf(ref_run - ref_walk, 0.01)
+	n = minf(n, 2.0)
+	var target := dir * n
+	_loco_pos = _loco_pos.lerp(target, 1.0 - exp(-14.0 * delta))
+	if speed > 0.2:
+		_idle_time = 0.0
+	if tree:
+		var p := Vector2(_loco_pos.x, _loco_pos.y)
+		tree.set("parameters/relaxed_bs/blend_position", Vector2(0.0, maxf(0.0, p.length()) * signf(p.y + 0.001)))
+		tree.set("parameters/combat_bs/blend_position", p)
+		tree.set("parameters/hurt_bs/blend_position", p)
+		var expected := 0.0
+		var ln := p.length()
+		expected = ref_walk * ln if ln <= 1.0 else ref_walk + (ln - 1.0) * (ref_run - ref_walk)
+		var ts := clampf(speed / expected, 0.6, 1.6) if expected > 0.3 and speed > 0.3 else 1.0
+		tree.set("parameters/loco_ts/scale", ts)
+	elif fallback:
+		_fb_speed = speed
+
+func _process(delta: float) -> void:
+	if not is_finite(delta) or delta <= 0.0:
+		return
+	_combat = move_toward(_combat, _combat_target, delta * 3.5)
+	_hurt = move_toward(_hurt, _hurt_target, delta * 1.5)
+	_upper = move_toward(_upper, _upper_target, delta * 8.0)
+	if tree:
+		tree.set("parameters/combat/blend_amount", _combat)
+		tree.set("parameters/hurt/blend_amount", _hurt)
+		tree.set("parameters/upper/blend_amount", _upper)
+	if _in_action and not _action_loop:
+		_action_left -= delta
+		if _action_left <= 0.0:
+			_end_action()
+	if not _in_action and not _dead:
+		_idle_time += delta
+		if _idle_time > _fidget_at and _combat < 0.05 and _hurt < 0.3 and _loco_pos.length() < 0.05:
+			_play_fidget()
+	if fallback:
+		_animate_fallback(delta)
+	if _trail:
+		_trail.tick(delta)
+
+func _end_action() -> void:
+	var a := _action
+	_in_action = false
+	_reaction = false
+	_action = &""
+	_action_left = 0.0
+	if not _dead:
+		_request(&"loco", LOCO_RETURN_BLEND)
+	action_finished.emit(a)
+
+func _request(state: StringName, xfade: float) -> void:
+	if tree == null:
+		return
+	(_root().get_node(&"state") as AnimationNodeTransition).xfade_time = xfade
+	tree.set("parameters/state/transition_request", String(state))
+
+func _play_fidget() -> void:
+	_idle_time = 0.0
+	_fidget_at = _rng.randf_range(9.0, 16.0)
+	var set_: Array = FIDGETS.get(personality, [&"idle_look", &"idle_adjust"])
+	var n: StringName = set_[_rng.randi_range(0, set_.size() - 1)]
+	if has_anim(n):
+		play_action(n, 1.0, 0.35)
+
+func is_busy() -> bool:
+	return _in_action and not _is_fidget()
+
+func _is_fidget() -> bool:
+	return _action in [&"idle_look", &"idle_adjust", &"idle_knight", &"idle_mage"]
+
+## Cancel a fidget when the owner starts moving or fighting.
+func interrupt_fidget() -> void:
+	if _in_action and _is_fidget():
+		_end_action()
+
+## One-shot action (attack, cast, skill, interaction). Returns its duration in seconds at the given rate.
+func play_action(n: StringName, rate := 1.0, blend := BLEND) -> float:
+	if _dead:
+		return 0.0
+	var meta := DB.anim(n)
+	var length := float(meta.get("length", 0.7))
+	_action = n
+	_action_loop = false
+	_in_action = true
+	_reaction = false
+	_action_left = length / maxf(rate, 0.05)
+	_start_slot(n, rate, blend)
+	if fallback:
+		_fb_action_t = 0.0
+		_fb_action_len = _action_left
+	return _action_left
+
+## Looping action (whirlwind, block, bow draw, channel, boss charge). Stays until stop_action().
+func hold_action(n: StringName, rate := 1.0, blend := BLEND) -> void:
+	if _dead:
+		return
+	_action = n
+	_action_loop = true
+	_in_action = true
+	_reaction = false
+	_action_left = 0.0
+	_start_slot(n, rate, blend)
+
+func _start_slot(n: StringName, rate: float, blend: float) -> void:
+	if tree == null:
+		return
+	_slot = &"b" if _slot == &"a" else &"a"
+	var node := _root().get_node(StringName("anim_" + String(_slot))) as AnimationNodeAnimation
+	node.animation = n if has_anim(n) else &"idle"
+	tree.set("parameters/%s_ts/scale" % _slot, rate)
+	_request(_slot, blend)
+
+func set_action_rate(rate: float) -> void:
+	if tree and _in_action:
+		tree.set("parameters/%s_ts/scale" % _slot, rate)
+
+func stop_action() -> void:
+	if _in_action:
+		_end_action()
+
+func current_action() -> StringName:
+	return _action
+
+## Upper-body overlay while the legs keep walking (guard walk, bow draw, channel). &"" clears it.
+func set_upper(n: StringName, rate := 1.0) -> void:
+	if tree == null:
+		return
+	if n == &"":
+		_upper_target = 0.0
+		return
+	if n != _upper_anim:
+		_upper_anim = n
+		(_root().get_node(&"upper_anim") as AnimationNodeAnimation).animation = n if has_anim(n) else &"idle"
+	tree.set("parameters/upper_ts/scale", rate)
+	_upper_target = 1.0
+
+func play_reaction(kind: StringName, direction := &"") -> void:
+	if _dead:
+		return
+	var n: StringName
+	match kind:
+		&"hit":
+			n = pick([StringName("hit_" + String(direction)), &"hit_light", &"hit"]) if direction != &"" else pick([&"hit_light", &"hit"])
+		&"hit_heavy": n = pick([&"hit_heavy", &"hit"])
+		&"stagger": n = pick([&"stagger_small", &"stagger"])
+		&"stagger_heavy": n = pick([&"stagger_heavy", &"stagger"])
+		&"knockback": n = &"knockback"
+		&"launch": n = pick([&"launch", &"knockback"])
+		&"wall": n = pick([&"wall_impact", &"hit_heavy"])
+		&"knockdown": n = pick([&"knockdown", &"knockback"])
+		&"land", &"getup": n = &"getup"
+		&"block": n = &"block_impact"
+		&"parry": n = &"parry"
+		_: n = kind
+	var meta := DB.anim(n)
+	var length := float(meta.get("length", 0.4))
+	if kind == &"hit" and _in_action and not _reaction and not _is_fidget():
+		flash(Color(1, 0.9, 0.85), 0.8)
+		return  # light hits don't interrupt actions; heavier reactions do
+	_action = n
+	_action_loop = false
+	_in_action = true
+	_reaction = true
+	_action_left = length
+	_start_slot(n, 1.0, REACTION_BLEND)
+	if fallback:
+		_fb_react = length
+
+func play_death() -> void:
+	_dead = true
+	_in_action = true
+	_action_loop = true
+	_upper_target = 0.0
+	if tree:
+		_start_slot(&"death", 1.0, 0.1)
+	elif fallback and model:
+		var tw := create_tween()
+		tw.tween_property(model, "rotation:x", -PI / 2.0, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	set_rim(Color.BLACK, 0.0)
+	set_trail(false)
+	for id in _status_nodes.keys():
+		set_status_visual(id, false)
+
+func revive() -> void:
+	_dead = false
+	_in_action = false
+	_action = &""
+	if tree:
+		play_action(&"revive" if has_anim(&"revive") else &"getup", 1.0, 0.1)
+	elif fallback and model:
+		model.rotation.x = 0.0
+
+func is_dead() -> bool:
+	return _dead
+
+# ---- Overlay: hit flash and status rim ----------------------------------------------------------------------
 
 func _setup_overlay() -> void:
 	if _overlay_shader == null:
@@ -123,7 +482,7 @@ func flash(color := Color(1, 1, 1), strength := 1.0, time := 0.14) -> void:
 	_flash_tw = create_tween()
 	_flash_tw.tween_method(func(v): _overlay.set_shader_parameter("flash", v), strength, 0.0, time)
 
-# ---- Weapons ----------------------------------------------------------------------------------------------
+# ---- Weapons ------------------------------------------------------------------------------------------------
 
 func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.IDENTITY) -> void:
 	detach_weapon(hand)
@@ -138,8 +497,10 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 		holder = ba
 	else:
 		holder = Node3D.new()
-		model.add_child(holder)
-		holder.position = Vector3(0.35 if hand == &"main" else -0.35, 1.0, 0.1)
+		(_fb_arm if fallback and _fb_arm else model).add_child(holder)
+		holder.position = Vector3(0, 0, 0.25) if fallback else Vector3(0.35 if hand == &"main" else -0.35, 1.0, 0.1)
+		if fallback:
+			holder.rotation = Vector3(PI * 0.5, 0, 0)
 	var w: Node3D = load(model_path).instantiate()
 	w.transform = offset
 	holder.add_child(w)
@@ -160,150 +521,36 @@ func _collect_into(n: Node, out: Array[MeshInstance3D]) -> void:
 func detach_weapon(hand: StringName) -> void:
 	if _weapon_nodes.has(hand):
 		var n: Node = _weapon_nodes[hand]
-		for c in n.get_children():
-			for m in _meshes.duplicate():
-				if not is_instance_valid(m) or c.is_ancestor_of(m) or c == m:
-					_meshes.erase(m)
+		for m in _meshes.duplicate():
+			if not is_instance_valid(m) or n.is_ancestor_of(m):
+				_meshes.erase(m)
 		n.queue_free()
 		_weapon_nodes.erase(hand)
 
-func weapon_tip_position(hand := &"main") -> Vector3:
-	if _weapon_nodes.has(hand):
+func has_weapon(hand: StringName) -> bool:
+	return _weapon_nodes.has(hand)
+
+## World position of a point along the weapon (0 = grip, 1 = tip) — used for trails and projectile spawns.
+func weapon_point(hand := &"main", t := 1.0, length := 1.0) -> Vector3:
+	if _weapon_nodes.has(hand) and is_instance_valid(_weapon_nodes[hand]):
 		var n: Node3D = _weapon_nodes[hand]
-		return n.global_transform * Vector3(0, 0.9, 0)
-	return global_position + Vector3.UP * 1.2 + global_transform.basis.z * 0.8
+		return n.global_transform * Vector3(0, length * t, 0)
+	return global_position + Vector3.UP * 1.2 * model_scale + global_transform.basis.z * 0.8 * model_scale
 
-# ---- Animation --------------------------------------------------------------------------------------------
+func weapon_tip_position(hand := &"main") -> Vector3:
+	return weapon_point(hand, 1.0)
 
-func _process(delta: float) -> void:
-	if _action_left > 0.0:
-		_action_left -= delta
-		if _action_left <= 0.0:
-			var a := _action
-			_action = &""
-			action_finished.emit(a)
-	if _reaction_left > 0.0:
-		_reaction_left -= delta
-	if fallback:
-		_animate_fallback(delta)
-	_footsteps()
+## Swing trail following the main-hand weapon between grip*0.35 and tip (enabled during hit windows).
+func set_trail(on: bool, color := Color(1, 0.95, 0.85, 0.6), length := 1.0) -> void:
+	if on:
+		if _trail == null:
+			_trail = WeaponTrail.new()
+			add_child(_trail)
+		_trail.begin(self, color, length)
+	elif _trail:
+		_trail.end()
 
-func is_busy() -> bool:
-	return _action_left > 0.0 or _reaction_left > 0.0
-
-## Locomotion by horizontal speed. Playback rate matches the authored ground speed to avoid foot sliding.
-func update_locomotion(speed: float, idle_name: StringName = &"") -> void:
-	if _dead or _action_left > 0.0 or _reaction_left > 0.0:
-		return
-	var target: StringName
-	var rate := 1.0
-	if speed < 0.25:
-		target = idle_name if idle_name != &"" and has_anim(idle_name) else idle_anim
-	elif speed < (ground_speed_walk + ground_speed_run) * 0.45:
-		target = &"walk"
-		rate = clampf(speed / ground_speed_walk, 0.6, 2.2)
-	else:
-		target = &"run"
-		rate = clampf(speed / ground_speed_run, 0.6, 1.8)
-	_play(target, LOCO_BLEND, rate)
-	_loco = target
-
-func _play(n: StringName, blend: float, rate: float) -> void:
-	if anim_player == null or not anim_player.has_animation(n):
-		return
-	if anim_player.current_animation == n:
-		anim_player.speed_scale = rate
-		return
-	anim_player.play(n, blend)
-	anim_player.speed_scale = rate
-
-## One-shot action (attack, cast, skill). Returns its duration in seconds at the given rate.
-func play_action(n: StringName, rate := 1.0, blend := 0.08) -> float:
-	if _dead:
-		return 0.0
-	var meta := DB.anim(n)
-	var length := float(meta.get("length", 0.7))
-	_action = n
-	_action_left = length / maxf(rate, 0.05)
-	_reaction_left = 0.0
-	_loco = &""
-	if anim_player and anim_player.has_animation(n):
-		anim_player.play(n, blend)
-		anim_player.seek(0.0, true)
-		anim_player.speed_scale = rate
-	elif fallback:
-		_fb_action_t = 0.0
-		_fb_action_len = _action_left
-	return _action_left
-
-## Looping channel animation (whirlwind, block, bow draw). Stays until stop_action().
-func hold_action(n: StringName, rate := 1.0) -> void:
-	_action = n
-	_action_left = 9999.0
-	if anim_player and anim_player.has_animation(n):
-		anim_player.play(n, 0.12)
-		anim_player.speed_scale = rate
-
-func stop_action() -> void:
-	_action_left = 0.0
-	_action = &""
-
-func current_action() -> StringName:
-	return _action
-
-func play_reaction(kind: StringName) -> void:
-	if _dead:
-		return
-	var n: StringName
-	match kind:
-		&"hit": n = &"hit"
-		&"stagger": n = &"stagger"
-		&"knockback": n = &"knockback"
-		&"land": n = &"getup"
-		&"block": n = &"block_impact"
-		&"parry": n = &"parry"
-		_: n = kind
-	var meta := DB.anim(n)
-	var length := float(meta.get("length", 0.4))
-	if kind == &"hit" and _action_left > 0.0:
-		flash(Color(1, 0.9, 0.85), 0.8)
-		return  # light hits don't interrupt actions; heavier reactions do
-	_action = &""
-	_action_left = 0.0
-	_reaction_left = length
-	if anim_player and anim_player.has_animation(n):
-		anim_player.play(n, 0.06)
-		anim_player.seek(0.0, true)
-		anim_player.speed_scale = 1.0
-	elif fallback:
-		_fb_react = length
-
-func play_death() -> void:
-	_dead = true
-	_action_left = 0.0
-	if anim_player and anim_player.has_animation(&"death"):
-		anim_player.play(&"death", 0.1)
-		anim_player.speed_scale = 1.0
-	elif fallback:
-		var tw := create_tween()
-		tw.tween_property(model, "rotation:x", -PI / 2.0, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	set_rim(Color.BLACK, 0.0)
-	for id in _status_nodes.keys():
-		set_status_visual(id, false)
-
-func _footsteps() -> void:
-	if anim_player == null or (_loco != &"walk" and _loco != &"run"):
-		return
-	var meta := DB.anim(_loco)
-	var pos := anim_player.current_animation_position
-	for t in meta.get("footsteps", []):
-		var ft := float(t)
-		if (_last_loco_pos < ft and pos >= ft) or (pos < _last_loco_pos and (ft > _last_loco_pos or ft <= pos)):
-			footstep.emit()
-			break
-	_last_loco_pos = pos
-
-# ---- Status visuals ---------------------------------------------------------------------------------------
+# ---- Status visuals -----------------------------------------------------------------------------------------
 
 func set_status_visual(id: StringName, on: bool) -> void:
 	if not on:
@@ -328,77 +575,85 @@ func set_status_visual(id: StringName, on: bool) -> void:
 		&"cursed": node = VFXLib.status_particles(Elements.DARK, h)
 		&"chilled": node = VFXLib.status_particles(Elements.ICE, h)
 		&"wet": node = VFXLib.status_particles(Elements.WATER, h)
+		&"poisoned": node = VFXLib.particles(Color(0.45, 0.9, 0.25, 0.7), 10, 1.2, false, 0.12, 0.4, 20.0, Vector3(0, 0.5, 0), h * 0.3)
+		&"armor_broken": node = VFXLib.status_particles(Elements.EARTH, h)
+		&"windswept": node = VFXLib.status_particles(Elements.WIND, h)
+		&"purged": node = VFXLib.status_particles(Elements.LIGHT, h)
 		&"frozen": node = VFXLib.ice_block(h, model_scale)
 		&"stunned", &"staggered": node = VFXLib.stun_stars(h)
 		&"bleeding": node = VFXLib.status_particles(Elements.PHYSICAL, h)
+		&"haste", &"empowered": node = VFXLib.particles(Color(1.0, 0.85, 0.4, 0.6), 8, 0.8, false, 0.1, 0.8, 30.0, Vector3(0, 0.3, 0), h * 0.35)
 	if node:
-		add_child(node)
+		if node.get_parent() == null:
+			add_child(node)
+		if node is GPUParticles3D and node.position == Vector3.ZERO:
+			node.position = Vector3.UP * h * 0.5
 		_status_nodes[id] = node
-	if id == &"frozen" and anim_player:
-		anim_player.speed_scale = 0.0
 	_refresh_rim()
 
 func _refresh_rim() -> void:
 	var c := Color.BLACK
 	var a := 0.0
-	for id in [&"frozen", &"burning", &"shocked", &"cursed", &"chilled", &"wet"]:
+	for id in [&"frozen", &"burning", &"shocked", &"cursed", &"poisoned", &"armor_broken", &"chilled", &"wet", &"empowered"]:
 		if _status_nodes.has(id):
 			match id:
 				&"frozen": c = Color(0.6, 0.9, 1.0); a = 1.2
 				&"burning": c = Color(1.0, 0.45, 0.1); a = 0.9
 				&"shocked": c = Color(1.0, 0.95, 0.4); a = 0.8
 				&"cursed": c = Color(0.6, 0.2, 0.9); a = 0.8
+				&"poisoned": c = Color(0.4, 0.85, 0.2); a = 0.6
+				&"armor_broken": c = Color(0.8, 0.55, 0.25); a = 0.5
 				&"chilled": c = Color(0.5, 0.8, 1.0); a = 0.5
 				&"wet": c = Color(0.2, 0.45, 0.9); a = 0.4
+				&"empowered": c = Color(1.0, 0.8, 0.3); a = 0.4
 			break
-	if not _status_nodes.has(&"frozen") and anim_player and anim_player.speed_scale == 0.0 and not _dead:
-		anim_player.speed_scale = 1.0
+	if tree:
+		tree.active = not _status_nodes.has(&"frozen") or _dead
 	set_rim(c, a)
 
-# ---- Temporary fallback body (only used until the rigged models exist) ------------------------------------
+# ---- Fallback body (used when a model file is missing, e.g. before the character builder delivers) ----------
 
 var _fb_action_t := 0.0
 var _fb_action_len := 0.0
 var _fb_react := 0.0
 var _fb_arm: Node3D
 var _fb_bob := 0.0
+var _fb_speed := 0.0
 
 func _build_fallback() -> Node3D:
 	var root := Node3D.new()
-	root.name = "TemporaryBody"
+	root.name = "FallbackBody"
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = tint_primary.darkened(0.25)
+	mat.roughness = 0.6
 	var body := MeshInstance3D.new()
 	var cap := CapsuleMesh.new()
-	cap.radius = 0.32
-	cap.height = 1.5
+	cap.radius = 0.3
+	cap.height = 1.45
 	body.mesh = cap
 	body.position.y = 0.85
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = tint_primary.darkened(0.2)
-	mat.roughness = 0.6
 	body.material_override = mat
 	root.add_child(body)
 	var head := MeshInstance3D.new()
 	var sph := SphereMesh.new()
-	sph.radius = 0.2
-	sph.height = 0.4
+	sph.radius = 0.19
+	sph.height = 0.38
 	head.mesh = sph
-	head.position.y = 1.72
+	head.position.y = 1.7
+	var hm := StandardMaterial3D.new()
+	hm.albedo_color = Color(0.55, 0.52, 0.5)
+	head.material_override = hm
 	root.add_child(head)
 	_fb_arm = Node3D.new()
-	_fb_arm.position = Vector3(0.38, 1.25, 0.0)
+	_fb_arm.position = Vector3(0.36, 1.25, 0.0)
 	root.add_child(_fb_arm)
-	var blade := MeshInstance3D.new()
-	var bm := BoxMesh.new()
-	bm.size = Vector3(0.08, 0.08, 1.0)
-	blade.mesh = bm
-	blade.position = Vector3(0, 0, 0.5)
-	_fb_arm.add_child(blade)
 	return root
 
 func _animate_fallback(delta: float) -> void:
-	if _dead:
+	if _dead or model == null:
 		return
-	_fb_bob += delta * 8.0
+	_fb_bob += delta * (4.0 + _fb_speed * 2.0)
+	model.position.y = absf(sin(_fb_bob)) * 0.05 * minf(_fb_speed, 1.0)
 	if _fb_action_len > 0.0:
 		_fb_action_t += delta
 		var t := clampf(_fb_action_t / _fb_action_len, 0.0, 1.0)
@@ -411,4 +666,4 @@ func _animate_fallback(delta: float) -> void:
 		_fb_react -= delta
 		model.rotation.x = -0.25 if _fb_react > 0.0 else 0.0
 	else:
-		model.rotation.x = 0.0
+		model.rotation.x = lerpf(model.rotation.x, 0.12 * _hurt, delta * 4.0)

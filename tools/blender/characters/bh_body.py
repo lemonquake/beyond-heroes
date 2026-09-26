@@ -255,9 +255,12 @@ def fist(body, side, mat_back, mat_fingers, gauntlet=True, scale=1.0, claw=False
     # local frame of weapon socket: X = knuckles (distal), Y = blade/thumb side, Z = back of hand (R) / palm (L)
     A = body.axes(wb)
     o = body.head(wb)
-    zsgn = 1.0 if side == "R" else -1.0     # +back-of-hand direction in socket-local Z
+    # socket-local: +Z = back of the hand on both sides; knuckles = +X (right hand) / -X (left hand)
+    xs = 1.0 if side == "R" else -1.0
+    zsgn = 1.0
+
     def L(x, y, z):
-        return o + A @ np.array([x, y, z * zsgn]) * s
+        return o + A @ np.array([x * xs, y, z]) * s
     # palm/back block
     rings = []
     for x, wy, hz, zc in ((-0.07, 0.03, 0.022, 0.018), (-0.05, 0.042, 0.03, 0.012), (-0.01, 0.046, 0.036, 0.004),

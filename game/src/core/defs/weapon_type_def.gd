@@ -31,3 +31,9 @@ extends Resource
 @export var icon := ""
 @export var model := ""
 @export var grip_offset := Transform3D.IDENTITY   # attachment correction in the hand socket
+@export var chain_mults: Array = [1.0, 1.0, 1.1, 1.5]   # damage multiplier per step of the light chain
+@export var chain_knock: Array = [1.0, 1.0, 1.2, 2.2]   # knockback multiplier per chain step (finisher throws)
+@export var length := 1.0                               # blade/shaft length in metres (trails, tip position)
+@export var move_mult := 0.25                           # movement allowed while attacking (0 = rooted)
+@export var trail_color := Color(1.0, 0.95, 0.85, 0.55)
+@export var description := ""                           # stance identity shown on weapon tooltips

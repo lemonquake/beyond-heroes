@@ -1,0 +1,1562 @@
+{
+ "fps": 30,
+ "generator": "tools/blender/characters/bh_library.py",
+ "notes": {
+  "space": "in place; hips move vertically only (plus small weight shifts). turn_l/turn_r end rotated by 'turn' degrees; whirlwind turns 360 per loop.",
+  "hits": "seconds at 1.0x, measured from the weapon-tip sweep (tip speed >= 55% of peak inside the authored strike segment)",
+  "ground_speed": "m/s for the standard 1.8 m rig, measured from planted sole points; scale with the model scale",
+  "sockets": "weapon.R / weapon.L share one rest frame: +Y blade, +Z back of hand. Attach weapon GLBs with an identity transform (shield faces outward from the left forearm)."
+ },
+ "animations": {
+  "idle": {
+   "length": 4.0,
+   "loop": true
+  },
+  "idle_look": {
+   "length": 4.0,
+   "loop": true
+  },
+  "idle_adjust": {
+   "length": 4.0,
+   "loop": true
+  },
+  "idle_knight": {
+   "length": 5.0,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "idle_mage": {
+   "length": 5.0,
+   "loop": true,
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "idle_hurt": {
+   "length": 2.0,
+   "loop": true
+  },
+  "idle_1h": {
+   "length": 2.4,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "idle_shield": {
+   "length": 2.4,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": "shield"
+   }
+  },
+  "idle_2h": {
+   "length": 2.667,
+   "loop": true,
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "idle_spear": {
+   "length": 2.667,
+   "loop": true,
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "idle_dagger": {
+   "length": 2.0,
+   "loop": true,
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "idle_bow": {
+   "length": 3.0,
+   "loop": true,
+   "props": {
+    "R": null,
+    "L": "bow"
+   }
+  },
+  "idle_staff": {
+   "length": 3.0,
+   "loop": true,
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "idle_wand": {
+   "length": 2.667,
+   "loop": true,
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "idle_dual": {
+   "length": 2.333,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "idle_combat_hurt": {
+   "length": 2.0,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "walk": {
+   "length": 0.867,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.433
+   ],
+   "ground_speed": 1.6,
+   "foot_slide_max": 0.0,
+   "direction_deg": 0.0
+  },
+  "run": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 4.996,
+   "foot_slide_max": 0.0202,
+   "direction_deg": 0.0
+  },
+  "walk_back": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 1.8,
+   "foot_slide_max": 0.0001,
+   "direction_deg": 180.0
+  },
+  "strafe_l": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 3.2,
+   "foot_slide_max": 0.0,
+   "direction_deg": 90.0
+  },
+  "strafe_r": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 3.201,
+   "foot_slide_max": 0.0058,
+   "direction_deg": -90.0
+  },
+  "run_combat": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 4.6,
+   "foot_slide_max": 0.0,
+   "direction_deg": 0.0,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "walk_hurt": {
+   "length": 1.0,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.56
+   ],
+   "ground_speed": 1.097,
+   "foot_slide_max": 0.11,
+   "direction_deg": 0.0
+  },
+  "run_hurt": {
+   "length": 0.733,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.396
+   ],
+   "ground_speed": 3.0,
+   "foot_slide_max": 0.0008,
+   "direction_deg": 0.0
+  },
+  "run_start": {
+   "length": 0.467,
+   "loop": false,
+   "footsteps": [
+    0.167,
+    0.333
+   ],
+   "ground_speed": 5.0
+  },
+  "run_stop": {
+   "length": 0.8,
+   "loop": false,
+   "footsteps": [
+    0.133,
+    0.4
+   ]
+  },
+  "turn_l": {
+   "length": 0.733,
+   "loop": false,
+   "turn": 90,
+   "footsteps": [
+    0.367,
+    0.633
+   ]
+  },
+  "turn_r": {
+   "length": 0.733,
+   "loop": false,
+   "turn": -90,
+   "footsteps": [
+    0.367,
+    0.633
+   ]
+  },
+  "dodge_roll": {
+   "length": 0.733,
+   "loop": false,
+   "iframes": [
+    0.067,
+    0.5
+   ],
+   "travel": 4.0,
+   "footsteps": [
+    0.567
+   ]
+  },
+  "dodge_step": {
+   "length": 0.467,
+   "loop": false,
+   "iframes": [
+    0.033,
+    0.233
+   ],
+   "travel": 1.8,
+   "footsteps": [
+    0.267
+   ]
+  },
+  "sword_1": {
+   "length": 0.567,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 46.91,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.767
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "sword_2": {
+   "length": 0.567,
+   "loop": false,
+   "hits": [
+    [
+     0.275,
+     0.308
+    ]
+   ],
+   "tip_speed_peak": 54.4,
+   "cancel_after": 0.467,
+   "combo_window": [
+    0.333,
+    0.767
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "sword_3": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 54.51,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.8
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "sword_4": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.442,
+     0.475
+    ]
+   ],
+   "tip_speed_peak": 53.88,
+   "cancel_after": 0.733,
+   "combo_window": [
+    0.5,
+    1.0
+   ],
+   "footsteps": [
+    0.4
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "sword_heavy": {
+   "length": 1.133,
+   "loop": false,
+   "hits": [
+    [
+     0.608,
+     0.675
+    ]
+   ],
+   "tip_speed_peak": 55.03,
+   "cancel_after": 0.933,
+   "combo_window": [
+    0.733,
+    1.2
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "gs_1": {
+   "length": 0.7,
+   "loop": false,
+   "hits": [
+    [
+     0.375,
+     0.442
+    ]
+   ],
+   "tip_speed_peak": 47.56,
+   "cancel_after": 0.6,
+   "combo_window": [
+    0.467,
+    0.9
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "gs_2": {
+   "length": 0.7,
+   "loop": false,
+   "hits": [
+    [
+     0.342,
+     0.408
+    ]
+   ],
+   "tip_speed_peak": 54.51,
+   "cancel_after": 0.567,
+   "combo_window": [
+    0.433,
+    0.9
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "gs_3": {
+   "length": 0.767,
+   "loop": false,
+   "hits": [
+    [
+     0.375,
+     0.442
+    ]
+   ],
+   "tip_speed_peak": 60.29,
+   "cancel_after": 0.6,
+   "combo_window": [
+    0.467,
+    0.967
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "gs_4": {
+   "length": 0.933,
+   "loop": false,
+   "hits": [
+    [
+     0.475,
+     0.508
+    ]
+   ],
+   "tip_speed_peak": 78.6,
+   "cancel_after": 0.767,
+   "combo_window": [
+    0.533,
+    1.033
+   ],
+   "footsteps": [
+    0.433
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "gs_heavy": {
+   "length": 1.333,
+   "loop": false,
+   "hits": [
+    [
+     0.775,
+     0.808
+    ]
+   ],
+   "tip_speed_peak": 87.37,
+   "cancel_after": 1.1,
+   "combo_window": [
+    0.867,
+    1.4
+   ],
+   "footsteps": [
+    0.8
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   }
+  },
+  "axe_1": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.342,
+     0.375
+    ]
+   ],
+   "tip_speed_peak": 32.07,
+   "cancel_after": 0.533,
+   "combo_window": [
+    0.4,
+    0.8
+   ],
+   "props": {
+    "R": "axe",
+    "L": null
+   }
+  },
+  "axe_2": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 44.13,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.8
+   ],
+   "props": {
+    "R": "axe",
+    "L": null
+   }
+  },
+  "axe_3": {
+   "length": 0.633,
+   "loop": false,
+   "hits": [
+    [
+     0.342,
+     0.375
+    ]
+   ],
+   "tip_speed_peak": 40.35,
+   "cancel_after": 0.533,
+   "combo_window": [
+    0.4,
+    0.833
+   ],
+   "props": {
+    "R": "axe",
+    "L": null
+   }
+  },
+  "axe_4": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.242,
+     0.308
+    ],
+    [
+     0.508,
+     0.608
+    ]
+   ],
+   "tip_speed_peak": 34.49,
+   "cancel_after": 0.767,
+   "combo_window": [
+    0.633,
+    1.0
+   ],
+   "footsteps": [
+    0.467,
+    0.567
+   ],
+   "props": {
+    "R": "axe",
+    "L": null
+   }
+  },
+  "axe_heavy": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.708,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 35.94,
+   "cancel_after": 1.0,
+   "combo_window": [
+    0.833,
+    1.267
+   ],
+   "props": {
+    "R": "axe",
+    "L": null
+   }
+  },
+  "spear_1": {
+   "length": 0.5,
+   "loop": false,
+   "hits": [
+    [
+     0.242,
+     0.275
+    ]
+   ],
+   "tip_speed_peak": 15.26,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.3,
+    0.7
+   ],
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "spear_2": {
+   "length": 0.533,
+   "loop": false,
+   "hits": [
+    [
+     0.275,
+     0.308
+    ]
+   ],
+   "tip_speed_peak": 20.73,
+   "cancel_after": 0.467,
+   "combo_window": [
+    0.333,
+    0.733
+   ],
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "spear_3": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 63.69,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.8
+   ],
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "spear_4": {
+   "length": 0.867,
+   "loop": false,
+   "hits": [
+    [
+     0.375,
+     0.442
+    ]
+   ],
+   "tip_speed_peak": 14.42,
+   "cancel_after": 0.7,
+   "combo_window": [
+    0.467,
+    0.967
+   ],
+   "footsteps": [
+    0.4
+   ],
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "spear_heavy": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.708,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 17.77,
+   "cancel_after": 1.0,
+   "combo_window": [
+    0.833,
+    1.267
+   ],
+   "footsteps": [
+    0.7
+   ],
+   "props": {
+    "R": "spear",
+    "L": null
+   }
+  },
+  "dagger_1": {
+   "length": 0.433,
+   "loop": false,
+   "hits": [
+    [
+     0.208,
+     0.242
+    ]
+   ],
+   "tip_speed_peak": 22.01,
+   "cancel_after": 0.367,
+   "combo_window": [
+    0.267,
+    0.633
+   ],
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "dagger_2": {
+   "length": 0.433,
+   "loop": false,
+   "hits": [
+    [
+     0.208,
+     0.242
+    ]
+   ],
+   "tip_speed_peak": 26.22,
+   "cancel_after": 0.367,
+   "combo_window": [
+    0.267,
+    0.633
+   ],
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "dagger_3": {
+   "length": 0.467,
+   "loop": false,
+   "hits": [
+    [
+     0.242,
+     0.275
+    ]
+   ],
+   "tip_speed_peak": 11.39,
+   "cancel_after": 0.4,
+   "combo_window": [
+    0.3,
+    0.667
+   ],
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "dagger_4": {
+   "length": 0.733,
+   "loop": false,
+   "hits": [
+    [
+     0.208,
+     0.275
+    ],
+    [
+     0.342,
+     0.408
+    ]
+   ],
+   "tip_speed_peak": 32.7,
+   "cancel_after": 0.567,
+   "combo_window": [
+    0.5,
+    0.833
+   ],
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "dagger_heavy": {
+   "length": 1.067,
+   "loop": false,
+   "hits": [
+    [
+     0.575,
+     0.642
+    ]
+   ],
+   "tip_speed_peak": 7.95,
+   "cancel_after": 0.867,
+   "combo_window": [
+    0.7,
+    1.133
+   ],
+   "footsteps": [
+    0.533,
+    0.667
+   ],
+   "props": {
+    "R": "dagger",
+    "L": null
+   }
+  },
+  "dual_1": {
+   "length": 0.5,
+   "loop": false,
+   "hits": [
+    [
+     0.275,
+     0.308
+    ]
+   ],
+   "tip_speed_peak": 46.04,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.333,
+    0.7
+   ],
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "dual_2": {
+   "length": 0.5,
+   "loop": false,
+   "hits": [
+    [
+     0.275,
+     0.308
+    ]
+   ],
+   "tip_speed_peak": 45.83,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.333,
+    0.7
+   ],
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "dual_3": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 38.54,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.8
+   ],
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "dual_4": {
+   "length": 0.867,
+   "loop": false,
+   "hits": [
+    [
+     0.375,
+     0.442
+    ],
+    [
+     0.442,
+     0.608
+    ]
+   ],
+   "tip_speed_peak": 50.63,
+   "cancel_after": 0.733,
+   "combo_window": [
+    0.633,
+    0.967
+   ],
+   "footsteps": [
+    0.467,
+    0.6
+   ],
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "dual_heavy": {
+   "length": 1.133,
+   "loop": false,
+   "hits": [
+    [
+     0.642,
+     0.675
+    ]
+   ],
+   "tip_speed_peak": 56.01,
+   "cancel_after": 0.933,
+   "combo_window": [
+    0.733,
+    1.2
+   ],
+   "footsteps": [
+    0.6
+   ],
+   "props": {
+    "R": "sword",
+    "L": "sword"
+   }
+  },
+  "staff_1": {
+   "length": 0.533,
+   "loop": false,
+   "hits": [
+    [
+     0.175,
+     0.242
+    ]
+   ],
+   "tip_speed_peak": 10.73,
+   "release": 0.267,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.3,
+    0.733
+   ],
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "staff_2": {
+   "length": 0.567,
+   "loop": false,
+   "hits": [
+    [
+     0.308,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 37.47,
+   "release": 0.3,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.367,
+    0.767
+   ],
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "staff_3": {
+   "length": 0.6,
+   "loop": false,
+   "hits": [
+    [
+     0.342,
+     0.375
+    ]
+   ],
+   "tip_speed_peak": 25.44,
+   "release": 0.367,
+   "cancel_after": 0.533,
+   "combo_window": [
+    0.4,
+    0.8
+   ],
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "staff_4": {
+   "length": 0.867,
+   "loop": false,
+   "hits": [
+    [
+     0.442,
+     0.508
+    ]
+   ],
+   "tip_speed_peak": 16.44,
+   "release": 0.5,
+   "cancel_after": 0.7,
+   "combo_window": [
+    0.533,
+    0.967
+   ],
+   "footsteps": [
+    0.5
+   ],
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "staff_heavy": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.708,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 24.68,
+   "release": 0.8,
+   "cancel_after": 0.967,
+   "combo_window": [
+    0.867,
+    1.267
+   ],
+   "footsteps": [
+    0.8
+   ],
+   "props": {
+    "R": "staff",
+    "L": null
+   }
+  },
+  "wand_1": {
+   "length": 0.467,
+   "loop": false,
+   "hits": [
+    [
+     0.142,
+     0.208
+    ]
+   ],
+   "tip_speed_peak": 14.4,
+   "release": 0.233,
+   "cancel_after": 0.4,
+   "combo_window": [
+    0.267,
+    0.667
+   ],
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "wand_2": {
+   "length": 0.467,
+   "loop": false,
+   "hits": [
+    [
+     0.142,
+     0.208
+    ]
+   ],
+   "tip_speed_peak": 19.23,
+   "release": 0.233,
+   "cancel_after": 0.4,
+   "combo_window": [
+    0.267,
+    0.667
+   ],
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "wand_3": {
+   "length": 0.567,
+   "loop": false,
+   "hits": [
+    [
+     0.275,
+     0.342
+    ]
+   ],
+   "tip_speed_peak": 13.0,
+   "release": 0.367,
+   "cancel_after": 0.5,
+   "combo_window": [
+    0.4,
+    0.767
+   ],
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "wand_4": {
+   "length": 0.833,
+   "loop": false,
+   "hits": [
+    [
+     0.408,
+     0.475
+    ]
+   ],
+   "tip_speed_peak": 14.32,
+   "release": 0.5,
+   "cancel_after": 0.667,
+   "combo_window": [
+    0.533,
+    0.933
+   ],
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "wand_heavy": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.675,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 12.06,
+   "release": 0.8,
+   "cancel_after": 1.0,
+   "combo_window": [
+    0.867,
+    1.267
+   ],
+   "props": {
+    "R": "wand",
+    "L": null
+   }
+  },
+  "bow_1": {
+   "length": 0.533,
+   "loop": false,
+   "release": 0.35,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.367,
+    0.633
+   ],
+   "props": {
+    "R": null,
+    "L": "bow"
+   }
+  },
+  "bow_2": {
+   "length": 0.533,
+   "loop": false,
+   "release": 0.35,
+   "cancel_after": 0.433,
+   "combo_window": [
+    0.367,
+    0.633
+   ],
+   "props": {
+    "R": null,
+    "L": "bow"
+   }
+  },
+  "bow_draw_hold": {
+   "length": 1.333,
+   "loop": true,
+   "props": {
+    "R": null,
+    "L": "bow"
+   }
+  },
+  "bow_release": {
+   "length": 0.5,
+   "loop": false,
+   "release": 0.017,
+   "cancel_after": 0.267,
+   "props": {
+    "R": null,
+    "L": "bow"
+   }
+  },
+  "charge_hold": {
+   "length": 1.333,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "charge_release": {
+   "length": 0.867,
+   "loop": false,
+   "hits": [
+    [
+     0.208,
+     0.275
+    ]
+   ],
+   "tip_speed_peak": 52.97,
+   "cancel_after": 0.6,
+   "footsteps": [
+    0.2
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "special_attack": {
+   "length": 1.267,
+   "loop": false,
+   "hits": [
+    [
+     0.242,
+     0.275
+    ],
+    [
+     0.575,
+     0.808
+    ]
+   ],
+   "tip_speed_peak": 62.39,
+   "cancel_after": 1.033,
+   "footsteps": [
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "block_loop": {
+   "length": 1.333,
+   "loop": true,
+   "props": {
+    "R": "sword",
+    "L": "shield"
+   }
+  },
+  "block_impact": {
+   "length": 0.467,
+   "loop": false,
+   "props": {
+    "R": "sword",
+    "L": "shield"
+   }
+  },
+  "parry": {
+   "length": 0.533,
+   "loop": false,
+   "hits": [
+    [
+     0.108,
+     0.175
+    ]
+   ],
+   "tip_speed_peak": 8.55,
+   "cancel_after": 0.333,
+   "parry_window": [
+    0.067,
+    0.267
+   ],
+   "props": {
+    "R": "sword",
+    "L": "shield"
+   }
+  },
+  "shield_bash": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.208,
+     0.275
+    ]
+   ],
+   "tip_speed_peak": 8.95,
+   "cancel_after": 0.533,
+   "footsteps": [
+    0.3
+   ],
+   "props": {
+    "R": "sword",
+    "L": "shield"
+   }
+  },
+  "cast_quick": {
+   "length": 0.5,
+   "loop": false,
+   "release": 0.233,
+   "cancel_after": 0.333
+  },
+  "cast_heavy": {
+   "length": 0.933,
+   "loop": false,
+   "release": 0.567,
+   "cancel_after": 0.733
+  },
+  "cast_channel": {
+   "length": 1.0,
+   "loop": true
+  },
+  "cast_area": {
+   "length": 1.0,
+   "loop": false,
+   "release": 0.5,
+   "cancel_after": 0.733
+  },
+  "cast_weapon": {
+   "length": 0.8,
+   "loop": false,
+   "release": 0.333,
+   "cancel_after": 0.533,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "cast_ultimate": {
+   "length": 1.333,
+   "loop": false,
+   "release": 0.9,
+   "cancel_after": 1.133
+  },
+  "whirlwind": {
+   "length": 0.667,
+   "loop": true,
+   "hits": [
+    [
+     0.0,
+     0.342
+    ],
+    [
+     0.308,
+     0.675
+    ]
+   ],
+   "tip_speed_peak": 11.85,
+   "turn_per_loop": 360,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "leap_slam": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.608,
+     0.675
+    ]
+   ],
+   "tip_speed_peak": 52.74,
+   "cancel_after": 0.967,
+   "airborne": [
+    0.333,
+    0.7
+   ],
+   "footsteps": [
+    0.7
+   ],
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "war_cry": {
+   "length": 1.133,
+   "loop": false,
+   "release": 0.433,
+   "cancel_after": 0.867,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "blink": {
+   "length": 0.5,
+   "loop": false,
+   "release": 0.2,
+   "cancel_after": 0.333,
+   "iframes": [
+    0.1,
+    0.3
+   ]
+  },
+  "hit_light": {
+   "length": 0.4,
+   "loop": false
+  },
+  "hit_heavy": {
+   "length": 0.6,
+   "loop": false
+  },
+  "hit_front": {
+   "length": 0.467,
+   "loop": false
+  },
+  "hit_back": {
+   "length": 0.467,
+   "loop": false
+  },
+  "hit_left": {
+   "length": 0.467,
+   "loop": false
+  },
+  "hit_right": {
+   "length": 0.467,
+   "loop": false
+  },
+  "stagger_small": {
+   "length": 0.667,
+   "loop": false,
+   "footsteps": [
+    0.267
+   ]
+  },
+  "stagger_heavy": {
+   "length": 1.067,
+   "loop": false,
+   "footsteps": [
+    0.3,
+    0.5
+   ]
+  },
+  "knockback": {
+   "length": 1.2,
+   "loop": false,
+   "travel": 3.0
+  },
+  "launch": {
+   "length": 0.8,
+   "loop": true
+  },
+  "wall_impact": {
+   "length": 1.067,
+   "loop": false
+  },
+  "knockdown": {
+   "length": 0.8,
+   "loop": false
+  },
+  "getup": {
+   "length": 0.933,
+   "loop": false,
+   "footsteps": [
+    0.433,
+    0.733
+   ]
+  },
+  "death": {
+   "length": 1.533,
+   "loop": false
+  },
+  "revive": {
+   "length": 1.533,
+   "loop": false
+  },
+  "interact_pickup": {
+   "length": 1.0,
+   "loop": false,
+   "release": 0.467
+  },
+  "interact_chest": {
+   "length": 1.2,
+   "loop": false,
+   "release": 0.667
+  },
+  "interact_talk": {
+   "length": 3.0,
+   "loop": true
+  },
+  "interact_teleport": {
+   "length": 1.2,
+   "loop": false,
+   "release": 0.6
+  },
+  "alert": {
+   "length": 0.6,
+   "loop": false,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "taunt": {
+   "length": 1.533,
+   "loop": false,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "boss_slam": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.708,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 54.4,
+   "release": 0.8,
+   "cancel_after": 1.133,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "boss_sweep": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.708,
+     0.775
+    ]
+   ],
+   "tip_speed_peak": 43.46,
+   "cancel_after": 1.0,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "boss_roar": {
+   "length": 1.533,
+   "loop": false,
+   "release": 0.5,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "boss_charge": {
+   "length": 0.667,
+   "loop": true,
+   "footsteps": [
+    0.0,
+    0.333
+   ],
+   "ground_speed": 6.001,
+   "foot_slide_max": 0.0056,
+   "direction_deg": 0.0,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  },
+  "boss_summon": {
+   "length": 1.533,
+   "loop": false,
+   "release": 0.967,
+   "props": {
+    "R": "sword",
+    "L": null
+   }
+  }
+ }
+}

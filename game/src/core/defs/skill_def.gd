@@ -13,7 +13,7 @@ extends Resource
 @export var kind := DamageRequest.Kind.SPELL   # ATTACK uses weapon damage (weapon_pct), SPELL uses base damage
 @export var element := Elements.PHYSICAL
 @export var conversion := {}                 # element -> share (overrides element)
-@export var anim: StringName = &"cast_short"
+@export var anim: StringName = &"cast_quick"
 @export var anim_speed_stat: StringName = &"cast_speed"  # attack_speed for weapon skills
 @export var max_rank := 5
 @export var mana_cost := 10.0

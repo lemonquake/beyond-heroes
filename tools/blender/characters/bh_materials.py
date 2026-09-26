@@ -16,6 +16,7 @@ BASE = {
     "BH_WeakPoint": ((1.0, 0.45, 0.1), 0.0, 0.3, (1.0, 0.42, 0.08), 12.0, 1.0),
     "BH_Wood": ((0.12, 0.07, 0.038), 0.0, 0.7, None, 0.0, 1.0),
     "BH_Hair": ((0.06, 0.045, 0.035), 0.0, 0.6, None, 0.0, 1.0),
+    "BH_Aether": ((0.55, 0.95, 1.0), 0.0, 0.25, (0.45, 0.92, 1.0), 9.0, 1.0),
 }
 
 # Per-character palette overrides (same names; different base colors)
@@ -43,7 +44,7 @@ OVERRIDES = {
 }
 
 
-def make_materials(char="knight"):
+def make_materials(char="knight", vertex_color=True):
     import bpy
     spec = dict(BASE)
     spec.update(OVERRIDES.get(char, {}))
@@ -59,8 +60,65 @@ def make_materials(char="knight"):
         if erg:
             bsdf.inputs["Emission Color"].default_value = (*erg, 1.0)
             bsdf.inputs["Emission Strength"].default_value = estr
+        if vertex_color and not erg:
+            # multiply the baked AO/wear vertex colors into the base color (same as the game does)
+            vc = nt.nodes.new("ShaderNodeVertexColor")
+            vc.layer_name = "Col"
+            mix = nt.nodes.new("ShaderNodeMix")
+            mix.data_type = "RGBA"
+            mix.blend_type = "MULTIPLY"
+            mix.inputs["Factor"].default_value = 1.0
+            mix.inputs[6].default_value = (*rgb, 1.0)
+            nt.links.new(vc.outputs["Color"], mix.inputs[7])
+            nt.links.new(mix.outputs[2], bsdf.inputs["Base Color"])
         m.diffuse_color = (*rgb, 1.0)
         m.metallic = met
         m.roughness = rough
         out[name] = m
     return out
+
+
+def bake_vertex_ao(ob, rays=24, dist=0.35, strength=0.75, seed=7):
+    """Bake ambient occlusion (hemisphere ray casts against the mesh itself, rest pose) plus a subtle
+    height gradient into the byte color attribute 'Col' (exported as glTF COLOR_0)."""
+    import numpy as np
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+    me = ob.data
+    bvh = BVHTree.FromPolygons([v.co[:] for v in me.vertices], [p.vertices[:] for p in me.polygons], epsilon=0.0)
+    n = len(me.vertices)
+    co = np.empty(n * 3)
+    me.vertices.foreach_get("co", co)
+    co = co.reshape(-1, 3)
+    nor = np.empty(n * 3)
+    me.vertices.foreach_get("normal", nor)
+    nor = nor.reshape(-1, 3)
+    rng = np.random.default_rng(seed)
+    dirs = rng.normal(size=(rays, 3))
+    dirs /= np.linalg.norm(dirs, axis=1, keepdims=True)
+    ao = np.ones(n)
+    for i in range(n):
+        nv = nor[i]
+        o = Vector(co[i] + nv * 0.002)
+        occ = 0.0
+        tot = 0.0
+        for d in dirs:
+            c = float(np.dot(d, nv))
+            if c < 0:
+                d = -d
+                c = -c
+            hit = bvh.ray_cast(o, Vector(d), dist)
+            w = c
+            tot += w
+            if hit[0] is not None:
+                occ += w * (1.0 - hit[3] / dist) ** 0.5
+        ao[i] = 1.0 - strength * occ / max(tot, 1e-6)
+    zmax = max(co[:, 2].max(), 1e-3)
+    grad = 0.82 + 0.18 * np.clip(co[:, 2] / zmax, 0, 1) ** 0.6
+    val = np.clip(ao * grad, 0.25, 1.0)
+    attr = me.color_attributes.get("Col") or me.color_attributes.new("Col", "BYTE_COLOR", "POINT")
+    cols = np.ones((n, 4))
+    cols[:, 0] = cols[:, 1] = cols[:, 2] = val
+    attr.data.foreach_set("color", cols.ravel())
+    me.color_attributes.active_color = attr
+    return attr

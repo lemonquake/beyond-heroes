@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="46"><stop offset="0" stop-color="#000000" stop-opacity="0.55"/><stop offset="0.6" stop-color="#000000" stop-opacity="0.25"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="20" y1="32" x2="112" y2="102"><stop offset="0" stop-color="#fff8e2"/><stop offset="0.6" stop-color="#e8d6ae"/><stop offset="1" stop-color="#8a7050"/></linearGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="62" cy="68" r="16"><stop offset="0" stop-color="#e0404a"/><stop offset="1" stop-color="#5a0a10"/></radialGradient></defs>
+<g transform="translate(64 108) scale(1 0.13)">
+<circle cx="0" cy="0" r="46" fill="url(#r1)"/>
+</g>
+<path d="M20,40 L108,32 L112,94 L24,102 Z" fill="none" stroke="#0a0610" stroke-width="5.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M20,40 L108,32 L112,94 L24,102 Z" fill="url(#l2)"/>
+<path d="M20,40 L66,74 L108,32" fill="none" stroke="#8a7050" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M24,102 L62,72" fill="none" stroke="#8a7050" stroke-width="1.4" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M112,94 L72,70" fill="none" stroke="#8a7050" stroke-width="1.4" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M20,64 L112,58" fill="none" stroke="#0a0610" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M20,64 L112,58" fill="none" stroke="#8a1e2a" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M79,72 C79,73.11 79.78,76.63 79.4,77.55 C79.02,78.47 75.98,80.41 75.19,81.19 C74.41,81.98 72.47,85.02 71.55,85.4 C70.63,85.78 67.11,85 66,85 C64.89,85 61.37,85.78 60.45,85.4 C59.53,85.02 57.59,81.98 56.81,81.19 C56.02,80.41 52.98,78.47 52.6,77.55 C52.22,76.63 53,73.11 53,72 C53,70.89 52.22,67.37 52.6,66.45 C52.98,65.53 56.02,63.59 56.81,62.81 C57.59,62.02 59.53,58.98 60.45,58.6 C61.37,58.22 64.89,59 66,59 C67.11,59 70.63,58.22 71.55,58.6 C72.47,58.98 74.41,62.02 75.19,62.81 C75.98,63.59 79.02,65.53 79.4,66.45 C79.78,67.37 79,70.89 79,72 Z" fill="url(#r3)" stroke="#0a0610" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="66" cy="72" r="8" fill="none" stroke="#3a0408" stroke-width="1.2"/>
+<path d="M66,66.5 L67.41,70.06 L71.23,70.3 L68.28,72.74 L69.23,76.45 L66,74.4 L62.77,76.45 L63.72,72.74 L60.77,70.3 L64.59,70.06 Z" fill="#ff8a8a" opacity="0.9"/>
+<path d="M58,108 L60,116 M70,108 L74,116" fill="none" stroke="#8a1e2a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

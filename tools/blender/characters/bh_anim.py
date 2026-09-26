@@ -19,9 +19,12 @@ Channel semantics (L side; R side uses the same numbers and is mirrored automati
   armik.S                 0..1 weight: hand grips the OTHER hand's weapon at armik.S.grip meters along the
                           weapon axis (negative = toward pommel), armik.S.rot = rotation around the grip
   hik.S                   0..1 weight: hand IK driven by a weapon-grip target in chest space:
-                          hik.S.x (outward), hik.S.fwd, hik.S.z = grip position in standard rest coordinates,
+                          grip position (standard rest coordinates, polar around the body axis):
+                          hik.S.r = horizontal distance, hik.S.az = azimuth (0 = straight ahead, + = toward own side,
+                          - = across the body), hik.S.z = height; hik.S.x / hik.S.fwd = extra cartesian offsets.
                           hik.S.yaw/pitch = blade direction (yaw + = toward own side, pitch + = up),
-                          hik.S.roll = rotation of the edge/knuckle side about the blade, hik.S.pole = elbow swivel
+                          hik.S.roll = knuckle/true-edge direction about the blade: 0 = up (blade level),
+                          +90 = toward the body midline, -90 = outward, 180 = down. hik.S.pole = elbow swivel
   legik.S                 0..1 weight of foot IK (1 = planted/targeted foot, 0 = FK thigh/shin/foot angles)
   foot.S.out/fwd/up       IK ankle target: lateral outward, forward, height above rest ankle height (m)
   foot.S.yaw              toes outward (deg); foot.S.heel = heel lift about the ball; foot.S.toe = toe lift
@@ -54,7 +57,8 @@ for _s in SIDES:
         f"hand.{_s}.flex": 6.0, f"hand.{_s}.dev": 0.0,
         f"wpn.{_s}.x": 0.0, f"wpn.{_s}.y": 0.0, f"wpn.{_s}.z": 0.0,
         f"armik.{_s}": 0.0, f"armik.{_s}.grip": -0.13, f"armik.{_s}.rot": 0.0, f"armik.{_s}.pole": 0.0,
-        f"hik.{_s}": 0.0, f"hik.{_s}.x": 0.25, f"hik.{_s}.fwd": 0.35, f"hik.{_s}.z": 1.15,
+        f"hik.{_s}": 0.0, f"hik.{_s}.x": 0.0, f"hik.{_s}.fwd": 0.0, f"hik.{_s}.z": 1.15,
+        f"hik.{_s}.r": 0.43, f"hik.{_s}.az": 35.0, f"hik.{_s}.rollfree": 0.0, f"hik.{_s}.rollauto": 1.0,
         f"hik.{_s}.yaw": 0.0, f"hik.{_s}.pitch": 0.0, f"hik.{_s}.roll": 0.0, f"hik.{_s}.pole": 0.0,
         f"legik.{_s}": 1.0,
         f"foot.{_s}.out": 0.115, f"foot.{_s}.fwd": 0.0, f"foot.{_s}.up": 0.0, f"foot.{_s}.yaw": 7.0,
@@ -97,6 +101,7 @@ class Rig:
 
     def __init__(self, props):
         self.p = props
+        self.warm = None            # dict side -> (swivel, roll) while evaluating an animation sequentially
         self.J = joints(props)
         self.R0 = rest_frames(self.J)
         self.h = {b: self.J[b][0] for b in BONE_ORDER}
@@ -142,6 +147,7 @@ class Rig:
         """c: full channel dict. Returns (Q dict bone->3x3 in armature axes, hips translation, D dict)."""
         h = self.h
         k = self.k
+        self.dbg = {}
         Q = {b: np.eye(3) for b in BONE_ORDER}
         D = {}
         D["root"] = Xf()
@@ -176,19 +182,31 @@ class Rig:
         if w <= 1e-4:
             Q.update(fk)
         else:
+            Y = np.array([0, 1.0, 0])
             if wh >= wa:
-                Pt, Wt = self.hand_target(c, s, D)
+                Pt, _ = self.hand_target(c, s, D)
+                r_auth = c[f"hik.{s}.roll"]
+                span = 90.0 * min(max(c[f"hik.{s}.rollfree"], 0.0), 1.0)
+                pole = c[f"hik.{s}.pole"]
+
+                def Wfn(r, c=c, s=s, D=D):
+                    return self.hand_target(c, s, D, roll=r)[1]
             else:
                 o = OTHER[s]
                 wo = f"weapon.{o}"
                 Wf = D[wo].R @ self.R0[wo]
                 Pw = D[wo].apply(h[wo])
                 Pt = Pw + Wf @ np.array([0, c[f"armik.{s}.grip"] * self.arm_ratio, 0])
-                Wt = Wf @ R_axis(np.array([0, 1.0, 0]), c[f"armik.{s}.rot"])
-                if s == "R" and o == "L":
-                    pass
-            pole_ang = c[f"hik.{s}.pole"] if wh >= wa else c[f"armik.{s}.pole"]
-            self._arm_ik(s, Q, D, Pt, Wt, pole_ang)
+                r_auth = c[f"armik.{s}.rot"]
+                span = 80.0
+                pole = c[f"armik.{s}.pole"]
+
+                # other hand's socket X is mirrored (knuckle convention): 180 deg about the grip axis
+                def Wfn(r, Wf=Wf):
+                    return Wf @ R_axis(Y, 180.0 + r)
+            phi, r = self._solve_arm(s, D, Pt, Wfn, pole, r_auth, span)
+            self._arm_ik(s, Q, D, Pt, Wfn(r), phi)
+            self.dbg[f"arm.{s}"] = (Pt, w, "grip" if wa > wh else "hik")
             if w < 0.9999:
                 for b in (up, fo, ha):
                     Q[b] = slerp_mat(fk[b], Q[b], w)
@@ -196,51 +214,158 @@ class Rig:
         Q[wp] = self.q_wpn(c, s)
         D[wp] = D[ha] @ Xf.rot_about(Q[wp], h[wp])
 
-    def hand_target(self, c, s, D):
-        """Desired weapon-socket world position and frame from hik.* channels (chest space)."""
+    def hand_target(self, c, s, D, roll=None):
+        """Desired weapon-socket world position and frame from hik.* channels (chest space).
+
+        The knuckle roll is relative to a natural grip: knuckles along the shoulder->hand line (perpendicular to
+        the blade), which is where a relaxed wrist puts them. hik.S.roll is an offset from that (deg).
+        Targets beyond comfortable reach are pulled in smoothly (the arm extends instead of snapping straight)."""
         sx = SX[s]
         yaw = math.radians(c[f"hik.{s}.yaw"])
         pit = math.radians(c[f"hik.{s}.pitch"])
         d = np.array([math.sin(yaw) * math.cos(pit), -math.cos(yaw) * math.cos(pit), math.sin(pit)])
         e0 = np.array([-math.sin(yaw) * math.sin(pit), math.cos(yaw) * math.sin(pit), math.cos(pit)])
-        e = R_axis(d, c[f"hik.{s}.roll"]) @ e0
+        az = math.radians(c[f"hik.{s}.az"])
+        r = c[f"hik.{s}.r"]
+        pL = np.array([r * math.sin(az) + c[f"hik.{s}.x"], -(r * math.cos(az) + c[f"hik.{s}.fwd"]), c[f"hik.{s}.z"]])
+        shL = self.sh_std["L"]
+        v = pL - shL
+        # smooth reach limit (standard-rig meters)
+        reach = (STD["upper_len"] + STD["fore_len"] + STD["grip_x"]) * 0.98
+        Lv = float(np.linalg.norm(v))
+        k0 = 0.8 * reach
+        if Lv > k0:
+            Ln = k0 + (reach - k0) * math.tanh((Lv - k0) / (reach - k0))
+            v = v * (Ln / Lv)
+            pL = shL + v
+        vp = v - d * np.dot(v, d)
+        auto = c.get(f"hik.{s}.rollauto", 1.0)
+        base = 0.0
+        if auto > 0 and np.linalg.norm(vp) > 1e-4:
+            vp = vp / np.linalg.norm(vp)
+            base = math.degrees(math.atan2(float(np.dot(np.cross(e0, vp), d)), float(np.dot(e0, vp)))) * auto
+        e = R_axis(d, base + (c[f"hik.{s}.roll"] if roll is None else roll)) @ e0
         if s == "R":
             d = MIRROR_V * d
             e = MIRROR_V * e
-            # R side: knuckle (edge) direction = +e, blade = d
-        X = normalize(e)
+            pL = MIRROR_V * pL
+        # e = knuckle / true-edge direction. Socket X = +knuckles on the right hand, -knuckles on the left.
         Y = normalize(d)
+        X = normalize(e - Y * np.dot(e, Y)) * (1.0 if s == "R" else -1.0)
         Z = np.cross(X, Y)
         W = np.stack([X, Y, Z], axis=1)
-        p = np.array([sx * c[f"hik.{s}.x"], -c[f"hik.{s}.fwd"], c[f"hik.{s}.z"]])
         sh_std = self.sh_std[s]
-        p_char = self.h[f"upper_arm.{s}"] + (p - sh_std) * self.arm_ratio
+        p_char = self.h[f"upper_arm.{s}"] + (pL - sh_std) * self.arm_ratio
         return D["chest"].apply(p_char), D["chest"].R @ W
 
-    def _arm_ik(self, s, Q, D, Pt, Wt, pole_ang):
+    # ---- arm IK --------------------------------------------------------------------------------------
+    def _arm_geom(self, s, D, Pt, Rh, phi):
         h = self.h
-        cl, up, fo, ha, wp = (f"shoulder.{s}", f"upper_arm.{s}", f"forearm.{s}", f"hand.{s}", f"weapon.{s}")
-        Rh = Wt @ self.R0[wp].T                     # desired D_hand rotation
-        th = Pt - Rh @ h[wp]
-        Dh = Xf(Rh, th)
-        wrist = Dh.apply(h[ha])
+        cl, up, fo, ha = (f"shoulder.{s}", f"upper_arm.{s}", f"forearm.{s}", f"hand.{s}")
         sx = SX[s]
-        pole_w = D["chest"].R @ normalize(np.array([sx * 0.55, 0.55, -1.0]))
-        pole_w = R_axis(wrist - D[cl].apply(h[up]), sx * pole_ang) @ pole_w
-        Tp = D[cl].inv().apply(wrist)
-        Pp = D[cl].R.T @ pole_w
+        th = Pt - Rh @ h[f"weapon.{s}"]
+        wrist = Rh @ h[ha] + th
+        shoulder = D[cl].apply(h[up])
+        pole0 = D["chest"].R @ normalize(np.array([sx * 0.55, 0.55, -1.0]))
+        pole_w = R_axis(wrist - shoulder, sx * phi) @ pole0
         bend_axis = np.array([0, 0, -1.0]) if s == "L" else np.array([0, 0, 1.0])
-        Qu, kappa = solve_two_bone(h[up], h[fo], h[ha], bend_axis, np.array([0, 1.0, 0]), Tp, Pp)
+        Qu, kappa = solve_two_bone(h[up], h[fo], h[ha], bend_axis, np.array([0, 1.0, 0]),
+                                   D[cl].inv().apply(wrist), D[cl].R.T @ pole_w)
         Rb = R_axis(bend_axis, kappa)
-        Q[up] = Qu
-        D[up] = D[cl] @ Xf.rot_about(Qu, h[up])
-        D[fo] = D[up] @ Xf.rot_about(Rb, h[fo])
-        Qh = D[fo].R.T @ Rh
-        a = np.array([sx, 0, 0])
+        Qh = (D[cl].R @ Qu @ Rb).T @ Rh
+        return Qu, Rb, Qh
+
+    @staticmethod
+    def _twist(Qh, a):
         q = mat_to_quat(Qh)
         tw = 2 * math.degrees(math.atan2(float(np.dot(q[1:], a)), q[0]))
-        tw = (tw + 180) % 360 - 180
-        Q[fo] = Rb @ R_axis(a, 0.75 * tw)
+        return (tw + 180) % 360 - 180
+
+    def _wrist_cost(self, s, Qh):
+        sx = SX[s]
+        a = np.array([sx, 0, 0])
+        d = Qh @ a
+        dx = max(float(d[0] * sx), 1e-4)
+        flex = math.degrees(math.atan2(-d[2], dx))
+        dev = math.degrees(math.atan2(-d[1], dx))
+        tw = self._twist(Qh, a)
+        c = (flex / (70.0 if flex > 0 else 55.0)) ** 2 + (dev / (22.0 if dev > 0 else 32.0)) ** 2
+        c += max(abs(0.75 * tw) - 75.0, 0.0) ** 2 / 400.0
+        return c
+
+    def _solve_arm(self, s, D, Pt, Wfn, pole, r_auth, span):
+        """Choose elbow swivel phi and grip roll r (within r_auth +- span) minimizing wrist strain.
+        Warm-started from the previous frame when an animation is evaluated sequentially (self.warm)."""
+        cache = {}
+        wcache = {}
+
+        def W(r):
+            k = round(r, 3)
+            if k not in wcache:
+                wcache[k] = Wfn(r) @ self.R0[f"weapon.{s}"].T
+            return wcache[k]
+
+        def f(phi, r):
+            key = (round(phi, 3), round(r, 3))
+            if key not in cache:
+                _, _, Qh = self._arm_geom(s, D, Pt, W(r), phi)
+                v = self._wrist_cost(s, Qh) + ((phi - pole) / 70.0) ** 2
+                if span > 0:
+                    v += ((r - r_auth) / 75.0) ** 2
+                cache[key] = v
+            return cache[key]
+
+        def line(g, x, step, lo=-1e9, hi=1e9):
+            fx = g(x)
+            for _ in range(5):
+                a, b = max(x - step, lo), min(x + step, hi)
+                fa, fb = g(a), g(b)
+                if fa < fx and fa <= fb:
+                    x, fx = a, fa
+                elif fb < fx:
+                    x, fx = b, fb
+                else:
+                    den = fa - 2 * fx + fb
+                    if den > 1e-12 and a < x < b:
+                        xm = x + 0.5 * step * (fa - fb) / den
+                        xm = min(max(xm, a), b)
+                        if g(xm) < fx:
+                            x = xm
+                    break
+            return x
+
+        rlo, rhi = r_auth - span, r_auth + span
+        warm = None if self.warm is None else self.warm.get(s)
+        if warm is None:
+            rs = [r_auth + span * (i / 2.0 - 1.0) for i in range(5)] if span > 0 else [r_auth]
+            best = min((f(p, r), p, r) for r in rs for p in [pole + d for d in range(-90, 91, 30)])
+            phi, r = best[1], best[2]
+            dphi, dr = 15.0, max(span / 4.0, 1.0)
+        else:
+            phi, r = warm
+            r = min(max(r, rlo), rhi)
+            dphi, dr = 8.0, 8.0
+        for _ in range(3):
+            phi = line(lambda p: f(p, r), phi, dphi)
+            if span > 0:
+                r = line(lambda x: f(phi, x), r, dr, rlo, rhi)
+            dphi *= 0.5
+            dr *= 0.5
+        if self.warm is not None:
+            self.warm[s] = (phi, r)
+        self.dbg[f"swivel.{s}"] = phi
+        self.dbg[f"roll.{s}"] = r
+        return phi, r
+
+    def _arm_ik(self, s, Q, D, Pt, Rw, phi):
+        h = self.h
+        cl, up, fo, ha, wp = (f"shoulder.{s}", f"upper_arm.{s}", f"forearm.{s}", f"hand.{s}", f"weapon.{s}")
+        Rh = Rw @ self.R0[wp].T
+        Qu, Rb, Qh = self._arm_geom(s, D, Pt, Rh, phi)
+        a = np.array([SX[s], 0, 0])
+        Q[up] = Qu
+        D[up] = D[cl] @ Xf.rot_about(Qu, h[up])
+        Q[fo] = Rb @ R_axis(a, 0.75 * self._twist(Qh, a))
         D[fo] = D[up] @ Xf.rot_about(Q[fo], h[fo])
         Q[ha] = D[fo].R.T @ Rh
 
@@ -269,6 +394,7 @@ class Rig:
             Wfoot = Ryaw @ Rx(heel - toe)
             pole_w = normalize(Ryaw @ Rz(sx * c[f"knee.{s}.out"]) @ np.array([0, -1.0, 0]) +
                                0.35 * (D["hips"].R @ np.array([0, -1.0, 0])))
+            self.dbg[f"leg.{s}"] = (A.copy(), w)
             Tp = D["hips"].inv().apply(A)
             Pp = D["hips"].R.T @ pole_w
             Qt, kappa = solve_two_bone(h[th], h[sh], h[ft], np.array([1.0, 0, 0]), np.array([0, -1.0, 0]), Tp, Pp)
@@ -288,14 +414,16 @@ class Rig:
 class Anim:
     """Keyed or procedural animation spec (frames at 30 fps)."""
 
-    def __init__(self, name, length, loop=False, fn=None, lag=None, **meta):
+    def __init__(self, name, length, loop=False, fn=None, lag=None, layers=None, **meta):
         self.name = name
         self.length = int(length)
         self.loop = loop
         self.fn = fn
         self.keys = []
         self.lag = lag or {}
-        self.meta = meta          # hits=[(f0,f1)], cancel_after=f, footsteps=[f], release=f, ground_speed=...
+        self.layers = list(layers or [])   # callables (f, channels) -> None, applied after sampling (additive)
+        self.meta = meta          # frames: hits=[(f0,f1)], cancel_after, combo_window, footsteps, release, iframes
+        self.wind = None          # (vx, vy) m/s apparent wind for secondary motion (locomotion)
         self._cache = None
 
     def key(self, f, pose, ease="smooth"):
@@ -337,23 +465,54 @@ class Anim:
 
     def channels(self, f):
         if self.fn is not None:
-            full = dict(DEFAULTS)
-            full.update(self.fn(f))
-            return full
-        if self._cache is None:
-            self._prep()
-        times, cache = self._cache
-        out = {}
-        for ch in CHANNELS:
-            vals, eases, tang = cache[ch]
-            t = f - self.lag_of(ch)
-            if self.loop:
-                t = t % self.length
-            out[ch] = sample_channel(times, vals, eases, t, self.loop, tang)
+            out = dict(DEFAULTS)
+            out.update(self.fn(f))
+        else:
+            if self._cache is None:
+                self._prep()
+            times, cache = self._cache
+            out = {}
+            for ch in CHANNELS:
+                vals, eases, tang = cache[ch]
+                t = f - self.lag_of(ch)
+                if self.loop:
+                    t = t % self.length
+                out[ch] = sample_channel(times, vals, eases, t, self.loop, tang)
+        for layer in self.layers:
+            layer(f, out)
         return out
+
+    def add_layer(self, fn):
+        self.layers.append(fn)
+        return self
 
 
 # ----------------------------------------------------------------------------------------------
+_EVAL_CACHE = {}
+
+
+def eval_anim(anim, rig):
+    """Evaluate every frame (0..length) sequentially with warm-started IK. Loops are evaluated twice so the
+    warm state wraps around, and the last frame is the first frame (seamless). Cached per (anim, rig)."""
+    key = (anim.name, id(anim), tuple(sorted(rig.p.items())))
+    if key in _EVAL_CACHE:
+        return _EVAL_CACHE[key]
+    n = anim.length + 1
+    rig.warm = {}
+    out = [None] * n
+    passes = 2 if anim.loop else 1
+    for p in range(passes):
+        for f in range(anim.length if anim.loop else n):
+            c = anim.channels(f)
+            Q, t, D = rig.evaluate(c)
+            out[f] = (c, Q, t, D, dict(rig.dbg))
+    if anim.loop:
+        out[anim.length] = out[0]
+    rig.warm = None
+    _EVAL_CACHE[key] = out
+    return out
+
+
 def bake_action(ob, rig, anim, extra=None):
     """Bake anim onto Blender armature object `ob` (pose bones in QUATERNION mode). Returns action.
     extra(anim, frames_data) -> list (per frame) of dict bone -> 3x3 rotation in armature axes for optional
@@ -370,11 +529,7 @@ def bake_action(ob, rig, anim, extra=None):
     bone_names = [b.name for b in ob.data.bones]
     quats = {b: np.zeros((n, 4)) for b in bone_names}
     locs = np.zeros((n, 3))
-    frames_data = []
-    for f in range(n):
-        c = anim.channels(f)
-        Q, t, D = rig.evaluate(c)
-        frames_data.append((c, Q, t, D))
+    frames_data = [fr[:4] for fr in eval_anim(anim, rig)]
     ex_all = extra(anim, frames_data) if extra else [{} for _ in range(n)]
     for f, (c, Q, t, D) in enumerate(frames_data):
         ex = ex_all[f]

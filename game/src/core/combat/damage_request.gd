@@ -33,3 +33,16 @@ var target_weight := 1.0
 var positional_mult := 1.0          # weak point / backstab multiplier (already decided by caller)
 var tags := {}                      # &"melee", &"projectile", &"aoe", &"spell_school_*"
 var label := ""                     # debug label (skill name)
+
+## Shallow copy with independent containers (one request per target for AoE / projectiles).
+func clone() -> DamageRequest:
+	var r := DamageRequest.new()
+	for p in ["kind", "attacker", "base_min", "base_max", "hand", "use_weapon", "weapon_mult", "skill_mult", "bonus_inc",
+			"can_crit", "force_crit", "crit_bonus", "evadable", "blockable", "guarding", "perfect_block", "knockback", "poise",
+			"status_power", "heavy", "target_weight", "positional_mult", "label"]:
+		r.set(p, get(p))
+	r.conversion = conversion.duplicate()
+	r.more = more.duplicate(true)
+	r.direct_status = direct_status.duplicate()
+	r.tags = tags.duplicate()
+	return r

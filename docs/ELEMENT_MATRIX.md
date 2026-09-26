@@ -35,22 +35,24 @@ Physical attacks and neutral (no-affinity) defenders always use 1.00.
 - **Fire** (builds `burning`): Burning: damage over time. Offensive pressure. Spreads with Wind.
 - **Ice** (builds `chilled`): Chill slows; Chill buildup becomes Freeze. Wet targets freeze twice as fast.
 - **Lightning** (builds `shocked`): Shock: target takes more damage. High burst, can chain. Wet targets are shocked harder.
-- **Earth** (builds `stagger`): Stagger and impact. Ignores 25% of armor. Heavy hits stagger more.
-- **Wind** (builds `windswept`): Knockback x1.5 and mobility. Fans Burning onto nearby foes.
+- **Earth** (builds `armor_broken`): Armor Break (-40% Defense) and heavy stagger. Crushes armored targets harder.
+- **Wind** (builds `windswept`): Windswept: knockback x1.5 and slowed. Fans Burning onto nearby foes.
 - **Water** (builds `wet`): Wet: conducts Lightning, speeds Freeze, extinguishes Burning.
-- **Light** (builds `purged`): Radiant. Purges enemy regeneration and buffs; heals the caster on hit.
-- **Dark** (builds `cursed`): Curse amplifies all damage taken; Dark hits drain life.
+- **Light** (builds `purged`): Radiant. Purges enemy regeneration and buffs; purifies Curses for a burst.
+- **Dark** (builds `cursed`): Curse amplifies all damage taken; Dark hits drain life and rend Purged targets.
 
 ## Interactions (StatusController)
 
-- **Wet + Lightning** — Lightning damage x1.25, Shock buildup x2, Shock strength 25% instead of 15%.
+- **Wet + Lightning** — Conduct: Lightning damage x1.25, Shock buildup x2, Shock strength 25% instead of 15%.
 - **Wet + Ice** — Freeze buildup x2.
-- **Burning + Water** — Water extinguishes Burning and leaves the target Wet.
+- **Burning + Water / Ice** — Extinguish: Burning ends; Water leaves the target Wet.
 - **Wet + Fire** — Fire damage x0.8 and the Wet status evaporates.
-- **Fire vs Chilled/Frozen** — Fire thaws: removes Chill and Freeze buildup.
+- **Fire + Chilled** — Fire thaws: removes Chill and its Freeze buildup.
+- **Fire + Frozen** — Melt: Fire damage x1.5 and the Freeze ends.
 - **Frozen + heavy physical / impact** — Shatter: physical damage x1.3, Freeze ends.
-- **Earth + strong physical impact** — Earth share adds up to +50% poise (stagger) damage.
-- **Wind + Burning** — Wind hits fan Burning onto enemies within 4 m.
-- **Light + Cursed** — Purify: light damage x1.3 and the Curse is consumed.
+- **Earth** — builds Armor Break (-40% Defense) and adds up to +50% poise (stagger) damage; heavy impacts on Armor Broken foes stagger harder.
+- **Wind** — builds Windswept (-30% knockback resistance, slowed); Wind hits fan Burning onto enemies within 4 m.
+- **Light + Cursed** — Purify: Light damage x1.3 and the Curse is consumed.
+- **Dark + Purged** — Umbral Rend: Dark damage x1.3 and the Purge is consumed (Light and Dark oppose each other).
 - **Freeze immunity** — after Freeze ends the target cannot be frozen for 4 s (no permanent freeze-lock).
 - **Stun immunity** — 3 s after a stun ends.

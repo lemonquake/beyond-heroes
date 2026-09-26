@@ -57,7 +57,7 @@ func _courtyard() -> void:
 		kit("gravestone_a" if i % 2 else "gravestone_b", Vector3(-12.0 + i * 1.6, 0, 16.0 + (i % 2) * 0.8), rng.randf_range(-12, 12))
 	scatter(["rubble_pile", "rock_medium"], r.grow(-2.5), 5, 5.0, Vector2(0.6, 0.9), func(x, z): return absf(x) < 5.0, true, true)
 	scatter(["bones_scatter"], r.grow(-3.0), 3, 4.0, Vector2(0.7, 1.0), func(x, z): return absf(x) < 3.0)
-	enemy_zone("courtyard", Vector3(0, 0, 14), 8.0, [&"ashen_cultist", &"hollow_soldier"], 6, 0.2)
+	enemy_zone("courtyard", Vector3(0, 0, 14), 8.0, [&"ashen_cultist", &"ashen_acolyte", &"hollow_soldier"], 6, 0.2)
 
 func _nave() -> void:
 	var r := NAVE
@@ -92,7 +92,7 @@ func _nave() -> void:
 		breakable("urn", p, 0.0, 10.0)
 	decor("cobweb", Vector3(r.position.x + 0.45, 3.9, r.position.y + 0.45), -90.0, 1.2, false)
 	enemy_zone("nave_south", Vector3(0, 0, 0), 6.0, [&"bonewarden", &"hollow_soldier", &"grave_archer"], 7, 0.15)
-	enemy_zone("nave_north", Vector3(0, 0, -16), 6.0, [&"ashen_cultist", &"grave_archer"], 5, 0.25)
+	enemy_zone("nave_north", Vector3(0, 0, -16), 6.0, [&"aether_wisp", &"ashen_cultist", &"grave_archer"], 5, 0.25)
 
 func _side_torch(x: float, z: float, facing_east: bool, y := 0.0) -> void:
 	torch(Vector3(x + (0.42 if facing_east else -0.42), y + 2.7, z), 90.0 if facing_east else -90.0)
@@ -125,7 +125,7 @@ func _chapels() -> void:
 	kit("chest", Vector3(20.6, 0, -9.4), -90.0)
 	decor("rubble_spill", Vector3(21.5, 0, -14.0), -90.0, 0.9, true, true)
 	torch(Vector3(18.5, 2.7, e.position.y + 0.42), 0.0)
-	enemy_zone("library", Vector3(e.get_center().x, 0, e.get_center().y), 4.0, [&"ashen_cultist", &"shade_stalker"], 3, 0.3)
+	enemy_zone("library", Vector3(e.get_center().x, 0, e.get_center().y), 4.0, [&"aether_wisp", &"shade_stalker"], 3, 0.3)
 
 func _sanctum() -> void:
 	var r := SANCTUM
@@ -191,7 +191,7 @@ func _sanctum() -> void:
 		kit("banner_torn", Vector3(r.end.x - 0.5, SY + 3.7, z), -90.0, 1.0, deco)
 	_side_torch(r.position.x, -34.0, true, SY)
 	_side_torch(r.end.x, -34.0, false, SY)
-	enemy_zone("sanctum", Vector3(0, SY, -32), 7.0, [&"ghoul_brute", &"ashen_cultist"], 5, 0.5)
+	enemy_zone("sanctum", Vector3(0, SY, -32), 7.0, [&"aether_sentinel", &"ghoul_brute", &"ashen_acolyte", &"ashen_cultist"], 5, 0.5)
 
 func _surroundings() -> void:
 	# the ledge falls away into cloud; mountains hang in the fog

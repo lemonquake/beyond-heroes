@@ -1,0 +1,2584 @@
+{
+ "_about": {
+  "margins": null,
+  "scale": null,
+  "use": "Beyond Heroes bh-002 UI art manifest. Raster textures are authored at 2x: 'margins' are 9-slice patch margins in TEXTURE pixels (left, top, right, bottom; null = not a 9-slice) and 'scale' is the intended draw scale at 1920x1080 (0.5 = draw at half texel size, i.e. margins on screen = margins*scale; at 3840x2160 with the canvas_items stretch the same logical size maps 1:1 to texels). 'stretch' tells which axes may be stretched (both | h | v). 'content_margins' (texture px) is the padding for content inside the frame; 'expand_margins' (texture px) is transparent glow padding outside the visual edge. Centres of panel textures are periodic noise, so AXIS_STRETCH_MODE_TILE/TILE_FIT or STRETCH both work. Cursors are 1:1 with 'hotspot' in px. Regenerate everything with: python tools/ui_art/build_bh002.py"
+ },
+ "frames/panel_main.png": {
+  "margins": [
+   112,
+   112,
+   112,
+   112
+  ],
+  "use": "Primary window frame (inventory, character, skills, talents, shop). Centre patch is periodic noise + faint rune lattice: AXIS_STRETCH tile, tile-fit or stretch all work.",
+  "scale": 0.5,
+  "content_margins": [
+   60,
+   60,
+   60,
+   60
+  ],
+  "stretch": "both",
+  "size": [
+   512,
+   512
+  ]
+ },
+ "frames/panel_inset.png": {
+  "margins": [
+   40,
+   40,
+   40,
+   40
+  ],
+  "use": "Recessed inner well for lists, stat blocks, item grids inside a panel_main. Centre periodic.",
+  "scale": 0.5,
+  "content_margins": [
+   22,
+   22,
+   22,
+   22
+  ],
+  "stretch": "both",
+  "size": [
+   256,
+   256
+  ]
+ },
+ "frames/panel_header.png": {
+  "margins": [
+   104,
+   44,
+   104,
+   44
+  ],
+  "use": "Title banner strip for window headers; stretch horizontally (STRETCH mode; the lacquer centre is not periodic). Put panel_header_crest.png centred on top for the crest.",
+  "scale": 0.5,
+  "content_margins": [
+   96,
+   30,
+   96,
+   30
+  ],
+  "stretch": "h",
+  "size": [
+   768,
+   128
+  ]
+ },
+ "frames/panel_header_crest.png": {
+  "margins": null,
+  "use": "Centre crest overlay for panel_header: draw centred horizontally over the header at the same scale (not 9-slice).",
+  "scale": 0.5,
+  "size": [
+   224,
+   144
+  ]
+ },
+ "frames/panel_tooltip.png": {
+  "margins": [
+   28,
+   28,
+   28,
+   28
+  ],
+  "use": "Thin gold-edged tooltip frame (body 94% opaque). Centre flat + faint noise.",
+  "scale": 0.5,
+  "content_margins": [
+   18,
+   16,
+   18,
+   16
+  ],
+  "stretch": "both",
+  "size": [
+   160,
+   160
+  ]
+ },
+ "frames/panel_dialogue.png": {
+  "margins": [
+   136,
+   72,
+   136,
+   48
+  ],
+  "use": "Wide NPC dialogue box with an ornate top edge; put panel_dialogue_crest.png centred on the top edge (speaker plate).",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   56,
+   72,
+   36
+  ],
+  "stretch": "both",
+  "size": [
+   1024,
+   320
+  ]
+ },
+ "frames/panel_dialogue_crest.png": {
+  "margins": null,
+  "use": "Speaker name-plate crest for the top edge of panel_dialogue (centre it on the top beam; not 9-slice).",
+  "scale": 0.5,
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/panel_glass.png": {
+  "margins": [
+   36,
+   36,
+   36,
+   36
+  ],
+  "use": "Translucent dark-glass HUD plate (skill bar backing, objective tracker). Body ~70% alpha; bevel highlight in the top margin only.",
+  "scale": 0.5,
+  "content_margins": [
+   18,
+   18,
+   18,
+   18
+  ],
+  "stretch": "both",
+  "size": [
+   192,
+   192
+  ]
+ },
+ "frames/button_normal.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Standard bronze button. State: normal. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/button_hover.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Standard bronze button. State: hover. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/button_pressed.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Standard bronze button. State: pressed. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/button_disabled.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Standard bronze button. State: disabled. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/button_focus.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Standard bronze button. State: focus. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   104
+  ]
+ },
+ "frames/button_primary_normal.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Primary/confirm button (Play, Confirm, Buy): gold trim, deep crimson lacquer. State: normal. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   112
+  ]
+ },
+ "frames/button_primary_hover.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Primary/confirm button (Play, Confirm, Buy): gold trim, deep crimson lacquer. State: hover. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   112
+  ]
+ },
+ "frames/button_primary_pressed.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Primary/confirm button (Play, Confirm, Buy): gold trim, deep crimson lacquer. State: pressed. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   112
+  ]
+ },
+ "frames/button_primary_disabled.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Primary/confirm button (Play, Confirm, Buy): gold trim, deep crimson lacquer. State: disabled. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   112
+  ]
+ },
+ "frames/button_primary_focus.png": {
+  "margins": [
+   44,
+   40,
+   44,
+   40
+  ],
+  "use": "Primary/confirm button (Play, Confirm, Buy): gold trim, deep crimson lacquer. State: focus. Transparent 12px pad around the art holds the focus glow.",
+  "scale": 0.5,
+  "content_margins": [
+   40,
+   26,
+   40,
+   26
+  ],
+  "expand_margins": [
+   12,
+   12,
+   12,
+   12
+  ],
+  "stretch": "both",
+  "size": [
+   384,
+   112
+  ]
+ },
+ "frames/button_menu_normal.png": {
+  "margins": [
+   72,
+   44,
+   72,
+   44
+  ],
+  "use": "Main-menu wide banner button. State: normal.",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   24,
+   72,
+   24
+  ],
+  "expand_margins": [
+   14,
+   14,
+   14,
+   14
+  ],
+  "stretch": "h",
+  "size": [
+   640,
+   120
+  ]
+ },
+ "frames/button_menu_hover.png": {
+  "margins": [
+   72,
+   44,
+   72,
+   44
+  ],
+  "use": "Main-menu wide banner button. State: hover (aether glow line).",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   24,
+   72,
+   24
+  ],
+  "expand_margins": [
+   14,
+   14,
+   14,
+   14
+  ],
+  "stretch": "h",
+  "size": [
+   640,
+   120
+  ]
+ },
+ "frames/button_menu_pressed.png": {
+  "margins": [
+   72,
+   44,
+   72,
+   44
+  ],
+  "use": "Main-menu wide banner button. State: pressed.",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   24,
+   72,
+   24
+  ],
+  "expand_margins": [
+   14,
+   14,
+   14,
+   14
+  ],
+  "stretch": "h",
+  "size": [
+   640,
+   120
+  ]
+ },
+ "frames/button_menu_disabled.png": {
+  "margins": [
+   72,
+   44,
+   72,
+   44
+  ],
+  "use": "Main-menu wide banner button. State: disabled.",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   24,
+   72,
+   24
+  ],
+  "expand_margins": [
+   14,
+   14,
+   14,
+   14
+  ],
+  "stretch": "h",
+  "size": [
+   640,
+   120
+  ]
+ },
+ "frames/button_menu_focus.png": {
+  "margins": [
+   72,
+   44,
+   72,
+   44
+  ],
+  "use": "Main-menu wide banner button. State: focus (aether glow line).",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   24,
+   72,
+   24
+  ],
+  "expand_margins": [
+   14,
+   14,
+   14,
+   14
+  ],
+  "stretch": "h",
+  "size": [
+   640,
+   120
+  ]
+ },
+ "frames/tab_normal.png": {
+  "margins": [
+   40,
+   40,
+   40,
+   20
+  ],
+  "use": "Unselected tab (sits behind the panel).",
+  "scale": 0.5,
+  "content_margins": [
+   32,
+   22,
+   32,
+   10
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   88
+  ]
+ },
+ "frames/tab_hover.png": {
+  "margins": [
+   40,
+   40,
+   40,
+   20
+  ],
+  "use": "Hovered tab.",
+  "scale": 0.5,
+  "content_margins": [
+   32,
+   22,
+   32,
+   10
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   88
+  ]
+ },
+ "frames/tab_selected.png": {
+  "margins": [
+   40,
+   40,
+   40,
+   20
+  ],
+  "use": "Selected tab: open bottom that joins the panel below (fades to #15100d, the panel_main body colour).",
+  "scale": 0.5,
+  "content_margins": [
+   32,
+   22,
+   32,
+   10
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   88
+  ]
+ },
+ "frames/checkbox_off.png": {
+  "margins": null,
+  "use": "Checkbox, unchecked (64x64 at 2x -> 32 px).",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "frames/checkbox_on.png": {
+  "margins": null,
+  "use": "Checkbox, checked: gold check with aether glow.",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "frames/slider_track.png": {
+  "margins": [
+   18,
+   14,
+   18,
+   14
+  ],
+  "use": "Horizontal slider groove (stretch horizontally).",
+  "scale": 0.5,
+  "content_margins": [
+   10,
+   8,
+   10,
+   8
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   36
+  ]
+ },
+ "frames/slider_fill.png": {
+  "margins": [
+   18,
+   14,
+   18,
+   14
+  ],
+  "use": "Slider filled portion (aether energy; draw inside slider_track with the same margins).",
+  "scale": 0.5,
+  "content_margins": [
+   10,
+   8,
+   10,
+   8
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   36
+  ]
+ },
+ "frames/slider_grabber.png": {
+  "margins": null,
+  "use": "Slider handle (48x56 at 2x).",
+  "scale": 0.5,
+  "size": [
+   48,
+   56
+  ]
+ },
+ "frames/slider_grabber_hover.png": {
+  "margins": null,
+  "use": "Slider handle, hovered/dragged.",
+  "scale": 0.5,
+  "size": [
+   48,
+   56
+  ]
+ },
+ "frames/scroll_track.png": {
+  "margins": [
+   8,
+   20,
+   8,
+   20
+  ],
+  "use": "Vertical scrollbar groove (stretch vertically).",
+  "scale": 0.5,
+  "content_margins": [
+   4,
+   8,
+   4,
+   8
+  ],
+  "stretch": "v",
+  "size": [
+   28,
+   256
+  ]
+ },
+ "frames/scroll_grabber.png": {
+  "margins": [
+   8,
+   26,
+   8,
+   26
+  ],
+  "use": "Vertical scrollbar thumb (stretch vertically).",
+  "scale": 0.5,
+  "content_margins": [
+   4,
+   8,
+   4,
+   8
+  ],
+  "stretch": "v",
+  "size": [
+   28,
+   128
+  ]
+ },
+ "frames/dropdown_arrow.png": {
+  "margins": null,
+  "use": "Gold chevron for OptionButton / dropdowns (32x32 at 2x).",
+  "scale": 0.5,
+  "size": [
+   32,
+   32
+  ]
+ },
+ "frames/lineedit.png": {
+  "margins": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "use": "Text field.",
+  "scale": 0.5,
+  "content_margins": [
+   16,
+   12,
+   16,
+   12
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   64
+  ]
+ },
+ "frames/lineedit_focus.png": {
+  "margins": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "use": "Text field with focus (aether rim).",
+  "scale": 0.5,
+  "content_margins": [
+   16,
+   12,
+   16,
+   12
+  ],
+  "stretch": "h",
+  "size": [
+   256,
+   64
+  ]
+ },
+ "frames/separator_h.png": {
+  "margins": [
+   112,
+   0,
+   112,
+   0
+  ],
+  "use": "Filigree horizontal divider: ornate ends, uniform gold rule in the middle (stretch horizontally only).",
+  "scale": 0.5,
+  "stretch": "h",
+  "size": [
+   512,
+   32
+  ]
+ },
+ "frames/close_x.png": {
+  "margins": null,
+  "use": "Window close button (64x64 at 2x).",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "frames/close_x_hover.png": {
+  "margins": null,
+  "use": "Window close button, hovered (red glow).",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "slots/slot.png": {
+  "margins": null,
+  "use": "Inventory cell (128x128 at 2x -> 64 px). Dark well ~92% opaque; draw the item icon above it.",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/slot_hover.png": {
+  "margins": null,
+  "use": "Inventory cell, hovered (warm inner light, gold corners).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/slot_selected.png": {
+  "margins": null,
+  "use": "Inventory cell, selected / picked up (gold rim + aether channel).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/slot_disabled.png": {
+  "margins": null,
+  "use": "Inventory cell, disabled (desaturated).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/slot_locked.png": {
+  "margins": null,
+  "use": "Inventory cell, locked (chains + padlock).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/equip_slot.png": {
+  "margins": null,
+  "use": "Equipment paper-doll slot (160x160 at 2x -> 80 px). Draw a glyph_* overlay in it when empty.",
+  "scale": 0.5,
+  "size": [
+   160,
+   160
+  ]
+ },
+ "slots/glyph_main_weapon.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'main_weapon' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_sub_weapon.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'sub_weapon' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_helm.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'helm' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_inner_garment.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'inner_garment' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_armor.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'armor' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_gloves.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'gloves' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_boots.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'boots' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/glyph_accessory.png": {
+  "margins": null,
+  "use": "Pale engraved silhouette for an empty 'accessory' equipment slot (128x128; centre it in equip_slot).",
+  "scale": 0.5,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_0.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 0 (Beginner, #8a7a66); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 0,
+  "tier_name": "Beginner",
+  "color": "#8a7a66",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_1.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 1 (Common, #d8dde4); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 1,
+  "tier_name": "Common",
+  "color": "#d8dde4",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_2.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 2 (Basic, #4ec25a); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 2,
+  "tier_name": "Basic",
+  "color": "#4ec25a",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_3.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 3 (Advanced, #3a86ff); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 3,
+  "tier_name": "Advanced",
+  "color": "#3a86ff",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_4.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 4 (Licensed, #22c4b0); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 4,
+  "tier_name": "Licensed",
+  "color": "#22c4b0",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_5.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 5 (Elite, #f5cc4a); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 5,
+  "tier_name": "Elite",
+  "color": "#f5cc4a",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_6.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 6 (Master, #f08a2a); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 6,
+  "tier_name": "Master",
+  "color": "#f08a2a",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_7.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 7 (Mythical, #d24af0); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 7,
+  "tier_name": "Mythical",
+  "color": "#d24af0",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_8.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 8 (Legendary, #ff4a1a); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 8,
+  "tier_name": "Legendary",
+  "color": "#ff4a1a",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_9.png": {
+  "margins": null,
+  "use": "Rarity overlay frame tier 9 (Aether, #7ff3ff); transparent centre, draw over slot*.png at the same size.",
+  "scale": 0.5,
+  "tier": 9,
+  "tier_name": "Aether",
+  "color": "#7ff3ff",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_glow_5.png": {
+  "margins": null,
+  "use": "Soft inner glow for tier 5 (Elite); additive/pulsing layer under rarity_5.",
+  "scale": 0.5,
+  "tier": 5,
+  "blend": "add or mix",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_glow_6.png": {
+  "margins": null,
+  "use": "Soft inner glow for tier 6 (Master); additive/pulsing layer under rarity_6.",
+  "scale": 0.5,
+  "tier": 6,
+  "blend": "add or mix",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_glow_7.png": {
+  "margins": null,
+  "use": "Soft inner glow for tier 7 (Mythical); additive/pulsing layer under rarity_7.",
+  "scale": 0.5,
+  "tier": 7,
+  "blend": "add or mix",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_glow_8.png": {
+  "margins": null,
+  "use": "Soft inner glow for tier 8 (Legendary); additive/pulsing layer under rarity_8.",
+  "scale": 0.5,
+  "tier": 8,
+  "blend": "add or mix",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/rarity_glow_9.png": {
+  "margins": null,
+  "use": "Soft inner glow for tier 9 (Aether); additive/pulsing layer under rarity_9.",
+  "scale": 0.5,
+  "tier": 9,
+  "blend": "add or mix",
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/skill_slot.png": {
+  "margins": null,
+  "use": "Hotbar skill bezel (128x128 at 2x). Transparent 96x96 window at (16,16) for the skill icon; draw the icon under the bezel.",
+  "scale": 0.5,
+  "icon_rect": [
+   16,
+   16,
+   96,
+   96
+  ],
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/skill_slot_empty.png": {
+  "margins": null,
+  "use": "Hotbar skill bezel with an engraved empty well.",
+  "scale": 0.5,
+  "icon_rect": [
+   16,
+   16,
+   96,
+   96
+  ],
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/cooldown_radial.png": {
+  "margins": null,
+  "use": "White mask for TextureProgressBar (FILL_CLOCKWISE / counter-clockwise); matches the skill_slot icon window (16,16,96,96). Tint e.g. #000000b0.",
+  "scale": 0.5,
+  "icon_rect": [
+   16,
+   16,
+   96,
+   96
+  ],
+  "size": [
+   128,
+   128
+  ]
+ },
+ "slots/keybind_badge.png": {
+  "margins": [
+   16,
+   14,
+   16,
+   14
+  ],
+  "use": "Small plaque for a key label under/over a hotbar slot (64x40 at 2x); 9-slice for wider labels.",
+  "scale": 0.5,
+  "content_margins": [
+   10,
+   6,
+   10,
+   6
+  ],
+  "stretch": "h",
+  "size": [
+   64,
+   40
+  ]
+ },
+ "hud/orb_frame_hp.png": {
+  "margins": null,
+  "use": "HP orb frame (320x320 at 2x). Transparent interior circle centre (160,160) r=112; draw liquid + orb_glass under/over it. Sun-and-lion crest.",
+  "scale": 0.5,
+  "orb_center": [
+   160,
+   160
+  ],
+  "orb_radius": 112,
+  "size": [
+   320,
+   320
+  ]
+ },
+ "hud/orb_frame_mana.png": {
+  "margins": null,
+  "use": "Mana orb frame (320x320 at 2x), blue/silver with a moon-and-star crest. Interior centre (160,160) r=112.",
+  "scale": 0.5,
+  "orb_center": [
+   160,
+   160
+  ],
+  "orb_radius": 112,
+  "size": [
+   320,
+   320
+  ]
+ },
+ "hud/orb_glass.png": {
+  "margins": null,
+  "use": "Glass overlay drawn above the orb liquid and below orb_frame_*: specular highlight, rim shade, bottom caustic. Same 320 canvas, circle (160,160) r=112.",
+  "scale": 0.5,
+  "orb_center": [
+   160,
+   160
+  ],
+  "orb_radius": 112,
+  "size": [
+   320,
+   320
+  ]
+ },
+ "hud/orb_liquid_noise.png": {
+  "margins": null,
+  "use": "Tileable 256x256 grayscale swirl noise for the orb liquid shader (sample with UV scroll/rotation). Not scaled.",
+  "scale": 1.0,
+  "tileable": true,
+  "size": [
+   256,
+   256
+  ]
+ },
+ "hud/bar_frame_resource.png": {
+  "margins": [
+   76,
+   0,
+   76,
+   0
+  ],
+  "use": "Class resource bar frame (rage/arcane): ornate gem ends; transparent window y 26..46 between x 32..480. Stretch horizontally; draw bar_fill under it.",
+  "scale": 0.5,
+  "window": [
+   32,
+   26,
+   480,
+   46
+  ],
+  "stretch": "h",
+  "size": [
+   512,
+   72
+  ]
+ },
+ "hud/bar_frame_xp.png": {
+  "margins": [
+   48,
+   0,
+   48,
+   0
+  ],
+  "use": "Long thin XP bar frame; transparent window y 9..19. 9-slice horizontally.",
+  "scale": 0.5,
+  "window": [
+   19,
+   9,
+   1005,
+   19
+  ],
+  "stretch": "h",
+  "size": [
+   1024,
+   28
+  ]
+ },
+ "hud/bar_frame_boss.png": {
+  "margins": [
+   180,
+   0,
+   180,
+   0
+  ],
+  "use": "Boss health bar frame with horned-skull end caps; transparent window y 54..82. Stretch horizontally.",
+  "scale": 0.5,
+  "window": [
+   71,
+   54,
+   953,
+   82
+  ],
+  "stretch": "h",
+  "size": [
+   1024,
+   136
+  ]
+ },
+ "hud/bar_frame_target.png": {
+  "margins": [
+   68,
+   0,
+   68,
+   0
+  ],
+  "use": "Small target/enemy frame bar; transparent window y 22..42.",
+  "scale": 0.5,
+  "window": [
+   28,
+   22,
+   484,
+   42
+  ],
+  "stretch": "h",
+  "size": [
+   512,
+   64
+  ]
+ },
+ "hud/bar_fill.png": {
+  "margins": [
+   4,
+   0,
+   4,
+   0
+  ],
+  "use": "White bar fill with a subtle vertical gradient + top gloss; tint (modulate) per resource. Stretch freely.",
+  "scale": 0.5,
+  "stretch": "h",
+  "size": [
+   256,
+   32
+  ]
+ },
+ "hud/pip_empty.png": {
+  "margins": null,
+  "use": "Arcane charge pip, empty socket (48x48 at 2x).",
+  "scale": 0.5,
+  "size": [
+   48,
+   48
+  ]
+ },
+ "hud/pip_full.png": {
+  "margins": null,
+  "use": "Arcane charge pip, charged (violet gem with glow).",
+  "scale": 0.5,
+  "size": [
+   48,
+   48
+  ]
+ },
+ "hud/minimap_frame.png": {
+  "margins": null,
+  "use": "Circular minimap frame (400x400 at 2x). Transparent interior centre (200,200) r=150; compass spikes, north gem at top.",
+  "scale": 0.5,
+  "map_center": [
+   200,
+   200
+  ],
+  "map_radius": 150,
+  "size": [
+   400,
+   400
+  ]
+ },
+ "hud/minimap_mask.png": {
+  "margins": null,
+  "use": "White disc mask for the minimap viewport (400x400, disc centre (200,200) r=153 so it tucks under the frame lip).",
+  "scale": 0.5,
+  "map_center": [
+   200,
+   200
+  ],
+  "map_radius": 153,
+  "size": [
+   400,
+   400
+  ]
+ },
+ "hud/buff_frame.png": {
+  "margins": null,
+  "use": "Buff icon border (64x64 at 2x -> 32 px), green-gold; transparent centre 48x48.",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "hud/debuff_frame.png": {
+  "margins": null,
+  "use": "Debuff icon border (64x64 at 2x), red with barbs.",
+  "scale": 0.5,
+  "size": [
+   64,
+   64
+  ]
+ },
+ "hud/vignette_lowhp.png": {
+  "margins": null,
+  "use": "Low-HP screen vignette (1920x1080, alpha only toward the edges). Stretch to the viewport; pulse its alpha.",
+  "scale": 1.0,
+  "size": [
+   1920,
+   1080
+  ]
+ },
+ "hud/vignette_dark.png": {
+  "margins": null,
+  "use": "Neutral dark screen vignette (1920x1080). Stretch to the viewport.",
+  "scale": 1.0,
+  "size": [
+   1920,
+   1080
+  ]
+ },
+ "hud/loot_beam.png": {
+  "margins": null,
+  "use": "Vertical soft beam (64x512, white; tint per rarity). Bottom = ground; use additive blend.",
+  "scale": 1.0,
+  "size": [
+   64,
+   512
+  ]
+ },
+ "hud/mote.png": {
+  "margins": null,
+  "use": "Soft round particle (32x32, white).",
+  "scale": 1.0,
+  "size": [
+   32,
+   32
+  ]
+ },
+ "hud/spark.png": {
+  "margins": null,
+  "use": "Four-point star spark (32x32, white).",
+  "scale": 1.0,
+  "size": [
+   32,
+   32
+  ]
+ },
+ "hud/ember.png": {
+  "margins": null,
+  "use": "Ember flake particle (32x32, orange-gold, hot core).",
+  "scale": 1.0,
+  "size": [
+   32,
+   32
+  ]
+ },
+ "hud/cursor_default.png": {
+  "margins": null,
+  "use": "Default pointer: gold arrow. 48x48, drawn 1:1 (Input.set_custom_image).",
+  "scale": 1.0,
+  "hotspot": [
+   3,
+   3
+  ],
+  "size": [
+   48,
+   48
+  ]
+ },
+ "hud/cursor_attack.png": {
+  "margins": null,
+  "use": "Attack cursor over enemies: sword. 48x48, drawn 1:1 (Input.set_custom_image).",
+  "scale": 1.0,
+  "hotspot": [
+   2,
+   2
+  ],
+  "size": [
+   48,
+   48
+  ]
+ },
+ "hud/cursor_interact.png": {
+  "margins": null,
+  "use": "Interact cursor (doors, chests, teleporters): arrow + aether cog. 48x48, drawn 1:1 (Input.set_custom_image).",
+  "scale": 1.0,
+  "hotspot": [
+   3,
+   3
+  ],
+  "size": [
+   48,
+   48
+  ]
+ },
+ "hud/cursor_talk.png": {
+  "margins": null,
+  "use": "Talk cursor over NPCs: arrow + speech bubble. 48x48, drawn 1:1 (Input.set_custom_image).",
+  "scale": 1.0,
+  "hotspot": [
+   3,
+   3
+  ],
+  "size": [
+   48,
+   48
+  ]
+ },
+ "tree/node_minor_locked.png": {
+  "margins": null,
+  "use": "Minor talent node, circle (96x96 at 2x -> 48 px). Transparent disc r=32 at the centre for the icon. State: locked.",
+  "scale": 0.5,
+  "icon_radius": 32,
+  "size": [
+   96,
+   96
+  ]
+ },
+ "tree/node_minor_available.png": {
+  "margins": null,
+  "use": "Minor talent node, circle (96x96 at 2x -> 48 px). Transparent disc r=32 at the centre for the icon. State: available.",
+  "scale": 0.5,
+  "icon_radius": 32,
+  "size": [
+   96,
+   96
+  ]
+ },
+ "tree/node_minor_allocated.png": {
+  "margins": null,
+  "use": "Minor talent node, circle (96x96 at 2x -> 48 px). Transparent disc r=32 at the centre for the icon. State: allocated.",
+  "scale": 0.5,
+  "icon_radius": 32,
+  "size": [
+   96,
+   96
+  ]
+ },
+ "tree/node_major_locked.png": {
+  "margins": null,
+  "use": "Major talent node, octagon (128x128 at 2x -> 64 px). Transparent octagon r=45. State: locked.",
+  "scale": 0.5,
+  "icon_radius": 45,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "tree/node_major_available.png": {
+  "margins": null,
+  "use": "Major talent node, octagon (128x128 at 2x -> 64 px). Transparent octagon r=45. State: available.",
+  "scale": 0.5,
+  "icon_radius": 45,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "tree/node_major_allocated.png": {
+  "margins": null,
+  "use": "Major talent node, octagon (128x128 at 2x -> 64 px). Transparent octagon r=45. State: allocated.",
+  "scale": 0.5,
+  "icon_radius": 45,
+  "size": [
+   128,
+   128
+  ]
+ },
+ "tree/node_keystone_locked.png": {
+  "margins": null,
+  "use": "Keystone node, sunburst + ring (192x192 at 2x -> 96 px). Transparent disc r=58. State: locked.",
+  "scale": 0.5,
+  "icon_radius": 58,
+  "size": [
+   192,
+   192
+  ]
+ },
+ "tree/node_keystone_available.png": {
+  "margins": null,
+  "use": "Keystone node, sunburst + ring (192x192 at 2x -> 96 px). Transparent disc r=58. State: available.",
+  "scale": 0.5,
+  "icon_radius": 58,
+  "size": [
+   192,
+   192
+  ]
+ },
+ "tree/node_keystone_allocated.png": {
+  "margins": null,
+  "use": "Keystone node, sunburst + ring (192x192 at 2x -> 96 px). Transparent disc r=58. State: allocated.",
+  "scale": 0.5,
+  "icon_radius": 58,
+  "size": [
+   192,
+   192
+  ]
+ },
+ "tree/node_skill_locked.png": {
+  "margins": null,
+  "use": "Skill node, square bezel (144x144 at 2x -> 72 px). Transparent window (20,20)-(124,124). State: locked.",
+  "scale": 0.5,
+  "icon_rect": [
+   20,
+   20,
+   104,
+   104
+  ],
+  "size": [
+   144,
+   144
+  ]
+ },
+ "tree/node_skill_available.png": {
+  "margins": null,
+  "use": "Skill node, square bezel (144x144 at 2x -> 72 px). Transparent window (20,20)-(124,124). State: available.",
+  "scale": 0.5,
+  "icon_rect": [
+   20,
+   20,
+   104,
+   104
+  ],
+  "size": [
+   144,
+   144
+  ]
+ },
+ "tree/node_skill_allocated.png": {
+  "margins": null,
+  "use": "Skill node, square bezel (144x144 at 2x -> 72 px). Transparent window (20,20)-(124,124). State: allocated.",
+  "scale": 0.5,
+  "icon_rect": [
+   20,
+   20,
+   104,
+   104
+  ],
+  "size": [
+   144,
+   144
+  ]
+ },
+ "tree/node_upgrade_locked.png": {
+  "margins": null,
+  "use": "Skill upgrade node, diamond (112x112 at 2x -> 56 px). Transparent diamond inset 18 px. State: locked.",
+  "scale": 0.5,
+  "icon_radius": 38,
+  "size": [
+   112,
+   112
+  ]
+ },
+ "tree/node_upgrade_available.png": {
+  "margins": null,
+  "use": "Skill upgrade node, diamond (112x112 at 2x -> 56 px). Transparent diamond inset 18 px. State: available.",
+  "scale": 0.5,
+  "icon_radius": 38,
+  "size": [
+   112,
+   112
+  ]
+ },
+ "tree/node_upgrade_allocated.png": {
+  "margins": null,
+  "use": "Skill upgrade node, diamond (112x112 at 2x -> 56 px). Transparent diamond inset 18 px. State: allocated.",
+  "scale": 0.5,
+  "icon_radius": 38,
+  "size": [
+   112,
+   112
+  ]
+ },
+ "tree/connector.png": {
+  "margins": null,
+  "use": "Tileable (x) link texture between tree nodes, grey-white: modulate grey when inactive, gold #f5cc75 / aether when active. 128x32 at 2x; repeat along the link (TextureRect tile or Line2D texture_mode TILE).",
+  "scale": 0.5,
+  "tileable": "x",
+  "size": [
+   128,
+   32
+  ]
+ },
+ "tree/tree_bg_knight.png": {
+  "margins": null,
+  "use": "Knight talent/skill tree backdrop (1600x900, opaque): ember haze, engraved sword + shield, rune ring, constellations. Stretch/cover.",
+  "scale": 1.0,
+  "size": [
+   1600,
+   900
+  ]
+ },
+ "tree/tree_bg_mage.png": {
+  "margins": null,
+  "use": "Mage talent/skill tree backdrop (1600x900, opaque): indigo nebula, orbital rings, rune ring, constellations. Stretch/cover.",
+  "scale": 1.0,
+  "size": [
+   1600,
+   900
+  ]
+ },
+ "menu/title_logo.png": {
+  "margins": null,
+  "use": "Main-menu 'BEYOND HEROES' wordmark (1600x420, drawn at 0.5 for 1080p -> 800x210). Own vector letterforms, gold chiselled metal, aether glow. Subtitle band y 300..410 left empty.",
+  "scale": 0.5,
+  "subtitle_rect": [
+   300,
+   300,
+   1000,
+   110
+  ],
+  "size": [
+   1600,
+   420
+  ]
+ },
+ "menu/menu_frame.png": {
+  "margins": [
+   0,
+   208,
+   0,
+   176
+  ],
+  "use": "Vertical ornate frame for the main-menu button column (512x1024 at 2x). Stretch vertically only (keep width): margins top 208 / bottom 176 hold the crest and base.",
+  "scale": 0.5,
+  "content_margins": [
+   72,
+   200,
+   72,
+   150
+  ],
+  "stretch": "v",
+  "size": [
+   512,
+   1024
+  ]
+ },
+ "menu/vignette_menu.png": {
+  "margins": null,
+  "use": "Main-menu vignette (1920x1080): darkens edges, faint warm floor light. Stretch to the viewport.",
+  "scale": 1.0,
+  "size": [
+   1920,
+   1080
+  ]
+ },
+ "menu/class_plinth_glow.png": {
+  "margins": null,
+  "use": "Additive elliptical aether glow under the hero on the class-select plinth (512x256, white-cyan).",
+  "scale": 1.0,
+  "size": [
+   512,
+   256
+  ]
+ },
+ "icons/items/sword_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/sword_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/greatsword_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/greatsword_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/axe_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/axe_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/spear_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/spear_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/dagger_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/dagger_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/bow_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/bow_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/staff_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/staff_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/wand_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/wand_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/shield_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/shield_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/helm_plate_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/helm_plate_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/helm_hood_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/helm_hood_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/armor_plate_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/armor_plate_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/armor_robe_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/armor_robe_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/inner_chain.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/inner_silk.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/gloves_plate_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/gloves_cloth_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/boots_plate_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/boots_cloth_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/ring_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/ring_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/amulet_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/amulet_3.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/charm_2.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/potion_health_large.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/potion_mana_large.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/elixir_rejuvenation.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/scroll_return.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/antidote.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_shard.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/frost_crystal.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/storm_essence.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/shadow_silk.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/beast_hide.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/quest_seal_key.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/quest_tablet.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/quest_crown_fragment.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/quest_letter.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_guardian_helm.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_guardian_armor.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_guardian_gloves.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_guardian_boots.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_guardian_shield.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_sage_hood.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_sage_robe.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_sage_gloves.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_sage_boots.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/set_sage_staff.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_sword.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_greatsword.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_staff.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_wand.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_ring.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/items/aether_amulet.svg": {
+  "margins": null,
+  "use": "Item icon (bh-002 tier/set/unique/consumable/material/quest), transparent background, 128 viewBox.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/poisoned.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/slowed.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/silenced.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/weakened.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/armor_broken.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/windswept.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/empowered.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/fortified.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/overcharged.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/resolute.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/status/badly_hurt.svg": {
+  "margins": null,
+  "use": "Status-effect badge (bh-002), 128 viewBox, same frame as bh-001 status icons.",
+  "scale": null,
+  "viewbox": "0 0 128 128",
+  "kind": "svg"
+ },
+ "icons/ui/gold.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/aether.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/level.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/xp.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/sort.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/filter.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/search.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/lock.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/favorite.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/junk.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/trash.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/split.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/compare.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/settings.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/save.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/load.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/map.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/teleport.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/quest.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/talk.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/shop.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/repair.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/buyback.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/back.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/close.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/plus.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/minus.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/check.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/warning.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/info.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/skull.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "icons/ui/crown.svg": {
+  "margins": null,
+  "use": "Interface glyph, 64 viewBox, near-white body + dark outline: modulate to tint; draw 24-64 px.",
+  "scale": null,
+  "viewbox": "0 0 64 64",
+  "kind": "svg"
+ },
+ "portraits/knight.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/mage.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/blacksmith.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/merchant.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/elder.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/mystic.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/captain.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ },
+ "portraits/stranger.svg": {
+  "margins": null,
+  "use": "Character portrait bust with vignette background and ornate frame, 256 viewBox (HUD, save slots, dialogue).",
+  "scale": null,
+  "viewbox": "0 0 256 256",
+  "kind": "svg"
+ }
+}

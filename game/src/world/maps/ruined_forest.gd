@@ -138,7 +138,7 @@ func _arrival() -> void:
 	light(old + Vector3(0, 1.2 + ground(old.x, old.z), 0), Color(0.6, 0.2, 1.0), 1.6, 7.0, false, true)
 	decor("bones_scatter", old + Vector3(3.5, 0, 2.0), 30.0)
 	decor("weapons_discarded", old + Vector3(-3.0, 0, 3.0), 110.0)
-	enemy_zone("old_waypoint", old, 6.0, [&"hollow_soldier"], 3, 0.0, true)
+	enemy_zone("old_waypoint", old, 6.0, [&"dire_wolf"], 3, 0.0, true)
 
 func _village() -> void:
 	var houses := [[Vector3(-38, 0, -4), 15.0], [Vector3(-22, 0, -6), -10.0], [Vector3(-40, 0, 20), 170.0], [Vector3(-20, 0, 19), 195.0]]
@@ -231,7 +231,7 @@ func _camp() -> void:
 	for p in [Vector3(-7.0, 0, -1.2), Vector3(7.2, 0, -2.8), Vector3(6.4, 0, -3.8)]:
 		breakable("crate" if rng.randf() < 0.5 else "barrel", CAMP + p, rng.randf() * 360.0, 20.0, true)
 	decor("bones_scatter", CAMP + Vector3(5.5, 0, 4.5), 60.0)
-	enemy_zone("camp", CAMP, 7.0, [&"ghoul_brute", &"hollow_soldier"], 5, 0.25, true)
+	enemy_zone("camp", CAMP, 7.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_cutthroat"], 6, 0.25, true)
 
 func _tower() -> void:
 	kit("ruin_tower", TOWER, 20.0, 1.0, geo, true)
@@ -284,7 +284,7 @@ func _grove_and_gate() -> void:
 	for i in 7:
 		var p := Vector3(g.x - 18.0 + rng.randf_range(-6, 6), 0, g.z + rng.randf_range(-10, 10))
 		cylinder_shard(p)
-	enemy_zone("grove", ob, 8.0, [&"shade_stalker", &"ashen_cultist"], 6, 0.4, true)
+	enemy_zone("grove", ob, 8.0, [&"shade_stalker", &"ashen_cultist", &"ghoul_brute", &"dire_wolf"], 6, 0.4, true)
 
 ## Violet corruption crystals erupting from the ground.
 func cylinder_shard(p: Vector3) -> MeshInstance3D:

@@ -95,12 +95,16 @@ func powers_for(category: StringName) -> Array:
 	out.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	return out
 
-## Animation timing metadata; falls back to sensible defaults if an animation is missing from the sidecar.
+## Animation timing metadata; falls back to AnimDefaults when an animation is missing from the sidecar.
 func anim(name: StringName) -> Dictionary:
 	var m: Dictionary = anim_meta.get(String(name), {})
 	if m.is_empty():
-		return {"length": 0.7, "loop": false, "hits": [[0.3, 0.4]], "cancel_after": 0.5, "release": 0.3}
+		if not _anim_default_cache.has(name):
+			_anim_default_cache[name] = AnimDefaults.meta(name)
+		return _anim_default_cache[name]
 	return m
+
+var _anim_default_cache := {}
 
 func make_item(base_id: StringName, rarity := BH.Rarity.COMMON, ilvl := 1, seed_value := 0) -> ItemInstance:
 	var b := item_base(base_id)

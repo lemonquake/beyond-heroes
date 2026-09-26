@@ -118,6 +118,27 @@ func play(name: StringName, volume_db := 0.0, pitch_var := 0.06, bus := "SFX") -
 	p.bus = bus
 	p.play()
 
+## UI / non-positional feedback sound.
+func play_ui(name: StringName, volume_db := 0.0) -> void:
+	play(name, volume_db, 0.02, "UI")
+
+var _loops := {}   # owner instance id -> AudioStreamPlayer3D
+
+## A looping positional sound owned by a node (whirlwind, channels). One loop per owner.
+func play_loop(name: StringName, owner: Node3D, volume_db := -4.0) -> void:
+	stop_loop(owner)
+	var p := make_loop(name, owner, volume_db)
+	if p:
+		_loops[owner.get_instance_id()] = p
+
+func stop_loop(owner: Node) -> void:
+	var id := owner.get_instance_id()
+	if _loops.has(id):
+		var p = _loops[id]
+		if is_instance_valid(p):
+			p.queue_free()
+		_loops.erase(id)
+
 func ui(name: StringName) -> void:
 	play(name, -4.0, 0.02, "UI")
 

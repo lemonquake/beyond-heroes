@@ -1,7 +1,7 @@
 """Generate every Beyond Heroes UI SVG into game/assets/ui/.
 
 Usage:  python tools/ui_art/build_all.py [category ...]
-Categories: skills talents items elements status attributes classes emblem
+Categories: skills talents items elements status attributes classes emblem items2 status2 ui portraits
 """
 from __future__ import annotations
 
@@ -23,6 +23,11 @@ CATS = {
     "attributes": ("icons/attributes", "icons_badges", "ATTRIBUTES"),
     "classes": ("icons/classes", "icons_crests", "CLASSES"),
     "emblem": ("emblem", "icons_crests", "EMBLEM"),
+    # bh-002 additions
+    "items2": ("icons/items", "icons_items2", "ITEMS2"),
+    "status2": ("icons/status", "icons_status2", "STATUS2"),
+    "ui": ("icons/ui", "icons_ui", "UI_ICONS"),
+    "portraits": ("portraits", "portraits", "PORTRAITS"),
 }
 
 

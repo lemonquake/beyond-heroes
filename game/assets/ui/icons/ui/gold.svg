@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<defs><linearGradient id="l1" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient><linearGradient id="l3" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient></defs>
+<path d="M9,40 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,40 L9,45 a13,5 0 0 0 26,0 L35,40" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M9,40 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,40 L9,45 a13,5 0 0 0 26,0 L35,40" fill="url(#l1)"/>
+<path d="M9,32 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,32 L9,37 a13,5 0 0 0 26,0 L35,32" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M9,32 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,32 L9,37 a13,5 0 0 0 26,0 L35,32" fill="url(#l2)"/>
+<path d="M9,24 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,24 L9,29 a13,5 0 0 0 26,0 L35,24" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M9,24 a13,5 0 1 0 26,0 a13,5 0 1 0 -26,0 Z M9,24 L9,29 a13,5 0 0 0 26,0 L35,24" fill="url(#l3)"/>
+<path d="M30,46 a14,6 0 1 0 28,0 a14,6 0 1 0 -28,0 Z M30,46 L30,52 a14,6 0 0 0 28,0 L58,46" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M30,46 a14,6 0 1 0 28,0 a14,6 0 1 0 -28,0 Z M30,46 L30,52 a14,6 0 0 0 28,0 L58,46" fill="url(#l4)"/>
+<path d="M38,46 L44,43 L50,46 L44,49 Z" fill="none" stroke="#0a0610" stroke-width="1.4" opacity="0.85" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

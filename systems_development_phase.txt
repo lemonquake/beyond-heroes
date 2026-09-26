@@ -1,0 +1,2756 @@
+You are continuing development of my game:
+
+# BEYOND HEROES
+### by Aljay Leodones
+
+This development phase is NOT about adding random surface-level features.
+
+Your task now is to work intensively on the CORE GAME SYSTEMS, USER INTERFACE, HEROES, ENEMIES, AI, ITEMS, EQUIPMENT, ANIMATIONS, DIALOGUE, SHOPS, PROGRESSION, DAMAGE SYSTEMS, and all interconnected RPG mechanics.
+
+Use my computer directly.
+
+Use:
+
+- Godot Engine for the game
+- Blender for custom 3D assets, modifications, rigging, animation, equipment, environmental objects, enemy models, and other art needs
+- Free legal third-party assets from the internet where appropriate
+- Available image-generation tools for icons, UI artwork, textures, decals, concept art, item artwork, spell icons, portraits, and other visual assets
+- Any additional local tools necessary to properly test and develop the game
+
+This is an intensive production phase.
+
+Do not simply create prototypes.
+
+Develop these systems as if Beyond Heroes is becoming a real commercial Action RPG.
+
+--------------------------------------------------
+MANDATORY DEVELOPMENT RULE
+--------------------------------------------------
+
+For every system you work on:
+
+DESIGN IT.
+
+IMPLEMENT IT.
+
+RUN THE GAME.
+
+TEST IT.
+
+VERIFY THE DATA.
+
+TEST EDGE CASES.
+
+TEST IT WITH OTHER SYSTEMS.
+
+FIX THE PROBLEMS.
+
+RETEST IT.
+
+POLISH IT.
+
+DO NOT mark something complete just because code exists.
+
+A system is complete only if it works correctly during actual gameplay.
+
+Frequently inspect your own work.
+
+Ask:
+
+"Is this genuinely fun?"
+
+"Does this system work correctly?"
+
+"Does the UI correctly communicate the system?"
+
+"Does this look like a finished RPG?"
+
+"Are the numbers actually correct?"
+
+"Can this system break when equipment, buffs, skills, talents, levels, statuses, and elements interact?"
+
+"Would a player immediately understand what is happening?"
+
+Whenever possible, create developer tests or debug panels to verify calculations.
+
+--------------------------------------------------
+PRIORITY 1 — COMPLETE RPG SYSTEM ARCHITECTURE
+--------------------------------------------------
+
+Before adding excessive content, make sure the underlying architecture is excellent.
+
+Build interconnected modular systems for:
+
+- Character Stats
+- Derived Stats
+- Leveling
+- Experience
+- Damage
+- Elements
+- Resistances
+- Status Effects
+- Equipment
+- Weapons
+- Inventory
+- Item Generation
+- Item Rarity
+- Skills
+- Talents
+- Skill Trees
+- Passive Effects
+- Buffs
+- Debuffs
+- Enemies
+- Enemy AI
+- Loot
+- Shops
+- Dialogue
+- NPCs
+- Quests-ready architecture
+- Save/Load
+- Teleporters
+- Maps
+- UI
+- Animation
+- VFX
+- Audio
+- Combat Feedback
+- Physics
+- Impact Damage
+
+Avoid duplicate logic.
+
+There should be ONE authoritative place for important calculations.
+
+Examples:
+
+One Damage Calculator.
+
+One Derived Stat Calculator.
+
+One Elemental Interaction System.
+
+One Equipment Modifier Pipeline.
+
+One Skill Definition System.
+
+One Item Definition System.
+
+One Status Effect Framework.
+
+Build these systems so future content can be added through data/resources instead of rewriting gameplay code.
+
+--------------------------------------------------
+COMPLETE CHARACTER STAT SYSTEM
+--------------------------------------------------
+
+The six major attributes are:
+
+STRENGTH
+
+AGILITY
+
+INTELLIGENCE
+
+WISDOM
+
+SPIRIT
+
+DEXTERITY
+
+These must feed into detailed derived statistics.
+
+Develop and balance formulas for:
+
+- Physical Damage
+- Magical Damage
+- Elemental Damage
+- Maximum HP
+- Maximum Mana
+- HP Regeneration
+- Mana Regeneration
+- Defense
+- Physical Resistance
+- Fire Resistance
+- Ice Resistance
+- Lightning Resistance
+- Earth Resistance
+- Wind Resistance
+- Water Resistance
+- Light Resistance
+- Dark Resistance
+- Accuracy
+- Evasion
+- Critical Chance
+- Critical Damage
+- Movement Speed
+- Attack Speed
+- Cast Speed
+- Block Chance
+- Block Strength
+- Knockback Strength
+- Knockback Resistance
+- Stagger Strength
+- Stagger Resistance
+- Status Resistance
+- Cooldown Reduction
+- Healing Power
+- Mana Efficiency
+- Elemental Penetration
+- Armor Penetration
+- Life Steal if appropriate
+- Mana Steal if appropriate
+
+Critical Hit base multiplier:
+
+1.5x DAMAGE
+
+Allow modifiers later.
+
+Create logical limits.
+
+Examples:
+
+Movement speed must have a maximum.
+
+Attack speed must not break animations.
+
+Critical chance must have a sane cap.
+
+Resistances must have understandable caps and diminishing returns if necessary.
+
+--------------------------------------------------
+ATTRIBUTE RESPONSIBILITIES
+--------------------------------------------------
+
+Build clear identities.
+
+STRENGTH
+
+Primarily affects:
+
+- Physical Damage
+- Heavy Weapon Damage
+- Maximum HP
+- Physical Defense
+- Knockback Strength
+- Stagger
+- Heavy equipment requirements
+
+AGILITY
+
+Primarily affects:
+
+- Attack Speed
+- Movement Speed
+- Evasion
+- Dodge effectiveness
+- Light weapon scaling
+- Certain Critical bonuses
+
+INTELLIGENCE
+
+Primarily affects:
+
+- Magical Damage
+- Spell Damage
+- Elemental Damage
+- Maximum Mana
+- Offensive spell scaling
+
+WISDOM
+
+Primarily affects:
+
+- Mana Regeneration
+- Mana Efficiency
+- Cast effectiveness
+- Cooldowns
+- Buff effectiveness
+- Magical utility
+
+SPIRIT
+
+Primarily affects:
+
+- HP Regeneration
+- Mana Regeneration
+- Healing
+- Status Resistance
+- Recovery
+- Certain Light/Dark interactions
+
+DEXTERITY
+
+Primarily affects:
+
+- Accuracy
+- Critical Chance
+- Projectile effectiveness
+- Precision weapon scaling
+- Block/Parry timing bonuses where appropriate
+
+Do not blindly follow this list if a better balanced mathematical design emerges.
+
+Document the formulas.
+
+--------------------------------------------------
+DYNAMIC STAT RECALCULATION
+--------------------------------------------------
+
+Derived stats must dynamically recalculate whenever something changes.
+
+Examples:
+
+Equip armor.
+
+Unequip armor.
+
+Level up.
+
+Gain talent.
+
+Receive buff.
+
+Receive debuff.
+
+Drink potion.
+
+Change weapon.
+
+Change accessory.
+
+Apply status effect.
+
+Enter special stance.
+
+Everything must update correctly.
+
+Prevent modifiers from accidentally stacking repeatedly when equipment is equipped and removed.
+
+--------------------------------------------------
+COMPREHENSIVE DAMAGE PIPELINE
+--------------------------------------------------
+
+Create one central damage pipeline.
+
+Possible sequence:
+
+Base Damage
+
+→ Weapon Base Damage
+
+→ Character Attribute Scaling
+
+→ Skill Scaling
+
+→ Additive Damage Bonuses
+
+→ Multiplicative Damage Bonuses
+
+→ Element Modifier
+
+→ Critical Hit
+
+→ Armor Penetration
+
+→ Elemental Penetration
+
+→ Target Defense
+
+→ Target Resistance
+
+→ Buff/Debuff Effects
+
+→ Status Effects
+
+→ Final Damage
+
+→ Stagger
+
+→ Knockback
+
+→ Physics Impact
+
+Every damage event should contain structured information.
+
+Example fields:
+
+- Attacker
+- Target
+- Skill
+- Weapon
+- Base Damage
+- Final Damage
+- Damage Type
+- Element
+- Critical
+- Status Applied
+- Penetration
+- Knockback
+- Stagger
+- Hit Position
+- Hit Direction
+
+This allows future systems to react to combat events.
+
+--------------------------------------------------
+EIGHT ELEMENT DAMAGE TABLE
+--------------------------------------------------
+
+Continue developing the eight-element system:
+
+1. FIRE
+2. ICE
+3. LIGHTNING
+4. EARTH
+5. WIND
+6. WATER
+7. LIGHT
+8. DARK
+
+Create a comprehensive Damage Table.
+
+Each element needs:
+
+- Base damage identity
+- Resistance
+- Weakness
+- Status effect
+- Visual identity
+- Audio identity
+- Interaction with other elements
+
+Examples:
+
+FIRE
+Burn
+
+ICE
+Chill / Freeze
+
+LIGHTNING
+Shock / Chain
+
+EARTH
+Armor Break / Stagger
+
+WIND
+Knockback / Mobility disruption
+
+WATER
+Wet
+
+LIGHT
+Purification / Healing / Radiant effects
+
+DARK
+Curse / Drain / Weakening
+
+Create meaningful combinations.
+
+Examples:
+
+WET + LIGHTNING
+= stronger Shock
+
+WET + ICE
+= accelerated Freeze buildup
+
+FIRE + ICE
+= temperature interaction / cancel or special reaction
+
+BURNING + WATER
+= extinguish
+
+EARTH + HEAVY IMPACT
+= increased stagger or armor break
+
+WIND + FIRE
+= optional fire spread interaction
+
+LIGHT + DARK
+= special opposition interaction
+
+Avoid turning the game into an incomprehensible combination simulator.
+
+Keep interactions readable.
+
+--------------------------------------------------
+STATUS EFFECT SYSTEM
+--------------------------------------------------
+
+Create reusable status effects.
+
+Examples:
+
+Burning
+
+Frozen
+
+Chilled
+
+Shocked
+
+Wet
+
+Bleeding
+
+Poisoned
+
+Stunned
+
+Staggered
+
+Slowed
+
+Silenced
+
+Cursed
+
+Weakened
+
+Armor Broken
+
+Regeneration
+
+Shielded
+
+Haste
+
+Create:
+
+- Duration
+- Stack limits
+- Refresh rules
+- Visual icon
+- Character VFX
+- Gameplay effects
+- Resistance
+- Immunity support
+
+--------------------------------------------------
+PRIORITY 2 — COMPLETE HIGH-QUALITY UI
+--------------------------------------------------
+
+Spend significant development time on UI.
+
+The UI must NOT look like generic Godot controls.
+
+Create a complete artistic visual identity for Beyond Heroes.
+
+The visual direction should communicate:
+
+- Ancient Fantasy
+- Mystical technology
+- Arcane energy
+- Aether
+- Heroic mythology
+- Premium dark-fantasy RPG presentation
+
+Create custom:
+
+- Panels
+- Frames
+- Borders
+- Buttons
+- Tabs
+- Icons
+- Separators
+- Background artwork
+- Tooltips
+- Equipment slots
+- Skill slots
+- Talent nodes
+- Health visuals
+- Mana visuals
+- Hover effects
+- Selected states
+- Locked states
+- Disabled states
+- Animations
+
+Use texture artwork rather than flat rectangles whenever appropriate.
+
+--------------------------------------------------
+FULL MAIN MENU
+--------------------------------------------------
+
+Create a professional Main Menu.
+
+Include:
+
+NEW GAME
+
+CONTINUE
+
+LOAD GAME
+
+SETTINGS
+
+CREDITS
+
+EXIT
+
+Add:
+
+- Animated background
+- Environmental particles
+- Character or world imagery
+- Atmospheric sound
+- Smooth transitions
+- Hover animations
+- Proper button feedback
+
+--------------------------------------------------
+CHARACTER SELECTION UI
+--------------------------------------------------
+
+Create a high-quality Hero Selection screen.
+
+Current classes:
+
+KNIGHT
+
+MAGE
+
+Display:
+
+- Animated 3D character
+- Class name
+- Class description
+- Difficulty
+- Major attributes
+- Starting equipment
+- Class resource
+- Strengths
+- Weaknesses
+- Starting skills
+
+Allow rotating the model.
+
+Use cinematic lighting.
+
+--------------------------------------------------
+COMPLETE HUD
+--------------------------------------------------
+
+Create an elegant combat HUD.
+
+Display:
+
+HP
+
+MANA
+
+CLASS RESOURCE
+
+XP
+
+LEVEL
+
+SKILLS
+
+COOLDOWNS
+
+BUFFS
+
+DEBUFFS
+
+STATUS EFFECTS
+
+BOSS HP
+
+TARGET HP
+
+QUEST / OBJECTIVE READY AREA
+
+MINIMAP if appropriate
+
+Create proper visual feedback.
+
+Low HP should be noticeable.
+
+Cooldown completion should animate.
+
+Skills that lack Mana should visually indicate why they cannot be cast.
+
+--------------------------------------------------
+CHARACTER UI
+--------------------------------------------------
+
+Build a major Character screen.
+
+Show:
+
+Character 3D preview
+
+Class
+
+Level
+
+Experience
+
+Attributes:
+
+Strength
+Agility
+Intelligence
+Wisdom
+Spirit
+Dexterity
+
+Show derived stats.
+
+Allow hovering over every stat.
+
+Tooltips should explain:
+
+What it does.
+
+Where its current value comes from.
+
+Example:
+
+CRITICAL CHANCE
+18.4%
+
+Sources:
+Dexterity: +8.4%
+Weapon: +4%
+Gloves: +2%
+Talent: +4%
+
+This makes the RPG transparent and understandable.
+
+--------------------------------------------------
+INVENTORY UI
+--------------------------------------------------
+
+Create a polished inventory.
+
+Features:
+
+- Categories
+- Sorting
+- Filtering
+- Search
+- Equipment comparison
+- Rarity filters
+- Item tooltip
+- Equip
+- Unequip
+- Drop
+- Destroy with confirmation
+- Stack splitting
+- Item locking
+- Favorite item
+- Sell flag
+
+Possible tabs:
+
+ALL
+
+WEAPONS
+
+ARMOR
+
+ACCESSORIES
+
+CONSUMABLES
+
+MATERIALS
+
+QUEST
+
+--------------------------------------------------
+EQUIPMENT UI
+--------------------------------------------------
+
+Support these slots:
+
+MAIN WEAPON
+
+SUB WEAPON
+
+HELM
+
+INNER GARMENT
+
+ARMOR
+
+GLOVE SLOT 1
+
+GLOVE SLOT 2
+
+BOOT SLOT 1
+
+BOOT SLOT 2
+
+ACCESSORY SLOT 1
+
+ACCESSORY SLOT 2
+
+ACCESSORY SLOT 3
+
+ACCESSORY SLOT 4
+
+Make the equipment interface visually attractive.
+
+Use the 3D hero model in the center.
+
+Equipment slots should surround or complement the model.
+
+--------------------------------------------------
+ITEM COMPARISON
+--------------------------------------------------
+
+Hovering another weapon should show:
+
+CURRENT ITEM
+
+vs.
+
+NEW ITEM
+
+Highlight changes.
+
+Example:
+
+Damage
+120 → 145
+
+Attack Speed
+1.10 → 1.02
+
+Critical Chance
+8% → 11%
+
+Fire Resistance
+15% → 0%
+
+Include DPS only if its calculation is meaningful.
+
+--------------------------------------------------
+SKILL UI
+--------------------------------------------------
+
+Create a complete Active Skill interface.
+
+Show:
+
+- Icon
+- Name
+- Level
+- Mana Cost
+- Cooldown
+- Element
+- Damage
+- Scaling
+- Range
+- Status effects
+- Upgrade information
+
+Allow assigning unlocked skills to hotbar slots.
+
+--------------------------------------------------
+SKILL TREE
+--------------------------------------------------
+
+Develop beautiful class-specific Tech Trees.
+
+KNIGHT TREE
+
+Possible major branches:
+
+WEAPON MASTERY
+
+GUARDIAN
+
+VANGUARD
+
+VALOR
+
+WARLORD
+
+MAGE TREE
+
+Possible branches:
+
+ELEMENTAL MASTERY
+
+ARCANE
+
+CONTROL
+
+AETHER
+
+SORCERY
+
+Create:
+
+Minor Nodes
+
+Major Nodes
+
+Branch Nodes
+
+Keystone Nodes
+
+Prerequisites
+
+Ranks
+
+Connecting lines
+
+Animated unlock effects
+
+Tooltips
+
+Respec-ready architecture
+
+--------------------------------------------------
+TALENT SYSTEM
+--------------------------------------------------
+
+Talents are passive skills.
+
+Examples:
+
++2% Critical Chance
+
++5% Sword damage
+
+Blocking restores 1% Mana
+
+Fire damage applies stronger Burning
+
+Critical hits reduce cooldown
+
+Frozen targets receive increased Impact damage
+
+Create meaningful build diversity.
+
+Avoid talents that are all boring percentage upgrades.
+
+Include mechanics-changing talents.
+
+--------------------------------------------------
+PRIORITY 3 — HERO CHARACTER PRODUCTION
+--------------------------------------------------
+
+Create production-quality models for:
+
+KNIGHT
+
+MAGE
+
+You may:
+
+Download free legally usable 3D models.
+
+OR
+
+Create characters yourself in Blender.
+
+OR
+
+Use a free base model and heavily customize it.
+
+However, both characters must visually belong to Beyond Heroes.
+
+Do NOT leave them looking like random asset-store characters.
+
+Modify:
+
+- Materials
+- Colors
+- Armor
+- Clothing
+- Accessories
+- Weapons
+- Proportions where necessary
+- Textures
+
+Create proper rigging.
+
+Use good humanoid skeletons.
+
+--------------------------------------------------
+KNIGHT VISUAL IDENTITY
+--------------------------------------------------
+
+Create a powerful heroic Knight.
+
+Possible direction:
+
+Ancient-tech fantasy warrior.
+
+Layered plate armor.
+
+Aether-powered engravings.
+
+Heavy gloves.
+
+Armor cloth layers.
+
+Distinctive silhouette.
+
+Capable of wielding:
+
+Sword
+
+Greatsword
+
+Axe
+
+Spear
+
+Shield
+
+Dual weapons where compatible.
+
+--------------------------------------------------
+MAGE VISUAL IDENTITY
+--------------------------------------------------
+
+Create an elegant but powerful Mage.
+
+Possible direction:
+
+Arcane traveler.
+
+Layered mystical garments.
+
+Light armor.
+
+Aether crystals.
+
+Runic accessories.
+
+Magical gauntlets or focus objects.
+
+Capable of wielding:
+
+Staff
+
+Wand
+
+Certain swords/daggers if allowed.
+
+--------------------------------------------------
+FULL HERO ANIMATION SET
+--------------------------------------------------
+
+Both Hero classes need comprehensive animations.
+
+At minimum:
+
+4 DIFFERENT IDLE ANIMATIONS
+
+Idle 1:
+Normal breathing
+
+Idle 2:
+Looking around
+
+Idle 3:
+Equipment adjustment
+
+Idle 4:
+Class-specific personality animation
+
+Movement:
+
+Walk
+
+Run
+
+Strafe Left
+
+Strafe Right
+
+Walk Backward
+
+Combat movement
+
+Dodge
+
+Roll if used
+
+Turn
+
+Start movement
+
+Stop movement
+
+COMBAT:
+
+4 DIFFERENT BASIC ATTACK ANIMATIONS
+
+Attack 1
+
+Attack 2
+
+Attack 3
+
+Attack 4
+
+These should combine into natural attack chains.
+
+Also create:
+
+Heavy Attack
+
+Charged Attack
+
+Special Attack
+
+Class Skill Animation
+
+WEAPON-SPECIFIC:
+
+Sword stance
+
+Greatsword stance
+
+Axe stance
+
+Spear stance
+
+Dagger stance
+
+Bow stance
+
+Staff stance
+
+Wand stance
+
+DUAL WIELD:
+
+Dual idle
+
+Dual attacks
+
+Dual movement
+
+SHIELD:
+
+Shield idle
+
+Block
+
+Block impact
+
+Perfect block / parry
+
+Cast animations:
+
+Quick Spell
+
+Heavy Spell
+
+Channel Spell
+
+Area Spell
+
+Weapon Skill Cast
+
+Ultimate-style Cast
+
+DAMAGE REACTIONS:
+
+Light Hit
+
+Heavy Hit
+
+Front Hit
+
+Back Hit
+
+Left Hit
+
+Right Hit
+
+STAGGER:
+
+Small Stagger
+
+Heavy Stagger
+
+Knockback
+
+Launch
+
+Wall Impact
+
+BADLY HURT:
+
+Create a damaged animation state.
+
+Examples:
+
+Holding injury
+
+Breathing heavily
+
+Slower posture
+
+Combat stance while injured
+
+Other animations:
+
+Knockdown
+
+Get Up
+
+Death
+
+Revive if architecture supports it
+
+Loot interaction
+
+Chest interaction
+
+NPC interaction
+
+Teleporter interaction
+
+--------------------------------------------------
+ANIMATION BLENDING
+--------------------------------------------------
+
+Use AnimationTree or equivalent Godot animation systems.
+
+Create smooth blending between:
+
+Idle
+
+Movement
+
+Combat
+
+Casting
+
+Hit reactions
+
+Stagger
+
+Death
+
+Avoid abrupt animation snapping.
+
+--------------------------------------------------
+ANIMATION HIT TIMING
+--------------------------------------------------
+
+Weapon collisions must match visible contact.
+
+Example:
+
+Sword visually hits enemy.
+
+Damage should trigger at that frame.
+
+Do not trigger damage at animation start.
+
+Use:
+
+Animation events
+
+Attack windows
+
+Hitboxes
+
+Proper combat timing
+
+--------------------------------------------------
+HERO DAMAGE VISUALIZATION
+--------------------------------------------------
+
+As HP gets low:
+
+Alter:
+
+- Posture
+- Breathing
+- Movement animation
+- Facial expression if practical
+- Combat idle
+
+Do NOT drastically slow gameplay unless intentionally designed.
+
+This should visually communicate that the hero is badly hurt.
+
+--------------------------------------------------
+PRIORITY 4 — ENEMIES
+--------------------------------------------------
+
+Create multiple enemy families.
+
+Do not build five enemies by recoloring the same model.
+
+Create real archetypes.
+
+Examples:
+
+BANDIT
+
+UNDEAD
+
+CORRUPTED CREATURE
+
+ANCIENT CONSTRUCT
+
+AETHER MONSTER
+
+BEAST
+
+CULTIST
+
+--------------------------------------------------
+ENEMY ROLES
+--------------------------------------------------
+
+Create enemy roles.
+
+MELEE GRUNT
+
+Fast basic attacker.
+
+TANK
+
+High defense.
+
+Slow.
+
+Hard stagger resistance.
+
+RANGED
+
+Keeps distance.
+
+PROJECTILE CASTER
+
+Uses spells.
+
+ASSASSIN
+
+Fast.
+
+Flanks player.
+
+BRUTE
+
+Large physical enemy.
+
+Heavy knockback.
+
+SUPPORT
+
+Buffs allies.
+
+ELITE
+
+Enhanced abilities.
+
+BOSS
+
+Complex AI.
+
+--------------------------------------------------
+ENEMY MODELS
+--------------------------------------------------
+
+Find or create high-quality enemy models.
+
+Every enemy should have:
+
+- Proper materials
+- Collision
+- Rigging
+- Hitbox
+- Hurtbox
+- Animations
+- Sounds
+- VFX hooks
+- Loot table
+- Stats
+- Resistances
+
+--------------------------------------------------
+ENEMY ANIMATIONS
+--------------------------------------------------
+
+Enemy animations should include:
+
+Idle
+
+Walk
+
+Run
+
+Attack 1
+
+Attack 2
+
+Attack 3 where appropriate
+
+Special Attack
+
+Cast
+
+Hit Reaction
+
+Heavy Hit
+
+Stagger
+
+Knockback
+
+Knockdown
+
+Get Up
+
+Death
+
+Alert
+
+Roar / Taunt if appropriate
+
+--------------------------------------------------
+ADVANCED ENEMY AI
+--------------------------------------------------
+
+Do NOT build AI that simply runs directly toward the player.
+
+Implement enemy decision systems.
+
+Enemy AI should understand:
+
+- Distance
+- Line of sight
+- Attack range
+- Player direction
+- Nearby allies
+- Current HP
+- Cooldowns
+- Environmental obstacles
+- Stagger
+- Threat
+- Status effects
+
+Create states such as:
+
+IDLE
+
+PATROL
+
+SUSPICIOUS
+
+ALERT
+
+CHASE
+
+POSITION
+
+ATTACK
+
+SPECIAL ATTACK
+
+RETREAT
+
+DEFEND
+
+CAST
+
+STAGGER
+
+KNOCKBACK
+
+DEAD
+
+--------------------------------------------------
+AI BEHAVIOR DIFFERENCES
+--------------------------------------------------
+
+MELEE:
+
+Approach.
+
+Attack.
+
+Circle.
+
+Reposition.
+
+Avoid constantly clipping through player.
+
+RANGED:
+
+Maintain distance.
+
+Reposition when player approaches.
+
+CASTER:
+
+Search for good casting positions.
+
+ASSASSIN:
+
+Attempt flank.
+
+BRUTE:
+
+Aggressively approach.
+
+Use high-impact attacks.
+
+SUPPORT:
+
+Stay near allies.
+
+Prioritize buffs/heals.
+
+--------------------------------------------------
+ENEMY GROUP BEHAVIOR
+--------------------------------------------------
+
+Enemies should not all attack simultaneously from the same position.
+
+Create attack coordination where appropriate.
+
+Enemies may:
+
+Circle player.
+
+Take turns.
+
+Move to attack slots.
+
+Flank.
+
+Protect casters.
+
+Maintain ranged distance.
+
+--------------------------------------------------
+ENEMY DIFFICULTY SCALING
+--------------------------------------------------
+
+Difficulty can affect:
+
+HP
+
+Damage
+
+AI aggression
+
+Skill frequency
+
+Status resistance
+
+Elite modifier likelihood
+
+Avoid making harder enemies only enormous HP sponges.
+
+--------------------------------------------------
+ELITE ENEMIES
+--------------------------------------------------
+
+Create Elite modifiers.
+
+Possible examples:
+
+FLAMING
+
+FROZEN
+
+STORM
+
+EARTHEN
+
+VAMPIRIC
+
+REGENERATING
+
+ARMORED
+
+SWIFT
+
+BERSERKER
+
+SHIELDED
+
+CURSED
+
+AETHER INFUSED
+
+Give elites:
+
+Distinct aura.
+
+Name modifier.
+
+Gameplay differences.
+
+Better loot.
+
+--------------------------------------------------
+PRIORITY 5 — ITEM AND LOOT SYSTEM
+--------------------------------------------------
+
+Create a deep item system.
+
+Each item should contain data such as:
+
+Unique ID
+
+Name
+
+Description
+
+Item Type
+
+Equipment Slot
+
+Weapon Type
+
+Rarity
+
+Required Level
+
+Required Attributes
+
+Base Stats
+
+Affixes
+
+Element
+
+Value
+
+Sell Value
+
+Icon
+
+3D Model
+
+Lore Text
+
+Set Association
+
+Unique Effect
+
+--------------------------------------------------
+ITEM RARITY SYSTEM
+--------------------------------------------------
+
+USE THESE EXACT RARITY LEVELS:
+
+1. BEGINNER
+2. COMMON
+3. BASIC
+4. ADVANCED
+5. LICENSED
+6. ELITE
+7. MASTER
+8. MYTHICAL
+9. LEGENDARY
+10. AETHER
+
+Create a meaningful visual identity for every tier.
+
+Do not merely recolor names.
+
+Higher tiers can affect:
+
+- Number of modifiers
+- Modifier quality
+- Unique properties
+- Special effects
+- Appearance
+- VFX
+- Drop sound
+- Loot beam
+- Item frame
+- Tooltip art
+
+--------------------------------------------------
+RARITY PHILOSOPHY
+--------------------------------------------------
+
+BEGINNER
+
+Starting equipment.
+
+Simple.
+
+COMMON
+
+Basic loot.
+
+BASIC
+
+Improved basic equipment.
+
+ADVANCED
+
+First meaningful build customization.
+
+LICENSED
+
+Specialized crafted or faction equipment.
+
+ELITE
+
+High-quality rare equipment.
+
+MASTER
+
+Powerful specialized gear.
+
+MYTHICAL
+
+Extremely rare magical items.
+
+LEGENDARY
+
+Build-defining equipment.
+
+AETHER
+
+Highest extraordinary tier.
+
+Aether items should feel special.
+
+Use:
+
+- Unique visual effects
+- Custom models when possible
+- Special properties
+- Altered abilities
+- Rare drop presentation
+
+Avoid simply giving Aether items +10000% damage.
+
+--------------------------------------------------
+ITEM AFFIX SYSTEM
+--------------------------------------------------
+
+Create prefixes and suffixes.
+
+Example:
+
+Flaming Sword of Precision
+
+Possible affixes:
+
++ Strength
+
++ Intelligence
+
++ Critical Chance
+
++ Fire Damage
+
++ Movement Speed
+
++ Mana
+
++ HP
+
++ Resistance
+
++ Skill Level
+
++ Attack Speed
+
++ Status Chance
+
+Higher rarity allows stronger and more interesting combinations.
+
+--------------------------------------------------
+UNIQUE ITEM EFFECTS
+--------------------------------------------------
+
+Examples:
+
+Critical attacks release lightning.
+
+Blocking creates a shockwave.
+
+Fireball splits into three projectiles.
+
+Frozen enemies explode when killed.
+
+Every fifth attack deals massive stagger.
+
+Mana regeneration increases while standing still.
+
+These make equipment exciting.
+
+--------------------------------------------------
+ITEM SETS
+--------------------------------------------------
+
+Create equipment sets.
+
+Example:
+
+KNIGHT SET:
+
+AETHER GUARDIAN
+
+2 pieces:
++Defense
+
+3 pieces:
++Block
+
+5 pieces:
+Blocking releases a protective Aether pulse.
+
+MAGE SET:
+
+STARBOUND SAGE
+
+2 pieces:
++Mana
+
+3 pieces:
++Elemental Damage
+
+5 pieces:
+Casting different elements consecutively grants Arcane Amplification.
+
+Create actual artistic matching equipment models where practical.
+
+--------------------------------------------------
+CUSTOM ITEM ICONS
+--------------------------------------------------
+
+Do NOT use random placeholders.
+
+Create beautiful icons for:
+
+Weapons
+
+Armor
+
+Helmets
+
+Gloves
+
+Boots
+
+Accessories
+
+Potions
+
+Materials
+
+Quest items
+
+Currency
+
+Skill-related items
+
+Icons should follow a single Beyond Heroes visual style.
+
+--------------------------------------------------
+LOOT DROP PRESENTATION
+--------------------------------------------------
+
+Rare drops should feel exciting.
+
+Use:
+
+Beam of light.
+
+Particle effect.
+
+Audio cue.
+
+Rarity-colored aura.
+
+Ground label.
+
+Optional animation.
+
+AETHER drops should be unmistakable.
+
+--------------------------------------------------
+PRIORITY 6 — WEAPON SYSTEM
+--------------------------------------------------
+
+Maintain eight weapon categories:
+
+1. SWORD
+2. GREATSWORD
+3. AXE
+4. SPEAR
+5. DAGGER
+6. BOW
+7. STAFF
+8. WAND
+
+Each should have:
+
+Unique stance.
+
+Unique movement.
+
+Attack timing.
+
+Range.
+
+Damage.
+
+Speed.
+
+Impact.
+
+Skill compatibility.
+
+Animations.
+
+--------------------------------------------------
+WEAPON COMBOS
+--------------------------------------------------
+
+Implement actual attack chains.
+
+Example Sword:
+
+Attack 1
+→ Attack 2
+→ Attack 3
+→ Attack 4
+
+Allow timing windows.
+
+Do not allow infinite accidental spam.
+
+Heavy attack may branch from combo.
+
+--------------------------------------------------
+PRIORITY 7 — PHYSICS AND IMPACT
+--------------------------------------------------
+
+Continue developing the game's signature physical combat.
+
+Support:
+
+Knockback
+
+Wall collision damage
+
+Enemy collision
+
+Breakable props
+
+Launch
+
+Stagger
+
+Heavy Impact
+
+Environmental collision
+
+Example:
+
+Player uses powerful Greatsword skill.
+
+Enemy gets launched backward.
+
+Enemy crashes into stone pillar.
+
+Pillar breaks.
+
+Enemy receives additional Impact Damage.
+
+Camera shake.
+
+Dust particles.
+
+Stone fragments.
+
+Impact sound.
+
+This should feel satisfying.
+
+--------------------------------------------------
+PRIORITY 8 — SHOP SYSTEM
+--------------------------------------------------
+
+Create a complete Shop interface.
+
+NPC shops may specialize in:
+
+Weapons
+
+Armor
+
+Magic
+
+Consumables
+
+Crafting
+
+Accessories
+
+Rare Goods
+
+Allow:
+
+BUY
+
+SELL
+
+BUYBACK
+
+COMPARE
+
+SORT
+
+FILTER
+
+QUANTITY
+
+Confirm expensive purchase.
+
+--------------------------------------------------
+SHOP PRICING
+--------------------------------------------------
+
+Develop logical pricing formulas.
+
+Factors can include:
+
+Item Level
+
+Rarity
+
+Affixes
+
+Base Value
+
+Merchant specialization
+
+Reputation-ready modifier
+
+--------------------------------------------------
+SHOP INVENTORY
+--------------------------------------------------
+
+Merchant inventory may:
+
+Refresh.
+
+Scale with player level.
+
+Contain fixed special items.
+
+Occasionally contain rare stock.
+
+Avoid giving every shop identical items.
+
+--------------------------------------------------
+PRIORITY 9 — DIALOGUE SYSTEM
+--------------------------------------------------
+
+Build a complete reusable Dialogue System.
+
+Support:
+
+NPC Name
+
+NPC Portrait
+
+Dialogue Text
+
+Multiple responses
+
+Branching dialogue
+
+Conditions
+
+Rewards
+
+Shop opening
+
+Quest-ready triggers
+
+Relationship-ready variables
+
+World-state checks
+
+Dialogue events
+
+--------------------------------------------------
+DIALOGUE UI
+--------------------------------------------------
+
+Create attractive dialogue panels.
+
+Support:
+
+Character portrait.
+
+NPC name.
+
+Animated text.
+
+Skip.
+
+Fast-forward.
+
+Choice buttons.
+
+Important words highlighted.
+
+Optional voice-ready architecture.
+
+--------------------------------------------------
+DIALOGUE CONDITIONS
+--------------------------------------------------
+
+Example:
+
+NPC:
+
+"You survived the Forgotten Temple?"
+
+Only show this if:
+
+ForgottenTempleBossDefeated = true
+
+Dialogue should be able to react to the game world.
+
+--------------------------------------------------
+NPC INTERACTION
+--------------------------------------------------
+
+NPCs may:
+
+Talk.
+
+Trade.
+
+Offer quests later.
+
+Open teleporters.
+
+Give items.
+
+Teach skills.
+
+Give lore.
+
+Provide services.
+
+--------------------------------------------------
+PRIORITY 10 — CHARACTER CONDITION UI
+--------------------------------------------------
+
+Create status presentation for:
+
+Normal
+
+Poisoned
+
+Burning
+
+Frozen
+
+Cursed
+
+Badly Hurt
+
+Buffed
+
+Debuffed
+
+Display icons.
+
+Hovering should explain effects and duration.
+
+--------------------------------------------------
+PRIORITY 11 — DAMAGE NUMBERS
+--------------------------------------------------
+
+Create attractive floating damage numbers.
+
+Differentiate:
+
+Normal Damage
+
+Critical
+
+Elemental
+
+Healing
+
+Blocked
+
+Miss
+
+Immune
+
+Resisted
+
+Critical number should have noticeably stronger presentation.
+
+Do not make text cover the screen excessively.
+
+--------------------------------------------------
+PRIORITY 12 — PLAYER FEEDBACK
+--------------------------------------------------
+
+Every action needs feedback.
+
+ATTACK:
+
+Animation
+
+Sound
+
+Weapon trail
+
+Hit effect
+
+Enemy reaction
+
+Damage number
+
+Impact
+
+CRITICAL:
+
+Special hit effect
+
+Different sound
+
+Stronger visual
+
+SPELL:
+
+Casting animation
+
+Spell VFX
+
+Impact
+
+Element effect
+
+Audio
+
+--------------------------------------------------
+PRIORITY 13 — SAVE SYSTEM
+--------------------------------------------------
+
+Save:
+
+Hero class
+
+Level
+
+XP
+
+Stats
+
+Inventory
+
+Equipment
+
+Gold/Currency
+
+Skills
+
+Talent Tree
+
+Teleporters
+
+Dialogue state
+
+NPC state
+
+Shop special stock when necessary
+
+Map progression
+
+Boss kills
+
+Settings
+
+Use versioned saves.
+
+--------------------------------------------------
+PRIORITY 14 — GAME SETTINGS
+--------------------------------------------------
+
+Create full settings menus.
+
+VIDEO:
+
+Resolution
+
+Fullscreen
+
+VSync
+
+Shadow Quality
+
+Texture Quality
+
+Effects Quality
+
+Anti-Aliasing
+
+Render Scale
+
+AUDIO:
+
+Master
+
+Music
+
+Effects
+
+Voice-ready channel
+
+Ambient
+
+CONTROLS:
+
+Key rebinding
+
+Mouse sensitivity
+
+Controller-ready architecture
+
+GAMEPLAY:
+
+Damage Numbers
+
+Screen Shake
+
+Auto Loot options
+
+Hold/Toggle settings
+
+--------------------------------------------------
+PRIORITY 15 — DEVELOPMENT DEBUG UI
+--------------------------------------------------
+
+Create a hidden developer panel.
+
+Provide:
+
+Spawn Enemy
+
+Spawn Elite
+
+Spawn Boss
+
+Give Item
+
+Give Random Item
+
+Set Item Rarity
+
+Give XP
+
+Set Level
+
+Set Stats
+
+God Mode
+
+Infinite Mana
+
+Reset Skills
+
+Reset Talents
+
+Teleport
+
+Unlock Teleporter
+
+Damage Player
+
+Apply Status
+
+Display Damage Formula
+
+Display AI State
+
+Show Hitboxes
+
+Show Navmesh
+
+Show FPS
+
+This will dramatically speed up testing.
+
+--------------------------------------------------
+QUALITY ASSURANCE
+--------------------------------------------------
+
+Create test cases for major systems.
+
+ITEM TEST:
+
+Equip item.
+
+Verify stats.
+
+Unequip.
+
+Verify stats return exactly to previous values.
+
+ELEMENT TEST:
+
+100 Fire damage against 0% resistance.
+
+Verify result.
+
+Test 25%.
+
+Test 50%.
+
+Test penetration.
+
+CRITICAL TEST:
+
+100 damage.
+
+1.5x critical.
+
+Expected pre-mitigation damage:
+
+150.
+
+LEVEL TEST:
+
+Give enough XP for several levels.
+
+Make sure leftover XP carries correctly.
+
+STATUS TEST:
+
+Apply Burning.
+
+Check duration.
+
+Check stacking.
+
+Remove.
+
+Check cleanup.
+
+SAVE TEST:
+
+Record hero.
+
+Save.
+
+Change data.
+
+Reload.
+
+Verify exact original data restored.
+
+--------------------------------------------------
+VISUAL QA
+--------------------------------------------------
+
+Inspect the game frequently.
+
+Look for:
+
+Clipping.
+
+Floating characters.
+
+Missing textures.
+
+Low-quality materials.
+
+Broken lighting.
+
+Incorrect weapon positions.
+
+Bad animation blending.
+
+Poor icon resolution.
+
+UI misalignment.
+
+Text overflow.
+
+Broken aspect ratios.
+
+Stretching.
+
+--------------------------------------------------
+16:9 AND RESPONSIVE UI
+--------------------------------------------------
+
+Primary interface target:
+
+16:9
+
+But make anchors and scaling work correctly at different resolutions.
+
+Avoid hardcoding UI positions unnecessarily.
+
+--------------------------------------------------
+PERFORMANCE QA
+--------------------------------------------------
+
+Profile the project.
+
+Check:
+
+FPS
+
+CPU
+
+GPU
+
+Physics
+
+AI
+
+Particles
+
+Draw calls
+
+Memory
+
+Texture memory
+
+Shader compilation
+
+Optimize intelligently.
+
+--------------------------------------------------
+FINAL OBJECTIVE FOR THIS DEVELOPMENT PHASE
+--------------------------------------------------
+
+By the end of this phase, Beyond Heroes should have:
+
+TWO polished playable hero classes.
+
+Real 3D character models.
+
+Full animation sets.
+
+Multiple idle animations.
+
+Multiple combat animations.
+
+Casting animations.
+
+Damage reactions.
+
+Stagger animations.
+
+Badly Hurt states.
+
+Eight weapon categories.
+
+Functional equipment.
+
+Ten item rarity tiers.
+
+Item affixes.
+
+Item sets.
+
+Custom item icons.
+
+Deep stat system.
+
+Eight-element damage system.
+
+Elemental interactions.
+
+Status effects.
+
+Skill trees.
+
+Talent trees.
+
+Inventory.
+
+Character UI.
+
+Equipment UI.
+
+Shops.
+
+Dialogue.
+
+NPC interactions.
+
+Enemies.
+
+Several enemy archetypes.
+
+Advanced enemy AI.
+
+Enemy animations.
+
+Elite enemies.
+
+Loot.
+
+Physics.
+
+Knockback.
+
+Impact damage.
+
+Teleportation.
+
+Save/load.
+
+Settings.
+
+Complete HUD.
+
+Professional UI artwork.
+
+Developer debugging tools.
+
+Good combat feedback.
+
+Actual game textures.
+
+Actual game assets.
+
+Actual playable content.
+
+--------------------------------------------------
+DO NOT RUSH
+--------------------------------------------------
+
+Take every major system seriously.
+
+Do not generate dozens of weak features.
+
+Build complete interconnected systems.
+
+If something is ugly:
+
+Improve it.
+
+If something is buggy:
+
+Fix it.
+
+If animations look wrong:
+
+Correct them.
+
+If an asset does not match:
+
+Modify it in Blender.
+
+If no appropriate free asset exists:
+
+Create one.
+
+If the UI looks generic:
+
+Redesign it.
+
+If a formula seems questionable:
+
+Test it mathematically.
+
+If combat feels weak:
+
+Improve timing, animation, sound, VFX, hitstop, knockback, and enemy response.
+
+If AI behaves stupidly:
+
+Improve its decision-making.
+
+If a map looks empty:
+
+Improve environmental composition.
+
+If item progression becomes meaningless:
+
+Rebalance it.
+
+Do not settle for "technically functional."
+
+--------------------------------------------------
+IMPORTANT FINAL DIRECTIVE
+--------------------------------------------------
+
+USE MY COMPUTER ACTIVELY.
+
+OPEN THE CURRENT BEYOND HEROES GODOT PROJECT.
+
+INSPECT WHAT ALREADY EXISTS BEFORE REPLACING ANYTHING.
+
+PRESERVE WORKING SYSTEMS THAT ARE ALREADY GOOD.
+
+IMPROVE WEAK SYSTEMS RATHER THAN NEEDLESSLY REBUILDING EVERYTHING.
+
+USE BLENDER FOR NEW OR MODIFIED ASSETS.
+
+DOWNLOAD LEGALLY USABLE FREE ASSETS WHERE THEY WILL IMPROVE THE PROJECT.
+
+KEEP ASSET LICENSE RECORDS.
+
+CREATE CUSTOM TEXTURES, ICONS, UI, MATERIALS, AND EFFECTS WHEN NECESSARY.
+
+PLAY THE GAME FREQUENTLY.
+
+TEST EVERY SYSTEM.
+
+CHECK YOUR OWN IMPLEMENTATION.
+
+FIND YOUR OWN BUGS.
+
+FIX THEM.
+
+RETEST.
+
+POLISH.
+
+THEN MOVE TO THE NEXT SYSTEM.
+
+The goal is not merely to make Beyond Heroes bigger.
+
+The goal is to make Beyond Heroes:
+
+DEEPER.
+
+BETTER.
+
+MORE RESPONSIVE.
+
+MORE BEAUTIFUL.
+
+MORE COHESIVE.
+
+MORE FEATURE-COMPLETE.
+
+MORE PROFESSIONAL.
+
+and genuinely fun to play.
+
+Continue developing:
+
+# BEYOND HEROES
+### by Aljay Leodones
+
+as a serious, ambitious, feature-rich Action RPG.

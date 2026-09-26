@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<defs><linearGradient id="l1" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient><linearGradient id="l3" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient></defs>
+<path d="M8,44 L56,44 L50,50 L42,50 L44,58 L20,58 L22,50 L14,50 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,44 L56,44 L50,50 L42,50 L44,58 L20,58 L22,50 L14,50 Z" fill="url(#l1)"/>
+<path d="M4,38 L8,34 L50,34 L58,38 L50,42 L8,42 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M4,38 L8,34 L50,34 L58,38 L50,42 L8,42 Z" fill="url(#l2)"/>
+<path d="M14,34 L34,16" fill="none" stroke="#0a0610" stroke-width="9.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M14,34 L34,16" fill="none" stroke="#f4f0ea" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M30,12 L39,3 L48,12 L39,21 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M30,12 L39,3 L48,12 L39,21 Z" fill="url(#l3)"/>
+</svg>

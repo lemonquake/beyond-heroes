@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="64" cy="56" r="84"><stop offset="0" stop-color="#0c1628"/><stop offset="0.6" stop-color="#080c16"/><stop offset="1" stop-color="#050307"/></radialGradient><linearGradient id="l2" gradientUnits="userSpaceOnUse" x1="0" y1="16.38" x2="0" y2="25.12"><stop offset="0" stop-color="#e8f0ff"/><stop offset="1" stop-color="#2a3448"/></linearGradient><linearGradient id="l3" gradientUnits="userSpaceOnUse" x1="0" y1="98.88" x2="0" y2="107.62"><stop offset="0" stop-color="#e8f0ff"/><stop offset="1" stop-color="#2a3448"/></linearGradient><linearGradient id="l4" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="128" y2="128"><stop offset="0" stop-color="#bccadf"/><stop offset="0.45" stop-color="#6a8ab8"/><stop offset="1" stop-color="#2a374a"/></linearGradient></defs>
+<path d="M20,2 L108,2 Q126,2 126,20 L126,108 Q126,126 108,126 L20,126 Q2,126 2,108 L2,20 Q2,2 20,2 Z" fill="#050307"/>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="url(#r1)"/>
+<g transform="translate(64 64) scale(0.86) translate(-64 -64)">
+<path d="M39,24.5 C42.17,23.5 85.83,23.5 89,24.5 C92.17,25.5 87.92,37.17 86.5,39.5 C85.08,41.83 69,57.83 67.75,59.5 C66.5,61.17 66.5,62.83 67.75,64.5 C69,66.17 85.08,82.17 86.5,84.5 C87.92,86.83 92.17,98.5 89,99.5 C85.83,100.5 42.17,100.5 39,99.5 C35.83,98.5 40.08,86.83 41.5,84.5 C42.92,82.17 59,66.17 60.25,64.5 C61.5,62.83 61.5,61.17 60.25,59.5 C59,57.83 42.92,41.83 41.5,39.5 C40.08,37.17 35.83,25.5 39,24.5 Z" fill="none" stroke="#0a0610" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M39,24.5 C42.17,23.5 85.83,23.5 89,24.5 C92.17,25.5 87.92,37.17 86.5,39.5 C85.08,41.83 69,57.83 67.75,59.5 C66.5,61.17 66.5,62.83 67.75,64.5 C69,66.17 85.08,82.17 86.5,84.5 C87.92,86.83 92.17,98.5 89,99.5 C85.83,100.5 42.17,100.5 39,99.5 C35.83,98.5 40.08,86.83 41.5,84.5 C42.92,82.17 59,66.17 60.25,64.5 C61.5,62.83 61.5,61.17 60.25,59.5 C59,57.83 42.92,41.83 41.5,39.5 C40.08,37.17 35.83,25.5 39,24.5 Z" fill="#bfe6f0" opacity="0.25"/>
+<path d="M46,45.12 L82,45.12 L66.5,59.5 L61.5,59.5 Z" fill="#b0d0ff"/>
+<path d="M64,59.5 L64,92" fill="none" stroke="#b0d0ff" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M41.5,97.62 C39.25,95.75 59.5,78.88 64,78.88 C68.5,78.88 88.75,95.75 86.5,97.62 C84.25,99.5 43.75,99.5 41.5,97.62 Z" fill="#4a7ad0"/>
+<path d="M49,30.12 L45.25,38.75" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M35.25,16.38 L92.75,16.38 Q95.25,16.38 95.25,18.88 L95.25,22.62 Q95.25,25.12 92.75,25.12 L35.25,25.12 Q32.75,25.12 32.75,22.62 L32.75,18.88 Q32.75,16.38 35.25,16.38 Z" fill="none" stroke="#0a0610" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M35.25,16.38 L92.75,16.38 Q95.25,16.38 95.25,18.88 L95.25,22.62 Q95.25,25.12 92.75,25.12 L35.25,25.12 Q32.75,25.12 32.75,22.62 L32.75,18.88 Q32.75,16.38 35.25,16.38 Z" fill="url(#l2)"/>
+<path d="M35.25,98.88 L92.75,98.88 Q95.25,98.88 95.25,101.38 L95.25,105.12 Q95.25,107.62 92.75,107.62 L35.25,107.62 Q32.75,107.62 32.75,105.12 L32.75,101.38 Q32.75,98.88 35.25,98.88 Z" fill="none" stroke="#0a0610" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M35.25,98.88 L92.75,98.88 Q95.25,98.88 95.25,101.38 L95.25,105.12 Q95.25,107.62 92.75,107.62 L35.25,107.62 Q32.75,107.62 32.75,105.12 L32.75,101.38 Q32.75,98.88 35.25,98.88 Z" fill="url(#l3)"/>
+<path d="M36.5,23.25 L36.5,100.75" fill="none" stroke="#0a0610" stroke-width="6.25" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M36.5,23.25 L36.5,100.75" fill="none" stroke="#8a9ab8" stroke-width="3.25" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M91.5,23.25 L91.5,100.75" fill="none" stroke="#0a0610" stroke-width="6.25" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M91.5,23.25 L91.5,100.75" fill="none" stroke="#8a9ab8" stroke-width="3.25" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="20" cy="94" rx="8" ry="4.5" fill="none" stroke="#0a0610" stroke-width="5"/>
+<ellipse cx="20" cy="94" rx="8" ry="4.5" fill="none" stroke="#eef2f6" stroke-width="2.4"/>
+<path d="M29.5,99 L39.5,99" fill="none" stroke="#0a0610" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M29.5,99 L39.5,99" fill="none" stroke="#8e98a4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="49" cy="94" rx="8" ry="4.5" fill="none" stroke="#0a0610" stroke-width="5"/>
+<ellipse cx="49" cy="94" rx="8" ry="4.5" fill="none" stroke="#eef2f6" stroke-width="2.4"/>
+<path d="M58.5,99 L68.5,99" fill="none" stroke="#0a0610" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M58.5,99 L68.5,99" fill="none" stroke="#8e98a4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="78" cy="94" rx="8" ry="4.5" fill="none" stroke="#0a0610" stroke-width="5"/>
+<ellipse cx="78" cy="94" rx="8" ry="4.5" fill="none" stroke="#eef2f6" stroke-width="2.4"/>
+<path d="M87.5,99 L97.5,99" fill="none" stroke="#0a0610" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M87.5,99 L97.5,99" fill="none" stroke="#8e98a4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="107" cy="94" rx="8" ry="4.5" fill="none" stroke="#0a0610" stroke-width="5"/>
+<ellipse cx="107" cy="94" rx="8" ry="4.5" fill="none" stroke="#eef2f6" stroke-width="2.4"/>
+</g>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="none" stroke="url(#l4)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21.5,9.5 L106.5,9.5 Q118.5,9.5 118.5,21.5 L118.5,106.5 Q118.5,118.5 106.5,118.5 L21.5,118.5 Q9.5,118.5 9.5,106.5 L9.5,21.5 Q9.5,9.5 21.5,9.5 Z" fill="none" stroke="#000000" stroke-width="1.2" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21,3 L107,3 Q125,3 125,21 L125,107 Q125,125 107,125 L21,125 Q3,125 3,107 L3,21 Q3,3 21,3 Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

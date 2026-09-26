@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<defs><linearGradient id="l1" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="58"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#f1ede6"/><stop offset="1" stop-color="#c9c2b6"/></linearGradient></defs>
+<path d="M18,32 A14,14 0 1 1 46,32 A14,14 0 1 1 18,32 Z" fill="none" stroke="#0a0610" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M18,32 A14,14 0 1 1 46,32 A14,14 0 1 1 18,32 Z" fill="url(#l1)"/>
+<path d="M50,32 L60,32" fill="none" stroke="#0a0610" stroke-width="8.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M50,32 L60,32" fill="none" stroke="#f4f0ea" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44.73,44.73 L48.97,48.97" fill="none" stroke="#0a0610" stroke-width="7.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44.73,44.73 L48.97,48.97" fill="none" stroke="#f4f0ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,50 L32,60" fill="none" stroke="#0a0610" stroke-width="8.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,50 L32,60" fill="none" stroke="#f4f0ea" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M19.27,44.73 L15.03,48.97" fill="none" stroke="#0a0610" stroke-width="7.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M19.27,44.73 L15.03,48.97" fill="none" stroke="#f4f0ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M14,32 L4,32" fill="none" stroke="#0a0610" stroke-width="8.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M14,32 L4,32" fill="none" stroke="#f4f0ea" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M19.27,19.27 L15.03,15.03" fill="none" stroke="#0a0610" stroke-width="7.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M19.27,19.27 L15.03,15.03" fill="none" stroke="#f4f0ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,14 L32,4" fill="none" stroke="#0a0610" stroke-width="8.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,14 L32,4" fill="none" stroke="#f4f0ea" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44.73,19.27 L48.97,15.03" fill="none" stroke="#0a0610" stroke-width="7.8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44.73,19.27 L48.97,15.03" fill="none" stroke="#f4f0ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32,24 L33.77,30.23 L40,32 L33.77,33.77 L32,40 L30.23,33.77 L24,32 L30.23,30.23 Z" fill="none" stroke="#0a0610" stroke-width="1.4" opacity="0.85" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

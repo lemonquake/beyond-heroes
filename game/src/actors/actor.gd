@@ -236,6 +236,8 @@ func die(killer: Node) -> void:
 		return
 	alive = false
 	hp = 0.0
+	set_meta(&"died_frozen", status.has(&"frozen"))
+	set_meta(&"died_burning", status.has(&"burning"))
 	status.clear()
 	if visual:
 		visual.play_death()

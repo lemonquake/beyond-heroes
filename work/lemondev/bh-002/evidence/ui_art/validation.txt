@@ -1,0 +1,264 @@
+UI art validation for bh-002 (tools/ui_art/validate_bh002.py)
+
+manifest: A:\Python\beyond-heroes\game\assets\ui\ui_art_manifest.json (238 entries)
+
+== raster textures ==
+[frames] expected 40
+  OK   frames/panel_main.png                    512x512 RGBA transparent=0% opaque=96% margins=[112, 112, 112, 112] centre-seam x=0.87 y=0.88
+  OK   frames/panel_inset.png                   256x256 RGBA transparent=3% opaque=97% margins=[40, 40, 40, 40] centre-seam x=1.01 y=1.14
+  OK   frames/panel_header.png                  768x128 RGBA transparent=20% opaque=66% margins=[104, 44, 104, 44]
+  OK   frames/panel_tooltip.png                 160x160 RGBA transparent=1% opaque=88% margins=[28, 28, 28, 28] centre-seam x=0.85 y=0.90
+  OK   frames/panel_dialogue.png                1024x320 RGBA transparent=4% opaque=90% margins=[136, 72, 136, 48] centre-seam x=1.02 y=0.98
+  OK   frames/panel_glass.png                   192x192 RGBA transparent=6% opaque=7% margins=[36, 36, 36, 36] centre-seam x=1.07 y=1.12
+  OK   frames/button_primary_normal.png         384x112 RGBA transparent=17% opaque=73% margins=[44, 40, 44, 40]
+  OK   frames/button_primary_hover.png          384x112 RGBA transparent=17% opaque=73% margins=[44, 40, 44, 40]
+  OK   frames/button_primary_pressed.png        384x112 RGBA transparent=17% opaque=73% margins=[44, 40, 44, 40]
+  OK   frames/button_primary_disabled.png       384x112 RGBA transparent=17% opaque=0% margins=[44, 40, 44, 40]
+  OK   frames/button_primary_focus.png          384x112 RGBA transparent=7% opaque=73% margins=[44, 40, 44, 40]
+  OK   frames/button_normal.png                 384x104 RGBA transparent=18% opaque=71% margins=[44, 40, 44, 40]
+  OK   frames/button_hover.png                  384x104 RGBA transparent=18% opaque=71% margins=[44, 40, 44, 40]
+  OK   frames/button_pressed.png                384x104 RGBA transparent=18% opaque=71% margins=[44, 40, 44, 40]
+  OK   frames/button_disabled.png               384x104 RGBA transparent=18% opaque=0% margins=[44, 40, 44, 40]
+  OK   frames/button_focus.png                  384x104 RGBA transparent=8% opaque=71% margins=[44, 40, 44, 40]
+  OK   frames/button_menu_normal.png            640x120 RGBA transparent=15% opaque=68% margins=[72, 44, 72, 44]
+  OK   frames/button_menu_hover.png             640x120 RGBA transparent=15% opaque=68% margins=[72, 44, 72, 44]
+  OK   frames/button_menu_pressed.png           640x120 RGBA transparent=15% opaque=68% margins=[72, 44, 72, 44]
+  OK   frames/button_menu_disabled.png          640x120 RGBA transparent=16% opaque=0% margins=[72, 44, 72, 44]
+  OK   frames/button_menu_focus.png             640x120 RGBA transparent=9% opaque=68% margins=[72, 44, 72, 44]
+  OK   frames/tab_normal.png                    256x88 RGBA transparent=8% opaque=82% margins=[40, 40, 40, 20]
+  OK   frames/tab_hover.png                     256x88 RGBA transparent=8% opaque=82% margins=[40, 40, 40, 20]
+  OK   frames/tab_selected.png                  256x88 RGBA transparent=8% opaque=82% margins=[40, 40, 40, 20]
+  OK   frames/checkbox_off.png                  64x64 RGBA transparent=15% opaque=64%
+  OK   frames/checkbox_on.png                   64x64 RGBA transparent=15% opaque=64%
+  OK   frames/slider_track.png                  256x36 RGBA transparent=25% opaque=63% margins=[18, 14, 18, 14]
+  OK   frames/slider_fill.png                   256x36 RGBA transparent=32% opaque=41% margins=[18, 14, 18, 14]
+  OK   frames/slider_grabber.png                48x56 RGBA transparent=41% opaque=40%
+  OK   frames/slider_grabber_hover.png          48x56 RGBA transparent=21% opaque=40%
+  OK   frames/scroll_track.png                  28x256 RGBA transparent=32% opaque=68% margins=[8, 20, 8, 20]
+  OK   frames/scroll_grabber.png                28x128 RGBA transparent=32% opaque=50% margins=[8, 26, 8, 26]
+  OK   frames/dropdown_arrow.png                32x32 RGBA transparent=72% opaque=11%
+  OK   frames/lineedit.png                      256x64 RGBA transparent=15% opaque=84% margins=[20, 20, 20, 20]
+  OK   frames/lineedit_focus.png                256x64 RGBA transparent=0% opaque=84% margins=[20, 20, 20, 20]
+  OK   frames/separator_h.png                   512x32 RGBA transparent=67% opaque=9% margins=[112, 0, 112, 0]
+  OK   frames/close_x.png                       64x64 RGBA transparent=33% opaque=50%
+  OK   frames/close_x_hover.png                 64x64 RGBA transparent=12% opaque=50%
+  OK   frames/panel_header_crest.png            224x144 RGBA transparent=55% opaque=25%
+  OK   frames/panel_dialogue_crest.png          384x104 RGBA transparent=39% opaque=43%
+[slots] expected 33
+  OK   slots/slot.png                           128x128 RGBA transparent=1% opaque=88%
+  OK   slots/slot_hover.png                     128x128 RGBA transparent=1% opaque=88%
+  OK   slots/slot_selected.png                  128x128 RGBA transparent=1% opaque=88%
+  OK   slots/slot_disabled.png                  128x128 RGBA transparent=1% opaque=0%
+  OK   slots/slot_locked.png                    128x128 RGBA transparent=1% opaque=88%
+  OK   slots/equip_slot.png                     160x160 RGBA transparent=3% opaque=84%
+  OK   slots/glyph_main_weapon.png              128x128 RGBA transparent=91% opaque=0%
+  OK   slots/glyph_sub_weapon.png               128x128 RGBA transparent=70% opaque=0%
+  OK   slots/glyph_helm.png                     128x128 RGBA transparent=62% opaque=0%
+  OK   slots/glyph_inner_garment.png            128x128 RGBA transparent=61% opaque=0%
+  OK   slots/glyph_armor.png                    128x128 RGBA transparent=58% opaque=0%
+  OK   slots/glyph_gloves.png                   128x128 RGBA transparent=70% opaque=0%
+  OK   slots/glyph_boots.png                    128x128 RGBA transparent=66% opaque=0%
+  OK   slots/glyph_accessory.png                128x128 RGBA transparent=85% opaque=0%
+  OK   slots/rarity_0.png                       128x128 RGBA transparent=72% opaque=12%
+  OK   slots/rarity_1.png                       128x128 RGBA transparent=72% opaque=13%
+  OK   slots/rarity_2.png                       128x128 RGBA transparent=69% opaque=16%
+  OK   slots/rarity_3.png                       128x128 RGBA transparent=66% opaque=17%
+  OK   slots/rarity_4.png                       128x128 RGBA transparent=62% opaque=23%
+  OK   slots/rarity_5.png                       128x128 RGBA transparent=58% opaque=19%
+  OK   slots/rarity_6.png                       128x128 RGBA transparent=47% opaque=25%
+  OK   slots/rarity_7.png                       128x128 RGBA transparent=47% opaque=23%
+  OK   slots/rarity_8.png                       128x128 RGBA transparent=30% opaque=30%
+  OK   slots/rarity_9.png                       128x128 RGBA transparent=31% opaque=26%
+  OK   slots/rarity_glow_5.png                  128x128 RGBA transparent=52% opaque=0%
+  OK   slots/rarity_glow_6.png                  128x128 RGBA transparent=44% opaque=0%
+  OK   slots/rarity_glow_7.png                  128x128 RGBA transparent=38% opaque=0%
+  OK   slots/rarity_glow_8.png                  128x128 RGBA transparent=33% opaque=0%
+  OK   slots/rarity_glow_9.png                  128x128 RGBA transparent=28% opaque=0%
+  OK   slots/skill_slot.png                     128x128 RGBA transparent=4% opaque=28%
+  OK   slots/skill_slot_empty.png               128x128 RGBA transparent=4% opaque=81%
+  OK   slots/cooldown_radial.png                128x128 RGBA transparent=44% opaque=56%
+  OK   slots/keybind_badge.png                  64x40 RGBA transparent=7% opaque=73% margins=[16, 14, 16, 14]
+[hud] expected 25
+  OK   hud/orb_frame_hp.png                     320x320 RGBA transparent=59% opaque=26%
+  OK   hud/orb_frame_mana.png                   320x320 RGBA transparent=59% opaque=26%
+  OK   hud/orb_glass.png                        320x320 RGBA transparent=76% opaque=0%
+  OK   hud/orb_liquid_noise.png                 256x256 L transparent=0% opaque=100% wrap-x=0.90 wrap-y=1.13
+  OK   hud/bar_frame_resource.png               512x72 RGBA transparent=48% opaque=27% margins=[76, 0, 76, 0]
+  OK   hud/bar_frame_xp.png                     1024x28 RGBA transparent=8% opaque=30% margins=[48, 0, 48, 0]
+  OK   hud/bar_fill.png                         256x32 RGBA transparent=0% opaque=100% margins=[4, 0, 4, 0]
+  OK   hud/bar_frame_boss.png                   1024x136 RGBA transparent=62% opaque=23% margins=[180, 0, 180, 0]
+  OK   hud/bar_frame_target.png                 512x64 RGBA transparent=45% opaque=26% margins=[68, 0, 68, 0]
+  OK   hud/pip_empty.png                        48x48 RGBA transparent=49% opaque=34%
+  OK   hud/pip_full.png                         48x48 RGBA transparent=37% opaque=35%
+  OK   hud/minimap_frame.png                    400x400 RGBA transparent=72% opaque=17%
+  OK   hud/minimap_mask.png                     400x400 RGBA transparent=54% opaque=46%
+  OK   hud/buff_frame.png                       64x64 RGBA transparent=40% opaque=25%
+  OK   hud/debuff_frame.png                     64x64 RGBA transparent=40% opaque=25%
+  OK   hud/vignette_lowhp.png                   1920x1080 RGBA transparent=34% opaque=0%
+  OK   hud/vignette_dark.png                    1920x1080 RGBA transparent=30% opaque=0%
+  OK   hud/loot_beam.png                        64x512 RGBA transparent=52% opaque=1%
+  OK   hud/mote.png                             32x32 RGBA transparent=56% opaque=0%
+  OK   hud/spark.png                            32x32 RGBA transparent=52% opaque=4%
+  OK   hud/ember.png                            32x32 RGBA transparent=36% opaque=19%
+  OK   hud/cursor_default.png                   48x48 RGBA transparent=67% opaque=24% hotspot=[3, 3]
+  OK   hud/cursor_attack.png                    48x48 RGBA transparent=62% opaque=28% hotspot=[2, 2]
+  OK   hud/cursor_interact.png                  48x48 RGBA transparent=48% opaque=41% hotspot=[3, 3]
+  OK   hud/cursor_talk.png                      48x48 RGBA transparent=49% opaque=41% hotspot=[3, 3]
+[tree] expected 18
+  OK   tree/node_minor_locked.png               96x96 RGBA transparent=52% opaque=24%
+  OK   tree/node_minor_available.png            96x96 RGBA transparent=51% opaque=23%
+  OK   tree/node_minor_allocated.png            96x96 RGBA transparent=28% opaque=27%
+  OK   tree/node_major_locked.png               128x128 RGBA transparent=59% opaque=23%
+  OK   tree/node_major_available.png            128x128 RGBA transparent=59% opaque=22%
+  OK   tree/node_major_allocated.png            128x128 RGBA transparent=38% opaque=24%
+  OK   tree/node_keystone_locked.png            192x192 RGBA transparent=64% opaque=20%
+  OK   tree/node_keystone_available.png         192x192 RGBA transparent=64% opaque=20%
+  OK   tree/node_keystone_allocated.png         192x192 RGBA transparent=48% opaque=22%
+  OK   tree/node_skill_locked.png               144x144 RGBA transparent=49% opaque=30%
+  OK   tree/node_skill_available.png            144x144 RGBA transparent=49% opaque=30%
+  OK   tree/node_skill_allocated.png            144x144 RGBA transparent=34% opaque=34%
+  OK   tree/node_upgrade_locked.png             112x112 RGBA transparent=60% opaque=21%
+  OK   tree/node_upgrade_available.png          112x112 RGBA transparent=60% opaque=20%
+  OK   tree/node_upgrade_allocated.png          112x112 RGBA transparent=41% opaque=23%
+  OK   tree/connector.png                       128x32 RGBA transparent=50% opaque=44% wrap-x=1.16
+  OK   tree/tree_bg_knight.png                  1600x900 RGBA transparent=0% opaque=100%
+  OK   tree/tree_bg_mage.png                    1600x900 RGBA transparent=0% opaque=100%
+[menu] expected 4
+  OK   menu/title_logo.png                      1600x420 RGBA transparent=52% opaque=15%
+  OK   menu/menu_frame.png                      512x1024 RGBA transparent=17% opaque=22% margins=[0, 208, 0, 176]
+  OK   menu/vignette_menu.png                   1920x1080 RGBA transparent=15% opaque=0%
+  OK   menu/class_plinth_glow.png               512x256 RGBA transparent=60% opaque=0%
+
+== SVG (bh-001 rules: circle,defs,ellipse,g,linearGradient,path,radialGradient,rect,stop,svg; no style/filter/mask/clip-path/href/class; refs resolve) ==
+[icons/items] expected 67 new files (viewBox 0 0 128 128)
+  OK   icons/items/sword_2.svg viewBox="0 0 128 128" 8601 bytes
+  OK   icons/items/sword_3.svg viewBox="0 0 128 128" 8714 bytes
+  OK   icons/items/greatsword_2.svg viewBox="0 0 128 128" 9244 bytes
+  OK   icons/items/greatsword_3.svg viewBox="0 0 128 128" 9655 bytes
+  OK   icons/items/axe_2.svg viewBox="0 0 128 128" 6554 bytes
+  OK   icons/items/axe_3.svg viewBox="0 0 128 128" 10283 bytes
+  OK   icons/items/spear_2.svg viewBox="0 0 128 128" 6610 bytes
+  OK   icons/items/spear_3.svg viewBox="0 0 128 128" 6595 bytes
+  OK   icons/items/dagger_2.svg viewBox="0 0 128 128" 5559 bytes
+  OK   icons/items/dagger_3.svg viewBox="0 0 128 128" 6634 bytes
+  OK   icons/items/bow_2.svg viewBox="0 0 128 128" 7999 bytes
+  OK   icons/items/bow_3.svg viewBox="0 0 128 128" 11608 bytes
+  OK   icons/items/staff_2.svg viewBox="0 0 128 128" 7560 bytes
+  OK   icons/items/staff_3.svg viewBox="0 0 128 128" 8113 bytes
+  OK   icons/items/wand_2.svg viewBox="0 0 128 128" 4467 bytes
+  OK   icons/items/wand_3.svg viewBox="0 0 128 128" 5126 bytes
+  OK   icons/items/shield_2.svg viewBox="0 0 128 128" 4779 bytes
+  OK   icons/items/shield_3.svg viewBox="0 0 128 128" 7798 bytes
+  OK   icons/items/helm_plate_2.svg viewBox="0 0 128 128" 6906 bytes
+  OK   icons/items/helm_plate_3.svg viewBox="0 0 128 128" 10455 bytes
+  OK   icons/items/helm_hood_2.svg viewBox="0 0 128 128" 5535 bytes
+  OK   icons/items/helm_hood_3.svg viewBox="0 0 128 128" 6939 bytes
+  OK   icons/items/armor_plate_2.svg viewBox="0 0 128 128" 7710 bytes
+  OK   icons/items/armor_plate_3.svg viewBox="0 0 128 128" 9208 bytes
+  OK   icons/items/armor_robe_2.svg viewBox="0 0 128 128" 6217 bytes
+  OK   icons/items/armor_robe_3.svg viewBox="0 0 128 128" 7465 bytes
+  OK   icons/items/inner_chain.svg viewBox="0 0 128 128" 31426 bytes
+  OK   icons/items/inner_silk.svg viewBox="0 0 128 128" 4657 bytes
+  OK   icons/items/gloves_plate_2.svg viewBox="0 0 128 128" 9447 bytes
+  OK   icons/items/gloves_cloth_2.svg viewBox="0 0 128 128" 6577 bytes
+  OK   icons/items/boots_plate_2.svg viewBox="0 0 128 128" 4104 bytes
+  OK   icons/items/boots_cloth_2.svg viewBox="0 0 128 128" 3874 bytes
+  OK   icons/items/ring_2.svg viewBox="0 0 128 128" 5368 bytes
+  OK   icons/items/ring_3.svg viewBox="0 0 128 128" 11566 bytes
+  OK   icons/items/amulet_2.svg viewBox="0 0 128 128" 10690 bytes
+  OK   icons/items/amulet_3.svg viewBox="0 0 128 128" 11303 bytes
+  OK   icons/items/charm_2.svg viewBox="0 0 128 128" 5134 bytes
+  OK   icons/items/potion_health_large.svg viewBox="0 0 128 128" 5786 bytes
+  OK   icons/items/potion_mana_large.svg viewBox="0 0 128 128" 5786 bytes
+  OK   icons/items/elixir_rejuvenation.svg viewBox="0 0 128 128" 5480 bytes
+  OK   icons/items/scroll_return.svg viewBox="0 0 128 128" 5766 bytes
+  OK   icons/items/antidote.svg viewBox="0 0 128 128" 3643 bytes
+  OK   icons/items/aether_shard.svg viewBox="0 0 128 128" 6058 bytes
+  OK   icons/items/frost_crystal.svg viewBox="0 0 128 128" 10925 bytes
+  OK   icons/items/storm_essence.svg viewBox="0 0 128 128" 5357 bytes
+  OK   icons/items/shadow_silk.svg viewBox="0 0 128 128" 4159 bytes
+  OK   icons/items/beast_hide.svg viewBox="0 0 128 128" 4992 bytes
+  OK   icons/items/quest_seal_key.svg viewBox="0 0 128 128" 5631 bytes
+  OK   icons/items/quest_tablet.svg viewBox="0 0 128 128" 9190 bytes
+  OK   icons/items/quest_crown_fragment.svg viewBox="0 0 128 128" 8164 bytes
+  OK   icons/items/quest_letter.svg viewBox="0 0 128 128" 2754 bytes
+  OK   icons/items/set_guardian_helm.svg viewBox="0 0 128 128" 9007 bytes
+  OK   icons/items/set_guardian_armor.svg viewBox="0 0 128 128" 12319 bytes
+  OK   icons/items/set_guardian_gloves.svg viewBox="0 0 128 128" 11645 bytes
+  OK   icons/items/set_guardian_boots.svg viewBox="0 0 128 128" 8313 bytes
+  OK   icons/items/set_guardian_shield.svg viewBox="0 0 128 128" 9037 bytes
+  OK   icons/items/set_sage_hood.svg viewBox="0 0 128 128" 5965 bytes
+  OK   icons/items/set_sage_robe.svg viewBox="0 0 128 128" 6822 bytes
+  OK   icons/items/set_sage_gloves.svg viewBox="0 0 128 128" 6779 bytes
+  OK   icons/items/set_sage_boots.svg viewBox="0 0 128 128" 4160 bytes
+  OK   icons/items/set_sage_staff.svg viewBox="0 0 128 128" 8017 bytes
+  OK   icons/items/aether_sword.svg viewBox="0 0 128 128" 8561 bytes
+  OK   icons/items/aether_greatsword.svg viewBox="0 0 128 128" 9061 bytes
+  OK   icons/items/aether_staff.svg viewBox="0 0 128 128" 12269 bytes
+  OK   icons/items/aether_wand.svg viewBox="0 0 128 128" 5788 bytes
+  OK   icons/items/aether_ring.svg viewBox="0 0 128 128" 12070 bytes
+  OK   icons/items/aether_amulet.svg viewBox="0 0 128 128" 9622 bytes
+[icons/status] expected 11 new files (viewBox 0 0 128 128)
+  OK   icons/status/poisoned.svg viewBox="0 0 128 128" 6707 bytes
+  OK   icons/status/slowed.svg viewBox="0 0 128 128" 6271 bytes
+  OK   icons/status/silenced.svg viewBox="0 0 128 128" 4742 bytes
+  OK   icons/status/weakened.svg viewBox="0 0 128 128" 6793 bytes
+  OK   icons/status/armor_broken.svg viewBox="0 0 128 128" 10014 bytes
+  OK   icons/status/windswept.svg viewBox="0 0 128 128" 10220 bytes
+  OK   icons/status/empowered.svg viewBox="0 0 128 128" 9075 bytes
+  OK   icons/status/fortified.svg viewBox="0 0 128 128" 11247 bytes
+  OK   icons/status/overcharged.svg viewBox="0 0 128 128" 7200 bytes
+  OK   icons/status/resolute.svg viewBox="0 0 128 128" 14461 bytes
+  OK   icons/status/badly_hurt.svg viewBox="0 0 128 128" 4327 bytes
+[icons/ui] expected 32 new files (viewBox 0 0 64 64)
+  OK   icons/ui/gold.svg viewBox="0 0 64 64" 2319 bytes
+  OK   icons/ui/aether.svg viewBox="0 0 64 64" 1562 bytes
+  OK   icons/ui/level.svg viewBox="0 0 64 64" 971 bytes
+  OK   icons/ui/xp.svg viewBox="0 0 64 64" 2771 bytes
+  OK   icons/ui/sort.svg viewBox="0 0 64 64" 653 bytes
+  OK   icons/ui/filter.svg viewBox="0 0 64 64" 682 bytes
+  OK   icons/ui/search.svg viewBox="0 0 64 64" 910 bytes
+  OK   icons/ui/lock.svg viewBox="0 0 64 64" 1012 bytes
+  OK   icons/ui/favorite.svg viewBox="0 0 64 64" 697 bytes
+  OK   icons/ui/junk.svg viewBox="0 0 64 64" 1545 bytes
+  OK   icons/ui/trash.svg viewBox="0 0 64 64" 1731 bytes
+  OK   icons/ui/split.svg viewBox="0 0 64 64" 667 bytes
+  OK   icons/ui/compare.svg viewBox="0 0 64 64" 1501 bytes
+  OK   icons/ui/settings.svg viewBox="0 0 64 64" 1407 bytes
+  OK   icons/ui/save.svg viewBox="0 0 64 64" 1587 bytes
+  OK   icons/ui/load.svg viewBox="0 0 64 64" 1587 bytes
+  OK   icons/ui/map.svg viewBox="0 0 64 64" 1026 bytes
+  OK   icons/ui/teleport.svg viewBox="0 0 64 64" 1447 bytes
+  OK   icons/ui/quest.svg viewBox="0 0 64 64" 1759 bytes
+  OK   icons/ui/talk.svg viewBox="0 0 64 64" 784 bytes
+  OK   icons/ui/shop.svg viewBox="0 0 64 64" 1055 bytes
+  OK   icons/ui/repair.svg viewBox="0 0 64 64" 1667 bytes
+  OK   icons/ui/buyback.svg viewBox="0 0 64 64" 1401 bytes
+  OK   icons/ui/back.svg viewBox="0 0 64 64" 770 bytes
+  OK   icons/ui/close.svg viewBox="0 0 64 64" 360 bytes
+  OK   icons/ui/plus.svg viewBox="0 0 64 64" 360 bytes
+  OK   icons/ui/minus.svg viewBox="0 0 64 64" 332 bytes
+  OK   icons/ui/check.svg viewBox="0 0 64 64" 346 bytes
+  OK   icons/ui/warning.svg viewBox="0 0 64 64" 591 bytes
+  OK   icons/ui/info.svg viewBox="0 0 64 64" 635 bytes
+  OK   icons/ui/skull.svg viewBox="0 0 64 64" 927 bytes
+  OK   icons/ui/crown.svg viewBox="0 0 64 64" 2160 bytes
+[portraits] expected 8 new files (viewBox 0 0 256 256)
+  OK   portraits/knight.svg viewBox="0 0 256 256" 25652 bytes
+  OK   portraits/mage.svg viewBox="0 0 256 256" 33036 bytes
+  OK   portraits/blacksmith.svg viewBox="0 0 256 256" 32159 bytes
+  OK   portraits/merchant.svg viewBox="0 0 256 256" 25511 bytes
+  OK   portraits/elder.svg viewBox="0 0 256 256" 32064 bytes
+  OK   portraits/mystic.svg viewBox="0 0 256 256" 30064 bytes
+  OK   portraits/captain.svg viewBox="0 0 256 256" 27619 bytes
+  OK   portraits/stranger.svg viewBox="0 0 256 256" 15768 bytes
+
+== determinism: re-render a sample and compare bytes ==
+  OK   frames/panel_main.png sha1 6d840f97c2d2 identical
+  OK   slots/rarity_9.png sha1 35d20b84f3ad identical
+  OK   hud/orb_frame_hp.png sha1 965f02ac2ce8 identical
+  OK   menu/title_logo.png sha1 9d0a48b794bd identical
+  OK   tree/node_keystone_allocated.png sha1 d92e454b98cc identical
+
+raster files checked: 120; svg files checked: 118; failures: 0
+RESULT: PASS

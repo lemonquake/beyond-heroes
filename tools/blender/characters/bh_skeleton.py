@@ -88,9 +88,12 @@ def joints(p):
         J["hand." + side] = ((xw, 0, sh), (xh, 0, sh), up)
         xg = xw + p["grip_x"] * sx
         zg = sh - p["grip_drop"]
-        # weapon socket: blade direction = forward (-Y) out of the thumb side of the fist.
-        # Bone local X = knuckle/edge direction (distal along the arm), so Z = X x Y.
-        zhint = (0, 0, 1.0) if side == "R" else (0, 0, -1.0)
+        # weapon socket: head = grip center in the closed fist, bone (+Y) = blade direction = forward (-Y) out of
+        # the thumb side of the fist. Both sockets share the SAME rest frame: +Z = back of the hand (palm faces
+        # down in the T-pose), X = Y x Z = -X world. Right hand: +X = knuckles/true edge (distal).
+        # Left hand: -X = knuckles. With identity attachment a shield (face -Y in its GLB) faces outward from the
+        # back of the left hand, and weapon flats (+-Y in the GLB) face +-Z.
+        zhint = (0, 0, 1.0)
         J["weapon." + side] = ((xg, 0, zg), (xg, -0.15 * p["upper_len"] / 0.28, zg), zhint)
         hx = p["hip_x"] * sx
         J["thigh." + side] = ((hx, 0, p["hip_h"]), (hx, 0, p["knee_h"]), fwd)
@@ -121,8 +124,9 @@ def build_armature(p, name="Armature", extra=None):
     arm = bpy.data.armatures.new(name)
     ob = bpy.data.objects.new(name, arm)
     bpy.context.scene.collection.objects.link(ob)
-    for o in bpy.context.view_layer.objects:
-        o.select_set(False)
+    for o in bpy.context.scene.objects:
+        if o is not None:
+            o.select_set(False)
     bpy.context.view_layer.objects.active = ob
     ob.select_set(True)
     bpy.ops.object.mode_set(mode="EDIT")

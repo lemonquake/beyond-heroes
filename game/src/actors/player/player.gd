@@ -1,0 +1,1381 @@
+class_name Player
+extends Actor
+## The hero in the world. Reads HeroData (the persistent model), owns runtime state (HP/mana pools, statuses, class
+## resource, cooldowns, the current animation-driven action) and turns input into intents:
+##
+##   Move (WASD, camera-relative) · Aim (mouse) · Light attack chain (LMB, four steps, buffered, finisher recovery)
+##   Heavy attack (RMB; hold to charge on charge weapons; branches from any chain step) · Dodge (Space, i-frames)
+##   Guard (F hold; frontal block, parry window) · Skills 1–6 · Potions Q/E · Interact R
+##
+## All damage goes through DamagePipeline via Actor.receive_hit; weapon damage is applied only inside the hit windows
+## of the playing animation (TimedAction), scaled by attack speed.
+
+signal skill_used(skill_id: StringName)
+signal cooldowns_changed
+signal resource_changed(value: float, max_value: float)
+signal interact_changed(target: Node)
+signal combo_changed(step: int)
+signal player_died
+signal stats_changed
+
+const INPUT_BUFFER := 0.35
+const COMBAT_LINGER := 4.0
+const FINISHER_LOCK := 0.3
+const GUARD_MOVE_MULT := 0.45
+const CHARGE_MOVE_MULT := 0.35
+const POTION_COOLDOWN := 1.5
+const LOW_HP := 0.3
+const INTERACT_RANGE := 2.6
+const RIPOSTE_WINDOW := 2.0
+const ACCEL := 45.0
+const TURN_RATE := 14.0
+
+var hero: HeroData
+var resource: ClassResource
+var runner: SkillRunner
+var camera: PlayerCamera
+var aim_point := Vector3.ZERO
+var input_enabled := true
+
+var action: TimedAction
+var action_kind := &""                 # light, heavy, charge_release, skill, dodge, interact, potion
+var chain_step := 0
+var _chain_expire := 0.0
+var _chain_lock := 0.0
+var _queued := &""
+var _queued_arg := &""
+var _queued_t := 0.0
+var charging := false
+var _charge_t := 0.0
+var guarding := false
+var _guard_t := 0.0
+var channel_skill := &""
+var _channel_tick := 0.0
+var _channel_params := {}
+var _dash_vel := Vector3.ZERO
+var _dash_t := 0.0
+var _leap := {}
+var cooldowns := {}                    # skill id -> remaining seconds
+var cooldown_total := {}
+var potion_cd := 0.0
+var dodge_cd := 0.0
+var shield_t := 0.0
+var _combat_t := 99.0
+var _attack_counter := 0
+var _still_t := 0.0
+var _riposte_t := 0.0
+var _last_element := -1
+var _overload_hits := {}               # element -> time
+var _heartbeat_t := 0.0
+var _pulse_cd := 0.0
+var _shockwave_cd := 0.0
+var _haste_t := 0.0
+var _footstep_acc := 0.0
+var _interact_target: Node
+var _interact_scan := 0.0
+var _time := 0.0
+var _last_move_dir := Vector3.FORWARD
+var _hurt_sound_t := 0.0
+var dead_since := -1.0
+
+func _ready() -> void:
+	super._ready()
+	team = BH.Team.PLAYER
+	add_to_group(&"player")
+	collision_layer = BH.LAYER_PLAYER
+	collision_mask = BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS | BH.LAYER_ENEMY
+	var cs := CollisionShape3D.new()
+	var cap := CapsuleShape3D.new()
+	cap.radius = 0.4
+	cap.height = 1.8
+	cs.shape = cap
+	cs.position.y = 0.9
+	add_child(cs)
+	body_radius = 0.4
+	body_height = 1.8
+	camera = PlayerCamera.new()
+	camera.target = self
+	add_child(camera)
+	camera.make_current()
+	runner = SkillRunner.new(self)
+	Events.actor_died.connect(_on_actor_died)
+
+## Bind a hero (new game / load) and build the visual.
+func bind(h: HeroData) -> void:
+	hero = h
+	display_name = h.hero_name
+	level = h.progress.level
+	resource = ClassResource.new(h.cls.resource_kind)
+	resource.changed.connect(func(v, m): resource_changed.emit(v, m))
+	h.stats_dirty.connect(_on_hero_changed)
+	h.progress.leveled_up.connect(_on_level_up)
+	visual = CharacterVisual.new()
+	visual.name = "Visual"
+	add_child(visual)
+	visual.setup(h.cls.model_path, 1.0, h.cls.tint, h.cls.id)
+	refresh_equipment_visuals()
+	mark_stats_dirty()
+	ensure_stats()
+	hp = max_hp()
+	mana = max_mana()
+	if stats.has_flag(&"valor_hold"):
+		resource.gain(stats.flag(&"valor_hold"))
+	health_changed.emit(hp, max_hp())
+	mana_changed.emit(mana, max_mana())
+	Events.player_spawned.emit(self)
+
+func _on_hero_changed() -> void:
+	mark_stats_dirty()
+	refresh_equipment_visuals()
+
+func _on_level_up(new_level: int, gained: int) -> void:
+	level = new_level
+	mark_stats_dirty()
+	ensure_stats()
+	hp = max_hp()
+	mana = max_mana()
+	health_changed.emit(hp, max_hp())
+	mana_changed.emit(mana, max_mana())
+	Events.player_leveled.emit(new_level, gained)
+	Audio.play_ui(&"level_up")
+	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.4, 0.9), 4.0, 0.9, 0.8), global_position)
+	FX.spawn(VFXLib.beam(Color(1.0, 0.85, 0.45), 6.0, 0.9), global_position)
+	FX.text_popup(center() + Vector3.UP * 0.8, "Level %d" % new_level, UITheme.GOLD, 1.5)
+
+func refresh_equipment_visuals() -> void:
+	if visual == null or hero == null:
+		return
+	var lo := hero.equipment.loadout()
+	var main := hero.equipment.get_item(&"main_weapon")
+	var sub := hero.equipment.get_item(&"sub_weapon")
+	visual.detach_weapon(&"main")
+	visual.detach_weapon(&"off")
+	if main != null and lo.main_type != null:
+		visual.attach_weapon(&"main", _weapon_model(main, lo.main_type), lo.main_type.grip_offset)
+	if sub != null:
+		if sub.base.category == &"shield":
+			visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+		elif lo.off_type != null:
+			visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type), lo.off_type.grip_offset)
+	visual.set_stance(stance_idle())
+
+func _weapon_model(item: ItemInstance, wt: WeaponTypeDef) -> String:
+	if item.rarity == BH.Rarity.AETHER:
+		var ae := "res://assets/weapons/%s_aether.glb" % wt.id
+		if ResourceLoader.exists(ae):
+			return ae
+	return wt.model
+
+func stance_idle() -> StringName:
+	var lo := stats.loadout if stats else hero.equipment.loadout()
+	if lo.is_unarmed():
+		return &"idle_1h"
+	if lo.dual_wield:
+		return &"idle_dual"
+	if lo.has_shield:
+		return &"idle_shield"
+	return lo.main_type.idle_anim
+
+# ---- Stats ---------------------------------------------------------------------------------------------------
+
+func rebuild_stats() -> void:
+	var mods := status.stat_modifiers()
+	if resource:
+		mods.append_array(resource.modifiers(40.0 if _has_hero_flag(&"resolute_40") else 50.0))
+	if _haste_t > 0.0:
+		mods.append(StatModifier.more(&"move_speed", stats.flag(&"dodge_haste") if stats else 0.2, "Windswift"))
+	if stats and stats.has_flag(&"low_hp_dr") and hp < max_hp() * 0.35:
+		mods.append(StatModifier.more(&"damage_taken", -stats.flag(&"low_hp_dr"), "Bastion"))
+	stats = hero.compute_stats(mods)
+	affinity = Elements.PHYSICAL
+	level = hero.progress.level
+	if resource:
+		resource.set_max(stats.get_stat(&"arcane_max", 5.0) if resource.kind == &"arcane" else 100.0)
+	stats_changed.emit()
+
+func _has_hero_flag(f: StringName) -> bool:
+	return stats != null and stats.has_flag(f)
+
+func in_combat() -> bool:
+	return _combat_t < COMBAT_LINGER
+
+func is_low_hp() -> bool:
+	return alive and hp < max_hp() * LOW_HP
+
+# ---- Aim ----------------------------------------------------------------------------------------------------
+
+func _update_aim() -> void:
+	if camera == null or not is_inside_tree():
+		return
+	var vp := get_viewport()
+	var mp := vp.get_mouse_position()
+	var from := camera.project_ray_origin(mp)
+	var dir := camera.project_ray_normal(mp)
+	var plane := Plane(Vector3.UP, global_position.y + 0.9)
+	var hit = plane.intersects_ray(from, dir)
+	if hit != null:
+		aim_point = Vector3(hit.x, global_position.y, hit.z)
+	var enemy := _enemy_under_cursor(from, dir)
+	if enemy:
+		aim_point = Vector3(enemy.global_position.x, global_position.y, enemy.global_position.z)
+		Game.hover_target = enemy
+	else:
+		Game.hover_target = null
+
+func _enemy_under_cursor(from: Vector3, dir: Vector3) -> Actor:
+	var best: Actor = null
+	var best_d := INF
+	for e in get_tree().get_nodes_in_group(&"enemy"):
+		var a := e as Actor
+		if a == null or not a.alive:
+			continue
+		var c := a.center()
+		var t := (c - from).dot(dir)
+		if t < 0.0:
+			continue
+		var d := (from + dir * t).distance_to(c)
+		if d < a.body_radius + 0.35 and t < best_d:
+			best_d = t
+			best = a
+	return best
+
+func aim_dir() -> Vector3:
+	var d := aim_point - global_position
+	d.y = 0.0
+	return d.normalized() if d.length() > 0.2 else forward()
+
+func cast_point() -> Vector3:
+	if visual and hero and hero.equipment.loadout().main_type != null and hero.equipment.loadout().main_type.ranged:
+		var p := visual.weapon_point(&"main", 1.0, hero.equipment.loadout().main_type.length)
+		if p.is_finite() and p.distance_to(global_position) < 3.0:
+			return p
+	return global_position + Vector3.UP * 1.3 + forward() * 0.6
+
+# ---- Frame loop ---------------------------------------------------------------------------------------------
+
+func _physics_process(delta: float) -> void:
+	if hero == null or not is_finite(delta) or delta <= 0.0:
+		return
+	_time += delta
+	ensure_stats()
+	status.tick(delta)
+	if not alive:
+		physics_move(delta, Vector3.ZERO)
+		return
+	_tick_timers(delta)
+	_regen(delta)
+	_update_aim()
+	if input_enabled and not Game.ui_blocking and not status.is_disabled():
+		_read_input(delta)
+	elif status.is_disabled():
+		_cancel_action(false)
+	var step_ok := true
+	if action:
+		step_ok = action.step(delta)
+		if not step_ok:
+			_on_action_done()
+	_update_channel(delta)
+	var desired := _movement(delta)
+	if not _leap.is_empty():
+		_leap_step(delta)
+	else:
+		physics_move(delta, desired)
+	_update_facing(delta, desired)
+	_update_visual(delta)
+	_update_interaction(delta)
+
+func _tick_timers(delta: float) -> void:
+	var changed := false
+	for k in cooldowns.keys():
+		cooldowns[k] = maxf(0.0, cooldowns[k] - delta)
+		if cooldowns[k] <= 0.0:
+			cooldowns.erase(k)
+			changed = true
+			Events.skill_ready.emit(k)
+	if changed:
+		cooldowns_changed.emit()
+	potion_cd = maxf(0.0, potion_cd - delta)
+	dodge_cd = maxf(0.0, dodge_cd - delta)
+	_chain_lock = maxf(0.0, _chain_lock - delta)
+	_riposte_t = maxf(0.0, _riposte_t - delta)
+	_pulse_cd = maxf(0.0, _pulse_cd - delta)
+	_shockwave_cd = maxf(0.0, _shockwave_cd - delta)
+	_combat_t += delta
+	if _haste_t > 0.0:
+		_haste_t -= delta
+		if _haste_t <= 0.0:
+			mark_stats_dirty()
+	if _heartbeat_t > 0.0:
+		_heartbeat_t -= delta
+	if shield_t > 0.0:
+		shield_t -= delta
+		if shield_t <= 0.0:
+			shield_hp = 0.0
+			status.remove(&"shielded")
+	if _queued != &"" and _time - _queued_t > INPUT_BUFFER:
+		_queued = &""
+	if resource:
+		resource.tick(delta, _enemy_near(8.0), stats.has_flag(&"valor_hold"))
+		var resolute := resource.is_resolute(40.0 if stats.has_flag(&"resolute_40") else 50.0)
+		if resolute != status.has(&"resolute"):
+			if resolute:
+				status.apply(&"resolute", 0.0)
+			else:
+				status.remove(&"resolute")
+		if resource.is_overcharged() != status.has(&"overcharged"):
+			if resource.is_overcharged():
+				status.apply(&"overcharged", 0.0)
+			else:
+				status.remove(&"overcharged")
+	var low := is_low_hp()
+	_hurt_sound_t -= delta
+	if low and _hurt_sound_t <= 0.0:
+		_hurt_sound_t = 2.6
+		Audio.play_ui(&"heartbeat")
+
+func _regen(delta: float) -> void:
+	var hr := stats.get_stat(&"hp_regen")
+	var mr := stats.get_stat(&"mana_regen")
+	if stats.has_flag(&"still_mana") and _still_t >= 1.0:
+		mr *= 1.0 + stats.flag(&"still_mana")
+		hr *= 1.5
+	if status.has(&"purged"):
+		hr *= 0.5
+	if status.has(&"regen"):
+		hr += status.magnitude(&"regen")
+	if hp < max_hp():
+		hp = minf(max_hp(), hp + hr * delta)
+		health_changed.emit(hp, max_hp())
+	if mana < max_mana():
+		mana = minf(max_mana(), mana + mr * delta)
+		mana_changed.emit(mana, max_mana())
+
+func _enemy_near(r: float) -> bool:
+	for e in get_tree().get_nodes_in_group(&"enemy"):
+		if e.alive and e.global_position.distance_squared_to(global_position) < r * r and e.is_aggressive():
+			return true
+	return false
+
+func mark_combat() -> void:
+	_combat_t = 0.0
+
+# ---- Input --------------------------------------------------------------------------------------------------
+
+func _mouse_blocked() -> bool:
+	var h := get_viewport().gui_get_hovered_control()
+	return h != null and h.mouse_filter == Control.MOUSE_FILTER_STOP
+
+func _read_input(delta: float) -> void:
+	if Input.is_action_just_pressed(&"dodge"):
+		_request(&"dodge")
+	var lmb := Input.is_action_pressed(&"primary") and not _mouse_blocked()
+	if Input.is_action_just_pressed(&"primary") and not _mouse_blocked():
+		if Game.hover_loot and is_instance_valid(Game.hover_loot):
+			Game.hover_loot.request_pickup(self)
+		else:
+			_request(&"light")
+	elif lmb and (action == null or action_kind == &"light"):
+		_request(&"light")   # holding attack keeps the chain going (finisher lock prevents endless spam)
+	var wt := _main_type()
+	if Input.is_action_just_pressed(&"secondary") and not _mouse_blocked():
+		if wt != null and wt.charge_max > 0.0:
+			_request(&"charge")
+		else:
+			_request(&"heavy")
+	if charging and not Input.is_action_pressed(&"secondary"):
+		_release_charge()
+	var want_guard := Input.is_action_pressed(&"guard") and _can_guard()
+	if want_guard != guarding:
+		_set_guard(want_guard)
+	for i in HeroData.SKILL_BAR_SIZE:
+		if Input.is_action_just_pressed(StringName("skill_%d" % (i + 1))):
+			var sid: StringName = hero.skill_bar[i]
+			if sid != &"":
+				_request(&"skill", sid)
+	if channel_skill != &"":
+		var idx := hero.skill_bar.find(channel_skill)
+		if idx < 0 or not Input.is_action_pressed(StringName("skill_%d" % (idx + 1))):
+			_stop_channel()
+	if Input.is_action_just_pressed(&"potion_health"):
+		use_potion(&"heal")
+	if Input.is_action_just_pressed(&"potion_mana"):
+		use_potion(&"mana")
+	if Input.is_action_just_pressed(&"interact"):
+		interact()
+	if Input.is_action_just_pressed(&"zoom_in"):
+		camera.zoom(-1)
+	elif Input.is_action_just_pressed(&"zoom_out"):
+		camera.zoom(1)
+	_try_queued()
+
+func _main_type() -> WeaponTypeDef:
+	return stats.loadout.main_type if stats and stats.loadout else null
+
+func _request(kind: StringName, arg := &"") -> void:
+	_queued = kind
+	_queued_arg = arg
+	_queued_t = _time
+	_try_queued()
+
+func _try_queued() -> void:
+	if _queued == &"":
+		return
+	var kind := _queued
+	var arg := _queued_arg
+	if not _can_start(kind):
+		return
+	_queued = &""
+	match kind:
+		&"light": _start_light()
+		&"heavy": _start_heavy(1.0, false)
+		&"charge": _start_charge()
+		&"dodge": _start_dodge()
+		&"skill": _start_skill(arg)
+
+## Whether a new intent may interrupt what is happening now.
+func _can_start(kind: StringName) -> bool:
+	if not alive or status.is_disabled():
+		return false
+	if kind == &"dodge":
+		if dodge_cd > 0.0:
+			return false
+		if action == null:
+			return true
+		# dodge-cancel: allowed during recovery, and during a light/heavy wind-up before the blow lands
+		return action.can_cancel() or action_kind == &"potion" or ((action_kind == &"light" or action_kind == &"heavy") and action.elapsed < action.first_hit_time() * 0.6)
+	if channel_skill != &"" and kind != &"skill":
+		return false
+	if charging:
+		return false
+	if kind == &"light" and _chain_lock > 0.0:
+		return false
+	if action == null:
+		return true
+	if action_kind == &"dodge":
+		return action.can_cancel()
+	if kind == &"heavy" and action_kind == &"light":
+		return action.in_combo_window() and action.can_cancel()
+	return action.can_cancel()
+
+# ---- Light chain ----------------------------------------------------------------------------------------------
+
+func _attack_rate(anims: Array) -> float:
+	var wt := _main_type()
+	var aps := (wt.attacks_per_second if wt else 1.4) * stats.get_stat(&"attack_speed", 1.0)
+	var total := 0.0
+	for n in anims:
+		total += float(DB.anim(n).get("length", 0.6))
+	var avg := total / maxf(1.0, anims.size())
+	return clampf(aps * avg, StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
+
+func _chain_anims() -> Array:
+	var wt := _main_type()
+	if wt == null:
+		return [&"sword_1", &"sword_2", &"sword_3", &"sword_4"]
+	if stats.loadout.dual_wield and not wt.dual_light_anims.is_empty():
+		return wt.dual_light_anims
+	return wt.light_anims
+
+func _start_light() -> void:
+	_cancel_action(true)
+	if _time > _chain_expire:
+		chain_step = 0
+	var anims := _chain_anims()
+	var step := chain_step % 4
+	var anim: StringName = anims[mini(step, anims.size() - 1)]
+	var a := TimedAction.from_anim(anim, _attack_rate(anims))
+	a.data["step"] = step
+	a.data["hand"] = stats.loadout.hand_for_step(step)
+	_begin(a, &"light")
+	var wt := _main_type()
+	a.move_mult = wt.move_mult if wt else 0.3
+	if wt != null and wt.ranged:
+		a.on_release = func() -> void: _fire_weapon_projectile(a, false, 1.0)
+	else:
+		a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first)
+	visual.play_action(anim, a.rate)
+	Audio.play_at(wt.swing_sound if wt else &"swing_light", global_position, -2.0 + step)
+	chain_step = step + 1
+	_chain_expire = _time + a.combo_close
+	combo_changed.emit(chain_step)
+	if chain_step >= 4:
+		chain_step = 0
+		a.data["finisher"] = true
+	mark_combat()
+
+func _begin(a: TimedAction, kind: StringName) -> void:
+	action = a
+	action_kind = kind
+	visual.interrupt_fidget()
+	_face_aim_now()
+
+func _face_aim_now() -> void:
+	var d := aim_dir()
+	rotation.y = atan2(d.x, d.z)
+
+func _weapon_request(a: TimedAction, heavy: bool, mult: float) -> DamageRequest:
+	var wt := _main_type()
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.ATTACK
+	req.attacker = stats
+	req.use_weapon = true
+	req.hand = int(a.data.get("hand", 0))
+	var step := int(a.data.get("step", 0))
+	req.heavy = heavy
+	req.label = "Heavy attack" if heavy else "Attack %d" % (step + 1)
+	var chain_m := float(wt.chain_mults[step]) if wt and step < wt.chain_mults.size() else 1.0
+	var chain_k := float(wt.chain_knock[step]) if wt and step < wt.chain_knock.size() else 1.0
+	req.weapon_mult = (wt.heavy_multiplier * mult if heavy else chain_m) if wt else (1.8 * mult if heavy else chain_m)
+	req.knockback = ((wt.heavy_knockback if wt else 8.0) * minf(mult, 1.6) if heavy else (wt.knockback if wt else 2.0) * chain_k)
+	req.poise = (wt.poise_damage if wt else 8.0) * (2.2 * mult if heavy else chain_m)
+	req.tags[&"weapon"] = true
+	decorate_request(req, null)
+	return req
+
+func _melee_window(a: TimedAction, w: int, first: bool) -> void:
+	var wt := _main_type()
+	var reach := wt.reach if wt else 1.8
+	var arc := wt.arc_degrees if wt else 100.0
+	var heavy := action_kind == &"heavy" or action_kind == &"charge_release"
+	if heavy:
+		reach *= 1.1
+		arc = minf(arc * 1.2, 220.0)
+	if first:
+		visual.set_trail(true, wt.trail_color if wt else Color(1, 1, 1, 0.5), wt.length if wt else 1.0)
+		var c := Color(1.0, 0.95, 0.85, 0.75)
+		if stats.loadout.elem_share_for(int(a.data.get("hand", 0))) > 0.0:
+			c = Elements.color(stats.loadout.element_for(int(a.data.get("hand", 0))))
+			c.a = 0.8
+		FX.spawn(VFXLib.slash_arc(c, reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.55, int(a.data.get("step", 0)) % 2 == 0), global_position)
+	var req := _weapon_request(a, heavy, float(a.data.get("charge_mult", 1.0)))
+	var hits := 0
+	for t: Actor in CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), reach, arc, BH.LAYER_ENEMY):
+		if not a.mark_hit(w, t):
+			continue
+		if CombatQuery.blocked(get_world_3d(), center(), t.center()):
+			continue
+		var r := req.clone()
+		r.tags[&"push_dir"] = (t.global_position - global_position).slide(Vector3.UP).normalized()
+		if wt and wt.id == &"dagger" and t.forward().dot(forward()) > 0.5:
+			r.positional_mult = 1.25   # backstab
+		_apply_attack_powers(r, a)
+		var res := t.receive_hit(r, self, t.center())
+		_on_hit_dealt(t, res, r)
+		hits += 1
+	if hits > 0:
+		Audio.play_at(wt.hit_sound if wt else &"hit_flesh", global_position + forward() * reach * 0.6)
+
+## Every-fifth-attack stagger (Dawnbreaker) and the Riposte counter.
+func _apply_attack_powers(r: DamageRequest, a: TimedAction) -> void:
+	if a.data.get("counted", false) == false:
+		a.data["counted"] = true
+		_attack_counter += 1
+		if stats.has_flag(&"fifth_stagger") and _attack_counter % 5 == 0:
+			a.data["fifth"] = true
+			_radiant_shockwave()
+	if a.data.get("fifth", false):
+		r.poise *= 4.0
+		r.knockback *= 1.6
+	if _riposte_t > 0.0:
+		r.force_crit = true
+
+func _radiant_shockwave() -> void:
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.ATTACK
+	req.attacker = stats
+	req.use_weapon = true
+	req.weapon_mult = 0.8
+	req.conversion = {Elements.LIGHT: 1.0}
+	req.knockback = 10.0
+	req.poise = 60.0
+	req.label = "Dawnbreaker"
+	AreaEffects.burst(self, global_position, 3.5, BH.LAYER_ENEMY, req, self)
+	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.9, 0.55, 0.95), 3.5, 0.45, 0.9), global_position)
+	FX.spawn(VFXLib.light_flash(Color(1.0, 0.9, 0.6), 6.0, 7.0, 0.3), global_position + Vector3.UP)
+	Events.camera_shake.emit(0.35)
+	Audio.play_at(&"holy_strike", global_position, 2.0)
+
+func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
+	var wt := _main_type()
+	var req := _weapon_request(a, heavy, mult)
+	_apply_attack_powers(req, a)
+	var el := stats.loadout.element_for(int(a.data.get("hand", 0)))
+	var look := "arrow" if wt.id == &"bow" else "orb"
+	var speed := wt.projectile_speed * (1.0 + stats.get_stat(&"projectile_speed")) * (1.3 if heavy else 1.0)
+	var pr := Projectile.spawn(runner.parent(), cast_point(), aim_dir(), speed, req, self, BH.LAYER_ENEMY, el, look)
+	pr.max_range = wt.reach
+	pr.radius = 0.3 if wt.id == &"bow" else 0.35
+	pr.hit_sound = wt.hit_sound
+	if heavy and wt.id == &"bow":
+		pr.pierce = 2
+	if (heavy and wt.id == &"staff") or (a.data.get("finisher", false) and wt.id == &"staff"):
+		pr.explode_radius = 2.2
+		pr.on_end = func(pt: Vector3, _w: bool) -> void:
+			FX.spawn(VFXLib.ring_wave(Elements.color(el), 2.2, 0.35), pt)
+	pr.on_hit = func(t: Actor, res: DamageResult, pt: Vector3) -> void:
+		_on_hit_dealt(t, res, req)
+	Audio.play_at(wt.swing_sound, global_position, -3.0)
+
+# ---- Heavy / charge ---------------------------------------------------------------------------------------------
+
+func _start_heavy(charge_frac: float, charged: bool) -> void:
+	var branch := 0
+	if action != null and action_kind == &"light":
+		branch = int(action.data.get("step", 0)) + 1
+	_cancel_action(true)
+	var wt := _main_type()
+	var anim: StringName
+	if charged:
+		anim = &"bow_release" if wt and wt.id == &"bow" else &"charge_release"
+	elif wt == null:
+		anim = &"sword_heavy"
+	elif stats.loadout.dual_wield and wt.dual_heavy_anim != &"":
+		anim = wt.dual_heavy_anim
+	else:
+		anim = wt.heavy_anim
+	var rate := clampf(stats.get_stat(&"attack_speed", 1.0), StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
+	var a := TimedAction.from_anim(anim, rate)
+	var mult := 1.0 + (wt.charge_bonus * charge_frac if wt and charged else 0.0) + 0.08 * branch
+	a.data["charge_mult"] = mult
+	a.data["step"] = 3 if branch >= 3 else 0
+	_begin(a, &"charge_release" if charged else &"heavy")
+	a.move_mult = 0.1
+	if wt != null and wt.ranged:
+		a.on_release = func() -> void: _fire_weapon_projectile(a, true, mult)
+	else:
+		a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first)
+	visual.play_action(anim, rate)
+	Audio.play_at(&"swing_heavy", global_position, 1.0)
+	chain_step = 0
+	_chain_lock = FINISHER_LOCK
+	mark_combat()
+
+func _start_charge() -> void:
+	_cancel_action(true)
+	charging = true
+	_charge_t = 0.0
+	var wt := _main_type()
+	visual.hold_action(&"bow_draw_hold" if wt and wt.id == &"bow" else &"charge_hold")
+	Audio.play_at(&"bow_draw" if wt and wt.id == &"bow" else &"arcane_charge", global_position, -4.0)
+	_face_aim_now()
+
+func _release_charge() -> void:
+	if not charging:
+		return
+	charging = false
+	var wt := _main_type()
+	var frac := clampf(_charge_t / maxf(wt.charge_max if wt else 1.0, 0.1), 0.0, 1.0)
+	visual.stop_action()
+	if frac < 0.15:
+		_start_heavy(0.0, false)
+	else:
+		_start_heavy(frac, true)
+		if frac >= 1.0:
+			FX.spawn(VFXLib.light_flash(Color(1.0, 0.9, 0.6), 4.0, 4.0, 0.2), center())
+
+# ---- Dodge ------------------------------------------------------------------------------------------------------
+
+func _start_dodge() -> void:
+	_cancel_action(true)
+	var input := _move_input()
+	var dir := input if input.length() > 0.1 else -aim_dir()
+	var anim := &"dodge_roll" if input.length() > 0.1 else &"dodge_step"
+	var a := TimedAction.from_anim(anim, 1.0)
+	_begin(a, &"dodge")
+	rotation.y = atan2(dir.x, dir.z) if anim == &"dodge_roll" else atan2(-dir.x, -dir.z)
+	var travel := (a.travel if a.travel > 0.0 else 4.0) * (1.0 + stats.get_stat(&"dodge_distance"))
+	var move_time := maxf(0.15, (a.iframes.y if a.iframes.y > 0.0 else a.duration * 0.65))
+	dash(dir, travel / move_time, move_time)
+	visual.play_action(anim, 1.0, 0.06)
+	dodge_cd = stats.get_stat(&"dodge_cooldown", 1.0)
+	Audio.play_at(&"dodge_roll", global_position)
+	if stats.has_flag(&"dodge_trail"):
+		lightning_trail(global_position, global_position + dir * travel)
+	if stats.has_flag(&"dodge_haste"):
+		_haste_t = 2.0
+		mark_stats_dirty()
+	chain_step = 0
+
+# ---- Guard ------------------------------------------------------------------------------------------------------
+
+func _can_guard() -> bool:
+	if charging or channel_skill != &"":
+		return false
+	if action != null and not action.can_cancel():
+		return false
+	return true
+
+func _set_guard(on: bool) -> void:
+	guarding = on
+	if on:
+		_cancel_action(true)
+		_guard_t = 0.0
+		status.apply(&"guard", 0.0)
+		visual.set_upper(&"block_loop")
+	else:
+		status.remove(&"guard")
+		visual.set_upper(&"")
+
+func _prepare_incoming(req: DamageRequest, attacker: Node) -> void:
+	if guarding and req.blockable and attacker is Node3D and req.kind != DamageRequest.Kind.DOT:
+		var to_att: Vector3 = (attacker as Node3D).global_position - global_position
+		to_att.y = 0.0
+		if to_att.length() < 0.01 or forward().angle_to(to_att.normalized()) < deg_to_rad(75.0):
+			req.guarding = true
+			req.perfect_block = _guard_t <= stats.get_stat(&"parry_window", 0.18)
+
+# ---- Skills -----------------------------------------------------------------------------------------------------
+
+func skill_rank(sid: StringName) -> int:
+	var r := hero.skill_rank(sid)
+	return r + int(stats.get_stat(&"skill_levels")) if r > 0 else 0
+
+func skill_params(sid: StringName) -> Dictionary:
+	var s := DB.skill(sid)
+	return s.resolve(skill_rank(sid), hero.skill_upgrades(sid)) if s else {}
+
+func mana_cost(sid: StringName) -> float:
+	var s := DB.skill(sid)
+	if s == null:
+		return 0.0
+	if resource and stats.has_flag(&"arcane_free") and resource.is_overcharged():
+		return 0.0
+	var c := s.mana_at(hero.skill_rank(sid)) * (1.0 - stats.get_stat(&"mana_cost_reduction"))
+	if resource:
+		c *= resource.mana_cost_mult()
+	return maxf(0.0, c)
+
+func skill_cooldown(sid: StringName) -> float:
+	var s := DB.skill(sid)
+	return s.cooldown * (1.0 - stats.get_stat(&"cdr")) if s else 0.0
+
+## Why a skill cannot be used right now ("" = usable). The HUD shows this.
+func skill_block_reason(sid: StringName) -> String:
+	var s := DB.skill(sid)
+	if s == null or hero.skill_rank(sid) <= 0:
+		return "Not learned"
+	if cooldowns.has(sid):
+		return "Cooldown"
+	if mana + 0.001 < mana_cost(sid):
+		return "Not enough Mana"
+	if s.valor_cost > 0.0 and (resource == null or resource.value < s.valor_cost):
+		return "Requires %d Valor" % roundi(s.valor_cost)
+	if s.requires == &"melee" and (_main_type() == null or _main_type().ranged):
+		return "Requires a melee weapon"
+	if s.requires == &"shield" and not stats.loadout.has_shield:
+		return "Requires a shield"
+	if s.kind == DamageRequest.Kind.SPELL and status.is_silenced():
+		return "Silenced"
+	return ""
+
+func _start_skill(sid: StringName) -> void:
+	var s := DB.skill(sid)
+	if s == null:
+		return
+	var why := skill_block_reason(sid)
+	if why != "":
+		Events.notify.emit(why, &"error")
+		Audio.play_ui(&"ui_error")
+		return
+	if s.behavior == &"spin":
+		_start_channel(s)
+		return
+	var p := skill_params(sid)
+	_cancel_action(true)
+	var rate := clampf(stats.get_stat(s.anim_speed_stat, 1.0), StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
+	var a := TimedAction.from_anim(s.anim, rate)
+	a.move_mult = 0.0
+	_begin(a, &"skill")
+	if not runner.setup(s, p, a):
+		action = null
+		return
+	_pay_skill(s)
+	visual.play_action(s.anim, rate)
+	if s.sound_cast != &"" and s.behavior in [&"melee_arc", &"dash_strike", &"leap", &"judgment"]:
+		Audio.play_at(s.sound_cast, global_position)
+	_after_cast(s)
+
+func _pay_skill(s: SkillDef) -> void:
+	spend_mana(mana_cost(s.id))
+	var cd := skill_cooldown(s.id)
+	if cd > 0.0:
+		cooldowns[s.id] = cd
+		cooldown_total[s.id] = cd
+		cooldowns_changed.emit()
+	skill_used.emit(s.id)
+	mark_combat()
+
+func _after_cast(s: SkillDef) -> void:
+	if resource and resource.kind == &"arcane" and s.kind == DamageRequest.Kind.SPELL and s.id != &"arcane_surge":
+		resource.gain(1.0)
+	if s.kind == DamageRequest.Kind.SPELL and s.element != Elements.PHYSICAL:
+		if stats.has_flag(&"arcane_amp") and _last_element >= 0 and s.element != _last_element:
+			status.apply(&"arcane_amp")
+		_last_element = s.element
+	if stats.has_flag(&"aether_heartbeat") and _heartbeat_t <= 0.0:
+		_heartbeat_t = 10.0
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL if s.kind == DamageRequest.Kind.SPELL else DamageRequest.Kind.ATTACK
+		req.attacker = stats
+		req.use_weapon = req.kind == DamageRequest.Kind.ATTACK
+		req.weapon_mult = stats.flag(&"aether_heartbeat")
+		req.base_min = 12.0 * level * 0.5 + 10.0
+		req.base_max = req.base_min * 1.3
+		req.conversion = {Elements.LIGHT: 0.5, Elements.WIND: 0.5}
+		req.knockback = 8.0
+		req.label = "Aetherheart"
+		AreaEffects.burst(self, global_position, 4.0, BH.LAYER_ENEMY, req, self)
+		FX.spawn(VFXLib.ring_wave(Color(0.6, 0.98, 1.0, 0.95), 4.0, 0.5, 0.9), global_position)
+
+func _start_channel(s: SkillDef) -> void:
+	_cancel_action(true)
+	channel_skill = s.id
+	_channel_params = skill_params(s.id)
+	_channel_tick = 0.0
+	visual.hold_action(s.anim, clampf(stats.get_stat(&"attack_speed", 1.0), 0.6, 1.8))
+	Audio.play_loop(&"whirlwind_loop", self)
+	skill_used.emit(s.id)
+	mark_combat()
+
+func _update_channel(delta: float) -> void:
+	if channel_skill == &"":
+		return
+	var s := DB.skill(channel_skill)
+	_channel_tick -= delta
+	if _channel_tick <= 0.0:
+		var cost := float(_channel_params.get("mana_per_tick", 2.0)) * (1.0 - stats.get_stat(&"mana_cost_reduction"))
+		if not spend_mana(cost):
+			_stop_channel()
+			Events.notify.emit("Not enough Mana", &"error")
+			return
+		_channel_tick += float(_channel_params.get("tick", 0.3)) / clampf(stats.get_stat(&"attack_speed", 1.0), 0.6, 2.0)
+		runner.spin_tick(s, _channel_params)
+		mark_combat()
+
+func _stop_channel() -> void:
+	if channel_skill == &"":
+		return
+	channel_skill = &""
+	visual.stop_action()
+	Audio.stop_loop(self)
+
+# ---- Potions & interaction ------------------------------------------------------------------------------------
+
+func use_potion(kind: StringName) -> bool:
+	if potion_cd > 0.0 or not alive:
+		return false
+	var item: ItemInstance = null
+	var order := [&"greater_health_potion", &"health_potion", &"rejuvenation_elixir"] if kind == &"heal" else [&"greater_mana_potion", &"mana_potion", &"rejuvenation_elixir"]
+	for bid in order:
+		for c in hero.inventory.cells:
+			if c != null and c.base.id == bid:
+				item = c
+				break
+		if item:
+			break
+	if item == null:
+		Events.notify.emit("No %s potions" % ("health" if kind == &"heal" else "mana"), &"error")
+		Audio.play_ui(&"ui_error")
+		return false
+	return consume_item(item)
+
+## Use a consumable (potion belt or inventory right-click).
+func consume_item(item: ItemInstance) -> bool:
+	if item == null or not item.base.is_consumable() or not alive:
+		return false
+	var fx: Dictionary = item.base.consumable_effect
+	if fx.has("heal") or fx.has("mana"):
+		if potion_cd > 0.0:
+			return false
+		potion_cd = POTION_COOLDOWN
+	var heal_mult := 1.0 + stats.get_stat(&"healing")
+	if fx.get("instant", 0.0) > 0.0:
+		heal(max_hp() * float(fx.get("heal", 0.0)) * heal_mult)
+		restore_mana(max_mana() * float(fx.get("mana", 0.0)))
+	else:
+		if fx.has("heal"):
+			status.apply(&"regen", 2.0, max_hp() * float(fx.heal) * heal_mult / 2.0)
+		if fx.has("mana"):
+			_mana_over_time(max_mana() * float(fx.mana), 2.0)
+	if fx.has("cleanse"):
+		status.cleanse([&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"])
+	if fx.has("return"):
+		Game.return_to_town()
+	hero.inventory.consume(item.base.id, 1)
+	Audio.play_at(&"potion_drink", global_position)
+	FX.spawn(VFXLib.particles(Color(1.0, 0.3, 0.3, 0.8) if fx.has("heal") else Color(0.3, 0.5, 1.0, 0.8), 14, 0.8, true, 0.3, 2.0, 40.0, Vector3(0, 2, 0), 0.4), global_position + Vector3.UP)
+	return true
+
+func _mana_over_time(total: float, dur: float) -> void:
+	var tw := create_tween()
+	var last := [0.0]
+	tw.tween_method(func(v: float) -> void:
+		restore_mana(v - last[0])
+		last[0] = v, 0.0, total, dur)
+
+func _update_interaction(delta: float) -> void:
+	_interact_scan -= delta
+	if _interact_scan > 0.0:
+		return
+	_interact_scan = 0.1
+	var best: Node3D = null
+	var bd := INTERACT_RANGE * INTERACT_RANGE
+	for n in get_tree().get_nodes_in_group(&"interactable"):
+		var n3 := n as Node3D
+		if n3 == null or not n3.is_visible_in_tree() or not n.call(&"can_interact", self):
+			continue
+		var d := n3.global_position.distance_squared_to(global_position)
+		var r: float = n.get("interact_range") if n.get("interact_range") != null else INTERACT_RANGE
+		if d < minf(bd, r * r):
+			bd = d
+			best = n3
+	if best != _interact_target:
+		_interact_target = best
+		interact_changed.emit(best)
+		Events.interact_prompt.emit(best.call(&"interact_text") if best else "")
+
+func interact() -> void:
+	if _interact_target and is_instance_valid(_interact_target) and _interact_target.call(&"can_interact", self):
+		_cancel_action(true)
+		if _interact_target.has_method(&"interact_anim"):
+			var an: StringName = _interact_target.call(&"interact_anim")
+			if an != &"":
+				visual.play_action(an, 1.0)
+		var d := _interact_target.global_position - global_position
+		d.y = 0.0
+		if d.length() > 0.1:
+			rotation.y = atan2(d.x, d.z)
+		_interact_target.call(&"interact", self)
+
+# ---- Movement & facing ----------------------------------------------------------------------------------------
+
+func _move_input() -> Vector3:
+	if not input_enabled or Game.ui_blocking:
+		return Vector3.ZERO
+	var v := Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	if v.length() < 0.1:
+		return Vector3.ZERO
+	return (camera.ground_basis() * Vector3(v.x, 0, v.y)).normalized() * minf(v.length(), 1.0)
+
+func _movement(delta: float) -> Vector3:
+	var speed := stats.get_stat(&"move_speed", 5.0)
+	if _dash_t > 0.0:
+		_dash_t -= delta
+		return _dash_vel
+	var input := _move_input()
+	var mult := 1.0
+	if action != null:
+		mult = action.move_mult
+	if guarding:
+		mult = minf(mult, GUARD_MOVE_MULT)
+	if charging:
+		mult = minf(mult, CHARGE_MOVE_MULT)
+		_charge_t += delta
+		var wt := _main_type()
+		if wt and _charge_t >= wt.charge_max + 0.6:
+			_release_charge()
+	if channel_skill != &"":
+		mult = float(_channel_params.get("move_mult", 0.6))
+	if status.is_disabled():
+		mult = 0.0
+	var want := input * speed * mult
+	if input.length() > 0.1:
+		_last_move_dir = input.normalized()
+		_still_t = 0.0
+	else:
+		_still_t += delta
+	var cur := Vector3(velocity.x, 0, velocity.z) - Vector3(knock_velocity.x, 0, knock_velocity.z)
+	return cur.move_toward(want, ACCEL * delta)
+
+func dash(dir: Vector3, speed: float, duration: float) -> void:
+	var d := Vector3(dir.x, 0, dir.z)
+	_dash_vel = d.normalized() * speed if d.length() > 0.01 else forward() * speed
+	_dash_t = duration
+
+func stop_dash() -> void:
+	_dash_t = 0.0
+
+func leap_to(target: Vector3, duration: float) -> void:
+	_leap = {"from": global_position, "to": target, "t": 0.0, "dur": duration}
+	invulnerable = true
+	var d := target - global_position
+	d.y = 0.0
+	if d.length() > 0.1:
+		rotation.y = atan2(d.x, d.z)
+
+func _leap_step(delta: float) -> void:
+	_leap.t += delta
+	var k := clampf(_leap.t / _leap.dur, 0.0, 1.0)
+	var p: Vector3 = (_leap.from as Vector3).lerp(_leap.to, ease(k, 0.8))
+	p.y += sin(k * PI) * 2.6
+	global_position = p
+	velocity = Vector3.ZERO
+	if k >= 1.0:
+		_leap = {}
+		invulnerable = false
+
+func teleport_to(p: Vector3) -> void:
+	global_position = p + Vector3.UP * 0.05
+	velocity = Vector3.ZERO
+	knock_velocity = Vector3.ZERO
+
+func _update_facing(delta: float, desired: Vector3) -> void:
+	if action != null and action_kind != &"dodge" and not action.can_cancel():
+		return
+	var face_aim := in_combat() or guarding or charging or channel_skill != &"" or action_kind in [&"light", &"heavy", &"skill", &"charge_release"]
+	var dir := Vector3.ZERO
+	if face_aim:
+		dir = aim_dir()
+	elif desired.length() > 0.3:
+		dir = desired.normalized()
+	if dir.length() > 0.1 and action_kind != &"dodge":
+		rotation.y = lerp_angle(rotation.y, atan2(dir.x, dir.z), clampf(TURN_RATE * delta, 0.0, 1.0))
+
+func _update_visual(delta: float) -> void:
+	if visual == null:
+		return
+	var hv := Vector3(velocity.x, 0, velocity.z)
+	var local := global_transform.basis.inverse() * hv
+	visual.update_locomotion(Vector2(local.x, local.z), in_combat() or guarding, 1.0 - clampf(hp / max_hp() / LOW_HP, 0.0, 1.0), delta)
+	if hv.length() > 0.5 and is_on_floor():
+		visual.interrupt_fidget()
+		_footstep_acc += hv.length() * delta
+		var stride := lerpf(0.8, 1.7, clampf((hv.length() - 1.6) / 3.4, 0.0, 1.0))
+		if _footstep_acc >= stride:
+			_footstep_acc = 0.0
+			var surf: StringName = Game.current_map.def.footstep_surface if Game.current_map and Game.current_map.def else &"stone"
+			Audio.play_at(StringName("footstep_%s" % surf), global_position, -8.0 if hv.length() < 3.0 else -4.0)
+
+# ---- Action lifecycle ----------------------------------------------------------------------------------------
+
+func _on_action_done() -> void:
+	var kind := action_kind
+	action = null
+	action_kind = &""
+	visual.set_trail(false)
+	if kind == &"light" and _chain_expire > 0.0 and chain_step == 0:
+		_chain_lock = FINISHER_LOCK
+	_try_queued()
+
+func _cancel_action(interrupting: bool) -> void:
+	if action != null:
+		action.finish(false)
+		action = null
+		action_kind = &""
+	visual.set_trail(false)
+	_dash_t = 0.0
+	if charging:
+		charging = false
+		visual.stop_action()
+	if not interrupting:
+		_stop_channel()
+		if guarding:
+			_set_guard(false)
+
+# ---- Damage intake & reactions ----------------------------------------------------------------------------------
+
+func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3.INF) -> DamageResult:
+	if action != null and action.in_iframes() and req.kind != DamageRequest.Kind.DOT:
+		var r0 := DamageResult.new()
+		r0.evaded = true
+		Events.damage_dealt.emit(self, r0, center(), attacker)
+		if stats.has_flag(&"evade_mana"):
+			restore_mana(stats.flag(&"evade_mana"))
+		return r0
+	if Game.god_mode:
+		req.base_min = 0.0
+		req.base_max = 0.0
+		req.use_weapon = false
+		req.weapon_mult = 0.0
+	var res := super.receive_hit(req, attacker, hit_point)
+	if not res.evaded and req.kind != DamageRequest.Kind.DOT:
+		mark_combat()
+	return res
+
+func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	super._apply_result(result, req, attacker, hit_point)
+	if result.blocked:
+		_on_blocked(result, attacker)
+	if resource and resource.kind == &"valor" and result.total > 0:
+		resource.gain(result.total / maxf(1.0, max_hp()) * 20.0, 1.0 + stats.get_stat(&"valor_gain"))
+	if stats.has_flag(&"thorns_chill") and attacker is Actor and not result.evaded:
+		(attacker as Actor).status.apply(&"chilled", 2.0, StatusController.CHILL_SLOW, 0.0, Elements.ICE,
+			[StatModifier.more(&"move_speed", -StatusController.CHILL_SLOW), StatModifier.more(&"attack_speed", -StatusController.CHILL_SLOW)])
+	if stats.has_flag(&"low_hp_dr"):
+		mark_stats_dirty()
+
+func _on_damaged(result: DamageResult, req: DamageRequest) -> void:
+	if result.total <= 0 or result.blocked:
+		return
+	var heavy := result.total > max_hp() * 0.12 or result.knockback >= HEAVY_KNOCK
+	if action != null and action_kind in [&"light", &"heavy", &"skill"] and heavy:
+		_cancel_action(true)
+	if heavy and knock_velocity.length() < KNOCKED_THRESHOLD:
+		visual.play_reaction(&"hit_heavy")
+	elif action == null and not guarding:
+		visual.play_reaction(&"hit", _hit_direction(req))
+
+func _hit_direction(req: DamageRequest) -> StringName:
+	var d: Vector3 = req.tags.get(&"push_dir", Vector3.ZERO)
+	if d == Vector3.ZERO:
+		return &"front"
+	var local := global_transform.basis.inverse() * (-d)
+	if absf(local.x) > absf(local.z):
+		return &"right" if local.x > 0.0 else &"left"
+	return &"front" if local.z > 0.0 else &"back"
+
+func _on_blocked(result: DamageResult, attacker: Node) -> void:
+	var gain := 15.0 if result.perfect_block else 8.0
+	if status.has(&"bulwark"):
+		gain *= 2.0
+	if resource and resource.kind == &"valor":
+		resource.gain(gain, 1.0 + stats.get_stat(&"valor_gain"))
+	visual.play_reaction(&"parry" if result.perfect_block else &"block")
+	Audio.play_at(&"parry" if result.perfect_block else &"block", global_position)
+	FX.spawn(VFXLib.hit_burst(center() + forward() * 0.5, Elements.PHYSICAL, 0.8 if result.perfect_block else 0.4, result.perfect_block), center() + forward() * 0.5)
+	if stats.has_flag(&"block_mana"):
+		restore_mana(stats.flag(&"block_mana"))
+		heal(max_hp() * 0.02, false)
+	if result.perfect_block:
+		FX.hitstop(0.08)
+		Events.camera_shake.emit(0.2)
+		if attacker is Actor:
+			(attacker as Actor).status.apply(&"staggered")
+			(attacker as Actor).status.apply(&"stagger_window", 2.0)
+		if stats.has_flag(&"counter"):
+			_riposte_t = RIPOSTE_WINDOW
+	if stats.has_flag(&"block_shockwave") and _shockwave_cd <= 0.0:
+		_shockwave_cd = 1.0
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.ATTACK
+		req.attacker = stats
+		req.use_weapon = true
+		req.weapon_mult = stats.flag(&"block_shockwave")
+		req.knockback = 9.0
+		req.poise = 25.0
+		req.label = "Echoing shockwave"
+		AreaEffects.burst(self, global_position, 3.0, BH.LAYER_ENEMY, req, self)
+		FX.spawn(VFXLib.ring_wave(Color(0.9, 0.85, 0.7, 0.9), 3.0, 0.35), global_position)
+	if stats.has_flag(&"aether_pulse") and _pulse_cd <= 0.0:
+		_pulse_cd = 2.0
+		add_shield(max_hp() * stats.flag(&"aether_pulse"), 4.0)
+		for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), global_position, 4.0, BH.LAYER_ENEMY):
+			var d := a.global_position - global_position
+			d.y = 0.0
+			a.apply_knockback(d.normalized(), 9.0, stats, self)
+		FX.spawn(VFXLib.ring_wave(Color(0.55, 0.98, 1.0, 0.95), 4.0, 0.5, 0.9), global_position)
+		Audio.play_at(&"arcane_surge", global_position)
+
+func add_shield(amount: float, duration: float) -> void:
+	shield_hp = maxf(shield_hp, amount)
+	shield_t = maxf(shield_t, duration)
+	status.apply(&"shielded", duration)
+	health_changed.emit(hp, max_hp())
+
+func _on_shield_broken() -> void:
+	status.remove(&"shielded")
+	shield_t = 0.0
+	Audio.play_at(&"shatter_ice", global_position, -4.0)
+
+func _on_staggered(broken: bool) -> void:
+	if stats.has_flag(&"unstaggerable"):
+		status.remove(&"staggered")
+		return
+	_cancel_action(false)
+	visual.play_reaction(&"stagger")
+	Audio.play_at(&"stagger", global_position)
+
+func apply_knockback(dir: Vector3, speed: float, source: DerivedStats, source_node: Node, depth := 0, launch := 0.0) -> void:
+	if not _leap.is_empty() or invulnerable:
+		return
+	super.apply_knockback(dir, speed, source, source_node, depth, launch)
+	if speed >= KNOCKED_THRESHOLD:
+		_cancel_action(false)
+
+func _wall_impact(into: float, normal: Vector3, point: Vector3, surface: StringName) -> void:
+	super._wall_impact(into, normal, point, surface)
+	if visual and alive:
+		visual.play_reaction(&"wall")
+
+# ---- Offensive bookkeeping (hooks for talents, uniques, set bonuses) -------------------------------------------
+
+## Adds the multiplicative bonuses that live on requests (class resource states, keystones, buffs).
+func decorate_request(req: DamageRequest, skill: SkillDef) -> void:
+	if status.has(&"resolute") and req.kind == DamageRequest.Kind.ATTACK:
+		req.more.append(["Resolute", 1.10])
+		req.knockback *= 1.10
+	if resource and resource.kind == &"arcane" and req.kind == DamageRequest.Kind.SPELL and resource.value > 0.0:
+		req.more.append(["Arcane Charge x%d" % roundi(resource.value), resource.spell_damage_more()])
+	if req.kind == DamageRequest.Kind.SPELL:
+		if status.has(&"arcane_amp"):
+			req.more.append(["Arcane Amplification", 1.0 + stats.flag(&"arcane_amp", 0.08) * status.stacks(&"arcane_amp")])
+		if stats.has_flag(&"archmage"):
+			req.more.append(["Archmage", 1.0 + 0.01 * floorf(max_mana() / stats.flag(&"archmage"))])
+		if status.has(&"overload"):
+			req.more.append(["Elemental Overload", 1.0 + stats.flag(&"overload", 0.4)])
+	if _riposte_t > 0.0 and req.kind == DamageRequest.Kind.ATTACK:
+		req.force_crit = true
+
+func on_skill_hit(skill: SkillDef, target: Actor, res: DamageResult) -> void:
+	_on_hit_dealt(target, res, null, skill)
+
+func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: SkillDef = null) -> void:
+	if res == null or res.evaded:
+		return
+	mark_combat()
+	if _riposte_t > 0.0 and (req == null or req.kind == DamageRequest.Kind.ATTACK):
+		_riposte_t = 0.0
+	if res.total <= 0:
+		return
+	if resource and resource.kind == &"valor":
+		var g := float(skill.params.get("valor_gain", 3.0)) if skill else 3.0
+		resource.gain(g, 1.0 + stats.get_stat(&"valor_gain"))
+	var moh := stats.get_stat(&"mana_on_hit")
+	if moh > 0.0:
+		restore_mana(moh)
+	if res.mana_leech > 0.0:
+		restore_mana(res.mana_leech)
+	if skill and skill.kind == DamageRequest.Kind.SPELL and stats.has_flag(&"mana_on_spell_hit"):
+		restore_mana(stats.flag(&"mana_on_spell_hit"))
+	if res.is_crit:
+		if stats.has_flag(&"crit_cdr"):
+			var cut := stats.flag(&"crit_cdr")
+			for k in cooldowns.keys():
+				cooldowns[k] = maxf(0.0, cooldowns[k] - cut)
+			cooldowns_changed.emit()
+		if stats.has_flag(&"crit_heal"):
+			heal(max_hp() * stats.flag(&"crit_heal"))
+		if stats.has_flag(&"crit_lightning") and (req == null or not req.tags.has(&"proc")):
+			_crit_lightning(target, res)
+	if stats.has_flag(&"hit_ignite") and rng.randf() < stats.flag(&"hit_ignite") and target.alive:
+		target.status.apply(&"burning", -1.0, 0.0, maxf(1.0, res.total * 0.25), Elements.FIRE)
+	if stats.has_flag(&"burn_spread") and res.components.get(Elements.FIRE, 0.0) > 0.0 and target.status.has(&"burning"):
+		_spread_burning(target)
+	if res.reactions.has(&"fan"):
+		_spread_burning(target)
+	# Elemental Overload: three different elements within 4 s.
+	if stats.has_flag(&"overload"):
+		for e in res.components:
+			if e != Elements.PHYSICAL and res.components[e] > 0.0:
+				_overload_hits[e] = _time
+		var recent := 0
+		for e in _overload_hits:
+			if _time - _overload_hits[e] <= 4.0:
+				recent += 1
+		if recent >= 3 and not status.has(&"overload"):
+			status.apply(&"overload")
+			_overload_hits.clear()
+	for rx in res.reactions:
+		FX.text_popup(target.center() + Vector3.UP * 0.9, DamageResult.REACTION_NAMES.get(rx, String(rx)), Elements.color(res.dominant_element), 0.9)
+
+func _crit_lightning(from_target: Actor, res: DamageResult) -> void:
+	var n := 0
+	for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), from_target.global_position, 7.0, BH.LAYER_ENEMY):
+		if a == from_target or n >= 3:
+			continue
+		n += 1
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL
+		req.attacker = stats
+		req.base_min = res.total * stats.flag(&"crit_lightning")
+		req.base_max = req.base_min
+		req.conversion = {Elements.LIGHTNING: 1.0}
+		req.can_crit = false
+		req.evadable = false
+		req.tags[&"proc"] = true
+		req.label = "Riftborn lightning"
+		FX.spawn(VFXLib.lightning_bolt(from_target.center(), a.center()), Vector3.ZERO)
+		a.receive_hit(req, self, a.center())
+	if n > 0:
+		Audio.play_at(&"lightning_zap", from_target.global_position)
+
+func _spread_burning(src: Actor) -> void:
+	var inst = src.status.statuses.get(&"burning")
+	if inst == null:
+		return
+	for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), src.global_position, 4.0, BH.LAYER_ENEMY):
+		if a == src or a.status.has(&"burning"):
+			continue
+		a.status.apply(&"burning", -1.0, 0.0, inst.dps * 0.8, Elements.FIRE)
+		FX.spawn(VFXLib.particles(Color(1.0, 0.5, 0.1, 0.9), 10, 0.4, true, 0.3, 4.0, 30.0, Vector3.ZERO, 0.2), a.center())
+		break
+
+func lightning_trail(from: Vector3, to: Vector3) -> void:
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.SPELL
+	req.attacker = stats
+	req.base_min = 4.0 + level * 1.5
+	req.base_max = req.base_min * 1.5
+	req.conversion = {Elements.LIGHTNING: 1.0}
+	req.direct_status[&"shocked"] = 60.0
+	req.label = "Stormstride"
+	var d := to - from
+	d.y = 0.0
+	for a: Actor in CombatQuery.actors_in_line(get_world_3d(), from, d.normalized(), d.length(), 2.0, BH.LAYER_ENEMY):
+		a.receive_hit(req.clone(), self, a.center())
+	FX.spawn(VFXLib.lightning_bolt(from + Vector3.UP * 0.3, to + Vector3.UP * 0.3, Color(1.0, 0.95, 0.5)), Vector3.ZERO)
+
+func _on_actor_died(victim: Node, killer: Node) -> void:
+	if killer != self or not (victim is Actor):
+		return
+	var v := victim as Actor
+	if stats.has_flag(&"kill_heal"):
+		heal(max_hp() * stats.flag(&"kill_heal"))
+	if stats.has_flag(&"frozen_explode") and v.get_meta(&"died_frozen", false):
+		if true:
+			var req := DamageRequest.new()
+			req.kind = DamageRequest.Kind.SPELL
+			req.attacker = stats
+			req.base_min = v.max_hp() * stats.flag(&"frozen_explode")
+			req.base_max = req.base_min
+			req.conversion = {Elements.ICE: 1.0}
+			req.direct_status[&"chilled"] = 60.0
+			req.can_crit = false
+			req.label = "Frozen explosion"
+			AreaEffects.burst(self, v.global_position, 3.5, BH.LAYER_ENEMY, req, self, [v])
+			FX.spawn(VFXLib.ring_wave(Elements.color(Elements.ICE), 3.5, 0.4, 0.8), v.global_position)
+			FX.spawn(VFXLib.particles(Color(0.7, 0.9, 1.0, 1.0), 30, 0.6, true, 0.3, 8.0, 180.0, Vector3(0, -9, 0), 0.4), v.center())
+			Audio.play_at(&"shatter_ice", v.global_position, 2.0)
+
+# ---- Death & respawn -------------------------------------------------------------------------------------------
+
+func die(killer: Node) -> void:
+	if not alive:
+		return
+	_cancel_action(false)
+	super.die(killer)
+	collision_layer = BH.LAYER_PLAYER
+	dead_since = _time
+	Audio.play_at(&"body_fall", global_position)
+	player_died.emit()
+	Events.player_died.emit()
+
+func respawn() -> void:
+	alive = true
+	status.clear()
+	collision_layer = BH.LAYER_PLAYER
+	collision_mask = BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS | BH.LAYER_ENEMY
+	knock_velocity = Vector3.ZERO
+	mark_stats_dirty()
+	ensure_stats()
+	hp = max_hp() * 0.6
+	mana = max_mana() * 0.6
+	health_changed.emit(hp, max_hp())
+	mana_changed.emit(mana, max_mana())
+	visual.revive()
+	dead_since = -1.0
+
+func on_teleported() -> void:
+	_cancel_action(false)
+	_leap = {}
+	knock_velocity = Vector3.ZERO
+	if camera:
+		camera.clear_occlusion()
+		camera.snap()
+
+func _fell_out() -> void:
+	# never lose the hero below the map: return to the current spawn with a small penalty
+	if Game.current_map:
+		Game.place_player(hero.current_spawn)
+		hp = maxf(1.0, hp - max_hp() * 0.1)
+		health_changed.emit(hp, max_hp())
