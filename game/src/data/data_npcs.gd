@@ -1,9 +1,11 @@
 class_name DataNpcs
-## The people of the Hero Sanctuary and their conversations. Graph format: see Dialogue.
+## The people of Malasugue Town (outdoor posts) and their conversations. The indoor townsfolk live in DataNpcsTown. Graph format: see Dialogue.
 ## World flags used: catacombs_ritual_seen, temple_seal_broken, boss_warden_defeated.
 
 const MAGE := "res://assets/characters/mage.glb"
 const KNIGHT := "res://assets/characters/knight.glb"
+const TOWN := "res://assets/characters/%s.glb"
+const TOWN_IDLES := [&"idle", &"idle_look", &"idle_adjust"]
 const PORTRAIT := "res://assets/ui/portraits/%s.svg"
 
 static func build() -> Array:
@@ -15,7 +17,7 @@ static func _end(text := "Farewell.") -> Dictionary:
 # ------------------------------------------------------------------------------------------------ Elder Maelis
 static func _maelis() -> NpcDef:
 	return NpcDef.make(&"maelis", "Elder Maelis", {"title": "Keeper of the Hearth", "portrait": PORTRAIT % "elder",
-		"position": Vector3(5.2, 0, -0.2), "yaw": -51.0, "model": MAGE, "tint": Color(0.55, 0.5, 0.42),
+		"position": Vector3(5.2, 0, -0.2), "yaw": -51.0, "model": TOWN % "elder", "tint": Color(0.55, 0.5, 0.42), "idle_anims": TOWN_IDLES,
 		"graph": {
 			"entries": [
 				[[{"flag": "boss_warden_defeated"}, {"not_visited": "warden_fallen"}], "warden_fallen"],
@@ -27,7 +29,7 @@ static func _maelis() -> NpcDef:
 			"nodes": {
 				"first": {"text": [
 						"So the waypoint still answers. I had begun to think it would stay dark forever.",
-						"This is the **Hero Sanctuary**, the last lit hearth between the valley and the ruin. Whatever you were before you came through that light, here you are a guest.",
+						"This is **Malasugue**, the last lit hearth on this coast of Salmonan. That terrace is the **Sanctuary Terrace**; the light you came through lives there. Whatever you were before, here you are a guest.",
 						"Take these. The road to the **Ruined Forest** eats the careless first."],
 					"actions": [{"give_item": "health_potion", "count": 3}, {"relationship": 5}],
 					"choices": [
@@ -68,12 +70,12 @@ static func _maelis() -> NpcDef:
 						"They are not merely raising the dead. They are feeding something. The Temple, then. It always comes back to the Temple."],
 					"actions": [{"relationship": 5}, {"give_xp": 60}], "next": "hub"},
 				"seal": {"text": [
-						"I felt it in the hearth when the **seal of the first oath** broke. Every flame in the Sanctuary leaned toward the east.",
+						"I felt it in the hearth when the **seal of the first oath** broke. Every flame in Malasugue leaned toward the east.",
 						"The Warden will know too. Rest, prepare, and go before he gathers his strength."],
 					"actions": [{"relationship": 5}], "next": "hub"},
 				"warden_fallen": {"text": [
 						"The dead did not march last night. For the first time in three winters, **the valley slept**.",
-						"You have done what our knights could not. The Sanctuary will remember your name, and I will teach you what I can."],
+						"You have done what our knights could not. Malasugue will remember your name, and I will teach you what I can."],
 					"actions": [{"relationship": 20}, {"skill_point": 1}, {"talent_point": 1}, {"event": "warden_thanks"}],
 					"choices": [{"text": "It was the right thing to do.", "next": "hub", "actions": [{"relationship": 5}]},
 						{"text": "I expect to be paid.", "next": "paid"}]},
@@ -86,7 +88,8 @@ static func _maelis() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Tovin
 static func _tovin() -> NpcDef:
 	return NpcDef.make(&"tovin", "Tovin", {"title": "Provisioner", "portrait": PORTRAIT % "merchant",
-		"position": Vector3(7.3, 0, 14.2), "yaw": -144.0, "model": MAGE, "tint": Color(0.62, 0.38, 0.2), "shop": &"tovin_goods",
+		"position": Vector3(7.3, 0, 14.2), "yaw": -144.0, "model": TOWN % "merchant", "tint": Color(0.62, 0.38, 0.2), "shop": &"tovin_goods",
+		"idle_anims": TOWN_IDLES,
 		"graph": {
 			"entries": [
 				[[{"not_visited": "first"}], "first"],
@@ -97,7 +100,7 @@ static func _tovin() -> NpcDef:
 				"first": {"text": "A new face! Tovin, provisioner. Draughts, salts, scrolls, bits of iron. If it keeps you breathing, I sell it. At a fair price, mostly.",
 					"choices": [{"text": "Show me your wares.", "next": "end", "actions": [{"open_shop": "tovin_goods"}]},
 						{"text": "Mostly?", "next": "mostly"}, _end("Another time.")]},
-				"mostly": {"text": "Prices move with trust, friend. Be good to the Sanctuary and the Sanctuary is good to you. That is not a rule, it is just how people work.",
+				"mostly": {"text": "Prices move with trust, friend. Be good to Malasugue and Malasugue is good to you. That is not a rule, it is just how people work.",
 					"actions": [{"relationship": 3}], "next": "hub"},
 				"hub": {"text": "Back again? Good. The shelves are fresher than the bread.",
 					"choices": [
@@ -113,7 +116,7 @@ static func _tovin() -> NpcDef:
 				"news_1": {"text": "Folk say lights move in the **Catacombs** at night. I say folk should buy more **Health Draughts**.", "next": "hub"},
 				"news_2": {"text": "A **hooded stranger** walked in through the east yard two nights ago and has not left. Pays in old coin. Sells things I cannot name.", "next": "hub"},
 				"news_3": {"text": "Business is terrible. Nobody needs **Purifying Salts** when the dead stay dead. I have never been happier.", "next": "hub"},
-				"celebrate": {"text": "The hero of the Sanctuary! Here, on the house. Do not tell Brannoc, he will want the same.",
+				"celebrate": {"text": "The hero of Malasugue! Here, on the house. Do not tell Brannoc, he will want the same.",
 					"actions": [{"give_item": "rejuvenation_elixir", "count": 2}, {"relationship": 10}], "next": "hub"},
 			},
 		}})
@@ -121,8 +124,8 @@ static func _tovin() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Brannoc
 static func _brannoc() -> NpcDef:
 	return NpcDef.make(&"brannoc", "Brannoc", {"title": "Blacksmith", "portrait": PORTRAIT % "blacksmith",
-		"position": Vector3(16.4, 0, 24.6), "yaw": -141.0, "model": KNIGHT, "tint": Color(0.3, 0.26, 0.22), "shop": &"brannoc_forge",
-		"idle_anims": [&"idle", &"idle_adjust"],
+		"position": Vector3(16.4, 0, 24.6), "yaw": -141.0, "model": TOWN % "smith", "tint": Color(0.3, 0.26, 0.22), "shop": &"brannoc_forge",
+		"idle_anims": TOWN_IDLES,
 		"graph": {
 			"entries": [
 				[[{"not_visited": "first"}], "first"],
@@ -164,7 +167,7 @@ static func _brannoc() -> NpcDef:
 static func _seris() -> NpcDef:
 	return NpcDef.make(&"seris", "Seris", {"title": "Aether Mystic", "portrait": PORTRAIT % "mystic",
 		"position": Vector3(-9.2, 0, -5.0), "yaw": 45.6, "model": MAGE, "tint": Color(0.2, 0.35, 0.55), "shop": &"seris_arcana",
-		"services": [&"heal", &"respec"], "idle_anims": [&"idle", &"idle_mage"],
+		"services": [&"mystic_heal", &"respec"], "idle_anims": [&"idle", &"idle_mage"],
 		"graph": {
 			"entries": [
 				[[{"not_visited": "first"}], "first"],
@@ -178,12 +181,15 @@ static func _seris() -> NpcDef:
 				"hub": {"text": "Ask.",
 					"choices": [
 						{"text": "Show me your arcana.", "next": "end", "actions": [{"open_shop": "seris_arcana"}]},
-						{"text": "Heal my wounds.", "next": "healed"},
+						{"text": "Mend my wounds ({mystic_fee} gold).", "next": "healed", "actions": [{"service": "mystic_heal"}]},
 						{"text": "Unweave my skills and talents.", "next": "respec"},
 						{"text": "What is the Aether?", "next": "aether"},
 						_end(),
 					]},
-				"healed": {"text": "Be still. There. The Aether remembers you whole.", "actions": [{"heal": 1}], "next": "hub"},
+				"healed": {"text": [
+						"The Aether remembers you whole, for a price. It always asks one.",
+						"If you want mending that comes with a bed and a hot meal, **Hesta** lets rooms at the **Salted Marlin**, west of the plaza. Cheaper, and she does not stare."],
+					"next": "hub"},
 				"respec": {"text": "Every point you spent returns to you. **Starting skills** stay, they are part of you. The weaving costs gold; the price grows with your level.",
 					"choices": [
 						{"text": "Do it.", "next": "respec_done", "actions": [{"service": "respec"}]},
@@ -254,7 +260,7 @@ static func _stranger() -> NpcDef:
 						"I deal in **rare goods**. Expensive, and worth it. I do not haggle and I do not explain where they come from."],
 					"choices": [{"text": "Show me.", "next": "end", "actions": [{"open_shop": "stranger_wares"}]},
 						{"text": "Who are you?", "next": "who"}, _end("Not today.")]},
-				"who": {"text": "Someone who was here before your Sanctuary, and will be here after. Buy something.", "next": "hub"},
+				"who": {"text": "Someone who was here before your town had walls, and will be here after. Buy something.", "next": "hub"},
 				"hub": {"text": "Well?",
 					"choices": [{"text": "Show me your goods.", "next": "end", "actions": [{"open_shop": "stranger_wares"}]}, _end("Later.")]},
 				"aether_offer": {"text": "The Warden is dead, and his relics have loosened their grip on the Aether. I have something for you now. It is not cheap. Nothing that changes a hero is.",

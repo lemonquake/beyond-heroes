@@ -53,6 +53,7 @@ var _vignette: TextureRect
 var _dodge: TextureProgressBar
 var _tick := 0.0
 var _status_sig := ""
+var tempo_frames: TempoFrames
 
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -66,6 +67,10 @@ func _ready() -> void:
 	_build_bottom()
 	_build_center()
 	_build_feed()
+	# party frames for the hero's Tempos, under the portrait
+	tempo_frames = TempoFrames.new()
+	tempo_frames.position = Vector2(24, 150)
+	add_child(tempo_frames)
 	Events.notify.connect(_on_notify)
 	Events.player_spawned.connect(bind)
 	Events.player_leveled.connect(_on_leveled)

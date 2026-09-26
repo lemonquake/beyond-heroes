@@ -39,7 +39,12 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	var personality := &"mage" if def.model.ends_with("mage.glb") else &"knight"
+	# fidget set from the body: the hero models carry class idles; townsfolk only have idle_look / idle_adjust
+	var personality := &"townsfolk"
+	if def.model.ends_with("mage.glb"):
+		personality = &"mage"
+	elif def.model.ends_with("knight.glb"):
+		personality = &"knight"
 	visual.setup(def.model, def.model_scale, def.tint, personality)
 	visual.set_stance(&"idle")
 	_plate = Label3D.new()
@@ -57,6 +62,23 @@ func _ready() -> void:
 	_plate.visible = false
 	add_child(_plate)
 	_fidget_t = _rng.randf_range(4.0, 9.0)
+	_settle.call_deferred()
+
+## Safety net: once the physics space has stepped, stand exactly on this map's ground (never on a neighbour's).
+func _settle() -> void:
+	if not is_inside_tree():
+		return
+	await get_tree().physics_frame
+	var map := _map_root()
+	if map == null or not is_inside_tree() or def == null:
+		return
+	global_position.y = map.global_position.y + NpcDirectory.ground_height(map, def.position)
+
+func _map_root() -> MapRoot:
+	var n := get_parent()
+	while n != null and not (n is MapRoot):
+		n = n.get_parent()
+	return n as MapRoot
 
 func _process(delta: float) -> void:
 	if visual == null:

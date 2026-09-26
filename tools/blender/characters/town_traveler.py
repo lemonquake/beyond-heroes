@@ -1,4 +1,4 @@
-"""Townsfolk: the traveler (Yusra Ven, a refugee from Tambakol).
+"""Townsfolk: the traveler (Zerin Ven, a refugee from Emberhal).
 
 A road-worn woman in a long hooded travel cloak (BH_Cloth_Primary, tinted) with the hood up and a shoulder mantle,
 a scarf wound around the neck, a belted tunic over trousers, cloth-wrapped boots, and a pack with a rolled bedroll

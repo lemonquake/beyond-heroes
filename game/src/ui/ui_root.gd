@@ -11,10 +11,11 @@ var pause_menu: PauseMenu
 var dev_panel: DevPanel
 var confirm: ConfirmDialog
 var tooltips: TooltipLayer
+var chat: ChatBox
 var _root: Control
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
-	&"world_map": &"world_map"}
+	&"world_map": &"world_map", &"tempos": &"tempos"}
 
 func _init() -> void:
 	layer = 20
@@ -31,6 +32,8 @@ func _ready() -> void:
 	hud = Hud.new()
 	hud.process_mode = Node.PROCESS_MODE_PAUSABLE
 	_root.add_child(hud)
+	chat = ChatBox.new()        # under the windows: an open window covers the chat log
+	_root.add_child(chat)
 	_add_window(&"inventory", InventoryWindow.new())
 	_add_window(&"character", CharacterWindow.new())
 	_add_window(&"skills", SkillsWindow.new())
@@ -38,6 +41,8 @@ func _ready() -> void:
 	_add_window(&"shop", ShopWindow.new())
 	_add_window(&"world_map", WorldMapWindow.new())
 	_add_window(&"settings", SettingsWindow.new())
+	_add_window(&"tempos", TempoWindow.new())
+	_add_window(&"tempo_caller", TempoCallerWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -84,10 +89,13 @@ func any_window_open() -> bool:
 	for w in windows.values():
 		if w.visible:
 			return true
-	return dialogue.visible or pause_menu.visible or confirm.visible
+	return dialogue.visible or pause_menu.visible or confirm.visible or chat.is_open()
 
 func close_all() -> bool:
 	var closed_any := false
+	if chat.is_open():
+		chat.close()
+		return true
 	if confirm.visible:
 		confirm.cancel()
 		return true
@@ -113,6 +121,10 @@ func _unhandled_input(e: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if get_tree().paused or dialogue.visible:
+		return
+	if e.is_action_pressed(&"chat") and not confirm.visible:
+		chat.open()
+		get_viewport().set_input_as_handled()
 		return
 	for action in HOTKEYS:
 		if e.is_action_pressed(action):

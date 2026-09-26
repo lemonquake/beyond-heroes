@@ -1,4 +1,4 @@
-"""Townsfolk: the matron (innkeeper Pilar Abucay, net-mender Nena Lagdameo, widow Mirasol Hald).
+"""Townsfolk: the matron (innkeeper Hesta Brindle, net-mender Tessaly Grane, widow Ilvena Hald).
 
 A sturdy woman in a long working dress (BH_Cloth_Primary, tinted per NPC) with a bib apron, sleeves rolled above
 the elbows, a knotted headscarf and a ring of keys on the belt.

@@ -11,14 +11,15 @@ extends RefCounted
 ## Conditions (all must hold): {"flag": id} {"not_flag": id} {"flag": id, "value": v} {"level_min": n} {"level_max": n}
 ##   {"class": id} {"visited": "node_id"} {"not_visited": "node_id"} {"item": base_id, "count": n} {"gold": n}
 ##   {"relationship_min": n} {"map": id} {"guild": id} {"not_guild": id} {"no_guild": true} {"any_guild": true}
-##   {"tier_min": rank} {"tier_max": rank} {"can_promote": true} {"rested": true}
+##   {"tier_min": rank} {"tier_max": rank} {"can_promote": true} {"rested": true} {"tempo_fallen": true} {"tempos_min": n}
 ## Actions: {"set_flag": id, "value": v} {"give_item": base_id, "count": n, "rarity": r} {"take_item": base_id, "count": n}
 ##   {"give_gold": n} {"take_gold": n} {"give_xp": n} {"open_shop": shop_id} {"relationship": delta}
 ##   {"event": id, ...} (quest-ready hook) {"unlock_teleporter": id} {"heal": 1} {"skill_point": n} {"talent_point": n}
-##   {"service": "respec" | "heal" | "rest" | "mystic_heal" | "promote" | "join_swordfin" | "join_lantern"}
+##   {"service": "respec" | "heal" | "rest" | "mystic_heal" | "promote" | "join_swordfin" | "join_lantern" | "tempo_hire" |
+##   "tempo_revive"}
 ##   (performed by the NPC service layer after the player confirms the price)
 ## Text placeholders filled from the hero: {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
-##   {promo_fee} {promo_level} {promo_deed} {join_fee} {transfer_fee}
+##   {promo_fee} {promo_level} {promo_deed} {promo_deed_text} {join_fee} {transfer_fee}
 ## Branch node: {"branch": [[conditions, node_id], ...]} jumps to the first matching node without showing anything.
 ##
 ## Text may mark important words with **double asterisks**; the UI highlights them.
@@ -122,6 +123,10 @@ func check(c: Dictionary, hero: HeroData) -> bool:
 		return bool(GuildRules.next_promotion(hero).ok) == bool(c.can_promote)
 	if c.has("rested"):
 		return hero.is_rested() == bool(c.rested)
+	if c.has("tempo_fallen"):
+		return TempoRules.has_fallen(hero) == bool(c.tempo_fallen)
+	if c.has("tempos_min"):
+		return hero.tempos.size() >= int(c.tempos_min)
 	push_warning("Unknown dialogue condition %s" % c)
 	return false
 
@@ -188,6 +193,7 @@ static func fill(text: String, hero: HeroData) -> String:
 		"mystic_fee": str(NpcServices.mystic_heal_cost(hero)),
 		"next_tier": ("Class %s" % DataGuilds.letter(nxt)) if nxt > 0 else "none",
 		"promo_fee": str(p.get("fee", 0)), "promo_level": str(p.get("level", 0)), "promo_deed": String(p.get("deed", "")),
+		"promo_deed_text": String(p.get("deed", "")) if String(p.get("deed", "")) != "" else "none required",
 		"join_fee": str(DataGuilds.tier(1).fee), "transfer_fee": str(DataGuilds.TRANSFER_FEE),
 	}
 	for k in vals:

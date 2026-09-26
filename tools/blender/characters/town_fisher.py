@@ -1,6 +1,6 @@
-"""Townsfolk: the old fisherman (Old Tasyo).
+"""Townsfolk: the old fisherman (Old Marrow).
 
-A lean, weathered old man, slightly stooped: a wide conical woven sun-hat (salakot) with a chin cord, an open
+A lean, weathered old man, slightly stooped: an oilskin sou'wester rain hat with a chin cord, an open
 sleeveless vest over a bare chest and trousers rolled to mid-calf (both BH_Cloth_Primary, tinted), a rope belt, bare feet in
 sandals and a coiled fishing net with wooden floats slung over the left shoulder.
 """
@@ -25,7 +25,7 @@ PALETTE_COLORS.update({
     "BH_Cloth_Accent": pal((0.20, 0.23, 0.15), 0.95),         # net twine (green-brown)
     "BH_Skin": pal((0.36, 0.20, 0.12), 0.6),                  # sun-dark
     "BH_Hair": pal((0.42, 0.41, 0.39), 0.7),                  # white
-    "BH_Wood": pal((0.30, 0.20, 0.10), 0.8),                  # hat weave, floats
+    "BH_Wood": pal((0.30, 0.20, 0.10), 0.8),                  # net floats
     "BH_Leather": pal((0.14, 0.08, 0.04), 0.7),
 })
 
@@ -160,26 +160,31 @@ def hair(k, hr):
 
 
 def hat(k, hr):
-    y0 = FWD
-    apex, rim_z, rim_r = 1.97, 1.745, 0.31
-    prof = [(0.0, apex + 0.02), (0.02, apex), (0.1, apex - 0.075), (0.2, apex - 0.155), (rim_r, rim_z),
-            (rim_r + 0.006, rim_z - 0.012), (rim_r - 0.012, rim_z - 0.01), (0.2, apex - 0.167),
-            (0.1, apex - 0.088), (0.0, apex - 0.02)]
-    V, F = M.lathe(prof, 28)
-    h = P_(V, F, "BH_Wood", "hat").move((0, y0 + 0.01, 0))
-    k.add(K.outward(h), "head")
-    # woven rings (darker bands) on the cone
-    for t in (0.35, 0.62, 0.9):
-        r = lerp(0.02, rim_r, t)
-        z = lerp(apex, rim_z, t) + 0.004
-        ring = K.ring_pts((0, y0 + 0.01, z), r + 0.002, (0, 0, 1), n=28)
-        V, F = M.tube(ring, [(0.004, 0.004)] * len(ring), n=4, up=(0, 0, 1), cap0=False, cap1=False)
-        k.add(P_(V, F, "BH_Leather", "weave"), "head")
-    # top knob
-    V, F = M.sphere(0.018, 8, 5, center=(0, y0 + 0.01, apex + 0.02))
-    k.add(P_(V, F, "BH_Leather", "knob"), "head")
+    """Oilskin sou'wester: a round stitched crown, the brim turned up a little at the front and sloping long and low
+    over the ears and the back of the neck (keeps the spray off). Tarred olive canvas (BH_Cloth_Accent)."""
+    y0 = FWD + 0.01
+    base_z = 1.768
+    prof = [(0.104, base_z - 0.004), (0.107, 1.8), (0.1, 1.84), (0.083, 1.872), (0.052, 1.893), (0.0, 1.9)]
+    V, F = M.lathe(prof, 28, cap=True)
+    k.add(K.outward(P_(V, F, "BH_Cloth_Accent", "hat_crown").move((0, y0, 0))), "head")
+
+    # brim: u runs around the head (front = -y), v from the crown out to the edge
+    def brim_pt(u, v):
+        a = u * 2.0 * math.pi
+        back = 0.5 * (1.0 + math.sin(a))          # 0 at the front (-y), 1 at the back (+y)
+        reach = 0.05 + 0.095 * back ** 1.4
+        r = 0.104 + reach * v
+        droop = -(0.012 + 0.085 * back ** 1.3) * v ** 1.3
+        lift = 0.018 * (1.0 - back) ** 2 * v * v   # the short front brim turns up
+        return (r * math.cos(a), y0 + r * math.sin(a), base_z + droop + lift)
+    V, F = M.grid(brim_pt, 36, 5, closed_u=True)
+    k.add(M.solidify(P_(V, F, "BH_Cloth_Accent", "hat_brim"), 0.007, 0.0), "head")
+    # a stitched band where the brim meets the crown
+    ring = K.ring_pts((0, y0, base_z + 0.012), 0.108, (0, 0, 1), n=28)
+    V, F = M.tube(ring, [(0.006, 0.004)] * len(ring), n=4, up=(0, 0, 1), cap0=False, cap1=False)
+    k.add(P_(V, F, "BH_Leather", "hat_band"), "head")
     # inner headband sitting on the skull
-    V, F = M.tube([(0, y0 + 0.004, 1.77), (0, y0 + 0.004, 1.81)], [(0.082, 0.098)] * 2, n=16, up=(0, -1, 0))
+    V, F = M.tube([(0, y0 - 0.006, 1.77), (0, y0 - 0.006, 1.81)], [(0.082, 0.098)] * 2, n=16, up=(0, -1, 0))
     k.add(P_(V, F, "BH_Leather", "headband"), "head")
     # chin cord
     for sx in (1, -1):

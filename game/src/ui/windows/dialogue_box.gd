@@ -5,6 +5,9 @@ extends Control
 ## (1-9), disabled choices shown when the graph wants them visible. Voice-ready: plays a line's "voice" id if present.
 
 const CPS := 55.0             # characters per second
+## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
+const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
+	&"tempo_revive"]
 
 var session: DialogueSession
 var npc: Npc
@@ -197,6 +200,14 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				&"promote": _promote()
 				&"join_swordfin": _join(&"swordfin")
 				&"join_lantern": _join(&"lantern")
+				&"tempo_hire", &"tempo_revive": _open_tempo_caller.call_deferred(StringName(arg))
+
+## Veyra Ashgrave's services open the Tempo-Caller window (binding spirits, calling fallen ones back).
+func _open_tempo_caller(which: StringName) -> void:
+	close()
+	var w := Game.ui_root.window(&"tempo_caller") as TempoCallerWindow
+	if w:
+		w.open_on(&"fallen" if which == &"tempo_revive" else &"roster")
 
 func _open_shop_after_end(shop_id: StringName) -> void:
 	var w := Game.ui_root.window(&"shop") as ShopWindow

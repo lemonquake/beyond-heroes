@@ -114,7 +114,7 @@ func _approach() -> void:
 	wall_run(Vector3(l.position.x, 0, l.position.y), Vector3(l.position.x, 0, l.end.y), "wall_low")
 	wall_run(Vector3(l.end.x, 0, l.position.y), Vector3(l.end.x, 0, l.end.y), "wall_low", [], {}, true)
 	wall_run(Vector3(l.position.x, 0, l.position.y), Vector3(l.end.x, 0, l.position.y), "wall_low", [1, 2])
-	teleporter(&"arena_return", Vector3(0, 0, 36.0), &"sanctuary", &"waypoint", "Hero Sanctuary", 0.0, true,
+	teleporter(&"arena_return", Vector3(0, 0, 36.0), &"sanctuary", &"waypoint", "Malasugue Town", 0.0, true,
 		&"boss_warden_defeated", "The Warden's will binds this waypoint.")
 	spawn(&"arrival", Vector3(0, 0, 31.6), 180.0)
 	spawn(&"start", Vector3(0, 0, 31.6), 180.0)

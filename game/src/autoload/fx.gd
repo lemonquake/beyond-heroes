@@ -75,6 +75,8 @@ func _number(pos: Vector3, text: String, color: Color, scale := 1.0, rise := 1.2
 
 func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> void:
 	var is_player_target: bool = target is Actor and target.team == BH.Team.PLAYER
+	var is_hero: bool = target is Player
+	var tempo_hit: bool = attacker is Tempo
 	if r.evaded:
 		_number(pos + Vector3.UP * 0.3, "Evade" if not is_player_target else "Dodged", Color(0.8, 0.85, 0.9), 0.8)
 		return
@@ -91,8 +93,12 @@ func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> 
 	if r.dominant_element == Elements.PHYSICAL:
 		c = Color(1.0, 0.97, 0.9)
 	if is_player_target:
-		c = Color(1.0, 0.35, 0.3)
-	var s := 1.0
+		c = Color(1.0, 0.35, 0.3) if is_hero else Color(1.0, 0.62, 0.45)
+	elif tempo_hit:
+		c = c.lerp(Color(0.62, 0.95, 1.0), 0.45)
+	var s := 1.0 if is_hero or not is_player_target else 0.78
+	if tempo_hit:
+		s = 0.85
 	var txt := str(r.total)
 	if r.is_crit:
 		s = 1.45
@@ -118,7 +124,7 @@ func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> 
 				stain(target.global_position + d2 * randf_range(0.4, 1.4), mat[1], randf_range(0.7, 1.3) * (1.4 if r.is_crit else 1.0), atan2(d2.x, d2.z) - PI * 0.5)
 		if target.visual:
 			target.visual.flash(Color(1, 1, 1) if not is_player_target else Color(1, 0.3, 0.2), 0.9 if r.is_crit else 0.6)
-		if attacker is Actor and attacker.team == BH.Team.PLAYER:
+		if attacker is Player:
 			if r.is_crit or r.knockback >= Actor.HEAVY_KNOCK or r.shattered:
 				hitstop(0.075 if r.is_crit else 0.055)
 				Events.camera_shake.emit(0.22 + strength * 0.15)
@@ -126,7 +132,7 @@ func _on_damage(target: Node, r: DamageResult, pos: Vector3, attacker: Node) -> 
 			elif strength > 0.3:
 				hitstop(0.03)
 				Events.camera_shake.emit(0.1)
-		elif is_player_target:
+		elif is_hero:
 			Events.camera_shake.emit(clampf(rel * 0.6, 0.08, 0.35))
 			rumble(0.6, 0.3, 0.15)
 
@@ -135,6 +141,8 @@ func hit_material(target: Node) -> Array:
 	if target is Enemy and (target as Enemy).def:
 		var d := (target as Enemy).def
 		return [d.hit_material, d.blood]
+	if target is Tempo:
+		return [Gore.AETHER, DataTempos.SPIRIT_TINT]   # spirits shed light, not blood
 	if target is Actor:
 		return [Gore.FLESH, Color(0.42, 0.02, 0.02)]
 	return [&"", Color.BLACK]

@@ -63,7 +63,7 @@ func show_for(def: MapDef) -> void:
 	if def:
 		_title.text = def.display_name
 		_subtitle.text = def.subtitle
-		_levels.text = "Sanctuary — no enemies" if def.is_town else ("Monster level %d – %d" % [def.level_min, def.level_max]
+		_levels.text = "Safe haven — no enemies" if def.is_town else ("Monster level %d – %d" % [def.level_min, def.level_max]
 			if def.level_max > def.level_min else "Monster level %d" % def.level_min)
 		_hint.text = def.loading_hint
 	visible = true

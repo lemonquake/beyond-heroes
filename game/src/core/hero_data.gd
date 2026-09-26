@@ -36,6 +36,11 @@ var guild: StringName = &""
 var tier := 0
 ## "Well Rested" from the inn: active while play_time < rested_until (seconds of play time).
 var rested_until := 0.0
+## Tempos (spirit companions, LORE §9): the bound spirits (at most DataTempos.MAX_ACTIVE, fallen ones included), the
+## spirits currently answering the Tempo-Caller ({offers: [TempoData dicts], refresh_at, serial}) and the uid counter.
+var tempos: Array = []
+var tempo_roster := {}
+var tempo_serial := 0
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -300,6 +305,7 @@ func to_dict() -> Dictionary:
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
 		"guild": String(guild), "tier": tier, "rested_until": rested_until,
+		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
 	}
 
 func _dialogue_out() -> Dictionary:
@@ -364,4 +370,16 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.tier = clampi(int(d.get("tier", 0)), 0, DataGuilds.MAX_RANK) if h.guild != &"" else 0
 	h.equipment.tier_rank = h.tier
 	h.rested_until = float(d.get("rested_until", 0.0))
+	# Tempos (absent in older saves: none bound)
+	for td in d.get("tempos", []):
+		if td is Dictionary and h.tempos.size() < DataTempos.MAX_ACTIVE:
+			h.tempos.append(TempoData.from_dict(td))
+	var roster = d.get("tempo_roster", {})
+	if roster is Dictionary and not (roster as Dictionary).is_empty():
+		# normalised through TempoData so a JSON round trip (ints read back as floats) stays exact
+		h.tempo_roster = {"offers": (roster.get("offers", []) as Array).map(func(o): return TempoData.from_dict(o).to_dict()),
+			"refresh_at": float(roster.get("refresh_at", 0.0)), "serial": int(roster.get("serial", 0))}
+	h.tempo_serial = int(d.get("tempo_serial", 0))
+	for t in h.tempos:
+		h.tempo_serial = maxi(h.tempo_serial, t.uid)
 	return h

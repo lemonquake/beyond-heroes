@@ -33,19 +33,19 @@ Rebuild everything with `python tools/ui_art/bh003_build.py`. It needs `pip inst
 - `swordfin_banner.png` and `lantern_banner.png` (512×768 RGBA) are the **cloth-only** texture variant, meant for 3D cloth meshes. They have the same art, but there is no rod, hook or tassels, and the cloth fills the full width. The swallowtail notch is transparent.
 
 **Portraits:** these live in `game/assets/ui/portraits/` (256×256). All 13 are new, and no existing file was touched:
-- `innkeeper`: Pilar, tan skin, red polka-dot headscarf, apron, dishcloth, big smile, lamplight
-- `bard`: Ciro, curly hair, red feathered cap, teal doublet, lute neck and pegbox
-- `fisher`: Old Tasyo, old skin, wide woven conical hat, deep wrinkles, white stubble, grey eyes
+- `innkeeper`: Hesta, tan skin, red polka-dot headscarf, apron, dishcloth, big smile, lamplight
+- `bard`: Fennick, curly hair, red feathered cap, teal doublet, lute neck and pegbox
+- `fisher`: Old Marrow, old skin, oilskin sou'wester, deep wrinkles, white stubble, grey eyes
 - `veteran`: Venna Kail, pale skin, cropped grey hair, scar across the brow, azure star pin, battered pauldron
 - `swordfin_master`: Rhea Talvanne, high bun, blue coat with silver frogging, swordfish pin, spear
-- `swordfin_quartermaster`: Dax Mercado, broad jaw, black beard with a grey streak, open ledger, blue sash
+- `swordfin_quartermaster`: Dax Harrowby, broad jaw, black beard with a grey streak, open ledger, blue sash
 - `lantern_master`: Oren Vale, bald with white tufts, gold round spectacles, violet robe with gold stole, hand lantern
 - `lantern_scribe`: Lio Sanvar, young, freckles, ink smudge, quill behind the ear, violet tunic
-- `netmender`: Nena, long braid, shell earrings, fishing net with floats over the shoulder
-- `cartographer`: Ibarra Quell, receding hair with grey temples, mustache, magnifying lens, rolled maps
-- `widow`: Mirasol Hald, grey veil and dress, sorrowful brows, soldier's tag on a cord
-- `keeper`: Tomas Dalisay, shaved head, shrine mark, wooden prayer beads, bestiary tome with a beast-eye sigil
-- `refugee`: Yusra Ven, ash-dusted hooded travel cloak, tired eyes, soot smudge, ember light
+- `netmender`: Tessaly, long braid, shell earrings, fishing net with floats over the shoulder
+- `cartographer`: Aurand Quell, receding hair with grey temples, mustache, magnifying lens, rolled maps
+- `widow`: Ilvena Hald, grey veil and dress, sorrowful brows, soldier's tag on a cord
+- `keeper`: Thadric Moll, shaved head, shrine mark, wooden prayer beads, bestiary tome with a beast-eye sigil
+- `refugee`: Zerin Ven, ash-dusted hooded travel cloak, tired eyes, soot smudge, ember light
 
 ## Evidence files (this folder)
 - `tiers_28.png`, `tiers_48.png`, `tiers_128.png`: emblems at each size

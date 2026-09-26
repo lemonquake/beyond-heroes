@@ -1,4 +1,4 @@
-"""Townsfolk: the scholar (Archivist Oren Vale, Keeper Tomas Dalisay, cartographer Ibarra Quell).
+"""Townsfolk: the scholar (Archivist Oren Vale, Keeper Thadric Moll, cartographer Aurand Quell).
 
 A robed man: ankle-length robe with wide sleeves (BH_Cloth_Primary, tinted), a short shoulder cape with a hood
 gathered at the back, round spectacles, a neat trimmed beard, a satchel of scrolls on a strap across the chest and a

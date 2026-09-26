@@ -164,6 +164,36 @@ func dress(hero: HeroData) -> void:
 		stance = lo.main_type.idle_anim
 	visual.set_stance(stance if visual.has_anim(stance) else &"idle")
 
+## Show a Tempo (spirit companion): its class body in its spectral tint, holding what it wears (or its ghost blade).
+func show_tempo(t: TempoData, level := 1) -> void:
+	if t == null:
+		return
+	var key := StringName("tempo_%d_%s" % [t.uid, t.class_id])
+	if visual == null or _class_id != key:
+		_class_id = key
+		if visual:
+			visual.queue_free()
+		visual = CharacterVisual.new()
+		pivot.add_child(visual)
+		var td := t.class_def()
+		visual.setup(String(td.get("model", "res://assets/characters/knight.glb")), 1.0, t.tint, &"knight" if t.class_id == &"swordsman" else &"mage")
+		visual.set_rim(DataTempos.SPIRIT_TINT, 0.75)
+		_fidget_t = 2.5
+	visual.detach_weapon(&"main")
+	visual.detach_weapon(&"off")
+	var lo := TempoRules.loadout(t, level)
+	var main := t.equipment.get_item(&"main_weapon")
+	var sub := t.equipment.get_item(&"sub_weapon")
+	if lo.main_type != null:
+		visual.attach_weapon(&"main", _weapon_model(main, lo.main_type) if main else lo.main_type.model, lo.main_type.grip_offset)
+	if sub != null and sub.base.category == &"shield":
+		visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+	elif lo.off_type != null:
+		visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type) if sub else lo.off_type.model, lo.off_type.grip_offset)
+	var stance: StringName = &"idle_dual" if lo.dual_wield else (&"idle_shield" if lo.has_shield else (lo.main_type.idle_anim if lo.main_type else &"idle"))
+	visual.set_stance(stance if visual.has_anim(stance) else &"idle")
+	visual.set_opacity(0.9)
+
 func _weapon_model(item: ItemInstance, wt: WeaponTypeDef) -> String:
 	if item.rarity == BH.Rarity.AETHER:
 		var ae := "res://assets/weapons/%s_aether.glb" % wt.id

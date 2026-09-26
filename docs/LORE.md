@@ -40,13 +40,9 @@ good or evil: the same light that powers a waypoint can wake a sleeping Oros.
 | Island | Where | Character | Status |
 |---|---|---|---|
 | **Salmonan** | West | Green cliffs, fishing coves, old forests, temple ruins. Home of **Malasugue Town**. Legend says the island sleeps on the coil of an Oros. | Author canon |
-| **Bangusan** *(provisional)* | North | The largest island, seat of the **Four-Island Accord** and its Hero Registry in the city of Lakanmar *(provisional)*. | Provisional |
-| **Tulingan** *(provisional)* | East | Merchant harbors, shipyards, the richest guild houses. First to hear news from overseas. | Provisional |
-| **Tambakol** *(provisional)* | South | Volcanic, hot springs and black sand. Closest to the outside nations; Tyrant sightings began here. | Provisional |
-
-*(Naming note: "Salmonan" and "Malasugue" read like fish names in Philippine languages — malasugi is a Visayan word
-for marlin/swordfish. The provisional island names follow that pattern: bangus, tulingan and tambakol are fish names.
-This is an inference about the author's intent that should be confirmed.)*
+| **Veldmoor** *(provisional)* | North | The largest island, seat of the **Four-Island Accord** and its Hero Registry in the city of Aubren *(provisional)*. | Provisional |
+| **Corvessa** *(provisional)* | East | Merchant harbors, shipyards, the richest guild houses. First to hear news from overseas. | Provisional |
+| **Emberhal** *(provisional)* | South | Volcanic, hot springs and black sand. Closest to the outside nations; Tyrant sightings began here. | Provisional |
 
 The four islands together are **the Accord Isles**. Their shared government is the **Four-Island Accord**, a treaty
 more than a crown: each island rules itself, but all four register heroes, guilds and tiers the same way.
@@ -61,7 +57,7 @@ more than a crown: each island rules itself, but all four register heroes, guild
 | **The Binding** | The first heroes — the **Oathbound** — used the Aether to put the great creatures to sleep and swore oaths to keep them sleeping. On Salmonan the oath was sworn at the **Forgotten Temple**, over the coil of the island's Oros. The oath-keepers became temple wardens. |
 | **The Age of Accord** | Roughly a thousand years *(provisional)* of fragile peace. The four islands signed the Accord; guilds formed to train and rank heroes; waypoint shrines linked the towns. |
 | **Three winters ago** | The **Ashen Circle** infiltrated the Forgotten Temple. Morthar, the last **Warden**, broke his oath to hold back an Aether collapse they caused, and was hollowed out by it. His dead began to march from the Catacombs. The forest village fell. Malasugue lit its hearth wards and held. |
-| **Now** | News from Tambakol and Tulingan: the outside nations have declared a **Holy War**. Monsters grow bolder everywhere. Malasugue's guilds are recruiting, and the waypoint has chosen a new hero. |
+| **Now** | News from Emberhal and Corvessa: the outside nations have declared a **Holy War**. Monsters grow bolder everywhere. Malasugue's guilds are recruiting, and the waypoint has chosen a new hero. |
 
 ---
 
@@ -149,11 +145,11 @@ The tier letter and emblem are shown on the HUD beside the hero's level, on the 
 
 | | **The Swordfin Company** | **The Lantern Covenant** |
 |---|---|---|
-| Banner | A silver swordfish (malasugue) leaping over two crossed blades, on deep sea-blue | A golden lantern holding an eye-shaped flame, on dusk violet |
+| Banner | A silver swordfish leaping over two crossed blades, on deep sea-blue | A golden lantern holding an eye-shaped flame, on dusk violet |
 | Motto | "Strike first. Strike true." | "We keep the light between things." |
 | Hall | **Swordfin Hall**, east of the plaza | **Lantern House**, west of the plaza |
-| Master | Commander **Rhea Talvanne**, Class S, a Salmonan-born spear-captain who fought an orc war-host on Tambakol | Archivist **Oren Vale**, Class SS, a scholar of the Binding who reads Aether like scripture |
-| Officer | Quartermaster **Dax Mercado** (registrar) | Scribe **Lio Sanvar** (registrar) |
+| Master | Commander **Rhea Talvanne**, Class S, a Salmonan-born spear-captain who fought an orc war-host on Emberhal | Archivist **Oren Vale**, Class SS, a scholar of the Binding who reads Aether like scripture |
+| Officer | Quartermaster **Dax Harrowby** (registrar) | Scribe **Lio Sanvar** (registrar) |
 | Who joins | Soldiers, duelists, monster-hunters | Casters, healers, scouts, scholars |
 | Perks (per tier step) | +2% Physical Damage, +3% Impact Damage, +1% Knockback Resistance | +2% Magic Damage, +2% Maximum Mana, +1% Status Resistance |
 | Features | 15% discount at **Brannoc's forge**; bounty pay: +10% gold from elites and bosses | 15% discount at **Seris's arcana**; 25% off **rest at the Salted Marlin**; +10% healing from potions |
@@ -163,8 +159,8 @@ The tier letter and emblem are shown on the HUD beside the hero's level, on the 
 
 ## 6. Malasugue Town
 
-A walled fishing and hero town on a cliff plateau on Salmonan's west coast, named after the **malasugue**, the
-swordfish that once filled its waters. Its people are fishers, net-menders, smiths and traders, and for three winters
+A walled fishing and hero town on a cliff plateau on Salmonan's west coast, whose waters were once full of
+swordfish and marlin. Its people are fishers, net-menders, smiths and traders, and for three winters
 they have lived behind a palisade while the dead marched in the forest below.
 
 **Places**
@@ -180,6 +176,7 @@ they have lived behind a palisade while the dead marched in the forest below.
 | **The Old Well** | Where Seris reads the Aether. |
 | **South Gate** | Barred for three winters. Captain Hald's post. |
 | **The burnt house** | Burned in the first raid. Left standing as a reminder. |
+| **Shrine of the Fallen** *(provisional)* | A small open-air shrine east of the terrace stair, hung with the tokens of the dead. Veyra Ashgrave calls Tempos here (§9). |
 
 **People of Malasugue** *(all provisional except where the legacy slice named them)*
 
@@ -191,19 +188,20 @@ they have lived behind a palisade while the dead marched in the forest below.
 | Seris | Aether Mystic | Old Well | The Aether, relics; unweaves skills |
 | Captain Hald | Gate Captain | South Gate | Combat, elites, the raids |
 | Hooded Stranger | Dealer in rare goods | Market | More than he says; older than the town |
-| Pilar Abucay | Innkeeper of the Salted Marlin | Tavern | Every rumor that walks in; rest service |
-| Ciro Balintad | Bard | Tavern | The songs of the Binding and the Oathbound |
-| Old Tasyo | Retired fisherman | Tavern | The night the tide ran backward (the Oros) |
-| Venna Kail | Retired Class A hero | Tavern | What tiers really mean; the Tambakol orc war |
+| Hesta Brindle | Innkeeper of the Salted Marlin | Tavern | Every rumor that walks in; rest service |
+| Fennick Arlow | Bard | Tavern | The songs of the Binding and the Oathbound |
+| Old Marrow | Retired fisherman | Tavern | The night the tide ran backward (the Oros) |
+| Venna Kail | Retired Class A hero | Tavern | What tiers really mean; the Emberhal orc war |
 | Commander Rhea Talvanne | Swordfin guildmaster | Swordfin Hall | War, the Kharvenn Gigas, the Company's way |
-| Dax Mercado | Swordfin quartermaster (registrar) | Swordfin Hall | Joining, promotion, bounties |
+| Dax Harrowby | Swordfin quartermaster (registrar) | Swordfin Hall | Joining, promotion, bounties |
 | Archivist Oren Vale | Lantern guildmaster | Lantern House | The Binding, the Oros, the Rekindling doctrine |
 | Lio Sanvar | Lantern scribe (registrar) | Lantern House | Joining, promotion, the Registry |
-| Nena Lagdameo | Net-mender | Net-mender's house | The sea, drowned bells, Ysmer |
-| Ibarra Quell | Cartographer | Cartographer's house | The four islands and the outside nations |
-| Mirasol Hald | Captain Hald's sister, war widow | Widow's house | The first raid; the fallen garrison |
-| Keeper Tomas Dalisay | Shrine-keeper and bestiary scholar | Keeper's house | Gigas, Tyrants, Oros; monster lore |
-| Yusra Ven | Refugee from Tambakol | Refugee's house | The Sulvane Theocracy, Tyrants, the start of the war |
+| Tessaly Grane | Net-mender | Net-mender's house | The sea, drowned bells, Ysmer |
+| Aurand Quell | Cartographer | Cartographer's house | The four islands and the outside nations |
+| Ilvena Hald | Captain Hald's sister, war widow | Widow's house | The first raid; the fallen garrison |
+| Keeper Thadric Moll | Shrine-keeper and bestiary scholar | Keeper's house | Gigas, Tyrants, Oros; monster lore |
+| Zerin Ven | Refugee from Emberhal | Refugee's house | The Sulvane Theocracy, Tyrants, the start of the war |
+| Veyra Ashgrave | Tempo-Caller | Shrine of the Fallen | Tempos: the restless dead, binding them, calling the fallen back |
 
 **Tone of dialogue.** Plain, warm, a little weary. People joke to stay sane. Nobody explains the whole world at once;
 each person knows their own corner of it. Important names are marked with `**bold**` in dialogue data. No modern
@@ -235,10 +233,32 @@ slang, no memes, no fourth-wall jokes.
 
 ## 8. Style rules for writers and artists
 
-- Names: Salmonan people use warm, island names (Pilar, Tasyo, Nena, Mirasol); guild officers and foreigners may use
-  harder names (Talvanne, Kharvenn). Keep new names pronounceable and distinct from existing ones.
+- Names: every name in Jre is **invented** for this world. Do **not** borrow names, words or folklore from real
+  cultures or languages (in particular, no Filipino names or words). Salmonan people use soft, short names (Hesta,
+  Marrow, Tessaly, Ilvena); guild officers and foreigners may use harder names (Talvanne, Kharvenn). Keep new names
+  pronounceable and distinct from existing ones. ("Jre", "Salmonan" and "Malasugue" are the author's own names.)
 - Colors: Swordfin = sea-blue and silver; Lantern = violet and gold; Ashen Circle = ash-grey and ember-orange;
   Aether = pale cyan light; undead = bone and verdigris; tiers go iron → bronze → silver → gold → azure → crimson →
   twin-moon violet-silver → prismatic Aether.
 - The ancient creatures are always spoken of with fear. Nobody alive in Malasugue has seen one awake.
 - Do not resolve the Holy War in any text. It is coming.
+
+---
+
+## 9. Tempos *(provisional — author-requested feature, details not yet confirmed)*
+
+**Tempos** are the spirits of warriors who died fighting the monsters of Jre and did not go quietly. The Aether holds
+their shape for a while; what is left in them is one thing, **vengeance**. A spirit without a living anchor thins out
+and drifts away before it ever finds its monster, so Tempos bind themselves to living heroes.
+
+| | |
+|---|---|
+| **Who calls them** | **Veyra Ashgrave**, the Tempo-Caller, at the **Shrine of the Fallen** in Malasugue. Spirits answer her call a few at a time; new ones come as time passes. Binding one costs gold (the Aether is not free, and neither is she). |
+| **Classes** | **Swordsmen** who held the line (vanguard: draws the monsters, cleaves, charges), **Archers** who kept the walls (marksman: keeps its distance, pierces lines, rains arrows), **Thieves** who fought from the shadows (shadow: strikes from behind, poisons, vanishes in smoke). Each knows a few skills; many carry a **mending** and heal their hero first. |
+| **Strength** | A Tempo's strength is borrowed: bound to a hero it takes **half of what the hero is** and grows as the hero grows, plus whatever its own gear gives. |
+| **Gear** | The dead cannot hold what the living have not earned: a Tempo wears gear **one rarity tier below** the best its hero may wear, and only its class's weapons. |
+| **How many** | **Two at a time.** A living heart can only carry so many ghosts. |
+| **Falling** | A Tempo struck down goes quiet; its token turns cold in the hero's pack. Veyra can **call it back** for a price. A hero may also **release** a spirit for good. |
+| **Personality** | Each spirit keeps something of who it was: valiant, cautious, devoted, vengeful or swift. It shows in how long it fights before falling back to tend itself. |
+| **Names** | Tempo names are invented for Jre (see §8); every spirit remembers where it fell. |
+

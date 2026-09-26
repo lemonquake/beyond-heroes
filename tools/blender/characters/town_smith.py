@@ -1,4 +1,4 @@
-"""Townsfolk: the smith (Brannoc, quartermaster Dax Mercado).
+"""Townsfolk: the smith (Brannoc, quartermaster Dax Harrowby).
 
 Broad and heavy-armed: bald head with a thick beard, a short-sleeved work shirt (BH_Cloth_Primary, tinted per NPC)
 rolled over the biceps and matching work trousers (same tinted cloth), bare forearms, a heavy leather apron from the chest to the knees, leather work gloves, a wide

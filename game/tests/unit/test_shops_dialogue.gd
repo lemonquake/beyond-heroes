@@ -335,7 +335,7 @@ func test_npcs_placed_in_sanctuary() -> void:
 	host.add_child(m)
 	await host.get_tree().physics_frame
 	var placed := NpcDirectory.populate(m)
-	eq(placed.size(), 5, "five townspeople before the ritual (stranger absent)")
+	eq(placed.size(), 6, "six townspeople before the ritual (stranger absent; Veyra Ashgrave at the shrine)")
 	for n in placed:
 		var gy := NpcDirectory.ground_height(m, n.def.position)
 		ok(absf(n.global_position.y - m.global_position.y - gy) < 0.05, "%s stands on the ground" % n.def.id)
@@ -351,7 +351,7 @@ func test_npcs_placed_in_sanctuary() -> void:
 	Game.hero.world_flags[&"catacombs_ritual_seen"] = true
 	await host.get_tree().process_frame
 	placed = NpcDirectory.populate(m)
-	eq(placed.size(), 6, "the stranger arrives after the ritual")
+	eq(placed.size(), 7, "the stranger arrives after the ritual")
 	m.queue_free()
 	Game.hero = prev
 	done()

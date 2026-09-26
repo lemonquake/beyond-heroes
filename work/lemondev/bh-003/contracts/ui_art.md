@@ -44,19 +44,19 @@ New people of Malasugue (see LORE §6 for who they are; show their role in costu
 
 | file | person |
 |---|---|
-| `innkeeper.svg` | Pilar Abucay, innkeeper — middle-aged woman, headscarf, apron, warm smile, tavern lamplight |
-| `bard.svg` | Ciro Balintad, bard — young man, feathered cap, lute neck visible |
-| `fisher.svg` | Old Tasyo — very old fisherman, wide woven conical hat, deep wrinkles, sea-grey eyes |
+| `innkeeper.svg` | Hesta Brindle, innkeeper — middle-aged woman, headscarf, apron, warm smile, tavern lamplight |
+| `bard.svg` | Fennick Arlow, bard — young man, feathered cap, lute neck visible |
+| `fisher.svg` | Old Marrow — very old fisherman, oilskin sou'wester, deep wrinkles, sea-grey eyes |
 | `veteran.svg` | Venna Kail — retired Class A heroine, scar across the brow, short grey hair, azure star pin |
 | `swordfin_master.svg` | Commander Rhea Talvanne — stern woman, blue coat, silver swordfish pin, spear shaft |
-| `swordfin_quartermaster.svg` | Dax Mercado — burly bearded man, ledger and blue sash |
+| `swordfin_quartermaster.svg` | Dax Harrowby — burly bearded man, ledger and blue sash |
 | `lantern_master.svg` | Archivist Oren Vale — elderly scholar, violet robes, spectacles, small lantern light |
 | `lantern_scribe.svg` | Lio Sanvar — young scribe, ink-stained, quill behind the ear, violet |
-| `netmender.svg` | Nena Lagdameo — weathered woman, shell earrings, net over the shoulder |
-| `cartographer.svg` | Ibarra Quell — middle-aged man, magnifying lens, rolled maps |
-| `widow.svg` | Mirasol Hald — woman in mourning grey, dark hair, a soldier's token on a cord |
-| `keeper.svg` | Keeper Tomas Dalisay — shrine-keeper, shaved head, prayer beads, bestiary tome |
-| `refugee.svg` | Yusra Ven — young woman, hooded travel cloak, ash on the cloak (from Tambakol) |
+| `netmender.svg` | Tessaly Grane — weathered woman, shell earrings, net over the shoulder |
+| `cartographer.svg` | Aurand Quell — middle-aged man, magnifying lens, rolled maps |
+| `widow.svg` | Ilvena Hald — woman in mourning grey, dark hair, a soldier's token on a cord |
+| `keeper.svg` | Keeper Thadric Moll — shrine-keeper, shaved head, prayer beads, bestiary tome |
+| `refugee.svg` | Zerin Ven — young woman, hooded travel cloak, ash on the cloak (from Emberhal) |
 
 Faces vary (age, skin tone from the existing SKIN palettes, hair, jaw); none may look like a recolour of another.
 

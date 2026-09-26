@@ -92,6 +92,14 @@ func max_mana() -> float:
 func is_disabled() -> bool:
 	return not alive or status.is_disabled() or knock_velocity.length() > KNOCKED_THRESHOLD
 
+## Fighting recently (the hero and Tempos override this; monsters read it to hear combat).
+func in_combat() -> bool:
+	return false
+
+## The animation-driven action in progress, if any (Player, Enemy and Tempo each keep one in `action`).
+func current_action() -> TimedAction:
+	return get(&"action") as TimedAction
+
 func forward() -> Vector3:
 	return global_transform.basis.z
 

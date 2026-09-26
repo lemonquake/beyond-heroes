@@ -1,4 +1,4 @@
-"""Townsfolk: the bard (Ciro Balintad).
+"""Townsfolk: the bard (Fennick Arlow).
 
 A lean young man in a fitted doublet with a short flared skirt and puffed upper sleeves (BH_Cloth_Primary, tinted),
 slim hose and soft boots, a bright scarf knotted at the throat, a floppy feathered cap over shaggy hair, and a lute

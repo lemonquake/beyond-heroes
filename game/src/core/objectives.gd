@@ -3,13 +3,13 @@ class_name Objectives
 ## Each entry: {id, title, text, map (where it happens), done_flag}. The first entry whose flag is not set is current.
 
 const CHAIN := [
-	{"id": "forest", "title": "The Fallen Village", "text": "Take the Sanctuary waypoint to the Ruined Forest and find the gate into the Catacombs.",
+	{"id": "forest", "title": "The Fallen Village", "text": "Take the waypoint on the Sanctuary Terrace to the Ruined Forest and find the gate into the Catacombs.",
 		"map": &"ruined_forest", "done_flag": &"catacombs_ritual_seen", "step": "Find out what the dead are doing beneath the drowned chapel."},
 	{"id": "temple", "title": "The First Oath", "text": "Enter the Forgotten Temple and find the altar that remembers the first oath.",
 		"map": &"forgotten_temple", "done_flag": &"temple_seal_broken", "step": "Break the seal on the temple sanctum."},
 	{"id": "warden", "title": "The Hollow Throne", "text": "Face Morthar, the Hollow Warden, on his throne.",
 		"map": &"boss_arena", "done_flag": &"boss_warden_defeated", "step": "Defeat the Hollow Warden."},
-	{"id": "after", "title": "A Quiet Valley", "text": "The dead sleep. Return to the Sanctuary; Elder Maelis wants to speak with you.",
+	{"id": "after", "title": "A Quiet Valley", "text": "The dead sleep. Return to Malasugue; Elder Maelis wants to speak with you.",
 		"map": &"sanctuary", "done_flag": &"", "step": "Speak with Elder Maelis."},
 ]
 

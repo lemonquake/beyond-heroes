@@ -28,14 +28,14 @@ tropical-temperate island; see LORE §6 and §8). Each model is reused by severa
 | id | Look | Used by (orchestrator assigns) |
 |---|---|---|
 | `town_elder` | Elderly woman, stooped a little, layered shawl over a long dress, long grey braid, walking staff (right hand), shell necklace | Elder Maelis |
-| `town_scholar` | Robed man with a short cape, spectacles, satchel of scrolls and a book at the hip, neat beard | Archivist Oren Vale, Keeper Tomas Dalisay, Ibarra Quell |
-| `town_smith` | Broad, muscular, bald with a thick beard, bare forearms, heavy leather apron, gloves, hammer and tongs hanging from the belt | Brannoc, Dax Mercado |
-| `town_matron` | Woman in a working dress with an apron, sleeves rolled, headscarf, keys at the belt | Pilar Abucay, Nena Lagdameo, Mirasol Hald |
-| `town_fisher` | Weathered old man, wide conical woven sun-hat, rolled trousers, open vest, a coiled net over one shoulder, bare feet or sandals | Old Tasyo |
+| `town_scholar` | Robed man with a short cape, spectacles, satchel of scrolls and a book at the hip, neat beard | Archivist Oren Vale, Keeper Thadric Moll, Aurand Quell |
+| `town_smith` | Broad, muscular, bald with a thick beard, bare forearms, heavy leather apron, gloves, hammer and tongs hanging from the belt | Brannoc, Dax Harrowby |
+| `town_matron` | Woman in a working dress with an apron, sleeves rolled, headscarf, keys at the belt | Hesta Brindle, Tessaly Grane, Ilvena Hald |
+| `town_fisher` | Weathered old man, oilskin sou'wester rain hat, rolled trousers, open vest, a coiled net over one shoulder, bare feet or sandals | Old Marrow |
 | `town_merchant` | Portly trader in a vest and sash, rolled cap, coin purse and ledger at the belt | Tovin, Lio Sanvar (younger tint) |
 | `town_officer` | Guild officer: long coat over a light breastplate, sash across the chest, short cape, gloves, a sheathed sword at the hip (scabbard on `hips`) | Commander Rhea Talvanne, Venna Kail |
-| `town_bard` | Lean young man with a feathered cap, doublet, lute slung on the back, bright scarf | Ciro Balintad |
-| `town_traveler` | Road-worn woman in a hooded travel cloak with a pack and bedroll, wrapped boots, scarf (a refugee from Tambakol) | Yusra Ven |
+| `town_bard` | Lean young man with a feathered cap, doublet, lute slung on the back, bright scarf | Fennick Arlow |
+| `town_traveler` | Road-worn woman in a hooded travel cloak with a pack and bedroll, wrapped boots, scarf (a refugee from Emberhal) | Zerin Ven |
 
 Female/male builds differ through `PROPS` (shoulder width, hip width, height) and mesh shaping; keep them respectful
 and period-appropriate (no exaggerated anatomy).

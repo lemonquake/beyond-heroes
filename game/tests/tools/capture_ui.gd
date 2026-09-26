@@ -4,7 +4,7 @@ extends Node
 ##   tools/render.sh --resolution 1920x1080 res://tests/tools/capture_ui.tscn -- --mode=game --class=knight --out=<dir>
 ## mode=menu: main menu, load panel, credits, settings, hero selection (both classes).
 ## mode=game: HUD (idle, combat, low HP), inventory, character, skills, talents, world map, settings, dialogue, shop,
-## pause, dev panel. The hero is given levels, gear and statuses first so every panel has real content.
+## pause, dev panel. --tempos=1 adds the chat box, the Tempo window, the Tempo-Caller window and Tempos in the forest. The hero is given levels, gear and statuses first so every panel has real content.
 
 var args := {}
 var out := ""
@@ -119,6 +119,8 @@ func _game_flow() -> void:
 			TooltipLayer.hide_for(null)
 		ui.window(StringName(w)).close_window()
 		await _wait(15)
+	if args.has("tempos"):
+		await _tempo_flow(h, ui)
 	# dialogue + shop
 	var tovin := NpcDirectory.find(&"tovin")
 	if tovin:
@@ -148,3 +150,29 @@ func _game_flow() -> void:
 			Events.boss_engaged.emit(boss)
 			boss.hp = boss.max_hp() * 0.58
 		await _shot("50_boss_hud", 60)
+
+func _tempo_flow(h: HeroData, ui: UIRoot) -> void:
+	h.inventory.gold += 5000
+	TempoRules.roster(h)
+	TempoRules.hire(h, 0)
+	TempoRules.hire(h, 1)
+	TempoParty.refresh(h)
+	await _wait(30)
+	ui.chat.open()
+	ui.chat.submit("Anyone seen the Tempo-Caller tonight?")
+	ui.chat.submit("lemonq")
+	ui.chat.submit("azrael")
+	ui.chat._line.text = "azrin"
+	await _shot("12_chat_open", 20)
+	ui.chat.close()
+	ui.open(&"tempos")
+	await _shot("13_tempo_window", 40)
+	ui.window(&"tempos").close_window()
+	ui.open(&"tempo_caller")
+	await _shot("14_tempo_caller", 40)
+	ui.window(&"tempo_caller").close_window()
+	Game.load_map(&"ruined_forest", &"start")
+	await _wait(120)
+	await _shot("15_tempos_forest", 30)
+	Game.load_map(&"sanctuary", &"start")
+	await _wait(60)

@@ -118,6 +118,9 @@ func _draw_markers() -> void:
 		_dot(t.global_position, c, Color(0.5, 0.95, 1.0), 5.0, true, lim)
 	for n in tree.get_nodes_in_group(&"npc"):
 		_dot(n.global_position, c, UITheme.GOLD, 4.5, true, lim)
+	for t in tree.get_nodes_in_group(&"tempo"):
+		if t.alive:
+			_dot(t.global_position, c, DataTempos.SPIRIT_TINT, 3.5, true, lim)
 	for l in tree.get_nodes_in_group(&"loot"):
 		var col := Color(0.9, 0.85, 0.5)
 		if "item" in l and l.item != null:

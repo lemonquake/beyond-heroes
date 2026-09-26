@@ -27,7 +27,7 @@ var home := Vector3.ZERO
 var patrol_radius := 5.0
 var zone: Node3D
 var agent: NavigationAgent3D
-var target: Player
+var target: Actor                    # the hero or one of the hero's Tempos (threat decides; taunts override)
 var bar: EnemyBar
 
 var action: TimedAction
@@ -68,6 +68,13 @@ var _stealth := 1.0
 var _stealth_reveal := 0.0
 var _stolen_gold := 0
 var _enrage_done := false
+# bh-004: who to fight — the hero or a Tempo
+const THREAT_DECAY := 0.12            # fraction of threat forgotten per second
+const HERO_BIAS := 1.25               # the hero is the monsters' first choice
+var _threat := {}                     # attacker instance id -> threat (damage dealt, decaying)
+var _taunt_by: Actor
+var _taunt_t := 0.0
+var _retarget_t := 0.0
 
 func setup(p_def: EnemyDef, p_level: int, mods: Array = [], p_difficulty := {}) -> Enemy:
 	def = p_def
@@ -201,8 +208,7 @@ func _physics_process(delta: float) -> void:
 	_tick_cooldowns(delta)
 	_elite_tick(delta)
 	_trait_tick(delta)
-	if target == null or not is_instance_valid(target):
-		target = Game.player as Player
+	_select_target(delta)
 	_update_interrupts()
 	if action:
 		if not action.step(delta):
@@ -261,6 +267,84 @@ func _interrupt() -> void:
 	if CombatDirector.current:
 		CombatDirector.current.release_token(self)
 	current_attack = {}
+
+# ---- Targets: the hero or a Tempo ----------------------------------------------------------------------------
+
+## Pick whom to fight. A taunt wins while it lasts; otherwise threat (damage taken from each of them, decaying), with a
+## bias toward the hero, a pull toward whoever is close, and stickiness so the monster does not flicker between foes.
+func _select_target(delta: float) -> void:
+	for k in _threat.keys():
+		_threat[k] *= maxf(0.0, 1.0 - THREAT_DECAY * delta)
+		if _threat[k] < 0.5:
+			_threat.erase(k)
+	if _taunt_t > 0.0:
+		_taunt_t -= delta
+		if _taunt_by and is_instance_valid(_taunt_by) and _taunt_by.alive:
+			target = _taunt_by
+			return
+		_taunt_t = 0.0
+	var hero := Game.player as Actor
+	var valid := target != null and is_instance_valid(target) and target.alive and not _hidden(target)
+	_retarget_t -= delta
+	if valid and _retarget_t > 0.0:
+		return
+	_retarget_t = 2.5 if is_boss else 1.0
+	var best: Actor = hero if hero and is_instance_valid(hero) else null
+	var best_s := _target_score(best) if best else -INF
+	for t in get_tree().get_nodes_in_group(&"tempo"):
+		if not t.alive or _hidden(t):
+			continue
+		var sc := _target_score(t)
+		if sc > best_s:
+			best_s = sc
+			best = t
+	if best == null:
+		target = hero
+	elif valid and best != target and best_s < _target_score(target) * 1.15 + 2.0:
+		return   # not worth switching
+	else:
+		target = best
+
+func _target_score(a: Actor) -> float:
+	if a == null or not is_instance_valid(a) or not a.alive:
+		return -INF
+	var threat := float(_threat.get(a.get_instance_id(), 0.0))
+	var d := global_position.distance_to(a.global_position)
+	var sc := threat * (HERO_BIAS if a is Player else 1.0) - d * 1.5
+	if a is Player:
+		sc += 6.0
+	if a == target:
+		sc += 3.0
+	return sc
+
+## The foe is swinging or casting right now (shield bearers raise their guard).
+func _target_winding_up() -> bool:
+	return target != null and is_instance_valid(target) and target.current_action() != null
+
+func _hidden(a: Actor) -> bool:
+	return a.has_method(&"is_hidden") and a.call(&"is_hidden")
+
+## A Tempo's Grave Challenge: fight me instead (bosses shrug it off twice as fast).
+func taunt(by: Actor, duration: float) -> void:
+	if not alive or by == null:
+		return
+	_taunt_by = by
+	_taunt_t = duration * (0.5 if is_boss else 1.0)
+	target = by
+	_threat[by.get_instance_id()] = float(_threat.get(by.get_instance_id(), 0.0)) + max_hp() * 0.1
+	if not brain.is_engaged():
+		alert_to(by.global_position)
+	FX.text_popup(center() + Vector3.UP * 0.8, "Taunted", Color(0.7, 0.9, 1.0), 0.8)
+
+## Lose sight of `who` (smoke): pick someone else at once.
+func lose_target(who: Actor) -> void:
+	if who and _threat.has(who.get_instance_id()):
+		_threat[who.get_instance_id()] *= 0.3
+	if _taunt_by == who:
+		_taunt_t = 0.0
+	if target == who:
+		target = Game.player as Actor
+		_retarget_t = 1.5
 
 # ---- Perception ----------------------------------------------------------------------------------------------
 
@@ -384,14 +468,14 @@ func _combat_think() -> void:
 		if brain.time_in_state < 1.4:
 			return
 	# Shield bearers raise their guard when the hero is winding up nearby.
-	if def.blocks_front and target.action != null and _dist < 4.0 and rng.randf() < 0.55 * float(difficulty.get("aggression", 1.0)):
+	if def.blocks_front and _target_winding_up() and _dist < 4.0 and rng.randf() < 0.55 * float(difficulty.get("aggression", 1.0)):
 		if brain.go(S.DEFEND):
 			_defend_t = rng.randf_range(0.8, 1.6)
 			visual.set_upper(&"block_loop")
 			return
 	if brain.state == S.DEFEND:
 		_defend_t -= THINK_INTERVAL
-		if _defend_t > 0.0 and target.action != null:
+		if _defend_t > 0.0 and _target_winding_up():
 			return
 		visual.set_upper(&"")
 	var atk := _choose_attack()
@@ -620,10 +704,11 @@ func _melee_hit(a: Dictionary, act: TimedAction, w: int) -> void:
 	var req := _attack_request(a)
 	req.tags[&"push_dir"] = to.normalized()
 	var res := target.receive_hit(req, self, target.center())
-	if has_trait(&"pickpocket") and res and not res.evaded and target.hero and target.hero.inventory.gold > 0:
-		var take := mini(target.hero.inventory.gold, clampi(int(target.hero.inventory.gold * 0.04) + 1, 1, 25))
-		target.hero.inventory.gold -= take
-		target.hero.inventory.changed.emit()
+	if has_trait(&"pickpocket") and res and not res.evaded and target is Player and (target as Player).hero and (target as Player).hero.inventory.gold > 0:
+		var inv: Inventory = (target as Player).hero.inventory
+		var take := mini(inv.gold, clampi(int(inv.gold * 0.04) + 1, 1, 25))
+		inv.gold -= take
+		inv.changed.emit()
 		_stolen_gold += take
 		FX.text_popup(target.center() + Vector3.UP * 0.8, "-%d gold" % take, Color(1.0, 0.8, 0.3), 0.9)
 	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position)
@@ -943,7 +1028,10 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 		return
 	_last_hit_t = 0.0
 	_regen_block = 3.0 if result.components.get(Elements.FIRE, 0.0) > 0.0 else _regen_block
-	if alive and attacker is Player:
+	if alive and attacker is Actor and attacker.team == BH.Team.PLAYER:
+		if result.total > 0:
+			var id := attacker.get_instance_id()
+			_threat[id] = float(_threat.get(id, 0.0)) + float(result.total)
 		if not brain.is_engaged():
 			alert_to(attacker.global_position)
 		if stats.has_flag(&"sparks") and _spark_cd <= 0.0 and rng.randf() < 0.35:

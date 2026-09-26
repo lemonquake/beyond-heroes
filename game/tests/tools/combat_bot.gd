@@ -30,6 +30,11 @@ func _ready() -> void:
 	await Game._begin_session(StringName(maps[0]), &"start")
 	player = Game.player as Player
 	player.input_enabled = true
+	# --tempos=archer,swordsman binds Tempos (the first one of each class that rolls a healing skill when asked: archer+heal)
+	if args.has("tempos"):
+		_bind_tempos(String(args.tempos).split(",", false))
+		TempoParty.refresh(Game.hero)
+		await _frames(3)
 	for m in maps:
 		await _fight_map(StringName(m), seconds)
 	report["class"] = String(cls)
@@ -68,6 +73,27 @@ func _fight_map(id: StringName, seconds: float) -> void:
 		else:
 			r.kills += 1
 	var on_skill := func(_s: StringName) -> void: r.skills_cast += 1
+	var tempo := {"hits": 0, "damage": 0, "kills": 0, "decisions": {}, "fallen": 0, "heals_on_hero": 0, "tempo_hits_taken": 0}
+	r["tempos"] = tempo
+	var on_tdmg := func(target: Node, res: DamageResult, _pos: Vector3, attacker: Node) -> void:
+		if attacker is Tempo and not res.evaded:
+			tempo.hits += 1
+			tempo.damage += res.total
+		if target is Tempo and not res.evaded:
+			tempo.tempo_hits_taken += 1
+	var on_tdie := func(actor: Node, killer: Node) -> void:
+		if killer is Tempo:
+			tempo.kills += 1
+	var on_fall := func(_a: Node) -> void: tempo.fallen += 1
+	Events.damage_dealt.connect(on_tdmg)
+	Events.actor_died.connect(on_tdie)
+	Events.tempo_fallen.connect(on_fall)
+	var watch := func() -> void:
+		for a in TempoParty.actors():
+			if not a.decided.is_connected(_on_decided.bind(tempo)):
+				a.decided.connect(_on_decided.bind(tempo))
+	watch.call()
+	Events.tempo_spawned.connect(func(_a): watch.call())
 	Events.damage_dealt.connect(on_dmg)
 	Events.actor_died.connect(on_die)
 	player.skill_used.connect(on_skill)
@@ -116,6 +142,9 @@ func _fight_map(id: StringName, seconds: float) -> void:
 			still += dt
 		last = player.global_position
 	r.stuck_s = snappedf(still, 0.1)
+	Events.damage_dealt.disconnect(on_tdmg)
+	Events.actor_died.disconnect(on_tdie)
+	Events.tempo_fallen.disconnect(on_fall)
 	r["xp_gained"] = Game.hero.progress.total_xp - xp0
 	r["items_dropped"] = loot_n[0]
 	Events.loot_dropped.disconnect(on_loot)
@@ -131,6 +160,31 @@ func _fight_map(id: StringName, seconds: float) -> void:
 	report.ok = report.ok and ok
 	report.maps[String(id)] = r
 	print("[%s] %s: %s" % ["OK" if ok else "FAIL", id, JSON.stringify(r)])
+
+func _on_decided(what: String, tempo: Dictionary) -> void:
+	var k := what.get_slice(" ", 0)
+	if what.begins_with("skill "):
+		k = what
+	if what.begins_with("healed ") and not what.ends_with("self"):
+		tempo.heals_on_hero += 1
+	tempo.decisions[k] = int(tempo.decisions.get(k, 0)) + 1
+
+func _bind_tempos(classes: Array) -> void:
+	var h := Game.hero
+	h.inventory.gold += 5000
+	var n := 0
+	for c in classes:
+		var want_heal := String(c).ends_with("+heal")
+		var cls := StringName(String(c).get_slice("+", 0))
+		for s in 60:
+			var t := TempoRules.generate(1000 + s * 31 + n, h.progress.level, cls)
+			if want_heal and not t.has_heal():
+				continue
+			h.tempo_roster = {"offers": [t.to_dict()], "refresh_at": h.play_time + 9999.0, "serial": 0}
+			TempoRules.hire(h, 0)
+			break
+		n += 1
+	print("TEMPOS ", h.tempos.map(func(t): return "%s the %s %s" % [t.tempo_name, t.class_name_text(), t.skills]))
 
 func _ranged() -> bool:
 	var lo := player.hero.equipment.loadout()

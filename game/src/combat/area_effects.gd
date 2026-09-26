@@ -87,6 +87,7 @@ static func sweep(parent: Node, from: Vector3, dir: Vector3, speed: float, lengt
 	s.width = width
 	parent.add_child(s)
 	s.global_position = from
+	s.add_to_group(&"sweep")          # Tempos read these to get out of the way
 	return s
 
 
@@ -143,6 +144,7 @@ static func hazard(parent: Node, at: Vector3, radius: float, duration: float, re
 	h.interval = interval
 	parent.add_child(h)
 	h.global_position = at
+	h.add_to_group(&"hazard")
 	var disc := VFXLib.telegraph("circle", Vector2(radius, radius), 0.01, Color(color.r, color.g, color.b, 0.55))
 	h.add_child(disc)
 	h.decal = disc
@@ -163,6 +165,9 @@ class DelayedBlast:
 	var delay := 1.0
 	var on_blast: Callable           # func(position, hits)
 	var _t := 0.0
+
+	func time_left() -> float:
+		return delay - _t
 	var marker: Node3D
 
 	func _physics_process(delta: float) -> void:
@@ -196,6 +201,7 @@ static func delayed(parent: Node, at: Vector3, radius: float, delay: float, req:
 	b.inner = inner
 	parent.add_child(b)
 	b.global_position = at
+	b.add_to_group(&"telegraph")      # Tempos read these to dodge (time left = delay - _t)
 	var m := VFXLib.telegraph(shape, Vector2(radius, radius), delay, color, 360.0, inner)
 	b.add_child(m)
 	b.marker = m

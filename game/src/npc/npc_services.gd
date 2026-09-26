@@ -77,6 +77,13 @@ static func rest(hero: HeroData, p: Node) -> String:
 	hero.stats_dirty.emit()
 	if p is Player and (p as Player).alive:
 		heal(p)
+	# bound spirits rest with their hero
+	TempoRules.restore_all(hero)
+	for t in TempoParty.actors():
+		if t is Tempo and t.alive:
+			t.hp = t.max_hp()
+			t.mana = t.max_mana()
+			t.status.cleanse_harmful()
 	Events.rested.emit(fee)
 	Events.notify.emit("You wake Well Rested (+%d%% experience)." % roundi(HeroData.RESTED_XP * 100.0), &"info")
 	return ""

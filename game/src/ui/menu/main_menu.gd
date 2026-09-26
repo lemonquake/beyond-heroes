@@ -1,6 +1,6 @@
 class_name MainMenu
 extends Control
-## Title screen. Backdrop: the Hero Sanctuary at night seen by a slowly orbiting camera, both heroes standing by the
+## Title screen. Backdrop: Malasugue Town at night seen by a slowly orbiting camera, both heroes standing by the
 ## fountain, drifting embers and aether motes. Foreground: the wordmark, the ornate menu column (Continue, New Game,
 ## Load Game, Settings, Credits, Exit) with hover glow and sounds, and the Load Game / Credits panels.
 ## Emits `new_game`, `load_slot(slot)`; the boot scene handles the flow.

@@ -119,7 +119,7 @@ def shell(d, x, y, s=1.0):
 
 @portrait
 def innkeeper(d):
-    """Pilar Abucay: middle-aged innkeeper, headscarf, apron, warm smile, lamplight."""
+    """Hesta Brindle: middle-aged innkeeper, headscarf, apron, warm smile, lamplight."""
     background(d, "#4a2a10", haze="#ffa040", haze2="#c85a1a", motes="#ffd080", seed=31)
     lamp_glow(d, 212, 60, 90, "#ffc060", 0.6)
     vignette(d)
@@ -182,7 +182,7 @@ def innkeeper(d):
 
 @portrait
 def bard(d):
-    """Ciro Balintad: young bard, feathered cap, lute neck."""
+    """Fennick Arlow: young bard, feathered cap, lute neck."""
     background(d, "#143a3a", haze="#30a090", haze2="#e0a040", motes="#ffe8a0", seed=37)
     vignette(d)
     cx, cy = 124, 120
@@ -248,7 +248,7 @@ def bard(d):
 
 @portrait
 def fisher(d):
-    """Old Tasyo: very old fisherman, wide woven conical hat, deep wrinkles, sea-grey eyes."""
+    """Old Marrow: very old fisherman, oilskin sou'wester, deep wrinkles, sea-grey eyes."""
     background(d, "#18303e", haze="#4a8aa8", haze2="#c08a4a", seed=41)
     vignette(d)
     cx, cy = 128, 126
@@ -278,19 +278,24 @@ def fisher(d):
     d.path(f"M{cx - 13},{cy + 32} Q{cx - 16},{cy + 36} {cx - 14},{cy + 40}", stroke=SKIN_OLD["shade"], sw=1.2, op=0.6)
     # hat shadow over the brow
     d.path(smooth([(cx - 48, cy - 26), (cx, cy - 36), (cx + 48, cy - 26), (cx + 40, cy - 14), (cx, cy - 22), (cx - 40, cy - 14)], tension=0.4), fill="#1a0e06", op=0.4)
-    # wide woven conical hat (salakot-like)
-    hx, hy = cx, cy - 40
-    hat = f"M{hx - 104},{hy + 18} Q{hx - 60},{hy - 20} {hx},{hy - 62} Q{hx + 60},{hy - 20} {hx + 104},{hy + 18} Q{hx},{hy + 34} {hx - 104},{hy + 18} Z"
-    d.path(hat, stroke=OUTLINE, sw=5)
-    d.path(hat, fill=d.lin([(0, "#f0d8a0"), (0.4, "#c8a060"), (1, "#6a4a20")], hx - 104, hy - 62, hx + 104, hy + 30))
-    for k in range(1, 9):   # concentric weave rings
-        t = k / 9
-        y = hy - 62 + 80 * t
-        half = 104 * t
-        d.path(f"M{f(hx - half)},{f(y - 0 + 2 * t)} Q{f(hx)},{f(y + 14 * t)} {f(hx + half)},{f(y + 2 * t)}", stroke="#6a4a20", sw=1.1, op=0.7)
-    for k in range(-6, 7):  # radial ribs
-        d.path(f"M{hx},{hy - 60} L{f(hx + k * 16)},{f(hy + 18 + 10 * (1 - abs(k) / 6))}", stroke="#8a6630", sw=0.9, op=0.55)
-    d.circle(hx, hy - 60, 4, fill="#6a4a20", stroke=OUTLINE, stroke_width=1.6)
+    # oilskin sou'wester: round crown, brim turned up at the front and drooping long over the ears and neck
+    oil = [(0, "#6a7648"), (0.45, "#465230"), (1, "#1e2412")]
+    back = (f"M{cx - 86},{cy + 6} Q{cx - 80},{cy - 34} {cx - 44},{cy - 40} L{cx + 44},{cy - 40} "
+            f"Q{cx + 80},{cy - 34} {cx + 86},{cy + 6} Q{cx + 66},{cy - 2} {cx + 48},{cy - 22} L{cx - 48},{cy - 22} "
+            f"Q{cx - 66},{cy - 2} {cx - 86},{cy + 6} Z")
+    d.path(back, stroke=OUTLINE, sw=5)
+    d.path(back, fill=d.lin(oil, cx, cy - 40, cx, cy + 6))
+    crown = (f"M{cx - 46},{cy - 36} Q{cx - 50},{cy - 98} {cx},{cy - 102} Q{cx + 50},{cy - 98} {cx + 46},{cy - 36} "
+             f"Q{cx},{cy - 44} {cx - 46},{cy - 36} Z")
+    d.path(crown, stroke=OUTLINE, sw=5)
+    d.path(crown, fill=d.lin(oil, cx - 46, cy - 102, cx + 46, cy - 36))
+    for k in (-1, 0, 1):   # stitched panel seams
+        d.path(f"M{cx + k * 22},{cy - 38 - abs(k) * 2} Q{cx + k * 26},{cy - 80} {cx + k * 8},{cy - 100}", stroke="#1e2412", sw=1.4, op=0.7)
+    d.path(f"M{cx - 30},{cy - 90} Q{cx - 10},{cy - 99} {cx + 8},{cy - 97}", stroke="#b8c090", sw=3, op=0.45)   # sheen
+    front = (f"M{cx - 50},{cy - 30} Q{cx},{cy - 50} {cx + 50},{cy - 30} Q{cx + 30},{cy - 24} {cx},{cy - 30} "
+             f"Q{cx - 30},{cy - 24} {cx - 50},{cy - 30} Z")
+    d.path(front, stroke=OUTLINE, sw=4)
+    d.path(front, fill=d.lin(oil, cx, cy - 50, cx, cy - 24))
     # chin cord
     for sx in (-1, 1):
         d.path(f"M{cx + sx * 40},{cy - 20} Q{cx + sx * 36},{cy + 30} {cx + sx * 8},{cy + 52}", stroke="#5a4020", sw=1.4, op=0.9)
@@ -401,7 +406,7 @@ def swordfin_master(d):
 
 @portrait
 def swordfin_quartermaster(d):
-    """Dax Mercado: burly bearded man, ledger, blue sash."""
+    """Dax Harrowby: burly bearded man, ledger, blue sash."""
     background(d, "#1a2a3a", haze="#3a6aa0", haze2="#c0904a", seed=53)
     vignette(d)
     cx, cy = 128, 114
@@ -562,7 +567,7 @@ def lantern_scribe(d):
 
 @portrait
 def netmender(d):
-    """Nena Lagdameo: weathered woman, shell earrings, net over the shoulder."""
+    """Tessaly Grane: weathered woman, shell earrings, net over the shoulder."""
     background(d, "#0e3438", haze="#2a9a9a", haze2="#d0b070", seed=67)
     vignette(d)
     cx, cy = 126, 118
@@ -620,7 +625,7 @@ def lerp(a, b, t):
 
 @portrait
 def cartographer(d):
-    """Ibarra Quell: middle-aged man, magnifying lens, rolled maps."""
+    """Aurand Quell: middle-aged man, magnifying lens, rolled maps."""
     background(d, "#3a2c18", haze="#d0a860", haze2="#6a8a60", seed=71)
     vignette(d)
     cx, cy = 122, 116
@@ -678,7 +683,7 @@ def cartographer(d):
 
 @portrait
 def widow(d):
-    """Mirasol Hald: mourning grey, dark hair, a soldier's token on a cord."""
+    """Ilvena Hald: mourning grey, dark hair, a soldier's token on a cord."""
     background(d, "#22262e", haze="#5a6070", haze2="#3a4a5a", seed=73)
     vignette(d)
     cx, cy = 128, 118
@@ -723,7 +728,7 @@ def widow(d):
 
 @portrait
 def keeper(d):
-    """Keeper Tomas Dalisay: shrine-keeper, shaved head, prayer beads, bestiary tome."""
+    """Keeper Thadric Moll: shrine-keeper, shaved head, prayer beads, bestiary tome."""
     background(d, "#2e2010", haze="#c89040", haze2="#6a8a50", motes="#ffd080", seed=79)
     lamp_glow(d, 50, 70, 70, "#ffc060", 0.45)
     vignette(d)
@@ -772,7 +777,7 @@ def keeper(d):
 
 @portrait
 def refugee(d):
-    """Yusra Ven: young woman from Tambakol, hooded travel cloak with ash on it."""
+    """Zerin Ven: young woman from Emberhal, hooded travel cloak with ash on it."""
     background(d, "#261a18", haze="#6a5a52", haze2="#e06a2a", motes="#ff9a40", seed=83)
     vignette(d)
     cx, cy = 128, 120

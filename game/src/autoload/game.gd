@@ -123,6 +123,7 @@ func _end_player() -> void:
 func save_now() -> bool:
 	if hero == null:
 		return false
+	TempoParty.sync_all()
 	var ok := SaveSystem.save_hero(hero, save_slot)
 	if ok:
 		Events.notify.emit("Game saved", &"save")
@@ -146,8 +147,14 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 	if map == null:
 		return null
 	if current_map and is_instance_valid(current_map):
+		TempoParty.sync_all()
 		if player and player.get_parent() == current_map:
 			current_map.remove_child(player)
+		# Take the old map out of the tree now, not at the end of the frame: its colliders would otherwise still be in
+		# the physics space while the new map is populated, and ground rays (NPC placement, spawns) land on the old
+		# map's terrain — townspeople floating metres above the plaza after returning from the forest.
+		if current_map.get_parent():
+			current_map.get_parent().remove_child(current_map)
 		current_map.queue_free()
 	var parent := world_parent if world_parent and is_instance_valid(world_parent) else get_tree().root
 	parent.add_child(map)
@@ -175,6 +182,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 	if player is Player:
 		Spawner.populate(map, difficulty)
 		NpcDirectory.populate(map)
+		TempoParty.spawn_for(map, player, hero)
 	Audio.play_music(def.music)
 	Audio.play_ambience(def.ambience)
 	Audio.set_environment_reverb(def.reverb)
@@ -191,6 +199,7 @@ func place_player(spawn_id: StringName) -> void:
 		(player as CharacterBody3D).velocity = Vector3.ZERO
 	if player.has_method(&"on_teleported"):
 		player.call(&"on_teleported")
+	TempoParty.regroup(player)
 
 ## Teleporter travel with the loading screen. Same-map travel just relocates the player.
 func travel(id: StringName, spawn_id: StringName) -> void:

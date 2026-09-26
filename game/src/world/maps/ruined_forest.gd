@@ -17,6 +17,12 @@ const BRIDGE_Z := 4.0
 const TOWER := Vector3(31, 0, 24)
 const CAMP := Vector3(20, 0, -15)
 const GATE := Vector3(68, 0, -4)
+## bh-004: the new monsters of LORE §7 — goblins picking over the burnt village, an orc scout band sold to the Sulvane
+## with the ogre they drive on a chain, and more wolf packs (they hunt in threes).
+const GOBLIN_CAMP := Vector3(-26, 0, -18)
+const ORC_CAMP := Vector3(21, 0, 28)
+const OGRE_POST := Vector3(40, 0, 25)
+const WOLF_DENS := [Vector3(-14, 0, -30), Vector3(42, 0, -26)]
 
 func compose() -> void:
 	environment({
@@ -35,6 +41,7 @@ func compose() -> void:
 	_camp()
 	_tower()
 	_grove_and_gate()
+	_raiders()
 	_forest()
 	set_bounds(AABB(Vector3(-72, -8, -48), Vector3(144, 20, 96)))
 	view("overview", Vector3(0, 0, 0), 0.0, 70.0, 150.0, 50.0)
@@ -44,6 +51,8 @@ func compose() -> void:
 	view("camp", CAMP + Vector3(0, 0, 2), 0.0, 48.0, 22.0)
 	view("tower", TOWER + Vector3(0, 3, -4), 0.0, 42.0, 34.0)
 	view("gate", GATE + Vector3(-8, 0, 0), 0.0, 45.0, 28.0)
+	view("goblin_camp", GOBLIN_CAMP, 0.0, 48.0, 22.0)
+	view("orc_camp", ORC_CAMP + Vector3(6, 0, -2), 0.0, 48.0, 30.0)
 
 # ------------------------------------------------------------------------------------------------------------
 # terrain
@@ -125,7 +134,7 @@ func _edges() -> void:
 
 func _arrival() -> void:
 	var c := Vector3(-62, 0, 12)
-	teleporter(&"forest_waypoint", c + Vector3(0, ground(c.x, c.z), 0), &"sanctuary", &"waypoint", "Hero Sanctuary")
+	teleporter(&"forest_waypoint", c + Vector3(0, ground(c.x, c.z), 0), &"sanctuary", &"waypoint", "Malasugue Town")
 	spawn(&"arrival", Vector3(-58.0, 0, 12.4), 90.0, true)
 	spawn(&"start", Vector3(-58.0, 0, 12.4), 90.0, true)
 	for a in [0.4, 1.9, 3.6, 5.0]:
@@ -286,6 +295,38 @@ func _grove_and_gate() -> void:
 		cylinder_shard(p)
 	enemy_zone("grove", ob, 8.0, [&"shade_stalker", &"ashen_cultist", &"ghoul_brute", &"dire_wolf"], 6, 0.4, true)
 
+func _raiders() -> void:
+	# goblin scavenger camp: loot piled from the village, a smoky fire, fire-pots stacked by the crates
+	var g := GOBLIN_CAMP
+	campfire(g, 3.6)
+	kit("tent_old", g + Vector3(-3.2, 0, -2.6), 60.0, 0.8, props, true)
+	for p in [Vector3(2.6, 0, -1.8), Vector3(3.3, 0, -0.8), Vector3(-2.8, 0, 2.4)]:
+		breakable("crate" if rng.randf() < 0.6 else "barrel", g + p, rng.randf() * 360.0, 20.0, true)
+	decor("weapons_discarded", g + Vector3(1.8, 0, 2.6), 30.0)
+	decor("bones_scatter", g + Vector3(-1.5, 0, 3.4), 80.0)
+	decor("skull_pile", g + Vector3(3.8, 0, 2.2), 10.0, 0.6)
+	enemy_zone("goblin_camp", g, 6.0, [&"goblin_skulker"], 5, 0.2, true)
+	# orc scouts on the watchtower hill: a war banner, a fire and the ogre's chain post
+	var o := ORC_CAMP
+	campfire(o, 4.2)
+	kit("tent_old", o + Vector3(3.5, 0, 3.0), -150.0, 1.0, props, true)
+	kit("weapon_rack", o + Vector3(-3.6, 0, 1.4), 70.0, 1.0, props, true)
+	kit("banner_torn", o + Vector3(-1.5, 3.4 + ground(o.x - 1.5, o.z - 3.0), -3.0), 10.0, 0.9, deco)
+	kit("wood_fence", o + Vector3(-1.5, 0, -3.0), 0.0, 0.5, props, true)
+	decor("bones_scatter", o + Vector3(2.0, 0, -2.6), 20.0)
+	enemy_zone("orc_scouts", o, 6.0, [&"orc_reaver", &"orc_reaver", &"goblin_skulker"], 3, 0.3, true)
+	var og := OGRE_POST
+	kit("stump", og + Vector3(-1.4, 0, -1.0), 0.0, 0.6, props, true)
+	kit("chains_hanging", og + Vector3(-1.4, 0.4 + ground(og.x - 1.4, og.z - 1.0), -1.0), 0.0, 0.8, deco)
+	decor("bones_scatter", og + Vector3(1.6, 0, 1.2), 140.0)
+	decor("rubble_pile", og + Vector3(2.8, 0, -2.4), 50.0, 0.9, true, true)
+	enemy_zone("ogre", og, 3.0, [&"ogre_crusher"], 1, 0.1, true)
+	for i in WOLF_DENS.size():
+		var w: Vector3 = WOLF_DENS[i]
+		decor("bones_scatter", w + Vector3(0.8, 0, 0.6), rng.randf() * 360.0)
+		decor("rock_large", w + Vector3(-2.6, 0, -1.8), rng.randf() * 360.0, 0.9, true, true)
+		enemy_zone("wolf_den_%d" % i, w, 6.0, [&"dire_wolf"], 3, 0.1, true)
+
 ## Violet corruption crystals erupting from the ground.
 func cylinder_shard(p: Vector3) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
@@ -310,7 +351,9 @@ func _forest() -> void:
 		if absf(x - _ravine_x(z)) < 8.0:
 			return true
 		for c in [[Vector2(-60, 11), 10.0], [Vector2(-30, 8), 17.0], [Vector2(-48, -13), 7.0], [Vector2(-44, 31), 10.0],
-				[Vector2(CAMP.x, CAMP.z), 10.0], [Vector2(TOWER.x, TOWER.z), 11.0], [Vector2(52, 6), 11.0], [Vector2(GATE.x - 6, GATE.z), 11.0]]:
+				[Vector2(CAMP.x, CAMP.z), 10.0], [Vector2(TOWER.x, TOWER.z), 11.0], [Vector2(52, 6), 11.0], [Vector2(GATE.x - 6, GATE.z), 11.0],
+				[Vector2(GOBLIN_CAMP.x, GOBLIN_CAMP.z), 8.0], [Vector2(ORC_CAMP.x, ORC_CAMP.z), 8.0], [Vector2(OGRE_POST.x, OGRE_POST.z), 6.0],
+				[Vector2(WOLF_DENS[0].x, WOLF_DENS[0].z), 5.0], [Vector2(WOLF_DENS[1].x, WOLF_DENS[1].z), 5.0]]:
 			if p.distance_to(c[0]) < float(c[1]):
 				return true
 		return absf(x) > W * 0.5 - 6.0 or absf(z) > D * 0.5 - 6.0

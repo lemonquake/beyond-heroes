@@ -127,7 +127,7 @@ static func bases() -> Array:
 	out.append(_b(&"antidote", "Purifying Salts", &"consumable", "antidote", {"stack_max": 10, "value": 15,
 		"consumable_effect": {"cleanse": 1.0}, "flavor": "Removes Poison, Burning, Bleeding, Curse and Chill."}))
 	out.append(_b(&"return_scroll", "Scroll of Return", &"consumable", "scroll_return", {"stack_max": 10, "value": 30,
-		"consumable_effect": {"return": 1.0}, "flavor": "Opens a path back to the Hero Sanctuary waypoint."}))
+		"consumable_effect": {"return": 1.0}, "flavor": "Opens a path back to the waypoint on the Sanctuary Terrace in Malasugue."}))
 	out.append(_b(&"iron_shard", "Iron Shard", &"material", "mat_iron_shard", {"stack_max": 99, "value": 2, "flavor": "Salvaged metal. Used for reforging."}))
 	out.append(_b(&"arcane_dust", "Arcane Dust", &"material", "mat_arcane_dust", {"stack_max": 99, "value": 4, "flavor": "Residue of broken enchantments."}))
 	out.append(_b(&"ember_core", "Ember Core", &"material", "mat_ember_core", {"stack_max": 50, "value": 10, "flavor": "A still-warm heart of cinders."}))
