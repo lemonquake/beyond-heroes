@@ -104,6 +104,11 @@ func end_session() -> void:
 	ui_blocking = false
 	session_ended.emit()
 
+## Pause menu "Main Menu": save, tear the session down; the boot scene listens to session_ended.
+func return_to_menu() -> void:
+	get_tree().paused = false
+	end_session()
+
 func _end_player() -> void:
 	if player and is_instance_valid(player):
 		player.queue_free()

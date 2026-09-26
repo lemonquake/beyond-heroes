@@ -215,6 +215,21 @@ func unequip_to_inventory(slot: StringName) -> String:
 		inventory.add(orphan)
 	return ""
 
+## Swap two equipped items (two rings, two gloves). Both must fit the other's slot.
+func swap_equipped(a: StringName, b: StringName) -> String:
+	var ia := equipment.get_item(a)
+	var ib := equipment.get_item(b)
+	if ia == null:
+		return ""
+	if not (BH.CATEGORY_SLOTS.get(ia.base.category, []) as Array).has(b):
+		return "Does not fit there"
+	if ib != null and not (BH.CATEGORY_SLOTS.get(ib.base.category, []) as Array).has(a):
+		return "Does not fit there"
+	equipment.slots[a] = ib
+	equipment.slots[b] = ia
+	equipment.changed.emit()
+	return ""
+
 # ---- NPCs & dialogue ---------------------------------------------------------------------------------------
 
 const REL_MIN := -100

@@ -29,3 +29,11 @@ extends Resource
 @export var talent_tree_id: StringName
 @export var weapon_mastery := {}              # weapon type id -> damage bonus fraction
 @export var tint := Color.WHITE
+# Presentation (hero selection)
+@export var tagline := ""
+@export var difficulty := 1                    # 1 straightforward .. 3 demanding
+@export var class_resource_name := ""
+@export_multiline var resource_desc := ""
+@export var strengths: Array = []
+@export var weaknesses: Array = []
+@export var major_attributes: Array = []

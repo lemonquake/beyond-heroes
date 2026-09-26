@@ -17,6 +17,11 @@ const BINDINGS := {
 }
 
 func _enter_tree() -> void:
+	install_defaults()
+	Settings._apply_bindings()
+
+## The default bindings (keyboard/mouse + controller). Settings.bindings overrides them per action.
+func install_defaults() -> void:
 	for action in BINDINGS:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action, 0.2)

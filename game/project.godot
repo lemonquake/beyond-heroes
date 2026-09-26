@@ -31,6 +31,7 @@ InputSetup="*res://src/autoload/input_setup.gd"
 Audio="*res://src/autoload/audio_manager.gd"
 SaveSystem="*res://src/autoload/save_system.gd"
 Game="*res://src/autoload/game.gd"
+Loot="*res://src/autoload/loot.gd"
 FX="*res://src/autoload/fx.gd"
 Dev="*res://src/autoload/dev_tools.gd"
 

@@ -49,6 +49,7 @@ var _queued_t := 0.0
 var charging := false
 var _charge_t := 0.0
 var guarding := false
+var _guard_latched := false
 var _guard_t := 0.0
 var channel_skill := &""
 var _channel_tick := 0.0
@@ -332,6 +333,11 @@ func _tick_timers(delta: float) -> void:
 			else:
 				status.remove(&"overcharged")
 	var low := is_low_hp()
+	if low != status.has(&"badly_hurt"):
+		if low:
+			status.apply(&"badly_hurt", 0.0)
+		else:
+			status.remove(&"badly_hurt")
 	_hurt_sound_t -= delta
 	if low and _hurt_sound_t <= 0.0:
 		_hurt_sound_t = 2.6
@@ -378,7 +384,7 @@ func _read_input(delta: float) -> void:
 			Game.hover_loot.request_pickup(self)
 		else:
 			_request(&"light")
-	elif lmb and (action == null or action_kind == &"light") and (_queued == &"" or _queued == &"light"):
+	elif lmb and Settings.attack_hold_repeat and (action == null or action_kind == &"light") and (_queued == &"" or _queued == &"light"):
 		# holding attack keeps the chain going (finisher lock prevents endless spam); it never replaces an explicit
 		# buffered intent (skill, heavy, dodge) that is waiting for the current swing's recovery
 		_request(&"light")
@@ -390,7 +396,12 @@ func _read_input(delta: float) -> void:
 			_request(&"heavy")
 	if charging and not Input.is_action_pressed(&"secondary"):
 		_release_charge()
-	var want_guard := Input.is_action_pressed(&"guard") and _can_guard()
+	if Settings.guard_toggle:
+		if Input.is_action_just_pressed(&"guard"):
+			_guard_latched = not _guard_latched
+	else:
+		_guard_latched = Input.is_action_pressed(&"guard")
+	var want_guard := _guard_latched and _can_guard()
 	if want_guard != guarding:
 		_set_guard(want_guard)
 	for i in HeroData.SKILL_BAR_SIZE:

@@ -46,7 +46,7 @@ func _mk_stream_player(bus: String) -> AudioStreamPlayer:
 	return p
 
 func _make_buses() -> void:
-	for n in ["Music", "SFX", "Ambience", "UI"]:
+	for n in ["Music", "SFX", "Voice", "Ambience", "UI"]:
 		if AudioServer.get_bus_index(n) < 0:
 			var i := AudioServer.bus_count
 			AudioServer.add_bus(i)
@@ -68,6 +68,7 @@ func _make_buses() -> void:
 	if AudioServer.get_bus_effect_count(master) == 0:
 		var lim := AudioEffectHardLimiter.new()
 		AudioServer.add_bus_effect(master, lim)
+	Settings._apply_audio()
 
 ## Environment response: more reverb in catacombs/temple, almost none outdoors.
 func set_environment_reverb(amount: float) -> void:

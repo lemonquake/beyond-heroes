@@ -354,9 +354,9 @@ def arms(body):
         ua, fa, ha = "upper_arm." + s, "forearm." + s, "hand." + s
         sh, el, wr = body.head(ua), body.head(fa), body.head(ha)
         # coat sleeve: shoulder -> elbow -> bell cuff at 60% of the forearm
-        pts = [sh + (sh - el) * 0.18 + np.array([0, 0, 0.01]), sh + (el - sh) * 0.3, sh + (el - sh) * 0.75, el,
+        pts = [sh + (sh - el) * 0.05, sh + (el - sh) * 0.3, sh + (el - sh) * 0.75, el,
                el + (wr - el) * 0.3, el + (wr - el) * 0.5, el + (wr - el) * 0.62]
-        prof = [(0.064, 0.068), (0.062, 0.066), (0.057, 0.06), (0.056, 0.058), (0.058, 0.06), (0.066, 0.068),
+        prof = [(0.058, 0.062), (0.062, 0.066), (0.057, 0.06), (0.056, 0.058), (0.058, 0.06), (0.066, 0.068),
                 (0.074, 0.076)]
         V, F = M.tube(pts, prof, n=14, up=(0, -1, 0), cap1=False)
         sl = M.solidify(M.Part(V, F, "BH_Cloth_Primary", name="sleeve"), 0.006, offset=-1.0)
@@ -413,12 +413,24 @@ def pauldron_L(body):
     sh = body.head(ua)
     el = body.head("forearm." + s)
     armdir = normalize(el - sh)
-    axis = normalize(np.array([0.8, 0.0, 0.7]))
-    c = sh + np.array([0.012, 0.0, 0.03])
+    axis = normalize(np.array([0.55, 0.0, 0.85]))
+    c = sh + np.array([0.02, 0.0, 0.02])
     V, F = dome(c, axis, 0.118, a_max=70, n=18, rings=6, scale=(1.0, 1.1, 1.0))
     body.add(M.solidify(M.Part(V, F, "BH_Steel", name="pauldron"), 0.007, offset=-1, bevel_w=0.002), ua)
     Rm = M_align_z(axis, (0, 0, 1))
-    for lat, mat, r in ((70, "BH_Gold", 0.007), (42, "BH_Aether", 0.0035)):
+    # raised gold keel + aether channel along the front-back meridian, gold boss at the apex
+    for off, mat, r, rad in ((0.0, "BH_Gold", 0.009, 0.121), (0.03, "BH_Aether", 0.0035, 0.119),
+                             (-0.03, "BH_Aether", 0.0035, 0.119)):
+        mer = []
+        for lat in np.linspace(-62, 62, 13):
+            a = math.radians(lat)
+            v = np.array([math.sin(math.asin(off / rad)) * rad, rad * math.sin(a) * 1.1, rad * math.cos(a)])
+            mer.append(c + Rm @ v)
+        V, F = M.tube(mer, [(r, r)] * len(mer), n=6, up=axis)
+        body.add(M.Part(V, F, mat, name="p_keel"), ua)
+    V, F = M.sphere(0.02, 10, 6, center=c + axis * 0.118, scale=(1, 1, 0.6))
+    body.add(M.Part(V, F, "BH_Gold", name="p_boss").rot(M_align_z(axis), center=c + axis * 0.118), ua)
+    for lat, mat, r in ((70, "BH_Gold", 0.007),):
         rim = []
         for i in range(25):
             a = 2 * math.pi * i / 24
@@ -498,14 +510,23 @@ def head_and_hood(body):
         add(M.Part(V, F, "BH_Shadow", name="socket"), "head")
         V, F = M.sphere(0.0062, 6, 4, center=(sx * 0.029, -0.075, 1.699), scale=(1.3, 0.7, 0.8))
         add(M.Part(V, F, "BH_Aether", name="eye"), "head")
-    # beard (pointed, along the jaw) + moustache
+    # beard along the jaw line and chin (mouth and cheeks stay visible) + moustache
+    w = 0.215
+    cols = np.linspace(-w, w, 13)
     rows = []
-    for z, w in ((1.556, 0.05), (1.585, 0.14), (1.606, 0.19), (1.626, 0.215), (1.640, 0.215)):
-        r = ring_frac(HEAD, max(z, 1.60), 0.006, np.linspace(-w, w, 11), p=2.1)
-        r[:, 2] = z
-        if z < 1.6:
-            r[:, 1] -= (1.6 - z) * 0.35
-        rows.append(r)
+    for t in np.linspace(0, 1, 5):
+        r = []
+        for f in cols:
+            a = abs(f) / w
+            zb = 1.556 + 0.05 * a ** 2
+            zt = 1.603 + 0.042 * a ** 1.3
+            z = zb + (zt - zb) * t
+            q = ring_frac(HEAD, max(z, 1.60), 0.006, [f], p=2.1)[0]
+            q[2] = z
+            if z < 1.6:
+                q[1] -= (1.6 - z) * 0.35
+            r.append(q)
+        rows.append(np.array(r))
     V, F = M.loft(rows, cap0=False, cap1=False, closed=False)
     beard = M.solidify(M.Part(V, F, "BH_Hair", name="beard"), 0.01, offset=1.0)
     add(beard, "head")
@@ -571,7 +592,7 @@ def mantle(body):
             st, ct = math.sin(th), math.cos(th)
             rx = 0.105 + 0.225 * v
             ry = (0.088 + 0.108 * v) if ct > 0 else (0.09 + 0.115 * v)
-            drop = 0.15 + 0.10 * ct * ct
+            drop = 0.13 + 0.12 * ct * ct
             z = 1.575 - drop * v ** 2 - 0.022 * (1 - math.cos(9 * th)) * 0.5 * v ** 4
             ring.append((rx * st, 0.012 - ry * ct, z))
         rings.append(np.array(ring))

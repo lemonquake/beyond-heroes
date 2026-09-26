@@ -31,6 +31,13 @@ static func build() -> Array:
 	knight.skill_tree_id = &"knight_skills"
 	knight.talent_tree_id = &"knight_talents"
 	knight.tint = Color(0.75, 0.18, 0.16)
+	knight.tagline = "Ancient-tech warrior of the Dawn"
+	knight.difficulty = 1
+	knight.class_resource_name = "Valor"
+	knight.resource_desc = "Builds as you land hits, block, parry and hold your ground near enemies; fades out of combat. At 50 Valor you are Resolute: 10% more physical damage and harder knockback. Judgment spends it all."
+	knight.strengths = ["Heavy armor and a shield that blocks and parries", "Knocks enemies into walls for impact damage", "Staggers and breaks guards", "Forgiving: high HP and poise"]
+	knight.weaknesses = ["Short reach; must close the distance", "Low Mana: few spells", "Slow against fast, ranged enemies"]
+	knight.major_attributes = [&"str", &"dex", &"spi"]
 
 	var mage := ClassDef.new()
 	mage.id = &"mage"
@@ -60,4 +67,11 @@ static func build() -> Array:
 	mage.skill_tree_id = &"mage_skills"
 	mage.talent_tree_id = &"mage_talents"
 	mage.tint = Color(0.32, 0.26, 0.78)
+	mage.tagline = "Arcane traveler of the eight elements"
+	mage.difficulty = 2
+	mage.class_resource_name = "Arcane Charge"
+	mage.resource_desc = "Every spell adds a charge (up to 5): each charge gives 6% more spell damage and 8% higher Mana cost, and at 3+ some spells change shape. At full charge you are Overcharged and take 15% more damage. Charges fade after 4 s without casting."
+	mage.strengths = ["Devastating elemental combinations (Wet + Shock, Chill + Freeze)", "Blink escapes and area control", "Strikes from range"]
+	mage.weaknesses = ["Fragile: low HP and armor", "Mana-hungry; potions and positioning matter", "Weak when surrounded"]
+	mage.major_attributes = [&"int", &"wis", &"spi"]
 	return [knight, mage]

@@ -64,9 +64,14 @@ func is_protected() -> bool:
 func set_def() -> SetDef:
 	return DB.item_set(base.set_id) if base.set_id != &"" else null
 
+## Cached: a texture loaded only for one draw call is freed before the frame renders (it would draw blank/white).
+static var _icons := {}
+
 func icon() -> Texture2D:
 	var p := base.icon_path()
-	return load(p) if p != "" and ResourceLoader.exists(p) else null
+	if not _icons.has(p):
+		_icons[p] = load(p) if p != "" and ResourceLoader.exists(p) else null
+	return _icons[p]
 
 func _local(stat: StringName) -> float:
 	var t := 0.0

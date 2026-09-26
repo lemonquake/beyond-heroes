@@ -18,6 +18,31 @@ CAPE_BONES = [
 ]
 
 EXTRA_BONES = CAPE_BONES
+
+
+def secondary(anim, frames):
+    """Cape: hangs toward gravity (counter-rotates chest pitch/roll while the torso is roughly upright), flares back
+    with ground speed in locomotion (+ a small flap at twice the step rate), follows the body when lying down.
+    Derived only from the evaluated frames, so loops stay seamless."""
+    import math as _m
+    from bh_math import slerp_mat
+    n = len(frames)
+    gait = getattr(anim, "gait", None)
+    speed = gait.v if gait is not None else 0.0
+    T = max(anim.length, 1)
+    out = []
+    for f in range(n):
+        Rc = frames[f][3]["chest"].R
+        fwd = Rc @ np.array([0, -1.0, 0])
+        yaw = _m.degrees(_m.atan2(fwd[0], -fwd[1]))
+        up = float(Rc[2, 2])                      # chest up-vector z: 1 upright, 0 lying
+        w = 0.75 * min(max((up - 0.45) / 0.45, 0.0), 1.0)
+        hang = slerp_mat(np.eye(3), Rc.T @ Rz(yaw), w)
+        flare = min(38.0, 7.5 * speed) + (3.0 * _m.sin(4 * _m.pi * f / T) if speed > 0 else 0.0)
+        d = _m.radians(gait.dir) if gait is not None else 0.0
+        fx, fy = max(flare * _m.cos(d), 0.0), 0.6 * flare * _m.sin(d)   # never flare into the body (walk_back)
+        out.append({"cape.1": hang @ Rx(fx) @ Ry(fy), "cape.2": Rx(0.45 * fx) @ Ry(0.45 * fy)})
+    return out
 PALETTE = "knight"
 
 TORSO = [

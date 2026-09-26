@@ -553,6 +553,7 @@ func light(pos: Vector3, c: Color, energy := 1.5, range_m := 8.0, shadow := fals
 	l.omni_range = range_m
 	l.omni_attenuation = 0.9
 	l.shadow_enabled = shadow and Settings.shadows_quality > 1
+	l.set_meta(&"wants_shadow", shadow)
 	l.light_bake_mode = Light3D.BAKE_DISABLED
 	l.position = pos
 	lights.add_child(l)

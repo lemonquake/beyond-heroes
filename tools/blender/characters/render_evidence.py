@@ -67,7 +67,7 @@ class Shoot:
         self.char = char
         # brighter studio world so dark metals read (the game uses its own lighting)
         w = bpy.context.scene.world
-        w.node_tree.nodes["Background"].inputs[0].default_value = (0.16, 0.17, 0.2, 1)
+        w.node_tree.nodes["Background"].inputs[0].default_value = (0.11, 0.115, 0.14, 1)
         w.node_tree.nodes["Background"].inputs[1].default_value = 1.0
 
     def frame(self, anim, f, view, path, props=None, **cam):
@@ -92,9 +92,12 @@ def heroes():
         sh = Shoot(c, RES, [x for x in (r, l) if x])
         ps = []
         for view in ("front", "34", "back"):
-            p = sh.frame(idle, 0, view, os.path.join(OUT, f"{c}_{view}.png"), props=(r, l), dist=4.2)
+            p = sh.frame(idle, 0, view, os.path.join(OUT, f"{c}_{view}.png"), props=(r, l), dist=5.2)
             ps.append(p)
-        sheet(ps, ["front", "3/4", "back"], f"{c}_turnaround", 3, f"{c}: {idle} with starting weapons")
+        ps.append(sh.frame("idle", 0, "34", os.path.join(FR, f"{c}_bare.png"), props=(None, None), dist=5.2,
+                           yaw_add=-70))
+        sheet(ps, ["front", "3/4", "back", "no weapons, idle (armor/outfit detail)"], f"{c}_turnaround", 4,
+              f"{c}: {idle} with starting weapons")
 
 
 ATTACKS = {
@@ -212,7 +215,7 @@ def weapons():
         zs = [v.co.z for v in ob.data.vertices]
         Lz = max(zs) - min(zs)
         ob.location = (0, 0, 1.0 - (max(zs) + min(zs)) / 2)
-        yaw = 25 if name == "shield" else (70 if name == "bow" else 35)
+        yaw = 25 if name == "shield" else (0 if name == "bow" else 35)
         RR.place_camera(cam, (0, 0, 1.0), 6.0, yaw, 12, ortho=max(Lz * 1.1, 0.42))
         p = os.path.join(FR, f"weapon_{name}.png")
         RR.render(p)

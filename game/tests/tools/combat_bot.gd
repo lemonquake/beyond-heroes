@@ -46,6 +46,10 @@ func _fight_map(id: StringName, seconds: float) -> void:
 	if Game.current_map_id != id:
 		Game.load_map(id, &"start")
 		await _frames(3)
+	var xp0 := Game.hero.progress.total_xp
+	var loot_n := [0]
+	var on_loot := func(_it: ItemInstance, _p: Vector3) -> void: loot_n[0] += 1
+	Events.loot_dropped.connect(on_loot)
 	var r := {"damage_events": 0, "player_hits": 0, "enemy_hits": 0, "crits": 0, "kills": 0, "player_deaths": 0,
 		"max_hit": 0.0, "states": {}, "enemies_at_start": get_tree().get_nodes_in_group(&"enemy").size(),
 		"skills_cast": 0, "potions": 0, "stuck_s": 0.0, "hp_min_frac": 1.0, "mismatch": 0}
@@ -112,6 +116,9 @@ func _fight_map(id: StringName, seconds: float) -> void:
 			still += dt
 		last = player.global_position
 	r.stuck_s = snappedf(still, 0.1)
+	r["xp_gained"] = Game.hero.progress.total_xp - xp0
+	r["items_dropped"] = loot_n[0]
+	Events.loot_dropped.disconnect(on_loot)
 	Events.damage_dealt.disconnect(on_dmg)
 	Events.actor_died.disconnect(on_die)
 	player.skill_used.disconnect(on_skill)
@@ -119,7 +126,7 @@ func _fight_map(id: StringName, seconds: float) -> void:
 		Input.action_release(a)
 	_press.clear()
 	player.aim_override = Vector3.INF
-	var ok: bool = r.player_hits > 0 and r.kills > 0
+	var ok: bool = r.player_hits > 0 and r.kills > 0 and r.xp_gained > 0
 	r["ok"] = ok
 	report.ok = report.ok and ok
 	report.maps[String(id)] = r

@@ -47,6 +47,7 @@ const DEFS := {
 		"mods": [[&"damage_taken", StatModifier.Op.MORE, -0.2]]},
 	&"war_cry": {"name": "War Cry", "debuff": false, "duration": 10.0, "icon": "valor", "desc": "Increased Defense and Valor generation."},
 	&"bulwark": {"name": "Iron Bulwark", "debuff": false, "duration": 6.0, "icon": "guard", "desc": "Increased Block Chance and Knockback Resistance."},
+	&"badly_hurt": {"name": "Badly Hurt", "debuff": true, "duration": 0.0, "icon": "badly_hurt", "desc": "Below 30% HP. Your hero is visibly wounded. Drink a potion or break away from the fight."},
 	&"resolute": {"name": "Resolute", "debuff": false, "duration": 0.0, "icon": "resolute", "desc": "Valor 50+: 10% more physical damage and knockback."},
 	&"overcharged": {"name": "Overcharged", "debuff": false, "duration": 0.0, "icon": "overcharged", "desc": "Maximum Arcane Charge: spells are empowered but you take 15% more damage.",
 		"mods": [[&"damage_taken", StatModifier.Op.MORE, 0.15]]},
