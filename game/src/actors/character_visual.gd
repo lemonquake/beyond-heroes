@@ -143,7 +143,7 @@ func _bs(points: Array) -> AnimationNodeBlendSpace2D:
 	bs.max_space = Vector2(2.0, 2.0)
 	bs.sync = true
 	for p in points:
-		bs.add_blend_point(_anim_node(p[0]), p[1], -1, StringName(p[0]))
+		bs.add_blend_point(_anim_node(p[0]), p[1])
 	return bs
 
 func _build_tree() -> void:
