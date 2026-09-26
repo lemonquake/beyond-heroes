@@ -563,7 +563,7 @@ func _melee_window(a: TimedAction, w: int, first: bool) -> void:
 		if stats.loadout.elem_share_for(int(a.data.get("hand", 0))) > 0.0:
 			c = Elements.color(stats.loadout.element_for(int(a.data.get("hand", 0))))
 			c.a = 0.8
-		FX.spawn(VFXLib.slash_arc(c, reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.55, int(a.data.get("step", 0)) % 2 == 0), global_position)
+		FX.spawn_facing(VFXLib.slash_arc(c, reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.55, int(a.data.get("step", 0)) % 2 == 0), global_position, forward())
 	var req := _weapon_request(a, heavy, float(a.data.get("charge_mult", 1.0)))
 	var hits := 0
 	for t: Actor in CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), reach, arc, BH.LAYER_ENEMY):

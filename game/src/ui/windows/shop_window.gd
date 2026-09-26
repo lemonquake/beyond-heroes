@@ -71,7 +71,10 @@ func _build() -> void:
 	_mode_tabs.tab_changed.connect(func(i: int) -> void:
 		mode = "buy" if i == 0 else "buyback"
 		_refresh_stock())
-	left.add_child(_mode_tabs)
+	var mode_row := hbox(8)
+	left.add_child(mode_row)
+	_mode_tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	mode_row.add_child(_mode_tabs)
 	var tools := hbox(8)
 	left.add_child(tools)
 	_filter_tabs = TabBar.new()
@@ -88,7 +91,7 @@ func _build() -> void:
 	_sort.item_selected.connect(func(i: int) -> void:
 		sort_mode = i
 		_refresh_stock())
-	tools.add_child(_sort)
+	mode_row.add_child(_sort)
 	var sw := inset()
 	sw.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	left.add_child(sw)

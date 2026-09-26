@@ -576,7 +576,7 @@ func _melee_hit(a: Dictionary, act: TimedAction, w: int) -> void:
 	var req := _attack_request(a)
 	req.tags[&"push_dir"] = to.normalized()
 	target.receive_hit(req, self, target.center())
-	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position)
+	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position, forward())
 
 func _fire(a: Dictionary) -> void:
 	if target == null:
@@ -618,7 +618,7 @@ func _telegraph_aoe(a: Dictionary, at: Vector3, delay: float) -> void:
 				var r := req.clone()
 				r.tags[&"push_dir"] = (t.global_position - global_position).slide(Vector3.UP).normalized()
 				t.receive_hit(r, self, t.center())
-			FX.spawn(VFXLib.slash_arc(Color(1.0, 0.45, 0.3, 0.8), radius, arc, 1.2, 0.3, 0.7), global_position)
+			FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.45, 0.3, 0.8), radius, arc, 1.2, 0.3, 0.7), global_position, forward())
 			Events.camera_shake.emit(0.3))
 		return
 	var blast := AreaEffects.delayed(FX.world, CombatQuery.ground_at(get_world_3d(), at), radius, delay, req, self, BH.LAYER_PLAYER,

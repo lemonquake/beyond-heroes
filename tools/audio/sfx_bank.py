@@ -1161,3 +1161,12 @@ def ui_error(r, v):
 @sfx("ui_page")
 def ui_page(r, v):
     return mix((_paper(r, 0.32, 55.0), 0, 0.8), (whoosh(r, 0.25, 600, 2500, q=0.7, peak=0.5), 0.03, 0.3))
+
+
+@sfx("heartbeat")
+def heartbeat(r, v):
+    # low-HP warning: a muffled "lub-dub", felt more than heard
+    lub = thump(r, 62, 38, 0.16, 0.004, 0.12, 0)
+    dub = thump(r, 55, 34, 0.14, 0.004, 0.10, 0)
+    y = mix((lub, 0, 1.0), (dub, 0.24, 0.75))
+    return verb(lp(y, 380), "room", 0.08)

@@ -121,7 +121,7 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		req.direct_status[&"bleeding"] = float(p.bleed)
 	var f: Vector3 = caster.forward()
 	var c := _elem_color(skill)
-	FX.spawn(VFXLib.slash_arc(c, reach, arc, 1.0, 0.24, 0.6), caster.global_position)
+	FX.spawn_facing(VFXLib.slash_arc(c, reach, arc, 1.0, 0.24, 0.6), caster.global_position, f)
 	for a: Actor in CombatQuery.actors_in_arc(caster.get_world_3d(), caster.global_position, f, reach, arc, mask()):
 		if not action.mark_hit(0, a):
 			continue
@@ -134,7 +134,7 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		wreq.conversion = {Elements.LIGHT: 1.0}
 		var sw := AreaEffects.sweep(parent(), caster.global_position + f * 1.0, f, 16.0, 9.0, 2.6, wreq, caster, mask())
 		sw.trail_fx = func(pos: Vector3) -> void:
-			FX.spawn(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.8), 1.6, 120.0, 0.6, 0.2, 0.5), pos)
+			FX.spawn_facing(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.8), 1.6, 120.0, 0.6, 0.2, 0.5), pos, f)
 	Audio.play_at(skill.sound_hit if skill.sound_hit != &"" else &"swing_heavy", caster.global_position)
 
 func _front_strike(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
@@ -484,7 +484,7 @@ func spin_tick(skill: SkillDef, p: Dictionary) -> void:
 			if pull:
 				r.tags[&"push_dir"] = (caster.global_position - a.global_position).slide(Vector3.UP).normalized()):
 		_hit(skill, h[0], h[1])
-	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.92, 0.8, 0.7), radius, 300.0, 1.0, 0.25, 0.5), caster.global_position)
+	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.92, 0.8, 0.7), radius, 300.0, 1.0, 0.25, 0.5), caster.global_position, caster.forward())
 
 func _elem_color(skill: SkillDef) -> Color:
 	var e := skill.element

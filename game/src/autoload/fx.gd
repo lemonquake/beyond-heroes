@@ -45,6 +45,13 @@ func spawn(node: Node3D, pos: Vector3) -> void:
 	world.add_child(node)
 	node.global_position = pos
 
+## Spawn a directional effect (slash arcs, sweeps) turned so its local +Z points along `dir` (flattened).
+func spawn_facing(node: Node3D, pos: Vector3, dir: Vector3) -> void:
+	spawn(node, pos)
+	var d := Vector3(dir.x, 0.0, dir.z)
+	if d.length_squared() > 0.0001 and is_instance_valid(node) and node.is_inside_tree():
+		node.rotation.y = atan2(d.x, d.z)
+
 func _number(pos: Vector3, text: String, color: Color, scale := 1.0, rise := 1.2) -> void:
 	if not Settings.damage_numbers:
 		return
