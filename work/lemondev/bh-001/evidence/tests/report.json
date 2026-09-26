@@ -1,45 +1,45 @@
 {
   "checks": 2646,
-  "elapsed_ms": 6032,
+  "elapsed_ms": 6747,
   "engine": "4.4.1-stable (official)",
   "failures": [],
   "suites": {
     "test_damage.gd": {
       "checks": 60,
       "failures": [],
-      "ms": 184.904,
+      "ms": 158.224,
       "tests": 13
     },
     "test_items.gd": {
       "checks": 2037,
       "failures": [],
-      "ms": 490.292,
+      "ms": 458.981,
       "tests": 17
     },
     "test_maps.gd": {
       "checks": 335,
       "failures": [],
-      "ms": 4998.21,
+      "ms": 5829.047,
       "tests": 14
     },
     "test_progression.gd": {
       "checks": 51,
       "failures": [],
-      "ms": 5.321,
+      "ms": 6.678,
       "tests": 7
     },
     "test_stats.gd": {
       "checks": 139,
       "failures": [],
-      "ms": 14.375,
+      "ms": 18.699,
       "tests": 8
     },
     "test_status.gd": {
       "checks": 24,
       "failures": [],
-      "ms": 99.617,
+      "ms": 87.588,
       "tests": 8
     }
   },
-  "timestamp": "2026-09-26T14:03:35"
+  "timestamp": "2026-09-26T06:44:31"
 }

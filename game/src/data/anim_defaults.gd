@@ -64,7 +64,7 @@ static func meta(n: StringName) -> Dictionary:
 	var parts := s.split("_")
 	if parts.size() == 2 and parts[1].is_valid_int():
 		var step := int(parts[1])
-		var base_len := {"sword": 0.55, "gs": 0.8, "axe": 0.62, "spear": 0.6, "dagger": 0.42, "dual": 0.5, "staff": 0.6, "wand": 0.45}.get(parts[0], 0.6)
+		var base_len: float = {"sword": 0.55, "gs": 0.8, "axe": 0.62, "spear": 0.6, "dagger": 0.42, "dual": 0.5, "staff": 0.6, "wand": 0.45}.get(parts[0], 0.6)
 		var len_: float = base_len * (1.4 if step == 4 else 1.0)
 		var hit_a: float = len_ * (0.42 if step == 4 else 0.36)
 		var m := {"length": len_, "loop": false, "hits": [[hit_a, hit_a + len_ * 0.16]], "cancel_after": len_ * 0.7,
@@ -73,7 +73,7 @@ static func meta(n: StringName) -> Dictionary:
 			m["release"] = hit_a
 		return m
 	if s.ends_with("_heavy"):
-		var hl := {"sword_heavy": 0.95, "gs_heavy": 1.3, "axe_heavy": 1.1, "spear_heavy": 1.0, "dagger_heavy": 0.8, "dual_heavy": 0.95,
+		var hl: float = {"sword_heavy": 0.95, "gs_heavy": 1.3, "axe_heavy": 1.1, "spear_heavy": 1.0, "dagger_heavy": 0.8, "dual_heavy": 0.95,
 			"staff_heavy": 1.0, "wand_heavy": 0.8}.get(s, 1.0)
 		var hm := {"length": hl, "loop": false, "hits": [[hl * 0.48, hl * 0.62]], "cancel_after": hl * 0.8}
 		if s.begins_with("staff") or s.begins_with("wand"):

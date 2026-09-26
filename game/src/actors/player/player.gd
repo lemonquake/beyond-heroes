@@ -941,7 +941,7 @@ func interact() -> void:
 			var an: StringName = _interact_target.call(&"interact_anim")
 			if an != &"":
 				visual.play_action(an, 1.0)
-		var d := _interact_target.global_position - global_position
+		var d: Vector3 = _interact_target.global_position - global_position
 		d.y = 0.0
 		if d.length() > 0.1:
 			rotation.y = atan2(d.x, d.z)

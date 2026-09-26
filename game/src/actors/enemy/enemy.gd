@@ -819,7 +819,7 @@ func _steer(delta: float) -> Vector3:
 			continue
 		var off: Vector3 = global_position - e.global_position
 		off.y = 0.0
-		var min_d := SEPARATION_RADIUS + body_radius + e.body_radius - 0.9
+		var min_d: float = SEPARATION_RADIUS + body_radius + e.body_radius - 0.9
 		var l := off.length()
 		if l < min_d and l > 0.001:
 			sep += off / l * (min_d - l) / min_d

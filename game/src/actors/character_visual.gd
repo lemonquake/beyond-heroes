@@ -210,7 +210,7 @@ func _build_tree() -> void:
 ## Track paths of upper-body bones (taken from a real animation so the NodePath format matches the import).
 func _upper_filter_paths() -> Array:
 	var out := []
-	var sample := &"idle" if has_anim(&"idle") else (anim_player.get_animation_list()[0] if not anim_player.get_animation_list().is_empty() else &"")
+	var sample: StringName = &"idle" if has_anim(&"idle") else (anim_player.get_animation_list()[0] if not anim_player.get_animation_list().is_empty() else &"")
 	if sample == &"":
 		return out
 	var a := anim_player.get_animation(sample)
