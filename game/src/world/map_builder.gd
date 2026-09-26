@@ -73,7 +73,12 @@ static func bake_navigation(map: MapRoot) -> void:
 		map.nav_region.bake_navigation_mesh(false)
 		# push the result to the server now (the region otherwise picks it up a frame later)
 		NavigationServer3D.region_set_navigation_mesh(map.nav_region.get_rid(), map.nav_region.navigation_mesh)
-		NavigationServer3D.map_force_update(map.nav_region.get_navigation_map())
+		var nav_map := map.nav_region.get_navigation_map()
+		# Godot 4.5+ rebuilds maps asynchronously by default; a freshly loaded map must be queryable at once
+		# (spawners and AI path on the first frame), so this map syncs on the main thread.
+		if NavigationServer3D.has_method(&"map_set_use_async_iterations"):
+			NavigationServer3D.call(&"map_set_use_async_iterations", nav_map, false)
+		NavigationServer3D.map_force_update(nav_map)
 
 ## Give the map its own navigation map (tests build several maps side by side; each must path in isolation).
 static func isolate_navigation(map: MapRoot) -> RID:
