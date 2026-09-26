@@ -158,13 +158,14 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 		current_map.queue_free()
 	var parent := world_parent if world_parent and is_instance_valid(world_parent) else get_tree().root
 	parent.add_child(map)
+	# flags first: an opened gate or broken seal must not be baked into the navmesh as a wall
+	map.apply_flag_visuals()
 	MapBuilder.bake_navigation(map)
 	current_map = map
 	current_map_id = id
 	FX.world = map
 	hover_target = null
 	hover_loot = null
-	map.apply_flag_visuals()
 	if player and is_instance_valid(player):
 		if player.get_parent() == null:
 			map.add_child(player)

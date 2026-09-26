@@ -120,6 +120,11 @@ func _unhandled_input(e: InputEvent) -> void:
 		_update_blocking()
 		get_viewport().set_input_as_handled()
 		return
+	# the map pauses the world while it is open, so it must still close on its own key
+	if e.is_action_pressed(&"world_map") and window(&"world_map") and window(&"world_map").visible:
+		window(&"world_map").close_window()
+		get_viewport().set_input_as_handled()
+		return
 	if get_tree().paused or dialogue.visible:
 		return
 	if e.is_action_pressed(&"chat") and not confirm.visible:
@@ -148,6 +153,20 @@ func _on_talk(npc: Node) -> void:
 func _on_player_died() -> void:
 	close_all()
 	pause_menu.show_death()
+
+## A network waypoint with several awakened destinations: one button per shrine (the dais's own destination first).
+func choose_waypoint(t: Teleporter, dests: Array) -> void:
+	var list := VBoxContainer.new()
+	list.add_theme_constant_override("separation", 8)
+	for i in range(1, dests.size()):
+		var d: Dictionary = dests[i]
+		var b := UIWindow.button("Travel to %s" % d.name, func() -> void:
+			confirm.cancel()
+			t.travel_to(d.map, d.spawn), &"", 420.0)
+		list.add_child(b)
+	var first: Dictionary = dests[0]
+	confirm.ask("Waypoint", "Choose an awakened shrine. You arrive beside its dais.", func() -> void: t.travel_to(first.map, first.spawn),
+		"Travel to %s" % first.name, false, list)
 
 ## Ask a yes/no question. `on_yes` runs on confirmation.
 func ask(title: String, text: String, on_yes: Callable, yes_text := "Confirm", danger := false) -> void:

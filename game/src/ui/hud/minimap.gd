@@ -3,6 +3,8 @@ extends Control
 ## Circular minimap: an orthographic top-down camera into the live world (updated a few times a second, with its own
 ## bright environment so night maps stay readable), masked to a disc under the painted frame. Markers: the hero
 ## (arrow), enemies (red; elites gold, bosses large), NPCs (gold), waypoints (cyan), dropped loot (rarity colour).
+## A tracked route (Routes) draws as a cyan line on the roads ahead, with a chevron on the rim when the next stretch of
+## road or the destination is out of range.
 
 const SHADER := """
 shader_type canvas_item;
@@ -113,7 +115,10 @@ func _draw_markers() -> void:
 	var c := _cam.global_position
 	var half := _markers.size * 0.5
 	var lim := half.x * 0.94
+	if not is_inside_tree():
+		return
 	var tree := get_tree()
+	_draw_route(c, half, lim)
 	for t in tree.get_nodes_in_group(&"teleporter"):
 		_dot(t.global_position, c, Color(0.5, 0.95, 1.0), 5.0, true, lim)
 	for n in tree.get_nodes_in_group(&"npc"):
@@ -157,3 +162,31 @@ func _dot(world: Vector3, center: Vector3, col: Color, r: float, clamp_edge: boo
 		q = half + off.normalized() * lim
 	_markers.draw_circle(q, r + 1.2, Color(0, 0, 0, 0.8))
 	_markers.draw_circle(q, r, col)
+
+func _draw_route(c: Vector3, half: Vector2, lim: float) -> void:
+	if not Routes.active() or Routes.path_here.size() < 2 or Game.current_map == null:
+		return
+	var cyan := Color(0.5, 0.95, 1.0)
+	var mp := Game.current_map
+	var pts: Array = DataIsland.slice(Routes.path_here, Routes.along_here, DataIsland.polyline_length(Routes.path_here))
+	# walk the remaining route in short pieces and keep only those inside the disc
+	var prev := Vector2.INF
+	var step := 1.5
+	var total := DataIsland.polyline_length(pts)
+	var along := 0.0
+	while along <= total:
+		var p := DataIsland.point_at(pts, along)
+		var w := mp.to_global(Vector3(p.x, 0, p.y))
+		var q := _to_map(w, c)
+		if (q - half).length() < lim and prev != Vector2.INF and (prev - half).length() < lim:
+			_markers.draw_line(prev, q, Color(0.02, 0.15, 0.2, 0.9), 6.0, true)
+			_markers.draw_line(prev, q, cyan, 3.0, true)
+		prev = q
+		along += step
+	if Routes.has_guide:
+		var gq := _to_map(Routes.guide, c)
+		var off := gq - half
+		if off.length() > lim * 0.9:
+			var d := off.normalized()
+			var e := half + d * lim
+			_markers.draw_colored_polygon(PackedVector2Array([e + d * 7.0, e + d.rotated(2.2) * 8.0, e + d.rotated(-2.2) * 8.0]), cyan)

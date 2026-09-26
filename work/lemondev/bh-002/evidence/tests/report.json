@@ -1,81 +1,87 @@
 {
-  "checks": 4717,
-  "elapsed_ms": 60613,
+  "checks": 5265,
+  "elapsed_ms": 74811,
   "engine": "4.7.2-stable (official)",
   "failures": [],
   "suites": {
     "test_chat.gd": {
       "checks": 38,
       "failures": [],
-      "ms": 2550.432,
+      "ms": 2831.977,
       "tests": 6
     },
     "test_damage.gd": {
       "checks": 60,
       "failures": [],
-      "ms": 243.123,
+      "ms": 195.59,
       "tests": 13
     },
     "test_enemies.gd": {
       "checks": 464,
       "failures": [],
-      "ms": 3887.401,
+      "ms": 4164.097,
       "tests": 6
     },
     "test_guilds.gd": {
       "checks": 100,
       "failures": [],
-      "ms": 12.826,
+      "ms": 16.93,
       "tests": 8
+    },
+    "test_island.gd": {
+      "checks": 522,
+      "failures": [],
+      "ms": 3935.347,
+      "tests": 13
     },
     "test_items.gd": {
       "checks": 2037,
       "failures": [],
-      "ms": 468.987,
+      "ms": 460.864,
       "tests": 17
     },
     "test_maps.gd": {
-      "checks": 386,
+      "checks": 406,
       "failures": [],
-      "ms": 5105.587,
+      "ms": 9089.683,
       "tests": 14
     },
     "test_npcs.gd": {
       "checks": 326,
       "failures": [],
-      "ms": 37022.375,
+      "ms": 41895.837,
       "tests": 3
     },
     "test_progression.gd": {
       "checks": 51,
       "failures": [],
-      "ms": 6.268,
+      "ms": 8.987,
       "tests": 7
     },
     "test_shops_dialogue.gd": {
-      "checks": 578,
+      "checks": 584,
       "failures": [],
-      "ms": 1267.053,
+      "ms": 1395.867,
       "tests": 10
     },
     "test_stats.gd": {
       "checks": 139,
       "failures": [],
-      "ms": 17.055,
+      "ms": 14.934,
       "tests": 8
     },
     "test_status.gd": {
       "checks": 24,
       "failures": [],
-      "ms": 78.737,
+      "ms": 72.244,
       "tests": 8
     },
     "test_tempos.gd": {
       "checks": 514,
       "failures": [],
-      "ms": 8853.344,
+      "ms": 9469.804,
       "tests": 12
     }
   },
-  "timestamp": "2026-09-27T01:34:27"
+  "timestamp": "2026-09-27T03:09:39"
 }

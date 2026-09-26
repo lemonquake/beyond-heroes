@@ -228,6 +228,7 @@ func _build_top_right() -> void:
 	_minimap = MiniMap.new(210.0)
 	_minimap.size_flags_horizontal = Control.SIZE_SHRINK_END
 	col.add_child(_minimap)
+	col.add_child(DirectionsPanel.new())
 	var obj := PanelContainer.new()
 	obj.theme_type_variation = &"GlassPanel"
 	obj.custom_minimum_size = Vector2(300, 0)

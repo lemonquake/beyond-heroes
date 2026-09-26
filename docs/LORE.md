@@ -174,7 +174,7 @@ they have lived behind a palisade while the dead marched in the forest below.
 | **Market** | Tovin's provisions and the Hooded Stranger's rare goods. |
 | **Brannoc's Forge** | The smithy yard by the east road. |
 | **The Old Well** | Where Seris reads the Aether. |
-| **South Gate** | Barred for three winters. Captain Hald's post. |
+| **South Gate** | Barred for three winters. Captain Hald's post. *(provisional:)* Hald opens it when the hero offers to walk the roads below: the dead keep to the forest now, and the farms need an escort (world flag `south_gate_open`). |
 | **The burnt house** | Burned in the first raid. Left standing as a reminder. |
 | **Shrine of the Fallen** *(provisional)* | A small open-air shrine east of the terrace stair, hung with the tokens of the dead. Veyra Ashgrave calls Tempos here (§9). |
 
@@ -206,6 +206,28 @@ they have lived behind a palisade while the dead marched in the forest below.
 **Tone of dialogue.** Plain, warm, a little weary. People joke to stay sane. Nobody explains the whole world at once;
 each person knows their own corner of it. Important names are marked with `**bold**` in dialogue data. No modern
 slang, no memes, no fourth-wall jokes.
+
+### 6b. Salmonan beyond the walls *(provisional — design of 27 September 2026, `work/map-concept-2026-09-27/`)*
+
+Malasugue sits on the island's west coast. Its South Gate opens onto **Westreach**, the farmed shoulder of the island
+between the town, the sea and the Ruined Forest. Roads rejoin, so a hero can leave one way and come home another.
+
+| Place | What it is |
+|---|---|
+| **Westreach** | The district below the South Gate (one map, `westreach`). Levels 1–4. |
+| **Old Mill Crossroads** | A watermill on the millstream where four roads meet: the Mill Road to Malasugue, the Forest Road north to the fallen village, Mill Lane south to the fields, and the Lake Shore Road east, washed out past the mill bridge by the spring floods. |
+| **Lantern Fields** | Working terraced farms that feed the town. Farmers hang lanterns at the field corners. Goblins raid the stores. |
+| **Tideglass Cove** | The fishing beach under the western cliffs: a pier, boats, drying racks and an old waypoint shrine. |
+| **Saltmouth Cave** | A sea cave in the headland north of the cove where smugglers hide the cove's missing shipment. |
+| **The roads** | Mill Road, Field Road, Cove Steps (a switchback trail), Coast Road (along the clifftops), Mill Lane, Forest Road, Lake Shore Road (closed). |
+| **Stillwater Lake** | The lake in the island's interior that feeds the millstream. Not yet reachable. |
+| **Northern Heights**, **Reedwater Marsh**, **Eastern Shore** | Uncharted regions shown under mist on the island map. Not yet reachable. |
+
+**Waypoint network.** The Sanctuary Terrace, the Ruined Forest glade and the Tideglass Cove shrine are linked: from
+any one of them a hero can travel to any other they have already *awakened* (stood on). Dungeon gates (the Catacombs,
+the temple, the Hollow Throne) are not part of the network. Placement of the Drowned Chapel above the Catacombs, and
+Watcher's Rise, are proposals not yet in the game: the Catacombs are still entered by the sunken gate at the east end
+of the Ruined Forest.
 
 ---
 

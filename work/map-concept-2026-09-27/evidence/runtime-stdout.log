@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+REVIEW SHOT 01-town-gameplay (1920, 1040) status 0
+REVIEW SHOT 02-town-after-walking (1920, 1040) status 0
+REVIEW SHOT 03-current-M-map (1920, 1040) status 0
+REVIEW SHOT 04-town-overview (1920, 1040) status 0
+REVIEW SHOT 05-forest-gameplay (1920, 1040) status 0
+REVIEW SHOT 06-forest-after-walking (1920, 1040) status 0
+REVIEW SHOT 07-forest-overview (1920, 1040) status 0
+REVIEW DONE {"M_opened_world_map":true,"forest_movement":{"action":"move_up","distance_m":15.6901845932007,"from":"(-58.0, 0.075337, 12.4)","hp":184.0,"physics_frames":180,"to":"(-57.99227, -0.730806, -3.269459)"},"town_movement":{"action":"move_right","distance_m":7.06774520874023,"from":"(0.0, 0.000069, 14.44986)","physics_frames":120,"to":"(7.050719, 0.000717, 14.94015)"}}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.

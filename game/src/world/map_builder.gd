@@ -697,6 +697,61 @@ func flag_trigger(flag: StringName, center: Vector3, size: Vector3, message := "
 	markers.add_child(t)
 	return t
 
+## Walk-through boundary into another map (see MapExit).
+func exit_zone(id: StringName, center: Vector3, size: Vector3, dest_map: StringName, dest_spawn: StringName, label: String,
+		flag := &"", hint := "") -> MapExit:
+	var e := MapExit.new().setup(id, dest_map, dest_spawn, label, flag, hint)
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = size
+	cs.shape = bs
+	e.add_child(cs)
+	e.position = Vector3(center.x, ground(center.x, center.z) + size.y * 0.5, center.z)
+	markers.add_child(e)
+	return e
+
+## A wooden signpost with one arm per road: [[label, direction (x, z)], ...]. Labels are native text in the world.
+func signpost(p: Vector2, arms: Array, y := NAN) -> Node3D:
+	var root3 := Node3D.new()
+	root3.name = "Signpost_%d" % markers.get_child_count()
+	if is_nan(y):
+		y = ground(p.x, p.y)
+	root3.position = Vector3(p.x, y, p.y)
+	var wood := MaterialLibrary.env("BH_WoodDark")
+	var post := MeshInstance3D.new()
+	var pm := BoxMesh.new()
+	pm.size = Vector3(0.2, 3.0, 0.2)
+	post.mesh = pm
+	post.material_override = wood
+	post.position.y = 1.5
+	root3.add_child(post)
+	var sb := StaticBody3D.new()
+	sb.collision_layer = BH.LAYER_WORLD
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = Vector3(0.3, 3.0, 0.3)
+	cs.shape = bs
+	cs.position.y = 1.5
+	sb.add_child(cs)
+	root3.add_child(sb)
+	var lab := SignLabels.new()
+	root3.add_child(lab)
+	for i in arms.size():
+		var dir: Vector2 = (arms[i][1] as Vector2).normalized()
+		var ay := 2.55 - i * 0.36
+		var arm := MeshInstance3D.new()
+		var am := BoxMesh.new()
+		am.size = Vector3(1.3, 0.26, 0.06)
+		arm.mesh = am
+		arm.material_override = MaterialLibrary.env("BH_Wood")
+		var yaw := atan2(-dir.y, dir.x)
+		arm.transform = Transform3D(Basis(Vector3.UP, yaw), Vector3(dir.x * 0.72, ay, dir.y * 0.72))
+		root3.add_child(arm)
+		lab.add_arm(String(arms[i][0]), Vector3(dir.x * 1.25, ay + 0.1, dir.y * 1.25))
+	props.add_child(root3)
+	light(Vector3(p.x + 0.6, y + 2.9, p.y + 0.6), Color(1.0, 0.72, 0.42), 1.6, 6.0, false, true)
+	return root3
+
 ## Named point of interest used by previews and (later) the world map / camera cinematics.
 func view(name: String, target: Vector3, yaw_deg := 0.0, pitch_deg := 50.0, dist := 22.0, fov := 45.0) -> void:
 	root.views[name] = {"target": target, "yaw": yaw_deg, "pitch": pitch_deg, "dist": dist, "fov": fov}

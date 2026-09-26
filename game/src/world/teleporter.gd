@@ -6,6 +6,9 @@ extends Node3D
 ## Presentation: rune glow that brightens when discovered/active, idle motes, a light, a hum loop, a charge-up
 ## beam + flash on use. Discovery registers the teleporter on the hero (for the world-map UI).
 ## The actual map change goes through `Game.travel`, which shows the loading screen.
+## Network shrines (DataIsland.NETWORK: the town terrace, the forest glade, Tideglass Cove) also reach every other
+## shrine the hero has awakened: with more than one destination, activating asks where to go. "Discovered" (stepped
+## on, recorded in unlocked_teleporters even while locked) and "awakened" (a usable network destination) are separate.
 
 signal activated(teleporter: Teleporter)
 
@@ -117,7 +120,8 @@ func _on_body_entered(body: Node3D) -> void:
 		Events.interact_prompt.emit("")
 		Audio.play(&"ui_error", -6.0)
 		return
-	Events.interact_prompt.emit("Travel to %s" % destination_name)
+	var dests := destinations()
+	Events.interact_prompt.emit("Travel to %s" % dests[0].name if dests.size() == 1 else "Use the waypoint (%d destinations)" % dests.size())
 
 func _on_body_exited(body: Node3D) -> void:
 	if body == _player_inside:
@@ -125,10 +129,35 @@ func _on_body_exited(body: Node3D) -> void:
 		Events.interact_prompt.emit("")
 
 func discover() -> void:
-	if Game.hero and not Game.hero.unlocked_teleporters.has(teleporter_id):
+	if Game.hero == null:
+		return
+	var first := not Game.hero.unlocked_teleporters.has(teleporter_id)
+	if first:
 		Game.hero.unlocked_teleporters[teleporter_id] = true
 		Events.teleporter_discovered.emit(Game.current_map_id)
-		Events.notify.emit("Waypoint awakened", &"discovery")
+	if is_network() and not is_locked() and not Game.hero.awakened_shrines.has(teleporter_id):
+		Game.hero.awakened_shrines[teleporter_id] = true
+		Events.notify.emit("Waypoint awakened: %s" % DataIsland.NETWORK[teleporter_id].name, &"discovery")
+	elif first:
+		Events.notify.emit("Waypoint found. The runes are dark." if is_locked() else "Waypoint awakened", &"discovery")
+
+func is_network() -> bool:
+	return DataIsland.NETWORK.has(teleporter_id)
+
+## Where activating can take the hero: this dais's own destination first, then every other awakened network shrine.
+func destinations() -> Array:
+	var out := []
+	if destination_map != &"":
+		out.append({"map": destination_map, "spawn": destination_spawn, "name": destination_name})
+	if is_network() and Game.hero:
+		for id in DataIsland.NETWORK_SHRINES:
+			if id == teleporter_id or not Game.hero.awakened_shrines.has(id):
+				continue
+			var n: Dictionary = DataIsland.NETWORK[id]
+			if out.any(func(o): return o.map == n.map and o.spawn == n.spawn):
+				continue
+			out.append({"map": n.map, "spawn": n.spawn, "name": n.name})
+	return out
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _player_inside and event.is_action_pressed(&"interact"):
@@ -139,9 +168,19 @@ func _unhandled_input(event: InputEvent) -> void:
 func activate_would_travel() -> bool:
 	return not _busy and not is_locked() and destination_map != &""
 
-## Charge up, flash and travel. Returns false when locked or already travelling.
+## Charge up, flash and travel. Returns false when locked or already travelling. A network shrine with several
+## destinations asks the hero to choose first (the choice then calls travel_to).
 func activate() -> bool:
 	if not activate_would_travel():
+		return false
+	var dests := destinations()
+	if dests.size() > 1 and Game.ui_root and Game.ui_root.has_method(&"choose_waypoint"):
+		Game.ui_root.choose_waypoint(self, dests)
+		return true
+	return await travel_to(dests[0].map, dests[0].spawn)
+
+func travel_to(map_id: StringName, spawn: StringName) -> bool:
+	if _busy or is_locked():
 		return false
 	_busy = true
 	activated.emit(self)
@@ -155,6 +194,6 @@ func activate() -> bool:
 	await tw.finished
 	Audio.play_at(&"teleport_whoosh", global_position)
 	add_child(VFXLib.light_flash(RUNE_ACTIVE, 10.0, 10.0, 0.4))
-	Game.travel(destination_map, destination_spawn)
+	Game.travel(map_id, spawn)
 	_busy = false
 	return true

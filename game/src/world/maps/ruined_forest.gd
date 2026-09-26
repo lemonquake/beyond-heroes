@@ -6,6 +6,8 @@ extends MapBuilder
 ## fire is still warm, the collapsed watchtower on its hill (the landmark seen from the bridge), and a corrupted
 ## grove around a violet-veined obelisk that marks the sunken gate to the Ancient Catacombs.
 ## The playable area is framed by rising ground, cliffs and dense pines — never by invisible walls on flat grass.
+## The Forest Road (DataIsland `rf_south_road`) leaves the village south through a cut in the rim and walks down to
+## Westreach's Old Mill Crossroads (a walk-through boundary), so the forest is part of a loop, not only a waypoint stop.
 
 const W := 160
 const D := 110
@@ -13,6 +15,7 @@ const ROAD := [Vector2(-66, 12), Vector2(-50, 9), Vector2(-34, 6), Vector2(-18, 
 	Vector2(18, 0), Vector2(30, -4), Vector2(44, -4), Vector2(57, -3), Vector2(66, -4)]
 const TOWER_PATH := [Vector2(24, -2), Vector2(27, 8), Vector2(30, 17)]
 const CAMP_PATH := [Vector2(20, -1), Vector2(20, -10)]
+const SOUTH_ROAD := [Vector2(-34, 6), Vector2(-33.5, 15), Vector2(-33, 26.5), Vector2(-31.5, 38), Vector2(-30, 46), Vector2(-30, 54)]
 const BRIDGE_Z := 4.0
 const TOWER := Vector3(31, 0, 24)
 const CAMP := Vector3(20, 0, -15)
@@ -87,7 +90,7 @@ func _height(x: float, z: float) -> float:
 	var p := Vector2(x, z)
 	var h := _base(x, z)
 	# flatten the road into a gently graded bed
-	var rd := minf(_poly_dist(p, ROAD), minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH)))
+	var rd := minf(minf(_poly_dist(p, ROAD), _poly_dist(p, SOUTH_ROAD)), minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH)))
 	var road_h := _base(x, z) * 0.35
 	h = lerpf(road_h, h, smoothstep(2.0, 6.0, rd))
 	# flat clearings
@@ -104,7 +107,7 @@ func _height(x: float, z: float) -> float:
 
 func _splat(x: float, z: float) -> Color:
 	var p := Vector2(x, z)
-	var rd := _poly_dist(p, ROAD)
+	var rd := minf(_poly_dist(p, ROAD), _poly_dist(p, SOUTH_ROAD))
 	var side := minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH))
 	var path := 1.0 - smoothstep(1.6, 3.2, rd)
 	path = maxf(path, (1.0 - smoothstep(1.0, 2.2, side)) * 0.8)
@@ -120,7 +123,8 @@ func _edges() -> void:
 	for i in 14:
 		var x := -70.0 + i * 11.0 + rng.randf_range(-2, 2)
 		decor("cliff_b" if i % 2 else "cliff_a", Vector3(x, _base(x, -50) - 7.0, -51.0), 180.0 + rng.randf_range(-15, 15), 1.5, false, true)
-		decor("cliff_a" if i % 2 else "cliff_b", Vector3(x, _base(x, 50) - 7.0, 51.0), rng.randf_range(-15, 15), 1.5, false, true)
+		if absf(x + 30.0) > 9.0:  # the Forest Road's cut through the south rim
+			decor("cliff_a" if i % 2 else "cliff_b", Vector3(x, _base(x, 50) - 7.0, 51.0), rng.randf_range(-15, 15), 1.5, false, true)
 	for i in 8:
 		var z := -44.0 + i * 12.0
 		decor("cliff_b", Vector3(77.0, _base(76, z) - 8.0, z), 90.0 + rng.randf_range(-10, 10), 1.6, false, true)
@@ -128,7 +132,14 @@ func _edges() -> void:
 	var bx := W * 0.5 - 8.0
 	var bz := D * 0.5 - 8.0
 	boundary(Vector3(-bx, 0, -bz), Vector3(bx, 0, -bz), 30.0)
-	boundary(Vector3(-bx, 0, bz), Vector3(bx, 0, bz), 30.0)
+	boundary(Vector3(-bx, 0, bz), Vector3(-34.5, 0, bz), 30.0)
+	boundary(Vector3(-25.5, 0, bz), Vector3(bx, 0, bz), 30.0)
+	# the cut in the south rim: rails, the walk-through down to the Old Mill, a cap beyond it
+	for sx: float in [-34.5, -25.5]:
+		boundary(Vector3(sx, 0, bz - 6.0), Vector3(sx, 0, bz + 6.0), 30.0, 0.6)
+	boundary(Vector3(-34.5, 0, bz + 5.0), Vector3(-25.5, 0, bz + 5.0), 30.0)
+	exit_zone(&"forest_south_road", Vector3(-30.0, 0, bz + 1.5), Vector3(8.0, 5.0, 3.0), &"westreach", &"forest_road", "Westreach")
+	spawn(&"south_road", Vector3(-31.0, 0, 39.0), 180.0, true)
 	boundary(Vector3(-bx, 0, -bz), Vector3(-bx, 0, bz), 30.0)
 	boundary(Vector3(bx, 0, -bz), Vector3(bx, 0, bz), 30.0)
 
@@ -170,7 +181,11 @@ func _village() -> void:
 	for p in [Vector3(-35.5, 0, -8.5), Vector3(-34.2, 0, -9.3), Vector3(-19.4, 0, 13.4), Vector3(-43.5, 0, 16.0)]:
 		breakable("barrel" if rng.randf() < 0.5 else "crate", p, rng.randf() * 360.0, 20.0, true)
 	for i in 5:
-		kit("wood_fence", Vector3(-46.0 + i * 4.2, 0, 26.5), rng.randf_range(-8, 8), 1.0, props, true)
+		if i != 3:  # a gap where the Forest Road passes
+			kit("wood_fence", Vector3(-46.0 + i * 4.2, 0, 26.5), rng.randf_range(-8, 8), 1.0, props, true)
+	signpost(Vector2(-37.8, 12.5), [["Waypoint glade", Vector2(-1, 0.2)], ["Old Mill (Forest Road)", Vector2(0.05, 1)],
+		["Ravine Bridge", Vector2(1, -0.05)]])
+	kit("lamp_post", Vector3(-29.0, 0, 30.0), 0.0, 1.0, props, true)
 	# graveyard and chapel ruin south-west of the village
 	var g := Vector3(-48, 0, 28)
 	for i in 9:
@@ -346,7 +361,7 @@ func cylinder_shard(p: Vector3) -> MeshInstance3D:
 func _forest() -> void:
 	var clear := func(x: float, z: float) -> bool:
 		var p := Vector2(x, z)
-		if _poly_dist(p, ROAD) < 5.5 or _poly_dist(p, TOWER_PATH) < 3.5 or _poly_dist(p, CAMP_PATH) < 3.5:
+		if _poly_dist(p, ROAD) < 5.5 or _poly_dist(p, SOUTH_ROAD) < 5.0 or _poly_dist(p, TOWER_PATH) < 3.5 or _poly_dist(p, CAMP_PATH) < 3.5:
 			return true
 		if absf(x - _ravine_x(z)) < 8.0:
 			return true

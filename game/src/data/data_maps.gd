@@ -16,6 +16,10 @@ static func build() -> Array:
 		_m(&"sanctuary", "Malasugue Town", "The last lit hearth on Salmonan", {"is_town": true, "level_min": 1, "level_max": 1, "music": &"music_town",
 			"ambience": &"amb_town", "footstep_surface": &"stone", "reverb": 0.1, "world_map_pos": Vector2(0.18, 0.62),
 			"loading_hint": "Malasugue remembers every face. The waypoint on the Sanctuary Terrace connects every shrine you have awakened; the guild halls register heroes, and the Salted Marlin lets rooms by the night."}),
+		# provisional district (LORE §6b): the roads below the South Gate — Old Mill Crossroads, Lantern Fields, Tideglass Cove
+		_m(&"westreach", "Westreach", "The roads below the South Gate", {"level_min": 1, "level_max": 4, "music": &"music_town",
+			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.04, "world_map_pos": Vector2(0.4, 0.64),
+			"loading_hint": "Roads rejoin. Leave by the mill, come home along the coast: the signposts and the map (M) name every road."}),
 		_m(&"ruined_forest", "Ruined Forest", "Where the village fell", {"level_min": 1, "level_max": 5, "music": &"music_dungeon",
 			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.05, "world_map_pos": Vector2(0.38, 0.45),
 			"loading_hint": "Throw enemies into walls, trees and each other: impacts deal damage based on how hard they hit."}),

@@ -3,7 +3,7 @@ extends Node
 ## Each file: {"version": N, "saved_at": unix, "hero": {...}, "settings": {...}}.
 ## Older versions are upgraded step-by-step through MIGRATIONS before loading.
 
-const CURRENT_VERSION := 3
+const CURRENT_VERSION := 4
 const SAVE_DIR := "user://saves"
 const SLOTS := 3
 
@@ -11,6 +11,7 @@ const SLOTS := 3
 var MIGRATIONS := {
 	1: _migrate_1_to_2,
 	2: _migrate_2_to_3,
+	3: _migrate_3_to_4,
 }
 
 func _ready() -> void:
@@ -102,5 +103,22 @@ func _migrate_2_to_3(d: Dictionary) -> Dictionary:
 	var eq: Dictionary = h.get("equipment", {})
 	for k in eq:
 		remap.call(eq[k])
+	d["hero"] = h
+	return d
+
+# v4 separates "awakened" waypoint shrines (travel destinations) from "discovered" teleporters: v3 recorded every dais
+# the hero stepped on, locked or not. Only the two original network waypoints (never locked) carry over as awakened;
+# the town's own waypoint is always awakened. Discovered places and the tracked route start empty.
+const V4_LEGACY_SHRINES := ["sanctuary_waypoint", "forest_waypoint"]
+
+func _migrate_3_to_4(d: Dictionary) -> Dictionary:
+	var h: Dictionary = d.get("hero", {})
+	var awake := ["sanctuary_waypoint"]
+	for t in h.get("teleporters", []):
+		if V4_LEGACY_SHRINES.has(String(t)) and not awake.has(String(t)):
+			awake.append(String(t))
+	h["awakened_shrines"] = awake
+	h["known_places"] = []
+	h["route"] = {}
 	d["hero"] = h
 	return d

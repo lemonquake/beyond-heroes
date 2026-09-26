@@ -35,7 +35,8 @@ func refresh_teleporters() -> void:
 	for t in teleporters():
 		t.refresh_state()
 
-## Nodes registered with MapBuilder.hide_when(flag) vanish once the hero has that world flag (seals, barriers).
+## Nodes registered with MapBuilder.hide_when(flag) vanish once the hero has that world flag (seals, barriers). A hidden
+## collider stops colliding too (the South Gate's bar), so the way is really open, not just invisible.
 func apply_flag_visuals(flag: StringName = &"", animate := false) -> void:
 	for n in get_tree().get_nodes_in_group(&"flag_visual") if is_inside_tree() else find_children("*", "", true, false):
 		if not n.has_meta(&"hide_when_flag"):
@@ -53,3 +54,12 @@ func apply_flag_visuals(flag: StringName = &"", animate := false) -> void:
 			tw.tween_callback(func(): n3.visible = false)
 		else:
 			n.visible = false
+		_release_collision(n)
+
+static func _release_collision(n: Node) -> void:
+	var bodies: Array = n.find_children("*", "CollisionObject3D", true, false)
+	if n is CollisionObject3D:
+		bodies.append(n)
+	for b: CollisionObject3D in bodies:
+		b.collision_layer = 0
+		b.collision_mask = 0

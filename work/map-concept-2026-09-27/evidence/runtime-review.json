@@ -1,0 +1,18 @@
+{
+  "M_opened_world_map": true,
+  "forest_movement": {
+    "action": "move_up",
+    "distance_m": 15.6901845932007,
+    "from": "(-58.0, 0.075337, 12.4)",
+    "hp": 184.0,
+    "physics_frames": 180,
+    "to": "(-57.99227, -0.730806, -3.269459)"
+  },
+  "town_movement": {
+    "action": "move_right",
+    "distance_m": 7.06774520874023,
+    "from": "(0.0, 0.000069, 14.44986)",
+    "physics_frames": 120,
+    "to": "(7.050719, 0.000717, 14.94015)"
+  }
+}

@@ -4,7 +4,7 @@ extends TestCase
 ## puts the player exactly on the named spawn, builds are deterministic, the kit's materials/collision are valid.
 
 const SY_TEMPLE := 2.0
-const MAP_IDS: Array[StringName] = [&"sanctuary", &"ruined_forest", &"catacombs", &"forgotten_temple", &"boss_arena"]
+const MAP_IDS: Array[StringName] = [&"sanctuary", &"westreach", &"ruined_forest", &"catacombs", &"forgotten_temple", &"boss_arena"]
 
 static var _maps := {}
 var _holder: Node3D

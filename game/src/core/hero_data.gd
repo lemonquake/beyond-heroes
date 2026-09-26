@@ -18,7 +18,13 @@ var skill_tree: TreeState
 var talent_tree: TreeState
 var skill_bar: Array = []                 # skill ids (StringName) or &""
 var discovered_maps := {}                 # map id -> true
-var unlocked_teleporters := {}            # teleporter id -> true
+var unlocked_teleporters := {}            # teleporter id -> true (discovered: a locked dais is recorded too)
+## Waypoint network shrines the hero has awakened (stood on while unlocked): only these are travel destinations.
+var awakened_shrines := {}                # teleporter id -> true
+## Non-public places found by walking near them (DataIsland.PLACES with public = false): place id -> true.
+var known_places := {}
+## The tracked route (directions HUD): {"dest": place id, "mode": RoutePlanner.Mode} or empty.
+var route := {}
 var world_flags := {}                     # e.g. &"boss_warden_defeated"
 var current_map: StringName = &"sanctuary"
 var current_spawn: StringName = &"start"
@@ -98,6 +104,7 @@ func init_new() -> void:
 	mp.count = 3
 	inventory.add(mp)
 	discovered_maps[&"sanctuary"] = true
+	awakened_shrines[&"sanctuary_waypoint"] = true
 
 ## All persistent stat modifiers: equipment + talents + guild/tier + the inn's rest bonus.
 func persistent_modifiers() -> Array:
@@ -302,6 +309,8 @@ func to_dict() -> Dictionary:
 		"skills": skill_tree.to_dict(), "talents": talent_tree.to_dict(), "skill_bar": bar,
 		"discovered_maps": discovered_maps.keys().map(func(k): return String(k)),
 		"teleporters": unlocked_teleporters.keys().map(func(k): return String(k)),
+		"awakened_shrines": awakened_shrines.keys().map(func(k): return String(k)),
+		"known_places": known_places.keys().map(func(k): return String(k)), "route": route.duplicate(),
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
 		"guild": String(guild), "tier": tier, "rested_until": rested_until,
@@ -345,6 +354,15 @@ static func from_dict(d: Dictionary) -> HeroData:
 		h.discovered_maps[StringName(m)] = true
 	for t in d.get("teleporters", []):
 		h.unlocked_teleporters[StringName(t)] = true
+	for t in d.get("awakened_shrines", []):
+		if DataIsland.NETWORK.has(StringName(t)):
+			h.awakened_shrines[StringName(t)] = true
+	for p in d.get("known_places", []):
+		if not DataIsland.place(String(p)).is_empty():
+			h.known_places[String(p)] = true
+	var rt = d.get("route", {})
+	if rt is Dictionary and not DataIsland.place(String(rt.get("dest", ""))).is_empty():
+		h.route = {"dest": String(rt.dest), "mode": clampi(int(rt.get("mode", 0)), 0, 2)}
 	var fl: Dictionary = d.get("flags", {})
 	for k in fl:
 		h.world_flags[StringName(k)] = fl[k]

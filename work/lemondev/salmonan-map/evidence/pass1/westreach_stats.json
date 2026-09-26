@@ -1,0 +1,15 @@
+{
+  "build_ms": 3978,
+  "mesh_instances": 317,
+  "nav_polygons": 5071,
+  "nodes": 1510,
+  "omni_lights": 52,
+  "shadowed_omni": 3,
+  "spawns": [
+    "start",
+    "town_gate",
+    "forest_road",
+    "cove_shrine"
+  ],
+  "teleporters": 1
+}

@@ -1,6 +1,6 @@
 class_name DataNpcs
 ## The people of Malasugue Town (outdoor posts) and their conversations. The indoor townsfolk live in DataNpcsTown. Graph format: see Dialogue.
-## World flags used: catacombs_ritual_seen, temple_seal_broken, boss_warden_defeated.
+## World flags used: catacombs_ritual_seen, temple_seal_broken, boss_warden_defeated, south_gate_open (Hald opens the gate).
 
 const MAGE := "res://assets/characters/mage.glb"
 const KNIGHT := "res://assets/characters/knight.glb"
@@ -216,7 +216,7 @@ static func _hald() -> NpcDef:
 			],
 			"nodes": {
 				"first": {"text": [
-						"Halt. The south road is closed; the gate stays barred until the dead stop walking.",
+						"Halt. The south road has been closed three winters. This gate has not opened since the forest garrison fell.",
 						"You came through the **waypoint**? Then you are either a hero or a very lost pilgrim. Which is it?"],
 					"choices": [
 						{"text": "A hero, apparently.", "next": "hero", "actions": [{"relationship": 3}]},
@@ -229,6 +229,8 @@ static func _hald() -> NpcDef:
 				"rude": {"text": "Fair enough. Just do not make trouble inside my walls.", "next": "hub"},
 				"hub": {"text": "Gate holds. What do you need?",
 					"choices": [
+						{"text": "About the south road...", "next": "road", "conditions": [{"not_flag": "south_gate_open"}], "hidden_if_unmet": true},
+						{"text": "How are the roads below?", "next": "road_open", "conditions": [{"flag": "south_gate_open"}], "hidden_if_unmet": true},
 						{"text": "Advice for the fight?", "next": "tactics"},
 						{"text": "How do elites work?", "next": "elites"},
 						_end("Stay sharp."),
@@ -238,7 +240,19 @@ static func _hald() -> NpcDef:
 						"Throw them into walls, pillars, each other. The **impact** hurts them more than your blade. And a **wet** enemy takes lightning like a rod in a storm."],
 					"actions": [{"relationship": 2}], "next": "hub"},
 				"elites": {"text": "Elites carry a name like **Flaming** or **Vampiric** above their heads. Each one changes how they fight. Read the name before you close in. They also carry better loot.", "next": "hub"},
-				"salute": {"text": "Hero. The men want to open the south gate for the first time in three winters. They want you to see it.",
+				"road": {"text": [
+						"The dead came up that road once. They have not come up it since; they keep to the forest now.",
+						"But the farms below still feed this town, and nobody has walked to the **Old Mill** without an escort since spring. Goblins in the **Lantern Fields**, wolves on the cliffs, smugglers at **Tideglass Cove**. Nothing a hero cannot handle."],
+					"choices": [
+						{"text": "Open the gate. I will walk the roads.", "next": "road_opened", "actions": [{"set_flag": "south_gate_open"}, {"relationship": 5}]},
+						{"text": "Not yet.", "next": "hub"},
+					]},
+				"road_opened": {"text": [
+						"Then it is done. Lift the bar!",
+						"The road forks below the gate: the **Mill Road** to the crossroads, the **Field Road** to the farms, the **Cove Steps** down to the sea. Press **M**: the cartographer's chart names every road we still keep, and it will walk you there if you ask it."],
+					"next": "hub"},
+				"road_open": {"text": "The gate stays open while you keep the roads. The **Forest Road** climbs from the Old Mill to the fallen village, if you would rather walk than trust the waypoint.", "next": "hub"},
+				"salute": {"text": "Hero. The men want to raise the old banners over the south gate, for the first time in three winters. They want you to see it.",
 					"actions": [{"set_flag": "south_gate_ceremony"}, {"relationship": 15}, {"give_gold": 150}], "next": "hub"},
 			},
 		}})

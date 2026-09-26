@@ -2,6 +2,7 @@ extends Node
 ## Headless test runner. Usage:
 ##   godot --headless --path game res://tests/run_tests.tscn
 ## Writes a JSON report to ../work/lemondev/bh-002/evidence/tests/report.json and exits with code 0/1.
+## Optional: -- --only=test_island,test_maps runs just those suites (the report then covers only them).
 
 const DIR := "res://tests/unit/"
 
@@ -12,8 +13,14 @@ func _ready() -> void:
 	var suites := {}
 	var files := DirAccess.get_files_at(DIR)
 	files.sort()
+	var only: PackedStringArray = []
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--only="):
+			only = a.substr(7).split(",", false)
 	for f in files:
 		if not f.ends_with(".gd") or not f.begins_with("test_"):
+			continue
+		if not only.is_empty() and not only.has(f.get_basename()):
 			continue
 		var script: GDScript = load(DIR + f)
 		var inst: TestCase = script.new()

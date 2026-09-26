@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://tests/tools/map_concept_combat.gd" id="1"]
+[node name="MapConceptCombat" type="Node"]
+script = ExtResource("1")

@@ -1,0 +1,34 @@
+{
+  "schema":1,"title":"Salmonan","prototype":true,"scale":{"width_px":1000,"height_px":850,"width_m":1200,"height_m":1000,"walk_mps":5},
+  "lake":{"cx":490,"cy":420,"rx":122,"ry":104},
+  "places":[
+    {"id":"town","name":"Malasugue Town","x":240,"y":527,"kind":"Town","shrine":true,"awakened":true,"provisional":false,"description":"West-coast cliff town. Guilds, market and Sanctuary Terrace."},
+    {"id":"forest","name":"Ruined Forest","x":250,"y":289,"kind":"Forest","shrine":true,"awakened":true,"provisional":false,"description":"Fallen village, graveyard and surviving roads. Two approaches reconnect here."},
+    {"id":"rise","name":"Watcher's Rise","x":510,"y":170,"kind":"Landmark","shrine":true,"awakened":false,"provisional":true,"description":"High overlook, scout encounter and a view across the island."},
+    {"id":"temple","name":"Forgotten Temple","x":740,"y":230,"kind":"Dungeon entrance","shrine":false,"provisional":false,"description":"The first oath. Entrance to the locked Hollow Throne sequence."},
+    {"id":"chapel","name":"Drowned Chapel","x":750,"y":450,"kind":"Dungeon entrance","shrine":true,"awakened":false,"provisional":true,"description":"Surface entrance to Ancient Catacombs, beneath the chapel."},
+    {"id":"marsh","name":"Reedwater Marsh","x":700,"y":638,"kind":"Wetland","shrine":true,"awakened":false,"provisional":true,"description":"Reed paths, raised causeways and corrupted wildlife."},
+    {"id":"fields","name":"Lantern Fields","x":450,"y":706,"kind":"Fields","shrine":false,"provisional":true,"description":"Farm lanes and recovery space between dangerous districts."},
+    {"id":"cove","name":"Tideglass Cove","x":140,"y":672,"kind":"Coast","shrine":true,"awakened":true,"provisional":true,"description":"Fishing cove, coastal trail and optional salvage encounters."},
+    {"id":"mill","name":"Old Mill Crossroads","x":400,"y":544,"kind":"Junction","shrine":false,"provisional":true,"description":"Four signed roads around the south and west sides of Stillwater Lake."},
+    {"id":"catacombs","name":"Ancient Catacombs","x":750,"y":450,"kind":"Underground","shrine":false,"provisional":false,"description":"Enter beneath Drowned Chapel. Interior distance is outside this prototype."},
+    {"id":"throne","name":"The Hollow Throne","x":740,"y":230,"kind":"Underground","shrine":false,"locked":true,"provisional":false,"description":"Locked: break the temple seal before entering."}
+  ],
+  "edges":[
+    {"id":"town_mill","a":"town","b":"mill","name":"Mill Road","type":"road","points":[[240,527],[290,508],[340,514],[400,544]]},
+    {"id":"mill_forest","a":"mill","b":"forest","name":"Forest Road","type":"road","points":[[400,544],[343,495],[324,427],[320,366],[283,325],[250,289]]},
+    {"id":"town_forest","a":"town","b":"forest","name":"Cliffside Trail","type":"trail","points":[[240,527],[209,470],[180,416],[187,346],[250,289]]},
+    {"id":"forest_rise","a":"forest","b":"rise","name":"Watcher's Road","type":"road","points":[[250,289],[312,235],[383,202],[450,187],[510,170]]},
+    {"id":"rise_temple","a":"rise","b":"temple","name":"Old Oath Road","type":"road","points":[[510,170],[566,159],[635,173],[689,199],[740,230]]},
+    {"id":"temple_chapel","a":"temple","b":"chapel","name":"Eastern Road","type":"road","points":[[740,230],[785,277],[802,342],[786,394],[750,450]]},
+    {"id":"chapel_marsh","a":"chapel","b":"marsh","name":"Reed Causeway","type":"road","points":[[750,450],[786,511],[769,570],[732,601],[700,638]]},
+    {"id":"marsh_fields","a":"marsh","b":"fields","name":"Southern Road","type":"road","points":[[700,638],[651,676],[586,706],[513,716],[450,706]]},
+    {"id":"fields_town","a":"fields","b":"town","name":"Field Road","type":"road","points":[[450,706],[376,680],[329,627],[277,585],[240,527]]},
+    {"id":"mill_chapel","a":"mill","b":"chapel","name":"Lake Shore Road","type":"road","points":[[400,544],[470,568],[554,571],[630,553],[700,510],[750,450]]},
+    {"id":"town_cove","a":"town","b":"cove","name":"Cove Steps","type":"trail","points":[[240,527],[205,558],[176,603],[157,648],[140,672]]},
+    {"id":"cove_fields","a":"cove","b":"fields","name":"Coast Road","type":"road","points":[[140,672],[209,713],[281,746],[365,747],[450,706]]},
+    {"id":"fields_mill","a":"fields","b":"mill","name":"Mill Lane","type":"road","points":[[450,706],[448,649],[423,596],[400,544]]},
+    {"id":"chapel_catacombs","a":"chapel","b":"catacombs","name":"Catacombs entrance","type":"door","points":[[750,450],[750,450]]},
+    {"id":"temple_throne","a":"temple","b":"throne","name":"Temple seal","type":"door","locked":true,"points":[[740,230],[740,230]]}
+  ]
+}

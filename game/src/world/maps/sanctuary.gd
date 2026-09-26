@@ -6,6 +6,8 @@ extends MapBuilder
 ## teleporter to the Ruined Forest. Houses with warm windows, a market, a smithy yard and a well make the hub feel
 ## lived in (reference 3: every lot furnished, trees and hedges framing the space); beyond the palisade the
 ## plateau breaks into cliffs above a misty valley, with mountains as background silhouettes.
+## The South Gate was barred for three winters; once Captain Hald opens it (world flag `south_gate_open`) its bar and
+## iron leaves are gone and the road runs down out of the gate into Westreach (a walk-through boundary).
 
 const PLAZA := Vector3(0, 0, 4)
 const TERRACE := Rect2(-10, -30, 20, 12)
@@ -78,7 +80,10 @@ func _height(x: float, z: float) -> float:
 	# gentle undulation away from the built-up centre
 	var outer := smoothstep(26.0, 38.0, d)
 	h += (sin(x * 0.21) * cos(z * 0.17) * 0.35 + sin(x * 0.07 + z * 0.05) * 0.4) * outer
-	h -= smoothstep(rim - 1.0, rim + 6.0, d) * 16.0
+	var drop := smoothstep(rim - 1.0, rim + 6.0, d) * 16.0
+	# the south road leaves the gate on an embankment that runs gently down toward Westreach
+	var road := (1.0 - smoothstep(3.6, 7.5, absf(x))) * smoothstep(34.0, 38.0, z)
+	h -= lerpf(drop, smoothstep(44.0, 75.0, z) * 6.0, road)
 	return h
 
 func _splat(x: float, z: float) -> Color:
@@ -86,7 +91,7 @@ func _splat(x: float, z: float) -> Color:
 	var cobble := 1.0 - smoothstep(12.5, 14.0, d)
 	# paths: gate -> plaza -> terrace stair, plaza -> houses
 	var path := 0.0
-	path = maxf(path, 1.0 - smoothstep(1.8, 3.2, absf(x)) * 1.0 if z > 12.0 and z < 36.0 else 0.0)
+	path = maxf(path, 1.0 - smoothstep(1.8, 3.2, absf(x)) * 1.0 if z > 12.0 and z < 75.0 else 0.0)
 	path = maxf(path, 1.0 - smoothstep(1.8, 3.0, absf(x)) if z < -8.0 and z > -16.0 else path)
 	for t in [Vector2(-20.6, 2), Vector2(20.6, 6), Vector2(-15, 19.5), Vector2(19.5, -12), Vector2(-17.7, -16.7), Vector2(20, 20),
 			Vector2(-23.5, 13.5), Vector2(26.4, -4.8), Vector2(-24.9, -9.5), Vector2(12.4, -9.4)]:
@@ -117,8 +122,8 @@ func _perimeter() -> void:
 	for sx in [-3.2, 3.2]:
 		kit("pillar_quoin", Vector3(sx, 0, gz), 0.0, 1.0, geo, true)
 	kit("arch_quoin", Vector3(0, 0, gz), 0.0, 1.0, geo, true)
-	kit("gate_iron", Vector3(0, 0, gz + 0.1), 0.0, 1.0, props, true)
-	blocker(Vector3(0, 1.5 + ground(0, gz), gz), Vector3(2.4, 3.0, 0.6))
+	hide_when(kit("gate_iron", Vector3(0, 0, gz + 0.1), 0.0, 1.0, props, true), &"south_gate_open")
+	hide_when(bar(Vector3(0, 1.5 + ground(0, gz), gz), Vector3(2.4, 3.0, 0.6)), &"south_gate_open")
 	brazier(Vector3(-5.2, 0, gz - 1.6), 3.0, true, true)
 	brazier(Vector3(5.2, 0, gz - 1.6), 3.0, false, true)
 	kit("banner_torn", Vector3(-3.2, 3.6 + ground(-3.2, gz), gz - 0.75), 0.0, 1.0, deco)
@@ -130,12 +135,24 @@ func _perimeter() -> void:
 	for z in [30.0, 22.0]:
 		lamp_post(Vector3(-3.4, 0, z), 180.0)
 		lamp_post(Vector3(3.4, 0, z), 0.0)
-	# hard boundary just outside the fence line (the palisade already blocks; this also covers the gate arch)
+	# hard boundary just outside the fence line (the palisade already blocks), open only where the road leaves the gate
 	var m := 24
+	var gap := asin(2.6 / (FENCE_R + 1.5))
 	for i in m:
 		var a0 := TAU * i / m
 		var a1 := TAU * (i + 1) / m
+		if a0 < PI * 0.5 and a1 > PI * 0.5 - 0.001:
+			a1 = PI * 0.5 - gap
+		elif a0 > PI * 0.5 - 0.001 and a0 < PI * 0.5 + 0.001:
+			a0 = PI * 0.5 + gap
 		boundary(Vector3(cos(a0), 0, sin(a0)) * (FENCE_R + 1.5), Vector3(cos(a1), 0, sin(a1)) * (FENCE_R + 1.5), 8.0)
+	# the road beyond the gate: rails on the embankment, the walk-through into Westreach and a cap behind it
+	for sx: float in [-2.8, 2.8]:
+		boundary(Vector3(sx, -4.0, FENCE_R + 1.2), Vector3(sx, -4.0, FENCE_R + 12.0), 12.0, 0.5)
+	boundary(Vector3(-3.2, -4.0, FENCE_R + 11.0), Vector3(3.2, -4.0, FENCE_R + 11.0), 12.0)
+	exit_zone(&"sanctuary_south_gate", Vector3(0, 0, FENCE_R + 7.0), Vector3(5.6, 4.0, 3.0), &"westreach", &"town_gate", "Westreach",
+		&"south_gate_open", "The South Gate is barred. Captain Hald keeps the key.")
+	signpost(Vector2(5.2, 33.0), [["Westreach roads", Vector2(0, 1)], ["Fountain Plaza", Vector2(0, -1)]])
 
 func _plaza() -> void:
 	var fnt := kit("fountain", PLAZA, 0.0, 1.0, props, true)
@@ -201,6 +218,22 @@ func _houses() -> void:
 		door(h, yaw, lot[2], lot[3])
 	kit("house_destroyed", Vector3(26, 0, 24), -40.0, 1.0, props, true)  # burnt last winter — the first raid
 	kit("well", Vector3(-11.0, 0, -7.0), 20.0, 1.0, props, true)
+
+## A solid invisible bar (the South Gate's crossbar) that a flag can lift: registered with hide_when, it stops
+## colliding once hidden (MapRoot.apply_flag_visuals).
+func bar(center: Vector3, size: Vector3) -> StaticBody3D:
+	var sb := StaticBody3D.new()
+	sb.name = "GateBar"
+	sb.collision_layer = BH.LAYER_WORLD
+	sb.collision_mask = 0
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = size
+	cs.shape = bs
+	sb.add_child(cs)
+	sb.position = center
+	geo.add_child(sb)
+	return sb
 
 ## A walk-in door on a building: the portal at its `door` socket, and the `door_<interior>` spawn 1.6 m outside it
 ## (facing out) where the hero reappears when leaving the interior.
