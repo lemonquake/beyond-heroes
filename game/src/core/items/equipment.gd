@@ -5,6 +5,9 @@ extends RefCounted
 signal changed
 
 var slots := {}              # slot StringName -> ItemInstance or null
+## Wearer's hero tier rank (DataGuilds: 0 Unranked .. 8 SSS). Rarities from Licensed up need a minimum tier.
+## A bare Equipment (tools, previews) is ungated; HeroData keeps this in sync with the hero's tier.
+var tier_rank := DataGuilds.MAX_RANK
 
 func _init() -> void:
 	for s in BH.SLOTS:
@@ -27,6 +30,9 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
 	if level < item.base.level_req:
 		return "Requires level %d" % item.base.level_req
+	var need := DataGuilds.rank_for_rarity(item.rarity)
+	if need > tier_rank:
+		return "Requires a Class %s hero (%s items)" % [DataGuilds.letter(need), BH.rarity_name(item.rarity)]
 	for a in item.base.requirements:
 		if int(attrs.get(a, 0)) < int(item.base.requirements[a]):
 			return "Requires %d %s" % [item.base.requirements[a], BH.ATTRIBUTE_NAMES[a]]

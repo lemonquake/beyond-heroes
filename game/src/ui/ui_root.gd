@@ -140,3 +140,65 @@ func _on_player_died() -> void:
 ## Ask a yes/no question. `on_yes` runs on confirmation.
 func ask(title: String, text: String, on_yes: Callable, yes_text := "Confirm", danger := false) -> void:
 	confirm.ask(title, text, on_yes, yes_text, danger)
+
+## Fade to black with a caption, run `at_dark` while the screen is black, then fade back (inn rest, doors).
+func fade_rest(caption: String, at_dark: Callable, hold := 0.9) -> void:
+	var cover := ColorRect.new()
+	cover.color = Color(0.01, 0.008, 0.012, 0.0)
+	cover.set_anchors_preset(Control.PRESET_FULL_RECT)
+	cover.mouse_filter = Control.MOUSE_FILTER_STOP
+	_root.add_child(cover)
+	var l := UITheme.label(caption, 30, UITheme.PARCHMENT, UITheme.title_font())
+	l.set_anchors_preset(Control.PRESET_CENTER)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	l.grow_vertical = Control.GROW_DIRECTION_BOTH
+	l.modulate.a = 0.0
+	cover.add_child(l)
+	var tw := cover.create_tween()
+	tw.tween_property(cover, "color:a", 1.0, 0.7)
+	tw.parallel().tween_property(l, "modulate:a", 1.0, 0.7)
+	tw.tween_callback(at_dark)
+	tw.tween_interval(hold)
+	tw.tween_property(l, "modulate:a", 0.0, 0.4)
+	tw.tween_property(cover, "color:a", 0.0, 0.7)
+	tw.tween_callback(cover.queue_free)
+
+## Big centred emblem announcement after joining a guild or a promotion.
+func show_tier_award(rank: int, heading: String) -> void:
+	var box := VBoxContainer.new()
+	box.set_anchors_preset(Control.PRESET_CENTER)
+	box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	box.grow_vertical = Control.GROW_DIRECTION_BOTH
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_theme_constant_override("separation", 6)
+	var em := TextureRect.new()
+	em.texture = UIArt.tex(DataGuilds.emblem_path(rank))
+	em.custom_minimum_size = Vector2(160, 160)
+	em.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	em.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	em.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(em)
+	var h := UITheme.label(heading, 22, UITheme.PARCHMENT)
+	h.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(h)
+	var t := UITheme.title(DataGuilds.tier_name(rank), 38, DataGuilds.tier(rank).color)
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(t)
+	var gate := int(DataGuilds.tier(rank).gate)
+	if gate >= 0:
+		var u := UITheme.label("You may now equip %s items." % BH.rarity_name(gate), 20, BH.rarity_color(gate))
+		u.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		box.add_child(u)
+	_root.add_child(box)
+	box.modulate.a = 0.0
+	box.scale = Vector2.ONE * 0.8
+	box.pivot_offset = Vector2(160, 140)
+	Audio.play_ui(&"level_up")
+	var tw := box.create_tween()
+	tw.tween_property(box, "modulate:a", 1.0, 0.3)
+	tw.parallel().tween_property(box, "scale", Vector2.ONE, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(3.2)
+	tw.tween_property(box, "modulate:a", 0.0, 0.6)
+	tw.tween_callback(box.queue_free)

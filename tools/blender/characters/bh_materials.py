@@ -17,7 +17,18 @@ BASE = {
     "BH_Wood": ((0.12, 0.07, 0.038), 0.0, 0.7, None, 0.0, 1.0),
     "BH_Hair": ((0.06, 0.045, 0.035), 0.0, 0.6, None, 0.0, 1.0),
     "BH_Aether": ((0.55, 0.95, 1.0), 0.0, 0.25, (0.45, 0.92, 1.0), 9.0, 1.0),
+    # added for enemies / townsfolk (bh-003); Godot keeps the exported PBR values for these
+    "BH_Fur": ((0.09, 0.075, 0.06), 0.0, 0.9, None, 0.0, 1.0),
+    "BH_Flesh": ((0.35, 0.12, 0.10), 0.0, 0.45, None, 0.0, 1.0),
+    "BH_Stone": ((0.30, 0.29, 0.27), 0.0, 0.85, None, 0.0, 1.0),
+    "BH_Bronze": ((0.45, 0.28, 0.12), 1.0, 0.4, None, 0.0, 1.0),
+    "BH_Horn": ((0.30, 0.25, 0.18), 0.0, 0.5, None, 0.0, 1.0),
+    "BH_Ichor": ((0.06, 0.09, 0.03), 0.0, 0.2, None, 0.0, 1.0),
 }
+
+# Heroes use the plain contract names (Godot swaps in its shared materials). Every other character exports
+# "<name>__<palette>" so its own colours survive in the game (MaterialLibrary._palette_mat).
+SHARED_PALETTES = {"knight", "mage"}
 
 # Per-character palette overrides (same names; different base colors)
 OVERRIDES = {
@@ -44,13 +55,17 @@ OVERRIDES = {
 }
 
 
-def make_materials(char="knight", vertex_color=True):
+def make_materials(char="knight", vertex_color=True, extra=None, tintable=()):
+    """extra: {name: spec} palette overrides supplied by a character module (PALETTE_COLORS).
+    tintable: names exported WITHOUT the palette suffix so the game recolours them per NPC (townsfolk cloth)."""
     import bpy
     spec = dict(BASE)
     spec.update(OVERRIDES.get(char, {}))
+    spec.update(extra or {})
     out = {}
     for name, (rgb, met, rough, erg, estr, alpha) in spec.items():
-        m = bpy.data.materials.get(name) or bpy.data.materials.new(name)
+        mname = name if char in SHARED_PALETTES or name in tintable else f"{name}__{char}"
+        m = bpy.data.materials.get(mname) or bpy.data.materials.new(mname)
         m.use_nodes = True
         nt = m.node_tree
         bsdf = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")

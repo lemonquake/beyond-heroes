@@ -84,7 +84,7 @@ def main():
     for c in chars:
         reset()
         BC.export_character(c, CHAR_DIR, export_glb)
-    if "all" in targets or "meta" in targets or chars:
+    if "all" in targets or "meta" in targets or any(c in ("knight", "mage") for c in chars):
         import bh_library as L
         L.write_meta(os.path.join(CHAR_DIR, "anim_meta.json"))
     if "all" in targets or "validate" in targets:

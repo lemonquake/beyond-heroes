@@ -35,6 +35,14 @@ const ENV := {
 	"BH_Glass": ["", Color(0.95, 0.8, 0.55), 0.1, 0.0, 1.0, Color(1.0, 0.72, 0.38), 2.2],  # lantern panes, lit from within
 	"BH_Thatch": ["thatch", Color(0.8, 0.72, 0.55), 0.95, 0.0, 0.8, Color.BLACK, 0.0],
 	"BH_Dirt": ["dirt", Color(0.8, 0.75, 0.7), 0.95, 0.0, 0.5, Color.BLACK, 0.0],
+	# bh-003: town buildings and interiors
+	"BH_ClothBlue": ["cloth", Color(0.12, 0.24, 0.5), 0.95, 0.0, 1.0, Color.BLACK, 0.0],       # Swordfin Company
+	"BH_ClothViolet": ["cloth", Color(0.3, 0.16, 0.42), 0.95, 0.0, 1.0, Color.BLACK, 0.0],    # Lantern Covenant
+	"BH_Silver": ["", Color(0.8, 0.82, 0.86), 0.3, 1.0, 1.0, Color.BLACK, 0.0],
+	"BH_Plaster": ["", Color(0.78, 0.72, 0.62), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Bottle": ["", Color(0.2, 0.42, 0.25), 0.08, 0.0, 1.0, Color(0.05, 0.12, 0.06), 0.4],
+	"BH_Paper": ["", Color(0.86, 0.8, 0.66), 0.9, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Rope": ["", Color(0.55, 0.45, 0.3), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
 }
 
 # Character material names -> [albedo, roughness, metallic, emission, energy, detail texture set]
@@ -138,9 +146,49 @@ static func apply_character(meshes: Array, primary: Color) -> void:
 		for i in mi.mesh.get_surface_count():
 			var mat := mi.mesh.surface_get_material(i)
 			var nm := mat.resource_name.get_slice(".", 0) if mat else ""
-			var rep := _char_mat(nm, primary)
+			var rep := _palette_mat(nm, mat) if "__" in nm else _char_mat(nm, primary)
 			if rep:
 				mi.set_surface_override_material(i, rep)
+
+## Palette materials ("BH_Emissive__ghoul_brute"): each enemy/townsfolk model exports its own colours. The shared
+## surface setup (roughness, metalness, detail normal textures) comes from CHAR by base name; the colours come from
+## the imported material, so every model keeps its palette. Unknown base names ("BH_Fur__dire_wolf") keep the imported
+## PBR values entirely.
+static func _palette_mat(nm: String, src: Material) -> Material:
+	if _char.has(nm):
+		return _char[nm]
+	var base := nm.get_slice("__", 0)
+	var imported := src as BaseMaterial3D
+	var m := StandardMaterial3D.new()
+	var d: Array = CHAR.get(base, [])
+	if base == "BH_Cloth_Primary":
+		d = [Color.WHITE, 0.9, 0.0, Color.BLACK, 0.0, "cloth"]
+	if not d.is_empty():
+		m.roughness = d[1]
+		m.metallic = d[2]
+		if d[5] != "":
+			var n := _tex(d[5], "normal")
+			if n:
+				m.normal_enabled = true
+				m.normal_texture = n
+				m.normal_scale = 0.5
+				m.uv1_scale = Vector3.ONE * 2.0
+	if imported:
+		m.albedo_color = imported.albedo_color
+		if d.is_empty():
+			m.roughness = imported.roughness
+			m.metallic = imported.metallic
+		if imported.emission_enabled:
+			m.emission_enabled = true
+			m.emission = imported.emission
+			m.emission_energy_multiplier = clampf(imported.emission_energy_multiplier, 1.0, 4.0)
+	elif not d.is_empty():
+		m.albedo_color = d[0]
+	m.rim_enabled = true
+	m.rim = 0.25
+	m.rim_tint = 0.6
+	_char[nm] = m
+	return m
 
 static func _char_mat(nm: String, primary: Color) -> Material:
 	var key := nm

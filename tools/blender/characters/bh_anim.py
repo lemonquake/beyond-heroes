@@ -557,7 +557,10 @@ def bake_action(ob, rig, anim, extra=None):
     frames = np.arange(n, dtype=float)
 
     def put(path, idx, vals, group):
-        fc = cb.fcurves.new(path, index=idx, group_name=group)
+        try:
+            fc = cb.fcurves.new(path, index=idx, group_name=group)
+        except TypeError:   # Blender 4.4 (bpy module) has no group_name argument
+            fc = cb.fcurves.new(path, index=idx)
         fc.keyframe_points.add(n)
         co = np.empty(2 * n)
         co[0::2] = frames

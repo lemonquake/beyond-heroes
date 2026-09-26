@@ -21,6 +21,10 @@ var _class_label: Label
 var _level_label: Label
 var _xp_bar: ArtBar
 var _xp_text: Label
+var _tier_emblem: TextureRect
+var _tier_text: Label
+var _guild_text: Label
+var _guild_crest: TextureRect
 var _points: Label
 var _attr_rows := {}              # attr -> {value: Label, plus: Button, pending: Label}
 var _pending := {}                # attr -> points not yet committed
@@ -40,10 +44,10 @@ func _build() -> void:
 	var left := vbox(10)
 	left.custom_minimum_size = Vector2(380, 0)
 	row.add_child(left)
-	var pw := inset(Vector2(380, 540))
+	var pw := inset(Vector2(380, 470))
 	left.add_child(pw)
 	preview = CharacterPreview.new(Vector2i(720, 1040))
-	preview.custom_minimum_size = Vector2(350, 520)
+	preview.custom_minimum_size = Vector2(320, 450)
 	pw.add_child(preview)
 	_class_label = UITheme.title("", 26, UITheme.GOLD)
 	_class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -56,6 +60,27 @@ func _build() -> void:
 	_xp_text = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.number_font())
 	_xp_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	left.add_child(_xp_text)
+	# hero tier and guild (docs/LORE.md §5)
+	var tr := hbox(10)
+	tr.alignment = BoxContainer.ALIGNMENT_CENTER
+	left.add_child(tr)
+	_tier_emblem = TextureRect.new()
+	_tier_emblem.custom_minimum_size = Vector2(64, 64)
+	_tier_emblem.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_tier_emblem.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	tr.add_child(_tier_emblem)
+	var tv := vbox(0)
+	tr.add_child(tv)
+	_tier_text = UITheme.label("", 19, UITheme.GOLD, UITheme.body_bold())
+	tv.add_child(_tier_text)
+	_guild_text = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.body_font())
+	tv.add_child(_guild_text)
+	_guild_crest = TextureRect.new()
+	_guild_crest.custom_minimum_size = Vector2(48, 48)
+	_guild_crest.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_guild_crest.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	tr.add_child(_guild_crest)
+	TooltipLayer.attach(tr, func() -> Control: return Tips.text(_guild_tip(), "Tier and guild") if hero else null)
 	# middle: attributes
 	var mid := vbox(8)
 	mid.custom_minimum_size = Vector2(420, 0)
@@ -185,7 +210,32 @@ func refresh() -> void:
 	var need := XpCurve.xp_to_next(hero.progress.level)
 	_xp_bar.set_ratio(float(hero.progress.xp) / float(maxi(1, need)) if need > 0 else 1.0, true)
 	_xp_text.text = "%d / %d experience" % [hero.progress.xp, need] if need > 0 else "Maximum level"
+	_tier_emblem.texture = UIArt.tex(DataGuilds.emblem_path(hero.tier))
+	_tier_text.text = DataGuilds.tier_name(hero.tier)
+	_tier_text.add_theme_color_override("font_color", DataGuilds.tier(hero.tier).color)
+	var g := DataGuilds.guild(hero.guild)
+	_guild_text.text = String(g.name) if not g.is_empty() else "No guild"
+	_guild_crest.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
 	_refresh_attrs()
+
+func _guild_tip() -> String:
+	var lines := PackedStringArray()
+	if hero.guild == &"":
+		lines.append("You are not registered with a guild. Join one in Malasugue (Swordfin Hall or Lantern House) to become a Class E hero and equip Licensed gear.")
+	else:
+		var g := DataGuilds.guild(hero.guild)
+		lines.append("%s — \"%s\"" % [g.name, g.motto])
+		for i in g.perk_text.size():
+			lines.append("%s per tier step (now x%d)" % [g.perk_text[i], hero.tier])
+		for f in g.features:
+			lines.append(f)
+	lines.append("")
+	for r in range(1, DataGuilds.MAX_RANK + 1):
+		var t := DataGuilds.tier(r)
+		var gate := int(t.gate)
+		lines.append("%s Class %s — %s: level %d%s%s" % ["▶" if r == hero.tier else " ", t.letter, t.title, t.level,
+			(", " + String(t.deed)) if String(t.deed) != "" else "", (" · equips %s" % BH.rarity_name(gate)) if gate >= 0 else ""])
+	return "\n".join(lines)
 
 func _on_dirty() -> void:
 	if visible:

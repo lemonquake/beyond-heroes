@@ -120,6 +120,7 @@ func test_sets_and_bonuses() -> void:
 	h.progress.add_xp(XpCurve.total_xp_for_level(12))
 	for a in BH.ATTRIBUTES:
 		h.progress.allocated[a] = 30
+	h.set_tier(2)   # Master-rarity set pieces need a Class D hero (tier gating, docs/LORE.md §5)
 	var base_stats := h.compute_stats()
 	var pieces := []
 	for id in DB.item_set(&"aether_guardian").pieces:

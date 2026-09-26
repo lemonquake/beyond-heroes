@@ -49,3 +49,47 @@ static func heal(p: Node) -> void:
 	FX.spawn(VFXLib.ring_wave(Color(0.6, 0.98, 1.0, 0.9), 2.5, 0.6, 0.7), pl.global_position)
 	Audio.play_ui(&"level_up")
 	Events.notify.emit("Fully restored", &"info")
+
+# ---- The Salted Marlin (inn) and Seris's paid mending ----------------------------------------------------------
+
+const REST_DURATION := 900.0          # seconds of play time the Well Rested bonus lasts
+
+## Price of a night at the inn: grows gently with level; the Lantern Covenant pays less.
+static func rest_cost(hero: HeroData) -> int:
+	var base := 10 + 5 * maxi(1, hero.progress.level)
+	return maxi(1, int(round(float(base) * (1.0 - GuildRules.inn_discount(hero)))))
+
+static func can_rest(hero: HeroData) -> String:
+	var fee := rest_cost(hero)
+	if hero.inventory.gold < fee:
+		return "Not enough gold (%d needed)" % fee
+	return ""
+
+## Pay exactly the quoted fee, restore HP/mana, cleanse, grant Well Rested. Returns "" or an error (nothing changes).
+static func rest(hero: HeroData, p: Node) -> String:
+	var err := can_rest(hero)
+	if err != "":
+		return err
+	var fee := rest_cost(hero)
+	hero.inventory.gold -= fee
+	hero.inventory.changed.emit()
+	hero.rested_until = hero.play_time + REST_DURATION
+	hero.stats_dirty.emit()
+	if p is Player and (p as Player).alive:
+		heal(p)
+	Events.rested.emit(fee)
+	Events.notify.emit("You wake Well Rested (+%d%% experience)." % roundi(HeroData.RESTED_XP * 100.0), &"info")
+	return ""
+
+## Seris mends on the spot: twice the inn's price, no rest bonus.
+static func mystic_heal_cost(hero: HeroData) -> int:
+	return (10 + 5 * maxi(1, hero.progress.level)) * 2
+
+static func mystic_heal(hero: HeroData, p: Node) -> String:
+	var fee := mystic_heal_cost(hero)
+	if hero.inventory.gold < fee:
+		return "Not enough gold (%d needed)" % fee
+	hero.inventory.gold -= fee
+	hero.inventory.changed.emit()
+	heal(p)
+	return ""

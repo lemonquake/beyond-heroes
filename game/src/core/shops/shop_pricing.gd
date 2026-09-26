@@ -35,9 +35,12 @@ static func sell_price(item: ItemInstance, shop: ShopDef, rel := 0) -> int:
 	var unit := maxi(1, floori(v))
 	return mini(unit, buy_price(item, shop, rel))
 
-## Prices for a stack.
-static func buy_total(item: ItemInstance, shop: ShopDef, count: int, rel := 0) -> int:
-	return buy_price(item, shop, rel) * maxi(1, count)
+## Prices for a stack. `discount` (0..1) is a guild privilege at this merchant (GuildRules.shop_discount).
+static func buy_total(item: ItemInstance, shop: ShopDef, count: int, rel := 0, discount := 0.0) -> int:
+	var unit := buy_price(item, shop, rel)
+	if discount > 0.0:
+		unit = maxi(1, ceili(float(unit) * (1.0 - clampf(discount, 0.0, 0.9))))
+	return unit * maxi(1, count)
 
 static func sell_total(item: ItemInstance, shop: ShopDef, rel := 0) -> int:
 	return sell_price(item, shop, rel) * item.count

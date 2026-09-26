@@ -19,6 +19,11 @@ var _pips: HBoxContainer
 var _resource_label: Label
 var _name_label: Label
 var _level_label: Label
+var _tier_icon: TextureRect
+var _tier_label: Label
+var _tier_key := ""
+var _guild_icon: TextureRect
+var _rested_label: Label
 var _portrait: TextureRect
 var _buffs: HBoxContainer
 var _debuffs: HBoxContainer
@@ -126,6 +131,28 @@ func _build_top_left() -> void:
 	_level_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	_level_label.add_theme_constant_override("outline_size", 4)
 	nh.add_child(_level_label)
+	# hero tier identifier (docs/LORE.md §5): emblem + class letter, guild crest; hover for details
+	var th := HBoxContainer.new()
+	th.add_theme_constant_override("separation", 6)
+	v.add_child(th)
+	_tier_icon = TextureRect.new()
+	_tier_icon.custom_minimum_size = Vector2(30, 30)
+	_tier_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_tier_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	th.add_child(_tier_icon)
+	_tier_label = UITheme.label("", 16, UITheme.PARCHMENT, UITheme.body_bold())
+	_tier_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	_tier_label.add_theme_constant_override("outline_size", 4)
+	th.add_child(_tier_label)
+	_guild_icon = TextureRect.new()
+	_guild_icon.custom_minimum_size = Vector2(26, 26)
+	_guild_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_guild_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	th.add_child(_guild_icon)
+	_rested_label = UITheme.label("Well Rested", 14, Color(0.6, 0.9, 1.0))
+	_rested_label.visible = false
+	th.add_child(_rested_label)
+	TooltipLayer.attach(th, func() -> Control: return Tips.text(_tier_tooltip(), "Hero tier") if player else null)
 	_buffs = HBoxContainer.new()
 	_buffs.add_theme_constant_override("separation", 4)
 	v.add_child(_buffs)
@@ -386,6 +413,7 @@ func _process(delta: float) -> void:
 	_vignette.modulate.a = lerpf(_vignette.modulate.a, want_vig, 1.0 - exp(-6.0 * delta))
 	var prog := p.hero.progress
 	_level_label.text = "Level %d" % prog.level
+	_update_tier(p.hero)
 	var need := XpCurve.xp_to_next(prog.level)
 	_xp.set_ratio(float(prog.xp) / float(maxi(1, need)) if need > 0 else 1.0)
 	_xp_label.text = ("Level %d · %d / %d XP" % [prog.level, prog.xp, need]) if need > 0 else "Level %d · maximum" % prog.level
@@ -641,3 +669,37 @@ func _xp_tip() -> Control:
 	var need := XpCurve.xp_to_next(prog.level)
 	return Tips.text("%d / %d experience to level %d (%d%%).\nTotal experience: %d" % [prog.xp, need, prog.level + 1,
 		roundi(100.0 * float(prog.xp) / float(maxi(1, need))), prog.total_xp], "Experience")
+
+func _update_tier(h: HeroData) -> void:
+	_rested_label.visible = h.is_rested()
+	var key := "%d/%s" % [h.tier, h.guild]
+	if key == _tier_key:
+		return
+	_tier_key = key
+	var t := DataGuilds.tier(h.tier)
+	_tier_icon.texture = UIArt.tex(DataGuilds.emblem_path(h.tier))
+	_tier_label.text = "Class %s" % t.letter if h.tier > 0 else "Unranked"
+	_tier_label.add_theme_color_override("font_color", t.color)
+	var g := DataGuilds.guild(h.guild)
+	_guild_icon.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
+	_guild_icon.visible = not g.is_empty()
+
+func _tier_tooltip() -> String:
+	var h := player.hero
+	var lines := PackedStringArray()
+	lines.append(DataGuilds.tier_name(h.tier))
+	if h.guild == &"":
+		lines.append("Join the Swordfin Company or the Lantern Covenant in Malasugue to be registered as a Class E hero.")
+		lines.append("Licensed items need a guild registration.")
+	else:
+		var g := DataGuilds.guild(h.guild)
+		lines.append("%s — \"%s\"" % [g.name, g.motto])
+		for i in g.perk_text.size():
+			lines.append("  %s x%d" % [g.perk_text[i], h.tier])
+		lines.append("  Accord bonus: +%d%% Maximum HP, +%d%% Damage" % [roundi(DataGuilds.ACCORD_HP * 100 * h.tier), roundi(DataGuilds.ACCORD_DAMAGE * 100 * h.tier)])
+		var p := GuildRules.next_promotion(h)
+		if int(p.rank) > 0:
+			lines.append("Next: Class %s at level %d, %d gold%s." % [DataGuilds.letter(int(p.rank)), p.level, p.fee, (", deed: " + String(p.deed)) if String(p.deed) != "" else ""])
+	if h.is_rested():
+		lines.append("Well Rested: +%d%% experience (%d min left)" % [roundi(HeroData.RESTED_XP * 100.0), ceili(h.rested_seconds_left() / 60.0)])
+	return "\n".join(lines)

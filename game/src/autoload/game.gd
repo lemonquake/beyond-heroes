@@ -19,6 +19,7 @@ var travelling := false
 var in_session := false
 var _loading: LoadingScreen
 var _autosave_t := 0.0
+var _was_rested := false
 
 # UI / interaction state
 var ui_blocking := false              # a modal panel is open: gameplay input is ignored
@@ -42,6 +43,11 @@ func _process(delta: float) -> void:
 		if _autosave_t >= AUTOSAVE_INTERVAL and not travelling and player and (player as Player) and (player as Player).alive:
 			_autosave_t = 0.0
 			save_now()
+		# the inn's Well Rested bonus ends: refresh derived stats once
+		var r := hero.is_rested()
+		if r != _was_rested:
+			_was_rested = r
+			hero.stats_dirty.emit()
 		if infinite_mana and player is Player:
 			var p := player as Player
 			p.mana = p.max_mana()

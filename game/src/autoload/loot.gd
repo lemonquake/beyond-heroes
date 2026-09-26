@@ -45,7 +45,8 @@ func drop_for(e: Enemy, player: Player) -> void:
 	var drops: Array = []
 	# Gold
 	var g := rng.randi_range(e.def.gold.x, e.def.gold.y)
-	g = int(round(float(g) * (1.0 + 0.12 * float(e.level - 1)) * (3.0 if e.is_elite else 1.0) * (1.0 + player.stats.get_stat(&"gold_find"))))
+	g = int(round(float(g) * (1.0 + 0.12 * float(e.level - 1)) * (3.0 if e.is_elite else 1.0) * (1.0 + player.stats.get_stat(&"gold_find")) \
+		* (1.0 + (GuildRules.elite_gold_bonus(player.hero) if e.is_elite or e.is_boss else 0.0))))
 	if g > 0 and (rng.randf() < 0.75 or e.is_elite or e.is_boss):
 		spawn_gold(at, g)
 	# Equipment

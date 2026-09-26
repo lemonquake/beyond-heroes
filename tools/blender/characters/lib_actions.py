@@ -281,6 +281,55 @@ def physics():
     lift = U(sit, torso(0, -10, 0, 0, 10, 0, 0, 6, 0), look(0, 20), arm("L", -30, 40, 50), arm("R", -30, 40, 50))
     out.append(anim("revive", 46, [(0, dead), (10, dead), (18, lift, "out"), (27, kneel), (36, rise), (46, B)],
                     lag={"head": 1.5, "arm": 2}, key=18))
+    out += deaths(B, dead)
+    return out
+
+
+def lying_face_down():
+    """Face down, head turned to one side, one arm under the body, legs splayed."""
+    return U(RELAX, hips(0.02, 0, -0.84), torso(0, 90, 4, 0, -6, 0, 0, -4, 0), look(-60, -10, 0),
+             leg_fk("L", 4, 0, 30, 4), leg_fk("R", 0, 6, 40, 2),
+             arm("L", -10, 100, 60, 0, 10), arm("R", -40, -60, 20, 0, 10))
+
+
+def deaths(B, dead):
+    """Death variants chosen by the game from the killing blow (heavy knockback -> death_back, crit or backstab ->
+    death_fwd, undead/constructs -> death_crumple). All end lying still (in place; the capsule is moved by physics)."""
+    out = []
+    # death_back: blown off the feet, flat on the back almost immediately
+    hit = U(B, torso(0, -36, 6, 0, -16, 0, 0, -12, 0), hips(0, -0.14, 0.02), look(10, -30), arm("L", 10, 60, 30),
+            arm("R", 0, 50, 30), foot("L", 0.14, 0.14, 12, up=0.12, toe=-10), foot("R", 0.1, 0.14, 14, up=0.08, toe=-10))
+    air = U(RELAX, hips(0, 0, -0.3), torso(0, -70, 8, 0, 8, 0, 0, 8, 0), look(0, 24), arm("L", 30, 40, 30),
+            arm("R", 40, 20, 40), leg_fk("L", 50, 40, 20), leg_fk("R", 30, 30, 20))
+    flat = U(dead, torso(0, -90, -6, 0, 4, 0, 0, 2, 0), look(24, 14))
+    out.append(anim("death_back", 40, [(0, B), (3, hit, "out"), (9, air), (15, flat, "in"),
+                                       (18, U(flat, hips(0, 0, -0.78))), (22, flat), (40, flat)],
+                    lag={"head": 1.5, "arm": 2.5}, key=15))
+    # death_fwd: doubles over the wound, stumbles a step, pitches forward onto the face
+    clutch = U(B, torso(0, 24, -6, 0, 12, 0, 0, 10, 0), hips(0, 0.02, -0.12), look(0, -24),
+               arm("L", -60, 40, 110, 0, 20), arm("R", -70, 30, 100, 0, 20))
+    step = U(clutch, foot("L", 0.24, 0.13, 10, knee=10), hips(0, 0.08, -0.18), torso(0, 34, -4, 0, 14, 0, 0, 12, 0))
+    kneel = U(RELAX, hips(0, 0.1, -0.52), torso(0, 40, 0, 0, 14, 0, 0, 10, 0), look(0, -20),
+              leg_fk("L", 80, 140, 10), leg_fk("R", 70, 145, 20), arm("L", -60, 30, 40), arm("R", -50, 40, 40))
+    down = lying_face_down()
+    out.append(anim("death_fwd", 48, [(0, B), (5, clutch, "out"), (12, step), (20, kneel, "in"), (28, U(kneel, torso(0, 60, 0, 0, 16, 0, 0, 12, 0))),
+                                      (34, down, "in"), (37, U(down, hips(0.02, 0, -0.8))), (48, down)],
+                    lag={"head": 2, "arm": 2.5}, key=34))
+    # death_crumple: the legs give out and the body folds straight down into a heap (undead, constructs, the drained)
+    sag = U(B, hips(0, 0, -0.14), torso(0, 14, 8, 0, 10, 0, 0, 12, 0), look(14, -30, 10), arm("L", -84, 10, 20), arm("R", -84, 6, 20))
+    heap = U(RELAX, hips(0, 0.04, -0.7), torso(0, 50, 12, 0, 24, 0, 0, 20, 0), look(30, -40, 20),
+             leg_fk("L", 100, 160, 30, 6), leg_fk("R", 90, 150, 10, 4), arm("L", -50, 20, 30), arm("R", -40, -10, 40))
+    slump = U(heap, hips(0.06, 0.1, -0.8), torso(0, 70, 30, 0, 20, 0, 0, 16, 0), look(40, -30, 30))
+    out.append(anim("death_crumple", 36, [(0, B), (4, sag, "out"), (13, heap, "in"), (18, slump, "in"), (36, slump)],
+                    lag={"head": 2, "arm": 2}, key=13))
+    # devour (loop): crouched over a body on the ground, tearing and feeding (ghoul brute)
+    c1 = U(RELAX, hips(0, 0.06, -0.46), torso(0, 44, 0, 0, 16, 0, 0, 12, 0), look(0, -30),
+           foot("L", 0.3, 0.16, 16, knee=14), foot("R", -0.18, 0.17, 20, heel=30, knee=10),
+           arm("L", -40, 30, 70, 0, 30), arm("R", -30, 20, 60, 0, 30))
+    c2 = U(c1, torso(0, 30, 6, 0, 10, 0, 0, 8, 0), look(10, 10), arm("L", -70, 20, 120, 0, 40), arm("R", -60, 10, 110, 0, 40))
+    c3 = U(c1, torso(0, 50, -4, 0, 18, 0, 0, 14, 0), look(-6, -36), arm("R", -30, 30, 40, 0, 20))
+    out.append(anim("devour", 48, [(0, c1), (10, c2, "out"), (18, c1, "in"), (30, c3), (40, c2), (48, c1)], loop=True,
+                    lag={"head": 1.5, "arm": 1.5}))
     return out
 
 

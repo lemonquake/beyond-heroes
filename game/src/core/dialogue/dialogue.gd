@@ -10,11 +10,15 @@ extends RefCounted
 ##
 ## Conditions (all must hold): {"flag": id} {"not_flag": id} {"flag": id, "value": v} {"level_min": n} {"level_max": n}
 ##   {"class": id} {"visited": "node_id"} {"not_visited": "node_id"} {"item": base_id, "count": n} {"gold": n}
-##   {"relationship_min": n} {"map": id}
+##   {"relationship_min": n} {"map": id} {"guild": id} {"not_guild": id} {"no_guild": true} {"any_guild": true}
+##   {"tier_min": rank} {"tier_max": rank} {"can_promote": true} {"rested": true}
 ## Actions: {"set_flag": id, "value": v} {"give_item": base_id, "count": n, "rarity": r} {"take_item": base_id, "count": n}
 ##   {"give_gold": n} {"take_gold": n} {"give_xp": n} {"open_shop": shop_id} {"relationship": delta}
 ##   {"event": id, ...} (quest-ready hook) {"unlock_teleporter": id} {"heal": 1} {"skill_point": n} {"talent_point": n}
-##   {"service": "respec" | "heal"} (performed by the NPC service layer)
+##   {"service": "respec" | "heal" | "rest" | "mystic_heal" | "promote" | "join_swordfin" | "join_lantern"}
+##   (performed by the NPC service layer after the player confirms the price)
+## Text placeholders filled from the hero: {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
+##   {promo_fee} {promo_level} {promo_deed} {join_fee} {transfer_fee}
 ## Branch node: {"branch": [[conditions, node_id], ...]} jumps to the first matching node without showing anything.
 ##
 ## Text may mark important words with **double asterisks**; the UI highlights them.
@@ -102,6 +106,22 @@ func check(c: Dictionary, hero: HeroData) -> bool:
 		return hero.relationship(npc_id) >= int(c.relationship_min)
 	if c.has("map"):
 		return hero.current_map == StringName(c.map)
+	if c.has("guild"):
+		return hero.guild == StringName(c.guild)
+	if c.has("not_guild"):
+		return hero.guild != StringName(c.not_guild)
+	if c.has("no_guild"):
+		return hero.guild == &""
+	if c.has("any_guild"):
+		return hero.guild != &""
+	if c.has("tier_min"):
+		return hero.tier >= int(c.tier_min)
+	if c.has("tier_max"):
+		return hero.tier <= int(c.tier_max)
+	if c.has("can_promote"):
+		return bool(GuildRules.next_promotion(hero).ok) == bool(c.can_promote)
+	if c.has("rested"):
+		return hero.is_rested() == bool(c.rested)
 	push_warning("Unknown dialogue condition %s" % c)
 	return false
 
@@ -154,6 +174,25 @@ func run_actions(actions: Array, hero: HeroData) -> Dictionary:
 		else:
 			push_warning("Unknown dialogue action %s" % a)
 	return out
+
+## Fill {placeholders} with live values (prices, tier) so dialogue never quotes a stale fee.
+static func fill(text: String, hero: HeroData) -> String:
+	if hero == null or not "{" in text:
+		return text
+	var p := GuildRules.next_promotion(hero)
+	var nxt: int = p.get("rank", -1)
+	var g := DataGuilds.guild(hero.guild)
+	var vals := {
+		"hero": hero.hero_name, "tier": DataGuilds.tier_name(hero.tier), "tier_letter": DataGuilds.letter(hero.tier),
+		"guild": String(g.get("name", "no guild")), "rest_fee": str(NpcServices.rest_cost(hero)),
+		"mystic_fee": str(NpcServices.mystic_heal_cost(hero)),
+		"next_tier": ("Class %s" % DataGuilds.letter(nxt)) if nxt > 0 else "none",
+		"promo_fee": str(p.get("fee", 0)), "promo_level": str(p.get("level", 0)), "promo_deed": String(p.get("deed", "")),
+		"join_fee": str(DataGuilds.tier(1).fee), "transfer_fee": str(DataGuilds.TRANSFER_FEE),
+	}
+	for k in vals:
+		text = text.replace("{%s}" % k, vals[k])
+	return text
 
 ## Convert **important words** to BBCode highlight.
 static func highlight(text: String, color := "#f5cc75") -> String:

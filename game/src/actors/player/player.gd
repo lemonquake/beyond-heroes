@@ -905,7 +905,7 @@ func consume_item(item: ItemInstance) -> bool:
 		if potion_cd > 0.0:
 			return false
 		potion_cd = POTION_COOLDOWN
-	var heal_mult := 1.0 + stats.get_stat(&"healing")
+	var heal_mult := 1.0 + stats.get_stat(&"healing") + GuildRules.potion_healing_bonus(hero)
 	if fx.get("instant", 0.0) > 0.0:
 		heal(max_hp() * float(fx.get("heal", 0.0)) * heal_mult)
 		restore_mana(max_mana() * float(fx.get("mana", 0.0)))

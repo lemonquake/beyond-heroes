@@ -141,7 +141,7 @@ func _has_special(sid: String) -> bool:
 func buy_price(entry_index: int, hero: HeroData, count := 1) -> int:
 	if entry_index < 0 or entry_index >= stock.size():
 		return 0
-	return ShopPricing.buy_total(stock[entry_index].item, def, count, hero.relationship(def.npc))
+	return ShopPricing.buy_total(stock[entry_index].item, def, count, hero.relationship(def.npc), GuildRules.shop_discount(hero, def.id))
 
 ## Buy `count` of a stock entry (count > 1 only for stackables). Returns {ok, error, price, item}.
 func buy(entry_index: int, hero: HeroData, count := 1) -> Dictionary:

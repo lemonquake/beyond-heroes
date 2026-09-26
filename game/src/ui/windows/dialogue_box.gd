@@ -113,7 +113,7 @@ func _on_choices(choices: Array) -> void:
 		var b := Button.new()
 		b.theme_type_variation = &"FlatButton"
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%d.  %s" % [i + 1, Dialogue.plain(String(ch.text))]
+		b.text = "%d.  %s" % [i + 1, Dialogue.plain(Dialogue.fill(String(ch.text), Game.hero))]
 		b.add_theme_font_size_override("font_size", 19)
 		b.add_theme_color_override("font_color", UITheme.PARCHMENT)
 		b.add_theme_color_override("font_hover_color", UITheme.GOLD)
@@ -190,8 +190,13 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 		&"heal":
 			NpcServices.heal(Game.player)
 		&"service":
-			if StringName(arg) == &"respec":
-				_respec()
+			match StringName(arg):
+				&"respec": _respec()
+				&"rest": _rest()
+				&"mystic_heal": _mystic_heal()
+				&"promote": _promote()
+				&"join_swordfin": _join(&"swordfin")
+				&"join_lantern": _join(&"lantern")
 
 func _open_shop_after_end(shop_id: StringName) -> void:
 	var w := Game.ui_root.window(&"shop") as ShopWindow
@@ -207,6 +212,66 @@ func _respec() -> void:
 			var err := NpcServices.respec(h)
 			Events.notify.emit("Your skills and talents are unwoven." if err == "" else err, &"info" if err == "" else &"error"),
 		"Unweave (%d gold)" % cost)
+
+## The Salted Marlin: pay, fade out, wake restored and Well Rested.
+func _rest() -> void:
+	var h := Game.hero
+	var fee := NpcServices.rest_cost(h)
+	var disc := GuildRules.inn_discount(h)
+	var note := " (Lantern Covenant discount)" if disc > 0.0 else ""
+	Game.ui_root.ask("Rest at the Salted Marlin", "Take a room for the night for %d gold%s?\nYou wake fully restored and Well Rested (+%d%% experience for %d minutes)." % [
+			fee, note, roundi(HeroData.RESTED_XP * 100.0), roundi(NpcServices.REST_DURATION / 60.0)],
+		func() -> void:
+			var err := NpcServices.can_rest(h)
+			if err != "":
+				Events.notify.emit(err, &"error")
+				return
+			close()
+			Game.ui_root.fade_rest("You rest at the Salted Marlin...", func() -> void:
+				var err2 := NpcServices.rest(h, Game.player)
+				if err2 != "":
+					Events.notify.emit(err2, &"error")),
+		"Rest (%d gold)" % fee)
+
+func _mystic_heal() -> void:
+	var h := Game.hero
+	var fee := NpcServices.mystic_heal_cost(h)
+	Game.ui_root.ask("Aether Mending", "Seris mends your wounds on the spot for %d gold." % fee,
+		func() -> void:
+			var err := NpcServices.mystic_heal(h, Game.player)
+			if err != "":
+				Events.notify.emit(err, &"error"),
+		"Mend (%d gold)" % fee)
+
+func _join(gid: StringName) -> void:
+	var h := Game.hero
+	var g := DataGuilds.guild(gid)
+	var fee := GuildRules.join_fee(h, gid)
+	var what := "Register as a Class E hero of %s" % g.name if h.guild == &"" else "Transfer to %s (you keep your Class %s tier)" % [g.name, DataGuilds.letter(h.tier)]
+	Game.ui_root.ask(String(g.name), "%s for %d gold?" % [what, fee],
+		func() -> void:
+			var err := GuildRules.join(h, gid)
+			if err != "":
+				Events.notify.emit(err, &"error")
+			else:
+				Game.ui_root.show_tier_award(h.tier, "You joined %s" % g.name),
+		"Join (%d gold)" % fee)
+
+func _promote() -> void:
+	var h := Game.hero
+	var p := GuildRules.next_promotion(h)
+	if not p.ok:
+		Events.notify.emit(String(p.error), &"error")
+		return
+	var t := DataGuilds.tier(int(p.rank))
+	Game.ui_root.ask("Promotion", "Register your promotion to Class %s — %s for %d gold?" % [t.letter, t.title, p.fee],
+		func() -> void:
+			var err := GuildRules.promote(h)
+			if err != "":
+				Events.notify.emit(err, &"error")
+			else:
+				Game.ui_root.show_tier_award(h.tier, "Promoted"),
+		"Promote (%d gold)" % p.fee)
 
 func _on_ended() -> void:
 	close()

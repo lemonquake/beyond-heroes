@@ -31,8 +31,17 @@ var dialogue := {}
 var npc_state := {}
 ## Merchant state that must survive saving (stock, refresh clock, sold specials): shop id -> Shop.to_dict().
 var shops := {}
+## Guild membership and hero tier (docs/LORE.md §5). tier: 0 Unranked, 1..8 = E..SSS (DataGuilds.TIERS).
+var guild: StringName = &""
+var tier := 0
+## "Well Rested" from the inn: active while play_time < rested_until (seconds of play time).
+var rested_until := 0.0
+
+const RESTED_XP := 0.10
+const RESTED_REGEN := 0.5
 
 func setup(p_cls: ClassDef, p_name: String) -> void:
+	equipment.tier_rank = tier
 	cls = p_cls
 	hero_name = p_name
 	progress.setup(cls)
@@ -85,11 +94,29 @@ func init_new() -> void:
 	inventory.add(mp)
 	discovered_maps[&"sanctuary"] = true
 
-## All persistent stat modifiers: equipment + talents.
+## All persistent stat modifiers: equipment + talents + guild/tier + the inn's rest bonus.
 func persistent_modifiers() -> Array:
 	var mods := equipment.modifiers()
 	mods.append_array(talent_tree.modifiers())
+	mods.append_array(GuildRules.modifiers(self))
+	if is_rested():
+		mods.append(StatModifier.inc(&"xp_gain", RESTED_XP, "Well Rested"))
+		mods.append(StatModifier.flat(&"hp_regen", RESTED_REGEN, "Well Rested"))
 	return mods
+
+# ---- Guild, tier, rest -------------------------------------------------------------------------------------
+
+func set_tier(rank: int) -> void:
+	tier = clampi(rank, 0, DataGuilds.MAX_RANK)
+	equipment.tier_rank = tier
+	stats_dirty.emit()
+	Events.tier_changed.emit(tier)
+
+func is_rested() -> bool:
+	return rested_until > play_time
+
+func rested_seconds_left() -> float:
+	return maxf(0.0, rested_until - play_time)
 
 ## Derived stats. `runtime_mods` are temporary (buffs/debuffs/class resource states) supplied by the actor.
 func compute_stats(runtime_mods: Array = []) -> DerivedStats:
@@ -272,6 +299,7 @@ func to_dict() -> Dictionary:
 		"teleporters": unlocked_teleporters.keys().map(func(k): return String(k)),
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
+		"guild": String(guild), "tier": tier, "rested_until": rested_until,
 	}
 
 func _dialogue_out() -> Dictionary:
@@ -330,4 +358,10 @@ static func from_dict(d: Dictionary) -> HeroData:
 	var sh: Dictionary = d.get("shops", {})
 	for k in sh:
 		h.shops[StringName(k)] = (sh[k] as Dictionary).duplicate(true)
+	# guild data (absent in older saves: Unranked, nothing equipped is removed)
+	var g := StringName(d.get("guild", ""))
+	h.guild = g if DataGuilds.GUILDS.has(g) else &""
+	h.tier = clampi(int(d.get("tier", 0)), 0, DataGuilds.MAX_RANK) if h.guild != &"" else 0
+	h.equipment.tier_rank = h.tier
+	h.rested_until = float(d.get("rested_until", 0.0))
 	return h

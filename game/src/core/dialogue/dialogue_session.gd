@@ -60,7 +60,7 @@ func _show_line() -> void:
 	var n := model.node(node_id)
 	var speaker := String(n.get("speaker", npc.display_name))
 	var portrait := String(n.get("portrait", npc.portrait))
-	line_shown.emit(speaker, portrait, Dialogue.highlight(lines[line_index]), line_index, lines.size())
+	line_shown.emit(speaker, portrait, Dialogue.highlight(Dialogue.fill(lines[line_index], hero)), line_index, lines.size())
 	if line_index == lines.size() - 1:
 		var n2 := model.node(node_id)
 		choices = model.choices(n2, hero)
