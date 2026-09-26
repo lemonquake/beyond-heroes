@@ -53,7 +53,7 @@ func _number(pos: Vector3, text: String, color: Color, scale := 1.0, rise := 1.2
 		return
 	var l := _numbers[_next]
 	_next = (_next + 1) % _numbers.size()
-	var tw_old: Tween = l.get_meta(&"tw", null)
+	var tw_old: Tween = l.get_meta(&"tw") if l.has_meta(&"tw") else null
 	if tw_old and tw_old.is_valid():
 		tw_old.kill()
 	l.text = text

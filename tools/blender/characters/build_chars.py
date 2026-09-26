@@ -70,10 +70,10 @@ def export_character(name, out_dir, export_fn, log=print):
     # every action becomes one NLA track (exported as one glTF animation named after the track)
     ad = arm.animation_data or arm.animation_data_create()
     ad.action = None
-    for name, act in res["actions"].items():
+    for an_name, act in res["actions"].items():   # (do not shadow `name`: that exported boss_summon.glb)
         tr = ad.nla_tracks.new()
-        tr.name = name
-        st = tr.strips.new(name, 0, act)
+        tr.name = an_name
+        st = tr.strips.new(an_name, 0, act)
         try:
             st.action_slot = act.slots[0]
         except Exception:

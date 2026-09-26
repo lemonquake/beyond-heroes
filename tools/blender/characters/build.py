@@ -31,6 +31,9 @@ def reset():
 
 
 def export_glb(path, objects, animations=True):
+    sc = bpy.context.scene
+    sc.render.fps = 30          # the glTF exporter samples at the scene rate (Blender default 24 fps)
+    sc.render.fps_base = 1.0
     for o in bpy.context.scene.objects:
         o.select_set(False)
     for o in objects:

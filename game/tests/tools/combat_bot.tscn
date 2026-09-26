@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://tests/tools/combat_bot.gd" id="1"]
+[node name="CombatBot" type="Node"]
+script = ExtResource("1")

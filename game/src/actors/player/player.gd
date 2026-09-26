@@ -36,6 +36,7 @@ var runner: SkillRunner
 var camera: PlayerCamera
 var aim_point := Vector3.ZERO
 var input_enabled := true
+var aim_override := Vector3.INF        # automated playtests aim here instead of at the mouse
 
 var action: TimedAction
 var action_kind := &""                 # light, heavy, charge_release, skill, dodge, interact, potion
@@ -207,6 +208,9 @@ func is_low_hp() -> bool:
 func _update_aim() -> void:
 	if camera == null or not is_inside_tree():
 		return
+	if aim_override.is_finite():
+		aim_point = Vector3(aim_override.x, global_position.y, aim_override.z)
+		return
 	var vp := get_viewport()
 	var mp := vp.get_mouse_position()
 	var from := camera.project_ray_origin(mp)
@@ -374,8 +378,10 @@ func _read_input(delta: float) -> void:
 			Game.hover_loot.request_pickup(self)
 		else:
 			_request(&"light")
-	elif lmb and (action == null or action_kind == &"light"):
-		_request(&"light")   # holding attack keeps the chain going (finisher lock prevents endless spam)
+	elif lmb and (action == null or action_kind == &"light") and (_queued == &"" or _queued == &"light"):
+		# holding attack keeps the chain going (finisher lock prevents endless spam); it never replaces an explicit
+		# buffered intent (skill, heavy, dodge) that is waiting for the current swing's recovery
+		_request(&"light")
 	var wt := _main_type()
 	if Input.is_action_just_pressed(&"secondary") and not _mouse_blocked():
 		if wt != null and wt.charge_max > 0.0:
@@ -1062,11 +1068,13 @@ func _cancel_action(interrupting: bool) -> void:
 		action.finish(false)
 		action = null
 		action_kind = &""
-	visual.set_trail(false)
+	if visual:
+		visual.set_trail(false)
 	_dash_t = 0.0
 	if charging:
 		charging = false
-		visual.stop_action()
+		if visual:
+			visual.stop_action()
 	if not interrupting:
 		_stop_channel()
 		if guarding:
