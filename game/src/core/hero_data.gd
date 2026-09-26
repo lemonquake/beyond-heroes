@@ -329,5 +329,9 @@ static func from_dict(d: Dictionary) -> HeroData:
 		h.npc_state[StringName(k)] = (ns[k] as Dictionary).duplicate(true)
 	var sh: Dictionary = d.get("shops", {})
 	for k in sh:
-		h.shops[StringName(k)] = (sh[k] as Dictionary).duplicate(true)
+		# through the Shop model so numbers come back with their real types (JSON makes every number a float)
+		var shop := Shop.new()
+		shop.def = DB.shop(StringName(k))
+		shop.from_dict(sh[k])
+		h.shops[StringName(k)] = shop.to_dict()
 	return h

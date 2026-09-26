@@ -78,7 +78,8 @@ func _ready() -> void:
 func to_dict() -> Dictionary:
 	var d := {}
 	for k in KEYS:
-		d[k] = get(k)
+		var v = get(k)
+		d[k] = v.duplicate(true) if v is Dictionary else v   # never hand out the live bindings dictionary
 	return d
 
 func from_dict(d: Dictionary) -> void:
@@ -98,7 +99,7 @@ func _coerce(k: String, v: Variant) -> Variant:
 		TYPE_INT: return int(v)
 		TYPE_FLOAT: return float(v)
 		TYPE_BOOL: return bool(v)
-		TYPE_DICTIONARY: return v if v is Dictionary else {}
+		TYPE_DICTIONARY: return (v as Dictionary).duplicate(true) if v is Dictionary else {}
 	return v
 
 func load_file() -> void:
@@ -320,7 +321,9 @@ static func binding_text(action: StringName) -> String:
 	for e in InputMap.action_get_events(action):
 		if e is InputEventKey:
 			var code: Key = e.physical_keycode if e.physical_keycode != 0 else e.keycode
-			return OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 else code)
+			if e.physical_keycode != 0 and DisplayServer.get_name() != "headless":
+				code = DisplayServer.keyboard_get_label_from_physical(code)   # the key's label on the player's layout
+			return OS.get_keycode_string(code)
 		if e is InputEventMouseButton:
 			return {MOUSE_BUTTON_LEFT: "LMB", MOUSE_BUTTON_RIGHT: "RMB", MOUSE_BUTTON_MIDDLE: "MMB",
 				MOUSE_BUTTON_WHEEL_UP: "Wheel Up", MOUSE_BUTTON_WHEEL_DOWN: "Wheel Down"}.get(e.button_index, "Mouse %d" % e.button_index)
