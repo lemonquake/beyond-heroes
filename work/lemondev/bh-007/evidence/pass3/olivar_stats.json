@@ -1,0 +1,15 @@
+{
+  "build_ms": 1436,
+  "mesh_instances": 323,
+  "nav_polygons": 2089,
+  "nodes": 1038,
+  "omni_lights": 56,
+  "shadowed_omni": 0,
+  "spawns": [
+    "olivar_shrine",
+    "start",
+    "west_road",
+    "south_road"
+  ],
+  "teleporters": 1
+}

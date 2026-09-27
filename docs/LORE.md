@@ -219,9 +219,32 @@ between the town, the sea and the Ruined Forest. Roads rejoin, so a hero can lea
 | **Lantern Fields** | Working terraced farms that feed the town. Farmers hang lanterns at the field corners. Goblins raid the stores. |
 | **Tideglass Cove** | The fishing beach under the western cliffs: a pier, boats, drying racks and an old waypoint shrine. |
 | **Saltmouth Cave** | A sea cave in the headland north of the cove where smugglers hide the cove's missing shipment. |
-| **The roads** | Mill Road, Field Road, Cove Steps (a switchback trail), Coast Road (along the clifftops), Mill Lane, Forest Road, Lake Shore Road (closed). |
-| **Stillwater Lake** | The lake in the island's interior that feeds the millstream. Not yet reachable. |
-| **Northern Heights**, **Reedwater Marsh**, **Eastern Shore** | Uncharted regions shown under mist on the island map. Not yet reachable. |
+| **The roads** | Mill Road, Field Road, Cove Steps (a switchback trail), Coast Road (along the clifftops), Mill Lane, Forest Road, Lake Shore Road (planked over by Olivar's traders after the washout), Fen Road (over the Fen Bridge to Wyman Outpost), Watch Road (Olivar to Wyman Outpost). |
+| **Olivar** *(name set by the author)* | A walled lake-trade town on the south shore of Stillwater Lake, east of the Old Mill (one map, `olivar`). Safe. Its merchants sell advanced arms, jewels and draughts at a premium and turn their stock over whenever heroes bring word of a cleared stage or a fallen champion ("news moves prices"). Waypoint on the Lake Terrace. |
+| **Wyman Outpost** *(name set by the author)* | A hero camp on a rise above Reedwater Marsh (one map, `wyman_outpost`). Safe. A round stockade around a great bonfire where heroes rest and set their checkpoint; the Hero Register lists every hero in camp by level, tier and guild. Swordfin and Lantern heroes share the fire. Waypoint inside the stockade. |
+| **Stillwater Lake** | The lake in the island's interior that feeds the millstream. Olivar's docks and barges work its south shore; the north-shore timber barges stopped running last month. |
+| **Northern Heights**, **Reedwater Marsh**, **Eastern Shore** | Uncharted regions shown under mist on the island map. Reedwater Marsh is watched from Wyman Outpost's overlook; an old causeway once crossed it. Not yet reachable. |
+
+**People of Olivar** *(provisional)*: Reeve Hollis Garrow (the reeve), Corvin Ashby (Ashby's Arms Exchange), Elsbeth Crane
+(Crane's Fine Settings, jeweller), Master Aldous Pell (Pell's Apothecary, alchemist), Wren Talbot (dockmaster), Pip
+Larkspur (bard; keeps the tally of the island's champions).
+
+**Wyman Outpost** *(provisional)*: heroes Sir Aldric Vane (commander, Class B, Swordfin), Gideon Rusk (B, Swordfin),
+Sabine Kestrel (C, Lantern), Maren Holt (C, Lantern), Yorick Dunmore (C, Lantern), Odo Fairweather (D, Swordfin), Tamsin
+Brisk (D, independent), Nell Carrow (E, independent); staff Hobb Tanner (quartermaster), Greta Stonehand (field smith,
+Brannoc's apprentice once), Ottilie Brand (camp healer).
+
+**Champions** (minibosses, provisional): named brutes holding camps. **Snagtooth the Fence** (goblins, Westreach),
+**Greymaw** (pack mother, the coast clifftop), **Rook Hallister** (smuggler captain, Saltmouth Cave), **Warchief Karg**
+(orc scouts, Ruined Forest), **Grundle the Chained** (the ogre on the watchtower hill), **The Ossuary Keeper**
+(Catacombs). A beaten champion crawls back to its camp after a while. Their essence is the base of Elite and Master
+crafting.
+
+**Crafting.** Monsters carry usable parts (wolf fangs, fire-pot resin, orc tusks, ogre sinew, grave dust, ghoul bile, ash
+sigils, wisp motes, stolen linen, rune plates); herbs grow in the wild (Silverleaf by roads and field walls, Mirebloom by
+water, Emberroot where it is warm, Brightcap in deep shade). Forges (Brannoc's anvil, Wyman's field forge), alchemy
+tables (Pell's, Wyman's camp kettle) and the camp workbench turn them into draughts, bombs, scrolls, charms, ingots and
+gear of fine quality. Recipe scrolls teach the rest.
 
 **Waypoint network.** The Sanctuary Terrace, the Ruined Forest glade and the Tideglass Cove shrine are linked: from
 any one of them a hero can travel to any other they have already *awakened* (stood on). Dungeon gates (the Catacombs,

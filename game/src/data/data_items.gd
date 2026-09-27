@@ -147,7 +147,7 @@ static func bases() -> Array:
 	out.append(_b(&"return_scroll", "Scroll of Return", &"consumable", "scroll_return", {"stack_max": 10, "value": 30,
 		"consumable_effect": {"return": 1.0}, "flavor": "Opens a path back to the waypoint on the Sanctuary Terrace in Malasugue."}))
 	_consumables(out)
-	out.append(_b(&"iron_shard", "Iron Shard", &"material", "mat_iron_shard", {"stack_max": 99, "value": 2, "flavor": "Salvaged metal. Used for reforging."}))
+	out.append(_b(&"iron_shard", "Iron Shard", &"material", "mat_iron_shard", {"stack_max": 99, "value": 2, "flavor": "Salvaged metal. Five make a Steel Ingot at a forge."}))
 	out.append(_b(&"arcane_dust", "Arcane Dust", &"material", "mat_arcane_dust", {"stack_max": 99, "value": 4, "flavor": "Residue of broken enchantments."}))
 	out.append(_b(&"ember_core", "Ember Core", &"material", "mat_ember_core", {"stack_max": 50, "value": 10, "flavor": "A still-warm heart of cinders."}))
 	out.append(_b(&"bone_fragment", "Bone Fragment", &"material", "mat_bone_fragment", {"stack_max": 99, "value": 1, "flavor": "Remains of the restless dead."}))
@@ -157,6 +157,7 @@ static func bases() -> Array:
 	out.append(_b(&"beast_hide", "Beast Hide", &"material", "beast_hide", {"stack_max": 50, "value": 3, "flavor": "Tough hide from the corrupted beasts of the forest."}))
 	out.append(_b(&"aether_shard", "Aether Shard", &"material", "aether_shard", {"stack_max": 999, "value": 40,
 		"flavor": "Crystallized Aether. Merchants of rare goods accept nothing else."}))
+	DataCrafting.materials(out)   # bh-007: ingredients, refined stock, champion essence, recipe scrolls
 	out.append(_b(&"quest_seal_key", "Seal of the First Oath", &"quest", "quest_seal_key", {"sellable": false, "value": 0,
 		"flavor": "A heavy bronze seal, warm to the touch. It once kept the Hollow Throne shut."}))
 	out.append(_b(&"quest_tablet", "Ritual Tablet", &"quest", "quest_tablet", {"sellable": false, "value": 0,

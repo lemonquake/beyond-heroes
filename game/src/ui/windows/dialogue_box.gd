@@ -7,7 +7,7 @@ extends Control
 const CPS := 55.0             # characters per second
 ## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
-	&"tempo_revive", &"tempo_renowned", &"field_guide"]
+	&"tempo_revive", &"tempo_renowned", &"field_guide", &"craft_forge", &"craft_alchemy", &"craft_workbench", &"hero_roster", &"camp_rest"]
 
 var session: DialogueSession
 var npc: Npc
@@ -212,6 +212,33 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				&"join_lantern": _join(&"lantern")
 				&"tempo_hire", &"tempo_revive", &"tempo_renowned": _open_tempo_caller.call_deferred(StringName(arg))
 				&"field_guide": _open_field_guide.call_deferred()
+				&"craft_forge", &"craft_alchemy", &"craft_workbench": _open_crafting.call_deferred(StringName(String(arg).trim_prefix("craft_")))
+				&"hero_roster": _open_roster.call_deferred()
+				&"camp_rest": _camp_rest.call_deferred()
+
+func _open_crafting(station: StringName) -> void:
+	# the name of that station on this map ("Pell's Alchemy Table", "Field Forge", "Brannoc's Anvil"), else the generic one
+	var label := String(DataCrafting.STATIONS.get(station, {}).get("name", ""))
+	for s in get_tree().get_nodes_in_group(&"crafting_station"):
+		if s is CraftingStation and s.station == station:
+			label = s.label
+			break
+	close()
+	Game.ui_root.open_crafting(station, label)
+
+func _open_roster() -> void:
+	var camp := Game.current_map_id
+	close()
+	Game.ui_root.open_roster(camp)
+
+## Rest at a camp's bonfire from a conversation (the camp healer offers it): free, sets the checkpoint.
+func _camp_rest() -> void:
+	close()
+	var fires := get_tree().get_nodes_in_group(&"checkpoint")
+	if fires.is_empty():
+		Events.notify.emit("There is no bonfire here.", &"error")
+		return
+	(fires[0] as CampBonfire).interact(Game.player)
 
 func _open_field_guide() -> void:
 	close()

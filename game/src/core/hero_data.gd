@@ -49,6 +49,19 @@ var tempo_roster := {}
 var tempo_serial := 0
 ## Open Town Portal (TownPortal): {"map": map id, "pos": [x, y, z], "yaw": float} or empty. Cleared on death / dispel.
 var town_portal := {}
+## Crafting (bh-007): recipes learned from scrolls (recipe id -> true; recipes marked `known` need no entry) and how
+## many things this hero has made.
+var known_recipes := {}
+var crafted_count := 0
+## Stages and minibosses (bh-007). clear_count: every stage cleared and every miniboss defeated (Olivar's merchants
+## restock whenever it moves). stages_cleared: map id -> times. miniboss_log: miniboss id -> {"kills", "at" (play time)}.
+var clear_count := 0
+var stages_cleared := {}
+var miniboss_log := {}
+## The last camp checkpoint rested at (Wyman Outpost's bonfire): {"map", "spawn", "name"} or empty.
+var checkpoint := {}
+## Herb patches picked: "map/node" -> play time they were picked (they regrow after GatherNode.REGROW seconds).
+var gather_log := {}
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -323,7 +336,21 @@ func to_dict() -> Dictionary:
 		"guild": String(guild), "tier": tier, "rested_until": rested_until,
 		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
 		"town_portal": town_portal.duplicate(true),
+		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
+		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
+		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
 	}
+
+static func _keyed_plain(src: Dictionary) -> Dictionary:
+	var d := {}
+	for k in src:
+		d[String(k)] = src[k]
+	return d
+
+## A clear (stage or miniboss) happened: count it and tell listeners (Olivar restocks, HUD notice).
+func add_clear() -> void:
+	clear_count += 1
+	Events.clears_changed.emit(clear_count)
 
 func _dialogue_out() -> Dictionary:
 	var d := {}
@@ -409,6 +436,28 @@ static func from_dict(d: Dictionary) -> HeroData:
 		h.tempo_roster = {"offers": (roster.get("offers", []) as Array).map(func(o): return TempoData.from_dict(o).to_dict()),
 			"refresh_at": float(roster.get("refresh_at", 0.0)), "serial": int(roster.get("serial", 0)),
 			"grade": clampi(int(roster.get("grade", 1)), 1, DataTempos.max_grade())}
+	# crafting, stages, minibosses, checkpoint, herbs (bh-007; absent in older saves)
+	for rid in d.get("known_recipes", []):
+		if not DataCrafting.recipe(StringName(rid)).is_empty():
+			h.known_recipes[StringName(rid)] = true
+	h.crafted_count = int(d.get("crafted_count", 0))
+	h.clear_count = maxi(0, int(d.get("clear_count", 0)))
+	var sc = d.get("stages_cleared", {})
+	if sc is Dictionary:
+		for k in sc:
+			h.stages_cleared[StringName(k)] = int(sc[k])
+	var ml = d.get("miniboss_log", {})
+	if ml is Dictionary:
+		for k in ml:
+			if ml[k] is Dictionary:
+				h.miniboss_log[StringName(k)] = {"kills": int(ml[k].get("kills", 0)), "at": float(ml[k].get("at", 0.0))}
+	var cp = d.get("checkpoint", {})
+	if cp is Dictionary and cp.has("map") and DB.map_def(StringName(cp.map)) != null:
+		h.checkpoint = {"map": String(cp.map), "spawn": String(cp.get("spawn", "start")), "name": String(cp.get("name", ""))}
+	var gl = d.get("gather_log", {})
+	if gl is Dictionary:
+		for k in gl:
+			h.gather_log[String(k)] = float(gl[k])
 	h.tempo_serial = int(d.get("tempo_serial", 0))
 	for t in h.tempos:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)

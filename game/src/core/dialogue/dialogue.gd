@@ -19,7 +19,7 @@ extends RefCounted
 ##   "tempo_revive"}
 ##   (performed by the NPC service layer after the player confirms the price)
 ## Text placeholders filled from the hero: {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
-##   {promo_fee} {promo_level} {promo_deed} {promo_deed_text} {join_fee} {transfer_fee}
+##   {promo_fee} {promo_level} {promo_deed} {promo_deed_text} {join_fee} {transfer_fee} {champions} {clears}
 ##   and {key:<input action>} — the key currently bound to that action ("I", "Space", "LMB"), so tutorials never quote
 ##   a stale key after the player rebinds it.
 ## Branch node: {"branch": [[conditions, node_id], ...]} jumps to the first matching node without showing anything.
@@ -201,6 +201,10 @@ static func fill(text: String, hero: HeroData) -> String:
 		"promo_deed_text": String(p.get("deed", "")) if String(p.get("deed", "")) != "" else "none required",
 		"join_fee": str(DataGuilds.tier(1).fee), "transfer_fee": str(DataGuilds.TRANSFER_FEE),
 	}
+	# bh-007: champions (minibosses) and the clear counter behind Olivar's stock
+	if "{champions}" in text:
+		vals["champions"] = DataMinibosses.rumours(hero)
+	vals["clears"] = str(hero.clear_count)
 	for k in vals:
 		text = text.replace("{%s}" % k, vals[k])
 	return text

@@ -10,6 +10,8 @@ Geography must agree with the game data:
     with its origin (400, 544) and 0.7 m per atlas pixel (DataIsland.MAP_ORIGIN / PX_M);
   - Malasugue sits at (240, 527) (47 m plateau radius), the Ruined Forest map at (366, 402) (144 x 96 m),
   - the millstream follows Westreach's STREAM; Stillwater Lake is centred at (575, 392).
+  - Olivar's origin is (601.5, 514) and Wyman Outpost's (618.7, 681) (bh-007); their walls, houses and tents are painted
+    from the same layout constants as src/world/maps/olivar.gd and wyman_outpost.gd.
 The north and east coast follow the concept atlas (work/map-concept-2026-09-27/atlas-preview.html).
 
 Run: python tools/ui_art/salmonan_atlas.py
@@ -34,6 +36,8 @@ WESTREACH_LAND = [(-212, -90), (-203, -60), (-201, -30), (-205, 0), (-200, 40), 
                   (-40, 142), (-10, 140), (20, 136), (50, 134), (80, 138), (120, 150)]
 STREAM = [(74, -66), (46, -44), (24, -32), (16, -22), (15.5, -10), (19, 2), (26, 20), (42, 48), (54, 78), (62, 108), (66, 134)]
 TOWN = (240.0, 527.0)
+OLIVAR = (601.5, 514.0)        # DataIsland.MAP_ORIGIN (bh-007)
+WYMAN = (618.7, 681.0)
 FOREST = (366.0, 402.0)
 LAKE = (575.0, 392.0)
 
@@ -248,7 +252,9 @@ def main():
     density += np.clip(ellipse_mask((700, 300), (90, 80), blur=40), 0, 1) * 0.55
     density += smoothstep(360, 200, ay) * 0.45 * (1 - smoothstep(0.85, 1.1, height))
     density += np.clip(ellipse_mask((290, 600), (60, 40), blur=24), 0, 1) * 0.35
-    density *= land * (1 - lake) * (1 - town) * (1 - fmask) * (1 - marsh * 0.8) * smoothstep(6, 14, d_in)
+    clear_olv = np.clip(ellipse_mask((OLIVAR[0], OLIVAR[1] + 4), (78, 66), blur=10), 0, 1)
+    clear_wy = np.clip(ellipse_mask(WYMAN, (52, 52), blur=10), 0, 1)
+    density *= land * (1 - lake) * (1 - town) * (1 - fmask) * (1 - marsh * 0.8) * smoothstep(6, 14, d_in) * (1 - clear_olv) * (1 - clear_wy)
     density *= np.clip(0.7 + noise((H, W), 50, 3) * 0.6, 0, 1)
     density = np.clip(density, 0, 1)
     burnt = ellipse_mask((330, 408), (60, 40), blur=24)
@@ -323,6 +329,60 @@ def main():
         tdw.rectangle([(x - w) * S, (y - h) * S, (x + w) * S, (y - h * 0.2) * S], fill=(128, 70, 50, 255))
     tdw.ellipse([(cx - 7) * S, (cy - 3) * S, (cx + 7) * S, (cy + 11) * S], fill=(70, 110, 120, 255))
     base.alpha_composite(tw)
+
+    # ---- Olivar (bh-007): the walled square above the lake, rooftops, the plaza, the trading house and the pier
+    def olv(x, z):
+        return (OLIVAR[0] + x / PX_M, OLIVAR[1] + z / PX_M)
+    ow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    od2 = ImageDraw.Draw(ow)
+    a0, a1 = olv(-46, -36), olv(46, 42)
+    od2.rectangle([a0[0] * S, a0[1] * S, a1[0] * S, a1[1] * S], fill=(62, 62, 46, 255))
+    for (x0, z0, x1, z1) in [(-46, -36, -46, 42), (-46, 42, 46, 42), (46, 42, 46, -36)]:
+        steps = int(max(abs(x1 - x0), abs(z1 - z0)) / 3)
+        for i in range(steps + 1):
+            t = i / max(1, steps)
+            x, z = x0 + (x1 - x0) * t, z0 + (z1 - z0) * t
+            if (x0 == x1 and abs(z - 12) < 4.5) or (z0 == z1 and abs(x - 20) < 4.5):
+                continue
+            q = olv(x, z)
+            od2.rectangle([(q[0] - 1.1) * S, (q[1] - 1.1) * S, (q[0] + 1.1) * S, (q[1] + 1.1) * S], fill=(82, 60, 40, 255))
+    pc = olv(0, 4)
+    od2.ellipse([(pc[0] - 13) * S, (pc[1] - 13) * S, (pc[0] + 13) * S, (pc[1] + 13) * S], fill=(92, 88, 76, 255))
+    for (x, z, w, h) in [(-30, 22, 5, 6), (-33, 34.5, 5, 5), (30, 22, 5, 6), (33, 34, 5, 5), (-5, 32, 6, 5), (31, -24, 5, 5),
+                         (-36, -23, 5, 5), (7, 32.5, 6, 5), (-31, -9, 5, 6), (31, -2, 7, 9)]:
+        q = olv(x, z)
+        od2.rectangle([(q[0] - w) * S, (q[1] - h) * S, (q[0] + w) * S, (q[1] + h) * S], fill=(96, 50, 38, 255))
+        od2.rectangle([(q[0] - w) * S, (q[1] - h) * S, (q[0] + w) * S, (q[1] - h * 0.2) * S], fill=(128, 70, 50, 255))
+    pier0, pier1 = olv(2, -44), olv(6, -62)
+    od2.rectangle([pier0[0] * S, pier1[1] * S, pier1[0] * S, pier0[1] * S], fill=(92, 70, 46, 255))
+    base.alpha_composite(ow)
+
+    # ---- Wyman Outpost (bh-007): the round stockade, tents around the bonfire, the overlook above the marsh
+    def wy(x, z):
+        return (WYMAN[0] + x / PX_M, WYMAN[1] + z / PX_M)
+    ww = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    wd = ImageDraw.Draw(ww)
+    c = wy(0, 0)
+    rr = 31 / PX_M
+    wd.ellipse([(c[0] - rr) * S, (c[1] - rr) * S, (c[0] + rr) * S, (c[1] + rr) * S], fill=(66, 60, 42, 255))
+    for i in range(80):
+        a = 2 * math.pi * i / 80
+        deg = math.degrees(a)
+        if abs(((deg + 80) + 180) % 360 - 180) < 8 or abs(((deg - 158) + 180) % 360 - 180) < 8:
+            continue
+        q = (c[0] + math.cos(a) * rr, c[1] + math.sin(a) * rr)
+        wd.rectangle([(q[0] - 1.1) * S, (q[1] - 1.1) * S, (q[0] + 1.1) * S, (q[1] + 1.1) * S], fill=(82, 60, 40, 255))
+    for (x, z) in [(-19, -11), (-9, -26), (13, -21), (21, -10), (10, 22), (20, 17), (3, 26), (-24, 3), (-6, -22)]:
+        q = wy(x, z)
+        wd.polygon([((q[0] - 3.2) * S, (q[1] + 2.4) * S), (q[0] * S, (q[1] - 2.8) * S), ((q[0] + 3.2) * S, (q[1] + 2.4) * S)], fill=(150, 128, 92, 255))
+        wd.line([(q[0] * S, (q[1] - 2.8) * S), (q[0] * S, (q[1] + 2.4) * S)], fill=(100, 84, 60, 255), width=S)
+    wbase = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    gdw = ImageDraw.Draw(wbase)
+    f = wy(-4, -2)
+    gdw.ellipse([(f[0] - 6) * S, (f[1] - 6) * S, (f[0] + 6) * S, (f[1] + 6) * S], fill=(255, 150, 60, 170))
+    wbase = wbase.filter(ImageFilter.GaussianBlur(5))
+    base.alpha_composite(ww)
+    base.alpha_composite(wbase)
 
     # ---- grain and a vignette so it reads as an old chart under the UI frame
     arr = np.asarray(base.convert("RGB"), np.float32) / 255.0

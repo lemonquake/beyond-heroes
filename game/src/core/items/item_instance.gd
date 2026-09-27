@@ -21,6 +21,7 @@ var seed_value := 0
 var locked := false                        # cannot be sold, dropped or destroyed
 var favorite := false                      # sorted first, protected like locked
 var junk := false                          # marked for "sell junk" at merchants
+var crafted := false                       # made at a crafting station (bh-007): shown in the tooltip
 
 func _init() -> void:
 	_uid_counter += 1
@@ -177,6 +178,8 @@ func to_dict() -> Dictionary:
 		d["favorite"] = true
 	if junk:
 		d["junk"] = true
+	if crafted:
+		d["crafted"] = true
 	return d
 
 static func from_dict(d: Dictionary) -> ItemInstance:
@@ -205,6 +208,7 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	it.locked = bool(d.get("locked", false))
 	it.favorite = bool(d.get("favorite", false))
 	it.junk = bool(d.get("junk", false))
+	it.crafted = bool(d.get("crafted", false))
 	return it
 
 func clone() -> ItemInstance:

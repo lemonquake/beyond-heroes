@@ -103,6 +103,18 @@ MAT = {
     "flame": ("BH_Emissive", (0.78, 0.12, 0.02), 0.0, 0.5, (1.0, 0.22, 0.02), 0.4),
     "flame_tip": ("BH_Emissive", (0.95, 0.45, 0.05), 0.0, 0.5, (1.0, 0.5, 0.06), 0.6),
     "smoke": ("BH_Stone", (0.3, 0.3, 0.32), 0.0, 0.95, None, 0),
+    # bh-007 ingredients
+    "leaf": ("BH_Cloth_Secondary", (0.16, 0.34, 0.12), 0.0, 0.8, None, 0),
+    "silverleaf": ("BH_Cloth_Secondary", (0.62, 0.72, 0.64), 0.0, 0.7, None, 0),
+    "stem": ("BH_Wood", (0.22, 0.28, 0.12), 0.0, 0.8, None, 0),
+    "mirebloom": ("BH_Emissive", (0.18, 0.32, 0.9), 0.0, 0.4, (0.3, 0.5, 1.0), 0.6),
+    "emberroot": ("BH_Emissive", (0.55, 0.12, 0.05), 0.0, 0.6, (1.0, 0.3, 0.1), 0.35),
+    "brightcap": ("BH_Emissive", (0.45, 0.95, 0.7), 0.0, 0.4, (0.5, 1.0, 0.75), 1.1),
+    "capstem": ("BH_Cloth_Secondary", (0.75, 0.7, 0.58), 0.0, 0.8, None, 0),
+    "tusk": ("BH_Horn", (0.8, 0.72, 0.5), 0.0, 0.4, None, 0),
+    "sinew": ("BH_Leather", (0.45, 0.14, 0.12), 0.0, 0.45, None, 0),
+    "resin": ("BH_Stone", (0.06, 0.045, 0.03), 0.0, 0.2, None, 0),
+    "bile": ("BH_Emissive", (0.35, 0.45, 0.08), 0.0, 0.2, (0.45, 0.6, 0.1), 0.5),
 }
 
 # element index (Godot Elements enum) -> glow palette key

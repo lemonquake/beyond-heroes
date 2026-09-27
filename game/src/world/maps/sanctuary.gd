@@ -259,6 +259,7 @@ func _market_and_smithy() -> void:
 	# smithy yard
 	var y := Vector3(18, 0, 26)
 	kit("anvil", y + Vector3(0, 0, 0), 30.0, 1.0, props, true)
+	crafting_station(&"forge", y + Vector3(0.0, 0, 0.9), "Brannoc's Anvil")
 	kit("weapon_rack", y + Vector3(-3.0, 0, -2.0), 20.0, 1.0, props, true)
 	kit("weapon_rack", y + Vector3(3.0, 0, 1.8), -70.0, 1.0, props, true)
 	brazier(y + Vector3(1.6, 0, -1.8), 3.4, true, true)

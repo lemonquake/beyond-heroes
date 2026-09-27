@@ -148,6 +148,7 @@ static func _brannoc() -> NpcDef:
 				"hub": {"text": "Forge is hot. What will it be?",
 					"choices": [
 						{"text": "Let me see what you have.", "next": "end", "actions": [{"open_shop": "brannoc_forge"}]},
+						{"text": "Can I use your anvil?", "next": "anvil"},
 						{"text": "Tell me about rarity again.", "next": "steel"},
 						{"text": "Anything special in stock?", "next": "special"},
 						_end("Keep the fire going."),
@@ -158,6 +159,17 @@ static func _brannoc() -> NpcDef:
 				]},
 				"special_no": {"text": "Special? Come back when you have seen what is under the chapel. I will not waste my best plate on a stranger who has not.", "next": "hub"},
 				"special_yes": {"text": "For you, yes. I rebuilt an **Aether Guardian** helm from the old order's patterns. Level eight or better, and it is yours for the right price.", "next": "hub"},
+				"anvil": {"branch": [
+					[[{"not_visited": "anvil_first"}], "anvil_first"],
+					[[], "anvil_go"],
+				]},
+				"anvil_first": {"text": [
+						"You want to work your own steel? Good. Saves me the sweat.",
+						"Five **iron shards** make an **ingot**. Ingots, cured leather and the right monster parts make a blade or a plate, and it comes out **fine quality** every time, which is more than I can say for what the dead drop.",
+						"Anything you do not want, break down on the anvil. Iron back, and dust if it was enchanted. The camp at **Wyman Outpost** keeps a field forge too, if you are ever out that way."],
+					"actions": [{"relationship": 3}],
+					"choices": [{"text": "Show me the anvil.", "next": "end", "actions": [{"service": "craft_forge"}]}, {"text": "Maybe later.", "next": "hub"}]},
+				"anvil_go": {"text": "The anvil is yours. Do not dent it.", "next": "end", "actions": [{"service": "craft_forge"}]},
 				"temple_steel": {"text": "You broke the temple seal. My forge flared blue the same night. Whatever steel they buried there, I want to see it. Bring me anything strange you find.",
 					"actions": [{"relationship": 5}], "next": "hub"},
 			},

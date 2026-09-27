@@ -752,6 +752,48 @@ func signpost(p: Vector2, arms: Array, y := NAN) -> Node3D:
 	light(Vector3(p.x + 0.6, y + 2.9, p.y + 0.6), Color(1.0, 0.72, 0.42), 1.6, 6.0, false, true)
 	return root3
 
+## bh-007: a herb patch (GatherNode) on the ground; its save key is "<map>/<n>" in placement order (deterministic).
+var _herb_count := 0
+func herb_patch(herb: StringName, p: Vector3, on_ground := true) -> GatherNode:
+	_herb_count += 1
+	var g := GatherNode.new().setup(herb, "%s/%d" % [def.id, _herb_count])
+	var q := p
+	if on_ground:
+		q.y += ground(p.x, p.z)
+	g.position = q
+	markers.add_child(g)
+	return g
+
+## bh-007: the interactable part of a crafting station (the furniture is placed with kit()).
+func crafting_station(station: StringName, p: Vector3, label := "", on_ground := true) -> CraftingStation:
+	var c := CraftingStation.new().setup(station, label)
+	var q := p
+	if on_ground:
+		q.y += ground(p.x, p.z)
+	c.position = q
+	markers.add_child(c)
+	return c
+
+## bh-007: a camp bonfire checkpoint with its fire, light and the spawn the hero wakes on.
+func bonfire(camp: String, p: Vector3, spawn_id: StringName, wake_yaw := 0.0) -> CampBonfire:
+	var y := ground(p.x, p.z)
+	var n := kit("campfire", Vector3(p.x, y, p.z), 0.0, 1.6, props)
+	var f := socket_pos(n, "flame")
+	flame(f, 2.2)
+	light(f + Vector3(0, 1.2, 0), FIRE, 8.5, 20.0, true, true)
+	var smoke := VFXLib.particles(Color(0.3, 0.3, 0.32, 0.25), 16, 4.0, false, 1.6, 0.8, 10.0, Vector3(0, 0.8, 0), 0.3, false)
+	smoke.position = f + Vector3(0, 1.2, 0)
+	deco.add_child(smoke)
+	var embers := VFXLib.particles(Color(1.0, 0.6, 0.25, 0.9), 14, 1.6, false, 0.3, 1.8, 25.0, Vector3(0, 1.6, 0), 0.08, false)
+	embers.position = f + Vector3(0, 0.4, 0)
+	deco.add_child(embers)
+	var b := CampBonfire.new().setup(camp, spawn_id)
+	b.position = Vector3(p.x, y, p.z)
+	markers.add_child(b)
+	var out := Vector3(sin(deg_to_rad(wake_yaw)), 0, cos(deg_to_rad(wake_yaw))) * 3.4
+	spawn(spawn_id, Vector3(p.x + out.x, 0, p.z + out.z), wake_yaw, true)
+	return b
+
 ## Named point of interest used by previews and (later) the world map / camera cinematics.
 func view(name: String, target: Vector3, yaw_deg := 0.0, pitch_deg := 50.0, dist := 22.0, fov := 45.0) -> void:
 	root.views[name] = {"target": target, "yaw": yaw_deg, "pitch": pitch_deg, "dist": dist, "fov": fov}

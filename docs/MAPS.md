@@ -38,6 +38,27 @@ still leads to its own destination, and also to every other network shrine the h
 (`HeroData.awakened_shrines`, separate from the "discovered" `unlocked_teleporters`). With more than one destination,
 activating asks where to go.
 
+## Olivar and Wyman Outpost (bh-007, safe zones; provisional, LORE §6b)
+
+| Map (id) | Arrive at | What is there | Leads to |
+|---|---|---|---|
+| Olivar (`olivar`) | `west_road`, `south_road`, `olivar_shrine`, `start` | Walled lake-trade town: plaza with the Founder's statue, Ashby's Arms Exchange, Crane's jewel stall, Pell's Apothecary and alchemy table, docks and pier, the Lake Terrace waypoint | West gate → Westreach (Lake Shore Road); south gate → Wyman Outpost (Watch Road) |
+| Wyman Outpost (`wyman_outpost`) | `north_road`, `west_road`, `wyman_shrine`, `bonfire`, `start` | Round stockade around the bonfire checkpoint, heroes' tents and banners, commander's lodge, Hero Register board, quartermaster, field forge, workbench, camp kettle, training yard with dummies, watchtower, Marsh Overlook above Reedwater Marsh | North gate → Olivar (Watch Road); west gate → Westreach (Fen Road) |
+
+Both build from `SettlementBuilder` (`src/world/maps/settlement_builder.gd`): a terrain lattice with DataIsland's road
+polylines flattened into it, palisade runs with gate gaps, gatehouses, corridor rails to the district boundaries,
+footprint-aware greenery. New walk-through boundaries: `westreach_lake_road` ↔ `olivar_west_road`,
+`olivar_watch_road` ↔ `wyman_watch_road`, `westreach_fen_road` ↔ `wyman_fen_road`. The Olivar and Wyman waypoints join
+the network. The loop Old Mill → Lake Shore Road → Olivar → Watch Road → Wyman Outpost → Fen Road → Lantern Fields →
+Mill Lane → Old Mill is walkable end to end.
+
+Westreach changes: the map is 15 m wider in the east (`W` 310), the Lake Shore Road's washout is planked over and runs to
+the east boundary, the Fen Road leaves Lantern Fields over the new **Fen Bridge**. Herb patches (`GatherNode`) stand in
+Westreach, the Ruined Forest, Olivar and Wyman Outpost. Crafting stations (`CraftingStation`): Brannoc's anvil
+(Malasugue), Pell's alchemy table (Olivar), the field forge, camp workbench and camp kettle (Wyman Outpost). The
+Ruined Forest's chained ogre is now the miniboss Grundle (DataMinibosses); other champions hold camps in Westreach, the
+Ruined Forest and the Catacombs.
+
 ## Westreach and the island (provisional, LORE §6b)
 
 `westreach` (levels 1–4) is the district below Malasugue's South Gate: Old Mill Crossroads, Lantern Fields and

@@ -8,6 +8,12 @@ var map: MapRoot
 var difficulty := {}
 var rng := RandomNumberGenerator.new()
 var spawned: Array[Enemy] = []
+## Camps (enemy zones) of this visit: zone name -> Array[Enemy]; a camp is cleared when all of its enemies are dead.
+## When every camp of a combat map is cleared the stage is cleared (once per visit) — bh-007.
+var camps := {}
+var cleared_camps := {}
+var minibosses: Array[Enemy] = []
+var stage_done := false
 
 static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 	var s := Spawner.new()
@@ -20,6 +26,7 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 	dir.configure(s.difficulty)
 	p_map.add_child(dir)
 	s._spawn_all()
+	Events.actor_died.connect(s._on_actor_died)
 	return s
 
 func _spawn_all() -> void:
@@ -44,6 +51,33 @@ func _spawn_all() -> void:
 			e.patrol_radius = 0.0
 			e.set_meta(&"boss_flag", flag)
 			spawned.append(e)
+	_spawn_minibosses()
+
+## Named champions of this map (DataMinibosses) that are not resting after a recent defeat.
+func _spawn_minibosses() -> void:
+	for md in DataMinibosses.on_map(map.def.id):
+		if DataMinibosses.resting(Game.hero, md.id):
+			continue
+		var edef := DB.enemy(md.enemy)
+		if edef == null:
+			push_warning("Unknown miniboss enemy %s" % md.enemy)
+			continue
+		var p: Vector2 = md.pos
+		var ground := Vector3(p.x, 0.0, p.y)
+		if map.is_inside_tree():
+			ground = map.to_global(ground)
+			ground.y = map.global_position.y + NpcDirectory.ground_height(map, Vector3(p.x, 0.0, p.y))
+		var e := Enemy.new()
+		e.setup(edef, mini(BH.LEVEL_CAP, map.def.level_max + int(md.get("level_bonus", 0))), md.get("mods", []), difficulty)
+		e.make_miniboss(md)
+		e.name = "Miniboss_%s" % md.id
+		map.add_child(e)
+		e.global_position = _nav_point(ground) + Vector3.UP * 0.1
+		e.home = e.global_position
+		e.patrol_radius = 2.0
+		e.rotation.y = rng.randf() * TAU
+		minibosses.append(e)
+		spawned.append(e)
 
 func _spawn_zone(m: Marker3D) -> void:
 	rng.seed = hash(String(map.def.id) + String(m.name))
@@ -72,6 +106,7 @@ func _spawn_zone(m: Marker3D) -> void:
 		e.zone = m
 		e.rotation.y = rng.randf() * TAU
 		spawned.append(e)
+		camps.get_or_add(String(m.name).trim_prefix("EnemyZone_"), []).append(e)
 
 func _nav_point(p: Vector3) -> Vector3:
 	var nm := map.nav_region.get_navigation_map() if map.nav_region else RID()
@@ -101,3 +136,39 @@ static func spawn_enemy(parent: Node, def: EnemyDef, lvl: int, mods: Array, pos:
 	e.global_position = pos + Vector3.UP * 0.1
 	e.home = pos
 	return e
+
+# ---- Camps and stage clears (bh-007) ----------------------------------------------------------------------------
+
+func camp_total() -> int:
+	return camps.size()
+
+func camps_cleared() -> int:
+	return cleared_camps.size()
+
+func _camp_alive(list: Array) -> bool:
+	for e in list:
+		if is_instance_valid(e) and (e as Enemy).alive:
+			return true
+	return false
+
+func _on_actor_died(actor: Node, _killer: Node) -> void:
+	if not (actor is Enemy) or not is_instance_valid(map) or not map.is_inside_tree():
+		return
+	for zone in camps:
+		if cleared_camps.has(zone) or not (camps[zone] as Array).has(actor):
+			continue
+		if not _camp_alive(camps[zone]):
+			cleared_camps[zone] = true
+			Events.camp_cleared.emit(map.def.id, zone, camps.size() - cleared_camps.size(), camps.size())
+	if not stage_done and not camps.is_empty() and cleared_camps.size() >= camps.size():
+		stage_done = true
+		if Game.hero:
+			Game.hero.stages_cleared[map.def.id] = int(Game.hero.stages_cleared.get(map.def.id, 0)) + 1
+			Game.hero.add_clear()
+		Events.stage_cleared.emit(map.def.id)
+
+## The current map's spawner (for the HUD's stage tracker), or null.
+static func current() -> Spawner:
+	if Game.current_map == null or not is_instance_valid(Game.current_map):
+		return null
+	return Game.current_map.get_node_or_null(^"Spawner") as Spawner

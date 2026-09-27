@@ -968,6 +968,16 @@ func consume_item(item: ItemInstance) -> bool:
 	if item == null or not item.base.is_consumable() or not alive:
 		return false
 	var fx: Dictionary = item.base.consumable_effect
+	if fx.has("learn_recipe"):
+		var err := Crafting.learn(hero, StringName(fx["learn_recipe"]))
+		if err != "":
+			Events.notify.emit(err, &"error")
+			return false
+		hero.inventory.consume(item.base.id, 1)
+		Audio.play_ui(&"level_up")
+		Events.notify.emit("Recipe learned: %s. Make it at a %s." % [DataCrafting.recipe(StringName(fx["learn_recipe"])).name,
+			DataCrafting.station_names(DataCrafting.recipe(StringName(fx["learn_recipe"])).stations)], &"info")
+		return true
 	if fx.has("phoenix"):
 		Events.notify.emit("The Phoenix Feather works on its own: it burns when a killing blow lands.", &"info")
 		return false

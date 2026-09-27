@@ -5,14 +5,14 @@ extends MapBuilder
 ## journey and come home by another road:
 ##   South Gate road -> Mill Road -> Old Mill Crossroads -> Mill Lane -> Lantern Fields -> Coast Road -> Tideglass Cove
 ##   -> Cove Steps -> back up to the gate. The Field Road is a shorter farm track between the gate and the fields; the
-##   Forest Road climbs north from the mill into the Ruined Forest; the Lake Shore Road east is washed out past the
-##   mill bridge (a dead end with a reason). The road polylines are DataIsland.ROADS: terrain beds, signposts, the atlas
-##   and the directions all read the same data.
+##   Forest Road climbs north from the mill into the Ruined Forest; the Lake Shore Road runs east over the mended
+##   washout to Olivar, and the Fen Road leaves the fields east over the Fen Bridge for Wyman Outpost (bh-007). The road
+##   polylines are DataIsland.ROADS: terrain beds, signposts, the atlas and the directions all read the same data.
 ## The land falls from the town plateau (0 m) to the millstream (-3 m), the terraced fields (-4 m) and the clifftop
 ## coast road, then down switchbacks to the cove beach (-12.5 m) at sea level (-14 m).
 
 const MAP := &"westreach"
-const W := 295
+const W := 310
 const D := 230
 const X0 := -225.0
 const Z0 := -62.0
@@ -26,6 +26,8 @@ const CAVE := Vector2(-191, 70)
 const SHRINE := Vector2(-168, 86)
 const MILL_HOUSE := Vector2(4, -21)
 const BRIDGE := Vector2(20, 2)
+const FEN_BRIDGE := Vector2(59, 97)
+const EAST_EDGE := 81.0
 const SEA_Y := -14.0
 const PIER_X := -172.0
 const STREAM := [Vector2(74, -66), Vector2(46, -44), Vector2(24, -32), Vector2(16, -22), Vector2(15.5, -10), Vector2(19, 2),
@@ -43,6 +45,7 @@ const ANCHORS := [
 	Vector3(-146, 110, -9.0), Vector3(-124, 118, -5.6), Vector3(-178, 92, -12.5), Vector3(-196, 92, -12.2), Vector3(-186, 74, -11.8),
 	Vector3(-152, 60, -4.6), Vector3(-140, 69, -6.6), Vector3(-152, 79, -9.0), Vector3(-166, 86, -11.2), Vector3(-140, 54, -2.8),
 	Vector3(-190, 40, -1.0), Vector3(-160, 20, 0.5), Vector3(58, 96, -4.6), Vector3(-30, 56, -1.8), Vector3(66, 20, -2.6),
+	Vector3(78, -9, -2.2), Vector3(76, 95, -3.8), Vector3(76, 40, -2.8),
 ]
 ## Crop plots (centre x, z, half size x, z) and flat pads kept level for buildings (x, z, radius).
 const PLOTS := [[-2.0, 66.0, 12.0, 7.0], [-30.0, 100.0, 11.0, 6.0], [-60.0, 100.0, 11.0, 6.5], [-5.0, 106.0, 10.0, 4.5]]
@@ -85,12 +88,15 @@ func compose() -> void:
 	_cove()
 	_roadside()
 	_encounters()
+	_herbs()
 	_greenery()
 	spawn(&"start", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
 	spawn(&"town_gate", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
 	spawn(&"forest_road", Vector3(-49, 0, -45), 140.0, true)
 	spawn(&"cove_shrine", Vector3(SHRINE.x + 3.2, 0, SHRINE.y + 1.2), 90.0, true)
-	set_bounds(AABB(Vector3(-205, -20, -58), Vector3(270, 40, 196)))
+	spawn(&"olivar_road", Vector3(70.5, 0, -9.6), -90.0, true)
+	spawn(&"fen_road", Vector3(70.5, 0, 95.4), -90.0, true)
+	set_bounds(AABB(Vector3(-205, -20, -58), Vector3(286, 40, 196)))
 	view("overview", Vector3(-70, -4, 40), 0.0, 62.0, 250.0, 50.0)
 	view("topdown", Vector3(-75, -4, 45), 0.0, 89.5, 260.0, 55.0)
 	view("gate", Vector3(GATE.x + 2, 0, GATE.y + 8), 0.0, 48.0, 34.0)
@@ -330,8 +336,10 @@ func _edges() -> void:
 		boundary(Vector3(pa.x, -20.0, pa.y), Vector3(pb.x, -20.0, pb.y), 34.0)
 	# map edges inland: the northern treeline, the lake-side east
 	boundary(Vector3(-200, -6, -57), Vector3(-58, -6, -57), 26.0)
-	boundary(Vector3(-50, -6, -57), Vector3(66, -6, -57), 26.0)
-	boundary(Vector3(66, -8, -57), Vector3(66, -8, 136), 26.0)
+	boundary(Vector3(-50, -6, -57), Vector3(EAST_EDGE, -6, -57), 26.0)
+	boundary(Vector3(EAST_EDGE, -8, -57), Vector3(EAST_EDGE, -8, -13.6), 26.0)
+	boundary(Vector3(EAST_EDGE, -8, -4.4), Vector3(EAST_EDGE, -8, 90.6), 26.0)
+	boundary(Vector3(EAST_EDGE, -8, 99.4), Vector3(EAST_EDGE, -8, 136), 26.0)
 	# the millstream's lower gorge: rails along both banks, open only where the mill bridge crosses
 	var total := DataIsland.polyline_length(STREAM)
 	for sgn: float in [-1.0, 1.0]:
@@ -343,7 +351,7 @@ func _edges() -> void:
 			var back := DataIsland.point_at(STREAM, maxf(0.0, along - 1.0))
 			var dir := (ahead - back).normalized()
 			var q := c + Vector2(-dir.y, dir.x) * 4.4 * sgn
-			var open := c.distance_to(BRIDGE) < 4.6 or c.y < -26.0
+			var open := c.distance_to(BRIDGE) < 4.6 or c.distance_to(FEN_BRIDGE) < 4.6 or c.y < -26.0
 			if prev != Vector2.INF and not open:
 				_guard(prev, q)
 			prev = Vector2.INF if open else q
@@ -420,7 +428,7 @@ func _crossroads() -> void:
 	kit("notice_board", Vector3(-104.0, 0, 51.5), -60.0, 1.0, props, true)
 	# Old Mill Crossroads: four roads, a signpost on a grass island, a waystone and lamps
 	signpost_at(Vector2(-4.5, 7.5), [["Malasugue", Vector2(-12, 6)], ["Ruined Forest", Vector2(-10, -10)],
-		["Lantern Fields", Vector2(4, 16)], ["Lake Shore Road (closed)", Vector2(12, 1)]])
+		["Lantern Fields", Vector2(4, 16)], ["Olivar (Lake Shore Road)", Vector2(12, 1)]])
 	kit("statue_small", Vector3(-3.4, 0, 8.6), 150.0, 0.9, props, true)
 	for p: Vector3 in [Vector3(-7.5, 0, -4.0), Vector3(6.5, 0, 6.5), Vector3(-9.0, 0, 9.0)]:
 		lamp_post(p, rng.randf() * 360.0)
@@ -484,13 +492,19 @@ func _mill() -> void:
 	for sx: float in [-7.0, 7.0]:
 		for dz: float in [-2.4, 2.4]:
 			kit("pillar", Vector3(BRIDGE.x + sx, 0, BRIDGE.y + dz), 0.0, 0.4, geo, true)
+	# the spring washout, planked over by Olivar's traders: rubble pushed aside, a timber causeway, a new sign
 	var end := Vector2(56, -8)
+	decor("rubble_pile", Vector3(end.x + 3.0, 0, end.y - 6.5), 30.0, 1.3, true, true)
+	decor("log_fallen", Vector3(end.x + 6.0, 0, end.y + 5.5), 70.0, 1.0, true, true)
 	for i in 3:
-		kit("wood_fence", Vector3(end.x + 2.0, 0, end.y - 3.0 + i * 3.0), 90.0 + rng.randf_range(-12, 12), 1.0, props, true)
-	decor("rubble_pile", Vector3(end.x + 5.0, 0, end.y), 30.0, 1.4, true, true)
-	decor("log_fallen", Vector3(end.x + 7.5, 0, end.y + 2.0), 70.0, 1.0, true, true)
-	signpost_at(Vector2(end.x - 3.0, end.y + 3.2), [["Road washed out", Vector2(1, -0.4)]])
-	blocker(Vector3(end.x + 2.6, bed(end.x, end.y) + 1.5, end.y), Vector3(1.0, 3.0, 12.0))
+		var q := DataIsland.point_at(DataIsland.road("wr_lake_road").points, 58.0 + i * 5.6)
+		kit("dock_planks", Vector3(q.x, bed(q.x, q.y) - 0.28, q.y), 10.0 + rng.randf_range(-3, 3), 0.95, deco)
+	for sz: float in [-3.6, 3.6]:
+		kit("wood_fence", Vector3(end.x + 6.0, 0, end.y - 1.2 + sz), 12.0, 1.0, props, true)
+	signpost_at(Vector2(end.x - 3.0, end.y + 3.4), [["Olivar", Vector2(1, -0.2)], ["Old Mill", Vector2(-1, 0.3)]])
+	signpost_at(Vector2(75.5, -4.8), [["Olivar (Lake Shore Road)", Vector2(1, 0)], ["Old Mill", Vector2(-1, 0.4)]])
+	lamp_post(Vector3(72.0, 0, -14.0), 0.0)
+	exit_zone(&"westreach_lake_road", Vector3(79.5, 0, -9.0), Vector3(3.0, 4.0, 8.4), &"olivar", &"west_road", "Olivar")
 
 func _fields() -> void:
 	# crop rows (leafy rows in dark soil) inside low fences, with a lantern at every corner
@@ -527,7 +541,9 @@ func _fields() -> void:
 	for p: Vector3 in [Vector3(43.5, 0, 84.0), Vector3(44.6, 0, 85.1), Vector3(47.8, 0, 86.4), Vector3(38.2, 0, 90.4)]:
 		breakable("crate" if rng.randf() < 0.6 else "barrel", p, rng.randf() * 360.0, 20.0, true)
 	kit("wagon_broken", Vector3(50.0, 0, 80.5), 40.0, 1.0, props, true)
-	signpost_at(Vector2(28.5, 104.0), [["Old Mill", Vector2(-9, -26)], ["Malasugue", Vector2(-27, -12)], ["Tideglass Cove", Vector2(-23, 6)]])
+	signpost_at(Vector2(28.5, 104.0), [["Old Mill", Vector2(-9, -26)], ["Malasugue", Vector2(-27, -12)], ["Tideglass Cove", Vector2(-23, 6)],
+		["Wyman Outpost (Fen Road)", Vector2(12, -4)]])
+	_fen_road()
 
 func _coast() -> void:
 	# a ruined lookout on the clifftop, benches for the fishers' wives, lamps along the coast road
@@ -647,27 +663,29 @@ func _greenery() -> void:
 		for pd in PADS:
 			if p.distance_to(Vector2(pd[0], pd[1])) < pd[2] + 2.0:
 				return true
-		for c: Vector2 in [COVE, CAVE, SHRINE, WOLVES, GOBLIN_CAMP, FIELD_RAID, SMUGGLERS, FOREST_WATCH, BRIDGE, Vector2(56, -8)]:
+		for c: Vector2 in [COVE, CAVE, SHRINE, WOLVES, GOBLIN_CAMP, FIELD_RAID, SMUGGLERS, FOREST_WATCH, BRIDGE, Vector2(56, -8), FEN_BRIDGE,
+				Vector2(-4.0, 57.5), Vector2(-38.0, 91.0), Vector2(22.0, 100.5), Vector2(-100.0, 62.0), Vector2(6.0, -11.0), Vector2(-2.5, 30.0),
+				Vector2(40.0, 61.0), Vector2(-22.0, 61.0), Vector2(-20.0, -46.0), Vector2(18.0, -42.0)]:
 			if p.distance_to(c) < 9.0:
 				return true
 		return p.distance_to(Vector2(-180, 100)) < 24.0
 	# pines thicken toward the forest in the north; oaks and bushes around the farms; grass everywhere dry
 	var north := func(x: float, z: float) -> bool: return blocked.call(x, z) or z > 30.0 + sin(x * 0.07) * 14.0
 	var south := func(x: float, z: float) -> bool: return blocked.call(x, z) or z < 20.0
-	var trees := scatter(["tree_pine", "tree_pine", "tree_pine", "tree_oak_twisted", "tree_dead_a"], Rect2(-205, -58, 270, 92), 230, 4.6,
+	var trees := scatter(["tree_pine", "tree_pine", "tree_pine", "tree_oak_twisted", "tree_dead_a"], Rect2(-205, -58, 285, 92), 240, 4.6,
 		Vector2(0.8, 1.3), north, true, true)
-	trees.append_array(scatter(["tree_oak_twisted", "tree_pine", "tree_dead_b"], Rect2(-205, 20, 270, 120), 70, 7.0, Vector2(0.8, 1.2), south, true, true))
+	trees.append_array(scatter(["tree_oak_twisted", "tree_pine", "tree_dead_b"], Rect2(-205, 20, 285, 120), 76, 7.0, Vector2(0.8, 1.2), south, true, true))
 	for t in trees:
 		var k := _k(t.x, t.z)
 		if _rd[k] < 14.0:
 			blocker(Vector3(t.x, ground(t.x, t.z) + 2.0, t.z), Vector3(0.9, 4.0, 0.9))
-	scatter(["bush_a", "bush_b", "fern"], Rect2(-205, -58, 270, 196), 260, 3.0, Vector2(0.7, 1.2), blocked, true, true)
+	scatter(["bush_a", "bush_b", "fern"], Rect2(-205, -58, 285, 196), 270, 3.0, Vector2(0.7, 1.2), blocked, true, true)
 	# grass has no spacing rule (MapBuilder.scatter's spacing check is quadratic in the count)
 	var placed := 0
 	var tries := 0
 	while placed < 1700 and tries < 9000:
 		tries += 1
-		var x := -205.0 + rng.randf() * 270.0
+		var x := -205.0 + rng.randf() * 285.0
 		var z := -58.0 + rng.randf() * 196.0
 		var k := _k(x, z)
 		if _rd[k] < 3.0 or _sea[k] > -2.0 or _ds[k] < 3.5 or Vector2(x, z).distance_to(TOWN) < TOWN_FENCE + 2.0:
@@ -690,3 +708,26 @@ func _greenery() -> void:
 ## Signposts stand on the smooth road bed, not on the noisy verge.
 func signpost_at(p: Vector2, arms: Array) -> Node3D:
 	return signpost(p, arms, bed(p.x, p.y))
+
+## bh-007: the Fen Road east from the fields, over the Fen Bridge, to the walk-through for Wyman Outpost.
+func _fen_road() -> void:
+	var b := FEN_BRIDGE
+	arch("bridge_stone", Vector3(b.x, (bed(b.x - 6.0, b.y) + bed(b.x + 6.0, b.y)) * 0.5, b.y), 0.0)
+	for sx: float in [-7.0, 7.0]:
+		for dz: float in [-2.4, 2.4]:
+			kit("pillar", Vector3(b.x + sx, 0, b.y + dz), 0.0, 0.4, geo, true)
+	signpost_at(Vector2(74.5, 99.8), [["Wyman Outpost (Fen Road)", Vector2(1, 0)], ["Lantern Fields", Vector2(-1, 0.3)]])
+	lamp_post(Vector3(69.0, 0, 91.0), 0.0)
+	lamp_post(Vector3(48.0, 0, 108.5), 0.0)
+	exit_zone(&"westreach_fen_road", Vector3(79.5, 0, 95.0), Vector3(3.0, 4.0, 8.4), &"wyman_outpost", &"west_road", "Wyman Outpost")
+
+## bh-007: herb patches beside field walls (Silverleaf), on the stream banks (Mirebloom), near the goblins' fire
+## (Emberroot) and in the dark of the northern woods (Brightcap).
+func _herbs() -> void:
+	for p: Vector2 in [Vector2(-4.0, 57.5), Vector2(-38.0, 91.0), Vector2(22.0, 100.5), Vector2(-100.0, 62.0)]:
+		herb_patch(&"silverleaf", Vector3(p.x, 0, p.y))
+	for p: Vector2 in [Vector2(6.0, -11.0), Vector2(-2.5, 30.0), Vector2(40.0, 61.0)]:
+		herb_patch(&"mirebloom", Vector3(p.x, 0, p.y))
+	herb_patch(&"emberroot", Vector3(-22.0, 0, 61.0))
+	for p: Vector2 in [Vector2(-20.0, -46.0), Vector2(18.0, -42.0)]:
+		herb_patch(&"brightcap", Vector3(p.x, 0, p.y))

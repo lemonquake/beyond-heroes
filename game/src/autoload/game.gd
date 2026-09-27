@@ -293,8 +293,15 @@ func _fade_cover() -> ColorRect:
 func return_to_town() -> void:
 	travel(&"sanctuary", &"waypoint")
 
-## After death: respawn at the current map's entry (towns: the plaza). Costs a little gold, never items.
-func respawn_player() -> void:
+## The checkpoint the hero may wake at after a fall (a camp bonfire they rested at), or "".
+func checkpoint_name() -> String:
+	if hero == null or hero.checkpoint.is_empty() or DB.map_def(StringName(hero.checkpoint.get("map", ""))) == null:
+		return ""
+	return String(hero.checkpoint.get("name", "your checkpoint"))
+
+## After death: respawn at the current map's entry (towns: the plaza), or at the checkpoint bonfire when asked (bh-007).
+## Costs a little gold, never items.
+func respawn_player(at_checkpoint := false) -> void:
 	var p := player as Player
 	if p == null:
 		return
@@ -302,7 +309,10 @@ func respawn_player() -> void:
 	hero.inventory.gold -= lost
 	var map_id := current_map_id
 	var spawn := &"start"
-	if not DB.map_def(map_id).is_town:
+	if at_checkpoint and checkpoint_name() != "":
+		map_id = StringName(hero.checkpoint.map)
+		spawn = StringName(hero.checkpoint.get("spawn", "start"))
+	elif not DB.map_def(map_id).is_town:
 		# dungeons send you back to their entrance
 		for s in [&"arrival", &"entrance", &"start"]:
 			if current_map.spawns.has(s):

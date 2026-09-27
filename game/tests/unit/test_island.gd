@@ -4,7 +4,7 @@ extends TestCase
 ## loops the design asks for, routes respect locks and explain them, distances count walking only, the directions
 ## service replans off route and clears on arrival, and v3 saves migrate without granting travel they did not have.
 
-const SURFACE: Array[StringName] = [&"sanctuary", &"westreach", &"ruined_forest"]
+const SURFACE: Array[StringName] = [&"sanctuary", &"westreach", &"ruined_forest", &"olivar", &"wyman_outpost"]
 
 static var _maps := {}
 var _holder: Node3D
@@ -158,11 +158,32 @@ func test_roads_are_walkable_on_the_navmesh() -> void:
 			ok(walked < total * 1.35 + 6.0, "%s: the walked way (%.0f m) matches the road (%.0f m)" % [r.id, walked, total])
 	done()
 
+## Height of the walkable surface of this map at a point: among the surfaces of THIS map under it (terrain, bridge
+## decks, slabs — the test builds every surface map at the same origin, so other maps' colliders are skipped), the
+## one with navmesh closest to it (a bridge deck over a ravine, not the ravine floor; the road, not an arch over it).
 func _ground_y(m: MapRoot, p: Vector2) -> float:
 	var space := m.get_world_3d().direct_space_state
-	var q := PhysicsRayQueryParameters3D.create(Vector3(p.x, 60, p.y), Vector3(p.x, -60, p.y), BH.LAYER_GROUND)
-	var hit := space.intersect_ray(q)
-	return hit.position.y if hit else 0.0
+	var nm := _nav(m)
+	var q := PhysicsRayQueryParameters3D.create(Vector3(p.x, 60, p.y), Vector3(p.x, -60, p.y), BH.LAYER_GROUND | BH.LAYER_WORLD)
+	var exclude: Array[RID] = []
+	var best_y := 0.0
+	var best := INF
+	for i in 16:
+		q.exclude = exclude
+		var hit := space.intersect_ray(q)
+		if hit.is_empty():
+			break
+		exclude.append(hit.rid)
+		if not (hit.collider is Node and m.is_ancestor_of(hit.collider)) or (hit.normal as Vector3).y < 0.6:
+			continue
+		var c := NavigationServer3D.map_get_closest_point(nm, hit.position)
+		var d := c.distance_to(hit.position)
+		if d < 0.6:
+			return hit.position.y   # the highest walkable surface (a bridge deck before the ravine floor under it)
+		if d < best:
+			best = d
+			best_y = hit.position.y
+	return best_y
 
 func test_sea_and_cliffs_are_not_routes() -> void:
 	var m := _map(&"westreach")

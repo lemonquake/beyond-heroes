@@ -413,3 +413,164 @@ GOODS = {
     # gold drops
     "gold_pile": (coins, {}),
 }
+
+
+# ---- bh-007: ingredients, refined stock, champion essence, recipe scrolls --------------------------------------------
+
+def fang(s):
+    """Curved teeth lying on their side (wolf fang, orc tusk)."""
+    parts = []
+    big = s.get("big", 1.0)
+    rng = np.random.default_rng(s.get("seed", 3))
+    for k in range(s.get("count", 2)):
+        a = k * 2.4 + rng.random() * 0.5
+        L = 0.075 * big * (1.0 - 0.18 * k)
+        pts = []
+        for i in range(9):
+            t = i / 8
+            pts.append((L * t - L * 0.5, 0.02 * big * math.sin(t * 1.9), 0.012 * big + 0.01 * big * math.sin(math.pi * t)))
+        radii = [0.011 * big * (1 - 0.9 * (i / 8)) + 0.0008 for i in range(9)]
+        p = K.tube(pts, radii, s.get("mat", "bone"), n=10, up=(0, 0, 1))
+        p.rot(Rz(math.degrees(a))).move((0.018 * k, -0.012 * k, 0))
+        parts.append(p)
+        if s.get("root"):
+            c = np.array(pts[0])
+            parts.append(K.sphere(radii[0] * 1.05, tuple(c), s["root"], 8, 6).rot(Rz(math.degrees(a))).move((0.018 * k, -0.012 * k, 0)))
+    return _ground(parts)
+
+
+def coil(s):
+    """A coiled cord (ogre sinew)."""
+    parts = []
+    pts = []
+    for i in range(60):
+        t = i / 59
+        a = t * 5.5 * math.pi
+        r = 0.045 - 0.018 * t
+        pts.append((r * math.cos(a), r * math.sin(a), 0.012 + 0.006 * math.sin(t * 9)))
+    parts.append(K.tube(pts, [0.009] * len(pts), s.get("mat", "sinew"), n=8, up=(0, 0, 1)))
+    parts.append(K.tube([pts[-1], (0.05, 0.03, 0.012), (0.075, 0.035, 0.008)], [0.009, 0.008, 0.005], s.get("mat", "sinew"), n=8, up=(0, 0, 1)))
+    return _ground(parts)
+
+
+def sprig(s):
+    """A tied bundle of herb stems with leaves and flowers (silverleaf, mirebloom) or a gnarled root (emberroot)."""
+    parts = []
+    rng = np.random.default_rng(s.get("seed", 6))
+    kind = s.get("kind", "leaf")
+    if kind == "root":
+        pts = [(-0.07, 0.0, 0.02), (-0.03, 0.01, 0.024), (0.0, -0.005, 0.022), (0.03, 0.008, 0.02), (0.07, -0.004, 0.014)]
+        parts.append(K.tube(pts, [0.016, 0.018, 0.016, 0.012, 0.004], s.get("mat", "emberroot"), n=10, up=(0, 0, 1)))
+        for k in range(6):
+            c = np.array(pts[1 + k % 3])
+            d = np.array([rng.random() - 0.5, rng.random() - 0.5, -0.4]) * 0.06
+            parts.append(K.tube([c, c + d * 0.5, c + d], [0.005, 0.003, 0.001], s.get("mat", "emberroot"), n=5))
+        for k in range(3):
+            parts.append(K.box(0.01, 0.03, 0.002, (-0.07 - 0.005 * k, 0.01 * (k - 1), 0.035), "leaf").rot(Rx(60 + 10 * k), (-0.07, 0, 0.03)))
+        return _ground(parts)
+    # stems lying along X, fanning out from the tie
+    for k in range(5):
+        a = math.radians(-18 + 9 * k + rng.random() * 4)
+        L = 0.11 + 0.03 * rng.random()
+        p0 = np.array([-0.05, 0.0, 0.01])
+        p1 = p0 + np.array([L * math.cos(a), L * math.sin(a), 0.008])
+        parts.append(K.tube([p0, (p0 + p1) / 2 + np.array([0, 0, 0.006]), p1], [0.0025, 0.002, 0.0015], "stem", n=5))
+        for j in range(3):
+            t = 0.45 + 0.22 * j
+            c = p0 + (p1 - p0) * t + np.array([0, 0, 0.006])
+            side = 1 if (j + k) % 2 else -1
+            leaf = K.sphere(0.012, (0, 0, 0), s.get("mat", "leaf"), 8, 5, scale=(1.8, 0.8, 0.18))
+            leaf.rot(Rz(math.degrees(a) + side * 35)).move(tuple(c + np.array([0, side * 0.008, 0])))
+            parts.append(leaf)
+        if s.get("flower"):
+            parts.append(K.sphere(0.009, tuple(p1 + np.array([0.004, 0, 0.004])), s["flower"], 8, 6, scale=(1, 1, 0.8)))
+    parts.append(K.band(0.0, 0.009, 0.01, s.get("tie", "rope"), n=10).rot(Ry(90)).move((-0.035, 0.0, 0.012)))
+    return _ground(parts)
+
+
+def mushroom(s):
+    """A small cluster of glowing caps."""
+    parts = []
+    for k, (x, y, h, r) in enumerate([(0.0, 0.0, 0.05, 0.028), (0.03, 0.015, 0.035, 0.02), (-0.025, 0.02, 0.03, 0.017)]):
+        parts.append(K.lathe([(0, 0), (0.008, 0), (0.007, h), (0, h)], "capstem", 10).move((x, y, 0)))
+        parts.append(K.lathe([(0, h - 0.004), (r, h - 0.006), (r * 0.9, h + 0.006), (r * 0.5, h + 0.014), (0, h + 0.016)], s.get("mat", "brightcap"), 14).move((x, y, 0)))
+    parts.append(K.sphere(0.03, (0, 0.01, 0.0), "fur", 8, 5, scale=(1.8, 1.4, 0.25)))
+    return _ground(parts)
+
+
+def ingot(s):
+    parts = []
+    for i, (x, z) in enumerate([(-0.028, 0.0), (0.028, 0.0), (0.0, 0.028)]):
+        if i >= s.get("count", 1):
+            break
+        prof = [(-0.05, 0.0), (0.05, 0.0), (0.042, 0.026), (-0.042, 0.026)]
+        p = K.slab(prof, 0.034, s.get("mat", "steel"), axis="y")
+        p.move((0, x if i < 2 else 0, z))
+        parts.append(M.bevel(p, 0.002, 1))
+    return _ground(parts)
+
+
+def sigil(s):
+    """A scorched cloth badge with an ember-stitched circle."""
+    parts = [M.bevel(K.box(0.08, 0.1, 0.006, (0, 0, 0.003), s.get("mat", "black")), 0.003, 1).rot(Rz(8))]
+    parts.append(K.ring_tube((0, 0, 0.007), 0.026, 0.0022, s.get("glow", "ember"), axis="z", n=20))
+    parts.append(K.box(0.004, 0.034, 0.003, (0, 0, 0.007), s.get("glow", "ember")).rot(Rz(35)))
+    parts.append(K.box(0.004, 0.034, 0.003, (0, 0, 0.007), s.get("glow", "ember")).rot(Rz(-35)))
+    return _ground(parts)
+
+
+def mote(s):
+    """A drifting mote of light in a tiny wire cage."""
+    parts = [K.sphere(0.022, (0, 0, 0.04), s.get("glow", "aether"), 12, 8)]
+    for k in range(3):
+        parts.append(K.ring_tube((0, 0, 0.04), 0.03, 0.0015, s.get("wire", "silver"), axis="z", n=18).rot(Rx(60 * k), (0, 0, 0.04)))
+    parts.append(K.lathe([(0, 0), (0.018, 0), (0.02, 0.008), (0, 0.01)], s.get("wire", "silver"), 12))
+    return _ground(parts)
+
+
+def plate(s):
+    """A hexagonal rune-carved shell plate, tilted up so its glowing runes face out."""
+    parts = []
+    hexo = [(0.065 * math.cos(math.radians(60 * k + 30)), 0.065 * math.sin(math.radians(60 * k + 30))) for k in range(6)]
+    p = K.slab(hexo, 0.016, s.get("mat", "stone"), axis="z")
+    parts.append(M.bevel(p, 0.004, 2))
+    g = s.get("glow", "aether")
+    parts.append(K.ring_tube((0, 0, 0.017), 0.034, 0.0028, g, axis="z", n=24))
+    for k in range(3):
+        parts.append(K.box(0.058, 0.005, 0.003, (0, 0, 0.018), g).rot(Rz(60 * k)))
+    parts.append(K.gem((0, 0, 0.022), 0.009, g))
+    for k in range(6):
+        a = math.radians(60 * k)
+        parts.append(K.sphere(0.004, (0.052 * math.cos(a), 0.052 * math.sin(a), 0.017), "bronze", 6, 4))
+    for q in parts:
+        q.rot(Rx(28))
+    return _ground(parts)
+
+
+GOODS.update({
+    "wolf_fang": (fang, {"mat": "bone", "count": 2}),
+    "goblin_resin": (jar, {"inner": "resin", "glass": "clay", "lid": "rope"}),
+    "orc_tusk": (fang, {"mat": "tusk", "count": 1, "big": 1.8, "root": "horn", "seed": 5}),
+    "ogre_sinew": (coil, {"mat": "sinew"}),
+    "grave_dust": (pouch, {"mat": "wool", "spill": "smoke", "tie": "rope"}),
+    "ghoul_bile": (bottle, {"shape": "gourd", "liquid": "bile", "glass": "horn", "stopper": "cork"}),
+    "ash_sigil": (sigil, {"mat": "black", "glow": "ember"}),
+    "wisp_mote": (mote, {"glow": "aether", "wire": "silver"}),
+    "stolen_linen": (bundle, {"mat": "linen", "tie": "rope"}),
+    "rune_plate": (plate, {"mat": "stone", "glow": "aether"}),
+    "silverleaf": (sprig, {"mat": "silverleaf", "flower": "white", "tie": "rope", "seed": 11}),
+    "mirebloom": (sprig, {"mat": "leaf", "flower": "mirebloom", "tie": "reed", "seed": 12}),
+    "emberroot": (sprig, {"kind": "root", "mat": "emberroot", "seed": 13}),
+    "brightcap": (mushroom, {"mat": "brightcap"}),
+    "steel_ingot": (ingot, {"mat": "steel", "count": 1}),
+    "cured_leather": (bundle, {"mat": "leather", "roll": True, "tie": "darkleather"}),
+    "champion_essence": (core, {"glow": "holy", "crust": "blackiron"}),
+    "recipe_berserker": (scroll, {"seal": "wax_red", "ribbon": "crimson", "paper": "paper"}),
+    "recipe_sage": (scroll, {"seal": "amethyst", "ribbon": "violet", "paper": "paper"}),
+    "recipe_fortune": (scroll, {"seal": "topaz", "ribbon": "ochre", "paper": "paper"}),
+    "recipe_phoenix": (scroll, {"seal": "flame", "ribbon": "crimson", "paper": "ochre", "glow": "ember"}),
+    "recipe_champion_weapon": (scroll, {"seal": "blackiron", "ribbon": "navy", "paper": "paper", "rod": "blackiron"}),
+    "recipe_champion_armor": (scroll, {"seal": "bronze", "ribbon": "forest", "paper": "paper", "rod": "blackiron"}),
+    "recipe_champion_trinket": (scroll, {"seal": "gold", "ribbon": "teal", "paper": "paper"}),
+    "recipe_aetherforged": (scroll, {"seal": "aether", "ribbon": "violet", "paper": "ochre", "rod": "blackiron", "glow": "aether"}),
+})

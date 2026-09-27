@@ -50,7 +50,11 @@ func _rebuild() -> void:
 	_buttons.clear()
 	var items: Array
 	if _death:
-		items = [["Respawn", _respawn, &"PrimaryButton"], ["Main Menu", _main_menu, &""]]
+		items = [["Respawn", _respawn, &"PrimaryButton"]]
+		var cp := Game.checkpoint_name()
+		if cp != "":
+			items.append(["Wake at %s" % cp, _respawn_checkpoint, &""])
+		items.append(["Main Menu", _main_menu, &""])
 	else:
 		items = [["Resume", close, &"PrimaryButton"], ["Settings", _settings, &""], ["Save Game", _save, &""],
 			["Main Menu", _main_menu, &""], ["Quit Game", _quit, &""]]
@@ -85,7 +89,10 @@ func show_death() -> void:
 	_title.text = "You Have Fallen"
 	_title.add_theme_color_override("font_color", Color(0.9, 0.25, 0.2))
 	var lost := int(Game.hero.inventory.gold * 0.05) if Game.hero else 0
-	_sub.text = "Respawning returns you to the entrance of this area.%s" % ("\nYou will lose %d gold." % lost if lost > 0 else "")
+	var cp := Game.checkpoint_name()
+	_sub.text = "Respawn at this area's entrance%s%s" % [
+		(",\nor wake at %s." % cp) if cp != "" else ".\nRest at a camp bonfire to set a checkpoint.",
+		("\nYou will lose %d gold." % lost) if lost > 0 else ""]
 	_rebuild()
 	visible = true
 	modulate.a = 0.0
@@ -100,6 +107,10 @@ func close() -> void:
 func _respawn() -> void:
 	visible = false
 	Game.respawn_player()
+
+func _respawn_checkpoint() -> void:
+	visible = false
+	Game.respawn_player(true)
 
 func _settings() -> void:
 	close()

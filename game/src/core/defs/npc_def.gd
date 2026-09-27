@@ -18,6 +18,21 @@ var presence: Array = []               # Dialogue conditions that must hold for 
 var idle_anims: Array = [&"idle", &"idle_look"]
 var greeting_sound: StringName = &""   # voice-ready: bark played when the conversation opens
 var graph := {}
+## bh-007 — heroes in a camp: their level, tier (DataGuilds rank), guild and class show on the name plate and in the
+## hero register (HeroRosterWindow). weapon / offhand: item base ids held in hand. activity: "" (stand), "spar"
+## (swing at a training dummy in front), "cast" (practise spells), "pace" (walk to pace_to and back), "watch".
+var hero_level := 0
+var hero_tier := 0
+var hero_guild: StringName = &""
+var hero_class: StringName = &""
+var hero_note := ""
+var weapon: StringName = &""
+var offhand: StringName = &""
+var activity: StringName = &""
+var pace_to := Vector3.ZERO
+
+func is_hero() -> bool:
+	return hero_level > 0
 
 static func make(p_id: StringName, p_name: String, d: Dictionary) -> NpcDef:
 	var n := NpcDef.new()

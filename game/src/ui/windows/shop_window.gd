@@ -100,7 +100,10 @@ func _build() -> void:
 	_stock_grid.add_theme_constant_override("h_separation", 10)
 	_stock_grid.add_theme_constant_override("v_separation", 30)
 	scroll.add_child(_stock_grid)
-	left.add_child(UITheme.label("Right-click: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
+	var hint_m := MarginContainer.new()
+	hint_m.add_theme_constant_override("margin_left", 18)
+	left.add_child(hint_m)
+	hint_m.add_child(UITheme.label("Right-click: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
 	# player side
 	var right := vbox(8)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -150,7 +153,8 @@ func refresh() -> void:
 	elif rel <= -20:
 		rep = " · Unfriendly prices"
 	_kind.text = "%s%s" % [{&"consumables": "Provisions and draughts", &"weapons": "Weapons and armor", &"magic": "Arcane goods",
-		&"rare": "Rare goods"}.get(shop.def.kind, "Goods"), rep]
+		&"rare": "Rare goods", &"premium": "Advanced arms and armor", &"jewels": "Rings, amulets and charms", &"alchemy": "Herbs, draughts and recipes",
+		&"supplies": "Camp supplies", &"outfitter": "Field gear"}.get(shop.def.kind, "Goods"), rep]
 	if not shop.changed.is_connected(_on_shop_changed):
 		shop.changed.connect(_on_shop_changed)
 	if not hero.inventory_changed.is_connected(_on_shop_changed):
@@ -165,6 +169,9 @@ func _on_shop_changed() -> void:
 
 func _process(_d: float) -> void:
 	if visible and shop and hero:
+		if shop.def.restock_on_clears:
+			_refresh_label.text = "New stock after your next stage clear or miniboss · Clears so far: %d" % hero.clear_count
+			return
 		var s := int(shop.seconds_to_refresh(hero))
 		_refresh_label.text = "New stock in %d:%02d" % [s / 60, s % 60]
 

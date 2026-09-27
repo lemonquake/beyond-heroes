@@ -20,6 +20,13 @@ static func build() -> Array:
 		_m(&"westreach", "Westreach", "The roads below the South Gate", {"level_min": 1, "level_max": 4, "music": &"music_town",
 			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.04, "world_map_pos": Vector2(0.4, 0.64),
 			"loading_hint": "Roads rejoin. Leave by the mill, come home along the coast: the signposts and the map (M) name every road."}),
+		# bh-007 (provisional, LORE §6b): the lake-trade town east of the mill and the hero camp above Reedwater Marsh
+		_m(&"olivar", "Olivar", "A trading town on Stillwater Lake", {"is_town": true, "level_min": 1, "level_max": 1, "music": &"music_town",
+			"ambience": &"amb_town", "footstep_surface": &"stone", "reverb": 0.08, "world_map_pos": Vector2(0.6, 0.6),
+			"loading_hint": "Olivar's merchants sell advanced gear at a premium. Their stock changes every time you clear a stage or defeat a miniboss."}),
+		_m(&"wyman_outpost", "Wyman Outpost", "The hero camp above Reedwater Marsh", {"is_town": true, "level_min": 1, "level_max": 1,
+			"music": &"music_town", "ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.04, "world_map_pos": Vector2(0.62, 0.8),
+			"loading_hint": "Rest at the bonfire to set your checkpoint: if you fall, you can wake beside it. The Hero Register lists every hero in camp."}),
 		_m(&"ruined_forest", "Ruined Forest", "Where the village fell", {"level_min": 1, "level_max": 5, "music": &"music_dungeon",
 			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.05, "world_map_pos": Vector2(0.38, 0.45),
 			"loading_hint": "Throw enemies into walls, trees and each other: impacts deal damage based on how hard they hit."}),

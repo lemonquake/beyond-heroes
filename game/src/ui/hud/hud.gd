@@ -68,6 +68,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	_build_vignette()
+	add_child(LootLabels.new())       # ground loot name tags, under every HUD panel (bh-007)
 	_build_top_left()
 	_build_top_center()
 	_build_top_right()
@@ -88,6 +89,16 @@ func _ready() -> void:
 	Events.boss_defeated.connect(_on_boss_defeated)
 	Events.damage_dealt.connect(_on_damage)
 	Events.map_loaded.connect(_on_map_loaded)
+	# bh-007: camps, stages, champions and Olivar's restocks
+	Events.camp_cleared.connect(func(_m: StringName, zone: String, left: int, _total: int) -> void:
+		_feed_line("Camp cleared: %s%s" % [zone.replace("_", " ").capitalize(), (" (%d left)" % left) if left > 0 else ""], UITheme.GOOD, UIArt.ui_icon("check")))
+	Events.stage_cleared.connect(func(m: StringName) -> void:
+		var d := DB.map_def(m)
+		banner("Stage Cleared", "%s is quiet. Olivar's merchants have new stock." % (d.display_name if d else String(m)), UITheme.GOOD))
+	Events.miniboss_defeated.connect(func(id: StringName) -> void:
+		banner("Champion Defeated", "%s · Olivar's merchants have new stock" % DataMinibosses.find(id).get("name", String(id)), Color(1.0, 0.7, 0.35)))
+	Events.recipe_learned.connect(func(rid: StringName) -> void:
+		_feed_line("Recipe learned: %s" % DataCrafting.recipe(rid).get("name", String(rid)), Color(0.6, 1.0, 0.75), UIArt.ui_icon("check")))
 	Events.teleporter_discovered.connect(func(_m): banner("Waypoint Awakened", "It will carry you back here", Color(0.55, 0.97, 1.0)))
 	if Game.player is Player:
 		bind(Game.player)
@@ -236,6 +247,7 @@ func _build_top_right() -> void:
 	_minimap.size_flags_horizontal = Control.SIZE_SHRINK_END
 	col.add_child(_minimap)
 	col.add_child(DirectionsPanel.new())
+	col.add_child(StageTracker.new())
 	var obj := PanelContainer.new()
 	obj.theme_type_variation = &"GlassPanel"
 	obj.custom_minimum_size = Vector2(300, 0)
@@ -701,7 +713,8 @@ func _on_boss(b: Node) -> void:
 			marks.append(h)
 	_boss_bar.tick_marks = marks
 	_boss_bar.set_ratio(_boss.hp / maxf(1.0, _boss.max_hp()), true)
-	banner(_boss.display_name, "", Color(1.0, 0.45, 0.35))
+	if not _boss.is_miniboss():          # champions are named by the bar and their own plate; no banner over them
+		banner(_boss.display_name, "", Color(1.0, 0.45, 0.35))
 
 func _on_boss_defeated(b: Node) -> void:
 	banner("Victory", "%s has fallen" % (b as Enemy).display_name if b is Enemy else "", UITheme.GOLD)
@@ -716,6 +729,7 @@ func _on_leveled(level: int, gained: int) -> void:
 		3 * gained, gained, gained], UITheme.GOLD)
 
 func _on_map_loaded(id: StringName) -> void:
+	_on_prompt("")                       # a prompt from the map we just left must not linger (bh-007)
 	var def := DB.map_def(id)
 	if def:
 		banner(def.display_name, def.subtitle, UITheme.PARCHMENT)

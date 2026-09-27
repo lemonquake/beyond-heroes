@@ -12,6 +12,21 @@ var rng := RandomNumberGenerator.new()
 func _ready() -> void:
 	rng.randomize()
 	Events.actor_died.connect(_on_actor_died)
+	Events.stage_cleared.connect(_on_stage_cleared)
+
+## Every camp of a combat map cleared in one visit (Spawner): a purse and some experience, scaled to the map.
+func _on_stage_cleared(map_id: StringName) -> void:
+	var player := Game.player as Player
+	var def := DB.map_def(map_id)
+	if player == null or not is_instance_valid(player) or def == null or Game.hero == null:
+		return
+	var lvl := def.level_max
+	var xp := maxi(1, int(round(XpCurve.monster_xp(lvl, 8.0) * XpCurve.level_diff_mult(Game.hero.progress.level, lvl))))
+	Game.hero.progress.add_xp(xp)
+	Events.xp_gained.emit(xp)
+	var gold := 25 + 15 * lvl
+	spawn_gold(player.global_position + Vector3(0, 0, 1.2), gold)
+	Events.notify.emit("Stage cleared: +%d XP, a purse of %d gold." % [xp, gold], &"loot")
 
 func _on_actor_died(actor: Node, killer: Node) -> void:
 	if not (actor is Enemy):
@@ -24,6 +39,16 @@ func _on_actor_died(actor: Node, killer: Node) -> void:
 	drop_for(e, player)
 	if e.is_boss and e.has_meta(&"boss_flag"):
 		Game.set_world_flag(StringName(e.get_meta(&"boss_flag")), true)
+	if e.is_miniboss():
+		miniboss_down(e, player.hero)
+
+## A miniboss fell: remember when (it returns after DataMinibosses.RESPAWN), count the clear, tell the HUD.
+func miniboss_down(e: Enemy, hero: HeroData) -> void:
+	var id := StringName(e.miniboss.id)
+	var rec: Dictionary = hero.miniboss_log.get(id, {"kills": 0, "at": 0.0})
+	hero.miniboss_log[id] = {"kills": int(rec.kills) + 1, "at": hero.play_time}
+	hero.add_clear()
+	Events.miniboss_defeated.emit(id)
 
 func xp_for(e: Enemy, player: Player) -> int:
 	var rank := 3.0 if e.is_elite else 1.0
@@ -39,13 +64,13 @@ func award_xp(e: Enemy, player: Player) -> void:
 
 func drop_for(e: Enemy, player: Player) -> void:
 	var mf := player.stats.get_stat(&"magic_find")
-	var ilvl := e.level + (2 if e.is_boss else (1 if e.is_elite else 0))
-	var rank_bonus := 2.0 if e.is_boss else (0.6 if e.is_elite else 0.0)
+	var ilvl := e.level + (2 if e.is_boss or e.is_miniboss() else (1 if e.is_elite else 0))
+	var rank_bonus := 2.0 if e.is_boss else (1.2 if e.is_miniboss() else (0.6 if e.is_elite else 0.0))
 	var at := e.global_position
 	var drops: Array = []
 	# Gold
 	var g := rng.randi_range(e.def.gold.x, e.def.gold.y)
-	g = int(round(float(g) * (1.0 + 0.12 * float(e.level - 1)) * (3.0 if e.is_elite else 1.0) * (1.0 + player.stats.get_stat(&"gold_find")) \
+	g = int(round(float(g) * (1.0 + 0.12 * float(e.level - 1)) * (3.0 if e.is_elite else 1.0) * (4.0 if e.is_miniboss() else 1.0) * (1.0 + player.stats.get_stat(&"gold_find")) \
 		* (1.0 + (GuildRules.elite_gold_bonus(player.hero) if e.is_elite or e.is_boss else 0.0))))
 	if g > 0 and (rng.randf() < 0.75 or e.is_elite or e.is_boss):
 		spawn_gold(at, g)
@@ -53,6 +78,8 @@ func drop_for(e: Enemy, player: Player) -> void:
 	var n := 0
 	if e.is_boss:
 		n = rng.randi_range(5, 6)
+	elif e.is_miniboss():
+		n = rng.randi_range(3, 4)
 	elif e.is_elite:
 		n = rng.randi_range(2, 3)
 	elif rng.randf() < e.def.drop_chance * 0.6:
@@ -62,6 +89,8 @@ func drop_for(e: Enemy, player: Player) -> void:
 		var rarity := ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl)
 		if i == 0 and e.is_boss:
 			rarity = maxi(rarity, BH.Rarity.MASTER)
+		elif i < 2 and e.is_miniboss():
+			rarity = maxi(rarity, BH.Rarity.ELITE if i == 0 else BH.Rarity.ADVANCED)
 		elif i == 0 and e.is_elite:
 			rarity = maxi(rarity, BH.Rarity.ADVANCED)
 		var base := ItemGenerator.random_base(rng, ilvl, [], cls if rng.randf() < 0.6 else &"")
@@ -96,13 +125,22 @@ func drop_for(e: Enemy, player: Player) -> void:
 			if it:
 				it.count = rng.randi_range(int(entry[2]), int(entry[3]))
 				drops.append(it)
+	if e.is_miniboss():
+		# the champion's essence (Elite and Master crafting) and, sometimes, a recipe scroll
+		var ce := DB.make_item(&"champion_essence", BH.Rarity.COMMON, ilvl, rng.randi())
+		ce.count = rng.randi_range(1, 2)
+		drops.append(ce)
+		if rng.randf() < DataMinibosses.RECIPE_CHANCE:
+			var pool := DataMinibosses.scroll_pool()
+			if not pool.is_empty():
+				drops.append(DB.make_item(pool[rng.randi_range(0, pool.size() - 1)], BH.Rarity.COMMON, ilvl, rng.randi()))
 	if e.stats and e.stats.has_flag(&"aether_blink"):
 		var sh := DB.make_item(&"aether_shard", BH.Rarity.COMMON, ilvl, rng.randi())
 		sh.count = rng.randi_range(1, 2)
 		drops.append(sh)
 	for i in drops.size():
 		var ang := TAU * float(i) / maxf(1.0, drops.size()) + rng.randf() * 0.5
-		spawn_item(drops[i], at, ang, 1.0 + rng.randf() * (1.8 if e.is_boss else 1.0))
+		spawn_item(drops[i], at, ang, 1.0 + rng.randf() * (1.8 if e.is_boss or e.is_miniboss() else 1.0))
 
 func _item_rng() -> RandomNumberGenerator:
 	var r := RandomNumberGenerator.new()

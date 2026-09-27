@@ -18,6 +18,7 @@ var refresh_index := 0
 var next_refresh_at := 0.0        # hero play time (s)
 var stock_level := 1
 var specials_sold := {}           # special id -> true
+var stock_clears := 0             # restock_on_clears shops: the hero's clear count when this stock was rolled
 var _hero: HeroData               # the hero this stock belongs to (every change is written back to it)
 
 ## Opens the shop for a hero: restores the saved state (or rolls fresh stock) and refreshes if due.
@@ -40,6 +41,8 @@ func _write_back() -> void:
 		save(_hero)
 
 func refresh_due(hero: HeroData) -> bool:
+	if def.restock_on_clears:
+		return hero.clear_count != stock_clears
 	return hero.play_time >= next_refresh_at or hero.progress.level >= stock_level + 3
 
 func maybe_refresh(hero: HeroData) -> bool:
@@ -58,7 +61,9 @@ func seconds_to_refresh(hero: HeroData) -> float:
 func generate(hero: HeroData) -> void:
 	var lvl := clampi(hero.progress.level, 1, BH.LEVEL_CAP)
 	stock_level = lvl
+	stock_clears = hero.clear_count
 	next_refresh_at = hero.play_time + def.refresh_minutes * 60.0
+	var ilvl := mini(BH.LEVEL_CAP, lvl + def.ilvl_bonus)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash("%s|%d|%s" % [def.id, refresh_index, hero.hero_name])
 	stock.clear()
@@ -74,14 +79,14 @@ func generate(hero: HeroData) -> void:
 			var base := _pool_base(p, lvl, rng, hero)
 			if base == null:
 				continue
-			var it := ItemGenerator.generate(base, lvl, _pool_rarity(lvl, rng), _child_rng(rng))
+			var it := ItemGenerator.generate(base, ilvl, _pool_rarity(lvl, rng), _child_rng(rng))
 			pool_items.append(it)
 	# the occasional rare piece
 	if not pool_items.is_empty() and rng.randf() < def.rare_chance and lvl >= 4:
 		var idx := rng.randi_range(0, pool_items.size() - 1)
 		var old: ItemInstance = pool_items[idx]
 		var rare := BH.Rarity.MASTER if lvl >= 14 and rng.randf() < 0.3 else BH.Rarity.ELITE
-		pool_items[idx] = ItemGenerator.generate(old.base, lvl, rare, _child_rng(rng))
+		pool_items[idx] = ItemGenerator.generate(old.base, ilvl, maxi(rare, old.rarity), _child_rng(rng))
 	for it in pool_items:
 		stock.append({"item": it, "infinite": false, "special": ""})
 	_add_new_specials(hero)
@@ -107,6 +112,12 @@ func _pool_base(p: Dictionary, lvl: int, rng: RandomNumberGenerator, hero: HeroD
 ## Merchant rarity table: grounded early, broader later (monsters and bosses remain the source of the high tiers).
 func _pool_rarity(lvl: int, rng: RandomNumberGenerator) -> int:
 	var w := [0.0, 50.0, 30.0, 15.0 if lvl >= 3 else 0.0, 6.0 if lvl >= 6 else 0.0, 2.0 if lvl >= 10 else 0.0]
+	if not def.rarity_weights.is_empty():
+		w = def.rarity_weights.duplicate()
+		# premium tables still grow with the hero: Master stock from level 5, Mythical from level 12
+		for i in w.size():
+			if (i >= BH.Rarity.MYTHICAL and lvl < 12) or (i == BH.Rarity.MASTER and lvl < 5):
+				w[i] = 0.0
 	var total := 0.0
 	for x in w:
 		total += x
@@ -233,12 +244,13 @@ func to_dict() -> Dictionary:
 	for e in buyback:
 		bb.append({"item": e.item.to_dict(), "price": e.price})
 	return {"refresh": refresh_index, "next_at": next_refresh_at, "level": stock_level, "stock": st, "buyback": bb,
-		"specials_sold": specials_sold.keys()}
+		"specials_sold": specials_sold.keys(), "clears": stock_clears}
 
 func from_dict(d: Dictionary) -> void:
 	refresh_index = int(d.get("refresh", 0))
 	next_refresh_at = float(d.get("next_at", 0.0))
 	stock_level = int(d.get("level", 1))
+	stock_clears = int(d.get("clears", 0))
 	stock.clear()
 	for e in d.get("stock", []):
 		var it := ItemInstance.from_dict(e.get("item", {}))

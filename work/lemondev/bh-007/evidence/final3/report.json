@@ -1,0 +1,103 @@
+{
+  "champion_loot": [
+    "Grim Song [Elite]",
+    "Iron Sabaton of the Ox [Licensed]",
+    "Iron Helm [Common]",
+    "Champion Essence [Common]"
+  ],
+  "checkpoint": {
+    "map": "wyman_outpost",
+    "name": "Wyman Outpost",
+    "spawn": "bonfire"
+  },
+  "clear_count": 5,
+  "crafted_weapon": {
+    "base": "riverguard_falchion",
+    "name": "Accursed Riverguard Falchion",
+    "quality": 0.13,
+    "rarity": "Advanced"
+  },
+  "olivar_restock": {
+    "after": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Bone Wake",
+      "Tidal Parrying Dirk of the Owl",
+      "Pyric Brass Knuckles",
+      "Tidal Hand Axe of Precision",
+      "Militia Shortsword of the Leech",
+      "Brass Knuckles of Thunderous Blows",
+      "Sturdy Sigil Buckler of the Owl",
+      "Iron Helm of Recurrence",
+      "Dusk Tongue",
+      "Scholar's Iron Sabaton of Shadows' Step",
+      "Bone Tongue",
+      "Brutal Iron Gauntlet of the Owl",
+      "Apprentice Robe of Embers"
+    ],
+    "before": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Flaming Rondel Dagger",
+      "Blood Vow",
+      "Hollow Brand",
+      "Scholar's Iron Talons of the Siphon",
+      "Hollow Song",
+      "Wraith Bite",
+      "Warden Kite Shield of the Lynx",
+      "Silk Glove of Fury",
+      "Silk Glove of the Monk",
+      "Iron Sabaton of the Ox",
+      "Dusk Grasp",
+      "Fletched Iron Gauntlet of Incantation",
+      "Stalwart Barbute of the Owl"
+    ],
+    "changed": true
+  },
+  "perf_malasugue_plaza_baseline": {
+    "avg_ms": 16.67,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 17.64,
+    "vsync": true,
+    "worst_ms": 17.81
+  },
+  "perf_olivar_plaza": {
+    "avg_ms": 16.6,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 17.77,
+    "vsync": true,
+    "worst_ms": 34.6
+  },
+  "perf_olivar_plaza_second_visit": {
+    "avg_ms": 16.67,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 17.74,
+    "vsync": true,
+    "worst_ms": 18.03
+  },
+  "perf_wyman_bonfire": {
+    "avg_ms": 16.59,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 17.76,
+    "vsync": true,
+    "worst_ms": 33.45
+  },
+  "stages_cleared": {
+    "westreach": 1
+  },
+  "viewport": [
+    1993.0,
+    1080.0
+  ],
+  "window": [
+    1920,
+    1040
+  ],
+  "woke_at": "wyman_outpost",
+  "wolf_fang_dropped": true,
+  "wolf_kills_until_fang": 1
+}

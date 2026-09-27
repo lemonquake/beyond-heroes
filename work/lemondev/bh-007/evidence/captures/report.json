@@ -1,0 +1,71 @@
+{
+  "checkpoint": {
+    "map": "wyman_outpost",
+    "name": "Wyman Outpost",
+    "spawn": "bonfire"
+  },
+  "clear_count": 5,
+  "crafted_weapon": {
+    "base": "riverguard_falchion",
+    "name": "Tidal Riverguard Falchion of the Owl",
+    "quality": 0.1,
+    "rarity": "Advanced"
+  },
+  "olivar_restock": {
+    "after": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Bone Wake",
+      "Tidal Parrying Dirk of the Owl",
+      "Pyric Brass Knuckles",
+      "Tidal Hand Axe of Precision",
+      "Militia Shortsword of the Leech",
+      "Brass Knuckles of Thunderous Blows",
+      "Sturdy Sigil Buckler of the Owl",
+      "Iron Helm of Recurrence",
+      "Dusk Tongue",
+      "Scholar's Iron Sabaton of Shadows' Step",
+      "Bone Tongue",
+      "Brutal Iron Gauntlet of the Owl",
+      "Apprentice Robe of Embers"
+    ],
+    "before": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Flaming Rondel Dagger",
+      "Blood Vow",
+      "Hollow Brand",
+      "Scholar's Iron Talons of the Siphon",
+      "Hollow Song",
+      "Wraith Bite",
+      "Warden Kite Shield of the Lynx",
+      "Silk Glove of Fury",
+      "Silk Glove of the Monk",
+      "Iron Sabaton of the Ox",
+      "Dusk Grasp",
+      "Fletched Iron Gauntlet of Incantation",
+      "Stalwart Barbute of the Owl"
+    ],
+    "changed": true
+  },
+  "perf_olivar_plaza": {
+    "avg_ms": 17.05,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 31.93,
+    "vsync": true,
+    "worst_ms": 33.25
+  },
+  "perf_wyman_bonfire": {
+    "avg_ms": 21.61,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 32.62,
+    "vsync": true,
+    "worst_ms": 33.36
+  },
+  "stages_cleared": {
+    "westreach": 1
+  },
+  "woke_at": "wyman_outpost"
+}

@@ -45,6 +45,7 @@ func compose() -> void:
 	_tower()
 	_grove_and_gate()
 	_raiders()
+	_herbs()
 	_forest()
 	set_bounds(AABB(Vector3(-72, -8, -48), Vector3(144, 20, 96)))
 	view("overview", Vector3(0, 0, 0), 0.0, 70.0, 150.0, 50.0)
@@ -335,7 +336,7 @@ func _raiders() -> void:
 	kit("chains_hanging", og + Vector3(-1.4, 0.4 + ground(og.x - 1.4, og.z - 1.0), -1.0), 0.0, 0.8, deco)
 	decor("bones_scatter", og + Vector3(1.6, 0, 1.2), 140.0)
 	decor("rubble_pile", og + Vector3(2.8, 0, -2.4), 50.0, 0.9, true, true)
-	enemy_zone("ogre", og, 3.0, [&"ogre_crusher"], 1, 0.1, true)
+	# the chained ogre is Grundle, a miniboss (DataMinibosses): he stands here unless he was beaten recently
 	for i in WOLF_DENS.size():
 		var w: Vector3 = WOLF_DENS[i]
 		decor("bones_scatter", w + Vector3(0.8, 0, 0.6), rng.randf() * 360.0)
@@ -383,3 +384,11 @@ func _forest() -> void:
 	scatter(["grass_clump"], Rect2(-74, -50, 148, 100), 900, 1.0, Vector2(0.8, 1.4), func(x, z): return absf(x - _ravine_x(z)) < 6.0 or _poly_dist(Vector2(x, z), ROAD) < 2.2)
 	scatter(["mushrooms", "roots", "rock_small", "rock_small"], Rect2(-74, -50, 148, 100), 120, 3.0, Vector2(0.7, 1.2), clear, true, true)
 	scatter(["log_fallen", "stump", "rock_medium"], Rect2(-74, -50, 148, 100), 40, 6.0, Vector2(0.7, 1.1), clear, false)
+
+## bh-007: herb patches: Silverleaf by the village road, Brightcap in the shade, Emberroot by the corrupted grove.
+func _herbs() -> void:
+	for p in [Vector3(-44, 0, 17), Vector3(-22, 0, 13)]:
+		herb_patch(&"silverleaf", p)
+	for p in [Vector3(-17, 0, -7), Vector3(36, 0, -13)]:
+		herb_patch(&"brightcap", p)
+	herb_patch(&"emberroot", Vector3(50, 0, 8))

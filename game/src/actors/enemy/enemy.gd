@@ -22,6 +22,8 @@ var brain := EnemyBrain.new()
 var elite_mods: Array[StringName] = []
 var is_elite := false
 var is_boss := false
+## A named champion holding a camp (DataMinibosses entry) or empty (bh-007).
+var miniboss: Dictionary = {}
 var difficulty := {}
 var home := Vector3.ZERO
 var patrol_radius := 5.0
@@ -96,6 +98,19 @@ func setup(p_def: EnemyDef, p_level: int, mods: Array = [], p_difficulty := {}) 
 	affinity = def.affinity
 	return self
 
+## Turn this (elite) enemy into a named miniboss before it enters the tree: its name, size and weight.
+func make_miniboss(md: Dictionary) -> Enemy:
+	miniboss = md
+	display_name = String(md.name)
+	var sc := float(md.get("scale", 1.2))
+	body_radius = def.body_radius * minf(sc, 1.3)
+	body_height = def.body_height * sc
+	weight *= sc * 1.5
+	return self
+
+func is_miniboss() -> bool:
+	return not miniboss.is_empty()
+
 func _ready() -> void:
 	super._ready()
 	team = BH.Team.ENEMY
@@ -121,7 +136,7 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	var sc := def.model_scale * (1.12 if is_elite else 1.0)
+	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0))
 	visual.setup(def.model, sc, def.tint, &"")
 	if visual.fallback:
 		_shape_fallback()
@@ -192,6 +207,11 @@ func rebuild_stats() -> void:
 	if enraged:
 		mods.append(StatModifier.more(&"attack_speed", 0.2))
 		mods.append(StatModifier.more(&"move_speed", 0.15))
+	if is_miniboss():
+		mods.append(StatModifier.more(&"max_hp", float(miniboss.get("hp", 2.0)) - 1.0, "Champion"))
+		mods.append(StatModifier.more(&"outgoing_damage", float(miniboss.get("damage", 1.2)) - 1.0, "Champion"))
+		mods.append(StatModifier.more(&"poise", 0.8, "Champion"))
+		mods.append(StatModifier.flat(&"knockback_res", 0.25, "Champion"))
 	stats = EnemyStats.build(def, level, difficulty, mods, is_elite, is_boss)
 
 # ---- Main loop -----------------------------------------------------------------------------------------------
@@ -384,7 +404,7 @@ func _become_alert(call_pack := true) -> void:
 		Events.enemy_alerted.emit(self)
 		if def.sounds.has("idle"):
 			Audio.play_at(def.sounds.idle, global_position)
-		if is_boss:
+		if is_boss or is_miniboss():
 			Events.boss_engaged.emit(self)
 		if call_pack and def.pack_call:
 			for e in get_tree().get_nodes_in_group(&"enemy"):
@@ -1405,7 +1425,26 @@ func _apply_elite_visuals() -> void:
 	add_child(aura)
 	var ring := VFXLib.telegraph("ring", Vector2(body_radius + 0.45, body_radius + 0.45), 0.01, Color(c.r, c.g, c.b, 0.6), 360.0, body_radius + 0.2)
 	add_child(ring)
+	if is_miniboss():
+		_apply_champion_visuals()
 	Events.elite_spawned.emit(self)
+
+## Champions (minibosses) read apart from elites at a glance: a gold rim, a wide gold ring and a crown of embers at
+## their feet, and a warm light of their own.
+func _apply_champion_visuals() -> void:
+	var gold := Color(1.0, 0.72, 0.28)
+	visual.set_rim(gold, 1.3)
+	var ring := VFXLib.telegraph("ring", Vector2(body_radius + 1.25, body_radius + 1.25), 0.02, Color(gold.r, gold.g, gold.b, 0.75), 360.0, body_radius + 0.9)
+	add_child(ring)
+	var embers := VFXLib.particles(Color(1.0, 0.6, 0.2, 0.85), 26, 1.4, false, 0.18, 1.6, 25.0, Vector3(0, 2.0, 0), body_radius + 0.8)
+	embers.position.y = 0.1
+	add_child(embers)
+	var l := OmniLight3D.new()
+	l.light_color = gold
+	l.light_energy = 1.4
+	l.omni_range = 5.0
+	l.position.y = body_height * 0.6
+	add_child(l)
 
 func _elite_tick(delta: float) -> void:
 	_spark_cd = maxf(0.0, _spark_cd - delta)
@@ -1467,6 +1506,8 @@ func _boss_phase_check() -> void:
 			a.apply_knockback((a.global_position - global_position).slide(Vector3.UP).normalized(), 12.0, stats, self)
 
 func phase_name() -> String:
+	if is_miniboss():
+		return String(miniboss.get("title", "Champion"))
 	if def.phases.is_empty():
 		return ""
 	return String(def.phases[clampi(phase - 1, 0, def.phases.size() - 1)].get("name", ""))

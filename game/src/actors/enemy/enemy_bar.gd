@@ -61,7 +61,7 @@ void fragment() {
 	position = Vector3(0, enemy.body_height * enemy.def.model_scale * (1.12 if enemy.is_elite else 1.0) + 0.45, 0)
 	if enemy.is_elite:
 		_label = Label3D.new()
-		_label.text = enemy.display_name
+		_label.text = enemy.display_name if not enemy.is_miniboss() else "%s\n%s" % [enemy.display_name, enemy.miniboss.get("title", "Champion")]
 		_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		_label.no_depth_test = true
 		_label.fixed_size = true
@@ -70,7 +70,9 @@ void fragment() {
 		_label.font_size = 26
 		_label.outline_size = 8
 		_label.outline_modulate = Color(0, 0, 0, 0.9)
-		_label.modulate = BH.rarity_color(BH.Rarity.ELITE)
+		_label.modulate = BH.rarity_color(BH.Rarity.ELITE) if not enemy.is_miniboss() else Color(1.0, 0.66, 0.3)
+		if enemy.is_miniboss():
+			_label.font_size = 30
 		_label.position = Vector3(0, 0.28, 0)
 		_label.render_priority = 6
 		add_child(_label)
@@ -84,7 +86,8 @@ func _process(delta: float) -> void:
 		visible = false
 		return
 	_visible_t -= delta
-	var show := Settings.show_enemy_bars and (_visible_t > 0.0 or (enemy.is_elite and enemy.brain.is_engaged()) or Game.hover_target == enemy)
+	var show := Settings.show_enemy_bars and (_visible_t > 0.0 or (enemy.is_elite and enemy.brain.is_engaged()) or Game.hover_target == enemy \
+		or (enemy.is_miniboss() and Game.player != null and is_instance_valid(Game.player) and (Game.player as Node3D).global_position.distance_to(enemy.global_position) < 18.0))
 	visible = show
 	if not show:
 		return

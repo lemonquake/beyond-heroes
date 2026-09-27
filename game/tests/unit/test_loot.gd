@@ -204,7 +204,8 @@ func test_every_item_has_a_model_and_icon() -> void:
 func test_twenty_new_consumables() -> void:
 	var new_ids := []
 	for b: ItemBaseDef in DB.item_bases.values():
-		if b.is_consumable() and b.icon.contains("items3d"):
+		# bh-007's recipe scrolls also use rendered icons; they are counted in test_crafting
+		if b.is_consumable() and b.icon.contains("items3d") and not b.consumable_effect.has("learn_recipe"):
 			new_ids.append(b.id)
 			ok(b.flavor != "", "%s explains itself" % b.id)
 			ok(b.stack_max > 1, "%s stacks" % b.id)

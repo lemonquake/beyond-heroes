@@ -1,0 +1,87 @@
+{
+  "checkpoint": {
+    "map": "wyman_outpost",
+    "name": "Wyman Outpost",
+    "spawn": "bonfire"
+  },
+  "clear_count": 5,
+  "crafted_weapon": {
+    "base": "riverguard_falchion",
+    "name": "Brutal Riverguard Falchion",
+    "quality": 0.09,
+    "rarity": "Advanced"
+  },
+  "olivar_restock": {
+    "after": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Bone Wake",
+      "Tidal Parrying Dirk of the Owl",
+      "Pyric Brass Knuckles",
+      "Tidal Hand Axe of Precision",
+      "Militia Shortsword of the Leech",
+      "Brass Knuckles of Thunderous Blows",
+      "Sturdy Sigil Buckler of the Owl",
+      "Iron Helm of Recurrence",
+      "Dusk Tongue",
+      "Scholar's Iron Sabaton of Shadows' Step",
+      "Bone Tongue",
+      "Brutal Iron Gauntlet of the Owl",
+      "Apprentice Robe of Embers"
+    ],
+    "before": [
+      "Recipe: Champion's Weapon",
+      "Recipe: Champion's Armor",
+      "Flaming Rondel Dagger",
+      "Blood Vow",
+      "Hollow Brand",
+      "Scholar's Iron Talons of the Siphon",
+      "Hollow Song",
+      "Wraith Bite",
+      "Warden Kite Shield of the Lynx",
+      "Silk Glove of Fury",
+      "Silk Glove of the Monk",
+      "Iron Sabaton of the Ox",
+      "Dusk Grasp",
+      "Fletched Iron Gauntlet of Incantation",
+      "Stalwart Barbute of the Owl"
+    ],
+    "changed": true
+  },
+  "perf_malasugue_plaza_baseline": {
+    "avg_ms": 21.43,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 32.27,
+    "vsync": true,
+    "worst_ms": 33.49
+  },
+  "perf_olivar_plaza": {
+    "avg_ms": 18.76,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 32.34,
+    "vsync": true,
+    "worst_ms": 33.56
+  },
+  "perf_olivar_plaza_second_visit": {
+    "avg_ms": 18.5,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 32.18,
+    "vsync": true,
+    "worst_ms": 33.28
+  },
+  "perf_wyman_bonfire": {
+    "avg_ms": 21.41,
+    "fps_limit": 0,
+    "frames": 240,
+    "p95_ms": 32.43,
+    "vsync": true,
+    "worst_ms": 33.34
+  },
+  "stages_cleared": {
+    "westreach": 1
+  },
+  "woke_at": "wyman_outpost"
+}

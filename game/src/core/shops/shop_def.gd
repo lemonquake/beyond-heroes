@@ -21,6 +21,12 @@ var specials: Array = []
 var rare_chance := 0.15
 var rarity_floor := BH.Rarity.COMMON
 var refresh_minutes := 12.0            # stock rerolls after this much play time (and when the hero outlevels it)
+## bh-007 (Olivar): the stock rerolls every time the hero clears a stage or defeats a miniboss (HeroData.clear_count),
+## never on a timer. ilvl_bonus raises the item level of pool stock (stronger enchantments than the hero's level);
+## rarity_weights (10 floats, BEGINNER..AETHER) replaces the default merchant rarity table.
+var restock_on_clears := false
+var ilvl_bonus := 0
+var rarity_weights: Array = []
 var buyback_size := 12
 
 static func make(p_id: StringName, p_name: String, d: Dictionary) -> ShopDef:

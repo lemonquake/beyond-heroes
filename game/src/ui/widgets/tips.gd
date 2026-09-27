@@ -147,13 +147,19 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	elif it.is_equipment() and it.defense_value() > 0.0:
 		v.add_child(_big_line(str(roundi(it.defense_value())), "Defense", UITheme.PARCHMENT))
 	if it.quality > 0.0 and it.is_equipment():
-		v.add_child(lbl("Quality +%d%%" % roundi(it.quality * 100.0), 14, UITheme.TEXT_DIM))
+		v.add_child(lbl("Quality +%d%%%s" % [roundi(it.quality * 100.0), " · Crafted" if it.crafted else ""], 14, UITheme.TEXT_DIM))
+	elif it.crafted:
+		v.add_child(lbl("Crafted", 14, UITheme.TEXT_DIM))
 	for m in it.base.implicit:
 		v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, m.value), 15, UITheme.PARCHMENT))
 	# consumables
 	if it.base.is_consumable() or it.base.category == &"material" or it.base.is_quest():
 		if it.base.flavor != "":
 			v.add_child(lbl(it.base.flavor, 15, UITheme.TEXT))
+		if it.base.category == &"material":
+			var uses := Tips.material_uses(it.base.id)
+			if uses != "":
+				v.add_child(lbl(uses, 14, UITheme.TEXT_DIM))
 	# enchantments
 	var aff := it.affix_lines()
 	if not aff.is_empty():
@@ -410,3 +416,18 @@ static func status(inst: Variant) -> Control:
 	if inst.source_name != "":
 		v.add_child(lbl("From %s" % inst.source_name, 14, UITheme.TEXT_MUTED))
 	return f[0]
+
+## Crafting uses of a material for its tooltip ("Used in: Health Draught, Steel Ingot and 2 more").
+static func material_uses(base_id: StringName) -> String:
+	var names := []
+	for r in DataCrafting.all():
+		for inp in r.inputs:
+			if inp[0] == base_id:
+				names.append(String(r.name))
+				break
+	if names.is_empty():
+		return ""
+	names.sort()
+	if names.size() > 4:
+		return "Used in: %s and %d more" % [", ".join(names.slice(0, 4)), names.size() - 4]
+	return "Used in: %s" % ", ".join(names)

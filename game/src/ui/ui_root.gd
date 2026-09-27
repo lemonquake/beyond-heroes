@@ -44,6 +44,8 @@ func _ready() -> void:
 	_add_window(&"tempos", TempoWindow.new())
 	_add_window(&"tempo_caller", TempoCallerWindow.new())
 	_add_window(&"guide", GuideWindow.new())
+	_add_window(&"crafting", CraftingWindow.new())
+	_add_window(&"hero_roster", HeroRosterWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -68,6 +70,18 @@ func _add_window(id: StringName, w: UIWindow) -> void:
 
 func window(id: StringName) -> UIWindow:
 	return windows.get(id)
+
+## A crafting station (bh-007): the forge, an alchemy table or a workbench.
+func open_crafting(station: StringName, label := "") -> void:
+	var w := window(&"crafting") as CraftingWindow
+	if w:
+		w.open_station(station, label)
+
+## The hero register board at a camp (bh-007): the heroes present with their level, tier and guild.
+func open_roster(camp: StringName) -> void:
+	var w := window(&"hero_roster") as HeroRosterWindow
+	if w:
+		w.open_camp(camp)
 
 func open(id: StringName) -> void:
 	var w := window(id)

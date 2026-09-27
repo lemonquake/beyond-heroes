@@ -1,0 +1,16 @@
+{
+  "build_ms": 772,
+  "mesh_instances": 298,
+  "nav_polygons": 1249,
+  "nodes": 1084,
+  "omni_lights": 35,
+  "shadowed_omni": 1,
+  "spawns": [
+    "bonfire",
+    "wyman_shrine",
+    "start",
+    "north_road",
+    "west_road"
+  ],
+  "teleporters": 1
+}
