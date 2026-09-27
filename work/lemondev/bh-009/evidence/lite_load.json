@@ -1,0 +1,44 @@
+{
+  "catacombs": {
+    "bake_ms": 35.551,
+    "bounds": "(84.0, 16.0, 92.0)",
+    "build_ms": 81.678,
+    "nav_polys": 685,
+    "nodes": 2573
+  },
+  "olivar": {
+    "bake_ms": 257.453,
+    "bounds": "(132.0, 30.0, 124.0)",
+    "build_ms": 419.352,
+    "nav_polys": 2089,
+    "nodes": 1303
+  },
+  "ruined_forest": {
+    "bake_ms": 108.727,
+    "bounds": "(144.0, 20.0, 96.0)",
+    "build_ms": 516.435,
+    "nav_polys": 2005,
+    "nodes": 1119
+  },
+  "sanctuary": {
+    "bake_ms": 117.106,
+    "bounds": "(84.0, 12.0, 84.0)",
+    "build_ms": 523.26,
+    "nav_polys": 1546,
+    "nodes": 1096
+  },
+  "westreach": {
+    "bake_ms": 447.482,
+    "bounds": "(286.0, 40.0, 196.0)",
+    "build_ms": 1464.498,
+    "nav_polys": 5221,
+    "nodes": 2401
+  },
+  "wyman_outpost": {
+    "bake_ms": 459.362,
+    "bounds": "(132.0, 24.0, 110.0)",
+    "build_ms": 394.147,
+    "nav_polys": 1249,
+    "nodes": 1317
+  }
+}

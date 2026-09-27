@@ -1,0 +1,23 @@
+{
+ "tris": 19864,
+ "height": 1.876,
+ "extra_bones": [
+  "scarf.1",
+  "scarf.2",
+  "sash.1"
+ ],
+ "materials": [
+  "BH_Cloth_Secondary__shadowblade",
+  "BH_Leather__shadowblade",
+  "BH_LeatherDark__shadowblade",
+  "BH_Steel__shadowblade",
+  "BH_DarkSteel__shadowblade",
+  "BH_Cloth_Primary",
+  "BH_Wrap__shadowblade",
+  "BH_Skin__shadowblade",
+  "BH_Shadow__shadowblade",
+  "BH_Emissive__shadowblade",
+  "BH_Hair__shadowblade",
+  "BH_Mask__shadowblade"
+ ]
+}

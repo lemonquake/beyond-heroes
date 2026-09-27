@@ -1,0 +1,24 @@
+{
+ "paths": [
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_0.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_90.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_180.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_270.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_35.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_iso_100.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\rest_iso_42.png"
+ ],
+ "labels": [
+  "front (yaw 0)",
+  "left side (yaw 90)",
+  "back (yaw 180)",
+  "right side (yaw 270)",
+  "3/4 front (yaw 35)",
+  "gameplay iso 26 m / 55 deg, scale 1.0",
+  "gameplay iso 26 m / 55 deg, scale 0.42"
+ ],
+ "out": "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\broodmother_rest.png",
+ "cols": 4,
+ "title": "Broodmother - rest (4 views + 3/4 + gameplay iso at 1.0 and 0.42 Spiderling scale)",
+ "cell": 420
+}

@@ -1,0 +1,12 @@
+node broodmother type=MESH parent=Armature tris=14812 mats=['BH_Horn__broodmother', 'BH_Fur__broodmother', 'BH_Emissive__broodmother', 'BH_Hair__broodmother', 'BH_Shadow__broodmother', 'BH_Flesh__broodmother', 'BH_Bone__broodmother'] groups=43 weapon groups: 
+node Icosphere type=MESH parent=None
+TOTAL tris=14812 bounds min=(-1.151, -1.421, 0.003) max=(1.139, 1.132, 1.178)
+ANIMS 16
+node treasure_mimic type=MESH parent=Armature tris=11772 mats=['BH_Wood__treasure_mimic', 'BH_Leather__treasure_mimic', 'BH_Shadow__treasure_mimic', 'BH_Gold__treasure_mimic', 'BH_Hair__treasure_mimic', 'BH_DarkSteel__treasure_mimic', 'BH_Bone__treasure_mimic', 'BH_Emissive__treasure_mimic', 'BH_Flesh__treasure_mimic', 'BH_Skin__treasure_mimic', 'BH_Horn__treasure_mimic'] groups=21 weapon groups: 
+node Icosphere type=MESH parent=None
+TOTAL tris=11772 bounds min=(-0.767, -0.555, -0.015) max=(0.767, 0.445, 1.317)
+ANIMS 16
+node war_totem type=MESH parent=Armature tris=5284 mats=['BH_Fur__war_totem', 'BH_Stone__war_totem', 'BH_Wood__war_totem', 'BH_Cloth_Primary__war_totem', 'BH_Shadow__war_totem', 'BH_Bone__war_totem', 'BH_Emissive__war_totem', 'BH_DarkSteel__war_totem', 'BH_Leather__war_totem', 'BH_Gold__war_totem', 'BH_Cloth_Secondary__war_totem', 'BH_Hair__war_totem', 'BH_Horn__war_totem'] groups=9 weapon groups: 
+node Icosphere type=MESH parent=None
+TOTAL tris=5284 bounds min=(-0.542, -0.23, -2.511) max=(0.542, 0.233, 0.023)
+ANIMS 6

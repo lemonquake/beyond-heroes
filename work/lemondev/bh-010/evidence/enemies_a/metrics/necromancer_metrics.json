@@ -1,0 +1,1039 @@
+{
+ "tris": 16092,
+ "verts": 8584,
+ "materials": [
+  "BH_Cloth_Primary__necromancer",
+  "BH_Cloth_Secondary__necromancer",
+  "BH_Leather__necromancer",
+  "BH_Bone__necromancer",
+  "BH_Shadow__necromancer",
+  "BH_Emissive__necromancer",
+  "BH_Skin__necromancer",
+  "BH_DarkSteel__necromancer",
+  "BH_Horn__necromancer"
+ ],
+ "clips": {
+  "alert": {
+   "frames": 19,
+   "max_stretch": 1.57,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.254,
+   "zmin": -0.0,
+   "zmax_body": 2.036,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "block_impact": {
+   "frames": 15,
+   "max_stretch": 1.605,
+   "at_frame": 6,
+   "bone": "hips",
+   "min_ratio": 0.159,
+   "zmin": -0.039,
+   "zmax_body": 1.848,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.055,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "block_loop": {
+   "frames": 41,
+   "max_stretch": 1.598,
+   "at_frame": 16,
+   "bone": "hips",
+   "min_ratio": 0.196,
+   "zmin": -0.03,
+   "zmax_body": 1.829,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.055,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "boss_summon": {
+   "frames": 47,
+   "max_stretch": 1.667,
+   "at_frame": 29,
+   "bone": "hips",
+   "min_ratio": 0.385,
+   "zmin": -0.446,
+   "zmax_body": 2.213,
+   "at_rest": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_grow": 0.065,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "cast_area": {
+   "frames": 31,
+   "max_stretch": 1.861,
+   "at_frame": 15,
+   "bone": "hips",
+   "min_ratio": 0.163,
+   "zmin": -0.577,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_grow": 0.084,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "cast_channel": {
+   "frames": 31,
+   "max_stretch": 1.557,
+   "at_frame": 4,
+   "bone": "shoulder.L",
+   "min_ratio": 0.421,
+   "zmin": -0.0,
+   "zmax_body": 1.921,
+   "at_rest": [
+    0.134,
+    -0.052,
+    1.558
+   ],
+   "abs_grow": 0.045,
+   "abs_at": [
+    0.199,
+    0.057,
+    1.589
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "cast_heavy": {
+   "frames": 29,
+   "max_stretch": 1.625,
+   "at_frame": 17,
+   "bone": "shoulder.R",
+   "min_ratio": 0.34,
+   "zmin": -0.016,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.135,
+    -0.052,
+    1.543
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "cast_quick": {
+   "frames": 16,
+   "max_stretch": 1.656,
+   "at_frame": 7,
+   "bone": "shoulder.L",
+   "min_ratio": 0.252,
+   "zmin": -0.001,
+   "zmax_body": 2.016,
+   "at_rest": [
+    0.134,
+    -0.052,
+    1.558
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "cast_weapon": {
+   "frames": 25,
+   "max_stretch": 1.689,
+   "at_frame": 19,
+   "bone": "shoulder.R",
+   "min_ratio": 0.14,
+   "zmin": -0.0,
+   "zmax_body": 1.994,
+   "at_rest": [
+    -0.135,
+    -0.052,
+    1.543
+   ],
+   "abs_grow": 0.047,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "charge_hold": {
+   "frames": 41,
+   "max_stretch": 1.584,
+   "at_frame": 16,
+   "bone": "hips",
+   "min_ratio": 0.127,
+   "zmin": -0.029,
+   "zmax_body": 1.85,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.053,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "death": {
+   "frames": 47,
+   "max_stretch": 1.447,
+   "at_frame": 7,
+   "bone": "shoulder.L",
+   "min_ratio": 0.168,
+   "zmin": -1.26,
+   "zmax_body": 2.016,
+   "at_rest": [
+    0.126,
+    -0.058,
+    1.564
+   ],
+   "abs_grow": 0.054,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "death_back": {
+   "frames": 41,
+   "max_stretch": 1.407,
+   "at_frame": 3,
+   "bone": "chest",
+   "min_ratio": 0.585,
+   "zmin": -1.252,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.011,
+    -0.16,
+    1.361
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "death_crumple": {
+   "frames": 37,
+   "max_stretch": 1.547,
+   "at_frame": 13,
+   "bone": "spine",
+   "min_ratio": 0.049,
+   "zmin": -0.77,
+   "zmax_body": 2.016,
+   "at_rest": [
+    0.0,
+    0.138,
+    1.186
+   ],
+   "abs_grow": 0.055,
+   "abs_at": [
+    0.0,
+    0.138,
+    1.186
+   ],
+   "abs_bone": "spine"
+  },
+  "death_fwd": {
+   "frames": 49,
+   "max_stretch": 1.556,
+   "at_frame": 37,
+   "bone": "shoulder.L",
+   "min_ratio": 0.203,
+   "zmin": -0.925,
+   "zmax_body": 2.018,
+   "at_rest": [
+    0.134,
+    -0.052,
+    1.558
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "getup": {
+   "frames": 29,
+   "max_stretch": 1.914,
+   "at_frame": 13,
+   "bone": "hips",
+   "min_ratio": 0.173,
+   "zmin": -1.26,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_grow": 0.089,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "hit_back": {
+   "frames": 15,
+   "max_stretch": 1.405,
+   "at_frame": 8,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "hit_front": {
+   "frames": 15,
+   "max_stretch": 1.405,
+   "at_frame": 9,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "hit_heavy": {
+   "frames": 19,
+   "max_stretch": 1.405,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "hit_left": {
+   "frames": 15,
+   "max_stretch": 1.405,
+   "at_frame": 10,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "hit_light": {
+   "frames": 13,
+   "max_stretch": 1.405,
+   "at_frame": 4,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "hit_right": {
+   "frames": 15,
+   "max_stretch": 1.405,
+   "at_frame": 10,
+   "bone": "shoulder.L",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.016,
+   "at_rest": [
+    0.126,
+    -0.058,
+    1.564
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "idle": {
+   "frames": 121,
+   "max_stretch": 1.405,
+   "at_frame": 56,
+   "bone": "shoulder.R",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.039,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "idle_1h": {
+   "frames": 73,
+   "max_stretch": 1.579,
+   "at_frame": 45,
+   "bone": "shoulder.R",
+   "min_ratio": 0.449,
+   "zmin": -0.0,
+   "zmax_body": 1.994,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.047,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_2h": {
+   "frames": 81,
+   "max_stretch": 1.602,
+   "at_frame": 33,
+   "bone": "shoulder.L",
+   "min_ratio": 0.493,
+   "zmin": -0.0,
+   "zmax_body": 1.958,
+   "at_rest": [
+    0.134,
+    0.052,
+    1.543
+   ],
+   "abs_grow": 0.057,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_bow": {
+   "frames": 91,
+   "max_stretch": 1.653,
+   "at_frame": 9,
+   "bone": "shoulder.L",
+   "min_ratio": 0.546,
+   "zmin": -0.0,
+   "zmax_body": 2.021,
+   "at_rest": [
+    0.134,
+    0.052,
+    1.543
+   ],
+   "abs_grow": 0.051,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "idle_dagger": {
+   "frames": 61,
+   "max_stretch": 1.577,
+   "at_frame": 38,
+   "bone": "shoulder.R",
+   "min_ratio": 0.44,
+   "zmin": -0.0,
+   "zmax_body": 1.923,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.048,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_hurt": {
+   "frames": 61,
+   "max_stretch": 1.696,
+   "at_frame": 25,
+   "bone": "shoulder.L",
+   "min_ratio": 0.369,
+   "zmin": -0.0,
+   "zmax_body": 1.929,
+   "at_rest": [
+    0.134,
+    0.052,
+    1.543
+   ],
+   "abs_grow": 0.053,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_look": {
+   "frames": 121,
+   "max_stretch": 1.405,
+   "at_frame": 68,
+   "bone": "shoulder.L",
+   "min_ratio": 0.593,
+   "zmin": -0.0,
+   "zmax_body": 2.039,
+   "at_rest": [
+    0.126,
+    -0.058,
+    1.564
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "idle_shield": {
+   "frames": 73,
+   "max_stretch": 1.501,
+   "at_frame": 33,
+   "bone": "shoulder.L",
+   "min_ratio": 0.218,
+   "zmin": -0.0,
+   "zmax_body": 1.994,
+   "at_rest": [
+    0.134,
+    0.052,
+    1.543
+   ],
+   "abs_grow": 0.051,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_spear": {
+   "frames": 81,
+   "max_stretch": 1.694,
+   "at_frame": 79,
+   "bone": "shoulder.L",
+   "min_ratio": 0.398,
+   "zmin": -0.0,
+   "zmax_body": 1.958,
+   "at_rest": [
+    0.134,
+    -0.052,
+    1.558
+   ],
+   "abs_grow": 0.053,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "idle_staff": {
+   "frames": 91,
+   "max_stretch": 1.658,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.51,
+   "zmin": -0.038,
+   "zmax_body": 2.026,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.049,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "knockback": {
+   "frames": 37,
+   "max_stretch": 1.405,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.542,
+   "zmin": -1.26,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "knockdown": {
+   "frames": 25,
+   "max_stretch": 1.405,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.454,
+   "zmin": -1.26,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "launch": {
+   "frames": 25,
+   "max_stretch": 1.312,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.572,
+   "zmin": 0.227,
+   "zmax_body": 1.916,
+   "at_rest": [
+    -0.152,
+    0.056,
+    1.491
+   ],
+   "abs_grow": 0.033,
+   "abs_at": [
+    0.503,
+    0.065,
+    1.548
+   ],
+   "abs_bone": "forearm.L"
+  },
+  "revive": {
+   "frames": 47,
+   "max_stretch": 1.914,
+   "at_frame": 27,
+   "bone": "hips",
+   "min_ratio": 0.173,
+   "zmin": -1.26,
+   "zmax_body": 2.016,
+   "at_rest": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_grow": 0.089,
+   "abs_at": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_bone": "hips"
+  },
+  "run": {
+   "frames": 21,
+   "max_stretch": 2.106,
+   "at_frame": 16,
+   "bone": "hips",
+   "min_ratio": 0.422,
+   "zmin": -0.022,
+   "zmax_body": 2.03,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.099,
+   "abs_at": [
+    0.0,
+    0.189,
+    0.483
+   ],
+   "abs_bone": "hips"
+  },
+  "run_combat": {
+   "frames": 21,
+   "max_stretch": 1.987,
+   "at_frame": 17,
+   "bone": "hips",
+   "min_ratio": 0.508,
+   "zmin": -0.053,
+   "zmax_body": 1.987,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.088,
+   "abs_at": [
+    0.0,
+    0.189,
+    0.483
+   ],
+   "abs_bone": "hips"
+  },
+  "run_hurt": {
+   "frames": 23,
+   "max_stretch": 1.775,
+   "at_frame": 19,
+   "bone": "hips",
+   "min_ratio": 0.379,
+   "zmin": -0.164,
+   "zmax_body": 1.977,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.073,
+   "abs_at": [
+    -0.069,
+    0.168,
+    0.414
+   ],
+   "abs_bone": "hips"
+  },
+  "staff_1": {
+   "frames": 17,
+   "max_stretch": 1.681,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.252,
+   "zmin": -0.025,
+   "zmax_body": 2.026,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.058,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "stagger_heavy": {
+   "frames": 33,
+   "max_stretch": 1.449,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.508,
+   "zmin": -0.035,
+   "zmax_body": 2.018,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "stagger_small": {
+   "frames": 21,
+   "max_stretch": 1.405,
+   "at_frame": 0,
+   "bone": "shoulder.R",
+   "min_ratio": 0.587,
+   "zmin": -0.017,
+   "zmax_body": 2.017,
+   "at_rest": [
+    -0.127,
+    -0.058,
+    1.546
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    -0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.R"
+  },
+  "strafe_l": {
+   "frames": 21,
+   "max_stretch": 1.912,
+   "at_frame": 17,
+   "bone": "hips",
+   "min_ratio": 0.524,
+   "zmin": -0.007,
+   "zmax_body": 2.002,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.082,
+   "abs_at": [
+    0.0,
+    0.189,
+    0.483
+   ],
+   "abs_bone": "hips"
+  },
+  "strafe_r": {
+   "frames": 21,
+   "max_stretch": 1.816,
+   "at_frame": 7,
+   "bone": "hips",
+   "min_ratio": 0.514,
+   "zmin": -0.006,
+   "zmax_body": 2.002,
+   "at_rest": [
+    -0.065,
+    0.159,
+    0.413
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    -0.069,
+    0.168,
+    0.414
+   ],
+   "abs_bone": "hips"
+  },
+  "taunt": {
+   "frames": 47,
+   "max_stretch": 1.665,
+   "at_frame": 20,
+   "bone": "shoulder.R",
+   "min_ratio": 0.345,
+   "zmin": -0.009,
+   "zmax_body": 1.994,
+   "at_rest": [
+    -0.134,
+    0.052,
+    1.558
+   ],
+   "abs_grow": 0.047,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "walk": {
+   "frames": 27,
+   "max_stretch": 1.608,
+   "at_frame": 2,
+   "bone": "hips",
+   "min_ratio": 0.577,
+   "zmin": -0.033,
+   "zmax_body": 2.026,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.054,
+   "abs_at": [
+    0.0,
+    0.189,
+    0.483
+   ],
+   "abs_bone": "hips"
+  },
+  "walk_back": {
+   "frames": 21,
+   "max_stretch": 1.459,
+   "at_frame": 10,
+   "bone": "hips",
+   "min_ratio": 0.599,
+   "zmin": -0.029,
+   "zmax_body": 2.001,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.051,
+   "abs_at": [
+    0.209,
+    0.001,
+    1.623
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "walk_hurt": {
+   "frames": 31,
+   "max_stretch": 1.701,
+   "at_frame": 19,
+   "bone": "shoulder.L",
+   "min_ratio": 0.374,
+   "zmin": -0.02,
+   "zmax_body": 2.019,
+   "at_rest": [
+    0.134,
+    0.052,
+    1.543
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    0.206,
+    0.032,
+    1.614
+   ],
+   "abs_bone": "shoulder.L"
+  },
+  "wall_impact": {
+   "frames": 33,
+   "max_stretch": 1.637,
+   "at_frame": 22,
+   "bone": "hips",
+   "min_ratio": 0.122,
+   "zmin": -0.121,
+   "zmax_body": 2.016,
+   "at_rest": [
+    0.0,
+    0.179,
+    0.483
+   ],
+   "abs_grow": 0.057,
+   "abs_at": [
+    0.0,
+    0.189,
+    0.483
+   ],
+   "abs_bone": "hips"
+  }
+ },
+ "tpose_top": 2.048461675643921,
+ "idle_top": 2.035674810409546,
+ "idle_bbox": [
+  [
+   -0.38335007429122925,
+   -1.1125271320343018,
+   -4.4284369948854874e-08
+  ],
+  [
+   0.3844088912010193,
+   1.0687017440795898,
+   2.035674810409546
+  ]
+ ]
+}

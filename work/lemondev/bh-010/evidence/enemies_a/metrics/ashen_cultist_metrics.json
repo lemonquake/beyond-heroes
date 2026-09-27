@@ -1,0 +1,429 @@
+{
+ "tris": 10892,
+ "verts": 5773,
+ "materials": [
+  "BH_Cloth_Primary__ashen_cultist",
+  "BH_Cloth_Secondary__ashen_cultist",
+  "BH_Leather__ashen_cultist",
+  "BH_Horn__ashen_cultist",
+  "BH_Ichor__ashen_cultist",
+  "BH_Skin__ashen_cultist",
+  "BH_Bone__ashen_cultist",
+  "BH_Emissive__ashen_cultist",
+  "BH_Shadow__ashen_cultist",
+  "BH_Wood__ashen_cultist",
+  "BH_DarkSteel__ashen_cultist"
+ ],
+ "clips": {
+  "alert": {
+   "frames": 19,
+   "max_stretch": 1.572,
+   "at_frame": 12,
+   "bone": "shoulder.R",
+   "min_ratio": 0.255,
+   "zmin": -0.0,
+   "zmax_body": 1.757
+  },
+  "block_impact": {
+   "frames": 15,
+   "max_stretch": 1.524,
+   "at_frame": 14,
+   "bone": "shoulder.L",
+   "min_ratio": 0.151,
+   "zmin": -0.0,
+   "zmax_body": 1.587
+  },
+  "block_loop": {
+   "frames": 41,
+   "max_stretch": 1.532,
+   "at_frame": 5,
+   "bone": "shoulder.L",
+   "min_ratio": 0.189,
+   "zmin": -0.0,
+   "zmax_body": 1.551
+  },
+  "cast_area": {
+   "frames": 31,
+   "max_stretch": 1.704,
+   "at_frame": 13,
+   "bone": "shoulder.R",
+   "min_ratio": 0.11,
+   "zmin": -0.314,
+   "zmax_body": 1.74
+  },
+  "cast_channel": {
+   "frames": 31,
+   "max_stretch": 1.565,
+   "at_frame": 4,
+   "bone": "shoulder.L",
+   "min_ratio": 0.422,
+   "zmin": -0.0,
+   "zmax_body": 1.64
+  },
+  "cast_quick": {
+   "frames": 16,
+   "max_stretch": 1.663,
+   "at_frame": 7,
+   "bone": "shoulder.L",
+   "min_ratio": 0.249,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "charge_hold": {
+   "frames": 41,
+   "max_stretch": 1.551,
+   "at_frame": 18,
+   "bone": "head",
+   "min_ratio": 0.111,
+   "zmin": -0.0,
+   "zmax_body": 1.58
+  },
+  "death": {
+   "frames": 47,
+   "max_stretch": 1.454,
+   "at_frame": 7,
+   "bone": "shoulder.L",
+   "min_ratio": 0.202,
+   "zmin": -0.749,
+   "zmax_body": 1.74
+  },
+  "death_back": {
+   "frames": 41,
+   "max_stretch": 1.46,
+   "at_frame": 4,
+   "bone": "head",
+   "min_ratio": 0.494,
+   "zmin": -0.745,
+   "zmax_body": 1.74
+  },
+  "death_crumple": {
+   "frames": 37,
+   "max_stretch": 2.052,
+   "at_frame": 20,
+   "bone": "head",
+   "min_ratio": 0.076,
+   "zmin": -0.523,
+   "zmax_body": 1.74
+  },
+  "death_fwd": {
+   "frames": 49,
+   "max_stretch": 1.818,
+   "at_frame": 40,
+   "bone": "neck",
+   "min_ratio": 0.218,
+   "zmin": -0.662,
+   "zmax_body": 1.74
+  },
+  "getup": {
+   "frames": 29,
+   "max_stretch": 1.428,
+   "at_frame": 15,
+   "bone": "shoulder.L",
+   "min_ratio": 0.179,
+   "zmin": -0.749,
+   "zmax_body": 1.74
+  },
+  "hit_back": {
+   "frames": 15,
+   "max_stretch": 1.42,
+   "at_frame": 6,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "hit_front": {
+   "frames": 15,
+   "max_stretch": 1.42,
+   "at_frame": 10,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "hit_heavy": {
+   "frames": 19,
+   "max_stretch": 1.42,
+   "at_frame": 1,
+   "bone": "shoulder.L",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.741
+  },
+  "hit_left": {
+   "frames": 15,
+   "max_stretch": 1.42,
+   "at_frame": 10,
+   "bone": "shoulder.L",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "hit_light": {
+   "frames": 13,
+   "max_stretch": 1.42,
+   "at_frame": 5,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "hit_right": {
+   "frames": 15,
+   "max_stretch": 1.42,
+   "at_frame": 10,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "idle": {
+   "frames": 121,
+   "max_stretch": 1.42,
+   "at_frame": 23,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.758
+  },
+  "idle_1h": {
+   "frames": 73,
+   "max_stretch": 1.582,
+   "at_frame": 45,
+   "bone": "shoulder.R",
+   "min_ratio": 0.448,
+   "zmin": -0.0,
+   "zmax_body": 1.713
+  },
+  "idle_2h": {
+   "frames": 81,
+   "max_stretch": 1.565,
+   "at_frame": 34,
+   "bone": "shoulder.L",
+   "min_ratio": 0.449,
+   "zmin": -0.0,
+   "zmax_body": 1.678
+  },
+  "idle_bow": {
+   "frames": 91,
+   "max_stretch": 1.662,
+   "at_frame": 9,
+   "bone": "shoulder.L",
+   "min_ratio": 0.544,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "idle_dagger": {
+   "frames": 61,
+   "max_stretch": 1.58,
+   "at_frame": 38,
+   "bone": "shoulder.R",
+   "min_ratio": 0.44,
+   "zmin": -0.0,
+   "zmax_body": 1.632
+  },
+  "idle_hurt": {
+   "frames": 61,
+   "max_stretch": 1.701,
+   "at_frame": 45,
+   "bone": "shoulder.L",
+   "min_ratio": 0.381,
+   "zmin": -0.0,
+   "zmax_body": 1.601
+  },
+  "idle_look": {
+   "frames": 121,
+   "max_stretch": 1.814,
+   "at_frame": 74,
+   "bone": "neck",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.77
+  },
+  "idle_shield": {
+   "frames": 73,
+   "max_stretch": 1.506,
+   "at_frame": 36,
+   "bone": "shoulder.L",
+   "min_ratio": 0.214,
+   "zmin": -0.0,
+   "zmax_body": 1.713
+  },
+  "idle_spear": {
+   "frames": 81,
+   "max_stretch": 1.694,
+   "at_frame": 0,
+   "bone": "shoulder.L",
+   "min_ratio": 0.399,
+   "zmin": -0.0,
+   "zmax_body": 1.678
+  },
+  "idle_staff": {
+   "frames": 91,
+   "max_stretch": 1.664,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.507,
+   "zmin": -0.0,
+   "zmax_body": 1.744
+  },
+  "knockback": {
+   "frames": 37,
+   "max_stretch": 1.42,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.475,
+   "zmin": -0.749,
+   "zmax_body": 1.74
+  },
+  "knockdown": {
+   "frames": 25,
+   "max_stretch": 1.42,
+   "at_frame": 2,
+   "bone": "shoulder.R",
+   "min_ratio": 0.372,
+   "zmin": -0.749,
+   "zmax_body": 1.74
+  },
+  "launch": {
+   "frames": 25,
+   "max_stretch": 1.357,
+   "at_frame": 13,
+   "bone": "neck",
+   "min_ratio": 0.526,
+   "zmin": 0.243,
+   "zmax_body": 1.679
+  },
+  "revive": {
+   "frames": 47,
+   "max_stretch": 1.428,
+   "at_frame": 29,
+   "bone": "shoulder.L",
+   "min_ratio": 0.172,
+   "zmin": -0.749,
+   "zmax_body": 1.74
+  },
+  "run": {
+   "frames": 21,
+   "max_stretch": 1.521,
+   "at_frame": 8,
+   "bone": "shoulder.L",
+   "min_ratio": 0.423,
+   "zmin": -0.0,
+   "zmax_body": 1.738
+  },
+  "run_combat": {
+   "frames": 21,
+   "max_stretch": 1.596,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.514,
+   "zmin": -0.001,
+   "zmax_body": 1.698
+  },
+  "run_hurt": {
+   "frames": 23,
+   "max_stretch": 1.704,
+   "at_frame": 3,
+   "bone": "shoulder.L",
+   "min_ratio": 0.39,
+   "zmin": -0.002,
+   "zmax_body": 1.689
+  },
+  "stagger_heavy": {
+   "frames": 33,
+   "max_stretch": 1.456,
+   "at_frame": 11,
+   "bone": "shoulder.R",
+   "min_ratio": 0.509,
+   "zmin": -0.0,
+   "zmax_body": 1.741
+  },
+  "stagger_small": {
+   "frames": 21,
+   "max_stretch": 1.42,
+   "at_frame": 1,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.0,
+   "zmax_body": 1.74
+  },
+  "strafe_l": {
+   "frames": 21,
+   "max_stretch": 1.535,
+   "at_frame": 13,
+   "bone": "spine",
+   "min_ratio": 0.593,
+   "zmin": -0.001,
+   "zmax_body": 1.723
+  },
+  "strafe_r": {
+   "frames": 21,
+   "max_stretch": 1.535,
+   "at_frame": 3,
+   "bone": "spine",
+   "min_ratio": 0.593,
+   "zmin": -0.001,
+   "zmax_body": 1.723
+  },
+  "taunt": {
+   "frames": 47,
+   "max_stretch": 1.667,
+   "at_frame": 21,
+   "bone": "shoulder.R",
+   "min_ratio": 0.346,
+   "zmin": -0.0,
+   "zmax_body": 1.711
+  },
+  "walk": {
+   "frames": 27,
+   "max_stretch": 1.427,
+   "at_frame": 0,
+   "bone": "shoulder.R",
+   "min_ratio": 0.573,
+   "zmin": -0.003,
+   "zmax_body": 1.745
+  },
+  "walk_back": {
+   "frames": 21,
+   "max_stretch": 1.419,
+   "at_frame": 0,
+   "bone": "shoulder.L",
+   "min_ratio": 0.586,
+   "zmin": -0.002,
+   "zmax_body": 1.733
+  },
+  "walk_hurt": {
+   "frames": 31,
+   "max_stretch": 1.705,
+   "at_frame": 4,
+   "bone": "shoulder.L",
+   "min_ratio": 0.385,
+   "zmin": -0.002,
+   "zmax_body": 1.731
+  },
+  "wall_impact": {
+   "frames": 33,
+   "max_stretch": 1.493,
+   "at_frame": 24,
+   "bone": "neck",
+   "min_ratio": 0.142,
+   "zmin": -0.066,
+   "zmax_body": 1.74
+  }
+ },
+ "tpose_top": 1.7712310552597046,
+ "idle_top": 1.7567102909088135,
+ "idle_bbox": [
+  [
+   -0.34313440322875977,
+   -0.8178755640983582,
+   1.872147237236277e-08
+  ],
+  [
+   0.3435175120830536,
+   0.6072355508804321,
+   1.7567102909088135
+  ]
+ ]
+}

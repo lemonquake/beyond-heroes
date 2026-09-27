@@ -1,0 +1,27 @@
+diff --git a/game/assets/characters/anim_meta.json b/game/assets/characters/anim_meta.json
+index 93ee432..b15e330 100644
+--- a/game/assets/characters/anim_meta.json
++++ b/game/assets/characters/anim_meta.json
+@@ -36,6 +36,22 @@
+     "L": null
+    }
+   },
++  "idle_ranger": {
++   "length": 3.5,
++   "loop": false,
++   "props": {
++    "R": null,
++    "L": "bow"
++   }
++  },
++  "idle_shadowblade": {
++   "length": 3.5,
++   "loop": false,
++   "props": {
++    "R": "dagger",
++    "L": null
++   }
++  },
+   "idle_hurt": {
+    "length": 2.0,
+    "loop": true

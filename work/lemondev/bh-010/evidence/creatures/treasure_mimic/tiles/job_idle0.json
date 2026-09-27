@@ -1,0 +1,22 @@
+{
+ "paths": [
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_0.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_90.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_180.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_270.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_35.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\tiles\\idle0_iso_100.png"
+ ],
+ "labels": [
+  "front (yaw 0)",
+  "left side (yaw 90)",
+  "back (yaw 180)",
+  "right side (yaw 270)",
+  "3/4 front (yaw 35)",
+  "gameplay iso 26 m / 55 deg, scale 1.0"
+ ],
+ "out": "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\treasure_mimic\\treasure_mimic_idle0.png",
+ "cols": 6,
+ "title": "Treasure Mimic - idle frame 0",
+ "cell": 420
+}

@@ -1,0 +1,1711 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/inventory_window.gd:54)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:73)
+       [5] _ready (res://src/ui/ui_root.gd:41)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/character_window.gd:51)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:73)
+       [5] _ready (res://src/ui/ui_root.gd:42)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:58)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:73)
+       [5] _ready (res://src/ui/ui_root.gd:48)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _draw_markers (res://src/ui/hud/minimap.gd:161)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/npc/npc.gd:54)
+       [4] populate (res://src/npc/npc_directory.gd:16)
+       [5] load_map (res://src/autoload/game.gd:199)
+       [6] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] _ready (res://src/actors/tempo/tempo.gd:124)
+       [4] spawn_one (res://src/actors/tempo/tempo_party.gd:34)
+       [5] spawn_for (res://src/actors/tempo/tempo_party.gd:28)
+       [6] load_map (res://src/autoload/game.gd:200)
+       [7] _begin_session (res://src/autoload/game.gd:104)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:165)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:167)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+WARNING: AnimationNodeBlendSpace2D::add_blend_point: No name provided, using safe index as reference. In the future, empty names will be deprecated, so explicitly passing a name is recommended.
+   at: add_blend_point (scene/animation/animation_blend_space_2d.cpp:74)
+   GDScript backtrace (most recent call first):
+       [0] _bs (res://src/actors/character_visual.gd:155)
+       [1] _build_tree (res://src/actors/character_visual.gd:170)
+       [2] setup (res://src/actors/character_visual.gd:88)
+       [3] bind (res://src/actors/player/player.gd:128)
+       [4] _begin_session (res://src/autoload/game.gd:105)
+PERF {"cpu_render":{"avg":1.97,"p95":2.54},"draws":{"avg":390.0,"p95":390.0},"frame":{"avg":3.84,"p95":6.0},"gpu":{"avg":1.2,"p95":1.74},"lights":{"avg":6.0,"p95":6.0},"objects":{"avg":1153.0,"p95":1153.0},"prims":{"avg":98966.0,"p95":98966.0},"script":{"avg":1357.84,"p95":1357.84}} renderer=gl_compatibility lite=true map=sanctuary lights_in_map=59 vmem=213.5
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.
+ERROR: Texture with GL ID of 72: leaked 12280 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 234: leaked 21844 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 235: leaked 21844 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)

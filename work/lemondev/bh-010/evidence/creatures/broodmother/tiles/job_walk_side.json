@@ -1,0 +1,26 @@
+{
+ "paths": [
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_0.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_2.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_5.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_8.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_10.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_12.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_15.png",
+  "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\tiles\\walk_side_walk_18.png"
+ ],
+ "labels": [
+  "walk f0 0.00s",
+  "walk f2 0.07s",
+  "walk f5 0.17s",
+  "walk f8 0.27s",
+  "walk f10 0.33s",
+  "walk f12 0.40s",
+  "walk f15 0.50s",
+  "walk f18 0.60s"
+ ],
+ "out": "A:\\Python\\beyond-heroes\\work\\lemondev\\bh-010\\evidence\\creatures\\broodmother\\broodmother_walk_side.png",
+ "cols": 8,
+ "title": "Broodmother - walk cycle, side view (ground_speed 1.6 m/s)",
+ "cell": 300
+}

@@ -1,0 +1,48 @@
+bandit_bombardier: 7762 verts, 14762 tris, 13745 edges >= 1 cm audited; stretch = evaluated/rest, squash = rest/evaluated, dL = largest absolute edge change
+  alert           19 fr  stretch 1.90 (thigh.L f11 @(-0.02,-0.10,0.82)   ) squash 3.90  dL   8.7 cm  lowest z -0.00 m
+  block_impact    15 fr  stretch 2.06 (thigh.L f0 @(-0.02,-0.10,0.82)    ) squash 6.65  dL   9.0 cm  lowest z -0.00 m
+  block_loop      41 fr  stretch 2.06 (thigh.L f4 @(-0.02,-0.10,0.82)    ) squash 5.33  dL   9.2 cm  lowest z -0.00 m
+  cast_channel    31 fr  stretch 1.91 (thigh.L f14 @(-0.02,-0.10,0.82)   ) squash 2.08  dL   8.4 cm  lowest z -0.00 m
+  cast_heavy      29 fr  stretch 1.98 (thigh.L f17 @(-0.02,-0.10,0.82)   ) squash 2.92  dL   8.7 cm  lowest z -0.00 m
+  cast_quick      16 fr  stretch 1.93 (thigh.L f4 @(-0.02,-0.10,0.82)    ) squash 4.02  dL   8.9 cm  lowest z -0.00 m
+  charge_hold     41 fr  stretch 2.09 (thigh.L f20 @(-0.02,-0.10,0.82)   ) squash 9.01  dL   6.4 cm  lowest z -0.00 m
+  dagger_1        14 fr  stretch 2.14 (thigh.L f3 @(-0.02,-0.10,0.82)    ) squash 4.01  dL  10.3 cm  lowest z -0.00 m
+  death           47 fr  stretch 1.58 (thigh.L f14 @(+0.00,+0.11,0.86)   ) squash 18.49  dL   9.1 cm  lowest z -0.34 m
+  death_back      41 fr  stretch 1.51 (thigh.L f0 @(+0.02,-0.10,0.82)    ) squash 2.18  dL   8.7 cm  lowest z -0.35 m
+  death_crumple   37 fr  stretch 1.64 (thigh.L f13 @(+0.00,+0.11,0.86)   ) squash 20.02  dL   9.1 cm  lowest z -0.26 m
+  death_fwd       49 fr  stretch 1.75 (thigh.L f12 @(-0.02,-0.10,0.82)   ) squash 14.91  dL   9.1 cm  lowest z -0.37 m
+  getup           29 fr  stretch 2.03 (thigh.L f13 @(+0.02,-0.10,0.82)   ) squash 10.66  dL   8.7 cm  lowest z -0.66 m
+  hit_back        15 fr  stretch 1.53 (thigh.L f2 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  hit_front       15 fr  stretch 1.53 (thigh.L f5 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  hit_heavy       19 fr  stretch 1.54 (thigh.L f5 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  hit_left        15 fr  stretch 1.53 (thigh.L f3 @(-0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  hit_light       13 fr  stretch 1.52 (thigh.L f2 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  hit_right       15 fr  stretch 1.53 (thigh.L f3 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  idle           121 fr  stretch 1.49 (shoulder.R f53 @(-0.28,+0.00,1.48)) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  idle_1h         73 fr  stretch 1.89 (thigh.L f30 @(-0.02,-0.10,0.82)   ) squash 1.98  dL   7.2 cm  lowest z -0.00 m
+  idle_2h         81 fr  stretch 2.07 (thigh.L f34 @(-0.02,-0.10,0.82)   ) squash 2.68  dL  10.9 cm  lowest z -0.00 m
+  idle_bow        91 fr  stretch 1.58 (thigh.L f38 @(-0.02,-0.10,0.82)   ) squash 1.91  dL   8.3 cm  lowest z -0.00 m
+  idle_dagger     61 fr  stretch 2.11 (thigh.L f25 @(-0.02,-0.10,0.82)   ) squash 2.04  dL   7.3 cm  lowest z -0.00 m
+  idle_hurt       61 fr  stretch 1.65 (thigh.L f34 @(+0.02,-0.10,0.82)   ) squash 3.16  dL   7.9 cm  lowest z -0.00 m
+  idle_look      121 fr  stretch 1.49 (shoulder.L f109 @(+0.28,+0.00,1.48)) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  idle_shield     73 fr  stretch 1.89 (thigh.L f30 @(-0.02,-0.10,0.82)   ) squash 4.68  dL   8.7 cm  lowest z -0.00 m
+  idle_spear      81 fr  stretch 2.07 (thigh.L f34 @(-0.02,-0.10,0.82)   ) squash 2.37  dL   9.4 cm  lowest z -0.00 m
+  idle_staff      91 fr  stretch 1.54 (thigh.L f38 @(-0.02,-0.10,0.82)   ) squash 1.82  dL   7.8 cm  lowest z -0.00 m
+  knockback       37 fr  stretch 1.51 (thigh.L f0 @(+0.02,-0.10,0.82)    ) squash 2.98  dL   8.7 cm  lowest z -0.34 m
+  knockdown       25 fr  stretch 1.53 (thigh.L f9 @(+0.05,+0.11,0.86)    ) squash 5.20  dL   8.7 cm  lowest z -0.34 m
+  launch          25 fr  stretch 1.46 (thigh.R f12 @(-0.05,+0.11,0.86)   ) squash 2.52  dL   4.7 cm  lowest z +0.26 m
+  revive          47 fr  stretch 2.03 (thigh.L f27 @(+0.02,-0.10,0.82)   ) squash 10.64  dL   8.7 cm  lowest z -0.75 m
+  run             21 fr  stretch 2.16 (thigh.L f6 @(+0.02,+0.11,0.82)    ) squash 2.29  dL   9.4 cm  lowest z -0.00 m
+  run_combat      21 fr  stretch 2.07 (thigh.L f7 @(+0.02,-0.10,0.82)    ) squash 2.47  dL   7.1 cm  lowest z -0.00 m
+  run_hurt        23 fr  stretch 1.93 (thigh.L f10 @(+0.02,-0.10,0.82)   ) squash 2.67  dL   7.0 cm  lowest z -0.00 m
+  shield_bash     25 fr  stretch 2.15 (thigh.L f13 @(+0.02,-0.10,0.82)   ) squash 4.59  dL   9.8 cm  lowest z -0.00 m
+  stagger_heavy   33 fr  stretch 1.87 (thigh.L f15 @(+0.02,-0.10,0.82)   ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  stagger_small   21 fr  stretch 1.69 (thigh.L f8 @(+0.02,-0.10,0.82)    ) squash 2.00  dL   8.7 cm  lowest z -0.00 m
+  strafe_l        21 fr  stretch 1.97 (thigh.L f18 @(+0.02,-0.10,0.82)   ) squash 2.15  dL   7.5 cm  lowest z -0.00 m
+  strafe_r        21 fr  stretch 1.97 (thigh.L f8 @(-0.02,-0.10,0.82)    ) squash 2.15  dL   7.5 cm  lowest z -0.00 m
+  taunt           47 fr  stretch 1.96 (thigh.L f9 @(+0.02,-0.10,0.82)    ) squash 2.88  dL   8.1 cm  lowest z -0.00 m
+  walk            27 fr  stretch 1.74 (thigh.L f2 @(-0.02,-0.10,0.82)    ) squash 1.95  dL   8.5 cm  lowest z -0.00 m
+  walk_back       21 fr  stretch 1.60 (thigh.L f10 @(-0.02,-0.10,0.82)   ) squash 1.95  dL   8.5 cm  lowest z -0.00 m
+  walk_hurt       31 fr  stretch 1.57 (thigh.L f20 @(+0.02,-0.10,0.82)   ) squash 2.36  dL   8.5 cm  lowest z -0.00 m
+  wall_impact     33 fr  stretch 2.11 (thigh.L f22 @(-0.02,-0.10,0.82)   ) squash 13.86  dL   8.7 cm  lowest z -0.00 m
+worst over all clips: stretch 2.16x, squash 20.02x, dL 10.9 cm
