@@ -2,7 +2,7 @@ extends Node
 ## Runs the real boot scene and saves screenshots of every interface for visual review.
 ##   tools/render.sh --resolution 1920x1080 res://tests/tools/capture_ui.tscn -- --mode=menu --out=<dir>
 ##   tools/render.sh --resolution 1920x1080 res://tests/tools/capture_ui.tscn -- --mode=game --class=knight --out=<dir>
-## mode=menu: main menu, load panel, credits, settings, hero selection (both classes).
+## mode=menu: main menu, load panel, credits, settings, hero selection (all four classes).
 ## mode=game: HUD (idle, combat, low HP), inventory, character, skills, talents, world map, settings, dialogue, shop,
 ## pause, dev panel. --tempos=1 adds the chat box, the Tempo window, the Tempo-Caller window and Tempos in the forest. The hero is given levels, gear and statuses first so every panel has real content.
 
@@ -54,6 +54,10 @@ func _menu_flow() -> void:
 	await _shot("05_hero_select_knight", 40)
 	main.select._select(&"mage")
 	await _shot("06_hero_select_mage", 40)
+	main.select._select(&"ranger")
+	await _shot("06b_hero_select_ranger", 40)
+	main.select._select(&"shadowblade")
+	await _shot("06c_hero_select_shadowblade", 40)
 
 func _game_flow() -> void:
 	# wait for the session

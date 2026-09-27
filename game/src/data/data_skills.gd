@@ -108,15 +108,20 @@ static func skills() -> Array:
 			"description": "Wrap yourself in light: a ward absorbing {absorb}% of Maximum HP for {duration} s and healing {heal}% of Maximum HP.",
 			"params": {"duration": 8.0, "absorb": 30.0, "heal": 15.0, "radius": 4.0},
 			"per_rank": {"absorb": 4.0, "heal": 2.0}, "sound_cast": &"heal", "vfx": &"ward"}),
-	]
+	] + DataSkillsExt.skills()
 
 static func knight_tree() -> TreeDef:
 	var t := TreeDef.new()
 	t.id = &"knight_skills"
 	t.display_name = "Knight Skills"
 	t.points_kind = &"skill"
+	t.pages = [{"name": "Combat", "desc": "Weapon techniques and holy strikes."}, {"name": "Auras", "desc": "Toggle one aura at a time; it empowers you, your Tempos and your party."},
+		{"name": "Disciplines", "desc": "Passive skills: always on."}]
 	t.branches = [{"name": "Vanguard", "x": 1.0, "color": Color(0.85, 0.3, 0.25)}, {"name": "Bulwark", "x": 4.0, "color": Color(0.7, 0.72, 0.8)},
-		{"name": "Earthshaker", "x": 7.0, "color": Color(0.8, 0.6, 0.3)}]
+		{"name": "Earthshaker", "x": 7.0, "color": Color(0.8, 0.6, 0.3)},
+		{"name": "Offensive Auras", "x": 1.0, "color": Color(1.0, 0.55, 0.3), "page": 1}, {"name": "Defensive Auras", "x": 5.0, "color": Color(0.55, 0.78, 1.0), "page": 1},
+		{"name": "Arms", "x": 1.0, "color": Color(0.9, 0.4, 0.3), "page": 2}, {"name": "Oath", "x": 4.0, "color": Color(1.0, 0.85, 0.45), "page": 2},
+		{"name": "Endurance", "x": 7.0, "color": Color(0.7, 0.72, 0.8), "page": 2}]
 	t.nodes = [
 		{"id": &"cleave", "name": "Cleave", "kind": "skill", "skill": &"cleave", "icon": ICON % "cleave", "pos": Vector2(1, 0), "max_rank": 5, "cost": 1, "requires": []},
 		{"id": &"cleave_bleed", "name": "Rending Arc", "kind": "upgrade", "skill": &"cleave", "icon": ICON % "cleave", "pos": Vector2(0, 1), "max_rank": 1, "cost": 1,
@@ -147,16 +152,30 @@ static func knight_tree() -> TreeDef:
 			"requires": [&"leap_slam"], "req_level": 7},
 		{"id": &"fissure_twin", "name": "Twin Faults", "kind": "upgrade", "skill": &"ground_fissure", "icon": ICON % "ground_fissure", "pos": Vector2(8, 3), "max_rank": 1, "cost": 2,
 			"requires": [&"ground_fissure"], "req_level": 12, "params": {"count": 2.0}, "desc": "Fissure splits into three diverging lines."},
-	]
+	] + DataSkillsExt.knight_nodes()
+	# Diablo II style synergies on the original skills
+	_syn(t, &"cleave", [[&"arms_mastery", 4.0]])
+	_syn(t, &"whirlwind", [[&"arms_mastery", 4.0], [&"zeal", 3.0]])
+	_syn(t, &"judgment", [[&"aura_might", 6.0], [&"crusader_resolve", 5.0]])
+	_syn(t, &"shield_bash", [[&"shield_mastery", 6.0]])
+	_syn(t, &"ground_fissure", [[&"leap_slam", 5.0]])
 	return t
+
+static func _syn(t: TreeDef, id: StringName, syn: Array) -> void:
+	for n in t.nodes:
+		if n.id == id:
+			n["synergies"] = syn
 
 static func mage_tree() -> TreeDef:
 	var t := TreeDef.new()
 	t.id = &"mage_skills"
 	t.display_name = "Mage Skills"
 	t.points_kind = &"skill"
+	t.pages = [{"name": "Spells", "desc": "The eight elements."}, {"name": "Mastery", "desc": "Passive skills: always on."}]
 	t.branches = [{"name": "Pyre & Storm", "x": 1.0, "color": Color(1.0, 0.5, 0.2)}, {"name": "Frost & Tide", "x": 4.0, "color": Color(0.45, 0.8, 1.0)},
-		{"name": "Arcana", "x": 7.0, "color": Color(0.7, 0.5, 1.0)}]
+		{"name": "Arcana", "x": 7.0, "color": Color(0.7, 0.5, 1.0)},
+		{"name": "Fire & Storm", "x": 1.0, "color": Color(1.0, 0.5, 0.2), "page": 1}, {"name": "Frost & Tide", "x": 4.0, "color": Color(0.45, 0.8, 1.0), "page": 1},
+		{"name": "Mind", "x": 7.0, "color": Color(0.7, 0.5, 1.0), "page": 1}]
 	t.nodes = [
 		{"id": &"firebolt", "name": "Firebolt", "kind": "skill", "skill": &"firebolt", "icon": ICON % "firebolt", "pos": Vector2(1, 0), "max_rank": 5, "cost": 1, "requires": []},
 		{"id": &"firebolt_explode", "name": "Combustion", "kind": "upgrade", "skill": &"firebolt", "icon": ICON % "firebolt", "pos": Vector2(0, 1), "max_rank": 1, "cost": 1,
@@ -189,5 +208,9 @@ static func mage_tree() -> TreeDef:
 			"requires": [&"shadow_curse", &"radiant_ward"], "req_level": 12},
 		{"id": &"surge_overload", "name": "Singularity", "kind": "upgrade", "skill": &"arcane_surge", "icon": ICON % "arcane_surge", "pos": Vector2(7, 5), "max_rank": 1, "cost": 2,
 			"requires": [&"arcane_surge"], "req_level": 16, "params": {"pull": 1.0, "radius": 1.5}, "desc": "Arcane Surge pulls enemies in before detonating; +1.5 m radius."},
-	]
+	] + DataSkillsExt.mage_nodes()
+	_syn(t, &"firebolt", [[&"meteor", 6.0], [&"flame_sentinel", 4.0]])
+	_syn(t, &"meteor", [[&"firebolt", 6.0]])
+	_syn(t, &"frost_nova", [[&"blizzard", 5.0]])
+	_syn(t, &"chain_lightning", [[&"gale_burst", 5.0]])
 	return t

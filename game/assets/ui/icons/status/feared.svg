@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="64" cy="56" r="84"><stop offset="0" stop-color="#1a0a20"/><stop offset="0.6" stop-color="#0e0612"/><stop offset="1" stop-color="#050307"/></radialGradient><radialGradient id="r2" gradientUnits="userSpaceOnUse" cx="64" cy="60" r="46"><stop offset="0" stop-color="#8a3ae0" stop-opacity="0.4"/><stop offset="0.35" stop-color="#8a3ae0" stop-opacity="0.22"/><stop offset="0.7" stop-color="#8a3ae0" stop-opacity="0.06"/><stop offset="1" stop-color="#8a3ae0" stop-opacity="0"/></radialGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="51.4" cy="46.6" r="44"><stop offset="0" stop-color="#fbf8ff"/><stop offset="0.6" stop-color="#d0c8e0"/><stop offset="1" stop-color="#5a5070"/></radialGradient><radialGradient id="r4" gradientUnits="userSpaceOnUse" cx="47" cy="60.9" r="9.9"><stop offset="0" stop-color="#c060ff" stop-opacity="0.9"/><stop offset="0.35" stop-color="#c060ff" stop-opacity="0.5"/><stop offset="0.7" stop-color="#c060ff" stop-opacity="0.14"/><stop offset="1" stop-color="#c060ff" stop-opacity="0"/></radialGradient><radialGradient id="r5" gradientUnits="userSpaceOnUse" cx="69" cy="60.9" r="9.9"><stop offset="0" stop-color="#c060ff" stop-opacity="0.9"/><stop offset="0.35" stop-color="#c060ff" stop-opacity="0.5"/><stop offset="0.7" stop-color="#c060ff" stop-opacity="0.14"/><stop offset="1" stop-color="#c060ff" stop-opacity="0"/></radialGradient><linearGradient id="l6" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="128" y2="128"><stop offset="0" stop-color="#dfa3a1"/><stop offset="0.45" stop-color="#b8322e"/><stop offset="1" stop-color="#4a1412"/></linearGradient></defs>
+<path d="M20,2 L108,2 Q126,2 126,20 L126,108 Q126,126 108,126 L20,126 Q2,126 2,108 L2,20 Q2,2 20,2 Z" fill="#050307"/>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="url(#r1)"/>
+<g transform="translate(64 64) scale(0.86) translate(-64 -64)">
+<circle cx="64" cy="60" r="46" fill="url(#r2)"/>
+<path d="M33.8,64.2 C33.07,62 30.87,49.35 31.6,46.6 C32.33,43.85 40.4,32.76 42.6,31.2 C44.8,29.64 55.43,27.9 58,27.9 C60.57,27.9 71.2,29.64 73.4,31.2 C75.6,32.76 83.67,43.85 84.4,46.6 C85.13,49.35 82.93,62 82.2,64.2 C81.47,66.4 76.33,71.35 75.6,73 C74.87,74.65 76.15,83.08 73.4,84 C70.65,84.92 45.35,84.92 42.6,84 C39.85,83.08 41.13,74.65 40.4,73 C39.67,71.35 34.53,66.4 33.8,64.2 Z" fill="none" stroke="#0a0610" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M33.8,64.2 C33.07,62 30.87,49.35 31.6,46.6 C32.33,43.85 40.4,32.76 42.6,31.2 C44.8,29.64 55.43,27.9 58,27.9 C60.57,27.9 71.2,29.64 73.4,31.2 C75.6,32.76 83.67,43.85 84.4,46.6 C85.13,49.35 82.93,62 82.2,64.2 C81.47,66.4 76.33,71.35 75.6,73 C74.87,74.65 76.15,83.08 73.4,84 C70.65,84.92 45.35,84.92 42.6,84 C39.85,83.08 41.13,74.65 40.4,73 C39.67,71.35 34.53,66.4 33.8,64.2 Z" fill="url(#r3)"/>
+<path d="M53.6,57.6 C53.05,56.17 44.03,52.65 42.6,53.2 C41.17,53.75 38.75,61.67 39.3,63.1 C39.85,64.53 46.67,68.05 48.1,67.5 C49.53,66.95 54.15,59.03 53.6,57.6 Z" fill="#0a0410"/>
+<circle cx="47" cy="60.9" r="9.9" fill="url(#r4)"/>
+<circle cx="47" cy="60.9" r="2.42" fill="#e0b0ff"/>
+<path d="M62.4,57.6 C62.95,56.17 71.97,52.65 73.4,53.2 C74.83,53.75 77.25,61.67 76.7,63.1 C76.15,64.53 69.33,68.05 67.9,67.5 C66.47,66.95 61.85,59.03 62.4,57.6 Z" fill="#0a0410"/>
+<circle cx="69" cy="60.9" r="9.9" fill="url(#r5)"/>
+<circle cx="69" cy="60.9" r="2.42" fill="#e0b0ff"/>
+<path d="M58,67.5 L54.15,75.2 L61.85,75.2 Z" fill="#0a0410"/>
+<path d="M48.1,78.5 L48.1,85.1" fill="none" stroke="#0a0410" stroke-width="1.54" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M53.05,78.5 L53.05,85.1" fill="none" stroke="#0a0410" stroke-width="1.54" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M58,78.5 L58,85.1" fill="none" stroke="#0a0410" stroke-width="1.54" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M62.95,78.5 L62.95,85.1" fill="none" stroke="#0a0410" stroke-width="1.54" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M67.9,78.5 L67.9,85.1" fill="none" stroke="#0a0410" stroke-width="1.54" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M84.02,44.2 L118.23,41.99 L117.77,38.01 L83.98,43.8 Z" fill="#e2c4ff" opacity="0.7"/>
+<path d="M88,60.2 L120,62.5 L120,57.5 L88,59.8 Z" fill="#e2c4ff" opacity="0.7"/>
+<path d="M83.98,78.2 L115.75,83.98 L116.25,80.02 L84.02,77.8 Z" fill="#e2c4ff" opacity="0.7"/>
+<path d="M30,23 C29.25,25.8 27,26.4 27,30 C27,32.25 28.35,33 30,33 C31.65,33 33,32.25 33,30 C33,26.4 30.75,25.8 30,23 Z" fill="#a8d8ff" stroke="#0a0610" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M98,93 C97.25,95.8 95,96.4 95,100 C95,102.25 96.35,103 98,103 C99.65,103 101,102.25 101,100 C101,96.4 98.75,95.8 98,93 Z" fill="#a8d8ff" stroke="#0a0610" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<path d="M21,6 L107,6 Q122,6 122,21 L122,107 Q122,122 107,122 L21,122 Q6,122 6,107 L6,21 Q6,6 21,6 Z" fill="none" stroke="url(#l6)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21.5,9.5 L106.5,9.5 Q118.5,9.5 118.5,21.5 L118.5,106.5 Q118.5,118.5 106.5,118.5 L21.5,118.5 Q9.5,118.5 9.5,106.5 L9.5,21.5 Q9.5,9.5 21.5,9.5 Z" fill="none" stroke="#000000" stroke-width="1.2" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M21,3 L107,3 Q125,3 125,21 L125,107 Q125,125 107,125 L21,125 Q3,125 3,107 L3,21 Q3,3 21,3 Z" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

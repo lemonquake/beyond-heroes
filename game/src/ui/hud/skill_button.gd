@@ -2,7 +2,8 @@ class_name SkillButton
 extends Control
 ## One hotbar slot: painted bezel, skill (or potion) icon, radial cooldown sweep with the seconds left, a flash when it
 ## becomes ready, a keybind plaque, and a clear "why not" state: blue wash + mana cost in red when Mana is short,
-## grey when the weapon requirement is not met. Also used for potions (kind = &"potion").
+## grey when the weapon requirement is not met. Also used for potions (kind = &"potion"). An aura that is switched on
+## wears a slowly turning halo (warm = offense, cool = defense).
 
 signal activated(slot: SkillButton)
 signal skill_dropped(slot: SkillButton, skill_id: StringName)
@@ -20,6 +21,8 @@ var _flash := 0.0
 var _hover := false
 var _mana_cost := 0.0
 var _icon: Texture2D
+var _aura: SkillDef                 # set when the slot holds an aura
+var _aura_on := false
 
 func _init(p_action := &"", size_px := 64.0) -> void:
 	action = p_action
@@ -37,6 +40,8 @@ func _ready() -> void:
 func set_skill(sid: StringName) -> void:
 	skill_id = sid
 	_icon = UIArt.skill_icon(sid) if sid != &"" else null
+	var s := DB.skill(sid) if sid != &"" else null
+	_aura = s if s and s.is_aura() else null
 	queue_redraw()
 
 func set_potion(base_id: StringName) -> void:
@@ -59,6 +64,11 @@ func update_state(cd: float, cd_total: float, block := "", count := -1, mana_cos
 		queue_redraw()
 
 func _process(delta: float) -> void:
+	if _aura:
+		var on := Game.hero != null and Game.hero.active_aura == skill_id
+		if on != _aura_on or on:
+			_aura_on = on
+			queue_redraw()
 	if _flash > 0.0:
 		_flash = maxf(0.0, _flash - delta * 2.2)
 		queue_redraw()
@@ -82,6 +92,11 @@ func _draw() -> void:
 	var bez := UIArt.tex("slots/skill_slot_empty.png" if empty else "slots/skill_slot.png")
 	if bez:
 		draw_texture_rect(bez, r, false)
+	if _aura and _aura_on:
+		var hc := Color(1.0, 0.62, 0.3) if _aura.aura_kind == &"offense" else Color(0.55, 0.78, 1.0)
+		var a0 := Time.get_ticks_msec() * 0.0015
+		draw_arc(ir.get_center(), ir.size.x * 0.6, a0, a0 + TAU * 0.8, 40, Color(hc, 0.95), 3.0, true)
+		draw_rect(ir, Color(hc, 0.12))
 	# cooldown sweep: dark pie over the remaining fraction, clockwise from 12 o'clock
 	if _cd > 0.0 and _cd_total > 0.0:
 		var frac := clampf(_cd / _cd_total, 0.0, 1.0)

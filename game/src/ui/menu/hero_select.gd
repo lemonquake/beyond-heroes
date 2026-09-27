@@ -1,12 +1,16 @@
 class_name HeroSelect
 extends Control
 ## Hero Selection. Centre: the chosen hero in 3D on a lit plinth (drag to rotate, wheel to zoom, idles play).
-## Left: class cards. Right: class name and tagline, description, difficulty, major attributes, class resource,
+## Left: class cards (Knight, Mage, Ranger, Shadowblade). Right: class name and tagline, description, difficulty, major attributes, class resource,
 ## strengths, weaknesses, starting equipment (hover for item tooltips) and starting skills (hover for details).
 ## Bottom: hero name, game difficulty, save slot; Back / Begin. Emits begin(class_id, name, slot, difficulty).
 
 signal begin(class_id: StringName, hero_name: String, slot: int, difficulty: int)
 signal back
+
+const CLASSES := [&"knight", &"mage", &"ranger", &"shadowblade"]
+## Suggested hero names per class (replaced only while the player has not typed their own).
+const DEFAULT_NAMES := {&"knight": "Aldric", &"mage": "Seraphine", &"ranger": "Tamsin", &"shadowblade": "Corvin"}
 
 var class_id: StringName = &"knight"
 var preview: CharacterPreview
@@ -88,13 +92,15 @@ func _build_cards() -> void:
 	col.offset_right = 400
 	col.offset_top = -260
 	col.offset_bottom = 200
-	col.add_theme_constant_override("separation", 18)
+	col.offset_top = -290
+	col.offset_bottom = 230
+	col.add_theme_constant_override("separation", 12)
 	add_child(col)
-	for id in [&"knight", &"mage"]:
+	for id in CLASSES:
 		var cls := DB.class_def(id)
 		var card := Button.new()
 		card.toggle_mode = true
-		card.custom_minimum_size = Vector2(330, 130)
+		card.custom_minimum_size = Vector2(330, 112)
 		card.text = ""
 		var h := HBoxContainer.new()
 		h.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -105,7 +111,7 @@ func _build_cards() -> void:
 		card.add_child(h)
 		var ic := TextureRect.new()
 		ic.texture = UIArt.portrait(String(id))
-		ic.custom_minimum_size = Vector2(92, 92)
+		ic.custom_minimum_size = Vector2(84, 84)
 		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		ic.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -115,7 +121,7 @@ func _build_cards() -> void:
 		v.alignment = BoxContainer.ALIGNMENT_CENTER
 		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		h.add_child(v)
-		var n := UITheme.title(cls.display_name, 28, UITheme.PARCHMENT)
+		var n := UITheme.title(cls.display_name, 28 if cls.display_name.length() <= 8 else 24, UITheme.PARCHMENT)
 		n.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(n)
 		var t := UITheme.label(cls.class_resource_name, 16, UITheme.TEXT_DIM, UITheme.body_font())
@@ -310,8 +316,8 @@ func _select(id: StringName) -> void:
 		b.set_skill(sid)
 		TooltipLayer.attach(b, func() -> Control: return Tips.skill(sid, null))
 		_skills.add_child(b)
-	if _name.text.strip_edges() == "" or _name.text in ["Aldric", "Seraphine"]:
-		_name.text = "Aldric" if id == &"knight" else "Seraphine"
+	if _name.text.strip_edges() == "" or _name.text in DEFAULT_NAMES.values():
+		_name.text = DEFAULT_NAMES.get(id, "Hero")
 	_validate()
 
 func _bullet(t: String, col: Color) -> Control:

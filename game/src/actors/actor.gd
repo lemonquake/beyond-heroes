@@ -129,12 +129,30 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	req.target = stats
 	req.target_status = status
 	req.target_weight = weight
+	_positional_bonuses(req, attacker)
 	_prepare_incoming(req, attacker)
 	var result := DamagePipeline.compute(req, rng)
 	if attacker != null:
 		last_attacker = attacker
 	_apply_result(result, req, attacker, hit_point)
 	return result
+
+## Attacker passives that depend on this target (bh-010): Ruthless (low-HP targets) and Opportunist (from behind).
+func _positional_bonuses(req: DamageRequest, attacker: Node) -> void:
+	var st := req.attacker
+	if st == null or req.kind == DamageRequest.Kind.DOT:
+		return
+	if st.has_flag(&"execute") and hp < max_hp() * 0.35:
+		req.more.append(["Ruthless", 1.0 + st.flag(&"execute")])
+	if st.has_flag(&"backstab") and attacker is Node3D:
+		var to_att := (attacker as Node3D).global_position - global_position
+		to_att.y = 0.0
+		if to_att.length() > 0.05 and forward().dot(to_att.normalized()) < -0.3:
+			req.more.append(["Opportunist", 1.0 + st.flag(&"backstab")])
+
+## HP per second from auras and passives (Aura of Mending, Second Wind); regeneration code adds it.
+func aura_regen() -> float:
+	return max_hp() * status.magnitude(&"aura_mending") + status.magnitude(&"second_wind")
 
 ## Hook for subclasses: guard/parry state, weak points, elite wards...
 func _prepare_incoming(_req: DamageRequest, _attacker: Node) -> void:
@@ -163,6 +181,19 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 	Events.damage_dealt.emit(self, result, pos, attacker)
 	if attacker is Actor and result.leech > 0.0 and attacker.alive:
 		attacker.heal(result.leech, false)
+	# Aura of Thorns: melee attackers take part of what they dealt (never from projectiles, spells or reflections).
+	if status.has(&"aura_thorns") and attacker is Actor and attacker != self and attacker.alive and result.total > 0 			and req.kind == DamageRequest.Kind.ATTACK and not req.tags.has(&"projectile") and not req.tags.has(&"thorns"):
+		var tr := DamageRequest.new()
+		tr.kind = DamageRequest.Kind.SPELL
+		tr.attacker = stats
+		tr.base_min = float(result.total) * status.magnitude(&"aura_thorns")
+		tr.base_max = tr.base_min
+		tr.can_crit = false
+		tr.evadable = false
+		tr.blockable = false
+		tr.label = "Thorns"
+		tr.tags[&"thorns"] = true
+		(attacker as Actor).receive_hit(tr, self, (attacker as Actor).center())
 	if hp <= 0.0:
 		die(attacker)
 		# Corpses still fly: apply knockback after death for satisfying ragdoll-like throws.

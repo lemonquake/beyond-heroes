@@ -25,6 +25,7 @@ var _markers: Control
 var _frame: TextureRect
 var _map_label: Label
 var _update_t := 0.0
+var _marker_t := 0.0
 
 func _init(p_diameter := 200.0) -> void:
 	diameter = p_diameter
@@ -98,11 +99,19 @@ func _process(delta: float) -> void:
 		_vp.world_3d = p.get_world_3d()
 	_map_label.text = Game.current_map.def.display_name if Game.current_map and Game.current_map.def else ""
 	_update_t -= delta
-	if _update_t <= 0.0:
+	# efficiency mode (bh-009): the top-down view is a whole second render of the map; redraw it only once the hero has
+	# moved a few metres (or every 1.5 s for moving enemies), not five times a second
+	var due := _update_t <= 0.0
+	if Perf.lite:
+		due = _update_t <= -1.3 or (due and _cam.global_position.distance_to(p.global_position + Vector3(0, 60, 0)) > 3.0)
+	if due:
 		_update_t = 0.2
 		_cam.global_position = p.global_position + Vector3(0, 60, 0)
 		_vp.render_target_update_mode = SubViewport.UPDATE_ONCE
-	_markers.queue_redraw()
+	_marker_t -= delta
+	if _marker_t <= 0.0:
+		_marker_t = 0.1 if Perf.lite else 0.0     # efficiency mode: markers move ten times a second
+		_markers.queue_redraw()
 
 func _to_map(world: Vector3, center: Vector3) -> Vector2:
 	var d := Vector2(world.x - center.x, world.z - center.z) / (radius_m * 2.0)
@@ -143,6 +152,11 @@ func _draw_markers() -> void:
 			col2 = UITheme.GOLD
 			r = 4.5
 		_dot(e.global_position, c, col2, r, e.is_boss, lim)
+	# other human players (bh-008): big dots in their colour, pinned to the rim when far away
+	for h in tree.get_nodes_in_group(&"net_hero"):
+		if h.alive:
+			_dot(h.global_position, c, Color.WHITE, 6.5, true, lim)
+			_dot(h.global_position, c, Net.player_color(h.owner_peer), 5.2, true, lim)
 	# the hero: an arrow pointing where they face
 	var f: Vector3 = p.global_transform.basis.z
 	var ang := atan2(f.x, f.z)

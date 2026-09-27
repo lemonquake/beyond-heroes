@@ -15,9 +15,15 @@ var _menu: VBoxContainer
 var _load_panel: PanelContainer
 var _credits: PanelContainer
 var _settings: SettingsWindow
+var _confirm: ConfirmDialog
 var _fade: ColorRect
 var _buttons: Array[Button] = []
 var _heroes: Array[CharacterVisual] = []
+var _logo: TextureRect
+var _byline: Label
+## Set before adding: the boot title sequence (TitleIntro) plays over this menu and hands the wordmark to it; the
+## wordmark, byline, buttons and music wait for `reveal()`.
+var wait_intro := false
 
 const CENTER := Vector3(0, 1.4, 4.0)
 
@@ -41,10 +47,12 @@ func _ready() -> void:
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(shade)
 	var logo := UIArt.image("menu/title_logo.png")
+	_logo = logo
 	logo.position = Vector2(70, 70)
 	logo.size = logo.custom_minimum_size
 	add_child(logo)
 	var byline := UITheme.label("by Aljay Leodones", 20, UITheme.PARCHMENT, UITheme.body_font())
+	_byline = byline
 	byline.position = Vector2(80, 70 + logo.size.y + 2)
 	byline.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	byline.add_theme_constant_override("outline_size", 5)
@@ -56,10 +64,17 @@ func _ready() -> void:
 	frame.offset_right = 150 + 400
 	frame.offset_top = 330
 	frame.offset_bottom = -60
+	# a short canvas (phone at a larger Interface Scale): smaller wordmark, the column starts higher
+	var short := get_viewport_rect().size.y < 1000.0
+	if short:
+		logo.scale = Vector2.ONE * 0.72
+		byline.position.y = 70 + logo.size.y * 0.72 + 2
+		frame.offset_top = 70 + logo.size.y * 0.72 + 44
+		frame.offset_bottom = -16
 	add_child(frame)
 	_menu = VBoxContainer.new()
 	_menu.alignment = BoxContainer.ALIGNMENT_CENTER
-	_menu.add_theme_constant_override("separation", 10)
+	_menu.add_theme_constant_override("separation", 10 if get_viewport_rect().size.y >= 1000.0 else 4)
 	frame.add_child(_menu)
 	var has_save := _latest_slot() >= 0
 	_add(&"continue", "Continue", _continue, not has_save)
@@ -67,7 +82,7 @@ func _ready() -> void:
 	_add(&"load", "Load Game", _show_load, not has_save)
 	_add(&"settings", "Settings", _show_settings)
 	_add(&"credits", "Credits", _show_credits)
-	_add(&"exit", "Exit", func() -> void: get_tree().quit())
+	_add(&"exit", "Exit", _ask_exit)
 	var ver := UITheme.label("Development build · %s" % ProjectSettings.get_setting("application/config/name"), 14, UITheme.TEXT_MUTED, UITheme.body_font())
 	ver.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	ver.offset_left = -420
@@ -81,21 +96,46 @@ func _ready() -> void:
 	add_child(_credits)
 	_settings = SettingsWindow.new()
 	add_child(_settings)
+	_confirm = ConfirmDialog.new()
+	add_child(_confirm)
 	_fade = ColorRect.new()
 	_fade.color = Color(0.01, 0.01, 0.015)
 	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_fade)
+	if wait_intro:
+		_fade.modulate.a = 0.0
+		_logo.visible = false
+		_byline.visible = false
+		for b in _buttons:
+			b.modulate.a = 0.0
+		return
 	create_tween().tween_property(_fade, "modulate:a", 0.0, 1.6).set_delay(0.2)
-	_buttons[0 if has_save else 1].grab_focus.call_deferred()
+	reveal()
+
+## Buttons in, focus, music (straight away, or when the title sequence hands over).
+func reveal() -> void:
+	_logo.visible = true
+	_byline.visible = true
+	_buttons[0 if _latest_slot() >= 0 else 1].grab_focus.call_deferred()
 	Audio.play_music(&"music_menu")
 	Audio.play_ambience(&"amb_town")
 	_animate_in()
 
+## Where the wordmark and byline sit on this screen (canvas coordinates), for the title sequence's hand-off.
+func logo_rect() -> Rect2:
+	return Rect2(_logo.global_position, _logo.size * _logo.scale)
+
+func byline_pos() -> Vector2:
+	return _byline.global_position
+
+func byline_font_scale() -> float:
+	return _byline.scale.x * 20.0 / 60.0
+
 func _add(id: StringName, text: String, cb: Callable, disabled := false) -> void:
 	var b := UIWindow.button(text, cb, &"BannerButton", 330.0)
 	b.name = String(id)
-	b.custom_minimum_size.y = 66
+	b.custom_minimum_size.y = 66 if get_viewport_rect().size.y >= 1000.0 else 60
 	b.disabled = disabled
 	b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	b.pivot_offset = Vector2(165, 33)
@@ -123,9 +163,12 @@ func build_backdrop(world: Node3D) -> void:
 	world.add_child(backdrop)
 	var map := Game.build_map(&"sanctuary")
 	backdrop.add_child(map)
-	# both heroes by the fountain, facing the camera's orbit centre
-	for pair in [[&"knight", Vector3(-1.6, 0, 8.6), 200.0], [&"mage", Vector3(1.7, 0, 8.4), 160.0]]:
+	# the heroes by the fountain, facing the camera's orbit centre (a class joins once its model is built)
+	for pair in [[&"knight", Vector3(-1.6, 0, 8.6), 200.0], [&"mage", Vector3(1.7, 0, 8.4), 160.0],
+			[&"ranger", Vector3(-3.7, 0, 7.5), 215.0], [&"shadowblade", Vector3(3.8, 0, 7.3), 145.0]]:
 		var cls := DB.class_def(pair[0])
+		if cls == null or not ResourceLoader.exists(cls.model_path):
+			continue
 		var v := CharacterVisual.new()
 		backdrop.add_child(v)
 		v.setup(cls.model_path, 1.0, cls.tint, cls.id)
@@ -155,7 +198,7 @@ func build_backdrop(world: Node3D) -> void:
 
 func _particles(tex: Texture2D, col: Color, n: int, vel: Vector3, size: float) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = n
+	p.amount = Perf.particles(n)
 	p.lifetime = 9.0
 	p.preprocess = 9.0
 	p.visibility_aabb = AABB(Vector3(-40, -5, -40), Vector3(80, 30, 80))
@@ -333,6 +376,22 @@ func _show_settings() -> void:
 	_load_panel.visible = false
 	_credits.visible = false
 	_settings.open()
+
+## Back (the phone's button): close the open panel, or ask before leaving the game.
+func go_back() -> void:
+	if _confirm.visible:
+		_confirm.cancel()
+	elif _settings.visible:
+		_settings.close_window()
+	elif _load_panel.visible:
+		_load_panel.visible = false
+	elif _credits.visible:
+		_credits.visible = false
+	else:
+		_ask_exit()
+
+func _ask_exit() -> void:
+	_confirm.ask("Exit Beyond Heroes", "Close the game? Your heroes are saved.", func() -> void: get_tree().quit(), "Exit", true)
 
 func fade_out() -> void:
 	var tw := create_tween()

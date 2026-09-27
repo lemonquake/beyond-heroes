@@ -235,7 +235,7 @@ func _ravine() -> void:
 		for dz in [-2.6, 2.6]:
 			kit("pillar_broken" if sx > 0 and dz > 0 else "pillar", Vector3(sx, 0, BRIDGE_Z + dz), 0.0, 0.55, geo, true)
 	torch_post(Vector3(-8.2, 0, BRIDGE_Z - 2.6))
-	enemy_zone("bridge", Vector3(0, 0, BRIDGE_Z), 4.0, [&"bonewarden", &"grave_archer"], 3, 0.6)
+	enemy_zone("bridge", Vector3(0, 0, BRIDGE_Z), 4.0, [&"bonewarden", &"grave_archer", &"mire_troll"], 3, 0.6)
 
 ## A fire bowl burning on top of a pillar (outdoor spots without walls to hang torches on).
 func torch_post(p: Vector3) -> void:
@@ -256,7 +256,7 @@ func _camp() -> void:
 	for p in [Vector3(-7.0, 0, -1.2), Vector3(7.2, 0, -2.8), Vector3(6.4, 0, -3.8)]:
 		breakable("crate" if rng.randf() < 0.5 else "barrel", CAMP + p, rng.randf() * 360.0, 20.0, true)
 	decor("bones_scatter", CAMP + Vector3(5.5, 0, 4.5), 60.0)
-	enemy_zone("camp", CAMP, 7.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_cutthroat"], 6, 0.25, true)
+	enemy_zone("camp", CAMP, 7.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_cutthroat", &"bandit_bombardier"], 6, 0.25, true)
 
 func _tower() -> void:
 	kit("ruin_tower", TOWER, 20.0, 1.0, geo, true)
@@ -309,7 +309,7 @@ func _grove_and_gate() -> void:
 	for i in 7:
 		var p := Vector3(g.x - 18.0 + rng.randf_range(-6, 6), 0, g.z + rng.randf_range(-10, 10))
 		cylinder_shard(p)
-	enemy_zone("grove", ob, 8.0, [&"shade_stalker", &"ashen_cultist", &"ghoul_brute", &"dire_wolf"], 6, 0.4, true)
+	enemy_zone("grove", ob, 8.0, [&"shade_stalker", &"ashen_cultist", &"ghoul_brute", &"dire_wolf", &"plague_bloater"], 6, 0.4, true)
 
 func _raiders() -> void:
 	# goblin scavenger camp: loot piled from the village, a smoky fire, fire-pots stacked by the crates
@@ -321,7 +321,7 @@ func _raiders() -> void:
 	decor("weapons_discarded", g + Vector3(1.8, 0, 2.6), 30.0)
 	decor("bones_scatter", g + Vector3(-1.5, 0, 3.4), 80.0)
 	decor("skull_pile", g + Vector3(3.8, 0, 2.2), 10.0, 0.6)
-	enemy_zone("goblin_camp", g, 6.0, [&"goblin_skulker"], 5, 0.2, true)
+	enemy_zone("goblin_camp", g, 6.0, [&"goblin_skulker", &"goblin_skulker", &"goblin_summoner"], 5, 0.2, true)
 	# orc scouts on the watchtower hill: a war banner, a fire and the ogre's chain post
 	var o := ORC_CAMP
 	campfire(o, 4.2)
@@ -330,7 +330,7 @@ func _raiders() -> void:
 	kit("banner_torn", o + Vector3(-1.5, 3.4 + ground(o.x - 1.5, o.z - 3.0), -3.0), 10.0, 0.9, deco)
 	kit("wood_fence", o + Vector3(-1.5, 0, -3.0), 0.0, 0.5, props, true)
 	decor("bones_scatter", o + Vector3(2.0, 0, -2.6), 20.0)
-	enemy_zone("orc_scouts", o, 6.0, [&"orc_reaver", &"orc_reaver", &"goblin_skulker"], 3, 0.3, true)
+	enemy_zone("orc_scouts", o, 6.0, [&"orc_reaver", &"orc_reaver", &"goblin_skulker", &"orc_shaman"], 4, 0.3, true)
 	var og := OGRE_POST
 	kit("stump", og + Vector3(-1.4, 0, -1.0), 0.0, 0.6, props, true)
 	kit("chains_hanging", og + Vector3(-1.4, 0.4 + ground(og.x - 1.4, og.z - 1.0), -1.0), 0.0, 0.8, deco)
@@ -341,7 +341,7 @@ func _raiders() -> void:
 		var w: Vector3 = WOLF_DENS[i]
 		decor("bones_scatter", w + Vector3(0.8, 0, 0.6), rng.randf() * 360.0)
 		decor("rock_large", w + Vector3(-2.6, 0, -1.8), rng.randf() * 360.0, 0.9, true, true)
-		enemy_zone("wolf_den_%d" % i, w, 6.0, [&"dire_wolf"], 3, 0.1, true)
+		enemy_zone("wolf_den_%d" % i, w, 6.0, [&"dire_wolf"] if i % 2 == 0 else [&"broodmother", &"dire_wolf", &"dire_wolf"], 3, 0.1, true)
 
 ## Violet corruption crystals erupting from the ground.
 func cylinder_shard(p: Vector3) -> MeshInstance3D:

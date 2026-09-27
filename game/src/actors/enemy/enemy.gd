@@ -77,6 +77,20 @@ var _threat := {}                     # attacker instance id -> threat (damage d
 var _taunt_by: Actor
 var _taunt_t := 0.0
 var _retarget_t := 0.0
+## Networking (bh-008): on a client every monster is a replica of the host's — no AI, moved and animated by the host's
+## snapshots; blows on it are resolved here and applied by the host; it dies when the host says so.
+var net_replica := false
+var _net_pos := Vector3.ZERO
+var _net_yaw := 0.0
+var _net_vel := Vector3.ZERO
+var _net_serial := -1
+var _net_engaged := false
+## bh-010: the new monsters' signature mechanics live in a helper (null for the older roster).
+const TraitsExt := preload("res://src/actors/enemy/enemy_traits_ext.gd")
+var ext: TraitsExt
+var risen := false                    # raised by a Necromancer: a weaker Hollow Soldier that cannot rise again
+var summoner: Node                    # who raised / summoned / planted it (null for camp monsters)
+var _bone_ward := 0.0                 # part of shield_hp that is a Necromancer's Bone Ward
 
 func setup(p_def: EnemyDef, p_level: int, mods: Array = [], p_difficulty := {}) -> Enemy:
 	def = p_def
@@ -143,6 +157,10 @@ func _ready() -> void:
 	visual.set_stance(_idle_anim())
 	for sid in def.status_immune:
 		status.immunities[StringName(sid)] = true
+	if is_boss:
+		status.immunities[&"feared"] = true
+	if TraitsExt.wants(def):
+		ext = TraitsExt.new(self)
 	status.grants_stagger_window = is_elite or is_boss
 	mark_stats_dirty()
 	ensure_stats()
@@ -153,13 +171,24 @@ func _ready() -> void:
 			shield_hp = max_hp() * stats.flag(&"ward")
 			status.apply(&"elite_shield", 0.0)
 	home = global_position
-	bar = EnemyBar.new()
-	bar.setup(self)
-	add_child(bar)
+	if risen and visual:
+		visual.set_rim(Color(0.4, 1.0, 0.55), 0.7)
 	_think_offset = rng.randf() * THINK_INTERVAL
 	_think_t = _think_offset
 	_strafe_dir = 1.0 if rng.randf() < 0.5 else -1.0
 	brain.go(EnemyBrain.State.PATROL if patrol_radius > 0.5 and not is_boss else EnemyBrain.State.IDLE)
+	if ext:
+		ext.setup()
+	if ext == null or not ext.dormant:
+		make_bar()
+
+## The floating health bar (a dormant Mimic has none until it wakes).
+func make_bar() -> void:
+	if bar != null and is_instance_valid(bar):
+		return
+	bar = EnemyBar.new()
+	bar.setup(self)
+	add_child(bar)
 
 func has_trait(t: StringName) -> bool:
 	return def != null and def.traits.has(t)
@@ -174,8 +203,51 @@ func _shape_fallback() -> void:
 			visual.model.scale = Vector3.ONE * 0.6
 			visual.model.position.y = 0.6
 			visual.add_child(VFXLib.orb(def.tint, 0.35, true))
+		&"spider", &"mimic", &"totem":
+			# bh-010 creatures before their models exist: a readable stand-in shape instead of a person
+			for c in visual.model.get_children():
+				if c is MeshInstance3D:
+					c.visible = false
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = def.tint
+			mat.roughness = 0.7
+			var mi := MeshInstance3D.new()
+			match def.body_shape:
+				&"spider":
+					var s := SphereMesh.new()
+					s.radius = 0.6
+					s.height = 0.7
+					mi.mesh = s
+					mi.position = Vector3(0, 0.55, -0.2)
+					for i in 8:
+						var leg := MeshInstance3D.new()
+						var bx := BoxMesh.new()
+						bx.size = Vector3(1.3, 0.08, 0.08)
+						leg.mesh = bx
+						leg.material_override = mat
+						var side := -1.0 if i < 4 else 1.0
+						leg.position = Vector3(side * 0.7, 0.45, -0.5 + float(i % 4) * 0.3)
+						leg.rotation.z = side * 0.5
+						visual.model.add_child(leg)
+				&"mimic":
+					var b := BoxMesh.new()
+					b.size = Vector3(1.1, 0.75, 0.7)
+					mi.mesh = b
+					mi.position.y = 0.38
+					mat.albedo_color = Color(0.45, 0.3, 0.16)
+				&"totem":
+					var cy := CylinderMesh.new()
+					cy.top_radius = 0.22
+					cy.bottom_radius = 0.3
+					cy.height = 2.2
+					mi.mesh = cy
+					mi.position.y = 1.1
+			mi.material_override = mat
+			visual.model.add_child(mi)
 
 func _idle_anim() -> StringName:
+	if def.body_shape != &"humanoid":
+		return &"idle"
 	match def.archetype:
 		&"shield": return &"idle_shield"
 		&"ranged": return &"idle_bow"
@@ -212,17 +284,32 @@ func rebuild_stats() -> void:
 		mods.append(StatModifier.more(&"outgoing_damage", float(miniboss.get("damage", 1.2)) - 1.0, "Champion"))
 		mods.append(StatModifier.more(&"poise", 0.8, "Champion"))
 		mods.append(StatModifier.flat(&"knockback_res", 0.25, "Champion"))
+	if risen:
+		mods.append(StatModifier.more(&"max_hp", TraitsExt.RISEN_HP - 1.0, "Risen"))
+		mods.append(StatModifier.more(&"outgoing_damage", TraitsExt.RISEN_DAMAGE - 1.0, "Risen"))
+	if ext:
+		ext.stat_mods(mods)
 	stats = EnemyStats.build(def, level, difficulty, mods, is_elite, is_boss)
+	if ext:
+		ext.post_stats(stats)
 
 # ---- Main loop -----------------------------------------------------------------------------------------------
 
 func _physics_process(delta: float) -> void:
 	if not is_finite(delta) or delta <= 0.0:
 		return
+	if net_replica:
+		_net_step(delta)
+		return
 	ensure_stats()
+	if Perf.lite and _lite_sleep(delta):
+		return
 	status.tick(delta)
 	if not alive:
 		physics_move(delta, Vector3.ZERO)
+		return
+	if ext and ext.pre_tick(delta):
+		physics_move(delta, Vector3.ZERO)       # a dormant Mimic, a War Totem: no AI this frame
 		return
 	brain.tick(delta)
 	_tick_cooldowns(delta)
@@ -248,6 +335,49 @@ func _physics_process(delta: float) -> void:
 		visual.update_locomotion(Vector2(local.x, local.z), brain.is_engaged(), 0.0, delta)
 	_ambient_sound(delta)
 
+## Efficiency mode (bh-009): a calm monster far beyond sight of the hero dozes — standing on the ground, nothing to
+## fight, nothing burning — and only checks twice a second whether the hero has come near. The whole simulation
+## (perception, steering, physics, animation blending) resumes the moment it wakes, well outside its sight range.
+var _asleep := false
+var _sleep_check := 0.0
+
+func _lite_sleep(delta: float) -> bool:
+	if _asleep:
+		_sleep_check -= delta
+		if _sleep_check > 0.0:
+			return true
+		_sleep_check = 0.5
+		if _should_sleep():
+			return true
+		_asleep = false
+		if visual:
+			visual.set_process(true)
+		return false
+	_sleep_check -= delta
+	if _sleep_check > 0.0:
+		return false
+	_sleep_check = 0.5
+	if not _should_sleep():
+		return false
+	_asleep = true
+	velocity = Vector3.ZERO
+	if visual:
+		visual.set_process(false)
+	return true
+
+func _should_sleep() -> bool:
+	if not alive or is_boss or brain.is_engaged() or not is_on_floor() or knock_velocity != Vector3.ZERO:
+		return false
+	for id in status.statuses:
+		if not status.statuses[id].infinite:       # standing markers (Troll Blood, Rune Shift) do not keep it awake
+			return false
+	if ext and (ext.fuse_lit or not ext.jobs.is_empty()):
+		return false
+	var hero := Game.player as Node3D
+	if hero == null or not is_instance_valid(hero):
+		return false
+	return global_position.distance_to(hero.global_position) > maxf(48.0, def.sight_range * 1.5 + 8.0)
+
 func _tick_cooldowns(delta: float) -> void:
 	for k in cooldowns.keys():
 		cooldowns[k] -= delta
@@ -263,6 +393,9 @@ func is_aggressive() -> bool:
 ## Stagger / knockback / disable interrupt any state.
 func _update_interrupts() -> void:
 	var S := EnemyBrain.State
+	if status.has(&"feared") and (action != null or brain.is_busy()):
+		_interrupt()                               # terror breaks off any attack or cast
+		brain.go(S.POSITION)
 	if status.is_disabled():
 		if brain.state != S.STAGGER:
 			_interrupt()
@@ -309,9 +442,10 @@ func _select_target(delta: float) -> void:
 	if valid and _retarget_t > 0.0:
 		return
 	_retarget_t = 2.5 if is_boss else 1.0
-	var best: Actor = hero if hero and is_instance_valid(hero) else null
+	# a hero in Stealth (Smoke Veil) is not a candidate at all: the monster loses them until they show again
+	var best: Actor = hero if hero and is_instance_valid(hero) and not _hidden(hero) else null
 	var best_s := _target_score(best) if best else -INF
-	for t in get_tree().get_nodes_in_group(&"tempo"):
+	for t in get_tree().get_nodes_in_group(&"tempo") + get_tree().get_nodes_in_group(&"net_ally"):
 		if not t.alive or _hidden(t):
 			continue
 		var sc := _target_score(t)
@@ -319,7 +453,7 @@ func _select_target(delta: float) -> void:
 			best_s = sc
 			best = t
 	if best == null:
-		target = hero
+		target = hero if hero and is_instance_valid(hero) and not _hidden(hero) else null
 	elif valid and best != target and best_s < _target_score(target) * 1.15 + 2.0:
 		return   # not worth switching
 	else:
@@ -330,8 +464,9 @@ func _target_score(a: Actor) -> float:
 		return -INF
 	var threat := float(_threat.get(a.get_instance_id(), 0.0))
 	var d := global_position.distance_to(a.global_position)
-	var sc := threat * (HERO_BIAS if a is Player else 1.0) - d * 1.5
-	if a is Player:
+	var hero := a is Player or a.is_in_group(&"net_hero")     # another player's hero counts as a hero (bh-008)
+	var sc := threat * (HERO_BIAS if hero else 1.0) - d * 1.5
+	if hero:
 		sc += 6.0
 	if a == target:
 		sc += 3.0
@@ -363,8 +498,9 @@ func lose_target(who: Actor) -> void:
 	if _taunt_by == who:
 		_taunt_t = 0.0
 	if target == who:
-		target = Game.player as Actor
-		_retarget_t = 1.5
+		var hero := Game.player as Actor
+		target = hero if hero and is_instance_valid(hero) and hero != who and not _hidden(hero) else null
+		_retarget_t = 1.5 if target else 0.0
 
 # ---- Perception ----------------------------------------------------------------------------------------------
 
@@ -468,6 +604,17 @@ func _combat_think() -> void:
 	if is_boss:
 		_boss_phase_check()
 	var arche := def.archetype
+	# Feared (Shadowblade / Ranger skills): run from whoever scared it, no attacks while it lasts.
+	if status.has(&"feared"):
+		brain.go(S.RETREAT)
+		var from: Node3D = last_attacker as Node3D if last_attacker is Node3D and is_instance_valid(last_attacker) else target
+		var away := (global_position - from.global_position).slide(Vector3.UP)
+		if away.length() < 0.1:
+			away = -forward()
+		_move_target = CombatQuery.reachable_point(get_world_3d(), global_position, global_position + away.normalized() * 5.0, body_radius)
+		return
+	if ext and ext.think():
+		return
 	if _try_devour():
 		return
 	# Cowards flee when hurt and alone.
@@ -500,7 +647,7 @@ func _combat_think() -> void:
 		visual.set_upper(&"")
 	var atk := _choose_attack()
 	if not atk.is_empty():
-		var kind: StringName = &"ranged" if atk.kind in ["projectile"] else &"melee"
+		var kind: StringName = &"ranged" if atk.kind in ["projectile", "chain", "tongue"] else &"melee"
 		var forced: bool = is_boss or atk.kind in ["aoe", "summon", "pools"] and is_elite
 		if _has_los and CombatDirector.current and CombatDirector.current.request_token(self, kind, forced):
 			_start_attack(atk)
@@ -575,7 +722,7 @@ func _choose_attack() -> Dictionary:
 		var rng_m := float(a.get("range", 2.0)) + body_radius
 		if _dist > rng_m or _dist < float(a.get("min_range", 0.0)):
 			continue
-		if a.kind in ["projectile", "aoe", "charge", "dash"] and not _has_los:
+		if a.kind in ["projectile", "aoe", "charge", "dash", "chain", "tongue"] and not _has_los:
 			continue
 		var w := float(a.get("weight", 1.0))
 		if a.kind in ["aoe", "charge", "pools", "summon"]:
@@ -602,7 +749,7 @@ func _attack_request(a: Dictionary) -> DamageRequest:
 	var rr := EnemyStats.attack_range(def, stats, float(a.get("mult", 1.0)))
 	req.base_min = rr.x
 	req.base_max = rr.y
-	var el := int(a.get("element", Elements.PHYSICAL))
+	var el := _atk_element(a)
 	if el != Elements.PHYSICAL:
 		req.conversion = {el: 1.0}
 		if req.kind == DamageRequest.Kind.ATTACK:
@@ -610,7 +757,7 @@ func _attack_request(a: Dictionary) -> DamageRequest:
 	req.knockback = float(a.get("knockback", 2.0))
 	req.poise = float(a.get("poise", 8.0))
 	req.label = "%s: %s" % [def.display_name, a.id]
-	req.evadable = a.kind in ["melee", "dash", "projectile"]
+	req.evadable = a.kind in ["melee", "dash", "projectile", "chain", "tongue"]
 	var st: Dictionary = a.get("status", {})
 	for sid in st:
 		req.direct_status[StringName(sid)] = float(st[sid])
@@ -626,9 +773,13 @@ func _attack_request(a: Dictionary) -> DamageRequest:
 		req.direct_status[&"chilled"] = req.direct_status.get(&"chilled", 0.0) + 30.0
 	return req
 
+## The element an attack deals (the Rune Golem's follow its core).
+func _atk_element(a: Dictionary) -> int:
+	return ext.attack_element(a) if ext else int(a.get("element", Elements.PHYSICAL))
+
 func _start_attack(a: Dictionary) -> void:
 	var S := EnemyBrain.State
-	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "dash"]
+	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "dash", "tongue"]
 	var st: int = S.CAST if def.archetype in [&"caster", &"support"] and a.kind != "melee" else (S.SPECIAL if special else S.ATTACK)
 	if not brain.go(st):
 		return
@@ -640,6 +791,7 @@ func _start_attack(a: Dictionary) -> void:
 	var anim: StringName = a.get("anim", &"sword_1")
 	var windup := float(a.get("windup", 0.0)) / rate
 	var act := TimedAction.from_anim(anim, rate)
+	_ensure_timing(act, a.kind == "melee" or a.kind == "dash")
 	# Telegraphed attacks: the whole animation is delayed by the windup, so the impact lands after the marker fills.
 	if windup > 0.0:
 		act.windows = act.windows.map(func(w): return [w[0] + windup, w[1] + windup])
@@ -674,14 +826,28 @@ func _start_attack(a: Dictionary) -> void:
 			var total_delay: float = act.release_t if act.release_t >= 0.0 else (act.windows[0][0] if not act.windows.is_empty() else 0.8)
 			total_delay = maxf(total_delay, windup)
 			if a.has("lob"):
-				# thrown: the missile leaves the hand at the release frame and lands when the circle fills
+				# thrown: the missile leaves the hand at the release frame and lands when the circle fills; a fused
+				# bomb (bh-010) lands early and lies sparking for `fuse` seconds before the circle fills
 				var land := CombatQuery.ground_at(get_world_3d(), center)
 				var throw_at := act.release_t if act.release_t >= 0.0 else windup
 				total_delay = maxf(total_delay, throw_at + 0.55)
+				var fuse := float(a.get("fuse", 0.0))
 				var flight := total_delay - throw_at
+				total_delay += fuse
 				get_tree().create_timer(maxf(throw_at, 0.01), false).timeout.connect(func() -> void:
-					if alive:
-						Lob.throw(FX.world, String(a.lob), visual.weapon_point(&"main", 0.2) if visual else center(), land, flight))
+					if not alive:
+						return
+					var from := visual.weapon_point(&"main", 0.2) if visual else center()
+					if String(a.lob) == "bomb":
+						Lob.throw_node(FX.world, TraitsExt.fuse_bomb_body(), from, land, flight, Color(1.0, 0.7, 0.3))
+						if fuse > 0.0:
+							get_tree().create_timer(flight, false).timeout.connect(func() -> void:
+								var lying := TraitsExt.fuse_bomb_body()
+								FX.spawn(lying, land + Vector3.UP * 0.2)
+								if is_instance_valid(lying) and lying.is_inside_tree():
+									lying.get_tree().create_timer(fuse, false).timeout.connect(lying.queue_free))
+					else:
+						Lob.throw(FX.world, String(a.lob), from, land, flight))
 			_telegraph_aoe(a, center, total_delay)
 		"dash":
 			var dist := minf(float(a.get("dash", 5.0)), _dist)
@@ -706,7 +872,23 @@ func _start_attack(a: Dictionary) -> void:
 			act.on_release = func() -> void: _pools(a)
 		"summon":
 			act.on_release = func() -> void: _summon(a)
+		"chain":
+			act.on_release = func() -> void:
+				if ext:
+					ext.chain(a)
+		"tongue":
+			act.on_release = func() -> void:
+				if ext:
+					ext.tongue(a)
 	Audio.play_at(&"swing_heavy" if special else &"swing_light", global_position, -4.0)
+
+## Clips without timing metadata (a creature model that has not been delivered yet) still hit: a release at mid-clip and,
+## for melee, a short window around it.
+func _ensure_timing(act: TimedAction, melee: bool) -> void:
+	if melee and act.windows.is_empty():
+		act.windows.append([act.duration * 0.4, act.duration * 0.55])
+	if act.release_t < 0.0:
+		act.release_t = act.windows[0][0] if not act.windows.is_empty() else act.duration * 0.5
 
 func _melee_hit(a: Dictionary, act: TimedAction, w: int) -> void:
 	if target == null or not target.alive:
@@ -746,20 +928,30 @@ func _fire(a: Dictionary) -> void:
 	var dir := (aim - from)
 	dir.y = 0.0
 	dir = dir.normalized()
-	var el := int(a.get("element", Elements.PHYSICAL))
+	var el := _atk_element(a)
 	var look := "arrow" if a.get("projectile", "") == "arrow" else "orb"
+	var on_hit_status: Dictionary = a.get("on_hit_status", {})
 	for i in count:
 		var ang := 0.0 if count == 1 else lerpf(-spread * 0.5, spread * 0.5, float(i) / float(count - 1))
 		var pr := Projectile.spawn(FX.world, from, dir.rotated(Vector3.UP, deg_to_rad(ang)), speed, _attack_request(a), self, BH.LAYER_PLAYER, el, look)
 		pr.max_range = float(a.get("range", 15.0)) + 4.0
 		pr.radius = 0.3
 		pr.hit_sound = &"arrow_impact" if look == "arrow" else Elements.SFX_HIT[el]
+		if not on_hit_status.is_empty():
+			pr.on_hit = func(t, res, _p) -> void: apply_hit_statuses(t, res, on_hit_status)
+
+## Web / mud / jinx: statuses a connecting blow applies outright ({id: seconds}), not through buildup.
+func apply_hit_statuses(t: Node, res: DamageResult, sts: Dictionary) -> void:
+	if not (t is Actor) or res == null or res.evaded or not (t as Actor).alive:
+		return
+	for sid in sts:
+		(t as Actor).status.apply(StringName(sid), float(sts[sid]))
 
 func _telegraph_aoe(a: Dictionary, at: Vector3, delay: float) -> void:
 	var shape := String(a.get("telegraph", "circle"))
 	var radius := float(a.get("radius", 3.0))
 	var req := _attack_request(a)
-	var el := int(a.get("element", Elements.PHYSICAL))
+	var el := _atk_element(a)
 	if shape == "cone":
 		var tele := VFXLib.telegraph("cone", Vector2(radius, radius), delay, Color(1.0, 0.25, 0.1, 0.75), float(a.get("arc", 120.0)))
 		FX.spawn(tele, global_position)
@@ -799,9 +991,11 @@ func _pools(a: Dictionary) -> void:
 		var off := Vector3(rng.randf_range(-5, 5), 0, rng.randf_range(-5, 5)) if i > 0 else Vector3.ZERO
 		var at := CombatQuery.ground_at(get_world_3d(), target.global_position + off)
 		var delay := float(a.get("windup", 1.0))
-		var blast := AreaEffects.delayed(FX.world, at, float(a.get("radius", 2.5)), delay, null, self, BH.LAYER_PLAYER, Color(0.6, 0.2, 0.9, 0.7))
+		var el := _atk_element(a)
+		var hc: Color = a.get("hazard_color", Elements.color(el) if el != Elements.PHYSICAL else Color(0.55, 0.15, 0.85))
+		var blast := AreaEffects.delayed(FX.world, at, float(a.get("radius", 2.5)), delay, null, self, BH.LAYER_PLAYER, Color(hc.r, hc.g, hc.b, 0.7))
 		blast.on_blast = func(pos: Vector3, _h: Array) -> void:
-			AreaEffects.hazard(FX.world, pos, float(a.get("radius", 2.5)), float(a.get("duration", 6.0)), req, self, BH.LAYER_PLAYER, Color(0.55, 0.15, 0.85), 0.5)
+			AreaEffects.hazard(FX.world, pos, float(a.get("radius", 2.5)), float(a.get("duration", 6.0)), req, self, BH.LAYER_PLAYER, hc, 0.5)
 
 func _summon(a: Dictionary) -> void:
 	var edef := DB.enemy(a.get("summon", &"hollow_soldier"))
@@ -919,18 +1113,45 @@ func _try_ability() -> bool:
 					FX.spawn(VFXLib.particles(def.tint, 20, 0.4, true, 0.35, 4.0, 180.0, Vector3.ZERO, 0.4), center())
 					Audio.play_at(&"blink", global_position)
 					return true
+			_:
+				if ext and ext.try_ability(ab):
+					return true
 	return false
 
-func _cast_ability(ab: Dictionary, effect: Callable) -> void:
+## Start a support/utility cast; `effect` runs at the clip's release frame. False when the monster cannot cast now.
+func _cast_ability(ab: Dictionary, effect: Callable) -> bool:
 	var S := EnemyBrain.State
 	if not brain.go(S.CAST):
-		return
+		return false
 	cooldowns[ab.id] = float(ab.cooldown)
 	var act := TimedAction.from_anim(ab.get("anim", &"cast_area"), 1.0)
-	act.on_release = effect
+	_ensure_timing(act, false)
+	if effect.is_valid():
+		act.on_release = effect
 	action = act
-	visual.play_action(act.anim, 1.0)
+	if visual:
+		visual.play_action(act.anim, 1.0)
 	Audio.play_at(&"cultist_chant", global_position, -2.0)
+	return true
+
+## A Necromancer's Bone Ward: absorbs `amount` damage for `duration` seconds (on top of any elite ward).
+func apply_bone_ward(amount: float, duration: float) -> void:
+	if not alive or amount <= 0.0:
+		return
+	var add := maxf(0.0, amount - _bone_ward)
+	_bone_ward += add
+	shield_hp += add
+	status.apply(&"bone_ward", duration, amount)
+	FX.spawn(VFXLib.particles(Color(0.9, 0.88, 0.8, 0.9), 24, 0.8, true, 0.16, 2.2, 180.0, Vector3(0, 0.5, 0), body_radius + 0.3), center())
+	FX.spawn(VFXLib.ring_wave(Color(0.85, 0.85, 0.75, 0.8), body_radius + 1.0, 0.5), global_position)
+	if bar:
+		bar.touch()
+
+func _on_status_removed(id: StringName) -> void:
+	super._on_status_removed(id)
+	if id == &"bone_ward" and _bone_ward > 0.0:
+		shield_hp = maxf(0.0, shield_hp - minf(shield_hp, _bone_ward))
+		_bone_ward = 0.0
 
 # ---- Movement ------------------------------------------------------------------------------------------------
 
@@ -1037,6 +1258,9 @@ func _prepare_incoming(req: DamageRequest, attacker: Node) -> void:
 		req.tags[&"ward_light"] = true
 
 func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	if net_replica:
+		_net_hit(result, req, attacker, hit_point)
+		return
 	_last_res = result
 	_last_req = req
 	if not result.evaded:
@@ -1044,6 +1268,9 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 	if shield_hp > 0.0 and req.tags.get(&"ward_light", false):
 		shield_hp = maxf(0.0, shield_hp - result.components.get(Elements.LIGHT, 0.0))
 	super._apply_result(result, req, attacker, hit_point)
+	_bone_ward = minf(_bone_ward, shield_hp)
+	if ext and alive:
+		ext.on_hit(result, req, attacker)
 	if result.evaded:
 		return
 	_last_hit_t = 0.0
@@ -1096,6 +1323,8 @@ func _on_staggered(_broken: bool) -> void:
 		FX.text_popup(center() + Vector3.UP * 1.2, "Staggered!", UITheme.GOLD, 1.2)
 
 func _on_shield_broken() -> void:
+	_bone_ward = 0.0
+	status.remove(&"bone_ward")
 	status.remove(&"elite_shield")
 	FX.text_popup(center() + Vector3.UP, "Ward Broken", Color(0.6, 0.7, 1.0), 1.1)
 	Audio.play_at(&"shatter_ice", global_position)
@@ -1130,7 +1359,7 @@ func die(killer: Node) -> void:
 		bar.queue_free()
 		bar = null
 	remove_from_group(&"enemy")
-	if stats.has_flag(&"death_fire"):
+	if not net_replica and stats.has_flag(&"death_fire"):
 		var req := DamageRequest.new()
 		req.kind = DamageRequest.Kind.SPELL
 		req.attacker = stats
@@ -1140,7 +1369,7 @@ func die(killer: Node) -> void:
 		req.conversion = {Elements.FIRE: 1.0}
 		req.label = "Burning ground"
 		AreaEffects.hazard(FX.world, global_position, 2.6, 5.0, req, null, BH.LAYER_PLAYER, Color(1.0, 0.4, 0.1))
-	if stats.has_flag(&"explode"):
+	if not net_replica and stats.has_flag(&"explode"):
 		var req2 := DamageRequest.new()
 		req2.kind = DamageRequest.Kind.SPELL
 		req2.attacker = stats
@@ -1161,9 +1390,72 @@ func die(killer: Node) -> void:
 	if _stolen_gold > 0:
 		Loot.spawn_gold(global_position, _stolen_gold)
 		_stolen_gold = 0
-	if has_trait(&"core_overload"):
+	if not net_replica and has_trait(&"core_overload"):
 		_core_overload()
+	if not net_replica and ext:
+		ext.on_death(killer)
 	_begin_corpse()
+
+# ---- Network replica (bh-008) ---------------------------------------------------------------------------------
+
+func net_snap(p: Vector3, yaw: float) -> void:
+	_net_pos = p
+	_net_yaw = yaw
+
+## One host snapshot: [id, pos, yaw, vel, hp, max_hp, action, serial, rate, loop, engaged, shield]
+func net_apply(s: Array) -> void:
+	_net_pos = s[1]
+	_net_yaw = s[2]
+	_net_vel = s[3]
+	hp = s[4]
+	shield_hp = s[11]
+	_net_engaged = s[10]
+	health_changed.emit(hp, max_hp())
+	if visual:
+		var serial := int(s[7])
+		var act := StringName(s[6])
+		if serial != _net_serial:
+			_net_serial = serial
+			if act != &"":
+				if bool(s[9]):
+					visual.hold_action(act, float(s[8]))
+				else:
+					visual.play_action(act, float(s[8]))
+		elif act == &"" and visual.current_action() != &"":
+			visual.stop_action()
+
+func _net_step(delta: float) -> void:
+	if not alive:
+		physics_move(delta, Vector3.ZERO)
+		return
+	var k := 1.0 - exp(-12.0 * delta)
+	if global_position.distance_to(_net_pos) > 6.0:
+		global_position = _net_pos
+	else:
+		global_position = global_position.lerp(_net_pos + _net_vel * 0.05, k)
+	rotation.y = lerp_angle(rotation.y, _net_yaw, k)
+	if visual:
+		var local := global_transform.basis.inverse() * Vector3(_net_vel.x, 0, _net_vel.z)
+		visual.update_locomotion(Vector2(local.x, local.z), _net_engaged, 0.0, delta)
+
+## A blow from this machine's hero or Tempo: feedback now, numbers to the host (it owns the HP).
+func _net_hit(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	Net.replica_hit(self, result, req, attacker, hit_point)
+	var pos := hit_point if hit_point != Vector3.INF else center()
+	Events.damage_dealt.emit(self, result, pos, attacker)
+	if result.evaded:
+		return
+	hp = maxf(1.0, hp - float(result.total))          # a guess until the host answers; never dies on its own
+	health_changed.emit(hp, max_hp())
+	if attacker is Actor and result.leech > 0.0 and attacker.alive:
+		attacker.heal(result.leech, false)
+	_on_damaged(result, req)
+	if bar:
+		bar.touch()
+
+func net_die(killer: Node, _clip: StringName) -> void:
+	hp = 0.0
+	die(killer)
 
 # ---- Deaths and corpses ---------------------------------------------------------------------------------------
 
@@ -1215,7 +1507,7 @@ func _begin_corpse() -> void:
 		get_tree().create_timer(0.7, false).timeout.connect(func() -> void:
 			if is_instance_valid(self) and not _decaying and not alive:
 				_pool = FX.pool(global_position, def.blood, clampf(body_radius * 3.2, 1.2, 4.5), 7.0))
-	if has_trait(&"reassemble") and not _reassembled and _can_reassemble():
+	if has_trait(&"reassemble") and not _reassembled and not risen and _can_reassemble():
 		_reassembling = true
 		get_tree().create_timer(3.5, false).timeout.connect(_reassemble)
 		return
@@ -1255,7 +1547,7 @@ func _dissolve(dur: float) -> void:
 	tw.tween_callback(queue_free)
 
 func is_fresh_corpse() -> bool:
-	return not alive and not _decaying and not _reassembling and is_in_group(&"corpse")
+	return not alive and not _decaying and not _reassembling and not risen and is_in_group(&"corpse")
 
 ## Consumed by a ghoul: the body is torn apart.
 func consume() -> void:
@@ -1356,6 +1648,10 @@ func _reassemble() -> void:
 # ---- Signature traits (per frame) --------------------------------------------------------------------------------
 
 func _trait_tick(delta: float) -> void:
+	if ext:
+		ext.tick(delta)
+		if not alive:
+			return
 	_devour_cd = maxf(0.0, _devour_cd - delta)
 	_stealth_reveal = maxf(0.0, _stealth_reveal - delta)
 	if has_trait(&"stealth") and visual:

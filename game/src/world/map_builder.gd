@@ -155,23 +155,46 @@ static func library_mesh(name: String) -> Mesh:
 	_lib_meshes[name] = mesh
 	return mesh
 
+## Decoration is cut into CHUNK-metre cells, one MultiMesh per asset per cell, so the camera culls what it cannot see
+## (a map-wide MultiMesh is drawn whole every frame: Westreach's ferns alone were half a million triangles).
+const CHUNK := 24.0
+## Efficiency mode (bh-009): share of each decoration kept. Undergrowth thins the most; trees stay mostly whole and
+## cliffs and anything not listed stay whole, so forest edges and walls still read as edges and walls.
+const LITE_KEEP := {"fern": 0.2, "grass_clump": 0.35, "mushrooms": 0.3, "roots": 0.4, "bush_a": 0.5, "bush_b": 0.5,
+	"bones_scatter": 0.5, "skull_pile": 0.6, "rubble_pile": 0.6, "rock_small": 0.5, "rock_medium": 0.8, "stump": 0.7,
+	"tree_pine": 0.8, "tree_oak_twisted": 0.8, "tree_dead_a": 0.7, "tree_dead_b": 0.7, "cobweb": 0.4}
+
 func _flush_batches() -> void:
 	for name in _batches:
 		var mesh := library_mesh(name)
 		if mesh == null:
 			continue
 		var tr: Array = _batches[name].transforms
-		var mm := MultiMesh.new()
-		mm.transform_format = MultiMesh.TRANSFORM_3D
-		mm.mesh = mesh
-		mm.instance_count = tr.size()
-		for i in tr.size():
-			mm.set_instance_transform(i, tr[i])
-		var mmi := MultiMeshInstance3D.new()
-		mmi.name = "Batch_%s" % name
-		mmi.multimesh = mm
-		mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if _batches[name].shadows else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		deco.add_child(mmi)
+		if Perf.lite and LITE_KEEP.has(name):
+			var keep := RandomNumberGenerator.new()
+			keep.seed = hash(String(def.id) + name)
+			var frac := float(LITE_KEEP[name])
+			tr = tr.filter(func(_t) -> bool: return keep.randf() < frac)
+		var cells := {}
+		for t: Transform3D in tr:
+			var key := Vector2i(floori(t.origin.x / CHUNK), floori(t.origin.z / CHUNK))
+			if not cells.has(key):
+				cells[key] = []
+			cells[key].append(t)
+		var shadows: bool = _batches[name].shadows and not Perf.lite
+		for key: Vector2i in cells:
+			var list: Array = cells[key]
+			var mm := MultiMesh.new()
+			mm.transform_format = MultiMesh.TRANSFORM_3D
+			mm.mesh = mesh
+			mm.instance_count = list.size()
+			for i in list.size():
+				mm.set_instance_transform(i, list[i])
+			var mmi := MultiMeshInstance3D.new()
+			mmi.name = "Batch_%s_%d_%d" % [name, key.x, key.y]
+			mmi.multimesh = mm
+			mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if shadows else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			deco.add_child(mmi)
 	_batches.clear()
 
 func breakable(kind: String, pos: Vector3, yaw_deg := 0.0, hp := 20.0, on_ground := false) -> Breakable:
@@ -385,7 +408,7 @@ func walk_slab(center: Vector3, size: Vector3) -> void:
 
 ## Heightfield terrain centred at `center` covering `size` metres at 1 m resolution. `hfn(x, z)` gives the
 ## height in world space, `splat(x, z)` gives vertex colour weights (R dirt/path, G forest floor, B cobble).
-func terrain(size: Vector2i, center: Vector3, hfn: Callable, splat: Callable, textures := {}, tint := Color.WHITE) -> MeshInstance3D:
+func terrain(size: Vector2i, center: Vector3, hfn: Callable, splat: Callable, textures := {}, tint := Color.WHITE) -> Node3D:
 	height_fn = hfn
 	var w := size.x + 1
 	var d := size.y + 1
@@ -396,6 +419,26 @@ func terrain(size: Vector2i, center: Vector3, hfn: Callable, splat: Callable, te
 	for j in d:
 		for i in w:
 			heights[j * w + i] = hfn.call(x0 + i, z0 + j)
+	var mat := MaterialLibrary.terrain_material(textures.get("grass", "grass"), textures.get("dirt", "dirt"),
+		textures.get("moss", "forest_floor"), textures.get("path", "cobblestone"), textures.get("rock", "rock_cliff"), tint)
+	var shown: Node3D = _terrain_lite(w, d, x0, z0, heights, splat, mat) if Perf.lite else _terrain_full(w, d, x0, z0, heights, splat, mat)
+	var sb := StaticBody3D.new()
+	sb.name = "TerrainBody"
+	sb.collision_layer = BH.LAYER_GROUND | BH.LAYER_WORLD
+	sb.collision_mask = 0
+	var cs := CollisionShape3D.new()
+	var hs := HeightMapShape3D.new()
+	hs.map_width = w
+	hs.map_depth = d
+	hs.map_data = heights
+	cs.shape = hs
+	sb.add_child(cs)
+	sb.position = Vector3(x0 + size.x * 0.5, 0, z0 + size.y * 0.5)
+	geo.add_child(sb)
+	return shown
+
+## Desktop terrain: one mesh, a vertex every metre.
+func _terrain_full(w: int, d: int, x0: float, z0: float, heights: PackedFloat32Array, splat: Callable, mat: Material) -> Node3D:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for j in d:
@@ -418,23 +461,73 @@ func terrain(size: Vector2i, center: Vector3, hfn: Callable, splat: Callable, te
 	var mi := MeshInstance3D.new()
 	mi.name = "Terrain"
 	mi.mesh = st.commit()
-	mi.material_override = MaterialLibrary.terrain_material(textures.get("grass", "grass"), textures.get("dirt", "dirt"),
-		textures.get("moss", "forest_floor"), textures.get("path", "cobblestone"), textures.get("rock", "rock_cliff"), tint)
+	mi.material_override = mat
 	geo.add_child(mi)
-	var sb := StaticBody3D.new()
-	sb.name = "TerrainBody"
-	sb.collision_layer = BH.LAYER_GROUND | BH.LAYER_WORLD
-	sb.collision_mask = 0
-	var cs := CollisionShape3D.new()
-	var hs := HeightMapShape3D.new()
-	hs.map_width = w
-	hs.map_depth = d
-	hs.map_data = heights
-	cs.shape = hs
-	sb.add_child(cs)
-	sb.position = Vector3(x0 + size.x * 0.5, 0, z0 + size.y * 0.5)
-	geo.add_child(sb)
 	return mi
+
+## Efficiency-mode terrain (bh-009): a vertex every LITE_STEP metres, cut into CHUNK-metre tiles the camera can cull,
+## drawn with the light splat shader. Normals come from the full 1 m height field, so tiles meet without seams and the
+## shading follows the collision surface. Collision is the same 1 m height map either way.
+const LITE_STEP := 2
+
+func _terrain_lite(w: int, d: int, x0: float, z0: float, heights: PackedFloat32Array, splat: Callable, mat: ShaderMaterial) -> Node3D:
+	var holder := Node3D.new()
+	holder.name = "Terrain"
+	geo.add_child(holder)
+	var lite_mat := MaterialLibrary.terrain_lite_material(mat)
+	var span := int(CHUNK)
+	for cj in range(0, d - 1, span):
+		for ci in range(0, w - 1, span):
+			var xs := _lite_steps(ci, mini(ci + span, w - 1))
+			var zs := _lite_steps(cj, mini(cj + span, d - 1))
+			var verts := PackedVector3Array()
+			var norms := PackedVector3Array()
+			var cols := PackedColorArray()
+			var uvs := PackedVector2Array()
+			for j in zs:
+				for i in xs:
+					var x := x0 + i
+					var z := z0 + j
+					verts.append(Vector3(x, heights[j * w + i], z))
+					var hl := heights[j * w + maxi(i - 1, 0)]
+					var hr := heights[j * w + mini(i + 1, w - 1)]
+					var hd := heights[maxi(j - 1, 0) * w + i]
+					var hu := heights[mini(j + 1, d - 1) * w + i]
+					norms.append(Vector3(hl - hr, 2.0, hd - hu).normalized())
+					cols.append(splat.call(x, z))
+					uvs.append(Vector2(x, z) * 0.25)
+			var idx := PackedInt32Array()
+			var rw := xs.size()
+			for j in zs.size() - 1:
+				for i in rw - 1:
+					var a := j * rw + i
+					idx.append_array([a, a + 1, a + rw, a + 1, a + rw + 1, a + rw])
+			var arr := []
+			arr.resize(Mesh.ARRAY_MAX)
+			arr[Mesh.ARRAY_VERTEX] = verts
+			arr[Mesh.ARRAY_NORMAL] = norms
+			arr[Mesh.ARRAY_COLOR] = cols
+			arr[Mesh.ARRAY_TEX_UV] = uvs
+			arr[Mesh.ARRAY_INDEX] = idx
+			var am := ArrayMesh.new()
+			am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+			var tile := MeshInstance3D.new()
+			tile.name = "Tile_%d_%d" % [ci / span, cj / span]
+			tile.mesh = am
+			tile.material_override = lite_mat
+			tile.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			holder.add_child(tile)
+	return holder
+
+## Grid indices from a to b (inclusive) every LITE_STEP, always ending exactly on b so neighbouring tiles share an edge.
+static func _lite_steps(a: int, b: int) -> Array[int]:
+	var out: Array[int] = []
+	var i := a
+	while i < b:
+		out.append(i)
+		i += LITE_STEP
+	out.append(b)
+	return out
 
 func water(rect: Rect2, y: float, shallow := Color(0.12, 0.62, 0.62), deep := Color(0.02, 0.12, 0.16), glow := 0.9, depth_fade := 2.5, foam := 0.3) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
@@ -444,8 +537,14 @@ func water(rect: Rect2, y: float, shallow := Color(0.12, 0.62, 0.62), deep := Co
 	pm.subdivide_width = int(rect.size.x / 4)
 	pm.subdivide_depth = int(rect.size.y / 4)
 	mi.mesh = pm
-	mi.material_override = WorldShaders.water_material(shallow, deep, glow, depth_fade)
-	mi.material_override.set_shader_parameter("foam", foam)
+	if Perf.lite:
+		# efficiency mode: one flat quad, no depth-buffer read, no normal maps, unlit (no extra pass per light)
+		pm.subdivide_width = 0
+		pm.subdivide_depth = 0
+		mi.material_override = WorldShaders.water_lite_material(shallow, deep, glow)
+	else:
+		mi.material_override = WorldShaders.water_material(shallow, deep, glow, depth_fade)
+		mi.material_override.set_shader_parameter("foam", foam)
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mi.position = Vector3(rect.position.x + rect.size.x * 0.5, y, rect.position.y + rect.size.y * 0.5)
 	mi.add_to_group(&"water")
@@ -453,6 +552,8 @@ func water(rect: Rect2, y: float, shallow := Color(0.12, 0.62, 0.62), deep := Co
 	return mi
 
 func mist(rect: Rect2, y: float, c := Color(0.55, 0.65, 0.75), density := 0.35) -> void:
+	if Perf.lite:
+		return      # efficiency mode: a big blended layer reading the depth buffer; the distance fog already hazes the air
 	var mi := MeshInstance3D.new()
 	var pm := PlaneMesh.new()
 	pm.size = rect.size
@@ -464,6 +565,8 @@ func mist(rect: Rect2, y: float, c := Color(0.55, 0.65, 0.75), density := 0.35) 
 
 ## Light shaft from `top` pointing down along `dir`.
 func shaft(top: Vector3, dir: Vector3, length: float, radius: float, c := Color(0.55, 0.7, 1.0), intensity := 0.35) -> void:
+	if Perf.lite:
+		return      # efficiency mode: large additive overdraw
 	var mi := MeshInstance3D.new()
 	var cm := CylinderMesh.new()
 	cm.top_radius = radius * 0.7
@@ -523,6 +626,20 @@ func environment(p: Dictionary) -> void:
 	env.adjustment_brightness = 1.0
 	env.adjustment_contrast = p.get("contrast", 1.08)
 	env.adjustment_saturation = p.get("saturation", 0.95)
+	if Perf.lite:
+		# efficiency mode: no sky pass (ambient light is a colour anyway), no SSAO, no glow, no colour-grade pass
+		if env.background_mode == Environment.BG_SKY:
+			env.background_mode = Environment.BG_COLOR
+			env.background_color = (p.get("sky_horizon", Color(0.16, 0.18, 0.26)) as Color).darkened(0.35)
+			env.sky = null
+		env.ssao_enabled = false
+		env.glow_enabled = false
+		env.volumetric_fog_enabled = false
+		env.adjustment_enabled = false
+		# fewer torches shine under the light budget and nothing blooms: lift ambient and exposure so the scene keeps the
+		# desktop's brightness (measured on the capture set, bh-009)
+		env.ambient_light_energy *= 1.7
+		env.tonemap_exposure *= 1.15
 	var we := WorldEnvironment.new()
 	we.name = "WorldEnvironment"
 	we.environment = env
@@ -533,11 +650,13 @@ func environment(p: Dictionary) -> void:
 	sun.light_color = p.get("sun", Color(0.55, 0.62, 0.85))
 	sun.light_energy = p.get("sun_energy", 0.6)
 	sun.rotation_degrees = p.get("sun_rot", Vector3(-55, 35, 0))
-	sun.shadow_enabled = Settings.shadows_quality > 0
+	sun.shadow_enabled = Settings.shadows_quality > 0 and not Perf.lite
 	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
 	sun.directional_shadow_max_distance = 60.0
 	sun.shadow_blur = 1.5
 	sun.light_angular_distance = 1.0
+	if Perf.lite:
+		sun.light_energy *= 1.2
 	root.add_child(sun)
 	root.sun = sun
 
@@ -552,7 +671,7 @@ func light(pos: Vector3, c: Color, energy := 1.5, range_m := 8.0, shadow := fals
 	l.light_energy = energy
 	l.omni_range = range_m
 	l.omni_attenuation = 0.9
-	l.shadow_enabled = shadow and Settings.shadows_quality > 1
+	l.shadow_enabled = shadow and Settings.shadows_quality > 1 and not Perf.lite
 	l.set_meta(&"wants_shadow", shadow)
 	l.light_bake_mode = Light3D.BAKE_DISABLED
 	l.position = pos

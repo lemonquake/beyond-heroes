@@ -3,6 +3,7 @@ extends UIWindow
 ## Skills (K): the class skill tree (learn / upgrade / refund) beside a detail panel for the selected skill: icon,
 ## rank, Mana, cooldown, element, damage, scaling, range, statuses and next-rank changes, plus hotbar assignment
 ## (buttons 1-6 or drag the icon onto the HUD bar). Learned skills are listed for quick access.
+## Trees with pages (Knight: Combat / Auras / Disciplines ...) get a tab per page above the tree.
 
 var hero: HeroData
 var tree: TreeView
@@ -10,6 +11,8 @@ var _points: Label
 var _detail: VBoxContainer
 var _learned: HBoxContainer
 var _sel_skill: StringName = &""
+var _tabs: HBoxContainer
+var _page_desc: Label
 
 func _init() -> void:
 	super._init("Skills", Vector2(1620, 920))
@@ -21,6 +24,13 @@ func _build() -> void:
 	_points.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_points)
 	top.add_child(UITheme.label("Left-click: learn · Right-click: refund", 15, UITheme.TEXT_MUTED, UITheme.body_font()))
+	var pages := hbox(12)
+	body.add_child(pages)
+	_tabs = hbox(6)
+	pages.add_child(_tabs)
+	_page_desc = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.body_font())
+	_page_desc.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	pages.add_child(_page_desc)
 	var row := hbox(16)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(row)
@@ -58,6 +68,7 @@ func refresh() -> void:
 	if hero == null:
 		return
 	tree.bind(hero, false)
+	_build_tabs()
 	_points.text = "%d skill point%s available" % [hero.progress.skill_points, "" if hero.progress.skill_points == 1 else "s"]
 	for c in _learned.get_children():
 		c.queue_free()
@@ -70,6 +81,25 @@ func refresh() -> void:
 	if _sel_skill == &"" and not hero.learned_skills().is_empty():
 		_sel_skill = hero.learned_skills()[0]
 	_show(_sel_skill)
+
+func _build_tabs() -> void:
+	for c in _tabs.get_children():
+		c.queue_free()
+	var t := hero.skill_tree.tree
+	_tabs.get_parent().visible = t.page_count() > 1
+	if t.page_count() <= 1:
+		return
+	for i in t.page_count():
+		var idx := i
+		var learned := 0
+		for n in t.nodes_on_page(i):
+			learned += hero.skill_tree.rank(n.id)
+		var label := String(t.pages[i].name) + ("  (%d)" % learned if learned > 0 else "")
+		_tabs.add_child(button(label, func() -> void:
+			Audio.play_ui(&"ui_click")
+			tree.set_page(idx)
+			_build_tabs(), &"PrimaryButton" if tree.page == i else &"", 190.0))
+	_page_desc.text = String(t.pages[tree.page].get("desc", ""))
 
 func _on_node(n: Dictionary) -> void:
 	if n.has("skill"):

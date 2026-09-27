@@ -7,6 +7,16 @@ const F := StatModifier.Op.FLAT
 const I := StatModifier.Op.INC
 const M := StatModifier.Op.MORE
 
+## Which class a weapon type favours (drop weighting, shop stock, crafting suggestions).
+static func _weapon_class(wt: StringName) -> StringName:
+	if wt in [&"staff", &"wand"]:
+		return &"mage"
+	if wt in [&"bow", &"javelin"]:
+		return &"ranger"
+	if wt in [&"dagger", &"claw", &"knuckles"]:
+		return &"shadowblade"
+	return &"knight"
+
 static func _b(id: StringName, name: String, cat: StringName, icon: String, d: Dictionary) -> ItemBaseDef:
 	var b := ItemBaseDef.new()
 	b.id = id
@@ -71,7 +81,7 @@ static func bases() -> Array:
 		var tier: int = w[7]
 		var d := {"weapon_type": w[2], "level_req": w[3], "damage_min": float(w[4]), "damage_max": float(w[5]),
 			"requirements": w[6], "value": 12 + w[3] * 4, "tier": tier,
-			"class_hint": &"mage" if w[2] in [&"staff", &"wand"] else &"knight"}
+			"class_hint": _weapon_class(w[2])}
 		if feel.has(w[0]):
 			d["attacks_per_second"] = feel[w[0]][0]
 			d["weight"] = feel[w[0]][1]

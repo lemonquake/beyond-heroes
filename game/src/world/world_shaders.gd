@@ -89,6 +89,38 @@ void fragment() {
 	m.set_shader_parameter("normal_tex", _normal_tex())
 	return m
 
+static var _water_lite_shader: Shader
+
+## Efficiency-mode water (bh-009): the same colours without the depth-buffer read, the normal maps or lighting. A slow
+## two-wave shimmer keeps it alive; unshaded, so a phone draws it once however many lights are near.
+static func water_lite_material(shallow := Color(0.12, 0.62, 0.62), deep := Color(0.02, 0.12, 0.16), glow := 0.9) -> ShaderMaterial:
+	if _water_lite_shader == null:
+		_water_lite_shader = Shader.new()
+		_water_lite_shader.code = """
+shader_type spatial;
+render_mode blend_mix, cull_back, depth_draw_never, unshaded, shadows_disabled;
+uniform vec4 shallow : source_color = vec4(0.12, 0.62, 0.62, 1.0);
+uniform vec4 deep : source_color = vec4(0.02, 0.12, 0.16, 1.0);
+uniform float glow = 0.9;
+varying vec2 wxz;
+void vertex() {
+	wxz = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
+}
+void fragment() {
+	float w = sin(wxz.x * 0.35 + TIME * 0.6) * sin(wxz.y * 0.28 - TIME * 0.45);
+	float sparkle = smoothstep(0.82, 1.0, w);
+	vec3 col = mix(deep.rgb, shallow.rgb, 0.45 + 0.12 * w);
+	ALBEDO = col * (0.75 + 0.35 * glow) + vec3(sparkle * 0.25);
+	ALPHA = 0.86;
+}
+"""
+	var m := ShaderMaterial.new()
+	m.shader = _water_lite_shader
+	m.set_shader_parameter("shallow", shallow)
+	m.set_shader_parameter("deep", deep)
+	m.set_shader_parameter("glow", glow)
+	return m
+
 ## Soft additive light shaft (moonlight through a broken roof, sun through trees). Fades at the ends and when
 ## viewed edge-on so it never becomes a hard slab.
 static func shaft_material(c: Color, intensity := 0.35) -> ShaderMaterial:

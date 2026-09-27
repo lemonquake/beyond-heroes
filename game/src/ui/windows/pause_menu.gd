@@ -30,7 +30,7 @@ func _ready() -> void:
 	add_child(c)
 	var frame := PanelContainer.new()
 	frame.add_theme_stylebox_override("panel", UIArt.style("menu/menu_frame.png"))
-	frame.custom_minimum_size = Vector2(420, 620)
+	frame.custom_minimum_size = Vector2(420, 690)
 	c.add_child(frame)
 	_box = VBoxContainer.new()
 	_box.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -56,7 +56,7 @@ func _rebuild() -> void:
 			items.append(["Wake at %s" % cp, _respawn_checkpoint, &""])
 		items.append(["Main Menu", _main_menu, &""])
 	else:
-		items = [["Resume", close, &"PrimaryButton"], ["Settings", _settings, &""], ["Save Game", _save, &""],
+		items = [["Resume", close, &"PrimaryButton"], ["Multiplayer", _multiplayer, &""], ["Settings", _settings, &""], ["Save Game", _save, &""],
 			["Main Menu", _main_menu, &""], ["Quit Game", _quit, &""]]
 	for it in items:
 		var b := UIWindow.button(it[0], it[1], it[2], 280.0)
@@ -65,6 +65,9 @@ func _rebuild() -> void:
 		_box.add_child(b)
 		_buttons.append(b)
 	_buttons[0].grab_focus.call_deferred()
+
+func is_death() -> bool:
+	return _death
 
 func toggle() -> void:
 	if visible:
@@ -78,9 +81,11 @@ func open() -> void:
 	_title.add_theme_color_override("font_color", UITheme.GOLD)
 	var h := Game.hero
 	_sub.text = "%s · Level %d %s · %s" % [h.hero_name, h.progress.level, h.cls.display_name, _time(h.play_time)] if h else ""
+	if Settings.touch_mode:
+		_sub.text += "\nPress Back again to resume."
 	_rebuild()
 	visible = true
-	get_tree().paused = true
+	get_tree().paused = not Net.is_active()     # the world keeps running for the others (bh-008)
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.15)
 
@@ -112,6 +117,10 @@ func _respawn_checkpoint() -> void:
 	visible = false
 	Game.respawn_player(true)
 
+func _multiplayer() -> void:
+	close()
+	Game.ui_root.open(&"multiplayer")
+
 func _settings() -> void:
 	close()
 	Game.ui_root.open(&"settings")
@@ -126,9 +135,15 @@ func _main_menu() -> void:
 		Game.return_to_menu(), "Main Menu")
 
 func _quit() -> void:
-	Game.ui_root.ask("Quit Game", "Save and quit Beyond Heroes?", func() -> void:
+	# three ways out of the question: save and quit, quit without saving, or stay (Cancel / Back)
+	var extra := UIWindow.button("Quit Without Saving", func() -> void:
+		Game.ui_root.confirm.cancel()
+		get_tree().quit(), &"", 300.0)
+	extra.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	extra.add_theme_color_override("font_color", Color(1.0, 0.6, 0.5))
+	Game.ui_root.confirm.ask("Quit Game", "Save your progress and close Beyond Heroes?", func() -> void:
 		Game.save_now()
-		get_tree().quit(), "Quit", true)
+		get_tree().quit(), "Save and Quit", false, extra)
 
 static func _time(t: float) -> String:
 	var m := int(t) / 60

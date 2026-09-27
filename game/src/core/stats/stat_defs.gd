@@ -70,12 +70,24 @@ const DEFS := {
 	&"physical_armor_dr": ["Armor Reduction", Fmt.PCT, "Physical damage prevented by Defense against a same-level attacker."],
 	&"res_cap": ["Resistance Cap", Fmt.PCT, ""],
 	&"accuracy_flat": ["Accuracy", Fmt.INT, ""],
+	# bh-010
+	&"focus_gain": ["Focus Gain", Fmt.PCT, "Faster Focus (Ranger)."],
+	&"combo_max": ["Maximum Combo", Fmt.INT, "Extra Combo pips (Shadowblade)."],
+	&"trap_damage": ["Trap Damage", Fmt.PCT, "Increased damage of traps and sentinels."],
+	&"aura_effect": ["Aura Effect", Fmt.PCT, "Stronger auras."],
+	&"aura_radius": ["Aura Radius", Fmt.PCT, "Larger auras."],
+	&"dot_damage": ["Damage over Time", Fmt.PCT, "Stronger Bleeding and Poison you inflict."],
+	&"summon_damage": ["Sentinel Damage", Fmt.PCT, "Increased damage of Flame Sentinels and Blade Sentinels."],
 }
 
 static func name_of(stat: StringName) -> String:
 	if DEFS.has(stat):
 		return DEFS[stat][0]
 	var s := String(stat)
+	if s == "res_all":
+		return "All Resistances"
+	if s.begins_with("dmg_wt_"):
+		return "%s Damage" % s.substr(7).capitalize()
 	for prefix in ["res_", "dmg_", "pen_", "added_", "status_"]:
 		if s.begins_with(prefix):
 			var el := Elements.from_key(StringName(s.substr(prefix.length())))

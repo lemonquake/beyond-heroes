@@ -305,8 +305,11 @@ func _stream_ribbon() -> void:
 	var mi := MeshInstance3D.new()
 	mi.name = "Millstream"
 	mi.mesh = st.commit()
-	mi.material_override = WorldShaders.water_material(Color(0.1, 0.3, 0.33), Color(0.02, 0.06, 0.08), 0.3, 1.6)
-	mi.material_override.set_shader_parameter("foam", 0.18)
+	if Perf.lite:
+		mi.material_override = WorldShaders.water_lite_material(Color(0.1, 0.3, 0.33), Color(0.02, 0.06, 0.08), 0.3)
+	else:
+		mi.material_override = WorldShaders.water_material(Color(0.1, 0.3, 0.33), Color(0.02, 0.06, 0.08), 0.3, 1.6)
+		mi.material_override.set_shader_parameter("foam", 0.18)
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mi.add_to_group(&"water")
 	deco.add_child(mi)
@@ -644,9 +647,9 @@ func _encounters() -> void:
 	for p: Vector3 in [Vector3(2.6, 0, -1.6), Vector3(3.2, 0, -0.4), Vector3(-2.8, 0, 2.6), Vector3(1.4, 0, 2.8)]:
 		breakable("crate" if rng.randf() < 0.6 else "barrel", Vector3(g.x, 0, g.y) + p, rng.randf() * 360.0, 20.0, true)
 	decor("weapons_discarded", Vector3(g.x + 1.8, 0, g.y + 2.2), 30.0)
-	enemy_zone("goblin_camp", Vector3(g.x, 0, g.y), 5.0, [&"goblin_skulker"], 4, 0.15, true)
+	enemy_zone("goblin_camp", Vector3(g.x, 0, g.y), 5.0, [&"goblin_skulker", &"goblin_skulker", &"goblin_summoner", &"goblin_skulker"], 4, 0.15, true)
 	enemy_zone("field_raid", Vector3(FIELD_RAID.x, 0, FIELD_RAID.y), 6.0, [&"goblin_skulker"], 3, 0.1, true)
-	enemy_zone("smugglers", Vector3(SMUGGLERS.x, 0, SMUGGLERS.y), 4.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_cutthroat"], 3, 0.2, true)
+	enemy_zone("smugglers", Vector3(SMUGGLERS.x, 0, SMUGGLERS.y), 4.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_bombardier"], 3, 0.2, true)
 	enemy_zone("forest_watch", Vector3(FOREST_WATCH.x, 0, FOREST_WATCH.y), 4.0, [&"hollow_soldier"], 2, 0.0, true)
 
 func _greenery() -> void:

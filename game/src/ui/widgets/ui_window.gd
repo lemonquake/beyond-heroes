@@ -90,9 +90,10 @@ func _make_frame() -> void:
 	close.texture_hover = UIArt.tex("frames/close_x_hover.png")
 	close.ignore_texture_size = true
 	close.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	close.custom_minimum_size = Vector2(36, 36)
-	close.size = Vector2(36, 36)
-	close.position = Vector2(window_size.x - 60, 16)
+	var cs2 := 56.0 if Settings.touch_mode else 36.0     # a thumb needs a bigger target
+	close.custom_minimum_size = Vector2(cs2, cs2)
+	close.size = Vector2(cs2, cs2)
+	close.position = Vector2(window_size.x - 24 - cs2, 16 - (cs2 - 36.0) * 0.5)
 	close.pressed.connect(close_window)
 	_root.add_child(close)
 
@@ -122,10 +123,11 @@ func open() -> void:
 	Audio.play_ui(&"ui_open")
 	if _tw:
 		_tw.kill()
-	_root.scale = Vector2(0.96, 0.96)
+	var fit := fit_scale()
+	_root.scale = Vector2(0.96, 0.96) * fit
 	_root.modulate.a = 0.0
 	_tw = create_tween().set_parallel(true)
-	_tw.tween_property(_root, "scale", Vector2.ONE, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_tw.tween_property(_root, "scale", Vector2.ONE * fit, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_tw.tween_property(_root, "modulate:a", 1.0, 0.1)
 
 func close_window() -> void:
@@ -136,11 +138,23 @@ func close_window() -> void:
 	if _tw:
 		_tw.kill()
 	_tw = create_tween().set_parallel(true)
-	_tw.tween_property(_root, "scale", Vector2(0.97, 0.97), 0.08)
+	_tw.tween_property(_root, "scale", Vector2(0.97, 0.97) * fit_scale(), 0.08)
 	_tw.tween_property(_root, "modulate:a", 0.0, 0.08)
 	_tw.chain().tween_callback(func() -> void:
 		visible = false
 		closed.emit())
+
+## Windows are laid out at a fixed logical size; on a small canvas (a phone with a larger Interface Scale) the whole
+## window shrinks to fit, title banner and crest included, instead of running off the screen.
+func fit_scale() -> float:
+	var vp := get_viewport_rect().size
+	if vp.x <= 0.0:
+		return 1.0
+	return minf(1.0, minf((vp.x - 24.0) / window_size.x, (vp.y - 80.0) / (window_size.y + 40.0)))
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and _root and visible and (_tw == null or not _tw.is_running()):
+		_root.scale = Vector2.ONE * fit_scale()
 
 func toggle() -> void:
 	if visible:

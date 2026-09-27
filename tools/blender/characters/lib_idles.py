@@ -72,6 +72,54 @@ def build():
                                        (84, turn1), (98, cup), (112, fade, "out"), (126, rest)],
                     loop=True, props=("staff", None), layers=[breath(50, 1.0)], lag={"head": 3, "chest": 1}))
 
+    # ---- idle_ranger (one-shot fidget, 3.5 s): shade the eyes and scan the horizon, then reach over the right
+    # shoulder, draw an arrow halfway from the quiver and slide it back. Bow carried low in the left hand. -------
+    def fist(s_, az, r, z, yaw, pitch, roll=0.0, pole=0.0):
+        return grip(s_, az, r, z, yaw, pitch, roll, pole, free=1.0)
+    bow_low = grip("L", 42, 0.2, 0.97, 12, 74, 0, pole=5)
+    carry = U(RELAX, bow_low)
+    shade = U(carry, fist("R", -16, 0.17, 1.765, -80, -12, 0, pole=30), look(0, -10), clav("R", 6, 4),
+              torso(0, -2, 0, 0, -2, 0, 0, -3, 0), hips(0, 0, -0.016))
+    scanL = U(shade, look(34, -9, 3), torso(8, -2, 0, 6, -2, 0, 10, -3, 0), hips(-0.006, 0, -0.018),
+              foot("R", -0.01, 0.13, 12))
+    scanR = U(shade, look(-36, -8, -3), torso(-8, -2, 0, -6, -2, 0, -10, -3, 0), hips(0.008, 0, -0.018),
+              foot("L", 0.01, 0.13, 12))
+    reach = U(carry, fist("R", 128, 0.17, 1.6, 30, 62, 0, pole=60), clav("R", 14, -8), look(-28, 4, -6),
+              torso(-6, 2, 0, -4, 2, 0, -8, 2, -4), hips(0.004, 0, -0.02))
+    draw = U(reach, fist("R", 132, 0.17, 1.72, 30, 66, 0, pole=62), clav("R", 18, -10), look(-32, -2, -6))
+    out.append(anim("idle_ranger", 105, [(0, RELAX), (8, carry), (18, shade, "out"), (26, shade), (40, scanL),
+                                         (48, scanL), (62, scanR), (68, shade), (74, carry), (82, reach, "out"),
+                                         (88, draw, "out"), (93, draw), (97, reach, "in"), (105, RELAX)],
+                    loop=False, props=(None, "bow"), layers=[breath(35, 0.9)], lag={"head": 2, "chest": 1}))
+
+    # ---- idle_shadowblade (one-shot fidget, 3.5 s): toss the dagger end over end and catch it, flip it to a
+    # reverse grip, roll the neck and shoulders, sink into a low ready crouch, then rise and flip it back. ------
+    held = U(RELAX, fist("R", 22, 0.3, 1.14, 0, 28, 0, pole=5))
+    toss = U(held, fist("R", 24, 0.32, 1.24, 0, 40, 0, pole=5), look(4, 6), hips(0, 0, -0.01))
+    catch = U(held, fist("R", 22, 0.3, 1.11, 0, 24, 0, pole=5), look(2, 10), hips(0, 0, -0.02))
+    rev = U(held, fist("R", 30, 0.28, 1.12, 0, 20, 0, pole=10))
+    rollA = U(rev, look(28, 8, 18), clav("L", 10, 4), clav("R", -4, 4))
+    rollB = U(rev, look(0, -14, 0), clav("L", 14, -6), clav("R", 14, -6), torso(0, -2, 0, 0, -2, 0, 0, -4, 0))
+    rollC = U(rev, look(-28, 8, -18), clav("R", 12, 4), clav("L", -4, 4))
+    low = U(rev, hips(-0.01, 0.02, -0.11), feet(0.12, -0.14, 0.15, 0.16, 16, 28, 10, 12),
+            torso(-12, 12, 0, -2, 8, 0, 4, 6, 0), look(10, -10), fist("R", 36, 0.34, 1.02, 10, 12, 0, pole=12),
+            fist("L", -4, 0.3, 1.14, -15, 60, 0, pole=10))
+    rise = U(held, fist("R", 24, 0.3, 1.16, 0, 30, 0, pole=5))
+    spin = [(0, 0.0), (21, 0.0), (35, 720.0), (44, 720.0), (50, 900.0), (84, 900.0), (90, 1080.0), (105, 1080.0)]
+
+    def dagger_spin(f, c, spin=spin):
+        # dagger turns end over end about the knuckle axis of the weapon socket (piecewise linear, whole turns)
+        for (a, va), (b, vb) in zip(spin, spin[1:]):
+            if a <= f <= b:
+                c["wpn.R.x"] += va + (vb - va) * (f - a) / (b - a)
+                return
+    out.append(anim("idle_shadowblade", 105,
+                    [(0, RELAX), (10, held), (18, held), (21, toss, "out"), (29, toss), (35, catch, "in"),
+                     (40, held), (44, held), (50, rev, "out"), (58, rollA), (66, rollB), (74, rollC), (80, rev),
+                     (86, low, "out"), (92, low), (98, rise), (105, RELAX)],
+                    loop=False, props=("dagger", None), layers=[breath(35, 0.9), dagger_spin],
+                    lag={"head": 2, "clav": 1}))
+
     # ---- idle_hurt: hunched, hand on the ribs, heavy breathing -----------------------------------------------
     H0 = U(RELAX, hips(0.01, -0.01, -0.07), torso(-6, 16, 8, -2, 12, 5, 4, 10, 4),
            grip("L", -70, 0.10, 1.22, -60, 30, 0, pole=15), arm("R", -72, 14, 30, 0, 10),

@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import importlib
 
-MODULES = [("frames", "raster_frames", "FRAMES"), ("slots", "raster_slots", "SLOTS"), ("hud", "raster_hud", "HUD"), ("tree", "raster_tree", "TREE"), ("menu", "raster_menu", "MENU")]
+MODULES = [("frames", "raster_frames", "FRAMES"), ("slots", "raster_slots", "SLOTS"), ("hud", "raster_hud", "HUD"), ("tree", "raster_tree", "TREE"), ("menu", "raster_menu", "MENU"),
+           # bh-010 additions
+           ("tree", "bh010_tree", "TREE10")]
 
 
 def builders():

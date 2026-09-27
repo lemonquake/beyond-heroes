@@ -70,3 +70,34 @@ static func graph() -> Dictionary:
 				]},
 		},
 	}
+
+# ---- Bestiary (bh-010): how to beat the newer monsters, in plain words (Field Guide / Keeper Thadric pages) ----------
+
+## monster id -> [short title, what it does, how to beat it]
+const BESTIARY := {
+	&"necromancer": ["Necromancer", "Raises the freshly fallen as Risen, throws bone spears and wraps its friends in a Bone Ward.",
+		"Kill it first. Every body it reaches becomes another fighter; a green ring on a corpse means one is about to stand up."],
+	&"goblin_summoner": ["Goblin Summoner", "Beats a drum that makes goblins faster, and calls more skulkers up through a smoking burrow.",
+		"Chase it down. It runs when it is alone and hurt, so cut it off before it reaches the others."],
+	&"orc_shaman": ["Orc Shaman", "Plants a War Totem that makes every orc near it hit harder, and throws lightning that jumps between you and your Tempos.",
+		"Smash the totem: it cannot move and breaks quickly. Keep your Tempos apart so the lightning cannot jump."],
+	&"frost_revenant": ["Frost Revenant", "A frozen knight. Standing close chills you, it throws fans of ice and freezes the ground.",
+		"Fire melts its guard. When it falls, a blue circle appears: step out before it shatters."],
+	&"plague_bloater": ["Plague Bloater", "Spews bile in a cone and glows green when badly hurt. On death it bursts into a toxic cloud.",
+		"When it starts swelling, back away. Lure other monsters next to it: the cloud hurts them too."],
+	&"bandit_bombardier": ["Bandit Bombardier", "Lobs bombs that land, fizz, then explode. Badly hurt, it lights its powder keg and runs at you.",
+		"Leave the red circles before the fuse ends. When the keg is lit, run the other way or finish it from range."],
+	&"mire_troll": ["Mire Troll", "Heals very fast between blows.",
+		"Burn it! Fire stops the healing for about four seconds. Hit it hard while it cannot heal."],
+	&"rune_golem": ["Rune Golem", "Its rune core glows Fire, Ice or Lightning and changes every few seconds.",
+		"Read the colour on its health bar. It is immune to that element and weak to the opposite one: Ice against Fire, Fire against Ice, Earth against Lightning."],
+	&"broodmother": ["Broodmother", "A giant spider. Its web sticks you to the ground (no dodging), its bite poisons, and it lays spiderlings.",
+		"Do not stand still in its line of fire. Kill the spiderlings fast, then focus the mother."],
+	&"treasure_mimic": ["Mimic", "Looks like a treasure chest until you come close. Then it bites, and its tongue drags you in.",
+		"A chest that sits a little crooked is worth a poke from range. Beaten, it pays well: extra gold and a good item."],
+	&"spiderling": ["Spiderling", "A broodmother's hatchling.", "Weak alone. Sweep them up with an attack that hits many."],
+	&"war_totem": ["War Totem", "An orc totem that makes nearby orcs stronger.", "Break it. It does not fight back."],
+}
+
+static func bestiary_entry(id: StringName) -> Array:
+	return BESTIARY.get(id, [])

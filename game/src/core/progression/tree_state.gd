@@ -105,6 +105,8 @@ func modifiers() -> Array:
 	var out: Array = []
 	for id in ranks:
 		var n := tree.node(id)
+		if n.get("kind", "") == "passive":
+			continue
 		var r: int = ranks[id]
 		for m in n.get("mods", []):
 			out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(m[2]) * r, "Talent: %s" % n.name))
@@ -112,6 +114,28 @@ func modifiers() -> Array:
 		for f in fl:
 			out.append(StatModifier.flat(StringName("flag_" + String(f)), float(fl[f]) * r, "Talent: %s" % n.name))
 	return out
+
+## Passive skills (bh-010): value at rank r = base + per_rank * (r - 1). `bonus` = +skill levels from items (only
+## raises passives already learned, like every other skill).
+func passive_modifiers(bonus := 0) -> Array:
+	var out: Array = []
+	for id in ranks:
+		var n := tree.node(id)
+		if n.get("kind", "") != "passive" or int(ranks[id]) <= 0:
+			continue
+		var r: int = int(ranks[id]) + bonus
+		for m in n.get("mods", []):
+			out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, passive_value(m, r), n.name))
+		var fl: Dictionary = n.get("flags", {})
+		for f in fl:
+			out.append(StatModifier.flat(StringName("flag_" + String(f)), passive_value([f, 0, fl[f][0], fl[f][1]], r), n.name))
+	return out
+
+## [stat, op, base, per_rank] at rank r.
+static func passive_value(m: Array, r: int) -> float:
+	var base := float(m[2])
+	var per := float(m[3]) if m.size() > 3 else 0.0
+	return base + per * float(maxi(r, 1) - 1)
 
 func to_dict() -> Dictionary:
 	var d := {}

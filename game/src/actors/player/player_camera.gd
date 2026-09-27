@@ -27,7 +27,7 @@ var _fade_timer := 0.0
 func _ready() -> void:
 	top_level = true
 	fov = 40.0
-	far = 400.0
+	far = 90.0 if Perf.lite else 400.0   # efficiency mode: the fog hides the horizon anyway
 	near = 0.3
 	_noise.seed = 7
 	_noise.frequency = 1.0

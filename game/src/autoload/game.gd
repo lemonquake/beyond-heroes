@@ -160,6 +160,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 		return null
 	if current_map and is_instance_valid(current_map):
 		TempoParty.sync_all()
+		Net.map_unloading()
 		if player and player.get_parent() == current_map:
 			current_map.remove_child(player)
 		# Take the old map out of the tree now, not at the end of the frame: its colliders would otherwise still be in
@@ -193,7 +194,8 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 			if t.global_position.distance_to(sp) < 6.0:
 				t.discover()
 	if player is Player:
-		Spawner.populate(map, difficulty)
+		if not Net.is_client():       # a client's monsters are replicas of the host's (bh-008)
+			Spawner.populate(map, difficulty)
 		NpcDirectory.populate(map)
 		TempoParty.spawn_for(map, player, hero)
 	TownPortal.spawn_for(map, id)
@@ -202,6 +204,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 	Audio.set_environment_reverb(def.reverb)
 	Events.map_loaded.emit(id)
 	map_changed.emit(map)
+	Net.on_local_map_loaded(id)
 	return map
 
 func place_player(spawn_id: StringName) -> void:
@@ -217,7 +220,7 @@ func place_player(spawn_id: StringName) -> void:
 
 ## Teleporter travel with the loading screen. Same-map travel just relocates the player.
 func travel(id: StringName, spawn_id: StringName) -> void:
-	if travelling:
+	if travelling or not Net.may_travel():
 		return
 	travelling = true
 	if id == current_map_id and current_map:
@@ -236,7 +239,7 @@ func travel(id: StringName, spawn_id: StringName) -> void:
 
 ## Travel through a Town Portal: loading screen, then the hero stands at `pos` on map `id` (not at a named spawn).
 func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
-	if travelling:
+	if travelling or not Net.may_travel():
 		return
 	travelling = true
 	await _loading.show_for(DB.map_def(id))
@@ -258,7 +261,7 @@ func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
 
 ## Walk through a door: fade to black, swap maps, fade back in (interiors are small, no loading screen).
 func door_travel(id: StringName, spawn_id: StringName) -> void:
-	if travelling:
+	if travelling or not Net.may_travel():
 		return
 	travelling = true
 	var cover := _fade_cover()
@@ -307,6 +310,14 @@ func respawn_player(at_checkpoint := false) -> void:
 		return
 	var lost := int(hero.inventory.gold * 0.05)
 	hero.inventory.gold -= lost
+	if Net.is_client():
+		# in someone else's world: get up at this map's entrance, the party's map stays loaded
+		place_player(&"start")
+		p.respawn()
+		Events.player_respawned.emit()
+		if lost > 0:
+			Events.notify.emit("You lost %d gold." % lost, &"info")
+		return
 	var map_id := current_map_id
 	var spawn := &"start"
 	if at_checkpoint and checkpoint_name() != "":
@@ -325,6 +336,50 @@ func respawn_player(at_checkpoint := false) -> void:
 	if lost > 0:
 		Events.notify.emit("You lost %d gold." % lost, &"info")
 	await _loading.hide_screen()
+
+# ---- Multiplayer (bh-008) ---------------------------------------------------------------------------------------
+
+## A client follows the host: load the host's map (monsters come from the host) and stand beside the host.
+func net_follow(id: StringName, pos: Vector3, yaw: float) -> void:
+	if DB.map_def(id) == null:
+		return
+	travelling = true
+	await _loading.show_for(DB.map_def(id))
+	await get_tree().process_frame
+	load_map(id, &"start")
+	if player and is_instance_valid(player):
+		var side := Vector3(cos(yaw), 0.0, -sin(yaw)) * 1.8
+		var spot := pos + side
+		if current_map and current_map.is_inside_tree():
+			spot = CombatQuery.reachable_point(current_map.get_world_3d(), pos, spot, 0.4)
+			spot = CombatQuery.ground_at(current_map.get_world_3d(), spot + Vector3.UP * 1.5)
+		player.global_transform = Transform3D(Basis(Vector3.UP, yaw), spot + Vector3.UP * 0.05)
+		if player is CharacterBody3D:
+			(player as CharacterBody3D).velocity = Vector3.ZERO
+		if player.has_method(&"on_teleported"):
+			player.call(&"on_teleported")
+		TempoParty.regroup(player)
+	await get_tree().process_frame
+	await _loading.hide_screen()
+	travelling = false
+
+## Rebuild the current map where the hero stands (leaving someone's world: the map gets its own monsters back).
+func reload_current_map() -> void:
+	if current_map == null or player == null:
+		return
+	var t := (player as Node3D).global_transform
+	travelling = true
+	await _loading.show_for(DB.map_def(current_map_id))
+	await get_tree().process_frame
+	load_map(current_map_id, hero.current_spawn if hero else &"start")
+	if player and is_instance_valid(player):
+		player.global_transform = t
+		if player.has_method(&"on_teleported"):
+			player.call(&"on_teleported")
+		TempoParty.regroup(player)
+	await get_tree().process_frame
+	await _loading.hide_screen()
+	travelling = false
 
 # ---- World state ------------------------------------------------------------------------------------------------
 

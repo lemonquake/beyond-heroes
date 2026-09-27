@@ -119,6 +119,7 @@ const ADDITIVE_INCREASE := {
 	&"phys_damage": true, &"magic_damage": true, &"elemental_damage": true, &"damage": true, &"weapon_damage": true,
 	&"heavy_damage": true, &"impact_damage": true, &"burn_damage": true, &"healing": true, &"buff_effect": true,
 	&"valor_gain": true, &"xp_gain": true, &"magic_find": true, &"gold_find": true, &"projectile_speed": true,
+	&"focus_gain": true, &"trap_damage": true, &"aura_effect": true, &"aura_radius": true, &"dot_damage": true, &"summon_damage": true,
 }
 
 static func is_additive_increase(k: StringName) -> bool:
@@ -309,7 +310,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		if agg.buckets.has(StringName("dmg_wt_" + String(wt))):
 			_std(d, agg, StringName("dmg_wt_" + String(wt)), [], -0.9, INF)
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",
-			&"mana_leech", &"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical", &"status_power"]:
+			&"mana_leech", &"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical", &"status_power",
+			&"focus_gain", &"trap_damage", &"aura_effect", &"aura_radius", &"dot_damage", &"summon_damage"]:
 		_std(d, agg, k, [], -0.9 if k != &"pen_armor" else 0.0, INF)
 	_std(d, agg, &"stagger_power", [["Strength %d x %.1f%%" % [STR, STAGGER_PER_STR * 100.0], STR * STAGGER_PER_STR]], -0.9, INF)
 	_std(d, agg, &"projectile_damage", [["Dexterity %d x %.1f%%" % [DEX, PROJ_DMG_PER_DEX * 100.0], DEX * PROJ_DMG_PER_DEX]], -0.9, INF)
@@ -340,6 +342,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		PackedStringArray(["Against a level %d enemy with %d Accuracy" % [level, roundi(ref_acc)], "Cap %d%%" % roundi(DamagePipeline.EVADE_CAP * 100)]))
 	d.set_stat(&"physical_armor_dr", armor_dr, PackedStringArray(["Defense / (Defense + %d + %d x level)" % [ARMOR_K_BASE, ARMOR_K_LEVEL]]))
 	_std(d, agg, &"arcane_max", [["Base", 5.0]], 0.0, 10.0, true)
+	_std(d, agg, &"combo_max", [["Base", ClassResource.COMBO_MAX]], 1.0, 8.0, true)
 
 	# Weapon damage ranges shown on the character sheet (same function the pipeline uses for base rolls).
 	var rng_main := weapon_range(d, 0)

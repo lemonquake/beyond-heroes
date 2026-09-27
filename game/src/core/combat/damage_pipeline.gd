@@ -38,6 +38,8 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	r.finisher = req.tags.get(&"finisher", false)
 	var atk := req.attacker
 	var tgt := req.target
+	if atk != null:
+		r.dot_mult = 1.0 + atk.get_stat(&"dot_damage")
 	var atk_level := atk.level if atk != null else tgt.level
 	var st := req.target_status
 	r.log_step("== %s (%s) ==" % [req.label, DamageRequest.Kind.keys()[req.kind]])

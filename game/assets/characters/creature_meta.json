@@ -81,6 +81,304 @@
   "devour": {
    "length": 2.0,
    "loop": true
+  },
+  "spider_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.367,
+     0.467
+    ]
+   ]
+  },
+  "spider_spit": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.6,
+     0.667
+    ]
+   ]
+  },
+  "spider_pounce": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.8,
+     0.9
+    ]
+   ]
+  },
+  "spider_brood": {
+   "length": 2.0,
+   "loop": false
+  },
+  "mimic_dormant": {
+   "length": 1.0,
+   "loop": true
+  },
+  "mimic_wake": {
+   "length": 1.2,
+   "loop": false
+  },
+  "mimic_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.433,
+     0.533
+    ]
+   ]
+  },
+  "mimic_tongue": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  "mimic_slam": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.733,
+     0.833
+    ]
+   ]
+  },
+  "totem_pulse": {
+   "length": 0.8,
+   "loop": false
+  }
+ },
+ "models": {
+  "broodmother": {
+   "generator": "tools/blender/creatures/build_broodmother.py",
+   "glb": "res://assets/characters/broodmother.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.667,
+     "loop": true,
+     "ground_speed": 1.6
+    },
+    "run": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 5.0
+    },
+    "run_combat": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 4.6
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "spider_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.367,
+       0.467
+      ]
+     ]
+    },
+    "spider_spit": {
+     "length": 1.2,
+     "loop": false,
+     "hits": [
+      [
+       0.6,
+       0.667
+      ]
+     ]
+    },
+    "spider_pounce": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.8,
+       0.9
+      ]
+     ]
+    },
+    "spider_brood": {
+     "length": 2.0,
+     "loop": false
+    }
+   },
+   "spiderling_scale": 0.42,
+   "tris": 14812,
+   "bones": 43
+  },
+  "treasure_mimic": {
+   "generator": "tools/blender/creatures/build_mimic.py",
+   "glb": "res://assets/characters/treasure_mimic.glb",
+   "clips": {
+    "mimic_dormant": {
+     "length": 1.0,
+     "loop": true
+    },
+    "mimic_wake": {
+     "length": 1.2,
+     "loop": false
+    },
+    "idle": {
+     "length": 2.0,
+     "loop": true
+    },
+    "walk": {
+     "length": 0.467,
+     "loop": true,
+     "ground_speed": 1.2
+    },
+    "run": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 3.2
+    },
+    "run_combat": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 3.0
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "mimic_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.433,
+       0.533
+      ]
+     ]
+    },
+    "mimic_tongue": {
+     "length": 1.2,
+     "loop": false,
+     "hits": [
+      [
+       0.4,
+       0.5
+      ]
+     ]
+    },
+    "mimic_slam": {
+     "length": 1.2,
+     "loop": false,
+     "hits": [
+      [
+       0.733,
+       0.833
+      ]
+     ]
+    }
+   },
+   "tris": 11772,
+   "bones": 21
+  },
+  "war_totem": {
+   "generator": "tools/blender/creatures/build_war_totem.py",
+   "glb": "res://assets/characters/war_totem.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "totem_pulse": {
+     "length": 0.8,
+     "loop": false
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 0.6,
+     "loop": false
+    }
+   },
+   "tris": 5284,
+   "bones": 9,
+   "stationary": true
   }
  }
 }

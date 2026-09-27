@@ -23,7 +23,8 @@ const REACTION_BLEND := 0.07
 const LOCO_RETURN_BLEND := 0.22
 const UPPER_BONES := ["spine", "chest", "neck", "head", "shoulder.L", "upper_arm.L", "forearm.L", "hand.L", "weapon.L",
 	"shoulder.R", "upper_arm.R", "forearm.R", "hand.R", "weapon.R", "cape.1", "cape.2"]
-const FIDGETS := {&"knight": [&"idle_look", &"idle_adjust", &"idle_knight"], &"mage": [&"idle_look", &"idle_adjust", &"idle_mage"]}
+const FIDGETS := {&"knight": [&"idle_look", &"idle_adjust", &"idle_knight"], &"mage": [&"idle_look", &"idle_adjust", &"idle_mage"],
+	&"ranger": [&"idle_look", &"idle_adjust", &"idle_ranger"], &"shadowblade": [&"idle_look", &"idle_adjust", &"idle_shadowblade"]}
 
 var model: Node3D
 var anim_player: AnimationPlayer
@@ -65,8 +66,13 @@ var _trail: WeaponTrail
 var _rng := RandomNumberGenerator.new()
 
 static var _overlay_shader: Shader
+## Networking (bh-008): what this visual looks like and which action it plays, so another machine can mirror it.
+var appearance := {}                        # model, scale, tint, pers, weapons {hand: [path, offset]}
+var action_serial := 0                      # bumps on every new action (the same clip twice still restarts remotely)
+var action_rate := 1.0
 
 func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE, p_personality := &"") -> void:
+	appearance = {"model": model_path, "scale": scale_factor, "tint": primary_tint, "pers": p_personality, "weapons": {}}
 	model_scale = scale_factor
 	tint_primary = primary_tint
 	personality = p_personality
@@ -142,7 +148,10 @@ func _bs(points: Array) -> AnimationNodeBlendSpace2D:
 	var bs := AnimationNodeBlendSpace2D.new()
 	bs.min_space = Vector2(-2.0, -2.0)
 	bs.max_space = Vector2(2.0, 2.0)
-	bs.sync = true
+	# sync keeps every clip of the space advancing (feet stay in phase when walk blends into run) but evaluates all of
+	# them every frame, weight 0 or not: ~90 % of a character's animation cost. Efficiency mode (bh-009) lets the idle
+	# clips rest instead.
+	bs.sync = not Perf.lite
 	for p in points:
 		bs.add_blend_point(_anim_node(p[0]), p[1])
 	return bs
@@ -207,6 +216,17 @@ func _build_tree() -> void:
 	tree.set("parameters/hurt/blend_amount", 0.0)
 	tree.set("parameters/upper/blend_amount", 0.0)
 	tree.set("parameters/state/transition_request", "loco")
+
+var _anim_awake := true
+var _frozen_pose := false           # Frozen status: the body is ice, the tree holds its pose
+
+## Efficiency mode (bh-009, Perf): off screen or far away the tree stops evaluating and the pose freezes. Timers,
+## action ends and every gameplay signal keep running in _process, so nothing waits on a sleeping tree.
+func set_anim_awake(on: bool) -> void:
+	if on == _anim_awake or tree == null:
+		return
+	_anim_awake = on
+	tree.active = on and not _frozen_pose
 
 ## Track paths of upper-body bones (taken from a real animation so the NodePath format matches the import).
 func _upper_filter_paths() -> Array:
@@ -490,6 +510,8 @@ func hold_action(n: StringName, rate := 1.0, blend := BLEND) -> void:
 func _start_slot(n: StringName, rate: float, blend: float) -> void:
 	if tree == null:
 		return
+	action_serial += 1
+	action_rate = rate
 	_slot = &"b" if _slot == &"a" else &"a"
 	var node := _root().get_node(StringName("anim_" + String(_slot))) as AnimationNodeAnimation
 	node.animation = n if has_anim(n) else &"idle"
@@ -628,6 +650,8 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 	detach_weapon(hand)
 	if model_path == "" or not ResourceLoader.exists(model_path):
 		return
+	if appearance.has("weapons"):
+		appearance.weapons[hand] = [model_path, offset]
 	var bone := "weapon.R" if hand == &"main" else "weapon.L"
 	var holder: Node3D
 	if skeleton and skeleton.find_bone(bone) >= 0:
@@ -659,6 +683,8 @@ func _collect_into(n: Node, out: Array[MeshInstance3D]) -> void:
 		_collect_into(c, out)
 
 func detach_weapon(hand: StringName) -> void:
+	if appearance.has("weapons"):
+		(appearance.weapons as Dictionary).erase(hand)
 	if _weapon_nodes.has(hand):
 		var n: Node = _weapon_nodes[hand]
 		for m in _meshes.duplicate():
@@ -747,8 +773,9 @@ func _refresh_rim() -> void:
 				&"wet": c = Color(0.2, 0.45, 0.9); a = 0.4
 				&"empowered": c = Color(1.0, 0.8, 0.3); a = 0.4
 			break
+	_frozen_pose = _status_nodes.has(&"frozen") and not _dead
 	if tree:
-		tree.active = not _status_nodes.has(&"frozen") or _dead
+		tree.active = _anim_awake and not _frozen_pose
 	set_rim(c, a)
 
 # ---- Fallback body (used when a model file is missing, e.g. before the character builder delivers) ----------

@@ -1,7 +1,8 @@
 class_name GuideWindow
 extends UIWindow
 ## The Field Guide (H): every control with the key currently bound to it, how Tempos work (grades, the renowned
-## spirits, where to bind and call them back) and where a new hero should start. It can replay Tobren's introduction.
+## spirits, where to bind and call them back), where a new hero should start, and how to play together with friends
+## (Play Together: the same steps as docs/MULTIPLAYER_GUIDE.md). It can replay Tobren's introduction.
 
 const CONTROLS := [
 	["Moving and fighting", [
@@ -58,7 +59,7 @@ func _build() -> void:
 	var top := hbox(16)
 	body.add_child(top)
 	_tabs = TabBar.new()
-	for t in ["Controls", "Tempos", "First steps"]:
+	for t in ["Controls", "Tempos", "First steps", "Play Together"]:
 		_tabs.add_tab(t)
 	_tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_tabs.tab_changed.connect(func(i: int) -> void:
@@ -88,8 +89,41 @@ func refresh() -> void:
 	match _page:
 		0: _controls()
 		1: _tempos()
+		3: _together()
 		_: _steps()
 	_scroll.scroll_vertical = 0
+
+## Multiplayer, explained simply enough for a young player (docs/MULTIPLAYER_GUIDE.md has the full version).
+func _together() -> void:
+	var touch := Settings.touch_mode
+	var menu := "tap Menu at the top" if touch else "press %s" % Settings.binding_text(&"pause")
+	_heading("Two jobs: Host and Friend")
+	_para("One player is the Host. Everyone plays in the Host's world, fights the Host's monsters and follows the Host from map to map. Everyone else is a Friend and brings their own hero, gear and bag. Up to 4 heroes, on PCs and phones together.")
+	_heading("Before you start")
+	_para("1.  Everyone has the same version of the game.
+2.  Everyone starts or continues their own hero and walks into the world.
+3.  For the easy way, everyone is on the same Wi-Fi.")
+	_heading("The Host")
+	_para("1.  %s, then Multiplayer.
+2.  Press Host Game.
+3.  Big gold letters show your room code, like K7QM-2XF. Read it out to your friends.
+4.  The first time, Windows may ask \"Allow access?\" Ask a grown-up to click Allow." % menu.capitalize())
+	_heading("A Friend")
+	_para("1.  %s, then Multiplayer.
+2.  Find the Host's world in the Join list and press Join.
+3.  Not in the list? Type the room code under \"Join with a Room Code\" and press Join." % menu.capitalize())
+	_heading("Far away, in different houses")
+	_para("Ask a grown-up to install the same LAN VPN program on every computer (for example Radmin VPN) and join the same network in it. Then the Host tells everyone the code on the line that starts with \"VPN\". (Or the Host forwards port %d, UDP, on the router.)" % Net.PORT)
+	_heading("Playing together")
+	_para("The party follows the Host through doors and waypoints. Everyone gets experience and their own loot. A Knight's aura also helps friends standing close. Press %s to chat. In the Multiplayer window every player shows a ping: small numbers are good, red means slow." % ("Chat" if touch else Settings.binding_text(&"chat")))
+	_heading("Stopping")
+	_para("A Friend presses Leave in the Multiplayer window and goes back to their own world. The Host presses Close World and everyone goes home. Each hero is saved on their own game.")
+	var open_mp := button("Open Multiplayer", func() -> void:
+		close_window()
+		if Game.ui_root and Game.ui_root.has_method(&"open"):
+			Game.ui_root.open(&"multiplayer"), &"PrimaryButton", 300.0)
+	open_mp.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	_content.add_child(open_mp)
 
 func _replay() -> void:
 	close_window()

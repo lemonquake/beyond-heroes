@@ -1,5 +1,5 @@
 class_name DataClasses
-## Knight and Mage definitions.
+## Hero classes: Knight, Mage and (bh-010) Ranger and Shadowblade.
 
 static func build() -> Array:
 	var knight := ClassDef.new()
@@ -74,4 +74,75 @@ static func build() -> Array:
 	mage.strengths = ["Devastating elemental combinations (Wet + Shock, Chill + Freeze)", "Blink escapes and area control", "Strikes from range"]
 	mage.weaknesses = ["Fragile: low HP and armor", "Mana-hungry; potions and positioning matter", "Weak when surrounded"]
 	mage.major_attributes = [&"int", &"wis", &"spi"]
-	return [knight, mage]
+	var ranger := ClassDef.new()
+	ranger.id = &"ranger"
+	ranger.display_name = "Ranger"
+	ranger.description = "A hunter of the broken frontier. Fights from range with bow and javelin, sets snares and powder traps, and vaults away when anything gets close. Builds Focus by keeping calm at a distance and spends it on one perfect shot."
+	ranger.model_path = "res://assets/characters/ranger.glb"
+	ranger.base_attributes = {&"str": 8, &"agi": 13, &"int": 6, &"wis": 8, &"spi": 7, &"dex": 14}
+	ranger.growth_per_level = {&"str": 0.25, &"agi": 0.75, &"int": 0.0, &"wis": 0.5, &"spi": 0.25, &"dex": 1.25}
+	ranger.base_hp = 95.0
+	ranger.hp_per_level = 9.0
+	ranger.base_mana = 50.0
+	ranger.mana_per_level = 4.0
+	ranger.mana_regen_mult = 1.0
+	ranger.base_defense = 10.0
+	ranger.base_move_speed = 5.4
+	ranger.base_knockback_res = 0.05
+	ranger.base_poise = 30.0
+	ranger.dodge_cooldown = 1.0
+	ranger.resource_kind = &"focus"
+	ranger.class_modifiers = [
+		StatModifier.inc(&"projectile_damage", 0.10, "Ranger: Fletching"),
+		StatModifier.inc(&"evasion", 0.10, "Ranger: Woodcraft"),
+	]
+	ranger.weapon_mastery = {&"bow": 0.12, &"javelin": 0.10, &"spear": 0.05, &"dagger": 0.05}
+	ranger.starting_items = [&"hunters_bow", &"padded_gambeson", &"linen_hood", &"soft_boot"]
+	ranger.starting_skills = [&"power_shot"]
+	ranger.skill_tree_id = &"ranger_skills"
+	ranger.talent_tree_id = &"ranger_talents"
+	ranger.tint = Color(0.3, 0.55, 0.28)
+	ranger.tagline = "Hunter of the broken frontier"
+	ranger.difficulty = 2
+	ranger.class_resource_name = "Focus"
+	ranger.resource_desc = "Builds while you fight from a distance: +6 per second in combat while no enemy is within 5 m, +3 per ranged hit. An enemy within 3 m drains it. At 60 Focus you are Steady: +10% Critical Chance. Deadeye spends it all."
+	ranger.strengths = ["Deadly at range: arrows, javelins and piercing shots", "Traps and snares control the fight", "Fast and evasive; Vault escapes danger"]
+	ranger.weaknesses = ["Loses Focus and damage when enemies close in", "Light armor and modest HP", "Needs room to kite"]
+	ranger.major_attributes = [&"dex", &"agi", &"wis"]
+
+	var shadow := ClassDef.new()
+	shadow.id = &"shadowblade"
+	shadow.display_name = "Shadowblade"
+	shadow.description = "An assassin who walks between the lights. Twin daggers build Combo with quick cuts; finishers spend it for brutal strikes. Slips into smoke, steps behind enemies and leaves poison and blades behind."
+	shadow.model_path = "res://assets/characters/shadowblade.glb"
+	shadow.base_attributes = {&"str": 10, &"agi": 15, &"int": 7, &"wis": 6, &"spi": 6, &"dex": 12}
+	shadow.growth_per_level = {&"str": 0.5, &"agi": 1.25, &"int": 0.0, &"wis": 0.25, &"spi": 0.25, &"dex": 0.75}
+	shadow.base_hp = 90.0
+	shadow.hp_per_level = 8.5
+	shadow.base_mana = 55.0
+	shadow.mana_per_level = 4.5
+	shadow.mana_regen_mult = 1.0
+	shadow.base_defense = 8.0
+	shadow.base_move_speed = 5.6
+	shadow.base_knockback_res = 0.0
+	shadow.base_poise = 26.0
+	shadow.dodge_cooldown = 0.9
+	shadow.resource_kind = &"combo"
+	shadow.class_modifiers = [
+		StatModifier.flat(&"crit_chance", 0.03, "Shadowblade: Killer's Instinct"),
+		StatModifier.inc(&"evasion", 0.10, "Shadowblade: Footwork"),
+	]
+	shadow.weapon_mastery = {&"dagger": 0.12, &"claw": 0.12, &"knuckles": 0.08, &"sword": 0.04}
+	shadow.starting_items = [&"rondel_dagger", &"rondel_dagger", &"padded_gambeson", &"linen_hood", &"soft_boot"]
+	shadow.starting_skills = [&"twin_fang"]
+	shadow.skill_tree_id = &"shadowblade_skills"
+	shadow.talent_tree_id = &"shadowblade_talents"
+	shadow.tint = Color(0.45, 0.2, 0.6)
+	shadow.tagline = "Blade that walks between the lights"
+	shadow.difficulty = 3
+	shadow.class_resource_name = "Combo"
+	shadow.resource_desc = "Builders and basic hits add Combo pips (up to 5; a critical builder hit adds one more). Finishers spend them all and hit harder per pip. At full Combo you are Poised: the next finisher always crits. Pips fade after 5 s without landing a hit."
+	shadow.strengths = ["Huge single-target bursts with finishers", "Stealth, Shadow Step and fear keep you untouchable", "Poison and bleeding wear down tough foes"]
+	shadow.weaknesses = ["Fragile: low HP and armor", "Must build Combo before it bursts", "Demands timing and positioning"]
+	shadow.major_attributes = [&"agi", &"dex", &"str"]
+	return [knight, mage, ranger, shadow]

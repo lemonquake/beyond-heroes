@@ -36,11 +36,15 @@ func _build() -> void:
 	body.add_child(foot)
 	foot.add_child(button("Restore Defaults", func() -> void:
 		var group: String = ["video", "audio", "controls", "gameplay"][_tabs.current_tab]
-		Game.ui_root.ask("Restore Defaults", "Reset every %s setting to its default?" % group, func() -> void:
+		var go := func() -> void:
 			if group == "controls":
 				Settings.reset_bindings()
 			Settings.reset_group(group)
-			_rebuild_pages(), "Restore"), &"", 220.0))
+			_rebuild_pages()
+		if Game.ui_root:
+			Game.ui_root.ask("Restore Defaults", "Reset every %s setting to its default?" % group, go, "Restore")
+		else:
+			go.call(), &"", 220.0))   # the title screen has no in-game dialog layer
 	foot.add_child(button("Done", close_window, &"PrimaryButton", 180.0))
 
 func _rebuild_pages() -> void:
@@ -114,6 +118,27 @@ func _slider(v: VBoxContainer, label: String, key: String, lo: float, hi: float,
 	_row(v, label, h, tip)
 
 func _video(v: VBoxContainer) -> void:
+	if not Settings.is_mobile_device():   # a phone has no window to size
+		_display(v)
+	v.add_child(section("Performance"))
+	var eff := CheckBox.new()
+	eff.button_pressed = Settings.efficiency_mode
+	eff.text = "On" if eff.button_pressed else "Off"
+	eff.toggled.connect(func(on: bool) -> void:
+		Settings.set_efficiency(on)
+		_rebuild_pages())            # the preset changes the quality options below
+	_row(v, "Efficiency Mode", eff, "For phones and low-end PCs: lighter maps and shaders, a few nearby lights, no shadows or post effects, "
+		+ "30 fps. On with Mobile. Maps change from the next area you enter.")
+	v.add_child(section("Quality"))
+	_option(v, "Shadow Quality", "shadows_quality", Settings.QUALITY_NAMES, "Low disables torch and lamp shadows.")
+	_option(v, "Texture Quality", "texture_quality", Settings.QUALITY_NAMES, "Texture filtering (anisotropy) and sharpness.")
+	_option(v, "Effects Quality", "effects_quality", Settings.QUALITY_NAMES, "Ambient occlusion, glow, volumetric fog and detail.")
+	_option(v, "Anti-Aliasing", "anti_aliasing", Settings.AA_NAMES)
+	_slider(v, "Render Scale", "render_scale", 0.5, 1.0, 0.05, "%d%%", 100.0, "Renders the 3D world at a lower resolution and upscales it (FSR). Lower is faster.")
+	if Settings.is_mobile_device():
+		_option(v, "Frame Rate Limit", "fps_limit_index", ["Unlimited", "30", "60", "120", "144"], "30 saves battery; 60 is smoother.")
+
+func _display(v: VBoxContainer) -> void:
 	v.add_child(section("Display"))
 	var res := []
 	for r in Settings.RESOLUTIONS:
@@ -122,12 +147,6 @@ func _video(v: VBoxContainer) -> void:
 	_option(v, "Window Mode", "window_mode", Settings.WINDOW_MODES)
 	_check(v, "Vertical Sync", "vsync", "Prevents tearing; caps the frame rate to the monitor's refresh rate.")
 	_option(v, "Frame Rate Limit", "fps_limit_index", ["Unlimited", "30", "60", "120", "144"])
-	v.add_child(section("Quality"))
-	_option(v, "Shadow Quality", "shadows_quality", Settings.QUALITY_NAMES, "Low disables torch and lamp shadows.")
-	_option(v, "Texture Quality", "texture_quality", Settings.QUALITY_NAMES, "Texture filtering (anisotropy) and sharpness.")
-	_option(v, "Effects Quality", "effects_quality", Settings.QUALITY_NAMES, "Ambient occlusion, glow, volumetric fog and detail.")
-	_option(v, "Anti-Aliasing", "anti_aliasing", Settings.AA_NAMES)
-	_slider(v, "Render Scale", "render_scale", 0.5, 1.0, 0.05, "%d%%", 100.0, "Renders the 3D world at a lower resolution and upscales it (FSR). Lower is faster.")
 
 func _audio(v: VBoxContainer) -> void:
 	v.add_child(section("Volume"))
@@ -136,6 +155,24 @@ func _audio(v: VBoxContainer) -> void:
 		_slider(v, pair[0], pair[1], 0.0, 1.0, 0.05)
 
 func _controls(v: VBoxContainer) -> void:
+	v.add_child(section("Control Mode"))
+	var mode := OptionButton.new()
+	mode.add_item("PC: keyboard and mouse")
+	mode.add_item("Mobile: touch controls")
+	mode.selected = 1 if Settings.touch_mode else 0
+	mode.custom_minimum_size.y = 52 if Settings.touch_mode else 44
+	mode.item_selected.connect(func(i: int) -> void:
+		Settings.set_control_mode("mobile" if i == 1 else "pc")
+		_rebuild_pages())
+	_row(v, "Control Mode", mode, "PC: WASD, mouse aim, number keys. Mobile: an on-screen stick and buttons, auto-aim, tap the orbs to drink. The game asked this on its first launch.")
+	if Settings.touch_mode:
+		v.add_child(section("Touch Controls"))
+		_slider(v, "Button Size", "touch_size", 0.7, 1.4, 0.05, "%d%%", 100.0, "Size of the stick and the on-screen buttons.")
+		_slider(v, "Button Opacity", "touch_opacity", 0.25, 1.0, 0.05, "%d%%", 100.0)
+		_check(v, "Auto-Aim", "touch_auto_aim", "Attacks and tapped skills turn toward the nearest enemy. Drag a skill button to aim it by hand.")
+		_check(v, "Fixed Stick", "touch_fixed_stick", "Off: the stick appears wherever your left thumb lands. On: it stays in the corner.")
+		_slider(v, "Interface Scale", "ui_scale", 0.75, 1.5, 0.05, "%d%%", 100.0, "Size of all text and panels.")
+		return                 # mouse and key bindings do not apply to touch play (switch to PC to see them)
 	v.add_child(section("Mouse"))
 	_slider(v, "Mouse Sensitivity", "mouse_sensitivity", 0.3, 2.0, 0.05, "%.2f×", 1.0)
 	_check(v, "Guard: Toggle Instead of Hold", "guard_toggle")

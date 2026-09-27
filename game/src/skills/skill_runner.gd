@@ -4,7 +4,8 @@ extends RefCounted
 ## (data) whose `behavior` selects a parametric routine here; numbers come from `params` (+ ranks + upgrade nodes).
 ##
 ## Behaviours: melee_arc, dash_strike, leap, spin, buff, projectile, self_aoe, ground_aoe, chain, wave, blink,
-## judgment. Timing: effects fire at the animation's hit window (weapon skills) or release frame (spells), taken from
+## judgment; (bh-010) flurry, spiral, storm, sentry, orb, trap, vault, shadow_step, veil, mark. Auras are toggled by
+## the Player itself (Player.toggle_aura), not run here. Timing: effects fire at the animation's hit window (weapon skills) or release frame (spells), taken from
 ## the animation metadata and scaled by attack/cast speed.
 
 var caster: Actor        # the Player (duck-typed helpers: aim_point, resource, hero, on_skill_hit, dash, leap_to ...)
@@ -41,13 +42,62 @@ func make_request(skill: SkillDef, p: Dictionary) -> DamageRequest:
 	req.tags[&"skill"] = skill.id
 	if p.has("launch"):
 		req.tags[&"launch"] = float(p.launch)
+	# bh-010: synergies, finishers (Combo), Focus shots, Spell Echo copies
+	if float(p.get("syn_pct", 0.0)) > 0.0:
+		req.more.append(["Synergies", 1.0 + float(p.syn_pct) / 100.0])
+	if p.has("_pips"):
+		var pips := float(p._pips)
+		req.tags[&"finisher"] = true
+		if req.kind == DamageRequest.Kind.ATTACK:
+			req.weapon_mult += float(p.get("per_pip", 0.0)) / 100.0 * pips
+		else:
+			req.more.append(["Combo x%d" % roundi(pips), 1.0 + float(p.get("per_pip", 0.0)) / 100.0 * pips])
+		if bool(p.get("_poised", false)):
+			req.force_crit = true
+	if p.has("_focus"):
+		var focus := float(p._focus)
+		req.weapon_mult += float(p.get("per_focus", 0.0)) / 100.0 * focus
+		if focus >= float(p.get("crit_focus", 999.0)):
+			req.force_crit = true
+	if bool(p.get("_echo", false)):
+		req.skill_mult *= float(p.get("echo_mult", 0.5))
+		req.label = "%s (Echo)" % skill.display_name
 	if caster.has_method(&"decorate_request"):
 		caster.decorate_request(req, skill)
 	return req
 
 func _hit(skill: SkillDef, target: Actor, res: DamageResult) -> void:
+	if res != null and not res.evaded and target != null and target.alive and not skill.on_hit_status.is_empty():
+		_apply_statuses(skill, target, caster.skill_params(skill.id) if caster.has_method(&"skill_params") else skill.resolve(1))
 	if caster.has_method(&"on_skill_hit"):
 		caster.on_skill_hit(skill, target, res)
+
+## Put the skill's on_hit_status on `target` ({status: [duration, magnitude]}; numbers or param names).
+func _apply_statuses(skill: SkillDef, target: Actor, p: Dictionary) -> void:
+	for sid in skill.on_hit_status:
+		var spec: Array = skill.on_hit_status[sid]
+		var dur := _num(spec[0], p) if spec.size() > 0 else -1.0
+		var mag := _num(spec[1], p) if spec.size() > 1 else 0.0
+		var mods: Array = []
+		if sid == &"marked":
+			mods = [StatModifier.more(&"damage_taken", mag / 100.0, skill.display_name)]
+		target.status.apply(StringName(sid), dur, mag, 0.0, Elements.PHYSICAL, mods)
+
+static func _num(v, p: Dictionary) -> float:
+	if v is String or v is StringName:
+		return float(p.get(String(v), 0.0))
+	return float(v)
+
+## Spend the class resource a finisher / focus shot consumes, once per cast (stored in `p` for make_request).
+func _consume(p: Dictionary) -> void:
+	var res = caster.get(&"resource")
+	if res == null:
+		return
+	if float(p.get("consume_combo", 0.0)) > 0.0 and res.kind == &"combo":
+		p["_poised"] = res.is_poised()
+		p["_pips"] = res.spend_all()
+	if float(p.get("consume_focus", 0.0)) > 0.0 and res.kind == &"focus":
+		p["_focus"] = res.spend_all()
 
 ## Configure `action` so the skill's effects fire at the right moments. Returns false if the skill cannot start now.
 func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
@@ -55,6 +105,7 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 	var dir: Vector3 = caster.aim_dir()
 	action.data["skill"] = skill.id
 	action.data["hits"] = {}
+	_consume(p)
 	match skill.behavior:
 		&"melee_arc":
 			action.on_window = func(w: int, first: bool) -> void:
@@ -106,12 +157,67 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 					_judgment(skill, p)
 		&"spin":
 			pass   # channelled by the player (tick())
+		&"flurry":
+			_flurry(skill, p, action)
+		&"spiral":
+			action.on_release = func() -> void:
+				_spiral(skill, p)
+		&"storm":
+			var at_s := _ground_target(aim, float(p.get("range", 18.0)))
+			action.on_release = func() -> void:
+				_storm(skill, p, at_s)
+		&"sentry":
+			var at_t: Vector3 = caster.global_position if float(p.get("at_feet", 0.0)) > 0.0 else _ground_target(aim, float(p.get("range", 10.0)))
+			action.on_release = func() -> void:
+				_sentry(skill, p, at_t)
+		&"orb":
+			action.on_release = func() -> void:
+				_orb(skill, p)
+		&"trap":
+			var at_trap: Vector3 = caster.global_position if float(p.get("at_feet", 0.0)) > 0.0 else _ground_target(aim, float(p.get("range", 12.0)))
+			action.on_release = func() -> void:
+				_trap(skill, p, at_trap)
+		&"vault":
+			_vault(skill, p, aim, action)
+		&"shadow_step":
+			var tgt := _step_target(aim, float(p.get("range", 10.0)))
+			if tgt == null:
+				Events.notify.emit("No enemy to step to", &"error")
+				return false
+			_shadow_step(tgt)
+			action.on_window = func(w: int, first: bool) -> void:
+				if first:
+					_arc(skill, p, action)
+			if action.windows.is_empty():
+				action.on_release = func() -> void:
+					_arc(skill, p, action)
+		&"veil":
+			action.on_release = func() -> void:
+				_veil(skill, p)
+		&"mark":
+			var at_m: Vector3 = caster.global_position if float(p.get("self", 0.0)) > 0.0 else _ground_target(aim, float(p.get("range", 16.0)))
+			action.on_release = func() -> void:
+				_mark(skill, p, at_m)
 		_:
 			push_warning("Unknown skill behaviour %s" % skill.behavior)
 			return false
 	# Clips without a release frame or hit window (Iron Bulwark's block_impact) would never fire on_release.
 	if action.on_release.is_valid() and action.release_t < 0.0:
 		action.release_t = minf(0.12, action.duration * 0.3)
+	# Spell Echo (Mage passive): damaging spells may repeat themselves at half strength.
+	if skill.kind == DamageRequest.Kind.SPELL and action.on_release.is_valid() and caster.stats.has_flag(&"spell_echo") \
+			and skill.behavior in [&"projectile", &"ground_aoe", &"self_aoe", &"chain", &"wave", &"storm", &"orb"]:
+		var first_release := action.on_release
+		action.on_release = func() -> void:
+			first_release.call()
+			if randf() < caster.stats.flag(&"spell_echo"):
+				caster.get_tree().create_timer(0.28, false).timeout.connect(func() -> void:
+					if not is_instance_valid(caster) or not caster.alive:
+						return
+					p["_echo"] = true
+					first_release.call()
+					p.erase("_echo")
+					FX.text_popup(caster.center() + Vector3.UP * 1.0, "Echo", Color(0.75, 0.6, 1.0), 0.8))
 	return true
 
 # ---- Behaviours ---------------------------------------------------------------------------------------------
@@ -127,7 +233,11 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 	FX.spawn_facing(VFXLib.slash_arc(c, reach, arc, 1.0, 0.24, 0.6), caster.global_position, f)
 	if skill.id == &"cleave":
 		SkillFX.cleave(caster, f, reach, arc)
-	for a: Actor in CombatQuery.actors_in_arc(caster.get_world_3d(), caster.global_position, f, reach, arc, mask()):
+	var victims: Array = CombatQuery.actors_in_arc(caster.get_world_3d(), caster.global_position, f, reach, arc, mask())
+	if float(p.get("max_targets", 0.0)) > 0.0:
+		victims.sort_custom(func(x, y): return x.global_position.distance_squared_to(caster.global_position) < y.global_position.distance_squared_to(caster.global_position))
+		victims = victims.slice(0, int(p.max_targets))
+	for a: Actor in victims:
 		if not action.mark_hit(0, a):
 			continue
 		var r := req.clone()
@@ -250,16 +360,33 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 	var dir: Vector3 = caster.aim_dir()
 	var from: Vector3 = caster.cast_point()
 	var req := make_request(skill, p)
+	req.tags[&"projectile"] = true
 	if p.has("ignite"):
 		req.direct_status[&"burning"] = float(p.ignite)
+	var st_keys := {"chill": &"chilled", "bleed": &"bleeding", "poison": &"poisoned", "shock_buildup": &"shocked"}
+	for st in st_keys:
+		if p.has(st):
+			req.direct_status[st_keys[st]] = float(p[st])
+	var radial := float(p.get("radial", 0.0)) > 0.0
+	var el := skill.element
+	if not skill.conversion.is_empty():
+		var best := -1.0
+		for k in skill.conversion:
+			if float(skill.conversion[k]) > best:
+				best = float(skill.conversion[k])
+				el = int(k)
 	for i in count:
 		var ang := 0.0 if count == 1 else lerpf(-spread, spread, float(i) / float(count - 1))
+		if radial:
+			ang = 360.0 * float(i) / float(count)
 		var d := dir.rotated(Vector3.UP, deg_to_rad(ang))
 		var speed := float(p.get("speed", 24.0)) * (1.0 + caster.stats.get_stat(&"projectile_speed"))
-		var look := "orb"
-		var pr := Projectile.spawn(parent(), from, d, speed, req, caster, mask(), skill.element, look)
+		var look := skill.projectile_look
+		var pr := Projectile.spawn(parent(), from, d, speed, req, caster, mask(), el, look)
 		pr.max_range = float(p.get("range", 20.0))
 		pr.pierce = int(p.get("pierce", 0.0))
+		if caster.stats.has_flag(&"pierce_chance") and randf() < caster.stats.flag(&"pierce_chance"):
+			pr.pierce += 1
 		pr.radius = float(p.get("width", 0.35)) * 0.5 if p.has("width") else 0.35
 		pr.explode_radius = float(p.get("explode_radius", 0.0))
 		pr.hit_sound = skill.sound_hit
@@ -320,6 +447,23 @@ func _ground_aoe(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
 		for h in hits:
 			_hit(skill, h[0], h[1])
 		_ground_fx(skill, p, pos, radius)
+		if float(p.get("sky_bolt", 0.0)) > 0.0:
+			FX.spawn(VFXLib.lightning_bolt(pos + Vector3(0.6, 16.0, -0.4), pos + Vector3.UP * 0.2, Color(1.0, 0.95, 0.7), 0.3, 0.3), Vector3.ZERO)
+			FX.spawn(VFXLib.light_pillar(Color(1.0, 0.92, 0.6), 10.0, radius * 0.6, 0.5), pos)
+			Audio.play_at(&"thunder_strike", pos, 2.0)
+		var bolts := int(p.get("radial_bolts", 0.0))
+		if bolts > 0:
+			var breq := req.clone()
+			breq.skill_mult *= float(p.get("bolt_pct", 50.0)) / 100.0
+			breq.tags[&"projectile"] = true
+			for i in bolts:
+				var d := Vector3.FORWARD.rotated(Vector3.UP, TAU * float(i) / float(bolts))
+				var pr := Projectile.spawn(parent(), pos + Vector3.UP * 0.9, d, 18.0, breq.clone(), caster, mask(), Elements.LIGHT, "orb")
+				pr.max_range = float(p.get("bolt_range", 9.0))
+				pr.radius = 0.35
+				pr.pierce = 99
+				pr.on_hit = func(a: Actor, res: DamageResult, _pt: Vector3) -> void:
+					_hit(skill, a, res)
 	if skill.id == &"meteor":
 		_meteor_fall(at, delay)
 		for i in extra:
@@ -499,6 +643,172 @@ func spin_tick(skill: SkillDef, p: Dictionary) -> void:
 				r.tags[&"push_dir"] = (caster.global_position - a.global_position).slide(Vector3.UP).normalized()):
 		_hit(skill, h[0], h[1])
 	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.92, 0.8, 0.7), radius, 300.0, 1.0, 0.25, 0.5), caster.global_position, caster.forward().rotated(Vector3.UP, randf() * TAU))
+
+# ---- bh-010 behaviours ---------------------------------------------------------------------------------------
+
+## Several quick strikes spread over the animation (Zeal, Twin Fang): each is a small arc hit.
+func _flurry(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
+	var n := maxi(1, int(p.get("strikes", 3.0)))
+	var t0 := maxf(0.06, action.first_hit_time()) if not action.windows.is_empty() else maxf(0.06, action.duration * 0.25)
+	var span := maxf(0.12, action.duration * 0.8 - t0)
+	for i in n:
+		var t := t0 + span * float(i) / float(maxi(1, n - 1)) if n > 1 else t0
+		caster.get_tree().create_timer(t, false).timeout.connect(func() -> void:
+			if not is_instance_valid(caster) or caster.get(&"action") != action:
+				return
+			_flurry_strike(skill, p, i))
+
+func _flurry_strike(skill: SkillDef, p: Dictionary, i: int) -> void:
+	var reach := float(p.get("range", 2.6))
+	var arc := float(p.get("arc", 110.0))
+	var req := make_request(skill, p)
+	req.heavy = i == int(p.get("strikes", 3.0)) - 1
+	if p.has("bleed"):
+		req.direct_status[&"bleeding"] = float(p.bleed)
+	if p.has("poison"):
+		req.direct_status[&"poisoned"] = float(p.poison)
+	var f: Vector3 = caster.forward()
+	FX.spawn_facing(VFXLib.slash_arc(_elem_color(skill), reach, arc, 0.9 + 0.3 * (i % 2), 0.18, 0.45, i % 2 == 0), caster.global_position, f)
+	var victims: Array = CombatQuery.actors_in_arc(caster.get_world_3d(), caster.global_position, f, reach, arc, mask())
+	if float(p.get("max_targets", 0.0)) > 0.0:
+		victims.sort_custom(func(x, y): return x.global_position.distance_squared_to(caster.global_position) < y.global_position.distance_squared_to(caster.global_position))
+		victims = victims.slice(0, int(p.max_targets))
+	for a: Actor in victims:
+		var r := req.clone()
+		r.tags[&"push_dir"] = (a.global_position - caster.global_position).slide(Vector3.UP).normalized()
+		_hit(skill, a, a.receive_hit(r, caster, a.center()))
+	Audio.play_at(&"swing_dagger" if skill.class_id == &"shadowblade" else &"swing_light", caster.global_position, -2.0)
+
+## Hallowed Hammer: one (or more) hammers spiral outward from the Knight.
+func _spiral(skill: SkillDef, p: Dictionary) -> void:
+	var req := make_request(skill, p)
+	var n := maxi(1, int(p.get("count", 1.0)))
+	var base_a := atan2(caster.forward().z, caster.forward().x)
+	for i in n:
+		var h := SpiralHammer.create(parent(), caster.global_position, base_a + TAU * float(i) / float(n), req, caster, mask(), float(p.get("duration", 2.2)))
+		h.growth = float(p.get("growth", 1.9))
+		h.on_hit = func(a: Actor, res: DamageResult) -> void:
+			_hit(skill, a, res)
+		Net.share_skill_fx("spiral", caster.global_position, Vector3(cos(h.start_angle), 0, sin(h.start_angle)), {"d": h.duration, "g": h.growth})
+	Audio.play_at(skill.sound_cast, caster.global_position)
+
+## Blizzard / Arrow Rain: a persistent area at the target.
+func _storm(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
+	var req := make_request(skill, p)
+	if p.has("chill"):
+		req.direct_status[&"chilled"] = float(p.chill)
+	var style := "arrows" if skill.projectile_look == "arrow" else "ice"
+	var s := StormArea.create(parent(), at, float(p.get("radius", 4.0)), float(p.get("duration", 3.0)), float(p.get("tick", 0.5)), req, caster, mask(), style)
+	s.on_hit = func(a: Actor, res: DamageResult) -> void:
+		_hit(skill, a, res)
+	Net.share_skill_fx("storm", at, Vector3.ZERO, {"r": s.radius, "d": s.duration, "t": s.tick, "s": style})
+	Audio.play_at(skill.sound_cast, at)
+
+## Flame Sentinel (turret) / Blade Sentinel (spinning blades).
+func _sentry(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
+	var req := make_request(skill, p)
+	req.more.append(["Sentinel", 1.0 + caster.stats.get_stat(&"summon_damage")])
+	if p.has("bleed"):
+		req.direct_status[&"bleeding"] = float(p.bleed)
+	if p.has("ignite"):
+		req.direct_status[&"burning"] = float(p.ignite)
+	var mode := "blades" if skill.class_id == &"shadowblade" else "turret"
+	var el := skill.element
+	if mode == "turret":
+		req.tags[&"projectile"] = true
+	else:
+		req.more.append(["Trap mastery", 1.0 + caster.stats.get_stat(&"trap_damage")])
+	var s := SkillSentry.create(parent(), at, mode, req, caster, mask(), float(p.get("duration", 8.0)), float(p.get("interval", 0.8)),
+		float(p.get("reach", 14.0)), el, int(p.get("max_count", 1.0)))
+	s.look = skill.projectile_look
+	s.on_hit = func(a: Actor, res: DamageResult) -> void:
+		_hit(skill, a, res)
+	Net.share_skill_fx("sentry", at, Vector3.ZERO, {"m": mode, "l": s.lifetime, "i": s.interval, "r": s.reach, "e": el})
+	Audio.play_at(skill.sound_cast, at)
+
+## Frost Orb.
+func _orb(skill: SkillDef, p: Dictionary) -> void:
+	var req := make_request(skill, p)
+	req.direct_status[&"chilled"] = float(p.get("chill", 20.0))
+	var o := FrostOrb.create(parent(), caster.cast_point(), caster.aim_dir(), req, caster, mask(), float(p.get("range", 14.0)))
+	o.on_hit = func(a: Actor, res: DamageResult) -> void:
+		_hit(skill, a, res)
+	Audio.play_at(skill.sound_cast, caster.global_position)
+
+## Snare / Blast Trap.
+func _trap(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
+	var req := make_request(skill, p)
+	req.more.append(["Trap mastery", 1.0 + caster.stats.get_stat(&"trap_damage")])
+	if p.has("ignite"):
+		req.direct_status[&"burning"] = float(p.ignite)
+	var style := "blast" if skill.element == Elements.FIRE or not skill.conversion.is_empty() else "snare"
+	var max_n := int(p.get("max_traps", 3.0)) + int(caster.stats.flag(&"trap_max"))
+	var t := SkillTrap.create(parent(), at, style, req, caster, mask(), float(p.get("radius", 2.5)), max_n)
+	t.on_hit = func(a: Actor, res: DamageResult) -> void:
+		_hit(skill, a, res)
+	Net.share_skill_fx("trap", at, Vector3.ZERO, {"s": style, "r": t.radius})
+	FX.spawn(VFXLib.ring_wave(Color(0.8, 0.95, 0.7, 0.7), 1.0, 0.3), at)
+
+## Vault: leap away from the aim point (i-frames while airborne) and leave caltrops where you stood.
+func _vault(skill: SkillDef, p: Dictionary, aim: Vector3, _action: TimedAction) -> void:
+	var origin: Vector3 = caster.global_position
+	var away := origin - aim
+	away.y = 0.0
+	if away.length() < 0.2:
+		away = -caster.forward()
+	var target := _leap_target(origin + away.normalized() * float(p.get("range", 7.0)), float(p.get("range", 7.0)))
+	caster.leap_to(target, 0.42)
+	var req := make_request(skill, p)
+	req.direct_status[&"slowed"] = 60.0
+	req.label = "Caltrops"
+	AreaEffects.hazard(parent(), origin, float(p.get("radius", 2.4)), float(p.get("duration", 4.0)), req, caster, mask(), Color(0.7, 0.65, 0.55), 0.5)
+	FX.spawn(VFXLib.dust_puff(0.8), origin)
+	Audio.play_at(&"dodge_roll", origin)
+
+## The enemy nearest the aim point within `rng_m` of the caster.
+func _step_target(aim: Vector3, rng_m: float) -> Actor:
+	var world: World3D = caster.get_world_3d()
+	var cands := CombatQuery.actors_in_radius(world, caster.global_position, rng_m, mask())
+	cands = cands.filter(func(a): return a.alive and not CombatQuery.blocked(world, caster.center(), a.center()))
+	return CombatQuery.nearest(cands, aim)
+
+## Shadow Step: appear behind the target, facing it.
+func _shadow_step(t: Actor) -> void:
+	var origin: Vector3 = caster.global_position
+	var behind: Vector3 = t.global_position - t.forward() * (t.body_radius + 0.9)
+	behind = CombatQuery.reachable_point(caster.get_world_3d(), t.global_position, behind)
+	behind = CombatQuery.ground_at(caster.get_world_3d(), behind)
+	FX.spawn(VFXLib.particles(Color(0.35, 0.2, 0.5, 0.9), 26, 0.5, true, 0.45, 3.0, 180.0, Vector3.ZERO, 0.5), origin + Vector3.UP)
+	caster.teleport_to(behind)
+	caster.face_toward(t.global_position)
+	FX.spawn(VFXLib.particles(Color(0.35, 0.2, 0.5, 0.9), 26, 0.5, true, 0.45, 3.0, 180.0, Vector3.ZERO, 0.5), behind + Vector3.UP)
+	Audio.play_at(&"blink", behind, -2.0)
+
+## Smoke Veil: enemies around lose you and you slip into Stealth.
+func _veil(_skill: SkillDef, p: Dictionary) -> void:
+	var at: Vector3 = caster.global_position
+	var radius := float(p.get("radius", 6.0))
+	for a: Actor in CombatQuery.actors_in_radius(caster.get_world_3d(), at, radius, mask()):
+		if a.has_method(&"lose_target"):
+			a.lose_target(caster)
+		if float(p.get("blind", 0.0)) > 0.0:
+			a.status.apply(&"weakened", float(p.get("duration", 4.0)))
+	caster.status.apply(&"stealth", float(p.get("duration", 4.0)))
+	FX.spawn(VFXLib.particles(Color(0.35, 0.33, 0.38, 0.75), 70, 2.2, true, 1.6, 2.5, 180.0, Vector3(0, 0.4, 0), radius * 0.5, false), at + Vector3.UP * 0.6)
+	FX.spawn(VFXLib.ring_wave(Color(0.5, 0.4, 0.65, 0.7), radius, 0.5), at)
+	Net.share_skill_fx("veil", at, Vector3.ZERO, {"r": radius})
+	Audio.play_at(&"shade_hiss", at)
+
+## Hunter's Mark / Dread Mark: statuses on every enemy in an area, no damage.
+func _mark(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
+	var radius := float(p.get("radius", 4.0))
+	for a: Actor in CombatQuery.actors_in_radius(caster.get_world_3d(), at, radius, mask()):
+		_apply_statuses(skill, a, p)
+		FX.spawn(VFXLib.impact_flash(_elem_color(skill), 1.0, 0.25, 5), a.center() + Vector3.UP * 0.8)
+	FX.spawn(VFXLib.ring_wave(_elem_color(skill), radius, 0.5, 0.6), at)
+	FX.spawn(VFXLib.ground_crack(_elem_color(skill), radius * 0.8, 1.0), at)
+	Net.share_telegraph(at, radius, 0.25, _elem_color(skill), "circle", 0.0, caster)
+	Audio.play_at(skill.sound_cast, at)
 
 func _elem_color(skill: SkillDef) -> Color:
 	var e := skill.element

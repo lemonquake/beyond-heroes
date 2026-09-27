@@ -249,7 +249,7 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		flags.append("Marked to sell")
 	if not flags.is_empty():
 		v.add_child(lbl(" · ".join(flags), 13, UITheme.GOLD))
-	var hint := String(opts.get("hint", ""))
+	var hint := touch_hint(String(opts.get("hint", "")))
 	if hint != "":
 		v.add_child(lbl(hint, 13, UITheme.TEXT_MUTED))
 	return pc
@@ -431,3 +431,9 @@ static func material_uses(base_id: StringName) -> String:
 	if names.size() > 4:
 		return "Used in: %s and %d more" % [", ".join(names.slice(0, 4)), names.size() - 4]
 	return "Used in: %s" % ", ".join(names)
+
+## Keyboard + mouse hints read as touch gestures in touch play: a long press is the right-click (TouchControls).
+static func touch_hint(t: String) -> String:
+	if not Settings.touch_mode or t == "":
+		return t
+	return t.replace("Right-click", "Hold").replace("right-click", "hold").replace("Double-click", "Double-tap").replace(" · Shift+click to choose quantity", "").replace("Click", "Tap").replace("click", "tap")

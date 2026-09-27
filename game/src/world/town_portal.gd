@@ -239,7 +239,7 @@ func _return_label() -> String:
 
 func _inflow() -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = 48
+	p.amount = Perf.particles(48)
 	p.lifetime = 1.1
 	p.preprocess = 1.0
 	p.local_coords = true

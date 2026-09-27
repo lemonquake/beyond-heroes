@@ -113,7 +113,7 @@ func _on_line(speaker: String, portrait: String, bb: String, index: int, count: 
 	_text.visible_characters = 0
 	_chars = 0.0
 	_typing = true
-	_more.text = "Click or Space to continue" if index < count - 1 else ""
+	_more.text = ("Tap to continue" if Settings.touch_mode else "Click or Space to continue") if index < count - 1 else ""
 	if npc and is_instance_valid(npc):
 		npc.gesture()
 

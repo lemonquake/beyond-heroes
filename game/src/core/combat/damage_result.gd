@@ -20,6 +20,7 @@ var buildup := {}                   # status id -> buildup points (0-100 scale)
 var leech := 0.0                    # HP returned to the attacker
 var mana_leech := 0.0               # Mana returned to the attacker
 var reactions: Array[StringName] = []   # elemental reactions that fired (shatter, melt, purify, conduct, extinguish, fan, umbral)
+var dot_mult := 1.0                  # attacker's Damage over Time multiplier (bh-010: Venomcraft)
 var absorbed := 0                   # part of `total` soaked by a ward/shield (HP loss = total - absorbed)
 var dominant_element := Elements.PHYSICAL
 var skill: StringName = &""          # id of the skill that dealt this (styled damage numbers), empty for attacks

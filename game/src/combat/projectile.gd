@@ -49,6 +49,8 @@ static func spawn(parent: Node, from: Vector3, dir: Vector3, speed: float, p_req
 	p.global_position = from
 	p._build_body(look)
 	p.add_to_group(&"projectile")
+	if p_request != null:
+		Net.share_projectile(p, from, dir, speed, p_element, look)   # other players see a harmless copy (bh-008)
 	return p
 
 func _build_body(look: String) -> void:

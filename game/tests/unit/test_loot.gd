@@ -460,12 +460,15 @@ func test_r_prefers_loot_over_a_nearer_door() -> void:
 	Game.current_map.add_child(door)
 	door.global_position = p.global_position + Vector3(1.2, 0, 0)
 	var it := DB.make_item(&"hand_axe", BH.Rarity.BASIC, 3, 5)
+	var auto_was := Settings.auto_loot_enabled
+	Settings.auto_loot_enabled = false      # the player's own settings may have auto-loot on: it would take the drop first
 	var d: LootDrop = Loot.spawn_item(it, p.global_position + Vector3(-1.55, 0, 0), 0.0, 0.01)
 	await host.get_tree().create_timer(0.6).timeout
 	eq(p.find_interact_target(), d, "a drop 1.55 m away wins over a door 1.2 m away")
 	p.interact()
 	ok(p.hero.inventory.index_of(it) >= 0, "R picked the drop up, not the door")
 	eq(Game.current_map_id, &"ruined_forest", "and did not walk through the door")
+	Settings.auto_loot_enabled = auto_was
 	door.free()
 	_end()
 	done()

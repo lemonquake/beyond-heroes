@@ -61,6 +61,14 @@ var _portal_label: Label
 var _tick := 0.0
 var _status_sig := ""
 var tempo_frames: TempoFrames
+# touch play (bh-008): the on-screen controls replace the skill plate; these are moved or hidden
+var _cluster: HBoxContainer
+var _plate: PanelContainer
+var _top_right: VBoxContainer
+var _top_center: VBoxContainer
+var _mobile := false
+var _quest_panels: Array[Control] = []  # directions, stage tracker, objective: top right, or the left column in touch play
+var _left_col: VBoxContainer
 
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -102,6 +110,8 @@ func _ready() -> void:
 	Events.teleporter_discovered.connect(func(_m): banner("Waypoint Awakened", "It will carry you back here", Color(0.55, 0.97, 1.0)))
 	if Game.player is Player:
 		bind(Game.player)
+	Settings.changed.connect(_apply_mode)
+	_apply_mode()
 
 func bind(p: Node) -> void:
 	player = p as Player
@@ -109,9 +119,11 @@ func bind(p: Node) -> void:
 		return
 	_portrait.texture = UIArt.portrait(String(player.hero.cls.id))
 	_name_label.text = player.hero.hero_name
-	var is_valor := player.hero.cls.resource_kind == &"valor"
-	_resource_bar.visible = is_valor
-	_pips.visible = not is_valor
+	var kind := player.hero.cls.resource_kind
+	var is_bar := kind in [&"valor", &"focus"]     # Valor and Focus are gauges; Arcane Charge and Combo are pips
+	_resource_bar.visible = is_bar
+	_pips.visible = not is_bar
+	_resource_bar.tick_marks = [ClassResource.STEADY_AT / 100.0] if kind == &"focus" else [0.5]
 	_resource_label.text = player.hero.cls.class_resource_name
 	_refresh_bar()
 	if not player.hero.skills_changed.is_connected(_refresh_bar):
@@ -192,6 +204,7 @@ func _build_top_center() -> void:
 	col.add_theme_constant_override("separation", 6)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(col)
+	_top_center = col
 	_boss_box = VBoxContainer.new()
 	_boss_box.add_theme_constant_override("separation", 0)
 	_boss_box.visible = false
@@ -243,12 +256,16 @@ func _build_top_right() -> void:
 	col.add_theme_constant_override("separation", 8)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(col)
+	_top_right = col
 	_minimap = MiniMap.new(210.0)
 	_minimap.size_flags_horizontal = Control.SIZE_SHRINK_END
 	col.add_child(_minimap)
-	col.add_child(DirectionsPanel.new())
-	col.add_child(StageTracker.new())
+	_quest_panels.append(DirectionsPanel.new())
+	col.add_child(_quest_panels[0])
+	_quest_panels.append(StageTracker.new())
+	col.add_child(_quest_panels[1])
 	var obj := PanelContainer.new()
+	_quest_panels.append(obj)
 	obj.theme_type_variation = &"GlassPanel"
 	obj.custom_minimum_size = Vector2(300, 0)
 	col.add_child(obj)
@@ -304,6 +321,7 @@ func _build_bottom() -> void:
 	cluster.add_theme_constant_override("separation", 6)
 	cluster.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(cluster)
+	_cluster = cluster
 	_hp_orb = HudOrb.new(&"hp", 168.0)
 	_hp_orb.size_flags_vertical = Control.SIZE_SHRINK_END
 	cluster.add_child(_hp_orb)
@@ -331,6 +349,7 @@ func _build_bottom() -> void:
 	var plate := PanelContainer.new()
 	plate.theme_type_variation = &"GlassPanel"
 	mid.add_child(plate)
+	_plate = plate
 	var bar := HBoxContainer.new()
 	bar.add_theme_constant_override("separation", 4)
 	plate.add_child(bar)
@@ -439,6 +458,81 @@ func _build_side() -> void:
 	TooltipLayer.attach(_portal_label, func() -> Control: return Tips.text(
 		"A Town Portal stands open in %s. Press %s beside it to travel; in Malasugue a return portal waits near the waypoint. It lasts until you die, dispel it, or open another." % [
 			_portal_place(), Settings.binding_text(&"interact")], "Town Portal"))
+
+# ---- Touch play layout (bh-008) --------------------------------------------------------------------------------
+
+## Keyboard + mouse: the full skill plate. Touch play: the plate and the load/auto-loot panel give way to the
+## on-screen controls (those settings move to the Menu), the orbs shrink a little and the feed moves above the stick.
+func _apply_mode() -> void:
+	var m := Settings.touch_mode
+	if _cluster == null:
+		return
+	_mobile = m
+	_plate.visible = not m
+	_side.visible = not m
+	_cluster.scale = Vector2.ONE * (0.82 if m else 1.0)
+	_cluster.offset_top = -214 if not m else -234
+	_cluster.offset_bottom = -30 if not m else -50   # touch play: the XP line sits between the orbs and the edge
+	_xp.offset_left = 360 if not m else 470
+	_xp.offset_right = -360 if not m else -560
+	if m:
+		# the feed sits right, between the minimap block and the action buttons
+		_feed.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		_feed.offset_left = -760
+		_feed.offset_right = -230
+		_feed.offset_top = 150
+		_feed.offset_bottom = 380
+		_top_center.offset_left = -340
+		_top_center.offset_right = 340
+		_top_right.offset_left = -254
+	else:
+		_feed.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+		_feed.offset_left = -420
+		_feed.offset_right = -24
+		_feed.offset_top = -40
+		_feed.offset_bottom = 260
+		_top_center.offset_left = -430
+		_top_center.offset_right = 430
+		_top_right.offset_left = -330
+	_place_quest_panels(m)
+
+func _process_cluster_pivot() -> void:
+	if _cluster and _cluster.size.x > 0.0:
+		_cluster.pivot_offset = Vector2(_cluster.size.x * 0.5, _cluster.size.y)
+
+## Touch play keeps the right side for the thumb: the Tempo frames, route directions, stage tracker and objective
+## stack under the portrait instead.
+func _place_quest_panels(m: bool) -> void:
+	if m:
+		if _left_col == null:
+			_left_col = VBoxContainer.new()
+			_left_col.position = Vector2(24, 134)
+			_left_col.add_theme_constant_override("separation", 8)
+			_left_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			add_child(_left_col)
+		if tempo_frames.get_parent() != _left_col:
+			tempo_frames.reparent(_left_col, false)
+		for q in _quest_panels:
+			if q.get_parent() != _left_col:
+				q.reparent(_left_col, false)
+	elif _left_col:
+		tempo_frames.reparent(self, false)
+		tempo_frames.position = Vector2(24, 150)
+		for q in _quest_panels:
+			q.reparent(_top_right, false)
+
+## Screen rects of the HP and Mana orbs (the touch controls put the draught buttons on them).
+func orb_rects() -> Array:
+	if _hp_orb == null:
+		return []
+	var out := []
+	for o in [_hp_orb, _mana_orb]:
+		var d: float = o.diameter * _cluster.scale.x
+		out.append(Rect2(o.global_position, Vector2(d, d)))
+	return out
+
+func minimap_rect() -> Rect2:
+	return Rect2(_minimap.global_position, Vector2.ONE * _minimap.diameter) if _minimap else Rect2()
 
 func _portal_place() -> String:
 	if player == null or player.hero.town_portal.is_empty():
@@ -554,6 +648,10 @@ func _process(delta: float) -> void:
 			_resource_bar.set_ratio(p.resource.value / maxf(1.0, p.resource.max_value))
 			_resource_bar.text = "%d" % roundi(p.resource.value)
 			_resource_bar.fill_color = Color(1.0, 0.72, 0.25) if p.resource.is_resolute() else Color(0.95, 0.45, 0.12)
+		elif p.resource.kind == &"focus":
+			_resource_bar.set_ratio(p.resource.value / maxf(1.0, p.resource.max_value))
+			_resource_bar.text = "%d" % roundi(p.resource.value)
+			_resource_bar.fill_color = Color(0.62, 1.0, 0.45) if p.resource.is_steady() else Color(0.3, 0.68, 0.3)
 		else:
 			_update_pips(int(p.resource.value), int(p.resource.max_value))
 	var dcd := p.dodge_cd
@@ -565,7 +663,9 @@ func _process(delta: float) -> void:
 		_refresh_slots()
 		_refresh_statuses()
 		_refresh_objective()
-	_update_side()
+	if not _mobile:
+		_update_side()
+	_process_cluster_pivot()
 	_update_target(delta)
 	_update_boss()
 
@@ -613,7 +713,10 @@ func _update_pips(v: int, m: int) -> void:
 	for i in _pips.get_child_count():
 		var t := _pips.get_child(i) as TextureRect
 		t.texture = UIArt.tex("hud/pip_full.png" if i < v else "hud/pip_empty.png")
-		t.modulate = Color(1.3, 1.1, 1.4) if v >= m and i < v else Color.WHITE
+		var full := Color(1.3, 1.1, 1.4)
+		if player and player.resource and player.resource.kind == &"combo":
+			full = Color(1.45, 0.75, 1.6)             # Poised: violet glow at 5 pips
+		t.modulate = full if v >= m and i < v else Color.WHITE
 
 func _refresh_statuses() -> void:
 	var list := player.status.visible_statuses()
@@ -660,7 +763,7 @@ func _update_target(delta: float) -> void:
 	var sig := ""
 	for s in t.status.visible_statuses():
 		sig += String(s.id)
-	if _target_status.get_meta(&"sig", "") != sig or _target_status.get_meta(&"who", null) != t:
+	if _target_status.get_meta(&"sig", "") != sig or (_target_status.get_meta(&"who") if _target_status.has_meta(&"who") else null) != t:
 		_target_status.set_meta(&"sig", sig)
 		_target_status.set_meta(&"who", t)
 		for c in _target_status.get_children():
@@ -696,7 +799,7 @@ func _on_skill_dropped(b: SkillButton, sid: StringName) -> void:
 	_refresh_bar()
 
 func _on_prompt(text: String) -> void:
-	_prompt_panel.visible = text != ""
+	_prompt_panel.visible = text != "" and not Settings.touch_mode   # touch play: the Interact button carries the verb
 	if text != "":
 		_prompt.text = "[%s]  %s" % [Settings.binding_text(&"interact"), text]
 
@@ -746,6 +849,7 @@ func _on_notify(text: String, kind: StringName) -> void:
 	var icon := "info"
 	match kind:
 		&"error": col = Color(1.0, 0.55, 0.45); icon = "warning"
+		&"warning": col = Color(1.0, 0.8, 0.5); icon = "warning"
 		&"loot": col = UITheme.PARCHMENT; icon = "check"
 		&"save": col = UITheme.TEXT_DIM; icon = "save"
 		&"discovery": col = Color(0.6, 0.97, 1.0); icon = "map"

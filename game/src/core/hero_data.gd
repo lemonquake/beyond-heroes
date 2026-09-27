@@ -62,6 +62,8 @@ var miniboss_log := {}
 var checkpoint := {}
 ## Herb patches picked: "map/node" -> play time they were picked (they regrow after GatherNode.REGROW seconds).
 var gather_log := {}
+## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
+var active_aura: StringName = &""
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -125,6 +127,7 @@ func init_new() -> void:
 func persistent_modifiers() -> Array:
 	var mods := equipment.modifiers()
 	mods.append_array(talent_tree.modifiers())
+	mods.append_array(skill_tree.passive_modifiers(item_skill_levels(mods)))
 	mods.append_array(GuildRules.modifiers(self))
 	if is_rested():
 		mods.append(StatModifier.inc(&"xp_gain", RESTED_XP, "Well Rested"))
@@ -161,6 +164,30 @@ func carried_weight() -> float:
 func skill_rank(skill_id: StringName) -> int:
 	return skill_tree.rank(skill_id)
 
+## "+N to all skills" from equipment (raises learned passives too, like actives).
+static func item_skill_levels(mods: Array) -> int:
+	var n := 0.0
+	for m in mods:
+		if m is StatModifier and m.stat == &"skill_levels" and m.op == StatModifier.Op.FLAT:
+			n += m.value
+	return clampi(int(n), 0, 5)
+
+## Learned passive nodes (the Disciplines/Mastery/Instincts pages).
+func learned_passives() -> Array:
+	var out := []
+	for n in skill_tree.tree.nodes:
+		if n.get("kind", "") == "passive" and skill_tree.rank(n.id) > 0:
+			out.append(n.id)
+	return out
+
+## Diablo II style synergies: each learned rank of a listed node adds pct% damage to this skill (param "syn_pct").
+func synergy_pct(skill_id: StringName) -> float:
+	var n := skill_tree.tree.node(skill_id)
+	var total := 0.0
+	for syn in n.get("synergies", []):
+		total += float(syn[1]) * float(skill_tree.rank(StringName(syn[0])))
+	return total
+
 func learned_skills() -> Array:
 	var out := []
 	for n in skill_tree.tree.nodes:
@@ -180,6 +207,9 @@ func skill_upgrades(skill_id: StringName) -> Dictionary:
 		var p: Dictionary = n.get("params", {})
 		for k in p:
 			out[k] = float(out.get(k, 0.0)) + float(p[k]) * r
+	var syn := synergy_pct(skill_id)
+	if syn > 0.0:
+		out["syn_pct"] = float(out.get("syn_pct", 0.0)) + syn
 	return out
 
 func resolved_skill(skill_id: StringName) -> Dictionary:
@@ -216,6 +246,8 @@ func refund_skill_point(node_id: StringName) -> String:
 		var idx := skill_bar.find(n.skill)
 		if idx >= 0:
 			skill_bar[idx] = &""
+		if active_aura == n.skill:
+			active_aura = &""
 	progress.points_changed.emit()
 	skills_changed.emit()
 	return ""
@@ -339,6 +371,7 @@ func to_dict() -> Dictionary:
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
 		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
+		"active_aura": String(active_aura),
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -458,6 +491,9 @@ static func from_dict(d: Dictionary) -> HeroData:
 	if gl is Dictionary:
 		for k in gl:
 			h.gather_log[String(k)] = float(gl[k])
+	var aura := StringName(d.get("active_aura", ""))
+	if aura != &"" and h.skill_tree.rank(aura) > 0 and DB.skill(aura) != null and DB.skill(aura).is_aura():
+		h.active_aura = aura
 	h.tempo_serial = int(d.get("tempo_serial", 0))
 	for t in h.tempos:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)

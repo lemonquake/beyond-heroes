@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><radialGradient id="r1" gradientUnits="userSpaceOnUse" cx="64" cy="64" r="92"><stop offset="0" stop-color="#14102a"/><stop offset="0.55" stop-color="#0b0817"/><stop offset="1" stop-color="#040208"/></radialGradient><radialGradient id="r2" gradientUnits="userSpaceOnUse" cx="66.44" cy="36.06" r="33.01"><stop offset="0" stop-color="#6a8ad0" stop-opacity="0.22"/><stop offset="1" stop-color="#6a8ad0" stop-opacity="0"/></radialGradient><radialGradient id="r3" gradientUnits="userSpaceOnUse" cx="62.72" cy="26.56" r="33.92"><stop offset="0" stop-color="#6a8ad0" stop-opacity="0.22"/><stop offset="1" stop-color="#6a8ad0" stop-opacity="0"/></radialGradient><radialGradient id="r4" gradientUnits="userSpaceOnUse" cx="30.22" cy="81.56" r="26.73"><stop offset="0" stop-color="#6a8ad0" stop-opacity="0.22"/><stop offset="1" stop-color="#6a8ad0" stop-opacity="0"/></radialGradient><linearGradient id="l5" gradientUnits="userSpaceOnUse" x1="-4" y1="0" x2="4" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="0.5" stop-color="#b4bfcc"/><stop offset="1" stop-color="#3a4250"/></linearGradient><linearGradient id="l6" gradientUnits="userSpaceOnUse" x1="-4" y1="0" x2="4" y2="0"><stop offset="0" stop-color="#d8d2ec"/><stop offset="1" stop-color="#14121c"/></linearGradient><radialGradient id="r7" gradientUnits="userSpaceOnUse" cx="64" cy="64" r="12"><stop offset="0" stop-color="#b070ff" stop-opacity="0.8"/><stop offset="0.35" stop-color="#b070ff" stop-opacity="0.44"/><stop offset="0.7" stop-color="#b070ff" stop-opacity="0.13"/><stop offset="1" stop-color="#b070ff" stop-opacity="0"/></radialGradient><radialGradient id="r8" gradientUnits="userSpaceOnUse" cx="64" cy="64" r="92"><stop offset="0" stop-color="#000000" stop-opacity="0"/><stop offset="0.58" stop-color="#000000" stop-opacity="0"/><stop offset="0.85" stop-color="#000000" stop-opacity="0.3"/><stop offset="1" stop-color="#000000" stop-opacity="0.55"/></radialGradient><linearGradient id="l9" gradientUnits="userSpaceOnUse" x1="20" y1="10" x2="108" y2="118"><stop offset="0" stop-color="#aaa4bc"/><stop offset="0.4" stop-color="#3e3a4c"/><stop offset="0.75" stop-color="#07060b"/><stop offset="1" stop-color="#040407"/></linearGradient></defs>
+<rect x="0" y="0" width="128" height="128" fill="url(#r1)"/>
+<circle cx="66.44" cy="36.06" r="33.01" fill="url(#r2)"/>
+<circle cx="62.72" cy="26.56" r="33.92" fill="url(#r3)"/>
+<circle cx="30.22" cy="81.56" r="26.73" fill="url(#r4)"/>
+<path d="M-10,80.14 L140,19.09" fill="none" stroke="#ffffff" stroke-width="6.4" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,29.21 L140,-21.75" fill="none" stroke="#ffffff" stroke-width="6.49" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,112.49 L140,53.81" fill="none" stroke="#ffffff" stroke-width="6.39" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,77.78 L140,21.71" fill="none" stroke="#ffffff" stroke-width="4.82" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,40.8 L140,-11.31" fill="none" stroke="#ffffff" stroke-width="6.76" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,42.04 L140,-8.72" fill="none" stroke="#ffffff" stroke-width="6.33" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-10,43.85 L140,-20.7" fill="none" stroke="#ffffff" stroke-width="9.18" opacity="0.02" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(64 64) scale(0.66) translate(-64 -64)">
+<path d="M99.55,63.97 L98.93,70.18 L97.42,75.63 L95.13,79.73 L92.29,82.04 L89.01,82.53 L85.05,81.23 L80.39,78.08 L75.21,73.33 L69.71,67.45 L64.05,61.02 L58.36,54.71 L52.76,49.11 L47.31,44.76 L41.94,42.08 L36.52,41.65 L31.68,43.94 L28.21,48.33 L26,54.04 L24.87,60.58 L24.76,67.43 L25.67,74.04 L27.7,79.94 L31.15,84.67 L36.32,87.37 L42.28,87.13 L48.1,84.5 L53.88,80.18 L59.73,74.64 L65.62,68.43 L71.42,62.17 L76.98,56.52 L82.06,52.12 L86.31,49.46 L89.21,48.63 L90.78,48.96 L92.31,50.4 L93.93,53.64 L95.09,58.42 L95.51,64.33 L104.49,63.67 L103.98,57.04 L102.36,50.57 L99.45,45.01 L94.78,41.01 L88.67,39.81 L82.59,41.52 L76.81,45.21 L71.05,50.31 L65.25,56.36 L59.48,62.76 L53.87,68.88 L48.59,74.08 L43.9,77.79 L40.19,79.67 L37.79,79.94 L36,79.11 L34.06,76.62 L32.42,72.36 L31.48,66.92 L31.36,61.07 L32.09,55.56 L33.55,51.11 L35.47,48.29 L37.59,47.04 L40.53,47.12 L44.69,48.95 L49.7,52.63 L55.24,57.77 L61.05,63.79 L66.97,70.03 L72.82,75.84 L78.48,80.59 L83.85,83.8 L88.86,85.04 L93.27,84 L96.63,80.86 L98.88,76.16 L100.14,70.36 L100.45,64.03 Z" fill="#d8c8ff" opacity="0.8"/>
+<g transform="translate(100 64) rotate(60) scale(1.4 1.4)">
+<path d="M-4,0 L-4,-18 L0,-30 L4,-16.5 L4,0 Z" fill="none" stroke="#0a0610" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-4,0 L-4,-18 L0,-30 L4,-16.5 L4,0 Z" fill="url(#l5)"/>
+<path d="M-1.2,-2 L-1.2,-21" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-1.4,0 L1.4,0 Q2.4,0 2.4,1 L2.4,9.2 Q2.4,10.2 1.4,10.2 L-1.4,10.2 Q-2.4,10.2 -2.4,9.2 L-2.4,1 Q-2.4,0 -1.4,0 Z" fill="none" stroke="#0a0610" stroke-width="2.88" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M-1.4,0 L1.4,0 Q2.4,0 2.4,1 L2.4,9.2 Q2.4,10.2 1.4,10.2 L-1.4,10.2 Q-2.4,10.2 -2.4,9.2 L-2.4,1 Q-2.4,0 -1.4,0 Z" fill="url(#l6)"/>
+<circle cx="0" cy="13.2" r="2.8" fill="none" stroke="#0a0610" stroke-width="3"/>
+<circle cx="0" cy="13.2" r="2.8" fill="none" stroke="#5a5668" stroke-width="1.4"/>
+</g>
+<circle cx="64" cy="64" r="12" fill="url(#r7)"/>
+</g>
+<rect x="0" y="0" width="128" height="128" fill="url(#r8)"/>
+<path d="M0,0 L128,0 L128,128 L0,128 Z M10,64 A54,54 0 1 1 118,64 A54,54 0 1 1 10,64 Z" fill="#000000" opacity="0.55" fill-rule="evenodd"/>
+<path d="M0,0 L128,0 L128,128 L0,128 Z M3,3 L3,125 L125,125 L125,3 Z" fill="#050307" fill-rule="evenodd"/>
+<circle cx="64" cy="64" r="54" fill="none" stroke="#000000" stroke-width="5.6"/>
+<circle cx="64" cy="64" r="54" fill="none" stroke="url(#l9)" stroke-width="2.6"/>
+<circle cx="64" cy="64" r="51.5" fill="none" stroke="#000000" stroke-width="1.2" opacity="0.8"/>
+<circle cx="64" cy="64" r="54.7" fill="none" stroke="#aaa4bc" stroke-width="0.6" opacity="0.4"/>
+</svg>

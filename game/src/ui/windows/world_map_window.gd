@@ -169,7 +169,7 @@ func _para(parent: Control, fs: int, col: Color) -> Label:
 
 func open() -> void:
 	super.open()
-	if Game.in_session and not get_tree().paused:
+	if Game.in_session and not get_tree().paused and not Net.is_active():   # never pause a shared world
 		get_tree().paused = true
 		_paused_by_map = true
 

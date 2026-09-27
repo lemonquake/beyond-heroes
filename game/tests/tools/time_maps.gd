@@ -8,6 +8,8 @@ func _ready() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--") and "=" in a:
 			args[a.substr(2).get_slice("=", 0)] = a.get_slice("=", 1)
+	if String(args.get("lite", "0")) == "1":     # efficiency mode builds (bh-009)
+		Settings._efficiency_preset()
 	var ids: Array = String(args.get("maps", "sanctuary,ruined_forest,catacombs,forgotten_temple,boss_arena")).split(",")
 	var report := {}
 	for id in ids:

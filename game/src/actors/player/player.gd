@@ -43,6 +43,10 @@ var camera: PlayerCamera
 var aim_point := Vector3.ZERO
 var input_enabled := true
 var aim_override := Vector3.INF        # automated playtests aim here instead of at the mouse
+## Touch play (bh-008): while a skill button is dragged the on-screen controls aim here (world direction, metres).
+var touch_aim_dir := Vector3.ZERO
+var touch_aim_dist := 0.0
+var auto_target: Actor                  # touch play: the enemy auto-aim has picked (kept while it stays in reach)
 
 var action: TimedAction
 var action_kind := &""                 # light, heavy, charge_release, skill, dodge, interact, potion
@@ -85,6 +89,14 @@ var _time := 0.0
 var _last_move_dir := Vector3.FORWARD
 var _hurt_sound_t := 0.0
 var dead_since := -1.0
+# bh-010: auras, Combo / Focus bookkeeping, passives
+const AURA_PULSE := 1.0
+const AURA_STATUS_TIME := 1.6
+var _aura_t := 0.0
+var _aura_ring: MeshInstance3D
+var _second_wind_cd := 0.0
+var _cast_serial := 0
+var _combo_cast := -1
 
 func _ready() -> void:
 	super._ready()
@@ -129,6 +141,8 @@ func bind(h: HeroData) -> void:
 	mana = max_mana()
 	if stats.has_flag(&"valor_hold"):
 		resource.gain(stats.flag(&"valor_hold"))
+	if hero.active_aura != &"":
+		_aura_visual(true)
 	health_changed.emit(hp, max_hp())
 	mana_changed.emit(mana, max_mana())
 	Events.player_spawned.emit(self)
@@ -200,7 +214,10 @@ func stance_idle() -> StringName:
 func rebuild_stats() -> void:
 	var mods := status.stat_modifiers()
 	if resource:
-		mods.append_array(resource.modifiers(40.0 if _has_hero_flag(&"resolute_40") else 50.0))
+		mods.append_array(resource.modifiers(40.0 if _has_hero_flag(&"resolute_40") else 50.0, _steady_at()))
+	var reserve := aura_reserve()
+	if reserve > 0.0:
+		mods.append(StatModifier.more(&"max_mana", -reserve, "Reserved by %s" % DB.skill(hero.active_aura).display_name))
 	if _haste_t > 0.0:
 		mods.append(StatModifier.more(&"move_speed", stats.flag(&"dodge_haste") if stats else 0.2, "Windswift"))
 	if stats and stats.has_flag(&"low_hp_dr") and hp < max_hp() * 0.35:
@@ -209,8 +226,23 @@ func rebuild_stats() -> void:
 	affinity = Elements.PHYSICAL
 	level = hero.progress.level
 	if resource:
-		resource.set_max(stats.get_stat(&"arcane_max", 5.0) if resource.kind == &"arcane" else 100.0)
+		match resource.kind:
+			&"arcane": resource.set_max(stats.get_stat(&"arcane_max", 5.0))
+			&"combo":
+				resource.set_max(stats.get_stat(&"combo_max", ClassResource.COMBO_MAX))
+				resource.decay_delay_bonus = stats.flag(&"combo_linger")
+			_: resource.set_max(100.0)
+	if mana > max_mana():
+		mana = max_mana()
+		mana_changed.emit(mana, max_mana())
 	stats_changed.emit()
+
+func _steady_at() -> float:
+	return 50.0 if stats != null and stats.has_flag(&"steady_50") else ClassResource.STEADY_AT
+
+## Stealth (Smoke Veil): enemies cannot see the hero (Enemy._hidden).
+func is_hidden() -> bool:
+	return status.has(&"stealth")
 
 func _has_hero_flag(f: StringName) -> bool:
 	return stats != null and stats.has_flag(f)
@@ -229,6 +261,9 @@ func _update_aim() -> void:
 	if aim_override.is_finite():
 		aim_point = Vector3(aim_override.x, global_position.y, aim_override.z)
 		return
+	if Settings.touch_mode:
+		_update_touch_aim()
+		return
 	var vp := get_viewport()
 	var mp := vp.get_mouse_position()
 	var from := camera.project_ray_origin(mp)
@@ -243,6 +278,49 @@ func _update_aim() -> void:
 		Game.hover_target = enemy
 	else:
 		Game.hover_target = null
+
+const AUTO_AIM_RANGE := 13.0
+
+## Touch play has no cursor: a dragged skill button aims where it points; otherwise attacks and skills turn toward the
+## nearest enemy (favouring the one ahead of the hero and the one already targeted), or straight ahead.
+func _update_touch_aim() -> void:
+	if touch_aim_dir.length() > 0.1:
+		aim_point = global_position + touch_aim_dir.normalized() * maxf(1.0, touch_aim_dist)
+		return
+	var t := pick_auto_target() if Settings.touch_auto_aim else null
+	auto_target = t
+	Game.hover_target = t
+	if t:
+		aim_point = Vector3(t.global_position.x, global_position.y, t.global_position.z)
+	else:
+		var ahead := _move_input()
+		if ahead.length() < 0.1:
+			ahead = forward()
+		aim_point = global_position + ahead.normalized() * 4.0
+
+func pick_auto_target() -> Actor:
+	var facing := _move_input()
+	if facing.length() < 0.1:
+		facing = forward()
+	facing = facing.normalized()
+	var best: Actor = null
+	var best_score := INF
+	for e in get_tree().get_nodes_in_group(&"enemy"):
+		var a := e as Actor
+		if a == null or not a.alive or not a.visible:
+			continue
+		var d := a.global_position - global_position
+		d.y = 0.0
+		var dist := d.length()
+		var reach := AUTO_AIM_RANGE * (1.2 if a == auto_target else 1.0)
+		if dist > reach or absf(a.global_position.y - global_position.y) > 4.0:
+			continue
+		var ahead := facing.dot(d / maxf(dist, 0.01))
+		var score := dist * (1.35 - 0.35 * ahead) * (0.7 if a == auto_target else 1.0)
+		if score < best_score:
+			best_score = score
+			best = a
+	return best
 
 func _enemy_under_cursor(from: Vector3, dir: Vector3) -> Actor:
 	var best: Actor = null
@@ -336,7 +414,16 @@ func _tick_timers(delta: float) -> void:
 			status.remove(&"shielded")
 	if _queued != &"" and _time - _queued_t > INPUT_BUFFER:
 		_queued = &""
-	if resource:
+	_second_wind_cd = maxf(0.0, _second_wind_cd - delta)
+	_aura_tick(delta)
+	if resource and resource.kind == &"focus":
+		resource.tick(delta, in_combat(), false, not _enemy_near(ClassResource.FOCUS_CALM_RANGE), _enemy_near(ClassResource.FOCUS_PRESSURE_RANGE),
+			1.0 + stats.get_stat(&"focus_gain"))
+		_sync_status(&"steady", resource.is_steady(_steady_at()))
+	elif resource and resource.kind == &"combo":
+		resource.tick(delta, in_combat())
+		_sync_status(&"poised", resource.is_poised())
+	elif resource:
 		resource.tick(delta, _enemy_near(8.0), stats.has_flag(&"valor_hold"))
 		var resolute := resource.is_resolute(40.0 if stats.has_flag(&"resolute_40") else 50.0)
 		if resolute != status.has(&"resolute"):
@@ -360,8 +447,16 @@ func _tick_timers(delta: float) -> void:
 		_hurt_sound_t = 2.6
 		Audio.play_ui(&"heartbeat")
 
+func _sync_status(id: StringName, on: bool) -> void:
+	if on != status.has(id):
+		if on:
+			status.apply(id, 0.0)
+		else:
+			status.remove(id)
+		mark_stats_dirty()
+
 func _regen(delta: float) -> void:
-	var hr := stats.get_stat(&"hp_regen")
+	var hr := stats.get_stat(&"hp_regen") + aura_regen()
 	var mr := stats.get_stat(&"mana_regen")
 	if stats.has_flag(&"still_mana") and _still_t >= 1.0:
 		mr *= 1.0 + stats.flag(&"still_mana")
@@ -472,6 +567,9 @@ func _can_start(kind: StringName) -> bool:
 		return false
 	if kind == &"dodge":
 		if dodge_cd > 0.0:
+			return false
+		if status.has(&"webbed"):
+			Events.notify.emit("Webbed! You cannot dodge", &"locked")
 			return false
 		if is_overburdened():
 			_overburden_notice()
@@ -675,6 +773,7 @@ func _radiant_shockwave() -> void:
 func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 	var wt := _main_type()
 	var req := _weapon_request(a, heavy, mult)
+	req.tags[&"projectile"] = true
 	_apply_attack_powers(req, a)
 	var el := stats.loadout.element_for(int(a.data.get("hand", 0)))
 	var look := "arrow" if wt.id == &"bow" else "orb"
@@ -688,6 +787,8 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 	pr.hit_sound = wt.hit_sound
 	if heavy and (wt.id == &"bow" or wt.id == &"javelin"):
 		pr.pierce = 2
+	if stats.has_flag(&"pierce_chance") and randf() < stats.flag(&"pierce_chance"):
+		pr.pierce += 1
 	if (heavy and wt.id == &"staff") or (a.data.get("finisher", false) and wt.id == &"staff"):
 		pr.explode_radius = 2.2
 		pr.on_end = func(pt: Vector3, _w: bool) -> void:
@@ -755,11 +856,25 @@ func _release_charge() -> void:
 
 # ---- Dodge ------------------------------------------------------------------------------------------------------
 
+## Touch "Roll" button: the next dodge is a forward roll even with the stick at rest. The request outlives the tap and
+## the input buffer (a roll pressed during a swing still comes out as a roll); the Dodge button cancels it.
+var _roll_forward_until := 0
+
+func request_roll_forward(on := true) -> void:
+	_roll_forward_until = Time.get_ticks_msec() + 800 if on else 0
+
 func _start_dodge() -> void:
 	_cancel_action(true)
 	var input := _move_input()
 	var dir := input if input.length() > 0.1 else -aim_dir()
 	var anim := &"dodge_roll" if input.length() > 0.1 else &"dodge_step"
+	if Time.get_ticks_msec() < _roll_forward_until:
+		_roll_forward_until = 0
+		if input.length() <= 0.1:
+			var fwd := global_transform.basis.z
+			fwd.y = 0.0
+			dir = fwd.normalized() if fwd.length() > 0.01 else -aim_dir()
+		anim = &"dodge_roll"
 	var a := TimedAction.from_anim(anim, 1.0)
 	_begin(a, &"dodge")
 	rotation.y = atan2(dir.x, dir.z) if anim == &"dodge_roll" else atan2(-dir.x, -dir.z)
@@ -840,8 +955,12 @@ func skill_block_reason(sid: StringName) -> String:
 		return "Not enough Mana"
 	if s.valor_cost > 0.0 and (resource == null or resource.value < s.valor_cost):
 		return "Requires %d Valor" % roundi(s.valor_cost)
+	if s.is_aura() and hero.active_aura == sid:
+		return ""                                 # switching an aura off is always allowed
 	if s.requires == &"melee" and (_main_type() == null or _main_type().ranged):
 		return "Requires a melee weapon"
+	if s.requires == &"bow" and (_main_type() == null or not (_main_type().id in [&"bow", &"javelin"])):
+		return "Requires a bow or javelins"
 	if s.requires == &"shield" and not stats.loadout.has_shield:
 		return "Requires a shield"
 	if s.kind == DamageRequest.Kind.SPELL and status.is_silenced():
@@ -859,9 +978,13 @@ func _start_skill(sid: StringName) -> void:
 		Events.notify.emit(why, &"error")
 		Audio.play_ui(&"ui_error")
 		return
+	if s.is_aura():
+		toggle_aura(sid)
+		return
 	if s.behavior == &"spin":
 		_start_channel(s)
 		return
+	_cast_serial += 1
 	var p := skill_params(sid)
 	_cancel_action(true)
 	var rate := clampf(stats.get_stat(s.anim_speed_stat, 1.0), StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
@@ -943,10 +1066,145 @@ func _stop_channel() -> void:
 	visual.stop_action()
 	Audio.stop_loop(self)
 
+# ---- Auras (bh-010, Knight) ----------------------------------------------------------------------------------
+# One aura at a time. While on, it reserves part of Maximum Mana and every second refreshes its status (and the stat
+# modifiers it grants) on the Knight, their Tempos and co-op heroes in range; offensive auras also hurt enemies.
+
+## Fraction of Maximum Mana the active aura reserves.
+func aura_reserve() -> float:
+	if hero == null or hero.active_aura == &"":
+		return 0.0
+	var s := DB.skill(hero.active_aura)
+	if s == null:
+		return 0.0
+	return clampf(float(s.params.get("reserve", 0.15)) * (1.0 - stats.flag(&"aura_reserve_less") if stats else 1.0), 0.0, 0.6)
+
+func toggle_aura(sid: StringName) -> void:
+	var s := DB.skill(sid)
+	if s == null or not s.is_aura():
+		return
+	if hero.active_aura == sid:
+		hero.active_aura = &""
+		status.remove(sid)
+		_aura_visual(false)
+		mark_stats_dirty()
+		Events.notify.emit("%s ended" % s.display_name, &"info")
+		Audio.play_ui(&"ui_close")
+		skill_used.emit(sid)
+		return
+	if hero.active_aura != &"":
+		status.remove(hero.active_aura)
+	spend_mana(mana_cost(sid))
+	hero.active_aura = sid
+	_aura_t = 0.0
+	mark_stats_dirty()
+	_aura_visual(true)
+	FX.spawn(VFXLib.ring_wave(_aura_color(s), float(skill_params(sid).get("radius", 10.0)), 0.6, 0.5), global_position)
+	Audio.play_at(s.sound_cast if s.sound_cast != &"" else &"holy_chime", global_position)
+	Events.notify.emit("%s active" % s.display_name, &"info")
+	skill_used.emit(sid)
+	mark_combat()
+
+func _aura_color(s: SkillDef) -> Color:
+	return Color(1.0, 0.62, 0.3) if s.aura_kind == &"offense" else Color(0.55, 0.78, 1.0)
+
+## A soft glowing ring on the ground under the Knight while an aura is on.
+func _aura_visual(on: bool) -> void:
+	if _aura_ring and is_instance_valid(_aura_ring):
+		_aura_ring.queue_free()
+	_aura_ring = null
+	if not on or hero == null or hero.active_aura == &"":
+		return
+	var s := DB.skill(hero.active_aura)
+	var c := _aura_color(s)
+	_aura_ring = MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = 1.05
+	tm.outer_radius = 1.2
+	tm.rings = 40
+	tm.ring_segments = 6
+	_aura_ring.mesh = tm
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.albedo_color = Color(c.r, c.g, c.b, 0.55)
+	_aura_ring.material_override = m
+	_aura_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_aura_ring.scale = Vector3(1, 0.08, 1)
+	_aura_ring.position.y = 0.05
+	add_child(_aura_ring)
+
+## Everyone who shares the aura: this hero, local Tempos, and (through Net) other players' heroes and Tempos.
+func _aura_tick(delta: float) -> void:
+	if _aura_ring and is_instance_valid(_aura_ring):
+		_aura_ring.rotation.y += delta * 0.7
+	if hero == null or hero.active_aura == &"" or not alive:
+		return
+	_aura_t -= delta
+	if _aura_t > 0.0:
+		return
+	_aura_t = AURA_PULSE
+	var sid := hero.active_aura
+	var s := DB.skill(sid)
+	if s == null or hero.skill_rank(sid) <= 0:
+		hero.active_aura = &""
+		_aura_visual(false)
+		mark_stats_dirty()
+		return
+	var p := skill_params(sid)
+	var eff := 1.0 + stats.get_stat(&"aura_effect")
+	var radius := float(p.get("radius", 10.0)) * (1.0 + stats.get_stat(&"aura_radius"))
+	var mods := aura_mods(s, p, eff)
+	var mag := float(p.get("magnitude", 0.0)) * eff
+	status.apply(sid, AURA_STATUS_TIME, mag, 0.0, Elements.PHYSICAL, mods)
+	for t in get_tree().get_nodes_in_group(&"tempo"):
+		if t is Actor and t.alive and t.global_position.distance_to(global_position) <= radius:
+			(t as Actor).status.apply(sid, AURA_STATUS_TIME, mag, 0.0, Elements.PHYSICAL, aura_mods(s, p, eff))
+	if Net.is_active():
+		for av in Net.avatars():
+			if av.alive and av.global_position.distance_to(global_position) <= radius:
+				Net.send_aura(av, sid, AURA_STATUS_TIME, mag, s.aura_mods, p, eff)
+	# offensive pulses
+	var pmin := float(p.get("pulse_min", 0.0))
+	if pmin > 0.0 or p.has("pulse_chill"):
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL
+		req.attacker = stats
+		req.base_min = pmin * eff
+		req.base_max = float(p.get("pulse_max", pmin)) * eff
+		req.conversion = {s.element: 1.0}
+		req.can_crit = false
+		req.evadable = false
+		req.knockback = 0.0
+		req.label = s.display_name
+		if p.has("pulse_chill"):
+			req.direct_status[&"chilled"] = float(p.pulse_chill)
+		var pr := float(p.get("pulse_radius", radius * 0.6))
+		for h in AreaEffects.burst(self, global_position, pr, BH.LAYER_ENEMY, req, self):
+			_on_hit_dealt(h[0], h[1], req, s)
+		FX.spawn(VFXLib.ring_wave(Elements.color(s.element), pr, 0.45, 0.3), global_position)
+	elif int(Time.get_ticks_msec() / 1000) % 3 == 0:
+		FX.spawn(VFXLib.ring_wave(Color(_aura_color(s), 0.35), radius, 0.9, 0.12), global_position)
+
+## Stat modifiers an aura grants at the current rank: [[stat, op, param, scale]].
+static func aura_mods(s: SkillDef, p: Dictionary, eff: float) -> Array:
+	var out: Array = []
+	for m in s.aura_mods:
+		out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(p.get(String(m[2]), 0.0)) * float(m[3]) * eff, s.display_name))
+	return out
+
 # ---- Potions & interaction ------------------------------------------------------------------------------------
 
 func use_potion(kind: StringName) -> bool:
 	if potion_cd > 0.0 or not alive:
+		return false
+	# A misclick on the belt must not waste a draught: the belt only drinks for the pool it restores.
+	if kind == &"heal" and hp >= max_hp() - 0.5:
+		_refuse_consumable("Your health is already full")
+		return false
+	if kind == &"mana" and mana >= max_mana() - 0.5:
+		_refuse_consumable("Your mana is already full")
 		return false
 	var item: ItemInstance = null
 	var order: Array = POTION_ORDER[kind]
@@ -968,6 +1226,8 @@ func consume_item(item: ItemInstance) -> bool:
 	if item == null or not item.base.is_consumable() or not alive:
 		return false
 	var fx: Dictionary = item.base.consumable_effect
+	if (fx.has("return") or fx.has("portal")) and not Net.may_travel():
+		return false                 # in someone else's world the party follows the host (bh-008)
 	if fx.has("learn_recipe"):
 		var err := Crafting.learn(hero, StringName(fx["learn_recipe"]))
 		if err != "":
@@ -1004,6 +1264,10 @@ func consume_item(item: ItemInstance) -> bool:
 		Events.notify.emit("%s: %s" % [StatusRules.name_of(sid), item.base.flavor], &"info")
 		hero.inventory.consume(item.base.id, 1)
 		return true
+	var refusal := restore_refusal(fx)
+	if refusal != "":
+		_refuse_consumable(refusal)
+		return false
 	if fx.has("heal") or fx.has("mana"):
 		if potion_cd > 0.0:
 			return false
@@ -1018,13 +1282,48 @@ func consume_item(item: ItemInstance) -> bool:
 		if fx.has("mana"):
 			_mana_over_time(max_mana() * float(fx.mana), 2.0)
 	if fx.has("cleanse"):
-		status.cleanse([&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"])
+		status.cleanse(CLEANSABLE)
 	if fx.has("return"):
 		Game.return_to_town()
 	hero.inventory.consume(item.base.id, 1)
 	Audio.play_at(&"potion_drink", global_position)
 	FX.spawn(VFXLib.particles(Color(1.0, 0.3, 0.3, 0.8) if fx.has("heal") else Color(0.3, 0.5, 1.0, 0.8), 14, 0.8, true, 0.3, 2.0, 40.0, Vector3(0, 2, 0), 0.4), global_position + Vector3.UP)
 	return true
+
+## Why a restorative consumable would be wasted right now ("" = drinking it does something). A draught is refused only
+## when every pool it restores is already full and it has no other effect (cleanse, return) that would still apply.
+func restore_refusal(fx: Dictionary) -> String:
+	if fx.has("return"):
+		return ""
+	var heals := fx.has("heal") and float(fx.get("heal", 0.0)) > 0.0
+	var mans := fx.has("mana") and float(fx.get("mana", 0.0)) > 0.0
+	var cleanses := fx.has("cleanse")
+	if not (heals or mans or cleanses):
+		return ""
+	var hp_full := hp >= max_hp() - 0.5
+	var mana_full := mana >= max_mana() - 0.5
+	var useful := (heals and not hp_full) or (mans and not mana_full)
+	if cleanses and _has_cleansable():
+		useful = true
+	if useful:
+		return ""
+	if cleanses and not (heals or mans):
+		return "Nothing to cleanse"
+	if heals and mans:
+		return "Your health and mana are already full"
+	return "Your health is already full" if heals else "Your mana is already full"
+
+const CLEANSABLE := [&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"]
+
+func _has_cleansable() -> bool:
+	for sid in CLEANSABLE:
+		if status.has(sid):
+			return true
+	return false
+
+func _refuse_consumable(msg: String) -> void:
+	Events.notify.emit(msg, &"warning")
+	Audio.play_ui(&"ui_error")
 
 func _mana_over_time(total: float, dur: float) -> void:
 	var tw := create_tween()
@@ -1234,7 +1533,20 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	return res
 
 func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	# Mana Shield (Mage passive): part of the damage drains Mana instead (1.5 Mana per point).
+	if stats.has_flag(&"mana_shield") and result.total > 0 and mana > 1.0 and not result.evaded:
+		var share := minf(stats.flag(&"mana_shield"), 0.6)
+		var absorb := mini(int(result.total * share), int(mana / 1.5))
+		if absorb > 0:
+			spend_mana(absorb * 1.5)
+			result.total -= absorb
+			FX.spawn(VFXLib.shield_dome(Color(0.45, 0.6, 1.0, 0.5), 1.1, 0.35), global_position)
 	super._apply_result(result, req, attacker, hit_point)
+	if alive and stats.has_flag(&"second_wind") and _second_wind_cd <= 0.0 and hp < max_hp() * 0.35:
+		_second_wind_cd = 45.0
+		status.apply(&"second_wind", 4.0, max_hp() * stats.flag(&"second_wind") / 4.0)
+		FX.spawn(VFXLib.ring_wave(Color(0.6, 1.0, 0.7, 0.9), 2.5, 0.5), global_position)
+		FX.text_popup(center() + Vector3.UP * 0.9, "Second Wind", Color(0.6, 1.0, 0.7), 1.0)
 	if result.blocked:
 		_on_blocked(result, attacker)
 	if resource and resource.kind == &"valor" and result.total > 0:
@@ -1276,6 +1588,22 @@ func _on_blocked(result: DamageResult, attacker: Node) -> void:
 	if stats.has_flag(&"block_mana"):
 		restore_mana(stats.flag(&"block_mana"))
 		heal(max_hp() * 0.02, false)
+	if stats.has_flag(&"retaliation") and attacker is Actor and (attacker as Actor).alive and randf() < stats.flag(&"retaliation") \
+			and (attacker as Node3D).global_position.distance_to(global_position) < 4.0:
+		var rq := DamageRequest.new()
+		rq.kind = DamageRequest.Kind.ATTACK
+		rq.attacker = stats
+		rq.use_weapon = true
+		rq.weapon_mult = 1.2
+		rq.knockback = 6.0
+		rq.poise = 20.0
+		rq.label = "Retaliation"
+		rq.tags[&"push_dir"] = ((attacker as Node3D).global_position - global_position).slide(Vector3.UP).normalized()
+		decorate_request(rq, null)
+		var rr := (attacker as Actor).receive_hit(rq, self, (attacker as Actor).center())
+		_on_hit_dealt(attacker as Actor, rr, rq)
+		FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.85, 0.5, 0.9), 2.4, 140.0, 1.1, 0.2, 0.5), global_position, forward())
+		FX.text_popup(center() + Vector3.UP * 0.9, "Retaliation", UITheme.GOLD, 0.8)
 	if result.perfect_block:
 		FX.hitstop(0.08)
 		Events.camera_shake.emit(0.2)
@@ -1355,6 +1683,9 @@ func decorate_request(req: DamageRequest, skill: SkillDef) -> void:
 			req.more.append(["Elemental Overload", 1.0 + stats.flag(&"overload", 0.4)])
 	if _riposte_t > 0.0 and req.kind == DamageRequest.Kind.ATTACK:
 		req.force_crit = true
+	if status.has(&"stealth") and req.kind != DamageRequest.Kind.DOT:
+		req.more.append(["Ambush", 1.5 + stats.flag(&"ambush")])
+		req.force_crit = true
 
 func on_skill_hit(skill: SkillDef, target: Actor, res: DamageResult) -> void:
 	_on_hit_dealt(target, res, null, skill)
@@ -1365,11 +1696,26 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 	mark_combat()
 	if _riposte_t > 0.0 and (req == null or req.kind == DamageRequest.Kind.ATTACK):
 		_riposte_t = 0.0
+	if status.has(&"stealth"):
+		status.remove(&"stealth")                  # the ambush is spent
 	if res.total <= 0:
 		return
 	if resource and resource.kind == &"valor":
 		var g := float(skill.params.get("valor_gain", 3.0)) if skill else 3.0
 		resource.gain(g, 1.0 + stats.get_stat(&"valor_gain"))
+	elif resource and resource.kind == &"combo":
+		if skill != null:
+			var cg := float(skill.params.get("combo_gain", 0.0))
+			if cg > 0.0 and _combo_cast != _cast_serial:
+				_combo_cast = _cast_serial
+				resource.gain(cg + (1.0 if res.is_crit else 0.0))
+		elif req != null and req.tags.has(&"weapon") and action != null and not action.data.get("combo_given", false):
+			action.data["combo_given"] = true
+			resource.gain(1.0)
+	elif resource and resource.kind == &"focus":
+		var ranged := (req != null and req.tags.has(&"projectile")) or (skill != null and skill.projectile_look == "arrow")
+		if ranged and target.global_position.distance_to(global_position) > ClassResource.FOCUS_CALM_RANGE:
+			resource.gain(ClassResource.FOCUS_PER_RANGED_HIT, 1.0 + stats.get_stat(&"focus_gain"))
 	var moh := stats.get_stat(&"mana_on_hit")
 	if moh > 0.0:
 		restore_mana(moh)
@@ -1591,6 +1937,7 @@ func respawn() -> void:
 	mana_changed.emit(mana, max_mana())
 	visual.revive()
 	dead_since = -1.0
+	_aura_t = 0.0
 
 func on_teleported() -> void:
 	_cancel_action(false)

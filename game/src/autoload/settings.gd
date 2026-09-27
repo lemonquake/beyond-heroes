@@ -49,19 +49,32 @@ var camera_zoom := 1.0
 var reduced_motion := false
 var ui_scale := 1.0
 var show_minimap := true
+# ---- PLATFORM (bh-008): asked once on the first launch, changeable in Settings > Controls
+var control_mode := ""              # "" not chosen yet, "pc" keyboard + mouse, "mobile" touch controls
+var touch_opacity := 0.85           # on-screen controls
+var touch_size := 1.0               # scale of the on-screen buttons and stick
+var touch_auto_aim := true          # attacks and tapped skills turn toward the nearest enemy
+var touch_fixed_stick := false      # false: the stick appears where the left thumb lands
+# ---- EFFICIENCY (bh-009): on with Mobile. Low-end phones: the OpenGL renderer, a light budget, lighter shaders and maps,
+# sleeping far actors, 30 fps. Read by the map builders (applies from the next map load) and by `Perf`.
+var efficiency_mode := false
 
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap"]
+	"auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
+	"control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
 var fog: bool:
 	get: return true
 var glow: bool:
-	get: return effects_quality >= 1
+	get: return effects_quality >= 1 and not efficiency_mode
 var ssao: bool:
-	get: return effects_quality >= 2
+	get: return effects_quality >= 2 and not efficiency_mode
+## Total efficiency (Mobile): every system that has a cheaper path takes it.
+var lite: bool:
+	get: return efficiency_mode
 var auto_loot: bool:
 	get: return auto_loot_enabled
 ## Items at or above this rarity are picked up automatically while auto-loot is on.
@@ -69,6 +82,12 @@ var auto_loot_rarity: int:
 	get: return [BH.Rarity.BEGINNER, BH.Rarity.COMMON, BH.Rarity.BASIC, BH.Rarity.ADVANCED, BH.Rarity.ELITE][clampi(auto_loot_mode, 0, 4)]
 var fullscreen: bool:
 	get: return window_mode > 0
+## Touch play: on-screen stick and buttons, auto-aim, long-press for right-click.
+var touch_mode: bool:
+	get: return control_mode == "mobile"
+## Running on a phone or tablet (the export, not the chosen control mode).
+static func is_mobile_device() -> bool:
+	return OS.has_feature("mobile") or OS.has_feature("android") or OS.has_feature("ios")
 const FPS_LIMITS := [0, 30, 60, 120, 144]
 var fps_limit_index: int:
 	get: return maxi(0, FPS_LIMITS.find(fps_limit))
@@ -85,15 +104,16 @@ func to_dict() -> Dictionary:
 		d[k] = get(k)
 	return d
 
+## Settings that belong to the device, not to the hero (bh-009): a save carries its settings along, but loading it on
+## a phone must not bring back a desktop's shadows and uncapped frame rate (or turn a PC into touch play).
+const DEVICE_KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
+	"anti_aliasing", "render_scale", "efficiency_mode", "ui_scale", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim",
+	"touch_fixed_stick"]
+
 func from_dict(d: Dictionary) -> void:
 	for k in KEYS:
-		if d.has(k):
+		if d.has(k) and not k in DEVICE_KEYS:
 			set(k, _coerce(k, d[k]))
-	# older saves stored a boolean
-	if d.has("fullscreen") and not d.has("window_mode"):
-		window_mode = 1 if d.fullscreen else 0
-	if d.has("shadows_quality"):
-		shadows_quality = clampi(int(d.shadows_quality), 0, 3)
 	apply()
 
 func _coerce(k: String, v: Variant) -> Variant:
@@ -108,6 +128,8 @@ func _coerce(k: String, v: Variant) -> Variant:
 func load_file() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(PATH) != OK:
+		if is_mobile_device():
+			_mobile_defaults()
 		return
 	var d := {}
 	for k in KEYS:
@@ -118,6 +140,62 @@ func load_file() -> void:
 	for k in d:
 		if k in KEYS:
 			set(k, _coerce(k, d[k]))
+	# a phone that saved its settings before efficiency mode existed (or a PC that picked Mobile): switch it on once
+	if not d.has("efficiency_mode") and (is_mobile_device() or control_mode == "mobile"):
+		_efficiency_preset()
+
+## First launch on a phone or tablet: settings a mobile GPU and a small screen are comfortable with.
+func _mobile_defaults() -> void:
+	_efficiency_preset()
+	ui_scale = 1.25
+	auto_loot_enabled = true
+	auto_loot_mode = 1
+
+## The Mobile video preset: no shadows, no post effects, no anti-aliasing, 3D drawn at 70 % and scaled up, 30 fps.
+func _efficiency_preset() -> void:
+	efficiency_mode = true
+	shadows_quality = 0
+	texture_quality = 0
+	effects_quality = 0
+	anti_aliasing = 0
+	render_scale = 0.7
+	fps_limit = 30
+
+## Back to the desktop defaults when leaving efficiency mode.
+func _desktop_preset() -> void:
+	efficiency_mode = false
+	shadows_quality = 2
+	texture_quality = 2
+	effects_quality = 2
+	anti_aliasing = 2
+	render_scale = 1.0
+	fps_limit = 0
+
+## Switch between keyboard + mouse and touch play (the first-launch question and Settings > Controls). Mobile turns
+## on total efficiency; PC turns it off again (a phone always keeps it: its GPU is the reason it exists).
+func set_control_mode(mode: String) -> void:
+	control_mode = mode
+	if mode == "mobile":
+		if not efficiency_mode:
+			_efficiency_preset()
+		if ui_scale < 1.2 and is_mobile_device():
+			ui_scale = 1.25
+	elif efficiency_mode and not is_mobile_device():
+		_desktop_preset()
+	apply()
+	save_file()
+
+## Settings > Video > Efficiency Mode.
+func set_efficiency(on: bool) -> void:
+	if on == efficiency_mode:
+		return
+	if on:
+		_efficiency_preset()
+	else:
+		_desktop_preset()
+	apply()
+	save_file()
+	changed.emit()
 
 func save_file() -> void:
 	var cfg := ConfigFile.new()
@@ -139,9 +217,11 @@ func reset_group(group: String) -> void:
 	save_file()
 
 const GROUPS := {
-	"video": ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality", "anti_aliasing", "render_scale"],
+	"video": ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality", "anti_aliasing", "render_scale",
+		"efficiency_mode"],
 	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume"],
-	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat"],
+	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "touch_opacity", "touch_size", "touch_auto_aim",
+		"touch_fixed_stick"],
 	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
 		"reduced_motion", "ui_scale", "show_minimap"],
 }
@@ -151,6 +231,7 @@ const GROUPS := {
 func apply() -> void:
 	_apply_audio()
 	_apply_bindings()
+	_apply_touch_input()
 	if is_inside_tree():
 		_apply_video()
 		_apply_world()
@@ -173,7 +254,7 @@ func _bus(name: String, v: float) -> void:
 func _apply_video() -> void:
 	var vp := get_tree().root
 	var headless := DisplayServer.get_name() == "headless"
-	if not headless and not Engine.is_editor_hint():
+	if not headless and not Engine.is_editor_hint() and not is_mobile_device():
 		match window_mode:
 			0:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -188,19 +269,29 @@ func _apply_video() -> void:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			2:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	if not headless and not Engine.is_editor_hint():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if vsync else DisplayServer.VSYNC_DISABLED)
 	Engine.max_fps = fps_limit
 	# anti-aliasing
 	vp.msaa_3d = [Viewport.MSAA_DISABLED, Viewport.MSAA_DISABLED, Viewport.MSAA_2X, Viewport.MSAA_4X, Viewport.MSAA_DISABLED][clampi(anti_aliasing, 0, 4)]
-	vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if anti_aliasing == 1 else Viewport.SCREEN_SPACE_AA_DISABLED
+	if RenderingServer.get_current_rendering_method() != "gl_compatibility":   # no FXAA in the OpenGL fallback
+		vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if anti_aliasing == 1 else Viewport.SCREEN_SPACE_AA_DISABLED
 	vp.use_taa = anti_aliasing == 4
 	# render scale: FSR 1 below native
 	vp.scaling_3d_scale = clampf(render_scale, 0.5, 1.0)
-	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if render_scale < 0.99 else Viewport.SCALING_3D_MODE_BILINEAR
+	# FSR exists only in the desktop (Forward+) renderer; phones use the Mobile renderer and plain bilinear upscaling
+	var fsr_ok := RenderingServer.get_current_rendering_method() == "forward_plus"
+	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if render_scale < 0.99 and fsr_ok else Viewport.SCALING_3D_MODE_BILINEAR
 	# textures
 	vp.anisotropic_filtering_level = [Viewport.ANISOTROPY_2X, Viewport.ANISOTROPY_4X, Viewport.ANISOTROPY_8X, Viewport.ANISOTROPY_16X][clampi(texture_quality, 0, 3)]
 	vp.texture_mipmap_bias = [0.5, 0.25, 0.0, -0.25][clampi(texture_quality, 0, 3)]
 	vp.mesh_lod_threshold = [2.5, 1.5, 1.0, 0.5][clampi(effects_quality, 0, 3)]
+	if efficiency_mode:
+		# bh-009: coarser mesh LODs sooner, and a slow frame catches up with at most 3 physics steps (a phone that
+		# falls behind must not spend the next frame catching up, which makes the one after slower still)
+		vp.mesh_lod_threshold = 4.0
+		vp.texture_mipmap_bias = 0.75
+	Engine.max_physics_steps_per_frame = 3 if efficiency_mode else 6
 	# shadows
 	var sq := clampi(shadows_quality, 0, 3)
 	RenderingServer.directional_shadow_atlas_set_size([2048, 4096, 4096, 8192][sq], true)
@@ -304,6 +395,29 @@ func _descs(action: StringName) -> Array:
 		if not d.is_empty():
 			out.append(d)
 	return out
+
+## In touch play a tap is also reported as a left click (emulated mouse). The on-screen buttons press the gameplay
+## actions themselves, so the mouse buttons are taken off them: a thumb on the stick must not swing the sword.
+const TOUCH_STRIPPED := [&"primary", &"secondary", &"zoom_in", &"zoom_out"]
+var _stripped := {}                 # action -> [InputEventMouseButton] removed while touch play is on
+
+func _apply_touch_input() -> void:
+	if touch_mode:
+		for a in TOUCH_STRIPPED:
+			if not InputMap.has_action(a):
+				continue
+			for e in InputMap.action_get_events(a):
+				if e is InputEventMouseButton:
+					InputMap.action_erase_event(a, e)
+					if not _stripped.has(a):
+						_stripped[a] = []
+					_stripped[a].append(e)
+	elif not _stripped.is_empty():
+		for a in _stripped:
+			for e in _stripped[a]:
+				if InputMap.has_action(a) and not InputMap.action_has_event(a, e):
+					InputMap.action_add_event(a, e)
+		_stripped.clear()
 
 func _apply_bindings() -> void:
 	if bindings.is_empty():

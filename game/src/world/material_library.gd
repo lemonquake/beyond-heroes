@@ -68,8 +68,10 @@ static func _tex(set_name: String, kind: String) -> Texture2D:
 
 static func env(name: String) -> Material:
 	var key := name.get_slice(".", 0)
-	if _env.has(key):
-		return _env[key]
+	var lite := Perf.lite
+	var ck := key + ("~lite" if lite else "")
+	if _env.has(ck):
+		return _env[ck]
 	if not ENV.has(key):
 		return null
 	var d: Array = ENV[key]
@@ -80,12 +82,13 @@ static func env(name: String) -> Material:
 	m.metallic = d[3]
 	if d[0] != "":
 		m.albedo_texture = _tex(d[0], "albedo")
-		var n := _tex(d[0], "normal")
+		# efficiency mode (bh-009): albedo only; triplanar already reads it three times per pixel
+		var n := _tex(d[0], "normal") if not lite else null
 		if n:
 			m.normal_enabled = true
 			m.normal_texture = n
 			m.normal_scale = 1.0
-		var r := _tex(d[0], "rough")
+		var r := _tex(d[0], "rough") if not lite else null
 		if r:
 			m.roughness_texture = r
 			m.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_RED
@@ -122,7 +125,7 @@ static func env(name: String) -> Material:
 		m.albedo_color.a = 0.8
 	if key in ["BH_Flame", "BH_Rune", "BH_Corruption"]:
 		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_env[key] = m
+	_env[ck] = m
 	return m
 
 ## Replace every surface material on an environment scene with the library version when the name matches.
@@ -155,8 +158,10 @@ static func apply_character(meshes: Array, primary: Color) -> void:
 ## the imported material, so every model keeps its palette. Unknown base names ("BH_Fur__dire_wolf") keep the imported
 ## PBR values entirely.
 static func _palette_mat(nm: String, src: Material) -> Material:
-	if _char.has(nm):
-		return _char[nm]
+	var lite := Perf.lite
+	var ck := nm + ("~lite" if lite else "")
+	if _char.has(ck):
+		return _char[ck]
 	var base := nm.get_slice("__", 0)
 	var imported := src as BaseMaterial3D
 	var m := StandardMaterial3D.new()
@@ -166,7 +171,7 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	if not d.is_empty():
 		m.roughness = d[1]
 		m.metallic = d[2]
-		if d[5] != "":
+		if d[5] != "" and not lite:
 			var n := _tex(d[5], "normal")
 			if n:
 				m.normal_enabled = true
@@ -185,16 +190,19 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 			m.emission_energy_multiplier = clampf(imported.emission_energy_multiplier, 0.0 if "__it_" in nm else 1.0, 4.0)
 	elif not d.is_empty():
 		m.albedo_color = d[0]
-	m.rim_enabled = true
+	m.rim_enabled = not lite
 	m.rim = 0.25
 	m.rim_tint = 0.6
-	_char[nm] = m
+	_char[ck] = m
 	return m
 
 static func _char_mat(nm: String, primary: Color) -> Material:
 	var key := nm
 	if nm == "BH_Cloth_Primary":
 		key = "%s_%s" % [nm, primary.to_html(false)]
+	var lite := Perf.lite
+	if lite:
+		key += "~lite"
 	if _char.has(key):
 		return _char[key]
 	var m := StandardMaterial3D.new()
@@ -212,7 +220,7 @@ static func _char_mat(nm: String, primary: Color) -> Material:
 			m.emission_enabled = true
 			m.emission = d[3]
 			m.emission_energy_multiplier = d[4]
-		if d[5] != "":
+		if d[5] != "" and not lite:
 			var n := _tex(d[5], "normal")
 			if n:
 				m.normal_enabled = true
@@ -221,7 +229,7 @@ static func _char_mat(nm: String, primary: Color) -> Material:
 				m.uv1_scale = Vector3.ONE * 2.0
 	else:
 		return null
-	m.rim_enabled = true
+	m.rim_enabled = not lite
 	m.rim = 0.25
 	m.rim_tint = 0.6
 	_char[key] = m
@@ -310,4 +318,46 @@ static func terrain_material(grass := "grass", dirt := "dirt", moss := "forest_f
 	m.set_shader_parameter("nrm_rock", _tex(rock, "normal"))
 	m.set_shader_parameter("nrm_path", _tex(path, "normal"))
 	m.set_shader_parameter("tint", tint)
+	return m
+
+static var _terrain_lite_shader: Shader
+
+## Efficiency-mode terrain (bh-009): the same splat with five plain texture reads instead of sixteen (no normal maps, no
+## triplanar rock, no macro-noise), no anisotropic filtering. Rock on slopes is projected from two sides.
+static func terrain_lite_material(full: ShaderMaterial) -> ShaderMaterial:
+	if _terrain_lite_shader == null:
+		_terrain_lite_shader = Shader.new()
+		_terrain_lite_shader.code = """
+shader_type spatial;
+render_mode specular_disabled;
+uniform sampler2D tex_grass : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D tex_dirt : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D tex_moss : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D tex_path : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D tex_rock : source_color, filter_linear_mipmap, repeat_enable;
+uniform float scale = 0.25;
+uniform vec4 tint : source_color = vec4(1.0);
+varying vec3 wpos;
+varying float slope;
+void vertex() {
+	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 wn = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	slope = 1.0 - clamp((wn.y - 0.55) / 0.3, 0.0, 1.0);
+}
+void fragment() {
+	vec2 uv = wpos.xz * scale;
+	vec4 c = COLOR;
+	vec3 col = texture(tex_grass, uv).rgb;
+	col = mix(col, texture(tex_moss, uv * 0.9).rgb, smoothstep(0.35, 0.65, c.g));
+	col = mix(col, texture(tex_dirt, uv * 1.1).rgb, smoothstep(0.35, 0.65, c.r));
+	col = mix(col, texture(tex_path, uv * 1.4).rgb, smoothstep(0.4, 0.6, c.b));
+	col = mix(col, texture(tex_rock, (wpos.xy + wpos.zy) * scale * 0.8).rgb, slope);
+	ALBEDO = col * tint.rgb;
+	ROUGHNESS = 0.92;
+}
+"""
+	var m := ShaderMaterial.new()
+	m.shader = _terrain_lite_shader
+	for k in ["tex_grass", "tex_dirt", "tex_moss", "tex_path", "tex_rock", "tint"]:
+		m.set_shader_parameter(k, full.get_shader_parameter(k))
 	return m

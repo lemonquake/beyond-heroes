@@ -290,7 +290,7 @@ func _timers(delta: float) -> void:
 			mark_stats_dirty()
 
 func _regen(delta: float) -> void:
-	var hr := stats.get_stat(&"hp_regen")
+	var hr := stats.get_stat(&"hp_regen") + aura_regen()
 	var mr := stats.get_stat(&"mana_regen")
 	if status.has(&"regen"):
 		hr += status.magnitude(&"regen")

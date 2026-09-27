@@ -9,6 +9,7 @@ var enemy: Enemy
 var _quad: MeshInstance3D
 var _mat: ShaderMaterial
 var _label: Label3D
+var _note: Label3D
 var _visible_t := 0.0
 var _shown_hp := 1.0
 var _lag_hp := 1.0
@@ -86,7 +87,8 @@ func _process(delta: float) -> void:
 		visible = false
 		return
 	_visible_t -= delta
-	var show := Settings.show_enemy_bars and (_visible_t > 0.0 or (enemy.is_elite and enemy.brain.is_engaged()) or Game.hover_target == enemy \
+	var noted: bool = enemy.ext != null and enemy.brain.is_engaged() and not enemy.ext.bar_note().is_empty()
+	var show := Settings.show_enemy_bars and (_visible_t > 0.0 or noted or (enemy.is_elite and enemy.brain.is_engaged()) or Game.hover_target == enemy \
 		or (enemy.is_miniboss() and Game.player != null and is_instance_valid(Game.player) and (Game.player as Node3D).global_position.distance_to(enemy.global_position) < 18.0))
 	visible = show
 	if not show:
@@ -97,3 +99,29 @@ func _process(delta: float) -> void:
 	_mat.set_shader_parameter("fill", _shown_hp)
 	_mat.set_shader_parameter("lag", _lag_hp)
 	_mat.set_shader_parameter("shield", clampf(enemy.shield_hp / maxf(1.0, enemy.max_hp()), 0.0, 1.0))
+	_update_note()
+
+## bh-010: one short line under the bar for the new monsters' states (the Rune Golem's current immunity, a burned
+## troll, a lit powder keg, a swelling bloater).
+func _update_note() -> void:
+	var note: Array = enemy.ext.bar_note() if enemy.ext else []
+	if note.is_empty():
+		if _note:
+			_note.visible = false
+		return
+	if _note == null:
+		_note = Label3D.new()
+		_note.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_note.no_depth_test = true
+		_note.fixed_size = true
+		_note.pixel_size = 0.0008
+		_note.font = UITheme.body_bold()
+		_note.font_size = 22
+		_note.outline_size = 7
+		_note.outline_modulate = Color(0, 0, 0, 0.9)
+		_note.position = Vector3(0, -0.2, 0)
+		_note.render_priority = 6
+		add_child(_note)
+	_note.visible = true
+	_note.text = String(note[0])
+	_note.modulate = note[1]

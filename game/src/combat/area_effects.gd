@@ -205,4 +205,6 @@ static func delayed(parent: Node, at: Vector3, radius: float, delay: float, req:
 	var m := VFXLib.telegraph(shape, Vector2(radius, radius), delay, color, 360.0, inner)
 	b.add_child(m)
 	b.marker = m
+	if req != null:
+		Net.share_telegraph(at, radius, delay, color, shape, inner, source)   # the warning shows for every player (bh-008)
 	return b

@@ -54,7 +54,7 @@ static func _ramp(c: Color, fade_to := Color(0, 0, 0, 0)) -> GradientTexture1D:
 static func particles(color: Color, amount: int, lifetime: float, one_shot: bool, size: float, velocity: float,
 		spread := 180.0, gravity := Vector3.ZERO, emission_radius := 0.0, additive := true) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = amount
+	p.amount = Perf.particles(amount)
 	p.lifetime = lifetime
 	p.one_shot = one_shot
 	p.explosiveness = 0.9 if one_shot else 0.0
@@ -339,6 +339,7 @@ static func light_flash(c: Color, energy: float, rng_m: float, duration: float) 
 	l.light_energy = energy
 	l.omni_range = rng_m
 	l.shadow_enabled = false
+	l.visible = not Perf.lite   # efficiency mode: flashes are glow meshes and sparks only (every light is a pass on phones)
 	var tw := l.create_tween()
 	tw.tween_property(l, "light_energy", 0.0, duration).set_ease(Tween.EASE_OUT)
 	tw.tween_callback(l.queue_free)
@@ -369,7 +370,7 @@ static func orb(c: Color, radius: float, with_light := true) -> Node3D:
 	root.add_child(halo)
 	var trail := particles(Color(c.r, c.g, c.b, 0.8), 24, 0.35, false, radius * 2.4, 0.3, 180.0, Vector3.ZERO, radius * 0.5)
 	root.add_child(trail)
-	if with_light:
+	if with_light and not Perf.lite:
 		var l := OmniLight3D.new()
 		l.light_color = c
 		l.light_energy = 1.6

@@ -33,7 +33,8 @@ func _init() -> void:
 	licenses = DataItems.licenses()
 	for s in DataSkills.skills():
 		skills[s.id] = s
-	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage()]:
+	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage(),
+			DataSkillsExt.ranger_tree(), DataSkillsExt.shadowblade_tree(), DataTalentsExt.ranger(), DataTalentsExt.shadowblade()]:
 		trees[t.id] = t
 	for e in DataEnemies.build():
 		enemies[e.id] = e

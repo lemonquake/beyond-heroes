@@ -211,15 +211,46 @@ static func fill(text: String, hero: HeroData) -> String:
 
 ## Replace every {key:<action>} with the key bound to that input action (or the action name if it has none).
 static func fill_keys(text: String) -> String:
+	if Settings.touch_mode:
+		text = _touch_phrases(text)
 	var at := text.find("{key:")
 	while at >= 0:
 		var close := text.find("}", at)
 		if close < 0:
 			break
 		var action := text.substr(at + 5, close - at - 5)
-		var k := Settings.binding_text(StringName(action))
+		var k := Settings.binding_text(StringName(action)) if not Settings.touch_mode else String(TOUCH_NAMES.get(action, action.capitalize()))
 		text = text.substr(0, at) + (k if k != "" else action.capitalize()) + text.substr(close + 1)
 		at = text.find("{key:", at)
+	return text
+
+## Touch play (bh-008): the on-screen control each action lives on, and whole keyboard phrases said the touch way.
+const TOUCH_NAMES := {"primary": "Attack", "secondary": "Heavy", "dodge": "Dodge", "guard": "Guard", "interact": "Interact",
+	"skill_1": "Skill 1", "skill_2": "Skill 2", "skill_3": "Skill 3", "skill_4": "Skill 4", "skill_5": "Skill 5", "skill_6": "Skill 6",
+	"potion_health": "the HP orb", "potion_mana": "the Mana orb", "inventory": "Bag", "chat": "Chat", "pause": "Back",
+	"character": "Menu > Character", "skills": "Menu > Skills", "talents": "Menu > Talents", "tempos": "Menu > Tempos",
+	"world_map": "the minimap", "guide": "Menu > Field Guide", "show_loot": "the labels", "attack_in_place": "Attack",
+	"move_up": "the stick", "move_down": "the stick", "move_left": "the stick", "move_right": "the stick"}
+const TOUCH_PHRASES := [
+	["**{key:move_up} {key:move_left} {key:move_down} {key:move_right}** to move; you face the cursor.",
+		"The **stick** under your left thumb moves you; your blows turn toward the nearest enemy."],
+	[" and holding it keeps the chain going", ", and holding it keeps the chain going"],
+	["keys **{key:skill_1}** to **{key:skill_6}**", "the round buttons around **Attack**: tap one to cast at the nearest enemy, or drag it to aim"],
+	["Your skills sit on the bar at the bottom,", "Your skills sit on"],
+	["Hold **{key:show_loot}** to see everything lying on the ground, and click an item to pick it up. The mouse wheel zooms the view.",
+		"Tap an item's name on the ground to pick it up, or walk over it with Auto-Loot on. Pinch the screen to zoom."],
+	["**{key:potion_health}** drinks a health draught, **{key:potion_mana}** a mana draught.",
+		"Tap **the HP orb** to drink a health draught, **the Mana orb** for a mana draught."],
+	["**{key:inventory}** Inventory, **{key:character}** Character, **{key:skills}** Skills, **{key:talents}** Talents, **{key:tempos}** Tempos, **{key:world_map}** Map.",
+		"**Bag** opens your Inventory; **Menu** has Character, Skills, Talents, Tempos and the rest; tap **the minimap** for the Map."],
+	["**{key:chat}** opens the chat line; **{key:pause}** closes a window, or pauses.", "**Chat** opens the chat line; your phone's **Back** closes a window, or pauses."],
+	["press **{key:guide}**", "open **Menu > Field Guide**"],
+	["**{key:tempos}** opens my window.", "**Menu > Tempos** opens my window."],
+]
+
+static func _touch_phrases(text: String) -> String:
+	for pair in TOUCH_PHRASES:
+		text = text.replace(pair[0], pair[1])
 	return text
 
 ## Convert **important words** to BBCode highlight.

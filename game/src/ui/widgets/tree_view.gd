@@ -3,6 +3,7 @@ extends Control
 ## Skill / talent tree canvas. Painted class backdrop, branch captions, connectors (dim when locked, bronze when
 ## reachable, glowing when both ends are learned), node art per kind and state, rank pips, and an unlock burst.
 ## Left-click learns a rank, right-click refunds one (respec-ready). Nodes explain themselves on hover.
+## Trees with pages (Combat / Auras / Disciplines ...) show one page at a time (`page`); passives are round medallions.
 
 signal node_selected(node: Dictionary)
 signal ranks_changed
@@ -10,12 +11,13 @@ signal ranks_changed
 const UNIT := Vector2(104, 112)
 const MARGIN := Vector2(70, 96)
 const ART := {"skill": ["node_skill", 72.0], "upgrade": ["node_upgrade", 56.0], "minor": ["node_minor", 50.0],
-	"major": ["node_major", 64.0], "keystone": ["node_keystone", 92.0]}
+	"major": ["node_major", 64.0], "keystone": ["node_keystone", 92.0], "passive": ["node_major", 66.0]}
 
 var hero: HeroData
 var tree_state: TreeState
 var is_talent := false
 var selected_id: StringName = &""
+var page := 0
 var _bursts := []            # [{pos, t}]
 var _hover_id: StringName = &""
 var _bg: Texture2D
@@ -29,11 +31,23 @@ func bind(p_hero: HeroData, talents: bool) -> void:
 	is_talent = talents
 	tree_state = hero.talent_tree if talents else hero.skill_tree
 	_bg = UIArt.tex("tree/tree_bg_%s.png" % hero.cls.id)
+	page = clampi(page, 0, tree_state.tree.page_count() - 1)
 	var max_p := Vector2.ZERO
-	for n in tree_state.tree.nodes:
+	for n in _nodes():
 		max_p = max_p.max(n.pos)
 	custom_minimum_size = MARGIN * 2.0 + max_p * UNIT + Vector2(40, 40)
 	queue_redraw()
+
+## Show another page of the tree.
+func set_page(p: int) -> void:
+	page = p
+	_hover_id = &""
+	if hero:
+		bind(hero, is_talent)
+
+## Nodes on the current page.
+func _nodes() -> Array:
+	return tree_state.tree.nodes_on_page(page) if tree_state.tree.page_count() > 1 else tree_state.tree.nodes
 
 func _points() -> int:
 	return hero.progress.talent_points if is_talent else hero.progress.skill_points
@@ -65,6 +79,8 @@ func _draw() -> void:
 		draw_rect(r, Color(0.05, 0.04, 0.05))
 	var font := UITheme.title_font()
 	for b in tree_state.tree.branches:
+		if int(b.get("page", 0)) != page and tree_state.tree.page_count() > 1:
+			continue
 		var x := MARGIN.x + float(b.x) * UNIT.x + 40.0
 		var t := String(b.name).to_upper()
 		var fs := 20
@@ -73,10 +89,10 @@ func _draw() -> void:
 		draw_string(font, Vector2(x - w * 0.5, 44), t, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(b.color).lerp(UITheme.PARCHMENT, 0.3))
 	# connectors
 	var ctex := UIArt.tex("tree/connector.png")
-	for n in tree_state.tree.nodes:
+	for n in _nodes():
 		for req in n.get("requires", []) + n.get("requires_all", []):
 			var m := tree_state.tree.node(req)
-			if m.is_empty():
+			if m.is_empty() or int(m.get("page", 0)) != int(n.get("page", 0)):
 				continue
 			var a := node_center(m)
 			var bpt := node_center(n)
@@ -86,7 +102,7 @@ func _draw() -> void:
 			var width := 10.0 if both else 7.0
 			_line(a, bpt, col, width, ctex)
 	# nodes
-	for n in tree_state.tree.nodes:
+	for n in _nodes():
 		_draw_node(n)
 	for b in _bursts:
 		var k: float = b.t / 0.9
@@ -114,12 +130,23 @@ func _draw_node(n: Dictionary) -> void:
 	var rect := Rect2(c - Vector2(sz, sz) * 0.5, Vector2(sz, sz))
 	var icon := UIArt.node_icon(n)
 	var inner := rect.grow(-sz * (0.2 if kind != "skill" else 0.14))
+	if kind == "passive":
+		inner = rect.grow(-sz * 0.08)            # the passive icon is its own round medallion
+	var mod := Color(1, 1, 1) if st == "allocated" else (Color(0.8, 0.8, 0.8) if st == "available" else Color(0.35, 0.35, 0.38))
 	if icon:
-		var mod := Color(1, 1, 1) if st == "allocated" else (Color(0.8, 0.8, 0.8) if st == "available" else Color(0.35, 0.35, 0.38))
 		draw_texture_rect(icon, inner, false, mod)
-	var frame := UIArt.tex("tree/%s_%s.png" % [art[0], st])
-	if frame:
-		draw_texture_rect(frame, rect, false)
+	var sd: SkillDef = DB.skill(n.skill) if kind == "skill" and n.has("skill") else null
+	if kind == "passive":
+		draw_arc(c, sz * 0.5, 0.0, TAU, 48, Color(UITheme.GOLD, 0.95) if st == "allocated" else Color(0.55, 0.5, 0.45, 0.9), 3.0, true)
+	else:
+		var frame := UIArt.tex("tree/%s_%s.png" % [art[0], st])
+		if frame:
+			draw_texture_rect(frame, rect, false)
+	if sd and sd.is_aura():
+		# auras wear a halo: warm for offense, cool for defense; brighter while it is the active aura
+		var hc := Color(1.0, 0.62, 0.3) if sd.aura_kind == &"offense" else Color(0.55, 0.78, 1.0)
+		var on := hero.active_aura == sd.id
+		draw_arc(c, sz * 0.68, 0.0, TAU, 48, Color(hc, 0.95 if on else 0.45), 4.0 if on else 2.0, true)
 	if n.id == selected_id or n.id == _hover_id:
 		draw_arc(c, sz * 0.62, 0.0, TAU, 40, Color(1.0, 0.9, 0.6, 0.9 if n.id == selected_id else 0.5), 2.0)
 	# rank pips / text
@@ -132,8 +159,11 @@ func _draw_node(n: Dictionary) -> void:
 		draw_string_outline(font, p, t, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color(0, 0, 0, 0.9))
 		draw_string(font, p, t, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, UITheme.GOLD if tree_state.rank(n.id) > 0 else UITheme.TEXT_DIM)
 
+var _touch_down_id: StringName = &""
+var _touch_down_t := 0
+
 func _node_at(p: Vector2) -> Dictionary:
-	for n in tree_state.tree.nodes:
+	for n in _nodes():
 		var sz: float = (ART.get(String(n.get("kind", "minor")), ART.minor) as Array)[1]
 		if p.distance_to(node_center(n)) < sz * 0.55:
 			return n
@@ -152,13 +182,25 @@ func _gui_input(e: InputEvent) -> void:
 				TooltipLayer.hide_for(self)
 			else:
 				TooltipLayer.show_for(self, func() -> Control: return _tip(n))
+	elif e is InputEventMouseButton and not e.pressed and e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
+		# touch play: a quick tap learns; a long press is a right-click (TouchControls) and refunds instead
+		var n := _node_at(e.position)
+		if not n.is_empty() and n.id == _touch_down_id and Time.get_ticks_msec() - _touch_down_t < 450:
+			_learn(n)
+			queue_redraw()
+			TooltipLayer.refresh()
+		_touch_down_id = &""
+		accept_event()
 	elif e is InputEventMouseButton and e.pressed:
 		var n := _node_at(e.position)
 		if n.is_empty():
 			return
 		selected_id = n.id
 		node_selected.emit(n)
-		if e.button_index == MOUSE_BUTTON_LEFT:
+		if e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
+			_touch_down_id = n.id
+			_touch_down_t = Time.get_ticks_msec()
+		elif e.button_index == MOUSE_BUTTON_LEFT:
 			_learn(n)
 		elif e.button_index == MOUSE_BUTTON_RIGHT:
 			_refund(n)
@@ -189,10 +231,23 @@ func _refund(n: Dictionary) -> void:
 func _tip(n: Dictionary) -> Control:
 	if n.get("kind") == "skill":
 		var tip := Tips.skill(n.skill, hero, Game.player as Player, true)
+		_append_synergies(tip.get_child(0) as VBoxContainer, n)
 		_append_requirements(tip.get_child(0) as VBoxContainer, n)
 		return tip
 	var f := Tips.frame(360.0)
 	var v: VBoxContainer = f[1]
+	if n.get("kind") == "passive":
+		var rk := tree_state.rank(n.id)
+		v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD, UITheme.title_font()))
+		v.add_child(Tips.lbl("Passive skill · always on · Rank %d / %d" % [rk, int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
+		v.add_child(Tips.rule(UITheme.BRONZE))
+		v.add_child(Tips.lbl(DataSkillsExt.passive_text(n, maxi(rk, 1)), 16, UITheme.TEXT))
+		if rk > 0 and rk < int(n.get("max_rank", 1)):
+			v.add_child(Tips.lbl("Next rank: " + DataSkillsExt.passive_text(n, rk + 1), 15, Tips.AFFIX))
+		elif rk == 0:
+			v.add_child(Tips.lbl("(values at rank 1)", 13, UITheme.TEXT_MUTED))
+		_append_requirements(v, n)
+		return f[0]
 	var kind_name: String = {"upgrade": "Skill Upgrade", "minor": "Minor Talent", "major": "Major Talent", "keystone": "Keystone"}.get(String(n.get("kind", "")), "Talent")
 	v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD if n.get("kind") != "keystone" else Color(0.6, 0.97, 1.0), UITheme.title_font()))
 	v.add_child(Tips.lbl("%s · Rank %d / %d" % [kind_name, tree_state.rank(n.id), int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
@@ -209,6 +264,19 @@ func _tip(n: Dictionary) -> Control:
 		v.add_child(Tips.lbl(StatDefs.format_modifier(StringName(m[0]), int(m[1]), float(m[2]) * r) + ("" if tree_state.rank(n.id) > 0 else "  (at rank 1)"), 15, Tips.AFFIX))
 	_append_requirements(v, n)
 	return f[0]
+
+## Diablo II style synergies: which other skills raise this one's damage, and by how much right now.
+func _append_synergies(v: VBoxContainer, n: Dictionary) -> void:
+	var syn: Array = n.get("synergies", [])
+	if syn.is_empty() or is_talent:
+		return
+	v.add_child(Tips.rule())
+	v.add_child(Tips.lbl("Synergies", 15, UITheme.GOLD, UITheme.body_bold()))
+	for s in syn:
+		var other := tree_state.tree.node(StringName(s[0]))
+		var rk := tree_state.rank(StringName(s[0]))
+		v.add_child(Tips.lbl("+%s%% damage per rank of %s (now +%s%%)" % [StatDefs._num(float(s[1])), String(other.get("name", s[0])),
+			StatDefs._num(float(s[1]) * rk)], 14, Tips.AFFIX if rk > 0 else UITheme.TEXT_DIM))
 
 func _append_requirements(v: VBoxContainer, n: Dictionary) -> void:
 	v.add_child(Tips.rule())

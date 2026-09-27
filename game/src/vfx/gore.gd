@@ -69,7 +69,7 @@ static func hit(pos: Vector3, dir: Vector3, material: StringName, liquid: Color,
 ## Liquid droplets: mix-blended, falling under gravity, thrown in a cone along `dir`.
 static func _spray(c: Color, amount: int, dir: Vector3, spread: float, speed: float, size: float) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = maxi(4, amount)
+	p.amount = Perf.particles(maxi(4, amount))
 	p.lifetime = 0.7
 	p.one_shot = true
 	p.explosiveness = 0.95
@@ -109,7 +109,7 @@ static func _mist(c: Color, s: float) -> GPUParticles3D:
 ## Solid chips (bone, stone): small tumbling boxes that bounce off nothing and fade.
 static func _chips(c: Color, amount: int, dir: Vector3, speed: float, size: float) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = maxi(3, amount)
+	p.amount = Perf.particles(maxi(3, amount))
 	p.lifetime = 0.9
 	p.one_shot = true
 	p.explosiveness = 0.95

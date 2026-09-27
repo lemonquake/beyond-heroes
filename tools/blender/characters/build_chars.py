@@ -23,6 +23,8 @@ import bh_skeleton as S
 CHARACTERS = {
     "knight": "char_knight",
     "mage": "char_mage",
+    "ranger": "char_ranger",
+    "shadowblade": "char_shadowblade",
 }
 
 # Enemies and townsfolk (run bh-003): one module per character, `enemy_<id>.py` / `town_<id>.py`, discovered

@@ -17,6 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Beyond Heroes"
 config/description="An atmospheric action RPG by Aljay Leodones."
 run/main_scene="res://src/main.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0.03, 0.025, 0.03, 1)
 boot_splash/show_image=false
@@ -35,6 +36,8 @@ Loot="*res://src/autoload/loot.gd"
 FX="*res://src/autoload/fx.gd"
 Dev="*res://src/autoload/dev_tools.gd"
 Routes="*res://src/autoload/routes.gd"
+Net="*res://src/net/net.gd"
+Perf="*res://src/autoload/perf.gd"
 
 [display]
 
@@ -44,6 +47,7 @@ window/size/window_width_override=1600
 window/size/window_height_override=900
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=4
 
 [gui]
 
@@ -72,9 +76,12 @@ common/max_physics_steps_per_frame=6
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_3d=2
 anti_aliasing/quality/use_debanding=true
 environment/defaults/default_clear_color=Color(0.03, 0.03, 0.04, 1)
 anti_aliasing/quality/screen_space_aa=1
+limits/opengl/max_renderable_lights.mobile=8

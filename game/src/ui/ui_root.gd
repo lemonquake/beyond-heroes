@@ -12,6 +12,7 @@ var dev_panel: DevPanel
 var confirm: ConfirmDialog
 var tooltips: TooltipLayer
 var chat: ChatBox
+var touch: TouchControls
 var _root: Control
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
@@ -34,6 +35,9 @@ func _ready() -> void:
 	_root.add_child(hud)
 	chat = ChatBox.new()        # under the windows: an open window covers the chat log
 	_root.add_child(chat)
+	touch = TouchControls.new() # touch play (bh-008); hides itself with keyboard + mouse
+	touch.hud = hud
+	_root.add_child(touch)
 	_add_window(&"inventory", InventoryWindow.new())
 	_add_window(&"character", CharacterWindow.new())
 	_add_window(&"skills", SkillsWindow.new())
@@ -46,6 +50,8 @@ func _ready() -> void:
 	_add_window(&"guide", GuideWindow.new())
 	_add_window(&"crafting", CraftingWindow.new())
 	_add_window(&"hero_roster", HeroRosterWindow.new())
+	_add_window(&"mobile_menu", MobileMenuWindow.new())
+	_add_window(&"multiplayer", MultiplayerWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -127,13 +133,24 @@ func close_all() -> bool:
 func _update_blocking() -> void:
 	Game.ui_blocking = any_window_open()
 
+## "Go back" (Escape, the phone's Back button, the on-screen Pause button): closes the topmost thing that is open —
+## chat, a question, a conversation, a window — then toggles the pause menu. It never quits the game by itself.
+func back() -> void:
+	if not Game.in_session or Game.player == null:
+		return
+	if pause_menu.visible and pause_menu.is_death():
+		return
+	if confirm.visible:
+		confirm.cancel()
+	elif not close_all():
+		pause_menu.toggle()
+	_update_blocking()
+
 func _unhandled_input(e: InputEvent) -> void:
 	if not Game.in_session or Game.player == null:
 		return
 	if e.is_action_pressed(&"pause"):
-		if not close_all():
-			pause_menu.toggle()
-		_update_blocking()
+		back()
 		get_viewport().set_input_as_handled()
 		return
 	# the map pauses the world while it is open, so it must still close on its own key

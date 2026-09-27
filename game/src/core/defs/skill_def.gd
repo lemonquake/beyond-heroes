@@ -2,7 +2,8 @@ class_name SkillDef
 extends Resource
 ## Active skill definition. Behaviour-specific numbers live in `params` so upgrade nodes can modify them by name.
 ##
-## Behaviours: melee_arc, projectile, ground_aoe, self_aoe, leap, blink, buff, spin, chain, wave, dash_strike, judgment
+## Behaviours: melee_arc, projectile, ground_aoe, self_aoe, leap, blink, buff, spin, chain, wave, dash_strike, judgment,
+## (bh-010) flurry, spiral, aura, storm, sentry, orb, trap, vault, shadow_step, veil, mark
 
 @export var id: StringName
 @export var display_name: String
@@ -27,6 +28,17 @@ extends Resource
 @export var sound_hit := &""
 @export var vfx := &""
 @export var tags: Array = []
+# ---- bh-010 ----------------------------------------------------------------------------------------------------
+@export var projectile_look := "orb"         # orb | arrow | fire | dark (Projectile looks)
+## Statuses put on every enemy the skill hits: {status: [duration (number or param name), magnitude (number or param)]}
+@export var on_hit_status := {}
+## Auras: [[stat, op, param, scale]] -> StatModifier(stat, op, params[param] * scale) on every ally in the radius
+@export var aura_mods: Array = []
+@export var aura_kind := &""                 # offense | defense (auras)
+@export var weapon_req_label := ""            # shown when `requires` is a custom requirement
+
+func is_aura() -> bool:
+	return behavior == &"aura"
 
 func mana_at(rank: int) -> float:
 	return mana_cost + mana_per_rank * float(maxi(rank, 1) - 1)
