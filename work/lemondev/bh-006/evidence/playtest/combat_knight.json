@@ -1,0 +1,47 @@
+{
+  "class": "knight",
+  "level": 5,
+  "maps": {
+    "ruined_forest": {
+      "crits": 8,
+      "damage_events": 104,
+      "enemies_at_start": 49,
+      "enemy_hits": 17,
+      "hp_min_frac": 0.937454759825318,
+      "items_dropped": 5,
+      "kills": 7,
+      "max_hit": 19.0,
+      "mismatch": 0,
+      "ok": true,
+      "player_deaths": 0,
+      "player_hits": 87,
+      "potions": 0,
+      "skills_cast": 2,
+      "states": {
+        "Alert": 453,
+        "Attack": 1096,
+        "Chase": 483,
+        "Defend": 3846,
+        "Idle": 12,
+        "Knockback": 294,
+        "Patrol": 153068,
+        "Position": 3502,
+        "Retreat": 162,
+        "Stagger": 755,
+        "Suspicious": 79
+      },
+      "stuck_s": 3.7,
+      "tempos": {
+        "damage": 0,
+        "decisions": {},
+        "fallen": 0,
+        "heals_on_hero": 0,
+        "hits": 0,
+        "kills": 0,
+        "tempo_hits_taken": 0
+      },
+      "xp_gained": 603
+    }
+  },
+  "ok": true
+}

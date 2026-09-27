@@ -12,9 +12,12 @@ extends Actor
 ##      has one, and rests (regenerates quickly) until it is fit to fight, or until the hero is in mortal danger.
 ##   4. Defend — it picks the monster that matters most: whatever is hitting the hero, casters and healers, the wounded,
 ##      whatever it already fights (with hysteresis so it does not flicker between targets).
-##   5. Fight by class — Swordsmen stand between the monster and the hero, taunt crowds off the hero, cleave and charge;
-##      Archers hold range with line of sight, rain arrows on packs, pierce lines and vault away from melee; Thieves
-##      flank for backstabs, shadowstep onto whatever attacks the hero, poison and vanish in smoke when cornered.
+##   5. Fight by role (the class's `ai`) — vanguards (Swordsmen, Wardens) stand between the monster and the hero,
+##      taunt crowds off the hero, cleave, charge and ward; marksmen and casters (Archers, Mystics) hold range with line
+##      of sight, rain arrows or lightning on packs and vault away from melee; shadows (Thieves) flank for backstabs,
+##      shadowstep onto whatever attacks the hero, poison and vanish in smoke when cornered.
+##      Skills are data (DataTempos.SKILLS): each names a handler (`use`) — strike, charge, shot, bolt, chain, nova,
+##      volley, trap, ward, rally, challenge, heal ... — and the AI picks one when its situation fits.
 ##   6. Follow — out of combat it walks at the hero's side and teleports back if it is left far behind or gets stuck.
 ## All damage goes through Actor.receive_hit / DamagePipeline; skills cost mana and have cooldowns.
 
@@ -48,6 +51,7 @@ var cooldowns := {}
 var dodge_cd := 0.0
 var agent: NavigationAgent3D
 var tdef: Dictionary
+var ai := "vanguard"                 # the class's fighting role (see DataTempos.CLASSES)
 var personality: Dictionary
 var last_skill := &""
 var debug_log: Array = []            # recent decisions (tests and the dev overlay read these)
@@ -84,6 +88,7 @@ func setup(p_data: TempoData, p_hero: HeroData, p_player: Node3D, p_slot := 0) -
 	owner_player = p_player
 	slot_index = p_slot
 	tdef = data.class_def()
+	ai = String(tdef.get("ai", "vanguard"))
 	personality = data.trait_def()
 	name = "Tempo_%d_%s" % [data.uid, data.tempo_name]
 	display_name = data.tempo_name
@@ -116,7 +121,7 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	visual.setup(String(tdef.get("model", "res://assets/characters/knight.glb")), 1.0, data.tint, &"knight" if data.class_id == &"swordsman" else &"mage")
+	visual.setup(String(tdef.get("model", "res://assets/characters/knight.glb")), 1.0, data.tint, tdef.get("rig", &"knight"))
 	_spirit_look()
 	refresh_equipment_visuals()
 	_rng_seed()
@@ -176,13 +181,14 @@ func refresh_equipment_visuals() -> void:
 	var lo := TempoRules.loadout(data, _level())
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
+	var main := data.equipment.get_item(&"main_weapon")
 	if lo.main_type != null:
-		visual.attach_weapon(&"main", lo.main_type.model, lo.main_type.grip_offset)
+		visual.attach_weapon(&"main", Player.weapon_model_for(main, lo.main_type) if main else lo.main_type.model, lo.main_type.grip_offset)
 	var sub := data.equipment.get_item(&"sub_weapon")
 	if sub != null and sub.base.category == &"shield":
-		visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+		visual.attach_weapon(&"off", sub.base.model_path())
 	elif lo.off_type != null:
-		visual.attach_weapon(&"off", lo.off_type.model, lo.off_type.grip_offset)
+		visual.attach_weapon(&"off", Player.weapon_model_for(sub, lo.off_type) if sub else lo.off_type.model, lo.off_type.grip_offset)
 	visual.set_stance(_stance_idle())
 	visual.set_opacity(0.84)
 
@@ -412,18 +418,18 @@ func _choose_target() -> Actor:
 		if _time - float(_hero_hits.get(en.get_instance_id(), -99.0)) < 3.0:
 			s += 5.0
 		if en.target == self:
-			s += 3.0 if data.class_id == &"swordsman" else 2.0
+			s += 3.0 if ai == "vanguard" else 2.0
 		if en == target:
 			s += 3.0
 		var frac := en.hp / maxf(1.0, en.max_hp())
 		s += (1.0 - frac) * (5.0 if data.trait_id == &"vengeful" else 2.5)
 		if en.def.archetype in [&"caster", &"support"]:
-			s += 1.5 if data.class_id == &"swordsman" else 3.5
+			s += 1.5 if ai == "vanguard" else 3.5
 		if en.is_boss:
-			s += 2.0 if data.class_id == &"swordsman" else 1.0
+			s += 2.0 if ai == "vanguard" else 1.0
 		elif en.is_elite:
 			s += 1.0
-		if data.class_id == &"archer" and CombatQuery.blocked(get_world_3d(), center(), en.center()):
+		if ai in ["marksman", "caster"] and CombatQuery.blocked(get_world_3d(), center(), en.center()):
 			s -= 3.0
 		if s > best_s:
 			best_s = s
@@ -473,8 +479,8 @@ func _heal_target() -> Actor:
 	return null
 
 func _try_escape() -> bool:
-	for sid in [&"th_smoke", &"ar_disengage"]:
-		if data.skills.has(sid) and _skill_ready(sid):
+	for sid in data.skills:
+		if String(DataTempos.skill(sid).get("kind", "")) == "escape" and _skill_ready(sid):
 			return _use_skill(sid)
 	# no escape skill: a plain dodge roll away from the nearest monster
 	var e := _nearest_enemy()
@@ -499,32 +505,57 @@ func _try_skill() -> bool:
 	for e in _enemies(8.0, p.global_position):
 		if (e as Enemy).target == p and e.is_aggressive():
 			hero_pressed += 1
+	var hero_a := p as Actor
+	var hero_frac := hero_a.hp / maxf(1.0, hero_a.max_hp()) if hero_a and hero_a.alive else 1.0
+	var hero_fighting: bool = hero_a != null and hero_a.alive and hero_a.has_method(&"in_combat") and hero_a.call(&"in_combat")
+	var big: bool = target.is_elite or target.is_boss
+	var executable := func(sk: Dictionary) -> bool:
+		return sk.has("execute") and target.hp / maxf(1.0, target.max_hp()) < float(sk.execute)
 	for sid in data.skills:
 		if DataTempos.is_heal(sid) or not _skill_ready(sid):
 			continue
 		var sk := DataTempos.skill(sid)
 		var ok := false
-		match sid:
-			&"sw_cleave":
-				ok = d <= float(sk.range) and (_enemies_in_front(float(sk.range), float(sk.arc)) >= 2 or target.is_elite or target.is_boss or rng.randf() < 0.35)
-			&"sw_challenge":
-				ok = hero_pressed >= 2 or (hero_pressed >= 1 and p is Actor and (p as Actor).hp < (p as Actor).max_hp() * 0.5) \
-					or (_enemies(6.0).size() >= 3 and hp_frac() > 0.5)
+		match DataTempos.skill_use(sid):
+			"cleave":
+				if sk.has("execute"):
+					ok = d <= float(sk.range) and (executable.call(sk) or big and rng.randf() < 0.3)
+				else:
+					ok = d <= float(sk.range) and (_enemies_in_front(float(sk.range), float(sk.arc)) >= 2 or big or rng.randf() < 0.35)
+			"challenge":
+				ok = hero_pressed >= 2 or (hero_pressed >= 1 and hero_frac < 0.5) or (_enemies(6.0).size() >= 3 and hp_frac() > 0.5)
 				ok = ok and hp_frac() > 0.4
-			&"sw_charge":
+			"charge":
 				ok = d >= float(sk.min_range) and d <= float(sk.range) and not CombatQuery.blocked(get_world_3d(), center(), target.center())
-			&"ar_pierce":
+			"pierce":
 				ok = d <= float(sk.range) and d > 2.5 and _has_los(target)
-			&"ar_volley":
-				ok = d <= float(sk.range) and (_enemies(float(sk.radius) + 0.5, target.global_position).size() >= 2 or target.is_boss or target.is_elite)
-			&"ar_disengage":
+			"volley":
+				ok = d <= float(sk.range) and (_enemies(float(sk.radius) + 0.5, target.global_position).size() >= 2 or big)
+			"disengage":
 				ok = d < float(sk.range) and (target as Enemy).def.preferred_range < 3.0
-			&"th_shadowstep":
-				ok = d <= float(sk.range) and (d > 3.0 or (target as Enemy).target == p)
-			&"th_venom":
-				ok = d <= 2.6 and _venom_t <= 0.0 and (target.is_elite or target.is_boss or target.hp > max_hp() * 0.8)
-			&"th_smoke":
+			"shadowstep":
+				ok = d <= float(sk.range) and (d > 3.0 or (target as Enemy).target == p or executable.call(sk))
+			"venom":
+				ok = d <= 2.6 and _venom_t <= 0.0 and (big or target.hp > max_hp() * 0.8)
+			"smoke":
 				ok = _enemies(3.5).size() >= 3 or (hp_frac() < 0.5 and _enemies(3.0).size() >= 1)
+			"nova":
+				var r := float(sk.radius)
+				ok = _enemies(r).size() >= int(sk.get("min_enemies", 2)) or (d <= r and big)
+			"bolt":
+				ok = d <= float(sk.range) and _has_los(target)
+			"chain":
+				ok = d <= float(sk.range) and _has_los(target) and (_enemies(7.0, target.global_position).size() >= 2 or big \
+					or (sk.get("dash", false) and d > 3.0))
+			"ward":
+				var shielded: bool = hero_a != null and hero_a.status.has(&"shielded")
+				ok = hero_fighting and not shielded and _flat(p.global_position) <= float(sk.range) \
+					and (hero_frac < 0.75 or hero_pressed >= 2 or (big and (target as Enemy).target == p))
+			"rally":
+				ok = hero_fighting and (_enemies(10.0, p.global_position).size() >= 3 or big)
+			"trap":
+				ok = d <= float(sk.range) and (_enemies(float(sk.radius) + 1.0, target.global_position).size() >= 2
+					or ((target as Enemy).def.preferred_range < 3.0 and d < 7.0))
 		if ok:
 			return _use_skill(sid)
 	return false
@@ -538,8 +569,8 @@ func _engage() -> void:
 	var lo := stats.loadout
 	var ranged := lo.main_type != null and lo.main_type.ranged
 	var reach := (lo.main_type.reach if lo.main_type else 1.8)
-	match data.class_id:
-		&"swordsman":
+	match ai:
+		"vanguard":
 			# between the monster and the hero when it hunts the hero; otherwise straight at it
 			var goal := t.global_position
 			if (t as Enemy).target == p:
@@ -548,7 +579,7 @@ func _engage() -> void:
 			else:
 				goal = t.global_position + (global_position - t.global_position).slide(Vector3.UP).normalized() * reach * 0.7
 			_move_goal = goal
-		&"thief":
+		"shadow":
 			# the blind side: behind the monster, alternating flanks
 			var back := -t.forward() * (reach * 0.6)
 			_move_goal = t.global_position + back.rotated(Vector3.UP, 0.5 * _flank)
@@ -579,7 +610,7 @@ func _attack() -> void:
 	var anims: Array = wt.dual_light_anims if lo.dual_wield and wt and not wt.dual_light_anims.is_empty() else (wt.light_anims if wt else [&"sword_1"])
 	var step := _chain % 4
 	var anim: StringName = anims[mini(step, anims.size() - 1)]
-	var aps := (wt.attacks_per_second if wt else 1.4) * stats.get_stat(&"attack_speed", 1.0)
+	var aps := lo.aps() * stats.get_stat(&"attack_speed", 1.0)
 	var rate := clampf(aps * float(DB.anim(anim).get("length", 0.6)), StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
 	var a := TimedAction.from_anim(anim, rate)
 	a.data["step"] = step
@@ -609,7 +640,7 @@ func _action_done() -> void:
 	action = null
 	action_kind = &""
 	visual.set_trail(false)
-	if data.class_id == &"thief" and rng.randf() < 0.3:
+	if ai == "shadow" and rng.randf() < 0.3:
 		_flank = -_flank
 
 func _cancel_action() -> void:
@@ -644,7 +675,7 @@ func _melee_window(a: TimedAction, w: int, first: bool, mult: float, arc: float,
 	var reach := (wt.reach if wt else 1.8) * (1.1 if a.data.get("heavy", false) else 1.0)
 	if first:
 		visual.set_trail(true, Color(0.6, 0.95, 1.0, 0.6), wt.length if wt else 1.0)
-		FX.spawn(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.6), reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.5, int(a.data.get("step", 0)) % 2 == 0), global_position)
+		FX.spawn_facing(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.6), reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.5, int(a.data.get("step", 0)) % 2 == 0), global_position, forward())
 	var step := int(a.data.get("step", 0))
 	var chain_m := float(wt.chain_mults[step]) if wt and step < wt.chain_mults.size() else 1.0
 	var hits := 0
@@ -654,16 +685,22 @@ func _melee_window(a: TimedAction, w: int, first: bool, mult: float, arc: float,
 		var req := _weapon_request(int(a.data.get("hand", 0)), mult * chain_m, bool(a.data.get("heavy", false)), String(a.data.get("label", "strike")))
 		req.knockback *= knock_mult
 		req.crit_bonus = crit_bonus
+		if a.data.has("sk"):
+			_decorate(req, a.data.sk, t)
 		req.tags[&"push_dir"] = (t.global_position - global_position).slide(Vector3.UP).normalized()
 		if wt and wt.id == &"dagger" and t.forward().dot(forward()) > 0.5:
 			req.positional_mult = 1.25
 		var res := t.receive_hit(req, self, t.center())
 		_on_hit_dealt(t, res)
 		hits += 1
+		# a killing stroke that resets (Nightfall): ready again at once
+		if not t.alive and a.data.has("sk") and a.data.sk.get("reset_on_kill", false):
+			cooldowns.erase(a.data.get("skill", &""))
+			_log("reset %s" % a.data.get("skill", &""))
 	if hits > 0:
 		Audio.play_at(wt.hit_sound if wt else &"hit_flesh", global_position + forward() * reach * 0.6, -3.0)
 
-func _shoot(a: TimedAction, t: Actor, mult: float, pierce: int, charged: bool) -> void:
+func _shoot(a: TimedAction, t: Actor, mult: float, pierce: int, charged: bool, sk := {}) -> void:
 	var wt := stats.loadout.main_type
 	if wt == null:
 		return
@@ -674,16 +711,19 @@ func _shoot(a: TimedAction, t: Actor, mult: float, pierce: int, charged: bool) -
 	var from := center() + Vector3.UP * 0.3 + forward() * 0.5
 	var dir := (aim - from)
 	dir.y = 0.0
-	var req := _weapon_request(int(a.data.get("hand", 0)), mult, charged, "Piercing Arrow" if pierce > 0 else "arrow")
+	var req := _weapon_request(int(a.data.get("hand", 0)), mult, charged, String(sk.get("name", "Piercing Arrow" if pierce > 0 else "arrow")))
 	req.tags[&"projectile"] = true
 	var el := stats.loadout.element_for(0)
+	if not sk.is_empty():
+		_decorate(req, sk, t)
+		el = int(sk.get("element", el))
 	var pr := Projectile.spawn(FX.world if FX.world else get_parent(), from, dir.normalized(), wt.projectile_speed * (1.25 if charged else 1.0),
-		req, self, BH.LAYER_ENEMY, el, "arrow" if wt.id == &"bow" else "orb")
+		req, self, BH.LAYER_ENEMY, el, "arrow" if wt.id == &"bow" else ("model:" + wt.model if wt.id == &"javelin" else "orb"))
 	pr.max_range = wt.reach + (6.0 if charged else 0.0)
 	pr.radius = 0.3
 	pr.pierce = pierce
 	pr.hit_sound = wt.hit_sound
-	pr.on_hit = func(tt: Actor, res: DamageResult, _pt: Vector3) -> void: _on_hit_dealt(tt, res)
+	pr.on_hit = _hit_relay(weakref(self))
 	Audio.play_at(wt.swing_sound, global_position, -6.0)
 	if charged:
 		FX.spawn(VFXLib.light_flash(DataTempos.SPIRIT_TINT, 2.5, 4.0, 0.2), from)
@@ -694,6 +734,26 @@ func _on_hit_dealt(t: Actor, res: DamageResult) -> void:
 	_combat_t = 0.0
 	if t and not t.alive:
 		data.kills += 1
+
+# ---- Callbacks that outlive the spirit ------------------------------------------------------------------------------
+# Projectiles and delayed blasts can land after this Tempo is gone (released mid-fight, fallen, a map change). A lambda
+# made in an instance method holds this node by a raw pointer, and calling it after the node is freed reaches whatever
+# object took its place. These are made in static functions and reach the Tempo only through a weak reference.
+
+static func _hit_relay(me: WeakRef) -> Callable:
+	return func(tt: Actor, res: DamageResult, _pt: Vector3) -> void:
+		var t := me.get_ref() as Tempo
+		if t:
+			t._on_hit_dealt(tt, res)
+
+static func _volley_relay(me: WeakRef, col: Color, radius: float) -> Callable:
+	return func(pos: Vector3, hits: Array) -> void:
+		FX.spawn(VFXLib.particles(Color(col.r, col.g, col.b, 0.9).lightened(0.2), 22, 0.35, true, 0.1, 9.0, 12.0, Vector3(0, -20, 0), radius * 0.8), pos + Vector3.UP * 3.5)
+		Audio.play_at(&"arrow_impact", pos, -4.0)
+		var t := me.get_ref() as Tempo
+		if t:
+			for h in hits:
+				t._on_hit_dealt(h[0], h[1])
 
 # ---- Skills ---------------------------------------------------------------------------------------------------------
 
@@ -709,17 +769,59 @@ func _use_skill(sid: StringName) -> bool:
 	var sk := DataTempos.skill(sid)
 	if sk.is_empty() or not _skill_ready(sid):
 		return false
-	match sid:
-		&"sw_cleave": return _sk_cleave(sid, sk)
-		&"sw_challenge": return _sk_challenge(sid, sk)
-		&"sw_charge": return _sk_charge(sid, sk)
-		&"ar_pierce": return _sk_pierce(sid, sk)
-		&"ar_volley": return _sk_volley(sid, sk)
-		&"ar_disengage": return _sk_disengage(sid, sk)
-		&"th_shadowstep": return _sk_shadowstep(sid, sk)
-		&"th_venom": return _sk_venom(sid, sk)
-		&"th_smoke": return _sk_smoke(sid, sk)
+	var needs_target := DataTempos.skill_use(sid) not in ["challenge", "disengage", "smoke", "nova", "ward", "rally", "heal"]
+	if needs_target and (target == null or not is_instance_valid(target) or not target.alive):
+		return false
+	match DataTempos.skill_use(sid):
+		"cleave": return _sk_cleave(sid, sk)
+		"challenge": return _sk_challenge(sid, sk)
+		"charge": return _sk_charge(sid, sk)
+		"pierce": return _sk_pierce(sid, sk)
+		"volley": return _sk_volley(sid, sk)
+		"disengage": return _sk_disengage(sid, sk)
+		"shadowstep": return _sk_shadowstep(sid, sk)
+		"venom": return _sk_venom(sid, sk)
+		"smoke": return _sk_smoke(sid, sk)
+		"nova": return _sk_nova(sid, sk)
+		"bolt": return _sk_bolt(sid, sk)
+		"chain": return _sk_chain(sid, sk)
+		"ward": return _sk_ward(sid, sk)
+		"rally": return _sk_rally(sid, sk)
+		"trap": return _sk_trap(sid, sk)
 	return false
+
+## Handlers every skill `use` may name (the data tests check SKILLS against this list).
+const HANDLERS := ["cleave", "challenge", "charge", "pierce", "volley", "disengage", "shadowstep", "venom", "smoke", "nova",
+	"bolt", "chain", "ward", "rally", "trap", "heal"]
+
+## A skill's own effects on a hit: element (the whole hit converts), status buildup, and the execute bonus against a
+## badly hurt monster. `forces` also takes the skill's knockback / poise.
+func _decorate(req: DamageRequest, sk: Dictionary, t: Actor, forces := false) -> void:
+	if sk.has("element"):
+		req.conversion = {int(sk.element): 1.0}
+	var st: Dictionary = sk.get("status", {})
+	for id in st:
+		req.direct_status[id] = float(req.direct_status.get(id, 0.0)) + float(st[id])
+	if sk.has("execute") and t != null and is_instance_valid(t) and t.hp / maxf(1.0, t.max_hp()) < float(sk.execute):
+		req.more.append(["Execute", float(sk.get("execute_mult", 2.0))])
+	if forces:
+		req.knockback = float(sk.get("knockback", req.knockback))
+		req.poise = float(sk.get("poise", req.poise))
+
+func _skill_color(sk: Dictionary) -> Color:
+	if sk.has("color"):
+		return sk.color
+	return Elements.color(int(sk.element)) if sk.has("element") else DataTempos.SPIRIT_TINT
+
+func _element_sound(sk: Dictionary, fallback: StringName) -> StringName:
+	match int(sk.get("element", -1)):
+		Elements.FIRE: return &"cast_fire"
+		Elements.ICE: return &"cast_ice"
+		Elements.LIGHTNING: return &"cast_lightning"
+		Elements.EARTH: return &"earth_quake"
+		Elements.DARK: return &"dark_cast"
+		Elements.LIGHT: return &"arcane_surge"
+	return fallback
 
 func _skill_action(sid: StringName, sk: Dictionary, rate := 1.0) -> TimedAction:
 	_cancel_action()
@@ -734,13 +836,15 @@ func _skill_action(sid: StringName, sk: Dictionary, rate := 1.0) -> TimedAction:
 func _sk_cleave(sid: StringName, sk: Dictionary) -> bool:
 	_face_now(target.global_position)
 	var wt := stats.loadout.main_type
-	var anim: StringName = wt.heavy_anim if wt and not wt.ranged else &"sword_heavy"
 	var skd := sk.duplicate()
-	skd.anim = anim
+	if not sk.get("keep_anim", false):
+		skd.anim = wt.heavy_anim if wt and not wt.ranged else &"sword_heavy"
 	var a := _skill_action(sid, skd, clampf(stats.get_stat(&"attack_speed", 1.0), 0.7, 1.6))
 	a.data["heavy"] = true
 	a.data["label"] = sk.name
-	a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first, float(sk.mult), float(sk.arc), 0.0, float(sk.knockback) / 4.0)
+	a.data["sk"] = sk
+	a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first, float(sk.mult), float(sk.arc), float(sk.get("crit_bonus", 0.0)),
+		float(sk.knockback) / 4.0)
 	Audio.play_at(&"swing_heavy", global_position, -2.0)
 	return true
 
@@ -753,7 +857,7 @@ func _sk_challenge(sid: StringName, sk: Dictionary) -> bool:
 			n += 1
 		status.apply(&"fortified", float(sk.duration))
 		FX.spawn(VFXLib.ring_wave(Color(0.6, 0.9, 1.0, 0.9), float(sk.range), 0.5, 0.8), global_position)
-		FX.text_popup(center() + Vector3.UP * 1.0, "Challenge!", Color(0.7, 0.92, 1.0), 1.0)
+		FX.text_popup(center() + Vector3.UP * 1.0, "%s!" % sk.name, Color(0.7, 0.92, 1.0), 1.0)
 		Audio.play_at(&"war_cry", global_position, -2.0)
 		_log("taunted %d" % n)
 	if a.release_t < 0.0:
@@ -794,7 +898,7 @@ func _sk_pierce(sid: StringName, sk: Dictionary) -> bool:
 	var t := target
 	_face_now(t.global_position)
 	var a := _skill_action(sid, sk)
-	a.on_release = func() -> void: _shoot(a, t, float(sk.mult), int(sk.pierce), true)
+	a.on_release = func() -> void: _shoot(a, t, float(sk.mult), int(sk.pierce), true, sk)
 	return true
 
 func _sk_volley(sid: StringName, sk: Dictionary) -> bool:
@@ -806,15 +910,13 @@ func _sk_volley(sid: StringName, sk: Dictionary) -> bool:
 			var off := Vector3(rng.randf_range(-1.2, 1.2), 0, rng.randf_range(-1.2, 1.2)) if i > 0 else Vector3.ZERO
 			var req := _weapon_request(0, float(sk.mult), false, sk.name)
 			req.evadable = false
+			_decorate(req, sk, null)
 			req.knockback = float(sk.knockback)
 			req.poise = float(sk.poise)
+			var col := _skill_color(sk) if sk.has("element") or sk.has("color") else Color(0.55, 0.95, 1.0)
 			var b := AreaEffects.delayed(FX.world, CombatQuery.ground_at(get_world_3d(), at + off), float(sk.radius), 0.5 + 0.45 * i, req, self,
-				BH.LAYER_ENEMY, Color(0.55, 0.95, 1.0, 0.35))
-			b.on_blast = func(pos: Vector3, hits: Array) -> void:
-				FX.spawn(VFXLib.particles(Color(0.7, 0.98, 1.0, 0.9), 22, 0.35, true, 0.1, 9.0, 12.0, Vector3(0, -20, 0), float(sk.radius) * 0.8), pos + Vector3.UP * 3.5)
-				Audio.play_at(&"arrow_impact", pos, -4.0)
-				for h in hits:
-					_on_hit_dealt(h[0], h[1])
+				BH.LAYER_ENEMY, Color(col.r, col.g, col.b, 0.35))
+			b.on_blast = _volley_relay(weakref(self), col, float(sk.radius))
 	return true
 
 func _sk_disengage(sid: StringName, sk: Dictionary) -> bool:
@@ -846,6 +948,7 @@ func _sk_shadowstep(sid: StringName, sk: Dictionary) -> bool:
 	var a := _skill_action(sid, sk, clampf(stats.get_stat(&"attack_speed", 1.0), 0.8, 1.6))
 	a.data["heavy"] = true
 	a.data["label"] = sk.name
+	a.data["sk"] = sk
 	a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first, float(sk.mult), 90.0, float(sk.crit_bonus))
 	return true
 
@@ -896,19 +999,202 @@ func _cast_heal(sid: StringName, who: Actor) -> void:
 		if who == null or not is_instance_valid(who) or not who.alive:
 			return
 		var mult := 1.0 + stats.get_stat(&"healing")
-		who.heal(who.max_hp() * float(sk.heal) * mult)
-		who.status.apply(&"regen", 4.0, who.max_hp() * float(sk.regen) * mult / 4.0)
-		if sk.get("cleanse", false):
-			who.status.cleanse([&"poisoned", &"bleeding", &"burning"])
+		# a mend with a radius reaches every ally around its target
+		var all: Array = [who]
+		if sk.has("radius"):
+			for ally in [owner_player] + get_tree().get_nodes_in_group(&"tempo"):
+				if ally is Actor and ally != who and ally.alive and ally.global_position.distance_to(who.global_position) <= float(sk.radius):
+					all.append(ally)
+			FX.spawn(VFXLib.ring_wave(Color(0.6, 1.0, 0.8, 0.9), float(sk.radius), 0.6, 0.6), who.global_position)
 		var col := Color(0.55, 1.0, 0.75)
-		if who != self:
-			FX.spawn(VFXLib.lightning_bolt(center() + Vector3.UP * 0.3, who.center(), col, 0.3, 0.1), Vector3.ZERO)
-		FX.spawn(VFXLib.beam(col, 3.0, 0.6), who.global_position)
-		FX.spawn(VFXLib.particles(Color(0.6, 1.0, 0.8, 0.9), 22, 0.9, true, 0.14, 2.0, 50.0, Vector3(0, 3, 0), 0.5), who.center())
+		for w: Actor in all:
+			w.heal(w.max_hp() * float(sk.heal) * mult)
+			w.status.apply(&"regen", 4.0, w.max_hp() * float(sk.regen) * mult / 4.0)
+			if sk.get("cleanse", false):
+				w.status.cleanse([&"poisoned", &"bleeding", &"burning"])
+			if w != self:
+				FX.spawn(VFXLib.lightning_bolt(center() + Vector3.UP * 0.3, w.center(), col, 0.3, 0.1), Vector3.ZERO)
+			FX.spawn(VFXLib.beam_flash(col, 3.0, 0.6), w.global_position)
+			FX.spawn(VFXLib.particles(Color(0.6, 1.0, 0.8, 0.9), 22, 0.9, true, 0.14, 2.0, 50.0, Vector3(0, 3, 0), 0.5), w.center())
 		Audio.play_at(&"heal", who.global_position, -2.0)
-		_log("healed %s" % (who.display_name if who != self else "self"))
+		_log("healed %s%s" % [who.display_name if who != self else "self", " +%d" % (all.size() - 1) if all.size() > 1 else ""])
 	if a.release_t < 0.0:
 		a.release_t = 0.3
+
+## Around itself: one burst that hits every monster within `radius` (whirlwinds, novas, quakes, knife fans).
+func _sk_nova(sid: StringName, sk: Dictionary) -> bool:
+	if target:
+		_face_now(target.global_position)
+	var a := _skill_action(sid, sk)
+	a.data["label"] = sk.name
+	var col := _skill_color(sk)
+	a.on_release = func() -> void:
+		if not alive:
+			return
+		var req := _weapon_request(0, float(sk.mult), true, String(sk.name))
+		_decorate(req, sk, null, true)
+		req.evadable = false
+		var hits := AreaEffects.burst(self, global_position, float(sk.radius), BH.LAYER_ENEMY, req, self)
+		for h in hits:
+			_on_hit_dealt(h[0], h[1])
+		FX.spawn(VFXLib.ring_wave(Color(col.r, col.g, col.b, 0.9), float(sk.radius), 0.45, 0.8), global_position)
+		FX.spawn(VFXLib.particles(Color(col.r, col.g, col.b, 0.85), 30, 0.6, true, 0.14, 5.0, 180.0, Vector3(0, 1.0, 0), float(sk.radius) * 0.5),
+			global_position + Vector3.UP * 0.5)
+		if int(sk.get("element", -1)) == Elements.EARTH:
+			FX.spawn(VFXLib.dust_puff(1.6), global_position)
+		Audio.play_at(_element_sound(sk, &"swing_heavy"), global_position, -3.0)
+		_log("nova %s hit %d" % [sid, hits.size()])
+	return true
+
+## A spell bolt of the skill's element.
+func _sk_bolt(sid: StringName, sk: Dictionary) -> bool:
+	var t := target
+	_face_now(t.global_position)
+	var a := _skill_action(sid, sk)
+	a.on_release = func() -> void:
+		if not alive:
+			return
+		var aim := t.center() if is_instance_valid(t) and t.alive else global_position + forward() * 10.0
+		var from := center() + Vector3.UP * 0.3 + forward() * 0.5
+		var dir := aim - from
+		dir.y = 0.0
+		var req := _weapon_request(0, float(sk.mult), true, String(sk.name))
+		_decorate(req, sk, t, true)
+		req.tags[&"projectile"] = true
+		var pr := Projectile.spawn(FX.world if FX.world else get_parent(), from, dir.normalized(), float(sk.get("speed", 24.0)), req, self,
+			BH.LAYER_ENEMY, int(sk.get("element", Elements.LIGHT)), "orb")
+		pr.max_range = float(sk.range) + 4.0
+		pr.radius = 0.35
+		pr.pierce = int(sk.get("pierce", 0))
+		pr.on_hit = _hit_relay(weakref(self))
+		FX.spawn(VFXLib.light_flash(_skill_color(sk), 2.0, 4.0, 0.2), from)
+		Audio.play_at(_element_sound(sk, &"arcane_surge"), global_position, -6.0)
+	return true
+
+## Lightning that leaps from monster to monster; `dash` rides it into the first one.
+func _sk_chain(sid: StringName, sk: Dictionary) -> bool:
+	var t := target
+	_face_now(t.global_position)
+	var col := _skill_color(sk)
+	var a := _skill_action(sid, sk)
+	if sk.get("dash", false):
+		var dir := (t.global_position - global_position).slide(Vector3.UP)
+		var goal := CombatQuery.reachable_point(get_world_3d(), global_position,
+			t.global_position - dir.normalized() * (t.body_radius + 1.0), body_radius)
+		var dist := global_position.distance_to(goal)
+		if dist > 1.0:
+			FX.spawn(VFXLib.lightning_bolt(center(), goal + Vector3.UP, col, 0.25, 0.16), Vector3.ZERO)
+			dash(goal - global_position, dist / 0.22, 0.22)
+	a.on_release = func() -> void: _chain_from(t, sk)
+	return true
+
+func _chain_from(first: Actor, sk: Dictionary) -> void:
+	if not alive or first == null or not is_instance_valid(first) or not first.alive:
+		return
+	var col := _skill_color(sk)
+	var hit := {}
+	var cur: Actor = first
+	var from := center() + Vector3.UP * 0.4
+	var mult := float(sk.mult)
+	for i in int(sk.get("jumps", 3)) + 1:
+		hit[cur.get_instance_id()] = true
+		var req := _weapon_request(0, mult, true, String(sk.name))
+		_decorate(req, sk, cur, true)
+		req.evadable = false
+		FX.spawn(VFXLib.lightning_bolt(from, cur.center(), col, 0.24, 0.12), Vector3.ZERO)
+		var at := cur.center()
+		_on_hit_dealt(cur, cur.receive_hit(req, self, at))
+		from = at
+		mult *= float(sk.get("falloff", 0.85))
+		var nxt: Actor = null
+		var best := 7.5
+		for e in _enemies(7.5, at):
+			if hit.has(e.get_instance_id()) or not e.alive:
+				continue
+			var dd: float = e.global_position.distance_to(at)
+			if dd < best and not CombatQuery.blocked(get_world_3d(), at, e.center()):
+				best = dd
+				nxt = e
+		if nxt == null:
+			break
+		cur = nxt
+	Audio.play_at(&"lightning_zap", first.global_position, -2.0)
+	_log("chain hit %d" % hit.size())
+
+## A barrier over the hero; `all` also fortifies every Tempo near it; `taunt` draws the monsters around onto itself.
+func _sk_ward(sid: StringName, sk: Dictionary) -> bool:
+	var p := owner_player
+	if p:
+		_face_now(p.global_position)
+	var a := _skill_action(sid, sk)
+	a.on_release = func() -> void:
+		if not alive:
+			return
+		var dur := float(sk.duration)
+		var mult := 1.0 + stats.get_stat(&"healing")
+		var col := Color(0.62, 0.95, 1.0)
+		if p is Player and (p as Player).alive and _flat(p.global_position) <= float(sk.range) + 2.0:
+			(p as Player).add_shield((p as Player).max_hp() * float(sk.shield) * mult, dur)
+			FX.spawn(VFXLib.lightning_bolt(center() + Vector3.UP * 0.3, (p as Player).center(), col, 0.3, 0.1), Vector3.ZERO)
+			FX.spawn(VFXLib.ring_wave(col, 1.6, 0.5, 0.5), p.global_position)
+		if sk.get("all", false):
+			for t in get_tree().get_nodes_in_group(&"tempo"):
+				if t.alive and _flat(t.global_position) <= float(sk.range):
+					t.status.apply(&"fortified", dur)
+					FX.spawn(VFXLib.ring_wave(col, 1.4, 0.5, 0.5), t.global_position)
+		if sk.has("taunt"):
+			var n := 0
+			for e in _enemies(float(sk.taunt)):
+				(e as Enemy).taunt(self, dur * 0.75)
+				n += 1
+			status.apply(&"fortified", dur)
+			FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.5, 0.9), float(sk.taunt), 0.5, 0.8), global_position)
+			_log("taunted %d" % n)
+		FX.text_popup(center() + Vector3.UP * 1.0, String(sk.name), col, 1.0)
+		Audio.play_at(&"arcane_charge", global_position, -3.0)
+		_log("warded")
+	return true
+
+## A battle cry: the skill's statuses on the hero and every Tempo within `radius`.
+func _sk_rally(sid: StringName, sk: Dictionary) -> bool:
+	var a := _skill_action(sid, sk)
+	a.on_release = func() -> void:
+		if not alive:
+			return
+		var n := 0
+		for who in [owner_player] + get_tree().get_nodes_in_group(&"tempo"):
+			if who is Actor and who.alive and _flat(who.global_position) <= float(sk.radius):
+				for st in sk.get("statuses", []):
+					who.status.apply(StringName(st), float(sk.duration))
+				n += 1
+		FX.spawn(VFXLib.ring_wave(Color(1.0, 0.8, 0.45, 0.9), float(sk.radius) * 0.6, 0.6, 0.9), global_position)
+		FX.text_popup(center() + Vector3.UP * 1.0, String(sk.name), Color(1.0, 0.85, 0.55), 1.0)
+		Audio.play_at(&"war_cry", global_position, -2.0)
+		_log("rallied %d" % n)
+	if a.release_t < 0.0:
+		a.release_t = 0.3
+	return true
+
+## A lingering snare under the target: hurts and hinders every monster that stays in it.
+func _sk_trap(sid: StringName, sk: Dictionary) -> bool:
+	var at := target.global_position
+	_face_now(at)
+	var col := _skill_color(sk)
+	var a := _skill_action(sid, sk)
+	a.on_release = func() -> void:
+		if not alive:
+			return
+		var req := _weapon_request(0, float(sk.mult), false, String(sk.name))
+		_decorate(req, sk, null)
+		req.evadable = false
+		req.knockback = 0.0
+		req.poise = 2.0
+		var h := AreaEffects.hazard(FX.world, CombatQuery.ground_at(get_world_3d(), at), float(sk.radius), float(sk.duration), req, self,
+			BH.LAYER_ENEMY, col, 0.5)
+		h.status_id = StringName(sk.get("status_id", &"slowed"))
+		Audio.play_at(&"cast_earth", at, -4.0)
+		_log("trap")
+	return true
 
 # ---- Danger ---------------------------------------------------------------------------------------------------------
 

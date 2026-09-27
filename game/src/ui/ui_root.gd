@@ -15,7 +15,7 @@ var chat: ChatBox
 var _root: Control
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
-	&"world_map": &"world_map", &"tempos": &"tempos"}
+	&"world_map": &"world_map", &"tempos": &"tempos", &"guide": &"guide"}
 
 func _init() -> void:
 	layer = 20
@@ -43,6 +43,7 @@ func _ready() -> void:
 	_add_window(&"settings", SettingsWindow.new())
 	_add_window(&"tempos", TempoWindow.new())
 	_add_window(&"tempo_caller", TempoCallerWindow.new())
+	_add_window(&"guide", GuideWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -56,6 +57,7 @@ func _ready() -> void:
 	(tooltips as CanvasLayer).layer = layer + 5
 	Events.talk_requested.connect(_on_talk)
 	Events.player_died.connect(_on_player_died)
+	Events.world_flag_set.connect(_on_flag)
 
 func _add_window(id: StringName, w: UIWindow) -> void:
 	windows[id] = w
@@ -149,6 +151,15 @@ func _on_talk(npc: Node) -> void:
 		return
 	close_all()
 	dialogue.start(n)
+
+## The new-game guide: Tobren introduces himself, Tempos and the controls (DataGuide). Also replayed from the Field Guide.
+func start_intro() -> void:
+	close_all()
+	dialogue.start_def(DataGuide.intro())
+
+func _on_flag(flag: StringName, _v: Variant) -> void:
+	if flag == DataGuide.DONE_FLAG:
+		Events.notify.emit("Press %s any time to open the Field Guide." % Settings.binding_text(&"guide"), &"info")
 
 func _on_player_died() -> void:
 	close_all()

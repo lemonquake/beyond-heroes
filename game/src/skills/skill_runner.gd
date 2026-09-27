@@ -109,6 +109,9 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 		_:
 			push_warning("Unknown skill behaviour %s" % skill.behavior)
 			return false
+	# Clips without a release frame or hit window (Iron Bulwark's block_impact) would never fire on_release.
+	if action.on_release.is_valid() and action.release_t < 0.0:
+		action.release_t = minf(0.12, action.duration * 0.3)
 	return true
 
 # ---- Behaviours ---------------------------------------------------------------------------------------------
@@ -121,7 +124,9 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		req.direct_status[&"bleeding"] = float(p.bleed)
 	var f: Vector3 = caster.forward()
 	var c := _elem_color(skill)
-	FX.spawn(VFXLib.slash_arc(c, reach, arc, 1.0, 0.24, 0.6), caster.global_position)
+	FX.spawn_facing(VFXLib.slash_arc(c, reach, arc, 1.0, 0.24, 0.6), caster.global_position, f)
+	if skill.id == &"cleave":
+		SkillFX.cleave(caster, f, reach, arc)
 	for a: Actor in CombatQuery.actors_in_arc(caster.get_world_3d(), caster.global_position, f, reach, arc, mask()):
 		if not action.mark_hit(0, a):
 			continue
@@ -134,7 +139,7 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		wreq.conversion = {Elements.LIGHT: 1.0}
 		var sw := AreaEffects.sweep(parent(), caster.global_position + f * 1.0, f, 16.0, 9.0, 2.6, wreq, caster, mask())
 		sw.trail_fx = func(pos: Vector3) -> void:
-			FX.spawn(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.8), 1.6, 120.0, 0.6, 0.2, 0.5), pos)
+			FX.spawn_facing(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.8), 1.6, 120.0, 0.6, 0.2, 0.5), pos, f)
 	Audio.play_at(skill.sound_hit if skill.sound_hit != &"" else &"swing_heavy", caster.global_position)
 
 func _front_strike(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
@@ -154,6 +159,9 @@ func _front_strike(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		_hit(skill, a, res)
 		caster.stop_dash()
 		FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.5, 0.9), 2.2, 0.3), a.global_position)
+		if not action.data.get("bash_fx", false):
+			action.data["bash_fx"] = true
+			SkillFX.shield_bash(caster, a.center() - caster.forward() * a.body_radius)
 		Events.camera_shake.emit(0.25)
 
 func _leap_target(aim: Vector3, rng_m: float) -> Vector3:
@@ -186,6 +194,7 @@ func _leap_land(skill: SkillDef, p: Dictionary) -> void:
 	FX.spawn(VFXLib.debris(1.3), at + Vector3.UP * 0.3)
 	Events.camera_shake.emit(0.45)
 	Events.impact.emit(at, 16.0, &"earth")
+	SkillFX.leap_land(caster, at, radius)
 	Audio.play_at(skill.sound_hit, at, 2.0)
 
 func _buff(skill: SkillDef, p: Dictionary) -> void:
@@ -207,12 +216,14 @@ func _buff(skill: SkillDef, p: Dictionary) -> void:
 				var r := req.clone()
 				a.receive_hit(r, caster, a.center())
 			FX.spawn(VFXLib.ring_wave(Color(1.0, 0.55, 0.25, 0.9), float(p.get("radius", 6.0)), 0.5, 0.8), caster.global_position)
+			SkillFX.war_cry(caster, float(p.get("radius", 6.0)))
 			Events.camera_shake.emit(0.3)
 		&"iron_bulwark":
 			caster.status.apply(&"bulwark", dur, 1.0, 0.0, Elements.PHYSICAL,
 				[StatModifier.flat(&"block_chance", float(p.block) / 100.0 * eff, "Iron Bulwark"),
 				StatModifier.flat(&"knockback_res", float(p.kb_res) / 100.0 * eff, "Iron Bulwark")])
 			FX.spawn(VFXLib.ring_wave(Color(0.75, 0.8, 0.95, 0.9), 2.5, 0.4), caster.global_position)
+			SkillFX.bulwark(caster)
 		&"radiant_ward":
 			var mx: float = caster.max_hp()
 			caster.add_shield(mx * float(p.absorb) / 100.0 * eff, dur)
@@ -414,6 +425,8 @@ func _wave(skill: SkillDef, p: Dictionary, dir: Vector3) -> void:
 				FX.spawn(VFXLib.dust_puff(0.5), pos)
 		sw.trail_every = 1.0
 	FX.spawn(VFXLib.ring_wave(c, 2.0, 0.3), caster.global_position)
+	if skill.id == &"ground_fissure":
+		SkillFX.fissure(caster, dir)
 	Events.camera_shake.emit(0.2)
 	Audio.play_at(skill.sound_cast, caster.global_position)
 
@@ -471,6 +484,7 @@ func _judgment(skill: SkillDef, p: Dictionary) -> void:
 		FX.spawn(VFXLib.light_flash(Color(1.0, 0.92, 0.6), 3.0, 4.0, 0.4), caster.global_position + f * (length * float(i) / 5.0) + Vector3.UP)
 		FX.spawn(VFXLib.particles(Color(1.0, 0.9, 0.55, 0.9), 12, 0.5, true, 0.5, 4.0, 60.0, Vector3(0, 3, 0), 0.4), caster.global_position + f * (length * float(i) / 5.0) + Vector3.UP * 0.3)
 	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.9, 0.55, 0.9), 3.0, 0.4), beam_pos)
+	SkillFX.judgment(caster, f, length)
 	Events.camera_shake.emit(0.45)
 	Audio.play_at(skill.sound_hit, beam_pos, 2.0)
 
@@ -484,7 +498,7 @@ func spin_tick(skill: SkillDef, p: Dictionary) -> void:
 			if pull:
 				r.tags[&"push_dir"] = (caster.global_position - a.global_position).slide(Vector3.UP).normalized()):
 		_hit(skill, h[0], h[1])
-	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.92, 0.8, 0.7), radius, 300.0, 1.0, 0.25, 0.5), caster.global_position)
+	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.92, 0.8, 0.7), radius, 300.0, 1.0, 0.25, 0.5), caster.global_position, caster.forward().rotated(Vector3.UP, randf() * TAU))
 
 func _elem_color(skill: SkillDef) -> Color:
 	var e := skill.element

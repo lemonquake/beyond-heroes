@@ -463,7 +463,7 @@ static func _zerin() -> NpcDef:
 static func _veyra() -> NpcDef:
 	return _npc(&"veyra", "Veyra Ashgrave", {"title": "Tempo-Caller", "portrait": PORTRAIT % "tempo_caller",
 		"map": &"sanctuary", "position": Vector3(12.6, 0, -10.6), "yaw": -40.0, "model": CHAR % "elder", "tint": Color(0.3, 0.5, 0.58),
-		"services": [&"tempo_hire", &"tempo_revive"],
+		"services": [&"tempo_hire", &"tempo_revive", &"tempo_renowned"],
 		"graph": {
 			"entries": [
 				[[{"not_visited": "first"}], "first"],
@@ -479,14 +479,16 @@ static func _veyra() -> NpcDef:
 				"hub": {"text": "The spirits are restless tonight, {hero}.",
 					"choices": [
 						{"text": "Call the spirits. I want to bind a Tempo.", "next": "end", "actions": [{"service": "tempo_hire"}]},
+						{"text": "Show me the renowned spirits.", "next": "renowned"},
 						{"text": "One of my Tempos has fallen.", "next": "end", "conditions": [{"tempo_fallen": true}], "actions": [{"service": "tempo_revive"}]},
 						{"text": "What exactly is a Tempo?", "next": "what"},
 						{"text": "How do they fight?", "next": "fight"},
 						{"text": "Why do they need me?", "next": "why"},
+						{"text": "Will stronger spirits answer me?", "next": "grades"},
 						_end("Rest easy, Veyra."),
 					]},
 				"what": {"text": [
-						"Soldiers, hunters, cutpurses, anyone who fell to a monster's claw with a grudge still warm. The Aether holds their shape for a while. **Swordsmen** who held the line, **Archers** who kept the walls, **Thieves** who fought from the shadows.",
+						"Soldiers, hunters, cutpurses, anyone who fell to a monster's claw with a grudge still warm. The Aether holds their shape for a while. **Swordsmen** who held the line, **Archers** who kept the walls, **Thieves** who fought from the shadows. Older spirits too: **Mystics** who wove the Aether, **Wardens** who died still standing behind their shields.",
 						"A Tempo's strength is borrowed. Bound to you, it takes **half of what you are**: half your might, half your endurance. As you grow, they grow. Give them steel, but no finer than one tier beneath your own; the dead cannot hold what the living have not earned."],
 					"next": "hub"},
 				"fight": {"text": [
@@ -496,6 +498,17 @@ static func _veyra() -> NpcDef:
 					"next": "hub"},
 				"why": {"text": "A spirit without a living anchor thins out and drifts away before it ever finds its monster. You give them a road. They give you their blades. When one falls, bring its token to me and I will call it back, for a price. The Aether is not free, and neither am I.",
 					"actions": [{"relationship": 2}], "next": "hub"},
+				"grades": {"text": [
+						"The dead are proud. The newly fallen will answer anyone. The old ones wait to see what you are made of.",
+						"Grow, {hero}. Every few levels, or after a deed the whole island talks about, stronger **grades** of spirit answer instead: more skills in them, rarer ones, and more of your strength carried. When that happens the weaker ones fade from my shrine. The ones already bound to you stay as they are."],
+					"next": "hub"},
+				"renowned": {"text": [
+						"Five of them. **Hollan Greywall**, who held the gate at Aubren. **Kavira Vane**, who called the storm down on her own blade. **Maudra Vell**, the Lantern Saint. **Cindrel Ashreed**, who killed a Tyrant. **Vessik Thorn**, who never gave the Ashen Circle a single name.",
+						"They answer no one weaker than they were, and binding a name like that costs more gold than most heroes see in a year. But if you mean to go somewhere nobody comes back from, go with one of them."],
+					"choices": [
+						{"text": "Let me see them.", "next": "end", "actions": [{"service": "tempo_renowned"}]},
+						{"text": "Another time.", "next": "hub"},
+					]},
 				"fallen": {"text": "I feel it. One of yours has gone quiet. Its token is cold in your pack. Shall I call it back?",
 					"choices": [
 						{"text": "Call it back.", "next": "end", "actions": [{"service": "tempo_revive"}]},

@@ -130,7 +130,12 @@ func test_data_is_consistent() -> void:
 		ok(DataTempos.class_icon(cid) != null, "%s crest" % cid)
 	for sid in DataTempos.SKILLS:
 		var sk := DataTempos.skill(sid)
-		ok(DataTempos.tempo_class(sk["class"]).skills.has(sid), "%s belongs to its class" % sid)
+		if DataTempos.is_unique(sid):
+			var lg := DataTempos.legend(sk.unique)
+			ok((lg.get("skills", []) as Array).has(sid) and lg["class"] == sk["class"], "%s belongs to its renowned spirit" % sid)
+		else:
+			ok(DataTempos.tempo_class(sk["class"]).skills.has(sid), "%s belongs to its class" % sid)
+		ok(Tempo.HANDLERS.has(DataTempos.skill_use(sid)), "%s has a handler (%s)" % [sid, DataTempos.skill_use(sid)])
 		ok(DataTempos.skill_icon(sid) != null, "%s icon" % sid)
 		ok(float(sk.mana) > 0.0 and float(sk.cooldown) > 0.0, "%s has a cost and a cooldown" % sid)
 	for tid in DataTempos.TRAITS:
@@ -404,6 +409,238 @@ func test_ai_follows_and_rejoins() -> void:
 		var back := await _until(func(): return a.global_position.distance_to(_player.global_position) < 5.0, 1.0)
 		ok(back, "teleports back when left %.0f m behind" % 45.0)
 		ok(_any(log, "rejoined"), "decided to rejoin (%s, regroup gap %.1f)" % [log, far])
+	_end()
+	done()
+
+# ------------------------------------------------------------------------------------------------------------ bh-005
+
+func test_starter_tempo() -> void:
+	var h := _hero(&"knight", 1)
+	eq(h.tempos.size(), 0, "Game.new_hero alone binds nothing")
+	var t := TempoRules.grant_starter(h)
+	ok(t != null, "the starter is granted")
+	eq(h.tempos.size(), 1, "one Tempo")
+	eq(t.tempo_name, String(DataTempos.STARTER.name), "named %s" % DataTempos.STARTER.name)
+	eq(t.class_id, &"swordsman", "a Swordsman")
+	eq(t.grade, 1, "grade 1")
+	eq(t.skills, [&"sw_cleave", &"sw_mend"], "Cleave and Soul Mend")
+	eq(t.price, 0, "free")
+	eq(t.uid, 1, "uid 1")
+	ok(not t.is_legend(), "not renowned")
+	ok(t.equipment.get_item(&"main_weapon") != null, "arrives holding a sword")
+	ok(not DataTempos.NAMES.has(t.tempo_name), "his name is not in the random pool")
+	ok(TempoRules.grant_starter(h) == null and h.tempos.size() == 1, "granting twice does nothing")
+	eq(TempoRules.revive_cost(t, h), int(snappedf(25.0 + 12.0, 5.0)), "calling him back costs the base fee")
+	# room for exactly one more
+	h.inventory.gold = 99999
+	TempoRules.roster(h)
+	ok(TempoRules.hire(h, 0) != null, "a second Tempo can be bound")
+	ok(TempoRules.hire_error(h, 1) != "", "a third is refused")
+	var back := HeroData.from_dict(JSON.parse_string(JSON.stringify(h.to_dict())))
+	eq(back.tempos[0].tempo_name, t.tempo_name, "the starter survives saving")
+	done()
+
+func test_grades_and_roster_upgrades() -> void:
+	var cases := [[1, {}, 1], [3, {}, 1], [4, {}, 2], [7, {}, 2], [8, {}, 3], [6, {&"temple_seal_broken": true}, 3],
+		[10, {&"boss_warden_defeated": true}, 4], [12, {}, 4], [19, {}, 4], [20, {}, 5]]
+	for c in cases:
+		var h := _hero(&"knight", c[0])
+		for k in c[1]:
+			h.world_flags[k] = c[1][k]
+		eq(TempoRules.current_grade(h), c[2], "level %d %s -> grade %d" % [c[0], c[1].keys(), c[2]])
+	for i in DataTempos.max_grade() - 1:
+		ok(float(DataTempos.grade_def(i + 2).mirror) > float(DataTempos.grade_def(i + 1).mirror), "grade %d carries more strength" % (i + 2))
+		ok(float(DataTempos.grade_def(i + 2).price) > float(DataTempos.grade_def(i + 1).price), "grade %d costs more" % (i + 2))
+	eq(DataTempos.classes_for_grade(1), [&"swordsman", &"archer", &"thief"], "grade 1: the three first classes")
+	ok(DataTempos.classes_for_grade(2).has(&"mystic") and not DataTempos.classes_for_grade(2).has(&"warden"), "Mystics answer from grade 2")
+	ok(DataTempos.classes_for_grade(3).has(&"warden"), "Wardens answer from grade 3")
+	# every generated spirit obeys its grade
+	var seen_skills := {}
+	for g in range(1, DataTempos.max_grade() + 1):
+		var gd := DataTempos.grade_def(g)
+		for i in 50:
+			var t := TempoRules.generate(i * 104729 + g * 7, 10, &"", [], g)
+			var td := t.class_def()
+			ok(t.grade == g and int(td.grade) <= g, "g%d: class %s may answer" % [g, t.class_id])
+			ok(t.skills[0] == td.signature, "g%d: signature first" % g)
+			var extra := t.skills.size() - 1
+			var pool := DataTempos.rollable_skills(t.class_id, g).size()
+			ok(extra <= int(gd.extra[1]) and extra >= mini(int(gd.extra[0]), pool), "g%d: %d extra skills (%s)" % [g, extra, t.skills])
+			var heals := 0
+			for s in t.skills:
+				ok(not DataTempos.is_unique(s) and DataTempos.skill_grade(s) <= g, "g%d: %s may be known" % [g, s])
+				heals += 1 if DataTempos.is_heal(s) else 0
+				seen_skills[s] = true
+			ok(heals <= 1, "g%d: one mend at most" % g)
+			eq(t.price, TempoRules.hire_cost(t, 10), "g%d: price = hire cost" % g)
+			ok(is_equal_approx(t.mirror(), float(gd.mirror)), "g%d: mirror %.2f" % [g, t.mirror()])
+	for sid in DataTempos.SKILLS:
+		if not DataTempos.is_unique(sid):
+			ok(seen_skills.has(sid), "%s is rolled by some spirit" % sid)
+	# the same spirit bound at a higher grade is stronger and dearer
+	var hs := _hero(&"knight", 12)
+	var low := _tempo(&"swordsman", [&"sw_cleave", &"sw_mend"])
+	var high := _tempo(&"swordsman", [&"sw_cleave", &"sw_mend"])
+	high.grade = 4
+	var m := TempoRules.hero_mirror(hs)
+	ok(TempoRules.compute(high, m, 12, hs.cls).get_stat(&"max_hp") > TempoRules.compute(low, m, 12, hs.cls).get_stat(&"max_hp"), "grade 4 carries more of the hero")
+	ok(TempoRules.hire_cost(high, 12) > TempoRules.hire_cost(low, 12), "and costs more")
+	# the roster upgrades the moment the grade rises
+	var h2 := _hero(&"knight", 3)
+	var before := TempoRules.roster(h2).map(func(t): return t.tempo_name)
+	ok(TempoRules.roster(h2).all(func(t): return t.grade == 1), "level 3: Restless spirits")
+	eq(TempoRules.check_grade(h2), 0, "nothing to upgrade yet")
+	h2.progress.add_xp(XpCurve.total_xp_for_level(4) - h2.progress.total_xp)
+	eq(h2.progress.level, 4, "level 4")
+	eq(TempoRules.check_grade(h2), 2, "the grade rises to Seasoned")
+	var after := TempoRules.roster(h2)
+	ok(after.all(func(t): return t.grade == 2), "every offer is Seasoned now")
+	ok(after.map(func(t): return t.tempo_name) != before, "the weaker spirits faded")
+	ok(after.any(func(t): return t.class_id == &"mystic"), "a Mystic answers")
+	eq(TempoRules.check_grade(h2), 0, "and only once")
+	# a hired replacement keeps the roster's grade
+	h2.inventory.gold = 99999
+	TempoRules.hire(h2, 0)
+	ok(TempoRules.roster(h2).all(func(t): return t.grade == 2), "the replacement offer is Seasoned too")
+	# a deed raises it without levels
+	var h3 := _hero(&"knight", 6)
+	TempoRules.roster(h3)
+	h3.world_flags[&"temple_seal_broken"] = true
+	eq(TempoRules.check_grade(h3), 3, "breaking the seal brings Veteran spirits")
+	ok(TempoRules.roster(h3).any(func(t): return t.class_id == &"warden") or DataTempos.ROSTER_SIZE < 5, "Wardens can answer")
+	done()
+
+func test_renowned_spirits() -> void:
+	eq(DataTempos.legend_ids().size(), 5, "five renowned spirits")
+	eq(DataTempos.LEGENDS.size(), 5, "and no more")
+	var names := {}
+	var prices := []
+	for id in DataTempos.legend_ids():
+		var lg := DataTempos.legend(id)
+		var first := String(lg.name).get_slice(" ", 0)
+		ok(not names.has(first), "%s has a unique name" % lg.name)
+		names[first] = true
+		ok(not DataTempos.NAMES.has(first), "%s is not in the random pool" % first)
+		for n in DB.npcs.values():
+			ok(n.display_name.get_slice(" ", 0) != first, "%s does not share a townsperson's name" % first)
+		ok(DataTempos.CLASSES.has(lg["class"]) and DataTempos.TRAITS.has(lg.trait), "%s class and trait exist" % id)
+		var uniques := (lg.skills as Array).filter(func(s): return DataTempos.is_unique(s))
+		ok(uniques.size() >= 1, "%s has a skill of its own" % id)
+		for s in lg.skills:
+			ok(DataTempos.SKILLS.has(s), "%s skill %s exists" % [id, s])
+			ok(DataTempos.skill(s)["class"] == lg["class"], "%s skill %s fits its class" % [id, s])
+		ok((lg.skills as Array).filter(func(s): return DataTempos.is_heal(s)).size() <= 1, "%s knows one mend at most" % id)
+		ok(int(lg.price) >= 1500, "%s is expensive (%d)" % [id, int(lg.price)])
+		ok(DataTempos.portrait_path("tempo_%s" % id) != "", "%s portrait" % id)
+		prices.append(int(lg.price))
+	var sorted := prices.duplicate()
+	sorted.sort()
+	eq(prices, sorted, "listed from the cheapest to the dearest")
+	ok(prices[0] > TempoRules.hire_cost(TempoRules.generate(1, 5, &"", [], 2), 5) * 2, "far above a nameless spirit")
+	ok(DataTempos.portrait_path("tempo_tobren") != "", "Tobren's portrait")
+	# binding rules
+	var h := _hero(&"knight", 4)
+	h.inventory.gold = 1000
+	ok(TempoRules.legend_error(h, &"hollan").contains("level 5"), "locked below its level")
+	h.progress.add_xp(XpCurve.total_xp_for_level(5) - h.progress.total_xp)
+	ok(TempoRules.legend_error(h, &"hollan").contains("gold"), "refused without the gold")
+	ok(TempoRules.hire_legend(h, &"hollan") == null and h.inventory.gold == 1000, "and nothing changes")
+	h.inventory.gold = 1600
+	var t := TempoRules.hire_legend(h, &"hollan")
+	ok(t != null and t.is_legend(), "Hollan bound")
+	eq(h.inventory.gold, 100, "paid exactly 1500")
+	eq(t.full_name(), "Hollan Greywall, the Unbroken", "full name")
+	ok(t.equipment.get_item(&"sub_weapon") != null, "arrives with his shield")
+	ok(is_equal_approx(t.mirror(), 0.75), "carries 75% of the hero")
+	ok(TempoRules.legend_error(h, &"hollan").contains("already"), "cannot be bound twice")
+	var m := TempoRules.hero_mirror(h)
+	var plain := TempoRules.legend_data(&"hollan")
+	plain.legend_id = &""
+	plain.grade = 1
+	ok(TempoRules.compute(t, m, 5, h.cls).get_stat(&"max_hp") > TempoRules.compute(plain, m, 5, h.cls).get_stat(&"max_hp"), "stronger than the same spirit unnamed")
+	var lo := TempoRules.spirit_loadout(&"thief", 10, &"vessik")
+	ok(lo.dual_wield and lo.main_element == Elements.DARK and lo.main_max > TempoRules.spirit_loadout(&"thief", 10).main_max, "Vessik's ghost blades are dark and stronger")
+	var json := JSON.stringify(h.to_dict())
+	var back := HeroData.from_dict(JSON.parse_string(json))
+	eq(back.tempos[0].legend_id, &"hollan", "renowned identity saved")
+	eq(JSON.stringify(back.to_dict()), json, "exact round trip")
+	eq(TempoRules.release(h, t), "", "released")
+	h.inventory.gold = 2000
+	eq(TempoRules.legend_error(h, &"hollan"), "", "a released renowned spirit returns to the shrine")
+	done()
+
+## Every skill of every class (and every renowned spirit's own) does what it says in a live fight.
+func test_every_skill_works_live() -> void:
+	await _begin(10)
+	var uid := 1
+	for cid in DataTempos.class_ids():
+		var skills: Array = (DataTempos.tempo_class(cid).skills as Array).duplicate()
+		for sid in DataTempos.SKILLS:
+			if DataTempos.is_unique(sid) and DataTempos.skill(sid)["class"] == cid:
+				skills.append(sid)
+		for sid in skills:
+			var t := _tempo(cid, [DataTempos.tempo_class(cid).signature, sid], &"valiant", uid)
+			uid += 1
+			var a := await _bind(t)
+			ok(a != null, "%s spawned for %s" % [cid, sid])
+			if a == null:
+				continue
+			a.teleport_to(_player.global_position + Vector3(-3, 0, 0))
+			await _frames(1)
+			var foes := []
+			for off in [Vector3(0, 0, 3.0), Vector3(1.4, 0, 3.4), Vector3(-1.4, 0, 3.4)]:
+				var e := _enemy(&"hollow_soldier", a.global_position + off)
+				e.alert_to(_player.global_position)
+				foes.append(e)
+			await _frames(2)
+			var hp0 := 0.0
+			for e in foes:
+				hp0 += e.hp
+			a.cooldowns.clear()
+			a.mana = a.max_mana()
+			a._cancel_action()
+			a.target = foes[0]
+			var use := DataTempos.skill_use(sid)
+			var log := _decisions(a)
+			if use == "heal":
+				_player.hp = _player.max_hp() * 0.4
+				var h0 := _player.hp
+				a._cast_heal(sid, _player)
+				ok(await _until(func(): return _player.hp > h0 + 1.0, 1.5), "%s heals the hero" % sid)
+			else:
+				ok(a._use_skill(sid), "%s fires" % sid)
+				match use:
+					"challenge":
+						ok(await _until(func(): return foes.any(func(e): return is_instance_valid(e) and e.target == a), 1.5), "%s draws the monsters" % sid)
+					"ward":
+						ok(await _until(func(): return _player.status.has(&"shielded"), 1.5), "%s wards the hero" % sid)
+						if DataTempos.skill(sid).has("taunt"):
+							ok(foes.any(func(e): return is_instance_valid(e) and e.target == a), "%s also draws the monsters" % sid)
+					"rally":
+						ok(await _until(func(): return _player.status.has(&"empowered"), 1.5), "%s empowers the hero" % sid)
+					"disengage":
+						var from := a.global_position
+						ok(await _until(func(): return a.global_position.distance_to(from) > 2.0, 1.5), "%s vaults away" % sid)
+					"smoke":
+						ok(await _until(func(): return a.is_hidden(), 1.5), "%s hides it" % sid)
+					_:
+						var hurt := func() -> bool:
+							var now := 0.0
+							for e in foes:
+								now += e.hp if is_instance_valid(e) and e.alive else 0.0
+							return now < hp0 - 0.5
+						ok(await _until(hurt, 3.0), "%s damages the monsters (%s)" % [sid, log])
+				if use == "chain":
+					var n := foes.filter(func(e): return is_instance_valid(e) and (not e.alive or e.hp < e.max_hp() - 0.5)).size()
+					ok(n >= 2, "%s leaps between monsters (%d hit)" % [sid, n])
+			for e in foes:
+				if is_instance_valid(e):
+					e.free()
+			Game.hero.tempos.erase(t)
+			a.free()
+			_player.status.remove(&"shielded")
+			_player.status.remove(&"empowered")
+			_player.hp = _player.max_hp()
 	_end()
 	done()
 

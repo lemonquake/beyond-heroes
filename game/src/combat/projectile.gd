@@ -53,15 +53,34 @@ static func spawn(parent: Node, from: Vector3, dir: Vector3, speed: float, p_req
 
 func _build_body(look: String) -> void:
 	var c := Elements.color(element)
-	match look:
-		"arrow":
-			body = VFXLib.arrow_body()
-		"none":
-			body = Node3D.new()
-		_:
-			body = VFXLib.orb(c if element != Elements.PHYSICAL else Color(1.0, 0.9, 0.7), clampf(radius * 0.8, 0.12, 0.6), look != "orb_nolight")
+	if look.begins_with("model:"):
+		body = _model_body(look.substr(6), c)
+	else:
+		match look:
+			"arrow":
+				body = VFXLib.arrow_body()
+			"none":
+				body = Node3D.new()
+			_:
+				body = VFXLib.orb(c if element != Elements.PHYSICAL else Color(1.0, 0.9, 0.7), clampf(radius * 0.8, 0.12, 0.6), look != "orb_nolight")
 	add_child(body)
 	_face()
+
+## A thrown weapon (javelin): the weapon's own model flying point first, trailing a faint streak.
+func _model_body(path: String, c: Color) -> Node3D:
+	var b := Node3D.new()
+	if ResourceLoader.exists(path):
+		var m: Node3D = load(path).instantiate()
+		m.rotation.x = -PI * 0.5          # model +Y (blade / tip) -> -Z (the flight direction after look_at)
+		m.position.z = 0.7
+		b.add_child(m)
+		var ms: Array[MeshInstance3D] = []
+		for n in m.find_children("*", "MeshInstance3D", true, false):
+			ms.append(n)
+		MaterialLibrary.apply_character(ms, Color(0.6, 0.2, 0.2))
+	var tc := Color(c.r, c.g, c.b, 0.5) if element != Elements.PHYSICAL else Color(1.0, 0.95, 0.85, 0.35)
+	b.add_child(VFXLib.particles(tc, 14, 0.25, false, 0.12, 0.2, 10.0, Vector3.ZERO, 0.05))
+	return b
 
 func _face() -> void:
 	if velocity.length_squared() > 0.0001 and body:

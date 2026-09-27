@@ -465,3 +465,344 @@ static func beam(c: Color, height: float, radius: float) -> MeshInstance3D:
 	mi.material_override = mat
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return mi
+
+## A beam that fades out and frees itself — for one-off moments (level-up, heals) spawned with FX.spawn. A plain
+## beam() never goes away on its own (it is meant to be parented to something that owns its lifetime).
+static func beam_flash(c: Color, height: float, radius: float, duration := 1.1) -> MeshInstance3D:
+	var mi := beam(c, height, radius)
+	var mat := mi.material_override as ShaderMaterial
+	mi.tree_entered.connect(func() -> void:
+		var tw := mi.create_tween()
+		tw.tween_method(func(a: float) -> void: mat.set_shader_parameter("alpha", a), 0.35, 0.0, duration).set_ease(Tween.EASE_IN)
+		tw.tween_callback(mi.queue_free), CONNECT_ONE_SHOT)
+	return mi
+
+# ---- Impact, block and heavy-strike effects ---------------------------------------------------------------------
+
+static var _star_shader: Shader
+static var _crack_shader: Shader
+static var _shield_shader: Shader
+static var _streak_mat_cache := {}
+
+static func _autofree(root: Node3D, after: float) -> void:
+	var t := Timer.new()
+	t.wait_time = after
+	t.one_shot = true
+	t.autostart = true
+	t.timeout.connect(root.queue_free)
+	root.add_child(t)
+
+## Billboarded star flash at the point of contact: bright core plus `rays` spikes that pop out and fade.
+static func impact_flash(c: Color, size: float, duration := 0.16, rays := 4, spin := 0.0) -> MeshInstance3D:
+	if _star_shader == null:
+		_star_shader = Shader.new()
+		_star_shader.code = """
+shader_type spatial;
+render_mode blend_add, unshaded, cull_disabled, depth_draw_never, depth_test_disabled, shadows_disabled;
+uniform vec4 color : source_color = vec4(1.0);
+uniform float progress = 0.0;
+uniform float rays = 4.0;
+uniform float spin = 0.0;
+void vertex() {
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0] * length(MODEL_MATRIX[0].xyz),
+		INV_VIEW_MATRIX[1] * length(MODEL_MATRIX[1].xyz), INV_VIEW_MATRIX[2] * length(MODEL_MATRIX[2].xyz), MODEL_MATRIX[3]);
+}
+void fragment() {
+	vec2 p = UV * 2.0 - 1.0;
+	float d = length(p);
+	float a = atan(p.y, p.x) + spin;
+	float grow = 0.35 + 0.65 * sqrt(progress);
+	float core = exp(-d * d * 18.0 / (grow * grow));
+	float ray = pow(abs(cos(a * rays * 0.5)), 40.0) * (1.0 - smoothstep(0.0, grow, d));
+	float fade = 1.0 - smoothstep(0.35, 1.0, progress);
+	vec3 col = mix(color.rgb, vec3(1.0), core * 0.8);
+	ALBEDO = col * 3.0;
+	ALPHA = clamp((core + ray * 0.9) * fade * color.a, 0.0, 1.0);
+}
+"""
+	var mi := MeshInstance3D.new()
+	var q := QuadMesh.new()
+	q.size = Vector2.ONE * size
+	mi.mesh = q
+	var mat := ShaderMaterial.new()
+	mat.shader = _star_shader
+	mat.set_shader_parameter("color", c)
+	mat.set_shader_parameter("rays", float(rays))
+	mat.set_shader_parameter("spin", spin if spin != 0.0 else randf() * TAU)
+	mat.render_priority = 5
+	mi.material_override = mat
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var tw := mi.create_tween()
+	tw.tween_method(func(v): mat.set_shader_parameter("progress", v), 0.0, 1.0, duration)
+	tw.tween_callback(mi.queue_free)
+	return mi
+
+static func _streak_material() -> StandardMaterial3D:
+	if _streak_mat_cache.has(true):
+		return _streak_mat_cache[true]
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.vertex_color_use_as_albedo = true
+	m.albedo_texture = soft_texture()
+	m.disable_receive_shadows = true
+	_streak_mat_cache[true] = m
+	return m
+
+## Streaking sparks sprayed along `dir` (world). Each spark is a velocity-aligned cross of two thin quads.
+static func spark_spray(dir: Vector3, c: Color, amount: int, speed: float, spread := 45.0, lifetime := 0.3, length := 0.45) -> GPUParticles3D:
+	var p := GPUParticles3D.new()
+	p.amount = maxi(1, amount)
+	p.lifetime = lifetime
+	p.one_shot = true
+	p.explosiveness = 1.0
+	p.local_coords = false
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var pm := ParticleProcessMaterial.new()
+	pm.direction = dir.normalized() if dir.length() > 0.01 else Vector3.UP
+	pm.spread = spread
+	pm.initial_velocity_min = speed * 0.45
+	pm.initial_velocity_max = speed
+	pm.gravity = Vector3(0, -12, 0)
+	pm.damping_min = 4.0
+	pm.damping_max = 8.0
+	pm.particle_flag_align_y = true
+	pm.scale_min = 0.6
+	pm.scale_max = 1.2
+	pm.color_ramp = _ramp(c)
+	var curve := CurveTexture.new()
+	var cv := Curve.new()
+	cv.add_point(Vector2(0, 1))
+	cv.add_point(Vector2(1, 0.0))
+	curve.curve = cv
+	pm.scale_curve = curve
+	p.process_material = pm
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var w := 0.035
+	for axis: Vector3 in [Vector3.RIGHT, Vector3.BACK]:
+		var s := axis * w
+		var up := Vector3.UP * length
+		var v := [[-s, Vector2(0, 1)], [s, Vector2(1, 1)], [s + up, Vector2(1, 0)], [-s + up, Vector2(0, 0)]]
+		for idx in [0, 1, 2, 0, 2, 3]:
+			st.set_uv(v[idx][1])
+			st.set_color(Color.WHITE)
+			st.add_vertex(v[idx][0] - up * 0.5)
+	var mesh := st.commit()
+	mesh.surface_set_material(0, _streak_material())
+	p.draw_pass_1 = mesh
+	p.visibility_aabb = AABB(Vector3(-6, -3, -6), Vector3(12, 9, 12))
+	p.emitting = true
+	p.finished.connect(p.queue_free)
+	return p
+
+## Standard contact effect for a landed blow: star flash, directional sparks, optional crit / heavy extras.
+## `dir` is the direction the blow travelled (attacker -> target).
+static func strike_impact(dir: Vector3, c: Color, strength: float, crit: bool, heavy := false) -> Node3D:
+	var root := Node3D.new()
+	var s := clampf(strength, 0.1, 1.5)
+	var flash_c := c.lerp(Color.WHITE, 0.35)
+	root.add_child(impact_flash(flash_c, 0.9 + s * 0.9 + (0.8 if crit else 0.0) + (0.9 if heavy else 0.0), 0.14 + (0.06 if heavy else 0.0), 6 if crit else 4))
+	var out := dir.slide(Vector3.UP).normalized() if dir.slide(Vector3.UP).length() > 0.01 else Vector3.UP
+	out = (out + Vector3.UP * 0.35).normalized()
+	root.add_child(spark_spray(out, Color(c.r, c.g, c.b, 1.0), int(5 + s * 10 + (8 if crit else 0)), 6.0 + s * 6.0, 40.0, 0.26, 0.35 + s * 0.2))
+	if crit:
+		root.add_child(impact_flash(Color(1.0, 0.85, 0.4, 0.9), 2.6 + s, 0.22, 8))
+		root.add_child(light_flash(Color(1.0, 0.85, 0.5), 4.0, 4.0, 0.18))
+	if heavy:
+		root.add_child(spark_spray(Vector3.UP, Color(1.0, 0.9, 0.7, 1.0), 14, 9.0, 80.0, 0.35, 0.5))
+		root.add_child(light_flash(c.lerp(Color.WHITE, 0.4), 5.0, 5.0, 0.2))
+	_autofree(root, 1.0)
+	return root
+
+## Guarded blow: metal sparks off the guard plus a hexagonal barrier flash turned toward the attacker.
+## `to_attacker` is the world direction from the defender toward whoever struck. Parries are gold and larger.
+static func block_impact(to_attacker: Vector3, perfect: bool) -> Node3D:
+	if _shield_shader == null:
+		_shield_shader = Shader.new()
+		_shield_shader.code = """
+shader_type spatial;
+render_mode blend_add, unshaded, cull_disabled, depth_draw_never, shadows_disabled;
+uniform vec4 color : source_color = vec4(0.6, 0.8, 1.0, 1.0);
+uniform float progress = 0.0;
+float hex_d(vec2 p) {
+	p = abs(p);
+	return max(dot(p, normalize(vec2(1.0, 1.7320508))), p.x);
+}
+void fragment() {
+	vec2 p = UV * 2.0 - 1.0;
+	float d = hex_d(p);
+	float r = 0.45 + 0.5 * progress;
+	float rim = smoothstep(r - 0.12, r, d) * (1.0 - smoothstep(r, r + 0.03, d));
+	vec2 g = p * 4.0;
+	vec2 cell = abs(fract(vec2(g.x, g.y + mod(floor(g.x), 2.0) * 0.5)) - 0.5);
+	float grid = smoothstep(0.42, 0.5, max(cell.x, cell.y)) * (1.0 - smoothstep(0.0, r, d)) * 0.5;
+	float core = exp(-dot(p, p) * 10.0) * (1.0 - progress);
+	ALBEDO = mix(color.rgb, vec3(1.0), core) * 3.0;
+	ALPHA = clamp((rim + grid + core) * (1.0 - progress) * color.a, 0.0, 1.0);
+}
+"""
+	var root := Node3D.new()
+	var c := Color(1.0, 0.85, 0.35, 1.0) if perfect else Color(0.6, 0.8, 1.0, 0.9)
+	var flat := to_attacker.slide(Vector3.UP)
+	var face := flat.normalized() if flat.length() > 0.01 else Vector3.FORWARD
+	var shield := MeshInstance3D.new()
+	var q := QuadMesh.new()
+	q.size = Vector2.ONE * (1.9 if perfect else 1.3)
+	shield.mesh = q
+	var mat := ShaderMaterial.new()
+	mat.shader = _shield_shader
+	mat.set_shader_parameter("color", c)
+	shield.material_override = mat
+	shield.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# QuadMesh faces +Z; looking_at points -Z at the target, so aim it away from the attacker to face them.
+	shield.basis = Basis.looking_at(-face, Vector3.UP)
+	shield.position = face * 0.05
+	root.add_child(shield)
+	var tw := shield.create_tween()
+	tw.tween_method(func(v): mat.set_shader_parameter("progress", v), 0.0, 1.0, 0.32 if perfect else 0.22).set_ease(Tween.EASE_OUT)
+	var spark_dir := (face + Vector3.UP * 0.5).normalized()
+	root.add_child(spark_spray(spark_dir, Color(1.0, 0.75, 0.35, 1.0), 22 if perfect else 12, 9.0 if perfect else 7.0, 55.0, 0.3, 0.4))
+	root.add_child(impact_flash(c.lerp(Color.WHITE, 0.5), 1.6 if perfect else 1.0, 0.12, 4, PI * 0.25))
+	root.add_child(light_flash(c, 3.5 if perfect else 1.8, 3.5, 0.15))
+	if perfect:
+		var ring := ring_wave(Color(1.0, 0.9, 0.5, 0.9), 2.4, 0.35, 0.5)
+		ring.position.y = -1.0
+		root.add_child(ring)
+	_autofree(root, 1.0)
+	return root
+
+## Glowing radial ground cracks that burst open and cool down. For heavy slams and finishers.
+static func ground_crack(c: Color, radius: float, duration := 1.2) -> MeshInstance3D:
+	if _crack_shader == null:
+		_crack_shader = Shader.new()
+		_crack_shader.code = """
+shader_type spatial;
+render_mode blend_add, unshaded, cull_disabled, depth_draw_never, shadows_disabled;
+uniform vec4 color : source_color = vec4(1.0, 0.7, 0.3, 1.0);
+uniform float progress = 0.0;
+uniform float seed = 0.0;
+float h(float x) { return fract(sin(x * 91.7 + seed) * 43758.5453); }
+void fragment() {
+	vec2 p = UV * 2.0 - 1.0;
+	float d = length(p);
+	float a = atan(p.y, p.x);
+	float n = 9.0;
+	float sector = floor((a / 6.2831853 + 0.5) * n);
+	float jag = (h(sector) - 0.5) * 0.35 + sin(d * 23.0 + sector * 3.1) * 0.05 + sin(d * 51.0 + sector) * 0.025;
+	float local = fract((a / 6.2831853 + 0.5) * n) - 0.5 + jag;
+	float len = 0.55 + 0.45 * h(sector + 7.0);
+	float open = smoothstep(0.0, 0.25, progress);
+	float line = (1.0 - smoothstep(0.0, 0.035 + 0.02 * (1.0 - d), abs(local) * d * 2.2)) * step(d, len * open);
+	float core = (1.0 - smoothstep(0.0, 0.22, d)) * 0.6;
+	float cool = 1.0 - smoothstep(0.2, 1.0, progress);
+	ALBEDO = mix(color.rgb, vec3(1.0, 0.95, 0.85), cool * 0.4) * (1.5 + 2.0 * cool);
+	ALPHA = clamp((line + core * cool) * (1.0 - smoothstep(0.7, 1.0, progress)) * color.a, 0.0, 1.0);
+}
+"""
+	var mi := MeshInstance3D.new()
+	var q := PlaneMesh.new()
+	q.size = Vector2.ONE * radius * 2.0
+	mi.mesh = q
+	var mat := ShaderMaterial.new()
+	mat.shader = _crack_shader
+	mat.set_shader_parameter("color", c)
+	mat.set_shader_parameter("seed", randf() * 100.0)
+	mi.material_override = mat
+	mi.position.y = 0.08
+	mi.rotation.y = randf() * TAU
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var tw := mi.create_tween()
+	tw.tween_method(func(v): mat.set_shader_parameter("progress", v), 0.0, 1.0, duration)
+	tw.tween_callback(mi.queue_free)
+	return mi
+
+## Everything a finisher / heavy blow leaves at the target's feet: glowing cracks, shock ring, debris, dust.
+static func heavy_impact(c: Color, strength := 1.0) -> Node3D:
+	var root := Node3D.new()
+	root.add_child(ground_crack(c, 1.6 + strength * 0.9, 1.1))
+	root.add_child(ring_wave(c.lerp(Color.WHITE, 0.3), 2.2 + strength, 0.35, 0.6))
+	var d := debris(0.8 + strength * 0.4)
+	d.position.y = 0.3
+	root.add_child(d)
+	root.add_child(dust_puff(0.7 + strength * 0.4))
+	_autofree(root, 1.4)
+	return root
+
+## A pillar of light that shoots up and fades (War Cry, Judgment, skill casts).
+static func light_pillar(c: Color, height: float, radius: float, duration := 0.6) -> MeshInstance3D:
+	var mi := beam(c, height, radius)
+	var mat := mi.material_override as ShaderMaterial
+	mat.set_shader_parameter("energy", 2.2)
+	mi.scale = Vector3(0.2, 0.05, 0.2)
+	var tw := mi.create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(mi, "scale", Vector3.ONE, duration * 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tw.tween_method(func(v): mat.set_shader_parameter("alpha", v), 0.6, 0.0, duration).set_delay(duration * 0.15)
+	tw.chain().tween_callback(mi.queue_free)
+	return mi
+
+## A giant blade of light that drops from the sky and plants itself point-first (Judgment). Root sits on the ground.
+static func light_sword(c: Color, length := 5.0, drop_time := 0.16, linger := 0.55) -> Node3D:
+	var root := Node3D.new()
+	var sword := Node3D.new()
+	root.add_child(sword)
+	var mat := glow_material(c.lerp(Color.WHITE, 0.3), 3.0)
+	var blade := MeshInstance3D.new()
+	var bm := PrismMesh.new()
+	bm.size = Vector3(0.55, length, 0.12)
+	blade.mesh = bm
+	blade.rotation.z = PI            # prism apex points down into the ground
+	blade.position.y = length * 0.5
+	blade.material_override = mat
+	sword.add_child(blade)
+	var guard := MeshInstance3D.new()
+	var gm := BoxMesh.new()
+	gm.size = Vector3(1.8, 0.18, 0.2)
+	guard.mesh = gm
+	guard.position.y = length + 0.05
+	guard.material_override = mat
+	sword.add_child(guard)
+	var grip := MeshInstance3D.new()
+	var hm := CylinderMesh.new()
+	hm.top_radius = 0.08
+	hm.bottom_radius = 0.08
+	hm.height = 1.0
+	grip.mesh = hm
+	grip.position.y = length + 0.6
+	grip.material_override = mat
+	sword.add_child(grip)
+	for n: MeshInstance3D in [blade, guard, grip]:
+		n.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	sword.position.y = 9.0
+	var tw := root.create_tween()
+	tw.tween_property(sword, "position:y", -0.6, drop_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	tw.tween_interval(linger)
+	tw.tween_method(func(v): mat.set_shader_parameter("alpha", v), 1.0, 0.0, 0.35)
+	tw.tween_callback(root.queue_free)
+	return root
+
+## Translucent fresnel dome that snaps up around the caster (Iron Bulwark).
+static func shield_dome(c: Color, radius: float, duration := 0.9) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = radius
+	sm.height = radius * 2.0
+	sm.is_hemisphere = true
+	sm.radial_segments = 24
+	sm.rings = 10
+	mi.mesh = sm
+	var mat := glow_material(c, 0.9)
+	mat.set_shader_parameter("alpha", 0.0)
+	mi.material_override = mat
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.scale = Vector3.ONE * 0.3
+	var tw := mi.create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(mi, "scale", Vector3.ONE, duration * 0.25).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tw.tween_method(func(v): mat.set_shader_parameter("alpha", v), 0.0, 0.4, duration * 0.2)
+	tw.chain().tween_method(func(v): mat.set_shader_parameter("alpha", v), 0.4, 0.0, duration * 0.75)
+	tw.chain().tween_callback(mi.queue_free)
+	return mi

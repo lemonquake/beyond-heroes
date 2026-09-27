@@ -55,6 +55,31 @@ const DEFS := {
 	&"overload": {"name": "Elemental Overload", "debuff": false, "duration": 5.0, "icon": "empowered", "desc": "40% more Elemental Damage."},
 	&"elite_shield": {"name": "Warded", "debuff": false, "duration": 0.0, "icon": "shielded", "desc": "Elite ward absorbs damage until broken."},
 	&"enraged": {"name": "Enraged", "debuff": false, "duration": 0.0, "icon": "empowered", "desc": "Faster and more aggressive."},
+	# ---- bh-006 elixirs (consumables); "item" = the base whose rendered icon the buff shows ----
+	&"elixir_swift": {"name": "Swiftfoot", "debuff": false, "duration": 60.0, "item": "swiftfoot_tonic", "desc": "20% more Movement Speed.",
+		"mods": [[&"move_speed", StatModifier.Op.MORE, 0.2]]},
+	&"elixir_ironskin": {"name": "Ironskin", "debuff": false, "duration": 60.0, "item": "ironskin_brew", "desc": "30% more Defense, +10% Knockback Resistance.",
+		"mods": [[&"defense", StatModifier.Op.MORE, 0.3], [&"knockback_res", StatModifier.Op.FLAT, 0.1]]},
+	&"elixir_berserk": {"name": "Berserk", "debuff": false, "duration": 45.0, "item": "berserker_draught", "desc": "20% more Attack Speed, 10% more damage taken.",
+		"mods": [[&"attack_speed", StatModifier.Op.MORE, 0.2], [&"damage_taken", StatModifier.Op.MORE, 0.1]]},
+	&"elixir_sage": {"name": "Sage's Focus", "debuff": false, "duration": 60.0, "item": "sages_infusion", "desc": "+25% Magic Damage, 15% more Cast Speed.",
+		"mods": [[&"magic_damage", StatModifier.Op.INC, 0.25], [&"cast_speed", StatModifier.Op.MORE, 0.15]]},
+	&"elixir_emberward": {"name": "Emberward", "debuff": false, "duration": 120.0, "item": "emberward_potion", "desc": "+25% Fire Resistance.",
+		"mods": [[&"res_fire", StatModifier.Op.FLAT, 0.25]]},
+	&"elixir_frostward": {"name": "Frostward", "debuff": false, "duration": 120.0, "item": "frostward_potion", "desc": "+25% Ice Resistance.",
+		"mods": [[&"res_ice", StatModifier.Op.FLAT, 0.25]]},
+	&"elixir_stormward": {"name": "Stormward", "debuff": false, "duration": 120.0, "item": "stormward_potion", "desc": "+25% Lightning Resistance.",
+		"mods": [[&"res_lightning", StatModifier.Op.FLAT, 0.25]]},
+	&"elixir_fortune": {"name": "Fortune", "debuff": false, "duration": 300.0, "item": "fortune_elixir", "desc": "+30% Magic Find, +25% Gold Find.",
+		"mods": [[&"magic_find", StatModifier.Op.FLAT, 0.3], [&"gold_find", StatModifier.Op.FLAT, 0.25]]},
+	&"elixir_scholar": {"name": "Scholar's Insight", "debuff": false, "duration": 600.0, "item": "scholars_tea", "desc": "+15% Experience gained.",
+		"mods": [[&"xp_gain", StatModifier.Op.FLAT, 0.15]]},
+	&"elixir_feather": {"name": "Featherweight", "debuff": false, "duration": 300.0, "item": "featherweight_draught", "desc": "+60 Carry Capacity.",
+		"mods": [[&"carry_capacity", StatModifier.Op.FLAT, 60.0]]},
+	&"elixir_whetstone": {"name": "Honed Edge", "debuff": false, "duration": 300.0, "item": "whetstone", "desc": "+15% Physical Damage, +10% Critical Damage.",
+		"mods": [[&"phys_damage", StatModifier.Op.FLAT, 0.15], [&"crit_damage", StatModifier.Op.FLAT, 0.1]]},
+	&"elixir_smoke": {"name": "Smoke Cloud", "debuff": false, "duration": 6.0, "item": "smoke_pellet", "desc": "60% more Evasion, 30% more Movement Speed.",
+		"mods": [[&"evasion", StatModifier.Op.MORE, 0.6], [&"move_speed", StatModifier.Op.MORE, 0.3]]},
 }
 
 const INTERACTION_DOCS := [
@@ -80,6 +105,8 @@ static func desc_of(id: StringName) -> String:
 	return DEFS[id]["desc"] if DEFS.has(id) else ""
 
 static func icon_of(id: StringName) -> String:
+	if DEFS.has(id) and DEFS[id].has("item"):
+		return "res://assets/ui/icons/items3d/%s.png" % DEFS[id]["item"]
 	var ic: String = DEFS[id].get("icon", "") if DEFS.has(id) else ""
 	return "res://assets/ui/icons/status/%s.svg" % ic if ic != "" else ""
 

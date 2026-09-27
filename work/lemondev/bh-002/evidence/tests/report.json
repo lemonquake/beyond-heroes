@@ -1,87 +1,99 @@
 {
-  "checks": 5265,
-  "elapsed_ms": 74811,
+  "checks": 9451,
+  "elapsed_ms": 122604,
   "engine": "4.7.2-stable (official)",
   "failures": [],
   "suites": {
     "test_chat.gd": {
       "checks": 38,
       "failures": [],
-      "ms": 2831.977,
+      "ms": 2295.665,
       "tests": 6
     },
     "test_damage.gd": {
       "checks": 60,
       "failures": [],
-      "ms": 195.59,
+      "ms": 199.443,
       "tests": 13
     },
     "test_enemies.gd": {
       "checks": 464,
       "failures": [],
-      "ms": 4164.097,
+      "ms": 3874.271,
       "tests": 6
+    },
+    "test_guide.gd": {
+      "checks": 139,
+      "failures": [],
+      "ms": 1071.277,
+      "tests": 5
     },
     "test_guilds.gd": {
       "checks": 100,
       "failures": [],
-      "ms": 16.93,
+      "ms": 14.561,
       "tests": 8
     },
     "test_island.gd": {
       "checks": 522,
       "failures": [],
-      "ms": 3935.347,
+      "ms": 3672.145,
       "tests": 13
     },
     "test_items.gd": {
-      "checks": 2037,
+      "checks": 2043,
       "failures": [],
-      "ms": 460.864,
+      "ms": 451.336,
+      "tests": 17
+    },
+    "test_loot.gd": {
+      "checks": 1128,
+      "failures": [],
+      "ms": 39998.219,
       "tests": 17
     },
     "test_maps.gd": {
-      "checks": 406,
+      "checks": 407,
       "failures": [],
-      "ms": 9089.683,
+      "ms": 6578.084,
       "tests": 14
     },
     "test_npcs.gd": {
-      "checks": 326,
+      "checks": 328,
       "failures": [],
-      "ms": 41895.837,
+      "ms": 34167.897,
       "tests": 3
     },
     "test_progression.gd": {
       "checks": 51,
       "failures": [],
-      "ms": 8.987,
+      "ms": 5.431,
       "tests": 7
     },
     "test_shops_dialogue.gd": {
-      "checks": 584,
+      "checks": 616,
       "failures": [],
-      "ms": 1395.867,
+      "ms": 1227.708,
       "tests": 10
     },
     "test_stats.gd": {
-      "checks": 139,
+      "checks": 142,
       "failures": [],
-      "ms": 14.934,
+      "ms": 29.036,
       "tests": 8
     },
     "test_status.gd": {
       "checks": 24,
       "failures": [],
-      "ms": 72.244,
+      "ms": 93.385,
       "tests": 8
     },
     "test_tempos.gd": {
-      "checks": 514,
+      "checks": 3389,
       "failures": [],
-      "ms": 9469.804,
-      "tests": 12
+      "ms": 27006.469,
+      "tests": 16
     }
   },
-  "timestamp": "2026-09-27T03:09:39"
+  "timestamp": "2026-09-27T12:00:59"
 }

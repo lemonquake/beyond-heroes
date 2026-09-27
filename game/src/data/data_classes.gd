@@ -25,7 +25,7 @@ static func build() -> Array:
 		StatModifier.flat(&"block_strength", 0.10, "Knight: Shield Discipline"),
 		StatModifier.inc(&"impact_strength", 0.15, "Knight: Heavy Hands"),
 	]
-	knight.weapon_mastery = {&"sword": 0.10, &"greatsword": 0.10, &"axe": 0.10, &"spear": 0.10}
+	knight.weapon_mastery = {&"sword": 0.10, &"greatsword": 0.10, &"axe": 0.10, &"greataxe": 0.10, &"spear": 0.10, &"club": 0.10, &"javelin": 0.05}
 	knight.starting_items = [&"iron_longsword", &"warden_kite_shield", &"padded_gambeson", &"iron_hauberk", &"iron_helm"]
 	knight.starting_skills = [&"cleave"]
 	knight.skill_tree_id = &"knight_skills"

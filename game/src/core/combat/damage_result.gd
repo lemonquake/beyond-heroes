@@ -22,6 +22,10 @@ var mana_leech := 0.0               # Mana returned to the attacker
 var reactions: Array[StringName] = []   # elemental reactions that fired (shatter, melt, purify, conduct, extinguish, fan, umbral)
 var absorbed := 0                   # part of `total` soaked by a ward/shield (HP loss = total - absorbed)
 var dominant_element := Elements.PHYSICAL
+var skill: StringName = &""          # id of the skill that dealt this (styled damage numbers), empty for attacks
+var skill_name := ""
+var heavy := false                  # heavy / charged / skill blow (bigger impact feedback)
+var finisher := false               # last hit of a combo chain
 var steps := PackedStringArray()    # debug breakdown
 
 func log_step(s: String) -> void:

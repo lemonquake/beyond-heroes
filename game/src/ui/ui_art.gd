@@ -80,8 +80,10 @@ static func ui_icon(id: String) -> Texture2D:
 	return icon("ui", id)
 
 static func status_icon(status_id: StringName) -> Texture2D:
-	var name := StatusRules.icon_of(status_id)
-	return icon("status", name if name != "" else String(status_id))
+	var path := StatusRules.icon_of(status_id)
+	if path != "" and ResourceLoader.exists(path):
+		return tex(path)
+	return icon("status", String(status_id))
 
 static func element_icon(e: int) -> Texture2D:
 	return icon("elements", String(Elements.NAMES[e]).to_lower())

@@ -83,6 +83,13 @@ func drop_for(e: Enemy, player: Player) -> void:
 		drops.append(DB.make_item(&"health_potion", BH.Rarity.COMMON, ilvl, rng.randi()))
 	if rng.randf() < 0.06:
 		drops.append(DB.make_item(&"mana_potion", BH.Rarity.COMMON, ilvl, rng.randi()))
+	# bh-006 consumables (tonics, wards, bombs, scrolls ...): one roll, more for elites and bosses
+	var cons_p := 0.55 if e.is_boss else (0.3 if e.is_elite else 0.07)
+	for i in (2 if e.is_boss else 1):
+		if rng.randf() < cons_p:
+			var cb := ItemGenerator.random_consumable(rng, ilvl)
+			if cb:
+				drops.append(DB.make_item(cb.id, BH.Rarity.COMMON, ilvl, rng.randi()))
 	for entry in e.def.loot:
 		if rng.randf() < float(entry[1]):
 			var it := DB.make_item(StringName(entry[0]), BH.Rarity.COMMON, ilvl, rng.randi())
@@ -110,7 +117,7 @@ func spawn_item(item: ItemInstance, from: Vector3, angle := 0.0, dist := 1.2) ->
 	FX.world.add_child(d)
 	var land := from + Vector3(cos(angle), 0, sin(angle)) * dist
 	if FX.world.is_inside_tree():
-		land = CombatQuery.ground_at(FX.world.get_world_3d(), land)
+		land = landing_point(FX.world.get_world_3d(), from, angle, dist)
 	d.launch(from + Vector3.UP * 0.8, land)
 	Events.loot_dropped.emit(item, land)
 	return d
@@ -121,8 +128,42 @@ func spawn_gold(from: Vector3, amount: int) -> LootDrop:
 	var d := LootDrop.new()
 	d.gold = amount
 	FX.world.add_child(d)
-	var land := from + Vector3(rng.randf_range(-0.8, 0.8), 0, rng.randf_range(-0.8, 0.8))
+	var off := Vector2(rng.randf_range(-0.8, 0.8), rng.randf_range(-0.8, 0.8))
+	var land := from + Vector3(off.x, 0, off.y)
 	if FX.world.is_inside_tree():
-		land = CombatQuery.ground_at(FX.world.get_world_3d(), land)
+		land = landing_point(FX.world.get_world_3d(), from, off.angle(), off.length())
 	d.launch(from + Vector3.UP * 0.8, land)
 	return d
+
+## Where a drop thrown from a corpse (feet at `from`) toward `angle` comes to rest: on walkable ground at about the
+## corpse's height, never on top of a wall, tree, rock or roof and never inside or behind one. (The old landing ray
+## started 6 m above the spot and returned the first surface it met, so drops near trees and walls landed on canopies
+## and wall tops, out of reach of the R key — the "cannot pick it up" bug.)
+static func landing_point(world: World3D, from: Vector3, angle: float, dist: float) -> Vector3:
+	var space := world.direct_space_state
+	var waist := from + Vector3.UP * 0.7
+	var tries := [[angle, dist], [angle + 1.3, dist], [angle - 1.3, dist], [angle + 2.6, dist * 0.6], [angle, dist * 0.35]]
+	for t in tries:
+		var dir := Vector3(cos(float(t[0])), 0.0, sin(float(t[0])))
+		var d := float(t[1])
+		# keep clear of walls / trees / props between the corpse and the landing spot
+		var q := PhysicsRayQueryParameters3D.create(waist, waist + dir * (d + 0.4), BH.LAYER_WORLD | BH.LAYER_PROPS)
+		var hit := space.intersect_ray(q)
+		if not hit.is_empty():
+			d = minf(d, (hit.position - waist).length() - 0.45)
+			if d < 0.25:
+				continue
+		var g = floor_under(space, waist + dir * d, from.y)
+		if g != null:
+			return g
+	var g0 = floor_under(space, waist, from.y)
+	return g0 if g0 != null else from
+
+## The walkable surface under `p` near height `ref_y` (from 1 m above down to 4 m below), or null. Steep hits (wall
+## faces) are rejected.
+static func floor_under(space: PhysicsDirectSpaceState3D, p: Vector3, ref_y: float) -> Variant:
+	var q := PhysicsRayQueryParameters3D.create(Vector3(p.x, ref_y + 1.0, p.z), Vector3(p.x, ref_y - 4.0, p.z), BH.LAYER_WORLD | BH.LAYER_GROUND)
+	var hit := space.intersect_ray(q)
+	if hit.is_empty() or (hit.normal as Vector3).y < 0.6:
+		return null
+	return hit.position

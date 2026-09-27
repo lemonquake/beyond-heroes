@@ -190,6 +190,8 @@ func _terrace() -> void:
 	# waypoint and its guardians
 	teleporter(&"sanctuary_waypoint", Vector3(0, y, -24.5), &"ruined_forest", &"arrival", "Ruined Forest")
 	spawn(&"waypoint", Vector3(0, y, -20.6), 180.0)
+	# where a Town Portal's return end stands: the open west half of the terrace, clear of the statue and braziers
+	spawn(&"town_portal", Vector3(-8.0, y, -24.8), 90.0)
 	for sx in [-6.8, 6.8]:
 		kit("statue_knight", Vector3(sx, y, -21.0), 0.0)
 		brazier(Vector3(sx * 0.62, y, -20.2), 3.0, sx < 0.0)

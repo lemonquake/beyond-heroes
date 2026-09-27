@@ -2,12 +2,18 @@ class_name TempoRules
 ## Rules for Tempos (spirit companions, docs/LORE.md §9). Pure functions over HeroData / TempoData — the Tempo-Caller's
 ## services, the Tempo window, the Tempo actor and the tests all call these.
 ##
-## * Strength: a Tempo mirrors 50% of its hero's persistent stats (pools, defense, accuracy, evasion, critical chance,
+## * Strength: a Tempo mirrors a share of its hero's persistent stats (50% at grade 1, up to 70% at grade 5, 75% for
+##   the renowned spirits — DataTempos.GRADES) (pools, defense, accuracy, evasion, critical chance,
 ##   damage bonuses, resistances). Its own gear, class and trait add on top, and every "increased" / "more" modifier
 ##   then applies to the total — so a Tempo's gear always matters and it grows as its hero grows.
 ## * Gear: one rarity tier below the best its hero may wear (Unranked heroes' Tempos: up to Advanced), class weapons only,
 ##   the hero's level requirement; spirits ignore attribute requirements.
 ## * At most two Tempos bound at once (fallen ones count until they are called back or released).
+## * Grades: the spirits answering the Tempo-Caller grow with the hero (level or story deeds): more skills, rarer
+##   skills, new classes, a larger share of the hero's strength, higher prices. A rise replaces the offers at once.
+## * Renowned spirits (DataTempos.LEGENDS): five named warriors with their own skills, a level requirement and a price
+##   far above the nameless spirits. Each can be bound once; released, it returns to the shrine.
+## * Every new hero starts with Tobren (DataTempos.STARTER), a grade-1 Swordsman, bound for free.
 
 const MIRROR_KEYS: Array[StringName] = [&"max_hp", &"max_mana", &"hp_regen", &"mana_regen", &"defense", &"evasion",
 	&"accuracy", &"crit_chance", &"status_res", &"knockback_res", &"poise", &"phys_damage", &"magic_damage",
@@ -52,50 +58,59 @@ static func shell(class_id: StringName, hero_cls: ClassDef) -> ClassDef:
 	return c
 
 ## The ghostly blade a Tempo fights with when its hands are empty: weaker than real steel, but never useless.
-static func spirit_loadout(class_id: StringName, level: int) -> WeaponLoadout:
+## A renowned spirit carries the weapon it died with (its `spirit` entry): stronger, and of its own element.
+static func spirit_loadout(class_id: StringName, level: int, legend_id: StringName = &"") -> WeaponLoadout:
 	var td := DataTempos.tempo_class(class_id)
-	var wt := DB.weapon_type(td.get("spirit_weapon", &"sword"))
+	var sp: Dictionary = DataTempos.legend(legend_id).get("spirit", {})
+	var wt := DB.weapon_type(sp.get("weapon", td.get("spirit_weapon", &"sword")))
+	var power := float(sp.get("power", 1.0))
 	var lo := WeaponLoadout.new()
 	lo.main_type = wt
-	lo.main_min = 3.0 + 0.9 * float(level)
-	lo.main_max = 6.0 + 1.5 * float(level)
+	lo.main_min = (3.0 + 0.9 * float(level)) * power
+	lo.main_max = (6.0 + 1.5 * float(level)) * power
 	lo.main_crit = wt.crit_chance if wt else 0.05
-	lo.main_element = Elements.LIGHT
-	lo.main_elem_share = 0.2
-	if class_id == &"thief" and wt != null:
+	lo.main_aps = wt.attacks_per_second if wt else WeaponLoadout.UNARMED_APS
+	lo.main_element = int(sp.get("element", Elements.LIGHT))
+	lo.main_elem_share = float(sp.get("share", 0.2))
+	if wt != null and wt.id == &"dagger" and (td.get("sub", []) as Array).has(&"dagger"):
 		lo.off_type = wt
 		lo.off_min = lo.main_min * 0.9
 		lo.off_max = lo.main_max * 0.9
-		lo.off_element = Elements.LIGHT
-		lo.off_elem_share = 0.2
+		lo.off_aps = lo.main_aps
+		lo.off_element = lo.main_element
+		lo.off_elem_share = lo.main_elem_share
 		lo.dual_wield = true
 	return lo
 
 ## Weapon configuration the Tempo actually fights with.
 static func loadout(t: TempoData, level: int) -> WeaponLoadout:
 	var lo := t.equipment.loadout()
-	return spirit_loadout(t.class_id, level) if lo.is_unarmed() else lo
+	return spirit_loadout(t.class_id, level, t.legend_id) if lo.is_unarmed() else lo
 
-## Derived stats: 50% of `hero_stats` (the hero's persistent stats) + the Tempo's gear, class and trait.
+## Derived stats: the Tempo's share (TempoData.mirror) of `hero_stats` (the hero's persistent stats) + its gear, class,
+## trait and — for a renowned spirit — its own strengths.
 ## `hero_stats` may be null (tools, previews): the Tempo then has only its own.
 static func compute(t: TempoData, hero_stats: DerivedStats, level: int, hero_cls: ClassDef = null, runtime: Array = []) -> DerivedStats:
 	var mods: Array = []
-	var who := "Soul-bond (50% of your hero)"
+	var share := t.mirror()
+	var who := "Soul-bond (%d%% of your hero)" % roundi(share * 100.0)
 	if hero_stats != null:
 		for k in mirror_keys():
-			var v := hero_stats.get_stat(k) * DataTempos.MIRROR
+			var v := hero_stats.get_stat(k) * share
 			if absf(v) > 0.00001:
 				mods.append(StatModifier.flat(k, v, who))
 	mods.append_array(t.equipment.modifiers())
 	mods.append_array(DataTempos.mods_from(t.class_def().get("mods", []), t.class_name_text()))
 	mods.append_array(DataTempos.mods_from(t.trait_def().get("mods", []), String(t.trait_def().get("name", ""))))
+	if t.is_legend():
+		mods.append_array(DataTempos.mods_from(t.legend_def().get("mods", []), t.full_name()))
 	mods.append_array(runtime)
 	var d := StatCalculator.compute(shell(t.class_id, hero_cls), level, {}, mods, loadout(t, level))
 	if hero_stats != null:
 		# attributes shown on the sheet: the mirrored half plus what the Tempo's own gear adds
 		for a in BH.ATTRIBUTES:
-			var mirrored := floorf(hero_stats.get_stat(a) * DataTempos.MIRROR)
-			var lines := PackedStringArray(["Mirrored from your hero (50%%): %d" % mirrored])
+			var mirrored := floorf(hero_stats.get_stat(a) * share)
+			var lines := PackedStringArray(["Mirrored from your hero (%d%%): %d" % [roundi(share * 100.0), mirrored]])
 			if d.get_stat(a) > 0.0:
 				lines.append("Tempo gear: +%d" % d.get_stat(a))
 			d.set_stat(a, mirrored + d.get_stat(a), lines)
@@ -221,10 +236,15 @@ static func unequip_to_inventory(hero: HeroData, t: TempoData, slot: StringName)
 
 # ---- Binding, calling back, releasing ------------------------------------------------------------------------------
 
+## Price of a nameless spirit: grows with the hero's level, its number of skills, a mend, and its grade.
+## Renowned spirits have a fixed price (DataTempos.LEGENDS).
 static func hire_cost(t: TempoData, level: int) -> int:
+	if t.is_legend():
+		return int(t.legend_def().price)
 	var c := (80.0 + 30.0 * float(maxi(1, level) - 1)) * (1.0 + 0.2 * float(maxi(0, t.skills.size() - 2)))
 	if t.has_heal():
 		c *= 1.15
+	c *= float(DataTempos.grade_def(t.grade).price)
 	return int(snappedf(c, 5.0))
 
 static func revive_cost(t: TempoData, hero: HeroData) -> int:
@@ -248,10 +268,53 @@ static func find(hero: HeroData, uid: int) -> TempoData:
 			return t
 	return null
 
-## Spirits answering the Tempo-Caller right now (refreshed on a play-time clock and after each binding).
+# ---- Grades -------------------------------------------------------------------------------------------------------
+
+## Whether the hero has reached spirit grade `g` (its level, or its deed when the grade has one).
+static func grade_reached(hero: HeroData, g: int) -> bool:
+	if hero == null:
+		return g <= 1
+	var gd := DataTempos.grade_def(g)
+	if hero.progress.level >= int(gd.level):
+		return true
+	return gd.flag != &"" and bool(hero.world_flags.get(gd.flag, false))
+
+## The grade of the spirits answering the Tempo-Caller for this hero right now.
+static func current_grade(hero: HeroData) -> int:
+	var best := 1
+	for g in range(2, DataTempos.max_grade() + 1):
+		if grade_reached(hero, g):
+			best = g
+	return best
+
+## What unlocks the next grade: {"grade": n, "name", "text"} or {} at the top.
+static func next_grade(hero: HeroData) -> Dictionary:
+	var g := current_grade(hero) + 1
+	if g > DataTempos.max_grade():
+		return {}
+	var gd := DataTempos.grade_def(g)
+	var how := "reach level %d" % int(gd.level)
+	if String(gd.deed) != "":
+		how += " or %s" % gd.deed
+	return {"grade": g, "name": String(gd.name), "text": how}
+
+## Call when the hero levels up or a deed is done: if the spirits' grade rose, the old offers fade and stronger
+## spirits answer at once. Returns the new grade, or 0 when nothing changed.
+static func check_grade(hero: HeroData) -> int:
+	if hero == null:
+		return 0
+	var g := current_grade(hero)
+	if g <= int(hero.tempo_roster.get("grade", 1)):
+		return 0
+	refresh_roster(hero)
+	return g
+
+## Spirits answering the Tempo-Caller right now (refreshed on a play-time clock, after each binding, and whenever
+## the hero reaches a new grade).
 static func roster(hero: HeroData) -> Array:
 	var r: Dictionary = hero.tempo_roster
-	if (r.get("offers", []) as Array).is_empty() or hero.play_time >= float(r.get("refresh_at", 0.0)):
+	var stale := (r.get("offers", []) as Array).is_empty() or hero.play_time >= float(r.get("refresh_at", 0.0))
+	if stale or int(r.get("grade", 1)) < current_grade(hero):
 		refresh_roster(hero)
 	var out := []
 	for d in hero.tempo_roster.offers:
@@ -260,24 +323,33 @@ static func roster(hero: HeroData) -> Array:
 
 static func refresh_roster(hero: HeroData) -> void:
 	var serial := int(hero.tempo_roster.get("serial", 0))
+	var grade := current_grade(hero)
 	var offers := []
 	var taken := hero.tempos.map(func(t): return t.tempo_name)
-	var classes := DataTempos.class_ids()
+	var classes := DataTempos.classes_for_grade(grade)
+	# more classes than places: rotate so every class answers over a few refreshes, the newest first
+	if classes.size() > DataTempos.ROSTER_SIZE:
+		classes.reverse()
+		var shift := (serial / DataTempos.ROSTER_SIZE) % classes.size()
+		classes = classes.slice(shift) + classes.slice(0, shift)
 	for i in DataTempos.ROSTER_SIZE:
 		serial += 1
 		var cls: StringName = classes[i] if i < classes.size() else &""
-		var t := generate(hash("%s/%d" % [hero.hero_name, serial]), hero.progress.level, cls, taken)
+		var t := generate(hash("%s/%d" % [hero.hero_name, serial]), hero.progress.level, cls, taken, grade)
 		taken.append(t.tempo_name)
 		offers.append(t.to_dict())
-	hero.tempo_roster = {"offers": offers, "refresh_at": hero.play_time + DataTempos.ROSTER_REFRESH, "serial": serial}
+	hero.tempo_roster = {"offers": offers, "refresh_at": hero.play_time + DataTempos.ROSTER_REFRESH, "serial": serial,
+		"grade": grade}
 
-## A random spirit (deterministic for a seed): class, name, personality, 2–3 skills (the class signature first), where
-## it fell, a spectral tint and its price.
-static func generate(seed_value: int, level: int, class_id: StringName = &"", taken: Array = []) -> TempoData:
+## A random spirit of `grade` (deterministic for a seed): class, name, personality, skills (the class signature first,
+## then as many as the grade grants, drawn from the skills that grade may know), where it fell, a spectral tint and
+## its price.
+static func generate(seed_value: int, level: int, class_id: StringName = &"", taken: Array = [], grade := 1) -> TempoData:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	var t := TempoData.new()
-	var classes := DataTempos.class_ids()
+	t.grade = clampi(grade, 1, DataTempos.max_grade())
+	var classes := DataTempos.classes_for_grade(t.grade)
 	t.class_id = class_id if DataTempos.CLASSES.has(class_id) else classes[rng.randi_range(0, classes.size() - 1)]
 	var names: Array = DataTempos.NAMES.filter(func(n): return not taken.has(n))
 	if names.is_empty():
@@ -288,12 +360,18 @@ static func generate(seed_value: int, level: int, class_id: StringName = &"", ta
 	t.trait_id = traits[rng.randi_range(0, traits.size() - 1)]
 	var td := t.class_def()
 	t.skills = [td.signature]
-	var pool: Array = (td.skills as Array).filter(func(s): return s != td.signature)
-	var extra := 2 if rng.randf() < 0.45 else 1
-	for i in extra:
+	var pool := DataTempos.rollable_skills(t.class_id, t.grade)
+	var span: Array = DataTempos.grade_def(t.grade).extra
+	var extra := (2 if rng.randf() < 0.45 else 1) if t.grade == 1 else rng.randi_range(int(span[0]), int(span[1]))
+	for i in mini(extra, pool.size()):
+		if pool.is_empty():
+			break
 		var s: StringName = pool[rng.randi_range(0, pool.size() - 1)]
 		pool.erase(s)
 		t.skills.append(s)
+		# a spirit knows one mend at most
+		if DataTempos.is_heal(s):
+			pool = pool.filter(func(x): return not DataTempos.is_heal(x))
 	t.origin = DataTempos.ORIGINS[rng.randi_range(0, DataTempos.ORIGINS.size() - 1)]
 	var base: Color = td.tint
 	t.tint = Color.from_hsv(fposmod(base.h + rng.randf_range(-0.05, 0.05), 1.0), clampf(base.s * rng.randf_range(0.8, 1.1), 0.0, 1.0),
@@ -306,7 +384,23 @@ static func starter_kit(class_id: StringName) -> Array:
 	match class_id:
 		&"archer": return [&"hunters_bow"]
 		&"thief": return [&"rondel_dagger", &"rondel_dagger"]
+		&"mystic": return [&"ashwood_staff"]
 	return [&"iron_longsword"]
+
+## Off-hand gear a class arrives with besides its weapons (a Warden's shield).
+static func starter_offhand(class_id: StringName) -> Array:
+	return [&"warden_kite_shield"] if class_id == &"warden" else []
+
+## Give a freshly bound spirit its uid and starting gear, and add it to the hero's Tempos.
+static func _bind_new(hero: HeroData, t: TempoData, kit: Array) -> void:
+	hero.tempo_serial += 1
+	t.uid = hero.tempo_serial
+	for bid in kit:
+		var it := DB.make_item(bid, BH.Rarity.BEGINNER, 1, hash("%s%d" % [bid, t.uid]))
+		if it:
+			var slot := auto_slot(t, it)
+			t.equipment.equip(it, slot, hero.progress.level, NO_ATTR)
+	hero.tempos.append(t)
 
 static func hire_error(hero: HeroData, index: int) -> String:
 	var offers: Array = hero.tempo_roster.get("offers", [])
@@ -327,22 +421,81 @@ static func hire(hero: HeroData, index: int) -> TempoData:
 	var t := TempoData.from_dict(d)
 	hero.inventory.gold -= t.price
 	hero.inventory.changed.emit()
-	hero.tempo_serial += 1
-	t.uid = hero.tempo_serial
-	for bid in starter_kit(t.class_id):
-		var it := DB.make_item(bid, BH.Rarity.BEGINNER, 1, hash("%s%d" % [bid, t.uid]))
-		if it:
-			var slot := auto_slot(t, it)
-			t.equipment.equip(it, slot, hero.progress.level, NO_ATTR)
-	hero.tempos.append(t)
+	_bind_new(hero, t, starter_kit(t.class_id) + starter_offhand(t.class_id))
 	# a new spirit answers in its place
 	var serial := int(hero.tempo_roster.get("serial", 0)) + 1
 	var taken := hero.tempos.map(func(x): return x.tempo_name)
 	for o in hero.tempo_roster.offers:
 		taken.append(String(o.get("name", "")))
-	hero.tempo_roster.offers[index] = generate(hash("%s/%d" % [hero.hero_name, serial]), hero.progress.level, t.class_id, taken).to_dict()
+	hero.tempo_roster.offers[index] = generate(hash("%s/%d" % [hero.hero_name, serial]), hero.progress.level, t.class_id, taken,
+		int(hero.tempo_roster.get("grade", t.grade))).to_dict()
 	hero.tempo_roster["serial"] = serial
 	Events.tempo_changed.emit(t.uid)
+	return t
+
+# ---- Renowned spirits and the starter ---------------------------------------------------------------------------
+
+## A renowned spirit as it waits at the shrine (uid 0 until bound).
+static func legend_data(id: StringName) -> TempoData:
+	var lg := DataTempos.legend(id)
+	if lg.is_empty():
+		return null
+	var t := TempoData.new()
+	t.legend_id = id
+	t.tempo_name = String(lg.name)
+	t.class_id = lg["class"]
+	t.trait_id = lg.trait
+	t.skills = (lg.skills as Array).duplicate()
+	t.origin = String(lg.origin)
+	t.tint = lg.tint
+	t.grade = DataTempos.max_grade()
+	t.price = int(lg.price)
+	return t
+
+static func legend_bound(hero: HeroData, id: StringName) -> bool:
+	return hero.tempos.any(func(t): return t.legend_id == id)
+
+## Why a renowned spirit cannot be bound right now ("" = it can).
+static func legend_error(hero: HeroData, id: StringName) -> String:
+	var lg := DataTempos.legend(id)
+	if lg.is_empty():
+		return "No such spirit"
+	if legend_bound(hero, id):
+		return "%s already walks with you" % lg.name
+	if hero.progress.level < int(lg.level):
+		return "Answers only a hero of level %d" % int(lg.level)
+	if bound_count(hero) >= DataTempos.MAX_ACTIVE:
+		return "You can carry only %d Tempos. Release one first." % DataTempos.MAX_ACTIVE
+	if hero.inventory.gold < int(lg.price):
+		return "Not enough gold (%d needed)" % int(lg.price)
+	return ""
+
+## Bind a renowned spirit: pay its price; it arrives with its own ghost weapon (and its kit).
+static func hire_legend(hero: HeroData, id: StringName) -> TempoData:
+	if legend_error(hero, id) != "":
+		return null
+	var t := legend_data(id)
+	hero.inventory.gold -= t.price
+	hero.inventory.changed.emit()
+	_bind_new(hero, t, DataTempos.legend(id).get("kit", []))
+	Events.tempo_changed.emit(t.uid)
+	return t
+
+## Every new hero starts with Tobren (DataTempos.STARTER), bound for free. Does nothing if the hero has any Tempo.
+static func grant_starter(hero: HeroData) -> TempoData:
+	if hero == null or not hero.tempos.is_empty():
+		return null
+	var st := DataTempos.STARTER
+	var t := TempoData.new()
+	t.tempo_name = String(st.name)
+	t.class_id = st["class"]
+	t.trait_id = st.trait
+	t.skills = (st.skills as Array).duplicate()
+	t.origin = String(st.origin)
+	t.tint = st.tint
+	t.grade = 1
+	t.price = 0
+	_bind_new(hero, t, starter_kit(t.class_id))
 	return t
 
 static func revive_error(hero: HeroData, t: TempoData) -> String:

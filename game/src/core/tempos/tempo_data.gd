@@ -18,6 +18,8 @@ var fallen := false
 var hp_frac := 1.0
 var mana_frac := 1.0
 var kills := 0
+var grade := 1                         # spirit grade at binding (DataTempos.GRADES); renowned spirits ignore it
+var legend_id: StringName = &""        # a renowned spirit (DataTempos.LEGENDS), else &""
 
 func _init() -> void:
 	equipment.changed.connect(_on_equipment)
@@ -34,6 +36,26 @@ func trait_def() -> Dictionary:
 func class_name_text() -> String:
 	return String(class_def().get("name", "Tempo"))
 
+func is_legend() -> bool:
+	return legend_id != &""
+
+func legend_def() -> Dictionary:
+	return DataTempos.legend(legend_id)
+
+## Share of its hero's strength this spirit carries (grade 1: half; renowned: three quarters).
+func mirror() -> float:
+	return float(DataTempos.RENOWNED.mirror) if is_legend() else float(DataTempos.grade_def(grade).mirror)
+
+func grade_name() -> String:
+	return String(DataTempos.RENOWNED.name) if is_legend() else String(DataTempos.grade_def(grade).name)
+
+func grade_color() -> Color:
+	return DataTempos.RENOWNED.color if is_legend() else DataTempos.grade_def(grade).color
+
+## "Hollan Greywall, the Unbroken" for renowned spirits, else the plain name.
+func full_name() -> String:
+	return "%s, %s" % [tempo_name, legend_def().title] if is_legend() else tempo_name
+
 func has_heal() -> bool:
 	for s in skills:
 		if DataTempos.is_heal(s):
@@ -43,7 +65,8 @@ func has_heal() -> bool:
 func to_dict() -> Dictionary:
 	return {"uid": uid, "name": tempo_name, "class": String(class_id), "trait": String(trait_id),
 		"skills": skills.map(func(s): return String(s)), "origin": origin, "tint": [tint.r, tint.g, tint.b], "price": price,
-		"equipment": equipment.to_dict(), "fallen": fallen, "hp": hp_frac, "mana": mana_frac, "kills": kills}
+		"equipment": equipment.to_dict(), "fallen": fallen, "hp": hp_frac, "mana": mana_frac, "kills": kills,
+		"grade": grade, "legend": String(legend_id)}
 
 static func from_dict(d: Dictionary) -> TempoData:
 	var t := TempoData.new()
@@ -68,4 +91,8 @@ static func from_dict(d: Dictionary) -> TempoData:
 	t.hp_frac = clampf(float(d.get("hp", 1.0)), 0.0, 1.0)
 	t.mana_frac = clampf(float(d.get("mana", 1.0)), 0.0, 1.0)
 	t.kills = int(d.get("kills", 0))
+	# absent in bh-004 saves: a grade-1 nameless spirit
+	t.grade = clampi(int(d.get("grade", 1)), 1, DataTempos.max_grade())
+	var lg := StringName(d.get("legend", ""))
+	t.legend_id = lg if DataTempos.LEGENDS.has(lg) else &""
 	return t

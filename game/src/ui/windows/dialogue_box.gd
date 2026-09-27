@@ -7,7 +7,7 @@ extends Control
 const CPS := 55.0             # characters per second
 ## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
-	&"tempo_revive"]
+	&"tempo_revive", &"tempo_renowned", &"field_guide"]
 
 var session: DialogueSession
 var npc: Npc
@@ -81,13 +81,21 @@ func _ready() -> void:
 
 func start(p_npc: Npc) -> void:
 	npc = p_npc
-	session = DialogueSession.start(npc.def, Game.hero)
+	_open(npc.def)
+
+## A conversation with no one standing in the world (the new-game guide).
+func start_def(def: NpcDef) -> void:
+	npc = null
+	_open(def)
+
+func _open(def: NpcDef) -> void:
+	session = DialogueSession.start(def, Game.hero)
 	session.line_shown.connect(_on_line)
 	session.choices_shown.connect(_on_choices)
 	session.request.connect(_on_request)
 	session.ended.connect(_on_ended)
-	_name.text = npc.def.display_name
-	_title.text = npc.def.title
+	_name.text = def.display_name
+	_title.text = def.title
 	visible = true
 	Game.ui_blocking = true
 	_panel.modulate.a = 0.0
@@ -95,8 +103,10 @@ func start(p_npc: Npc) -> void:
 	Audio.play_ui(&"ui_open")
 	session.begin()
 
-func _on_line(_speaker: String, portrait: String, bb: String, index: int, count: int) -> void:
+func _on_line(speaker: String, portrait: String, bb: String, index: int, count: int) -> void:
 	_portrait.texture = UIArt.tex(portrait) if portrait != "" else null
+	if speaker != "":
+		_name.text = speaker
 	for c in _choices.get_children():
 		c.queue_free()
 	_text.text = bb
@@ -200,14 +210,19 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				&"promote": _promote()
 				&"join_swordfin": _join(&"swordfin")
 				&"join_lantern": _join(&"lantern")
-				&"tempo_hire", &"tempo_revive": _open_tempo_caller.call_deferred(StringName(arg))
+				&"tempo_hire", &"tempo_revive", &"tempo_renowned": _open_tempo_caller.call_deferred(StringName(arg))
+				&"field_guide": _open_field_guide.call_deferred()
+
+func _open_field_guide() -> void:
+	close()
+	Game.ui_root.open(&"guide")
 
 ## Veyra Ashgrave's services open the Tempo-Caller window (binding spirits, calling fallen ones back).
 func _open_tempo_caller(which: StringName) -> void:
 	close()
 	var w := Game.ui_root.window(&"tempo_caller") as TempoCallerWindow
 	if w:
-		w.open_on(&"fallen" if which == &"tempo_revive" else &"roster")
+		w.open_on({&"tempo_revive": &"fallen", &"tempo_renowned": &"renowned"}.get(which, &"roster"))
 
 func _open_shop_after_end(shop_id: StringName) -> void:
 	var w := Game.ui_root.window(&"shop") as ShopWindow

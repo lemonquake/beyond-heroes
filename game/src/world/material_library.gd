@@ -181,7 +181,8 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 		if imported.emission_enabled:
 			m.emission_enabled = true
 			m.emission = imported.emission
-			m.emission_energy_multiplier = clampf(imported.emission_energy_multiplier, 1.0, 4.0)
+			# item models (bh-006, "__it_" palettes) carry deliberately soft glows (potion liquids, gems): no 1.0 floor
+			m.emission_energy_multiplier = clampf(imported.emission_energy_multiplier, 0.0 if "__it_" in nm else 1.0, 4.0)
 	elif not d.is_empty():
 		m.albedo_color = d[0]
 	m.rim_enabled = true

@@ -32,6 +32,10 @@ static var debug_enabled := false
 
 static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageResult:
 	var r := DamageResult.new()
+	r.skill = req.tags.get(&"skill", &"")
+	r.skill_name = req.label if r.skill != &"" else ""
+	r.heavy = req.heavy
+	r.finisher = req.tags.get(&"finisher", false)
 	var atk := req.attacker
 	var tgt := req.target
 	var atk_level := atk.level if atk != null else tgt.level

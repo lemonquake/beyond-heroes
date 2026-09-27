@@ -47,6 +47,8 @@ var rested_until := 0.0
 var tempos: Array = []
 var tempo_roster := {}
 var tempo_serial := 0
+## Open Town Portal (TownPortal): {"map": map id, "pos": [x, y, z], "yaw": float} or empty. Cleared on death / dispel.
+var town_portal := {}
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -133,8 +135,13 @@ func rested_seconds_left() -> float:
 ## Derived stats. `runtime_mods` are temporary (buffs/debuffs/class resource states) supplied by the actor.
 func compute_stats(runtime_mods: Array = []) -> DerivedStats:
 	var mods := persistent_modifiers()
+	mods.append(StatModifier.flat(&"carry_weight", carried_weight()))
 	mods.append_array(runtime_mods)
 	return StatCalculator.compute(cls, progress.level, progress.base_attributes(), mods, equipment.loadout())
+
+## Weight of the worn equipment plus the bag.
+func carried_weight() -> float:
+	return equipment.weight() + inventory.weight()
 
 # ---- Skills -----------------------------------------------------------------------------------------------
 
@@ -315,6 +322,7 @@ func to_dict() -> Dictionary:
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
 		"guild": String(guild), "tier": tier, "rested_until": rested_until,
 		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
+		"town_portal": town_portal.duplicate(true),
 	}
 
 func _dialogue_out() -> Dictionary:
@@ -366,6 +374,9 @@ static func from_dict(d: Dictionary) -> HeroData:
 	var fl: Dictionary = d.get("flags", {})
 	for k in fl:
 		h.world_flags[StringName(k)] = fl[k]
+	var tp = d.get("town_portal", {})
+	if tp is Dictionary and tp.has("map") and tp.get("pos") is Array and (tp.pos as Array).size() == 3:
+		h.town_portal = {"map": String(tp.map), "pos": (tp.pos as Array).map(func(v): return float(v)), "yaw": float(tp.get("yaw", 0.0))}
 	h.current_map = StringName(d.get("map", "sanctuary"))
 	h.current_spawn = StringName(d.get("spawn", "start"))
 	h.play_time = float(d.get("play_time", 0.0))
@@ -396,7 +407,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 	if roster is Dictionary and not (roster as Dictionary).is_empty():
 		# normalised through TempoData so a JSON round trip (ints read back as floats) stays exact
 		h.tempo_roster = {"offers": (roster.get("offers", []) as Array).map(func(o): return TempoData.from_dict(o).to_dict()),
-			"refresh_at": float(roster.get("refresh_at", 0.0)), "serial": int(roster.get("serial", 0))}
+			"refresh_at": float(roster.get("refresh_at", 0.0)), "serial": int(roster.get("serial", 0)),
+			"grade": clampi(int(roster.get("grade", 1)), 1, DataTempos.max_grade())}
 	h.tempo_serial = int(d.get("tempo_serial", 0))
 	for t in h.tempos:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)

@@ -150,7 +150,7 @@ func dress(hero: HeroData) -> void:
 		visual.attach_weapon(&"main", _weapon_model(main, lo.main_type), lo.main_type.grip_offset)
 	if sub != null:
 		if sub.base.category == &"shield":
-			visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+			visual.attach_weapon(&"off", sub.base.model_path())
 		elif lo.off_type != null:
 			visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type), lo.off_type.grip_offset)
 	var stance: StringName = &"idle_1h"
@@ -187,7 +187,7 @@ func show_tempo(t: TempoData, level := 1) -> void:
 	if lo.main_type != null:
 		visual.attach_weapon(&"main", _weapon_model(main, lo.main_type) if main else lo.main_type.model, lo.main_type.grip_offset)
 	if sub != null and sub.base.category == &"shield":
-		visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+		visual.attach_weapon(&"off", sub.base.model_path())
 	elif lo.off_type != null:
 		visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type) if sub else lo.off_type.model, lo.off_type.grip_offset)
 	var stance: StringName = &"idle_dual" if lo.dual_wield else (&"idle_shield" if lo.has_shield else (lo.main_type.idle_anim if lo.main_type else &"idle"))
@@ -195,11 +195,7 @@ func show_tempo(t: TempoData, level := 1) -> void:
 	visual.set_opacity(0.9)
 
 func _weapon_model(item: ItemInstance, wt: WeaponTypeDef) -> String:
-	if item.rarity == BH.Rarity.AETHER:
-		var ae := "res://assets/weapons/%s_aether.glb" % wt.id
-		if ResourceLoader.exists(ae):
-			return ae
-	return wt.model
+	return Player.weapon_model_for(item, wt)
 
 func _starting_equipment() -> Equipment:
 	var eq := Equipment.new()

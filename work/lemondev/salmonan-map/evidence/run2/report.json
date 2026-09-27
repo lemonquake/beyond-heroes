@@ -1,0 +1,127 @@
+{
+  "cove_plan": {
+    "est_s": 42.7,
+    "ok": true,
+    "reason": "",
+    "steps": [
+      "Head along Field Road to Lantern Fields",
+      "Follow Coast Road to Tideglass Cove"
+    ],
+    "walk_m": 227.1
+  },
+  "fields_plan": {
+    "est_s": 32.7,
+    "ok": true,
+    "reason": "",
+    "steps": [
+      "Leave Malasugue through the South Gate (Gate Street)",
+      "Follow Field Road to Lantern Fields"
+    ],
+    "walk_m": 173.9
+  },
+  "hald_has_road_node": true,
+  "legs": [
+    {
+      "arrived": true,
+      "dest": "wr_fields",
+      "end": "(29.7, -4.0, 107.7)",
+      "maps": [
+        "sanctuary",
+        "westreach"
+      ],
+      "replans": 2,
+      "seconds": 32.3,
+      "walked_m": 171.1
+    },
+    {
+      "arrived": true,
+      "dest": "wr_cove",
+      "end": "(-173.0, -10.6, 94.7)",
+      "maps": [
+        "westreach"
+      ],
+      "replans": 3,
+      "seconds": 40.3,
+      "walked_m": 214.4
+    }
+  ],
+  "locked_plan": {
+    "ok": true,
+    "reason": ""
+  },
+  "map_closed_by_M": true,
+  "shots": [
+    "01-town-start",
+    "02-map-gate-barred",
+    "03-south-gate-open",
+    "04-map-search",
+    "05-map-directions-fields",
+    "06-hud-route-in-town",
+    "07-westreach-gate-fork",
+    "08-field-road",
+    "09-arrived-fields",
+    "10-coast-road",
+    "11-coast-road-late",
+    "12-tideglass-cove",
+    "13-map-local-westreach",
+    "14-map-underground",
+    "15-map-waypoints-to-village",
+    "16-after-wrong-turn"
+  ],
+  "summary": {
+    "cove_walk_m": 227.1,
+    "elapsed_s": 102.237,
+    "fields_walk_m": 173.9,
+    "legs": [
+      {
+        "arrived": true,
+        "dest": "wr_fields",
+        "end": "(29.7, -4.0, 107.7)",
+        "maps": [
+          "sanctuary",
+          "westreach"
+        ],
+        "replans": 2,
+        "seconds": 32.3,
+        "walked_m": 171.1
+      },
+      {
+        "arrived": true,
+        "dest": "wr_cove",
+        "end": "(-173.0, -10.6, 94.7)",
+        "maps": [
+          "westreach"
+        ],
+        "replans": 3,
+        "seconds": 40.3,
+        "walked_m": 214.4
+      }
+    ],
+    "shots": 16
+  },
+  "temple_plan": {
+    "ok": false,
+    "reason": "The way to the temple opens once you find the ritual chamber in the Catacombs."
+  },
+  "unpaused_after_close": true,
+  "village_waypoints_plan": {
+    "est_s": 36.8,
+    "ok": true,
+    "reason": "",
+    "steps": [
+      "Head along Coast Road to Tideglass Cove",
+      "Enter Malasugue through the South Gate (Cove Steps)",
+      "Follow Gate Street to Malasugue Town",
+      "Follow Terrace Stair to Sanctuary Terrace",
+      "At Sanctuary Terrace, use the waypoint to Ruined Forest",
+      "Follow Village Road to Burnt Village"
+    ],
+    "walk_m": 195.7
+  },
+  "wrong_turn": {
+    "first_step_after": "Head along Coast Road to Tideglass Cove",
+    "first_step_before": "Head along Coast Road to Tideglass Cove",
+    "remaining_m": 240.965402126312,
+    "replans_during": 0
+  }
+}

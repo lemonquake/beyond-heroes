@@ -30,6 +30,23 @@ static func throw(world: Node, kind: String, p_from: Vector3, p_to: Vector3, p_f
 	l.global_position = p_from
 	return l
 
+## Throw any node (a consumable's own model: Firebomb, Frost Flask) along the same arc, trailing `trail` coloured motes.
+static func throw_node(world: Node, p_body: Node3D, p_from: Vector3, p_to: Vector3, p_flight: float, trail := Color(1, 1, 1, 0.8)) -> Lob:
+	if world == null or not is_instance_valid(world):
+		return null
+	var l := Lob.new()
+	l.from = p_from
+	l.to = p_to
+	l.flight = maxf(p_flight, 0.2)
+	l.height = clampf(p_from.distance_to(p_to) * 0.35, 1.2, 4.0)
+	l.body = p_body if p_body else Node3D.new()
+	l.add_child(l.body)
+	l.spin = Vector3(randf_range(-9, 9), randf_range(-5, 5), randf_range(-9, 9))
+	l.add_child(VFXLib.particles(Color(trail.r, trail.g, trail.b, 0.85), 20, 0.4, false, 0.22, 0.3, 30.0, Vector3(0, 0.6, 0), 0.05))
+	world.add_child(l)
+	l.global_position = p_from
+	return l
+
 func _process(delta: float) -> void:
 	t += delta
 	var u := clampf(t / flight, 0.0, 1.0)

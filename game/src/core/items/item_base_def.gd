@@ -21,7 +21,9 @@ extends Resource
 @export var stack_max := 1
 @export var value := 10
 @export var weight_class: StringName = &"" # heavy / light / cloth (flavor + class affinity)
-@export var model := ""                   # weapon/shield model path
+@export var model := ""                   # 3D model (res path); "" = res://assets/items/<id>.glb, then the type fallback
+@export var weight := -1.0                # carried weight per unit (-1 = category default, see DataItems.default_weight)
+@export var attacks_per_second := 0.0     # weapons: this weapon's own attack rate (0 = the weapon type's rate)
 @export var drop_weight := 100
 @export_multiline var flavor := ""
 @export var consumable_effect := {}       # {"heal": 0.35} etc.
@@ -34,6 +36,8 @@ extends Resource
 @export var class_hint: StringName = &""  # knight / mage preference (drop weighting, shop stock)
 @export var sellable := true
 @export_multiline var lore := ""
+
+const ITEM_MODEL := "res://assets/items/%s.glb"
 
 func is_weapon() -> bool:
 	return category == &"weapon"
@@ -66,3 +70,25 @@ func icon_path() -> String:
 			&"consumable": fb = "res://assets/ui/icons/items/potion_health.svg"
 			_: fb = "res://assets/ui/icons/items/mat_iron_shard.svg"
 	return fb
+
+## The 3D model of this base: its own model (assets/items/<id>.glb), else the weapon-type / shield model, else "".
+func model_path() -> String:
+	if model != "" and ResourceLoader.exists(model):
+		return model
+	var own := ITEM_MODEL % id
+	if ResourceLoader.exists(own):
+		return own
+	if is_weapon():
+		var wt := DB.weapon_type(weapon_type)
+		if wt and ResourceLoader.exists(wt.model):
+			return wt.model
+	elif category == &"shield":
+		return "res://assets/weapons/shield.glb"
+	return ""
+
+## Attacks per second at 1.0 attack speed: the weapon's own rate, else its type's.
+func weapon_aps() -> float:
+	if attacks_per_second > 0.0:
+		return attacks_per_second
+	var wt := DB.weapon_type(weapon_type) if is_weapon() else null
+	return wt.attacks_per_second if wt else 1.4

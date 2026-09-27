@@ -83,7 +83,7 @@ func _tip(uid: int) -> Control:
 	if t == null:
 		return null
 	var skills: Array = t.skills.map(func(s): return String(DataTempos.skill(s).get("name", s)))
-	return Tips.text("%s — %s (%s)\nSkills: %s\n%s" % [t.tempo_name, t.class_name_text(), t.trait_def().get("name", ""), ", ".join(skills),
+	return Tips.text("%s — %s, %s spirit (%s)\nSkills: %s\n%s" % [t.full_name(), t.class_name_text(), t.grade_name(), t.trait_def().get("name", ""), ", ".join(skills),
 		"Fallen. Veyra Ashgrave at the Shrine of the Fallen can call it back." if t.fallen else "Click to open the Tempo window (%s)." % Settings.binding_text(&"tempos")])
 
 func _process(delta: float) -> void:

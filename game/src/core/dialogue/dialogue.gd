@@ -20,6 +20,8 @@ extends RefCounted
 ##   (performed by the NPC service layer after the player confirms the price)
 ## Text placeholders filled from the hero: {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
 ##   {promo_fee} {promo_level} {promo_deed} {promo_deed_text} {join_fee} {transfer_fee}
+##   and {key:<input action>} — the key currently bound to that action ("I", "Space", "LMB"), so tutorials never quote
+##   a stale key after the player rebinds it.
 ## Branch node: {"branch": [[conditions, node_id], ...]} jumps to the first matching node without showing anything.
 ##
 ## Text may mark important words with **double asterisks**; the UI highlights them.
@@ -182,6 +184,9 @@ func run_actions(actions: Array, hero: HeroData) -> Dictionary:
 
 ## Fill {placeholders} with live values (prices, tier) so dialogue never quotes a stale fee.
 static func fill(text: String, hero: HeroData) -> String:
+	if not "{" in text:
+		return text
+	text = fill_keys(text)
 	if hero == null or not "{" in text:
 		return text
 	var p := GuildRules.next_promotion(hero)
@@ -198,6 +203,19 @@ static func fill(text: String, hero: HeroData) -> String:
 	}
 	for k in vals:
 		text = text.replace("{%s}" % k, vals[k])
+	return text
+
+## Replace every {key:<action>} with the key bound to that input action (or the action name if it has none).
+static func fill_keys(text: String) -> String:
+	var at := text.find("{key:")
+	while at >= 0:
+		var close := text.find("}", at)
+		if close < 0:
+			break
+		var action := text.substr(at + 5, close - at - 5)
+		var k := Settings.binding_text(StringName(action))
+		text = text.substr(0, at) + (k if k != "" else action.capitalize()) + text.substr(close + 1)
+		at = text.find("{key:", at)
 	return text
 
 ## Convert **important words** to BBCode highlight.

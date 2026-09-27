@@ -121,7 +121,6 @@ func test_sets_and_bonuses() -> void:
 	for a in BH.ATTRIBUTES:
 		h.progress.allocated[a] = 30
 	h.set_tier(2)   # Master-rarity set pieces need a Class D hero (tier gating, docs/LORE.md §5)
-	var base_stats := h.compute_stats()
 	var pieces := []
 	for id in DB.item_set(&"aether_guardian").pieces:
 		var it := DB.make_item(id, BH.Rarity.MASTER, 12, hash(String(id)))
@@ -129,6 +128,7 @@ func test_sets_and_bonuses() -> void:
 		eq(it.display_name(), it.base.display_name, "set pieces keep their set name")
 		pieces.append(it)
 		h.inventory.add(it)
+	var base_stats := h.compute_stats()   # pieces carried in the bag: same weight as when worn
 	h.equip_from_inventory(pieces[0])
 	eq(h.equipment.set_counts().get(&"aether_guardian", 0), 1, "one piece counted")
 	var one := h.compute_stats()

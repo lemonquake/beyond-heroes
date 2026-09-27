@@ -48,6 +48,7 @@ signal tempo_fallen(tempo: Node)
 signal tempo_spawned(tempo: Node)
 # UI
 signal notify(text: String, kind: StringName)
+signal town_portal_changed                       # a Town Portal opened, was dispelled or expired
 signal ui_toggle(panel: StringName)
 signal interact_prompt(text: String)
 signal tooltip_request(content: Variant, anchor: Control)

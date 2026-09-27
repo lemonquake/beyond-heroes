@@ -11,7 +11,9 @@ const RESOLUTIONS := [Vector2i(1280, 720), Vector2i(1600, 900), Vector2i(1920, 1
 const WINDOW_MODES := ["Windowed", "Borderless", "Fullscreen"]
 const QUALITY_NAMES := ["Low", "Medium", "High", "Ultra"]
 const AA_NAMES := ["Off", "FXAA", "MSAA 2x", "MSAA 4x", "TAA"]
-const AUTO_LOOT_NAMES := ["Off", "Gold only", "Gold + Common", "Gold + Basic", "Gold + Advanced"]
+## Auto-loot filter (the on/off switch is `auto_loot_enabled`, the HUD checkbox beside the HP orb). Gold is always
+## collected on contact.
+const AUTO_LOOT_NAMES := ["All items", "Common and better", "Basic and better", "Advanced and better", "Elite and better"]
 
 # ---- VIDEO
 var resolution := 2                 # index into RESOLUTIONS (windowed size)
@@ -39,7 +41,8 @@ var attack_hold_repeat := true      # holding attack keeps the combo going
 var damage_numbers := true
 var blood := true                   # blood sprays, pools and gore on hits and corpses
 var screen_shake := 1.0
-var auto_loot_mode := 1             # AUTO_LOOT_NAMES
+var auto_loot_enabled := false      # HUD checkbox: walk over matching drops to pick them up
+var auto_loot_mode := 0             # AUTO_LOOT_NAMES (which drops auto-loot takes)
 var show_enemy_bars := true
 var loot_labels_always := true      # false: only while Alt is held
 var camera_zoom := 1.0
@@ -50,7 +53,7 @@ var show_minimap := true
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap"]
+	"auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap"]
 
 # Derived switches read by the world builders.
 var fog: bool:
@@ -60,10 +63,10 @@ var glow: bool:
 var ssao: bool:
 	get: return effects_quality >= 2
 var auto_loot: bool:
-	get: return auto_loot_mode > 0
-## Items at or above this rarity are picked up automatically (gold is always taken while auto loot is on).
+	get: return auto_loot_enabled
+## Items at or above this rarity are picked up automatically while auto-loot is on.
 var auto_loot_rarity: int:
-	get: return [BH.RARITY_COUNT, BH.RARITY_COUNT, BH.Rarity.COMMON, BH.Rarity.BASIC, BH.Rarity.ADVANCED][clampi(auto_loot_mode, 0, 4)]
+	get: return [BH.Rarity.BEGINNER, BH.Rarity.COMMON, BH.Rarity.BASIC, BH.Rarity.ADVANCED, BH.Rarity.ELITE][clampi(auto_loot_mode, 0, 4)]
 var fullscreen: bool:
 	get: return window_mode > 0
 const FPS_LIMITS := [0, 30, 60, 120, 144]
@@ -139,7 +142,7 @@ const GROUPS := {
 	"video": ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality", "anti_aliasing", "render_scale"],
 	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume"],
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat"],
-	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
+	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
 		"reduced_motion", "ui_scale", "show_minimap"],
 }
 

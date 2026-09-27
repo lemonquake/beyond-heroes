@@ -90,6 +90,14 @@ func remove_item(item: ItemInstance) -> bool:
 	changed.emit()
 	return true
 
+## Total carried weight of everything in the bag (stacks count every unit). Gold weighs nothing.
+func weight() -> float:
+	var w := 0.0
+	for c in cells:
+		if c != null:
+			w += (c as ItemInstance).weight()
+	return w
+
 func count_of(base_id: StringName) -> int:
 	var n := 0
 	for c in cells:

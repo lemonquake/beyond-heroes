@@ -81,6 +81,10 @@ func _local(stat: StringName) -> float:
 			t += float(a.value)
 	return t
 
+## Carried weight of this stack (unit weight x count).
+func weight() -> float:
+	return maxf(0.0, base.weight) * float(maxi(count, 1))
+
 func damage_range() -> Vector2:
 	var q := 1.0 + quality
 	return Vector2(base.damage_min, base.damage_max) * q * (1.0 + _local(&"local_phys"))

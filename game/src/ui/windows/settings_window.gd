@@ -11,7 +11,7 @@ const ACTION_NAMES := [
 	["skill_1", "Skill 1"], ["skill_2", "Skill 2"], ["skill_3", "Skill 3"], ["skill_4", "Skill 4"], ["skill_5", "Skill 5"],
 	["skill_6", "Skill 6"], ["potion_health", "Health Potion"], ["potion_mana", "Mana Potion"], ["interact", "Interact"],
 	["attack_in_place", "Attack in Place"], ["inventory", "Inventory"], ["character", "Character"], ["skills", "Skills"],
-	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
+	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["guide", "Field Guide"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
 ]
 
 var _tabs: TabContainer
@@ -164,7 +164,8 @@ func _gameplay(v: VBoxContainer) -> void:
 	_check(v, "Enemy Health Bars", "show_enemy_bars")
 	_check(v, "Reduced Motion", "reduced_motion", "Removes screen shake and softens flashes.")
 	v.add_child(section("Loot"))
-	_option(v, "Auto Loot", "auto_loot_mode", Settings.AUTO_LOOT_NAMES, "Walking near a drop picks it up automatically when it matches.")
+	_check(v, "Auto Loot", "auto_loot_enabled", "Walking near a drop picks it up automatically (also the checkbox beside the HP orb).")
+	_option(v, "Auto Loot Picks Up", "auto_loot_mode", Settings.AUTO_LOOT_NAMES, "Which drops Auto Loot takes. Gold is always collected on contact.")
 	_check(v, "Always Show Loot Labels", "loot_labels_always", "Off: labels appear only while the Show Loot key is held.")
 	v.add_child(section("Interface"))
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)

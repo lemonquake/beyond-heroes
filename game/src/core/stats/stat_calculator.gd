@@ -28,6 +28,12 @@ const CRIT_PER_DEX := 0.0008
 const CRIT_CAP := 0.80
 const CRIT_DAMAGE_BASE := 1.5
 const MOVE_PER_AGI := 0.0025
+const MOVE_PER_STR := 0.002         # Strength carries the load: +0.2% movement speed per point
+const CARRY_BASE := 55.0
+const CARRY_PER_STR := 1.6
+const LOAD_FREE := 0.35             # no slowdown up to 35% load
+const LOAD_SLOW_MAX := 0.30         # ... then up to 30% less movement speed at 100% load
+const OVERBURDEN_SLOW := 0.45       # 100%+ load: 45% less movement speed and no dodging
 const MOVE_MAX_FACTOR := 1.5        # hard cap: 150% of the class base speed
 const MOVE_MIN_FACTOR := 0.35
 const ATK_SPEED_PER_AGI := 0.003
@@ -215,13 +221,31 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	cdl.append_array(agg.lines(&"crit_damage"))
 	d.set_stat(&"crit_damage", cd, cdl)
 
+	# ---- Weight ------------------------------------------------------------------------------------------
+	var carried := maxf(0.0, agg.flat(&"carry_weight"))
+	d.set_stat(&"carry_weight", carried, PackedStringArray(["Worn equipment and everything in the bag"]))
+	var cap_l := PackedStringArray(["Base %d" % roundi(CARRY_BASE), "Strength %d x %.1f" % [STR, CARRY_PER_STR]])
+	cap_l.append_array(agg.lines(&"carry_capacity"))
+	var capacity := maxf(10.0, (CARRY_BASE + STR * CARRY_PER_STR + agg.flat(&"carry_capacity")) * (1.0 + agg.inc(&"carry_capacity")))
+	d.set_stat(&"carry_capacity", capacity, cap_l)
+	var load := carried / capacity
+	d.set_stat(&"load", load, PackedStringArray(["%.1f / %.1f" % [carried, capacity],
+		"Up to %d%%: no slowdown; %d%%: %d%% slower; 100%%+: Overburdened (%d%% slower, cannot dodge)" % [
+			roundi(LOAD_FREE * 100), 100, roundi(LOAD_SLOW_MAX * 100), roundi(OVERBURDEN_SLOW * 100)]]))
+	var load_mult := load_move_mult(load)
+	if load >= 1.0:
+		d.flags[&"overburdened"] = 1.0
+
 	# ---- Speeds -------------------------------------------------------------------------------------------
 	var ms_base := cls.base_move_speed
-	var ms_inc := AGI * MOVE_PER_AGI + agg.inc(&"move_speed")
-	var ms := (ms_base + agg.flat(&"move_speed")) * (1.0 + ms_inc) * agg.more(&"move_speed")
+	var ms_inc := AGI * MOVE_PER_AGI + STR * MOVE_PER_STR + agg.inc(&"move_speed")
+	var ms := (ms_base + agg.flat(&"move_speed")) * (1.0 + ms_inc) * agg.more(&"move_speed") * load_mult
 	var ms_capped := clampf(ms, ms_base * MOVE_MIN_FACTOR, ms_base * MOVE_MAX_FACTOR)
-	var msl := PackedStringArray(["Class base %.2f m/s" % ms_base, "Agility %d x %.2f%% = +%.1f%%" % [AGI, MOVE_PER_AGI * 100.0, AGI * MOVE_PER_AGI * 100.0]])
+	var msl := PackedStringArray(["Class base %.2f m/s" % ms_base, "Agility %d x %.2f%% = +%.1f%%" % [AGI, MOVE_PER_AGI * 100.0, AGI * MOVE_PER_AGI * 100.0],
+		"Strength %d x %.2f%% = +%.1f%%" % [STR, MOVE_PER_STR * 100.0, STR * MOVE_PER_STR * 100.0]])
 	msl.append_array(agg.lines(&"move_speed"))
+	if load_mult < 1.0:
+		msl.append("Load %d%%: %d%% slower%s" % [roundi(load * 100.0), roundi((1.0 - load_mult) * 100.0), "  — Overburdened" if load >= 1.0 else ""])
 	msl.append("Maximum %.2f m/s (%d%% of base)%s" % [ms_base * MOVE_MAX_FACTOR, roundi(MOVE_MAX_FACTOR * 100), "  — capped" if ms > ms_capped else ""])
 	d.set_stat(&"move_speed", ms_capped, msl)
 	d.set_stat(&"move_speed_uncapped", ms)
@@ -281,7 +305,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		_std(d, agg, Elements.dmg_key(e), dterms, -0.9, INF)
 		_std(d, agg, Elements.pen_key(e), [["Elemental Penetration", pen_all]] if pen_all > 0.0 else [], 0.0, 1.0)
 		_std(d, agg, StringName("added_" + String(Elements.key(e))), [], 0.0, INF)
-	for wt in [&"sword", &"greatsword", &"axe", &"spear", &"dagger", &"bow", &"staff", &"wand"]:
+	for wt in [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"club", &"dagger", &"claw", &"knuckles", &"bow", &"staff", &"wand"]:
 		if agg.buckets.has(StringName("dmg_wt_" + String(wt))):
 			_std(d, agg, StringName("dmg_wt_" + String(wt)), [], -0.9, INF)
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",
@@ -325,9 +349,17 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		var rng_off := weapon_range(d, 1)
 		d.set_stat(&"off_min", rng_off.x)
 		d.set_stat(&"off_max", rng_off.y)
-	var aps := (d.loadout.main_type.attacks_per_second if d.loadout.main_type != null else 1.4) * d.get_stat(&"attack_speed")
+	var aps := d.loadout.aps() * d.get_stat(&"attack_speed")
 	d.set_stat(&"attacks_per_second", aps)
 	return d
+
+## Movement multiplier from load (carried / capacity).
+static func load_move_mult(load: float) -> float:
+	if load >= 1.0:
+		return 1.0 - OVERBURDEN_SLOW
+	if load <= LOAD_FREE:
+		return 1.0
+	return 1.0 - LOAD_SLOW_MAX * (load - LOAD_FREE) / (1.0 - LOAD_FREE)
 
 ## Displayed and rolled weapon base range for one hand after flat added physical damage (before % bonuses).
 static func weapon_range(d: DerivedStats, hand: int) -> Vector2:

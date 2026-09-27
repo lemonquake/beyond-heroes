@@ -51,6 +51,13 @@ var _banner_sub: Label
 var _banner_tw: Tween
 var _vignette: TextureRect
 var _dodge: TextureProgressBar
+# beside the HP orb (bh-006): auto-loot switch, carried load, the open Town Portal
+var _side: VBoxContainer
+var _auto_loot: CheckBox
+var _load_bar: ProgressBar
+var _load_label: Label
+var _portal_row: HBoxContainer
+var _portal_label: Label
 var _tick := 0.0
 var _status_sig := ""
 var tempo_frames: TempoFrames
@@ -346,10 +353,117 @@ func _build_bottom() -> void:
 	_dodge.step = 0.01
 	bar.add_child(_dodge)
 	TooltipLayer.attach(_dodge, func() -> Control: return Tips.text("Dodge (%s). Brief invulnerability while rolling." % Settings.binding_text(&"dodge")))
+	_build_side()
 	_mana_orb = HudOrb.new(&"mana", 168.0)
 	_mana_orb.size_flags_vertical = Control.SIZE_SHRINK_END
 	cluster.add_child(_mana_orb)
 	TooltipLayer.attach(_mana_orb, func() -> Control: return Tips.stat(&"max_mana", player.stats, "%d / %d" % [floori(player.mana), roundi(player.max_mana())]) if player else null)
+
+## Beside the HP orb: the Auto-Loot checkbox (always visible), the carried-load meter and the Town Portal chip.
+func _build_side() -> void:
+	_side = VBoxContainer.new()
+	_side.add_theme_constant_override("separation", 6)
+	_side.custom_minimum_size = Vector2(236, 0)
+	_side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_side)
+	var plate := PanelContainer.new()
+	plate.theme_type_variation = &"GlassPanel"
+	_side.add_child(plate)
+	var v := VBoxContainer.new()
+	v.add_theme_constant_override("separation", 4)
+	plate.add_child(v)
+	_auto_loot = CheckBox.new()
+	_auto_loot.text = "Auto-Loot"
+	_auto_loot.focus_mode = Control.FOCUS_NONE
+	_auto_loot.add_theme_font_size_override("font_size", 17)
+	_auto_loot.button_pressed = Settings.auto_loot_enabled
+	_auto_loot.toggled.connect(func(on: bool) -> void:
+		if on != Settings.auto_loot_enabled:
+			Settings.set_value("auto_loot_enabled", on)
+			Events.notify.emit("Auto-Loot %s" % ("on: walk over drops to pick them up (%s)" % Settings.AUTO_LOOT_NAMES[Settings.auto_loot_mode].to_lower() if on else "off"), &"info"))
+	Settings.changed.connect(func() -> void:
+		if is_instance_valid(_auto_loot) and _auto_loot.button_pressed != Settings.auto_loot_enabled:
+			_auto_loot.set_pressed_no_signal(Settings.auto_loot_enabled))
+	TooltipLayer.attach(_auto_loot, func() -> Control: return Tips.text(
+		"Walk over drops to pick them up automatically. Takes: %s (change it in Settings > Gameplay). Gold is always collected. Skips drops that do not fit in the bag or would make you Overburdened." % Settings.AUTO_LOOT_NAMES[Settings.auto_loot_mode].to_lower(), "Auto-Loot"))
+	v.add_child(_auto_loot)
+	var lh := HBoxContainer.new()
+	lh.add_theme_constant_override("separation", 6)
+	v.add_child(lh)
+	var li := UITheme.label("Load", 15, UITheme.TEXT_DIM, UITheme.body_bold())
+	lh.add_child(li)
+	_load_label = UITheme.label("", 15, UITheme.PARCHMENT, UITheme.number_font())
+	_load_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_load_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	lh.add_child(_load_label)
+	_load_bar = ProgressBar.new()
+	_load_bar.show_percentage = false
+	_load_bar.custom_minimum_size = Vector2(170, 9)
+	_load_bar.max_value = 1.0
+	_load_bar.step = 0.001
+	var bg := StyleBoxFlat.new()
+	bg.bg_color = Color(0, 0, 0, 0.55)
+	bg.set_corner_radius_all(3)
+	_load_bar.add_theme_stylebox_override("background", bg)
+	v.add_child(_load_bar)
+	TooltipLayer.attach(lh, func() -> Control: return Tips.stat(&"load", player.stats, "%.1f / %.1f" % [
+		player.stats.get_stat(&"carry_weight"), player.stats.get_stat(&"carry_capacity")]) if player and player.stats else null)
+	TooltipLayer.attach(_load_bar, func() -> Control: return Tips.stat(&"load", player.stats) if player and player.stats else null)
+	_portal_row = HBoxContainer.new()
+	_portal_row.add_theme_constant_override("separation", 6)
+	_portal_row.visible = false
+	v.add_child(_portal_row)
+	_portal_label = UITheme.label("", 14, Color(0.8, 0.65, 1.0), UITheme.body_bold())
+	_portal_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_portal_label.clip_text = true
+	_portal_row.add_child(_portal_label)
+	var dispel := Button.new()
+	dispel.text = "Dispel"
+	dispel.focus_mode = Control.FOCUS_NONE
+	dispel.add_theme_font_size_override("font_size", 14)
+	dispel.pressed.connect(func() -> void: TownPortal.dispel())
+	TooltipLayer.attach(dispel, func() -> Control: return Tips.text("Close your Town Portal (both ends)."))
+	_portal_row.add_child(dispel)
+	TooltipLayer.attach(_portal_label, func() -> Control: return Tips.text(
+		"A Town Portal stands open in %s. Press %s beside it to travel; in Malasugue a return portal waits near the waypoint. It lasts until you die, dispel it, or open another." % [
+			_portal_place(), Settings.binding_text(&"interact")], "Town Portal"))
+
+func _portal_place() -> String:
+	if player == null or player.hero.town_portal.is_empty():
+		return ""
+	var def := DB.map_def(StringName(player.hero.town_portal.get("map", "")))
+	return def.display_name if def else "the wilds"
+
+func _update_side() -> void:
+	if _side == null or _hp_orb == null:
+		return
+	var p := player
+	if p.stats:
+		var load := p.stats.get_stat(&"load")
+		_load_bar.value = clampf(load, 0.0, 1.0)
+		_load_label.text = "%.1f / %.0f" % [p.stats.get_stat(&"carry_weight"), p.stats.get_stat(&"carry_capacity")]
+		var col := Color(0.45, 0.8, 0.4)
+		if load >= 1.0:
+			col = Color(0.95, 0.25, 0.2)
+		elif load > StatCalculator.LOAD_FREE:
+			col = Color(0.95, 0.7, 0.25)
+		var fill := _load_bar.get_theme_stylebox("fill") as StyleBoxFlat
+		if fill == null or not fill.has_meta(&"own"):
+			fill = StyleBoxFlat.new()
+			fill.set_meta(&"own", true)
+			fill.set_corner_radius_all(3)
+			_load_bar.add_theme_stylebox_override("fill", fill)
+		fill.bg_color = col
+		_load_label.add_theme_color_override("font_color", col.lerp(UITheme.PARCHMENT, 0.4) if load < 1.0 else col)
+	if _auto_loot.button_pressed != Settings.auto_loot_enabled:
+		_auto_loot.set_pressed_no_signal(Settings.auto_loot_enabled)
+	var tp := p.hero.town_portal
+	_portal_row.visible = not tp.is_empty()
+	if _portal_row.visible:
+		_portal_label.text = "Portal: %s" % _portal_place()
+	# sit just left of the HP orb, bottoms aligned
+	var r := _hp_orb.get_global_rect()
+	_side.global_position = Vector2(r.position.x - _side.size.x - 10.0, r.end.y - _side.size.y - 6.0)
 
 func _build_center() -> void:
 	_prompt_panel = PanelContainer.new()
@@ -439,6 +553,7 @@ func _process(delta: float) -> void:
 		_refresh_slots()
 		_refresh_statuses()
 		_refresh_objective()
+	_update_side()
 	_update_target(delta)
 	_update_boss()
 
@@ -462,7 +577,7 @@ func _refresh_slots() -> void:
 		b.update_state(cd, total, p.skill_block_reason(b.skill_id), -1, p.mana_cost(b.skill_id))
 	for pb in _potions:
 		var kind: StringName = pb.get_meta(&"potion_kind")
-		var order := [&"greater_health_potion", &"health_potion", &"rejuvenation_elixir"] if kind == &"heal" else [&"greater_mana_potion", &"mana_potion", &"rejuvenation_elixir"]
+		var order: Array = Player.POTION_ORDER[kind]
 		var n := 0
 		var best: StringName = &""
 		for bid in order:

@@ -124,6 +124,14 @@ func set_counts() -> Dictionary:
 		out[it.base.set_id] = int(out.get(it.base.set_id, 0)) + 1
 	return out
 
+## Total carried weight of the equipped items.
+func weight() -> float:
+	var w := 0.0
+	for s in BH.SLOTS:
+		if slots[s] != null:
+			w += (slots[s] as ItemInstance).weight()
+	return w
+
 func equipped_items() -> Array:
 	var out := []
 	for s in BH.SLOTS:
@@ -149,6 +157,7 @@ func loadout() -> WeaponLoadout:
 		lo.main_crit = lo.main_type.crit_chance if lo.main_type != null else 0.05
 		lo.main_element = main.base.element
 		lo.main_elem_share = main.base.element_share
+		lo.main_aps = main.base.weapon_aps()
 	if sub != null:
 		if sub.base.category == &"shield":
 			lo.has_shield = true
@@ -161,6 +170,7 @@ func loadout() -> WeaponLoadout:
 			lo.off_max = r2.y
 			lo.off_element = sub.base.element
 			lo.off_elem_share = sub.base.element_share
+			lo.off_aps = sub.base.weapon_aps()
 			lo.dual_wield = lo.main_type != null and lo.off_type != null and lo.main_type.dual_wieldable and lo.off_type.dual_wieldable
 	return lo
 

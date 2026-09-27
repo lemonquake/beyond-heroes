@@ -24,6 +24,7 @@ var _empty: Label
 var _content: HBoxContainer
 var _name: Label
 var _class_line: Label
+var _strength_head: Control
 var _hp_bar: ArtBar
 var _mp_bar: ArtBar
 var _state: Label
@@ -132,7 +133,8 @@ func _build_sheet() -> Control:
 	_mp_bar = ArtBar.new("hud/bar_frame_target.png", Color(0.25, 0.45, 0.95), 24.0)
 	_mp_bar.custom_minimum_size = Vector2(500, 24)
 	col.add_child(_mp_bar)
-	col.add_child(section("Strength (half of yours, plus its gear)"))
+	_strength_head = section("Strength (half of yours, plus its gear)")
+	col.add_child(_strength_head)
 	var st := inset(Vector2(500, 0))
 	col.add_child(st)
 	_stats_grid = GridContainer.new()
@@ -209,9 +211,11 @@ func refresh() -> void:
 	_stats = TempoRules.compute(t, TempoRules.hero_mirror(hero), lvl, hero.cls)
 	preview.show_tempo(t, lvl)
 	var td := t.class_def()
-	_name.text = t.tempo_name
-	_class_line.text = "%s — %s  ·  %s" % [td.name, td.role, t.trait_def().get("name", "")]
+	_name.text = t.full_name()
+	_class_line.text = "%s — %s  ·  %s  ·  %s spirit (%d%% of your strength)" % [td.name, td.role, t.trait_def().get("name", ""),
+		t.grade_name(), roundi(t.mirror() * 100.0)]
 	_class_line.add_theme_color_override("font_color", td.get("color", UITheme.GOLD))
+	(_strength_head.get_child(0) as Label).text = "Strength (%d%% of yours, plus its gear)" % roundi(t.mirror() * 100.0)
 	for s in equip_slots:
 		var it := t.equipment.get_item(s)
 		(equip_slots[s] as ItemSlot).set_item(it)

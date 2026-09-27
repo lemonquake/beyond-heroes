@@ -2,6 +2,7 @@ extends Node
 ## Boot scene and session flow: Main Menu (live Sanctuary backdrop) -> Hero Selection -> game, or Continue / Load
 ## Game -> game; Main Menu from the pause menu returns here. The in-game interface (UIRoot) exists only during a session.
 ## Quick start for testing: --class=knight|mage [--map=<id>] [--spawn=<id>] [--slot=<n>] [--level=<n>] skips the menus.
+## A quick-started hero gets the starter Tempo like a new game (--starter=0 to skip); --intro=1 also opens the guide.
 
 var world: Node3D
 var ui: UIRoot
@@ -110,4 +111,8 @@ func _quick_start() -> void:
 	Game.hero.difficulty = int(args.get("difficulty", "1"))
 	Game.difficulty = Game.hero.difficulty
 	Game.save_slot = slot
+	if String(args.get("starter", "1")) != "0":
+		TempoRules.grant_starter(Game.hero)
 	await Game._begin_session(StringName(args.get("map", "sanctuary")), StringName(args.get("spawn", "start")))
+	if String(args.get("intro", "0")) == "1":
+		Game.open_intro()

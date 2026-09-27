@@ -2,6 +2,7 @@ class_name DataItems
 ## Item bases, affix pool, faction licenses, powers (mythical / legendary / aether), item sets and named uniques.
 
 const ICON := "res://assets/ui/icons/items/%s.svg"
+const ICON3D := "res://assets/ui/icons/items3d/%s.png"   # icons rendered from the 3D models (bh-006)
 const F := StatModifier.Op.FLAT
 const I := StatModifier.Op.INC
 const M := StatModifier.Op.MORE
@@ -16,6 +17,8 @@ static func _b(id: StringName, name: String, cat: StringName, icon: String, d: D
 		b.set(k, d[k])
 	if b.drop_level <= 1 and b.level_req > 1:
 		b.drop_level = b.level_req
+	if b.weight < 0.0:
+		b.weight = default_weight(b)
 	return b
 
 static func bases() -> Array:
@@ -53,14 +56,29 @@ static func bases() -> Array:
 		[&"sunfire_wand", "Sunfire Wand", &"wand", 18, 13, 24, {&"int": 32}, 3, {"element": Elements.LIGHT, "element_share": 1.0,
 			"implicit": [StatModifier.flat(&"crit_chance", 0.04)]}],
 	]
+	# own attack rate and weight of the original weapons: [attacks per second, weight]
+	var feel := {
+		&"iron_longsword": [1.45, 3.5], &"knights_arming_sword": [1.5, 3.2], &"runed_sword": [1.42, 3.6],
+		&"rusted_claymore": [0.95, 8.0], &"executioner_blade": [0.88, 9.5], &"titan_greatsword": [0.85, 10.5],
+		&"hand_axe": [1.25, 4.0], &"bearded_axe": [1.22, 4.4], &"rune_cleaver": [1.18, 4.8],
+		&"ash_spear": [1.2, 4.5], &"winged_spear": [1.14, 5.2], &"storm_lance": [1.24, 4.9],
+		&"rondel_dagger": [2.0, 1.2], &"shadow_kris": [2.06, 1.1], &"aether_stiletto": [2.12, 0.9],
+		&"hunters_bow": [1.1, 2.4], &"composite_bow": [1.06, 2.8], &"warden_longbow": [1.0, 3.2],
+		&"ashwood_staff": [1.0, 3.4], &"storm_staff": [0.96, 3.8], &"frost_staff": [1.02, 3.6],
+		&"bone_wand": [1.6, 0.9], &"tide_wand": [1.64, 1.0], &"sunfire_wand": [1.58, 1.1],
+	}
 	for w in weapons:
 		var tier: int = w[7]
 		var d := {"weapon_type": w[2], "level_req": w[3], "damage_min": float(w[4]), "damage_max": float(w[5]),
 			"requirements": w[6], "value": 12 + w[3] * 4, "tier": tier,
 			"class_hint": &"mage" if w[2] in [&"staff", &"wand"] else &"knight"}
+		if feel.has(w[0]):
+			d["attacks_per_second"] = feel[w[0]][0]
+			d["weight"] = feel[w[0]][1]
 		d.merge(w[8], true)
 		var icon := String(w[2]) if tier == 1 else "%s_%d" % [w[2], tier]
 		out.append(_b(w[0], w[1], &"weapon", icon, d))
+	_weapon_roster(out)
 	# ---- Shields ----
 	out.append(_b(&"warden_kite_shield", "Warden Kite Shield", &"shield", "shield", {"level_req": 1, "defense": 12.0,
 		"block_chance": 0.25, "block_strength": 0.6, "requirements": {&"str": 12}, "value": 15, "class_hint": &"knight"}))
@@ -92,10 +110,10 @@ static func bases() -> Array:
 		[&"spiked_gauntlet", "Spiked Gauntlet", &"gloves", "gloves_plate_2", 11, 11, &"heavy", {&"str": 24}, [StatModifier.flat(&"added_physical", 3)]],
 		[&"silk_glove", "Silk Glove", &"gloves", "gloves_cloth", 1, 2, &"cloth", {}, [StatModifier.inc(&"cast_speed", 0.03)]],
 		[&"runed_glove", "Runed Glove", &"gloves", "gloves_cloth_2", 11, 6, &"cloth", {&"int": 22}, [StatModifier.inc(&"cast_speed", 0.06)]],
-		[&"iron_sabaton", "Iron Sabaton", &"boots", "boots_plate", 1, 4, &"heavy", {&"str": 10}, []],
-		[&"warden_greave", "Warden Greave", &"boots", "boots_plate_2", 11, 12, &"heavy", {&"str": 24}, [StatModifier.flat(&"knockback_res", 0.05)]],
-		[&"soft_boot", "Soft Boot", &"boots", "boots_cloth", 1, 2, &"cloth", {}, [StatModifier.inc(&"move_speed", 0.02)]],
-		[&"wayfarer_boot", "Wayfarer Boot", &"boots", "boots_cloth_2", 11, 6, &"cloth", {&"agi": 16}, [StatModifier.inc(&"move_speed", 0.04)]],
+		[&"iron_sabaton", "Iron Sabaton", &"boots", "boots_plate", 1, 4, &"heavy", {&"str": 10}, [StatModifier.inc(&"move_speed", 0.03)]],
+		[&"warden_greave", "Warden Greave", &"boots", "boots_plate_2", 11, 12, &"heavy", {&"str": 24}, [StatModifier.inc(&"move_speed", 0.04), StatModifier.flat(&"knockback_res", 0.05)]],
+		[&"soft_boot", "Soft Boot", &"boots", "boots_cloth", 1, 2, &"cloth", {}, [StatModifier.inc(&"move_speed", 0.05)]],
+		[&"wayfarer_boot", "Wayfarer Boot", &"boots", "boots_cloth_2", 11, 6, &"cloth", {&"agi": 16}, [StatModifier.inc(&"move_speed", 0.08)]],
 	]
 	for a in armor:
 		out.append(_b(a[0], a[1], a[2], a[3], {"level_req": a[4], "defense": float(a[5]), "weight_class": a[6],
@@ -128,6 +146,7 @@ static func bases() -> Array:
 		"consumable_effect": {"cleanse": 1.0}, "flavor": "Removes Poison, Burning, Bleeding, Curse and Chill."}))
 	out.append(_b(&"return_scroll", "Scroll of Return", &"consumable", "scroll_return", {"stack_max": 10, "value": 30,
 		"consumable_effect": {"return": 1.0}, "flavor": "Opens a path back to the waypoint on the Sanctuary Terrace in Malasugue."}))
+	_consumables(out)
 	out.append(_b(&"iron_shard", "Iron Shard", &"material", "mat_iron_shard", {"stack_max": 99, "value": 2, "flavor": "Salvaged metal. Used for reforging."}))
 	out.append(_b(&"arcane_dust", "Arcane Dust", &"material", "mat_arcane_dust", {"stack_max": 99, "value": 4, "flavor": "Residue of broken enchantments."}))
 	out.append(_b(&"ember_core", "Ember Core", &"material", "mat_ember_core", {"stack_max": 50, "value": 10, "flavor": "A still-warm heart of cinders."}))
@@ -146,6 +165,177 @@ static func bases() -> Array:
 		"flavor": "A shard of Morthar's broken crown. It hums with stolen Aether."}))
 	return out
 
+## bh-006: twenty more consumables. Effects (consumable_effect):
+##   heal / mana / instant   restore a fraction of the pool (over 2 s unless instant) — potion cooldown
+##   buff: status id         a timed elixir buff (StatusRules.DEFS) for `duration` seconds
+##   throw: {...}            thrown at the aim point: an elemental burst (radius, damage per level, status)
+##   portal                  tears open a Town Portal (TownPortal)
+##   phoenix                 not drunk: burns by itself when the hero would die and revives them
+static func _consumables(out: Array) -> void:
+	var C := &"consumable"
+	var list := [
+		[&"town_portal", "Town Portal Scroll", "scroll_portal", 1, 40, 10, 0.1, {"portal": 1.0},
+			"Rips space and time open: a violent vortex that carries you to Malasugue and back. Lasts until you die, dispel it, or open another.", 120],
+		[&"minor_health_potion", "Minor Health Draught", "potion_minor_health", 1, 4, 20, 0.15, {"heal": 0.25},
+			"Restores 25% of Maximum HP over 2 seconds.", 160],
+		[&"superior_health_potion", "Superior Health Draught", "potion_superior_health", 20, 55, 20, 0.25, {"heal": 0.9},
+			"Restores 90% of Maximum HP over 2 seconds.", 60],
+		[&"minor_mana_potion", "Minor Mana Draught", "potion_minor_mana", 1, 4, 20, 0.15, {"mana": 0.3},
+			"Restores 30% of Maximum Mana over 2 seconds.", 140],
+		[&"superior_mana_potion", "Superior Mana Draught", "potion_superior_mana", 20, 55, 20, 0.25, {"mana": 1.0},
+			"Restores all Mana over 2 seconds.", 55],
+		[&"swiftfoot_tonic", "Swiftfoot Tonic", "tonic_swift", 4, 30, 10, 0.2, {"buff": &"elixir_swift", "duration": 60.0},
+			"20% more Movement Speed for 60 seconds.", 60],
+		[&"ironskin_brew", "Ironskin Brew", "brew_ironskin", 5, 35, 10, 0.25, {"buff": &"elixir_ironskin", "duration": 60.0},
+			"30% more Defense and +10% Knockback Resistance for 60 seconds.", 55],
+		[&"berserker_draught", "Berserker's Draught", "draught_berserker", 8, 45, 10, 0.2, {"buff": &"elixir_berserk", "duration": 45.0},
+			"20% more Attack Speed and 10% more damage taken for 45 seconds.", 45],
+		[&"sages_infusion", "Sage's Infusion", "infusion_sage", 8, 45, 10, 0.2, {"buff": &"elixir_sage", "duration": 60.0},
+			"+25% increased Magic Damage and 15% more Cast Speed for 60 seconds.", 45],
+		[&"emberward_potion", "Emberward Potion", "ward_ember", 6, 30, 10, 0.2, {"buff": &"elixir_emberward", "duration": 120.0},
+			"+25% Fire Resistance for 2 minutes.", 40],
+		[&"frostward_potion", "Frostward Potion", "ward_frost", 6, 30, 10, 0.2, {"buff": &"elixir_frostward", "duration": 120.0},
+			"+25% Ice Resistance for 2 minutes.", 40],
+		[&"stormward_potion", "Stormward Potion", "ward_storm", 6, 30, 10, 0.2, {"buff": &"elixir_stormward", "duration": 120.0},
+			"+25% Lightning Resistance for 2 minutes.", 40],
+		[&"fortune_elixir", "Elixir of Fortune", "elixir_fortune", 10, 90, 5, 0.25, {"buff": &"elixir_fortune", "duration": 300.0},
+			"+30% Magic Find and +25% Gold Find for 5 minutes.", 20],
+		[&"scholars_tea", "Scholar's Tea", "tea_scholar", 3, 40, 10, 0.2, {"buff": &"elixir_scholar", "duration": 600.0},
+			"+15% Experience gained for 10 minutes.", 30],
+		[&"featherweight_draught", "Featherweight Draught", "draught_feather", 5, 35, 10, 0.1, {"buff": &"elixir_feather", "duration": 300.0},
+			"+60 Carry Capacity for 5 minutes. The bag feels like it is full of air.", 45],
+		[&"whetstone", "Whetstone", "whetstone", 3, 25, 10, 0.4, {"buff": &"elixir_whetstone", "duration": 300.0},
+			"Hone your weapon: +15% increased Physical Damage and +10% Critical Damage for 5 minutes.", 50],
+		[&"firebomb", "Firebomb", "firebomb", 4, 20, 10, 0.4, {"throw": {"element": Elements.FIRE, "radius": 3.5, "base": 22.0, "per_level": 7.0,
+			"status": &"burning", "look": "firebomb"}}, "Thrown at the cursor: bursts into flame, burning everything within 3.5 m.", 70],
+		[&"frost_flask", "Frost Flask", "frost_flask", 6, 24, 10, 0.4, {"throw": {"element": Elements.ICE, "radius": 3.5, "base": 16.0, "per_level": 5.0,
+			"status": &"chilled", "look": "frost_flask"}}, "Thrown at the cursor: shatters in a freezing cloud that Chills everything within 3.5 m.", 60],
+		[&"smoke_pellet", "Smoke Pellet", "smoke_pellet", 5, 25, 10, 0.1, {"buff": &"elixir_smoke", "duration": 6.0, "smoke": 1.0},
+			"A choking cloud: +60% Evasion and 30% more Movement Speed for 6 seconds.", 45],
+		[&"phoenix_feather", "Phoenix Feather", "phoenix_feather", 12, 250, 3, 0.05, {"phoenix": 1.0},
+			"Carried, not drunk. When a killing blow lands, the feather burns and you rise with half your HP (once per feather).", 6],
+	]
+	for c in list:
+		var b := _b(c[0], c[1], C, "", {"level_req": c[3], "value": c[4], "stack_max": c[5], "weight": c[6], "consumable_effect": c[7],
+			"flavor": c[8], "drop_weight": c[9]})
+		b.icon = ICON3D % c[0]
+		out.append(b)
+
+## bh-006 weapon roster: five weapons for each of ten categories, each with its own attack rate and weight.
+## Damage is derived from a DPS budget so a slower weapon hits proportionally harder:
+##   dps(level) = (9 + 1.9 x level) x category factor;  average hit = dps / attacks per second.
+## [id, name, type, level, attacks/s, weight, visual tier 1..3, requirements, extra]
+const ROSTER := [
+	# Swords (one-handed)
+	[&"militia_shortsword", "Militia Shortsword", &"sword", 3, 1.62, 2.6, 1, {&"str": 11}, {}],
+	[&"riverguard_falchion", "Riverguard Falchion", &"sword", 7, 1.38, 3.4, 1, {&"str": 16, &"dex": 10}, {}],
+	[&"duelist_sabre", "Duelist's Sabre", &"sword", 13, 1.72, 2.8, 2, {&"dex": 22, &"str": 14}, {"implicit": [["crit_chance", 0, 0.03]]}],
+	[&"bastard_sword", "Bastard Sword", &"sword", 22, 1.24, 4.8, 2, {&"str": 34}, {"implicit": [["stagger_power", 1, 0.12]]}],
+	[&"sunsteel_blade", "Sunsteel Blade", &"sword", 32, 1.5, 3.6, 3, {&"str": 42, &"dex": 30}, {"element": Elements.FIRE, "element_share": 0.2}],
+	# Axes (one-handed)
+	[&"woodcutter_hatchet", "Woodcutter's Hatchet", &"axe", 2, 1.34, 2.8, 1, {&"str": 11}, {}],
+	[&"raider_tomahawk", "Raider's Tomahawk", &"axe", 8, 1.46, 2.4, 1, {&"str": 16, &"agi": 12}, {}],
+	[&"crescent_axe", "Crescent Axe", &"axe", 14, 1.16, 4.2, 2, {&"str": 26, &"agi": 12}, {}],
+	[&"rimebite_axe", "Rimebite Axe", &"axe", 23, 1.26, 4.0, 2, {&"str": 34, &"agi": 18}, {"element": Elements.ICE, "element_share": 0.2}],
+	[&"warlord_cleaver", "Warlord's Cleaver", &"axe", 33, 1.04, 5.6, 3, {&"str": 46, &"agi": 20}, {"implicit": [["impact_strength", 1, 0.12]]}],
+	# Great axes (two-handed)
+	[&"lumber_greataxe", "Lumberjack's Greataxe", &"greataxe", 3, 0.95, 7.5, 1, {&"str": 15}, {}],
+	[&"double_bit_greataxe", "Double-Bit Greataxe", &"greataxe", 9, 0.84, 9.2, 1, {&"str": 24}, {}],
+	[&"northman_greataxe", "Northman's Bearded Axe", &"greataxe", 15, 0.9, 8.6, 2, {&"str": 32}, {}],
+	[&"executioner_moon", "Executioner's Moon", &"greataxe", 24, 0.77, 11.0, 2, {&"str": 42}, {"implicit": [["stagger_power", 1, 0.2]]}],
+	[&"worldsplitter", "Worldsplitter", &"greataxe", 34, 0.72, 12.5, 3, {&"str": 54}, {"element": Elements.EARTH, "element_share": 0.25}],
+	# Spears (two-handed)
+	[&"hunting_spear", "Hunting Spear", &"spear", 3, 1.3, 3.8, 1, {&"str": 11, &"agi": 9}, {}],
+	[&"partisan", "Partisan", &"spear", 9, 1.14, 5.0, 1, {&"str": 20, &"agi": 14}, {}],
+	[&"glaive", "Glaive", &"spear", 15, 1.04, 5.8, 2, {&"str": 28, &"agi": 18}, {}],
+	[&"tideguard_trident", "Tideguard Trident", &"spear", 24, 1.2, 5.0, 2, {&"str": 32, &"agi": 26}, {"element": Elements.WATER, "element_share": 0.25}],
+	[&"wyrmtooth_lance", "Wyrmtooth Lance", &"spear", 34, 1.0, 6.5, 3, {&"str": 42, &"agi": 32}, {"implicit": [["crit_damage", 0, 0.15]]}],
+	# Javelins (one-handed, thrown)
+	[&"reed_javelin", "Reed Javelin", &"javelin", 1, 1.26, 1.6, 1, {&"str": 8, &"dex": 8}, {}],
+	[&"hunters_javelin", "Hunter's Javelin", &"javelin", 7, 1.2, 2.0, 1, {&"str": 14, &"dex": 14}, {}],
+	[&"barbed_pilum", "Barbed Pilum", &"javelin", 13, 1.04, 2.8, 2, {&"str": 22, &"dex": 18}, {"implicit": [["projectile_damage", 1, 0.12]]}],
+	[&"thunderhead_javelin", "Thunderhead Javelin", &"javelin", 22, 1.16, 2.4, 2, {&"str": 28, &"dex": 28}, {"element": Elements.LIGHTNING, "element_share": 0.3}],
+	[&"sunpiercer", "Sunpiercer", &"javelin", 32, 1.1, 2.6, 3, {&"str": 36, &"dex": 38}, {"element": Elements.LIGHT, "element_share": 0.25}],
+	# Clubs (one-handed, blunt)
+	[&"oak_cudgel", "Oak Cudgel", &"club", 1, 1.3, 3.2, 1, {&"str": 10}, {}],
+	[&"spiked_club", "Spiked Club", &"club", 6, 1.2, 4.0, 1, {&"str": 16}, {}],
+	[&"flanged_mace", "Flanged Mace", &"club", 12, 1.14, 4.6, 2, {&"str": 24}, {"implicit": [["stagger_power", 1, 0.15]]}],
+	[&"morning_star", "Morning Star", &"club", 21, 1.04, 5.4, 2, {&"str": 34}, {}],
+	[&"emberheart_mace", "Emberheart Mace", &"club", 31, 1.1, 5.0, 3, {&"str": 44}, {"element": Elements.FIRE, "element_share": 0.25}],
+	# Daggers
+	[&"skinning_knife", "Skinning Knife", &"dagger", 2, 2.16, 0.9, 1, {&"dex": 10}, {}],
+	[&"parrying_dirk", "Parrying Dirk", &"dagger", 8, 1.94, 1.3, 1, {&"dex": 16, &"agi": 12}, {"implicit": [["parry_window", 0, 0.03]]}],
+	[&"kukri", "Kukri", &"dagger", 14, 1.88, 1.6, 2, {&"dex": 22, &"agi": 18}, {}],
+	[&"viper_fang", "Viper Fang", &"dagger", 23, 2.1, 1.1, 2, {&"dex": 30, &"agi": 26}, {"element": Elements.DARK, "element_share": 0.2}],
+	[&"moonshard_dagger", "Moonshard Dagger", &"dagger", 33, 2.04, 1.2, 3, {&"dex": 40, &"agi": 34}, {"element": Elements.ICE, "element_share": 0.2}],
+	# Claws
+	[&"iron_talons", "Iron Talons", &"claw", 3, 1.9, 1.8, 1, {&"agi": 10, &"dex": 8}, {}],
+	[&"tiger_claw", "Tiger Claw", &"claw", 9, 1.84, 2.0, 1, {&"agi": 16, &"dex": 14}, {}],
+	[&"hookblade_claws", "Hookblade Claws", &"claw", 15, 1.74, 2.4, 2, {&"agi": 24, &"dex": 18}, {"implicit": [["crit_chance", 0, 0.02]]}],
+	[&"nightstalker_claw", "Nightstalker Claw", &"claw", 24, 1.96, 1.9, 2, {&"agi": 32, &"dex": 26}, {"element": Elements.DARK, "element_share": 0.25}],
+	[&"drakescale_rend", "Drakescale Rend", &"claw", 34, 1.8, 2.3, 3, {&"agi": 42, &"dex": 34}, {"element": Elements.FIRE, "element_share": 0.2}],
+	# Knuckles
+	[&"brass_knuckles", "Brass Knuckles", &"knuckles", 1, 2.26, 1.0, 1, {&"str": 8, &"agi": 8}, {}],
+	[&"studded_cestus", "Studded Cestus", &"knuckles", 6, 2.1, 1.4, 1, {&"str": 12, &"agi": 12}, {}],
+	[&"spiked_knucklebars", "Spiked Knucklebars", &"knuckles", 12, 2.04, 1.6, 2, {&"str": 18, &"agi": 18}, {"implicit": [["stagger_power", 1, 0.1]]}],
+	[&"thunderfist_knuckles", "Thunderfist Knuckles", &"knuckles", 21, 2.16, 1.5, 2, {&"str": 24, &"agi": 28}, {"element": Elements.LIGHTNING, "element_share": 0.3}],
+	[&"titanknuckle", "Titanknuckle", &"knuckles", 31, 1.9, 2.6, 3, {&"str": 38, &"agi": 30}, {"implicit": [["impact_strength", 1, 0.15]]}],
+	# Bows
+	[&"shortbow", "Shortbow", &"bow", 2, 1.3, 1.6, 1, {&"dex": 11}, {}],
+	[&"recurve_bow", "Recurve Bow", &"bow", 8, 1.2, 2.0, 1, {&"dex": 18}, {}],
+	[&"hornbow", "Hornbow", &"bow", 14, 1.14, 2.5, 2, {&"dex": 26, &"agi": 10}, {}],
+	[&"siege_greatbow", "Siege Greatbow", &"bow", 23, 0.84, 3.8, 2, {&"dex": 34, &"str": 20}, {"implicit": [["projectile_speed", 1, 0.2]]}],
+	[&"galewing_bow", "Galewing Bow", &"bow", 33, 1.25, 2.2, 3, {&"dex": 44, &"agi": 24}, {"element": Elements.WIND, "element_share": 0.25}],
+]
+## Damage budget factor and hit spread (min, max as fractions of the average hit) per category.
+const ROSTER_FACTOR := {
+	&"sword": [1.0, 0.7, 1.3], &"axe": [1.0, 0.6, 1.4], &"greataxe": [1.28, 0.6, 1.4], &"spear": [1.2, 0.7, 1.3],
+	&"javelin": [0.95, 0.75, 1.25], &"club": [1.0, 0.6, 1.4], &"dagger": [0.93, 0.75, 1.25], &"claw": [0.93, 0.7, 1.3],
+	&"knuckles": [0.9, 0.75, 1.25], &"bow": [1.0, 0.65, 1.35],
+}
+
+static func roster_damage(wtype: StringName, level: int, aps: float) -> Vector2:
+	var f: Array = ROSTER_FACTOR.get(wtype, [1.0, 0.7, 1.3])
+	var avg := (9.0 + 1.9 * float(level)) * float(f[0]) / maxf(aps, 0.1)
+	return Vector2(maxf(1.0, roundf(avg * float(f[1]))), maxf(2.0, roundf(avg * float(f[2]))))
+
+static func _weapon_roster(out: Array) -> void:
+	for r in ROSTER:
+		var dmg := roster_damage(r[2], r[3], r[4])
+		var d := {"weapon_type": r[2], "level_req": r[3], "damage_min": dmg.x, "damage_max": dmg.y, "requirements": r[7],
+			"value": 14 + r[3] * 4, "tier": r[6], "attacks_per_second": r[4], "weight": r[5], "class_hint": &"knight"}
+		var extra: Dictionary = r[8]
+		for k in extra:
+			if k == "implicit":
+				var mods := []
+				for m in extra[k]:
+					mods.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(m[2])))
+				d["implicit"] = mods
+			else:
+				d[k] = extra[k]
+		var b := _b(r[0], r[1], &"weapon", "", d)
+		b.icon = ICON3D % r[0]
+		out.append(b)
+
+## Carried weight per unit when a base does not set its own. Equipment is far heavier than anything else in the bag.
+static func default_weight(b: ItemBaseDef) -> float:
+	var heavy := b.weight_class == &"heavy"
+	match b.category:
+		&"weapon":
+			return {&"sword": 3.5, &"greatsword": 8.5, &"axe": 4.2, &"greataxe": 9.5, &"spear": 4.8, &"javelin": 2.2,
+				&"club": 4.4, &"dagger": 1.2, &"claw": 2.0, &"knuckles": 1.6, &"bow": 2.6, &"staff": 3.5, &"wand": 1.0}.get(b.weapon_type, 3.0)
+		&"shield": return clampf(4.0 + b.defense * 0.14, 4.5, 10.0)
+		&"helm": return 4.2 if heavy else 1.2
+		&"armor": return clampf(8.0 + b.defense * 0.18, 10.0, 18.0) if heavy else 3.2
+		&"inner_garment": return 6.5 if heavy and b.defense >= 10.0 else (3.6 if heavy else 1.0)
+		&"gloves": return 2.6 if heavy else 0.8
+		&"boots": return 3.6 if heavy else 1.2
+		&"accessory": return 0.8
+		&"consumable": return 0.2
+		&"material": return 0.1
+		&"quest": return 0.5
+	return 0.3
+
 ## Set pieces (Master tier minimum) and named Aether uniques.
 static func _sets_and_uniques(out: Array) -> void:
 	# Aether Guardian — knight
@@ -156,7 +346,8 @@ static func _sets_and_uniques(out: Array) -> void:
 	out.append(_b(&"guardian_gauntlets", "Aether Guardian Gauntlets", &"gloves", "set_guardian_gloves", {"level_req": 8, "defense": 10.0,
 		"weight_class": &"heavy", "requirements": {&"str": 20}, "value": 50, "set_id": &"aether_guardian", "class_hint": &"knight", "drop_weight": 0}))
 	out.append(_b(&"guardian_greaves", "Aether Guardian Greaves", &"boots", "set_guardian_boots", {"level_req": 8, "defense": 10.0,
-		"weight_class": &"heavy", "requirements": {&"str": 20}, "value": 50, "set_id": &"aether_guardian", "class_hint": &"knight", "drop_weight": 0}))
+		"weight_class": &"heavy", "requirements": {&"str": 20}, "value": 50, "set_id": &"aether_guardian", "class_hint": &"knight", "drop_weight": 0,
+			"implicit": [StatModifier.inc(&"move_speed", 0.05)]}))
 	out.append(_b(&"guardian_aegis", "Aether Guardian Aegis", &"shield", "set_guardian_shield", {"level_req": 10, "defense": 26.0,
 		"block_chance": 0.28, "block_strength": 0.68, "requirements": {&"str": 24}, "value": 90, "set_id": &"aether_guardian",
 		"class_hint": &"knight", "drop_weight": 0}))
@@ -168,7 +359,8 @@ static func _sets_and_uniques(out: Array) -> void:
 	out.append(_b(&"sage_gloves", "Starbound Sage Gloves", &"gloves", "set_sage_gloves", {"level_req": 8, "defense": 4.0,
 		"weight_class": &"cloth", "requirements": {&"int": 20}, "value": 50, "set_id": &"starbound_sage", "class_hint": &"mage", "drop_weight": 0}))
 	out.append(_b(&"sage_boots", "Starbound Sage Boots", &"boots", "set_sage_boots", {"level_req": 8, "defense": 4.0,
-		"weight_class": &"cloth", "requirements": {&"int": 20}, "value": 50, "set_id": &"starbound_sage", "class_hint": &"mage", "drop_weight": 0}))
+		"weight_class": &"cloth", "requirements": {&"int": 20}, "value": 50, "set_id": &"starbound_sage", "class_hint": &"mage", "drop_weight": 0,
+			"implicit": [StatModifier.inc(&"move_speed", 0.07)]}))
 	out.append(_b(&"sage_staff", "Starbound Sage Staff", &"weapon", "set_sage_staff", {"level_req": 10, "weapon_type": &"staff",
 		"damage_min": 13.0, "damage_max": 22.0, "element": Elements.LIGHT, "element_share": 1.0, "requirements": {&"int": 24},
 		"implicit": [StatModifier.inc(&"magic_damage", 0.18)], "value": 90, "set_id": &"starbound_sage", "class_hint": &"mage", "drop_weight": 0}))

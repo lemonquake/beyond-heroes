@@ -1,0 +1,1652 @@
+[
+ {
+  "id": "iron_longsword",
+  "tris": 1092,
+  "size": [
+   0.229,
+   0.036,
+   0.999
+  ],
+  "fallback": false
+ },
+ {
+  "id": "knights_arming_sword",
+  "tris": 992,
+  "size": [
+   0.238,
+   0.036,
+   1.041
+  ],
+  "fallback": false
+ },
+ {
+  "id": "runed_sword",
+  "tris": 1212,
+  "size": [
+   0.248,
+   0.036,
+   1.079
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rusted_claymore",
+  "tris": 1092,
+  "size": [
+   0.412,
+   0.039,
+   1.579
+  ],
+  "fallback": false
+ },
+ {
+  "id": "executioner_blade",
+  "tris": 1128,
+  "size": [
+   0.326,
+   0.041,
+   1.556
+  ],
+  "fallback": false
+ },
+ {
+  "id": "titan_greatsword",
+  "tris": 1096,
+  "size": [
+   0.397,
+   0.041,
+   1.661
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hand_axe",
+  "tris": 1088,
+  "size": [
+   0.372,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bearded_axe",
+  "tris": 1448,
+  "size": [
+   0.427,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rune_cleaver",
+  "tris": 1124,
+  "size": [
+   0.402,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "ash_spear",
+  "tris": 772,
+  "size": [
+   0.078,
+   0.047,
+   2.26
+  ],
+  "fallback": false
+ },
+ {
+  "id": "winged_spear",
+  "tris": 896,
+  "size": [
+   0.197,
+   0.047,
+   2.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "storm_lance",
+  "tris": 1052,
+  "size": [
+   0.108,
+   0.125,
+   2.35
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rondel_dagger",
+  "tris": 760,
+  "size": [
+   0.07,
+   0.038,
+   0.409
+  ],
+  "fallback": false
+ },
+ {
+  "id": "shadow_kris",
+  "tris": 1068,
+  "size": [
+   0.126,
+   0.03,
+   0.408
+  ],
+  "fallback": false
+ },
+ {
+  "id": "aether_stiletto",
+  "tris": 996,
+  "size": [
+   0.126,
+   0.03,
+   0.428
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hunters_bow",
+  "tris": 624,
+  "size": [
+   0.114,
+   0.044,
+   1.306
+  ],
+  "fallback": false
+ },
+ {
+  "id": "composite_bow",
+  "tris": 816,
+  "size": [
+   0.114,
+   0.044,
+   1.309
+  ],
+  "fallback": false
+ },
+ {
+  "id": "warden_longbow",
+  "tris": 624,
+  "size": [
+   0.156,
+   0.044,
+   1.642
+  ],
+  "fallback": false
+ },
+ {
+  "id": "ashwood_staff",
+  "tris": 1062,
+  "size": [
+   0.15,
+   0.15,
+   1.9
+  ],
+  "fallback": false
+ },
+ {
+  "id": "storm_staff",
+  "tris": 1410,
+  "size": [
+   0.136,
+   0.103,
+   1.961
+  ],
+  "fallback": false
+ },
+ {
+  "id": "frost_staff",
+  "tris": 906,
+  "size": [
+   0.14,
+   0.147,
+   1.94
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bone_wand",
+  "tris": 944,
+  "size": [
+   0.044,
+   0.042,
+   0.359
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tide_wand",
+  "tris": 842,
+  "size": [
+   0.042,
+   0.043,
+   0.372
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sunfire_wand",
+  "tris": 1052,
+  "size": [
+   0.06,
+   0.026,
+   0.365
+  ],
+  "fallback": false
+ },
+ {
+  "id": "militia_shortsword",
+  "tris": 1092,
+  "size": [
+   0.153,
+   0.036,
+   0.799
+  ],
+  "fallback": false
+ },
+ {
+  "id": "riverguard_falchion",
+  "tris": 1068,
+  "size": [
+   0.172,
+   0.036,
+   0.941
+  ],
+  "fallback": false
+ },
+ {
+  "id": "duelist_sabre",
+  "tris": 1140,
+  "size": [
+   0.229,
+   0.043,
+   1.059
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bastard_sword",
+  "tris": 1112,
+  "size": [
+   0.287,
+   0.036,
+   1.281
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sunsteel_blade",
+  "tris": 968,
+  "size": [
+   0.278,
+   0.054,
+   1.144
+  ],
+  "fallback": false
+ },
+ {
+  "id": "woodcutter_hatchet",
+  "tris": 1052,
+  "size": [
+   0.194,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "raider_tomahawk",
+  "tris": 1480,
+  "size": [
+   0.312,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "crescent_axe",
+  "tris": 1084,
+  "size": [
+   0.414,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rimebite_axe",
+  "tris": 1148,
+  "size": [
+   0.409,
+   0.052,
+   0.825
+  ],
+  "fallback": false
+ },
+ {
+  "id": "warlord_cleaver",
+  "tris": 1488,
+  "size": [
+   0.502,
+   0.052,
+   0.867
+  ],
+  "fallback": false
+ },
+ {
+  "id": "lumber_greataxe",
+  "tris": 1252,
+  "size": [
+   0.363,
+   0.061,
+   1.605
+  ],
+  "fallback": false
+ },
+ {
+  "id": "double_bit_greataxe",
+  "tris": 1608,
+  "size": [
+   0.552,
+   0.061,
+   1.605
+  ],
+  "fallback": false
+ },
+ {
+  "id": "northman_greataxe",
+  "tris": 1648,
+  "size": [
+   0.575,
+   0.061,
+   1.605
+  ],
+  "fallback": false
+ },
+ {
+  "id": "executioner_moon",
+  "tris": 1328,
+  "size": [
+   0.651,
+   0.061,
+   1.722
+  ],
+  "fallback": false
+ },
+ {
+  "id": "worldsplitter",
+  "tris": 1704,
+  "size": [
+   0.82,
+   0.061,
+   1.645
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hunting_spear",
+  "tris": 772,
+  "size": [
+   0.081,
+   0.047,
+   2.2
+  ],
+  "fallback": false
+ },
+ {
+  "id": "partisan",
+  "tris": 860,
+  "size": [
+   0.197,
+   0.047,
+   2.33
+  ],
+  "fallback": false
+ },
+ {
+  "id": "glaive",
+  "tris": 1076,
+  "size": [
+   0.165,
+   0.047,
+   2.41
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tideguard_trident",
+  "tris": 1224,
+  "size": [
+   0.231,
+   0.064,
+   2.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "wyrmtooth_lance",
+  "tris": 808,
+  "size": [
+   0.115,
+   0.047,
+   2.37
+  ],
+  "fallback": false
+ },
+ {
+  "id": "reed_javelin",
+  "tris": 760,
+  "size": [
+   0.083,
+   0.072,
+   1.62
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hunters_javelin",
+  "tris": 808,
+  "size": [
+   0.083,
+   0.072,
+   1.62
+  ],
+  "fallback": false
+ },
+ {
+  "id": "barbed_pilum",
+  "tris": 724,
+  "size": [
+   0.036,
+   0.036,
+   1.73
+  ],
+  "fallback": false
+ },
+ {
+  "id": "thunderhead_javelin",
+  "tris": 1044,
+  "size": [
+   0.084,
+   0.072,
+   1.686
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sunpiercer",
+  "tris": 1200,
+  "size": [
+   0.12,
+   0.072,
+   1.69
+  ],
+  "fallback": false
+ },
+ {
+  "id": "oak_cudgel",
+  "tris": 784,
+  "size": [
+   0.111,
+   0.105,
+   0.88
+  ],
+  "fallback": false
+ },
+ {
+  "id": "spiked_club",
+  "tris": 1156,
+  "size": [
+   0.164,
+   0.175,
+   0.88
+  ],
+  "fallback": false
+ },
+ {
+  "id": "flanged_mace",
+  "tris": 808,
+  "size": [
+   0.124,
+   0.112,
+   1.01
+  ],
+  "fallback": false
+ },
+ {
+  "id": "morning_star",
+  "tris": 1060,
+  "size": [
+   0.201,
+   0.208,
+   0.983
+  ],
+  "fallback": false
+ },
+ {
+  "id": "emberheart_mace",
+  "tris": 1248,
+  "size": [
+   0.124,
+   0.124,
+   1.01
+  ],
+  "fallback": false
+ },
+ {
+  "id": "skinning_knife",
+  "tris": 676,
+  "size": [
+   0.058,
+   0.03,
+   0.328
+  ],
+  "fallback": false
+ },
+ {
+  "id": "parrying_dirk",
+  "tris": 972,
+  "size": [
+   0.221,
+   0.039,
+   0.428
+  ],
+  "fallback": false
+ },
+ {
+  "id": "kukri",
+  "tris": 784,
+  "size": [
+   0.123,
+   0.038,
+   0.428
+  ],
+  "fallback": false
+ },
+ {
+  "id": "viper_fang",
+  "tris": 1092,
+  "size": [
+   0.126,
+   0.03,
+   0.398
+  ],
+  "fallback": false
+ },
+ {
+  "id": "moonshard_dagger",
+  "tris": 1092,
+  "size": [
+   0.136,
+   0.03,
+   0.428
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_talons",
+  "tris": 1012,
+  "size": [
+   0.12,
+   0.04,
+   0.465
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tiger_claw",
+  "tris": 1252,
+  "size": [
+   0.152,
+   0.04,
+   0.456
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hookblade_claws",
+  "tris": 820,
+  "size": [
+   0.22,
+   0.04,
+   0.515
+  ],
+  "fallback": false
+ },
+ {
+  "id": "nightstalker_claw",
+  "tris": 1060,
+  "size": [
+   0.165,
+   0.062,
+   0.505
+  ],
+  "fallback": false
+ },
+ {
+  "id": "drakescale_rend",
+  "tris": 1240,
+  "size": [
+   0.181,
+   0.062,
+   0.525
+  ],
+  "fallback": false
+ },
+ {
+  "id": "brass_knuckles",
+  "tris": 876,
+  "size": [
+   0.062,
+   0.02,
+   0.141
+  ],
+  "fallback": false
+ },
+ {
+  "id": "studded_cestus",
+  "tris": 2264,
+  "size": [
+   0.117,
+   0.073,
+   0.227
+  ],
+  "fallback": false
+ },
+ {
+  "id": "spiked_knucklebars",
+  "tris": 972,
+  "size": [
+   0.09,
+   0.02,
+   0.141
+  ],
+  "fallback": false
+ },
+ {
+  "id": "thunderfist_knuckles",
+  "tris": 1020,
+  "size": [
+   0.09,
+   0.02,
+   0.141
+  ],
+  "fallback": false
+ },
+ {
+  "id": "titanknuckle",
+  "tris": 1036,
+  "size": [
+   0.1,
+   0.07,
+   0.16
+  ],
+  "fallback": false
+ },
+ {
+  "id": "shortbow",
+  "tris": 624,
+  "size": [
+   0.108,
+   0.044,
+   1.0
+  ],
+  "fallback": false
+ },
+ {
+  "id": "recurve_bow",
+  "tris": 816,
+  "size": [
+   0.114,
+   0.044,
+   1.25
+  ],
+  "fallback": false
+ },
+ {
+  "id": "hornbow",
+  "tris": 696,
+  "size": [
+   0.127,
+   0.044,
+   1.251
+  ],
+  "fallback": false
+ },
+ {
+  "id": "siege_greatbow",
+  "tris": 668,
+  "size": [
+   0.151,
+   0.056,
+   1.84
+  ],
+  "fallback": false
+ },
+ {
+  "id": "galewing_bow",
+  "tris": 720,
+  "size": [
+   0.144,
+   0.044,
+   1.52
+  ],
+  "fallback": false
+ },
+ {
+  "id": "warden_kite_shield",
+  "tris": 3236,
+  "size": [
+   0.672,
+   0.151,
+   0.953
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sigil_buckler",
+  "tris": 2508,
+  "size": [
+   0.532,
+   0.223,
+   0.532
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tower_shield",
+  "tris": 2592,
+  "size": [
+   0.712,
+   0.159,
+   1.272
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_helm",
+  "tris": 1156,
+  "size": [
+   0.455,
+   0.455,
+   0.25
+  ],
+  "fallback": false
+ },
+ {
+  "id": "barbute_helm",
+  "tris": 1010,
+  "size": [
+   0.282,
+   0.284,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "visored_greathelm",
+  "tris": 592,
+  "size": [
+   0.281,
+   0.296,
+   0.315
+  ],
+  "fallback": false
+ },
+ {
+  "id": "linen_hood",
+  "tris": 1936,
+  "size": [
+   0.453,
+   0.382,
+   0.294
+  ],
+  "fallback": false
+ },
+ {
+  "id": "arcanist_cowl",
+  "tris": 2020,
+  "size": [
+   0.453,
+   0.384,
+   0.308
+  ],
+  "fallback": false
+ },
+ {
+  "id": "seers_circlet",
+  "tris": 1196,
+  "size": [
+   0.257,
+   0.293,
+   0.205
+  ],
+  "fallback": false
+ },
+ {
+  "id": "padded_gambeson",
+  "tris": 3526,
+  "size": [
+   0.626,
+   0.271,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "silk_undershirt",
+  "tris": 3526,
+  "size": [
+   0.741,
+   0.271,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "chain_shirt",
+  "tris": 3526,
+  "size": [
+   0.626,
+   0.271,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "runeweave_vest",
+  "tris": 1550,
+  "size": [
+   0.355,
+   0.282,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_hauberk",
+  "tris": 4090,
+  "size": [
+   0.676,
+   0.279,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "brigandine",
+  "tris": 1690,
+  "size": [
+   0.392,
+   0.282,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "warden_plate",
+  "tris": 1870,
+  "size": [
+   0.599,
+   0.31,
+   0.66
+  ],
+  "fallback": false
+ },
+ {
+  "id": "apprentice_robe",
+  "tris": 2150,
+  "size": [
+   0.934,
+   0.313,
+   0.894
+  ],
+  "fallback": false
+ },
+ {
+  "id": "traveler_coat",
+  "tris": 2150,
+  "size": [
+   0.934,
+   0.313,
+   0.844
+  ],
+  "fallback": false
+ },
+ {
+  "id": "magister_robe",
+  "tris": 2174,
+  "size": [
+   0.934,
+   0.331,
+   0.995
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_gauntlet",
+  "tris": 2156,
+  "size": [
+   0.152,
+   0.09,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "spiked_gauntlet",
+  "tris": 2252,
+  "size": [
+   0.152,
+   0.095,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "silk_glove",
+  "tris": 716,
+  "size": [
+   0.148,
+   0.085,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "runed_glove",
+  "tris": 740,
+  "size": [
+   0.148,
+   0.085,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_sabaton",
+  "tris": 1208,
+  "size": [
+   0.13,
+   0.308,
+   0.3
+  ],
+  "fallback": false
+ },
+ {
+  "id": "warden_greave",
+  "tris": 1348,
+  "size": [
+   0.156,
+   0.318,
+   0.35
+  ],
+  "fallback": false
+ },
+ {
+  "id": "soft_boot",
+  "tris": 460,
+  "size": [
+   0.148,
+   0.306,
+   0.24
+  ],
+  "fallback": false
+ },
+ {
+  "id": "wayfarer_boot",
+  "tris": 1192,
+  "size": [
+   0.156,
+   0.309,
+   0.33
+  ],
+  "fallback": false
+ },
+ {
+  "id": "copper_ring",
+  "tris": 392,
+  "size": [
+   0.027,
+   0.005,
+   0.027
+  ],
+  "fallback": false
+ },
+ {
+  "id": "silver_ring",
+  "tris": 536,
+  "size": [
+   0.026,
+   0.013,
+   0.034
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sigil_ring",
+  "tris": 664,
+  "size": [
+   0.026,
+   0.014,
+   0.028
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bone_amulet",
+  "tris": 548,
+  "size": [
+   0.08,
+   0.116,
+   0.012
+  ],
+  "fallback": false
+ },
+ {
+  "id": "gold_amulet",
+  "tris": 756,
+  "size": [
+   0.08,
+   0.098,
+   0.013
+  ],
+  "fallback": false
+ },
+ {
+  "id": "star_pendant",
+  "tris": 440,
+  "size": [
+   0.08,
+   0.103,
+   0.01
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rune_charm",
+  "tris": 170,
+  "size": [
+   0.052,
+   0.1,
+   0.011
+  ],
+  "fallback": false
+ },
+ {
+  "id": "war_talisman",
+  "tris": 218,
+  "size": [
+   0.074,
+   0.101,
+   0.012
+  ],
+  "fallback": false
+ },
+ {
+  "id": "guardian_helm",
+  "tris": 1160,
+  "size": [
+   0.342,
+   0.394,
+   0.33
+  ],
+  "fallback": false
+ },
+ {
+  "id": "guardian_plate",
+  "tris": 2146,
+  "size": [
+   0.599,
+   0.31,
+   0.66
+  ],
+  "fallback": false
+ },
+ {
+  "id": "guardian_gauntlets",
+  "tris": 2180,
+  "size": [
+   0.152,
+   0.09,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "guardian_greaves",
+  "tris": 1404,
+  "size": [
+   0.156,
+   0.333,
+   0.35
+  ],
+  "fallback": false
+ },
+ {
+  "id": "guardian_aegis",
+  "tris": 3344,
+  "size": [
+   0.762,
+   0.206,
+   0.954
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sage_hood",
+  "tris": 2212,
+  "size": [
+   0.453,
+   0.384,
+   0.308
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sage_robe",
+  "tris": 2390,
+  "size": [
+   0.934,
+   0.313,
+   0.995
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sage_gloves",
+  "tris": 740,
+  "size": [
+   0.148,
+   0.085,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sage_boots",
+  "tris": 624,
+  "size": [
+   0.156,
+   0.31,
+   0.29
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sage_staff",
+  "tris": 1310,
+  "size": [
+   0.26,
+   0.064,
+   1.93
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_dawnbreaker",
+  "tris": 1048,
+  "size": [
+   0.437,
+   0.054,
+   1.664
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_riftblade",
+  "tris": 1188,
+  "size": [
+   0.252,
+   0.036,
+   1.081
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_starwhisper",
+  "tris": 1310,
+  "size": [
+   0.26,
+   0.064,
+   1.93
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_winters_heart",
+  "tris": 936,
+  "size": [
+   0.026,
+   0.026,
+   0.36
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_band_of_stillness",
+  "tris": 720,
+  "size": [
+   0.026,
+   0.019,
+   0.05
+  ],
+  "fallback": false
+ },
+ {
+  "id": "u_heart_of_aether",
+  "tris": 1232,
+  "size": [
+   0.08,
+   0.101,
+   0.019
+  ],
+  "fallback": false
+ },
+ {
+  "id": "health_potion",
+  "tris": 880,
+  "size": [
+   0.104,
+   0.104,
+   0.158
+  ],
+  "fallback": false
+ },
+ {
+  "id": "greater_health_potion",
+  "tris": 1372,
+  "size": [
+   0.104,
+   0.109,
+   0.179
+  ],
+  "fallback": false
+ },
+ {
+  "id": "mana_potion",
+  "tris": 840,
+  "size": [
+   0.068,
+   0.068,
+   0.193
+  ],
+  "fallback": false
+ },
+ {
+  "id": "greater_mana_potion",
+  "tris": 1372,
+  "size": [
+   0.104,
+   0.109,
+   0.179
+  ],
+  "fallback": false
+ },
+ {
+  "id": "rejuvenation_elixir",
+  "tris": 852,
+  "size": [
+   0.1,
+   0.1,
+   0.162
+  ],
+  "fallback": false
+ },
+ {
+  "id": "antidote",
+  "tris": 588,
+  "size": [
+   0.146,
+   0.113,
+   0.109
+  ],
+  "fallback": false
+ },
+ {
+  "id": "return_scroll",
+  "tris": 480,
+  "size": [
+   0.248,
+   0.105,
+   0.059
+  ],
+  "fallback": false
+ },
+ {
+  "id": "town_portal",
+  "tris": 1144,
+  "size": [
+   0.248,
+   0.105,
+   0.072
+  ],
+  "fallback": false
+ },
+ {
+  "id": "minor_health_potion",
+  "tris": 840,
+  "size": [
+   0.048,
+   0.048,
+   0.163
+  ],
+  "fallback": false
+ },
+ {
+  "id": "superior_health_potion",
+  "tris": 912,
+  "size": [
+   0.105,
+   0.109,
+   0.195
+  ],
+  "fallback": false
+ },
+ {
+  "id": "minor_mana_potion",
+  "tris": 840,
+  "size": [
+   0.048,
+   0.048,
+   0.163
+  ],
+  "fallback": false
+ },
+ {
+  "id": "superior_mana_potion",
+  "tris": 912,
+  "size": [
+   0.105,
+   0.109,
+   0.195
+  ],
+  "fallback": false
+ },
+ {
+  "id": "swiftfoot_tonic",
+  "tris": 880,
+  "size": [
+   0.165,
+   0.068,
+   0.193
+  ],
+  "fallback": false
+ },
+ {
+  "id": "ironskin_brew",
+  "tris": 600,
+  "size": [
+   0.139,
+   0.1,
+   0.14
+  ],
+  "fallback": false
+ },
+ {
+  "id": "berserker_draught",
+  "tris": 932,
+  "size": [
+   0.092,
+   0.092,
+   0.173
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sages_infusion",
+  "tris": 1036,
+  "size": [
+   0.107,
+   0.107,
+   0.19
+  ],
+  "fallback": false
+ },
+ {
+  "id": "emberward_potion",
+  "tris": 1008,
+  "size": [
+   0.096,
+   0.096,
+   0.148
+  ],
+  "fallback": false
+ },
+ {
+  "id": "frostward_potion",
+  "tris": 1008,
+  "size": [
+   0.096,
+   0.096,
+   0.148
+  ],
+  "fallback": false
+ },
+ {
+  "id": "stormward_potion",
+  "tris": 1008,
+  "size": [
+   0.096,
+   0.096,
+   0.148
+  ],
+  "fallback": false
+ },
+ {
+  "id": "fortune_elixir",
+  "tris": 1436,
+  "size": [
+   0.106,
+   0.115,
+   0.165
+  ],
+  "fallback": false
+ },
+ {
+  "id": "scholars_tea",
+  "tris": 604,
+  "size": [
+   0.1,
+   0.1,
+   0.112
+  ],
+  "fallback": false
+ },
+ {
+  "id": "featherweight_draught",
+  "tris": 936,
+  "size": [
+   0.068,
+   0.068,
+   0.285
+  ],
+  "fallback": false
+ },
+ {
+  "id": "whetstone",
+  "tris": 152,
+  "size": [
+   0.14,
+   0.05,
+   0.032
+  ],
+  "fallback": false
+ },
+ {
+  "id": "firebomb",
+  "tris": 504,
+  "size": [
+   0.114,
+   0.114,
+   0.16
+  ],
+  "fallback": false
+ },
+ {
+  "id": "frost_flask",
+  "tris": 636,
+  "size": [
+   0.122,
+   0.104,
+   0.2
+  ],
+  "fallback": false
+ },
+ {
+  "id": "smoke_pellet",
+  "tris": 616,
+  "size": [
+   0.139,
+   0.104,
+   0.1
+  ],
+  "fallback": false
+ },
+ {
+  "id": "phoenix_feather",
+  "tris": 744,
+  "size": [
+   0.103,
+   0.313,
+   0.03
+  ],
+  "fallback": false
+ },
+ {
+  "id": "iron_shard",
+  "tris": 176,
+  "size": [
+   0.141,
+   0.143,
+   0.023
+  ],
+  "fallback": false
+ },
+ {
+  "id": "arcane_dust",
+  "tris": 588,
+  "size": [
+   0.146,
+   0.113,
+   0.109
+  ],
+  "fallback": false
+ },
+ {
+  "id": "ember_core",
+  "tris": 828,
+  "size": [
+   0.087,
+   0.082,
+   0.077
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bone_fragment",
+  "tris": 404,
+  "size": [
+   0.154,
+   0.071,
+   0.024
+  ],
+  "fallback": false
+ },
+ {
+  "id": "frost_crystal",
+  "tris": 316,
+  "size": [
+   0.095,
+   0.076,
+   0.111
+  ],
+  "fallback": false
+ },
+ {
+  "id": "storm_essence",
+  "tris": 860,
+  "size": [
+   0.098,
+   0.096,
+   0.118
+  ],
+  "fallback": false
+ },
+ {
+  "id": "shadow_silk",
+  "tris": 360,
+  "size": [
+   0.149,
+   0.083,
+   0.095
+  ],
+  "fallback": false
+ },
+ {
+  "id": "beast_hide",
+  "tris": 308,
+  "size": [
+   0.146,
+   0.114,
+   0.068
+  ],
+  "fallback": false
+ },
+ {
+  "id": "aether_shard",
+  "tris": 208,
+  "size": [
+   0.091,
+   0.078,
+   0.087
+  ],
+  "fallback": false
+ },
+ {
+  "id": "quest_seal_key",
+  "tris": 868,
+  "size": [
+   0.1,
+   0.18,
+   0.03
+  ],
+  "fallback": false
+ },
+ {
+  "id": "quest_tablet",
+  "tris": 348,
+  "size": [
+   0.159,
+   0.214,
+   0.032
+  ],
+  "fallback": false
+ },
+ {
+  "id": "quest_crown_fragment",
+  "tris": 360,
+  "size": [
+   0.091,
+   0.101,
+   0.112
+  ],
+  "fallback": false
+ },
+ {
+  "id": "gold_pile",
+  "tris": 1260,
+  "size": [
+   0.146,
+   0.081,
+   0.023
+  ],
+  "fallback": false
+ }
+]

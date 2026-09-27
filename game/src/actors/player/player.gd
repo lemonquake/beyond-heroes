@@ -24,8 +24,14 @@ const FINISHER_LOCK := 0.3
 const GUARD_MOVE_MULT := 0.45
 const CHARGE_MOVE_MULT := 0.35
 const POTION_COOLDOWN := 1.5
+## Potion belt keys (Q / E): strongest draught first, the elixir last.
+const POTION_ORDER := {
+	&"heal": [&"superior_health_potion", &"greater_health_potion", &"health_potion", &"minor_health_potion", &"rejuvenation_elixir"],
+	&"mana": [&"superior_mana_potion", &"greater_mana_potion", &"mana_potion", &"minor_mana_potion", &"rejuvenation_elixir"],
+}
 const LOW_HP := 0.3
 const INTERACT_RANGE := 2.6
+const INTERACT_HEIGHT := 1.6
 const RIPOSTE_WINDOW := 2.0
 const ACCEL := 45.0
 const TURN_RATE := 14.0
@@ -110,6 +116,7 @@ func bind(h: HeroData) -> void:
 	resource = ClassResource.new(h.cls.resource_kind)
 	resource.changed.connect(func(v, m): resource_changed.emit(v, m))
 	h.stats_dirty.connect(_on_hero_changed)
+	h.inventory_changed.connect(_on_inventory_changed)
 	h.progress.leveled_up.connect(_on_level_up)
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
@@ -130,6 +137,10 @@ func _on_hero_changed() -> void:
 	mark_stats_dirty()
 	refresh_equipment_visuals()
 
+## The bag's weight changes Load and so Movement Speed (no visual refresh needed).
+func _on_inventory_changed() -> void:
+	mark_stats_dirty()
+
 func _on_level_up(new_level: int, gained: int) -> void:
 	level = new_level
 	mark_stats_dirty()
@@ -141,7 +152,7 @@ func _on_level_up(new_level: int, gained: int) -> void:
 	Events.player_leveled.emit(new_level, gained)
 	Audio.play_ui(&"level_up")
 	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.4, 0.9), 4.0, 0.9, 0.8), global_position)
-	FX.spawn(VFXLib.beam(Color(1.0, 0.85, 0.45), 6.0, 0.9), global_position)
+	FX.spawn(VFXLib.beam_flash(Color(1.0, 0.85, 0.45), 6.0, 0.9, 1.4), global_position)
 	FX.text_popup(center() + Vector3.UP * 0.8, "Level %d" % new_level, UITheme.GOLD, 1.5)
 
 func refresh_equipment_visuals() -> void:
@@ -156,17 +167,23 @@ func refresh_equipment_visuals() -> void:
 		visual.attach_weapon(&"main", _weapon_model(main, lo.main_type), lo.main_type.grip_offset)
 	if sub != null:
 		if sub.base.category == &"shield":
-			visual.attach_weapon(&"off", "res://assets/weapons/shield.glb")
+			visual.attach_weapon(&"off", sub.base.model_path())
 		elif lo.off_type != null:
 			visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type), lo.off_type.grip_offset)
 	visual.set_stance(stance_idle())
 
-func _weapon_model(item: ItemInstance, wt: WeaponTypeDef) -> String:
-	if item.rarity == BH.Rarity.AETHER:
+## The model held in the hand: the item's own model (every base has one since bh-006); a random Aether-tier roll of a
+## plain base shows the type's crystalline Aether variant instead.
+static func weapon_model_for(item: ItemInstance, wt: WeaponTypeDef) -> String:
+	if item.rarity == BH.Rarity.AETHER and item.base.unique_name == "":
 		var ae := "res://assets/weapons/%s_aether.glb" % wt.id
 		if ResourceLoader.exists(ae):
 			return ae
-	return wt.model
+	var own := item.base.model_path()
+	return own if own != "" else wt.model
+
+func _weapon_model(item: ItemInstance, wt: WeaponTypeDef) -> String:
+	return weapon_model_for(item, wt)
 
 func stance_idle() -> StringName:
 	var lo := stats.loadout if stats else hero.equipment.loadout()
@@ -456,6 +473,9 @@ func _can_start(kind: StringName) -> bool:
 	if kind == &"dodge":
 		if dodge_cd > 0.0:
 			return false
+		if is_overburdened():
+			_overburden_notice()
+			return false
 		if action == null:
 			return true
 		# dodge-cancel: allowed during recovery, and during a light/heavy wind-up before the blow lands
@@ -478,7 +498,7 @@ func _can_start(kind: StringName) -> bool:
 
 func _attack_rate(anims: Array) -> float:
 	var wt := _main_type()
-	var aps := (wt.attacks_per_second if wt else 1.4) * stats.get_stat(&"attack_speed", 1.0)
+	var aps := stats.loadout.aps() * stats.get_stat(&"attack_speed", 1.0)
 	var total := 0.0
 	for n in anims:
 		total += float(DB.anim(n).get("length", 0.6))
@@ -554,6 +574,8 @@ func _melee_window(a: TimedAction, w: int, first: bool) -> void:
 	var reach := wt.reach if wt else 1.8
 	var arc := wt.arc_degrees if wt else 100.0
 	var heavy := action_kind == &"heavy" or action_kind == &"charge_release"
+	var finisher := bool(a.data.get("finisher", false))
+	var big := heavy or finisher
 	if heavy:
 		reach *= 1.1
 		arc = minf(arc * 1.2, 220.0)
@@ -563,9 +585,15 @@ func _melee_window(a: TimedAction, w: int, first: bool) -> void:
 		if stats.loadout.elem_share_for(int(a.data.get("hand", 0))) > 0.0:
 			c = Elements.color(stats.loadout.element_for(int(a.data.get("hand", 0))))
 			c.a = 0.8
-		FX.spawn(VFXLib.slash_arc(c, reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.55, int(a.data.get("step", 0)) % 2 == 0), global_position)
+		var cw := int(a.data.get("step", 0)) % 2 == 0
+		FX.spawn_facing(VFXLib.slash_arc(c, reach * 0.95, arc, 1.05, 0.2 / maxf(a.rate, 0.5), 0.55, cw), global_position, forward())
+		if big:
+			_big_swing_fx(reach, arc, cw)
 	var req := _weapon_request(a, heavy, float(a.data.get("charge_mult", 1.0)))
+	if finisher:
+		req.tags[&"finisher"] = true
 	var hits := 0
+	var first_hit: Actor = null
 	for t: Actor in CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), reach, arc, BH.LAYER_ENEMY):
 		if not a.mark_hit(w, t):
 			continue
@@ -573,14 +601,46 @@ func _melee_window(a: TimedAction, w: int, first: bool) -> void:
 			continue
 		var r := req.clone()
 		r.tags[&"push_dir"] = (t.global_position - global_position).slide(Vector3.UP).normalized()
-		if wt and wt.id == &"dagger" and t.forward().dot(forward()) > 0.5:
-			r.positional_mult = 1.25   # backstab
+		if wt and (wt.id == &"dagger" or wt.id == &"claw") and t.forward().dot(forward()) > 0.5:
+			r.positional_mult = 1.25 if wt.id == &"dagger" else 1.2   # backstab
 		_apply_attack_powers(r, a)
 		var res := t.receive_hit(r, self, t.center())
 		_on_hit_dealt(t, res, r)
 		hits += 1
+		if first_hit == null and res != null and not res.evaded and not res.blocked:
+			first_hit = t
 	if hits > 0:
 		Audio.play_at(wt.hit_sound if wt else &"hit_flesh", global_position + forward() * reach * 0.6)
+	if first_hit != null and big and not a.data.get("big_fx", false):
+		a.data["big_fx"] = true
+		_big_impact_fx(first_hit)
+
+## Knight colour for heavy blows: tempered gold, or the weapon's element when it carries one.
+func _strike_color() -> Color:
+	var el := stats.loadout.element_for(0)
+	if stats.loadout.elem_share_for(0) > 0.0 and el != Elements.PHYSICAL:
+		return Elements.color(el)
+	return Color(1.0, 0.78, 0.35)
+
+## Finisher / heavy swing: a second, wider blazing arc, a lunge of the body and a burst at the blade's path.
+func _big_swing_fx(reach: float, arc: float, cw: bool) -> void:
+	var c := _strike_color()
+	FX.spawn_facing(VFXLib.slash_arc(Color(c.r, c.g, c.b, 0.95), reach * 1.2, minf(arc * 1.15, 240.0), 0.9, 0.3, 0.35, cw), global_position, forward())
+	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 1.0, 0.95, 0.7), reach * 0.8, arc, 1.2, 0.18, 0.25, not cw), global_position, forward())
+	FX.spawn(VFXLib.light_flash(c, 3.0, 4.0, 0.2), global_position + forward() * reach * 0.5 + Vector3.UP)
+	visual.play_pose([[0.07, {"pos": Vector3(0, -0.06, 0.32), "rot": Vector3(0.16, 0, 0)}], [0.22, {"pos": Vector3(0, -0.04, 0.28), "rot": Vector3(0.1, 0, 0)}]], 0.22)
+
+## Where a finisher / heavy blow lands: ground cracks, shock ring, debris, a flash and a hard shake.
+func _big_impact_fx(t: Actor) -> void:
+	var c := _strike_color()
+	var at := t.global_position
+	FX.spawn(VFXLib.heavy_impact(c, 1.0), at)
+	FX.spawn(VFXLib.impact_flash(c.lerp(Color.WHITE, 0.4), 3.2, 0.2, 8), t.center())
+	FX.spawn(VFXLib.light_flash(c, 6.0, 6.0, 0.25), t.center())
+	Events.camera_shake.emit(0.4)
+	Events.impact.emit(at, 12.0, &"earth")
+	FX.rumble(0.6, 0.9, 0.18)
+	Audio.play_at(&"hit_heavy", at, 2.0)
 
 ## Every-fifth-attack stagger (Dawnbreaker) and the Riposte counter.
 func _apply_attack_powers(r: DamageRequest, a: TimedAction) -> void:
@@ -618,12 +678,15 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 	_apply_attack_powers(req, a)
 	var el := stats.loadout.element_for(int(a.data.get("hand", 0)))
 	var look := "arrow" if wt.id == &"bow" else "orb"
+	if wt.id == &"javelin":
+		var main := hero.equipment.get_item(&"main_weapon")
+		look = "model:" + (weapon_model_for(main, wt) if main else wt.model)
 	var speed := wt.projectile_speed * (1.0 + stats.get_stat(&"projectile_speed")) * (1.3 if heavy else 1.0)
 	var pr := Projectile.spawn(runner.parent(), cast_point(), aim_dir(), speed, req, self, BH.LAYER_ENEMY, el, look)
 	pr.max_range = wt.reach
-	pr.radius = 0.3 if wt.id == &"bow" else 0.35
+	pr.radius = 0.3 if wt.id == &"bow" or wt.id == &"javelin" else 0.35
 	pr.hit_sound = wt.hit_sound
-	if heavy and wt.id == &"bow":
+	if heavy and (wt.id == &"bow" or wt.id == &"javelin"):
 		pr.pierce = 2
 	if (heavy and wt.id == &"staff") or (a.data.get("finisher", false) and wt.id == &"staff"):
 		pr.explode_radius = 2.2
@@ -783,6 +846,8 @@ func skill_block_reason(sid: StringName) -> String:
 		return "Requires a shield"
 	if s.kind == DamageRequest.Kind.SPELL and status.is_silenced():
 		return "Silenced"
+	if (s.behavior == &"dash_strike" or s.behavior == &"leap") and is_overburdened():
+		return "Overburdened: too heavy to dash"
 	return ""
 
 func _start_skill(sid: StringName) -> void:
@@ -808,6 +873,7 @@ func _start_skill(sid: StringName) -> void:
 		return
 	_pay_skill(s)
 	visual.play_action(s.anim, rate)
+	SkillFX.cast(self, s, a)
 	if s.sound_cast != &"" and s.behavior in [&"melee_arc", &"dash_strike", &"leap", &"judgment"]:
 		Audio.play_at(s.sound_cast, global_position)
 	_after_cast(s)
@@ -851,6 +917,7 @@ func _start_channel(s: SkillDef) -> void:
 	_channel_tick = 0.0
 	visual.hold_action(s.anim, clampf(stats.get_stat(&"attack_speed", 1.0), 0.6, 1.8))
 	Audio.play_loop(&"whirlwind_loop", self)
+	SkillFX.cast(self, s, null)
 	skill_used.emit(s.id)
 	mark_combat()
 
@@ -882,7 +949,7 @@ func use_potion(kind: StringName) -> bool:
 	if potion_cd > 0.0 or not alive:
 		return false
 	var item: ItemInstance = null
-	var order := [&"greater_health_potion", &"health_potion", &"rejuvenation_elixir"] if kind == &"heal" else [&"greater_mana_potion", &"mana_potion", &"rejuvenation_elixir"]
+	var order: Array = POTION_ORDER[kind]
 	for bid in order:
 		for c in hero.inventory.cells:
 			if c != null and c.base.id == bid:
@@ -901,6 +968,32 @@ func consume_item(item: ItemInstance) -> bool:
 	if item == null or not item.base.is_consumable() or not alive:
 		return false
 	var fx: Dictionary = item.base.consumable_effect
+	if fx.has("phoenix"):
+		Events.notify.emit("The Phoenix Feather works on its own: it burns when a killing blow lands.", &"info")
+		return false
+	if fx.has("portal"):
+		if not TownPortal.open_for(self):
+			return false
+		hero.inventory.consume(item.base.id, 1)
+		return true
+	if fx.has("throw"):
+		if not _throw_consumable(item, fx["throw"]):
+			return false
+		hero.inventory.consume(item.base.id, 1)
+		return true
+	if fx.has("buff"):
+		var sid := StringName(fx["buff"])
+		status.apply(sid, float(fx.get("duration", StatusRules.base_duration(sid))))
+		mark_stats_dirty()
+		if fx.has("smoke"):
+			FX.spawn(VFXLib.particles(Color(0.55, 0.55, 0.58, 0.55), 40, 1.6, true, 1.6, 2.2, 180.0, Vector3(0, 0.4, 0), 0.8, false), global_position + Vector3.UP * 0.6)
+			Audio.play_at(&"wind_gust", global_position, -2.0)
+		else:
+			Audio.play_at(&"potion_drink", global_position)
+			FX.spawn(VFXLib.particles(ItemModels.tint_of(item.base), 16, 0.9, true, 0.3, 2.0, 40.0, Vector3(0, 2, 0), 0.4), global_position + Vector3.UP)
+		Events.notify.emit("%s: %s" % [StatusRules.name_of(sid), item.base.flavor], &"info")
+		hero.inventory.consume(item.base.id, 1)
+		return true
 	if fx.has("heal") or fx.has("mana"):
 		if potion_cd > 0.0:
 			return false
@@ -930,28 +1023,45 @@ func _mana_over_time(total: float, dur: float) -> void:
 		restore_mana(v - last[0])
 		last[0] = v, 0.0, total, dur)
 
-func _update_interaction(delta: float) -> void:
-	_interact_scan -= delta
-	if _interact_scan > 0.0:
-		return
-	_interact_scan = 0.1
+## Distance used to reach an interactable: flat (XZ) distance, as long as it is not more than about a body height above
+## or below the hero. (A 3D distance made drops on a slope or step out of reach although the hero stood on top of them.)
+func interact_distance(n3: Node3D) -> float:
+	var d := n3.global_position - global_position
+	var flat := Vector2(d.x, d.z).length()
+	return flat if absf(d.y) < INTERACT_HEIGHT else Vector3(d.x, absf(d.y) - INTERACT_HEIGHT, d.z).length() + INTERACT_HEIGHT
+
+## Best interactable in reach. Loot counts as slightly closer than doors and people so picking up is never blocked by
+## a townsperson or a door standing next to the drop.
+func find_interact_target() -> Node3D:
 	var best: Node3D = null
-	var bd := INTERACT_RANGE * INTERACT_RANGE
+	var best_score := INF
 	for n in get_tree().get_nodes_in_group(&"interactable"):
 		var n3 := n as Node3D
 		if n3 == null or not n3.is_visible_in_tree() or not n.call(&"can_interact", self):
 			continue
-		var d := n3.global_position.distance_squared_to(global_position)
 		var r: float = n.get("interact_range") if n.get("interact_range") != null else INTERACT_RANGE
-		if d < minf(bd, r * r):
-			bd = d
+		var d := interact_distance(n3)
+		if d > r:
+			continue
+		var score := d * (0.7 if n3.is_in_group(&"loot") else 1.0)
+		if score < best_score:
+			best_score = score
 			best = n3
+	return best
+
+func _update_interaction(delta: float, force := false) -> void:
+	_interact_scan -= delta
+	if _interact_scan > 0.0 and not force:
+		return
+	_interact_scan = 0.1
+	var best := find_interact_target()
 	if best != _interact_target:
 		_interact_target = best
 		interact_changed.emit(best)
 		Events.interact_prompt.emit(best.call(&"interact_text") if best else "")
 
 func interact() -> void:
+	_update_interaction(0.0, true)   # never act on a target picked up to 0.1 s ago (it may have moved, landed or gone)
 	if _interact_target and is_instance_valid(_interact_target) and _interact_target.call(&"can_interact", self):
 		_cancel_action(true)
 		if _interact_target.has_method(&"interact_anim"):
@@ -1076,6 +1186,8 @@ func _on_action_done() -> void:
 
 func _cancel_action(interrupting: bool) -> void:
 	if action != null:
+		if visual and action_kind == &"skill":
+			visual.relax_pose()
 		action.finish(false)
 		action = null
 		action_kind = &""
@@ -1151,7 +1263,6 @@ func _on_blocked(result: DamageResult, attacker: Node) -> void:
 		resource.gain(gain, 1.0 + stats.get_stat(&"valor_gain"))
 	visual.play_reaction(&"parry" if result.perfect_block else &"block")
 	Audio.play_at(&"parry" if result.perfect_block else &"block", global_position)
-	FX.spawn(VFXLib.hit_burst(center() + forward() * 0.5, Elements.PHYSICAL, 0.8 if result.perfect_block else 0.4, result.perfect_block), center() + forward() * 0.5)
 	if stats.has_flag(&"block_mana"):
 		restore_mana(stats.flag(&"block_mana"))
 		heal(max_hp() * 0.02, false)
@@ -1356,10 +1467,96 @@ func _on_actor_died(victim: Node, killer: Node) -> void:
 			FX.spawn(VFXLib.particles(Color(0.7, 0.9, 1.0, 1.0), 30, 0.6, true, 0.3, 8.0, 180.0, Vector3(0, -9, 0), 0.4), v.center())
 			Audio.play_at(&"shatter_ice", v.global_position, 2.0)
 
+# ---- Weight ------------------------------------------------------------------------------------------------------
+
+## Load >= 100%: no dodge rolls or steps (StatCalculator sets the flag).
+func is_overburdened() -> bool:
+	return stats != null and stats.has_flag(&"overburdened")
+
+var _overburden_note_t := -10.0
+
+func _overburden_notice() -> void:
+	if _time - _overburden_note_t < 2.5:
+		return
+	_overburden_note_t = _time
+	Events.notify.emit("Overburdened: too heavy to dodge. Drop or sell something.", &"error")
+	Audio.play_ui(&"ui_error")
+
+# ---- Throwables --------------------------------------------------------------------------------------------------
+
+## Firebomb / Frost Flask: lobbed at the cursor (at most 12 m), bursting on landing.
+func _throw_consumable(item: ItemInstance, spec: Dictionary) -> bool:
+	if FX.world == null:
+		return false
+	var to := aim_point
+	var flat := to - global_position
+	flat.y = 0.0
+	if flat.length() > 12.0:
+		to = global_position + flat.normalized() * 12.0
+	to = CombatQuery.ground_at(get_world_3d(), to)
+	_face_aim_now()
+	visual.play_action(&"cast_quick", 1.2)
+	var from := global_position + Vector3.UP * 1.5 + forward() * 0.3
+	var flight := clampf(from.distance_to(to) / 14.0, 0.35, 0.9)
+	var body := ItemModels.instance(item.base, 1.4)
+	var el := int(spec.get("element", Elements.FIRE))
+	Lob.throw_node(FX.world, body, from, to, flight, Elements.color(el))
+	Audio.play_at(&"swing_light", global_position, -2.0)
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.SPELL
+	req.attacker = stats
+	req.use_weapon = false
+	var lv := float(hero.progress.level)
+	var dmg := float(spec.get("base", 20.0)) + float(spec.get("per_level", 5.0)) * lv
+	req.base_min = dmg * 0.85
+	req.base_max = dmg * 1.15
+	req.conversion = {el: 1.0}
+	req.knockback = 5.0
+	req.poise = 20.0
+	req.evadable = false
+	req.label = item.base.display_name
+	var st := StringName(spec.get("status", &""))
+	if st != &"":
+		req.direct_status = {st: 120.0}
+	var radius := float(spec.get("radius", 3.0))
+	get_tree().create_timer(flight).timeout.connect(func() -> void:
+		if not is_inside_tree():
+			return
+		AreaEffects.burst(self, to, radius, BH.LAYER_ENEMY, req, self)
+		FX.spawn(VFXLib.ring_wave(Elements.color(el), radius, 0.4, 0.8), to)
+		FX.spawn(VFXLib.particles(Elements.color(el), 40, 0.8, true, 0.45, 6.0, 180.0, Vector3(0, -4, 0), 0.5), to + Vector3.UP * 0.4)
+		FX.spawn(VFXLib.light_flash(Elements.color(el), 6.0, radius * 2.0, 0.35), to + Vector3.UP)
+		Audio.play_at(&"fire_explode" if el == Elements.FIRE else &"shatter_ice", to, 2.0)
+		Events.camera_shake.emit(0.2))
+	mark_combat()
+	return true
+
+# ---- Phoenix Feather ---------------------------------------------------------------------------------------------
+
+## A killing blow burns a Phoenix Feather from the bag instead: rise at half HP with a short invulnerable flare.
+func _try_phoenix() -> bool:
+	if hero == null or hero.inventory.count_of(&"phoenix_feather") <= 0:
+		return false
+	hero.inventory.consume(&"phoenix_feather", 1)
+	hp = max_hp() * 0.5
+	health_changed.emit(hp, max_hp())
+	status.cleanse([&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"])
+	status.apply(&"fortified", 3.0, 0.0, 0.0, Elements.PHYSICAL, [StatModifier.more(&"damage_taken", -0.9)])
+	FX.spawn(VFXLib.light_pillar(Color(1.0, 0.55, 0.15), 6.0, 1.2, 0.9), global_position)
+	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.6, 0.2, 0.95), 4.0, 0.6, 0.9), global_position)
+	FX.spawn(VFXLib.particles(Color(1.0, 0.6, 0.15, 1.0), 60, 1.2, true, 0.4, 6.0, 60.0, Vector3(0, 3.0, 0), 0.6), global_position + Vector3.UP)
+	Audio.play_at(&"fire_whoosh", global_position, 3.0)
+	Audio.play_at(&"holy_chime", global_position, 0.0)
+	Events.camera_shake.emit(0.3)
+	Events.notify.emit("The Phoenix Feather burns — you rise again!", &"loot")
+	return true
+
 # ---- Death & respawn -------------------------------------------------------------------------------------------
 
 func die(killer: Node) -> void:
 	if not alive:
+		return
+	if _try_phoenix():
 		return
 	_cancel_action(false)
 	super.die(killer)
@@ -1368,6 +1565,7 @@ func die(killer: Node) -> void:
 	Audio.play_at(&"body_fall", global_position)
 	player_died.emit()
 	Events.player_died.emit()
+	TownPortal.expire("Your Town Portal collapsed when you fell.")
 
 func respawn() -> void:
 	alive = true

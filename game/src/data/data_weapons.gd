@@ -1,5 +1,5 @@
 class_name DataWeapons
-## The eight weapon categories: stance, movement, attack timing, range, damage, speed, impact, skill compatibility,
+## The thirteen weapon categories: stance, movement, attack timing, range, damage, speed, impact, skill compatibility,
 ## animations. Light attacks chain through four animations; heavy attacks may branch from any chain step.
 
 static func _w(id: StringName, name: String, d: Dictionary) -> WeaponTypeDef:
@@ -10,6 +10,10 @@ static func _w(id: StringName, name: String, d: Dictionary) -> WeaponTypeDef:
 		w.set(k, d[k])
 	w.model = "res://assets/weapons/%s.glb" % id
 	w.icon = "res://assets/ui/icons/items/%s.svg" % id
+	if not ResourceLoader.exists(w.model) and d.has("rep"):
+		# new categories (bh-006) have no shared type model: their representative base's own model stands in
+		w.model = "res://assets/items/%s.glb" % d["rep"]
+		w.icon = "res://assets/ui/icons/items3d/%s.png" % d["rep"]
 	return w
 
 static func build() -> Array:
@@ -67,4 +71,41 @@ static func build() -> Array:
 			"dual_light_anims": [&"wand_1", &"wand_2", &"wand_3", &"wand_4"], "dual_heavy_anim": &"wand_heavy",
 			"chain_mults": [1.0, 1.0, 1.0, 1.35], "swing_sound": &"cast_lightning", "hit_sound": &"lightning_zap",
 			"description": "Rapid elemental darts while moving. Low impact, high critical chance."}),
+		# ---- bh-006 categories: they reuse the existing clip library (no new animations) ----
+		_w(&"greataxe", "Great Axe", {"two_handed": true, "attacks_per_second": 0.88, "reach": 2.9, "arc_degrees": 150.0,
+			"crit_chance": 0.05, "impact": 1.6, "knockback": 6.5, "poise_damage": 25.0, "heavy_multiplier": 2.3, "heavy_knockback": 15.0,
+			"charge_max": 1.2, "charge_bonus": 0.9, "scaling": {&"str": 1.1}, "idle_anim": &"idle_2h", "length": 1.45, "move_mult": 0.12,
+			"light_anims": [&"gs_1", &"gs_2", &"gs_3", &"gs_4"], "heavy_anim": &"gs_heavy", "chain_mults": [1.0, 1.08, 1.2, 1.8],
+			"chain_knock": [1.0, 1.1, 1.4, 2.6], "swing_sound": &"swing_heavy", "hit_sound": &"hit_heavy", "rep": &"lumber_greataxe",
+			"trail_color": Color(1.0, 0.85, 0.7, 0.55),
+			"description": "Two-handed cleaving arcs. The heaviest blows in the armoury: huge stagger, slow recovery."}),
+		_w(&"javelin", "Javelin", {"ranged": true, "projectile_speed": 28.0, "attacks_per_second": 1.15, "reach": 17.0,
+			"arc_degrees": 0.0, "crit_chance": 0.07, "impact": 0.95, "knockback": 3.5, "poise_damage": 11.0, "heavy_multiplier": 2.2,
+			"heavy_knockback": 9.0, "charge_max": 0.9, "charge_bonus": 0.9, "scaling": {&"str": 0.4, &"agi": 0.3, &"dex": 0.3},
+			"idle_anim": &"idle_1h", "length": 1.5, "move_mult": 0.4, "light_anims": [&"wand_1", &"wand_2", &"wand_3", &"wand_4"],
+			"heavy_anim": &"spear_heavy", "chain_mults": [1.0, 1.0, 1.05, 1.4], "swing_sound": &"swing_light", "hit_sound": &"arrow_impact",
+			"rep": &"reed_javelin",
+			"description": "Thrown one-handed and always returns to the hand. Pairs with a shield; hold heavy to hurl a piercing throw."}),
+		_w(&"club", "Club", {"dual_wieldable": true, "attacks_per_second": 1.2, "reach": 2.2, "arc_degrees": 110.0,
+			"crit_chance": 0.04, "impact": 1.45, "knockback": 5.0, "poise_damage": 19.0, "heavy_multiplier": 2.0, "heavy_knockback": 12.0,
+			"scaling": {&"str": 1.0}, "idle_anim": &"idle_1h", "length": 0.8, "move_mult": 0.25,
+			"light_anims": [&"axe_1", &"axe_2", &"axe_3", &"axe_4"], "heavy_anim": &"axe_heavy",
+			"dual_light_anims": dual_chain, "dual_heavy_anim": &"dual_heavy", "chain_mults": [1.0, 1.05, 1.1, 1.6],
+			"chain_knock": [1.0, 1.1, 1.3, 2.4], "swing_sound": &"swing_blunt", "hit_sound": &"hit_heavy", "rep": &"oak_cudgel",
+			"description": "Blunt, brutal and simple. Crushes poise and hurls enemies into walls."}),
+		_w(&"claw", "Claw", {"dual_wieldable": true, "attacks_per_second": 1.85, "reach": 1.8, "arc_degrees": 120.0,
+			"crit_chance": 0.09, "impact": 0.7, "knockback": 2.0, "poise_damage": 7.0, "heavy_multiplier": 1.8, "heavy_knockback": 6.0,
+			"scaling": {&"agi": 0.6, &"dex": 0.4}, "idle_anim": &"idle_dagger", "length": 0.45, "move_mult": 0.5,
+			"light_anims": [&"dagger_1", &"dagger_2", &"dagger_3", &"dagger_4"], "heavy_anim": &"dagger_heavy",
+			"dual_light_anims": dual_chain, "dual_heavy_anim": &"dual_heavy", "chain_mults": [1.0, 1.0, 1.05, 1.45],
+			"swing_sound": &"swing_dagger", "hit_sound": &"hit_flesh", "rep": &"iron_talons",
+			"trail_color": Color(1.0, 0.8, 0.8, 0.5),
+			"description": "Blades worn over the knuckles. Wide raking slashes; attacks from behind deal 20% more damage."}),
+		_w(&"knuckles", "Knuckles", {"dual_wieldable": true, "attacks_per_second": 2.1, "reach": 1.6, "arc_degrees": 90.0,
+			"crit_chance": 0.08, "impact": 1.15, "knockback": 3.5, "poise_damage": 10.0, "heavy_multiplier": 1.9, "heavy_knockback": 9.0,
+			"scaling": {&"str": 0.5, &"agi": 0.5}, "idle_anim": &"idle_dagger", "length": 0.25, "move_mult": 0.55,
+			"light_anims": [&"dagger_2", &"dagger_1", &"dagger_4", &"dagger_3"], "heavy_anim": &"dagger_heavy",
+			"dual_light_anims": dual_chain, "dual_heavy_anim": &"dual_heavy", "chain_mults": [1.0, 1.0, 1.1, 1.5],
+			"chain_knock": [1.0, 1.0, 1.3, 2.2], "swing_sound": &"swing_blunt", "hit_sound": &"hit_heavy", "rep": &"brass_knuckles",
+			"description": "Fists of forged metal. The fastest weapon: rapid punches that still stagger."}),
 	]

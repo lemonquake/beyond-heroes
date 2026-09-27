@@ -89,6 +89,9 @@ static func item(it: ItemInstance, opts := {}) -> Control:
 		box.add_child(eq)
 	return box
 
+static func _wt(w: float) -> String:
+	return ("%.2f" % w) if w < 1.0 else ("%.1f" % w)
+
 static func _diff_row(r: Dictionary) -> Control:
 	var h := HBoxContainer.new()
 	var n := lbl(r.name, 15, UITheme.TEXT, null, false)
@@ -135,7 +138,7 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		if it.base.element != Elements.PHYSICAL and it.base.element_share > 0.0:
 			v.add_child(lbl("%d%% as %s" % [roundi(it.base.element_share * 100.0), Elements.NAMES[it.base.element]], 15, Elements.color(it.base.element)))
 		if wt:
-			v.add_child(lbl("%.2f attacks per second · %s%% critical chance · %.1f m reach" % [wt.attacks_per_second, StatDefs._num(wt.crit_chance * 100.0), wt.reach], 15, UITheme.TEXT))
+			v.add_child(lbl("%.2f attacks per second · %s%% critical chance · %.1f m reach" % [it.base.weapon_aps(), StatDefs._num(wt.crit_chance * 100.0), wt.reach], 15, UITheme.TEXT))
 			if wt.two_handed:
 				v.add_child(lbl("Two-handed", 14, UITheme.TEXT_DIM))
 	elif it.base.category == &"shield":
@@ -213,6 +216,13 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	v.add_child(rule())
 	var foot := HBoxContainer.new()
 	var left := lbl("Item level %d" % it.ilvl if it.is_equipment() else ("Stack of %d" % it.count if it.count > 1 else ""), 14, UITheme.TEXT_MUTED, null, false)
+	# carried weight (bh-006): equipment is heavy, the rest is light
+	var wtxt := "Weight %s" % _wt(it.base.weight)
+	if it.count > 1:
+		wtxt = "Weight %s each · %s" % [_wt(it.base.weight), _wt(it.weight())]
+	var wl := lbl(wtxt, 14, UITheme.TEXT_DIM, UITheme.number_font(), false)
+	wl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	foot.add_child(wl)
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	foot.add_child(left)
 	var price: int = opts.get("price", -1)

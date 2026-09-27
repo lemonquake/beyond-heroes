@@ -711,7 +711,7 @@ func _melee_hit(a: Dictionary, act: TimedAction, w: int) -> void:
 		inv.changed.emit()
 		_stolen_gold += take
 		FX.text_popup(target.center() + Vector3.UP * 0.8, "-%d gold" % take, Color(1.0, 0.8, 0.3), 0.9)
-	FX.spawn(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position)
+	FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.5, 0.4, 0.6), reach, arc, 1.0, 0.2, 0.5), global_position, forward())
 
 func _fire(a: Dictionary) -> void:
 	if target == null:
@@ -753,7 +753,7 @@ func _telegraph_aoe(a: Dictionary, at: Vector3, delay: float) -> void:
 				var r := req.clone()
 				r.tags[&"push_dir"] = (t.global_position - global_position).slide(Vector3.UP).normalized()
 				t.receive_hit(r, self, t.center())
-			FX.spawn(VFXLib.slash_arc(Color(1.0, 0.45, 0.3, 0.8), radius, arc, 1.2, 0.3, 0.7), global_position)
+			FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.45, 0.3, 0.8), radius, arc, 1.2, 0.3, 0.7), global_position, forward())
 			Events.camera_shake.emit(0.3))
 		return
 	var blast := AreaEffects.delayed(FX.world, CombatQuery.ground_at(get_world_3d(), at), radius, delay, req, self, BH.LAYER_PLAYER,
@@ -873,7 +873,7 @@ func _try_ability() -> bool:
 					_cast_ability(ab, func() -> void:
 						if is_instance_valid(hurt) and hurt.alive:
 							hurt.heal(hurt.max_hp() * float(ab.amount))
-							FX.spawn(VFXLib.beam(Color(1.0, 0.6, 0.3), 3.0, 0.6), hurt.global_position)
+							FX.spawn(VFXLib.beam_flash(Color(1.0, 0.6, 0.3), 3.0, 0.6), hurt.global_position)
 							FX.spawn(VFXLib.particles(Color(1.0, 0.7, 0.3, 0.9), 20, 0.8, true, 0.4, 2.0, 40.0, Vector3(0, 3, 0), 0.5), hurt.center()))
 					return true
 			"buff":
@@ -1070,6 +1070,7 @@ func _on_staggered(_broken: bool) -> void:
 	_interrupt()
 	if visual:
 		visual.play_reaction(&"stagger_heavy" if is_elite or is_boss else &"stagger")
+		visual.shudder(1.0)
 	Audio.play_at(&"stagger", global_position)
 	if is_boss or is_elite:
 		FX.text_popup(center() + Vector3.UP * 1.2, "Staggered!", UITheme.GOLD, 1.2)

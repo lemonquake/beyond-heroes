@@ -290,6 +290,132 @@ func _process(delta: float) -> void:
 		_animate_floating(delta)
 	if _trail:
 		_trail.tick(delta)
+	_update_motion(delta)
+
+# ---- Procedural motion layer: hit flinch (spring) + authored skill poses, applied on top of the clips -----------
+# The whole visual node is tilted/offset/squashed, so it layers over any animation (and over creatures without a rig).
+
+const FLINCH_STIFF := 260.0
+const FLINCH_DAMP := 16.0
+const FLINCH_TILT := 0.55          # radians of lean per unit of flinch
+const FLINCH_SHIFT := 0.22         # metres of body shove per unit of flinch
+
+var _flinch := Vector3.ZERO        # local-space lean direction * amount (x/z used)
+var _flinch_v := Vector3.ZERO
+var _squash := 0.0                 # 0..1 vertical squash from impacts, decays fast
+var _shake := 0.0                  # 0..1 high-frequency tremble (heavy hits, stagger)
+var _shake_t := 0.0
+## Skill pose offsets (tweened by SkillFX): position, euler rotation, scale, and the height the rotation pivots around.
+var pose_pos := Vector3.ZERO
+var pose_rot := Vector3.ZERO
+var pose_scale := Vector3.ONE
+var pose_pivot := 0.0
+var _pose_tw: Tween
+var _motion_on := false
+var _rest := Transform3D.IDENTITY   # the node's own transform before the layer took over (menus place visuals)
+
+func _wake_motion() -> void:
+	if not _motion_on:
+		_rest = transform
+		_motion_on = true
+
+## Knock the body away from a blow. `world_dir` is the direction the blow travelled (attacker -> target);
+## `strength` ~0.2 (jab) .. 1.5 (crushing crit). Heavy actors should pass a reduced strength.
+func flinch(world_dir: Vector3, strength: float) -> void:
+	if _dead or not is_finite(strength) or strength <= 0.0:
+		return
+	var d := world_dir.slide(Vector3.UP)
+	if d.length_squared() < 0.0001:
+		d = -global_transform.basis.z
+	var local := (global_transform.basis.inverse() * d.normalized()).slide(Vector3.UP).normalized()
+	_wake_motion()
+	_flinch_v += local * clampf(strength, 0.0, 1.6) * 7.0
+	_squash = maxf(_squash, clampf(strength * 0.6, 0.0, 0.8))
+	if strength >= 0.7:
+		_shake = maxf(_shake, clampf(strength - 0.5, 0.0, 1.0))
+
+## Tremble in place (stagger, guard break) without a push direction.
+func shudder(amount := 0.8) -> void:
+	_wake_motion()
+	_shake = maxf(_shake, amount)
+
+## Tween the skill pose layer through `keys`: [[time_s, {pos, rot, scale, pivot}], ...] relative to now.
+## Each key eases from the previous state; the pose always returns to rest at the end.
+func play_pose(keys: Array, settle := 0.18) -> void:
+	if _pose_tw:
+		_pose_tw.kill()
+	_wake_motion()
+	_pose_tw = create_tween()
+	var t_prev := 0.0
+	for k in keys:
+		var t: float = k[0]
+		var dur := maxf(0.01, t - t_prev)
+		t_prev = t
+		var d: Dictionary = k[1]
+		if d.get("instant", false):
+			# jump straight to this state (e.g. a full flip ends at TAU: snap to 0 so it doesn't unwind)
+			_pose_tw.tween_callback(func() -> void:
+				pose_pos = d.get("pos", Vector3.ZERO)
+				pose_rot = d.get("rot", Vector3.ZERO)
+				pose_scale = d.get("scale", Vector3.ONE))
+			continue
+		var trans: int = d.get("trans", Tween.TRANS_SINE)
+		var ease_: int = d.get("ease", Tween.EASE_OUT)
+		_pose_tw.set_parallel(true)
+		_pose_tw.tween_property(self, "pose_pos", d.get("pos", Vector3.ZERO), dur).set_trans(trans).set_ease(ease_)
+		_pose_tw.tween_property(self, "pose_rot", d.get("rot", Vector3.ZERO), dur).set_trans(trans).set_ease(ease_)
+		_pose_tw.tween_property(self, "pose_scale", d.get("scale", Vector3.ONE), dur).set_trans(trans).set_ease(ease_)
+		_pose_tw.tween_property(self, "pose_pivot", d.get("pivot", pose_pivot), dur)
+		_pose_tw.set_parallel(false)
+		_pose_tw.tween_interval(0.0)
+	_pose_tw.set_parallel(true)
+	_pose_tw.tween_property(self, "pose_pos", Vector3.ZERO, settle).set_trans(Tween.TRANS_SINE)
+	_pose_tw.tween_property(self, "pose_rot", Vector3.ZERO, settle).set_trans(Tween.TRANS_SINE)
+	_pose_tw.tween_property(self, "pose_scale", Vector3.ONE, settle).set_trans(Tween.TRANS_SINE)
+
+## Ease the pose layer back to rest (an interrupted skill).
+func relax_pose(time := 0.1) -> void:
+	if not _motion_on or (pose_pos == Vector3.ZERO and pose_rot == Vector3.ZERO and pose_scale == Vector3.ONE):
+		return
+	play_pose([], time)
+
+func clear_pose() -> void:
+	if _pose_tw:
+		_pose_tw.kill()
+	pose_pos = Vector3.ZERO
+	pose_rot = Vector3.ZERO
+	pose_scale = Vector3.ONE
+	pose_pivot = 0.0
+
+func _update_motion(delta: float) -> void:
+	if not _motion_on:
+		return
+	delta = minf(delta, 0.05)
+	_flinch_v += (-_flinch * FLINCH_STIFF - _flinch_v * FLINCH_DAMP) * delta
+	_flinch += _flinch_v * delta
+	_squash = move_toward(_squash, 0.0, delta * 5.0)
+	_shake = move_toward(_shake, 0.0, delta * 2.5)
+	_shake_t += delta
+	if _dead:
+		_flinch = _flinch.lerp(Vector3.ZERO, clampf(delta * 8.0, 0.0, 1.0))
+	var rot := pose_rot + Vector3(_flinch.z * FLINCH_TILT, 0.0, -_flinch.x * FLINCH_TILT)
+	var pos := pose_pos + Vector3(_flinch.x, 0.0, _flinch.z) * FLINCH_SHIFT
+	if _shake > 0.0:
+		pos += Vector3(sin(_shake_t * 71.0), 0.0, cos(_shake_t * 57.0)) * 0.035 * _shake
+		rot.z += sin(_shake_t * 63.0) * 0.05 * _shake
+	var sq := _squash * 0.14
+	var sc := pose_scale * Vector3(1.0 + sq * 0.5, 1.0 - sq, 1.0 + sq * 0.5)
+	var b := Basis.from_euler(rot) * Basis.from_scale(sc)
+	if pose_pivot != 0.0:
+		var piv := Vector3.UP * pose_pivot
+		pos += piv - b * piv
+	transform = _rest * Transform3D(b, pos)
+	var posing := _pose_tw != null and _pose_tw.is_running()
+	if not posing and _flinch.length() < 0.002 and _flinch_v.length() < 0.01 and _squash <= 0.0 and _shake <= 0.0 and pose_pos == Vector3.ZERO and pose_rot == Vector3.ZERO and pose_scale == Vector3.ONE:
+		_flinch = Vector3.ZERO
+		_flinch_v = Vector3.ZERO
+		transform = _rest
+		_motion_on = false
 
 func _end_action() -> void:
 	var a := _action
@@ -429,6 +555,7 @@ func play_reaction(kind: StringName, direction := &"") -> void:
 
 func play_death(clip: StringName = &"death") -> void:
 	_dead = true
+	clear_pose()
 	_in_action = true
 	_action_loop = true
 	_upper_target = 0.0

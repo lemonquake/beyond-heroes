@@ -229,6 +229,26 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 	return pool[0]
 
 ## Dedicated roll for special items (set piece or unique) — used by elite/boss loot and rare merchant stock.
+## A random consumable for a monster drop: weighted by drop_weight, level requirement at most ilvl + 3.
+static func random_consumable(rng: RandomNumberGenerator, ilvl: int) -> ItemBaseDef:
+	var pool := []
+	var total := 0
+	for b: ItemBaseDef in DB.item_bases.values():
+		if b.category != &"consumable" or b.drop_weight <= 0 or b.level_req > ilvl + 3:
+			continue
+		if b.id in [&"health_potion", &"mana_potion", &"greater_health_potion", &"greater_mana_potion", &"rejuvenation_elixir", &"antidote", &"return_scroll"]:
+			continue   # the original potions have their own drop rolls
+		pool.append(b)
+		total += b.drop_weight
+	if total <= 0:
+		return null
+	var r := rng.randi_range(1, total)
+	for b in pool:
+		r -= b.drop_weight
+		if r <= 0:
+			return b
+	return pool[-1]
+
 static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool) -> ItemBaseDef:
 	var pool := []
 	for b in DB.item_bases.values():

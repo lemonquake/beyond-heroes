@@ -28,6 +28,9 @@ var _search: LineEdit
 var _rarity: OptionButton
 var _sort: OptionButton
 var _gold: Label
+var _load_bar: ProgressBar
+var _load_fill: StyleBoxFlat
+var _load_text: Label
 var _space: Label
 var _summary: GridContainer
 var _sets: VBoxContainer
@@ -180,6 +183,29 @@ func _build_bag() -> Control:
 	status.add_child(sp)
 	_space = UITheme.label("", 16, UITheme.TEXT_DIM, UITheme.body_font())
 	status.add_child(_space)
+	# carried load (bh-006): worn + bagged weight against capacity (Strength); slows you from 35%, 100% = no dodging
+	var lrow := hbox(10)
+	col.add_child(lrow)
+	var lt := UITheme.label("Load", 16, UITheme.TEXT_DIM, UITheme.body_bold())
+	lrow.add_child(lt)
+	_load_bar = ProgressBar.new()
+	_load_bar.show_percentage = false
+	_load_bar.max_value = 1.0
+	_load_bar.step = 0.001
+	_load_bar.custom_minimum_size = Vector2(260, 14)
+	_load_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var lbg := StyleBoxFlat.new()
+	lbg.bg_color = Color(0, 0, 0, 0.5)
+	lbg.set_corner_radius_all(3)
+	_load_bar.add_theme_stylebox_override("background", lbg)
+	_load_fill = StyleBoxFlat.new()
+	_load_fill.set_corner_radius_all(3)
+	_load_bar.add_theme_stylebox_override("fill", _load_fill)
+	lrow.add_child(_load_bar)
+	_load_text = UITheme.label("", 16, UITheme.PARCHMENT, UITheme.number_font())
+	_load_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lrow.add_child(_load_text)
+	TooltipLayer.attach(lrow, func() -> Control: return Tips.stat(&"load", hero.compute_stats()) if hero else null)
 	# selected-item action bar
 	var act := inset()
 	col.add_child(act)
@@ -239,9 +265,29 @@ func _refresh_items() -> void:
 	_apply_filter()
 	_gold.text = _fmt_gold(hero.inventory.gold)
 	_space.text = "%d / %d slots free" % [hero.inventory.free_cells(), hero.inventory.capacity()]
+	_refresh_load()
 	preview.dress(hero)
 	_refresh_summary()
 	_update_actions()
+
+func _refresh_load() -> void:
+	var p := Game.player as Player
+	if p and p.hero == hero:
+		p.ensure_stats()          # the bag just changed: recompute before reading (else one change behind the HUD)
+	var d: DerivedStats = p.stats if p and p.hero == hero and p.stats else hero.compute_stats()
+	var load := d.get_stat(&"load")
+	_load_bar.value = clampf(load, 0.0, 1.0)
+	var col := Color(0.45, 0.8, 0.4)
+	var note := "no slowdown"
+	var slow := 1.0 - StatCalculator.load_move_mult(load)
+	if load >= 1.0:
+		col = Color(0.95, 0.25, 0.2)
+		note = "Overburdened: %d%% slower, cannot dodge" % roundi(slow * 100.0)
+	elif slow > 0.0:
+		col = Color(0.95, 0.7, 0.25)
+		note = "%d%% slower" % roundi(slow * 100.0)
+	_load_fill.bg_color = col
+	_load_text.text = "%.1f / %.0f  (%d%%) · %s" % [d.get_stat(&"carry_weight"), d.get_stat(&"carry_capacity"), roundi(load * 100.0), note]
 
 func _apply_filter() -> void:
 	for c in cells:

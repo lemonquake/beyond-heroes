@@ -35,6 +35,7 @@ func _ready() -> void:
 	_loading = LoadingScreen.new()
 	add_child(_loading)
 	Events.world_flag_set.connect(_on_flag)
+	Events.player_leveled.connect(func(_l: int, _g: int) -> void: _check_tempo_grade())
 
 func _process(delta: float) -> void:
 	if hero and in_session:
@@ -60,13 +61,24 @@ func new_hero(class_id: StringName, hero_name: String) -> HeroData:
 	h.init_new()
 	return h
 
+## A new hero: Tobren, the starter Tempo, comes through the waypoint with them, and once the world is up he walks them
+## through Tempos and the controls (DataGuide; skipped if that conversation already ended for this hero).
 func start_new_game(class_id: StringName, hero_name: String, slot: int, diff := 1) -> void:
 	hero = new_hero(class_id, hero_name)
+	TempoRules.grant_starter(hero)
 	hero.difficulty = diff
 	save_slot = slot
 	difficulty = diff
 	await _begin_session(&"sanctuary", &"start")
 	save_now()
+	open_intro()
+
+## Open the new-game guide unless this hero has already heard it.
+func open_intro() -> void:
+	if hero == null or has_flag(DataGuide.DONE_FLAG):
+		return
+	if ui_root and is_instance_valid(ui_root) and ui_root.has_method(&"start_intro"):
+		ui_root.start_intro()
 
 func continue_game(slot: int) -> bool:
 	var h := SaveSystem.load_hero(slot)
@@ -184,6 +196,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 		Spawner.populate(map, difficulty)
 		NpcDirectory.populate(map)
 		TempoParty.spawn_for(map, player, hero)
+	TownPortal.spawn_for(map, id)
 	Audio.play_music(def.music)
 	Audio.play_ambience(def.ambience)
 	Audio.set_environment_reverb(def.reverb)
@@ -215,6 +228,28 @@ func travel(id: StringName, spawn_id: StringName) -> void:
 	await _loading.show_for(def)
 	await get_tree().process_frame
 	load_map(id, spawn_id)
+	await get_tree().process_frame
+	if in_session:
+		save_now()
+	await _loading.hide_screen()
+	travelling = false
+
+## Travel through a Town Portal: loading screen, then the hero stands at `pos` on map `id` (not at a named spawn).
+func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
+	if travelling:
+		return
+	travelling = true
+	await _loading.show_for(DB.map_def(id))
+	await get_tree().process_frame
+	if id != current_map_id or current_map == null:
+		load_map(id, &"start")
+	if player and is_instance_valid(player):
+		player.global_transform = Transform3D(Basis(Vector3.UP, yaw), pos + Vector3.UP * 0.05)
+		if player is CharacterBody3D:
+			(player as CharacterBody3D).velocity = Vector3.ZERO
+		if player.has_method(&"on_teleported"):
+			player.call(&"on_teleported")
+		TempoParty.regroup(player)
 	await get_tree().process_frame
 	if in_session:
 		save_now()
@@ -296,3 +331,12 @@ func _on_flag(flag: StringName, _v: Variant) -> void:
 	if current_map:
 		current_map.apply_flag_visuals(flag, true)
 		current_map.refresh_teleporters()
+	_check_tempo_grade()
+
+## A level or a deed may raise the grade of the spirits answering the Tempo-Caller: the old offers fade at once.
+func _check_tempo_grade() -> void:
+	if hero == null or not in_session:
+		return
+	var g := TempoRules.check_grade(hero)
+	if g > 0:
+		Events.notify.emit("Stronger spirits answer at the Shrine of the Fallen: %s grade." % DataTempos.grade_def(g).name, &"info")
