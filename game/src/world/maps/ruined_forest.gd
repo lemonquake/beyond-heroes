@@ -17,6 +17,12 @@ const TOWER_PATH := [Vector2(24, -2), Vector2(27, 8), Vector2(30, 17)]
 const CAMP_PATH := [Vector2(20, -1), Vector2(20, -10)]
 const SOUTH_ROAD := [Vector2(-34, 6), Vector2(-33.5, 15), Vector2(-33, 26.5), Vector2(-31.5, 38), Vector2(-30, 46), Vector2(-30, 54)]
 const BRIDGE_Z := 4.0
+## bh-012: the Rime path up the north-west rim to the Rimeglass Barrow's gate (DataIsland rf_barrow_path)
+const BARROW_PATH := [Vector2(-34, 6), Vector2(-37, -6), Vector2(-42, -18), Vector2(-46, -31)]
+const BARROW := Vector2(-46, -31)
+## bh-013: trails to the other dungeon gates on this map (DataIsland `<dungeon>_trail`), and the gates themselves
+var _xtrails: Array = []
+var _xgates: Array[Vector2] = []
 const TOWER := Vector3(31, 0, 24)
 const CAMP := Vector3(20, 0, -15)
 const GATE := Vector3(68, 0, -4)
@@ -46,6 +52,10 @@ func compose() -> void:
 	_grove_and_gate()
 	_raiders()
 	_herbs()
+	for gid in DataDungeons.gates_on(def.id):
+		var bg: Dictionary = DataDungeons.get_def(gid).surface
+		dungeon_gate(gid, bg.pos, bg.yaw)
+	enemy_zone("rime_spill", Vector3(-40, 0, -22), 4.0, [&"rime_husk", &"hollow_soldier", &"rime_husk"], 3, 0.1, true)
 	_forest()
 	set_bounds(AABB(Vector3(-72, -8, -48), Vector3(144, 20, 96)))
 	view("overview", Vector3(0, 0, 0), 0.0, 70.0, 150.0, 50.0)
@@ -87,15 +97,33 @@ func _base(x: float, z: float) -> float:
 	h += maxf(ex, ez) * 12.0
 	return h
 
+## The bh-013 trails and gates (read once from DataIsland / DataDungeons).
+func _extras() -> void:
+	if not _xtrails.is_empty():
+		return
+	for r in DataIsland.roads_on(&"ruined_forest"):
+		if String(r.id).ends_with("_trail"):
+			_xtrails.append(r.points)
+	for gid in DataDungeons.gates_on(&"ruined_forest"):
+		if gid != &"barrow":
+			_xgates.append(DataDungeons.get_def(gid).surface.pos)
+
+func _xtrail_dist(p: Vector2) -> float:
+	_extras()
+	var d := INF
+	for pts in _xtrails:
+		d = minf(d, _poly_dist(p, pts))
+	return d
+
 func _height(x: float, z: float) -> float:
 	var p := Vector2(x, z)
 	var h := _base(x, z)
 	# flatten the road into a gently graded bed
-	var rd := minf(minf(_poly_dist(p, ROAD), _poly_dist(p, SOUTH_ROAD)), minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH)))
+	var rd := minf(minf(minf(_poly_dist(p, ROAD), _poly_dist(p, SOUTH_ROAD)), minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH))), minf(_poly_dist(p, BARROW_PATH), _xtrail_dist(p)))
 	var road_h := _base(x, z) * 0.35
 	h = lerpf(road_h, h, smoothstep(2.0, 6.0, rd))
 	# flat clearings
-	for c in [[Vector2(-60, 11), 10.0], [Vector2(-30, 8), 17.0], [Vector2(CAMP.x, CAMP.z), 9.0], [Vector2(GATE.x - 8, GATE.z), 9.0]]:
+	for c in [[Vector2(-60, 11), 10.0], [Vector2(-30, 8), 17.0], [Vector2(CAMP.x, CAMP.z), 9.0], [Vector2(GATE.x - 8, GATE.z), 9.0], [BARROW + Vector2(0, 2), 9.0]] + _xgates.map(func(g): return [g, 9.0]):
 		var k := 1.0 - smoothstep(float(c[1]) * 0.6, float(c[1]), p.distance_to(c[0]))
 		h = lerpf(h, road_h, k)
 	# the ravine
@@ -109,7 +137,7 @@ func _height(x: float, z: float) -> float:
 func _splat(x: float, z: float) -> Color:
 	var p := Vector2(x, z)
 	var rd := minf(_poly_dist(p, ROAD), _poly_dist(p, SOUTH_ROAD))
-	var side := minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH))
+	var side := minf(minf(_poly_dist(p, TOWER_PATH), _poly_dist(p, CAMP_PATH)), minf(_poly_dist(p, BARROW_PATH), _xtrail_dist(p)))
 	var path := 1.0 - smoothstep(1.6, 3.2, rd)
 	path = maxf(path, (1.0 - smoothstep(1.0, 2.2, side)) * 0.8)
 	var n := sin(x * 0.31 + z * 0.17) * 0.5 + 0.5
@@ -362,7 +390,7 @@ func cylinder_shard(p: Vector3) -> MeshInstance3D:
 func _forest() -> void:
 	var clear := func(x: float, z: float) -> bool:
 		var p := Vector2(x, z)
-		if _poly_dist(p, ROAD) < 5.5 or _poly_dist(p, SOUTH_ROAD) < 5.0 or _poly_dist(p, TOWER_PATH) < 3.5 or _poly_dist(p, CAMP_PATH) < 3.5:
+		if _poly_dist(p, ROAD) < 5.5 or _poly_dist(p, SOUTH_ROAD) < 5.0 or _poly_dist(p, TOWER_PATH) < 3.5 or _poly_dist(p, CAMP_PATH) < 3.5 or _poly_dist(p, BARROW_PATH) < 4.0 or p.distance_to(BARROW) < 9.0 or _xtrail_dist(p) < 4.0 or _xgates.any(func(g): return p.distance_to(g) < 9.0):
 			return true
 		if absf(x - _ravine_x(z)) < 8.0:
 			return true

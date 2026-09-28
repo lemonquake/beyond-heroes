@@ -12,7 +12,8 @@ const GROUPS := [
 		&"block_strength", &"parry_window", &"poise", &"knockback_res", &"status_res", &"damage_taken"]],
 	["Resistances", []],
 	["Magic & Utility", [&"max_mana", &"mana_regen", &"mana_cost_reduction", &"cdr", &"healing", &"buff_effect", &"move_speed",
-		&"carry_weight", &"carry_capacity", &"load", &"dodge_cooldown", &"dodge_distance", &"projectile_speed", &"magic_find", &"gold_find", &"xp_gain"]],
+		&"carry_weight", &"carry_capacity", &"load", &"dodge_cooldown", &"dodge_distance", &"projectile_speed", &"magic_find", &"gold_find", &"xp_gain",
+		&"ember_find", &"potion_power", &"hp_on_kill", &"mana_on_kill", &"thorns", &"elite_damage", &"tempo_damage"]],
 ]
 
 var hero: HeroData

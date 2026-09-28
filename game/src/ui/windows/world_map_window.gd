@@ -248,7 +248,8 @@ func _matches(q: String) -> Array:
 	for p in DataIsland.PLACES:
 		if not p.get("listed", false) or not Routes.is_known(hero, p):
 			continue
-		var hay := ("%s %s %s" % [p.name, KIND_NAMES.get(p.kind, ""), "waypoint shrine" if p.has("shrine") else ""]).to_lower()
+		var hay := ("%s %s %s %s" % [p.name, KIND_NAMES.get(p.kind, ""), "waypoint shrine" if p.has("shrine") else "",
+			"dungeon gate " + String(DataDungeons.get_def(StringName(p.gate)).get("name", "")) if p.has("gate") else ""]).to_lower()
 		if q in hay:
 			out.append(p)
 	return out
@@ -316,17 +317,32 @@ func select(id: String) -> void:
 		atlas.preview = {}
 	var map_def := DB.map_def(StringName(p.map))
 	_title.text = p.name
-	_sub.text = "%s · %s" % [KIND_NAMES.get(p.kind, "Place"), map_def.display_name if map_def and p.kind != "dungeon" else "Underground"]
+	var did := _dungeon_of(p)
+	_sub.text = "%s · %s" % ["Dungeon gate" if p.has("gate") else KIND_NAMES.get(p.kind, "Place"), map_def.display_name if map_def and p.kind != "dungeon" else "Underground"]
 	var lv := String(p.get("levels", ""))
 	_levels.text = ("Recommended level: %s" % lv.trim_prefix("Level ")) if lv.begins_with("Level") else ("Safe haven: no enemies" if lv.begins_with("Safe") else lv)
 	_status.text = _status_text(p)
 	_desc.text = p.get("text", "")
+	if did != &"":
+		# bh-013: difficulty, floors, lord and raid state of the dungeon behind this gate
+		var dd := DataDungeons.get_def(did)
+		var boss := DB.enemy(dd.boss)
+		_desc.text += "\n\nDifficulty: %s %s · %d floors\nLord: %s\nChampion: %s\n%s" % [DataDungeons.tier_stars(did), DataDungeons.tier_name(did),
+			DataDungeons.floor_count(did), boss.display_name if boss else "?", String(dd.miniboss.name), DataDungeons.status_text(hero, did)]
 	if Routes.active() and Routes.dest == id:
 		_show_plan(Routes.plan, true)
 	else:
 		_summary.text = "Choose Directions to preview a route from where you stand."
 		_clear_steps()
 	_clear_btn.disabled = not Routes.active()
+
+## The dungeon a place stands for: a gate (its "gate" key) or a dungeon's own place (kind dungeon, map dg_<id>_1).
+func _dungeon_of(p: Dictionary) -> StringName:
+	if p.has("gate"):
+		return StringName(p.gate)
+	if p.kind == "dungeon":
+		return DataDungeons.parse(StringName(p.map))[0]
+	return &""
 
 func _status_text(p: Dictionary) -> String:
 	var parts := []

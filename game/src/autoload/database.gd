@@ -24,9 +24,9 @@ func _init() -> void:
 		weapon_types[w.id] = w
 	for b in DataItems.bases():
 		item_bases[b.id] = b
-	for a in DataItems.affixes():
+	for a in DataItems.affixes() + DataRelics.affixes():
 		affix_defs[a.id] = a
-	for p in DataItems.powers():
+	for p in DataItems.powers() + DataRelics.powers():
 		power_defs[p.id] = p
 	for st in DataItems.sets():
 		item_sets[st.id] = st

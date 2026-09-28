@@ -1273,6 +1273,11 @@ func consume_item(item: ItemInstance) -> bool:
 		Events.notify.emit("Recipe learned: %s. Make it at a %s." % [DataCrafting.recipe(StringName(fx["learn_recipe"])).name,
 			DataCrafting.station_names(DataCrafting.recipe(StringName(fx["learn_recipe"])).stations)], &"info")
 		return true
+	if fx.has("cache"):
+		# a Relic Cache (bh-012): opened with a reveal; the gear goes to the bag (or the floor when it is full)
+		hero.inventory.consume(item.base.id, 1)
+		RelicCache.open(hero, int(fx["cache"]), self)
+		return true
 	if fx.has("phoenix"):
 		Events.notify.emit("The Phoenix Feather works on its own: it burns when a killing blow lands.", &"info")
 		return false
@@ -1307,15 +1312,16 @@ func consume_item(item: ItemInstance) -> bool:
 		if potion_cd > 0.0:
 			return false
 		potion_cd = POTION_COOLDOWN
-	var heal_mult := 1.0 + stats.get_stat(&"healing") + GuildRules.potion_healing_bonus(hero)
+	var potion := 1.0 + stats.get_stat(&"potion_power")
+	var heal_mult := (1.0 + stats.get_stat(&"healing") + GuildRules.potion_healing_bonus(hero)) * potion
 	if fx.get("instant", 0.0) > 0.0:
 		heal(max_hp() * float(fx.get("heal", 0.0)) * heal_mult)
-		restore_mana(max_mana() * float(fx.get("mana", 0.0)))
+		restore_mana(max_mana() * float(fx.get("mana", 0.0)) * potion)
 	else:
 		if fx.has("heal"):
 			status.apply(&"regen", 2.0, max_hp() * float(fx.heal) * heal_mult / 2.0)
 		if fx.has("mana"):
-			_mana_over_time(max_mana() * float(fx.mana), 2.0)
+			_mana_over_time(max_mana() * float(fx.mana) * potion, 2.0)
 	if fx.has("cleanse"):
 		status.cleanse(CLEANSABLE)
 	if fx.has("return"):

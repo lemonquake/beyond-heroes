@@ -35,6 +35,10 @@ func label_text() -> String:
 		return "%d Gold" % gold
 	if item.count > 1:
 		return "%s (%d)" % [item.display_name(), item.count]
+	var st := item.stars()
+	# gacha gear (bh-012): the proper name and its stars on the ground label; the epithet is in the tooltip
+	if item.epithet != "":
+		return "%s %s" % [item.short_name(), "★".repeat(st)]
 	return item.display_name()
 
 func rarity() -> int:
@@ -133,6 +137,11 @@ func _on_land() -> void:
 	if r == BH.Rarity.AETHER:
 		_aether_presentation()
 		Events.notify.emit("An Aether item has appeared!", &"aether")
+	# bh-012: a five-star roll gets its own flourish, whatever its rarity
+	if item.stars() == 5 and r >= BH.Rarity.BASIC:
+		add_child(VFXLib.ring_wave(Color(1.0, 0.82, 0.3), 1.8, 0.7, 0.4))
+		FX.spawn(VFXLib.particles(Color(1.0, 0.85, 0.35, 1.0), 22, 0.9, true, 0.1, 3.0, 80.0, Vector3(0, -2.5, 0), 0.15), global_position + Vector3.UP * 0.4)
+		Events.notify.emit("★★★★★ %s — %s!" % [item.short_name(), "perfect rolls" if item.is_perfect() else "a five-star find"], &"loot")
 
 func _aether_presentation() -> void:
 	var prism := [Color(0.55, 0.98, 1.0), Color(0.85, 0.7, 1.0), Color(1.0, 0.95, 0.75)]

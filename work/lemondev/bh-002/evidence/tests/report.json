@@ -1,27 +1,195 @@
 {
-  "checks": 1493,
-  "elapsed_ms": 327887,
+  "checks": 18955,
+  "elapsed_ms": 701408,
   "engine": "4.7.2-stable (official)",
-  "failures": [],
+  "failures": [
+    "test_balance.test_power_is_within_band_at_every_level: L1 knight power 468.9 is within 20% of the mean 653.7 (-28%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1220.5 is within 20% of the mean 653.7 (+87%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 925.2 is within 20% of the mean 653.7 (+42%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 653.7 (-100%)",
+    "test_balance.test_power_is_within_band_at_every_level: L10 mage power 5000.7 is within 20% of the mean 2165.2 (+131%)",
+    "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2165.2 (-100%)",
+    "test_balance.test_power_is_within_band_at_every_level: L20 mage power 5857.8 is within 20% of the mean 2802.8 (+109%)",
+    "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 509.2 is within 20% of the mean 2802.8 (-82%)",
+    "test_balance.test_power_is_within_band_at_every_level: L30 knight power 5355.9 is within 20% of the mean 4385.8 (+22%)",
+    "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 2547.6 is within 20% of the mean 4385.8 (-42%)",
+    "test_enemies.test_roster_definitions: sixteen enemies — expected 16, got 93",
+    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+    "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (167 -> 171)",
+    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+    "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+  ],
   "suites": {
+    "test_balance.gd": {
+      "checks": 16,
+      "failures": [
+        "test_balance.test_power_is_within_band_at_every_level: L1 knight power 468.9 is within 20% of the mean 653.7 (-28%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1220.5 is within 20% of the mean 653.7 (+87%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 925.2 is within 20% of the mean 653.7 (+42%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 653.7 (-100%)",
+        "test_balance.test_power_is_within_band_at_every_level: L10 mage power 5000.7 is within 20% of the mean 2165.2 (+131%)",
+        "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2165.2 (-100%)",
+        "test_balance.test_power_is_within_band_at_every_level: L20 mage power 5857.8 is within 20% of the mean 2802.8 (+109%)",
+        "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 509.2 is within 20% of the mean 2802.8 (-82%)",
+        "test_balance.test_power_is_within_band_at_every_level: L30 knight power 5355.9 is within 20% of the mean 4385.8 (+22%)",
+        "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 2547.6 is within 20% of the mean 4385.8 (-42%)"
+      ],
+      "ms": 385996.877,
+      "tests": 1
+    },
     "test_bh011.gd": {
       "checks": 45,
       "failures": [],
-      "ms": 144697.428,
+      "ms": 13207.242,
+      "tests": 6
+    },
+    "test_bh012.gd": {
+      "checks": 1142,
+      "failures": [],
+      "ms": 1771.325,
+      "tests": 11
+    },
+    "test_bh013.gd": {
+      "checks": 1017,
+      "failures": [],
+      "ms": 12652.104,
+      "tests": 11
+    },
+    "test_chat.gd": {
+      "checks": 38,
+      "failures": [],
+      "ms": 1760.388,
       "tests": 6
     },
     "test_crafting.gd": {
-      "checks": 603,
+      "checks": 606,
       "failures": [],
-      "ms": 182864.28,
+      "ms": 34184.56,
       "tests": 11
+    },
+    "test_damage.gd": {
+      "checks": 60,
+      "failures": [],
+      "ms": 201.278,
+      "tests": 13
+    },
+    "test_enemies.gd": {
+      "checks": 464,
+      "failures": [
+        "test_enemies.test_roster_definitions: sixteen enemies — expected 16, got 93"
+      ],
+      "ms": 3669.2,
+      "tests": 6
+    },
+    "test_enemies2.gd": {
+      "checks": 598,
+      "failures": [
+        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+        "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (167 -> 171)",
+        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+        "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+      ],
+      "ms": 68315.216,
+      "tests": 19
+    },
+    "test_guide.gd": {
+      "checks": 140,
+      "failures": [],
+      "ms": 1181.076,
+      "tests": 5
+    },
+    "test_guilds.gd": {
+      "checks": 100,
+      "failures": [],
+      "ms": 16.722,
+      "tests": 8
+    },
+    "test_island.gd": {
+      "checks": 1107,
+      "failures": [],
+      "ms": 5175.54,
+      "tests": 13
+    },
+    "test_items.gd": {
+      "checks": 2471,
+      "failures": [],
+      "ms": 472.554,
+      "tests": 17
+    },
+    "test_loot.gd": {
+      "checks": 1264,
+      "failures": [],
+      "ms": 45028.345,
+      "tests": 17
+    },
+    "test_maps.gd": {
+      "checks": 538,
+      "failures": [],
+      "ms": 8921.766,
+      "tests": 14
     },
     "test_net.gd": {
       "checks": 845,
       "failures": [],
-      "ms": 3.283,
+      "ms": 3.358,
       "tests": 4
+    },
+    "test_npcs.gd": {
+      "checks": 375,
+      "failures": [],
+      "ms": 33828.385,
+      "tests": 3
+    },
+    "test_perf.gd": {
+      "checks": 243,
+      "failures": [],
+      "ms": 6221.385,
+      "tests": 7
+    },
+    "test_progression.gd": {
+      "checks": 51,
+      "failures": [],
+      "ms": 6.318,
+      "tests": 7
+    },
+    "test_shops_dialogue.gd": {
+      "checks": 879,
+      "failures": [],
+      "ms": 1171.399,
+      "tests": 10
+    },
+    "test_skills.gd": {
+      "checks": 3285,
+      "failures": [],
+      "ms": 47973.204,
+      "tests": 11
+    },
+    "test_stats.gd": {
+      "checks": 156,
+      "failures": [],
+      "ms": 16.664,
+      "tests": 8
+    },
+    "test_status.gd": {
+      "checks": 24,
+      "failures": [],
+      "ms": 69.711,
+      "tests": 8
+    },
+    "test_tempos.gd": {
+      "checks": 3491,
+      "failures": [],
+      "ms": 27118.394,
+      "tests": 16
     }
   },
-  "timestamp": "2026-09-28T09:25:26"
+  "timestamp": "2026-09-29T01:29:27"
 }

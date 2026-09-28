@@ -223,7 +223,7 @@ func pick(p: Vector2) -> String:
 	var bd := PICK_PX
 	if underground:
 		for slot in _underground_slots():
-			if Rect2(slot[1] - Vector2(24, 24), Vector2(420, 48)).has_point(p):
+			if Rect2(slot[1] - Vector2(20, 28), Vector2(slot[2], UG_ROW - 6)).has_point(p):
 				return slot[0]
 		return ""
 	for pl in visible_places():
@@ -311,7 +311,8 @@ func _draw_overlay() -> void:
 		_draw_label(c, p, taken)
 	if underground:
 		_draw_underground(c, font, body)
-	_draw_hero(c, font)
+	if not underground:
+		_draw_hero(c, font)
 	_draw_compass_and_scale(c, body)
 
 static func _dashed(c: Control, pts: PackedVector2Array, col: Color, w: float, dash: float, gap: float) -> void:
@@ -397,20 +398,25 @@ func _label_rank(p: Dictionary) -> int:
 		return 0
 	if p.id == hover:
 		return 1
+	if p.has("gate"):
+		return 3
 	return {"town": 2, "shrine": 3, "district": 3, "dungeon": 3, "landmark": 4, "junction": 5, "service": 6, "home": 7}.get(p.kind, 8)
 
 func _draw_label(c: Control, p: Dictionary, taken: Array[Rect2]) -> void:
 	var font := UITheme.body_bold()
 	var sp := to_screen(DataIsland.place_atlas(p))
-	var fs := 24 if p.kind in ["town", "district", "shrine", "dungeon"] else (21 if p.kind in ["landmark", "junction"] else 19)
+	var gate := p.has("gate")
+	var fs := 24 if p.kind in ["town", "district", "shrine", "dungeon"] or gate else (21 if p.kind in ["landmark", "junction"] else 19)
 	var sel: bool = p.id == selected or p.id == hover
 	if sel:
 		fs += 2
 	var name: String = p.name
+	if gate:
+		name = String(DataDungeons.get_def(StringName(p.gate)).get("name", p.name))
 	var tw := font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 	var r := 14.0 if p.kind == "town" else (7.0 if p.kind in ["service", "home"] else 11.0)
 	var tp := sp + Vector2(-tw * 0.5, r + fs + 2)
-	var box := Rect2(tp + Vector2(-4, -fs), Vector2(tw + 8, fs + 8))
+	var box := Rect2(tp + Vector2(-4, -fs), Vector2(tw + 8, fs + 8 + (20 if gate else 0)))
 	if not sel:
 		for t in taken:
 			if t.intersects(box):
@@ -420,6 +426,16 @@ func _draw_label(c: Control, p: Dictionary, taken: Array[Rect2]) -> void:
 	var col := UITheme.GOLD if p.id == selected else (UITheme.PARCHMENT if charted else Color(0.82, 0.82, 0.8))
 	c.draw_string_outline(font, tp, name, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, 7, Color(0.02, 0.02, 0.02, 0.92))
 	c.draw_string(font, tp, name, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, col)
+	if gate:
+		# the level range and difficulty under a dungeon's name (bh-013)
+		var did := StringName(p.gate)
+		var lr := DataDungeons.level_range(did)
+		var sub := "Lv %d–%d  %s" % [lr.x, lr.y, DataDungeons.tier_stars(did)]
+		var body := UITheme.body_bold()
+		var sw := body.get_string_size(sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x
+		var sp2 := sp + Vector2(-sw * 0.5, r + fs + 22)
+		c.draw_string_outline(body, sp2, sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, 6, Color(0.02, 0.02, 0.02, 0.92))
+		c.draw_string(body, sp2, sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, tier_color(did).lightened(0.35))
 
 func _draw_place(c: Control, p: Dictionary, objective: bool) -> void:
 	var sp := to_screen(DataIsland.place_atlas(p))
@@ -431,6 +447,9 @@ func _draw_place(c: Control, p: Dictionary, objective: bool) -> void:
 	if sel:
 		var pr := 22.0 + sin(_t * 4.0) * 2.5
 		c.draw_arc(sp, pr, 0.0, TAU, 40, UITheme.GOLD, 3.0, true)
+	if p.has("gate"):
+		_draw_gate(c, sp, StringName(p.gate), dim)
+		return
 	match p.kind:
 		"town":
 			r = 14.0
@@ -466,6 +485,40 @@ func _draw_place(c: Control, p: Dictionary, objective: bool) -> void:
 		var q := sp + Vector2(r + 8, -r - 12 + bob)
 		c.draw_colored_polygon(PackedVector2Array([q + Vector2(0, -9), q + Vector2(9, 0), q + Vector2(0, 9), q + Vector2(-9, 0)]), ink)
 		c.draw_colored_polygon(PackedVector2Array([q + Vector2(0, -6), q + Vector2(6, 0), q + Vector2(0, 6), q + Vector2(-6, 0)]), UITheme.GOLD)
+
+## Dungeon colours by difficulty tier (1 Easy .. 5 Mythic): green, blue, violet, amber, red.
+const TIER_COLORS := [Color(0.5, 0.5, 0.5), Color(0.42, 0.78, 0.4), Color(0.38, 0.62, 0.95), Color(0.66, 0.45, 0.9), Color(0.95, 0.6, 0.22), Color(0.95, 0.26, 0.24)]
+
+static func tier_color(did: StringName) -> Color:
+	return TIER_COLORS[clampi(DataDungeons.tier(did), 1, 5)]
+
+## A dungeon gate: an arch filled with its difficulty colour; a raided (recovering) dungeon is greyed with a clock,
+## a conquered one wears a small crown.
+func _draw_gate(c: Control, sp: Vector2, did: StringName, dim: float) -> void:
+	var ink := Color(0.08, 0.06, 0.04, 0.95)
+	var col := tier_color(did)
+	var raided := DataDungeons.recovering(hero, did)
+	if raided:
+		col = col.lerp(Color(0.4, 0.4, 0.42), 0.65)
+	col.a = dim
+	var arch := PackedVector2Array([sp + Vector2(-12, 12), sp + Vector2(-12, -2)])
+	for i in 9:
+		var a := PI + PI * i / 8.0
+		arch.append(sp + Vector2(cos(a), sin(a)) * 12.0 + Vector2(0, -2))
+	arch.append(sp + Vector2(12, 12))
+	c.draw_colored_polygon(arch, col)
+	c.draw_polyline(arch + PackedVector2Array([arch[0]]), ink, 3.0, true)
+	c.draw_rect(Rect2(sp + Vector2(-5, 1), Vector2(10, 11)), ink)
+	if raided:
+		var q := sp + Vector2(12, -12)
+		c.draw_circle(q, 8.0, ink)
+		c.draw_circle(q, 6.0, Color(0.85, 0.85, 0.8))
+		c.draw_line(q, q + Vector2(0, -4.5), ink, 1.6)
+		c.draw_line(q, q + Vector2(3.5, 0), ink, 1.6)
+	elif DataDungeons.boss_gone(hero, did):
+		var q := sp + Vector2(12, -12)
+		c.draw_colored_polygon(PackedVector2Array([q + Vector2(-6, 4), q + Vector2(-6, -3), q + Vector2(-3, 0), q + Vector2(0, -5), q + Vector2(3, 0),
+			q + Vector2(6, -3), q + Vector2(6, 4)]), UITheme.GOLD)
 
 ## The hero's true position (projected from the current map) with heading; inside a building or dungeon, at its door.
 func _draw_hero(c: Control, font: Font) -> void:
@@ -524,36 +577,73 @@ func _draw_compass_and_scale(c: Control, font: Font) -> void:
 	c.draw_line(b + Vector2(w, -6), b + Vector2(w, 6), UITheme.PARCHMENT, 2.0)
 	c.draw_string(font, b + Vector2(0, -9), "%d m" % int(metres), HORIZONTAL_ALIGNMENT_LEFT, -1, 18, UITheme.PARCHMENT)
 
-const UNDERGROUND := [["rf_gate", "Sunken Catacomb Gate", ""], ["catacombs", "Ancient Catacombs", ""],
-	["temple", "Forgotten Temple", "catacombs_ritual_seen"], ["throne", "The Hollow Throne", "temple_seal_broken"]]
+const UNDERGROUND := [["catacombs", "Ancient Catacombs", ""], ["temple", "Forgotten Temple", "catacombs_ritual_seen"],
+	["throne", "The Hollow Throne", "temple_seal_broken"]]
+const UG_COLS := 3
+const UG_ROW := 70.0
 
-func _underground_box() -> Rect2:
-	return Rect2(Vector2(size.x * 0.5 - 330, 90), Vector2(660, 150 + UNDERGROUND.size() * 92))
-
-func _underground_slots() -> Array:
-	var box := _underground_box()
+## Every dungeon (easiest first), then the temple sequence: [place id, name, lock flag or "", dungeon id or &""].
+func _underground_rows() -> Array:
 	var out := []
-	for i in UNDERGROUND.size():
-		out.append([UNDERGROUND[i][0], Vector2(box.position.x + 70, box.position.y + 140 + i * 92)])
+	for did in DataDungeons.order():
+		out.append([String(did), String(DataDungeons.get_def(did).name), "", did])
+	for u in UNDERGROUND:
+		out.append([u[0], u[1], u[2], &""])
 	return out
 
-## Underground: the dungeon chain beneath the surface, with its entrance and locks.
-func _draw_underground(c: Control, font: Font, body: Font) -> void:
-	var chain := UNDERGROUND
+func _underground_box() -> Rect2:
+	var rows := ceili(float(_underground_rows().size()) / UG_COLS)
+	var w := minf(size.x - 40.0, 1320.0)
+	return Rect2(Vector2((size.x - w) * 0.5, 76), Vector2(w, 104 + rows * UG_ROW))
+
+## [place id, anchor point of the row's icon, row width] per row.
+func _underground_slots() -> Array:
 	var box := _underground_box()
-	c.draw_rect(box, Color(0.05, 0.04, 0.05, 0.9))
+	var rows := _underground_rows()
+	var per := ceili(float(rows.size()) / UG_COLS)
+	var cw := (box.size.x - 40.0) / UG_COLS
+	var out := []
+	for i in rows.size():
+		var col := i / per
+		var row := i % per
+		out.append([rows[i][0], Vector2(box.position.x + 20 + col * cw + 22, box.position.y + 124 + row * UG_ROW), cw - 10.0])
+	return out
+
+## Underground: every dungeon beneath the island with its difficulty, levels, floors and raid state; then the temple
+## sequence under the Ruined Forest with its locks. Clicking a row selects that dungeon.
+func _draw_underground(c: Control, font: Font, body: Font) -> void:
+	var box := _underground_box()
+	c.draw_rect(box, Color(0.05, 0.04, 0.05, 0.93))
 	c.draw_rect(box, UITheme.BRONZE_DIM, false, 2.0)
-	c.draw_string(font, box.position + Vector2(28, 50), "Underground and the temple sequence", HORIZONTAL_ALIGNMENT_LEFT, -1, 26, UITheme.GOLD)
-	c.draw_string(body, box.position + Vector2(28, 84), "Entered from the Ruined Forest. Distances inside are not counted.", HORIZONTAL_ALIGNMENT_LEFT, -1, 19, UITheme.TEXT_DIM)
-	for i in chain.size():
-		var y := box.position.y + 140 + i * 92
-		var sp := Vector2(box.position.x + 70, y)
-		var flag: String = chain[i][2]
+	c.draw_string(font, box.position + Vector2(24, 44), "Dungeons beneath Salmonan", HORIZONTAL_ALIGNMENT_LEFT, -1, 28, UITheme.GOLD)
+	c.draw_string(body, box.position + Vector2(24, 76), "Colour and stars show difficulty. A raided dungeon recovers in 30 min to 2 h; its lord never returns.",
+		HORIZONTAL_ALIGNMENT_LEFT, box.size.x - 48, 18, UITheme.TEXT_DIM)
+	var rows := _underground_rows()
+	var slots := _underground_slots()
+	for i in rows.size():
+		var sp: Vector2 = slots[i][1]
+		var cw: float = slots[i][2]
+		var did: StringName = rows[i][3]
+		var flag: String = rows[i][2]
 		var open: bool = flag == "" or (hero != null and bool(hero.world_flags.get(StringName(flag), false)))
-		if i > 0:
-			c.draw_line(sp + Vector2(0, -80), sp + Vector2(0, -14), UITheme.BRONZE if open else UITheme.TEXT_MUTED, 3.0)
-		c.draw_circle(sp, 14.0, Color(0.55, 0.4, 0.75) if open else Color(0.3, 0.28, 0.3))
-		c.draw_arc(sp, 14.0, 0.0, TAU, 24, UITheme.GOLD if chain[i][0] == selected else Color(0.08, 0.06, 0.04), 3.0)
-		c.draw_string(font, sp + Vector2(34, 8), chain[i][1], HORIZONTAL_ALIGNMENT_LEFT, -1, 23, UITheme.PARCHMENT if open else UITheme.TEXT_DIM)
-		if not open:
-			c.draw_string(body, sp + Vector2(34, 36), "Locked", HORIZONTAL_ALIGNMENT_LEFT, -1, 19, UITheme.BAD)
+		var sel: bool = rows[i][0] == selected or rows[i][0] == hover
+		if sel:
+			c.draw_rect(Rect2(sp + Vector2(-20, -28), Vector2(cw, UG_ROW - 6)), Color(0.9, 0.75, 0.4, 0.12))
+			c.draw_rect(Rect2(sp + Vector2(-20, -28), Vector2(cw, UG_ROW - 6)), UITheme.GOLD, false, 1.5)
+		if did != &"":
+			_draw_gate(c, sp + Vector2(0, -4), did, 1.0)
+			var lr := DataDungeons.level_range(did)
+			c.draw_string(font, sp + Vector2(24, -6), String(rows[i][1]), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 21, UITheme.PARCHMENT)
+			var line := "%s  Lv %d–%d · %s · %d floors" % [DataDungeons.tier_stars(did), lr.x, lr.y, DataDungeons.tier_name(did), DataDungeons.floor_count(did)]
+			c.draw_string(body, sp + Vector2(24, 15), line, HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 16, tier_color(did).lightened(0.35))
+			var raided := DataDungeons.recovering(hero, did)
+			c.draw_string(body, sp + Vector2(24, 33), DataDungeons.status_short(hero, did), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 15,
+				Color(0.95, 0.7, 0.45) if raided else UITheme.TEXT_DIM)
+		else:
+			c.draw_circle(sp, 12.0, Color(0.55, 0.4, 0.75) if open else Color(0.3, 0.28, 0.3))
+			c.draw_arc(sp, 12.0, 0.0, TAU, 24, Color(0.08, 0.06, 0.04), 3.0)
+			c.draw_string(font, sp + Vector2(24, -6), String(rows[i][1]), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 21, UITheme.PARCHMENT if open else UITheme.TEXT_DIM)
+			var pl := DataIsland.place(String(rows[i][0]))
+			c.draw_string(body, sp + Vector2(24, 15), "%s · the temple sequence" % String(pl.get("levels", "")), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 16, UITheme.TEXT_DIM)
+			if not open:
+				c.draw_string(body, sp + Vector2(24, 33), "Locked", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, UITheme.BAD)

@@ -31,14 +31,18 @@ const LIST := [
 		"lore": "It stacks the dead in careful rows, and adds anyone who interrupts."},
 ]
 
+## Every champion: the surface ones above and the dungeon champions (DataDungeons, bh-012).
+static func all() -> Array:
+	return LIST + DataDungeons.minibosses()
+
 static func find(id: StringName) -> Dictionary:
-	for m in LIST:
+	for m in all():
 		if m.id == id:
 			return m
 	return {}
 
 static func on_map(map_id: StringName) -> Array:
-	return LIST.filter(func(m): return m.map == map_id)
+	return all().filter(func(m): return m.map == map_id)
 
 ## True while a defeated miniboss is still gone (it returns RESPAWN seconds of play time after its last defeat).
 static func resting(hero: HeroData, id: StringName) -> bool:
@@ -58,7 +62,7 @@ static func scroll_pool() -> Array:
 ## One line per champion for the rumour-monger: where it holds, and whether it is there now or when it returns.
 static func rumours(hero: HeroData) -> String:
 	var lines := []
-	for m in LIST:
+	for m in all():
 		var md := DB.map_def(m.map)
 		var where := md.display_name if md else String(m.map)
 		if resting(hero, m.id):

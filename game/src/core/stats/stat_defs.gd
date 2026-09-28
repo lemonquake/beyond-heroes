@@ -78,6 +78,14 @@ const DEFS := {
 	&"aura_radius": ["Aura Radius", Fmt.PCT, "Larger auras."],
 	&"dot_damage": ["Damage over Time", Fmt.PCT, "Stronger Bleeding and Poison you inflict."],
 	&"summon_damage": ["Sentinel Damage", Fmt.PCT, "Increased damage of Flame Sentinels and Blade Sentinels."],
+	# bh-012
+	&"hp_on_kill": ["Life on Kill", Fmt.INT, "HP restored whenever a monster you fight dies."],
+	&"mana_on_kill": ["Mana on Kill", Fmt.INT, "Mana restored whenever a monster you fight dies."],
+	&"potion_power": ["Potion Effectiveness", Fmt.PCT, "Draughts restore more HP and Mana."],
+	&"thorns": ["Thorns", Fmt.INT, "Damage dealt back to anything that strikes you in melee."],
+	&"elite_damage": ["Damage to Champions", Fmt.PCT, "Increased damage against elites, champions and bosses."],
+	&"ember_find": ["Soul Ember Find", Fmt.PCT, "More Soul Embers from monsters and chests."],
+	&"tempo_damage": ["Tempo Damage", Fmt.PCT, "Your Tempos deal more damage."],
 }
 
 static func name_of(stat: StringName) -> String:

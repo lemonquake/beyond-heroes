@@ -87,6 +87,9 @@ func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE,
 		if anim_player:
 			_prepare_animations()
 			_build_tree()
+		elif model.find_child("core", true, false) != null:
+			# a static floating creature (wisp convention: core + rings + ribbons, no skeleton) is animated here
+			_setup_floating()
 	else:
 		fallback = true
 		model = _build_fallback()
@@ -898,6 +901,11 @@ var _float_rings: Array[Node3D] = []
 var _float_core: Node3D
 var _float_ribbons: Node3D
 var _float_light: OmniLight3D
+var _float_wings: Array[Node3D] = []
+## Height the floating model hovers at (bh-013: 0 for a nest that sits on the ground); set by the owner.
+var float_hover := 1.2
+## Turns of the core per second about its own up axis (bh-013: a Void Rift's vortex swirls); set by the owner.
+var float_core_spin := 0.0
 
 func _setup_floating() -> void:
 	_floating = true
@@ -907,8 +915,14 @@ func _setup_floating() -> void:
 		var r := model.find_child("ring_%d" % i, true, false) as Node3D
 		if r:
 			_float_rings.append(r)
+	for wn in ["wing_l", "wing_r"]:
+		var w := model.find_child(wn, true, false) as Node3D
+		if w:
+			w.set_meta(&"rest", w.transform)
+			_float_wings.append(w)
 	_float_light = OmniLight3D.new()
-	_float_light.light_color = Color(0.5, 0.95, 1.0)
+	# the Aether wisp's cyan by default; other floating creatures (bh-012: Ice Wraith, Starmote) glow in their own tint
+	_float_light.light_color = Color(0.5, 0.95, 1.0) if tint_primary == Color.WHITE else tint_primary.lerp(Color.WHITE, 0.25)
 	_float_light.light_energy = 1.4
 	_float_light.omni_range = 5.0
 	add_child(_float_light)
@@ -917,14 +931,16 @@ func _setup_floating() -> void:
 func _animate_floating(delta: float) -> void:
 	_float_t += delta
 	_float_pulse = maxf(0.0, _float_pulse - delta * 1.6)
-	var hover := 1.2 * model_scale
+	var hover := float_hover * model_scale
 	if _float_dying:
 		# implode: rings collapse into the core, then everything winks out
 		model.scale = model.scale.lerp(Vector3.ONE * 0.01, 1.0 - exp(-5.0 * delta))
 		if _float_light:
 			_float_light.light_energy = lerpf(_float_light.light_energy, 0.0, 1.0 - exp(-4.0 * delta))
 		return
-	model.position.y = hover + sin(_float_t * 1.7) * 0.12 + _loco_pos.length() * 0.05
+	# a structure on the ground (hover 0: the Waxen Hive) stays planted; everything else bobs
+	var grounded := float_hover <= 0.01
+	model.position.y = hover if grounded else hover + sin(_float_t * 1.7) * 0.12 + _loco_pos.length() * 0.05
 	var spin := 1.0 + _float_pulse * 4.0 + _combat * 0.8
 	for i in _float_rings.size():
 		# each ring keeps its authored tilt and spins in its own plane (local +Y)
@@ -933,7 +949,16 @@ func _animate_floating(delta: float) -> void:
 		var sc := 1.0 - 0.25 * _float_pulse
 		r.basis = r.basis.orthonormalized().scaled(Vector3.ONE * sc)
 	if _float_core:
-		_float_core.scale = Vector3.ONE * (1.0 + 0.08 * sin(_float_t * 5.0) + 0.35 * _float_pulse)
+		var breathe := 0.03 * sin(_float_t * 2.0) + 0.12 * _float_pulse if grounded else 0.08 * sin(_float_t * 5.0) + 0.35 * _float_pulse
+		_float_core.scale = Vector3.ONE * (1.0 + breathe)
+		if float_core_spin != 0.0:
+			_float_core.rotate_object_local(Vector3.UP, delta * TAU * float_core_spin)
+	for wi in _float_wings.size():
+		# bh-013: insect wings beat about their root (local Z), mirrored left and right
+		var w := _float_wings[wi]
+		var rest: Transform3D = w.get_meta(&"rest")
+		var flap := sin(_float_t * 38.0) * deg_to_rad(35.0) * (1.0 if wi == 0 else -1.0)
+		w.transform = rest * Transform3D(Basis(Vector3.BACK, flap), Vector3.ZERO)
 	if _float_ribbons:
 		_float_ribbons.rotation.y += delta * 0.6
 		_float_ribbons.rotation.x = sin(_float_t * 1.3) * 0.12 - _loco_pos.y * 0.15

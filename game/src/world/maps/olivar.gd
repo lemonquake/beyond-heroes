@@ -44,6 +44,10 @@ func compose() -> void:
 	_market()
 	_houses()
 	_docks_and_terrace()
+	# bh-013: the sunken tomb stair by the market and the counting-house cellar behind Ashby's
+	for gid in DataDungeons.gates_on(def.id):
+		var gs: Dictionary = DataDungeons.get_def(gid).surface
+		dungeon_gate(gid, gs.pos, gs.yaw)
 	_herbs()
 	_greenery()
 	spawn(&"start", Vector3(0, 0, 9.0), 180.0, true)

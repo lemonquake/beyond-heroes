@@ -247,6 +247,41 @@ const LEGENDS := {
 		"pitch": "Kills the wounded before they know he is there, then does it again."},
 }
 
+## bh-012: five more renowned spirits who answer only a summoning at the shrine (TempoGacha, 5-star). They fight with
+## the class skills of their kind, a stronger ghost weapon and gifts of their own. Names invented for Jre.
+const SUMMON_LEGENDS := {
+	&"durek": {"name": "Durek Hollowmere", "title": "the Anvil", "class": &"warden", "trait": &"cautious", "level": 1, "price": 0,
+		"skills": [&"wd_bash", &"wd_aegis", &"wd_quake", &"wd_oath"], "tint": Color(0.55, 0.46, 0.36), "kit": [&"warden_kite_shield"],
+		"spirit": {"weapon": &"club", "element": Elements.EARTH, "share": 0.4, "power": 1.4},
+		"mods": [["max_hp", "inc", 0.3], ["knockback_res", "flat", 0.15], ["defense", "inc", 0.2]], "summon_only": true,
+		"origin": "A forge-lord's shield-bearer who stood in the Emberforge gate while the lava rose. It rose over him and he did not move.",
+		"pitch": "An unmovable wall that shakes the ground under every pack."},
+	&"seraphine": {"name": "Seraphine Ardel", "title": "the Dawnspear", "class": &"swordsman", "trait": &"valiant", "level": 1, "price": 0,
+		"skills": [&"sw_charge", &"sw_cleave", &"sw_whirl", &"sw_rally"], "tint": Color(0.85, 0.78, 0.5),
+		"spirit": {"weapon": &"spear", "element": Elements.LIGHT, "share": 0.5, "power": 1.45},
+		"mods": [["crit_chance", "flat", 0.05], ["attack_speed", "more", 0.08]], "summon_only": true,
+		"origin": "Led the last charge down the Watch Road before Wyman Outpost had a stockade. The road is named for the ones who watched her go.",
+		"pitch": "A charging lance of light: rallies you and cuts whole lines apart."},
+	&"talwyn": {"name": "Talwyn Rookshade", "title": "the Grey Fletch", "class": &"archer", "trait": &"swift", "level": 1, "price": 0,
+		"skills": [&"ar_pierce", &"ar_frost", &"ar_volley", &"ar_trap"], "tint": Color(0.45, 0.52, 0.6),
+		"spirit": {"weapon": &"bow", "element": Elements.ICE, "share": 0.5, "power": 1.45},
+		"mods": [["projectile_damage", "inc", 0.25], ["evasion", "inc", 0.2]], "summon_only": true,
+		"origin": "Held the Rimeglass stair alone with a quiver of frost-tipped arrows until the barrow door closed behind the last of her company.",
+		"pitch": "Freezes packs in place, then pins them there."},
+	&"nyssa": {"name": "Nyssa Kaldor", "title": "the Silent Knife", "class": &"thief", "trait": &"vengeful", "level": 1, "price": 0,
+		"skills": [&"th_shadowstep", &"th_venom", &"th_fan", &"th_finish"], "tint": Color(0.22, 0.3, 0.22),
+		"spirit": {"weapon": &"dagger", "element": Elements.EARTH, "share": 0.35, "power": 1.5},
+		"mods": [["crit_damage", "flat", 0.35], ["crit_chance", "flat", 0.05]], "summon_only": true,
+		"origin": "Poisoned a whole war-camp of the Ashen Circle in one night, then walked back into their fire to be sure.",
+		"pitch": "Poison, then the quiet finish. Nothing wounded lives long near her."},
+	&"eldric": {"name": "Eldric Sunmarrow", "title": "the Starweaver", "class": &"mystic", "trait": &"devoted", "level": 1, "price": 0,
+		"skills": [&"my_bolt", &"my_chain", &"my_nova", &"my_mend"], "tint": Color(0.5, 0.45, 0.85),
+		"spirit": {"weapon": &"staff", "element": Elements.LIGHTNING, "share": 1.0, "power": 1.45},
+		"mods": [["elemental_damage", "inc", 0.25], ["max_mana", "inc", 0.25]], "summon_only": true,
+		"origin": "The last Aether-watcher to leave the Orrery. He did not leave by the door.",
+		"pitch": "Storms that leap from foe to foe, and a mend when you need it."},
+}
+
 ## The spirit that comes through the waypoint with every new hero: a town guard who died holding the Sanctuary
 ## Terrace so the townsfolk could reach the hearth wards. A plain grade-1 Swordsman with a mend.
 const STARTER := {"name": "Tobren", "class": &"swordsman", "trait": &"devoted", "skills": [&"sw_cleave", &"sw_mend"],
@@ -327,7 +362,11 @@ static func max_grade() -> int:
 	return GRADES.size()
 
 static func legend(id: StringName) -> Dictionary:
-	return LEGENDS.get(id, {})
+	return LEGENDS.get(id, SUMMON_LEGENDS.get(id, {}))
+
+## Every renowned spirit a 5-star summon may bring (the five of the shrine and the five who answer only a summoning).
+static func summon_legend_ids() -> Array:
+	return legend_ids() + [&"durek", &"seraphine", &"talwyn", &"nyssa", &"eldric"]
 
 static func legend_ids() -> Array:
 	return [&"hollan", &"kavira", &"maudra", &"cindrel", &"vessik"]

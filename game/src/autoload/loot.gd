@@ -37,6 +37,14 @@ func _on_actor_died(actor: Node, killer: Node) -> void:
 		return
 	award_xp(e, player)
 	drop_for(e, player)
+	# Life / Mana on Kill gear (bh-012)
+	if player.alive:
+		var hk := player.stats.get_stat(&"hp_on_kill")
+		var mk := player.stats.get_stat(&"mana_on_kill")
+		if hk > 0.0:
+			player.heal(hk, false)
+		if mk > 0.0:
+			player.restore_mana(mk)
 	if e.is_boss and e.has_meta(&"boss_flag"):
 		Game.set_world_flag(StringName(e.get_meta(&"boss_flag")), true)
 	if e.is_miniboss():
@@ -141,6 +149,69 @@ func drop_for(e: Enemy, player: Player) -> void:
 	for i in drops.size():
 		var ang := TAU * float(i) / maxf(1.0, drops.size()) + rng.randf() * 0.5
 		spawn_item(drops[i], at, ang, 1.0 + rng.randf() * (1.8 if e.is_boss or e.is_miniboss() else 1.0))
+
+## Soul Embers a kill drops (0 = none): rare on the surface, common in the dungeons, generous from champions.
+func ember_roll(e: Enemy, in_dungeon: bool, find := 0.0) -> int:
+	var n := 0
+	if e.is_boss:
+		n = rng.randi_range(30, 45) if in_dungeon else rng.randi_range(20, 30)
+	elif e.is_miniboss():
+		n = rng.randi_range(10, 18) if in_dungeon else rng.randi_range(6, 10)
+	elif e.is_elite:
+		n = rng.randi_range(3, 6) if in_dungeon else (rng.randi_range(1, 3) if rng.randf() < 0.5 else 0)
+	elif rng.randf() < (0.22 if in_dungeon else 0.04) * e.def.xp_mult:
+		n = rng.randi_range(1, 2)
+	return int(round(float(n) * (1.0 + maxf(0.0, find))))
+
+## The Relic Cache tier a kill drops (-1 = none).
+func cache_roll(e: Enemy, in_dungeon: bool) -> int:
+	if e.is_boss:
+		return 2 if (in_dungeon and rng.randf() < 0.35) else 1
+	if e.is_miniboss():
+		return 1 if rng.randf() < (0.2 if in_dungeon else 0.08) else (0 if in_dungeon or rng.randf() < 0.4 else -1)
+	if e.is_elite and rng.randf() < (0.04 if in_dungeon else 0.01):
+		return 0
+	return -1
+
+## A dungeon chest opened (TreasureChest): gold, gear (one piece guaranteed Advanced / Elite / Master by tier), Soul
+## Embers, a draught or two and sometimes a Relic Cache.
+func drop_chest(tier: int, level: int, at: Vector3, hero: HeroData) -> Array:
+	var player := Game.player as Player
+	var mf := player.stats.get_stat(&"magic_find") if player else 0.0
+	var ef := player.stats.get_stat(&"ember_find") if player else 0.0
+	var gf := player.stats.get_stat(&"gold_find") if player else 0.0
+	var ilvl := level + tier
+	var drops: Array = []
+	var n: int = [rng.randi_range(1, 2), rng.randi_range(2, 3), 4][clampi(tier, 0, 2)]
+	var floor_r: int = [BH.Rarity.ADVANCED, BH.Rarity.ELITE, BH.Rarity.MASTER][clampi(tier, 0, 2)]
+	var cls: StringName = hero.cls.id if hero and hero.cls else &""
+	for i in n:
+		var rarity := ItemGenerator.roll_rarity(rng, mf, 0.4 + 0.6 * tier, ilvl)
+		if i == 0:
+			rarity = maxi(rarity, floor_r)
+		if i == 1 and tier == 2 and rng.randf() < 0.5:
+			rarity = maxi(rarity, BH.Rarity.MYTHICAL)
+		var base := ItemGenerator.random_base(rng, ilvl, [], cls if rng.randf() < 0.6 else &"")
+		if base:
+			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
+	var em := DB.make_item(&"soul_ember", BH.Rarity.COMMON, ilvl, rng.randi())
+	em.count = int(round(float([rng.randi_range(3, 6), rng.randi_range(8, 15), rng.randi_range(25, 40)][clampi(tier, 0, 2)]) * (1.0 + ef)))
+	drops.append(em)
+	for i in tier + 1:
+		var cb := ItemGenerator.random_consumable(rng, ilvl)
+		if cb and rng.randf() < 0.6:
+			drops.append(DB.make_item(cb.id, BH.Rarity.COMMON, ilvl, rng.randi()))
+	var cache := -1
+	match tier:
+		0: cache = 0 if rng.randf() < 0.08 else -1
+		1: cache = 1 if rng.randf() < 0.08 else (0 if rng.randf() < 0.35 else -1)
+		_: cache = 2 if rng.randf() < 0.3 else 1
+	if cache >= 0:
+		drops.append(DB.make_item(DataRelics.CACHES[cache].id, BH.Rarity.COMMON, ilvl, rng.randi()))
+	spawn_gold(at, int(round(float(20 + 8 * level) * [1.0, 2.2, 5.0][clampi(tier, 0, 2)] * rng.randf_range(0.8, 1.25) * (1.0 + gf))))
+	for i in drops.size():
+		spawn_item(drops[i], at, TAU * float(i) / maxf(1.0, drops.size()) + rng.randf() * 0.4, 1.0 + rng.randf() * 0.8)
+	return drops
 
 func _item_rng() -> RandomNumberGenerator:
 	var r := RandomNumberGenerator.new()

@@ -20,7 +20,7 @@ static func _e(id: StringName, name: String, arche: StringName, d: Dictionary) -
 	return e
 
 static func build() -> Array:
-	var out := _defs() + _defs_bh010()
+	var out := _defs() + _defs_bh010() + DataEnemiesDungeon.defs() + DataEnemiesX.defs()
 	for e in out:
 		var d: Dictionary = LOOK.get(e.id, {})
 		for k in d:

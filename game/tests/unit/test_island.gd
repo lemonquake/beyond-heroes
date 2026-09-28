@@ -211,6 +211,16 @@ func test_topology_loops_and_early_choices() -> void:
 		edges += 1
 		adj.get_or_add(r.a, []).append(r.b)
 		adj.get_or_add(r.b, []).append(r.a)
+	# bh-013: a junction part-way along a road (where a dungeon trail leaves it) joins both of that road's ends
+	for pl in DataIsland.all_places():
+		var rr := DataIsland.road(String(pl.get("on_road", "")))
+		if rr.is_empty():
+			continue
+		nodes[pl.id] = true
+		for end in [rr.a, rr.b]:
+			edges += 1
+			adj.get_or_add(pl.id, []).append(end)
+			adj.get_or_add(end, []).append(pl.id)
 	for l in DataIsland.LINKS:
 		if l.mode == "boundary":
 			nodes[l.a] = true

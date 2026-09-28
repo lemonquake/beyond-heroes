@@ -1,0 +1,174 @@
+[FAIL] test_balance.gd — 1 tests, 16 checks, 10 failures (382751.9 ms)
+[PASS] test_bh011.gd — 6 tests, 45 checks, 0 failures (13081.9 ms)
+[PASS] test_bh012.gd — 11 tests, 1133 checks, 0 failures (1795.3 ms)
+[PASS] test_chat.gd — 6 tests, 38 checks, 0 failures (1911.4 ms)
+[PASS] test_crafting.gd — 11 tests, 606 checks, 0 failures (33888.1 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (196.4 ms)
+[FAIL] test_enemies.gd — 6 tests, 464 checks, 1 failures (3801.5 ms)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 7 failures (68011.1 ms)
+[PASS] test_guide.gd — 5 tests, 139 checks, 0 failures (2228.1 ms)
+[PASS] test_guilds.gd — 8 tests, 100 checks, 0 failures (16.9 ms)
+[PASS] test_island.gd — 13 tests, 840 checks, 0 failures (4837.1 ms)
+[FAIL] test_items.gd — 17 tests, 2071 checks, 112 failures (466.0 ms)
+[FAIL] test_loot.gd — 17 tests, 1270 checks, 20 failures (43839.5 ms)
+[PASS] test_maps.gd — 14 tests, 460 checks, 0 failures (7418.9 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.3 ms)
+[PASS] test_npcs.gd — 3 tests, 375 checks, 0 failures (34578.1 ms)
+[PASS] test_perf.gd — 7 tests, 174 checks, 0 failures (5458.5 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (6.2 ms)
+[PASS] test_shops_dialogue.gd — 10 tests, 879 checks, 0 failures (1206.3 ms)
+[PASS] test_skills.gd — 11 tests, 3285 checks, 0 failures (49509.6 ms)
+[PASS] test_stats.gd — 8 tests, 156 checks, 0 failures (16.7 ms)
+[PASS] test_status.gd — 8 tests, 24 checks, 0 failures (70.4 ms)
+[PASS] test_tempos.gd — 16 tests, 3491 checks, 0 failures (27841.6 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 knight power 464.8 is within 20% of the mean 638.2 (-27%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 mage power 1203.1 is within 20% of the mean 638.2 (+89%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 ranger power 885.0 is within 20% of the mean 638.2 (+39%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 638.2 (-100%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 mage power 5020.1 is within 20% of the mean 2147.3 (+134%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2147.3 (-100%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 mage power 5804.5 is within 20% of the mean 2761.8 (+110%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 511.2 is within 20% of the mean 2761.8 (-81%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 knight power 5655.4 is within 20% of the mean 4433.4 (+28%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 2422.2 is within 20% of the mean 4433.4 (-45%)
+  FAIL test_enemies.test_roster_definitions: sixteen enemies — expected 16, got 53
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 4 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 4 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 4 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 5 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 6 — expected 0, got 1
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 7 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 8 — expected 1, got 2
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_items.test_generation_rules_per_rarity: powers for rarity 9 — expected 2, got 3
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_worn has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_worn rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_gilded has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_gilded rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_radiant has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: relic_cache_radiant rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: soul_ember has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: soul_ember rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: glowcap_spore has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: glowcap_spore rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tide_pearl has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tide_pearl rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: slag_ember has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: slag_ember rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: rime_shard has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: rime_shard rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: star_glass has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: star_glass rendered icon exists
+  FAIL test_loot.test_every_item_has_weight_and_equipment_is_heavy: soul_ember has a weight
+  FAIL test_loot.test_twenty_new_consumables: twenty new consumables — expected 20, got 23
+TOTAL: 17120 checks, 150 failures

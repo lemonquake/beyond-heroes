@@ -80,6 +80,23 @@ static func _graph(hero: HeroData, mode: int, respect_locks: bool) -> Dictionary
 		back.reverse()
 		adj[r.a].append({"to": r.b, "cost": cost, "leg": _road_leg(r, r.a, r.b, pts, m)})
 		adj[r.b].append({"to": r.a, "cost": cost, "leg": _road_leg(r, r.b, r.a, back, m)})
+	# bh-013: a junction standing part-way along a road (where a dungeon trail leaves it) joins both of its ends
+	for p in DataIsland.all_places():
+		if not p.has("on_road"):
+			continue
+		var rr := DataIsland.road(String(p.on_road))
+		if rr.is_empty():
+			continue
+		var pr := DataIsland.project(p.pos, rr.points)
+		var total := DataIsland.polyline_length(rr.points)
+		for end in [[rr.a, 0.0], [rr.b, total]]:
+			var pts := DataIsland.slice(rr.points, float(end[1]), float(pr.along))
+			var m2 := absf(float(end[1]) - float(pr.along))
+			var c2 := m2 * (TRAIL_FACTOR if rr.type == "trail" and mode == Mode.ROADS else 1.0)
+			var back2 := pts.duplicate()
+			back2.reverse()
+			adj[end[0]].append({"to": p.id, "cost": c2, "leg": _road_leg(rr, end[0], p.id, pts, m2)})
+			adj[p.id].append({"to": end[0], "cost": c2, "leg": _road_leg(rr, p.id, end[0], back2, m2)})
 	for l in DataIsland.all_links():
 		var locked: bool = l.has("flag") and not (hero != null and bool(hero.world_flags.get(StringName(l.flag), false)))
 		if locked and respect_locks:

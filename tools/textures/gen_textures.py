@@ -587,11 +587,185 @@ def sand_path(seed=1601):
     return alb, h, rough, 4.0
 
 
+
+# ----------------------------------------------------------------------------------------------------------------
+# bh-012 dungeon sets
+def basalt(seed=1901):
+    """Dark hex-jointed basalt (column tops) with faint warm cracks."""
+    r = rng(seed)
+    nx, ny = 7, 8
+    pts = []
+    for j in range(ny):
+        for i in range(nx):
+            pts.append(((i + 0.5 + 0.5 * (j % 2) + r.uniform(-0.12, 0.12)) * N / nx,
+                        (j + 0.5 + r.uniform(-0.1, 0.1)) * N / ny))
+    pts = np.array(pts, np.float32) % N
+    wx, wy = warp_coords(seed + 1, 5.0, 2.3, 4)
+    f1, edge, i1, _ = voronoi(pts, wx, wy)
+    n = len(pts)
+    tone = r.uniform(0.8, 1.15, n).astype(np.float32)
+    foff = r.uniform(-0.06, 0.06, n).astype(np.float32)
+    fine = noise(seed + 2, 1.3, 40)
+    rn = noise(seed + 3, 2.0, 5)
+    chipn = noise(seed + 4, 1.8, 14)
+    gap = 3.0
+    blk = sstep(gap, gap + 14, edge + chipn * 2.5)
+    cv = Canvas()
+    for _ in range(16):
+        x, y = r.uniform(0, N, 2)
+        a = r.uniform(0, 2 * math.pi)
+        p = [(x, y)]
+        for _s in range(int(r.integers(8, 18))):
+            a += r.normal(0, 0.45)
+            x += math.cos(a) * 11
+            y += math.sin(a) * 11
+            p.append((x, y))
+        cv.line(p, 255, int(r.integers(2, 4)))
+    crack = blur(cv.array(), 0.9)
+    ves = (noise(seed + 5, 0.5, 200) > 2.3).astype(np.float32)
+    h = 0.1 + blk * (0.78 + 0.05 * rn + 0.03 * fine + foff[i1]) - crack * 0.25 * blk - ves * 0.06
+    h = np.clip(h, 0, 1)
+    joint = 1 - sstep(gap - 1, gap + 3, edge)
+    alb = mul(fill([0.135, 0.13, 0.135]), tone[i1] * (1 + 0.08 * fine + 0.06 * rn) * (1 - ves * 0.4))
+    alb = lerp(alb, col([0.05, 0.045, 0.045]), joint)
+    glow = np.clip(crack * 0.9 + joint * sstep(0.6, 1.4, noise(seed + 6, 2.0, 3)) * 0.6, 0, 1)
+    alb = lerp(alb, col([0.6, 0.18, 0.04]), glow * 0.75)
+    alb = mul(alb, 1.0 + np.clip(cavity(h, 5), -0.3, 0.3) * 0.9)
+    rough = 0.82 + 0.05 * rn + joint * 0.08 - glow * 0.2
+    return alb, h, rough, 6.0
+
+
+def rime_ice(seed=2001):
+    """Frosted blue-white ice blocks with internal fractures and frost at the joints."""
+    r = rng(seed)
+    wx, wy = warp_coords(seed + 1, 3.0, 2.2, 6)
+    rows = split_len(N, 4, r, 0.2)
+    edge = np.zeros((N, N), np.float32)
+    bid = np.zeros((N, N), np.int32)
+    nb = 0
+    for ri in range(4):
+        y0, y1 = rows[ri], rows[ri + 1]
+        kk = int(r.integers(2, 4))
+        cum = split_len(N, kk, r, 0.35)
+        off = r.integers(0, N)
+        band = (wy >= y0) & (wy < y1)
+        c = (wx - off) % N
+        idx = np.clip(np.searchsorted(cum, c, side="right") - 1, 0, kk - 1)
+        e = np.minimum(np.minimum(c - cum[idx], cum[idx + 1] - c), np.minimum(wy - y0, y1 - wy))
+        edge[band] = e[band]
+        bid[band] = (idx + nb)[band]
+        nb += kk
+    tone = r.uniform(0.9, 1.1, nb).astype(np.float32)
+    fine = noise(seed + 2, 1.3, 50)
+    cloud = noise(seed + 3, 2.2, 3)
+    fpts = r.uniform(0, N, (60, 2)).astype(np.float32)
+    _, fe, _, _ = voronoi(fpts, *warp_coords(seed + 4, 12.0, 2.2, 3))
+    frac = (1 - sstep(0.5, 2.5, fe)) * sstep(0.2, 1.2, noise(seed + 5, 2.0, 4))
+    gap = 3.0
+    blk = sstep(gap, gap + 18, edge)
+    depth = sstep(10, 90, edge) * (0.6 + 0.2 * cloud)
+    frost = np.clip(1 - sstep(4, 40, edge + noise(seed + 6, 1.6, 12) * 10)
+                    + sstep(0.8, 1.8, noise(seed + 7, 1.8, 6)) * 0.5, 0, 1)
+    bub = (noise(seed + 8, 0.4, 220) > 2.4).astype(np.float32)
+    h = 0.15 + blk * (0.7 + 0.04 * cloud + 0.02 * fine) - frac * 0.08 + frost * 0.05 * fine
+    h = np.clip(h, 0, 1)
+    alb = lerp(col([0.62, 0.75, 0.84]), col([0.36, 0.52, 0.66]), depth)
+    alb = mul(alb, tone[bid] * (1 + 0.04 * fine))
+    alb = lerp(alb, col([0.86, 0.91, 0.95]), np.clip(frac * 0.8 + frost * 0.75 + bub * 0.5, 0, 1))
+    alb = lerp(alb, col([0.3, 0.38, 0.46]), (1 - sstep(gap - 1, gap + 2, edge)) * 0.8)
+    rough = 0.18 + frost * 0.5 + frac * 0.15 + 0.03 * fine
+    return alb, h, rough, 4.0
+
+
+def marble(seed=2101):
+    """Pale veined marble slabs (running bond), polished."""
+    r = rng(seed)
+    nrows, ncols = 4, 4
+    rh = N // nrows
+    cw = N // ncols
+    edge = np.zeros((N, N), np.float32)
+    bid = np.zeros((N, N), np.int32)
+    for ri in range(nrows):
+        y0, y1 = ri * rh, (ri + 1) * rh
+        off = (ri % 2) * cw // 2
+        band = (YY >= y0) & (YY < y1)
+        c = (XX - off) % N
+        idx = (c // cw).astype(np.int32)
+        e = np.minimum(np.minimum(c - idx * cw, (idx + 1) * cw - c), np.minimum(YY - y0, y1 - YY))
+        edge[band] = e[band]
+        bid[band] = (idx + ri * ncols)[band]
+    nb = nrows * ncols
+    ph = r.uniform(0, 2 * math.pi, nb).astype(np.float32)
+    tone = r.uniform(0.95, 1.04, nb).astype(np.float32)
+    w1 = noise(seed + 1, 3.0, 2, fmax=8) * 1.6 + noise(seed + 2, 2.5, 6, fmax=40) * 0.3
+    w2 = noise(seed + 3, 3.0, 2, fmax=8) * 1.6
+    v1 = np.abs(np.sin((XX * 2 + YY * 1) / N * 2 * math.pi * 1.5 + w1 * 1.0 + ph[bid]))
+    v2 = np.abs(np.sin((XX * -1 + YY * 3) / N * 2 * math.pi + w2 * 1.2 + ph[bid] * 1.7))
+    vein = np.clip((1 - sstep(0.0, 0.12, v1)) + 0.4 * (1 - sstep(0.0, 0.06, v2)), 0, 1)
+    soft = (1 - sstep(0.0, 0.5, v1)) * 0.35
+    cloud = noise(seed + 4, 2.4, 2)
+    fine = noise(seed + 5, 1.2, 60)
+    gap = 2.0
+    grout = 1 - sstep(gap - 0.5, gap + 1.5, edge)
+    h = 0.6 - grout * 0.4 - vein * 0.02 + 0.01 * fine
+    alb = mul(fill([0.82, 0.8, 0.76]), tone[bid] * (1 + 0.035 * cloud + 0.015 * fine))
+    alb = lerp(alb, col([0.62, 0.6, 0.6]), soft)
+    gold = sstep(0.8, 1.6, noise(seed + 6, 2.0, 3))
+    vc = lerp(np.broadcast_to(col([0.42, 0.42, 0.45]), (N, N, 3)), col([0.66, 0.54, 0.34]), gold)
+    alb = lerp(alb, vc, vein * 0.85)
+    alb = lerp(alb, col([0.45, 0.43, 0.4]), grout)
+    rough = 0.28 + 0.04 * cloud + grout * 0.45 + vein * 0.05
+    return alb, h, rough, 2.5
+
+
+def fungal_stone(seed=2201):
+    """Dark damp irregular stone with pale mycelium threads and moss in the joints."""
+    r = rng(seed)
+    pts = jittered_points(6, 6, seed, 0.85)
+    wx, wy = warp_coords(seed + 1, 8.0, 2.4, 3)
+    f1, edge, i1, _ = voronoi(pts, wx, wy)
+    n = len(pts)
+    tone = r.uniform(0.8, 1.15, n).astype(np.float32)
+    rn = noise(seed + 2, 2.0, 4)
+    fine = noise(seed + 3, 1.3, 40)
+    gap = 4.0
+    blk = sstep(gap, gap + 26, edge + noise(seed + 4, 1.8, 10) * 4)
+    joint = 1 - sstep(gap - 1, gap + 6, edge)
+    cv = Canvas()
+    walkers = [(float(x), float(y), float(r.uniform(0, 2 * math.pi)), 0) for x, y in r.uniform(0, N, (160, 2))]
+    steps = 0
+    while walkers and steps < 6000:
+        x, y, a, age = walkers.pop()
+        p = [(x, y)]
+        for _ in range(int(r.integers(12, 40))):
+            a += r.normal(0, 0.35)
+            x += math.cos(a) * 6
+            y += math.sin(a) * 6
+            p.append((x, y))
+            if age < 3 and r.random() < 0.06:
+                walkers.append((x, y, a + (1 if r.random() < 0.5 else -1) * r.uniform(0.5, 1.2), age + 1))
+        cv.line(p, int(255 * (1 - 0.25 * age)), 2 if age == 0 else 1)
+        steps += 1
+    myc = blur(cv.array(), 0.6) * sstep(-0.8, 0.8, noise(seed + 5, 2.0, 4) + joint * 1.5)
+    h = np.clip(0.1 + blk * (0.75 + 0.07 * rn + 0.03 * fine) + myc * 0.08, 0, 1)
+    alb = mul(fill([0.2, 0.195, 0.18]), tone[i1] * (1 + 0.08 * rn + 0.06 * fine))
+    wet = sstep(0.2, 1.4, noise(seed + 6, 2.3, 2))
+    alb = mul(alb, 1 - wet * 0.3)
+    alb = lerp(alb, col([0.09, 0.085, 0.07]), joint)
+    moss = sstep(0.6, 1.5, noise(seed + 7, 2.0, 5) + joint * 1.6) * (0.4 + 0.6 * joint)
+    alb = lerp(alb, col([0.17, 0.23, 0.08]) * (1 + 0.2 * fine[..., None]), moss * 0.85)
+    alb = lerp(alb, col([0.78, 0.76, 0.64]), np.clip(myc, 0, 1) * 0.85)
+    alb = mul(alb, 1.0 + np.clip(cavity(h, 6), -0.3, 0.3))
+    rough = 0.85 - wet * 0.35 + moss * 0.08 + myc * 0.05
+    return alb, h, rough, 5.0
+
+
 SETS = {
     "stone_blocks": stone_blocks, "stone_floor": stone_floor, "cobblestone": cobblestone, "brick": brick,
     "dirt": dirt, "mud": mud, "grass": grass, "forest_floor": forest_floor, "rock_cliff": rock_cliff,
     "wood_planks": wood_planks, "wood_grain": wood_grain, "bark": bark, "moss": moss, "metal_iron": metal_iron, "cloth": cloth,
     "thatch": thatch, "sand_path": sand_path,
+    "basalt": basalt, "rime_ice": rime_ice, "marble": marble, "fungal_stone": fungal_stone,  # bh-012
 }
 
 

@@ -54,7 +54,7 @@ func stacks(id: StringName) -> int:
 	return statuses[id].stacks if statuses.has(id) else 0
 
 func is_disabled() -> bool:
-	return has(&"frozen") or has(&"stunned") or has(&"staggered")
+	return has(&"frozen") or has(&"stunned") or has(&"staggered") or has(&"petrified")
 
 func is_silenced() -> bool:
 	return has(&"silenced") or is_disabled()

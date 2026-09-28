@@ -104,6 +104,10 @@ static func compute(t: TempoData, hero_stats: DerivedStats, level: int, hero_cls
 	mods.append_array(DataTempos.mods_from(t.trait_def().get("mods", []), String(t.trait_def().get("name", ""))))
 	if t.is_legend():
 		mods.append_array(DataTempos.mods_from(t.legend_def().get("mods", []), t.full_name()))
+	if hero_stats != null and hero_stats.get_stat(&"tempo_damage") > 0.0:
+		mods.append(StatModifier.more(&"outgoing_damage", hero_stats.get_stat(&"tempo_damage"), "Your Soulbound gear"))
+	if t.resonance > 0:
+		mods.append_array(TempoGacha.resonance_mods(t))
 	mods.append_array(runtime)
 	var d := StatCalculator.compute(shell(t.class_id, hero_cls), level, {}, mods, loadout(t, level))
 	if hero_stats != null:

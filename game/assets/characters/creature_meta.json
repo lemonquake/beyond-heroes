@@ -157,6 +157,249 @@
   "totem_pulse": {
    "length": 0.8,
    "loop": false
+  },
+  "boar_gore": {
+   "length": 1.0,
+   "loop": false,
+   "hits": [
+    [
+     0.367,
+     0.533
+    ]
+   ]
+  },
+  "boar_charge": {
+   "length": 1.0,
+   "loop": false,
+   "hits": [
+    [
+     0.1,
+     0.9
+    ]
+   ],
+   "ground_speed": 6.0
+  },
+  "boar_stomp": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.633,
+     0.733
+    ]
+   ]
+  },
+  "crab_snap": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.367,
+     0.467
+    ]
+   ]
+  },
+  "crab_slam": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.8,
+     0.933
+    ]
+   ]
+  },
+  "crab_guard": {
+   "length": 1.2,
+   "loop": false
+  },
+  "hound_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.333,
+     0.433
+    ]
+   ]
+  },
+  "hound_lunge": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.767,
+     0.9
+    ]
+   ]
+  },
+  "hound_breath": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.433,
+     1.233
+    ]
+   ]
+  },
+  "weaver_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.367,
+     0.467
+    ]
+   ]
+  },
+  "weaver_spit": {
+   "length": 1.2,
+   "loop": false,
+   "hits": [
+    [
+     0.6,
+     0.667
+    ]
+   ]
+  },
+  "weaver_pounce": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.8,
+     0.9
+    ]
+   ]
+  },
+  "ooze_slam": {
+   "length": 1.067,
+   "loop": false,
+   "hits": [
+    [
+     0.5,
+     0.633
+    ]
+   ]
+  },
+  "ooze_spit": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.433,
+     0.5
+    ]
+   ]
+  },
+  "ooze_split": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.8,
+     0.9
+    ]
+   ]
+  },
+  "maw_bite": {
+   "length": 1.0,
+   "loop": false,
+   "hits": [
+    [
+     0.467,
+     0.567
+    ]
+   ]
+  },
+  "maw_slam": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.667,
+     0.767
+    ]
+   ]
+  },
+  "maw_spit": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.433,
+     0.5
+    ]
+   ]
+  },
+  "maw_burrow": {
+   "length": 1.0,
+   "loop": false
+  },
+  "maw_emerge": {
+   "length": 0.8,
+   "loop": false
+  },
+  "basilisk_bite": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.4,
+     0.533
+    ]
+   ]
+  },
+  "basilisk_gaze": {
+   "length": 1.2,
+   "loop": true
+  },
+  "basilisk_tail": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.533,
+     0.667
+    ]
+   ]
+  },
+  "shell_bite": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.433,
+     0.533
+    ]
+   ]
+  },
+  "shell_swipe": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.467,
+     0.567
+    ]
+   ]
+  },
+  "shell_curl": {
+   "length": 0.6,
+   "loop": false
+  },
+  "shell_roll": {
+   "length": 0.6,
+   "loop": true
+  },
+  "shell_uncurl": {
+   "length": 0.6,
+   "loop": false
+  },
+  "shell_flipped": {
+   "length": 1.0,
+   "loop": true
   }
  },
  "models": {
@@ -379,6 +622,633 @@
    "tris": 5284,
    "bones": 9,
    "stationary": true
+  },
+  "rootback_boar": {
+   "generator": "tools/blender/creatures/build_rootback_boar.py",
+   "glb": "res://assets/characters/rootback_boar.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.2,
+     "loop": true,
+     "ground_speed": 1.1
+    },
+    "run": {
+     "length": 0.667,
+     "loop": true,
+     "ground_speed": 4.4
+    },
+    "run_combat": {
+     "length": 0.667,
+     "loop": true,
+     "ground_speed": 4.4
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "boar_gore": {
+     "length": 1.0,
+     "loop": false,
+     "hits": [
+      [
+       0.367,
+       0.533
+      ]
+     ]
+    },
+    "boar_charge": {
+     "length": 1.0,
+     "loop": false,
+     "hits": [
+      [
+       0.1,
+       0.9
+      ]
+     ],
+     "ground_speed": 6.0
+    },
+    "boar_stomp": {
+     "length": 1.2,
+     "loop": false,
+     "hits": [
+      [
+       0.633,
+       0.733
+      ]
+     ]
+    }
+   },
+   "tris": 11164,
+   "bones": 31
+  },
+  "reef_crawler": {
+   "generator": "tools/blender/creatures/build_reef_crawler.py",
+   "glb": "res://assets/characters/reef_crawler.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.733,
+     "loop": true,
+     "ground_speed": 1.4
+    },
+    "run": {
+     "length": 0.4,
+     "loop": true,
+     "ground_speed": 3.8
+    },
+    "run_combat": {
+     "length": 0.4,
+     "loop": true,
+     "ground_speed": 3.4
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "crab_snap": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.367,
+       0.467
+      ]
+     ]
+    },
+    "crab_slam": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.8,
+       0.933
+      ]
+     ]
+    },
+    "crab_guard": {
+     "length": 1.2,
+     "loop": false
+    }
+   },
+   "tris": 11192,
+   "bones": 38
+  },
+  "rime_weaver": {
+   "generator": "tools/blender/creatures/build_rime_weaver.py",
+   "glb": "res://assets/characters/rime_weaver.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.667,
+     "loop": true,
+     "ground_speed": 1.12
+    },
+    "run": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 3.5
+    },
+    "run_combat": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 3.22
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "weaver_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.367,
+       0.467
+      ]
+     ]
+    },
+    "weaver_spit": {
+     "length": 1.2,
+     "loop": false,
+     "hits": [
+      [
+       0.6,
+       0.667
+      ]
+     ]
+    },
+    "weaver_pounce": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.8,
+       0.9
+      ]
+     ]
+    }
+   },
+   "tris": 5734,
+   "bones": 43,
+   "leg_span_m": 1.8
+  },
+  "gloam_ooze": {
+   "generator": "tools/blender/creatures/build_gloam_ooze.py",
+   "glb": "res://assets/characters/gloam_ooze.glb",
+   "clips": {
+    "idle": {
+     "length": 2.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.333,
+     "loop": true,
+     "ground_speed": 1.0
+    },
+    "run": {
+     "length": 0.8,
+     "loop": true,
+     "ground_speed": 2.8
+    },
+    "run_combat": {
+     "length": 0.8,
+     "loop": true,
+     "ground_speed": 2.8
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.667,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "ooze_slam": {
+     "length": 1.067,
+     "loop": false,
+     "hits": [
+      [
+       0.5,
+       0.633
+      ]
+     ]
+    },
+    "ooze_spit": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.433,
+       0.5
+      ]
+     ]
+    },
+    "ooze_split": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.8,
+       0.9
+      ]
+     ]
+    }
+   },
+   "tris": 11908,
+   "bones": 15
+  },
+  "tunnel_maw": {
+   "generator": "tools/blender/creatures/build_tunnel_maw.py",
+   "glb": "res://assets/characters/tunnel_maw.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.333,
+     "loop": true,
+     "ground_speed": 1.5
+    },
+    "run": {
+     "length": 0.8,
+     "loop": true,
+     "ground_speed": 4.0
+    },
+    "run_combat": {
+     "length": 0.8,
+     "loop": true,
+     "ground_speed": 4.0
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.8,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.8,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "maw_bite": {
+     "length": 1.0,
+     "loop": false,
+     "hits": [
+      [
+       0.467,
+       0.567
+      ]
+     ]
+    },
+    "maw_slam": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.667,
+       0.767
+      ]
+     ]
+    },
+    "maw_spit": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.433,
+       0.5
+      ]
+     ]
+    },
+    "maw_burrow": {
+     "length": 1.0,
+     "loop": false
+    },
+    "maw_emerge": {
+     "length": 0.8,
+     "loop": false
+    }
+   },
+   "tris": 13808,
+   "bones": 20
+  },
+  "stonegaze_basilisk": {
+   "generator": "tools/blender/creatures/build_stonegaze_basilisk.py",
+   "glb": "res://assets/characters/stonegaze_basilisk.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.333,
+     "loop": true,
+     "ground_speed": 1.0
+    },
+    "run": {
+     "length": 0.733,
+     "loop": true,
+     "ground_speed": 3.4
+    },
+    "run_combat": {
+     "length": 0.733,
+     "loop": true,
+     "ground_speed": 3.4
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "basilisk_bite": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.4,
+       0.533
+      ]
+     ]
+    },
+    "basilisk_gaze": {
+     "length": 1.2,
+     "loop": true
+    },
+    "basilisk_tail": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.533,
+       0.667
+      ]
+     ]
+    }
+   },
+   "tris": 9446,
+   "bones": 36
+  },
+  "shellback_grinder": {
+   "generator": "tools/blender/creatures/build_shellback_grinder.py",
+   "glb": "res://assets/characters/shellback_grinder.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.933,
+     "loop": true,
+     "ground_speed": 0.6
+    },
+    "run": {
+     "length": 0.4,
+     "loop": true,
+     "ground_speed": 2.4
+    },
+    "run_combat": {
+     "length": 0.4,
+     "loop": true,
+     "ground_speed": 2.4
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "shell_bite": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.433,
+       0.533
+      ]
+     ]
+    },
+    "shell_swipe": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.467,
+       0.567
+      ]
+     ]
+    },
+    "shell_curl": {
+     "length": 0.6,
+     "loop": false
+    },
+    "shell_roll": {
+     "length": 0.6,
+     "loop": true
+    },
+    "shell_uncurl": {
+     "length": 0.6,
+     "loop": false
+    },
+    "shell_flipped": {
+     "length": 1.0,
+     "loop": true
+    }
+   },
+   "tris": 9058,
+   "bones": 30
   }
  }
 }

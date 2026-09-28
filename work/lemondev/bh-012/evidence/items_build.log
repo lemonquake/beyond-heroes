@@ -1,0 +1,80 @@
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+20:13:06 | INFO: Starting glTF 2.0 export
+20:13:06 | INFO: Extracting primitive: relic_cache_worn
+20:13:06 | INFO: Primitives created: 4
+20:13:06 | INFO: Finished glTF 2.0 export in 0.0553431510925293 s
+
+[item] relic_cache_worn                356 tris  size 0.114 x 0.087 x 0.095
+20:13:06 | INFO: Starting glTF 2.0 export
+20:13:06 | INFO: Extracting primitive: relic_cache_gilded
+20:13:06 | INFO: Primitives created: 4
+20:13:06 | INFO: Finished glTF 2.0 export in 0.009234189987182617 s
+
+[item] relic_cache_gilded              356 tris  size 0.114 x 0.087 x 0.095
+20:13:06 | INFO: Starting glTF 2.0 export
+20:13:06 | INFO: Extracting primitive: relic_cache_radiant
+20:13:06 | INFO: Primitives created: 4
+20:13:06 | INFO: Finished glTF 2.0 export in 0.008185863494873047 s
+
+[item] relic_cache_radiant             356 tris  size 0.114 x 0.087 x 0.095
+20:13:06 | INFO: Starting glTF 2.0 export
+20:13:06 | INFO: Extracting primitive: soul_ember
+20:13:06 | INFO: Primitives created: 2
+20:13:06 | INFO: Finished glTF 2.0 export in 0.005951642990112305 s
+
+[item] soul_ember                      972 tris  size 0.063 x 0.062 x 0.067
+20:13:06 | INFO: Starting glTF 2.0 export
+20:13:06 | INFO: Extracting primitive: glowcap_spore
+20:13:07 | INFO: Primitives created: 3
+20:13:07 | INFO: Finished glTF 2.0 export in 0.007445812225341797 s
+
+[item] glowcap_spore                   588 tris  size 0.146 x 0.113 x 0.109
+20:13:07 | INFO: Starting glTF 2.0 export
+20:13:07 | INFO: Extracting primitive: tide_pearl
+20:13:07 | INFO: Primitives created: 3
+20:13:07 | INFO: Finished glTF 2.0 export in 0.007401943206787109 s
+
+[item] tide_pearl                      548 tris  size 0.100 x 0.132 x 0.085
+20:13:07 | INFO: Starting glTF 2.0 export
+20:13:07 | INFO: Extracting primitive: slag_ember
+20:13:07 | INFO: Primitives created: 2
+20:13:07 | INFO: Finished glTF 2.0 export in 0.006472587585449219 s
+
+[item] slag_ember                      828 tris  size 0.087 x 0.082 x 0.077
+20:13:07 | INFO: Starting glTF 2.0 export
+20:13:07 | INFO: Extracting primitive: rime_shard
+20:13:07 | INFO: Primitives created: 2
+20:13:07 | INFO: Finished glTF 2.0 export in 0.005115032196044922 s
+
+[item] rime_shard                      172 tris  size 0.095 x 0.088 x 0.165
+20:13:07 | INFO: Starting glTF 2.0 export
+20:13:07 | INFO: Extracting primitive: star_glass
+20:13:07 | INFO: Primitives created: 2
+20:13:07 | INFO: Finished glTF 2.0 export in 0.005203962326049805 s
+A:\Python\beyond-heroes\tools\blender\items\build_items.py:127: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:04.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\relic_cache_worn.png'
+00:04.454  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\relic_cache_gilded.png'
+00:04.688  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\relic_cache_radiant.png'
+00:04.954  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\soul_ember.png'
+00:05.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\glowcap_spore.png'
+00:05.454  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\tide_pearl.png'
+00:05.719  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\slag_ember.png'
+00:05.969  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\rime_shard.png'
+00:06.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\star_glass.png'
+
+[item] star_glass                      208 tris  size 0.091 x 0.073 x 0.130
+[icon] relic_cache_worn
+[icon] relic_cache_gilded
+[icon] relic_cache_radiant
+[icon] soul_ember
+[icon] glowcap_spore
+[icon] tide_pearl
+[icon] slag_ember
+[icon] rime_shard
+[icon] star_glass
+[build_items] 9 items done in 4.1s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

@@ -1,0 +1,15 @@
+[winter_crown] mesh 12862 tris, 190 parts, 1.0s
+[winter_crown] baked 52 actions in 21.5s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+11:54:23 | INFO: Starting glTF 2.0 export
+11:54:23 | INFO: Extracting primitive: winter_crown
+11:54:23 | INFO: Primitives created: 9
+11:54:27 | INFO: Finished glTF 2.0 export in 4.7909276485443115 s
+
+[winter_crown] clip lengths verified (52 clips)
+[winter_crown] -> A:\Python\beyond-heroes\game\assets\characters\winter_crown.glb (3.4 MB)
+[build] done in 27.8s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

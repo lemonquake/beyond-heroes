@@ -1,0 +1,12 @@
+# Waxen Hive (hive_nest) (`hive_nest`)
+- Script `tools/blender/creatures/build_hive_nest.py` -> `game/assets/characters/hive_nest.glb` (+ `.glb.import`); reuses `build_hive_drone.drone()` for the dormant drones.
+- Triangles: 11518 (core 10692, base 826). Budget 12k.
+- Size: 2.44 m tall, mound ~2.2-2.6 m across (lumps), roots spread to ~3.1 m. STATIC GROUND STRUCTURE: origin at ground level under the mound centre (float_hover = 0).
+- Nodes (Godot space, front = +Z):
+  - `core` (identity, origin on the ground): the whole mound - lumpy tiered wax body in alternating ochre / pale-amber bands, 5 patches of hexagonal comb cells (honey-filled, dark empty, wax-capped), 6 raised round entrances (wax collar, dark throat, warm amber BH_Emissive glow ring around a dark hole), 9 dripping honey ribs with drop bulbs, 2 dormant hive drones (0.6 scale, wings folded) clinging to it. Pulsing scales it up from its footprint.
+  - `base` (identity): 7 dead roots and 8 stones around the foot; not animated by the game (keeps the footprint planted while `core` pulses).
+- Palette (`__hive_nest`): BH_Cloth_Primary ochre wax (0.62,0.4,0.14), BH_Cloth_Secondary pale amber wax (0.88,0.66,0.3), BH_Ichor glossy honey (0.85,0.45,0.04 r0.12), BH_Shadow throats / empty cells, BH_Emissive warm amber glow (1.0,0.52,0.1 x6), BH_Wood dead roots, BH_Stone stones, plus the drone's BH_Horn / BH_Gold / BH_Aether.
+- Limitations: no ring nodes -> the float light falls back to cyan unless the game overrides it; the stock floating animation also bobs the model +-0.12 m and pulses core 8% continuously (35% on hit) - for a ground nest the Orchestrator should damp or skip the bob / pulse.
+- Validation: scratch Godot 4.7.2 import (`tools/godot_check_floaters.py`, log `logs/godot_check.txt`): loads, 0 import errors, no skeleton / AnimationPlayer, all nodes and `BH_*__hive_nest` materials present. Build log: `logs/build_hive_nest.log`.
+- Evidence: `hive_nest_rest_iso.png` (gameplay camera 54 deg at 16 / 22 m 1:1 crops, back view, 2x zooms, 7 m), `hive_nest_views.png` (4 side views, from-above view, close-up). Workbench renders: emissive materials show as flat bright colour (no bloom).
+- Pipeline: `"<blender>" -b --factory-startup --python tools/blender/creatures/build_hive_nest.py -- [--preview DIR]`; shared helpers in `tools/blender/creatures/kit_d13_float.py`. No clips (static; the game animates the nodes, see `character_visual.gd` `_animate_floating`).

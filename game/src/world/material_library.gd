@@ -43,7 +43,33 @@ const ENV := {
 	"BH_Bottle": ["", Color(0.2, 0.42, 0.25), 0.08, 0.0, 1.0, Color(0.05, 0.12, 0.06), 0.4],
 	"BH_Paper": ["", Color(0.86, 0.8, 0.66), 0.9, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_Rope": ["", Color(0.55, 0.45, 0.3), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
+	# bh-012: dungeon themes (Builder F's kit)
+	"BH_Lava": ["", Color(1.0, 0.42, 0.1), 0.6, 0.0, 1.0, Color(1.0, 0.4, 0.08), 4.5],
+	"BH_Ice": ["", Color(0.72, 0.86, 1.0), 0.12, 0.0, 1.0, Color(0.35, 0.6, 0.9), 0.35],
+	"BH_Spore": ["", Color(0.75, 1.0, 0.35), 0.6, 0.0, 1.0, Color(0.7, 1.0, 0.25), 3.0],
+	"BH_Starglass": ["", Color(0.72, 0.55, 1.0), 0.15, 0.0, 1.0, Color(0.7, 0.5, 1.0), 3.5],
+	"BH_Brass": ["", Color(0.78, 0.6, 0.3), 0.35, 0.95, 1.0, Color.BLACK, 0.0],
+	"BH_Coral": ["", Color(0.86, 0.46, 0.4), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Basalt": ["basalt", Color(0.42, 0.4, 0.4), 0.9, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_Marble": ["marble", Color(0.9, 0.88, 0.86), 0.5, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_MushroomCap": ["", Color(0.42, 0.24, 0.36), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Fungus": ["", Color(0.84, 0.8, 0.66), 0.85, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Snow": ["", Color(0.92, 0.95, 1.0), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Kelp": ["", Color(0.2, 0.3, 0.14), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
 }
+
+## bh-012: a dungeon theme swaps the stone of the kit for its own texture set and tint while its map is built
+## ({"BH_Stone": [texture set, tint], ...}). Cached per theme; `theme_id` is "" outside themed builds.
+static var theme_id := ""
+static var theme_over := {}
+
+static func push_theme(id: String, over: Dictionary) -> void:
+	theme_id = id
+	theme_over = over
+
+static func pop_theme() -> void:
+	theme_id = ""
+	theme_over = {}
 
 # Character material names -> [albedo, roughness, metallic, emission, energy, detail texture set]
 const CHAR := {
@@ -69,12 +95,19 @@ static func _tex(set_name: String, kind: String) -> Texture2D:
 static func env(name: String) -> Material:
 	var key := name.get_slice(".", 0)
 	var lite := Perf.lite
-	var ck := key + ("~lite" if lite else "")
+	var themed := theme_over.has(key)
+	var ck := key + ("~lite" if lite else "") + ("~" + theme_id if themed else "")
 	if _env.has(ck):
 		return _env[ck]
 	if not ENV.has(key):
 		return null
 	var d: Array = ENV[key]
+	if themed:
+		d = d.duplicate()
+		var o: Array = theme_over[key]
+		if ResourceLoader.exists(TEX % [o[0], "albedo"]):
+			d[0] = o[0]
+		d[1] = o[1]
 	var m := StandardMaterial3D.new()
 	m.resource_name = key
 	m.albedo_color = d[1]

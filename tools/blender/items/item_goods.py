@@ -574,3 +574,46 @@ GOODS.update({
     "recipe_champion_trinket": (scroll, {"seal": "gold", "ribbon": "teal", "paper": "paper"}),
     "recipe_aetherforged": (scroll, {"seal": "aether", "ribbon": "violet", "paper": "ochre", "rod": "blackiron", "glow": "aether"}),
 })
+
+
+# ---- bh-012: Relic Caches, the Soul Ember and the five dungeon materials -----------------------------------------------
+
+def coffer(s):
+    """A small iron-banded relic coffer; a glowing seam under the lid and a gem lock in the front."""
+    body, trim, glow = s.get("mat", "darkwood"), s.get("trim", "iron"), s.get("glow", "holy")
+    parts = [M.bevel(K.box(0.11, 0.075, 0.055, (0, 0, 0.0275), body), 0.004, 1)]
+    lid = K.lathe([(0, 0), (0.0375, 0), (0.0375, 0.012), (0.03, 0.026), (0.0, 0.03)], body, 16)
+    lid.rot(Ry(90)).V[:, 0] *= 1.47
+    parts.append(lid.move((0, 0, 0.058)))
+    for x in (-0.042, 0.0, 0.042):
+        parts.append(K.box(0.008, 0.079, 0.059, (x, 0, 0.0295), trim))
+    parts.append(K.box(0.112, 0.077, 0.004, (0, 0, 0.057), glow))
+    parts.append(K.gem((0, -0.04, 0.03), 0.009, s.get("gem", "topaz")))
+    for x in (-0.053, 0.053):
+        for y in (-0.036, 0.036):
+            parts.append(K.sphere(0.004, (x, y, 0.004), trim, 6, 4))
+    return _ground(parts)
+
+
+def pearl(s):
+    """A grey pearl in a half-open shell."""
+    parts = [K.lathe([(0, 0), (0.045, 0.004), (0.05, 0.012), (0.04, 0.016), (0, 0.012)], s.get("shell", "bone"), 18)]
+    top = K.lathe([(0, 0), (0.045, 0.004), (0.05, 0.012), (0.04, 0.016), (0, 0.012)], s.get("shell", "bone"), 18)
+    top.rot(Rx(-120)).move((0, 0.048, 0.02))
+    parts.append(top)
+    parts.append(K.sphere(0.019, (0, 0.004, 0.03), s.get("mat", "pearl"), 14, 10))
+    parts.append(K.sphere(0.008, (0.01, -0.01, 0.042), s.get("glow", "tide"), 8, 6))
+    return _ground(parts)
+
+
+GOODS.update({
+    "relic_cache_worn": (coffer, {"mat": "darkwood", "trim": "rust", "glow": "earth", "gem": "onyx"}),
+    "relic_cache_gilded": (coffer, {"mat": "redwood", "trim": "gold", "glow": "holy", "gem": "topaz"}),
+    "relic_cache_radiant": (coffer, {"mat": "blackiron", "trim": "paleg", "glow": "portal", "gem": "amethyst"}),
+    "soul_ember": (mote, {"glow": "tide", "wire": "paleg"}),
+    "glowcap_spore": (pouch, {"mat": "forest", "spill": "venom", "tie": "rope"}),
+    "tide_pearl": (pearl, {}),
+    "slag_ember": (core, {"glow": "ember", "crust": "blackiron"}),
+    "rime_shard": (cluster, {"mat": "ice", "count": 2, "scale": 1.7, "base": "slate", "seed": 21}),
+    "star_glass": (cluster, {"mat": "portal", "count": 3, "scale": 1.2, "base": "brass", "seed": 33}),
+})

@@ -142,6 +142,10 @@ func _positional_bonuses(req: DamageRequest, attacker: Node) -> void:
 	var st := req.attacker
 	if st == null or req.kind == DamageRequest.Kind.DOT:
 		return
+	# Champion-slaying gear (bh-012): more damage against elites, champions and bosses
+	var ed := st.get_stat(&"elite_damage")
+	if ed > 0.0 and (bool(get(&"is_elite")) or bool(get(&"is_boss")) or (has_method(&"is_miniboss") and call(&"is_miniboss"))):
+		req.more.append(["Champion-slaying", 1.0 + ed])
 	if st.has_flag(&"execute") and hp < max_hp() * 0.35:
 		req.more.append(["Ruthless", 1.0 + st.flag(&"execute")])
 	if st.has_flag(&"backstab") and attacker is Node3D:
@@ -181,12 +185,14 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 	Events.damage_dealt.emit(self, result, pos, attacker)
 	if attacker is Actor and result.leech > 0.0 and attacker.alive:
 		attacker.heal(result.leech, false)
-	# Aura of Thorns: melee attackers take part of what they dealt (never from projectiles, spells or reflections).
-	if status.has(&"aura_thorns") and attacker is Actor and attacker != self and attacker.alive and result.total > 0 			and req.kind == DamageRequest.Kind.ATTACK and not req.tags.has(&"projectile") and not req.tags.has(&"thorns"):
+	# Aura of Thorns and Thorns gear (bh-012): melee attackers take damage back (never from projectiles, spells or
+	# reflections).
+	var thorn_flat := stats.get_stat(&"thorns") if stats else 0.0
+	if (status.has(&"aura_thorns") or thorn_flat > 0.0) and attacker is Actor and attacker != self and attacker.alive and result.total > 0 			and req.kind == DamageRequest.Kind.ATTACK and not req.tags.has(&"projectile") and not req.tags.has(&"thorns"):
 		var tr := DamageRequest.new()
 		tr.kind = DamageRequest.Kind.SPELL
 		tr.attacker = stats
-		tr.base_min = float(result.total) * status.magnitude(&"aura_thorns")
+		tr.base_min = float(result.total) * (status.magnitude(&"aura_thorns") if status.has(&"aura_thorns") else 0.0) + thorn_flat
 		tr.base_max = tr.base_min
 		tr.can_crit = false
 		tr.evadable = false

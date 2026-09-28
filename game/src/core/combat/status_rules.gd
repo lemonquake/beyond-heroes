@@ -104,6 +104,14 @@ const DEFS := {
 	&"rune_immune": {"name": "Rune Shift", "debuff": false, "duration": 0.0, "icon": "rune_immune", "desc": "Immune to the element its rune core shows; weak to the opposite one."},
 	&"troll_regen": {"name": "Troll Blood", "debuff": false, "duration": 0.0, "icon": "regen", "desc": "Regenerates quickly unless it was burned in the last few seconds."},
 	&"lit_fuse": {"name": "Lit Fuse", "debuff": false, "duration": 0.0, "icon": "burning", "desc": "The powder keg is burning. It will explode!"},
+	# ---- bh-013: the new monsters ----
+	&"petrified": {"name": "Petrified", "debuff": true, "duration": 2.0, "icon": "stunned", "desc": "Turned to stone by a basilisk's gaze: cannot act. Look away from a gazing basilisk."},
+	&"static_charge": {"name": "Static", "debuff": true, "duration": 6.0, "icon": "shocked", "desc": "Storm Herald bolts charge you. Three charges and you are Stunned."},
+	&"blood_tether": {"name": "Blood Tether", "debuff": true, "duration": 4.0, "icon": "bleeding", "desc": "A Bloodbinder drains you. Break its line of sight or get more than 12 m away."},
+	&"aegis_link": {"name": "Aegis Link", "debuff": false, "duration": 0.0, "icon": "shielded", "desc": "Linked to an Aegis Acolyte: takes 85% less damage until the acolyte falls."},
+	&"ethereal": {"name": "Ethereal", "debuff": false, "duration": 0.0, "icon": "stealth", "desc": "Immune to physical damage; takes 50% more elemental damage."},
+	&"curled": {"name": "Curled", "debuff": false, "duration": 0.0, "icon": "guard", "desc": "Rolled into its shell: takes 90% less damage. Break its poise to flip it over."},
+	&"mirror_guard": {"name": "Mirror Guard", "debuff": false, "duration": 3.0, "icon": "guard", "desc": "Reflects projectiles and part of frontal blows. Strike from behind."},
 }
 
 const INTERACTION_DOCS := [

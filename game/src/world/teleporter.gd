@@ -27,7 +27,9 @@ signal activated(teleporter: Teleporter)
 const RUNE_ACTIVE := Color(0.35, 0.85, 1.0)
 const RUNE_LOCKED := Color(0.35, 0.3, 0.45)
 
-var interact_range := 2.1                       # flat metres from the dais centre (the dais is 1.3 m across the runes)
+var interact_range := 2.1
+var rune_tint := RUNE_ACTIVE                    # dungeon portals glow in their theme's colour (bh-012)
+var dungeon_gate: StringName = &""             # a dungeon's surface gate: also offers every floor the hero has reached                       # flat metres from the dais centre (the dais is 1.3 m across the runes)
 
 var _area: Area3D
 var _light: OmniLight3D
@@ -102,7 +104,7 @@ func is_locked() -> bool:
 
 func refresh_state() -> void:
 	var active := not is_locked()
-	var c := RUNE_ACTIVE if active else RUNE_LOCKED
+	var c := rune_tint if active else RUNE_LOCKED
 	for m in _rune_mats:
 		m.emission = c
 		m.albedo_color = c
@@ -148,8 +150,16 @@ func is_network() -> bool:
 ## Where activating can take the hero: this dais's own destination first, then every other awakened network shrine.
 func destinations() -> Array:
 	var out := []
+	if dungeon_gate != &"":
+		return DataDungeons.gate_destinations(Game.hero, dungeon_gate)
 	if destination_map != &"":
 		out.append({"map": destination_map, "spawn": destination_spawn, "name": destination_name})
+	if has_meta(&"dungeon_up") and String(destination_map).begins_with("dg_"):
+		# deeper floors can also leave the dungeon at once
+		var dg: StringName = get_meta(&"dungeon_up")
+		var sf: Dictionary = DataDungeons.get_def(dg).get("surface", {})
+		if not sf.is_empty():
+			out.append({"map": sf.map, "spawn": DataDungeons.gate_id(dg), "name": "Leave the dungeon"})
 	if is_network() and Game.hero:
 		for id in DataIsland.NETWORK_SHRINES:
 			if id == teleporter_id or not Game.hero.awakened_shrines.has(id):
@@ -167,6 +177,8 @@ func can_interact(_p: Node) -> bool:
 
 func interact_text() -> String:
 	var dests := destinations()
+	if dungeon_gate != &"":
+		return "Enter %s" % DataDungeons.get_def(dungeon_gate).get("name", "the dungeon") if dests.size() == 1 else "Descend (%d floors reached)" % dests.size()
 	if dests.size() == 1:
 		return "Travel to %s" % dests[0].name
 	return "Use Waypoint (%d places)" % dests.size()
@@ -198,7 +210,7 @@ func travel_to(map_id: StringName, spawn: StringName) -> bool:
 	_busy = true
 	activated.emit(self)
 	Audio.play_at(&"teleport_charge", global_position, -4.0)
-	var beam := VFXLib.beam(RUNE_ACTIVE, 6.0, 1.3)
+	var beam := VFXLib.beam(rune_tint, 6.0, 1.3)
 	add_child(beam)
 	var tw := create_tween()
 	tw.tween_property(_light, "light_energy", 6.0, charge_time)
@@ -206,7 +218,7 @@ func travel_to(map_id: StringName, spawn: StringName) -> bool:
 		tw.parallel().tween_property(m, "emission_energy_multiplier", 12.0, charge_time)
 	await tw.finished
 	Audio.play_at(&"teleport_whoosh", global_position)
-	add_child(VFXLib.light_flash(RUNE_ACTIVE, 10.0, 10.0, 0.4))
+	add_child(VFXLib.light_flash(rune_tint, 10.0, 10.0, 0.4))
 	Game.travel(map_id, spawn)
 	_busy = false
 	return true

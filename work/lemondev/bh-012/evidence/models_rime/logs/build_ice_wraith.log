@@ -1,0 +1,33 @@
+[ice_wraith] core: 2392 tris
+[ice_wraith] ring_1: 216 tris
+[ice_wraith] ring_2: 264 tris
+[ice_wraith] ring_3: 168 tris
+[ice_wraith] ribbons: 1176 tris
+[ice_wraith] total 4216 tris
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+19:51:55 | INFO: Starting glTF 2.0 export
+19:51:55 | INFO: Extracting primitive: core
+19:51:55 | INFO: Primitives created: 4
+19:51:55 | INFO: Extracting primitive: ribbons
+19:51:55 | INFO: Primitives created: 3
+19:51:55 | INFO: Extracting primitive: ring_1
+19:51:55 | INFO: Primitives created: 2
+19:51:55 | INFO: Extracting primitive: ring_2
+19:51:55 | INFO: Primitives created: 2
+19:51:55 | INFO: Extracting primitive: ring_3
+19:51:55 | INFO: Primitives created: 2
+19:51:55 | INFO: Finished glTF 2.0 export in 0.08111906051635742 s
+00:03.672  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\v0_6.png'
+00:03.703  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\v60_20.png'
+00:03.734  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\v150_8.png'
+00:03.766  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\v270_6.png'
+00:03.797  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\face.png'
+00:04.047  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\game_16.png'
+00:04.312  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\rime\prev\_tiles_ice_wraith\game_22.png'
+
+[ice_wraith] -> A:\Python\beyond-heroes\game\assets\characters\ice_wraith.glb
+MANIFEST A:/Python/beyond-heroes/work/lemondev/bh-012/scratch/rime/prev\ice_wraith_rest.json
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

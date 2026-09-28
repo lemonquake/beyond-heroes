@@ -47,6 +47,7 @@ func _ready() -> void:
 	_add_window(&"settings", SettingsWindow.new())
 	_add_window(&"tempos", TempoWindow.new())
 	_add_window(&"tempo_caller", TempoCallerWindow.new())
+	_add_window(&"gacha_reveal", GachaRevealWindow.new())
 	_add_window(&"guide", GuideWindow.new())
 	_add_window(&"crafting", CraftingWindow.new())
 	_add_window(&"hero_roster", HeroRosterWindow.new())
@@ -207,8 +208,16 @@ func choose_waypoint(t: Teleporter, dests: Array) -> void:
 			t.travel_to(d.map, d.spawn), &"", 420.0)
 		list.add_child(b)
 	var first: Dictionary = dests[0]
-	confirm.ask("Waypoint", "Choose an awakened shrine. You arrive beside its dais.", func() -> void: t.travel_to(first.map, first.spawn),
+	var dg := t.dungeon_gate != &"" or t.has_meta(&"dungeon_up")
+	confirm.ask("Dungeon portal" if dg else "Waypoint", "Choose where to go. Every floor whose seal you have broken can be reached from the gate." if dg
+		else "Choose an awakened shrine. You arrive beside its dais.", func() -> void: t.travel_to(first.map, first.spawn),
 		"Travel to %s" % first.name, false, list)
+
+## The gacha reveal (bh-012): Relic Caches and Tempo summons turn their cards over here, on top of other windows.
+func reveal(title: String, cards: Array, auto := false, on_done := Callable()) -> void:
+	var w := window(&"gacha_reveal") as GachaRevealWindow
+	if w:
+		w.show_cards(title, cards, auto, on_done)
 
 ## Ask a yes/no question. `on_yes` runs on confirmation.
 func ask(title: String, text: String, on_yes: Callable, yes_text := "Confirm", danger := false) -> void:

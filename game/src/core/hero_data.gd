@@ -67,6 +67,15 @@ var miniboss_log := {}
 var checkpoint := {}
 ## Herb patches picked: "map/node" -> play time they were picked (they regrow after GatherNode.REGROW seconds).
 var gather_log := {}
+## Dungeon chests opened (bh-012): "map/n" -> play time; a chest refills DataDungeons.CHEST_RESPAWN seconds later.
+var chest_log := {}
+## Dungeon raids (bh-013): dungeon id -> {at, until (unix seconds), count}; DataDungeons.record_raid / recovering.
+var dungeon_raids := {}
+## Tempo summoning (bh-012, TempoGacha): calls made, calls since the last 4-star / 5-star (pity), the welcome gift,
+## and the last summons for the history list.
+var summon := {}
+## Spirits called at the shrine but not bound: they wait in the Spirit Hall (TempoData), swapped in for free.
+var spirit_hall: Array = []
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
 
@@ -376,7 +385,8 @@ func to_dict() -> Dictionary:
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
 		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
-		"active_aura": String(active_aura),
+		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true),
+		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()),
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -499,11 +509,28 @@ static func from_dict(d: Dictionary) -> HeroData:
 	if gl is Dictionary:
 		for k in gl:
 			h.gather_log[String(k)] = float(gl[k])
+	var cl = d.get("chest_log", {})
+	if cl is Dictionary:
+		for k in cl:
+			h.chest_log[String(k)] = float(cl[k])
+	var dr = d.get("dungeon_raids", {})
+	if dr is Dictionary:
+		for k in dr:
+			if dr[k] is Dictionary:
+				h.dungeon_raids[String(k)] = {"at": float(dr[k].get("at", 0.0)), "until": float(dr[k].get("until", 0.0)), "count": int(dr[k].get("count", 1))}
+	var sm = d.get("summon", {})
+	if sm is Dictionary:
+		h.summon = sm.duplicate(true)
+	for td in d.get("spirit_hall", []):
+		if td is Dictionary:
+			var st := TempoData.from_dict(td)
+			if st != null:
+				h.spirit_hall.append(st)
 	var aura := StringName(d.get("active_aura", ""))
 	if aura != &"" and h.skill_tree.rank(aura) > 0 and DB.skill(aura) != null and DB.skill(aura).is_aura():
 		h.active_aura = aura
 	h.tempo_serial = int(d.get("tempo_serial", 0))
-	for t in h.tempos:
+	for t in h.tempos + h.spirit_hall:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)
 	return h
 

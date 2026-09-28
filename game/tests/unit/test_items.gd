@@ -37,7 +37,10 @@ func test_generation_rules_per_rarity() -> void:
 					ok(false, "tier above item level")
 					return
 			var expected_powers := {BH.Rarity.MYTHICAL: 1, BH.Rarity.LEGENDARY: 1, BH.Rarity.AETHER: 2}
-			eq(it.powers.size(), expected_powers.get(rarity, 0), "powers for rarity %d" % rarity)
+			# bh-012: Licensed-or-better pieces may also carry one relic passive (a utility stat bundle) on top
+			var relic := it.powers.filter(func(pid): return DB.power(StringName(pid)) != null and DB.power(StringName(pid)).tier == &"relic").size()
+			ok(relic <= 1 and (relic == 0 or rarity >= BH.Rarity.LICENSED), "at most one relic passive, Licensed+ only (rarity %d)" % rarity)
+			eq(it.powers.size() - relic, expected_powers.get(rarity, 0), "powers for rarity %d" % rarity)
 			ok(it.quality <= float(rule[5]) + 0.0001 and it.quality >= float(rule[4]) - 0.0001, "quality bounded")
 			eq(it.license != &"", rarity == BH.Rarity.LICENSED, "license only on Licensed (%d)" % rarity)
 			var mw := it.affixes.filter(func(a): return a.get("mw", false)).size()

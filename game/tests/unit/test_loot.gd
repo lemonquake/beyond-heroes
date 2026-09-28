@@ -205,7 +205,8 @@ func test_twenty_new_consumables() -> void:
 	var new_ids := []
 	for b: ItemBaseDef in DB.item_bases.values():
 		# bh-007's recipe scrolls also use rendered icons; they are counted in test_crafting
-		if b.is_consumable() and b.icon.contains("items3d") and not b.consumable_effect.has("learn_recipe"):
+		# bh-012's Relic Caches are counted in test_bh012
+		if b.is_consumable() and b.icon.contains("items3d") and not b.consumable_effect.has("learn_recipe") and not b.consumable_effect.has("cache"):
 			new_ids.append(b.id)
 			ok(b.flavor != "", "%s explains itself" % b.id)
 			ok(b.stack_max > 1, "%s stacks" % b.id)

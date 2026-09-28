@@ -167,6 +167,7 @@ static func bases() -> Array:
 	out.append(_b(&"beast_hide", "Beast Hide", &"material", "beast_hide", {"stack_max": 50, "value": 3, "flavor": "Tough hide from the corrupted beasts of the forest."}))
 	out.append(_b(&"aether_shard", "Aether Shard", &"material", "aether_shard", {"stack_max": 999, "value": 40,
 		"flavor": "Crystallized Aether. Merchants of rare goods accept nothing else."}))
+	DataRelics.items(out)         # bh-012: relic caches, Soul Embers, dungeon materials
 	DataCrafting.materials(out)   # bh-007: ingredients, refined stock, champion essence, recipe scrolls
 	out.append(_b(&"quest_seal_key", "Seal of the First Oath", &"quest", "quest_seal_key", {"sellable": false, "value": 0,
 		"flavor": "A heavy bronze seal, warm to the touch. It once kept the Hollow Throne shut."}))

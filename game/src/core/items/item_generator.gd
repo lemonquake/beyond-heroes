@@ -85,8 +85,44 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 		BH.Rarity.AETHER:
 			_add_power(it, &"legendary", rng)
 			_add_power(it, &"aether", rng)
+	# bh-012: a relic power — a signature utility passive — on some Licensed-or-better pieces
+	if rarity >= BH.Rarity.LICENSED and base.unique_name == "" and rng.randf() < RELIC_CHANCE[clampi(rarity - BH.Rarity.LICENSED, 0, RELIC_CHANCE.size() - 1)]:
+		_add_power(it, &"relic", rng)
 	it.custom_name = _name_for(it, rng)
+	if it.custom_name == "" and rarity >= ItemNames.MIN_RARITY and base.unique_name == "" and base.set_id == &"":
+		var nm := ItemNames.roll(it, rng)
+		it.custom_name = nm[0]
+		it.epithet = nm[1]
 	return it
+
+## Chance of a relic power by rarity from Licensed up (Licensed, Elite, Master, Mythical, Legendary, Aether).
+const RELIC_CHANCE := [0.15, 0.3, 0.45, 0.6, 0.6, 0.6]
+
+## The gear inside a Relic Cache of `tier` (DataRelics.CACHES) opened by a hero of `level`: one piece at least the
+## cache's floor rarity, the rest rolled with a strong rarity bonus; a Radiant cache has a small chance of more.
+static func relic_items(tier: int, level: int, rng: RandomNumberGenerator, magic_find := 0.0, class_hint := &"") -> Array:
+	var c: Dictionary = DataRelics.CACHES[clampi(tier, 0, DataRelics.CACHES.size() - 1)]
+	var ilvl := clampi(level + int(c.ilvl), 1, BH.LEVEL_CAP + 5)
+	var out := []
+	for i in int(c.items):
+		var rarity := maxi(roll_rarity(rng, magic_find, float(c.bonus), ilvl), int(c.min))
+		if i == 0:
+			rarity = maxi(rarity, int(c.floor))
+		if tier == 2 and i == 1 and rng.randf() < 0.25:
+			rarity = maxi(rarity, BH.Rarity.LEGENDARY)
+		var base := random_base(rng, ilvl, [], class_hint if rng.randf() < 0.6 else &"")
+		if base == null:
+			continue
+		var r2 := RandomNumberGenerator.new()
+		r2.seed = rng.randi()
+		out.append(generate(base, ilvl, rarity, r2))
+	if tier >= 1 and rng.randf() < (0.06 if tier == 1 else 0.18):
+		var sb := random_special(rng, ilvl + 4, rng.randf() < 0.6)
+		if sb:
+			var r3 := RandomNumberGenerator.new()
+			r3.seed = rng.randi()
+			out.append(generate(sb, ilvl, BH.Rarity.MASTER if sb.set_id != &"" else BH.Rarity.AETHER, r3))
+	return out
 
 static func _roll_affixes(it: ItemInstance, n: int, bias: int, min_roll: float, rng: RandomNumberGenerator) -> void:
 	var pool: Array = []
@@ -166,17 +202,7 @@ static func _name_for(it: ItemInstance, rng: RandomNumberGenerator) -> String:
 		BH.Rarity.ELITE, BH.Rarity.MASTER:
 			if b.set_id != &"":
 				return ""
-			return "%s %s" % [RARE_NAME_A[rng.randi_range(0, RARE_NAME_A.size() - 1)], RARE_NAME_B[rng.randi_range(0, RARE_NAME_B.size() - 1)]]
-		BH.Rarity.MYTHICAL, BH.Rarity.LEGENDARY:
-			if not it.powers.is_empty():
-				var p := DB.power(StringName(it.powers[it.powers.size() - 1]))
-				if p != null:
-					return "%s %s" % [p.display_name, b.display_name]
-		BH.Rarity.AETHER:
-			for pid in it.powers:
-				var p2 := DB.power(StringName(pid))
-				if p2 != null and p2.tier == &"aether":
-					return "%s %s" % [p2.display_name, b.display_name]
+	# Licensed and better: ItemNames rolls a proper name and an epithet (bh-012)
 	return ""
 
 static func _weighted_pick(pool: Array, rng: RandomNumberGenerator, used: Dictionary) -> AffixDef:

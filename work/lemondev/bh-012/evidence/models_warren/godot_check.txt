@@ -1,0 +1,18 @@
+Godot 4.7.2.stable.official.ed1daf0bf, throwaway project A:\Python\beyond-heroes\work\lemondev\bh-012\scratch\warren\godot_check
+import errors: 0 []
+GLB sporeling.glb tris=5674 bones=24 materials=BH_Skin__sporeling,BH_Emissive__sporeling,BH_Fur__sporeling,BH_Shadow__sporeling,BH_Horn__sporeling,BH_Flesh__sporeling,BH_Bone__sporeling,BH_Wood__sporeling
+  sporeling: 45 clips, missing []; clips imported with a loop mode: ['block']
+  attack clips: axe_1 0.600s loop=0, axe_2 0.600s loop=0, cast_quick 0.500s loop=0
+GLB rootweaver.glb tris=9214 bones=24 materials=BH_Wood__rootweaver,BH_Leather__rootweaver,BH_Fur__rootweaver,BH_Emissive__rootweaver,BH_Horn__rootweaver,BH_Shadow__rootweaver,BH_Hair__rootweaver,BH_Cloth_Primary__rootweaver,BH_Bone__rootweaver,BH_Flesh__rootweaver
+  rootweaver: 47 clips, missing []; clips imported with a loop mode: ['block']
+  attack clips: staff_1 0.533s loop=0, cast_quick 0.500s loop=0, cast_area 1.000s loop=0, cast_heavy 0.933s loop=0, cast_weapon 0.800s loop=0
+GLB mycelid_hulk.glb tris=10914 bones=24 materials=BH_Skin__mycelid_hulk,BH_Cloth_Primary__mycelid_hulk,BH_Bone__mycelid_hulk,BH_Emissive__mycelid_hulk,BH_Fur__mycelid_hulk,BH_Shadow__mycelid_hulk,BH_Flesh__mycelid_hulk,BH_Horn__mycelid_hulk,BH_Wood__mycelid_hulk
+  mycelid_hulk: 47 clips, missing []; clips imported with a loop mode: ['block']
+  attack clips: axe_1 0.600s loop=0, axe_2 0.600s loop=0, boss_slam 1.400s loop=0, cast_heavy 0.933s loop=0, boss_charge 0.667s loop=0
+GLB rot_mother.glb tris=17184 bones=24 materials=BH_Fur__rot_mother,BH_Cloth_Secondary__rot_mother,BH_Bone__rot_mother,BH_Emissive__rot_mother,BH_Flesh__rot_mother,BH_Horn__rot_mother,BH_Shadow__rot_mother,BH_Leather__rot_mother,BH_Wood__rot_mother,BH_Cloth_Primary__rot_mother
+  rot_mother: 50 clips, missing []; clips imported with a loop mode: ['block']
+  attack clips: staff_1 0.533s loop=0, staff_heavy 1.200s loop=0, cast_area 1.000s loop=0, cast_heavy 0.933s loop=0, cast_ultimate 1.333s loop=0, boss_roar 1.533s loop=0, boss_summon 1.533s loop=0, boss_slam 1.400s loop=0
+GLB rootback_boar.glb tris=11164 bones=31 materials=BH_Fur__rootback_boar,BH_Flesh__rootback_boar,BH_Shadow__rootback_boar,BH_Bone__rootback_boar,BH_Aether__rootback_boar,BH_Hair__rootback_boar,BH_Wood__rootback_boar,BH_Horn__rootback_boar,BH_Cloth_Secondary__rootback_boar,BH_Skin__rootback_boar,BH_Emissive__rootback_boar
+  rootback_boar: 15 clips, missing []; clips imported with a loop mode: []
+  attack clips: boar_gore 1.000s loop=0, boar_charge 1.000s loop=0, boar_stomp 1.200s loop=0
+RESULT OK

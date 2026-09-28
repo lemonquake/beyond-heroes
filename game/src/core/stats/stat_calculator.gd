@@ -120,6 +120,7 @@ const ADDITIVE_INCREASE := {
 	&"heavy_damage": true, &"impact_damage": true, &"burn_damage": true, &"healing": true, &"buff_effect": true,
 	&"valor_gain": true, &"xp_gain": true, &"magic_find": true, &"gold_find": true, &"projectile_speed": true,
 	&"focus_gain": true, &"trap_damage": true, &"aura_effect": true, &"aura_radius": true, &"dot_damage": true, &"summon_damage": true,
+	&"potion_power": true, &"elite_damage": true, &"ember_find": true, &"tempo_damage": true,
 }
 
 static func is_additive_increase(k: StringName) -> bool:
@@ -311,7 +312,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 			_std(d, agg, StringName("dmg_wt_" + String(wt)), [], -0.9, INF)
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",
 			&"mana_leech", &"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical", &"status_power",
-			&"focus_gain", &"trap_damage", &"aura_effect", &"aura_radius", &"dot_damage", &"summon_damage"]:
+			&"focus_gain", &"trap_damage", &"aura_effect", &"aura_radius", &"dot_damage", &"summon_damage",
+			&"potion_power", &"elite_damage", &"ember_find", &"tempo_damage", &"hp_on_kill", &"mana_on_kill", &"thorns"]:
 		_std(d, agg, k, [], -0.9 if k != &"pen_armor" else 0.0, INF)
 	_std(d, agg, &"stagger_power", [["Strength %d x %.1f%%" % [STR, STAGGER_PER_STR * 100.0], STR * STAGGER_PER_STR]], -0.9, INF)
 	_std(d, agg, &"projectile_damage", [["Dexterity %d x %.1f%%" % [DEX, PROJ_DMG_PER_DEX * 100.0], DEX * PROJ_DMG_PER_DEX]], -0.9, INF)

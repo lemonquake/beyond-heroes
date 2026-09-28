@@ -59,7 +59,7 @@ func _build() -> void:
 	var top := hbox(16)
 	body.add_child(top)
 	_tabs = TabBar.new()
-	for t in ["Controls", "Tempos", "First steps", "Play Together"]:
+	for t in ["Controls", "Tempos", "First steps", "Play Together", "Dungeons & Relics"]:
 		_tabs.add_tab(t)
 	_tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_tabs.tab_changed.connect(func(i: int) -> void:
@@ -90,8 +90,30 @@ func refresh() -> void:
 		0: _controls()
 		1: _tempos()
 		3: _together()
+		4: _dungeons()
 		_: _steps()
 	_scroll.scroll_vertical = 0
+
+## bh-012/13: the twenty dungeons, their seals, bosses and raid recovery, Relic Caches, gacha gear and Tempo summoning.
+func _dungeons() -> void:
+	var hero := Game.hero
+	_heading("The dungeons of Salmonan")
+	_para("Twenty dungeons lie under the island, from a smugglers' cellar for new heroes to the Maw Beneath at level 58. Each has two to five floors and a difficulty from Easy to Mythic. Every floor is sealed: defeat its Seal Keepers (an elite pack) to open the portal down; on the last sealed floor the dungeon's champion holds the seal, and the deepest floor is the lair of its lord. A broken seal stays broken, and the gate on the surface takes you straight to any floor you have opened. Every gate is on the map (M); the Underground view lists them all.")
+	_para("Raids: when a dungeon's lord falls the dungeon is raided. Its halls stay empty for 30 minutes to 2 hours (longer for harder dungeons), then its monsters return. Its lord never comes back, but a Usurper, a named champion, claims the empty sanctum, and the champions keep returning.")
+	for id in DataDungeons.order():
+		var d := DataDungeons.get_def(id)
+		var gate := DataIsland.place(String(d.surface.place))
+		var lr := DataDungeons.level_range(id)
+		var boss := DB.enemy(d.boss)
+		var gone := DataDungeons.boss_gone(hero, id)
+		_para("%s  %s (%s) — levels %d–%d, %d floors. Gate: %s (%s). Lord: %s. %s" % [DataDungeons.tier_stars(id), d.name, DataDungeons.tier_name(id),
+			lr.x, lr.y, DataDungeons.floor_count(id), gate.get("name", "?"), DB.map_def(StringName(d.surface.map)).display_name,
+			boss.display_name if boss else "?", DataDungeons.status_text(hero, id)], UITheme.GOLD if gone else UITheme.TEXT)
+	_heading("Relic Caches and named gear")
+	_para("Chests, champions and dungeon lords drop Relic Caches — Worn, Gilded and Radiant. Open one from your bag and its gear is revealed card by card. Every Licensed-or-better piece carries a name of its own and an epithet (no two alike), and stars from ★ to ★★★★★ for how close its rolls came to perfect. Some carry a relic passive: gold, experience, regeneration, life on kill, potions, thorns, damage to champions, Soul Embers or stronger Tempos.")
+	_heading("Summoning Tempos")
+	_para("Monsters (far more in the dungeons), champions and chests drop Soul Embers. At the Shrine of the Fallen, Veyra Ashgrave burns %d Embers to call one spirit, %d to call ten. ★★★ spirits are the plain dead of your grade, ★★★★ are honoured veterans one grade higher with an extra skill, ★★★★★ are renowned spirits — half of them today's featured spirit. You always get a ★★★★ or better within %d calls and a ★★★★★ by call %d. Call a renowned spirit you already have and it grows stronger (Resonance, up to V). Summoned spirits wait in the Spirit Hall; bind or swap them for free." % [
+		TempoGacha.COST_ONE, TempoGacha.COST_TEN, TempoGacha.FOUR_PITY, TempoGacha.HARD_PITY])
 
 ## Multiplayer, explained simply enough for a young player (docs/MULTIPLAYER_GUIDE.md has the full version).
 func _together() -> void:

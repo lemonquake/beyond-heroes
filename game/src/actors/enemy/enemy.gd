@@ -88,7 +88,9 @@ var _net_serial := -1
 var _net_engaged := false
 ## bh-010: the new monsters' signature mechanics live in a helper (null for the older roster).
 const TraitsExt := preload("res://src/actors/enemy/enemy_traits_ext.gd")
-var ext: TraitsExt
+## bh-013: the twenty-one new monsters' mechanics extend that helper (one `ext` serves both).
+const TraitsX := preload("res://src/actors/enemy/enemy_traits_x.gd")
+var ext: TraitsX
 var risen := false                    # raised by a Necromancer: a weaker Hollow Soldier that cannot rise again
 var summoner: Node                    # who raised / summoned / planted it (null for camp monsters)
 var _bone_ward := 0.0                 # part of shield_hp that is a Necromancer's Bone Ward
@@ -128,6 +130,11 @@ func is_miniboss() -> bool:
 
 func _ready() -> void:
 	super._ready()
+	var size_mult := float(get_meta(&"size_mult", 1.0))
+	if size_mult != 1.0:
+		body_radius *= size_mult
+		body_height *= size_mult
+		weight *= size_mult
 	team = BH.Team.ENEMY
 	add_to_group(&"enemy")
 	if is_boss:
@@ -151,8 +158,10 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0))
+	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0)) * size_mult
 	visual.setup(def.model, sc, def.tint, &"")
+	visual.float_hover = float(def.anim_map.get("hover", 1.2))
+	visual.float_core_spin = float(def.anim_map.get("core_spin", 0.0))
 	if visual.fallback:
 		_shape_fallback()
 	visual.set_stance(_idle_anim())
@@ -160,8 +169,8 @@ func _ready() -> void:
 		status.immunities[StringName(sid)] = true
 	if is_boss:
 		status.immunities[&"feared"] = true
-	if TraitsExt.wants(def):
-		ext = TraitsExt.new(self)
+	if TraitsExt.wants(def) or TraitsX.wants_x(def):
+		ext = TraitsX.new(self)
 	status.grants_stagger_window = is_elite or is_boss
 	mark_stats_dirty()
 	ensure_stats()
@@ -723,7 +732,7 @@ func _choose_attack() -> Dictionary:
 		var rng_m := float(a.get("range", 2.0)) + body_radius
 		if _dist > rng_m or _dist < float(a.get("min_range", 0.0)):
 			continue
-		if a.kind in ["projectile", "aoe", "charge", "dash", "chain", "tongue"] and not _has_los:
+		if a.kind in ["projectile", "aoe", "charge", "dash", "chain", "tongue", "tether", "gaze", "beam", "strikes"] and not _has_los:
 			continue
 		var w := float(a.get("weight", 1.0))
 		if a.kind in ["aoe", "charge", "pools", "summon"]:
@@ -780,7 +789,7 @@ func _atk_element(a: Dictionary) -> int:
 
 func _start_attack(a: Dictionary) -> void:
 	var S := EnemyBrain.State
-	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "dash", "tongue"]
+	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "dash", "tongue", "bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
 	var st: int = S.CAST if def.archetype in [&"caster", &"support"] and a.kind != "melee" else (S.SPECIAL if special else S.ATTACK)
 	if not brain.go(st):
 		return
@@ -868,7 +877,7 @@ func _start_attack(a: Dictionary) -> void:
 					sw.trail_fx = func(pos: Vector3) -> void: FX.spawn(VFXLib.light_flash(Elements.color(int(a.get("element", 0))), 2.0, 3.0, 0.2), pos + Vector3.UP)
 			else:
 				_charge = {"dir": dir, "speed": float(a.get("speed", 14.0)), "left": length / float(a.get("speed", 14.0)), "delay": windup, "hit": false, "a": a}
-				visual.hold_action(&"boss_charge" if is_boss or def.archetype == &"brute" else &"run_combat")
+				visual.hold_action(StringName(a.get("hold_anim", &"boss_charge" if is_boss or def.archetype == &"brute" else &"run_combat")))
 		"pools":
 			act.on_release = func() -> void: _pools(a)
 		"summon":
@@ -881,6 +890,9 @@ func _start_attack(a: Dictionary) -> void:
 			act.on_release = func() -> void:
 				if ext:
 					ext.tongue(a)
+		_:
+			if ext:
+				ext.start_special(a, act)
 	Audio.play_at(&"swing_heavy" if special else &"swing_light", global_position, -4.0)
 
 ## Clips without timing metadata (a creature model that has not been delivered yet) still hit: a release at mid-clip and,
@@ -978,6 +990,9 @@ func _telegraph_aoe(a: Dictionary, at: Vector3, delay: float) -> void:
 		Events.camera_shake.emit(0.35 if is_boss else 0.2)
 		Events.impact.emit(pos, 12.0, &"earth")
 		Audio.play_at(&"boss_slam" if is_boss else &"earth_quake", pos)
+		# a Starmote spends itself in the blast (bh-012)
+		if a.get("self_destruct", false) and alive:
+			die(null)
 
 func _pools(a: Dictionary) -> void:
 	if target == null:
@@ -1257,6 +1272,11 @@ func _prepare_incoming(req: DamageRequest, attacker: Node) -> void:
 				req.guarding = true
 	if stats.has_flag(&"ward") and shield_hp > 0.0 and req.conversion.has(Elements.LIGHT):
 		req.tags[&"ward_light"] = true
+	# bh-013: an Aegis Acolyte's link, and the new monsters' own defences (ethereal, curled, mirror guard)
+	if status.has(&"aegis_link") and req.kind != DamageRequest.Kind.DOT:
+		req.more.append(["Aegis Link", TraitsX.LINK_TAKEN])
+	if ext:
+		ext.prepare_incoming(req, attacker)
 
 func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
 	if net_replica:

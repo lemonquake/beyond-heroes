@@ -1,0 +1,13 @@
+Godot 4.7.2.stable.official.ed1daf0bf scratch import (C:/Users/LEMONP~1/AppData/Local/Temp/claude/A--Python-beyond-heroes/2174d3af-8bc8-426c-abb3-ed04021b3f29/scratchpad\godot_check_orrery); import errors: 0 []
+GLB astral_duelist.glb tris=9072 nodes=astral_duelist materials=BH_Stone__astral_duelist,BH_Aether__astral_duelist,BH_Steel__astral_duelist,BH_Gold__astral_duelist,BH_Emissive__astral_duelist,BH_DarkSteel__astral_duelist,BH_Cloth_Primary__astral_duelist,BH_Cloth_Secondary__astral_duelist bones=24
+  47 anims; attack clips ['sword_1', 'sword_2', 'sword_3', 'sword_heavy', 'dagger_heavy']: sword_1=0.567s, sword_2=0.567s, sword_3=0.600s, sword_heavy=1.133s, dagger_heavy=1.067s -> OK
+GLB astrarch.glb tris=22244 nodes=astrarch materials=BH_DarkSteel__astrarch,BH_Bronze__astrarch,BH_Gold__astrarch,BH_Horn__astrarch,BH_WeakPoint__astrarch,BH_Emissive__astrarch,BH_Stone__astrarch,BH_Aether__astrarch bones=24
+  51 anims; attack clips ['staff_1', 'staff_heavy', 'cast_heavy', 'cast_area', 'cast_ultimate', 'cast_channel', 'boss_slam', 'boss_sweep', 'boss_summon', 'boss_roar']: staff_1=0.533s, staff_heavy=1.200s, cast_heavy=0.933s, cast_area=1.000s, cast_ultimate=1.333s, cast_channel=1.000s, boss_slam=1.400s, boss_sweep=1.200s, boss_summon=1.533s, boss_roar=1.533s -> OK
+GLB clockwork_sentry.glb tris=16002 nodes=clockwork_sentry materials=BH_DarkSteel__clockwork_sentry,BH_Horn__clockwork_sentry,BH_Gold__clockwork_sentry,BH_Bronze__clockwork_sentry,BH_Shadow__clockwork_sentry,BH_Emissive__clockwork_sentry,BH_Steel__clockwork_sentry bones=24
+  45 anims; attack clips ['bow_release', 'bow_1', 'sword_1']: bow_release=0.500s, bow_1=0.533s, sword_1=0.567s -> OK
+GLB star_mote.glb tris=6200 nodes=core,ribbons,ring_1,ring_2,ring_3 materials=BH_Emissive__star_mote,BH_Bronze__star_mote,BH_Gold__star_mote,BH_Stone__star_mote,BH_Horn__star_mote,BH_Aether__star_mote bones=0
+  floating nodes ['core', 'ribbons', 'ring_1', 'ring_2', 'ring_3'] -> OK
+GLB void_seer.glb tris=12966 nodes=void_seer materials=BH_Cloth_Primary__void_seer,BH_Bronze__void_seer,BH_Cloth_Secondary__void_seer,BH_Emissive__void_seer,BH_Leather__void_seer,BH_Gold__void_seer,BH_Horn__void_seer,BH_Shadow__void_seer,BH_DarkSteel__void_seer bones=24
+  47 anims; attack clips ['staff_1', 'cast_quick', 'cast_heavy', 'cast_area', 'cast_channel', 'blink']: staff_1=0.533s, cast_quick=0.500s, cast_heavy=0.933s, cast_area=1.000s, cast_channel=1.000s, blink=0.500s -> OK
+note: loop modes are applied at runtime by character_visual.gd from anim_meta.json (the game's existing enemies import the same way); block_loop imports as 'block' (use_name_suffixes=true, like every enemy)
+RESULT OK

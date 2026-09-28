@@ -21,7 +21,7 @@ extends RefCounted
 ##   brood           Broodmother (summon ability with spiderlings)
 
 const NEW_TRAITS := [&"raise_dead", &"chill_aura", &"shatter_death", &"death_burst", &"powder_keg", &"troll_regen",
-	&"rune_shift", &"mimic", &"totem", &"brood"]
+	&"rune_shift", &"mimic", &"totem", &"brood", &"spore_pop"]
 const NEW_ABILITIES := ["raise", "summon", "totem", "ward"]
 const NEW_ATTACKS := ["chain", "tongue"]
 
@@ -224,6 +224,8 @@ func on_death(killer: Node) -> void:
 		_shatter()
 	if has(&"death_burst"):
 		_burst()
+	if has(&"spore_pop"):
+		_spore_pop()
 	if has(&"powder_keg") and fuse_lit and not exploded:
 		exploded = true
 		var at := e.global_position
@@ -552,6 +554,17 @@ func _burst() -> void:
 	if e.visual:
 		e.visual.set_rim(Color(0.55, 1.0, 0.2), 2.0)
 
+## Sporeling (bh-012): a small puff of spores where it falls — poisons whoever stands in it, monsters included.
+func _spore_pop() -> void:
+	var at := e.global_position
+	var mask := BH.LAYER_PLAYER | BH.LAYER_ENEMY
+	var puff := _req(0.5, Elements.PHYSICAL, 0.0, 2.0, "Spore puff")
+	puff.direct_status[&"poisoned"] = 55.0
+	var b := AreaEffects.delayed(FX.world, at, 2.4, 0.8, puff, null, mask, Color(0.75, 1.0, 0.3, 0.7))
+	b.on_blast = func(pos: Vector3, _h: Array) -> void:
+		FX.spawn(VFXLib.particles(Color(0.75, 1.0, 0.3, 0.8), 26, 1.0, true, 0.35, 3.0, 180.0, Vector3(0, -1.5, 0), 0.4, false), pos + Vector3.UP * 0.6)
+		Audio.play_at(&"ghoul_growl", pos, -8.0)
+
 # ---- Bandit Bombardier --------------------------------------------------------------------------------------------
 
 func light_fuse() -> void:
@@ -705,11 +718,11 @@ func tongue(a: Dictionary) -> bool:
 	var to := (t.global_position - e.global_position).slide(Vector3.UP)
 	var reach := float(a.get("range", 7.0)) + 1.0
 	if to.length() > reach or e.forward().angle_to(to.normalized()) > deg_to_rad(40.0):
-		_tongue_fx(e.center() + e.forward() * reach * 0.8)
+		_tongue_fx(e.center() + e.forward() * reach * 0.8, a.get("tongue_color", Color(0.9, 0.35, 0.45)))
 		return false
 	if CombatQuery.blocked(e.get_world_3d(), e.center(), t.center()):
 		return false
-	_tongue_fx(t.center())
+	_tongue_fx(t.center(), a.get("tongue_color", Color(0.9, 0.35, 0.45)))
 	var res := t.receive_hit(e._attack_request(a), e, t.center())
 	if res == null or res.evaded or not t.alive:
 		return false
@@ -717,8 +730,8 @@ func tongue(a: Dictionary) -> bool:
 		t.apply_knockback(-to.normalized(), float(a.get("pull", 11.0)), e.stats, e)
 	return true
 
-func _tongue_fx(to: Vector3) -> void:
-	FX.spawn(VFXLib.lightning_bolt(e.center() + e.forward() * 0.5, to, Color(0.9, 0.35, 0.45), 0.3, 0.14), Vector3.ZERO)
+func _tongue_fx(to: Vector3, col := Color(0.9, 0.35, 0.45)) -> void:
+	FX.spawn(VFXLib.lightning_bolt(e.center() + e.forward() * 0.5, to, col, 0.3, 0.14), Vector3.ZERO)
 
 ## Mimics pay well: an extra purse and one more item of Advanced quality or better.
 func _mimic_loot(_killer: Node) -> void:

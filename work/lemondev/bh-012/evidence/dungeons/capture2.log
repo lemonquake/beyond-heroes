@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_deeps_2__overview.png
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_deeps_2__arrival.png
+STATS dg_deeps_2 {"build_ms":1093,"mesh_instances":697,"nav_polygons":333,"nodes":2641,"omni_lights":62,"shadowed_omni":0,"spawns":["arrival","start","descent"],"teleporters":2}
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_warren_1__overview.png
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_warren_1__arrival.png
+STATS dg_warren_1 {"build_ms":224,"mesh_instances":530,"nav_polygons":325,"nodes":2021,"omni_lights":46,"shadowed_omni":0,"spawns":["arrival","start","descent"],"teleporters":2}
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_ember_2__overview.png
+CAPTURED A:/Python/beyond-heroes/work/lemondev/bh-012/evidence/dungeons/dg_ember_2__arrival.png
+STATS dg_ember_2 {"build_ms":255,"mesh_instances":737,"nav_polygons":452,"nodes":2849,"omni_lights":69,"shadowed_omni":0,"spawns":["arrival","start","descent"],"teleporters":2}

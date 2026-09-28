@@ -1,0 +1,15 @@
+[mirror_knight] mesh 17578 tris, 129 parts, 1.7s
+[mirror_knight] baked 47 actions in 21.5s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+23:02:46 | INFO: Starting glTF 2.0 export
+23:02:46 | INFO: Extracting primitive: mirror_knight
+23:02:47 | INFO: Primitives created: 8
+23:02:51 | INFO: Finished glTF 2.0 export in 4.274548768997192 s
+
+[mirror_knight] clip lengths verified (47 clips)
+[mirror_knight] -> A:\Python\beyond-heroes\game\assets\characters\mirror_knight.glb (3.3 MB)
+[build] done in 28.1s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

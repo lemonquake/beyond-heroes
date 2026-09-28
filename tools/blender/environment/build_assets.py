@@ -15,6 +15,7 @@ import kit  # noqa
 from registry import REG, ORDER  # noqa
 import assets_arch, assets_nature, assets_props, assets_crypt, assets_town  # noqa
 import assets_town2, assets_interior  # noqa  (bh-003)
+import assets_dungeon  # noqa  (bh-012)
 
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 OUT = os.path.join(ROOT, "game", "assets", "environment")

@@ -129,7 +129,7 @@ func test_opens_once_per_hero() -> void:
 	ok(gw != null, "the Field Guide window exists")
 	ui.open(&"guide")
 	ok(gw.visible, "it opens")
-	for p in 3:
+	for p in [0, 1, 2, 4]:
 		gw._tabs.current_tab = p
 		ok(gw._content.get_child_count() > 0, "page %d has content" % p)
 	gw._replay()

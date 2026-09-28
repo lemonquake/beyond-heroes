@@ -31,9 +31,15 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 
 func _spawn_all() -> void:
 	var def := map.def
-	if def.is_town:
-		return
+	# bh-013: a raided dungeon's floors stay empty until it recovers (its champions still come back)
+	var dg: StringName = DataDungeons.parse(def.id)[0]
+	var quiet := dg != &"" and DataDungeons.recovering(Game.hero, dg)
 	for m in map.find_children("EnemyZone_*", "Marker3D", true, false):
+		if quiet:
+			break
+		# towns stay safe inside their walls: only "wild" camps out on the roads beyond them spawn (bh-012)
+		if def.is_town and not m.get_meta(&"wild", false):
+			continue
 		# the boss comes from its boss_spawn marker; "summons" zones are reserved for the boss's adds
 		if String(m.name).begins_with("EnemyZone_summons") or (m.get_meta(&"enemies", []) as Array).any(func(id): return DB.enemy(StringName(id)) != null and DB.enemy(StringName(id)).archetype == &"boss"):
 			continue
@@ -43,13 +49,19 @@ func _spawn_all() -> void:
 			continue
 		var bid := StringName(b.get_meta(&"boss", "boss_warden"))
 		var flag := StringName(b.get_meta(&"flag", "boss_warden_defeated"))
-		if Game.hero and Game.hero.world_flags.get(flag, false):
+		var bdg := StringName(b.get_meta(&"dungeon", ""))
+		if bdg != &"":
+			# a dungeon boss never returns once raided (bh-013); DungeonRuntime records the raid, its Usurper holds the sanctum
+			if DataDungeons.boss_gone(Game.hero, bdg):
+				continue
+		elif Game.hero and Game.hero.world_flags.get(flag, false):
 			continue
 		var edef := DB.enemy(bid)
 		if edef:
 			var e := spawn_enemy(map, edef, def.level_max, [], b.global_position, difficulty)
 			e.patrol_radius = 0.0
-			e.set_meta(&"boss_flag", flag)
+			if bdg == &"":
+				e.set_meta(&"boss_flag", flag)
 			spawned.append(e)
 	_spawn_minibosses()
 
@@ -57,6 +69,9 @@ func _spawn_all() -> void:
 func _spawn_minibosses() -> void:
 	for md in DataMinibosses.on_map(map.def.id):
 		if DataMinibosses.resting(Game.hero, md.id):
+			continue
+		# a dungeon's Usurper (bh-013) only takes the sanctum once the boss is gone
+		if md.has("raid_only") and not DataDungeons.boss_gone(Game.hero, StringName(md.raid_only)):
 			continue
 		var edef := DB.enemy(md.enemy)
 		if edef == null:
@@ -66,7 +81,7 @@ func _spawn_minibosses() -> void:
 		var ground := Vector3(p.x, 0.0, p.y)
 		if map.is_inside_tree():
 			ground = map.to_global(ground)
-			ground.y = map.global_position.y + NpcDirectory.ground_height(map, Vector3(p.x, 0.0, p.y))
+			ground.y = map.global_position.y + NpcDirectory.ground_height(map, Vector3(p.x, float(md.get("y", 0.0)), p.y))
 		var e := Enemy.new()
 		e.setup(edef, mini(BH.LEVEL_CAP, map.def.level_max + int(md.get("level_bonus", 0))), md.get("mods", []), difficulty)
 		e.make_miniboss(md)
@@ -86,6 +101,10 @@ func _spawn_zone(m: Marker3D) -> void:
 	var radius := float(m.get_meta(&"radius", 5.0))
 	var elite_chance := float(m.get_meta(&"elite_chance", 0.0)) * float(difficulty.get("elite", 1.0))
 	var lvl := rng.randi_range(map.def.level_min, map.def.level_max)
+	if m.has_meta(&"levels"):
+		# a camp with its own level range (bh-012: wild camps outside the town walls)
+		var lv: Vector2i = m.get_meta(&"levels")
+		lvl = rng.randi_range(lv.x, lv.y)
 	var pack_elite := rng.randf() < elite_chance
 	var elite_idx := rng.randi_range(0, maxi(0, count - 1)) if pack_elite else -1
 	for i in count:
@@ -107,6 +126,24 @@ func _spawn_zone(m: Marker3D) -> void:
 		e.rotation.y = rng.randf() * TAU
 		spawned.append(e)
 		camps.get_or_add(String(m.name).trim_prefix("EnemyZone_"), []).append(e)
+	_pair_twins(String(m.name).trim_prefix("EnemyZone_"), lvl)
+
+## bh-013: Soulbound Twins always come in pairs: the twins of a camp are paired up, an odd one gets a partner.
+func _pair_twins(zone: String, lvl: int) -> void:
+	var twins: Array = (camps.get(zone, []) as Array).filter(func(x): return x is Enemy and (x as Enemy).has_trait(&"twin"))
+	if twins.size() % 2 == 1:
+		var last: Enemy = twins[twins.size() - 1]
+		var p := _nav_point(last.global_position + Vector3(1.6, 0, 0.8))
+		var mate := spawn_enemy(map, last.def, lvl, [], p, difficulty)
+		mate.patrol_radius = last.patrol_radius
+		mate.home = last.home
+		mate.zone = last.zone
+		spawned.append(mate)
+		camps[zone].append(mate)
+		twins.append(mate)
+	for i in range(0, twins.size() - 1, 2):
+		twins[i + 1].set_meta(&"twin_warm", true)
+		Enemy.TraitsX.pair(twins[i], twins[i + 1])
 
 ## Where a monster may stand near `p`: the closest navmesh point (a camp marker's height is only a hint — the ground
 ## rises and falls across a camp, and a bridge camp's marker sits in the ravine below the deck). Without a usable

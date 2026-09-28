@@ -88,6 +88,7 @@ func compose() -> void:
 	_cove()
 	_roadside()
 	_encounters()
+	_dungeon_gates()
 	_herbs()
 	_greenery()
 	spawn(&"start", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
@@ -607,9 +608,11 @@ func _cove() -> void:
 	dark.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(90)), Vector3(c.x - 2.2, cy + 1.7, c.y))
 	deco.add_child(dark)
 	blocker(Vector3(c.x - 3.2, cy + 2.0, c.y), Vector3(1.0, 4.0, 6.0))
-	for p: Vector3 in [Vector3(1.6, 0, -2.2), Vector3(2.4, 0, -1.2), Vector3(1.2, 0, 2.6), Vector3(3.2, 0, 2.2)]:
+	for p: Vector3 in [Vector3(1.6, 0, -2.4), Vector3(2.6, 0, -3.4), Vector3(1.2, 0, 2.8), Vector3(3.4, 0, 2.4)]:
 		breakable("crate", Vector3(c.x, 0, c.y) + p, rng.randf() * 90.0, 20.0, true)
-	kit("chest", Vector3(c.x + 0.6, 0, c.y + 0.4), 90.0, 1.0, props, true)
+	# bh-012: the door the smugglers found at the back of the cave — the Saltmouth Deeps
+	var dg: Dictionary = DataDungeons.get_def(&"deeps").surface
+	dungeon_gate(&"deeps", dg.pos, dg.yaw)
 	torch_post(Vector3(c.x + 3.4, 0, c.y - 3.8))
 
 func torch_post(p: Vector3) -> void:
@@ -636,6 +639,15 @@ func _roadside() -> void:
 	signpost_at(Vector2(-47.5, -48.5), [["Ruined Forest", Vector2(-1, -1.2)], ["Old Mill", Vector2(1, 1)]])
 	exit_zone(&"westreach_forest_road", Vector3(-55.0, 0, -53.6), Vector3(9.0, 4.0, 3.0), &"ruined_forest", &"south_road", "the Ruined Forest")
 
+## bh-012: the Warren's sinkhole east of the Fen Road and the Emberforge's smoking crack above the Lake Shore Road;
+## bh-013: ten more gates along the roads (the Deeps' door is built with the sea cave).
+func _dungeon_gates() -> void:
+	for id in DataDungeons.gates_on(MAP):
+		if id == &"deeps":
+			continue
+		var dg: Dictionary = DataDungeons.get_def(id).surface
+		dungeon_gate(id, dg.pos, dg.yaw)
+
 func _encounters() -> void:
 	# wolves on the clifftop, goblins picking over a stolen-goods camp and raiding the farm store, smugglers at the
 	# cave, and a pair of the forest's dead drifting down the Forest Road. The mill, the gate and the cove are safe.
@@ -651,12 +663,34 @@ func _encounters() -> void:
 	enemy_zone("field_raid", Vector3(FIELD_RAID.x, 0, FIELD_RAID.y), 6.0, [&"goblin_skulker"], 3, 0.1, true)
 	enemy_zone("smugglers", Vector3(SMUGGLERS.x, 0, SMUGGLERS.y), 4.0, [&"bandit_cutthroat", &"bandit_marksman", &"bandit_bombardier"], 3, 0.2, true)
 	enemy_zone("forest_watch", Vector3(FOREST_WATCH.x, 0, FOREST_WATCH.y), 4.0, [&"hollow_soldier"], 2, 0.0, true)
+	# bh-012: the roads east to Olivar and Wyman Outpost were empty — toll-takers, the dead, and things spilling out of
+	# the new dungeons now wait along them
+	var roadside := [
+		["lake_toll", Vector2(32, -9), [&"bandit_cutthroat", &"bandit_marksman", &"bandit_cutthroat"], 3, 0.15],
+		["ember_spill", Vector2(62, -26), [&"cinder_imp", &"slag_hound", &"slag_hound"], 3, 0.1],
+		["lane_wolves", Vector2(22, 44), [&"dire_wolf"], 3, 0.1],
+		["lane_dead", Vector2(18, 76), [&"hollow_soldier", &"grave_archer", &"hollow_soldier"], 3, 0.1],
+		["fen_toll", Vector2(50, 118), [&"bandit_cutthroat", &"bandit_bombardier", &"bandit_marksman", &"bandit_cutthroat"], 4, 0.2],
+		["warren_spill", Vector2(76, 62), [&"sporeling", &"sporeling", &"sporeling", &"rootback_boar"], 4, 0.1],
+		["field_goblins", Vector2(-86, 86), [&"goblin_skulker", &"goblin_skulker", &"goblin_summoner"], 3, 0.1],
+		["tide_dead", Vector2(-128, 110), [&"drowned_deckhand", &"drowned_deckhand", &"hollow_soldier"], 3, 0.1],
+	]
+	for c in roadside:
+		var cp: Vector2 = c[1]
+		enemy_zone(c[0], Vector3(cp.x, 0, cp.y), 4.5, c[2], c[3], c[4], true)
+		decor("bones_scatter", Vector3(cp.x + 1.6, 0, cp.y + 1.2), rng.randf() * 360.0)
+	campfire(Vector3(33.5, 0, -12.0), 3.0)
+	campfire(Vector3(51.5, 0, 121.0), 3.0)
 
 func _greenery() -> void:
 	var blocked := func(x: float, z: float) -> bool:
 		var k := _k(x, z)
 		if _rd[k] < (6.0 if _rt[k] == 1 else 4.0) or _ds[k] < 6.0 or _sea[k] > -4.0:
 			return true
+		# bh-012: keep the dungeon gates clear of trees and brush
+		for gid in DataDungeons.gates_on(MAP):
+			if Vector2(x, z).distance_to(DataDungeons.get_def(gid).surface.pos) < 8.5:
+				return true
 		var p := Vector2(x, z)
 		if p.distance_to(TOWN) < TOWN_FENCE + 5.0:
 			return true

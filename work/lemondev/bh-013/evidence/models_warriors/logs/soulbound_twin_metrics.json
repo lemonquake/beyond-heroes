@@ -1,0 +1,1017 @@
+{
+ "tris": 17336,
+ "verts": 9014,
+ "materials": [
+  "BH_DarkSteel__soulbound_twin",
+  "BH_Steel__soulbound_twin",
+  "BH_Skin__soulbound_twin",
+  "BH_Shadow__soulbound_twin",
+  "BH_Emissive__soulbound_twin",
+  "BH_Cloth_Primary__soulbound_twin",
+  "BH_Leather__soulbound_twin",
+  "BH_Cloth_Secondary__soulbound_twin"
+ ],
+ "clips": {
+  "alert": {
+   "frames": 19,
+   "max_stretch": 2.203,
+   "at_frame": 11,
+   "bone": "thigh.L",
+   "min_ratio": 0.253,
+   "zmin": -0.0,
+   "zmax_body": 1.934,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.068,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "block_impact": {
+   "frames": 15,
+   "max_stretch": 2.425,
+   "at_frame": 0,
+   "bone": "thigh.L",
+   "min_ratio": 0.138,
+   "zmin": -0.0,
+   "zmax_body": 1.732,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "block_loop": {
+   "frames": 41,
+   "max_stretch": 2.425,
+   "at_frame": 4,
+   "bone": "thigh.L",
+   "min_ratio": 0.176,
+   "zmin": -0.0,
+   "zmax_body": 1.68,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "cast_channel": {
+   "frames": 31,
+   "max_stretch": 2.226,
+   "at_frame": 11,
+   "bone": "thigh.L",
+   "min_ratio": 0.479,
+   "zmin": -0.0,
+   "zmax_body": 1.789,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.069,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "cast_quick": {
+   "frames": 16,
+   "max_stretch": 2.222,
+   "at_frame": 4,
+   "bone": "thigh.L",
+   "min_ratio": 0.219,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.069,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "charge_hold": {
+   "frames": 41,
+   "max_stretch": 2.442,
+   "at_frame": 20,
+   "bone": "thigh.L",
+   "min_ratio": 0.061,
+   "zmin": -0.0,
+   "zmax_body": 1.72,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.081,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "death": {
+   "frames": 47,
+   "max_stretch": 1.7,
+   "at_frame": 5,
+   "bone": "thigh.L",
+   "min_ratio": 0.259,
+   "zmin": -0.353,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.055,
+   "abs_at": [
+    -0.0,
+    0.123,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "death_back": {
+   "frames": 41,
+   "max_stretch": 1.853,
+   "at_frame": 3,
+   "bone": "hips",
+   "min_ratio": 0.463,
+   "zmin": -0.265,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.119,
+    -0.166,
+    1.131
+   ],
+   "abs_grow": 0.038,
+   "abs_at": [
+    0.054,
+    0.12,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "death_crumple": {
+   "frames": 37,
+   "max_stretch": 2.051,
+   "at_frame": 13,
+   "bone": "neck",
+   "min_ratio": 0.174,
+   "zmin": -0.744,
+   "zmax_body": 1.915,
+   "at_rest": [
+    -0.041,
+    -0.136,
+    1.596
+   ],
+   "abs_grow": 0.062,
+   "abs_at": [
+    -0.0,
+    0.123,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "death_fwd": {
+   "frames": 49,
+   "max_stretch": 2.007,
+   "at_frame": 12,
+   "bone": "thigh.L",
+   "min_ratio": 0.286,
+   "zmin": -0.872,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.057,
+   "abs_at": [
+    0.054,
+    0.12,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "getup": {
+   "frames": 29,
+   "max_stretch": 2.44,
+   "at_frame": 13,
+   "bone": "thigh.L",
+   "min_ratio": 0.139,
+   "zmin": -0.708,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.081,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_back": {
+   "frames": 15,
+   "max_stretch": 1.706,
+   "at_frame": 2,
+   "bone": "thigh.L",
+   "min_ratio": 0.507,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.04,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_front": {
+   "frames": 15,
+   "max_stretch": 1.696,
+   "at_frame": 5,
+   "bone": "thigh.L",
+   "min_ratio": 0.729,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.039,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_heavy": {
+   "frames": 19,
+   "max_stretch": 1.724,
+   "at_frame": 2,
+   "bone": "thigh.L",
+   "min_ratio": 0.634,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.041,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_left": {
+   "frames": 15,
+   "max_stretch": 1.705,
+   "at_frame": 3,
+   "bone": "thigh.L",
+   "min_ratio": 0.594,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.04,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_light": {
+   "frames": 13,
+   "max_stretch": 1.682,
+   "at_frame": 2,
+   "bone": "thigh.L",
+   "min_ratio": 0.851,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.038,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "hit_right": {
+   "frames": 15,
+   "max_stretch": 1.705,
+   "at_frame": 3,
+   "bone": "thigh.L",
+   "min_ratio": 0.643,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.04,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle": {
+   "frames": 121,
+   "max_stretch": 1.418,
+   "at_frame": 65,
+   "bone": "thigh.L",
+   "min_ratio": 0.853,
+   "zmin": -0.0,
+   "zmax_body": 1.935,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.024,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_1h": {
+   "frames": 73,
+   "max_stretch": 2.18,
+   "at_frame": 30,
+   "bone": "thigh.L",
+   "min_ratio": 0.615,
+   "zmin": -0.0,
+   "zmax_body": 1.875,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.067,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_2h": {
+   "frames": 81,
+   "max_stretch": 2.42,
+   "at_frame": 34,
+   "bone": "thigh.L",
+   "min_ratio": 0.564,
+   "zmin": -0.0,
+   "zmax_body": 1.831,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_bow": {
+   "frames": 91,
+   "max_stretch": 1.778,
+   "at_frame": 38,
+   "bone": "thigh.L",
+   "min_ratio": 0.765,
+   "zmin": -0.0,
+   "zmax_body": 1.91,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.044,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_dagger": {
+   "frames": 61,
+   "max_stretch": 2.472,
+   "at_frame": 25,
+   "bone": "thigh.L",
+   "min_ratio": 0.527,
+   "zmin": -0.0,
+   "zmax_body": 1.77,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.083,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_hurt": {
+   "frames": 61,
+   "max_stretch": 1.873,
+   "at_frame": 56,
+   "bone": "thigh.L",
+   "min_ratio": 0.19,
+   "zmin": -0.0,
+   "zmax_body": 1.736,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.049,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_look": {
+   "frames": 121,
+   "max_stretch": 1.812,
+   "at_frame": 73,
+   "bone": "head",
+   "min_ratio": 0.596,
+   "zmin": -0.0,
+   "zmax_body": 1.935,
+   "at_rest": [
+    0.055,
+    -0.12,
+    1.638
+   ],
+   "abs_grow": 0.039,
+   "abs_at": [
+    0.074,
+    -0.106,
+    1.638
+   ],
+   "abs_bone": "head"
+  },
+  "idle_shield": {
+   "frames": 73,
+   "max_stretch": 2.18,
+   "at_frame": 30,
+   "bone": "thigh.L",
+   "min_ratio": 0.207,
+   "zmin": -0.0,
+   "zmax_body": 1.875,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.067,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_spear": {
+   "frames": 81,
+   "max_stretch": 2.42,
+   "at_frame": 34,
+   "bone": "thigh.L",
+   "min_ratio": 0.564,
+   "zmin": -0.0,
+   "zmax_body": 1.831,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "idle_staff": {
+   "frames": 91,
+   "max_stretch": 1.722,
+   "at_frame": 38,
+   "bone": "thigh.L",
+   "min_ratio": 0.551,
+   "zmin": -0.0,
+   "zmax_body": 1.916,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.041,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "knockback": {
+   "frames": 37,
+   "max_stretch": 1.747,
+   "at_frame": 3,
+   "bone": "hips",
+   "min_ratio": 0.427,
+   "zmin": -0.269,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.119,
+    -0.166,
+    1.131
+   ],
+   "abs_grow": 0.045,
+   "abs_at": [
+    0.054,
+    0.12,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "knockdown": {
+   "frames": 25,
+   "max_stretch": 1.686,
+   "at_frame": 1,
+   "bone": "thigh.L",
+   "min_ratio": 0.345,
+   "zmin": -0.269,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.05,
+   "abs_at": [
+    0.054,
+    0.12,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "launch": {
+   "frames": 25,
+   "max_stretch": 1.439,
+   "at_frame": 12,
+   "bone": "hips",
+   "min_ratio": 0.445,
+   "zmin": 0.281,
+   "zmax_body": 1.854,
+   "at_rest": [
+    -0.054,
+    0.12,
+    0.924
+   ],
+   "abs_grow": 0.042,
+   "abs_at": [
+    -0.054,
+    0.12,
+    0.924
+   ],
+   "abs_bone": "hips"
+  },
+  "revive": {
+   "frames": 47,
+   "max_stretch": 2.44,
+   "at_frame": 27,
+   "bone": "thigh.L",
+   "min_ratio": 0.14,
+   "zmin": -0.808,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.081,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "run": {
+   "frames": 21,
+   "max_stretch": 2.622,
+   "at_frame": 6,
+   "bone": "thigh.L",
+   "min_ratio": 0.447,
+   "zmin": -0.0,
+   "zmax_body": 1.906,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.092,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "run_combat": {
+   "frames": 21,
+   "max_stretch": 2.526,
+   "at_frame": 17,
+   "bone": "thigh.L",
+   "min_ratio": 0.464,
+   "zmin": -0.001,
+   "zmax_body": 1.86,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.086,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "run_hurt": {
+   "frames": 23,
+   "max_stretch": 2.339,
+   "at_frame": 10,
+   "bone": "thigh.L",
+   "min_ratio": 0.186,
+   "zmin": -0.001,
+   "zmax_body": 1.847,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.076,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "stagger_heavy": {
+   "frames": 33,
+   "max_stretch": 2.15,
+   "at_frame": 15,
+   "bone": "thigh.L",
+   "min_ratio": 0.597,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.065,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "stagger_small": {
+   "frames": 21,
+   "max_stretch": 1.92,
+   "at_frame": 8,
+   "bone": "thigh.L",
+   "min_ratio": 0.604,
+   "zmin": -0.0,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.052,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "strafe_l": {
+   "frames": 21,
+   "max_stretch": 2.908,
+   "at_frame": 3,
+   "bone": "spine",
+   "min_ratio": 0.385,
+   "zmin": -0.001,
+   "zmax_body": 1.892,
+   "at_rest": [
+    -0.125,
+    -0.179,
+    1.318
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "strafe_r": {
+   "frames": 21,
+   "max_stretch": 3.117,
+   "at_frame": 3,
+   "bone": "spine",
+   "min_ratio": 0.387,
+   "zmin": -0.001,
+   "zmax_body": 1.892,
+   "at_rest": [
+    -0.107,
+    -0.202,
+    1.33
+   ],
+   "abs_grow": 0.08,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "sword_1": {
+   "frames": 18,
+   "max_stretch": 2.232,
+   "at_frame": 13,
+   "bone": "thigh.L",
+   "min_ratio": 0.11,
+   "zmin": -0.0,
+   "zmax_body": 1.872,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.07,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "sword_2": {
+   "frames": 18,
+   "max_stretch": 2.237,
+   "at_frame": 9,
+   "bone": "thigh.L",
+   "min_ratio": 0.155,
+   "zmin": -0.0,
+   "zmax_body": 1.845,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.07,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "sword_3": {
+   "frames": 19,
+   "max_stretch": 2.243,
+   "at_frame": 5,
+   "bone": "thigh.L",
+   "min_ratio": 0.141,
+   "zmin": -0.0,
+   "zmax_body": 1.843,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.07,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "sword_heavy": {
+   "frames": 35,
+   "max_stretch": 2.506,
+   "at_frame": 24,
+   "bone": "thigh.L",
+   "min_ratio": 0.158,
+   "zmin": -0.0,
+   "zmax_body": 1.872,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.085,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "taunt": {
+   "frames": 47,
+   "max_stretch": 2.225,
+   "at_frame": 9,
+   "bone": "thigh.L",
+   "min_ratio": 0.344,
+   "zmin": -0.0,
+   "zmax_body": 1.872,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.069,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "walk": {
+   "frames": 27,
+   "max_stretch": 2.037,
+   "at_frame": 2,
+   "bone": "thigh.L",
+   "min_ratio": 0.654,
+   "zmin": -0.003,
+   "zmax_body": 1.917,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.058,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "walk_back": {
+   "frames": 21,
+   "max_stretch": 1.842,
+   "at_frame": 0,
+   "bone": "thigh.L",
+   "min_ratio": 0.661,
+   "zmin": -0.002,
+   "zmax_body": 1.905,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.048,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "walk_hurt": {
+   "frames": 31,
+   "max_stretch": 1.783,
+   "at_frame": 20,
+   "bone": "thigh.L",
+   "min_ratio": 0.294,
+   "zmin": -0.002,
+   "zmax_body": 1.893,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.044,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  },
+  "wall_impact": {
+   "frames": 33,
+   "max_stretch": 2.376,
+   "at_frame": 22,
+   "bone": "thigh.L",
+   "min_ratio": 0.152,
+   "zmin": -0.002,
+   "zmax_body": 1.915,
+   "at_rest": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_grow": 0.078,
+   "abs_at": [
+    0.0,
+    -0.128,
+    0.83
+   ],
+   "abs_bone": "thigh.L"
+  }
+ },
+ "tpose_top": 1.9466900825500488,
+ "idle_top": 1.9336131811141968,
+ "idle_bbox": [
+  [
+   -0.3657870292663574,
+   -1.07591712474823,
+   4.9525091583291214e-08
+  ],
+  [
+   0.3657870292663574,
+   0.165269672870636,
+   1.9336131811141968
+  ]
+ ]
+}

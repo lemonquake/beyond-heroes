@@ -143,8 +143,9 @@ func decor(name: String, pos: Vector3, yaw_deg := 0.0, scale := 1.0, on_ground :
 	_batches[name].transforms.append(Transform3D(b.scaled(Vector3.ONE * scale), p))
 
 static func library_mesh(name: String) -> Mesh:
-	if _lib_meshes.has(name):
-		return _lib_meshes[name]
+	var ck := name + ("~" + MaterialLibrary.theme_id if MaterialLibrary.theme_id != "" else "")
+	if _lib_meshes.has(ck):
+		return _lib_meshes[ck]
 	var inst := scene(name).instantiate()
 	var found: MeshInstance3D = null
 	for c in inst.find_children("*", "MeshInstance3D", true, false):
@@ -158,7 +159,7 @@ static func library_mesh(name: String) -> Mesh:
 			if rep:
 				mesh.surface_set_material(i, rep)
 	inst.free()
-	_lib_meshes[name] = mesh
+	_lib_meshes[ck] = mesh
 	return mesh
 
 ## Decoration is cut into CHUNK-metre cells, one MultiMesh per asset per cell, so the camera culls what it cannot see
@@ -807,6 +808,14 @@ func enemy_zone(id: String, pos: Vector3, radius: float, enemies: Array, count: 
 	markers.add_child(m)
 	return m
 
+## bh-012: a camp outside a town's walls — spawns even though the map is a safe town, at its own levels.
+func wild_camp(id: String, p: Vector2, radius: float, enemies: Array, count: int, levels: Vector2i, elite_chance := 0.1) -> Marker3D:
+	var m := enemy_zone(id, Vector3(p.x, 0, p.y), radius, enemies, count, elite_chance, true)
+	m.set_meta(&"wild", true)
+	m.set_meta(&"levels", levels)
+	campfire(Vector3(p.x + 1.5, 0, p.y - 1.0), 3.0)
+	return m
+
 func flag_trigger(flag: StringName, center: Vector3, size: Vector3, message := "", xp := 0) -> FlagTrigger:
 	var t := FlagTrigger.new()
 	t.name = "Trigger_%s" % flag
@@ -918,6 +927,51 @@ func bonfire(camp: String, p: Vector3, spawn_id: StringName, wake_yaw := 0.0) ->
 	var out := Vector3(sin(deg_to_rad(wake_yaw)), 0, cos(deg_to_rad(wake_yaw))) * 3.4
 	spawn(spawn_id, Vector3(p.x + out.x, 0, p.z + out.z), wake_yaw, true)
 	return b
+
+## bh-012: a dungeon's surface gate — a themed entrance (DataDungeons THEMES) around a portal dais to floor 1 that also
+## offers every floor whose seal the hero has broken. `p` is map-local XZ, `yaw` the way the gate faces (0 = +Z);
+## the hero arrives (spawn "dg_<id>_gate") in front of it.
+const GATE_DRESS := {
+	&"fungal": ["root_arch", "mushroom_giant", "mushroom_glow_cluster"],
+	&"drowned": ["arch_quoin", "anchor_giant", "kelp_strands"],
+	&"ember": ["basalt_column", "lava_crucible", "rubble_pile"],
+	&"rime": ["arch_quoin", "ice_crystal_large", "snow_drift"],
+	&"orrery": ["arch_quoin", "crystal_pylon", "floating_rock"],
+}
+
+func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
+	var dd := DataDungeons.get_def(dungeon)
+	var th := DataDungeons.theme(dungeon)
+	var y := ground(p.x, p.y) + 0.05
+	var fwd := Vector3(sin(deg_to_rad(yaw)), 0, cos(deg_to_rad(yaw)))
+	var side := fwd.cross(Vector3.UP)
+	var c := Vector3(p.x, y, p.y)
+	floor_disc(c, 3.2, y)
+	var t := teleporter(DataDungeons.gate_id(dungeon), c, DataDungeons.map_id(dungeon, 1), &"arrival",
+		DataDungeons.floor_title(dungeon, 1), yaw)
+	t.dungeon_gate = dungeon
+	t.rune_tint = th.rune
+	var dress: Array = GATE_DRESS.get(StringName(dd.theme), DataDungeonsX.GATE_DRESS.get(StringName(dd.theme), GATE_DRESS[&"drowned"]))
+	var have := func(n: String) -> bool: return ResourceLoader.exists(ENV_DIR % n)
+	# the entrance frame behind the dais, two big pieces flanking it, smaller dressing around
+	if have.call(dress[0]):
+		kit(dress[0], c - fwd * 2.6, yaw, 1.0)
+	for sx: float in [-1.0, 1.0]:
+		var q := c - fwd * 1.8 + side * sx * 3.6
+		if have.call(dress[1]):
+			kit(dress[1], Vector3(q.x, 0, q.z), yaw + sx * 25.0, 0.7, null, true)
+		var r := c + fwd * 1.0 + side * sx * 4.6
+		if have.call(dress[2]):
+			decor(dress[2], Vector3(r.x, 0, r.z), rng.randf() * 360.0, 1.0)
+		var tq := c + fwd * 1.6 + side * sx * 2.6
+		flame(Vector3(tq.x, ground(tq.x, tq.z) + 2.3, tq.z), 1.0)
+		light(Vector3(tq.x, ground(tq.x, tq.z) + 2.8, tq.z), th.torch, 2.6, 9.0, false, true)
+	light(c + Vector3(0, 2.2, 0), th.glow, 2.2, 9.0, false, false)
+	var sp := c + fwd * 3.4
+	spawn(DataDungeons.gate_id(dungeon), Vector3(sp.x, 0, sp.z), yaw, true)
+	var sg := c + fwd * 3.0 + side * 3.0
+	signpost(Vector2(sg.x, sg.z), [[String(dd.name), Vector2(-fwd.x, -fwd.z)]])
+	return t
 
 ## Named point of interest used by previews and (later) the world map / camera cinematics.
 func view(name: String, target: Vector3, yaw_deg := 0.0, pitch_deg := 50.0, dist := 22.0, fov := 45.0) -> void:

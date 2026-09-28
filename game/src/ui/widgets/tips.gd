@@ -118,12 +118,18 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	var hv := VBoxContainer.new()
 	hv.add_theme_constant_override("separation", 0)
 	hv.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var name_l := lbl(it.display_name(), 21, col, UITheme.title_font())
+	var name_l := lbl(it.short_name() if it.epithet != "" else it.display_name(), 21, col, UITheme.title_font())
 	name_l.custom_minimum_size = Vector2(W - 110.0, 0)
 	name_l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	name_l.add_theme_constant_override("outline_size", 4)
 	hv.add_child(name_l)
+	if it.epithet != "":
+		# bh-012: the gacha epithet under the proper name
+		hv.add_child(lbl(it.epithet, 16, col.lerp(UITheme.PARCHMENT, 0.45), UITheme.body_bold()))
 	hv.add_child(lbl(_type_line(it), 15, UITheme.TEXT_DIM, null, false))
+	var st := it.stars()
+	if st > 0:
+		hv.add_child(lbl(ItemNames.star_text(st) + ("   Perfect rolls" if it.is_perfect() else ""), 17, ItemNames.star_color(st), null, false))
 	head.add_child(hv)
 	v.add_child(head)
 	var band := ColorRect.new()
@@ -179,8 +185,8 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		if p == null:
 			continue
 		v.add_child(gap(2))
-		var pc_col := AETHER if p.tier == &"aether" else (Color(0.86, 0.55, 1.0) if p.tier == &"mythical" else POWER)
-		v.add_child(lbl(p.display_name, 16, pc_col, UITheme.body_bold()))
+		var pc_col := AETHER if p.tier == &"aether" else (Color(0.86, 0.55, 1.0) if p.tier == &"mythical" else (Color(0.55, 0.9, 0.75) if p.tier == &"relic" else POWER))
+		v.add_child(lbl(p.display_name + ("  (Relic passive)" if p.tier == &"relic" else ""), 16, pc_col, UITheme.body_bold()))
 		v.add_child(lbl(p.description, 15, Color(pc_col, 0.9)))
 	# set
 	var sd := it.set_def()

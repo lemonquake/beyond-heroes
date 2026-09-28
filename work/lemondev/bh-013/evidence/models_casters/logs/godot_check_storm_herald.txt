@@ -1,0 +1,3 @@
+import errors: 0 []
+GLB storm_herald tris=15584 bones=24 mats=8 anims=48 expected=48 missing=[] length_mismatch=[] meta_loop=["idle", "idle_look", "idle_hurt", "idle_1h", "idle_shield", "idle_2h", "idle_dagger", "idle_bow", "idle_staff", "idle_spear", "walk", "run", "walk_back", "strafe_l", "strafe_r", "run_combat", "walk_hurt", "run_hurt", "launch", "charge_hold", "cast_channel", "block_loop"] imported_loop=["block_loop"]
+GODOT_RESULT OK

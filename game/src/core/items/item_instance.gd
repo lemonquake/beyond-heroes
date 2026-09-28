@@ -16,6 +16,7 @@ var powers: Array = []                     # [power id]
 var license: StringName = &""              # Licensed tier: faction license id
 var count := 1
 var custom_name := ""
+var epithet := ""                          # bh-012: the second half of a gacha name ("Oath of the Last Flame")
 var seed_value := 0
 # Player-controlled flags (persisted).
 var locked := false                        # cannot be sold, dropped or destroyed
@@ -28,6 +29,8 @@ func _init() -> void:
 	uid = _uid_counter
 
 func display_name() -> String:
+	if custom_name != "" and epithet != "":
+		return "%s, %s" % [custom_name, epithet]
 	if custom_name != "":
 		return custom_name
 	if base.unique_name != "":
@@ -46,6 +49,17 @@ func display_name() -> String:
 				suf = " " + def.label
 		return pre + base.display_name + suf
 	return base.display_name
+
+## The proper name alone (loot labels): "Vornhald", or the full display name.
+func short_name() -> String:
+	return custom_name if custom_name != "" else display_name()
+
+## Gear stars 1–5 from how close the rolls came to perfect (0 for non-gear and plain pieces).
+func stars() -> int:
+	return ItemNames.stars(self)
+
+func is_perfect() -> bool:
+	return ItemNames.is_perfect(self)
 
 func color() -> Color:
 	return BH.rarity_color(rarity)
@@ -170,6 +184,8 @@ func affix_lines() -> PackedStringArray:
 func to_dict() -> Dictionary:
 	var d := {"base": String(base.id), "rarity": rarity, "ilvl": ilvl, "quality": quality, "affixes": affixes.duplicate(true),
 		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value}
+	if epithet != "":
+		d["epithet"] = epithet
 	if license != &"":
 		d["license"] = String(license)
 	if locked:
@@ -204,6 +220,7 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	it.license = StringName(d.get("license", ""))
 	it.count = maxi(1, int(d.get("count", 1)))
 	it.custom_name = String(d.get("name", ""))
+	it.epithet = String(d.get("epithet", ""))
 	it.seed_value = int(d.get("seed", 0))
 	it.locked = bool(d.get("locked", false))
 	it.favorite = bool(d.get("favorite", false))

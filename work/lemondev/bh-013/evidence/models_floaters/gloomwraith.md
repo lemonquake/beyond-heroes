@@ -1,0 +1,16 @@
+# Gloomwraith (`gloomwraith`)
+- Script `tools/blender/creatures/build_gloomwraith.py` -> `game/assets/characters/gloomwraith.glb` (+ `.glb.import`)
+- Triangles: 7028 (core 4396, ring_1 1308, ring_2 288, ribbons 1036). Budget 10k.
+- Size: 2.07 m (hood peak +0.85 m, wisp tips -1.22 m below origin), 1.69 m hand-to-hand. Origin = creature centre; at the default 1.2 m hover the wisp tips just clear the floor.
+- Nodes (Godot space, front = +Z):
+  - `core` (identity): tall peaked hood with forward-drooping crown, black void face with two slanted pale-violet eyes, ragged indigo capelet, violet-black robe narrowing downward, tattered sleeves held forward/out, skeletal forearms and splayed clawed bone hands (black claw tips) ~0.5 m in front.
+  - `ring_1` pos (0,-0.15,0), authored tilt X10/Y-8 deg (Blender): sagging dark-iron chain (r 0.46 m) with 5 glowing violet ghost-lanterns around the waist.
+  - `ring_2` pos (0,0.2,0), authored tilt X-14/Y18 deg: 4 violet soul-flames (r 0.62 m) at shoulder height.
+  - `ribbons` (identity): 7 twisting shroud wisps trailing below the robe, violet glow at the tips.
+  - Rings lie in their local XZ plane (Godot) and spin about local +Y, exactly like ice_wraith.
+- Palette (`__gloomwraith`): BH_Cloth_Primary deep indigo (0.085,0.065,0.17), BH_Cloth_Secondary violet-black (0.15,0.085,0.26), BH_Shadow void, BH_Bone pale grey-violet hands, BH_Horn black claws, BH_DarkSteel lantern iron, BH_Aether violet glow (0.55,0.3,1.0 x3.5: lantern glass, soul-flames, wisp tips), BH_Emissive pale violet eyes (0.85,0.7,1.0 x10).
+- Distinct from ice_wraith: dark indigo/violet instead of pale frost, no mask/icicles, long reaching bone hands, lantern chain; larger (2.07 vs 1.8 m).
+- Limitations: the dark robe relies on the violet glow + pale hands for contrast on dark floors; no separate phase node (a phase-shift effect must be done by the game, e.g. alpha/tint on the whole model).
+- Validation: scratch Godot 4.7.2 import (`tools/godot_check_floaters.py`, log `logs/godot_check.txt`): loads, 0 import errors, no skeleton / AnimationPlayer, all nodes and `BH_*__gloomwraith` materials present. Build log: `logs/build_gloomwraith.log`.
+- Evidence: `gloomwraith_rest_iso.png` (gameplay camera 54 deg at 16 / 22 m 1:1 crops, back view, 2x zooms, 7 m), `gloomwraith_views.png` (4 side views, from-above view, close-up). Workbench renders: emissive materials show as flat bright colour (no bloom).
+- Pipeline: `"<blender>" -b --factory-startup --python tools/blender/creatures/build_gloomwraith.py -- [--preview DIR]`; shared helpers in `tools/blender/creatures/kit_d13_float.py`. No clips (static; the game animates the nodes, see `character_visual.gd` `_animate_floating`).

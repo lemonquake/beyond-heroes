@@ -53,6 +53,10 @@ func compose() -> void:
 	_tower_and_overlook()
 	_shrine()
 	_herbs()
+	_wild_camps()
+	var og: Dictionary = DataDungeons.get_def(&"orrery").surface
+	dungeon_gate(&"orrery", og.pos, og.yaw)
+	keep_clear(og.pos.x, og.pos.y, 8.0)
 	_greenery()
 	spawn(&"start", Vector3(0, 0, 9.0), 180.0, true)
 	spawn(&"north_road", Vector3(7.5, 0, -47.0), 0.0, true)
@@ -64,6 +68,10 @@ func compose() -> void:
 	view("forge", Vector3(14, 1, 8), -25.0, 45.0, 18.0)
 	view("yard", Vector3(-10, 1, 22), 20.0, 48.0, 20.0)
 	view("overlook", Vector3(30, 0, 0), -60.0, 35.0, 30.0)
+
+## bh-012: an orc band camped on the Brass path, between the Watch Road and the Orrery gate (the town stays safe).
+func _wild_camps() -> void:
+	wild_camp("brass_path_orcs", Vector2(-13, -51), 4.0, [&"orc_reaver", &"goblin_skulker", &"goblin_skulker", &"orc_shaman"], 4, Vector2i(4, 6), 0.15)
 
 ## Where a road leaving the camp crosses the stockade circle (degrees).
 func _gate_angle(pts: Array) -> float:
@@ -164,7 +172,13 @@ func _stockade() -> void:
 	# corridors along the roads to the district boundaries
 	var ng := Vector2(cos(deg_to_rad(_north_gate)), sin(deg_to_rad(_north_gate))) * (R + 1.0)
 	var wg := Vector2(cos(deg_to_rad(_west_gate)), sin(deg_to_rad(_west_gate))) * (R + 1.0)
-	corridor_rails([ng, Vector2(7.0, -44.0), Vector2(8.0, -62.0)], 4.6)
+	corridor_rails([ng, Vector2(7.0, -44.0)], 4.6)
+	# bh-012: the Watch Road's west rail opens onto the Brass path to the Orrery gate (its own corridor)
+	boundary(Vector3(7.0 + 4.6, ground(7, -44) - 2.0, -44.0), Vector3(8.0 + 4.6, ground(8, -62) - 2.0, -62.0), 10.0, 0.6)
+	boundary(Vector3(7.0 - 4.6, ground(7, -44) - 2.0, -44.0), Vector3(7.2 - 4.6, ground(7, -50) - 2.0, -50.5), 10.0, 0.6)
+	boundary(Vector3(7.8 - 4.6, ground(8, -60) - 2.0, -59.5), Vector3(8.0 - 4.6, ground(8, -62) - 2.0, -62.0), 10.0, 0.6)
+	corridor_rails([Vector2(3.2, -55.3), Vector2(-4.0, -54.0), Vector2(-16.0, -50.0), Vector2(-28.0, -46.0), Vector2(-34.0, -44.0)], 5.2)
+	boundary(Vector3(-34.0, -2.0, -50.0), Vector3(-34.0, -2.0, -38.0), 12.0)
 	boundary(Vector3(3.0, -2.0, -62.0), Vector3(13.0, -2.0, -62.0), 12.0)
 	corridor_rails([wg, Vector2(-46.0, 17.0), Vector2(-66.0, 21.2)], 4.6)
 	boundary(Vector3(-66.0, -2.0, 16.4), Vector3(-66.0, -2.0, 26.0), 12.0)

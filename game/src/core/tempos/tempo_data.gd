@@ -20,6 +20,8 @@ var mana_frac := 1.0
 var kills := 0
 var grade := 1                         # spirit grade at binding (DataTempos.GRADES); renowned spirits ignore it
 var legend_id: StringName = &""        # a renowned spirit (DataTempos.LEGENDS), else &""
+var stars := 0                         # summoned at the shrine (bh-012): 3, 4 or 5 stars; 0 = bound the old way
+var resonance := 0                     # duplicates called later strengthen it: 0..TempoGacha.MAX_RESONANCE
 
 func _init() -> void:
 	equipment.changed.connect(_on_equipment)
@@ -44,7 +46,8 @@ func legend_def() -> Dictionary:
 
 ## Share of its hero's strength this spirit carries (grade 1: half; renowned: three quarters).
 func mirror() -> float:
-	return float(DataTempos.RENOWNED.mirror) if is_legend() else float(DataTempos.grade_def(grade).mirror)
+	var base := float(DataTempos.RENOWNED.mirror) if is_legend() else float(DataTempos.grade_def(grade).mirror)
+	return base + TempoGacha.RESONANCE_MIRROR * float(resonance)
 
 func grade_name() -> String:
 	return String(DataTempos.RENOWNED.name) if is_legend() else String(DataTempos.grade_def(grade).name)
@@ -66,7 +69,7 @@ func to_dict() -> Dictionary:
 	return {"uid": uid, "name": tempo_name, "class": String(class_id), "trait": String(trait_id),
 		"skills": skills.map(func(s): return String(s)), "origin": origin, "tint": [tint.r, tint.g, tint.b], "price": price,
 		"equipment": equipment.to_dict(), "fallen": fallen, "hp": hp_frac, "mana": mana_frac, "kills": kills,
-		"grade": grade, "legend": String(legend_id)}
+		"grade": grade, "legend": String(legend_id), "stars": stars, "resonance": resonance}
 
 static func from_dict(d: Dictionary) -> TempoData:
 	var t := TempoData.new()
@@ -94,5 +97,7 @@ static func from_dict(d: Dictionary) -> TempoData:
 	# absent in bh-004 saves: a grade-1 nameless spirit
 	t.grade = clampi(int(d.get("grade", 1)), 1, DataTempos.max_grade())
 	var lg := StringName(d.get("legend", ""))
-	t.legend_id = lg if DataTempos.LEGENDS.has(lg) else &""
+	t.legend_id = lg if not DataTempos.legend(lg).is_empty() else &""
+	t.stars = clampi(int(d.get("stars", 0)), 0, 5)
+	t.resonance = clampi(int(d.get("resonance", 0)), 0, 5)
 	return t

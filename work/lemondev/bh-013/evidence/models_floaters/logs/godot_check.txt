@@ -1,0 +1,65 @@
+import errors: 0 []
+GLB gloomwraith.glb tris=7028 skeletons=0 animplayers=0 mats=BH_Cloth_Primary__gloomwraith,BH_Shadow__gloomwraith,BH_Emissive__gloomwraith,BH_Cloth_Secondary__gloomwraith,BH_Bone__gloomwraith,BH_Horn__gloomwraith,BH_Aether__gloomwraith,BH_DarkSteel__gloomwraith
+NODE   core [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=4396 aabb=(1.69, 1.53, 1.27)
+NODE   ribbons [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=1036 aabb=(0.36, 0.92, 0.43)
+NODE   ring_1 [MeshInstance3D] pos=(0.0, -0.15, 0.0) rot_deg=(9.900001, 1.4, 8.1) tris=1308 aabb=(0.99, 0.26, 0.99)
+NODE   ring_2 [MeshInstance3D] pos=(0.0, 0.2, 0.0) rot_deg=(-13.3, 4.4, -18.5) tris=288 aabb=(1.23, 0.11, 1.23)
+HAS gloomwraith.glb core: yes
+HAS gloomwraith.glb ring_1: yes
+HAS gloomwraith.glb ring_2: yes
+HAS gloomwraith.glb ring_3: no
+HAS gloomwraith.glb ribbons: yes
+HAS gloomwraith.glb wing_l: no
+HAS gloomwraith.glb wing_r: no
+HAS gloomwraith.glb base: no
+GLB hive_drone.glb tris=3016 skeletons=0 animplayers=0 mats=BH_Horn__hive_drone,BH_Emissive__hive_drone,BH_Gold__hive_drone,BH_Aether__hive_drone
+NODE   core [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=2280 aabb=(0.42, 0.55, 1.0)
+NODE     wing_l [MeshInstance3D] pos=(0.045, 0.099, 0.22) rot_deg=(0.0, 0.0, 0.0) tris=368 aabb=(0.45, 0.09, 0.2)
+NODE     wing_r [MeshInstance3D] pos=(-0.045, 0.099, 0.22) rot_deg=(0.0, 0.0, 0.0) tris=368 aabb=(0.45, 0.09, 0.2)
+HAS hive_drone.glb core: yes
+HAS hive_drone.glb ring_1: no
+HAS hive_drone.glb ring_2: no
+HAS hive_drone.glb ring_3: no
+HAS hive_drone.glb ribbons: no
+HAS hive_drone.glb wing_l: yes
+HAS hive_drone.glb wing_r: yes
+HAS hive_drone.glb base: no
+FLAP hive_drone.glb wing_l tip_local_x=0.450 +35deg tip_y=0.258 -35deg tip_y=-0.258
+FLAP hive_drone.glb wing_r tip_local_x=-0.450 +35deg tip_y=0.258 -35deg tip_y=-0.258
+GLB hive_nest.glb tris=11518 skeletons=0 animplayers=0 mats=BH_Wood__hive_nest,BH_Stone__hive_nest,BH_Cloth_Primary__hive_nest,BH_Cloth_Secondary__hive_nest,BH_Ichor__hive_nest,BH_Shadow__hive_nest,BH_Emissive__hive_nest,BH_Horn__hive_nest,BH_Gold__hive_nest,BH_Aether__hive_nest
+NODE   base [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=826 aabb=(3.1, 0.28, 2.86)
+NODE   core [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=10692 aabb=(2.57, 2.44, 2.41)
+HAS hive_nest.glb core: yes
+HAS hive_nest.glb ring_1: no
+HAS hive_nest.glb ring_2: no
+HAS hive_nest.glb ring_3: no
+HAS hive_nest.glb ribbons: no
+HAS hive_nest.glb wing_l: no
+HAS hive_nest.glb wing_r: no
+HAS hive_nest.glb base: yes
+GLB prism_sentinel.glb tris=6996 skeletons=0 animplayers=0 mats=BH_Aether__prism_sentinel,BH_Ichor__prism_sentinel,BH_Bronze__prism_sentinel,BH_Stone__prism_sentinel,BH_Shadow__prism_sentinel,BH_Emissive__prism_sentinel
+NODE   core [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=1306 aabb=(0.62, 1.85, 0.73)
+NODE   ring_1 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(70.0, 0.0, 0.0) tris=2376 aabb=(1.98, 0.15, 1.97)
+NODE   ring_2 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(11.0, -14.4, -53.4) tris=2408 aabb=(2.14, 0.15, 2.07)
+NODE   ring_3 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(-10.0, 0.0, 0.0) tris=906 aabb=(1.62, 0.18, 1.84)
+HAS prism_sentinel.glb core: yes
+HAS prism_sentinel.glb ring_1: yes
+HAS prism_sentinel.glb ring_2: yes
+HAS prism_sentinel.glb ring_3: yes
+HAS prism_sentinel.glb ribbons: no
+HAS prism_sentinel.glb wing_l: no
+HAS prism_sentinel.glb wing_r: no
+HAS prism_sentinel.glb base: no
+GLB void_rift.glb tris=3834 skeletons=0 animplayers=0 mats=BH_Shadow__void_rift,BH_Aether__void_rift,BH_Emissive__void_rift,BH_Horn__void_rift,BH_Stone__void_rift
+NODE   core [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(-20.0, 0.0, 0.0) tris=3490 aabb=(1.56, 2.57, 0.46)
+NODE   ring_1 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(70.0, 0.0, 0.0) tris=132 aabb=(1.84, 0.16, 1.81)
+NODE   ring_2 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(62.9, -15.9, -17.8) tris=164 aabb=(2.55, 0.18, 2.5)
+NODE   ring_3 [MeshInstance3D] pos=(0.0, 0.0, 0.0) rot_deg=(0.0, 0.0, 0.0) tris=48 aabb=(2.47, 0.92, 2.17)
+HAS void_rift.glb core: yes
+HAS void_rift.glb ring_1: yes
+HAS void_rift.glb ring_2: yes
+HAS void_rift.glb ring_3: yes
+HAS void_rift.glb ribbons: no
+HAS void_rift.glb wing_l: no
+HAS void_rift.glb wing_r: no
+HAS void_rift.glb base: no
