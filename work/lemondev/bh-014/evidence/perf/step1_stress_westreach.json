@@ -1,0 +1,47 @@
+{
+  "engaged_at_end": 43,
+  "lite": false,
+  "map": "westreach",
+  "renderer": "forward_plus",
+  "stress": 40,
+  "total": {
+    "cpu_render": {
+      "avg": 3.08,
+      "p95": 3.97
+    },
+    "draws": {
+      "avg": 2236.1,
+      "p95": 2687.0
+    },
+    "frame": {
+      "avg": 32.66,
+      "max": 3777.02,
+      "p95": 34.86,
+      "p99": 68.12
+    },
+    "gpu": {
+      "avg": 7.47,
+      "p95": 8.07
+    },
+    "lights": {
+      "avg": 0.0,
+      "p95": 0.0
+    },
+    "objects": {
+      "avg": 2723.21,
+      "p95": 3354.0
+    },
+    "prims": {
+      "avg": 3526212.23,
+      "p95": 4102398.0
+    },
+    "script": {
+      "avg": 0.0,
+      "p95": 0.0
+    }
+  },
+  "window": [
+    1920,
+    1040
+  ]
+}

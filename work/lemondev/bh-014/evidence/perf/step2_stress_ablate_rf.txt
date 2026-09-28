@@ -1,0 +1,16 @@
+ABLATE counts { "Enemy": 96, "Npc": 0, "Tempo": 1, "CharacterVisual": 98, "AnimationTree": 98, "GPUParticles3D": 84, "Light3D": 52, "MultiMeshInstance3D": 338, "MeshInstance3D": 491 }
+ABLATE all_on 36.91 ms
+ABLATE -anim_nosync 34.17 ms
+ABLATE -anim_offscreen 36.27 ms
+ABLATE -anim_trees 35.49 ms
+ABLATE -visual_process 36.26 ms
+ABLATE -enemy_physics 14.27 ms
+ABLATE -enemies_all 9.19 ms
+ABLATE -npcs 9.23 ms
+ABLATE -tempos 8.85 ms
+ABLATE -enemy_bars 8.98 ms
+ABLATE -label3d 8.93 ms
+ABLATE -hud 5.09 ms
+ABLATE -particles 4.88 ms
+ABLATE -lights 4.98 ms
+ABLATE -decor 4.22 ms

@@ -1,0 +1,6 @@
+BEFORE LOAD westreach 44749 ms enemies=44
+BEFORE LOAD ruined_forest 51188 ms enemies=54
+BEFORE LOAD catacombs 37811 ms enemies=39
+AFTER LOAD westreach 2830 ms enemies=44
+AFTER LOAD ruined_forest 1253 ms enemies=54
+AFTER LOAD catacombs 266 ms enemies=39

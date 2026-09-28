@@ -37,6 +37,10 @@ var ground_speed_run := 5.0
 var ground_speed_strafe := 3.2
 var ground_speed_back := 1.8
 var personality: StringName = &""          # knight / mage fidget set
+## Animation LOD (bh-014): heroes, Tempos, bosses and townsfolk keep every locomotion clip in phase; the rank and file
+## of a monster pack let clips at zero weight rest (set before setup()). From an isometric camera nobody can tell a
+## goblin's feet re-phasing through a walk-to-run blend; a brawl of 40 of them saved ~3 ms a frame.
+var full_sync := true
 var tint_primary := Color.WHITE
 
 var _slot := &"a"                           # slot that holds the current (or last) action
@@ -153,10 +157,12 @@ func _bs(points: Array) -> AnimationNodeBlendSpace2D:
 	bs.max_space = Vector2(2.0, 2.0)
 	# sync keeps every clip of the space advancing (feet stay in phase when walk blends into run) but evaluates all of
 	# them every frame, weight 0 or not: ~90 % of a character's animation cost. Efficiency mode (bh-009) lets the idle
-	# clips rest instead.
-	bs.sync = not Perf.lite
-	for p in points:
-		bs.add_blend_point(_anim_node(p[0]), p[1])
+	# clips rest instead, and so do ordinary monsters everywhere (bh-014 animation LOD, `full_sync`).
+	bs.sync = full_sync and not Perf.lite
+	# every point gets a name: Godot 4.7 warns (with a full script backtrace) for each unnamed point, and printing that
+	# took ~45 ms a point — about 0.9 s of frozen game every time a monster spawned (bh-014)
+	for i in points.size():
+		bs.add_blend_point(_anim_node(points[i][0]), points[i][1], -1, StringName("p%d" % i))
 	return bs
 
 func _build_tree() -> void:
@@ -230,6 +236,11 @@ func set_anim_awake(on: bool) -> void:
 		return
 	_anim_awake = on
 	tree.active = on and not _frozen_pose
+	if on:
+		# catch the blends up with what happened while asleep (they are only pushed to the tree while awake)
+		tree.set(&"parameters/combat/blend_amount", _combat)
+		tree.set(&"parameters/hurt/blend_amount", _hurt)
+		tree.set(&"parameters/upper/blend_amount", _upper)
 
 ## Track paths of upper-body bones (taken from a real animation so the NodePath format matches the import).
 func _upper_filter_paths() -> Array:
@@ -277,15 +288,18 @@ func update_locomotion(local_velocity: Vector2, combat_stance: bool, hurt_amount
 	if speed > 0.2:
 		_idle_time = 0.0
 	if tree:
+		if not _anim_awake:
+			return      # nobody sees this pose (Perf); the smoothed blend position above is kept for waking up
 		var p := Vector2(_loco_pos.x, _loco_pos.y)
-		tree.set("parameters/relaxed_bs/blend_position", Vector2(0.0, maxf(0.0, p.length()) * signf(p.y + 0.001)))
-		tree.set("parameters/combat_bs/blend_position", p)
-		tree.set("parameters/hurt_bs/blend_position", p)
+		# StringName paths: a String path is hashed into a StringName on every call (4 calls per character per step)
+		tree.set(&"parameters/relaxed_bs/blend_position", Vector2(0.0, maxf(0.0, p.length()) * signf(p.y + 0.001)))
+		tree.set(&"parameters/combat_bs/blend_position", p)
+		tree.set(&"parameters/hurt_bs/blend_position", p)
 		var expected := 0.0
 		var ln := p.length()
 		expected = ref_walk * ln if ln <= 1.0 else ref_walk + (ln - 1.0) * (ref_run - ref_walk)
 		var ts := clampf(speed / expected, 0.6, 1.6) if expected > 0.3 and speed > 0.3 else 1.0
-		tree.set("parameters/loco_ts/scale", ts)
+		tree.set(&"parameters/loco_ts/scale", ts)
 	elif fallback:
 		_fb_speed = speed
 
@@ -295,10 +309,10 @@ func _process(delta: float) -> void:
 	_combat = move_toward(_combat, _combat_target, delta * 3.5)
 	_hurt = move_toward(_hurt, _hurt_target, delta * 1.5)
 	_upper = move_toward(_upper, _upper_target, delta * 8.0)
-	if tree:
-		tree.set("parameters/combat/blend_amount", _combat)
-		tree.set("parameters/hurt/blend_amount", _hurt)
-		tree.set("parameters/upper/blend_amount", _upper)
+	if tree and _anim_awake:
+		tree.set(&"parameters/combat/blend_amount", _combat)
+		tree.set(&"parameters/hurt/blend_amount", _hurt)
+		tree.set(&"parameters/upper/blend_amount", _upper)
 	if _in_action and not _action_loop:
 		_action_left -= delta
 		if _action_left <= 0.0:

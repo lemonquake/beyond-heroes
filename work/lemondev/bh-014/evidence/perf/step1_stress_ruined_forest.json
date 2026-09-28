@@ -1,0 +1,47 @@
+{
+  "engaged_at_end": 52,
+  "lite": false,
+  "map": "ruined_forest",
+  "renderer": "forward_plus",
+  "stress": 40,
+  "total": {
+    "cpu_render": {
+      "avg": 4.72,
+      "p95": 6.84
+    },
+    "draws": {
+      "avg": 3424.49,
+      "p95": 4237.0
+    },
+    "frame": {
+      "avg": 54.17,
+      "max": 993.47,
+      "p95": 69.6,
+      "p99": 116.92
+    },
+    "gpu": {
+      "avg": 13.67,
+      "p95": 18.79
+    },
+    "lights": {
+      "avg": 0.0,
+      "p95": 0.0
+    },
+    "objects": {
+      "avg": 3923.96,
+      "p95": 4870.0
+    },
+    "prims": {
+      "avg": 4379665.86,
+      "p95": 4991886.0
+    },
+    "script": {
+      "avg": 0.0,
+      "p95": 0.0
+    }
+  },
+  "window": [
+    1920,
+    1040
+  ]
+}

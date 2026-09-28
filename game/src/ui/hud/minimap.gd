@@ -6,15 +6,23 @@ extends Control
 ## A tracked route (Routes) draws as a cyan line on the roads ahead, with a chevron on the rim when the next stretch of
 ## road or the destination is out of range.
 
+## The top-down render covers MARGIN metres more than the disc shows; the disc slides across it as the hero walks
+## (view_offset) and the world is only rendered again once the hero is close to its edge (bh-014). It used to render
+## the whole map five times a second, sun shadows and every light included — a second full frame on the CPU.
 const SHADER := """
 shader_type canvas_item;
 uniform sampler2D mask_tex : filter_linear;
+uniform vec2 view_offset = vec2(0.0);
+uniform float view_scale = 1.0;
 void fragment() {
-	vec4 c = texture(TEXTURE, UV);
+	vec4 c = texture(TEXTURE, (UV - 0.5) * view_scale + 0.5 + view_offset);
 	float m = texture(mask_tex, UV).a;
 	COLOR = vec4(c.rgb * 1.08, m);
 }
 """
+const MARGIN := 10.0                # metres of render beyond the disc on every side
+const REFRESH := 4.0                # seconds: re-render anyway (a door opened, a bridge dropped)
+const MARKER_HZ := 30.0
 
 var radius_m := 26.0
 var diameter := 200.0
@@ -26,6 +34,9 @@ var _frame: TextureRect
 var _map_label: Label
 var _update_t := 0.0
 var _marker_t := 0.0
+var _view_mat: ShaderMaterial
+var _rendered_world: World3D
+var _center := Vector3.ZERO         # the hero, the middle of the disc (markers are placed around it)
 
 func _init(p_diameter := 200.0) -> void:
 	diameter = p_diameter
@@ -36,14 +47,15 @@ func _ready() -> void:
 	var m := UIArt.meta("hud/minimap_frame.png")
 	var inner := diameter * 0.78
 	_vp = SubViewport.new()
-	_vp.size = Vector2i(256, 256)
+	var px := int(ceil(256.0 * (radius_m + MARGIN) / radius_m / 16.0)) * 16
+	_vp.size = Vector2i(px, px)
 	_vp.render_target_update_mode = SubViewport.UPDATE_ONCE
 	_vp.msaa_3d = Viewport.MSAA_DISABLED
 	_vp.positional_shadow_atlas_size = 0
 	add_child(_vp)
 	_cam = Camera3D.new()
 	_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
-	_cam.size = radius_m * 2.0
+	_cam.size = (radius_m + MARGIN) * 2.0
 	_cam.far = 200.0
 	_cam.rotation_degrees = Vector3(-90, 0, 0)
 	var env := Environment.new()
@@ -54,7 +66,7 @@ func _ready() -> void:
 	env.ambient_light_energy = 1.6
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	_cam.environment = env
-	_cam.cull_mask = 1   # world geometry only
+	_cam.cull_mask = 1   # world geometry only (no characters, and no lights: they live on Perf.LIGHT_LAYER)
 	_vp.add_child(_cam)
 	_view = TextureRect.new()
 	_view.texture = _vp.get_texture()
@@ -66,7 +78,9 @@ func _ready() -> void:
 	sh.code = SHADER
 	mat.shader = sh
 	mat.set_shader_parameter("mask_tex", UIArt.tex("hud/minimap_mask.png"))
+	mat.set_shader_parameter("view_scale", radius_m / (radius_m + MARGIN))
 	_view.material = mat
+	_view_mat = mat
 	_view.modulate = Color(0.78, 0.76, 0.72)
 	add_child(_view)
 	_markers = Control.new()
@@ -99,18 +113,22 @@ func _process(delta: float) -> void:
 		_vp.world_3d = p.get_world_3d()
 	_map_label.text = Game.current_map.def.display_name if Game.current_map and Game.current_map.def else ""
 	_update_t -= delta
-	# efficiency mode (bh-009): the top-down view is a whole second render of the map; redraw it only once the hero has
-	# moved a few metres (or every 1.5 s for moving enemies), not five times a second
-	var due := _update_t <= 0.0
-	if Perf.lite:
-		due = _update_t <= -1.3 or (due and _cam.global_position.distance_to(p.global_position + Vector3(0, 60, 0)) > 3.0)
+	var hero := p.global_position
+	var off := Vector2(hero.x - _cam.global_position.x, hero.z - _cam.global_position.z)
+	# re-render when the disc is about to slide off the render, when the map changed, and now and then for doors
+	var slack := MARGIN - 1.0
+	var due := _rendered_world != _vp.world_3d or absf(off.x) > slack or absf(off.y) > slack 		or _update_t <= 0.0 and off.length() > 0.5 or _update_t <= -REFRESH
 	if due:
-		_update_t = 0.2
-		_cam.global_position = p.global_position + Vector3(0, 60, 0)
+		_update_t = REFRESH * (2.0 if Perf.lite else 1.0)
+		_rendered_world = _vp.world_3d
+		_cam.global_position = hero + Vector3(0, 60, 0)
 		_vp.render_target_update_mode = SubViewport.UPDATE_ONCE
+		off = Vector2.ZERO
+	_center = hero
+	_view_mat.set_shader_parameter("view_offset", off / ((radius_m + MARGIN) * 2.0))
 	_marker_t -= delta
 	if _marker_t <= 0.0:
-		_marker_t = 0.1 if Perf.lite else 0.0     # efficiency mode: markers move ten times a second
+		_marker_t = 1.0 / (10.0 if Perf.lite else MARKER_HZ)
 		_markers.queue_redraw()
 
 func _to_map(world: Vector3, center: Vector3) -> Vector2:
@@ -121,7 +139,7 @@ func _draw_markers() -> void:
 	var p := Game.player as Node3D
 	if p == null or not is_instance_valid(p):
 		return
-	var c := _cam.global_position
+	var c := _center
 	var half := _markers.size * 0.5
 	var lim := half.x * 0.94
 	if not is_inside_tree():

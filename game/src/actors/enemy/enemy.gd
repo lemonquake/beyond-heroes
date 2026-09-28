@@ -141,6 +141,11 @@ func _ready() -> void:
 		add_to_group(&"boss")
 	collision_layer = BH.LAYER_ENEMY
 	collision_mask = BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS | BH.LAYER_PLAYER | BH.LAYER_ENEMY
+	rest_skip = true
+	_sep_phase = get_instance_id() % SEP_EVERY      # staggered: a third of the pack refreshes each step
+	# a jammed pack pushes into itself every step: 3 slide iterations instead of 6 halve that worst case, and nothing
+	# a monster walks along needs more (bh-014)
+	max_slides = 3
 	var cs := CollisionShape3D.new()
 	var cap := CapsuleShape3D.new()
 	cap.radius = body_radius
@@ -157,6 +162,7 @@ func _ready() -> void:
 	add_child(agent)
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
+	visual.full_sync = is_boss or is_miniboss()
 	add_child(visual)
 	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0)) * size_mult
 	visual.setup(def.model, sc, def.tint, &"")
@@ -312,7 +318,7 @@ func _physics_process(delta: float) -> void:
 		_net_step(delta)
 		return
 	ensure_stats()
-	if Perf.lite and _lite_sleep(delta):
+	if _sim_sleep(delta):
 		return
 	status.tick(delta)
 	if not alive:
@@ -345,13 +351,15 @@ func _physics_process(delta: float) -> void:
 		visual.update_locomotion(Vector2(local.x, local.z), brain.is_engaged(), 0.0, delta)
 	_ambient_sound(delta)
 
-## Efficiency mode (bh-009): a calm monster far beyond sight of the hero dozes — standing on the ground, nothing to
-## fight, nothing burning — and only checks twice a second whether the hero has come near. The whole simulation
-## (perception, steering, physics, animation blending) resumes the moment it wakes, well outside its sight range.
+## Simulation LOD (bh-009 efficiency mode; every platform since bh-014): a calm monster far beyond sight of every hero
+## dozes — standing on the ground, nothing to fight, nothing burning — and only checks twice a second whether a hero
+## has come near. The whole simulation (perception, steering, physics, animation blending) resumes the moment it wakes,
+## well outside its sight range and off screen, so nobody ever sees it happen. Like the "active zone" of Diablo-style
+## ARPGs: a map of 50 monsters only pays for the handful around the heroes.
 var _asleep := false
 var _sleep_check := 0.0
 
-func _lite_sleep(delta: float) -> bool:
+func _sim_sleep(delta: float) -> bool:
 	if _asleep:
 		_sleep_check -= delta
 		if _sleep_check > 0.0:
@@ -360,17 +368,19 @@ func _lite_sleep(delta: float) -> bool:
 		if _should_sleep():
 			return true
 		_asleep = false
+		agent.process_mode = Node.PROCESS_MODE_INHERIT
 		if visual:
 			visual.set_process(true)
 		return false
 	_sleep_check -= delta
 	if _sleep_check > 0.0:
 		return false
-	_sleep_check = 0.5
+	_sleep_check = 0.5 + rng.randf() * 0.05     # spread the checks so a map of monsters never checks on one frame
 	if not _should_sleep():
 		return false
 	_asleep = true
 	velocity = Vector3.ZERO
+	agent.process_mode = Node.PROCESS_MODE_DISABLED
 	if visual:
 		visual.set_process(false)
 	return true
@@ -384,9 +394,16 @@ func _should_sleep() -> bool:
 	if ext and (ext.fuse_lit or not ext.jobs.is_empty()):
 		return false
 	var hero := Game.player as Node3D
-	if hero == null or not is_instance_valid(hero):
+	if hero == null or not is_instance_valid(hero) or not hero.is_inside_tree():
 		return false
-	return global_position.distance_to(hero.global_position) > maxf(48.0, def.sight_range * 1.5 + 8.0)
+	var wake := maxf(48.0, def.sight_range * 1.5 + 8.0)
+	if global_position.distance_squared_to(hero.global_position) <= wake * wake:
+		return false
+	# the host simulates every monster: another player's hero keeps the ones around them awake (bh-008 multiplayer)
+	for h: Node3D in get_tree().get_nodes_in_group(&"net_hero"):
+		if h.is_inside_tree() and global_position.distance_squared_to(h.global_position) <= wake * wake:
+			return false
+	return true
 
 func _tick_cooldowns(delta: float) -> void:
 	for k in cooldowns.keys():
@@ -1192,7 +1209,7 @@ func _steer(delta: float) -> Vector3:
 	to_goal.y = 0.0
 	var v := Vector3.ZERO
 	if to_goal.length() > 0.5:
-		agent.target_position = goal
+		_nav_to(goal, delta)
 		var nxt := agent.get_next_path_position()
 		var d := nxt - global_position
 		d.y = 0.0
@@ -1208,17 +1225,13 @@ func _steer(delta: float) -> Vector3:
 		var r := global_position - target.global_position
 		r.y = 0.0
 		v = r.normalized().cross(Vector3.UP) * _strafe_dir * speed * 0.35
-	# separation: avoid clipping through allies and stacking on the same spot
-	var sep := Vector3.ZERO
-	for e in get_tree().get_nodes_in_group(&"enemy"):
-		if e == self or not e.alive:
-			continue
-		var off: Vector3 = global_position - e.global_position
-		off.y = 0.0
-		var min_d: float = SEPARATION_RADIUS + body_radius + e.body_radius - 0.9
-		var l := off.length()
-		if l < min_d and l > 0.001:
-			sep += off / l * (min_d - l) / min_d
+	# separation: avoid clipping through allies and stacking on the same spot. Only the monsters in the grid cells
+	# around this one count (a map-wide loop made every monster pay for every other one, every physics step), and the
+	# push is a soft force, so it is refreshed at 20 Hz (staggered per monster) and held in between (bh-014).
+	_sep_phase += 1
+	if _sep_phase % SEP_EVERY == 0:
+		_sep = _separation()
+	var sep := _sep
 	if target and target.alive:
 		var off2 := global_position - target.global_position
 		off2.y = 0.0
@@ -1228,6 +1241,80 @@ func _steer(delta: float) -> Vector3:
 	v += sep * speed * 0.9
 	var cur := Vector3(velocity.x, 0, velocity.z) - Vector3(knock_velocity.x, 0, knock_velocity.z)
 	return cur.move_toward(v.limit_length(speed * 1.1), 30.0 * delta)
+
+## Path requests (bh-014). Assigning NavigationAgent3D.target_position always runs a fresh A* query on the next
+## get_next_path_position(), even for the same point (the engine never compares), so steering every physics step
+## searched the whole map's navmesh 60 times a second per monster. Now: a new goal far from the last one paths at
+## once; one that drifts (a hero walking away) re-paths at most every REPATH_INTERVAL. The agent still follows
+## (and re-plans on its own if pushed off) the current path in between.
+const REPATH_INTERVAL := 0.3
+const REPATH_DRIFT := 0.6            # metres the goal may move before a timed re-path
+const REPATH_JUMP := 4.0             # metres: a goal this far from the last one is a new errand, path now
+var _nav_goal := Vector3.INF
+var _nav_t := 0.0
+
+func _nav_to(goal: Vector3, delta: float) -> void:
+	_nav_t -= delta
+	var moved := INF if _nav_goal == Vector3.INF else goal.distance_squared_to(_nav_goal)
+	if moved > REPATH_JUMP * REPATH_JUMP or (_nav_t <= 0.0 and moved > REPATH_DRIFT * REPATH_DRIFT):
+		agent.target_position = goal
+		_nav_goal = goal
+		_nav_t = REPATH_INTERVAL
+
+## Neighbour grid for separation, rebuilt once per physics step and shared by every monster (bh-014).
+const SEP_CELL := 6.0
+const SEP_EVERY := 3
+var _sep := Vector3.ZERO
+var _sep_phase := 0
+
+func _separation() -> Vector3:
+	_neighbours_grid()
+	var sep := Vector3.ZERO
+	var gp := global_position
+	var c := Vector2i(floori(gp.x / SEP_CELL), floori(gp.z / SEP_CELL))
+	var r := 1 + int((SEPARATION_RADIUS + body_radius * 2.0) / SEP_CELL)   # a giant's reach can span more than one cell
+	for dx in range(-r, r + 1):
+		for dz in range(-r, r + 1):
+			var cell = _grid.get(c + Vector2i(dx, dz))
+			if cell == null:
+				continue
+			for e in cell:
+				if e == self or not is_instance_valid(e) or not e.alive:
+					continue
+				var off: Vector3 = gp - e.global_position
+				off.y = 0.0
+				var min_d: float = SEPARATION_RADIUS + body_radius + e.body_radius - 0.9
+				var l := off.length()
+				if l < min_d and l > 0.001:
+					sep += off / l * (min_d - l) / min_d
+	return sep
+
+static var _grid := {}
+static var _grid_frame := -1
+static var _grid_gen := 0
+static var _grid_tree: SceneTree
+var _grid_seen := -1
+
+## Rebuilt at most once per physics step, and whenever a monster asks twice from the same build (tests step monsters
+## by hand, many times inside one engine frame).
+func _neighbours_grid() -> void:
+	var tree := get_tree()
+	var f := Engine.get_physics_frames()
+	if f == _grid_frame and tree == _grid_tree and _grid_seen != _grid_gen:
+		_grid_seen = _grid_gen
+		return
+	_grid_frame = f
+	_grid_tree = tree
+	_grid_gen += 1
+	_grid_seen = _grid_gen
+	_grid.clear()
+	for e: Enemy in tree.get_nodes_in_group(&"enemy"):
+		if e.alive and e.is_inside_tree() and not e._asleep:
+			var k := Vector2i(floori(e.global_position.x / SEP_CELL), floori(e.global_position.z / SEP_CELL))
+			if _grid.has(k):
+				(_grid[k] as Array).append(e)
+			else:
+				_grid[k] = [e]
 
 func _face(delta: float, desired: Vector3) -> void:
 	var S := EnemyBrain.State

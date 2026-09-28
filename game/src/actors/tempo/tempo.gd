@@ -1374,7 +1374,7 @@ func _movement(delta: float) -> Vector3:
 			speed *= 1.3
 	var v := Vector3.ZERO
 	if to.length() > arrive:
-		agent.target_position = goal
+		_nav_to(goal, delta)
 		var nxt := agent.get_next_path_position()
 		var d := (nxt - global_position).slide(Vector3.UP)
 		if d.length() < 0.05 or agent.is_navigation_finished():
@@ -1405,6 +1405,18 @@ func _formation_point() -> Vector3:
 		f = Vector3.BACK
 	var side := f.cross(Vector3.UP) * (1.6 if slot_index % 2 == 0 else -1.6)
 	return p.global_position - f * 2.0 + side
+
+## Throttled path requests (bh-014, same as Enemy._nav_to): assigning target_position re-runs A* every time.
+var _nav_goal := Vector3.INF
+var _nav_t := 0.0
+
+func _nav_to(goal: Vector3, delta: float) -> void:
+	_nav_t -= delta
+	var moved := INF if _nav_goal == Vector3.INF else goal.distance_squared_to(_nav_goal)
+	if moved > 16.0 or (_nav_t <= 0.0 and moved > 0.36):
+		agent.target_position = goal
+		_nav_goal = goal
+		_nav_t = 0.25
 
 func _face(delta: float, desired: Vector3) -> void:
 	if action_kind == &"dodge" or (action != null and action.elapsed > action.first_hit_time() - 0.05 and action.first_hit_time() >= 0.0):

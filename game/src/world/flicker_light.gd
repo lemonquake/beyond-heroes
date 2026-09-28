@@ -1,7 +1,8 @@
 class_name FlickerLight
 extends OmniLight3D
 ## Fire light with layered-noise flicker (energy + a few cm of positional wobble). Deterministic per light seed so
-## neighbouring torches never pulse in sync. Stops animating when far from the camera to save CPU.
+## neighbouring torches never pulse in sync. Stops animating when far from the camera to save CPU. Shadow casters
+## never wobble (bh-014: moving a shadowed light re-renders its shadow map every frame).
 
 @export var base_energy := 1.6
 @export var flicker := 0.22          # fraction of base energy
@@ -26,5 +27,8 @@ func _process(delta: float) -> void:
 	_t += delta * speed
 	var n := _noise.get_noise_1d(_t * 6.0) * 0.6 + _noise.get_noise_1d(_t * 17.0 + 40.0) * 0.4
 	light_energy = base_energy * (1.0 + n * flicker)
-	position = _origin + Vector3(_noise.get_noise_1d(_t * 3.0 + 7.0), _noise.get_noise_1d(_t * 3.0 + 13.0) * 0.5,
-		_noise.get_noise_1d(_t * 3.0 + 29.0)) * wobble
+	# a light that moves must redraw its whole shadow cube map that frame; energy alone never does (bh-014). Shadowed
+	# fires keep the flicker and hold still; the shadowless torches keep their few centimetres of wobble.
+	if not shadow_enabled:
+		position = _origin + Vector3(_noise.get_noise_1d(_t * 3.0 + 7.0), _noise.get_noise_1d(_t * 3.0 + 13.0) * 0.5,
+			_noise.get_noise_1d(_t * 3.0 + 29.0)) * wobble

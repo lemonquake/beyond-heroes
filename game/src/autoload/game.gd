@@ -205,6 +205,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 	Events.map_loaded.emit(id)
 	map_changed.emit(map)
 	Net.on_local_map_loaded(id)
+	FX.warm_up()     # behind the loading screen: compile the combat effects now, not on the first blow (bh-014)
 	return map
 
 func place_player(spawn_id: StringName) -> void:

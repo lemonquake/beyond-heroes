@@ -36,6 +36,7 @@ func _init(p_kind := Kind.INVENTORY, size_px := 64.0) -> void:
 	focus_mode = Control.FOCUS_NONE
 
 func _ready() -> void:
+	set_process(_shimmers())
 	mouse_entered.connect(func() -> void:
 		_hover = true
 		hovered.emit(self, true)
@@ -48,10 +49,18 @@ func _ready() -> void:
 func set_item(it: ItemInstance, p_unusable := false) -> void:
 	item = it
 	unusable = p_unusable
+	# only an elite item shimmers; every other slot (hundreds across the inventory, stash and shops) sleeps (bh-014)
+	set_process(_shimmers())
 	queue_redraw()
 
+func _shimmers() -> bool:
+	return item != null and item.rarity >= BH.Rarity.ELITE
+
 func _process(delta: float) -> void:
-	if item != null and item.rarity >= BH.Rarity.ELITE and is_visible_in_tree():
+	if not _shimmers():
+		set_process(false)
+		return
+	if is_visible_in_tree():
 		_t += delta
 		queue_redraw()
 

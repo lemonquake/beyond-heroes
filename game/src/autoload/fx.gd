@@ -41,6 +41,109 @@ func _ensure_pool() -> void:
 		world.add_child(l)
 		_numbers.append(l)
 
+## Warm-up (bh-014), run by every map load while the loading screen still covers the view: builds the damage-number
+## pool, and draws one of each combat effect for a few frames right in front of the camera. The first frame a material
+## is drawn compiles its shader and pipeline, the first damage number rasterises the font's glyphs and the first blood
+## stain paints its splat textures; together that was a ~350 ms freeze on the first blow of a session. Nothing of it
+## is left behind (no stain, no number, no sound).
+const WARM_FRAMES := 3
+var warm_enabled := true              # tools switch it off to measure the cold first hit
+
+func warm_up() -> void:
+	if not warm_enabled or world == null or not is_instance_valid(world) or not world.is_inside_tree() or DisplayServer.get_name() == "headless":
+		return
+	_ensure_pool()
+	var at := Vector3.ZERO
+	var p := Game.player as Node3D
+	var cam := get_viewport().get_camera_3d()
+	if p and is_instance_valid(p) and p.is_inside_tree():
+		at = p.global_position + Vector3.UP
+	elif cam:
+		at = cam.global_position - cam.global_basis.z * 12.0
+	var holder := Node3D.new()
+	holder.name = "WarmUp"
+	world.add_child(holder)
+	holder.global_position = at
+	# every glyph numbers and combat words use, in every number style
+	var styles := [NumStyle.NORMAL, NumStyle.SKILL, NumStyle.CRIT, NumStyle.SKILL_CRIT]
+	var was := Settings.damage_numbers
+	Settings.damage_numbers = true
+	for st in styles:
+		_number(at, "0123456789!", Color.WHITE, 1.0, 1.2, st)
+	_number(at, "Evade Dodged Parry! Blocked Immune Shatter", Color.WHITE, 1.0)
+	Settings.damage_numbers = was
+	var fx: Array[Node3D] = []
+	for el in Elements.COUNT:
+		fx.append(VFXLib.hit_burst(at, el, 1.0, el % 2 == 0))
+		fx.append(VFXLib.status_particles(el, 1.6))
+	for m in [Gore.FLESH, Gore.ICHOR, Gore.BONE, Gore.STONE, Gore.AETHER, Gore.SHADOW, &""]:
+		fx.append(Gore.hit(at, Vector3.FORWARD, m, Color(0.5, 0.05, 0.03), 1.0, true))
+	for v in Gore.SPLAT_VARIANTS:
+		fx.append(Gore.stain(Color(0.4, 0.02, 0.02), 1.0, v, 0.0))
+	fx.append(VFXLib.strike_impact(Vector3.FORWARD, Color.WHITE, 1.2, true, true))
+	fx.append(VFXLib.strike_impact(Vector3.FORWARD, Color.WHITE, 0.3, false))
+	fx.append(VFXLib.block_impact(Vector3.FORWARD, true))
+	fx.append(VFXLib.block_impact(Vector3.FORWARD, false))
+	fx.append(VFXLib.heavy_impact(Color.WHITE))
+	fx.append(VFXLib.dust_puff())
+	fx.append(VFXLib.debris())
+	fx.append(VFXLib.slash_arc(Color.WHITE, 2.0, 120.0))
+	fx.append(VFXLib.ring_wave(Color.WHITE, 2.0))
+	fx.append(VFXLib.ground_crack(Color.WHITE, 2.0))
+	fx.append(VFXLib.light_pillar(Color.WHITE, 3.0, 1.0))
+	fx.append(VFXLib.shield_dome(Color.WHITE, 1.5))
+	fx.append(VFXLib.lightning_bolt(at, at + Vector3(2, 0, 0)))
+	fx.append(VFXLib.beam(Color.WHITE, 3.0, 0.5))
+	fx.append(VFXLib.orb(Color.WHITE, 0.3))
+	for shape in ["circle", "cone", "line", "ring"]:
+		fx.append(VFXLib.telegraph(shape, Vector2(2, 2), 1.0))
+	for n in fx:
+		if n.get_parent():
+			n.get_parent().remove_child(n)
+		holder.add_child(n)
+		n.position = Vector3.ZERO
+	for i in WARM_FRAMES:
+		await get_tree().process_frame
+	if is_instance_valid(holder):
+		# keep every material (and mesh) the effects used: an engine shader lives only while a material with its
+		# feature set exists, so freeing the last one would throw the compiled shader away again
+		_retain(holder)
+		holder.queue_free()
+	for l in _numbers:
+		if is_instance_valid(l):
+			var tw: Tween = l.get_meta(&"tw") if l.has_meta(&"tw") else null
+			if tw and tw.is_valid():
+				tw.kill()
+			l.visible = false
+	_next = 0
+
+var _warm_keep := {}                 # Resource -> true, alive for the session (see warm_up)
+
+func _retain(n: Node) -> void:
+	var keep := func(r: Resource) -> void:
+		if r != null:
+			_warm_keep[r] = true
+	if n is GeometryInstance3D:
+		keep.call((n as GeometryInstance3D).material_override)
+		keep.call((n as GeometryInstance3D).material_overlay)
+	if n is MeshInstance3D and (n as MeshInstance3D).mesh:
+		var m := (n as MeshInstance3D).mesh
+		keep.call(m)
+		for i in m.get_surface_count():
+			keep.call(m.surface_get_material(i))
+			keep.call((n as MeshInstance3D).get_surface_override_material(i))
+	if n is GPUParticles3D:
+		var gp := n as GPUParticles3D
+		keep.call(gp.process_material)
+		for i in gp.draw_passes:
+			var dm := gp.get_draw_pass_mesh(i)
+			keep.call(dm)
+			if dm:
+				for j in dm.get_surface_count():
+					keep.call(dm.surface_get_material(j))
+	for c in n.get_children():
+		_retain(c)
+
 func spawn(node: Node3D, pos: Vector3) -> void:
 	if world == null or not is_instance_valid(world):
 		node.queue_free()

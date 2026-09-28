@@ -38,6 +38,7 @@ func _ready() -> void:
 	_music_b = _mk_stream_player("Music")
 	_amb = _mk_stream_player("Ambience")
 	Settings.apply()
+	_start_prefetch()
 
 func _mk_stream_player(bus: String) -> AudioStreamPlayer:
 	var p := AudioStreamPlayer.new()
@@ -75,6 +76,43 @@ func set_environment_reverb(amount: float) -> void:
 	if _reverb:
 		_reverb.wet = clampf(amount, 0.0, 1.0) * 0.35
 		_reverb.room_size = lerpf(0.3, 0.9, amount)
+
+## SFX prefetch (bh-014): every sound effect (15 MB) is read on a loader thread at startup instead of from disk on the
+## game thread the first time it plays (the first blow of a session waited ~15 ms for its hurt and hit sounds). The
+## streams are held here so they stay in the resource cache; `load()` then returns them at once.
+var _prefetch: Array[String] = []
+var _prefetched := {}               # path -> AudioStream (keeps the cache entry alive)
+
+func _start_prefetch() -> void:
+	var files: PackedStringArray
+	if ResourceLoader.has_method(&"list_directory"):
+		files = ResourceLoader.call(&"list_directory", SFX_DIR)
+	else:
+		files = DirAccess.get_files_at(SFX_DIR)
+	for f in files:
+		var fn := f.trim_suffix(".import").trim_suffix(".remap")
+		if not fn.ends_with(".wav"):
+			continue
+		var path := SFX_DIR + fn
+		if _prefetch.has(path) or not ResourceLoader.exists(path):
+			continue
+		if ResourceLoader.load_threaded_request(path, "AudioStream") == OK:
+			_prefetch.append(path)
+	set_process(not _prefetch.is_empty())
+
+func _process(_d: float) -> void:
+	var i := 0
+	while i < _prefetch.size():
+		var path := _prefetch[i]
+		var st := ResourceLoader.load_threaded_get_status(path)
+		if st == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			i += 1
+			continue
+		if st == ResourceLoader.THREAD_LOAD_LOADED:
+			_prefetched[path] = ResourceLoader.load_threaded_get(path)
+		_prefetch.remove_at(i)
+	if _prefetch.is_empty():
+		set_process(false)
 
 func _variations(name: StringName) -> Array:
 	if _cache.has(name):

@@ -46,6 +46,22 @@ var last_attacker: Node
 var rng := RandomNumberGenerator.new()
 var invulnerable := false                 # dodge i-frames, cutscenes
 var _stats_dirty := true
+## Physics LOD (bh-014): a body standing on the floor with nowhere to go skips its capsule sweep, re-checking the floor
+## every REST_CHECK steps (staggered). In a brawl half the monsters are swinging or waiting their turn in place, and
+## each sweep cost as much as a moving one. Monsters opt in; the hero always sweeps.
+var rest_skip := false
+const REST_CHECK := 6
+var _rest_n := 0
+
+func _resting(horiz: Vector3) -> bool:
+	if horiz.x * horiz.x + horiz.z * horiz.z > 0.0025 or _vertical > -0.5 or not is_on_floor() or _airborne_from_launch:
+		_rest_n = 0
+		return false
+	_rest_n += 1
+	if _rest_n % REST_CHECK == get_instance_id() % REST_CHECK:
+		return false
+	velocity = Vector3.ZERO
+	return true
 
 func _ready() -> void:
 	rng.seed = hash(get_instance_id())
@@ -347,6 +363,8 @@ func physics_move(delta: float, desired: Vector3) -> void:
 		knock_velocity = Vector3.ZERO
 		_vertical = 0.0
 	var pre_knock := knock_velocity
+	if rest_skip and _resting(horiz):
+		return
 	move_and_slide()
 	if pre_knock.length() > 1.0:
 		_process_impacts(pre_knock)

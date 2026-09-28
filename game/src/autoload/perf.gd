@@ -7,8 +7,9 @@ extends Node
 ##    renderer (not on the node, so gameplay code that shows or hides its own lights is never overridden). Low-end
 ##    phones draw every lit object once more per light, so 70 torches in a town are what makes it unplayable.
 ##  - Animation sleep: characters off screen or far away stop evaluating their AnimationTree (the pose freezes where
-##    nobody can see it). Gameplay never reads the pose, so combat and AI are unaffected.
-## Nothing here changes a desktop session: with efficiency mode off every light and tree is left alone.
+##    nobody can see it). Gameplay never reads the pose, so combat and AI are unaffected. Since bh-014 this half runs
+##    on every platform: it is invisible by construction, and a forest of 50 animated monsters cost ~15 ms on a desktop.
+## With efficiency mode off every light is left alone.
 
 const LIGHT_BUDGET := 6
 const LIGHT_RADIUS := 32.0          # a light further than this from the hero never takes a slot
@@ -31,7 +32,14 @@ var stats := {"lights_total": 0, "lights_on": 0, "visuals": 0, "anim_awake": 0}
 func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
+## Render layer every light lives on (bh-014). The main camera sees every layer; the minimap's top-down camera only
+## sees layer 1 (world geometry), so it skips the lights and, above all, the sun's shadow pass (it has its own flat
+## ambient light). A light's `layers` only decide which cameras draw it, never what it lights.
+const LIGHT_LAYER := 1 << 19
+
 func _on_node_added(n: Node) -> void:
+	if n is Light3D:
+		(n as Light3D).layers = LIGHT_LAYER
 	if n is OmniLight3D or n is SpotLight3D:
 		_lights.append(n)
 	elif n is CharacterVisual:
@@ -50,11 +58,8 @@ func _process(delta: float) -> void:
 		if _fps_t >= 5.0:
 			_fps_t = 0.0
 			print("BH_FPS %d lite=%s lights_on=%d anim_awake=%d/%d" % [Engine.get_frames_per_second(), lite, stats.lights_on, stats.anim_awake, stats.visuals])
-	if not lite:
-		if _was_lite:
-			_restore()
-		return
-	_was_lite = true
+	if not lite and _was_lite:
+		_restore_lights()
 	_t -= delta
 	if _t > 0.0:
 		return
@@ -63,7 +68,10 @@ func _process(delta: float) -> void:
 	if cam == null:
 		return
 	var focus := _focus(cam)
-	_budget_lights(focus)
+	if lite:
+		_was_lite = true
+		_budget_lights(focus)
+	# animation sleep runs on every platform (bh-014): a character nobody can see never needs a fresh pose
 	_sleep_animations(cam, focus)
 
 ## The hero if there is one, else the ground point the camera looks at (title screen backdrop).
@@ -119,6 +127,10 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 		i += 1
 		if v.tree == null or not v.is_inside_tree():
 			continue
+		if v.get_viewport() != cam.get_viewport():
+			v.set_anim_awake(true)          # a portrait in its own viewport (character preview): always posed
+			awake += 1
+			continue
 		var p := v.global_position + Vector3.UP
 		var show := p.distance_to(focus) < ANIM_RANGE and v.is_visible_in_tree()
 		if show:
@@ -132,13 +144,17 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 	stats.visuals = _visuals.size()
 	stats.anim_awake = awake
 
-## Efficiency mode was switched off: give every light and animation back.
-func _restore() -> void:
+## Efficiency mode was switched off: give every light back.
+func _restore_lights() -> void:
 	_was_lite = false
 	for l in _off_lights:
 		if is_instance_valid(l):
 			RenderingServer.instance_set_visible(l.get_instance(), l.is_visible_in_tree())
 	_off_lights.clear()
+
+## Give every light and animation back (tests; the governor puts the far ones to sleep again on its next tick).
+func _restore() -> void:
+	_restore_lights()
 	for v in _visuals:
 		if is_instance_valid(v):
 			v.set_anim_awake(true)

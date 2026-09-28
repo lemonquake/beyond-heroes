@@ -1,0 +1,6 @@
+FIRSTHIT mode=cold worst=["329.7ms@20", "15.2ms@140", "9.2ms@100", "7.3ms@60", "7.1ms@75"] hp=0/30
+FIRSTHIT mode=warm worst=["24.1ms@20", "8.7ms@132", "7.7ms@100", "7.5ms@140", "6.8ms@135"] hp=2/30
+FIRSTHIT mode=cold worst=["344.9ms@20", "29.9ms@38", "29.8ms@40", "22.3ms@36", "11.8ms@140"] hp=0/30
+FIRSTHIT mode=warm worst=["25.5ms@20", "12.9ms@140", "7.7ms@128", "7.2ms@38", "6.8ms@54"] hp=0/30
+FIRSTHIT mode=cold worst=["387.5ms@20", "30.7ms@39", "26.3ms@41", "23.5ms@37", "12.9ms@140"] hp=0/30
+FIRSTHIT mode=warm worst=["26.2ms@20", "22.7ms@100", "7.4ms@106", "6.9ms@93", "6.9ms@140"] hp=0/30
