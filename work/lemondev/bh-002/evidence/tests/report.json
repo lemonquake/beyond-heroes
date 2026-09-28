@@ -1,41 +1,27 @@
 {
-  "checks": 16,
-  "elapsed_ms": 391232,
+  "checks": 1493,
+  "elapsed_ms": 327887,
   "engine": "4.7.2-stable (official)",
-  "failures": [
-    "test_balance.test_power_is_within_band_at_every_level: L1 knight power 466.5 is within 20% of the mean 652.7 (-29%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1212.8 is within 20% of the mean 652.7 (+86%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 931.4 is within 20% of the mean 652.7 (+43%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 652.7 (-100%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 knight power 1662.9 is within 20% of the mean 2102.3 (-21%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 mage power 4980.3 is within 20% of the mean 2102.3 (+137%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2102.3 (-100%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 knight power 2070.3 is within 20% of the mean 2879.2 (-28%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 mage power 6160.2 is within 20% of the mean 2879.2 (+114%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 521.8 is within 20% of the mean 2879.2 (-82%)",
-    "test_balance.test_power_is_within_band_at_every_level: L30 knight power 5468.1 is within 20% of the mean 4337.2 (+26%)",
-    "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 2511.1 is within 20% of the mean 4337.2 (-42%)"
-  ],
+  "failures": [],
   "suites": {
-    "test_balance.gd": {
-      "checks": 16,
-      "failures": [
-        "test_balance.test_power_is_within_band_at_every_level: L1 knight power 466.5 is within 20% of the mean 652.7 (-29%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1212.8 is within 20% of the mean 652.7 (+86%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 931.4 is within 20% of the mean 652.7 (+43%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 652.7 (-100%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 knight power 1662.9 is within 20% of the mean 2102.3 (-21%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 mage power 4980.3 is within 20% of the mean 2102.3 (+137%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2102.3 (-100%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 knight power 2070.3 is within 20% of the mean 2879.2 (-28%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 mage power 6160.2 is within 20% of the mean 2879.2 (+114%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 521.8 is within 20% of the mean 2879.2 (-82%)",
-        "test_balance.test_power_is_within_band_at_every_level: L30 knight power 5468.1 is within 20% of the mean 4337.2 (+26%)",
-        "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 2511.1 is within 20% of the mean 4337.2 (-42%)"
-      ],
-      "ms": 391161.243,
-      "tests": 1
+    "test_bh011.gd": {
+      "checks": 45,
+      "failures": [],
+      "ms": 144697.428,
+      "tests": 6
+    },
+    "test_crafting.gd": {
+      "checks": 603,
+      "failures": [],
+      "ms": 182864.28,
+      "tests": 11
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.283,
+      "tests": 4
     }
   },
-  "timestamp": "2026-09-28T06:30:41"
+  "timestamp": "2026-09-28T09:25:26"
 }

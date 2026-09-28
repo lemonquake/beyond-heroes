@@ -220,6 +220,9 @@ func place_player(spawn_id: StringName) -> void:
 
 ## Teleporter travel with the loading screen. Same-map travel just relocates the player.
 func travel(id: StringName, spawn_id: StringName) -> void:
+	if not travelling and Net.is_client() and not Net.following:
+		Net.request_travel({"kind": "travel", "map": id, "spawn": spawn_id})     # the host leads the party (bh-011)
+		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -239,6 +242,9 @@ func travel(id: StringName, spawn_id: StringName) -> void:
 
 ## Travel through a Town Portal: loading screen, then the hero stands at `pos` on map `id` (not at a named spawn).
 func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
+	if not travelling and Net.is_client() and not Net.following:
+		Net.request_travel({"kind": "point", "map": id, "pos": pos, "yaw": yaw})
+		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -261,6 +267,9 @@ func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
 
 ## Walk through a door: fade to black, swap maps, fade back in (interiors are small, no loading screen).
 func door_travel(id: StringName, spawn_id: StringName) -> void:
+	if not travelling and Net.is_client() and not Net.following:
+		Net.request_travel({"kind": "door", "map": id, "spawn": spawn_id})
+		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -320,6 +329,19 @@ func respawn_player(at_checkpoint := false) -> void:
 		return
 	var map_id := current_map_id
 	var spawn := &"start"
+	if Net.is_host() and not (at_checkpoint and checkpoint_name() != "" and StringName(hero.checkpoint.map) != current_map_id):
+		# hosting: the world (and everyone in it) stays; rebuilding the map would drag every client through a loading
+		# screen and reset the monsters they are fighting (bh-011). Get up at this map's entrance (or its checkpoint).
+		for s in ([StringName(hero.checkpoint.get("spawn", "start"))] if at_checkpoint and checkpoint_name() != "" else []) + [&"arrival", &"entrance", &"start"]:
+			if current_map.spawns.has(s):
+				spawn = s
+				break
+		place_player(spawn)
+		p.respawn()
+		Events.player_respawned.emit()
+		if lost > 0:
+			Events.notify.emit("You lost %d gold." % lost, &"info")
+		return
 	if at_checkpoint and checkpoint_name() != "":
 		map_id = StringName(hero.checkpoint.map)
 		spawn = StringName(hero.checkpoint.get("spawn", "start"))

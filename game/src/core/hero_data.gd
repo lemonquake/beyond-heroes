@@ -29,7 +29,12 @@ var world_flags := {}                     # e.g. &"boss_warden_defeated"
 var current_map: StringName = &"sanctuary"
 var current_spawn: StringName = &"start"
 var play_time := 0.0
-var potion_belt := [&"health_potion", &"mana_potion"]
+## The potion belt (bh-011): what the two belt keys (Q / E, the HP / Mana orbs on a phone) drink. Each slot is
+## BELT_AUTO_HEAL / BELT_AUTO_MANA (the strongest draught of that kind the bag holds) or any consumable's base id.
+const BELT_AUTO_HEAL := &"auto_heal"
+const BELT_AUTO_MANA := &"auto_mana"
+const BELT_SIZE := 2
+var potion_belt: Array[StringName] = [BELT_AUTO_HEAL, BELT_AUTO_MANA]
 var difficulty := 1
 ## Per-NPC memory: npc id -> {"visited": {node_id: true}, "rel": int}. Relationship is reputation-ready (-100..100).
 var dialogue := {}
@@ -367,7 +372,7 @@ func to_dict() -> Dictionary:
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
 		"guild": String(guild), "tier": tier, "rested_until": rested_until,
 		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
-		"town_portal": town_portal.duplicate(true),
+		"town_portal": town_portal.duplicate(true), "belt": potion_belt.map(func(b): return String(b)),
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
 		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
@@ -418,6 +423,9 @@ static func from_dict(d: Dictionary) -> HeroData:
 	var bar: Array = d.get("skill_bar", [])
 	for i in SKILL_BAR_SIZE:
 		h.skill_bar[i] = StringName(bar[i]) if i < bar.size() else &""
+	var belt: Array = d.get("belt", [])
+	for i in BELT_SIZE:
+		h.set_belt(i, StringName(belt[i]) if i < belt.size() else &"")
 	for m in d.get("discovered_maps", []):
 		h.discovered_maps[StringName(m)] = true
 	for t in d.get("teleporters", []):
@@ -498,3 +506,49 @@ static func from_dict(d: Dictionary) -> HeroData:
 	for t in h.tempos:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)
 	return h
+
+# ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------
+
+## The default binding of a belt slot: slot 0 the strongest health draught, slot 1 the strongest mana draught.
+static func belt_default(slot: int) -> StringName:
+	return BELT_AUTO_HEAL if slot == 0 else BELT_AUTO_MANA
+
+static func belt_is_auto(id: StringName) -> bool:
+	return id == BELT_AUTO_HEAL or id == BELT_AUTO_MANA
+
+## Bind a belt slot. "" (or anything that is not a usable consumable) restores the slot's default.
+func set_belt(slot: int, id: StringName) -> void:
+	if slot < 0 or slot >= BELT_SIZE:
+		return
+	if not belt_is_auto(id):
+		var base := DB.item_base(id) if id != &"" else null
+		if base == null or not base.is_consumable():
+			id = belt_default(slot)
+	potion_belt[slot] = id
+
+## The item base a belt slot would drink now (an auto slot: the strongest draught in the bag, or the plain draught when
+## the bag has none, for its picture) and how many uses the bag holds for it.
+func belt_preview(slot: int) -> Dictionary:
+	var id: StringName = potion_belt[slot] if slot >= 0 and slot < BELT_SIZE else &""
+	if belt_is_auto(id):
+		var kind := &"heal" if id == BELT_AUTO_HEAL else &"mana"
+		var n := 0
+		var best: StringName = &""
+		for bid in Player.POTION_ORDER[kind]:
+			var c := inventory.count_of(bid)
+			n += c
+			if c > 0 and best == &"":
+				best = bid
+		if best == &"":
+			best = &"health_potion" if kind == &"heal" else &"mana_potion"
+		return {"base": best, "count": n, "auto": kind}
+	return {"base": id, "count": inventory.count_of(id), "auto": &""}
+
+## Plain words for a belt binding ("Strongest health draught", "Frost Flask").
+static func belt_label(id: StringName) -> String:
+	if id == BELT_AUTO_HEAL:
+		return "Strongest health draught"
+	if id == BELT_AUTO_MANA:
+		return "Strongest mana draught"
+	var base := DB.item_base(id)
+	return base.display_name if base else String(id)

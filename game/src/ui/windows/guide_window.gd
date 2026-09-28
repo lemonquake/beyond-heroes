@@ -15,8 +15,8 @@ const CONTROLS := [
 	]],
 	["Skills and draughts", [
 		[["skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6"], "Skills on the skill bar"],
-		[["potion_health"], "Drink a health draught"],
-		[["potion_mana"], "Drink a mana draught"],
+		[["potion_health"], "Potion belt 1 (health draught unless you change it in the Bag)"],
+		[["potion_mana"], "Potion belt 2 (mana draught unless you change it in the Bag)"],
 		[["interact"], "Talk, open doors, wake waypoints"],
 		[["show_loot"], "Hold to show every item lying on the ground"],
 		[["zoom_in", "zoom_out"], "Zoom the view"],
@@ -116,6 +116,8 @@ func _together() -> void:
 	_para("Ask a grown-up to install the same LAN VPN program on every computer (for example Radmin VPN) and join the same network in it. Then the Host tells everyone the code on the line that starts with \"VPN\". (Or the Host forwards port %d, UDP, on the router.)" % Net.PORT)
 	_heading("Playing together")
 	_para("The party follows the Host through doors and waypoints. Everyone gets experience and their own loot. A Knight's aura also helps friends standing close. Press %s to chat. In the Multiplayer window every player shows a ping: small numbers are good, red means slow." % ("Chat" if touch else Settings.binding_text(&"chat")))
+	_para("A Friend who takes a waypoint or door asks the Host, who answers Go or Stay. Regroup jumps you back beside the Host. A fallen friend: stand beside them and press %s to revive them. %s puts a marker on the ground that everyone sees. Your friends' boxes (health, distance, ping) sit on the left of the screen." % [
+		"Interact" if touch else Settings.binding_text(&"interact"), "The ! button" if touch else Settings.binding_text(&"ping")])
 	_heading("Stopping")
 	_para("A Friend presses Leave in the Multiplayer window and goes back to their own world. The Host presses Close World and everyone goes home. Each hero is saved on their own game.")
 	var open_mp := button("Open Multiplayer", func() -> void:

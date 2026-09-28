@@ -61,6 +61,7 @@ var _portal_label: Label
 var _tick := 0.0
 var _status_sig := ""
 var tempo_frames: TempoFrames
+var party_frames: PartyFrames       # other players in a multiplayer party (bh-011), under the Tempo frames
 # touch play (bh-008): the on-screen controls replace the skill plate; these are moved or hidden
 var _cluster: HBoxContainer
 var _plate: PanelContainer
@@ -87,6 +88,8 @@ func _ready() -> void:
 	tempo_frames = TempoFrames.new()
 	tempo_frames.position = Vector2(24, 150)
 	add_child(tempo_frames)
+	party_frames = PartyFrames.new()
+	add_child(party_frames)
 	Events.notify.connect(_on_notify)
 	Events.player_spawned.connect(bind)
 	Events.player_leveled.connect(_on_leveled)
@@ -363,14 +366,17 @@ func _build_bottom() -> void:
 		_skills.append(b)
 	var sep := VSeparator.new()
 	bar.add_child(sep)
-	for pk in [[&"potion_health", &"health_potion", &"heal"], [&"potion_mana", &"mana_potion", &"mana"]]:
+	for pk in [[&"potion_health", &"health_potion", 0], [&"potion_mana", &"mana_potion", 1]]:
+		# the potion belt (bh-011): each key uses whatever the player bound to it; right-click or drop a consumable to change
 		var pb := SkillButton.new(pk[0], 58.0)
 		pb.set_potion(pk[1])
 		pb.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		pb.set_meta(&"potion_kind", pk[2])
-		pb.activated.connect(func(_s): if player: player.use_potion(pk[2]))
-		TooltipLayer.attach(pb, func() -> Control: return Tips.text("Drinks your strongest %s potion (%s). Restores over 2 seconds; shared cooldown %.1f s." % [
-			"health" if pk[2] == &"heal" else "mana", Settings.binding_text(pk[0]), Player.POTION_COOLDOWN]))
+		var slot: int = pk[2]
+		pb.set_meta(&"belt_slot", slot)
+		pb.activated.connect(func(_s): if player: player.use_belt(slot))
+		pb.context.connect(func(b: SkillButton) -> void: if player: BeltPicker.open(b, player.hero, slot))
+		pb.item_dropped.connect(func(_b: SkillButton, it: ItemInstance) -> void: if player and it: BeltPicker.bind(player.hero, slot, it.base.id))
+		TooltipLayer.attach(pb, func() -> Control: return _belt_tip(slot))
 		bar.add_child(pb)
 		_potions.append(pb)
 	_dodge = TextureProgressBar.new()
@@ -512,12 +518,16 @@ func _place_quest_panels(m: bool) -> void:
 			add_child(_left_col)
 		if tempo_frames.get_parent() != _left_col:
 			tempo_frames.reparent(_left_col, false)
+		if party_frames.get_parent() != _left_col:
+			party_frames.reparent(_left_col, false)
+			_left_col.move_child(party_frames, tempo_frames.get_index() + 1)
 		for q in _quest_panels:
 			if q.get_parent() != _left_col:
 				q.reparent(_left_col, false)
 	elif _left_col:
 		tempo_frames.reparent(self, false)
 		tempo_frames.position = Vector2(24, 150)
+		party_frames.reparent(self, false)
 		for q in _quest_panels:
 			q.reparent(_top_right, false)
 
@@ -626,6 +636,8 @@ func _build_feed() -> void:
 # ---- Update --------------------------------------------------------------------------------------------------------
 
 func _process(delta: float) -> void:
+	if party_frames and party_frames.get_parent() == self:
+		party_frames.position = tempo_frames.position + Vector2(0, tempo_frames.size.y + (8.0 if tempo_frames.get_child_count() > 0 else 0.0))
 	if player == null or not is_instance_valid(player) or player.hero == null:
 		return
 	var p := player
@@ -688,18 +700,25 @@ func _refresh_slots() -> void:
 		var total: float = p.cooldown_total.get(b.skill_id, cd)
 		b.update_state(cd, total, p.skill_block_reason(b.skill_id), -1, p.mana_cost(b.skill_id))
 	for pb in _potions:
-		var kind: StringName = pb.get_meta(&"potion_kind")
-		var order: Array = Player.POTION_ORDER[kind]
-		var n := 0
-		var best: StringName = &""
-		for bid in order:
-			var c := p.hero.inventory.count_of(bid)
-			n += c
-			if c > 0 and best == &"":
-				best = bid
-		if best != &"" and best != pb.potion_base:
-			pb.set_potion(best)
+		var bp := p.hero.belt_preview(int(pb.get_meta(&"belt_slot")))
+		var n: int = bp.count
+		if bp.base != pb.potion_base:
+			pb.set_potion(bp.base)
 		pb.update_state(p.potion_cd, Player.POTION_COOLDOWN, "", n)
+
+## Belt slot tooltip: what the key uses now and how to change it.
+func _belt_tip(slot: int) -> Control:
+	if player == null or player.hero == null:
+		return null
+	var id: StringName = player.hero.potion_belt[slot]
+	var key := Settings.binding_text(&"potion_health" if slot == 0 else &"potion_mana")
+	var what := HeroData.belt_label(id)
+	var body := (DB.item_base(id).flavor if DB.item_base(id) else "")
+	if HeroData.belt_is_auto(id):
+		body = "Drinks your strongest %s draught. Restores over 2 seconds; shared cooldown %.1f s." % [
+			"health" if id == HeroData.BELT_AUTO_HEAL else "mana", Player.POTION_COOLDOWN]
+	return Tips.text("%s\n\nRight-click to choose what %s uses, or drag a consumable from your bag onto it." % [body, key],
+		"%s: %s" % [key, what])
 
 func _update_pips(v: int, m: int) -> void:
 	if _pips.get_child_count() != m:

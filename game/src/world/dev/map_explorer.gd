@@ -117,6 +117,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		cam_dist = clampf(cam_dist - 1.5, 8.0, 34.0)
 	elif event.is_action_pressed(&"zoom_out"):
 		cam_dist = clampf(cam_dist + 1.5, 8.0, 34.0)
+	elif event.is_action_pressed(&"interact"):
+		# waypoints are interactables now (the hero's interact scan uses them); this pawn has no scan of its own
+		for t in get_tree().get_nodes_in_group(&"teleporter"):
+			if t._player_inside == self:
+				t.activate()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var from := camera.project_ray_origin(event.position)
 		var to := from + camera.project_ray_normal(event.position) * 300.0

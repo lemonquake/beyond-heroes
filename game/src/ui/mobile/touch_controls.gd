@@ -7,9 +7,10 @@ extends Control
 ##   left thumb    movement stick: appears where the thumb lands in the lower left (or stays put, see Settings)
 ##   right thumb   Attack (hold to keep swinging) ringed by Skills 1-4, an outer ring with Dodge, Skills 5-6, Heavy
 ##                 and Guard. Tap a skill to cast at the nearest enemy; drag it to aim, release to cast.
-##   orbs          tap the HP orb for a health draught, the Mana orb for a mana draught
+##   orbs          tap the HP / Mana orb to use its potion belt slot (a health / mana draught unless changed in the Bag)
 ##   context       an Interact button appears with the verb ("Talk to Hesta", "Pick up") when something is in reach
-##   top right     Bag, Chat, Menu (every window) and Pause; tap the minimap for the world map
+##   top right     Bag, Chat, Menu (every window) and Pause; tap the minimap for the world map; in a multiplayer
+##                 party also Ping (mark the aimed spot for everyone) and Regroup (clients: back to the host, bh-011)
 ##   free screen   tap a loot label to pick it up; pinch to zoom the camera
 
 const STICK_RADIUS := 125.0
@@ -75,6 +76,12 @@ func _ready() -> void:
 		else:
 			b.glyph = String(pair[0])
 		b.hit_scale = 1.25
+	var pg := _make(&"ping", 34.0)
+	pg.icon = UIArt.ui_icon("warning")
+	pg.hit_scale = 1.25
+	var rg := _make(&"regroup", 34.0)
+	rg.icon = UIArt.ui_icon("teleport")
+	rg.hit_scale = 1.25
 	var mm := _make(&"minimap", 80.0)
 	mm.style = &"area"
 	mm.hit_scale = 1.0
@@ -145,6 +152,8 @@ func _layout() -> void:
 	button(&"pause").place(Vector2(gx - gap, gy))
 	button(&"bag").place(Vector2(gx, gy + gap))
 	button(&"chat").place(Vector2(gx - gap, gy + gap))
+	button(&"ping").place(Vector2(gx - gap * 2.0, gy))
+	button(&"regroup").place(Vector2(gx - gap * 2.0, gy + gap))
 	var mmb := button(&"minimap")
 	mmb.place(mm.get_center(), mm.size.x * 0.5)
 	queue_redraw()
@@ -223,6 +232,9 @@ func _sync_active(active: bool) -> void:
 		_was_active = active
 	for b in _buttons:
 		b.visible = active
+	# party-only buttons
+	button(&"ping").visible = active and Net.is_active()
+	button(&"regroup").visible = active and Net.is_client()
 
 func _refresh() -> void:
 	var p := player
@@ -248,29 +260,33 @@ func _refresh() -> void:
 	var dmax: float = p.stats.get_stat(&"dodge_cooldown", 1.0) if p.stats else 1.0
 	button(&"dodge").set_state(p.dodge_cd, dmax)
 	button(&"roll").set_state(p.dodge_cd, dmax)
-	for pair in [[&"potion_health", &"heal"], [&"potion_mana", &"mana"]]:
-		var pb := button(pair[0])
-		var n := 0
-		var best: StringName = &""
-		for bid in Player.POTION_ORDER[pair[1]]:
-			var cnt := hero.inventory.count_of(bid)
-			n += cnt
-			if cnt > 0 and best == &"":
-				best = bid
-		if best == &"":
-			best = &"health_potion" if pair[1] == &"heal" else &"mana_potion"
+	for i in HeroData.BELT_SIZE:
+		# the orbs use whatever the potion belt holds (bh-011: any consumable, chosen in the Bag)
+		var pb := button(&"potion_health" if i == 0 else &"potion_mana")
+		var bp := hero.belt_preview(i)
+		var best: StringName = bp.base
 		var base := DB.item_base(best)
 		if base and pb.get_meta(&"base", &"") != best:
 			pb.set_meta(&"base", best)
 			pb.set_icon(load(base.icon_path()) if ResourceLoader.exists(base.icon_path()) else null)
-		pb.set_state(p.potion_cd, Player.POTION_COOLDOWN, false, n)
+		pb.set_state(p.potion_cd, Player.POTION_COOLDOWN, false, int(bp.count))
 	_place_potions()
 	var it := button(&"interact")
 	it.visible = _interact_text != ""
 	if it.visible:
 		it.caption = _short(_interact_text)
-		it.icon = UIArt.ui_icon("check" if _interact_text.begins_with("Pick up") else ("talk" if _interact_text.begins_with("Talk") else "info"))
+		it.icon = UIArt.ui_icon(_interact_icon(_interact_text))
 		it.queue_redraw()
+
+## The Interact button's picture for the verb on offer.
+static func _interact_icon(t: String) -> String:
+	if t.begins_with("Pick up"):
+		return "check"
+	if t.begins_with("Talk"):
+		return "talk"
+	if t.begins_with("Travel") or t.begins_with("Use Waypoint") or t.contains("Portal"):
+		return "teleport"
+	return "info"
 
 static func _short(t: String) -> String:
 	return t if t.length() <= 26 else t.substr(0, 24) + "…"
@@ -422,6 +438,11 @@ func _release(b: TouchButton, idx: int, pos: Vector2) -> void:
 		&"pause":
 			if Game.ui_root:
 				Game.ui_root.back()
+		&"ping":
+			if player:
+				player.ping_here()
+		&"regroup":
+			Net.regroup()
 		_:
 			if String(b.id).begins_with("skill_") and idx == _aim_touch:
 				_aim_touch = -99

@@ -51,6 +51,8 @@ func _rebuild() -> void:
 	var items: Array
 	if _death:
 		items = [["Respawn", _respawn, &"PrimaryButton"]]
+		if Net.is_client():
+			items.append(["Respawn beside %s" % Net.host_name(), _respawn_beside_host, &""])
 		var cp := Game.checkpoint_name()
 		if cp != "":
 			items.append(["Wake at %s" % cp, _respawn_checkpoint, &""])
@@ -98,6 +100,8 @@ func show_death() -> void:
 	_sub.text = "Respawn at this area's entrance%s%s" % [
 		(",\nor wake at %s." % cp) if cp != "" else ".\nRest at a camp bonfire to set a checkpoint.",
 		("\nYou will lose %d gold." % lost) if lost > 0 else ""]
+	if Net.is_active() and Net.player_count() > 1:
+		_sub.text = "A friend can revive you right here: they stand beside you and press Interact.\n" + _sub.text
 	_rebuild()
 	visible = true
 	modulate.a = 0.0
@@ -112,6 +116,12 @@ func close() -> void:
 func _respawn() -> void:
 	visible = false
 	Game.respawn_player()
+
+## In someone else's world: get up at the entrance, then regroup at the host's side (bh-011).
+func _respawn_beside_host() -> void:
+	visible = false
+	await Game.respawn_player()
+	Net.regroup()
 
 func _respawn_checkpoint() -> void:
 	visible = false

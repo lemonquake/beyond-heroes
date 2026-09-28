@@ -523,7 +523,7 @@ func set_action_rate(rate: float) -> void:
 		tree.set("parameters/%s_ts/scale" % _slot, rate)
 
 func stop_action() -> void:
-	if _in_action:
+	if _in_action and not _dead:       # the death pose is not an action to cancel (a fallen co-op hero stood up, bh-011)
 		_end_action()
 
 func current_action() -> StringName:

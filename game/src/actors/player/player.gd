@@ -526,11 +526,13 @@ func _read_input(delta: float) -> void:
 		if idx < 0 or not Input.is_action_pressed(StringName("skill_%d" % (idx + 1))):
 			_stop_channel()
 	if Input.is_action_just_pressed(&"potion_health"):
-		use_potion(&"heal")
+		use_belt(0)
 	if Input.is_action_just_pressed(&"potion_mana"):
-		use_potion(&"mana")
+		use_belt(1)
 	if Input.is_action_just_pressed(&"interact"):
 		interact()
+	if Input.is_action_just_pressed(&"ping"):
+		ping_here()
 	if Input.is_action_just_pressed(&"zoom_in"):
 		camera.zoom(-1)
 	elif Input.is_action_just_pressed(&"zoom_out"):
@@ -1218,6 +1220,39 @@ func use_potion(kind: StringName) -> bool:
 	if item == null:
 		Events.notify.emit("No %s potions" % ("health" if kind == &"heal" else "mana"), &"error")
 		Audio.play_ui(&"ui_error")
+		return false
+	return consume_item(item)
+
+var _ping_t := -99.0
+
+## Mark the aimed spot for the party (G; the touch Ping button): the cursor on a PC, the auto-aim target or the spot
+## ahead in touch play (bh-011). Rate-limited so nobody can flood the others' screens.
+func ping_here() -> void:
+	if _time - _ping_t < 1.0 or not is_inside_tree():
+		return
+	_ping_t = _time
+	Net.ping(CombatQuery.ground_at(get_world_3d(), aim_point + Vector3.UP * 0.5))
+
+## Drink (or use) what belt slot `slot` is bound to (HeroData.potion_belt): an auto slot drinks the strongest draught of
+## its kind; a chosen consumable is used exactly like a right-click on it in the bag (bh-011).
+func use_belt(slot: int) -> bool:
+	if hero == null or slot < 0 or slot >= HeroData.BELT_SIZE or not alive:
+		return false
+	var id: StringName = hero.potion_belt[slot]
+	if id == HeroData.BELT_AUTO_HEAL:
+		return use_potion(&"heal")
+	if id == HeroData.BELT_AUTO_MANA:
+		return use_potion(&"mana")
+	var item: ItemInstance = null
+	for c in hero.inventory.cells:
+		if c != null and c.base.id == id:
+			item = c
+			break
+	if item == null:
+		Events.notify.emit("No %s left" % HeroData.belt_label(id), &"error")
+		Audio.play_ui(&"ui_error")
+		return false
+	if potion_cd > 0.0 and (item.base.consumable_effect.has("heal") or item.base.consumable_effect.has("mana")):
 		return false
 	return consume_item(item)
 

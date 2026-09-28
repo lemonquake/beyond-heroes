@@ -10,6 +10,8 @@ var _no: Button
 var _on_yes: Callable
 var _extra: Control
 
+signal cancelled                     # Cancel / Back / Escape (bh-011: a party travel request answers "Stay")
+
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -49,8 +51,9 @@ func _ready() -> void:
 	_yes = UIWindow.button("Confirm", _confirm, &"PrimaryButton", 190.0)
 	h.add_child(_yes)
 
-func ask(title: String, text: String, on_yes: Callable, yes_text := "Confirm", danger := false, extra: Control = null) -> void:
+func ask(title: String, text: String, on_yes: Callable, yes_text := "Confirm", danger := false, extra: Control = null, no_text := "Cancel") -> void:
 	_title.text = title
+	_no.text = no_text
 	_text.text = text
 	_yes.text = yes_text
 	_yes.add_theme_color_override("font_color", Color(1.0, 0.6, 0.5) if danger else Color(1.0, 0.93, 0.78))
@@ -70,7 +73,10 @@ func _confirm() -> void:
 		_on_yes.call()
 
 func cancel() -> void:
+	var was := visible
 	visible = false
+	if was:
+		cancelled.emit()
 
 func _unhandled_input(e: InputEvent) -> void:
 	if not visible:

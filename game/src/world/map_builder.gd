@@ -71,13 +71,19 @@ func compose() -> void:
 static func bake_navigation(map: MapRoot) -> void:
 	if map.nav_region and map.nav_region.navigation_mesh:
 		map.nav_region.bake_navigation_mesh(false)
-		# push the result to the server now (the region otherwise picks it up a frame later)
-		NavigationServer3D.region_set_navigation_mesh(map.nav_region.get_rid(), map.nav_region.navigation_mesh)
+		var region := map.nav_region.get_rid()
 		var nav_map := map.nav_region.get_navigation_map()
-		# Godot 4.5+ rebuilds maps asynchronously by default; a freshly loaded map must be queryable at once
-		# (spawners and AI path on the first frame), so this map syncs on the main thread.
+		# Godot 4.5+ syncs regions and maps asynchronously by default; a freshly loaded map must be queryable at once
+		# (the spawner snaps every monster onto the navmesh; AI paths on the first frame), so both sync on the main
+		# thread. With only the map synchronous the region's polygons arrived a frame late: every spawn query answered
+		# (0, 0, 0) and camps fell back to their marker's height — monsters under the Ruined Forest bridge, and inside
+		# the tower mound, where they fell out of the world and paid the hero experience (bh-011).
+		if NavigationServer3D.has_method(&"region_set_use_async_iterations"):
+			NavigationServer3D.call(&"region_set_use_async_iterations", region, false)
 		if NavigationServer3D.has_method(&"map_set_use_async_iterations"):
 			NavigationServer3D.call(&"map_set_use_async_iterations", nav_map, false)
+		# push the result to the server now (the region otherwise picks it up a frame later)
+		NavigationServer3D.region_set_navigation_mesh(region, map.nav_region.navigation_mesh)
 		NavigationServer3D.map_force_update(nav_map)
 
 ## Give the map its own navigation map (tests build several maps side by side; each must path in isolation).

@@ -76,11 +76,21 @@ When you are not on the same Wi-Fi, the game cannot find your friend by itself. 
 ## While you play together
 
 - **Who goes where:** the party follows the Host. When the Host takes a door or a waypoint, everyone moves with them.
-  Friends cannot take doors or waypoints by themselves.
+- **Want to go somewhere?** A Friend can step on a waypoint or walk into a door too. The Host then sees
+  **"Mira wants the party to go to Olivar"** with two buttons: **Go** (everyone travels) or **Stay**.
+- **Lost the group?** Press **Regroup** (in the Multiplayer window, or the waypoint-swirl button on a phone), or click
+  the Host's box on the left of the screen. You jump right next to the Host.
+- **Party boxes:** on the left of the screen, under your Tempos, every friend has a box with their picture, their
+  health bar, how far away they are, and their ping.
 - **Monsters:** everyone fights the same monsters. Everyone who is on the map gets experience when a monster dies.
 - **Loot:** everyone gets their **own** loot. Nobody can take your drops.
 - **Your stuff stays yours:** your bag, gold, shops and saves stay on your own game.
 - **Helping each other:** a Knight's **aura** (like Aura of Might) also helps friends who stand close to the Knight.
+- **A friend fell down?** Walk next to them. The button says **Revive Mira**. Press **R** (on a phone, tap the
+  **Interact** button) and they stand up right there. If you fall, wait for a friend, or press **Respawn**
+  (a Friend can also pick **Respawn beside** the Host).
+- **"Look here!"** Press **G** (on a phone, tap the **!** button) to put a glowing marker with your name on the
+  ground. Everybody sees it for 5 seconds.
 - **Talking:** press **Enter** to open the chat, type, and press **Enter** again to send.
   On a phone, tap **Chat**, type, and tap **Send**.
 - **Who is who:** real players have a name like **◆ Mira ◆** in their own colour, a glowing ring at their feet, and a
@@ -104,6 +114,9 @@ When you are not on the same Wi-Fi, the game cannot find your friend by itself. 
 |---|---|
 | "Different game versions" | Update the game on both computers so they match, then try again. |
 | The Host's world is not in the Join list | Type the room code instead. Check that you are both on the same Wi-Fi. |
+| "No answer from K7QM-2XF" (after 10 seconds) | The code may be wrong, or the Host has not pressed **Host Game**, or you are not on the same Wi-Fi / VPN. Check and press **Join** again. |
+| You played together yesterday | Open **Multiplayer** and press **Rejoin** with the old code (it only works if the Host's address did not change). |
+| The Host wants someone to leave | The Host presses **Send Home** next to their name in the Party list. |
 | "Could not connect to the host" | Check the code. Make sure the Host pressed **Host Game** and is still playing. Ask a grown-up to check the Windows "Allow access" question on the Host's PC. |
 | "Could not open port 24680" | Another copy of the game is already hosting on that PC. Close it and try again. |
 | The Join button says **Full** | 4 heroes are already playing. Wait for someone to leave. |

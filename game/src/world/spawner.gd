@@ -108,12 +108,19 @@ func _spawn_zone(m: Marker3D) -> void:
 		spawned.append(e)
 		camps.get_or_add(String(m.name).trim_prefix("EnemyZone_"), []).append(e)
 
+## Where a monster may stand near `p`: the closest navmesh point (a camp marker's height is only a hint — the ground
+## rises and falls across a camp, and a bridge camp's marker sits in the ravine below the deck). Without a usable
+## navmesh answer, the ground under `p` found by a ray from above: never the raw marker height, which buried monsters
+## in hillsides (they fell out of the world and paid the hero experience) or left them under bridges (bh-011).
 func _nav_point(p: Vector3) -> Vector3:
 	var nm := map.nav_region.get_navigation_map() if map.nav_region else RID()
-	if nm.is_valid():
+	if nm.is_valid() and NavigationServer3D.map_get_iteration_id(nm) > 0:
 		var q := NavigationServer3D.map_get_closest_point(nm, p)
-		if q.is_finite() and q.distance_to(p) < 4.0:
+		if q.is_finite() and q != Vector3.ZERO and Vector2(q.x - p.x, q.z - p.z).length() < 4.0 and absf(q.y - p.y) < 9.0:
 			return q
+	if map.is_inside_tree():
+		var local := map.to_local(p)
+		return map.to_global(Vector3(local.x, NpcDirectory.ground_height(map, local), local.z))
 	return p
 
 ## One or two elite modifiers (two from level 6).

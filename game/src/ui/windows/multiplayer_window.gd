@@ -3,6 +3,8 @@ extends UIWindow
 ## Multiplayer (bh-008): open your running world to others (Host), join someone on the same network from the list or
 ## by room code or address (Join), see who is in the party (with each player's ping), and leave. PC and phones play
 ## together. Hosting shows a big room code ("K7QM-2XF") that the others type to join (bh-010).
+## bh-011: Rejoin the last room with one press, Regroup (clients: back to the host's side), Send Home (host: remove a
+## player), and a short "playing together" guide (travel requests, revive, ping).
 
 var _status: Label
 var _host_btn: Button
@@ -13,6 +15,9 @@ var _address: LineEdit
 var _party: VBoxContainer
 var _join_box: Control
 var _code: Label
+var _rejoin: Button
+var _regroup: Button
+var _tips: Label
 
 func _init() -> void:
 	super._init("Multiplayer", Vector2(1180, 820))
@@ -45,10 +50,20 @@ func _build() -> void:
 	left.add_child(section("Party"))
 	_party = vbox(6)
 	left.add_child(_party)
-	_leave_btn = button("Leave", _on_leave, &"", 260.0)
+	var lrow := hbox(12)
+	lrow.alignment = BoxContainer.ALIGNMENT_CENTER
+	left.add_child(lrow)
+	_regroup = button("Regroup", func() -> void:
+		Net.regroup()
+		close_window(), &"", 220.0)
+	_regroup.custom_minimum_size.y = 60 if touch else 48
+	TooltipLayer.attach(_regroup, func() -> Control: return Tips.text("Jump back to the host's side (after respawning at the entrance, or when you wandered off)."))
+	lrow.add_child(_regroup)
+	_leave_btn = button("Leave", _on_leave, &"", 220.0)
 	_leave_btn.custom_minimum_size.y = 60 if touch else 48
-	_leave_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	left.add_child(_leave_btn)
+	lrow.add_child(_leave_btn)
+	_tips = _text("")
+	left.add_child(_tips)
 	# right: join
 	var right := vbox(12)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -77,6 +92,10 @@ func _build() -> void:
 	var jb := button("Join", func() -> void: _on_join(_address.text), &"PrimaryButton", 160.0)
 	jb.custom_minimum_size.y = _address.custom_minimum_size.y
 	row.add_child(jb)
+	_rejoin = button("", func() -> void: _on_join(Net.last_room), &"", 360.0)
+	_rejoin.custom_minimum_size.y = 58 if touch else 44
+	_rejoin.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	right.add_child(_rejoin)
 	Net.state_changed.connect(refresh)
 	Net.peers_changed.connect(refresh)
 	Net.lan_games_changed.connect(_fill_lan)
@@ -89,6 +108,8 @@ func _text(t: String) -> Label:
 func open() -> void:
 	super.open()
 	Net.start_discovery()
+	if _address and _address.text == "" and Net.last_room != "":
+		_address.text = Net.last_room
 
 func close_window() -> void:
 	if not Net.is_active() or Net.is_host():
@@ -110,6 +131,15 @@ func refresh() -> void:
 	_host_btn.disabled = Net.is_active()
 	_leave_btn.visible = Net.is_active()
 	_leave_btn.text = "Close World" if Net.is_host() else "Leave"
+	_regroup.visible = Net.is_client() and not Net.connecting
+	_rejoin.visible = Net.last_room != "" and not Net.is_active()
+	_rejoin.text = "Rejoin %s" % Net.last_room
+	_tips.visible = Net.is_active()
+	var lead := "You lead: everyone follows you through waypoints and doors. When a friend takes one, you are asked Go / Stay." \
+		if Net.is_host() else "The host leads. Take a waypoint or door to ask them to go there. Regroup jumps back to their side."
+	var interact := "Interact" if Settings.touch_mode else Settings.binding_text(&"interact")
+	var ping := "The Ping button" if Settings.touch_mode else Settings.binding_text(&"ping")
+	_tips.text = "Playing together:\n• %s\n• A fallen friend: stand beside them and press %s to revive them.\n• %s marks a spot for everyone. Each hero keeps their own loot and gets the experience." % [lead, interact, ping]
 	_join_box.modulate.a = 0.45 if Net.is_active() else 1.0
 	var codes := Net.room_codes()
 	if codes.is_empty():
@@ -152,7 +182,14 @@ func _fill_party() -> void:
 		var ping_txt := (" · %d ms" % ping) if ping >= 0 else ""
 		var sub := UITheme.label("%s · %s%s" % [p.get("device", "PC"), map.display_name if map else "travelling", ping_txt], 16,
 			(UITheme.BAD if ping > 250 else UITheme.TEXT_DIM), UITheme.body_font())
+		sub.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		h.add_child(sub)
+		if Net.is_host() and id != 1:
+			var pid: int = id
+			var kb := button("Send Home", func() -> void:
+				Game.ui_root.ask("Send Home", "Send %s back to their own world?" % p.get("name", "this hero"), func() -> void: Net.kick(pid), "Send Home", true), &"", 150.0)
+			kb.custom_minimum_size.y = 52 if Settings.touch_mode else 38
+			h.add_child(kb)
 		_party.add_child(h)
 
 func _fill_lan() -> void:

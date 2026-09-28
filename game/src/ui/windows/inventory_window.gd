@@ -4,6 +4,8 @@ extends UIWindow
 ## active set bonuses. Right: category tabs, search, rarity filter, sorting, the 60-cell bag, gold, and an action bar
 ## for the selected item: Equip/Use, Split, Lock, Favorite, Mark to sell, Drop, Destroy (confirmed).
 ## Mouse: left select · right Equip/Use · Shift+left Split · drag to move, merge, equip or unequip · double-click Equip.
+## Potion Belt row (bh-011): what Q / E (the HP / Mana orbs on a phone) use — click a slot to choose, drop a consumable on
+## it, press "Put on Q/E" for the selected consumable, or hover a consumable and press Q or E.
 
 const CELL := 62.0
 const SLOT_LAYOUT := {
@@ -43,6 +45,10 @@ var _btn_fav: Button
 var _btn_junk: Button
 var _btn_drop: Button
 var _btn_destroy: Button
+var _belt_slots: Array[SkillButton] = []
+var _belt_names: Array[Label] = []
+var _btn_belt: Array[Button] = []
+var _hover_slot: ItemSlot
 
 func _init() -> void:
 	super._init("Inventory", Vector2(1560, 900))
@@ -87,6 +93,7 @@ func _build_paper_doll() -> Control:
 		l.size = Vector2(112, 20)
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		doll.add_child(l)
+	col.add_child(_build_belt())
 	var info := hbox(14)
 	col.add_child(info)
 	var sum_box := inset(Vector2(330, 0))
@@ -101,6 +108,42 @@ func _build_paper_doll() -> Control:
 	_sets = vbox(2)
 	set_box.add_child(_sets)
 	return col
+
+func _build_belt() -> Control:
+	var box := inset(Vector2(620, 0))
+	var row := hbox(12)
+	box.add_child(row)
+	var t := UITheme.label("Potion Belt", 18, UITheme.GOLD, UITheme.title_font())
+	t.custom_minimum_size = Vector2(118, 0)
+	t.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(t)
+	for i in HeroData.BELT_SIZE:
+		var b := SkillButton.new(&"potion_health" if i == 0 else &"potion_mana", 54.0)
+		b.set_potion(&"health_potion" if i == 0 else &"mana_potion")
+		b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		var slot := i
+		b.activated.connect(func(sb: SkillButton) -> void: BeltPicker.open(sb, hero, slot))
+		b.context.connect(func(sb: SkillButton) -> void: BeltPicker.open(sb, hero, slot))
+		b.item_dropped.connect(func(_sb: SkillButton, it: ItemInstance) -> void: if it: BeltPicker.bind(hero, slot, it.base.id))
+		TooltipLayer.attach(b, func() -> Control: return Tips.text("Click to choose what %s uses. You can also drag a consumable here%s." % [
+			BeltPicker.slot_name(slot), "" if Settings.touch_mode else ", or hover one in the bag and press %s" % BeltPicker.slot_name(slot)], "Potion Belt"))
+		row.add_child(b)
+		_belt_slots.append(b)
+		var n := UITheme.label("", 15, UITheme.PARCHMENT, UITheme.body_font())
+		n.custom_minimum_size = Vector2(180, 0)
+		n.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		n.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(n)
+		_belt_names.append(n)
+	return box
+
+func _refresh_belt() -> void:
+	for i in _belt_slots.size():
+		var bp := hero.belt_preview(i)
+		if bp.base != _belt_slots[i].potion_base:
+			_belt_slots[i].set_potion(bp.base)
+		_belt_slots[i].update_state(0.0, 0.0, "", int(bp.count))
+		_belt_names[i].text = HeroData.belt_label(hero.potion_belt[i])
 
 func _equip_slot(slot: StringName, px := 76.0) -> ItemSlot:
 	var s := ItemSlot.new(ItemSlot.Kind.EQUIPMENT, px)
@@ -222,9 +265,19 @@ func _build_bag() -> Control:
 	_btn_junk = button("Mark to Sell", func() -> void: _toggle_flag("junk"), &"", 150.0)
 	_btn_drop = button("Drop", func() -> void: _drop(_sel_item()), &"", 96.0)
 	_btn_destroy = button("Destroy", func() -> void: _destroy(_sel_item()), &"", 120.0)
+	for i in HeroData.BELT_SIZE:
+		var slot := i
+		_btn_belt.append(button("Put on %s" % BeltPicker.slot_name(i), func() -> void:
+			if _sel_item():
+				BeltPicker.bind(hero, slot, _sel_item().base.id), &"", 150.0))
 	for b in [_btn_use, _btn_split, _btn_lock, _btn_fav, _btn_junk, _btn_drop, _btn_destroy]:
 		b.custom_minimum_size.y = 46
 		_actions.add_child(b)
+	var belt_row := hbox(6)
+	av.add_child(belt_row)
+	for b in _btn_belt:
+		b.custom_minimum_size.y = 46
+		belt_row.add_child(b)
 	var hint := UITheme.label("Hold: equip or use · Drag onto a slot to equip · Double-tap an equipped item to remove it · Split with the Split button" if Settings.touch_mode else "Right-click: equip or use · Shift+click: split stack · Drag onto a slot to equip · Double-click an equipped item to remove it",
 		14, UITheme.TEXT_MUTED, UITheme.body_font())
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -268,6 +321,7 @@ func _refresh_items() -> void:
 	_refresh_load()
 	preview.dress(hero)
 	_refresh_summary()
+	_refresh_belt()
 	_update_actions()
 
 func _refresh_load() -> void:
@@ -369,6 +423,10 @@ func _update_actions() -> void:
 	_btn_junk.text = "Keep" if has and it.junk else "Mark to Sell"
 	_btn_drop.disabled = not has or it.is_protected() or it.base.is_quest() or equipped
 	_btn_destroy.disabled = not has or it.is_protected() or it.base.is_quest() or equipped
+	# a consumable can go on the potion belt; the belt buttons replace Drop/Destroy's neighbours only while it is selected
+	for i in _btn_belt.size():
+		_btn_belt[i].visible = has and it.base.is_consumable() and not equipped
+		_btn_belt[i].text = "Put on %s" % BeltPicker.slot_name(i)
 
 func _on_cell_clicked(s: ItemSlot, button: int, shift: bool, _ctrl: bool) -> void:
 	if s.item == null:
@@ -394,15 +452,32 @@ func _on_equip_clicked(s: ItemSlot, button: int, _shift: bool, _ctrl: bool) -> v
 
 func _on_hover(s: ItemSlot, inside: bool) -> void:
 	if not inside:
+		if _hover_slot == s:
+			_hover_slot = null
 		TooltipLayer.hide_for(s)
 		return
+	_hover_slot = s
 	if s.item == null:
 		if s.kind == ItemSlot.Kind.EQUIPMENT:
 			TooltipLayer.show_for(s, func() -> Control: return Tips.text("Empty. Drag an item here to equip it.", BH.SLOT_NAMES[s.equip_slot]))
 		return
 	var equipped := s.kind == ItemSlot.Kind.EQUIPMENT
 	var hint := "Right-click to unequip" if equipped else ("Right-click to use" if s.item.base.is_consumable() else ("Right-click to equip" if s.item.is_equipment() else ""))
+	if not equipped and s.item.base.is_consumable() and not Settings.touch_mode:
+		hint += " · %s / %s: put on the belt" % [BeltPicker.slot_name(0), BeltPicker.slot_name(1)]
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(s.item, {"hero": hero, "equipped": equipped, "hint": hint}))
+
+## Hover a consumable in the bag and press a belt key (Q / E): that key now uses it.
+func _unhandled_input(e: InputEvent) -> void:
+	if not visible or hero == null or _hover_slot == null or not is_instance_valid(_hover_slot) or _hover_slot.item == null:
+		return
+	if _hover_slot.kind != ItemSlot.Kind.INVENTORY or not _hover_slot.item.base.is_consumable():
+		return
+	for i in HeroData.BELT_SIZE:
+		if e.is_action_pressed(&"potion_health" if i == 0 else &"potion_mana"):
+			BeltPicker.bind(hero, i, _hover_slot.item.base.id)
+			get_viewport().set_input_as_handled()
+			return
 
 func _use(it: ItemInstance) -> void:
 	if it == null:

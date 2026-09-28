@@ -7,6 +7,8 @@ extends Control
 
 signal activated(slot: SkillButton)
 signal skill_dropped(slot: SkillButton, skill_id: StringName)
+signal context(slot: SkillButton)                       # right-click (a belt slot opens its picker)
+signal item_dropped(slot: SkillButton, item: ItemInstance)  # a bag item dropped on a belt slot
 
 var action: StringName = &""        # input action shown on the plaque
 var skill_id: StringName = &""
@@ -151,11 +153,19 @@ func _gui_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 		activated.emit(self)
 		accept_event()
+	elif e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_RIGHT:
+		context.emit(self)
+		accept_event()
 
 func _can_drop_data(_at: Vector2, data: Variant) -> bool:
+	if kind == &"potion":
+		return data is Dictionary and data.has("bh_item_slot") and data.bh_item_slot.item != null and data.bh_item_slot.item.base.is_consumable()
 	return kind == &"skill" and data is Dictionary and data.has("bh_skill")
 
 func _drop_data(_at: Vector2, data: Variant) -> void:
+	if kind == &"potion":
+		item_dropped.emit(self, data.bh_item_slot.item)
+		return
 	skill_dropped.emit(self, StringName(data.bh_skill))
 
 func _get_drag_data(_at: Vector2) -> Variant:

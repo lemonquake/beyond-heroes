@@ -6,6 +6,9 @@ extends Node3D
 ## Presentation: rune glow that brightens when discovered/active, idle motes, a light, a hum loop, a charge-up
 ## beam + flash on use. Discovery registers the teleporter on the hero (for the world-map UI).
 ## The actual map change goes through `Game.travel`, which shows the loading screen.
+## Using it goes through the player's interact system like a door or an NPC (group "interactable"): the R key, a pad
+## and the touch Interact button all press the same action the player polls. (It used to listen for a key *event* in
+## _unhandled_input, which a touch button never sends — waypoints could not be used on phones, bh-011.)
 ## Network shrines (DataIsland.NETWORK: the town terrace, the forest glade, Tideglass Cove) also reach every other
 ## shrine the hero has awakened: with more than one destination, activating asks where to go. "Discovered" (stepped
 ## on, recorded in unlocked_teleporters even while locked) and "awakened" (a usable network destination) are separate.
@@ -24,6 +27,8 @@ signal activated(teleporter: Teleporter)
 const RUNE_ACTIVE := Color(0.35, 0.85, 1.0)
 const RUNE_LOCKED := Color(0.35, 0.3, 0.45)
 
+var interact_range := 2.1                       # flat metres from the dais centre (the dais is 1.3 m across the runes)
+
 var _area: Area3D
 var _light: OmniLight3D
 var _motes: GPUParticles3D
@@ -34,6 +39,7 @@ var _hum: AudioStreamPlayer3D
 
 func _ready() -> void:
 	add_to_group(&"teleporter")
+	add_to_group(&"interactable")
 	_build()
 	refresh_state()
 
@@ -117,16 +123,11 @@ func _on_body_entered(body: Node3D) -> void:
 	refresh_state()
 	if is_locked():
 		Events.notify.emit(locked_hint, &"locked")
-		Events.interact_prompt.emit("")
 		Audio.play(&"ui_error", -6.0)
-		return
-	var dests := destinations()
-	Events.interact_prompt.emit("Travel to %s" % dests[0].name if dests.size() == 1 else "Use the waypoint (%d destinations)" % dests.size())
 
 func _on_body_exited(body: Node3D) -> void:
 	if body == _player_inside:
 		_player_inside = null
-		Events.interact_prompt.emit("")
 
 func discover() -> void:
 	if Game.hero == null:
@@ -159,10 +160,22 @@ func destinations() -> Array:
 			out.append({"map": n.map, "spawn": n.spawn, "name": n.name})
 	return out
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _player_inside and event.is_action_pressed(&"interact"):
-		activate()
-		get_viewport().set_input_as_handled()
+# ---- Interactable -----------------------------------------------------------------------------------------------
+
+func can_interact(_p: Node) -> bool:
+	return not _busy and not is_locked() and destination_map != &"" and not Game.travelling
+
+func interact_text() -> String:
+	var dests := destinations()
+	if dests.size() == 1:
+		return "Travel to %s" % dests[0].name
+	return "Use Waypoint (%d places)" % dests.size()
+
+func interact_anim() -> StringName:
+	return &"interact_teleport"
+
+func interact(_p: Node) -> void:
+	activate()          # a client's travel becomes a request to the host (Game.travel, bh-011)
 
 ## True when activating now would start travel (not locked, not mid-charge, has a destination).
 func activate_would_travel() -> bool:

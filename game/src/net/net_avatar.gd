@@ -4,6 +4,7 @@ extends Actor
 ## as the original, with a name tag and a health bar. On the host it is a real target: monsters chase it and hit it,
 ## and every hit is forwarded to the machine that owns the original, which resolves it against the real hero. Nothing
 ## it does changes the world by itself.
+## A fallen human hero is an interactable (bh-011): stand beside them and press Interact to revive them.
 
 const LERP_RATE := 14.0
 
@@ -23,6 +24,7 @@ var _ring: MeshInstance3D            # human heroes: a ring in their colour at t
 var _bar: MeshInstance3D
 var _bar_mat: StandardMaterial3D
 var _was_alive := true
+var interact_range := 2.4
 
 func _init() -> void:
 	team = BH.Team.PLAYER
@@ -43,6 +45,7 @@ func _ready() -> void:
 	add_to_group(&"net_ally")
 	if is_hero:
 		add_to_group(&"net_hero")
+		add_to_group(&"interactable")      # only offered while fallen (can_interact)
 	collision_layer = BH.LAYER_PLAYER
 	collision_mask = 0                  # moved by snapshots, never pushed
 	var cs := CollisionShape3D.new()
@@ -165,7 +168,7 @@ func apply_state(s: Array) -> void:
 		_refresh_tag()
 	elif _tag and _tag.text.find(display_name) < 0:
 		_refresh_tag()
-	if visual:
+	if visual and now_alive:
 		var act := StringName(s[6])
 		var serial := int(s[7])
 		if serial != _serial:
@@ -180,6 +183,7 @@ func apply_state(s: Array) -> void:
 	if now_alive != _was_alive:
 		_was_alive = now_alive
 		alive = now_alive
+		_refresh_tag()
 		if visual:
 			if not now_alive:
 				visual.play_death(&"death")
@@ -216,7 +220,7 @@ func _refresh_tag() -> void:
 		return
 	var p: Dictionary = Net.peers.get(owner_peer, {})
 	if is_hero:
-		_tag.text = "◆ %s ◆" % display_name
+		_tag.text = ("◆ %s ◆" % display_name) if alive else ("◆ %s · Fallen ◆" % display_name)
 		if _sub:
 			var cls := DB.class_def(StringName(p.get("cls", "")))
 			_sub.text = "Level %d %s · %s%s" % [level, cls.display_name if cls else "Hero", p.get("device", "PC"), " · Host" if owner_peer == 1 else ""]
@@ -246,3 +250,17 @@ func apply_knockback(_dir: Vector3, _speed: float, _source: DerivedStats, _sourc
 
 func in_combat() -> bool:
 	return _engaged
+
+# ---- Interactable: revive a fallen friend (bh-011) -----------------------------------------------------------------
+
+func can_interact(p: Node) -> bool:
+	return is_hero and not alive and p is Player and (p as Player).alive
+
+func interact_text() -> String:
+	return "Revive %s" % display_name
+
+func interact_anim() -> StringName:
+	return &"interact_teleport"
+
+func interact(_p: Node) -> void:
+	Net.revive(self)

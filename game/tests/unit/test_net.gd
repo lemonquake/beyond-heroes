@@ -31,7 +31,7 @@ func test_typed_o_reads_as_zero() -> void:
 	done()
 
 func test_protocol_bumped_for_new_classes() -> void:
-	ok(Net.PROTOCOL >= 2, "bh-010 clients refuse bh-008 hosts (protocol %d)" % Net.PROTOCOL)
+	ok(Net.PROTOCOL >= 3, "bh-011 clients refuse older hosts: travel requests, revive and ping are new messages (protocol %d)" % Net.PROTOCOL)
 	for sid in [&"aura_might", &"aura_mending", &"aura_defiance", &"aura_fervor"]:
 		var s := DB.skill(sid)
 		ok(s != null and s.is_aura(), "%s is an aura" % sid)

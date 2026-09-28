@@ -10,16 +10,19 @@ extends Node
 ##             the host; a monster's blow on a NetAvatar is sent to the avatar's owner and resolved against the real
 ##             hero there (guard, dodge, resistances all count). Kills are announced; every hero in the map gets the
 ##             experience and rolls their own loot (instanced loot: nobody steals anybody's drops).
-##   Travel    the party follows the host: when the host changes maps the clients load the same map. Clients cannot
-##             take doors or waypoints on their own while connected.
-##   Chat      the chat box is shared.
+##   Travel    the party follows the host: when the host changes maps the clients load the same map. A client who
+##             takes a door, waypoint or scroll asks the host instead ("Mira wants to go to Olivar": Go / Stay);
+##             Regroup puts a client who wandered off back beside the host (bh-011).
+##   Revive    a fallen hero can be stood up again by a friend: stand beside them and press Interact (bh-011).
+##   Ping      G (or the touch Ping button) marks a spot every player sees for a few seconds (bh-011).
+##   Chat      the chat box is shared; joins and leaves also show as notices.
 ## Everything else (inventory, shops, crafting, dialogue, saving) stays per player, on their own machine.
 
 signal state_changed
 signal peers_changed
 signal lan_games_changed
 
-const PROTOCOL := 2                  # 2 (bh-010): Ranger / Shadowblade, auras, shared skill effects
+const PROTOCOL := 3                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping
 const PORT := 24680
 const DISCOVERY_PORT := 24681
 const MAX_CLIENTS := 3
@@ -28,6 +31,10 @@ const ENEMY_RATE := 12.0
 const ENEMY_RANGE := 70.0            # monsters farther than this from a client's hero are not streamed to it
 const APPEARANCE_EVERY := 30         # full appearance every N ally snapshots (and whenever gear changes)
 const GONE_AFTER := 4.0
+const CONNECT_TIMEOUT := 10.0        # seconds a join may take before it is given up with a clear message
+const REVIVE_HP := 0.4               # a friend's revive stands you up with this share of your HP
+const PING_LIFE := 5.0
+const RECENT_PATH := "user://net_recent.cfg"
 
 enum Mode { OFFLINE, HOST, CLIENT }
 
@@ -54,6 +61,11 @@ var _replica_seen := {}              # client: eid -> time of the last snapshot 
 var _avatars := {}                   # "peer:key" -> NetAvatar
 var _app_sig := {}                   # local ally key -> appearance hash (resend on change)
 var _unloading := false              # the old map is leaving the tree: its monsters are not "gone", the map is
+var _connect_t := 0.0
+var _joining_addr := ""
+var _travel_pending := {}            # host: the request being asked about {from, req}
+var _travel_asked_t := -99.0         # client: when this machine last asked (one request at a time)
+var last_room := ""                  # the last room code / address this machine joined (Multiplayer > Rejoin)
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -67,6 +79,10 @@ func _ready() -> void:
 	Game.session_ended.connect(func() -> void:
 		if is_active():
 			leave(false))
+	Events.player_leveled.connect(func(_l: int, _g: int) -> void: update_profile())
+	var cfg := ConfigFile.new()
+	if cfg.load(RECENT_PATH) == OK:
+		last_room = String(cfg.get_value("net", "last_room", ""))
 
 # ---- State --------------------------------------------------------------------------------------------------------
 
@@ -134,6 +150,7 @@ func join_game(address: String, port := PORT) -> String:
 	if not Game.in_session:
 		return "Start or continue a game first, then join."
 	address = address.strip_edges()
+	var typed := address
 	if address == "":
 		return "Type the host's room code."
 	var code := NetCodec.parse_room_code(address, PORT)
@@ -148,6 +165,8 @@ func join_game(address: String, port := PORT) -> String:
 	multiplayer.multiplayer_peer = _peer
 	mode = Mode.CLIENT
 	connecting = true
+	_connect_t = 0.0
+	_joining_addr = typed
 	last_error = ""
 	state_changed.emit()
 	return ""
@@ -187,16 +206,28 @@ func _on_peer_disconnected(id: int) -> void:
 	_known.erase(id)
 	_remove_avatars_of(id)
 	if is_host():
-		_chat_system("%s left." % who)
+		_chat_system("%s left." % who, true)
 		_rpc_peers()
+	if _travel_pending.get("from", 0) == id:
+		_travel_pending = {}
 	peers_changed.emit()
 
 func _on_connected() -> void:
 	connecting = false
+	_remember_room(_joining_addr)
 	_hello.rpc_id(1, protocol_override if protocol_override >= 0 else PROTOCOL, _profile())
 
+## Remember the room a join reached, for Multiplayer > Rejoin (never a probe's loopback address).
+func _remember_room(addr: String) -> void:
+	if addr == "" or addr.begins_with("127.") or addr == NetCodec.room_code("127.0.0.1", PORT, PORT):
+		return
+	last_room = addr
+	var cfg := ConfigFile.new()
+	cfg.set_value("net", "last_room", addr)
+	cfg.save(RECENT_PATH)
+
 func _on_connection_failed() -> void:
-	last_error = "Could not connect to the host."
+	last_error = "Could not connect to the host. Check the room code and that the host pressed Host Game."
 	Events.notify.emit(last_error, &"error")
 	leave(false)
 
@@ -220,7 +251,7 @@ func _hello(proto: int, profile: Dictionary) -> void:
 	var p := Game.player as Node3D
 	_welcome.rpc_id(id, {"map": String(Game.current_map_id), "pos": p.global_position if p else Vector3.ZERO,
 		"yaw": p.rotation.y if p else 0.0, "peers": peers})
-	_chat_system("%s joined (%s)." % [profile.get("name", "A hero"), profile.get("device", "PC")])
+	_chat_system("%s joined (%s)." % [profile.get("name", "A hero"), profile.get("device", "PC")], true)
 	_rpc_peers()
 	peers_changed.emit()
 
@@ -293,7 +324,7 @@ func _in_map(map: String) -> void:
 ## May this machine take a door, a waypoint or a portal right now? (Clients follow the host.)
 func may_travel() -> bool:
 	if is_client() and not following:
-		Events.notify.emit("The party follows %s. Only the host can lead it elsewhere." % peers.get(1, {}).get("name", "the host"), &"locked")
+		Events.notify.emit("The party follows %s. Only the host can lead it elsewhere." % host_name(), &"locked")
 		return false
 	return true
 
@@ -386,7 +417,14 @@ func _process(delta: float) -> void:
 		if _bcast_t <= 0.0:
 			_bcast_t = 1.0
 			_broadcast()
-	if connecting or not Game.in_session or Game.travelling or following:
+	if connecting:
+		_connect_t += delta
+		if _connect_t > CONNECT_TIMEOUT:
+			last_error = "No answer from %s. Check the room code, that the host pressed Host Game, and that you are on the same network (or the same VPN)." % _joining_addr
+			Events.notify.emit(last_error, &"error")
+			leave(false)
+		return
+	if not Game.in_session or Game.travelling or following:
 		return
 	_ally_t -= delta
 	if _ally_t <= 0.0:
@@ -836,13 +874,236 @@ func _chat(who: String, text: String) -> void:
 		var col := player_color(multiplayer.get_remote_sender_id())
 		Game.ui_root.chat.add_line("◆ %s: %s" % [who, text.substr(0, 160)], col.lightened(0.2))
 
-func _chat_system(text: String) -> void:
+func _chat_system(text: String, notice := false) -> void:
 	if Game.ui_root and is_instance_valid(Game.ui_root):
 		Game.ui_root.chat.add_line(text, UITheme.GOLD)
+	if notice:
+		Events.notify.emit(text, &"info")
 	if is_host():
-		_chat_sys_remote.rpc(text)
+		_chat_sys_remote.rpc(text, notice)
 
 @rpc("authority", "reliable")
-func _chat_sys_remote(text: String) -> void:
+func _chat_sys_remote(text: String, notice := false) -> void:
 	if Game.ui_root and is_instance_valid(Game.ui_root):
 		Game.ui_root.chat.add_line(text, UITheme.GOLD)
+	if notice:
+		Events.notify.emit(text, &"info")
+
+# ---- Profile updates (bh-011) -------------------------------------------------------------------------------------
+
+## Tell the others this hero's level / map changed (party frames, name plates).
+func update_profile() -> void:
+	if not is_active() or connecting:
+		return
+	if is_host():
+		peers[1] = _profile()
+		_rpc_peers()
+	else:
+		_profile_changed.rpc_id(1, _profile())
+
+@rpc("any_peer", "reliable")
+func _profile_changed(profile: Dictionary) -> void:
+	var id := multiplayer.get_remote_sender_id()
+	if not is_host() or not peers.has(id):
+		return
+	var keep: String = peers[id].get("map", "")
+	peers[id] = profile
+	if keep != "":
+		peers[id]["map"] = keep
+	_rpc_peers()
+
+# ---- Party travel requests (bh-011) -------------------------------------------------------------------------------
+
+## A client stepped through a door / onto a waypoint / read a scroll: ask the host to take the party there.
+## req: {"kind": "travel" | "door" | "point", "map": id, "spawn": id, "pos": Vector3, "yaw": float}. True when asked.
+func request_travel(req: Dictionary) -> bool:
+	if not is_client() or connecting:
+		return false
+	var map := StringName(req.get("map", ""))
+	if map == Game.current_map_id and String(req.get("kind", "travel")) != "point":
+		return false
+	var now := Time.get_ticks_msec() * 0.001
+	if now - _travel_asked_t < 6.0:
+		Events.notify.emit("Waiting for %s to answer." % host_name(), &"info")
+		return false
+	_travel_asked_t = now
+	_travel_request.rpc_id(1, req)
+	Events.notify.emit("Asked %s to lead the party to %s." % [host_name(), place_name(map)], &"info")
+	return true
+
+func host_name() -> String:
+	return String(peers.get(1, {}).get("name", "the host"))
+
+static func place_name(map: StringName) -> String:
+	var d := DB.map_def(map)
+	return d.display_name if d else String(map)
+
+## The travel request the host is being asked about ({} when none).
+func pending_travel() -> Dictionary:
+	return _travel_pending
+
+@rpc("any_peer", "reliable")
+func _travel_request(req: Dictionary) -> void:
+	if not is_host() or not Game.in_session:
+		return
+	var from := multiplayer.get_remote_sender_id()
+	var map := StringName(req.get("map", ""))
+	if DB.map_def(map) == null or not peers.has(from):
+		return
+	if not _travel_pending.is_empty():
+		_travel_answer.rpc_id(from, false, "%s is answering another request." % String(peers[1].name))
+		return
+	_travel_pending = {"from": from, "req": req, "t": Time.get_ticks_msec()}
+	var serial: int = _travel_pending.t
+	var who: String = peers[from].get("name", "A hero")
+	Audio.play_ui(&"ui_open")
+	if Game.ui_root and is_instance_valid(Game.ui_root):
+		Game.ui_root.confirm.ask("Party Travel", "%s wants the party to go to %s. Everyone follows you." % [who, place_name(map)],
+			func() -> void: answer_travel(true), "Go", false, null, "Stay")
+		var c: Node = Game.ui_root.confirm
+		if c.has_signal(&"cancelled"):
+			c.connect(&"cancelled", func() -> void:
+				if _travel_pending.get("t", -1) == serial:
+					answer_travel(false), CONNECT_ONE_SHOT)
+	# nobody answered in time: the request lapses
+	get_tree().create_timer(20.0).timeout.connect(func() -> void:
+		if _travel_pending.get("t", -1) == serial:
+			if Game.ui_root and is_instance_valid(Game.ui_root) and Game.ui_root.confirm.visible:
+				Game.ui_root.confirm.visible = false
+			answer_travel(false, "%s did not answer." % host_name().capitalize()))
+
+## The host's answer to the pending request: Go travels (everyone follows), Stay tells the asker.
+func answer_travel(go: bool, why := "") -> void:
+	if not is_host() or _travel_pending.is_empty():
+		return
+	var from: int = _travel_pending.from
+	var req: Dictionary = _travel_pending.req
+	_travel_pending = {}
+	if peers.has(from):
+		_travel_answer.rpc_id(from, go, why if why != "" else ("" if go else "%s wants to stay here for now." % String(peers[1].name)))
+	if not go:
+		return
+	_chat_system("The party travels to %s." % place_name(StringName(req.map)), true)
+	match String(req.get("kind", "travel")):
+		"door": Game.door_travel(StringName(req.map), StringName(req.get("spawn", "start")))
+		"point": Game.travel_to_point(StringName(req.map), req.get("pos", Vector3.ZERO), float(req.get("yaw", 0.0)))
+		_: Game.travel(StringName(req.map), StringName(req.get("spawn", "start")))
+
+@rpc("authority", "reliable")
+func _travel_answer(go: bool, why: String) -> void:
+	_travel_asked_t = -99.0
+	if not go and why != "":
+		Events.notify.emit(why, &"info")
+
+# ---- Regroup (bh-011) ---------------------------------------------------------------------------------------------
+
+## A client who wandered off (or respawned at the entrance) goes back to the host's side.
+func regroup() -> void:
+	if not is_client() or connecting or following or Game.travelling:
+		return
+	var p := Game.player as Player
+	if p == null or not p.alive:
+		return
+	_ask_regroup.rpc_id(1)
+
+@rpc("any_peer", "reliable")
+func _ask_regroup() -> void:
+	if not is_host():
+		return
+	var p := Game.player as Node3D
+	if p == null:
+		return
+	_regroup_to.rpc_id(multiplayer.get_remote_sender_id(), String(Game.current_map_id), p.global_position, p.rotation.y)
+
+@rpc("authority", "reliable")
+func _regroup_to(map: String, pos: Vector3, yaw: float) -> void:
+	if not is_client() or Game.travelling:
+		return
+	if StringName(map) != Game.current_map_id:
+		_follow(StringName(map), pos, yaw)
+		return
+	var pl := Game.player as Player
+	if pl == null:
+		return
+	var spot := pos + Vector3(cos(yaw), 0.0, -sin(yaw)) * 1.8
+	if Game.current_map and Game.current_map.is_inside_tree():
+		spot = CombatQuery.reachable_point(Game.current_map.get_world_3d(), pos, spot, 0.4)
+		spot = CombatQuery.ground_at(Game.current_map.get_world_3d(), spot + Vector3.UP * 1.5)
+	FX.spawn(VFXLib.ring_wave(Color(0.55, 0.9, 1.0, 0.9), 2.0, 0.5), pl.global_position)
+	pl.teleport_to(spot)
+	pl.on_teleported()
+	TempoParty.regroup(pl)
+	FX.spawn(VFXLib.light_pillar(Color(0.55, 0.9, 1.0), 4.0, 0.8, 0.6), spot)
+	Audio.play_at(&"teleport_whoosh", spot, -4.0)
+	Events.notify.emit("Back at %s's side." % host_name(), &"info")
+
+# ---- Revive (bh-011) ----------------------------------------------------------------------------------------------
+
+## This machine's hero stands beside a fallen friend and revives them.
+func revive(av: NetAvatar) -> void:
+	if not is_active() or av == null or not is_instance_valid(av) or av.alive or not av.is_hero:
+		return
+	var h := Game.hero
+	_revived.rpc_id(av.owner_peer, h.hero_name if h else "A friend")
+	FX.spawn(VFXLib.light_pillar(Color(1.0, 0.9, 0.55), 5.0, 1.0, 0.8), av.global_position)
+	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.5, 0.9), 3.0, 0.6), av.global_position)
+	Audio.play_at(&"holy_chime", av.global_position)
+	Events.notify.emit("You revived %s." % av.display_name, &"info")
+
+@rpc("any_peer", "reliable")
+func _revived(by: String) -> void:
+	revive_local(by)
+
+## Stand this machine's fallen hero up where they fell (a friend's revive).
+func revive_local(by: String) -> bool:
+	var p := Game.player as Player
+	if p == null or not is_instance_valid(p) or p.alive or not Game.in_session:
+		return false
+	p.respawn()
+	p.hp = p.max_hp() * REVIVE_HP
+	p.health_changed.emit(p.hp, p.max_hp())
+	if Game.ui_root and is_instance_valid(Game.ui_root) and Game.ui_root.pause_menu.visible:
+		Game.ui_root.pause_menu.close()
+	FX.spawn(VFXLib.light_pillar(Color(1.0, 0.9, 0.55), 5.0, 1.0, 0.8), p.global_position)
+	Audio.play_at(&"holy_chime", p.global_position)
+	Events.player_respawned.emit()
+	Events.notify.emit("%s revived you!" % by, &"loot")
+	return true
+
+# ---- Ping markers (bh-011) ----------------------------------------------------------------------------------------
+
+## Mark a spot for the whole party (offline it marks it just for you).
+func ping(at: Vector3) -> void:
+	var h := Game.hero
+	var who := h.hero_name if h else "You"
+	show_ping(at, who, player_color(my_id()) if is_active() else PLAYER_COLORS[0])
+	if is_active():
+		_remote_ping.rpc(String(Game.current_map_id), at, who)
+
+@rpc("any_peer", "unreliable")
+func _remote_ping(map: String, at: Vector3, who: String) -> void:
+	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
+		return
+	show_ping(at, who, player_color(multiplayer.get_remote_sender_id()))
+	Events.notify.emit("%s marked a spot." % who, &"info")
+
+func show_ping(at: Vector3, who: String, col: Color) -> void:
+	if FX.world == null or not is_instance_valid(FX.world):
+		return
+	var n := PingMarker.new()
+	n.setup(who, col, PING_LIFE)
+	FX.world.add_child(n)
+	n.global_position = at
+	Audio.play_at(&"ui_hover", at, 4.0)
+
+# ---- Host: send a player home (bh-011) ----------------------------------------------------------------------------
+
+func kick(id: int) -> void:
+	if not is_host() or id == 1 or not peers.has(id):
+		return
+	var who: String = peers[id].get("name", "A hero")
+	_rejected.rpc_id(id, "The host sent you back to your own world.")
+	get_tree().create_timer(0.4).timeout.connect(func() -> void:
+		if _peer:
+			_peer.disconnect_peer(id))
+	_chat_system("%s was sent home by the host." % who, true)

@@ -51,6 +51,7 @@ var _spark_cd := 0.0
 var _regen_block := 0.0
 var _elite_t := 0.0
 var _last_hit_t := 99.0
+var _falls := 0                     # times it fell out of the world on its own (see _fell_out)
 var _idle_sound_t := 0.0
 var _think_offset := 0.0
 var _phase_lock := 0.0
@@ -1343,6 +1344,34 @@ func _spark(to: Node3D) -> void:
 	pr.homing_target = to
 	pr.max_range = 16.0
 	pr.radius = 0.25
+
+## Below the world. Knocked off a ledge by someone in the last few seconds: that someone gets the kill. Fallen on its
+## own (a bad spawn, a physics hiccup): it quietly returns to its camp — a fall is never a free kill paying the hero
+## experience and loot (bh-011: monsters spawned inside the Ruined Forest's tower mound did exactly that on arrival).
+func _fell_out() -> void:
+	if _last_hit_t < 6.0 and last_attacker and is_instance_valid(last_attacker):
+		die(last_attacker)
+		return
+	_falls += 1
+	if _falls > 3:
+		# it keeps falling from its own camp: take it out of the world without a death (no reward, no camp credit)
+		alive = false
+		remove_from_group(&"enemy")
+		if bar:
+			bar.queue_free()
+			bar = null
+		queue_free()
+		return
+	var spot := home
+	var nm := get_world_3d().navigation_map
+	if NavigationServer3D.map_get_iteration_id(nm) > 0:
+		var q := NavigationServer3D.map_get_closest_point(nm, home)
+		if q.is_finite() and q != Vector3.ZERO:
+			spot = q
+	global_position = spot + Vector3.UP * 0.3
+	velocity = Vector3.ZERO
+	knock_velocity = Vector3.ZERO
+	_vertical = 0.0
 
 func die(killer: Node) -> void:
 	if not alive:
