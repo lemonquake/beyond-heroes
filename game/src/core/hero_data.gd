@@ -8,6 +8,7 @@ signal inventory_changed
 signal skills_changed
 
 const SKILL_BAR_SIZE := 6
+const START_TOWN_PORTALS := 5 # free Town Portal Scrolls in a new hero's bag
 
 var cls: ClassDef
 var hero_name := "Hero"
@@ -134,6 +135,9 @@ func init_new() -> void:
 	var mp := DB.make_item(&"mana_potion", BH.Rarity.COMMON, 1, 2)
 	mp.count = 3
 	inventory.add(mp)
+	var tp := DB.make_item(&"town_portal", BH.Rarity.COMMON, 1, 3)
+	tp.count = START_TOWN_PORTALS
+	inventory.add(tp)
 	discovered_maps[&"sanctuary"] = true
 	awakened_shrines[&"sanctuary_waypoint"] = true
 

@@ -47,7 +47,7 @@ func test_enter_opens_chat() -> void:
 	done()
 
 func test_codes_are_recognised() -> void:
-	for c in ["lemonq", "LEMONQ", "  azrin ", "Azrael"]:
+	for c in ["lemonq", "LEMONQ", "  azrin ", "Azrael", "taicho", "Greg"]:
 		ok(Cheats.is_code(c), "'%s' is a code" % c)
 	for c in ["", "lemon", "lemonqq", "azrin now", "hello"]:
 		ok(not Cheats.is_code(c), "'%s' is not a code" % c)
@@ -61,6 +61,20 @@ func test_lemonq_gives_gold() -> void:
 	eq(h.inventory.gold, g0 + 5000, "+5000 gold")
 	Cheats.apply("LemonQ", h)
 	eq(h.inventory.gold, g0 + 10000, "works again, any case")
+	done()
+
+func test_taicho_and_greg_give_1000_gold() -> void:
+	var h := Game.new_hero(&"mage", "Gold")
+	var g0 := h.inventory.gold
+	ok(Cheats.apply("taicho", h).begins_with("Cheat:"), "taicho reports the cheat")
+	eq(h.inventory.gold, g0 + 1000, "taicho: +1000 gold")
+	Cheats.apply("GREG", h)
+	eq(h.inventory.gold, g0 + 2000, "greg: +1000 gold, any case")
+	done()
+
+func test_new_hero_starts_with_five_town_portals() -> void:
+	var h := Game.new_hero(&"knight", "Portal")
+	eq(h.inventory.count_of(&"town_portal"), 5, "5 free Town Portals")
 	done()
 
 func test_azrin_levels_up_three() -> void:

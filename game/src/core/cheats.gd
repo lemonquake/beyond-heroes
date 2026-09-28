@@ -1,12 +1,15 @@
 class_name Cheats
 ## Cheat codes typed into the chat box (ChatBox). Codes are case-insensitive and must be the whole message.
 ##   lemonq  +5000 gold
+##   taicho  +1000 gold
+##   greg    +1000 gold
 ##   azrin   +3 levels (levels, points and all, exactly as if earned)
 ##   azrael  full HP and mana (the hero and every living Tempo at their side)
 
 const GOLD := 5000
+const SMALL_GOLD := 1000
 const LEVELS := 3
-const CODES := {"lemonq": "gold", "azrin": "levels", "azrael": "restore"}
+const CODES := {"lemonq": "gold", "taicho": "small_gold", "greg": "small_gold", "azrin": "levels", "azrael": "restore"}
 
 static func is_code(text: String) -> bool:
 	return CODES.has(text.strip_edges().to_lower())
@@ -15,12 +18,9 @@ static func is_code(text: String) -> bool:
 static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 	match String(CODES.get(text.strip_edges().to_lower(), "")):
 		"gold":
-			if hero == null:
-				return "No hero to give gold to."
-			hero.inventory.gold += GOLD
-			hero.inventory.changed.emit()
-			Audio.play_ui(&"gold_pickup")
-			return "Cheat: +%d gold (now %d)." % [GOLD, hero.inventory.gold]
+			return _give_gold(hero, GOLD)
+		"small_gold":
+			return _give_gold(hero, SMALL_GOLD)
 		"levels":
 			if hero == null:
 				return "No hero to level up."
@@ -43,3 +43,11 @@ static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 					a.restore_mana(a.max_mana())
 			return "Cheat: HP and mana fully restored."
 	return ""
+
+static func _give_gold(hero: HeroData, amount: int) -> String:
+	if hero == null:
+		return "No hero to give gold to."
+	hero.inventory.gold += amount
+	hero.inventory.changed.emit()
+	Audio.play_ui(&"gold_pickup")
+	return "Cheat: +%d gold (now %d)." % [amount, hero.inventory.gold]

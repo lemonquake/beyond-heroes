@@ -425,10 +425,11 @@ func test_portal_never_opens_inside_scenery() -> void:
 		walls.append(_pillar(p.global_position + d, Vector3(0.6 if d.x != 0.0 else 4.0, 3.5, 0.6 if d.z != 0.0 else 4.0)))
 	await host.get_tree().physics_frame
 	await host.get_tree().physics_frame
+	var had := p.hero.inventory.count_of(&"town_portal") # a new hero starts with some
 	var scroll := DB.make_item(&"town_portal", BH.Rarity.COMMON, 1, 1)
 	p.hero.inventory.add(scroll)
 	ok(not p.consume_item(scroll), "no portal in a cramped spot")
-	eq(p.hero.inventory.count_of(&"town_portal"), 1, "the scroll is not used up")
+	eq(p.hero.inventory.count_of(&"town_portal"), had + 1, "the scroll is not used up")
 	for w in walls:
 		w.free()
 	_end()
