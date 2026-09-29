@@ -61,7 +61,8 @@ static func refresh(hero: HeroData) -> void:
 	for t in TempoRules.active(hero):
 		keep[t.uid] = true
 	for a in actors():
-		if a is Tempo and (not keep.has(a.data.uid) or not hero.tempos.has(a.data)) and a.alive:
+		# only this hero's own spirits: a Quake Team ally (and the Tempo it binds) belongs to another hero
+		if a is Tempo and a.hero == hero and (not keep.has(a.data.uid) or not hero.tempos.has(a.data)) and a.alive:
 			a.queue_free()
 	spawn_for(map, player, hero)
 

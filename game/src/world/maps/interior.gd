@@ -193,6 +193,10 @@ func _guildhouse() -> void:
 	item("bench", Vector3(2.6, 0, 3.2))
 	for lp in [Vector3(-3.5, 0, 1.0), Vector3(3.5, 0, 1.0)]:
 		lamp(kit("hanging_lantern", lp, 0.0, 1.0, deco), WARM, 2.0, 8.0)
+	# the hero's own guild banner (bh-017), centred on the north wall above the reception
+	var gb := GuildBannerDisplay.new()
+	gb.position = Vector3(0, 2.3, z0 + HALF_WALL + 0.05)
+	markers.add_child(gb)
 	# the two job boards you can read (the notice boards on the side walls)
 	for side in [[&"swordfin", Vector3(x0 + 1.0, 0, 0.2)], [&"lantern", Vector3(x1 - 1.0, 0, 0.2)]]:
 		var jb := GuildJobBoard.new()

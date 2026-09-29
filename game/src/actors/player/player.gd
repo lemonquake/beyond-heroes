@@ -480,10 +480,9 @@ func _regen(delta: float) -> void:
 	if stats.has_flag(&"still_mana") and _still_t >= 1.0:
 		mr *= 1.0 + stats.flag(&"still_mana")
 		hr *= 1.5
-	if status.has(&"purged"):
-		hr *= 0.5
 	if status.has(&"regen"):
 		hr += status.magnitude(&"regen")
+	hr *= status.heal_taken_mult()
 	if hp < max_hp():
 		hp = minf(max_hp(), hp + hr * delta)
 		health_changed.emit(hp, max_hp())

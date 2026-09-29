@@ -135,7 +135,7 @@ static func _nell() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ camp staff
 static func _hobb() -> NpcDef:
 	return NpcDef.make(&"hobb", "Hobb Tanner", {"title": "Quartermaster", "portrait": _p("quartermaster", "swordfin_quartermaster"), "map": MAP,
-		"position": Vector3(-4.0, 0, 19.8), "yaw": 180.0, "model": "res://assets/characters/merchant.glb", "tint": Color(0.4, 0.34, 0.22),
+		"position": DataTownRows.npc_spot(&"hobb").position, "yaw": DataTownRows.npc_spot(&"hobb").yaw, "model": "res://assets/characters/merchant.glb", "tint": Color(0.4, 0.34, 0.22),
 		"shop": &"wyman_supplies", "idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
@@ -151,7 +151,7 @@ static func _hobb() -> NpcDef:
 
 static func _greta() -> NpcDef:
 	return NpcDef.make(&"greta", "Greta Stonehand", {"title": "Field Smith", "portrait": _p("field_smith", "blacksmith"), "map": MAP,
-		"position": Vector3(17.6, 0, 13.4), "yaw": -130.0, "model": "res://assets/characters/smith.glb", "tint": Color(0.36, 0.28, 0.22),
+		"position": DataTownRows.npc_spot(&"greta").position, "yaw": DataTownRows.npc_spot(&"greta").yaw, "model": "res://assets/characters/smith.glb", "tint": Color(0.36, 0.28, 0.22),
 		"shop": &"wyman_outfitter", "idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],

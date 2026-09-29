@@ -141,14 +141,14 @@ static func relic_items(tier: int, level: int, rng: RandomNumberGenerator, magic
 			rarity = maxi(rarity, int(c.floor))
 		if tier == 2 and i == 1 and rng.randf() < 0.25:
 			rarity = maxi(rarity, BH.Rarity.LEGENDARY)
-		var base := random_base(rng, ilvl, [], class_hint if rng.randf() < 0.6 else &"")
+		var base := random_base(rng, ilvl, [], class_hint)
 		if base == null:
 			continue
 		var r2 := RandomNumberGenerator.new()
 		r2.seed = rng.randi()
 		out.append(generate(base, ilvl, rarity, r2))
 	if tier >= 1 and rng.randf() < (0.06 if tier == 1 else 0.18):
-		var sb := random_special(rng, ilvl + 4, rng.randf() < 0.6)
+		var sb := random_special(rng, ilvl + 4, rng.randf() < 0.6, class_hint)
 		if sb:
 			var r3 := RandomNumberGenerator.new()
 			r3.seed = rng.randi()
@@ -252,9 +252,34 @@ static func _weighted_pick(pool: Array, rng: RandomNumberGenerator, used: Dictio
 			return a
 	return null
 
+## bh-017: the share of a hero's equipment drops (and class-hinted merchant stock) that is the hero's own class gear.
+const CLASS_FIT_CHANCE := 0.72
+
+## Armor weight each class wears: knights plate, everyone else cloth (rangers and shadowblades also keep the gambeson).
+const CLASS_ARMOR := {&"knight": [&"heavy"], &"mage": [&"cloth"], &"ranger": [&"cloth"], &"shadowblade": [&"cloth"]}
+
+## Whether `base` is gear meant for `class_id`: a weapon the class has mastery in, armor of the class's weight, a shield
+## for a knight. Accessories suit everyone, so they are never "class gear".
+static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
+	if class_id == &"" or base == null:
+		return false
+	var cd := DB.class_def(class_id)
+	if cd == null:
+		return base.class_hint == class_id
+	if base.category == &"weapon":
+		return cd.weapon_mastery.has(base.weapon_type)
+	if base.category == &"shield":
+		return class_id == &"knight"
+	if base.category in [&"helm", &"armor", &"inner_garment", &"gloves", &"boots"]:
+		if (CLASS_ARMOR.get(class_id, [&"heavy"]) as Array).has(base.weight_class):
+			return true
+		return base.category == &"inner_garment" and base.weight_class == &"heavy" and class_id in [&"ranger", &"shadowblade"]
+	return false
+
 ## Random base eligible at an item level (weighted), optionally restricted to categories. Set pieces and uniques are
-## excluded — they come from dedicated drop rolls (elites/bosses) and special merchant stock.
-static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array = [], class_hint := &"") -> ItemBaseDef:
+## excluded — they come from dedicated drop rolls (elites/bosses) and special merchant stock. With a `class_hint`,
+## `fit_chance` of the picks come from that class's own gear (bh-017: a Knight is offered plate and blades, not robes).
+static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array = [], class_hint := &"", fit_chance := CLASS_FIT_CHANCE) -> ItemBaseDef:
 	var pool := []
 	var total := 0
 	for b in DB.item_bases.values():
@@ -267,6 +292,10 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 		pool.append(b)
 	if pool.is_empty():
 		return null
+	if class_hint != &"" and rng.randf() < fit_chance:
+		var mine := pool.filter(func(b): return class_fit(b, class_hint))
+		if not mine.is_empty():
+			pool = mine
 	pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	var weights := []
 	for b in pool:
@@ -274,8 +303,6 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 		# Recent bases are favoured so drops keep pace with the hero; far outleveled bases fade out.
 		if ilvl - b.drop_level > 12:
 			w = maxi(1, w / 4)
-		if class_hint != &"" and b.class_hint == class_hint:
-			w *= 2
 		weights.append(w)
 		total += w
 	var r := rng.randi_range(1, total)
@@ -306,7 +333,7 @@ static func random_consumable(rng: RandomNumberGenerator, ilvl: int) -> ItemBase
 			return b
 	return pool[-1]
 
-static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool) -> ItemBaseDef:
+static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool, class_hint := &"") -> ItemBaseDef:
 	var pool := []
 	for b in DB.item_bases.values():
 		if b.drop_level > ilvl:
@@ -317,5 +344,9 @@ static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool
 			pool.append(b)
 	if pool.is_empty():
 		return null
+	if class_hint != &"" and rng.randf() < CLASS_FIT_CHANCE:
+		var mine := pool.filter(func(b): return b.class_hint == class_hint or class_fit(b, class_hint))
+		if not mine.is_empty():
+			pool = mine
 	pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	return pool[rng.randi_range(0, pool.size() - 1)]

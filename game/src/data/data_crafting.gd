@@ -16,8 +16,8 @@ const R := BH.Rarity
 const ICON3D := "res://assets/ui/icons/items3d/%s.png"
 
 const STATIONS := {
-	&"forge": {"name": "Forge", "verb": "Forge", "text": "Metalwork: ingots, whetstones, weapons and armor. Salvage gear for its metal."},
-	&"alchemy": {"name": "Alchemy Table", "verb": "Brew", "text": "Draughts, tonics, wards and elixirs from herbs and monster parts."},
+	&"forge": {"name": "Forge", "verb": "Forge", "text": "Metalwork: ingots, whetstones, weapons and armor. Salvage gear for its metal. Refit a weapon: Fore-Tech."},
+	&"alchemy": {"name": "Alchemy Table", "verb": "Brew", "text": "Draughts, tonics, wards and elixirs from herbs and monster parts. Etch a rune on a weapon: Enchantment."},
 	&"workbench": {"name": "Workbench", "verb": "Make", "text": "Leather, bombs, scrolls and charms. Salvage gear for hide and cloth."},
 }
 
@@ -149,6 +149,17 @@ static func recipes() -> Array:
 			"inputs": [[&"wisp_mote", 2], [&"mirebloom", 2], [&"brightcap", 1]], "out": {"base": &"sages_infusion", "count": 1}},
 		{"id": &"fortune_elixir", "name": "Elixir of Fortune", "stations": A, "group": "Tonics and Wards", "level": 10, "gold": 40,
 			"inputs": [[&"champion_essence", 1], [&"brightcap", 3], [&"arcane_dust", 2]], "out": {"base": &"fortune_elixir", "count": 1}},
+		# ---- bh-017: elixirs of the five new buffs ----
+		{"id": &"vigor_draught", "name": "Draught of Vigor", "stations": A, "group": "Tonics and Wards", "level": 6, "gold": 10, "known": true,
+			"inputs": [[&"silverleaf", 3], [&"beast_hide", 1], [&"brightcap", 1]], "out": {"base": &"vigor_draught", "count": 1}},
+		{"id": &"keen_tonic", "name": "Keen-Eye Tonic", "stations": A, "group": "Tonics and Wards", "level": 7, "gold": 12, "known": true,
+			"inputs": [[&"wolf_fang", 2], [&"brightcap", 2], [&"arcane_dust", 1]], "out": {"base": &"keen_tonic", "count": 1}},
+		{"id": &"windstep_tonic", "name": "Windstep Tonic", "stations": A, "group": "Tonics and Wards", "level": 6, "gold": 10, "known": true,
+			"inputs": [[&"wisp_mote", 2], [&"mirebloom", 1], [&"wolf_fang", 1]], "out": {"base": &"windstep_tonic", "count": 1}},
+		{"id": &"titan_brew", "name": "Titan's Brew", "stations": A, "group": "Tonics and Wards", "level": 10, "gold": 24, "known": true,
+			"inputs": [[&"ogre_sinew", 2], [&"orc_tusk", 2], [&"emberroot", 2]], "out": {"base": &"titan_brew", "count": 1}},
+		{"id": &"spirit_ward_draught", "name": "Spirit Ward Draught", "stations": A, "group": "Tonics and Wards", "level": 8, "gold": 16, "known": true,
+			"inputs": [[&"ash_sigil", 1], [&"storm_essence", 1], [&"silverleaf", 2]], "out": {"base": &"spirit_ward_draught", "count": 1}},
 		{"id": &"phoenix_feather", "name": "Phoenix Feather", "stations": A, "group": "Tonics and Wards", "level": 12, "gold": 120,
 			"inputs": [[&"champion_essence", 2], [&"ember_core", 3], [&"emberroot", 4]], "out": {"base": &"phoenix_feather", "count": 1},
 			"text": "Burns by itself when a killing blow lands and you rise with half your HP."},
@@ -161,6 +172,10 @@ static func recipes() -> Array:
 			"inputs": [[&"frost_crystal", 1], [&"goblin_resin", 1]], "out": {"base": &"frost_flask", "count": 2}},
 		{"id": &"smoke_pellet", "name": "Smoke Pellet", "stations": W, "group": "Bombs and Scrolls", "level": 5, "gold": 4, "known": true,
 			"inputs": [[&"grave_dust", 2], [&"stolen_linen", 1]], "out": {"base": &"smoke_pellet", "count": 2}},
+		{"id": &"blinding_flask", "name": "Blinding Flask", "stations": W, "group": "Bombs and Scrolls", "level": 5, "gold": 5, "known": true,
+			"inputs": [[&"wisp_mote", 1], [&"goblin_resin", 1]], "out": {"base": &"blinding_flask", "count": 2}},
+		{"id": &"festering_bomb", "name": "Festering Bomb", "stations": W, "group": "Bombs and Scrolls", "level": 7, "gold": 6, "known": true,
+			"inputs": [[&"ghoul_bile", 1], [&"grave_dust", 1], [&"stolen_linen", 1]], "out": {"base": &"festering_bomb", "count": 2}},
 		{"id": &"town_portal", "name": "Town Portal Scroll", "stations": W, "group": "Bombs and Scrolls", "level": 2, "gold": 6, "known": true,
 			"inputs": [[&"stolen_linen", 1], [&"wisp_mote", 1]], "out": {"base": &"town_portal", "count": 1}},
 		{"id": &"hunters_charm", "name": "Hunter's Charm", "stations": W, "group": "Charms", "level": 3, "gold": 20, "known": true,

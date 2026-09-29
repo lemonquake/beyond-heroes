@@ -141,8 +141,8 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		var wt := DB.weapon_type(it.base.weapon_type)
 		var dr := it.damage_range()
 		v.add_child(_big_line("%d – %d" % [roundi(dr.x), roundi(dr.y)], "Damage", UITheme.PARCHMENT))
-		if it.base.element != Elements.PHYSICAL and it.base.element_share > 0.0:
-			v.add_child(lbl("%d%% as %s" % [roundi(it.base.element_share * 100.0), Elements.NAMES[it.base.element]], 15, Elements.color(it.base.element)))
+		if it.weapon_element() != Elements.PHYSICAL and it.weapon_element_share() > 0.0:
+			v.add_child(lbl("%d%% as %s" % [roundi(it.weapon_element_share() * 100.0), Elements.NAMES[it.weapon_element()]], 15, Elements.color(it.weapon_element())))
 		if wt:
 			v.add_child(lbl("%.2f attacks per second · %s%% critical chance · %.1f m reach" % [it.base.weapon_aps(), StatDefs._num(wt.crit_chance * 100.0), wt.reach], 15, UITheme.TEXT))
 			if wt.two_handed:
@@ -174,6 +174,20 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			v.add_child(lbl(line, 15, AFFIX))
 	for m in it.base.fixed_mods:
 		v.add_child(lbl(StatModifier_text(m), 15, AFFIX))
+	# bh-017: weapon upgrades
+	if it.enchant != &"" and it.enchant_rank > 0:
+		var ed := DataUpgrades.enchant(it.enchant)
+		v.add_child(gap(2))
+		v.add_child(lbl("%s %s" % [ed.name, DataUpgrades.roman(it.enchant_rank)], 16, ed.color, UITheme.body_bold()))
+		for m in DataUpgrades.enchant_mods(it.enchant, it.enchant_rank):
+			v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, m.value), 15, Color(ed.color, 0.9)))
+	if it.foretech != &"" and it.foretech_rank > 0:
+		var td := DataUpgrades.tech(it.foretech)
+		v.add_child(gap(2))
+		v.add_child(lbl("Fore-Tech: %s +%d" % [td.name, it.foretech_rank], 16, td.color, UITheme.body_bold()))
+		v.add_child(lbl("+%d%% weapon damage (tempered)" % roundi(DataUpgrades.TEMPER_PER_RANK * it.foretech_rank * 100.0), 15, Color(td.color, 0.9)))
+		for m in DataUpgrades.tech_mods(it.foretech, it.foretech_rank):
+			v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, m.value), 15, Color(td.color, 0.9)))
 	if it.license != &"":
 		var lic: Dictionary = DB.licenses.get(it.license, {})
 		v.add_child(gap(2))

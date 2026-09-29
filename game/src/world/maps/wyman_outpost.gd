@@ -22,8 +22,7 @@ const YARD := Vector2(-11, 24)
 const SHRINE := Vector2(-19.5, 15.5)
 const TOWER := Vector2(-20, -20)
 const OVERLOOK := Vector2(26, 0)
-const TENTS := [Vector2(-19, -11), Vector2(-9, -26), Vector2(13, -21), Vector2(21, -10), Vector2(10, 22), Vector2(20, 17),
-	Vector2(3, 26), Vector2(-24, 3)]
+const TENTS := [Vector2(-19, -11), Vector2(-9, -26), Vector2(13, -21), Vector2(21, -10), Vector2(-24, 3), Vector2(20, 24)]
 ## Gate crossings on the stockade (angle in degrees, measured with atan2(z, x)).
 var _north_gate := 0.0
 var _west_gate := 0.0
@@ -46,9 +45,7 @@ func compose() -> void:
 	_fire_ring()
 	_tents()
 	_lodge_and_register()
-	_quartermaster()
-	_forge_and_bench()
-	_kettle()
+	_trade_row()
 	_training_yard()
 	_tower_and_overlook()
 	_shrine()
@@ -65,7 +62,8 @@ func compose() -> void:
 	view("overview", Vector3(0, 0, 0), 0.0, 62.0, 100.0, 45.0)
 	view("topdown", Vector3(0, 0, -4), 0.0, 89.5, 118.0, 50.0)
 	view("bonfire", Vector3(0, 1, -2), 0.0, 48.0, 22.0)
-	view("forge", Vector3(14, 1, 8), -25.0, 45.0, 18.0)
+	view("forge", Vector3(4, 1, 20), 0.0, 50.0, 28.0)
+	view("row_gate", Vector3(4, 1, 15), 0.0, 40.0, 22.0)
 	view("yard", Vector3(-10, 1, 22), 20.0, 48.0, 20.0)
 	view("overlook", Vector3(30, 0, 0), -60.0, 35.0, 30.0)
 
@@ -112,7 +110,7 @@ func _splat(x: float, z: float) -> Color:
 	var marsh := smoothstep(MARSH_X - 6.0, MARSH_X + 2.0, x)
 	var r := clampf(maxf(maxf(trail, trodden * 0.7), fire) + n * 0.1, 0.0, 1.0)
 	var g := clampf(marsh + n * 0.3 + (1.0 - trodden) * 0.35, 0.0, 1.0) * (1.0 - trail)
-	var b := clampf(road * 0.8, 0.0, 1.0)
+	var b := clampf(maxf(road * 0.8, DataTownRows.paved(&"wyman_outpost", x, z) * 0.85), 0.0, 1.0)
 	return Color(r * (1.0 - b), g * (1.0 - b), b)
 
 # ------------------------------------------------------------------------------------------------------------
@@ -259,45 +257,12 @@ func _lodge_and_register() -> void:
 	light(Vector3(REGISTER.x + 2.3, height_at(REGISTER.x, REGISTER.y) + 1.8, REGISTER.y + 0.2), Color(1.0, 0.75, 0.45), 2.2, 7.0, false, true)
 	keep_clear(REGISTER.x, REGISTER.y, 2.5)
 
-func _quartermaster() -> void:
-	var q := kit("market_stall", Vector3(QUARTER.x, 0, QUARTER.y), 180.0, 1.0, props, true)
-	light(socket_pos(q, "light"), Color(1.0, 0.72, 0.42), 2.0, 7.0, false, true)
-	keep_clear(QUARTER.x, QUARTER.y, 3.5)
-	kit("cart_hay", Vector3(QUARTER.x - 5.0, 0, QUARTER.y + 1.5), 80.0, 1.0, props, true)
-	for p: Vector2 in [Vector2(2.6, 0.8), Vector2(3.4, 1.6), Vector2(-2.8, 1.8), Vector2(2.9, -0.4)]:
-		breakable("crate" if p.x > 0.0 else "barrel", Vector3(QUARTER.x + p.x, 0, QUARTER.y + p.y), rng.randf() * 90.0, 20.0, true)
-	keep_clear(QUARTER.x - 5.0, QUARTER.y + 1.5, 3.0)
-
-func _forge_and_bench() -> void:
-	var f := FORGE
-	kit("anvil", Vector3(f.x, 0, f.y), -60.0, 1.0, props, true)
-	brazier(Vector3(f.x + 1.6, 0, f.y - 1.6), 3.4, false, true)
-	kit("weapon_rack", Vector3(f.x + 2.4, 0, f.y + 1.8), -130.0, 1.0, props, true)
-	kit("armor_stand", Vector3(f.x - 1.0, 0, f.y + 2.8), 160.0, 1.0, props, true)
-	for p: Vector2 in [Vector2(3.4, -0.6), Vector2(3.9, 0.3)]:
-		breakable("barrel", Vector3(f.x + p.x, 0, f.y + p.y), rng.randf() * 360.0, 20.0, true)
-	crafting_station(&"forge", Vector3(f.x - 0.9, 0, f.y - 0.5), "Field Forge")
-	keep_clear(f.x, f.y, 4.0)
-	var b := BENCH
-	kit("table_long", Vector3(b.x, 0, b.y), 90.0, 1.0, props, true)
-	kit("trunk", Vector3(b.x + 1.2, 0, b.y - 2.2), 0.0, 1.0, props, true)
-	kit("crate", Vector3(b.x + 1.3, 0, b.y + 2.3), 20.0, 1.0, props, true)
-	decor("weapons_discarded", Vector3(b.x + 1.8, 0, b.y), 0.0, 0.8)
-	candles(Vector3(b.x, 1.08 + height_at(b.x, b.y), b.y - 0.9))
-	crafting_station(&"workbench", Vector3(b.x - 1.0, 0, b.y), "Camp Workbench")
-	keep_clear(b.x, b.y, 3.0)
-
-func _kettle() -> void:
-	var k := KETTLE
-	var hearth := kit("cooking_hearth", Vector3(k.x, 0, k.y), 0.0, 1.0, props, true)
-	flame(socket_pos(hearth, "flame"), 0.9)
-	light(socket_pos(hearth, "light"), Color(0.6, 1.0, 0.7), 2.4, 7.0, false, true)
-	kit("table", Vector3(k.x - 2.4, 0, k.y - 0.4), 90.0, 1.0, props, true)
-	candles(Vector3(k.x - 2.4, 0.92 + height_at(k.x - 2.4, k.y), k.y - 0.4))
-	crafting_station(&"alchemy", Vector3(k.x + 0.2, 0, k.y + 1.2), "Camp Kettle")
-	kit("bedroll", Vector3(k.x - 1.0, 0, k.y + 3.0), 0.0, 1.0, props, true)
-	kit("bedroll", Vector3(k.x - 3.2, 0, k.y + 3.2), 10.0, 1.0, props, true)
-	keep_clear(k.x, k.y, 3.5)
+## bh-017: Quartermaster Row (DataTownRows): the quartermaster, the field smith, the forge, the camp kettle and the workbench
+## stand together along one signed street south of the bonfire.
+func _trade_row() -> void:
+	TownRowBuilder.build(self, def.id)
+	kit("cart_hay", Vector3(4.0, 0, 28.6), 90.0, 1.0, props, true)
+	keep_clear(4.0, 28.6, 3.0)
 
 ## A straw training dummy: post, crossbar and a stuffed sack (solid, so heroes and the player can swing at it).
 func dummy(p: Vector2, yaw: float) -> void:

@@ -82,6 +82,13 @@ func _build() -> void:
 	_guild_crest.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	tr.add_child(_guild_crest)
 	TooltipLayer.attach(tr, func() -> Control: return Tips.text(_guild_tip(), "Tier and guild") if hero else null)
+	tr.mouse_filter = Control.MOUSE_FILTER_STOP
+	tr.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	tr.gui_input.connect(func(ev: InputEvent) -> void:
+		if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT and GuildRules.can_customise(hero):
+			Game.ui_root.open(&"guild_custom")
+		elif ev is InputEventScreenTouch and ev.pressed and GuildRules.can_customise(hero):
+			Game.ui_root.open(&"guild_custom"))
 	# middle: attributes
 	var mid := vbox(8)
 	mid.custom_minimum_size = Vector2(420, 0)
@@ -215,7 +222,7 @@ func refresh() -> void:
 	_tier_text.text = DataGuilds.tier_name(hero.tier)
 	_tier_text.add_theme_color_override("font_color", DataGuilds.tier(hero.tier).color)
 	var g := DataGuilds.guild(hero.guild)
-	_guild_text.text = String(g.name) if not g.is_empty() else "No guild"
+	_guild_text.text = GuildRules.display_name(hero) if not g.is_empty() else "No guild"
 	_guild_crest.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
 	_refresh_attrs()
 
@@ -225,7 +232,8 @@ func _guild_tip() -> String:
 		lines.append("You are not registered with a guild. Join one in Malasugue (Swordfin Hall or Lantern House) to become a Class E hero and equip Licensed gear.")
 	else:
 		var g := DataGuilds.guild(hero.guild)
-		lines.append("%s — \"%s\"" % [g.name, g.motto])
+		lines.append("%s — \"%s\"" % [g.name if hero.guild_alias == "" else "%s (%s)" % [hero.guild_alias, g.name], g.motto])
+		lines.append("Click the guild to rename it or change its banner.")
 		for i in g.perk_text.size():
 			lines.append("%s per tier step (now x%d)" % [g.perk_text[i], hero.tier])
 		for f in g.features:

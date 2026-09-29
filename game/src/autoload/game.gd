@@ -38,6 +38,7 @@ func _ready() -> void:
 	Events.world_flag_set.connect(_on_flag)
 	Events.player_leveled.connect(func(_l: int, _g: int) -> void: _check_tempo_grade())
 	GuildJobs.connect_events()
+	QuakeTeam.connect_events()
 
 func _process(delta: float) -> void:
 	if hero and in_session:
@@ -203,6 +204,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 			Spawner.populate(map, difficulty)
 		NpcDirectory.populate(map)
 		TempoParty.spawn_for(map, player, hero)
+		QuakeTeam.spawn_for(map, player, hero)
 	TownPortal.spawn_for(map, id)
 	Audio.play_music(def.music)
 	Audio.play_ambience(def.ambience)

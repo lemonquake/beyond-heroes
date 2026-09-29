@@ -306,8 +306,7 @@ func _regen(delta: float) -> void:
 	if not in_combat():
 		hr += max_hp() * OOC_REGEN
 		mr += max_mana() * 0.03
-	if status.has(&"purged"):
-		hr *= 0.5
+	hr *= status.heal_taken_mult()
 	if hp < max_hp():
 		hp = minf(max_hp(), hp + hr * delta)
 		health_changed.emit(hp, max_hp())
@@ -1545,7 +1544,7 @@ func die(killer: Node) -> void:
 	remove_from_group(&"ally")
 	Events.tempo_fallen.emit(self)
 	Events.tempo_changed.emit(data.uid)
-	Events.notify.emit("%s has fallen. Veyra Ashgrave can call the spirit back." % data.tempo_name, &"error")
+	_fall_notice()
 	Audio.play_at(&"body_fall", global_position)
 	if _bar:
 		_bar.visible = false
@@ -1557,6 +1556,10 @@ func die(killer: Node) -> void:
 	tw.tween_method(func(v: float) -> void: visual.set_opacity(v), 0.84, 0.0, 1.6)
 	tw.parallel().tween_property(_light, "light_energy", 0.0, 1.6)
 	tw.tween_callback(queue_free)
+
+## What the player is told when this companion falls (a Quake Team ally says something else).
+func _fall_notice() -> void:
+	Events.notify.emit("%s has fallen. Veyra Ashgrave can call the spirit back." % data.tempo_name, &"error")
 
 func _fell_out() -> void:
 	_rejoin_hero()

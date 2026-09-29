@@ -52,8 +52,8 @@ static func _maelis() -> NpcDef:
 				"leave": {"text": "The waypoint is the only road out that the dead do not watch, and it answers only to those it chooses. It chose you. Draw your own conclusions.",
 					"actions": [{"relationship": 2}], "next": "hub"},
 				"people": {"text": [
-						"**Tovin** at the market sells provisions: draughts, salts, scrolls. **Brannoc** keeps the forge by the east yard; nobody in the valley works steel better.",
-						"**Seris** reads the Aether by the old well. She can mend wounds and, for a price, unmake the paths you have chosen.",
+						"Everything a hero needs stands on **Merchant Row**, the signed street off the plaza's south-east corner. **Tovin** has General Goods (draughts, salts, scrolls); **Brannoc** sells Arms & Armor and keeps the Forge at the far end; nobody in the valley works steel better.",
+						"**Seris** reads the Aether at her Arcana stand on the same street. She can mend wounds and, for a price, unmake the paths you have chosen. The Alchemy Table, the Workbench and the Tempo Shrine are there too.",
 						"And **Captain Hald** watches the south gate. Ask him about the road."],
 					"next": "hub"},
 				"advice": {"branch": [
@@ -88,7 +88,7 @@ static func _maelis() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Tovin
 static func _tovin() -> NpcDef:
 	return NpcDef.make(&"tovin", "Tovin", {"title": "Provisioner", "portrait": PORTRAIT % "merchant",
-		"position": Vector3(7.3, 0, 14.2), "yaw": -144.0, "model": TOWN % "merchant", "tint": Color(0.62, 0.38, 0.2), "shop": &"tovin_goods",
+		"position": DataTownRows.npc_spot(&"tovin").position, "yaw": DataTownRows.npc_spot(&"tovin").yaw, "model": TOWN % "merchant", "tint": Color(0.62, 0.38, 0.2), "shop": &"tovin_goods",
 		"idle_anims": TOWN_IDLES,
 		"graph": {
 			"entries": [
@@ -114,7 +114,7 @@ static func _tovin() -> NpcDef:
 					[[{"flag": "boss_warden_defeated"}], "news_3"],
 				]},
 				"news_1": {"text": "Folk say lights move in the **Catacombs** at night. I say folk should buy more **Health Draughts**.", "next": "hub"},
-				"news_2": {"text": "A **hooded stranger** walked in through the east yard two nights ago and has not left. Pays in old coin. Sells things I cannot name.", "next": "hub"},
+				"news_2": {"text": "A **hooded stranger** walked in past the east side of Merchant Row two nights ago and has not left. Pays in old coin. Sells things I cannot name.", "next": "hub"},
 				"news_3": {"text": "Business is terrible. Nobody needs **Purifying Salts** when the dead stay dead. I have never been happier.", "next": "hub"},
 				"celebrate": {"text": "The hero of Malasugue! Here, on the house. Do not tell Brannoc, he will want the same.",
 					"actions": [{"give_item": "rejuvenation_elixir", "count": 2}, {"relationship": 10}], "next": "hub"},
@@ -124,7 +124,7 @@ static func _tovin() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Brannoc
 static func _brannoc() -> NpcDef:
 	return NpcDef.make(&"brannoc", "Brannoc", {"title": "Blacksmith", "portrait": PORTRAIT % "blacksmith",
-		"position": Vector3(16.4, 0, 24.6), "yaw": -141.0, "model": TOWN % "smith", "tint": Color(0.3, 0.26, 0.22), "shop": &"brannoc_forge",
+		"position": DataTownRows.npc_spot(&"brannoc").position, "yaw": DataTownRows.npc_spot(&"brannoc").yaw, "model": TOWN % "smith", "tint": Color(0.3, 0.26, 0.22), "shop": &"brannoc_forge",
 		"idle_anims": TOWN_IDLES,
 		"graph": {
 			"entries": [
@@ -178,7 +178,7 @@ static func _brannoc() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Seris
 static func _seris() -> NpcDef:
 	return NpcDef.make(&"seris", "Seris", {"title": "Aether Mystic", "portrait": PORTRAIT % "mystic",
-		"position": Vector3(7.6, 0, -7.6), "yaw": -34.0, "model": MAGE, "tint": Color(0.2, 0.35, 0.55), "shop": &"seris_arcana",
+		"position": DataTownRows.npc_spot(&"seris").position, "yaw": DataTownRows.npc_spot(&"seris").yaw, "model": MAGE, "tint": Color(0.2, 0.35, 0.55), "shop": &"seris_arcana",
 		"services": [&"mystic_heal", &"respec"], "idle_anims": [&"idle", &"idle_mage"],
 		"graph": {
 			"entries": [
@@ -272,7 +272,7 @@ static func _hald() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ The Hooded Stranger
 static func _stranger() -> NpcDef:
 	return NpcDef.make(&"stranger", "Hooded Stranger", {"title": "Dealer in Rare Goods", "portrait": PORTRAIT % "stranger",
-		"position": Vector3(21.5, 0, 19.0), "yaw": -125.0, "model": MAGE, "tint": Color(0.12, 0.1, 0.14), "shop": &"stranger_wares",
+		"position": DataTownRows.npc_spot(&"stranger").position, "yaw": DataTownRows.npc_spot(&"stranger").yaw, "model": MAGE, "tint": Color(0.12, 0.1, 0.14), "shop": &"stranger_wares",
 		"presence": [{"flag": "catacombs_ritual_seen"}],
 		"graph": {
 			"entries": [

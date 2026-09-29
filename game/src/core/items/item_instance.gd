@@ -27,6 +27,11 @@ var locked := false                        # cannot be sold, dropped or destroye
 var favorite := false                      # sorted first, protected like locked
 var junk := false                          # marked for "sell junk" at merchants
 var crafted := false                       # made at a crafting station (bh-007): shown in the tooltip
+# bh-017: a weapon can carry one Enchantment (Alchemy Table, rank I..III) and one Fore-Tech refit (Forge, +1..+5): DataUpgrades
+var enchant: StringName = &""
+var enchant_rank := 0
+var foretech: StringName = &""
+var foretech_rank := 0
 
 func _init() -> void:
 	_uid_counter += 1
@@ -34,11 +39,11 @@ func _init() -> void:
 
 func display_name() -> String:
 	if custom_name != "" and epithet != "":
-		return "%s, %s" % [custom_name, epithet]
+		return "%s, %s%s" % [custom_name, epithet, _tech_tag()]
 	if custom_name != "":
-		return custom_name
+		return custom_name + _tech_tag()
 	if base.unique_name != "":
-		return base.unique_name
+		return base.unique_name + _tech_tag()
 	if rarity >= BH.Rarity.BASIC and rarity <= BH.Rarity.LICENSED and not affixes.is_empty() or name_prefix != "" or name_suffix != "":
 		# "Flaming Sword of Precision": first prefix + base + first suffix; a weapon's forged parts fill an empty side.
 		var pre := ""
@@ -55,8 +60,12 @@ func display_name() -> String:
 			pre = name_prefix + " "
 		if suf == "" and name_suffix != "":
 			suf = " " + name_suffix
-		return pre + base.display_name + suf
-	return base.display_name
+		return pre + base.display_name + suf + _tech_tag()
+	return base.display_name + _tech_tag()
+
+## bh-017: " +3" after the name of a weapon with a Fore-Tech refit.
+func _tech_tag() -> String:
+	return " +%d" % foretech_rank if foretech_rank > 0 and foretech != &"" else ""
 
 ## The proper name alone (loot labels): "Vornhald", or the full display name.
 func short_name() -> String:
@@ -109,11 +118,26 @@ func weight() -> float:
 	return maxf(0.0, base.weight) * float(maxi(count, 1))
 
 func damage_range() -> Vector2:
-	var q := 1.0 + quality
+	var q := 1.0 + quality + DataUpgrades.TEMPER_PER_RANK * float(foretech_rank if foretech != &"" else 0)
 	return Vector2(base.damage_min, base.damage_max) * q * (1.0 + _local(&"local_phys"))
 
 func defense_value() -> float:
 	return (base.defense * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
+
+## bh-017: the element the weapon deals (an Enchantment replaces the blade's own) and the share of its damage that is elemental.
+func weapon_element() -> int:
+	if enchant != &"" and enchant_rank > 0:
+		return int(DataUpgrades.enchant(enchant).get("element", base.element))
+	return base.element
+
+func weapon_element_share() -> float:
+	if enchant != &"" and enchant_rank > 0:
+		var sh := DataUpgrades.enchant_share(enchant, enchant_rank)
+		return maxf(sh, base.element_share) if weapon_element() == base.element else sh
+	return base.element_share
+
+func is_upgraded() -> bool:
+	return (enchant != &"" and enchant_rank > 0) or (foretech != &"" and foretech_rank > 0)
 
 func block_chance() -> float:
 	return base.block_chance
@@ -135,6 +159,10 @@ func modifiers() -> Array:
 		if def == null or String(def.stat).begins_with("local_"):
 			continue
 		out.append(StatModifier.new(def.stat, def.op, float(a.value), src))
+	if enchant != &"" and enchant_rank > 0:
+		out.append_array(DataUpgrades.enchant_mods(enchant, enchant_rank, "%s %s" % [DataUpgrades.enchant(enchant).get("name", "Enchantment"), DataUpgrades.roman(enchant_rank)]))
+	if foretech != &"" and foretech_rank > 0:
+		out.append_array(DataUpgrades.tech_mods(foretech, foretech_rank, "%s +%d" % [DataUpgrades.tech(foretech).get("name", "Fore-Tech"), foretech_rank]))
 	if license != &"":
 		for m in license_modifiers():
 			out.append(m)
@@ -161,7 +189,7 @@ func license_modifiers() -> Array:
 
 ## Merchant buy price of one unit before merchant markup (ShopPricing applies markup/reputation).
 func base_value() -> float:
-	var affix_bonus := 1.0 + 0.12 * float(affixes.size()) + 0.35 * float(powers.size())
+	var affix_bonus := 1.0 + 0.12 * float(affixes.size()) + 0.35 * float(powers.size()) + 0.18 * float(enchant_rank) + 0.1 * float(foretech_rank)
 	return float(base.value) * SELL_MULT[clampi(rarity, 0, SELL_MULT.size() - 1)] * (1.0 + float(ilvl) * 0.06) * affix_bonus * (1.0 + quality)
 
 func sell_value() -> int:
@@ -208,6 +236,10 @@ func to_dict() -> Dictionary:
 		d["junk"] = true
 	if crafted:
 		d["crafted"] = true
+	if enchant != &"" and enchant_rank > 0:
+		d["ench"] = [String(enchant), enchant_rank]
+	if foretech != &"" and foretech_rank > 0:
+		d["tech"] = [String(foretech), foretech_rank]
 	return d
 
 static func from_dict(d: Dictionary) -> ItemInstance:
@@ -240,6 +272,14 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	it.favorite = bool(d.get("favorite", false))
 	it.junk = bool(d.get("junk", false))
 	it.crafted = bool(d.get("crafted", false))
+	var en = d.get("ench", [])
+	if en is Array and (en as Array).size() == 2 and DataUpgrades.ENCHANTS.has(StringName(en[0])) and b.is_weapon():
+		it.enchant = StringName(en[0])
+		it.enchant_rank = clampi(int(en[1]), 1, DataUpgrades.ENCHANT_MAX)
+	var te = d.get("tech", [])
+	if te is Array and (te as Array).size() == 2 and DataUpgrades.TECHS.has(StringName(te[0])) and b.is_weapon():
+		it.foretech = StringName(te[0])
+		it.foretech_rank = clampi(int(te[1]), 1, DataUpgrades.TECH_MAX)
 	return it
 
 func clone() -> ItemInstance:

@@ -210,7 +210,7 @@ func test_twenty_new_consumables() -> void:
 			new_ids.append(b.id)
 			ok(b.flavor != "", "%s explains itself" % b.id)
 			ok(b.stack_max > 1, "%s stacks" % b.id)
-	eq(new_ids.size(), 20, "twenty new consumables")
+	eq(new_ids.size(), 27, "twenty new consumables (bh-006) and the seven of bh-017")
 	ok(new_ids.has(&"town_portal"), "the Town Portal is one of them")
 	for b: ItemBaseDef in DB.item_bases.values():
 		var fx := b.consumable_effect

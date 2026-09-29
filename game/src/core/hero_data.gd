@@ -79,6 +79,12 @@ var summon := {}
 var spirit_hall: Array = []
 ## Guild House miniquests (bh-016): GuildJobs.state / to_dict / from_dict.
 var guild_jobs := {}
+## bh-017: what the hero calls their guild ("" = the guild's own name) and the banner they uploaded (a JPEG, "" = the
+## guild's own banner). Both are optional in a save, so older saves load unchanged.
+var guild_alias := ""
+## bh-017: the AI allies the `quake team` cheat called (QuakeMate), at most QuakeTeam.MAX; optional in a save.
+var quake_team: Array = []
+var guild_banner := PackedByteArray()
 var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
@@ -111,6 +117,8 @@ func _dirty() -> void:
 
 func _on_level(_l: int, _g: int) -> void:
 	stats_dirty.emit()
+	if not quake_team.is_empty():
+		QuakeTeam.sync_owner(self)
 
 func _inv_changed() -> void:
 	inventory_changed.emit()
@@ -395,6 +403,8 @@ func to_dict() -> Dictionary:
 		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true),
 		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()), "starter_name": starter_name,
 		"guild_jobs": GuildJobs.to_dict(self),
+		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
+		"guild_alias": guild_alias, "guild_banner": Marshalls.raw_to_base64(guild_banner) if not guild_banner.is_empty() else "",
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -537,6 +547,13 @@ static func from_dict(d: Dictionary) -> HeroData:
 			if st != null:
 				h.spirit_hall.append(st)
 	h.guild_jobs = GuildJobs.from_dict(d.get("guild_jobs", {}))
+	h.guild_alias = GuildRules.clean_alias(String(d.get("guild_alias", "")))
+	for qd in d.get("quake_team", []):
+		if qd is Dictionary and h.quake_team.size() < QuakeTeam.MAX:
+			var qm := QuakeMate.from_dict(qd)
+			if qm != null:
+				h.quake_team.append(qm)
+	h.guild_banner = GuildRules.load_banner_bytes(String(d.get("guild_banner", "")))
 	var aura := StringName(d.get("active_aura", ""))
 	if aura != &"" and h.skill_tree.rank(aura) > 0 and DB.skill(aura) != null and DB.skill(aura).is_aura():
 		h.active_aura = aura

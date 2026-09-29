@@ -36,7 +36,7 @@ static func graph() -> Dictionary:
 					"My health sits under your portrait. Press **{key:tempos}** to open the **Tempo window**: hand me better steel from your bag and see what I can do. A Tempo's gear must be one tier below what you may wear."],
 				"next": "where"},
 			"where": {"text": [
-					"You can carry **two** of us, and one place is still empty. **Veyra Ashgrave**, the Tempo-Caller, keeps the **Shrine of the Fallen** just east of the terrace stair. Spirits answer her call, and she binds them for **gold**.",
+					"You can carry **two** of us, and one place is still empty. **Veyra Ashgrave**, the Tempo-Caller, keeps the **Shrine of the Fallen** at the south end of **Merchant Row**, the signed street south-east of the plaza. Spirits answer her call, and she binds them for **gold**.",
 					"The spirits who answer grow with you. Rise in level, or do great deeds, and stronger **grades** answer instead: more skills, rarer ones, Mystics and Wardens among them. The weaker ones fade.",
 					"And a few old names wait at her shrine: **renowned** spirits, with skills no one else has. They answer only a hero strong enough, and they are **not cheap**. Save for them before you go after anything big.",
 					"If one of us falls, our token goes cold in your pack. Bring it to Veyra and she will call us back, for a price."],
@@ -62,7 +62,7 @@ static func graph() -> Dictionary:
 				]},
 			"short": {"text": [
 					"Good. Then only this: **{key:primary}** attacks, **{key:dodge}** dodges, **{key:skill_1}** to **{key:skill_6}** are your skills, **{key:potion_health}** and **{key:potion_mana}** your draughts, **{key:interact}** talks and opens doors.",
-					"I carry half your strength and I mend your wounds. **{key:tempos}** opens my window. A second Tempo can be bound at **Veyra Ashgrave**'s **Shrine of the Fallen**, east of the terrace stair; stronger spirits answer as you grow, and a few renowned ones wait for a hero with deep pockets.",
+					"I carry half your strength and I mend your wounds. **{key:tempos}** opens my window. A second Tempo can be bound at **Veyra Ashgrave**'s **Shrine of the Fallen**, at the south end of Merchant Row; stronger spirits answer as you grow, and a few renowned ones wait for a hero with deep pockets.",
 					"Everything else is in the **Field Guide**: press **{key:guide}**. Elder Maelis is by the hearth, down the terrace. Let us go."],
 				"choices": [
 					{"text": "Let us go.", "next": "end", "actions": [done]},

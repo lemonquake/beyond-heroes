@@ -18,6 +18,8 @@ var _variant_order: Array = []        # option index -> variant index
 var _tabs: TabBar
 var _recipes_page: Control
 var _salvage_page: Control
+var _enchant_page: WeaponUpgradePage      # bh-017: Enchantment (Alchemy Table)
+var _tech_page: WeaponUpgradePage         # bh-017: Fore-Tech (Forge)
 var _desc: Label
 var _gold: Label
 var _list: VBoxContainer
@@ -66,12 +68,20 @@ func _build() -> void:
 	_tabs = TabBar.new()
 	_tabs.add_tab("Recipes")
 	_tabs.add_tab("Salvage")
+	_tabs.add_tab("Enchant Weapon")
+	_tabs.add_tab("Fore-Tech Weapon")
 	_tabs.tab_changed.connect(func(_i: int) -> void: _show_page())
 	body.add_child(_tabs)
 	_recipes_page = _build_recipes()
 	body.add_child(_recipes_page)
 	_salvage_page = _build_salvage()
 	body.add_child(_salvage_page)
+	_enchant_page = WeaponUpgradePage.new(WeaponUpgrades.ENCHANT)
+	body.add_child(_enchant_page)
+	_tech_page = WeaponUpgradePage.new(WeaponUpgrades.FORETECH)
+	body.add_child(_tech_page)
+	_enchant_page.applied.connect(func() -> void: _gold.text = InventoryWindow._fmt_gold(hero.inventory.gold))
+	_tech_page.applied.connect(func() -> void: _gold.text = InventoryWindow._fmt_gold(hero.inventory.gold))
 
 func _build_recipes() -> Control:
 	var row := hbox(22)
@@ -202,7 +212,9 @@ func refresh() -> void:
 	_desc.text = String(sdef.get("text", ""))
 	var can_salvage := station in [&"forge", &"workbench"]
 	_tabs.set_tab_hidden(1, not can_salvage)
-	if not can_salvage:
+	_tabs.set_tab_hidden(2, station != &"alchemy")
+	_tabs.set_tab_hidden(3, station != &"forge")
+	if _tabs.is_tab_hidden(_tabs.current_tab):
 		_tabs.current_tab = 0
 	_recipes = Crafting.recipes_for(station)
 	if _sel < 0 or _sel >= _recipes.size():
@@ -222,11 +234,18 @@ func _on_inv() -> void:
 		_show_page()
 
 func _show_page() -> void:
-	var salvage := _tabs.current_tab == 1
-	_recipes_page.visible = not salvage
+	var tab := _tabs.current_tab
+	var salvage := tab == 1
+	_recipes_page.visible = tab == 0
 	_salvage_page.visible = salvage
+	_enchant_page.visible = tab == 2
+	_tech_page.visible = tab == 3
 	_gold.text = InventoryWindow._fmt_gold(hero.inventory.gold) if hero else ""
-	if salvage:
+	if tab == 2:
+		_enchant_page.refresh(hero)
+	elif tab == 3:
+		_tech_page.refresh(hero)
+	elif salvage:
 		_refresh_salvage()
 	else:
 		_refresh_list()

@@ -5,11 +5,13 @@ class_name Cheats
 ##   greg    +1000 gold
 ##   azrin   +3 levels (levels, points and all, exactly as if earned)
 ##   azrael  full HP and mana (the hero and every living Tempo at their side)
+##   quake team  calls an AI ally hero to fight beside you (up to 3, Single Player only): it follows, protects, shops for the
+##               best gear, binds a Tempo and heals itself (QuakeTeam)
 
 const GOLD := 5000
 const SMALL_GOLD := 1000
 const LEVELS := 3
-const CODES := {"lemonq": "gold", "taicho": "small_gold", "greg": "small_gold", "azrin": "levels", "azrael": "restore"}
+const CODES := {"lemonq": "gold", "taicho": "small_gold", "greg": "small_gold", "azrin": "levels", "azrael": "restore", "quake team": "quake_team"}
 
 static func is_code(text: String) -> bool:
 	return CODES.has(text.strip_edges().to_lower())
@@ -31,6 +33,9 @@ static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 			var from := pr.level
 			pr.add_xp(XpCurve.total_xp_for_level(want) - XpCurve.total_xp_for_level(pr.level) - pr.xp)
 			return "Cheat: level %d -> %d." % [from, pr.level]
+		"quake_team":
+			var r := QuakeTeam.summon(hero, player as Node3D)
+			return ("Cheat: " if r.ok else "") + String(r.text)
 		"restore":
 			var pl := player as Player
 			if pl == null or not pl.alive:

@@ -273,8 +273,9 @@ func _on_status_removed(id: StringName) -> void:
 func heal(amount: float, show := true) -> void:
 	if not alive or amount <= 0.0:
 		return
-	if status.has(&"purged"):
-		amount *= 0.5
+	amount *= status.heal_taken_mult()
+	if amount <= 0.0:
+		return
 	var before := hp
 	hp = minf(max_hp(), hp + amount)
 	health_changed.emit(hp, max_hp())

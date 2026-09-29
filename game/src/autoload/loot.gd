@@ -102,18 +102,18 @@ func drop_for(e: Enemy, player: Player) -> void:
 			rarity = maxi(rarity, BH.Rarity.ELITE if i == 0 else BH.Rarity.ADVANCED)
 		elif i == 0 and e.is_elite:
 			rarity = maxi(rarity, BH.Rarity.ADVANCED)
-		var base := ItemGenerator.random_base(rng, ilvl, [], cls if rng.randf() < 0.6 else &"")
+		var base := ItemGenerator.random_base(rng, ilvl, [], cls)
 		if base:
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
 	# Set pieces and Aether uniques
 	var set_p := 0.4 if e.is_boss else (0.04 if e.is_elite else 0.002)
 	var uniq_p := 0.15 if e.is_boss else (0.015 if e.is_elite else 0.0005)
 	if rng.randf() < set_p * (1.0 + mf):
-		var sb := ItemGenerator.random_special(rng, ilvl + 4, true)
+		var sb := ItemGenerator.random_special(rng, ilvl + 4, true, cls)
 		if sb:
 			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))
 	if rng.randf() < uniq_p * (1.0 + mf):
-		var ub := ItemGenerator.random_special(rng, ilvl + 4, false)
+		var ub := ItemGenerator.random_special(rng, ilvl + 4, false, cls)
 		if ub:
 			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
 	# Consumables and materials
@@ -192,7 +192,7 @@ func drop_chest(tier: int, level: int, at: Vector3, hero: HeroData) -> Array:
 			rarity = maxi(rarity, floor_r)
 		if i == 1 and tier == 2 and rng.randf() < 0.5:
 			rarity = maxi(rarity, BH.Rarity.MYTHICAL)
-		var base := ItemGenerator.random_base(rng, ilvl, [], cls if rng.randf() < 0.6 else &"")
+		var base := ItemGenerator.random_base(rng, ilvl, [], cls)
 		if base:
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
 	var em := DB.make_item(&"soul_ember", BH.Rarity.COMMON, ilvl, rng.randi())

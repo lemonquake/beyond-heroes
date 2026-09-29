@@ -740,7 +740,7 @@ func _mimic_loot(_killer: Node) -> void:
 	var r := RandomNumberGenerator.new()
 	r.seed = hash(e.get_instance_id()) ^ Time.get_ticks_usec()
 	Loot.spawn_gold(e.global_position, 20 + 8 * e.level)
-	var base := ItemGenerator.random_base(r, e.level + 1, [], Game.hero.cls.id if r.randf() < 0.6 else &"")
+	var base := ItemGenerator.random_base(r, e.level + 1, [], Game.hero.cls.id)
 	if base:
 		var rarity := maxi(ItemGenerator.roll_rarity(r, 0.0, 0.6, e.level + 1), BH.Rarity.ADVANCED)
 		Loot.spawn_item(ItemGenerator.generate(base, e.level + 1, rarity, r), e.global_position, r.randf() * TAU, 1.4)

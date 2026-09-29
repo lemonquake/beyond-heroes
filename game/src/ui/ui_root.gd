@@ -54,6 +54,7 @@ func _ready() -> void:
 	_add_window(&"mobile_menu", MobileMenuWindow.new())
 	_add_window(&"multiplayer", MultiplayerWindow.new())
 	_add_window(&"guild_jobs", GuildJobsWindow.new())
+	_add_window(&"guild_custom", GuildCustomWindow.new())
 	_add_window(&"trade", TradeWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
@@ -69,6 +70,7 @@ func _ready() -> void:
 	Events.talk_requested.connect(_on_talk)
 	Events.player_died.connect(_on_player_died)
 	Events.world_flag_set.connect(_on_flag)
+	Events.guild_joined.connect(_on_guild_joined)
 
 func _add_window(id: StringName, w: UIWindow) -> void:
 	windows[id] = w
@@ -292,3 +294,16 @@ func show_tier_award(rank: int, heading: String) -> void:
 	tw.tween_interval(3.2)
 	tw.tween_property(box, "modulate:a", 0.0, 0.6)
 	tw.tween_callback(box.queue_free)
+
+## bh-017: the first time a hero registers with a guild, invite them to name it and hang their banner (a moment after the
+## tier award, and after any registrar conversation is out of the way).
+func _on_guild_joined(_gid: StringName, first_time: bool) -> void:
+	if not first_time:
+		return
+	Events.notify.emit("You may name your guild anything you like - and hang your own banner.", &"info")
+	get_tree().create_timer(3.2).timeout.connect(func() -> void:
+		if Game.hero == null or Game.hero.guild == &"" or Game.hero.guild_alias != "":
+			return
+		if dialogue.visible:
+			dialogue.close()
+		open(&"guild_custom"))

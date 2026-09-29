@@ -112,6 +112,44 @@ const DEFS := {
 	&"ethereal": {"name": "Ethereal", "debuff": false, "duration": 0.0, "icon": "stealth", "desc": "Immune to physical damage; takes 50% more elemental damage."},
 	&"curled": {"name": "Curled", "debuff": false, "duration": 0.0, "icon": "guard", "desc": "Rolled into its shell: takes 90% less damage. Break its poise to flip it over."},
 	&"mirror_guard": {"name": "Mirror Guard", "debuff": false, "duration": 3.0, "icon": "guard", "desc": "Reflects projectiles and part of frontal blows. Strike from behind."},
+	# ---- bh-017: five new debuffs and five new buffs ("heal_taken" = change of the healing / regeneration the bearer
+	# receives per stack; "stacks" = how many times a re-application deepens it) ----
+	# statuses that monsters already inflicted (Aegis Acolytes, the Prism and Buried Sovereign) but that had no definition
+	&"dazed": {"name": "Dazed", "debuff": true, "duration": 3.0, "icon": "stunned", "desc": "Head ringing: 25% slower attacks and casting.",
+		"mods": [[&"attack_speed", StatModifier.Op.MORE, -0.25], [&"cast_speed", StatModifier.Op.MORE, -0.25]]},
+	&"blinded": {"name": "Blinded", "debuff": true, "duration": 3.0, "icon": "dazzled", "desc": "Cannot see the target: 50% less Evasion and 30% less Accuracy.",
+		"mods": [[&"evasion", StatModifier.Op.MORE, -0.5], [&"accuracy", StatModifier.Op.MORE, -0.3]]},
+	&"grievous": {"name": "Grievous Wound", "debuff": true, "duration": 6.0, "icon": "grievous", "stacks": 3, "heal_taken": -0.25,
+		"desc": "A wound that will not close: every healing and regeneration the bearer receives is 25% lower. Deepens with each new wound, up to 75%."},
+	&"enfeebled": {"name": "Enfeebled", "debuff": true, "duration": 8.0, "icon": "enfeebled",
+		"desc": "Strength sapped: 20% less Strength, Agility, Intelligence, Wisdom, Spirit and Dexterity.",
+		"mods": [[&"str", StatModifier.Op.MORE, -0.2], [&"agi", StatModifier.Op.MORE, -0.2], [&"int", StatModifier.Op.MORE, -0.2],
+			[&"wis", StatModifier.Op.MORE, -0.2], [&"spi", StatModifier.Op.MORE, -0.2], [&"dex", StatModifier.Op.MORE, -0.2]]},
+	&"dazzled": {"name": "Dazzled", "debuff": true, "duration": 5.0, "icon": "dazzled",
+		"desc": "Blinded by a flash: 50% less Evasion and 30% less Accuracy.",
+		"mods": [[&"evasion", StatModifier.Op.MORE, -0.5], [&"accuracy", StatModifier.Op.MORE, -0.3]]},
+	&"sundered": {"name": "Sundered", "debuff": true, "duration": 6.0, "icon": "sundered",
+		"desc": "Guard shattered: 25% less Defense and 10% more damage taken.",
+		"mods": [[&"defense", StatModifier.Op.MORE, -0.25], [&"damage_taken", StatModifier.Op.MORE, 0.1]]},
+	&"demoralized": {"name": "Demoralized", "debuff": true, "duration": 6.0, "icon": "demoralized",
+		"desc": "The will to fight is gone: 15% less damage dealt and 15% less Critical Damage.",
+		"mods": [[&"outgoing_damage", StatModifier.Op.MORE, -0.15], [&"crit_damage", StatModifier.Op.FLAT, -0.15]]},
+	&"vigor": {"name": "Vigor", "debuff": false, "duration": 10.0, "icon": "vigor", "heal_taken": 0.25,
+		"desc": "Bursting with life: 15% more Maximum HP and 25% more healing and regeneration received.",
+		"mods": [[&"max_hp", StatModifier.Op.MORE, 0.15]]},
+	&"keen": {"name": "Keen Focus", "debuff": false, "duration": 10.0, "icon": "keen",
+		"desc": "Every opening is clear: +12% Critical Chance and +25% Critical Damage.",
+		"mods": [[&"crit_chance", StatModifier.Op.FLAT, 0.12], [&"crit_damage", StatModifier.Op.FLAT, 0.25]]},
+	&"windstep": {"name": "Windstep", "debuff": false, "duration": 8.0, "icon": "windstep",
+		"desc": "Light on the feet: 40% more Evasion, 15% more Movement Speed and a shorter dodge cooldown.",
+		"mods": [[&"evasion", StatModifier.Op.MORE, 0.4], [&"move_speed", StatModifier.Op.MORE, 0.15], [&"dodge_cooldown", StatModifier.Op.FLAT, -0.25]]},
+	&"titan": {"name": "Titan's Might", "debuff": false, "duration": 10.0, "icon": "titan",
+		"desc": "Borrowed strength: 15% more Strength, Agility, Intelligence, Wisdom, Spirit and Dexterity.",
+		"mods": [[&"str", StatModifier.Op.MORE, 0.15], [&"agi", StatModifier.Op.MORE, 0.15], [&"int", StatModifier.Op.MORE, 0.15],
+			[&"wis", StatModifier.Op.MORE, 0.15], [&"spi", StatModifier.Op.MORE, 0.15], [&"dex", StatModifier.Op.MORE, 0.15]]},
+	&"spirit_ward": {"name": "Spirit Ward", "debuff": false, "duration": 12.0, "icon": "spirit_ward",
+		"desc": "Warded against the strange: +15% to every Resistance and +30% Status Resistance.",
+		"mods": [[&"res_all", StatModifier.Op.FLAT, 0.15], [&"status_res", StatModifier.Op.FLAT, 0.3]]},
 }
 
 const INTERACTION_DOCS := [
@@ -162,3 +200,7 @@ static func default_mods(id: StringName) -> Array:
 	for m in DEFS[id].get("mods", []):
 		out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(m[2]), name_of(id)))
 	return out
+
+## bh-017: change of received healing per stack of a status (Grievous Wound -25%, Vigor +25%); 0 for the rest.
+static func heal_taken(id: StringName) -> float:
+	return float(DEFS[id].get("heal_taken", 0.0)) if DEFS.has(id) else 0.0

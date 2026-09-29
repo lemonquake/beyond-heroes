@@ -280,3 +280,15 @@ func visible_statuses() -> Array:
 		if not StatusRules.is_hidden(id):
 			out.append(statuses[id])
 	return out
+
+## bh-017: multiplier on every point of healing and regeneration this actor receives — Grievous Wound (-25% per stack,
+## up to -75%), Vigor (+25%), Purged (halved). Applied by Actor.heal and by each regeneration tick.
+func heal_taken_mult() -> float:
+	var m := 1.0
+	for id in statuses:
+		var per := StatusRules.heal_taken(id)
+		if per != 0.0:
+			m += per * float(statuses[id].stacks)
+	if statuses.has(&"purged"):
+		m *= 0.5
+	return clampf(m, 0.0, 3.0)

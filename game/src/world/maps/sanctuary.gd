@@ -34,8 +34,8 @@ const FOOTPRINTS := [
 	[-25, 2, 90, 4.3, 3.8], [25, 6, -90, 4.3, 3.8], [-17, 23, 150, 4.3, 3.8], [23, -14, -60, 4.3, 3.8], [-21, -19, 55, 4.3, 3.8],
 	[-28.8, 13.5, 90, 6.3, 4.9], [32, -4.8, -90, 5.7, 5.2], [-30, -9.5, 90, 4.9, 5.4], [-11, -9.6, 0, 8.2, 5.6],
 ]
-## The Shrine of the Fallen, where the Tempo-Caller calls the spirits of dead warriors (companions, LORE §9).
-const SHRINE := Vector3(13.5, 0, -11.0)
+## bh-017: Merchant Row (DataTownRows) — every stand of the town's trade, the crafting stations and the Shrine of the Fallen (the
+## Tempo-Caller's spirit shrine, LORE §9) stand along one signed street south-east of the plaza.
 
 func compose() -> void:
 	environment({
@@ -50,9 +50,8 @@ func compose() -> void:
 	_plaza()
 	_terrace()
 	_houses()
-	_market_and_smithy()
+	_merchant_row()
 	_halls()
-	_shrine_of_the_fallen()
 	_greenery()
 	_background()
 	spawn(&"start", Vector3(0, 0, 14.5), 180.0, true)
@@ -62,12 +61,14 @@ func compose() -> void:
 	view("arrival", Vector3(0, 0, 10), 0.0, 48.0, 30.0)
 	view("plaza", PLAZA, 0.0, 52.0, 26.0)
 	view("terrace", Vector3(0, TERRACE_Y, -23), 0.0, 45.0, 26.0)
-	view("market", Vector3(12, 0, 16), -20.0, 50.0, 22.0)
+	view("market", Vector3(14.8, 0, 20), 0.0, 50.0, 30.0)
+	view("row_gate", Vector3(14.8, 0, 14), 0.0, 40.0, 22.0)
+	view("row_south", Vector3(14.8, 0, 26), 0.0, 46.0, 24.0)
 	view("gate", Vector3(0, 0, 30), 0.0, 40.0, 24.0)
 	view("tavern", Vector3(-22, 0, 13.5), 30.0, 50.0, 30.0)
 	view("guild_halls", Vector3(0, 0, -6), 0.0, 60.0, 66.0)
 	view("guild_house", Vector3(-11, 0, -8), 0.0, 40.0, 30.0)
-	view("shrine", SHRINE, -20.0, 45.0, 16.0)
+	view("shrine", Vector3(8.2, 0, 30), 0.0, 45.0, 16.0)
 	view("topdown", Vector3(0, 0, 0), 0.0, 89.5, 105.0, 50.0)
 
 # ------------------------------------------------------------------------------------------------------------
@@ -91,12 +92,17 @@ func _height(x: float, z: float) -> float:
 func _splat(x: float, z: float) -> Color:
 	var d := Vector2(x - PLAZA.x, z - PLAZA.z).length()
 	var cobble := 1.0 - smoothstep(12.5, 14.0, d)
+	# bh-017: Merchant Row is cobbled from the gateway to the shrine end
+	var rw := Rect2(6.4, 10.5, 17.0, 23.0)
+	var rdx := maxf(maxf(rw.position.x - x, x - rw.end.x), 0.0)
+	var rdz := maxf(maxf(rw.position.y - z, z - rw.end.y), 0.0)
+	cobble = maxf(cobble, 1.0 - smoothstep(0.4, 2.2, Vector2(rdx, rdz).length()))
 	# paths: gate -> plaza -> terrace stair, plaza -> houses
 	var path := 0.0
 	path = maxf(path, 1.0 - smoothstep(1.8, 3.2, absf(x)) * 1.0 if z > 12.0 and z < 75.0 else 0.0)
 	path = maxf(path, 1.0 - smoothstep(1.8, 3.0, absf(x)) if z < -8.0 and z > -16.0 else path)
-	for t in [Vector2(-20.6, 2), Vector2(20.6, 6), Vector2(-15, 19.5), Vector2(19.5, -12), Vector2(-17.7, -16.7), Vector2(20, 20),
-			Vector2(-23.5, 13.5), Vector2(26.4, -4.8), Vector2(-24.9, -9.5), Vector2(12.4, -9.4)]:
+	for t in [Vector2(-20.6, 2), Vector2(20.6, 6), Vector2(-15, 19.5), Vector2(19.5, -12), Vector2(-17.7, -16.7),
+			Vector2(-23.5, 13.5), Vector2(26.4, -4.8), Vector2(-24.9, -9.5)]:
 		var dd := _seg_dist(Vector2(x, z), Vector2(PLAZA.x, PLAZA.z), t)
 		path = maxf(path, 1.0 - smoothstep(1.3, 2.6, dd))
 	var forest := smoothstep(34.0, 42.0, Vector2(x, z).length())
@@ -220,7 +226,7 @@ func _houses() -> void:
 		kit("wood_fence", p + side * -5.2 + fwd * 1.0, yaw + 90.0, 1.0, props, true)
 		decor("bush_a", p + side * 5.2 - fwd * 2.5, rng.randf() * 360.0, 0.8, true, true)
 		door(h, yaw, lot[2], lot[3])
-	kit("house_destroyed", Vector3(26, 0, 24), -40.0, 1.0, props, true)  # burnt last winter — the first raid
+	kit("house_destroyed", Vector3(-26.0, 0, 27.5), 40.0, 1.0, props, true)  # burnt last winter — the first raid (moved west for Merchant Row)
 	kit("well", Vector3(7.4, 0, -10.4), 20.0, 1.0, props, true)   # bh-016: moved from (-11, -7) for the Guild House lot
 
 ## A solid invisible bar (the South Gate's crossbar) that a flag can lift: registered with hide_when, it stops
@@ -252,23 +258,13 @@ func door(building: Node3D, yaw: float, interior: StringName, label: String) -> 
 	spawn(StringName("door_%s" % interior), Vector3(sp.x, 0, sp.z), yaw, true)
 	return portal
 
-func _market_and_smithy() -> void:
-	for s in [[Vector3(8.5, 0, 16.5), -20.0], [Vector3(13.5, 0, 12.0), -55.0], [Vector3(-9.5, 0, 16.0), 25.0]]:
-		var st := kit("market_stall", s[0], s[1], 1.0, props, true)
-		light(socket_pos(st, "light"), Color(1.0, 0.7, 0.4), 1.4, 6.0, false, true)
-	for p in [Vector3(11.2, 0, 18.4), Vector3(15.6, 0, 14.2)]:
-		breakable("crate", p, rng.randf() * 90.0, 20.0, true)
-	# smithy yard
-	var y := Vector3(18, 0, 26)
-	kit("anvil", y + Vector3(0, 0, 0), 30.0, 1.0, props, true)
-	crafting_station(&"forge", y + Vector3(0.0, 0, 0.9), "Brannoc's Anvil")
-	kit("weapon_rack", y + Vector3(-3.0, 0, -2.0), 20.0, 1.0, props, true)
-	kit("weapon_rack", y + Vector3(3.0, 0, 1.8), -70.0, 1.0, props, true)
-	brazier(y + Vector3(1.6, 0, -1.8), 3.4, true, true)
-	decor("weapons_discarded", y + Vector3(-1.5, 0, 2.5), 60.0)
-	kit("table", y + Vector3(-3.6, 0, 2.8), 70.0, 1.0, props, true)
-	for p in [Vector3(4.0, 0, -2.5), Vector3(4.8, 0, -1.6)]:
-		breakable("barrel", y + p, rng.randf() * 360.0, 20.0, true)
+## bh-017: the town's trade street (DataTownRows): a signed gateway on the plaza's south-east edge, then a stand for each
+## merchant, crafting station and the Tempo-Caller's shrine along both sides.
+func _merchant_row() -> void:
+	TownRowBuilder.build(self, def.id)
+	# a couple of crates and barrels at the head of the street
+	for p in [Vector3(13.6, 0, 33.0), Vector3(16.2, 0, 33.4)]:
+		breakable("crate" if p.x < 15.0 else "barrel", p, rng.randf() * 90.0, 20.0, true)
 
 func _halls() -> void:
 	for hd in HALLS:
@@ -295,21 +291,6 @@ func _halls() -> void:
 				light(socket_pos(b, "lantern_light") + Vector3(0, 1.0, 0), Color(0.72, 0.5, 0.95), 0.9, 6.0)
 		door(b, yaw, hd[3], hd[4])
 
-## A small open-air shrine east of the terrace stair: weapons of the fallen, candles and a cold spirit light. The
-## Tempo-Caller keeps it (companions, docs/LORE.md §9).
-func _shrine_of_the_fallen() -> void:
-	var c := SHRINE
-	kit("shrine_small", c + Vector3(0, 0, -1.2), -40.0, 1.3, props, true)   # faces the plaza
-	candles(c + Vector3(-1.3, ground(c.x - 1.3, c.z - 0.6), -0.6))
-	candles(c + Vector3(1.4, ground(c.x + 1.4, c.z - 1.0), -1.0))
-	decor("weapons_discarded", c + Vector3(-2.2, 0, 0.6), 40.0, 1.0, true, true)
-	decor("weapons_discarded", c + Vector3(2.4, 0, -0.2), -70.0, 0.9, true, true)
-	kit("banner_torn", c + Vector3(-1.9, 2.9 + ground(c.x - 1.9, c.z - 1.9), -1.9), 20.0, 0.8, deco)
-	light(c + Vector3(0, 1.8 + ground(c.x, c.z), -0.8), Color(0.55, 0.95, 1.0), 1.6, 7.0, false, true)
-	var motes := VFXLib.particles(Color(0.6, 0.95, 1.0, 0.7), 24, 3.0, false, 0.08, 0.35, 60.0, Vector3(0, 0.25, 0), 1.6)
-	motes.position = c + Vector3(0, 0.6 + ground(c.x, c.z), -0.6)
-	deco.add_child(motes)
-
 func _greenery() -> void:
 	var avoid := func(x: float, z: float) -> bool:
 		var d := Vector2(x, z).length()
@@ -321,9 +302,11 @@ func _greenery() -> void:
 			var local := Vector2(x - f[0], z - f[1]).rotated(deg_to_rad(f[2]))
 			if absf(local.x) < f[3] + 1.5 and absf(local.y) < f[4] + 1.5:
 				return true
-		for lot in [Vector2(26, 24), Vector2(18, 26), Vector2(-11, -7), Vector2(10, 15), Vector2(SHRINE.x, SHRINE.z)]:
+		for lot in [Vector2(-11, -7)]:
 			if Vector2(x, z).distance_to(lot) < 7.5:
 				return true
+		if Rect2(4.0, 9.0, 22.0, 26.0).has_point(Vector2(x, z)):
+			return true
 		return d > FENCE_R - 1.5
 	scatter(["grass_clump"], Rect2(-40, -40, 80, 80), 520, 1.1, Vector2(0.8, 1.3), avoid)
 	scatter(["fern", "mushrooms", "rock_small"], Rect2(-40, -40, 80, 80), 70, 2.5, Vector2(0.7, 1.1), avoid, true, true)

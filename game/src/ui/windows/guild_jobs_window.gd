@@ -117,11 +117,14 @@ func _fill_info(hero: HeroData) -> void:
 	var g := DataGuilds.guild(guild)
 	var head := hbox(12)
 	_info.add_child(head)
-	var gname := UITheme.title(String(g.name), 24, (g.color as Color).lightened(0.3))
+	var own_name := GuildRules.display_name(hero) if hero.guild == guild else String(g.name)
+	var gname := UITheme.title(own_name if own_name == String(g.name) else "%s  (%s)" % [own_name, g.short], 24, (g.color as Color).lightened(0.3))
 	gname.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(gname)
 	if hero.guild == guild:
 		head.add_child(UITheme.label("You are registered: %s" % DataGuilds.tier_name(hero.tier), 19, UITheme.GOOD, UITheme.body_bold()))
+		head.add_child(_btn("Name & Banner", func() -> void: Game.ui_root.open(&"guild_custom"), &"", 210.0))
+		head.add_child(_btn("Name & Banner", func() -> void: Game.ui_root.open(&"guild_custom"), &"", 210.0))
 	else:
 		var fee := GuildRules.join_fee(hero, guild)
 		var verb := "Register with %s" % g.short if hero.guild == &"" else "Transfer to %s" % g.short

@@ -177,6 +177,7 @@ static func on_kill(hero: HeroData, is_elite: bool, map_id: String) -> void:
 ## Wire the world events to the active hero's jobs (called once by Game).
 static func connect_events() -> void:
 	Events.herb_gathered.connect(func(_b: StringName, c: int) -> void: progress(Game.hero, "herb", c))
+	Events.weapon_upgraded.connect(func(_i: ItemInstance, _k: StringName) -> void: progress(Game.hero, "craft", 1))
 	Events.item_crafted.connect(func(_r: StringName, _items: Array) -> void: progress(Game.hero, "craft", 1))
 	Events.camp_cleared.connect(func(_m: StringName, _z: String, _l: int, _t: int) -> void: progress(Game.hero, "camp", 1))
 	Events.stage_cleared.connect(func(_m: StringName) -> void: progress(Game.hero, "stage", 1))

@@ -46,7 +46,7 @@ static func _hollis() -> NpcDef:
 						"You have brought us **{clears}** such tidings so far. Every one of them is a new stall of goods. The next is up to you."],
 					"next": "hub"},
 				"people": {"text": [
-						"**Corvin Ashby** at the Arms Exchange sells advanced weapons and armor. **Elsbeth Crane** at the market sells rings, amulets and charms. Both cost a fortune and are worth it.",
+						"**Corvin Ashby** at the Arms Exchange sells advanced weapons and armor. **Elsbeth Crane** at Fine Settings sells rings, amulets and charms. They and the apothecary, the alchemy table, the workbench and the forge all stand along **Market Row**, south-west of the plaza. Both cost a fortune and are worth it.",
 						"**Master Aldous Pell** brews at his alchemy table west of the plaza; he sells herbs and recipe scrolls too. **Wren Talbot** keeps the docks, and **Pip** keeps everyone's secrets and none of his own."],
 					"next": "hub"},
 				"beyond": {"text": [
@@ -59,7 +59,7 @@ static func _hollis() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ arms broker
 static func _corvin() -> NpcDef:
 	return NpcDef.make(&"corvin", "Corvin Ashby", {"title": "Arms Broker", "portrait": _p("arms_broker", "merchant"), "map": &"olivar",
-		"position": Vector3(22.8, 0, 1.4), "yaw": -100.0, "model": TOWN % "merchant", "tint": Color(0.32, 0.18, 0.14), "shop": &"olivar_arms",
+		"position": DataTownRows.npc_spot(&"corvin").position, "yaw": DataTownRows.npc_spot(&"corvin").yaw, "model": TOWN % "merchant", "tint": Color(0.32, 0.18, 0.14), "shop": &"olivar_arms",
 		"idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
@@ -85,7 +85,7 @@ static func _corvin() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ jeweller
 static func _elsbeth() -> NpcDef:
 	return NpcDef.make(&"elsbeth", "Elsbeth Crane", {"title": "Jeweller", "portrait": _p("jeweller", "lantern_scribe"), "map": &"olivar",
-		"position": Vector3(-12.7, 0, 18.2), "yaw": 150.0, "model": TOWN % "matron", "tint": Color(0.42, 0.22, 0.5), "shop": &"olivar_jewels",
+		"position": DataTownRows.npc_spot(&"elsbeth").position, "yaw": DataTownRows.npc_spot(&"elsbeth").yaw, "model": TOWN % "matron", "tint": Color(0.42, 0.22, 0.5), "shop": &"olivar_jewels",
 		"idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
@@ -105,7 +105,7 @@ static func _elsbeth() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ alchemist
 static func _aldous() -> NpcDef:
 	return NpcDef.make(&"aldous", "Master Aldous Pell", {"title": "Alchemist", "portrait": _p("alchemist", "keeper"), "map": &"olivar",
-		"position": Vector3(-24.4, 0, -12.0), "yaw": 90.0, "model": TOWN % "scholar", "tint": Color(0.2, 0.36, 0.26), "shop": &"olivar_alchemy",
+		"position": DataTownRows.npc_spot(&"aldous").position, "yaw": DataTownRows.npc_spot(&"aldous").yaw, "model": TOWN % "scholar", "tint": Color(0.2, 0.36, 0.26), "shop": &"olivar_alchemy",
 		"idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],

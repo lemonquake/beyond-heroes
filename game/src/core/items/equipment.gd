@@ -155,8 +155,8 @@ func loadout() -> WeaponLoadout:
 		lo.main_min = r.x
 		lo.main_max = r.y
 		lo.main_crit = lo.main_type.crit_chance if lo.main_type != null else 0.05
-		lo.main_element = main.base.element
-		lo.main_elem_share = main.base.element_share
+		lo.main_element = main.weapon_element()
+		lo.main_elem_share = main.weapon_element_share()
 		lo.main_aps = main.base.weapon_aps()
 	if sub != null:
 		if sub.base.category == &"shield":
@@ -168,8 +168,8 @@ func loadout() -> WeaponLoadout:
 			var r2 := sub.damage_range()
 			lo.off_min = r2.x
 			lo.off_max = r2.y
-			lo.off_element = sub.base.element
-			lo.off_elem_share = sub.base.element_share
+			lo.off_element = sub.weapon_element()
+			lo.off_elem_share = sub.weapon_element_share()
 			lo.off_aps = sub.base.weapon_aps()
 			lo.dual_wield = lo.main_type != null and lo.off_type != null and lo.main_type.dual_wieldable and lo.off_type.dual_wieldable
 	return lo

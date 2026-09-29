@@ -22,7 +22,7 @@ const ALCHEMY := Vector2(-21.5, -13.0)
 const JEWELS := Vector2(-12, 17)
 const PIER_X := 4.0
 ## Houses: (x, z, yaw). Not enterable; lit windows and yards.
-const HOUSES := [[-30.0, 22.0, 90.0], [-33.0, 34.5, 60.0], [30.0, 22.0, -90.0], [33.0, 34.0, -120.0], [-5.0, 32.0, 180.0],
+const HOUSES := [[-30.0, 22.0, 90.0], [-33.0, 34.5, 60.0], [30.0, 22.0, -90.0], [33.0, 34.0, -120.0], 
 	[31.0, -24.0, -45.0], [-36.0, -23.0, 45.0], [7.0, 32.5, 190.0]]
 
 func compose() -> void:
@@ -41,7 +41,7 @@ func compose() -> void:
 	_plaza()
 	_exchange()
 	_apothecary()
-	_market()
+	_trade_row()
 	_houses()
 	_docks_and_terrace()
 	# bh-013: the sunken tomb stair by the market and the counting-house cellar behind Ashby's
@@ -58,6 +58,8 @@ func compose() -> void:
 	view("topdown", Vector3(0, 0, 2), 0.0, 89.5, 125.0, 50.0)
 	view("plaza", Vector3(0, 0, 4), 0.0, 50.0, 30.0)
 	view("exchange", Vector3(24, 0, -2), -30.0, 45.0, 22.0)
+	view("row", Vector3(-5.2, 0, 22), 0.0, 50.0, 30.0)
+	view("row_gate", Vector3(-5.2, 0, 16), 0.0, 40.0, 22.0)
 	view("apothecary", Vector3(-22, 0, -10), 25.0, 45.0, 20.0)
 	view("docks", Vector3(2, -1, -38), 0.0, 48.0, 30.0)
 	view("west_gate", Vector3(-46, 0, 12), 60.0, 45.0, 26.0)
@@ -92,7 +94,7 @@ func _splat(x: float, z: float) -> Color:
 	var plaza := 1.0 - smoothstep(10.0, 11.5, Vector2(x, z).distance_to(PLAZA))
 	var sand := smoothstep(-34.0, -40.0, z)
 	var outside := 1.0 if (x < WALL_W - 2.0 or x > WALL_E + 2.0 or z > WALL_S + 2.0) else 0.0
-	var b := clampf(maxf(road, plaza), 0.0, 1.0) * (1.0 - sand)
+	var b := clampf(maxf(maxf(road, plaza), DataTownRows.paved(&"olivar", x, z)), 0.0, 1.0) * (1.0 - sand)
 	var r := clampf(maxf(trail, sand) + n * 0.08, 0.0, 1.0)
 	var g := clampf(outside * 0.6 + n * 0.25, 0.0, 1.0) * (1.0 - trail)
 	return Color(r * (1.0 - b), g * (1.0 - b), b)
@@ -209,33 +211,20 @@ func _apothecary() -> void:
 	var h := kit("house_intact", Vector3(c.x, 0, c.y), 90.0, 1.0, props, true)
 	light(socket_pos(h, "door_light"), Color(0.7, 1.0, 0.75), 2.2, 7.0, false, true)
 	keep_clear(c.x, c.y, 6.0)
-	# the alchemy table in the herb garden: a long table, the kettle on its hearth, shelves of jars
-	var a := ALCHEMY
-	kit("table_long", Vector3(a.x, 0, a.y), 0.0, 1.0, props, true)
-	var hearth := kit("cooking_hearth", Vector3(a.x + 3.0, 0, a.y - 0.4), 0.0, 1.0, props, true)
-	flame(socket_pos(hearth, "flame"), 0.8)
-	light(socket_pos(hearth, "light"), Color(0.6, 1.0, 0.7), 2.2, 7.0, false, true)
-	kit("bookshelf_full", Vector3(a.x - 0.5, 0, a.y - 1.4), 0.0, 0.8, props, true)
-	candles(Vector3(a.x - 0.9, 1.08 + height_at(a.x, a.y), a.y))
-	crafting_station(&"alchemy", Vector3(a.x + 0.3, 0, a.y + 1.1), "Pell's Alchemy Table")
-	keep_clear(a.x, a.y, 4.0)
 	# the garden beds
 	for i in 5:
 		var p := Vector2(-26.0 + i * 1.6, -2.2 + (i % 2) * 0.8)
 		decor("fern", Vector3(p.x, 0, p.y), rng.randf() * 360.0, 0.7)
 	kit("wood_fence", Vector3(-24.0, 0, -0.4), 0.0, 1.0, props, true)
 
-func _market() -> void:
-	var j := kit("market_stall", Vector3(JEWELS.x, 0, JEWELS.y), 150.0, 1.0, props, true)
-	light(socket_pos(j, "light"), Color(1.0, 0.85, 0.55), 2.2, 7.0, false, true)
-	keep_clear(JEWELS.x, JEWELS.y, 3.5)
-	for s in [[Vector2(-17.0, 12.0), 60.0], [Vector2(14.5, 5.5), -110.0], [Vector2(-5.0, 22.0), 175.0]]:
-		var st := kit("market_stall", Vector3(s[0].x, 0, s[0].y), s[1], 1.0, props, true)
-		light(socket_pos(st, "light"), Color(1.0, 0.72, 0.42), 1.6, 6.0, false, true)
-		keep_clear(s[0].x, s[0].y, 3.5)
-	kit("cart_hay", Vector3(-19.5, 0, 16.5), 30.0, 1.0, props, true)
-	for p: Vector3 in [Vector3(-15.5, 0, 15.2), Vector3(16.8, 0, 8.4), Vector3(-2.5, 0, 24.4)]:
-		breakable("crate", p, rng.randf() * 90.0, 20.0, true)
+## bh-017: Market Row (DataTownRows): the jeweller, the apothecary, the arms broker, the alchemy table, the workbench and the forge
+## stand together along one signed street south-west of the plaza (Ashby's warehouse stays on the east side).
+func _trade_row() -> void:
+	TownRowBuilder.build(self, def.id)
+	kit("cart_hay", Vector3(-5.2, 0, 33.6), 0.0, 1.0, props, true)
+	keep_clear(-5.2, 33.6, 3.0)
+	for p: Vector3 in [Vector3(-7.4, 0, 32.6), Vector3(-3.0, 0, 32.8)]:
+		breakable("crate" if p.x < -5.2 else "barrel", p, rng.randf() * 90.0, 20.0, true)
 
 func _houses() -> void:
 	for hd in HOUSES:

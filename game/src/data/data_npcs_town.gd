@@ -462,7 +462,7 @@ static func _zerin() -> NpcDef:
 ## heroes who will lead them to their vengeance (companions: see TempoRules / LORE §9).
 static func _veyra() -> NpcDef:
 	return _npc(&"veyra", "Veyra Ashgrave", {"title": "Tempo-Caller", "portrait": PORTRAIT % "tempo_caller",
-		"map": &"sanctuary", "position": Vector3(12.6, 0, -10.6), "yaw": -40.0, "model": CHAR % "elder", "tint": Color(0.3, 0.5, 0.58),
+		"map": &"sanctuary", "position": DataTownRows.npc_spot(&"veyra").position, "yaw": DataTownRows.npc_spot(&"veyra").yaw, "model": CHAR % "elder", "tint": Color(0.3, 0.5, 0.58),
 		"services": [&"tempo_hire", &"tempo_revive", &"tempo_renowned"],
 		"graph": {
 			"entries": [
