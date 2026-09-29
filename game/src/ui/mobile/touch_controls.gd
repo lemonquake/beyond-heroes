@@ -442,10 +442,7 @@ func _release(b: TouchButton, idx: int, pos: Vector2) -> void:
 			if player:
 				player.ping_here()
 		&"regroup":
-			if Net.is_host():
-				Net.summon_party()
-			else:
-				Net.regroup()
+			Net.open_team_portal()
 		_:
 			if String(b.id).begins_with("skill_") and idx == _aim_touch:
 				_aim_touch = -99

@@ -476,7 +476,7 @@ func _select_target(delta: float) -> void:
 	var best_s := _target_score(best) if best else -INF
 	# other players' heroes are targets only where the host resolves their hits (bh-015: in a client's own world they
 	# are visitors the monsters cannot hurt, so they are not chased either)
-	var others: Array = get_tree().get_nodes_in_group(&"net_ally") if not Net.is_client() else []
+	var others: Array = get_tree().get_nodes_in_group(&"net_ally") if Net.is_world_authority() else []
 	for t in get_tree().get_nodes_in_group(&"tempo") + others:
 		if not t.alive or _hidden(t):
 			continue

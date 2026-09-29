@@ -1,0 +1,332 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_auto_loot_filters.gd — 4 tests, 30 checks, 0 failures (7.0 ms)
+BALANCE L1 knight      single     9.9  aoe    20.1  ehp    1046  power    456.2
+BALANCE L1 mage        single    43.6  aoe   127.6  ehp     266  power   1215.5
+BALANCE L1 ranger      single    30.3  aoe    56.2  ehp     394  power    819.4
+BALANCE L1 shadowblade single     9.4  aoe     0.0  ehp     345  power      0.0
+BALANCE L10 knight      single    24.4  aoe   142.4  ehp    1133  power   1983.9
+BALANCE L10 mage        single   154.0  aoe   395.4  ehp     389  power   4866.5
+BALANCE L10 ranger      single    50.5  aoe   101.8  ehp     516  power   1629.2
+BALANCE L10 shadowblade single    18.6  aoe     0.0  ehp     493  power      0.0
+BALANCE L20 knight      single    33.4  aoe   124.9  ehp    1666  power   2636.6
+BALANCE L20 mage        single   144.6  aoe   423.7  ehp     535  power   5722.7
+BALANCE L20 ranger      single    52.0  aoe   106.4  ehp     688  power   1951.3
+BALANCE L20 shadowblade single    26.9  aoe    10.1  ehp     684  power    431.0
+BALANCE L30 knight      single    67.6  aoe   227.1  ehp    2022  power   5571.1
+BALANCE L30 mage        single   119.3  aoe   290.8  ehp     690  power   4893.5
+BALANCE L30 ranger      single    73.5  aoe   184.6  ehp     875  power   3446.1
+BALANCE L30 shadowblade single    38.8  aoe   128.7  ehp     873  power   2088.1
+[FAIL] test_balance.gd — 1 tests, 16 checks, 13 failures (369281.1 ms)
+[PASS] test_bh011.gd — 6 tests, 45 checks, 0 failures (5358.6 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _floor (res://tests/unit/test_bh012.gd:29)
+       [2] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [3] _ready (res://tests/run_tests.gd:40)
+       [4] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@33178' will make owner 'armillary_sphere_115' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@33179' will make owner 'armillary_sphere_115' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@33180' will make owner 'armillary_sphere_115' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@33318' will make owner 'armillary_sphere_116' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@33319' will make owner 'armillary_sphere_116' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@33320' will make owner 'armillary_sphere_116' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@33436' will make owner 'armillary_sphere_96' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@33437' will make owner 'armillary_sphere_96' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@33438' will make owner 'armillary_sphere_96' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@33563' will make owner 'armillary_sphere_106' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@33564' will make owner 'armillary_sphere_106' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@33565' will make owner 'armillary_sphere_106' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:599)
+       [1] compose (res://src/world/maps/dungeon.gd:91)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:167)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+[PASS] test_bh012.gd — 11 tests, 1142 checks, 0 failures (2276.5 ms)
+[PASS] test_bh013.gd — 11 tests, 1017 checks, 0 failures (8589.1 ms)
+[PASS] test_bh014.gd — 10 tests, 30 checks, 0 failures (121.7 ms)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _zoom_button (res://src/ui/hud/minimap.gd:207)
+       [2] _ready (res://src/ui/hud/minimap.gd:152)
+       [3] _build_top_right (res://src/ui/hud/hud.gd:271)
+       [4] _ready (res://src/ui/hud/hud.gd:83)
+       [5] test_hud_column_stays_on_screen (res://tests/unit/test_bh015.gd:151)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_sleeping_monster_parks_its_agent (res://tests/unit/test_bh014.gd:133)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _zoom_button (res://src/ui/hud/minimap.gd:207)
+       [2] _ready (res://src/ui/hud/minimap.gd:153)
+       [3] _build_top_right (res://src/ui/hud/hud.gd:271)
+       [4] _ready (res://src/ui/hud/hud.gd:83)
+       [5] test_hud_column_stays_on_screen (res://tests/unit/test_bh015.gd:151)
+       [6] _ready (res://tests/run_tests.gd:40)
+       [7] test_sleeping_monster_parks_its_agent (res://tests/unit/test_bh014.gd:133)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _draw (res://src/ui/hud/skill_button.gd:142)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _zoom_button (res://src/ui/hud/minimap.gd:207)
+       [2] _ready (res://src/ui/hud/minimap.gd:152)
+       [3] test_minimap_math_and_trades (res://tests/unit/test_bh015.gd:170)
+       [4] _ready (res://tests/run_tests.gd:40)
+       [5] test_hud_column_stays_on_screen (res://tests/unit/test_bh015.gd:166)
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] _zoom_button (res://src/ui/hud/minimap.gd:207)
+       [2] _ready (res://src/ui/hud/minimap.gd:153)
+       [3] test_minimap_math_and_trades (res://tests/unit/test_bh015.gd:170)
+       [4] _ready (res://tests/run_tests.gd:40)
+       [5] test_hud_column_stays_on_screen (res://tests/unit/test_bh015.gd:166)
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:68)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:250)
+       [2] _ready (res://tests/run_tests.gd:40)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:70)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:250)
+       [2] _ready (res://tests/run_tests.gd:40)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Slot 98 restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:73)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:250)
+       [2] _ready (res://tests/run_tests.gd:40)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:68)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:252)
+       [3] _ready (res://tests/run_tests.gd:40)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:70)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:252)
+       [3] _ready (res://tests/run_tests.gd:40)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Slot 98 restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:73)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:252)
+       [3] _ready (res://tests/run_tests.gd:40)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:220)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+[FAIL] test_bh015.gd — 11 tests, 10108 checks, 4 failures (919.2 ms)
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:259)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:58)
+       [2] test_trade_refuses_bad_offers_and_changes_nothing (res://tests/unit/test_bh016.gd:401)
+       [3] _ready (res://tests/run_tests.gd:40)
+       [4] test_guild_house_builds (res://tests/unit/test_bh016.gd:307)
+[PASS] test_bh016.gd — 15 tests, 1394 checks, 0 failures (691.5 ms)
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:130)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:131)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:132)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:194)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _ready (res://tests/run_tests.gd:40)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)

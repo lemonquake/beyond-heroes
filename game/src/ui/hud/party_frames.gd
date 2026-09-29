@@ -49,16 +49,16 @@ func _rebuild() -> void:
 	for id in ids:
 		add_child(_row(id))
 	_summon_btn = null
-	if Net.is_host():
-		# bh-015: the host calls everyone who is away to their side; each player chooses Go or Stay
+	if Net.is_active():
+		# Team Portal: the host calls everyone who is away to their side; each player chooses Go or Stay
 		_summon_btn = Button.new()
-		_summon_btn.text = "Summon Party  (%s)" % Settings.binding_text(&"summon_party")
+		_summon_btn.text = "Team Portal  (%s)" % Settings.binding_text(&"summon_party")
 		_summon_btn.theme_type_variation = &"PrimaryButton"
 		_summon_btn.custom_minimum_size = Vector2(W, 36)
 		_summon_btn.focus_mode = Control.FOCUS_NONE
 		_summon_btn.add_theme_font_size_override("font_size", 16)
-		_summon_btn.pressed.connect(func() -> void: Net.summon_party())
-		TooltipLayer.attach(_summon_btn, func() -> Control: return Tips.text("Ask everyone who is away to come to your side. Each of them chooses Go or Stay."))
+		_summon_btn.pressed.connect(func() -> void: Net.open_team_portal())
+		TooltipLayer.attach(_summon_btn, func() -> Control: return Tips.text("Travel to the party leader, or choose a member to visit if you are the leader."))
 		add_child(_summon_btn)
 
 func _row(id: int) -> Control:
@@ -111,8 +111,8 @@ func _row(id: int) -> Control:
 	v.add_child(sub)
 	TooltipLayer.attach(p, func() -> Control: return _tip(id))
 	p.gui_input.connect(func(e: InputEvent) -> void:
-		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT and id == 1 and Net.is_client():
-			Net.regroup())
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT and (Net.is_host() or id == 1):
+			Net.team_portal(id))
 	_rows[id] = {"root": p, "name": nm, "sub": sub, "hp": hp, "ping": ping}
 	return p
 
@@ -126,8 +126,8 @@ func _tip(id: int) -> Control:
 	var av := Net.avatar(id)
 	if av and not av.alive:
 		lines.append("Fallen. Stand beside them and press %s to revive them." % Settings.binding_text(&"interact"))
-	if id == 1 and Net.is_client():
-		lines.append("Click to regroup at their side.")
+	if Net.is_host() or id == 1:
+		lines.append("Click to cast Team Portal to their side.")
 	return Tips.text("\n".join(lines), String(info.get("name", "Hero")))
 
 func _process(delta: float) -> void:
@@ -135,7 +135,7 @@ func _process(delta: float) -> void:
 	if _t > 0.0 or not visible:
 		return
 	_t = 0.12
-	if _others().size() != _rows.size() or not _rows.is_empty() and (_summon_btn == null) == Net.is_host():
+	if _others().size() != _rows.size() or not _rows.is_empty() and _summon_btn == null:
 		_rebuild()
 		return
 	var here := String(Game.current_map_id)
@@ -184,4 +184,4 @@ func _process(delta: float) -> void:
 			sub.add_theme_color_override("font_color", UITheme.TEXT_DIM)
 			root.modulate = Color(0.85, 0.85, 0.92)
 	if _summon_btn:
-		_summon_btn.visible = Net.is_host() and not _rows.is_empty()
+		_summon_btn.visible = Net.is_active() and not _rows.is_empty()

@@ -4,7 +4,7 @@ extends Node
 ## Drops per rank (before Magic Find):
 ##   normal  drop_chance -> 1 item; 10% health / 6% mana potion; family materials
 ##   elite   2-3 items, one guaranteed Advanced or better; 4% set piece, 1.5% Aether unique; 3x XP
-##   boss    5-6 items, one guaranteed Master or better; 40% set piece, 15% Aether unique; boss materials
+##   boss    5-6 class items, all Master or better; 40% set piece, 15% Aether unique; boss materials
 ## Item level = monster level (+1 elite, +2 boss). Rarity uses ItemGenerator.roll_rarity with a rank bonus.
 
 var rng := RandomNumberGenerator.new()
@@ -74,7 +74,6 @@ func award_xp(e: Enemy, player: Player) -> void:
 func drop_for(e: Enemy, player: Player) -> void:
 	var mf := player.stats.get_stat(&"magic_find")
 	var ilvl := e.level + (2 if e.is_boss or e.is_miniboss() else (1 if e.is_elite else 0))
-	var rank_bonus := 2.0 if e.is_boss else (1.2 if e.is_miniboss() else (0.6 if e.is_elite else 0.0))
 	var at := e.global_position
 	var drops: Array = []
 	# Gold
@@ -83,39 +82,7 @@ func drop_for(e: Enemy, player: Player) -> void:
 		* (1.0 + (GuildRules.elite_gold_bonus(player.hero) if e.is_elite or e.is_boss else 0.0))))
 	if g > 0 and (rng.randf() < 0.75 or e.is_elite or e.is_boss):
 		spawn_gold(at, g)
-	# Equipment
-	var n := 0
-	if e.is_boss:
-		n = rng.randi_range(5, 6)
-	elif e.is_miniboss():
-		n = rng.randi_range(3, 4)
-	elif e.is_elite:
-		n = rng.randi_range(2, 3)
-	elif rng.randf() < e.def.drop_chance * 0.6:
-		n = 1
-	var cls: StringName = player.hero.cls.id
-	for i in n:
-		var rarity := ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl)
-		if i == 0 and e.is_boss:
-			rarity = maxi(rarity, BH.Rarity.MASTER)
-		elif i < 2 and e.is_miniboss():
-			rarity = maxi(rarity, BH.Rarity.ELITE if i == 0 else BH.Rarity.ADVANCED)
-		elif i == 0 and e.is_elite:
-			rarity = maxi(rarity, BH.Rarity.ADVANCED)
-		var base := ItemGenerator.random_base(rng, ilvl, [], cls)
-		if base:
-			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
-	# Set pieces and Aether uniques
-	var set_p := 0.4 if e.is_boss else (0.04 if e.is_elite else 0.002)
-	var uniq_p := 0.15 if e.is_boss else (0.015 if e.is_elite else 0.0005)
-	if rng.randf() < set_p * (1.0 + mf):
-		var sb := ItemGenerator.random_special(rng, ilvl + 4, true, cls)
-		if sb:
-			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))
-	if rng.randf() < uniq_p * (1.0 + mf):
-		var ub := ItemGenerator.random_special(rng, ilvl + 4, false, cls)
-		if ub:
-			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
+	drops.append_array(equipment_for(e, player))
 	# Consumables and materials
 	if rng.randf() < 0.10:
 		drops.append(DB.make_item(&"health_potion", BH.Rarity.COMMON, ilvl, rng.randi()))
@@ -156,6 +123,50 @@ func drop_for(e: Enemy, player: Player) -> void:
 	for i in drops.size():
 		var ang := TAU * float(i) / maxf(1.0, drops.size()) + rng.randf() * 0.5
 		spawn_item(drops[i], at, ang, 1.0 + rng.randf() * (1.8 if e.is_boss or e.is_miniboss() else 1.0))
+
+## Equipment rolls are separate from world spawning so every rank/class combination can be verified.
+## Bosses: every piece Master+, minibosses: every piece Elite+, always class gear, including a weapon.
+## Normal attribute, level and earned-rank equip requirements still apply.
+func equipment_for(e: Enemy, player: Player) -> Array:
+	var mf := player.stats.get_stat(&"magic_find")
+	var ilvl := e.level + (2 if e.is_boss or e.is_miniboss() else (1 if e.is_elite else 0))
+	var rank_bonus := 2.0 if e.is_boss else (1.2 if e.is_miniboss() else (0.6 if e.is_elite else 0.0))
+	var drops: Array = []
+	var n := 0
+	if e.is_boss:
+		n = rng.randi_range(5, 6)
+	elif e.is_miniboss():
+		n = rng.randi_range(3, 4)
+	elif e.is_elite:
+		n = rng.randi_range(2, 3)
+	elif rng.randf() < e.def.drop_chance * 0.6:
+		n = 1
+	var cls: StringName = player.hero.cls.id
+	var guaranteed := e.is_boss or e.is_miniboss()
+	var fit := 1.0 if guaranteed else ItemGenerator.CLASS_FIT_CHANCE
+	for i in n:
+		var rarity := ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl)
+		if e.is_boss:
+			rarity = maxi(rarity, BH.Rarity.MASTER)
+		elif e.is_miniboss():
+			rarity = maxi(rarity, BH.Rarity.ELITE)
+		elif i == 0 and e.is_elite:
+			rarity = maxi(rarity, BH.Rarity.ADVANCED)
+		var base := ItemGenerator.random_base(rng, ilvl, [&"weapon"] if guaranteed and i == 0 else [], cls, fit)
+		if base:
+			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
+	# Set pieces and Aether uniques
+	var set_p := 0.4 if e.is_boss else (0.04 if e.is_elite else 0.002)
+	var uniq_p := 0.15 if e.is_boss else (0.015 if e.is_elite else 0.0005)
+	if rng.randf() < set_p * (1.0 + mf):
+		var sb := ItemGenerator.random_special(rng, ilvl + 4, true, cls, fit)
+		if sb:
+			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))
+	if rng.randf() < uniq_p * (1.0 + mf):
+		var ub := ItemGenerator.random_special(rng, ilvl + 4, false, cls, fit)
+		if ub:
+			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
+	return drops
 
 ## Soul Embers a kill drops (0 = none): rare on the surface, common in the dungeons, generous from champions.
 func ember_roll(e: Enemy, in_dungeon: bool, find := 0.0) -> int:

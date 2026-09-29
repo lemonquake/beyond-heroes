@@ -1,0 +1,56 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] fill_keys (res://src/core/dialogue/dialogue.gd:232)
+       [2] fill (res://src/core/dialogue/dialogue.gd:192)
+       [3] _show_line (res://src/core/dialogue/dialogue_session.gd:63)
+       [4] advance (res://src/core/dialogue/dialogue_session.gd:76)
+       [5] test_opening_errand_flow (res://tests/unit/test_bh021.gd:114)
+       [6] _ready (res://tests/run_tests.gd:40)
+[PASS] test_bh021.gd — 13 tests, 379 checks, 0 failures (2742.1 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":15,"hits_to_kill":4.3,"level":5,"skill_hit":29,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":51,"hits_to_kill":4.1,"level":10,"skill_hit":96,"weapon":"knights_arming_sword","weapon_max":32,"weapon_min":20}
+GROWTH {"class":"knight","enemy_hp":472,"hit":118,"hits_to_kill":4.0,"level":15,"skill_hit":225,"weapon":"duelist_sabre","weapon_max":52,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":299,"hits_to_kill":3.1,"level":20,"skill_hit":568,"weapon":"runed_sword","weapon_max":96,"weapon_min":62}
+GROWTH {"class":"knight","enemy_hp":1611,"hit":405,"hits_to_kill":4.0,"level":25,"skill_hit":770,"weapon":"bastard_sword","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"knight","enemy_hp":2617,"hit":502,"hits_to_kill":5.2,"level":30,"skill_hit":953,"weapon":"gravewatch_longsword","weapon_max":226,"weapon_min":121}
+GROWTH {"class":"knight","enemy_hp":8360,"hit":1855,"hits_to_kill":4.5,"level":45,"skill_hit":3525,"weapon":"starfall_sabre","weapon_max":467,"weapon_min":254}
+GROWTH {"class":"knight","enemy_hp":20336,"hit":3360,"hits_to_kill":6.1,"level":60,"skill_hit":6384,"weapon":"kingsbane","weapon_max":1028,"weapon_min":557}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":44,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":67,"hits_to_kill":3.1,"level":10,"skill_hit":87,"weapon":"storm_staff","weapon_max":36,"weapon_min":21}
+GROWTH {"class":"mage","enemy_hp":472,"hit":197,"hits_to_kill":2.4,"level":15,"skill_hit":175,"weapon":"storm_staff","weapon_max":65,"weapon_min":37}
+GROWTH {"class":"mage","enemy_hp":920,"hit":305,"hits_to_kill":3.0,"level":20,"skill_hit":297,"weapon":"frost_staff","weapon_max":91,"weapon_min":54}
+GROWTH {"class":"mage","enemy_hp":1611,"hit":494,"hits_to_kill":3.3,"level":25,"skill_hit":465,"weapon":"frost_staff","weapon_max":137,"weapon_min":82}
+GROWTH {"class":"mage","enemy_hp":2617,"hit":893,"hits_to_kill":2.9,"level":30,"skill_hit":622,"weapon":"deepwater_staff","weapon_max":226,"weapon_min":121}
+GROWTH {"class":"mage","enemy_hp":8360,"hit":1101,"hits_to_kill":7.6,"level":45,"skill_hit":1394,"weapon":"gloamspire_staff","weapon_max":577,"weapon_min":309}
+GROWTH {"class":"mage","enemy_hp":20336,"hit":12679,"hits_to_kill":1.6,"level":60,"skill_hit":2748,"weapon":"sunspire_staff","weapon_max":1050,"weapon_min":568}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":30,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":41,"hits_to_kill":5.0,"level":10,"skill_hit":78,"weapon":"composite_bow","weapon_max":38,"weapon_min":20}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":105,"hits_to_kill":4.5,"level":15,"skill_hit":200,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":168,"hits_to_kill":5.5,"level":20,"skill_hit":319,"weapon":"warden_longbow","weapon_max":109,"weapon_min":57}
+GROWTH {"class":"ranger","enemy_hp":1611,"hit":382,"hits_to_kill":4.2,"level":25,"skill_hit":725,"weapon":"siege_greatbow","weapon_max":272,"weapon_min":131}
+GROWTH {"class":"ranger","enemy_hp":2617,"hit":441,"hits_to_kill":5.9,"level":30,"skill_hit":838,"weapon":"thornback_bow","weapon_max":272,"weapon_min":132}
+GROWTH {"class":"ranger","enemy_hp":8360,"hit":1161,"hits_to_kill":7.2,"level":45,"skill_hit":2206,"weapon":"frostwing_bow","weapon_max":645,"weapon_min":309}
+GROWTH {"class":"ranger","enemy_hp":20336,"hit":3421,"hits_to_kill":5.9,"level":60,"skill_hit":6500,"weapon":"stormstring_greatbow","weapon_max":1736,"weapon_min":831}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.2,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":25,"hits_to_kill":8.3,"level":10,"skill_hit":47,"weapon":"shadow_kris","weapon_max":25,"weapon_min":13}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":71,"hits_to_kill":6.7,"level":15,"skill_hit":134,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":127,"hits_to_kill":7.2,"level":20,"skill_hit":242,"weapon":"aether_stiletto","weapon_max":72,"weapon_min":37}
+GROWTH {"class":"shadowblade","enemy_hp":1611,"hit":165,"hits_to_kill":9.8,"level":25,"skill_hit":313,"weapon":"viper_fang","weapon_max":93,"weapon_min":58}
+GROWTH {"class":"shadowblade","enemy_hp":2617,"hit":285,"hits_to_kill":9.2,"level":30,"skill_hit":542,"weapon":"emberfang_dirk","weapon_max":140,"weapon_min":83}
+GROWTH {"class":"shadowblade","enemy_hp":8360,"hit":727,"hits_to_kill":11.5,"level":45,"skill_hit":1382,"weapon":"stormneedle","weapon_max":316,"weapon_min":188}
+GROWTH {"class":"shadowblade","enemy_hp":20336,"hit":1314,"hits_to_kill":15.5,"level":60,"skill_hit":2496,"weapon":"nightwhisper","weapon_max":642,"weapon_min":389}
+[PASS] test_combat_growth.gd — 5 tests, 130 checks, 0 failures (1552.6 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (235.8 ms)
+[PASS] test_guilds.gd — 8 tests, 100 checks, 0 failures (20.9 ms)
+[PASS] test_inventory_overhaul.gd — 6 tests, 1917 checks, 0 failures (55.8 ms)
+[PASS] test_items.gd — 17 tests, 2477 checks, 0 failures (524.1 ms)
+[PASS] test_stats.gd — 8 tests, 159 checks, 0 failures (21.6 ms)
+TOTAL: 5222 checks, 0 failures
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -1,21 +1,14 @@
 extends Node
 ## Multiplayer (autoload `Net`, bh-008). Co-op for up to four heroes over ENet, the same on PC and Android.
 ##
-##   Host      a player opens their running game ("Host Game"). Their machine is the authority for the world: it runs
-##             the monsters, decides where the party is, and relays everyone's snapshots.
-##   Join      another player, already playing their own hero, joins by LAN discovery or by address. Their game
-##             arrives at the host's side and, on the host's map, shows the host's monsters as replicas.
-##   Heroes    every machine sends its own hero and Tempos ~15 times a second; the others draw them as NetAvatars.
-##   Combat    a client's blow on a replica is resolved on the client (its hero's stats) and the result is applied by
-##             the host; a monster's blow on a NetAvatar is sent to the avatar's owner and resolved against the real
-##             hero there (guard, dodge, resistances all count). Kills are announced; every hero in the map gets the
-##             experience and rolls their own loot (instanced loot: nobody steals anybody's drops).
-##   Travel    (bh-015) everyone explores on their own. A joining player arrives at the host's side; after that each
-##             player takes doors, waypoints and scrolls freely. On the host's map the host's monsters are shared
-##             (replicas on the clients); anywhere else a client's world runs its own monsters, as when playing alone.
-##             When the host walks into a client's map the client's own monsters give way to the host's; when the host
-##             leaves, the map fills with the client's own again. The host can Summon the party: every player away
-##             from them is asked "Go / Stay"; Go puts them at the host's side. Regroup still jumps a client there.
+##   Host      the party leader opens a room and assigns one combat owner per occupied map.
+##   Join      a hero joins at the leader's side once, then uses doors and waypoints independently.
+##   Combat    each map keeps its first explorer as owner; every other hero there shares its monsters, even when
+##             the leader is elsewhere. Hits and kills route to that owner. Nearby heroes roll personal class loot.
+##   Handoff   when the owner leaves, a remaining member restores the map's live monsters and cleared camps from
+##             the latest checkpoint. Packets carry a map and generation so old combat cannot leak into a new map.
+##   Portal    members cast Team Portal to the leader; the leader picks a member. Movement/damage interrupts the
+##             cast. Summon Party remains an optional Go/Stay invitation. No move forces another player to follow.
 ##   Presence  every player's hero snapshot reaches every other machine wherever they are: the party frames show HP,
 ##             level and map for all, the minimap shows allies on the same map (arrows; on the rim with the distance
 ##             when out of sight) and the world map shows where everyone is (bh-015).
@@ -32,10 +25,10 @@ signal peers_changed
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 8                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+const PROTOCOL := 9                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
-                                     # 8: item-level combat growth, earned ranks and the Forsaken story
+                                     # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
 const SUMMON_WAIT := 30.0            # seconds a summoned player has to answer before it counts as Stay
 const SUMMON_COOLDOWN := 8.0
 const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
@@ -75,6 +68,7 @@ var _known := {}                     # host: peer -> {eid: true} spawn infos alr
 var _replicas := {}                  # client: eid -> Enemy
 var _replica_seen := {}              # client: eid -> time of the last snapshot that carried it
 var _avatars := {}                   # "peer:key" -> NetAvatar
+var _appearance_cache := {}
 var _app_sig := {}                   # local ally key -> appearance hash (resend on change)
 var _unloading := false              # the old map is leaving the tree: its monsters are not "gone", the map is
 var _connect_t := 0.0
@@ -83,7 +77,12 @@ var _travel_pending := {}            # host: the request being asked about {from
 var _travel_asked_t := -99.0         # client: when this machine last asked (one request at a time)
 var last_room := ""                  # the last room code / address this machine joined (Multiplayer > Rejoin)
 var status := {}                     # peer id -> {map, pos, yaw, hp, mhp, alive, lvl, t}: every player, wherever they are
-var _host_shared := false            # client: the host is on this map, its monsters are the ones here
+var _worlds := {}                    # map -> {owner, epoch, state}; assigned by the room host
+var _world_serial := 0
+var _world_owner := 0
+var _world_epoch := 0
+var _checkpoint_t := 0.0
+var _host_shared := false            # another member owns this map; local enemies are replicas
 var _share_t := 0.0
 var _arrived := false                # client: has reached the host once after joining (later host moves do not drag it)
 var _summon := {}                    # client: the summons being asked about {map, t}
@@ -103,6 +102,7 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	get_tree().node_added.connect(_on_node_added)
 	Events.actor_died.connect(_on_actor_died)
+	Events.stage_cleared.connect(_on_stage_cleared)
 	Game.session_ended.connect(func() -> void:
 		if is_active():
 			leave(false))
@@ -123,7 +123,7 @@ func is_client() -> bool:
 	return mode == Mode.CLIENT
 
 func my_id() -> int:
-	return multiplayer.get_unique_id() if is_active() else 1
+	return multiplayer.get_unique_id() if is_active() and _peer and _peer.get_connection_status() != MultiplayerPeer.CONNECTION_DISCONNECTED else 1
 
 ## Each human player's colour: their name plate, foot ring, chat name and party entry (bh-008).
 const PLAYER_COLORS := [Color(1.0, 0.78, 0.3), Color(0.35, 0.8, 1.0), Color(0.55, 1.0, 0.45), Color(1.0, 0.45, 0.75)]
@@ -162,7 +162,7 @@ func host_game(port := PORT) -> String:
 	_known.clear()
 	_host_enemies.clear()
 	_next_eid = 1
-	_register_existing_enemies()
+	_reassign_worlds()
 	_start_broadcast()
 	Events.notify.emit("Your world is open. Others can join from Multiplayer > Join.", &"info")
 	_chat_system("%s opened the world to other heroes." % peers[1].name)
@@ -198,11 +198,12 @@ func join_game(address: String, port := PORT) -> String:
 	state_changed.emit()
 	return ""
 
-## Leave the party (or close the hosted world). A client's world becomes its own again: the map reloads with its
-## own monsters.
+## Leave the party. Restore shared combat locally at its latest checkpoint, keeping this map and its loot.
 func leave(reload := true) -> void:
-	var was_client := is_client()
 	var was_shared := _host_shared
+	var state: Dictionary = _worlds.get(String(Game.current_map_id), {}).get("state", {}).duplicate(true)
+	if is_active() and not is_host():
+		_send_checkpoint()
 	if is_active() and _peer:
 		if is_host():
 			_chat_system("The host closed the world.")
@@ -217,17 +218,28 @@ func leave(reload := true) -> void:
 	_known.clear()
 	_host_enemies.clear()
 	_host_shared = false
+	_worlds.clear()
+	_world_owner = 0
+	_world_epoch = 0
+	_portal_pending = {}
+	_portal_serial += 1
+	_portal_ready_at = 0.0
 	_arrived = false
 	_summon = {}
 	_trade_incoming = {}
 	trade_reset()
 	_stop_broadcast()
 	_clear_avatars()
+	_appearance_cache.clear()
 	_clear_replicas()
 	state_changed.emit()
 	peers_changed.emit()
-	if was_client and reload and Game.in_session and was_shared:
-		Game.reload_current_map()          # its monsters were the host's replicas: get this map's own back
+	if reload and Game.in_session and was_shared and Game.current_map:
+		_drop_local_monsters(Game.current_map)
+		if not state.is_empty():
+			NetWorld.restore(state)
+		else:
+			Spawner.populate(Game.current_map, Game.difficulty)
 
 func _on_peer_connected(_id: int) -> void:
 	pass                                     # the client introduces itself with _hello
@@ -240,12 +252,16 @@ func _on_peer_disconnected(id: int) -> void:
 	status.erase(id)
 	_known.erase(id)
 	_remove_avatars_of(id)
+	for key in _appearance_cache.keys():
+		if key.begins_with("%d:" % id):
+			_appearance_cache.erase(key)
 	if int(trade.get("peer", -1)) == id:
 		trade_reset("%s left the game. The trade was cancelled." % who)
 	if int(_trade_incoming.get("peer", -1)) == id:
 		_trade_incoming = {}
 	if is_host():
 		_chat_system("%s left." % who, true)
+		_reassign_worlds()
 		_rpc_peers()
 	if _travel_pending.get("from", 0) == id:
 		_travel_pending = {}
@@ -285,11 +301,12 @@ func _hello(proto: int, profile: Dictionary) -> void:
 			if _peer:
 				_peer.disconnect_peer(id))
 		return
+	profile["map"] = "" # the joining hero has not arrived yet
 	peers[id] = profile
 	_known[id] = {}
 	var p := Game.player as Node3D
 	_welcome.rpc_id(id, {"map": String(Game.current_map_id), "pos": p.global_position if p else Vector3.ZERO,
-		"yaw": p.rotation.y if p else 0.0, "peers": peers})
+		"yaw": p.rotation.y if p else 0.0, "peers": peers, "worlds": _worlds})
 	_chat_system("%s joined (%s)." % [profile.get("name", "A hero"), profile.get("device", "PC")], true)
 	_rpc_peers()
 	peers_changed.emit()
@@ -303,24 +320,34 @@ func _rejected(why: String) -> void:
 @rpc("authority", "reliable")
 func _welcome(info: Dictionary) -> void:
 	peers = info.get("peers", {})
+	_worlds = info.get("worlds", {})
 	Events.notify.emit("Joined %s's world." % peers.get(1, {}).get("name", "the host"), &"info")
 	state_changed.emit()
 	peers_changed.emit()
 	_follow(StringName(info.map), info.pos, float(info.yaw))
 
 func _rpc_peers() -> void:
-	_peers_update.rpc(peers)
+	_peers_update.rpc(peers, _worlds)
 
 @rpc("authority", "reliable")
-func _peers_update(p: Dictionary) -> void:
+func _peers_update(p: Dictionary, worlds: Dictionary) -> void:
 	peers = p
+	for map in worlds:
+		if int(_worlds.get(map, {}).get("epoch", -1)) == int(worlds[map].get("epoch", 0)) and _worlds[map].get("rewarded", false):
+			worlds[map]["rewarded"] = true
+	_worlds = worlds
+	_check_shared()
 	peers_changed.emit()
 
 # ---- Following the host between maps ------------------------------------------------------------------------------
 
 ## Game.load_map calls these around every map swap on this machine.
 func map_unloading() -> void:
+	_send_checkpoint()
 	_unloading = true
+	_world_owner = 0
+	_world_epoch = 0
+	_host_enemies.clear()
 
 func on_local_map_loaded(id: StringName) -> void:
 	_unloading = false
@@ -328,64 +355,153 @@ func on_local_map_loaded(id: StringName) -> void:
 		return
 	_clear_avatars()
 	_clear_replicas()
+	_app_sig.clear()
+	_known.clear()
+	if peers.has(my_id()):
+		peers[my_id()]["map"] = String(id)
 	if is_host():
-		peers[1] = _profile()
-		for pid in _known:
-			_known[pid] = {}
-		_register_existing_enemies()
-		var p := Game.player as Node3D
-		_host_moved.rpc(String(id), p.global_position if p else Vector3.ZERO, p.rotation.y if p else 0.0)
+		_reassign_worlds()
 		_rpc_peers()
 	else:
-		_host_shared = host_on(id)
-		if not following:
-			_in_map.rpc_id(1, String(id))  # while following, _follow reports once the map is ready
+		_in_map.rpc_id(1, String(id))
+	_check_shared()
 
-## The host changed maps. A player who has not reached the host since joining follows; everyone else keeps exploring
-## (bh-015) and only hears where the host went.
-@rpc("authority", "reliable")
-func _host_moved(map: String, pos: Vector3, yaw: float) -> void:
-	if peers.has(1):
-		peers[1]["map"] = map
-	if not _arrived:
-		_follow(StringName(map), pos, yaw)
-		return
-	peers_changed.emit()
-
-## Client: is the host on map `id` right now? There its monsters are shared; anywhere else this machine runs its own.
+## Compatibility name for map loaders: true whenever another member runs this map's combat.
 func host_on(id: StringName) -> bool:
-	return is_client() and String(peers.get(1, {}).get("map", "")) == String(id)
+	var owner := world_owner(id)
+	return is_active() and owner != 0 and owner != my_id()
+
+func world_owner(id: StringName) -> int:
+	return int(_worlds.get(String(id), {}).get("owner", 0))
+
+func is_world_authority() -> bool:
+	return is_active() and _peer != null and _peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED and not _unloading and world_owner(Game.current_map_id) == my_id()
+
+static func choose_world_owner(members: Dictionary, map: String, previous: int) -> int:
+	if members.has(previous) and String(members[previous].get("map", "")) == map:
+		return previous
+	var ids := members.keys()
+	ids.sort()
+	for id in ids:
+		if String(members[id].get("map", "")) == map:
+			return int(id)
+	return 0
+
+## Keep the first member on a map in charge, even when the party leader arrives later.
+func _reassign_worlds() -> void:
+	if not is_host():
+		return
+	var maps := _worlds.keys()
+	for profile in peers.values():
+		var map := String(profile.get("map", ""))
+		if map != "" and not maps.has(map):
+			maps.append(map)
+	for map in maps:
+		var old: Dictionary = _worlds.get(map, {})
+		var owner := choose_world_owner(peers, map, int(old.get("owner", 0)))
+		if owner == 0:
+			_worlds.erase(map) # an empty map starts a new visit next time
+		elif owner != int(old.get("owner", 0)):
+			_world_serial += 1
+			_worlds[map] = {"owner": owner, "epoch": _world_serial, "state": old.get("state", {})}
+	_check_shared()
 
 func _follow(map: StringName, pos: Vector3, yaw: float) -> void:
+	if following or Game.travelling:
+		return
 	following = true
-	if peers.has(1):
-		peers[1]["map"] = String(map)       # the map about to load is the host's: no monsters of its own
 	await Game.net_follow(map, pos, yaw)
 	following = false
 	_arrived = true
-	if is_client():
-		_host_shared = host_on(Game.current_map_id)
-		_in_map.rpc_id(1, String(Game.current_map_id))   # now the host may stream its monsters
+	if is_active():
+		_check_shared()
 
-## Client: the host walked into this map (its monsters replace this machine's own) or left it (this map fills with
-## the machine's own monsters again). Checked a few times a second.
 func _check_shared() -> void:
-	if not is_client() or not _arrived or following or Game.travelling or not Game.in_session or Game.current_map == null:
+	if not is_active() or not Game.in_session or Game.current_map == null or _unloading:
 		return
-	var shared := host_on(Game.current_map_id)
-	if shared == _host_shared:
+	var entry: Dictionary = _worlds.get(String(Game.current_map_id), {})
+	var owner := int(entry.get("owner", 0))
+	var epoch := int(entry.get("epoch", 0))
+	if owner == 0 or (_world_owner == owner and _world_epoch == epoch):
 		return
-	_host_shared = shared
-	var map := Game.current_map
-	if shared:
-		_drop_local_monsters(map)
-		_in_map.rpc_id(1, String(Game.current_map_id))
-		Events.notify.emit("%s is here. You fight the same monsters now." % host_name(), &"info")
+	var was_remote := _host_shared
+	_world_owner = owner
+	_world_epoch = epoch
+	_host_shared = owner != my_id()
+	_clear_replicas()
+	_host_enemies.clear()
+	_known.clear()
+	if _host_shared:
+		_drop_local_monsters(Game.current_map)
 	else:
-		_clear_replicas()
-		if map.get_node_or_null(^"Spawner") == null:
-			Spawner.populate(map, Game.difficulty)
-		Events.notify.emit("%s left for %s. This place is yours alone again." % [host_name(), place_name(StringName(peers.get(1, {}).get("map", "")))], &"info")
+		var state: Dictionary = entry.get("state", {})
+		if not state.is_empty():
+			_drop_local_monsters(Game.current_map)
+			NetWorld.restore(state)
+		elif Spawner.current() == null:
+			Spawner.populate(Game.current_map, Game.difficulty)
+		_register_existing_enemies()
+		_send_checkpoint()
+	if was_remote != _host_shared:
+		Events.notify.emit("Party combat synchronized. You can keep exploring independently.", &"info")
+
+func _send_checkpoint() -> void:
+	if not is_world_authority() or Game.current_map == null:
+		return
+	var state := NetWorld.capture(_host_enemies)
+	var map := String(Game.current_map_id)
+	if is_host():
+		_worlds[map]["state"] = state
+	for pid in peers:
+		if int(pid) != my_id() and (int(pid) == 1 or _peer_map(pid) == map):
+			_world_checkpoint.rpc_id(pid, map, _world_epoch, state)
+
+@rpc("any_peer", "reliable")
+func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
+	var entry: Dictionary = _worlds.get(map, {})
+	if int(entry.get("owner", 0)) != multiplayer.get_remote_sender_id() or int(entry.get("epoch", -1)) != epoch:
+		return
+	entry["state"] = state
+	if _world_sender(map, epoch) and Game.current_map:
+		var sp := Spawner.current()
+		if sp == null:
+			sp = Spawner.new()
+			sp.name = "Spawner"
+			sp.map = Game.current_map
+			Game.current_map.add_child(sp)
+		sp.camps.clear()
+		for camp in state.get("camps", []):
+			sp.camps[camp] = []
+		sp.cleared_camps = state.get("cleared", {}).duplicate()
+		sp.stage_done = bool(state.get("done", false))
+		sp.minibosses.clear()
+		for e: Enemy in _replicas.values():
+			if is_instance_valid(e) and e.is_miniboss():
+				sp.minibosses.append(e)
+
+func _on_stage_cleared(map: StringName) -> void:
+	if not is_world_authority():
+		return
+	for pid in peers:
+		if pid != my_id() and _peer_map(pid) == String(map):
+			_stage_complete.rpc_id(pid, String(map), _world_epoch)
+	_send_checkpoint.call_deferred()
+
+@rpc("any_peer", "reliable")
+func _stage_complete(map: String, epoch: int) -> void:
+	if not _world_sender(map, epoch) or Game.hero == null:
+		return
+	var entry: Dictionary = _worlds.get(map, {})
+	if entry.get("rewarded", false):
+		return
+	entry["rewarded"] = true
+	Game.hero.stages_cleared[StringName(map)] = int(Game.hero.stages_cleared.get(StringName(map), 0)) + 1
+	Game.hero.add_clear()
+	Events.stage_cleared.emit(StringName(map))
+
+func _world_sender(map: String, epoch: int) -> bool:
+	return is_active() and not _unloading and map == String(Game.current_map_id) and epoch == _world_epoch \
+		and _world_owner != my_id() and multiplayer.get_remote_sender_id() == _world_owner
 
 func _drop_local_monsters(map: Node) -> void:
 	for n in [map.get_node_or_null(^"Spawner"), map.get_node_or_null(^"CombatDirector")]:
@@ -398,12 +514,14 @@ func _drop_local_monsters(map: Node) -> void:
 
 @rpc("any_peer", "reliable")
 func _in_map(map: String) -> void:
-	if not is_host():
+	if not is_host() or DB.map_def(StringName(map)) == null:
 		return
 	var id := multiplayer.get_remote_sender_id()
-	if peers.has(id):
-		peers[id]["map"] = map
+	if not peers.has(id):
+		return
+	peers[id]["map"] = map
 	_known[id] = {}
+	_reassign_worlds()
 	_rpc_peers()
 
 ## May this machine take a door, a waypoint or a portal right now? Always (bh-015: everyone explores on their own;
@@ -495,6 +613,7 @@ func _process(delta: float) -> void:
 	_poll_discovery()
 	if not is_active():
 		return
+	_portal_tick()
 	if is_host():
 		_bcast_t -= delta
 		if _bcast_t <= 0.0:
@@ -513,7 +632,12 @@ func _process(delta: float) -> void:
 	if _ally_t <= 0.0:
 		_ally_t = 1.0 / ALLY_RATE
 		_send_allies()
-	if is_host():
+	_check_shared()
+	if is_world_authority():
+		_checkpoint_t -= delta
+		if _checkpoint_t <= 0.0:
+			_checkpoint_t = 1.0
+			_send_checkpoint()
 		_enemy_t -= delta
 		if _enemy_t <= 0.0:
 			_enemy_t = 1.0 / ENEMY_RATE
@@ -545,6 +669,7 @@ static func actor_state(a: Actor) -> Array:
 func _send_allies() -> void:
 	_ally_count += 1
 	var pack := []
+	var appearances := []
 	for pair in _local_allies():
 		var a: Actor = pair[1]
 		var e := {"k": pair[0], "s": actor_state(a), "n": a.display_name}
@@ -557,14 +682,26 @@ func _send_allies() -> void:
 				var app := a.visual.appearance.duplicate(true)
 				app["stance"] = String(a.visual._stance_idle)
 				e["a"] = app
+				appearances.append({"k": pair[0], "a": app})
 		pack.append(e)
+	if not appearances.is_empty():
+		_appearances.rpc(appearances)
 	_allies.rpc(String(Game.current_map_id), pack)
 
-@rpc("any_peer", "unreliable_ordered")
+## Appearance must arrive reliably even when a large snapshot is overtaken by enemy updates.
+@rpc("any_peer", "reliable")
+func _appearances(pack: Array) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from):
+		return
+	for entry in pack:
+		_appearance_cache["%d:%s" % [from, entry.k]] = entry.a
+
+@rpc("any_peer", "call_remote", "unreliable_ordered", 1)
 func _allies(map: String, pack: Array) -> void:
 	var from := multiplayer.get_remote_sender_id()
-	if peers.has(from):
-		peers[from]["map"] = map
+	if not peers.has(from) or _peer_map(from) != map:
+		return
 	for e in pack:
 		if e.get("k", "") == "p" and (e.s as Array).size() >= 12:
 			status[from] = {"map": map, "pos": e.s[0], "yaw": e.s[1], "hp": e.s[3], "mhp": e.s[4], "alive": e.s[5], "lvl": e.s[11],
@@ -577,6 +714,10 @@ func _allies(map: String, pack: Array) -> void:
 	var seen := {}
 	for e in pack:
 		var k := "%d:%s" % [from, e.k]
+		if e.has("a"):
+			_appearance_cache[k] = e.a
+		elif _appearance_cache.has(k):
+			e["a"] = _appearance_cache[k]
 		seen[k] = true
 		var av: NetAvatar = _avatars.get(k)
 		if av == null or not is_instance_valid(av):
@@ -626,37 +767,43 @@ func avatars() -> Array:
 # ---- Host: monsters -----------------------------------------------------------------------------------------------
 
 func _on_node_added(n: Node) -> void:
-	if is_host() and n is Enemy and not (n as Enemy).net_replica:
+	if n is Enemy and not (n as Enemy).net_replica and is_world_authority():
 		_register_enemy.call_deferred(n)
 
 func _register_existing_enemies() -> void:
 	if Game.current_map == null:
 		return
 	for e in get_tree().get_nodes_in_group(&"enemy"):     # find_children cannot match script classes
-		if e is Enemy and Game.current_map.is_ancestor_of(e):
+		if e is Enemy and not e.net_replica and not e.is_queued_for_deletion() and Game.current_map.is_ancestor_of(e):
 			_register_enemy(e)
 
 func _register_enemy(e: Enemy) -> void:
-	if not is_instance_valid(e) or e.has_meta(&"net_id") or not e.is_inside_tree():
+	if not is_world_authority() or not is_instance_valid(e) or e.net_replica or e.is_queued_for_deletion() or not e.is_inside_tree():
 		return
-	var id := _next_eid
-	_next_eid += 1
+	var id := int(e.get_meta(&"net_id", _next_eid))
+	if _host_enemies.get(id) == e:
+		return
+	_next_eid = maxi(_next_eid, id + 1)
 	e.set_meta(&"net_id", id)
 	_host_enemies[id] = e
+	var map := String(Game.current_map_id)
+	var epoch := _world_epoch
 	e.tree_exiting.connect(func() -> void:
+		if _host_enemies.get(id) != e:
+			return
 		_host_enemies.erase(id)
-		if is_host() and e.alive and not _unloading:
-			_enemy_gone.rpc(id))
+		if is_world_authority() and e.alive and not _unloading and _world_epoch == epoch:
+			_enemy_gone.rpc(map, epoch, id))
 
 static func enemy_info(e: Enemy) -> Dictionary:
 	return {"id": int(e.get_meta(&"net_id")), "def": String(e.def.id), "lvl": e.level, "mods": e.elite_mods.map(func(m): return String(m)),
-		"diff": Game.difficulty, "mb": String(e.miniboss.get("id", "")), "flag": String(e.get_meta(&"boss_flag", "")),
+		"diff": maxi(0, DataEnemies.DIFFICULTY.find(e.difficulty)), "mb": String(e.miniboss.get("id", "")), "flag": String(e.get_meta(&"boss_flag", "")),
 		"pos": e.global_position, "yaw": e.rotation.y, "hp": e.hp}
 
 func _send_enemies() -> void:
 	var here := String(Game.current_map_id)
 	for pid in peers:
-		if pid == 1 or _peer_map(pid) != here:
+		if pid == my_id() or _peer_map(pid) != here:
 			continue
 		var av := avatar(pid)
 		var center: Vector3 = av.global_position if av else (Game.player as Node3D).global_position
@@ -676,28 +823,29 @@ func _send_enemies() -> void:
 			states.append([id, e.global_position, e.rotation.y, e.velocity, e.hp, e.max_hp(), String(v.current_action() if v else &""),
 				v.action_serial if v else 0, v.action_rate if v else 1.0, bool(v._action_loop) if v else false, e.brain.is_engaged(), e.shield_hp])
 		if not infos.is_empty():
-			_enemy_spawn.rpc_id(pid, infos)
+			_enemy_spawn.rpc_id(pid, here, _world_epoch, infos)
 		if not states.is_empty():
-			_enemy_states.rpc_id(pid, states)
+			_enemy_states.rpc_id(pid, here, _world_epoch, states)
 
 func _on_actor_died(actor: Node, killer: Node) -> void:
-	if not is_host() or not (actor is Enemy) or not actor.has_meta(&"net_id"):
+	if not is_world_authority() or not (actor is Enemy) or not actor.has_meta(&"net_id"):
 		return
+	_send_checkpoint.call_deferred()
 	var kp := 0
 	if killer is NetAvatar:
 		kp = (killer as NetAvatar).owner_peer
 	elif killer is Player or killer is Tempo:
-		kp = 1
+		kp = my_id()
 	var e := actor as Enemy
 	var here := String(Game.current_map_id)
 	for pid in peers:
-		if pid != 1 and _peer_map(pid) == here and _known.get(pid, {}).has(int(e.get_meta(&"net_id"))):
-			_enemy_died.rpc_id(pid, int(e.get_meta(&"net_id")), kp, String(e.death_clip()))
+		if pid != my_id() and _peer_map(pid) == here and _known.get(pid, {}).has(int(e.get_meta(&"net_id"))):
+			_enemy_died.rpc_id(pid, here, _world_epoch, int(e.get_meta(&"net_id")), kp, String(e.death_clip()))
 
 ## A client's hit on one of the host's monsters: the client resolved it (its hero, its skills); apply the numbers.
 @rpc("any_peer", "reliable")
-func _client_hit(eid: int, res: Dictionary, hit_point: Vector3, key: String) -> void:
-	if not is_host():
+func _client_hit(map: String, epoch: int, eid: int, res: Dictionary, hit_point: Vector3, key: String) -> void:
+	if not is_world_authority() or map != String(Game.current_map_id) or epoch != _world_epoch or _peer_map(multiplayer.get_remote_sender_id()) != map:
 		return
 	var e: Enemy = _host_enemies.get(eid)
 	if e == null or not is_instance_valid(e) or not e.alive:
@@ -706,6 +854,8 @@ func _client_hit(eid: int, res: Dictionary, hit_point: Vector3, key: String) -> 
 	var av := avatar(from, key)
 	if av == null:
 		av = avatar(from, "p")
+	if av == null or not av.alive:
+		return
 	var result := NetCodec.decode_result(res)
 	var req := DamageRequest.new()
 	req.attacker = av.stats if av else null
@@ -716,49 +866,31 @@ func _client_hit(eid: int, res: Dictionary, hit_point: Vector3, key: String) -> 
 
 ## A monster hit a NetAvatar here on the host: the owner resolves it against the real hero or Tempo.
 func forward_ally_hit(av: NetAvatar, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
-	if not is_host():
+	if not is_world_authority():
 		return
 	var src: Node = attacker
 	if not (src is Enemy):
 		return                                 # traps and hazards exist on the owner's map too: no double hits
-	_ally_hit.rpc_id(av.owner_peer, av.key, NetCodec.encode_request(req), int(src.get_meta(&"net_id", 0)), hit_point)
+	_ally_hit.rpc_id(av.owner_peer, String(Game.current_map_id), _world_epoch, av.key, NetCodec.encode_request(req), int(src.get_meta(&"net_id", 0)), hit_point)
 
 # ---- Client: replicas ---------------------------------------------------------------------------------------------
 
-@rpc("authority", "reliable")
-func _enemy_spawn(infos: Array) -> void:
-	if not is_client() or Game.current_map == null or following:
+@rpc("any_peer", "reliable")
+func _enemy_spawn(map: String, epoch: int, infos: Array) -> void:
+	if not _world_sender(map, epoch) or Game.current_map == null:
 		return
 	for info in infos:
 		var id := int(info.id)
 		if _replicas.has(id) and is_instance_valid(_replicas[id]):
 			continue
-		var edef := DB.enemy(StringName(info.def))
-		if edef == null:
-			continue
-		var e := Enemy.new()
-		e.net_replica = true
-		var diff: Dictionary = DataEnemies.DIFFICULTY[clampi(int(info.diff), 0, DataEnemies.DIFFICULTY.size() - 1)]
-		e.setup(edef, int(info.lvl), (info.mods as Array).map(func(m): return StringName(m)), diff)
-		if String(info.mb) != "":
-			var md := DataMinibosses.find(StringName(info.mb))
-			if not md.is_empty():
-				e.make_miniboss(md)
-		if String(info.flag) != "":
-			e.set_meta(&"boss_flag", StringName(info.flag))
-		e.set_meta(&"net_id", id)
-		e.name = "Replica_%d" % id
-		Game.current_map.add_child(e)
-		e.global_position = info.pos
-		e.rotation.y = float(info.yaw)
-		e.net_snap(info.pos, float(info.yaw))
-		e.hp = float(info.hp)
-		_replicas[id] = e
-		_replica_seen[id] = Time.get_ticks_msec() * 0.001
+		var e := NetWorld.make_enemy(info, true)
+		if e:
+			_replicas[id] = e
+			_replica_seen[id] = Time.get_ticks_msec() * 0.001
 
-@rpc("authority", "unreliable_ordered")
-func _enemy_states(states: Array) -> void:
-	if not is_client() or following:
+@rpc("any_peer", "call_remote", "unreliable_ordered", 2)
+func _enemy_states(map: String, epoch: int, states: Array) -> void:
+	if not _world_sender(map, epoch):
 		return
 	var now := Time.get_ticks_msec() * 0.001
 	for s in states:
@@ -767,8 +899,10 @@ func _enemy_states(states: Array) -> void:
 			e.net_apply(s)
 			_replica_seen[int(s[0])] = now
 
-@rpc("authority", "reliable")
-func _enemy_died(eid: int, killer_peer: int, clip: String) -> void:
+@rpc("any_peer", "reliable")
+func _enemy_died(map: String, epoch: int, eid: int, killer_peer: int, clip: String) -> void:
+	if not _world_sender(map, epoch):
+		return
 	var e: Enemy = _replicas.get(eid)
 	if e == null or not is_instance_valid(e) or not e.alive:
 		return
@@ -780,8 +914,10 @@ func _enemy_died(eid: int, killer_peer: int, clip: String) -> void:
 	e.net_die(killer, StringName(clip))
 	_replicas.erase(eid)
 
-@rpc("authority", "reliable")
-func _enemy_gone(eid: int) -> void:
+@rpc("any_peer", "reliable")
+func _enemy_gone(map: String, epoch: int, eid: int) -> void:
+	if not _world_sender(map, epoch):
+		return
 	var e: Enemy = _replicas.get(eid)
 	if e and is_instance_valid(e) and e.alive:
 		e.queue_free()
@@ -797,13 +933,13 @@ func _expire_replicas() -> void:
 		elif now - float(_replica_seen.get(id, now)) > GONE_AFTER and Game.player and e.global_position.distance_to((Game.player as Node3D).global_position) > ENEMY_RANGE * 0.8:
 			e.queue_free()
 			_replicas.erase(id)
-			_forget_on_host.rpc_id(1, id)
+			_forget_on_host.rpc_id(_world_owner, id)
 
 @rpc("any_peer", "reliable")
 func _forget_on_host(eid: int) -> void:
 	# the client dropped a far replica: send its spawn info again when it comes back into range
 	var from := multiplayer.get_remote_sender_id()
-	if is_host() and _known.has(from):
+	if is_world_authority() and _known.has(from):
 		(_known[from] as Dictionary).erase(eid)
 
 func _clear_replicas() -> void:
@@ -815,19 +951,19 @@ func _clear_replicas() -> void:
 
 ## A local hero or Tempo hit a replica: show it here, let the host apply it.
 func replica_hit(e: Enemy, result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
-	if not is_client() or not e.has_meta(&"net_id"):
+	if not _host_shared or not e.has_meta(&"net_id"):
 		return
 	var key := "p"
 	if attacker is Tempo and (attacker as Tempo).data:
 		key = "t%d" % (attacker as Tempo).data.uid
 	var d := NetCodec.encode_result(result)
 	d["tags"] = {&"push_dir": req.tags.get(&"push_dir", Vector3.ZERO), &"launch": req.tags.get(&"launch", 0.0)}
-	_client_hit.rpc_id(1, int(e.get_meta(&"net_id")), d, hit_point if hit_point.is_finite() else e.center(), key)
+	_client_hit.rpc_id(_world_owner, String(Game.current_map_id), _world_epoch, int(e.get_meta(&"net_id")), d, hit_point if hit_point.is_finite() else e.center(), key)
 
 ## The host says a monster hit one of this machine's allies: resolve it against the real one.
-@rpc("authority", "reliable")
-func _ally_hit(key: String, req_d: Dictionary, attacker_eid: int, hit_point: Vector3) -> void:
-	if not Game.in_session:
+@rpc("any_peer", "reliable")
+func _ally_hit(map: String, epoch: int, key: String, req_d: Dictionary, attacker_eid: int, hit_point: Vector3) -> void:
+	if not Game.in_session or not _world_sender(map, epoch):
 		return
 	var target: Actor = null
 	for pair in _local_allies():
@@ -858,7 +994,7 @@ func send_aura(av: NetAvatar, sid: StringName, time: float, mag: float, mods: Ar
 
 @rpc("any_peer", "unreliable")
 func _ally_aura(key: String, sid: String, time: float, mag: float, vals: Array) -> void:
-	if not Game.in_session:
+	if not Game.in_session or _peer_map(multiplayer.get_remote_sender_id()) != String(Game.current_map_id):
 		return
 	var s := DB.skill(StringName(sid))
 	if s == null or not s.is_aura() or vals.size() != s.aura_mods.size():
@@ -879,6 +1015,8 @@ func ping_ms(peer: int) -> int:
 	var target := peer if is_host() else 1
 	if target == my_id():
 		return 0
+	if not multiplayer.get_peers().has(target):
+		return -1
 	var pp := _peer.get_peer(target)
 	return int(pp.get_statistic(ENetPacketPeer.PEER_ROUND_TRIP_TIME)) if pp else -1
 
@@ -892,7 +1030,7 @@ func owns_source(source: Node) -> bool:
 	if source is NetAvatar:
 		return false
 	if source is Enemy:
-		return is_host() and not (source as Enemy).net_replica
+		return is_world_authority() and not (source as Enemy).net_replica
 	return source is Player or source is Tempo
 
 func share_projectile(p: Projectile, from: Vector3, dir: Vector3, speed: float, element: int, look: String) -> void:
@@ -1086,47 +1224,140 @@ func _travel_answer(go: bool, why: String) -> void:
 	if not go and why != "":
 		Events.notify.emit(why, &"info")
 
-# ---- Regroup (bh-011) ---------------------------------------------------------------------------------------------
+# ---- Team Portal -------------------------------------------------------------------------------------------------
 
-## A client who wandered off (or respawned at the entrance) goes back to the host's side.
-func regroup() -> void:
-	if not is_client() or connecting or following or Game.travelling:
-		return
+const PORTAL_CAST := 1.25
+const PORTAL_COOLDOWN := 10.0
+const PORTAL_TIMEOUT := 5.0
+var _portal_pending := {}
+var _portal_serial := 0
+var _portal_ready_at := 0.0
+
+## Members travel to the leader. The leader chooses a member in Multiplayer (or clicks their party frame).
+func open_team_portal() -> void:
+	if is_host() and Game.ui_root:
+		Game.ui_root.open(&"multiplayer")
+	else:
+		team_portal(1)
+
+func portal_error(target: int) -> String:
+	if not is_active() or connecting:
+		return "Join a party first."
+	if target == my_id() or not peers.has(target):
+		return "Choose another party member."
+	if not is_host() and target != 1:
+		return "Team Portal takes you to the party leader."
+	if Game.travelling or following or not Game.in_session:
+		return "Finish travelling first."
 	var p := Game.player as Player
 	if p == null or not p.alive:
+		return "Get back on your feet first."
+	if in_trade():
+		return "Finish or cancel your trade first."
+	if not _portal_pending.is_empty():
+		return "Team Portal is already being cast."
+	var remaining := _portal_ready_at - Time.get_ticks_msec() * 0.001
+	if remaining > 0.0:
+		return "Team Portal is ready in %d seconds." % ceili(remaining)
+	return ""
+
+func team_portal(target := 1) -> bool:
+	var error := portal_error(target)
+	if error != "":
+		Events.notify.emit(error, &"info")
+		return false
+	_portal_serial += 1
+	var p := Game.player as Player
+	_portal_pending = {"target": target, "serial": _portal_serial, "map": Game.current_map_id,
+		"pos": p.global_position, "hp": p.hp, "phase": "cast"}
+	Events.notify.emit("Casting Team Portal to %s. Stand still for a moment." % peers[target].get("name", "your ally"), &"info")
+	FX.spawn(VFXLib.ring_wave(Color(0.55, 0.9, 1.0, 0.9), 2.0, PORTAL_CAST), p.global_position)
+	_finish_portal_cast(_portal_serial)
+	return true
+
+func _portal_cancel(why: String) -> void:
+	_portal_pending = {}
+	_portal_serial += 1
+	Events.notify.emit(why, &"info")
+
+func _portal_tick() -> void:
+	if _portal_pending.is_empty():
 		return
-	_ask_regroup.rpc_id(1)
+	var p := Game.player as Player
+	if not peers.has(int(_portal_pending.target)):
+		_portal_cancel("Team Portal cancelled: that player left.")
+	elif p == null or not p.alive or Game.travelling or Game.current_map_id != _portal_pending.map:
+		_portal_cancel("Team Portal cancelled.")
+	elif p.global_position.distance_to(_portal_pending.pos) > 0.8 or p.hp < float(_portal_pending.hp):
+		_portal_cancel("Team Portal interrupted by movement or damage.")
+
+func _finish_portal_cast(serial: int) -> void:
+	await get_tree().create_timer(PORTAL_CAST).timeout
+	_portal_tick()
+	if _portal_pending.get("serial", -1) != serial:
+		return
+	_portal_pending["phase"] = "waiting"
+	_portal_request.rpc_id(int(_portal_pending.target), serial)
+	await get_tree().create_timer(PORTAL_TIMEOUT).timeout
+	if _portal_pending.get("serial", -1) == serial:
+		_portal_cancel("Team Portal timed out. Try again when your ally has finished travelling.")
 
 @rpc("any_peer", "reliable")
-func _ask_regroup() -> void:
-	if not is_host():
+func _portal_request(serial: int) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from) or (not is_host() and from != 1):
 		return
-	var p := Game.player as Node3D
-	if p == null:
-		return
-	_regroup_to.rpc_id(multiplayer.get_remote_sender_id(), String(Game.current_map_id), p.global_position, p.rotation.y)
+	var p := Game.player as Player
+	var error := ""
+	if not Game.in_session or Game.travelling or following or p == null:
+		error = "Your ally is travelling. Try again in a moment."
+	elif in_trade():
+		error = "Your ally is trading. Try again when they finish."
+	_portal_destination.rpc_id(from, serial, error, String(Game.current_map_id), p.global_position if p else Vector3.ZERO, p.rotation.y if p else 0.0)
 
-@rpc("authority", "reliable")
-func _regroup_to(map: String, pos: Vector3, yaw: float) -> void:
-	if not is_client() or Game.travelling:
+@rpc("any_peer", "reliable")
+func _portal_destination(serial: int, error: String, map: String, pos: Vector3, yaw: float) -> void:
+	if _portal_pending.get("serial", -1) != serial or int(_portal_pending.get("target", 0)) != multiplayer.get_remote_sender_id():
 		return
-	if StringName(map) != Game.current_map_id:
-		_follow(StringName(map), pos, yaw)
+	_portal_tick()
+	if _portal_pending.is_empty():
 		return
-	var pl := Game.player as Player
-	if pl == null:
+	if error != "":
+		_portal_cancel(error)
 		return
-	var spot := pos + Vector3(cos(yaw), 0.0, -sin(yaw)) * 1.8
+	if DB.map_def(StringName(map)) == null or not pos.is_finite() or not is_finite(yaw):
+		_portal_cancel("Team Portal destination is unavailable.")
+		return
+	var target := int(_portal_pending.target)
+	_portal_pending = {}
+	_portal_ready_at = Time.get_ticks_msec() * 0.001 + PORTAL_COOLDOWN
+	await _portal_travel(StringName(map), pos, yaw)
+	if is_active() and peers.has(target):
+		Events.notify.emit("Team Portal: arrived beside %s." % peers[target].get("name", "your ally"), &"info")
+
+## Use the ally's floor height, not a ray from above roofs or bridges.
+func portal_arrival(pos: Vector3, yaw: float) -> Vector3:
 	if Game.current_map and Game.current_map.is_inside_tree():
-		spot = CombatQuery.reachable_point(Game.current_map.get_world_3d(), pos, spot, 0.4)
-		spot = CombatQuery.ground_at(Game.current_map.get_world_3d(), spot + Vector3.UP * 1.5)
-	FX.spawn(VFXLib.ring_wave(Color(0.55, 0.9, 1.0, 0.9), 2.0, 0.5), pl.global_position)
-	pl.teleport_to(spot)
-	pl.on_teleported()
-	TempoParty.regroup(pl)
-	FX.spawn(VFXLib.light_pillar(Color(0.55, 0.9, 1.0), 4.0, 0.8, 0.6), spot)
-	Audio.play_at(&"teleport_whoosh", spot, -4.0)
-	Events.notify.emit("Back at %s's side." % host_name(), &"info")
+		return Loot.landing_point(Game.current_map.get_world_3d(), pos, -yaw, 1.8) + Vector3.UP * 0.05
+	return pos
+
+func _portal_travel(map: StringName, pos: Vector3, yaw: float) -> void:
+	if map != Game.current_map_id:
+		await _follow(map, pos, yaw)
+	else:
+		var pl := Game.player as Player
+		var spot := portal_arrival(pos, yaw)
+		pl.teleport_to(spot)
+		pl.on_teleported()
+		TempoParty.regroup(pl)
+	if Game.player and is_instance_valid(Game.player):
+		FX.spawn(VFXLib.light_pillar(Color(0.55, 0.9, 1.0), 4.0, 0.8, 0.6), Game.player.global_position)
+		Audio.play_at(&"teleport_whoosh", Game.player.global_position, -4.0)
+		Game.save_now()
+
+## Existing respawn and summons paths use the same checked, voluntary cast.
+func regroup() -> void:
+	team_portal(1)
 
 # ---- Summon the party (bh-015) -------------------------------------------------------------------------------------
 
@@ -1192,7 +1423,7 @@ func answer_summon(go: bool) -> void:
 		go = false
 	_summon_reply.rpc_id(1, go)
 	if go:
-		_ask_regroup.rpc_id(1)              # the host answers with where it stands now: _regroup_to
+		team_portal(1)
 
 func pending_summon() -> Dictionary:
 	return _summon
@@ -1218,8 +1449,15 @@ func revive(av: NetAvatar) -> void:
 	Events.notify.emit("You revived %s." % av.display_name, &"info")
 
 @rpc("any_peer", "reliable")
-func _revived(by: String) -> void:
-	revive_local(by)
+func _revived(_by: String) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var av := avatar(from)
+	var p := Game.player as Player
+	if not peers.has(from) or _peer_map(from) != String(Game.current_map_id) or av == null or not av.alive or p == null:
+		return
+	if av.global_position.distance_to(p.global_position) > 5.0:
+		return
+	revive_local(String(peers[from].get("name", "A friend")))
 
 ## Stand this machine's fallen hero up where they fell (a friend's revive).
 func revive_local(by: String) -> bool:

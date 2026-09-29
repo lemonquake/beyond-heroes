@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Navigation region synchronization had 80 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_both_bridges_walkable_in_both_directions (res://tests/unit/test_westreach_bridges.gd:16)
+       [2] _run (res://tests/run_tests.gd:43)
+BRIDGE blocked by /root/TestRunner/Map_westreach/Navigation/Geometry/bridge_stone_131/bridge_stone/bridge_stone normal=(-0.988844, 0.148954, 0.0) point=(14.0, -2.585456, 1.300332)
+BRIDGE blocked by /root/TestRunner/Map_westreach/Navigation/Geometry/TerrainBody normal=(0.471905, 0.881636, 0.004877) point=(13.41535, -2.879732, 1.298388)
+BRIDGE blocked by /root/TestRunner/Map_westreach/Navigation/Geometry/bridge_stone_131/bridge_stone/bridge_stone normal=(-0.916029, 0.401111, 0.0) point=(14.0, -2.585456, 2.00018)
+BRIDGE blocked by /root/TestRunner/Map_westreach/Navigation/Geometry/bridge_stone_131/bridge_stone/bridge_stone normal=(-0.853481, 0.521124, 0.0) point=(14.0, -2.585456, 2.698745)
+BRIDGE blocked by /root/TestRunner/Map_westreach/Navigation/Geometry/TerrainBody normal=(0.098707, 0.979282, -0.176814) point=(13.61793, -2.769626, 2.76946)
+[FAIL] test_westreach_bridges.gd — 1 tests, 14 checks, 3 failures (5398.5 ms)
+  FAIL test_westreach_bridges.test_both_bridges_walkable_in_both_directions: bridge (20.0, 2.0) direction 1 lane -0.7: actual player reached (13.6035, -2.925689, 1.300332)
+  FAIL test_westreach_bridges.test_both_bridges_walkable_in_both_directions: bridge (20.0, 2.0) direction 1 lane 0.0: actual player reached (13.62328, -2.823383, 2.00018)
+  FAIL test_westreach_bridges.test_both_bridges_walkable_in_both_directions: bridge (20.0, 2.0) direction 1 lane 0.7: actual player reached (13.65742, -2.777229, 2.698795)
+TOTAL: 14 checks, 3 failures

@@ -209,6 +209,15 @@ func _shape(p: Vector2, k: int) -> float:
 	var cliff := smoothstep(-1.5, 5.0, s)
 	var shelf := smoothstep(-3.0, 16.0, s)
 	h = lerpf(h, -19.0, lerpf(cliff, shelf, beach))
+	# The stream cuts below the road bed even at the bridge ends. Blend real terrain approaches
+	# into the flat deck; navmesh climb tolerance does not let a CharacterBody walk up a vertical lip.
+	for bridge: Vector2 in [BRIDGE, FEN_BRIDGE]:
+		var dx := absf(p.x - bridge.x)
+		var dz := absf(p.y - bridge.y)
+		if dx >= 5.0 and dx < 11.0 and dz < 3.5:
+			var deck := bridge_height(bridge)
+			var blend := (1.0 - smoothstep(6.0, 11.0, dx)) * (1.0 - smoothstep(1.4, 3.5, dz))
+			h = lerpf(h, deck, blend)
 	return h
 
 func _height(x: float, z: float) -> float:
@@ -251,6 +260,9 @@ func _seg_on(pts: Array, p: Vector2) -> float:
 	for i in pts.size() - 1:
 		d = minf(d, _seg_dist(p, pts[i], pts[i + 1]))
 	return d
+
+func bridge_height(bridge: Vector2) -> float:
+	return (bed(bridge.x - 6.0, bridge.y) + bed(bridge.x + 6.0, bridge.y)) * 0.5
 
 ## Height of the road bed under a point (props and signs stand on this, not on the noisy verge).
 func bed(x: float, z: float) -> float:
@@ -491,8 +503,8 @@ func _mill() -> void:
 	kit("lantern_stand", Vector3(c.x + 5.0, 0, c.y + 4.4), 0.0, 1.0, props, true)
 	light(Vector3(c.x + 5.45, bed(c.x + 5, c.y + 4.4) + 1.8, c.y + 4.4), Color(1.0, 0.7, 0.4), 2.0, 8.0, false, true)
 	# the stone bridge on the Lake Shore Road, and the washed-out end beyond it
-	# the bridge's ends meet the road bed (its deck arches 0.9 m above them), within the 0.5 m climb at each end
-	arch("bridge_stone", Vector3(BRIDGE.x, (bed(BRIDGE.x - 6.0, BRIDGE.y) + bed(BRIDGE.x + 6.0, BRIDGE.y)) * 0.5, BRIDGE.y), 0.0)
+	# the flat deck meets the terrain approaches generated in _shape
+	arch("bridge_stone", Vector3(BRIDGE.x, bridge_height(BRIDGE), BRIDGE.y), 0.0)
 	for sx: float in [-7.0, 7.0]:
 		for dz: float in [-2.4, 2.4]:
 			kit("pillar", Vector3(BRIDGE.x + sx, 0, BRIDGE.y + dz), 0.0, 0.4, geo, true)
@@ -749,7 +761,7 @@ func signpost_at(p: Vector2, arms: Array) -> Node3D:
 ## bh-007: the Fen Road east from the fields, over the Fen Bridge, to the walk-through for Wyman Outpost.
 func _fen_road() -> void:
 	var b := FEN_BRIDGE
-	arch("bridge_stone", Vector3(b.x, (bed(b.x - 6.0, b.y) + bed(b.x + 6.0, b.y)) * 0.5, b.y), 0.0)
+	arch("bridge_stone", Vector3(b.x, bridge_height(b), b.y), 0.0)
 	for sx: float in [-7.0, 7.0]:
 		for dz: float in [-2.4, 2.4]:
 			kit("pillar", Vector3(b.x + sx, 0, b.y + dz), 0.0, 0.4, geo, true)

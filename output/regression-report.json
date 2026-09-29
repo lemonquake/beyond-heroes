@@ -1,0 +1,223 @@
+{
+  "checks": 35150,
+  "elapsed_ms": 246581,
+  "engine": "4.7.2-stable (official)",
+  "failures": [
+    "test_enemies.test_roster_definitions: sixteen enemies — expected 16, got 93",
+    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+    "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed",
+    "test_inventory_overhaul.test_full_bag_trade_and_two_handed_swap_are_atomic: refused trade retains offered item"
+  ],
+  "suites": {
+    "test_auto_loot_filters.gd": {
+      "checks": 30,
+      "failures": [],
+      "ms": 9.259,
+      "tests": 4
+    },
+    "test_bh011.gd": {
+      "checks": 45,
+      "failures": [],
+      "ms": 6177.08,
+      "tests": 6
+    },
+    "test_bh012.gd": {
+      "checks": 1142,
+      "failures": [],
+      "ms": 2315.947,
+      "tests": 11
+    },
+    "test_bh013.gd": {
+      "checks": 1017,
+      "failures": [],
+      "ms": 7160.282,
+      "tests": 11
+    },
+    "test_bh014.gd": {
+      "checks": 30,
+      "failures": [],
+      "ms": 100.504,
+      "tests": 10
+    },
+    "test_bh015.gd": {
+      "checks": 10108,
+      "failures": [],
+      "ms": 797.975,
+      "tests": 11
+    },
+    "test_bh016.gd": {
+      "checks": 1394,
+      "failures": [],
+      "ms": 764.586,
+      "tests": 15
+    },
+    "test_bh017.gd": {
+      "checks": 802,
+      "failures": [],
+      "ms": 31262.61,
+      "tests": 27
+    },
+    "test_bh018.gd": {
+      "checks": 474,
+      "failures": [],
+      "ms": 1922.662,
+      "tests": 18
+    },
+    "test_bh019.gd": {
+      "checks": 393,
+      "failures": [],
+      "ms": 3394.76,
+      "tests": 11
+    },
+    "test_bh020.gd": {
+      "checks": 41,
+      "failures": [],
+      "ms": 798.462,
+      "tests": 2
+    },
+    "test_chat.gd": {
+      "checks": 44,
+      "failures": [],
+      "ms": 1187.157,
+      "tests": 8
+    },
+    "test_crafting.gd": {
+      "checks": 679,
+      "failures": [],
+      "ms": 18747.249,
+      "tests": 11
+    },
+    "test_damage.gd": {
+      "checks": 60,
+      "failures": [],
+      "ms": 231.627,
+      "tests": 13
+    },
+    "test_enemies.gd": {
+      "checks": 464,
+      "failures": [
+        "test_enemies.test_roster_definitions: sixteen enemies — expected 16, got 93"
+      ],
+      "ms": 1934.195,
+      "tests": 6
+    },
+    "test_enemies2.gd": {
+      "checks": 598,
+      "failures": [
+        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+        "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+      ],
+      "ms": 31893.408,
+      "tests": 19
+    },
+    "test_guide.gd": {
+      "checks": 140,
+      "failures": [],
+      "ms": 1109.907,
+      "tests": 5
+    },
+    "test_guilds.gd": {
+      "checks": 100,
+      "failures": [],
+      "ms": 21.196,
+      "tests": 8
+    },
+    "test_inventory_overhaul.gd": {
+      "checks": 1891,
+      "failures": [
+        "test_inventory_overhaul.test_full_bag_trade_and_two_handed_swap_are_atomic: refused trade retains offered item"
+      ],
+      "ms": 49.108,
+      "tests": 6
+    },
+    "test_island.gd": {
+      "checks": 1150,
+      "failures": [],
+      "ms": 7858.562,
+      "tests": 13
+    },
+    "test_items.gd": {
+      "checks": 2473,
+      "failures": [],
+      "ms": 756.876,
+      "tests": 17
+    },
+    "test_loot.gd": {
+      "checks": 1837,
+      "failures": [],
+      "ms": 19924.515,
+      "tests": 17
+    },
+    "test_maps.gd": {
+      "checks": 558,
+      "failures": [],
+      "ms": 11142.516,
+      "tests": 14
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.487,
+      "tests": 4
+    },
+    "test_npcs.gd": {
+      "checks": 438,
+      "failures": [],
+      "ms": 20710.94,
+      "tests": 3
+    },
+    "test_perf.gd": {
+      "checks": 243,
+      "failures": [],
+      "ms": 7878.1,
+      "tests": 7
+    },
+    "test_progression.gd": {
+      "checks": 51,
+      "failures": [],
+      "ms": 9.555,
+      "tests": 7
+    },
+    "test_shops_dialogue.gd": {
+      "checks": 1106,
+      "failures": [],
+      "ms": 843.379,
+      "tests": 10
+    },
+    "test_skills.gd": {
+      "checks": 3285,
+      "failures": [],
+      "ms": 42562.713,
+      "tests": 11
+    },
+    "test_stats.gd": {
+      "checks": 157,
+      "failures": [],
+      "ms": 17.489,
+      "tests": 8
+    },
+    "test_status.gd": {
+      "checks": 24,
+      "failures": [],
+      "ms": 72.268,
+      "tests": 8
+    },
+    "test_tempos.gd": {
+      "checks": 3531,
+      "failures": [],
+      "ms": 20977.644,
+      "tests": 16
+    }
+  },
+  "timestamp": "2026-09-29T17:51:47"
+}

@@ -80,6 +80,8 @@ func test_capacity_reservations_limits_and_persistence() -> void:
 func test_magnet_rechecks_load_before_pickup() -> void:
 	var original_rules := Settings.auto_loot_rules.duplicate(true)
 	var original_enabled := Settings.auto_loot_enabled
+	var original_mode := Settings.auto_loot_mode
+	Settings.auto_loot_mode = 1
 	Settings.auto_loot_rules = {}
 	Settings.auto_loot_enabled = true
 	var player := Player.new()
@@ -94,4 +96,5 @@ func test_magnet_rechecks_load_before_pickup() -> void:
 	player.free()
 	Settings.auto_loot_rules = original_rules
 	Settings.auto_loot_enabled = original_enabled
+	Settings.auto_loot_mode = original_mode
 	done()

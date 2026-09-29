@@ -19,6 +19,8 @@ var _rejoin: Button
 var _regroup: Button
 var _summon: Button
 var _tips: Label
+var _host_help: Label
+var _host_heading: Control
 
 func _init() -> void:
 	super._init("Multiplayer", Vector2(1180, 820))
@@ -34,11 +36,13 @@ func _build() -> void:
 	body.add_child(cols)
 	# left: host + party
 	var left := vbox(12)
-	left.custom_minimum_size = Vector2(520, 0)
+	left.custom_minimum_size = Vector2(550, 0)
+	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cols.add_child(left)
-	left.add_child(section("Host"))
-	var hdesc := _text("Open this world: friends join your game, fight your monsters and follow you from map to map. Each hero keeps their own gear and loot.")
-	left.add_child(hdesc)
+	_host_heading = section("Host")
+	left.add_child(_host_heading)
+	_host_help = _text("Open this world: friends can explore independently or fight together on any map. Each hero keeps their own gear and loot.")
+	left.add_child(_host_help)
 	_host_btn = button("Host Game", _on_host, &"PrimaryButton", 300.0)
 	_host_btn.custom_minimum_size.y = 64 if touch else 52
 	_host_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -49,22 +53,28 @@ func _build() -> void:
 	_addr_info = _text("")
 	left.add_child(_addr_info)
 	left.add_child(section("Party"))
-	_party = vbox(6)
-	left.add_child(_party)
+	var party_scroll := ScrollContainer.new()
+	party_scroll.custom_minimum_size.y = 230
+	party_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	party_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	left.add_child(party_scroll)
+	_party = vbox(10)
+	_party.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	party_scroll.add_child(_party)
 	var lrow := hbox(12)
 	lrow.alignment = BoxContainer.ALIGNMENT_CENTER
 	left.add_child(lrow)
-	_regroup = button("Regroup", func() -> void:
+	_regroup = button("Team Portal", func() -> void:
 		Net.regroup()
 		close_window(), &"", 220.0)
 	_regroup.custom_minimum_size.y = 60 if touch else 48
-	TooltipLayer.attach(_regroup, func() -> Control: return Tips.text("Jump back to the host's side (after respawning at the entrance, or when you wandered off)."))
+	TooltipLayer.attach(_regroup, func() -> Control: return Tips.text("Cast a Team Portal to the party leader. Stand still during the cast. Cooldown: 10 seconds."))
 	lrow.add_child(_regroup)
 	_summon = button("Summon Party", func() -> void:
 		if Net.summon_party() > 0:
 			close_window(), &"PrimaryButton", 240.0)
 	_summon.custom_minimum_size.y = 60 if touch else 48
-	TooltipLayer.attach(_summon, func() -> Control: return Tips.text("Ask everyone who is away to come to your side. Each of them chooses Go or Stay (%s)." % Settings.binding_text(&"summon_party")))
+	TooltipLayer.attach(_summon, func() -> Control: return Tips.text("Invite everyone who is away to come to your side. Each chooses Go or Stay."))
 	lrow.add_child(_summon)
 	_leave_btn = button("Leave", _on_leave, &"", 220.0)
 	_leave_btn.custom_minimum_size.y = 60 if touch else 48
@@ -136,6 +146,9 @@ func refresh() -> void:
 	if Net.last_error != "" and not Net.is_active():
 		_status.text += "  " + Net.last_error
 	_host_btn.disabled = Net.is_active()
+	_host_btn.visible = not Net.is_active()
+	_host_help.visible = not Net.is_active()
+	_host_heading.visible = not Net.is_active()
 	_leave_btn.visible = Net.is_active()
 	_leave_btn.text = "Close World" if Net.is_host() else "Leave"
 	_regroup.visible = Net.is_client() and not Net.connecting
@@ -144,12 +157,14 @@ func refresh() -> void:
 	_rejoin.visible = Net.last_room != "" and not Net.is_active()
 	_rejoin.text = "Rejoin %s" % Net.last_room
 	_tips.visible = Net.is_active()
-	var lead := "Everyone explores on their own. Summon Party asks everyone who is away to come to your side; each chooses Go or Stay." \
-		if Net.is_host() else "Explore on your own: on the host's map you share their monsters, elsewhere the world is yours. Regroup jumps to their side; the host can summon you."
+	var lead := "Explore independently. Use Team Portal beside a member below to visit them. Summon Party is an invitation; each player chooses Go or Stay." \
+		if Net.is_host() else "Explore independently or share combat with allies on any map. Team Portal takes you to the party leader. A summons is optional."
 	var interact := "Interact" if Settings.touch_mode else Settings.binding_text(&"interact")
 	var ping := "The Ping button" if Settings.touch_mode else Settings.binding_text(&"ping")
-	_tips.text = "Playing together:\n• %s\n• A fallen friend: stand beside them and press %s to revive them.\n• %s marks a spot for everyone. Each hero keeps their own loot and gets the experience." % [lead, interact, ping]
-	_join_box.modulate.a = 0.45 if Net.is_active() else 1.0
+	_tips.text = "Playing together:\n• %s\n• A fallen friend: stand beside them and press %s to revive them.\n• %s marks a spot for everyone. Nearby heroes keep their own class-aware loot and experience." % [lead, interact, ping]
+	_join_box.visible = not Net.is_active()
+	_code.visible = Net.is_host()
+	_addr_info.visible = not Net.is_client()
 	var codes := Net.room_codes()
 	if codes.is_empty():
 		_code.text = ""
@@ -158,10 +173,9 @@ func refresh() -> void:
 		_code.text = ("Room code: %s" % codes[0][1]) if Net.is_host() else ""
 		var lines := []
 		for c in codes:
-			lines.append("%s: code %s (address %s)" % [c[0], c[1], c[2]])
-		_addr_info.text = ("Tell your friends the room code. " if Net.is_host() else "When you host, friends join with your room code.
-") + "
-".join(lines)
+			lines.append("%s: %s" % [c[0], c[1]])
+		_addr_info.text = "Share a room code: " + " · ".join(lines)
+
 	_fill_party()
 	_fill_lan()
 
@@ -178,35 +192,49 @@ func _fill_party() -> void:
 		var cls := DB.class_def(StringName(p.get("cls", "knight")))
 		var map := DB.map_def(StringName(p.get("map", "")))
 		var h := hbox(10)
+		var details := vbox(3)
+		details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var actions := hbox(8)
 		var por := TextureRect.new()
 		por.texture = UIArt.portrait(String(p.get("cls", "knight")))
 		por.custom_minimum_size = Vector2(44, 44)
 		por.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		h.add_child(por)
 		var you := " (you)" if id == Net.my_id() else ""
-		var host := " · Host" if id == 1 else ""
-		h.add_child(UITheme.label("◆ %s%s — Level %d %s%s" % [p.get("name", "Hero"), you, int(p.get("level", 1)), cls.display_name if cls else "", host],
+		var host := " · Leader" if id == 1 else ""
+		h.add_child(details)
+		details.add_child(UITheme.label("◆ %s%s — Level %d %s%s" % [p.get("name", "Hero"), you, int(p.get("level", 1)), cls.display_name if cls else "", host],
 			20 if Settings.touch_mode else 17, Net.player_color(id).lightened(0.2), UITheme.body_bold()))
 		var ping := Net.ping_ms(id) if id != Net.my_id() else -1
 		var ping_txt := (" · %d ms" % ping) if ping >= 0 else ""
 		var sub := UITheme.label("%s · %s%s" % [p.get("device", "PC"), map.display_name if map else "travelling", ping_txt], 16,
 			(UITheme.BAD if ping > 250 else UITheme.TEXT_DIM), UITheme.body_font())
 		sub.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		h.add_child(sub)
+		details.add_child(sub)
 		if id != Net.my_id():
 			var tid: int = id
 			var tb := button("Trade", func() -> void:
 				close_window()
 				Net.trade_prompt(tid), &"", 110.0)
 			tb.custom_minimum_size.y = 52 if Settings.touch_mode else 38
-			h.add_child(tb)
+			actions.add_child(tb)
 		if Net.is_host() and id != 1:
 			var pid: int = id
 			var kb := button("Send Home", func() -> void:
-				Game.ui_root.ask("Send Home", "Send %s back to their own world?" % p.get("name", "this hero"), func() -> void: Net.kick(pid), "Send Home", true), &"", 150.0)
+				Game.ui_root.ask("Send Home", "Send %s back to their own world?" % p.get("name", "this hero"), func() -> void: Net.kick(pid), "Send Home", true), &"", 130.0)
 			kb.custom_minimum_size.y = 52 if Settings.touch_mode else 38
-			h.add_child(kb)
-		_party.add_child(h)
+			actions.add_child(kb)
+		var card := vbox(4)
+		card.add_child(h)
+		if id != Net.my_id() and (Net.is_host() or id == 1):
+			var target: int = id
+			var portal := button("Team Portal", func() -> void:
+				if Net.team_portal(target):
+					close_window(), &"PrimaryButton", 175.0)
+			portal.custom_minimum_size.y = 54 if Settings.touch_mode else 42
+			actions.add_child(portal)
+		card.add_child(actions)
+		_party.add_child(card)
 
 func _fill_lan() -> void:
 	if _lan_list == null:

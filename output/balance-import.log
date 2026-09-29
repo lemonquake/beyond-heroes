@@ -1,0 +1,143 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+Could not find version of build tools that matches Target SDK, using 36.0.0
+first_scan_filesystem: begin: Project initialization steps: 5
+	first_scan_filesystem: step 0: Scanning file structure...
+	first_scan_filesystem: step 1: Loading global class names...
+	first_scan_filesystem: step 2: Verifying GDExtensions...
+	first_scan_filesystem: step 3: Creating autoload scripts...
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/perf.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/world/material_library.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/world/teleporter.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/world/map_root.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/cinema/cutscene_player.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/cinema/story_director.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/npc/npc.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/npc/npc_directory.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/world/spawner.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/net/net_avatar.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/net/net.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/combat/area_effects.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/loot/loot_drop.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/loot.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/enemy/enemy_traits_ext.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/enemy/enemy_traits_x.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/enemy/enemy_bar.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/enemy/enemy.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/tempo/tempo.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/fx.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/actor.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/vfx/skill_fx.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/skills/skill_runner.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/world/town_portal.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/player/player.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/game.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/quake/quake_mate.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/quake/quake_team.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/hero_data.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/tempos/tempo_gacha.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_relics.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_items.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/database.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_base_def.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_instance.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/events.gd:0)
+ERROR: Failed to load script "res://src/autoload/events.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript.cpp:3022)
+	first_scan_filesystem: step 4: Initializing plugins...
+	first_scan_filesystem: step 5: Starting file scan...
+first_scan_filesystem: end
+loading_editor_layout: begin: Loading editor steps: 5
+	loading_editor_layout: step 0: Loading editor layout...
+	loading_editor_layout: step 1: Loading docks...
+	loading_editor_layout: step 2: Reopening scenes...
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/widgets/character_preview.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/windows/tempo_window.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/hud/tempo_frames.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/hud/hud.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/ui_root.gd:0)
+SCRIPT ERROR: Parse Error: Too many arguments for "add_blend_point()" call. Expected at most 3 but received 4.
+   at: GDScript::reload (res://src/actors/character_visual.gd:165)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/ui/menu/main_menu.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/main.gd:0)
+ERROR: Failed to load script "res://src/main.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript.cpp:3022)
+	loading_editor_layout: step 3: Loading central editor layout...
+	loading_editor_layout: step 4: Loading plugin window layout...
+	loading_editor_layout: step 5: Editor layout ready.
+loading_editor_layout: end

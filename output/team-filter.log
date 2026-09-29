@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_auto_loot_filters.gd — 4 tests, 30 checks, 1 failures (9.3 ms)
+  FAIL test_auto_loot_filters.test_magnet_rechecks_load_before_pickup: matching item can auto-loot
+TOTAL: 30 checks, 1 failures

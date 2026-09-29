@@ -557,8 +557,8 @@ func _read_input(delta: float) -> void:
 		interact()
 	if Input.is_action_just_pressed(&"ping"):
 		ping_here()
-	if Input.is_action_just_pressed(&"summon_party") and Net.is_host():
-		Net.summon_party()
+	if Input.is_action_just_pressed(&"summon_party") and Net.is_active():
+		Net.open_team_portal()
 	if Input.is_action_just_pressed(&"zoom_in"):
 		camera.zoom(-1)
 	elif Input.is_action_just_pressed(&"zoom_out"):

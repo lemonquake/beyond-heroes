@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/inventory_window.gd:71)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:41)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/character_window.gd:53)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:43)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:58)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:49)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _yaw_of (res://src/ui/hud/minimap.gd:704)
+       [1] _draw_markers (res://src/ui/hud/minimap.gd:593)
+TEAM[ally] PASS join requested
+TEAM[ally] PASS travel
+TEAM[ally] PASS authority
+TEAM[ally] PASS replicas
+TEAM[ally] PASS kill
+TEAM[ally] PASS kill_reward
+TEAM[ally] PASS replicas
+TEAM[ally] PASS stale_packet
+TEAM[ally] FAIL bad_revive
+TEAM[ally] PASS travel
+TEAM[ally] PASS stay
+TEAM[ally] PASS travel
+ERROR: The multiplayer instance isn't currently active.
+   at: get_unique_id (modules/enet/enet_multiplayer_peer.cpp:438)
+   GDScript backtrace (most recent call first):
+       [0] my_id (res://src/net/net.gd:131)
+       [1] is_world_authority (res://src/net/net.gd:373)
+       [2] _on_node_added (res://src/net/net.gd:712)
+       [3] _feed_line (res://src/ui/hud/hud.gd:922)
+       [4] _on_notify (res://src/ui/hud/hud.gd:903)
+       [5] _on_server_disconnected (res://src/net/net.gd:288)
+ERROR: The multiplayer instance isn't currently active.
+   at: get_unique_id (modules/enet/enet_multiplayer_peer.cpp:438)
+   GDScript backtrace (most recent call first):
+       [0] my_id (res://src/net/net.gd:131)
+       [1] is_world_authority (res://src/net/net.gd:373)
+       [2] _on_node_added (res://src/net/net.gd:712)
+       [3] _feed_line (res://src/ui/hud/hud.gd:922)
+       [4] _on_notify (res://src/ui/hud/hud.gd:903)
+       [5] _on_server_disconnected (res://src/net/net.gd:288)
+ERROR: The multiplayer instance isn't currently active.
+   at: get_unique_id (modules/enet/enet_multiplayer_peer.cpp:438)
+   GDScript backtrace (most recent call first):
+       [0] my_id (res://src/net/net.gd:131)
+       [1] is_world_authority (res://src/net/net.gd:373)
+       [2] _on_node_added (res://src/net/net.gd:712)
+       [3] _feed_line (res://src/ui/hud/hud.gd:922)
+       [4] _on_notify (res://src/ui/hud/hud.gd:903)
+       [5] _on_server_disconnected (res://src/net/net.gd:288)
+ERROR: The multiplayer instance isn't currently active.
+   at: get_unique_id (modules/enet/enet_multiplayer_peer.cpp:438)
+   GDScript backtrace (most recent call first):
+       [0] my_id (res://src/net/net.gd:131)
+       [1] is_world_authority (res://src/net/net.gd:373)
+       [2] _on_node_added (res://src/net/net.gd:712)
+       [3] _feed_line (res://src/ui/hud/hud.gd:922)
+       [4] _on_notify (res://src/ui/hud/hud.gd:903)
+       [5] _on_server_disconnected (res://src/net/net.gd:288)
+ERROR: The multiplayer instance isn't currently active.
+   at: get_unique_id (modules/enet/enet_multiplayer_peer.cpp:438)
+   GDScript backtrace (most recent call first):
+       [0] my_id (res://src/net/net.gd:131)
+       [1] is_world_authority (res://src/net/net.gd:373)
+       [2] _send_checkpoint (res://src/net/net.gd:444)
+       [3] leave (res://src/net/net.gd:212)
+       [4] _on_server_disconnected (res://src/net/net.gd:289)
+TEAM[ally] PASS host closed: playable local world

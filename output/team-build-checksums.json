@@ -1,0 +1,14 @@
+{
+  "build/windows/BeyondHeroes.exe": {
+    "bytes": 377696248,
+    "sha256": "437b3b62b3e03d0c49557bc5a2fffc1bb0c3eb1992d84b34fcccb7aca420ccee"
+  },
+  "build/BeyondHeroes-Windows.zip": {
+    "bytes": 302482548,
+    "sha256": "3f0f250faeb5e2da6781dd99f177fea94e726117f6f7ab24dd2b71f76671a927"
+  },
+  "build/BeyondHeroes.apk": {
+    "bytes": 325265779,
+    "sha256": "33c835a969b2c5566606ad0f88cee4de78ec6b71e40e06a108f7ef8f0ff5c6d4"
+  }
+}

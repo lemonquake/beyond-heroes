@@ -701,6 +701,8 @@ func _hit(q: Vector2, text: String, lim: float) -> void:
 		_hits.append([q, text])
 
 static func _yaw_of(n: Node3D) -> float:
+	if not is_instance_valid(n) or not n.is_inside_tree():
+		return 0.0
 	var f: Vector3 = n.global_transform.basis.z
 	return atan2(f.x, f.z)
 

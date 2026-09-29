@@ -270,7 +270,7 @@ static func _weighted_pick(pool: Array, rng: RandomNumberGenerator, used: Dictio
 	return null
 
 ## bh-017: the share of a hero's equipment drops (and class-hinted merchant stock) that is the hero's own class gear.
-const CLASS_FIT_CHANCE := 0.72
+const CLASS_FIT_CHANCE := 0.80
 
 ## Armor weight each class wears: knights plate, everyone else cloth (rangers and shadowblades also keep the gambeson).
 const CLASS_ARMOR := {&"knight": [&"heavy"], &"mage": [&"cloth"], &"ranger": [&"cloth"], &"shadowblade": [&"cloth"]}
@@ -279,6 +279,9 @@ const CLASS_ARMOR := {&"knight": [&"heavy"], &"mage": [&"cloth"], &"ranger": [&"
 ## for a knight. Accessories suit everyone, so they are never "class gear".
 static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 	if class_id == &"" or base == null:
+		return false
+	# A class set's cloth weight alone must not make mage sets ranger/shadowblade loot.
+	if (base.set_id != &"" or base.unique_name != "") and base.class_hint != &"" and base.class_hint != class_id:
 		return false
 	var cd := DB.class_def(class_id)
 	if cd == null:
@@ -313,6 +316,20 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 		var mine := pool.filter(func(b): return class_fit(b, class_hint))
 		if not mine.is_empty():
 			pool = mine
+		elif fit_chance >= 1.0:
+			return null
+	# Pick a weapon family before a base so large sword/armour catalogs cannot drown out axes.
+	var weapons := pool.filter(func(b): return b.is_weapon())
+	if not weapons.is_empty() and (weapons.size() == pool.size() or rng.randf() < 0.40):
+		var families := []
+		for b in weapons:
+			if not families.has(b.weapon_type):
+				families.append(b.weapon_type)
+		families.sort()
+		var family: StringName = families[rng.randi_range(0, families.size() - 1)]
+		pool = weapons.filter(func(b): return b.weapon_type == family)
+	elif weapons.size() < pool.size():
+		pool = pool.filter(func(b): return not b.is_weapon())
 	pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	var weights := []
 	for b in pool:
@@ -350,7 +367,7 @@ static func random_consumable(rng: RandomNumberGenerator, ilvl: int) -> ItemBase
 			return b
 	return pool[-1]
 
-static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool, class_hint := &"") -> ItemBaseDef:
+static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool, class_hint := &"", fit_chance := CLASS_FIT_CHANCE) -> ItemBaseDef:
 	var pool := []
 	for b in DB.item_bases.values():
 		if b.drop_level > ilvl:
@@ -361,9 +378,11 @@ static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool
 			pool.append(b)
 	if pool.is_empty():
 		return null
-	if class_hint != &"" and rng.randf() < CLASS_FIT_CHANCE:
-		var mine := pool.filter(func(b): return b.class_hint == class_hint or class_fit(b, class_hint))
+	if class_hint != &"" and rng.randf() < fit_chance:
+		var mine := pool.filter(func(b): return class_fit(b, class_hint) or (b.category == &"accessory" and b.class_hint == &""))
 		if not mine.is_empty():
 			pool = mine
+		elif fit_chance >= 1.0:
+			return null
 	pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	return pool[rng.randi_range(0, pool.size() - 1)]

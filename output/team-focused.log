@@ -1,0 +1,94 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:68)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:70)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Slot 98 restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:73)
+       [1] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [4] _begin (res://tests/unit/test_bh015.gd:30)
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:68)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:70)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Slot 98 restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] read_slot (res://src/autoload/save_system.gd:73)
+       [1] load_hero (res://src/autoload/save_system.gd:89)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+[PASS] test_bh015.gd — 11 tests, 10107 checks, 0 failures (1653.0 ms)
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:130)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:131)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:132)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:260)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+[PASS] test_bh017.gd — 27 tests, 803 checks, 0 failures (28512.5 ms)
+[PASS] test_loot.gd — 17 tests, 1843 checks, 0 failures (18036.3 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (4.8 ms)
+TOTAL: 13598 checks, 0 failures

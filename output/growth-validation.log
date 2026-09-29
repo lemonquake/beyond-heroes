@@ -1,0 +1,92 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (4 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | CutscenePlayer[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | DataGuilds[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Not supported by this display server.
+   at: keyboard_get_label_from_physical (servers/display/display_server.cpp:1228)
+   GDScript backtrace (most recent call first):
+       [0] binding_text (res://src/autoload/settings.gd:445)
+       [1] fill_keys (res://src/core/dialogue/dialogue.gd:232)
+       [2] fill (res://src/core/dialogue/dialogue.gd:192)
+       [3] _show_line (res://src/core/dialogue/dialogue_session.gd:63)
+       [4] advance (res://src/core/dialogue/dialogue_session.gd:76)
+       [5] test_opening_errand_flow (res://tests/unit/test_bh021.gd:114)
+       [6] _ready (res://tests/run_tests.gd:40)
+[FAIL] test_bh021.gd — 13 tests, 379 checks, 1 failures (2855.6 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":15,"hits_to_kill":4.3,"level":5,"skill_hit":29,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":183,"hit":51,"hits_to_kill":3.6,"level":10,"skill_hit":96,"weapon":"knights_arming_sword","weapon_max":32,"weapon_min":20}
+GROWTH {"class":"knight","enemy_hp":385,"hit":118,"hits_to_kill":3.3,"level":15,"skill_hit":225,"weapon":"duelist_sabre","weapon_max":52,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":696,"hit":299,"hits_to_kill":2.3,"level":20,"skill_hit":568,"weapon":"runed_sword","weapon_max":96,"weapon_min":62}
+GROWTH {"class":"knight","enemy_hp":1135,"hit":405,"hits_to_kill":2.8,"level":25,"skill_hit":770,"weapon":"bastard_sword","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"knight","enemy_hp":1727,"hit":502,"hits_to_kill":3.4,"level":30,"skill_hit":953,"weapon":"gravewatch_longsword","weapon_max":226,"weapon_min":121}
+GROWTH {"class":"knight","enemy_hp":4631,"hit":1855,"hits_to_kill":2.5,"level":45,"skill_hit":3525,"weapon":"starfall_sabre","weapon_max":467,"weapon_min":254}
+GROWTH {"class":"knight","enemy_hp":9694,"hit":3360,"hits_to_kill":2.9,"level":60,"skill_hit":6384,"weapon":"kingsbane","weapon_max":1028,"weapon_min":557}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":44,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":183,"hit":67,"hits_to_kill":2.7,"level":10,"skill_hit":87,"weapon":"storm_staff","weapon_max":36,"weapon_min":21}
+GROWTH {"class":"mage","enemy_hp":385,"hit":197,"hits_to_kill":2.0,"level":15,"skill_hit":175,"weapon":"storm_staff","weapon_max":65,"weapon_min":37}
+GROWTH {"class":"mage","enemy_hp":696,"hit":305,"hits_to_kill":2.3,"level":20,"skill_hit":297,"weapon":"frost_staff","weapon_max":91,"weapon_min":54}
+GROWTH {"class":"mage","enemy_hp":1135,"hit":494,"hits_to_kill":2.3,"level":25,"skill_hit":465,"weapon":"frost_staff","weapon_max":137,"weapon_min":82}
+GROWTH {"class":"mage","enemy_hp":1727,"hit":893,"hits_to_kill":1.9,"level":30,"skill_hit":622,"weapon":"deepwater_staff","weapon_max":226,"weapon_min":121}
+GROWTH {"class":"mage","enemy_hp":4631,"hit":1101,"hits_to_kill":4.2,"level":45,"skill_hit":1394,"weapon":"gloamspire_staff","weapon_max":577,"weapon_min":309}
+GROWTH {"class":"mage","enemy_hp":9694,"hit":12679,"hits_to_kill":0.8,"level":60,"skill_hit":2748,"weapon":"sunspire_staff","weapon_max":1050,"weapon_min":568}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":30,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":183,"hit":41,"hits_to_kill":4.4,"level":10,"skill_hit":78,"weapon":"composite_bow","weapon_max":38,"weapon_min":20}
+GROWTH {"class":"ranger","enemy_hp":385,"hit":105,"hits_to_kill":3.7,"level":15,"skill_hit":200,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":696,"hit":168,"hits_to_kill":4.1,"level":20,"skill_hit":319,"weapon":"warden_longbow","weapon_max":109,"weapon_min":57}
+GROWTH {"class":"ranger","enemy_hp":1135,"hit":382,"hits_to_kill":3.0,"level":25,"skill_hit":725,"weapon":"siege_greatbow","weapon_max":272,"weapon_min":131}
+GROWTH {"class":"ranger","enemy_hp":1727,"hit":441,"hits_to_kill":3.9,"level":30,"skill_hit":838,"weapon":"thornback_bow","weapon_max":272,"weapon_min":132}
+GROWTH {"class":"ranger","enemy_hp":4631,"hit":1161,"hits_to_kill":4.0,"level":45,"skill_hit":2206,"weapon":"frostwing_bow","weapon_max":645,"weapon_min":309}
+GROWTH {"class":"ranger","enemy_hp":9694,"hit":3421,"hits_to_kill":2.8,"level":60,"skill_hit":6500,"weapon":"stormstring_greatbow","weapon_max":1736,"weapon_min":831}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.2,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":183,"hit":25,"hits_to_kill":7.4,"level":10,"skill_hit":47,"weapon":"shadow_kris","weapon_max":25,"weapon_min":13}
+GROWTH {"class":"shadowblade","enemy_hp":385,"hit":71,"hits_to_kill":5.4,"level":15,"skill_hit":134,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":696,"hit":127,"hits_to_kill":5.5,"level":20,"skill_hit":242,"weapon":"aether_stiletto","weapon_max":72,"weapon_min":37}
+GROWTH {"class":"shadowblade","enemy_hp":1135,"hit":165,"hits_to_kill":6.9,"level":25,"skill_hit":313,"weapon":"viper_fang","weapon_max":93,"weapon_min":58}
+GROWTH {"class":"shadowblade","enemy_hp":1727,"hit":285,"hits_to_kill":6.1,"level":30,"skill_hit":542,"weapon":"emberfang_dirk","weapon_max":140,"weapon_min":83}
+GROWTH {"class":"shadowblade","enemy_hp":4631,"hit":727,"hits_to_kill":6.4,"level":45,"skill_hit":1382,"weapon":"stormneedle","weapon_max":316,"weapon_min":188}
+GROWTH {"class":"shadowblade","enemy_hp":9694,"hit":1314,"hits_to_kill":7.4,"level":60,"skill_hit":2496,"weapon":"nightwhisper","weapon_max":642,"weapon_min":389}
+[FAIL] test_combat_growth.gd — 5 tests, 130 checks, 1 failures (1911.6 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (281.0 ms)
+[FAIL] test_guilds.gd — 8 tests, 100 checks, 7 failures (30.9 ms)
+[PASS] test_inventory_overhaul.gd — 6 tests, 1917 checks, 0 failures (80.9 ms)
+[PASS] test_items.gd — 17 tests, 2477 checks, 0 failures (631.7 ms)
+[PASS] test_stats.gd — 8 tests, 159 checks, 0 failures (18.4 ms)
+  FAIL test_bh021.test_paul_after_kethrax: a skill point for it — expected 1, got 2
+  FAIL test_combat_growth.test_progression_damage_and_enemy_survival: same-level regular survives multiple normal hits
+  FAIL test_guilds.test_dialogue_conditions_and_placeholders: can promote to D at level 5
+  FAIL test_guilds.test_promotion_requirements: promoted to D at level 4 — expected , got Class D needs level 6 (4 / 6)
+  FAIL test_guilds.test_promotion_requirements: Class D — expected 2, got 1
+  FAIL test_guilds.test_promotion_requirements: D fee charged exactly — expected 99800, got 99950
+  FAIL test_guilds.test_promotion_requirements: not promoted without the deed — expected 2, got 1
+  FAIL test_guilds.test_promotion_requirements: promoted to C with the deed — expected , got Class D needs a proven deed: Receive Maelis's orders
+  FAIL test_guilds.test_promotion_requirements: tier unchanged after a failed promotion — expected 3, got 1
+TOTAL: 5222 checks, 9 failures
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -380,11 +380,7 @@ func net_follow(id: StringName, pos: Vector3, yaw: float) -> void:
 	await get_tree().process_frame
 	load_map(id, &"start")
 	if player and is_instance_valid(player):
-		var side := Vector3(cos(yaw), 0.0, -sin(yaw)) * 1.8
-		var spot := pos + side
-		if current_map and current_map.is_inside_tree():
-			spot = CombatQuery.reachable_point(current_map.get_world_3d(), pos, spot, 0.4)
-			spot = CombatQuery.ground_at(current_map.get_world_3d(), spot + Vector3.UP * 1.5)
+		var spot := Net.portal_arrival(pos, yaw)
 		player.global_transform = Transform3D(Basis(Vector3.UP, yaw), spot + Vector3.UP * 0.05)
 		if player is CharacterBody3D:
 			(player as CharacterBody3D).velocity = Vector3.ZERO
