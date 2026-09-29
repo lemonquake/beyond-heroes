@@ -30,6 +30,7 @@ var body: Node3D
 
 var _travelled := 0.0
 var _hit := {}
+var volley_hits: Dictionary = {}    # shared only by a Split Shot volley
 var _done := false
 
 const MAX_LIFETIME := 8.0
@@ -42,9 +43,7 @@ static func spawn(parent: Node, from: Vector3, dir: Vector3, speed: float, p_req
 	p.source = p_source
 	p.target_mask = mask
 	p.element = p_element
-	var d := dir
-	d.y = 0.0 if absf(d.y) < 0.2 else d.y
-	p.velocity = d.normalized() * speed
+	p.velocity = dir.normalized() * speed
 	parent.add_child(p)
 	p.global_position = from
 	p._build_body(look)
@@ -115,9 +114,10 @@ func _physics_process(delta: float) -> void:
 	var hits := _actors_on_segment(world, from, seg_end)
 	for h in hits:
 		var a: Actor = h[0]
-		if _hit.has(a.get_instance_id()):
+		if _hit.has(a.get_instance_id()) or volley_hits.has(a.get_instance_id()):
 			continue
 		_hit[a.get_instance_id()] = true
+		volley_hits[a.get_instance_id()] = true
 		_hit_target(a, h[1])
 		if _done:
 			return

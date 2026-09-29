@@ -75,12 +75,12 @@ static func skills() -> Array:
 			"description": "Teleport up to {range} m toward the cursor, leaving an arcane burst that pushes nearby enemies away.",
 			"params": {"range": 9.0, "radius": 2.5, "knockback": 8.0},
 			"per_rank": {"range": 0.5}, "sound_cast": &"blink", "vfx": &"blink"}),
-		_s(&"meteor", "Meteor", &"mage", &"ground_aoe", {"element": Elements.FIRE, "conversion": {Elements.FIRE: 0.6, Elements.EARTH: 0.4}, "anim": &"cast_heavy",
-			"mana_cost": 22.0, "cooldown": 8.0,
+		_s(&"meteor", "Meteor Strike", &"mage", &"ground_aoe", {"element": Elements.FIRE, "conversion": {Elements.FIRE: 0.6, Elements.EARTH: 0.4}, "anim": &"cast_heavy",
+			"mana_cost": 45.0, "mana_per_rank": 2.0, "cooldown": 24.0,
 			"description": "Call a meteor onto the target area after {delay} s: {damage_min}-{damage_max} Fire and Earth damage in {radius} m, burning ground, massive impact.",
-			"params": {"damage_min": 38.0, "damage_max": 56.0, "radius": 4.0, "delay": 1.1, "range": 20.0, "knockback": 13.0, "poise": 60.0,
+			"params": {"damage_min": 90.0, "damage_max": 130.0, "radius": 7.0, "delay": 1.1, "range": 20.0, "knockback": 13.0, "poise": 60.0,
 				"launch": 7.0, "burn_ground": 4.0, "status_power": 1.5},
-			"per_rank": {"damage_min": 11.0, "damage_max": 16.0}, "sound_cast": &"meteor_fall", "sound_hit": &"meteor_impact", "vfx": &"meteor"}),
+			"per_rank": {"damage_min": 22.0, "damage_max": 32.0}, "sound_cast": &"meteor_fall", "sound_hit": &"meteor_impact", "vfx": &"meteor"}),
 		_s(&"tidal_wave", "Tidal Wave", &"mage", &"wave", {"element": Elements.WATER, "anim": &"cast_heavy", "mana_cost": 14.0, "cooldown": 5.0,
 			"description": "A crashing wave in a {length} m line: {damage_min}-{damage_max} Water damage, soaks enemies (Wet) and sweeps them away.",
 			"params": {"damage_min": 14.0, "damage_max": 20.0, "length": 12.0, "width": 3.6, "speed": 14.0, "knockback": 12.0, "poise": 18.0, "push_along": 1.0},
@@ -171,7 +171,7 @@ static func mage_tree() -> TreeDef:
 	t.id = &"mage_skills"
 	t.display_name = "Mage Skills"
 	t.points_kind = &"skill"
-	t.pages = [{"name": "Spells", "desc": "The eight elements."}, {"name": "Mastery", "desc": "Passive skills: always on."}]
+	t.pages = [{"name": "Spells", "desc": "The eight elements."}, {"name": "Mastery", "desc": "Passive skills: always on."}, {"name": "Gravity & Dark Arts", "desc": "Pulls, stuns, curses and Mana drain."}]
 	t.branches = [{"name": "Pyre & Storm", "x": 1.0, "color": Color(1.0, 0.5, 0.2)}, {"name": "Frost & Tide", "x": 4.0, "color": Color(0.45, 0.8, 1.0)},
 		{"name": "Arcana", "x": 7.0, "color": Color(0.7, 0.5, 1.0)},
 		{"name": "Fire & Storm", "x": 1.0, "color": Color(1.0, 0.5, 0.2), "page": 1}, {"name": "Frost & Tide", "x": 4.0, "color": Color(0.45, 0.8, 1.0), "page": 1},

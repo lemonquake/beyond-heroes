@@ -293,7 +293,13 @@ func _panel(title: String, w := 760.0) -> Array:
 
 func _build_load() -> PanelContainer:
 	var pv := _panel("Load Game")
-	pv[1].add_child(VBoxContainer.new())  # slot list (filled on open)
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	pv[1].add_child(scroll)
+	var list := VBoxContainer.new()
+	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(list)
 	var back := UIWindow.button("Back", func() -> void: _load_panel.visible = false, &"", 200.0)
 	back.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	pv[1].add_child(back)
@@ -301,7 +307,7 @@ func _build_load() -> PanelContainer:
 
 func _show_load() -> void:
 	_credits.visible = false
-	var list: VBoxContainer = (_load_panel.get_child(0) as VBoxContainer).get_child(2)
+	var list: VBoxContainer = _load_panel.get_child(0).get_child(2).get_child(0)
 	for c in list.get_children():
 		c.queue_free()
 	for s in SaveSystem.SLOTS:

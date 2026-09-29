@@ -1,0 +1,23 @@
+{
+  "engine": "Godot 4.7.2",
+  "tests": {
+    "checks": 3861,
+    "failures": 0
+  },
+  "windows": "Release x64; embedded game data; headless startup passed",
+  "android": "Debug-signed ARM64 + ARMv7; v2/v3 signature verified; not device-tested",
+  "artifacts": {
+    "build/windows/BeyondHeroes.exe": {
+      "bytes": 377712552,
+      "sha256": "f6316868958b6d4487d6d1e298f83bb64595f5bbc945708c55b58a27398b7a8c"
+    },
+    "build/BeyondHeroes-Windows.zip": {
+      "bytes": 302497888,
+      "sha256": "327bd99643506675b068159de0873e0fa7b72527737b17a1bcfb4b8ba513d9bf"
+    },
+    "build/BeyondHeroes.apk": {
+      "bytes": 325282668,
+      "sha256": "ec167fc99b88707e07ceada132edf5fd58e4db1ffe80a03e80d88a64deccf59e"
+    }
+  }
+}

@@ -128,7 +128,8 @@ func passive_modifiers(bonus := 0) -> Array:
 			out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, passive_value(m, r), n.name))
 		var fl: Dictionary = n.get("flags", {})
 		for f in fl:
-			out.append(StatModifier.flat(StringName("flag_" + String(f)), passive_value([f, 0, fl[f][0], fl[f][1]], r), n.name))
+			var value := minf(passive_value([f, 0, fl[f][0], fl[f][1]], r), float(DataClassRework.CAPS.get(f, INF)))
+			out.append(StatModifier.flat(StringName("flag_" + String(f)), value, n.name))
 	return out
 
 ## [stat, op, base, per_rank] at rank r.

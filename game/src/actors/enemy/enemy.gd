@@ -183,6 +183,7 @@ func _ready() -> void:
 	mark_stats_dirty()
 	ensure_stats()
 	hp = max_hp()
+	mana = max_mana()
 	if is_elite:
 		_apply_elite_visuals()
 		if stats.has_flag(&"ward"):

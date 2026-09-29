@@ -291,4 +291,6 @@ func heal_taken_mult() -> float:
 			m += per * float(statuses[id].stacks)
 	if statuses.has(&"purged"):
 		m *= 0.5
+	if statuses.has(&"bloodcurse"):
+		m *= 1.0 - clampf(magnitude(&"bloodcurse"), 0.0, 0.70)
 	return clampf(m, 0.0, 3.0)

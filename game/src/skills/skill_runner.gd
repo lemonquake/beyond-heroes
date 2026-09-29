@@ -107,6 +107,9 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 	action.data["hits"] = {}
 	_consume(p)
 	match skill.behavior:
+		&"gravity_pull", &"spike_tentacle", &"mana_siphon", &"dark_arts":
+			action.on_release = func() -> void:
+				ClassSpells.cast(self, skill, p, aim)
 		&"melee_arc":
 			action.on_window = func(w: int, first: bool) -> void:
 				if first:
@@ -357,7 +360,7 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 	if skill.id == &"firebolt" and (caster.stats.has_flag(&"firebolt_split") or (caster.resource != null and caster.resource.value >= float(p.get("charge_split", 99.0)))):
 		count = maxi(count, 3)
 		spread = maxf(spread, 14.0)
-	var dir: Vector3 = caster.aim_dir()
+	var dir: Vector3 = caster.projectile_dir() if caster.has_method(&"projectile_dir") else caster.aim_dir()
 	var from: Vector3 = caster.cast_point()
 	var req := make_request(skill, p)
 	req.tags[&"projectile"] = true
@@ -730,7 +733,8 @@ func _sentry(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
 func _orb(skill: SkillDef, p: Dictionary) -> void:
 	var req := make_request(skill, p)
 	req.direct_status[&"chilled"] = float(p.get("chill", 20.0))
-	var o := FrostOrb.create(parent(), caster.cast_point(), caster.aim_dir(), req, caster, mask(), float(p.get("range", 14.0)))
+	var dir: Vector3 = caster.projectile_dir() if caster.has_method(&"projectile_dir") else caster.aim_dir()
+	var o := FrostOrb.create(parent(), caster.cast_point(), dir, req, caster, mask(), float(p.get("range", 14.0)))
 	o.on_hit = func(a: Actor, res: DamageResult) -> void:
 		_hit(skill, a, res)
 	Audio.play_at(skill.sound_cast, caster.global_position)

@@ -471,7 +471,12 @@ static func status(inst: Variant) -> Control:
 	var bad := StatusRules.is_debuff(id)
 	var head := lbl(StatusRules.name_of(id) + (" x%d" % inst.stacks if int(inst.stacks) > 1 else ""), 19, UITheme.BAD if bad else UITheme.GOOD, UITheme.title_font())
 	v.add_child(head)
-	v.add_child(lbl(StatusRules.desc_of(id), 15, UITheme.TEXT))
+	var description := StatusRules.desc_of(id)
+	if id == &"bloodcurse":
+		description = "All HP restoration is reduced by %.0f%%." % (clampf(inst.magnitude, 0.0, 0.70) * 100.0)
+	elif id == &"paralyzed":
+		description = "Movement is slowed by %.0f%%." % (clampf(inst.magnitude, 0.0, 0.85) * 100.0)
+	v.add_child(lbl(description, 15, UITheme.TEXT))
 	if inst.infinite:
 		v.add_child(lbl("Lasts while its source remains", 14, UITheme.TEXT_DIM))
 	else:

@@ -6,7 +6,7 @@ extends TestCase
 const CLASSES := [&"knight", &"mage", &"ranger", &"shadowblade"]
 const NEW_BEHAVIORS := [&"melee_arc", &"projectile", &"ground_aoe", &"self_aoe", &"leap", &"blink", &"buff", &"spin",
 	&"chain", &"wave", &"dash_strike", &"judgment", &"flurry", &"spiral", &"aura", &"storm", &"sentry", &"orb", &"trap",
-	&"vault", &"shadow_step", &"veil", &"mark"]
+	&"vault", &"shadow_step", &"veil", &"mark", &"gravity_pull", &"spike_tentacle", &"mana_siphon", &"dark_arts"]
 
 var _holder: Node3D
 var _saved := {}
@@ -274,7 +274,7 @@ func _pool_hp(es: Array) -> float:
 func _cast_all(cls: StringName) -> void:
 	await _begin(cls)
 	var t := Game.hero.skill_tree.tree
-	var no_damage := [&"buff", &"blink", &"vault", &"veil", &"aura", &"mark"]
+	var no_damage := [&"mana_siphon", &"buff", &"blink", &"vault", &"veil", &"aura", &"mark"]
 	for n in t.nodes:
 		if n.get("kind", "skill") != "skill":
 			continue

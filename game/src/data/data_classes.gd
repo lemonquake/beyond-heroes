@@ -5,7 +5,7 @@ static func build() -> Array:
 	var knight := ClassDef.new()
 	knight.id = &"knight"
 	knight.display_name = "Knight"
-	knight.description = "A martial champion of steel and resolve. Blocks, staggers and hurls foes into the walls. Builds Valor by fighting up close and spends it on devastating strikes."
+	knight.description = "A durable melee fighter who builds Valor through attacks and blocks. Learn knockback resistance, counterattacks, damage return and extra regeneration for each debuff. Auras support nearby allies."
 	knight.model_path = "res://assets/characters/knight.glb"
 	knight.base_attributes = {&"str": 14, &"agi": 9, &"int": 5, &"wis": 6, &"spi": 9, &"dex": 10}
 	knight.growth_per_level = {&"str": 1.5, &"agi": 0.5, &"int": 0.0, &"wis": 0.25, &"spi": 0.5, &"dex": 0.5}
@@ -42,7 +42,7 @@ static func build() -> Array:
 	var mage := ClassDef.new()
 	mage.id = &"mage"
 	mage.display_name = "Mage"
-	mage.description = "A scholar of the eight elements. Fragile but devastating: combines Wet, Chill and Shock, blinks out of danger, and builds Arcane Charge to push spells beyond their limits — at a price."
+	mage.description = "A ranged spellcaster who combines elemental damage with gravity pulls, stuns and curses. Meteor Strike deals heavy area damage; Mana Siphon and Arcane Arts help manage expensive spells."
 	mage.model_path = "res://assets/characters/mage.glb"
 	mage.base_attributes = {&"str": 5, &"agi": 8, &"int": 15, &"wis": 11, &"spi": 7, &"dex": 7}
 	mage.growth_per_level = {&"str": 0.25, &"agi": 0.5, &"int": 1.5, &"wis": 0.75, &"spi": 0.5, &"dex": 0.25}
@@ -77,7 +77,7 @@ static func build() -> Array:
 	var ranger := ClassDef.new()
 	ranger.id = &"ranger"
 	ranger.display_name = "Ranger"
-	ranger.description = "A hunter of the broken frontier. Fights from range with bow and javelin, sets snares and powder traps, and vaults away when anything gets close. Builds Focus by keeping calm at a distance and spends it on one perfect shot."
+	ranger.description = "A ranged fighter using bows, javelins and traps. Learn Knee Shot to stun enemies and Split Shot to fire additional arrows. Builds Focus at a distance and spends it on stronger shots."
 	ranger.model_path = "res://assets/characters/ranger.glb"
 	ranger.base_attributes = {&"str": 8, &"agi": 13, &"int": 6, &"wis": 8, &"spi": 7, &"dex": 14}
 	ranger.growth_per_level = {&"str": 0.25, &"agi": 0.75, &"int": 0.0, &"wis": 0.5, &"spi": 0.25, &"dex": 1.25}
@@ -113,7 +113,7 @@ static func build() -> Array:
 	var shadow := ClassDef.new()
 	shadow.id = &"shadowblade"
 	shadow.display_name = "Shadowblade"
-	shadow.description = "An assassin who walks between the lights. Twin daggers build Combo with quick cuts; finishers spend it for brutal strikes. Slips into smoke, steps behind enemies and leaves poison and blades behind."
+	shadow.description = "A fast melee fighter who builds Combo for finishers. Learn Double Attack, brief paralyzing slows, lifesteal on every second attack and Bloodcurse to reduce enemy healing."
 	shadow.model_path = "res://assets/characters/shadowblade.glb"
 	shadow.base_attributes = {&"str": 10, &"agi": 15, &"int": 7, &"wis": 6, &"spi": 6, &"dex": 12}
 	shadow.growth_per_level = {&"str": 0.5, &"agi": 1.25, &"int": 0.0, &"wis": 0.25, &"spi": 0.25, &"dex": 0.75}

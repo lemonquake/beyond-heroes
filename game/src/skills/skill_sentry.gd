@@ -135,7 +135,6 @@ func _shoot() -> void:
 	if best == null:
 		return
 	var dir := (best.center() - from)
-	dir.y = 0.0
 	if request == null:
 		return                           # the real sentinel's bolts are shared by Projectile.spawn
 	var pr := Projectile.spawn(get_parent(), from, dir.normalized(), speed, request.clone(), source if is_instance_valid(source) else null, mask, element, look)

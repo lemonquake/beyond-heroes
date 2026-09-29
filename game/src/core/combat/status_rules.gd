@@ -12,6 +12,8 @@ const THRESHOLD := 100.0
 
 # id: {name, debuff, duration, icon, desc, [hidden], [mods: [[stat, op, value]]]}   value scales with magnitude when mag_scaled
 const DEFS := {
+	&"bloodcurse": {"name": "Bloodcurse", "debuff": true, "duration": 4.0, "icon": "grievous", "desc": "All HP restoration is reduced by 20-70%, according to the curse strength."},
+	&"paralyzed": {"name": "Paralyzing Attack", "debuff": true, "duration": 0.1, "icon": "slowed", "desc": "Movement slowed by 30-85% for a brief moment."},
 	&"burning": {"name": "Burning", "debuff": true, "duration": 4.0, "icon": "burning", "desc": "Taking Fire damage over time. Water or Ice extinguishes it; Wind fans it onto nearby enemies."},
 	&"chilled": {"name": "Chilled", "debuff": true, "duration": 3.0, "icon": "chilled", "desc": "25% slower movement and attacks. Chill builds toward Freeze."},
 	&"frozen": {"name": "Frozen", "debuff": true, "duration": 1.6, "icon": "frozen", "desc": "Cannot act. Heavy physical hits Shatter (+30%); Fire Melts it (+50% Fire)."},

@@ -147,10 +147,14 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	req.target_weight = weight
 	_positional_bonuses(req, attacker)
 	_prepare_incoming(req, attacker)
+	if attacker is Player:
+		attacker.class_passives.before_hit(req)
 	var result := DamagePipeline.compute(req, rng)
 	if attacker != null:
 		last_attacker = attacker
 	_apply_result(result, req, attacker, hit_point)
+	if is_instance_valid(attacker) and attacker is Player:
+		attacker.class_passives.after_hit(self, req, result)
 	return result
 
 ## Attacker passives that depend on this target (bh-010): Ruthless (low-HP targets) and Opportunist (from behind).
@@ -194,7 +198,7 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 			_on_shield_broken()
 	hp = maxf(0.0, hp - dmg)
 	if result.healed > 0:
-		hp = minf(max_hp(), hp + result.healed)
+		hp = minf(max_hp(), hp + result.healed * status.heal_taken_mult())
 	status.receive_hit(result)
 	health_changed.emit(hp, max_hp())
 	hit_taken.emit(result)

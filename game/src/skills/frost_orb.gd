@@ -25,7 +25,7 @@ static func create(parent: Node, from: Vector3, p_dir: Vector3, req: DamageReque
 	o.request = req
 	o.source = p_source
 	o.mask = p_mask
-	o.dir = p_dir.slide(Vector3.UP).normalized()
+	o.dir = p_dir.normalized()
 	o.reach = p_reach
 	parent.add_child(o)
 	o.global_position = from

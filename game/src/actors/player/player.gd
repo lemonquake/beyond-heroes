@@ -74,6 +74,8 @@ var dodge_cd := 0.0
 var shield_t := 0.0
 var _combat_t := 99.0
 var _attack_counter := 0
+var class_passives := ClassPassives.new(self)
+var _retaliation_cd := 0.0
 var _still_t := 0.0
 var _riposte_t := 0.0
 var _last_element := -1
@@ -259,7 +261,7 @@ func _update_aim() -> void:
 	if camera == null or not is_inside_tree():
 		return
 	if aim_override.is_finite():
-		aim_point = Vector3(aim_override.x, global_position.y, aim_override.z)
+		aim_point = aim_override
 		return
 	if Settings.touch_mode:
 		_update_touch_aim()
@@ -272,9 +274,13 @@ func _update_aim() -> void:
 	var hit = plane.intersects_ray(from, dir)
 	if hit != null:
 		aim_point = Vector3(hit.x, global_position.y, hit.z)
+	var terrain_query := PhysicsRayQueryParameters3D.create(from, from + dir * 200.0, BH.LAYER_WORLD | BH.LAYER_GROUND)
+	var terrain := get_world_3d().direct_space_state.intersect_ray(terrain_query)
+	if not terrain.is_empty() and terrain.normal.y > 0.5:
+		aim_point = terrain.position
 	var enemy := _enemy_under_cursor(from, dir)
 	if enemy:
-		aim_point = Vector3(enemy.global_position.x, global_position.y, enemy.global_position.z)
+		aim_point = enemy.global_position
 		Game.hover_target = enemy
 	else:
 		Game.hover_target = null
@@ -287,12 +293,13 @@ const AUTO_AIM_RANGE := 13.0
 func _update_touch_aim() -> void:
 	if touch_aim_dir.length() > 0.1:
 		aim_point = global_position + touch_aim_dir.normalized() * maxf(1.0, touch_aim_dist)
+		aim_point = CombatQuery.ground_at(get_world_3d(), aim_point)
 		return
 	var t := pick_auto_target() if Settings.touch_auto_aim else null
 	auto_target = t
 	Game.hover_target = t
 	if t:
-		aim_point = Vector3(t.global_position.x, global_position.y, t.global_position.z)
+		aim_point = t.global_position
 	else:
 		var ahead := _move_input()
 		if ahead.length() < 0.1:
@@ -374,6 +381,13 @@ func cast_point() -> Vector3:
 			return p
 	return global_position + Vector3.UP * 1.3 + forward() * 0.6
 
+## Projectile aim retains elevation; facing and melee continue to use horizontal aim_dir().
+func projectile_dir() -> Vector3:
+	var target := aim_point + Vector3.UP * 1.0
+	if is_instance_valid(Game.hover_target) and Game.hover_target is Actor and aim_point.distance_squared_to(Game.hover_target.global_position) < 0.01:
+		target = Game.hover_target.center()
+	return (target - cast_point()).normalized()
+
 # ---- Frame loop ---------------------------------------------------------------------------------------------
 
 func _physics_process(delta: float) -> void:
@@ -408,6 +422,8 @@ func _physics_process(delta: float) -> void:
 	_update_interaction(delta)
 
 func _tick_timers(delta: float) -> void:
+	_retaliation_cd = maxf(0.0, _retaliation_cd - delta)
+	class_passives.tick(delta)
 	var changed := false
 	for k in cooldowns.keys():
 		cooldowns[k] = maxf(0.0, cooldowns[k] - delta)
@@ -479,7 +495,7 @@ func _sync_status(id: StringName, on: bool) -> void:
 		mark_stats_dirty()
 
 func _regen(delta: float) -> void:
-	var hr := stats.get_stat(&"hp_regen") + aura_regen()
+	var hr := stats.get_stat(&"hp_regen") + aura_regen() + class_passives.debuff_regen()
 	var mr := stats.get_stat(&"mana_regen")
 	if stats.has_flag(&"still_mana") and _still_t >= 1.0:
 		mr *= 1.0 + stats.flag(&"still_mana")
@@ -692,6 +708,7 @@ func _weapon_request(a: TimedAction, heavy: bool, mult: float) -> DamageRequest:
 	req.knockback = ((wt.heavy_knockback if wt else 8.0) * minf(mult, 1.6) if heavy else (wt.knockback if wt else 2.0) * chain_k)
 	req.poise = (wt.poise_damage if wt else 8.0) * (2.2 * mult if heavy else chain_m)
 	req.tags[&"weapon"] = true
+	req.tags[&"attack_id"] = a.get_instance_id()
 	decorate_request(req, null)
 	return req
 
@@ -809,7 +826,7 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 		var main := hero.equipment.get_item(&"main_weapon")
 		look = "model:" + (weapon_model_for(main, wt) if main else wt.model)
 	var speed := wt.projectile_speed * (1.0 + stats.get_stat(&"projectile_speed")) * (1.3 if heavy else 1.0)
-	var pr := Projectile.spawn(runner.parent(), cast_point(), aim_dir(), speed, req, self, BH.LAYER_ENEMY, el, look)
+	var pr := Projectile.spawn(runner.parent(), cast_point(), projectile_dir(), speed, req, self, BH.LAYER_ENEMY, el, look)
 	pr.max_range = wt.reach
 	pr.radius = 0.3 if wt.id == &"bow" or wt.id == &"javelin" else 0.35
 	pr.hit_sound = wt.hit_sound
@@ -823,6 +840,8 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 			FX.spawn(VFXLib.ring_wave(Elements.color(el), 2.2, 0.35), pt)
 	pr.on_hit = func(t: Actor, res: DamageResult, pt: Vector3) -> void:
 		_on_hit_dealt(t, res, req)
+	if wt.id == &"bow":
+		class_passives.split_shot(pr)
 	Audio.play_at(wt.swing_sound, global_position, -3.0)
 
 # ---- Heavy / charge ---------------------------------------------------------------------------------------------
@@ -1030,7 +1049,9 @@ func _start_skill(sid: StringName) -> void:
 	_after_cast(s)
 
 func _pay_skill(s: SkillDef) -> void:
-	spend_mana(mana_cost(s.id))
+	var paid := mana_cost(s.id)
+	if spend_mana(paid):
+		class_passives.refund(s, paid)
 	var cd := skill_cooldown(s.id)
 	if cd > 0.0:
 		cooldowns[s.id] = cd
@@ -1614,7 +1635,8 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 		status.apply(&"second_wind", 4.0, max_hp() * stats.flag(&"second_wind") / 4.0)
 		FX.spawn(VFXLib.ring_wave(Color(0.6, 1.0, 0.7, 0.9), 2.5, 0.5), global_position)
 		FX.text_popup(center() + Vector3.UP * 0.9, "Second Wind", Color(0.6, 1.0, 0.7), 1.0)
-	if result.blocked:
+	class_passives.return_damage(attacker, req, result)
+	if alive and result.blocked and not req.tags.has(&"proc") and not req.tags.has(&"thorns"):
 		_on_blocked(result, attacker)
 	if resource and resource.kind == &"valor" and result.total > 0:
 		resource.gain(result.total / maxf(1.0, max_hp()) * 20.0, 1.0 + stats.get_stat(&"valor_gain"))
@@ -1655,22 +1677,24 @@ func _on_blocked(result: DamageResult, attacker: Node) -> void:
 	if stats.has_flag(&"block_mana"):
 		restore_mana(stats.flag(&"block_mana"))
 		heal(max_hp() * 0.02, false)
-	if stats.has_flag(&"retaliation") and attacker is Actor and (attacker as Actor).alive and randf() < stats.flag(&"retaliation") \
-			and (attacker as Node3D).global_position.distance_to(global_position) < 4.0:
+	if _retaliation_cd <= 0.0 and not is_disabled() and stats.has_flag(&"retaliation") and attacker is Actor and (attacker as Actor).alive and randf() < stats.flag(&"retaliation") \
+			and (attacker as Node3D).global_position.distance_to(global_position) < 4.0 and not CombatQuery.blocked(get_world_3d(), center(), attacker.center()):
+		_retaliation_cd = 2.0
 		var rq := DamageRequest.new()
+		rq.tags[&"proc"] = true
 		rq.kind = DamageRequest.Kind.ATTACK
 		rq.attacker = stats
 		rq.use_weapon = true
 		rq.weapon_mult = 1.2
 		rq.knockback = 6.0
 		rq.poise = 20.0
-		rq.label = "Retaliation"
+		rq.label = "Counter-attack"
 		rq.tags[&"push_dir"] = ((attacker as Node3D).global_position - global_position).slide(Vector3.UP).normalized()
 		decorate_request(rq, null)
 		var rr := (attacker as Actor).receive_hit(rq, self, (attacker as Actor).center())
 		_on_hit_dealt(attacker as Actor, rr, rq)
 		FX.spawn_facing(VFXLib.slash_arc(Color(1.0, 0.85, 0.5, 0.9), 2.4, 140.0, 1.1, 0.2, 0.5), global_position, forward())
-		FX.text_popup(center() + Vector3.UP * 0.9, "Retaliation", UITheme.GOLD, 0.8)
+		FX.text_popup(center() + Vector3.UP * 0.9, "Counter-attack", UITheme.GOLD, 0.8)
 	if result.perfect_block:
 		FX.hitstop(0.08)
 		Events.camera_shake.emit(0.2)

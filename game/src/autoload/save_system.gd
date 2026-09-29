@@ -5,7 +5,7 @@ extends Node
 
 const CURRENT_VERSION := 4
 const SAVE_DIR := "user://saves"
-const SLOTS := 3
+const SLOTS := 8
 
 ## version -> Callable(dict) -> dict  (upgrades from `version` to `version + 1`)
 var MIGRATIONS := {

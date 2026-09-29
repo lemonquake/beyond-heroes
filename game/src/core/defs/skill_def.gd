@@ -60,4 +60,6 @@ func resolve(rank: int, upgrades: Dictionary = {}) -> Dictionary:
 		else:
 			p[k] = float(p.get(k, 0.0)) + float(v)
 	p["rank"] = r
+	if id == &"spike_tentacle":
+		p["stun_duration"] = minf(1.6, float(p.stun_duration))
 	return p

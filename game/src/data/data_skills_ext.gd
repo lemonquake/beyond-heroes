@@ -15,7 +15,7 @@ static func _s(id: StringName, name: String, cls: StringName, behavior: StringNa
 	return DataSkills._s(id, name, cls, behavior, d)
 
 static func skills() -> Array:
-	return knight() + mage() + ranger() + shadowblade()
+	return knight() + mage() + ranger() + shadowblade() + DataClassRework.skills()
 
 # ================================================================================================= KNIGHT
 static func knight() -> Array:
@@ -260,7 +260,7 @@ static func knight_nodes() -> Array:
 		# Disciplines (passives)
 		_pas(&"arms_mastery", "Arms Mastery", Vector2(1, 0), 2, [], 1, "+{0}% increased weapon damage and +{1}% Critical Chance.",
 			[[&"weapon_damage", I, 0.06, 0.03], [&"crit_chance", F, 0.01, 0.005]]),
-		_pas(&"retaliation", "Retaliation", Vector2(1, 2), 2, [&"arms_mastery"], 6, "Blocking has a {f0}% chance to counterattack for 120% weapon damage.",
+		_pas(&"retaliation", "Counter-attack", Vector2(1, 2), 2, [&"arms_mastery"], 6, "Blocking has a {f0}% chance to counterattack for 120% weapon damage. 2 s cooldown. Cannot counter another passive hit.",
 			[], {&"retaliation": [0.2, 0.06]}),
 		_pas(&"crusader_resolve", "Crusader's Resolve", Vector2(1, 4), 2, [&"retaliation"], 12, "+{0}% Valor generation and +{1}% Physical Damage.",
 			[[&"valor_gain", I, 0.15, 0.05], [&"phys_damage", F, 0.03, 0.02]]),
@@ -274,7 +274,7 @@ static func knight_nodes() -> Array:
 			[[&"max_hp", I, 0.06, 0.03], [&"poise", F, 4.0, 2.0]]),
 		_pas(&"iron_skin", "Iron Skin", Vector2(7, 2), 2, [&"toughness"], 4, "+{0}% increased Defense.",
 			[[&"defense", I, 0.12, 0.06]]),
-	]
+	] + DataClassRework.nodes(&"knight")
 
 ## Extra Mage nodes: new spells (page 0) and Mastery (page 1).
 static func mage_nodes() -> Array:
@@ -300,7 +300,7 @@ static func mage_nodes() -> Array:
 			[], {&"mana_shield": [0.15, 0.05]}),
 		_pas(&"spell_echo", "Spell Echo", Vector2(8, 4), 1, [&"arcane_precision"], 14, "Damaging spells have a {f0}% chance to cast again at half strength.",
 			[], {&"spell_echo": [0.08, 0.02]}),
-	]
+	] + DataClassRework.nodes(&"mage")
 
 static func ranger_tree() -> TreeDef:
 	var t := TreeDef.new()
@@ -345,7 +345,7 @@ static func ranger_tree() -> TreeDef:
 			[[&"evasion", I, 0.12, 0.05], [&"dodge_cooldown", F, -0.05, -0.03]]),
 		_pas(&"fleet_foot", "Fleet Foot", Vector2(7, 2), 1, [&"light_feet"], 6, "+{0}% increased Movement Speed.",
 			[[&"move_speed", I, 0.04, 0.015]]),
-	]
+	] + DataClassRework.nodes(&"ranger")
 	return t
 
 static func shadowblade_tree() -> TreeDef:
@@ -391,7 +391,7 @@ static func shadowblade_tree() -> TreeDef:
 			[[&"dot_damage", I, 0.15, 0.06], [&"status_power", I, 0.05, 0.03]]),
 		_pas(&"fleet_step", "Fleet Step", Vector2(7, 2), 1, [&"venomcraft"], 6, "+{0}% Movement Speed and {1} s faster dodge recovery.",
 			[[&"move_speed", I, 0.03, 0.01], [&"dodge_cooldown", F, -0.05, -0.02]]),
-	]
+	] + DataClassRework.nodes(&"shadowblade")
 	return t
 
 ## Description of a passive node at a rank: {0}, {1}... = mod values (percent for fractions), {f0}... = flag values.
@@ -413,7 +413,9 @@ static func passive_text(n: Dictionary, rank: int) -> String:
 	var fl: Dictionary = n.get("flags", {})
 	var i := 0
 	for f in fl:
-		var v := TreeState.passive_value([f, 0, fl[f][0], fl[f][1]], r)
-		text = text.replace("{f%d}" % i, StatDefs._num(v * 100.0) if v < 1.0 and f != &"combo_linger" else StatDefs._num(v))
+		var v := minf(TreeState.passive_value([f, 0, fl[f][0], fl[f][1]], r), float(DataClassRework.CAPS.get(f, INF)))
+		text = text.replace("{f%d}" % i, StatDefs._num(v * 100.0) if (v < 1.0 and f != &"combo_linger") or DataClassRework.CAPS.has(f) else StatDefs._num(v))
+		if f == &"split_shot":
+			text = text.replace("3-8 arrows (by level)", "%d arrows" % ClassPassives.split_count(v))
 		i += 1
 	return text
