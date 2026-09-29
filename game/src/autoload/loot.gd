@@ -143,6 +143,12 @@ func drop_for(e: Enemy, player: Player) -> void:
 			var pool := DataMinibosses.scroll_pool()
 			if not pool.is_empty():
 				drops.append(DB.make_item(pool[rng.randi_range(0, pool.size() - 1)], BH.Rarity.COMMON, ilvl, rng.randi()))
+	# bh-018: socket crystals — every boss drops one (any grade), every miniboss a Fragment or a Shard
+	if e.is_boss or e.is_miniboss():
+		var cid := DataCrystals.roll_drop(rng, e.level, e.is_boss)
+		var cr := DB.make_item(cid, BH.Rarity.COMMON, ilvl, rng.randi())
+		if cr:
+			drops.append(cr)
 	if e.stats and e.stats.has_flag(&"aether_blink"):
 		var sh := DB.make_item(&"aether_shard", BH.Rarity.COMMON, ilvl, rng.randi())
 		sh.count = rng.randi_range(1, 2)

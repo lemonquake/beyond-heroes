@@ -171,7 +171,7 @@ they have lived behind a palisade while the dead marched in the forest below.
 | **Sanctuary Terrace** | The raised waypoint terrace guarded by two knight statues; the old "Hero Sanctuary". The waypoint leads to the Ruined Forest. |
 | **The Salted Marlin** | Tavern and inn. Rest here to recover fully (paid). |
 | **Swordfin Hall** / **Lantern House** | The two guild halls. Join, register, and request promotion here. |
-| **Market** | Tovin's provisions and the Hooded Stranger's rare goods. |
+| **Market** | Anton's provisions and the Hooded Stranger's rare goods. |
 | **Brannoc's Forge** | The smithy yard by the east road. |
 | **The Old Well** | Where Seris reads the Aether. |
 | **South Gate** | Barred for three winters. Captain Hald's post. *(provisional:)* Hald opens it when the hero offers to walk the roads below: the dead keep to the forest now, and the farms need an escort (world flag `south_gate_open`). |
@@ -183,7 +183,7 @@ they have lived behind a palisade while the dead marched in the forest below.
 | Name | Role | Where | Knows about |
 |---|---|---|---|
 | Elder Maelis | Keeper of the Hearth | Plaza | The Warden, the Binding, the town's history |
-| Tovin | Provisioner | Market | Gossip, prices, the Stranger |
+| Anton | Provisioner | Market | Gossip, prices, the Stranger |
 | Brannoc | Blacksmith | Forge | Rarity, Licensed gear, old-order steel |
 | Seris | Aether Mystic | Old Well | The Aether, relics; unweaves skills |
 | Captain Hald | Gate Captain | South Gate | Combat, elites, the raids |
@@ -225,13 +225,13 @@ between the town, the sea and the Ruined Forest. Roads rejoin, so a hero can lea
 | **Stillwater Lake** | The lake in the island's interior that feeds the millstream. Olivar's docks and barges work its south shore; the north-shore timber barges stopped running last month. |
 | **Northern Heights**, **Reedwater Marsh**, **Eastern Shore** | Uncharted regions shown under mist on the island map. Reedwater Marsh is watched from Wyman Outpost's overlook; an old causeway once crossed it. Not yet reachable. |
 
-**People of Olivar** *(provisional)*: Reeve Hollis Garrow (the reeve), Corvin Ashby (Ashby's Arms Exchange), Elsbeth Crane
-(Crane's Fine Settings, jeweller), Master Aldous Pell (Pell's Apothecary, alchemist), Wren Talbot (dockmaster), Pip
+**People of Olivar** *(provisional)*: Reeve Hollis Garrow (the reeve), Taicho (Taicho's Arms Exchange), Elsbeth Crane
+(Crane's Fine Settings, jeweller), Angkol Les (Angkol Les' Apothecary, alchemist), Wren Talbot (dockmaster), Pip
 Larkspur (bard; keeps the tally of the island's champions).
 
 **Wyman Outpost** *(provisional)*: heroes Sir Aldric Vane (commander, Class B, Swordfin), Gideon Rusk (B, Swordfin),
 Sabine Kestrel (C, Lantern), Maren Holt (C, Lantern), Yorick Dunmore (C, Lantern), Odo Fairweather (D, Swordfin), Tamsin
-Brisk (D, independent), Nell Carrow (E, independent); staff Hobb Tanner (quartermaster), Greta Stonehand (field smith,
+Brisk (D, independent), Nell Carrow (E, independent); staff Greggy (quartermaster), Greta Stonehand (field smith,
 Brannoc's apprentice once), Ottilie Brand (camp healer).
 
 **Champions** (minibosses, provisional): named brutes holding camps. **Snagtooth the Fence** (goblins, Westreach),
@@ -243,7 +243,7 @@ crafting.
 **Crafting.** Monsters carry usable parts (wolf fangs, fire-pot resin, orc tusks, ogre sinew, grave dust, ghoul bile, ash
 sigils, wisp motes, stolen linen, rune plates); herbs grow in the wild (Silverleaf by roads and field walls, Mirebloom by
 water, Emberroot where it is warm, Brightcap in deep shade). Forges (Brannoc's anvil, Wyman's field forge), alchemy
-tables (Pell's, Wyman's camp kettle) and the camp workbench turn them into draughts, bombs, scrolls, charms, ingots and
+tables (Angkol Les', Wyman's camp kettle) and the camp workbench turn them into draughts, bombs, scrolls, charms, ingots and
 gear of fine quality. Recipe scrolls teach the rest.
 
 **Waypoint network.** The Sanctuary Terrace, the Ruined Forest glade and the Tideglass Cove shrine are linked: from

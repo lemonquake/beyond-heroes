@@ -1,0 +1,27 @@
+{
+  "engine": "4.7.2.stable",
+  "windows": "release; embedded PCK",
+  "android": "debug-signed; ARM64 and ARMv7; no connected device",
+  "files": [
+    {
+      "path": "build/windows/BeyondHeroes.exe",
+      "bytes": 339688512,
+      "sha256": "7c3ce5c976936b35cac831dc3c7eff677901ba313dfe21430696111557c2c040"
+    },
+    {
+      "path": "build/BeyondHeroes-Windows.zip",
+      "bytes": 264773886,
+      "sha256": "f41bd9b4c77eeb6602250f9c23a457fe3e35de0fba84b3ea4e5bdd4233a3412e"
+    },
+    {
+      "path": "build/BeyondHeroes.apk",
+      "bytes": 286796085,
+      "sha256": "25df6ee4041107fd54a5811647c2ff460032edd822987f7609401ec316408a22"
+    },
+    {
+      "path": "output/pdf/Beyond-Heroes-Changelog-BH016-BH020.pdf",
+      "bytes": 54133,
+      "sha256": "b9a165fbe68cb38ea882721c091628edb5bc555273c53c519f0c00726bf71869"
+    }
+  ]
+}

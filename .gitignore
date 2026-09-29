@@ -9,6 +9,9 @@ godot.log
 
 # Local test screenshots and logs
 /work/probe/
+/work/lemondev/*/scratch/
+/work/lemondev/*/evidence/tests_full_raw.txt
+/work/lemondev/*/evidence/t_*.txt
 
 # Python
 __pycache__/

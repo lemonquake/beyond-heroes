@@ -659,7 +659,7 @@ func test_every_merchant_stands_on_the_trade_row() -> void:
 					near(npc.position.x, want.position.x, 0.01, "%s stands beside the stall (x)" % s.npc)
 					near(npc.position.z, want.position.z, 0.01, "%s stands beside the stall (z)" % s.npc)
 					ok(Vector2(npc.position.x - s.pos.x, npc.position.z - s.pos.z).length() < 3.0, "%s is at their stall" % s.npc)
-			if s.kind == DataTownRows.STATION:
+			if s.has("station"):   # a station stand, or a smithy that keeps the forge (bh-018)
 				stations[s.station] = true
 		for st in [&"forge", &"alchemy", &"workbench"]:
 			ok(stations.has(st), "%s: the %s is on the row" % [map_id, st])
@@ -677,10 +677,9 @@ func test_town_rows_build_in_the_world() -> void:
 		await _begin(map_id)
 		var map := Game.current_map
 		var row := DataTownRows.row(map_id)
-		var signs := 0
-		for n in map.find_children("Sign_*", "Node3D", true, false):
-			signs += 1
-		ok(signs >= row.stands.size() + 1, "%s: a sign for every stand and the gateway (%d)" % [map_id, signs])
+		# bh-018: no sign-poles; every stand except the shrine is its own model
+		var stands := map.find_children("Stand_*", "Node3D", true, false).size()
+		ok(stands >= row.stands.size() - 1, "%s: a stand for every shop and station (%d)" % [map_id, stands])
 		var stations := {}
 		for n in get_stations(map):
 			stations[n.station] = true

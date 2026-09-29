@@ -376,6 +376,46 @@ func floor_disc(center: Vector3, radius: float, y := 0.0, texture_set := "stone_
 	sb.position = mi.position
 	geo.add_child(sb)
 
+## bh-018: a paved apron under a dais that a hero can walk onto from every side. Its flat top (`radius`) sits at `top_y`;
+## the rim slopes down (about 24 degrees) to below the lowest ground around it, so on a hillside there is never a sheer
+## ledge (a flat disc on a slope left a knee-high wall on the downhill side, and dungeon_gate once raised it by the ground
+## height twice: a pedestal nobody could climb).
+func apron(center: Vector2, top_y: float, radius: float, texture_set := "stone_floor") -> void:
+	var low := top_y
+	for k in 16:
+		var a := TAU * k / 16.0
+		for d in [radius * 0.6, radius, radius + 1.2, radius + 2.4]:
+			low = minf(low, ground(center.x + cos(a) * d, center.y + sin(a) * d))
+	var depth := maxf(0.25, top_y - low + 0.2)
+	var cm := CylinderMesh.new()
+	cm.top_radius = radius
+	cm.bottom_radius = radius + depth * 2.2
+	cm.height = depth
+	cm.radial_segments = 48
+	var mi := MeshInstance3D.new()
+	mi.mesh = cm
+	var m := StandardMaterial3D.new()
+	m.albedo_texture = load("res://assets/textures/%s_albedo.png" % texture_set)
+	m.normal_enabled = true
+	m.normal_texture = load("res://assets/textures/%s_normal.png" % texture_set)
+	m.roughness_texture = load("res://assets/textures/%s_rough.png" % texture_set)
+	m.albedo_color = Color(0.62, 0.6, 0.6)
+	m.uv1_triplanar = true
+	m.uv1_world_triplanar = true
+	m.uv1_scale = Vector3.ONE * 0.4
+	mi.material_override = m
+	mi.position = Vector3(center.x, top_y - depth * 0.5, center.y)
+	geo.add_child(mi)
+	var sb := StaticBody3D.new()
+	sb.name = "Apron_%d" % geo.get_child_count()
+	sb.collision_layer = BH.LAYER_WORLD | BH.LAYER_GROUND
+	sb.collision_mask = 0
+	var cs := CollisionShape3D.new()
+	cs.shape = cm.create_convex_shape()
+	sb.add_child(cs)
+	sb.position = mi.position
+	geo.add_child(sb)
+
 ## Invisible boundary (collision only) from a to b, `h` tall — used sparingly where cliffs/trees already read as
 ## the edge, to guarantee the player can never leave the handcrafted area.
 func boundary(a: Vector3, b: Vector3, h := 6.0, thick := 1.0) -> void:
@@ -946,7 +986,7 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	var fwd := Vector3(sin(deg_to_rad(yaw)), 0, cos(deg_to_rad(yaw)))
 	var side := fwd.cross(Vector3.UP)
 	var c := Vector3(p.x, y, p.y)
-	floor_disc(c, 3.2, y)
+	apron(p, y, 3.2)
 	var t := teleporter(DataDungeons.gate_id(dungeon), c, DataDungeons.map_id(dungeon, 1), &"arrival",
 		DataDungeons.floor_title(dungeon, 1), yaw)
 	t.dungeon_gate = dungeon

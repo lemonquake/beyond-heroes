@@ -34,8 +34,9 @@ const FOOTPRINTS := [
 	[-25, 2, 90, 4.3, 3.8], [25, 6, -90, 4.3, 3.8], [-17, 23, 150, 4.3, 3.8], [23, -14, -60, 4.3, 3.8], [-21, -19, 55, 4.3, 3.8],
 	[-28.8, 13.5, 90, 6.3, 4.9], [32, -4.8, -90, 5.7, 5.2], [-30, -9.5, 90, 4.9, 5.4], [-11, -9.6, 0, 8.2, 5.6],
 ]
-## bh-017: Merchant Row (DataTownRows) — every stand of the town's trade, the crafting stations and the Shrine of the Fallen (the
-## Tempo-Caller's spirit shrine, LORE §9) stand along one signed street south-east of the plaza.
+## bh-018: the Merchant Quarter (DataTownRows) south-east of the plaza — every shopkeeper's own stand around a cobbled square,
+## Brannoc's smithy with the town forge, the lapidary, the stranger's wagon, the crafting stations and the Shrine of the
+## Fallen (the Tempo-Caller's spirit shrine, LORE §9).
 
 func compose() -> void:
 	environment({
@@ -92,7 +93,7 @@ func _height(x: float, z: float) -> float:
 func _splat(x: float, z: float) -> Color:
 	var d := Vector2(x - PLAZA.x, z - PLAZA.z).length()
 	var cobble := 1.0 - smoothstep(12.5, 14.0, d)
-	# bh-017: Merchant Row is cobbled from the gateway to the shrine end
+	# the Merchant Quarter (bh-017/bh-018) is cobbled end to end
 	var rw := Rect2(6.4, 10.5, 17.0, 23.0)
 	var rdx := maxf(maxf(rw.position.x - x, x - rw.end.x), 0.0)
 	var rdz := maxf(maxf(rw.position.y - z, z - rw.end.y), 0.0)
@@ -226,7 +227,7 @@ func _houses() -> void:
 		kit("wood_fence", p + side * -5.2 + fwd * 1.0, yaw + 90.0, 1.0, props, true)
 		decor("bush_a", p + side * 5.2 - fwd * 2.5, rng.randf() * 360.0, 0.8, true, true)
 		door(h, yaw, lot[2], lot[3])
-	kit("house_destroyed", Vector3(-26.0, 0, 27.5), 40.0, 1.0, props, true)  # burnt last winter — the first raid (moved west for Merchant Row)
+	kit("house_destroyed", Vector3(-26.0, 0, 27.5), 40.0, 1.0, props, true)  # burnt last winter — the first raid (moved west for the Merchant Quarter)
 	kit("well", Vector3(7.4, 0, -10.4), 20.0, 1.0, props, true)   # bh-016: moved from (-11, -7) for the Guild House lot
 
 ## A solid invisible bar (the South Gate's crossbar) that a flag can lift: registered with hide_when, it stops
@@ -262,8 +263,8 @@ func door(building: Node3D, yaw: float, interior: StringName, label: String) -> 
 ## merchant, crafting station and the Tempo-Caller's shrine along both sides.
 func _merchant_row() -> void:
 	TownRowBuilder.build(self, def.id)
-	# a couple of crates and barrels at the head of the street
-	for p in [Vector3(13.6, 0, 33.0), Vector3(16.2, 0, 33.4)]:
+	# a couple of crates and barrels stacked out of the way at the south end of the square
+	for p in [Vector3(11.2, 0, 32.4), Vector3(18.2, 0, 32.6)]:
 		breakable("crate" if p.x < 15.0 else "barrel", p, rng.randf() * 90.0, 20.0, true)
 
 func _halls() -> void:

@@ -19,8 +19,13 @@ blender -b --factory-startup --python tools/blender/environment/render_assets.py
 | `assets_props.py` | props | breakables with fragments (crate, barrel, urn, statue_small), furniture, camp, storytelling props, cistern pieces (ladder, scaffold, dock, boat, winch) |
 | `assets_crypt.py` | crypt, landmarks | statues, altar, sarcophagus, gravestones, teleporter dais (intact/destroyed), corrupted obelisk, ritual circle, bridges, ruined tower, temple facade, throne |
 | `assets_town.py` | town | timber-framed house (intact/burnt), market stall, well, fountain, palisade and fences |
+| `market_common.py` | (materials) | bh-018 shared material contract for the trade quarters (canvas colours, velvet, leather, copper, verdigris, slate, glowing gems, coals); every name also exists in `MaterialLibrary.ENV` |
+| `assets_market_a.py` | market | bh-018 Malasugue stands: provisions stall, arcana pavilion, lapidary booth, smithy with forge, the stranger's wagon |
+| `assets_market_b.py` | market | bh-018 Olivar / Wyman stands: jeweller, apothecary, arms broker, gem-cutter's kiosk, crystal prospector's cart |
+| `assets_market_c.py` | market | bh-018 quartermaster's tent, field smith's campaign forge, and the Alchemy Table / Workbench / Forge stations |
 
 Conventions: metres, Blender Z-up exported as glTF Y-up (Blender −Y becomes Godot +Z, the "front"), origin at the
 bottom centre unless noted, 4 m wall grid, material names from the `BH_*` contract (Godot swaps them for
 `MaterialLibrary` materials), `<name>-colonly` collision children, child empties as sockets (`flame`, `light`,
-`center`, `door_light`). Deterministic: each asset seeds its RNG from its name.
+`center`, `door_light`; trade stands add `npc`, `customer`, `light_a`, `light_b`, `use`, `flame`, `smoke` — see
+`work/lemondev/bh-018/contracts/stands.md`). Deterministic: each asset seeds its RNG from its name.

@@ -64,7 +64,8 @@ func _ready() -> void:
 	_plate.outline_size = 8
 	_plate.outline_modulate = Color(0, 0, 0, 0.85)
 	_plate.modulate = UITheme.GOLD
-	_plate.no_depth_test = false
+	_plate.no_depth_test = true
+	_plate.render_priority = 8
 	_plate.position.y = 2.25 * def.model_scale
 	_plate.visible = false
 	add_child(_plate)
@@ -73,6 +74,7 @@ func _ready() -> void:
 		_emblem = Sprite3D.new()
 		_emblem.texture = UIArt.tex(DataGuilds.emblem_path(def.hero_tier)) if def.hero_tier > 0 else null
 		_emblem.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_emblem.no_depth_test = true
 		_emblem.fixed_size = true
 		# about 40 px tall on screen, sitting just above the plate's two lines (the plate uses 0.0008 per font pixel)
 		var th := float(_emblem.texture.get_height()) if _emblem.texture else 64.0

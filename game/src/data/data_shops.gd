@@ -5,7 +5,7 @@ const R := BH.Rarity
 
 static func build() -> Array:
 	return [
-		ShopDef.make(&"tovin_goods", "Tovin's Provisions", {"npc": &"tovin", "kind": &"consumables",
+		ShopDef.make(&"tovin_goods", "Anton's Provisions", {"npc": &"tovin", "kind": &"consumables",
 			"specialties": [&"consumable", &"material"], "markup": 1.0, "sell_rate": 1.0, "refresh_minutes": 10.0,
 			"fixed": [
 				{"base": &"health_potion", "infinite": true},
@@ -77,7 +77,7 @@ static func build() -> Array:
 			"specials": [{"id": "seris_sage_hood", "base": &"sage_hood", "rarity": R.MASTER, "level_min": 8, "flag": &"catacombs_ritual_seen"}],
 		}),
 		# ---- Olivar (bh-007): advanced stock at a premium; every merchant restocks when the hero clears a stage or a miniboss
-		ShopDef.make(&"olivar_arms", "Ashby's Arms Exchange", {"npc": &"corvin", "kind": &"premium",
+		ShopDef.make(&"olivar_arms", "Taicho's Arms Exchange", {"npc": &"corvin", "kind": &"premium",
 			"specialties": [&"weapon", &"shield", &"helm", &"armor", &"gloves", &"boots", &"inner_garment"],
 			"markup": 1.9, "sell_rate": 1.05, "refresh_minutes": 99999.0, "restock_on_clears": true, "ilvl_bonus": 3,
 			"rarity_floor": R.ADVANCED, "rarity_weights": [0.0, 0.0, 0.0, 50.0, 22.0, 20.0, 7.0, 1.0, 0.0, 0.0],
@@ -100,7 +100,7 @@ static func build() -> Array:
 			"pools": [{"categories": [&"accessory"], "count": 8}],
 			"rare_chance": 0.5,
 		}),
-		ShopDef.make(&"olivar_alchemy", "Pell's Apothecary", {"npc": &"aldous", "kind": &"alchemy",
+		ShopDef.make(&"olivar_alchemy", "Angkol Les' Apothecary", {"npc": &"aldous", "kind": &"alchemy",
 			"specialties": [&"consumable", &"material"], "markup": 1.25, "sell_rate": 1.15, "refresh_minutes": 99999.0, "restock_on_clears": true,
 			"fixed": [
 				{"base": &"silverleaf", "infinite": true},
@@ -162,6 +162,16 @@ static func build() -> Array:
 			],
 			"rare_chance": 0.15,
 		}),
+		# ---- bh-018: the Socket Specialists sell crystals (dear: from 5,000 gold a Fragment) and buy them back
+		ShopDef.make(&"lapidary_crystals", "Marr's Lapidary", {"npc": &"ysolde", "kind": &"crystals",
+			"specialties": [], "markup": 1.0, "sell_rate": 1.0, "refresh_minutes": 99999.0,
+			"fixed": crystal_stock([0, 12, 25, 40], 20), "pools": [], "rare_chance": 0.0}),
+		ShopDef.make(&"gemcutter_crystals", "Cray's Cutting Room", {"npc": &"anselm", "kind": &"crystals",
+			"specialties": [], "markup": 1.0, "sell_rate": 1.05, "refresh_minutes": 99999.0,
+			"fixed": crystal_stock([0, 10, 22, 36], 18), "pools": [], "rare_chance": 0.0}),
+		ShopDef.make(&"prospector_crystals", "Flint's Crystal Cart", {"npc": &"dagna", "kind": &"crystals",
+			"specialties": [], "markup": 1.0, "sell_rate": 1.1, "refresh_minutes": 99999.0,
+			"fixed": crystal_stock([0, 14, 30, 99], 30), "pools": [], "rare_chance": 0.0}),
 		ShopDef.make(&"stranger_wares", "The Hooded Stranger", {"npc": &"stranger", "kind": &"rare",
 			"specialties": [], "markup": 1.6, "sell_rate": 0.8, "refresh_minutes": 20.0, "rarity_floor": R.ADVANCED,
 			"pools": [{"categories": [&"weapon", &"helm", &"armor", &"gloves", &"boots", &"accessory"], "count": 4, "class_hint": true}],
@@ -171,3 +181,17 @@ static func build() -> Array:
 			],
 		}),
 	]
+
+## bh-018: a Socket Specialist's crystals: every common family at each grade from the given hero level (99 = never), the
+## Aetherift Fragment from `aether_level`. Never sells out; the price is the crystal's own (DataCrystals.PRICE).
+static func crystal_stock(grade_levels: Array, aether_level: int) -> Array:
+	var out := []
+	for g in 4:
+		if int(grade_levels[g]) >= 99:
+			continue
+		for f in DataCrystals.ORDER:
+			if f == &"aetherift":
+				continue
+			out.append({"base": DataCrystals.id_of(f, g), "infinite": true, "level_min": int(grade_levels[g])})
+	out.append({"base": DataCrystals.id_of(&"aetherift", 0), "infinite": true, "level_min": aether_level})
+	return out

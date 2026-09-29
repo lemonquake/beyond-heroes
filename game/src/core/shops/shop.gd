@@ -31,6 +31,9 @@ static func open(p_def: ShopDef, hero: HeroData) -> Shop:
 	else:
 		s.from_dict(saved)
 		s.maybe_refresh(hero)
+	# Restore newly introduced or newly unlocked unlimited goods without rerolling
+	# finite stock, buyback items, or already purchased specials in an existing save.
+	s._ensure_infinite_stock(hero)
 	s.save(hero)
 	s._hero = hero
 	s.changed.connect(s._write_back)
@@ -39,6 +42,21 @@ static func open(p_def: ShopDef, hero: HeroData) -> Shop:
 func _write_back() -> void:
 	if _hero:
 		save(_hero)
+
+func _ensure_infinite_stock(hero: HeroData) -> void:
+	for f in def.fixed:
+		if not f.get("infinite", false) or hero.progress.level < int(f.get("level_min", 1)):
+			continue
+		var base_id := StringName(f.base)
+		var present := false
+		for entry in stock:
+			if entry.infinite and entry.item.base.id == base_id:
+				present = true
+				break
+		if not present:
+			var it := DB.make_item(base_id, int(f.get("rarity", BH.Rarity.COMMON)), hero.progress.level, hash(base_id) | 1)
+			if it:
+				stock.append({"item": it, "infinite": true, "special": ""})
 
 func refresh_due(hero: HeroData) -> bool:
 	if def.restock_on_clears:

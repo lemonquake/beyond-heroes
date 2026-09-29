@@ -146,8 +146,9 @@ func _ready() -> void:
 	_plate.outline_size = 7
 	_plate.outline_modulate = Color(0, 0, 0, 0.85)
 	_plate.modulate = tdef.get("color", DataTempos.SPIRIT_TINT)
-	_plate.position.y = 2.35
+	_plate.position.y = 2.65
 	_plate.no_depth_test = true
+	_plate.render_priority = 8
 	add_child(_plate)
 	_bar = TempoBar.new()
 	_bar.tempo = self

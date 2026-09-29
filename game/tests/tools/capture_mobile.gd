@@ -87,7 +87,7 @@ func _run() -> void:
 	await _wait(0.8)
 	await _tap(tc.button(&"chat").center() * k)
 	await _wait(0.4)
-	ui.chat.add_line("[Tovin] Welcome back, hero.", UITheme.PARCHMENT)
+	ui.chat.add_line("[Anton] Welcome back, hero.", UITheme.PARCHMENT)
 	await _shot("07_chat")
 	main._on_back()
 	await _wait(0.3)

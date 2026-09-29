@@ -304,6 +304,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		r.buildup[sid] = r.buildup.get(sid, 0.0) + b
 	for sid in req.direct_status:
 		r.buildup[sid] = r.buildup.get(sid, 0.0) + float(req.direct_status[sid]) * spow * (1.0 - sres * 0.5)
+	# bh-018: Vipera crystals — every landed weapon hit adds poison buildup
+	if atk != null and req.kind == DamageRequest.Kind.ATTACK and r.total > 0:
+		var pb := atk.get_stat(&"poison_on_hit")
+		if pb > 0.0:
+			r.buildup[&"poisoned"] = r.buildup.get(&"poisoned", 0.0) + pb * spow * (1.0 - sres * 0.5)
 	if atk != null and r.total > 0:
 		r.leech = r.total * atk.get_stat(&"life_leech") + comp.get(Elements.DARK, 0.0) * DARK_DRAIN
 		r.mana_leech = r.total * atk.get_stat(&"mana_leech")

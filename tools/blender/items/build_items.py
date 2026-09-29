@@ -28,6 +28,7 @@ from item_kit import M  # noqa: E402
 import item_weapons as IW  # noqa: E402
 import item_gear as IG  # noqa: E402
 import item_goods as IGo  # noqa: E402
+import item_crystals as IC  # noqa: E402  (bh-018 socket crystals; not in items.json)
 
 sys.path.insert(0, K.CHARS)
 from build import export_glb, reset  # noqa: E402
@@ -54,6 +55,8 @@ def spec_for(item):
 
 
 def build_parts(item):
+    if IC.is_crystal(item["id"]):
+        return IC.build_parts(item["id"]), False
     fn, s, fallback = spec_for(item)
     if fn is None:
         raise KeyError(f"no builder for {item['id']}")
@@ -65,6 +68,8 @@ def build_parts(item):
 
 
 def build_object(iid, parts):
+    if IC.is_crystal(iid):
+        return IC.build_object(iid, parts)
     for p in parts:
         try:
             M.recalc_normals(p)
@@ -79,6 +84,8 @@ def load_items(ids=None):
     with open(os.path.join(HERE, "items.json"), encoding="utf-8") as f:
         items = json.load(f)
     items.append({"id": "gold_pile", "category": "gold", "weapon_type": "", "element": 0})
+    if ids and all(i == "crystals" or IC.is_crystal(i) for i in ids):   # crystals only ("crystals" = all 32)
+        return IC.items(None if "crystals" in ids else ids)
     if ids:
         items = [it for it in items if it["id"] in ids]
     return items
@@ -98,7 +105,9 @@ def export_models(items, log=print):
         tris = M.tri_count(ob)
         report.append({"id": it["id"], "tris": tris, "size": [round(x, 3) for x in size], "fallback": fb})
         log(f"[item] {it['id']:28s} {tris:6d} tris  size {size[0]:.3f} x {size[1]:.3f} x {size[2]:.3f}{'  (fallback builder)' if fb else ''}")
-    with open(os.path.join(ROOT, "work", "lemondev", "bh-006", "evidence", "models_report.json"), "w", encoding="utf-8") as f:
+    rp = IC.REPORT if report and all(IC.is_crystal(r["id"]) for r in report) else os.path.join(ROOT, "work", "lemondev", "bh-006", "evidence", "models_report.json")
+    os.makedirs(os.path.dirname(rp), exist_ok=True)
+    with open(rp, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=1)
     return report
 
@@ -224,7 +233,10 @@ def main():
     if "models" in targets or "all" in targets:
         export_models(items)
     if "icons" in targets or "all" in targets:
-        render_icons(items)
+        cr = [it["id"] for it in items if IC.is_crystal(it["id"])]
+        if cr:
+            IC.render_icons(cr)
+        render_icons([it for it in items if not IC.is_crystal(it["id"])])
     print(f"[build_items] {len(items)} items done in {time.time() - t0:.1f}s")
 
 

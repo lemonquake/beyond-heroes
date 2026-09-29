@@ -86,6 +86,8 @@ const DEFS := {
 	&"elite_damage": ["Damage to Champions", Fmt.PCT, "Increased damage against elites, champions and bosses."],
 	&"ember_find": ["Soul Ember Find", Fmt.PCT, "More Soul Embers from monsters and chests."],
 	&"tempo_damage": ["Tempo Damage", Fmt.PCT, "Your Tempos deal more damage."],
+	# bh-018
+	&"poison_on_hit": ["Poison on Hit", Fmt.INT, "Poison buildup every weapon hit adds (100 = Poisoned). Vipera crystals."],
 }
 
 static func name_of(stat: StringName) -> String:
@@ -147,7 +149,7 @@ static func format_modifier(stat: StringName, op: int, v: float) -> String:
 				Fmt.PCT: return "%s%s%% %s" % [sgn, _num(av * 100.0), n]
 				Fmt.MULT: return "%s%s%% %s" % [sgn, _num(av * 100.0), n]
 				Fmt.SPEED: return "%s%.2f %s" % [sgn, av, n]
-				Fmt.SECONDS: return "%s%.1fs %s" % [sgn, av, n]
+				Fmt.SECONDS: return ("%s%.2fs %s" if av < 0.1 else "%s%.1fs %s") % [sgn, av, n]
 		StatModifier.Op.INC:
 			return "%s%% %s %s" % [_num(av * 100.0), "increased" if v >= 0.0 else "reduced", n]
 		StatModifier.Op.MORE:

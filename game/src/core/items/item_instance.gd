@@ -32,6 +32,9 @@ var enchant: StringName = &""
 var enchant_rank := 0
 var foretech: StringName = &""
 var foretech_rank := 0
+# bh-018: sockets opened by a Socket Specialist (Sockets) and the crystal set in each ("" = empty): gems.size() == sockets
+var sockets := 0
+var gems: Array = []
 
 func _init() -> void:
 	_uid_counter += 1
@@ -166,6 +169,9 @@ func modifiers() -> Array:
 	if license != &"":
 		for m in license_modifiers():
 			out.append(m)
+	for g in gems:
+		if String(g) != "":
+			out.append_array(DataCrystals.mods(StringName(g), base.category))
 	for pid in powers:
 		var p := DB.power(StringName(pid))
 		if p == null:
@@ -189,6 +195,8 @@ func license_modifiers() -> Array:
 
 ## Merchant buy price of one unit before merchant markup (ShopPricing applies markup/reputation).
 func base_value() -> float:
+	if base.category == &"crystal":
+		return float(base.value)
 	var affix_bonus := 1.0 + 0.12 * float(affixes.size()) + 0.35 * float(powers.size()) + 0.18 * float(enchant_rank) + 0.1 * float(foretech_rank)
 	return float(base.value) * SELL_MULT[clampi(rarity, 0, SELL_MULT.size() - 1)] * (1.0 + float(ilvl) * 0.06) * affix_bonus * (1.0 + quality)
 
@@ -240,6 +248,9 @@ func to_dict() -> Dictionary:
 		d["ench"] = [String(enchant), enchant_rank]
 	if foretech != &"" and foretech_rank > 0:
 		d["tech"] = [String(foretech), foretech_rank]
+	if sockets > 0:
+		d["sk"] = sockets
+		d["gems"] = gems.duplicate()
 	return d
 
 static func from_dict(d: Dictionary) -> ItemInstance:
@@ -280,6 +291,13 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	if te is Array and (te as Array).size() == 2 and DataUpgrades.TECHS.has(StringName(te[0])) and b.is_weapon():
 		it.foretech = StringName(te[0])
 		it.foretech_rank = clampi(int(te[1]), 1, DataUpgrades.TECH_MAX)
+	# bh-018 (optional keys): sockets and their crystals; unknown crystals become empty sockets
+	if b.category in BH.CATEGORY_SLOTS:
+		it.sockets = clampi(int(d.get("sk", 0)), 0, 7)
+		var gs = d.get("gems", [])
+		for i in it.sockets:
+			var gid := String(gs[i]) if gs is Array and i < (gs as Array).size() else ""
+			it.gems.append(gid if gid != "" and DataCrystals.is_crystal(StringName(gid)) and DB.item_base(StringName(gid)) != null else "")
 	return it
 
 func clone() -> ItemInstance:

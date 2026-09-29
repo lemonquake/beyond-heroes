@@ -585,7 +585,7 @@ func _cove() -> void:
 		breakable("barrel", p, rng.randf() * 360.0, 20.0, true)
 	campfire(Vector3(-170, 0, 97.5), 3.6)
 	# the shrine: a waypoint on the rocks above the tideline
-	floor_disc(Vector3(SHRINE.x, 0, SHRINE.y), 3.4, bed(SHRINE.x, SHRINE.y) + 0.05)
+	apron(SHRINE, bed(SHRINE.x, SHRINE.y) + 0.05, 3.4)
 	var sy := bed(SHRINE.x, SHRINE.y) + 0.05
 	teleporter(&"cove_shrine", Vector3(SHRINE.x, sy, SHRINE.y), &"sanctuary", &"waypoint", "Malasugue Town")
 	for a: float in [0.3, 1.6, 3.4, 4.8]:

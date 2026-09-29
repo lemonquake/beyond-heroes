@@ -1,6 +1,6 @@
 extends Node
 ## bh-007 evidence run (real renderer, the real boot scene with HUD, NPCs and windows): Olivar (plaza, arms exchange,
-## premium shop before and after a clear), crafting at Pell's alchemy table, Wyman Outpost (bonfire, heroes with level
+## premium shop before and after a clear), crafting at Angkol Les' alchemy table, Wyman Outpost (bonfire, heroes with level
 ## and tier plates, the Hero Register, the checkpoint), crafting and salvage at the field forge, a miniboss with its HUD
 ## bar and the stage tracker in Westreach, a stage clear, the death screen offering the checkpoint, and the island map.
 ##   godot --path game --resolution 1920x1080 res://tests/tools/capture_bh007.tscn -- --class=knight --slot=96 --map=olivar --level=8 --out=<dir>
@@ -164,13 +164,13 @@ func _run() -> void:
 	shop_w.open_shop(&"olivar_jewels")
 	await _shot("05_olivar_jeweller", 20)
 	await _close_windows()
-	# crafting at Pell's alchemy table
+	# crafting at Angkol Les' alchemy table
 	for pair in [[&"silverleaf", 9], [&"mirebloom", 6], [&"wolf_fang", 5], [&"brightcap", 3], [&"orc_tusk", 2], [&"grave_dust", 4]]:
 		_give(pair[0], pair[1])
 	await _stand(Vector3(-20.5, 0, -9.0), 200.0)
 	p.camera._dist_target = 10.0
 	await _shot("06_olivar_alchemy_table", 30)
-	Game.ui_root.open_crafting(&"alchemy", "Pell's Alchemy Table")
+	Game.ui_root.open_crafting(&"alchemy", "Angkol Les' Alchemy Table")
 	await _shot("07_crafting_alchemy", 20)
 	var cw := Game.ui_root.window(&"crafting") as CraftingWindow
 	cw._qty.value = 2

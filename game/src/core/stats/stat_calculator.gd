@@ -29,8 +29,8 @@ const CRIT_CAP := 0.80
 const CRIT_DAMAGE_BASE := 1.5
 const MOVE_PER_AGI := 0.0025
 const MOVE_PER_STR := 0.002         # Strength carries the load: +0.2% movement speed per point
-const CARRY_BASE := 55.0
-const CARRY_PER_STR := 1.6
+const CARRY_BASE := 110.0          # bh-018: doubled (was 55)
+const CARRY_PER_STR := 3.2       # bh-018: doubled (was 1.6)
 const LOAD_FREE := 0.35             # no slowdown up to 35% load
 const LOAD_SLOW_MAX := 0.30         # ... then up to 30% less movement speed at 100% load
 const OVERBURDEN_SLOW := 0.45       # 100%+ load: 45% less movement speed and no dodging
@@ -313,7 +313,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",
 			&"mana_leech", &"mana_on_hit", &"valor_gain", &"xp_gain", &"magic_find", &"gold_find", &"added_physical", &"status_power",
 			&"focus_gain", &"trap_damage", &"aura_effect", &"aura_radius", &"dot_damage", &"summon_damage",
-			&"potion_power", &"elite_damage", &"ember_find", &"tempo_damage", &"hp_on_kill", &"mana_on_kill", &"thorns"]:
+			&"potion_power", &"elite_damage", &"ember_find", &"tempo_damage", &"hp_on_kill", &"mana_on_kill", &"thorns", &"poison_on_hit"]:
 		_std(d, agg, k, [], -0.9 if k != &"pen_armor" else 0.0, INF)
 	_std(d, agg, &"stagger_power", [["Strength %d x %.1f%%" % [STR, STAGGER_PER_STR * 100.0], STR * STAGGER_PER_STR]], -0.9, INF)
 	_std(d, agg, &"projectile_damage", [["Dexterity %d x %.1f%%" % [DEX, PROJ_DMG_PER_DEX * 100.0], DEX * PROJ_DMG_PER_DEX]], -0.9, INF)

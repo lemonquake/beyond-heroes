@@ -8,7 +8,7 @@ const CPS := 55.0             # characters per second
 ## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
 	&"tempo_revive", &"tempo_renowned", &"field_guide", &"craft_forge", &"craft_alchemy", &"craft_workbench", &"hero_roster", &"camp_rest",
-	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern"]
+	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade"]
 
 var session: DialogueSession
 var npc: Npc
@@ -217,9 +217,14 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				&"hero_roster": _open_roster.call_deferred()
 				&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern": _open_guild_jobs.call_deferred(StringName(String(arg).trim_prefix("guild_jobs").trim_prefix("_")))
 				&"camp_rest": _camp_rest.call_deferred()
+				&"socketing":
+					# The choice ends the dialogue synchronously and clears npc/session.
+					# Capture the definition before opening the next window deferred.
+					_open_socketing.call_deferred(session.npc.display_name, session.npc.shop)
+				&"lape_trade": _open_lape.call_deferred()
 
 func _open_crafting(station: StringName) -> void:
-	# the name of that station on this map ("Pell's Alchemy Table", "Field Forge", "Brannoc's Anvil"), else the generic one
+	# the name of that station on this map ("Angkol Les' Alchemy Table", "Field Forge", "Brannoc's Anvil"), else the generic one
 	var label := String(DataCrafting.STATIONS.get(station, {}).get("name", ""))
 	for s in get_tree().get_nodes_in_group(&"crafting_station"):
 		if s is CraftingStation and s.station == station:
@@ -227,6 +232,17 @@ func _open_crafting(station: StringName) -> void:
 			break
 	close()
 	Game.ui_root.open_crafting(station, label)
+
+## bh-018: a Socket Specialist's work on your gear (SocketWindow), under their name.
+func _open_socketing(who: String, shop: StringName) -> void:
+	close()
+	Game.ui_root.open_socketing(who, shop)
+
+## bh-019: Lape the Ancient's trading table (LapeWindow).
+func _open_lape() -> void:
+	var who := npc.def.display_name if npc and npc.def else "Lape the Ancient"
+	close()
+	Game.ui_root.open_lape(who)
 
 func _open_guild_jobs(gid: StringName) -> void:
 	close()

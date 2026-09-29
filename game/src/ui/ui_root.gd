@@ -56,6 +56,9 @@ func _ready() -> void:
 	_add_window(&"guild_jobs", GuildJobsWindow.new())
 	_add_window(&"guild_custom", GuildCustomWindow.new())
 	_add_window(&"trade", TradeWindow.new())
+	_add_window(&"socketing", SocketWindow.new())
+	_add_window(&"lape", LapeWindow.new())
+	_add_window(&"vault", VaultWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -99,6 +102,18 @@ func open_guild_jobs(gid: StringName = &"") -> void:
 	var w := window(&"guild_jobs") as GuildJobsWindow
 	if w:
 		w.open_on(gid)
+
+## bh-018: a Socket Specialist's bench (sockets, crystals, purge, crystallization); `shop` is their crystal shop.
+func open_socketing(specialist: String, shop: StringName = &"") -> void:
+	var w := window(&"socketing") as SocketWindow
+	if w:
+		w.open_for(specialist, shop)
+
+## bh-019: Lape the Ancient's trading table.
+func open_lape(npc_name := "Lape the Ancient") -> void:
+	var w := window(&"lape") as LapeWindow
+	if w:
+		w.open_for(npc_name)
 
 func open(id: StringName) -> void:
 	var w := window(id)

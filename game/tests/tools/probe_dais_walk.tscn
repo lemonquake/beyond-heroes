@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/tools/probe_dais_walk.gd" id="1"]
+
+[node name="ProbeDaisWalk" type="Node"]
+script = ExtResource("1")

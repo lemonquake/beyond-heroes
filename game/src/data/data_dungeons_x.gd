@@ -379,7 +379,7 @@ const LIST := {
 	&"vault": {
 		"name": "The Gilded Vault", "theme": &"gilded", "tier": 4, "material": &"aether_shard",
 		"surface": {"map": &"olivar", "pos": Vector2(34.0, -14.0), "yaw": -45.0, "place": "olv_vault"},
-		"blurb": "Ashby swears the old counting-house cellar is bricked up. The gold that keeps turning up in his rain barrel says otherwise.",
+		"blurb": "Taicho swears the old counting-house cellar is bricked up. The gold that keeps turning up in his rain barrel says otherwise.",
 		"levels": [[36, 37], [37, 38], [39, 39], [40, 40]],
 		"pools": {"a": [&"treasure_gremlin", &"clockwork_sentry", &"mirror_knight", &"aegis_acolyte"],
 			"b": [&"treasure_mimic", &"rune_golem", &"mirror_knight", &"aegis_acolyte", &"shellback_grinder"],

@@ -40,6 +40,8 @@ func _ready() -> void:
 	_plate = Label3D.new()
 	_plate.text = "%s\n[%s]" % [label, "Crafting"]
 	_plate.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_plate.no_depth_test = true
+	_plate.render_priority = 8
 	_plate.fixed_size = true
 	_plate.pixel_size = 0.0008
 	_plate.font = UITheme.body_bold()

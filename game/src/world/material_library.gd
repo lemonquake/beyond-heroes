@@ -56,6 +56,24 @@ const ENV := {
 	"BH_Fungus": ["", Color(0.84, 0.8, 0.66), 0.85, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_Snow": ["", Color(0.92, 0.95, 1.0), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_Kelp": ["", Color(0.2, 0.3, 0.14), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	# bh-018: trade quarters (tools/blender/environment/market_common.py)
+	"BH_ClothGreen": ["cloth", Color(0.24, 0.4, 0.2), 0.93, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_ClothOchre": ["cloth", Color(0.72, 0.5, 0.16), 0.93, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_ClothTeal": ["cloth", Color(0.12, 0.4, 0.42), 0.9, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_ClothCream": ["cloth", Color(0.9, 0.84, 0.7), 0.93, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_ClothBlack": ["cloth", Color(0.13, 0.12, 0.14), 0.95, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Velvet": ["cloth", Color(0.42, 0.06, 0.12), 0.7, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Leather": ["", Color(0.32, 0.2, 0.12), 0.75, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_Copper": ["", Color(0.8, 0.45, 0.28), 0.4, 0.95, 1.0, Color.BLACK, 0.0],
+	"BH_Verdigris": ["metal_iron", Color(0.36, 0.62, 0.52), 0.8, 0.3, 1.0, Color.BLACK, 0.0],
+	"BH_Slate": ["stone_blocks", Color(0.32, 0.34, 0.4), 0.8, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_GemRed": ["", Color(0.9, 0.2, 0.15), 0.15, 0.0, 1.0, Color(1.0, 0.18, 0.12), 2.6],
+	"BH_GemAmber": ["", Color(1.0, 0.55, 0.15), 0.15, 0.0, 1.0, Color(1.0, 0.55, 0.12), 2.6],
+	"BH_GemAqua": ["", Color(0.3, 0.7, 1.0), 0.12, 0.0, 1.0, Color(0.25, 0.7, 1.0), 2.6],
+	"BH_GemGreen": ["", Color(0.4, 0.95, 0.35), 0.15, 0.0, 1.0, Color(0.35, 1.0, 0.3), 2.6],
+	"BH_GemGold": ["", Color(1.0, 0.86, 0.5), 0.15, 0.0, 1.0, Color(1.0, 0.85, 0.45), 2.6],
+	"BH_GemViolet": ["", Color(0.72, 0.4, 1.0), 0.15, 0.0, 1.0, Color(0.7, 0.35, 1.0), 2.6],
+	"BH_Coals": ["", Color(0.6, 0.15, 0.05), 0.7, 0.0, 1.0, Color(1.0, 0.3, 0.05), 4.0],
 }
 
 ## bh-012: a dungeon theme swaps the stone of the kit for its own texture set and tint while its map is built

@@ -17,6 +17,8 @@ import assets_arch, assets_nature, assets_props, assets_crypt, assets_town  # no
 import assets_town2, assets_interior  # noqa  (bh-003)
 import assets_dungeon  # noqa  (bh-012)
 import assets_guildhouse  # noqa  (bh-016)
+import market_common, assets_market_a, assets_market_b, assets_market_c  # noqa  (bh-018)
+import assets_bh019  # noqa  (bh-019)
 
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 OUT = os.path.join(ROOT, "game", "assets", "environment")

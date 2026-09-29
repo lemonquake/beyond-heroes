@@ -58,7 +58,7 @@ static func _aldric() -> NpcDef:
 						"Level and deeds. Your guild hall in Malasugue registers each promotion for a fee. You are **{tier}** now; next is **{next_tier}**, which asks for level {promo_level} and this deed: {promo_deed_text}.",
 						"Gideon over there is Class B like me. Nell arrived last week, Class E, and has already set two tents on fire."],
 					"next": "hub"},
-				"services": {"text": "**Hobb** at the stall keeps supplies. **Greta** runs the field forge: she sells kit and lets you use the anvil. The **workbench** and **camp kettle** are free to anyone. **Ottilie** will see to your wounds by the fire.",
+				"services": {"text": "**Greggy** at the stall keeps supplies. **Greta** runs the field forge: she sells kit and lets you use the anvil. The **workbench** and **camp kettle** are free to anyone. **Ottilie** will see to your wounds by the fire.",
 					"next": "hub"},
 			},
 		})
@@ -90,7 +90,7 @@ static func _maren() -> NpcDef:
 			["Warm your hands, the fire does not bite. Maren Holt, Lantern Covenant. I am mapping the marsh one soggy step at a time."],
 			"Ink's drying. What do you need?",
 			[["What have you mapped?", "The dry ground ends two hundred paces east. After that it is reeds, black water and old stone posts: a road, once. Someone built a causeway across the marsh long before Malasugue had walls."],
-			["Any herbs out there?", "**Mirebloom** grows on the camp's east side, where the ground stays wet. Pick it: Hobb pays for it, and the kettle turns two into a mana draught."]]))
+			["Any herbs out there?", "**Mirebloom** grows on the camp's east side, where the ground stays wet. Pick it: Greggy pays for it, and the kettle turns two into a mana draught."]]))
 
 static func _sabine() -> NpcDef:
 	return _hero(&"sabine", "Sabine Kestrel", &"mage", 19, 3, &"lantern", "Warden of the wards", Vector3(22.4, 0, 3.4), 90.0,
@@ -122,7 +122,7 @@ static func _tamsin() -> NpcDef:
 			["Do not tell Aldric I call it the Register of Show-offs. Tamsin Brisk. No guild. Class D anyway: the Swordfin registered me before I told them no."],
 			"Coin's coin. What do you want?",
 			[["Why no guild?", "Guilds take a cut. I take contracts. But the discounts are real: Swordfin members get Brannoc's forge cheaper, Lantern people sleep cheaper at the Salted Marlin. Pick one, if you like rules."],
-			["Best way to make money?", "Salvage. Every sword you do not want is iron at the field forge; iron is ingots; ingots are better swords. And sell monster parts to Hobb: he pays more than anyone."]]))
+			["Best way to make money?", "Salvage. Every sword you do not want is iron at the field forge; iron is ingots; ingots are better swords. And sell monster parts to Greggy: he pays more than anyone."]]))
 
 static func _nell() -> NpcDef:
 	return _hero(&"nell", "Nell Carrow", &"mage", 5, 1, &"", "Rookie, first week out", Vector3(-6.4, 0, 21.0), 0.0,
@@ -134,14 +134,14 @@ static func _nell() -> NpcDef:
 
 # ------------------------------------------------------------------------------------------------ camp staff
 static func _hobb() -> NpcDef:
-	return NpcDef.make(&"hobb", "Hobb Tanner", {"title": "Quartermaster", "portrait": _p("quartermaster", "swordfin_quartermaster"), "map": MAP,
+	return NpcDef.make(&"hobb", "Greggy", {"title": "Quartermaster", "portrait": _p("quartermaster", "swordfin_quartermaster"), "map": MAP,
 		"position": DataTownRows.npc_spot(&"hobb").position, "yaw": DataTownRows.npc_spot(&"hobb").yaw, "model": "res://assets/characters/merchant.glb", "tint": Color(0.4, 0.34, 0.22),
 		"shop": &"wyman_supplies", "idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
 			"nodes": {
 				"first": {"text": [
-						"Hobb Tanner, quartermaster. Draughts, scrolls, bombs, ingots, leather. Fair prices: this is a camp, not Olivar.",
+						"Greggy, quartermaster. Draughts, scrolls, bombs, ingots, leather. Fair prices: this is a camp, not Olivar.",
 						"And I buy **monster parts** and **herbs** better than anyone on the island. Fangs, tusks, resin, dust. The camp runs on them."],
 					"choices": [{"text": "Show me the supplies.", "next": "end", "actions": [{"open_shop": "wyman_supplies"}]}, _end("Later.")]},
 				"hub": {"text": "Supplies are in. What do you need?",

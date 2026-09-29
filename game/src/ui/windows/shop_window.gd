@@ -2,7 +2,7 @@ class_name ShopWindow
 extends UIWindow
 ## Merchant (opened from dialogue). Left: the merchant, their stock (Buy) or what you sold (Buyback), category filter,
 ## sorting, prices under every item (red when unaffordable). Right: your inventory; right-click or Ctrl+click sells.
-## Buying: right-click buys one; Shift+click asks for a quantity (stacks); expensive purchases ask for confirmation.
+## Buying: click, tap or right-click buys one; Shift+click asks for a quantity; expensive purchases ask for confirmation.
 ## Tooltips compare every item with what you wear.
 
 const CELL := 64.0
@@ -32,6 +32,17 @@ func open_shop(shop_id: StringName) -> void:
 	if def == null or Game.hero == null:
 		return
 	shop = Shop.open(def, Game.hero)
+	# A category or Buyback tab from the previous merchant must not hide this stock.
+	mode = "buy"
+	filter = "all"
+	if _mode_tabs:
+		_mode_tabs.set_block_signals(true)
+		_mode_tabs.current_tab = 0
+		_mode_tabs.set_block_signals(false)
+	if _filter_tabs:
+		_filter_tabs.set_block_signals(true)
+		_filter_tabs.current_tab = 0
+		_filter_tabs.set_block_signals(false)
 	set_title(def.display_name)
 	Events.shop_opened.emit(shop_id)
 	Game.ui_root.open(&"shop")
@@ -103,7 +114,7 @@ func _build() -> void:
 	var hint_m := MarginContainer.new()
 	hint_m.add_theme_constant_override("margin_left", 18)
 	left.add_child(hint_m)
-	hint_m.add_child(UITheme.label("Right-click: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
+	hint_m.add_child(UITheme.label("Click or tap: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
 	# player side
 	var right := vbox(8)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -154,7 +165,7 @@ func refresh() -> void:
 		rep = " · Unfriendly prices"
 	_kind.text = "%s%s" % [{&"consumables": "Provisions and draughts", &"weapons": "Weapons and armor", &"magic": "Arcane goods",
 		&"rare": "Rare goods", &"premium": "Advanced arms and armor", &"jewels": "Rings, amulets and charms", &"alchemy": "Herbs, draughts and recipes",
-		&"supplies": "Camp supplies", &"outfitter": "Field gear"}.get(shop.def.kind, "Goods"), rep]
+		&"supplies": "Camp supplies", &"outfitter": "Field gear", &"crystals": "Socket crystals"}.get(shop.def.kind, "Goods"), rep]
 	if not shop.changed.is_connected(_on_shop_changed):
 		shop.changed.connect(_on_shop_changed)
 	if not hero.inventory_changed.is_connected(_on_shop_changed):
@@ -169,6 +180,9 @@ func _on_shop_changed() -> void:
 
 func _process(_d: float) -> void:
 	if visible and shop and hero:
+		if shop.def.kind == &"crystals":
+			_refresh_label.text = "Crystals stay in stock. Higher grades unlock as you level."
+			return
 		if shop.def.restock_on_clears:
 			_refresh_label.text = "New stock after your next stage clear or miniboss · Clears so far: %d" % hero.clear_count
 			return
@@ -216,10 +230,10 @@ func _refresh_stock() -> void:
 		s.clicked.connect(_on_stock_clicked)
 		s.hovered.connect(func(sl: ItemSlot, inside: bool) -> void:
 			if inside:
-				var hint := "Right-click to buy" + (" · Shift+click to choose quantity" if it.base.is_stackable() else "")
+				var hint := "Click or tap to buy" + (" · Shift+click to choose quantity" if it.base.is_stackable() else "")
 				if e.special:
 					hint = "One of a kind. " + hint
-				TooltipLayer.show_for(sl, func() -> Control: return Tips.item(it, {"hero": hero, "price": e.price, "hint": hint if mode == "buy" else "Right-click to buy back"}))
+				TooltipLayer.show_for(sl, func() -> Control: return Tips.item(it, {"hero": hero, "price": e.price, "hint": hint if mode == "buy" else "Click or tap to buy back"}))
 			else:
 				TooltipLayer.hide_for(sl))
 		_stock_grid.add_child(s)
@@ -242,7 +256,7 @@ func _on_stock_clicked(s: ItemSlot, button: int, shift: bool, _ctrl: bool) -> vo
 	if shift and s.item.base.is_stackable():
 		_quantity_dialog(s.index)
 		return
-	if button == MOUSE_BUTTON_RIGHT:
+	if button == MOUSE_BUTTON_RIGHT or button == MOUSE_BUTTON_LEFT:
 		_buy(s.index, 1)
 
 func _buy(index: int, count: int) -> void:

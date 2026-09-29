@@ -299,6 +299,10 @@ func _update_touch_aim() -> void:
 			ahead = forward()
 		aim_point = global_position + ahead.normalized() * 4.0
 
+## What auto-aim and click targeting may pick: monsters, and the towns' practice dummies (bh-019).
+func _aim_targets() -> Array:
+	return get_tree().get_nodes_in_group(&"enemy") + get_tree().get_nodes_in_group(&"practice_target")
+
 func pick_auto_target() -> Actor:
 	var facing := _move_input()
 	if facing.length() < 0.1:
@@ -306,7 +310,7 @@ func pick_auto_target() -> Actor:
 	facing = facing.normalized()
 	var best: Actor = null
 	var best_score := INF
-	for e in get_tree().get_nodes_in_group(&"enemy"):
+	for e in _aim_targets():
 		var a := e as Actor
 		if a == null or not a.alive or not a.visible:
 			continue
@@ -326,7 +330,7 @@ func pick_auto_target() -> Actor:
 func _enemy_under_cursor(from: Vector3, dir: Vector3) -> Actor:
 	var best: Actor = null
 	var best_d := INF
-	for e in get_tree().get_nodes_in_group(&"enemy"):
+	for e in _aim_targets():
 		var a := e as Actor
 		if a == null or not a.alive:
 			continue

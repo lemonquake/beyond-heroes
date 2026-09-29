@@ -52,8 +52,8 @@ static func _maelis() -> NpcDef:
 				"leave": {"text": "The waypoint is the only road out that the dead do not watch, and it answers only to those it chooses. It chose you. Draw your own conclusions.",
 					"actions": [{"relationship": 2}], "next": "hub"},
 				"people": {"text": [
-						"Everything a hero needs stands on **Merchant Row**, the signed street off the plaza's south-east corner. **Tovin** has General Goods (draughts, salts, scrolls); **Brannoc** sells Arms & Armor and keeps the Forge at the far end; nobody in the valley works steel better.",
-						"**Seris** reads the Aether at her Arcana stand on the same street. She can mend wounds and, for a price, unmake the paths you have chosen. The Alchemy Table, the Workbench and the Tempo Shrine are there too.",
+						"Everything a hero needs is in the **Merchant Quarter**, the square off the plaza's south-east corner. **Anton** has provisions (draughts, salts, scrolls); **Brannoc** sells arms and armour from his smithy and works the forge; nobody in the valley works steel better. **Ysolde Marr**, the lapidary, opens sockets in your gear for crystals.",
+						"**Seris** reads the Aether in her violet pavilion on the same square. She can mend wounds and, for a price, unmake the paths you have chosen. The Alchemy Table, the Workbench and the Shrine of the Fallen are there too. Past the smithy, a hooded ancient called **Lape** trades in relics, and beside him stands the **Hero's Vault**, with a straw dummy to practise on.",
 						"And **Captain Hald** watches the south gate. Ask him about the road."],
 					"next": "hub"},
 				"advice": {"branch": [
@@ -79,15 +79,15 @@ static func _maelis() -> NpcDef:
 					"actions": [{"relationship": 20}, {"skill_point": 1}, {"talent_point": 1}, {"event": "warden_thanks"}],
 					"choices": [{"text": "It was the right thing to do.", "next": "hub", "actions": [{"relationship": 5}]},
 						{"text": "I expect to be paid.", "next": "paid"}]},
-				"paid": {"text": "Honest, at least. Tovin has set aside a purse for you. Do not spend it all on draughts.",
+				"paid": {"text": "Honest, at least. Anton has set aside a purse for you. Do not spend it all on draughts.",
 					"actions": [{"give_gold": 250}, {"relationship": -5}], "next": "hub"},
 				"after": {"text": "The valley is quiet, but the Aether is not. Seris says the waypoint hums at night, as if something far away is calling back. When you are ready, we will find out what.", "next": "hub"},
 			},
 		}})
 
-# ------------------------------------------------------------------------------------------------ Tovin
+# ------------------------------------------------------------------------------------------------ Anton
 static func _tovin() -> NpcDef:
-	return NpcDef.make(&"tovin", "Tovin", {"title": "Provisioner", "portrait": PORTRAIT % "merchant",
+	return NpcDef.make(&"tovin", "Anton", {"title": "Provisioner", "portrait": PORTRAIT % "merchant",
 		"position": DataTownRows.npc_spot(&"tovin").position, "yaw": DataTownRows.npc_spot(&"tovin").yaw, "model": TOWN % "merchant", "tint": Color(0.62, 0.38, 0.2), "shop": &"tovin_goods",
 		"idle_anims": TOWN_IDLES,
 		"graph": {
@@ -97,7 +97,7 @@ static func _tovin() -> NpcDef:
 				[[], "hub"],
 			],
 			"nodes": {
-				"first": {"text": "A new face! Tovin, provisioner. Draughts, salts, scrolls, bits of iron. If it keeps you breathing, I sell it. At a fair price, mostly.",
+				"first": {"text": "A new face! Anton, provisioner. Draughts, salts, scrolls, bits of iron. If it keeps you breathing, I sell it. At a fair price, mostly.",
 					"choices": [{"text": "Show me your wares.", "next": "end", "actions": [{"open_shop": "tovin_goods"}]},
 						{"text": "Mostly?", "next": "mostly"}, _end("Another time.")]},
 				"mostly": {"text": "Prices move with trust, friend. Be good to Malasugue and Malasugue is good to you. That is not a rule, it is just how people work.",
@@ -114,7 +114,7 @@ static func _tovin() -> NpcDef:
 					[[{"flag": "boss_warden_defeated"}], "news_3"],
 				]},
 				"news_1": {"text": "Folk say lights move in the **Catacombs** at night. I say folk should buy more **Health Draughts**.", "next": "hub"},
-				"news_2": {"text": "A **hooded stranger** walked in past the east side of Merchant Row two nights ago and has not left. Pays in old coin. Sells things I cannot name.", "next": "hub"},
+				"news_2": {"text": "A **hooded stranger** parked a black wagon in the Merchant Quarter two nights ago and has not left. Pays in old coin. Sells things I cannot name.", "next": "hub"},
 				"news_3": {"text": "Business is terrible. Nobody needs **Purifying Salts** when the dead stay dead. I have never been happier.", "next": "hub"},
 				"celebrate": {"text": "The hero of Malasugue! Here, on the house. Do not tell Brannoc, he will want the same.",
 					"actions": [{"give_item": "rejuvenation_elixir", "count": 2}, {"relationship": 10}], "next": "hub"},

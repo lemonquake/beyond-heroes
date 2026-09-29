@@ -68,6 +68,7 @@ func icon_path() -> String:
 			&"boots": fb = "res://assets/ui/icons/items/%s.svg" % ("boots_cloth" if weight_class == &"cloth" else "boots_plate")
 			&"accessory": fb = "res://assets/ui/icons/items/ring.svg"
 			&"consumable": fb = "res://assets/ui/icons/items/potion_health.svg"
+			&"crystal": fb = "res://assets/ui/icons/items/aether_shard.svg"
 			_: fb = "res://assets/ui/icons/items/mat_iron_shard.svg"
 	return fb
 

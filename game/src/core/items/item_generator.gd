@@ -59,7 +59,8 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 	it.ilvl = maxi(1, ilvl)
 	it.seed_value = rng.seed
 	if not BH.CATEGORY_SLOTS.has(base.category):
-		it.rarity = BH.Rarity.COMMON
+		# bh-018: crystals keep their grade's colour tier; everything else in the bag is Common
+		it.rarity = base.fixed_rarity if base.category == &"crystal" and base.fixed_rarity >= 0 else BH.Rarity.COMMON
 		return it
 	if base.fixed_rarity >= 0:
 		rarity = base.fixed_rarity
@@ -94,7 +95,23 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 		it.custom_name = nm[0]
 		it.epithet = nm[1]
 	_forge_weapon_name(it)
+	_roll_sockets(it)
 	return it
+
+## bh-018: now and then a piece is found with a socket or two already open (never more than half its tier maximum).
+## Drawn from the item's own seed, like the forged name, so it never moves the main roll sequence.
+static func _roll_sockets(it: ItemInstance) -> void:
+	if it.rarity <= BH.Rarity.BEGINNER or it.base.unique_name != "":
+		return
+	var r := RandomNumberGenerator.new()
+	r.seed = hash("%d/%s/sockets" % [it.seed_value, it.base.id])
+	if r.randf() >= 0.06 + 0.015 * float(it.rarity):
+		return
+	var cap := maxi(1, Sockets.max_sockets(it) / 2)
+	it.sockets = r.randi_range(1, cap)
+	it.gems.clear()
+	for i in it.sockets:
+		it.gems.append("")
 
 ## bh-015: a Common, Basic or Advanced weapon gets a forged prefix and/or suffix (NameForge) — "Saltworn Shortbow",
 ## "Emberkissed Hornbow of the Grey Ferry" — so two drops of one base rarely read the same. Where an enchantment

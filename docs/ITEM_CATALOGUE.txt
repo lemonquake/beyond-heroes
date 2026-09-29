@@ -1,0 +1,1061 @@
+BEYOND HEROES — ITEM AND EQUIPMENT CATALOGUE
+Generated from the game's data by game/tests/tools/item_catalogue.gd (2026-09-29). 302 item bases.
+Regenerate: "C:/Users/Lemon PC/Desktop/Godot.exe" --headless --path game res://tests/tools/item_catalogue.tscn
+
+Contents
+  1. Rarity tiers, equipment slots, weight and sockets
+  2. Weapons
+  3. Shields
+  4. Armour (helms, inner garments, armour, gloves, boots)
+  5. Accessories
+  6. Item sets
+  7. Named uniques
+  8. Enchantments (random affixes)
+  9. Powers (mythical, legendary, aether, relic)
+  10. Faction licenses
+  11. Socket crystals and the Socket Specialists
+  12. Weapon upgrades: Enchantment and Fore-Tech
+  13. Consumables
+  14. Materials, currencies and relic caches
+  15. Quest items
+  16. Crafting recipes
+  17. Where to buy: merchants
+
+======================================================================================================================
+1. RARITY TIERS, EQUIPMENT SLOTS, WEIGHT AND SOCKETS
+======================================================================================================================
+Tier Name       Max sockets Loot beam What it means
+0    Beginner   1           0.0 m     Starting equipment. Simple and dependable.
+1    Common     1           0.0 m     Basic loot with no enchantments.
+2    Basic      2           0.0 m     Improved equipment with one enchantment.
+3    Advanced   3           1.2 m     The first real build customization: two enchantments.
+4    Licensed   3           1.6 m     Specialized faction equipment carrying a guild license.
+5    Elite      4           2.4 m     High-quality rare equipment with strong enchantments.
+6    Master     5           3.2 m     Masterwork gear: superior base quality and a perfected enchantment.
+7    Mythical   6           4.2 m     Extremely rare magical items with a mythical property.
+8    Legendary  6           5.5 m     Build-defining equipment with a legendary power.
+9    Aether     7           8.0 m     The extraordinary tier. Aether items alter your abilities.
+
+Equipment slots
+---------------
+  Main Weapon    — takes: weapon
+  Sub Weapon     — takes: weapon, shield
+  Helm           — takes: helm
+  Inner Garment  — takes: inner_garment
+  Armor          — takes: armor
+  Gloves I       — takes: gloves
+  Gloves II      — takes: gloves
+  Boots I        — takes: boots
+  Boots II       — takes: boots
+  Accessory I    — takes: accessory
+  Accessory II   — takes: accessory
+  Accessory III  — takes: accessory
+  Accessory IV   — takes: accessory
+
+Carried weight
+--------------
+  Everything worn and carried has weight. Carry capacity = (110 + 3.2 x Strength + bonuses). Up to 35% load there is
+  no slowdown; at 100% load movement is 30% slower; above 100% the hero is Overburdened (45% slower, no dodging).
+  (bh-018: capacity doubled from 55 + 1.6 per Strength.)
+
+======================================================================================================================
+2. WEAPONS
+======================================================================================================================
+
+Axe (13)
+--------
+  One-handed. Base 1.25 attacks/s, 5% crit, 2.3 m reach, heavy x2.0.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Hand Axe                   6-10      1.25  -              10 STR           4.0   16     knight
+  2   Woodcutter's Hatchet       6-13      1.34  -              11 STR           2.8   22     knight
+  5   Bonecutter                 9-20      1.30  -              13 STR           3.4   34     knight
+  8   Raider's Tomahawk          10-23     1.46  -              16 STR 12 AGI    2.4   46     knight
+  10  Bearded Axe                16-26     1.22  -              26 STR 11 AGI    4.4   52     knight
+  14  Crescent Axe               18-43     1.16  -              26 STR 12 AGI    4.2   70     knight
+  17  Skirmisher's Axe           18-41     1.40  -              22 STR 16 AGI    3.1   82     knight
+  19  Rune Cleaver               27-43     1.18  20% Earth      38 STR 18 AGI    4.8   88     knight
+  23  Rimebite Axe               25-59     1.26  20% Ice        34 STR 18 AGI    4.0   106    knight
+  29  Thunderbeak Axe            32-74     1.22  20% Lightning  40 STR 22 AGI    4.2   130    knight
+  33  Warlord's Cleaver          41-97     1.04  -              46 STR 20 AGI    5.6   146    knight      12% increased Impact Strength
+  41  Gravewarden's Axe          45-105    1.16  20% Dark       54 STR 26 AGI    4.7   178    knight      10% increased Impact Strength
+  53  Sunreaver                  54-127    1.21  25% Light      68 STR 34 AGI    4.4   226    knight
+
+Bow (13)
+--------
+  Two-handed, ranged. Base 1.10 attacks/s, 8% crit, 22.0 m reach, heavy x2.4.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Hunter's Bow               5-10      1.10  -              10 DEX           2.4   16     ranger
+  2   Shortbow                   6-13      1.30  -              11 DEX           1.6   22     ranger
+  5   Fowling Bow                9-19      1.34  -              12 DEX           1.5   34     ranger
+  8   Recurve Bow                13-27     1.20  -              18 DEX           2.0   46     ranger
+  10  Composite Bow              14-27     1.06  -              26 DEX           2.8   52     ranger
+  14  Hornbow                    20-42     1.14  -              26 DEX 10 AGI    2.5   70     ranger
+  17  Yew Longbow                24-51     1.10  -              26 DEX 10 AGI    2.6   82     ranger
+  19  Warden Longbow             23-44     1.00  -              40 DEX           3.2   88     ranger      15% increased Projectile Speed
+  23  Siege Greatbow             41-85     0.84  -              34 DEX 20 STR    3.8   106    ranger      20% increased Projectile Speed
+  29  Thornback Bow              35-72     1.20  20% Earth      38 DEX 18 AGI    2.3   130    ranger
+  33  Galewing Bow               37-77     1.25  25% Wind       44 DEX 24 AGI    2.2   146    ranger
+  41  Frostwing Bow              46-96     1.22  25% Ice        52 DEX 24 AGI    2.4   178    ranger
+  53  Stormstring Greatbow       79-165    0.90  25% Lightning  64 DEX 30 STR    3.6   226    ranger      20% increased Projectile Speed
+
+Claw (10)
+---------
+  One-handed. Base 1.85 attacks/s, 9% crit, 1.8 m reach, heavy x1.8.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  3   Iron Talons                5-9       1.90  -              10 AGI 8 DEX     1.8   26     shadowblade
+  5   Scrapper's Hooks           6-12      1.92  -              12 AGI 10 DEX    1.7   34     shadowblade
+  9   Tiger Claw                 9-17      1.84  -              16 AGI 14 DEX    2.0   50     shadowblade
+  15  Hookblade Claws            14-26     1.74  -              24 AGI 18 DEX    2.4   74     shadowblade +2% Critical Chance
+  17  Raptor Talons              14-27     1.88  -              22 AGI 18 DEX    2.0   82     shadowblade
+  24  Nightstalker Claw          18-34     1.96  25% Dark       32 AGI 26 DEX    1.9   110    shadowblade
+  29  Frostbite Claws            23-42     1.85  20% Ice        36 AGI 26 DEX    2.1   130    shadowblade
+  34  Drakescale Rend            27-49     1.80  20% Fire       42 AGI 34 DEX    2.3   150    shadowblade
+  41  Tempest Rakes              29-53     1.98  25% Wind       50 AGI 36 DEX    1.9   178    shadowblade
+  53  Wyrmqueen's Talons         38-71     1.87  25% Fire       64 AGI 46 DEX    2.2   226    shadowblade +3% Critical Chance
+
+Club (10)
+---------
+  One-handed. Base 1.20 attacks/s, 4% crit, 2.2 m reach, heavy x2.0.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Oak Cudgel                 5-12      1.30  -              10 STR           3.2   18     knight
+  4   Knotwood Club              8-18      1.28  -              12 STR           3.4   30     knight
+  6   Spiked Club                10-24     1.20  -              16 STR           4.0   38     knight
+  12  Flanged Mace               17-39     1.14  -              24 STR           4.6   62     knight      15% increased Stagger Strength
+  16  Smith's Warhammer          21-49     1.12  -              24 STR           4.8   78     knight      12% increased Stagger Strength
+  21  Morning Star               28-66     1.04  -              34 STR           5.4   98     knight
+  27  Ironbound Mace             33-78     1.08  -              38 STR           5.2   122    knight
+  31  Emberheart Mace            37-86     1.10  25% Fire       44 STR           5.0   138    knight
+  39  Tidecrusher                45-106    1.10  25% Water      50 STR           5.1   170    knight
+  51  Starhammer                 61-143    1.04  25% Light      64 STR           5.7   218    knight      15% increased Stagger Strength
+
+Dagger (13)
+-----------
+  One-handed. Base 2.00 attacks/s, 10% crit, 1.9 m reach, heavy x1.7.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Rondel Dagger              3-7       2.00  -              9 DEX            1.2   16     shadowblade
+  2   Skinning Knife             4-7       2.16  -              10 DEX           0.9   22     shadowblade
+  5   Cutpurse Knife             6-10      2.20  -              12 DEX           0.8   34     shadowblade
+  8   Parrying Dirk              9-15      1.94  -              16 DEX 12 AGI    1.3   46     shadowblade +0.03s Parry Window
+  10  Shadow Kris                9-18      2.06  25% Dark       22 DEX 18 AGI    1.1   52     shadowblade
+  14  Kukri                      13-22     1.88  -              22 DEX 18 AGI    1.6   70     shadowblade
+  17  Bonebite                   14-24     2.00  -              24 DEX 16 AGI    1.1   82     shadowblade +2% Critical Chance
+  19  Glass Stiletto             15-29     2.12  -              36 DEX 28 AGI    0.9   88     shadowblade +15% Critical Damage
+  23  Viper Fang                 18-29     2.10  20% Dark       30 DEX 26 AGI    1.1   106    shadowblade
+  29  Emberfang Dirk             22-37     2.02  20% Fire       36 DEX 28 AGI    1.3   130    shadowblade
+  33  Moonshard Dagger           25-41     2.04  20% Ice        40 DEX 34 AGI    1.2   146    shadowblade
+  41  Stormneedle                28-47     2.14  25% Lightning  50 DEX 38 AGI    0.9   178    shadowblade
+  53  Nightwhisper               37-61     2.08  25% Dark       64 DEX 48 AGI    1.1   226    shadowblade +20% Critical Damage
+
+Great Axe (10)
+--------------
+  Two-handed. Base 0.88 attacks/s, 5% crit, 2.9 m reach, heavy x2.3.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  3   Lumberjack's Greataxe      12-28     0.95  -              15 STR           7.5   26     knight
+  6   Stumpsplitter              17-41     0.90  -              18 STR           8.4   38     knight
+  9   Double-Bit Greataxe        24-56     0.84  -              24 STR           9.2   50     knight
+  15  Northman's Bearded Axe     32-75     0.90  -              32 STR           8.6   74     knight
+  18  Tuskbreaker                40-94     0.82  -              34 STR           9.8   86     knight      15% increased Stagger Strength
+  24  Executioner's Moon         54-127    0.77  -              42 STR           11.0  110    knight      20% increased Stagger Strength
+  30  Frostreaver                59-138    0.86  25% Ice        46 STR           9.4   134    knight
+  34  Worldsplitter              79-183    0.72  25% Earth      54 STR           12.5  150    knight
+  42  Headsman's Eclipse         91-212    0.75  20% Dark       62 STR           12.0  182    knight
+  54  Skyrender                  108-253   0.79  25% Lightning  76 STR           11.6  230    knight
+
+Greatsword (9)
+--------------
+  Two-handed. Base 0.95 attacks/s, 5% crit, 3.0 m reach, heavy x2.2.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Rusted Claymore            9-17      0.95  -              14 STR           8.0   16     knight
+  6   Oathkeeper Greatsword      18-37     0.92  -              18 STR           8.2   38     knight
+  9   Dawnbreaker                22-38     0.95  30% Light      26 STR           8.5   150    knight      Unique.
+  10  Executioner's Blade        24-40     0.88  -              30 STR           9.5   52     knight
+  17  Wavecrest Flamberge        37-77     0.88  -              32 STR           8.8   82     knight      +2% Critical Chance
+  19  Titan's Edge               40-64     0.85  -              44 STR           10.5  88     knight      15% increased Stagger Strength
+  29  Ironbark Greatblade        61-126    0.84  -              46 STR           10.1  130    knight      18% increased Stagger Strength
+  41  Dragonspine Greatsword     79-165    0.87  25% Fire       60 STR           10.6  178    knight
+  53  Nightfall Greatsword       106-220   0.82  25% Dark       74 STR           11.2  226    knight      +20% Critical Damage
+
+Javelin (10)
+------------
+  One-handed, ranged. Base 1.15 attacks/s, 7% crit, 17.0 m reach, heavy x2.2.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Reed Javelin               6-10      1.26  -              8 STR 8 DEX      1.6   18     ranger
+  4   Fowler's Dart              9-15      1.30  -              8 STR 10 DEX     1.4   30     ranger
+  7   Hunter's Javelin           13-22     1.20  -              14 STR 14 DEX    2.0   42     ranger
+  13  Barbed Pilum               23-38     1.04  -              22 STR 18 DEX    2.8   66     ranger      12% increased Projectile Damage
+  16  Flint Javelin              24-40     1.18  20% Earth      18 STR 20 DEX    2.2   78     ranger
+  22  Thunderhead Javelin        31-52     1.16  30% Lightning  28 STR 28 DEX    2.4   102    ranger
+  28  Windrunner Javelin         36-61     1.22  25% Wind       26 STR 38 DEX    2.1   126    ranger
+  32  Sunpiercer                 45-75     1.10  25% Light      36 STR 38 DEX    2.6   142    ranger
+  40  Frostspike                 54-90     1.12  25% Ice        36 STR 50 DEX    2.6   174    ranger
+  52  Heavenfall Pilum           71-119    1.08  20% Light      46 STR 62 DEX    2.9   222    ranger      15% increased Projectile Damage
+
+Knuckles (10)
+-------------
+  One-handed. Base 2.10 attacks/s, 8% crit, 1.6 m reach, heavy x1.9.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Brass Knuckles             3-5       2.26  -              8 STR 8 AGI      1.0   18     shadowblade
+  4   Pit Fighter's Wraps        5-8       2.30  -              8 STR 10 AGI     0.8   30     shadowblade
+  6   Studded Cestus             7-11      2.10  -              12 STR 12 AGI    1.4   38     shadowblade
+  12  Spiked Knucklebars         11-18     2.04  -              18 STR 18 AGI    1.6   62     shadowblade 10% increased Stagger Strength
+  16  Iron Fistguards            13-21     2.12  -              18 STR 18 AGI    1.6   78     shadowblade
+  21  Thunderfist Knuckles       15-25     2.16  30% Lightning  24 STR 28 AGI    1.5   98     shadowblade
+  28  Stonefist                  21-35     2.00  25% Earth      30 STR 26 AGI    1.9   126    shadowblade
+  31  Titanknuckle               24-40     1.90  -              38 STR 30 AGI    2.6   138    shadowblade 15% increased Impact Strength
+  40  Emberknuckles              27-45     2.14  25% Fire       38 STR 40 AGI    1.6   174    shadowblade
+  52  Dawnfist Gauntlets         35-59     2.06  25% Light      50 STR 52 AGI    1.8   222    shadowblade 15% increased Impact Strength
+
+Spear (13)
+----------
+  Two-handed. Base 1.20 attacks/s, 7% crit, 3.4 m reach, heavy x1.8.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Ash Spear                  7-13      1.20  -              10 STR 8 AGI     4.5   16     knight
+  3   Hunting Spear              9-18      1.30  -              11 STR 9 AGI     3.8   26     knight
+  5   Boar Spear                 13-23     1.24  -              12 STR 10 AGI    4.2   34     knight
+  9   Partisan                   19-36     1.14  -              20 STR 14 AGI    5.0   50     knight
+  11  Winged Spear               19-32     1.14  -              24 STR 18 AGI    5.2   56     knight
+  15  Glaive                     30-56     1.04  -              28 STR 18 AGI    5.8   74     knight
+  17  Corsair Harpoon            31-58     1.12  20% Water      24 STR 20 AGI    4.6   82     knight
+  20  Storm Lance                30-50     1.24  25% Lightning  34 STR 28 AGI    4.9   92     knight
+  24  Tideguard Trident          38-71     1.20  25% Water      32 STR 26 AGI    5.0   110    knight
+  29  Watchman's Halberd         53-98     1.02  -              40 STR 24 AGI    6.4   130    knight      12% increased Stagger Strength
+  34  Wyrmtooth Lance            62-115    1.00  -              42 STR 32 AGI    6.5   150    knight      +15% Critical Damage
+  41  Emberfang Pike             66-123    1.10  25% Fire       50 STR 40 AGI    5.6   178    knight
+  53  Dawnspire Lance            85-158    1.08  25% Light      62 STR 50 AGI    5.8   226    knight      +15% Critical Damage
+
+Staff (10)
+----------
+  Two-handed, ranged. Base 1.00 attacks/s, 5% crit, 18.0 m reach, heavy x2.0.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Ashwood Staff              6-11      1.00  100% Fire      12 INT           3.4   16     mage        10% increased Magic Damage
+  5   Pilgrim's Staff            9-17      1.00  100% Wind      14 INT           3.2   34     mage        12% increased Magic Damage
+  8   Starwhisper                14-24     1.00  100% Fire      22 INT           3.5   150    mage        Unique. 20% increased Magic Damage
+  10  Starbound Sage Staff       13-22     1.00  100% Light     24 INT           3.5   90     mage        Set: Starbound Sage. 18% increased Magic Damage
+  10  Stormcaller Staff          15-26     0.96  100% Lightning 26 INT           3.8   52     mage        18% increased Magic Damage
+  16  Cinderheart Staff          20-38     0.98  100% Fire      28 INT           3.6   78     mage        18% increased Magic Damage
+  18  Rimeheart Staff            21-35     1.02  100% Ice       36 INT 18 WIS    3.6   84     mage        25% increased Magic Damage
+  28  Deepwater Staff            31-58     1.01  100% Water     40 INT 20 WIS    3.5   126    mage        22% increased Magic Damage
+  40  Gloamspire Staff           45-84     0.95  100% Dark      54 INT 26 WIS    3.9   174    mage        28% increased Magic Damage
+  52  Sunspire Staff             53-98     1.03  100% Light     68 INT 34 WIS    3.7   222    mage        34% increased Magic Damage
+
+Sword (14)
+----------
+  One-handed. Base 1.45 attacks/s, 6% crit, 2.4 m reach, heavy x1.9.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Iron Longsword             5-9       1.45  -              10 STR           3.5   16     knight
+  3   Militia Shortsword         6-12      1.62  -              11 STR           2.6   26     knight
+  5   Wayfarer's Blade           9-16      1.52  -              13 STR 8 DEX     3.0   34     knight
+  7   Riverguard Falchion        11-21     1.38  -              16 STR 10 DEX    3.4   42     knight
+  8   Riftblade                  12-21     1.45  25% Lightning  18 STR 14 DEX    3.5   140    knight      Unique.
+  9   Arming Sword               13-21     1.50  -              20 STR 13 DEX    3.2   48     knight
+  13  Duelist's Sabre            14-25     1.72  -              22 DEX 14 STR    2.8   66     knight      +3% Critical Chance
+  16  Saltmarsh Cutlass          17-31     1.66  -              22 DEX 18 STR    2.9   78     knight      +2% Critical Chance
+  18  Runed Blade                24-37     1.42  20% Light      34 STR 22 DEX    3.6   84     knight
+  22  Bastard Sword              29-53     1.24  -              34 STR           4.8   102    knight      12% increased Stagger Strength
+  28  Gravewatch Longsword       31-58     1.40  20% Dark       38 STR 24 DEX    3.8   126    knight
+  32  Sunsteel Blade             33-60     1.50  20% Fire       42 STR 30 DEX    3.6   142    knight
+  40  Starfall Sabre             37-68     1.62  25% Light      52 DEX 36 STR    3.1   174    knight
+  52  Kingsbane                  52-96     1.46  15% Fire       64 STR 44 DEX    3.9   222    knight      +20% Critical Damage
+
+Wand (9)
+--------
+  One-handed, ranged. Base 1.60 attacks/s, 7% crit, 18.0 m reach, heavy x1.6.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Bone Wand                  3-6       1.60  100% Dark      10 INT           0.9   16     mage        +2% Critical Chance
+  4   Willow Wand                5-9       1.62  100% Earth     12 INT           0.8   30     mage        +2% Critical Chance
+  8   Winter's Heart             8-14      1.60  100% Ice       20 INT           1.0   140    mage        Unique.
+  9   Tidecaller Wand            8-15      1.64  100% Water     20 INT           1.0   48     mage        +3% Critical Chance
+  15  Emberbrand Wand            12-20     1.66  100% Fire      24 INT           0.9   74     mage        +3% Critical Chance
+  18  Sunfire Wand               13-24     1.58  100% Light     32 INT           1.1   84     mage        +4% Critical Chance
+  27  Hoarfrost Wand             20-33     1.60  100% Ice       36 INT           1.1   122    mage        +3.5% Critical Chance
+  39  Stormglass Wand            26-43     1.70  100% Lightning 50 INT           0.9   170    mage        +4% Critical Chance
+  51  Nightbloom Wand            34-57     1.64  100% Dark      64 INT           1.1   218    mage        +5% Critical Chance
+
+======================================================================================================================
+3. SHIELDS
+======================================================================================================================
+  Lvl Name                       Def   Block  Strength  Requires         Wt    Value  Notes
+  1   Warden Kite Shield         12    25%    60%       12 STR           5.7   15
+  7   Sigil Buckler              16    20%    50%       14 STR 16 DEX    6.2   30     +5% All Resistances
+  10  Aether Guardian Aegis      26    28%    68%       24 STR           7.6   90
+  12  Bastion Tower Shield       34    32%    70%       30 STR           8.8   40     -0.15 Movement Speed
+
+======================================================================================================================
+4. ARMOUR
+======================================================================================================================
+
+Helms (8)
+---------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Iron Helm                    heavy        8     10 STR           4.2   11
+  1   Linen Hood                   cloth        3     -                1.2   11     +10 Maximum Mana
+  8   Aether Guardian Helm         heavy        20    20 STR           4.2   60     Set: Aether Guardian.
+  8   Barbute                      heavy        16    20 STR           4.2   32
+  8   Starbound Sage Hood          cloth        7     20 INT           1.2   60     Set: Starbound Sage.
+  9   Arcanist Cowl                cloth        8     20 INT           1.2   35     +22 Maximum Mana
+  16  Visored Greathelm            heavy        28    32 STR           4.2   56     +5% Status Resistance
+  17  Seer's Veil                  cloth        13    32 INT           1.2   59     +36 Maximum Mana
+
+Inner garments (4)
+------------------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Padded Gambeson              heavy        6     -                3.6   11     +10 Maximum HP
+  1   Silk Undershirt              cloth        2     -                1.0   11     +0.3 Mana Regeneration
+  10  Chain Shirt                  heavy        14    20 STR           6.5   38     +20 Maximum HP
+  10  Runeweave Vest               cloth        6     20 INT           1.0   38     +0.8 Mana Regeneration
+
+Body armour (8)
+---------------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Apprentice Robe              cloth        6     -                3.2   11     +15 Maximum Mana
+  1   Iron Hauberk                 heavy        18    12 STR           11.2  11
+  8   Brigandine                   heavy        32    22 STR           13.8  32
+  8   Traveler's Coat              cloth        12    18 INT           3.2   32     5% increased Magic Damage
+  9   Aether Guardian Plate        heavy        40    22 STR           15.2  80     Set: Aether Guardian.
+  9   Starbound Sage Robe          cloth        14    22 INT           3.2   80     Set: Starbound Sage.
+  16  Magister Robe                cloth        20    30 INT           3.2   56     10% increased Magic Damage
+  16  Warden Plate                 heavy        52    34 STR           17.4  56     +5% Knockback Resistance
+
+Gloves (6)
+----------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Iron Gauntlet                heavy        4     10 STR           2.6   11
+  1   Silk Glove                   cloth        2     -                0.8   11     3% increased Cast Speed
+  8   Aether Guardian Gauntlets    heavy        10    20 STR           2.6   50     Set: Aether Guardian.
+  8   Starbound Sage Gloves        cloth        4     20 INT           0.8   50     Set: Starbound Sage.
+  11  Runed Glove                  cloth        6     22 INT           0.8   41     6% increased Cast Speed
+  11  Spiked Gauntlet              heavy        11    24 STR           2.6   41     +3 Added Physical Damage
+
+Boots (6)
+---------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Iron Sabaton                 heavy        4     10 STR           3.6   11     3% increased Movement Speed
+  1   Soft Boot                    cloth        2     -                1.2   11     5% increased Movement Speed
+  8   Aether Guardian Greaves      heavy        10    20 STR           3.6   50     Set: Aether Guardian. 5% increased Movement Speed
+  8   Starbound Sage Boots         cloth        4     20 INT           1.2   50     Set: Starbound Sage. 7% increased Movement Speed
+  11  Warden Greave                heavy        12    24 STR           3.6   41     4% increased Movement Speed; +5% Knockback Resistance
+  11  Wayfarer Boot                cloth        6     16 AGI           1.2   41     8% increased Movement Speed
+
+======================================================================================================================
+5. ACCESSORIES (RINGS, AMULETS, CHARMS)
+======================================================================================================================
+  Lvl Name                         Wt    Value  Implicit
+  1   Bone Amulet                  0.8   25     +8 Maximum HP
+  1   Copper Ring                  0.8   20
+  4   Rune Charm                   0.8   30     5% increased Elemental Damage
+  6   Band of Stillness            0.8   120    Unique.
+  8   Silver Ring                  0.8   40     +3% All Resistances
+  10  Heart of the Aether          0.8   160    Unique.
+  10  Gilded Amulet                0.8   60     +10% Critical Damage
+  12  War Talisman                 0.8   55     8% increased Impact Strength
+  16  Sigil Ring                   0.8   70     +2% Critical Chance
+  18  Star Pendant                 0.8   90     8% increased Elemental Damage
+
+======================================================================================================================
+6. ITEM SETS
+======================================================================================================================
+  Set pieces always drop at Master tier or better. Wearing several different pieces of one set unlocks its bonuses.
+
+Aether Guardian (knight)
+------------------------
+  Pieces: Aether Guardian Helm [helm], Aether Guardian Plate [armor], Aether Guardian Gauntlets [gloves], Aether
+  Guardian Greaves [boots], Aether Guardian Aegis [shield]
+  (2) +40 Defense and 10% increased Defense
+  (3) +8% Block Chance and +10% Block Strength
+  (5) Blocking releases a protective Aether pulse: knocks nearby enemies back and grants a ward of 6% of Maximum HP
+  (2 s cooldown).
+  Worn by the wardens who held the Sanctuary gate on the night the Aether broke.
+
+Starbound Sage (mage)
+---------------------
+  Pieces: Starbound Sage Hood [helm], Starbound Sage Robe [armor], Starbound Sage Gloves [gloves], Starbound Sage
+  Boots [boots], Starbound Sage Staff [weapon]
+  (2) +50 Maximum Mana
+  (3) +20% increased Elemental Damage
+  (5) Casting a spell of a different element than your last grants Arcane Amplification: 8% more spell damage per
+  stack (max 5, 6 s).
+  The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea.
+
+======================================================================================================================
+7. NAMED UNIQUES
+======================================================================================================================
+
+Band of Stillness — Ring, level 6 (Aether)
+------------------------------------------
+  Stillness: Standing still for 1 s increases Mana regeneration by 150% and HP regeneration by 50%.
+  Worn by the monks of the drowned chapel, who believed Aether pools where nothing moves.
+
+Starwhisper — Staff, level 8 (Aether)
+-------------------------------------
+  14-24 damage; 20% increased Magic Damage
+  Starwhisper: Firebolt always splits into three projectiles.
+  The stars it was carved to point at no longer exist. It remembers them anyway.
+
+Riftblade — Sword, level 8 (Aether)
+-----------------------------------
+  12-21 damage
+  Riftborn: Critical attacks release chain lightning at up to 3 nearby enemies (50% of the hit as Lightning).
+  Its edge cuts a thin line in the air that takes a moment to close.
+
+Winter's Heart — Wand, level 8 (Aether)
+---------------------------------------
+  8-14 damage
+  Winter's: Frozen enemies explode when killed, dealing 30% of their Maximum HP as Ice damage around them.
+  Cold enough to make the dead shatter.
+
+Dawnbreaker — Greatsword, level 9 (Aether)
+------------------------------------------
+  22-38 damage
+  Dawnbreaker: Every fifth attack deals massive stagger and releases a radiant shockwave.
+  Forged at first light by the Order of the Dawn. Every fifth blow lands like a falling sun.
+
+Heart of the Aether — Amulet, level 10 (Aether)
+-----------------------------------------------
+  Aetherheart: Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.
+  A drop of the world's first light, caged in silver.
+
+======================================================================================================================
+8. ENCHANTMENTS (RANDOM AFFIXES)
+======================================================================================================================
+  Basic items roll one enchantment, Advanced two, and higher tiers more and stronger ones. Each enchantment has
+  level-gated tiers: [min item level: min-max].
+  Name                 Pre/suf Stat                       Tiers                                        Fits
+  Umbral               prefix  Added Dark Damage          [5: 2.0-4.0] [15: 5.0-9.0] [28: 10.0-16.0]   weapon, accessory
+  Flaming              prefix  Added Fire Damage          [1: 2.0-4.0] [12: 5.0-9.0] [25: 10.0-16.0]   weapon, accessory
+  Frigid               prefix  Added Ice Damage           [1: 2.0-4.0] [12: 5.0-9.0] [25: 10.0-16.0]   weapon, accessory
+  Crackling            prefix  Added Lightning Damage     [1: 1.0-6.0] [12: 2.0-13.0] [25: 3.0-24.0]   weapon, accessory
+  of the Lynx          suffix  Agility                    [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  of Fury              suffix  Attack Speed               [1: 4%-7%] [12: 8%-12%] [25: 13%-18%]        weapon, gloves, accessory
+  of Warding           suffix  Block Chance               [1: 3%-5%] [15: 6%-9%]                       shield
+  of Incantation       suffix  Cast Speed                 [1: 4%-7%] [12: 8%-12%] [25: 13%-18%]        weapon, gloves, helm, accessory
+  of Recurrence        suffix  Cooldown Reduction         [10: 3%-5%] [25: 6%-9%]                      helm, accessory, gloves
+  of the Hawk          suffix  Critical Chance            [1: 1%-2%] [12: 3%-4%] [25: 5%-6%]           weapon, accessory, gloves, helm
+  of Ruin              suffix  Critical Damage            [5: 0.1-0.1] [15: 0.2-0.3] [30: 0.3-0.4]     weapon, accessory
+  of Precision         suffix  Dexterity                  [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  Accursed             prefix  Dark Damage                [1: 8%-14%] [15: 15%-25%]                    weapon, accessory
+  Quaking              prefix  Earth Damage               [1: 8%-14%] [15: 15%-25%]                    weapon, accessory
+  Pyric                prefix  Fire Damage                [1: 8%-14%] [15: 15%-25%]                    weapon, accessory, helm
+  Glacial              prefix  Ice Damage                 [1: 8%-14%] [15: 15%-25%]                    weapon, accessory, helm
+  Hallowed             prefix  Light Damage               [1: 8%-14%] [15: 15%-25%]                    weapon, accessory
+  Stormforged          prefix  Lightning Damage           [1: 8%-14%] [15: 15%-25%]                    weapon, accessory, helm
+  Tidal                prefix  Water Damage               [1: 8%-14%] [15: 15%-25%]                    weapon, accessory
+  Gale-touched         prefix  Wind Damage                [1: 8%-14%] [15: 15%-25%]                    weapon, accessory
+  Prismatic            prefix  Elemental Damage           [5: 6%-10%] [18: 11%-18%] [30: 19%-26%]      weapon, accessory
+  Champion-slaying     prefix  Damage to Champions        [5: 6%-10%] [15: 11%-18%] [30: 19%-26%]      weapon, accessory, gloves
+  of the Spirit-caller suffix  Soul Ember Find            [1: 10%-20%] [15: 21%-35%]                   accessory, helm
+  of Shadows' Step     suffix  Evasion                    [1: 6.0-14.0] [12: 15.0-30.0] [25: 31.0-55.0 boots, gloves, armor, inner_garment
+  of Plenty            suffix  Gold Find                  [1: 8%-15%] [12: 16%-28%] [25: 29%-45%]      accessory, helm, gloves, boots
+  of Renewal           suffix  Healing Effectiveness      [1: 6%-12%] [15: 13%-22%]                    helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Reaping           suffix  Life on Kill               [1: 3.0-6.0] [12: 7.0-14.0] [25: 15.0-28.0]  weapon, accessory, gloves
+  of Mending           suffix  HP Regeneration            [1: 0.5-1.0] [12: 1.1-2.2] [25: 2.3-4.0]     helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Vigor             suffix  HP Regeneration            [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Thunderous Blows  suffix  Impact Strength            [1: 8%-14%] [15: 15%-25%]                    weapon, gloves, boots
+  of the Sage          suffix  Intelligence               [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  of the Anchor        suffix  Knockback Resistance       [1: 5%-8%] [15: 9%-14%]                      boots, armor
+  of the Leech         suffix  Life Leech                 [5: 1%-2%] [18: 3%-4%]                       weapon, accessory, gloves
+  Sturdy               prefix  Local Def                  [1: 15%-30%] [10: 30%-50%] [22: 50%-75%]     helm, armor, inner_garment, gloves, boots, shield
+  Reinforced           prefix  Local Def Flat             [1: 400%-1000%] [10: 1100%-2400%] [22: 2500% helm, armor, inner_garment, gloves, boots, shield
+  Keen                 prefix  Local Phys                 [1: 15%-30%] [10: 30%-50%] [20: 50%-75%] [35 weapon
+  Arcane               prefix  Magic Damage               [1: 8%-14%] [12: 15%-24%] [25: 25%-36%]      weapon, helm, accessory, armor
+  of Fortune           suffix  Magic Find                 [1: 6%-12%] [15: 13%-22%]                    accessory, helm, boots
+  of the Siphon        suffix  Mana Steal                 [5: 1%-2%] [18: 3%-4%]                       weapon, accessory
+  of the Harvest       suffix  Mana on Kill               [1: 2.0-4.0] [12: 5.0-9.0] [25: 10.0-16.0]   weapon, accessory
+  of Clarity           suffix  Mana Regeneration          [1: 0.4-0.8] [12: 0.9-1.6] [25: 1.7-2.8]     helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Wellspring    suffix  Mana Regeneration          [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, gloves, boots, shield, accessory
+  Stalwart             prefix  Maximum HP                 [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, gloves, boots, shield, accessory
+  Scholar's            prefix  Maximum Mana               [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Haste             suffix  Movement Speed             [1: 4%-6%] [12: 7%-10%] [25: 11%-14%]        boots
+  of Sundering         suffix  Armor Penetration          [12: 5%-8%] [28: 9%-14%]                     weapon, accessory
+  of Piercing          suffix  Elemental Penetration      [10: 4%-6%] [25: 7%-10%]                     weapon, accessory
+  of Searing           suffix  Fire Penetration           [12: 5%-8%] [28: 9%-14%]                     weapon, accessory
+  of the Alchemist     suffix  Potion Effectiveness       [1: 10%-18%] [15: 19%-30%]                   armor, gloves, accessory, inner_garment
+  Fletched             prefix  Projectile Damage          [1: 8%-14%] [14: 15%-25%]                    weapon, gloves, accessory
+  of the Prism         suffix  All Resistances            [8: 3%-6%] [20: 7%-10%] [35: 11%-15%]        helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Vigil         suffix  Dark Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Mountain      suffix  Earth Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Embers            suffix  Fire Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Winter            suffix  Ice Resistance             [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Shadows           suffix  Light Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Grounding         suffix  Lightning Resistance       [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Shore         suffix  Water Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Stillness         suffix  Wind Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Mastery           suffix  Skill Levels               [8: 1.0-1.0] [24: 2.0-2.0]                   weapon, helm, accessory
+  of the Monk          suffix  Spirit                     [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  Crushing             prefix  Stagger Strength           [1: 10%-18%] [14: 19%-30%]                   weapon, gloves
+  of Affliction        suffix  Status Chance              [1: 10%-18%] [15: 19%-30%]                   weapon, accessory, gloves
+  of Resolve           suffix  Status Resistance          [1: 5%-8%] [15: 9%-15%]                      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Ox            suffix  Strength                   [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  Soulbound            prefix  Tempo Damage               [1: 8%-15%] [15: 16%-26%] [30: 27%-40%]      accessory, helm, armor
+  Thorned              prefix  Thorns                     [1: 3.0-6.0] [12: 8.0-16.0] [25: 18.0-32.0]  armor, shield, inner_garment
+  Brutal               prefix  Weapon Damage              [1: 6%-10%] [15: 11%-18%] [30: 19%-28%]      weapon, gloves
+  of the Owl           suffix  Wisdom                     [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
+  of Learning          suffix  Experience Gain            [1: 3%-6%] [12: 7%-10%] [25: 11%-15%]        accessory, helm, armor
+
+======================================================================================================================
+9. POWERS
+======================================================================================================================
+
+Mythical powers
+---------------
+  Aetherwell [mage] — +1 maximum Arcane Charge and spells restore 1 Mana on hit. (weapon, helm, accessory)
+  Bastion — While below 35% HP you take 15% less damage. (armor, helm, shield)
+  Embersoul — Your hits have a 10% chance to ignite (strong Burning buildup). (weapon, gloves, accessory)
+  Frostguard — Enemies that hit you are Chilled. (armor, shield, inner_garment)
+  Windswift — After dodging, gain 20% more Movement Speed for 2 s. (boots, gloves)
+  Vampiric — Critical hits heal you for 3% of Maximum HP. (weapon, accessory)
+
+Legendary powers
+----------------
+  Bloodthirsty — Kills restore 4% of Maximum HP. (any slot)
+  Conductor's [mage] — Chain Lightning chains 3 additional times against Wet targets. (weapon, helm)
+  Echoing [knight] — Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown). (shield,
+  armor, gloves)
+  Frostbitten — Frozen enemies take 40% more impact damage and shatter on death, chilling nearby foes. (weapon,
+  gloves, accessory)
+  Overflowing [mage] — At maximum Arcane Charge your spells cost no Mana. (weapon, armor, accessory)
+  Pyrelord's [mage] — Burning spreads to one nearby enemy every second. (weapon, helm, accessory)
+  Relentless — Critical hits reduce all skill cooldowns by 0.5 seconds. (weapon, accessory, gloves)
+  Stillwater [mage] — Mana regeneration is tripled while you stand still. (armor, inner_garment, accessory)
+  Stormstriding — Dodging or blinking leaves a crackling trail that Shocks enemies. (boots)
+  Valorous [knight] — Valor never decays and you start fights with 30 Valor. (armor, helm, accessory)
+  Wallbreaker's [knight] — Impact damage from knockback collisions is doubled. (any slot)
+
+Aether powers
+-------------
+  Riftwalker's [mage] — Blink leaves a Frost Nova at the point you left. (boots, helm, accessory)
+  Aether-edged [knight] — Cleave releases a travelling Aether wave (80% of Cleave's damage as Light). (weapon,
+  gloves)
+  Riftborn — Critical attacks release chain lightning at up to 3 nearby enemies (50% of the hit as Lightning).
+  (weapon, gloves, accessory)
+  Dawnbreaker [knight] — Every fifth attack deals massive stagger and releases a radiant shockwave. (weapon)
+  Starwhisper [mage] — Firebolt always splits into three projectiles. (weapon, helm)
+  Winter's — Frozen enemies explode when killed, dealing 30% of their Maximum HP as Ice damage around them. (weapon,
+  gloves, accessory)
+  Aetherheart — Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.
+  (accessory, armor)
+  Stillness — Standing still for 1 s increases Mana regeneration by 150% and HP regeneration by 50%. (accessory,
+  armor)
+
+Relic powers
+------------
+  Alchemist's — Potions restore 30% more. (armor, accessory, gloves, inner_garment)
+  Bramblecoat — Melee attackers take 40 damage. (armor, shield, inner_garment)
+  Unbowed — +12% maximum HP and +8% to all resistances. (armor, helm, shield)
+  Giantbane — 22% more damage against elites, champions and bosses. (weapon, gloves, accessory)
+  Goldrush — +35% Gold Find and +10% Magic Find. (accessory, gloves, boots, helm)
+  Reaper's — Kills restore 20 HP and 10 Mana. (weapon, gloves, accessory)
+  Scholar's — +12% Experience gained. (accessory, helm, armor)
+  Spirit-called — +40% Soul Embers found and your Tempos deal 15% more damage. (accessory, helm)
+  Springwater — +40% HP Regeneration and +40% Mana Regeneration. (any slot)
+  Windrunner's — +8% Movement Speed and 15% faster dodge recovery. (boots)
+
+======================================================================================================================
+10. FACTION LICENSES
+======================================================================================================================
+  Licensed-tier equipment carries one guild license: fixed specialisation bonuses that grow with item level (value
+  at item level 1, + per level).
+  Order of the Dawn: +2% Block Chance (+0.0005/level); 8% increased Valor Gain (+0.002/level)
+  Circle of the Arcanum: 4% increased Cast Speed (+0.001/level); +0.4 Mana Regeneration (+0.05/level)
+  Wardens' Guild: +10 Maximum HP (+1.5/level); +4% Knockback Resistance (+0.001/level)
+  Hunters' Lodge: +1.5% Critical Chance (+0.0004/level); +10 Accuracy (+1.5/level)
+  Merchant League: 12% increased Gold Find (+0.004/level); +5% Magic Find (+0.002/level)
+
+======================================================================================================================
+11. SOCKET CRYSTALS AND THE SOCKET SPECIALISTS (BH-018)
+======================================================================================================================
+  Every piece of equipment can have sockets opened by a Socket Specialist: Ysolde Marr (Marr's Lapidary, Malasugue),
+  Anselm Cray (Cray's Cutting Room, Olivar) and Dagna Flint (Flint's Crystal Cart, Wyman Outpost). The most sockets
+  a piece can hold depends on its tier (section 1): from 1 (Beginner, Common) to 7 (Aether).
+
+Services
+--------
+  Add Socket — opens one more socket. Fee = 400 x (sockets after opening)^2 x (1 + item level / 20).
+  Remove Socket — closes an empty socket. Fee = 200 x open sockets x (1 + item level / 20).
+  Set Crystal — free. A set crystal stays until the piece is purged or crystallized.
+  Purge — breaks every crystal out of the piece: the crystals are destroyed, the piece keeps its (now empty)
+  sockets. Fee = 300 x crystals x (1 + item level / 20).
+  Crystallization — destroys the piece; every crystal set in it returns to the bag. Fee = 10% of the crystals' shop
+  value (at least 100).
+
+  Example Add Socket fees for an item level 20 piece: socket 1: 800, socket 2: 3,200, socket 3: 7,200, socket 4: 12,800, socket 5: 20,000, socket 6: 28,800, socket 7: 39,200
+
+Where crystals come from
+------------------------
+  Every boss always drops one crystal of any grade (higher grades grow likelier with the boss's level). Every
+  miniboss (champion) always drops a Fragment or a Shard. Aetherift is rare: 4% of boss crystals, 1% of champion
+  crystals. The three Specialists sell every family except Aetherift from 5,000 gold a Fragment (Shards,
+  Crystallines and Orbitals unlock with hero level); Aetherift Fragments are sold at a higher level only.
+
+Grades and prices
+-----------------
+  Grade         Tier colour  Shop price  Aetherift price
+  Fragment      Advanced     5,000       15,000
+  Shard         Elite        15,000      45,000
+  Crystalline   Mythical     45,000      135,000
+  Orbital       Legendary    135,000     405,000
+
+Ember — Fire caught in stone.
+-----------------------------
+  Ember Fragment (ember_fragment)
+      In a weapon: +4 Added Fire Damage
+      In armour: +5% Fire Resistance
+      In jewellery: 6% increased Fire Damage; +4% Burning Damage
+  Ember Shard (ember_shard)
+      In a weapon: +10 Added Fire Damage
+      In armour: +9% Fire Resistance
+      In jewellery: 12% increased Fire Damage; +8% Burning Damage
+  Ember Crystalline (ember_crystalline)
+      In a weapon: +20 Added Fire Damage
+      In armour: +14% Fire Resistance
+      In jewellery: 20% increased Fire Damage; +13% Burning Damage
+  Ember Orbital (ember_orbital)
+      In a weapon: +38 Added Fire Damage
+      In armour: +20% Fire Resistance
+      In jewellery: 32% increased Fire Damage; +20% Burning Damage
+
+Aqua — A drop of the deep sea that never dries.
+-----------------------------------------------
+  Aqua Fragment (aqua_fragment)
+      In a weapon: +4 Added Water Damage
+      In armour: +5% Water Resistance; +8 Maximum HP
+      In jewellery: +0.5 Mana Regeneration; +3% Healing Effectiveness
+  Aqua Shard (aqua_shard)
+      In a weapon: +10 Added Water Damage
+      In armour: +9% Water Resistance; +20 Maximum HP
+      In jewellery: +1.2 Mana Regeneration; +6% Healing Effectiveness
+  Aqua Crystalline (aqua_crystalline)
+      In a weapon: +20 Added Water Damage
+      In armour: +14% Water Resistance; +40 Maximum HP
+      In jewellery: +2.2 Mana Regeneration; +10% Healing Effectiveness
+  Aqua Orbital (aqua_orbital)
+      In a weapon: +38 Added Water Damage
+      In armour: +20% Water Resistance; +70 Maximum HP
+      In jewellery: +3.8 Mana Regeneration; +15% Healing Effectiveness
+
+Nova — Starlight that fell and hardened.
+----------------------------------------
+  Nova Fragment (nova_fragment)
+      In a weapon: +4 Added Light Damage
+      In armour: +4% Light Resistance; +4% Dark Resistance
+      In jewellery: +1% Critical Chance
+  Nova Shard (nova_shard)
+      In a weapon: +10 Added Light Damage
+      In armour: +7% Light Resistance; +7% Dark Resistance
+      In jewellery: +2% Critical Chance
+  Nova Crystalline (nova_crystalline)
+      In a weapon: +20 Added Light Damage
+      In armour: +11% Light Resistance; +11% Dark Resistance
+      In jewellery: +3.5% Critical Chance
+  Nova Orbital (nova_orbital)
+      In a weapon: +38 Added Light Damage
+      In armour: +16% Light Resistance; +16% Dark Resistance
+      In jewellery: +5% Critical Chance
+
+Thundra — A thunderhead's heart, still crackling.
+-------------------------------------------------
+  Thundra Fragment (thundra_fragment)
+      In a weapon: +3 Added Lightning Damage
+      In armour: +5% Lightning Resistance
+      In jewellery: 2% increased Attack Speed; 2% increased Cast Speed
+  Thundra Shard (thundra_shard)
+      In a weapon: +9 Added Lightning Damage
+      In armour: +9% Lightning Resistance
+      In jewellery: 4% increased Attack Speed; 4% increased Cast Speed
+  Thundra Crystalline (thundra_crystalline)
+      In a weapon: +19 Added Lightning Damage
+      In armour: +14% Lightning Resistance
+      In jewellery: 7% increased Attack Speed; 7% increased Cast Speed
+  Thundra Orbital (thundra_orbital)
+      In a weapon: +36 Added Lightning Damage
+      In armour: +20% Lightning Resistance
+      In jewellery: 10% increased Attack Speed; 10% increased Cast Speed
+
+Vipera — Venom, crystallised in a serpent's eye.
+------------------------------------------------
+  Vipera Fragment (vipera_fragment)
+      In a weapon: +8 Poison on Hit; +5% Damage over Time
+      In armour: +3% Status Resistance; +4 Thorns
+      In jewellery: +6% Damage over Time
+  Vipera Shard (vipera_shard)
+      In a weapon: +16 Poison on Hit; +10% Damage over Time
+      In armour: +6% Status Resistance; +10 Thorns
+      In jewellery: +12% Damage over Time
+  Vipera Crystalline (vipera_crystalline)
+      In a weapon: +28 Poison on Hit; +16% Damage over Time
+      In armour: +9% Status Resistance; +20 Thorns
+      In jewellery: +20% Damage over Time
+  Vipera Orbital (vipera_orbital)
+      In a weapon: +45 Poison on Hit; +25% Damage over Time
+      In armour: +13% Status Resistance; +35 Thorns
+      In jewellery: +30% Damage over Time
+
+Bloodrift — A rift that drinks. Weapons only.
+---------------------------------------------
+  Bloodrift Fragment (bloodrift_fragment)
+      In a weapon: +1% Life Leech; +2 Life on Kill
+  Bloodrift Shard (bloodrift_shard)
+      In a weapon: +2% Life Leech; +5 Life on Kill
+  Bloodrift Crystalline (bloodrift_crystalline)
+      In a weapon: +3.5% Life Leech; +10 Life on Kill
+  Bloodrift Orbital (bloodrift_orbital)
+      In a weapon: +5.5% Life Leech; +18 Life on Kill
+
+Essencerift — A rift that drinks the mind. Weapons only.
+--------------------------------------------------------
+  Essencerift Fragment (essencerift_fragment)
+      In a weapon: +1% Mana Steal; +0.5 Mana on Hit
+  Essencerift Shard (essencerift_shard)
+      In a weapon: +2% Mana Steal; +1.0 Mana on Hit
+  Essencerift Crystalline (essencerift_crystalline)
+      In a weapon: +3.5% Mana Steal; +2.0 Mana on Hit
+  Essencerift Orbital (essencerift_orbital)
+      In a weapon: +5.5% Mana Steal; +3.0 Mana on Hit
+
+Aetherift — A tear in the world, full of light. Very rare.
+----------------------------------------------------------
+  Aetherift Fragment (aetherift_fragment)
+      In a weapon: 5% increased Damage; +8% Critical Damage; Riftborn Echo: Critical attacks release chain lightning
+      at up to 3 nearby enemies (15% of the hit as Lightning).
+      In armour: +3% All Resistances; +15 Maximum HP; Rift Bulwark: While below 35% HP you take 4% less damage.
+      In jewellery: +2% Cooldown Reduction; 5% increased Elemental Damage; Rift Tempo: Critical hits cut every skill
+      cooldown by 0.1 s.
+  Aetherift Shard (aetherift_shard)
+      In a weapon: 9% increased Damage; +14% Critical Damage; Riftborn Echo: Critical attacks release chain
+      lightning at up to 3 nearby enemies (25% of the hit as Lightning).
+      In armour: +5% All Resistances; +35 Maximum HP; Rift Bulwark: While below 35% HP you take 7% less damage.
+      In jewellery: +3% Cooldown Reduction; 9% increased Elemental Damage; Rift Tempo: Critical hits cut every skill
+      cooldown by 0.2 s.
+  Aetherift Crystalline (aetherift_crystalline)
+      In a weapon: 14% increased Damage; +22% Critical Damage; Riftborn Echo: Critical attacks release chain
+      lightning at up to 3 nearby enemies (35% of the hit as Lightning).
+      In armour: +8% All Resistances; +65 Maximum HP; Rift Bulwark: While below 35% HP you take 10% less damage.
+      In jewellery: +5% Cooldown Reduction; 14% increased Elemental Damage; Rift Tempo: Critical hits cut every
+      skill cooldown by 0.3 s.
+  Aetherift Orbital (aetherift_orbital)
+      In a weapon: 20% increased Damage; +32% Critical Damage; Riftborn Echo: Critical attacks release chain
+      lightning at up to 3 nearby enemies (50% of the hit as Lightning).
+      In armour: +12% All Resistances; +110 Maximum HP; Rift Bulwark: While below 35% HP you take 14% less damage.
+      In jewellery: +7% Cooldown Reduction; 20% increased Elemental Damage; +1 Skill Levels; Rift Tempo: Critical
+      hits cut every skill cooldown by 0.5 s.
+
+======================================================================================================================
+12. WEAPON UPGRADES: ENCHANTMENT AND FORE-TECH
+======================================================================================================================
+  Enchantment (at an Alchemy Table): a rune, rank I-III, turns a share of the weapon's damage into an element and
+  adds elemental gifts. Fore-Tech (at a Forge): a mechanical refit +1..+5, +2% weapon damage per rank plus its own
+  bonus. Both can be on one weapon; a different rune or refit starts over at rank 1.
+
+Enchantments
+------------
+  Flame Etching — A rune of cinders. Part of every hit burns, and Burning hurts more.
+      I: 20% Fire; +4 Added Fire Damage; 10% increased Burning Damage
+      II: 30% Fire; +8 Added Fire Damage; 20% increased Burning Damage
+      III: 40% Fire; +13 Added Fire Damage; 32% increased Burning Damage
+  Frost Etching — A rune of rime. Part of every hit is ice, and Chill builds toward Freeze faster.
+      I: 20% Ice; +4 Added Ice Damage; 10% increased Status Chance
+      II: 30% Ice; +8 Added Ice Damage; 18% increased Status Chance
+      III: 40% Ice; +13 Added Ice Damage; 28% increased Status Chance
+  Storm Etching — A rune of thunder. Part of every hit is lightning, and the weapon moves quicker.
+      I: 20% Lightning; +4 Added Lightning Damage; 3% increased Attack Speed
+      II: 30% Lightning; +8 Added Lightning Damage; 6% increased Attack Speed
+      III: 40% Lightning; +13 Added Lightning Damage; 9% increased Attack Speed
+  Stone Etching — A rune of the deep. Part of every hit is earth; armor gives way and poise breaks sooner.
+      I: 20% Earth; +5% Armor Penetration; 10% increased Stagger Strength
+      II: 30% Earth; +9% Armor Penetration; 20% increased Stagger Strength
+      III: 40% Earth; +14% Armor Penetration; 30% increased Stagger Strength
+  Radiant Etching — A rune of dawn. Part of every hit is light, and healing you give or receive is stronger.
+      I: 20% Light; +4 Added Light Damage; 6% increased Healing Effectiveness
+      II: 30% Light; +8 Added Light Damage; 12% increased Healing Effectiveness
+      III: 40% Light; +13 Added Light Damage; 20% increased Healing Effectiveness
+  Umbral Etching — A rune of dusk. Part of every hit is shadow, and a share of the damage returns as life.
+      I: 20% Dark; +4 Added Dark Damage; +1.5% Life Leech
+      II: 30% Dark; +8 Added Dark Damage; +3% Life Leech
+      III: 40% Dark; +13 Added Dark Damage; +5% Life Leech
+
+Fore-Tech refits
+----------------
+  Whetted Edge (best on any weapon) — Grind and re-hone: more Physical Damage. Per rank: 6% increased Physical
+  Damage
+  Balanced Grip (best on fast weapons) — Rebalance the weight: swings come faster and find weak spots. Per rank: 3%
+  increased Attack Speed; +0.5% Critical Chance
+  Serrated Teeth (best on daggers, claws, axes) — Cut a row of teeth: critical hits hit harder and bleeding bites
+  deeper. Per rank: +8% Critical Damage; 6% increased Damage over Time
+  Weighted Head (best on hammers, great axes, clubs) — Cast in a heavy cap: bigger stagger and harder collisions.
+  Per rank: 8% increased Stagger Strength; 10% increased Impact Damage
+  Piercing Point (best on spears, swords, arrows) — Narrow the tip: ignores part of the target's armor. Per rank:
+  +4% Armor Penetration
+  Fine Sights (best on bows and javelins) — Fit a sighting notch and true the shaft: straighter, faster, deadlier
+  shots. Per rank: +1.2% Critical Chance; 4% increased Projectile Damage; 5% increased Projectile Speed
+
+======================================================================================================================
+13. CONSUMABLES
+======================================================================================================================
+  Lvl Name                         Stack  Value  Effect
+  1   Gilded Relic Cache           20     260    Gold leaf over black iron, warm to the touch. Three pieces of gear, at least one Master-made.
+  1   Health Draught               20     8      Restores 40% of Maximum HP over 2 seconds.
+  1   Mana Draught                 20     8      Restores 50% of Maximum Mana over 2 seconds.
+  1   Minor Health Draught         20     4      Restores 25% of Maximum HP over 2 seconds.
+  1   Minor Mana Draught           20     4      Restores 30% of Maximum Mana over 2 seconds.
+  1   Purifying Salts              10     15     Removes Poison, Burning, Bleeding, Curse and Chill.
+  1   Radiant Relic Cache          20     900    It hums, and the light leaks out between the slats. Four pieces of gear, at least one Mythical — and sometimes far more.
+  1   Scroll of Return             10     30     Opens a path back to the waypoint on the Sanctuary Terrace in Malasugue.
+  1   Town Portal Scroll           10     40     Rips space and time open: a violent vortex that carries you to Malasugue and back. Lasts until you die, dispel it, or open another.
+  1   Worn Relic Cache             20     80     A sealed coffer from the deep places, its lock rusted shut. Open it: two pieces of gear, at least one Elite.
+  3   Scholar's Tea                10     40     +15% Experience gained for 10 minutes.
+  3   Whetstone                    10     25     Hone your weapon: +15% increased Physical Damage and +10% Critical Damage for 5 minutes.
+  4   Firebomb                     10     20     Thrown at the cursor: bursts into flame, burning everything within 3.5 m.
+  4   Swiftfoot Tonic              10     30     20% more Movement Speed for 60 seconds.
+  5   Blinding Flask               10     22     Thrown at the cursor: bursts in a flash that Dazzles everything within 3.5 m (50% less Evasion).
+  5   Featherweight Draught        10     35     +120 Carry Capacity for 5 minutes. The bag feels like it is full of air.
+  5   Ironskin Brew                10     35     30% more Defense and +10% Knockback Resistance for 60 seconds.
+  5   Rejuvenation Elixir          10     45     Instantly restores 35% of HP and Mana.
+  5   Smoke Pellet                 10     25     A choking cloud: +60% Evasion and 30% more Movement Speed for 6 seconds.
+  6   Draught of Vigor             10     34     +15% Maximum HP and 25% more healing and regeneration received for 60 seconds.
+  6   Emberward Potion             10     30     +25% Fire Resistance for 2 minutes.
+  6   Frost Flask                  10     24     Thrown at the cursor: shatters in a freezing cloud that Chills everything within 3.5 m.
+  6   Frostward Potion             10     30     +25% Ice Resistance for 2 minutes.
+  6   Stormward Potion             10     30     +25% Lightning Resistance for 2 minutes.
+  6   Windstep Tonic               10     34     40% more Evasion, 15% more Movement Speed and a quicker dodge for 45 seconds.
+  7   Festering Bomb               10     28     Thrown at the cursor: splashes rot that leaves a Grievous Wound (healing received -25%) on everything within 3.5 m.
+  7   Keen-Eye Tonic               10     38     +12% Critical Chance and +25% Critical Damage for 60 seconds.
+  8   Berserker's Draught          10     45     20% more Attack Speed and 10% more damage taken for 45 seconds.
+  8   Greater Health Draught       20     22     Restores 65% of Maximum HP over 2 seconds.
+  8   Greater Mana Draught         20     22     Restores 80% of Maximum Mana over 2 seconds.
+  8   Recipe: Berserker's Draught  5      90     Use to learn the recipe for Berserker's Draught (Alchemy Table). Found at: Olivar's alchemist, minibosses.
+  8   Recipe: Champion's Armor     5      240    Use to learn the recipe for Champion's Armor (Forge). Found at: Olivar's arms exchange, minibosses.
+  8   Recipe: Champion's Trinket   5      240    Use to learn the recipe for Champion's Trinket (Workbench). Found at: Olivar's jeweller, minibosses.
+  8   Recipe: Champion's Weapon    5      260    Use to learn the recipe for Champion's Weapon (Forge). Found at: Olivar's arms exchange, minibosses.
+  8   Recipe: Sage's Infusion      5      90     Use to learn the recipe for Sage's Infusion (Alchemy Table). Found at: Olivar's alchemist, minibosses.
+  8   Sage's Infusion              10     45     +25% increased Magic Damage and 15% more Cast Speed for 60 seconds.
+  8   Spirit Ward Draught          10     42     +15% to every Resistance and +30% Status Resistance for 90 seconds.
+  10  Elixir of Fortune            5      90     +30% Magic Find and +25% Gold Find for 5 minutes.
+  10  Recipe: Elixir of Fortune    5      220    Use to learn the recipe for Elixir of Fortune (Alchemy Table). Found at: Olivar's alchemist, minibosses.
+  10  Titan's Brew                 10     60     15% more Strength, Agility, Intelligence, Wisdom, Spirit and Dexterity for 60 seconds.
+  12  Phoenix Feather              3      250    Carried, not drunk. When a killing blow lands, the feather burns and you rise with half your HP (once per feather).
+  12  Recipe: Phoenix Feather      5      420    Use to learn the recipe for Phoenix Feather (Alchemy Table). Found at: Olivar's alchemist.
+  14  Recipe: Aetherforged Weapon  5      900    Use to learn the recipe for Aetherforged Weapon (Forge). Found at: Olivar's arms exchange (rare).
+  20  Superior Health Draught      20     55     Restores 90% of Maximum HP over 2 seconds.
+  20  Superior Mana Draught        20     55     Restores all Mana over 2 seconds.
+
+======================================================================================================================
+14. MATERIALS, CURRENCIES AND RELIC CACHES
+======================================================================================================================
+  Name                         Stack  Value  Notes
+  Aether Shard                 999    40     Crystallized Aether. Merchants of rare goods accept nothing else.
+  Arcane Dust                  99     4      Residue of broken enchantments.
+  Ash Sigil                    50     8      A cultist's scorched cloth badge. The stitching still holds a little heat.
+  Beast Hide                   50     3      Tough hide from the corrupted beasts of the forest.
+  Bolt of Linen                99     4      Good cloth from the cove's missing shipment. Nobody is asking for it back.
+  Bone Fragment                99     1      Remains of the restless dead.
+  Brightcap                    99     4      A mushroom that glows in deep shade. Sharpens the mind.
+  Champion Essence             50     60     The distilled will of a champion monster. Needed for Elite and Master work.
+  Cured Leather                50     10     Beast hide scraped, cured and oiled.
+  Ember Core                   50     10     A still-warm heart of cinders.
+  Emberroot                    99     5      A red root that stays warm in the hand. The base of every fire ward.
+  Fire-pot Resin               99     3      Sticky black pitch scraped out of a goblin fire-pot. It burns hot and long.
+  Frost Crystal                50     8      Never melts, even in the forge.
+  Ghoul Bile                   50     6      Foul and caustic. Alchemists wear gloves.
+  Glowcap Spore                50     14     A pinch of glowing dust from the Hollowroot Warren. Alchemists pay well for it.
+  Grave Dust                   99     3      What the restless dead leave behind. Useful in salts and smoke.
+  Iron Shard                   99     2      Salvaged metal. Five make a Steel Ingot at a forge.
+  Mirebloom                    99     3      A blue marsh flower. Brewed, it restores Mana.
+  Ogre Sinew                   50     12     A cord of muscle as thick as a rope and twice as strong.
+  Orc Tusk                     99     7      Heavy yellow ivory. Ground into Ironskin Brew, or bound into armor.
+  Rime Shard                   50     26     Ice from the Rimeglass Barrow. It frosts your fingers even through gloves.
+  Rune Plate                   50     14     A carved plate from an Aether Sentinel's shell. The runes still glow faintly.
+  Shadow Silk                  50     7      Woven by things that hunt in the catacombs.
+  Silverleaf                   99     2      A pale healing herb that grows beside roads and field walls.
+  Slag Ember                   50     22     A lump of slag from the Emberforge Depths that never quite cools.
+  Soul Ember                   9999   0      A spark of a fallen warrior's will. At the Shrine of the Fallen, Veyra Ashgrave burns them to call Tempos: 10 for one call, 90 for ten.
+  Starglass                    50     32     A splinter of the Shattered Orrery's lenses, with a tiny moving star inside.
+  Steel Ingot                  50     18     Forged from salvaged iron. Every weapon and armor recipe starts here.
+  Storm Essence                50     9      A captured crackle of a spent thunderhead.
+  Tide Pearl                   50     18     A grey pearl from the Saltmouth Deeps. Hold it to your ear and it rings like a bell.
+  Wisp Mote                    50     9      A drifting speck of Aether left when a wisp burns out.
+  Wolf Fang                    99     4      A curved fang from a dire wolf. Alchemists grind it into swiftness tonics; smiths set it in blades.
+
+======================================================================================================================
+15. QUEST ITEMS
+======================================================================================================================
+  Hollow Crown Fragment — A shard of Morthar's broken crown. It hums with stolen Aether.
+  Ritual Tablet — Ash-stained stone covered in the Ashen Circle's cipher.
+  Seal of the First Oath — A heavy bronze seal, warm to the touch. It once kept the Hollow Throne shut.
+
+======================================================================================================================
+16. CRAFTING RECIPES
+======================================================================================================================
+
+Armor
+-----
+  Tempered Armor (level 2, 22 gold, Forge): 1 Steel Ingot, 2 Cured Leather, 2 Beast Hide ->
+  Champion's Armor (level 8, 110 gold, Forge, needs its recipe scroll): 3 Steel Ingot, 3 Cured Leather, 1 Champion
+  Essence, 2 Orc Tusk ->
+
+Bombs and Scrolls
+-----------------
+  Firebomb (level 4, 4 gold, Workbench): 2 Fire-pot Resin, 1 Bolt of Linen -> Firebomb x2
+  Frost Flask (level 6, 5 gold, Workbench): 1 Frost Crystal, 1 Fire-pot Resin -> Frost Flask x2
+  Smoke Pellet (level 5, 4 gold, Workbench): 2 Grave Dust, 1 Bolt of Linen -> Smoke Pellet x2
+  Blinding Flask (level 5, 5 gold, Workbench): 1 Wisp Mote, 1 Fire-pot Resin -> Blinding Flask x2
+  Festering Bomb (level 7, 6 gold, Workbench): 1 Ghoul Bile, 1 Grave Dust, 1 Bolt of Linen -> Festering Bomb x2
+  Town Portal Scroll (level 2, 6 gold, Workbench): 1 Bolt of Linen, 1 Wisp Mote -> Town Portal Scroll
+
+Charms
+------
+  Hunter's Charm (level 3, 20 gold, Workbench): 3 Wolf Fang, 1 Cured Leather, 2 Iron Shard ->
+  Champion's Trinket (level 8, 90 gold, Workbench, needs its recipe scroll): 1 Champion Essence, 2 Wisp Mote, 3
+  Arcane Dust, 1 Cured Leather ->
+
+Draughts
+--------
+  Health Draught (level 1, 2 gold, Alchemy Table or Workbench): 2 Silverleaf -> Health Draught x2
+  Mana Draught (level 1, 2 gold, Alchemy Table or Workbench): 2 Mirebloom -> Mana Draught x2
+  Purifying Salts (level 1, 3 gold, Alchemy Table or Workbench): 1 Silverleaf, 2 Grave Dust -> Purifying Salts x2
+  Greater Health Draught (level 6, 8 gold, Alchemy Table): 3 Silverleaf, 1 Wolf Fang -> Greater Health Draught
+  Greater Mana Draught (level 6, 8 gold, Alchemy Table): 3 Mirebloom, 1 Wisp Mote -> Greater Mana Draught
+  Rejuvenation Elixir (level 5, 10 gold, Alchemy Table): 2 Silverleaf, 2 Mirebloom, 1 Brightcap -> Rejuvenation
+  Elixir
+
+Refined Stock
+-------------
+  Cured Leather (level 1, 3 gold, Workbench): 2 Beast Hide -> Cured Leather
+  Steel Ingot (level 1, 4 gold, Forge): 5 Iron Shard -> Steel Ingot
+  Whetstone (level 3, 3 gold, Forge): 3 Iron Shard, 1 Orc Tusk -> Whetstone x2
+
+Tonics and Wards
+----------------
+  Scholar's Tea (level 3, 6 gold, Alchemy Table): 2 Brightcap, 1 Silverleaf -> Scholar's Tea
+  Swiftfoot Tonic (level 4, 6 gold, Alchemy Table): 2 Wolf Fang, 1 Mirebloom -> Swiftfoot Tonic
+  Ironskin Brew (level 5, 8 gold, Alchemy Table): 1 Orc Tusk, 2 Silverleaf -> Ironskin Brew
+  Emberward Potion (level 6, 8 gold, Alchemy Table): 2 Emberroot, 1 Ash Sigil -> Emberward Potion
+  Frostward Potion (level 6, 8 gold, Alchemy Table): 1 Emberroot, 1 Frost Crystal, 1 Silverleaf -> Frostward Potion
+  Stormward Potion (level 6, 8 gold, Alchemy Table): 1 Storm Essence, 2 Brightcap -> Stormward Potion
+  Berserker's Draught (level 8, 14 gold, Alchemy Table, needs its recipe scroll): 1 Ogre Sinew, 2 Emberroot, 1 Ghoul
+  Bile -> Berserker's Draught
+  Sage's Infusion (level 8, 14 gold, Alchemy Table, needs its recipe scroll): 2 Wisp Mote, 2 Mirebloom, 1 Brightcap
+  -> Sage's Infusion
+  Elixir of Fortune (level 10, 40 gold, Alchemy Table, needs its recipe scroll): 1 Champion Essence, 3 Brightcap, 2
+  Arcane Dust -> Elixir of Fortune
+  Draught of Vigor (level 6, 10 gold, Alchemy Table): 3 Silverleaf, 1 Beast Hide, 1 Brightcap -> Draught of Vigor
+  Keen-Eye Tonic (level 7, 12 gold, Alchemy Table): 2 Wolf Fang, 2 Brightcap, 1 Arcane Dust -> Keen-Eye Tonic
+  Windstep Tonic (level 6, 10 gold, Alchemy Table): 2 Wisp Mote, 1 Mirebloom, 1 Wolf Fang -> Windstep Tonic
+  Titan's Brew (level 10, 24 gold, Alchemy Table): 2 Ogre Sinew, 2 Orc Tusk, 2 Emberroot -> Titan's Brew
+  Spirit Ward Draught (level 8, 16 gold, Alchemy Table): 1 Ash Sigil, 1 Storm Essence, 2 Silverleaf -> Spirit Ward
+  Draught
+  Phoenix Feather (level 12, 120 gold, Alchemy Table, needs its recipe scroll): 2 Champion Essence, 3 Ember Core, 4
+  Emberroot -> Phoenix Feather
+
+Weapons
+-------
+  Tempered Weapon (level 2, 25 gold, Forge): 2 Steel Ingot, 1 Cured Leather, 2 Wolf Fang ->
+  Champion's Weapon (level 8, 120 gold, Forge, needs its recipe scroll): 4 Steel Ingot, 1 Champion Essence, 1 Ogre
+  Sinew, 2 Orc Tusk ->
+  Aetherforged Weapon (level 14, 400 gold, Forge, needs its recipe scroll): 5 Steel Ingot, 3 Champion Essence, 2
+  Rune Plate, 5 Aether Shard ->
+
+======================================================================================================================
+17. WHERE TO BUY: MERCHANTS
+======================================================================================================================
+
+Brannoc's Forge — Brannoc (Malasugue Town)
+------------------------------------------
+  Rotating stock: 7 x weapon (sword, greatsword, axe, greataxe, spear, javelin, club, dagger, claw, knuckles, bow)
+  Rotating stock: 1 x shield
+  Rotating stock: 5 x helm, armor, gloves, boots, inner_garment
+  Prices: x1.05 markup, buys at x1.00.
+
+Cray's Cutting Room — Anselm Cray (Olivar)
+------------------------------------------
+  Always: Ember Fragment, Aqua Fragment, Nova Fragment, Thundra Fragment, Vipera Fragment, Bloodrift Fragment,
+  Essencerift Fragment, Ember Shard (lvl 10+), Aqua Shard (lvl 10+), Nova Shard (lvl 10+), Thundra Shard (lvl 10+),
+  Vipera Shard (lvl 10+), Bloodrift Shard (lvl 10+), Essencerift Shard (lvl 10+), Ember Crystalline (lvl 22+), Aqua
+  Crystalline (lvl 22+), Nova Crystalline (lvl 22+), Thundra Crystalline (lvl 22+), Vipera Crystalline (lvl 22+),
+  Bloodrift Crystalline (lvl 22+), Essencerift Crystalline (lvl 22+), Ember Orbital (lvl 36+), Aqua Orbital (lvl
+  36+), Nova Orbital (lvl 36+), Thundra Orbital (lvl 36+), Vipera Orbital (lvl 36+), Bloodrift Orbital (lvl 36+),
+  Essencerift Orbital (lvl 36+), Aetherift Fragment (lvl 18+)
+  Prices: x1.00 markup, buys at x1.05.
+
+Marr's Lapidary — Ysolde Marr (Malasugue Town)
+----------------------------------------------
+  Always: Ember Fragment, Aqua Fragment, Nova Fragment, Thundra Fragment, Vipera Fragment, Bloodrift Fragment,
+  Essencerift Fragment, Ember Shard (lvl 12+), Aqua Shard (lvl 12+), Nova Shard (lvl 12+), Thundra Shard (lvl 12+),
+  Vipera Shard (lvl 12+), Bloodrift Shard (lvl 12+), Essencerift Shard (lvl 12+), Ember Crystalline (lvl 25+), Aqua
+  Crystalline (lvl 25+), Nova Crystalline (lvl 25+), Thundra Crystalline (lvl 25+), Vipera Crystalline (lvl 25+),
+  Bloodrift Crystalline (lvl 25+), Essencerift Crystalline (lvl 25+), Ember Orbital (lvl 40+), Aqua Orbital (lvl
+  40+), Nova Orbital (lvl 40+), Thundra Orbital (lvl 40+), Vipera Orbital (lvl 40+), Bloodrift Orbital (lvl 40+),
+  Essencerift Orbital (lvl 40+), Aetherift Fragment (lvl 20+)
+  Prices: x1.00 markup, buys at x1.00.
+
+Pell's Apothecary — Master Aldous Pell (Olivar)
+-----------------------------------------------
+  Always: Silverleaf, Mirebloom, Emberroot, Brightcap, Greater Health Draught (lvl 6+), Greater Mana Draught (lvl
+  6+), Rejuvenation Elixir (lvl 5+), Elixir of Fortune (lvl 10+), Draught of Vigor (lvl 6+), Windstep Tonic (lvl
+  6+), Keen-Eye Tonic (lvl 7+), Spirit Ward Draught (lvl 8+), Titan's Brew (lvl 10+), Blinding Flask (lvl 5+),
+  Festering Bomb (lvl 7+), Phoenix Feather (lvl 12+), Recipe: Berserker's Draught (lvl 6+), Recipe: Sage's Infusion
+  (lvl 6+), Recipe: Elixir of Fortune (lvl 8+), Recipe: Phoenix Feather (lvl 10+)
+  Prices: x1.25 markup, buys at x1.15; restocks after every cleared stage or miniboss.
+
+Ashby's Arms Exchange — Corvin Ashby (Olivar)
+---------------------------------------------
+  Always: Recipe: Champion's Weapon (lvl 6+), Recipe: Champion's Armor (lvl 6+)
+  Rotating stock: 6 x weapon
+  Rotating stock: 1 x shield
+  Rotating stock: 6 x helm, armor, gloves, boots, inner_garment
+  Prices: x1.90 markup, buys at x1.05; restocks after every cleared stage or miniboss.
+
+Crane's Fine Settings — Elsbeth Crane (Olivar)
+----------------------------------------------
+  Always: Recipe: Champion's Trinket (lvl 6+)
+  Rotating stock: 8 x accessory
+  Prices: x1.80 markup, buys at x1.10; restocks after every cleared stage or miniboss.
+
+Flint's Crystal Cart — Dagna Flint (Wyman Outpost)
+--------------------------------------------------
+  Always: Ember Fragment, Aqua Fragment, Nova Fragment, Thundra Fragment, Vipera Fragment, Bloodrift Fragment,
+  Essencerift Fragment, Ember Shard (lvl 14+), Aqua Shard (lvl 14+), Nova Shard (lvl 14+), Thundra Shard (lvl 14+),
+  Vipera Shard (lvl 14+), Bloodrift Shard (lvl 14+), Essencerift Shard (lvl 14+), Ember Crystalline (lvl 30+), Aqua
+  Crystalline (lvl 30+), Nova Crystalline (lvl 30+), Thundra Crystalline (lvl 30+), Vipera Crystalline (lvl 30+),
+  Bloodrift Crystalline (lvl 30+), Essencerift Crystalline (lvl 30+), Aetherift Fragment (lvl 30+)
+  Prices: x1.00 markup, buys at x1.10.
+
+Seris' Arcana — Seris (Malasugue Town)
+--------------------------------------
+  Always: Mana Draught, Greater Mana Draught (lvl 6+), Arcane Dust, Sage's Infusion (lvl 8+), Berserker's Draught
+  (lvl 8+), Elixir of Fortune (lvl 10+)
+  Rotating stock: 3 x weapon (staff, wand)
+  Rotating stock: 4 x accessory
+  Rotating stock: 2 x helm, armor, inner_garment
+  Prices: x1.10 markup, buys at x0.95.
+
+The Hooded Stranger — Hooded Stranger (Malasugue Town)
+------------------------------------------------------
+  Rotating stock: 4 x weapon, helm, armor, gloves, boots, accessory
+  Prices: x1.60 markup, buys at x0.80.
+
+Tovin's Provisions — Tovin (Malasugue Town)
+-------------------------------------------
+  Always: Health Draught, Mana Draught, Purifying Salts, Scroll of Return (lvl 2+), Greater Health Draught (lvl 6+),
+  Greater Mana Draught (lvl 6+), Rejuvenation Elixir (lvl 9+), Town Portal Scroll, Minor Health Draught, Minor Mana
+  Draught, Superior Health Draught (lvl 20+), Superior Mana Draught (lvl 20+), Swiftfoot Tonic (lvl 4+), Ironskin
+  Brew (lvl 5+), Featherweight Draught (lvl 5+), Whetstone (lvl 3+), Scholar's Tea (lvl 3+), Firebomb (lvl 4+),
+  Frost Flask (lvl 6+), Smoke Pellet (lvl 5+), Emberward Potion (lvl 6+), Frostward Potion (lvl 6+), Stormward
+  Potion (lvl 6+), Draught of Vigor (lvl 6+), Windstep Tonic (lvl 6+), Keen-Eye Tonic (lvl 7+), Spirit Ward Draught
+  (lvl 8+), Titan's Brew (lvl 10+), Blinding Flask (lvl 5+), Festering Bomb (lvl 7+), Iron Shard
+  Rotating stock: 2 x accessory
+  Prices: x1.00 markup, buys at x1.00.
+
+Stonehand's Field Kit — Greta Stonehand (Wyman Outpost)
+-------------------------------------------------------
+  Rotating stock: 5 x weapon
+  Rotating stock: 1 x shield
+  Rotating stock: 5 x helm, armor, gloves, boots, inner_garment
+  Rotating stock: 2 x accessory
+  Prices: x1.00 markup, buys at x1.05.
+
+Wyman Quartermaster — Hobb Tanner (Wyman Outpost)
+-------------------------------------------------
+  Always: Minor Health Draught, Health Draught, Mana Draught, Purifying Salts, Town Portal Scroll, Scroll of Return,
+  Swiftfoot Tonic (lvl 4+), Featherweight Draught (lvl 5+), Firebomb (lvl 4+), Smoke Pellet (lvl 5+), Whetstone (lvl
+  3+), Draught of Vigor (lvl 6+), Blinding Flask (lvl 5+), Iron Shard, Beast Hide, Bolt of Linen, Steel Ingot (lvl
+  3+), Cured Leather (lvl 3+)
+  Prices: x1.00 markup, buys at x1.20.

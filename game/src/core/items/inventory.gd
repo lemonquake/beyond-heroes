@@ -164,7 +164,7 @@ const FILTERS := {
 	"armor": [&"helm", &"armor", &"inner_garment", &"gloves", &"boots"],
 	"accessories": [&"accessory"],
 	"consumables": [&"consumable"],
-	"materials": [&"material"],
+	"materials": [&"material", &"crystal"],
 	"quest": [&"quest"],
 }
 const FILTER_NAMES := {"all": "All", "weapons": "Weapons", "armor": "Armor", "accessories": "Accessories",

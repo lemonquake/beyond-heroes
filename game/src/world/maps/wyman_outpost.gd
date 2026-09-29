@@ -257,12 +257,10 @@ func _lodge_and_register() -> void:
 	light(Vector3(REGISTER.x + 2.3, height_at(REGISTER.x, REGISTER.y) + 1.8, REGISTER.y + 0.2), Color(1.0, 0.75, 0.45), 2.2, 7.0, false, true)
 	keep_clear(REGISTER.x, REGISTER.y, 2.5)
 
-## bh-017: Quartermaster Row (DataTownRows): the quartermaster, the field smith, the forge, the camp kettle and the workbench
-## stand together along one signed street south of the bonfire.
+## bh-018: Quartermaster Row (DataTownRows) south of the bonfire: the quartermaster's tent, the field smith's campaign forge,
+## the crystal prospector's cart, the camp kettle and the workbench.
 func _trade_row() -> void:
 	TownRowBuilder.build(self, def.id)
-	kit("cart_hay", Vector3(4.0, 0, 28.6), 90.0, 1.0, props, true)
-	keep_clear(4.0, 28.6, 3.0)
 
 ## A straw training dummy: post, crossbar and a stuffed sack (solid, so heroes and the player can swing at it).
 func dummy(p: Vector2, yaw: float) -> void:
@@ -364,7 +362,7 @@ func _tower_and_overlook() -> void:
 func _shrine() -> void:
 	var s := SHRINE
 	var sy := height_at(s.x, s.y) + 0.05
-	floor_disc(Vector3(s.x, 0, s.y), 3.6, sy)
+	apron(s, sy, 3.6)
 	teleporter(&"wyman_shrine", Vector3(s.x, sy, s.y), &"sanctuary", &"waypoint", "Malasugue Town")
 	spawn(&"wyman_shrine", Vector3(s.x + 3.2, 0, s.y - 1.6), 110.0, true)
 	for a: float in [0.9, 2.5, 4.1]:

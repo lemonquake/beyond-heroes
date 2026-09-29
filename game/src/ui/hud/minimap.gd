@@ -366,6 +366,13 @@ func _collect_pois() -> void:
 	for n in tree.get_nodes_in_group(&"crafting_station"):
 		if map.is_ancestor_of(n):
 			_pois.append({"node": n, "kind": "craft", "text": String(n.label) if n.label != "" else "Workbench", "col": Color(1.0, 0.7, 0.4), "rim": false})
+	# bh-019: the Hero's Vault and the practice dummy
+	for n in tree.get_nodes_in_group(&"vault_point"):
+		if map.is_ancestor_of(n):
+			_pois.append({"node": n, "kind": "chest", "text": "The Hero's Vault", "col": Color(1.0, 0.86, 0.5), "rim": true})
+	for n in tree.get_nodes_in_group(&"practice_target"):
+		if map.is_ancestor_of(n):
+			_pois.append({"node": n, "kind": "smith", "text": "Practice Dummy", "col": Color(0.95, 0.62, 0.42), "rim": false})
 	for n in tree.get_nodes_in_group(&"treasure_chest"):
 		if map.is_ancestor_of(n) and n.has_method(&"is_ready") and n.is_ready():
 			_pois.append({"node": n, "kind": "chest", "text": "Treasure chest", "col": UITheme.GOLD, "rim": false})
@@ -400,6 +407,10 @@ func _collect_pois() -> void:
 ## [icon kind, colour] for a townsperson.
 static func _npc_role(d: NpcDef) -> Array:
 	var t := d.title.to_lower()
+	if d.services.has(&"lape_trade"):
+		return ["shop", Color(0.78, 0.62, 1.0)]
+	if d.services.has(&"socketing"):
+		return ["shop", Color(0.62, 0.86, 1.0)]
 	if d.services.has(&"tempo_hire"):
 		return ["spirit", DataTempos.SPIRIT_TINT]
 	if d.services.has(&"rest") or t.contains("innkeeper"):

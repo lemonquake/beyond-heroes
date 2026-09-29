@@ -169,6 +169,7 @@ static func bases() -> Array:
 		"flavor": "Crystallized Aether. Merchants of rare goods accept nothing else."}))
 	DataRelics.items(out)         # bh-012: relic caches, Soul Embers, dungeon materials
 	DataCrafting.materials(out)   # bh-007: ingredients, refined stock, champion essence, recipe scrolls
+	DataCrystals.items(out)       # bh-018: socket crystals
 	out.append(_b(&"quest_seal_key", "Seal of the First Oath", &"quest", "quest_seal_key", {"sellable": false, "value": 0,
 		"flavor": "A heavy bronze seal, warm to the touch. It once kept the Hollow Throne shut."}))
 	out.append(_b(&"quest_tablet", "Ritual Tablet", &"quest", "quest_tablet", {"sellable": false, "value": 0,
@@ -215,7 +216,7 @@ static func _consumables(out: Array) -> void:
 		[&"scholars_tea", "Scholar's Tea", "tea_scholar", 3, 40, 10, 0.2, {"buff": &"elixir_scholar", "duration": 600.0},
 			"+15% Experience gained for 10 minutes.", 30],
 		[&"featherweight_draught", "Featherweight Draught", "draught_feather", 5, 35, 10, 0.1, {"buff": &"elixir_feather", "duration": 300.0},
-			"+60 Carry Capacity for 5 minutes. The bag feels like it is full of air.", 45],
+			"+120 Carry Capacity for 5 minutes. The bag feels like it is full of air.", 45],
 		[&"whetstone", "Whetstone", "whetstone", 3, 25, 10, 0.4, {"buff": &"elixir_whetstone", "duration": 300.0},
 			"Hone your weapon: +15% increased Physical Damage and +10% Critical Damage for 5 minutes.", 50],
 		[&"firebomb", "Firebomb", "firebomb", 4, 20, 10, 0.4, {"throw": {"element": Elements.FIRE, "radius": 3.5, "base": 22.0, "per_level": 7.0,

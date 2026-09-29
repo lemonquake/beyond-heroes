@@ -4,8 +4,8 @@ extends SettlementBuilder
 ## for Wyman Outpost.
 ##
 ## A palisade on three sides, the lake on the fourth. The Lake Shore Road enters by the west gate and runs to a cobbled
-## plaza with a well and market stalls; Exchange Row leads east to Ashby's Arms Exchange (a trading house with racks of
-## arms and armor outside), Apothecary Lane west to Pell's garden and alchemy table, Market Row to Crane's jewel stall,
+## plaza with a well and market stalls; Exchange Row leads east to Taicho's Arms Exchange (a trading house with racks of
+## arms and armor outside), Apothecary Lane west to Angkol Les' garden and alchemy table, Market Row to Crane's jewel stall,
 ## the Dock Walk north down to the piers, and the Terrace Steps to the waypoint above the water. The road polylines are
 ## DataIsland.ROADS (terrain beds, the atlas and the route planner share them).
 
@@ -44,7 +44,7 @@ func compose() -> void:
 	_trade_row()
 	_houses()
 	_docks_and_terrace()
-	# bh-013: the sunken tomb stair by the market and the counting-house cellar behind Ashby's
+	# bh-013: the sunken tomb stair by the market and the counting-house cellar behind Taicho's
 	for gid in DataDungeons.gates_on(def.id):
 		var gs: Dictionary = DataDungeons.get_def(gid).surface
 		dungeon_gate(gid, gs.pos, gs.yaw)
@@ -217,8 +217,8 @@ func _apothecary() -> void:
 		decor("fern", Vector3(p.x, 0, p.y), rng.randf() * 360.0, 0.7)
 	kit("wood_fence", Vector3(-24.0, 0, -0.4), 0.0, 1.0, props, true)
 
-## bh-017: Market Row (DataTownRows): the jeweller, the apothecary, the arms broker, the alchemy table, the workbench and the forge
-## stand together along one signed street south-west of the plaza (Ashby's warehouse stays on the east side).
+## bh-018: Market Row (DataTownRows) south-west of the plaza: the jeweller's canopy, the apothecary, the arms broker's pavilion,
+## the gem-cutter's kiosk, the alchemy table, the workbench and the forge (Taicho's warehouse stays on the east side).
 func _trade_row() -> void:
 	TownRowBuilder.build(self, def.id)
 	kit("cart_hay", Vector3(-5.2, 0, 33.6), 0.0, 1.0, props, true)
@@ -263,7 +263,7 @@ func _docks_and_terrace() -> void:
 	# the waypoint terrace: a stone disc above the water, standing stones, lanterns
 	var s := SHRINE
 	var sy := height_at(s.x, s.y) + 0.05
-	floor_disc(Vector3(s.x, 0, s.y), 4.2, sy)
+	apron(s, sy, 4.2)
 	teleporter(&"olivar_shrine", Vector3(s.x, sy, s.y), &"sanctuary", &"waypoint", "Malasugue Town")
 	spawn(&"olivar_shrine", Vector3(s.x + 3.0, 0, s.y + 2.4), 150.0, true)
 	for a: float in [0.6, 2.2, 3.9, 5.3]:

@@ -46,8 +46,8 @@ static func _hollis() -> NpcDef:
 						"You have brought us **{clears}** such tidings so far. Every one of them is a new stall of goods. The next is up to you."],
 					"next": "hub"},
 				"people": {"text": [
-						"**Corvin Ashby** at the Arms Exchange sells advanced weapons and armor. **Elsbeth Crane** at Fine Settings sells rings, amulets and charms. They and the apothecary, the alchemy table, the workbench and the forge all stand along **Market Row**, south-west of the plaza. Both cost a fortune and are worth it.",
-						"**Master Aldous Pell** brews at his alchemy table west of the plaza; he sells herbs and recipe scrolls too. **Wren Talbot** keeps the docks, and **Pip** keeps everyone's secrets and none of his own."],
+						"**Taicho** at the Arms Exchange sells advanced weapons and armor. **Elsbeth Crane** at Fine Settings sells rings, amulets and charms. They and the apothecary, the alchemy table, the workbench and the forge all stand along **Market Row**, south-west of the plaza. Both cost a fortune and are worth it.",
+						"**Angkol Les** brews at his alchemy table west of the plaza; he sells herbs and recipe scrolls too. **Wren Talbot** keeps the docks, and **Pip** keeps everyone's secrets and none of his own."],
 					"next": "hub"},
 				"beyond": {"text": [
 						"South, the **Watch Road** runs to **Wyman Outpost**, the hero camp above Reedwater Marsh. Rest at their bonfire and you will have a place to wake if the road goes badly.",
@@ -58,14 +58,14 @@ static func _hollis() -> NpcDef:
 
 # ------------------------------------------------------------------------------------------------ arms broker
 static func _corvin() -> NpcDef:
-	return NpcDef.make(&"corvin", "Corvin Ashby", {"title": "Arms Broker", "portrait": _p("arms_broker", "merchant"), "map": &"olivar",
+	return NpcDef.make(&"corvin", "Taicho", {"title": "Arms Broker", "portrait": _p("arms_broker", "merchant"), "map": &"olivar",
 		"position": DataTownRows.npc_spot(&"corvin").position, "yaw": DataTownRows.npc_spot(&"corvin").yaw, "model": TOWN % "merchant", "tint": Color(0.32, 0.18, 0.14), "shop": &"olivar_arms",
 		"idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
 			"nodes": {
 				"first": {"text": [
-						"Corvin Ashby, Arms Exchange. Nothing on my racks is Common, and nothing on my racks is cheap.",
+						"Taicho, Arms Exchange. Nothing on my racks is Common, and nothing on my racks is cheap.",
 						"I buy what the barges bring and I sell it once. When you come back with news of a cleared stage or a champion's head, the racks change. Come often."],
 					"choices": [{"text": "Show me the racks.", "next": "end", "actions": [{"open_shop": "olivar_arms"}]},
 						{"text": "Why so expensive?", "next": "price"}, _end("Another time.")]},
@@ -104,14 +104,14 @@ static func _elsbeth() -> NpcDef:
 
 # ------------------------------------------------------------------------------------------------ alchemist
 static func _aldous() -> NpcDef:
-	return NpcDef.make(&"aldous", "Master Aldous Pell", {"title": "Alchemist", "portrait": _p("alchemist", "keeper"), "map": &"olivar",
+	return NpcDef.make(&"aldous", "Angkol Les", {"title": "Alchemist", "portrait": _p("alchemist", "keeper"), "map": &"olivar",
 		"position": DataTownRows.npc_spot(&"aldous").position, "yaw": DataTownRows.npc_spot(&"aldous").yaw, "model": TOWN % "scholar", "tint": Color(0.2, 0.36, 0.26), "shop": &"olivar_alchemy",
 		"idle_anims": IDLES,
 		"graph": {
 			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
 			"nodes": {
 				"first": {"text": [
-						"Ah! Mind the kettle. Aldous Pell, master of this table and of very little else.",
+						"Ah! Mind the kettle. Angkol Les, master of this table and of very little else.",
 						"Everything the monsters out there carry is an ingredient, if you know what to do with it. **Wolf fangs** for swiftness. **Orc tusks** for iron skin. **Grave dust** for salts. And herbs: **Silverleaf** by the roads, **Mirebloom** by the water, **Emberroot** where it is warm, **Brightcap** in the dark.",
 						"Bring me the parts and I will lend you my table. Or buy from my shelves, if you are in a hurry."],
 					"actions": [{"give_item": "silverleaf", "count": 4}, {"relationship": 4}],

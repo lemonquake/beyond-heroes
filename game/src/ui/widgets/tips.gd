@@ -188,6 +188,38 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		v.add_child(lbl("+%d%% weapon damage (tempered)" % roundi(DataUpgrades.TEMPER_PER_RANK * it.foretech_rank * 100.0), 15, Color(td.color, 0.9)))
 		for m in DataUpgrades.tech_mods(it.foretech, it.foretech_rank):
 			v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, m.value), 15, Color(td.color, 0.9)))
+	# bh-018: sockets and the crystals set in them
+	if it.sockets > 0:
+		v.add_child(gap(2))
+		var grp := DataCrystals.group_for(it.base.category)
+		v.add_child(lbl("Sockets %d / %d" % [Sockets.filled(it), it.sockets], 16, Color(0.62, 0.86, 1.0), UITheme.body_bold()))
+		for g in it.gems:
+			if String(g) == "":
+				v.add_child(lbl("  ◇ Empty socket", 15, UITheme.TEXT_MUTED))
+				continue
+			var fam := DataCrystals.family_of(StringName(g))
+			var fcol: Color = DataCrystals.FAMILIES[fam].color if fam != &"" else UITheme.TEXT
+			var cb := DB.item_base(StringName(g))
+			v.add_child(lbl("  ◆ %s" % (cb.display_name if cb else String(g)), 15, fcol, UITheme.body_bold()))
+			for line in DataCrystals.lines(StringName(g), grp):
+				v.add_child(lbl("      " + line, 14, Color(fcol, 0.85)))
+	elif it.is_equipment() and Sockets.max_sockets(it) > 0:
+		v.add_child(lbl("No sockets (a Socket Specialist can open up to %d)" % Sockets.max_sockets(it), 14, UITheme.TEXT_MUTED))
+	# bh-018: a crystal's gifts in each kind of gear
+	if it.base.category == &"crystal":
+		var fam2 := DataCrystals.family_of(it.base.id)
+		var fcol2: Color = DataCrystals.FAMILIES[fam2].color if fam2 != &"" else UITheme.TEXT
+		v.add_child(lbl(it.base.flavor, 15, UITheme.TEXT))
+		for grp2 in [DataCrystals.WEAPON, DataCrystals.ARMOR, DataCrystals.JEWEL]:
+			var ls := DataCrystals.lines(it.base.id, grp2)
+			if ls.is_empty() or (DataCrystals.weapon_only(fam2) and grp2 != DataCrystals.WEAPON):
+				continue
+			v.add_child(gap(2))
+			v.add_child(lbl(DataCrystals.GROUP_NAMES[grp2], 15, fcol2, UITheme.body_bold()))
+			for line in ls:
+				v.add_child(lbl("  " + line, 15, Color(fcol2, 0.9)))
+		if DataCrystals.weapon_only(fam2):
+			v.add_child(lbl("Fits weapons only.", 14, UITheme.TEXT_DIM))
 	if it.license != &"":
 		var lic: Dictionary = DB.licenses.get(it.license, {})
 		v.add_child(gap(2))
@@ -284,7 +316,10 @@ static func _type_line(it: ItemInstance) -> String:
 		kind = wt.display_name if wt else "Weapon"
 	else:
 		kind = {&"shield": "Shield", &"helm": "Helm", &"armor": "Armor", &"inner_garment": "Inner Garment", &"gloves": "Gloves",
-			&"boots": "Boots", &"accessory": "Accessory", &"consumable": "Consumable", &"material": "Material", &"quest": "Quest Item"}.get(it.base.category, "Item")
+			&"boots": "Boots", &"accessory": "Accessory", &"consumable": "Consumable", &"material": "Material", &"quest": "Quest Item",
+			&"crystal": "Socket Crystal"}.get(it.base.category, "Item")
+	if it.base.category == &"crystal":
+		return "%s · Grade %d of 4" % [kind, DataCrystals.grade_of(it.base.id) + 1]
 	if it.is_equipment():
 		# a proper name hides the base: say what it is underneath (bh-015)
 		if it.custom_name != "" and it.base.unique_name == "":

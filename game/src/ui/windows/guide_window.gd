@@ -36,13 +36,14 @@ const CONTROLS := [
 
 const STEPS := [
 	["Speak to Elder Maelis", "She waits by the hearth, just down the Sanctuary Terrace, and has draughts for a new arrival."],
-	["Stock up", "Tovin at the market sells draughts, salts and scrolls. Brannoc's forge by the east yard sells and makes weapons and armour."],
+	["Stock up", "Anton at the market sells draughts, salts and scrolls. Brannoc's forge by the east yard sells and makes weapons and armour."],
 	["Register as a hero", "The Swordfin Hall and the Lantern House register heroes. Your tier decides the finest gear you may wear; promotions need levels, fees and deeds."],
 	["Bind a second Tempo", "Veyra Ashgrave at the Shrine of the Fallen, east of the terrace stair. You can carry two Tempos."],
 	["Rest", "A night at the Salted Marlin restores you and your Tempos and leaves you Well Rested: more experience for a while."],
 	["Travel", "Waypoint shrines carry you between the places you have woken them in. The Map can track a route to any known place; follow the directions on the right of the screen."],
 	["If you fall", "You wake at the entrance of the place you fell, a little lighter in the purse, or at your checkpoint: rest at the bonfire of Wyman Outpost to set it. Your fallen Tempos stay fallen until Veyra calls them back."],
-	["Craft", "Monsters drop parts and herbs grow by the roads. Use a forge, an alchemy table or a workbench (Brannoc's anvil, Pell's table in Olivar, Wyman Outpost's camp) to turn them into draughts, bombs and fine gear, or salvage gear you do not need."],
+	["Craft", "Monsters drop parts and herbs grow by the roads. Use a forge, an alchemy table or a workbench (Brannoc's anvil, Angkol Les' table in Olivar, Wyman Outpost's camp) to turn them into draughts, bombs and fine gear, or salvage gear you do not need."],
+	["Trade with Lape, store in the Vault", "Past Brannoc's smithy, Lape the Ancient appraises up to three of your items and offers one of three special-crafted, licensed pieces for them, or gold. The Hero's Vault beside him (and in Olivar and Wyman Outpost) keeps items for all of your heroes; a practice dummy stands near each vault for testing your damage."],
 	["Clear stages, hunt champions", "Clear every camp of a place in one outing, or defeat a named champion, and Olivar's merchants put out new stock: advanced arms, jewels and draughts at a premium."],
 	["Level up", "Each level brings skill points, talent points and attribute points. Spend them in the Skills, Talents and Character windows."],
 ]
