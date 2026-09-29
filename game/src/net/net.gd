@@ -21,15 +21,19 @@ extends Node
 ##             when out of sight) and the world map shows where everyone is (bh-015).
 ##   Revive    a fallen hero can be stood up again by a friend: stand beside them and press Interact (bh-011).
 ##   Ping      G (or the touch Ping button) marks a spot every player sees for a few seconds (bh-011).
+##   Trade     (bh-016) click an ally (or use the party frames / Multiplayer window) and send a Trade Request; if they
+##             accept, both put items from their bags and gold on the table, each accepts the same two offers, and each
+##             machine swaps on its own hero (TradeRules). Any change to either offer clears both acceptances.
 ##   Chat      the chat box is shared; joins and leaves also show as notices.
 ## Everything else (inventory, shops, crafting, dialogue, saving) stays per player, on their own machine.
 
 signal state_changed
 signal peers_changed
 signal lan_games_changed
+signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 4                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
-                                     # 4 (bh-015): independent exploring, party summons
+const PROTOCOL := 5                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+                                     # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades
 const SUMMON_WAIT := 30.0            # seconds a summoned player has to answer before it counts as Stay
 const SUMMON_COOLDOWN := 8.0
 const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
@@ -82,6 +86,11 @@ var _share_t := 0.0
 var _arrived := false                # client: has reached the host once after joining (later host moves do not drag it)
 var _summon := {}                    # client: the summons being asked about {map, t}
 var _summon_t := -99.0               # host: when the party was last summoned
+## The trade in progress ({} = none): {peer, name, phase ("asking" | "open"), mine {gold, items}, theirs {gold, items},
+## rev, their_rev, my_ok, their_ok, committing, their_ready, sent (wire form of the offer last sent)}.
+var trade := {}
+var _trade_asked_t := -99.0
+var _trade_incoming := {}            # a request being asked about: {peer, name, t}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -208,6 +217,8 @@ func leave(reload := true) -> void:
 	_host_shared = false
 	_arrived = false
 	_summon = {}
+	_trade_incoming = {}
+	trade_reset()
 	_stop_broadcast()
 	_clear_avatars()
 	_clear_replicas()
@@ -227,6 +238,10 @@ func _on_peer_disconnected(id: int) -> void:
 	status.erase(id)
 	_known.erase(id)
 	_remove_avatars_of(id)
+	if int(trade.get("peer", -1)) == id:
+		trade_reset("%s left the game. The trade was cancelled." % who)
+	if int(_trade_incoming.get("peer", -1)) == id:
+		_trade_incoming = {}
 	if is_host():
 		_chat_system("%s left." % who, true)
 		_rpc_peers()
@@ -1219,6 +1234,231 @@ func revive_local(by: String) -> bool:
 	Events.player_respawned.emit()
 	Events.notify.emit("%s revived you!" % by, &"loot")
 	return true
+
+# ---- Trade (bh-016) -------------------------------------------------------------------------------------------------
+
+func in_trade() -> bool:
+	return not trade.is_empty()
+
+## "" when a trade request to `peer` can be sent now, otherwise why not.
+func trade_error(peer: int) -> String:
+	if not is_active() or connecting:
+		return "Trading needs a multiplayer game."
+	if peer == my_id() or not peers.has(peer):
+		return "Nobody by that name is in the party."
+	if not Game.in_session or Game.hero == null or Game.travelling:
+		return "You cannot trade right now."
+	if in_trade():
+		return "You are already trading."
+	var p := Game.player as Player
+	if p == null or not p.alive:
+		return "You cannot trade while fallen."
+	if Time.get_ticks_msec() * 0.001 - _trade_asked_t < 3.0:
+		return "Wait a moment before asking again."
+	return ""
+
+## Ask "Send a Trade Request?" for an ally (clicking them, their party frame, the Multiplayer window).
+func trade_prompt(peer: int) -> void:
+	var err := trade_error(peer)
+	if err != "":
+		Events.notify.emit(err, &"error")
+		return
+	var info: Dictionary = peers[peer]
+	var cls := DB.class_def(StringName(info.get("cls", "knight")))
+	Game.ui_root.ask("Trade", "Send %s (Level %d %s) a Trade Request?\nYou each choose items and gold; nothing changes hands until you both accept." % [
+			info.get("name", "this hero"), int(info.get("level", 1)), cls.display_name if cls else "Hero"],
+		func() -> void: request_trade(peer), "Send Request")
+
+## Send `peer` a Trade Request. Returns "" or the reason it was not sent.
+func request_trade(peer: int) -> String:
+	var err := trade_error(peer)
+	if err != "":
+		Events.notify.emit(err, &"error")
+		return err
+	_trade_asked_t = Time.get_ticks_msec() * 0.001
+	var who := String(peers[peer].get("name", "that hero"))
+	trade = {"peer": peer, "name": who, "phase": "asking", "mine": {"gold": 0, "items": []}, "theirs": {"gold": 0, "items": []},
+		"rev": 0, "their_rev": 0, "my_ok": false, "their_ok": false, "committing": false, "their_ready": false, "sent": {}}
+	_trade_ask.rpc_id(peer, String(Game.hero.hero_name))
+	Events.notify.emit("Trade Request sent to %s." % who, &"info")
+	trade_changed.emit()
+	var serial := _trade_asked_t
+	get_tree().create_timer(35.0).timeout.connect(func() -> void:
+		if in_trade() and trade.phase == "asking" and _trade_asked_t == serial:
+			trade_cancel("%s did not answer." % who))
+	return ""
+
+@rpc("any_peer", "reliable")
+func _trade_ask(who: String) -> void:
+	if not is_active():
+		return
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from):
+		return
+	var p := Game.player as Player
+	if not Game.in_session or Game.travelling or in_trade() or not _trade_incoming.is_empty() or p == null or not p.alive \
+			or Game.ui_root == null or not is_instance_valid(Game.ui_root):
+		_trade_reply.rpc_id(from, false, "%s cannot trade right now." % String(peers.get(my_id(), {}).get("name", "That hero")))
+		return
+	var serial := Time.get_ticks_msec()
+	_trade_incoming = {"peer": from, "name": who, "t": serial}
+	Audio.play_ui(&"ui_open")
+	var info: Dictionary = peers[from]
+	Game.ui_root.confirm.ask("Trade Request", "%s (Level %d) wants to trade with you. Gold and items are swapped only when you both accept the same offers." % [
+			who, int(info.get("level", 1))],
+		func() -> void: _trade_answer(true, serial), "Accept", false, null, "Decline")
+	var c: Node = Game.ui_root.confirm
+	if c.has_signal(&"cancelled"):
+		c.connect(&"cancelled", func() -> void: _trade_answer(false, serial), CONNECT_ONE_SHOT)
+	Events.notify.emit("%s wants to trade." % who, &"info")
+	get_tree().create_timer(30.0).timeout.connect(func() -> void:
+		if _trade_incoming.get("t", -1) == serial:
+			if Game.ui_root and is_instance_valid(Game.ui_root) and Game.ui_root.confirm.visible:
+				Game.ui_root.confirm.visible = false
+			_trade_answer(false, serial))
+
+func _trade_answer(go: bool, serial: int) -> void:
+	if _trade_incoming.get("t", -1) != serial:
+		return
+	var from: int = _trade_incoming.peer
+	var who: String = _trade_incoming.name
+	_trade_incoming = {}
+	if not peers.has(from):
+		return
+	var p := Game.player as Player
+	if go and (in_trade() or p == null or not p.alive):
+		go = false
+	_trade_reply.rpc_id(from, go, "" if go else "%s declined the trade." % String(peers.get(my_id(), {}).get("name", "That hero")))
+	if go:
+		trade = {"peer": from, "name": who, "phase": "open", "mine": {"gold": 0, "items": []}, "theirs": {"gold": 0, "items": []},
+			"rev": 0, "their_rev": 0, "my_ok": false, "their_ok": false, "committing": false, "their_ready": false, "sent": {}}
+		trade_changed.emit()
+		Game.ui_root.open(&"trade")
+
+@rpc("any_peer", "reliable")
+func _trade_reply(go: bool, why: String) -> void:
+	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id() or trade.phase != "asking":
+		return
+	if not go:
+		trade_reset(why if why != "" else "%s declined the trade." % trade.name)
+		return
+	trade.phase = "open"
+	trade_changed.emit()
+	Game.ui_root.open(&"trade")
+
+## Put `gold` and `items` (ItemInstances from your bag) on the table. Clears both acceptances. Returns "" or why not.
+func trade_set_offer(gold: int, items: Array) -> String:
+	if not in_trade() or trade.phase != "open" or trade.committing:
+		return "There is no open trade."
+	var offer := {"gold": gold, "items": items}
+	var err := TradeRules.offer_error(Game.hero, offer)
+	if err != "":
+		return err
+	trade.mine = offer
+	trade.rev = int(trade.rev) + 1
+	trade.my_ok = false
+	trade.their_ok = false
+	trade.sent = TradeRules.to_wire(offer)
+	_trade_offer.rpc_id(int(trade.peer), int(trade.rev), trade.sent)
+	trade_changed.emit()
+	return ""
+
+@rpc("any_peer", "reliable")
+func _trade_offer(rev: int, wire: Dictionary) -> void:
+	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id() or trade.phase != "open" or trade.committing:
+		return
+	trade.theirs = TradeRules.read_incoming(wire)
+	trade.their_rev = rev
+	trade.my_ok = false
+	trade.their_ok = false
+	Audio.play_ui(&"ui_click")
+	trade_changed.emit()
+
+## Accept (or take back the acceptance of) the two offers as they stand.
+func trade_accept(on: bool) -> void:
+	if not in_trade() or trade.phase != "open" or trade.committing:
+		return
+	if on:
+		var err := TradeRules.swap_error(Game.hero, trade.mine, trade.theirs)
+		if err != "":
+			Events.notify.emit(err, &"error")
+			return
+	trade.my_ok = on
+	_trade_ok.rpc_id(int(trade.peer), on, int(trade.rev), int(trade.their_rev))
+	trade_changed.emit()
+	_trade_check()
+
+@rpc("any_peer", "reliable")
+func _trade_ok(on: bool, their_rev: int, my_rev_seen: int) -> void:
+	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id() or trade.phase != "open" or trade.committing:
+		return
+	# only counts when it was given for the very offers on the table here
+	if their_rev != int(trade.their_rev) or my_rev_seen != int(trade.rev):
+		return
+	trade.their_ok = on
+	trade_changed.emit()
+	_trade_check()
+
+## Both accepted: check this hero can honour it, tell the other side, and swap once both are ready.
+func _trade_check() -> void:
+	if not in_trade() or not trade.my_ok or not trade.their_ok or trade.committing:
+		return
+	var err := TradeRules.swap_error(Game.hero, trade.mine, trade.theirs)
+	if err == "" and TradeRules.to_wire(trade.mine) != trade.sent:
+		err = "Your offer changed while the trade was open."
+	if err != "":
+		trade_cancel(err)
+		return
+	trade.committing = true
+	_trade_ready.rpc_id(int(trade.peer))
+	trade_changed.emit()
+	_trade_finish()
+
+@rpc("any_peer", "reliable")
+func _trade_ready() -> void:
+	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id():
+		return
+	trade.their_ready = true
+	_trade_finish()
+
+func _trade_finish() -> void:
+	if not in_trade() or not trade.committing or not trade.their_ready:
+		return
+	var mine: Dictionary = trade.mine
+	var theirs: Dictionary = trade.theirs
+	var who: String = trade.name
+	var err := TradeRules.swap(Game.hero, mine, theirs)
+	if err != "":
+		trade_cancel(err)
+		return
+	Events.notify.emit("Trade complete with %s: you gave %s and received %s." % [who, TradeRules.describe(mine), TradeRules.describe(theirs)], &"loot")
+	Audio.play_ui(&"level_up")
+	trade_reset("")
+	Game.save_now()
+
+## End the trade from here and tell the other player.
+func trade_cancel(why := "") -> void:
+	if not in_trade():
+		return
+	var peer := int(trade.peer)
+	if peers.has(peer) and is_active():
+		_trade_cancelled.rpc_id(peer, "%s cancelled the trade." % String(peers.get(my_id(), {}).get("name", "The other hero")) if why == "" else why)
+	trade_reset(why if why != "" else "You cancelled the trade.")
+
+@rpc("any_peer", "reliable")
+func _trade_cancelled(why: String) -> void:
+	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id():
+		return
+	trade_reset(why)
+
+## Drop the trade state and close the window; `why` (if any) is shown as a notice.
+func trade_reset(why := "") -> void:
+	var had := in_trade()
+	trade = {}
+	if had:
+		trade_changed.emit()
+		if why != "":
+			Events.notify.emit(why, &"info")
 
 # ---- Ping markers (bh-011) ----------------------------------------------------------------------------------------
 

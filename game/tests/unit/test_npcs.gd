@@ -92,7 +92,7 @@ func _check_grounded(map: MapRoot, where: String) -> void:
 
 func test_data() -> void:
 	var interiors := _interior_ids()
-	eq(interiors.size(), 8, "eight interiors")
+	eq(interiors.size(), 9, "nine interiors (bh-016: the Guild House)")
 	for id in interiors:
 		var d := DB.map_def(id)
 		ok(d != null and d.interior and d.is_town and d.parent_map == &"sanctuary", "%s is a town interior of sanctuary" % id)

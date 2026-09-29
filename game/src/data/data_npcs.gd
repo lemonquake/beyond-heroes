@@ -178,7 +178,7 @@ static func _brannoc() -> NpcDef:
 # ------------------------------------------------------------------------------------------------ Seris
 static func _seris() -> NpcDef:
 	return NpcDef.make(&"seris", "Seris", {"title": "Aether Mystic", "portrait": PORTRAIT % "mystic",
-		"position": Vector3(-9.2, 0, -5.0), "yaw": 45.6, "model": MAGE, "tint": Color(0.2, 0.35, 0.55), "shop": &"seris_arcana",
+		"position": Vector3(7.6, 0, -7.6), "yaw": -34.0, "model": MAGE, "tint": Color(0.2, 0.35, 0.55), "shop": &"seris_arcana",
 		"services": [&"mystic_heal", &"respec"], "idle_anims": [&"idle", &"idle_mage"],
 		"graph": {
 			"entries": [

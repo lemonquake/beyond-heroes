@@ -107,7 +107,7 @@ func modifiers() -> Array:
 		var n := tree.node(id)
 		if n.get("kind", "") == "passive":
 			continue
-		var r: int = ranks[id]
+		var r := tree.power_of(id, ranks[id])
 		for m in n.get("mods", []):
 			out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(m[2]) * r, "Talent: %s" % n.name))
 		var fl: Dictionary = n.get("flags", {})
@@ -123,7 +123,7 @@ func passive_modifiers(bonus := 0) -> Array:
 		var n := tree.node(id)
 		if n.get("kind", "") != "passive" or int(ranks[id]) <= 0:
 			continue
-		var r: int = int(ranks[id]) + bonus
+		var r := tree.power_of(id, int(ranks[id]) + bonus)
 		for m in n.get("mods", []):
 			out.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, passive_value(m, r), n.name))
 		var fl: Dictionary = n.get("flags", {})
@@ -132,10 +132,10 @@ func passive_modifiers(bonus := 0) -> Array:
 	return out
 
 ## [stat, op, base, per_rank] at rank r.
-static func passive_value(m: Array, r: int) -> float:
+static func passive_value(m: Array, r: float) -> float:
 	var base := float(m[2])
 	var per := float(m[3]) if m.size() > 3 else 0.0
-	return base + per * float(maxi(r, 1) - 1)
+	return base + per * (maxf(r, 1.0) - 1.0)
 
 func to_dict() -> Dictionary:
 	var d := {}

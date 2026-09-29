@@ -46,6 +46,9 @@ static func build(h: HeroData, lvl: int) -> void:
 			for n in st.tree.nodes:
 				if st.can_rank_up(n.id, pts, lvl) != "":
 					continue
+				# bh-016: levels run to 25, but this rule measures the build a player reaches at the old cap
+				if st.rank(n.id) >= int(n.get("base_rank", n.get("max_rank", 1))):
+					continue
 				var kind: String = n.get("kind", "skill")
 				var s: SkillDef = DB.skill(n.get("skill", n.id)) if kind == "skill" else null
 				var support := kind == "passive" or (s != null and s.is_aura())

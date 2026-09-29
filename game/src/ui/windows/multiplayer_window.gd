@@ -193,6 +193,13 @@ func _fill_party() -> void:
 			(UITheme.BAD if ping > 250 else UITheme.TEXT_DIM), UITheme.body_font())
 		sub.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		h.add_child(sub)
+		if id != Net.my_id():
+			var tid: int = id
+			var tb := button("Trade", func() -> void:
+				close_window()
+				Net.trade_prompt(tid), &"", 110.0)
+			tb.custom_minimum_size.y = 52 if Settings.touch_mode else 38
+			h.add_child(tb)
 		if Net.is_host() and id != 1:
 			var pid: int = id
 			var kb := button("Send Home", func() -> void:

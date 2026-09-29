@@ -15,7 +15,7 @@ static func build() -> Array:
 		# id stays "sanctuary" for save compatibility; the waypoint terrace keeps the old name "Sanctuary Terrace"
 		_m(&"sanctuary", "Malasugue Town", "The last lit hearth on Salmonan", {"is_town": true, "level_min": 1, "level_max": 1, "music": &"music_town",
 			"ambience": &"amb_town", "footstep_surface": &"stone", "reverb": 0.1, "world_map_pos": Vector2(0.18, 0.62),
-			"loading_hint": "Malasugue remembers every face. The waypoint on the Sanctuary Terrace connects every shrine you have awakened; the guild halls register heroes, and the Salted Marlin lets rooms by the night."}),
+			"loading_hint": "Malasugue remembers every face. The waypoint on the Sanctuary Terrace connects every shrine you have awakened; the guild halls register heroes, the Guild House posts paid odd jobs, and the Salted Marlin lets rooms by the night."}),
 		# provisional district (LORE §6b): the roads below the South Gate — Old Mill Crossroads, Lantern Fields, Tideglass Cove
 		_m(&"westreach", "Westreach", "The roads below the South Gate", {"level_min": 1, "level_max": 4, "music": &"music_town",
 			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.04, "world_map_pos": Vector2(0.4, 0.64),
@@ -46,6 +46,7 @@ static func interiors() -> Array:
 	var out := []
 	for d in [
 		[&"int_tavern", "The Salted Marlin", "Tavern and inn", &"dirt", "Rest here for a fee: you wake fully restored and Well Rested."],
+		[&"int_guildhouse", "The Guild House", "Swordfin and Lantern job boards", &"stone", "Both guilds keep a counter here. Register with one, then take its jobs from the board: miniquests that pay gold."],
 		[&"int_swordfin", "Swordfin Hall", "The Swordfin Company", &"stone", "Strike first. Strike true. Register with Quartermaster Dax to join the Company."],
 		[&"int_lantern", "Lantern House", "The Lantern Covenant", &"stone", "We keep the light between things. Scribe Lio keeps the Covenant's register."],
 		[&"int_netmender", "The Net-mender's House", "Home of Tessaly Grane", &"dirt", "Fishers of Malasugue read the tides the way heroes read the Aether."],

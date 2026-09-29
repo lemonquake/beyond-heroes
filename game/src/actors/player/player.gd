@@ -278,6 +278,7 @@ func _update_aim() -> void:
 		Game.hover_target = enemy
 	else:
 		Game.hover_target = null
+	Game.hover_ally = _ally_under_cursor(from, dir) if enemy == null and Net.is_active() else null
 
 const AUTO_AIM_RANGE := 13.0
 
@@ -335,6 +336,24 @@ func _enemy_under_cursor(from: Vector3, dir: Vector3) -> Actor:
 			continue
 		var d := (from + dir * t).distance_to(c)
 		if d < a.body_radius + 0.35 and t < best_d:
+			best_d = t
+			best = a
+	return best
+
+## Another player's hero under the cursor (bh-016): clicking them offers a Trade Request.
+func _ally_under_cursor(from: Vector3, dir: Vector3) -> Node:
+	var best: Node = null
+	var best_d := INF
+	for n in get_tree().get_nodes_in_group(&"net_hero"):
+		var a := n as NetAvatar
+		if a == null or not is_instance_valid(a) or not a.is_visible_in_tree():
+			continue
+		var c := a.center()
+		var t := (c - from).dot(dir)
+		if t < 0.0:
+			continue
+		var d := (from + dir * t).distance_to(c)
+		if d < a.body_radius + 0.45 and t < best_d:
 			best_d = t
 			best = a
 	return best
@@ -494,6 +513,8 @@ func _read_input(delta: float) -> void:
 	if Input.is_action_just_pressed(&"primary") and not _mouse_blocked():
 		if Game.hover_loot and is_instance_valid(Game.hover_loot):
 			Game.hover_loot.request_pickup(self)
+		elif Game.hover_ally and is_instance_valid(Game.hover_ally) and Game.hover_target == null:
+			Net.trade_prompt((Game.hover_ally as NetAvatar).owner_peer)
 		else:
 			_request(&"light")
 	elif lmb and Settings.attack_hold_repeat and (action == null or action_kind == &"light") and (_queued == &"" or _queued == &"light"):

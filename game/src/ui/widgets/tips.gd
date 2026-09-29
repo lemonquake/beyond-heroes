@@ -332,7 +332,7 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 	hv.add_theme_constant_override("separation", 0)
 	hv.add_child(lbl(s.display_name, 21, UITheme.GOLD, UITheme.title_font(), false))
 	var kind := "Weapon Skill" if s.kind == DamageRequest.Kind.ATTACK else "Spell"
-	hv.add_child(lbl("%s · Rank %d / %d" % [kind, rank, s.max_rank] if rank > 0 else "%s · Not learned" % kind, 15, UITheme.TEXT_DIM, null, false))
+	hv.add_child(lbl("%s · Level %d / %d" % [kind, rank, TreeDef.LEVEL_MAX] if rank > 0 else "%s · Not learned" % kind, 15, UITheme.TEXT_DIM, null, false))
 	head.add_child(hv)
 	v.add_child(head)
 	v.add_child(rule(UITheme.BRONZE))
@@ -374,14 +374,14 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 		var why := player.skill_block_reason(sid)
 		if why != "" and why != "Cooldown":
 			v.add_child(lbl(why, 15, UITheme.BAD, UITheme.body_bold()))
-	if next_rank or (hero and rank > 0 and rank < s.max_rank):
+	if rank < TreeDef.LEVEL_MAX and (next_rank or (hero and rank > 0)):
 		var np := s.resolve(rank + 1, hero.skill_upgrades(sid) if hero else {})
 		var changes := []
 		for k in s.per_rank:
 			changes.append("%s %s → %s" % [String(k).replace("_", " ").capitalize(), StatDefs._num(float(params.get(k, 0.0))), StatDefs._num(float(np.get(k, 0.0)))])
 		if not changes.is_empty():
 			v.add_child(gap(2))
-			v.add_child(lbl("Next rank:", 14, UITheme.GOLD, UITheme.body_bold()))
+			v.add_child(lbl("Next level:", 14, UITheme.GOLD, UITheme.body_bold()))
 			for c in changes:
 				v.add_child(lbl("  " + c, 14, UITheme.GOOD))
 	return f[0]

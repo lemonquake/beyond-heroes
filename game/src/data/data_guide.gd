@@ -55,7 +55,7 @@ static func graph() -> Dictionary:
 					"Each level gives you **skill points** and **talent points**; spend them in those windows. On the Map you can pick a place and **track a route**; the directions show on the right of your screen."],
 				"next": "start"},
 			"start": {"text": [
-					"Where to begin? **Elder Maelis** by the hearth, just down the terrace. After her, the town: **Tovin** sells provisions, **Brannoc** forges, the **Salted Marlin** has beds, and the two guild halls will register you as a hero.",
+					"Where to begin? **Elder Maelis** by the hearth, just down the terrace. After her, the town: **Tovin** sells provisions, **Brannoc** forges, the **Salted Marlin** has beds, and the two guild halls will register you as a hero. The **Guild House** by the plaza posts paid odd jobs for both guilds.",
 					"Forget any of this and press **{key:guide}**: the **Field Guide** keeps every key and every lesson, and I will say it all again if you ask. Now come on. I have been dead a long time, and I am bored of standing still."],
 				"choices": [
 					{"text": "Lead on, {tempo}.", "next": "end", "actions": [done]},

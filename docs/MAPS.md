@@ -59,6 +59,14 @@ Westreach, the Ruined Forest, Olivar and Wyman Outpost. Crafting stations (`Craf
 Ruined Forest's chained ogre is now the miniboss Grundle (DataMinibosses); other champions hold camps in Westreach, the
 Ruined Forest and the Catacombs.
 
+## The Guild House (bh-016)
+
+`guild_house` (Blender kit, `tools/blender/environment/assets_guildhouse.py`) stands on the north-west lot of Malasugue at
+(-11, -10) facing the plaza; the old well and Seris moved to (7.4, -10.4) / (7.6, -7.6) to make room. Its interior
+`int_guildhouse` (20 x 12 m, `interior.gd:_guildhouse`) has the steward Hollis Varnay at the reception table, Bram Ostler
+at the Swordfin counter (west) and Sabeth Wynn at the Lantern counter (east), and a job board on each side wall
+(`GuildJobBoard`, an interactable). Both guilds' boards are read and worked through `GuildJobsWindow` / `GuildJobs`.
+
 ## Westreach and the island (provisional, LORE §6b)
 
 `westreach` (levels 1–4) is the district below Malasugue's South Gate: Old Mill Crossroads, Lantern Fields and

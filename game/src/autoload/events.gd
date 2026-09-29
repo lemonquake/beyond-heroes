@@ -49,6 +49,7 @@ signal shop_opened(shop_id: StringName)
 signal shop_closed(shop_id: StringName)
 signal guild_joined(guild_id: StringName, first_time: bool)
 signal tier_changed(rank: int)
+signal guild_jobs_changed                        # a Guild House job was taken, moved on, handed in or dropped
 signal rested(fee: int)
 # Tempos (spirit companions)
 signal tempo_changed(uid: int)          # bound, released, called back, gear changed (0 = all)

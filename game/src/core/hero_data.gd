@@ -77,6 +77,8 @@ var dungeon_raids := {}
 var summon := {}
 ## Spirits called at the shrine but not bound: they wait in the Spirit Hall (TempoData), swapped in for free.
 var spirit_hall: Array = []
+## Guild House miniquests (bh-016): GuildJobs.state / to_dict / from_dict.
+var guild_jobs := {}
 var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
@@ -204,7 +206,7 @@ func synergy_pct(skill_id: StringName) -> float:
 	var n := skill_tree.tree.node(skill_id)
 	var total := 0.0
 	for syn in n.get("synergies", []):
-		total += float(syn[1]) * float(skill_tree.rank(StringName(syn[0])))
+		total += float(syn[1]) * skill_tree.tree.power_of(StringName(syn[0]), skill_tree.rank(StringName(syn[0])))
 	return total
 
 func learned_skills() -> Array:
@@ -220,8 +222,8 @@ func skill_upgrades(skill_id: StringName) -> Dictionary:
 	for n in skill_tree.tree.nodes:
 		if n.kind != "upgrade" or n.get("skill") != skill_id:
 			continue
-		var r := skill_tree.rank(n.id)
-		if r <= 0:
+		var r := skill_tree.tree.power_of(n.id, skill_tree.rank(n.id))
+		if r <= 0.0:
 			continue
 		var p: Dictionary = n.get("params", {})
 		for k in p:
@@ -392,6 +394,7 @@ func to_dict() -> Dictionary:
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
 		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true),
 		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()), "starter_name": starter_name,
+		"guild_jobs": GuildJobs.to_dict(self),
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -533,6 +536,7 @@ static func from_dict(d: Dictionary) -> HeroData:
 			var st := TempoData.from_dict(td)
 			if st != null:
 				h.spirit_hall.append(st)
+	h.guild_jobs = GuildJobs.from_dict(d.get("guild_jobs", {}))
 	var aura := StringName(d.get("active_aura", ""))
 	if aura != &"" and h.skill_tree.rank(aura) > 0 and DB.skill(aura) != null and DB.skill(aura).is_aura():
 		h.active_aura = aura

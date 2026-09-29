@@ -16,7 +16,7 @@ extends Resource
 @export var conversion := {}                 # element -> share (overrides element)
 @export var anim: StringName = &"cast_quick"
 @export var anim_speed_stat: StringName = &"cast_speed"  # attack_speed for weapon skills
-@export var max_rank := 5
+@export var max_rank := 5                    # rank the numbers below were tuned for; levels up to TreeDef.LEVEL_MAX use the tail curve
 @export var mana_cost := 10.0
 @export var mana_per_rank := 1.0
 @export var valor_cost := 0.0                # knight
@@ -41,14 +41,18 @@ func is_aura() -> bool:
 	return behavior == &"aura"
 
 func mana_at(rank: int) -> float:
-	return mana_cost + mana_per_rank * float(maxi(rank, 1) - 1)
+	return mana_cost + mana_per_rank * (power(rank) - 1.0)
+
+## Ranks' worth of effect at `rank` (a rank past `max_rank` counts for less).
+func power(rank: int) -> float:
+	return TreeDef.rank_power(maxi(rank, 1), max_rank)
 
 ## Parameters at a rank with upgrade deltas applied. upgrades: {param: total delta}.
 func resolve(rank: int, upgrades: Dictionary = {}) -> Dictionary:
 	var p := params.duplicate(true)
 	var r := maxi(rank, 1)
 	for k in per_rank:
-		p[k] = float(p.get(k, 0.0)) + float(per_rank[k]) * float(r - 1)
+		p[k] = float(p.get(k, 0.0)) + float(per_rank[k]) * (power(r) - 1.0)
 	for k in upgrades:
 		var v = upgrades[k]
 		if v is bool:

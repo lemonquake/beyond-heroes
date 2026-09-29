@@ -31,10 +31,11 @@ func _hero(cls: StringName, lvl := 30) -> HeroData:
 func _tree_of(cls: StringName) -> TreeDef:
 	return DB.tree(DB.class_def(cls).skill_tree_id)
 
-## Rank every node of the hero's skill tree to its maximum (ignores the point budget: data/behaviour tests only).
+## Rank every node of the hero's skill tree to the cap it had before bh-016 (ignores the point budget: data/behaviour
+## tests only). Level 25 everywhere is not a state a hero can reach (its passives alone would make casting free).
 func _learn_all(h: HeroData) -> void:
 	for n in h.skill_tree.tree.nodes:
-		h.skill_tree.ranks[n.id] = int(n.get("max_rank", 1))
+		h.skill_tree.ranks[n.id] = int(n.get("base_rank", n.get("max_rank", 1)))
 	h._skills_changed()
 
 # ------------------------------------------------------------------------------------------------------------ data

@@ -1,0 +1,24 @@
+{
+  "build_ms": 1888,
+  "mesh_instances": 347,
+  "nav_polygons": 1571,
+  "nodes": 1266,
+  "omni_lights": 77,
+  "shadowed_omni": 4,
+  "spawns": [
+    "waypoint",
+    "town_portal",
+    "door_int_netmender",
+    "door_int_cartographer",
+    "door_int_widow",
+    "door_int_keeper",
+    "door_int_refugee",
+    "door_int_tavern",
+    "door_int_swordfin",
+    "door_int_guildhouse",
+    "door_int_lantern",
+    "start",
+    "gate"
+  ],
+  "teleporters": 1
+}

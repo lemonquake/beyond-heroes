@@ -36,6 +36,7 @@ func _on_actor_died(actor: Node, killer: Node) -> void:
 	if player == null or not is_instance_valid(player) or Game.hero == null:
 		return
 	award_xp(e, player)
+	GuildJobs.on_kill(Game.hero, e.is_elite or e.is_boss, String(Game.current_map_id))
 	drop_for(e, player)
 	# Life / Mana on Kill gear (bh-012)
 	if player.alive:

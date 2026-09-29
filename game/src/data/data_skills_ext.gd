@@ -396,7 +396,7 @@ static func shadowblade_tree() -> TreeDef:
 
 ## Description of a passive node at a rank: {0}, {1}... = mod values (percent for fractions), {f0}... = flag values.
 static func passive_text(n: Dictionary, rank: int) -> String:
-	var r := maxi(rank, 1)
+	var r := TreeDef.rank_power(maxi(rank, 1), int(n.get("base_rank", n.get("max_rank", 1))))
 	var text := String(n.get("desc", ""))
 	var mods: Array = n.get("mods", [])
 	for i in mods.size():

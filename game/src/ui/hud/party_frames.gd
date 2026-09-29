@@ -89,6 +89,14 @@ func _row(id: int) -> Control:
 	nm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	nm.clip_text = true
 	nh.add_child(nm)
+	var tb := Button.new()
+	tb.text = "Trade"
+	tb.focus_mode = Control.FOCUS_NONE
+	tb.custom_minimum_size = Vector2(84, 40) if Settings.touch_mode else Vector2(58, 22)
+	tb.add_theme_font_size_override("font_size", 16 if Settings.touch_mode else 12)
+	tb.pressed.connect(func() -> void: Net.trade_prompt(id))
+	TooltipLayer.attach(tb, func() -> Control: return Tips.text("Send %s a Trade Request: swap items and gold." % info.get("name", "this hero")))
+	nh.add_child(tb)
 	var ping := UITheme.label("", 13, UITheme.TEXT_DIM, UITheme.number_font())
 	ping.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	ping.add_theme_constant_override("outline_size", 3)

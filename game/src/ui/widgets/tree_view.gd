@@ -239,18 +239,18 @@ func _tip(n: Dictionary) -> Control:
 	if n.get("kind") == "passive":
 		var rk := tree_state.rank(n.id)
 		v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD, UITheme.title_font()))
-		v.add_child(Tips.lbl("Passive skill · always on · Rank %d / %d" % [rk, int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
+		v.add_child(Tips.lbl("Passive skill · always on · Level %d / %d" % [rk, int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
 		v.add_child(Tips.rule(UITheme.BRONZE))
 		v.add_child(Tips.lbl(DataSkillsExt.passive_text(n, maxi(rk, 1)), 16, UITheme.TEXT))
 		if rk > 0 and rk < int(n.get("max_rank", 1)):
-			v.add_child(Tips.lbl("Next rank: " + DataSkillsExt.passive_text(n, rk + 1), 15, Tips.AFFIX))
+			v.add_child(Tips.lbl("Next level: " + DataSkillsExt.passive_text(n, rk + 1), 15, Tips.AFFIX))
 		elif rk == 0:
-			v.add_child(Tips.lbl("(values at rank 1)", 13, UITheme.TEXT_MUTED))
+			v.add_child(Tips.lbl("(values at level 1)", 13, UITheme.TEXT_MUTED))
 		_append_requirements(v, n)
 		return f[0]
 	var kind_name: String = {"upgrade": "Skill Upgrade", "minor": "Minor Talent", "major": "Major Talent", "keystone": "Keystone"}.get(String(n.get("kind", "")), "Talent")
 	v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD if n.get("kind") != "keystone" else Color(0.6, 0.97, 1.0), UITheme.title_font()))
-	v.add_child(Tips.lbl("%s · Rank %d / %d" % [kind_name, tree_state.rank(n.id), int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
+	v.add_child(Tips.lbl("%s · Level %d / %d" % [kind_name, tree_state.rank(n.id), int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
 	v.add_child(Tips.rule(UITheme.BRONZE))
 	if n.has("desc"):
 		v.add_child(Tips.lbl(String(n.desc), 16, UITheme.TEXT))
@@ -259,9 +259,9 @@ func _tip(n: Dictionary) -> Control:
 		if sd:
 			v.add_child(Tips.lbl("Upgrades %s" % sd.display_name, 14, UITheme.TEXT_DIM))
 	var mods: Array = n.get("mods", [])
-	var r := maxi(1, tree_state.rank(n.id))
+	var r := tree_state.tree.power_of(n.id, maxi(1, tree_state.rank(n.id)))
 	for m in mods:
-		v.add_child(Tips.lbl(StatDefs.format_modifier(StringName(m[0]), int(m[1]), float(m[2]) * r) + ("" if tree_state.rank(n.id) > 0 else "  (at rank 1)"), 15, Tips.AFFIX))
+		v.add_child(Tips.lbl(StatDefs.format_modifier(StringName(m[0]), int(m[1]), float(m[2]) * r) + ("" if tree_state.rank(n.id) > 0 else "  (at level 1)"), 15, Tips.AFFIX))
 	_append_requirements(v, n)
 	return f[0]
 
@@ -275,8 +275,8 @@ func _append_synergies(v: VBoxContainer, n: Dictionary) -> void:
 	for s in syn:
 		var other := tree_state.tree.node(StringName(s[0]))
 		var rk := tree_state.rank(StringName(s[0]))
-		v.add_child(Tips.lbl("+%s%% damage per rank of %s (now +%s%%)" % [StatDefs._num(float(s[1])), String(other.get("name", s[0])),
-			StatDefs._num(float(s[1]) * rk)], 14, Tips.AFFIX if rk > 0 else UITheme.TEXT_DIM))
+		v.add_child(Tips.lbl("+%s%% damage per level of %s (now +%s%%)" % [StatDefs._num(float(s[1])), String(other.get("name", s[0])),
+			StatDefs._num(float(s[1]) * tree_state.tree.power_of(StringName(s[0]), rk))], 14, Tips.AFFIX if rk > 0 else UITheme.TEXT_DIM))
 
 func _append_requirements(v: VBoxContainer, n: Dictionary) -> void:
 	v.add_child(Tips.rule())
@@ -286,4 +286,4 @@ func _append_requirements(v: VBoxContainer, n: Dictionary) -> void:
 	elif why != "Maximum rank":
 		v.add_child(Tips.lbl(why, 14, UITheme.BAD))
 	if tree_state.rank(n.id) > 0:
-		v.add_child(Tips.lbl("Right-click to refund a rank", 13, UITheme.TEXT_MUTED))
+		v.add_child(Tips.lbl("Right-click to refund a level", 13, UITheme.TEXT_MUTED))

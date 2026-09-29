@@ -1,0 +1,62 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/inventory_window.gd:60)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:76)
+       [5] _ready (res://src/ui/ui_root.gd:41)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/character_window.gd:52)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:76)
+       [5] _ready (res://src/ui/ui_root.gd:42)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:58)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:76)
+       [5] _ready (res://src/ui/ui_root.gd:48)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _yaw_of (res://src/ui/hud/minimap.gd:691)
+       [1] _draw_markers (res://src/ui/hud/minimap.gd:580)
+TRADE[join] ok   join sent ()
+TRADE[join] ok   the first request arrived and was declined
+TRADE[join] ok   nothing open after declining
+TRADE[join] ok   the second request arrived and was accepted
+TRADE[join] ok   the trade table is open here too
+TRADE[join] ok   the host's offer (100 gold + a stack) shows here
+TRADE[join] ok   offer 30 gold and the mana potions
+TRADE[join] ok   the host accepted
+TRADE[join] ok   raise our gold offer by 5
+TRADE[join] ok   both acceptances cleared
+TRADE[join] ok   both accepted: the trade closed
+TRADE[join] ok   gold: 100 -> 165 gave 35 got 100
+TRADE[join] ok   the mana potions left, the host's health potions arrived (0 / 3)
+TRADE[join] ok   the third request arrived
+TRADE[join] ok   closing the window cancelled the trade
+TRADE[join] PASS
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

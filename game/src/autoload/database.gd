@@ -35,13 +35,14 @@ func _init() -> void:
 		skills[s.id] = s
 	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage(),
 			DataSkillsExt.ranger_tree(), DataSkillsExt.shadowblade_tree(), DataTalentsExt.ranger(), DataTalentsExt.shadowblade()]:
+		t.finalize_levels()
 		trees[t.id] = t
 	for e in DataEnemies.build():
 		enemies[e.id] = e
 	elite_mods = DataEnemies.elite_mods()
 	for m in DataMaps.build():
 		maps[m.id] = m
-	for n in DataNpcs.build() + DataNpcsTown.build() + DataNpcsOlivar.build() + DataNpcsWyman.build():
+	for n in DataNpcs.build() + DataNpcsTown.build() + DataNpcsOlivar.build() + DataNpcsWyman.build() + DataNpcsGuildHouse.build():
 		npcs[n.id] = n
 	for sh in DataShops.build():
 		shops[sh.id] = sh

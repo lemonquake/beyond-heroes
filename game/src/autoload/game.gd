@@ -25,6 +25,7 @@ var _was_rested := false
 var ui_blocking := false              # a modal panel is open: gameplay input is ignored
 var hover_target: Node                # enemy under the cursor
 var hover_loot: Node                  # loot label under the cursor
+var hover_ally: Node                  # another player's hero under the cursor (click = Trade Request, bh-016)
 # Developer toggles (only reachable through the dev panel)
 var god_mode := false
 var infinite_mana := false
@@ -36,6 +37,7 @@ func _ready() -> void:
 	add_child(_loading)
 	Events.world_flag_set.connect(_on_flag)
 	Events.player_leveled.connect(func(_l: int, _g: int) -> void: _check_tempo_grade())
+	GuildJobs.connect_events()
 
 func _process(delta: float) -> void:
 	if hero and in_session:
@@ -179,6 +181,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 	FX.world = map
 	hover_target = null
 	hover_loot = null
+	hover_ally = null
 	if player and is_instance_valid(player):
 		if player.get_parent() == null:
 			map.add_child(player)

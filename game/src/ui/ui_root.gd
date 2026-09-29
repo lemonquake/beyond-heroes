@@ -53,6 +53,8 @@ func _ready() -> void:
 	_add_window(&"hero_roster", HeroRosterWindow.new())
 	_add_window(&"mobile_menu", MobileMenuWindow.new())
 	_add_window(&"multiplayer", MultiplayerWindow.new())
+	_add_window(&"guild_jobs", GuildJobsWindow.new())
+	_add_window(&"trade", TradeWindow.new())
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -89,6 +91,12 @@ func open_roster(camp: StringName) -> void:
 	var w := window(&"hero_roster") as HeroRosterWindow
 	if w:
 		w.open_camp(camp)
+
+## The Guild House job board (bh-016), on one guild's page ("" = the hero's own).
+func open_guild_jobs(gid: StringName = &"") -> void:
+	var w := window(&"guild_jobs") as GuildJobsWindow
+	if w:
+		w.open_on(gid)
 
 func open(id: StringName) -> void:
 	var w := window(id)

@@ -26,12 +26,13 @@ const HOUSE_LOTS := [
 const HALLS := [
 	["tavern_exterior", Vector3(-28.8, 0, 13.5), 90.0, &"int_tavern", "the Salted Marlin"],
 	["guild_hall_swordfin", Vector3(32, 0, -4.8), -90.0, &"int_swordfin", "Swordfin Hall"],
+	["guild_house", Vector3(-11, 0, -10), 0.0, &"int_guildhouse", "the Guild House"],
 	["guild_hall_lantern", Vector3(-30, 0, -9.5), 90.0, &"int_lantern", "Lantern House"],
 ]
 ## Footprints kept clear of grass, bushes and trees: (centre x, z, yaw, half size x, half size z).
 const FOOTPRINTS := [
 	[-25, 2, 90, 4.3, 3.8], [25, 6, -90, 4.3, 3.8], [-17, 23, 150, 4.3, 3.8], [23, -14, -60, 4.3, 3.8], [-21, -19, 55, 4.3, 3.8],
-	[-28.8, 13.5, 90, 6.3, 4.9], [32, -4.8, -90, 5.7, 5.2], [-30, -9.5, 90, 4.9, 5.4],
+	[-28.8, 13.5, 90, 6.3, 4.9], [32, -4.8, -90, 5.7, 5.2], [-30, -9.5, 90, 4.9, 5.4], [-11, -9.6, 0, 8.2, 5.6],
 ]
 ## The Shrine of the Fallen, where the Tempo-Caller calls the spirits of dead warriors (companions, LORE §9).
 const SHRINE := Vector3(13.5, 0, -11.0)
@@ -65,6 +66,7 @@ func compose() -> void:
 	view("gate", Vector3(0, 0, 30), 0.0, 40.0, 24.0)
 	view("tavern", Vector3(-22, 0, 13.5), 30.0, 50.0, 30.0)
 	view("guild_halls", Vector3(0, 0, -6), 0.0, 60.0, 66.0)
+	view("guild_house", Vector3(-11, 0, -8), 0.0, 40.0, 30.0)
 	view("shrine", SHRINE, -20.0, 45.0, 16.0)
 	view("topdown", Vector3(0, 0, 0), 0.0, 89.5, 105.0, 50.0)
 
@@ -219,7 +221,7 @@ func _houses() -> void:
 		decor("bush_a", p + side * 5.2 - fwd * 2.5, rng.randf() * 360.0, 0.8, true, true)
 		door(h, yaw, lot[2], lot[3])
 	kit("house_destroyed", Vector3(26, 0, 24), -40.0, 1.0, props, true)  # burnt last winter — the first raid
-	kit("well", Vector3(-11.0, 0, -7.0), 20.0, 1.0, props, true)
+	kit("well", Vector3(7.4, 0, -10.4), 20.0, 1.0, props, true)   # bh-016: moved from (-11, -7) for the Guild House lot
 
 ## A solid invisible bar (the South Gate's crossbar) that a flag can lift: registered with hide_when, it stops
 ## colliding once hidden (MapRoot.apply_flag_visuals).
@@ -284,6 +286,10 @@ func _halls() -> void:
 			"guild_hall_swordfin":
 				for sk in ["banner_l", "banner_r"]:
 					light(socket_pos(b, sk) + Vector3(0, -1.6, 0) + fwd * 0.6, Color(0.55, 0.7, 1.0), 1.0, 4.0)
+			"guild_house":
+				light(socket_pos(b, "sign_light"), Color(1.0, 0.78, 0.5), 1.6, 6.0, false, true)
+				for sk in ["banner_l", "banner_r"]:
+					light(socket_pos(b, sk) + Vector3(0, -1.6, 0) + fwd * 0.6, Color(0.55, 0.7, 1.0) if sk == "banner_l" else Color(0.75, 0.55, 1.0), 0.9, 4.0)
 			"guild_hall_lantern":
 				light(socket_pos(b, "lantern_light"), Color(1.0, 0.8, 0.45), 2.4, 8.0, false, true)
 				light(socket_pos(b, "lantern_light") + Vector3(0, 1.0, 0), Color(0.72, 0.5, 0.95), 0.9, 6.0)

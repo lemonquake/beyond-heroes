@@ -56,6 +56,8 @@ const PLACES := [
 		"door": "int_swordfin", "levels": "Safe haven", "text": "The Swordfin Company. Join, register and request promotion."},
 	{"id": "town_lantern", "name": "Lantern House", "kind": "service", "map": "sanctuary", "pos": Vector2(-24.9, -9.5), "listed": true, "public": true,
 		"door": "int_lantern", "levels": "Safe haven", "text": "The Lantern Covenant. Join, register and request promotion."},
+	{"id": "town_guildhouse", "name": "The Guild House", "kind": "service", "map": "sanctuary", "pos": Vector2(-11, -4.4), "listed": true, "public": true,
+		"door": "int_guildhouse", "levels": "Safe haven", "text": "Both guilds keep a counter here. Pick a guild and take paid odd jobs from its board."},
 	{"id": "town_market", "name": "Market", "kind": "service", "map": "sanctuary", "pos": Vector2(5.5, 13.0), "listed": true, "public": true,
 		"levels": "Safe haven", "text": "Tovin's provisions and, some nights, the Hooded Stranger's rare goods."},
 	{"id": "town_forge", "name": "Brannoc's Forge", "kind": "service", "map": "sanctuary", "pos": Vector2(15.5, 20.5), "listed": true, "public": true,
@@ -243,7 +245,7 @@ const PLACES := [
 
 ## Enterable buildings: interior place id -> the interior map (added to PLACES at load; distance inside is not counted).
 const INTERIORS := {
-	"int_tavern": "The Salted Marlin", "int_swordfin": "Swordfin Hall", "int_lantern": "Lantern House",
+	"int_tavern": "The Salted Marlin", "int_guildhouse": "The Guild House", "int_swordfin": "Swordfin Hall", "int_lantern": "Lantern House",
 	"int_netmender": "The Net-mender's House", "int_cartographer": "The Cartographer's House", "int_widow": "The Hald House",
 	"int_keeper": "The Keeper's House", "int_refugee": "The Refugee's House",
 }
@@ -262,6 +264,8 @@ const ROADS := [
 		"points": [Vector2(0, 10.5), Vector2(7, 6.5), Vector2(13, -0.5), Vector2(26.4, -4.8)]},
 	{"id": "tn_lantern", "name": "Covenant Lane", "type": "road", "map": "sanctuary", "a": "town", "b": "town_lantern",
 		"points": [Vector2(0, 10.5), Vector2(-6.5, 6.5), Vector2(-12, -3), Vector2(-24.9, -9.5)]},
+	{"id": "tn_guildhouse", "name": "Guild Row", "type": "road", "map": "sanctuary", "a": "town", "b": "town_guildhouse",
+		"points": [Vector2(0, 10.5), Vector2(-6.5, 6.5), Vector2(-9, 0), Vector2(-11, -4.4)]},
 	{"id": "tn_market", "name": "Market Row", "type": "road", "map": "sanctuary", "a": "town", "b": "town_market",
 		"points": [Vector2(0, 10.5), Vector2(5.5, 13.0)]},
 	{"id": "tn_forge", "name": "Forge Yard", "type": "road", "map": "sanctuary", "a": "town_market", "b": "town_forge",

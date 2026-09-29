@@ -1,5 +1,5 @@
 extends MapBuilder
-## The walk-in interiors of Malasugue: the Salted Marlin, the two guild halls and five homes. One builder for all of
+## The walk-in interiors of Malasugue: the Salted Marlin, the Guild House, the two guild halls and five homes. One builder for all of
 ## them; `compose()` switches on the map id. Rooms sit on the 4 m grid, centred on the origin:
 ##
 ##   north (-Z) and east/west walls are full height; the south wall is a low cutaway (the camera looks from +Z) with a
@@ -24,6 +24,7 @@ var exit_x := 0.0
 func compose() -> void:
 	match def.id:
 		&"int_tavern": _tavern()
+		&"int_guildhouse": _guildhouse()
 		&"int_swordfin": _swordfin()
 		&"int_lantern": _lantern()
 		&"int_netmender": _netmender()
@@ -146,6 +147,58 @@ func _tavern() -> void:
 	item("crate", Vector3(7.0, 0, -0.3), 20.0)
 	for lp in [Vector3(-1.5, 0, -0.8), Vector3(3.2, 0, -0.2)]:
 		lamp(kit("hanging_lantern", lp, 0.0, 1.0, deco), WARM, 2.2, 8.0)
+
+# ------------------------------------------------------------------------------------------------------------
+# The Guild House (bh-016) — Steward Hollis at the reception table, Bram Ostler at the Swordfin counter (west),
+# Sabeth Wynn at the Lantern counter (east); a job board on each side wall
+
+func _guildhouse() -> void:
+	_room(20.0, 12.0, STONE, 2, {}, true, Color(0.52, 0.48, 0.58), 0.46)
+	# both banners, twice: the room belongs to both guilds
+	banner("guild_banner_swordfin", -7.6)
+	banner("guild_banner_swordfin", -4.4)
+	banner("guild_banner_lantern", 4.4)
+	banner("guild_banner_lantern", 7.6)
+	# reception: a long table across the middle of the north wall, the steward behind it
+	item("table_long", Vector3(0, 0, -2.3))
+	candles(Vector3(-0.8, 1.0, -2.3), 0.9)
+	candles(Vector3(0.9, 1.0, -2.3), 0.8)
+	kit("rug", Vector3(0, 0.004, 0.9), 0.0, 1.4, deco)
+	torch(Vector3(-1.6, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.6)
+	torch(Vector3(1.6, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.6)
+	# Swordfin side: counter, racks, armor, the west job board
+	item("desk_writing", Vector3(-6.4, 0, -2.2), 180.0)
+	candles(Vector3(-6.9, 1.0, -2.1), 0.8)
+	against("weapon_display", "north", -8.9, 0.08)
+	item("armor_stand", Vector3(-9.0, 0, -4.9))
+	item("weapon_rack", Vector3(-9.3, 0, 3.4), 90.0)
+	against("notice_board", "west", 0.2, 0.32)
+	item("bench", Vector3(-7.2, 0, 3.0), 90.0)
+	item("chest", Vector3(-9.0, 0, -1.4), 90.0)
+	lamp(item("lantern_stand", Vector3(-4.0, 0, -4.9)), WARM, 1.6)
+	# Lantern side: counter, shelves, the east job board
+	item("desk_writing", Vector3(6.4, 0, -2.2), 180.0)
+	candles(Vector3(5.9, 1.0, -2.1), 0.8)
+	against("bookshelf_full", "east", -3.4, 0.25)
+	against("bookshelf_full", "east", 3.4, 0.25)
+	against("notice_board", "east", 0.2, 0.32)
+	item("lectern", Vector3(8.6, 0, -4.8))
+	item("trunk", Vector3(9.0, 0, -1.3), -90.0)
+	kit("rug_round", Vector3(6.4, 0.005, 2.6), 0.0, 1.0, deco)
+	lamp(item("lantern_stand", Vector3(4.0, 0, -4.9), 180.0), Color(1.0, 0.78, 0.45), 1.8)
+	light(Vector3(6.4, 2.8, -2.6), Color(0.7, 0.5, 1.0), 0.9, 6.0, false, true)
+	light(Vector3(-6.4, 2.8, -2.6), Color(0.55, 0.7, 1.0), 0.9, 6.0, false, true)
+	# waiting benches and hanging lanterns
+	item("bench", Vector3(-2.6, 0, 3.2))
+	item("bench", Vector3(2.6, 0, 3.2))
+	for lp in [Vector3(-3.5, 0, 1.0), Vector3(3.5, 0, 1.0)]:
+		lamp(kit("hanging_lantern", lp, 0.0, 1.0, deco), WARM, 2.0, 8.0)
+	# the two job boards you can read (the notice boards on the side walls)
+	for side in [[&"swordfin", Vector3(x0 + 1.0, 0, 0.2)], [&"lantern", Vector3(x1 - 1.0, 0, 0.2)]]:
+		var jb := GuildJobBoard.new()
+		jb.guild = side[0]
+		jb.position = side[1]
+		markers.add_child(jb)
 
 # ------------------------------------------------------------------------------------------------------------
 # Swordfin Hall — Commander Rhea at the war table, Quartermaster Dax at the register desk

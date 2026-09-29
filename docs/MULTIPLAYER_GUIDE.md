@@ -97,6 +97,11 @@ When you are not on the same Wi-Fi, the game cannot find your friend by itself. 
   (a Friend can also pick **Respawn beside** the Host).
 - **"Look here!"** Press **G** (on a phone, tap the **!** button) to put a glowing marker with your name on the
   ground. Everybody sees it for 5 seconds.
+- **Trading:** click a friend in the world (or press **Trade** on their party frame or in **Multiplayer**) and
+  choose **Send Request**. When they accept, the Trade window opens: click items in your bag to put them on the
+  table, type an amount of gold, then press **Accept Trade**. Nothing changes hands until **both** of you have
+  accepted the same two offers, and changing an offer clears both acceptances. Locked and favorite items and
+  quest items cannot be traded. If your bag is too full for what you would receive, the window tells you.
 - **Talking:** press **Enter** to open the chat, type, and press **Enter** again to send.
   On a phone, tap **Chat**, type, and tap **Send**.
 - **Who is who:** real players have a name like **◆ Mira ◆** in their own colour, a glowing ring at their feet, and a

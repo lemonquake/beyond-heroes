@@ -22,6 +22,30 @@ extends Resource
 var nodes: Array = []
 var _index := {}
 
+## Every skill and talent can be raised to this level (bh-016).
+const LEVEL_MAX := 25
+## Past the level a node used to top out at (its `base_rank`) each extra level is worth this share of a normal one;
+## single-level nodes (majors, keystones, one-off upgrades) grow far more slowly.
+const TAIL := 0.5
+const TAIL_SINGLE := 0.1
+
+## Raises every node to LEVEL_MAX; the old cap is kept as `base_rank`. Safe to call twice.
+func finalize_levels() -> void:
+	for n in nodes:
+		if not n.has("base_rank"):
+			n["base_rank"] = int(n.get("max_rank", 1))
+		n["max_rank"] = LEVEL_MAX
+
+## Effective number of "ranks worth" of effect at `rank`: identical to `rank` up to `base`, then diminishing.
+static func rank_power(rank: int, base: int) -> float:
+	if rank <= base:
+		return float(maxi(rank, 0))
+	return float(base) + float(rank - base) * (TAIL_SINGLE if base <= 1 else TAIL)
+
+func power_of(id: StringName, rank: int) -> float:
+	var n := node(id)
+	return rank_power(rank, int(n.get("base_rank", n.get("max_rank", 1))))
+
 func index() -> Dictionary:
 	if _index.is_empty():
 		for n in nodes:
