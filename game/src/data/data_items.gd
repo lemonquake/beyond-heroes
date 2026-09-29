@@ -176,6 +176,11 @@ static func bases() -> Array:
 		"flavor": "Ash-stained stone covered in the Ashen Circle's cipher."}))
 	out.append(_b(&"quest_crown_fragment", "Hollow Crown Fragment", &"quest", "quest_crown_fragment", {"sellable": false, "value": 0,
 		"flavor": "A shard of Morthar's broken crown. It hums with stolen Aether."}))
+	# bh-021: the Forsaken Hero's story
+	out.append(_b(&"quest_lance_shard", "Dusk-Piercer Shard", &"quest", "quest_lance_shard", {"sellable": false, "value": 0,
+		"flavor": "The broken tip of a black lance, wrapped in oilcloth. It is warm, and it glows red while its master lives."}))
+	out.append(_b(&"quest_chain_seal", "Kethrax's Chain-Seal", &"quest", "quest_chain_seal", {"sellable": false, "value": 0,
+		"flavor": "An iron seal as big as a fist, still threaded with a link of Tyrant-chain. The violet fire in it has gone out."}))
 	return out
 
 ## bh-006: twenty more consumables. Effects (consumable_effect):

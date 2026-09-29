@@ -15,7 +15,7 @@ func _init() -> void:
 	strict = true
 
 func test_roster_definitions() -> void:
-	eq(DB.enemies.size(), ROSTER.size(), "sixteen enemies")
+	ok(DB.enemies.size() >= ROSTER.size(), "the original roster remains alongside later additions")
 	for id in ROSTER:
 		var d: EnemyDef = DB.enemy(id)
 		ok(d != null, "%s defined" % id)

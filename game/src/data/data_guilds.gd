@@ -6,15 +6,15 @@ const EMBLEM := "res://assets/ui/tiers/tier_%s.svg"
 
 ## rank -> {letter, title, level, flag (deed world flag or ""), deed (text), fee, gate (rarity unlocked or -1), color}
 const TIERS := [
-	{"letter": "", "title": "Unranked", "level": 0, "flag": "", "deed": "", "fee": 0, "gate": -1, "color": Color(0.62, 0.6, 0.58), "key": "unranked"},
-	{"letter": "E", "title": "Iron Initiate", "level": 1, "flag": "", "deed": "", "fee": 50, "gate": BH.Rarity.LICENSED, "color": Color(0.62, 0.62, 0.64), "key": "e"},
-	{"letter": "D", "title": "Bronze Warden", "level": 4, "flag": "", "deed": "", "fee": 150, "gate": BH.Rarity.MASTER, "color": Color(0.8, 0.52, 0.28), "key": "d"},
-	{"letter": "C", "title": "Silver Crest", "level": 7, "flag": "catacombs_ritual_seen", "deed": "Witness the ritual circle beneath the Catacombs", "fee": 400, "gate": BH.Rarity.MYTHICAL, "color": Color(0.82, 0.85, 0.9), "key": "c"},
-	{"letter": "B", "title": "Gold Laurel", "level": 10, "flag": "temple_seal_broken", "deed": "Break the seal of the first oath in the Forgotten Temple", "fee": 900, "gate": BH.Rarity.LEGENDARY, "color": Color(1.0, 0.8, 0.3), "key": "b"},
-	{"letter": "A", "title": "Azure Star", "level": 13, "flag": "boss_warden_defeated", "deed": "Fell Morthar, the Hollow Warden", "fee": 1800, "gate": BH.Rarity.AETHER, "color": Color(0.35, 0.65, 1.0), "key": "a"},
-	{"letter": "S", "title": "Crimson Sun", "level": 20, "flag": "", "deed": "", "fee": 4000, "gate": -1, "color": Color(1.0, 0.3, 0.25), "key": "s"},
-	{"letter": "SS", "title": "Twin Moon", "level": 30, "flag": "", "deed": "", "fee": 9000, "gate": -1, "color": Color(0.8, 0.65, 1.0), "key": "ss"},
-	{"letter": "SSS", "title": "Aether Crown", "level": 45, "flag": "", "deed": "", "fee": 20000, "gate": -1, "color": Color(0.6, 0.98, 1.0), "key": "sss"},
+	{"letter": "", "title": "Unranked", "level": 0, "flag": "", "deed": "", "jobs": 0, "dungeons": 0, "champions": 0, "dungeon_tier": 0, "fee": 0, "gate": -1, "color": Color(0.62, 0.6, 0.58), "key": "unranked"},
+	{"letter": "E", "title": "Iron Initiate", "level": 1, "flag": "", "deed": "", "jobs": 0, "dungeons": 0, "champions": 0, "dungeon_tier": 0, "fee": 50, "gate": BH.Rarity.LICENSED, "color": Color(0.62, 0.62, 0.64), "key": "e"},
+	{"letter": "D", "title": "Bronze Warden", "level": 6, "flag": "mq_maelis_orders", "deed": "Receive Maelis's orders", "jobs": 2, "dungeons": 0, "champions": 0, "dungeon_tier": 0, "fee": 150, "gate": BH.Rarity.MASTER, "color": Color(0.8, 0.52, 0.28), "key": "d"},
+	{"letter": "C", "title": "Silver Crest", "level": 12, "flag": "catacombs_ritual_seen", "deed": "Witness the Catacombs ritual", "jobs": 5, "dungeons": 1, "champions": 1, "dungeon_tier": 0, "fee": 400, "gate": BH.Rarity.MYTHICAL, "color": Color(0.82, 0.85, 0.9), "key": "c"},
+	{"letter": "B", "title": "Gold Laurel", "level": 20, "flag": "boss_kethrax_defeated", "deed": "Defeat Kethrax", "jobs": 10, "dungeons": 2, "champions": 3, "dungeon_tier": 0, "fee": 900, "gate": BH.Rarity.LEGENDARY, "color": Color(1.0, 0.8, 0.3), "key": "b"},
+	{"letter": "A", "title": "Azure Star", "level": 32, "flag": "boss_warden_defeated", "deed": "Defeat Morthar, the Hollow Warden", "jobs": 20, "dungeons": 4, "champions": 5, "dungeon_tier": 0, "fee": 1800, "gate": BH.Rarity.AETHER, "color": Color(0.35, 0.65, 1.0), "key": "a"},
+	{"letter": "S", "title": "Crimson Sun", "level": 45, "flag": "boss_warden_defeated", "deed": "Complete the story and conquer a tier 4 dungeon", "jobs": 40, "dungeons": 8, "champions": 8, "dungeon_tier": 4, "fee": 4000, "gate": -1, "color": Color(1.0, 0.3, 0.25), "key": "s"},
+	{"letter": "SS", "title": "Twin Moon", "level": 55, "flag": "boss_warden_defeated", "deed": "Conquer a tier 5 dungeon", "jobs": 75, "dungeons": 12, "champions": 12, "dungeon_tier": 5, "fee": 9000, "gate": -1, "color": Color(0.8, 0.65, 1.0), "key": "ss"},
+	{"letter": "SSS", "title": "Aether Crown", "level": 60, "flag": "boss_warden_defeated", "deed": "Clear all twenty dungeons", "jobs": 120, "dungeons": 20, "champions": 16, "dungeon_tier": 5, "fee": 20000, "gate": -1, "color": Color(0.6, 0.98, 1.0), "key": "sss"},
 ]
 const MAX_RANK := 8
 

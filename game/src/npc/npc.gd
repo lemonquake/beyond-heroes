@@ -21,6 +21,7 @@ var _pace_dir := 1.0
 var _pace_wait := 0.0
 var _home := Vector3.ZERO
 var _emblem: Sprite3D
+var _legend_plate: LegendPlate
 
 func setup(p_def: NpcDef) -> Npc:
 	def = p_def
@@ -69,6 +70,11 @@ func _ready() -> void:
 	_plate.position.y = 2.25 * def.model_scale
 	_plate.visible = false
 	add_child(_plate)
+	if def.legend != &"":
+		# bh-021: a legend's plate burns in their colours (the plain plate stays hidden)
+		_legend_plate = LegendPlate.make(def.legend, 2.35 * def.model_scale)
+		_legend_plate.visible = false
+		add_child(_legend_plate)
 	if def.is_hero():
 		_plate.modulate = (DataGuilds.tier(def.hero_tier).color as Color).lerp(UITheme.GOLD, 0.35)
 		_emblem = Sprite3D.new()
@@ -192,6 +198,11 @@ func _process(delta: float) -> void:
 	# the name plate shows when the hero is near
 	var p := Game.player as Node3D
 	_plate.visible = p != null and is_instance_valid(p) and p.global_position.distance_to(global_position) < 9.0
+	if _legend_plate:
+		var near := _plate.visible or p != null and is_instance_valid(p) and p.global_position.distance_to(global_position) < 14.0
+		if near != _legend_plate.visible:
+			_legend_plate.set_shown(near)
+		_plate.visible = false
 	if _emblem:
 		_emblem.visible = _plate.visible
 

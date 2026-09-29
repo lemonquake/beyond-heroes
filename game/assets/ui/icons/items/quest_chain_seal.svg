@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs>
+<radialGradient id="g" gradientUnits="userSpaceOnUse" cx="64" cy="70" r="58"><stop offset="0" stop-color="#8a5ad0" stop-opacity="0.35"/><stop offset="1" stop-color="#20082e" stop-opacity="0"/></radialGradient>
+<radialGradient id="s" gradientUnits="userSpaceOnUse" cx="56" cy="64" r="40"><stop offset="0" stop-color="#6a6470"/><stop offset="0.7" stop-color="#2e2a34"/><stop offset="1" stop-color="#141018"/></radialGradient>
+</defs>
+<circle cx="64" cy="70" r="56" fill="url(#g)"/>
+<g fill="none" stroke="#3a3440" stroke-width="7">
+<ellipse cx="64" cy="18" rx="9" ry="14"/>
+<ellipse cx="64" cy="38" rx="14" ry="8"/>
+</g>
+<g fill="none" stroke="#8a8290" stroke-width="2">
+<ellipse cx="64" cy="18" rx="9" ry="14"/>
+<ellipse cx="64" cy="38" rx="14" ry="8"/>
+</g>
+<circle cx="64" cy="78" r="36" fill="url(#s)" stroke="#0a080c" stroke-width="3.5"/>
+<circle cx="64" cy="78" r="27" fill="none" stroke="#1a161e" stroke-width="3"/>
+<path d="M52 68 C56 60 72 60 76 68 M50 80 L78 80 M54 92 C58 98 70 98 74 92 M64 58 L64 100" stroke="#5a3a7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+<path d="M42 60 L50 66 M86 60 L78 66 M44 98 L52 92 M84 98 L76 92" stroke="#0a080c" stroke-width="3" stroke-linecap="round"/>
+</svg>

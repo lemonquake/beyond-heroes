@@ -17,7 +17,7 @@ class_name TempoRules
 
 const MIRROR_KEYS: Array[StringName] = [&"max_hp", &"max_mana", &"hp_regen", &"mana_regen", &"defense", &"evasion",
 	&"accuracy", &"crit_chance", &"status_res", &"knockback_res", &"poise", &"phys_damage", &"magic_damage",
-	&"elemental_damage", &"healing", &"projectile_damage", &"damage", &"added_physical"]
+	&"elemental_damage", &"healing", &"projectile_damage", &"damage", &"added_physical", &"physical_attack", &"spell_power"]
 const NO_ATTR := {&"str": 9999, &"agi": 9999, &"int": 9999, &"wis": 9999, &"spi": 9999, &"dex": 9999}
 
 static var _shells := {}
@@ -66,8 +66,8 @@ static func spirit_loadout(class_id: StringName, level: int, legend_id: StringNa
 	var power := float(sp.get("power", 1.0))
 	var lo := WeaponLoadout.new()
 	lo.main_type = wt
-	lo.main_min = (3.0 + 0.9 * float(level)) * power
-	lo.main_max = (6.0 + 1.5 * float(level)) * power
+	lo.main_min = (3.0 + 0.9 * float(level)) * power * CombatGrowth.weapon_factor(level)
+	lo.main_max = (6.0 + 1.5 * float(level)) * power * CombatGrowth.weapon_factor(level)
 	lo.main_crit = wt.crit_chance if wt else 0.05
 	lo.main_aps = wt.attacks_per_second if wt else WeaponLoadout.UNARMED_APS
 	lo.main_element = int(sp.get("element", Elements.LIGHT))
@@ -163,8 +163,8 @@ static func equip_error(hero: HeroData, t: TempoData, item: ItemInstance, slot: 
 	var allowed: Array = BH.CATEGORY_SLOTS.get(item.base.category, [])
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
-	if hero.progress.level < item.base.level_req:
-		return "Requires level %d" % item.base.level_req
+	if hero.progress.level < item.required_level():
+		return "Requires level %d" % item.required_level()
 	if not rarity_allowed(hero, item.rarity):
 		return "Tempos may wear %s gear at most (one tier below yours)" % BH.rarity_name(best_wearable_rarity(hero))
 	var td := t.class_def()

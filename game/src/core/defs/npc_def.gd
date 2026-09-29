@@ -30,6 +30,8 @@ var weapon: StringName = &""
 var offhand: StringName = &""
 var activity: StringName = &""
 var pace_to := Vector3.ZERO
+## bh-021: a legend (DataLegends id): the name plate burns in their colours with the Class SX emblem (LegendPlate)
+var legend: StringName = &""
 
 func is_hero() -> bool:
 	return hero_level > 0

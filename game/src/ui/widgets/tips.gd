@@ -141,6 +141,7 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		var wt := DB.weapon_type(it.base.weapon_type)
 		var dr := it.damage_range()
 		v.add_child(_big_line("%d – %d" % [roundi(dr.x), roundi(dr.y)], "Damage", UITheme.PARCHMENT))
+		v.add_child(lbl("Item level %d · damage grows with drop level and upgrades" % it.equipment_level(), 15, UITheme.TEXT_DIM))
 		if it.weapon_element() != Elements.PHYSICAL and it.weapon_element_share() > 0.0:
 			v.add_child(lbl("%d%% as %s" % [roundi(it.weapon_element_share() * 100.0), Elements.NAMES[it.weapon_element()]], 15, Elements.color(it.weapon_element())))
 		if wt:
@@ -254,8 +255,8 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	# requirements
 	if it.is_equipment() and hero:
 		var reqs := []
-		if it.base.level_req > 1:
-			reqs.append(["Requires Level %d" % it.base.level_req, hero.progress.level >= it.base.level_req])
+		if it.required_level() > 1:
+			reqs.append(["Requires Level %d" % it.required_level(), hero.progress.level >= it.required_level()])
 		var attrs := hero.progress.base_attributes()
 		for a in it.base.requirements:
 			reqs.append(["Requires %d %s" % [it.base.requirements[a], BH.ATTRIBUTE_NAMES[a]], int(attrs.get(a, 0)) >= int(it.base.requirements[a])])
@@ -409,6 +410,10 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 	if params.has("damage_min") and params.has("damage_max"):
 		extra.append("Base damage %d – %d (scales with %s)" % [roundi(params.damage_min), roundi(params.damage_max),
 			"Intelligence" if s.kind == DamageRequest.Kind.SPELL else "your weapon"])
+	if hero and s.kind == DamageRequest.Kind.SPELL and params.has("damage_min") and params.has("damage_max"):
+		var stats := hero.compute_stats()
+		var scale := (1.0 + stats.get_stat(&"spell_power")) * (1.0 + stats.get_stat(&"magic_damage"))
+		extra.append("After spell power and Intelligence: %d – %d, before elements and target resistance" % [roundi(float(params.damage_min) * scale), roundi(float(params.damage_max) * scale)])
 	if params.has("range"):
 		extra.append("Range %s m" % StatDefs._num(float(params.range)))
 	if params.has("radius"):

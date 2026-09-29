@@ -310,3 +310,41 @@ and drifts away before it ever finds its monster, so Tempos bind themselves to l
 | **Personality** | Each spirit keeps something of who it was: valiant, cautious, devoted, vengeful or swift. It shows in how long it fights before falling back to tend itself. |
 | **Names** | Tempo names are invented for Jre (see §8); every spirit remembers where it fell. |
 
+
+---
+
+## 10. The Forsaken Hero (BH-021)
+
+
+**Class SX — "Beyond".** The rank beyond heroes. The Accord minted it once, for three people, and then struck it from
+the Registry. Emblem: a split crown with a rising blade of light between the halves, crimson-to-gold.
+
+**The Dawnbreakers** — Aljay, Roydo and Paul David, three heroes of Malasugue who climbed past SSS.
+
+| | Aljay, the Forsaken Hero | Roydo, the Righteous Hammer | Paul David, the Tempest Blade |
+|---|---|---|---|
+| Rank / level | Class SX · Lv 287 | Class SX · Lv 264 | Class SX · Lv 251 |
+| Look | Black + crimson dragon-scale plate, horned dragon helm, glowing red eye-slits, tattered crimson cape; blood-red aura | White-gold holy plate, sunburst pauldrons, white tabard, braided beard, sun-crested helm; golden light | Weathered storm-blue long coat over mail, grey at the temples, scar, longsword at the hip; a black chain-brand on his sword hand |
+| Weapon | **Dusk-Piercer**, a 3.4 m lance of black steel and Tyrant bone, crimson veins | **Dawnmaul**, a giant warhammer with a sun-disc head | **Stormwake**, a long straight blade with an azure edge |
+
+- **Twelve winters ago — the Night of Black Wings.** A Sulvane war-Tyrant, **Vharzul the Dusk Tyrant**, fell on Malasugue.
+  Aljay drove his lance through its heart. Its blood — the wrath of the Age of Wrath — poured into him. His armour
+  fused with its black scales; the red aura never left him. The darkness wanted him to burn the world. **He used it to
+  guard Malasugue instead**, for nine winters.
+- **Three winters ago — the Winter of Chains.** High Registrar **Orsolan Vey** of the Accord feared what Aljay carried
+  and sold the Three to the **Forsaken Legion** (knights who forsook the oath of the Binding and serve the Pact of
+  Wrath's Rekindling; they hunt "wrath-bearers" to wake the Tyrants). The Registry ordered the Three to the **Weeping
+  Causeway** in Reedwater Marsh to meet an orc war-host. The Accord's own knights turned their sealing bolts on Aljay.
+  **Kethrax, Chain-Marshal of the Forsaken**, rose from the marsh with his Legion. Roydo held the causeway alone.
+  Kethrax bound Aljay in Tyrant-chains; Aljay broke his lance in Kethrax's chest as he was dragged under. Paul David's
+  sword hand was branded with a chain-seal; Roydo's light sank into the black water. With the Three gone, the Ashen
+  Circle struck the Forgotten Temple that same winter — Morthar was hollowed holding it alone.
+- **After.** The Accord declared that Aljay had turned Forsaken — "the Forsaken Hero" — and struck all three from the
+  Registry; the songs were forbidden. Paul David lives quietly by the lake in Olivar. His blade has not left its
+  sheath since: Kethrax's brand forbids it while Kethrax lives. Roydo's fate is unknown ("the Righteous Hammer does not
+  drown"). Aljay lives, chained in the Legion's **Black Spire** across the sea — every night he breaks their chains,
+  and every night they forge more.
+- **Now.** A Wyman scout pulled the lance's broken tip — the **Dusk-Piercer Shard** — out of the marsh. It glows while
+  its master lives. Kethrax has come back to the marsh to hunt for it.
+
+The playable chapter ends with Kethrax defeated, the Hollow Warden laid to rest, and Paul David discussing the Black Spire. The rescue across the sea remains a later chapter. SX belongs to the three story characters; the player cap remains level 60 and Class SSS.

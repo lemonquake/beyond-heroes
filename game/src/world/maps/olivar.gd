@@ -260,6 +260,13 @@ func _docks_and_terrace() -> void:
 	for p: Vector3 in [Vector3(13.5, 0, -40.2), Vector3(14.4, 0, -39.4), Vector3(-4.0, 0, -41.2)]:
 		breakable("barrel", p, rng.randf() * 360.0, 20.0, true)
 	keep_clear(PIER_X, -40.0, 5.0)
+	# bh-021: Paul David's bench above the water on the east shore, a lantern post beside it
+	var pd := Vector2(24.6, -30.2)
+	kit("bench", Vector3(pd.x + 0.3, 0, pd.y + 1.7), 12.0, 1.0, props, true)
+	kit("lantern_stand", Vector3(pd.x + 2.2, 0, pd.y + 1.4), 30.0, 1.0, props, true)
+	light(Vector3(pd.x + 2.65, height_at(pd.x + 2.2, pd.y + 1.4) + 1.8, pd.y + 1.4), Color(1.0, 0.72, 0.42), 2.2, 9.0, false, true)
+	decor("rock_medium", Vector3(pd.x - 2.2, 0, pd.y - 1.2), 40.0, 0.6, true, true)
+	keep_clear(pd.x, pd.y, 3.2)
 	# the waypoint terrace: a stone disc above the water, standing stones, lanterns
 	var s := SHRINE
 	var sy := height_at(s.x, s.y) + 0.05

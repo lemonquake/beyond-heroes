@@ -28,8 +28,8 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 	var allowed: Array = BH.CATEGORY_SLOTS.get(item.base.category, [])
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
-	if level < item.base.level_req:
-		return "Requires level %d" % item.base.level_req
+	if level < item.required_level():
+		return "Requires level %d" % item.required_level()
 	var need := DataGuilds.rank_for_rarity(item.rarity)
 	if need > tier_rank:
 		return "Requires a Class %s hero (%s items)" % [DataGuilds.letter(need), BH.rarity_name(item.rarity)]

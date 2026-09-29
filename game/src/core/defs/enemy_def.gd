@@ -62,6 +62,8 @@ extends Resource
 ## Signature mechanics: reassemble, devour, stealth, pickpocket, aim_line, cowardly, lob, ... (see Enemy)
 @export var traits: Array = []
 @export var corpse_time := 14.0              # seconds a corpse lies fresh before it starts to decay
+## bh-021: a weapon GLB carried in the right hand (models authored without one: Kethrax's chain-mace)
+@export var weapon := ""
 
 func scaled(level: int) -> float:
 	return 1.0 + level_scaling * float(maxi(level, 1) - 1)

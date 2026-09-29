@@ -279,6 +279,17 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		"Agility %d: -%.1f%% (max %d%%)" % [AGI, minf(DODGE_CDR_CAP, AGI * DODGE_CDR_PER_AGI) * 100.0, roundi(DODGE_CDR_CAP * 100)]]))
 
 	# ---- Offense ------------------------------------------------------------------------------------------
+	var attack := CombatGrowth.physical_attack(STR, level)
+	d.set_stat(&"physical_attack", attack + agg.flat(&"physical_attack"), PackedStringArray([
+		"Strength above 15 adds 0.5 attack per point plus 0.004 x points squared.",
+		"Gradually enabled at levels 6-15. Added before damage bonuses."]))
+	var focus := 0.0
+	if d.loadout.main_type != null and d.loadout.main_type.id in [&"staff", &"wand"]:
+		focus = (d.loadout.main_min + d.loadout.main_max) * 0.5
+	d.set_stat(&"spell_power", CombatGrowth.spell_power(INT, WIS, focus, level) / 100.0 + agg.flat(&"spell_power"), PackedStringArray([
+		"INT above 15: 0.7 power per point plus 0.006 x points squared.",
+		"WIS above 10: 0.2 power per point. Staff/wand: 25% of average weapon damage.",
+		"Each power adds 1% to spell base damage; enabled gradually at levels 6-15."]))
 	var sc_terms := []
 	if d.loadout.main_type != null:
 		for a in d.loadout.main_type.scaling:
@@ -369,11 +380,24 @@ static func weapon_range(d: DerivedStats, hand: int) -> Vector2:
 		var r := d.loadout.damage_range(hand)
 		lo = r.x
 		hi = r.y
-	var add := d.get_stat(&"added_physical")
+	var add := d.get_stat(&"added_physical") + d.get_stat(&"physical_attack")
+	# Elemental caster weapons draw their base attack from Intelligence after
+	# the opening levels; physical weapons continue to draw it from Strength.
+	if magical_weapon(d, hand):
+		add = d.get_stat(&"added_physical") + CombatGrowth.physical_attack(d.get_stat(&"int"), d.level)
 	if d.loadout.dual_wield:
 		lo *= WeaponLoadout.DUAL_DAMAGE_PER_HAND
 		hi *= WeaponLoadout.DUAL_DAMAGE_PER_HAND
 	return Vector2(lo + add * 0.8, hi + add * 1.2)
+
+static func magical_weapon(d: DerivedStats, hand := 0) -> bool:
+	if d.level <= 5 or d.loadout == null:
+		return false
+	var wt := d.loadout.type_for(hand)
+	return wt != null and wt.id in [&"staff", &"wand"] and d.loadout.elem_share_for(hand) > 0.5
+
+static func attack_scaling(d: DerivedStats, hand := 0) -> float:
+	return lerpf(d.get_stat(&"phys_damage"), d.get_stat(&"magic_damage"), CombatGrowth.ramp(d.level)) if magical_weapon(d, hand) else d.get_stat(&"phys_damage")
 
 # Generic: (sum of terms + flat) * (1 + inc) * more * extra_more, clamped.
 static func _std(d: DerivedStats, agg: Aggregate, k: StringName, terms: Array, lo: float, hi: float, round_down := false,

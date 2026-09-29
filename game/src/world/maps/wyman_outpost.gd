@@ -26,6 +26,7 @@ const TENTS := [Vector2(-19, -11), Vector2(-9, -26), Vector2(13, -21), Vector2(2
 ## Gate crossings on the stockade (angle in degrees, measured with atan2(z, x)).
 var _north_gate := 0.0
 var _west_gate := 0.0
+var _marsh_gate := 0.0              # bh-021: the Marsh Gate to the Weeping Causeway (barred until mq_marsh_gate_open)
 
 func compose() -> void:
 	environment({
@@ -40,6 +41,7 @@ func compose() -> void:
 		{"grass": "grass", "moss": "forest_floor", "dirt": "dirt", "path": "cobblestone", "rock": "rock_cliff"}, Color(0.9, 0.94, 0.88))
 	_north_gate = _gate_angle(DataIsland.road("wy_north_road").points)
 	_west_gate = _gate_angle(DataIsland.road("wy_west_road").points)
+	_marsh_gate = _gate_angle(DataIsland.road("wy_marsh_road").points)
 	_marsh()
 	_stockade()
 	_fire_ring()
@@ -133,10 +135,43 @@ func _marsh() -> void:
 	for i in 3:
 		var p := Vector3(MARSH_X + 14.0 + rng.randf() * 20.0, MARSH_Y + 1.2, -40.0 + rng.randf() * 80.0)
 		light(p, Color(0.5, 1.0, 0.8), 1.6, 7.0, false, true)
-	boundary(Vector3(MARSH_X - 2.0, -4.0, -66.0), Vector3(MARSH_X - 2.0, -4.0, 54.0), 12.0)
+	# bh-021: the marsh line stays closed except where the Marsh Gate's causeway leaves the camp
+	boundary(Vector3(MARSH_X - 2.0, -4.0, -66.0), Vector3(MARSH_X - 2.0, -4.0, 2.6), 12.0)
+	boundary(Vector3(MARSH_X - 2.0, -4.0, 11.8), Vector3(MARSH_X - 2.0, -4.0, 54.0), 12.0)
+
+## bh-021: the Marsh Gate — an iron gate and a bar across the arch until Sir Aldric opens it (mq_marsh_gate_open), a
+## short railed causeway of planks out over the reeds, and the boundary into the Weeping Causeway map.
+func _marsh_gate_bar() -> void:
+	var a := deg_to_rad(_marsh_gate)
+	var c := Vector2(cos(a), sin(a)) * R
+	var yaw := rad_to_deg(atan2(c.x, c.y))
+	var y := ground(c.x, c.y)
+	var sb := StaticBody3D.new()
+	sb.name = "MarshGateBar"
+	sb.collision_layer = BH.LAYER_WORLD
+	sb.collision_mask = 0
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = Vector3(6.4, 4.0, 0.8)
+	cs.shape = bs
+	sb.add_child(cs)
+	sb.position = Vector3(c.x, y + 2.0, c.y)
+	sb.rotation.y = deg_to_rad(yaw)
+	geo.add_child(sb)
+	hide_when(sb, &"mq_marsh_gate_open")
+	hide_when(kit("gate_iron", Vector3(c.x, y, c.y), yaw, 1.0, props), &"mq_marsh_gate_open")
+	var out := Vector2(MARSH_X + 0.5, 7.2)
+	corridor_rails([c, out], 3.6)
+	boundary(Vector3(out.x + 1.2, -4.0, out.y - 4.0), Vector3(out.x + 1.2, -4.0, out.y + 4.0), 12.0)
+	for i in 4:
+		var p := c.lerp(out, (i + 0.5) / 4.0)
+		kit("dock_planks", Vector3(p.x, ground(p.x, p.y) + 0.05, p.y), yaw + 90.0, 1.0, deco)
+	exit_zone(&"wyman_marsh_gate", Vector3(out.x - 0.6, 0, out.y), Vector3(2.4, 4.0, 7.0), &"weeping_causeway", &"arrival",
+		"The Weeping Causeway", &"mq_marsh_gate_open", "The Marsh Gate is barred. Sir Aldric holds the key.")
+	spawn(&"marsh_gate", Vector3(c.x - 3.5, 0, c.y - 1.0), -95.0, true)
 
 func _in_gap(deg: float) -> bool:
-	return absf(wrapf(deg - _north_gate, -180.0, 180.0)) < 7.5 or absf(wrapf(deg - _west_gate, -180.0, 180.0)) < 7.5
+	return absf(wrapf(deg - _north_gate, -180.0, 180.0)) < 7.5 or absf(wrapf(deg - _west_gate, -180.0, 180.0)) < 7.5 		or absf(wrapf(deg - _marsh_gate, -180.0, 180.0)) < 7.5
 
 func _stockade() -> void:
 	var n := int(TAU * R / 4.0)
@@ -157,16 +192,17 @@ func _stockade() -> void:
 		var p1 := Vector2(cos(a1), sin(a1)) * (R + 1.0)
 		boundary(Vector3(p0.x, ground(p0.x, p0.y) - 1.0, p0.y), Vector3(p1.x, ground(p1.x, p1.y) - 1.0, p1.y), 8.0, 0.8)
 	# gap edges: close the corners beside each gate
-	for g: float in [_north_gate, _west_gate]:
+	for g: float in [_north_gate, _west_gate, _marsh_gate]:
 		for side: float in [-1.0, 1.0]:
 			var a := deg_to_rad(g + side * 7.5)
 			var q0 := Vector2(cos(a), sin(a)) * (R - 1.0)
 			var q1 := Vector2(cos(a), sin(a)) * (R + 3.5)
 			boundary(Vector3(q0.x, ground(q0.x, q0.y) - 1.0, q0.y), Vector3(q1.x, ground(q1.x, q1.y) - 1.0, q1.y), 8.0, 0.6)
-	for g: float in [_north_gate, _west_gate]:
+	for g: float in [_north_gate, _west_gate, _marsh_gate]:
 		var a := deg_to_rad(g)
 		var c := Vector2(cos(a), sin(a)) * R
 		gatehouse(c, rad_to_deg(atan2(c.x, c.y)))
+	_marsh_gate_bar()
 	# corridors along the roads to the district boundaries
 	var ng := Vector2(cos(deg_to_rad(_north_gate)), sin(deg_to_rad(_north_gate))) * (R + 1.0)
 	var wg := Vector2(cos(deg_to_rad(_west_gate)), sin(deg_to_rad(_west_gate))) * (R + 1.0)

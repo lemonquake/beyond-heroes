@@ -55,7 +55,7 @@ static func graph() -> Dictionary:
 					"Each level gives you **skill points** and **talent points**; spend them in those windows. On the Map you can pick a place and **track a route**; the directions show on the right of your screen."],
 				"next": "start"},
 			"start": {"text": [
-					"Where to begin? **Elder Maelis** by the hearth, just down the terrace. After her, the town: **Anton** sells provisions, **Brannoc** forges, the **Salted Marlin** has beds, and the two guild halls will register you as a hero. The **Guild House** by the plaza posts paid odd jobs for both guilds.",
+					"Where to begin? **Elder Maelis** by the hearth, just down the terrace: she has been waiting three winters for whoever this waypoint chose, and I would not keep her waiting longer. After her, the town: **Anton** sells provisions, **Brannoc** forges, the **Salted Marlin** has beds, and the two guild halls will register you as a hero. The **Guild House** by the plaza posts paid odd jobs for both guilds.",
 					"Forget any of this and press **{key:guide}**: the **Field Guide** keeps every key and every lesson, and I will say it all again if you ask. Now come on. I have been dead a long time, and I am bored of standing still."],
 				"choices": [
 					{"text": "Lead on, {tempo}.", "next": "end", "actions": [done]},
@@ -63,7 +63,7 @@ static func graph() -> Dictionary:
 			"short": {"text": [
 					"Good. Then only this: **{key:primary}** attacks, **{key:dodge}** dodges, **{key:skill_1}** to **{key:skill_6}** are your skills, **{key:potion_health}** and **{key:potion_mana}** your draughts, **{key:interact}** talks and opens doors.",
 					"I carry half your strength and I mend your wounds. **{key:tempos}** opens my window. A second Tempo can be bound at **Veyra Ashgrave**'s **Shrine of the Fallen**, in the Merchant Quarter; stronger spirits answer as you grow, and a few renowned ones wait for a hero with deep pockets.",
-					"Everything else is in the **Field Guide**: press **{key:guide}**. Elder Maelis is by the hearth, down the terrace. Let us go."],
+					"Everything else is in the **Field Guide**: press **{key:guide}**. Elder Maelis is by the hearth, down the terrace, and she has an errand for you. Let us go."],
 				"choices": [
 					{"text": "Let us go.", "next": "end", "actions": [done]},
 					{"text": "Actually, tell me everything.", "next": "what"},

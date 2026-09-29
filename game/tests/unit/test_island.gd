@@ -27,10 +27,14 @@ func _map(id: StringName) -> MapRoot:
 		_holder = Node3D.new()
 		_holder.name = "IslandTestHolder"
 		host.add_child(_holder)
+	var prev := Game.hero
+	Game.hero = _hero({"mq_marsh_gate_open": true})
 	var m := Game.build_map(id)
 	_holder.add_child(m)
 	MapBuilder.isolate_navigation(m)
+	m.apply_flag_visuals()
 	MapBuilder.bake_navigation(m)
+	Game.hero = prev
 	_maps[id] = m
 	return m
 

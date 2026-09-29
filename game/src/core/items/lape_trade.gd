@@ -221,7 +221,7 @@ static func requirements(hero: HeroData, it: ItemInstance) -> Array:
 	if hero == null:
 		return out
 	var lvl := hero.progress.level
-	out.append(["Requires level %d" % it.base.level_req, lvl >= it.base.level_req])
+	out.append(["Requires level %d" % it.required_level(), lvl >= it.required_level()])
 	var need := DataGuilds.rank_for_rarity(it.rarity)
 	if need > 0:
 		out.append(["Requires a Class %s hero (%s gear) — you are %s" % [DataGuilds.letter(need), it.rarity_name(), DataGuilds.tier_name(hero.tier)],

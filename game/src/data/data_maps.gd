@@ -39,6 +39,11 @@ static func build() -> Array:
 		_m(&"boss_arena", "The Hollow Throne", "Morthar awaits", {"level_min": 10, "level_max": 10, "music": &"music_boss",
 			"ambience": &"amb_arena", "footstep_surface": &"stone", "reverb": 0.6, "world_map_pos": Vector2(0.86, 0.26), "waypoint": false,
 			"loading_hint": "Bait the Warden's charge into a pillar to stun him. His back rune is a weak point."}),
+		# bh-021: the boss causeway in Reedwater Marsh, through Wyman Outpost's Marsh Gate (docs/LORE.md §10)
+		_m(&"weeping_causeway", "The Weeping Causeway", "Where the Dawnbreakers were betrayed", {"level_min": 5, "level_max": 7,
+			"music": &"music_boss", "ambience": &"amb_arena", "footstep_surface": &"stone", "reverb": 0.2,
+			"world_map_pos": Vector2(0.78, 0.8), "waypoint": false,
+			"loading_hint": "Kethrax's chain drags you to him: dodge when he draws it back. Light burns the Legion; fire does not touch his stolen wrath."}),
 	] + interiors() + DataDungeons.map_defs()
 
 ## The buildings of Malasugue you can walk into (doors in sanctuary.gd, rooms in interior.gd).

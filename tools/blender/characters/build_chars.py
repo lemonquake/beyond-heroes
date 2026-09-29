@@ -28,13 +28,15 @@ CHARACTERS = {
 }
 
 # Enemies and townsfolk (run bh-003): one module per character, `enemy_<id>.py` / `town_<id>.py`, discovered
-# automatically (the GLB is named <id>.glb).
+# automatically (the GLB is named <id>.glb). bh-021: the legends (`legend_<id>.py`: Aljay, Roydo, Paul David, Kethrax);
+# legend_kit / legend_weapons / legend_preview are helpers, not characters.
 import glob as _glob
 for _f in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), "*_*.py"))):
     _b = os.path.basename(_f)[:-3]
-    for _pre in ("enemy_", "town_"):
+    for _pre in ("enemy_", "town_", "legend_"):
         if _b.startswith(_pre):
-            CHARACTERS[_b[len(_pre):]] = _b
+            if _b not in ("legend_kit", "legend_weapons", "legend_preview", "legend_sheet"):
+                CHARACTERS[_b[len(_pre):]] = _b
 
 # Clips every enemy exports (locomotion, reactions, deaths). Enemy modules add their own attacks via CLIPS.
 # Townsfolk modules set CLIPS_ONLY (idles, walk, talk) instead to skip the combat set.
@@ -89,6 +91,9 @@ def build_character(name, with_actions=True, only=None, log=print, preview=False
         acts = {}
         keep = clip_filter(cm)
         for an in lib:
+            # cinematic clips (cs_*, bh-021) belong to the characters that list them, never to the full hero set
+            if keep is None and an.name.startswith("cs_"):
+                continue
             if only and an.name not in only:
                 continue
             if keep is not None and an.name not in keep:

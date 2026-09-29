@@ -15,6 +15,7 @@ extends RefCounted
 ## Actions: {"set_flag": id, "value": v} {"give_item": base_id, "count": n, "rarity": r} {"take_item": base_id, "count": n}
 ##   {"give_gold": n} {"take_gold": n} {"give_xp": n} {"open_shop": shop_id} {"relationship": delta}
 ##   {"event": id, ...} (quest-ready hook) {"unlock_teleporter": id} {"heal": 1} {"skill_point": n} {"talent_point": n}
+##   {"cutscene": id, "resume": node_id} (bh-021: the conversation closes, the cutscene plays, then it reopens at `resume`)
 ##   {"service": "respec" | "heal" | "rest" | "mystic_heal" | "promote" | "join_swordfin" | "join_lantern" | "tempo_hire" |
 ##   "tempo_revive"}
 ##   (performed by the NPC service layer after the player confirms the price)
@@ -172,6 +173,8 @@ func run_actions(actions: Array, hero: HeroData) -> Dictionary:
 			out["heal"] = true
 		elif a.has("service"):
 			out["service"] = StringName(a.service)
+		elif a.has("cutscene"):
+			out["cutscene"] = {"id": StringName(a.cutscene), "resume": String(a.get("resume", ""))}
 		elif a.has("skill_point"):
 			hero.progress.skill_points += int(a.skill_point)
 			hero.progress.points_changed.emit()

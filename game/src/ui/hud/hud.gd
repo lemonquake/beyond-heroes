@@ -787,7 +787,9 @@ func _refresh_objective() -> void:
 	_objective_title.get_parent().get_parent().get_parent().visible = not o.is_empty()
 	if not o.is_empty():
 		_objective_title.text = o.title
-		_objective_text.text = o.step
+		var lv := int(o.get("level", 0))
+		# bh-021: a gentle warning when the next step is above the hero's level
+		_objective_text.text = o.step + ("  (recommended level %d)" % lv if lv > player.hero.progress.level else "")
 
 func _update_target(delta: float) -> void:
 	var t: Enemy = Game.hover_target as Enemy

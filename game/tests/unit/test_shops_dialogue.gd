@@ -210,8 +210,8 @@ func test_dialogue_reacts_to_world() -> void:
 	var h := _hero()
 	var maelis := DB.npc(&"maelis")
 	var d := Dialogue.new(maelis.id, maelis.graph)
-	eq(d.entry_node(h), "first", "first meeting")
-	h.mark_dialogue_visited(&"maelis", "first")
+	eq(d.entry_node(h), "orders", "first meeting begins the Wyman errand")
+	h.world_flags[&"mq_maelis_orders"] = true
 	eq(d.entry_node(h), "hub", "afterwards the hub")
 	h.world_flags[&"catacombs_ritual_seen"] = true
 	eq(d.entry_node(h), "ritual", "reacts to the catacombs")
@@ -249,13 +249,13 @@ func test_dialogue_session_flow() -> void:
 	eq(h.relationship(&"maelis"), 5, "relationship raised")
 	s.advance()
 	s.advance()
-	eq(shown.size(), 3, "three lines")
+	s.advance()
+	eq(shown.size(), 4, "four opening lines")
 	ok(String(shown[1]).find("[color=") >= 0, "important words highlighted")
 	eq(offered.size(), 1, "choices offered after the last line")
-	s.choose(0)  # history
-	ok(String(shown[3]).find("Hollow Warden") >= 0, "history node")
+	s.choose(0)  # reliquary
+	ok(String(shown[4]).find("warm") >= 0, "reliquary clue")
 	s.advance()
-	s.choose(0)  # why not leave
 	s.advance()  # -> hub (next)
 	eq(s.node_id, "hub", "back at the hub")
 	var n_choices: int = s.choices.size()

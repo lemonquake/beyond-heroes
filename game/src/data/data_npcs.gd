@@ -21,9 +21,10 @@ static func _maelis() -> NpcDef:
 		"graph": {
 			"entries": [
 				[[{"flag": "boss_warden_defeated"}, {"not_visited": "warden_fallen"}], "warden_fallen"],
+				[[{"not_flag": "mq_maelis_orders"}], "orders"],
+				[[{"flag": "mq_three_told"}, {"not_visited": "three_told"}], "three_told"],
 				[[{"flag": "temple_seal_broken"}, {"not_visited": "seal"}], "seal"],
 				[[{"flag": "catacombs_ritual_seen"}, {"not_visited": "ritual"}], "ritual"],
-				[[{"not_visited": "first"}], "first"],
 				[[], "hub"],
 			],
 			"nodes": {
@@ -37,8 +38,41 @@ static func _maelis() -> NpcDef:
 						{"text": "Who else lives here?", "next": "people"},
 						_end("I will manage. Farewell."),
 					]},
+				# bh-021: the new opening — the waypoint's choice and the errand to Wyman Outpost
+				"orders": {"text": [
+						"So the waypoint still answers. I had begun to think it would stay dark forever.",
+						"This is **Malasugue**, the last lit hearth on this coast of Salmonan. That terrace is the **Sanctuary Terrace**; the light you came through lives there. And it did not wake for nothing, not tonight.",
+						"A rider came from **Wyman Outpost** at dusk. **Sir Aldric Vane** has pulled something out of Reedwater Marsh and sealed it in the outpost's reliquary. He will give it only to a hand the waypoint chose. That is yours, it seems.",
+						"Take my token to **Captain Hald** at the South Gate; he will open it for you. Follow the **Fen Road** across Westreach to Wyman. Bring back what Aldric gives you, and do not unwrap it on the road."],
+					"actions": [{"set_flag": "mq_maelis_orders"}, {"give_item": "health_potion", "count": 3}, {"relationship": 5}],
+					"choices": [
+						{"text": "What is in the reliquary?", "next": "reliquary"},
+						{"text": "Why me?", "next": "why_me"},
+						_end("I will go."),
+					]},
+				"reliquary": {"text": [
+						"Aldric's letter says only that it is **warm**, and that it glows red when the sun goes down.",
+						"There is one thing in Jre I know of that does that. I pray I am wrong. If I am not, then there is a man in **Olivar** who has waited three winters for it."],
+					"next": "hub"},
+				"why_me": {"text": "Because the waypoint has chosen four people in my lifetime, and three of them were the best this island ever raised. The fourth is standing in front of me, dripping on my hearthstones. Go on.",
+					"actions": [{"relationship": 2}], "next": "hub"},
+				"three_told": {"text": [
+						"You have been to Olivar. I can see it on you. So it was **Aljay**'s lance after all.",
+						"I carried water to the three of them when I was a girl. The Registry can burn the songs; it cannot burn what this town remembers. Go and do what Paul David asks."],
+					"actions": [{"relationship": 10}, {"give_xp": 80}], "next": "hub"},
+				"errand": {"branch": [
+					[[{"not_flag": "south_gate_open"}], "errand_gate"],
+					[[{"not_flag": "mq_shard_taken"}], "errand_wyman"],
+					[[{"not_flag": "mq_three_told"}], "errand_olivar"],
+					[[], "errand_done"],
+				]},
+				"errand_gate": {"text": "Captain Hald, at the **South Gate**. Show him my token and he will lift the bar.", "next": "hub"},
+				"errand_wyman": {"text": "Through the South Gate, across **Westreach** by the **Fen Road**, to **Wyman Outpost**. Ask for **Sir Aldric Vane**.", "next": "hub"},
+				"errand_olivar": {"text": "Take it to **Olivar**, by the Lake Shore Road or the Watch Road. The old swordsman by the water: **Paul David**. He will know it.", "next": "hub"},
+				"errand_done": {"text": "The errand is his now, and yours. I only kept the hearth warm for it.", "next": "hub"},
 				"hub": {"text": "The hearth is warm and the wards hold. What do you need, wanderer?",
 					"choices": [
+						{"text": "About the errand you gave me...", "next": "errand", "conditions": [{"flag": "mq_maelis_orders"}], "hidden_if_unmet": true},
 						{"text": "Tell me again what happened here.", "next": "history"},
 						{"text": "Who can help me prepare?", "next": "people"},
 						{"text": "Where should I go next?", "next": "advice"},
@@ -223,10 +257,20 @@ static func _hald() -> NpcDef:
 		"graph": {
 			"entries": [
 				[[{"flag": "boss_warden_defeated"}, {"not_visited": "salute"}], "salute"],
+				[[{"flag": "mq_maelis_orders"}, {"not_flag": "south_gate_open"}], "token"],
 				[[{"not_visited": "first"}], "first"],
 				[[], "hub"],
 			],
 			"nodes": {
+				# bh-021: the Elder's token opens the gate
+				"token": {"text": [
+						"Halt. The south road has been closed three winters... Is that the **Elder's token**?",
+						"Then she is sending you to **Wyman**. She would not do that for a pilgrim. Right.",
+						"Take this **Scroll of Return**: read it anywhere and it pulls you home to the hearth. The road forks below the gate: the **Mill Road** to the crossroads, then south through the farms to the **Fen Road** and the outpost. Press **{key:world_map}** and the chart will walk you there."],
+					"actions": [{"give_item": "return_scroll", "count": 1}, {"relationship": 5}],
+					"choices": [
+						{"text": "Open the gate.", "next": "road_opened", "actions": [{"set_flag": "south_gate_open"}, {"relationship": 5}]},
+					]},
 				"first": {"text": [
 						"Halt. The south road has been closed three winters. This gate has not opened since the forest garrison fell.",
 						"You came through the **waypoint**? Then you are either a hero or a very lost pilgrim. Which is it?"],

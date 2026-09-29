@@ -122,10 +122,20 @@ func weight() -> float:
 
 func damage_range() -> Vector2:
 	var q := 1.0 + quality + DataUpgrades.TEMPER_PER_RANK * float(foretech_rank if foretech != &"" else 0)
-	return Vector2(base.damage_min, base.damage_max) * q * (1.0 + _local(&"local_phys"))
+	var level := equipment_level()
+	# Old bases and named relics remain useful when found later. Preserve each
+	# weapon's spread, speed and identity by scaling its authored damage budget.
+	var budget := maxf(1.0, (9.0 + 1.9 * level) / (9.0 + 1.9 * base.level_req)) if level > 5 else 1.0
+	return Vector2(base.damage_min, base.damage_max) * budget * CombatGrowth.weapon_factor(level) * q * (1.0 + _local(&"local_phys"))
+
+func equipment_level() -> int:
+	return maxi(base.level_req, clampi(ilvl, 1, BH.LEVEL_CAP + 5)) if rarity != BH.Rarity.BEGINNER else base.level_req
+
+func required_level() -> int:
+	return maxi(base.level_req, mini(BH.LEVEL_CAP, equipment_level() - 3)) if is_equipment() else base.level_req
 
 func defense_value() -> float:
-	return (base.defense * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
+	return (base.defense * CombatGrowth.armor_factor(equipment_level()) * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
 
 ## bh-017: the element the weapon deals (an Enchantment replaces the blade's own) and the share of its damage that is elemental.
 func weapon_element() -> int:

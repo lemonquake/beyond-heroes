@@ -30,8 +30,41 @@ static func _hero(id: StringName, name: String, cls: StringName, lvl: int, tier:
 static func _aldric() -> NpcDef:
 	return _hero(&"aldric", "Sir Aldric Vane", &"knight", 24, 4, &"swordfin", "Commander of the outpost", Vector3(-3.5, 0, -15.5), 10.0,
 		&"runed_sword", &"warden_kite_shield", &"", Color(0.25, 0.4, 0.75), {
-			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
+			"entries": [
+				[[{"flag": "mq_three_told"}, {"not_flag": "mq_marsh_gate_open"}], "marsh_gate"],
+				[[{"not_flag": "mq_shard_taken"}], "reliquary"],
+				[[{"not_visited": "first"}], "first"],
+				[[], "hub"],
+			],
 			"nodes": {
+				# bh-021: the sealed reliquary and the Marsh Gate
+				"reliquary": {"text": [
+						"You are the one the waypoint woke. The Elder's rider said you would come, and you look about as tired as she promised.",
+						"Sir Aldric Vane, Swordfin Company. A month ago one of my scouts fell in the reeds off the old causeway and came up holding **this**. Two men have tried to carry it since. One burned his hands; one dropped it and ran.",
+						"It has been sealed in the reliquary behind the lodge ever since. Come. Let us see whether it will let you hold it."],
+					"choices": [
+						{"text": "Open the reliquary.", "next": "end", "actions": [{"cutscene": "shard", "resume": "shard_after"}]},
+					]},
+				"shard_after": {"text": [
+						"It let you. Of course it did.",
+						"There was a letter to go with it. I wrote it the night the scout came back, and then I did not send it, because the man it is for has asked the world to leave him alone for three winters.",
+						"Take the **Watch Road** north to **Olivar**. There is an old swordsman who sits by the lake: **Paul David**. Give him the shard. Do not let him refuse it."],
+					"actions": [{"set_flag": "mq_shard_taken"}, {"give_item": "quest_lance_shard", "count": 1}, {"give_xp": 90}, {"relationship": 8}],
+					"choices": [
+						{"text": "Who is Paul David?", "next": "who_paul"},
+						_end("To Olivar, then."),
+					]},
+				"who_paul": {"text": "Once? The finest blade in the Accord. Now? A man who feeds the ducks and pretends not to hear his own name. He saved my life at **Greyford** before you were born. Go.",
+					"next": "hub"},
+				"marsh_gate": {"text": [
+						"Paul David says to open the Marsh Gate? He said those words? ...Then he has found a reason to live again, and it is you.",
+						"The Legion has been in the reeds this month. Violet lights on the water at night, chains dragged over stones. The causeway leads to the old **Drowned Tollhouse**; that is where it happened, three winters ago.",
+						"The gate is open. The bonfire will still be here if you need to crawl back to it. Tell him I kept my word, and that he still owes me a horse."],
+					"actions": [{"set_flag": "mq_marsh_gate_open"}, {"relationship": 8}],
+					"choices": [
+						{"text": "Thank you, Sir Aldric.", "next": "hub"},
+						_end("To the causeway."),
+					]},
 				"first": {"text": [
 						"Stand easy. Sir Aldric Vane, Swordfin Company, Class B. I hold **Wyman Outpost** for whoever will help me hold it.",
 						"Every hero who comes through signs the **Hero Register** by the lodge: name, level, tier, guild. It tells me who can take the marsh and who should take the waypoint home.",
@@ -51,7 +84,7 @@ static func _aldric() -> NpcDef:
 						_end(),
 					]},
 				"camp": {"text": [
-						"**Reedwater Marsh** starts at our east wall. Something drowned there three winters ago and has not stopped drowning. We watch it; we have not crossed it. Not yet.",
+						"**Reedwater Marsh** starts at our east wall. Something drowned there three winters ago and has not stopped drowning. The **Marsh Gate** stays barred until I have a reason to open it.",
 						"Until we can, the outpost is a place to rest, to mend, to craft and to count heads. The Swordfin and the Lantern share this fire. Out here it does not matter which hall you signed at."],
 					"next": "hub"},
 				"tiers": {"text": [

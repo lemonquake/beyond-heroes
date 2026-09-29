@@ -57,13 +57,18 @@ func test_promotion_requirements() -> void:
 	GuildRules.join(h, &"lantern")
 	var p := GuildRules.next_promotion(h)
 	eq(int(p.rank), 2, "next is D")
-	ok(not p.ok and String(p.error).contains("level"), "D needs level 4")
-	h.progress.add_xp(XpCurve.total_xp_for_level(4))
+	ok(not p.ok and String(p.error).contains("level"), "D needs level 6")
+	h.progress.add_xp(XpCurve.total_xp_for_level(6))
+	h.world_flags[&"mq_maelis_orders"] = true
+	h.guild_jobs["done"] = 2
 	var gold := h.inventory.gold
-	eq(GuildRules.promote(h), "", "promoted to D at level 4")
+	eq(GuildRules.promote(h), "", "promoted to D with orders and two jobs")
 	eq(h.tier, 2, "Class D")
 	eq(h.inventory.gold, gold - 150, "D fee charged exactly")
-	h.progress.add_xp(XpCurve.total_xp_for_level(8))
+	h.progress.add_xp(XpCurve.total_xp_for_level(12))
+	h.guild_jobs["done"] = 5
+	h.dungeon_raids["warren"] = {"count": 1}
+	h.miniboss_log[&"snagtooth"] = {"kills": 1}
 	var pc := GuildRules.next_promotion(h)
 	ok(not pc.ok and String(pc.error).contains("deed"), "C needs the Catacomb ritual deed")
 	eq(h.tier, 2, "not promoted without the deed")
@@ -155,14 +160,16 @@ func test_inn_rest() -> void:
 	done()
 
 func test_dialogue_conditions_and_placeholders() -> void:
-	var h := _hero(1000, 5)
+	var h := _hero(1000, 6)
+	h.world_flags[&"mq_maelis_orders"] = true
+	h.guild_jobs["done"] = 2
 	var d := Dialogue.new(&"x", {})
 	ok(d.check({"no_guild": true}, h), "no_guild before joining")
 	GuildRules.join(h, &"lantern")
 	ok(d.check({"guild": "lantern"}, h), "guild condition")
 	ok(d.check({"not_guild": "swordfin"}, h), "not_guild condition")
 	ok(d.check({"tier_min": 1}, h) and not d.check({"tier_min": 2}, h), "tier_min")
-	ok(d.check({"can_promote": true}, h), "can promote to D at level 5")
+	ok(d.check({"can_promote": true}, h), "can promote with the required deeds")
 	var t := Dialogue.fill("Rest for {rest_fee}. Next: {next_tier} for {promo_fee}. You are {tier}.", h)
 	ok(not t.contains("{"), "all placeholders filled")
 	ok(t.contains(str(NpcServices.rest_cost(h))) and t.contains("Class D") and t.contains("150"), "live values: %s" % t)

@@ -42,7 +42,7 @@ func _init() -> void:
 	elite_mods = DataEnemies.elite_mods()
 	for m in DataMaps.build():
 		maps[m.id] = m
-	for n in DataNpcs.build() + DataNpcsTown.build() + DataNpcsOlivar.build() + DataNpcsWyman.build() + DataNpcsGuildHouse.build() + DataNpcsSockets.build() + DataNpcsLape.build():
+	for n in DataNpcs.build() + DataNpcsTown.build() + DataNpcsOlivar.build() + DataNpcsWyman.build() + DataNpcsGuildHouse.build() + DataNpcsSockets.build() + DataNpcsLape.build() + DataNpcsLegend.build():
 		npcs[n.id] = n
 	for sh in DataShops.build():
 		shops[sh.id] = sh

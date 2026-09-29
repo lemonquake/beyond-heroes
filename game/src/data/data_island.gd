@@ -20,6 +20,7 @@ const MAP_ORIGIN := {
 	&"ruined_forest": Vector2(366, 402),
 	&"olivar": Vector2(601.5, 514.0),
 	&"wyman_outpost": Vector2(618.7, 681.0),
+	&"weeping_causeway": Vector2(760.0, 691.0),
 }
 
 ## Surface areas revealed on the atlas once their map is discovered (atlas px ellipses: centre, radii).
@@ -29,6 +30,7 @@ const CHARTED_AREAS := {
 	&"ruined_forest": [Vector2(366, 402), Vector2(130, 92)],
 	&"olivar": [Vector2(601, 512), Vector2(100, 86)],
 	&"wyman_outpost": [Vector2(619, 676), Vector2(92, 78)],
+	&"weeping_causeway": [Vector2(735, 691), Vector2(70, 40)],
 }
 
 ## Uncharted regions: painted on the base atlas, named here, not routable in this milestone.
@@ -106,6 +108,8 @@ const PLACES := [
 		"levels": "Safe haven", "text": "The Watch Road leaves south for Wyman Outpost."},
 	{"id": "olv_shrine", "name": "Olivar Lake Terrace", "kind": "shrine", "map": "olivar", "pos": Vector2(-22, -30), "listed": true, "public": true,
 		"shrine": "olivar_shrine", "levels": "Safe haven", "text": "A waypoint on the terrace above the docks, where the lake mist rolls in each evening."},
+	{"id": "olv_paul", "name": "The Lakeside Bench", "kind": "landmark", "map": "olivar", "pos": Vector2(24.6, -30.2), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "A bench above the water on the east shore, where an old swordsman sits most evenings: Paul David."},
 	{"id": "olv_docks", "name": "Olivar Docks", "kind": "landmark", "map": "olivar", "pos": Vector2(4, -40), "listed": true, "public": true,
 		"levels": "Safe haven", "text": "Barges carry grain, timber and news across Stillwater Lake. Wren Talbot keeps the tally."},
 	{"id": "olv_arms", "name": "Taicho's Arms Exchange", "kind": "service", "map": "olivar", "pos": Vector2(23, -2), "listed": true, "public": true,
@@ -137,8 +141,15 @@ const PLACES := [
 		"levels": "Safe haven", "text": "Dagna Flint, Socket Specialist: opens sockets in your gear, sets crystals, purges and crystallizes, and sells crystals."},
 	{"id": "wy_hero_vault", "name": "Wyman Hero's Vault", "kind": "service", "map": "wyman_outpost", "pos": Vector2(14.4, 15.2), "listed": true, "public": true,
 		"levels": "Safe haven", "text": "The Hero's Vault on the east side of the camp: storage shared by all of your heroes, with a practice dummy nearby."},
+	{"id": "wy_marsh_gate", "name": "Marsh Gate", "kind": "junction", "map": "wyman_outpost", "pos": Vector2(36.0, 7.2), "listed": false, "public": true,
+		"levels": "Safe haven", "text": "The east gate of the stockade, out over the reeds to the Weeping Causeway. Barred until Sir Aldric opens it."},
 	{"id": "wy_overlook", "name": "Marsh Overlook", "kind": "landmark", "map": "wyman_outpost", "pos": Vector2(22, 0), "listed": true, "public": true,
 		"levels": "Safe haven", "text": "A watch platform over Reedwater Marsh, where the heroes of the outpost keep a lamp lit all night."},
+	# --- The Weeping Causeway (bh-021) ---
+	{"id": "wc_arrival", "name": "Causeway West End", "kind": "junction", "map": "weeping_causeway", "pos": Vector2(-62, 0), "listed": false, "public": true,
+		"levels": "Levels 5–7", "text": "Where the planks from Wyman's Marsh Gate meet the old stone causeway."},
+	{"id": "wc_tollhouse", "name": "The Drowned Tollhouse", "kind": "landmark", "map": "weeping_causeway", "pos": Vector2(0, 0), "listed": true, "public": false,
+		"levels": "Levels 5–7", "text": "A ruined toll-fort at the end of the Weeping Causeway. Three winters ago the Dawnbreakers were betrayed here. Kethrax holds it now."},
 	# --- Ruined Forest ---
 	{"id": "rf_glade", "name": "Ruined Forest", "kind": "shrine", "map": "ruined_forest", "pos": Vector2(-60, 10.875), "listed": true, "public": true,
 		"shrine": "forest_waypoint", "levels": "Level 1–5", "text": "The waypoint glade at the forest's west end. The fallen village lies just beyond."},
@@ -323,6 +334,8 @@ const ROADS := [
 		"points": [Vector2(-62, 12), Vector2(-48, 12), Vector2(-34, 10), Vector2(-18, 6), Vector2(0, 4)]},
 	{"id": "olv_south_road", "name": "Watch Road", "type": "road", "map": "olivar", "a": "olv_town", "b": "olv_south",
 		"points": [Vector2(0, 4), Vector2(8, 12), Vector2(15, 24), Vector2(19, 38), Vector2(20, 56)]},
+	{"id": "olv_lake_path", "name": "Lakeside path", "type": "trail", "map": "olivar", "a": "olv_town", "b": "olv_paul",
+		"points": [Vector2(0, 4), Vector2(1, -8), Vector2(2, -24), Vector2(12, -27.5), Vector2(24.6, -30.2)]},
 	{"id": "olv_dock_walk", "name": "Dock Walk", "type": "road", "map": "olivar", "a": "olv_town", "b": "olv_docks",
 		"points": [Vector2(0, 4), Vector2(1, -8), Vector2(2, -24), Vector2(4, -40)]},
 	{"id": "olv_terrace_steps", "name": "Terrace Steps", "type": "trail", "map": "olivar", "a": "olv_town", "b": "olv_shrine",
@@ -346,6 +359,10 @@ const ROADS := [
 		"points": [Vector2(0, 6), Vector2(-5, 1), Vector2(-8, -6)]},
 	{"id": "wy_forge_path", "name": "Forge path", "type": "trail", "map": "wyman_outpost", "a": "wy_camp", "b": "wy_forge",
 		"points": [Vector2(0, 6), Vector2(3.5, 12.0), Vector2(3.0, 20.0)]},
+	{"id": "wy_marsh_road", "name": "Marsh Gate path", "type": "trail", "map": "wyman_outpost", "a": "wy_marsh_gate", "b": "wy_camp",
+		"points": [Vector2(36.0, 7.2), Vector2(30.5, 7.0), Vector2(24.0, 5.5), Vector2(18.0, 3.5), Vector2(8.0, 3.0), Vector2(0, 6)]},
+	{"id": "wc_causeway_road", "name": "The Weeping Causeway", "type": "road", "map": "weeping_causeway", "a": "wc_arrival", "b": "wc_tollhouse",
+		"points": [Vector2(-62, 0), Vector2(-40, 0), Vector2(-16, 0), Vector2(0, 0)]},
 	{"id": "wy_overlook_path", "name": "Overlook path", "type": "trail", "map": "wyman_outpost", "a": "wy_camp", "b": "wy_overlook",
 		"points": [Vector2(0, 6), Vector2(10, 3), Vector2(22, 0)]},
 	# bh-012: trails to the dungeon gates
@@ -422,6 +439,9 @@ const LINKS := [
 		"text": "Take the Watch Road south to Wyman Outpost", "back": "Take the Watch Road north to Olivar"},
 	{"id": "fen_road_boundary", "mode": "boundary", "a": "wr_fen_exit", "b": "wy_west",
 		"text": "Follow the Fen Road east to Wyman Outpost", "back": "Follow the Fen Road west to Lantern Fields"},
+	{"id": "marsh_gate_boundary", "mode": "boundary", "a": "wy_marsh_gate", "b": "wc_arrival", "flag": "mq_marsh_gate_open",
+		"why": "The Marsh Gate is barred. Sir Aldric Vane holds the key.", "text": "Cross the Marsh Gate onto the Weeping Causeway",
+		"back": "Follow the causeway back to Wyman Outpost"},
 	{"id": "waypoint_town_forest", "mode": "shrine", "a": "town_terrace", "b": "rf_glade", "legacy": true},
 	{"id": "warren_gate", "mode": "dungeon", "a": "wr_warren", "b": "warren", "text": "Take the gate down into the Hollowroot Warren", "back": "Climb out of the Warren"},
 	{"id": "deeps_gate", "mode": "dungeon", "a": "wr_deeps", "b": "deeps", "text": "Take the gate down into the Saltmouth Deeps", "back": "Climb out of the Deeps"},

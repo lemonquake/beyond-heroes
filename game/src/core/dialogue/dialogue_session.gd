@@ -26,9 +26,9 @@ static func start(p_npc: NpcDef, p_hero: HeroData) -> DialogueSession:
 	return s
 
 ## Call after connecting signals.
-func begin() -> void:
+func begin(at := "") -> void:
 	Events.dialogue_started.emit(npc.id)
-	var first := model.entry_node(hero)
+	var first := at if at != "" else model.entry_node(hero)
 	_enter(first)
 
 func _enter(id: String) -> void:
@@ -107,6 +107,8 @@ func _apply(out: Dictionary) -> void:
 		request.emit(&"service", out.service)
 	if out.has("open_shop"):
 		request.emit(&"open_shop", out.open_shop)
+	if out.has("cutscene"):
+		request.emit(&"cutscene", out.cutscene)
 
 func finish() -> void:
 	if finished:

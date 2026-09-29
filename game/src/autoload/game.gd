@@ -28,6 +28,7 @@ var hover_loot: Node                  # loot label under the cursor
 var hover_ally: Node                  # another player's hero under the cursor (click = Trade Request, bh-016)
 # Developer toggles (only reachable through the dev panel)
 var god_mode := false
+var in_cutscene := false             # bh-021: a CutscenePlayer owns the screen
 var infinite_mana := false
 
 const AUTOSAVE_INTERVAL := 120.0
@@ -39,6 +40,7 @@ func _ready() -> void:
 	Events.player_leveled.connect(func(_l: int, _g: int) -> void: _check_tempo_grade())
 	GuildJobs.connect_events()
 	QuakeTeam.connect_events()
+	StoryDirector.connect_events()
 
 func _process(delta: float) -> void:
 	if hero and in_session:
@@ -64,17 +66,25 @@ func new_hero(class_id: StringName, hero_name: String) -> HeroData:
 	h.init_new()
 	return h
 
-## A new hero: Tobren, the starter Tempo, comes through the waypoint with them, and once the world is up he walks them
-## through Tempos and the controls (DataGuide; skipped if that conversation already ended for this hero).
+## A new hero: the prologue cutscene (bh-021) shows the waypoint waking and the hero arriving on the Sanctuary
+## Terrace; Tobren, the starter Tempo, comes through with them, and once the prologue ends he walks them through Tempos
+## and the controls (DataGuide; skipped if that conversation already ended for this hero).
 func start_new_game(class_id: StringName, hero_name: String, slot: int, diff := 1) -> void:
 	hero = new_hero(class_id, hero_name)
 	TempoRules.grant_starter(hero)
 	hero.difficulty = diff
 	save_slot = slot
 	difficulty = diff
-	await _begin_session(&"sanctuary", &"start")
+	await _begin_session(&"sanctuary", &"waypoint")
 	save_now()
-	open_intro()
+	play_prologue()
+
+## The prologue, then the Tempo guide (headless runs skip straight to the guide).
+func play_prologue() -> void:
+	if DisplayServer.get_name() == "headless" or has_flag(&"prologue_seen"):
+		open_intro()
+		return
+	CutscenePlayer.play(&"prologue", open_intro)
 
 ## Open the new-game guide unless this hero has already heard it.
 func open_intro() -> void:

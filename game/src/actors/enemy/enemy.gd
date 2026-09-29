@@ -166,6 +166,8 @@ func _ready() -> void:
 	add_child(visual)
 	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0)) * size_mult
 	visual.setup(def.model, sc, def.tint, &"")
+	if def.weapon != "":
+		visual.attach_weapon(&"main", def.weapon)
 	visual.float_hover = float(def.anim_map.get("hover", 1.2))
 	visual.float_core_spin = float(def.anim_map.get("core_spin", 0.0))
 	if visual.fallback:

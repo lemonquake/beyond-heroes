@@ -73,8 +73,12 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	var attr_scale := 0.0
 	if atk != null:
 		match req.kind:
-			DamageRequest.Kind.ATTACK: attr_scale = atk.get_stat(&"phys_damage")
-			DamageRequest.Kind.SPELL: attr_scale = atk.get_stat(&"magic_damage")
+			DamageRequest.Kind.ATTACK: attr_scale = StatCalculator.attack_scaling(atk, req.hand) if req.use_weapon else atk.get_stat(&"phys_damage")
+			DamageRequest.Kind.SPELL:
+				attr_scale = atk.get_stat(&"magic_damage")
+				# Reflections and percentage-of-hit/health procs already inherit the scaled source.
+				if not req.tags.has(&"proc") and not req.tags.has(&"thorns"):
+					base *= 1.0 + atk.get_stat(&"spell_power")
 	var dmg := base * (1.0 + attr_scale)
 	r.log_step("Attribute scaling +%.1f%% -> %.1f" % [attr_scale * 100.0, dmg])
 

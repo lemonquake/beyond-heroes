@@ -200,11 +200,10 @@ func test_quest_locator() -> void:
 	await _begin(&"sanctuary", &"start")
 	var q := QuestTarget.new()
 	q.resolve()
-	eq(q.id, "forest", "a new hero's objective is the forest")
-	ok(q.has and not q.final, "in town it points at the way on, not the spot")
-	ok(q.path.size() >= 2, "with a trail along the town's roads (%d points)" % q.path.size())
+	eq(q.id, "awaken", "a new hero is sent to Maelis")
+	ok(q.has and q.final, "the opening objective points at the NPC in this town")
 	# the last step: Elder Maelis herself
-	for f in [&"catacombs_ritual_seen", &"temple_seal_broken", &"boss_warden_defeated"]:
+	for f in [&"mq_maelis_orders", &"south_gate_open", &"mq_shard_taken", &"mq_three_told", &"mq_marsh_gate_open", &"boss_kethrax_defeated", &"mq_kethrax_reported", &"catacombs_ritual_seen", &"temple_seal_broken", &"boss_warden_defeated"]:
 		Game.hero.world_flags[f] = true
 	q.invalidate()
 	q.resolve()

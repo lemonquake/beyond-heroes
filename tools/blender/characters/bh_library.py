@@ -33,7 +33,7 @@ def library(partial=False):
     if _LIB is None:
         import importlib
         mods = []
-        for m in ("lib_idles", "lib_loco", "lib_attacks", "lib_actions"):
+        for m in ("lib_idles", "lib_loco", "lib_attacks", "lib_actions", "lib_cinematic"):
             try:
                 mods.append(importlib.import_module(m))
             except ModuleNotFoundError as e:

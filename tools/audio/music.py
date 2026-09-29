@@ -4,6 +4,7 @@ music_menu    D minor, 66 BPM 4/4, 32 bars  : Intro | A (lute motif) | B (string
 music_town    A minor, 78 BPM 3/4, 48 bars  : Intro | A (flute) | A2 | B (strings, relative major) | A3 | C (cello) | Outro
 music_dungeon C phrygian, 88 BPM 4/4, 44 bars: Intro | A (pulse+keys) | B (+ostinato) | C (build) | D (breakdown) | A'
 music_boss    E minor, 140 BPM 4/4, 64 bars : Intro | A (ostinato+stabs) | B (brass theme) | C (choir breakdown) | D (climax) | T
+music_legend  D minor, 72 BPM 4/4, 40 bars  : Intro (heartbeat, choir) | A (cello lament) | B (horn theme) | C (choir, betrayal) | B' (tutti) | Outro
 
 Loops are seamless by construction: every note is written into a buffer that wraps modulo the
 loop length (tails that ring past the end continue at the start), reverb is a circular
@@ -19,7 +20,7 @@ import instruments as I
 from instruments import Song, bass_of, nm, song_ir, voicing
 from synth import SR, circ, filt, hp, lp, mtof, N
 
-TRACKS = ["music_menu", "music_town", "music_dungeon", "music_boss"]
+TRACKS = ["music_menu", "music_town", "music_dungeon", "music_boss", "music_legend"]
 
 
 def seed_of(name):
@@ -544,7 +545,119 @@ def music_boss(r):
     return s.render(song_ir("boss"))
 
 
-FUNCS = {"music_menu": music_menu, "music_town": music_town, "music_dungeon": music_dungeon, "music_boss": music_boss}
+# --------------------------------------------------------------------------------------------
+# LEGEND - "The Dawnbreakers" (bh-021: the story's cutscenes)
+# --------------------------------------------------------------------------------------------
+LEGEND_A = [
+    [(0, 2, "D4"), (2, 1, "F4"), (3, 1, "E4")],
+    [(0, 3, "D4"), (3, 1, "A#3")],
+    [(0, 2, "C4"), (2, 1, "F4"), (3, 1, "A4")],
+    [(0, 4, "G4")],
+    [(0, 2, "A4"), (2, 1, "G4"), (3, 1, "F4")],
+    [(0, 2, "E4"), (2, 2, "D4")],
+    [(0, 2, "C#4"), (2, 1, "E4"), (3, 1, "A4")],
+    [(0, 4, "A4")],
+]
+LEGEND_B = [
+    [(0, 1.5, "D5"), (1.5, 0.5, "F5"), (2, 2, "A#4")],
+    [(0, 2, "C5"), (2, 2, "A4")],
+    [(0, 1, "A#4"), (1, 1, "D5"), (2, 2, "G5")],
+    [(0, 3, "F5"), (3, 1, "A4")],
+    [(0, 1.5, "D5"), (1.5, 0.5, "F5"), (2, 2, "A#5")],
+    [(0, 2, "A5"), (2, 1, "G5"), (3, 1, "E5")],
+    [(0, 2, "F#5"), (2, 2, "A5")],
+    [(0, 4, "D5")],
+]
+LEGEND_C_VLN = [[(0, 8, "D5")], [], [(0, 8, "D#5")], [], [(0, 8, "D5")], [], [(0, 4, "C#5")], [(0, 4, "E5")]]
+
+
+def music_legend(r):
+    s = Song(r, bpm=72, bars=40, meter=4)
+    s.bus("pad", 0.32, 0.5, eq=lambda z: lp(z, 4200))
+    s.bus("bass", 0.5, 0.3, eq=lambda z: lp(z, 1500))
+    s.bus("cello", 1.0, 0.4)
+    s.bus("str", 0.55, 0.5)
+    s.bus("brass", 0.5, 0.4)
+    s.bus("theme", 0.62, 0.4)
+    s.bus("choir", 0.5, 0.65)
+    s.bus("bell", 0.8, 0.6)
+    s.bus("perc", 0.95, 0.35)
+    s.bus("sub", 0.22, 0.0)
+    s.bus("fx", 0.6, 0.55)
+
+    intro = ["Dm", "Dm", "Bb", "A"]
+    progA = ["Dm", "Bb", "F", "C", "Dm", "Gm", "A", "A"]
+    progB = ["Bb", "F", "Gm", "Dm", "Bb", "C", "D", "D"]
+    progC = ["Gm", "Eb", "Bb", "A", "Gm", "Eb", "F", "A"]
+    outro = ["Dm", "Dm", "Bb", "A"]
+    form = intro + progA + progB + progC + progB + outro          # 40 bars
+
+    vel = [0.4] * 4 + [0.48] * 8 + [0.62] * 8 + [0.55] * 8 + [0.72] * 8 + [0.42] * 4
+    for i, ch in enumerate(form):
+        play_pads(s, "pad", [ch], i, vel[i], low=50)
+        s.add("sub", I.sub(r, float(mtof(bass_of(ch, 26))), s.beats(4), 0.62, attack=0.6, release=1.2), s.t(i), 1.0, 0.0,
+              humanize=0)
+    # intro: a slow heartbeat on the taiko, a choir breathing, a bell tolling the loop's start
+    for b in range(4):
+        hit(s, "perc", I.heartbeat, b, 0, 0.7)
+        hit(s, "perc", I.heartbeat, b, 2, 0.55)
+    for ch, i, nb in merged(intro):
+        s.add("choir", I.choir(r, mtof(np.array(voicing(ch, 50))), s.beats(4 * nb), 0.35, "o", 1.2, 1.6), s.t(i), 1.0, 0.0,
+              humanize=0)
+    s.add("bell", I.bell(r, float(mtof(nm("D4"))), 4.0, 0.5, 4.5), s.t(0), 1.0, -0.2)
+    # A: the lament on the cello (Aljay), strings holding the chords, bass walking slowly
+    play_bass(s, "bass", progA, 4, 0.45, low=38)
+    play_mel(s, "cello", I.cello, 4, LEGEND_A, 0.72, pan=-0.15)
+    for ch, i, nb in merged(progA):
+        for m in voicing(ch, 55):
+            s.add("str", I.strings(r, float(mtof(m)), s.beats(4 * nb), 0.32, attack=0.9, release=1.0, bright=0.35),
+                  s.t(4 + i), 0.5, 0.2, humanize=0)
+    for b in range(4, 12, 2):
+        hit(s, "perc", I.taiko, b, 0, 0.45)
+    # B: the Dawnbreakers' theme on the horns, strings climbing under it, taiko marching
+    hit(s, "fx", I.boom, 12, 0, 0.8)
+    s.add("fx", I.cymbal(r, 3.0, 0.4), s.t(12), 1.0, 0.3, humanize=0)
+    play_mel(s, "theme", I.brassn, 12, LEGEND_B, 0.8, pan=0.1, swell=0.08, release=0.3, bright=0.9, growl=0.05)
+    play_bass(s, "bass", progB, 12, 0.58, low=38)
+    arp(s, "str", I.strings, progB, 12, [0, 1, 2, 1], 1.0, vel=0.35, low=55, pan=-0.3, attack=0.05, release=0.3, bright=0.5)
+    for b in range(12, 20):
+        hit(s, "perc", I.taiko, b, 0, 0.85)
+        hit(s, "perc", I.taiko, b, 2, 0.6)
+        hit(s, "perc", I.frame_drum, b, 3.5, 0.3)
+    # C: the betrayal — choir swells, a high tense violin line, low taiko alone
+    for ch, i, nb in merged(progC):
+        s.add("choir", I.choir(r, mtof(np.array(voicing(ch, 50))), s.beats(4 * nb), 0.62, "a", 0.8, 1.2), s.t(20 + i), 1.0,
+              0.0, humanize=0)
+    play_mel(s, "str", I.strings, 20, LEGEND_C_VLN, 0.55, pan=0.25, attack=1.2, release=1.0, bright=0.55, block=64)
+    play_bass(s, "bass", progC, 20, 0.5, low=36)
+    for b in range(20, 28):
+        hit(s, "perc", I.taiko, b, 0, 0.9)
+        if b % 2:
+            hit(s, "perc", I.taiko, b, 2.5, 0.45, pitch=1.2)
+    swell_into(s, "fx", 28, 1.8, 0.5)
+    # D: tutti reprise — horns and violins in octaves, choir, bells on the phrase heads
+    hit(s, "fx", I.boom, 28, 0, 1.0)
+    s.add("fx", I.cymbal(r, 3.0, 0.5), s.t(28), 1.0, 0.3, humanize=0)
+    play_mel(s, "theme", I.brassn, 28, LEGEND_B, 0.95, pan=0.1, swell=0.06, release=0.3, bright=1.1, growl=0.08)
+    play_mel(s, "str", I.strings, 28, LEGEND_B, 0.7, pan=-0.2, transpose=12, attack=0.08, release=0.5, bright=0.7, block=32)
+    play_bass(s, "bass", progB, 28, 0.66, low=38)
+    for ch, i, nb in merged(progB):
+        s.add("choir", I.choir(r, mtof(np.array(voicing(ch, 52))), s.beats(4 * nb), 0.6, "a", 0.5, 1.0), s.t(28 + i), 1.0, 0.0,
+              humanize=0)
+    for b in range(28, 36):
+        hit(s, "perc", I.taiko, b, 0, 1.0)
+        hit(s, "perc", I.taiko, b, 2, 0.7)
+        hit(s, "perc", I.snare, b, 1, 0.3)
+        hit(s, "perc", I.snare, b, 3, 0.35)
+    for b in (28, 30, 32, 34):
+        s.add("bell", I.bell(r, float(mtof(nm(LEGEND_B[b - 28][0][2]))), 2.5, 0.35, 2.5), s.t(b), 1.0, 0.35)
+    # outro: the lament's first phrase, thinning to the loop point
+    play_mel(s, "cello", I.cello, 36, LEGEND_A[:2] + [[(0, 4, "A#3")], [(0, 4, "A3")]], 0.55, pan=-0.15)
+    return s.render(song_ir("menu"))
+
+
+FUNCS = {"music_menu": music_menu, "music_town": music_town, "music_dungeon": music_dungeon, "music_boss": music_boss,
+         "music_legend": music_legend}
 
 
 def render(name):

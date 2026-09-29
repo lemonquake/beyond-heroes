@@ -1,0 +1,93 @@
+{
+  "checks": 24396,
+  "elapsed_ms": 58031,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_bh015.gd": {
+      "checks": 10107,
+      "failures": [],
+      "ms": 1628.58,
+      "tests": 11
+    },
+    "test_bh021.gd": {
+      "checks": 378,
+      "failures": [],
+      "ms": 1910.765,
+      "tests": 13
+    },
+    "test_combat_growth.gd": {
+      "checks": 130,
+      "failures": [],
+      "ms": 1833.316,
+      "tests": 5
+    },
+    "test_damage.gd": {
+      "checks": 60,
+      "failures": [],
+      "ms": 360.748,
+      "tests": 13
+    },
+    "test_enemies.gd": {
+      "checks": 464,
+      "failures": [],
+      "ms": 2441.723,
+      "tests": 6
+    },
+    "test_guilds.gd": {
+      "checks": 100,
+      "failures": [],
+      "ms": 37.777,
+      "tests": 8
+    },
+    "test_inventory_overhaul.gd": {
+      "checks": 1917,
+      "failures": [],
+      "ms": 49.314,
+      "tests": 6
+    },
+    "test_island.gd": {
+      "checks": 1204,
+      "failures": [],
+      "ms": 7337.498,
+      "tests": 13
+    },
+    "test_items.gd": {
+      "checks": 2477,
+      "failures": [],
+      "ms": 658.469,
+      "tests": 17
+    },
+    "test_loot.gd": {
+      "checks": 1843,
+      "failures": [],
+      "ms": 18866.064,
+      "tests": 17
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.32,
+      "tests": 4
+    },
+    "test_shops_dialogue.gd": {
+      "checks": 1175,
+      "failures": [],
+      "ms": 543.989,
+      "tests": 10
+    },
+    "test_stats.gd": {
+      "checks": 159,
+      "failures": [],
+      "ms": 17.393,
+      "tests": 8
+    },
+    "test_tempos.gd": {
+      "checks": 3537,
+      "failures": [],
+      "ms": 20613.88,
+      "tests": 16
+    }
+  },
+  "timestamp": "2026-09-29T20:39:21"
+}

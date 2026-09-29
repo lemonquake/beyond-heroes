@@ -26,7 +26,7 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	var scale := def.scaled(level)
 	var hp_mult := float(difficulty.get("hp", 1.0)) * (2.6 if elite else 1.0)
 	var dmg_mult := float(difficulty.get("damage", 1.0)) * (1.3 if elite else 1.0)
-	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult, 1.0)
+	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level), 1.0)
 	_set_stat(d, agg, &"defense", def.defense * (1.0 + LEVEL_DEFENSE * float(level - 1)), 0.0)
 	_set_stat(d, agg, &"evasion", def.evasion + LEVEL_EVASION * float(level - 1), 0.0)
 	_set_stat(d, agg, &"accuracy", def.accuracy + LEVEL_ACCURACY * float(level - 1), 1.0)

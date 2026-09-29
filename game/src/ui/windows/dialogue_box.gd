@@ -80,16 +80,16 @@ func _ready() -> void:
 	_more.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	v.add_child(_more)
 
-func start(p_npc: Npc) -> void:
+func start(p_npc: Npc, at := "") -> void:
 	npc = p_npc
-	_open(npc.def)
+	_open(npc.def, at)
 
 ## A conversation with no one standing in the world (the new-game guide).
 func start_def(def: NpcDef) -> void:
 	npc = null
 	_open(def)
 
-func _open(def: NpcDef) -> void:
+func _open(def: NpcDef, at := "") -> void:
 	session = DialogueSession.start(def, Game.hero)
 	session.line_shown.connect(_on_line)
 	session.choices_shown.connect(_on_choices)
@@ -102,7 +102,7 @@ func _open(def: NpcDef) -> void:
 	_panel.modulate.a = 0.0
 	create_tween().tween_property(_panel, "modulate:a", 1.0, 0.18)
 	Audio.play_ui(&"ui_open")
-	session.begin()
+	session.begin(at)
 
 func _on_line(speaker: String, portrait: String, bb: String, index: int, count: int) -> void:
 	_portrait.texture = UIArt.tex(portrait) if portrait != "" else null
@@ -203,6 +203,10 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 			_open_shop_after_end.call_deferred(shop_id)
 		&"heal":
 			NpcServices.heal(Game.player)
+		&"cutscene":
+			# bh-021: the conversation steps aside for a cutscene and picks up again at `resume` afterwards
+			var d: Dictionary = arg
+			_play_cutscene.call_deferred(StringName(d.id), npc, String(d.get("resume", "")), session.npc if session else null)
 		&"service":
 			match StringName(arg):
 				&"respec": _respec()
@@ -222,6 +226,21 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 					# Capture the definition before opening the next window deferred.
 					_open_socketing.call_deferred(session.npc.display_name, session.npc.shop)
 				&"lape_trade": _open_lape.call_deferred()
+
+func _play_cutscene(id: StringName, who: Npc, resume: String, def: NpcDef) -> void:
+	close()
+	if who and is_instance_valid(who):
+		who.begin_talk(Game.player as Node3D)
+	CutscenePlayer.play(id, func() -> void:
+		if resume == "":
+			if who and is_instance_valid(who):
+				who.end_talk()
+			return
+		if who and is_instance_valid(who):
+			start(who, resume)
+		elif def:
+			npc = null
+			_open(def, resume))
 
 func _open_crafting(station: StringName) -> void:
 	# the name of that station on this map ("Angkol Les' Alchemy Table", "Field Forge", "Brannoc's Anvil"), else the generic one

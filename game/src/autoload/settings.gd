@@ -442,7 +442,7 @@ static func binding_text(action: StringName) -> String:
 	for e in InputMap.action_get_events(action):
 		if e is InputEventKey:
 			var code: Key = e.physical_keycode if e.physical_keycode != 0 else e.keycode
-			return OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 else code)
+			return OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 and DisplayServer.get_name() != "headless" else code)
 		if e is InputEventMouseButton:
 			return {MOUSE_BUTTON_LEFT: "LMB", MOUSE_BUTTON_RIGHT: "RMB", MOUSE_BUTTON_MIDDLE: "MMB",
 				MOUSE_BUTTON_WHEEL_UP: "Wheel Up", MOUSE_BUTTON_WHEEL_DOWN: "Wheel Down"}.get(e.button_index, "Mouse %d" % e.button_index)

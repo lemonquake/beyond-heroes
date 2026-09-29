@@ -6,7 +6,7 @@ extends UIWindow
 
 const GROUPS := [
 	["Offense", [&"weapon_damage_range", &"attacks_per_second", &"attack_speed", &"cast_speed", &"crit_chance", &"crit_damage",
-		&"accuracy", &"accuracy_chance", &"phys_damage", &"magic_damage", &"elemental_damage", &"pen_armor", &"pen_elemental",
+		&"accuracy", &"accuracy_chance", &"physical_attack", &"spell_power", &"phys_damage", &"magic_damage", &"elemental_damage", &"pen_armor", &"pen_elemental",
 		&"impact_strength", &"stagger_power", &"status_power", &"life_leech", &"mana_leech", &"skill_levels"]],
 	["Defense", [&"max_hp", &"hp_regen", &"defense", &"physical_armor_dr", &"evasion", &"evade_chance", &"block_chance",
 		&"block_strength", &"parry_window", &"poise", &"knockback_res", &"status_res", &"damage_taken"]],
@@ -26,6 +26,7 @@ var _tier_emblem: TextureRect
 var _tier_text: Label
 var _guild_text: Label
 var _guild_crest: TextureRect
+var _promotion_text: Label
 var _points: Label
 var _attr_rows := {}              # attr -> {value: Label, plus: Button, pending: Label}
 var _pending := {}                # attr -> points not yet committed
@@ -109,6 +110,10 @@ func _build() -> void:
 	var note := UITheme.label("Hover an attribute to see what it improves. Points are only spent when you apply them.", 14, UITheme.TEXT_MUTED, UITheme.body_font())
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	mid.add_child(note)
+	mid.add_child(section("Next Class Rank"))
+	_promotion_text = UITheme.label("", 17, UITheme.TEXT, UITheme.body_font())
+	_promotion_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	mid.add_child(_promotion_text)
 	# right: derived stats (scrolling)
 	var right := vbox(6)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -224,6 +229,10 @@ func refresh() -> void:
 	var g := DataGuilds.guild(hero.guild)
 	_guild_text.text = GuildRules.display_name(hero) if not g.is_empty() else "No guild"
 	_guild_crest.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
+	var promotion := GuildRules.next_promotion(hero)
+	_promotion_text.text = String(promotion.error)
+	if int(promotion.rank) > 0:
+		_promotion_text.text = "Class %s · Level %d · %d gold\n%s" % [DataGuilds.letter(int(promotion.rank)), promotion.level, promotion.fee, String(promotion.deed).replace("; ", "\n")]
 	_refresh_attrs()
 
 func _guild_tip() -> String:
@@ -243,7 +252,7 @@ func _guild_tip() -> String:
 		var t := DataGuilds.tier(r)
 		var gate := int(t.gate)
 		lines.append("%s Class %s — %s: level %d%s%s" % ["▶" if r == hero.tier else " ", t.letter, t.title, t.level,
-			(", " + String(t.deed)) if String(t.deed) != "" else "", (" · equips %s" % BH.rarity_name(gate)) if gate >= 0 else ""])
+			(", " + GuildRules.requirements_text(hero, r)) if r > 1 else "", (" · equips %s" % BH.rarity_name(gate)) if gate >= 0 else ""])
 	return "\n".join(lines)
 
 func _on_dirty() -> void:

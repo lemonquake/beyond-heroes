@@ -44,15 +44,81 @@ static func next_promotion(hero: HeroData) -> Dictionary:
 		return {"rank": -1, "ok": false, "error": "There is no tier above Class SSS"}
 	var t := DataGuilds.tier(r)
 	var out := {"rank": r, "fee": int(t.fee), "level": int(t.level), "flag": String(t.flag), "deed": String(t.deed), "ok": false, "error": ""}
-	if hero.progress.level < int(t.level):
-		out.error = "Class %s needs level %d" % [t.letter, t.level]
-	elif String(t.flag) != "" and not bool(hero.world_flags.get(StringName(t.flag), false)):
-		out.error = "Class %s needs a proven deed: %s" % [t.letter, t.deed]
+	var missing := missing_requirements(hero, r)
+	out.deed = requirements_text(hero, r)
+	out["requirements"] = missing
+	if not missing.is_empty():
+		out.error = "Class %s needs %s" % [t.letter, missing[0]]
 	elif hero.inventory.gold < int(t.fee):
 		out.error = "The Class %s registration costs %d gold" % [t.letter, t.fee]
 	else:
 		out.ok = true
 	return out
+
+## Count distinct victories, so farming one easy boss never earns a high rank.
+static func achievements(hero: HeroData) -> Dictionary:
+	var dungeons := 0
+	var hardest := 0
+	for id in DataDungeons.order():
+		if DataDungeons.boss_gone(hero, id):
+			dungeons += 1
+			hardest = maxi(hardest, DataDungeons.tier(id))
+	var champions := 0
+	for id in hero.miniboss_log:
+		if int(hero.miniboss_log[id].get("kills", 0)) > 0:
+			champions += 1
+	return {"jobs": maxi(0, int(hero.guild_jobs.get("done", 0))), "dungeons": dungeons, "champions": champions, "dungeon_tier": hardest}
+
+static func missing_requirements(hero: HeroData, rank: int) -> PackedStringArray:
+	var out := PackedStringArray()
+	var t := DataGuilds.tier(rank)
+	if hero.progress.level < int(t.level):
+		out.append("level %d (%d / %d)" % [t.level, hero.progress.level, t.level])
+	# Promotions remain cumulative, including when validating a legacy save.
+	for r in range(2, rank + 1):
+		var previous := DataGuilds.tier(r)
+		if String(previous.flag) != "" and not bool(hero.world_flags.get(StringName(previous.flag), false)):
+			var line := "a proven deed: %s" % previous.deed
+			if not out.has(line):
+				out.append(line)
+	var a := achievements(hero)
+	for k in ["jobs", "champions", "dungeons", "dungeon_tier"]:
+		if int(a[k]) < int(t.get(k, 0)):
+			out.append("%s (%d / %d)" % [_achievement_name(k), a[k], t[k]])
+	return out
+
+static func _achievement_name(key: String) -> String:
+	return {"jobs": "guild jobs handed in", "champions": "different champions defeated", "dungeons": "different dungeons cleared", "dungeon_tier": "highest dungeon tier cleared"}.get(key, key)
+
+static func requirements_text(hero: HeroData, rank: int) -> String:
+	var t := DataGuilds.tier(rank)
+	var a := achievements(hero)
+	var lines := PackedStringArray()
+	for r in range(2, rank + 1):
+		var previous := DataGuilds.tier(r)
+		if String(previous.flag) != "":
+			var line := "%s: %s" % [previous.deed, "done" if bool(hero.world_flags.get(StringName(previous.flag), false)) else "needed"]
+			if not lines.has(line):
+				lines.append(line)
+	for k in ["jobs", "champions", "dungeons", "dungeon_tier"]:
+		if int(t.get(k, 0)) > 0:
+			lines.append("%s: %d / %d" % [_achievement_name(k).capitalize(), a[k], t[k]])
+	return "; ".join(lines)
+
+## Reassess old level-and-gold ranks once. Refund removed promotion fees;
+## never remove equipment, items, experience or recorded victories.
+static func migrate_legacy_rank(hero: HeroData) -> void:
+	if hero.guild == &"" or hero.tier <= 1:
+		return
+	var earned := 1
+	for r in range(2, hero.tier + 1):
+		if not missing_requirements(hero, r).is_empty():
+			break
+		earned = r
+	for r in range(earned + 1, hero.tier + 1):
+		hero.inventory.gold += int(DataGuilds.tier(r).fee)
+	hero.tier = earned
+	hero.equipment.tier_rank = earned
 
 static func promote(hero: HeroData) -> String:
 	var p := next_promotion(hero)

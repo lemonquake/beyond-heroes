@@ -71,3 +71,13 @@ Current completion update, 29 September 2026.
 - Added regression coverage for the real dialogue-to-socket-window-to-shop flow at all three specialists, confirmation and gold charging, stale filters, and saved-stock recovery. Updated the visual capture to use the same dialogue and Buy Crystals path as players.
 
 Validation and build details are recorded in work/lemondev/bh-020/handoff.md and its evidence folder. Windows and Android build outputs are provided separately from source control. The APK uses the project's existing debug signing configuration; physical-device testing is reported separately from a successful build.
+
+
+## BH-021 - Forsaken Hero story and combat progression
+
+- Completed the opening quest through Wyman, Paul David's account of Aljay and Roydo, the Weeping Causeway and Kethrax, connecting back to the Hollow Warden chapter. Added cinematic scenes, legendary models and animations, quest models, music and Class SX nameplates. Fixed duplicate introduction rewards, quest routing and delayed cutscene cleanup.
+- Reworked level-6+ weapon drops, Strength attack, Intelligence/Wisdom spell power and caster weapons. Scaled enemy health and equipment armor, updated Tempos and player-facing stat comparisons, and protected reflected/percentage damage from applying spell power twice. Levels 1-5 keep their original growth budgets.
+- Replaced level-and-gold promotions with cumulative story deeds, handed-in jobs, different champion victories and different dungeon clears. S/SS/SSS begin at levels 45/55/60 and require substantial achievements. Old saves reassess rank once and refund removed promotion fees while retaining gear. Multiplayer protocol is 8.
+- Focused regression: 24,396 passing checks, plus additional percentage-damage checks and a rendered quest/boss/cutscene smoke test. Existing enemy behavior and starter-gear class-balance assertions remain documented limitations.
+
+Formulas, measured damage, promotion requirements and build details: [Combat and story update](COMBAT_AND_STORY_UPDATE.md).

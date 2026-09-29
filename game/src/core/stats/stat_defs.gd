@@ -5,9 +5,9 @@ enum Fmt { INT, DEC1, PCT, MULT, SPEED, SECONDS }
 
 # key: [display name, format, short description]
 const DEFS := {
-	&"str": ["Strength", Fmt.INT, "Physical damage with all weapons, Defense, carry capacity, knockback and Maximum HP."],
+	&"str": ["Strength", Fmt.INT, "Physical attack and weapon damage, Defense, carry capacity, knockback and Maximum HP."],
 	&"agi": ["Agility", Fmt.INT, "Movement speed, Evasion, Attack Speed, Critical Chance and dodge."],
-	&"int": ["Intelligence", Fmt.INT, "Magic damage, spell scaling, Maximum Mana."],
+	&"int": ["Intelligence", Fmt.INT, "Magic damage, spell power, staff and wand attacks, Maximum Mana."],
 	&"wis": ["Wisdom", Fmt.INT, "Mana efficiency and regeneration, resistances, cooldowns."],
 	&"spi": ["Spirit", Fmt.INT, "HP/Mana regeneration, healing, buff effect, status resistance."],
 	&"dex": ["Dexterity", Fmt.INT, "Accuracy and Critical Chance. Does not increase damage."],
@@ -34,6 +34,8 @@ const DEFS := {
 	&"status_res": ["Status Resistance", Fmt.PCT, "Reduces status buildup and duration."],
 	&"knockback_res": ["Knockback Resistance", Fmt.PCT, ""],
 	&"impact_strength": ["Impact Strength", Fmt.MULT, "Multiplier on knockback you inflict and on impact damage."],
+	&"physical_attack": ["Attribute Attack", Fmt.DEC1, "Flat attack from Strength, before weapon bonuses. Elemental staffs and wands use Intelligence."],
+	&"spell_power": ["Spell Power", Fmt.PCT, "Multiplies spell base damage. Comes from Intelligence, Wisdom and the equipped staff or wand."],
 	&"phys_damage": ["Physical Damage", Fmt.PCT, "Increased physical damage."],
 	&"magic_damage": ["Magic Damage", Fmt.PCT, "Increased spell damage."],
 	&"elemental_damage": ["Elemental Damage", Fmt.PCT, "Increased damage of all eight elements."],

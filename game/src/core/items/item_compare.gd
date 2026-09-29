@@ -8,7 +8,7 @@ const ROWS := [
 	[&"crit_damage", false], [&"defense", false], [&"block_chance", false], [&"max_hp", false], [&"max_mana", false],
 	[&"hp_regen", false], [&"mana_regen", false], [&"move_speed", false], [&"attack_speed", false], [&"cast_speed", false],
 	[&"evasion", false], [&"accuracy", false], [&"phys_damage", false], [&"magic_damage", false], [&"elemental_damage", false],
-	[&"cdr", false], [&"status_res", false], [&"life_leech", false],
+	[&"spell_power", false], [&"physical_attack", false], [&"cdr", false], [&"status_res", false], [&"life_leech", false],
 	[&"str", false], [&"agi", false], [&"int", false], [&"wis", false], [&"spi", false], [&"dex", false],
 ]
 
@@ -27,6 +27,8 @@ static func stats_with(hero: HeroData, equipment_slots: Dictionary) -> DerivedSt
 		eq.slots[k] = equipment_slots[k]
 	var mods := eq.modifiers()
 	mods.append_array(hero.talent_tree.modifiers())
+	mods.append_array(hero.skill_tree.passive_modifiers(hero.item_skill_levels(mods)))
+	mods.append_array(GuildRules.modifiers(hero))
 	var d := StatCalculator.compute(hero.cls, hero.progress.level, hero.progress.base_attributes(), mods, eq.loadout())
 	_add_weapon_rows(d)
 	return d
@@ -34,7 +36,14 @@ static func stats_with(hero: HeroData, equipment_slots: Dictionary) -> DerivedSt
 static func _add_weapon_rows(d: DerivedStats) -> void:
 	var mn := d.get_stat(&"weapon_min")
 	var mx := d.get_stat(&"weapon_max")
-	var avg := (mn + mx) * 0.5
+	var avg := (mn + mx) * 0.5 * (1.0 + StatCalculator.attack_scaling(d))
+	avg *= 1.0 + d.get_stat(&"damage") + d.get_stat(&"weapon_damage")
+	# Neutral target estimate: elemental resistance, armour and skill multipliers
+	# are encounter-specific and deliberately excluded from the comparison.
+	if d.loadout != null:
+		var share := d.loadout.main_elem_share
+		var bonus := d.get_stat(&"elemental_damage") + d.get_stat(Elements.dmg_key(d.loadout.main_element)) if share > 0.0 else 0.0
+		avg *= 1.0 + share * bonus
 	d.values[&"weapon_avg"] = avg
 	var aps := d.get_stat(&"attacks_per_second")
 	var crit := clampf(d.get_stat(&"crit_chance"), 0.0, 1.0)

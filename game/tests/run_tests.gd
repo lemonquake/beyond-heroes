@@ -7,6 +7,9 @@ extends Node
 const DIR := "res://tests/unit/"
 
 func _ready() -> void:
+	_run.call_deferred()
+
+func _run() -> void:
 	# anything a test saves (a bonfire rest, a travel) goes to a hidden slot: slots 0-2 are the player's own heroes, and
 	# Game.save_slot starts at 0 (the crafting suite's bonfire rest overwrote Slot 1 with a "Crafter", bh-011)
 	Game.save_slot = 99

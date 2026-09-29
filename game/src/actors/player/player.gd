@@ -1885,6 +1885,7 @@ func _on_actor_died(victim: Node, killer: Node) -> void:
 			req.direct_status[&"chilled"] = 60.0
 			req.can_crit = false
 			req.label = "Frozen explosion"
+			req.tags[&"proc"] = true
 			AreaEffects.burst(self, v.global_position, 3.5, BH.LAYER_ENEMY, req, self, [v])
 			FX.spawn(VFXLib.ring_wave(Elements.color(Elements.ICE), 3.5, 0.4, 0.8), v.global_position)
 			FX.spawn(VFXLib.particles(Color(0.7, 0.9, 1.0, 1.0), 30, 0.6, true, 0.3, 8.0, 180.0, Vector3(0, -9, 0), 0.4), v.center())

@@ -214,6 +214,9 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	if _char.has(ck):
 		return _char[ck]
 	var base := nm.get_slice("__", 0)
+	if LEGEND_PALETTES.has(nm.get_slice("__", 1)) and LEGEND.has(base):
+		_char[ck] = _legend_mat(base, src as BaseMaterial3D, lite)
+		return _char[ck]
 	var imported := src as BaseMaterial3D
 	var m := StandardMaterial3D.new()
 	var d: Array = CHAR.get(base, [])
@@ -245,6 +248,43 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	m.rim = 0.25
 	m.rim_tint = 0.6
 	_char[ck] = m
+	return m
+
+## bh-021: the legends (Aljay, Roydo, Paul David, Kethrax) and their weapons carry a box-projected UV map
+## (tools/blender/characters/legend_kit.finish_mesh) and real tileable texture sets (tools/textures/gen_legend_textures.py).
+## base material name -> [texture set, metres per repeat, normal strength]
+const LEGEND_PALETTES := ["aljay", "roydo", "paul_david", "kethrax", "dusk_piercer", "dusk_piercer_broken", "dusk_piercer_tip", "dawnmaul",
+	"stormwake", "kethrax_mace"]
+const LEGEND := {
+	"BH_DragonPlate": ["dragon_scale", 0.3, 1.0], "BH_HolyPlate": ["engraved_plate", 0.8, 0.35],
+	"BH_Crimson": ["engraved_plate", 0.3, 0.8], "BH_Gold": ["engraved_plate", 0.45, 0.4], "BH_DarkSteel": ["engraved_plate", 0.55, 0.6],
+	"BH_ForsakenIron": ["forsaken_iron", 0.6, 1.0], "BH_Mail": ["chainmail", 0.22, 1.0], "BH_Leather": ["leather_worn", 0.45, 0.8],
+	"BH_Cloth_Primary": ["storm_wool", 0.3, 0.6], "BH_Cloth_Secondary": ["storm_wool", 0.3, 0.6],
+	"BH_Horn": ["tyrant_bone", 0.3, 0.8], "BH_Fang": ["tyrant_bone", 0.2, 0.6], "BH_Bone": ["tyrant_bone", 0.3, 0.8],
+	"BH_Steel": ["engraved_plate", 0.5, 0.5], "BH_Silver": ["engraved_plate", 0.4, 0.5], "BH_Hilt": ["engraved_plate", 0.4, 0.5],
+}
+
+static func _legend_mat(base: String, imported: BaseMaterial3D, lite: bool) -> Material:
+	var d: Array = LEGEND[base]
+	var m := StandardMaterial3D.new()
+	var tile := 1.0 / float(d[1])
+	m.uv1_scale = Vector3(tile, tile, 1.0)
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.vertex_color_use_as_albedo = true      # the baked AO
+	m.albedo_texture = load("res://assets/textures/legend/%s_albedo.png" % d[0])
+	if not lite:
+		m.normal_enabled = true
+		m.normal_texture = load("res://assets/textures/legend/%s_normal.png" % d[0])
+		m.normal_scale = float(d[2])
+		m.roughness_texture = load("res://assets/textures/legend/%s_rough.png" % d[0])
+		m.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_RED
+	if imported:
+		m.albedo_color = imported.albedo_color
+		m.metallic = imported.metallic
+		m.roughness = clampf(imported.roughness / 0.45, 0.2, 1.0) if not lite else imported.roughness
+	m.rim_enabled = not lite
+	m.rim = 0.2
+	m.rim_tint = 0.5
 	return m
 
 static func _char_mat(nm: String, primary: Color) -> Material:

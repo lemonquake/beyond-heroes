@@ -404,7 +404,7 @@ func to_dict() -> Dictionary:
 		"known_places": known_places.keys().map(func(k): return String(k)), "route": route.duplicate(),
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
-		"guild": String(guild), "tier": tier, "rested_until": rested_until,
+		"guild": String(guild), "tier": tier, "tier_rules_version": 2, "rested_until": rested_until,
 		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
 		"town_portal": town_portal.duplicate(true), "belt": potion_belt.map(func(b): return String(b)),
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
@@ -570,6 +570,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.tempo_serial = int(d.get("tempo_serial", 0))
 	for t in h.tempos + h.spirit_hall:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)
+	if int(d.get("tier_rules_version", 1)) < 2:
+		GuildRules.migrate_legacy_rank(h)
 	return h
 
 # ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------
