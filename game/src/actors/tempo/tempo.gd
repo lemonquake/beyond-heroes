@@ -146,6 +146,8 @@ func _ready() -> void:
 	_plate.outline_size = 7
 	_plate.outline_modulate = Color(0, 0, 0, 0.85)
 	_plate.modulate = tdef.get("color", DataTempos.SPIRIT_TINT)
+	if data.is_legend() and DataTempos.legend_tier(data.legend_id) > 0:
+		_plate.modulate = data.grade_color().lightened(0.2)
 	_plate.position.y = 2.65
 	_plate.no_depth_test = true
 	_plate.render_priority = 8
@@ -175,6 +177,16 @@ func _spirit_look() -> void:
 	_light.omni_range = 3.2
 	_light.position = Vector3(0, 1.3, 0)
 	add_child(_light)
+	# bh-022: a Mythic or Eternal spirit burns in its tier's colour — a rim, embers rising around it and a halo of light
+	var tier := DataTempos.legend_tier(data.legend_id) if data.is_legend() else 0
+	if tier > 0:
+		var tc: Color = DataTempos.renowned_tier(tier).color
+		visual.set_rim(tc.lerp(DataTempos.SPIRIT_TINT, 0.35), 0.95)
+		var embers := VFXLib.particles(Color(tc, 0.8), 12 + 8 * tier, 1.4, false, 0.07, 0.6, 30.0, Vector3(0, 0.9, 0), 0.45)
+		embers.position = Vector3(0, 0.4, 0)
+		add_child(embers)
+		_light.light_color = tc
+		_light.light_energy = 0.8 + 0.3 * tier
 
 func refresh_equipment_visuals() -> void:
 	if visual == null:

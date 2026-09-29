@@ -249,24 +249,30 @@ func _tempos() -> void:
 	_para("When your grade rises, the weaker spirits fade from the shrine and stronger ones answer at once. The Tempos you already carry keep the grade they were bound at.", UITheme.TEXT_DIM, 16)
 	_heading("The renowned")
 	_para("Five spirits whose names are still sung wait at the shrine for a hero strong enough to carry them. They cost a fortune, carry three quarters of your strength and fight with skills no other spirit has. Save for them before a hard raid.")
-	for id in DataTempos.legend_ids():
-		var lg := DataTempos.legend(id)
-		var r := hbox(14)
-		var ic := TextureRect.new()
-		ic.texture = DataTempos.class_icon(lg["class"])
-		ic.custom_minimum_size = Vector2(40, 40)
-		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		r.add_child(ic)
-		var nm := UITheme.label("%s, %s" % [lg.name, lg.title], 18, DataTempos.RENOWNED.color, UITheme.body_bold())
-		nm.custom_minimum_size = Vector2(420, 0)
-		r.add_child(nm)
-		r.add_child(UITheme.label("%s  ·  level %d  ·  %s gold" % [DataTempos.tempo_class(lg["class"]).name, int(lg.level), _thousands(int(lg.price))],
-			16, UITheme.PARCHMENT, UITheme.body_font()))
-		if hero:
-			var state := "walks with you" if TempoRules.legend_bound(hero, id) else ("can be bound" if hero.progress.level >= int(lg.level) else "not yet")
-			r.add_child(UITheme.label("(%s)" % state, 15, UITheme.GOOD if state != "not yet" else UITheme.TEXT_MUTED, UITheme.body_font()))
-		_content.add_child(r)
+	_para("As you grow, greater dead take their place at the shrine and in summons: the Mythic from level 25, the Eternal from level 45. Spirits you already carry stay with you.", UITheme.TEXT_DIM, 16)
+	for tier in DataTempos.RENOWNED_TIERS.size():
+		var td: Dictionary = DataTempos.renowned_tier(tier)
+		_content.add_child(UITheme.label("%s  ·  level %d+  ·  %d%% of your strength" % [td.name, int(td.level), roundi(float(td.mirror) * 100.0)],
+			18, td.color, UITheme.body_bold()))
+		for id in DataTempos.legend_ids(int(td.level)):
+			var lg := DataTempos.legend(id)
+			var r := hbox(14)
+			var ic := TextureRect.new()
+			ic.texture = DataTempos.class_icon(lg["class"])
+			ic.custom_minimum_size = Vector2(40, 40)
+			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			r.add_child(ic)
+			var nm := UITheme.label("%s, %s" % [lg.name, lg.title], 18, td.color, UITheme.body_bold())
+			nm.custom_minimum_size = Vector2(420, 0)
+			r.add_child(nm)
+			r.add_child(UITheme.label("%s  ·  level %d  ·  %s gold" % [DataTempos.tempo_class(lg["class"]).name, int(lg.level), _thousands(int(lg.price))],
+				16, UITheme.PARCHMENT, UITheme.body_font()))
+			if hero:
+				var answering := DataTempos.renowned_tier_for(hero.progress.level) == tier
+				var state := "walks with you" if TempoRules.legend_bound(hero, id) else (("can be bound" if hero.progress.level >= int(lg.level) else "not yet") if answering else ("passed on" if DataTempos.renowned_tier_for(hero.progress.level) > tier else "not yet"))
+				r.add_child(UITheme.label("(%s)" % state, 15, UITheme.GOOD if state in ["walks with you", "can be bound"] else UITheme.TEXT_MUTED, UITheme.body_font()))
+			_content.add_child(r)
 
 func _steps() -> void:
 	_heading("Where to start")

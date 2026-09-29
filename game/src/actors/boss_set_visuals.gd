@@ -406,8 +406,43 @@ static func wear(visual: Node3D, equipment: Equipment) -> Array[Node3D]:
 		ba.name = "Set_" + slot
 		ba.bone_name = bone
 		skeleton.add_child(ba)
-		var piece := create_piece(id,slot)
+		var piece := _worn_piece(id, slot, item.base.model_path())
 		ba.add_child(piece)
 		piece.transform = rest.affine_inverse() * target
 		result.append(ba)
+		# bh-022: parts that follow another bone (pauldrons, hand plates, sabatons, tassets) ride their own attachment
+		for child in piece.get_children():
+			var nm := String(child.name)
+			if not nm.begins_with("AT_") or not (child is Node3D):
+				continue
+			var other := nm.substr(3)
+			if other.ends_with("_L") or other.ends_with("_R"):
+				other = other.left(other.length() - 2) + "." + other.right(1)
+			var oi := skeleton.find_bone(other)
+			if oi < 0:
+				continue
+			var ob := BoneAttachment3D.new()
+			ob.name = "SetPart_%s_%s" % [slot, other.replace(".", "_")]
+			ob.bone_name = other
+			skeleton.add_child(ob)
+			var local := (child as Node3D).transform
+			piece.remove_child(child)
+			ob.add_child(child)
+			(child as Node3D).transform = skeleton.get_bone_global_rest(oi).affine_inverse() * target * local
+			result.append(ob)
 	return result
+
+## bh-022: the worn piece is the item's own model (tools/blender/items/boss_regalia.py) with the game's materials;
+## the older procedural regalia (create_piece) remains the fallback when a model is missing.
+static func _worn_piece(id: String, slot: String, path: String) -> Node3D:
+	if path != "" and ResourceLoader.exists(path):
+		var ps: PackedScene = load(path)
+		var n: Node3D = ps.instantiate()
+		var ms: Array[MeshInstance3D] = []
+		for c in n.find_children("*", "MeshInstance3D", true, false):
+			ms.append(c)
+		if n is MeshInstance3D:
+			ms.append(n)
+		MaterialLibrary.apply_character(ms, Color(0.55, 0.18, 0.16))
+		return n
+	return create_piece(id, slot)

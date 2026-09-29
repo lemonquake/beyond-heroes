@@ -41,14 +41,18 @@ func _init() -> void:
 	uid = _uid_counter
 
 func display_name() -> String:
+	# bh-022: crystals set in the sockets name the piece ("Iron Longsword of the Nova Blast", CrystalNames)
+	var cs := CrystalNames.suffix(self)
+	var cx := (" " + cs) if cs != "" else ""
 	if custom_name != "" and epithet != "":
-		return "%s, %s%s" % [custom_name, epithet, _tech_tag()]
+		return "%s%s, %s%s" % [custom_name, cx, epithet, _tech_tag()]
 	if custom_name != "":
-		return custom_name + _tech_tag()
+		return custom_name + cx + _tech_tag()
 	if base.unique_name != "":
-		return base.unique_name + _tech_tag()
+		return base.unique_name + cx + _tech_tag()
 	if rarity >= BH.Rarity.BASIC and rarity <= BH.Rarity.LICENSED and not affixes.is_empty() or name_prefix != "" or name_suffix != "":
 		# "Flaming Sword of Precision": first prefix + base + first suffix; a weapon's forged parts fill an empty side.
+		# The crystals' name takes the suffix's place ("Flaming Sword of the Nova Blast").
 		var pre := ""
 		var suf := ""
 		for a in affixes:
@@ -63,8 +67,10 @@ func display_name() -> String:
 			pre = name_prefix + " "
 		if suf == "" and name_suffix != "":
 			suf = " " + name_suffix
+		if cx != "":
+			suf = cx
 		return pre + base.display_name + suf + _tech_tag()
-	return base.display_name + _tech_tag()
+	return base.display_name + cx + _tech_tag()
 
 ## bh-017: " +3" after the name of a weapon with a Fore-Tech refit.
 func _tech_tag() -> String:

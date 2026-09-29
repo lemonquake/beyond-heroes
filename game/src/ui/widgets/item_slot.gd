@@ -54,7 +54,8 @@ func set_item(it: ItemInstance, p_unusable := false) -> void:
 	queue_redraw()
 
 func _shimmers() -> bool:
-	return item != null and item.rarity >= BH.Rarity.ELITE
+	# bh-022: a piece with crystals set pulses in their colour too
+	return item != null and (item.rarity >= BH.Rarity.ELITE or (item.sockets > 0 and Sockets.filled(item) > 0))
 
 func _process(delta: float) -> void:
 	if not _shimmers():
@@ -96,6 +97,7 @@ func _draw() -> void:
 	if gl:
 		var pulse := 0.65 + 0.35 * sin(_t * (2.2 + 0.3 * float(item.rarity - 5)))
 		draw_texture_rect(gl, r, false, Color(1, 1, 1, pulse * a))
+	SocketArt.draw_infusion(self, item, ir, _t, a)
 	var ic := item.icon()
 	if ic:
 		draw_texture_rect(ic, ir, false, Color(1, 1, 1, a))
@@ -106,6 +108,8 @@ func _draw() -> void:
 		draw_texture_rect(fr, r, false, Color(1, 1, 1, a))
 	elif item.rarity >= BH.Rarity.BASIC:
 		draw_rect(r.grow(-3), Color(item.color(), 0.6 * a), false, 2.0)
+	# bh-022: its sockets, empty or holding their crystals
+	SocketArt.draw_sockets(self, item, r.grow(-size.x * (0.1 if kind == Kind.EQUIPMENT else 0.04)), a)
 	# stack count
 	var font := UITheme.number_font()
 	if item.count > 1:

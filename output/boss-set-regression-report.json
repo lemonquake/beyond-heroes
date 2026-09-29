@@ -1,0 +1,45 @@
+{
+  "checks": 44124,
+  "elapsed_ms": 32529,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_boss_sets.gd": {
+      "checks": 5959,
+      "failures": [],
+      "ms": 6184.04,
+      "tests": 7
+    },
+    "test_crafting.gd": {
+      "checks": 680,
+      "failures": [],
+      "ms": 18982.962,
+      "tests": 11
+    },
+    "test_crossbows.gd": {
+      "checks": 10766,
+      "failures": [],
+      "ms": 371.164,
+      "tests": 8
+    },
+    "test_dungeon_growth.gd": {
+      "checks": 22207,
+      "failures": [],
+      "ms": 6076.255,
+      "tests": 6
+    },
+    "test_inventory_overhaul.gd": {
+      "checks": 2035,
+      "failures": [],
+      "ms": 50.841,
+      "tests": 6
+    },
+    "test_items.gd": {
+      "checks": 2477,
+      "failures": [],
+      "ms": 468.063,
+      "tests": 17
+    }
+  },
+  "timestamp": "2026-09-30T03:57:50"
+}

@@ -1,0 +1,152 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _floor (res://tests/unit/test_bh012.gd:29)
+       [2] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2322' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2323' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2324' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2459' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2460' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2461' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2574' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2575' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2576' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2697' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2698' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2699' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+[PASS] test_bh012.gd — 11 tests, 1142 checks, 0 failures (2163.3 ms)
+[PASS] test_bh013.gd — 11 tests, 1017 checks, 0 failures (7515.4 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 21371 checks, 0 failures (5150.5 ms)
+TOTAL: 23530 checks, 0 failures
+ERROR: 98 RID allocations of type 'P11JoltShape3D' were leaked at exit.
+ERROR: 1513 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.
+ERROR: 30 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.
+ERROR: 498 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.
+ERROR: 26 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 4 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
+WARNING: 2889 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1931 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketSmallE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

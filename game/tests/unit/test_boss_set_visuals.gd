@@ -31,7 +31,8 @@ func test_bone_attachments_follow_equipment_and_teardown() -> void:
 		for slot in Art.SLOTS:
 			if slot != "main_weapon": eqp.slots[StringName(slot)] = DB.make_item(StringName("boss_dragonforge_"+slot),BH.Rarity.MASTER,30,1)
 		v.dress_equipment(eqp)
-		eq(v._set_nodes.size(),11,"all non-weapon slots have independent worn geometry on "+String(cls_id))
+		eq(_main(v),11,"all non-weapon slots have independent worn geometry on "+String(cls_id))
+		ok(v._set_nodes.size() > 11,"pauldrons, hand plates, sabatons and tassets ride their own bones (bh-022)")
 		var first_id: int = v._set_nodes[0].get_instance_id()
 		v.dress_equipment(eqp)
 		eq(v._set_nodes[0].get_instance_id(),first_id,"unchanged equipment does not rebuild bones")
@@ -39,10 +40,14 @@ func test_bone_attachments_follow_equipment_and_teardown() -> void:
 			ok(node is BoneAttachment3D and v.skeleton.find_bone(node.bone_name)>=0,"gear follows a real skeleton bone")
 		eqp.slots[&"helm"] = null
 		v.dress_equipment(eqp)
-		eq(v._set_nodes.size(),10,"removing helmet preserves other pieces")
+		eq(_main(v),10,"removing helmet preserves other pieces")
 		for slot in eqp.slots: eqp.slots[slot] = null
 		v.dress_equipment(eqp)
 		eq(v._set_nodes.size(),0,"removing set clears every worn attachment")
 		ok(v.appearance.get("set_gear",{}).is_empty(),"network appearance clears removed gear")
 		v.free()
 	done()
+
+## The worn pieces themselves (one "Set_<slot>" attachment each), not their extra per-bone parts.
+func _main(v: CharacterVisual) -> int:
+	return v._set_nodes.filter(func(n): return String(n.name).begins_with("Set_")).size()

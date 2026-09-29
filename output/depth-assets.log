@@ -1,0 +1,648 @@
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+01:49:23 | INFO: Starting glTF 2.0 export
+01:49:23 | INFO: Extracting primitive: depth_copperleaf_backsword
+01:49:23 | INFO: Primitives created: 4
+01:49:23 | INFO: Finished glTF 2.0 export in 0.05754899978637695 s
+
+[item] depth_copperleaf_backsword     1224 tris  size 0.144 x 0.036 x 0.916
+01:49:23 | INFO: Starting glTF 2.0 export
+01:49:23 | INFO: Extracting primitive: depth_saltglass_cutlass
+01:49:23 | INFO: Primitives created: 4
+01:49:23 | INFO: Finished glTF 2.0 export in 0.010413408279418945 s
+
+[item] depth_saltglass_cutlass        1020 tris  size 0.156 x 0.084 x 0.923
+01:49:23 | INFO: Starting glTF 2.0 export
+01:49:23 | INFO: Extracting primitive: depth_rootguard_falchion
+01:49:23 | INFO: Primitives created: 4
+01:49:23 | INFO: Finished glTF 2.0 export in 0.009270906448364258 s
+
+[item] depth_rootguard_falchion       1136 tris  size 0.180 x 0.054 x 0.988
+01:49:23 | INFO: Starting glTF 2.0 export
+01:49:23 | INFO: Extracting primitive: depth_lantern_rapier
+01:49:23 | INFO: Primitives created: 4
+01:49:23 | INFO: Finished glTF 2.0 export in 0.009212732315063477 s
+
+[item] depth_lantern_rapier           1280 tris  size 0.237 x 0.043 x 1.005
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_cinderhook_saber
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009460687637329102 s
+
+[item] depth_cinderhook_saber         1312 tris  size 0.249 x 0.036 x 1.084
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_frostbell_broadsword
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.00961446762084961 s
+
+[item] depth_frostbell_broadsword     1020 tris  size 0.260 x 0.141 x 1.091
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_hollowfin_estoc
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009966135025024414 s
+
+[item] depth_hollowfin_estoc           944 tris  size 0.284 x 0.054 x 1.156
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_moonwell_flamberge
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009989261627197266 s
+
+[item] depth_moonwell_flamberge       1280 tris  size 0.169 x 0.043 x 1.173
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_starfall_spatha
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009464502334594727 s
+
+[item] depth_starfall_spatha          1224 tris  size 0.170 x 0.036 x 1.252
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_deepwatch_messer
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009881258010864258 s
+
+[item] depth_deepwatch_messer         1108 tris  size 0.182 x 0.099 x 1.259
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_sunken_oathblade
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009890317916870117 s
+
+[item] depth_sunken_oathblade         1136 tris  size 0.206 x 0.054 x 1.324
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_crownless_longsword
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009493589401245117 s
+
+[item] depth_crownless_longsword      1280 tris  size 0.261 x 0.043 x 1.341
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_basalt_zweihander
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009876012802124023 s
+
+[item] depth_basalt_zweihander        1224 tris  size 0.144 x 0.036 x 1.436
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_briar_executioner
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009327888488769531 s
+
+[item] depth_briar_executioner        1020 tris  size 0.156 x 0.084 x 1.491
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_astral_greatblade
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009789466857910156 s
+
+[item] depth_astral_greatblade        1136 tris  size 0.180 x 0.054 x 1.604
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_vaultbreaker_claymore
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.009697198867797852 s
+
+[item] depth_vaultbreaker_claymore    1280 tris  size 0.237 x 0.043 x 1.669
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_glowcap_crook
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.012309789657592773 s
+
+[item] depth_glowcap_crook            1074 tris  size 0.188 x 0.058 x 1.878
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_tidal_forkstaff
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.010373115539550781 s
+
+[item] depth_tidal_forkstaff          1410 tris  size 0.136 x 0.103 x 1.961
+01:49:24 | INFO: Starting glTF 2.0 export
+01:49:24 | INFO: Extracting primitive: depth_cinder_lanternstaff
+01:49:24 | INFO: Primitives created: 4
+01:49:24 | INFO: Finished glTF 2.0 export in 0.010009050369262695 s
+
+[item] depth_cinder_lanternstaff      1422 tris  size 0.151 x 0.151 x 1.882
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_rime_shardstaff
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009375333786010742 s
+
+[item] depth_rime_shardstaff           906 tris  size 0.140 x 0.147 x 1.940
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_thornseed_branchstaff
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.014856815338134766 s
+
+[item] depth_thornseed_branchstaff     966 tris  size 0.147 x 0.141 x 1.921
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_orrery_starstaff
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.01065826416015625 s
+
+[item] depth_orrery_starstaff         1310 tris  size 0.260 x 0.100 x 1.930
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_voidcage_scepter
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.013218879699707031 s
+
+[item] depth_voidcage_scepter         1062 tris  size 0.150 x 0.150 x 1.900
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_dawnspire_staff
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009877443313598633 s
+
+[item] depth_dawnspire_staff          1310 tris  size 0.260 x 0.119 x 1.930
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_sporebud_wand
+01:49:25 | INFO: Primitives created: 5
+01:49:25 | INFO: Finished glTF 2.0 export in 0.01677250862121582 s
+
+[item] depth_sporebud_wand             840 tris  size 0.063 x 0.026 x 0.355
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_shellsong_wand
+01:49:25 | INFO: Primitives created: 5
+01:49:25 | INFO: Finished glTF 2.0 export in 0.010666847229003906 s
+
+[item] depth_shellsong_wand            842 tris  size 0.042 x 0.043 x 0.372
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_embercrown_wand
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009827852249145508 s
+
+[item] depth_embercrown_wand           936 tris  size 0.026 x 0.026 x 0.360
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_icepetal_wand
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009575605392456055 s
+
+[item] depth_icepetal_wand             940 tris  size 0.049 x 0.026 x 0.351
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_gravebell_wand
+01:49:25 | INFO: Primitives created: 5
+01:49:25 | INFO: Finished glTF 2.0 export in 0.011863470077514648 s
+
+[item] depth_gravebell_wand            944 tris  size 0.044 x 0.042 x 0.359
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_moonhook_wand
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009358882904052734 s
+
+[item] depth_moonhook_wand             940 tris  size 0.049 x 0.026 x 0.351
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_prismcoil_wand
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.00964665412902832 s
+
+[item] depth_prismcoil_wand           1216 tris  size 0.049 x 0.034 x 0.356
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_sunwheel_wand
+01:49:25 | INFO: Primitives created: 4
+01:49:25 | INFO: Finished glTF 2.0 export in 0.009862661361694336 s
+
+[item] depth_sunwheel_wand            1052 tris  size 0.060 x 0.026 x 0.365
+01:49:25 | INFO: Starting glTF 2.0 export
+01:49:25 | INFO: Extracting primitive: depth_rootbend_shortbow
+01:49:25 | INFO: Primitives created: 5
+01:49:26 | INFO: Finished glTF 2.0 export in 0.011982440948486328 s
+
+[item] depth_rootbend_shortbow         888 tris  size 0.096 x 0.044 x 0.900
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_saltwind_recurve
+01:49:26 | INFO: Primitives created: 7
+01:49:26 | INFO: Finished glTF 2.0 export in 0.014930963516235352 s
+
+[item] depth_saltwind_recurve          912 tris  size 0.102 x 0.044 x 1.100
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_cinderhorn_bow
+01:49:26 | INFO: Primitives created: 6
+01:49:26 | INFO: Finished glTF 2.0 export in 0.07016110420227051 s
+
+[item] depth_cinderhorn_bow            888 tris  size 0.110 x 0.050 x 1.065
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_icebranch_longbow
+01:49:26 | INFO: Primitives created: 7
+01:49:26 | INFO: Finished glTF 2.0 export in 0.01570582389831543 s
+
+[item] depth_icebranch_longbow         912 tris  size 0.118 x 0.044 x 1.260
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_thornwing_bow
+01:49:26 | INFO: Primitives created: 5
+01:49:26 | INFO: Finished glTF 2.0 export in 0.011816740036010742 s
+
+[item] depth_thornwing_bow             888 tris  size 0.156 x 0.044 x 1.223
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_starbridge_bow
+01:49:26 | INFO: Primitives created: 7
+01:49:26 | INFO: Finished glTF 2.0 export in 0.014896154403686523 s
+
+[item] depth_starbridge_bow            956 tris  size 0.153 x 0.050 x 1.420
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_nightglass_warbow
+01:49:26 | INFO: Primitives created: 7
+01:49:26 | INFO: Finished glTF 2.0 export in 0.018909215927124023 s
+
+[item] depth_nightglass_warbow         932 tris  size 0.154 x 0.044 x 1.381
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_dawnfeather_bow
+01:49:26 | INFO: Primitives created: 7
+01:49:26 | INFO: Finished glTF 2.0 export in 0.015019655227661133 s
+
+[item] depth_dawnfeather_bow           956 tris  size 0.160 x 0.044 x 1.580
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_sporeleaf_javelin
+01:49:26 | INFO: Primitives created: 6
+01:49:26 | INFO: Finished glTF 2.0 export in 0.012515068054199219 s
+
+[item] depth_sporeleaf_javelin         972 tris  size 0.043 x 0.043 x 1.430
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_keelspike_javelin
+01:49:26 | INFO: Primitives created: 6
+01:49:26 | INFO: Finished glTF 2.0 export in 0.013025045394897461 s
+
+[item] depth_keelspike_javelin        1056 tris  size 0.083 x 0.072 x 1.525
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_furnace_barb
+01:49:26 | INFO: Primitives created: 5
+01:49:26 | INFO: Finished glTF 2.0 export in 0.013231039047241211 s
+
+[item] depth_furnace_barb              972 tris  size 0.049 x 0.043 x 1.600
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_rimefork_javelin
+01:49:26 | INFO: Primitives created: 6
+01:49:26 | INFO: Finished glTF 2.0 export in 0.012881278991699219 s
+
+[item] depth_rimefork_javelin          952 tris  size 0.083 x 0.072 x 1.500
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_briarfin_javelin
+01:49:26 | INFO: Primitives created: 6
+01:49:26 | INFO: Finished glTF 2.0 export in 0.013215065002441406 s
+
+[item] depth_briarfin_javelin          972 tris  size 0.043 x 0.043 x 1.770
+01:49:26 | INFO: Starting glTF 2.0 export
+01:49:26 | INFO: Extracting primitive: depth_starshard_javelin
+01:49:27 | INFO: Primitives created: 6
+01:49:27 | INFO: Finished glTF 2.0 export in 0.013166666030883789 s
+
+[item] depth_starshard_javelin        1056 tris  size 0.083 x 0.072 x 1.865
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_gloomspear
+01:49:27 | INFO: Primitives created: 6
+01:49:27 | INFO: Finished glTF 2.0 export in 0.019333362579345703 s
+
+[item] depth_gloomspear                972 tris  size 0.049 x 0.043 x 1.940
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_suncrest_javelin
+01:49:27 | INFO: Primitives created: 5
+01:49:27 | INFO: Finished glTF 2.0 export in 0.011595964431762695 s
+
+[item] depth_suncrest_javelin          952 tris  size 0.083 x 0.072 x 1.740
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_rootfang_skinner
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.01589226722717285 s
+
+[item] depth_rootfang_skinner         1068 tris  size 0.126 x 0.030 x 0.348
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_keelhook_knife
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.01118612289428711 s
+
+[item] depth_keelhook_knife           1104 tris  size 0.221 x 0.039 x 0.397
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_emberwave_kris
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.009235620498657227 s
+
+[item] depth_emberwave_kris            856 tris  size 0.070 x 0.038 x 0.397
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_iceglass_stiletto
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.011386632919311523 s
+
+[item] depth_iceglass_stiletto         900 tris  size 0.126 x 0.036 x 0.436
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_briar_talon
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.010253667831420898 s
+
+[item] depth_briar_talon              1068 tris  size 0.221 x 0.039 x 0.444
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_moonfang_kukri
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.009643316268920898 s
+
+[item] depth_moonfang_kukri            916 tris  size 0.125 x 0.038 x 0.493
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_voidpetal_dagger
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.01013946533203125 s
+
+[item] depth_voidpetal_dagger         1044 tris  size 0.126 x 0.030 x 0.493
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_dawnthorn_knife
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.009810447692871094 s
+
+[item] depth_dawnthorn_knife           900 tris  size 0.221 x 0.039 x 0.532
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_rootrake_claws
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.009545326232910156 s
+
+[item] depth_rootrake_claws            820 tris  size 0.120 x 0.062 x 0.406
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_keelgrip_talons
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.009573936462402344 s
+
+[item] depth_keelgrip_talons          1108 tris  size 0.201 x 0.062 x 0.433
+01:49:27 | INFO: Starting glTF 2.0 export
+01:49:27 | INFO: Extracting primitive: depth_furnace_knives
+01:49:27 | INFO: Primitives created: 4
+01:49:27 | INFO: Finished glTF 2.0 export in 0.010281562805175781 s
+
+[item] depth_furnace_knives           1300 tris  size 0.163 x 0.062 x 0.442
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_rimefang_claws
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.009955406188964844 s
+
+[item] depth_rimefang_claws           1588 tris  size 0.201 x 0.062 x 0.469
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_briarhook_claws
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.009182453155517578 s
+
+[item] depth_briarhook_claws           820 tris  size 0.120 x 0.062 x 0.474
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_starweb_talons
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.01021432876586914 s
+
+[item] depth_starweb_talons           1288 tris  size 0.201 x 0.062 x 0.505
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_voidreaver_claws
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.013205528259277344 s
+
+[item] depth_voidreaver_claws         1480 tris  size 0.120 x 0.062 x 0.510
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_dawnrake_claws
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.01391291618347168 s
+
+[item] depth_dawnrake_claws           1768 tris  size 0.201 x 0.062 x 0.541
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_deepwarden_coat
+01:49:28 | INFO: Primitives created: 5
+01:49:28 | INFO: Finished glTF 2.0 export in 0.015896320343017578 s
+
+[item] depth_deepwarden_coat          2146 tris  size 0.599 x 0.310 x 0.660
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_deepwarden_crown
+01:49:28 | INFO: Primitives created: 3
+01:49:28 | INFO: Finished glTF 2.0 export in 0.008877277374267578 s
+
+[item] depth_deepwarden_crown          592 tris  size 0.281 x 0.296 x 0.315
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_deepwarden_grips
+01:49:28 | INFO: Primitives created: 3
+01:49:28 | INFO: Finished glTF 2.0 export in 0.01289057731628418 s
+
+[item] depth_deepwarden_grips         2180 tris  size 0.152 x 0.090 x 0.280
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_deepwarden_treads
+01:49:28 | INFO: Primitives created: 5
+01:49:28 | INFO: Finished glTF 2.0 export in 0.012541532516479492 s
+
+[item] depth_deepwarden_treads        1964 tris  size 0.156 x 0.318 x 0.260
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_prismkeeper_coat
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.01083683967590332 s
+
+[item] depth_prismkeeper_coat         2174 tris  size 0.934 x 0.331 x 0.849
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_prismkeeper_crown
+01:49:28 | INFO: Primitives created: 4
+01:49:28 | INFO: Finished glTF 2.0 export in 0.010286808013916016 s
+
+[item] depth_prismkeeper_crown        1960 tris  size 0.453 x 0.382 x 0.294
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_prismkeeper_grips
+01:49:28 | INFO: Primitives created: 3
+01:49:28 | INFO: Finished glTF 2.0 export in 0.007509946823120117 s
+
+[item] depth_prismkeeper_grips         740 tris  size 0.148 x 0.085 x 0.280
+01:49:28 | INFO: Starting glTF 2.0 export
+01:49:28 | INFO: Extracting primitive: depth_prismkeeper_treads
+01:49:28 | INFO: Primitives created: 5
+01:49:28 | INFO: Finished glTF 2.0 export in 0.015714406967163086 s
+
+[item] depth_prismkeeper_treads       1216 tris  size 0.156 x 0.309 x 0.295
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_vaultpath_coat
+01:49:29 | INFO: Primitives created: 6
+01:49:29 | INFO: Finished glTF 2.0 export in 0.014243841171264648 s
+
+[item] depth_vaultpath_coat           1966 tris  size 0.392 x 0.285 x 0.540
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_vaultpath_crown
+01:49:29 | INFO: Primitives created: 4
+01:49:29 | INFO: Finished glTF 2.0 export in 0.010518550872802734 s
+
+[item] depth_vaultpath_crown          2020 tris  size 0.453 x 0.384 x 0.308
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_vaultpath_grips
+01:49:29 | INFO: Primitives created: 3
+01:49:29 | INFO: Finished glTF 2.0 export in 0.009714841842651367 s
+
+[item] depth_vaultpath_grips           740 tris  size 0.148 x 0.085 x 0.280
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_vaultpath_treads
+01:49:29 | INFO: Primitives created: 5
+01:49:29 | INFO: Finished glTF 2.0 export in 0.012616395950317383 s
+
+[item] depth_vaultpath_treads         1216 tris  size 0.156 x 0.311 x 0.330
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_gloomthread_coat
+01:49:29 | INFO: Primitives created: 6
+01:49:29 | INFO: Finished glTF 2.0 export in 0.01914191246032715 s
+
+[item] depth_gloomthread_coat         1966 tris  size 0.355 x 0.285 x 0.540
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_gloomthread_crown
+01:49:29 | INFO: Primitives created: 3
+01:49:29 | INFO: Finished glTF 2.0 export in 0.013489484786987305 s
+
+[item] depth_gloomthread_crown        2020 tris  size 0.453 x 0.384 x 0.308
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_gloomthread_grips
+01:49:29 | INFO: Primitives created: 3
+01:49:29 | INFO: Finished glTF 2.0 export in 0.010331392288208008 s
+
+[item] depth_gloomthread_grips         836 tris  size 0.148 x 0.093 x 0.280
+01:49:29 | INFO: Starting glTF 2.0 export
+01:49:29 | INFO: Extracting primitive: depth_gloomthread_treads
+01:49:29 | INFO: Primitives created: 5
+01:49:29 | INFO: Finished glTF 2.0 export in 0.013052225112915039 s
+A:\Python\beyond-heroes\tools\blender\items\build_items.py:143: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:09.875  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_copperleaf_backsword.png'
+00:10.141  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_saltglass_cutlass.png'
+00:10.391  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rootguard_falchion.png'
+00:10.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_lantern_rapier.png'
+00:10.938  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_cinderhook_saber.png'
+00:11.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_frostbell_broadsword.png'
+00:11.500  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_hollowfin_estoc.png'
+00:11.797  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_moonwell_flamberge.png'
+00:12.078  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_starfall_spatha.png'
+00:12.375  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_deepwatch_messer.png'
+00:12.672  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_sunken_oathblade.png'
+00:12.953  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_crownless_longsword.png'
+00:13.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_basalt_zweihander.png'
+00:13.484  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_briar_executioner.png'
+00:13.781  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_astral_greatblade.png'
+00:14.063  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_vaultbreaker_claymore.png'
+00:14.344  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_glowcap_crook.png'
+00:14.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_tidal_forkstaff.png'
+00:14.953  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_cinder_lanternstaff.png'
+00:15.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rime_shardstaff.png'
+00:15.469  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_thornseed_branchstaff.png'
+00:15.781  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_orrery_starstaff.png'
+00:16.094  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_voidcage_scepter.png'
+00:16.359  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_dawnspire_staff.png'
+00:16.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_sporebud_wand.png'
+00:16.969  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_shellsong_wand.png'
+00:17.297  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_embercrown_wand.png'
+00:17.594  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_icepetal_wand.png'
+00:17.906  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gravebell_wand.png'
+00:18.188  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_moonhook_wand.png'
+00:18.469  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_prismcoil_wand.png'
+00:18.781  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_sunwheel_wand.png'
+00:19.063  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rootbend_shortbow.png'
+00:19.344  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_saltwind_recurve.png'
+00:19.594  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_cinderhorn_bow.png'
+00:19.875  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_icebranch_longbow.png'
+00:20.156  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_thornwing_bow.png'
+00:20.438  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_starbridge_bow.png'
+00:20.719  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_nightglass_warbow.png'
+00:21.016  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_dawnfeather_bow.png'
+00:21.297  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_sporeleaf_javelin.png'
+00:21.578  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_keelspike_javelin.png'
+00:21.859  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_furnace_barb.png'
+00:22.172  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rimefork_javelin.png'
+00:22.438  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_briarfin_javelin.png'
+00:22.750  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_starshard_javelin.png'
+00:23.063  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gloomspear.png'
+00:23.328  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_suncrest_javelin.png'
+00:23.609  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rootfang_skinner.png'
+00:23.906  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_keelhook_knife.png'
+00:24.203  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_emberwave_kris.png'
+00:24.469  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_iceglass_stiletto.png'
+00:24.734  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_briar_talon.png'
+00:25.031  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_moonfang_kukri.png'
+00:25.344  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_voidpetal_dagger.png'
+00:25.641  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_dawnthorn_knife.png'
+00:25.938  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rootrake_claws.png'
+00:26.250  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_keelgrip_talons.png'
+00:26.531  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_furnace_knives.png'
+00:26.844  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rimefang_claws.png'
+00:27.156  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_briarhook_claws.png'
+00:27.438  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_starweb_talons.png'
+00:27.688  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_voidreaver_claws.png'
+00:28.000  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_dawnrake_claws.png'
+00:28.297  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_deepwarden_coat.png'
+00:28.547  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_deepwarden_crown.png'
+00:28.828  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_deepwarden_grips.png'
+00:29.125  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_deepwarden_treads.png'
+00:29.406  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_prismkeeper_coat.png'
+00:29.672  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_prismkeeper_crown.png'
+00:29.953  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_prismkeeper_grips.png'
+00:30.266  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_prismkeeper_treads.png'
+00:30.563  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_vaultpath_coat.png'
+00:30.828  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_vaultpath_crown.png'
+00:31.125  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_vaultpath_grips.png'
+00:31.422  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_vaultpath_treads.png'
+00:31.719  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gloomthread_coat.png'
+00:32.031  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gloomthread_crown.png'
+00:32.328  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gloomthread_grips.png'
+00:32.625  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_gloomthread_treads.png'
+
+[item] depth_gloomthread_treads       1216 tris  size 0.166 x 0.316 x 0.365
+[icon] depth_copperleaf_backsword
+[icon] depth_saltglass_cutlass
+[icon] depth_rootguard_falchion
+[icon] depth_lantern_rapier
+[icon] depth_cinderhook_saber
+[icon] depth_frostbell_broadsword
+[icon] depth_hollowfin_estoc
+[icon] depth_moonwell_flamberge
+[icon] depth_starfall_spatha
+[icon] depth_deepwatch_messer
+[icon] depth_sunken_oathblade
+[icon] depth_crownless_longsword
+[icon] depth_basalt_zweihander
+[icon] depth_briar_executioner
+[icon] depth_astral_greatblade
+[icon] depth_vaultbreaker_claymore
+[icon] depth_glowcap_crook
+[icon] depth_tidal_forkstaff
+[icon] depth_cinder_lanternstaff
+[icon] depth_rime_shardstaff
+[icon] depth_thornseed_branchstaff
+[icon] depth_orrery_starstaff
+[icon] depth_voidcage_scepter
+[icon] depth_dawnspire_staff
+[icon] depth_sporebud_wand
+[icon] depth_shellsong_wand
+[icon] depth_embercrown_wand
+[icon] depth_icepetal_wand
+[icon] depth_gravebell_wand
+[icon] depth_moonhook_wand
+[icon] depth_prismcoil_wand
+[icon] depth_sunwheel_wand
+[icon] depth_rootbend_shortbow
+[icon] depth_saltwind_recurve
+[icon] depth_cinderhorn_bow
+[icon] depth_icebranch_longbow
+[icon] depth_thornwing_bow
+[icon] depth_starbridge_bow
+[icon] depth_nightglass_warbow
+[icon] depth_dawnfeather_bow
+[icon] depth_sporeleaf_javelin
+[icon] depth_keelspike_javelin
+[icon] depth_furnace_barb
+[icon] depth_rimefork_javelin
+[icon] depth_briarfin_javelin
+[icon] depth_starshard_javelin
+[icon] depth_gloomspear
+[icon] depth_suncrest_javelin
+[icon] depth_rootfang_skinner
+[icon] depth_keelhook_knife
+[icon] depth_emberwave_kris
+[icon] depth_iceglass_stiletto
+[icon] depth_briar_talon
+[icon] depth_moonfang_kukri
+[icon] depth_voidpetal_dagger
+[icon] depth_dawnthorn_knife
+[icon] depth_rootrake_claws
+[icon] depth_keelgrip_talons
+[icon] depth_furnace_knives
+[icon] depth_rimefang_claws
+[icon] depth_briarhook_claws
+[icon] depth_starweb_talons
+[icon] depth_voidreaver_claws
+[icon] depth_dawnrake_claws
+[icon] depth_deepwarden_coat
+[icon] depth_deepwarden_crown
+[icon] depth_deepwarden_grips
+[icon] depth_deepwarden_treads
+[icon] depth_prismkeeper_coat
+[icon] depth_prismkeeper_crown
+[icon] depth_prismkeeper_grips
+[icon] depth_prismkeeper_treads
+[icon] depth_vaultpath_coat
+[icon] depth_vaultpath_crown
+[icon] depth_vaultpath_grips
+[icon] depth_vaultpath_treads
+[icon] depth_gloomthread_coat
+[icon] depth_gloomthread_crown
+[icon] depth_gloomthread_grips
+[icon] depth_gloomthread_treads
+[build_items] 80 items done in 30.2s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

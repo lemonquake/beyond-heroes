@@ -27,6 +27,18 @@ const GRADES := [
 		"color": Color(1.0, 0.82, 0.4), "desc": "The strongest of the nameless dead. Four or five skills."},
 ]
 const RENOWNED := {"name": "Renowned", "mirror": 0.75, "color": Color(1.0, 0.72, 0.32)}
+## bh-022: as a hero grows, greater dead answer the Shrine of the Fallen. From level 25 the Mythic spirits replace the
+## Renowned (at the shrine and in 5-star summons), from level 45 the Eternal replace the Mythic. Each tier carries more
+## of its hero's strength, a stronger ghost weapon, a skill no one else knows, and a far higher price. Spirits already
+## bound keep walking with the hero whatever tier answers now.
+const RENOWNED_TIERS := [
+	{"name": "Renowned", "level": 1, "mirror": 0.75, "color": Color(1.0, 0.72, 0.32),
+		"desc": "Warriors whose names are still sung."},
+	{"name": "Mythic", "level": 25, "mirror": 0.85, "color": Color(1.0, 0.46, 0.34),
+		"desc": "Heroes of the old wars, whose deeds became songs and the songs became oaths."},
+	{"name": "Eternal", "level": 45, "mirror": 0.95, "color": Color(0.74, 0.62, 1.0),
+		"desc": "The first dead of Jre, who never let go of the world. They answer only the greatest heroes."},
+]
 
 ## Class shells. `weapons` = main-hand weapon types; `sub` = what the sub hand may hold (a category or weapon types);
 ## `spirit_weapon` = the weapon type of the ghostly blade a Tempo fights with when its hands are empty.
@@ -208,6 +220,85 @@ const SKILLS := {
 		"range": 14.0, "mult": 2.0, "crit_bonus": 0.4, "execute": 0.4, "execute_mult": 2.5, "reset_on_kill": true,
 		"status": {&"cursed": 70.0}, "knockback": 3.0, "poise": 30.0, "anim": &"dagger_heavy", "icon": "shadow_curse",
 		"desc": "Vessik steps out of the dark behind a monster and curses it. Deals 2.5 times the damage below 40% health, and if it kills, he is ready to strike again at once."},
+	# ---- bh-022: the Mythic spirits' own skills (level 25+)
+	&"lg_rampart": {"name": "The Last Rampart", "class": &"warden", "kind": "buff", "use": "ward", "unique": &"branthor", "mana": 22.0, "cooldown": 24.0,
+		"range": 14.0, "shield": 0.42, "duration": 10.0, "all": true, "taunt": 10.0, "anim": &"war_cry", "icon": "iron_bulwark",
+		"desc": "Branthor plants himself like a wall: you and every Tempo near him are warded for 42% of maximum HP for 10 s, and every monster within 10 m turns on him."},
+	&"lg_rimecleave": {"name": "Rimecleave", "class": &"swordsman", "kind": "strike", "use": "cleave", "unique": &"ysmera", "mana": 16.0, "cooldown": 8.0,
+		"range": 3.4, "arc": 170.0, "mult": 2.6, "element": Elements.ICE, "status": {&"chilled": 140.0}, "knockback": 7.0, "poise": 45.0,
+		"anim": &"special_attack", "icon": "blizzard",
+		"desc": "A frost-white arc that splits the air in front of Ysmera: 2.6 times weapon damage as Ice, and chill that freezes whole packs."},
+	&"lg_astral_lance": {"name": "Astral Lance", "class": &"mystic", "kind": "shot", "use": "bolt", "unique": &"aldevar", "mana": 14.0, "cooldown": 6.0,
+		"range": 22.0, "mult": 3.2, "speed": 34.0, "element": Elements.LIGHT, "status": {&"purged": 120.0}, "knockback": 6.0, "poise": 30.0,
+		"anim": &"cast_heavy", "icon": "heavens_fist",
+		"desc": "A spear of starlight: 3.2 times spell damage as Light, and the target's healing and wards are burned away."},
+	&"lg_galestorm": {"name": "Galestorm Volley", "class": &"archer", "kind": "area", "use": "volley", "unique": &"sabeline", "mana": 20.0, "cooldown": 12.0,
+		"range": 20.0, "radius": 5.0, "mult": 0.95, "waves": 7, "element": Elements.WIND, "status": {&"windswept": 90.0}, "knockback": 5.0,
+		"poise": 14.0, "anim": &"bow_release", "icon": "arrow_rain", "color": Color(0.62, 0.95, 0.66),
+		"desc": "Seven waves of arrows riding a gale: every monster under them is torn and thrown about."},
+	&"lg_thousand_cuts": {"name": "A Thousand Cuts", "class": &"thief", "kind": "strike", "use": "shadowstep", "unique": &"mireth", "mana": 15.0, "cooldown": 9.0,
+		"range": 16.0, "mult": 2.8, "crit_bonus": 0.5, "execute": 0.5, "execute_mult": 2.8, "reset_on_kill": true,
+		"status": {&"bleeding": 110.0}, "knockback": 3.0, "poise": 35.0, "anim": &"dagger_heavy", "icon": "death_blossom",
+		"desc": "Mireth is behind a monster before it sees her: 2.8 times damage, far more below half health, and every kill readies the next cut."},
+	&"lg_gravewall": {"name": "Gravewall", "class": &"warden", "kind": "area", "use": "nova", "unique": &"thraxen", "mana": 17.0, "cooldown": 12.0,
+		"radius": 5.5, "mult": 1.9, "element": Elements.EARTH, "status": {&"armor_broken": 120.0}, "knockback": 10.0, "poise": 60.0,
+		"anim": &"leap_slam", "keep_anim": true, "icon": "ground_fissure", "color": Color(0.8, 0.66, 0.42),
+		"desc": "Thraxen brings a barrow's weight down around him: everything within 5.5 m is crushed and its armor broken."},
+	&"lg_thousand_blades": {"name": "Thousand-Blade Dance", "class": &"swordsman", "kind": "strike", "use": "chain", "unique": &"caelith", "mana": 16.0, "cooldown": 9.0,
+		"range": 11.0, "mult": 1.9, "jumps": 6, "falloff": 0.9, "dash": true, "status": {&"bleeding": 90.0}, "knockback": 4.0,
+		"anim": &"special_attack", "icon": "blade_sentinel",
+		"desc": "Caelith flickers from monster to monster, seven cuts in a breath, and every one bleeds."},
+	&"lg_last_arrow": {"name": "The Last Arrow", "class": &"archer", "kind": "shot", "use": "pierce", "unique": &"wynter", "mana": 14.0, "cooldown": 7.0,
+		"range": 26.0, "mult": 3.4, "pierce": 6, "element": Elements.ICE, "status": {&"chilled": 130.0}, "knockback": 6.0, "poise": 30.0,
+		"anim": &"bow_release", "icon": "frost_arrow",
+		"desc": "The arrow Wynter saved for the end: it passes through six monsters, freezing each one."},
+	&"lg_laughing_knife": {"name": "Laughing Knives", "class": &"thief", "kind": "area", "use": "nova", "unique": &"sable", "mana": 13.0, "cooldown": 8.0,
+		"radius": 4.6, "mult": 1.6, "status": {&"bleeding": 120.0}, "knockback": 3.0, "poise": 14.0, "anim": &"dual_3", "icon": "fan_of_knives",
+		"color": Color(0.9, 0.5, 0.62),
+		"desc": "A storm of thrown knives and a laugh no one forgets: every monster around Sable is cut and bleeds hard."},
+	&"lg_stormhymn": {"name": "Stormhymn", "class": &"mystic", "kind": "area", "use": "chain", "unique": &"orrin", "mana": 17.0, "cooldown": 9.0,
+		"range": 18.0, "mult": 1.9, "jumps": 7, "falloff": 0.9, "element": Elements.LIGHTNING, "status": {&"shocked": 110.0},
+		"anim": &"cast_heavy", "icon": "chain_lightning",
+		"desc": "Orrin sings and the sky answers: lightning leaps through eight monsters, shocking every one."},
+	# ---- bh-022: the Eternal spirits' own skills (level 45+)
+	&"lg_mountain": {"name": "The Mountain Walks", "class": &"warden", "kind": "area", "use": "nova", "unique": &"gorran", "mana": 20.0, "cooldown": 11.0,
+		"radius": 7.0, "mult": 2.8, "element": Elements.EARTH, "status": {&"armor_broken": 160.0}, "knockback": 14.0, "poise": 90.0,
+		"anim": &"leap_slam", "keep_anim": true, "icon": "ground_fissure", "color": Color(0.85, 0.7, 0.45),
+		"desc": "Gorran strides and the ground breaks for 7 m around him: 2.8 times weapon damage as Earth, and no armor survives it."},
+	&"lg_sunsworn": {"name": "Sunsworn Judgment", "class": &"swordsman", "kind": "strike", "use": "cleave", "unique": &"aurelis", "mana": 18.0, "cooldown": 8.0,
+		"range": 4.0, "arc": 200.0, "mult": 3.4, "element": Elements.LIGHT, "status": {&"purged": 160.0}, "execute": 0.3, "execute_mult": 2.0,
+		"knockback": 9.0, "poise": 60.0, "anim": &"special_attack", "icon": "judgment",
+		"desc": "A blade of noon light swept in a wide ring: 3.4 times weapon damage as Light, doubled against the badly hurt."},
+	&"lg_tidecall": {"name": "Tidecall", "class": &"mystic", "kind": "heal", "unique": &"ilyra", "mana": 24.0, "cooldown": 14.0, "range": 14.0,
+		"heal": 0.45, "regen": 0.12, "radius": 14.0, "cleanse": true, "anim": &"cast_area", "icon": "tidal_wave",
+		"desc": "The moon-tide rises around Ilyra: you and every ally within 14 m are healed 45% of maximum HP, more over 4 s, and cleansed."},
+	&"lg_skyburner": {"name": "Skyburner", "class": &"archer", "kind": "area", "use": "volley", "unique": &"kaedric", "mana": 22.0, "cooldown": 11.0,
+		"range": 22.0, "radius": 5.6, "mult": 1.2, "waves": 8, "element": Elements.FIRE, "status": {&"burning": 140.0}, "knockback": 3.0,
+		"poise": 16.0, "anim": &"bow_release", "icon": "meteor", "color": Color(1.0, 0.5, 0.18),
+		"desc": "Eight waves of arrows that fall like burning stars over a wide field."},
+	&"lg_unseen_crown": {"name": "The Unseen Crown", "class": &"thief", "kind": "strike", "use": "shadowstep", "unique": &"veyl", "mana": 16.0, "cooldown": 8.0,
+		"range": 18.0, "mult": 3.6, "crit_bonus": 0.6, "execute": 0.5, "execute_mult": 3.0, "reset_on_kill": true,
+		"status": {&"cursed": 150.0}, "knockback": 4.0, "poise": 45.0, "anim": &"dagger_heavy", "icon": "shadow_step",
+		"desc": "Veyl wears the dark like a crown: 3.6 times damage from behind, triple below half health, and every kill readies the next."},
+	&"lg_unfallen": {"name": "Unfallen", "class": &"warden", "kind": "buff", "use": "ward", "unique": &"bramwold", "mana": 22.0, "cooldown": 22.0,
+		"range": 14.0, "shield": 0.5, "duration": 10.0, "all": true, "taunt": 12.0, "anim": &"war_cry", "icon": "oathbound",
+		"desc": "Bramwold's heart never stopped: you and every Tempo near him are warded for half of maximum HP, and every monster within 12 m turns on him."},
+	&"lg_dawnheir": {"name": "Dawnbreakers' Oath", "class": &"swordsman", "kind": "strike", "use": "chain", "unique": &"estrid", "mana": 18.0, "cooldown": 8.0,
+		"range": 12.0, "mult": 2.4, "jumps": 7, "falloff": 0.92, "dash": true, "element": Elements.FIRE, "status": {&"burning": 130.0},
+		"knockback": 5.0, "anim": &"special_attack", "icon": "aura_cinders",
+		"desc": "Estrid carries the Dawnbreakers' fire: she dashes through eight monsters and sets every one of them burning."},
+	&"lg_comet": {"name": "Comet Shot", "class": &"archer", "kind": "shot", "use": "pierce", "unique": &"quillon", "mana": 16.0, "cooldown": 6.0,
+		"range": 30.0, "mult": 4.2, "pierce": 8, "element": Elements.LIGHT, "status": {&"purged": 140.0}, "knockback": 8.0, "poise": 40.0,
+		"anim": &"bow_release", "icon": "power_shot",
+		"desc": "An arrow with a comet's tail: 4.2 times damage through eight monsters in a line."},
+	&"lg_whisper": {"name": "Whisper of Knives", "class": &"thief", "kind": "area", "use": "nova", "unique": &"mourne", "mana": 15.0, "cooldown": 7.0,
+		"radius": 5.2, "mult": 2.2, "element": Elements.DARK, "status": {&"cursed": 140.0}, "knockback": 3.0, "poise": 20.0, "anim": &"dual_3",
+		"icon": "dread_mark", "color": Color(0.66, 0.4, 0.95),
+		"desc": "A hush, then knives from nowhere: every monster within 5 m is cut as Dark and cursed."},
+	&"lg_worldsong": {"name": "Worldsong", "class": &"mystic", "kind": "area", "use": "nova", "unique": &"ethra", "mana": 20.0, "cooldown": 10.0,
+		"radius": 7.0, "mult": 2.5, "element": Elements.LIGHT, "status": {&"purged": 160.0}, "knockback": 8.0, "poise": 30.0,
+		"anim": &"cast_ultimate", "icon": "judgment", "color": Color(0.85, 0.8, 1.0),
+		"desc": "Ethra sings the song the world was made with: a burst of light 7 m wide that unmakes wards and healing."},
 }
 
 ## The five renowned spirits: warriors whose names are still sung. Each answers only a hero of their level, costs a
@@ -280,6 +371,140 @@ const SUMMON_LEGENDS := {
 		"mods": [["elemental_damage", "inc", 0.25], ["max_mana", "inc", 0.25]], "summon_only": true,
 		"origin": "The last Aether-watcher to leave the Orrery. He did not leave by the door.",
 		"pitch": "Storms that leap from foe to foe, and a mend when you need it."},
+}
+
+## bh-022: the Mythic renowned (level 25+). They replace the five of the shrine once a hero reaches level 25.
+const MYTHIC_LEGENDS := {
+	&"branthor": {"name": "Branthor Veyle", "title": "the Last Rampart", "class": &"warden", "trait": &"cautious", "level": 25, "price": 45000, "tier": 1,
+		"skills": [&"wd_bash", &"lg_rampart", &"wd_quake", &"wd_oath", &"wd_mend"], "tint": Color(0.5, 0.52, 0.58), "kit": [&"warden_kite_shield"],
+		"spirit": {"weapon": &"club", "element": Elements.EARTH, "share": 0.45, "power": 1.7},
+		"mods": [["max_hp", "inc", 0.4], ["block_chance", "flat", 0.15], ["defense", "inc", 0.3], ["knockback_res", "flat", 0.2]],
+		"origin": "Held the breach at Harrowmere for a winter and a day while the whole north walked south behind him. The breach closed with him in it.",
+		"pitch": "A wall that shields the whole party and holds every monster's eye."},
+	&"ysmera": {"name": "Ysmera Coldbrand", "title": "the Frostblade", "class": &"swordsman", "trait": &"valiant", "level": 27, "price": 60000, "tier": 1,
+		"skills": [&"sw_cleave", &"lg_rimecleave", &"sw_charge", &"sw_whirl", &"sw_mend"], "tint": Color(0.55, 0.72, 0.88), "kit": [],
+		"spirit": {"weapon": &"greatsword", "element": Elements.ICE, "share": 0.55, "power": 1.7},
+		"mods": [["attack_speed", "more", 0.14], ["crit_chance", "flat", 0.06], ["crit_damage", "flat", 0.3]],
+		"origin": "Walked into the Rimeglass barrows with a blade forged in their own cold, and froze the thing at their heart where it stood.",
+		"pitch": "Freezes whole packs with every swing, then shatters them."},
+	&"aldevar": {"name": "Aldevar Quennt", "title": "the Starwarden", "class": &"mystic", "trait": &"devoted", "level": 29, "price": 75000, "tier": 1,
+		"skills": [&"my_bolt", &"lg_astral_lance", &"my_mend", &"my_ward", &"my_chain"], "tint": Color(0.55, 0.52, 0.85), "kit": [],
+		"spirit": {"weapon": &"staff", "element": Elements.LIGHT, "share": 1.0, "power": 1.7},
+		"mods": [["healing", "inc", 0.35], ["max_mana", "inc", 0.3], ["elemental_damage", "inc", 0.25]],
+		"origin": "Kept the Orrery's great lens turned on the sky for forty years, and read in it the night the dead would rise. No one listened until he stood alone at its door.",
+		"pitch": "Lances of starlight, storms that leap between foes, and a mend for the whole party."},
+	&"sabeline": {"name": "Sabeline Harrowgale", "title": "the Windpiercer", "class": &"archer", "trait": &"swift", "level": 31, "price": 90000, "tier": 1,
+		"skills": [&"ar_pierce", &"lg_galestorm", &"ar_volley", &"ar_trap", &"ar_mend"], "tint": Color(0.46, 0.62, 0.5), "kit": [],
+		"spirit": {"weapon": &"bow", "element": Elements.WIND, "share": 0.55, "power": 1.75},
+		"mods": [["projectile_damage", "inc", 0.3], ["crit_damage", "flat", 0.35], ["evasion", "inc", 0.25]],
+		"origin": "Shot the Gigas of Stormcrag through the eye from the far side of a gale. The wind has carried her name ever since.",
+		"pitch": "Storms of arrows that scatter whole war-hosts."},
+	&"mireth": {"name": "Mireth Dusk", "title": "the Velvet Death", "class": &"thief", "trait": &"vengeful", "level": 33, "price": 110000, "tier": 1,
+		"skills": [&"th_shadowstep", &"lg_thousand_cuts", &"th_venom", &"th_fan", &"th_smoke"], "tint": Color(0.3, 0.16, 0.26), "kit": [],
+		"spirit": {"weapon": &"dagger", "element": Elements.DARK, "share": 0.45, "power": 1.75},
+		"mods": [["crit_chance", "flat", 0.08], ["crit_damage", "flat", 0.4], ["attack_speed", "more", 0.1]],
+		"origin": "Danced at the Tyrant-king's feast, and he was dead before the music stopped. So were his seven captains.",
+		"pitch": "Kills the strongest monster in reach, then the next, then the next."},
+}
+
+## bh-022: the Eternal renowned (level 45+). They replace the Mythic once a hero reaches level 45.
+const ETERNAL_LEGENDS := {
+	&"gorran": {"name": "Gorran Stoneveil", "title": "the Mountain That Walks", "class": &"warden", "trait": &"cautious", "level": 45, "price": 180000, "tier": 2,
+		"skills": [&"wd_bash", &"lg_mountain", &"wd_aegis", &"wd_oath", &"wd_mend"], "tint": Color(0.52, 0.46, 0.38), "kit": [&"warden_kite_shield"],
+		"spirit": {"weapon": &"club", "element": Elements.EARTH, "share": 0.55, "power": 1.95},
+		"mods": [["max_hp", "inc", 0.55], ["block_chance", "flat", 0.2], ["defense", "inc", 0.45], ["knockback_res", "flat", 0.3]],
+		"origin": "Before the towns, before the roads, a giant of a man stood between the first hearth and the dark. The hill behind Malasugue is said to be his shadow.",
+		"pitch": "The ground breaks where he walks. Nothing reaches you past him."},
+	&"aurelis": {"name": "Aurelis Dawnmantle", "title": "the Sunsworn", "class": &"swordsman", "trait": &"valiant", "level": 47, "price": 240000, "tier": 2,
+		"skills": [&"sw_cleave", &"lg_sunsworn", &"sw_charge", &"sw_whirl", &"sw_rally"], "tint": Color(0.9, 0.78, 0.45), "kit": [],
+		"spirit": {"weapon": &"greatsword", "element": Elements.LIGHT, "share": 0.6, "power": 2.0},
+		"mods": [["attack_speed", "more", 0.18], ["crit_chance", "flat", 0.08], ["crit_damage", "flat", 0.45], ["outgoing_damage", "more", 0.1]],
+		"origin": "Swore to the sun on the first morning of the world that no night would last forever. Every dawn since has been hers.",
+		"pitch": "Rings of noon light that end fights before they begin."},
+	&"ilyra": {"name": "Ilyra Moonwhisper", "title": "the Tidecaller", "class": &"mystic", "trait": &"devoted", "level": 49, "price": 300000, "tier": 2,
+		"skills": [&"my_chain", &"lg_tidecall", &"my_bolt", &"my_ward", &"my_nova"], "tint": Color(0.42, 0.6, 0.82), "kit": [],
+		"spirit": {"weapon": &"staff", "element": Elements.WATER, "share": 1.0, "power": 2.0},
+		"mods": [["healing", "inc", 0.5], ["max_mana", "inc", 0.4], ["elemental_damage", "inc", 0.35]],
+		"origin": "Called the sea up over the drowned kingdom so its dead would sleep. She still hears them in every tide.",
+		"pitch": "Heals the whole party at once, and the tide takes what she points at."},
+	&"kaedric": {"name": "Kaedric Emberline", "title": "the Skyburner", "class": &"archer", "trait": &"vengeful", "level": 51, "price": 380000, "tier": 2,
+		"skills": [&"ar_pierce", &"lg_skyburner", &"ar_volley", &"ar_trap", &"ar_mend"], "tint": Color(0.7, 0.36, 0.2), "kit": [],
+		"spirit": {"weapon": &"crossbow", "element": Elements.FIRE, "share": 0.6, "power": 2.0},
+		"mods": [["projectile_damage", "inc", 0.4], ["crit_damage", "flat", 0.5], ["crit_chance", "flat", 0.06]],
+		"origin": "Set the sky itself alight to turn back the dragon-flight over Emberhal. The clouds there still glow at night.",
+		"pitch": "Rains fire over whole fields; bosses melt under it."},
+	&"veyl": {"name": "Veyl Ashenmourn", "title": "the Unseen Crown", "class": &"thief", "trait": &"valiant", "level": 53, "price": 450000, "tier": 2,
+		"skills": [&"th_shadowstep", &"lg_unseen_crown", &"th_finish", &"th_fan", &"th_remedy"], "tint": Color(0.16, 0.12, 0.22), "kit": [],
+		"spirit": {"weapon": &"dagger", "element": Elements.DARK, "share": 0.5, "power": 2.05},
+		"mods": [["crit_chance", "flat", 0.1], ["crit_damage", "flat", 0.55], ["attack_speed", "more", 0.14]],
+		"origin": "Wore a crown no one could see and ruled the night roads of Jre for a hundred years. The Ashen Circle still will not say the name.",
+		"pitch": "The deadliest spirit ever called. Nothing hurt survives near him."},
+}
+
+## bh-022: the Mythic and Eternal who answer only a summoning (5-star), each with a skill of its own.
+const MYTHIC_SUMMON := {
+	&"thraxen": {"name": "Thraxen Oldbarrow", "title": "the Gravewall", "class": &"warden", "trait": &"cautious", "level": 1, "price": 0, "tier": 1,
+		"skills": [&"wd_bash", &"lg_gravewall", &"wd_aegis", &"wd_oath"], "tint": Color(0.42, 0.44, 0.4), "kit": [&"warden_kite_shield"],
+		"spirit": {"weapon": &"club", "element": Elements.EARTH, "share": 0.5, "power": 1.7},
+		"mods": [["max_hp", "inc", 0.45], ["defense", "inc", 0.3], ["knockback_res", "flat", 0.2]], "summon_only": true,
+		"origin": "Buried himself in the barrow door so the dead inside could not follow the living out.",
+		"pitch": "Crushes packs flat and breaks their armor."},
+	&"caelith": {"name": "Caelith Varr", "title": "the Thousand-Blade", "class": &"swordsman", "trait": &"swift", "level": 1, "price": 0, "tier": 1,
+		"skills": [&"sw_cleave", &"lg_thousand_blades", &"sw_whirl", &"sw_rally"], "tint": Color(0.62, 0.6, 0.66),
+		"spirit": {"weapon": &"sword", "element": Elements.WIND, "share": 0.5, "power": 1.7},
+		"mods": [["attack_speed", "more", 0.16], ["crit_chance", "flat", 0.06]], "summon_only": true,
+		"origin": "Fought the orc war-host alone at the Bell Pass and was seen in seven places at once.",
+		"pitch": "Seven cuts in a breath, all of them bleeding."},
+	&"wynter": {"name": "Wynter Ashfeather", "title": "the Last Arrow", "class": &"archer", "trait": &"vengeful", "level": 1, "price": 0, "tier": 1,
+		"skills": [&"ar_pierce", &"lg_last_arrow", &"ar_frost", &"ar_volley"], "tint": Color(0.58, 0.64, 0.72),
+		"spirit": {"weapon": &"bow", "element": Elements.ICE, "share": 0.55, "power": 1.75},
+		"mods": [["projectile_damage", "inc", 0.32], ["crit_damage", "flat", 0.3]], "summon_only": true,
+		"origin": "Kept one arrow for forty years for the thing that burned her village. She found it.",
+		"pitch": "One arrow through a whole line of monsters, frozen solid."},
+	&"sable": {"name": "Sable Myrrow", "title": "the Laughing Knife", "class": &"thief", "trait": &"swift", "level": 1, "price": 0, "tier": 1,
+		"skills": [&"th_shadowstep", &"lg_laughing_knife", &"th_venom", &"th_finish"], "tint": Color(0.4, 0.18, 0.24),
+		"spirit": {"weapon": &"dagger", "element": Elements.DARK, "share": 0.45, "power": 1.75},
+		"mods": [["crit_damage", "flat", 0.4], ["crit_chance", "flat", 0.07]], "summon_only": true,
+		"origin": "Laughed at the headsman, at the king and at the dead. She is laughing still.",
+		"pitch": "Knives in every direction, and everything bleeds."},
+	&"orrin": {"name": "Orrin Galesong", "title": "the Stormhymn", "class": &"mystic", "trait": &"devoted", "level": 1, "price": 0, "tier": 1,
+		"skills": [&"my_bolt", &"lg_stormhymn", &"my_mend", &"my_ward"], "tint": Color(0.46, 0.5, 0.86),
+		"spirit": {"weapon": &"staff", "element": Elements.LIGHTNING, "share": 1.0, "power": 1.75},
+		"mods": [["elemental_damage", "inc", 0.32], ["max_mana", "inc", 0.3]], "summon_only": true,
+		"origin": "Sang on the cliffs of Corvessa until the storm he called drowned the fleet that came for them.",
+		"pitch": "Lightning that leaps through whole packs."},
+}
+const ETERNAL_SUMMON := {
+	&"bramwold": {"name": "Bramwold Ironheart", "title": "the Unfallen", "class": &"warden", "trait": &"cautious", "level": 1, "price": 0, "tier": 2,
+		"skills": [&"wd_bash", &"lg_unfallen", &"wd_quake", &"wd_mend"], "tint": Color(0.44, 0.42, 0.46), "kit": [&"warden_kite_shield"],
+		"spirit": {"weapon": &"club", "element": Elements.EARTH, "share": 0.55, "power": 1.95},
+		"mods": [["max_hp", "inc", 0.6], ["defense", "inc", 0.4], ["block_chance", "flat", 0.15]], "summon_only": true,
+		"origin": "Took a hundred wounds at the founding of Aubren and would not fall until the gate was hung.",
+		"pitch": "Wards the whole party and never goes down."},
+	&"estrid": {"name": "Estrid Flamecrown", "title": "the Dawnbreakers' Heir", "class": &"swordsman", "trait": &"valiant", "level": 1, "price": 0, "tier": 2,
+		"skills": [&"sw_cleave", &"lg_dawnheir", &"sw_charge", &"sw_rally"], "tint": Color(0.82, 0.46, 0.28),
+		"spirit": {"weapon": &"sword", "element": Elements.FIRE, "share": 0.6, "power": 2.0},
+		"mods": [["attack_speed", "more", 0.16], ["crit_chance", "flat", 0.08], ["outgoing_damage", "more", 0.08]], "summon_only": true,
+		"origin": "The first to wear the Dawnbreakers' crown of fire, long before the betrayal on the causeway.",
+		"pitch": "Dashes through whole packs and leaves them burning."},
+	&"quillon": {"name": "Quillon Starwatch", "title": "the Comet", "class": &"archer", "trait": &"swift", "level": 1, "price": 0, "tier": 2,
+		"skills": [&"ar_pierce", &"lg_comet", &"ar_volley", &"ar_trap"], "tint": Color(0.72, 0.7, 0.5),
+		"spirit": {"weapon": &"bow", "element": Elements.LIGHT, "share": 0.6, "power": 2.0},
+		"mods": [["projectile_damage", "inc", 0.4], ["crit_chance", "flat", 0.06]], "summon_only": true,
+		"origin": "Shot a falling star back into the sky, the old songs say, and it has not come down since.",
+		"pitch": "Arrows that cross the whole field and everything in the way."},
+	&"mourne": {"name": "Mourne Velvetshade", "title": "the Whisper of Knives", "class": &"thief", "trait": &"vengeful", "level": 1, "price": 0, "tier": 2,
+		"skills": [&"th_shadowstep", &"lg_whisper", &"th_fan", &"th_finish"], "tint": Color(0.24, 0.16, 0.32),
+		"spirit": {"weapon": &"dagger", "element": Elements.DARK, "share": 0.5, "power": 2.05},
+		"mods": [["crit_damage", "flat", 0.5], ["crit_chance", "flat", 0.09]], "summon_only": true,
+		"origin": "No one ever heard Mourne coming. The last thing anyone heard was a whisper.",
+		"pitch": "Curses and cuts every monster around at once."},
+	&"ethra": {"name": "Ethra Lumenveil", "title": "the Worldsinger", "class": &"mystic", "trait": &"devoted", "level": 1, "price": 0, "tier": 2,
+		"skills": [&"my_chain", &"lg_worldsong", &"my_mend", &"my_ward"], "tint": Color(0.7, 0.66, 0.92),
+		"spirit": {"weapon": &"staff", "element": Elements.LIGHT, "share": 1.0, "power": 2.0},
+		"mods": [["elemental_damage", "inc", 0.4], ["max_mana", "inc", 0.4], ["healing", "inc", 0.3]], "summon_only": true,
+		"origin": "Sang with the Aether before there were words for it. Some say she taught the waypoints to wake.",
+		"pitch": "Light that unmakes everything around her, and a mend when you need it."},
 }
 
 ## The spirit that comes through the waypoint with every new hero: a town guard who died holding the Sanctuary
@@ -362,14 +587,47 @@ static func max_grade() -> int:
 	return GRADES.size()
 
 static func legend(id: StringName) -> Dictionary:
-	return LEGENDS.get(id, SUMMON_LEGENDS.get(id, {}))
+	for table in [LEGENDS, SUMMON_LEGENDS, MYTHIC_LEGENDS, MYTHIC_SUMMON, ETERNAL_LEGENDS, ETERNAL_SUMMON]:
+		if table.has(id):
+			return table[id]
+	return {}
 
-## Every renowned spirit a 5-star summon may bring (the five of the shrine and the five who answer only a summoning).
-static func summon_legend_ids() -> Array:
+## bh-022: which renowned tier answers a hero of `level` (0 Renowned, 1 Mythic, 2 Eternal).
+static func renowned_tier_for(level: int) -> int:
+	var t := 0
+	for i in RENOWNED_TIERS.size():
+		if level >= int(RENOWNED_TIERS[i].level):
+			t = i
+	return t
+
+static func renowned_tier(tier: int) -> Dictionary:
+	return RENOWNED_TIERS[clampi(tier, 0, RENOWNED_TIERS.size() - 1)]
+
+## The tier of a renowned spirit (0 for the first ten).
+static func legend_tier(id: StringName) -> int:
+	return int(legend(id).get("tier", 0))
+
+## Every renowned spirit a 5-star summon may bring to a hero of `level` (the shrine's five of that tier and the five
+## of that tier who answer only a summoning). No level (-1): the first tier.
+static func summon_legend_ids(level := -1) -> Array:
+	match renowned_tier_for(level) if level >= 0 else 0:
+		1: return legend_ids(level) + MYTHIC_SUMMON.keys()
+		2: return legend_ids(level) + ETERNAL_SUMMON.keys()
 	return legend_ids() + [&"durek", &"seraphine", &"talwyn", &"nyssa", &"eldric"]
 
-static func legend_ids() -> Array:
+## The five renowned spirits waiting at the shrine for a hero of `level` (no level: the first five).
+static func legend_ids(level := -1) -> Array:
+	match renowned_tier_for(level) if level >= 0 else 0:
+		1: return MYTHIC_LEGENDS.keys()
+		2: return ETERNAL_LEGENDS.keys()
 	return [&"hollan", &"kavira", &"maudra", &"cindrel", &"vessik"]
+
+## Every renowned spirit of every tier.
+static func all_legend_ids() -> Array:
+	var out: Array = []
+	for table in [LEGENDS, SUMMON_LEGENDS, MYTHIC_LEGENDS, MYTHIC_SUMMON, ETERNAL_LEGENDS, ETERNAL_SUMMON]:
+		out.append_array(table.keys())
+	return out
 
 ## The Tempo actor's handler for a skill (see SKILLS).
 static func skill_use(id: StringName) -> String:

@@ -214,7 +214,9 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	if _char.has(ck):
 		return _char[ck]
 	var base := nm.get_slice("__", 0)
-	if LEGEND_PALETTES.has(nm.get_slice("__", 1)) and LEGEND.has(base):
+	# bh-022: the boss collections ("BH_HolyPlate__it_boss_crimson_glory_plate") wear the legends' texture sets too
+	var pal := nm.get_slice("__", 1)
+	if (LEGEND_PALETTES.has(pal) or pal.begins_with("it_boss_")) and LEGEND.has(base):
 		_char[ck] = _legend_mat(base, src as BaseMaterial3D, lite)
 		return _char[ck]
 	var imported := src as BaseMaterial3D

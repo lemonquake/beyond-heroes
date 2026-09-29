@@ -44,16 +44,20 @@ func is_legend() -> bool:
 func legend_def() -> Dictionary:
 	return DataTempos.legend(legend_id)
 
-## Share of its hero's strength this spirit carries (grade 1: half; renowned: three quarters).
+## Share of its hero's strength this spirit carries (grade 1: half; renowned: three quarters; Mythic and Eternal more).
 func mirror() -> float:
-	var base := float(DataTempos.RENOWNED.mirror) if is_legend() else float(DataTempos.grade_def(grade).mirror)
+	var base := float(renowned_def().mirror) if is_legend() else float(DataTempos.grade_def(grade).mirror)
 	return base + TempoGacha.RESONANCE_MIRROR * float(resonance)
 
+## bh-022: the renowned tier of this spirit (DataTempos.RENOWNED_TIERS: Renowned, Mythic, Eternal).
+func renowned_def() -> Dictionary:
+	return DataTempos.renowned_tier(DataTempos.legend_tier(legend_id))
+
 func grade_name() -> String:
-	return String(DataTempos.RENOWNED.name) if is_legend() else String(DataTempos.grade_def(grade).name)
+	return String(renowned_def().name) if is_legend() else String(DataTempos.grade_def(grade).name)
 
 func grade_color() -> Color:
-	return DataTempos.RENOWNED.color if is_legend() else DataTempos.grade_def(grade).color
+	return renowned_def().color if is_legend() else DataTempos.grade_def(grade).color
 
 ## "Hollan Greywall, the Unbroken" for renowned spirits, else the plain name.
 func full_name() -> String:

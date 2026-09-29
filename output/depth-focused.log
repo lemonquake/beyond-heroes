@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_dungeon_growth.gd — 5 tests, 14165 checks, 1 failures (2927.7 ms)
+  FAIL test_dungeon_growth.test_thresholds_and_scaling: new depths can drop level 25 equipment immediately
+TOTAL: 14165 checks, 1 failures

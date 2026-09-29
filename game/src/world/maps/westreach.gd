@@ -24,6 +24,8 @@ const FIELDS := Vector2(35, 110)
 const COVE := Vector2(-178, 92)
 const CAVE := Vector2(-191, 70)
 const SHRINE := Vector2(-168, 86)
+const GATE_SHRINE := Vector2(-122, 49)       # bh-022: waypoints at the two safe forks
+const MILL_SHRINE := Vector2(-7.5, 11.0)
 const MILL_HOUSE := Vector2(4, -21)
 const BRIDGE := Vector2(20, 2)
 const FEN_BRIDGE := Vector2(59, 97)
@@ -50,7 +52,7 @@ const ANCHORS := [
 ## Crop plots (centre x, z, half size x, z) and flat pads kept level for buildings (x, z, radius).
 const PLOTS := [[-2.0, 66.0, 12.0, 7.0], [-30.0, 100.0, 11.0, 6.0], [-60.0, 100.0, 11.0, 6.5], [-5.0, 106.0, 10.0, 4.5]]
 const PADS := [[4.0, -21.0, 7.5], [46.0, 94.0, 6.5], [20.0, 128.0, 6.0], [-150.0, 97.0, 5.5], [-30.0, 52.0, 6.0],
-	[-168.0, 86.0, 4.5], [0.0, 0.0, 8.0], [-112.0, 50.0, 6.0]]
+	[-168.0, 86.0, 4.5], [0.0, 0.0, 8.0], [-112.0, 50.0, 6.0], [-122.0, 49.0, 5.0], [-7.5, 11.0, 5.0]]
 ## The short stretch from the gate arch down to the fork (not a separate route edge: the South Gate link lands on it).
 const GATE_APPROACH := [Vector2(-112, 26), Vector2(-112, 40)]
 const WOLVES := Vector2(-70, 112)
@@ -95,6 +97,8 @@ func compose() -> void:
 	spawn(&"town_gate", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
 	spawn(&"forest_road", Vector3(-49, 0, -45), 140.0, true)
 	spawn(&"cove_shrine", Vector3(SHRINE.x + 3.2, 0, SHRINE.y + 1.2), 90.0, true)
+	spawn(&"gate_shrine", Vector3(GATE_SHRINE.x + 3.0, 0, GATE_SHRINE.y + 1.4), 70.0, true)
+	spawn(&"mill_shrine", Vector3(MILL_SHRINE.x + 2.8, 0, MILL_SHRINE.y - 1.8), 120.0, true)
 	spawn(&"olivar_road", Vector3(70.5, 0, -9.6), -90.0, true)
 	spawn(&"fen_road", Vector3(70.5, 0, 95.4), -90.0, true)
 	set_bounds(AABB(Vector3(-205, -20, -58), Vector3(286, 40, 196)))
@@ -448,6 +452,14 @@ func _crossroads() -> void:
 	kit("statue_small", Vector3(-3.4, 0, 8.6), 150.0, 0.9, props, true)
 	for p: Vector3 in [Vector3(-7.5, 0, -4.0), Vector3(6.5, 0, 6.5), Vector3(-9.0, 0, 9.0)]:
 		lamp_post(p, rng.randf() * 360.0)
+	# bh-022: waypoint shrines at both safe forks, each on a paved apron ringed with stones
+	for w in [[&"gate_shrine", GATE_SHRINE], [&"mill_shrine", MILL_SHRINE]]:
+		var q: Vector2 = w[1]
+		var wy := bed(q.x, q.y) + 0.05
+		apron(q, wy, 3.2)
+		teleporter(w[0], Vector3(q.x, wy, q.y), &"sanctuary", &"waypoint", "Malasugue Town")
+		for a: float in [0.5, 2.2, 3.9, 5.4]:
+			decor("rock_medium", Vector3(q.x + cos(a) * 4.6, 0, q.y + sin(a) * 4.4), rng.randf() * 360.0, rng.randf_range(0.5, 0.75), true, true)
 
 func _mill() -> void:
 	var c := MILL_HOUSE
@@ -738,6 +750,8 @@ func _greenery() -> void:
 		var z := -58.0 + rng.randf() * 196.0
 		var k := _k(x, z)
 		if _rd[k] < 3.0 or _sea[k] > -2.0 or _ds[k] < 3.5 or Vector2(x, z).distance_to(TOWN) < TOWN_FENCE + 2.0:
+			continue
+		if Vector2(x, z).distance_to(GATE_SHRINE) < 4.0 or Vector2(x, z).distance_to(MILL_SHRINE) < 4.0:
 			continue
 		decor("grass_clump", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.8, 1.4))
 		placed += 1

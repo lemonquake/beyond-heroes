@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BOSS_SET_WEIGHTS seed=303015 samples=10000 sets={"ashfall_pilgrim":455,"crimson_glory":897,"dragonforge":895,"eclipse_dancer":440,"gale_nomad":477,"grievance_of_the_fairy":457,"obsidian_oath":890,"pale_requiem":457,"serpent_veil":452,"starfall_hunter":471,"sunken_crown":886,"thunder_abbot":448,"truth_of_raikuru":1821,"wailing_mistress":484,"winter_court":470} target_missing=1555 target_owned=266
+[PASS] test_boss_sets.gd — 7 tests, 5959 checks, 0 failures (6184.0 ms)
+[PASS] test_crafting.gd — 11 tests, 680 checks, 0 failures (18983.0 ms)
+[PASS] test_crossbows.gd — 8 tests, 10766 checks, 0 failures (371.2 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 22207 checks, 0 failures (6076.3 ms)
+[PASS] test_inventory_overhaul.gd — 6 tests, 2035 checks, 0 failures (50.8 ms)
+[PASS] test_items.gd — 17 tests, 2477 checks, 0 failures (468.1 ms)
+TOTAL: 44124 checks, 0 failures

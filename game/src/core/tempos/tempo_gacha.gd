@@ -75,11 +75,12 @@ static func buy_embers(hero: HeroData) -> String:
 
 # ---- the banner ------------------------------------------------------------------------------------------------------
 
-## Today's featured renowned spirit (rotates daily through the summon pool).
-static func featured(day := -1) -> StringName:
+## Today's featured renowned spirit (rotates daily through the summon pool of the hero's tier; bh-022: from level 25
+## the Mythic, from 45 the Eternal). `level` -1 = the first tier.
+static func featured(day := -1, level := -1) -> StringName:
 	if day < 0:
 		day = int(Time.get_unix_time_from_system() / 86400.0)
-	var ids := DataTempos.summon_legend_ids()
+	var ids := DataTempos.summon_legend_ids(level)
 	return ids[posmod(day, ids.size())]
 
 # ---- calling ----------------------------------------------------------------------------------------------------------
@@ -147,7 +148,7 @@ static func summon(hero: HeroData, n: int, rng: RandomNumberGenerator = null) ->
 
 static func _resolve(hero: HeroData, stars: int, rng: RandomNumberGenerator, st: Dictionary) -> Dictionary:
 	if stars == 5:
-		var id := _pick_legend(st, rng)
+		var id := _pick_legend(st, rng, hero.progress.level)
 		var have := owned_legend(hero, id)
 		if have != null:
 			if have.resonance < MAX_RESONANCE:
@@ -176,13 +177,13 @@ static func _resolve(hero: HeroData, stars: int, rng: RandomNumberGenerator, st:
 	return {"tempo": t2, "stars": stars, "new": true, "resonance": 0, "refund": 0}
 
 ## Half of the 5-stars are the featured spirit; missing it guarantees the feature next time.
-static func _pick_legend(st: Dictionary, rng: RandomNumberGenerator) -> StringName:
-	var feat := featured()
+static func _pick_legend(st: Dictionary, rng: RandomNumberGenerator, level := -1) -> StringName:
+	var feat := featured(-1, level)
 	if bool(st.get("lost_feature", false)) or rng.randf() < 0.5:
 		st["lost_feature"] = false
 		return feat
 	st["lost_feature"] = true
-	var others := DataTempos.summon_legend_ids().filter(func(x): return x != feat)
+	var others := DataTempos.summon_legend_ids(level).filter(func(x): return x != feat)
 	return others[rng.randi_range(0, others.size() - 1)]
 
 static func _to_hall(hero: HeroData, t: TempoData) -> void:

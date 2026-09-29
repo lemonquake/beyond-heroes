@@ -187,6 +187,12 @@ func refresh_equipment_visuals() -> void:
 			visual.attach_weapon(&"off", sub.base.model_path())
 		elif lo.off_type != null:
 			visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type), lo.off_type.grip_offset)
+	# bh-022: crystals set in the held weapons glow along them
+	for pair in [[&"main", main], [&"off", sub]]:
+		var w: ItemInstance = pair[1]
+		if w != null and w.sockets > 0 and visual.has_weapon(pair[0]):
+			visual.set_weapon_infusion(pair[0], CrystalNames.color_for(w.gems), CrystalNames.power(w.gems),
+				0.45 if w.base.category == &"shield" else 0.9)
 	visual.set_stance(stance_idle())
 
 ## The model held in the hand: the item's own model (every base has one since bh-006); a random Aether-tier roll of a

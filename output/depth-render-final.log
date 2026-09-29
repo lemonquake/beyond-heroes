@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/inventory_window.gd:71)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:41)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/character_window.gd:53)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:43)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:58)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _add_window (res://src/ui/ui_root.gd:82)
+       [5] _ready (res://src/ui/ui_root.gd:49)
+       [6] _make_ui (res://src/main.gd:162)
+       [7] _quick_start (res://src/main.gd:190)
+DEPTH RENDER PASS: named guardian, 3 abilities, populated floor, real kills open exit and treasure
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

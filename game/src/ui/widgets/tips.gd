@@ -126,6 +126,10 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	if it.epithet != "":
 		# bh-012: the gacha epithet under the proper name
 		hv.add_child(lbl(it.epithet, 16, col.lerp(UITheme.PARCHMENT, 0.45), UITheme.body_bold()))
+		# bh-022: its crystals' name follows the proper name
+		var inf := CrystalNames.suffix(it)
+		if inf != "":
+			hv.add_child(lbl(inf, 15, CrystalNames.color_for(it.gems).lightened(0.3), UITheme.body_bold()))
 	hv.add_child(lbl(_type_line(it), 15, UITheme.TEXT_DIM, null, false))
 	var st := it.stars()
 	if st > 0:
@@ -194,6 +198,10 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		v.add_child(gap(2))
 		var grp := DataCrystals.group_for(it.base.category)
 		v.add_child(lbl("Sockets %d / %d" % [Sockets.filled(it), it.sockets], 16, Color(0.62, 0.86, 1.0), UITheme.body_bold()))
+		v.add_child(SocketArt.Strip.new(it, 30.0))
+		var inf := CrystalNames.suffix(it)
+		if inf != "":
+			v.add_child(lbl("Infused %s" % inf, 15, CrystalNames.color_for(it.gems).lightened(0.25), UITheme.body_bold()))
 		for g in it.gems:
 			if String(g) == "":
 				v.add_child(lbl("  ◇ Empty socket", 15, UITheme.TEXT_MUTED))

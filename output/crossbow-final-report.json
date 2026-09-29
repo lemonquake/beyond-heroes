@@ -1,0 +1,15 @@
+{
+  "checks": 10766,
+  "elapsed_ms": 523,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_crossbows.gd": {
+      "checks": 10766,
+      "failures": [],
+      "ms": 476.084,
+      "tests": 8
+    }
+  },
+  "timestamp": "2026-09-30T03:45:41"
+}

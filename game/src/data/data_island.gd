@@ -83,10 +83,10 @@ const PLACES := [
 	{"id": "town_refugee", "name": "Zerin's house", "kind": "home", "map": "sanctuary", "pos": Vector2(-17.7, -16.7), "listed": true, "public": true,
 		"door": "int_refugee", "levels": "Safe haven", "text": "Zerin Ven fled Emberhal."},
 	# --- Westreach: the district below the South Gate ---
-	{"id": "wr_gate", "name": "South Gate road", "kind": "junction", "map": "westreach", "pos": Vector2(-112, 40), "listed": false, "public": true,
-		"levels": "Level 1–4", "text": "Three roads leave the gate: to the mill, the fields and down the steps to the cove."},
+	{"id": "wr_gate", "name": "South Gate road", "kind": "junction", "map": "westreach", "pos": Vector2(-112, 40), "listed": true, "public": true,
+		"shrine": "gate_shrine", "levels": "Safe haven", "text": "Three roads leave the gate: to the mill, the fields and down the steps to the cove. A waypoint shrine stands by the fork, under the watch of the gate."},
 	{"id": "wr_mill", "name": "Old Mill Crossroads", "kind": "junction", "map": "westreach", "pos": Vector2(0, 0), "listed": true, "public": true,
-		"provisional": true, "levels": "Low danger", "text": "A watermill where four roads meet: Malasugue to the west, the Ruined Forest to the north, Lantern Fields to the south and the Lake Shore Road east to Olivar."},
+		"provisional": true, "shrine": "mill_shrine", "levels": "Safe haven", "text": "A watermill where four roads meet: Malasugue to the west, the Ruined Forest to the north, Lantern Fields to the south and the Lake Shore Road east to Olivar. A waypoint shrine stands on the grass island by the signpost."},
 	{"id": "wr_fields", "name": "Lantern Fields", "kind": "district", "map": "westreach", "pos": Vector2(35, 110), "listed": true, "public": true,
 		"provisional": true, "levels": "Level 1–4", "text": "Working farms that feed Malasugue. Goblins have been stealing from the stores."},
 	{"id": "wr_cove", "name": "Tideglass Cove", "kind": "shrine", "map": "westreach", "pos": Vector2(-178, 92), "listed": true, "public": true,
@@ -482,8 +482,12 @@ const NETWORK := {
 	&"cove_shrine": {"map": &"westreach", "spawn": &"cove_shrine", "place": "wr_cove", "name": "Tideglass Cove"},
 	&"olivar_shrine": {"map": &"olivar", "spawn": &"olivar_shrine", "place": "olv_shrine", "name": "Olivar"},
 	&"wyman_shrine": {"map": &"wyman_outpost", "spawn": &"wyman_shrine", "place": "wy_shrine", "name": "Wyman Outpost"},
+	# bh-022: every safe haven on the roads has its own waypoint (the South Gate fork and Old Mill Crossroads)
+	&"gate_shrine": {"map": &"westreach", "spawn": &"gate_shrine", "place": "wr_gate", "name": "South Gate"},
+	&"mill_shrine": {"map": &"westreach", "spawn": &"mill_shrine", "place": "wr_mill", "name": "Old Mill Crossroads"},
 }
-const NETWORK_SHRINES := [&"sanctuary_waypoint", &"forest_waypoint", &"cove_shrine", &"olivar_shrine", &"wyman_shrine"]
+const NETWORK_SHRINES := [&"sanctuary_waypoint", &"forest_waypoint", &"cove_shrine", &"olivar_shrine", &"wyman_shrine",
+	&"gate_shrine", &"mill_shrine"]
 
 # ------------------------------------------------------------------------------------------------------------
 

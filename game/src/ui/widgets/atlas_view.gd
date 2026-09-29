@@ -451,7 +451,8 @@ func _draw_place(c: Control, p: Dictionary, objective: bool) -> void:
 	if p.has("gate"):
 		_draw_gate(c, sp, StringName(p.gate), dim)
 		return
-	match p.kind:
+	# a crossroads with a waypoint shrine (bh-022) shows as a shrine
+	match ("shrine" if p.has("shrine") and p.kind == "junction" else p.kind):
 		"town":
 			r = 14.0
 			c.draw_circle(sp, r + 2.5, ink)

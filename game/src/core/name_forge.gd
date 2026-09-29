@@ -51,8 +51,8 @@ static func person(rng: RandomNumberGenerator, taken: Array = []) -> String:
 ## The first names of townsfolk and renowned spirits: a random Tempo never shares one.
 static func reserved() -> Array:
 	var out := []
-	for id in DataTempos.LEGENDS:
-		out.append(String(DataTempos.LEGENDS[id].name).get_slice(" ", 0).to_lower())
+	for id in DataTempos.all_legend_ids():
+		out.append(String(DataTempos.legend(id).name).get_slice(" ", 0).to_lower())
 	if DB and "npcs" in DB:
 		for n in DB.npcs.values():
 			out.append(String(n.display_name).get_slice(" ", 0).to_lower())

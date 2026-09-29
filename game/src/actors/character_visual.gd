@@ -725,6 +725,28 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 		_meshes.append(m)
 	_weapon_nodes[hand] = holder
 
+## bh-022: crystals set in a held weapon make it shed motes of their colour along the blade (stronger with more
+## crystal power). `power` 0 removes it. `length` = how far along the weapon's +Y the motes rise.
+func set_weapon_infusion(hand: StringName, color: Color, power: int, length := 0.9) -> void:
+	if not _weapon_nodes.has(hand) or not is_instance_valid(_weapon_nodes[hand]):
+		return
+	var holder: Node3D = _weapon_nodes[hand]
+	var old := holder.get_node_or_null(^"Infusion")
+	if old:
+		old.queue_free()
+	if power <= 0:
+		return
+	var fx := Node3D.new()
+	fx.name = "Infusion"
+	holder.add_child(fx)
+	var motes := VFXLib.particles(Color(color, 0.85), clampi(6 + power, 8, 22), 0.9, false, 0.07, 0.25, 40.0,
+		Vector3(0, 0.25, 0), 0.0, true)
+	var pm := motes.process_material as ParticleProcessMaterial
+	pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	pm.emission_box_extents = Vector3(0.03, length * 0.5, 0.03)
+	motes.position = Vector3(0, length * 0.55, 0)
+	fx.add_child(motes)
+
 func _collect_into(n: Node, out: Array[MeshInstance3D]) -> void:
 	if n is MeshInstance3D:
 		out.append(n)

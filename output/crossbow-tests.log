@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_class_rework.gd — 12 tests, 77 checks, 0 failures (4303.8 ms)
+[PASS] test_crossbows.gd — 8 tests, 10766 checks, 0 failures (395.8 ms)
+[PASS] test_inventory_overhaul.gd — 6 tests, 2035 checks, 0 failures (53.2 ms)
+[PASS] test_stats.gd — 8 tests, 159 checks, 0 failures (18.8 ms)
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:70)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] test_windows_open_with_tempos (res://tests/unit/test_tempos.gd:659)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_every_skill_works_live (res://tests/unit/test_tempos.gd:646)
+       [7] _until (res://tests/unit/test_tempos.gd:96)
+[PASS] test_tempos.gd — 16 tests, 3538 checks, 0 failures (21293.7 ms)
+TOTAL: 16575 checks, 0 failures

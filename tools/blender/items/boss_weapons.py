@@ -164,6 +164,11 @@ def weapon(theme):
     return remap(parts,keys)
 
 def shield(theme):
+    """bh-022: the collection shields are built by boss_regalia (set emblem in relief, textured palette)."""
+    import boss_regalia as RG
+    return RG.piece_parts(theme[0], 'sub_weapon', RG.palette(theme[0]))
+
+def _old_shield(theme):
     iid,name,body,trim,gem,family,cls=theme
     keys=palette(theme)
     index=[t[0] for t in THEMES].index(iid)
@@ -201,7 +206,8 @@ def main():
     for item in ITEMS:
         reset()
         fn,theme=SPECS[item['id']]
-        ob=B.build_object(item['id'],fn(theme))
+        import boss_regalia as RG
+        ob=RG.objects_for(item['id'],fn(theme))[0]   # bh-022: box-projected UVs for the legend texture sets
         export_glb(str(ROOT/'game/assets/items'/(item['id']+'.glb')),[ob],animations=False)
         tris=K.M.tri_count(ob)
         assert tris<12000,(item['id'],tris)

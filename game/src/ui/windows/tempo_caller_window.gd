@@ -92,8 +92,11 @@ func _update_status() -> void:
 			_status.text = "%s    ·    Spirits in the hall: %d / %d. Bind one into an open place, swap it with a bound Tempo, or release it for Soul Embers." % [
 				bound, hero.spirit_hall.size(), TempoGacha.HALL_CAP]
 		&"renowned":
-			_status.text = "%s    ·    Renowned spirits carry %d%% of your strength and skills no other spirit knows. Each answers only a hero of its level.    %s" % [
-				bound, roundi(float(DataTempos.RENOWNED.mirror) * 100.0), gear]
+			var tier := DataTempos.renowned_tier(DataTempos.renowned_tier_for(hero.progress.level))
+			var nxt_tier := DataTempos.renowned_tier_for(hero.progress.level) + 1
+			var later := ("    %s spirits answer at level %d." % [DataTempos.renowned_tier(nxt_tier).name, int(DataTempos.renowned_tier(nxt_tier).level)]) 				if nxt_tier < DataTempos.RENOWNED_TIERS.size() else ""
+			_status.text = "%s    ·    %s spirits carry %d%% of your strength and skills no other spirit knows. Each answers only a hero of its level.%s    %s" % [
+				bound, tier.name, roundi(float(tier.mirror) * 100.0), later, gear]
 		_:
 			_status.text = "%s    ·    %s" % [bound, gear]
 
@@ -119,7 +122,7 @@ func _build_roster() -> void:
 
 func _build_renowned() -> void:
 	var mirror := TempoRules.hero_mirror(hero)
-	for id in DataTempos.legend_ids():
+	for id in DataTempos.legend_ids(hero.progress.level):
 		var t := TempoRules.legend_data(id)
 		var err := TempoRules.legend_error(hero, id)
 		var label := "Walks with you" if TempoRules.legend_bound(hero, id) else "Bind — %s gold" % GuideWindow._thousands(t.price)
@@ -147,7 +150,7 @@ func _card(t: TempoData, mirror: DerivedStats, w: float, err: String, bind_text:
 		var nm := UITheme.title(t.tempo_name, 24, UITheme.PARCHMENT)
 		nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		v.add_child(nm)
-		var tt := UITheme.label(String(lg.title), 16, DataTempos.RENOWNED.color, UITheme.body_bold())
+		var tt := UITheme.label("%s  ·  %s" % [String(lg.title), t.grade_name()], 16, t.grade_color(), UITheme.body_bold())
 		tt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		v.add_child(tt)
 		var cl := UITheme.label("%s — %s  ·  level %d" % [td.name, td.role, int(lg.level)], 15, td.get("color", UITheme.GOLD), UITheme.body_bold())
@@ -184,7 +187,7 @@ func _card(t: TempoData, mirror: DerivedStats, w: float, err: String, bind_text:
 		row.add_child(si)
 		var heal := DataTempos.is_heal(sid)
 		var uniq := DataTempos.is_unique(sid)
-		var col := DataTempos.RENOWNED.color if uniq else (UITheme.GOOD if heal else UITheme.PARCHMENT)
+		var col := t.grade_color() if uniq else (UITheme.GOOD if heal else UITheme.PARCHMENT)
 		var nl := UITheme.label(String(sk.name) + ("  (heals)" if heal else "") + ("  ★" if uniq else ""), 15, col, UITheme.body_bold())
 		nl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(nl)
@@ -319,7 +322,7 @@ func _release(t: TempoData) -> void:
 
 func _build_summon() -> void:
 	var st := TempoGacha.state(hero)
-	var feat := TempoGacha.featured()
+	var feat := TempoGacha.featured(-1, hero.progress.level)
 	var lg := DataTempos.legend(feat)
 	var top := hbox(24)
 	_mine.add_child(top)

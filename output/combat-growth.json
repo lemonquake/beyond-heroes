@@ -13,12 +13,12 @@
   {
     "class": "knight",
     "enemy_hp": 205,
-    "hit": 51,
-    "hits_to_kill": 4.1,
+    "hit": 56,
+    "hits_to_kill": 3.7,
     "level": 10,
-    "skill_hit": 96,
-    "weapon": "knights_arming_sword",
-    "weapon_max": 32,
+    "skill_hit": 107,
+    "weapon": "artisan_copperleaf_sword",
+    "weapon_max": 36,
     "weapon_min": 20
   },
   {
@@ -46,46 +46,46 @@
   {
     "class": "knight",
     "enemy_hp": 1611,
-    "hit": 405,
-    "hits_to_kill": 4.0,
+    "hit": 391,
+    "hits_to_kill": 4.1,
     "level": 25,
-    "skill_hit": 770,
-    "weapon": "bastard_sword",
-    "weapon_max": 176,
-    "weapon_min": 96
+    "skill_hit": 742,
+    "weapon": "depth_copperleaf_backsword",
+    "weapon_max": 167,
+    "weapon_min": 90
   },
   {
     "class": "knight",
     "enemy_hp": 2617,
-    "hit": 502,
-    "hits_to_kill": 5.2,
+    "hit": 462,
+    "hits_to_kill": 5.7,
     "level": 30,
-    "skill_hit": 953,
-    "weapon": "gravewatch_longsword",
-    "weapon_max": 226,
-    "weapon_min": 121
+    "skill_hit": 877,
+    "weapon": "artisan_split_crown_sword",
+    "weapon_max": 196,
+    "weapon_min": 106
   },
   {
     "class": "knight",
     "enemy_hp": 8360,
-    "hit": 1855,
-    "hits_to_kill": 4.5,
+    "hit": 1408,
+    "hits_to_kill": 5.9,
     "level": 45,
-    "skill_hit": 3525,
-    "weapon": "starfall_sabre",
-    "weapon_max": 467,
-    "weapon_min": 254
+    "skill_hit": 2675,
+    "weapon": "depth_hollowfin_estoc",
+    "weapon_max": 580,
+    "weapon_min": 315
   },
   {
     "class": "knight",
     "enemy_hp": 20336,
-    "hit": 3360,
-    "hits_to_kill": 6.1,
+    "hit": 3105,
+    "hits_to_kill": 6.5,
     "level": 60,
-    "skill_hit": 6384,
-    "weapon": "kingsbane",
-    "weapon_max": 1028,
-    "weapon_min": 557
+    "skill_hit": 5900,
+    "weapon": "depth_crownless_longsword",
+    "weapon_max": 939,
+    "weapon_min": 507
   },
   {
     "class": "mage",
@@ -134,46 +134,46 @@
   {
     "class": "mage",
     "enemy_hp": 1611,
-    "hit": 494,
-    "hits_to_kill": 3.3,
+    "hit": 651,
+    "hits_to_kill": 2.5,
     "level": 25,
-    "skill_hit": 465,
-    "weapon": "frost_staff",
-    "weapon_max": 137,
-    "weapon_min": 82
+    "skill_hit": 470,
+    "weapon": "depth_glowcap_crook",
+    "weapon_max": 176,
+    "weapon_min": 96
   },
   {
     "class": "mage",
     "enemy_hp": 2617,
-    "hit": 893,
-    "hits_to_kill": 2.9,
+    "hit": 939,
+    "hits_to_kill": 2.8,
     "level": 30,
-    "skill_hit": 622,
-    "weapon": "deepwater_staff",
-    "weapon_max": 226,
-    "weapon_min": 121
+    "skill_hit": 632,
+    "weapon": "depth_tidal_forkstaff",
+    "weapon_max": 242,
+    "weapon_min": 128
   },
   {
     "class": "mage",
     "enemy_hp": 8360,
-    "hit": 1101,
-    "hits_to_kill": 7.6,
+    "hit": 2729,
+    "hits_to_kill": 3.1,
     "level": 45,
-    "skill_hit": 1394,
-    "weapon": "gloamspire_staff",
-    "weapon_max": 577,
-    "weapon_min": 309
+    "skill_hit": 1369,
+    "weapon": "depth_thornseed_branchstaff",
+    "weapon_max": 513,
+    "weapon_min": 278
   },
   {
     "class": "mage",
     "enemy_hp": 20336,
-    "hit": 12679,
-    "hits_to_kill": 1.6,
+    "hit": 13644,
+    "hits_to_kill": 1.5,
     "level": 60,
-    "skill_hit": 2748,
-    "weapon": "sunspire_staff",
-    "weapon_max": 1050,
-    "weapon_min": 568
+    "skill_hit": 2840,
+    "weapon": "depth_dawnspire_staff",
+    "weapon_max": 1145,
+    "weapon_min": 619
   },
   {
     "class": "ranger",
@@ -222,46 +222,46 @@
   {
     "class": "ranger",
     "enemy_hp": 1611,
-    "hit": 382,
-    "hits_to_kill": 4.2,
+    "hit": 337,
+    "hits_to_kill": 4.8,
     "level": 25,
-    "skill_hit": 725,
-    "weapon": "siege_greatbow",
-    "weapon_max": 272,
-    "weapon_min": 131
+    "skill_hit": 640,
+    "weapon": "depth_rootbend_shortbow",
+    "weapon_max": 233,
+    "weapon_min": 114
   },
   {
     "class": "ranger",
     "enemy_hp": 2617,
-    "hit": 441,
-    "hits_to_kill": 5.9,
+    "hit": 502,
+    "hits_to_kill": 5.2,
     "level": 30,
-    "skill_hit": 838,
-    "weapon": "thornback_bow",
-    "weapon_max": 272,
-    "weapon_min": 132
+    "skill_hit": 953,
+    "weapon": "depth_saltwind_recurve",
+    "weapon_max": 323,
+    "weapon_min": 154
   },
   {
     "class": "ranger",
     "enemy_hp": 8360,
-    "hit": 1161,
-    "hits_to_kill": 7.2,
+    "hit": 1224,
+    "hits_to_kill": 6.8,
     "level": 45,
-    "skill_hit": 2206,
-    "weapon": "frostwing_bow",
-    "weapon_max": 645,
-    "weapon_min": 309
+    "skill_hit": 2325,
+    "weapon": "depth_thornwing_bow",
+    "weapon_max": 686,
+    "weapon_min": 334
   },
   {
     "class": "ranger",
     "enemy_hp": 20336,
-    "hit": 3421,
-    "hits_to_kill": 5.9,
+    "hit": 3906,
+    "hits_to_kill": 5.2,
     "level": 60,
-    "skill_hit": 6500,
-    "weapon": "stormstring_greatbow",
-    "weapon_max": 1736,
-    "weapon_min": 831
+    "skill_hit": 7422,
+    "weapon": "depth_dawnfeather_bow",
+    "weapon_max": 1539,
+    "weapon_min": 741
   },
   {
     "class": "shadowblade",
@@ -310,45 +310,45 @@
   {
     "class": "shadowblade",
     "enemy_hp": 1611,
-    "hit": 165,
-    "hits_to_kill": 9.8,
+    "hit": 201,
+    "hits_to_kill": 8.0,
     "level": 25,
-    "skill_hit": 313,
-    "weapon": "viper_fang",
-    "weapon_max": 93,
-    "weapon_min": 58
+    "skill_hit": 383,
+    "weapon": "depth_rootfang_skinner",
+    "weapon_max": 108,
+    "weapon_min": 66
   },
   {
     "class": "shadowblade",
     "enemy_hp": 2617,
-    "hit": 285,
-    "hits_to_kill": 9.2,
+    "hit": 299,
+    "hits_to_kill": 8.7,
     "level": 30,
-    "skill_hit": 542,
-    "weapon": "emberfang_dirk",
-    "weapon_max": 140,
-    "weapon_min": 83
+    "skill_hit": 568,
+    "weapon": "depth_keelhook_knife",
+    "weapon_max": 150,
+    "weapon_min": 88
   },
   {
     "class": "shadowblade",
     "enemy_hp": 8360,
-    "hit": 727,
-    "hits_to_kill": 11.5,
+    "hit": 713,
+    "hits_to_kill": 11.7,
     "level": 45,
-    "skill_hit": 1382,
-    "weapon": "stormneedle",
-    "weapon_max": 316,
-    "weapon_min": 188
+    "skill_hit": 1355,
+    "weapon": "depth_briar_talon",
+    "weapon_max": 321,
+    "weapon_min": 192
   },
   {
     "class": "shadowblade",
     "enemy_hp": 20336,
-    "hit": 1314,
-    "hits_to_kill": 15.5,
+    "hit": 2153,
+    "hits_to_kill": 9.4,
     "level": 60,
-    "skill_hit": 2496,
-    "weapon": "nightwhisper",
-    "weapon_max": 642,
-    "weapon_min": 389
+    "skill_hit": 4090,
+    "weapon": "depth_dawnthorn_knife",
+    "weapon_max": 713,
+    "weapon_min": 432
   }
 ]

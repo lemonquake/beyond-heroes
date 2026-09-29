@@ -1,0 +1,189 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _floor (res://tests/unit/test_bh012.gd:29)
+       [2] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2322' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2323' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2324' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2459' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2460' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2461' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2574' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2575' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2576' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_a' as child to '@Node3D@2697' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_b' as child to '@Node3D@2698' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+WARNING: Adding 'ring_c' as child to '@Node3D@2699' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:182)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:43)
+[PASS] test_bh012.gd — 11 tests, 1142 checks, 0 failures (2194.5 ms)
+[PASS] test_bh013.gd — 11 tests, 1017 checks, 0 failures (6751.3 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":15,"hits_to_kill":4.3,"level":5,"skill_hit":29,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":51,"hits_to_kill":4.1,"level":10,"skill_hit":96,"weapon":"knights_arming_sword","weapon_max":32,"weapon_min":20}
+GROWTH {"class":"knight","enemy_hp":472,"hit":118,"hits_to_kill":4.0,"level":15,"skill_hit":225,"weapon":"duelist_sabre","weapon_max":52,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":299,"hits_to_kill":3.1,"level":20,"skill_hit":568,"weapon":"runed_sword","weapon_max":96,"weapon_min":62}
+GROWTH {"class":"knight","enemy_hp":1611,"hit":391,"hits_to_kill":4.1,"level":25,"skill_hit":742,"weapon":"depth_copperleaf_backsword","weapon_max":167,"weapon_min":90}
+GROWTH {"class":"knight","enemy_hp":2617,"hit":502,"hits_to_kill":5.2,"level":30,"skill_hit":953,"weapon":"gravewatch_longsword","weapon_max":226,"weapon_min":121}
+GROWTH {"class":"knight","enemy_hp":8360,"hit":1408,"hits_to_kill":5.9,"level":45,"skill_hit":2675,"weapon":"depth_hollowfin_estoc","weapon_max":580,"weapon_min":315}
+GROWTH {"class":"knight","enemy_hp":20336,"hit":3105,"hits_to_kill":6.5,"level":60,"skill_hit":5900,"weapon":"depth_crownless_longsword","weapon_max":939,"weapon_min":507}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":44,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":67,"hits_to_kill":3.1,"level":10,"skill_hit":87,"weapon":"storm_staff","weapon_max":36,"weapon_min":21}
+GROWTH {"class":"mage","enemy_hp":472,"hit":197,"hits_to_kill":2.4,"level":15,"skill_hit":175,"weapon":"storm_staff","weapon_max":65,"weapon_min":37}
+GROWTH {"class":"mage","enemy_hp":920,"hit":305,"hits_to_kill":3.0,"level":20,"skill_hit":297,"weapon":"frost_staff","weapon_max":91,"weapon_min":54}
+GROWTH {"class":"mage","enemy_hp":1611,"hit":651,"hits_to_kill":2.5,"level":25,"skill_hit":470,"weapon":"depth_glowcap_crook","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"mage","enemy_hp":2617,"hit":939,"hits_to_kill":2.8,"level":30,"skill_hit":632,"weapon":"depth_tidal_forkstaff","weapon_max":242,"weapon_min":128}
+GROWTH {"class":"mage","enemy_hp":8360,"hit":2729,"hits_to_kill":3.1,"level":45,"skill_hit":1369,"weapon":"depth_thornseed_branchstaff","weapon_max":513,"weapon_min":278}
+GROWTH {"class":"mage","enemy_hp":20336,"hit":13644,"hits_to_kill":1.5,"level":60,"skill_hit":2840,"weapon":"depth_dawnspire_staff","weapon_max":1145,"weapon_min":619}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":30,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":41,"hits_to_kill":5.0,"level":10,"skill_hit":78,"weapon":"composite_bow","weapon_max":38,"weapon_min":20}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":105,"hits_to_kill":4.5,"level":15,"skill_hit":200,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":168,"hits_to_kill":5.5,"level":20,"skill_hit":319,"weapon":"warden_longbow","weapon_max":109,"weapon_min":57}
+GROWTH {"class":"ranger","enemy_hp":1611,"hit":337,"hits_to_kill":4.8,"level":25,"skill_hit":640,"weapon":"depth_rootbend_shortbow","weapon_max":233,"weapon_min":114}
+GROWTH {"class":"ranger","enemy_hp":2617,"hit":502,"hits_to_kill":5.2,"level":30,"skill_hit":953,"weapon":"depth_saltwind_recurve","weapon_max":323,"weapon_min":154}
+GROWTH {"class":"ranger","enemy_hp":8360,"hit":1224,"hits_to_kill":6.8,"level":45,"skill_hit":2325,"weapon":"depth_thornwing_bow","weapon_max":686,"weapon_min":334}
+GROWTH {"class":"ranger","enemy_hp":20336,"hit":3906,"hits_to_kill":5.2,"level":60,"skill_hit":7422,"weapon":"depth_dawnfeather_bow","weapon_max":1539,"weapon_min":741}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.2,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":25,"hits_to_kill":8.3,"level":10,"skill_hit":47,"weapon":"shadow_kris","weapon_max":25,"weapon_min":13}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":71,"hits_to_kill":6.7,"level":15,"skill_hit":134,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":127,"hits_to_kill":7.2,"level":20,"skill_hit":242,"weapon":"aether_stiletto","weapon_max":72,"weapon_min":37}
+GROWTH {"class":"shadowblade","enemy_hp":1611,"hit":201,"hits_to_kill":8.0,"level":25,"skill_hit":383,"weapon":"depth_rootfang_skinner","weapon_max":108,"weapon_min":66}
+GROWTH {"class":"shadowblade","enemy_hp":2617,"hit":299,"hits_to_kill":8.7,"level":30,"skill_hit":568,"weapon":"depth_keelhook_knife","weapon_max":150,"weapon_min":88}
+GROWTH {"class":"shadowblade","enemy_hp":8360,"hit":713,"hits_to_kill":11.7,"level":45,"skill_hit":1355,"weapon":"depth_briar_talon","weapon_max":321,"weapon_min":192}
+GROWTH {"class":"shadowblade","enemy_hp":20336,"hit":2153,"hits_to_kill":9.4,"level":60,"skill_hit":4090,"weapon":"depth_dawnthorn_knife","weapon_max":713,"weapon_min":432}
+[PASS] test_combat_growth.gd — 6 tests, 134 checks, 0 failures (1593.5 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 21371 checks, 0 failures (4744.6 ms)
+[PASS] test_items.gd — 17 tests, 2477 checks, 0 failures (473.8 ms)
+[PASS] test_loot.gd — 17 tests, 2335 checks, 0 failures (18409.5 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.5 ms)
+[PASS] test_team_loot.gd — 3 tests, 21649 checks, 0 failures (18107.3 ms)
+TOTAL: 50970 checks, 0 failures
+ERROR: 104 RID allocations of type 'P11JoltShape3D' were leaked at exit.
+ERROR: 1710 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.
+ERROR: 36 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.
+ERROR: 537 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.
+ERROR: 30 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 4 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
+WARNING: 3160 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2016 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketSmallE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

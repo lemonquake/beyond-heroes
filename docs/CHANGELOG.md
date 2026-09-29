@@ -2,6 +2,18 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-022 - Socket visuals, infused names, waypoints, Mythic and Eternal Tempos, rebuilt boss collections
+
+Prepared 30 September 2026.
+
+- Socketed equipment shows its sockets on item cells, equipment slots and tooltips: bronze bezels, each holding its crystal cut by grade. Pieces holding crystals glow in their blended colour, and held weapons shed motes of it.
+- Equipment is named after its crystals: 32 single-family names in four tiers, all 28 hybrid pairs ("of the Nova Blast"), Grand and Eternal forms, third-family epithets and Fourfold / Prismatic forms. See docs/CRYSTAL_NAMES.md.
+- Waypoint shrines now stand at the South Gate fork and Old Mill Crossroads, so every safe haven on the roads is on the waypoint network. They show on the minimap, world map and route planner.
+- From level 25 the Mythic renowned spirits replace the Renowned at the Shrine of the Fallen and in 5-star summons; from level 45 the Eternal replace the Mythic. Twenty new spirits with portraits (shrine) and a unique skill each, carrying 85% / 95% of the hero's strength, costing 45,000-110,000 and 180,000-450,000 gold. Spirits already bound keep their tier. Mythic and Eternal spirits burn in their tier's colour in the world.
+- All fifteen boss collections were rebuilt as fitted, textured regalia with set crests and emblems; the seven shields and fifteen signature weapons use the same textured palettes. New icons for all 187 pieces. Showcase PDF: output/pdf/Beyond-Heroes-Boss-Collections.pdf.
+
+Sources: work/lemondev/bh-022/handoff.md.
+
 ## BH-016 - Skills, Guild House and player trading
 
 Git commit: 4f0b64b784ba869e14ddc99cc87859a3503fca03 (29 September 2026).

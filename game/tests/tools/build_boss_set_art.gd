@@ -19,6 +19,12 @@ func _bounds(root: Node3D) -> AABB:
 	return result
 
 func _run() -> void:
+	# bh-022: the collections are now built and iconised in Blender (tools/blender/items/boss_regalia.py -- models icons);
+	# this exporter would overwrite those models and icons with the old procedural regalia.
+	if not "--legacy" in OS.get_cmdline_user_args():
+		print("BOSS_ART superseded by tools/blender/items/boss_regalia.py (pass --legacy to run the old exporter)")
+		get_tree().quit()
+		return
 	var phase := "gear"
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--phase="): phase = arg.substr(8)

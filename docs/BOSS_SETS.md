@@ -54,6 +54,28 @@ At three pieces: Knight collections give +10% Defense and +8% maximum health; Ra
 
 The full-set effects use existing combat behaviors. Individual pieces still roll normal Master affixes; a full collection does not grant every set's effect at once.
 
+## Appearance (BH-022)
+
+Every collection was rebuilt as fitted, textured regalia in Blender (`tools/blender/items/boss_regalia.py`). Each piece is
+modelled around the standard hero skeleton, so one model is both the worn piece and the dropped item:
+
+- Knights wear closed great helms, engraved cuirasses with gorgets and fauld lames, layered pauldrons that move with the
+  upper arms, mail skirts and tassets on the thighs, gauntlets with plated hands, greaves with knee cops and sabatons.
+- Rangers wear sallets or circlets, riveted brigandines with a baldric, spaulders, leather tassets and split cloaks.
+- Mages wear hoods, crowns or a pilgrim's hat, a soft mantle over a bodice, robes with front and back panels and
+  bell sleeves.
+- Shadowblades wear hoods (or a cobra's hood), fitted harnesses with crossed straps, an asymmetric pauldron and scarves.
+- Each set has its own crest and emblem (dragon, storm halo, sunburst, leaf wings, tears, ice crown, trident and coral,
+  twin orbiting rings, flame, stars, feathers, obsidian shards, antlers, serpent, eclipse), repeated on the chest,
+  belt, shield, signet, seal, pendant and brooch.
+- Materials use the legend texture sets (engraved plate, dragon scale, mail, worn leather, storm wool, bone) through a
+  box-projected UV map; gems and glows keep their emission.
+
+Pauldrons, hand plates, sabatons and tassets are separate parts that follow their own bones. The seven shields carry the
+set emblem in relief. Icons are rendered with the same studio lighting and backdrop as all other 3D item icons.
+
+Showcase: `output/pdf/Beyond-Heroes-Boss-Collections.pdf` (`python tools/create_boss_sets_pdf.py`).
+
 ## Verification
 
-The dedicated `test_boss_sets.gd` suite checks complete legal equipment, all bonus thresholds, saving, exact level eligibility, repeatable encounters, one-piece reward bundles, ownership sources and exclusion from generic rewards. A seeded 10,000-drop sample checks that all sets remain possible and that collection weighting favors missing pieces without preventing duplicates. Numerical simulation does not certify visual quality or frame rate.
+The dedicated `test_boss_sets.gd` suite checks complete legal equipment, all bonus thresholds, saving, exact level eligibility, repeatable encounters, one-piece reward bundles, ownership sources and exclusion from generic rewards. A seeded 10,000-drop sample checks that all sets remain possible and that collection weighting favors missing pieces without preventing duplicates. `test_bh022.gd` checks that every piece has a model and icon, that worn parts ride the arm, hand, foot and thigh bones, and that the textured palettes apply. Numerical simulation does not certify visual quality or frame rate.

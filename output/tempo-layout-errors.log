@@ -1,0 +1,8 @@
+WARNING: Can't change the size of a `SubViewport` with a `SubViewportContainer` parent that has `stretch` enabled. Set `SubViewportContainer.stretch` to `false` to allow changing the size manually.
+   at: _internal_set_size (scene/main/viewport.cpp:5627)
+   GDScript backtrace (most recent call first):
+       [0] _on_resized (res://src/ui/widgets/character_preview.gd:113)
+       [1] _ready (res://src/ui/widgets/character_preview.gd:109)
+       [2] _build (res://src/ui/windows/tempo_window.gd:68)
+       [3] _ready (res://src/ui/widgets/ui_window.gd:30)
+       [4] _run (res://tests/tools/capture_tempo_layout.gd:66)
