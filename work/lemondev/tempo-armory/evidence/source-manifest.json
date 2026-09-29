@@ -1,0 +1,4302 @@
+[
+  {
+    "path": "game/assets/items/artisan_anchor_beard_axe.glb",
+    "sha256": "38b6b06ecd074c0fed6eff0412a671fbbbc159e5f5870cfb4496087759a128b9"
+  },
+  {
+    "path": "game/assets/items/artisan_anchor_beard_axe.glb.import",
+    "sha256": "1ba61a33f02c7f4a1d561e56f85f6a9dfd5a75bdfbfd934f6f20d58ead52ceae"
+  },
+  {
+    "path": "game/assets/items/artisan_antler_crown_bow.glb",
+    "sha256": "efa0c444d764f69970c2ad910861aaa831c45e85d4ac8f156d87cf8520a81876"
+  },
+  {
+    "path": "game/assets/items/artisan_antler_crown_bow.glb.import",
+    "sha256": "e310f7ac8c63201647da2a4cc073bf1dae8787dfa3dc336562feb15c0953d9a9"
+  },
+  {
+    "path": "game/assets/items/artisan_astral_ring_sword.glb",
+    "sha256": "f15d5e8bdf32f715630ce377014f5503512eb2aaaaae677642a49e6f1ddf19f4"
+  },
+  {
+    "path": "game/assets/items/artisan_astral_ring_sword.glb.import",
+    "sha256": "6c366178b64523deba6710fcf22b578dc9f28ba2b9da4639f0fb57708089ee96"
+  },
+  {
+    "path": "game/assets/items/artisan_boar_cleaver_axe.glb",
+    "sha256": "153af1649ec1a20f1c69c24d6a8d92840ce2d23afd8a73fee954e80151ddd111"
+  },
+  {
+    "path": "game/assets/items/artisan_boar_cleaver_axe.glb.import",
+    "sha256": "b1c5131dbb89b9c1d3a4f85ad98dfc95ef9811b09d50b02ee1f492e42a51d5d8"
+  },
+  {
+    "path": "game/assets/items/artisan_clockwork_cam_bow.glb",
+    "sha256": "56b53e41e3f06a1328a27f49089808eb3a6af210194c6da9fe0335b5f34aa512"
+  },
+  {
+    "path": "game/assets/items/artisan_clockwork_cam_bow.glb.import",
+    "sha256": "ff99d1e140e6935e6dc5c0c12ff54f914691a333a6a9d5aa433b19fa6c7ed53b"
+  },
+  {
+    "path": "game/assets/items/artisan_copperleaf_sword.glb",
+    "sha256": "0e834ccf55c6eb081108c6cb23dd32cfac331c9a8efc5da53ac34cebb95d7cb4"
+  },
+  {
+    "path": "game/assets/items/artisan_copperleaf_sword.glb.import",
+    "sha256": "01c03604e3eea670bc4963a3ad01f3f06d06f7c94016cfc65535639d55acd7de"
+  },
+  {
+    "path": "game/assets/items/artisan_crescent_fang_dagger.glb",
+    "sha256": "0578d3f463003d32ac9d39128d506a2eb08617f74c220ca85cba145c75c1701b"
+  },
+  {
+    "path": "game/assets/items/artisan_crescent_fang_dagger.glb.import",
+    "sha256": "e8bee95087b31016f9c35d13f9f5c562fcb60a81a508992f1f2764f2c238b4ef"
+  },
+  {
+    "path": "game/assets/items/artisan_crescent_moon_axe.glb",
+    "sha256": "39f791cf3be5b5071d524187a293491a1b7cffdf61866a2af222f168cfc7524d"
+  },
+  {
+    "path": "game/assets/items/artisan_crescent_moon_axe.glb.import",
+    "sha256": "e950d6ddd06a9cfc0805a5dc174f3cfd92a2072586c4878a28f4cce205fc5f1d"
+  },
+  {
+    "path": "game/assets/items/artisan_crystal_spire_bow.glb",
+    "sha256": "b086c4b431acca669a62910db5dcb51d9ca68d9949e7812b377c23eb8ff52b76"
+  },
+  {
+    "path": "game/assets/items/artisan_crystal_spire_bow.glb.import",
+    "sha256": "72420da5805bec757fdb9b9e57c3c00119f21234c2b24f9557d548f16087fa37"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_rib_bow.glb",
+    "sha256": "e2a11eb25b51530ca7b9df7a2a379d1b487d042de7417eb66acf50a4141d3d37"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_rib_bow.glb.import",
+    "sha256": "84bc1997f7c85d0185770dd780d5225d53661272510b6f242363840c75680605"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_talon_axe.glb",
+    "sha256": "6648fad705057d6d40557f8736897dffbbb9d0e526269cb94b0388782c29e58f"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_talon_axe.glb.import",
+    "sha256": "8e0f00e06a30b03a8f1bdf7a3563a9261e7a2987d1fbeb0408491d9f957966a9"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_tooth_sword.glb",
+    "sha256": "1b25e0139160927d671b3204aec862995a9d7b3fc1b4f91ee54614ea78ab9542"
+  },
+  {
+    "path": "game/assets/items/artisan_dragon_tooth_sword.glb.import",
+    "sha256": "9d99229cdafa228cfecb31d5f31c628a38a0e60da21b728961230210d045e5e5"
+  },
+  {
+    "path": "game/assets/items/artisan_flame_ribbon_sword.glb",
+    "sha256": "f7d50dce186096e30d7d6ab0fc3b5b830b3b50528cd49c6e1a7c776ac7c1771d"
+  },
+  {
+    "path": "game/assets/items/artisan_flame_ribbon_sword.glb.import",
+    "sha256": "54ac37527fbfa194af826d446e7c6cf9d1d8d02dc101aae8ee2434a222946d2c"
+  },
+  {
+    "path": "game/assets/items/artisan_frost_pick_axe.glb",
+    "sha256": "cf579f172c1d3a59854f56722d7721f7d419e7f778277b894a5f017f83f708cf"
+  },
+  {
+    "path": "game/assets/items/artisan_frost_pick_axe.glb.import",
+    "sha256": "d804690fffb7c1540e868808a65c1be97535eee4eb67d9630407ef1faf48dcbc"
+  },
+  {
+    "path": "game/assets/items/artisan_glass_leaf_dagger.glb",
+    "sha256": "0457b712cbec53aeb5592ec34cbf125e1529dc7a54b22929e73b533ea1682463"
+  },
+  {
+    "path": "game/assets/items/artisan_glass_leaf_dagger.glb.import",
+    "sha256": "b7e41fe45985a383dd1f34bf5f9ae22a9b3d770f0ee724b24dd7b97c6f946658"
+  },
+  {
+    "path": "game/assets/items/artisan_gothic_window_axe.glb",
+    "sha256": "863684aa62cd48fd0d58edfa4b9751387cb264cd92e1d7e88f6687d5c3c4cdaa"
+  },
+  {
+    "path": "game/assets/items/artisan_gothic_window_axe.glb.import",
+    "sha256": "b97614de3f96c3656aef717c1457e426627c4783d494ffdedf5f84d84b5fd24c"
+  },
+  {
+    "path": "game/assets/items/artisan_gull_hook_dagger.glb",
+    "sha256": "827dd6669f49b17aa4c89213b530b22b30b2368840bc07f6fadd4e44fdab4255"
+  },
+  {
+    "path": "game/assets/items/artisan_gull_hook_dagger.glb.import",
+    "sha256": "dc0cf1e3763bf9c0d08937a0852b069134468df9893d16a33c7f108168ecbe59"
+  },
+  {
+    "path": "game/assets/items/artisan_harbor_basket_sword.glb",
+    "sha256": "3a45fe9c92477ab7ce561be9b87d153b22b8af56356f122f8785cb98005eacb1"
+  },
+  {
+    "path": "game/assets/items/artisan_harbor_basket_sword.glb.import",
+    "sha256": "dd8a3ab4d47ef26bcd513646e0015bd30732121e6a7184b3298ce62c715199b4"
+  },
+  {
+    "path": "game/assets/items/artisan_heron_estoc.glb",
+    "sha256": "31ec8137d3905f4b354725b08bf9cc188fb3d462b6b88f18213c96c392243d7f"
+  },
+  {
+    "path": "game/assets/items/artisan_heron_estoc.glb.import",
+    "sha256": "ef918ad15cc0d302b22dc1d988164df3ba0e52b689a8dd0b6910d367cec26328"
+  },
+  {
+    "path": "game/assets/items/artisan_heron_wing_bow.glb",
+    "sha256": "cee32ae000dde5253f143c71ba762bf8bdd54a96b33d68a73bb50037d5d7040b"
+  },
+  {
+    "path": "game/assets/items/artisan_heron_wing_bow.glb.import",
+    "sha256": "6e67e740ed863a060d6e68958988d3989a25ee03961d1449c8718d8d0808c8ef"
+  },
+  {
+    "path": "game/assets/items/artisan_ironleaf_bow.glb",
+    "sha256": "8cf603ec730b018c3e390018305a0bf2c322dff42f5cd64943c72f18ee74d02d"
+  },
+  {
+    "path": "game/assets/items/artisan_ironleaf_bow.glb.import",
+    "sha256": "173f9555d13abdfd608ee0eef549875f571c7c5bc6555d4e102966d993905f43"
+  },
+  {
+    "path": "game/assets/items/artisan_moon_hook_sword.glb",
+    "sha256": "ef5c6ffb4e734deb07c54cb84d2481d8474a4de6064026fdcb0244a0c1147f71"
+  },
+  {
+    "path": "game/assets/items/artisan_moon_hook_sword.glb.import",
+    "sha256": "074d890bf524598f7e70ae3e946f294c6b5e0e38c0cc83fea88c51dffdb10e55"
+  },
+  {
+    "path": "game/assets/items/artisan_orchid_fan_dagger.glb",
+    "sha256": "ea77da68a346541ddd3ebba1e0972da3f4e520158bb1bbd4477359d43c02d5fc"
+  },
+  {
+    "path": "game/assets/items/artisan_orchid_fan_dagger.glb.import",
+    "sha256": "8986eab6870e4a1ae785f797897c4d1f975b93a73ca50ad9fe8bd95b5b8b3850"
+  },
+  {
+    "path": "game/assets/items/artisan_prism_greatblade.glb",
+    "sha256": "bc424a77d7250a841d86e7fe7b189c6937d7e30f4bfd8d9a64da9372375e2c11"
+  },
+  {
+    "path": "game/assets/items/artisan_prism_greatblade.glb.import",
+    "sha256": "c8410ef3623d26448bdf8e1ad9e9fbd8edfbf07f90235d4363710214b076933e"
+  },
+  {
+    "path": "game/assets/items/artisan_raven_beak_axe.glb",
+    "sha256": "889b48b8bb97b02f58a6bdc0f310f9ef655ed35b3f49cb6b3fdd235afa19845a"
+  },
+  {
+    "path": "game/assets/items/artisan_raven_beak_axe.glb.import",
+    "sha256": "cf6d2931856b84d6fa510c386e5dab4a80a43733d88aa8c542130ed2170718ff"
+  },
+  {
+    "path": "game/assets/items/artisan_sawback_dagger.glb",
+    "sha256": "9fcbe081805393c653bf5a53371b8828d839ec5cda8e2e4f08110d6060f796db"
+  },
+  {
+    "path": "game/assets/items/artisan_sawback_dagger.glb.import",
+    "sha256": "9a4fdae55f247b7d692a69ad1f469565545957b43f38b0d1b59ede464e00cbda"
+  },
+  {
+    "path": "game/assets/items/artisan_scorpion_tail_dagger.glb",
+    "sha256": "19396eba6edcd6dd83b257b74af0b761878157100d74994033b76e9823abf658"
+  },
+  {
+    "path": "game/assets/items/artisan_scorpion_tail_dagger.glb.import",
+    "sha256": "cc2f90a7df8e25b80897f39353533d28c627c33d5f1330d8cac1878ec5c08ad6"
+  },
+  {
+    "path": "game/assets/items/artisan_serpent_coil_bow.glb",
+    "sha256": "c4cf29636994de0d3d6157d243051ca70a03dad9477631250b0a70e52200218a"
+  },
+  {
+    "path": "game/assets/items/artisan_serpent_coil_bow.glb.import",
+    "sha256": "f671ea8744f60a86bc6c232f74527f75d6011b0fb098dd26021095362576b0bd"
+  },
+  {
+    "path": "game/assets/items/artisan_serpent_kris_dagger.glb",
+    "sha256": "e4d79cb74f8d4d88047e6edaf37853aab8e27e6a8fe7204509f99c373b2711a2"
+  },
+  {
+    "path": "game/assets/items/artisan_serpent_kris_dagger.glb.import",
+    "sha256": "d28dc376c7a42e61d9aa111b0fa8c25221c6c704526e4bb3234a16918e8d68f1"
+  },
+  {
+    "path": "game/assets/items/artisan_split_crown_sword.glb",
+    "sha256": "19cadc5f63081dbfd581f9dbc606480f6d52a23e4ae6186b162ecac700e8be8f"
+  },
+  {
+    "path": "game/assets/items/artisan_split_crown_sword.glb.import",
+    "sha256": "19b626363184b861ba21f8e20ce5e61c5c19c51933c578aa334d1c9f4ca45b3c"
+  },
+  {
+    "path": "game/assets/items/artisan_star_compass_dagger.glb",
+    "sha256": "fe094824ddb7a74ef0e79452feba2045bbf2c411b689d35d78c02434ffb30805"
+  },
+  {
+    "path": "game/assets/items/artisan_star_compass_dagger.glb.import",
+    "sha256": "e91e98aaedc5b1b9b28df6eaaee75f41e7d9219f41b51bf404db4b05261728ae"
+  },
+  {
+    "path": "game/assets/items/artisan_sun_disc_axe.glb",
+    "sha256": "f6ecd166c264e93c8be334ddd81e2760fd8d303573d506333fc0f7348237746c"
+  },
+  {
+    "path": "game/assets/items/artisan_sun_disc_axe.glb.import",
+    "sha256": "4c3fa9f0dd9b04c27eab02d7d71634d7c7e3d4b56096ae7d385be7bb9e2dd023"
+  },
+  {
+    "path": "game/assets/items/artisan_sunwheel_bow.glb",
+    "sha256": "9dc291dc3d22f3915011b9716af2ecbeeb70805154a454069d6e9e6fe32be60d"
+  },
+  {
+    "path": "game/assets/items/artisan_sunwheel_bow.glb.import",
+    "sha256": "308224270a9cfa578cbecb1fd17702ae28d4c019a9742fc0b352ecf518da39ff"
+  },
+  {
+    "path": "game/assets/items/artisan_thunder_fork_axe.glb",
+    "sha256": "73d88372d47ee3d03a92dabac40c0dea9db05473ea1af5bf5b11646713de40ac"
+  },
+  {
+    "path": "game/assets/items/artisan_thunder_fork_axe.glb.import",
+    "sha256": "18e5c7ea9c62d30d700f3ba68a4a2e27dcbf4f79347a99ed9b241500f68416c6"
+  },
+  {
+    "path": "game/assets/items/artisan_tide_harp_bow.glb",
+    "sha256": "fa8e8bbd5801b80a6b101f1a2b6b7b9715e2dcf0320a09e77d2cfce6c7182af4"
+  },
+  {
+    "path": "game/assets/items/artisan_tide_harp_bow.glb.import",
+    "sha256": "3641db8f04f8a682027cc5b8ef277149c4a16cc08ec6b90c133b5ce188add6e5"
+  },
+  {
+    "path": "game/assets/items/artisan_tide_scimitar.glb",
+    "sha256": "540008f548fe1cb38783994cc5d4a9db2749a89bbdd23d75274fa710cabbb5c5"
+  },
+  {
+    "path": "game/assets/items/artisan_tide_scimitar.glb.import",
+    "sha256": "8299ca58ce4a5305d85b6e96a1674fcd71adb4af09f9a5ae3e37e13d67fa822d"
+  },
+  {
+    "path": "game/assets/items/artisan_trident_dirk.glb",
+    "sha256": "6d86c9330488ddc2ccd7d159955c7bacc3537c0cc765f735b48b04c10501e3e1"
+  },
+  {
+    "path": "game/assets/items/artisan_trident_dirk.glb.import",
+    "sha256": "3bee214789605406509110c636dd3a757cbbd2e1e8a9b4f7043ad1a0f86b5702"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_crescent_bow.glb",
+    "sha256": "bd5ddc4589ddda62eade3f15586b394088154a5e217f79a2d9fd759dc5bc351f"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_crescent_bow.glb.import",
+    "sha256": "f4196c9a38ec329933ccd6a215fd79acdddd5c5d6f73670c2406ab6167d32c9c"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_fang_dagger.glb",
+    "sha256": "76c1df6c342adad819911a6da211f4d23e3ed72afbff56d688e09938ce3a4af6"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_fang_dagger.glb.import",
+    "sha256": "25724913f159ef91a120598f8460f8cf5c983c131f1c9d25e74f3640040e3bbe"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_petal_axe.glb",
+    "sha256": "345a09f71afd04db959fa77601efa3a28f34328e3f538d035d6032aa78737cb6"
+  },
+  {
+    "path": "game/assets/items/artisan_twin_petal_axe.glb.import",
+    "sha256": "18d07f3ae146f9ec391c993c526d449dd373cca3b184a3b633e5dbea9659e9fb"
+  },
+  {
+    "path": "game/assets/items/ashwood_crossbow.glb",
+    "sha256": "8639172bf11c215f93e9cf5dd64ce27017556970a9eae8c85ef3a4b08ec48c28"
+  },
+  {
+    "path": "game/assets/items/ashwood_crossbow.glb.import",
+    "sha256": "763512cb5457f4a12502749e2a9bbb4d5297eb43ece14170dd7ec33d407918ce"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_1.glb",
+    "sha256": "eb9dd0eda9f6b736bce225d4872770f3140102d2c461a4a466d72fd8da2e8ed1"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_1.glb.import",
+    "sha256": "8c5e60d9b7a6a0ddf5d766819a19cb246c21811b6ec00c239f351ed492c13a52"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_2.glb",
+    "sha256": "699ec5a8e7fb3e59bfa0f847cf1857685b65c9ed8061129c6054815c91ff9194"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_2.glb.import",
+    "sha256": "68cc7ed492c7477fe9eea1c8006db5b581e347f177a0dc0639b34ba7c72a380d"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_3.glb",
+    "sha256": "d8d8f8ac613a7a5551153fae59ec0c7c40227d64df9eb8a973f5f39edf821c93"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_3.glb.import",
+    "sha256": "8bec298c9fddfd24c2e482d7d3c2a177c912f48b2befa4ba71f4476d8f540949"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_4.glb",
+    "sha256": "10683a4b3bef476e63aae25415bf771ed333d117ebc2bd5e718c4a07d4e7a889"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_accessory_4.glb.import",
+    "sha256": "89945f2aa2dbe882d7af6e53a43963b638fdd2c627aed701c2bfd581de689421"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_armor.glb",
+    "sha256": "6d86bf75b7356d7407e06659cc9b39521b2a1a6f7143660044f3ebbcf481e077"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_armor.glb.import",
+    "sha256": "9ee5573c6d9efdca5680f98075371c32c4027c390709c142ee6c0be4cbe2a0f3"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_boots_1.glb",
+    "sha256": "b464ad2bc614f85e9d3bc01ad47eb0738b92091cf5ddeaaaf6e77c384c07dd43"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_boots_1.glb.import",
+    "sha256": "08048fda61387d7c89276f4e992a9b72fa2018aa4de2dc00ea3540f43e52448d"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_boots_2.glb",
+    "sha256": "9449c0ab191224e75c5447506c414672dda97c7e04538ce8f6f7975e41925905"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_boots_2.glb.import",
+    "sha256": "d6eb7d601942e840a5b5054fe29c961ec170f8f3c8807501d97e2ff6e8c856bc"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_gloves_1.glb",
+    "sha256": "fcadd6383b8a00c93a035b798106a7a83f61dbb85cd56c972878ceac5bbb495d"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_gloves_1.glb.import",
+    "sha256": "d386a1addc220fecce30fb1025ce1f6f9c4e17980dc20f43a32b9f64d25b7bd5"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_gloves_2.glb",
+    "sha256": "5e27ce4c62e272eed17111a4e34f383e63838edec15fb3774da74b73ed0d534f"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_gloves_2.glb.import",
+    "sha256": "7e2ac8006d452ae74874c1090389162c70525cf5b60c3b5958c0ddc3197db40f"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_helm.glb",
+    "sha256": "98697dc58690c56a8742a8d3a56e786138465ebc22f06bf17d480d9576faa153"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_helm.glb.import",
+    "sha256": "afc1c9afd62d28cb907c4331460d65772910bc14c7041cb5d51155071c8a295a"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_inner_garment.glb",
+    "sha256": "6500f51c21c916b7eddd94ee13ab8b820b19e86eb44b207e814dcaecee2ad846"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_inner_garment.glb.import",
+    "sha256": "d7322c083869c5fd3e1fb51dedf6efd4307e8334717cea5e6b9e507cd84bcab1"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_main_weapon.glb",
+    "sha256": "8888130c6ee5f2397993ec8a8de9f901fd7c7b07e356dd47b90de830e4ec0dd1"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_main_weapon.glb.import",
+    "sha256": "a4ec22a1ba9f362d6780ea301d43b5d1f67645c823e0566beef24ecf9f700f71"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_sub_weapon.glb",
+    "sha256": "9f638979a6ba2ae8525e19842f7366fc88177392ce1bac96a7940b6a7f975751"
+  },
+  {
+    "path": "game/assets/items/boss_ashfall_pilgrim_sub_weapon.glb.import",
+    "sha256": "6546c0f1975c2f4e2e2230d21b563b23aafec14f7bb11b3f534f1079cce4cf78"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_1.glb",
+    "sha256": "ad5b4e14e522723e8749c371c5f3e9b21403bee5cbf9354ac8b863507cc897e3"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_1.glb.import",
+    "sha256": "a61ac3d655dd5c355f1f7d0e1a861041fe7cd99cb0f33b4771235fff9f255b65"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_2.glb",
+    "sha256": "2770a0da36fe73c5fbf74c1f74035f6dd6721cf714019b0b111413aca01894b1"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_2.glb.import",
+    "sha256": "380de9195ac583b2b0c94cfa7ce8cbf858b70366ee5adca9c924417660c4f8ab"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_3.glb",
+    "sha256": "e13992e4be049bf48e34f2e77bb5d95574c82f55a55752ab846c56eeea01e127"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_3.glb.import",
+    "sha256": "104645fd099a25d5094102bffe5d1b091a9a36463064114ca4ebf863be12ff3d"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_4.glb",
+    "sha256": "090230829180f03ed70544d41af1358b6e7ee5feb98bd76448f75ab8d88fbb4f"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_accessory_4.glb.import",
+    "sha256": "0cb7d0af78845d20e32dd0731cec05b7d7c45d7178e9d8a66bce1a3e988b7d8a"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_armor.glb",
+    "sha256": "62dde0ed417252b7fec7cdb5be8a791ef401e63bd9686d3969d5d042dece94bc"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_armor.glb.import",
+    "sha256": "fdba9d29599eef31c6719f7b95755b9c6a4b6af44d7e3a937b8ec1ed59ae92e2"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_boots_1.glb",
+    "sha256": "3b50340d6b0d16bc2a951ace2d0dc0c8a704324d757a24205f298688d1b3f609"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_boots_1.glb.import",
+    "sha256": "3ad4dab76e6797dda14c9adc23ad3c3b69096617b8d03f36ae53e8993e6704ed"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_boots_2.glb",
+    "sha256": "5230670a1eea16b51041fde60903168757d4d8bf47b122b56cf1c613d6ea560a"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_boots_2.glb.import",
+    "sha256": "b31c4cdbeec3969d28bd7d7dd29f57721b2f35313641b7066321c3785d478d6e"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_gloves_1.glb",
+    "sha256": "ac909df4c9087db69553a7e1cb24c3aaf3f5aa71ae4d7efae7e216297fb1c658"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_gloves_1.glb.import",
+    "sha256": "d67c5cde37e71a7e2e7fad5243e3153fde994d62deb8777ade87c58ab47d6e1d"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_gloves_2.glb",
+    "sha256": "18e58a41d348a3eb2f9c267bb0e83c0878fdd6e5377351e12f64d19628d0fab2"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_gloves_2.glb.import",
+    "sha256": "1ee75b94b53725a22419622e1e7be523c29882fef9468679845e6a6db8dc0228"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_helm.glb",
+    "sha256": "fa72bc81091300c8d34f04f69ea9563dd39a28e01125c96b6b906a26a0da68aa"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_helm.glb.import",
+    "sha256": "140f9b0bb3a17e3efdc81b01c980de0cdda380fa0fbb85cbc33f23502b554b06"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_inner_garment.glb",
+    "sha256": "0f573abf1ab060f8c331961795cac0482551242d33e49e4c2b3ed05d383c2815"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_inner_garment.glb.import",
+    "sha256": "2de9eed13bd4dddc91be5a8a3314873785783a8476c7bbefaec0c9edeb5501e7"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_main_weapon.glb",
+    "sha256": "53cdafea053ede486123807d2ff211bf00de8fc5d6863f9d6ab183ffebf43fd2"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_main_weapon.glb.import",
+    "sha256": "e037293a73ac04a84070c9cf7f850c6e6b49fb3a5d84b0ae3946925dfeff8943"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_sub_weapon.glb",
+    "sha256": "1908f6eb4afe212a25b18d2d3366c44595de0e92bd9c141092a27de203f54921"
+  },
+  {
+    "path": "game/assets/items/boss_crimson_glory_sub_weapon.glb.import",
+    "sha256": "070aba1b241701c5ac3b2bbf768618eadd7b265bdd04dd0bac13c3e2096ce37f"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_1.glb",
+    "sha256": "81d93cfeaa7ee9b2bf4ee4a85320625e54d5fc82af6c804eec74b8be58da4c9b"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_1.glb.import",
+    "sha256": "6541378608f47980a290d575110233d5a1706638af8e00bc1316a89ef1fef8c4"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_2.glb",
+    "sha256": "0536d9d0fd6d15f40631250512305dd93e7f579e45c7a0f4131187fcbac14ebd"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_2.glb.import",
+    "sha256": "fbddcabea03bc0a95d129925846bac0cdda93df01b48e3f5c6278f6e85cbef16"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_3.glb",
+    "sha256": "cadd7e807f2a99f603c408c4c2e175ed1bfb6e7a8bd82058886eb623b6eba9ae"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_3.glb.import",
+    "sha256": "b5208cc68c411ad80a1a414f56700d86ab7471d8a819d325882ad05ae9c8979a"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_4.glb",
+    "sha256": "66e3b69c365483a9207c1ba38cccea9d4d3db6c75bc3454db9e7617ed322c6f3"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_accessory_4.glb.import",
+    "sha256": "734620d911278b8a5ac517c3736d5644fa0be4cb454e612c225ac9551643bbca"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_armor.glb",
+    "sha256": "8c19b1db67c638dcad46a0553d236b50d8051ecb8875766546b23315f4d3a216"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_armor.glb.import",
+    "sha256": "095c65fc1524f4563c02d3c1549e1de4aa901ad79a17c99330fe0929f58ac31d"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_boots_1.glb",
+    "sha256": "dfec33dc0a266d5471988d3a93819e5c972534a6e87216aa64b382779ea50554"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_boots_1.glb.import",
+    "sha256": "285f3afba6b1f0088f22f464cddcc00287f598c498b8bb0d7ea2f3c9740b05cd"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_boots_2.glb",
+    "sha256": "e3de53b17216658f8701d9787137c1f913ba347afc4d684abdbd5f3139d075ed"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_boots_2.glb.import",
+    "sha256": "b3fd3fd1f82f31bd3da169e738443b23ae90e096c784f664e8c864c1e57642db"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_gloves_1.glb",
+    "sha256": "7ae43c7e2029a342629ef0ac406bc4bd65ae38739e02d0c7cc0eccfd8b2679b2"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_gloves_1.glb.import",
+    "sha256": "080f991469a37a2594b79c69ebb7921fbb23d636777ae6aff3ebcbc03c86c0c4"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_gloves_2.glb",
+    "sha256": "995bcf644ee77473ae34480546cfbb5385430ed458461ef8bdb5367ec48f0f49"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_gloves_2.glb.import",
+    "sha256": "be684d9933a056660286cda7f31d6f7c285754d92456e79c15835d359b6b3d14"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_helm.glb",
+    "sha256": "76366f733d8eb3e0fb2d868af9f255e5ee69d7a70f5ef45b400667562a75507b"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_helm.glb.import",
+    "sha256": "c6abbabdd142f9b019f2105f7ba247598602642f9103f9a33eea869e55468dc9"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_inner_garment.glb",
+    "sha256": "2ca3fccde55b2fa88a53d2bccbfed0ef5c9d4d70a86929fbf62b3bb0e7eb5f57"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_inner_garment.glb.import",
+    "sha256": "3e59124a78692d44497c3dba12d701e7cacce40d2804a108867c2b18ce9cea73"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_main_weapon.glb",
+    "sha256": "512b71eba6eab693f44988ff83dafe2532a28e39b150785686c6d49020b0984e"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_main_weapon.glb.import",
+    "sha256": "28f9a3d7945cad27853821201ceede2f8acfdd23391856abb9b5ba70a9949d67"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_sub_weapon.glb",
+    "sha256": "bb38b138eeb28ef7efe40c22271af9ec67daefd54d3d8e5c90bda645cff56a48"
+  },
+  {
+    "path": "game/assets/items/boss_dragonforge_sub_weapon.glb.import",
+    "sha256": "820ad09d9c0f7f2ac057231e9150060e9b7de4f84d9df51214f960590d9ea9b2"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_1.glb",
+    "sha256": "43a5d1e4dbd723a842b830cd8f31d2bde5eda0cbc24ca2d6d8d1ec4004aec7e5"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_1.glb.import",
+    "sha256": "9960bcabfbef36566545b45291ce6ccfac13d98a89d0cd75c2c51102116531d9"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_2.glb",
+    "sha256": "d1350d7e25cf90f2ae6ab87c0eb0e35446ba5feca03e6a6fcf165103cded8b22"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_2.glb.import",
+    "sha256": "04dc1ad27eab1040f32d61bd95357558476381fd72c2f9a1ea42267dfaa5a4b9"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_3.glb",
+    "sha256": "2746a24476310d5a549e728dbc6cee74faeac948ec3db70c82777c6f1bae26e4"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_3.glb.import",
+    "sha256": "b6b8d40f756823185a9e89544fc3fc4e4d3aae1e04edd8f3bf3279c6b61a9141"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_4.glb",
+    "sha256": "48d7d7fca6ece288d60fda3be254ea2e45d96b74d9034029cb9f3db38b9bef3e"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_accessory_4.glb.import",
+    "sha256": "8d90ec7d870bab7ab42525771c73de23bf0271b355dd34f0e29125b22267e0c8"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_armor.glb",
+    "sha256": "4d28cc183e9f2b75135b554b5486dea71ebd304d13b88c18bc6100b27fb70987"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_armor.glb.import",
+    "sha256": "c6b2d76340f40cbcdd78c38c356e89bcfdee849a3acfcdbe013ab1745c53fc24"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_boots_1.glb",
+    "sha256": "346a4c955158900244fdaab3687905a2474c40ace8a497ce328847e6a31554b0"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_boots_1.glb.import",
+    "sha256": "d7518e04a40e6ce7ce608769fb58969487a2cd683a74f56c9bed3731d1605479"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_boots_2.glb",
+    "sha256": "782a3bcb1e632a6b4bef1aae9dcd4793213fee14aabd95277f8db0ae19a2ba46"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_boots_2.glb.import",
+    "sha256": "9ba32f0f75dd98df352b09276e156afd584813ae7dab2245839f7def7711ef19"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_gloves_1.glb",
+    "sha256": "598d4c22d23c4adc7c4af4c0ffbac51c4638850830acdeff64415f71d2dd8d1e"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_gloves_1.glb.import",
+    "sha256": "65eeb8b0ac85ece2458d4366531c22a36644458ed8c488c178fa9247e4c7c8a6"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_gloves_2.glb",
+    "sha256": "bf74b351018b710551500009cd887c65b6e6ff7e02d4b64f85a258d672230d9c"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_gloves_2.glb.import",
+    "sha256": "241d1f9a9c4f5585fcccdf595581b94ce22b814c12feba35fae7a054d9989552"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_helm.glb",
+    "sha256": "4f60968b3bd2822fd449156d9ac97c59dadce308385f9c0f935b025f2bb2b024"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_helm.glb.import",
+    "sha256": "1044a342cae79b506141d59f3757c06353c3949da2ee74406a28b3d2ee36d033"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_inner_garment.glb",
+    "sha256": "762919730173e0ab8ff1ae556e46baca51dfb542f36c52ac44145e6e9ff57676"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_inner_garment.glb.import",
+    "sha256": "5779b1a3ccfbab3f393cd4dc6462883e5569510ce3909af12d9b7811bbfc7963"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_main_weapon.glb",
+    "sha256": "b81712508443373ae51362a7c7f2e80437115b4c75c046325d1fba4d27aeee71"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_main_weapon.glb.import",
+    "sha256": "e91fe13d5153804cbba5173c1f4b973489eb31559e35420297aee35328abc5ab"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_sub_weapon.glb",
+    "sha256": "56d1040e3c26f213f8161cb2d404ff41ae392db336d114cb3992e08ae9e82855"
+  },
+  {
+    "path": "game/assets/items/boss_eclipse_dancer_sub_weapon.glb.import",
+    "sha256": "e45405d02107b875985a70ccf1b93caaa6544acaf8fd40ca303969caa69e9902"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_1.glb",
+    "sha256": "20871e30311045a9da3579d35014e372e7549afbd8307a99f3a812b2235d78d6"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_1.glb.import",
+    "sha256": "d2afa8f17d33af445fa709b7b3854b104fc64523094f71d924af3ac7157a2387"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_2.glb",
+    "sha256": "b4df094180915c93198db02032c542db8496356f418a13425de5d894c445c196"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_2.glb.import",
+    "sha256": "31000e115f9526eed727cd1f55ea3ced2a136f4fc6a6b0d780c01fe9aac19e37"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_3.glb",
+    "sha256": "a6247553d85b74b4cf534bc1a1178384a95d81856e1f4df15df86dba5dc49764"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_3.glb.import",
+    "sha256": "81ac27c0908f0a051d0bc008d889f818198ff6f02fb4d02ea5754aa1784b1513"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_4.glb",
+    "sha256": "13a14f96099b8aaf2a557333717a18352b5b9827c7d7a9d5e2083a286ba85572"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_accessory_4.glb.import",
+    "sha256": "df4702773efdff6ce72bea0d5dc442de8d97aa66591e952859cc5b3fc5fab2dc"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_armor.glb",
+    "sha256": "16ef6c3402d6f7ee648e4cd23d86c265b7c5f374a17d0528cdca24fdd9183d0c"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_armor.glb.import",
+    "sha256": "e552b79096ac82680f145850134118a7db5c932112113ef604b512d77b6773d9"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_boots_1.glb",
+    "sha256": "c4988c3fff4cc57bb0cab0ccc37a947a5b306ae40c276ac0b53ace8c5ba7919a"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_boots_1.glb.import",
+    "sha256": "ff9c8c2a79ab8cffef9062ba6fe27975f780587ebad6c362d3cbb636f5655136"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_boots_2.glb",
+    "sha256": "1b43a21e0dcea4663958a57fa6c5ee9bcbf119d83a81279e2bbf05383bca2ea6"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_boots_2.glb.import",
+    "sha256": "79e93b8932e9542fbe504e76b312bec2b7d63c6476ca2fc989f45085c7bf11a1"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_gloves_1.glb",
+    "sha256": "c2c6b3e45d613a3a21831259a862f817815f8f3c998b65fcedd67ea78687cdb4"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_gloves_1.glb.import",
+    "sha256": "023e4abc439a426e39db386d9e76e1f33fe746d03fffd9f0222f4e986d53b576"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_gloves_2.glb",
+    "sha256": "bbd093b1bf8a4869e913bb06a2ca06c04da921ce7fdd68af7f1297d8b2520d14"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_gloves_2.glb.import",
+    "sha256": "5052ba69311e3f01943dab6e1afac5d9105bb5f2352b3d230c9f6221e6f080a7"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_helm.glb",
+    "sha256": "ef60776188d40ddc7eeb37db94868ef5acb2795b9d3ea403ee36586f8520a28f"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_helm.glb.import",
+    "sha256": "d76b7cec7505486f500859399a8f89d0e40e79604e0e507df1b20665bd0c5646"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_inner_garment.glb",
+    "sha256": "8b590e21c2b7b3de38b388481c6ef61ecd08c01580a14e24f585f26997a4af51"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_inner_garment.glb.import",
+    "sha256": "6114d87efd494bf7fcb3d64091e5854d6196405c387a264b845bb25632c219e0"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_main_weapon.glb",
+    "sha256": "d9856a709ba19508e8a4e3d67276174709f77b41c6fcc9f9be79040736dfc97c"
+  },
+  {
+    "path": "game/assets/items/boss_gale_nomad_main_weapon.glb.import",
+    "sha256": "1a0b7ef1a67b352d3a5c76d1f6f8353253ef79710134d4baee9b0afb1b370fa2"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_1.glb",
+    "sha256": "330d06478f606f248beb4e7db7ac5a78c790d258293e8a4385f06c705b34f052"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_1.glb.import",
+    "sha256": "b4e174381c8f19aa4e307e3257c3873a51ca3ab18b0cfa197c9611ffcd475641"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_2.glb",
+    "sha256": "61fe44a8284944f179ddfc765b8a0badd84d752b087bfaf9a531dc709cee7dc0"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_2.glb.import",
+    "sha256": "457064b884831d0b084c638e3687a6b44bbf6d1b6c267fefceb9966387d3f953"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_3.glb",
+    "sha256": "e78e9d3e2cf8ffbec332cb3dc74a97e05b31d210443116be56b068edea23c8e6"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_3.glb.import",
+    "sha256": "32214c4a8f3565d79dd902af985d3c47465fbaaf659fcdb11c9a9b336d7f2163"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_4.glb",
+    "sha256": "48d36af9b429084117ba8e2eee047d4e4b0861856457ea2a1a40b2406f24cb0f"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_accessory_4.glb.import",
+    "sha256": "5825ec4f8c2fa51690b797fde9a0b19d64ea50117d00877e0d08af9f33ca8e2c"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_armor.glb",
+    "sha256": "56b2c44e603cc1cbac061176af538393ae6220a1e7f63c9cd6efc4134c4587dd"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_armor.glb.import",
+    "sha256": "f77150e5502cd7211404576616d9e10dfbf031d260e7c65293b38a33c910841a"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_boots_1.glb",
+    "sha256": "f567f6cadc14836598c5019185de9496e042819afeb8524a204486c33ac8388f"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_boots_1.glb.import",
+    "sha256": "ab6829216c53b92137cc309dcfb10355a2aeb6dcb22beb2e456167158e0e0903"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_boots_2.glb",
+    "sha256": "10b609ef4eec7c133ffd352fa5c82cea01ccd34ee7ed94feb651214cb18825c7"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_boots_2.glb.import",
+    "sha256": "dc239aefdc28f674e7b33727b41d198cf4b507b3ff4e27d472cb2bf5d1c29714"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_gloves_1.glb",
+    "sha256": "9f49197285779ffd007a18a64025f2f49f435f69e2d1dd25a6efb8320c81ad19"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_gloves_1.glb.import",
+    "sha256": "1faa95813a096dc3898c03699f3a81de551782503d7ad4c0015e986e072ba533"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_gloves_2.glb",
+    "sha256": "e84a95e1763c5f6eb9c75f8591235b5d41c3874b557756d5b97c1f993359bf5d"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_gloves_2.glb.import",
+    "sha256": "aabb48e720cd3db0343ba8336f0f90d9fd0be301c8ea8d6d6c11a6398e8a3554"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_helm.glb",
+    "sha256": "e1b5461db91e2298e3fc6fe465725573fa19a222db8f9e420f1136c1f6e74e5d"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_helm.glb.import",
+    "sha256": "bad1885e78712e77ef2bc83284eb9fae688eb7c742a67b03cf866159aa78584e"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_inner_garment.glb",
+    "sha256": "001e37b2de44c8e9de530e62cb9185c213bfb904bfee46b1e7b2c93fd24e0bf6"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_inner_garment.glb.import",
+    "sha256": "d18f85dfc761724074fc1771e74f0e128b9b7be4fa346e4c4068960012d37e52"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_main_weapon.glb",
+    "sha256": "3914ef7c8cd32668972f9e1e26115ebaea729885e34db094e9646ca0bf0d7a52"
+  },
+  {
+    "path": "game/assets/items/boss_grievance_of_the_fairy_main_weapon.glb.import",
+    "sha256": "4c6550223e1a5d041be92fa024c3fb9e935bf6691b3a25256d326b7388bdd570"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_1.glb",
+    "sha256": "77fe0fb7ae1b9a2435780f91c7a165c426de2fe0c9fa92dce3120a6765746fe8"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_1.glb.import",
+    "sha256": "b095afdd0ca649bcea2bab6e1213abd7e0ddd9b85b921ec7804a20c56187d138"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_2.glb",
+    "sha256": "b574f3a187cb985c9f6a41d3f26971298261f332aab0804d3c42467facde4722"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_2.glb.import",
+    "sha256": "e2e530908e9158953410d6597afdd01fd846c6903df7331d4bd20b6cae002f80"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_3.glb",
+    "sha256": "87575e92fa04834a7eeee9d0be11ba2b05242dd9381227e9b978280d1086db21"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_3.glb.import",
+    "sha256": "fe1ad6a0b99dcf390a383d27a952e241f4d43f2b62ed6c1994f4d3873d8dced1"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_4.glb",
+    "sha256": "474fa199afc0b95facfa58e8c7ca5c58eb91febb086d8e644108a9c2fece1a1c"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_accessory_4.glb.import",
+    "sha256": "327f36916742825be110c31052ff065e62b1fd74b39dac3bfa38c4dcb8122be0"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_armor.glb",
+    "sha256": "3cf234a5138c1fdad44e3aaa5687cee5c599d19f070c368436ba4d73b8b945ce"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_armor.glb.import",
+    "sha256": "96d7b57fa47bdbb3d50aae9f28e5707f2d9d314922ac9223576d5e21118a5fe8"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_boots_1.glb",
+    "sha256": "467e3affe7934fdd1542e049c09a51027c2cb3cedf416ee7a231d8b0219e1c7b"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_boots_1.glb.import",
+    "sha256": "5567f7429f4a916eafd53fa3c009b68fee2e0bc8fee889fdda430bf48980325b"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_boots_2.glb",
+    "sha256": "505bbc11801663fcb6bbc2d6e5818d8505815bacf9bbc62e33f5ceefc64b8850"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_boots_2.glb.import",
+    "sha256": "36fbf05672eec5af7ce49d6fc76030420fd7b4cf2c766e4ad92a2e0dce91ccd5"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_gloves_1.glb",
+    "sha256": "1b5ae588bf89a1d428dc7a7f88969f3fe56b4b13163db1f9ff9b9c693f334d6d"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_gloves_1.glb.import",
+    "sha256": "e121f3dfc9b41d6754a2070b63736337cbadaff8f292d5b399d70a97608c054e"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_gloves_2.glb",
+    "sha256": "0f46a5a1cf91a8e45481b3762478dc9a6bdacb90761b38010ae0d0e28ea5340e"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_gloves_2.glb.import",
+    "sha256": "ae97bc554366ad2bfb215ca582101ea1f904afcc2fa938e05de54d9cd8e99dfa"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_helm.glb",
+    "sha256": "145c54bfc9d82f3b8834edebe1c2690c77ecbc4e8c8f2bddfa7138ba8f51f597"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_helm.glb.import",
+    "sha256": "763fca25c6c645718bc3697be14532ef7b82465b131361bc3ad9c062a2bf7e27"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_inner_garment.glb",
+    "sha256": "d4f23d9e2ae44c28d7a6e8556c07bfd28208c591eed5e3746495ec039a2dae2d"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_inner_garment.glb.import",
+    "sha256": "dbbdee56ee91fc7deeda4bf0ee6e24ed85c1ee5ae307d5bf30216007f85153e9"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_main_weapon.glb",
+    "sha256": "46d327eff1cbe33434a7be37469ca9e4b135224283d66e0ec06d1eedbf431755"
+  },
+  {
+    "path": "game/assets/items/boss_obsidian_oath_main_weapon.glb.import",
+    "sha256": "3819259ace48598543551ddbb45d64f6b7f42506036dc9ba6d4750e192405cfd"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_1.glb",
+    "sha256": "e1475b0359357ab511c82d35619537ab0535a570a3167efedb8484deb089d999"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_1.glb.import",
+    "sha256": "bebb88fadee2c79f9f90526b91a4fc966d666aa3855a38cfb0369b618c00032a"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_2.glb",
+    "sha256": "ac4b32e27a597911369e4698ba2fd1cc40b70e0c3e1706f4247482bed20d3dd5"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_2.glb.import",
+    "sha256": "c25aca63d9aed470aaf82991b8516bb31361544f7aaff52e6a0a1da543135d77"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_3.glb",
+    "sha256": "89db8d9d18ab876bdf636e4d2620515899e7e610423fb6772677f10b4a8292ce"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_3.glb.import",
+    "sha256": "79dd28a6b7c45a6db77f5232e835a32506f75bd03894e9722d918bb9484102df"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_4.glb",
+    "sha256": "af861ec674b1a7e20029fcfdcb7c1fbe0e293607a0b96639f18947b555a1c840"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_accessory_4.glb.import",
+    "sha256": "e5449a23a4e5e710fa3f64c5f9d149fcb53723c8dd78227454885d135be02284"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_armor.glb",
+    "sha256": "b591acaa1bd9efd3e0e33d90739102d3cee02067e89d11d923993dc62401652a"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_armor.glb.import",
+    "sha256": "79187731a63b65a2d969e7b160c3c9248c98134e0a0423ccf990510b89f3b337"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_boots_1.glb",
+    "sha256": "415e7b9fa02612f803b169b59ad9e6595c7402f450ef2530e2b1089fe90795ff"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_boots_1.glb.import",
+    "sha256": "b3372c6a436a0ebb9b712f27286086e2a2d8cdf6410c07a77c136fbf389326ea"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_boots_2.glb",
+    "sha256": "62066b36ff9c0afe98d43b741bf19c43f954643ba6f52ea8b7833b7afebf10f4"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_boots_2.glb.import",
+    "sha256": "a0e3fd29351f4903ac89f0e1ac7ecf7131a4972d97c2f9bf0cfe1d8669808717"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_gloves_1.glb",
+    "sha256": "f06cf84337535f31cbcba3511c02cb93adc9763db84be6921715d1e66fd1d2a3"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_gloves_1.glb.import",
+    "sha256": "d06f372236ce009744620ba57176c34e911216503d839575bf567a3f4f6b6f94"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_gloves_2.glb",
+    "sha256": "53b12593e37170c936e748497d81a7ecc9362a884610ea294cce1875fd456a22"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_gloves_2.glb.import",
+    "sha256": "04e74a836fc614995cfc5bad56ef72ac508faa617329280479242f91a02d3d29"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_helm.glb",
+    "sha256": "e8ca59a8b5ec7d07d5104f05788e62a198ef85df645530943a12bb72795346db"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_helm.glb.import",
+    "sha256": "d9b327215dee2e983224a66726797361deeb09036e223178f247e100edec5717"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_inner_garment.glb",
+    "sha256": "73d084f7f6eeece39167b79b7e991ddcacc8317ce4b0c06d7a29094ea718cfc0"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_inner_garment.glb.import",
+    "sha256": "4dd095ff631c176e1a69be2e407691e12436b2f46253ab9e251cfa44d8be17e2"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_main_weapon.glb",
+    "sha256": "a6e99894940edd26f2e86ac520b34f5dc36f9ccdefbd710e421dd03384745e0c"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_main_weapon.glb.import",
+    "sha256": "b74e4d77f513b992308a9f906baf2d7137c9214630006b425444924cfe8ad38f"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_sub_weapon.glb",
+    "sha256": "3a16bb8b75275aa7e814b38069e0e175ecb453cf5be4a3d606fefa4d00a02e21"
+  },
+  {
+    "path": "game/assets/items/boss_pale_requiem_sub_weapon.glb.import",
+    "sha256": "d49dd58e34a7cbb98ad357b3271fcb138484f6f93430219c2f9384953433680a"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_1.glb",
+    "sha256": "8c2ad9398a9f84c754531c5074b0f34935b45e852f7b382c4ee2dc80d0f1838c"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_1.glb.import",
+    "sha256": "7943bb9826adf6f981dd8e16eb550bb07c9f189bd93f9f6592cd7a7342f0726b"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_2.glb",
+    "sha256": "0a23285d58c811246eecdc65ed9ee8945c328e0e3ce605e9cb138c2ec6c2c77e"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_2.glb.import",
+    "sha256": "d7b94015ac48a3b114e60c3011ef40f2f799d7d907e5770b709da544db10b36e"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_3.glb",
+    "sha256": "8ed6241d0c06d62be85863bb79ce4cfa15a7e7dc10afe32b813be8bb97b1e995"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_3.glb.import",
+    "sha256": "7c781ac84351888063e45aafde87b734abe7f74dcc1b2fb0acea7077dd0bbd4f"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_4.glb",
+    "sha256": "d2df5a77ab968375450fa7f35162abefb12223b7a9b3fc6fcd09d34c1efd15fa"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_accessory_4.glb.import",
+    "sha256": "d6cde0fbbcfba161cea75a24762453d7a9c62a5aca2135b93a7ee2783360b79e"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_armor.glb",
+    "sha256": "cdd55dc3f439941927bfb4a72cb7c366ca33486bc3365f0fc6d9e8574fadcdf9"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_armor.glb.import",
+    "sha256": "37937bbcd422bd566835561a145dda5fc0cb35a6b512962723df3be53740ab5f"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_boots_1.glb",
+    "sha256": "79c353317df0ec3e6ecc0bee53fd0ddf9a96e60d23978f31697ca36c50e5fde8"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_boots_1.glb.import",
+    "sha256": "7a4b13a5cca972c9412204dc536e5aae454d016ee20914268859e774c4fce598"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_boots_2.glb",
+    "sha256": "ff98bbcc52930653f7c6b9f3de02eb31389a3b7a928b99f7747ddfe82c99cd83"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_boots_2.glb.import",
+    "sha256": "23005c0e89880df580f89072c16547ca42a8a008e1066e23ae185125a7b8a40e"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_gloves_1.glb",
+    "sha256": "798069251ea355331568f8f8830158b1972548e81341b6342c3066f6488174de"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_gloves_1.glb.import",
+    "sha256": "3a312902882ee5cb92e60a4e67cd8b370684329fdc66078007c46fda6365130f"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_gloves_2.glb",
+    "sha256": "91d14ac1280896d79365d07101791b970f6090f37eb44812fca4984243d49eba"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_gloves_2.glb.import",
+    "sha256": "e66110750abdeacf07826ad4debfd5597635f69c9e6d669d32bbcd3b8c9dff21"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_helm.glb",
+    "sha256": "09e7d3fe2efd6fec4893cd204b8ccff38f23aa6236c37460997e28145ef2a19e"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_helm.glb.import",
+    "sha256": "a45a58258a505b75bfbe43fd7dbc2be83a316465843bc5ea084a0b06908eda30"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_inner_garment.glb",
+    "sha256": "b4965b5abebe84bf9ba1238a7a8eb92ff253eac5b38ef9e9c9539b689ae2cead"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_inner_garment.glb.import",
+    "sha256": "269209cd6d6ba67635b3b3d11e5e7047c77baeab7ecea60af232f9cfe9a5aff7"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_main_weapon.glb",
+    "sha256": "b40f21ccdba851a1fbd9dbbffe92322cd6feabe5fde98c68b15913365772b419"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_main_weapon.glb.import",
+    "sha256": "bc065496aeaa54c607f2d27d42313c1fa360fcc79d2ddfcf0750a135f085b245"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_sub_weapon.glb",
+    "sha256": "2d8f75ff72b3e76faede428b9038478b7f89c7eb5872e0bef18a9c8bc295a371"
+  },
+  {
+    "path": "game/assets/items/boss_serpent_veil_sub_weapon.glb.import",
+    "sha256": "88e9e29e7f4aedefef71e3206e80de0755b2cf1bc516929c5ad1e1856961efe5"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_1.glb",
+    "sha256": "6dd336e2ca62b767f9738ed45543d6bf0f87c027a8ce6e1a7242d8dba53a0b0f"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_1.glb.import",
+    "sha256": "c0aae7036befe1fb343793db6bf90b327071dcd8a5558271b1d42c5e3c8c0dcb"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_2.glb",
+    "sha256": "39c8e30a176cd0f9ccdda3d84a3c5a4061750ae62c2c311733e85aaa4494f460"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_2.glb.import",
+    "sha256": "e9a1fda9e2ad97eb81d75ffb9933dec184bf0c69f2332a755923b5f8bf065846"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_3.glb",
+    "sha256": "c14f09fefcca98a442eaa60490c68ed73836a0a246330fb174d5e753a5451f69"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_3.glb.import",
+    "sha256": "58298e37bb237bdeab55e3e5604d6b64bdd1ca5699e108d1ea12d49a9893056b"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_4.glb",
+    "sha256": "85113e93fb97be3d1a40bc4418b814f50113161434c8bd61b396564073e2fdfe"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_accessory_4.glb.import",
+    "sha256": "78f7ab5f838f8a282fef23ecb5dd3f736a4ca388239d353b946eec47251984dd"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_armor.glb",
+    "sha256": "c750067b2ea7cf01b6d76bf27ea4edbded0768cf4500399732a7a85dcd773ae4"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_armor.glb.import",
+    "sha256": "fc979800b5d9e9054f610290bd9ff4b81d61642abe0e54686d2c66dd5f4e60bf"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_boots_1.glb",
+    "sha256": "1cddb3f339571a2769402cf4617e3f4c633a72dc03a7239ca04854d64db43a61"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_boots_1.glb.import",
+    "sha256": "a157ea3b4aed6eaff8149c05195b4f72f62521ca521c5c329b8c1d003fca72ae"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_boots_2.glb",
+    "sha256": "62b0f39ce9f572f6042f4320351298e371b244f93b43b3f9ab7cb40be32e4034"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_boots_2.glb.import",
+    "sha256": "e9a71d19d6917adf2e7fa4169c9b7d14c9c7f300eb46ddd998c9670eb4896e00"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_gloves_1.glb",
+    "sha256": "bab408b3ae429637b9267e7b33a4b06efb0863bdcf465e8208992fd9b7729ec1"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_gloves_1.glb.import",
+    "sha256": "54dc760e8f25dae61cd00582691f4f266cdb693d93499960e938645ef730ccbb"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_gloves_2.glb",
+    "sha256": "19a674aa1af9a6a705a4eb2826efd35420982aad6d8744e850d3fc149e1f252c"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_gloves_2.glb.import",
+    "sha256": "59b3d123246211b81ad47d37673e92c2bc5d16352679c0a6b986fd4731fc9de6"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_helm.glb",
+    "sha256": "b4a05f1faa1ba3826e5fce7c47ba29ad1d112d6f9ef85829e6e4cd343679e867"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_helm.glb.import",
+    "sha256": "e24f7c7c9399adc59aae52492edbd41f02f15e912539b37d67b1ce46e2645207"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_inner_garment.glb",
+    "sha256": "7816e54d51a1281cde0de9d638cbe678dbf9b3b947ffd8b0c39c57c1bd227bcc"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_inner_garment.glb.import",
+    "sha256": "d038b7b57f2dcb6e01dab3936f19383eeb5601bedf4b0454fbc061ed89e312f0"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_main_weapon.glb",
+    "sha256": "198db6605a8e5465f79c6d661e292d451432b2938ad4ed5a1ff05a00a4623473"
+  },
+  {
+    "path": "game/assets/items/boss_starfall_hunter_main_weapon.glb.import",
+    "sha256": "934776f014ebd3d85a79bec5bc1b0bbc0e43d6eb50c678c9c4d6ed8f1ddfe3e0"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_1.glb",
+    "sha256": "6025c8f3ca52ba361955ed026aa91f9a807f444721b35f313136624f342b3599"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_1.glb.import",
+    "sha256": "fb4340e07a09de147c5b1a954f67e16eb53126ff08288477ea67f247efc414b5"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_2.glb",
+    "sha256": "4561c708960368a1ede9fdb6976390d17180ea6fcc242905b84568154661149b"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_2.glb.import",
+    "sha256": "fbf768154bcc8f05285779c00f54a07b53e64ac974e72a301623249d345076e6"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_3.glb",
+    "sha256": "527439732447265286f3fbda65cd0ed9cff6fb001a0ed703b0c083bf4229c96b"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_3.glb.import",
+    "sha256": "ea0b62a003c9601a4adc1055b9bc216684269f7124077722adef01951ce0f746"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_4.glb",
+    "sha256": "fcc949378c3429f9745de5b3243575574d2ee289975b46e5794235808fabdc4b"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_accessory_4.glb.import",
+    "sha256": "a30df3115ff27afe5fb36d48517e41a1b1c2caf572375ad204467cfc5198c80e"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_armor.glb",
+    "sha256": "3f4275d66b48a754da2e3632b6a1ffc01411fa47bd384c1672ec43e5227f9609"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_armor.glb.import",
+    "sha256": "10e631104486ebeca26928c53b7f7681d2fd2c05f0e762087eb192f946d215f1"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_boots_1.glb",
+    "sha256": "2916c4c94adc5e9082937d358c51bd5a5324c96d7a8c8972394e24e909e1dbb5"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_boots_1.glb.import",
+    "sha256": "10359fa575a552b38d309d4b61be5b8f1da1e4acfb2715f3578eb2a8e9b8ce6a"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_boots_2.glb",
+    "sha256": "031c3a3dd3e75986c2e652de8f1407cf7518fe12cd5d250b5d5702f34b17c861"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_boots_2.glb.import",
+    "sha256": "9213511bd65e184b7059084374fc5f25fe48e2762dc5b3f83209dff06727ff11"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_gloves_1.glb",
+    "sha256": "f8f22b538a5ebb49e85596280e03933fa4313fd25f5a53c8ff0a4d184ea4ed78"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_gloves_1.glb.import",
+    "sha256": "f5f2d15ec550ddc3b8386131f95b85db944c932d2d85b3b26930a7bb010310d0"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_gloves_2.glb",
+    "sha256": "0f7d42c98aba5320f34527972a365dc4fc9de43a6504245ce941ad0f7df91de3"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_gloves_2.glb.import",
+    "sha256": "a33d25b592a2bfdecbb80a145e5f0ca67eb37221db65841032ecc4c7a7dc5598"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_helm.glb",
+    "sha256": "7024e02feaf2e0ae8be36727d27b69d642116da6db5f6f037e635f82e4863a2b"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_helm.glb.import",
+    "sha256": "26a9e0922536123f208c519d04dcdba7e129d092a5f4b7edd9fa67dd57b8d365"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_inner_garment.glb",
+    "sha256": "162436c0fa8713555159b4201fede2bd82a9f50070e55554fec682c329ad7dd4"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_inner_garment.glb.import",
+    "sha256": "a0b60a5ac6ebb22fdb7ced76b8e12bf66ce217db2124e115cf8a0f67871306b0"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_main_weapon.glb",
+    "sha256": "3d65d10f67f8052aa6275c285a1053b76b3555fd457ff096a618d39b72492798"
+  },
+  {
+    "path": "game/assets/items/boss_sunken_crown_main_weapon.glb.import",
+    "sha256": "56a005ac6345f8dfecf65614858eb37e8ccfa23d20833799ec4c2f46d9ee613f"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_1.glb",
+    "sha256": "1ac47cc442d190ac19d3952a2e88bb2d80c972a32ff325e149aba9f7cb740605"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_1.glb.import",
+    "sha256": "c3bd8b14ddfed1b1a0285fbd6fd152f704f6440ba841105fb91da9120bc6f10d"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_2.glb",
+    "sha256": "29a2ebbcce98166a22a9a611651c5878e26a7cf8c75f68636e6484ac2b8086bc"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_2.glb.import",
+    "sha256": "4c2661ed392d7e2cc052bc3dbf97451f3f33a2d04d562512d9d4c578eb7594a5"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_3.glb",
+    "sha256": "2fe438c152c405427c4e3750e74b3b758f7f58962deca35d20ebc89d0c8d1ebd"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_3.glb.import",
+    "sha256": "dc7447702252c4d027e900521103305e2c6f9f86c80ff8f8ef65f01834e2e53c"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_4.glb",
+    "sha256": "eb67676fca8a3e3493db45f3de980bc7074ebb95d617e74f912302bb05bb4d2a"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_accessory_4.glb.import",
+    "sha256": "c99fa8425193dba29c2556afa136137c6c9c300335559025111fc5e5feeb333d"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_armor.glb",
+    "sha256": "125d1e99fcc37c648a1a1df1ac2118a9d7545423eeae69443f91e196308afc5c"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_armor.glb.import",
+    "sha256": "106496b5ecdcaee04b41abfae192d9ab091e9c6b83b8e48535349f074cf9cc28"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_boots_1.glb",
+    "sha256": "dd5dfa4889b60a0975b41c46e62bb6080cfb89a1e5d7d91644fd7d9269e6755f"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_boots_1.glb.import",
+    "sha256": "80825db14bdf66387c1b5aa58c81f72531a8fe10a1c60a8c1c417d6c7301123b"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_boots_2.glb",
+    "sha256": "92cfd3ca51024699e95e07ee6b44955739eef3bf99ab29afddf8ad2b74e7e985"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_boots_2.glb.import",
+    "sha256": "89b40e8a62a58bc900f368cf9bb48d751a13c35a48165be76e95e36e3303e83d"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_gloves_1.glb",
+    "sha256": "c5347527795cb4b7e9da780c8f82a0d0076f9e4b809b7091d1e94db09aad9832"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_gloves_1.glb.import",
+    "sha256": "d4974c35d66bba53af050e77bac9984d0310cec0263004575be1bfb94edd2793"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_gloves_2.glb",
+    "sha256": "2f674f465b612819b773680f62ba939a01752aef5c21274731c8e1ee3f87ab8a"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_gloves_2.glb.import",
+    "sha256": "405f2934c004878d9f783bf23fcf0a416170c501994529c080353b2b0c006da5"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_helm.glb",
+    "sha256": "95bbc72e21c8f1ae0150bc387feb4c53355cf80ab7358b24f8125936b7e09bb9"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_helm.glb.import",
+    "sha256": "06fbed33fd028dd793d6775c3d027f651b221b29169b9d6bae55768a9561f8d4"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_inner_garment.glb",
+    "sha256": "dbed6fab979b67af461b065138734c7a22b2261e662057f56bfce0f3c45356c7"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_inner_garment.glb.import",
+    "sha256": "197ae3477f3c027767271354b1dc356f043a206baa8ec36ac14f6d04ca1d0d29"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_main_weapon.glb",
+    "sha256": "30011312543d59ee955209531961532a24afb69c1036d158c4ade16dd0393062"
+  },
+  {
+    "path": "game/assets/items/boss_thunder_abbot_main_weapon.glb.import",
+    "sha256": "6383c97b2223f5f94431581a39faa0caca88c6608f2c1a6278fc446aec81a3ff"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_1.glb",
+    "sha256": "0805c6847fbadd3d94881ac7be7cd4f2f4914c64f52f6155ff0bd3ad4e4e9af3"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_1.glb.import",
+    "sha256": "30577ea4a9918080f4cfe827209580ed51fdcc32d4cc1e8a39bc87b3172d8efb"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_2.glb",
+    "sha256": "63d5a081b7a6cdf30dc189532553102c220bcccd622176bb5ceadec6dfc4e732"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_2.glb.import",
+    "sha256": "d6972f7c13cfc1ca85405d41c8fd24050c91f9bdf23ffe535994e25ad7b2fec3"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_3.glb",
+    "sha256": "451c7e12cd95a46e7302380c32326a781e2e931b4b0831b08f3e625915f7b6b6"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_3.glb.import",
+    "sha256": "19671668e96066b61ad6253aceb13ae5846471076ff5dde2a00472b5beafc980"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_4.glb",
+    "sha256": "e6c6fad5df9f7378af2907b29cea5c46d0fb940bad90dc087e28db2b1f91b4b9"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_accessory_4.glb.import",
+    "sha256": "0fe0a9789735c309a8c270f8dc246eb1b8a0dea21ad40d764be92201c0ecc15d"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_armor.glb",
+    "sha256": "c0a87e3e439e032cf28a32f1fcdac01a42508d064e3692453b7bc5122467f9d6"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_armor.glb.import",
+    "sha256": "4cf42c6311823d7ef5894bfbc62032d2aede63ad27244f951427d00bac6077c9"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_boots_1.glb",
+    "sha256": "a0471ac7fc6b29f90fd156c721cac4dfecabdd31e0fea63ad2bd0d14080303e6"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_boots_1.glb.import",
+    "sha256": "420b9bad00d04af5ce3483172ac31a1036b26ea0405ce0249e05064fd5ed4b44"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_boots_2.glb",
+    "sha256": "53b7f819d52730190ca3f67de5c4d1e39000f6ef36625139ce8a441a35a49bea"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_boots_2.glb.import",
+    "sha256": "04078716125ad0b92d86d7cfbb9428f5bba1781ea8388434426554e74f68d1ca"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_gloves_1.glb",
+    "sha256": "338f0343250adce6910d1c4f944130dab7aa98edac84078c4bb29a6be83da018"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_gloves_1.glb.import",
+    "sha256": "65f2cc6e12e902686c18537572852d2cec078fcba63b74062b32bda51b8e7231"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_gloves_2.glb",
+    "sha256": "5c54861fd90815e1da4207d445ec6c47a224d7041e32409407ce458c6b02f67e"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_gloves_2.glb.import",
+    "sha256": "06b3612a30d370fb790818640aa01336320059467cc460567b4f36d3d504caaf"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_helm.glb",
+    "sha256": "dd7501e0a166e683e700e3eaf28a3f9a3529c293c179fb0922105ba8296697d7"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_helm.glb.import",
+    "sha256": "5c7c3e20dcb0833a56bcdb52cdef8e7130b10e7bf01be119adfdeffa66a7f157"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_inner_garment.glb",
+    "sha256": "71ce62090c9461b10bcb3e781f0ba369a642be57d9f929de05ed637b48f99aab"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_inner_garment.glb.import",
+    "sha256": "cc3f490ea7e26714a707f11070400cf295e3efab8abe1f136ffce39427fca87a"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_main_weapon.glb",
+    "sha256": "b3b95bca4f396894daf4ef3687f73b651d0bbd818cbf9a07e8f74ab5ae072205"
+  },
+  {
+    "path": "game/assets/items/boss_truth_of_raikuru_main_weapon.glb.import",
+    "sha256": "9fc805baeba76feda7051bd2572e333feb0bc1e30ca2ca2743c119b3a6ab24bf"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_1.glb",
+    "sha256": "035083896977c863bbf7b4da002247da214fd8dea6054e714d9032bba20597f0"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_1.glb.import",
+    "sha256": "bfcf47551f2e0cf72a47fa63f12eeee9778a59c0d2e2993359d8def8381bee7a"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_2.glb",
+    "sha256": "d5e690b8ccb9f8f6c7b642496e9b003e47e3e930684c164672deb79d0c23ecd3"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_2.glb.import",
+    "sha256": "945d493a2652ec97e4ece20f2f99793d2483a8554af0006d6eaffa0b87ed302c"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_3.glb",
+    "sha256": "fb995e988b25f7f1dfd69f8e8dda8c208469f1761857ff70011b3cf40e79131e"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_3.glb.import",
+    "sha256": "f881d5c457047cb6ca96f66a9df6625a353fbc19aca4c02fb098a836cda4e4f2"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_4.glb",
+    "sha256": "bbd5bef91544bc201c3b756ee902b3bda644f43ce0fc9a5c1a7212df0da0407f"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_accessory_4.glb.import",
+    "sha256": "d008d92c58034a2630384855b6df63e52e37597dc65d7a03ae4b84ff869f8557"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_armor.glb",
+    "sha256": "d4bdffaad0eabdce1fa9ac9afe0ff45f82f0cd62f66a70de30ce968d74758e35"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_armor.glb.import",
+    "sha256": "503b282123344d7fff14b6adad26a84a6ca15939cf49f888b3875ce7cf162f8b"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_boots_1.glb",
+    "sha256": "62c15f15464e7573f4bbb2a27e7fd85321ad62d8967c67242aae284f1886daa4"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_boots_1.glb.import",
+    "sha256": "d16462f4cf908c240ba61981fac5418a120d7598b0d00d702fb950fe35e71e0e"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_boots_2.glb",
+    "sha256": "bab30c6eabfec1ee0e02ffb92cbbb19d0f429d96b486646820f8a2a92bc9d22b"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_boots_2.glb.import",
+    "sha256": "00afc274b4f4ffd69f6505b6a080c70c725b4b4edc0cd41d1f1449279f5f3516"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_gloves_1.glb",
+    "sha256": "a7fed329d124dd6a9e7a6f28fd23efab27e9e886c68fd32d0481d1c17669e53c"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_gloves_1.glb.import",
+    "sha256": "57bbf55ef379d4f0365f475dfec27a6dc41f5eeb368a563c068182191fe2b491"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_gloves_2.glb",
+    "sha256": "2196a3099573d68ea576abf5a446a4978ea9916f77fb7e6418528a37f25542b1"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_gloves_2.glb.import",
+    "sha256": "54891bdcc48872798f4076ed4bc2acb5b6ab3a7ecb9b84e84e9d5d60cb74c3a1"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_helm.glb",
+    "sha256": "23f937d7c91256493906dc9cd78cdea8bcfd09cb34e3cc5947fcf2e7a0cf7c64"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_helm.glb.import",
+    "sha256": "a1252ce609d8b23c695982a1c1b47843c4f43aff76a5aab3f0d988f7eea18c8e"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_inner_garment.glb",
+    "sha256": "87b017ad2399d4a7ca42cc3c81a3e42ebcbf2f70ac39a4c2d5335c2d3a0926ac"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_inner_garment.glb.import",
+    "sha256": "ce86f64e93301fdc41c44a62fbe25afe96f0ae04f1e6eee4f110d441c1501ed5"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_main_weapon.glb",
+    "sha256": "e3a5c1b55fc060277989b4632ca6956d02e268b6c762215c9b2a23cde6f62693"
+  },
+  {
+    "path": "game/assets/items/boss_wailing_mistress_main_weapon.glb.import",
+    "sha256": "e43baeff1b7518196c2d7dc1e5fd4b856ea179fa3655ad577ccc828dea6d91a1"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_1.glb",
+    "sha256": "e3ba0cbf2602fa86568fd3b7efb98139769c6acacfd0df82804805af630c1117"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_1.glb.import",
+    "sha256": "986630b85e0f1f72de1174e66656ac8ccc8a39278329c981921b2d90771c9b1e"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_2.glb",
+    "sha256": "8e3b25be07b203b1eb81240141a3f968858ee31c39a6d8eae5305544c62e69c1"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_2.glb.import",
+    "sha256": "c795198c14954bdee7fd9e245231394c24bfd6c9fb3a78ba59adbf66b83b758b"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_3.glb",
+    "sha256": "6948f816cffa660091b808e92fd851c844193288f22a076e8dac1824217135e2"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_3.glb.import",
+    "sha256": "a2780550a5256dd7f32951866204a2d89d7a444051834294aedfc1f4a7ed063f"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_4.glb",
+    "sha256": "e30b55d48ef9a8f2708f1b43b66578901aa5d2d6ad288fd9e9ade17949a4f507"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_accessory_4.glb.import",
+    "sha256": "ba7e419ed3a2c4bd33687ed1e6496e5b8ae895d93a34b00e7804e51f4e7dd2b9"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_armor.glb",
+    "sha256": "edd692811a6d006804d1ee6ecd8fc1721533891ce7c39d7c7c849a74ef176ca3"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_armor.glb.import",
+    "sha256": "e1c93f3c37ba6fa9e517af06a8b82560cada47d3e5b94afcfe385ad4dcf3e455"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_boots_1.glb",
+    "sha256": "b41c8c32527331cfe956c61f0487fe6a2fa30973e76acbbe917bb88750bf36cd"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_boots_1.glb.import",
+    "sha256": "0b3ae3112f335c86138b30f575727c3b2d7e3f2e3309dbbc7eb2f9485f9eed3b"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_boots_2.glb",
+    "sha256": "b84089f9c4482f91e68df09e3c014ce0270c811c955422c8faf362aa4596cde0"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_boots_2.glb.import",
+    "sha256": "845b966fc2c4b236c33c18de1c13b4a2048b85a5f6f68ef7cf3099c25287caad"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_gloves_1.glb",
+    "sha256": "97de4bb2b24e0585f88dbadddca1e07dad5bae038c3e375e7bfacd7afd3a9c7c"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_gloves_1.glb.import",
+    "sha256": "7af3156f94470774a13c71fdd703b97703734a44d7b9587119c4a4a9cc3d6c0a"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_gloves_2.glb",
+    "sha256": "df55efbf2ccc32f0226fa93e94597617911bd9f83209ae37b75ded00c4fbc903"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_gloves_2.glb.import",
+    "sha256": "a55487b800e10361db41fa7cae892d09724efe1d9eb0919e1239575c3b29db57"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_helm.glb",
+    "sha256": "3a06aeb49c4d93f750a1ecf35065d6a8351a97f154d1d1009198051df22f0dcb"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_helm.glb.import",
+    "sha256": "1a5f646920715e9c031264a654b4604710dc6d3e766308e82c42274b0b351766"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_inner_garment.glb",
+    "sha256": "5a280a48e32f4f7403ace676656ab0c291e6f03b0aeaf475c28081408bb0ad23"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_inner_garment.glb.import",
+    "sha256": "e14e3c9ee03501c14b40c67ee85a51be6cad56f38e2066cbc993310c1bb463c2"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_main_weapon.glb",
+    "sha256": "84523f08cd898ed4f989b6aec1a6f044377f38a6a7b1120070f9dc15dad86e19"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_main_weapon.glb.import",
+    "sha256": "65156c29eb05bd72308df00c56e676ba9b5ebbba2a1f324b43cc0e5b3ef4135c"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_sub_weapon.glb",
+    "sha256": "570c00895805898ff83cc8d21cc188b42ec52f28ab2f07ed0d67f3262775bced"
+  },
+  {
+    "path": "game/assets/items/boss_winter_court_sub_weapon.glb.import",
+    "sha256": "d965f63d7825944e3338109b9e6d41d4a04464db09e65a366b44fe88134e7cc7"
+  },
+  {
+    "path": "game/assets/items/composite_bow.glb",
+    "sha256": "03e517b8ee433d78c510da490807b65834d505dc2657f87abeb1a7292bbe1139"
+  },
+  {
+    "path": "game/assets/items/crane_lever_crossbow.glb",
+    "sha256": "44c51e0bd70deaa7ec8384ad649608cdc2b5c0434e3712f9276e15c6b3d36e32"
+  },
+  {
+    "path": "game/assets/items/crane_lever_crossbow.glb.import",
+    "sha256": "025b101c72f284cf94e4d0c5369c2565b88fc5a0fcb2a4d5a83330dbc96d8275"
+  },
+  {
+    "path": "game/assets/items/depth_cinderhorn_bow.glb",
+    "sha256": "e39f6eaf3505da0e6090a9a2c9504443008bd603cd4e06ba69b35b22b161fb15"
+  },
+  {
+    "path": "game/assets/items/depth_dawnfeather_bow.glb",
+    "sha256": "2a12a7fdd36157bab11fc15755ccea72c68933b6645b39d2b4bcb978598f17ed"
+  },
+  {
+    "path": "game/assets/items/depth_icebranch_longbow.glb",
+    "sha256": "d35f8261eea7447f336cb828042aa1f4512df83466c66b501a0fda98aeb0b32b"
+  },
+  {
+    "path": "game/assets/items/depth_nightglass_warbow.glb",
+    "sha256": "b4e55c6fb84eff7226d6ad9396156979b870f3f878954255ea2844f4c7207cee"
+  },
+  {
+    "path": "game/assets/items/depth_rootbend_shortbow.glb",
+    "sha256": "263f3d55336283da25a6d428d4e7c2d8cb276cbad4f7c8a0c82e17303b47ae90"
+  },
+  {
+    "path": "game/assets/items/depth_saltwind_recurve.glb",
+    "sha256": "ff14dc32a14d5a77b967dd92fb686c011c6598bd5ae5e25e581a6a8dc09b484e"
+  },
+  {
+    "path": "game/assets/items/depth_starbridge_bow.glb",
+    "sha256": "34b797828eb1d064e9ce06d8756ea8703b0adf22243689b699ac27a45d68ccbb"
+  },
+  {
+    "path": "game/assets/items/depth_thornwing_bow.glb",
+    "sha256": "b78281426cdc688b835922d36cf79c0bf19f51dfb33bd2d1b20e0f81ccf6bd5e"
+  },
+  {
+    "path": "game/assets/items/dragon_jaw_crossbow.glb",
+    "sha256": "9e4a5aa72f2f7b0ee87a5f1520ff839672ecfa38e4113196a8569fe2f45166ec"
+  },
+  {
+    "path": "game/assets/items/dragon_jaw_crossbow.glb.import",
+    "sha256": "ec759fac95fc33fe65cae45d6256979c911c5d9489c2d39056f254bb1e8f9bbf"
+  },
+  {
+    "path": "game/assets/items/fowling_bow.glb",
+    "sha256": "0d9d915eac5ab38e5e929cfaa86799bed8ca94c8d176d6c196fdb7e1a8087817"
+  },
+  {
+    "path": "game/assets/items/frost_fork_crossbow.glb",
+    "sha256": "cbc2a72177503bac41a61ad7604025754e5f319e0f5fc938b09c97b19963f701"
+  },
+  {
+    "path": "game/assets/items/frost_fork_crossbow.glb.import",
+    "sha256": "6ec86e7b8188a7a0dbdfc9787f69225cc485dfc1ec755e3766b2e0a47c3573a1"
+  },
+  {
+    "path": "game/assets/items/frostwing_bow.glb",
+    "sha256": "e27e3b4a16cf56f3cabed1475a26e41b1f1dc714fc0ee6b530f35665ff7fba9e"
+  },
+  {
+    "path": "game/assets/items/galewing_bow.glb",
+    "sha256": "62d1e7abaaee06652cecf25704ec09a509024c6d25369c2acd78daf77715e8f8"
+  },
+  {
+    "path": "game/assets/items/hornbow.glb",
+    "sha256": "a7beb994ddbab485328894d60f17f30662c59bd63ba2eda5b8d32e1428f426de"
+  },
+  {
+    "path": "game/assets/items/hunters_bow.glb",
+    "sha256": "095134abb0929e94c9e81dd8d345089326bcbe7bf10c47bb8b408b0051f40ce5"
+  },
+  {
+    "path": "game/assets/items/iron_boar_crossbow.glb",
+    "sha256": "c29cdaa3450c8e895a59a5c08dac73a9e67fdb236c7bc534a53cacf1b026afc0"
+  },
+  {
+    "path": "game/assets/items/iron_boar_crossbow.glb.import",
+    "sha256": "8ae09165a304ab357913d4b447eae3b861485255ba71c6a6c410654824e1c893"
+  },
+  {
+    "path": "game/assets/items/orrery_crossbow.glb",
+    "sha256": "76e35067cf0514b5588b4d7ebfdf1f889e1479297d91464e36190db31e9b699f"
+  },
+  {
+    "path": "game/assets/items/orrery_crossbow.glb.import",
+    "sha256": "ce62008dd5e4b77cd39cb31ce9e19d57319e8a9f9a89dcfb15aa2efabe6ae2e4"
+  },
+  {
+    "path": "game/assets/items/raven_wing_crossbow.glb",
+    "sha256": "b669783b7261602cd0d0f8ae297f4c5f986c0d1cf159d95d8196d10bd63c1ec6"
+  },
+  {
+    "path": "game/assets/items/raven_wing_crossbow.glb.import",
+    "sha256": "21c52ade10465542b5974d27627ec75591d85ec355d4ffc364fd17cfbe10dae8"
+  },
+  {
+    "path": "game/assets/items/recurve_bow.glb",
+    "sha256": "e25b0ee340698055c67b484bc921efbd1d8097c1b47e9514068fafb0f74b58a8"
+  },
+  {
+    "path": "game/assets/items/repeater_crossbow.glb",
+    "sha256": "6de3eb4afa771811a7202f34bb93d2bdb125c23184cde132ead1338d1eaed1a8"
+  },
+  {
+    "path": "game/assets/items/repeater_crossbow.glb.import",
+    "sha256": "fa79cd08504c50c24590655c5fb894d7620da75e91a815a3dba1d34f6caeee01"
+  },
+  {
+    "path": "game/assets/items/shortbow.glb",
+    "sha256": "06f2d914fea656d9d1af43d81adb41a9d14c8b38909c09bb134fa94a9b0af08a"
+  },
+  {
+    "path": "game/assets/items/siege_greatbow.glb",
+    "sha256": "87d726fb01a4b3718255192ac7e5ddf8e1dbf843934ae2467a61aa4e897ad3cd"
+  },
+  {
+    "path": "game/assets/items/stormstring_greatbow.glb",
+    "sha256": "0b691cba5c2407cb5881cfab26baef4c8c54d21ca7c7d2c544ef4b7c1c882791"
+  },
+  {
+    "path": "game/assets/items/sun_dial_crossbow.glb",
+    "sha256": "33bb2b54bccf9c31209756cba94c8bd22ecbf3a2360b27fcc85bb9cc92c94c3b"
+  },
+  {
+    "path": "game/assets/items/sun_dial_crossbow.glb.import",
+    "sha256": "042f26c90aed8ee962b16f9fa4846790936353f5fb45ccab74cb249e5ac134a7"
+  },
+  {
+    "path": "game/assets/items/thornback_bow.glb",
+    "sha256": "5cd932322ee095f0085c0f9859e2c86d309f96355fadfff50c263e6685faa746"
+  },
+  {
+    "path": "game/assets/items/twin_rail_crossbow.glb",
+    "sha256": "cec35b8de7499f708fade95ec6e520be45c5d454d964de73bb6ac679cb2da07c"
+  },
+  {
+    "path": "game/assets/items/twin_rail_crossbow.glb.import",
+    "sha256": "fa70c6e1c11404f643fc5a8353a8533ad2a25c45519a17e7347a5d706488b849"
+  },
+  {
+    "path": "game/assets/items/warden_longbow.glb",
+    "sha256": "520f689ab817650c9528ad379b06a5c64c944b35ba862a56c03998ca4173bd28"
+  },
+  {
+    "path": "game/assets/items/yew_longbow.glb",
+    "sha256": "ce7cadc1d99b6b43d02147d72100d6d6f34c850c1e0392cb6bed2e821e652764"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_anchor_beard_axe.png",
+    "sha256": "147f15aff4e4e9a7dd89c2a5f0dfad11638d638dc44f712e70e49ae61a281b43"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_anchor_beard_axe.png.import",
+    "sha256": "3fa30d588650fd0f4cbc3f999a880c8bb83369c31e3b643285816c37976c78a1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_antler_crown_bow.png",
+    "sha256": "8a448d7de5d2994a183900444947a5aff56496a45b22db296b24b57e4dc72b1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_antler_crown_bow.png.import",
+    "sha256": "bb32077bf591abe63630fbfc540112a8cf3fada734f25619cb0ea149bce14a38"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_astral_ring_sword.png",
+    "sha256": "4d5945dbc88bb65a098602cc649604b157c9152fb9098e02db5136213dd75b54"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_astral_ring_sword.png.import",
+    "sha256": "83a3b73850ba29bef519299ee1c16d7ea811dc1fa430a8c107acedec6aef64a9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_boar_cleaver_axe.png",
+    "sha256": "2c213418964f1680d7516f3b2cdde0bc2bc864747ae4522a8ad94b0513732e56"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_boar_cleaver_axe.png.import",
+    "sha256": "ccf967d8fa7cf7b10d780278a3fc3382cfab8acf67364855755bfd254b4b6b1e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_clockwork_cam_bow.png",
+    "sha256": "591ba04f30c977eb29dffd29d6522eab8d5658eb5769f0623fd78b316a2554e6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_clockwork_cam_bow.png.import",
+    "sha256": "0e59b359983f25d36a743880ec9dd9b77e6ccfeee92ad9992ad0282bcfce0184"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_copperleaf_sword.png",
+    "sha256": "ad9d9585de334267ef0cf0afb4db3520e9dad53f126fb323e107bb152ea4f930"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_copperleaf_sword.png.import",
+    "sha256": "8d1551546bfea9cbd213db886645745ecdd540d056f271d6de63ab0dd0f62f90"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crescent_fang_dagger.png",
+    "sha256": "035b1e20be4c3660abb3b67a154c2a2d73dc1075c26435eb897f3c4db7f4aad0"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crescent_fang_dagger.png.import",
+    "sha256": "aaafe806da61290fc62c03810ae912e4f14a8c2652fd69381cfc1f5c91af393a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crescent_moon_axe.png",
+    "sha256": "86bce7589813cfc481d6596779da8123f8f73813fe0b4593533bca7195240636"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crescent_moon_axe.png.import",
+    "sha256": "b8c9ca0477cd2a57be372d79fb2167374709c44c872c4934051676da8aeaa30c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crystal_spire_bow.png",
+    "sha256": "3e5c5d16db9bce877a935de0f95bedc22fa1a1fcd6f826028f39f4e1c13c705f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_crystal_spire_bow.png.import",
+    "sha256": "891c33cd02be9150a9b54efcfc335eb91760fba8948579c8250234c3973e0d38"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_rib_bow.png",
+    "sha256": "e038123a24b72bc63f213fa4462ba2d3c4a69309756669bbfe676ab0f38fcee2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_rib_bow.png.import",
+    "sha256": "9a85289faaf27266a63e43b245140c9a1b615c035e8570726ffc5660769865aa"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_talon_axe.png",
+    "sha256": "40cf0250ba02514e8b9d5e33dbb4a9af3f06a2be350de3f6d6538d4463d88b47"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_talon_axe.png.import",
+    "sha256": "0d5e85b158919fe7022e719d3663a7a04cace0270e0859141a250585f7115423"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_tooth_sword.png",
+    "sha256": "b6b5faed6d13cccdfe087fd95f512b65787a5481ddf3ff520c551aa064e1080f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_dragon_tooth_sword.png.import",
+    "sha256": "7a91ee031db9e06db5f2ece96c2a1488770c29a9ec337e5d55f272ed788d5f48"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_flame_ribbon_sword.png",
+    "sha256": "e2d23447de7a2ea7ad19ae386b4815bd28c922308eaea5dcf12982bf83e111b8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_flame_ribbon_sword.png.import",
+    "sha256": "a2c8a47e59e8fc720b28c345beeb79d9f3d566c56dde9d297654c4bc414c2109"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_frost_pick_axe.png",
+    "sha256": "2bf3cf5b325e6b173a201b335aad90a6c21d5f49fa97624c452e402c7ae02362"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_frost_pick_axe.png.import",
+    "sha256": "6ab033ec32f6bb83fa9e21b1e78836d5acdca7cb3758e164c2634eb5bc3c32c8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_glass_leaf_dagger.png",
+    "sha256": "ff839c80b4ba018eb608b5b389b86da3672aab1436348e865570b145336b2b42"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_glass_leaf_dagger.png.import",
+    "sha256": "08f370d0755c1a0cb371a115fc43f351993166e25ef5578965fe5047b5c5b278"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_gothic_window_axe.png",
+    "sha256": "1f4fc96d54efaa69db249d549ae63580bfd4e628b5c4133c7fa838ed724afb9b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_gothic_window_axe.png.import",
+    "sha256": "92ed46546cfeca1ce4b536247d07749f55a6dd447370c6cd742bad87d4acd844"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_gull_hook_dagger.png",
+    "sha256": "d9cc06cba011493ffe30f52fb08a6d32d2acab1db835040282c720852889a5b5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_gull_hook_dagger.png.import",
+    "sha256": "334153f4f26b9bc03cf8e5e184b1d16c1e7bd17391e088a7b879bfa7bcf02265"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_harbor_basket_sword.png",
+    "sha256": "f2316a2462b63a5e467150e5e646997d2288eaee59c8c44544b1866be516a348"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_harbor_basket_sword.png.import",
+    "sha256": "3173222ab3f131ffd4a74532af14a133df9d3b6c892945493fe5404d3e519dbc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_heron_estoc.png",
+    "sha256": "d1ec8ed0323acac1d3baea5f8847faf47eb1ebdd7246f6aa6b5935b38042ca26"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_heron_estoc.png.import",
+    "sha256": "666ded1f7cf24070025957d5ee00bf446414939ee507db037a8c6dbec5eac697"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_heron_wing_bow.png",
+    "sha256": "d88fbfad9c5d3694c227d3b0694531e8473371eb1a46fbdff754c9b88e8625f5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_heron_wing_bow.png.import",
+    "sha256": "98493064cfcfd1b1397fc10e5567ee2e6340a651766de716908b215f955fed46"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_ironleaf_bow.png",
+    "sha256": "e435c54c5c7810a1eed809b51206d401a6e2ead410ae97d3e5b6e4d11a7ca1e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_ironleaf_bow.png.import",
+    "sha256": "934a023416173dc909c6992ee0483807e275d38d89ee916cd77e9fb285cefdb8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_moon_hook_sword.png",
+    "sha256": "6aaa1e4369d049af6c1ce80ebb172a8fb616500f5d71e69527d1a8417be4affb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_moon_hook_sword.png.import",
+    "sha256": "7bfe342601cf883d29db563fc14109c11877f1d2592cfe62bee231bcea4eab82"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_orchid_fan_dagger.png",
+    "sha256": "166c3c4fe909242a7cbdb3ebc60f9858d83a47c2c6d8a39d93782d2e2b0876c2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_orchid_fan_dagger.png.import",
+    "sha256": "90bba8a626fe89d327163aad48a654816c36aa1dad58948150fab3a443b65491"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_prism_greatblade.png",
+    "sha256": "4578abdf17d225c3f8f9245e01312cca12e681b18ef6180bcdbfdc611f399454"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_prism_greatblade.png.import",
+    "sha256": "881d91c24f4140b99cdcb056eaf458a1406cada1e5f3835fc16869d7e5136384"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_raven_beak_axe.png",
+    "sha256": "a300ea0c7573034095c8adb17beb2b787df9f42b0f52640e908cfa07d522d769"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_raven_beak_axe.png.import",
+    "sha256": "d57f278747cd4942d9c3281409346c80175d61598a95edc52ae213da6ababc91"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sawback_dagger.png",
+    "sha256": "dc3593efff07163b51dfc27510e3724426bc2f6d1c4c2dda10d3470f4e0e1ed4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sawback_dagger.png.import",
+    "sha256": "d9bbe9c2e5501dd164b7ee81c32e12026a470a9934d9684edcb0ad6443a45fe9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_scorpion_tail_dagger.png",
+    "sha256": "cbff220a36beb2501e5878711c455e37e081cc856460bb43c781693cd992a9b6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_scorpion_tail_dagger.png.import",
+    "sha256": "de8b3175ab1bf8ece6daf78dd6742671993d6de143e074966bdfa04d6a0fa95b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_serpent_coil_bow.png",
+    "sha256": "bc0ec79982b9b5ed0a70c4029c5e622c0083096d38d4dad605f7a7e6edbf9449"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_serpent_coil_bow.png.import",
+    "sha256": "c0c2813e44939047381d9dfadebf3cbb3868e6b23d58e24a986f3cbc0127d69d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_serpent_kris_dagger.png",
+    "sha256": "180a115584c82c44d7ce7c295996c80741784e19ce2900c7028d8edef2aec948"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_serpent_kris_dagger.png.import",
+    "sha256": "f023ff05cd13c3170589b232a0bd630f434d525b96389245a188896e02bb84f5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_split_crown_sword.png",
+    "sha256": "b63721557f33efc2cdb919ec31f750bf09bd9ea2fd47350e3738173d0d35d974"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_split_crown_sword.png.import",
+    "sha256": "0b6c5d50b19d04ee118cbbb9614877c872e89a58764ff924b259e83112699288"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_star_compass_dagger.png",
+    "sha256": "5805bc82506de1fbfad7255370312016a1085072e14d556b58db7f3b549b5c2d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_star_compass_dagger.png.import",
+    "sha256": "7272398a75cc9bacb1502acfdf3112762f2183769a7b2afc151329c1f41c8faa"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sun_disc_axe.png",
+    "sha256": "77d04bb1cd12232a9121b51123124a2ca0ad3b6a5301e68b9fb90b0a93598ea5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sun_disc_axe.png.import",
+    "sha256": "361cb82e2574c78f32c7a5e72456fc735d0e93f893e7903fa53efa86bbf2c788"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sunwheel_bow.png",
+    "sha256": "76f82617f408d33b90a758281aa1d2d43c9cb46a9e7d9d4f98e099c96480e7ce"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_sunwheel_bow.png.import",
+    "sha256": "90113e45c37ab2c919621e0785079689056f572d7b6ab9356c4e83108a582ec4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_thunder_fork_axe.png",
+    "sha256": "689318a8b67f030cb106e0c04c33665f7017b0d131341ab8c4af089d9cbb29d3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_thunder_fork_axe.png.import",
+    "sha256": "6b3c418508bd139160ceee73493a007389f88ef2824f76ad6e5ba44d030bffc8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_tide_harp_bow.png",
+    "sha256": "74f4de10e302cd4574a04fbf21781c0c0a060a6af453c08f8f62e46ee168ba43"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_tide_harp_bow.png.import",
+    "sha256": "8e398145a09c3595ed57302602e64a28e2cbef0dd0d1ed4e93c8783d4a652d39"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_tide_scimitar.png",
+    "sha256": "2b8c91bd8751a947b47490e45558c2f106a825007a58ffd21ce7944475a7fe22"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_tide_scimitar.png.import",
+    "sha256": "de6dd241adcdd3e1c281dfacd852e517ccff811576320d5e6ca108ebba9cf80e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_trident_dirk.png",
+    "sha256": "5be11c7ab208d34f35635bd0f5c540f6794b05362ec18948d35a20a6523f54f9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_trident_dirk.png.import",
+    "sha256": "4d61c17b2c1ee767725576d83c9ca5895e562a159eaab89e193b846a1617f85f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_crescent_bow.png",
+    "sha256": "6ac30b61ea1bff64854911a5fcfeafdb96f15f8a516da020929ec3fae9403f7a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_crescent_bow.png.import",
+    "sha256": "f011a147ce7cbecb2c39879b7f43a24320c5fc3d0dbe8b9b6b16a3ba4e10c3a7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_fang_dagger.png",
+    "sha256": "cee6738b6753db3ab26e8a74dd0b525f508ee3ff9c62223ffafe8be37830b64c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_fang_dagger.png.import",
+    "sha256": "3d922bfa5ff04974fd61c0edb19e73b2efd051b9edbf6610dd4fdf123d51df39"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_petal_axe.png",
+    "sha256": "47affc84193d310594928f64e728cad110ee18cab501395af05d09f7466621a2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/artisan_twin_petal_axe.png.import",
+    "sha256": "11cc075a479377c6f2e4475bd8b5883b15207e52672bc1a38318d807bd5dc20b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/ashwood_crossbow.png",
+    "sha256": "790acfbcb152eabf34b18179553ff7d3cc738c2a567b6f13d45fc90f135e6267"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/ashwood_crossbow.png.import",
+    "sha256": "9526ec774f73745a285b9f66ae15c4604bb36b671daf538eb80c5c2ba6085d14"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_1.png",
+    "sha256": "b5451e3bc9dec07db1484db7150ae26a9aed830ae6883272aeb29c806d205666"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_1.png.import",
+    "sha256": "0907cd887ca605680943cb01746fe00376ef093c9907c4cd657ed135b8279850"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_2.png",
+    "sha256": "b5451e3bc9dec07db1484db7150ae26a9aed830ae6883272aeb29c806d205666"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_2.png.import",
+    "sha256": "c6292851ce4f3b0a9092c594238095eec1d4cf4f02d00e4fa71def511a137f92"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_3.png",
+    "sha256": "b704dc2ada16a7771c4eb2df869371e005acb99d140c03bb7819901e30ed104c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_3.png.import",
+    "sha256": "f61e05c0542f72e696534a895ac88d5f06caf0f94e10603ec02b6eb019233e08"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_4.png",
+    "sha256": "b704dc2ada16a7771c4eb2df869371e005acb99d140c03bb7819901e30ed104c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_accessory_4.png.import",
+    "sha256": "f145c75c4f10972b93147831654bcdad894ee21508a2ce45bb4e58529d0d941f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_armor.png",
+    "sha256": "88fecac374a4b2fab20c69ffa261dd41f3b1629ff8bef2196dbe2f482ae0989f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_armor.png.import",
+    "sha256": "3b6e8ae4e16a12d83229b33a4c33378743892b2867d0181bad73cab40853ecb4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_boots_1.png",
+    "sha256": "0ac0b66714ea92ae4c995b40abc343aee8a23111353cf7ca5b96374fd7e82bd9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_boots_1.png.import",
+    "sha256": "73de3a427c788420897521e0717a37d0b45bb3c75239a5e3d8780f9a5b4c371c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_boots_2.png",
+    "sha256": "0ac0b66714ea92ae4c995b40abc343aee8a23111353cf7ca5b96374fd7e82bd9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_boots_2.png.import",
+    "sha256": "248c07d57e36a72d77d330cd3e14f994ae8d275792d468f1035e212927f15791"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_gloves_1.png",
+    "sha256": "2d87f45cdc475f87a423f5420777a19254fb5517552a359564636397652009f2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_gloves_1.png.import",
+    "sha256": "467afc421f8ffd3043df7f3280bb0bb53220949ca4aac571ecc392105c2654ea"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_gloves_2.png",
+    "sha256": "2d87f45cdc475f87a423f5420777a19254fb5517552a359564636397652009f2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_gloves_2.png.import",
+    "sha256": "1a2e7a29551913fdc0c469cead80db1042b93315a0e15cdf621d5b2a5932257d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_helm.png",
+    "sha256": "1c28567d98d6aa148a092dbfd2d1e0ea18d052e0fbeb66fd8ccdcadf3c77bd99"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_helm.png.import",
+    "sha256": "f04c41a0fd91338f8b4f3fd41034bfa07aff50b5da5cc631e06c3d64a15d2b8b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_inner_garment.png",
+    "sha256": "fafe29d51e23fcbfd2b207f3ed0298705e7e244d4aa9ac7b863db1bf1f7c0a00"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_inner_garment.png.import",
+    "sha256": "a2404900d346b344f138da9f9b6ab0ca44ba203f7056dea72b8b18263e27938f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_main_weapon.png",
+    "sha256": "5d5b206e85215e40843a38c585d50958ae8f29d8d196f3ed21c44b5feb8d61ad"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_main_weapon.png.import",
+    "sha256": "01d6eb130fcfdb0d891e18ce48e0e567f4c342bc26a9ac7f992376ef14f90009"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_sub_weapon.png",
+    "sha256": "8f2de53781b86bfdef550823e96d53bd7ede5ddb1d786fa3697fb57847053244"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_ashfall_pilgrim_sub_weapon.png.import",
+    "sha256": "a8467f74a8b6cb76c57335e6fd68c13ef7b3737964a2835df7227f89f2134cdd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_1.png",
+    "sha256": "e9e0d71252bd3e43130ce624112f53de93551ca353c2683d1c11feb385e9313b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_1.png.import",
+    "sha256": "78b17ebeb6b88cc8960afed33cfdaea89bb1e5e7cb20c9319ebd870dfb2597f4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_2.png",
+    "sha256": "e9e0d71252bd3e43130ce624112f53de93551ca353c2683d1c11feb385e9313b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_2.png.import",
+    "sha256": "dc0bd8c8b64b01c4f6190901077203ddb5776d39d5e60a55898a91ee37cc5d9d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_3.png",
+    "sha256": "071ef7b7e81effc349af09728e4f543e9e32d4af40c13187b28e22d6cc84c396"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_3.png.import",
+    "sha256": "8a1c4ffc304dc59d7220399c7b3776e897504ee512fdcd49d90263cc39f05f93"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_4.png",
+    "sha256": "071ef7b7e81effc349af09728e4f543e9e32d4af40c13187b28e22d6cc84c396"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_accessory_4.png.import",
+    "sha256": "e6a32729bedb465cdb8117ebbda08d68d4f20130fe0098e8749342f76fa2872a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_armor.png",
+    "sha256": "224f0662657fbdb2197958af1062bc3d4e597fffd82c9bcfdd82b78904aa1c5c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_armor.png.import",
+    "sha256": "dc1467c89997425dca3978aff20c367e28f45f80d312f7e7ac990cda45a40d4a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_boots_1.png",
+    "sha256": "b9f52172cdcc82570e659a88e0db346b6dfb1eef5aaa862c8cffd0cdb603e74c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_boots_1.png.import",
+    "sha256": "f9df8bda91e70278ea042e2bc15efbbde8eed5e501cdd76bba5ff4dd5e42c214"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_boots_2.png",
+    "sha256": "b9f52172cdcc82570e659a88e0db346b6dfb1eef5aaa862c8cffd0cdb603e74c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_boots_2.png.import",
+    "sha256": "1b6e6321e31410c4da1ff58c086a916d72fe07aae8a8a90884c1ac230a684209"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_gloves_1.png",
+    "sha256": "abef27355761623b4955b78b8b7d84d05bc759c672cd3b48100aad7edd470cb4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_gloves_1.png.import",
+    "sha256": "b947c7fa6096186610996d8dbcd31ee3ff30aefcb62257047eb1d77fafdd7632"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_gloves_2.png",
+    "sha256": "abef27355761623b4955b78b8b7d84d05bc759c672cd3b48100aad7edd470cb4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_gloves_2.png.import",
+    "sha256": "63467e36f690c94c522b87412cf78584671226a64abad349eda806e41f387efe"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_helm.png",
+    "sha256": "82f0a8d79bf808a0848d66defab878d10bb53670d2e4618db7e4849aa2a37a92"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_helm.png.import",
+    "sha256": "6e7748385ffdb2d6dc50cd01950f156a593fb308a29b5a1c7cac4c97fb26163b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_inner_garment.png",
+    "sha256": "5fdd6f4955f43f765e91d1c335031751598f97d78f9dbbf256ce26f2fd1b486d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_inner_garment.png.import",
+    "sha256": "0ce20b592e86e5047a14a20f4221c49bee80f3f266322f7fa4eb055eddb9e743"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_main_weapon.png",
+    "sha256": "0e809f7d6630319ac2bfc452279d99e3023e8da15c9ca18c82df1ecdeb711a16"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_main_weapon.png.import",
+    "sha256": "476dd86b7d83026724d621473d7e430b16dbde44f782845994a45e94e88cd811"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_sub_weapon.png",
+    "sha256": "7aaf950b57f4f14f37ec6aa941da9525c8b79a6e56c749010ed9e71dad425b7a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_crimson_glory_sub_weapon.png.import",
+    "sha256": "596772acdc5fd82810237843b229f287b5df8caa18f79ce01625084d90e6b209"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_1.png",
+    "sha256": "491aa0488b7f3743d0b4b8b80645deec2536240e8ca240ccafa0a615d3fdd93a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_1.png.import",
+    "sha256": "ad4cc6bbec49de178b9908b295fc4bbe134348355b104747bc21cb86695fb876"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_2.png",
+    "sha256": "491aa0488b7f3743d0b4b8b80645deec2536240e8ca240ccafa0a615d3fdd93a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_2.png.import",
+    "sha256": "66dc17d8cf521cc9e562dbc165ffe8a85796d4efe870fd27bba74480b661d836"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_3.png",
+    "sha256": "c1f26c2c4d3cda5938afd9a6c41e4953d16806da726e5b1077760f2d7a0f181c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_3.png.import",
+    "sha256": "45ff49eb0b3bf106f4a81b4e80a715ce1b332070d56add2081e093d5edfc6598"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_4.png",
+    "sha256": "c1f26c2c4d3cda5938afd9a6c41e4953d16806da726e5b1077760f2d7a0f181c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_accessory_4.png.import",
+    "sha256": "2d540cc26841fa1e68e8d65137ab1b1be3cf7f760da724b4fb25ba5d6bbb0030"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_armor.png",
+    "sha256": "f2efbf7a6249b161c7038ab37d0d070b8e4455b98310f638f9ace1565408d3fe"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_armor.png.import",
+    "sha256": "2469160e6daf46d6ea2fb68b4534ab36e4d0e24209c9b498c485a49b5dc0c445"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_boots_1.png",
+    "sha256": "9c9ac66a12282cc421f6a505cca9dcba57d21773dd711d50e924f5413a666b91"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_boots_1.png.import",
+    "sha256": "f9c04ff682b8c07a6d7cfe738c86eb92dd9d2a9ab5a15fd214d84df13fa3f875"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_boots_2.png",
+    "sha256": "9c9ac66a12282cc421f6a505cca9dcba57d21773dd711d50e924f5413a666b91"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_boots_2.png.import",
+    "sha256": "54658a94e8e3a0ef146deb70ebfbfc14dc86bffe40d63b0eed8298df879ff553"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_gloves_1.png",
+    "sha256": "8273dad00554961fc61cce168c9f0eddc98be200bc4c818ce832590374e23d65"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_gloves_1.png.import",
+    "sha256": "e9fc24f387f33866870c3e89ce6c812cbed70f38be07e69030ae528fc20842a8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_gloves_2.png",
+    "sha256": "8273dad00554961fc61cce168c9f0eddc98be200bc4c818ce832590374e23d65"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_gloves_2.png.import",
+    "sha256": "67b9f54be98522e1862eebdc8004865b6122f414499109e38d6fc519f2974c71"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_helm.png",
+    "sha256": "a57c59588ce1b56a5b07b139fd7f6f9d8b4b1c0efcf723a63c15a40e915a32a6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_helm.png.import",
+    "sha256": "391c3ad41c478320d19357dda639ba4acb6dae5b25493e7164d5c6e4acbae2bc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_inner_garment.png",
+    "sha256": "d9cccbe66fea33ea5c769b0f5a7b16b8104ecce8ad7504b66364bf4eb01b4eab"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_inner_garment.png.import",
+    "sha256": "f38a385b3033d3cb721faab326066ae7f260cca335dc9af126586ae954a473bd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_main_weapon.png",
+    "sha256": "95127c2fc9f819c42203678b26157c30f2fe40b47ddff7ae75aeb4cbe27b7ff8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_main_weapon.png.import",
+    "sha256": "7963db02521b5097b01b7a5bf65deee77ceb69e5b88ebe916c0ac5988b31bc3d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_sub_weapon.png",
+    "sha256": "544e6edb88bce3c601dd7c599c111f99c1b2d7da7604a58d56e73e409846b653"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_dragonforge_sub_weapon.png.import",
+    "sha256": "9f6dc066ddf107dae6f0274ea6f5eb18d3c44f908925ed6d3a25a12f7f2abb91"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_1.png",
+    "sha256": "0f6a6aa23a67c6e2c4b87f575108bc6491f04527e8eec8b868bc049d59728d73"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_1.png.import",
+    "sha256": "bb231f727c1255db3415fb3decc22ddac331f8d74517bbed4084c9217265ba6f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_2.png",
+    "sha256": "0f6a6aa23a67c6e2c4b87f575108bc6491f04527e8eec8b868bc049d59728d73"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_2.png.import",
+    "sha256": "c239d8d2321663c67ba750465dae075a425cac38cfb48804a0b62f6990e6ac68"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_3.png",
+    "sha256": "7a96f3e70affb71348525db7f250bdbd735fffc70a18dfb2a1a023a5ffaf9585"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_3.png.import",
+    "sha256": "607eef729436b56a2094845cd9cd004a55bac4a01a8e349294cc1e982b107cef"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_4.png",
+    "sha256": "7a96f3e70affb71348525db7f250bdbd735fffc70a18dfb2a1a023a5ffaf9585"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_accessory_4.png.import",
+    "sha256": "d18249277d5b698985488ef4914f2df28a9fd445018ad501fa8cff3b824444f8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_armor.png",
+    "sha256": "48c97cda2e73fa08401428807ff66677e2d08d2e06c611f1151af4b5764433c6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_armor.png.import",
+    "sha256": "be9047817f509152410e0de7c54b1023f54a00969ed1986124bd16a3a529031e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_boots_1.png",
+    "sha256": "0f22b1d45359dd8460e4eec83817f88c43c1da4dacd40e859dbd6ba59391c973"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_boots_1.png.import",
+    "sha256": "355cd2c7d56a89c4d8bdcb132143d794a42132fd1d209e298221a464f731c3f9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_boots_2.png",
+    "sha256": "0f22b1d45359dd8460e4eec83817f88c43c1da4dacd40e859dbd6ba59391c973"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_boots_2.png.import",
+    "sha256": "021a843674b0f1848c4a9d84623413a8453c52b48e6b7eec17af895c83636514"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_gloves_1.png",
+    "sha256": "6d3fe8167aaa4e1b61b65973f6d992dfd831597426c0dff4fde8061faf3cf964"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_gloves_1.png.import",
+    "sha256": "e67f3c8bef63c51a23f48adebe7f0cc0818738fc8d403ae36583f5b2241128d7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_gloves_2.png",
+    "sha256": "6d3fe8167aaa4e1b61b65973f6d992dfd831597426c0dff4fde8061faf3cf964"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_gloves_2.png.import",
+    "sha256": "bfa414d616171a8f10884e5e373a6952de9e4301c2b53558183117bf899e3a1e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_helm.png",
+    "sha256": "56ad9d0060e54a61d5166d79d3f6767637ed6fe1eb7217dea5faa44b5c238107"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_helm.png.import",
+    "sha256": "5a0b324dd5ebdd9dc9342715202a051871fba19f6d9708fa30b788e928c2df82"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_inner_garment.png",
+    "sha256": "46f2c203e50e6e46649a8e831512d51c3ffabef1cf41817ebf060e812c758fab"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_inner_garment.png.import",
+    "sha256": "86abaa74b317eba7a1ae4b2f83aaba64320735483496b1af858702720fe67661"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_main_weapon.png",
+    "sha256": "5f70d6659ca83412327956c32e920fb02fdf04e363fb4757830c0f7c5ceea61f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_main_weapon.png.import",
+    "sha256": "d3c6414e60cdced47509dca3d326f88f969112cb854c4e487c45560865090d4f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_sub_weapon.png",
+    "sha256": "656db6e24f6b67ae0f033b209bc512c35293f354c0e02aeda30375870368625c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_eclipse_dancer_sub_weapon.png.import",
+    "sha256": "ee12e2a053f473447f47f0f08054b7451b021046db119b7722a6950b17b7a788"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_1.png",
+    "sha256": "044a69f719aaf2f9c338397b5add2f511d998d09058cd266f5f4604cfd82c290"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_1.png.import",
+    "sha256": "d35558df555f9e00bc966422c1f488a511fd2a7d6e304b28f3459af28d68677c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_2.png",
+    "sha256": "044a69f719aaf2f9c338397b5add2f511d998d09058cd266f5f4604cfd82c290"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_2.png.import",
+    "sha256": "134299e0445a72bd5eb856dc9c7c602d42681adf472b3931c44799fcf316696a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_3.png",
+    "sha256": "ca0cd12ea1f5621d444f70959c284747c36b5e2bd2392912bc0a9b0db8f15c25"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_3.png.import",
+    "sha256": "e3189a49674ce0ec640f5fca8a39bb4ee0181b89cddc5add6be149080cad9f65"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_4.png",
+    "sha256": "ca0cd12ea1f5621d444f70959c284747c36b5e2bd2392912bc0a9b0db8f15c25"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_accessory_4.png.import",
+    "sha256": "b5bc12c35c78f44f0d1095bbc8d6137fbb2834ddd78309ebe1f7bb1d076c5621"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_armor.png",
+    "sha256": "029d24c40aa68bcafd9189bb52b0c995277098c36ff9ecf48a2c5da9805abc91"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_armor.png.import",
+    "sha256": "405f86f30433c01bf6022addc83aa028b7868c2f50166254d32e87c4ae6fe55c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_boots_1.png",
+    "sha256": "d0ebf6710b412372dd122b4d22016cb279710a1dbfd2268fcea11af636239cba"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_boots_1.png.import",
+    "sha256": "14bbad31409bf35907c0ae120fe95ba13fac637bd7efc60cb375f2b93c4f6616"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_boots_2.png",
+    "sha256": "d0ebf6710b412372dd122b4d22016cb279710a1dbfd2268fcea11af636239cba"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_boots_2.png.import",
+    "sha256": "36ce3bd0db82fb03b4027aef8b4602256dcd8fce66650a6f2b2e3f14b6ab1396"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_gloves_1.png",
+    "sha256": "eb6ae517e6e7ccbbee0a527ab454349838236f4baea4f52f15f25f8c733dcf1b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_gloves_1.png.import",
+    "sha256": "82f96db83129eaa1679ac75ad1f426b4c0939099f7abf301fb5ca45e1b1008e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_gloves_2.png",
+    "sha256": "eb6ae517e6e7ccbbee0a527ab454349838236f4baea4f52f15f25f8c733dcf1b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_gloves_2.png.import",
+    "sha256": "2132a3d354934a143986ee483139d1472163c3f22ef0faf20df5f8fae0b61356"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_helm.png",
+    "sha256": "35e12210e73072d87206f7192c9111ed8b63f8c64bdd3b06a401e9943c7fb6f3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_helm.png.import",
+    "sha256": "168383cdba38c0df15c42a22ffd83478dfd28486e36fbc1eea03865f694d0bcb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_inner_garment.png",
+    "sha256": "eae7b8889a430c2e4ee775f863d54365093a2b549970d12c031cb45338cdb4e8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_inner_garment.png.import",
+    "sha256": "cc9b5ba33193148598ebfbec85483f70a5840e5207600878f306ac745a874636"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_main_weapon.png",
+    "sha256": "00fc1ab6a385b39647a4c064514d2c683fbd0021dd5e325d25e487a1ca121f29"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_gale_nomad_main_weapon.png.import",
+    "sha256": "12528b900b35b7a59c7265cc77d2d12bd6da533ba0b22b0797d8d3122e7e607b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_1.png",
+    "sha256": "1296ac02315d820b0ec4f9104b5e32374e23528aa571b80d4bb0cf66d3114f0f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_1.png.import",
+    "sha256": "2dc50f8e8d753ade9d0b2a5ae19cd08a161f6ba58da47ce896f578d3a386447d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_2.png",
+    "sha256": "1296ac02315d820b0ec4f9104b5e32374e23528aa571b80d4bb0cf66d3114f0f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_2.png.import",
+    "sha256": "67d9ce1851d66efdc7d9b717fbb5f2130325f5d27fef957b68c1582e4600652d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_3.png",
+    "sha256": "5bb095fab9ed22d6008a9bea984064253a99db34160b53e802206bb376392ffc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_3.png.import",
+    "sha256": "00614587e748b60d5b2666b937c84c578f941649c4a081e6991e9e2a48e85e5c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_4.png",
+    "sha256": "5bb095fab9ed22d6008a9bea984064253a99db34160b53e802206bb376392ffc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_accessory_4.png.import",
+    "sha256": "b91bdb3e194b1afb5aef9decd8560491f06f4f036a4f88db0d24b8a37c8d5e32"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_armor.png",
+    "sha256": "d800fe4135004e9b35b16533cfb0d808917ddf0ac1afd01cb1a5e413afeca955"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_armor.png.import",
+    "sha256": "c121f60b4c45902b16de2d9294c45cc25a0998f2c2b56aa820fb0cb47d2b07ea"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_boots_1.png",
+    "sha256": "6f701de34d5bcc282d3f58e11a9552911677a9a6fa90e33ec61bae586732a19d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_boots_1.png.import",
+    "sha256": "b0cbe3c78722a5bceed339a86e7e79a6f22a7b270f4c1d996835eeac875dfe3f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_boots_2.png",
+    "sha256": "6f701de34d5bcc282d3f58e11a9552911677a9a6fa90e33ec61bae586732a19d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_boots_2.png.import",
+    "sha256": "c96f24fc1b48c8d354d80389168f94f2a14d006853d2a6d95c36f6945c96484b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_gloves_1.png",
+    "sha256": "619e151b2b19d137c00972b756d86efdda73468454633f488880a834e9267ffc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_gloves_1.png.import",
+    "sha256": "8fcbc4242afddaff986e164596ebfaec47d37a6e3c0a320884443004f751b06c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_gloves_2.png",
+    "sha256": "619e151b2b19d137c00972b756d86efdda73468454633f488880a834e9267ffc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_gloves_2.png.import",
+    "sha256": "eb9522dce3d4cbb4fc95876b64ac13fdc18fb71741a7b73bf4bbfa70915b9648"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_helm.png",
+    "sha256": "22419b9885e312273127811d9722646e4b9572235ff3f94165f37bacb00f59f0"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_helm.png.import",
+    "sha256": "658d2f11182b13b5e90bb9047313d95753494098820696cf715a4650e31c986a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_inner_garment.png",
+    "sha256": "79b4bf6294d08f492ee302cf31d900b4edca689f522de84e1c1442dd8af15e13"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_inner_garment.png.import",
+    "sha256": "402c73a991372a3085155fcae8ac18ce95caddbca0ba27dd64cc61b4e13ccb2f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_main_weapon.png",
+    "sha256": "31464cc19854a76de918007fac135945396859850f72cef17cfedf60c7a64e3c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_grievance_of_the_fairy_main_weapon.png.import",
+    "sha256": "96875619ed61d34bdd5cb67099b5c7d450282784afa9275473417b97127aa3a5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_1.png",
+    "sha256": "3cec345fdb5f2349753018fb30d2dc6bfcdd40a42d12af08c68a64216d4bb961"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_1.png.import",
+    "sha256": "239f24f3a552e85447b0690a2d4b8504a8aa76e6d5c0808cac2c9fc2a0b7fa0b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_2.png",
+    "sha256": "3cec345fdb5f2349753018fb30d2dc6bfcdd40a42d12af08c68a64216d4bb961"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_2.png.import",
+    "sha256": "03fe303c8ecc9c5ecf8b6b116dd7b09b21762c0d461f7961c9f1a0df3651fc63"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_3.png",
+    "sha256": "73b9fe17a30fffa324d63d82d6317064c3194bd4a1f52ce25f4d5d4efc795c98"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_3.png.import",
+    "sha256": "f0cc20afa1969e496567d80df9533fbc05f0ba87e813cbe8e0ec185265e5c36a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_4.png",
+    "sha256": "73b9fe17a30fffa324d63d82d6317064c3194bd4a1f52ce25f4d5d4efc795c98"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_accessory_4.png.import",
+    "sha256": "1cc44de93dfb53923ac8eefb5afcc0d4347ebf372d2655066e0d28400791f71c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_armor.png",
+    "sha256": "59e9cd134edfea5b8c5caa78f54dcef61b322e9d6777c1ffe413858651b94d8f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_armor.png.import",
+    "sha256": "6f5725fd0317f94cd9c4a46803b77f81cd2829dcc69e9ab6fffb2371b0017f7e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_boots_1.png",
+    "sha256": "316d7d67409a1b4b43b6abefd6e6a429fe5f14eb4ba59e70c6a97a5f3db7f113"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_boots_1.png.import",
+    "sha256": "dcf1bc2b0bc5bbea578ec4dafacd513c2d0caf17ec1dd3efad32cc0eadb0aeeb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_boots_2.png",
+    "sha256": "316d7d67409a1b4b43b6abefd6e6a429fe5f14eb4ba59e70c6a97a5f3db7f113"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_boots_2.png.import",
+    "sha256": "6f233b02577159e2cd52bd0e85b31402707a18edba84610ebb73316a62d71c96"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_gloves_1.png",
+    "sha256": "379e000f4979c6504f0a9afaea900c999474da4cb8d0d8b21b72938c5df90377"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_gloves_1.png.import",
+    "sha256": "7baecde8e94931b44a7c30f39f0d737efe4011a3ecfdb030203a9fdfd8728789"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_gloves_2.png",
+    "sha256": "379e000f4979c6504f0a9afaea900c999474da4cb8d0d8b21b72938c5df90377"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_gloves_2.png.import",
+    "sha256": "f90d117e67f5579ffa40bb45e18de6d424037f7bc9a9f3918351119eae832063"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_helm.png",
+    "sha256": "4b0feaa358b9006b8ab1df371b596075be83f289704ee29bc4f78fecd208a4d9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_helm.png.import",
+    "sha256": "7769a29f2c3deab1fb71967ee0fade2672ba1e8a9164c4b486fe6dab1115f4d2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_inner_garment.png",
+    "sha256": "0d9b99f59191ec8d1785455bacd54b61e594819a79c4f3d8b39b5db7a88db678"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_inner_garment.png.import",
+    "sha256": "a3f874f8387e93f1476755e4a6c2dbc164469e8620f89dd0f78f79040d5b59ab"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_main_weapon.png",
+    "sha256": "5f8ce56cc1ed55a7c3c22b58d14a2ef2f30692144a91e9bffc1d3353f6f3954c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_obsidian_oath_main_weapon.png.import",
+    "sha256": "39fca1376612438481de53b2da97f251aebf6149225f600834d1da6dcbc39daf"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_1.png",
+    "sha256": "f0ab57bbf1dc384297018cec587f97257ad1916ece09a86718713528aa226f1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_1.png.import",
+    "sha256": "ea4763676b405c9f831374ffa4fe82e0cebe60ea739df83afd834213fdf73aa4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_2.png",
+    "sha256": "f0ab57bbf1dc384297018cec587f97257ad1916ece09a86718713528aa226f1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_2.png.import",
+    "sha256": "73e8f4bb0098481f1ca3cc62cafefe2646e9e4b2b29817a896e8b7d7277d16a8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_3.png",
+    "sha256": "4dd7bd82da15dce5767f13484ef06b03eb5bbbee3228ba8366319132adfe613e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_3.png.import",
+    "sha256": "dbeb8e3f8c08a791b9c14fd57f1d8a2ada336c316f0323787745400e4e5a4890"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_4.png",
+    "sha256": "4dd7bd82da15dce5767f13484ef06b03eb5bbbee3228ba8366319132adfe613e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_accessory_4.png.import",
+    "sha256": "77958cfa82d693c1e02ab9e3cbb1e618eaf40a8ca301a826966a332731698237"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_armor.png",
+    "sha256": "25246c098d1a0b934af8f81e8ddacb5e3180a78dd05449f40234da382d22ca52"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_armor.png.import",
+    "sha256": "ab18bceab4876d03b64d7f2be0887c6c62973eea41279bf1179a13bfbe1c1311"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_boots_1.png",
+    "sha256": "9885a8b2e5e3dcae7cb590836b67dd0029d7969c5ec19389395bb0fa8e31083b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_boots_1.png.import",
+    "sha256": "1cf53b2452cb9072cff607261c88af9ca2a0f953fdb9b875ec80b8f5e5a7c019"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_boots_2.png",
+    "sha256": "9885a8b2e5e3dcae7cb590836b67dd0029d7969c5ec19389395bb0fa8e31083b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_boots_2.png.import",
+    "sha256": "84b79e51c00a651067fc4e3182f0b51558e42c54592eb468daf388a8ee7f214f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_gloves_1.png",
+    "sha256": "480cfe07705dbfb764cf7780a0f1f829b0006281e654abeca5a9a7948dc46882"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_gloves_1.png.import",
+    "sha256": "f366aa620b524506b1c1fd1315c9482854b6050110f11dff5c9379022f4728cd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_gloves_2.png",
+    "sha256": "480cfe07705dbfb764cf7780a0f1f829b0006281e654abeca5a9a7948dc46882"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_gloves_2.png.import",
+    "sha256": "ce45ea826b6edce0cb8611c90c5b406acb7794bcd48c554fa7fb6472ddc5767e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_helm.png",
+    "sha256": "71e2ddb4ab944a2a29a8107e22be5a97680771c780a3ad1f04f85cc9605394ca"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_helm.png.import",
+    "sha256": "ba12b1af57a67ee193e95a6d353b6240f94863f9dd092abdf630dfa126fc1130"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_inner_garment.png",
+    "sha256": "63e58cf95f04d5deeaf039c692a94134c1fbe3bf96cc66717da43a702fdf3b2b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_inner_garment.png.import",
+    "sha256": "46e54396fb9696ba94c5e975d35cfb05fb55d41ebf9601149ceb80238a51e158"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_main_weapon.png",
+    "sha256": "424f456c2625228700c2e49ff3b6eb64b6a75f86e626d2437780e88b821e7344"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_main_weapon.png.import",
+    "sha256": "45444dfb5361236b810d05ab495d9c361b8d3e5265051b0470a3ddd24c04641c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_sub_weapon.png",
+    "sha256": "f6f7066955bad52ace0a3e5690270e1b097b7037a594a5d78e1f00d214ee5bf3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_pale_requiem_sub_weapon.png.import",
+    "sha256": "10853aea166c3572ff43c20b7424a7d0df50fe6c9491de6250f52dec5ca6ae7c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_1.png",
+    "sha256": "50db9e0c1de233e4e7a3587b38d36c0550f534d56e994d0ca421d674fd1f41fe"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_1.png.import",
+    "sha256": "21ee22ce8a1e8bad2f77f3d0b87b382b955e41b7bf7a63e46bd5b0e7edc3fbd3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_2.png",
+    "sha256": "50db9e0c1de233e4e7a3587b38d36c0550f534d56e994d0ca421d674fd1f41fe"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_2.png.import",
+    "sha256": "851b0651e44ff6964f71a8bb3e9b67ed4355f98d5dbb29de66eb35f78c008d76"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_3.png",
+    "sha256": "52ab8a322e01140c8bd5d38d8c522d4f1bfe4e78c6ae2d483f30a2bd29c534e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_3.png.import",
+    "sha256": "28789bf0581accd51523cb7f29cd8df497939c92580acf1c6d98432065e36acc"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_4.png",
+    "sha256": "52ab8a322e01140c8bd5d38d8c522d4f1bfe4e78c6ae2d483f30a2bd29c534e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_accessory_4.png.import",
+    "sha256": "e4b41055406ef466f8f8aa5b8b0bc737b494a66799b66ebc163d395096c1b1f6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_armor.png",
+    "sha256": "69ca57ad4a142e1aece4546e38efdb33645648af587c673ecbf379edeb854879"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_armor.png.import",
+    "sha256": "b22e0db4fd2765ec122817f9b27dcfd2c8c7558c3670e9abc3d56c13b31b3f99"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_boots_1.png",
+    "sha256": "a8ef130ae0da57b6ae3e18385f9ba1231ac9480d719b4203ae0554f0012cac29"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_boots_1.png.import",
+    "sha256": "5639f47e45c4a064524ceee3cf3b7af556be379934684129a6042bb18952545d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_boots_2.png",
+    "sha256": "a8ef130ae0da57b6ae3e18385f9ba1231ac9480d719b4203ae0554f0012cac29"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_boots_2.png.import",
+    "sha256": "487f3e4ccdc814169ce85dd4fdf082409f3ae67cf1a6c212e6826471e5aed30a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_gloves_1.png",
+    "sha256": "81043834feea63acfbc239e30ced45ec23ec7b822da222c2371aaf66ba41a4e7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_gloves_1.png.import",
+    "sha256": "6e294079481575ee1e658e22c467f7ac6648ebc2f64c4ae964671c3c620232e3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_gloves_2.png",
+    "sha256": "81043834feea63acfbc239e30ced45ec23ec7b822da222c2371aaf66ba41a4e7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_gloves_2.png.import",
+    "sha256": "f058441808802aee6f170faa24fafc6c07926657a764416826f3dfcc6a45b077"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_helm.png",
+    "sha256": "8404cb7404268e00c3471ecca669978fe3927e62e2c89fcf35a64bb27fc1b65b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_helm.png.import",
+    "sha256": "992cc36b33c9b3d41cb6c03da05e6dc2903c6219b94dabe06490805b24c18664"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_inner_garment.png",
+    "sha256": "ecfbd8c7ff8f795d2bf619d479000fffe3988eaf9ef094a8065f3ce9925a783e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_inner_garment.png.import",
+    "sha256": "48c6b86e99b6013197c7159f47652d0f5ed1f52a56c6e6741012969d52e78564"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_main_weapon.png",
+    "sha256": "a8341efe4b75993cddc89fde6f063e4b8d481ddd3c3cf08ddd3fb77984150fd2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_main_weapon.png.import",
+    "sha256": "15230e498e8d7aef0e51b6b88bb323c1a99f676f93a57efd0bbe5103e48eb527"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_sub_weapon.png",
+    "sha256": "8b8ba7e00db16ee222eff7bc1206d00e941179cd8307027913a494d667a8d81a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_serpent_veil_sub_weapon.png.import",
+    "sha256": "8caeb6ed92ac54ffa305a28765da162e72dd7ee6724cbcfe67618c34fb3b1638"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_1.png",
+    "sha256": "bab1e446701c134669457336db8d38e5f7b67f58f9bfa7d1e615dd4faeebee32"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_1.png.import",
+    "sha256": "e13226016bf2aa420f74e3e2bd9219cc1e5f73168655feecf7e14e571e202bf1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_2.png",
+    "sha256": "bab1e446701c134669457336db8d38e5f7b67f58f9bfa7d1e615dd4faeebee32"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_2.png.import",
+    "sha256": "b88a624dd87cebea39decf2ad2598099c36998667f92e23d406ea889bd65e930"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_3.png",
+    "sha256": "5f579dbb8083535828a27d5bcb89b50e9d4fccb4f16b0f769a7c07aaf7bc70f2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_3.png.import",
+    "sha256": "debfe551c0404e9af37f1f3d3d4b0e264364acd1e00f35110c89d9fb3dc1bad5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_4.png",
+    "sha256": "5f579dbb8083535828a27d5bcb89b50e9d4fccb4f16b0f769a7c07aaf7bc70f2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_accessory_4.png.import",
+    "sha256": "6116765196157edf643afd0911d57cfa6f025937ea5f674ae5553690e7272de6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_armor.png",
+    "sha256": "67467b81df638dbd24f2bc01ffebcd145dc7756d93ecd4bf8c857e6b82d212ae"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_armor.png.import",
+    "sha256": "03e9b279495ace814ab0d786ab922d6cc0784d12ee96a129366b76f734552610"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_boots_1.png",
+    "sha256": "05ae2e743a701c9492c2836958f9ecbd7b5306283dee27b8d140a50ec4327329"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_boots_1.png.import",
+    "sha256": "49d7de87d7c976ae90b52ee0abbb5d0e35557d3cfd240f9bd7d863e42f63dc57"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_boots_2.png",
+    "sha256": "05ae2e743a701c9492c2836958f9ecbd7b5306283dee27b8d140a50ec4327329"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_boots_2.png.import",
+    "sha256": "52ca9eb7a992dfc587a1b37ad48af4d9120792e4aea201f1cbc5de9fb1259ae8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_gloves_1.png",
+    "sha256": "e7afba1eae5703d42426446d4a65854efb80a052b7c27727b1c03557852edda4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_gloves_1.png.import",
+    "sha256": "562d3aa224e9b83cce53ad6016b1e069a66b3f244900bf8e14edb570b03e9a8a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_gloves_2.png",
+    "sha256": "e7afba1eae5703d42426446d4a65854efb80a052b7c27727b1c03557852edda4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_gloves_2.png.import",
+    "sha256": "2cae6e9ea122747aa662c8dbe2b7c288e842b7efc5447f7f8018a0fa948c805d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_helm.png",
+    "sha256": "2f2c71b610f30088c1c80b05cae953877358ddf4956fbeb690a775ec36f6056c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_helm.png.import",
+    "sha256": "532b78e5a48da19122f77bebba94880c92236b1e58a77725319e81e609d1e65f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_inner_garment.png",
+    "sha256": "661387115b3259608b0ab2b7989b0aa5b71fc44fbc5ba53b301302d6e8f18fac"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_inner_garment.png.import",
+    "sha256": "e52f8d6deb92830af13d4400d289cdacf24688844ff8265d8058dc1709b0c07f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_main_weapon.png",
+    "sha256": "7549c388fd35334c62dc5fefb36e641575b9110da061336d9164af8acae5fe7d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_starfall_hunter_main_weapon.png.import",
+    "sha256": "64c8e65685d9aefad3446fd86f516046014051ed4cdba4a899424b2222b28992"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_1.png",
+    "sha256": "f09067058ebba3e104df26bd1369ff1fb3293aeffaf1867fa1cfc4fb44bfeb74"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_1.png.import",
+    "sha256": "a82e0c42a2f53b2bcddc7457477adeca166ae030393d4554ae108bb44e803dc1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_2.png",
+    "sha256": "f09067058ebba3e104df26bd1369ff1fb3293aeffaf1867fa1cfc4fb44bfeb74"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_2.png.import",
+    "sha256": "c9112ed4ae7f12979cf824fc03e03620b6e729494668409c6abfeec88ba3cde0"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_3.png",
+    "sha256": "5d212f85ee85318fd7cc74f1a8bf271b037b83c46dbacc0a8209b5aeb11a0edd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_3.png.import",
+    "sha256": "6d5222ddcf7db84872361290794e5e8935cd659e796a7405d813170c8711ce8e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_4.png",
+    "sha256": "5d212f85ee85318fd7cc74f1a8bf271b037b83c46dbacc0a8209b5aeb11a0edd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_accessory_4.png.import",
+    "sha256": "c96373fff456d55e1021eeaaf8a5577e71a0fe05a7edbaa4cf0febac655134a3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_armor.png",
+    "sha256": "ef4c415a11cdf8e25b1fd3ea0761e727568d3ce9af5400c73071b8571512d991"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_armor.png.import",
+    "sha256": "7f325df867394f1838f0b102789fd9a1060deaa3c888f86d7cb67ccc4659d222"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_boots_1.png",
+    "sha256": "84081b806d7098bc50f20e86fe32bf73a406a4ac04663a30cb7b1a839a907c45"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_boots_1.png.import",
+    "sha256": "c916a197e90ef4d1ebaaa765a4e7f312cde498b22edb21b5d8055df6f24d7f22"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_boots_2.png",
+    "sha256": "84081b806d7098bc50f20e86fe32bf73a406a4ac04663a30cb7b1a839a907c45"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_boots_2.png.import",
+    "sha256": "f538cabfb95d48f20db5bd016d269b265ded2801b5ba1cd2c4fce79075192a15"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_gloves_1.png",
+    "sha256": "98486899c8ba273a6a98c15897728886e1773fc5d12f980d672599b0098344fd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_gloves_1.png.import",
+    "sha256": "369b072c149d5b414d11fdca7d76ac6a3eb9070448fd17c1b93bd4769299323a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_gloves_2.png",
+    "sha256": "98486899c8ba273a6a98c15897728886e1773fc5d12f980d672599b0098344fd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_gloves_2.png.import",
+    "sha256": "a8e5b12e94d90d80cf2cf477d401ce2e98581873b3046d8df8740dfe72265243"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_helm.png",
+    "sha256": "2ed4a83de0bff05459827aca5dda9b301e23b7c304cc72663265a77a5e4e5684"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_helm.png.import",
+    "sha256": "882445e6003cd6ac9f707734d0536c8afb48b8e93e60a3030032b244fef0a707"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_inner_garment.png",
+    "sha256": "2393cb529db2acc7572697a23b15dac662d66578f2a62fed80adb6ebc0d60320"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_inner_garment.png.import",
+    "sha256": "d53953a3cc7a01869aceef321163d353c13ef0e63df50209a6417871348c3c2c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_main_weapon.png",
+    "sha256": "1588913067425cfcd6d75ba070ffd32a313c0a1d319756b8e8258100f0d2415f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_sunken_crown_main_weapon.png.import",
+    "sha256": "4d18fae82e9d68fdbf5f4a860fdcc3bac0041a987170dfd8278cf76f52811a1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_1.png",
+    "sha256": "25a4077bf92b582f72e38cdb22b96554a3e4be03b1bb984854b731ce4cac1835"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_1.png.import",
+    "sha256": "f0271801946675fe546ec4d3aeee9267d88a1b20d831a2f2a442d6d36f75b09e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_2.png",
+    "sha256": "25a4077bf92b582f72e38cdb22b96554a3e4be03b1bb984854b731ce4cac1835"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_2.png.import",
+    "sha256": "3a62b5148c6e32cab56c9b697849d00c880ad3bb359e77227db681ae24b55956"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_3.png",
+    "sha256": "15d653cb3343b863d6bb2f21f8bb805e6adf789d400ed58611e5a1bb41f09152"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_3.png.import",
+    "sha256": "08f3b0016d2bf00f0f523e3060ea9a98ffa68de4d5db7d4ed8b18678c48865ad"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_4.png",
+    "sha256": "15d653cb3343b863d6bb2f21f8bb805e6adf789d400ed58611e5a1bb41f09152"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_accessory_4.png.import",
+    "sha256": "dca1ca190679c7bd43908d9ab2bf0fe313fcf105323997472faa73b2bb50da2b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_armor.png",
+    "sha256": "fbc3b2d81b837f0a1da63083283bdd3d38872e0f6ab6550918a64a7863a7655e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_armor.png.import",
+    "sha256": "ef86e00a0e53af5d8151fc4580d4322f67169bb3a6f3191c17a87c203f0cb2f1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_boots_1.png",
+    "sha256": "0bd0fe52fd9fcfc31ff44fc4a3d77f35469ab03dd89b20822463d4ef0a074718"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_boots_1.png.import",
+    "sha256": "4d5488eb4e3e5513a890a436e82e864e816aa27069658b9f609a97e8f8e8cba3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_boots_2.png",
+    "sha256": "0bd0fe52fd9fcfc31ff44fc4a3d77f35469ab03dd89b20822463d4ef0a074718"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_boots_2.png.import",
+    "sha256": "b133e68fa6b7cc2150ee8b4c03cbf6867c423e60348aba585d0156aa7a7d8a61"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_gloves_1.png",
+    "sha256": "d7fa38d8cc9d170133376048bbcbe62ba2d811e99b820dc391aeba9b962aa2d4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_gloves_1.png.import",
+    "sha256": "dafdeca894ca79559e76a4dbb69db426dcd2c231c1b48011adcf0508b716277b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_gloves_2.png",
+    "sha256": "d7fa38d8cc9d170133376048bbcbe62ba2d811e99b820dc391aeba9b962aa2d4"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_gloves_2.png.import",
+    "sha256": "f3f516d562242a9959a6f8a84a93f02ee554e4a907085cc2086643b371d2a555"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_helm.png",
+    "sha256": "c40dd4fdd3e734ed5c470b27310ace87734ba69dd91def2228a73c74f139babb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_helm.png.import",
+    "sha256": "490bd3ac5a25507e6532c440164ecd2927626d68aa7ab2de4b2ca62657c9b346"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_inner_garment.png",
+    "sha256": "7d5da88ce2ec02516fad2e79535235e906235d3d199475341c2f48fbfb182f16"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_inner_garment.png.import",
+    "sha256": "deaee1870f5f83b62598404eba7c5bc384a1467c6dca5a8d3deb3e58119a02a2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_main_weapon.png",
+    "sha256": "173b4d7a3f0b4fdbfa04c8696bf4a2d1907d17718894e2f0e3c6226b015d0d3f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_thunder_abbot_main_weapon.png.import",
+    "sha256": "7f4cf2e847799bcaad822e6c7b2c224780a225c761e3624b93fdbd14f5fffce7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_1.png",
+    "sha256": "4698e7adbeef68073dcdf2a63c1fdd3a9e867e30268bd6df9526f2fdc647455d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_1.png.import",
+    "sha256": "9d4fdc5ffdff88ac4a462e4ce4b0be7ee06ea48531bf7b09f3ffe756c2a56f28"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_2.png",
+    "sha256": "4698e7adbeef68073dcdf2a63c1fdd3a9e867e30268bd6df9526f2fdc647455d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_2.png.import",
+    "sha256": "d76f9e60a7b8f74061876d01fbf6f45e9e43b98561106e5870d1d0dd290468d8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_3.png",
+    "sha256": "2cc4dd2f8376d0c4cc6b069958f8c77e91d61c464cfed981d50454c1fcfe9b54"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_3.png.import",
+    "sha256": "c2a8b0aec29f70d32f3000c7c043cb378d0960d7e27a641b1018f15209e2c97f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_4.png",
+    "sha256": "2cc4dd2f8376d0c4cc6b069958f8c77e91d61c464cfed981d50454c1fcfe9b54"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_accessory_4.png.import",
+    "sha256": "2da6bbd9f630c225dde0f9d0e61f03d27a78bb8d4856f84965fdd878d99d376e"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_armor.png",
+    "sha256": "a6a709f33f8036745ba6c176d7b3e8a7c0dc45c26508688bbd68bb31a50c18b9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_armor.png.import",
+    "sha256": "84ee287ee1906e00fd600126086a10d843297b06ddf6b6dd61ac3f86fab4bdec"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_boots_1.png",
+    "sha256": "49ff7fc7bf41db216e5e114e1f82af42e5ba0b2a42303363f28e4c9a41753465"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_boots_1.png.import",
+    "sha256": "c8206ce53f0386ae4c89f1faaa08e67607a26559fe794edae9ada027478f5115"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_boots_2.png",
+    "sha256": "49ff7fc7bf41db216e5e114e1f82af42e5ba0b2a42303363f28e4c9a41753465"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_boots_2.png.import",
+    "sha256": "f124f9dded2fce7fa5d1797b1aa8c98530af61b6f2c43a672864b54cbd26bb54"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_gloves_1.png",
+    "sha256": "308e92bad3033ed6b02faf76e041276af82783bb0cf69267a8598caed113ddb5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_gloves_1.png.import",
+    "sha256": "2adcc2604ed02a1d1b19acadd584a6cb39293cb1fac55be23a8b398de61f2e15"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_gloves_2.png",
+    "sha256": "308e92bad3033ed6b02faf76e041276af82783bb0cf69267a8598caed113ddb5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_gloves_2.png.import",
+    "sha256": "54df74a9f0101da7ce24792be89faeff93bdee83ef5ad036ba382f875a6f69db"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_helm.png",
+    "sha256": "d608a783497ae2a7c47d70f3e3de0615f0fd18cf0e25a02029303638b5620c89"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_helm.png.import",
+    "sha256": "6af78ccdbc3863c9c76e846c1f665ba1ea22407c8e82c1b10ef25d4a88cd7c98"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_inner_garment.png",
+    "sha256": "4adc7e2e46f8114e97cf846de8b5f31c792858aba2dbc1af21c8e531d3b804f7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_inner_garment.png.import",
+    "sha256": "b9952675b77eb7407ab4b6f9c79726be301faa4b15f5f216f0da6759b1ae3c4a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_main_weapon.png",
+    "sha256": "9e3837ba06eaff07c33d4de72cef78c5a4d014f07dd6724da03989f3c5e04eb9"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_truth_of_raikuru_main_weapon.png.import",
+    "sha256": "79aca9c388f35b8e2249b9b061d04f695d9e7f78d2e64df0344394a62df9bdd5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_1.png",
+    "sha256": "f2337b7a5c32b234479dbbda30665bb5ba9166d0194e45bccb20b0e7c01648c8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_1.png.import",
+    "sha256": "c04b21c54b5aa7ea0d23121a47d4c23177dbaefb556821ac1f295e28823735bd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_2.png",
+    "sha256": "f2337b7a5c32b234479dbbda30665bb5ba9166d0194e45bccb20b0e7c01648c8"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_2.png.import",
+    "sha256": "a0101298489cddfaec8a1b4370182c112ed0dc73b5153f0ba623b85ad66c836c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_3.png",
+    "sha256": "40277853fbb0a7aec10f7be927e36aea6cf5a98929d2e00167ee6554721fbb52"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_3.png.import",
+    "sha256": "6eaa32f3888cbc4d92d5c77987d6f3c0da395ba01586881c78205241ec4f9199"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_4.png",
+    "sha256": "40277853fbb0a7aec10f7be927e36aea6cf5a98929d2e00167ee6554721fbb52"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_accessory_4.png.import",
+    "sha256": "432fe7e68e06627044eb2333bb56f68d6bf0f5cb601e3adfd04c65f21488f851"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_armor.png",
+    "sha256": "ab4d10dd01ad2b8a67d7871d305d15f0eac9c4f46e31109ce0a232511cdd9ceb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_armor.png.import",
+    "sha256": "c16e661404580608530756d6f3d4967c41b9a1df3500ae448f542aa45d55608a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_boots_1.png",
+    "sha256": "4f27bb8c5cb64325cce5dba1ba2d92f7bf95ab32730f0273430dd2f8ce643f57"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_boots_1.png.import",
+    "sha256": "4870a310ed3be8b0b240d01f83d8920b4a40580589612b80f785473e98e175fb"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_boots_2.png",
+    "sha256": "4f27bb8c5cb64325cce5dba1ba2d92f7bf95ab32730f0273430dd2f8ce643f57"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_boots_2.png.import",
+    "sha256": "ccbef23f621f59006989b54b603fb47ff5caa262e89f3b8e8057891dedbe855d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_gloves_1.png",
+    "sha256": "43eaafef90b129f3a99da26f4f4fa4f26241abd8176892fca0b25a636efdc05a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_gloves_1.png.import",
+    "sha256": "4737b0cea1c2695161d129614896fa894da10a736ca07548d7ee048505672b0d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_gloves_2.png",
+    "sha256": "43eaafef90b129f3a99da26f4f4fa4f26241abd8176892fca0b25a636efdc05a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_gloves_2.png.import",
+    "sha256": "5ae01176ed7e1e6f7a72ebc46b7aca3c603e87af17e364d206dc3a510fb80708"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_helm.png",
+    "sha256": "b1b5b53ed87f4afd99e6a317ce911698606ae384f2e057daf8f28ae822347acf"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_helm.png.import",
+    "sha256": "5397941f1839d448fab922d5267eed5b3fc4e3ca741ef6933e70c3ffb60d2c09"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_inner_garment.png",
+    "sha256": "4195a487ff88041c0ba02d760289fbce8f15ab08caa9415a5b50a37f309c6678"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_inner_garment.png.import",
+    "sha256": "7127c4ee19e05ddb2a619221f84c26be71845df0d237b0d3ba9f0995c3a90e28"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_main_weapon.png",
+    "sha256": "5057f11f8ea6b01b88426cdb9467ff494c5fe9f8b7ac7e48592565a644ddef43"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_wailing_mistress_main_weapon.png.import",
+    "sha256": "a33acfd6bb6edaa46ec44eaf230615c00f0a04ac816f24cca3a7d01a2cdf8dfd"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_1.png",
+    "sha256": "cb8144e0821a4f42315fdcc2128688c3a9e2e9a1b695b855ce24532d0ae5a4b3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_1.png.import",
+    "sha256": "3888b8bec3c152cbb2256fcce647ba7b802426a2ba185894eed4a551f1d75c6c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_2.png",
+    "sha256": "cb8144e0821a4f42315fdcc2128688c3a9e2e9a1b695b855ce24532d0ae5a4b3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_2.png.import",
+    "sha256": "7aee44fe43b0afb3eed5c766ab6532465f955ef475e31bd1ed2f5bec59ec3239"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_3.png",
+    "sha256": "032ba535fe5da1aa7504621de9371447f2be929cd9c9b345b9bf6ed75b342bc7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_3.png.import",
+    "sha256": "e967723d150914b4ab4b16d2bf340e7fbce2aa83f335099b4b4bfd2d39bea75d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_4.png",
+    "sha256": "032ba535fe5da1aa7504621de9371447f2be929cd9c9b345b9bf6ed75b342bc7"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_accessory_4.png.import",
+    "sha256": "1ca12a39aa09fb0691543a94c8560ef6ef63753c28418279213048bafc306273"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_armor.png",
+    "sha256": "180eee586ae439d484f7c0b41e5afb77b7aecfd863c4dcdeece83f306033b9d5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_armor.png.import",
+    "sha256": "8fdb3ab0b927d26ed9da119ae9bf680d071069a3f5d501035c9ffce9a46bf3c3"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_boots_1.png",
+    "sha256": "d9280d32d1783d221599c60dee6f22fdfa5fdaf4ff4c51099bf561e26dfdd160"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_boots_1.png.import",
+    "sha256": "a681ff73e92d773b3fefdc518b5a88922a78583188440817d79c71f28ce7b30a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_boots_2.png",
+    "sha256": "d9280d32d1783d221599c60dee6f22fdfa5fdaf4ff4c51099bf561e26dfdd160"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_boots_2.png.import",
+    "sha256": "05d22d8cb03e97781e62f12ab16444a51d1b6f647c5a5ea91f8b9fb493f52b67"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_gloves_1.png",
+    "sha256": "07fc110167ec2a30c2e2524549490239f8d51d62891c03a61faade39351679ee"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_gloves_1.png.import",
+    "sha256": "5af76a66d1ee9ba2a320d70a68654fb2f793fbc593ef2ab51bcd3690fad2ba47"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_gloves_2.png",
+    "sha256": "07fc110167ec2a30c2e2524549490239f8d51d62891c03a61faade39351679ee"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_gloves_2.png.import",
+    "sha256": "ff9e17e384f61f1b01e1ca85a9979ae4e26cf4d96809fc7ab4b661ee4554cb3b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_helm.png",
+    "sha256": "354a5dee0822f0d831112f08a4198bbdaaf05ca7f8d2d2f18f7770ad9d41f607"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_helm.png.import",
+    "sha256": "8162c7b29458df9f52e9aa60c0f2f6cbe7771572a208e502606d56aef5fac69c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_inner_garment.png",
+    "sha256": "0e81600976a29a8abf564a063eaa0cd8367ca6343ed53d265f0c155effc6bd1d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_inner_garment.png.import",
+    "sha256": "cb08aaad8b364502630cf67acfe0a6d6e148cbc2964dd431f0e480f5f2ea9680"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_main_weapon.png",
+    "sha256": "5625c8591452c9c1208398592b92ca8fae77a9d01a21ed08f670aa397d61c4c2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_main_weapon.png.import",
+    "sha256": "40cbc0c843de7114e9d03c86590da4a3309de5534ba1ee6e3f2ca3fecc55c70f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_sub_weapon.png",
+    "sha256": "5d70f93879054384544ccc690150d017c65b958a561857064b9fe1eaacfd301f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/boss_winter_court_sub_weapon.png.import",
+    "sha256": "9a23666ad239a4b0e16894ea54c2dcff9245abb4c70981e61a76206b0aba15ac"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/composite_bow.png",
+    "sha256": "8a448d7de5d2994a183900444947a5aff56496a45b22db296b24b57e4dc72b1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/composite_bow.png.import",
+    "sha256": "ca7fc395795cd5b24eb45d761fbd94ff4171df6b6b1307674eb10734bd51e340"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/crane_lever_crossbow.png",
+    "sha256": "775821ac6bc18a73a05bdb48ecccffcd86ebaccaff54bf1f807e39d1965fa477"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/crane_lever_crossbow.png.import",
+    "sha256": "8098cf77c441f58729de1dbeece965431a016f393ecda45121406bb4e8bf7b84"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_cinderhorn_bow.png",
+    "sha256": "e435c54c5c7810a1eed809b51206d401a6e2ead410ae97d3e5b6e4d11a7ca1e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_dawnfeather_bow.png",
+    "sha256": "591ba04f30c977eb29dffd29d6522eab8d5658eb5769f0623fd78b316a2554e6"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_icebranch_longbow.png",
+    "sha256": "6ac30b61ea1bff64854911a5fcfeafdb96f15f8a516da020929ec3fae9403f7a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_nightglass_warbow.png",
+    "sha256": "3e5c5d16db9bce877a935de0f95bedc22fa1a1fcd6f826028f39f4e1c13c705f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_rootbend_shortbow.png",
+    "sha256": "bc0ec79982b9b5ed0a70c4029c5e622c0083096d38d4dad605f7a7e6edbf9449"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_saltwind_recurve.png",
+    "sha256": "76f82617f408d33b90a758281aa1d2d43c9cb46a9e7d9d4f98e099c96480e7ce"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_starbridge_bow.png",
+    "sha256": "74f4de10e302cd4574a04fbf21781c0c0a060a6af453c08f8f62e46ee168ba43"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/depth_thornwing_bow.png",
+    "sha256": "e038123a24b72bc63f213fa4462ba2d3c4a69309756669bbfe676ab0f38fcee2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/dragon_jaw_crossbow.png",
+    "sha256": "30aa0fbb31f6cdc4057d5e8f8fb54d3084a9ac0cdf0ba510880d531bd9600f41"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/dragon_jaw_crossbow.png.import",
+    "sha256": "24ee5fd48332d928623276157d2d657dd20f91724b08c035af3bad2480808473"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/fowling_bow.png",
+    "sha256": "3e5c5d16db9bce877a935de0f95bedc22fa1a1fcd6f826028f39f4e1c13c705f"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/frost_fork_crossbow.png",
+    "sha256": "a6622997ebdf2fd529f1814ae3201e8101ab13620829d8529a220bfaad80c3c5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/frost_fork_crossbow.png.import",
+    "sha256": "68dd1363b64a66a8b565ae550ee6464b25571dc538cde8d8beb1e9e6322a084d"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/frostwing_bow.png",
+    "sha256": "8a448d7de5d2994a183900444947a5aff56496a45b22db296b24b57e4dc72b1c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/galewing_bow.png",
+    "sha256": "74f4de10e302cd4574a04fbf21781c0c0a060a6af453c08f8f62e46ee168ba43"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/hornbow.png",
+    "sha256": "6ac30b61ea1bff64854911a5fcfeafdb96f15f8a516da020929ec3fae9403f7a"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/hunters_bow.png",
+    "sha256": "d88fbfad9c5d3694c227d3b0694531e8473371eb1a46fbdff754c9b88e8625f5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/hunters_bow.png.import",
+    "sha256": "c160cc1cfdd9172df7a16bf67136d36cd10d52bfd31ed7e3520af5663c8e3d90"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/iron_boar_crossbow.png",
+    "sha256": "8372de072470f9b83d2388649c421bd405adbb12e0af6b6a0e2cb1bf7e43b780"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/iron_boar_crossbow.png.import",
+    "sha256": "bc3015f0550417a3a46f849ffca03ec2627508874abc80b04ebc807583303bb0"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/orrery_crossbow.png",
+    "sha256": "08ec81f17f177d11bd94658b08aae8288b7ce649321947aa2a0150faa92ce897"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/orrery_crossbow.png.import",
+    "sha256": "4bd7d4bd6e559661e55fda2ec0ec334138499048ddf39f63f52bd57ea11e56ae"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/raven_wing_crossbow.png",
+    "sha256": "f692ff6c6d5172f8d8c3f126096f9dc54b53c23fa01fc7d0b13847d7ca8c2e7b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/raven_wing_crossbow.png.import",
+    "sha256": "42641298d7800a0e28169a147c8aea8f7e2ede2a69d6d2306fc118a69d309027"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/recurve_bow.png",
+    "sha256": "e435c54c5c7810a1eed809b51206d401a6e2ead410ae97d3e5b6e4d11a7ca1e1"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/repeater_crossbow.png",
+    "sha256": "eeb049157afba70e0b9866d504f259f8f99db23bb56082b65c2f3c4b0b975d95"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/repeater_crossbow.png.import",
+    "sha256": "1db2efdcf9e8812a09f4ab603305b61553ac40111eb491f1a2ab813326d5d168"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/shortbow.png",
+    "sha256": "76f82617f408d33b90a758281aa1d2d43c9cb46a9e7d9d4f98e099c96480e7ce"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/siege_greatbow.png",
+    "sha256": "e038123a24b72bc63f213fa4462ba2d3c4a69309756669bbfe676ab0f38fcee2"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/stormstring_greatbow.png",
+    "sha256": "bc0ec79982b9b5ed0a70c4029c5e622c0083096d38d4dad605f7a7e6edbf9449"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/sun_dial_crossbow.png",
+    "sha256": "06321cab6b204e90214534f20bcdb8aadc97ff4247c2638295e677718c67a36c"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/sun_dial_crossbow.png.import",
+    "sha256": "8e6493bd2564747d94d299098b6df6e39c634f2979c1d6a5397b90bb8ea8f652"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/thornback_bow.png",
+    "sha256": "d88fbfad9c5d3694c227d3b0694531e8473371eb1a46fbdff754c9b88e8625f5"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/twin_rail_crossbow.png",
+    "sha256": "168acc3ee741aa36b100a6cced8ef83a83ce2e3addb8ef9c61ae18fa9f71b6ff"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/twin_rail_crossbow.png.import",
+    "sha256": "a164ee92fd7bfadc05ab70156cabb946b784e69e9b91f4c3b101fe995a06ef05"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/warden_longbow.png",
+    "sha256": "bc0ec79982b9b5ed0a70c4029c5e622c0083096d38d4dad605f7a7e6edbf9449"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/warden_longbow.png.import",
+    "sha256": "09528c5f78897b9f2642bdd27176792e55bc414500ac3a929ed5febcb512af0b"
+  },
+  {
+    "path": "game/assets/ui/icons/items3d/yew_longbow.png",
+    "sha256": "591ba04f30c977eb29dffd29d6522eab8d5658eb5769f0623fd78b316a2554e6"
+  },
+  {
+    "path": "game/src/actors/boss_set_visuals.gd",
+    "sha256": "9c014336c70fd2eb2f32ec0e5f13c1ded6b88115591796f65f3cd0f920fd60c9"
+  },
+  {
+    "path": "game/src/actors/boss_set_visuals.gd.uid",
+    "sha256": "3512c588896bb1006caa50a70854f3bf238233e86de207faefb94b03a3fbe515"
+  },
+  {
+    "path": "game/src/actors/character_visual.gd",
+    "sha256": "47abb7e81c16638a71636ff7699789597421149202e818e96a4d209f3cd64595"
+  },
+  {
+    "path": "game/src/actors/crossbow_animations.gd",
+    "sha256": "ec8a64f921fe53b9b835152f79e48cba05305c7a2bf8b32a2c62c21b242883cb"
+  },
+  {
+    "path": "game/src/actors/crossbow_animations.gd.uid",
+    "sha256": "6e518a747c701782e9ccd63b5fddb1a9d8ec32f1c3275951105bebc26394b164"
+  },
+  {
+    "path": "game/src/actors/crossbow_pose_data.gd",
+    "sha256": "2c4dc640176085ea3c68a71093aa0d494a84f6199139c4d1cabb8d51f2a7b9e6"
+  },
+  {
+    "path": "game/src/actors/crossbow_pose_data.gd.uid",
+    "sha256": "03832accfd2a5fbe103647bbec140fc742da9817f4e063e09cc12066becd8c10"
+  },
+  {
+    "path": "game/src/actors/player/player.gd",
+    "sha256": "78825f68f606c54a6d643357bad60302380f8424aa8657e84ecd3a859f43252f"
+  },
+  {
+    "path": "game/src/actors/tempo/tempo.gd",
+    "sha256": "9ab2e588a8337c8b268c793193ccf466134edaae2e9534404a77b98ec174c674"
+  },
+  {
+    "path": "game/src/autoload/loot.gd",
+    "sha256": "7ae4b9aae88f8388fcc500734c7a7bde7ca573d186bde90d8a70a921f583c027"
+  },
+  {
+    "path": "game/src/combat/class_passives.gd",
+    "sha256": "20111a767ce0ff49e2c1d7c8154edbde1f081bcef82c8066c21e7dbaf10d5271"
+  },
+  {
+    "path": "game/src/combat/projectile.gd",
+    "sha256": "02333dd3d29a10b459fbc11e407988d793e894b5cf553efa99d2c7fb6f0ec65e"
+  },
+  {
+    "path": "game/src/core/cheats.gd",
+    "sha256": "8f868abbdd8ccfeead8c6bd5030b1b0b959fd19b25451f8b959990b0aa798ec1"
+  },
+  {
+    "path": "game/src/core/hero_data.gd",
+    "sha256": "c9ffa851a3f3f8d9872d4c0542b34eae5c6adb66b2ba0096f69940603501e0d8"
+  },
+  {
+    "path": "game/src/core/items/equipment.gd",
+    "sha256": "042bb00c4520f82ae738d51eff62520ff01521eb5c230298257d5bc7aaad68a6"
+  },
+  {
+    "path": "game/src/core/items/item_base_def.gd",
+    "sha256": "d4d6c65a526428e02dce3e19bed8d8f628bd2bf2f6ec91985ba26cea618967fc"
+  },
+  {
+    "path": "game/src/core/items/item_generator.gd",
+    "sha256": "8f7ed7a04ec4d04d5adb63a0d8a61d678043cc032b4ad81e2b2740695e90f42e"
+  },
+  {
+    "path": "game/src/core/stats/stat_calculator.gd",
+    "sha256": "1920bd4a24106d3b97bb3030502d4764401929f22d93863595cff63afbf0bf78"
+  },
+  {
+    "path": "game/src/core/tempos/tempo_gacha.gd",
+    "sha256": "7b333477a49cf6b11bb934fdd507ec28e6a659cddd2c4a14d0239cd53452b0be"
+  },
+  {
+    "path": "game/src/core/tempos/tempo_rules.gd",
+    "sha256": "937d4050f9f5e20e7d3725b1572aaaf88d3f03dc78577ea2817a10eb972a4497"
+  },
+  {
+    "path": "game/src/data/anim_defaults.gd",
+    "sha256": "8e15d5af9719b3fb8cfe7115c2f3e601b2c15edb6b143da59a18a4add28bf0d9"
+  },
+  {
+    "path": "game/src/data/data_boss_sets.gd",
+    "sha256": "60e8ba771f2a723e6986fd358883ea1261c96e0e6d49dc6314e15ec2df526caa"
+  },
+  {
+    "path": "game/src/data/data_boss_sets.gd.uid",
+    "sha256": "a0b449ea0975938725553c4f41fd031b9a2316ca58243e1a74e3d440d4f67ddd"
+  },
+  {
+    "path": "game/src/data/data_class_rework.gd",
+    "sha256": "dac395e840369ef2b16acfe2c763c3c0567447bbe50f131b71adbaeaac8fac9c"
+  },
+  {
+    "path": "game/src/data/data_classes.gd",
+    "sha256": "96c79ba5536f60f35e2a4bc9216df9473d7151b46866461e893c92f0346a5f58"
+  },
+  {
+    "path": "game/src/data/data_crafting.gd",
+    "sha256": "b59a125a5b3a6c269b72900bb6d341e2be20d7c0dc3dcfcd1de4fad3a7c14dff"
+  },
+  {
+    "path": "game/src/data/data_items.gd",
+    "sha256": "b8fc8f4dc12f12bbfc52abef34b9f4587b6a941e8c56cf885a61879bcca53772"
+  },
+  {
+    "path": "game/src/data/data_items_artisan.gd",
+    "sha256": "fe6a4257f8bd4c88eeb73930ee672720dbba33369ca07081b36e186ec92d25da"
+  },
+  {
+    "path": "game/src/data/data_items_artisan.gd.uid",
+    "sha256": "7f86995f46a55aec43447f7684084bfcccaa51e3099b74002c999f6f5711ea3d"
+  },
+  {
+    "path": "game/src/data/data_shops.gd",
+    "sha256": "7167db45cd131301ffb39e941e4a5277d19a85ba2020b7a5dfb4f20401661d2a"
+  },
+  {
+    "path": "game/src/data/data_talents_ext.gd",
+    "sha256": "b318fb0f3865a1635d347b60e6d182ff011ac6b0854697621eaf870ed3a26a3f"
+  },
+  {
+    "path": "game/src/data/data_tempos.gd",
+    "sha256": "f73f8dfd84dd7f6107507b348b5e283a157489ca8a10017e300bfe8643d6bf00"
+  },
+  {
+    "path": "game/src/data/data_weapons.gd",
+    "sha256": "211d2ca78f4d320b2305498081e7f4abe3e7a2d5087f8464c3cd92783ed2c2cd"
+  },
+  {
+    "path": "game/src/net/net_avatar.gd",
+    "sha256": "abe55f358e034ef1c16b1934dced9f825d559da8195c81d24d216953a4b5cd28"
+  },
+  {
+    "path": "game/src/skills/skill_runner.gd",
+    "sha256": "67325f1210a6dbb8fe9dc79ef7092108c653e1e7c9e2eb16b410be23c6dcc80f"
+  },
+  {
+    "path": "game/src/ui/widgets/character_preview.gd",
+    "sha256": "68ab9dd6eac2a0381f61db224aaf5701dbd846cc2b460da9fb6599951cd94d96"
+  },
+  {
+    "path": "game/src/ui/widgets/tips.gd",
+    "sha256": "0b0237d8d78eeb1bcd57fc4e624c9905acb83b2cc2d8434bbf9f0557554ba28d"
+  },
+  {
+    "path": "game/src/ui/windows/guide_window.gd",
+    "sha256": "c792848aba1821d15042745804c29cba61ccd542977f8ce597075ac90cf5cb26"
+  },
+  {
+    "path": "game/src/ui/windows/tempo_window.gd",
+    "sha256": "20ff413ef4a88903c61d4809e60a34c6781309b855fbeae878b5992d0ad008ad"
+  },
+  {
+    "path": "game/tests/tools/build_boss_set_art.gd",
+    "sha256": "e7635d6cabdb617e215868fd090e32b98b035a1aed2ea5a75ac604f5a7fb6e64"
+  },
+  {
+    "path": "game/tests/tools/build_boss_set_art.gd.uid",
+    "sha256": "bfcaeed91ca47fb628738db4ad2d10a4772be5821753de9894b173331fd46b3b"
+  },
+  {
+    "path": "game/tests/tools/build_boss_set_art.tscn",
+    "sha256": "ef8230a085ad362b9a54419267496a2dd4cc5b9df2f456dbd292d614c74f96b2"
+  },
+  {
+    "path": "game/tests/tools/capture_armory_integration.gd",
+    "sha256": "677412298abdb73c339a85c551f03c74e724bb085723273e643f8a10b7a2fb57"
+  },
+  {
+    "path": "game/tests/tools/capture_armory_integration.gd.uid",
+    "sha256": "00aa7c531e3ed911744fb51b127d89b2884e54e90f7e4396af27cca2ba9b9319"
+  },
+  {
+    "path": "game/tests/tools/capture_armory_integration.tscn",
+    "sha256": "7d33a0a79f65697b35f14c5c272a4df8799984c9318357072d6f1f02204e7cfa"
+  },
+  {
+    "path": "game/tests/tools/capture_artisan_weapons.gd",
+    "sha256": "60cc98c0621e86dcd54124cd9edab21eb1a0b3194dffdc003c6307a7ed986778"
+  },
+  {
+    "path": "game/tests/tools/capture_artisan_weapons.gd.uid",
+    "sha256": "3a35e0614db2a3ea341f9e770009b003afb6c94783952974f5ec4b7bfb28e97b"
+  },
+  {
+    "path": "game/tests/tools/capture_artisan_weapons.tscn",
+    "sha256": "974d322e208dac1b66c2738becdecab7e15daf00d5c0f2e757ddcd95f6050f00"
+  },
+  {
+    "path": "game/tests/tools/capture_boss_sets.gd",
+    "sha256": "2663a16bbedddeb7565188433e29565f6f8875479d1a6f323fda977f18a8dd09"
+  },
+  {
+    "path": "game/tests/tools/capture_boss_sets.gd.uid",
+    "sha256": "2b7153604dd20239f5185a058f0bba765b90b6e107ed1e02e66ef83cc79c4733"
+  },
+  {
+    "path": "game/tests/tools/capture_boss_sets.tscn",
+    "sha256": "4c12508f9812521129ec578345aea2f74f6334de8251a36c2b4795bdc79427b3"
+  },
+  {
+    "path": "game/tests/tools/capture_set_details.gd",
+    "sha256": "433e9e7028be718f81899702b65455826da0e5cf1269d382a8e1ef3667b394b4"
+  },
+  {
+    "path": "game/tests/tools/capture_set_details.gd.uid",
+    "sha256": "4abc51efbbe8bbddc3e5241ec4787445d0b41803b36fc02429657bac94db3506"
+  },
+  {
+    "path": "game/tests/tools/capture_set_details.tscn",
+    "sha256": "734d1b9ef360a0cd7de6f71fab362dedeee819f4b568daf7064bff233d9c74e1"
+  },
+  {
+    "path": "game/tests/tools/capture_tempo_layout.gd",
+    "sha256": "2370130c9cb2c284f49872cc37e75a6efca854de3442b83d383a93371f24ffed"
+  },
+  {
+    "path": "game/tests/tools/capture_tempo_layout.gd.uid",
+    "sha256": "64936972d6e88f68393377dc9e7fef74d23d11f5f0976f06e6d0d1b6b7b551fd"
+  },
+  {
+    "path": "game/tests/tools/capture_tempo_layout.tscn",
+    "sha256": "84479f8754db110781d11f41e663b15d0ab2b6ecd8731096507e562c404000f6"
+  },
+  {
+    "path": "game/tests/unit/test_armory_cheats.gd",
+    "sha256": "2c8ae3980cb12e6e59d46a1581405a2ad55776549f71ffc13064e062f16c0347"
+  },
+  {
+    "path": "game/tests/unit/test_armory_cheats.gd.uid",
+    "sha256": "0f05ac95a3630e3c27ee117516a673bec2b7b7184d6d3f785bd822c16ebaaccb"
+  },
+  {
+    "path": "game/tests/unit/test_artisan_weapons.gd",
+    "sha256": "0c8b8d2bdd057135142c71530b968ac3f24d7ffd768e2e47b2121c98b1cf38ae"
+  },
+  {
+    "path": "game/tests/unit/test_artisan_weapons.gd.uid",
+    "sha256": "1ed7932b1b5cb99470aa749b70ff02266d08069b7ee238eaacf86bce28341a27"
+  },
+  {
+    "path": "game/tests/unit/test_boss_set_network.gd",
+    "sha256": "193a24acd26cab434c51a720b2764880d12975ecb072f4faaaab948fa3c8d4a2"
+  },
+  {
+    "path": "game/tests/unit/test_boss_set_network.gd.uid",
+    "sha256": "928868d96a3d92f4052810c37fd33a44001abbcb8ddecc35c57682256b5609a5"
+  },
+  {
+    "path": "game/tests/unit/test_boss_set_visuals.gd",
+    "sha256": "86c3cf7daf83bc737244d70764eab58832b95d3e78721e9deacf00932e1cdafa"
+  },
+  {
+    "path": "game/tests/unit/test_boss_set_visuals.gd.uid",
+    "sha256": "cf4783104ca83ef64a133b8a16910388c7d8dbbecacb1ca1a599ed8412f94a22"
+  },
+  {
+    "path": "game/tests/unit/test_boss_sets.gd",
+    "sha256": "eeb0d70e672816d5ce26966fb7b6f4ea396f6584e52d13ac1bfac45aa2595de0"
+  },
+  {
+    "path": "game/tests/unit/test_boss_sets.gd.uid",
+    "sha256": "5bf1f8a15a7fc9cef349a8b7d1e2ca0fee7750a143213547a3318f521bf52d82"
+  },
+  {
+    "path": "game/tests/unit/test_chat.gd",
+    "sha256": "ab4f41f9c15e2acd7bb13e2be21ef0947e5a206d6afc7df4215e18d51833adde"
+  },
+  {
+    "path": "game/tests/unit/test_crossbow_pose.gd",
+    "sha256": "b3419fd829af60dfcbca476527f4bff8d3fbe521c8518951e91f2c3ad405b2d9"
+  },
+  {
+    "path": "game/tests/unit/test_crossbow_pose.gd.uid",
+    "sha256": "f7552d0b2214bad0a11e89c619e464fce494c059ce1ae7fe309b9560ce7f1aee"
+  },
+  {
+    "path": "game/tests/unit/test_crossbows.gd",
+    "sha256": "df21caa1c75e8f29f15959d7f0f03214ba55d84428e8cdb202e9596788bf8c10"
+  },
+  {
+    "path": "game/tests/unit/test_crossbows.gd.uid",
+    "sha256": "b3b120a2a519dfe704814230216d5ae5170dc6a35985a20bc07bf0d1ce514172"
+  },
+  {
+    "path": "game/tests/unit/test_dungeon_growth.gd",
+    "sha256": "05c4f03c980f6927344ab8bdda413b5b793e8428d1b1e929d4f9d67979dbc209"
+  },
+  {
+    "path": "game/tests/unit/test_tempo_layout.gd",
+    "sha256": "9f4a98260492e6146d9fa4de5af945b0f6daa5ef3d7ce31d0fe9780ea4bcc9fa"
+  },
+  {
+    "path": "game/tests/unit/test_tempo_layout.gd.uid",
+    "sha256": "0dd60ab16ad24f395f0cb0cbc96ec088aae1f0087e97b300df7386728e782b2f"
+  },
+  {
+    "path": "tools/blender/characters/crossbow_poses.py",
+    "sha256": "685d01dc9d78ed09da4d35011606c5e3676689c1d6ae0249da8c93207af49855"
+  },
+  {
+    "path": "tools/blender/items/artisan_catalog.py",
+    "sha256": "116107e1f2535c22a849f6584752713a346170c4c186c89f5a9cb3edd52721b2"
+  },
+  {
+    "path": "tools/blender/items/artisan_manifest.json",
+    "sha256": "8cdf7f4eef9cdb98ed5164fd181eb95f5139d9ba4242ae8243126596644b2c03"
+  },
+  {
+    "path": "tools/blender/items/artisan_weapons.py",
+    "sha256": "871dc979368f78819b75ccad790ea5d84eb56437dcb9a2f5b4ec6dcbcb8b36b4"
+  },
+  {
+    "path": "tools/blender/items/boss_weapons.py",
+    "sha256": "339fe283ce11f9a472e0d8aae71caa8b8216f6ed3451f675173a6ad1bae69081"
+  },
+  {
+    "path": "tools/blender/items/build_artisan.py",
+    "sha256": "323884da10ed464605dd82ddf38f880e82623ae25940d58df692a092809c2316"
+  },
+  {
+    "path": "tools/blender/items/build_items.py",
+    "sha256": "4d0b37c087d95e3845e5ef826a68ad09d309286589dab98242edf0e0aea52c9c"
+  }
+]

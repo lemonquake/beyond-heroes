@@ -1,0 +1,81 @@
+{
+  "checks": 2414,
+  "elapsed_ms": 37995,
+  "engine": "4.7.2-stable (official)",
+  "failures": [
+    "test_bh016.test_every_node_reaches_level_25: knight_skills.steadfast remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: knight_skills.damage_return remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: knight_skills.debuff_regen remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: mage_skills.arcane_arts remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: mage_skills.gravity_pull remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: mage_skills.spike_tentacle remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: mage_skills.mana_siphon remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: mage_skills.dark_arts remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: ranger_skills.knee_shot remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: ranger_skills.split_shot remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.double_attack remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.paralyzing_attack remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodsucker remembers its old cap (25)",
+    "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodcurse remembers its old cap (25)",
+    "test_bh019.test_lape_offers_three_licensed_class_pieces: ranger: three offers — expected 3, got 1",
+    "test_bh019.test_lape_offers_three_licensed_class_pieces: shadowblade: three offers — expected 3, got 1",
+    "test_bh019.test_lape_trade_closes: aborted before done() (script error?)",
+    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+    "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (167 -> 180)",
+    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+    "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+  ],
+  "suites": {
+    "test_bh016.gd": {
+      "checks": 1452,
+      "failures": [
+        "test_bh016.test_every_node_reaches_level_25: knight_skills.steadfast remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: knight_skills.damage_return remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: knight_skills.debuff_regen remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: mage_skills.arcane_arts remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: mage_skills.gravity_pull remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: mage_skills.spike_tentacle remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: mage_skills.mana_siphon remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: mage_skills.dark_arts remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: ranger_skills.knee_shot remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: ranger_skills.split_shot remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.double_attack remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.paralyzing_attack remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodsucker remembers its old cap (25)",
+        "test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodcurse remembers its old cap (25)"
+      ],
+      "ms": 1539.935,
+      "tests": 15
+    },
+    "test_bh019.gd": {
+      "checks": 364,
+      "failures": [
+        "test_bh019.test_lape_offers_three_licensed_class_pieces: ranger: three offers — expected 3, got 1",
+        "test_bh019.test_lape_offers_three_licensed_class_pieces: shadowblade: three offers — expected 3, got 1",
+        "test_bh019.test_lape_trade_closes: aborted before done() (script error?)"
+      ],
+      "ms": 3029.051,
+      "tests": 11
+    },
+    "test_enemies2.gd": {
+      "checks": 598,
+      "failures": [
+        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+        "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (167 -> 180)",
+        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
+        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+        "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
+        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+      ],
+      "ms": 32589.309,
+      "tests": 19
+    }
+  },
+  "timestamp": "2026-09-30T04:09:27"
+}

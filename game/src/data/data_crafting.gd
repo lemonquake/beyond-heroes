@@ -98,7 +98,7 @@ static func station_names(ids: Array) -> String:
 const WEAPON_VARIANTS := [
 	["Sword", &"sword"], ["Greatsword", &"greatsword"], ["Axe", &"axe"], ["Great Axe", &"greataxe"], ["Spear", &"spear"],
 	["Javelin", &"javelin"], ["Club", &"club"], ["Dagger", &"dagger"], ["Claw", &"claw"], ["Knuckles", &"knuckles"],
-	["Bow", &"bow"], ["Staff", &"staff"], ["Wand", &"wand"],
+	["Bow", &"bow"], ["Crossbow", &"crossbow"], ["Staff", &"staff"], ["Wand", &"wand"],
 ]
 const ARMOR_VARIANTS := [
 	["Helm", [&"helm"]], ["Body Armor", [&"armor"]], ["Inner Garment", [&"inner_garment"]], ["Gloves", [&"gloves"]],
@@ -238,8 +238,8 @@ static func salvage_yield(it: ItemInstance) -> Array:
 	var b := it.base
 	match b.category:
 		&"weapon":
-			if b.weapon_type in [&"bow", &"staff", &"wand"]:
-				out.append([&"beast_hide" if b.weapon_type == &"bow" else &"stolen_linen", bulk])
+			if b.weapon_type in [&"bow", &"crossbow", &"staff", &"wand"]:
+				out.append([&"beast_hide" if b.weapon_type in [&"bow", &"crossbow"] else &"stolen_linen", bulk])
 				out.append([&"iron_shard", maxi(1, bulk - 1)])
 			else:
 				out.append([&"iron_shard", bulk + 1])

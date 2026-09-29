@@ -372,7 +372,7 @@ static func random_consumable(rng: RandomNumberGenerator, ilvl: int) -> ItemBase
 static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool, class_hint := &"", fit_chance := CLASS_FIT_CHANCE) -> ItemBaseDef:
 	var pool := []
 	for b in DB.item_bases.values():
-		if b.drop_level > ilvl:
+		if b.drop_level > ilvl or b.boss_exclusive:
 			continue
 		if want_set and b.set_id != &"":
 			pool.append(b)

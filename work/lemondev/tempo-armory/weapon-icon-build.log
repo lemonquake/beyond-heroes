@@ -1,0 +1,106 @@
+A:\Python\beyond-heroes\tools\blender\items\build_items.py:149: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:04.172  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_heron_wing_bow.png'
+00:04.500  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_antler_crown_bow.png'
+00:04.812  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_serpent_coil_bow.png'
+00:05.109  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_sunwheel_bow.png'
+00:05.422  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_ironleaf_bow.png'
+00:05.734  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_twin_crescent_bow.png'
+00:06.062  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_dragon_rib_bow.png'
+00:06.344  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_tide_harp_bow.png'
+00:06.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_crystal_spire_bow.png'
+00:06.969  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_clockwork_cam_bow.png'
+00:07.265  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\ashwood_crossbow.png'
+00:07.562  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\crane_lever_crossbow.png'
+00:07.875  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\iron_boar_crossbow.png'
+00:08.203  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\twin_rail_crossbow.png'
+00:08.515  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\repeater_crossbow.png'
+00:08.844  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\raven_wing_crossbow.png'
+00:09.156  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\sun_dial_crossbow.png'
+00:09.484  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\frost_fork_crossbow.png'
+00:09.828  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\dragon_jaw_crossbow.png'
+00:10.187  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\orrery_crossbow.png'
+00:10.500  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_gull_hook_dagger.png'
+00:10.812  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_scorpion_tail_dagger.png'
+00:11.125  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_glass_leaf_dagger.png'
+00:11.469  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_trident_dirk.png'
+00:11.797  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_crescent_fang_dagger.png'
+00:12.094  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_serpent_kris_dagger.png'
+00:12.359  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_sawback_dagger.png'
+00:12.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_orchid_fan_dagger.png'
+00:12.984  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_twin_fang_dagger.png'
+00:13.328  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_star_compass_dagger.png'
+00:13.656  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_heron_estoc.png'
+00:13.984  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_harbor_basket_sword.png'
+00:14.312  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_copperleaf_sword.png'
+00:14.640  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_flame_ribbon_sword.png'
+00:14.969  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_moon_hook_sword.png'
+00:15.297  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_split_crown_sword.png'
+00:15.609  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_dragon_tooth_sword.png'
+00:15.937  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_tide_scimitar.png'
+00:16.250  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_prism_greatblade.png'
+00:16.547  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_astral_ring_sword.png'
+00:16.844  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_raven_beak_axe.png'
+00:17.187  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_anchor_beard_axe.png'
+00:17.484  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_crescent_moon_axe.png'
+00:17.781  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_boar_cleaver_axe.png'
+00:18.109  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_twin_petal_axe.png'
+00:18.437  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_dragon_talon_axe.png'
+00:18.750  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_sun_disc_axe.png'
+00:19.031  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_frost_pick_axe.png'
+00:19.312  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_gothic_window_axe.png'
+00:19.594  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\artisan_thunder_fork_axe.png'
+[icon] artisan_heron_wing_bow
+[icon] artisan_antler_crown_bow
+[icon] artisan_serpent_coil_bow
+[icon] artisan_sunwheel_bow
+[icon] artisan_ironleaf_bow
+[icon] artisan_twin_crescent_bow
+[icon] artisan_dragon_rib_bow
+[icon] artisan_tide_harp_bow
+[icon] artisan_crystal_spire_bow
+[icon] artisan_clockwork_cam_bow
+[icon] ashwood_crossbow
+[icon] crane_lever_crossbow
+[icon] iron_boar_crossbow
+[icon] twin_rail_crossbow
+[icon] repeater_crossbow
+[icon] raven_wing_crossbow
+[icon] sun_dial_crossbow
+[icon] frost_fork_crossbow
+[icon] dragon_jaw_crossbow
+[icon] orrery_crossbow
+[icon] artisan_gull_hook_dagger
+[icon] artisan_scorpion_tail_dagger
+[icon] artisan_glass_leaf_dagger
+[icon] artisan_trident_dirk
+[icon] artisan_crescent_fang_dagger
+[icon] artisan_serpent_kris_dagger
+[icon] artisan_sawback_dagger
+[icon] artisan_orchid_fan_dagger
+[icon] artisan_twin_fang_dagger
+[icon] artisan_star_compass_dagger
+[icon] artisan_heron_estoc
+[icon] artisan_harbor_basket_sword
+[icon] artisan_copperleaf_sword
+[icon] artisan_flame_ribbon_sword
+[icon] artisan_moon_hook_sword
+[icon] artisan_split_crown_sword
+[icon] artisan_dragon_tooth_sword
+[icon] artisan_tide_scimitar
+[icon] artisan_prism_greatblade
+[icon] artisan_astral_ring_sword
+[icon] artisan_raven_beak_axe
+[icon] artisan_anchor_beard_axe
+[icon] artisan_crescent_moon_axe
+[icon] artisan_boar_cleaver_axe
+[icon] artisan_twin_petal_axe
+[icon] artisan_dragon_talon_axe
+[icon] artisan_sun_disc_axe
+[icon] artisan_frost_pick_axe
+[icon] artisan_gothic_window_axe
+[icon] artisan_thunder_fork_axe
+[build_items] 50 items done in 17.0s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

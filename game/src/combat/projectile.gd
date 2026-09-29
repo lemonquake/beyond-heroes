@@ -27,6 +27,7 @@ var on_hit: Callable               # func(target, result, point)
 var on_end: Callable               # func(point, by_wall)
 var hit_sound := &""
 var body: Node3D
+var projectile_look := "orb"
 
 var _travelled := 0.0
 var _hit := {}
@@ -53,6 +54,7 @@ static func spawn(parent: Node, from: Vector3, dir: Vector3, speed: float, p_req
 	return p
 
 func _build_body(look: String) -> void:
+	projectile_look = look
 	var c := Elements.color(element)
 	if look.begins_with("model:"):
 		body = _model_body(look.substr(6), c)
@@ -60,6 +62,9 @@ func _build_body(look: String) -> void:
 		match look:
 			"arrow":
 				body = VFXLib.arrow_body()
+			"bolt":
+				body = VFXLib.arrow_body()
+				body.scale = Vector3(1.35, 1.35, 0.60)
 			"none":
 				body = Node3D.new()
 			_:

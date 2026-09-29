@@ -28,6 +28,8 @@ extends Resource
 @export_multiline var flavor := ""
 @export var consumable_effect := {}       # {"heal": 0.35} etc.
 @export var set_id: StringName = &""       # item set this base belongs to (set pieces drop at a fixed rarity)
+@export var boss_exclusive := false       # dedicated level-30+ boss collection; never enters generic rewards
+@export var equip_slots: Array = []       # optional exact slot restriction for distinct left/right set pieces
 @export var unique_name := ""             # named unique (fixed name, fixed rarity, fixed powers)
 @export var fixed_rarity := -1            # >= 0 forces the rarity when generated
 @export var fixed_powers: Array = []      # power ids always present on this base (uniques)
@@ -38,6 +40,9 @@ extends Resource
 @export_multiline var lore := ""
 
 const ITEM_MODEL := "res://assets/items/%s.glb"
+
+func equipment_slots() -> Array:
+	return equip_slots if not equip_slots.is_empty() else BH.CATEGORY_SLOTS.get(category, [])
 
 func is_weapon() -> bool:
 	return category == &"weapon"

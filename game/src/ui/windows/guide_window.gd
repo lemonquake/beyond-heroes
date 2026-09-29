@@ -8,7 +8,7 @@ const CONTROLS := [
 	["Moving and fighting", [
 		[["move_up", "move_left", "move_down", "move_right"], "Move (you face the cursor)"],
 		[["primary"], "Attack. Hold to keep the chain going; click an item on the ground to pick it up"],
-		[["secondary"], "Heavy attack (hold to charge with a greatsword, spear or bow)"],
+		[["secondary"], "Heavy attack (hold to charge with a greatsword, spear, bow or crossbow)"],
 		[["attack_in_place"], "Hold to attack without moving"],
 		[["dodge"], "Dodge roll: a moment where nothing can hit you"],
 		[["guard"], "Guard with a shield"],
@@ -113,6 +113,9 @@ func _dungeons() -> void:
 	_heading("Dungeons as you grow")
 	_para("At Level 25, a passage opens below each defeated dungeon lord. More floors open at levels 35 and 45. Enemy levels catch up gradually over levels 25 to 35, and themed reinforcements join the camps. At Level 50, larger packs and elites with three abilities arrive; further floors open at 55 and 60. Your level is recorded when you enter: leveling inside never changes your current visit.")
 	_para("The added floors remain active during the original dungeon's recovery. Each has a named guardian among its Seal Keepers. Clear that pack to open its treasure; guardians can drop a relic for your class. New weapons have different shapes, attack speeds, elements and bonuses. Deeper encounters and chests provide class-specific equipment. Broken seals stay open, but treasure chests still need time to refill.")
+	_heading("Special boss equipment sets")
+	_para("Boss encounters at level 30 or above drop one piece from a random special set, alongside their ordinary loot. There are fifteen complete sets, including Dragonforge, Truth of Raikuru, Crimson Glory, Grievance of the Fairy and Wailing Mistress. Each has its own worn appearance, weapons and set bonuses.")
+	_para("Pieces you already own increase the chance of finding missing pieces from that set. Rewards stay random, so you can still find other sets or duplicates. Keep collecting through returning dungeon Usurpers and named Depth Guardians as well as dungeon lords. Hover over a piece to see the full set and its bonuses.")
 	_heading("Relic Caches and named gear")
 	_para("Chests, champions and dungeon lords drop Relic Caches — Worn, Gilded and Radiant. Open one from your bag and its gear is revealed card by card. Every Licensed-or-better piece carries a name of its own and an epithet (no two alike), and stars from ★ to ★★★★★ for how close its rolls came to perfect. Some carry a relic passive: gold, experience, regeneration, life on kill, potions, thorns, damage to champions, Soul Embers or stronger Tempos.")
 	_heading("Summoning Tempos")

@@ -1,0 +1,46 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_loot.gd — 17 tests, 3649 checks, 42 failures (20527.1 ms)
+  FAIL test_loot.test_boots_raise_move_speed: boss_dragonforge_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_dragonforge_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_truth_of_raikuru_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_truth_of_raikuru_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_crimson_glory_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_crimson_glory_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_grievance_of_the_fairy_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_grievance_of_the_fairy_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_wailing_mistress_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_wailing_mistress_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_winter_court_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_winter_court_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_sunken_crown_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_sunken_crown_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_thunder_abbot_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_thunder_abbot_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_ashfall_pilgrim_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_ashfall_pilgrim_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_starfall_hunter_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_starfall_hunter_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_gale_nomad_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_gale_nomad_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_obsidian_oath_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_obsidian_oath_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_pale_requiem_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_pale_requiem_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_serpent_veil_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_serpent_veil_boots_2 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_eclipse_dancer_boots_1 grants movement speed
+  FAIL test_loot.test_boots_raise_move_speed: boss_eclipse_dancer_boots_2 grants movement speed
+  FAIL test_loot.test_weapon_roster: artisan_astral_ring_sword: attack speed + weight differ from artisan_heron_estoc
+  FAIL test_loot.test_weapon_roster: boss_crimson_glory_main_weapon: attack speed + weight differ from iron_longsword
+  FAIL test_loot.test_weapon_roster: artisan_boar_cleaver_axe: attack speed + weight differ from thunderbeak_axe
+  FAIL test_loot.test_weapon_roster: artisan_thunder_fork_axe: attack speed + weight differ from artisan_raven_beak_axe
+  FAIL test_loot.test_weapon_roster: boss_dragonforge_main_weapon: attack speed + weight differ from artisan_frost_pick_axe
+  FAIL test_loot.test_weapon_roster: artisan_star_compass_dagger: attack speed + weight differ from artisan_gull_hook_dagger
+  FAIL test_loot.test_weapon_roster: boss_pale_requiem_main_weapon: attack speed + weight differ from rondel_dagger
+  FAIL test_loot.test_weapon_roster: boss_eclipse_dancer_main_weapon: attack speed + weight differ from boss_pale_requiem_main_weapon
+  FAIL test_loot.test_weapon_roster: artisan_dragon_rib_bow: attack speed + weight differ from yew_longbow
+  FAIL test_loot.test_weapon_roster: artisan_clockwork_cam_bow: attack speed + weight differ from artisan_heron_wing_bow
+  FAIL test_loot.test_weapon_roster: boss_grievance_of_the_fairy_main_weapon: attack speed + weight differ from artisan_dragon_rib_bow
+  FAIL test_loot.test_weapon_roster: boss_gale_nomad_main_weapon: attack speed + weight differ from boss_grievance_of_the_fairy_main_weapon
+TOTAL: 3649 checks, 42 failures

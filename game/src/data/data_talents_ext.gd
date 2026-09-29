@@ -19,8 +19,8 @@ static func ranger() -> TreeDef:
 	t.nodes = [
 		# Hawkeye
 		_n(&"r_dex", "Steady Hands", "minor", "r_dex", Vector2(1, 0), 3, [], "+3 Dexterity per rank.", {"mods": [[&"dex", F, 3]]}),
-		_n(&"r_bow", "Bowyer", "minor", "r_bow", Vector2(0, 1), 3, [&"r_dex"], "Bow and javelin attacks deal 6% increased damage per rank.",
-			{"mods": [[&"dmg_wt_bow", I, 0.06], [&"dmg_wt_javelin", I, 0.06]]}),
+		_n(&"r_bow", "Bowyer", "minor", "r_bow", Vector2(0, 1), 3, [&"r_dex"], "Bow, crossbow and javelin attacks deal 6% increased damage per rank.",
+			{"mods": [[&"dmg_wt_bow", I, 0.06], [&"dmg_wt_crossbow", I, 0.06], [&"dmg_wt_javelin", I, 0.06]]}),
 		_n(&"r_crit", "Eagle Eye", "minor", "r_crit", Vector2(2, 1), 3, [&"r_dex"], "+1.5% Critical Chance per rank.", {"mods": [[&"crit_chance", F, 0.015]]}),
 		_n(&"r_projdmg", "Fletcher", "minor", "r_bow", Vector2(1, 2), 2, [&"r_bow", &"r_crit"], "+10% projectile damage per rank.",
 			{"mods": [[&"projectile_damage", I, 0.10]]}),

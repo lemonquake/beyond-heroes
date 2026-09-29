@@ -313,7 +313,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		_std(d, agg, Elements.dmg_key(e), dterms, -0.9, INF)
 		_std(d, agg, Elements.pen_key(e), [["Elemental Penetration", pen_all]] if pen_all > 0.0 else [], 0.0, 1.0)
 		_std(d, agg, StringName("added_" + String(Elements.key(e))), [], 0.0, INF)
-	for wt in [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"club", &"dagger", &"claw", &"knuckles", &"bow", &"staff", &"wand"]:
+	for wt in [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"club", &"dagger", &"claw", &"knuckles", &"bow", &"crossbow", &"staff", &"wand"]:
 		if agg.buckets.has(StringName("dmg_wt_" + String(wt))):
 			_std(d, agg, StringName("dmg_wt_" + String(wt)), [], -0.9, INF)
 	for k in [&"damage", &"weapon_damage", &"heavy_damage", &"impact_damage", &"burn_damage", &"pen_armor", &"life_leech",

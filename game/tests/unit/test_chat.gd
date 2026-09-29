@@ -22,7 +22,9 @@ func _begin() -> void:
 	Game.player = _player
 	Game.load_map(&"sanctuary", &"waypoint")
 	_player.bind(Game.hero)
-	await host.get_tree().physics_frame
+	# Let deferred NPC ground settling finish before tests can tear the map down.
+	for i in 3:
+		await host.get_tree().physics_frame
 
 func _end() -> void:
 	for t in TempoParty.actors(host.get_tree()):
@@ -143,5 +145,39 @@ func test_chat_box_says_and_cheats() -> void:
 	chat.close()
 	ok(not chat.is_open(), "closes")
 	chat.free()
+	_end()
+	done()
+
+func test_new_cheats_through_chat_and_immediate_tempo_revival() -> void:
+	await _begin()
+	var h := Game.hero
+	var chat := ChatBox.new()
+	host.add_child(chat)
+	var gold := h.inventory.gold
+	var sp := h.progress.skill_points
+	var fp := h.progress.free_points
+	chat.submit(" ASDF ")
+	chat.submit("LOL")
+	chat.submit("jjwp")
+	eq(h.inventory.gold, gold + 50000, "asdf through chat")
+	eq(h.progress.skill_points, sp + 10, "lol through chat")
+	eq(h.progress.free_points, fp + 20, "jjwp through chat")
+	var t := TempoData.new()
+	t.uid = 9876
+	t.skills = [DataTempos.tempo_class(t.class_id).signature]
+	h.tempos.append(t)
+	TempoParty.refresh(h)
+	var old := TempoParty.actor_for(t.uid)
+	ok(old != null, "living actor spawned")
+	old.die(null)
+	ok(t.fallen, "spirit just fell and actor is still fading")
+	chat.submit("secondwind")
+	var revived := TempoParty.actor_for(t.uid)
+	ok(revived != null and revived != old and revived.alive, "replacement active immediately")
+	near(revived.hp, revived.max_hp(), 0.01, "revived actor full HP")
+	TempoParty.sync_all()
+	ok(not t.fallen, "normal save sync preserves revival")
+	chat.free()
+	await host.get_tree().process_frame
 	_end()
 	done()

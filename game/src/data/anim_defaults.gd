@@ -4,7 +4,7 @@ class_name AnimDefaults
 ## sane and consistent with the contract (light 0.45-0.75 s, finishers 0.7-0.95 s, heavies 0.9-1.4 s).
 
 const LOOPS := [&"idle", &"idle_look", &"idle_adjust", &"idle_knight", &"idle_mage", &"idle_hurt", &"idle_1h", &"idle_shield",
-	&"idle_2h", &"idle_spear", &"idle_dagger", &"idle_bow", &"idle_staff", &"idle_wand", &"idle_dual", &"idle_combat_hurt",
+	&"idle_crossbow", &"crossbow_aim", &"idle_2h", &"idle_spear", &"idle_dagger", &"idle_bow", &"idle_staff", &"idle_wand", &"idle_dual", &"idle_combat_hurt",
 	&"walk", &"run", &"walk_back", &"strafe_l", &"strafe_r", &"run_combat", &"walk_hurt", &"run_hurt", &"bow_draw_hold",
 	&"charge_hold", &"block_loop", &"cast_channel", &"whirlwind", &"launch", &"boss_charge"]
 
@@ -28,6 +28,8 @@ static func meta(n: StringName) -> Dictionary:
 		"shield_bash": return {"length": 0.7, "loop": false, "hits": [[0.2, 0.34]], "cancel_after": 0.5}
 		"charge_release": return {"length": 0.8, "loop": false, "hits": [[0.14, 0.28]], "cancel_after": 0.55}
 		"special_attack": return {"length": 1.0, "loop": false, "hits": [[0.25, 0.38], [0.55, 0.68]], "cancel_after": 0.8}
+		"crossbow_fire": return {"length": 0.85, "loop": false, "release": 0.12, "cancel_after": 0.65, "combo_window": [0.68, 0.95]}
+		"crossbow_heavy": return {"length": 1.0, "loop": false, "release": 0.2, "cancel_after": 0.78}
 		"bow_1", "bow_2": return {"length": 0.55, "loop": false, "release": 0.24, "cancel_after": 0.38, "combo_window": [0.3, 0.7]}
 		"bow_release": return {"length": 0.5, "loop": false, "release": 0.08, "cancel_after": 0.3}
 		"cast_quick": return {"length": 0.55, "loop": false, "release": 0.26, "cancel_after": 0.38}

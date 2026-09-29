@@ -1,4 +1,5 @@
 extends Node
+const BossSets = preload("res://src/data/data_boss_sets.gd")
 ## Loot and experience (autoload `Loot`): reacts to kills, awards XP, rolls drops and spawns them in the world.
 ##
 ## Drops per rank (before Magic Find):
@@ -162,7 +163,10 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 	# Set pieces and Aether uniques
 	var set_p := 0.4 if e.is_boss else (0.04 if e.is_elite else 0.002)
 	var uniq_p := 0.15 if e.is_boss else (0.015 if e.is_elite else 0.0005)
-	if rng.randf() < set_p * (1.0 + mf):
+	if BossSets.eligible(e):
+		var stored: Array = HeroVault.shared().cells if player.hero == Game.hero else []
+		drops.append(BossSets.roll(e, player.hero, rng, stored))
+	elif rng.randf() < set_p * (1.0 + mf):
 		var sb := ItemGenerator.random_special(rng, ilvl, true, cls, fit)
 		if sb:
 			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))

@@ -46,7 +46,7 @@ const CLASSES := {
 		"name": "Archer", "role": "Marksman", "model": "res://assets/characters/mage.glb", "tint": Color(0.3, 0.55, 0.4),
 		"color": Color(0.6, 1.0, 0.7), "icon": "archer", "ai": "marksman", "rig": &"mage", "grade": 1,
 		"desc": "Keeps its distance and its aim. Pierces lines of foes, rains arrows on crowds and falls back when anything gets too close.",
-		"weapons": [&"bow", &"javelin"], "sub": [], "spirit_weapon": &"bow",
+		"weapons": [&"bow", &"crossbow", &"javelin"], "sub": [], "spirit_weapon": &"bow",
 		"preferred_range": 9.0, "hp_mult": 0.9, "dodge_cooldown": 1.8,
 		"mods": [["projectile_damage", "inc", 0.15], ["crit_chance", "flat", 0.03], ["evasion", "inc", 0.15]],
 		"skills": [&"ar_pierce", &"ar_volley", &"ar_mend", &"ar_disengage", &"ar_frost", &"ar_trap"], "signature": &"ar_pierce",

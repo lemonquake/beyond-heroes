@@ -1,0 +1,306 @@
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_heron_wing_bow
+03:41:06 | INFO: Primitives created: 7
+03:41:06 | INFO: Finished glTF 2.0 export in 0.07565855979919434 s
+
+[item] artisan_heron_wing_bow         1700 tris  size 0.476 x 0.064 x 1.445
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_antler_crown_bow
+03:41:06 | INFO: Primitives created: 6
+03:41:06 | INFO: Finished glTF 2.0 export in 0.016067028045654297 s
+
+[item] artisan_antler_crown_bow       1376 tris  size 0.427 x 0.064 x 1.340
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_serpent_coil_bow
+03:41:06 | INFO: Primitives created: 8
+03:41:06 | INFO: Finished glTF 2.0 export in 0.022495746612548828 s
+
+[item] artisan_serpent_coil_bow       1704 tris  size 0.460 x 0.064 x 1.185
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_sunwheel_bow
+03:41:06 | INFO: Primitives created: 8
+03:41:06 | INFO: Finished glTF 2.0 export in 0.0285799503326416 s
+
+[item] artisan_sunwheel_bow           1844 tris  size 0.425 x 0.064 x 1.338
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_ironleaf_bow
+03:41:06 | INFO: Primitives created: 7
+03:41:06 | INFO: Finished glTF 2.0 export in 0.021565914154052734 s
+
+[item] artisan_ironleaf_bow           1700 tris  size 0.476 x 0.064 x 1.492
+03:41:06 | INFO: Starting glTF 2.0 export
+03:41:06 | INFO: Extracting primitive: artisan_twin_crescent_bow
+03:41:06 | INFO: Primitives created: 6
+03:41:06 | INFO: Finished glTF 2.0 export in 0.023014545440673828 s
+
+[item] artisan_twin_crescent_bow      1388 tris  size 0.488 x 0.064 x 1.205
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: artisan_dragon_rib_bow
+03:41:07 | INFO: Primitives created: 7
+03:41:07 | INFO: Finished glTF 2.0 export in 0.020606517791748047 s
+
+[item] artisan_dragon_rib_bow         2084 tris  size 0.476 x 0.064 x 1.425
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: artisan_tide_harp_bow
+03:41:07 | INFO: Primitives created: 6
+03:41:07 | INFO: Finished glTF 2.0 export in 0.013784170150756836 s
+
+[item] artisan_tide_harp_bow          1388 tris  size 0.459 x 0.064 x 1.568
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: artisan_crystal_spire_bow
+03:41:07 | INFO: Primitives created: 6
+03:41:07 | INFO: Finished glTF 2.0 export in 0.013677120208740234 s
+
+[item] artisan_crystal_spire_bow      1340 tris  size 0.395 x 0.065 x 1.370
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: artisan_clockwork_cam_bow
+03:41:07 | INFO: Primitives created: 7
+03:41:07 | INFO: Finished glTF 2.0 export in 0.016566038131713867 s
+
+[item] artisan_clockwork_cam_bow      2236 tris  size 0.348 x 0.071 x 1.436
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: ashwood_crossbow
+03:41:07 | INFO: Primitives created: 7
+03:41:07 | INFO: Finished glTF 2.0 export in 0.026471853256225586 s
+
+[item] ashwood_crossbow               1576 tris  size 0.717 x 0.154 x 1.041
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: crane_lever_crossbow
+03:41:07 | INFO: Primitives created: 9
+03:41:07 | INFO: Finished glTF 2.0 export in 0.01920485496520996 s
+
+[item] crane_lever_crossbow           1612 tris  size 0.599 x 0.164 x 1.211
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: iron_boar_crossbow
+03:41:07 | INFO: Primitives created: 10
+03:41:07 | INFO: Finished glTF 2.0 export in 0.023789644241333008 s
+
+[item] iron_boar_crossbow             1672 tris  size 0.816 x 0.154 x 1.051
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: twin_rail_crossbow
+03:41:07 | INFO: Primitives created: 9
+03:41:07 | INFO: Finished glTF 2.0 export in 0.023617982864379883 s
+
+[item] twin_rail_crossbow             1664 tris  size 0.678 x 0.154 x 1.151
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: repeater_crossbow
+03:41:07 | INFO: Primitives created: 9
+03:41:07 | INFO: Finished glTF 2.0 export in 0.02068614959716797 s
+
+[item] repeater_crossbow              1896 tris  size 0.618 x 0.244 x 1.041
+03:41:07 | INFO: Starting glTF 2.0 export
+03:41:07 | INFO: Extracting primitive: raven_wing_crossbow
+03:41:08 | INFO: Primitives created: 9
+03:41:08 | INFO: Finished glTF 2.0 export in 0.026528120040893555 s
+
+[item] raven_wing_crossbow            1960 tris  size 0.936 x 0.154 x 1.121
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: sun_dial_crossbow
+03:41:08 | INFO: Primitives created: 9
+03:41:08 | INFO: Finished glTF 2.0 export in 0.020231246948242188 s
+
+[item] sun_dial_crossbow              2104 tris  size 0.777 x 0.154 x 1.101
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: frost_fork_crossbow
+03:41:08 | INFO: Primitives created: 10
+03:41:08 | INFO: Finished glTF 2.0 export in 0.06653022766113281 s
+
+[item] frost_fork_crossbow            1720 tris  size 0.738 x 0.154 x 1.181
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: dragon_jaw_crossbow
+03:41:08 | INFO: Primitives created: 10
+03:41:08 | INFO: Finished glTF 2.0 export in 0.021522045135498047 s
+
+[item] dragon_jaw_crossbow            1816 tris  size 0.856 x 0.154 x 1.191
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: orrery_crossbow
+03:41:08 | INFO: Primitives created: 9
+03:41:08 | INFO: Finished glTF 2.0 export in 0.025068044662475586 s
+
+[item] orrery_crossbow                3048 tris  size 0.830 x 0.154 x 1.151
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_gull_hook_dagger
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.010327339172363281 s
+
+[item] artisan_gull_hook_dagger       1116 tris  size 0.199 x 0.060 x 0.586
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_scorpion_tail_dagger
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.014873504638671875 s
+
+[item] artisan_scorpion_tail_dagger   1432 tris  size 0.181 x 0.063 x 0.599
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_glass_leaf_dagger
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.010260820388793945 s
+
+[item] artisan_glass_leaf_dagger      1252 tris  size 0.199 x 0.054 x 0.526
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_trident_dirk
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.010987997055053711 s
+
+[item] artisan_trident_dirk           1328 tris  size 0.199 x 0.054 x 0.623
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_crescent_fang_dagger
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.011532306671142578 s
+
+[item] artisan_crescent_fang_dagger   1206 tris  size 0.184 x 0.060 x 0.582
+03:41:08 | INFO: Starting glTF 2.0 export
+03:41:08 | INFO: Extracting primitive: artisan_serpent_kris_dagger
+03:41:08 | INFO: Primitives created: 4
+03:41:08 | INFO: Finished glTF 2.0 export in 0.010027885437011719 s
+
+[item] artisan_serpent_kris_dagger    1312 tris  size 0.199 x 0.054 x 0.622
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_sawback_dagger
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.013449907302856445 s
+
+[item] artisan_sawback_dagger         1464 tris  size 0.197 x 0.059 x 0.550
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_orchid_fan_dagger
+03:41:09 | INFO: Primitives created: 5
+03:41:09 | INFO: Finished glTF 2.0 export in 0.01903533935546875 s
+
+[item] artisan_orchid_fan_dagger      1524 tris  size 0.219 x 0.059 x 0.528
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_twin_fang_dagger
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.014528512954711914 s
+
+[item] artisan_twin_fang_dagger       1048 tris  size 0.199 x 0.060 x 0.640
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_star_compass_dagger
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.014299631118774414 s
+
+[item] artisan_star_compass_dagger    1592 tris  size 0.214 x 0.054 x 0.676
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_heron_estoc
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.013136148452758789 s
+
+[item] artisan_heron_estoc            1060 tris  size 0.324 x 0.069 x 1.205
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_harbor_basket_sword
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.010487794876098633 s
+
+[item] artisan_harbor_basket_sword    1432 tris  size 0.294 x 0.065 x 1.155
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_copperleaf_sword
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.01089167594909668 s
+
+[item] artisan_copperleaf_sword       1236 tris  size 0.324 x 0.061 x 1.007
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_flame_ribbon_sword
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.013924121856689453 s
+
+[item] artisan_flame_ribbon_sword     1636 tris  size 0.324 x 0.061 x 1.223
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_moon_hook_sword
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.014142274856567383 s
+
+[item] artisan_moon_hook_sword        1202 tris  size 0.299 x 0.069 x 1.125
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_split_crown_sword
+03:41:09 | INFO: Primitives created: 4
+03:41:09 | INFO: Finished glTF 2.0 export in 0.014242410659790039 s
+
+[item] artisan_split_crown_sword      1236 tris  size 0.324 x 0.061 x 1.214
+03:41:09 | INFO: Starting glTF 2.0 export
+03:41:09 | INFO: Extracting primitive: artisan_dragon_tooth_sword
+03:41:10 | INFO: Primitives created: 4
+03:41:10 | INFO: Finished glTF 2.0 export in 0.017435550689697266 s
+
+[item] artisan_dragon_tooth_sword     1444 tris  size 0.303 x 0.061 x 1.072
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_tide_scimitar
+03:41:10 | INFO: Primitives created: 4
+03:41:10 | INFO: Finished glTF 2.0 export in 0.013506650924682617 s
+
+[item] artisan_tide_scimitar          1396 tris  size 0.294 x 0.065 x 1.026
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_prism_greatblade
+03:41:10 | INFO: Primitives created: 4
+03:41:10 | INFO: Finished glTF 2.0 export in 0.010556936264038086 s
+
+[item] artisan_prism_greatblade        952 tris  size 0.324 x 0.069 x 1.253
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_astral_ring_sword
+03:41:10 | INFO: Primitives created: 4
+03:41:10 | INFO: Finished glTF 2.0 export in 0.0159304141998291 s
+
+[item] artisan_astral_ring_sword      1592 tris  size 0.364 x 0.061 x 1.304
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_raven_beak_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.016358375549316406 s
+
+[item] artisan_raven_beak_axe         1180 tris  size 0.475 x 0.070 x 0.964
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_anchor_beard_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.016802549362182617 s
+
+[item] artisan_anchor_beard_axe       1496 tris  size 0.403 x 0.070 x 0.976
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_crescent_moon_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.018248558044433594 s
+
+[item] artisan_crescent_moon_axe      1280 tris  size 0.433 x 0.070 x 1.002
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_boar_cleaver_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.015384912490844727 s
+
+[item] artisan_boar_cleaver_axe       1524 tris  size 0.436 x 0.070 x 0.977
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_twin_petal_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.014562129974365234 s
+
+[item] artisan_twin_petal_axe         1328 tris  size 0.588 x 0.070 x 0.999
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_dragon_talon_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.016847610473632812 s
+
+[item] artisan_dragon_talon_axe       1580 tris  size 0.419 x 0.070 x 1.001
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_sun_disc_axe
+03:41:10 | INFO: Primitives created: 5
+03:41:10 | INFO: Finished glTF 2.0 export in 0.016853809356689453 s
+
+[item] artisan_sun_disc_axe           1620 tris  size 0.436 x 0.070 x 0.964
+03:41:10 | INFO: Starting glTF 2.0 export
+03:41:10 | INFO: Extracting primitive: artisan_frost_pick_axe
+03:41:10 | INFO: Primitives created: 6
+03:41:10 | INFO: Finished glTF 2.0 export in 0.013734817504882812 s
+
+[item] artisan_frost_pick_axe         1424 tris  size 0.519 x 0.070 x 0.986
+03:41:11 | INFO: Starting glTF 2.0 export
+03:41:11 | INFO: Extracting primitive: artisan_gothic_window_axe
+03:41:11 | INFO: Primitives created: 5
+03:41:11 | INFO: Finished glTF 2.0 export in 0.01296377182006836 s
+
+[item] artisan_gothic_window_axe      1380 tris  size 0.427 x 0.070 x 0.995
+03:41:11 | INFO: Starting glTF 2.0 export
+03:41:11 | INFO: Extracting primitive: artisan_thunder_fork_axe
+03:41:11 | INFO: Primitives created: 5
+03:41:11 | INFO: Finished glTF 2.0 export in 0.016269683837890625 s
+
+[item] artisan_thunder_fork_axe       1580 tris  size 0.436 x 0.070 x 1.022
+[build_items] 50 items done in 5.3s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

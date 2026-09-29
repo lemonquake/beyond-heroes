@@ -174,6 +174,7 @@ func _on_level_up(new_level: int, gained: int) -> void:
 func refresh_equipment_visuals() -> void:
 	if visual == null or hero == null:
 		return
+	visual.dress_equipment(hero.equipment)
 	var lo := hero.equipment.loadout()
 	var main := hero.equipment.get_item(&"main_weapon")
 	var sub := hero.equipment.get_item(&"sub_weapon")
@@ -191,7 +192,7 @@ func refresh_equipment_visuals() -> void:
 ## The model held in the hand: the item's own model (every base has one since bh-006); a random Aether-tier roll of a
 ## plain base shows the type's crystalline Aether variant instead.
 static func weapon_model_for(item: ItemInstance, wt: WeaponTypeDef) -> String:
-	if item.rarity == BH.Rarity.AETHER and item.base.unique_name == "":
+	if item.rarity == BH.Rarity.AETHER and item.base.unique_name == "" and not String(item.base.id).begins_with("artisan_"):
 		var ae := "res://assets/weapons/%s_aether.glb" % wt.id
 		if ResourceLoader.exists(ae):
 			return ae
@@ -821,16 +822,16 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 	req.tags[&"projectile"] = true
 	_apply_attack_powers(req, a)
 	var el := stats.loadout.element_for(int(a.data.get("hand", 0)))
-	var look := "arrow" if wt.id == &"bow" else "orb"
+	var look := "bolt" if wt.id == &"crossbow" else ("arrow" if wt.id == &"bow" else "orb")
 	if wt.id == &"javelin":
 		var main := hero.equipment.get_item(&"main_weapon")
 		look = "model:" + (weapon_model_for(main, wt) if main else wt.model)
 	var speed := wt.projectile_speed * (1.0 + stats.get_stat(&"projectile_speed")) * (1.3 if heavy else 1.0)
 	var pr := Projectile.spawn(runner.parent(), cast_point(), projectile_dir(), speed, req, self, BH.LAYER_ENEMY, el, look)
 	pr.max_range = wt.reach
-	pr.radius = 0.3 if wt.id == &"bow" or wt.id == &"javelin" else 0.35
+	pr.radius = 0.3 if wt.id in [&"bow", &"crossbow", &"javelin"] else 0.35
 	pr.hit_sound = wt.hit_sound
-	if heavy and (wt.id == &"bow" or wt.id == &"javelin"):
+	if heavy and (wt.id in [&"bow", &"crossbow", &"javelin"]):
 		pr.pierce = 2
 	if stats.has_flag(&"pierce_chance") and randf() < stats.flag(&"pierce_chance"):
 		pr.pierce += 1
@@ -840,7 +841,7 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 			FX.spawn(VFXLib.ring_wave(Elements.color(el), 2.2, 0.35), pt)
 	pr.on_hit = func(t: Actor, res: DamageResult, pt: Vector3) -> void:
 		_on_hit_dealt(t, res, req)
-	if wt.id == &"bow":
+	if wt.id in [&"bow", &"crossbow"]:
 		class_passives.split_shot(pr)
 	Audio.play_at(wt.swing_sound, global_position, -3.0)
 
@@ -854,7 +855,7 @@ func _start_heavy(charge_frac: float, charged: bool) -> void:
 	var wt := _main_type()
 	var anim: StringName
 	if charged:
-		anim = &"bow_release" if wt and wt.id == &"bow" else &"charge_release"
+		anim = wt.heavy_anim if wt and wt.id in [&"bow", &"crossbow"] else &"charge_release"
 	elif wt == null:
 		anim = &"sword_heavy"
 	elif stats.loadout.dual_wield and wt.dual_heavy_anim != &"":
@@ -883,7 +884,7 @@ func _start_charge() -> void:
 	charging = true
 	_charge_t = 0.0
 	var wt := _main_type()
-	visual.hold_action(&"bow_draw_hold" if wt and wt.id == &"bow" else &"charge_hold")
+	visual.hold_action(&"crossbow_aim" if wt and wt.id == &"crossbow" else (&"bow_draw_hold" if wt and wt.id == &"bow" else &"charge_hold"))
 	Audio.play_at(&"bow_draw" if wt and wt.id == &"bow" else &"arcane_charge", global_position, -4.0)
 	_face_aim_now()
 
@@ -1006,8 +1007,8 @@ func skill_block_reason(sid: StringName) -> String:
 		return ""                                 # switching an aura off is always allowed
 	if s.requires == &"melee" and (_main_type() == null or _main_type().ranged):
 		return "Requires a melee weapon"
-	if s.requires == &"bow" and (_main_type() == null or not (_main_type().id in [&"bow", &"javelin"])):
-		return "Requires a bow or javelins"
+	if s.requires == &"bow" and (_main_type() == null or not (_main_type().id in [&"bow", &"crossbow", &"javelin"])):
+		return "Requires a bow, crossbow or javelin"
 	if s.requires == &"shield" and not stats.loadout.has_shield:
 		return "Requires a shield"
 	if s.kind == DamageRequest.Kind.SPELL and status.is_silenced():
@@ -1035,14 +1036,15 @@ func _start_skill(sid: StringName) -> void:
 	var p := skill_params(sid)
 	_cancel_action(true)
 	var rate := clampf(stats.get_stat(s.anim_speed_stat, 1.0), StatCalculator.SPEED_MULT_MIN, StatCalculator.SPEED_MULT_MAX)
-	var a := TimedAction.from_anim(s.anim, rate)
+	var clip := &"crossbow_heavy" if s.requires == &"bow" and _main_type() != null and _main_type().id == &"crossbow" else s.anim
+	var a := TimedAction.from_anim(clip, rate)
 	a.move_mult = 0.0
 	_begin(a, &"skill")
 	if not runner.setup(s, p, a):
 		action = null
 		return
 	_pay_skill(s)
-	visual.play_action(s.anim, rate)
+	visual.play_action(clip, rate)
 	SkillFX.cast(self, s, a)
 	if s.sound_cast != &"" and s.behavior in [&"melee_arc", &"dash_strike", &"leap", &"judgment"]:
 		Audio.play_at(s.sound_cast, global_position)

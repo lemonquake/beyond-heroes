@@ -148,6 +148,19 @@ func set_appearance(app: Dictionary) -> void:
 			visual.detach_weapon(hand)
 		elif w != null and (have == null or String(have[0]) != String(w[0])):
 			visual.attach_weapon(hand, String(w[0]), w[1])
+	# Reconstruct presentation-only pieces from known base IDs. Missing data from
+	# an older peer also clears any previous set appearance without changing stats.
+	var gear = app.get("set_gear", {})
+	var equipment := Equipment.new()
+	if gear is Dictionary:
+		for slot in BH.SLOTS:
+			var id := StringName(str(gear.get(slot, "")))
+			var base := DB.item_base(id) if id != &"" else null
+			if base != null and base.boss_exclusive and base.equip_slots.has(slot):
+				var piece := ItemInstance.new()
+				piece.base = base
+				equipment.slots[slot] = piece
+	visual.dress_equipment(equipment)
 	if app.has("stance"):
 		visual.set_stance(StringName(app.stance))
 

@@ -186,6 +186,8 @@ static func auto_slot(t: TempoData, item: ItemInstance) -> StringName:
 	if item.base.category == &"shield":
 		return &"sub_weapon"
 	if item.base.is_weapon():
+		if not item.base.equipment_slots().has(&"sub_weapon"):
+			return &"main_weapon"
 		var td := t.class_def()
 		var main := t.equipment.get_item(&"main_weapon")
 		if main != null and t.equipment.get_item(&"sub_weapon") == null and (td.get("sub", []) as Array).has(item.base.weapon_type):
@@ -206,6 +208,15 @@ static func equip_from_inventory(hero: HeroData, t: TempoData, item: ItemInstanc
 	var idx := hero.inventory.index_of(item)
 	if idx < 0:
 		return "That item is not in your bag"
+	var needed := 1 if t.equipment.get_item(slot) != null else 0
+	if slot == &"main_weapon":
+		var wt := t.equipment.weapon_type_of(item)
+		var sub := t.equipment.get_item(&"sub_weapon")
+		if sub != null and wt != null and (wt.two_handed or (sub.base.is_weapon() and not wt.dual_wieldable)):
+			needed += 1
+	if needed > hero.inventory.free_cells() + (1 if idx < hero.inventory.bag_capacity else 0):
+		return "Gear Bag needs room for the replaced equipment"
+	hero._loading_equipment = true
 	hero.inventory.cells[idx] = null
 	var res := t.equipment.equip(item, slot, hero.progress.level, NO_ATTR)
 	for d in res.displaced:
@@ -213,6 +224,7 @@ static func equip_from_inventory(hero: HeroData, t: TempoData, item: ItemInstanc
 			hero.inventory.cells[idx] = d
 		else:
 			hero.inventory.add(d)
+	hero._loading_equipment = false
 	hero.inventory.changed.emit()
 	Events.tempo_changed.emit(t.uid)
 	return ""
@@ -228,12 +240,14 @@ static func unequip_to_inventory(hero: HeroData, t: TempoData, slot: StringName)
 		needed = 2
 	if hero.inventory.free_cells() < needed:
 		return "Your bag is full"
+	hero._loading_equipment = true
 	t.equipment.unequip(slot)
 	hero.inventory.add(it)
 	var orphan := t.equipment.orphaned_sub()
 	if orphan != null:
 		t.equipment.unequip(&"sub_weapon")
 		hero.inventory.add(orphan)
+	hero._loading_equipment = false
 	hero.inventory.changed.emit()
 	Events.tempo_changed.emit(t.uid)
 	return ""
@@ -531,15 +545,20 @@ static func revive(hero: HeroData, t: TempoData) -> String:
 static func release(hero: HeroData, t: TempoData) -> String:
 	if t == null or not hero.tempos.has(t):
 		return "No such Tempo"
-	var gear := t.equipment.equipped_items()
+	var gear := t.equipment.equipped_items() + t.equipment.recovered_items
 	if hero.inventory.free_cells() < gear.size():
 		return "Your bag cannot hold its gear (%d free cells needed)" % gear.size()
+	hero._loading_equipment = true
 	for s in BH.SLOTS:
 		var it := t.equipment.get_item(s)
 		if it != null:
 			t.equipment.slots[s] = null
 			hero.inventory.add(it)
+	for it in t.equipment.recovered_items:
+		hero.inventory.add(it)
+	t.equipment.recovered_items.clear()
 	hero.tempos.erase(t)
+	hero._loading_equipment = false
 	hero.inventory.changed.emit()
 	Events.tempo_changed.emit(t.uid)
 	return ""

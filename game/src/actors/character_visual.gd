@@ -65,6 +65,8 @@ var _overlay: ShaderMaterial
 var _flash_tw: Tween
 var _status_nodes := {}
 var _weapon_nodes := {}
+var _set_nodes: Array[Node3D] = []
+var _set_appearance := ""
 var _meshes: Array[MeshInstance3D] = []
 var _trail: WeaponTrail
 var _rng := RandomNumberGenerator.new()
@@ -126,6 +128,7 @@ func _collect_meshes(n: Node) -> void:
 		_collect_meshes(c)
 
 func _prepare_animations() -> void:
+	preload("res://src/actors/crossbow_animations.gd").install(anim_player)
 	for lib_name in anim_player.get_animation_library_list():
 		var lib := anim_player.get_animation_library(lib_name)
 		for an in lib.get_animation_list():
@@ -662,6 +665,35 @@ func flash(color := Color(1, 1, 1), strength := 1.0, time := 0.14) -> void:
 	_flash_tw.tween_method(func(v): _overlay.set_shader_parameter("flash", v), strength, 0.0, time)
 
 # ---- Weapons ------------------------------------------------------------------------------------------------
+
+## Per-slot regalia follows the animated skeleton; rebuilding only when the set
+## piece IDs change keeps stat refreshes and inventory hovering inexpensive.
+func dress_equipment(equipment: Equipment) -> void:
+	var parts: Array[String] = []
+	var worn := {}
+	for slot in equipment.slots:
+		var item := equipment.get_item(slot)
+		if item and preload("res://src/actors/boss_set_visuals.gd").has_theme(item.base.set_id):
+			parts.append("%s:%s" % [slot,item.base.id])
+			worn[slot] = String(item.base.id)
+	var signature := ",".join(parts)
+	appearance["set_gear"] = worn
+	if signature == _set_appearance:
+		return
+	_set_appearance = signature
+	for old in _set_nodes:
+		for mesh in _meshes.duplicate():
+			if not is_instance_valid(mesh) or old.is_ancestor_of(mesh): _meshes.erase(mesh)
+		old.get_parent().remove_child(old)
+		old.queue_free()
+	_set_nodes = preload("res://src/actors/boss_set_visuals.gd").wear(self,equipment)
+	for attachment in _set_nodes:
+		var meshes: Array[MeshInstance3D] = []
+		_collect_into(attachment,meshes)
+		for mesh in meshes:
+			mesh.layers = 2
+			mesh.material_overlay = _overlay
+			_meshes.append(mesh)
 
 func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.IDENTITY) -> void:
 	detach_weapon(hand)

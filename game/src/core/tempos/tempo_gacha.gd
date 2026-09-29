@@ -262,16 +262,21 @@ static func release(hero: HeroData, uid: int) -> int:
 	var t := find_in_hall(hero, uid)
 	if t == null:
 		return -1
-	var gear := t.equipment.equipped_items()
+	var gear := t.equipment.equipped_items() + t.equipment.recovered_items
 	if hero.inventory.free_cells() < gear.size():
 		return -1
+	hero._loading_equipment = true
 	for s in BH.SLOTS:
 		var it := t.equipment.get_item(s)
 		if it != null:
 			t.equipment.slots[s] = null
 			if it.rarity > BH.Rarity.BEGINNER:
 				hero.inventory.add(it)
+	for it in t.equipment.recovered_items:
+		hero.inventory.add(it)
+	t.equipment.recovered_items.clear()
 	hero.spirit_hall.erase(t)
+	hero._loading_equipment = false
 	var n: int = RELEASE_EMBERS.get(maxi(3, t.stars), 2) + (t.resonance * 10 if t.stars == 5 else 0)
 	add_embers(hero, n)
 	Events.tempo_changed.emit(0)

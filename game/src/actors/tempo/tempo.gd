@@ -179,6 +179,7 @@ func _spirit_look() -> void:
 func refresh_equipment_visuals() -> void:
 	if visual == null:
 		return
+	visual.dress_equipment(data.equipment)
 	var lo := TempoRules.loadout(data, _level())
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
@@ -718,7 +719,7 @@ func _shoot(a: TimedAction, t: Actor, mult: float, pierce: int, charged: bool, s
 		_decorate(req, sk, t)
 		el = int(sk.get("element", el))
 	var pr := Projectile.spawn(FX.world if FX.world else get_parent(), from, dir.normalized(), wt.projectile_speed * (1.25 if charged else 1.0),
-		req, self, BH.LAYER_ENEMY, el, "arrow" if wt.id == &"bow" else ("model:" + wt.model if wt.id == &"javelin" else "orb"))
+		req, self, BH.LAYER_ENEMY, el, "bolt" if wt.id == &"crossbow" else ("arrow" if wt.id == &"bow" else ("model:" + wt.model if wt.id == &"javelin" else "orb")))
 	pr.max_range = wt.reach + (6.0 if charged else 0.0)
 	pr.radius = 0.3
 	pr.pierce = pierce
@@ -825,11 +826,13 @@ func _element_sound(sk: Dictionary, fallback: StringName) -> StringName:
 
 func _skill_action(sid: StringName, sk: Dictionary, rate := 1.0) -> TimedAction:
 	_cancel_action()
-	var a := TimedAction.from_anim(sk.anim, rate)
+	var wt := stats.loadout.main_type
+	var clip: StringName = &"crossbow_heavy" if wt != null and wt.id == &"crossbow" and String(sk.anim).begins_with("bow_") else sk.anim
+	var a := TimedAction.from_anim(clip, rate)
 	a.move_mult = 0.0
 	a.data["skill"] = sid
 	_begin(a, &"skill")
-	visual.play_action(sk.anim, rate)
+	visual.play_action(clip, rate)
 	_pay(sid)
 	return a
 

@@ -109,7 +109,7 @@ func _ready() -> void:
 	_on_resized()
 
 func _on_resized() -> void:
-	if viewport:
+	if viewport and not stretch:
 		viewport.size = Vector2i(maxi(64, int(size.x * 2.0)), maxi(64, int(size.y * 2.0)))
 
 func _place_camera() -> void:
@@ -143,6 +143,7 @@ func dress(hero: HeroData) -> void:
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
 	var eq := hero.equipment if hero else _starting_equipment()
+	visual.dress_equipment(eq)
 	var lo := eq.loadout()
 	var main := eq.get_item(&"main_weapon")
 	var sub := eq.get_item(&"sub_weapon")
@@ -182,6 +183,7 @@ func show_tempo(t: TempoData, level := 1) -> void:
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
 	var lo := TempoRules.loadout(t, level)
+	visual.dress_equipment(t.equipment)
 	var main := t.equipment.get_item(&"main_weapon")
 	var sub := t.equipment.get_item(&"sub_weapon")
 	if lo.main_type != null:

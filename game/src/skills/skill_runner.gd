@@ -385,6 +385,8 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 		var d := dir.rotated(Vector3.UP, deg_to_rad(ang))
 		var speed := float(p.get("speed", 24.0)) * (1.0 + caster.stats.get_stat(&"projectile_speed"))
 		var look := skill.projectile_look
+		if look == "arrow" and caster.stats.loadout.main_type != null and caster.stats.loadout.main_type.id == &"crossbow":
+			look = "bolt"
 		var pr := Projectile.spawn(parent(), from, d, speed, req, caster, mask(), el, look)
 		pr.max_range = float(p.get("range", 20.0))
 		pr.pierce = int(p.get("pierce", 0.0))

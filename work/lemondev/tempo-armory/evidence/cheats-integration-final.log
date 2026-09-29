@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_armory_cheats.gd — 4 tests, 116 checks, 0 failures (4.1 ms)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+ERROR: Resumed function '_settle()' after await, but class instance is gone. At script: res://src/npc/npc.gd:100
+   at: resume (modules/gdscript/gdscript_function.cpp:323)
+[PASS] test_chat.gd — 9 tests, 52 checks, 0 failures (3310.4 ms)
+TOTAL: 168 checks, 0 failures

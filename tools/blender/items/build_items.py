@@ -18,7 +18,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 OUT_DIR = os.path.join(ROOT, "game", "assets", "items")
-RAW_DIR = os.path.join(ROOT, "work", "lemondev", "bh-006", "evidence", "icons", "raw")
+EVID_DIR = os.environ.get("BH_ITEM_EVIDENCE", os.path.join(ROOT, "work", "lemondev", "bh-006", "evidence"))
+RAW_DIR = os.path.join(EVID_DIR, "icons", "raw")
 
 import bpy  # noqa: E402
 from mathutils import Vector, Matrix  # noqa: E402
@@ -26,6 +27,7 @@ from mathutils import Vector, Matrix  # noqa: E402
 import item_kit as K  # noqa: E402
 from item_kit import M  # noqa: E402
 import item_weapons as IW  # noqa: E402
+import artisan_weapons as AW  # noqa: E402
 import item_gear as IG  # noqa: E402
 import item_goods as IGo  # noqa: E402
 import item_crystals as IC  # noqa: E402  (bh-018 socket crystals; not in items.json)
@@ -48,6 +50,9 @@ with open(os.path.join(HERE, "depth_specs.json"), encoding="utf-8") as f:
 
 def spec_for(item):
     iid = item["id"]
+    if iid in AW.SPECS:
+        fn, spec = AW.SPECS[iid]
+        return fn, dict(spec), False
     if iid in DEPTH_SPECS:
         name, spec = DEPTH_SPECS[iid]
         return getattr(IW, name, None) or getattr(IG, name), dict(spec), False
@@ -62,6 +67,11 @@ def spec_for(item):
 
 
 def build_parts(item):
+    if item["id"].startswith("boss_") and item["id"].endswith(("_main_weapon", "_sub_weapon")):
+        import boss_weapons
+        if item["id"] in boss_weapons.SPECS:
+            fn, theme = boss_weapons.SPECS[item["id"]]
+            return fn(theme), False
     if IC.is_crystal(item["id"]):
         return IC.build_parts(item["id"]), False
     fn, s, fallback = spec_for(item)
@@ -90,6 +100,8 @@ def build_object(iid, parts):
 def load_items(ids=None):
     with open(os.path.join(HERE, "items.json"), encoding="utf-8") as f:
         items = json.load(f)
+    known = {it["id"] for it in items}
+    items.extend(it for it in AW.MANIFEST if it["id"] not in known)
     items.append({"id": "gold_pile", "category": "gold", "weapon_type": "", "element": 0})
     if ids and all(i == "crystals" or IC.is_crystal(i) for i in ids):   # crystals only ("crystals" = all 32)
         return IC.items(None if "crystals" in ids else ids)
@@ -112,7 +124,7 @@ def export_models(items, log=print):
         tris = M.tri_count(ob)
         report.append({"id": it["id"], "tris": tris, "size": [round(x, 3) for x in size], "fallback": fb})
         log(f"[item] {it['id']:28s} {tris:6d} tris  size {size[0]:.3f} x {size[1]:.3f} x {size[2]:.3f}{'  (fallback builder)' if fb else ''}")
-    rp = IC.REPORT if report and all(IC.is_crystal(r["id"]) for r in report) else os.path.join(ROOT, "work", "lemondev", "bh-006", "evidence", "models_report.json")
+    rp = IC.REPORT if report and all(IC.is_crystal(r["id"]) for r in report) else os.path.join(EVID_DIR, "models_report.json")
     os.makedirs(os.path.dirname(rp), exist_ok=True)
     with open(rp, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=1)
@@ -176,6 +188,8 @@ def _pose_for(item, ob):
     if cat == "weapon":
         if wt == "bow":
             ob.rotation_euler = (0, math.radians(-40), math.radians(180))
+        elif wt == "crossbow":
+            ob.rotation_euler = (math.radians(18), math.radians(35), math.radians(-8))
         elif wt == "claw":
             ob.rotation_euler = (0, math.radians(40), 0)
         elif wt == "knuckles":

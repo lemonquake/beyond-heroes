@@ -77,7 +77,7 @@ static func build() -> Array:
 	var ranger := ClassDef.new()
 	ranger.id = &"ranger"
 	ranger.display_name = "Ranger"
-	ranger.description = "A ranged fighter using bows, javelins and traps. Learn Knee Shot to stun enemies and Split Shot to fire additional arrows. Builds Focus at a distance and spends it on stronger shots."
+	ranger.description = "A ranged fighter using bows, crossbows, javelins and traps. Learn Knee Shot to stun enemies and Split Shot to fire additional arrows. Builds Focus at a distance and spends it on stronger shots."
 	ranger.model_path = "res://assets/characters/ranger.glb"
 	ranger.base_attributes = {&"str": 8, &"agi": 13, &"int": 6, &"wis": 8, &"spi": 7, &"dex": 14}
 	ranger.growth_per_level = {&"str": 0.25, &"agi": 0.75, &"int": 0.0, &"wis": 0.5, &"spi": 0.25, &"dex": 1.25}
@@ -96,7 +96,7 @@ static func build() -> Array:
 		StatModifier.inc(&"projectile_damage", 0.10, "Ranger: Fletching"),
 		StatModifier.inc(&"evasion", 0.10, "Ranger: Woodcraft"),
 	]
-	ranger.weapon_mastery = {&"bow": 0.12, &"javelin": 0.10, &"spear": 0.05, &"dagger": 0.05}
+	ranger.weapon_mastery = {&"bow": 0.12, &"crossbow": 0.12, &"javelin": 0.10, &"spear": 0.05, &"dagger": 0.05}
 	ranger.starting_items = [&"hunters_bow", &"padded_gambeson", &"linen_hood", &"soft_boot"]
 	ranger.starting_skills = [&"power_shot"]
 	ranger.skill_tree_id = &"ranger_skills"

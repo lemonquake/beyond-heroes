@@ -29,7 +29,7 @@ static func nodes(cls: StringName) -> Array:
 		&"ranger":
 			return [
 				passive(&"knee_shot", "Knee Shot", "power_shot", Vector2(1, 6), 1, [&"piercing_arrows"], "Basic arrows have a 25% chance to deal {f0}% additional damage and stun for 0.4 s. Respects stun immunity.", {&"knee_shot": [0.10, 0.30 / 24.0]}),
-				passive(&"split_shot", "Split Shot", "multishot", Vector2(4, 6), 1, [&"trapmaster"], "Basic bow shots have a 30% chance to split into 3-8 arrows (by level), each dealing {f0}% damage. One hit per enemy per split volley.", {&"split_shot": [0.50, 0.25 / 24.0]}),
+				passive(&"split_shot", "Split Shot", "multishot", Vector2(4, 6), 1, [&"trapmaster"], "Basic bow and crossbow shots have a 30% chance to split into 3-8 projectiles (by level), each dealing {f0}% damage. One hit per enemy per split volley.", {&"split_shot": [0.50, 0.25 / 24.0]}),
 			]
 		&"mage":
 			return [

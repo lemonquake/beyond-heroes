@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://tests/tools/build_boss_set_art.gd" id="1"]
+[node name="BuildBossSetArt" type="Node"]
+script = ExtResource("1")

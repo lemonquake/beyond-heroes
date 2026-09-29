@@ -48,7 +48,7 @@ static func build() -> Array:
 			"specialties": [&"weapon", &"shield", &"helm", &"armor", &"gloves", &"boots", &"inner_garment"],
 			"markup": 1.05, "sell_rate": 1.0, "refresh_minutes": 12.0,
 			"pools": [
-				{"categories": [&"weapon"], "weapon_types": [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"club", &"dagger", &"claw", &"knuckles", &"bow"], "count": 7, "class_hint": true},
+				{"categories": [&"weapon"], "weapon_types": [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"club", &"dagger", &"claw", &"knuckles", &"bow", &"crossbow"], "count": 7, "class_hint": true},
 				{"categories": [&"shield"], "count": 1},
 				{"categories": [&"helm", &"armor", &"gloves", &"boots", &"inner_garment"], "count": 5, "class_hint": true},
 			],

@@ -1,0 +1,52 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "u" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://src/actors/boss_set_visuals.gd:123)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "v" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://src/actors/boss_set_visuals.gd:124)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/character_visual.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/actor.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/actors/player/player.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/combat/class_passives.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_skills_ext.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_class_rework.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/progression/tree_state.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/hero_data.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_boss_sets.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/data/data_items.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/database.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_base_def.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_instance.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/events.gd:0)
+ERROR: Failed to load script "res://src/autoload/events.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+POSE idle_spear
+root REST (0, 0, 0, 1) LOCAL (0, 0, 0, 1) GLOBAL (0.0, 0.0, 0.0) AXIS (0.0, 1.0, 0.0)
+chest REST (0, 0, 0, 1) LOCAL (0.026113, 0.069733, -0.001826, 0.997222) GLOBAL (-0.024116, 1.156725, 0.039197) AXIS (-0.074564, 0.974448, 0.211874)
+shoulder.R REST (0.5, -0.5, -0.5, -0.5) LOCAL (0.5, -0.5, -0.5, -0.5) GLOBAL (-0.071164, 1.331661, 0.067637) AXIS (-0.960752, -0.013268, -0.277092)
+upper_arm.R REST (0, -0.0, 0, 1) LOCAL (-0.337575, -0.481024, 0.203813, 0.783019) GLOBAL (-0.22008, 1.329605, 0.024687) AXIS (-0.606434, -0.714105, -0.349704)
+hand.R REST (0, 0, 0, 1) LOCAL (-0.07724, 0.152918, -0.281408, 0.944171) GLOBAL (-0.243804, 0.955275, 0.052678) AXIS (0.726552, -0.68295, -0.075509)
+weapon.R REST (0, 0, 0.707107, 0.707107) LOCAL (-0.0, 0.0, 0.707107, 0.707107) GLOBAL (-0.176945, 0.917053, 0.048447) AXIS (0.000194, -0.10969, 0.993966)
+weapon.L REST (0, 0, -0.707107, 0.707107) LOCAL (0, 0, -0.707107, 0.707107) GLOBAL (-0.143871, 0.933761, 0.420666) AXIS (0.000195, -0.10969, 0.993966)
+POSE crossbow_aim
+root REST (0, 0, 0, 1) LOCAL (0, 0, 0, 1) GLOBAL (0.0, 0.0, 0.0) AXIS (0.0, 1.0, 0.0)
+chest REST (0, 0, 0, 1) LOCAL (0, 0, 0, 1) GLOBAL (0.0, 1.22, 0.0) AXIS (0.0, 1.0, 0.0)
+shoulder.R REST (0.5, -0.5, -0.5, -0.5) LOCAL (0.5, -0.5, -0.5, -0.5) GLOBAL (-0.035, 1.4, 0.0) AXIS (-1.0, 0.0, 0.0)
+upper_arm.R REST (0, -0.0, 0, 1) LOCAL (-0.998794, 0.008319, -0.039193, 0.028376) GLOBAL (-0.19, 1.4, 0.0) AXIS (0.998251, -0.057335, 0.014393)
+hand.R REST (0, 0, 0, 1) LOCAL (0.259044, -0.292983, -0.548667, 0.738933) GLOBAL (0.020943, 1.368, 0.254318) AXIS (-1.0, -0.0, 0.0)
+weapon.R REST (0, 0, 0.707107, 0.707107) LOCAL (0, 0, 0.707107, 0.707107) GLOBAL (-0.054057, 1.35, 0.254318) AXIS (0.0, 0.0, 1.0)
+weapon.L REST (0, 0, -0.707107, 0.707107) LOCAL (0, 0, -0.707107, 0.707107) GLOBAL (-0.054057, 1.35, 0.454318) AXIS (-0.0, -0.0, 1.0)

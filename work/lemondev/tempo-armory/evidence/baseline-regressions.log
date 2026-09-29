@@ -1,0 +1,154 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:269)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:58)
+       [2] test_trade_refuses_bad_offers_and_changes_nothing (res://tests/unit/test_bh016.gd:401)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_guild_house_builds (res://tests/unit/test_bh016.gd:307)
+[FAIL] test_bh016.gd — 15 tests, 1452 checks, 14 failures (1539.9 ms)
+SCRIPT ERROR: Invalid access of index '1' on a base object of type: 'Array'.
+   at: test_lape_trade_closes (res://tests/unit/test_bh019.gd:170)
+   GDScript backtrace (most recent call first):
+       [0] test_lape_trade_closes (res://tests/unit/test_bh019.gd:170)
+       [1] _run (res://tests/run_tests.gd:43)
+       [2] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [3] _begin (res://tests/unit/test_bh019.gd:317)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:188)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Unreadable vault file user://saves/vault_unit_test.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:193)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Vault restored from vault_unit_test.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:191)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+[FAIL] test_bh019.gd — 11 tests, 364 checks, 3 failures (3029.1 ms)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 8 failures (32589.3 ms)
+  FAIL test_bh016.test_every_node_reaches_level_25: knight_skills.steadfast remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: knight_skills.damage_return remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: knight_skills.debuff_regen remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: mage_skills.arcane_arts remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: mage_skills.gravity_pull remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: mage_skills.spike_tentacle remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: mage_skills.mana_siphon remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: mage_skills.dark_arts remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: ranger_skills.knee_shot remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: ranger_skills.split_shot remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: shadowblade_skills.double_attack remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: shadowblade_skills.paralyzing_attack remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodsucker remembers its old cap (25)
+  FAIL test_bh016.test_every_node_reaches_level_25: shadowblade_skills.bloodcurse remembers its old cap (25)
+  FAIL test_bh019.test_lape_offers_three_licensed_class_pieces: ranger: three offers — expected 3, got 1
+  FAIL test_bh019.test_lape_offers_three_licensed_class_pieces: shadowblade: three offers — expected 3, got 1
+  FAIL test_bh019.test_lape_trade_closes: aborted before done() (script error?)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (167 -> 180)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+TOTAL: 2414 checks, 25 failures

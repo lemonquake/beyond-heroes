@@ -1,0 +1,48 @@
+A:\Python\beyond-heroes\tools\blender\items\build_items.py:149: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:04.672  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\hunters_bow.png'
+00:04.969  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\composite_bow.png'
+00:05.282  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\warden_longbow.png'
+00:05.578  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\shortbow.png'
+00:05.891  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\recurve_bow.png'
+00:06.188  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\hornbow.png'
+00:06.500  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\siege_greatbow.png'
+00:06.797  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\galewing_bow.png'
+00:07.078  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\fowling_bow.png'
+00:07.391  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\yew_longbow.png'
+00:07.719  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\thornback_bow.png'
+00:08.032  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\frostwing_bow.png'
+00:08.328  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\stormstring_greatbow.png'
+00:08.657  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_rootbend_shortbow.png'
+00:08.985  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_saltwind_recurve.png'
+00:09.297  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_cinderhorn_bow.png'
+00:09.625  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_icebranch_longbow.png'
+00:09.953  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_thornwing_bow.png'
+00:10.219  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_starbridge_bow.png'
+00:10.532  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_nightglass_warbow.png'
+00:10.860  render           | Saved: 'A:\Python\beyond-heroes\work\lemondev\bh-006\evidence\icons\raw\depth_dawnfeather_bow.png'
+[icon] hunters_bow
+[icon] composite_bow
+[icon] warden_longbow
+[icon] shortbow
+[icon] recurve_bow
+[icon] hornbow
+[icon] siege_greatbow
+[icon] galewing_bow
+[icon] fowling_bow
+[icon] yew_longbow
+[icon] thornback_bow
+[icon] frostwing_bow
+[icon] stormstring_greatbow
+[icon] depth_rootbend_shortbow
+[icon] depth_saltwind_recurve
+[icon] depth_cinderhorn_bow
+[icon] depth_icebranch_longbow
+[icon] depth_thornwing_bow
+[icon] depth_starbridge_bow
+[icon] depth_nightglass_warbow
+[icon] depth_dawnfeather_bow
+[build_items] 21 items done in 7.7s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

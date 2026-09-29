@@ -11,7 +11,7 @@ const M := StatModifier.Op.MORE
 static func _weapon_class(wt: StringName) -> StringName:
 	if wt in [&"staff", &"wand"]:
 		return &"mage"
-	if wt in [&"bow", &"javelin"]:
+	if wt in [&"bow", &"crossbow", &"javelin"]:
 		return &"ranger"
 	if wt in [&"dagger", &"claw", &"knuckles"]:
 		return &"shadowblade"
@@ -89,6 +89,8 @@ static func bases() -> Array:
 		var icon := String(w[2]) if tier == 1 else "%s_%d" % [w[2], tier]
 		out.append(_b(w[0], w[1], &"weapon", icon, d))
 	_weapon_roster(out)
+	out.append_array(DataArtisanWeapons.bases())
+	out.append_array(preload("res://src/data/data_boss_sets.gd").bases())
 	out.append_array(DataDepthEquipment.bases())
 	# ---- Shields ----
 	out.append(_b(&"warden_kite_shield", "Warden Kite Shield", &"shield", "shield", {"level_req": 1, "defense": 12.0,
@@ -182,6 +184,9 @@ static func bases() -> Array:
 		"flavor": "The broken tip of a black lance, wrapped in oilcloth. It is warm, and it glows red while its master lives."}))
 	out.append(_b(&"quest_chain_seal", "Kethrax's Chain-Seal", &"quest", "quest_chain_seal", {"sellable": false, "value": 0,
 		"flavor": "An iron seal as big as a fist, still threaded with a link of Tyrant-chain. The violet fire in it has gone out."}))
+	for base in out:
+		if base.weapon_type == &"bow":
+			base.icon = ICON3D % base.id
 	return out
 
 ## bh-006: twenty more consumables. Effects (consumable_effect):
@@ -408,7 +413,7 @@ const ROSTER_BH015 := [
 const ROSTER_FACTOR := {
 	&"sword": [1.0, 0.7, 1.3], &"axe": [1.0, 0.6, 1.4], &"greataxe": [1.28, 0.6, 1.4], &"spear": [1.2, 0.7, 1.3],
 	&"javelin": [0.95, 0.75, 1.25], &"club": [1.0, 0.6, 1.4], &"dagger": [0.93, 0.75, 1.25], &"claw": [0.93, 0.7, 1.3],
-	&"knuckles": [0.9, 0.75, 1.25], &"bow": [1.0, 0.65, 1.35],
+	&"knuckles": [0.9, 0.75, 1.25], &"bow": [1.0, 0.65, 1.35], &"crossbow": [1.04, 0.8, 1.2],
 	# bh-015 (matched to the original three of each: casters' staves and wands hit softer, their spells carry them)
 	&"greatsword": [1.22, 0.65, 1.35], &"staff": [0.72, 0.7, 1.3], &"wand": [0.7, 0.75, 1.25],
 }
@@ -535,7 +540,7 @@ static func sets() -> Array:
 			"flags": {&"arcane_amp": 0.08}},
 	}
 	sage.lore = "The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea."
-	return [guardian, sage]
+	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets()
 
 ## Faction licenses for Licensed-tier items: fixed specialization bonus [stat, op, base, per item level].
 static func licenses() -> Dictionary:

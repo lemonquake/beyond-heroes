@@ -88,6 +88,7 @@ var guild_banner := PackedByteArray()
 var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
+var _loading_equipment := false
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -121,7 +122,23 @@ func _on_level(_l: int, _g: int) -> void:
 		QuakeTeam.sync_owner(self)
 
 func _inv_changed() -> void:
+	if not _loading_equipment:
+		recover_unequipped_gear()
 	inventory_changed.emit()
+
+## Legacy incompatible off-hand gear returns as space opens, without discarding items from a full bag.
+func recover_unequipped_gear() -> void:
+	var sources: Array = [equipment]
+	for t in tempos + spirit_hall:
+		sources.append(t.equipment)
+	# Place directly: emitting Inventory.changed inside this signal handler would recurse.
+	for source: Equipment in sources:
+		while not source.recovered_items.is_empty():
+			var item: ItemInstance = source.recovered_items[0]
+			var index := inventory.first_free(item)
+			if index < 0:
+				return
+			inventory.cells[index] = source.recovered_items.pop_front()
 
 func _skills_changed() -> void:
 	skills_changed.emit()
@@ -317,6 +334,7 @@ func equip_from_inventory(item: ItemInstance, slot: StringName = &"") -> String:
 			needed += 1
 	if needed > inventory.free_cells() + (1 if idx >= 0 and idx < inventory.bag_capacity else 0):
 		return "Gear Bag needs room for the replaced equipment"
+	_loading_equipment = true
 	if idx >= 0:
 		inventory.cells[idx] = null
 	var res := equipment.equip(item, slot, progress.level, progress.base_attributes())
@@ -325,6 +343,7 @@ func equip_from_inventory(item: ItemInstance, slot: StringName = &"") -> String:
 			inventory.cells[idx] = d
 		else:
 			inventory.add(d)
+	_loading_equipment = false
 	inventory.changed.emit()
 	return ""
 
@@ -337,12 +356,15 @@ func unequip_to_inventory(slot: StringName) -> String:
 		needed = 2
 	if inventory.free_cells() < needed:
 		return "Inventory is full"
+	_loading_equipment = true
 	equipment.unequip(slot)
 	inventory.add(it)
 	var orphan := equipment.orphaned_sub()
 	if orphan != null:
 		equipment.unequip(&"sub_weapon")
 		inventory.add(orphan)
+	_loading_equipment = false
+	inventory.changed.emit()
 	return ""
 
 ## Swap two equipped items (two rings, two gloves). Both must fit the other's slot.
@@ -357,6 +379,14 @@ func swap_equipped(a: StringName, b: StringName) -> String:
 		return "Does not fit there"
 	equipment.slots[a] = ib
 	equipment.slots[b] = ia
+	# Validate the resulting pair, so dragging a bow into the off hand cannot bypass equip rules.
+	var error := equipment.check(ia, b, progress.level, progress.base_attributes())
+	if error == "" and ib != null:
+		error = equipment.check(ib, a, progress.level, progress.base_attributes())
+	if error != "":
+		equipment.slots[a] = ia
+		equipment.slots[b] = ib
+		return error
 	equipment.changed.emit()
 	return ""
 
@@ -452,6 +482,7 @@ static func from_dict(d: Dictionary) -> HeroData:
 		return null
 	var h := HeroData.new()
 	h.setup(c, String(d.get("name", "Hero")))
+	h._loading_equipment = true
 	h.progress.from_dict(d.get("progress", {}))
 	h.equipment.from_dict(d.get("equipment", {}))
 	h.inventory.from_array(d.get("inventory", []))
@@ -572,6 +603,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 		h.tempo_serial = maxi(h.tempo_serial, t.uid)
 	if int(d.get("tier_rules_version", 1)) < 2:
 		GuildRules.migrate_legacy_rank(h)
+	h._loading_equipment = false
+	h.recover_unequipped_gear()
 	return h
 
 # ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------

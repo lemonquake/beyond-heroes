@@ -241,6 +241,14 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 		v.add_child(gap(2))
 		var owned: int = hero.equipment.set_counts().get(sd.id, 0) if hero else 0
 		v.add_child(lbl("%s (%d/%d)" % [sd.display_name, owned, sd.pieces.size()], 16, UITheme.GOLD, UITheme.body_bold()))
+		var piece_list: Control = v
+		if sd.pieces.size() > 8:
+			var grid := GridContainer.new()
+			grid.columns = 2
+			grid.add_theme_constant_override("h_separation", 8)
+			grid.add_theme_constant_override("v_separation", 2)
+			v.add_child(grid)
+			piece_list = grid
 		for pid in sd.pieces:
 			var b := DB.item_base(StringName(pid))
 			var have := false
@@ -248,7 +256,13 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 				for e in hero.equipment.equipped_items():
 					if e.base.id == StringName(pid):
 						have = true
-			v.add_child(lbl("  " + (b.display_name if b else String(pid)), 14, SET_ON if have else SET_OFF))
+			var piece_name: String = b.display_name if b else String(pid)
+			if piece_list != v:
+				piece_name = piece_name.trim_prefix(sd.display_name).strip_edges()
+			var piece_label := lbl(("+ " if have else "- ") + piece_name, 14, SET_ON if have else SET_OFF)
+			if piece_list != v:
+				piece_label.custom_minimum_size.x = (W - 44.0) * 0.5
+			piece_list.add_child(piece_label)
 		for n in sd.thresholds():
 			var active: bool = owned >= int(n)
 			v.add_child(lbl("(%d) %s" % [n, sd.bonuses[n].get("desc", "")], 15, SET_ON if active else SET_OFF))

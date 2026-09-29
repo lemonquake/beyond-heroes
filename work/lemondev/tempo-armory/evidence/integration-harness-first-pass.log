@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+ERROR: pause freezes gameplay
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/tools/capture_armory_integration.gd:16)
+       [1] _run (res://tests/tools/capture_armory_integration.gd:83)
+ERROR: pause freezes gameplay
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/tools/capture_armory_integration.gd:16)
+       [1] _run (res://tests/tools/capture_armory_integration.gd:83)
+ERROR: pause freezes gameplay
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/tools/capture_armory_integration.gd:16)
+       [1] _run (res://tests/tools/capture_armory_integration.gd:83)
+ARMORY_INTEGRATION {"attacks":60,"checks":35,"duration_seconds":60.010628,"engine":"4.7.2-stable (official)","failures":["pause freezes gameplay","pause freezes gameplay","pause freezes gameplay"],"frames":8629,"frames_over_16_67ms":2,"gpu":"NVIDIA GeForce RTX 4060","map":"sanctuary","max_ms":75.849,"p95_ms":7.711,"p99_ms":7.993,"performance_gate":"PASS","renderer":"forward_plus","resolution":[1920,1080]}

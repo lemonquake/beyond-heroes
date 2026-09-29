@@ -1,0 +1,1685 @@
+[
+  {
+    "id": "boss_ashfall_pilgrim_accessory_1",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_accessory_2",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_armor",
+    "bbox": [
+      35,
+      41,
+      217,
+      209
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_helm",
+    "bbox": [
+      67,
+      36,
+      187,
+      223
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_main_weapon",
+    "bbox": [
+      101,
+      37,
+      155,
+      219
+    ]
+  },
+  {
+    "id": "boss_ashfall_pilgrim_sub_weapon",
+    "bbox": [
+      53,
+      36,
+      205,
+      218
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_accessory_1",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_accessory_2",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_accessory_3",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_accessory_4",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_armor",
+    "bbox": [
+      40,
+      63,
+      220,
+      187
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_helm",
+    "bbox": [
+      51,
+      36,
+      206,
+      223
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_main_weapon",
+    "bbox": [
+      104,
+      38,
+      152,
+      219
+    ]
+  },
+  {
+    "id": "boss_crimson_glory_sub_weapon",
+    "bbox": [
+      71,
+      36,
+      189,
+      219
+    ]
+  },
+  {
+    "id": "boss_dragonforge_accessory_1",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_dragonforge_accessory_2",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_dragonforge_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_dragonforge_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_dragonforge_armor",
+    "bbox": [
+      37,
+      55,
+      218,
+      195
+    ]
+  },
+  {
+    "id": "boss_dragonforge_boots_1",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_dragonforge_boots_2",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_dragonforge_gloves_1",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_dragonforge_gloves_2",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_dragonforge_helm",
+    "bbox": [
+      38,
+      44,
+      220,
+      216
+    ]
+  },
+  {
+    "id": "boss_dragonforge_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_dragonforge_main_weapon",
+    "bbox": [
+      88,
+      37,
+      168,
+      219
+    ]
+  },
+  {
+    "id": "boss_dragonforge_sub_weapon",
+    "bbox": [
+      67,
+      36,
+      193,
+      218
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_accessory_1",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_accessory_2",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_accessory_3",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_accessory_4",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_armor",
+    "bbox": [
+      36,
+      43,
+      216,
+      209
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_helm",
+    "bbox": [
+      54,
+      34,
+      210,
+      222
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_main_weapon",
+    "bbox": [
+      98,
+      37,
+      159,
+      219
+    ]
+  },
+  {
+    "id": "boss_eclipse_dancer_sub_weapon",
+    "bbox": [
+      39,
+      36,
+      220,
+      218
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_accessory_1",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_accessory_2",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_armor",
+    "bbox": [
+      40,
+      69,
+      220,
+      181
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_helm",
+    "bbox": [
+      34,
+      44,
+      223,
+      214
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_gale_nomad_main_weapon",
+    "bbox": [
+      101,
+      37,
+      156,
+      219
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_accessory_1",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_accessory_2",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_armor",
+    "bbox": [
+      42,
+      45,
+      223,
+      202
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_boots_1",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_boots_2",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_gloves_1",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_gloves_2",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_helm",
+    "bbox": [
+      38,
+      44,
+      218,
+      214
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_grievance_of_the_fairy_main_weapon",
+    "bbox": [
+      88,
+      36,
+      168,
+      218
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_accessory_1",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_accessory_2",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_accessory_3",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_accessory_4",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_armor",
+    "bbox": [
+      37,
+      39,
+      218,
+      212
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_helm",
+    "bbox": [
+      54,
+      35,
+      203,
+      223
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_obsidian_oath_main_weapon",
+    "bbox": [
+      107,
+      38,
+      150,
+      219
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_accessory_1",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_accessory_2",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_accessory_3",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_accessory_4",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_armor",
+    "bbox": [
+      34,
+      67,
+      215,
+      186
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_boots_1",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_boots_2",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_gloves_1",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_gloves_2",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_helm",
+    "bbox": [
+      39,
+      50,
+      221,
+      206
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_main_weapon",
+    "bbox": [
+      80,
+      37,
+      176,
+      219
+    ]
+  },
+  {
+    "id": "boss_pale_requiem_sub_weapon",
+    "bbox": [
+      69,
+      36,
+      191,
+      218
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_accessory_1",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_accessory_2",
+    "bbox": [
+      41,
+      46,
+      222,
+      205
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      220
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_armor",
+    "bbox": [
+      36,
+      56,
+      217,
+      193
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_helm",
+    "bbox": [
+      39,
+      51,
+      221,
+      210
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_main_weapon",
+    "bbox": [
+      90,
+      38,
+      167,
+      220
+    ]
+  },
+  {
+    "id": "boss_serpent_veil_sub_weapon",
+    "bbox": [
+      40,
+      34,
+      220,
+      218
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_accessory_1",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_accessory_2",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_accessory_3",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_accessory_4",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_armor",
+    "bbox": [
+      37,
+      60,
+      216,
+      192
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_boots_1",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_boots_2",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_gloves_1",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_gloves_2",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_helm",
+    "bbox": [
+      56,
+      36,
+      200,
+      223
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_starfall_hunter_main_weapon",
+    "bbox": [
+      71,
+      37,
+      187,
+      219
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_accessory_1",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_accessory_2",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_accessory_3",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_accessory_4",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_armor",
+    "bbox": [
+      38,
+      61,
+      219,
+      190
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_boots_1",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_boots_2",
+    "bbox": [
+      76,
+      33,
+      189,
+      221
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_gloves_1",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_gloves_2",
+    "bbox": [
+      46,
+      32,
+      221,
+      223
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_helm",
+    "bbox": [
+      38,
+      45,
+      220,
+      212
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_sunken_crown_main_weapon",
+    "bbox": [
+      113,
+      37,
+      142,
+      219
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_accessory_1",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_accessory_2",
+    "bbox": [
+      44,
+      35,
+      218,
+      217
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_accessory_3",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_accessory_4",
+    "bbox": [
+      45,
+      32,
+      220,
+      220
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_armor",
+    "bbox": [
+      37,
+      41,
+      220,
+      208
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_helm",
+    "bbox": [
+      45,
+      31,
+      226,
+      214
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_thunder_abbot_main_weapon",
+    "bbox": [
+      113,
+      37,
+      143,
+      219
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_accessory_1",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_accessory_2",
+    "bbox": [
+      41,
+      35,
+      222,
+      217
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_accessory_3",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_accessory_4",
+    "bbox": [
+      47,
+      32,
+      219,
+      219
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_armor",
+    "bbox": [
+      35,
+      58,
+      215,
+      195
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_helm",
+    "bbox": [
+      56,
+      33,
+      210,
+      222
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_truth_of_raikuru_main_weapon",
+    "bbox": [
+      69,
+      36,
+      189,
+      219
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_accessory_1",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_accessory_2",
+    "bbox": [
+      43,
+      34,
+      219,
+      216
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_accessory_3",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_accessory_4",
+    "bbox": [
+      46,
+      32,
+      220,
+      219
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_armor",
+    "bbox": [
+      35,
+      58,
+      215,
+      195
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_helm",
+    "bbox": [
+      72,
+      35,
+      178,
+      225
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_wailing_mistress_main_weapon",
+    "bbox": [
+      110,
+      37,
+      146,
+      219
+    ]
+  },
+  {
+    "id": "boss_winter_court_accessory_1",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_winter_court_accessory_2",
+    "bbox": [
+      41,
+      38,
+      222,
+      210
+    ]
+  },
+  {
+    "id": "boss_winter_court_accessory_3",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_winter_court_accessory_4",
+    "bbox": [
+      43,
+      32,
+      223,
+      219
+    ]
+  },
+  {
+    "id": "boss_winter_court_armor",
+    "bbox": [
+      38,
+      48,
+      217,
+      203
+    ]
+  },
+  {
+    "id": "boss_winter_court_boots_1",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_winter_court_boots_2",
+    "bbox": [
+      84,
+      33,
+      179,
+      221
+    ]
+  },
+  {
+    "id": "boss_winter_court_gloves_1",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_winter_court_gloves_2",
+    "bbox": [
+      63,
+      32,
+      201,
+      223
+    ]
+  },
+  {
+    "id": "boss_winter_court_helm",
+    "bbox": [
+      56,
+      31,
+      196,
+      223
+    ]
+  },
+  {
+    "id": "boss_winter_court_inner_garment",
+    "bbox": [
+      50,
+      37,
+      203,
+      225
+    ]
+  },
+  {
+    "id": "boss_winter_court_main_weapon",
+    "bbox": [
+      87,
+      36,
+      169,
+      219
+    ]
+  },
+  {
+    "id": "boss_winter_court_sub_weapon",
+    "bbox": [
+      67,
+      36,
+      193,
+      218
+    ]
+  }
+]

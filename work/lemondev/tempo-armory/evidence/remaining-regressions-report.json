@@ -1,0 +1,57 @@
+{
+  "checks": 30143,
+  "elapsed_ms": 160716,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_progression.gd": {
+      "checks": 51,
+      "failures": [],
+      "ms": 12.212,
+      "tests": 7
+    },
+    "test_shops_dialogue.gd": {
+      "checks": 1175,
+      "failures": [],
+      "ms": 1127.204,
+      "tests": 10
+    },
+    "test_skills.gd": {
+      "checks": 3515,
+      "failures": [],
+      "ms": 47667.839,
+      "tests": 11
+    },
+    "test_stats.gd": {
+      "checks": 159,
+      "failures": [],
+      "ms": 22.625,
+      "tests": 8
+    },
+    "test_status.gd": {
+      "checks": 24,
+      "failures": [],
+      "ms": 107.436,
+      "tests": 8
+    },
+    "test_team_loot.gd": {
+      "checks": 21667,
+      "failures": [],
+      "ms": 29725.143,
+      "tests": 3
+    },
+    "test_tempos.gd": {
+      "checks": 3538,
+      "failures": [],
+      "ms": 22975.615,
+      "tests": 16
+    },
+    "test_westreach_bridges.gd": {
+      "checks": 14,
+      "failures": [],
+      "ms": 58393.091,
+      "tests": 1
+    }
+  },
+  "timestamp": "2026-09-30T04:14:48"
+}

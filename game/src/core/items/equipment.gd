@@ -8,6 +8,8 @@ var slots := {}              # slot StringName -> ItemInstance or null
 ## Wearer's hero tier rank (DataGuilds: 0 Unranked .. 8 SSS). Rarities from Licensed up need a minimum tier.
 ## A bare Equipment (tools, previews) is ungated; HeroData keeps this in sync with the hero's tier.
 var tier_rank := DataGuilds.MAX_RANK
+## Invalid legacy hand combinations are removed from combat and retained until bag space is available.
+var recovered_items: Array = []
 
 func _init() -> void:
 	for s in BH.SLOTS:
@@ -25,7 +27,7 @@ func weapon_type_of(item: ItemInstance) -> WeaponTypeDef:
 func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) -> String:
 	if item == null or not item.is_equipment():
 		return "Cannot be equipped"
-	var allowed: Array = BH.CATEGORY_SLOTS.get(item.base.category, [])
+	var allowed: Array = item.base.equipment_slots()
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
 	if level < item.required_level():
@@ -36,6 +38,10 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 	for a in item.base.requirements:
 		if int(attrs.get(a, 0)) < int(item.base.requirements[a]):
 			return "Requires %d %s" % [item.base.requirements[a], BH.ATTRIBUTE_NAMES[a]]
+	if slot == &"sub_weapon":
+		var main_type := weapon_type_of(slots[&"main_weapon"])
+		if main_type != null and main_type.two_handed:
+			return "%s requires both hands; remove it before equipping a shield or secondary weapon" % main_type.display_name
 	if slot == &"sub_weapon" and item.base.is_weapon():
 		var wt := weapon_type_of(item)
 		if wt == null or not wt.dual_wieldable or wt.two_handed:
@@ -43,20 +49,22 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 		var main_wt := weapon_type_of(slots[&"main_weapon"])
 		if main_wt == null:
 			return "Equip a main weapon first"
-		if not main_wt.dual_wieldable:
+		if main_wt.two_handed or not main_wt.dual_wieldable:
 			return "%s cannot be dual wielded" % main_wt.display_name
 	return ""
 
 ## Best slot for an item: first empty accepted slot, otherwise the first accepted slot.
 func auto_slot(item: ItemInstance) -> StringName:
-	var allowed: Array = BH.CATEGORY_SLOTS.get(item.base.category, [])
+	var allowed: Array = item.base.equipment_slots()
 	if allowed.is_empty():
 		return &""
 	if item.base.is_weapon():
+		if not allowed.has(&"sub_weapon"):
+			return &"main_weapon"
 		var wt := weapon_type_of(item)
 		var main_wt := weapon_type_of(slots[&"main_weapon"])
 		if slots[&"main_weapon"] != null and slots[&"sub_weapon"] == null and wt != null and wt.dual_wieldable \
-				and main_wt != null and main_wt.dual_wieldable:
+				and not wt.two_handed and main_wt != null and main_wt.dual_wieldable and not main_wt.two_handed:
 			return &"sub_weapon"
 		return &"main_weapon"
 	for s in allowed:
@@ -178,10 +186,29 @@ func to_dict() -> Dictionary:
 	var d := {}
 	for s in BH.SLOTS:
 		d[String(s)] = slots[s].to_dict() if slots[s] != null else null
+	if not recovered_items.is_empty():
+		d["recovered_items"] = recovered_items.map(func(it): return it.to_dict())
 	return d
 
 func from_dict(d: Dictionary) -> void:
+	recovered_items.clear()
+	for entry in d.get("recovered_items", []):
+		if entry is Dictionary:
+			var item := ItemInstance.from_dict(entry)
+			if item != null:
+				recovered_items.append(item)
 	for s in BH.SLOTS:
 		var v = d.get(String(s))
 		slots[s] = ItemInstance.from_dict(v) if v is Dictionary else null
+	# Repair old saves that allowed a shield after a bow, or a two-handed weapon in the sub hand.
+	var main := weapon_type_of(slots[&"main_weapon"])
+	var sub: ItemInstance = slots[&"sub_weapon"]
+	if sub != null:
+		var off := weapon_type_of(sub)
+		var invalid := main != null and main.two_handed
+		if sub.base.is_weapon():
+			invalid = invalid or off == null or off.two_handed or not off.dual_wieldable or main == null or not main.dual_wieldable
+		if invalid:
+			recovered_items.append(sub)
+			slots[&"sub_weapon"] = null
 	changed.emit()

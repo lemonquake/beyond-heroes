@@ -1,0 +1,22 @@
+{
+  "engine": "Godot 4.7.2",
+  "windows": "release; cold-start exit 0",
+  "android": "debug signed; signature verified; no attached device",
+  "artifacts": [
+    {
+      "path": "build/windows/BeyondHeroes.exe",
+      "bytes": 397292992,
+      "sha256": "a8c4bf47741bf37fa2f4886a54037faae04a45bbeacd1ceed6dc88600588a28b"
+    },
+    {
+      "path": "build/BeyondHeroes.apk",
+      "bytes": 345231680,
+      "sha256": "807ef170822fbf76c08df614ff073acc3bd6951445dce02b21a4c9d2be67f773"
+    },
+    {
+      "path": "build/BeyondHeroes-Windows.zip",
+      "bytes": 321278655,
+      "sha256": "6fb299ebd9e072cfff603f4126cde99c17d563ad2c4f1e44b30933bf0b0c3f59"
+    }
+  ]
+}

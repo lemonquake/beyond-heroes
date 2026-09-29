@@ -1,0 +1,1430 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Identifier "DataArtisanWeapons" not declared in the current scope.
+   at: GDScript::reload (res://src/data/data_items.gd:92)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/database.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_base_def.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/core/items/item_instance.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://src/autoload/events.gd:0)
+ERROR: Failed to load script "res://src/autoload/events.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+SCRIPT ERROR: Invalid call. Nonexistent function 'bases' in base 'GDScript'.
+   at: _init (res://src/autoload/database.gd:25)
+   GDScript backtrace (most recent call first):
+       [0] _init (res://src/autoload/database.gd:25)
+ERROR: Unknown item base ashwood_staff
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base silk_undershirt
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base apprentice_robe
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base linen_hood
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:43)
+       [3] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] _give_items (res://src/core/cheats.gd:136)
+       [2] apply (res://src/core/cheats.gd:72)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:46)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base mana_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] _give_items (res://src/core/cheats.gd:136)
+       [2] apply (res://src/core/cheats.gd:74)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:46)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base town_portal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] _give_items (res://src/core/cheats.gd:136)
+       [2] apply (res://src/core/cheats.gd:76)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:46)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base soul_ember
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] _give_items (res://src/core/cheats.gd:136)
+       [2] apply (res://src/core/cheats.gd:78)
+       [3] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:46)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:50)
+       [2] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:51)
+   GDScript backtrace (most recent call first):
+       [0] test_item_gifts_and_full_bag_are_atomic (res://tests/unit/test_armory_cheats.gd:51)
+       [1] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:61)
+       [3] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.from_dict (res://src/core/progression/tree_state.gd:151)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/progression/tree_state.gd:151)
+       [1] from_dict (res://src/core/hero_data.gd:490)
+       [2] test_level_cap_rest_refund_and_tempo_revival (res://tests/unit/test_armory_cheats.gd:96)
+       [3] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:18)
+       [3] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.from_dict (res://src/core/progression/tree_state.gd:151)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/progression/tree_state.gd:151)
+       [1] from_dict (res://src/core/hero_data.gd:490)
+       [2] test_requested_points_repeat_and_save (res://tests/unit/test_armory_cheats.gd:35)
+       [3] _run (res://tests/run_tests.gd:43)
+[FAIL] test_armory_cheats.gd — 4 tests, 112 checks, 9 failures (16.7 ms)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [5] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] _begin (res://tests/unit/test_chat.gd:19)
+       [3] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [4] _run (res://tests/run_tests.gd:43)
+ERROR: Unknown map sanctuary
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build_map (res://src/autoload/game.gd:167)
+       [1] load_map (res://src/autoload/game.gd:187)
+       [2] _begin (res://tests/unit/test_chat.gd:23)
+       [3] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [4] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.passive_modifiers (res://src/core/progression/tree_state.gd:123)
+   GDScript backtrace (most recent call first):
+       [0] passive_modifiers (res://src/core/progression/tree_state.gd:123)
+       [1] persistent_modifiers (res://src/core/hero_data.gd:176)
+       [2] compute_stats (res://src/core/hero_data.gd:199)
+       [3] rebuild_stats (res://src/actors/player/player.gd:227)
+       [4] ensure_stats (res://src/actors/actor.gd:88)
+       [5] bind (res://src/actors/player/player.gd:141)
+       [6] _begin (res://tests/unit/test_chat.gd:24)
+       [7] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:103)
+       [8] _run (res://tests/run_tests.gd:43)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] heal (res://src/npc/npc_services.gd:49)
+       [1] apply (res://src/core/cheats.gd:117)
+       [2] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:107)
+       [3] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Parameter "data.tree" is null.
+   at: get_tree (scene/main/node.h:559)
+   GDScript backtrace (most recent call first):
+       [0] apply (res://src/core/cheats.gd:118)
+       [1] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:107)
+       [2] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_azrin_levels_up_three (res://tests/unit/test_chat.gd:81)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [5] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] _begin (res://tests/unit/test_chat.gd:19)
+       [3] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown map sanctuary
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build_map (res://src/autoload/game.gd:167)
+       [1] load_map (res://src/autoload/game.gd:187)
+       [2] _begin (res://tests/unit/test_chat.gd:23)
+       [3] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.passive_modifiers (res://src/core/progression/tree_state.gd:123)
+   GDScript backtrace (most recent call first):
+       [0] passive_modifiers (res://src/core/progression/tree_state.gd:123)
+       [1] persistent_modifiers (res://src/core/hero_data.gd:176)
+       [2] compute_stats (res://src/core/hero_data.gd:199)
+       [3] rebuild_stats (res://src/actors/player/player.gd:227)
+       [4] ensure_stats (res://src/actors/actor.gd:88)
+       [5] bind (res://src/actors/player/player.gd:141)
+       [6] _begin (res://tests/unit/test_chat.gd:24)
+       [7] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:119)
+       [8] _run (res://tests/run_tests.gd:43)
+       [9] test_azrael_restores_hp_and_mana (res://tests/unit/test_chat.gd:116)
+       [10] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.passive_modifiers (res://src/core/progression/tree_state.gd:123)
+   GDScript backtrace (most recent call first):
+       [0] passive_modifiers (res://src/core/progression/tree_state.gd:123)
+       [1] persistent_modifiers (res://src/core/hero_data.gd:176)
+       [2] compute_stats (res://src/core/hero_data.gd:199)
+       [3] rebuild_stats (res://src/actors/player/player.gd:227)
+       [4] ensure_stats (res://src/actors/actor.gd:88)
+       [5] _on_level_up (res://src/actors/player/player.gd:163)
+       [6] add_xp (res://src/core/progression/hero_progress.gd:49)
+       [7] _give_levels (res://src/core/cheats.gd:132)
+       [8] apply (res://src/core/cheats.gd:109)
+       [9] submit (res://src/ui/hud/chat_box.gd:121)
+       [10] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:132)
+       [11] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _on_level_up (res://src/actors/player/player.gd:170)
+       [1] add_xp (res://src/core/progression/hero_progress.gd:49)
+       [2] _give_levels (res://src/core/cheats.gd:132)
+       [3] apply (res://src/core/cheats.gd:109)
+       [4] submit (res://src/ui/hud/chat_box.gd:121)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:132)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _on_level_up (res://src/actors/player/player.gd:171)
+       [1] add_xp (res://src/core/progression/hero_progress.gd:49)
+       [2] _give_levels (res://src/core/cheats.gd:132)
+       [3] apply (res://src/core/cheats.gd:109)
+       [4] submit (res://src/ui/hud/chat_box.gd:121)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:132)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] center (res://src/actors/actor.gd:131)
+       [1] _on_level_up (res://src/actors/player/player.gd:172)
+       [2] add_xp (res://src/core/progression/hero_progress.gd:49)
+       [3] _give_levels (res://src/core/cheats.gd:132)
+       [4] apply (res://src/core/cheats.gd:109)
+       [5] submit (res://src/ui/hud/chat_box.gd:121)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:132)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] heal (res://src/npc/npc_services.gd:49)
+       [1] apply (res://src/core/cheats.gd:117)
+       [2] submit (res://src/ui/hud/chat_box.gd:121)
+       [3] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:135)
+       [4] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Parameter "data.tree" is null.
+   at: get_tree (scene/main/node.h:559)
+   GDScript backtrace (most recent call first):
+       [0] apply (res://src/core/cheats.gd:118)
+       [1] submit (res://src/ui/hud/chat_box.gd:121)
+       [2] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:135)
+       [3] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_codes_are_recognised (res://tests/unit/test_chat.gd:54)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [5] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base ashwood_staff
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base silk_undershirt
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base apprentice_robe
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base linen_hood
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_lemonq_gives_gold (res://tests/unit/test_chat.gd:58)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [5] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] _begin (res://tests/unit/test_chat.gd:19)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [5] _run (res://tests/run_tests.gd:43)
+       [6] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [7] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] _begin (res://tests/unit/test_chat.gd:19)
+       [3] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown map sanctuary
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build_map (res://src/autoload/game.gd:167)
+       [1] load_map (res://src/autoload/game.gd:187)
+       [2] _begin (res://tests/unit/test_chat.gd:23)
+       [3] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid call. Nonexistent function 'node' in base 'Nil'.
+   at: TreeState.passive_modifiers (res://src/core/progression/tree_state.gd:123)
+   GDScript backtrace (most recent call first):
+       [0] passive_modifiers (res://src/core/progression/tree_state.gd:123)
+       [1] persistent_modifiers (res://src/core/hero_data.gd:176)
+       [2] compute_stats (res://src/core/hero_data.gd:199)
+       [3] rebuild_stats (res://src/actors/player/player.gd:227)
+       [4] ensure_stats (res://src/actors/actor.gd:88)
+       [5] bind (res://src/actors/player/player.gd:141)
+       [6] _begin (res://tests/unit/test_chat.gd:24)
+       [7] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:150)
+       [8] _run (res://tests/run_tests.gd:43)
+       [9] test_chat_box_says_and_cheats (res://tests/unit/test_chat.gd:147)
+       [10] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid call. Nonexistent function 'die' in base 'Nil'.
+   at: test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+   GDScript backtrace (most recent call first):
+       [0] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [1] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_longsword
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base warden_kite_shield
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base padded_gambeson
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_hauberk
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base iron_helm
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_new_hero_starts_with_five_town_portals (res://tests/unit/test_chat.gd:76)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [5] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base ashwood_staff
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base silk_undershirt
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base apprentice_robe
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base linen_hood
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:155)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'base' on a base object of type 'Nil'.
+   at: Equipment.auto_slot (res://src/core/items/equipment.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] auto_slot (res://src/core/items/equipment.gd:58)
+       [1] init_new (res://src/core/hero_data.gd:156)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+ERROR: Unknown item base health_potion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] make_item (res://src/autoload/database.gd:135)
+       [1] init_new (res://src/core/hero_data.gd:160)
+       [2] new_hero (res://src/autoload/game.gd:70)
+       [3] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [6] _begin (res://tests/unit/test_chat.gd:25)
+SCRIPT ERROR: Invalid assignment of property or key 'count' with value of type 'int' on a base object of type 'Nil'.
+   at: HeroData.init_new (res://src/core/hero_data.gd:161)
+   GDScript backtrace (most recent call first):
+       [0] init_new (res://src/core/hero_data.gd:161)
+       [1] new_hero (res://src/autoload/game.gd:70)
+       [2] test_taicho_and_greg_give_1000_gold (res://tests/unit/test_chat.gd:67)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_new_cheats_through_chat_and_immediate_tempo_revival (res://tests/unit/test_chat.gd:170)
+       [5] _begin (res://tests/unit/test_chat.gd:25)
+[FAIL] test_chat.gd — 9 tests, 48 checks, 3 failures (196.9 ms)
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: gift reports added count
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: all requested items added — expected 20, got 0
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: gift reports added count
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: all requested items added — expected 20, got 0
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: gift reports added count
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: all requested items added — expected 10, got 0
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: gift reports added count
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: all requested items added — expected 100, got 0
+  FAIL test_armory_cheats.test_item_gifts_and_full_bag_are_atomic: aborted before done() (script error?)
+  FAIL test_chat.test_new_cheats_through_chat_and_immediate_tempo_revival: living actor spawned
+  FAIL test_chat.test_new_cheats_through_chat_and_immediate_tempo_revival: aborted before done() (script error?)
+  FAIL test_chat.test_new_hero_starts_with_five_town_portals: 5 free Town Portals — expected 5, got 0
+TOTAL: 160 checks, 12 failures

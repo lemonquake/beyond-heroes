@@ -1,5 +1,5 @@
 class_name DataWeapons
-## The thirteen weapon categories: stance, movement, attack timing, range, damage, speed, impact, skill compatibility,
+## Weapon categories: stance, movement, attack timing, range, damage, speed, impact, skill compatibility,
 ## animations. Light attacks chain through four animations; heavy attacks may branch from any chain step.
 
 static func _w(id: StringName, name: String, d: Dictionary) -> WeaponTypeDef:
@@ -58,6 +58,12 @@ static func build() -> Array:
 			"length": 1.3, "move_mult": 0.45, "light_anims": [&"bow_1", &"bow_2", &"bow_1", &"bow_2"], "heavy_anim": &"bow_release",
 			"chain_mults": [1.0, 1.0, 1.0, 1.25], "swing_sound": &"bow_release", "hit_sound": &"arrow_impact",
 			"description": "Ranged physical damage. Hold heavy to draw a charged, piercing shot."}),
+		_w(&"crossbow", "Crossbow", {"two_handed": true, "ranged": true, "projectile_speed": 45.0, "attacks_per_second": 0.82, "reach": 26.0,
+			"arc_degrees": 0.0, "crit_chance": 0.10, "impact": 1.25, "knockback": 4.0, "poise_damage": 16.0, "heavy_multiplier": 2.1,
+			"heavy_knockback": 10.0, "charge_max": 0.8, "charge_bonus": 0.65, "scaling": {&"str": 1.0}, "idle_anim": &"idle_crossbow",
+			"length": 0.9, "move_mult": 0.30, "light_anims": [&"crossbow_fire", &"crossbow_fire", &"crossbow_fire", &"crossbow_fire"], "heavy_anim": &"crossbow_heavy",
+			"chain_mults": [1.0, 1.0, 1.0, 1.35], "swing_sound": &"bow_release", "hit_sound": &"arrow_impact", "rep": &"ashwood_crossbow",
+			"description": "Two-handed bolt launcher. Slower reloads, faster bolts and stronger impact. Hold heavy to aim a piercing shot; uses Ranger shot skills."}),
 		_w(&"staff", "Staff", {"two_handed": true, "ranged": true, "projectile_speed": 20.0, "attacks_per_second": 1.0, "reach": 18.0,
 			"arc_degrees": 0.0, "crit_chance": 0.05, "impact": 1.1, "knockback": 3.5, "poise_damage": 10.0, "heavy_multiplier": 2.0,
 			"heavy_knockback": 8.0, "charge_max": 1.0, "charge_bonus": 0.8, "scaling": {&"str": 1.0}, "idle_anim": &"idle_staff",

@@ -1,0 +1,132 @@
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: hunters_bow
+03:41:57 | INFO: Primitives created: 7
+03:41:57 | INFO: Finished glTF 2.0 export in 0.07350277900695801 s
+
+[item] hunters_bow                    1700 tris  size 0.476 x 0.064 x 1.445
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: composite_bow
+03:41:57 | INFO: Primitives created: 6
+03:41:57 | INFO: Finished glTF 2.0 export in 0.013544321060180664 s
+
+[item] composite_bow                  1376 tris  size 0.427 x 0.064 x 1.340
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: warden_longbow
+03:41:57 | INFO: Primitives created: 8
+03:41:57 | INFO: Finished glTF 2.0 export in 0.026091337203979492 s
+
+[item] warden_longbow                 1704 tris  size 0.460 x 0.064 x 1.185
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: shortbow
+03:41:57 | INFO: Primitives created: 8
+03:41:57 | INFO: Finished glTF 2.0 export in 0.028696060180664062 s
+
+[item] shortbow                       1844 tris  size 0.425 x 0.064 x 1.338
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: recurve_bow
+03:41:57 | INFO: Primitives created: 7
+03:41:57 | INFO: Finished glTF 2.0 export in 0.015735149383544922 s
+
+[item] recurve_bow                    1700 tris  size 0.476 x 0.064 x 1.492
+03:41:57 | INFO: Starting glTF 2.0 export
+03:41:57 | INFO: Extracting primitive: hornbow
+03:41:57 | INFO: Primitives created: 6
+03:41:57 | INFO: Finished glTF 2.0 export in 0.020204782485961914 s
+
+[item] hornbow                        1388 tris  size 0.488 x 0.064 x 1.205
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: siege_greatbow
+03:41:58 | INFO: Primitives created: 7
+03:41:58 | INFO: Finished glTF 2.0 export in 0.02200937271118164 s
+
+[item] siege_greatbow                 2084 tris  size 0.476 x 0.064 x 1.425
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: galewing_bow
+03:41:58 | INFO: Primitives created: 6
+03:41:58 | INFO: Finished glTF 2.0 export in 0.013473987579345703 s
+
+[item] galewing_bow                   1388 tris  size 0.459 x 0.064 x 1.568
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: fowling_bow
+03:41:58 | INFO: Primitives created: 6
+03:41:58 | INFO: Finished glTF 2.0 export in 0.013789892196655273 s
+
+[item] fowling_bow                    1340 tris  size 0.395 x 0.065 x 1.370
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: yew_longbow
+03:41:58 | INFO: Primitives created: 7
+03:41:58 | INFO: Finished glTF 2.0 export in 0.01728343963623047 s
+
+[item] yew_longbow                    2236 tris  size 0.348 x 0.071 x 1.436
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: thornback_bow
+03:41:58 | INFO: Primitives created: 7
+03:41:58 | INFO: Finished glTF 2.0 export in 0.0162353515625 s
+
+[item] thornback_bow                  1700 tris  size 0.476 x 0.064 x 1.445
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: frostwing_bow
+03:41:58 | INFO: Primitives created: 6
+03:41:58 | INFO: Finished glTF 2.0 export in 0.014125585556030273 s
+
+[item] frostwing_bow                  1376 tris  size 0.427 x 0.064 x 1.340
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: stormstring_greatbow
+03:41:58 | INFO: Primitives created: 8
+03:41:58 | INFO: Finished glTF 2.0 export in 0.02766585350036621 s
+
+[item] stormstring_greatbow           1704 tris  size 0.460 x 0.064 x 1.185
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: depth_rootbend_shortbow
+03:41:58 | INFO: Primitives created: 8
+03:41:58 | INFO: Finished glTF 2.0 export in 0.028475046157836914 s
+
+[item] depth_rootbend_shortbow        1704 tris  size 0.460 x 0.064 x 1.185
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: depth_saltwind_recurve
+03:41:58 | INFO: Primitives created: 8
+03:41:58 | INFO: Finished glTF 2.0 export in 0.02533864974975586 s
+
+[item] depth_saltwind_recurve         1844 tris  size 0.425 x 0.064 x 1.338
+03:41:58 | INFO: Starting glTF 2.0 export
+03:41:58 | INFO: Extracting primitive: depth_cinderhorn_bow
+03:41:58 | INFO: Primitives created: 7
+03:41:58 | INFO: Finished glTF 2.0 export in 0.02453446388244629 s
+
+[item] depth_cinderhorn_bow           1700 tris  size 0.476 x 0.064 x 1.492
+03:41:59 | INFO: Starting glTF 2.0 export
+03:41:59 | INFO: Extracting primitive: depth_icebranch_longbow
+03:41:59 | INFO: Primitives created: 6
+03:41:59 | INFO: Finished glTF 2.0 export in 0.020098209381103516 s
+
+[item] depth_icebranch_longbow        1388 tris  size 0.488 x 0.064 x 1.205
+03:41:59 | INFO: Starting glTF 2.0 export
+03:41:59 | INFO: Extracting primitive: depth_thornwing_bow
+03:41:59 | INFO: Primitives created: 7
+03:41:59 | INFO: Finished glTF 2.0 export in 0.02313971519470215 s
+
+[item] depth_thornwing_bow            2084 tris  size 0.476 x 0.064 x 1.425
+03:41:59 | INFO: Starting glTF 2.0 export
+03:41:59 | INFO: Extracting primitive: depth_starbridge_bow
+03:41:59 | INFO: Primitives created: 6
+03:41:59 | INFO: Finished glTF 2.0 export in 0.013814687728881836 s
+
+[item] depth_starbridge_bow           1388 tris  size 0.459 x 0.064 x 1.568
+03:41:59 | INFO: Starting glTF 2.0 export
+03:41:59 | INFO: Extracting primitive: depth_nightglass_warbow
+03:41:59 | INFO: Primitives created: 6
+03:41:59 | INFO: Finished glTF 2.0 export in 0.014419794082641602 s
+
+[item] depth_nightglass_warbow        1340 tris  size 0.395 x 0.065 x 1.370
+03:41:59 | INFO: Starting glTF 2.0 export
+03:41:59 | INFO: Extracting primitive: depth_dawnfeather_bow
+03:41:59 | INFO: Primitives created: 7
+03:41:59 | INFO: Finished glTF 2.0 export in 0.023120641708374023 s
+
+[item] depth_dawnfeather_bow          2236 tris  size 0.348 x 0.071 x 1.436
+[build_items] 21 items done in 2.8s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

@@ -110,7 +110,7 @@ func split_shot(original: Projectile) -> void:
 	# Keep the aimed arrow; additional arrows alternate left and right.
 	for i in range(1, count):
 		var angle := deg_to_rad(6.0 * ceilf(float(i) / 2.0) * (1.0 if i % 2 else -1.0))
-		var p := Projectile.spawn(original.get_parent(), original.global_position, original.velocity.normalized().rotated(Vector3.UP, angle), original.velocity.length(), original.request.clone(), owner, original.target_mask, original.element, "arrow")
+		var p := Projectile.spawn(original.get_parent(), original.global_position, original.velocity.normalized().rotated(Vector3.UP, angle), original.velocity.length(), original.request.clone(), owner, original.target_mask, original.element, original.projectile_look)
 		p.volley_hits = shared_hits
 		p.max_range = original.max_range
 		p.pierce = original.pierce
