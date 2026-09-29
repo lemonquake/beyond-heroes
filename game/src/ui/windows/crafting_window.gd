@@ -179,7 +179,13 @@ func _build_salvage() -> Control:
 	grid.columns = Inventory.COLUMNS
 	grid.add_theme_constant_override("h_separation", 3)
 	grid.add_theme_constant_override("v_separation", 3)
-	bw.add_child(grid)
+	var bag_scroll := ScrollContainer.new()
+	bag_scroll.custom_minimum_size = Vector2(698, 420)
+	bag_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	bag_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	bw.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	bw.add_child(bag_scroll)
+	bag_scroll.add_child(grid)
 	for i in Inventory.COLUMNS * Inventory.ROWS:
 		var c := ItemSlot.new(ItemSlot.Kind.INVENTORY, 64.0)
 		c.index = i

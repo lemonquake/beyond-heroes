@@ -39,6 +39,7 @@ func _ready() -> void:
 	touch.hud = hud
 	_root.add_child(touch)
 	_add_window(&"inventory", InventoryWindow.new())
+	_add_window(&"auto_loot", AutoLootWindow.new())
 	_add_window(&"character", CharacterWindow.new())
 	_add_window(&"skills", SkillsWindow.new())
 	_add_window(&"talents", TalentsWindow.new())

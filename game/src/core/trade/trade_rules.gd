@@ -39,7 +39,11 @@ static func offer_error(hero: HeroData, offer: Dictionary) -> String:
 
 ## "" when `hero`'s bag has room for `incoming` items after their own offered items leave it.
 static func fit_error(hero: HeroData, offer: Dictionary, incoming: int) -> String:
-	var room := hero.inventory.free_cells() + (offer.get("items", []) as Array).size()
+	var room := hero.inventory.free_cells()
+	for it in offer.get("items", []):
+		var index := hero.inventory.index_of(it)
+		if index >= 0 and index < hero.inventory.bag_capacity:
+			room += 1
 	if incoming > room:
 		return "Your bag needs room for %d more item%s" % [incoming - room, "" if incoming - room == 1 else "s"]
 	return ""
@@ -73,7 +77,13 @@ static func swap_error(hero: HeroData, mine: Dictionary, theirs: Dictionary) -> 
 	var e := offer_error(hero, mine)
 	if e != "":
 		return e
-	return fit_error(hero, mine, (theirs.get("items", []) as Array).size())
+	var trial := hero.inventory.copy()
+	for it in mine.get("items", []):
+		trial.take(hero.inventory.index_of(it))
+	for it in theirs.get("items", []):
+		if trial.add((it as ItemInstance).clone()) > 0:
+			return "Your bags need more room for this trade"
+	return ""
 
 ## Perform the exchange on `hero`: their offered items and gold arrive, this hero's leave. Returns "" or why not
 ## (in which case nothing changed).

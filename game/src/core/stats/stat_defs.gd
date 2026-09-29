@@ -5,12 +5,12 @@ enum Fmt { INT, DEC1, PCT, MULT, SPEED, SECONDS }
 
 # key: [display name, format, short description]
 const DEFS := {
-	&"str": ["Strength", Fmt.INT, "Physical weapon damage, heavy weapons, Defense, knockback, Maximum HP."],
-	&"agi": ["Agility", Fmt.INT, "Movement speed, Evasion, Attack Speed, light weapons, dodge."],
+	&"str": ["Strength", Fmt.INT, "Physical damage with all weapons, Defense, carry capacity, knockback and Maximum HP."],
+	&"agi": ["Agility", Fmt.INT, "Movement speed, Evasion, Attack Speed, Critical Chance and dodge."],
 	&"int": ["Intelligence", Fmt.INT, "Magic damage, spell scaling, Maximum Mana."],
 	&"wis": ["Wisdom", Fmt.INT, "Mana efficiency and regeneration, resistances, cooldowns."],
 	&"spi": ["Spirit", Fmt.INT, "HP/Mana regeneration, healing, buff effect, status resistance."],
-	&"dex": ["Dexterity", Fmt.INT, "Accuracy, Critical Chance, projectiles, blocking."],
+	&"dex": ["Dexterity", Fmt.INT, "Accuracy and Critical Chance. Does not increase damage."],
 	&"max_hp": ["Maximum HP", Fmt.INT, ""],
 	&"max_mana": ["Maximum Mana", Fmt.INT, ""],
 	&"hp_regen": ["HP Regeneration", Fmt.DEC1, "per second"],

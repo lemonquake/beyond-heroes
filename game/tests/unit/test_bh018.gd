@@ -26,12 +26,12 @@ func _crystal(id: StringName, n := 1) -> ItemInstance:
 # ---- carry capacity -------------------------------------------------------------------------------------------------
 
 func test_carry_capacity_is_doubled() -> void:
-	eq(StatCalculator.CARRY_BASE, 110.0, "base capacity 110 (was 55)")
-	eq(StatCalculator.CARRY_PER_STR, 3.2, "3.2 per Strength (was 1.6)")
+	eq(StatCalculator.CARRY_BASE, 220.0, "base capacity doubled again to 220")
+	eq(StatCalculator.CARRY_PER_STR, 6.4, "6.4 per Strength")
 	var h := _hero(&"knight", 1)
 	var d := h.compute_stats()
 	var strength := d.get_stat(&"str")
-	near(d.get_stat(&"carry_capacity"), 2.0 * (55.0 + strength * 1.6), 0.01, "a new knight carries twice what they used to")
+	near(d.get_stat(&"carry_capacity"), 2.0 * (110.0 + strength * 3.2), 0.01, "a new knight carries twice the previous capacity")
 	eq(float(StatusRules.DEFS[&"elixir_feather"].mods[0][2]), 120.0, "the Featherweight Draught doubles too (+120)")
 	done()
 

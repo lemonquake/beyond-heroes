@@ -180,13 +180,10 @@ func _process(delta: float) -> void:
 
 ## Auto-loot (HUD checkbox): on, matching the rarity filter, room in the bag and not pushing the hero past full load.
 func wants_auto_loot(p: Player) -> bool:
-	if item == null or not Settings.auto_loot or item.rarity < Settings.auto_loot_rarity:
+	if item == null or not Settings.auto_loot or p == null or not p.alive:
 		return false
-	if not p.hero.inventory.can_fit(item):
-		return false
-	if p.stats and p.stats.get_stat(&"carry_weight") + item.weight() > p.stats.get_stat(&"carry_capacity"):
-		return false
-	return true
+	p.ensure_stats()
+	return AutoLootRules.pickup_reason(item, p.hero, p.stats, Settings.auto_loot_rules, Settings.auto_loot_rarity) == ""
 
 ## The drop flies into the hero, then is picked up (auto-loot).
 func _magnet(p: Player) -> void:
@@ -202,7 +199,7 @@ func _magnet(p: Player) -> void:
 		if _visual:
 			_visual.scale = Vector3.ONE * (1.0 - 0.6 * k), 0.0, 1.0, MAGNET_TIME)
 	tw.tween_callback(func() -> void:
-		if not pick_up(p):
+		if not is_instance_valid(p) or not wants_auto_loot(p) or not pick_up(p):
 			# the bag filled up in the meantime: drop back where it was
 			_collecting = false
 			global_position = start

@@ -664,6 +664,20 @@ static func level_range(id: StringName) -> Vector2i:
 	var lv: Array = get_def(id).get("levels", [[1, 1]])
 	return Vector2i(int(lv[0][0]), int(lv[lv.size() - 1][1]))
 
+## Shared recommendation for entrances, maps and travel choices.
+static func recommended_levels(id: StringName) -> String:
+	var lv := level_range(id)
+	return "Suggested Level %d–%d" % [lv.x, lv.y]
+
+static func map_recommendation(map: StringName) -> String:
+	var parsed := parse(map)
+	if parsed[0] != &"":
+		return recommended_levels(parsed[0])
+	if map in [&"catacombs", &"forgotten_temple", &"boss_arena"]:
+		var def := DB.map_def(map)
+		return "Suggested Level %d–%d" % [def.level_min, def.level_max] if def.level_min != def.level_max else "Suggested Level %d" % def.level_min
+	return ""
+
 static func map_id(dungeon: StringName, floor_n: int) -> StringName:
 	return StringName("dg_%s_%d" % [dungeon, floor_n])
 
@@ -855,5 +869,5 @@ static func cell_xz(plan: Array, cell: Vector2i) -> Vector2:
 static func gate_destinations(hero: HeroData, dungeon: StringName) -> Array:
 	var out := []
 	for n in reached_floors(hero, dungeon):
-		out.append({"map": map_id(dungeon, n), "spawn": &"arrival", "name": floor_title(dungeon, n)})
+		out.append({"map": map_id(dungeon, n), "spawn": &"arrival", "name": "%s · %s" % [floor_title(dungeon, n), recommended_levels(dungeon)]})
 	return out

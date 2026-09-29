@@ -43,6 +43,7 @@ var blood := true                   # blood sprays, pools and gore on hits and c
 var screen_shake := 1.0
 var auto_loot_enabled := false      # HUD checkbox: walk over matching drops to pick them up
 var auto_loot_mode := 0             # AUTO_LOOT_NAMES (which drops auto-loot takes)
+var auto_loot_rules := {}           # AutoLootRules: category and advanced filters, saved per hero
 var show_enemy_bars := true
 var loot_labels_always := true      # false: only while Alt is held
 var camera_zoom := 1.0
@@ -63,7 +64,7 @@ var efficiency_mode := false
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
+	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
 	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
@@ -205,6 +206,8 @@ func save_file() -> void:
 	cfg.save(PATH)
 
 func set_value(key: String, value) -> void:
+	if key == "auto_loot_mode":
+		auto_loot_rules.erase("min_rarity")
 	set(key, value)
 	apply()
 	save_file()
@@ -223,7 +226,7 @@ const GROUPS := {
 	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume"],
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "touch_opacity", "touch_size", "touch_auto_aim",
 		"touch_fixed_stick"],
-	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
+	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom",
 		"reduced_motion", "ui_scale", "show_minimap", "minimap_zoom"],
 }
 

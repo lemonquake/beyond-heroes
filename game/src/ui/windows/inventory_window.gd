@@ -1,7 +1,7 @@
 class_name InventoryWindow
 extends UIWindow
-## Inventory + Equipment (I). Left: the hero in 3D on a plinth, the 13 equipment slots around it, a stat summary and
-## active set bonuses. Right: category tabs, search, rarity filter, sorting, the 60-cell bag, gold, and an action bar
+## Inventory + Equipment (I). Gear and Utility share 84 slots; consumables have 16 additional belt slots. Left: the hero in 3D on a plinth, the 13 equipment slots around it, a stat summary and
+## active set bonuses. Right: category tabs, search, rarity filter, sorting, the bags and separate belt, gold, and an action bar
 ## for the selected item: Equip/Use, Split, Lock, Favorite, Mark to sell, Drop, Destroy (confirmed).
 ## Mouse: left select · right Equip/Use · Shift+left Split · drag to move, merge, equip or unequip · double-click Equip.
 ## Potion Belt row (bh-011): what Q / E (the HP / Mana orbs on a phone) use — click a slot to choose, drop a consumable on
@@ -25,7 +25,18 @@ var filter := "all"
 var min_rarity := 0
 var search := ""
 var selected: ItemSlot
-var _tabs: TabBar
+var _tabs: HFlowContainer
+var _category_buttons: Dictionary = {}
+var _bag_tabs: TabBar
+var bag_view := "all"
+var _bag_section: VBoxContainer
+var _belt_section: VBoxContainer
+var _bag_heading: Label
+var _belt_heading: Label
+var _empty: Label
+var _results: Label
+var _reverse: CheckButton
+var _grid_scroll: ScrollContainer
 var _search: LineEdit
 var _rarity: OptionButton
 var _sort: OptionButton
@@ -36,7 +47,7 @@ var _load_text: Label
 var _space: Label
 var _summary: GridContainer
 var _sets: VBoxContainer
-var _actions: HBoxContainer
+var _actions: HFlowContainer
 var _sel_name: Label
 var _btn_use: Button
 var _btn_split: Button
@@ -51,7 +62,7 @@ var _btn_belt: Array[Button] = []
 var _hover_slot: ItemSlot
 
 func _init() -> void:
-	super._init("Inventory", Vector2(1560, 900))
+	super._init("Inventory", Vector2(1680, 960))
 
 func _build() -> void:
 	var row := hbox(22)
@@ -113,7 +124,7 @@ func _build_belt() -> Control:
 	var box := inset(Vector2(620, 0))
 	var row := hbox(12)
 	box.add_child(row)
-	var t := UITheme.label("Potion Belt", 18, UITheme.GOLD, UITheme.title_font())
+	var t := UITheme.label("Quick Use", 18, UITheme.GOLD, UITheme.title_font())
 	t.custom_minimum_size = Vector2(118, 0)
 	t.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(t)
@@ -160,22 +171,53 @@ func _equip_slot(slot: StringName, px := 76.0) -> ItemSlot:
 func _build_bag() -> Control:
 	var col := vbox(10)
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_tabs = TabBar.new()
-	for k in Inventory.FILTERS:
-		_tabs.add_tab(Inventory.FILTER_NAMES[k])
-	_tabs.tab_changed.connect(func(i: int) -> void:
-		filter = Inventory.FILTERS.keys()[i]
+	_bag_tabs = TabBar.new()
+	for label in ["All Bags", "Gear Bag", "Utility Bag", "Potion & Scroll Belt"]:
+		_bag_tabs.add_tab(label)
+	_bag_tabs.add_theme_font_size_override("font_size", 20)
+	_bag_tabs.add_theme_font_override("font", UITheme.body_bold())
+	_bag_tabs.tab_changed.connect(func(i: int) -> void:
+		bag_view = ["all", "gear", "utility", "belt"][i]
+		_select(null)
 		_apply_filter())
+	col.add_child(_bag_tabs)
+	_tabs = HFlowContainer.new()
+	_tabs.add_theme_constant_override("h_separation", 6)
+	_tabs.add_theme_constant_override("v_separation", 6)
+	var group := ButtonGroup.new()
+	for k in Inventory.TABS:
+		var key: String = k
+		var tab := button(Inventory.FILTER_NAMES[k], func() -> void:
+			filter = key
+			_select(null)
+			_apply_filter())
+		tab.toggle_mode = true
+		tab.button_group = group
+		tab.button_pressed = key == "all"
+		tab.custom_minimum_size.y = 38
+		tab.add_theme_font_size_override("font_size", 18)
+		tab.add_theme_font_override("font", UITheme.body_bold())
+		for state in ["normal", "hover", "pressed", "focus"]:
+			var style := UITheme.button_style(state)
+			style.content_margin_left = 10
+			style.content_margin_right = 10
+			style.content_margin_top = 6
+			style.content_margin_bottom = 6
+			tab.add_theme_stylebox_override(state, style)
+		tab.add_theme_color_override("font_pressed_color", UITheme.GOLD)
+		_tabs.add_child(tab)
+		_category_buttons[key] = tab
 	col.add_child(_tabs)
 	var tools := hbox(8)
 	col.add_child(tools)
 	_search = LineEdit.new()
-	_search.placeholder_text = "Search items"
-	_search.right_icon = UIArt.ui_icon("search")
+	_search.placeholder_text = "Search name, rarity or enchantment"
 	_search.custom_minimum_size = Vector2(260, 44)
+	_search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_search.clear_button_enabled = true
 	_search.text_changed.connect(func(t: String) -> void:
 		search = t
+		_select(null)
 		_apply_filter())
 	tools.add_child(_search)
 	_rarity = OptionButton.new()
@@ -184,33 +226,56 @@ func _build_bag() -> Control:
 		_rarity.add_item("%s or better" % BH.RARITY_NAMES[i])
 	_rarity.item_selected.connect(func(i: int) -> void:
 		min_rarity = i
+		_select(null)
 		_apply_filter())
 	_rarity.custom_minimum_size = Vector2(210, 44)
 	tools.add_child(_rarity)
+	tools.add_child(button("Clear", func() -> void:
+		filter = "all"
+		min_rarity = 0
+		search = ""
+		_search.text = ""
+		_rarity.select(0)
+		_category_buttons["all"].button_pressed = true
+		_select(null)
+		_apply_filter()))
+	var sorting := hbox(10)
+	col.add_child(sorting)
 	_sort = OptionButton.new()
-	for m in ["Rarity", "Type", "Level", "Name", "Value"]:
+	for m in ["Rarity", "Category", "Item level", "Name", "Value", "Weight"]:
 		_sort.add_item("Sort: " + m)
-	_sort.custom_minimum_size = Vector2(170, 44)
-	tools.add_child(_sort)
-	tools.add_child(button("Sort", func() -> void:
-		hero.inventory.sort(Inventory.SORT_MODES[_sort.selected])
-		_select(null)))
-	var grid_well := inset()
-	col.add_child(grid_well)
-	var grid := GridContainer.new()
-	grid.columns = Inventory.COLUMNS
-	grid.add_theme_constant_override("h_separation", 4)
-	grid.add_theme_constant_override("v_separation", 4)
-	grid_well.add_child(grid)
-	for i in Inventory.COLUMNS * Inventory.ROWS:
-		var c := ItemSlot.new(ItemSlot.Kind.INVENTORY, CELL)
-		c.index = i
-		c.clicked.connect(_on_cell_clicked)
-		c.double_clicked.connect(func(sl): _use(sl.item))
-		c.dropped.connect(_on_drop)
-		c.hovered.connect(_on_hover)
-		grid.add_child(c)
-		cells.append(c)
+	_sort.custom_minimum_size = Vector2(210, 42)
+	_sort.item_selected.connect(func(_i: int) -> void: _sort_bags())
+	sorting.add_child(_sort)
+	_reverse = CheckButton.new()
+	_reverse.text = "Reverse order"
+	_reverse.toggled.connect(func(_on: bool) -> void: _sort_bags())
+	sorting.add_child(_reverse)
+	sorting.add_child(button("Sort bags", _sort_bags))
+	sorting.add_child(button("Auto-Loot Filters", func() -> void:
+		if Game.ui_root: Game.ui_root.open(&"auto_loot")))
+	_results = UITheme.label("", 17, UITheme.TEXT_DIM, UITheme.body_font())
+	col.add_child(_results)
+	_grid_scroll = ScrollContainer.new()
+	_grid_scroll.custom_minimum_size.y = 310
+	_grid_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_grid_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	col.add_child(_grid_scroll)
+	var sections := vbox(12)
+	sections.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_grid_scroll.add_child(sections)
+	_bag_section = vbox(8)
+	sections.add_child(_bag_section)
+	_bag_heading = UITheme.label("Gear & Utility Bags · 84 shared slots", 19, UITheme.GOLD, UITheme.body_bold())
+	_bag_section.add_child(_bag_heading)
+	_add_grid(_bag_section, 0, Inventory.BAG_CAPACITY, 12)
+	_belt_section = vbox(8)
+	sections.add_child(_belt_section)
+	_belt_heading = UITheme.label("Potion & Scroll Belt · 16 separate slots", 19, UITheme.GOLD, UITheme.body_bold())
+	_belt_section.add_child(_belt_heading)
+	_add_grid(_belt_section, Inventory.BAG_CAPACITY, Inventory.BAG_CAPACITY + Inventory.BELT_CAPACITY, 8)
+	_empty = UITheme.label("No items match these filters.", 20, UITheme.TEXT_DIM, UITheme.body_font())
+	sections.add_child(_empty)
 	var status := hbox(10)
 	col.add_child(status)
 	var gi := TextureRect.new()
@@ -254,9 +319,12 @@ func _build_bag() -> Control:
 	col.add_child(act)
 	var av := vbox(6)
 	act.add_child(av)
-	_sel_name = UITheme.label("Select an item", 17, UITheme.TEXT_DIM, UITheme.body_bold())
+	_sel_name = UITheme.label("Select an item", 19, UITheme.TEXT_DIM, UITheme.body_bold())
+	_sel_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	av.add_child(_sel_name)
-	_actions = hbox(6)
+	_actions = HFlowContainer.new()
+	_actions.add_theme_constant_override("h_separation", 6)
+	_actions.add_theme_constant_override("v_separation", 6)
 	av.add_child(_actions)
 	_btn_use = button("Equip", func() -> void: _use(_sel_item()), &"PrimaryButton", 120.0)
 	_btn_split = button("Split", func() -> void: _split_dialog(_sel_item()), &"", 96.0)
@@ -271,11 +339,13 @@ func _build_bag() -> Control:
 			if _sel_item():
 				BeltPicker.bind(hero, slot, _sel_item().base.id), &"", 150.0))
 	for b in [_btn_use, _btn_split, _btn_lock, _btn_fav, _btn_junk, _btn_drop, _btn_destroy]:
+		b.add_theme_font_override("font", UITheme.body_bold())
 		b.custom_minimum_size.y = 46
 		_actions.add_child(b)
 	var belt_row := hbox(6)
 	av.add_child(belt_row)
 	for b in _btn_belt:
+		b.add_theme_font_override("font", UITheme.body_bold())
 		b.custom_minimum_size.y = 46
 		belt_row.add_child(b)
 	var hint := UITheme.label("Hold: equip or use · Drag onto a slot to equip · Double-tap an equipped item to remove it · Split with the Split button" if Settings.touch_mode else "Right-click: equip or use · Shift+click: split stack · Drag onto a slot to equip · Double-click an equipped item to remove it",
@@ -317,7 +387,7 @@ func _refresh_items() -> void:
 		cells[i].set_item(it, unusable)
 	_apply_filter()
 	_gold.text = _fmt_gold(hero.inventory.gold)
-	_space.text = "%d / %d slots free" % [hero.inventory.free_cells(), hero.inventory.capacity()]
+	_space.text = "%d / 84 bag slots free · %d / 16 belt slots free" % [hero.inventory.free_cells(), hero.inventory.free_cells(true) - hero.inventory.free_cells()]
 	_refresh_load()
 	preview.dress(hero)
 	_refresh_summary()
@@ -343,10 +413,57 @@ func _refresh_load() -> void:
 	_load_fill.bg_color = col
 	_load_text.text = "%.1f / %.0f  (%d%%) · %s" % [d.get_stat(&"carry_weight"), d.get_stat(&"carry_capacity"), roundi(load * 100.0), note]
 
+func _add_grid(parent: Control, start: int, end: int, columns: int) -> void:
+	var well := inset()
+	parent.add_child(well)
+	var grid := GridContainer.new()
+	grid.columns = columns
+	grid.add_theme_constant_override("h_separation", 5)
+	grid.add_theme_constant_override("v_separation", 5)
+	well.add_child(grid)
+	for i in range(start, end):
+		var c := ItemSlot.new(ItemSlot.Kind.INVENTORY, CELL)
+		c.index = i
+		c.clicked.connect(_on_cell_clicked)
+		c.double_clicked.connect(func(sl): _use(sl.item))
+		c.dropped.connect(_on_drop)
+		c.hovered.connect(_on_hover)
+		grid.add_child(c)
+		cells.append(c)
+
+func _sort_bags() -> void:
+	if hero == null:
+		return
+	_select(null)
+	hero.inventory.sort(Inventory.SORT_MODES[_sort.selected], _reverse.button_pressed)
+
 func _apply_filter() -> void:
+	if hero == null:
+		return
+	var matches := 0
+	var bag_visible := 0
+	var belt_visible := 0
+	var filtering := filter != "all" or min_rarity > 0 or search.strip_edges() != ""
 	for c in cells:
-		c.dim = c.item != null and not Inventory.matches_filter(c.item, filter, min_rarity, search)
+		var in_belt := c.index >= hero.inventory.bag_capacity
+		var in_view := bag_view == "all" or (bag_view == "belt" and in_belt)
+		if bag_view in ["gear", "utility"]:
+			in_view = not in_belt and (c.item == null or hero.inventory.bag_of(c.index) == bag_view)
+		c.visible = in_view and (Inventory.matches_filter(c.item, filter, min_rarity, search) if c.item else not filtering)
+		c.dim = false
+		if c.visible:
+			if in_belt: belt_visible += 1
+			else: bag_visible += 1
+			if c.item: matches += 1
 		c.queue_redraw()
+	_bag_section.visible = bag_visible > 0
+	_belt_section.visible = belt_visible > 0
+	_empty.visible = bag_visible + belt_visible == 0
+	_bag_heading.text = "%s · %d / 84 shared slots free" % [{"all": "Gear & Utility Bags", "gear": "Gear Bag", "utility": "Utility Bag"}.get(bag_view, "Bags"), hero.inventory.free_cells()]
+	_belt_heading.text = "Potion & Scroll Belt · %d / 16 slots free" % (hero.inventory.free_cells(true) - hero.inventory.free_cells())
+	_results.text = "%d item stacks · Favorites first · Gear and Utility share space" % matches
+	if selected and selected.kind == ItemSlot.Kind.INVENTORY and not selected.visible:
+		_select(null)
 
 func _refresh_summary() -> void:
 	for c in _summary.get_children():
@@ -516,6 +633,9 @@ func _on_drop(from: ItemSlot, to: ItemSlot) -> void:
 		return
 	# bag -> bag: move / merge / swap
 	if from.kind == ItemSlot.Kind.INVENTORY and to.kind == ItemSlot.Kind.INVENTORY:
+		if not hero.inventory.accepts(to.index, from.item) or not hero.inventory.accepts(from.index, to.item):
+			Events.notify.emit("The belt holds consumables, potions and scrolls", &"error")
+			return
 		hero.inventory.move(from.index, to.index)
 		_select(null)
 		return
@@ -530,6 +650,9 @@ func _on_drop(from: ItemSlot, to: ItemSlot) -> void:
 		return
 	# equipment -> bag: unequip (into that cell when it is empty)
 	if from.kind == ItemSlot.Kind.EQUIPMENT and to.kind == ItemSlot.Kind.INVENTORY:
+		if not hero.inventory.accepts(to.index, from.item):
+			Events.notify.emit("Equipment belongs in the Gear Bag", &"error")
+			return
 		if to.item == null:
 			var it := hero.equipment.get_item(from.equip_slot)
 			var err := hero.unequip_to_inventory(from.equip_slot)

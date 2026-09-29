@@ -1010,7 +1010,7 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	var sp := c + fwd * 3.4
 	spawn(DataDungeons.gate_id(dungeon), Vector3(sp.x, 0, sp.z), yaw, true)
 	var sg := c + fwd * 3.0 + side * 3.0
-	signpost(Vector2(sg.x, sg.z), [[String(dd.name), Vector2(-fwd.x, -fwd.z)]])
+	signpost(Vector2(sg.x, sg.z), [["%s\n%s" % [dd.name, DataDungeons.recommended_levels(dungeon)], Vector2(-fwd.x, -fwd.z)]])
 	return t
 
 ## Named point of interest used by previews and (later) the world map / camera cinematics.

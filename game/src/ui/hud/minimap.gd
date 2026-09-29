@@ -344,10 +344,12 @@ func _collect_pois() -> void:
 		if tp == null:
 			continue
 		if tp.dungeon_gate != &"":
-			_pois.append({"node": tp, "kind": "gate", "text": String(DataDungeons.get_def(tp.dungeon_gate).get("name", "Dungeon gate")),
+			_pois.append({"node": tp, "kind": "gate", "text": "%s · %s" % [DataDungeons.get_def(tp.dungeon_gate).get("name", "Dungeon gate"), DataDungeons.recommended_levels(tp.dungeon_gate)],
 				"col": tp.rune_tint.lightened(0.2), "rim": false})
 		elif String(tp.destination_map).begins_with("dg_") or tp.has_meta(&"dungeon_up"):
 			_pois.append({"node": tp, "kind": "stairs", "text": "Stairs", "col": tp.rune_tint.lightened(0.2), "rim": false})
+		elif DataDungeons.map_recommendation(tp.destination_map) != "":
+			_pois.append({"node": tp, "kind": "gate", "text": "%s · %s" % [tp.destination_name, DataDungeons.map_recommendation(tp.destination_map)], "col": tp.rune_tint.lightened(0.2), "rim": false})
 		else:
 			var lit := not tp.is_locked() and (not tp.is_network() or Game.hero == null or Game.hero.awakened_shrines.has(tp.teleporter_id))
 			var nm := String(DataIsland.NETWORK.get(tp.teleporter_id, {}).get("name", "Waypoint")) if tp.is_network() else "Waypoint"

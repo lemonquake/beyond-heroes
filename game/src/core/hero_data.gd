@@ -307,6 +307,16 @@ func equip_from_inventory(item: ItemInstance, slot: StringName = &"") -> String:
 	if err != "":
 		return err
 	var idx := inventory.index_of(item)
+	# A two-handed replacement can return both hands. Reserved belt cells cannot
+	# hold either piece, so check general bag space before changing equipment.
+	var needed := 1 if equipment.get_item(slot) != null else 0
+	if slot == &"main_weapon":
+		var wt := equipment.weapon_type_of(item)
+		var sub := equipment.get_item(&"sub_weapon")
+		if sub != null and wt != null and (wt.two_handed or (sub.base.is_weapon() and not wt.dual_wieldable)):
+			needed += 1
+	if needed > inventory.free_cells() + (1 if idx >= 0 and idx < inventory.bag_capacity else 0):
+		return "Gear Bag needs room for the replaced equipment"
 	if idx >= 0:
 		inventory.cells[idx] = null
 	var res := equipment.equip(item, slot, progress.level, progress.base_attributes())

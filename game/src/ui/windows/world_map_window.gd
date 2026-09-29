@@ -324,6 +324,7 @@ func select(id: String) -> void:
 	_status.text = _status_text(p)
 	_desc.text = p.get("text", "")
 	if did != &"":
+		_levels.text = DataDungeons.recommended_levels(did)
 		# bh-013: difficulty, floors, lord and raid state of the dungeon behind this gate
 		var dd := DataDungeons.get_def(did)
 		var boss := DB.enemy(dd.boss)

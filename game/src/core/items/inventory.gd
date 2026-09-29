@@ -5,23 +5,48 @@ extends RefCounted
 signal changed
 
 const COLUMNS := 10
-const ROWS := 6
+const ROWS := 10
+const BAG_CAPACITY := 84
+const BELT_CAPACITY := 16
 
 var cells: Array = []        # ItemInstance or null
 var gold := 0
+var bag_capacity: int
 
-func _init(capacity := COLUMNS * ROWS) -> void:
-	cells.resize(capacity)
+func _init(size := -1) -> void:
+	# Explicit sizes remain ordinary grids (vaults, simulations and tests).
+	bag_capacity = BAG_CAPACITY if size < 0 else size
+	cells.resize(bag_capacity + (BELT_CAPACITY if size < 0 else 0))
 
 func capacity() -> int:
 	return cells.size()
 
-func free_cells() -> int:
+func free_cells(include_belt := false) -> int:
 	var n := 0
-	for c in cells:
-		if c == null:
+	for i in (cells.size() if include_belt else bag_capacity):
+		if cells[i] == null:
 			n += 1
 	return n
+
+func accepts(index: int, item: ItemInstance) -> bool:
+	return index >= 0 and index < cells.size() and (item == null or index < bag_capacity or item.base.is_consumable())
+
+func first_free(item: ItemInstance) -> int:
+	# Consumables fill the reserved belt first, then overflow into the Utility Bag.
+	if item != null and item.base.is_consumable():
+		for i in range(bag_capacity, cells.size()):
+			if cells[i] == null:
+				return i
+	for i in bag_capacity:
+		if cells[i] == null:
+			return i
+	return -1
+
+func bag_of(index: int) -> String:
+	if index >= bag_capacity:
+		return "belt"
+	var item: ItemInstance = cells[index]
+	return "gear" if item != null and item.is_equipment() else "utility"
 
 ## Adds an item, merging stacks first. Returns the leftover count that did not fit (0 = fully added).
 func add(item: ItemInstance) -> int:
@@ -37,7 +62,7 @@ func add(item: ItemInstance) -> int:
 					changed.emit()
 					return 0
 	while item.count > 0:
-		var idx := cells.find(null)
+		var idx := first_free(item)
 		if idx < 0:
 			changed.emit()
 			return item.count
@@ -54,17 +79,22 @@ func add(item: ItemInstance) -> int:
 	return 0
 
 func can_fit(item: ItemInstance) -> bool:
-	if cells.find(null) >= 0:
+	if item == null:
 		return true
-	if item.base.is_stackable():
-		var room := 0
-		for c in cells:
-			if c != null and c.stacks_with(item):
-				room += c.base.stack_max - c.count
-		return room >= item.count
-	return false
+	var room := 0
+	for i in cells.size():
+		if not accepts(i, item):
+			continue
+		var c: ItemInstance = cells[i]
+		if c == null:
+			room += item.base.stack_max
+		elif c.stacks_with(item):
+			room += c.base.stack_max - c.count
+	return room >= item.count
 
 func put_at(index: int, item: ItemInstance) -> ItemInstance:
+	if not accepts(index, item):
+		return item
 	var prev: ItemInstance = cells[index]
 	cells[index] = item
 	changed.emit()
@@ -122,14 +152,20 @@ func consume(base_id: StringName, n := 1) -> bool:
 	changed.emit()
 	return true
 
-const SORT_MODES := ["rarity", "type", "level", "name", "value"]
+const SORT_MODES := ["rarity", "type", "level", "name", "value", "weight"]
 const CATEGORY_ORDER := [&"weapon", &"shield", &"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"accessory",
-	&"consumable", &"material", &"quest"]
+	&"consumable", &"material", &"crystal", &"quest"]
 
 ## Compacts and sorts the grid. Favorites always come first; locked items keep their relative order within a group.
-func sort(mode: String) -> void:
+func sort(mode: String, ascending := false) -> void:
+	_sort_range(mode, ascending, 0, bag_capacity)
+	_sort_range(mode, ascending, bag_capacity, cells.size())
+	changed.emit()
+
+func _sort_range(mode: String, ascending: bool, start: int, end: int) -> void:
 	var items := []
-	for c in cells:
+	for i in range(start, end):
+		var c: ItemInstance = cells[i]
 		if c != null:
 			items.append(c)
 	items.sort_custom(func(a: ItemInstance, b: ItemInstance) -> bool:
@@ -137,26 +173,27 @@ func sort(mode: String) -> void:
 			return a.favorite
 		match mode:
 			"rarity":
-				if a.rarity != b.rarity: return a.rarity > b.rarity
+				if a.rarity != b.rarity: return (a.rarity < b.rarity) if ascending else (a.rarity > b.rarity)
 			"type":
 				var ca := CATEGORY_ORDER.find(a.base.category)
 				var cb := CATEGORY_ORDER.find(b.base.category)
-				if ca != cb: return ca < cb
+				if ca != cb: return (ca > cb) if ascending else (ca < cb)
 			"level":
-				if a.ilvl != b.ilvl: return a.ilvl > b.ilvl
+				if a.ilvl != b.ilvl: return (a.ilvl < b.ilvl) if ascending else (a.ilvl > b.ilvl)
 			"value":
 				var va := a.base_value()
 				var vb := b.base_value()
-				if va != vb: return va > vb
+				if va != vb: return (va < vb) if ascending else (va > vb)
+			"weight":
+				if a.weight() != b.weight(): return (a.weight() < b.weight()) if ascending else (a.weight() > b.weight())
 			"name":
 				pass
 		var na := a.display_name()
 		var nb := b.display_name()
-		if na != nb: return na < nb
+		if na != nb: return (na > nb) if mode == "name" and ascending else (na < nb)
 		return a.uid < b.uid)
-	for i in cells.size():
-		cells[i] = items[i] if i < items.size() else null
-	changed.emit()
+	for i in range(start, end):
+		cells[i] = items[i - start] if i - start < items.size() else null
 
 const FILTERS := {
 	"all": [],
@@ -166,9 +203,20 @@ const FILTERS := {
 	"consumables": [&"consumable"],
 	"materials": [&"material", &"crystal"],
 	"quest": [&"quest"],
+	"potions": [&"consumable"],
+	"scrolls": [&"consumable"],
+	"keys": [&"quest"],
 }
+const TABS := ["all", "weapons", "armor", "accessories", "materials", "potions", "scrolls", "keys", "consumables"]
 const FILTER_NAMES := {"all": "All", "weapons": "Weapons", "armor": "Armor", "accessories": "Accessories",
-	"consumables": "Consumables", "materials": "Materials", "quest": "Quest"}
+	"consumables": "Consumables", "materials": "Ingredients", "quest": "Quest", "potions": "Potions", "scrolls": "Scrolls", "keys": "Keys & Quest"}
+
+static func is_scroll(item: ItemInstance) -> bool:
+	return item.base.is_consumable() and (String(item.base.id).contains("scroll") or item.base.id == &"town_portal" or item.base.consumable_effect.has("learn_recipe"))
+
+static func is_potion(item: ItemInstance) -> bool:
+	var id := String(item.base.id)
+	return item.base.is_consumable() and not is_scroll(item) and (id.contains("potion") or id.contains("elixir") or id.contains("tonic") or id.contains("draught") or id.contains("brew") or id.contains("infusion"))
 
 ## Category filter + optional minimum rarity + free-text search on name, base name and enchantment text.
 static func matches_filter(item: ItemInstance, filter: String, min_rarity := 0, search := "") -> bool:
@@ -176,6 +224,10 @@ static func matches_filter(item: ItemInstance, filter: String, min_rarity := 0, 
 		return false
 	var cats: Array = FILTERS.get(filter, [])
 	if not cats.is_empty() and not cats.has(item.base.category):
+		return false
+	if filter == "scrolls" and not is_scroll(item):
+		return false
+	if filter == "potions" and not is_potion(item):
 		return false
 	if item.rarity < min_rarity:
 		return false
@@ -193,7 +245,7 @@ func split(index: int, amount: int) -> ItemInstance:
 	var src: ItemInstance = cells[index]
 	if src == null or not src.base.is_stackable() or amount <= 0 or amount >= src.count:
 		return null
-	var free := cells.find(null)
+	var free := first_free(src)
 	if free < 0:
 		return null
 	var part := src.clone()
@@ -211,6 +263,8 @@ func move(from: int, to: int) -> void:
 		return
 	var a: ItemInstance = cells[from]
 	var b: ItemInstance = cells[to]
+	if not accepts(to, a) or not accepts(from, b):
+		return
 	if a != null and b != null and a.stacks_with(b) and b.count < b.base.stack_max:
 		var moved := mini(a.count, b.base.stack_max - b.count)
 		b.count += moved
@@ -247,4 +301,21 @@ func from_array(arr: Array) -> void:
 	for i in mini(arr.size(), cells.size()):
 		if arr[i] is Dictionary:
 			cells[i] = ItemInstance.from_dict(arr[i])
+	# Older saves had only general bag slots. Move consumables into the new belt
+	# without changing their stack, identity, flags or the position of other items.
+	if arr.size() <= bag_capacity and cells.size() > bag_capacity:
+		for i in bag_capacity:
+			var item: ItemInstance = cells[i]
+			if item != null and item.base.is_consumable():
+				var dest := first_free(item)
+				if dest >= bag_capacity:
+					cells[dest] = item
+					cells[i] = null
 	changed.emit()
+
+## Independent copy for transactional space checks; never consumes the real items.
+func copy() -> Inventory:
+	var out := Inventory.new(cells.size())
+	out.bag_capacity = bag_capacity
+	out.from_array(to_array())
+	return out

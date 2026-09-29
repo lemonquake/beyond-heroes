@@ -203,6 +203,15 @@ func _gameplay(v: VBoxContainer) -> void:
 	v.add_child(section("Loot"))
 	_check(v, "Auto Loot", "auto_loot_enabled", "Walking near a drop picks it up automatically (also the checkbox beside the HP orb).")
 	_option(v, "Auto Loot Picks Up", "auto_loot_mode", Settings.AUTO_LOOT_NAMES, "Which drops Auto Loot takes. Gold is always collected on contact.")
+	v.add_child(button("Auto-Loot Categories & Advanced Filters", func() -> void:
+		if Game.ui_root:
+			Game.ui_root.open(&"auto_loot")
+			return
+		var filters := AutoLootWindow.new()
+		filters.theme = UITheme.theme()
+		filters.closed.connect(filters.queue_free)
+		add_child(filters)
+		filters.open()))
 	_check(v, "Always Show Loot Labels", "loot_labels_always", "Off: labels appear only while the Show Loot key is held.")
 	v.add_child(section("Interface"))
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)

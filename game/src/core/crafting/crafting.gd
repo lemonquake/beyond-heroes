@@ -66,27 +66,17 @@ static func check(hero: HeroData, r: Dictionary, station: StringName, times := 1
 
 ## Bag space for the results, counting cells the used-up inputs would free.
 static func _fits(hero: HeroData, r: Dictionary, times: int) -> bool:
-	var inv := hero.inventory
-	var freed := 0
+	var trial := hero.inventory.copy()
 	for inp in r.inputs:
-		var need := int(inp[1]) * times
-		for c in inv.cells:
-			if c != null and c.base.id == inp[0] and c.count <= need:
-				need -= c.count
-				freed += 1
-	var free := inv.free_cells() + freed
+		trial.consume(inp[0], int(inp[1]) * times)
 	if is_gear(r):
-		return free >= times
-	var out: Dictionary = r.out
-	var b := DB.item_base(out.base)
-	if b == null:
+		return trial.free_cells() >= times
+	var output: Dictionary = r.out
+	var item := DB.make_item(output.base, BH.Rarity.COMMON, 1, 1)
+	if item == null:
 		return false
-	var total := int(out.get("count", 1)) * times
-	var room := 0
-	for c in inv.cells:
-		if c != null and c.base.id == b.id and c.rarity == BH.Rarity.COMMON:
-			room += b.stack_max - c.count
-	return total <= room + free * b.stack_max
+	item.count = int(output.get("count", 1)) * times
+	return trial.can_fit(item)
 
 ## The base a gear recipe makes for this hero: among bases of the chosen kind that the hero's level allows, the most
 ## advanced ones (highest level requirement), preferring the hero's class. Set pieces and uniques are never crafted.

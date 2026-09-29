@@ -424,12 +424,12 @@ func _build_side() -> void:
 	_auto_loot.toggled.connect(func(on: bool) -> void:
 		if on != Settings.auto_loot_enabled:
 			Settings.set_value("auto_loot_enabled", on)
-			Events.notify.emit("Auto-Loot %s" % ("on: walk over drops to pick them up (%s)" % Settings.AUTO_LOOT_NAMES[Settings.auto_loot_mode].to_lower() if on else "off"), &"info"))
+			Events.notify.emit("Auto-Loot %s" % ("on: walk over drops to pick them up (%s)" % AutoLootRules.summary(Settings.auto_loot_rules, Settings.auto_loot_rarity) if on else "off"), &"info"))
 	Settings.changed.connect(func() -> void:
 		if is_instance_valid(_auto_loot) and _auto_loot.button_pressed != Settings.auto_loot_enabled:
 			_auto_loot.set_pressed_no_signal(Settings.auto_loot_enabled))
 	TooltipLayer.attach(_auto_loot, func() -> Control: return Tips.text(
-		"Walk over drops to pick them up automatically. Takes: %s (change it in Settings > Gameplay). Gold is always collected. Skips drops that do not fit in the bag or would make you Overburdened." % Settings.AUTO_LOOT_NAMES[Settings.auto_loot_mode].to_lower(), "Auto-Loot"))
+		"Walk near matching drops to collect them. %s. Change categories and advanced rules in Inventory > Auto-Loot Filters or Settings > Gameplay. Gold is collected on contact." % AutoLootRules.summary(Settings.auto_loot_rules, Settings.auto_loot_rarity), "Auto-Loot"))
 	v.add_child(_auto_loot)
 	var lh := HBoxContainer.new()
 	lh.add_theme_constant_override("separation", 6)
@@ -608,15 +608,16 @@ func _build_center() -> void:
 	_prompt_panel = PanelContainer.new()
 	_prompt_panel.theme_type_variation = &"GlassPanel"
 	_prompt_panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	_prompt_panel.offset_left = -220
-	_prompt_panel.offset_right = 220
-	_prompt_panel.offset_top = -300
+	_prompt_panel.offset_left = -300
+	_prompt_panel.offset_right = 300
+	_prompt_panel.offset_top = -320
 	_prompt_panel.offset_bottom = -250
 	_prompt_panel.visible = false
 	_prompt_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_prompt_panel)
 	_prompt = UITheme.label("", 19, UITheme.PARCHMENT, UITheme.body_bold())
 	_prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_prompt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_prompt_panel.add_child(_prompt)
 	_banner = VBoxContainer.new()
 	_banner.set_anchors_preset(Control.PRESET_CENTER_TOP)

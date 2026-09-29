@@ -388,7 +388,7 @@ func test_trade_refuses_bad_offers_and_changes_nothing() -> void:
 	# a full bag cannot take more than it gives
 	for i in a.inventory.capacity():
 		if a.inventory.cells[i] == null:
-			a.inventory.cells[i] = _item(&"mana_potion", 1, 100 + i)
+			a.inventory.cells[i] = _item(&"mana_potion", 20, 100 + i)
 			a.inventory.cells[i].seed_value = 100 + i
 	var incoming := {"gold": 5, "items": [TradeRules.read_incoming({"items": [_item(&"health_potion", 1, 9).to_dict()]}).items[0],
 		TradeRules.read_incoming({"items": [_item(&"mana_potion", 1, 8).to_dict()]}).items[0]]}

@@ -178,9 +178,10 @@ func can_interact(_p: Node) -> bool:
 func interact_text() -> String:
 	var dests := destinations()
 	if dungeon_gate != &"":
-		return "Enter %s" % DataDungeons.get_def(dungeon_gate).get("name", "the dungeon") if dests.size() == 1 else "Descend (%d floors reached)" % dests.size()
+		return "%s\n%s" % ["Enter %s" % DataDungeons.get_def(dungeon_gate).get("name", "the dungeon") if dests.size() == 1 else "Descend (%d floors reached)" % dests.size(), DataDungeons.recommended_levels(dungeon_gate)]
 	if dests.size() == 1:
-		return "Travel to %s" % dests[0].name
+		var recommendation := DataDungeons.map_recommendation(destination_map)
+		return "Travel to %s%s" % [dests[0].name, "\n" + recommendation if recommendation != "" else ""]
 	return "Use Waypoint (%d places)" % dests.size()
 
 func interact_anim() -> StringName:

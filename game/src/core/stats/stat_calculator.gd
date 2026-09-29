@@ -29,8 +29,8 @@ const CRIT_CAP := 0.80
 const CRIT_DAMAGE_BASE := 1.5
 const MOVE_PER_AGI := 0.0025
 const MOVE_PER_STR := 0.002         # Strength carries the load: +0.2% movement speed per point
-const CARRY_BASE := 110.0          # bh-018: doubled (was 55)
-const CARRY_PER_STR := 3.2       # bh-018: doubled (was 1.6)
+const CARRY_BASE := 220.0          # Doubled carrying capacity
+const CARRY_PER_STR := 6.4
 const LOAD_FREE := 0.35             # no slowdown up to 35% load
 const LOAD_SLOW_MAX := 0.30         # ... then up to 30% less movement speed at 100% load
 const OVERBURDEN_SLOW := 0.45       # 100%+ load: 45% less movement speed and no dodging
@@ -42,7 +42,6 @@ const CAST_SPEED_PER_WIS := 0.0015
 const SPEED_SOFTCAP := 1.5          # diminishing returns: eff = raw / (1 + raw / SOFTCAP)
 const SPEED_MULT_MIN := 0.4
 const SPEED_MULT_MAX := 2.2         # animation-rate hard cap
-const BLOCK_PER_DEX := 0.001
 const BLOCK_CAP := 0.75
 const GUARD_BLOCK_STRENGTH := 0.4   # block strength when guarding without a shield
 const BLOCK_STR_PER_STR := 0.002
@@ -60,7 +59,6 @@ const MAGIC_PER_WIS := 0.003
 const ELEM_PER_INT := 0.002
 const HEAL_PER_SPI := 0.005
 const BUFF_PER_SPI := 0.003
-const PROJ_SPEED_PER_DEX := 0.002
 const DODGE_CDR_PER_AGI := 0.002
 const DODGE_CDR_CAP := 0.4
 const POISE_PER_STR := 0.5
@@ -71,9 +69,7 @@ const DODGE_DIST_CAP := 0.30
 const BUFF_PER_WIS := 0.004
 const LIGHTDARK_PER_SPI := 0.0025    # Spirit attunes to Light and Dark: +0.25% damage, +0.1% resistance per point
 const LIGHTDARK_RES_PER_SPI := 0.001
-const PROJ_DMG_PER_DEX := 0.003
 const PARRY_BASE := 0.18
-const PARRY_PER_DEX := 0.0008
 const PARRY_MAX := 0.32
 const DEFAULT_ENEMY_EVASION_PER_LEVEL := 6.0   # reference target for the hit-chance display
 const UNARMED_MIN := 2.0
@@ -264,7 +260,6 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	var bterms := []
 	if d.loadout.has_shield:
 		bterms.append(["Shield", d.loadout.shield_block])
-		bterms.append(["Dexterity %d x %.1f%%" % [DEX, BLOCK_PER_DEX * 100.0], DEX * BLOCK_PER_DEX])
 	_std(d, agg, &"block_chance", bterms, 0.0, BLOCK_CAP)
 	var bs_base := d.loadout.shield_block_strength if d.loadout.has_shield else GUARD_BLOCK_STRENGTH
 	_std(d, agg, &"block_strength", [["Shield" if d.loadout.has_shield else "Weapon guard", bs_base],
@@ -316,16 +311,16 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 			&"potion_power", &"elite_damage", &"ember_find", &"tempo_damage", &"hp_on_kill", &"mana_on_kill", &"thorns", &"poison_on_hit"]:
 		_std(d, agg, k, [], -0.9 if k != &"pen_armor" else 0.0, INF)
 	_std(d, agg, &"stagger_power", [["Strength %d x %.1f%%" % [STR, STAGGER_PER_STR * 100.0], STR * STAGGER_PER_STR]], -0.9, INF)
-	_std(d, agg, &"projectile_damage", [["Dexterity %d x %.1f%%" % [DEX, PROJ_DMG_PER_DEX * 100.0], DEX * PROJ_DMG_PER_DEX]], -0.9, INF)
+	_std(d, agg, &"projectile_damage", [], -0.9, INF)
 	_std(d, agg, &"healing", [["Spirit %d x %.1f%%" % [SPI, HEAL_PER_SPI * 100.0], SPI * HEAL_PER_SPI]], -0.9, INF)
 	_std(d, agg, &"buff_effect", [["Wisdom %d x %.1f%%" % [WIS, BUFF_PER_WIS * 100.0], WIS * BUFF_PER_WIS],
 		["Spirit %d x %.1f%%" % [SPI, BUFF_PER_SPI * 100.0], SPI * BUFF_PER_SPI]], -0.9, INF)
-	_std(d, agg, &"projectile_speed", [["Dexterity %d x %.1f%%" % [DEX, PROJ_SPEED_PER_DEX * 100.0], DEX * PROJ_SPEED_PER_DEX]], -0.5, 2.0)
+	_std(d, agg, &"projectile_speed", [], -0.5, 2.0)
 	_std(d, agg, &"skill_levels", [], 0.0, 5.0, true)
 	var dodge_inc := minf(DODGE_DIST_CAP, AGI * DODGE_DIST_PER_AGI) + agg.inc(&"dodge_distance")
 	d.set_stat(&"dodge_distance", dodge_inc, PackedStringArray(["Agility %d x %.2f%% (max %d%%)" % [AGI, DODGE_DIST_PER_AGI * 100.0, roundi(DODGE_DIST_CAP * 100)]]))
-	var pw := minf(PARRY_MAX, PARRY_BASE + DEX * PARRY_PER_DEX + agg.flat(&"parry_window"))
-	d.set_stat(&"parry_window", pw, PackedStringArray(["Base %.2f s" % PARRY_BASE, "Dexterity %d x %.1f ms" % [DEX, PARRY_PER_DEX * 1000.0],
+	var pw := minf(PARRY_MAX, PARRY_BASE + agg.flat(&"parry_window"))
+	d.set_stat(&"parry_window", pw, PackedStringArray(["Base %.2f s" % PARRY_BASE,
 		"Maximum %.2f s" % PARRY_MAX]))
 	# Global damage multipliers from buffs/debuffs (Weakened, Empowered, Overcharged, Fortified ...).
 	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))

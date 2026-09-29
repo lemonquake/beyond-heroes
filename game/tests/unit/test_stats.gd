@@ -102,8 +102,8 @@ func test_shield_block() -> void:
 	var h := _hero()
 	var s := h.compute_stats()
 	ok(s.loadout.has_shield, "knight starts with shield")
-	# 25% shield + DEX 10 * 0.1% = 26%
-	near(s.get_stat(&"block_chance"), 0.26, 0.00001, "block chance")
+	# Dexterity now affects only accuracy and critical chance.
+	near(s.get_stat(&"block_chance"), 0.25, 0.00001, "shield block chance")
 	# 60% shield + 10% class + STR14 * 0.2% = 72.8%
 	near(s.get_stat(&"block_strength"), 0.728, 0.00001, "block strength")
 
