@@ -1,0 +1,1186 @@
+{
+  "depth_copperleaf_backsword": [
+    "sword",
+    {
+      "len": 0.66,
+      "w": [
+        0.037,
+        0.019
+      ],
+      "shape": "straight",
+      "guard": "bar",
+      "guard_half": 0.065,
+      "guard_curve": -0.02,
+      "blade": "bronze",
+      "guard_mat": "silver",
+      "pommel": "ring",
+      "grip_len": 0.16,
+      "glow": "emerald",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": null
+    }
+  ],
+  "depth_saltglass_cutlass": [
+    "sword",
+    {
+      "len": 0.7020000000000001,
+      "w": [
+        0.044,
+        0.027
+      ],
+      "shape": "sabre",
+      "guard": "disc",
+      "guard_half": 0.078,
+      "guard_curve": -0.005000000000000001,
+      "blade": "moonsteel",
+      "guard_mat": "blackiron",
+      "pommel": "disc",
+      "grip_len": 0.16,
+      "glow": "tide",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "moonsteel"
+    }
+  ],
+  "depth_rootguard_falchion": [
+    "sword",
+    {
+      "len": 0.744,
+      "w": [
+        0.051,
+        0.035
+      ],
+      "shape": "falchion",
+      "guard": "winged",
+      "guard_half": 0.091,
+      "guard_curve": 0.009999999999999998,
+      "blade": "darksteel",
+      "guard_mat": "blued",
+      "pommel": "spike",
+      "grip_len": 0.16,
+      "glow": "ember",
+      "wave": 0,
+      "lugs": false,
+      "serrate": true,
+      "ricasso": null
+    }
+  ],
+  "depth_lantern_rapier": [
+    "sword",
+    {
+      "len": 0.786,
+      "w": [
+        0.057999999999999996,
+        0.043
+      ],
+      "shape": "waisted",
+      "guard": "swept",
+      "guard_half": 0.10400000000000001,
+      "guard_curve": 0.024999999999999998,
+      "blade": "silver",
+      "guard_mat": "bright",
+      "pommel": "round",
+      "grip_len": 0.16,
+      "glow": "ice",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "silver"
+    }
+  ],
+  "depth_cinderhook_saber": [
+    "sword",
+    {
+      "len": 0.8280000000000001,
+      "w": [
+        0.065,
+        0.019
+      ],
+      "shape": "leaf",
+      "guard": "bar",
+      "guard_half": 0.11699999999999999,
+      "guard_curve": 0.039999999999999994,
+      "blade": "blackiron",
+      "guard_mat": "sunsteel",
+      "pommel": "ring",
+      "grip_len": 0.16,
+      "glow": "ruby",
+      "wave": 0,
+      "lugs": true,
+      "serrate": false,
+      "ricasso": null
+    }
+  ],
+  "depth_frostbell_broadsword": [
+    "sword",
+    {
+      "len": 0.8700000000000001,
+      "w": [
+        0.037,
+        0.027
+      ],
+      "shape": "straight",
+      "guard": "disc",
+      "guard_half": 0.13,
+      "guard_curve": -0.02,
+      "blade": "blued",
+      "guard_mat": "bronze",
+      "pommel": "disc",
+      "grip_len": 0.16,
+      "glow": "aether",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "blued"
+    }
+  ],
+  "depth_hollowfin_estoc": [
+    "sword",
+    {
+      "len": 0.912,
+      "w": [
+        0.044,
+        0.035
+      ],
+      "shape": "sabre",
+      "guard": "winged",
+      "guard_half": 0.14300000000000002,
+      "guard_curve": -0.005000000000000001,
+      "blade": "bright",
+      "guard_mat": "moonsteel",
+      "pommel": "spike",
+      "grip_len": 0.16,
+      "glow": "onyx",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": null
+    }
+  ],
+  "depth_moonwell_flamberge": [
+    "sword",
+    {
+      "len": 0.9540000000000001,
+      "w": [
+        0.051,
+        0.043
+      ],
+      "shape": "falchion",
+      "guard": "swept",
+      "guard_half": 0.065,
+      "guard_curve": 0.009999999999999998,
+      "blade": "sunsteel",
+      "guard_mat": "darksteel",
+      "pommel": "round",
+      "grip_len": 0.16,
+      "glow": "holy",
+      "wave": 0.012,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "sunsteel"
+    }
+  ],
+  "depth_starfall_spatha": [
+    "sword",
+    {
+      "len": 0.996,
+      "w": [
+        0.057999999999999996,
+        0.019
+      ],
+      "shape": "waisted",
+      "guard": "bar",
+      "guard_half": 0.078,
+      "guard_curve": 0.024999999999999998,
+      "blade": "bronze",
+      "guard_mat": "silver",
+      "pommel": "ring",
+      "grip_len": 0.16,
+      "glow": "emerald",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": null
+    }
+  ],
+  "depth_deepwatch_messer": [
+    "sword",
+    {
+      "len": 1.038,
+      "w": [
+        0.065,
+        0.027
+      ],
+      "shape": "leaf",
+      "guard": "disc",
+      "guard_half": 0.091,
+      "guard_curve": 0.039999999999999994,
+      "blade": "moonsteel",
+      "guard_mat": "blackiron",
+      "pommel": "disc",
+      "grip_len": 0.16,
+      "glow": "tide",
+      "wave": 0,
+      "lugs": true,
+      "serrate": false,
+      "ricasso": "moonsteel"
+    }
+  ],
+  "depth_sunken_oathblade": [
+    "sword",
+    {
+      "len": 1.08,
+      "w": [
+        0.037,
+        0.035
+      ],
+      "shape": "straight",
+      "guard": "winged",
+      "guard_half": 0.10400000000000001,
+      "guard_curve": -0.02,
+      "blade": "darksteel",
+      "guard_mat": "blued",
+      "pommel": "spike",
+      "grip_len": 0.16,
+      "glow": "ember",
+      "wave": 0,
+      "lugs": false,
+      "serrate": true,
+      "ricasso": null
+    }
+  ],
+  "depth_crownless_longsword": [
+    "sword",
+    {
+      "len": 1.122,
+      "w": [
+        0.044,
+        0.043
+      ],
+      "shape": "sabre",
+      "guard": "swept",
+      "guard_half": 0.11699999999999999,
+      "guard_curve": -0.005000000000000001,
+      "blade": "silver",
+      "guard_mat": "bright",
+      "pommel": "round",
+      "grip_len": 0.16,
+      "glow": "ice",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "silver"
+    }
+  ],
+  "depth_basalt_zweihander": [
+    "sword",
+    {
+      "len": 1.05,
+      "w": [
+        0.037,
+        0.019
+      ],
+      "shape": "straight",
+      "guard": "bar",
+      "guard_half": 0.065,
+      "guard_curve": -0.02,
+      "blade": "bronze",
+      "guard_mat": "silver",
+      "pommel": "ring",
+      "grip_len": 0.29,
+      "glow": "emerald",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": null
+    }
+  ],
+  "depth_briar_executioner": [
+    "sword",
+    {
+      "len": 1.1400000000000001,
+      "w": [
+        0.044,
+        0.027
+      ],
+      "shape": "sabre",
+      "guard": "disc",
+      "guard_half": 0.078,
+      "guard_curve": -0.005000000000000001,
+      "blade": "moonsteel",
+      "guard_mat": "blackiron",
+      "pommel": "disc",
+      "grip_len": 0.29,
+      "glow": "tide",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "moonsteel"
+    }
+  ],
+  "depth_astral_greatblade": [
+    "sword",
+    {
+      "len": 1.23,
+      "w": [
+        0.051,
+        0.035
+      ],
+      "shape": "falchion",
+      "guard": "winged",
+      "guard_half": 0.091,
+      "guard_curve": 0.009999999999999998,
+      "blade": "darksteel",
+      "guard_mat": "blued",
+      "pommel": "spike",
+      "grip_len": 0.29,
+      "glow": "ember",
+      "wave": 0,
+      "lugs": false,
+      "serrate": true,
+      "ricasso": null
+    }
+  ],
+  "depth_vaultbreaker_claymore": [
+    "sword",
+    {
+      "len": 1.32,
+      "w": [
+        0.057999999999999996,
+        0.043
+      ],
+      "shape": "waisted",
+      "guard": "swept",
+      "guard_half": 0.10400000000000001,
+      "guard_curve": 0.024999999999999998,
+      "blade": "silver",
+      "guard_mat": "bright",
+      "pommel": "round",
+      "grip_len": 0.29,
+      "glow": "ice",
+      "wave": 0,
+      "lugs": false,
+      "serrate": false,
+      "ricasso": "silver"
+    }
+  ],
+  "depth_glowcap_crook": [
+    "staff",
+    {
+      "head": "crook",
+      "wood": "darkwood",
+      "metal": "bronze",
+      "gem": "emerald",
+      "band": "bronze",
+      "wobble": 0.005
+    }
+  ],
+  "depth_tidal_forkstaff": [
+    "staff",
+    {
+      "head": "fork",
+      "wood": "ash",
+      "metal": "moonsteel",
+      "gem": "tide",
+      "band": "moonsteel",
+      "wobble": 0.011
+    }
+  ],
+  "depth_cinder_lanternstaff": [
+    "staff",
+    {
+      "head": "orb",
+      "wood": "redwood",
+      "metal": "darksteel",
+      "gem": "ember",
+      "band": "darksteel",
+      "wobble": 0.017
+    }
+  ],
+  "depth_rime_shardstaff": [
+    "staff",
+    {
+      "head": "shards",
+      "wood": "bone",
+      "metal": "silver",
+      "gem": "ice",
+      "band": "silver",
+      "wobble": 0.023000000000000003
+    }
+  ],
+  "depth_thornseed_branchstaff": [
+    "staff",
+    {
+      "head": "branch",
+      "wood": "darkwood",
+      "metal": "blackiron",
+      "gem": "ruby",
+      "band": "blackiron",
+      "wobble": 0.029
+    }
+  ],
+  "depth_orrery_starstaff": [
+    "staff",
+    {
+      "head": "star",
+      "wood": "ash",
+      "metal": "blued",
+      "gem": "aether",
+      "band": "blued",
+      "wobble": 0.034999999999999996
+    }
+  ],
+  "depth_voidcage_scepter": [
+    "staff",
+    {
+      "head": "prongs",
+      "wood": "redwood",
+      "metal": "bright",
+      "gem": "onyx",
+      "band": "bright",
+      "wobble": 0.041
+    }
+  ],
+  "depth_dawnspire_staff": [
+    "staff",
+    {
+      "head": "star",
+      "wood": "bone",
+      "metal": "sunsteel",
+      "gem": "holy",
+      "band": "sunsteel",
+      "wobble": 0.047
+    }
+  ],
+  "depth_sporebud_wand": [
+    "wand",
+    {
+      "head": "branch",
+      "wood": "darkwood",
+      "orn": "bronze",
+      "gem": "emerald"
+    }
+  ],
+  "depth_shellsong_wand": [
+    "wand",
+    {
+      "head": "shell",
+      "wood": "ash",
+      "orn": "moonsteel",
+      "gem": "tide"
+    }
+  ],
+  "depth_embercrown_wand": [
+    "wand",
+    {
+      "head": "claw",
+      "wood": "redwood",
+      "orn": "darksteel",
+      "gem": "ember"
+    }
+  ],
+  "depth_icepetal_wand": [
+    "wand",
+    {
+      "head": "crescent",
+      "wood": "bone",
+      "orn": "silver",
+      "gem": "ice"
+    }
+  ],
+  "depth_gravebell_wand": [
+    "wand",
+    {
+      "head": "skull",
+      "wood": "darkwood",
+      "orn": "blackiron",
+      "gem": "ruby"
+    }
+  ],
+  "depth_moonhook_wand": [
+    "wand",
+    {
+      "head": "crescent",
+      "wood": "ash",
+      "orn": "blued",
+      "gem": "aether"
+    }
+  ],
+  "depth_prismcoil_wand": [
+    "wand",
+    {
+      "head": "orb",
+      "wood": "redwood",
+      "orn": "bright",
+      "gem": "onyx"
+    }
+  ],
+  "depth_sunwheel_wand": [
+    "wand",
+    {
+      "head": "sun",
+      "wood": "bone",
+      "orn": "sunsteel",
+      "gem": "holy"
+    }
+  ],
+  "depth_rootbend_shortbow": [
+    "bow",
+    {
+      "len": 0.45,
+      "recurve": 0.02,
+      "bend": 0.07,
+      "limb_w": 0.015,
+      "wood": "darkwood",
+      "glow": "emerald",
+      "wraps": "leather",
+      "leaf_tips": null,
+      "thick_riser": null
+    }
+  ],
+  "depth_saltwind_recurve": [
+    "bow",
+    {
+      "len": 0.49,
+      "recurve": 0.038,
+      "bend": 0.085,
+      "limb_w": 0.018,
+      "wood": "ash",
+      "glow": "tide",
+      "wraps": "redleather",
+      "leaf_tips": "moonsteel",
+      "thick_riser": null
+    }
+  ],
+  "depth_cinderhorn_bow": [
+    "bow",
+    {
+      "len": 0.53,
+      "recurve": 0.055999999999999994,
+      "bend": 0.1,
+      "limb_w": 0.020999999999999998,
+      "wood": "redwood",
+      "glow": "ember",
+      "wraps": "tan",
+      "leaf_tips": null,
+      "thick_riser": null
+    }
+  ],
+  "depth_icebranch_longbow": [
+    "bow",
+    {
+      "len": 0.5700000000000001,
+      "recurve": 0.074,
+      "bend": 0.115,
+      "limb_w": 0.015,
+      "wood": "bone",
+      "glow": "ice",
+      "wraps": "navy",
+      "leaf_tips": "silver",
+      "thick_riser": null
+    }
+  ],
+  "depth_thornwing_bow": [
+    "bow",
+    {
+      "len": 0.61,
+      "recurve": 0.02,
+      "bend": 0.13,
+      "limb_w": 0.018,
+      "wood": "darkwood",
+      "glow": "ruby",
+      "wraps": "leather",
+      "leaf_tips": null,
+      "thick_riser": null
+    }
+  ],
+  "depth_starbridge_bow": [
+    "bow",
+    {
+      "len": 0.65,
+      "recurve": 0.038,
+      "bend": 0.14500000000000002,
+      "limb_w": 0.020999999999999998,
+      "wood": "ash",
+      "glow": "aether",
+      "wraps": "redleather",
+      "leaf_tips": "blued",
+      "thick_riser": "blued"
+    }
+  ],
+  "depth_nightglass_warbow": [
+    "bow",
+    {
+      "len": 0.69,
+      "recurve": 0.055999999999999994,
+      "bend": 0.16,
+      "limb_w": 0.015,
+      "wood": "redwood",
+      "glow": "onyx",
+      "wraps": "tan",
+      "leaf_tips": null,
+      "thick_riser": "bright"
+    }
+  ],
+  "depth_dawnfeather_bow": [
+    "bow",
+    {
+      "len": 0.73,
+      "recurve": 0.074,
+      "bend": 0.175,
+      "limb_w": 0.018,
+      "wood": "bone",
+      "glow": "holy",
+      "wraps": "navy",
+      "leaf_tips": "sunsteel",
+      "thick_riser": "sunsteel"
+    }
+  ],
+  "depth_sporeleaf_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.6,
+      "shaft_bot": -0.65,
+      "head_len": 0.17,
+      "head_w": 0.035,
+      "head": "leaf",
+      "head_mat": "bronze",
+      "shaft_mat": "darkwood",
+      "band_mat": "silver",
+      "glow": "emerald",
+      "fins": null
+    }
+  ],
+  "depth_keelspike_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.635,
+      "shaft_bot": -0.675,
+      "head_len": 0.195,
+      "head_w": 0.042,
+      "head": "barbed",
+      "head_mat": "moonsteel",
+      "shaft_mat": "ash",
+      "band_mat": "blackiron",
+      "glow": "tide",
+      "fins": "moonsteel"
+    }
+  ],
+  "depth_furnace_barb": [
+    "javelin",
+    {
+      "shaft_top": 0.6699999999999999,
+      "shaft_bot": -0.7000000000000001,
+      "head_len": 0.22000000000000003,
+      "head_w": 0.049,
+      "head": "leaf",
+      "head_mat": "darksteel",
+      "shaft_mat": "redwood",
+      "band_mat": "blued",
+      "glow": "ember",
+      "fins": null
+    }
+  ],
+  "depth_rimefork_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.705,
+      "shaft_bot": -0.7250000000000001,
+      "head_len": 0.24500000000000002,
+      "head_w": 0.05600000000000001,
+      "head": "fork",
+      "head_mat": "silver",
+      "shaft_mat": "bone",
+      "band_mat": "bright",
+      "glow": "ice",
+      "fins": "silver"
+    }
+  ],
+  "depth_briarfin_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.74,
+      "shaft_bot": -0.75,
+      "head_len": 0.27,
+      "head_w": 0.035,
+      "head": "leaf",
+      "head_mat": "blackiron",
+      "shaft_mat": "darkwood",
+      "band_mat": "sunsteel",
+      "glow": "ruby",
+      "fins": null
+    }
+  ],
+  "depth_starshard_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.775,
+      "shaft_bot": -0.775,
+      "head_len": 0.29500000000000004,
+      "head_w": 0.042,
+      "head": "barbed",
+      "head_mat": "blued",
+      "shaft_mat": "ash",
+      "band_mat": "bronze",
+      "glow": "aether",
+      "fins": "blued"
+    }
+  ],
+  "depth_gloomspear": [
+    "javelin",
+    {
+      "shaft_top": 0.81,
+      "shaft_bot": -0.8,
+      "head_len": 0.32000000000000006,
+      "head_w": 0.049,
+      "head": "leaf",
+      "head_mat": "bright",
+      "shaft_mat": "redwood",
+      "band_mat": "moonsteel",
+      "glow": "onyx",
+      "fins": null
+    }
+  ],
+  "depth_suncrest_javelin": [
+    "javelin",
+    {
+      "shaft_top": 0.845,
+      "shaft_bot": -0.8250000000000001,
+      "head_len": 0.34500000000000003,
+      "head_w": 0.05600000000000001,
+      "head": "fork",
+      "head_mat": "sunsteel",
+      "shaft_mat": "bone",
+      "band_mat": "darksteel",
+      "glow": "holy",
+      "fins": "sunsteel"
+    }
+  ],
+  "depth_rootfang_skinner": [
+    "dagger",
+    {
+      "len": 0.22,
+      "w": [
+        0.028,
+        0.017
+      ],
+      "shape": "skinner",
+      "blade": "bronze",
+      "guard": "bar",
+      "guard_mat": "silver",
+      "glow": "emerald",
+      "pommel": "round"
+    }
+  ],
+  "depth_keelhook_knife": [
+    "dagger",
+    {
+      "len": 0.244,
+      "w": [
+        0.033,
+        0.021
+      ],
+      "shape": "crescent",
+      "blade": "moonsteel",
+      "guard": "wide",
+      "guard_mat": "blackiron",
+      "glow": "tide",
+      "pommel": "ring"
+    }
+  ],
+  "depth_emberwave_kris": [
+    "dagger",
+    {
+      "len": 0.268,
+      "w": [
+        0.038,
+        0.025
+      ],
+      "shape": "kris",
+      "blade": "darksteel",
+      "guard": "disc",
+      "guard_mat": "blued",
+      "glow": "ember",
+      "pommel": "disc"
+    }
+  ],
+  "depth_iceglass_stiletto": [
+    "dagger",
+    {
+      "len": 0.29200000000000004,
+      "w": [
+        0.043,
+        0.017
+      ],
+      "shape": "straight",
+      "blade": "silver",
+      "guard": "bar",
+      "guard_mat": "bright",
+      "glow": "ice",
+      "pommel": "spike"
+    }
+  ],
+  "depth_briar_talon": [
+    "dagger",
+    {
+      "len": 0.316,
+      "w": [
+        0.028,
+        0.021
+      ],
+      "shape": "crescent",
+      "blade": "blackiron",
+      "guard": "wide",
+      "guard_mat": "sunsteel",
+      "glow": "ruby",
+      "pommel": "round"
+    }
+  ],
+  "depth_moonfang_kukri": [
+    "dagger",
+    {
+      "len": 0.33999999999999997,
+      "w": [
+        0.033,
+        0.025
+      ],
+      "shape": "kukri",
+      "blade": "blued",
+      "guard": "disc",
+      "guard_mat": "bronze",
+      "glow": "aether",
+      "pommel": "ring"
+    }
+  ],
+  "depth_voidpetal_dagger": [
+    "dagger",
+    {
+      "len": 0.364,
+      "w": [
+        0.038,
+        0.017
+      ],
+      "shape": "kris",
+      "blade": "bright",
+      "guard": "bar",
+      "guard_mat": "moonsteel",
+      "glow": "onyx",
+      "pommel": "disc"
+    }
+  ],
+  "depth_dawnthorn_knife": [
+    "dagger",
+    {
+      "len": 0.388,
+      "w": [
+        0.043,
+        0.021
+      ],
+      "shape": "straight",
+      "blade": "sunsteel",
+      "guard": "wide",
+      "guard_mat": "darksteel",
+      "glow": "holy",
+      "pommel": "spike"
+    }
+  ],
+  "depth_rootrake_claws": [
+    "claw",
+    {
+      "len": 0.19,
+      "blades": 2,
+      "spacing": 0.027,
+      "hook": 0.01,
+      "blade": "bronze",
+      "frame_mat": "silver",
+      "glow": "emerald",
+      "spikes": false,
+      "scales": null
+    }
+  ],
+  "depth_keelgrip_talons": [
+    "claw",
+    {
+      "len": 0.208,
+      "blades": 3,
+      "spacing": 0.031,
+      "hook": 0.027999999999999997,
+      "blade": "moonsteel",
+      "frame_mat": "blackiron",
+      "glow": "tide",
+      "spikes": true,
+      "scales": null
+    }
+  ],
+  "depth_furnace_knives": [
+    "claw",
+    {
+      "len": 0.226,
+      "blades": 4,
+      "spacing": 0.035,
+      "hook": 0.046,
+      "blade": "darksteel",
+      "frame_mat": "blued",
+      "glow": "ember",
+      "spikes": false,
+      "scales": null
+    }
+  ],
+  "depth_rimefang_claws": [
+    "claw",
+    {
+      "len": 0.244,
+      "blades": 5,
+      "spacing": 0.027,
+      "hook": 0.06399999999999999,
+      "blade": "silver",
+      "frame_mat": "bright",
+      "glow": "ice",
+      "spikes": true,
+      "scales": null
+    }
+  ],
+  "depth_briarhook_claws": [
+    "claw",
+    {
+      "len": 0.262,
+      "blades": 2,
+      "spacing": 0.031,
+      "hook": 0.01,
+      "blade": "blackiron",
+      "frame_mat": "sunsteel",
+      "glow": "ruby",
+      "spikes": false,
+      "scales": null
+    }
+  ],
+  "depth_starweb_talons": [
+    "claw",
+    {
+      "len": 0.28,
+      "blades": 3,
+      "spacing": 0.035,
+      "hook": 0.027999999999999997,
+      "blade": "blued",
+      "frame_mat": "bronze",
+      "glow": "aether",
+      "spikes": true,
+      "scales": "blued"
+    }
+  ],
+  "depth_voidreaver_claws": [
+    "claw",
+    {
+      "len": 0.298,
+      "blades": 4,
+      "spacing": 0.027,
+      "hook": 0.046,
+      "blade": "bright",
+      "frame_mat": "moonsteel",
+      "glow": "onyx",
+      "spikes": false,
+      "scales": "bright"
+    }
+  ],
+  "depth_dawnrake_claws": [
+    "claw",
+    {
+      "len": 0.316,
+      "blades": 5,
+      "spacing": 0.031,
+      "hook": 0.06399999999999999,
+      "blade": "sunsteel",
+      "frame_mat": "darksteel",
+      "glow": "holy",
+      "spikes": true,
+      "scales": "sunsteel"
+    }
+  ],
+  "depth_deepwarden_coat": [
+    "chest",
+    {
+      "kind": "plate",
+      "mat": "blued",
+      "trim": "bronze",
+      "len": 0.74,
+      "belt": "darkleather",
+      "rivet": "bronze",
+      "glow": "emerald"
+    }
+  ],
+  "depth_deepwarden_crown": [
+    "helm",
+    {
+      "mat": "blued",
+      "trim": "bronze",
+      "gem": "emerald",
+      "glow": "emerald",
+      "kind": "greathelm",
+      "peak": 0.55
+    }
+  ],
+  "depth_deepwarden_grips": [
+    "glove",
+    {
+      "mat": "blued",
+      "trim": "bronze",
+      "runes": "emerald",
+      "cuff": "bronze",
+      "plate": "bronze",
+      "spikes": null
+    }
+  ],
+  "depth_deepwarden_treads": [
+    "boot",
+    {
+      "mat": "blued",
+      "h": 0.25,
+      "flare": 0.006,
+      "cuff": "bronze",
+      "glow": "emerald",
+      "plate": "bronze",
+      "straps": "darkleather"
+    }
+  ],
+  "depth_prismkeeper_coat": [
+    "chest",
+    {
+      "kind": "robe",
+      "mat": "violet",
+      "trim": "silver",
+      "len": 0.8049999999999999,
+      "belt": "darkleather",
+      "rivet": "silver",
+      "glow": "tide"
+    }
+  ],
+  "depth_prismkeeper_crown": [
+    "hood",
+    {
+      "mat": "violet",
+      "trim": "silver",
+      "gem": "tide",
+      "glow": "tide",
+      "kind": "greathelm",
+      "peak": 1.0
+    }
+  ],
+  "depth_prismkeeper_grips": [
+    "glove",
+    {
+      "mat": "violet",
+      "trim": "silver",
+      "runes": "tide",
+      "cuff": "silver",
+      "plate": null,
+      "spikes": null
+    }
+  ],
+  "depth_prismkeeper_treads": [
+    "boot",
+    {
+      "mat": "violet",
+      "h": 0.28500000000000003,
+      "flare": 0.011,
+      "cuff": "silver",
+      "glow": "tide",
+      "plate": null,
+      "straps": "darkleather"
+    }
+  ],
+  "depth_vaultpath_coat": [
+    "chest",
+    {
+      "kind": "brigandine",
+      "mat": "forest",
+      "trim": "copper",
+      "len": 0.87,
+      "belt": "darkleather",
+      "rivet": "copper",
+      "glow": "ember"
+    }
+  ],
+  "depth_vaultpath_crown": [
+    "hood",
+    {
+      "mat": "forest",
+      "trim": "copper",
+      "gem": "ember",
+      "glow": "ember",
+      "kind": "greathelm",
+      "peak": 1.4500000000000002
+    }
+  ],
+  "depth_vaultpath_grips": [
+    "glove",
+    {
+      "mat": "forest",
+      "trim": "copper",
+      "runes": "ember",
+      "cuff": "copper",
+      "plate": null,
+      "spikes": null
+    }
+  ],
+  "depth_vaultpath_treads": [
+    "boot",
+    {
+      "mat": "forest",
+      "h": 0.32,
+      "flare": 0.016,
+      "cuff": "copper",
+      "glow": "ember",
+      "plate": null,
+      "straps": "darkleather"
+    }
+  ],
+  "depth_gloomthread_coat": [
+    "chest",
+    {
+      "kind": "vest",
+      "mat": "black",
+      "trim": "moonsteel",
+      "len": 0.935,
+      "belt": "darkleather",
+      "rivet": "moonsteel",
+      "glow": "ice"
+    }
+  ],
+  "depth_gloomthread_crown": [
+    "hood",
+    {
+      "mat": "black",
+      "trim": "moonsteel",
+      "gem": "ice",
+      "glow": "ice",
+      "kind": "greathelm",
+      "peak": 1.9000000000000001
+    }
+  ],
+  "depth_gloomthread_grips": [
+    "glove",
+    {
+      "mat": "black",
+      "trim": "moonsteel",
+      "runes": "ice",
+      "cuff": "moonsteel",
+      "plate": null,
+      "spikes": "moonsteel"
+    }
+  ],
+  "depth_gloomthread_treads": [
+    "boot",
+    {
+      "mat": "black",
+      "h": 0.355,
+      "flare": 0.020999999999999998,
+      "cuff": "moonsteel",
+      "glow": "ice",
+      "plate": null,
+      "straps": "darkleather"
+    }
+  ]
+}

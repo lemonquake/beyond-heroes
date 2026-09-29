@@ -11,6 +11,7 @@ const LOOK := [
 	{"tint": Color(0.75, 0.55, 1.0), "glow": Color(0.8, 0.55, 1.0), "name": "Hoard"},
 ]
 
+var guardian_zone: String = ""
 var tier := 0
 var key := ""
 var level := 1
@@ -85,11 +86,20 @@ func _refresh() -> void:
 	_glow.visible = r
 	_motes.emitting = r
 
+func guardian_alive() -> bool:
+	if guardian_zone == "":
+		return false
+	var map := get_parent()
+	while map != null and not map is MapRoot:
+		map = map.get_parent()
+	var sp := map.get_node_or_null("Spawner") as Spawner if map else null
+	return sp == null or not sp.cleared_camps.has(guardian_zone)
+
 func can_interact(_p: Node) -> bool:
-	return is_ready() and not _busy and not Game.travelling
+	return not guardian_alive() and is_ready() and not _busy and not Game.travelling
 
 func interact_text() -> String:
-	return "Open the %s" % LOOK[tier].name
+	return "Defeat the Seal Keepers to open this hoard" if guardian_alive() else "Open the %s" % LOOK[tier].name
 
 func interact_anim() -> StringName:
 	return &"interact_chest"
@@ -99,7 +109,7 @@ func interact(_p: Node) -> void:
 
 ## Open the chest: remember it, animate the lid, throw out the loot. Returns false when it is still empty.
 func open(hero: HeroData) -> bool:
-	if hero == null or not is_ready() or _busy:
+	if hero == null or not is_ready() or _busy or guardian_alive():
 		return false
 	_busy = true
 	hero.chest_log[key] = hero.play_time

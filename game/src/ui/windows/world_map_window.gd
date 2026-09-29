@@ -329,7 +329,7 @@ func select(id: String) -> void:
 		var dd := DataDungeons.get_def(did)
 		var boss := DB.enemy(dd.boss)
 		_desc.text += "\n\nDifficulty: %s %s · %d floors\nLord: %s\nChampion: %s\n%s" % [DataDungeons.tier_stars(did), DataDungeons.tier_name(did),
-			DataDungeons.floor_count(did), boss.display_name if boss else "?", String(dd.miniboss.name), DataDungeons.status_text(hero, did)]
+			DungeonGrowth.total(Game.hero, did), boss.display_name if boss else "?", String(dd.miniboss.name), DataDungeons.status_text(hero, did)]
 	if Routes.active() and Routes.dest == id:
 		_show_plan(Routes.plan, true)
 	else:

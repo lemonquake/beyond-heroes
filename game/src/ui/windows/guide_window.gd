@@ -99,7 +99,7 @@ func refresh() -> void:
 func _dungeons() -> void:
 	var hero := Game.hero
 	_heading("The dungeons of Salmonan")
-	_para("Twenty dungeons lie under the island, from a smugglers' cellar for new heroes to the Maw Beneath at level 58. Each has two to five floors and a difficulty from Easy to Mythic. Every floor is sealed: defeat its Seal Keepers (an elite pack) to open the portal down; on the last sealed floor the dungeon's champion holds the seal, and the deepest floor is the lair of its lord. A broken seal stays broken, and the gate on the surface takes you straight to any floor you have opened. Every gate is on the map (M); the Underground view lists them all.")
+	_para("Twenty dungeons lie under the island, from a smugglers' cellar for new heroes to the Maw Beneath at level 58. Each begins with two to five floors and a difficulty from Easy to Mythic. Every floor is sealed: defeat its Seal Keepers (an elite pack) to open the portal down; on the last sealed floor the dungeon's champion holds the seal, and the original final floor is the lair of its lord. A broken seal stays broken, and the gate on the surface takes you straight to any floor you have opened. Every gate is on the map (M); the Underground view lists them all.")
 	_para("Raids: when a dungeon's lord falls the dungeon is raided. Its halls stay empty for 30 minutes to 2 hours (longer for harder dungeons), then its monsters return. Its lord never comes back, but a Usurper, a named champion, claims the empty sanctum, and the champions keep returning.")
 	for id in DataDungeons.order():
 		var d := DataDungeons.get_def(id)
@@ -108,8 +108,11 @@ func _dungeons() -> void:
 		var boss := DB.enemy(d.boss)
 		var gone := DataDungeons.boss_gone(hero, id)
 		_para("%s  %s (%s) — levels %d–%d, %d floors. Gate: %s (%s). Lord: %s. %s" % [DataDungeons.tier_stars(id), d.name, DataDungeons.tier_name(id),
-			lr.x, lr.y, DataDungeons.floor_count(id), gate.get("name", "?"), DB.map_def(StringName(d.surface.map)).display_name,
+			lr.x, lr.y, DungeonGrowth.total(Game.hero, id), gate.get("name", "?"), DB.map_def(StringName(d.surface.map)).display_name,
 			boss.display_name if boss else "?", DataDungeons.status_text(hero, id)], UITheme.GOLD if gone else UITheme.TEXT)
+	_heading("Dungeons as you grow")
+	_para("At Level 25, a passage opens below each defeated dungeon lord. More floors open at levels 35 and 45. Enemy levels catch up gradually over levels 25 to 35, and themed reinforcements join the camps. At Level 50, larger packs and elites with three abilities arrive; further floors open at 55 and 60. Your level is recorded when you enter: leveling inside never changes your current visit.")
+	_para("The added floors remain active during the original dungeon's recovery. Each has a named guardian among its Seal Keepers. Clear that pack to open its treasure; guardians can drop a relic for your class. New weapons have different shapes, attack speeds, elements and bonuses. Deeper encounters and chests provide class-specific equipment. Broken seals stay open, but treasure chests still need time to refill.")
 	_heading("Relic Caches and named gear")
 	_para("Chests, champions and dungeon lords drop Relic Caches — Worn, Gilded and Radiant. Open one from your bag and its gear is revealed card by card. Every Licensed-or-better piece carries a name of its own and an epithet (no two alike), and stars from ★ to ★★★★★ for how close its rolls came to perfect. Some carry a relic passive: gold, experience, regeneration, life on kill, potions, thorns, damage to champions, Soul Embers or stronger Tempos.")
 	_heading("Summoning Tempos")

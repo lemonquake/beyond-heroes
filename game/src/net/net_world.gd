@@ -23,6 +23,10 @@ static func make_enemy(info: Dictionary, replica: bool) -> Enemy:
 	e.setup(def, int(info.lvl), (info.mods as Array).map(func(m): return StringName(m)),
 		DataEnemies.DIFFICULTY[clampi(int(info.diff), 0, DataEnemies.DIFFICULTY.size() - 1)])
 	var md := DataMinibosses.find(StringName(info.get("mb", "")))
+	if md.is_empty() and not (info.get("depth_guardian", {}) as Dictionary).is_empty():
+		md = info.depth_guardian
+		e.set_meta(&"depth_guardian", true)
+	e.set_meta(&"dungeon_reward_bonus", float(info.get("dungeon_reward", 0.0)))
 	if not md.is_empty():
 		e.make_miniboss(md)
 	if String(info.get("flag", "")) != "":

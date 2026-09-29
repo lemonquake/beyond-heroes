@@ -89,6 +89,7 @@ static func bases() -> Array:
 		var icon := String(w[2]) if tier == 1 else "%s_%d" % [w[2], tier]
 		out.append(_b(w[0], w[1], &"weapon", icon, d))
 	_weapon_roster(out)
+	out.append_array(DataDepthEquipment.bases())
 	# ---- Shields ----
 	out.append(_b(&"warden_kite_shield", "Warden Kite Shield", &"shield", "shield", {"level_req": 1, "defense": 12.0,
 		"block_chance": 0.25, "block_strength": 0.6, "requirements": {&"str": 12}, "value": 15, "class_hint": &"knight"}))

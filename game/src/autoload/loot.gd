@@ -131,6 +131,8 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 	var mf := player.stats.get_stat(&"magic_find")
 	var ilvl := e.level + (2 if e.is_boss or e.is_miniboss() else (1 if e.is_elite else 0))
 	var rank_bonus := 2.0 if e.is_boss else (1.2 if e.is_miniboss() else (0.6 if e.is_elite else 0.0))
+	var reward := float(e.get_meta(&"dungeon_reward_bonus", 0.0))
+	rank_bonus += reward
 	var drops: Array = []
 	var n := 0
 	if e.is_boss:
@@ -143,7 +145,8 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 		n = 1
 	var cls: StringName = player.hero.cls.id
 	var guaranteed := e.is_boss or e.is_miniboss()
-	var fit := 1.0 if guaranteed else ItemGenerator.CLASS_FIT_CHANCE
+	var fit := 1.0
+	var used_bases := []
 	for i in n:
 		var rarity := ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl)
 		if e.is_boss:
@@ -152,18 +155,21 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 			rarity = maxi(rarity, BH.Rarity.ELITE)
 		elif i == 0 and e.is_elite:
 			rarity = maxi(rarity, BH.Rarity.ADVANCED)
-		var base := ItemGenerator.random_base(rng, ilvl, [&"weapon"] if guaranteed and i == 0 else [], cls, fit)
+		var base := ItemGenerator.random_base(rng, ilvl, [&"weapon"] if guaranteed and i == 0 else [], cls, fit, used_bases)
 		if base:
+			used_bases.append(base.id)
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
 	# Set pieces and Aether uniques
 	var set_p := 0.4 if e.is_boss else (0.04 if e.is_elite else 0.002)
 	var uniq_p := 0.15 if e.is_boss else (0.015 if e.is_elite else 0.0005)
 	if rng.randf() < set_p * (1.0 + mf):
-		var sb := ItemGenerator.random_special(rng, ilvl + 4, true, cls, fit)
+		var sb := ItemGenerator.random_special(rng, ilvl, true, cls, fit)
 		if sb:
 			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))
+	if e.has_meta(&"depth_guardian"):
+		uniq_p = 0.35 if e.level < 50 else 0.65
 	if rng.randf() < uniq_p * (1.0 + mf):
-		var ub := ItemGenerator.random_special(rng, ilvl + 4, false, cls, fit)
+		var ub := DataDepthEquipment.special(rng, ilvl, cls) if e.has_meta(&"depth_guardian") else ItemGenerator.random_special(rng, ilvl, false, cls, fit)
 		if ub:
 			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
 	return drops
@@ -203,14 +209,16 @@ func drop_chest(tier: int, level: int, at: Vector3, hero: HeroData) -> Array:
 	var n: int = [rng.randi_range(1, 2), rng.randi_range(2, 3), 4][clampi(tier, 0, 2)]
 	var floor_r: int = [BH.Rarity.ADVANCED, BH.Rarity.ELITE, BH.Rarity.MASTER][clampi(tier, 0, 2)]
 	var cls: StringName = hero.cls.id if hero and hero.cls else &""
+	var used_bases := []
 	for i in n:
 		var rarity := ItemGenerator.roll_rarity(rng, mf, 0.4 + 0.6 * tier, ilvl)
 		if i == 0:
 			rarity = maxi(rarity, floor_r)
 		if i == 1 and tier == 2 and rng.randf() < 0.5:
 			rarity = maxi(rarity, BH.Rarity.MYTHICAL)
-		var base := ItemGenerator.random_base(rng, ilvl, [], cls)
+		var base := ItemGenerator.random_base(rng, ilvl, [], cls, 1.0, used_bases)
 		if base:
+			used_bases.append(base.id)
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
 	var em := DB.make_item(&"soul_ember", BH.Rarity.COMMON, ilvl, rng.randi())
 	em.count = int(round(float([rng.randi_range(3, 6), rng.randi_range(8, 15), rng.randi_range(25, 40)][clampi(tier, 0, 2)]) * (1.0 + ef)))

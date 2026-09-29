@@ -4,6 +4,9 @@ extends Node
 ## Pack composition, level (within the map's level range), elite rolls (scaled by difficulty) and the combat director
 ## are decided here; everything is seeded from the map id + zone name so a map loads the same way every time.
 
+var growth := DungeonGrowth.profile(1)
+var dungeon: StringName = &""
+var depth := 0
 var map: MapRoot
 var difficulty := {}
 var rng := RandomNumberGenerator.new()
@@ -19,6 +22,11 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 	var s := Spawner.new()
 	s.name = "Spawner"
 	s.map = p_map
+	var parsed := DataDungeons.parse(p_map.def.id)
+	s.dungeon = parsed[0]
+	if s.dungeon != &"":
+		s.growth = DungeonGrowth.for_hero(Game.hero, s.dungeon)
+		s.depth = int(parsed[1]) - DataDungeons.floor_count(s.dungeon)
 	s.difficulty = DataEnemies.DIFFICULTY[clampi(diff_index, 0, DataEnemies.DIFFICULTY.size() - 1)]
 	p_map.add_child(s)
 	var dir := CombatDirector.new()
@@ -33,7 +41,7 @@ func _spawn_all() -> void:
 	var def := map.def
 	# bh-013: a raided dungeon's floors stay empty until it recovers (its champions still come back)
 	var dg: StringName = DataDungeons.parse(def.id)[0]
-	var quiet := dg != &"" and DataDungeons.recovering(Game.hero, dg)
+	var quiet := dg != &"" and depth <= 0 and DataDungeons.recovering(Game.hero, dg)
 	for m in map.find_children("EnemyZone_*", "Marker3D", true, false):
 		if quiet:
 			break
@@ -59,6 +67,7 @@ func _spawn_all() -> void:
 		var edef := DB.enemy(bid)
 		if edef:
 			var e := spawn_enemy(map, edef, def.level_max, [], b.global_position, difficulty)
+			e.set_meta(&"dungeon_reward_bonus", float(growth.reward_bonus))
 			e.patrol_radius = 0.0
 			if bdg == &"":
 				e.set_meta(&"boss_flag", flag)
@@ -84,6 +93,7 @@ func _spawn_minibosses() -> void:
 			ground.y = map.global_position.y + NpcDirectory.ground_height(map, Vector3(p.x, float(md.get("y", 0.0)), p.y))
 		var e := Enemy.new()
 		e.setup(edef, mini(BH.LEVEL_CAP, map.def.level_max + int(md.get("level_bonus", 0))), md.get("mods", []), difficulty)
+		e.set_meta(&"dungeon_reward_bonus", float(growth.reward_bonus))
 		e.make_miniboss(md)
 		e.name = "Miniboss_%s" % md.id
 		map.add_child(e)
@@ -97,7 +107,9 @@ func _spawn_minibosses() -> void:
 func _spawn_zone(m: Marker3D) -> void:
 	rng.seed = hash(String(map.def.id) + String(m.name))
 	var ids: Array = m.get_meta(&"enemies", [])
-	var count := int(m.get_meta(&"count", 3))
+	if dungeon != &"":
+		ids = DungeonGrowth.pool(dungeon, ids, growth, hash(String(m.name)))
+	var count := int(m.get_meta(&"count", 3)) + int(growth.pack_bonus)
 	var radius := float(m.get_meta(&"radius", 5.0))
 	var elite_chance := float(m.get_meta(&"elite_chance", 0.0)) * float(difficulty.get("elite", 1.0))
 	var lvl := rng.randi_range(map.def.level_min, map.def.level_max)
@@ -105,6 +117,7 @@ func _spawn_zone(m: Marker3D) -> void:
 		# a camp with its own level range (bh-012: wild camps outside the town walls)
 		var lv: Vector2i = m.get_meta(&"levels")
 		lvl = rng.randi_range(lv.x, lv.y)
+	elite_chance = clampf(elite_chance + float(growth.elite_bonus), 0.0, 0.9) if elite_chance < 1.0 else 1.0
 	var pack_elite := rng.randf() < elite_chance
 	var elite_idx := rng.randi_range(0, maxi(0, count - 1)) if pack_elite else -1
 	for i in count:
@@ -119,7 +132,20 @@ func _spawn_zone(m: Marker3D) -> void:
 		var mods: Array = []
 		if i == elite_idx and edef.can_be_elite:
 			mods = roll_elite_mods(rng, lvl)
-		var e := spawn_enemy(map, edef, lvl, mods, p, difficulty)
+			if int(growth.stage) == 2:
+				for extra in [&"shielded", &"swift"]:
+					if not mods.has(extra) and mods.size() < 3:
+						mods.append(extra)
+		var guardian := {}
+		if depth > 0 and i == elite_idx and String(m.name) == "EnemyZone_" + DataDungeons.SEAL_ZONE:
+			guardian = {"id": StringName("depth_%s_%d" % [dungeon, depth]), "name": "Guardian of %s" % DungeonGrowth.NAMES[depth - 1],
+				"title": "Greater Depth Guardian" if int(growth.stage) == 2 else "Depth Guardian", "hp": 1.35, "damage": 1.08, "scale": 1.15}
+		var e := spawn_enemy(map, edef, lvl, mods, p, difficulty, guardian)
+		if dungeon != &"":
+			e.set_meta(&"dungeon_reward_bonus", float(growth.reward_bonus))
+			if not guardian.is_empty():
+				e.set_meta(&"depth_guardian", true)
+				minibosses.append(e)
 		e.patrol_radius = radius * 0.6
 		e.home = m.global_position
 		e.zone = m
@@ -172,9 +198,11 @@ static func roll_elite_mods(r: RandomNumberGenerator, lvl: int) -> Array:
 			out.append(k)
 	return out
 
-static func spawn_enemy(parent: Node, def: EnemyDef, lvl: int, mods: Array, pos: Vector3, diff: Dictionary) -> Enemy:
+static func spawn_enemy(parent: Node, def: EnemyDef, lvl: int, mods: Array, pos: Vector3, diff: Dictionary, guardian: Dictionary = {}) -> Enemy:
 	var e := Enemy.new()
 	e.setup(def, lvl, mods, diff)
+	if not guardian.is_empty():
+		e.make_miniboss(guardian)
 	e.name = "Enemy_%s_%d" % [def.id, parent.get_child_count()]
 	parent.add_child(e)
 	e.global_position = pos + Vector3.UP * 0.1

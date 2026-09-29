@@ -51,6 +51,7 @@ const DRESS := {
 		"pillar": "pillar_quoin", "floor_light": 0.0},
 }
 
+var growth: Dictionary
 var dungeon: StringName
 var floor_n := 1
 var dd: Dictionary
@@ -71,7 +72,11 @@ func compose() -> void:
 	dungeon = p[0]
 	floor_n = p[1]
 	dd = DataDungeons.get_def(dungeon)
-	fd = DataDungeons.floor_def(dungeon, floor_n)
+	growth = def.get_meta(&"dungeon_growth", DungeonGrowth.for_hero(Game.hero, dungeon))
+	fd = DataDungeons.floor_def(dungeon, floor_n).duplicate(true)
+	if floor_n > DataDungeons.floor_count(dungeon) and floor_n == DataDungeons.floor_count(dungeon) + int(growth.extra):
+		fd["exit"] = fd.descent
+		fd.erase("descent")
 	th = DataDungeons.theme(dungeon)
 	var tid := StringName(dd.get("theme", &"drowned"))
 	dress = DRESS.get(tid, DataDungeonsX.DRESS.get(tid, DRESS[&"drowned"]))
@@ -374,7 +379,7 @@ func _gameplay() -> void:
 	_used[gc] = true
 	if goal_key == "descent":
 		var flag := DataDungeons.seal_flag(dungeon, floor_n)
-		var hint := "Sealed. Defeat the Seal Keepers of this floor to open the way down." if floor_n < DataDungeons.champion_floor(dungeon) else \
+		var hint := "Sealed. Defeat the Seal Keepers of this floor to open the way down." if floor_n != DataDungeons.champion_floor(dungeon) else \
 			"Sealed. %s holds the seal." % dd.miniboss.name
 		var dt := teleporter(StringName("dg_%s_%d_down" % [dungeon, floor_n]), gp, DataDungeons.map_id(dungeon, floor_n + 1), &"arrival",
 			DataDungeons.floor_title(dungeon, floor_n + 1), 0.0, true, flag, hint)
@@ -382,14 +387,21 @@ func _gameplay() -> void:
 		spawn(&"descent", _beside(gc), 180.0)
 		_seal_ward(gp, flag)
 	else:
-		var flag := DataDungeons.cleared_flag(dungeon)
+		var flag := DataDungeons.seal_flag(dungeon, floor_n) if floor_n > DataDungeons.floor_count(dungeon) else DataDungeons.cleared_flag(dungeon)
 		var et := teleporter(StringName("dg_%s_%d_exit" % [dungeon, floor_n]), gp, surface.map, DataDungeons.gate_id(dungeon),
 			DB.map_def(surface.map).display_name if DB.map_def(surface.map) else String(surface.map), 0.0, true, flag,
-			"The way home wakes when the lord of this place falls.")
+			"Defeat the Seal Keepers to open the way home." if floor_n > DataDungeons.floor_count(dungeon) else "The way home wakes when the lord of this place falls.")
 		et.rune_tint = th.rune
 		spawn(&"exit", _beside(gc), 180.0)
 		_seal_ward(gp, flag)
 	brazier_pair(gp)
+	# The original sanctum retains its exit and boss; deeper halls branch from the cleared arena.
+	if floor_n == DataDungeons.floor_count(dungeon) and int(growth.extra) > 0:
+		var deep_pos := cell_pos(fd.boss)
+		var dt := teleporter(StringName("dg_%s_depths" % dungeon), deep_pos, DataDungeons.map_id(dungeon, floor_n + 1), &"arrival",
+			"Enter the deeper halls", 0.0, true, DataDungeons.cleared_flag(dungeon), "Defeat the dungeon lord to enter the deeper halls.")
+		dt.rune_tint = th.rune
+		spawn(&"descent", _beside(fd.boss), 180.0)
 	# camps
 	var pools: Dictionary = dd.pools
 	var i := 0
@@ -422,6 +434,8 @@ func _gameplay() -> void:
 		_used[cell] = true
 		n += 1
 		var chest := TreasureChest.new().setup(int(cp[1]), "%s/%d" % [def.id, n], def.level_max, DataDungeons.CHEST_RESPAWN)
+		if floor_n > DataDungeons.floor_count(dungeon):
+			chest.guardian_zone = DataDungeons.SEAL_ZONE
 		var p := cell_pos(cell)
 		# against the nearest wall so it never blocks a passage
 		var push := Vector3.ZERO

@@ -286,6 +286,8 @@ static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 	var cd := DB.class_def(class_id)
 	if cd == null:
 		return base.class_hint == class_id
+	if base.class_hint != &"" and base.class_hint != class_id:
+		return false
 	if base.category == &"weapon":
 		return cd.weapon_mastery.has(base.weapon_type)
 	if base.category == &"shield":
@@ -299,25 +301,25 @@ static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 ## Random base eligible at an item level (weighted), optionally restricted to categories. Set pieces and uniques are
 ## excluded — they come from dedicated drop rolls (elites/bosses) and special merchant stock. With a `class_hint`,
 ## `fit_chance` of the picks come from that class's own gear (bh-017: a Knight is offered plate and blades, not robes).
-static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array = [], class_hint := &"", fit_chance := CLASS_FIT_CHANCE) -> ItemBaseDef:
+static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array = [], class_hint := &"", fit_chance := CLASS_FIT_CHANCE, excluded: Array = []) -> ItemBaseDef:
 	var pool := []
 	var total := 0
 	for b in DB.item_bases.values():
 		if not BH.CATEGORY_SLOTS.has(b.category) or b.set_id != &"" or b.unique_name != "" or b.drop_weight <= 0:
 			continue
-		if b.drop_level > ilvl:
+		if b.drop_level > ilvl or excluded.has(b.id):
 			continue
 		if not categories.is_empty() and not categories.has(b.category):
 			continue
 		pool.append(b)
 	if pool.is_empty():
-		return null
+		return random_base(rng, ilvl, categories, class_hint, fit_chance) if not excluded.is_empty() else null
 	if class_hint != &"" and rng.randf() < fit_chance:
 		var mine := pool.filter(func(b): return class_fit(b, class_hint))
 		if not mine.is_empty():
 			pool = mine
 		elif fit_chance >= 1.0:
-			return null
+			return random_base(rng, ilvl, categories, class_hint, fit_chance) if not excluded.is_empty() else null
 	# Pick a weapon family before a base so large sword/armour catalogs cannot drown out axes.
 	var weapons := pool.filter(func(b): return b.is_weapon())
 	if not weapons.is_empty() and (weapons.size() == pool.size() or rng.randf() < 0.40):
@@ -335,8 +337,8 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 	for b in pool:
 		var w: int = b.drop_weight
 		# Recent bases are favoured so drops keep pace with the hero; far outleveled bases fade out.
-		if ilvl - b.drop_level > 12:
-			w = maxi(1, w / 4)
+		var age: int = maxi(0, ilvl - b.drop_level - 8)
+		w = maxi(1, roundi(float(w) / (1.0 + pow(float(age) / 8.0, 2.0))))
 		weights.append(w)
 		total += w
 	var r := rng.randi_range(1, total)

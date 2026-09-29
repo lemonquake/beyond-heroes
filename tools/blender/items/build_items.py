@@ -42,8 +42,15 @@ TYPE_FALLBACK = {
 }
 
 
+with open(os.path.join(HERE, "depth_specs.json"), encoding="utf-8") as f:
+    DEPTH_SPECS = json.load(f)
+
+
 def spec_for(item):
     iid = item["id"]
+    if iid in DEPTH_SPECS:
+        name, spec = DEPTH_SPECS[iid]
+        return getattr(IW, name, None) or getattr(IG, name), dict(spec), False
     for table in (IW.SPECS, IG.GEAR, IGo.GOODS):
         if iid in table:
             fn, s = table[iid]

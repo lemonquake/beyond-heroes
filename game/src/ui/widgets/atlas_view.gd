@@ -682,7 +682,7 @@ func _draw_underground(c: Control, font: Font, body: Font) -> void:
 			_draw_gate(c, sp + Vector2(0, -4), did, 1.0)
 			var lr := DataDungeons.level_range(did)
 			c.draw_string(font, sp + Vector2(24, -6), String(rows[i][1]), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 21, UITheme.PARCHMENT)
-			var line := "%s  Lv %d–%d · %s · %d floors" % [DataDungeons.tier_stars(did), lr.x, lr.y, DataDungeons.tier_name(did), DataDungeons.floor_count(did)]
+			var line := "%s  Lv %d–%d · %s · %d floors" % [DataDungeons.tier_stars(did), lr.x, lr.y, DataDungeons.tier_name(did), DungeonGrowth.total(Game.hero, did)]
 			c.draw_string(body, sp + Vector2(24, 15), line, HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 16, tier_color(did).lightened(0.35))
 			var raided := DataDungeons.recovering(hero, did)
 			c.draw_string(body, sp + Vector2(24, 33), DataDungeons.status_short(hero, did), HORIZONTAL_ALIGNMENT_LEFT, cw - 60, 15,

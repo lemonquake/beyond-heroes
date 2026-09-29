@@ -141,6 +141,7 @@ func _profile() -> Dictionary:
 	var h: HeroData = Game.hero
 	return {"name": h.hero_name if h else "Hero", "cls": String(h.cls.id) if h else "knight",
 		"level": h.progress.level if h else 1, "map": String(Game.current_map_id),
+		"dungeon_level": int(h.world_flags.get(DungeonGrowth.visit_key(DataDungeons.parse(h.current_map)[0]), h.progress.level)) if h else 1,
 		"device": "Mobile" if Settings.is_mobile_device() else "PC"}
 
 # ---- Host / join / leave ------------------------------------------------------------------------------------------
@@ -359,6 +360,7 @@ func on_local_map_loaded(id: StringName) -> void:
 	_known.clear()
 	if peers.has(my_id()):
 		peers[my_id()]["map"] = String(id)
+	update_profile()
 	if is_host():
 		_reassign_worlds()
 		_rpc_peers()
@@ -473,6 +475,8 @@ func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
 		for camp in state.get("camps", []):
 			sp.camps[camp] = []
 		sp.cleared_camps = state.get("cleared", {}).duplicate()
+		if sp.cleared_camps.has(DataDungeons.SEAL_ZONE):
+			Events.camp_cleared.emit(StringName(map), DataDungeons.SEAL_ZONE, 0, sp.camps.size())
 		sp.stage_done = bool(state.get("done", false))
 		sp.minibosses.clear()
 		for e: Enemy in _replicas.values():
@@ -798,7 +802,9 @@ func _register_enemy(e: Enemy) -> void:
 static func enemy_info(e: Enemy) -> Dictionary:
 	return {"id": int(e.get_meta(&"net_id")), "def": String(e.def.id), "lvl": e.level, "mods": e.elite_mods.map(func(m): return String(m)),
 		"diff": maxi(0, DataEnemies.DIFFICULTY.find(e.difficulty)), "mb": String(e.miniboss.get("id", "")), "flag": String(e.get_meta(&"boss_flag", "")),
-		"pos": e.global_position, "yaw": e.rotation.y, "hp": e.hp}
+		"pos": e.global_position, "yaw": e.rotation.y, "hp": e.hp,
+		"depth_guardian": e.miniboss if e.has_meta(&"depth_guardian") else {},
+		"dungeon_reward": float(e.get_meta(&"dungeon_reward_bonus", 0.0))}
 
 func _send_enemies() -> void:
 	var here := String(Game.current_map_id)

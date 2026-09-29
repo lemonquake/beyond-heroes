@@ -661,8 +661,10 @@ static func tier_stars(id: StringName) -> String:
 	return "★".repeat(t) + "☆".repeat(5 - t)
 
 static func level_range(id: StringName) -> Vector2i:
-	var lv: Array = get_def(id).get("levels", [[1, 1]])
-	return Vector2i(int(lv[0][0]), int(lv[lv.size() - 1][1]))
+	if get_def(id).is_empty():
+		return Vector2i.ONE
+	var g := DungeonGrowth.for_hero(Game.hero, id)
+	return Vector2i(DungeonGrowth.levels(id, 1, g).x, DungeonGrowth.levels(id, floor_count(id) + int(g.extra), g).y)
 
 ## Shared recommendation for entrances, maps and travel choices.
 static func recommended_levels(id: StringName) -> String:
@@ -693,8 +695,10 @@ static func parse(map: StringName) -> Array:
 
 static func floor_def(dungeon: StringName, floor_n: int) -> Dictionary:
 	var d := get_def(dungeon)
-	if d.is_empty() or floor_n < 1 or floor_n > (d.floors as Array).size():
+	if d.is_empty() or floor_n < 1 or floor_n > floor_count(dungeon) + DungeonGrowth.MAX_EXTRA:
 		return {}
+	if floor_n > floor_count(dungeon):
+		return DungeonGrowth.floor_plan(dungeon, floor_n)
 	return d.floors[floor_n - 1]
 
 static func theme(dungeon: StringName) -> Dictionary:
@@ -725,9 +729,12 @@ static func gates_on(map: StringName) -> Array[StringName]:
 ## Floors the hero may enter straight from the surface gate: floor 1, and every floor whose seal above is broken.
 static func reached_floors(hero: HeroData, dungeon: StringName) -> Array:
 	var out := [1]
-	for n in range(2, floor_count(dungeon) + 1):
-		if hero != null and bool(hero.world_flags.get(seal_flag(dungeon, n - 1), false)):
+	for n in range(2, DungeonGrowth.total(hero, dungeon) + 1):
+		var flag := cleared_flag(dungeon) if n == floor_count(dungeon) + 1 else seal_flag(dungeon, n - 1)
+		if hero != null and bool(hero.world_flags.get(flag, false)):
 			out.append(n)
+		else:
+			break
 	return out
 
 static func floor_title(dungeon: StringName, floor_n: int) -> String:
@@ -775,14 +782,14 @@ static func recovering(hero: HeroData, dungeon: StringName) -> bool:
 
 ## One line of state for the map and the guide.
 static func status_text(hero: HeroData, dungeon: StringName) -> String:
-	var n := floor_count(dungeon)
+	var n := DungeonGrowth.total(hero, dungeon)
 	if recovering(hero, dungeon):
 		return "Raided — its monsters return in %s" % fmt_minutes(recover_left(hero, dungeon))
 	if boss_gone(hero, dungeon):
 		return "Recovered — its lord is gone; %s holds the sanctum" % String(get_def(dungeon).usurper.name)
 	var reached := reached_floors(hero, dungeon).size()
 	if hero == null or (reached == 1 and not hero.discovered_maps.has(map_id(dungeon, 1))):
-		return "Unexplored — %d floors" % n
+		return "Unexplored — %d floors. %s" % [n, DungeonGrowth.summary(hero, dungeon)]
 	return "Floor %d of %d reached" % [reached, n]
 
 ## The same state, short enough for a row of the Underground list.
@@ -805,14 +812,14 @@ static func map_defs() -> Array:
 	for id in order():
 		var d: Dictionary = get_def(id)
 		var n_floors := floor_count(id)
-		for n in range(1, n_floors + 1):
-			var f: Dictionary = d.floors[n - 1]
+		for n in range(1, n_floors + DungeonGrowth.MAX_EXTRA + 1):
+			var f := floor_def(id, n)
 			var m := MapDef.new()
 			m.id = map_id(id, n)
 			m.display_name = floor_title(id, n)
 			m.subtitle = String(f.name)
 			m.builder = "res://src/world/maps/dungeon.gd"
-			var lv: Array = d.levels[n - 1]
+			var lv: Array = d.levels[mini(n, n_floors) - 1]
 			m.level_min = int(lv[0])
 			m.level_max = int(lv[1])
 			m.music = &"music_boss" if n == n_floors else StringName(d.music)
@@ -827,6 +834,8 @@ static func map_defs() -> Array:
 
 static func _hint(id: StringName, n: int) -> String:
 	var d: Dictionary = get_def(id)
+	if n > floor_count(id):
+		return "These deeper halls open from Level %d. Clear the guardian's Seal Keeper pack to open its treasure and the next portal. Your dungeon strength stays fixed until you leave." % DungeonGrowth.STEPS[n - floor_count(id) - 1]
 	if n == floor_count(id):
 		return "The lord of %s waits below. Defeat it to wake the portal home and claim its Relic Cache. A raided dungeon recovers in 30 minutes to 2 hours; its lord does not." % d.name
 	if n == champion_floor(id):

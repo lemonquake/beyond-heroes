@@ -38,6 +38,10 @@ func _ready() -> void:
 	add_child(_loading)
 	Events.world_flag_set.connect(_on_flag)
 	Events.player_leveled.connect(func(_l: int, _g: int) -> void: _check_tempo_grade())
+	Events.player_leveled.connect(func(level: int, gained: int) -> void:
+		var notice := DungeonGrowth.level_notice(level, gained)
+		if notice != "":
+			Events.notify.emit(notice, &"discovery"))
 	GuildJobs.connect_events()
 	QuakeTeam.connect_events()
 	StoryDirector.connect_events()
@@ -157,18 +161,30 @@ func save_now() -> bool:
 # ---- Maps -----------------------------------------------------------------------------------------------------
 
 ## Build a map scene from its definition without adding it to the tree (used by loading and by tests).
-func build_map(id: StringName) -> MapRoot:
+func build_map(id: StringName, saved_visit := false) -> MapRoot:
 	var def := DB.map_def(id)
 	if def == null:
 		push_error("Unknown map %s" % id)
 		return null
+	var parsed := DataDungeons.parse(id)
+	if parsed[0] != &"":
+		def = def.duplicate()
+		var growth := DungeonGrowth.for_hero(hero, parsed[0])
+		if saved_visit and hero:
+			growth = DungeonGrowth.profile(int(hero.world_flags.get(DungeonGrowth.visit_key(parsed[0]), hero.progress.level)))
+		def.set_meta(&"dungeon_growth", growth)
+		var lv := DungeonGrowth.levels(parsed[0], parsed[1], growth)
+		def.level_min = lv.x
+		def.level_max = lv.y
+		def.subtitle += " · " + DungeonGrowth.describe(growth)
 	var script: GDScript = load(def.builder)
 	var builder: MapBuilder = script.new()
 	return builder.build(def)
 
 ## Replace the current map immediately and put the player on `spawn_id`.
 func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
-	var map := build_map(id)
+	DungeonGrowth.enter(hero, id)
+	var map := build_map(id, true)
 	if map == null:
 		return null
 	if current_map and is_instance_valid(current_map):

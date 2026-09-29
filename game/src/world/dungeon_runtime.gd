@@ -26,7 +26,7 @@ func map_id() -> StringName:
 	return DataDungeons.map_id(dungeon, floor_n)
 
 func _quiet_notice() -> void:
-	if Game.hero == null or not is_inside_tree() or not DataDungeons.recovering(Game.hero, dungeon):
+	if floor_n > DataDungeons.floor_count(dungeon) or Game.hero == null or not is_inside_tree() or not DataDungeons.recovering(Game.hero, dungeon):
 		return
 	Events.notify.emit("The halls are quiet: %s is still recovering from your raid. Its monsters return in %s." % [
 		DataDungeons.get_def(dungeon).name, DataDungeons.fmt_minutes(DataDungeons.recover_left(Game.hero, dungeon))], &"info")
@@ -42,10 +42,11 @@ func _on_miniboss(id: StringName) -> void:
 ## Open this floor's descent portal for good (idempotent).
 func break_seal() -> bool:
 	var flag := DataDungeons.seal_flag(dungeon, floor_n)
-	if Game.hero == null or Game.has_flag(flag) or floor_n >= DataDungeons.floor_count(dungeon):
+	if Game.hero == null or Game.has_flag(flag) or floor_n > DungeonGrowth.total(Game.hero, dungeon):
 		return false
 	Game.set_world_flag(flag, true)
-	Events.notify.emit("The seal breaks. The way down to %s is open." % DataDungeons.floor_title(dungeon, floor_n + 1), &"discovery")
+	var message := "The seal breaks. The way home is open." if floor_n == DungeonGrowth.total(Game.hero, dungeon) else "The seal breaks. The way down to %s is open." % DataDungeons.floor_title(dungeon, floor_n + 1)
+	Events.notify.emit(message, &"discovery")
 	Audio.play_ui(&"level_up")
 	return true
 
