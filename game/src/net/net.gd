@@ -4,15 +4,21 @@ extends Node
 ##   Host      a player opens their running game ("Host Game"). Their machine is the authority for the world: it runs
 ##             the monsters, decides where the party is, and relays everyone's snapshots.
 ##   Join      another player, already playing their own hero, joins by LAN discovery or by address. Their game
-##             follows the host to the host's map and shows the host's monsters as replicas.
+##             arrives at the host's side and, on the host's map, shows the host's monsters as replicas.
 ##   Heroes    every machine sends its own hero and Tempos ~15 times a second; the others draw them as NetAvatars.
 ##   Combat    a client's blow on a replica is resolved on the client (its hero's stats) and the result is applied by
 ##             the host; a monster's blow on a NetAvatar is sent to the avatar's owner and resolved against the real
 ##             hero there (guard, dodge, resistances all count). Kills are announced; every hero in the map gets the
 ##             experience and rolls their own loot (instanced loot: nobody steals anybody's drops).
-##   Travel    the party follows the host: when the host changes maps the clients load the same map. A client who
-##             takes a door, waypoint or scroll asks the host instead ("Mira wants to go to Olivar": Go / Stay);
-##             Regroup puts a client who wandered off back beside the host (bh-011).
+##   Travel    (bh-015) everyone explores on their own. A joining player arrives at the host's side; after that each
+##             player takes doors, waypoints and scrolls freely. On the host's map the host's monsters are shared
+##             (replicas on the clients); anywhere else a client's world runs its own monsters, as when playing alone.
+##             When the host walks into a client's map the client's own monsters give way to the host's; when the host
+##             leaves, the map fills with the client's own again. The host can Summon the party: every player away
+##             from them is asked "Go / Stay"; Go puts them at the host's side. Regroup still jumps a client there.
+##   Presence  every player's hero snapshot reaches every other machine wherever they are: the party frames show HP,
+##             level and map for all, the minimap shows allies on the same map (arrows; on the rim with the distance
+##             when out of sight) and the world map shows where everyone is (bh-015).
 ##   Revive    a fallen hero can be stood up again by a friend: stand beside them and press Interact (bh-011).
 ##   Ping      G (or the touch Ping button) marks a spot every player sees for a few seconds (bh-011).
 ##   Chat      the chat box is shared; joins and leaves also show as notices.
@@ -22,7 +28,11 @@ signal state_changed
 signal peers_changed
 signal lan_games_changed
 
-const PROTOCOL := 3                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping
+const PROTOCOL := 4                  # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+                                     # 4 (bh-015): independent exploring, party summons
+const SUMMON_WAIT := 30.0            # seconds a summoned player has to answer before it counts as Stay
+const SUMMON_COOLDOWN := 8.0
+const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
 const PORT := 24680
 const DISCOVERY_PORT := 24681
 const MAX_CLIENTS := 3
@@ -66,6 +76,12 @@ var _joining_addr := ""
 var _travel_pending := {}            # host: the request being asked about {from, req}
 var _travel_asked_t := -99.0         # client: when this machine last asked (one request at a time)
 var last_room := ""                  # the last room code / address this machine joined (Multiplayer > Rejoin)
+var status := {}                     # peer id -> {map, pos, yaw, hp, mhp, alive, lvl, t}: every player, wherever they are
+var _host_shared := false            # client: the host is on this map, its monsters are the ones here
+var _share_t := 0.0
+var _arrived := false                # client: has reached the host once after joining (later host moves do not drag it)
+var _summon := {}                    # client: the summons being asked about {map, t}
+var _summon_t := -99.0               # host: when the party was last summoned
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -175,6 +191,7 @@ func join_game(address: String, port := PORT) -> String:
 ## own monsters.
 func leave(reload := true) -> void:
 	var was_client := is_client()
+	var was_shared := _host_shared
 	if is_active() and _peer:
 		if is_host():
 			_chat_system("The host closed the world.")
@@ -185,15 +202,19 @@ func leave(reload := true) -> void:
 	connecting = false
 	following = false
 	peers.clear()
+	status.clear()
 	_known.clear()
 	_host_enemies.clear()
+	_host_shared = false
+	_arrived = false
+	_summon = {}
 	_stop_broadcast()
 	_clear_avatars()
 	_clear_replicas()
 	state_changed.emit()
 	peers_changed.emit()
-	if was_client and reload and Game.in_session:
-		Game.reload_current_map()
+	if was_client and reload and Game.in_session and was_shared:
+		Game.reload_current_map()          # its monsters were the host's replicas: get this map's own back
 
 func _on_peer_connected(_id: int) -> void:
 	pass                                     # the client introduces itself with _hello
@@ -203,6 +224,7 @@ func _on_peer_disconnected(id: int) -> void:
 		return
 	var who: String = peers.get(id, {}).get("name", "A hero")
 	peers.erase(id)
+	status.erase(id)
 	_known.erase(id)
 	_remove_avatars_of(id)
 	if is_host():
@@ -297,19 +319,65 @@ func on_local_map_loaded(id: StringName) -> void:
 		var p := Game.player as Node3D
 		_host_moved.rpc(String(id), p.global_position if p else Vector3.ZERO, p.rotation.y if p else 0.0)
 		_rpc_peers()
-	elif not following:
-		_in_map.rpc_id(1, String(id))      # while following, _follow reports once the map is ready
+	else:
+		_host_shared = host_on(id)
+		if not following:
+			_in_map.rpc_id(1, String(id))  # while following, _follow reports once the map is ready
 
+## The host changed maps. A player who has not reached the host since joining follows; everyone else keeps exploring
+## (bh-015) and only hears where the host went.
 @rpc("authority", "reliable")
 func _host_moved(map: String, pos: Vector3, yaw: float) -> void:
-	_follow(StringName(map), pos, yaw)
+	if peers.has(1):
+		peers[1]["map"] = map
+	if not _arrived:
+		_follow(StringName(map), pos, yaw)
+		return
+	peers_changed.emit()
+
+## Client: is the host on map `id` right now? There its monsters are shared; anywhere else this machine runs its own.
+func host_on(id: StringName) -> bool:
+	return is_client() and String(peers.get(1, {}).get("map", "")) == String(id)
 
 func _follow(map: StringName, pos: Vector3, yaw: float) -> void:
 	following = true
+	if peers.has(1):
+		peers[1]["map"] = String(map)       # the map about to load is the host's: no monsters of its own
 	await Game.net_follow(map, pos, yaw)
 	following = false
+	_arrived = true
 	if is_client():
+		_host_shared = host_on(Game.current_map_id)
 		_in_map.rpc_id(1, String(Game.current_map_id))   # now the host may stream its monsters
+
+## Client: the host walked into this map (its monsters replace this machine's own) or left it (this map fills with
+## the machine's own monsters again). Checked a few times a second.
+func _check_shared() -> void:
+	if not is_client() or not _arrived or following or Game.travelling or not Game.in_session or Game.current_map == null:
+		return
+	var shared := host_on(Game.current_map_id)
+	if shared == _host_shared:
+		return
+	_host_shared = shared
+	var map := Game.current_map
+	if shared:
+		_drop_local_monsters(map)
+		_in_map.rpc_id(1, String(Game.current_map_id))
+		Events.notify.emit("%s is here. You fight the same monsters now." % host_name(), &"info")
+	else:
+		_clear_replicas()
+		if map.get_node_or_null(^"Spawner") == null:
+			Spawner.populate(map, Game.difficulty)
+		Events.notify.emit("%s left for %s. This place is yours alone again." % [host_name(), place_name(StringName(peers.get(1, {}).get("map", "")))], &"info")
+
+func _drop_local_monsters(map: Node) -> void:
+	for n in [map.get_node_or_null(^"Spawner"), map.get_node_or_null(^"CombatDirector")]:
+		if n:
+			map.remove_child(n)
+			n.queue_free()
+	for e in get_tree().get_nodes_in_group(&"enemy"):
+		if e is Enemy and not (e as Enemy).net_replica and map.is_ancestor_of(e):
+			e.queue_free()
 
 @rpc("any_peer", "reliable")
 func _in_map(map: String) -> void:
@@ -321,11 +389,9 @@ func _in_map(map: String) -> void:
 	_known[id] = {}
 	_rpc_peers()
 
-## May this machine take a door, a waypoint or a portal right now? (Clients follow the host.)
+## May this machine take a door, a waypoint or a portal right now? Always (bh-015: everyone explores on their own;
+## until bh-014 a client had to ask the host to lead the party).
 func may_travel() -> bool:
-	if is_client() and not following:
-		Events.notify.emit("The party follows %s. Only the host can lead it elsewhere." % host_name(), &"locked")
-		return false
 	return true
 
 func _peer_map(id: int) -> String:
@@ -437,6 +503,10 @@ func _process(delta: float) -> void:
 			_send_enemies()
 	else:
 		_expire_replicas()
+		_share_t -= delta
+		if _share_t <= 0.0:
+			_share_t = 0.25
+			_check_shared()
 
 # ---- Allies (heroes and Tempos) -----------------------------------------------------------------------------------
 
@@ -478,6 +548,10 @@ func _allies(map: String, pack: Array) -> void:
 	var from := multiplayer.get_remote_sender_id()
 	if peers.has(from):
 		peers[from]["map"] = map
+	for e in pack:
+		if e.get("k", "") == "p" and (e.s as Array).size() >= 12:
+			status[from] = {"map": map, "pos": e.s[0], "yaw": e.s[1], "hp": e.s[3], "mhp": e.s[4], "alive": e.s[5], "lvl": e.s[11],
+				"t": Time.get_ticks_msec() * 0.001}
 	if not Game.in_session or Game.current_map == null or Game.travelling or following:
 		return
 	if map != String(Game.current_map_id):
@@ -912,7 +986,7 @@ func _profile_changed(profile: Dictionary) -> void:
 		peers[id]["map"] = keep
 	_rpc_peers()
 
-# ---- Party travel requests (bh-011) -------------------------------------------------------------------------------
+# ---- Party travel requests (bh-011; unused since bh-015, when clients started travelling on their own) ---------------
 
 ## A client stepped through a door / onto a waypoint / read a scroll: ask the host to take the party there.
 ## req: {"kind": "travel" | "door" | "point", "map": id, "spawn": id, "pos": Vector3, "yaw": float}. True when asked.
@@ -1036,6 +1110,82 @@ func _regroup_to(map: String, pos: Vector3, yaw: float) -> void:
 	FX.spawn(VFXLib.light_pillar(Color(0.55, 0.9, 1.0), 4.0, 0.8, 0.6), spot)
 	Audio.play_at(&"teleport_whoosh", spot, -4.0)
 	Events.notify.emit("Back at %s's side." % host_name(), &"info")
+
+# ---- Summon the party (bh-015) -------------------------------------------------------------------------------------
+
+## Host: ask every player who is not already beside you to come to your side. Returns how many were asked.
+func summon_party() -> int:
+	if not is_host() or not Game.in_session or Game.travelling:
+		return 0
+	var p := Game.player as Node3D
+	if p == null or not is_instance_valid(p):
+		return 0
+	var now := Time.get_ticks_msec() * 0.001
+	if now - _summon_t < SUMMON_COOLDOWN:
+		Events.notify.emit("The last summons is still being answered.", &"info")
+		return 0
+	var asked := 0
+	for pid in peers:
+		if int(pid) == 1:
+			continue
+		var av := avatar(int(pid))
+		if av and av.global_position.distance_to(p.global_position) < BESIDE_M:
+			continue
+		_summoned.rpc_id(int(pid), String(Game.current_map_id))
+		asked += 1
+	if asked == 0:
+		Events.notify.emit("Everyone is already at your side." if peers.size() > 1 else "Nobody has joined yet.", &"info")
+		return 0
+	_summon_t = now
+	_chat_system("%s summons the party to %s." % [String(peers.get(1, {}).get("name", "The host")), place_name(Game.current_map_id)], true)
+	return asked
+
+## Client: the host summons the party. Go / Stay (no answer in SUMMON_WAIT seconds is Stay).
+@rpc("authority", "reliable")
+func _summoned(map: String) -> void:
+	if not is_client() or not Game.in_session:
+		return
+	var serial := Time.get_ticks_msec()
+	_summon = {"map": map, "t": serial}
+	Audio.play_ui(&"ui_open")
+	var here := StringName(map) == Game.current_map_id
+	var text := "%s summons the party to %s. Go to their side?" % [host_name(), "this place" if here else place_name(StringName(map))]
+	if Game.ui_root and is_instance_valid(Game.ui_root):
+		Game.ui_root.confirm.ask("Summoned", text, func() -> void: answer_summon(true), "Go", false, null, "Stay")
+		var c: Node = Game.ui_root.confirm
+		if c.has_signal(&"cancelled"):
+			c.connect(&"cancelled", func() -> void:
+				if _summon.get("t", -1) == serial:
+					answer_summon(false), CONNECT_ONE_SHOT)
+	Events.notify.emit(text, &"info")
+	get_tree().create_timer(SUMMON_WAIT).timeout.connect(func() -> void:
+		if _summon.get("t", -1) == serial:
+			if Game.ui_root and is_instance_valid(Game.ui_root) and Game.ui_root.confirm.visible:
+				Game.ui_root.confirm.visible = false
+			answer_summon(false))
+
+## Client: answer the pending summons. Go asks the host where it stands now and travels there.
+func answer_summon(go: bool) -> void:
+	if _summon.is_empty():
+		return
+	_summon = {}
+	var p := Game.player as Player
+	if go and (p == null or not p.alive):
+		Events.notify.emit("Get back on your feet first.", &"info")
+		go = false
+	_summon_reply.rpc_id(1, go)
+	if go:
+		_ask_regroup.rpc_id(1)              # the host answers with where it stands now: _regroup_to
+
+func pending_summon() -> Dictionary:
+	return _summon
+
+@rpc("any_peer", "reliable")
+func _summon_reply(go: bool) -> void:
+	if not is_host():
+		return
+	var who: String = peers.get(multiplayer.get_remote_sender_id(), {}).get("name", "A hero")
+	Events.notify.emit(("%s is on the way." if go else "%s stays where they are.") % who, &"info")
 
 # ---- Revive (bh-011) ----------------------------------------------------------------------------------------------
 

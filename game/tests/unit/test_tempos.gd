@@ -144,7 +144,8 @@ func test_data_is_consistent() -> void:
 	# every generated spirit is valid
 	for i in 60:
 		var t := TempoRules.generate(i * 7919, 5)
-		ok(names.has(t.tempo_name), "generated name from the pool")
+		# bh-015: rolled from prefix + middle + suffix (NameForge), never a townsperson's or a renowned spirit's name
+		ok(t.tempo_name.length() >= 4 and not NameForge.reserved().has(t.tempo_name.to_lower()), "generated name %s is a rolled one" % t.tempo_name)
 		ok(t.skills[0] == t.class_def().signature and t.skills.size() >= 2 and t.skills.size() <= 3, "generated skills (%s)" % [t.skills])
 		ok(DataTempos.ORIGINS.has(t.origin), "generated origin")
 		ok(t.price == TempoRules.hire_cost(t, 5), "generated price = hire cost")
@@ -420,7 +421,8 @@ func test_starter_tempo() -> void:
 	var t := TempoRules.grant_starter(h)
 	ok(t != null, "the starter is granted")
 	eq(h.tempos.size(), 1, "one Tempo")
-	eq(t.tempo_name, String(DataTempos.STARTER.name), "named %s" % DataTempos.STARTER.name)
+	ok(t.tempo_name.length() >= 4 and t.tempo_name[0] == t.tempo_name[0].to_upper(), "a rolled name (%s)" % t.tempo_name)
+	eq(h.starter_name, t.tempo_name, "the hero remembers the starter's name (the guide quotes it)")
 	eq(t.class_id, &"swordsman", "a Swordsman")
 	eq(t.grade, 1, "grade 1")
 	eq(t.skills, [&"sw_cleave", &"sw_mend"], "Cleave and Soul Mend")
@@ -428,7 +430,6 @@ func test_starter_tempo() -> void:
 	eq(t.uid, 1, "uid 1")
 	ok(not t.is_legend(), "not renowned")
 	ok(t.equipment.get_item(&"main_weapon") != null, "arrives holding a sword")
-	ok(not DataTempos.NAMES.has(t.tempo_name), "his name is not in the random pool")
 	ok(TempoRules.grant_starter(h) == null and h.tempos.size() == 1, "granting twice does nothing")
 	eq(TempoRules.revive_cost(t, h), int(snappedf(25.0 + 12.0, 5.0)), "calling him back costs the base fee")
 	# room for exactly one more

@@ -633,6 +633,39 @@ def staff(s):
         for k in range(8):
             a = math.radians(k * 45)
             parts.append(K.cone_spike((0.09 * math.cos(a), 0, 0.72 + 0.09 * math.sin(a)), (0.13 * math.cos(a), 0, 0.72 + 0.13 * math.sin(a)), 0.008, s.get("metal", "gold")))
+    elif head == "orb":
+        # bh-015: a glowing orb held in a three-armed metal cage
+        parts.append(K.sphere(0.055, (0, 0, 0.7), gm, 14, 10))
+        for k in range(3):
+            a = math.radians(k * 120)
+            cage = [(0.02 * math.cos(a), 0.02 * math.sin(a), 0.56), (0.07 * math.cos(a), 0.07 * math.sin(a), 0.64),
+                    (0.068 * math.cos(a), 0.068 * math.sin(a), 0.74), (0.02 * math.cos(a), 0.02 * math.sin(a), 0.8)]
+            parts.append(K.tube(cage, [0.008, 0.007, 0.006, 0.004], s.get("metal", "darksteel"), n=6, up=(0, 0, 1)))
+        parts.append(K.ring_tube((0, 0, 0.7), 0.072, 0.004, s.get("metal", "darksteel"), axis="z", n=24))
+    elif head == "crook":
+        # bh-015: a shepherd's curl with a lantern crystal hanging inside it
+        pts = []
+        for i in range(12):
+            u = i / 11
+            a = math.radians(-90 + 250 * u)
+            pts.append((0.075 + 0.075 * math.cos(a) - 0.075, 0, 0.62 + 0.075 + 0.075 * math.sin(a) + 0.02 * u))
+        parts.append(K.tube([(0, 0, 0.5)] + pts, [0.02] + [0.019 - 0.008 * i / 11 for i in range(12)], s.get("wood", "wood"), n=8, up=(0, 1, 0)))
+        parts.append(K.crystal((-0.075, 0, 0.66), 0.09, 0.022, gm))
+        parts.append(K.ring_tube((-0.075, 0, 0.71), 0.012, 0.003, s.get("metal", "gold"), axis="z", n=10))
+    elif head == "branch":
+        # bh-015: living wood splitting into tines around a seed crystal
+        for k in range(5):
+            a = math.radians(k * 72 + 20)
+            pp = [(0, 0, 0.55), (0.03 * math.cos(a), 0.03 * math.sin(a), 0.65), (0.07 * math.cos(a), 0.07 * math.sin(a), 0.76),
+                  (0.06 * math.cos(a + 0.4), 0.06 * math.sin(a + 0.4), 0.84)]
+            parts.append(K.tube(pp, [0.014, 0.011, 0.007, 0.002], s.get("wood", "wood"), n=6, up=(0, 0, 1)))
+        parts.append(K.crystal((0, 0, 0.72), 0.16, 0.03, gm))
+        if s.get("leaves"):
+            for k in range(4):
+                a = math.radians(k * 90 + 45)
+                o = [(0.0, 0.0), (0.02, 0.025), (0.0, 0.06), (-0.02, 0.025)]
+                p = K.slab(o, 0.003, s["leaves"])
+                parts.append(p.rot(Ry(35)).rot(Rz(math.degrees(a))).move((0.05 * math.cos(a), 0.05 * math.sin(a), 0.7)))
     for z in (0.5, 0.2):
         parts.append(K.band(z, 0.028, 0.024, s.get("band", "gold")))
     parts.append(K.lathe([(0, -1.08), (0.018, -1.07), (0.024, -1.03), (0.022, -0.99), (0, -0.98)], s.get("metal", "darksteel"), 8))
@@ -677,6 +710,28 @@ def wand(s):
         for k in range(8):
             a = math.radians(k * 45)
             parts.append(K.cone_spike((0.012 * math.cos(a), 0, 0.225 + 0.012 * math.sin(a)), (0.03 * math.cos(a), 0, 0.225 + 0.03 * math.sin(a)), 0.004, om))
+    elif head == "orb":
+        # bh-015: an orb in a ring
+        parts.append(K.lathe([(0, 0.188), (0.009, 0.19), (0.012, 0.2), (0.0, 0.205)], om, 12))
+        parts.append(K.sphere(0.017, (0, 0, 0.222), gm, 12, 8))
+        parts.append(K.ring_tube((0, 0, 0.222), 0.022, 0.0025, om, axis="y", n=20))
+    elif head == "branch":
+        # bh-015: a forked twig with a seed crystal and two leaves
+        for sx in (1, -1):
+            parts.append(K.tube([(0, 0, 0.19), (sx * 0.012, 0, 0.215), (sx * 0.018, 0, 0.245)], [0.004, 0.003, 0.0012], s.get("wood", "wood"), n=5))
+        parts.append(K.crystal((0, 0, 0.222), 0.04, 0.009, gm))
+        for sx in (1, -1):
+            o = [(0.0, 0.0), (0.008, 0.012), (0.0, 0.028), (-0.008, 0.012)]
+            parts.append(K.slab(o, 0.0015, s.get("leaves", "leaf")).rot(Ry(sx * 50)).move((sx * 0.01, 0, 0.2)))
+    elif head == "crescent":
+        # bh-015: a crescent moon cradling a gem
+        pts = []
+        for i in range(10):
+            a = math.radians(200 + 140 * i / 9)
+            pts.append((0.024 * math.cos(a), 0, 0.228 + 0.024 * math.sin(a) + 0.02))
+        pts = [(x, 0, z) for x, _, z in pts]
+        parts.append(K.tube(pts, [0.002 + 0.004 * math.sin(math.pi * i / 9) for i in range(10)], om, n=6, up=(0, 1, 0)))
+        parts.append(K.sphere(0.01, (0, 0, 0.228), gm, 10, 6))
     parts.append(K.lathe([(0, -0.11), (0.011, -0.106), (0.013, -0.097), (0.011, -0.09), (0, -0.088)], om, 12))
     return parts
 
@@ -795,3 +850,122 @@ SPECS = {
     "u_starwhisper": (staff, {"head": "star", "gem": "aether", "wood": "ash", "metal": "silver", "band": "silver"}),
     "u_winters_heart": (wand, {"wood": "moonsteel", "head": "claw", "gem": "ice", "orn": "silver"}),
 }
+
+# ---- bh-015: five more of every weapon type -------------------------------------------------------------------------
+# (the element glow comes from the item element unless a spec sets its own; bows set theirs explicitly)
+
+SPECS.update({
+    # swords
+    "wayfarer_blade": (sword, {"len": 0.74, "w": (0.048, 0.034), "guard": "bar", "guard_half": 0.09, "guard_mat": "iron", "pommel": "ring",
+                               "pommel_mat": "iron", "grip_mat": "tan"}),
+    "saltmarsh_cutlass": (sword, {"len": 0.7, "w": (0.04, 0.06), "shape": "falchion", "guard": "swept", "guard_mat": "brass", "pommel_mat": "brass",
+                                  "grip_mat": "darkleather", "blade": "blued"}),
+    "gravewatch_longsword": (sword, {"len": 0.9, "w": (0.05, 0.03), "blade": "darksteel", "guard": "bar", "guard_half": 0.13, "guard_curve": -0.03,
+                                     "guard_mat": "blackiron", "pommel": "disc", "pommel_mat": "blackiron", "gem": "onyx", "serrate": True}),
+    "starfall_sabre": (sword, {"len": 0.88, "w": (0.036, 0.03), "shape": "sabre", "blade": "moonsteel", "guard": "swept", "guard_mat": "silver",
+                               "pommel_mat": "silver", "gem": "sapphire", "grip_mat": "navy"}),
+    "kingsbane": (sword, {"len": 0.94, "w": (0.056, 0.036), "shape": "waisted", "blade": "sunsteel", "guard": "winged", "guard_half": 0.15,
+                          "guard_mat": "gold", "pommel": "spike", "grip_mat": "crimson", "gem": "ruby", "lugs": True}),
+    # greatswords
+    "oathkeeper_greatsword": (sword, {"len": 1.1, "z0": 0.135, "w": (0.06, 0.042), "thick": 0.008, "guard_half": 0.18, "guard_mat": "iron",
+                                      "grip_len": 0.3, "pommel": "disc", "pommel_mat": "iron", "ricasso": "leather"}),
+    "wavecrest_flamberge": (sword, {"len": 1.16, "z0": 0.135, "w": (0.058, 0.04), "thick": 0.008, "wave": 0.012, "blade": "bright",
+                                    "guard": "bar", "guard_half": 0.2, "guard_curve": 0.05, "guard_mat": "steel", "grip_len": 0.32,
+                                    "grip_mat": "navy", "pommel_mat": "steel", "lugs": True}),
+    "ironbark_greatblade": (sword, {"len": 1.08, "z0": 0.135, "w": (0.11, 0.1), "thick": 0.01, "shape": "straight", "tip": 0.06,
+                                    "blade": "blackiron", "guard": "disc", "guard_half": 0.08, "guard_mat": "bronze", "grip_len": 0.3,
+                                    "grip_mat": "darkleather", "pommel_mat": "bronze"}),
+    "dragonspine_greatsword": (sword, {"len": 1.2, "z0": 0.135, "w": (0.07, 0.048), "thick": 0.009, "blade": "darksteel", "guard": "winged",
+                                       "guard_half": 0.2, "guard_mat": "redwood", "grip_len": 0.32, "grip_mat": "redleather",
+                                       "pommel": "spike", "pommel_mat": "gold", "serrate": True, "gem": "ruby"}),
+    "nightfall_greatsword": (sword, {"len": 1.24, "z0": 0.135, "w": (0.066, 0.046), "thick": 0.009, "shape": "waisted", "blade": "blackiron",
+                                     "guard": "bar", "guard_half": 0.21, "guard_curve": -0.05, "guard_mat": "silver", "grip_len": 0.34,
+                                     "grip_mat": "darkleather", "pommel": "ring", "pommel_mat": "silver", "gem": "amethyst"}),
+    # axes
+    "bonecutter": (axe, {"head": "cleaver", "head_mat": "iron", "haft_mat": "wood", "band_mat": "iron", "spike": False, "head_scale": 0.9}),
+    "skirmisher_axe": (axe, {"head": "tomahawk", "head_mat": "steel", "haft_mat": "ash", "spike_mat": "steel", "wrap": "leather", "band_mat": "bronze"}),
+    "thunderbeak_axe": (axe, {"head": "crescent", "head_mat": "bright", "haft_mat": "darkwood", "band_mat": "gold", "head_scale": 1.05,
+                              "spike_mat": "gold"}),
+    "gravewarden_axe": (axe, {"head": "bearded", "head_mat": "blackiron", "haft_mat": "darkwood", "band_mat": "silver", "head_scale": 1.2,
+                              "wrap": "darkleather", "pommel": True}),
+    "sunreaver": (axe, {"head": "moon", "head_mat": "sunsteel", "haft_mat": "redwood", "band_mat": "gold", "head_scale": 0.8, "double": True}),
+    # great axes
+    "stumpsplitter": (axe, {"two_handed": True, "head": "cleaver", "head_mat": "iron", "haft_mat": "wood", "band_mat": "rope", "head_scale": 1.25,
+                            "spike": False}),
+    "tuskbreaker": (axe, {"two_handed": True, "head": "bearded", "head_mat": "darksteel", "head_scale": 1.4, "spike_mat": "bone", "wrap": "fur",
+                          "band_mat": "bone", "haft_mat": "darkwood"}),
+    "frostreaver": (axe, {"two_handed": True, "head": "crescent", "head_mat": "moonsteel", "head_scale": 1.35, "double": True,
+                          "band_mat": "silver", "haft_mat": "darkwood"}),
+    "headsmans_eclipse": (axe, {"two_handed": True, "head": "moon", "head_mat": "blackiron", "head_scale": 1.45, "band_mat": "crimson",
+                                "haft_mat": "darkwood", "wrap": "crimson", "spike_mat": "blackiron"}),
+    "skyrender": (axe, {"two_handed": True, "head": "broad", "head_mat": "bright", "head_scale": 1.2, "double": True, "band_mat": "gold",
+                        "haft_mat": "ash", "pommel": True}),
+    # spears
+    "boar_spear": (spear, {"head": "partisan", "head_len": 0.3, "head_w": 0.075, "shaft_mat": "ash", "band_mat": "leather", "head_mat": "iron"}),
+    "corsair_harpoon": (spear, {"head": "barbed", "head_len": 0.26, "head_w": 0.055, "shaft_mat": "darkwood", "band_mat": "rope",
+                                "head_mat": "blued", "tassel": "navy"}),
+    "watchmans_halberd": (spear, {"head": "glaive", "head_len": 0.5, "shaft_mat": "darkwood", "band_mat": "iron", "head_mat": "steel",
+                                  "tassel": "crimson"}),
+    "emberfang_pike": (spear, {"head": "lance", "head_len": 0.42, "head_mat": "darksteel", "shaft_mat": "redwood", "band_mat": "bronze"}),
+    "dawnspire_lance": (spear, {"head": "sun", "head_len": 0.36, "head_mat": "sunsteel", "shaft_mat": "ash", "band_mat": "gold", "orn": "gold",
+                                "tassel": "white"}),
+    # javelins
+    "fowlers_dart": (javelin, {"head": "leaf", "head_len": 0.14, "head_w": 0.03, "shaft_mat": "reed", "band_mat": "rope", "fins": "white",
+                               "shaft_top": 0.62, "shaft_bot": -0.5}),
+    "flint_javelin": (javelin, {"head": "leaf", "head_w": 0.045, "head_mat": "slate", "shaft_mat": "ash", "band_mat": "leather", "fins": "tan"}),
+    "windrunner_javelin": (javelin, {"head": "barbed", "head_w": 0.04, "head_mat": "bright", "shaft_mat": "ash", "band_mat": "silver",
+                                     "fins": "white"}),
+    "frostspike": (javelin, {"head": "pilum", "head_len": 0.34, "head_mat": "moonsteel", "shaft_mat": "darkwood", "band_mat": "silver"}),
+    "heavenfall_pilum": (javelin, {"head": "lance", "head_len": 0.28, "head_mat": "sunsteel", "shaft_mat": "redwood", "band_mat": "gold",
+                                   "fins": "white"}),
+    # clubs
+    "knotwood_club": (club, {"kind": "cudgel", "wood": "ash"}),
+    "smiths_warhammer": (club, {"kind": "flanged", "head_mat": "iron", "flanges": 4, "haft_mat": "wood", "grip_mat": "leather"}),
+    "ironbound_mace": (club, {"kind": "cudgel", "wood": "darkwood", "spikes": True, "spike_mat": "steel"}),
+    "tidecrusher": (club, {"kind": "morningstar", "head_mat": "bronze", "spike_mat": "blued", "haft_mat": "darkwood", "grip_mat": "navy"}),
+    "starhammer": (club, {"kind": "flanged", "head_mat": "bright", "flanges": 9, "haft_mat": "ash", "grip_mat": "tan", "cap": "gold"}),
+    # daggers
+    "cutpurse_knife": (dagger, {"len": 0.2, "w": (0.024, 0.018), "guard": "none", "grip_mat": "darkleather", "pommel_mat": "iron", "blade": "iron"}),
+    "bonebite": (dagger, {"len": 0.26, "shape": "skinner", "blade": "bone", "guard": "bar", "guard_mat": "bone", "grip_mat": "hide",
+                          "pommel_mat": "bone"}),
+    "emberfang_dirk": (dagger, {"len": 0.3, "w": (0.032, 0.016), "blade": "darksteel", "guard": "wide", "guard_mat": "bronze",
+                                "grip_mat": "redleather", "pommel_mat": "bronze", "gem": "ruby"}),
+    "stormneedle": (dagger, {"len": 0.32, "w": (0.016, 0.008), "blade": "bright", "guard": "disc", "guard_mat": "silver", "thick": 0.004,
+                             "grip_mat": "navy", "pommel_mat": "silver", "gem": "topaz"}),
+    "nightwhisper": (dagger, {"len": 0.3, "shape": "crescent", "blade": "blackiron", "guard_mat": "darksteel", "grip_mat": "darkleather",
+                              "pommel_mat": "darksteel", "gem": "amethyst"}),
+    # claws
+    "scrappers_hooks": (claw, {"blades": 2, "len": 0.2, "hook": 0.08, "spacing": 0.05, "blade": "iron", "frame_mat": "iron", "plate_mat": "wood"}),
+    "raptor_talons": (claw, {"blades": 3, "len": 0.26, "hook": 0.1, "blade": "steel", "frame_mat": "darksteel", "plate_mat": "bone"}),
+    "frostbite_claws": (claw, {"blades": 4, "len": 0.24, "hook": 0.04, "spacing": 0.03, "blade": "moonsteel", "frame_mat": "silver"}),
+    "tempest_rakes": (claw, {"blades": 3, "len": 0.32, "hook": 0.02, "blade": "bright", "frame_mat": "silver", "spikes": True}),
+    "wyrmqueen_talons": (claw, {"blades": 3, "len": 0.3, "hook": 0.09, "blade": "sunsteel", "frame_mat": "blackiron", "plate_mat": "redwood",
+                                "scales": "ruby", "spikes": True}),
+    # knuckles
+    "pit_fighter_wraps": (knuckles, {"kind": "cestus", "wrap": "linen", "stud": "bronze"}),
+    "iron_fistguards": (knuckles, {"mat": "iron", "plate": "iron", "spikes": 0}),
+    "stonefist": (knuckles, {"mat": "bronze", "plate": "slate", "spikes": 4, "spike_len": 0.02, "spike_mat": "slate"}),
+    "emberknuckles": (knuckles, {"mat": "blackiron", "spikes": 4, "spike_mat": "bronze", "spike_len": 0.035}),
+    "dawnfist_gauntlets": (knuckles, {"mat": "gold", "plate": "sunsteel", "spikes": 2, "spike_len": 0.045, "spike_mat": "bright"}),
+    # bows
+    "fowling_bow": (bow, {"len": 0.46, "bend": 0.08, "recurve": 0.02, "limb_mat": "wood", "orn": "rope"}),
+    "yew_longbow": (bow, {"len": 0.86, "bend": 0.12, "recurve": 0.0, "limb_mat": "redwood", "orn": "leather", "wraps": "tan"}),
+    "thornback_bow": (bow, {"len": 0.62, "bend": 0.12, "recurve": 0.09, "limb_mat": "darkwood", "horn_tips": "leaf", "orn": "bronze",
+                            "wraps": "leaf", "glow": "earth"}),
+    "frostwing_bow": (bow, {"len": 0.7, "bend": 0.13, "recurve": 0.14, "limb_mat": "moonsteel", "leaf_tips": "ice", "orn": "silver",
+                            "glow": "ice"}),
+    "stormstring_greatbow": (bow, {"len": 0.94, "bend": 0.15, "recurve": 0.06, "limb_w": 0.024, "limb_t": 0.018, "limb_mat": "blackiron",
+                                   "thick_riser": "darksteel", "orn": "gold", "glow": "storm", "string": "storm"}),
+    # staves
+    "pilgrims_staff": (staff, {"head": "crook", "wood": "ash", "gem": "wind", "metal": "bronze", "band": "bronze"}),
+    "cinderheart_staff": (staff, {"head": "orb", "wood": "darkwood", "gem": "ember", "metal": "blackiron", "band": "bronze"}),
+    "deepwater_staff": (staff, {"head": "branch", "wood": "darkwood", "gem": "tide", "band": "silver", "leaves": "teal"}),
+    "gloamspire_staff": (staff, {"head": "shards", "wood": "blackiron", "gem": "shadow", "band": "silver", "metal": "silver", "wobble": 0.004}),
+    "sunspire_staff": (staff, {"head": "orb", "wood": "ash", "gem": "holy", "metal": "gold", "band": "gold"}),
+    # wands
+    "willow_wand": (wand, {"wood": "ash", "head": "branch", "gem": "earth", "orn": "bronze", "leaves": "leaf"}),
+    "emberbrand_wand": (wand, {"wood": "darkwood", "head": "orb", "gem": "ember", "orn": "bronze"}),
+    "hoarfrost_wand": (wand, {"wood": "moonsteel", "head": "crescent", "gem": "ice", "orn": "silver"}),
+    "stormglass_wand": (wand, {"wood": "darkwood", "head": "claw", "gem": "storm", "orn": "gold"}),
+    "nightbloom_wand": (wand, {"wood": "blackiron", "head": "crescent", "gem": "shadow", "orn": "silver"}),
+})

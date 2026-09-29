@@ -472,7 +472,10 @@ func _select_target(delta: float) -> void:
 	# a hero in Stealth (Smoke Veil) is not a candidate at all: the monster loses them until they show again
 	var best: Actor = hero if hero and is_instance_valid(hero) and not _hidden(hero) else null
 	var best_s := _target_score(best) if best else -INF
-	for t in get_tree().get_nodes_in_group(&"tempo") + get_tree().get_nodes_in_group(&"net_ally"):
+	# other players' heroes are targets only where the host resolves their hits (bh-015: in a client's own world they
+	# are visitors the monsters cannot hurt, so they are not chased either)
+	var others: Array = get_tree().get_nodes_in_group(&"net_ally") if not Net.is_client() else []
+	for t in get_tree().get_nodes_in_group(&"tempo") + others:
 		if not t.alive or _hidden(t):
 			continue
 		var sc := _target_score(t)

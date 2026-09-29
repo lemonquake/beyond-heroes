@@ -194,7 +194,9 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 			if t.global_position.distance_to(sp) < 6.0:
 				t.discover()
 	if player is Player:
-		if not Net.is_client():       # a client's monsters are replicas of the host's (bh-008)
+		# a client's monsters are replicas of the host's on the host's map (bh-008); anywhere else a client explores
+		# its own world with its own monsters (bh-015)
+		if not Net.host_on(id):
 			Spawner.populate(map, difficulty)
 		NpcDirectory.populate(map)
 		TempoParty.spawn_for(map, player, hero)
@@ -221,9 +223,6 @@ func place_player(spawn_id: StringName) -> void:
 
 ## Teleporter travel with the loading screen. Same-map travel just relocates the player.
 func travel(id: StringName, spawn_id: StringName) -> void:
-	if not travelling and Net.is_client() and not Net.following:
-		Net.request_travel({"kind": "travel", "map": id, "spawn": spawn_id})     # the host leads the party (bh-011)
-		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -243,9 +242,6 @@ func travel(id: StringName, spawn_id: StringName) -> void:
 
 ## Travel through a Town Portal: loading screen, then the hero stands at `pos` on map `id` (not at a named spawn).
 func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
-	if not travelling and Net.is_client() and not Net.following:
-		Net.request_travel({"kind": "point", "map": id, "pos": pos, "yaw": yaw})
-		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -268,9 +264,6 @@ func travel_to_point(id: StringName, pos: Vector3, yaw := 0.0) -> void:
 
 ## Walk through a door: fade to black, swap maps, fade back in (interiors are small, no loading screen).
 func door_travel(id: StringName, spawn_id: StringName) -> void:
-	if not travelling and Net.is_client() and not Net.following:
-		Net.request_travel({"kind": "door", "map": id, "spawn": spawn_id})
-		return
 	if travelling or not Net.may_travel():
 		return
 	travelling = true
@@ -362,7 +355,8 @@ func respawn_player(at_checkpoint := false) -> void:
 
 # ---- Multiplayer (bh-008) ---------------------------------------------------------------------------------------
 
-## A client follows the host: load the host's map (monsters come from the host) and stand beside the host.
+## A client goes to the host (joining, Regroup, a summons answered Go): load the host's map (its monsters come from
+## the host) and stand beside the host.
 func net_follow(id: StringName, pos: Vector3, yaw: float) -> void:
 	if DB.map_def(id) == null:
 		return

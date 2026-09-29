@@ -93,7 +93,38 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 		var nm := ItemNames.roll(it, rng)
 		it.custom_name = nm[0]
 		it.epithet = nm[1]
+	_forge_weapon_name(it)
 	return it
+
+## bh-015: a Common, Basic or Advanced weapon gets a forged prefix and/or suffix (NameForge) — "Saltworn Shortbow",
+## "Emberkissed Hornbow of the Grey Ferry" — so two drops of one base rarely read the same. Where an enchantment
+## already names a side ("Flaming", "of Precision") it keeps it. Drawn from the item's own seed, so it neither moves
+## the main roll sequence nor changes when the item is loaded.
+static func _forge_weapon_name(it: ItemInstance) -> void:
+	var b := it.base
+	if not b.is_weapon() or it.custom_name != "" or b.unique_name != "" or b.set_id != &"" 			or it.rarity < BH.Rarity.COMMON or it.rarity > BH.Rarity.ADVANCED:
+		return
+	var r := RandomNumberGenerator.new()
+	r.seed = hash("%d/%s/name" % [it.seed_value, b.id])
+	var has_pre := false
+	var has_suf := false
+	for a in it.affixes:
+		var d := DB.affix(StringName(a.id))
+		if d:
+			has_pre = has_pre or d.is_prefix
+			has_suf = has_suf or not d.is_prefix
+	match it.rarity:
+		BH.Rarity.COMMON:
+			# plain steel: one forged word, before or after
+			if r.randf() < 0.65:
+				it.name_prefix = NameForge.weapon_prefix(b.element, r)
+			else:
+				it.name_suffix = NameForge.weapon_suffix(r)
+		_:
+			if not has_pre and r.randf() < 0.85:
+				it.name_prefix = NameForge.weapon_prefix(b.element, r)
+			if not has_suf and r.randf() < 0.75:
+				it.name_suffix = NameForge.weapon_suffix(r)
 
 ## Chance of a relic power by rarity from Licensed up (Licensed, Elite, Master, Mythical, Legendary, Aether).
 const RELIC_CHANCE := [0.15, 0.3, 0.45, 0.6, 0.6, 0.6]

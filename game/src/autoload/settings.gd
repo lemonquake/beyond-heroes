@@ -49,6 +49,7 @@ var camera_zoom := 1.0
 var reduced_motion := false
 var ui_scale := 1.0
 var show_minimap := true
+var minimap_zoom := 1                # bh-015: 0 close, 1 normal, 2 wide (MiniMap.ZOOMS)
 # ---- PLATFORM (bh-008): asked once on the first launch, changeable in Settings > Controls
 var control_mode := ""              # "" not chosen yet, "pc" keyboard + mouse, "mobile" touch controls
 var touch_opacity := 0.85           # on-screen controls
@@ -63,7 +64,7 @@ const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quali
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
 	"auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
-	"control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
+	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
 var fog: bool:
@@ -223,7 +224,7 @@ const GROUPS := {
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "touch_opacity", "touch_size", "touch_auto_aim",
 		"touch_fixed_stick"],
 	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "show_enemy_bars", "loot_labels_always", "camera_zoom",
-		"reduced_motion", "ui_scale", "show_minimap"],
+		"reduced_motion", "ui_scale", "show_minimap", "minimap_zoom"],
 }
 
 # ---- Apply ------------------------------------------------------------------------------------------------------

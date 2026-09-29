@@ -8,11 +8,12 @@ const BINDINGS := {
 	"skill_1": [KEY_1], "skill_2": [KEY_2], "skill_3": [KEY_3], "skill_4": [KEY_4], "skill_5": [KEY_5], "skill_6": [KEY_6],
 	"dodge": [KEY_SPACE], "guard": [KEY_F],
 	"potion_health": [KEY_Q], "potion_mana": [KEY_E],
-	"interact": [KEY_R], "ping": [KEY_G],
+	"interact": [KEY_R], "ping": [KEY_G], "summon_party": [KEY_P],
 	"inventory": [KEY_I, KEY_B], "character": [KEY_C], "skills": [KEY_K], "talents": [KEY_T], "world_map": [KEY_M, KEY_TAB], "tempos": [KEY_O], "guide": [KEY_H], "chat": [KEY_ENTER, KEY_KP_ENTER],
 	"pause": [KEY_ESCAPE],
 	"zoom_in": [MOUSE_BUTTON_WHEEL_UP], "zoom_out": [MOUSE_BUTTON_WHEEL_DOWN],
 	"show_loot": [KEY_ALT],
+	"minimap_zoom_in": [KEY_EQUAL, KEY_KP_ADD], "minimap_zoom_out": [KEY_MINUS, KEY_KP_SUBTRACT],
 	"dev_panel": [KEY_F1], "dev_fps": [KEY_F3],
 }
 

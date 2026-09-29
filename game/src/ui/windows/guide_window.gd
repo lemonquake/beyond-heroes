@@ -66,7 +66,7 @@ func _build() -> void:
 		_page = i
 		refresh())
 	top.add_child(_tabs)
-	var replay := button("Hear Tobren's introduction again", _replay, &"", 360.0)
+	var replay := button("Hear %s's introduction again" % Dialogue.starter_name(Game.hero), _replay, &"", 360.0)
 	top.add_child(replay)
 	_scroll = ScrollContainer.new()
 	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -120,7 +120,7 @@ func _together() -> void:
 	var touch := Settings.touch_mode
 	var menu := "tap Menu at the top" if touch else "press %s" % Settings.binding_text(&"pause")
 	_heading("Two jobs: Host and Friend")
-	_para("One player is the Host. Everyone plays in the Host's world, fights the Host's monsters and follows the Host from map to map. Everyone else is a Friend and brings their own hero, gear and bag. Up to 4 heroes, on PCs and phones together.")
+	_para("One player is the Host. You arrive at the Host's side, then everyone explores on their own: on the Host's map you fight the Host's monsters together, anywhere else the world is yours. Everyone else is a Friend and brings their own hero, gear and bag. Up to 4 heroes, on PCs and phones together.")
 	_heading("Before you start")
 	_para("1.  Everyone has the same version of the game.
 2.  Everyone starts or continues their own hero and walks into the world.
@@ -137,9 +137,10 @@ func _together() -> void:
 	_heading("Far away, in different houses")
 	_para("Ask a grown-up to install the same LAN VPN program on every computer (for example Radmin VPN) and join the same network in it. Then the Host tells everyone the code on the line that starts with \"VPN\". (Or the Host forwards port %d, UDP, on the router.)" % Net.PORT)
 	_heading("Playing together")
-	_para("The party follows the Host through doors and waypoints. Everyone gets experience and their own loot. A Knight's aura also helps friends standing close. Press %s to chat. In the Multiplayer window every player shows a ping: small numbers are good, red means slow." % ("Chat" if touch else Settings.binding_text(&"chat")))
-	_para("A Friend who takes a waypoint or door asks the Host, who answers Go or Stay. Regroup jumps you back beside the Host. A fallen friend: stand beside them and press %s to revive them. %s puts a marker on the ground that everyone sees. Your friends' boxes (health, distance, ping) sit on the left of the screen." % [
-		"Interact" if touch else Settings.binding_text(&"interact"), "The ! button" if touch else Settings.binding_text(&"ping")])
+	_para("Take any door or waypoint you like. Everyone on the same map gets experience and their own loot. A Knight's aura also helps friends standing close. Press %s to chat. In the Multiplayer window every player shows a ping: small numbers are good, red means slow." % ("Chat" if touch else Settings.binding_text(&"chat")))
+	_para("The Host can Summon the Party (%s): everyone away from them is asked Go or Stay. Regroup jumps you beside the Host. The minimap shows your friends as arrows in their colour, on its rim with the distance when they are out of sight; the Map shows where everyone is. A fallen friend: stand beside them and press %s to revive them. %s puts a marker on the ground that everyone sees. Your friends' boxes (health, distance, ping) sit on the left of the screen." % [
+		"the Summon button" if touch else Settings.binding_text(&"summon_party"), "Interact" if touch else Settings.binding_text(&"interact"),
+		"The ! button" if touch else Settings.binding_text(&"ping")])
 	_heading("Stopping")
 	_para("A Friend presses Leave in the Multiplayer window and goes back to their own world. The Host presses Close World and everyone goes home. Each hero is saved on their own game.")
 	var open_mp := button("Open Multiplayer", func() -> void:
@@ -204,7 +205,7 @@ func _controls() -> void:
 func _tempos() -> void:
 	var hero := Game.hero
 	_heading("What a Tempo is")
-	_para("Tempos are the spirits of warriors who died fighting the monsters of Jre. Bound to you, a Tempo fights at your side with a share of your own strength (half, for the plainest spirits), grows as you grow, heals you if it knows a mend, and falls back to tend itself when badly hurt. You can carry two at a time. Your first, Tobren, came through the waypoint with you.")
+	_para("Tempos are the spirits of warriors who died fighting the monsters of Jre. Bound to you, a Tempo fights at your side with a share of your own strength (half, for the plainest spirits), grows as you grow, heals you if it knows a mend, and falls back to tend itself when badly hurt. You can carry two at a time. Your first, %s, came through the waypoint with you." % Dialogue.starter_name(Game.hero))
 	_para("Press %s for the Tempo window: give them gear from your bag (one rarity tier below what you may wear, and only their class's weapons) and look at their skills. If a Tempo falls, its token goes cold in your pack; Veyra Ashgrave can call it back for gold." % Settings.binding_text(&"tempos"))
 	_heading("Binding more: the Shrine of the Fallen")
 	_para("Veyra Ashgrave, the Tempo-Caller, keeps the Shrine of the Fallen east of the terrace stair in Malasugue. A few spirits answer her call at a time, and new ones answer every %d minutes. Binding one costs gold." % roundi(DataTempos.ROSTER_REFRESH / 60.0))

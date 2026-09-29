@@ -1,5 +1,5 @@
 class_name DataGuide
-## The first conversation of a new game: Tobren, the Tempo who came through the waypoint with the hero, introduces
+## The first conversation of a new game: the starter Tempo (its name rolled per hero, {tempo}), the Tempo who came through the waypoint with the hero, introduces
 ## himself, explains what Tempos are and where to bind more (Veyra Ashgrave at the Shrine of the Fallen, grades,
 ## renowned spirits), then walks the hero through the controls and the first places to visit. Not placed in the world:
 ## UIRoot.start_intro() opens it on a new game, the Field Guide window (H) replays it.
@@ -13,7 +13,7 @@ static func intro() -> NpcDef:
 	var portrait := DataTempos.portrait_path(String(st.portrait))
 	if portrait == "":
 		portrait = "res://assets/ui/icons/classes/tempo_swordsman.svg"
-	return NpcDef.make(ID, String(st.name), {"title": "Your Tempo  ·  Swordsman", "portrait": portrait, "map": &"",
+	return NpcDef.make(ID, Dialogue.starter_name(Game.hero), {"title": "Your Tempo  ·  Swordsman", "portrait": portrait, "map": &"",
 		"graph": graph()})
 
 static func graph() -> Dictionary:
@@ -23,7 +23,7 @@ static func graph() -> Dictionary:
 		"nodes": {
 			"wake": {"text": [
 					"Easy. Easy. The waypoint threw you harder than it threw me. Breathe. You are on the **Sanctuary Terrace** in **Malasugue**, and nothing here wants to eat you.",
-					"I am **Tobren**. I stood a guard's watch on this terrace the night the dead came up the road. I held the shrine long enough for the townsfolk to reach the hearth wards. I did not walk away from it.",
+					"I am **{tempo}**. I stood a guard's watch on this terrace the night the dead came up the road. I held the shrine long enough for the townsfolk to reach the hearth wards. I did not walk away from it.",
 					"When the waypoint woke for you, I felt the pull and came through at your side. I am a **Tempo** now, {hero}. Your Tempo, if you will have me."],
 				"choices": [
 					{"text": "Tell me everything. I want to know how this works.", "next": "what"},
@@ -58,7 +58,7 @@ static func graph() -> Dictionary:
 					"Where to begin? **Elder Maelis** by the hearth, just down the terrace. After her, the town: **Tovin** sells provisions, **Brannoc** forges, the **Salted Marlin** has beds, and the two guild halls will register you as a hero.",
 					"Forget any of this and press **{key:guide}**: the **Field Guide** keeps every key and every lesson, and I will say it all again if you ask. Now come on. I have been dead a long time, and I am bored of standing still."],
 				"choices": [
-					{"text": "Lead on, Tobren.", "next": "end", "actions": [done]},
+					{"text": "Lead on, {tempo}.", "next": "end", "actions": [done]},
 				]},
 			"short": {"text": [
 					"Good. Then only this: **{key:primary}** attacks, **{key:dodge}** dodges, **{key:skill_1}** to **{key:skill_6}** are your skills, **{key:potion_health}** and **{key:potion_mana}** your draughts, **{key:interact}** talks and opens doors.",

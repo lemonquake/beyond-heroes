@@ -102,6 +102,9 @@ func warm_up() -> void:
 			n.get_parent().remove_child(n)
 		holder.add_child(n)
 		n.position = Vector3.ZERO
+	# seen by the main camera only: the minimap renders the new map during these frames (bh-015)
+	for v in holder.find_children("*", "VisualInstance3D", true, false):
+		(v as VisualInstance3D).layers = Perf.FX_LAYER
 	for i in WARM_FRAMES:
 		await get_tree().process_frame
 	if is_instance_valid(holder):

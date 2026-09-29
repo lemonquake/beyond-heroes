@@ -10,11 +10,14 @@ var _beam_mat: StandardMaterial3D
 var _ring: MeshInstance3D
 var _ring_mat: StandardMaterial3D
 var _label: Label3D
+var who := ""                       # bh-015: the minimap shows pings too (group "ping")
 
-func setup(who: String, col: Color, life: float) -> void:
+func setup(p_who: String, col: Color, life: float) -> void:
+	who = p_who
 	_col = col
 	_life = life
 	name = "Ping"
+	add_to_group(&"ping")
 	_beam_mat = _unshaded(Color(col, 0.55))
 	var beam := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
@@ -62,6 +65,13 @@ static func _unshaded(c: Color) -> StandardMaterial3D:
 	m.no_depth_test = false
 	m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return m
+
+func color() -> Color:
+	return _col
+
+## 0 when placed, 1 when it has faded (the minimap ripples and fades it the same way).
+func age() -> float:
+	return clampf(_t / maxf(_life, 0.01), 0.0, 1.0)
 
 func _process(delta: float) -> void:
 	_t += delta

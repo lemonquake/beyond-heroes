@@ -9,7 +9,7 @@ func _init() -> void:
 func test_graph_is_consistent() -> void:
 	var def := DataGuide.intro()
 	eq(def.id, DataGuide.ID, "guide id")
-	eq(def.display_name, String(DataTempos.STARTER.name), "spoken by the starter Tempo")
+	eq(def.display_name, Dialogue.starter_name(Game.hero), "spoken by the starter Tempo")
 	ok(ResourceLoader.exists(def.portrait), "portrait exists (%s)" % def.portrait)
 	var nodes: Dictionary = def.graph.nodes
 	for e in def.graph.entries:
@@ -118,7 +118,7 @@ func test_opens_once_per_hero() -> void:
 	Game.open_intro()
 	ok(ui.dialogue.visible, "the guide opens for a new hero")
 	ok(ui.dialogue.session != null and ui.dialogue.session.npc.id == DataGuide.ID, "it is Tobren's introduction")
-	eq(ui.dialogue._name.text, String(DataTempos.STARTER.name), "spoken by Tobren")
+	eq(ui.dialogue._name.text, Dialogue.starter_name(Game.hero), "spoken by the starter Tempo")
 	ui.dialogue.close()
 	ok(not ui.dialogue.visible, "closed")
 	Game.hero.world_flags[DataGuide.DONE_FLAG] = true

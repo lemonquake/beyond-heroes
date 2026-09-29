@@ -312,6 +312,7 @@ func _draw_overlay() -> void:
 	if underground:
 		_draw_underground(c, font, body)
 	if not underground:
+		_draw_party(c)
 		_draw_hero(c, font)
 	_draw_compass_and_scale(c, body)
 
@@ -559,6 +560,53 @@ func _draw_hero(c: Control, font: Font) -> void:
 	var tw := bf.get_string_size("You", HORIZONTAL_ALIGNMENT_LEFT, -1, 21).x
 	c.draw_string_outline(bf, sp + Vector2(-tw * 0.5, -24), "You", HORIZONTAL_ALIGNMENT_LEFT, -1, 21, 6, Color(0, 0, 0, 0.9))
 	c.draw_string(bf, sp + Vector2(-tw * 0.5, -24), "You", HORIZONTAL_ALIGNMENT_LEFT, -1, 21, Color(0.8, 1.0, 1.0))
+
+## bh-015: the other players, wherever they are on the island (Net.status): an arrow in their colour with their name;
+## on a dungeon floor or indoors, at that place's gate. Fallen players show a red cross.
+func _draw_party(c: Control) -> void:
+	if not Net.is_active():
+		return
+	var bf := UITheme.body_bold()
+	for pid in Net.status:
+		if int(pid) == Net.my_id():
+			continue
+		var st: Dictionary = Net.status[pid]
+		var mid := StringName(st.get("map", ""))
+		var ap := Vector2.INF
+		var heading := PI
+		if DataIsland.MAP_ORIGIN.has(mid):
+			var pos: Vector3 = st.get("pos", Vector3.ZERO)
+			ap = DataIsland.to_atlas(mid, Vector2(pos.x, pos.z))
+			heading = float(st.get("yaw", 0.0))
+		else:
+			var here := DataIsland.place(String(mid))
+			if here.is_empty():
+				for pl in DataIsland.PLACES:
+					if StringName(pl.map) == mid:
+						here = pl
+						break
+			if here.is_empty():
+				continue
+			ap = DataIsland.place_atlas(here)
+		var sp := to_screen(ap)
+		var col := Net.player_color(int(pid))
+		var alive := bool(st.get("alive", true))
+		var pulse := 0.5 + 0.5 * sin(_t * 3.0 + float(pid))
+		c.draw_circle(sp, 15.0 + pulse * 4.0, Color(col, 0.16))
+		if alive:
+			var dir := Vector2(sin(heading), cos(heading))
+			var tri := PackedVector2Array([sp + dir * 12.0, sp + dir.rotated(2.45) * 9.0, sp - dir * 3.0, sp + dir.rotated(-2.45) * 9.0])
+			c.draw_colored_polygon(tri, col)
+			c.draw_polyline(tri + PackedVector2Array([tri[0]]), Color(0.05, 0.03, 0.02), 2.0, true)
+		else:
+			c.draw_circle(sp, 9.0, col)
+			c.draw_circle(sp, 7.0, Color(0.08, 0.05, 0.05))
+			c.draw_line(sp + Vector2(-4, -4), sp + Vector2(4, 4), Color(1.0, 0.35, 0.3), 2.2, true)
+			c.draw_line(sp + Vector2(4, -4), sp + Vector2(-4, 4), Color(1.0, 0.35, 0.3), 2.2, true)
+		var nm := String(Net.peers.get(pid, {}).get("name", "Ally")) + ("" if alive else " (fallen)")
+		var tw := bf.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 18).x
+		c.draw_string_outline(bf, sp + Vector2(-tw * 0.5, -18), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, 6, Color(0, 0, 0, 0.9))
+		c.draw_string(bf, sp + Vector2(-tw * 0.5, -18), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, col.lightened(0.3))
 
 func _draw_compass_and_scale(c: Control, font: Font) -> void:
 	var o := Vector2(size.x - 56, 64)

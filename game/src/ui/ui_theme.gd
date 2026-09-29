@@ -286,6 +286,14 @@ static func label(text: String, size := 18, color := TEXT, font: Font = null) ->
 		l.add_theme_font_override("font", font)
 	return l
 
+## A one-line label that never widens its container: text longer than the space it is given ends in "…" (the full
+## text stays in the tooltip).
+static func fit_line(l: Label) -> Label:
+	l.clip_text = true
+	l.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return l
+
 static func title(text: String, size := 30, color := GOLD) -> Label:
 	var l := label(text, size, color, title_font())
 	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))

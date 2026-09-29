@@ -18,7 +18,7 @@ extends RefCounted
 ##   {"service": "respec" | "heal" | "rest" | "mystic_heal" | "promote" | "join_swordfin" | "join_lantern" | "tempo_hire" |
 ##   "tempo_revive"}
 ##   (performed by the NPC service layer after the player confirms the price)
-## Text placeholders filled from the hero: {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
+## Text placeholders filled from the hero: {tempo} (the starter Tempo's name) {hero} {tier} {tier_letter} {guild} {rest_fee} {mystic_fee} {next_tier}
 ##   {promo_fee} {promo_level} {promo_deed} {promo_deed_text} {join_fee} {transfer_fee} {champions} {clears}
 ##   and {key:<input action>} — the key currently bound to that action ("I", "Space", "LMB"), so tutorials never quote
 ##   a stale key after the player rebinds it.
@@ -200,6 +200,7 @@ static func fill(text: String, hero: HeroData) -> String:
 		"promo_fee": str(p.get("fee", 0)), "promo_level": str(p.get("level", 0)), "promo_deed": String(p.get("deed", "")),
 		"promo_deed_text": String(p.get("deed", "")) if String(p.get("deed", "")) != "" else "none required",
 		"join_fee": str(DataGuilds.tier(1).fee), "transfer_fee": str(DataGuilds.TRANSFER_FEE),
+		"tempo": starter_name(hero),
 	}
 	# bh-007: champions (minibosses) and the clear counter behind Olivar's stock
 	if "{champions}" in text:
@@ -208,6 +209,12 @@ static func fill(text: String, hero: HeroData) -> String:
 	for k in vals:
 		text = text.replace("{%s}" % k, vals[k])
 	return text
+
+## The hero's first Tempo, as the guide and the Field Guide name it (bh-015: rolled per hero).
+static func starter_name(hero: HeroData) -> String:
+	if hero != null and hero.starter_name != "":
+		return hero.starter_name
+	return String(DataTempos.STARTER.name)
 
 ## Replace every {key:<action>} with the key bound to that input action (or the action name if it has none).
 static func fill_keys(text: String) -> String:

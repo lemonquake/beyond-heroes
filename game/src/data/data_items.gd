@@ -233,7 +233,7 @@ static func _consumables(out: Array) -> void:
 		b.icon = ICON3D % c[0]
 		out.append(b)
 
-## bh-006 weapon roster: five weapons for each of ten categories, each with its own attack rate and weight.
+## bh-006 weapon roster (+ ROSTER_BH015): five weapons for each of ten categories, each with its own attack rate and weight.
 ## Damage is derived from a DPS budget so a slower weapon hits proportionally harder:
 ##   dps(level) = (9 + 1.9 x level) x category factor;  average hit = dps / attacks per second.
 ## [id, name, type, level, attacks/s, weight, visual tier 1..3, requirements, extra]
@@ -299,11 +299,96 @@ const ROSTER := [
 	[&"siege_greatbow", "Siege Greatbow", &"bow", 23, 0.84, 3.8, 2, {&"dex": 34, &"str": 20}, {"implicit": [["projectile_speed", 1, 0.2]]}],
 	[&"galewing_bow", "Galewing Bow", &"bow", 33, 1.25, 2.2, 3, {&"dex": 44, &"agi": 24}, {"element": Elements.WIND, "element_share": 0.25}],
 ]
+## bh-015: five more weapons for each of the thirteen weapon types (65), levels 4–54 so the late game has steel past
+## level 34 too. Same row format as ROSTER. Staffs and wands deal their element entirely (element_share 1.0) and carry
+## the magic implicit their type always has.
+const ROSTER_BH015 := [
+	# Swords
+	[&"wayfarer_blade", "Wayfarer's Blade", &"sword", 5, 1.52, 3.0, 1, {&"str": 13, &"dex": 8}, {}],
+	[&"saltmarsh_cutlass", "Saltmarsh Cutlass", &"sword", 16, 1.66, 2.9, 2, {&"dex": 22, &"str": 18}, {"implicit": [["crit_chance", 0, 0.02]]}],
+	[&"gravewatch_longsword", "Gravewatch Longsword", &"sword", 28, 1.4, 3.8, 2, {&"str": 38, &"dex": 24}, {"element": Elements.DARK, "element_share": 0.2}],
+	[&"starfall_sabre", "Starfall Sabre", &"sword", 40, 1.62, 3.1, 3, {&"dex": 52, &"str": 36}, {"element": Elements.LIGHT, "element_share": 0.25}],
+	[&"kingsbane", "Kingsbane", &"sword", 52, 1.46, 3.9, 3, {&"str": 64, &"dex": 44}, {"element": Elements.FIRE, "element_share": 0.15, "implicit": [["crit_damage", 0, 0.2]]}],
+	# Greatswords (two-handed)
+	[&"oathkeeper_greatsword", "Oathkeeper Greatsword", &"greatsword", 6, 0.92, 8.2, 1, {&"str": 18}, {}],
+	[&"wavecrest_flamberge", "Wavecrest Flamberge", &"greatsword", 17, 0.88, 8.8, 2, {&"str": 32}, {"implicit": [["crit_chance", 0, 0.02]]}],
+	[&"ironbark_greatblade", "Ironbark Greatblade", &"greatsword", 29, 0.84, 10.1, 2, {&"str": 46}, {"implicit": [["stagger_power", 1, 0.18]]}],
+	[&"dragonspine_greatsword", "Dragonspine Greatsword", &"greatsword", 41, 0.87, 10.6, 3, {&"str": 60}, {"element": Elements.FIRE, "element_share": 0.25}],
+	[&"nightfall_greatsword", "Nightfall Greatsword", &"greatsword", 53, 0.82, 11.2, 3, {&"str": 74}, {"element": Elements.DARK, "element_share": 0.25, "implicit": [["crit_damage", 0, 0.2]]}],
+	# Axes (one-handed)
+	[&"bonecutter", "Bonecutter", &"axe", 5, 1.3, 3.4, 1, {&"str": 13}, {}],
+	[&"skirmisher_axe", "Skirmisher's Axe", &"axe", 17, 1.4, 3.1, 1, {&"str": 22, &"agi": 16}, {}],
+	[&"thunderbeak_axe", "Thunderbeak Axe", &"axe", 29, 1.22, 4.2, 2, {&"str": 40, &"agi": 22}, {"element": Elements.LIGHTNING, "element_share": 0.2}],
+	[&"gravewarden_axe", "Gravewarden's Axe", &"axe", 41, 1.16, 4.7, 3, {&"str": 54, &"agi": 26}, {"element": Elements.DARK, "element_share": 0.2, "implicit": [["impact_strength", 1, 0.1]]}],
+	[&"sunreaver", "Sunreaver", &"axe", 53, 1.21, 4.4, 3, {&"str": 68, &"agi": 34}, {"element": Elements.LIGHT, "element_share": 0.25}],
+	# Great axes (two-handed)
+	[&"stumpsplitter", "Stumpsplitter", &"greataxe", 6, 0.9, 8.4, 1, {&"str": 18}, {}],
+	[&"tuskbreaker", "Tuskbreaker", &"greataxe", 18, 0.82, 9.8, 2, {&"str": 34}, {"implicit": [["stagger_power", 1, 0.15]]}],
+	[&"frostreaver", "Frostreaver", &"greataxe", 30, 0.86, 9.4, 2, {&"str": 46}, {"element": Elements.ICE, "element_share": 0.25}],
+	[&"headsmans_eclipse", "Headsman's Eclipse", &"greataxe", 42, 0.75, 12.0, 3, {&"str": 62}, {"element": Elements.DARK, "element_share": 0.2}],
+	[&"skyrender", "Skyrender", &"greataxe", 54, 0.79, 11.6, 3, {&"str": 76}, {"element": Elements.LIGHTNING, "element_share": 0.25}],
+	# Spears (two-handed)
+	[&"boar_spear", "Boar Spear", &"spear", 5, 1.24, 4.2, 1, {&"str": 12, &"agi": 10}, {}],
+	[&"corsair_harpoon", "Corsair Harpoon", &"spear", 17, 1.12, 4.6, 1, {&"str": 24, &"agi": 20}, {"element": Elements.WATER, "element_share": 0.2}],
+	[&"watchmans_halberd", "Watchman's Halberd", &"spear", 29, 1.02, 6.4, 2, {&"str": 40, &"agi": 24}, {"implicit": [["stagger_power", 1, 0.12]]}],
+	[&"emberfang_pike", "Emberfang Pike", &"spear", 41, 1.1, 5.6, 3, {&"str": 50, &"agi": 40}, {"element": Elements.FIRE, "element_share": 0.25}],
+	[&"dawnspire_lance", "Dawnspire Lance", &"spear", 53, 1.08, 5.8, 3, {&"str": 62, &"agi": 50}, {"element": Elements.LIGHT, "element_share": 0.25, "implicit": [["crit_damage", 0, 0.15]]}],
+	# Javelins
+	[&"fowlers_dart", "Fowler's Dart", &"javelin", 4, 1.3, 1.4, 1, {&"str": 8, &"dex": 10}, {}],
+	[&"flint_javelin", "Flint Javelin", &"javelin", 16, 1.18, 2.2, 1, {&"str": 18, &"dex": 20}, {"element": Elements.EARTH, "element_share": 0.2}],
+	[&"windrunner_javelin", "Windrunner Javelin", &"javelin", 28, 1.22, 2.1, 2, {&"str": 26, &"dex": 38}, {"element": Elements.WIND, "element_share": 0.25}],
+	[&"frostspike", "Frostspike", &"javelin", 40, 1.12, 2.6, 2, {&"str": 36, &"dex": 50}, {"element": Elements.ICE, "element_share": 0.25}],
+	[&"heavenfall_pilum", "Heavenfall Pilum", &"javelin", 52, 1.08, 2.9, 3, {&"str": 46, &"dex": 62}, {"element": Elements.LIGHT, "element_share": 0.2, "implicit": [["projectile_damage", 1, 0.15]]}],
+	# Clubs
+	[&"knotwood_club", "Knotwood Club", &"club", 4, 1.28, 3.4, 1, {&"str": 12}, {}],
+	[&"smiths_warhammer", "Smith's Warhammer", &"club", 16, 1.12, 4.8, 1, {&"str": 24}, {"implicit": [["stagger_power", 1, 0.12]]}],
+	[&"ironbound_mace", "Ironbound Mace", &"club", 27, 1.08, 5.2, 2, {&"str": 38}, {}],
+	[&"tidecrusher", "Tidecrusher", &"club", 39, 1.1, 5.1, 2, {&"str": 50}, {"element": Elements.WATER, "element_share": 0.25}],
+	[&"starhammer", "Starhammer", &"club", 51, 1.04, 5.7, 3, {&"str": 64}, {"element": Elements.LIGHT, "element_share": 0.25, "implicit": [["stagger_power", 1, 0.15]]}],
+	# Daggers
+	[&"cutpurse_knife", "Cutpurse Knife", &"dagger", 5, 2.2, 0.8, 1, {&"dex": 12}, {}],
+	[&"bonebite", "Bonebite", &"dagger", 17, 2.0, 1.15, 1, {&"dex": 24, &"agi": 16}, {"implicit": [["crit_chance", 0, 0.02]]}],
+	[&"emberfang_dirk", "Emberfang Dirk", &"dagger", 29, 2.02, 1.25, 2, {&"dex": 36, &"agi": 28}, {"element": Elements.FIRE, "element_share": 0.2}],
+	[&"stormneedle", "Stormneedle", &"dagger", 41, 2.14, 0.95, 3, {&"dex": 50, &"agi": 38}, {"element": Elements.LIGHTNING, "element_share": 0.25}],
+	[&"nightwhisper", "Nightwhisper", &"dagger", 53, 2.08, 1.05, 3, {&"dex": 64, &"agi": 48}, {"element": Elements.DARK, "element_share": 0.25, "implicit": [["crit_damage", 0, 0.2]]}],
+	# Claws
+	[&"scrappers_hooks", "Scrapper's Hooks", &"claw", 5, 1.92, 1.7, 1, {&"agi": 12, &"dex": 10}, {}],
+	[&"raptor_talons", "Raptor Talons", &"claw", 17, 1.88, 1.95, 1, {&"agi": 22, &"dex": 18}, {}],
+	[&"frostbite_claws", "Frostbite Claws", &"claw", 29, 1.85, 2.1, 2, {&"agi": 36, &"dex": 26}, {"element": Elements.ICE, "element_share": 0.2}],
+	[&"tempest_rakes", "Tempest Rakes", &"claw", 41, 1.98, 1.85, 3, {&"agi": 50, &"dex": 36}, {"element": Elements.WIND, "element_share": 0.25}],
+	[&"wyrmqueen_talons", "Wyrmqueen's Talons", &"claw", 53, 1.87, 2.2, 3, {&"agi": 64, &"dex": 46}, {"element": Elements.FIRE, "element_share": 0.25, "implicit": [["crit_chance", 0, 0.03]]}],
+	# Knuckles
+	[&"pit_fighter_wraps", "Pit Fighter's Wraps", &"knuckles", 4, 2.3, 0.8, 1, {&"str": 8, &"agi": 10}, {}],
+	[&"iron_fistguards", "Iron Fistguards", &"knuckles", 16, 2.12, 1.55, 1, {&"str": 18, &"agi": 18}, {}],
+	[&"stonefist", "Stonefist", &"knuckles", 28, 2.0, 1.9, 2, {&"str": 30, &"agi": 26}, {"element": Elements.EARTH, "element_share": 0.25}],
+	[&"emberknuckles", "Emberknuckles", &"knuckles", 40, 2.14, 1.65, 2, {&"str": 38, &"agi": 40}, {"element": Elements.FIRE, "element_share": 0.25}],
+	[&"dawnfist_gauntlets", "Dawnfist Gauntlets", &"knuckles", 52, 2.06, 1.8, 3, {&"str": 50, &"agi": 52}, {"element": Elements.LIGHT, "element_share": 0.25, "implicit": [["impact_strength", 1, 0.15]]}],
+	# Bows
+	[&"fowling_bow", "Fowling Bow", &"bow", 5, 1.34, 1.5, 1, {&"dex": 12}, {}],
+	[&"yew_longbow", "Yew Longbow", &"bow", 17, 1.1, 2.6, 1, {&"dex": 26, &"agi": 10}, {}],
+	[&"thornback_bow", "Thornback Bow", &"bow", 29, 1.2, 2.3, 2, {&"dex": 38, &"agi": 18}, {"element": Elements.EARTH, "element_share": 0.2}],
+	[&"frostwing_bow", "Frostwing Bow", &"bow", 41, 1.22, 2.4, 3, {&"dex": 52, &"agi": 24}, {"element": Elements.ICE, "element_share": 0.25}],
+	[&"stormstring_greatbow", "Stormstring Greatbow", &"bow", 53, 0.9, 3.6, 3, {&"dex": 64, &"str": 30}, {"element": Elements.LIGHTNING, "element_share": 0.25, "implicit": [["projectile_speed", 1, 0.2]]}],
+	# Staffs (the element is the whole blow)
+	[&"pilgrims_staff", "Pilgrim's Staff", &"staff", 5, 1.0, 3.2, 1, {&"int": 14}, {"element": Elements.WIND, "element_share": 1.0, "implicit": [["magic_damage", 1, 0.12]]}],
+	[&"cinderheart_staff", "Cinderheart Staff", &"staff", 16, 0.98, 3.6, 2, {&"int": 28}, {"element": Elements.FIRE, "element_share": 1.0, "implicit": [["magic_damage", 1, 0.18]]}],
+	[&"deepwater_staff", "Deepwater Staff", &"staff", 28, 1.01, 3.5, 2, {&"int": 40, &"wis": 20}, {"element": Elements.WATER, "element_share": 1.0, "implicit": [["magic_damage", 1, 0.22]]}],
+	[&"gloamspire_staff", "Gloamspire Staff", &"staff", 40, 0.95, 3.9, 3, {&"int": 54, &"wis": 26}, {"element": Elements.DARK, "element_share": 1.0, "implicit": [["magic_damage", 1, 0.28]]}],
+	[&"sunspire_staff", "Sunspire Staff", &"staff", 52, 1.03, 3.7, 3, {&"int": 68, &"wis": 34}, {"element": Elements.LIGHT, "element_share": 1.0, "implicit": [["magic_damage", 1, 0.34]]}],
+	# Wands
+	[&"willow_wand", "Willow Wand", &"wand", 4, 1.62, 0.8, 1, {&"int": 12}, {"element": Elements.EARTH, "element_share": 1.0, "implicit": [["crit_chance", 0, 0.02]]}],
+	[&"emberbrand_wand", "Emberbrand Wand", &"wand", 15, 1.66, 0.9, 2, {&"int": 24}, {"element": Elements.FIRE, "element_share": 1.0, "implicit": [["crit_chance", 0, 0.03]]}],
+	[&"hoarfrost_wand", "Hoarfrost Wand", &"wand", 27, 1.6, 1.05, 2, {&"int": 36}, {"element": Elements.ICE, "element_share": 1.0, "implicit": [["crit_chance", 0, 0.035]]}],
+	[&"stormglass_wand", "Stormglass Wand", &"wand", 39, 1.7, 0.95, 3, {&"int": 50}, {"element": Elements.LIGHTNING, "element_share": 1.0, "implicit": [["crit_chance", 0, 0.04]]}],
+	[&"nightbloom_wand", "Nightbloom Wand", &"wand", 51, 1.64, 1.1, 3, {&"int": 64}, {"element": Elements.DARK, "element_share": 1.0, "implicit": [["crit_chance", 0, 0.05]]}],
+]
 ## Damage budget factor and hit spread (min, max as fractions of the average hit) per category.
 const ROSTER_FACTOR := {
 	&"sword": [1.0, 0.7, 1.3], &"axe": [1.0, 0.6, 1.4], &"greataxe": [1.28, 0.6, 1.4], &"spear": [1.2, 0.7, 1.3],
 	&"javelin": [0.95, 0.75, 1.25], &"club": [1.0, 0.6, 1.4], &"dagger": [0.93, 0.75, 1.25], &"claw": [0.93, 0.7, 1.3],
 	&"knuckles": [0.9, 0.75, 1.25], &"bow": [1.0, 0.65, 1.35],
+	# bh-015 (matched to the original three of each: casters' staves and wands hit softer, their spells carry them)
+	&"greatsword": [1.22, 0.65, 1.35], &"staff": [0.72, 0.7, 1.3], &"wand": [0.7, 0.75, 1.25],
 }
 
 static func roster_damage(wtype: StringName, level: int, aps: float) -> Vector2:
@@ -312,10 +397,10 @@ static func roster_damage(wtype: StringName, level: int, aps: float) -> Vector2:
 	return Vector2(maxf(1.0, roundf(avg * float(f[1]))), maxf(2.0, roundf(avg * float(f[2]))))
 
 static func _weapon_roster(out: Array) -> void:
-	for r in ROSTER:
+	for r in ROSTER + ROSTER_BH015:
 		var dmg := roster_damage(r[2], r[3], r[4])
 		var d := {"weapon_type": r[2], "level_req": r[3], "damage_min": dmg.x, "damage_max": dmg.y, "requirements": r[7],
-			"value": 14 + r[3] * 4, "tier": r[6], "attacks_per_second": r[4], "weight": r[5], "class_hint": &"knight"}
+			"value": 14 + r[3] * 4, "tier": r[6], "attacks_per_second": r[4], "weight": r[5], "class_hint": _weapon_class(r[2])}
 		var extra: Dictionary = r[8]
 		for k in extra:
 			if k == "implicit":

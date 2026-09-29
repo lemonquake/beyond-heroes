@@ -115,6 +115,9 @@ func _ready() -> void:
 		bind(Game.player)
 	Settings.changed.connect(_apply_mode)
 	_apply_mode()
+	# bh-015: a resize, a minimise / restore or a map load lays the HUD out again from its anchors
+	get_viewport().size_changed.connect(_relayout)
+	Events.map_loaded.connect(func(_m: StringName) -> void: _relayout.call_deferred())
 
 func bind(p: Node) -> void:
 	player = p as Player
@@ -258,9 +261,12 @@ func _build_top_right() -> void:
 	col.alignment = BoxContainer.ALIGNMENT_BEGIN
 	col.add_theme_constant_override("separation", 8)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# bh-015: anything wider than the column grows it toward the screen, never past the right edge (a long dungeon
+	# name used to push the whole column, minimap first, off the screen)
+	col.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	add_child(col)
 	_top_right = col
-	_minimap = MiniMap.new(210.0)
+	_minimap = MiniMap.new(236.0)
 	_minimap.size_flags_horizontal = Control.SIZE_SHRINK_END
 	col.add_child(_minimap)
 	_quest_panels.append(DirectionsPanel.new())
@@ -285,6 +291,7 @@ func _build_top_right() -> void:
 	qi.modulate = UITheme.GOLD
 	oh.add_child(qi)
 	_objective_title = UITheme.label("", 17, UITheme.GOLD, UITheme.title_font())
+	UITheme.fit_line(_objective_title)
 	oh.add_child(_objective_title)
 	_objective_text = UITheme.label("", 15, UITheme.TEXT, UITheme.body_font())
 	_objective_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -501,6 +508,22 @@ func _apply_mode() -> void:
 		_top_center.offset_right = 430
 		_top_right.offset_left = -330
 	_place_quest_panels(m)
+
+## Re-seat the anchored regions after the window changed size (or came back from minimised) and shrink containers
+## back to their content: a container only ever grows by itself.
+func _relayout() -> void:
+	if _cluster == null or not is_inside_tree():
+		return
+	_apply_mode()
+	_top_right.offset_right = -24
+	_top_right.queue_sort()
+	_top_center.queue_sort()
+	if _left_col and is_instance_valid(_left_col):
+		_left_col.reset_size()      # placed by position, not anchors: shrink it back to its content
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+		_relayout.call_deferred()
 
 func _process_cluster_pivot() -> void:
 	if _cluster and _cluster.size.x > 0.0:

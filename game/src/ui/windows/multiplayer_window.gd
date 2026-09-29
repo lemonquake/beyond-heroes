@@ -17,6 +17,7 @@ var _join_box: Control
 var _code: Label
 var _rejoin: Button
 var _regroup: Button
+var _summon: Button
 var _tips: Label
 
 func _init() -> void:
@@ -59,6 +60,12 @@ func _build() -> void:
 	_regroup.custom_minimum_size.y = 60 if touch else 48
 	TooltipLayer.attach(_regroup, func() -> Control: return Tips.text("Jump back to the host's side (after respawning at the entrance, or when you wandered off)."))
 	lrow.add_child(_regroup)
+	_summon = button("Summon Party", func() -> void:
+		if Net.summon_party() > 0:
+			close_window(), &"PrimaryButton", 240.0)
+	_summon.custom_minimum_size.y = 60 if touch else 48
+	TooltipLayer.attach(_summon, func() -> Control: return Tips.text("Ask everyone who is away to come to your side. Each of them chooses Go or Stay (%s)." % Settings.binding_text(&"summon_party")))
+	lrow.add_child(_summon)
 	_leave_btn = button("Leave", _on_leave, &"", 220.0)
 	_leave_btn.custom_minimum_size.y = 60 if touch else 48
 	lrow.add_child(_leave_btn)
@@ -132,11 +139,13 @@ func refresh() -> void:
 	_leave_btn.visible = Net.is_active()
 	_leave_btn.text = "Close World" if Net.is_host() else "Leave"
 	_regroup.visible = Net.is_client() and not Net.connecting
+	_summon.visible = Net.is_host()
+	_summon.disabled = Net.player_count() < 2
 	_rejoin.visible = Net.last_room != "" and not Net.is_active()
 	_rejoin.text = "Rejoin %s" % Net.last_room
 	_tips.visible = Net.is_active()
-	var lead := "You lead: everyone follows you through waypoints and doors. When a friend takes one, you are asked Go / Stay." \
-		if Net.is_host() else "The host leads. Take a waypoint or door to ask them to go there. Regroup jumps back to their side."
+	var lead := "Everyone explores on their own. Summon Party asks everyone who is away to come to your side; each chooses Go or Stay." \
+		if Net.is_host() else "Explore on your own: on the host's map you share their monsters, elsewhere the world is yours. Regroup jumps to their side; the host can summon you."
 	var interact := "Interact" if Settings.touch_mode else Settings.binding_text(&"interact")
 	var ping := "The Ping button" if Settings.touch_mode else Settings.binding_text(&"ping")
 	_tips.text = "Playing together:\n• %s\n• A fallen friend: stand beside them and press %s to revive them.\n• %s marks a spot for everyone. Each hero keeps their own loot and gets the experience." % [lead, interact, ping]

@@ -77,6 +77,7 @@ var dungeon_raids := {}
 var summon := {}
 ## Spirits called at the shrine but not bound: they wait in the Spirit Hall (TempoData), swapped in for free.
 var spirit_hall: Array = []
+var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
 
@@ -390,7 +391,7 @@ func to_dict() -> Dictionary:
 		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
 		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true),
-		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()),
+		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()), "starter_name": starter_name,
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -525,6 +526,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 	var sm = d.get("summon", {})
 	if sm is Dictionary:
 		h.summon = sm.duplicate(true)
+	# heroes from before bh-015 met Tobren
+	h.starter_name = String(d.get("starter_name", DataTempos.STARTER.name))
 	for td in d.get("spirit_hall", []):
 		if td is Dictionary:
 			var st := TempoData.from_dict(td)

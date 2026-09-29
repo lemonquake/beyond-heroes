@@ -23,6 +23,7 @@ func _ready() -> void:
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(v)
 	_title = UITheme.label("", 18, UITheme.GOLD, UITheme.title_font())
+	UITheme.fit_line(_title)
 	v.add_child(_title)
 	_bar = ProgressBar.new()
 	_bar.custom_minimum_size = Vector2(0, 10)

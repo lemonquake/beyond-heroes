@@ -355,10 +355,7 @@ static func generate(seed_value: int, level: int, class_id: StringName = &"", ta
 	t.grade = clampi(grade, 1, DataTempos.max_grade())
 	var classes := DataTempos.classes_for_grade(t.grade)
 	t.class_id = class_id if DataTempos.CLASSES.has(class_id) else classes[rng.randi_range(0, classes.size() - 1)]
-	var names: Array = DataTempos.NAMES.filter(func(n): return not taken.has(n))
-	if names.is_empty():
-		names = DataTempos.NAMES
-	t.tempo_name = names[rng.randi_range(0, names.size() - 1)]
+	t.tempo_name = NameForge.person(rng, taken)   # bh-015: prefix + middle + suffix, never a fixed list
 	var traits := DataTempos.TRAITS.keys()
 	traits.sort()
 	t.trait_id = traits[rng.randi_range(0, traits.size() - 1)]
@@ -485,13 +482,21 @@ static func hire_legend(hero: HeroData, id: StringName) -> TempoData:
 	Events.tempo_changed.emit(t.uid)
 	return t
 
-## Every new hero starts with Tobren (DataTempos.STARTER), bound for free. Does nothing if the hero has any Tempo.
-static func grant_starter(hero: HeroData) -> TempoData:
+## Every new hero starts with a starter Tempo (DataTempos.STARTER: a grade-1 Swordsman), bound for free. Its name is
+## rolled for this hero (NameForge; bh-015 — it used to be Tobren for everyone). `seed_value` 0 = a fresh random seed.
+## Does nothing if the hero has any Tempo.
+static func grant_starter(hero: HeroData, seed_value := 0) -> TempoData:
 	if hero == null or not hero.tempos.is_empty():
 		return null
 	var st := DataTempos.STARTER
 	var t := TempoData.new()
-	t.tempo_name = String(st.name)
+	var rng := RandomNumberGenerator.new()
+	if seed_value != 0:
+		rng.seed = seed_value
+	else:
+		rng.randomize()
+	t.tempo_name = NameForge.person(rng, [hero.hero_name])
+	hero.starter_name = t.tempo_name
 	t.class_id = st["class"]
 	t.trait_id = st.trait
 	t.skills = (st.skills as Array).duplicate()

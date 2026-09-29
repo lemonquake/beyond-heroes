@@ -75,9 +75,15 @@ When you are not on the same Wi-Fi, the game cannot find your friend by itself. 
 
 ## While you play together
 
-- **Who goes where:** the party follows the Host. When the Host takes a door or a waypoint, everyone moves with them.
-- **Want to go somewhere?** A Friend can step on a waypoint or walk into a door too. The Host then sees
-  **"Mira wants the party to go to Olivar"** with two buttons: **Go** (everyone travels) or **Stay**.
+- **Who goes where:** when you join you arrive next to the Host. After that **everyone explores on their own**: take
+  any door, waypoint or scroll you like. On the Host's map you all fight the same monsters; anywhere else the world is
+  yours alone, with your own monsters.
+- **Summon Party:** the Host presses **P** (or **Summon Party** under the party boxes, in the Multiplayer window, or the
+  waypoint-swirl button on a phone). Every friend who is away sees **"Taicho summons the party to Westreach"** with
+  **Go** (you land next to the Host) or **Stay**. No answer in 30 seconds counts as Stay.
+- **Where is everyone?** On the minimap your friends are arrows in their colour with their name. When they are out of
+  sight they sit on the edge of the minimap with how many metres away they are. The Map (**M**) shows every friend,
+  on any map. Their party box says which map they are on.
 - **Lost the group?** Press **Regroup** (in the Multiplayer window, or the waypoint-swirl button on a phone), or click
   the Host's box on the left of the screen. You jump right next to the Host.
 - **Party boxes:** on the left of the screen, under your Tempos, every friend has a box with their picture, their

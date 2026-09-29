@@ -272,6 +272,9 @@ static func _type_line(it: ItemInstance) -> String:
 		kind = {&"shield": "Shield", &"helm": "Helm", &"armor": "Armor", &"inner_garment": "Inner Garment", &"gloves": "Gloves",
 			&"boots": "Boots", &"accessory": "Accessory", &"consumable": "Consumable", &"material": "Material", &"quest": "Quest Item"}.get(it.base.category, "Item")
 	if it.is_equipment():
+		# a proper name hides the base: say what it is underneath (bh-015)
+		if it.custom_name != "" and it.base.unique_name == "":
+			return "%s %s · %s" % [it.rarity_name(), kind, it.base.display_name]
 		return "%s %s" % [it.rarity_name(), kind]
 	return kind
 

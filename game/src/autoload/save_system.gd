@@ -24,29 +24,55 @@ func serialize(hero: HeroData) -> Dictionary:
 	return {"version": CURRENT_VERSION, "saved_at": int(Time.get_unix_time_from_system()), "hero": hero.to_dict(),
 		"settings": Settings.to_dict()}
 
+## Write the slot without ever leaving it unreadable (bh-015): the new file is written beside the old one and read
+## back; only a file that parses to this hero replaces the save, and the previous save is kept as slot_<n>.json.bak.
+## A crash at any point leaves either the old save, the backup, or the checked new file.
 func save_hero(hero: HeroData, slot: int) -> bool:
+	if hero == null or hero.cls == null:
+		return false
 	var data := serialize(hero)
-	var tmp := slot_path(slot) + ".tmp"
+	var path := slot_path(slot)
+	var tmp := path + ".tmp"
 	var f := FileAccess.open(tmp, FileAccess.WRITE)
 	if f == null:
 		push_error("Cannot write save: %s" % FileAccess.get_open_error())
 		return false
-	f.store_string(JSON.stringify(data, "  "))
+	var text := JSON.stringify(data, "  ")
+	f.store_string(text)
 	f.close()
-	# Atomic-ish replace so a crash mid-write never corrupts the previous save.
-	if FileAccess.file_exists(slot_path(slot)):
-		DirAccess.remove_absolute(slot_path(slot))
-	DirAccess.rename_absolute(tmp, slot_path(slot))
+	var back = JSON.parse_string(FileAccess.get_file_as_string(tmp))
+	if not _valid(back) or String(back.hero.get("name", "")) != hero.hero_name:
+		push_error("Save check failed for slot %d: the previous save is kept" % slot)
+		DirAccess.remove_absolute(tmp)
+		return false
+	if FileAccess.file_exists(path):
+		if FileAccess.file_exists(path + ".bak"):
+			DirAccess.remove_absolute(path + ".bak")
+		DirAccess.rename_absolute(path, path + ".bak")
+	if DirAccess.rename_absolute(tmp, path) != OK:
+		push_error("Cannot replace save in slot %d: the previous save is kept as a backup" % slot)
+		if not FileAccess.file_exists(path) and FileAccess.file_exists(path + ".bak"):
+			DirAccess.copy_absolute(path + ".bak", path)
+		return false
 	return true
 
+static func _valid(d) -> bool:
+	return d is Dictionary and d.get("hero") is Dictionary and String(d.hero.get("class", "")) != "" and d.hero.has("progress")
+
+## The slot's data, from the save itself or — when it is missing or unreadable — from its backup, or from a checked
+## new file a crash left behind.
 func read_slot(slot: int) -> Dictionary:
-	if not FileAccess.file_exists(slot_path(slot)):
-		return {}
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(slot_path(slot)))
-	if not parsed is Dictionary:
-		push_warning("Corrupt save in slot %d" % slot)
-		return {}
-	return migrate(parsed)
+	for path in [slot_path(slot), slot_path(slot) + ".bak", slot_path(slot) + ".tmp"]:
+		if not FileAccess.file_exists(path):
+			continue
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if not _valid(parsed):
+			push_warning("Corrupt save file %s" % path)
+			continue
+		if path != slot_path(slot):
+			push_warning("Slot %d restored from %s" % [slot, path.get_file()])
+		return migrate(parsed)
+	return {}
 
 func migrate(data: Dictionary) -> Dictionary:
 	var v := int(data.get("version", 1))
@@ -76,8 +102,9 @@ func slot_summary(slot: int) -> Dictionary:
 		"map": h.get("map", "sanctuary"), "saved_at": data.get("saved_at", 0), "play_time": h.get("play_time", 0.0)}
 
 func delete_slot(slot: int) -> void:
-	if FileAccess.file_exists(slot_path(slot)):
-		DirAccess.remove_absolute(slot_path(slot))
+	for path in [slot_path(slot), slot_path(slot) + ".bak", slot_path(slot) + ".tmp"]:
+		if FileAccess.file_exists(path):
+			DirAccess.remove_absolute(path)
 
 # v1 stored the skill bar under "hotbar" and had no potion belt / play_time.
 func _migrate_1_to_2(d: Dictionary) -> Dictionary:

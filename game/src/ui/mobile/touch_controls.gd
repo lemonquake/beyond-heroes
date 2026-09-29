@@ -234,7 +234,7 @@ func _sync_active(active: bool) -> void:
 		b.visible = active
 	# party-only buttons
 	button(&"ping").visible = active and Net.is_active()
-	button(&"regroup").visible = active and Net.is_client()
+	button(&"regroup").visible = active and (Net.is_client() or Net.is_host() and Net.player_count() > 1)   # the host: Summon
 
 func _refresh() -> void:
 	var p := player
@@ -442,7 +442,10 @@ func _release(b: TouchButton, idx: int, pos: Vector2) -> void:
 			if player:
 				player.ping_here()
 		&"regroup":
-			Net.regroup()
+			if Net.is_host():
+				Net.summon_party()
+			else:
+				Net.regroup()
 		_:
 			if String(b.id).begins_with("skill_") and idx == _aim_touch:
 				_aim_touch = -99

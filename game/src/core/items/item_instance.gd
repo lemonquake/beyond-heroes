@@ -17,6 +17,10 @@ var license: StringName = &""              # Licensed tier: faction license id
 var count := 1
 var custom_name := ""
 var epithet := ""                          # bh-012: the second half of a gacha name ("Oath of the Last Flame")
+# bh-015: forged name parts of a Common..Advanced weapon (NameForge), used where no enchantment names that side:
+# "Saltworn Shortbow", "Flaming Recurve Bow of the Grey Ferry"
+var name_prefix := ""
+var name_suffix := ""
 var seed_value := 0
 # Player-controlled flags (persisted).
 var locked := false                        # cannot be sold, dropped or destroyed
@@ -35,8 +39,8 @@ func display_name() -> String:
 		return custom_name
 	if base.unique_name != "":
 		return base.unique_name
-	if rarity >= BH.Rarity.BASIC and rarity <= BH.Rarity.LICENSED and not affixes.is_empty():
-		# "Flaming Sword of Precision": first prefix + base + first suffix.
+	if rarity >= BH.Rarity.BASIC and rarity <= BH.Rarity.LICENSED and not affixes.is_empty() or name_prefix != "" or name_suffix != "":
+		# "Flaming Sword of Precision": first prefix + base + first suffix; a weapon's forged parts fill an empty side.
 		var pre := ""
 		var suf := ""
 		for a in affixes:
@@ -47,6 +51,10 @@ func display_name() -> String:
 				pre = def.label + " "
 			elif not def.is_prefix and suf == "":
 				suf = " " + def.label
+		if pre == "" and name_prefix != "":
+			pre = name_prefix + " "
+		if suf == "" and name_suffix != "":
+			suf = " " + name_suffix
 		return pre + base.display_name + suf
 	return base.display_name
 
@@ -186,6 +194,10 @@ func to_dict() -> Dictionary:
 		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value}
 	if epithet != "":
 		d["epithet"] = epithet
+	if name_prefix != "":
+		d["np"] = name_prefix
+	if name_suffix != "":
+		d["ns"] = name_suffix
 	if license != &"":
 		d["license"] = String(license)
 	if locked:
@@ -221,6 +233,8 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	it.count = maxi(1, int(d.get("count", 1)))
 	it.custom_name = String(d.get("name", ""))
 	it.epithet = String(d.get("epithet", ""))
+	it.name_prefix = String(d.get("np", ""))
+	it.name_suffix = String(d.get("ns", ""))
 	it.seed_value = int(d.get("seed", 0))
 	it.locked = bool(d.get("locked", false))
 	it.favorite = bool(d.get("favorite", false))

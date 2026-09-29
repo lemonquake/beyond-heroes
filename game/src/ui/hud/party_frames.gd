@@ -8,6 +8,7 @@ const W := 300.0
 
 var _rows := {}        # peer id -> {root, name, sub, hp, por}
 var _t := 0.0
+var _summon_btn: Button
 
 func _init() -> void:
 	add_theme_constant_override("separation", 6)
@@ -30,6 +31,7 @@ func _rebuild() -> void:
 	for c in get_children():
 		c.queue_free()
 	_rows.clear()
+	_summon_btn = null
 	if not Net.is_active():
 		visible = false
 		return
@@ -46,6 +48,18 @@ func _rebuild() -> void:
 		return
 	for id in ids:
 		add_child(_row(id))
+	_summon_btn = null
+	if Net.is_host():
+		# bh-015: the host calls everyone who is away to their side; each player chooses Go or Stay
+		_summon_btn = Button.new()
+		_summon_btn.text = "Summon Party  (%s)" % Settings.binding_text(&"summon_party")
+		_summon_btn.theme_type_variation = &"PrimaryButton"
+		_summon_btn.custom_minimum_size = Vector2(W, 36)
+		_summon_btn.focus_mode = Control.FOCUS_NONE
+		_summon_btn.add_theme_font_size_override("font_size", 16)
+		_summon_btn.pressed.connect(func() -> void: Net.summon_party())
+		TooltipLayer.attach(_summon_btn, func() -> Control: return Tips.text("Ask everyone who is away to come to your side. Each of them chooses Go or Stay."))
+		add_child(_summon_btn)
 
 func _row(id: int) -> Control:
 	var info: Dictionary = Net.peers.get(id, {})
@@ -98,6 +112,9 @@ func _tip(id: int) -> Control:
 	var info: Dictionary = Net.peers.get(id, {})
 	var cls := DB.class_def(StringName(info.get("cls", "knight")))
 	var lines := ["Level %d %s · playing on %s" % [int(info.get("level", 1)), cls.display_name if cls else "Hero", info.get("device", "PC")]]
+	var st: Dictionary = Net.status.get(id, {})
+	if not st.is_empty():
+		lines.append("In %s" % Net.place_name(StringName(st.map)))
 	var av := Net.avatar(id)
 	if av and not av.alive:
 		lines.append("Fallen. Stand beside them and press %s to revive them." % Settings.binding_text(&"interact"))
@@ -110,7 +127,7 @@ func _process(delta: float) -> void:
 	if _t > 0.0 or not visible:
 		return
 	_t = 0.12
-	if _others().size() != _rows.size():
+	if _others().size() != _rows.size() or not _rows.is_empty() and (_summon_btn == null) == Net.is_host():
 		_rebuild()
 		return
 	var here := String(Game.current_map_id)
@@ -140,9 +157,23 @@ func _process(delta: float) -> void:
 				sub.add_theme_color_override("font_color", UITheme.BAD)
 				root.modulate = Color(1.0, 0.8, 0.8)
 		else:
-			bar.set_ratio(0.0)
-			bar.text = ""
-			var m := String(info.get("map", ""))
-			sub.text = "Travelling…" if m == "" or m == here else "In %s" % Net.place_name(StringName(m))
+			# elsewhere on the island (bh-015): their last snapshot still carries HP and level
+			var st: Dictionary = Net.status.get(id, {})
+			var m := String(st.get("map", info.get("map", "")))
+			if not st.is_empty():
+				var f2 := clampf(float(st.hp) / maxf(1.0, float(st.mhp)), 0.0, 1.0)
+				bar.set_ratio(f2 if st.alive else 0.0)
+				bar.text = "%d / %d" % [ceili(float(st.hp)), roundi(float(st.mhp))] if st.alive else ""
+				bar.fill_color = Color(0.92, 0.32, 0.25) if f2 < 0.3 else Color(0.3, 0.88, 0.4)
+			else:
+				bar.set_ratio(0.0)
+				bar.text = ""
+			var lv := int(st.get("lvl", info.get("level", 1)))
+			if m == "" or m == here:
+				sub.text = "Level %d %s · travelling…" % [lv, cls.display_name if cls else ""]
+			else:
+				sub.text = "Level %d · in %s%s" % [lv, Net.place_name(StringName(m)), "" if st.get("alive", true) else " · fallen"]
 			sub.add_theme_color_override("font_color", UITheme.TEXT_DIM)
-			root.modulate = Color(0.75, 0.75, 0.8)
+			root.modulate = Color(0.85, 0.85, 0.92)
+	if _summon_btn:
+		_summon_btn.visible = Net.is_host() and not _rows.is_empty()

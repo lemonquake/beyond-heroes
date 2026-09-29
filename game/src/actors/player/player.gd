@@ -533,6 +533,8 @@ func _read_input(delta: float) -> void:
 		interact()
 	if Input.is_action_just_pressed(&"ping"):
 		ping_here()
+	if Input.is_action_just_pressed(&"summon_party") and Net.is_host():
+		Net.summon_party()
 	if Input.is_action_just_pressed(&"zoom_in"):
 		camera.zoom(-1)
 	elif Input.is_action_just_pressed(&"zoom_out"):
@@ -1262,7 +1264,7 @@ func consume_item(item: ItemInstance) -> bool:
 		return false
 	var fx: Dictionary = item.base.consumable_effect
 	if (fx.has("return") or fx.has("portal")) and not Net.may_travel():
-		return false                 # in someone else's world the party follows the host (bh-008)
+		return false                 # (never since bh-015: everyone explores on their own)
 	if fx.has("learn_recipe"):
 		var err := Crafting.learn(hero, StringName(fx["learn_recipe"]))
 		if err != "":

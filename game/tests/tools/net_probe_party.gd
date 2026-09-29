@@ -7,6 +7,8 @@ extends Node
 ##   Interact; the host falls and respawns without rebuilding the shared map (the client is not dragged through a
 ##   loading screen); the client takes a waypoint -> the host is asked -> Go -> both arrive; Regroup puts a separated
 ##   client beside the host; the host sends the client home.
+## bh-015: clients now travel on their own, so the "asked to lead the party" step no longer happens; the new rules
+## (independent exploring, Summon Party) are covered by net_probe_explore.gd.
 
 var args := {}
 var role := "host"

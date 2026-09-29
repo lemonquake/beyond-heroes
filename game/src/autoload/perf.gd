@@ -37,9 +37,17 @@ func _ready() -> void:
 ## ambient light). A light's `layers` only decide which cameras draw it, never what it lights.
 const LIGHT_LAYER := 1 << 19
 
+## bh-015: floating text, sprites, particles and ground stains live here — seen by the main camera, never baked into
+## the minimap's top-down render (a map load's warm-up damage numbers used to sit in the middle of the minimap until
+## the hero walked far enough for it to render again).
+const FX_LAYER := 1 << 18
+
 func _on_node_added(n: Node) -> void:
 	if n is Light3D:
 		(n as Light3D).layers = LIGHT_LAYER
+	elif n is Label3D or n is Sprite3D or n is GPUParticles3D or n is CPUParticles3D or n is Decal:
+		if (n as VisualInstance3D).layers == 1:
+			(n as VisualInstance3D).layers = FX_LAYER
 	if n is OmniLight3D or n is SpotLight3D:
 		_lights.append(n)
 	elif n is CharacterVisual:

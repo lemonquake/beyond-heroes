@@ -9,7 +9,7 @@ const ACTION_NAMES := [
 	["move_up", "Move Up"], ["move_down", "Move Down"], ["move_left", "Move Left"], ["move_right", "Move Right"],
 	["primary", "Attack / Interact"], ["secondary", "Heavy Attack"], ["dodge", "Dodge"], ["guard", "Guard / Block"],
 	["skill_1", "Skill 1"], ["skill_2", "Skill 2"], ["skill_3", "Skill 3"], ["skill_4", "Skill 4"], ["skill_5", "Skill 5"],
-	["skill_6", "Skill 6"], ["potion_health", "Potion Belt 1"], ["potion_mana", "Potion Belt 2"], ["interact", "Interact"], ["ping", "Ping (mark a spot)"],
+	["skill_6", "Skill 6"], ["potion_health", "Potion Belt 1"], ["potion_mana", "Potion Belt 2"], ["interact", "Interact"], ["ping", "Ping (mark a spot)"], ["summon_party", "Summon Party (host)"], ["minimap_zoom_in", "Minimap Zoom In"], ["minimap_zoom_out", "Minimap Zoom Out"],
 	["attack_in_place", "Attack in Place"], ["inventory", "Inventory"], ["character", "Character"], ["skills", "Skills"],
 	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["guide", "Field Guide"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
 ]
@@ -208,6 +208,7 @@ func _gameplay(v: VBoxContainer) -> void:
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)
 	_slider(v, "Interface Scale", "ui_scale", 0.75, 1.5, 0.05, "%d%%", 100.0)
 	_check(v, "Minimap", "show_minimap")
+	_option(v, "Minimap Zoom", "minimap_zoom", ["Close (16 m)", "Normal (26 m)", "Wide (42 m)"], "Also: the mouse wheel over the minimap, or the Minimap Zoom keys.")
 
 func _begin_capture(action: StringName, b: Button) -> void:
 	_capture_action = action
