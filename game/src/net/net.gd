@@ -22,15 +22,17 @@ extends Node
 
 signal state_changed
 signal peers_changed
+signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 11                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+const PROTOCOL := 12                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
                                      # 10 (bh-023): heroes share one body, their looks and all worn gear travel
                                      # 11 (bh-024): the Leggings slot and its items
+                                     # 12: roster-identified chat, mentions and host-only cheats
 const SUMMON_WAIT := 30.0            # seconds a summoned player has to answer before it counts as Stay
 const SUMMON_COOLDOWN := 8.0
 const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
@@ -1102,14 +1104,22 @@ func _remote_telegraph(map: String, pos: Vector3, radius: float, delay: float, c
 func send_chat(text: String) -> void:
 	if not is_active():
 		return
-	var h := Game.hero
-	_chat.rpc(h.hero_name if h else "Hero", text)
+	var clean := ChatText.clean(text)
+	if clean.is_empty() or Cheats.is_code(clean):
+		return
+	chat_received.emit(my_id(), clean)
+	_chat.rpc(clean)
 
 @rpc("any_peer", "reliable")
-func _chat(who: String, text: String) -> void:
-	if Game.ui_root and is_instance_valid(Game.ui_root):
-		var col := player_color(multiplayer.get_remote_sender_id())
-		Game.ui_root.chat.add_line("◆ %s: %s" % [who, text.substr(0, 160)], col.lightened(0.2))
+func _chat(text: String) -> void:
+	receive_chat(multiplayer.get_remote_sender_id(), text)
+
+## Resolve identity from the connected roster, never from a supplied display name.
+func receive_chat(peer: int, text: String) -> void:
+	var clean := ChatText.clean(text)
+	if not is_active() or not peers.has(peer) or clean.is_empty() or Cheats.is_code(clean):
+		return
+	chat_received.emit(peer, clean)
 
 func _chat_system(text: String, notice := false) -> void:
 	if Game.ui_root and is_instance_valid(Game.ui_root):

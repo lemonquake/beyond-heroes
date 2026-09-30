@@ -1,0 +1,52 @@
+{
+  "engine": "4.7.2.stable",
+  "artifacts": {
+    "build/windows/BeyondHeroes.exe": {
+      "bytes": 464852104,
+      "sha256": "dd0a8d06712015cb9361b6a0f8d678b9cd810cc50821b169375efef28fe5a0f3"
+    },
+    "build/BeyondHeroes.apk": {
+      "bytes": 413504590,
+      "sha256": "d9560576a879d77f1d260b948d4a8e594528780a089c9d7bb2a7689cacf9007c"
+    },
+    "output/pdf/Beyond-Heroes-Cheat-Codes.pdf": {
+      "bytes": 68853,
+      "sha256": "f22da82b6936abcb7a21750d7ae870aed03212b95ea17def9ac27c0913fee5b9"
+    }
+  },
+  "windows": "Release export; headless launch and hero creation succeeded",
+  "android": "Debug-signed APK; v2 and v3 signatures verified; no connected Android device for install testing",
+  "focused_tests": {
+    "checks": 1310,
+    "failures": 0
+  },
+  "multiplayer_probe": {
+    "host": "passed",
+    "client": "passed",
+    "checks": "actual ENet peers, host-only cheats, local and remote bubbles, 3-second expiry, targeted/everyone pings, autocomplete, hold/release stat controls"
+  },
+  "regression_tests": {
+    "checks": 33671,
+    "failures": [
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow \u2014 expected 0.0 \u00b1 0.00001, got 6.71875",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow \u2014 expected 0.1 \u00b1 0.00001, got 0.4",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow \u2014 expected 1.0 \u00b1 0.00001, got 6.375",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow \u2014 expected 2.0 \u00b1 0.00001, got 10.0625",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow \u2014 expected 0.0 \u00b1 0.00001, got 6.71875",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow \u2014 expected 0.1 \u00b1 0.00001, got 0.4",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow \u2014 expected 1.0 \u00b1 0.00001, got 6.375",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow \u2014 expected 2.0 \u00b1 0.00001, got 10.0625",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin \u2014 expected 0.0 \u00b1 0.00001, got 6.71875",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin \u2014 expected 0.15 \u00b1 0.00001, got 0.45",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin \u2014 expected 1.0 \u00b1 0.00001, got 6.375",
+      "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin \u2014 expected 2.0 \u00b1 0.00001, got 10.0625"
+    ],
+    "note": "15 failures in unchanged legacy ranged-stat assertions; calculator and data are unchanged from main and use Dexterity for bows, crossbows and javelins."
+  },
+  "full_suite": "Stopped the unrelated long combat-balance simulation; used relevant regression suites instead.",
+  "pdf": "All three pages rendered and visually checked",
+  "ui": "Desktop chat, bubbles, autocomplete, emoji picker, stats and touch layout visually checked"
+}

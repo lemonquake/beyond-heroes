@@ -49,6 +49,7 @@ var shops := {}
 ## Guild membership and hero tier (docs/LORE.md §5). tier: 0 Unranked, 1..8 = E..SSS (DataGuilds.TIERS).
 var guild: StringName = &""
 var tier := 0
+var tier_cheat_level := -1 # Hold a manually chosen rank until the next level, including across saves.
 ## "Well Rested" from the inn: active while play_time < rested_until (seconds of play time).
 var rested_until := 0.0
 ## Tempos (spirit companions, LORE §9): the bound spirits (at most DataTempos.MAX_ACTIVE, fallen ones included), the
@@ -134,7 +135,7 @@ func _inv_changed() -> void:
 	check_promotions()
 
 func check_promotions() -> void:
-	if _loading_equipment or _checking_promotions:
+	if _loading_equipment or _checking_promotions or tier_cheat_level == progress.level:
 		return
 	_checking_promotions = true
 	GuildRules.auto_promote(self)
@@ -448,7 +449,7 @@ func to_dict() -> Dictionary:
 		"known_places": known_places.keys().map(func(k): return String(k)), "route": route.duplicate(),
 		"flags": _flags_out(), "map": String(current_map), "spawn": String(current_spawn), "play_time": play_time,
 		"difficulty": difficulty, "dialogue": _dialogue_out(), "npcs": _keyed_out(npc_state), "shops": _keyed_out(shops),
-		"guild": String(guild), "tier": tier, "tier_rules_version": 2, "rested_until": rested_until,
+		"guild": String(guild), "tier": tier, "tier_cheat_level": tier_cheat_level, "tier_rules_version": 2, "rested_until": rested_until,
 		"tempos": tempos.map(func(t): return t.to_dict()), "tempo_roster": tempo_roster.duplicate(true), "tempo_serial": tempo_serial,
 		"town_portal": town_portal.duplicate(true), "belt": potion_belt.map(func(b): return String(b)),
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
@@ -548,7 +549,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 	# guild data (absent in older saves: Unranked, nothing equipped is removed)
 	var g := StringName(d.get("guild", ""))
 	h.guild = g if DataGuilds.GUILDS.has(g) else &""
-	h.tier = clampi(int(d.get("tier", 0)), 0, DataGuilds.MAX_RANK) if h.guild != &"" else 0
+	h.tier_cheat_level = int(d.get("tier_cheat_level", -1))
+	h.tier = clampi(int(d.get("tier", 0)), 0, DataGuilds.MAX_RANK) if h.guild != &"" or h.tier_cheat_level >= 1 else 0
 	h.equipment.tier_rank = h.tier
 	h.rested_until = float(d.get("rested_until", 0.0))
 	# Tempos (absent in older saves: none bound)

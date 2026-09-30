@@ -4,7 +4,7 @@ func _init() -> void:
 	strict = true
 
 func test_exact_codes_null_hero_and_documentation() -> void:
-	eq(Cheats.CODES.size(), 20, "six previous codes, thirteen new codes and alj (bh-024)")
+	eq(Cheats.CODES.size(), 26, "all current cheat codes")
 	eq(Cheats.DESCRIPTIONS.size(), Cheats.CODES.size(), "complete reference")
 	for code in Cheats.CODES:
 		ok(Cheats.DESCRIPTIONS.has(code), "documented " + code)
@@ -24,7 +24,7 @@ func test_requested_points_repeat_and_save() -> void:
 	h.progress.points_changed.connect(func(): notifications[0] += 1)
 	for i in 2:
 		Cheats.apply(" ASDF ", h)
-		Cheats.apply("LOL", h)
+		Cheats.apply("LEL", h)
 		Cheats.apply("jjwp", h)
 	Cheats.apply("talenttime", h)
 	eq(h.inventory.gold, gold + 100000, "exact gold")

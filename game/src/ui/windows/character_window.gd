@@ -34,6 +34,8 @@ var _apply: Button
 var _reset: Button
 var _stats_box: VBoxContainer
 var _stats: DerivedStats
+var _held_attr: StringName = &""
+var _hold_wait := 0.0
 
 func _init() -> void:
 	super._init("Character", Vector2(1560, 900))
@@ -98,7 +100,7 @@ func _build() -> void:
 			Game.ui_root.open(&"guild_custom"))
 	# middle: attributes
 	var mid := vbox(8)
-	mid.custom_minimum_size = Vector2(420, 0)
+	mid.custom_minimum_size = Vector2(500, 0)
 	row.add_child(mid)
 	mid.add_child(section("Attributes"))
 	_points = UITheme.label("", 17, UITheme.GOLD, UITheme.body_bold())
@@ -113,7 +115,7 @@ func _build() -> void:
 	ab.add_child(_reset)
 	_apply = button("Apply Points", _commit, &"PrimaryButton", 200.0)
 	ab.add_child(_apply)
-	var note := UITheme.label("Hover an attribute to see what it improves. Points are only spent when you apply them.", 14, UITheme.TEXT_MUTED, UITheme.body_font())
+	var note := UITheme.label("Hold + to keep adding points. All assigns remaining points to that attribute. Apply Points saves your choices.", 16, UITheme.TEXT_MUTED, UITheme.body_font())
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	mid.add_child(note)
 	mid.add_child(section("Next Class Rank"))
@@ -158,10 +160,19 @@ func _attr_row(a: StringName) -> Control:
 	var minus := icon_button("minus", "", func() -> void: _change(a, -1), 20.0)
 	h.add_child(minus)
 	var plus := icon_button("plus", "", func() -> void: _change(a, 1), 20.0)
+	plus.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+	plus.button_down.connect(func() -> void:
+		_held_attr = a
+		_hold_wait = 0.4)
+	plus.button_up.connect(_stop_hold)
+	plus.mouse_exited.connect(_stop_hold)
 	h.add_child(plus)
+	var all := button("All", func() -> void: _allocate_all(a), &"", 64.0)
+	all.tooltip_text = "Assign all remaining points to %s" % BH.ATTRIBUTE_NAMES[a]
+	h.add_child(all)
 	p.mouse_filter = Control.MOUSE_FILTER_PASS
 	TooltipLayer.attach(p, func() -> Control: return _attr_tip(a))
-	_attr_rows[a] = {"value": v, "plus": plus, "minus": minus, "pending": pend}
+	_attr_rows[a] = {"value": v, "plus": plus, "minus": minus, "all": all, "pending": pend}
 	return p
 
 func _attr_tip(a: StringName) -> Control:
@@ -197,6 +208,8 @@ func _attr_tip(a: StringName) -> Control:
 	return f[0]
 
 func _change(a: StringName, d: int) -> void:
+	if hero == null:
+		return
 	var total := 0
 	for k in _pending:
 		total += int(_pending[k])
@@ -205,11 +218,35 @@ func _change(a: StringName, d: int) -> void:
 		return
 	if d < 0 and cur <= 0:
 		return
-	_pending[a] = cur + d
+	_pending[a] = cur + clampi(d, -cur, maxi(0, hero.progress.free_points - total))
 	Audio.play_ui(&"ui_click")
 	_refresh_attrs()
 
+func _allocate_all(a: StringName) -> void:
+	_stop_hold()
+	if hero:
+		_change(a, hero.progress.free_points)
+
+func _stop_hold() -> void:
+	_held_attr = &""
+
+func _process(delta: float) -> void:
+	if _held_attr == &"":
+		return
+	if not is_visible_in_tree() or not get_window().has_focus() or hero == null:
+		_stop_hold()
+		return
+	var plus: Button = _attr_rows[_held_attr].plus
+	if plus.disabled or not plus.is_pressed():
+		_stop_hold()
+		return
+	_hold_wait -= delta
+	if _hold_wait <= 0.0:
+		_hold_wait = 0.08
+		_change(_held_attr, 1)
+
 func _commit() -> void:
+	_stop_hold()
 	for a in _pending:
 		if int(_pending[a]) > 0:
 			hero.progress.allocate(a, int(_pending[a]))
@@ -285,6 +322,7 @@ func _refresh_attrs() -> void:
 		(r.value as Label).text = str(roundi(_stats.get_stat(a)) + pend)
 		(r.pending as Label).text = "+%d" % pend if pend > 0 else ""
 		(r.plus as Button).disabled = free <= 0
+		(r.all as Button).disabled = free <= 0
 		(r.minus as Button).disabled = pend <= 0
 		(r.plus as Button).visible = hero.progress.free_points > 0
 		(r.minus as Button).visible = hero.progress.free_points > 0

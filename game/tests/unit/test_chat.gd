@@ -139,7 +139,7 @@ func test_chat_box_says_and_cheats() -> void:
 	var n := chat.lines().size()
 	chat.submit("   ")
 	eq(chat.lines().size(), n, "blank messages are ignored")
-	for i in 20:
+	for i in 80:
 		chat.submit("line %d" % i)
 	eq(chat.lines().size(), ChatBox.MAX_LINES, "the log keeps the last %d lines" % ChatBox.MAX_LINES)
 	chat.close()
@@ -157,10 +157,10 @@ func test_new_cheats_through_chat_and_immediate_tempo_revival() -> void:
 	var sp := h.progress.skill_points
 	var fp := h.progress.free_points
 	chat.submit(" ASDF ")
-	chat.submit("LOL")
+	chat.submit("LEL")
 	chat.submit("jjwp")
 	eq(h.inventory.gold, gold + 50000, "asdf through chat")
-	eq(h.progress.skill_points, sp + 10, "lol through chat")
+	eq(h.progress.skill_points, sp + 10, "lel through chat")
 	eq(h.progress.free_points, fp + 20, "jjwp through chat")
 	var t := TempoData.new()
 	t.uid = 9876
