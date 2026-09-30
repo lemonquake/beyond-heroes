@@ -2,6 +2,20 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-025 - Music system, recorded themes and weapon sounds
+
+Prepared 30 September 2026.
+
+- The seven recorded themes are in the game. **main_theme** is the default: the main menu, the towns, the roads, and any map without music of its own. Dungeons play dungeon_theme; Emberforge Depths plays fire_dungeon_theme; Rimeglass Barrow and Prismdeep Geode play ice_dungeon_theme.
+- Music now follows the fight. The battle theme takes over while monsters are fighting the hero in open country (and for a dungeon's champion), and lets go six seconds after the last of them. The boss theme starts when a boss sees the hero, not at the door of its floor. The road's music carries on from where it stopped.
+- Paul David speaks of Aljay and Roydo under **aljay_theme**: it starts when he sees the shard, plays through his tale and holds until the conversation ends. The chain breaking on the Black Spire plays it too.
+- Music starts at 60 % and keeps whatever the player sets in Settings > Audio. New setting: Battle Music (on by default). The seven recordings are levelled against each other, the pause menu muffles the music, and three new stingers play when a boss sees the hero, when a boss falls and when the hero falls.
+- Recorded sounds: sword, axe and hammer hits, the blade swing, bow shots, staff and wand attacks (and their strong attack), Cleave, Firebolt, Meteor Strike, Blizzard and Chain Lightning. Each was cut to the sound itself, so a blow sounds on the frame it lands.
+- New sounds made for the weapons the pack has none for (greatsword, great axe, dagger, spear, claw, knuckles, crossbow, staff and wand bolts), and for five the game asked for and never had: the low-health heartbeat, buying, crafting, gathering and holy casts.
+- The four synthesised tracks the recordings replaced are out of the build (80 MB of WAV for 25 MB of MP3).
+
+Sources: docs/MUSIC.md, game/tests/unit/test_bh025.gd, work/lemondev/bh-025/evidence.
+
 ## BH-024 - Leggings, the complete worn wardrobe, Unbound items
 
 Prepared 30 September 2026.

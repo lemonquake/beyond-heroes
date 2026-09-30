@@ -32,6 +32,7 @@ var sfx_volume := 0.9
 var voice_volume := 0.9
 var ambience_volume := 0.7
 var ui_volume := 0.8
+var combat_music := true            # the battle theme takes over while monsters are fighting the hero
 # ---- CONTROLS
 var bindings := {}                  # action -> [event descriptor]; empty = defaults (InputSetup.BINDINGS)
 var mouse_sensitivity := 1.0        # camera rotation / zoom speed
@@ -63,7 +64,7 @@ var efficiency_mode := false
 
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
-	"ui_volume", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
+	"ui_volume", "combat_music", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
 	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
 	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
@@ -223,7 +224,7 @@ func reset_group(group: String) -> void:
 const GROUPS := {
 	"video": ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality", "anti_aliasing", "render_scale",
 		"efficiency_mode"],
-	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume"],
+	"audio": ["master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume", "ui_volume", "combat_music"],
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "touch_opacity", "touch_size", "touch_auto_aim",
 		"touch_fixed_stick"],
 	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom",

@@ -17,6 +17,8 @@ sys.path.insert(0, str(HERE))
 ROOT = HERE.parents[1]
 SFX_DIR = ROOT / "game" / "assets" / "audio" / "sfx"
 MUS_DIR = ROOT / "game" / "assets" / "audio" / "music"
+# bh-025: the recorded themes (tools/audio/import_pack.py) replaced these; a track renders again only when named
+RETIRED = {"music_menu", "music_town", "music_dungeon", "music_boss"}
 EVID_DIR = ROOT / "work" / "lemondev" / "bh-001" / "evidence" / "audio"
 
 
@@ -53,7 +55,7 @@ def main():
 
     jobs = []
     if a.only in (None, "music"):
-        jobs += [("music", n) for n in music.TRACKS]
+        jobs += [("music", n) for n in music.TRACKS if n not in RETIRED or (a.names and n in a.names)]
     if a.only in (None, "amb"):
         jobs += [("amb", n) for n in ambience.AMBIENCES]
     if a.only in (None, "sfx"):

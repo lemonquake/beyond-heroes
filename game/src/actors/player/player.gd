@@ -884,7 +884,7 @@ func _start_heavy(charge_frac: float, charged: bool) -> void:
 	else:
 		a.on_window = func(w: int, first: bool) -> void: _melee_window(a, w, first)
 	visual.play_action(anim, rate)
-	Audio.play_at(&"swing_heavy", global_position, 1.0)
+	Audio.play_at(wt.heavy_sound if wt else &"swing_heavy", global_position, 1.0)
 	chain_step = 0
 	_chain_lock = FINISHER_LOCK
 	mark_combat()

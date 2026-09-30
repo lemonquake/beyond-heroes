@@ -28,6 +28,7 @@ extends Resource
 @export var dual_heavy_anim: StringName
 @export var swing_sound := &"swing_light"
 @export var hit_sound := &"hit_flesh"
+@export var heavy_sound := &"swing_heavy"   # the heavy attack (a staff or wand: the strong cast)
 @export var icon := ""
 @export var model := ""
 @export var grip_offset := Transform3D.IDENTITY   # attachment correction in the hand socket

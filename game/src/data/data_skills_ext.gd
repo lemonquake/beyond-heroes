@@ -79,7 +79,7 @@ static func mage() -> Array:
 			"mana_per_rank": 1.2, "cooldown": 4.0,
 			"description": "Summon a storm of ice over the target for {duration} s: every {tick} s, {damage_min}-{damage_max} Ice damage to enemies within {radius} m and heavy Chill.",
 			"params": {"damage_min": 6.0, "damage_max": 9.0, "radius": 4.0, "duration": 3.5, "tick": 0.5, "range": 18.0, "chill": 22.0, "knockback": 0.0, "poise": 3.0},
-			"per_rank": {"damage_min": 1.8, "damage_max": 2.6}, "sound_cast": &"cast_ice", "sound_hit": &"freeze", "vfx": &"blizzard"}),
+			"per_rank": {"damage_min": 1.8, "damage_max": 2.6}, "sound_cast": &"blizzard_cast", "sound_hit": &"freeze", "vfx": &"blizzard"}),
 		_s(&"flame_sentinel", "Flame Sentinel", &"mage", &"sentry", {"kind": SPL, "element": Elements.FIRE, "anim": &"cast_heavy", "mana_cost": 16.0,
 			"mana_per_rank": 1.0, "cooldown": 6.0,
 			"description": "Raise a pillar of living flame for {duration} s that hurls a fire bolt at the nearest enemy every {interval} s ({damage_min}-{damage_max} Fire damage). Up to {max_count} at once.",

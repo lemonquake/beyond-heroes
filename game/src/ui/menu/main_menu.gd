@@ -119,7 +119,7 @@ func reveal() -> void:
 	_logo.visible = true
 	_byline.visible = true
 	_buttons[0 if _latest_slot() >= 0 else 1].grab_focus.call_deferred()
-	Audio.play_music(&"music_menu")
+	Audio.play_music(&"main_theme")
 	Audio.play_ambience(&"amb_town")
 	_animate_in()
 

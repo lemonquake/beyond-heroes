@@ -18,7 +18,7 @@ var _lake := Transform3D.IDENTITY
 func _init() -> void:
 	title = "The Dawnbreakers"
 	skip_all = false
-	music = &"music_legend"
+	music = &"aljay_theme"
 
 func build(cs: CutscenePlayer) -> Array:
 	var n := cs.npc(&"paul_david")

@@ -11,7 +11,7 @@ var _at := Transform3D.IDENTITY
 func _init() -> void:
 	title = "A Chain Breaks"
 	skip_all = true
-	music = &"music_legend"
+	music = &"aljay_theme"
 
 func build(cs: CutscenePlayer) -> Array:
 	if has_meta(&"at"):

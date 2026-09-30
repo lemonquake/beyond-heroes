@@ -95,7 +95,7 @@ static func _defs() -> Array:
 			"attacks": [{"id": &"bash", "anim": &"shield_bash", "range": 2.0, "mult": 1.1, "knockback": 7.0, "poise": 20.0, "cooldown": 2.2, "kind": "melee", "arc": 80.0},
 				{"id": &"chop", "anim": &"axe_1", "range": 2.3, "mult": 1.3, "knockback": 3.0, "poise": 12.0, "cooldown": 2.0, "kind": "melee", "arc": 90.0}],
 			"xp_mult": 1.6, "drop_chance": 0.4, "loot": [[&"bone_fragment", 0.5, 2, 4], [&"iron_shard", 0.45, 1, 3], [&"grave_dust", 0.4, 1, 2]],
-			"sounds": {"hurt": &"hit_armor", "death": &"skeleton_death", "idle": &"skeleton_rattle"},
+			"sounds": {"hurt": &"hit_metal", "death": &"skeleton_death", "idle": &"skeleton_rattle"},
 			"lore": "Its tower shield is the lid of its own coffin."}),
 		_e(&"grave_archer", "Grave Archer", &"ranged", {"family": &"undead", "role_name": "Ranged", "tint": Color(0.58, 0.56, 0.52),
 			"hp": 34.0, "damage_min": 5.0, "damage_max": 8.0, "defense": 6.0,
@@ -271,7 +271,7 @@ static func _defs() -> Array:
 					"kind": "aoe", "radius": 9.0, "windup": 1.6, "telegraph": "ring", "self_centered": true, "inner_radius": 3.5, "phase": 3},
 			],
 			"xp_mult": 25.0, "drop_chance": 1.0, "gold": Vector2i(150, 260), "loot": [[&"aether_shard", 1.0, 2, 4], [&"quest_crown_fragment", 1.0, 1, 1], [&"champion_essence", 1.0, 2, 3]],
-			"sounds": {"hurt": &"hit_armor", "death": &"boss_roar", "idle": &"boss_roar"},
+			"sounds": {"hurt": &"hit_metal", "death": &"boss_roar", "idle": &"boss_roar"},
 			"lore": "Once the Sanctuary's sworn protector. He broke his oath to hold back the Aether's collapse — and was hollowed out by it."}),
 	]
 

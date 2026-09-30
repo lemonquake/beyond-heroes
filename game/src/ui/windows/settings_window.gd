@@ -153,6 +153,8 @@ func _audio(v: VBoxContainer) -> void:
 	for pair in [["Master", "master_volume"], ["Music", "music_volume"], ["Effects", "sfx_volume"], ["Voice", "voice_volume"],
 			["Ambience", "ambience_volume"], ["Interface", "ui_volume"]]:
 		_slider(v, pair[0], pair[1], 0.0, 1.0, 0.05)
+	v.add_child(section("Music"))
+	_check(v, "Battle Music", "combat_music", "The battle theme takes over while monsters are fighting you. Off: the area's own music keeps playing; bosses still bring theirs.")
 
 func _controls(v: VBoxContainer) -> void:
 	v.add_child(section("Control Mode"))

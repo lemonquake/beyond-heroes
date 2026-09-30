@@ -11,7 +11,7 @@ var _map := Transform3D.IDENTITY
 func _init() -> void:
 	title = "The Chain-Marshal"
 	skip_all = true
-	music = &"music_boss"
+	music = &"boss_theme"
 
 func build(cs: CutscenePlayer) -> Array:
 	if Game.current_map:

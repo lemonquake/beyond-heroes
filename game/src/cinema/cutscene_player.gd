@@ -109,9 +109,12 @@ func _ready() -> void:
 	_take_over()
 	scenes = cutscene.build(self)
 	if cutscene.music != &"":
-		Audio.play_music(cutscene.music, 1.5)
+		Music.push(&"cutscene", cutscene.music, 1.5)
 	_next_scene(false)
 	_started = true
+
+func _exit_tree() -> void:
+	Music.pop(&"cutscene")           # however the player ends, the map gets its music back
 
 # ---------------------------------------------------------------------------------------------------------------- ui
 
@@ -245,7 +248,7 @@ func _layout() -> void:
 # ---------------------------------------------------------------------------------------------------------------- takeover
 
 func _take_over() -> void:
-	_saved = {"blocking": Game.ui_blocking, "god": Game.god_mode, "music": Game.current_map.def.music if Game.current_map and Game.current_map.def else &""}
+	_saved = {"blocking": Game.ui_blocking, "god": Game.god_mode}
 	Game.ui_blocking = true
 	Game.god_mode = true
 	Game.in_cutscene = true
@@ -315,8 +318,7 @@ func _restore() -> void:
 	elif _prev_cam and is_instance_valid(_prev_cam) and _prev_cam.is_inside_tree():
 		_prev_cam.make_current()
 	get_tree().root.disable_3d = false
-	if cutscene.music != &"" and StringName(_saved.get("music", &"")) != &"":
-		Audio.play_music(StringName(_saved.music), 2.0)
+	Music.pop(&"cutscene", 2.0)
 
 # ---------------------------------------------------------------------------------------------------------------- flow
 

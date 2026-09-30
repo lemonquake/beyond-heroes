@@ -43,6 +43,8 @@ func _enter(id: String) -> void:
 		finish()
 		return
 	hero.mark_dialogue_visited(npc.id, id)
+	if n.has("music"):
+		Music.push(&"dialogue", StringName(n.music))     # holds until the conversation ends
 	_apply(model.run_actions(n.get("actions", []), hero))
 	if finished:
 		return
@@ -114,5 +116,6 @@ func finish() -> void:
 	if finished:
 		return
 	finished = true
+	Music.pop(&"dialogue")
 	Events.dialogue_ended.emit(npc.id)
 	ended.emit()

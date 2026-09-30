@@ -1161,3 +1161,178 @@ def ui_error(r, v):
 @sfx("ui_page")
 def ui_page(r, v):
     return mix((_paper(r, 0.32, 55.0), 0, 0.8), (whoosh(r, 0.25, 600, 2500, q=0.7, peak=0.5), 0.03, 0.3))
+
+
+# ============================================================================================
+# bh-025: the weapons the recorded pack has no sound for, the interface sounds the game asked
+# for and never had, and the music stingers
+# ============================================================================================
+from instruments import boom as _boom, cymbal as _cymbal, swell_cym as _swell_cym, taiko as _taiko  # noqa: E402
+
+
+@sfx("dagger_hit_1", "dagger_hit_2", "dagger_hit_3")
+def dagger_hit(r, v):
+    p = PV[v] * 1.1
+    stab = thump(r, 260 * p, 120 * p, 0.09, 0.012, 0.07, 2.0)
+    steel = metal(r, 3100 * p, 0.22, 0.12, 6, 4, 0.5)
+    sq = _squelch(r, 0.11, 1100 * p, r.uniform(22, 34))
+    y = mix((click(r, 4500, 0.003), 0, 0.9), (burst(r, 0.035, 900, 7000 * p, 0.03), 0, 0.8), (stab, 0, 0.8),
+            (steel, 0.002, 0.28), (sq, 0.008, 0.4))
+    return verb(sat(y, 1.7), "room", 0.06)
+
+
+@sfx("spear_hit_1", "spear_hit_2")
+def spear_hit(r, v):
+    p = PV[v]
+    punch = thump(r, 175 * p, 62 * p, 0.2, 0.022, 0.16, 2.2)
+    shaft = wood_knock(r, 520 * p, 9, 0.12)
+    head = metal(r, 1900 * p, 0.3, 0.16, 7, 4, 0.55)
+    sq = _squelch(r, 0.16, 800 * p, r.uniform(14, 22))
+    rip = whoosh(r, 0.07, 5200, 1800, q=1.4, peak=0.1, rise=1.0, fall=2.0)
+    y = mix((click(r, 3200, 0.004), 0, 0.8), (rip, 0, 0.55), (punch, 0.004, 1.0), (shaft, 0.006, 0.45),
+            (head, 0.004, 0.22), (sq, 0.012, 0.4))
+    return verb(peq(sat(y, 1.9), 220, 2.5, 0.8), "room", 0.07)
+
+
+@sfx("claw_hit_1", "claw_hit_2")
+def claw_hit(r, v):
+    p = PV[v]
+    layers = [(thump(r, 150 * p, 70 * p, 0.14, 0.02, 0.11, 1.8), 0.012, 0.7)]
+    for k in range(3):                                   # three blades, a few milliseconds apart
+        rake = whoosh(r, 0.075, 6500 * p, 1700 * p, q=2.2, peak=0.12, rise=1.0, fall=1.8, sing=0.4, sing_q=9)
+        layers.append((rake, 0.014 * k, 1.0 - 0.12 * k))
+        layers.append((click(r, 5000, 0.003), 0.014 * k, 0.5))
+    layers.append((_squelch(r, 0.15, 950 * p, r.uniform(20, 30)), 0.02, 0.5))
+    return verb(sat(mix(*layers), 1.8), "room", 0.06)
+
+
+@sfx("fist_hit_1", "fist_hit_2", "fist_hit_3")
+def fist_hit(r, v):
+    p = PV[v]
+    body = thump(r, 190 * p, 58 * p, 0.2, 0.02, 0.15, 2.4)
+    smack = burst(r, 0.06, 300, 3800 * p, 0.045)
+    knuckle = metal(r, 1250 * p, 0.2, 0.09, 6, 3.5, 0.7)
+    crack = np.zeros(N(0.05))
+    for _ in range(r.integers(2, 5)):
+        place(crack, click(r, r.uniform(1800, 3400), r.uniform(0.002, 0.005)), N(r.uniform(0, 0.02)), r.uniform(0.4, 1.0))
+    y = mix((body, 0, 1.0), (smack, 0, 0.85), (knuckle, 0.001, 0.3), (crack, 0.003, 0.45))
+    y = filt(sat(y, 2.2), "lowshelf", 120, 0.7, 2.5)
+    return verb(y, "room", 0.06)
+
+
+@sfx("magic_hit_1", "magic_hit_2")
+def magic_hit(r, v):
+    p = PV[v]
+    n = N(0.32)
+    chirp = nz(sine(np.geomspace(2400 * p, 260 * p, n), n) * env_ad(n, 0.0008, 0.22))
+    ring = nz(fm(620 * p, 2.76, 3.0 * env_ad(n, 0.001, 0.12), n) * env_ad(n, 0.001, 0.26))
+    pop = burst(r, 0.05, 700, 9000, 0.035)
+    y = mix((pop, 0, 0.8), (chirp, 0, 0.7), (ring, 0.002, 0.45), (thump(r, 140 * p, 60, 0.16, 0.02, 0.12), 0, 0.55),
+            (sparkle(r, 0.35, 70, 4000, 11000, (0.03, 0.12)), 0.01, 0.3), (bellnote(r, mtof(88) * p, 0.5, 0.35), 0.004, 0.25))
+    return verb(y, "room", 0.12)
+
+
+@sfx("crossbow_fire_1", "crossbow_fire_2")
+def crossbow_fire(r, v):
+    p = PV[v]
+    n = N(0.4)
+    t = tvec(n)
+    f = 150 * p * (1 + 0.7 * np.exp(-t / 0.006))
+    string = sine(f, n) + 0.5 * sine(2 * f, n) + 0.3 * saw(f, n)
+    string = nz(lp(string, 3200) * env_ad(n, 0.0004, 0.2))
+    latch = metal(r, 2300 * p, 0.12, 0.05, 5, 3, 0.8)
+    stock = wood_knock(r, 380 * p, 8, 0.11)
+    thwip = whoosh(r, 0.13, 5500, 1900, q=1.7, peak=0.1, rise=1.0, fall=2.0)
+    y = mix((click(r, 3800, 0.004), 0, 0.9), (latch, 0, 0.4), (string, 0.003, 0.85), (stock, 0.004, 0.6),
+            (thump(r, 170, 70, 0.1, 0.012, 0.08), 0.004, 0.55), (thwip, 0.008, 0.75))
+    return verb(sat(y, 1.6), "room", 0.06)
+
+
+@sfx("heartbeat")
+def heartbeat(r, v):
+    lub = thump(r, 62, 38, 0.34, 0.03, 0.24, 1.3)
+    dub = thump(r, 56, 36, 0.34, 0.03, 0.24, 1.3)
+    chest = burst(r, 0.05, 40, 220, 0.04, src="pink")
+    y = mix((lub, 0, 1.0), (chest, 0, 0.35), (dub, 0.2, 0.7), (chest, 0.2, 0.22))
+    return lp(y, 420, order=2)
+
+
+@sfx("ui_buy")
+def ui_buy(r, v):
+    coins = mix(*[(ping(r, r.uniform(2500, 4200), r.uniform(0.14, 0.32), (1.0, 2.4, 4.1, 5.9)),
+                   0.035 * i + r.uniform(0, 0.02), 1.0 - 0.1 * i) for i in range(5)])
+    purse = swell_noise(r, 0.12, 300, 2600, 0.35)
+    y = mix((purse, 0, 0.45), (thump(r, 210, 110, 0.07, 0.01, 0.05), 0.02, 0.4), (coins, 0.02, 0.9),
+            (bellnote(r, mtof(86), 0.7, 0.6), 0.2, 0.18))
+    return verb(y, "room", 0.1)
+
+
+@sfx("ui_craft")
+def ui_craft(r, v):
+    def strike(f, g):
+        return mix((click(r, 3000, 0.004), 0, 0.7), (metal(r, f, 0.9, 0.55, 12, 8, 0.4), 0, g),
+                   (thump(r, 230, 90, 0.1, 0.012, 0.08, 2.0), 0, 0.7), (burst(r, 0.03, 1500, 12000, 0.02), 0, 0.5))
+    y = mix((strike(880, 0.8), 0, 0.8), (strike(990, 0.9), 0.17, 1.0), (sparkle(r, 0.7, 60, 5000, 12000), 0.19, 0.3),
+            (_glass_rise(r, 0.6, 90, 3500, 9000), 0.2, 0.18))
+    return verb(y, "room", 0.14)
+
+
+@sfx("loot_pickup")
+def loot_pickup(r, v):
+    rustle = swell_noise(r, 0.2, 900, 7000, 0.45, 1.6, 1.6)
+    snap = wood_knock(r, 1500, 5, 0.04)
+    y = mix((rustle, 0, 0.7), (swell_noise(r, 0.12, 2500, 9000, 0.4), 0.09, 0.4), (snap, 0.12, 0.45),
+            (ping(r, 1800, 0.12), 0.13, 0.12))
+    return verb(y, "room", 0.08)
+
+
+@sfx("holy_cast")
+def holy_cast(r, v):
+    ch = choir(r, mtof(np.array([62, 69, 74])), 1.3, "ah", attack=0.35, release=0.7)
+    bells = mix(*[(bellnote(r, mtof(m), 1.4, 1.2), 0.18 + 0.05 * i, 0.8 - 0.1 * i) for i, m in enumerate([86, 90, 93])])
+    rise = _glass_rise(r, 0.9, 100, 2500, 9000)
+    y = mix((ch, 0, 0.6), (rise, 0, 0.3), (bells, 0, 0.55), (sparkle(r, 1.0, 50, 5000, 11000), 0.15, 0.3),
+            (whoosh(r, 0.5, 900, 4200, q=1.0, peak=0.75), 0, 0.22))
+    return verb(y, "hall", 0.32)
+
+
+@sfx("sting_victory")
+def sting_victory(r, v):
+    # a rising call (D A D) into a held D major chord over drums: a boss is down
+    call = [(50, 0.0, 0.34), (57, 0.26, 0.34), (62, 0.52, 0.5)]
+    fan = mix(*[(brass(r, mtof(m + 12), d + 0.1, swell=0.04, bright=1.1, rel=0.12), t0, 0.85) for m, t0, d in call])
+    hold = mix(*[(brass(r, mtof(m), 2.6, swell=0.08, bright=1.0 - 0.06 * i, rel=1.3), 0.0, 0.8 - 0.06 * i)
+                 for i, m in enumerate([38, 50, 57, 62, 66, 74])])
+    ch = choir(r, mtof(np.array([62, 66, 69, 74])), 2.8, "ah", attack=0.25, release=1.5)
+    bells = mix(*[(bellnote(r, mtof(m), 2.2, 2.0), 0.07 * i, 0.7) for i, m in enumerate([74, 78, 81, 86])])
+    y = mix((_taiko(r, 0.8, 1.0), 0.0, 0.7), (_taiko(r, 0.8, 1.05), 0.26, 0.7), (fan, 0.0, 0.8),
+            (_boom(r, 1.0), 0.84, 0.9), (_taiko(r, 1.0, 0.85), 0.84, 0.9), (_cymbal(r, 2.8, 0.5), 0.84, 0.4),
+            (hold, 0.84, 0.75), (ch, 0.86, 0.4), (bells, 0.86, 0.35), (_swell_cym(r, 0.8, 0.5), 0.08, 0.3))
+    return verb(y, "hall", 0.32)
+
+
+@sfx("sting_defeat")
+def sting_defeat(r, v):
+    # a fall through D minor into a low unison and a tolling bell: the hero is down
+    fall = [(62, 0.0), (60, 0.42), (57, 0.84), (53, 1.26)]
+    line = mix(*[(brass(r, mtof(m), 0.6, swell=0.12, bright=0.5, rel=0.3), t0, 0.7 - 0.06 * i) for i, (m, t0) in enumerate(fall)])
+    low = mix(*[(brass(r, mtof(m), 2.6, swell=0.35, bright=0.35, rel=1.6, growl=0.15), 0, 0.8) for m in (26, 38, 45)])
+    ch = choir(r, mtof(np.array([50, 53, 57])), 3.0, "o", attack=0.6, release=1.8)
+    toll = bellnote(r, mtof(50), 3.0, 3.2, 0.5)
+    y = mix((thump(r, 70, 28, 1.4, 0.09, 1.1, 2.2), 0, 0.9), (line, 0.0, 0.6), (low, 1.5, 0.75), (ch, 0.9, 0.45),
+            (toll, 1.55, 0.45), (_boom(r, 0.9), 1.5, 0.7))
+    return verb(lp(y, 6500), "hall", 0.38)
+
+
+@sfx("sting_boss")
+def sting_boss(r, v):
+    # a swell that slams into a low brass cluster: a boss has seen the hero
+    n = N(0.7)
+    x = np.linspace(0, 1, n)
+    suck = nz(tvf(pink(n, r), "bp", 200 + 3800 * x ** 2.2, 1.4) * x ** 2.4)
+    snarl = mix(*[(brass(r, mtof(m), 1.9, swell=0.03, bright=1.2, rel=1.1, growl=0.35), 0, 0.85) for m in (26, 33, 38, 39, 45)])
+    ch = choir(r, mtof(np.array([38, 45, 50])), 1.9, "a", attack=0.04, release=1.2)
+    y = mix((suck, 0, 0.6), (_swell_cym(r, 0.7, 0.5), 0.0, 0.35), (_boom(r, 1.0), 0.7, 1.0), (_taiko(r, 1.0, 0.8), 0.7, 0.9),
+            (_taiko(r, 0.8, 0.9), 0.95, 0.6), (snarl, 0.7, 0.8), (ch, 0.7, 0.4), (_cymbal(r, 1.8, 0.4), 0.7, 0.3),
+            (burst(r, 0.03, 1500, 14000, 0.02), 0.7, 0.7))
+    return verb(sat(y, 1.4), "hall", 0.28)

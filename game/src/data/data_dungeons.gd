@@ -86,7 +86,7 @@ const LIST := {
 		"pools": {"a": [&"sporeling", &"sporeling", &"rootback_boar", &"sporeling"],
 			"b": [&"rootweaver", &"mycelid_hulk", &"sporeling", &"rootback_boar", &"broodmother"],
 			"seal": [&"mycelid_hulk", &"rootweaver", &"rootback_boar", &"sporeling", &"sporeling"]},
-		"music": &"music_dungeon", "ambience": &"amb_forest", "footstep": &"dirt", "reverb": 0.35,
+		"music": &"dungeon_theme", "ambience": &"amb_forest", "footstep": &"dirt", "reverb": 0.35,
 		"miniboss": {"id": &"gorrowmaw", "name": "Gorrowmaw the Sporefather", "title": "Champion of the Warren", "enemy": &"mycelid_hulk",
 			"mods": [&"regenerating"], "scale": 1.25, "hp": 2.4, "damage": 1.25, "level_bonus": 1,
 			"lore": "The oldest thing in the Warren that can still walk. Every sporeling there budded from its back."},
@@ -187,7 +187,7 @@ const LIST := {
 		"pools": {"a": [&"drowned_deckhand", &"drowned_deckhand", &"reef_crawler", &"drowned_deckhand"],
 			"b": [&"brinecaller", &"barnacle_hulk", &"drowned_deckhand", &"reef_crawler"],
 			"seal": [&"barnacle_hulk", &"brinecaller", &"reef_crawler", &"drowned_deckhand", &"drowned_deckhand"]},
-		"music": &"music_dungeon", "ambience": &"amb_catacombs", "footstep": &"stone", "reverb": 0.6,
+		"music": &"dungeon_theme", "ambience": &"amb_catacombs", "footstep": &"stone", "reverb": 0.6,
 		"miniboss": {"id": &"varroch", "name": "Keelbreaker Varroch", "title": "Champion of the Deeps", "enemy": &"barnacle_hulk",
 			"mods": [&"armored"], "scale": 1.2, "hp": 2.4, "damage": 1.25, "level_bonus": 1,
 			"lore": "It hauled three ships onto the rocks by their anchor chains. It still drags the chain behind it."},
@@ -290,7 +290,7 @@ const LIST := {
 		"pools": {"a": [&"cinder_imp", &"slag_hound", &"forge_thrall", &"slag_hound"],
 			"b": [&"magma_golem", &"forge_thrall", &"cinder_imp", &"ashen_cultist", &"slag_hound"],
 			"seal": [&"magma_golem", &"forge_thrall", &"forge_thrall", &"cinder_imp", &"slag_hound"]},
-		"music": &"music_dungeon", "ambience": &"amb_temple", "footstep": &"stone", "reverb": 0.5,
+		"music": &"fire_dungeon_theme", "ambience": &"amb_temple", "footstep": &"stone", "reverb": 0.5,
 		"miniboss": {"id": &"cindrax", "name": "Cindrax the Furnace-Heart", "title": "Champion of the Depths", "enemy": &"magma_golem",
 			"mods": [&"berserker"], "scale": 1.2, "hp": 2.4, "damage": 1.25, "level_bonus": 1,
 			"lore": "The first golem the Forgemaster ever poured. Its core has been burning for nine hundred years."},
@@ -392,7 +392,7 @@ const LIST := {
 		"pools": {"a": [&"rime_husk", &"rime_husk", &"rime_weaver", &"ice_wraith"],
 			"b": [&"barrow_jarl", &"ice_wraith", &"rime_husk", &"frost_revenant", &"rime_weaver"],
 			"seal": [&"barrow_jarl", &"barrow_jarl", &"ice_wraith", &"rime_weaver", &"rime_husk"]},
-		"music": &"music_dungeon", "ambience": &"amb_catacombs", "footstep": &"stone", "reverb": 0.65,
+		"music": &"ice_dungeon_theme", "ambience": &"amb_catacombs", "footstep": &"stone", "reverb": 0.65,
 		"miniboss": {"id": &"hrimgard", "name": "Hrimgard of the Frozen Oath", "title": "Champion of the Barrow", "enemy": &"barrow_jarl",
 			"mods": [&"frozen", &"shielded"], "scale": 1.3, "hp": 2.4, "damage": 1.25, "level_bonus": 1,
 			"lore": "The queen's shield-sworn. He swore to hold her door until spring, and spring never came."},
@@ -491,7 +491,7 @@ const LIST := {
 		"pools": {"a": [&"clockwork_sentry", &"star_mote", &"astral_duelist", &"star_mote"],
 			"b": [&"void_seer", &"astral_duelist", &"clockwork_sentry", &"rune_golem", &"aether_wisp"],
 			"seal": [&"void_seer", &"astral_duelist", &"astral_duelist", &"clockwork_sentry", &"star_mote"]},
-		"music": &"music_dungeon", "ambience": &"amb_temple", "footstep": &"stone", "reverb": 0.7,
+		"music": &"dungeon_theme", "ambience": &"amb_temple", "footstep": &"stone", "reverb": 0.7,
 		"miniboss": {"id": &"lumenar", "name": "Lumenar, the Last Astronomer", "title": "Champion of the Orrery", "enemy": &"void_seer",
 			"mods": [&"aether_infused", &"swift"], "scale": 1.3, "hp": 2.6, "damage": 1.25, "level_bonus": 1,
 			"lore": "He mapped every star over Jre, then went looking for the ones that were not there."},
@@ -823,7 +823,7 @@ static func map_defs() -> Array:
 			var lv: Array = d.levels[mini(n, n_floors) - 1]
 			m.level_min = int(lv[0])
 			m.level_max = int(lv[1])
-			m.music = &"music_boss" if n == n_floors else StringName(d.music)
+			m.music = StringName(d.music)      # the boss theme starts when the boss sees the hero (MusicDirector)
 			m.ambience = StringName(d.ambience)
 			m.footstep_surface = StringName(d.footstep)
 			m.reverb = float(d.reverb)

@@ -1,6 +1,6 @@
 extends Node
-## Audio playback (autoload `Audio`): buses, pooled 2D/3D SFX with random variations, music and ambience crossfades,
-## environment reverb per map.
+## Audio playback (autoload `Audio`): buses, pooled 2D/3D SFX with random variations, ambience crossfades and
+## environment reverb per map. Music is the `Music` autoload's (MusicDirector); `play_music` hands the map's track to it.
 
 const SFX_DIR := "res://assets/audio/sfx/"
 const MUSIC_DIR := "res://assets/audio/music/"
@@ -10,9 +10,6 @@ const POOL_3D := 32
 var _cache := {}                 # name -> Array[AudioStream] (variations)
 var _pool2d: Array[AudioStreamPlayer] = []
 var _pool3d: Array[AudioStreamPlayer3D] = []
-var _music_a: AudioStreamPlayer
-var _music_b: AudioStreamPlayer
-var _music_current: StringName = &""
 var _amb: AudioStreamPlayer
 var _amb_current: StringName = &""
 var _last_play := {}             # name -> msec, throttles identical sounds in the same frame burst
@@ -34,8 +31,6 @@ func _ready() -> void:
 		p3.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
 		add_child(p3)
 		_pool3d.append(p3)
-	_music_a = _mk_stream_player("Music")
-	_music_b = _mk_stream_player("Music")
 	_amb = _mk_stream_player("Ambience")
 	Settings.apply()
 	_start_prefetch()
@@ -220,26 +215,9 @@ func make_loop(name: StringName, parent: Node3D, volume_db := -6.0, max_distance
 	p.play()
 	return p
 
+## The music of the map (or the menu). Fights, bosses, cutscenes and conversations layer over it: see MusicDirector.
 func play_music(name: StringName, fade := 2.0) -> void:
-	if name == _music_current:
-		return
-	_music_current = name
-	var path := MUSIC_DIR + String(name) + ".wav"
-	var incoming := _music_b if _music_a.playing else _music_a
-	var outgoing := _music_a if incoming == _music_b else _music_b
-	var tw := create_tween().set_parallel(true)
-	if ResourceLoader.exists(path):
-		var st: AudioStream = load(path)
-		if st is AudioStreamWAV:
-			st.loop_mode = AudioStreamWAV.LOOP_FORWARD
-			st.loop_end = int(st.get_length() * st.mix_rate)
-		incoming.stream = st
-		incoming.volume_db = -40.0
-		incoming.play()
-		tw.tween_property(incoming, "volume_db", 0.0, fade)
-	if outgoing.playing:
-		tw.tween_property(outgoing, "volume_db", -40.0, fade)
-		tw.chain().tween_callback(outgoing.stop)
+	Music.play(name, fade)
 
 func play_ambience(name: StringName) -> void:
 	if name == _amb_current:
