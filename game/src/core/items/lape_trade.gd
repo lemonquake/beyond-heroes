@@ -220,8 +220,11 @@ static func requirements(hero: HeroData, it: ItemInstance) -> Array:
 		out.append(["Licensed: %s. %s License bonus: %s." % [lic.get("name", ""), lic.get("desc", ""), ", ".join(mods)], null])
 	if hero == null:
 		return out
+	if not it.base.wearers.is_empty():
+		out.append([DataSpecialWeapons.wearers_text(it.base) + ".", hero.cls == null or DataSpecialWeapons.can_wear(it.base, hero.cls.id)])
 	if it.unbound:
-		out.append(["Unbound: no level, attribute or rank requirement.", true])
+		out.append(["Unbound: no level or attribute requirement; wearable from Class %s." % DataGuilds.letter(DataSpecialWeapons.UNBOUND_RANK),
+			hero.tier >= DataSpecialWeapons.UNBOUND_RANK])
 		return out
 	var lvl := hero.progress.level
 	out.append(["Requires level %d" % it.required_level(), lvl >= it.required_level()])

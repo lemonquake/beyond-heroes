@@ -38,6 +38,10 @@ extends Resource
 @export var class_hint: StringName = &""  # knight / mage preference (drop weighting, shop stock)
 @export var sellable := true
 @export_multiline var lore := ""
+# bh-026: who may wear it — hero class ids and Tempo class ids (empty = anyone); a story piece is never generated
+# (loot, merchants, crafting): it exists only where the story or a code puts it (DataSpecialWeapons)
+@export var wearers: Array = []
+@export var story := false
 
 const ITEM_MODEL := "res://assets/items/%s.glb"
 

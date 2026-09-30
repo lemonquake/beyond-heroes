@@ -221,6 +221,9 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 		_char[ck] = _legend_mat(base, src as BaseMaterial3D, lite)
 		return _char[ck]
 	var imported := src as BaseMaterial3D
+	if base == "BH_Baked":
+		_char[ck] = _baked_mat(imported, lite)
+		return _char[ck]
 	var m := StandardMaterial3D.new()
 	var d: Array = CHAR.get(base, [])
 	if base == "BH_Cloth_Primary":
@@ -266,6 +269,20 @@ const LEGEND := {
 	"BH_Horn": ["tyrant_bone", 0.3, 0.8], "BH_Fang": ["tyrant_bone", 0.2, 0.6], "BH_Bone": ["tyrant_bone", 0.3, 0.8],
 	"BH_Steel": ["engraved_plate", 0.5, 0.5], "BH_Silver": ["engraved_plate", 0.4, 0.5], "BH_Hilt": ["engraved_plate", 0.4, 0.5],
 }
+
+## bh-026: sculpted pieces whose painted colours ride the vertex colour ("BH_Baked__it_<id>", the Ember Dragon set's
+## sword and shield, tools/blender/items/special_set.py).
+static func _baked_mat(imported: BaseMaterial3D, lite: bool) -> Material:
+	var m := StandardMaterial3D.new()
+	m.vertex_color_use_as_albedo = true
+	m.vertex_color_is_srgb = imported.vertex_color_is_srgb if imported else true
+	m.albedo_color = Color.WHITE
+	m.metallic = imported.metallic if imported else 0.35
+	m.roughness = imported.roughness if imported else 0.45
+	m.rim_enabled = not lite
+	m.rim = 0.2
+	m.rim_tint = 0.5
+	return m
 
 static func _legend_mat(base: String, imported: BaseMaterial3D, lite: bool) -> Material:
 	var d: Array = LEGEND[base]

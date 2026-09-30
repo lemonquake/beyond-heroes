@@ -407,6 +407,8 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 	var result: Array[Node3D] = []
 	var skeleton: Skeleton3D = visual.skeleton
 	if not skeleton: return result
+	if not hero:
+		_wear_special(skeleton, equipment, result)
 	for slot in SLOTS:
 		if slot == "main_weapon" or (slot == "helm" and skip_helm): continue
 		var item := equipment.get_item(StringName(slot))
@@ -466,6 +468,28 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 			(child as Node3D).transform = skeleton.get_bone_global_rest(oi).affine_inverse() * target * local
 			result.append(ob)
 	return result
+
+## bh-026: the Ember Dragonhide on an armoured class body (a knight-type Tempo). The hero wears the fitted, skinned
+## cuirass (HeroWear); its item model is the same cuirass as it sits on the hero in the idle pose, authored round the
+## chest joint, so here it rides the chest bone, scaled out to the bulkier class body.
+const SPECIAL_CLASS_FIT := Vector3(1.2, 1.02, 1.28)
+
+static func _wear_special(skeleton: Skeleton3D, equipment: Equipment, result: Array[Node3D]) -> void:
+	var item := equipment.get_item(&"armor")
+	if item == null or not DataSpecialWeapons.is_special(item.base):
+		return
+	var bi := skeleton.find_bone("chest")
+	if bi < 0:
+		return
+	var ba := BoneAttachment3D.new()
+	ba.name = "Set_special_armor"
+	ba.bone_name = "chest"
+	skeleton.add_child(ba)
+	var piece := ItemModels.instance(item.base)
+	ba.add_child(piece)
+	var rest := skeleton.get_bone_global_rest(bi)
+	piece.transform = rest.affine_inverse() * Transform3D(Basis.from_scale(SPECIAL_CLASS_FIT), rest.origin)
+	result.append(ba)
 
 ## bh-022: the worn piece is the item's own model (tools/blender/items/boss_regalia.py) with the game's materials;
 ## the older procedural regalia (create_piece) remains the fallback when a model is missing.

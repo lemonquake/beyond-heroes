@@ -134,7 +134,7 @@ static func bases() -> Array:
 			"class_hint": &"knight" if a[6] == &"heavy" else &"mage"}))
 	# ---- Leggings (bh-024) ----
 	out.append_array(DataLeggings.bases())
-	out.append_array(DataSpecialWeapons.bases())       # bh-024: empty until the special weapons' models are added
+	out.append_array(DataSpecialWeapons.bases())       # bh-026: the Ember Dragon set (Aljay's, knights only)
 	# ---- Accessories ----
 	out.append(_b(&"copper_ring", "Copper Ring", &"accessory", "ring", {"level_req": 1, "value": 20}))
 	out.append(_b(&"silver_ring", "Silver Ring", &"accessory", "ring_2", {"level_req": 8, "value": 40, "implicit": [StatModifier.flat(&"res_all", 0.03)]}))
@@ -546,7 +546,7 @@ static func sets() -> Array:
 		6: {"desc": "+8% Cast Speed and +1.5 Mana Regeneration", "mods": [StatModifier.inc(&"cast_speed", 0.08), StatModifier.flat(&"mana_regen", 1.5)]},
 	}
 	sage.lore = "The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea."
-	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets()
+	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets() + DataSpecialWeapons.sets()
 
 ## Faction licenses for Licensed-tier items: fixed specialization bonus [stat, op, base, per item level].
 static func licenses() -> Dictionary:

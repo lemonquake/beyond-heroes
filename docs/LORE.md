@@ -332,7 +332,9 @@ the Registry. Emblem: a split crown with a rising blade of light between the hal
 - **Twelve winters ago — the Night of Black Wings.** A Sulvane war-Tyrant, **Vharzul the Dusk Tyrant**, fell on Malasugue.
   Aljay drove his lance through its heart. Its blood — the wrath of the Age of Wrath — poured into him. His armour
   fused with its black scales; the red aura never left him. The darkness wanted him to burn the world. **He used it to
-  guard Malasugue instead**, for nine winters.
+  guard Malasugue instead**, for nine winters. *(bh-026)* That night he wore the **Ember Dragon** set from the
+  Dragonforge — the Ember Dragonslayer at his side, the Aegis of Fragnir, the Ember Dragonhide — the last Legendary set
+  he wore as a man; the black scales grew over the Dragonhide (docs/SPECIAL_WEAPONS.md).
 - **Three winters ago — the Winter of Chains.** High Registrar **Orsolan Vey** of the Accord feared what Aljay carried
   and sold the Three to the **Forsaken Legion** (knights who forsook the oath of the Binding and serve the Pact of
   Wrath's Rekindling; they hunt "wrath-bearers" to wake the Tyrants). The Registry ordered the Three to the **Weeping

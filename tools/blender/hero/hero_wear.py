@@ -51,7 +51,7 @@ def shoes():
 
 
 # ---- item modules -----------------------------------------------------------------------------------------------------
-for _m in ("hero_wear_torso", "hero_wear_ends", "hero_wear_legs"):
+for _m in ("hero_wear_torso", "hero_wear_ends", "hero_wear_legs", "hero_wear_special"):
     if os.path.exists(os.path.join(HERE, _m + ".py")):
         importlib.import_module(_m)
 

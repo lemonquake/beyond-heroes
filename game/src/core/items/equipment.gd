@@ -8,6 +8,9 @@ var slots := {}              # slot StringName -> ItemInstance or null
 ## Wearer's hero tier rank (DataGuilds: 0 Unranked .. 8 SSS). Rarities from Licensed up need a minimum tier.
 ## A bare Equipment (tools, previews) is ungated; HeroData keeps this in sync with the hero's tier.
 var tier_rank := DataGuilds.MAX_RANK
+## bh-026: the wearer's class id, for pieces only some classes may wear (ItemBaseDef.wearers). "" = ungated (a bare
+## Equipment); HeroData sets the hero's class, TempoRules checks a Tempo's class itself.
+var wearer: StringName = &""
 ## Invalid legacy hand combinations are removed from combat and retained until bag space is available.
 var recovered_items: Array = []
 
@@ -30,7 +33,12 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 	var allowed: Array = item.base.equipment_slots()
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
-	if not item.unbound:         # bh-024: Unbound pieces ask for no level, rank or attributes
+	if wearer != &"" and not DataSpecialWeapons.can_wear(item.base, wearer):
+		return DataSpecialWeapons.wearers_text(item.base)
+	if item.unbound:             # bh-024/026: Unbound pieces ask for no level or attributes, and Class E at most
+		if tier_rank < DataSpecialWeapons.UNBOUND_RANK:
+			return "Requires a Class %s hero (Unbound gear)" % DataGuilds.letter(DataSpecialWeapons.UNBOUND_RANK)
+	else:
 		if level < item.required_level():
 			return "Requires level %d" % item.required_level()
 		var need := DataGuilds.rank_for_rarity(item.rarity)

@@ -730,7 +730,7 @@ func dress_equipment(equipment: Equipment) -> void:
 	var worn := {}
 	for slot in equipment.slots:
 		var item := equipment.get_item(slot)
-		if item and preload("res://src/actors/boss_set_visuals.gd").has_theme(item.base.set_id):
+		if item and (preload("res://src/actors/boss_set_visuals.gd").has_theme(item.base.set_id) or DataSpecialWeapons.is_special(item.base)):
 			parts.append("%s:%s" % [slot,item.base.id])
 			worn[slot] = String(item.base.id)
 	var signature := ",".join(parts)

@@ -2,6 +2,17 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-026 - The Ember Dragon set
+
+Prepared 1 October 2026.
+
+- The sculpts in models/special_weapons/ are in the game as the **Ember Dragon** set, the last Legendary set Aljay wore while he was still human: the **Ember Dragonslayer** (sword), the **Aegis of Fragnir** (shield) and the **Ember Dragonhide** (cuirass). Knights only (Swordsman and Warden Tempos too). Two- and three-piece set bonuses; the full set ignites enemies.
+- The cuirass is fitted to the hero's body: it sits as sculpted in the idle pose, its pauldrons follow the arms, and it follows the body sliders. The sword and shield keep the sculpts' painted colours. Knight-type Tempos wear the cuirass too.
+- `alj` now gives the whole set as Unbound copies with four open sockets: no level or attribute requirement, wearable from Class E. Unbound gear asks for Class E (it asked for no class before).
+- The pieces are story pieces: never loot, stock or crafts.
+
+Sources: docs/SPECIAL_WEAPONS.md, game/tests/unit/test_bh026.gd, work/lemondev/bh-026/evidence.
+
 ## BH-025 - Music system, recorded themes and weapon sounds
 
 Prepared 30 September 2026.

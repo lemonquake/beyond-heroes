@@ -282,7 +282,9 @@ func test_unbound_items_have_no_requirements() -> void:
 	var attrs := h.progress.base_attributes()
 	ok(h.equipment.check(it, &"leggings", 1, attrs) != "", "a level-40 Legendary is out of a new mage's reach")
 	it.unbound = true
-	eq(h.equipment.check(it, &"leggings", 1, attrs), "", "Unbound: no level, rank or attribute requirement")
+	ok(h.equipment.check(it, &"leggings", 1, attrs).contains("Class E"), "bh-026: Unbound gear asks for Class E")
+	h.equipment.tier_rank = 1
+	eq(h.equipment.check(it, &"leggings", 1, attrs), "", "Unbound: no level or attribute requirement, Class E is enough")
 	ok(h.equipment.check(it, &"armor", 1, attrs) != "", "but it still only fits its own slot")
 	var back := ItemInstance.from_dict(JSON.parse_string(JSON.stringify(it.to_dict())))
 	ok(back.unbound, "Unbound survives a save")

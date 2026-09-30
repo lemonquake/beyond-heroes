@@ -275,9 +275,15 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			var active: bool = owned >= int(n)
 			v.add_child(lbl("(%d) %s" % [n, sd.bonuses[n].get("desc", "")], 15, SET_ON if active else SET_OFF))
 	# requirements
+	if it.is_equipment() and not it.base.wearers.is_empty():
+		# bh-026: pieces only some classes may wear (the Ember Dragon set: knights)
+		var fits := hero == null or hero.cls == null or DataSpecialWeapons.can_wear(it.base, hero.cls.id)
+		v.add_child(gap(2))
+		v.add_child(lbl(DataSpecialWeapons.wearers_text(it.base), 14, UITheme.TEXT_DIM if fits else UITheme.BAD))
 	if it.is_equipment() and it.unbound:
 		v.add_child(gap(2))
-		v.add_child(lbl("Unbound: no level, attribute or rank requirement", 14, Color(1.0, 0.72, 0.35)))
+		v.add_child(lbl("Unbound: no level or attribute requirement; wearable from Class %s" % DataGuilds.letter(DataSpecialWeapons.UNBOUND_RANK),
+			14, Color(1.0, 0.72, 0.35) if hero == null or hero.tier >= DataSpecialWeapons.UNBOUND_RANK else UITheme.BAD))
 	elif it.is_equipment() and hero:
 		var reqs := []
 		if it.required_level() > 1:

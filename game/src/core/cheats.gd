@@ -5,7 +5,8 @@ class_name Cheats
 ##   greg    +1000 gold
 ##   azrin   +3 levels (levels, points and all, exactly as if earned)
 ##   azrael  full HP and mana (the hero and every living Tempo at their side)
-##   alj    every special weapon as an Unbound variant: no level, attribute or rank requirement (DataSpecialWeapons)
+##   alj    Aljay's Ember Dragon set (sword, shield, cuirass) as Unbound copies: no level or attribute requirement,
+##          wearable from Class E, four sockets open; knights only (DataSpecialWeapons)
 ##   quake team  calls an AI ally hero to fight beside you (up to 3, Single Player only): it follows, protects, shops for the
 ##               best gear, binds a Tempo and heals itself (QuakeTeam)
 
@@ -39,7 +40,7 @@ const DESCRIPTIONS := {
 	"wellrested": "Grant at least 30 minutes of Well Rested: +10% XP and +0.5 HP regeneration. Uses play time.",
 	"freshstart": "Refund all allocated stat points for free. Does not reset your level, skills or talents.",
 	"secondwind": "Revive all fallen bound Tempos at full HP and mana for free. Does not revive the hero.",
-	"alj": "Add every Legendary special weapon as an Unbound variant that can be equipped without level, attribute or rank requirements. Requires enough bag space for all of them."
+	"alj": "Add Aljay's Ember Dragon set (Ember Dragonslayer, Aegis of Fragnir, Ember Dragonhide) as Unbound Legendary copies with 4 sockets: no level or attribute requirements, wearable from Class E. Knights only (and Swordsman and Warden Tempos). Requires enough bag space for all three."
 }
 
 static func is_code(text: String) -> bool:
@@ -146,20 +147,27 @@ static func _give_items(hero: HeroData, base_id: StringName, count: int) -> Stri
 	hero.inventory.add(item)
 	return "Cheat: +%d %s." % [count, item.base.display_name]
 
-## bh-024 "alj": every special weapon (DataSpecialWeapons) as an Unbound variant — equippable without requirements.
+## bh-024/026 "alj": Aljay's Ember Dragon set (DataSpecialWeapons) as Unbound copies with four open sockets.
 static func _give_special(hero: HeroData) -> String:
 	var ids := DataSpecialWeapons.ids()
 	if ids.is_empty():
-		return "Cheat: no special weapons are in this build yet."
+		return "Cheat: no special equipment is in this build."
 	if hero.inventory.free_cells() < ids.size():
-		return "Cheat: make room in your bag for %d special weapons; nothing added." % ids.size()
+		return "Cheat: make room in your bag for %d pieces; nothing added." % ids.size()
 	var names: Array[String] = []
+	var first: ItemInstance = null
 	for id in ids:
 		var it := DataSpecialWeapons.unbound(id, hero.progress.level)
 		if it:
 			hero.inventory.add(it)
 			names.append(it.display_name())
-	return "Cheat: +%s (Unbound: no requirements)." % ", ".join(names)
+			first = it if first == null else first
+	var note := "Unbound, %d sockets, wearable from Class %s" % [DataSpecialWeapons.UNBOUND_SOCKETS, DataGuilds.letter(DataSpecialWeapons.UNBOUND_RANK)]
+	if first and hero.cls and not DataSpecialWeapons.can_wear(first.base, hero.cls.id):
+		note += "; %s" % DataSpecialWeapons.wearers_text(first.base)
+	elif hero.tier < DataSpecialWeapons.UNBOUND_RANK:
+		note += "; register with a guild to wear them"
+	return "Cheat: +%s (%s)." % [", ".join(names), note]
 
 static func _give_gold(hero: HeroData, amount: int) -> String:
 	if hero == null:

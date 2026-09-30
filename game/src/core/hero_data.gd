@@ -99,6 +99,7 @@ const RESTED_REGEN := 0.5
 
 func setup(p_cls: ClassDef, p_name: String) -> void:
 	equipment.tier_rank = tier
+	equipment.wearer = p_cls.id if p_cls else &""
 	cls = p_cls
 	hero_name = p_name
 	progress.setup(cls)

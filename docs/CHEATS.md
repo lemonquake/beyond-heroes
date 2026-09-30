@@ -25,4 +25,4 @@ Codes can be repeated. Rewards and point changes are kept by the normal save sys
 | `wellrested` | Grant at least 30 minutes of Well Rested: +10% XP and +0.5 HP regeneration. Uses play time. |
 | `freshstart` | Refund all allocated stat points for free. Does not reset your level, skills or talents. |
 | `secondwind` | Revive all fallen bound Tempos at full HP and mana for free. Does not revive the hero. |
-| `alj` | Add every Legendary special weapon as an Unbound variant that can be equipped without level, attribute or rank requirements. Requires enough bag space for all of them. |
+| `alj` | Add Aljay's Ember Dragon set (Ember Dragonslayer, Aegis of Fragnir, Ember Dragonhide) as Unbound Legendary copies with 4 sockets: no level or attribute requirements, wearable from Class E. Knights only (and Swordsman and Warden Tempos). Requires enough bag space for all three. |
