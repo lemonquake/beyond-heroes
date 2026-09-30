@@ -18,6 +18,7 @@ import numpy as np
 import item_gear as G
 import hero_wear_kit as WK
 from hero_wear_kit import K, M, item, pal, shell, attach
+from bh_math import Rx, Ry, Rz  # noqa: F401
 
 HEAD_C = (0.0, -0.040)            # the skull's centre line (x, y)
 EYE_Z = 1.687
@@ -559,7 +560,7 @@ def _glove(id, fist_tris=640):
     cuff_m = pal(s.get("cuff") or plate or s.get("mat", "leather"))
     parts = [simplify(shell(lambda V: WK.hand(V, 1.0, 0.715), 0.005, m, "glove", relax=1), fist_tris)]
     if plate:
-        pm = pal(plate)
+        pm = WK.plate(plate)
         parts += _cuff(0.60, 0.013, 0.020, cuff_m, trim, rings=3)
 
         def back(V):          # the back of the hand, wrist to knuckles
@@ -591,6 +592,197 @@ def _glove_item(id):
     return fn
 
 
+# ---- boots ------------------------------------------------------------------------------------------------------------
+# A boot is the skin of the foot and the lower leg pushed out (10 mm on the foot, 12 mm up the shaft, flaring at its top)
+# up to a height from the item's own shaft (spec "h"); the skin is hidden inside it. Plated boots add a greave down the
+# shin and lames over the instep. The leggings stay within 6.5 mm below the calf, so every shaft closes over them.
+def _leg_axis(z):
+    """Centre (x, y) of the left lower leg at height z (smoothed body sections)."""
+    zs = np.linspace(0.08, 0.46, 20)
+    cs = np.array([WK.leg_section(zz)[:2] for zz in zs])
+    k = np.ones(3) / 3.0
+    cx = np.convolve(np.pad(cs[:, 0], 1, mode="edge"), k, "valid")
+    cy = np.convolve(np.pad(cs[:, 1], 1, mode="edge"), k, "valid")
+    return np.interp(z, zs, cx), np.interp(z, zs, cy)
+
+
+def _shin_front(z0, z1, a0=205.0, a1=335.0):
+    """The front of the left shin between z0 and z1, from angle a0 to a1 around the leg (front = 270)."""
+    def f(V):
+        cx, cy = _leg_axis(V[:, 2])
+        ang = np.degrees(np.arctan2(V[:, 1] - cy, V[:, 0] - cx)) % 360.0
+        mid, half = (a0 + a1) / 2.0, (a1 - a0) / 2.0
+        d = np.abs((ang - mid + 180.0) % 360.0 - 180.0)
+        return np.minimum.reduce([V[:, 2] - z0, z1 - V[:, 2], (half - d) * 0.001, V[:, 0]])
+    return f
+
+
+def _instep(y0, y1, z0=0.035):
+    """The top of the left foot between y0 (toward the toes, -Y) and y1."""
+    return lambda V: np.minimum.reduce([V[:, 2] - z0, V[:, 1] - y0, y1 - V[:, 1], V[:, 0], 0.16 - V[:, 2]])
+
+
+def _leg_ring(z, grow, mat, tube=0.004, n=14):
+    """A strap round the left lower leg (four-sided cord: straps are flat)."""
+    cx, cy, rx, ry = WK.leg_section(z)
+    ax, ay = _leg_axis(z)
+    P = [(ax + (rx + grow) * math.cos(a), ay + (ry + grow) * math.sin(a), z) for a in np.linspace(0, 2 * math.pi, n + 1)]
+    return K.tube(P, [(tube * 0.6, tube * 1.3)] * len(P), mat, n=4, up=(0, 0, 1), cap=False, name="strap")
+
+
+def boot_top(id):
+    return 0.12 + float(spec_of(id).get("h", 0.3)) * 0.85
+
+
+def _boot(id):
+    s = spec_of(id)
+    m = pal(s.get("mat", "leather"))
+    plate = s.get("plate")
+    trim = pal(s.get("cuff") or s.get("trim") or "gold")
+    top = boot_top(id)
+    flare = float(s.get("flare", 0.0))
+
+    def off(V):
+        z = V[:, 2]
+        return 0.0105 + 0.0025 * WK.step(0.10, 0.20, z) + (0.003 + flare * 0.5) * WK.step(top - 0.09, top, z)
+    sel = lambda V: WK.foot(V, 1.0, top)                           # noqa: E731
+    parts = [simplify(shell(sel, off, m, "boot", relax=6), 660 if plate else 820)]
+    raw = shell(sel, off, m, "boot", rim=False, relax=6)
+    loops = border_loops(raw)
+    if loops:
+        lp = max(loops, key=lambda l: raw.V[l][:, 2].mean())
+        parts.append(cord_on(raw, lp, 0.0065 if s.get("cuff") else 0.0035, trim, n=20, sides=4, name="cuff"))
+    sole = lambda V: np.minimum.reduce([0.024 - V[:, 2], V[:, 0], 0.27 - np.abs(V[:, 0])])   # noqa: E731
+    parts.append(simplify(shell(sole, 0.0138, pal(s.get("sole", "darkleather")), "sole", relax=6), 160))
+    extra = []
+    if plate:
+        pm = WK.plate(plate)
+        g = shell(_shin_front(0.15, top - 0.012), 0.0195, pm, "greave", relax=8)
+        parts.append(simplify(g, 200))
+        graw = shell(_shin_front(0.15, top - 0.012), 0.0195, pm, "greave", rim=False, relax=8)
+        gl = border_loops(graw)
+        if gl:
+            parts.append(cord_on(graw, max(gl, key=len), 0.0032, trim, n=16, name="greave_trim"))
+        for i, (y0, y1) in enumerate(((-0.17, -0.12), (-0.125, -0.075), (-0.08, -0.03))):
+            lame = shell(_instep(y0, y1, 0.03 + 0.012 * i), 0.0185 + 0.001 * i, pm, "lame", relax=5)
+            parts.append(rigid(simplify(lame, 70), "foot.L"))
+    for z in ((0.16, 0.26) if s.get("straps") else ()):
+        if z < top - 0.03:
+            extra.append(_leg_ring(z, 0.016, pal(s["straps"]), 0.0045))
+            cx, cy = _leg_axis(z)
+            _, _, rx, _ = WK.leg_section(z)
+            extra.append(K.box(0.008, 0.016, 0.018, (cx + rx + 0.017, cy - 0.01, z), trim, 0.002))
+    if s.get("wings"):
+        o = [(0.0, 0.0), (0.05, 0.055), (0.018, 0.045), (0.045, 0.085), (-0.008, 0.03)]
+        cx, cy = _leg_axis(top - 0.06)
+        _, _, rx, _ = WK.leg_section(top - 0.06)
+        extra.append(K.slab(o, 0.005, pal(s["wings"]), axis="x").move((cx + rx + 0.02, cy + 0.01, top - 0.09)))
+    if s.get("glow"):
+        z = min(top - 0.05, 0.3)
+        cx, cy = _leg_axis(z)
+        H = WK.leg_section(z)
+        y = cy - H[3] - (0.024 if plate else 0.016)
+        extra.append(K.gem((cx, y, z), 0.011, pal(s["glow"]), rot=(90, 0, 0)))
+    out = parts + (attach(extra, bones=["shin.L"], k=6) if extra else [])
+    # within the boot budget (1,600 a foot): what is over comes off the upper, the densest part
+    over = sum(tris_of(p) for p in out) - 1480
+    if over > 0:
+        out[0] = simplify(out[0], max(360, tris_of(out[0]) - over))
+    return out
+
+
+def _boot_item(id):
+    @item(id, hide={"boot": [-1.0, round(boot_top(id) - 0.015, 3)]}, sides=True)
+    def fn():
+        return _boot(id)
+    return fn
+
+
+# ---- jewellery --------------------------------------------------------------------------------------------------------
+# Rings on the fist's middle finger (left slots on the left hand, right on the right), pendants on the breastbone over
+# whatever is worn, charms hanging from the left hip. Built from the item models' own parts.
+RING_AT = (0.829, -0.018, 1.426)
+PENDANT_AT = (0.0, -0.172, 1.37)
+
+
+def _ring_worn(id):
+    s = spec_of(id)
+    src = [p for p in G.ring(dict(s))]
+    for p in src:
+        p.mat = pal(p.mat)
+    # item: band round the Y axis, stone on top (+Z) at z = 0.024, the band's centre at z = 0.011
+    for p in src:
+        p.move((0.0, 0.0, -0.011))
+        p.rot(Rx(90.0))                  # band now round the Z axis, the stone toward -Y
+        p.rot(Rz(-90.0))                 # the stone toward +X: the front of the fist
+        p.scale((0.95, 0.95, 0.95))
+        p.move(RING_AT)
+    out = attach(src, bone="hand.L", keys=False)
+    total = sum(tris_of(p) for p in out)
+    return [simplify(p, max(12, int(tris_of(p) * 260 / total))) for p in out] if total > 270 else out
+
+
+def _neck_chain(mat, r=0.0022):
+    P = [(0.0, 0.062, 1.548), (0.058, 0.03, 1.548), (0.083, -0.03, 1.525), (0.078, -0.098, 1.47), (0.048, -0.15, 1.415),
+         (0.0, -0.168, 1.395), (-0.048, -0.15, 1.415), (-0.078, -0.098, 1.47), (-0.083, -0.03, 1.525), (-0.058, 0.03, 1.548),
+         (0.0, 0.062, 1.548)]
+    return K.tube(P, [r] * len(P), mat, n=5, up=(0, 0, 1), cap=False, name="chain")
+
+
+def _pendant_worn(id):
+    s = spec_of(id)
+    src = [p for p in G.amulet(dict(s)) if p.name != "tube" or len(p.V) < 40]
+    src = [p for p in src if not (p.name == "tube" and p.V[:, 1].max() > 0.06)]
+    for p in src:
+        p.mat = pal(p.mat)
+    c = np.vstack([p.V for p in src]).mean(0)
+    for p in src:
+        p.move(-c)
+        p.rot(Rx(90.0))                  # the face (+Z) toward -Y
+        p.scale((1.25, 1.25, 1.25))
+        p.move(PENDANT_AT)
+    chain = _neck_chain(pal(s.get("chain", s.get("mat", "gold"))))
+    out = attach(src, bone="chest", keys=False)
+    total = sum(tris_of(p) for p in out)
+    if total > 180:
+        out = [simplify(p, max(8, int(tris_of(p) * 180 / total))) for p in out]
+    return out + attach([chain], bone="chest", keys=False)
+
+
+def _charm_worn(id):
+    s = spec_of(id)
+    src = [p for p in G.charm(dict(s))]
+    for p in src:
+        p.mat = pal(p.mat)
+    c = np.vstack([p.V for p in src]).mean(0)
+    at = (0.172, -0.118, 0.95)
+    for p in src:
+        p.move(-c)
+        p.rot(Rx(90.0))
+        p.rot(Rz(-28.0))
+        p.scale((1.2, 1.2, 1.2))
+        p.move(at)
+    cordp = K.tube([(0.165, -0.112, 1.05), (0.17, -0.118, 1.0), (0.172, -0.12, 0.985)], [0.0018] * 3, pal(s.get("cord", "leather")), n=5)
+    return attach(src + [cordp], bones=["hips", "thigh.L"], keys=False)
+
+
+def _jewel_item(id):
+    kind = G.GEAR[id][0].__name__
+    if kind == "ring":
+        @item(id, sides=True)
+        def fn():
+            return _ring_worn(id)
+    elif kind == "amulet":
+        @item(id)
+        def fn():
+            return _pendant_worn(id)
+    else:
+        @item(id)
+        def fn():
+            return _charm_worn(id)
+    return fn
+
+
 HELMS = ["iron_helm", "barbute_helm", "visored_greathelm", "guardian_helm", "linen_hood", "arcanist_cowl", "seers_circlet", "sage_hood",
          "depth_deepwarden_crown", "depth_prismkeeper_crown", "depth_vaultpath_crown", "depth_gloomthread_crown"]
 GLOVES = ["iron_gauntlet", "spiked_gauntlet", "silk_glove", "runed_glove", "guardian_gauntlets", "sage_gloves", "depth_deepwarden_grips",
@@ -603,3 +795,7 @@ ALL = HELMS + GLOVES + BOOTS + JEWELS
 
 for _id in GLOVES:
     _glove_item(_id)
+for _id in BOOTS:
+    _boot_item(_id)
+for _id in JEWELS:
+    _jewel_item(_id)

@@ -86,6 +86,13 @@ const KIND := {
 		"Soft things last longer than you think. They do not try to be hard.",
 		"Hm. Mended at the elbow, twice. Somebody could not bear to part with it.",
 	],
+	&"leggings": [
+		"Leggings. Nobody writes songs about them, and nobody wins a fight without them.",
+		"The knees are scuffed and the seat is shiny. Somebody knelt to pray and sat to wait. Both, a lot.",
+		"Hm. Mud to the thigh on one side only. The wearer forded rivers with a limp.",
+		"A good pair of leggings keeps your dignity and your blood on the inside.",
+		"Every buckle re-punched a hole further out. Fed well, this one. Or bloated with courage.",
+	],
 	&"gloves": [
 		"Gloves. Hands tell everything. Gloves tell what the hands wanted to hide.",
 		"The fingertips are worn through. A climber, or a thief. Possibly both.",

@@ -4,7 +4,7 @@ extends Resource
 
 @export var id: StringName
 @export var display_name: String
-@export var category: StringName          # weapon, shield, helm, inner_garment, armor, gloves, boots, accessory, material, consumable
+@export var category: StringName          # weapon, shield, helm, inner_garment, armor, leggings, gloves, boots, accessory, material, consumable
 @export var weapon_type: StringName       # for category weapon
 @export var icon: String                  # res path to icon svg
 @export var level_req := 1
@@ -69,6 +69,7 @@ func icon_path() -> String:
 			&"helm": fb = "res://assets/ui/icons/items/%s.svg" % ("helm_hood" if weight_class == &"cloth" else "helm_plate")
 			&"armor": fb = "res://assets/ui/icons/items/%s.svg" % ("armor_robe" if weight_class == &"cloth" else "armor_plate")
 			&"inner_garment": fb = "res://assets/ui/icons/items/inner_garment.svg"
+			&"leggings": fb = "res://assets/ui/icons/items/%s.svg" % ("leggings_plate" if weight_class == &"heavy" else ("leggings_leather" if class_hint in [&"ranger", &"shadowblade"] else "leggings_cloth"))
 			&"gloves": fb = "res://assets/ui/icons/items/%s.svg" % ("gloves_cloth" if weight_class == &"cloth" else "gloves_plate")
 			&"boots": fb = "res://assets/ui/icons/items/%s.svg" % ("boots_cloth" if weight_class == &"cloth" else "boots_plate")
 			&"accessory": fb = "res://assets/ui/icons/items/ring.svg"

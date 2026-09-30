@@ -101,7 +101,7 @@ const WEAPON_VARIANTS := [
 	["Bow", &"bow"], ["Crossbow", &"crossbow"], ["Staff", &"staff"], ["Wand", &"wand"],
 ]
 const ARMOR_VARIANTS := [
-	["Helm", [&"helm"]], ["Body Armor", [&"armor"]], ["Inner Garment", [&"inner_garment"]], ["Gloves", [&"gloves"]],
+	["Helm", [&"helm"]], ["Body Armor", [&"armor"]], ["Inner Garment", [&"inner_garment"]], ["Leggings", [&"leggings"]], ["Gloves", [&"gloves"]],
 	["Boots", [&"boots"]], ["Shield", [&"shield"]],
 ]
 

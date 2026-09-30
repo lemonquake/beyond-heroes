@@ -2,6 +2,21 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-024 - Leggings, the complete worn wardrobe, Unbound items
+
+Prepared 30 September 2026.
+
+- New equipment slot: **Leggings**, between Armor and the gloves (14 slots). Leggings roll the armour enchantments plus Evasion and Knockback Resistance, carry Mythical, Legendary, Aether and relic powers, take three faction licences and socket crystals, and weigh 1.6 (cloth) to 9 (plate). Old saves load with the slot empty. Multiplayer protocol advanced to 11.
+- 34 unique leggings: five for each class from level 1 to 30 (Knight plate, Mage silk, Ranger hide, Shadowblade dark leather), a leg piece for each of the four depth groups (level 44), Aether Guardian Cuisses and Starbound Sage Leggings (both sets now six pieces, with a new six-piece bonus), and eight named uniques (Rimewalkers, Windswift, Oathbound, Echoing Bastion, Stillwater, Bloodrunner, Stormstriders, Riftwalker). Every class starts in a pair. See docs/LEGGINGS.md.
+- Each of the fifteen boss collections gained its **Legguards** (202 pieces in all; 14 per collection, 13 for two-handed ones): class-shaped thigh regalia in the set's palette and emblem.
+- Merchants: Brannoc, Seris, Taicho's Arms Exchange, Stonehand's Field Kit and the Hooded Stranger stock leggings; Brannoc and Seris also sell the set leggings after the Catacombs ritual and a level-28 pair; the Stranger sells Windswift after the Warden falls. Crafters can make leggings.
+- Inventory and Tempo paper dolls: clothing down the left (helm, inner garment, armour, leggings, glove, boot), jewellery down the right, with an engraved trousers glyph for the empty slot.
+- The hero's wardrobe is complete (the unfinished part of BH-023): every armour, inner garment, helm, glove, boot, ring, amulet and charm now has its own model fitted to the hero body (98 worn pieces), so a mage no longer appears in a knight's hauberk and iron helm. Body garments stop at the hips; the legs are covered by leggings, by plain breeches under a shirt or coat, or by a set-coloured under-layer beneath boss Legguards. Belts, thigh plates, knee cops and ankle cuffs are left off where a shirt, skirt, robe or boot covers them. Worn plate armour uses a less mirror-like finish so it no longer reads as black at night.
+- Unbound items: a variant with no level, attribute or rank requirement. The `alj` code gives every Legendary special weapon as an Unbound variant; the special weapons themselves are waiting for their models (models/special_weapon/ was not in the repository), see docs/SPECIAL_WEAPONS.md.
+- Fixed test_bh023's save call, which stopped the whole headless test run under Godot 4.7.2.
+
+Sources: work/lemondev/bh-024/handoff.md, docs/LEGGINGS.md, game/tests/unit/test_bh024.gd.
+
 ## BH-022 - Socket visuals, infused names, waypoints, Mythic and Eternal Tempos, rebuilt boss collections
 
 Prepared 30 September 2026.

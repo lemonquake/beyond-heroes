@@ -1,6 +1,6 @@
 # Boss equipment sets
 
-Fifteen complete collections contain 187 distinct pieces. They begin dropping when the defeated boss encounter is **actually level 30**; the ordinary +2 boss item-level bonus cannot unlock them early.
+Fifteen complete collections contain 202 distinct pieces. They begin dropping when the defeated boss encounter is **actually level 30**; the ordinary +2 boss item-level bonus cannot unlock them early.
 
 Each eligible encounter drops **exactly one piece from one randomly selected boss set**, in addition to ordinary equipment, materials and other rewards. It replaces that encounter's generic set-piece roll, so there is no second set piece in the same reward bundle.
 
@@ -24,7 +24,9 @@ Ownership counts distinct base items in the bag, worn equipment, bound Tempos, t
 
 ## Wearing a complete set
 
-Each collection has a main weapon, helm, inner garment, armor, left and right gauntlets, left and right greaves, signet, seal, pendant and brooch. One-handed collections also have a shield: **13 pieces** in total. Bow, crossbow, staff, spear and greatsword collections use both hands and have **12 pieces**, with no shield. Each piece has a specific equipment slot.
+Each collection has a main weapon, helm, inner garment, armor, Legguards (bh-024: the Leggings slot), left and right gauntlets, left and right greaves, signet, seal, pendant and brooch. One-handed collections also have a shield: **14 pieces** in total. Bow, crossbow, staff, spear and greatsword collections use both hands and have **13 pieces**, with no shield. Each piece has a specific equipment slot.
+
+The Legguards follow each set's class: knights wear three-lame cuisses and a fauld across the hips, mages silk thigh wraps under an embroidered panel and a front apron, rangers and shadowblades strapped leather thigh guards with a plate and the set's emblem (rangers carry a quiver of spare bolts on the thigh, shadowblades a sheathed knife). On the hero they sit over a plain under-layer in the set's colour. Heroes who completed a collection before bh-024 need its Legguards for the full-collection effect again.
 
 Pieces are **Master** rarity, require at least level 30 and retain the existing **Class D** hero-rank requirement. Each requires 32 of its class's principal attribute (Strength for Knight, Intelligence for Mage, Dexterity for Ranger and Shadowblade). Item level is the defeated encounter's level +2, capped by the existing equipment cap, so later drops scale under the normal damage, defense and affix rules. Higher-level pieces can have higher level requirements.
 
@@ -36,22 +38,21 @@ At three pieces: Knight collections give +10% Defense and +8% maximum health; Ra
 
 | Set | Suggested class | Weapon | Element | Pieces | Full-set effect |
 | --- | --- | --- | --- | ---: | --- |
-| Dragonforge | Knight | Axe | Fire | 13 | Hits have a 15% chance to ignite enemies. |
-| Truth of Raikuru | Ranger | Crossbow | Lightning | 12 | Critical hits chain 30% of their damage as lightning. |
-| Crimson Glory | Knight | Sword | Fire | 13 | Blocks release a 60% weapon-damage shockwave (1 s cooldown). |
-| Grievance of the Fairy | Ranger | Bow | Earth | 12 | Kills restore 2.5% of maximum health. |
-| Wailing Mistress | Mage | Staff | Dark | 12 | Spell hits restore 1.5 Mana. |
-| Winter Court | Mage | Wand | Ice | 13 | Enemies that hit you are Chilled. |
-| Sunken Crown | Knight | Spear | Water | 12 | Take 15% less damage while below 35% health. |
-| Thunder Abbot | Mage | Staff | Lightning | 12 | Chain Lightning gains 2 extra jumps against Wet targets. |
-| Ashfall Pilgrim | Mage | Wand | Fire | 13 | Fire hits spread Burning from burning targets to nearby foes. |
-| Starfall Hunter | Ranger | Crossbow | Light | 12 | Critical hits reduce skill cooldowns by 0.25 seconds. |
-| Gale Nomad | Ranger | Bow | Wind | 12 | Dodging grants 18% more movement speed for 2 seconds. |
-| Obsidian Oath | Knight | Greatsword | Dark | 12 | Every fifth attack releases a staggering radiant shockwave. |
-| Pale Requiem | Shadowblade | Dagger | Ice | 13 | Critical hits restore 2.5% of maximum health. |
-| Serpent Veil | Shadowblade | Claw | Earth | 13 | Evading an attack restores 4 Mana. |
-| Eclipse Dancer | Shadowblade | Dagger | Dark | 13 | Dodging leaves a lightning trail that Shocks enemies. |
-
+| Dragonforge | Knight | Axe | Fire | 14 | Hits have a 15% chance to ignite enemies. |
+| Truth of Raikuru | Ranger | Crossbow | Lightning | 13 | Critical hits chain 30% of their damage as lightning. |
+| Crimson Glory | Knight | Sword | Fire | 14 | Blocks release a 60% weapon-damage shockwave (1 s cooldown). |
+| Grievance of the Fairy | Ranger | Bow | Earth | 13 | Kills restore 2.5% of maximum health. |
+| Wailing Mistress | Mage | Staff | Dark | 13 | Spell hits restore 1.5 Mana. |
+| Winter Court | Mage | Wand | Ice | 14 | Enemies that hit you are Chilled. |
+| Sunken Crown | Knight | Spear | Water | 13 | Take 15% less damage while below 35% health. |
+| Thunder Abbot | Mage | Staff | Lightning | 13 | Chain Lightning gains 2 extra jumps against Wet targets. |
+| Ashfall Pilgrim | Mage | Wand | Fire | 14 | Fire hits spread Burning from burning targets to nearby foes. |
+| Starfall Hunter | Ranger | Crossbow | Light | 13 | Critical hits reduce skill cooldowns by 0.25 seconds. |
+| Gale Nomad | Ranger | Bow | Wind | 13 | Dodging grants 18% more movement speed for 2 seconds. |
+| Obsidian Oath | Knight | Greatsword | Dark | 13 | Every fifth attack releases a staggering radiant shockwave. |
+| Pale Requiem | Shadowblade | Dagger | Ice | 14 | Critical hits restore 2.5% of maximum health. |
+| Serpent Veil | Shadowblade | Claw | Earth | 14 | Evading an attack restores 4 Mana. |
+| Eclipse Dancer | Shadowblade | Dagger | Dark | 14 | Dodging leaves a lightning trail that Shocks enemies. |
 The full-set effects use existing combat behaviors. Individual pieces still roll normal Master affixes; a full collection does not grant every set's effect at once.
 
 ## Appearance (BH-022)

@@ -56,10 +56,18 @@ for ci,cls in enumerate(['knight','mage','ranger','shadowblade']):
   elif cat=='gloves':builder='glove';s={'mat':color,'trim':trim,'runes':gems[ci],'cuff':trim,'plate':trim if ci==0 else None,'spikes':trim if ci==3 else None}
   else:builder='boot';s={'mat':color,'h':.25+.035*ci,'flare':.006+.005*ci,'cuff':trim,'glow':gems[ci],'plate':trim if ci==0 else None,'straps':'darkleather'}
   specs[iid]=[builder,s]
+# bh-024: a leg piece for each group, between the crown and the grips
+for ci,cls in enumerate(['knight','mage','ranger','shadowblade']):
+ title=['Deepwarden','Prismkeeper','Vaultpath','Gloomthread'][ci];noun=['Cuisses','Legwraps','Leggings','Leggings'][ci]
+ name=f'{title} {noun}';iid='depth_'+name.lower().replace(' ','_')
+ rows.append([iid,name,'leggings',cls,44,0,0,['max_hp','max_mana','evasion','move_speed'][ci],[35.,24.,20.,.12][ci],'',0])
+ color=['blued','violet','forest','black'][ci];trim=['bronze','silver','copper','moonsteel'][ci]
+ extra=[{'rivets':True,'fluted':True},{'wraps':trim,'runes':gems[ci],'loose':.1},{'guards':'leather','knee_pad':'leather','straps':'darkleather'},{'plates':'blackiron','knife':True}][ci]
+ specs[iid]=['legs',dict({'kind':['plate','silk','hide','wrap'][ci],'mat':color,'trim':trim,'glow':gems[ci],'belt':'darkleather'},**extra)]
 (HERE/'depth_specs.json').write_text(json.dumps(specs,indent=2)+'\n')
 header='''class_name DataDepthEquipment
 ## Generated catalog; edit tools/blender/items/depth_catalog.py and regenerate.
-## 64 weapons and 16 armor pieces; eight named relics have guaranteed functional powers.
+## 64 weapons and 20 armor pieces; eight named relics have guaranteed functional powers.
 const ROWS := '''
 code=header+'[\n'+',\n'.join('\t'+json.dumps(row) for row in rows)+'\n]'+'''
 
@@ -91,7 +99,7 @@ static func bases() -> Array:
 			b.element_share = (1.0 if cls == &"mage" else 0.25) if b.element != Elements.PHYSICAL else 0.0
 		else:
 			var factor := 1.0 if cls == &"knight" else 0.6
-			b.defense = (12.0 + level * 1.5) * factor * (1.0 if b.category == &"armor" else 0.5)
+			b.defense = (12.0 + level * 1.5) * factor * (1.0 if b.category == &"armor" else (0.6 if b.category == &"leggings" else 0.5))
 		b.weight = float(r[10]) if weapon else DataItems.default_weight(b)
 		b.flavor = "Recovered from the deeper halls. " + ("A fast weapon trades damage per strike for speed." if weapon and b.attacks_per_second > 1.5 else "Made for long journeys below the surface.")
 		if r[9] != "":

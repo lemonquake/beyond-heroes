@@ -1,12 +1,12 @@
 BEYOND HEROES — ITEM AND EQUIPMENT CATALOGUE
-Generated from the game's data by game/tests/tools/item_catalogue.gd (2026-09-29). 302 item bases.
+Generated from the game's data by game/tests/tools/item_catalogue.gd (2026-09-30). 670 item bases.
 Regenerate: "C:/Users/Lemon PC/Desktop/Godot.exe" --headless --path game res://tests/tools/item_catalogue.tscn
 
 Contents
   1. Rarity tiers, equipment slots, weight and sockets
   2. Weapons
   3. Shields
-  4. Armour (helms, inner garments, armour, gloves, boots)
+  4. Armour (helms, inner garments, armour, leggings, gloves, boots)
   5. Accessories
   6. Item sets
   7. Named uniques
@@ -43,6 +43,7 @@ Equipment slots
   Helm           — takes: helm
   Inner Garment  — takes: inner_garment
   Armor          — takes: armor
+  Leggings       — takes: leggings
   Gloves I       — takes: gloves
   Gloves II      — takes: gloves
   Boots I        — takes: boots
@@ -54,7 +55,7 @@ Equipment slots
 
 Carried weight
 --------------
-  Everything worn and carried has weight. Carry capacity = (110 + 3.2 x Strength + bonuses). Up to 35% load there is
+  Everything worn and carried has weight. Carry capacity = (220 + 6.4 x Strength + bonuses). Up to 35% load there is
   no slowdown; at 100% load movement is 30% slower; above 100% the hero is Overburdened (45% slower, no dodging).
   (bh-018: capacity doubled from 55 + 1.6 per Strength.)
 
@@ -62,43 +63,74 @@ Carried weight
 2. WEAPONS
 ======================================================================================================================
 
-Axe (13)
+Axe (24)
 --------
   One-handed. Base 1.25 attacks/s, 5% crit, 2.3 m reach, heavy x2.0.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
   1   Hand Axe                   6-10      1.25  -              10 STR           4.0   16     knight
+  1   Raven Beak Axe             5-13      1.20  -              10 STR           4.2   23     knight
   2   Woodcutter's Hatchet       6-13      1.34  -              11 STR           2.8   22     knight
+  5   Anchor Beard Axe           9-20      1.27  -              14 STR           4.3   43     knight
   5   Bonecutter                 9-20      1.30  -              13 STR           3.4   34     knight
   8   Raider's Tomahawk          10-23     1.46  -              16 STR 12 AGI    2.4   46     knight
   10  Bearded Axe                16-26     1.22  -              26 STR 11 AGI    4.4   52     knight
+  10  Crescent Moon Axe          15-35     1.13  20% Earth      19 STR           4.4   68     knight
   14  Crescent Axe               18-43     1.16  -              26 STR 12 AGI    4.2   70     knight
+  16  Boar Cleaver Axe           19-45     1.22  20% Fire       25 STR           4.4   98     knight
   17  Skirmisher's Axe           18-41     1.40  -              22 STR 16 AGI    3.1   82     knight
   19  Rune Cleaver               27-43     1.18  20% Earth      38 STR 18 AGI    4.8   88     knight
+  22  Twin Petal Axe             28-66     1.08  -              31 STR           4.5   128    knight
   23  Rimebite Axe               25-59     1.26  20% Ice        34 STR 18 AGI    4.0   106    knight
+  29  Dragon Talon Axe           30-69     1.30  20% Dark       38 STR           4.6   163    knight
   29  Thunderbeak Axe            32-74     1.22  20% Lightning  40 STR 22 AGI    4.2   130    knight
+  30  Dragonforge Axe            32-74     1.25  30% Fire       32 STR           4.2   200    knight      Set: Dragonforge.
   33  Warlord's Cleaver          41-97     1.04  -              46 STR 20 AGI    5.6   146    knight      12% increased Impact Strength
+  36  Sun Disc Axe               40-94     1.15  20% Light      45 STR           4.7   198    knight
   41  Gravewarden's Axe          45-105    1.16  20% Dark       54 STR 26 AGI    4.7   178    knight      10% increased Impact Strength
+  43  Frost Pick Axe             44-102    1.25  20% Water      52 STR           4.7   233    knight
+  51  Gothic Window Axe          60-140    1.06  20% Ice        60 STR           4.8   273    knight
   53  Sunreaver                  54-127    1.21  25% Light      68 STR 34 AGI    4.4   226    knight
+  59  Thunder Fork Axe           61-141    1.20  20% Lightning  68 STR           4.9   313    knight
 
-Bow (13)
+Bow (33)
 --------
   Two-handed, ranged. Base 1.10 attacks/s, 8% crit, 22.0 m reach, heavy x2.4.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Heron Wing Bow             6-13      1.15  -              10 DEX           2.6   23     ranger
   1   Hunter's Bow               5-10      1.10  -              10 DEX           2.4   16     ranger
   2   Shortbow                   6-13      1.30  -              11 DEX           1.6   22     ranger
+  5   Antler Crown Bow           10-20     1.22  -              14 DEX           2.7   43     ranger
   5   Fowling Bow                9-19      1.34  -              12 DEX           1.5   34     ranger
   8   Recurve Bow                13-27     1.20  -              18 DEX           2.0   46     ranger
   10  Composite Bow              14-27     1.06  -              26 DEX           2.8   52     ranger
+  10  Serpent Coil Bow           17-35     1.08  20% Earth      19 DEX           2.8   68     ranger
   14  Hornbow                    20-42     1.14  -              26 DEX 10 AGI    2.5   70     ranger
+  16  Sunwheel Bow               22-45     1.17  20% Fire       25 DEX           2.8   98     ranger
   17  Yew Longbow                24-51     1.10  -              26 DEX 10 AGI    2.6   82     ranger
   19  Warden Longbow             23-44     1.00  -              40 DEX           3.2   88     ranger      15% increased Projectile Speed
+  22  Ironleaf Bow               32-66     1.03  -              31 DEX           2.9   128    ranger
   23  Siege Greatbow             41-85     0.84  -              34 DEX 20 STR    3.8   106    ranger      20% increased Projectile Speed
+  25  Rootbend Shortbow          38-78     0.97  -              37 DEX           2.2   165    ranger      12% increased Stagger Strength
   29  Thornback Bow              35-72     1.20  20% Earth      38 DEX 18 AGI    2.3   130    ranger
+  29  Twin Crescent Bow          34-70     1.24  20% Dark       38 DEX           3.0   163    ranger
+  30  Gale Nomad Bow             39-81     1.10  30% Wind       32 DEX           2.9   200    ranger      Set: Gale Nomad.
+  30  Grievance of the Fairy Bow 39-81     1.10  30% Earth      32 DEX           2.7   200    ranger      Set: Grievance of the Fairy.
+  30  Saltwind Recurve           42-88     1.01  25% Water      42 DEX           2.3   190    ranger      +2.5% Critical Chance
   33  Galewing Bow               37-77     1.25  25% Wind       44 DEX 24 AGI    2.2   146    ranger
+  35  Cinderhorn Bow             46-96     1.06  25% Fire       47 DEX           2.4   215    ranger      12% increased Status Chance
+  36  Dragon Rib Bow             46-95     1.10  20% Light      45 DEX           3.1   198    ranger
+  40  Icebranch Longbow          50-104    1.10  25% Ice        52 DEX           2.6   240    ranger      +4% Armor Penetration
   41  Frostwing Bow              46-96     1.22  25% Ice        52 DEX 24 AGI    2.4   178    ranger
+  43  Tide Harp Bow              49-102    1.20  20% Water      52 DEX           3.1   233    ranger
+  45  Thornwing Bow              54-111    1.15  -              57 DEX           2.7   265    ranger      12% increased Stagger Strength
+  50  Starbridge Bow             57-118    1.19  25% Light      62 DEX           2.9   290    ranger      +2.5% Critical Chance
+  51  Crystal Spire Bow          68-141    1.01  20% Ice        60 DEX           3.2   273    ranger
   53  Stormstring Greatbow       79-165    0.90  25% Lightning  64 DEX 30 STR    3.6   226    ranger      20% increased Projectile Speed
+  55  Nightglass Warbow          76-158    0.97  25% Dark       67 DEX           3.0   315    ranger      12% increased Status Chance
+  59  Clockwork Cam Bow          68-142    1.15  20% Lightning  68 DEX           3.3   313    ranger
+  60  Dawnfeather Bow            79-164    1.01  25% Light      72 DEX           3.1   340    ranger      +4% Armor Penetration
 
-Claw (10)
+Claw (19)
 ---------
   One-handed. Base 1.85 attacks/s, 9% crit, 1.8 m reach, heavy x1.8.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
@@ -106,12 +138,21 @@ Claw (10)
   5   Scrapper's Hooks           6-12      1.92  -              12 AGI 10 DEX    1.7   34     shadowblade
   9   Tiger Claw                 9-17      1.84  -              16 AGI 14 DEX    2.0   50     shadowblade
   15  Hookblade Claws            14-26     1.74  -              24 AGI 18 DEX    2.4   74     shadowblade +2% Critical Chance
-  17  Raptor Talons              14-27     1.88  -              22 AGI 18 DEX    2.0   82     shadowblade
+  17  Raptor Talons              14-27     1.88  -              22 AGI 18 DEX    1.9   82     shadowblade
   24  Nightstalker Claw          18-34     1.96  25% Dark       32 AGI 26 DEX    1.9   110    shadowblade
+  25  Rootrake Claws             22-41     1.67  -              37 DEX           1.5   165    shadowblade 12% increased Stagger Strength
   29  Frostbite Claws            23-42     1.85  20% Ice        36 AGI 26 DEX    2.1   130    shadowblade
+  30  Keelgrip Talons            25-46     1.74  25% Water      42 DEX           1.6   190    shadowblade +2.5% Critical Chance
+  30  Serpent Veil Claw          24-44     1.80  30% Earth      32 DEX           2.3   200    shadowblade Set: Serpent Veil.
   34  Drakescale Rend            27-49     1.80  20% Fire       42 AGI 34 DEX    2.3   150    shadowblade
+  35  Furnace Knives             27-50     1.81  25% Fire       47 DEX           1.7   215    shadowblade 12% increased Status Chance
+  40  Rimefang Claws             29-54     1.89  25% Ice        52 DEX           1.8   240    shadowblade +4% Armor Penetration
   41  Tempest Rakes              29-53     1.98  25% Wind       50 AGI 36 DEX    1.9   178    shadowblade
+  45  Briarhook Claws            31-58     1.96  -              57 DEX           1.9   265    shadowblade 12% increased Stagger Strength
+  50  Starweb Talons             33-62     2.04  25% Light      62 DEX           2.0   290    shadowblade +2.5% Critical Chance
   53  Wyrmqueen's Talons         38-71     1.87  25% Fire       64 AGI 46 DEX    2.2   226    shadowblade +3% Critical Chance
+  55  Voidreaver Claws           44-82     1.67  25% Dark       67 DEX           2.1   315    shadowblade 12% increased Status Chance
+  60  Dawnrake Claws             46-86     1.74  25% Light      72 DEX           2.2   340    shadowblade +4% Armor Penetration
 
 Club (10)
 ---------
@@ -128,23 +169,60 @@ Club (10)
   39  Tidecrusher                45-106    1.10  25% Water      50 STR           5.1   170    knight
   51  Starhammer                 61-143    1.04  25% Light      64 STR           5.7   218    knight      15% increased Stagger Strength
 
-Dagger (13)
+Crossbow (12)
+-------------
+  Two-handed, ranged. Base 0.82 attacks/s, 10% crit, 26.0 m reach, heavy x2.1.
+  Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Ashwood Crossbow           11-17     0.82  -              10 DEX           3.0   23     ranger
+  5   Crane Lever Crossbow       18-27     0.87  -              14 DEX           3.1   43     ranger
+  10  Iron Boar Crossbow         30-45     0.77  20% Earth      19 DEX           3.2   68     ranger
+  16  Twin Rail Crossbow         39-59     0.84  20% Fire       25 DEX           3.2   98     ranger
+  22  Repeater Crossbow          57-86     0.74  -              31 DEX           3.3   128    ranger
+  29  Raven Wing Crossbow        60-90     0.89  20% Dark       38 DEX           3.4   163    ranger
+  30  Starfall Hunter Crossbow   67-100    0.82  30% Light      32 DEX           3.2   200    ranger      Set: Starfall Hunter.
+  30  Truth of Raikuru Crossbow  67-100    0.82  30% Lightning  32 DEX           3.1   200    ranger      Set: Truth of Raikuru.
+  36  Sun Dial Crossbow          82-123    0.79  20% Light      45 DEX           3.5   198    ranger
+  43  Frost Fork Crossbow        88-133    0.85  20% Water      52 DEX           3.5   233    ranger
+  51  Dragon Jaw Crossbow        122-183   0.72  20% Ice        60 DEX           3.6   273    ranger
+  59  Orrery Crossbow            123-184   0.82  20% Lightning  68 DEX           3.7   313    ranger
+
+Dagger (33)
 -----------
   One-handed. Base 2.00 attacks/s, 10% crit, 1.9 m reach, heavy x1.7.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Gull Hook Dagger           4-6       2.05  -              10 DEX           1.2   23     shadowblade
   1   Rondel Dagger              3-7       2.00  -              9 DEX            1.2   16     shadowblade
   2   Skinning Knife             4-7       2.16  -              10 DEX           0.9   22     shadowblade
   5   Cutpurse Knife             6-10      2.20  -              12 DEX           0.8   34     shadowblade
+  5   Scorpion Tail Dagger       6-10      2.17  -              14 DEX           1.3   43     shadowblade
   8   Parrying Dirk              9-15      1.94  -              16 DEX 12 AGI    1.3   46     shadowblade +0.03s Parry Window
+  10  Glass Leaf Dagger          10-17     1.93  20% Earth      19 DEX           1.4   68     shadowblade
   10  Shadow Kris                9-18      2.06  25% Dark       22 DEX 18 AGI    1.1   52     shadowblade
   14  Kukri                      13-22     1.88  -              22 DEX 18 AGI    1.6   70     shadowblade
+  16  Trident Dirk               13-22     2.09  20% Fire       25 DEX           1.4   98     shadowblade
   17  Bonebite                   14-24     2.00  -              24 DEX 16 AGI    1.1   82     shadowblade +2% Critical Chance
   19  Glass Stiletto             15-29     2.12  -              36 DEX 28 AGI    0.9   88     shadowblade +15% Critical Damage
+  22  Crescent Fang Dagger       19-32     1.84  -              31 DEX           1.5   128    shadowblade
   23  Viper Fang                 18-29     2.10  20% Dark       30 DEX 26 AGI    1.1   106    shadowblade
-  29  Emberfang Dirk             22-37     2.02  20% Fire       36 DEX 28 AGI    1.3   130    shadowblade
+  25  Rootfang Skinner           22-36     1.80  -              37 DEX           1.0   165    shadowblade 12% increased Stagger Strength
+  29  Emberfang Dirk             22-37     2.02  20% Fire       36 DEX 28 AGI    1.2   130    shadowblade
+  29  Serpent Kris Dagger        20-34     2.21  20% Dark       38 DEX           1.6   163    shadowblade
+  30  Eclipse Dancer Dagger      23-38     2.00  30% Dark       32 DEX           1.5   200    shadowblade Set: Eclipse Dancer.
+  30  Keelhook Knife             24-41     1.88  25% Water      42 DEX           1.1   190    shadowblade +2.5% Critical Chance
+  30  Pale Requiem Dagger        23-38     2.00  30% Ice        32 DEX           1.5   200    shadowblade Set: Pale Requiem.
   33  Moonshard Dagger           25-41     2.04  20% Ice        40 DEX 34 AGI    1.2   146    shadowblade
+  35  Emberwave Kris             27-45     1.96  25% Fire       47 DEX           1.1   215    shadowblade 12% increased Status Chance
+  36  Sawback Dagger             27-46     1.97  20% Light      45 DEX           1.7   198    shadowblade
+  40  Iceglass Stiletto          29-48     2.04  25% Ice        52 DEX           1.2   240    shadowblade +4% Armor Penetration
   41  Stormneedle                28-47     2.14  25% Lightning  50 DEX 38 AGI    0.9   178    shadowblade
+  43  Orchid Fan Dagger          30-49     2.13  20% Water      52 DEX           1.7   233    shadowblade
+  45  Briar Talon                31-52     2.12  -              57 DEX           1.2   265    shadowblade 12% increased Stagger Strength
+  50  Moonfang Kukri             33-55     2.20  25% Light      62 DEX           1.3   290    shadowblade +2.5% Critical Chance
+  51  Twin Fang Dagger           41-68     1.80  20% Ice        60 DEX           1.8   273    shadowblade
   53  Nightwhisper               37-61     2.08  25% Dark       64 DEX 48 AGI    1.1   226    shadowblade +20% Critical Damage
+  55  Voidpetal Dagger           44-73     1.80  25% Dark       67 DEX           1.4   315    shadowblade 12% increased Status Chance
+  59  Star Compass Dagger        41-69     2.05  20% Lightning  68 DEX           1.9   313    shadowblade
+  60  Dawnthorn Knife            46-76     1.88  25% Light      72 DEX           1.4   340    shadowblade +4% Armor Penetration
 
 Great Axe (10)
 --------------
@@ -161,8 +239,8 @@ Great Axe (10)
   42  Headsman's Eclipse         91-212    0.75  20% Dark       62 STR           12.0  182    knight
   54  Skyrender                  108-253   0.79  25% Lightning  76 STR           11.6  230    knight
 
-Greatsword (9)
---------------
+Greatsword (14)
+---------------
   Two-handed. Base 0.95 attacks/s, 5% crit, 3.0 m reach, heavy x2.2.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
   1   Rusted Claymore            9-17      0.95  -              14 STR           8.0   16     knight
@@ -171,11 +249,16 @@ Greatsword (9)
   10  Executioner's Blade        24-40     0.88  -              30 STR           9.5   52     knight
   17  Wavecrest Flamberge        37-77     0.88  -              32 STR           8.8   82     knight      +2% Critical Chance
   19  Titan's Edge               40-64     0.85  -              44 STR           10.5  88     knight      15% increased Stagger Strength
+  25  Basalt Zweihander          54-112    0.83  -              37 STR           7.0   165    knight      12% increased Stagger Strength
   29  Ironbark Greatblade        61-126    0.84  -              46 STR           10.1  130    knight      18% increased Stagger Strength
+  30  Obsidian Oath Greatsword   55-114    0.95  30% Dark       32 STR           8.8   200    knight      Set: Obsidian Oath.
+  35  Briar Executioner          69-144    0.86  25% Water      47 STR           7.5   215    knight      +2.5% Critical Chance
   41  Dragonspine Greatsword     79-165    0.87  25% Fire       60 STR           10.6  178    knight
+  50  Astral Greatblade          91-190    0.90  25% Fire       62 STR           8.0   290    knight      12% increased Status Chance
   53  Nightfall Greatsword       106-220   0.82  25% Dark       74 STR           11.2  226    knight      +20% Critical Damage
+  60  Vaultbreaker Claymore      104-216   0.94  25% Ice        72 STR           8.4   340    knight      +4% Armor Penetration
 
-Javelin (10)
+Javelin (18)
 ------------
   One-handed, ranged. Base 1.15 attacks/s, 7% crit, 17.0 m reach, heavy x2.2.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
@@ -185,10 +268,18 @@ Javelin (10)
   13  Barbed Pilum               23-38     1.04  -              22 STR 18 DEX    2.8   66     ranger      12% increased Projectile Damage
   16  Flint Javelin              24-40     1.18  20% Earth      18 STR 20 DEX    2.2   78     ranger
   22  Thunderhead Javelin        31-52     1.16  30% Lightning  28 STR 28 DEX    2.4   102    ranger
+  25  Sporeleaf Javelin          38-63     1.06  -              37 DEX           1.9   165    ranger      12% increased Stagger Strength
   28  Windrunner Javelin         36-61     1.22  25% Wind       26 STR 38 DEX    2.1   126    ranger
+  30  Keelspike Javelin          42-71     1.11  25% Water      42 DEX           2.0   190    ranger      +2.5% Critical Chance
   32  Sunpiercer                 45-75     1.10  25% Light      36 STR 38 DEX    2.6   142    ranger
+  35  Furnace Barb               47-78     1.16  25% Fire       47 DEX           2.1   215    ranger      12% increased Status Chance
   40  Frostspike                 54-90     1.12  25% Ice        36 STR 50 DEX    2.6   174    ranger
+  40  Rimefork Javelin           50-84     1.20  25% Ice        52 DEX           2.3   240    ranger      +4% Armor Penetration
+  45  Briarfin Javelin           54-90     1.25  -              57 DEX           2.4   265    ranger      12% increased Stagger Strength
+  50  Starshard Javelin          57-95     1.30  25% Light      62 DEX           2.5   290    ranger      +2.5% Critical Chance
   52  Heavenfall Pilum           71-119    1.08  20% Light      46 STR 62 DEX    2.9   222    ranger      15% increased Projectile Damage
+  55  Gloomspear                 76-127    1.06  25% Dark       67 DEX           2.6   315    ranger      12% increased Status Chance
+  60  Suncrest Javelin           79-132    1.11  25% Light      72 DEX           2.8   340    ranger      +4% Armor Penetration
 
 Knuckles (10)
 -------------
@@ -205,7 +296,7 @@ Knuckles (10)
   40  Emberknuckles              27-45     2.14  25% Fire       38 STR 40 AGI    1.6   174    shadowblade
   52  Dawnfist Gauntlets         35-59     2.06  25% Light      50 STR 52 AGI    1.8   222    shadowblade 15% increased Impact Strength
 
-Spear (13)
+Spear (14)
 ----------
   Two-handed. Base 1.20 attacks/s, 7% crit, 3.4 m reach, heavy x1.8.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
@@ -219,11 +310,12 @@ Spear (13)
   20  Storm Lance                30-50     1.24  25% Lightning  34 STR 28 AGI    4.9   92     knight
   24  Tideguard Trident          38-71     1.20  25% Water      32 STR 26 AGI    5.0   110    knight
   29  Watchman's Halberd         53-98     1.02  -              40 STR 24 AGI    6.4   130    knight      12% increased Stagger Strength
+  30  Sunken Crown Spear         46-86     1.20  30% Water      32 STR           5.0   200    knight      Set: Sunken Crown.
   34  Wyrmtooth Lance            62-115    1.00  -              42 STR 32 AGI    6.5   150    knight      +15% Critical Damage
   41  Emberfang Pike             66-123    1.10  25% Fire       50 STR 40 AGI    5.6   178    knight
   53  Dawnspire Lance            85-158    1.08  25% Light      62 STR 50 AGI    5.8   226    knight      +15% Critical Damage
 
-Staff (10)
+Staff (20)
 ----------
   Two-handed, ranged. Base 1.00 attacks/s, 5% crit, 18.0 m reach, heavy x2.0.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
@@ -234,31 +326,64 @@ Staff (10)
   10  Stormcaller Staff          15-26     0.96  100% Lightning 26 INT           3.8   52     mage        18% increased Magic Damage
   16  Cinderheart Staff          20-38     0.98  100% Fire      28 INT           3.6   78     mage        18% increased Magic Damage
   18  Rimeheart Staff            21-35     1.02  100% Ice       36 INT 18 WIS    3.6   84     mage        25% increased Magic Damage
+  25  Glowcap Crook              32-59     0.90  100% Earth     37 INT           3.0   165    mage        12% increased Stagger Strength; 21.2% increased Magic Damage
   28  Deepwater Staff            31-58     1.01  100% Water     40 INT 20 WIS    3.5   126    mage        22% increased Magic Damage
+  30  Thunder Abbot Staff        33-62     1.00  100% Lightning 32 INT           3.7   200    mage        Set: Thunder Abbot. 18% increased Magic Damage
+  30  Tidal Forkstaff            35-66     0.94  100% Water     42 INT           3.2   190    mage        +2.5% Critical Chance; 23.5% increased Magic Damage
+  30  Wailing Mistress Staff     33-62     1.00  100% Dark      32 INT           3.6   200    mage        Set: Wailing Mistress. 18% increased Magic Damage
+  35  Cinder Lanternstaff        39-72     0.98  100% Fire      47 INT           3.4   215    mage        12% increased Status Chance; 25.8% increased Magic Damage
   40  Gloamspire Staff           45-84     0.95  100% Dark      54 INT 26 WIS    3.9   174    mage        28% increased Magic Damage
+  40  Rime Shardstaff            42-78     1.02  100% Ice       52 INT           3.6   240    mage        +4% Armor Penetration; 28% increased Magic Damage
+  45  Thornseed Branchstaff      45-83     1.06  100% Earth     57 INT           3.8   265    mage        12% increased Stagger Strength; 30.2% increased Magic Damage
+  50  Orrery Starstaff           48-88     1.10  100% Light     62 INT           3.9   290    mage        +2.5% Critical Chance; 32.5% increased Magic Damage
   52  Sunspire Staff             53-98     1.03  100% Light     68 INT 34 WIS    3.7   222    mage        34% increased Magic Damage
+  55  Voidcage Scepter           64-118    0.90  100% Dark      67 INT           4.1   315    mage        12% increased Status Chance; 34.8% increased Magic Damage
+  60  Dawnspire Staff            66-122    0.94  100% Light     72 INT           4.3   340    mage        +4% Armor Penetration; 37% increased Magic Damage
 
-Sword (14)
+Sword (37)
 ----------
   One-handed. Base 1.45 attacks/s, 6% crit, 2.4 m reach, heavy x1.9.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
+  1   Heron Estoc                5-10      1.48  -              10 STR           3.5   23     knight
   1   Iron Longsword             5-9       1.45  -              10 STR           3.5   16     knight
   3   Militia Shortsword         6-12      1.62  -              11 STR           2.6   26     knight
+  5   Harbor Basket Sword        8-15      1.57  -              14 STR           3.6   43     knight
   5   Wayfarer's Blade           9-16      1.52  -              13 STR 8 DEX     3.0   34     knight
   7   Riverguard Falchion        11-21     1.38  -              16 STR 10 DEX    3.4   42     knight
   8   Riftblade                  12-21     1.45  25% Lightning  18 STR 14 DEX    3.5   140    knight      Unique.
   9   Arming Sword               13-21     1.50  -              20 STR 13 DEX    3.2   48     knight
+  10  Copperleaf Sword           14-26     1.39  20% Earth      19 STR           3.7   68     knight
   13  Duelist's Sabre            14-25     1.72  -              22 DEX 14 STR    2.8   66     knight      +3% Critical Chance
+  16  Flame Ribbon Sword         18-34     1.51  20% Fire       25 STR           3.7   98     knight
   16  Saltmarsh Cutlass          17-31     1.66  -              22 DEX 18 STR    2.9   78     knight      +2% Critical Chance
   18  Runed Blade                24-37     1.42  20% Light      34 STR 22 DEX    3.6   84     knight
   22  Bastard Sword              29-53     1.24  -              34 STR           4.8   102    knight      12% increased Stagger Strength
+  22  Moon Hook Sword            27-50     1.33  -              31 STR           3.8   128    knight
+  25  Copperleaf Backsword       30-56     1.30  -              37 STR           2.8   165    knight      12% increased Stagger Strength
   28  Gravewatch Longsword       31-58     1.40  20% Dark       38 STR 24 DEX    3.8   126    knight
+  28  Saltglass Cutlass          32-59     1.36  25% Water      40 STR           3.0   180    knight      +2.5% Critical Chance
+  29  Split Crown Sword          28-52     1.60  20% Dark       38 STR           3.9   163    knight
+  30  Crimson Glory Sword        32-59     1.45  30% Fire       32 STR           3.6   200    knight      Set: Crimson Glory.
+  32  Rootguard Falchion         34-64     1.42  25% Fire       44 STR           3.2   200    knight      12% increased Status Chance
   32  Sunsteel Blade             33-60     1.50  20% Fire       42 STR 30 DEX    3.6   142    knight
+  35  Lantern Rapier             36-66     1.48  25% Ice        47 STR           3.4   215    knight      +4% Armor Penetration
+  36  Dragon Tooth Sword         38-71     1.42  20% Light      45 STR           4.0   198    knight
+  38  Cinderhook Saber           37-69     1.54  -              50 STR           3.5   230    knight      12% increased Stagger Strength
   40  Starfall Sabre             37-68     1.62  25% Light      52 DEX 36 STR    3.1   174    knight
+  41  Frostbell Broadsword       38-71     1.59  25% Light      53 STR           3.7   245    knight      +2.5% Critical Chance
+  43  Tide Scimitar              41-77     1.54  20% Water      52 STR           4.0   233    knight
+  44  Hollowfin Estoc            50-92     1.30  25% Dark       56 STR           3.9   260    knight      12% increased Status Chance
+  47  Moonwell Flamberge         50-94     1.36  25% Light      59 STR           4.1   275    knight      +4% Armor Penetration
+  50  Starfall Spatha            51-95     1.42  -              62 STR           4.3   290    knight      12% increased Stagger Strength
+  51  Prism Greatblade           57-106    1.30  20% Ice        60 STR           4.1   273    knight
   52  Kingsbane                  52-96     1.46  15% Fire       64 STR 44 DEX    3.9   222    knight      +20% Critical Damage
+  53  Deepwatch Messer           52-96     1.48  25% Water      65 STR           4.4   305    knight      +2.5% Critical Chance
+  56  Sunken Oathblade           53-98     1.54  25% Fire       68 STR           4.6   320    knight      12% increased Status Chance
+  59  Astral Ring Sword          57-106    1.48  20% Lightning  68 STR           4.2   313    knight
+  60  Crownless Longsword        54-100    1.59  25% Ice        72 STR           4.8   340    knight      +4% Armor Penetration
 
-Wand (9)
---------
+Wand (19)
+---------
   One-handed, ranged. Base 1.60 attacks/s, 7% crit, 18.0 m reach, heavy x1.6.
   Lvl Name                       Damage    APS   Element        Requires         Wt    Value  Class       Notes
   1   Bone Wand                  3-6       1.60  100% Dark      10 INT           0.9   16     mage        +2% Critical Chance
@@ -267,9 +392,19 @@ Wand (9)
   9   Tidecaller Wand            8-15      1.64  100% Water     20 INT           1.0   48     mage        +3% Critical Chance
   15  Emberbrand Wand            12-20     1.66  100% Fire      24 INT           0.9   74     mage        +3% Critical Chance
   18  Sunfire Wand               13-24     1.58  100% Light     32 INT           1.1   84     mage        +4% Critical Chance
+  25  Sporebud Wand              21-34     1.44  100% Earth     37 INT           0.8   165    mage        12% increased Stagger Strength
   27  Hoarfrost Wand             20-33     1.60  100% Ice       36 INT           1.1   122    mage        +3.5% Critical Chance
+  30  Ashfall Pilgrim Wand       22-36     1.60  100% Fire      32 INT           1.2   200    mage        Set: Ashfall Pilgrim. 18% increased Magic Damage
+  30  Shellsong Wand             23-38     1.50  100% Water     42 INT           0.9   190    mage        +2.5% Critical Chance
+  30  Winter Court Wand          22-36     1.60  100% Ice       32 INT           1.1   200    mage        Set: Winter Court. 18% increased Magic Damage
+  35  Embercrown Wand            25-42     1.57  100% Fire      47 INT           0.9   215    mage        12% increased Status Chance
   39  Stormglass Wand            26-43     1.70  100% Lightning 50 INT           0.9   170    mage        +4% Critical Chance
+  40  Icepetal Wand              27-46     1.63  100% Ice       52 INT           1.0   240    mage        +4% Armor Penetration
+  45  Gravebell Wand             29-49     1.70  100% Earth     57 INT           1.0   265    mage        12% increased Stagger Strength
+  50  Moonhook Wand              31-52     1.76  100% Light     62 INT           1.1   290    mage        +2.5% Critical Chance
   51  Nightbloom Wand            34-57     1.64  100% Dark      64 INT           1.1   218    mage        +5% Critical Chance
+  55  Prismcoil Wand             41-69     1.44  100% Dark      67 INT           1.1   315    mage        12% increased Status Chance
+  60  Sunwheel Wand              43-72     1.50  100% Light     72 INT           1.2   340    mage        +4% Armor Penetration
 
 ======================================================================================================================
 3. SHIELDS
@@ -279,13 +414,20 @@ Wand (9)
   7   Sigil Buckler              16    20%    50%       14 STR 16 DEX    6.2   30     +5% All Resistances
   10  Aether Guardian Aegis      26    28%    68%       24 STR           7.6   90
   12  Bastion Tower Shield       34    32%    70%       30 STR           8.8   40     -0.15 Movement Speed
+  30  Ashfall Pilgrim Shield     24    16%    30%       32 INT           7.4   200
+  30  Crimson Glory Shield       40    16%    30%       32 STR           9.6   200
+  30  Dragonforge Shield         40    16%    30%       32 STR           9.6   200
+  30  Eclipse Dancer Shield      24    16%    30%       32 DEX           7.4   200
+  30  Pale Requiem Shield        24    16%    30%       32 DEX           7.4   200
+  30  Serpent Veil Shield        24    16%    30%       32 DEX           7.4   200
+  30  Winter Court Shield        24    16%    30%       32 INT           7.4   200
 
 ======================================================================================================================
 4. ARMOUR
 ======================================================================================================================
 
-Helms (8)
----------
+Helms (27)
+----------
   Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
   1   Iron Helm                    heavy        8     10 STR           4.2   11
   1   Linen Hood                   cloth        3     -                1.2   11     +10 Maximum Mana
@@ -295,17 +437,51 @@ Helms (8)
   9   Arcanist Cowl                cloth        8     20 INT           1.2   35     +22 Maximum Mana
   16  Visored Greathelm            heavy        28    32 STR           4.2   56     +5% Status Resistance
   17  Seer's Veil                  cloth        13    32 INT           1.2   59     +36 Maximum Mana
+  30  Ashfall Pilgrim Crown        cloth        17    32 INT           1.2   200    Set: Ashfall Pilgrim.
+  30  Crimson Glory Crown          heavy        29    32 STR           4.2   200    Set: Crimson Glory.
+  30  Dragonforge Crown            heavy        29    32 STR           4.2   200    Set: Dragonforge.
+  30  Eclipse Dancer Crown         cloth        17    32 DEX           1.2   200    Set: Eclipse Dancer.
+  30  Gale Nomad Crown             cloth        17    32 DEX           1.2   200    Set: Gale Nomad.
+  30  Grievance of the Fairy Crown cloth        17    32 DEX           1.2   200    Set: Grievance of the Fairy.
+  30  Obsidian Oath Crown          heavy        29    32 STR           4.2   200    Set: Obsidian Oath.
+  30  Pale Requiem Crown           cloth        17    32 DEX           1.2   200    Set: Pale Requiem.
+  30  Serpent Veil Crown           cloth        17    32 DEX           1.2   200    Set: Serpent Veil.
+  30  Starfall Hunter Crown        cloth        17    32 DEX           1.2   200    Set: Starfall Hunter.
+  30  Sunken Crown Crown           heavy        29    32 STR           4.2   200    Set: Sunken Crown.
+  30  Thunder Abbot Crown          cloth        17    32 INT           1.2   200    Set: Thunder Abbot.
+  30  Truth of Raikuru Crown       cloth        17    32 DEX           1.2   200    Set: Truth of Raikuru.
+  30  Wailing Mistress Crown       cloth        17    32 INT           1.2   200    Set: Wailing Mistress.
+  30  Winter Court Crown           cloth        17    32 INT           1.2   200    Set: Winter Court.
+  38  Deepwarden Crown             heavy        35    50 STR           4.2   230    +35 Maximum HP
+  38  Gloomthread Crown            cloth        21    50 DEX           1.2   230    12% increased Movement Speed
+  38  Prismkeeper Crown            cloth        21    50 INT           1.2   230    +24 Maximum Mana
+  38  Vaultpath Crown              cloth        21    50 DEX           1.2   230    +20 Evasion
 
-Inner garments (4)
-------------------
+Inner garments (19)
+-------------------
   Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
   1   Padded Gambeson              heavy        6     -                3.6   11     +10 Maximum HP
   1   Silk Undershirt              cloth        2     -                1.0   11     +0.3 Mana Regeneration
   10  Chain Shirt                  heavy        14    20 STR           6.5   38     +20 Maximum HP
   10  Runeweave Vest               cloth        6     20 INT           1.0   38     +0.8 Mana Regeneration
+  30  Ashfall Pilgrim Vestment     cloth        11    32 INT           1.0   200    Set: Ashfall Pilgrim.
+  30  Crimson Glory Vestment       heavy        18    32 STR           6.5   200    Set: Crimson Glory.
+  30  Dragonforge Vestment         heavy        18    32 STR           6.5   200    Set: Dragonforge.
+  30  Eclipse Dancer Vestment      cloth        11    32 DEX           1.0   200    Set: Eclipse Dancer.
+  30  Gale Nomad Vestment          cloth        11    32 DEX           1.0   200    Set: Gale Nomad.
+  30  Grievance of the Fairy Vestm cloth        11    32 DEX           1.0   200    Set: Grievance of the Fairy.
+  30  Obsidian Oath Vestment       heavy        18    32 STR           6.5   200    Set: Obsidian Oath.
+  30  Pale Requiem Vestment        cloth        11    32 DEX           1.0   200    Set: Pale Requiem.
+  30  Serpent Veil Vestment        cloth        11    32 DEX           1.0   200    Set: Serpent Veil.
+  30  Starfall Hunter Vestment     cloth        11    32 DEX           1.0   200    Set: Starfall Hunter.
+  30  Sunken Crown Vestment        heavy        18    32 STR           6.5   200    Set: Sunken Crown.
+  30  Thunder Abbot Vestment       cloth        11    32 INT           1.0   200    Set: Thunder Abbot.
+  30  Truth of Raikuru Vestment    cloth        11    32 DEX           1.0   200    Set: Truth of Raikuru.
+  30  Wailing Mistress Vestment    cloth        11    32 INT           1.0   200    Set: Wailing Mistress.
+  30  Winter Court Vestment        cloth        11    32 INT           1.0   200    Set: Winter Court.
 
-Body armour (8)
----------------
+Body armour (27)
+----------------
   Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
   1   Apprentice Robe              cloth        6     -                3.2   11     +15 Maximum Mana
   1   Iron Hauberk                 heavy        18    12 STR           11.2  11
@@ -315,9 +491,81 @@ Body armour (8)
   9   Starbound Sage Robe          cloth        14    22 INT           3.2   80     Set: Starbound Sage.
   16  Magister Robe                cloth        20    30 INT           3.2   56     10% increased Magic Damage
   16  Warden Plate                 heavy        52    34 STR           17.4  56     +5% Knockback Resistance
+  25  Deepwarden Coat              heavy        50    37 STR           16.9  165    Unique. +35 Maximum HP
+  25  Gloomthread Coat             cloth        30    37 DEX           3.2   165    Unique. 12% increased Movement Speed
+  25  Prismkeeper Coat             cloth        30    37 INT           3.2   165    Unique. +24 Maximum Mana
+  25  Vaultpath Coat               cloth        30    37 DEX           3.2   165    Unique. +20 Evasion
+  30  Ashfall Pilgrim Armor        cloth        34    32 INT           3.2   200    Set: Ashfall Pilgrim.
+  30  Crimson Glory Armor          heavy        57    32 STR           18.0  200    Set: Crimson Glory.
+  30  Dragonforge Armor            heavy        57    32 STR           18.0  200    Set: Dragonforge.
+  30  Eclipse Dancer Armor         cloth        34    32 DEX           3.2   200    Set: Eclipse Dancer.
+  30  Gale Nomad Armor             cloth        34    32 DEX           3.2   200    Set: Gale Nomad.
+  30  Grievance of the Fairy Armor cloth        34    32 DEX           3.2   200    Set: Grievance of the Fairy.
+  30  Obsidian Oath Armor          heavy        57    32 STR           18.0  200    Set: Obsidian Oath.
+  30  Pale Requiem Armor           cloth        34    32 DEX           3.2   200    Set: Pale Requiem.
+  30  Serpent Veil Armor           cloth        34    32 DEX           3.2   200    Set: Serpent Veil.
+  30  Starfall Hunter Armor        cloth        34    32 DEX           3.2   200    Set: Starfall Hunter.
+  30  Sunken Crown Armor           heavy        57    32 STR           18.0  200    Set: Sunken Crown.
+  30  Thunder Abbot Armor          cloth        34    32 INT           3.2   200    Set: Thunder Abbot.
+  30  Truth of Raikuru Armor       cloth        34    32 DEX           3.2   200    Set: Truth of Raikuru.
+  30  Wailing Mistress Armor       cloth        34    32 INT           3.2   200    Set: Wailing Mistress.
+  30  Winter Court Armor           cloth        34    32 INT           3.2   200    Set: Winter Court.
 
-Gloves (6)
-----------
+Leggings (49)
+-------------
+  Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
+  1   Cutpurse Trousers            cloth        3     6 DEX 6 AGI      1.6   13     +8 Evasion
+  1   Hide Leggings                cloth        3     8 DEX            1.6   13     +6 Evasion
+  1   Iron Cuisses                 heavy        6     10 STR           4.7   13     +6 Maximum HP
+  1   Linen Trousers               cloth        2     -                1.6   13     +8 Maximum Mana
+  6   Mail Chausses                heavy        10    16 STR           5.2   28     +12 Maximum HP
+  6   Nightweave Leggings          cloth        5     10 DEX 10 AGI    1.6   28     +1% Critical Chance
+  6   Scholar's Breeches           cloth        4     14 INT           1.6   28     +0.3 Mana Regeneration
+  6   Tracker's Breeches           cloth        5     16 DEX           1.6   28     +8 Accuracy
+  8   Aether Guardian Cuisses      heavy        16    20 STR           5.9   55     Set: Aether Guardian. +5% Knockback Resistance
+  8   Starbound Sage Leggings      cloth        6     20 INT           1.6   55     Set: Starbound Sage. +0.5 Mana Regeneration
+  10  Windswift                    cloth        8     22 DEX           1.6   140    Unique. +14 Evasion
+  10  Rimewalkers                  heavy        18    22 STR           6.2   140    Unique. +10% Ice Resistance
+  12  Arcanist Legwraps            cloth        7     22 INT           1.6   46     3% increased Cast Speed
+  12  Riveted Legplates            heavy        17    24 STR           6.0   46     +4% Knockback Resistance
+  12  Silent-Step Breeches         cloth        8     14 DEX 14 AGI    1.6   46     +18 Evasion
+  12  Stag-Hide Chaps              cloth        8     24 DEX           1.6   46     +16 Evasion
+  14  Stormstriders                cloth        12    28 DEX           1.6   152    Unique. 4% increased Movement Speed
+  14  Stillwater                   cloth        11    28 INT           1.6   152    Unique. +25 Maximum Mana
+  16  Oathbound                    heavy        28    32 STR           7.4   158    Unique. +25 Maximum HP
+  16  Bloodrunner                  cloth        12    18 DEX 18 AGI    1.6   158    Unique. +1.5% Critical Chance
+  18  Duskrunner Leggings          cloth        12    20 DEX 20 AGI    1.6   64     3% increased Attack Speed
+  18  Riftwalker                   cloth        12    34 INT           1.6   164    Unique. 4% increased Cast Speed
+  18  Longstrider Leggings         cloth        12    34 DEX           1.6   64     3% increased Movement Speed
+  18  Magister Silks               cloth        11    32 INT           1.6   64     5% increased Magic Damage
+  18  Warden Cuisses               heavy        26    34 STR           7.1   64     +4% Status Resistance
+  20  Echoing Bastion              heavy        32    38 STR           7.8   170    Unique. +5% Block Strength
+  30  Aethersilk Trousers          cloth        16    48 INT           1.6   100    7% increased Magic Damage; +30 Maximum Mana
+  30  Ashfall Pilgrim Legguards    cloth        14    32 INT           1.6   200    Set: Ashfall Pilgrim.
+  30  Crimson Glory Legguards      heavy        24    32 STR           6.9   200    Set: Crimson Glory.
+  30  Dragonforge Legguards        heavy        24    32 STR           6.9   200    Set: Dragonforge.
+  30  Eclipse Dancer Legguards     cloth        14    32 DEX           1.6   200    Set: Eclipse Dancer.
+  30  Gale Nomad Legguards         cloth        14    32 DEX           1.6   200    Set: Gale Nomad.
+  30  Grievance of the Fairy Leggu cloth        14    32 DEX           1.6   200    Set: Grievance of the Fairy.
+  30  Knight-Commander's Cuisses   heavy        38    50 STR           8.6   100    +6% Knockback Resistance; +30 Maximum HP
+  30  Obsidian Oath Legguards      heavy        24    32 STR           6.9   200    Set: Obsidian Oath.
+  30  Pale Requiem Legguards       cloth        14    32 DEX           1.6   200    Set: Pale Requiem.
+  30  Serpent Veil Legguards       cloth        14    32 DEX           1.6   200    Set: Serpent Veil.
+  30  Starfall Hunter Legguards    cloth        14    32 DEX           1.6   200    Set: Starfall Hunter.
+  30  Sunken Crown Legguards       heavy        24    32 STR           6.9   200    Set: Sunken Crown.
+  30  Thunder Abbot Legguards      cloth        14    32 INT           1.6   200    Set: Thunder Abbot.
+  30  Truth of Raikuru Legguards   cloth        14    32 DEX           1.6   200    Set: Truth of Raikuru.
+  30  Veilstalker Leggings         cloth        17    28 DEX 28 AGI    1.6   100    +8% Critical Damage; +30 Evasion
+  30  Wailing Mistress Legguards   cloth        14    32 INT           1.6   200    Set: Wailing Mistress.
+  30  Windrunner Leggings          cloth        17    48 DEX           1.6   100    5% increased Projectile Damage; +30 Evasion
+  30  Winter Court Legguards       cloth        14    32 INT           1.6   200    Set: Winter Court.
+  44  Deepwarden Cuisses           heavy        47    56 STR           9.0   260    +35 Maximum HP
+  44  Gloomthread Leggings         cloth        28    56 DEX           1.6   260    12% increased Movement Speed
+  44  Prismkeeper Legwraps         cloth        28    56 INT           1.6   260    +24 Maximum Mana
+  44  Vaultpath Leggings           cloth        28    56 DEX           1.6   260    +20 Evasion
+
+Gloves (40)
+-----------
   Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
   1   Iron Gauntlet                heavy        4     10 STR           2.6   11
   1   Silk Glove                   cloth        2     -                0.8   11     3% increased Cast Speed
@@ -325,9 +573,43 @@ Gloves (6)
   8   Starbound Sage Gloves        cloth        4     20 INT           0.8   50     Set: Starbound Sage.
   11  Runed Glove                  cloth        6     22 INT           0.8   41     6% increased Cast Speed
   11  Spiked Gauntlet              heavy        11    24 STR           2.6   41     +3 Added Physical Damage
+  30  Ashfall Pilgrim Left Gauntle cloth        8     32 INT           0.8   200    Set: Ashfall Pilgrim.
+  30  Ashfall Pilgrim Right Gauntl cloth        8     32 INT           0.8   200    Set: Ashfall Pilgrim.
+  30  Crimson Glory Left Gauntlet  heavy        14    32 STR           2.6   200    Set: Crimson Glory.
+  30  Crimson Glory Right Gauntlet heavy        14    32 STR           2.6   200    Set: Crimson Glory.
+  30  Dragonforge Left Gauntlet    heavy        14    32 STR           2.6   200    Set: Dragonforge.
+  30  Dragonforge Right Gauntlet   heavy        14    32 STR           2.6   200    Set: Dragonforge.
+  30  Eclipse Dancer Left Gauntlet cloth        8     32 DEX           0.8   200    Set: Eclipse Dancer.
+  30  Eclipse Dancer Right Gauntle cloth        8     32 DEX           0.8   200    Set: Eclipse Dancer.
+  30  Gale Nomad Left Gauntlet     cloth        8     32 DEX           0.8   200    Set: Gale Nomad.
+  30  Gale Nomad Right Gauntlet    cloth        8     32 DEX           0.8   200    Set: Gale Nomad.
+  30  Grievance of the Fairy Left  cloth        8     32 DEX           0.8   200    Set: Grievance of the Fairy.
+  30  Grievance of the Fairy Right cloth        8     32 DEX           0.8   200    Set: Grievance of the Fairy.
+  30  Obsidian Oath Left Gauntlet  heavy        14    32 STR           2.6   200    Set: Obsidian Oath.
+  30  Obsidian Oath Right Gauntlet heavy        14    32 STR           2.6   200    Set: Obsidian Oath.
+  30  Pale Requiem Left Gauntlet   cloth        8     32 DEX           0.8   200    Set: Pale Requiem.
+  30  Pale Requiem Right Gauntlet  cloth        8     32 DEX           0.8   200    Set: Pale Requiem.
+  30  Serpent Veil Left Gauntlet   cloth        8     32 DEX           0.8   200    Set: Serpent Veil.
+  30  Serpent Veil Right Gauntlet  cloth        8     32 DEX           0.8   200    Set: Serpent Veil.
+  30  Starfall Hunter Left Gauntle cloth        8     32 DEX           0.8   200    Set: Starfall Hunter.
+  30  Starfall Hunter Right Gauntl cloth        8     32 DEX           0.8   200    Set: Starfall Hunter.
+  30  Sunken Crown Left Gauntlet   heavy        14    32 STR           2.6   200    Set: Sunken Crown.
+  30  Sunken Crown Right Gauntlet  heavy        14    32 STR           2.6   200    Set: Sunken Crown.
+  30  Thunder Abbot Left Gauntlet  cloth        8     32 INT           0.8   200    Set: Thunder Abbot.
+  30  Thunder Abbot Right Gauntlet cloth        8     32 INT           0.8   200    Set: Thunder Abbot.
+  30  Truth of Raikuru Left Gauntl cloth        8     32 DEX           0.8   200    Set: Truth of Raikuru.
+  30  Truth of Raikuru Right Gaunt cloth        8     32 DEX           0.8   200    Set: Truth of Raikuru.
+  30  Wailing Mistress Left Gauntl cloth        8     32 INT           0.8   200    Set: Wailing Mistress.
+  30  Wailing Mistress Right Gaunt cloth        8     32 INT           0.8   200    Set: Wailing Mistress.
+  30  Winter Court Left Gauntlet   cloth        8     32 INT           0.8   200    Set: Winter Court.
+  30  Winter Court Right Gauntlet  cloth        8     32 INT           0.8   200    Set: Winter Court.
+  50  Deepwarden Grips             heavy        44    62 STR           2.6   290    Unique. +35 Maximum HP
+  50  Gloomthread Grips            cloth        26    62 DEX           0.8   290    Unique. 12% increased Movement Speed
+  50  Prismkeeper Grips            cloth        26    62 INT           0.8   290    Unique. +24 Maximum Mana
+  50  Vaultpath Grips              cloth        26    62 DEX           0.8   290    Unique. +20 Evasion
 
-Boots (6)
----------
+Boots (40)
+----------
   Lvl Name                         Weight class Def   Requires         Wt    Value  Notes
   1   Iron Sabaton                 heavy        4     10 STR           3.6   11     3% increased Movement Speed
   1   Soft Boot                    cloth        2     -                1.2   11     5% increased Movement Speed
@@ -335,6 +617,40 @@ Boots (6)
   8   Starbound Sage Boots         cloth        4     20 INT           1.2   50     Set: Starbound Sage. 7% increased Movement Speed
   11  Warden Greave                heavy        12    24 STR           3.6   41     4% increased Movement Speed; +5% Knockback Resistance
   11  Wayfarer Boot                cloth        6     16 AGI           1.2   41     8% increased Movement Speed
+  30  Ashfall Pilgrim Left Greave  cloth        10    32 INT           1.2   200    Set: Ashfall Pilgrim. 6% increased Movement Speed
+  30  Ashfall Pilgrim Right Greave cloth        10    32 INT           1.2   200    Set: Ashfall Pilgrim. 6% increased Movement Speed
+  30  Crimson Glory Left Greave    heavy        17    32 STR           3.6   200    Set: Crimson Glory. 4% increased Movement Speed
+  30  Crimson Glory Right Greave   heavy        17    32 STR           3.6   200    Set: Crimson Glory. 4% increased Movement Speed
+  30  Dragonforge Left Greave      heavy        17    32 STR           3.6   200    Set: Dragonforge. 4% increased Movement Speed
+  30  Dragonforge Right Greave     heavy        17    32 STR           3.6   200    Set: Dragonforge. 4% increased Movement Speed
+  30  Eclipse Dancer Left Greave   cloth        10    32 DEX           1.2   200    Set: Eclipse Dancer. 6% increased Movement Speed
+  30  Eclipse Dancer Right Greave  cloth        10    32 DEX           1.2   200    Set: Eclipse Dancer. 6% increased Movement Speed
+  30  Gale Nomad Left Greave       cloth        10    32 DEX           1.2   200    Set: Gale Nomad. 6% increased Movement Speed
+  30  Gale Nomad Right Greave      cloth        10    32 DEX           1.2   200    Set: Gale Nomad. 6% increased Movement Speed
+  30  Grievance of the Fairy Left  cloth        10    32 DEX           1.2   200    Set: Grievance of the Fairy. 6% increased Movement Speed
+  30  Grievance of the Fairy Right cloth        10    32 DEX           1.2   200    Set: Grievance of the Fairy. 6% increased Movement Speed
+  30  Obsidian Oath Left Greave    heavy        17    32 STR           3.6   200    Set: Obsidian Oath. 4% increased Movement Speed
+  30  Obsidian Oath Right Greave   heavy        17    32 STR           3.6   200    Set: Obsidian Oath. 4% increased Movement Speed
+  30  Pale Requiem Left Greave     cloth        10    32 DEX           1.2   200    Set: Pale Requiem. 6% increased Movement Speed
+  30  Pale Requiem Right Greave    cloth        10    32 DEX           1.2   200    Set: Pale Requiem. 6% increased Movement Speed
+  30  Serpent Veil Left Greave     cloth        10    32 DEX           1.2   200    Set: Serpent Veil. 6% increased Movement Speed
+  30  Serpent Veil Right Greave    cloth        10    32 DEX           1.2   200    Set: Serpent Veil. 6% increased Movement Speed
+  30  Starfall Hunter Left Greave  cloth        10    32 DEX           1.2   200    Set: Starfall Hunter. 6% increased Movement Speed
+  30  Starfall Hunter Right Greave cloth        10    32 DEX           1.2   200    Set: Starfall Hunter. 6% increased Movement Speed
+  30  Sunken Crown Left Greave     heavy        17    32 STR           3.6   200    Set: Sunken Crown. 4% increased Movement Speed
+  30  Sunken Crown Right Greave    heavy        17    32 STR           3.6   200    Set: Sunken Crown. 4% increased Movement Speed
+  30  Thunder Abbot Left Greave    cloth        10    32 INT           1.2   200    Set: Thunder Abbot. 6% increased Movement Speed
+  30  Thunder Abbot Right Greave   cloth        10    32 INT           1.2   200    Set: Thunder Abbot. 6% increased Movement Speed
+  30  Truth of Raikuru Left Greave cloth        10    32 DEX           1.2   200    Set: Truth of Raikuru. 6% increased Movement Speed
+  30  Truth of Raikuru Right Greav cloth        10    32 DEX           1.2   200    Set: Truth of Raikuru. 6% increased Movement Speed
+  30  Wailing Mistress Left Greave cloth        10    32 INT           1.2   200    Set: Wailing Mistress. 6% increased Movement Speed
+  30  Wailing Mistress Right Greav cloth        10    32 INT           1.2   200    Set: Wailing Mistress. 6% increased Movement Speed
+  30  Winter Court Left Greave     cloth        10    32 INT           1.2   200    Set: Winter Court. 6% increased Movement Speed
+  30  Winter Court Right Greave    cloth        10    32 INT           1.2   200    Set: Winter Court. 6% increased Movement Speed
+  60  Deepwarden Treads            heavy        51    72 STR           3.6   340    +35 Maximum HP; 8% increased Movement Speed
+  60  Gloomthread Treads           cloth        31    72 DEX           1.2   340    12% increased Movement Speed
+  60  Prismkeeper Treads           cloth        31    72 INT           1.2   340    +24 Maximum Mana; 8% increased Movement Speed
+  60  Vaultpath Treads             cloth        31    72 DEX           1.2   340    +20 Evasion; 8% increased Movement Speed
 
 ======================================================================================================================
 5. ACCESSORIES (RINGS, AMULETS, CHARMS)
@@ -350,6 +666,66 @@ Boots (6)
   12  War Talisman                 0.8   55     8% increased Impact Strength
   16  Sigil Ring                   0.8   70     +2% Critical Chance
   18  Star Pendant                 0.8   90     8% increased Elemental Damage
+  30  Ashfall Pilgrim Brooch       0.8   200    +4% Status Resistance
+  30  Ashfall Pilgrim Pendant      0.8   200    +20 Maximum Mana
+  30  Ashfall Pilgrim Seal         0.8   200    +30 Maximum HP
+  30  Ashfall Pilgrim Signet       0.8   200    +3 Intelligence
+  30  Crimson Glory Brooch         0.8   200    +4% Status Resistance
+  30  Crimson Glory Pendant        0.8   200    +20 Maximum Mana
+  30  Crimson Glory Seal           0.8   200    +30 Maximum HP
+  30  Crimson Glory Signet         0.8   200    +3 Strength
+  30  Dragonforge Brooch           0.8   200    +4% Status Resistance
+  30  Dragonforge Pendant          0.8   200    +20 Maximum Mana
+  30  Dragonforge Seal             0.8   200    +30 Maximum HP
+  30  Dragonforge Signet           0.8   200    +3 Strength
+  30  Eclipse Dancer Brooch        0.8   200    +4% Status Resistance
+  30  Eclipse Dancer Pendant       0.8   200    +20 Maximum Mana
+  30  Eclipse Dancer Seal          0.8   200    +30 Maximum HP
+  30  Eclipse Dancer Signet        0.8   200    +3 Dexterity
+  30  Gale Nomad Brooch            0.8   200    +4% Status Resistance
+  30  Gale Nomad Pendant           0.8   200    +20 Maximum Mana
+  30  Gale Nomad Seal              0.8   200    +30 Maximum HP
+  30  Gale Nomad Signet            0.8   200    +3 Dexterity
+  30  Grievance of the Fairy Brooc 0.8   200    +4% Status Resistance
+  30  Grievance of the Fairy Penda 0.8   200    +20 Maximum Mana
+  30  Grievance of the Fairy Seal  0.8   200    +30 Maximum HP
+  30  Grievance of the Fairy Signe 0.8   200    +3 Dexterity
+  30  Obsidian Oath Brooch         0.8   200    +4% Status Resistance
+  30  Obsidian Oath Pendant        0.8   200    +20 Maximum Mana
+  30  Obsidian Oath Seal           0.8   200    +30 Maximum HP
+  30  Obsidian Oath Signet         0.8   200    +3 Strength
+  30  Pale Requiem Brooch          0.8   200    +4% Status Resistance
+  30  Pale Requiem Pendant         0.8   200    +20 Maximum Mana
+  30  Pale Requiem Seal            0.8   200    +30 Maximum HP
+  30  Pale Requiem Signet          0.8   200    +3 Dexterity
+  30  Serpent Veil Brooch          0.8   200    +4% Status Resistance
+  30  Serpent Veil Pendant         0.8   200    +20 Maximum Mana
+  30  Serpent Veil Seal            0.8   200    +30 Maximum HP
+  30  Serpent Veil Signet          0.8   200    +3 Dexterity
+  30  Starfall Hunter Brooch       0.8   200    +4% Status Resistance
+  30  Starfall Hunter Pendant      0.8   200    +20 Maximum Mana
+  30  Starfall Hunter Seal         0.8   200    +30 Maximum HP
+  30  Starfall Hunter Signet       0.8   200    +3 Dexterity
+  30  Sunken Crown Brooch          0.8   200    +4% Status Resistance
+  30  Sunken Crown Pendant         0.8   200    +20 Maximum Mana
+  30  Sunken Crown Seal            0.8   200    +30 Maximum HP
+  30  Sunken Crown Signet          0.8   200    +3 Strength
+  30  Thunder Abbot Brooch         0.8   200    +4% Status Resistance
+  30  Thunder Abbot Pendant        0.8   200    +20 Maximum Mana
+  30  Thunder Abbot Seal           0.8   200    +30 Maximum HP
+  30  Thunder Abbot Signet         0.8   200    +3 Intelligence
+  30  Truth of Raikuru Brooch      0.8   200    +4% Status Resistance
+  30  Truth of Raikuru Pendant     0.8   200    +20 Maximum Mana
+  30  Truth of Raikuru Seal        0.8   200    +30 Maximum HP
+  30  Truth of Raikuru Signet      0.8   200    +3 Dexterity
+  30  Wailing Mistress Brooch      0.8   200    +4% Status Resistance
+  30  Wailing Mistress Pendant     0.8   200    +20 Maximum Mana
+  30  Wailing Mistress Seal        0.8   200    +30 Maximum HP
+  30  Wailing Mistress Signet      0.8   200    +3 Intelligence
+  30  Winter Court Brooch          0.8   200    +4% Status Resistance
+  30  Winter Court Pendant         0.8   200    +20 Maximum Mana
+  30  Winter Court Seal            0.8   200    +30 Maximum HP
+  30  Winter Court Signet          0.8   200    +3 Intelligence
 
 ======================================================================================================================
 6. ITEM SETS
@@ -358,23 +734,203 @@ Boots (6)
 
 Aether Guardian (knight)
 ------------------------
-  Pieces: Aether Guardian Helm [helm], Aether Guardian Plate [armor], Aether Guardian Gauntlets [gloves], Aether
-  Guardian Greaves [boots], Aether Guardian Aegis [shield]
+  Pieces: Aether Guardian Helm [helm], Aether Guardian Plate [armor], Aether Guardian Cuisses [leggings], Aether
+  Guardian Gauntlets [gloves], Aether Guardian Greaves [boots], Aether Guardian Aegis [shield]
   (2) +40 Defense and 10% increased Defense
   (3) +8% Block Chance and +10% Block Strength
   (5) Blocking releases a protective Aether pulse: knocks nearby enemies back and grants a ward of 6% of Maximum HP
   (2 s cooldown).
+  (6) +8% maximum HP and +10% Knockback Resistance
   Worn by the wardens who held the Sanctuary gate on the night the Aether broke.
+
+Ashfall Pilgrim (mage)
+----------------------
+  Pieces: Ashfall Pilgrim Wand [weapon], Ashfall Pilgrim Shield [shield], Ashfall Pilgrim Crown [helm], Ashfall
+  Pilgrim Vestment [inner_garment], Ashfall Pilgrim Armor [armor], Ashfall Pilgrim Legguards [leggings], Ashfall
+  Pilgrim Left Gauntlet [gloves], Ashfall Pilgrim Right Gauntlet [gloves], Ashfall Pilgrim Left Greave [boots],
+  Ashfall Pilgrim Right Greave [boots], Ashfall Pilgrim Signet [accessory], Ashfall Pilgrim Seal [accessory],
+  Ashfall Pilgrim Pendant [accessory], Ashfall Pilgrim Brooch [accessory]
+  (3) +10% maximum Mana and +8% cast speed.
+  (6) +12% Fire damage and +6% Fire resistance.
+  (14) Fire hits spread Burning from burning targets to nearby foes.
+  Complete Ashfall Pilgrim with trophies from bosses of level 30 or higher.
+
+Crimson Glory (knight)
+----------------------
+  Pieces: Crimson Glory Sword [weapon], Crimson Glory Shield [shield], Crimson Glory Crown [helm], Crimson Glory
+  Vestment [inner_garment], Crimson Glory Armor [armor], Crimson Glory Legguards [leggings], Crimson Glory Left
+  Gauntlet [gloves], Crimson Glory Right Gauntlet [gloves], Crimson Glory Left Greave [boots], Crimson Glory Right
+  Greave [boots], Crimson Glory Signet [accessory], Crimson Glory Seal [accessory], Crimson Glory Pendant
+  [accessory], Crimson Glory Brooch [accessory]
+  (3) +10% Defense and +8% maximum health.
+  (6) +12% Fire damage and +6% Fire resistance.
+  (14) Blocks release a 60% weapon-damage shockwave (1 s cooldown).
+  Complete Crimson Glory with trophies from bosses of level 30 or higher.
+
+Dragonforge (knight)
+--------------------
+  Pieces: Dragonforge Axe [weapon], Dragonforge Shield [shield], Dragonforge Crown [helm], Dragonforge Vestment
+  [inner_garment], Dragonforge Armor [armor], Dragonforge Legguards [leggings], Dragonforge Left Gauntlet [gloves],
+  Dragonforge Right Gauntlet [gloves], Dragonforge Left Greave [boots], Dragonforge Right Greave [boots],
+  Dragonforge Signet [accessory], Dragonforge Seal [accessory], Dragonforge Pendant [accessory], Dragonforge Brooch
+  [accessory]
+  (3) +10% Defense and +8% maximum health.
+  (6) +12% Fire damage and +6% Fire resistance.
+  (14) Hits have a 15% chance to ignite enemies.
+  Complete Dragonforge with trophies from bosses of level 30 or higher.
+
+Eclipse Dancer (shadowblade)
+----------------------------
+  Pieces: Eclipse Dancer Dagger [weapon], Eclipse Dancer Shield [shield], Eclipse Dancer Crown [helm], Eclipse
+  Dancer Vestment [inner_garment], Eclipse Dancer Armor [armor], Eclipse Dancer Legguards [leggings], Eclipse Dancer
+  Left Gauntlet [gloves], Eclipse Dancer Right Gauntlet [gloves], Eclipse Dancer Left Greave [boots], Eclipse Dancer
+  Right Greave [boots], Eclipse Dancer Signet [accessory], Eclipse Dancer Seal [accessory], Eclipse Dancer Pendant
+  [accessory], Eclipse Dancer Brooch [accessory]
+  (3) +8% attack speed and +12% Evasion.
+  (6) +12% Dark damage and +6% Dark resistance.
+  (14) Dodging leaves a lightning trail that Shocks enemies.
+  Complete Eclipse Dancer with trophies from bosses of level 30 or higher.
+
+Gale Nomad (ranger)
+-------------------
+  Pieces: Gale Nomad Bow [weapon], Gale Nomad Crown [helm], Gale Nomad Vestment [inner_garment], Gale Nomad Armor
+  [armor], Gale Nomad Legguards [leggings], Gale Nomad Left Gauntlet [gloves], Gale Nomad Right Gauntlet [gloves],
+  Gale Nomad Left Greave [boots], Gale Nomad Right Greave [boots], Gale Nomad Signet [accessory], Gale Nomad Seal
+  [accessory], Gale Nomad Pendant [accessory], Gale Nomad Brooch [accessory]
+  (3) +12% projectile damage and +25 Accuracy.
+  (6) +12% Wind damage and +6% Wind resistance.
+  (13) Dodging grants 18% more movement speed for 2 seconds.
+  Complete Gale Nomad with trophies from bosses of level 30 or higher.
+
+Grievance of the Fairy (ranger)
+-------------------------------
+  Pieces: Grievance of the Fairy Bow [weapon], Grievance of the Fairy Crown [helm], Grievance of the Fairy Vestment
+  [inner_garment], Grievance of the Fairy Armor [armor], Grievance of the Fairy Legguards [leggings], Grievance of
+  the Fairy Left Gauntlet [gloves], Grievance of the Fairy Right Gauntlet [gloves], Grievance of the Fairy Left
+  Greave [boots], Grievance of the Fairy Right Greave [boots], Grievance of the Fairy Signet [accessory], Grievance
+  of the Fairy Seal [accessory], Grievance of the Fairy Pendant [accessory], Grievance of the Fairy Brooch
+  [accessory]
+  (3) +12% projectile damage and +25 Accuracy.
+  (6) +12% Earth damage and +6% Earth resistance.
+  (13) Kills restore 2.5% of maximum health.
+  Complete Grievance of the Fairy with trophies from bosses of level 30 or higher.
+
+Obsidian Oath (knight)
+----------------------
+  Pieces: Obsidian Oath Greatsword [weapon], Obsidian Oath Crown [helm], Obsidian Oath Vestment [inner_garment],
+  Obsidian Oath Armor [armor], Obsidian Oath Legguards [leggings], Obsidian Oath Left Gauntlet [gloves], Obsidian
+  Oath Right Gauntlet [gloves], Obsidian Oath Left Greave [boots], Obsidian Oath Right Greave [boots], Obsidian Oath
+  Signet [accessory], Obsidian Oath Seal [accessory], Obsidian Oath Pendant [accessory], Obsidian Oath Brooch
+  [accessory]
+  (3) +10% Defense and +8% maximum health.
+  (6) +12% Dark damage and +6% Dark resistance.
+  (13) Every fifth attack releases a staggering radiant shockwave.
+  Complete Obsidian Oath with trophies from bosses of level 30 or higher.
+
+Pale Requiem (shadowblade)
+--------------------------
+  Pieces: Pale Requiem Dagger [weapon], Pale Requiem Shield [shield], Pale Requiem Crown [helm], Pale Requiem
+  Vestment [inner_garment], Pale Requiem Armor [armor], Pale Requiem Legguards [leggings], Pale Requiem Left
+  Gauntlet [gloves], Pale Requiem Right Gauntlet [gloves], Pale Requiem Left Greave [boots], Pale Requiem Right
+  Greave [boots], Pale Requiem Signet [accessory], Pale Requiem Seal [accessory], Pale Requiem Pendant [accessory],
+  Pale Requiem Brooch [accessory]
+  (3) +8% attack speed and +12% Evasion.
+  (6) +12% Ice damage and +6% Ice resistance.
+  (14) Critical hits restore 2.5% of maximum health.
+  Complete Pale Requiem with trophies from bosses of level 30 or higher.
+
+Serpent Veil (shadowblade)
+--------------------------
+  Pieces: Serpent Veil Claw [weapon], Serpent Veil Shield [shield], Serpent Veil Crown [helm], Serpent Veil Vestment
+  [inner_garment], Serpent Veil Armor [armor], Serpent Veil Legguards [leggings], Serpent Veil Left Gauntlet
+  [gloves], Serpent Veil Right Gauntlet [gloves], Serpent Veil Left Greave [boots], Serpent Veil Right Greave
+  [boots], Serpent Veil Signet [accessory], Serpent Veil Seal [accessory], Serpent Veil Pendant [accessory], Serpent
+  Veil Brooch [accessory]
+  (3) +8% attack speed and +12% Evasion.
+  (6) +12% Earth damage and +6% Earth resistance.
+  (14) Evading an attack restores 4 Mana.
+  Complete Serpent Veil with trophies from bosses of level 30 or higher.
 
 Starbound Sage (mage)
 ---------------------
-  Pieces: Starbound Sage Hood [helm], Starbound Sage Robe [armor], Starbound Sage Gloves [gloves], Starbound Sage
-  Boots [boots], Starbound Sage Staff [weapon]
+  Pieces: Starbound Sage Hood [helm], Starbound Sage Robe [armor], Starbound Sage Leggings [leggings], Starbound
+  Sage Gloves [gloves], Starbound Sage Boots [boots], Starbound Sage Staff [weapon]
   (2) +50 Maximum Mana
   (3) +20% increased Elemental Damage
   (5) Casting a spell of a different element than your last grants Arcane Amplification: 8% more spell damage per
   stack (max 5, 6 s).
+  (6) +8% Cast Speed and +1.5 Mana Regeneration
   The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea.
+
+Starfall Hunter (ranger)
+------------------------
+  Pieces: Starfall Hunter Crossbow [weapon], Starfall Hunter Crown [helm], Starfall Hunter Vestment [inner_garment],
+  Starfall Hunter Armor [armor], Starfall Hunter Legguards [leggings], Starfall Hunter Left Gauntlet [gloves],
+  Starfall Hunter Right Gauntlet [gloves], Starfall Hunter Left Greave [boots], Starfall Hunter Right Greave
+  [boots], Starfall Hunter Signet [accessory], Starfall Hunter Seal [accessory], Starfall Hunter Pendant
+  [accessory], Starfall Hunter Brooch [accessory]
+  (3) +12% projectile damage and +25 Accuracy.
+  (6) +12% Light damage and +6% Light resistance.
+  (13) Critical hits reduce skill cooldowns by 0.25 seconds.
+  Complete Starfall Hunter with trophies from bosses of level 30 or higher.
+
+Sunken Crown (knight)
+---------------------
+  Pieces: Sunken Crown Spear [weapon], Sunken Crown Crown [helm], Sunken Crown Vestment [inner_garment], Sunken
+  Crown Armor [armor], Sunken Crown Legguards [leggings], Sunken Crown Left Gauntlet [gloves], Sunken Crown Right
+  Gauntlet [gloves], Sunken Crown Left Greave [boots], Sunken Crown Right Greave [boots], Sunken Crown Signet
+  [accessory], Sunken Crown Seal [accessory], Sunken Crown Pendant [accessory], Sunken Crown Brooch [accessory]
+  (3) +10% Defense and +8% maximum health.
+  (6) +12% Water damage and +6% Water resistance.
+  (13) Take 15% less damage while below 35% health.
+  Complete Sunken Crown with trophies from bosses of level 30 or higher.
+
+Thunder Abbot (mage)
+--------------------
+  Pieces: Thunder Abbot Staff [weapon], Thunder Abbot Crown [helm], Thunder Abbot Vestment [inner_garment], Thunder
+  Abbot Armor [armor], Thunder Abbot Legguards [leggings], Thunder Abbot Left Gauntlet [gloves], Thunder Abbot Right
+  Gauntlet [gloves], Thunder Abbot Left Greave [boots], Thunder Abbot Right Greave [boots], Thunder Abbot Signet
+  [accessory], Thunder Abbot Seal [accessory], Thunder Abbot Pendant [accessory], Thunder Abbot Brooch [accessory]
+  (3) +10% maximum Mana and +8% cast speed.
+  (6) +12% Lightning damage and +6% Lightning resistance.
+  (13) Chain Lightning gains 2 extra jumps against Wet targets.
+  Complete Thunder Abbot with trophies from bosses of level 30 or higher.
+
+Truth of Raikuru (ranger)
+-------------------------
+  Pieces: Truth of Raikuru Crossbow [weapon], Truth of Raikuru Crown [helm], Truth of Raikuru Vestment
+  [inner_garment], Truth of Raikuru Armor [armor], Truth of Raikuru Legguards [leggings], Truth of Raikuru Left
+  Gauntlet [gloves], Truth of Raikuru Right Gauntlet [gloves], Truth of Raikuru Left Greave [boots], Truth of
+  Raikuru Right Greave [boots], Truth of Raikuru Signet [accessory], Truth of Raikuru Seal [accessory], Truth of
+  Raikuru Pendant [accessory], Truth of Raikuru Brooch [accessory]
+  (3) +12% projectile damage and +25 Accuracy.
+  (6) +12% Lightning damage and +6% Lightning resistance.
+  (13) Critical hits chain 30% of their damage as lightning.
+  Complete Truth of Raikuru with trophies from bosses of level 30 or higher.
+
+Wailing Mistress (mage)
+-----------------------
+  Pieces: Wailing Mistress Staff [weapon], Wailing Mistress Crown [helm], Wailing Mistress Vestment [inner_garment],
+  Wailing Mistress Armor [armor], Wailing Mistress Legguards [leggings], Wailing Mistress Left Gauntlet [gloves],
+  Wailing Mistress Right Gauntlet [gloves], Wailing Mistress Left Greave [boots], Wailing Mistress Right Greave
+  [boots], Wailing Mistress Signet [accessory], Wailing Mistress Seal [accessory], Wailing Mistress Pendant
+  [accessory], Wailing Mistress Brooch [accessory]
+  (3) +10% maximum Mana and +8% cast speed.
+  (6) +12% Dark damage and +6% Dark resistance.
+  (13) Spell hits restore 1.5 Mana.
+  Complete Wailing Mistress with trophies from bosses of level 30 or higher.
+
+Winter Court (mage)
+-------------------
+  Pieces: Winter Court Wand [weapon], Winter Court Shield [shield], Winter Court Crown [helm], Winter Court Vestment
+  [inner_garment], Winter Court Armor [armor], Winter Court Legguards [leggings], Winter Court Left Gauntlet
+  [gloves], Winter Court Right Gauntlet [gloves], Winter Court Left Greave [boots], Winter Court Right Greave
+  [boots], Winter Court Signet [accessory], Winter Court Seal [accessory], Winter Court Pendant [accessory], Winter
+  Court Brooch [accessory]
+  (3) +10% maximum Mana and +8% cast speed.
+  (6) +12% Ice damage and +6% Ice resistance.
+  (14) Enemies that hit you are Chilled.
+  Complete Winter Court with trophies from bosses of level 30 or higher.
 
 ======================================================================================================================
 7. NAMED UNIQUES
@@ -414,6 +970,94 @@ Heart of the Aether — Amulet, level 10 (Aether)
   Aetherheart: Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.
   A drop of the world's first light, caged in silver.
 
+Windswift — Breeches, level 10 (Mythical)
+-----------------------------------------
+  8 defense; +14 Evasion
+  Windswift: After dodging, gain 20% more Movement Speed for 2 s.
+  A courier's breeches from the old coast road. After a dodge the wind keeps pushing.
+
+Rimewalkers — Legplates, level 10 (Mythical)
+--------------------------------------------
+  18 defense; +10% Ice Resistance
+  Frostguard: Enemies that hit you are Chilled.
+  Forged in the Rimeglass Barrow. Frost creeps up the blade of anyone who strikes the wearer.
+
+Stormstriders — Leggings, level 14 (Aether)
+-------------------------------------------
+  12 defense; 4% increased Movement Speed
+  Stormstriding: Dodging or blinking leaves a crackling trail that Shocks enemies.
+  Stitched with thread spun from a lightning-struck oak. They crackle when you run.
+
+Stillwater — Silks, level 14 (Legendary)
+----------------------------------------
+  11 defense; +25 Maximum Mana
+  Stillwater: Mana regeneration is tripled while you stand still.
+  Worn by the drowned chapel's monks for their long, motionless vigils.
+
+Oathbound — Cuisses, level 16 (Legendary)
+-----------------------------------------
+  28 defense; +25 Maximum HP
+  Valorous: Valor never decays and you start fights with 30 Valor.
+  Every knight who wore them swore never to kneel. The knee cops were never scratched.
+
+Bloodrunner — Leggings, level 16 (Legendary)
+--------------------------------------------
+  12 defense; +1.5% Critical Chance
+  Bloodthirsty: Kills restore 4% of Maximum HP.
+  Dyed three times, and never with anything as honest as madder.
+
+Riftwalker — Legwraps, level 18 (Aether)
+----------------------------------------
+  12 defense; 4% increased Cast Speed
+  Riftwalker's: Blink leaves a Frost Nova at the point you left.
+  Wrapped around the legs of a mage who blinked once too often and left the cold behind.
+
+Echoing Bastion — Legplates, level 20 (Legendary)
+-------------------------------------------------
+  32 defense; +5% Block Strength
+  Echoing: Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown).
+  Hollow steel tuned like a bell. A blocked blow rings out through the ground.
+
+Deepwarden Coat — Deepwarden Coat, level 25 (Mythical)
+------------------------------------------------------
+  50 defense; +35 Maximum HP
+  Valorous: Valor never decays and you start fights with 30 Valor.
+
+Gloomthread Coat — Gloomthread Coat, level 25 (Mythical)
+--------------------------------------------------------
+  30 defense; 12% increased Movement Speed
+  Bloodthirsty: Kills restore 4% of Maximum HP.
+
+Prismkeeper Coat — Prismkeeper Coat, level 25 (Mythical)
+--------------------------------------------------------
+  30 defense; +24 Maximum Mana
+  Overflowing: At maximum Arcane Charge your spells cost no Mana.
+
+Vaultpath Coat — Vaultpath Coat, level 25 (Mythical)
+----------------------------------------------------
+  30 defense; +20 Evasion
+  Frostguard: Enemies that hit you are Chilled.
+
+Deepwarden Grips — Deepwarden Grips, level 50 (Legendary)
+---------------------------------------------------------
+  44 defense; +35 Maximum HP
+  Echoing: Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown).
+
+Gloomthread Grips — Gloomthread Grips, level 50 (Legendary)
+-----------------------------------------------------------
+  26 defense; 12% increased Movement Speed
+  Relentless: Critical hits reduce all skill cooldowns by 0.5 seconds.
+
+Prismkeeper Grips — Prismkeeper Grips, level 50 (Legendary)
+-----------------------------------------------------------
+  26 defense; +24 Maximum Mana
+  Frostbitten: Frozen enemies take 40% more impact damage and shatter on death, chilling nearby foes.
+
+Vaultpath Grips — Vaultpath Grips, level 50 (Legendary)
+-------------------------------------------------------
+  26 defense; +20 Evasion
+  Riftborn: Critical attacks release chain lightning at up to 3 nearby enemies (50% of the hit as Lightning).
+
 ======================================================================================================================
 8. ENCHANTMENTS (RANDOM AFFIXES)
 ======================================================================================================================
@@ -443,47 +1087,47 @@ Heart of the Aether — Amulet, level 10 (Aether)
   Prismatic            prefix  Elemental Damage           [5: 6%-10%] [18: 11%-18%] [30: 19%-26%]      weapon, accessory
   Champion-slaying     prefix  Damage to Champions        [5: 6%-10%] [15: 11%-18%] [30: 19%-26%]      weapon, accessory, gloves
   of the Spirit-caller suffix  Soul Ember Find            [1: 10%-20%] [15: 21%-35%]                   accessory, helm
-  of Shadows' Step     suffix  Evasion                    [1: 6.0-14.0] [12: 15.0-30.0] [25: 31.0-55.0 boots, gloves, armor, inner_garment
+  of Shadows' Step     suffix  Evasion                    [1: 6.0-14.0] [12: 15.0-30.0] [25: 31.0-55.0 boots, gloves, armor, inner_garment, leggings
   of Plenty            suffix  Gold Find                  [1: 8%-15%] [12: 16%-28%] [25: 29%-45%]      accessory, helm, gloves, boots
-  of Renewal           suffix  Healing Effectiveness      [1: 6%-12%] [15: 13%-22%]                    helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Renewal           suffix  Healing Effectiveness      [1: 6%-12%] [15: 13%-22%]                    helm, armor, inner_garment, leggings, gloves, boots, shield,
   of Reaping           suffix  Life on Kill               [1: 3.0-6.0] [12: 7.0-14.0] [25: 15.0-28.0]  weapon, accessory, gloves
-  of Mending           suffix  HP Regeneration            [1: 0.5-1.0] [12: 1.1-2.2] [25: 2.3-4.0]     helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Vigor             suffix  HP Regeneration            [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Mending           suffix  HP Regeneration            [1: 0.5-1.0] [12: 1.1-2.2] [25: 2.3-4.0]     helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Vigor             suffix  HP Regeneration            [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, leggings, gloves, boots, shield,
   of Thunderous Blows  suffix  Impact Strength            [1: 8%-14%] [15: 15%-25%]                    weapon, gloves, boots
   of the Sage          suffix  Intelligence               [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
-  of the Anchor        suffix  Knockback Resistance       [1: 5%-8%] [15: 9%-14%]                      boots, armor
+  of the Anchor        suffix  Knockback Resistance       [1: 5%-8%] [15: 9%-14%]                      boots, armor, leggings
   of the Leech         suffix  Life Leech                 [5: 1%-2%] [18: 3%-4%]                       weapon, accessory, gloves
-  Sturdy               prefix  Local Def                  [1: 15%-30%] [10: 30%-50%] [22: 50%-75%]     helm, armor, inner_garment, gloves, boots, shield
-  Reinforced           prefix  Local Def Flat             [1: 400%-1000%] [10: 1100%-2400%] [22: 2500% helm, armor, inner_garment, gloves, boots, shield
-  Keen                 prefix  Local Phys                 [1: 15%-30%] [10: 30%-50%] [20: 50%-75%] [35 weapon
+  Sturdy               prefix  Local Def                  [1: 15%-30%] [10: 30%-50%] [22: 50%-75%]     helm, armor, inner_garment, leggings, gloves, boots, shield
+  Reinforced           prefix  Local Def Flat             [1: 400%-1000%] [10: 1100%-2400%] [22: 2500% helm, armor, inner_garment, leggings, gloves, boots, shield
+  Keen                 prefix  Local Phys                 [1: 8%-15%] [10: 15%-22%] [20: 22%-30%] [35: weapon
   Arcane               prefix  Magic Damage               [1: 8%-14%] [12: 15%-24%] [25: 25%-36%]      weapon, helm, accessory, armor
   of Fortune           suffix  Magic Find                 [1: 6%-12%] [15: 13%-22%]                    accessory, helm, boots
   of the Siphon        suffix  Mana Steal                 [5: 1%-2%] [18: 3%-4%]                       weapon, accessory
   of the Harvest       suffix  Mana on Kill               [1: 2.0-4.0] [12: 5.0-9.0] [25: 10.0-16.0]   weapon, accessory
-  of Clarity           suffix  Mana Regeneration          [1: 0.4-0.8] [12: 0.9-1.6] [25: 1.7-2.8]     helm, armor, inner_garment, gloves, boots, shield, accessory
-  of the Wellspring    suffix  Mana Regeneration          [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, gloves, boots, shield, accessory
-  Stalwart             prefix  Maximum HP                 [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, gloves, boots, shield, accessory
-  Scholar's            prefix  Maximum Mana               [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Clarity           suffix  Mana Regeneration          [1: 0.4-0.8] [12: 0.9-1.6] [25: 1.7-2.8]     helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of the Wellspring    suffix  Mana Regeneration          [1: 10%-20%] [12: 21%-35%] [25: 36%-50%]     helm, armor, inner_garment, leggings, gloves, boots, shield,
+  Stalwart             prefix  Maximum HP                 [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, leggings, gloves, boots, shield,
+  Scholar's            prefix  Maximum Mana               [1: 8.0-15.0] [10: 16.0-30.0] [20: 31.0-50.0 helm, armor, inner_garment, leggings, gloves, boots, shield,
   of Haste             suffix  Movement Speed             [1: 4%-6%] [12: 7%-10%] [25: 11%-14%]        boots
   of Sundering         suffix  Armor Penetration          [12: 5%-8%] [28: 9%-14%]                     weapon, accessory
   of Piercing          suffix  Elemental Penetration      [10: 4%-6%] [25: 7%-10%]                     weapon, accessory
   of Searing           suffix  Fire Penetration           [12: 5%-8%] [28: 9%-14%]                     weapon, accessory
   of the Alchemist     suffix  Potion Effectiveness       [1: 10%-18%] [15: 19%-30%]                   armor, gloves, accessory, inner_garment
   Fletched             prefix  Projectile Damage          [1: 8%-14%] [14: 15%-25%]                    weapon, gloves, accessory
-  of the Prism         suffix  All Resistances            [8: 3%-6%] [20: 7%-10%] [35: 11%-15%]        helm, armor, inner_garment, gloves, boots, shield, accessory
-  of the Vigil         suffix  Dark Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of the Mountain      suffix  Earth Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Embers            suffix  Fire Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Winter            suffix  Ice Resistance             [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Shadows           suffix  Light Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Grounding         suffix  Lightning Resistance       [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of the Shore         suffix  Water Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
-  of Stillness         suffix  Wind Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of the Prism         suffix  All Resistances            [8: 3%-6%] [20: 7%-10%] [35: 11%-15%]        helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of the Vigil         suffix  Dark Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of the Mountain      suffix  Earth Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Embers            suffix  Fire Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Winter            suffix  Ice Resistance             [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Shadows           suffix  Light Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Grounding         suffix  Lightning Resistance       [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of the Shore         suffix  Water Resistance           [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
+  of Stillness         suffix  Wind Resistance            [1: 6%-12%] [12: 13%-20%] [25: 21%-30%]      helm, armor, inner_garment, leggings, gloves, boots, shield,
   of Mastery           suffix  Skill Levels               [8: 1.0-1.0] [24: 2.0-2.0]                   weapon, helm, accessory
   of the Monk          suffix  Spirit                     [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
   Crushing             prefix  Stagger Strength           [1: 10%-18%] [14: 19%-30%]                   weapon, gloves
   of Affliction        suffix  Status Chance              [1: 10%-18%] [15: 19%-30%]                   weapon, accessory, gloves
-  of Resolve           suffix  Status Resistance          [1: 5%-8%] [15: 9%-15%]                      helm, armor, inner_garment, gloves, boots, shield, accessory
+  of Resolve           suffix  Status Resistance          [1: 5%-8%] [15: 9%-15%]                      helm, armor, inner_garment, leggings, gloves, boots, shield,
   of the Ox            suffix  Strength                   [1: 2.0-4.0] [10: 5.0-8.0] [20: 9.0-13.0] [3 all equipment
   Soulbound            prefix  Tempo Damage               [1: 8%-15%] [15: 16%-26%] [30: 27%-40%]      accessory, helm, armor
   Thorned              prefix  Thorns                     [1: 3.0-6.0] [12: 8.0-16.0] [25: 18.0-32.0]  armor, shield, inner_garment
@@ -498,10 +1142,10 @@ Heart of the Aether — Amulet, level 10 (Aether)
 Mythical powers
 ---------------
   Aetherwell [mage] — +1 maximum Arcane Charge and spells restore 1 Mana on hit. (weapon, helm, accessory)
-  Bastion — While below 35% HP you take 15% less damage. (armor, helm, shield)
+  Bastion — While below 35% HP you take 15% less damage. (armor, helm, shield, leggings)
   Embersoul — Your hits have a 10% chance to ignite (strong Burning buildup). (weapon, gloves, accessory)
-  Frostguard — Enemies that hit you are Chilled. (armor, shield, inner_garment)
-  Windswift — After dodging, gain 20% more Movement Speed for 2 s. (boots, gloves)
+  Frostguard — Enemies that hit you are Chilled. (armor, shield, inner_garment, leggings)
+  Windswift — After dodging, gain 20% more Movement Speed for 2 s. (boots, gloves, leggings)
   Vampiric — Critical hits heal you for 3% of Maximum HP. (weapon, accessory)
 
 Legendary powers
@@ -509,20 +1153,21 @@ Legendary powers
   Bloodthirsty — Kills restore 4% of Maximum HP. (any slot)
   Conductor's [mage] — Chain Lightning chains 3 additional times against Wet targets. (weapon, helm)
   Echoing [knight] — Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown). (shield,
-  armor, gloves)
+  armor, gloves, leggings)
   Frostbitten — Frozen enemies take 40% more impact damage and shatter on death, chilling nearby foes. (weapon,
   gloves, accessory)
   Overflowing [mage] — At maximum Arcane Charge your spells cost no Mana. (weapon, armor, accessory)
   Pyrelord's [mage] — Burning spreads to one nearby enemy every second. (weapon, helm, accessory)
   Relentless — Critical hits reduce all skill cooldowns by 0.5 seconds. (weapon, accessory, gloves)
-  Stillwater [mage] — Mana regeneration is tripled while you stand still. (armor, inner_garment, accessory)
-  Stormstriding — Dodging or blinking leaves a crackling trail that Shocks enemies. (boots)
-  Valorous [knight] — Valor never decays and you start fights with 30 Valor. (armor, helm, accessory)
+  Stillwater [mage] — Mana regeneration is tripled while you stand still. (armor, inner_garment, accessory,
+  leggings)
+  Stormstriding — Dodging or blinking leaves a crackling trail that Shocks enemies. (boots, leggings)
+  Valorous [knight] — Valor never decays and you start fights with 30 Valor. (armor, helm, accessory, leggings)
   Wallbreaker's [knight] — Impact damage from knockback collisions is doubled. (any slot)
 
 Aether powers
 -------------
-  Riftwalker's [mage] — Blink leaves a Frost Nova at the point you left. (boots, helm, accessory)
+  Riftwalker's [mage] — Blink leaves a Frost Nova at the point you left. (boots, helm, accessory, leggings)
   Aether-edged [knight] — Cleave releases a travelling Aether wave (80% of Cleave's damage as Light). (weapon,
   gloves)
   Riftborn — Critical attacks release chain lightning at up to 3 nearby enemies (50% of the hit as Lightning).
@@ -540,14 +1185,14 @@ Relic powers
 ------------
   Alchemist's — Potions restore 30% more. (armor, accessory, gloves, inner_garment)
   Bramblecoat — Melee attackers take 40 damage. (armor, shield, inner_garment)
-  Unbowed — +12% maximum HP and +8% to all resistances. (armor, helm, shield)
+  Unbowed — +12% maximum HP and +8% to all resistances. (armor, helm, shield, leggings)
   Giantbane — 22% more damage against elites, champions and bosses. (weapon, gloves, accessory)
   Goldrush — +35% Gold Find and +10% Magic Find. (accessory, gloves, boots, helm)
   Reaper's — Kills restore 20 HP and 10 Mana. (weapon, gloves, accessory)
   Scholar's — +12% Experience gained. (accessory, helm, armor)
   Spirit-called — +40% Soul Embers found and your Tempos deal 15% more damage. (accessory, helm)
   Springwater — +40% HP Regeneration and +40% Mana Regeneration. (any slot)
-  Windrunner's — +8% Movement Speed and 15% faster dodge recovery. (boots)
+  Windrunner's — +8% Movement Speed and 15% faster dodge recovery. (boots, leggings)
 
 ======================================================================================================================
 10. FACTION LICENSES
@@ -877,7 +1522,11 @@ Fore-Tech refits
 ======================================================================================================================
 15. QUEST ITEMS
 ======================================================================================================================
+  Dusk-Piercer Shard — The broken tip of a black lance, wrapped in oilcloth. It is warm, and it glows red while its
+  master lives.
   Hollow Crown Fragment — A shard of Morthar's broken crown. It hums with stolen Aether.
+  Kethrax's Chain-Seal — An iron seal as big as a fist, still threaded with a link of Tyrant-chain. The violet fire
+  in it has gone out.
   Ritual Tablet — Ash-stained stone covered in the Ashen Circle's cipher.
   Seal of the First Oath — A heavy bronze seal, warm to the touch. It once kept the Hollow Throne shut.
 
@@ -887,9 +1536,9 @@ Fore-Tech refits
 
 Armor
 -----
-  Tempered Armor (level 2, 22 gold, Forge): 1 Steel Ingot, 2 Cured Leather, 2 Beast Hide ->
+  Tempered Armor (level 2, 22 gold, Forge): 1 Steel Ingot, 2 Cured Leather, 2 Beast Hide -> 
   Champion's Armor (level 8, 110 gold, Forge, needs its recipe scroll): 3 Steel Ingot, 3 Cured Leather, 1 Champion
-  Essence, 2 Orc Tusk ->
+  Essence, 2 Orc Tusk -> 
 
 Bombs and Scrolls
 -----------------
@@ -902,9 +1551,9 @@ Bombs and Scrolls
 
 Charms
 ------
-  Hunter's Charm (level 3, 20 gold, Workbench): 3 Wolf Fang, 1 Cured Leather, 2 Iron Shard ->
+  Hunter's Charm (level 3, 20 gold, Workbench): 3 Wolf Fang, 1 Cured Leather, 2 Iron Shard -> 
   Champion's Trinket (level 8, 90 gold, Workbench, needs its recipe scroll): 1 Champion Essence, 2 Wisp Mote, 3
-  Arcane Dust, 1 Cured Leather ->
+  Arcane Dust, 1 Cured Leather -> 
 
 Draughts
 --------
@@ -947,11 +1596,11 @@ Tonics and Wards
 
 Weapons
 -------
-  Tempered Weapon (level 2, 25 gold, Forge): 2 Steel Ingot, 1 Cured Leather, 2 Wolf Fang ->
+  Tempered Weapon (level 2, 25 gold, Forge): 2 Steel Ingot, 1 Cured Leather, 2 Wolf Fang -> 
   Champion's Weapon (level 8, 120 gold, Forge, needs its recipe scroll): 4 Steel Ingot, 1 Champion Essence, 1 Ogre
-  Sinew, 2 Orc Tusk ->
+  Sinew, 2 Orc Tusk -> 
   Aetherforged Weapon (level 14, 400 gold, Forge, needs its recipe scroll): 5 Steel Ingot, 3 Champion Essence, 2
-  Rune Plate, 5 Aether Shard ->
+  Rune Plate, 5 Aether Shard -> 
 
 ======================================================================================================================
 17. WHERE TO BUY: MERCHANTS
@@ -959,9 +1608,11 @@ Weapons
 
 Brannoc's Forge — Brannoc (Malasugue Town)
 ------------------------------------------
-  Rotating stock: 7 x weapon (sword, greatsword, axe, greataxe, spear, javelin, club, dagger, claw, knuckles, bow)
+  Rotating stock: 7 x weapon (sword, greatsword, axe, greataxe, spear, javelin, club, dagger, claw, knuckles, bow,
+  crossbow)
   Rotating stock: 1 x shield
   Rotating stock: 5 x helm, armor, gloves, boots, inner_garment
+  Rotating stock: 2 x leggings
   Prices: x1.05 markup, buys at x1.00.
 
 Cray's Cutting Room — Anselm Cray (Olivar)
@@ -986,8 +1637,8 @@ Marr's Lapidary — Ysolde Marr (Malasugue Town)
   Essencerift Orbital (lvl 40+), Aetherift Fragment (lvl 20+)
   Prices: x1.00 markup, buys at x1.00.
 
-Pell's Apothecary — Master Aldous Pell (Olivar)
------------------------------------------------
+Angkol Les' Apothecary — Angkol Les (Olivar)
+--------------------------------------------
   Always: Silverleaf, Mirebloom, Emberroot, Brightcap, Greater Health Draught (lvl 6+), Greater Mana Draught (lvl
   6+), Rejuvenation Elixir (lvl 5+), Elixir of Fortune (lvl 10+), Draught of Vigor (lvl 6+), Windstep Tonic (lvl
   6+), Keen-Eye Tonic (lvl 7+), Spirit Ward Draught (lvl 8+), Titan's Brew (lvl 10+), Blinding Flask (lvl 5+),
@@ -995,12 +1646,13 @@ Pell's Apothecary — Master Aldous Pell (Olivar)
   (lvl 6+), Recipe: Elixir of Fortune (lvl 8+), Recipe: Phoenix Feather (lvl 10+)
   Prices: x1.25 markup, buys at x1.15; restocks after every cleared stage or miniboss.
 
-Ashby's Arms Exchange — Corvin Ashby (Olivar)
----------------------------------------------
+Taicho's Arms Exchange — Taicho (Olivar)
+----------------------------------------
   Always: Recipe: Champion's Weapon (lvl 6+), Recipe: Champion's Armor (lvl 6+)
   Rotating stock: 6 x weapon
   Rotating stock: 1 x shield
   Rotating stock: 6 x helm, armor, gloves, boots, inner_garment
+  Rotating stock: 2 x leggings
   Prices: x1.90 markup, buys at x1.05; restocks after every cleared stage or miniboss.
 
 Crane's Fine Settings — Elsbeth Crane (Olivar)
@@ -1025,14 +1677,15 @@ Seris' Arcana — Seris (Malasugue Town)
   Rotating stock: 3 x weapon (staff, wand)
   Rotating stock: 4 x accessory
   Rotating stock: 2 x helm, armor, inner_garment
+  Rotating stock: 1 x leggings
   Prices: x1.10 markup, buys at x0.95.
 
 The Hooded Stranger — Hooded Stranger (Malasugue Town)
 ------------------------------------------------------
-  Rotating stock: 4 x weapon, helm, armor, gloves, boots, accessory
+  Rotating stock: 4 x weapon, helm, armor, leggings, gloves, boots, accessory
   Prices: x1.60 markup, buys at x0.80.
 
-Tovin's Provisions — Tovin (Malasugue Town)
+Anton's Provisions — Anton (Malasugue Town)
 -------------------------------------------
   Always: Health Draught, Mana Draught, Purifying Salts, Scroll of Return (lvl 2+), Greater Health Draught (lvl 6+),
   Greater Mana Draught (lvl 6+), Rejuvenation Elixir (lvl 9+), Town Portal Scroll, Minor Health Draught, Minor Mana
@@ -1049,11 +1702,12 @@ Stonehand's Field Kit — Greta Stonehand (Wyman Outpost)
   Rotating stock: 5 x weapon
   Rotating stock: 1 x shield
   Rotating stock: 5 x helm, armor, gloves, boots, inner_garment
+  Rotating stock: 2 x leggings
   Rotating stock: 2 x accessory
   Prices: x1.00 markup, buys at x1.05.
 
-Wyman Quartermaster — Hobb Tanner (Wyman Outpost)
--------------------------------------------------
+Wyman Quartermaster — Greggy (Wyman Outpost)
+--------------------------------------------
   Always: Minor Health Draught, Health Draught, Mana Draught, Purifying Salts, Town Portal Scroll, Scroll of Return,
   Swiftfoot Tonic (lvl 4+), Featherweight Draught (lvl 5+), Firebomb (lvl 4+), Smoke Pellet (lvl 5+), Whetstone (lvl
   3+), Draught of Vigor (lvl 6+), Blinding Flask (lvl 5+), Iron Shard, Beast Hide, Bolt of Linen, Steel Ingot (lvl

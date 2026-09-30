@@ -132,6 +132,9 @@ static func bases() -> Array:
 		out.append(_b(a[0], a[1], a[2], a[3], {"level_req": a[4], "defense": float(a[5]), "weight_class": a[6],
 			"requirements": a[7], "implicit": a[8], "value": 8 + a[4] * 3,
 			"class_hint": &"knight" if a[6] == &"heavy" else &"mage"}))
+	# ---- Leggings (bh-024) ----
+	out.append_array(DataLeggings.bases())
+	out.append_array(DataSpecialWeapons.bases())       # bh-024: empty until the special weapons' models are added
 	# ---- Accessories ----
 	out.append(_b(&"copper_ring", "Copper Ring", &"accessory", "ring", {"level_req": 1, "value": 20}))
 	out.append(_b(&"silver_ring", "Silver Ring", &"accessory", "ring_2", {"level_req": 8, "value": 40, "implicit": [StatModifier.flat(&"res_all", 0.03)]}))
@@ -452,6 +455,7 @@ static func default_weight(b: ItemBaseDef) -> float:
 		&"helm": return 4.2 if heavy else 1.2
 		&"armor": return clampf(8.0 + b.defense * 0.18, 10.0, 18.0) if heavy else 3.2
 		&"inner_garment": return 6.5 if heavy and b.defense >= 10.0 else (3.6 if heavy else 1.0)
+		&"leggings": return clampf(4.0 + b.defense * 0.12, 4.5, 9.0) if heavy else 1.6
 		&"gloves": return 2.6 if heavy else 0.8
 		&"boots": return 3.6 if heavy else 1.2
 		&"accessory": return 0.8
@@ -520,24 +524,26 @@ static func sets() -> Array:
 	guardian.id = &"aether_guardian"
 	guardian.display_name = "Aether Guardian"
 	guardian.class_hint = &"knight"
-	guardian.pieces = [&"guardian_helm", &"guardian_plate", &"guardian_gauntlets", &"guardian_greaves", &"guardian_aegis"]
+	guardian.pieces = [&"guardian_helm", &"guardian_plate", &"guardian_cuisses", &"guardian_gauntlets", &"guardian_greaves", &"guardian_aegis"]
 	guardian.bonuses = {
 		2: {"desc": "+40 Defense and 10% increased Defense", "mods": [StatModifier.flat(&"defense", 40.0), StatModifier.inc(&"defense", 0.10)]},
 		3: {"desc": "+8% Block Chance and +10% Block Strength", "mods": [StatModifier.flat(&"block_chance", 0.08), StatModifier.flat(&"block_strength", 0.10)]},
 		5: {"desc": "Blocking releases a protective Aether pulse: knocks nearby enemies back and grants a ward of 6% of Maximum HP (2 s cooldown).",
 			"flags": {&"aether_pulse": 0.06}},
+		6: {"desc": "+8% maximum HP and +10% Knockback Resistance", "mods": [StatModifier.inc(&"max_hp", 0.08), StatModifier.flat(&"knockback_res", 0.10)]},
 	}
 	guardian.lore = "Worn by the wardens who held the Sanctuary gate on the night the Aether broke."
 	var sage := SetDef.new()
 	sage.id = &"starbound_sage"
 	sage.display_name = "Starbound Sage"
 	sage.class_hint = &"mage"
-	sage.pieces = [&"sage_hood", &"sage_robe", &"sage_gloves", &"sage_boots", &"sage_staff"]
+	sage.pieces = [&"sage_hood", &"sage_robe", &"sage_leggings", &"sage_gloves", &"sage_boots", &"sage_staff"]
 	sage.bonuses = {
 		2: {"desc": "+50 Maximum Mana", "mods": [StatModifier.flat(&"max_mana", 50.0)]},
 		3: {"desc": "+20% increased Elemental Damage", "mods": [StatModifier.inc(&"elemental_damage", 0.20)]},
 		5: {"desc": "Casting a spell of a different element than your last grants Arcane Amplification: 8% more spell damage per stack (max 5, 6 s).",
 			"flags": {&"arcane_amp": 0.08}},
+		6: {"desc": "+8% Cast Speed and +1.5 Mana Regeneration", "mods": [StatModifier.inc(&"cast_speed", 0.08), StatModifier.flat(&"mana_regen", 1.5)]},
 	}
 	sage.lore = "The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea."
 	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets()
@@ -546,16 +552,16 @@ static func sets() -> Array:
 static func licenses() -> Dictionary:
 	return {
 		&"dawn_order": {"name": "Order of the Dawn", "desc": "Licensed smiths of the knightly Order.",
-			"categories": [&"weapon", &"shield", &"armor", &"helm", &"gloves"],
+			"categories": [&"weapon", &"shield", &"armor", &"helm", &"gloves", &"leggings"],
 			"mods": [[&"block_chance", F, 0.02, 0.0005], [&"valor_gain", I, 0.08, 0.002]]},
 		&"arcanum": {"name": "Circle of the Arcanum", "desc": "Enchantments certified by the mage circle.",
 			"categories": [&"weapon", &"helm", &"armor", &"gloves", &"accessory"],
 			"mods": [[&"cast_speed", I, 0.04, 0.001], [&"mana_regen", F, 0.4, 0.05]]},
 		&"wardens_guild": {"name": "Wardens' Guild", "desc": "Gear of the Sanctuary's gate-wardens.",
-			"categories": [&"armor", &"inner_garment", &"boots", &"shield", &"helm"],
+			"categories": [&"armor", &"inner_garment", &"leggings", &"boots", &"shield", &"helm"],
 			"mods": [[&"max_hp", F, 10.0, 1.5], [&"knockback_res", F, 0.04, 0.001]]},
 		&"hunters_lodge": {"name": "Hunters' Lodge", "desc": "Precision work from the forest lodge.",
-			"categories": [&"weapon", &"gloves", &"boots", &"accessory"],
+			"categories": [&"weapon", &"gloves", &"boots", &"leggings", &"accessory"],
 			"mods": [[&"crit_chance", F, 0.015, 0.0004], [&"accuracy", F, 10.0, 1.5]]},
 		&"merchant_league": {"name": "Merchant League", "desc": "Certified trade goods, fairly priced.",
 			"categories": [&"accessory", &"helm", &"boots"],
@@ -579,7 +585,7 @@ static func _a(id: StringName, label: String, prefix: bool, stat: StringName, op
 
 static func affixes() -> Array:
 	var WEAP := [&"weapon"]
-	var ARM := [&"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"shield"]
+	var ARM := [&"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots", &"shield"]
 	var JEW := [&"accessory"]
 	var ANY := []
 	var ELITE := BH.Rarity.ELITE
@@ -628,7 +634,7 @@ static func affixes() -> Array:
 		_a(&"block_chance", "of Warding", false, &"block_chance", F, [[1, 0.03, 0.05], [15, 0.06, 0.09]], [&"shield"], &"block_chance"),
 		_a(&"hp_regen", "of Mending", false, &"hp_regen", F, [[1, 0.5, 1.0], [12, 1.1, 2.2], [25, 2.3, 4.0]], ARM + JEW, &"hp_regen"),
 		_a(&"mana_regen", "of Clarity", false, &"mana_regen", F, [[1, 0.4, 0.8], [12, 0.9, 1.6], [25, 1.7, 2.8]], ARM + JEW + WEAP, &"mana_regen"),
-		_a(&"evasion", "of Shadows' Step", false, &"evasion", F, [[1, 6, 14], [12, 15, 30], [25, 31, 55]], [&"boots", &"gloves", &"armor", &"inner_garment"], &"evasion", 60, true),
+		_a(&"evasion", "of Shadows' Step", false, &"evasion", F, [[1, 6, 14], [12, 15, 30], [25, 31, 55]], [&"boots", &"gloves", &"armor", &"inner_garment", &"leggings"], &"evasion", 60, true),
 		# Suffixes — offense/utility
 		_a(&"crit_chance", "of the Hawk", false, &"crit_chance", F, [[1, 0.01, 0.02], [12, 0.025, 0.04], [25, 0.045, 0.06]], WEAP + JEW + [&"gloves", &"helm"], &"crit_chance"),
 		_a(&"crit_damage", "of Ruin", false, &"crit_damage", F, [[5, 0.08, 0.15], [15, 0.16, 0.25], [30, 0.26, 0.40]], WEAP + JEW, &"crit_damage", 70),
@@ -639,7 +645,7 @@ static func affixes() -> Array:
 		_a(&"life_leech", "of the Leech", false, &"life_leech", F, [[5, 0.01, 0.02], [18, 0.025, 0.04]], WEAP + JEW + [&"gloves"], &"life_leech", 50),
 		_a(&"mana_leech", "of the Siphon", false, &"mana_leech", F, [[5, 0.01, 0.02], [18, 0.025, 0.04]], WEAP + JEW, &"mana_leech", 40),
 		_a(&"impact_strength", "of Thunderous Blows", false, &"impact_strength", I, [[1, 0.08, 0.14], [15, 0.15, 0.25]], WEAP + [&"gloves", &"boots"], &"impact_strength", 60),
-		_a(&"knockback_res", "of the Anchor", false, &"knockback_res", F, [[1, 0.05, 0.08], [15, 0.09, 0.14]], [&"boots", &"armor"], &"knockback_res", 60),
+		_a(&"knockback_res", "of the Anchor", false, &"knockback_res", F, [[1, 0.05, 0.08], [15, 0.09, 0.14]], [&"boots", &"armor", &"leggings"], &"knockback_res", 60),
 		_a(&"status_res", "of Resolve", false, &"status_res", F, [[1, 0.05, 0.08], [15, 0.09, 0.15]], ARM + JEW, &"status_res", 60),
 		_a(&"status_power", "of Affliction", false, &"status_power", I, [[1, 0.10, 0.18], [15, 0.19, 0.30]], WEAP + JEW + [&"gloves"], &"status_power", 60),
 		_a(&"healing", "of Renewal", false, &"healing", I, [[1, 0.06, 0.12], [15, 0.13, 0.22]], ARM + JEW, &"healing", 40),
@@ -668,25 +674,25 @@ static func powers() -> Array:
 	return [
 		# ---- Mythical: rare magical properties ----
 		_p(&"m_embersoul", "Embersoul", "Your hits have a 10% chance to ignite (strong Burning buildup).", &"hit_ignite", 0.10, [&"weapon", &"gloves", &"accessory"], &"", [], &"mythical"),
-		_p(&"m_frostguard", "Frostguard", "Enemies that hit you are Chilled.", &"thorns_chill", 1.0, [&"armor", &"shield", &"inner_garment"], &"", [], &"mythical"),
+		_p(&"m_frostguard", "Frostguard", "Enemies that hit you are Chilled.", &"thorns_chill", 1.0, [&"armor", &"shield", &"inner_garment", &"leggings"], &"", [], &"mythical"),
 		_p(&"m_vampiric", "Vampiric", "Critical hits heal you for 3% of Maximum HP.", &"crit_heal", 0.03, [&"weapon", &"accessory"], &"", [], &"mythical"),
-		_p(&"m_swiftness", "Windswift", "After dodging, gain 20% more Movement Speed for 2 s.", &"dodge_haste", 0.2, [&"boots", &"gloves"], &"", [], &"mythical"),
-		_p(&"m_bastion", "Bastion", "While below 35% HP you take 15% less damage.", &"low_hp_dr", 0.15, [&"armor", &"helm", &"shield"], &"", [], &"mythical"),
+		_p(&"m_swiftness", "Windswift", "After dodging, gain 20% more Movement Speed for 2 s.", &"dodge_haste", 0.2, [&"boots", &"gloves", &"leggings"], &"", [], &"mythical"),
+		_p(&"m_bastion", "Bastion", "While below 35% HP you take 15% less damage.", &"low_hp_dr", 0.15, [&"armor", &"helm", &"shield", &"leggings"], &"", [], &"mythical"),
 		_p(&"m_aetherwell", "Aetherwell", "+1 maximum Arcane Charge and spells restore 1 Mana on hit.", &"mana_on_spell_hit", 1.0, [&"weapon", &"helm", &"accessory"], &"mage",
 			[StatModifier.flat(&"arcane_max", 1.0)], &"mythical"),
 		# ---- Legendary: build-defining powers ----
 		_p(&"wallbreaker", "Wallbreaker's", "Impact damage from knockback collisions is doubled.", &"impact_double", 1.0, [], &"knight",
 			[StatModifier.inc(&"impact_damage", 1.0)]),
-		_p(&"echoing_guard", "Echoing", "Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown).", &"block_shockwave", 0.6, [&"shield", &"armor", &"gloves"], &"knight"),
+		_p(&"echoing_guard", "Echoing", "Blocking creates a shockwave dealing 60% weapon damage around you (1 s cooldown).", &"block_shockwave", 0.6, [&"shield", &"armor", &"gloves", &"leggings"], &"knight"),
 		_p(&"relentless", "Relentless", "Critical hits reduce all skill cooldowns by 0.5 seconds.", &"crit_cdr", 0.5, [&"weapon", &"accessory", &"gloves"]),
 		_p(&"pyre", "Pyrelord's", "Burning spreads to one nearby enemy every second.", &"burn_spread", 1.0, [&"weapon", &"helm", &"accessory"], &"mage"),
 		_p(&"frostbite", "Frostbitten", "Frozen enemies take 40% more impact damage and shatter on death, chilling nearby foes.", &"frozen_impact", 0.4, [&"weapon", &"gloves", &"accessory"]),
 		_p(&"conductor", "Conductor's", "Chain Lightning chains 3 additional times against Wet targets.", &"wet_chains", 3.0, [&"weapon", &"helm"], &"mage"),
 		_p(&"bloodthirst", "Bloodthirsty", "Kills restore 4% of Maximum HP.", &"kill_heal", 0.04, [], &""),
-		_p(&"stormstride", "Stormstriding", "Dodging or blinking leaves a crackling trail that Shocks enemies.", &"dodge_trail", 1.0, [&"boots"]),
-		_p(&"valorous", "Valorous", "Valor never decays and you start fights with 30 Valor.", &"valor_hold", 30.0, [&"armor", &"helm", &"accessory"], &"knight"),
+		_p(&"stormstride", "Stormstriding", "Dodging or blinking leaves a crackling trail that Shocks enemies.", &"dodge_trail", 1.0, [&"boots", &"leggings"]),
+		_p(&"valorous", "Valorous", "Valor never decays and you start fights with 30 Valor.", &"valor_hold", 30.0, [&"armor", &"helm", &"accessory", &"leggings"], &"knight"),
 		_p(&"overflow", "Overflowing", "At maximum Arcane Charge your spells cost no Mana.", &"arcane_free", 1.0, [&"weapon", &"armor", &"accessory"], &"mage"),
-		_p(&"stillwater", "Stillwater", "Mana regeneration is tripled while you stand still.", &"still_mana", 2.0, [&"armor", &"inner_garment", &"accessory"], &"mage"),
+		_p(&"stillwater", "Stillwater", "Mana regeneration is tripled while you stand still.", &"still_mana", 2.0, [&"armor", &"inner_garment", &"accessory", &"leggings"], &"mage"),
 		# ---- Aether: altered abilities ----
 		_p(&"a_fifth_stagger", "Dawnbreaker", "Every fifth attack deals massive stagger and releases a radiant shockwave.", &"fifth_stagger", 1.0, [&"weapon"], &"knight", [], &"aether"),
 		_p(&"a_crit_lightning", "Riftborn", "Critical attacks release chain lightning at up to 3 nearby enemies (50% of the hit as Lightning).", &"crit_lightning", 0.5, [&"weapon", &"gloves", &"accessory"], &"", [], &"aether"),
@@ -694,6 +700,6 @@ static func powers() -> Array:
 		_p(&"a_frozen_explode", "Winter's", "Frozen enemies explode when killed, dealing 30% of their Maximum HP as Ice damage around them.", &"frozen_explode", 0.3, [&"weapon", &"gloves", &"accessory"], &"", [], &"aether"),
 		_p(&"a_still_mana", "Stillness", "Standing still for 1 s increases Mana regeneration by 150% and HP regeneration by 50%.", &"still_mana", 1.5, [&"accessory", &"armor"], &"", [], &"aether"),
 		_p(&"a_cleave_wave", "Aether-edged", "Cleave releases a travelling Aether wave (80% of Cleave's damage as Light).", &"cleave_wave", 0.8, [&"weapon", &"gloves"], &"knight", [], &"aether"),
-		_p(&"a_blink_nova", "Riftwalker's", "Blink leaves a Frost Nova at the point you left.", &"blink_nova", 1.0, [&"boots", &"helm", &"accessory"], &"mage", [], &"aether"),
+		_p(&"a_blink_nova", "Riftwalker's", "Blink leaves a Frost Nova at the point you left.", &"blink_nova", 1.0, [&"boots", &"helm", &"accessory", &"leggings"], &"mage", [], &"aether"),
 		_p(&"a_overflow_pulse", "Aetherheart", "Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.", &"aether_heartbeat", 1.2, [&"accessory", &"armor"], &"", [], &"aether"),
 	]

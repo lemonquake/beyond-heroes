@@ -16,9 +16,24 @@
   "helm/heavy": "iron_helm",
   "inner_garment": "padded_gambeson",
   "inner_garment/cloth": "silk_undershirt",
-  "inner_garment/heavy": "padded_gambeson"
+  "inner_garment/heavy": "padded_gambeson",
+  "leggings": "linen_trousers",
+  "leggings/cloth": "linen_trousers",
+  "leggings/cloth/ranger": "hide_leggings",
+  "leggings/cloth/shadowblade": "cutpurse_trousers",
+  "leggings/heavy": "iron_cuisses"
  },
  "items": {
+  "_breeches": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
   "_shoes": {
    "hair": "hide",
    "hide": {
@@ -37,7 +52,7 @@
      0.71
     ],
     "z": [
-     0.13,
+     0.875,
      1.49
     ]
    },
@@ -63,6 +78,401 @@
    },
    "sides": true
   },
+  "_under_legs": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "aethersilk_trousers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "apprentice_robe": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.3
+  },
+  "arcanist_cowl": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "arcanist_legwraps": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "barbute_helm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "bone_amulet": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "brigandine": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "chain_shirt": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.47
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false
+  },
+  "commander_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "copper_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "cutpurse_trousers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "depth_deepwarden_coat": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.43
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "depth_deepwarden_crown": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "depth_deepwarden_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "depth_deepwarden_grips": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "depth_deepwarden_treads": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.318
+    ]
+   },
+   "sides": true
+  },
+  "depth_gloomthread_coat": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "depth_gloomthread_crown": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "depth_gloomthread_grips": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "depth_gloomthread_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "depth_gloomthread_treads": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.407
+    ]
+   },
+   "sides": true
+  },
+  "depth_prismkeeper_coat": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.3
+  },
+  "depth_prismkeeper_crown": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "depth_prismkeeper_grips": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "depth_prismkeeper_legwraps": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "depth_prismkeeper_treads": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.347
+    ]
+   },
+   "sides": true
+  },
+  "depth_vaultpath_coat": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false,
+   "skirt": 0.66
+  },
+  "depth_vaultpath_crown": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "depth_vaultpath_grips": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "depth_vaultpath_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "depth_vaultpath_treads": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.377
+    ]
+   },
+   "sides": true
+  },
+  "duskrunner_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "gold_amulet": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "guardian_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "guardian_gauntlets": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "guardian_greaves": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.394
+    ]
+   },
+   "sides": true
+  },
+  "guardian_helm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "guardian_plate": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.43
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "hide_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "iron_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "iron_gauntlet": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
   "iron_hauberk": {
    "hair": "hide",
    "hide": {
@@ -71,15 +481,96 @@
      0.47
     ],
     "z": [
-     0.13,
+     0.925,
      1.49
     ]
    },
-   "sides": false
+   "sides": false,
+   "skirt": 0.6
   },
   "iron_helm": {
    "hair": "hide",
    "hide": {},
+   "sides": false
+  },
+  "iron_sabaton": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.36
+    ]
+   },
+   "sides": true
+  },
+  "linen_hood": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "linen_trousers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "longstrider_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "magister_robe": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.24
+  },
+  "magister_silks": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "mail_chausses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "nightweave_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
    "sides": false
   },
   "padded_gambeson": {
@@ -90,8 +581,377 @@
      0.69
     ],
     "z": [
-     0.13,
+     0.875,
      1.49
+    ]
+   },
+   "sides": false
+  },
+  "riveted_legplates": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "rune_charm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "runed_glove": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "runeweave_vest": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.885,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "sage_boots": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.343
+    ]
+   },
+   "sides": true
+  },
+  "sage_gloves": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "sage_hood": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "sage_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "sage_robe": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.24
+  },
+  "scholars_breeches": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "seers_circlet": {
+   "hair": "keep",
+   "hide": {},
+   "sides": false
+  },
+  "sigil_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "silentstep_breeches": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "silk_glove": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "silk_undershirt": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.71
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false
+  },
+  "silver_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "soft_boot": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.309
+    ]
+   },
+   "sides": true
+  },
+  "spiked_gauntlet": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.725,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "staghide_chaps": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "star_pendant": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "trackers_breeches": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "traveler_coat": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.42
+  },
+  "u_band_of_stillness": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "u_bloodrunner": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_echoing_legplates": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_heart_of_aether": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "u_oathbound_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_riftwalker_legwraps": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_rimewalkers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_stillwater_silks": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_stormstriders": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "u_windswift_breeches": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "veilstalker_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "visored_greathelm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "war_talisman": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "warden_cuisses": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
+    ]
+   },
+   "sides": false
+  },
+  "warden_greave": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.394
+    ]
+   },
+   "sides": true
+  },
+  "warden_plate": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.43
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "wayfarer_boot": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.377
+    ]
+   },
+   "sides": true
+  },
+  "windrunner_leggings": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.13,
+     1.065
     ]
    },
    "sides": false

@@ -181,6 +181,17 @@ def pal(key, base=None, rgb=None, metallic=None, rough=None, emission=None, estr
     return hk
 
 
+def plate(key):
+    """bh-024: a worn plate's material from the item palette key: the item colour lifted a little, and much less of a
+    mirror (a fully metallic plate reflects the game's dark night sky and reads as black on the hero)."""
+    hk = "hw_plate_" + key
+    if hk not in K.MAT:
+        b0, rgb0, met0, rough0, erg0, estr0 = K.MAT[key]
+        lift = tuple(min(1.0, c * 1.3 + 0.03) for c in rgb0)
+        K.MAT[hk] = (b0, lift, min(met0, 0.55), max(rough0, 0.36), erg0, estr0)
+    return hk
+
+
 def srgb(h):
     return tuple((int(h[i:i + 2], 16) / 255.0) ** 2.2 for i in (0, 2, 4))
 
@@ -521,7 +532,7 @@ def export_glb(path, objects):
 REGISTRY = {}
 
 
-def item(id, hide=None, hair="hide", sides=False):
+def item(id, hide=None, hair="hide", sides=False, skirt=None):
     """Register a worn piece.
 
     The function returns a list of WParts (for `sides=True` pieces — gloves, boots, rings — the LEFT side only: the
@@ -530,9 +541,13 @@ def item(id, hide=None, hair="hide", sides=False):
           {"z": [z0, z1], "z2": [z0, z1]} heights of the trunk and legs, {"sleeve": [x0, x1]} distance along both arms,
           {"glove": [x0, x1]} / {"boot": [z0, z1]} for sided pieces. Leave a margin inside the garment's openings.
     hair: helms only, "hide" or "keep" (open crowns, circlets).
+    skirt: body garments only, the lowest height their skirt, tails or robe reach (the game then hides what leggings
+          carry on the thigh or knee under it, see hero_wear_legs.py).
+    The function may instead return {group: [WParts]}: the GLB then holds one mesh per group, "wear" for "" and
+    "wear_<group>" for the others (leggings, whose outer parts the game hides under skirts, shirts and boots).
     """
     def deco(fn):
-        REGISTRY[id] = dict(fn=fn, hide=hide or {}, hair=hair, sides=sides)
+        REGISTRY[id] = dict(fn=fn, hide=hide or {}, hair=hair, sides=sides, skirt=skirt)
         return fn
     return deco
 
@@ -541,6 +556,8 @@ def build_item(id, arm):
     """-> list of Blender objects for the piece (skinned to `arm`)."""
     spec = REGISTRY[id]
     parts = spec["fn"]()
+    if isinstance(parts, dict):
+        return [build_object("wear" if g == "" else "wear_" + g, ps, arm) for g, ps in parts.items() if ps]
     if spec["sides"]:
         return [build_object("wear_L", parts, arm), build_object("wear_R", mirror(parts), arm)]
     return [build_object("wear", parts, arm)]
@@ -557,6 +574,8 @@ def write_manifest(ids, fallback=None):
     for i in ids:
         spec = REGISTRY[i]
         data.setdefault("items", {})[i] = {"hide": spec["hide"], "hair": spec["hair"], "sides": spec["sides"]}
+        if spec.get("skirt") is not None:
+            data["items"][i]["skirt"] = spec["skirt"]
     if fallback:
         data["fallback"] = fallback
     os.makedirs(OUT_DIR, exist_ok=True)

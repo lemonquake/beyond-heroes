@@ -20,7 +20,7 @@ const THEMES := {
 	"serpent_veil": ["Serpent Veil", "194c40", "c3a469", "a1f577", "claw", "shadowblade"],
 	"eclipse_dancer": ["Eclipse Dancer", "41335e", "bfc0d6", "bc93ff", "dagger", "shadowblade"]
 }
-const SLOTS := ["helm", "inner_garment", "armor", "gloves_1", "gloves_2", "boots_1", "boots_2", "accessory_1", "accessory_2", "accessory_3", "accessory_4", "main_weapon"]
+const SLOTS := ["helm", "inner_garment", "armor", "leggings", "gloves_1", "gloves_2", "boots_1", "boots_2", "accessory_1", "accessory_2", "accessory_3", "accessory_4", "main_weapon"]
 static var _materials := {}
 static var _pieces := {}
 
@@ -168,6 +168,13 @@ static func create_piece(id: String, slot: String) -> Node3D:
 			for row in 3:
 				_gem(root,Vector3(s*0.12,-0.12-row*0.13,0.225),0.024,trim)
 		_gem(root,Vector3(0,0.01,0.23),0.062,glow)
+	elif slot == "leggings":
+		# bh-024 fallback: a belt with a gem and a plate down each thigh
+		_ring(root,Vector3(0,0.02,0),0.24,0.022,trim,Vector3.ZERO)
+		_gem(root,Vector3(0,0.02,0.23),0.05,glow)
+		for s in [-1.0,1.0]:
+			_oval(root,Vector3(s*0.11,-0.26,0.03),Vector3(0.19,0.40,0.20),base)
+			_leaf(root,Vector3(s*0.11,-0.08,0.13),Vector3(s*0.11,-0.44,0.14),0.06,0.02,trim)
 	elif slot.begins_with("gloves") or slot.begins_with("boots"):
 		var boot := slot.begins_with("boots")
 		var length := 0.32 if boot else 0.23
@@ -384,6 +391,10 @@ const HERO_FIT := {
 	"accessory_4": [Vector3.ONE, Vector3(0.05, -0.02, -0.07)],
 }
 
+## bh-024: the Legguards are the other way round — authored on the hero's own legs, so it is the armoured class bodies
+## (Tempos, other models) that wear them scaled up round the hips.
+const CLASS_LEGS_FIT := Vector3(1.15, 1.0, 1.15)
+
 static func _hero_fit(slot: String) -> Transform3D:
 	var key := slot
 	if slot.begins_with("gloves") or slot.begins_with("boots"):
@@ -403,7 +414,7 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 		var id := String(item.base.set_id)
 		var bone := "chest"
 		if slot == "helm": bone = "head"
-		elif slot == "inner_garment": bone = "hips"
+		elif slot == "inner_garment" or slot == "leggings": bone = "hips"
 		elif slot.begins_with("gloves"): bone = "forearm." + ("L" if slot.ends_with("1") else "R")
 		elif slot.begins_with("boots"): bone = "shin." + ("L" if slot.ends_with("1") else "R")
 		elif slot in ["accessory_1","accessory_2"]: bone = "hand." + ("L" if slot.ends_with("1") else "R")
@@ -413,7 +424,7 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 		var target := Transform3D(Basis.IDENTITY, rest.origin)
 		if slot == "helm": target.origin += Vector3(0,.13,0)
 		elif slot == "armor": target.origin += Vector3(0,.04,0)
-		elif slot == "inner_garment": target.origin += Vector3(0,-.05,0)
+		elif slot == "inner_garment" or slot == "leggings": target.origin += Vector3(0,-.05,0)
 		elif slot.begins_with("gloves") or slot.begins_with("boots"):
 			var end_bone := bone.replace("forearm","hand").replace("shin","foot")
 			var end := skeleton.get_bone_global_rest(skeleton.find_bone(end_bone)).origin
@@ -428,6 +439,8 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 		skeleton.add_child(ba)
 		if hero:
 			target = Transform3D(target.basis, target.origin + _hero_fit(slot).origin) * Transform3D(_hero_fit(slot).basis, Vector3.ZERO)
+		elif slot == "leggings":
+			target = target * Transform3D(Basis.from_scale(CLASS_LEGS_FIT), Vector3.ZERO)
 		var piece := _worn_piece(id, slot, item.base.model_path())
 		ba.add_child(piece)
 		piece.transform = rest.affine_inverse() * target

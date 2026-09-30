@@ -95,7 +95,7 @@ func test_look_survives_a_save() -> void:
 	junk["look"] = {"nose_long": "huge", "hair": 12, "x": [1, 2]}
 	var safe := HeroData.from_dict(JSON.parse_string(JSON.stringify(junk)))
 	ok(safe != null and HeroLook.is_plain(safe.look), "a damaged look loads as the plain hero")
-	ok(SaveSystem.save_hero(SLOT, h), "a styled hero saves")
+	ok(SaveSystem.save_hero(h, SLOT), "a styled hero saves")
 	var disk := SaveSystem.load_hero(SLOT)
 	eq(HeroLook.sanitize(disk.look), HeroLook.preset("goblin"), "and loads from disk")
 	SaveSystem.delete_slot(SLOT)

@@ -19,7 +19,7 @@ const MAX_ITEMS := 3
 const GOLD_RATE := 0.45
 ## Upper bounds (gold) of the worth bands the remarks use: scraps, modest, fair, good, great, treasure.
 const VALUE_BANDS := [15, 80, 400, 2000, 10000]
-const ARMOR_CATS := [&"helm", &"armor", &"gloves", &"boots", &"inner_garment", &"shield"]
+const ARMOR_CATS := [&"helm", &"armor", &"leggings", &"gloves", &"boots", &"inner_garment", &"shield"]
 
 ## Why Lape will not take an item ("" when he will).
 static func refuse_reason(it: ItemInstance) -> String:
@@ -219,6 +219,9 @@ static func requirements(hero: HeroData, it: ItemInstance) -> Array:
 			mods.append(StatDefs.format_modifier(m.stat, m.op, m.value))
 		out.append(["Licensed: %s. %s License bonus: %s." % [lic.get("name", ""), lic.get("desc", ""), ", ".join(mods)], null])
 	if hero == null:
+		return out
+	if it.unbound:
+		out.append(["Unbound: no level, attribute or rank requirement.", true])
 		return out
 	var lvl := hero.progress.level
 	out.append(["Requires level %d" % it.required_level(), lvl >= it.required_level()])

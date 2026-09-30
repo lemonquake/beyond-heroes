@@ -25,7 +25,7 @@ python icons_post.py sheet my_sheet
 |---|---|
 | `item_kit.py` | palette materials (`MAT`: key -> base, colour, metal/rough, emission) exported as `BH_<base>__it_<key>` so Godot keeps each item's colours; shape helpers |
 | `item_weapons.py` | 13 parametric weapon builders + `SPECS` (one spec per weapon base) |
-| `item_gear.py` | shields, helms, hoods, circlet, chest pieces, gloves, boots, rings, amulets, charms + `GEAR` |
+| `item_gear.py` | shields, helms, hoods, circlet, chest pieces, leggings (`legs`, bh-024), gloves, boots, rings, amulets, charms + `GEAR` |
 | `item_goods.py` | potions and bottles, scrolls, pouches, bombs, jars, tins, materials, quest items, gold pile + `GOODS` |
 | `build_items.py` | registry lookup, GLB export (`../characters/build.export_glb`), studio icon renders |
 | `icons_post.py` | 128 px game icons (dark radial backdrop + contact shadow, like the SVG item icons), contact sheets |
@@ -35,7 +35,7 @@ python icons_post.py sheet my_sheet
 
 * Weapons: hand-socket convention of `../characters/bh_weapons.py` — origin at the grip, long axis +Z (Godot +Y), flats
   +-Y. They are also the held models (`Player.weapon_model_for`).
-* Shields: handle at the origin, face -Y (Godot +Z). Chest pieces, inner garments and gloves: upright, front -Y.
+* Shields: handle at the origin, face -Y (Godot +Z). Chest pieces, inner garments, leggings and gloves: upright, front -Y.
   The game lays these (and weapons) flat when they lie on the ground.
 * Everything else stands on its base at z = 0.
 * A weapon's element (items.json `element`) adds a glowing inlay (`ELEMENT_GLOW`) unless the spec sets its own `glow`.

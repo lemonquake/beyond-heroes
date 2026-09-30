@@ -204,7 +204,7 @@ def _pose_for(item, ob):
         return 58.0, 12.0
     if cat in ("helm", "boots"):
         return 16.0, 28.0
-    if cat in ("armor", "inner_garment", "gloves"):
+    if cat in ("armor", "inner_garment", "gloves", "leggings"):
         return 10.0, 18.0
     if cat == "accessory":
         return 18.0, 20.0

@@ -153,7 +153,7 @@ func consume(base_id: StringName, n := 1) -> bool:
 	return true
 
 const SORT_MODES := ["rarity", "type", "level", "name", "value", "weight"]
-const CATEGORY_ORDER := [&"weapon", &"shield", &"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"accessory",
+const CATEGORY_ORDER := [&"weapon", &"shield", &"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots", &"accessory",
 	&"consumable", &"material", &"crystal", &"quest"]
 
 ## Compacts and sorts the grid. Favorites always come first; locked items keep their relative order within a group.
@@ -198,7 +198,7 @@ func _sort_range(mode: String, ascending: bool, start: int, end: int) -> void:
 const FILTERS := {
 	"all": [],
 	"weapons": [&"weapon", &"shield"],
-	"armor": [&"helm", &"armor", &"inner_garment", &"gloves", &"boots"],
+	"armor": [&"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots"],
 	"accessories": [&"accessory"],
 	"consumables": [&"consumable"],
 	"materials": [&"material", &"crystal"],

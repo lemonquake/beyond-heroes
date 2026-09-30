@@ -60,7 +60,8 @@ func test_equip_unequip_applies_once_and_removes_cleanly() -> void:
 	eq(h.compute_stats().get_stat(&"str"), before[&"str"] + 8.0, "two rings stack additively")
 
 func test_slot_layout_exact() -> void:
-	eq(BH.SLOTS.size(), 13, "13 slots")
+	eq(BH.SLOTS.size(), 14, "14 slots (bh-024 Leggings)")
+	eq(BH.CATEGORY_SLOTS[&"leggings"].size(), 1, "1 leggings slot")
 	eq(BH.CATEGORY_SLOTS[&"gloves"].size(), 2, "2 glove slots")
 	eq(BH.CATEGORY_SLOTS[&"boots"].size(), 2, "2 boot slots")
 	eq(BH.CATEGORY_SLOTS[&"accessory"].size(), 4, "4 accessory slots")

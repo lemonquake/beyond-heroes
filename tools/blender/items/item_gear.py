@@ -410,6 +410,212 @@ def boot(s):
     return _ground(parts)
 
 
+# ---- leggings (bh-024) ---------------------------------------------------------------------------------------------
+# Upright like the chest pieces (waist on top, front -Y); the game lays them flat on the ground. Authored at the hero's
+# own size (waist 0.95 m above the ankles) and scaled to sit with the other armour models.
+LEG_Z = 0.95
+
+
+def _leg_line(L, loose=0.0, flare=0.0):
+    """(points, radii) down the LEFT leg: hip, thigh, above the knee, knee, calf, ankle."""
+    zs = [L - 0.1, L - 0.28, L - 0.42, L - 0.49, L - 0.64, 0.07]
+    xs = [0.092, 0.1, 0.1, 0.097, 0.095, 0.09]
+    ys = [0.0, -0.004, -0.006, -0.006, 0.006, 0.002]
+    rr = [(0.09, 0.092), (0.08, 0.083), (0.066, 0.068), (0.059, 0.061), (0.06, 0.065), (0.046, 0.05)]
+    out = []
+    for i, (rx, ry) in enumerate(rr):
+        t = i / (len(rr) - 1)
+        g = 1.0 + loose * (0.4 + 0.6 * t) + flare * t ** 3
+        out.append((rx * g, ry * g))
+    return [(x, y, z) for x, y, z in zip(xs, ys, zs)], out
+
+
+def _on_leg(L, t, loose=0.0):
+    """Centre and radii of the left leg at t (0 hip .. 1 ankle), by linear interpolation of _leg_line."""
+    pts, rad = _leg_line(L, loose)
+    zs = [p[2] for p in pts]
+    z = zs[0] + (zs[-1] - zs[0]) * t
+    for i in range(len(zs) - 1):
+        if zs[i] >= z >= zs[i + 1]:
+            k = (zs[i] - z) / max(zs[i] - zs[i + 1], 1e-9)
+            c = tuple(pts[i][j] + (pts[i + 1][j] - pts[i][j]) * k for j in range(3))
+            r = (rad[i][0] + (rad[i + 1][0] - rad[i][0]) * k, rad[i][1] + (rad[i + 1][1] - rad[i][1]) * k)
+            return c, r
+    return pts[-1], rad[-1]
+
+
+def _ellipse_ring(z, w, d, n=24, cx=0.0, cy=0.0):
+    return np.array([(cx + w * math.cos(a), cy + d * math.sin(a), z) for a in np.linspace(0, 2 * math.pi, n, endpoint=False)])
+
+
+def _mirror(parts):
+    out = []
+    for p in parts:
+        q = p.copy()
+        q.V = q.V * np.array([-1.0, 1.0, 1.0])
+        q.F = [tuple(reversed(f)) for f in q.F]
+        out.append(q)
+    return out
+
+
+def _leg_band(L, t, mat, grow=0.006, tube=0.005, loose=0.0, tilt=0.0):
+    (x, y, z), (rx, ry) = _on_leg(L, t, loose)
+    b = K.ring_tube((x, y, z), 1.0, tube, mat, axis="z", n=16).scale((rx + grow, ry + grow, 1), (x, y, z))
+    if tilt:
+        b.rot(Rx(tilt), (x, y, z))
+    return b
+
+
+def legs(s):
+    kind = s.get("kind", "trousers")
+    if kind == "plate" and "plate" not in s:          # depth specs name the plate colour as the main material
+        s = dict(s, plate=s.get("mat", "iron"), mat="darkleather")
+    m = s.get("mat", "wool")
+    trim = s.get("trim", "gold")
+    L = LEG_Z
+    loose = s.get("loose", 0.0)
+    lower = s.get("hose")                 # breeches: a different cloth below the knee
+    parts, left = [], []
+    # the seat: waist to crotch
+    rings = [_ellipse_ring(L, 0.165, 0.112), _ellipse_ring(L - 0.08, 0.178, 0.12), _ellipse_ring(L - 0.17, 0.182, 0.12)]
+    V, F = M.loft(rings, cap0=True, cap1=True)
+    seat = M.Part(V, F, m, name="seat")
+    M.recalc_normals(seat)
+    parts.append(seat)
+    parts.append(K.lathe([(0.0, L + 0.002), (0.15, L + 0.002), (0.15, L - 0.004), (0.0, L - 0.004)], "black", 20).scale((1, 0.7, 1)))
+    pts, rad = _leg_line(L, loose, s.get("flare", 0.0))
+    if lower:
+        k = 4
+        left.append(K.tube(pts[:k], rad[:k], m, n=18, name="leg"))
+        low_r = [_leg_line(L, 0.0)[1][i] for i in range(3, 6)]
+        left.append(K.tube(pts[3:], low_r, lower, n=16, name="hose"))
+        (x, y, z), (rx, ry) = _on_leg(L, 0.56, loose)
+        left.append(K.ring_tube((x, y, z), 1.0, 0.009, s.get("cuff", trim), axis="z", n=22).scale((rx * 0.9 + 0.004, ry * 0.9 + 0.004, 1), (x, y, z)))
+    else:
+        left.append(K.tube(pts, rad, m, n=18, name="leg"))
+    # ---- kinds
+    if kind in ("plate", "mail"):
+        plate = s.get("plate", "iron")
+        if kind == "mail":
+            for i in range(1, 12):
+                left.append(_leg_band(L, i / 12.0, s.get("links", "darksteel"), 0.002, 0.0035))
+        if kind == "plate":
+            (x, y, z), (rx, ry) = _on_leg(L, 0.3)
+            left.append(K.sphere(0.1, (x + 0.004, y - 0.03, z), plate, 18, 10, scale=(0.95, 0.66, 1.75)))
+            for t in (0.13, 0.46):
+                (bx, by, bz), (brx, bry) = _on_leg(L, t)
+                left.append(K.ring_tube((bx, by - 0.012, bz), 1.0, 0.0055, trim, axis="z", n=22, arc=200, a0=170)
+                            .scale((brx + 0.012, bry + 0.02, 1), (bx, by - 0.012, bz)))
+            if s.get("fluted"):
+                for dx in (-0.03, 0.0, 0.03):
+                    left.append(K.tube([(x + dx, y - 0.093, z + 0.13), (x + dx * 1.1, y - 0.1, z), (x + dx, y - 0.09, z - 0.12)],
+                                       [0.0045, 0.005, 0.004], trim, n=5))
+            if s.get("rivets"):
+                for t in (0.18, 0.3, 0.42):
+                    (rx_, ry_, rz_), _ = _on_leg(L, t)
+                    for dx in (-0.045, 0.045):
+                        left.append(K.sphere(0.0065, (rx_ + dx, ry_ - 0.083, rz_), trim, 6, 4))
+            if s.get("tassets"):
+                for i in range(2):
+                    z0 = L - 0.04 - i * 0.075
+                    left.append(K.sphere(0.09, (0.1, -0.075 - 0.006 * i, z0 - 0.06), plate, 14, 8, scale=(1.05, 0.5, 0.62)))
+                    left.append(K.tube([(0.02, -0.12 - 0.006 * i, z0 - 0.11), (0.1, -0.128 - 0.006 * i, z0 - 0.118), (0.18, -0.1, z0 - 0.1)], [0.0045] * 3, trim, n=5))
+        # the knee cop (poleyn) with a fan on the outside
+        knee = s.get("knee", s.get("plate", "iron"))
+        (x, y, z), _ = _on_leg(L, 0.56)
+        left.append(K.sphere(0.052, (x, y - 0.052, z), knee, 14, 8, scale=(1.05, 0.64, 0.95)))
+        fan = [(0, 0), (0.055, 0.03), (0.065, -0.035), (0.025, -0.05)]
+        left.append(K.slab(fan, 0.007, knee, axis="y").move((x + 0.03, y - 0.03, z)))
+        left.append(K.sphere(0.009, (x, y - 0.086, z), trim, 6, 4))
+        if s.get("wings"):
+            o = [(0.0, 0.0), (0.05, 0.05), (0.042, 0.015), (0.07, 0.024), (0.034, -0.01)]
+            left.append(K.slab(o, 0.006, s["wings"], axis="y").move((x + 0.05, y - 0.02, z + 0.01)))
+        if s.get("frost"):
+            for i in range(3):
+                left.append(K.crystal((x + 0.03 - i * 0.03, y - 0.07, z + 0.03), 0.07 - i * 0.01, 0.012, s["frost"], rot=(20 - i * 20, 20, 0)))
+    elif kind in ("trousers", "silk"):
+        (x, y, z), (rx, ry) = _on_leg(L, 1.0, loose)
+        cuff = s.get("cuff", trim)
+        if cuff and not lower:
+            left.append(K.ring_tube((x, y, z + 0.012), 1.0, 0.008, cuff, axis="z", n=22).scale((rx + 0.004, ry + 0.004, 1), (x, y, z + 0.012)))
+        if s.get("stripe"):
+            p2, r2 = _leg_line(L, loose, s.get("flare", 0.0))
+            left.append(K.tube([(pp[0] + rr[0] + 0.001, pp[1], pp[2]) for pp, rr in zip(p2, r2)], [(0.004, 0.012)] * len(p2), s["stripe"], n=6, up=(1, 0, 0)))
+        if s.get("wraps"):
+            for i in range(9):
+                left.append(_leg_band(L, 0.6 + i * 0.045, s["wraps"], 0.003, 0.0045, loose, tilt=12 if i % 2 else -12))
+        if s.get("knee_pad"):
+            (kx, ky, kz), _ = _on_leg(L, 0.56, loose)
+            left.append(K.sphere(0.05, (kx, ky - 0.05, kz), s["knee_pad"], 12, 8, scale=(1.0, 0.55, 1.0)))
+    elif kind in ("hide", "chaps", "wrap"):
+        if kind == "hide" or s.get("lacing"):
+            lace = s.get("lacing", "darkleather")
+            zig = []
+            for i in range(14):
+                t = 0.04 + i * 0.065
+                (x, y, z), (rx, ry) = _on_leg(L, t)
+                zig.append((x + rx + 0.002, y + (0.012 if i % 2 else -0.012), z))
+            left.append(K.tube(zig, [0.003] * len(zig), lace, n=5, up=(1, 0, 0)))
+        if kind == "chaps" or s.get("guards"):
+            g = s.get("guards", "tan")
+            (x, y, z), _ = _on_leg(L, 0.26)
+            left.append(K.sphere(0.095, (x + 0.004, y - 0.028, z), g, 16, 9, scale=(0.98, 0.7, 1.9)))
+            for t in (0.12, 0.36):
+                left.append(_leg_band(L, t, s.get("straps", "darkleather"), 0.012, 0.0055))
+        if kind == "wrap" or s.get("wraps"):
+            w = s.get("wraps", "darkleather")
+            for i in range(10):
+                left.append(_leg_band(L, 0.55 + i * 0.045, w, 0.003, 0.005, tilt=14 if i % 2 else -14))
+        if s.get("knee_pad"):
+            (x, y, z), _ = _on_leg(L, 0.56)
+            left.append(K.sphere(0.05, (x, y - 0.05, z), s["knee_pad"], 12, 8, scale=(1.0, 0.55, 1.0)))
+        if s.get("plates"):
+            for t in (0.2, 0.33):
+                (x, y, z), _ = _on_leg(L, t)
+                left.append(K.sphere(0.05, (x + 0.01, y - 0.06, z), s["plates"], 10, 6, scale=(1.0, 0.45, 1.2)))
+        if s.get("pouch"):
+            (x, y, z), (rx, ry) = _on_leg(L, 0.16)
+            left.append(K.box(0.04, 0.05, 0.07, (x + rx + 0.012, y - 0.01, z), s["pouch"], 0.008))
+            left.append(K.box(0.042, 0.052, 0.018, (x + rx + 0.012, y - 0.01, z + 0.03), s.get("straps", "darkleather"), 0.004))
+        if s.get("knife"):
+            (x, y, z), (rx, ry) = _on_leg(L, 0.22)
+            left.append(K.box(0.018, 0.028, 0.2, (x + rx + 0.008, y + 0.01, z - 0.04), "darkleather", 0.006))
+            left.append(K.tube([(x + rx + 0.008, y + 0.01, z + 0.06), (x + rx + 0.008, y + 0.01, z + 0.12)], [0.009, 0.008], "wood", n=6))
+            left.append(K.sphere(0.011, (x + rx + 0.008, y + 0.01, z + 0.125), s.get("trim", "iron"), 6, 4))
+        if s.get("feathers"):
+            (x, y, z), (rx, ry) = _on_leg(L, 0.03)
+            for i in range(3):
+                fy = y - 0.022 + i * 0.022
+                left.append(K.tube([(x + rx + 0.004, fy, z), (x + rx + 0.012, fy, z - 0.07), (x + rx + 0.016, fy, z - 0.15 + i * 0.02)],
+                                   [(0.003, 0.002), (0.013, 0.0025), (0.002, 0.001)], s["feathers"] if i != 1 else trim, n=6, up=(1, 0, 0)))
+    if s.get("runes"):
+        for i in range(4):
+            (x, y, z), (rx, ry) = _on_leg(L, 0.12 + i * 0.1, loose)
+            left.append(K.gem((x + rx * 0.72, y - ry * 0.72, z), 0.009, s["runes"], rot=(90, 0, -35)))
+    if s.get("stars"):
+        for i in range(5):
+            (x, y, z), (rx, ry) = _on_leg(L, 0.1 + ((i * 0.37) % 1.0) * 0.8, loose)
+            a = -math.pi / 2 + (i - 2) * 0.35
+            left.append(K.gem((x + rx * math.cos(a) * 1.02, y + ry * math.sin(a) * 1.02, z), 0.007, s["stars"]))
+    parts += left + _mirror(left)
+    # waistband, buckle, hanging panel and sash
+    belt = s.get("belt", "leather")
+    parts.append(K.lathe([(0.166, L - 0.05), (0.173, L - 0.045), (0.173, L - 0.005), (0.166, L)], belt, 24).scale((1, 0.72, 1)))
+    parts.append(K.box(0.04, 0.02, 0.045, (0, -0.126, L - 0.026), s.get("clasp", "brass"), 0.004))
+    if s.get("glow"):
+        parts.append(K.gem((0, -0.14, L - 0.026), 0.013, s["glow"], rot=(90, 0, 0)))
+    if s.get("panel"):
+        o = [(-0.09, 0.0), (0.09, 0.0), (0.11, -0.44), (0.0, -0.5), (-0.11, -0.44)]
+        parts.append(K.slab(o, 0.008, s["panel"], axis="y").move((0, -0.13, L - 0.04)))
+        parts.append(K.tube([(-0.105, -0.136, L - 0.47), (0.0, -0.138, L - 0.53), (0.105, -0.136, L - 0.47)], [0.005] * 3, trim, n=5))
+    if s.get("sash"):
+        parts.append(K.tube([(0.12, -0.1, L - 0.03), (0.16, -0.08, L - 0.2), (0.17, -0.07, L - 0.36)], [(0.03, 0.006), (0.034, 0.006), (0.036, 0.006)],
+                            s["sash"], n=6, up=(0, -1, 0)))
+    for p in parts:
+        p.scale((0.8, 0.8, 0.8))
+    return _ground(parts)
+
+
 # ---- jewellery -----------------------------------------------------------------------------------------------------
 
 def ring(s):
@@ -536,6 +742,41 @@ GEAR = {
     "guardian_greaves": (boot, {"mat": "white", "plate": "bright", "cuff": "gold", "wings": "gold", "glow": "aether", "h": 0.34}),
     "sage_boots": (boot, {"mat": "violet", "h": 0.28, "cuff": "paleg", "glow": "holy", "flare": 0.015}),
     # rings, amulets, charms
+    # leggings (bh-024): knights
+    "iron_cuisses": (legs, {"kind": "plate", "mat": "wool", "plate": "iron", "trim": "iron", "belt": "leather"}),
+    "mail_chausses": (legs, {"kind": "mail", "mat": "iron", "links": "darksteel", "knee": "iron", "trim": "iron", "belt": "leather"}),
+    "riveted_legplates": (legs, {"kind": "plate", "mat": "darkleather", "plate": "steel", "trim": "brass", "rivets": True, "belt": "darkleather"}),
+    "warden_cuisses": (legs, {"kind": "plate", "mat": "darkleather", "plate": "bright", "trim": "gold", "fluted": True, "wings": "gold", "belt": "darkleather"}),
+    "commander_cuisses": (legs, {"kind": "plate", "mat": "crimson", "plate": "steel", "trim": "gold", "tassets": True, "fluted": True, "glow": "ruby", "belt": "darkleather", "clasp": "gold"}),
+    "guardian_cuisses": (legs, {"kind": "plate", "mat": "white", "plate": "bright", "trim": "gold", "wings": "gold", "glow": "aether", "belt": "white", "clasp": "gold"}),
+    "u_rimewalkers": (legs, {"kind": "plate", "mat": "navy", "plate": "moonsteel", "trim": "silver", "frost": "ice", "glow": "ice", "belt": "darkleather", "clasp": "silver"}),
+    "u_oathbound_cuisses": (legs, {"kind": "plate", "mat": "darkleather", "plate": "blackiron", "trim": "gold", "fluted": True, "glow": "holy", "belt": "darkleather", "clasp": "gold"}),
+    "u_echoing_legplates": (legs, {"kind": "plate", "mat": "darkleather", "plate": "bronze", "trim": "gold", "rivets": True, "tassets": True, "glow": "storm", "belt": "darkleather", "clasp": "gold"}),
+    # mages
+    "linen_trousers": (legs, {"kind": "trousers", "mat": "linen", "loose": 0.18, "flare": 0.15, "cuff": "linen", "trim": "rope", "belt": "rope"}),
+    "scholars_breeches": (legs, {"kind": "trousers", "mat": "wool", "loose": 0.2, "hose": "linen", "cuff": "navy", "sash": "navy", "belt": "leather"}),
+    "arcanist_legwraps": (legs, {"kind": "silk", "mat": "navy", "loose": 0.08, "wraps": "gold", "runes": "sapphire", "cuff": "gold", "trim": "gold", "belt": "navy", "clasp": "gold"}),
+    "magister_silks": (legs, {"kind": "silk", "mat": "crimson", "loose": 0.22, "flare": 0.1, "panel": "navy", "trim": "gold", "cuff": "gold", "glow": "sapphire", "belt": "navy", "clasp": "gold"}),
+    "aethersilk_trousers": (legs, {"kind": "silk", "mat": "silk", "loose": 0.16, "trim": "silver", "cuff": "silver", "runes": "aether", "glow": "aether", "stripe": "silver", "belt": "navy", "clasp": "silver"}),
+    "sage_leggings": (legs, {"kind": "silk", "mat": "violet", "loose": 0.14, "trim": "paleg", "cuff": "paleg", "stars": "holy", "glow": "holy", "belt": "paleg", "clasp": "paleg"}),
+    "u_stillwater_silks": (legs, {"kind": "silk", "mat": "teal", "loose": 0.24, "flare": 0.2, "trim": "silver", "cuff": "silver", "panel": "teal", "glow": "tide", "belt": "darkleather", "clasp": "silver"}),
+    "u_riftwalker_legwraps": (legs, {"kind": "silk", "mat": "black", "loose": 0.06, "wraps": "silver", "runes": "portal", "cuff": "silver", "trim": "silver", "glow": "ice", "belt": "violet", "clasp": "silver"}),
+    # rangers
+    "hide_leggings": (legs, {"kind": "hide", "mat": "tan", "lacing": "leather", "belt": "leather"}),
+    "trackers_breeches": (legs, {"kind": "hide", "mat": "leather", "lacing": "darkleather", "knee_pad": "darkleather", "pouch": "tan", "belt": "darkleather"}),
+    "staghide_chaps": (legs, {"kind": "chaps", "mat": "forest", "guards": "tan", "straps": "darkleather", "belt": "leather"}),
+    "longstrider_leggings": (legs, {"kind": "chaps", "mat": "forest", "guards": "leather", "straps": "darkleather", "knee_pad": "leather", "pouch": "leather", "belt": "darkleather"}),
+    "windrunner_leggings": (legs, {"kind": "hide", "mat": "leather", "lacing": "tan", "feathers": "white", "guards": "tan", "straps": "darkleather", "trim": "wind", "glow": "wind", "belt": "darkleather"}),
+    "u_windswift_breeches": (legs, {"kind": "hide", "mat": "tan", "lacing": "white", "feathers": "white", "trim": "wind", "glow": "wind", "knee_pad": "leather", "belt": "leather"}),
+    "u_stormstriders": (legs, {"kind": "chaps", "mat": "darkleather", "guards": "leather", "straps": "gold", "runes": "storm", "trim": "gold", "glow": "storm", "belt": "darkleather", "clasp": "gold"}),
+    # shadowblades
+    "cutpurse_trousers": (legs, {"kind": "wrap", "mat": "black", "wraps": "darkleather", "pouch": "leather", "straps": "darkleather", "belt": "darkleather"}),
+    "nightweave_leggings": (legs, {"kind": "wrap", "mat": "black", "wraps": "black", "knife": True, "trim": "darksteel", "belt": "darkleather", "clasp": "darksteel"}),
+    "silentstep_breeches": (legs, {"kind": "wrap", "mat": "black", "wraps": "darkleather", "knee_pad": "darkleather", "belt": "darkleather", "clasp": "darksteel"}),
+    "duskrunner_leggings": (legs, {"kind": "wrap", "mat": "black", "wraps": "leather", "plates": "darkleather", "knife": True, "trim": "darksteel", "belt": "darkleather", "clasp": "darksteel"}),
+    "veilstalker_leggings": (legs, {"kind": "wrap", "mat": "violet", "wraps": "black", "plates": "blackiron", "runes": "shadow", "trim": "moonsteel", "glow": "shadow", "belt": "black", "clasp": "moonsteel"}),
+    "u_bloodrunner": (legs, {"kind": "wrap", "mat": "redleather", "wraps": "black", "plates": "blackiron", "knife": True, "trim": "blackiron", "glow": "ruby", "belt": "black", "clasp": "blackiron"}),
+
     "copper_ring": (ring, {"mat": "copper", "kind": "plain", "band": 0.0026}),
     "silver_ring": (ring, {"mat": "silver", "kind": "gem", "gem": "sapphire"}),
     "sigil_ring": (ring, {"mat": "gold", "kind": "signet", "gem": "onyx"}),

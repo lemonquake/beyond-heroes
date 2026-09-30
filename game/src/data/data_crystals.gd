@@ -101,7 +101,7 @@ static func group_for(category: StringName) -> StringName:
 	match category:
 		&"weapon": return WEAPON
 		&"accessory": return JEWEL
-		&"shield", &"helm", &"inner_garment", &"armor", &"gloves", &"boots": return ARMOR
+		&"shield", &"helm", &"inner_garment", &"armor", &"leggings", &"gloves", &"boots": return ARMOR
 	return &""
 
 ## The stat modifiers one crystal grants in a piece of the given category.

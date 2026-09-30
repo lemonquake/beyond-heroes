@@ -1,13 +1,13 @@
 class_name TempoWindow
 extends UIWindow
-## Tempos (O): the hero's bound spirit companions. One tab per Tempo. Left: the spirit on its plinth with its 13
+## Tempos (O): the hero's bound spirit companions. One tab per Tempo. Left: the spirit on its plinth with its 14
 ## equipment slots. Middle: live HP / mana, derived stats (half the hero's, plus its own gear), personality, skills
 ## with mana costs and cooldowns, and where it fell. Right: the hero's bag — right-click or drag an item onto a slot to
 ## give it to the Tempo; right-click an equipped piece to take it back. Tempos wear gear one tier below the hero's.
 
 const SLOT_LAYOUT := {
-	&"helm": [0, 0], &"inner_garment": [0, 1], &"armor": [0, 2], &"gloves_1": [0, 3], &"boots_1": [0, 4],
-	&"accessory_1": [1, 0], &"accessory_2": [1, 1], &"gloves_2": [1, 2], &"boots_2": [1, 3], &"accessory_3": [1, 4],
+	&"helm": [0, 0], &"inner_garment": [0, 1], &"armor": [0, 2], &"leggings": [0, 3], &"gloves_1": [0, 4], &"boots_1": [0, 5],
+	&"accessory_1": [1, 0], &"accessory_2": [1, 1], &"accessory_3": [1, 2], &"accessory_4": [1, 3], &"gloves_2": [1, 4], &"boots_2": [1, 5],
 }
 const STAT_ROWS := [[&"max_hp", "Health"], [&"max_mana", "Mana"], [&"defense", "Defense"], [&"phys_res", "Physical Resist"],
 	[&"evasion", "Evasion"], [&"accuracy", "Accuracy"], [&"crit_chance", "Critical Chance"], [&"crit_damage", "Critical Damage"],
@@ -99,9 +99,6 @@ func _build_doll() -> Control:
 		var s := _equip_slot(slot)
 		s.position = Vector2(14 if pos[0] == 0 else 290, 6 + pos[1] * 80)
 		doll.add_child(s)
-	var acc4 := _equip_slot(&"accessory_4")
-	acc4.position = Vector2(290, 6 + 5 * 80)
-	doll.add_child(acc4)
 	var main := _equip_slot(&"main_weapon", 84.0)
 	main.position = Vector2(95, 420)
 	doll.add_child(main)

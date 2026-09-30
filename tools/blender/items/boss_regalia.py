@@ -96,13 +96,14 @@ SETS = {
 ORDER = list(SETS.keys())
 SHIELDED = {"dragonforge": "heater", "crimson_glory": "tower", "winter_court": "kite", "ashfall_pilgrim": "round",
             "pale_requiem": "heater", "serpent_veil": "round", "eclipse_dancer": "round"}
-SLOTS = ["helm", "inner_garment", "armor", "gloves_1", "gloves_2", "boots_1", "boots_2",
+SLOTS = ["helm", "inner_garment", "armor", "leggings", "gloves_1", "gloves_2", "boots_1", "boots_2",
          "accessory_1", "accessory_2", "accessory_3", "accessory_4"]
 
 # attachment frames of BossSetVisuals.wear() in Blender model space: origin, and R (local -> model)
 I3 = np.eye(3)
 FRAMES = {
     "helm": ((0.0, 0.0, 1.73), I3), "armor": ((0.0, 0.0, 1.30), I3), "inner_garment": ((0.0, 0.0, 0.93), I3),
+    "leggings": ((0.0, 0.0, 0.93), I3),
     "gloves_1": ((0.639, 0.0, 1.44), Ry(-90)), "gloves_2": ((-0.639, 0.0, 1.44), Ry(90)),
     "boots_1": ((0.1, 0.0, 0.2305), I3), "boots_2": ((-0.1, 0.0, 0.2305), I3),
     "accessory_1": ((0.73, -0.06, 1.40), I3), "accessory_2": ((-0.73, -0.06, 1.40), I3),
@@ -1094,6 +1095,100 @@ def greave(sid, m):
     return parts
 
 
+# ------------------------------------------------------------------------------------------------------------ thighs
+# bh-024: the Legguards. Unlike the rest of the regalia they are authored on the hero's own legs (BossSetVisuals.HERO_FIT
+# leaves them as they are and scales them up about each thigh for the armoured class bodies): the thigh pieces follow
+# thigh.L / thigh.R, the fauld or apron at the front of the hips is the piece itself (the hips).
+THIGH = [(0.585, 0.083, 0.090, 0.080, 0.099, 0.010), (0.68, 0.095, 0.103, 0.088, 0.106, -0.004),
+         (0.78, 0.106, 0.113, 0.094, 0.108, -0.018), (0.87, 0.112, 0.118, 0.098, 0.109, -0.027)]
+
+
+def _thigh_rows(z0, z1, grow=0.0):
+    zs = np.array([r[0] for r in THIGH])
+    out = []
+    for z in np.linspace(z0, z1, 4):
+        vals = [float(np.interp(z, zs, [r[k] for r in THIGH])) for k in range(1, 6)]
+        out.append((z, vals[0] + grow, vals[1] + grow, vals[2] + grow, vals[3], vals[4]))
+    return out
+
+
+def _on_thigh(z, a, grow=0.0):
+    """A point on the left thigh's section at height z and angle a (270 = front), `grow` outside it."""
+    (zz, w, f, b, cx, cy), = _thigh_rows(z, z, grow)[:1]
+    return srow(z, w, f, b, 3, 2.3, cx, cy, a, a + 0.001)[0]
+
+
+def legguard(sid, m):
+    s = SETS[sid]
+    mo, cls = s["motif"], s["cls"]
+    left, hips = [], []
+    if cls == "knight":
+        # cuisses: three lames down the front and outside of each thigh, each with a trim and rivets
+        for i, (z0, z1, g) in enumerate(((0.79, 0.88, 0.028), (0.69, 0.795, 0.024), (0.59, 0.70, 0.020))):
+            left.append(shell(_thigh_rows(z0, z1, g), m["plate"], n=16, p=2.3, a0=195, a1=355, thick=0.008, bevel=0.0, name="cuisse"))
+            r = _thigh_rows(z0 + 0.004, z0 + 0.004, g + 0.004)[0]
+            left.append(band_trim(r[0], r[1], r[2], r[3], m["trim"], 0.005, 18, 2.3, r[4], r[5], 195, 355))
+            left += rivets(z1 - 0.018, r[1], r[2], r[3], m["trim"], 3, 0.005, 2.3, 230, 320, r[4], r[5], 0.006)
+        left += xform(emblem(mo, 0.07, m, 0.007), None, tuple(_on_thigh(0.745, 285.0, 0.036)))
+        if mo in ("dragon", "shard"):
+            for i in range(3):
+                p0 = _on_thigh(0.62 + i * 0.09, 350.0, 0.028)
+                left.append(K.cone_spike(tuple(p0), (p0[0] + 0.05, p0[1] + 0.005, p0[2] + 0.03), 0.014, m["horn"]))
+        # the fauld: two lames across the front of the hips
+        for i in range(2):
+            z = 0.935 - i * 0.045
+            hips.append(shell([(z - 0.045, 0.2 + 0.008 * i, 0.158 + 0.006 * i, 0.1), (z, 0.196 + 0.008 * i, 0.152 + 0.006 * i, 0.1)],
+                              m["plate"], n=24, p=2.4, a0=205, a1=335, thick=0.008, name="fauld"))
+            hips.append(band_trim(z - 0.044, 0.202 + 0.008 * i, 0.162 + 0.006 * i, 0.1, m["trim"], 0.0045, p=2.4, a0=205, a1=335))
+    elif cls == "mage":
+        # silk wraps round each thigh under a hanging embroidered panel on the outside
+        left.append(shell(_thigh_rows(0.60, 0.86, 0.018), m["cloth"], n=24, p=2.2, thick=0.004, name="wrap"))
+        for z in (0.63, 0.72, 0.81):
+            r = _thigh_rows(z, z, 0.022)[0]
+            left.append(band_trim(r[0], r[1], r[2], r[3], m["trim"], 0.004, 28, 2.2, r[4], r[5]))
+        c = _on_thigh(0.75, 330.0, 0.03)
+        pn = _panel(-0.05, 0.05, 0.16, -0.16, 0.0, m["cloth"], bulge=0.012, flare=0.25, hem="point", thick=0.006)
+        pn.rot(Rz(60.0))
+        pn.move(tuple(c))
+        left.append(pn)
+        left.append(K.gem(tuple(_on_thigh(0.80, 290.0, 0.04)), 0.013, m["gem"], rot=(90, 0, 0)))
+        # an apron at the front of the hips, hemmed and gemmed
+        hips.append(_panel(-0.1, 0.1, 0.95, 0.62, -0.15, m["cloth"], bulge=0.02, flare=0.4, hem="point", thick=0.006))
+        hips.append(K.tube([(-0.1, -0.158, 0.95), (-0.14, -0.16, 0.63)], [0.006, 0.006], m["trim"], n=5))
+        hips.append(K.tube([(0.1, -0.158, 0.95), (0.14, -0.16, 0.63)], [0.006, 0.006], m["trim"], n=5))
+        hips += front_emblem(mo, 0.08, m, (0.0, -0.172, 0.8))
+    else:
+        # rangers and shadowblades: a leather guard on the front and outside of each thigh, strapped on, with a plate
+        left.append(shell(_thigh_rows(0.60, 0.87, 0.02), m["leather"], n=24, p=2.3, a0=190, a1=360, thick=0.008, name="guard"))
+        for z in (0.64, 0.83):
+            r = _thigh_rows(z, z, 0.03)[0]
+            left.append(band_trim(r[0], r[1], r[2], r[3], m["dark"], 0.0055, 28, 2.3, r[4], r[5]))
+        left.append(shell(_thigh_rows(0.68, 0.79, 0.03), m["plate"], n=18, p=2.3, a0=240, a1=320, thick=0.007, name="plate"))
+        r = _thigh_rows(0.79, 0.79, 0.036)[0]
+        left.append(band_trim(r[0], r[1], r[2], r[3], m["trim"], 0.004, 16, 2.3, r[4], r[5], 240, 320))
+        left += xform(emblem(mo, 0.055, m, 0.006), None, tuple(_on_thigh(0.735, 280.0, 0.044)))
+        if cls == "shadowblade":
+            # a knife sheathed on the outside of the thigh
+            c = _on_thigh(0.72, 358.0, 0.036)
+            left.append(K.box(0.016, 0.03, 0.2, (c[0], c[1], c[2] - 0.02), m["dark"], 0.006))
+            left.append(K.tube([(c[0], c[1], c[2] + 0.08), (c[0], c[1], c[2] + 0.14)], [0.009, 0.008], m["leather"], n=6))
+            left.append(K.sphere(0.012, (c[0], c[1], c[2] + 0.145), m["trim"], 8, 5))
+        else:
+            # a quiver of spare bolts on the outer thigh
+            c = _on_thigh(0.74, 358.0, 0.04)
+            left.append(K.tube([(c[0], c[1] + 0.01, c[2] - 0.1), (c[0], c[1] + 0.01, c[2] + 0.08)], [(0.024, 0.018)] * 2, m["leather"], n=10))
+            for k in range(4):
+                left.append(K.tube([(c[0] - 0.012 + 0.008 * k, c[1] + 0.01, c[2] + 0.08), (c[0] - 0.012 + 0.008 * k, c[1] + 0.01, c[2] + 0.14)],
+                                   [0.0022, 0.0022], m["horn"], n=4))
+        hips.append(band_trim(0.95, 0.19, 0.152, 0.1, m["dark"], 0.009, 24, 2.3, 0.0, 0.0, 195, 345))
+        hips.append(K.lathe([(0.0, 0.0), (0.03, 0.0), (0.034, 0.008), (0.0, 0.01)], m["trim"], 18).rot(Rx(90)).move((0.0, -0.165, 0.95)))
+        hips += front_emblem(mo, 0.05, m, (0.0, -0.178, 0.95))
+    for p in left:
+        p.bone = "thigh.L"
+    right = [p.mirrored(False).to(bone="thigh.R") for p in left]
+    return hips + left + right
+
+
 # ------------------------------------------------------------------------------------------------------------ jewellery
 def jewel(sid, m, slot):
     s = SETS[sid]
@@ -1200,6 +1295,8 @@ def piece_parts(sid, slot, m):
         return armor(sid, m)
     if slot == "inner_garment":
         return inner_garment(sid, m)
+    if slot == "leggings":
+        return legguard(sid, m)
     if slot.startswith("gloves"):
         parts = gauntlet(sid, m)
     elif slot.startswith("boots"):
@@ -1358,7 +1455,10 @@ def export_models(sids, log=print):
     sys.path.insert(0, K.CHARS)
     from build import reset
     report = []
+    only = [x for x in os.environ.get("BH_REGALIA_SLOTS", "").split(",") if x]
     for sid, slot, iid in items_for(sids):
+        if only and slot not in only:
+            continue
         reset()
         m = palette(sid)
         parts = piece_parts(sid, slot, m)
@@ -1371,7 +1471,7 @@ def export_models(sids, log=print):
         log("[regalia] %-44s %6d tris  %s" % (iid, tris, ",".join(o.name for o in obs[1:])))
     # the signature weapons (boss_weapons designs) with the same UV map, so the game can texture them too
     import boss_weapons as BW
-    for sid in sids:
+    for sid in (sids if not only or "main_weapon" in only else []):
         iid = "boss_%s_main_weapon" % sid
         reset()
         fn, theme = BW.SPECS[iid]
@@ -1383,7 +1483,7 @@ def export_models(sids, log=print):
 
 # ------------------------------------------------------------------------------------------------------------ icons
 ICON_VIEW = {  # slot -> (pitch, yaw, rotation applied to the model-space piece)
-    "helm": (10.0, 28.0, None), "armor": (6.0, 20.0, None), "inner_garment": (10.0, 20.0, None),
+    "helm": (10.0, 28.0, None), "armor": (6.0, 20.0, None), "inner_garment": (10.0, 20.0, None), "leggings": (8.0, 24.0, None),
     "gloves_1": (18.0, 0.0, Ry(-32)), "gloves_2": (18.0, 0.0, Ry(32)),
     "boots_1": (12.0, 30.0, None), "boots_2": (12.0, -30.0, None),
     "accessory_1": (40.0, 24.0, None), "accessory_2": (40.0, -24.0, None), "accessory_3": (8.0, 12.0, None),

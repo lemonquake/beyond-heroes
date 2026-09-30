@@ -1,6 +1,6 @@
 class_name InventoryWindow
 extends UIWindow
-## Inventory + Equipment (I). Gear and Utility share 84 slots; consumables have 16 additional belt slots. Left: the hero in 3D on a plinth, the 13 equipment slots around it, a stat summary and
+## Inventory + Equipment (I). Gear and Utility share 84 slots; consumables have 16 additional belt slots. Left: the hero in 3D on a plinth, the 14 equipment slots around it, a stat summary and
 ## active set bonuses. Right: category tabs, search, rarity filter, sorting, the bags and separate belt, gold, and an action bar
 ## for the selected item: Equip/Use, Split, Lock, Favorite, Mark to sell, Drop, Destroy (confirmed).
 ## Mouse: left select · right Equip/Use · Shift+left Split · drag to move, merge, equip or unequip · double-click Equip.
@@ -9,12 +9,12 @@ extends UIWindow
 
 const CELL := 62.0
 const SLOT_LAYOUT := {
-	# slot: [column (0 left / 1 right), row]
-	&"helm": [0, 0], &"inner_garment": [0, 1], &"armor": [0, 2], &"gloves_1": [0, 3], &"boots_1": [0, 4],
-	&"accessory_1": [1, 0], &"accessory_2": [1, 1], &"gloves_2": [1, 2], &"boots_2": [1, 3], &"accessory_3": [1, 4],
+	# slot: [column (0 left / 1 right), row] — clothing down the left, jewellery down the right, the pairs side by side
+	&"helm": [0, 0], &"inner_garment": [0, 1], &"armor": [0, 2], &"leggings": [0, 3], &"gloves_1": [0, 4], &"boots_1": [0, 5],
+	&"accessory_1": [1, 0], &"accessory_2": [1, 1], &"accessory_3": [1, 2], &"accessory_4": [1, 3], &"gloves_2": [1, 4], &"boots_2": [1, 5],
 }
 const GLYPH := {&"main_weapon": "main_weapon", &"sub_weapon": "sub_weapon", &"helm": "helm", &"inner_garment": "inner_garment",
-	&"armor": "armor", &"gloves_1": "gloves", &"gloves_2": "gloves", &"boots_1": "boots", &"boots_2": "boots",
+	&"armor": "armor", &"leggings": "leggings", &"gloves_1": "gloves", &"gloves_2": "gloves", &"boots_1": "boots", &"boots_2": "boots",
 	&"accessory_1": "accessory", &"accessory_2": "accessory", &"accessory_3": "accessory", &"accessory_4": "accessory"}
 
 var hero: HeroData
@@ -89,9 +89,6 @@ func _build_paper_doll() -> Control:
 		var s := _equip_slot(slot)
 		s.position = Vector2(20 if pos[0] == 0 else 490, 8 + pos[1] * 88)
 		doll.add_child(s)
-	var acc4 := _equip_slot(&"accessory_4")
-	acc4.position = Vector2(490, 8 + 5 * 88)
-	doll.add_child(acc4)
 	var main := _equip_slot(&"main_weapon", 92.0)
 	main.position = Vector2(170, 460)
 	doll.add_child(main)

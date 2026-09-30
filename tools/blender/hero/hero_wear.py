@@ -3,8 +3,9 @@
   blender -b --factory-startup --python tools/blender/hero/hero_wear.py -- all | <ids...> | preview [ids or a+b+c outfits]
 
 Every wearable base item has an entry (its own id); ids starting with "_" are the shared pieces the game adds itself:
-the plain under-layers worn beneath boss regalia and the shoes of a clothed hero without boots. The item modules
-(hero_wear_torso.py: armour and inner garments; hero_wear_ends.py: helms, gloves, boots, jewellery) register the rest.
+the plain under-layers worn beneath boss regalia, and the shoes and breeches of a clothed hero without boots or
+leggings. The item modules (hero_wear_torso.py: armour and inner garments; hero_wear_legs.py: leggings and the shared
+legwear; hero_wear_ends.py: helms, gloves, boots, jewellery) register the rest.
 """
 import importlib
 import math
@@ -22,10 +23,11 @@ TINT = "raw:BH_Cloth_Primary"            # takes the colour the game gives the w
 
 
 # ---- shared pieces ----------------------------------------------------------------------------------------------------
-@item("_under_body", hide={"z": [0.13, 1.49], "sleeve": [0.23, 0.71]})
+@item("_under_body", hide={"z": [0.875, 1.49], "sleeve": [0.23, 0.71]})
 def under_body():
+    """Trunk and arms (bh-024: the legs have their own under-layer, hero_wear_legs._under_legs)."""
     def sel(V):
-        return WK.either(WK.trunk(V, 0.78, 1.53), WK.arms(V, 0.19, 0.735), WK.legs(V, 0.105, 0.95))
+        return WK.either(WK.trunk(V, 0.85, 1.53), WK.arms(V, 0.19, 0.735))
     return [shell(sel, 0.005, TINT, "suit")]
 
 
@@ -49,7 +51,7 @@ def shoes():
 
 
 # ---- item modules -----------------------------------------------------------------------------------------------------
-for _m in ("hero_wear_torso", "hero_wear_ends"):
+for _m in ("hero_wear_torso", "hero_wear_ends", "hero_wear_legs"):
     if os.path.exists(os.path.join(HERE, _m + ".py")):
         importlib.import_module(_m)
 
@@ -61,10 +63,22 @@ FALLBACK = {
     "inner_garment/heavy": "padded_gambeson", "inner_garment/cloth": "silk_undershirt", "inner_garment": "padded_gambeson",
     "gloves/heavy": "iron_gauntlet", "gloves/cloth": "silk_glove", "gloves": "silk_glove",
     "boots/heavy": "iron_sabaton", "boots/cloth": "soft_boot", "boots": "soft_boot",
+    "leggings/heavy": "iron_cuisses", "leggings/cloth": "linen_trousers", "leggings": "linen_trousers",
+    "leggings/cloth/ranger": "hide_leggings", "leggings/cloth/shadowblade": "cutpurse_trousers",
 }
 
 
 # ---- preview ----------------------------------------------------------------------------------------------------------
+TORSO_IDS = set()
+BOOT_IDS = set()
+try:
+    import hero_wear_torso as _T
+    import hero_wear_ends as _E
+    TORSO_IDS = {k for k, v in WK.REGISTRY.items() if v["fn"].__module__ == _T.__name__}
+    BOOT_IDS = set(_E.BOOTS)
+except Exception:  # noqa: BLE001
+    pass
+
 def _hide_body(ob, V, ids):
     """Approximate the skin shader's cut-outs with a mask modifier, so previews show what the game shows."""
     ax = np.abs(V[:, 0])
@@ -90,7 +104,11 @@ def _hide_body(ob, V, ids):
 
 def preview(outfits, clips=("run", "sword_2", "cast_heavy")):
     """Renders of each outfit ("a+b+c" = several pieces together) on the hero: rest pose front / back / side and a
-    few library poses -> work/lemondev/bh-023/scratch/wear/<outfit>_*.png"""
+    few library poses -> work/lemondev/bh-023/scratch/wear/<outfit>_*.png
+    BH_WEAR_SHOTS=front,side,back,head,legs limits the rest-pose shots and BH_WEAR_CLIPS=run,... the poses (empty: none)."""
+    shots = [x for x in os.environ.get("BH_WEAR_SHOTS", "front,back,side,head").split(",") if x]
+    if "BH_WEAR_CLIPS" in os.environ:
+        clips = tuple(x for x in os.environ["BH_WEAR_CLIPS"].split(",") if x)
     import bpy
     import bh_anim as A
     import bh_library as L
@@ -108,6 +126,16 @@ def preview(outfits, clips=("run", "sword_2", "cast_heavy")):
         obs = []
         for i in ids:
             obs += WK.build_item(i, arm)
+        # what the game leaves off (HeroWear.plan): a pair of leggings' outer groups under what is worn over them
+        torso = [i for i in ids if WK.REGISTRY[i].get("skirt") is not None or i in TORSO_IDS]
+        skirt = min([WK.REGISTRY[i].get("skirt") or 9.0 for i in torso] or [9.0])
+        booted = any(i in BOOT_IDS for i in ids)
+        skip = (["waist"] if torso else []) + (["hip"] if skirt < 0.80 else []) + (["knee"] if skirt < 0.45 else []) \
+            + (["ankle_L", "ankle_R"] if booted else [])
+        for o in list(obs):
+            if o.name.split(".")[0] in ["wear_" + g for g in skip]:
+                obs.remove(o)
+                bpy.data.objects.remove(o)
         _hide_body(body, r["V"], ids)
         if arm.animation_data:
             arm.animation_data.action = None
@@ -115,10 +143,13 @@ def preview(outfits, clips=("run", "sword_2", "cast_heavy")):
             pb.rotation_quaternion = (1, 0, 0, 0)
             pb.location = (0, 0, 0)
         tag = outfit.replace("+", "__")
-        shot(os.path.join(out, tag + "_front.png"), (0, -6, 0.95), (0, 0, 0.95), 2.0, (700, 900))
-        shot(os.path.join(out, tag + "_back.png"), (0, 6, 0.95), (0, 0, 0.95), 2.0, (700, 900))
-        shot(os.path.join(out, tag + "_side.png"), (6, -0.5, 0.95), (0, 0, 0.95), 2.0, (500, 900))
-        shot(os.path.join(out, tag + "_head.png"), (2.2, -4.5, 1.85), (0, -0.03, 1.66), 0.62, (640, 640))
+        views = {"front": ((0, -6, 0.95), (0, 0, 0.95), 2.0, (700, 900)), "back": ((0, 6, 0.95), (0, 0, 0.95), 2.0, (700, 900)),
+                 "side": ((6, -0.5, 0.95), (0, 0, 0.95), 2.0, (500, 900)), "head": ((2.2, -4.5, 1.85), (0, -0.03, 1.66), 0.62, (640, 640)),
+                 "legs": ((2.6, -5.2, 0.62), (0, 0, 0.58), 1.25, (700, 800)),
+                 "hips": ((0.8, -5.5, 0.95), (0, 0, 0.92), 0.5, (900, 900)), "legs_back": ((-2.6, 5.2, 0.62), (0, 0, 0.58), 1.25, (700, 800))}
+        for v in shots:
+            loc, tgt, sc, res = views[v]
+            shot(os.path.join(out, "%s_%s.png" % (tag, v)), loc, tgt, sc, res)
         for c in clips:
             A.assign_action(arm, acts[c])
             f = lib[c].length // 2

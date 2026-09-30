@@ -35,6 +35,8 @@ var foretech_rank := 0
 # bh-018: sockets opened by a Socket Specialist (Sockets) and the crystal set in each ("" = empty): gems.size() == sockets
 var sockets := 0
 var gems: Array = []
+# bh-024: an Unbound variant (the "alj" special weapons, Cheats) has no level, attribute or class-rank requirement
+var unbound := false
 
 func _init() -> void:
 	_uid_counter += 1
@@ -271,6 +273,8 @@ func to_dict() -> Dictionary:
 	if sockets > 0:
 		d["sk"] = sockets
 		d["gems"] = gems.duplicate()
+	if unbound:
+		d["ub"] = true
 	return d
 
 static func from_dict(d: Dictionary) -> ItemInstance:
@@ -303,6 +307,7 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 	it.favorite = bool(d.get("favorite", false))
 	it.junk = bool(d.get("junk", false))
 	it.crafted = bool(d.get("crafted", false))
+	it.unbound = bool(d.get("ub", false))
 	var en = d.get("ench", [])
 	if en is Array and (en as Array).size() == 2 and DataUpgrades.ENCHANTS.has(StringName(en[0])) and b.is_weapon():
 		it.enchant = StringName(en[0])

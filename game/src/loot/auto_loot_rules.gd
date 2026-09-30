@@ -12,7 +12,7 @@ static func category(item: ItemInstance) -> String:
 		&"weapon": return "weapons"
 		&"shield": return "shields"
 		&"accessory": return "accessories"
-		&"helm", &"armor", &"inner_garment", &"gloves", &"boots": return "armor"
+		&"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots": return "armor"
 		&"material": return "ingredients"
 		&"crystal": return "crystals"
 		&"quest": return "quest"
@@ -56,7 +56,7 @@ static func item_reason(item: ItemInstance, hero: HeroData, rules: Dictionary, l
 	if item.is_equipment():
 		if item.ilvl < int(rules.get("min_level", 0)): return "Below minimum item level"
 		if bool(rules.get("usable_only", false)) and hero:
-			if item.required_level() > hero.progress.level: return "Level requirement too high"
+			if not item.unbound and item.required_level() > hero.progress.level: return "Level requirement too high"
 			var attrs := hero.progress.base_attributes()
 			for attr in item.base.requirements:
 				if float(attrs.get(attr, 0)) < float(item.base.requirements[attr]): return "Attribute requirements not met"

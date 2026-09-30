@@ -1,6 +1,6 @@
 class_name Equipment
 extends RefCounted
-## The hero's 13 equipment slots (exact spec layout) and the rules for filling them.
+## The hero's 14 equipment slots (the spec's 13 plus Leggings, bh-024) and the rules for filling them.
 
 signal changed
 
@@ -30,14 +30,15 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 	var allowed: Array = item.base.equipment_slots()
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
-	if level < item.required_level():
-		return "Requires level %d" % item.required_level()
-	var need := DataGuilds.rank_for_rarity(item.rarity)
-	if need > tier_rank:
-		return "Requires a Class %s hero (%s items)" % [DataGuilds.letter(need), BH.rarity_name(item.rarity)]
-	for a in item.base.requirements:
-		if int(attrs.get(a, 0)) < int(item.base.requirements[a]):
-			return "Requires %d %s" % [item.base.requirements[a], BH.ATTRIBUTE_NAMES[a]]
+	if not item.unbound:         # bh-024: Unbound pieces ask for no level, rank or attributes
+		if level < item.required_level():
+			return "Requires level %d" % item.required_level()
+		var need := DataGuilds.rank_for_rarity(item.rarity)
+		if need > tier_rank:
+			return "Requires a Class %s hero (%s items)" % [DataGuilds.letter(need), BH.rarity_name(item.rarity)]
+		for a in item.base.requirements:
+			if int(attrs.get(a, 0)) < int(item.base.requirements[a]):
+				return "Requires %d %s" % [item.base.requirements[a], BH.ATTRIBUTE_NAMES[a]]
 	if slot == &"sub_weapon":
 		var main_type := weapon_type_of(slots[&"main_weapon"])
 		if main_type != null and main_type.two_handed:

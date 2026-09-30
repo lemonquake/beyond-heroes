@@ -163,7 +163,7 @@ static func equip_error(hero: HeroData, t: TempoData, item: ItemInstance, slot: 
 	var allowed: Array = BH.CATEGORY_SLOTS.get(item.base.category, [])
 	if not allowed.has(slot):
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
-	if hero.progress.level < item.required_level():
+	if not item.unbound and hero.progress.level < item.required_level():
 		return "Requires level %d" % item.required_level()
 	if not rarity_allowed(hero, item.rarity):
 		return "Tempos may wear %s gear at most (one tier below yours)" % BH.rarity_name(best_wearable_rarity(hero))

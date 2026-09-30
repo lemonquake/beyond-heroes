@@ -92,7 +92,7 @@ func _write() -> void:
 	_p("Regenerate: \"C:/Users/Lemon PC/Desktop/Godot.exe\" --headless --path game res://tests/tools/item_catalogue.tscn")
 	_p("")
 	_p("Contents")
-	for s in ["1. Rarity tiers, equipment slots, weight and sockets", "2. Weapons", "3. Shields", "4. Armour (helms, inner garments, armour, gloves, boots)",
+	for s in ["1. Rarity tiers, equipment slots, weight and sockets", "2. Weapons", "3. Shields", "4. Armour (helms, inner garments, armour, leggings, gloves, boots)",
 			"5. Accessories", "6. Item sets", "7. Named uniques", "8. Enchantments (random affixes)", "9. Powers (mythical, legendary, aether, relic)",
 			"10. Faction licenses", "11. Socket crystals and the Socket Specialists", "12. Weapon upgrades: Enchantment and Fore-Tech",
 			"13. Consumables", "14. Materials, currencies and relic caches", "15. Quest items", "16. Crafting recipes", "17. Where to buy: merchants"]:
@@ -168,9 +168,9 @@ func _shields() -> void:
 
 func _armour() -> void:
 	_h1("4. Armour")
-	for cat in [&"helm", &"inner_garment", &"armor", &"gloves", &"boots"]:
+	for cat in [&"helm", &"inner_garment", &"armor", &"leggings", &"gloves", &"boots"]:
 		var list := _bases(func(b: ItemBaseDef) -> bool: return b.category == cat)
-		_h2("%s (%d)" % [{&"helm": "Helms", &"inner_garment": "Inner garments", &"armor": "Body armour", &"gloves": "Gloves", &"boots": "Boots"}[cat], list.size()])
+		_h2("%s (%d)" % [{&"helm": "Helms", &"inner_garment": "Inner garments", &"armor": "Body armour", &"leggings": "Leggings", &"gloves": "Gloves", &"boots": "Boots"}[cat], list.size()])
 		_p(_row(["  Lvl", "Name", "Weight class", "Def", "Requires", "Wt", "Value", "Notes"], [5, 28, 12, 5, 16, 5, 6, 60]))
 		for b: ItemBaseDef in list:
 			var note := _mods(b.implicit)

@@ -7,17 +7,28 @@ extends RefCounted
 ##
 ## Boss collections keep their authored regalia (BossSetVisuals) and get a plain under-layer in the set's cloth
 ## colour beneath the plates.
+##
+## bh-024: legs are their own slot. Body garments stop at the hips; the legs are covered by the Leggings, by the set
+## colour's under-layer beneath boss Legguards, or — for a hero wearing a shirt or coat but no leggings — by plain
+## breeches, so nobody walks out in a hauberk and bare legs. A pair of leggings carries its outer parts in separate
+## meshes (tools/blender/hero/hero_wear_legs.py) that are left off where something is worn over them: the belt and
+## hanging panels under any shirt or coat, thigh plates under skirts reaching below SKIRT_HIP, knee cops under robes
+## reaching below SKIRT_KNEE, ankle cuffs and low wraps inside a boot.
 
 const DIR := "res://assets/characters/hero/wear/"
 const MANIFEST := DIR + "manifest.json"
-const SLOTS: Array[StringName] = [&"inner_garment", &"armor", &"helm", &"gloves_1", &"gloves_2", &"boots_1", &"boots_2",
+const SLOTS: Array[StringName] = [&"inner_garment", &"armor", &"leggings", &"helm", &"gloves_1", &"gloves_2", &"boots_1", &"boots_2",
 	&"accessory_1", &"accessory_2", &"accessory_3", &"accessory_4"]
 ## Left-hand / left-foot slots (the other of each pair is the right).
 const LEFT := [&"gloves_1", &"boots_1", &"accessory_1", &"accessory_3"]
 const UNDER_BODY := "_under_body"
 const UNDER_HANDS := "_under_hands"
 const UNDER_FEET := "_under_feet"
+const UNDER_LEGS := "_under_legs"
 const SHOES := "_shoes"
+const BREECHES := "_breeches"
+const SKIRT_HIP := 0.80
+const SKIRT_KNEE := 0.45
 const FAR := Vector2(9.0, 9.0)
 ## Boss helms that are open crowns (the hair stays).
 const BOSS_HELM_KEEPS_HAIR := ["grievance_of_the_fairy", "winter_court"]
@@ -68,6 +79,9 @@ static func plan(equipment: Equipment, show_helm := true) -> Dictionary:
 	var hide := {}
 	var hide_hair := false
 	var clothed := false
+	var legged := false
+	var legs_piece := {}
+	var skirt := 9.0
 	var booted := {"L": false, "R": false}
 	for slot in SLOTS:
 		var item := equipment.get_item(slot)
@@ -86,6 +100,9 @@ static func plan(equipment: Equipment, show_helm := true) -> Dictionary:
 			if slot == &"armor" or slot == &"inner_garment":
 				under = UNDER_BODY
 				clothed = true
+			elif slot == &"leggings":
+				under = UNDER_LEGS
+				legged = true
 			elif slot.begins_with("gloves"):
 				under = UNDER_HANDS
 			elif slot.begins_with("boots"):
@@ -101,16 +118,39 @@ static func plan(equipment: Equipment, show_helm := true) -> Dictionary:
 		if id == "":
 			continue
 		var info := _info(id)
-		pieces.append({"id": id, "side": side, "tint": Color(0.5, 0.2, 0.18)})
+		var piece := {"id": id, "side": side, "tint": Color(0.5, 0.2, 0.18)}
+		pieces.append(piece)
 		_cover(info, side, spans, hide)
 		if slot == &"armor" or slot == &"inner_garment":
 			clothed = true
+			skirt = minf(skirt, float(info.get("skirt", 9.0)))
+		elif slot == &"leggings":
+			legged = true
+			legs_piece = piece
 		elif slot.begins_with("boots"):
 			booted[side] = true
 		elif slot == &"helm" and String(info.get("hair", "hide")) == "hide":
 			hide_hair = true
+	# what the leggings carry over the cloth stays off where something else is worn over it
+	if not legs_piece.is_empty():
+		var skip: Array[String] = []
+		if clothed:
+			skip.append("waist")
+		if skirt < SKIRT_HIP:
+			skip.append("hip")
+		if skirt < SKIRT_KNEE:
+			skip.append("knee")
+		for sd in ["L", "R"]:
+			if booted[sd]:
+				skip.append("ankle_" + sd)
+		legs_piece["skip"] = skip
+	# nor bare-legged under one: plain breeches unless leggings are worn
+	if clothed and not legged and has_model(BREECHES):
+		pieces.append({"id": BREECHES, "side": "", "tint": Color(0.22, 0.17, 0.12)})
+		_cover(_info(BREECHES), "", spans, hide)
+		sig.append("breeches")
 	# nobody goes to war barefoot in a coat of mail: plain shoes unless boots are worn
-	if clothed and has_model(SHOES):
+	if (clothed or legged) and has_model(SHOES):
 		for side in ["L", "R"]:
 			if not booted[side]:
 				pieces.append({"id": SHOES, "side": side, "tint": Color(0.2, 0.13, 0.08)})
@@ -156,10 +196,13 @@ static func build(piece: Dictionary, skeleton: Skeleton3D) -> Array[MeshInstance
 		return out
 	var scene: Node = (load(path) as PackedScene).instantiate()
 	var side := String(piece.get("side", ""))
+	var skip: Array = piece.get("skip", [])
 	for n in scene.find_children("*", "MeshInstance3D", true, false):
 		var mi := n as MeshInstance3D
 		var nm := String(mi.name)
 		if side != "" and (nm.ends_with("_L") or nm.ends_with("_R")) and not nm.ends_with("_" + side):
+			continue
+		if skip.any(func(t): return nm == "wear_" + String(t)):
 			continue
 		mi.get_parent().remove_child(mi)
 		mi.owner = null

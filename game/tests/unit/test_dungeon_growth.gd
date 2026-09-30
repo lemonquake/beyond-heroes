@@ -88,7 +88,7 @@ func test_plans_and_reinforcements() -> void:
 	done()
 
 func test_catalog_models_stats_and_class_loot() -> void:
-	eq(DataDepthEquipment.ROWS.size(), 80, "80 new equipment designs")
+	eq(DataDepthEquipment.ROWS.size(), 84, "80 new equipment designs + 4 depth leggings (bh-024)")
 	var ids := {}
 	var swords := 0
 	var specials := 0

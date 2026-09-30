@@ -8,7 +8,7 @@ class_name ItemModels
 const GROUND_MIN_SIZE := 0.36
 const GROUND_MAX_SIZE := 1.7
 ## Authored upright with the front toward +Z (Blender -Y): laid on their back when they lie on the ground.
-const LAY_FLAT := [&"shield", &"armor", &"inner_garment", &"gloves"]
+const LAY_FLAT := [&"shield", &"armor", &"inner_garment", &"leggings", &"gloves"]
 
 static var _scenes := {}
 

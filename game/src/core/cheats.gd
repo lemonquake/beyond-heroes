@@ -5,6 +5,7 @@ class_name Cheats
 ##   greg    +1000 gold
 ##   azrin   +3 levels (levels, points and all, exactly as if earned)
 ##   azrael  full HP and mana (the hero and every living Tempo at their side)
+##   alj    every special weapon as an Unbound variant: no level, attribute or rank requirement (DataSpecialWeapons)
 ##   quake team  calls an AI ally hero to fight beside you (up to 3, Single Player only): it follows, protects, shops for the
 ##               best gear, binds a Tempo and heals itself (QuakeTeam)
 
@@ -15,7 +16,7 @@ const CODES := {"lemonq": "gold", "taicho": "small_gold", "greg": "small_gold", 
 	"asdf": "large_gold", "lol": "skill_points", "jjwp": "stat_points",
 	"deep pockets": "rich", "talenttime": "talent_points", "oneup": "one_level", "redbottle": "health_items",
 	"bluebottle": "mana_items", "homeward": "portal_items", "embers": "ember_items", "wellrested": "rest",
-	"freshstart": "reset_stats", "secondwind": "revive_tempos"}
+	"freshstart": "reset_stats", "secondwind": "revive_tempos", "alj": "special_weapons"}
 
 ## Player-facing reference, also used by tools/create_cheats_pdf.py. Keep one entry for every code.
 const DESCRIPTIONS := {
@@ -37,7 +38,8 @@ const DESCRIPTIONS := {
 	"embers": "Add 100 Soul Embers for Tempo summoning. Requires enough bag space for the entire gift.",
 	"wellrested": "Grant at least 30 minutes of Well Rested: +10% XP and +0.5 HP regeneration. Uses play time.",
 	"freshstart": "Refund all allocated stat points for free. Does not reset your level, skills or talents.",
-	"secondwind": "Revive all fallen bound Tempos at full HP and mana for free. Does not revive the hero."
+	"secondwind": "Revive all fallen bound Tempos at full HP and mana for free. Does not revive the hero.",
+	"alj": "Add every Legendary special weapon as an Unbound variant that can be equipped without level, attribute or rank requirements. Requires enough bag space for all of them."
 }
 
 static func is_code(text: String) -> bool:
@@ -110,6 +112,8 @@ static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 		"quake_team":
 			var r := QuakeTeam.summon(hero, player as Node3D)
 			return ("Cheat: " if r.ok else "") + String(r.text)
+		"special_weapons":
+			return _give_special(hero)
 		"restore":
 			var pl := player as Player
 			if pl == null or not pl.alive:
@@ -141,6 +145,21 @@ static func _give_items(hero: HeroData, base_id: StringName, count: int) -> Stri
 		return "Cheat: make room in your bag or belt for %d %s; nothing added." % [count, item.base.display_name]
 	hero.inventory.add(item)
 	return "Cheat: +%d %s." % [count, item.base.display_name]
+
+## bh-024 "alj": every special weapon (DataSpecialWeapons) as an Unbound variant — equippable without requirements.
+static func _give_special(hero: HeroData) -> String:
+	var ids := DataSpecialWeapons.ids()
+	if ids.is_empty():
+		return "Cheat: no special weapons are in this build yet."
+	if hero.inventory.free_cells() < ids.size():
+		return "Cheat: make room in your bag for %d special weapons; nothing added." % ids.size()
+	var names: Array[String] = []
+	for id in ids:
+		var it := DataSpecialWeapons.unbound(id, hero.progress.level)
+		if it:
+			hero.inventory.add(it)
+			names.append(it.display_name())
+	return "Cheat: +%s (Unbound: no requirements)." % ", ".join(names)
 
 static func _give_gold(hero: HeroData, amount: int) -> String:
 	if hero == null:

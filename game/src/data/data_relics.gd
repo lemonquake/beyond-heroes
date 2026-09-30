@@ -72,7 +72,7 @@ static func affixes() -> Array:
 	var F := StatModifier.Op.FLAT
 	var I := StatModifier.Op.INC
 	var WEAP := [&"weapon"]
-	var ARM := [&"helm", &"armor", &"inner_garment", &"gloves", &"boots", &"shield"]
+	var ARM := [&"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots", &"shield"]
 	var JEW := [&"accessory"]
 	return [
 		DataItems._a(&"gold_find", "of Plenty", false, &"gold_find", I, [[1, 0.08, 0.15], [12, 0.16, 0.28], [25, 0.29, 0.45]],
@@ -113,8 +113,8 @@ static func powers() -> Array:
 		_p(&"r_bramble", "Bramblecoat", "Melee attackers take 40 damage.", [[&"thorns", F, 40.0]], [&"armor", &"shield", &"inner_garment"]),
 		_p(&"r_giantbane", "Giantbane", "22% more damage against elites, champions and bosses.", [[&"elite_damage", I, 0.22]], [&"weapon", &"gloves", &"accessory"]),
 		_p(&"r_spiritcall", "Spirit-called", "+40% Soul Embers found and your Tempos deal 15% more damage.", [[&"ember_find", I, 0.4], [&"tempo_damage", I, 0.15]], [&"accessory", &"helm"]),
-		_p(&"r_windrunner", "Windrunner's", "+8% Movement Speed and 15% faster dodge recovery.", [[&"move_speed", I, 0.08], [&"dodge_cooldown", I, -0.15]], [&"boots"]),
-		_p(&"r_bulwark", "Unbowed", "+12% maximum HP and +8% to all resistances.", [[&"max_hp", I, 0.12], [&"res_all", F, 0.08]], [&"armor", &"helm", &"shield"]),
+		_p(&"r_windrunner", "Windrunner's", "+8% Movement Speed and 15% faster dodge recovery.", [[&"move_speed", I, 0.08], [&"dodge_cooldown", I, -0.15]], [&"boots", &"leggings"]),
+		_p(&"r_bulwark", "Unbowed", "+12% maximum HP and +8% to all resistances.", [[&"max_hp", I, 0.12], [&"res_all", F, 0.08]], [&"armor", &"helm", &"shield", &"leggings"]),
 	]
 
 static func _p(id: StringName, name: String, desc: String, mods: Array, cats: Array) -> LegendaryPowerDef:
@@ -140,6 +140,7 @@ const NOUNS := {
 	&"helm": ["Crown", "Visage", "Brow", "Gaze", "Diadem", "Watch"],
 	&"armor": ["Mantle", "Shroud", "Carapace", "Vigil", "Embrace", "Bulwark", "Hide"],
 	&"inner_garment": ["Veil", "Skin", "Weave", "Second Skin", "Lining"],
+	&"leggings": ["Stance", "Stand", "Tread", "Hold", "Footing"],
 	&"gloves": ["Grip", "Grasp", "Hand", "Touch", "Reach"],
 	&"boots": ["Stride", "Path", "March", "Wander", "Step"],
 	&"accessory": ["Sigil", "Seal", "Eye", "Heart", "Tear", "Coil", "Knot", "Echo", "Star"],

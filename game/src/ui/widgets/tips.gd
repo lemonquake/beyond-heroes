@@ -275,7 +275,10 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			var active: bool = owned >= int(n)
 			v.add_child(lbl("(%d) %s" % [n, sd.bonuses[n].get("desc", "")], 15, SET_ON if active else SET_OFF))
 	# requirements
-	if it.is_equipment() and hero:
+	if it.is_equipment() and it.unbound:
+		v.add_child(gap(2))
+		v.add_child(lbl("Unbound: no level, attribute or rank requirement", 14, Color(1.0, 0.72, 0.35)))
+	elif it.is_equipment() and hero:
 		var reqs := []
 		if it.required_level() > 1:
 			reqs.append(["Requires Level %d" % it.required_level(), hero.progress.level >= it.required_level()])
@@ -338,7 +341,7 @@ static func _type_line(it: ItemInstance) -> String:
 		var wt := DB.weapon_type(it.base.weapon_type)
 		kind = wt.display_name if wt else "Weapon"
 	else:
-		kind = {&"shield": "Shield", &"helm": "Helm", &"armor": "Armor", &"inner_garment": "Inner Garment", &"gloves": "Gloves",
+		kind = {&"shield": "Shield", &"helm": "Helm", &"armor": "Armor", &"inner_garment": "Inner Garment", &"leggings": "Leggings", &"gloves": "Gloves",
 			&"boots": "Boots", &"accessory": "Accessory", &"consumable": "Consumable", &"material": "Material", &"quest": "Quest Item",
 			&"crystal": "Socket Crystal"}.get(it.base.category, "Item")
 	if it.base.category == &"crystal":

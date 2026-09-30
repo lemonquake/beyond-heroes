@@ -1182,5 +1182,55 @@
       "plate": null,
       "straps": "darkleather"
     }
+  ],
+  "depth_deepwarden_cuisses": [
+    "legs",
+    {
+      "kind": "plate",
+      "mat": "blued",
+      "trim": "bronze",
+      "glow": "emerald",
+      "belt": "darkleather",
+      "rivets": true,
+      "fluted": true
+    }
+  ],
+  "depth_prismkeeper_legwraps": [
+    "legs",
+    {
+      "kind": "silk",
+      "mat": "violet",
+      "trim": "silver",
+      "glow": "tide",
+      "belt": "darkleather",
+      "wraps": "silver",
+      "runes": "tide",
+      "loose": 0.1
+    }
+  ],
+  "depth_vaultpath_leggings": [
+    "legs",
+    {
+      "kind": "hide",
+      "mat": "forest",
+      "trim": "copper",
+      "glow": "ember",
+      "belt": "darkleather",
+      "guards": "leather",
+      "knee_pad": "leather",
+      "straps": "darkleather"
+    }
+  ],
+  "depth_gloomthread_leggings": [
+    "legs",
+    {
+      "kind": "wrap",
+      "mat": "black",
+      "trim": "moonsteel",
+      "glow": "ice",
+      "belt": "darkleather",
+      "plates": "blackiron",
+      "knife": true
+    }
   ]
 }

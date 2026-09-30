@@ -292,7 +292,7 @@ static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 		return cd.weapon_mastery.has(base.weapon_type)
 	if base.category == &"shield":
 		return class_id == &"knight"
-	if base.category in [&"helm", &"armor", &"inner_garment", &"gloves", &"boots"]:
+	if base.category in [&"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots"]:
 		if (CLASS_ARMOR.get(class_id, [&"heavy"]) as Array).has(base.weight_class):
 			return true
 		return base.category == &"inner_garment" and base.weight_class == &"heavy" and class_id in [&"ranger", &"shadowblade"]

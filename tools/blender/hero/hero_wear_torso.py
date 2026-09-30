@@ -3,9 +3,11 @@
 Each entry mirrors its item model's spec (tools/blender/items/item_gear.py GEAR, depth_specs.json) so the worn piece
 is recognisably the thing in the icon: same kind, same palette keys, same trims.
 
-Layers (offsets from the skin): inner garments 4-9 mm, armour cloth 10-16 mm, plates beyond. Both layers bring their
-own legwear, so a hero is never bare-legged under a hauberk whatever is in the other slot. Inner garments are only
-body-cut cloth and thin trims (nothing flares), so any armour covers them; they show at the neck and the wrists.
+Layers (offsets from the skin): inner garments 5-9 mm, armour cloth 10-16 mm, plates beyond. bh-024: the legs are the
+Leggings slot's (hero_wear_legs.py): body garments stop at the hips, and their hems stand at least 6.5 mm out so the
+leggings, tucked in at 3.5 mm, close under them. `skirt=` tells the game how low a skirt, tail or robe hangs. Inner
+garments are only body-cut cloth and thin trims (nothing flares), so any armour covers them; they show at the neck and
+the wrists.
 
 How the pieces are made:
   cloth()      the body's own surface pushed out (hero_wear_kit.shell) and then relaxed like a membrane stretched
@@ -19,6 +21,7 @@ import math
 import numpy as np
 
 import boss_regalia as R
+import hero_wear_ends as E
 import hero_wear_kit as WK
 from hero_wear_kit import K, M, item, pal, shell, attach
 from bh_math import Rx, Ry, Rz  # noqa: F401
@@ -464,27 +467,114 @@ def rigid_mix(parts, bones, keys=True):
 
 
 # ====================================================================================================================
-# inner garments (4-9 mm)
+# helpers
 # ====================================================================================================================
-@item("padded_gambeson", hide={"z": [0.13, 1.49], "sleeve": [0.23, 0.69]})
+def hem_off(base, z_hem, extra=0.003, band=0.08):
+    """`base` all over, standing `extra` further out over the last `band` metres above the hem (z_hem)."""
+    def f(V):
+        return base + extra * (1.0 - WK.step(z_hem, z_hem + band, V[:, 2]))
+    return f
+
+
+def edge_cords(raw, mat, r=0.004, n=40, pick=None):
+    """Trim cords along the open edges of an un-rimmed cloth (hems, armholes, necklines): `pick(P)` keeps a loop."""
+    out = []
+    for lp in E.border_loops(raw):
+        P = raw.V[lp]
+        if len(lp) < 6 or (pick is not None and not pick(P)):
+            continue
+        out.append(E.cord_on(raw, lp, r, mat, n=n, name="edge"))
+    return out
+
+
+def bell(x0, x1, grow0, grow1, mat, src=None, drop1=0.03, n=16, trim=None, name="bell"):
+    """A sleeve opening out into a bell from x0 to the cuff at x1 (the T-pose's down is the sleeve's hang)."""
+    xs = np.linspace(x0, x1, 5)
+    t = np.linspace(0.0, 1.0, 5)
+    grows = list(grow0 + (grow1 - grow0) * t ** 1.6)
+    drops = list(drop1 * t ** 1.8)
+    parts = [sleeve(list(xs), grows, mat, src, n=n, lip1=0.006, drop=drops, name=name)]
+    if trim:
+        r, c = ARM.prof(x1, n, grows[-1] + 0.001, src)
+        c = c + np.array([0.0, -drops[-1]])
+        P = ARM.pts(x1, r, c)
+        parts.append(cord(P, 0.0045, trim, sides=4, closed=True))
+    return attach(parts, bones=["upper_arm.L", "forearm.L"], k=8)
+
+
+def pauldron(mat, trim, big=True):
+    """The left pauldron: a dome over the shoulder and two lames down the upper arm."""
+    r = (0.095, 0.088, 0.07) if big else (0.082, 0.078, 0.06)
+    parts = [dome((0.215, -0.004, 1.448), r, mat, n=14, rings=4, span=96.0, tilt=38.0, lip=0.006, name="pauldron")]
+    parts.append(dome((0.215, -0.004, 1.448), (r[0] + 0.004, r[1] + 0.004, r[2] * 0.25), trim, n=14, rings=1, span=96.0, tilt=38.0,
+                      lip=0.0, name="pauldron_rim"))
+    for i, x in enumerate((0.30, 0.345)):
+        rr, c = ARM.prof(x, 14, 0.024 - 0.004 * i)
+        parts.append(loft([ARM.pts(x - 0.024, rr * 1.02, c), ARM.pts(x + 0.024, rr * 0.98, c)], mat, ARM, True, 0.004, 0.004, name="lame"))
+    return rigid_mix(parts, [("upper_arm.L", 0.8), ("shoulder.L", 0.2)])
+
+
+# ====================================================================================================================
+# inner garments (5-9 mm)
+# ====================================================================================================================
+@item("padded_gambeson", hide={"z": [0.875, 1.49], "sleeve": [0.23, 0.69]})
 def padded_gambeson():
     wool, linen = pal("wool"), pal("linen")
-    jacket = cloth(region(trunk=(0.85, 1.535), arms=(0.19, 0.715)), 0.008, wool, "jacket", relax=5)
-    hose = cloth(region(legs=(0.105, 0.93)), 0.004, linen, "hose", relax=2)
+    jacket = cloth(region(trunk=(0.85, 1.535), arms=(0.19, 0.715)), hem_off(0.008, 0.85), wool, "jacket", relax=5)
     S = surf(jacket)
     body = [hoop(z, 0.012, linen, S, 0.0015, 22) for z in (0.95, 1.04, 1.13, 1.22, 1.31)]      # quilting rows
     body += [hoop(0.868, 0.03, linen, S, 0.002, 24), collar(1.505, 1.56, linen, 0.009)]
     body.append(vband(0.0, 0.88, 1.50, 0.022, linen, S, 0.0025, 7, frame=TRUNK))
     arm = [hoop(x, 0.012, linen, S, 0.0015, 10, ARM) for x in (0.31, 0.40, 0.53, 0.62)]
     arm.append(hoop(0.70, 0.028, linen, S, 0.002, 10, ARM))
-    return [jacket, hose] + attach(body, k=8) + WK.both(attach(arm, bones=["upper_arm.L", "forearm.L"], k=8))
+    return [jacket] + attach(body, k=8) + WK.both(attach(arm, bones=["upper_arm.L", "forearm.L"], k=8))
 
 
-@item("iron_hauberk", hide={"z": [0.13, 1.49], "sleeve": [0.23, 0.47]})
+@item("silk_undershirt", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.71]})
+def silk_undershirt():
+    silk, white = pal("silk"), pal("white")
+    shirt = cloth(region(trunk=(0.86, 1.535), arms=(0.19, 0.735), notch=(1.46, 0.05)), hem_off(0.0058, 0.86, 0.0022), silk, "shirt", relax=5)
+    raw = cloth(region(trunk=(0.86, 1.535), arms=(0.19, 0.735), notch=(1.46, 0.05)), hem_off(0.0058, 0.86, 0.0022), silk, "shirt",
+                relax=5, rim=False)
+    S = surf(shirt)
+    trims = edge_cords(raw, white, 0.0028, 44, pick=lambda P: P[:, 2].mean() > 1.3 and np.abs(P[:, 0]).max() < 0.2)
+    trims += attach([hoop(0.872, 0.014, white, S, 0.0015, 26)], k=8)
+    cuff = hoop(0.722, 0.022, white, S, 0.0015, 12, ARM)
+    return [shirt] + trims + WK.both(attach(cuff, bones=["forearm.L"], k=6))
+
+
+@item("chain_shirt", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.47]})
+def chain_shirt():
+    mail, dark = WK.mail("mail_shirt", "b8bcc4"), pal("darksteel")
+    shirt = cloth(region(trunk=(0.86, 1.535), arms=(0.19, 0.50)), hem_off(0.009, 0.86), mail, "shirt", relax=7)
+    S = surf(shirt)
+    trims = attach([hoop(0.872, 0.018, dark, S, 0.0018, 26), collar(1.50, 1.545, dark, 0.012)], k=8)
+    cuff = hoop(0.485, 0.02, dark, S, 0.0018, 12, ARM)
+    return [shirt] + trims + WK.both(attach(cuff, bones=["upper_arm.L", "forearm.L"], k=6))
+
+
+@item("runeweave_vest", hide={"z": [0.885, 1.46]})
+def runeweave_vest():
+    teal, silver, tide = pal("teal"), pal("silver"), pal("tide")
+    sel = region(vest=(0.86, 1.53, 0.205), notch=(1.40, 0.06))
+    vest = cloth(sel, hem_off(0.0072, 0.86, 0.0025), teal, "vest", relax=6)
+    raw = cloth(sel, hem_off(0.0072, 0.86, 0.0025), teal, "vest", relax=6, rim=False)
+    S = surf(vest)
+    parts = [vest] + edge_cords(raw, silver, 0.0032, 48)
+    pts = [(x, front_y(z, x, S, frame=TRUNK) - 0.002, z) for z in (0.95, 1.05, 1.15, 1.25, 1.35) for x in (-0.028, 0.028)]
+    parts += attach([studs(pts, lambda p: (0.0, -0.02, p[2]), 0.0055, tide)], k=6)
+    runes = [K.box(0.012, 0.004, 0.028, (-0.08 + i * 0.04, front_y(1.2 + 0.02 * (i % 2), -0.08 + i * 0.04, S, frame=TRUNK) - 0.003,
+                                           1.2 + 0.02 * (i % 2)), tide) for i in range(5)]
+    return parts + attach(runes, k=6)
+
+
+# ====================================================================================================================
+# armour (10-16 mm cloth, plates beyond)
+# ====================================================================================================================
+@item("iron_hauberk", hide={"z": [0.925, 1.49], "sleeve": [0.23, 0.47]}, skirt=0.60)
 def iron_hauberk():
-    mail, leather, gold, dark = WK.mail(), pal("leather"), pal("gold"), pal("darkleather")
+    mail, leather, gold = WK.mail(), pal("leather"), pal("gold")
     shirt = cloth(region(trunk=(0.90, 1.535), arms=(0.19, 0.50)), 0.014, mail, "shirt", relax=9)
-    breeches = cloth(region(legs=(0.105, 0.95)), 0.0115, dark, "breeches", relax=5)
     S = surf(shirt)
     tail = skirt(1.02, 0.60, mail, S, (0.002, 0.022), n=28, steps=4, flare=0.02)
     ST = surf(tail)
@@ -493,5 +583,168 @@ def iron_hauberk():
     waist = belt(0.995, 1.045, leather, S, 0.012, clasp=gold)
     neck = collar(1.50, 1.548, leather, 0.017)
     cuff = hoop(0.485, 0.028, leather, S, 0.002, 12, ARM)
-    return [shirt, breeches] + parts + attach(waist, bones=["hips", "spine"], k=8) + attach(neck, k=8) \
+    return [shirt] + parts + attach(waist, bones=["hips", "spine"], k=8) + attach(neck, k=8) \
         + WK.both(attach(cuff, bones=["upper_arm.L", "forearm.L"]))
+
+
+def _brigandine(face, rivet, trim, belt_m, clasp="gold", glow=None, skirt_to=None):
+    sel = region(vest=(0.84, 1.53, 0.215), notch=(1.47, 0.045))
+    coat = cloth(sel, hem_off(0.0135, 0.84, 0.003), face, "coat", relax=9)
+    raw = cloth(sel, hem_off(0.0135, 0.84, 0.003), face, "coat", relax=9, rim=False)
+    S = surf(coat)
+    parts = [coat] + edge_cords(raw, trim, 0.0045, 52)
+    pts = []
+    for z in np.linspace(0.93, 1.40, 8):
+        for x in np.linspace(-0.15, 0.15, 7):
+            if abs(x) < 0.02:
+                continue
+            pts.append((x, front_y(z, x, S, frame=TRUNK) - 0.001, z))
+            pts.append((x, front_y(z, x, S, back=True, frame=TRUNK) + 0.001, z))
+    parts += attach([studs(pts, lambda p: (0.0, -0.02, p[2]), 0.0048, rivet)], k=6)
+    parts += attach(belt(0.975, 1.03, belt_m, S, 0.004, clasp=clasp), bones=["hips", "spine"], k=8)
+    if glow:
+        parts += attach([K.gem((0.0, front_y(1.3, 0.0, S, frame=TRUNK) - 0.01, 1.3), 0.013, glow, rot=(90, 0, 0))], bone="chest")
+    if skirt_to:
+        tail = skirt(0.99, skirt_to, face, S, (0.003, 0.02), n=28, steps=3, flare=0.02, a0=0.0, a1=360.0)
+        parts += attach([tail, hoop(skirt_to + 0.012, 0.022, trim, surf(tail), 0.002, 28, HIPS)], weights=skw(z_knee=0.6, leg=0.9))
+    return parts
+
+
+@item("brigandine", hide={"z": [0.865, 1.46]})
+def brigandine():
+    return _brigandine(pal("crimson"), pal("gold"), pal("leather"), pal("leather"))
+
+
+@item("depth_vaultpath_coat", hide={"z": [0.865, 1.46]}, skirt=0.66)
+def depth_vaultpath_coat():
+    return _brigandine(pal("forest"), pal("copper"), pal("copper"), pal("darkleather"), "copper", pal("ember"), skirt_to=0.66)
+
+
+def _plate(plate, trim, belt_m, glow=None, under="darkleather"):
+    """A cuirass over an arming coat: breast and back plates, a gorget, three fauld lames, two pauldrons."""
+    # the arming coat shows only below the cuirass and down the upper arms
+    coat = cloth(region(trunk=(0.84, 0.975), arms=(0.19, 0.45)), hem_off(0.010, 0.84), pal(under), "arming", relax=6)
+    S0 = surf(coat)
+    sel = region(trunk=(0.93, 1.515))
+    cuir = cloth(sel, 0.021, plate, "cuirass", relax=14)
+    raw = cloth(sel, 0.021, plate, "cuirass", relax=14, rim=False)
+    S = surf(cuir)
+    parts = [coat, cuir] + edge_cords(raw, trim, 0.0045, 36)
+    ridge = vband(0.0, 0.96, 1.46, 0.012, trim, S, 0.0025, 8, frame=TRUNK)
+    fauld = []
+    top = S
+    for i in range(3):
+        z0 = 0.95 - i * 0.045
+        lame = skirt(z0, z0 - 0.06, plate, top, (0.003 + 0.001 * i, 0.012 + 0.002 * i), n=24, steps=1, flare=0.004, thick=0.0,
+                     name="fauld")
+        top = surf(lame)
+        fauld += [lame, hoop(z0 - 0.056, 0.008, trim, top, 0.0015, 24, HIPS)]
+    parts += attach([ridge], bone="chest") + attach(fauld, weights=skw(z_top=0.96, z_knee=0.62, leg=0.6))
+    parts += attach(belt(0.955, 0.99, belt_m, S0, 0.018, clasp=trim), bones=["hips", "spine"], k=8)
+    parts += attach([collar(1.49, 1.555, plate, 0.018, lip=0.006)], k=8)
+    parts += WK.both(pauldron(plate, trim))
+    if glow:
+        parts += attach([K.gem((0.0, front_y(1.3, 0.0, S, frame=TRUNK) - 0.012, 1.3), 0.016, glow, rot=(90, 0, 0)),
+                         K.ring_tube((0.0, front_y(1.3, 0.0, S, frame=TRUNK) - 0.006, 1.3), 0.026, 0.0035, trim, axis="y", n=20)],
+                        bone="chest")
+    return parts
+
+
+@item("warden_plate", hide={"z": [0.865, 1.49], "sleeve": [0.23, 0.43]}, skirt=0.80)
+def warden_plate():
+    return _plate(WK.plate("steel"), pal("gold"), pal("darkleather"))
+
+
+@item("guardian_plate", hide={"z": [0.865, 1.49], "sleeve": [0.23, 0.43]}, skirt=0.80)
+def guardian_plate():
+    return _plate(WK.plate("bright"), pal("gold"), pal("white"), glow=pal("aether"), under="white")
+
+
+@item("depth_deepwarden_coat", hide={"z": [0.865, 1.49], "sleeve": [0.23, 0.43]}, skirt=0.80)
+def depth_deepwarden_coat():
+    return _plate(WK.plate("blued"), pal("bronze"), pal("darkleather"), glow=pal("emerald"))
+
+
+def metal(key):
+    """A metal trim as the worn plates are finished (hero_wear_kit.plate): a mirror-bright gold band reads as black at night."""
+    return WK.plate(key) if K.MAT[key][2] >= 0.9 else pal(key)
+
+
+def _robe(mat, trim, belt_m, hem, sleeve_to=0.70, bell_to=0.08, glow=None, stars=None, open_front=False, belt_clasp=None):
+    """A robe or coat: body and sleeves cut from the body, a skirt from the waist to `hem` (open in front for a coat),
+    bell cuffs, a trim down the front and round the hem, a belt."""
+    body = cloth(region(trunk=(0.86, 1.535), arms=(0.19, sleeve_to), notch=(1.44, 0.055)), hem_off(0.0125, 0.86), mat, "robe", relax=8)
+    raw = cloth(region(trunk=(0.86, 1.535), arms=(0.19, sleeve_to), notch=(1.44, 0.055)), hem_off(0.0125, 0.86), mat, "robe", relax=8,
+                rim=False)
+    S = surf(body)
+    parts = [body] + edge_cords(raw, trim, 0.004, 44, pick=lambda P: P[:, 2].mean() > 1.3 and np.abs(P[:, 0]).max() < 0.2)
+    a0, a1 = (283.0, 257.0 + 360.0) if open_front else (0.0, 360.0)
+    tail = skirt(1.0, hem, mat, S, (0.004, 0.032), n=32, steps=6, flare=0.12 if not open_front else 0.07, a0=a0, a1=a1, thick=0.004,
+                 name="skirt")
+    ST = surf(tail)
+    hemt = hoop(hem + 0.014, 0.026, trim, ST, 0.0022, 32, HIPS, a0=a0, a1=a1)
+    skirt_parts = [tail, hemt]
+    if not open_front:
+        skirt_parts.append(vband(0.0, hem + 0.02, 0.99, 0.034, trim, ST, 0.0045, 20))
+    else:
+        for x in (-0.03, 0.03):
+            skirt_parts.append(vband(x, hem + 0.02, 0.99, 0.022, trim, ST, 0.0045, 20))
+    parts += attach(skirt_parts, weights=skw(z_top=1.0, z_knee=0.51, z_bot=hem, centre=0.09, leg=0.85))
+    parts += attach([vband(0.0, 1.0, 1.44, 0.026, trim, S, 0.002, 6, frame=TRUNK)], bone="chest")
+    parts += attach(belt(0.985, 1.035, belt_m, S, 0.006, clasp=belt_clasp), bones=["hips", "spine"], k=8)
+    if bell_to:
+        parts += WK.both(bell(sleeve_to - 0.16, sleeve_to - 0.005, 0.004, bell_to * 0.45, mat, S, bell_to * 0.4, trim=trim))
+    if glow:
+        parts += attach([K.gem((0.0, front_y(1.34, 0.0, S, frame=TRUNK) - 0.01, 1.34), 0.014, glow, rot=(90, 0, 0))], bone="chest")
+    if stars:
+        pts = []
+        for i in range(12):
+            z = hem + 0.05 + ((i * 0.37) % 1.0) * (0.95 - hem)
+            a = 200.0 + (i * 53.0) % 140.0
+            pts.append(HIPS.ring(z, 3, 0.036, ST, a, a + 0.001)[0])
+        parts += attach([K.gem(tuple(p), 0.007, stars) for p in pts], weights=skw(z_top=1.0, z_knee=0.51, z_bot=hem, centre=0.09, leg=0.85))
+    return parts
+
+
+@item("apprentice_robe", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.70]}, skirt=0.30)
+def apprentice_robe():
+    return _robe(pal("ochre"), pal("linen"), pal("rope"), 0.30)
+
+
+@item("traveler_coat", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.70]}, skirt=0.42)
+def traveler_coat():
+    return _robe(pal("forest"), pal("tan"), pal("leather"), 0.42, bell_to=0.0, open_front=True, belt_clasp=pal("brass"))
+
+
+@item("magister_robe", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.70]}, skirt=0.24)
+def magister_robe():
+    return _robe(pal("navy"), metal("gold"), pal("crimson"), 0.24, glow=pal("sapphire"), belt_clasp=metal("gold"))
+
+
+@item("sage_robe", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.70]}, skirt=0.24)
+def sage_robe():
+    return _robe(pal("violet"), metal("paleg"), pal("paleg"), 0.24, stars=pal("holy"), belt_clasp=metal("paleg"))
+
+
+@item("depth_prismkeeper_coat", hide={"z": [0.885, 1.49], "sleeve": [0.23, 0.70]}, skirt=0.30)
+def depth_prismkeeper_coat():
+    return _robe(pal("violet"), metal("silver"), pal("darkleather"), 0.30, glow=pal("tide"), belt_clasp=metal("silver"))
+
+
+@item("depth_gloomthread_coat", hide={"z": [0.865, 1.46]})
+def depth_gloomthread_coat():
+    black, moon, ice = pal("black"), pal("moonsteel"), pal("ice")
+    sel = region(vest=(0.84, 1.53, 0.21), notch=(1.42, 0.05))
+    vest = cloth(sel, hem_off(0.012, 0.84, 0.003), black, "vest", relax=8)
+    raw = cloth(sel, hem_off(0.012, 0.84, 0.003), black, "vest", relax=8, rim=False)
+    S = surf(vest)
+    parts = [vest] + edge_cords(raw, moon, 0.0035, 48)
+    for sx in (1.0, -1.0):
+        strap = [(sx * 0.19, front_y(1.47, sx * 0.19, S, frame=TRUNK) - 0.004, 1.47),
+                 (sx * 0.05, front_y(1.30, sx * 0.05, S, frame=TRUNK) - 0.006, 1.30),
+                 (-sx * 0.10, front_y(1.14, -sx * 0.10, S, frame=TRUNK) - 0.006, 1.14),
+                 (-sx * 0.19, front_y(1.04, -sx * 0.19, S, frame=TRUNK) - 0.004, 1.04)]
+        parts += attach([cord(strap, 0.006, pal("darkleather"), sides=4)], k=6)
+    parts += attach(belt(0.97, 1.02, pal("darkleather"), S, 0.004, clasp=moon), bones=["hips", "spine"], k=8)
+    parts += attach([K.gem((0.0, front_y(1.30, 0.0, S, frame=TRUNK) - 0.012, 1.30), 0.012, ice, rot=(90, 0, 0))], bone="chest")
+    return parts

@@ -26,7 +26,7 @@ static func build() -> Array:
 		StatModifier.inc(&"impact_strength", 0.15, "Knight: Heavy Hands"),
 	]
 	knight.weapon_mastery = {&"sword": 0.10, &"greatsword": 0.10, &"axe": 0.10, &"greataxe": 0.10, &"spear": 0.10, &"club": 0.10, &"javelin": 0.05}
-	knight.starting_items = [&"iron_longsword", &"warden_kite_shield", &"padded_gambeson", &"iron_hauberk", &"iron_helm"]
+	knight.starting_items = [&"iron_longsword", &"warden_kite_shield", &"padded_gambeson", &"iron_hauberk", &"iron_cuisses", &"iron_helm"]
 	knight.starting_skills = [&"cleave"]
 	knight.skill_tree_id = &"knight_skills"
 	knight.talent_tree_id = &"knight_talents"
@@ -62,7 +62,7 @@ static func build() -> Array:
 		StatModifier.flat(&"mana_cost_reduction", 0.05, "Mage: Efficient Channeling"),
 	]
 	mage.weapon_mastery = {&"staff": 0.10, &"wand": 0.10}
-	mage.starting_items = [&"ashwood_staff", &"silk_undershirt", &"apprentice_robe", &"linen_hood"]
+	mage.starting_items = [&"ashwood_staff", &"silk_undershirt", &"apprentice_robe", &"linen_trousers", &"linen_hood"]
 	mage.starting_skills = [&"firebolt"]
 	mage.skill_tree_id = &"mage_skills"
 	mage.talent_tree_id = &"mage_talents"
@@ -97,7 +97,7 @@ static func build() -> Array:
 		StatModifier.inc(&"evasion", 0.10, "Ranger: Woodcraft"),
 	]
 	ranger.weapon_mastery = {&"bow": 0.12, &"crossbow": 0.12, &"javelin": 0.10, &"spear": 0.05, &"dagger": 0.05}
-	ranger.starting_items = [&"hunters_bow", &"padded_gambeson", &"linen_hood", &"soft_boot"]
+	ranger.starting_items = [&"hunters_bow", &"padded_gambeson", &"hide_leggings", &"linen_hood", &"soft_boot"]
 	ranger.starting_skills = [&"power_shot"]
 	ranger.skill_tree_id = &"ranger_skills"
 	ranger.talent_tree_id = &"ranger_talents"
@@ -133,7 +133,7 @@ static func build() -> Array:
 		StatModifier.inc(&"evasion", 0.10, "Shadowblade: Footwork"),
 	]
 	shadow.weapon_mastery = {&"dagger": 0.12, &"claw": 0.12, &"knuckles": 0.08, &"sword": 0.04}
-	shadow.starting_items = [&"rondel_dagger", &"rondel_dagger", &"padded_gambeson", &"linen_hood", &"soft_boot"]
+	shadow.starting_items = [&"rondel_dagger", &"rondel_dagger", &"padded_gambeson", &"cutpurse_trousers", &"linen_hood", &"soft_boot"]
 	shadow.starting_skills = [&"twin_fang"]
 	shadow.skill_tree_id = &"shadowblade_skills"
 	shadow.talent_tree_id = &"shadowblade_talents"

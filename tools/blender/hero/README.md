@@ -21,7 +21,11 @@ python tools/blender/hero/hero_skin.py                                          
 | `hero_export.py` | `hero.glb`: body + shape keys + the whole action library (`tools/blender/characters`) + the source clips |
 | `hero_skin.py` | skin detail texture and region masks from `models/generic_body.jpg` |
 | `hero_hair.py` | hair and beard models |
-| `hero_wear.py` | worn equipment, skinned to the shared skeleton and following the body's shape keys |
+| `hero_wear.py` | worn equipment, skinned to the shared skeleton and following the body's shape keys (`-- all`, `-- <ids>`, `-- preview <a+b+c outfits>`) |
+| `hero_wear_kit.py` | shell() / attach() / build_object(), the registry (`@item`), `plate()` (worn plate material), the manifest |
+| `hero_wear_torso.py` | the 16 armours and inner garments (they stop at the hips; `skirt=` records how low a skirt hangs) |
+| `hero_wear_legs.py` | bh-024: the 34 leggings, `_breeches` (a clothed hero without leggings) and `_under_legs` (under boss Legguards) |
+| `hero_wear_ends.py` | helms, gloves, boots and jewellery (rings on the fist, pendants on the breastbone, charms at the hip) |
 
 ## Space and measurements
 
@@ -57,3 +61,12 @@ shape-key displacements.
   R = how freely that vertex sways (0 at the scalp, 1 at the tips), optional shape key `length`.
 * Worn equipment GLBs: meshes skinned to the shared bone names, materials `<BH base>__it_<key>` as the item models
   use, shape keys `muscle`, `belly`, `build`, `rear` copied from the body so clothing follows the body sliders.
+* bh-024 mesh groups: a piece may return `{group: [WParts]}`; its GLB then holds `wear` and `wear_<group>` meshes. Leggings
+  use `waist` (belt, panels, tassets), `hip` (thigh plates and guards, pouches), `knee` (knee cops and pads) and
+  `ankle_L` / `ankle_R` (cuffs, low wraps); HeroWear.plan leaves a group off under a shirt, a skirt below 0.80 m, a robe
+  below 0.45 m or a boot on that side. `skirt` in the manifest is the lowest height of a body garment's skirt.
+* Layers: inner garments 5-9 mm, armour cloth 10-16 mm, plates beyond; leggings are tucked in at 3.5 mm under the body
+  garments' hems (which stand 6.5 mm or more out) and stay within 6.5 mm below the calf so boot shafts (10-16 mm) close
+  over them.
+* Budgets (game/tests/unit/test_bh023.gd, test_bh024.gd): helm 1,600, inner garment 5,600, armour 7,200, leggings
+  6,500, gloves 1,800 and boots 1,600 a side, jewellery 300.

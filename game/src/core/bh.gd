@@ -24,15 +24,15 @@ const ATTRIBUTE_ICONS := {
 	&"wis": "wisdom", &"spi": "spirit", &"dex": "dexterity",
 }
 
-# Equipment slots — exact configuration from the design spec.
+# Equipment slots — the design spec's thirteen plus Leggings (bh-024).
 const SLOTS: Array[StringName] = [
-	&"main_weapon", &"sub_weapon", &"helm", &"inner_garment", &"armor",
+	&"main_weapon", &"sub_weapon", &"helm", &"inner_garment", &"armor", &"leggings",
 	&"gloves_1", &"gloves_2", &"boots_1", &"boots_2",
 	&"accessory_1", &"accessory_2", &"accessory_3", &"accessory_4",
 ]
 const SLOT_NAMES := {
 	&"main_weapon": "Main Weapon", &"sub_weapon": "Sub Weapon", &"helm": "Helm",
-	&"inner_garment": "Inner Garment", &"armor": "Armor",
+	&"inner_garment": "Inner Garment", &"armor": "Armor", &"leggings": "Leggings",
 	&"gloves_1": "Gloves I", &"gloves_2": "Gloves II",
 	&"boots_1": "Boots I", &"boots_2": "Boots II",
 	&"accessory_1": "Accessory I", &"accessory_2": "Accessory II",
@@ -45,6 +45,7 @@ const CATEGORY_SLOTS := {
 	&"helm": [&"helm"],
 	&"inner_garment": [&"inner_garment"],
 	&"armor": [&"armor"],
+	&"leggings": [&"leggings"],
 	&"gloves": [&"gloves_1", &"gloves_2"],
 	&"boots": [&"boots_1", &"boots_2"],
 	&"accessory": [&"accessory_1", &"accessory_2", &"accessory_3", &"accessory_4"],

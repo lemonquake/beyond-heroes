@@ -25,7 +25,7 @@ const ROWS := [
 ]
 const TWO_HANDED := ["bow", "crossbow", "staff", "spear", "greatsword"]
 const SLOT_LABELS := {
-	&"main_weapon": "Weapon", &"sub_weapon": "Shield", &"helm": "Crown", &"inner_garment": "Vestment", &"armor": "Armor",
+	&"main_weapon": "Weapon", &"sub_weapon": "Shield", &"helm": "Crown", &"inner_garment": "Vestment", &"armor": "Armor", &"leggings": "Legguards",
 	&"gloves_1": "Left Gauntlet", &"gloves_2": "Right Gauntlet", &"boots_1": "Left Greave", &"boots_2": "Right Greave",
 	&"accessory_1": "Signet", &"accessory_2": "Seal", &"accessory_3": "Pendant", &"accessory_4": "Brooch",
 }
@@ -84,7 +84,7 @@ static func bases() -> Array:
 				if cls == &"mage":
 					b.implicit = [StatModifier.inc(&"magic_damage", 0.18)]
 			elif category != &"accessory":
-				var armor_budget: float = {&"armor": 57.0, &"helm": 28.5, &"inner_garment": 18.0,
+				var armor_budget: float = {&"armor": 57.0, &"helm": 28.5, &"inner_garment": 18.0, &"leggings": 24.0,
 					&"gloves": 14.0, &"boots": 17.0, &"shield": 40.0}.get(category, 0.0)
 				b.defense = armor_budget * (1.0 if cls == &"knight" else 0.6)
 				if category == &"shield":

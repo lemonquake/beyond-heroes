@@ -1,6 +1,6 @@
 class_name DataDepthEquipment
 ## Generated catalog; edit tools/blender/items/depth_catalog.py and regenerate.
-## 64 weapons and 16 armor pieces; eight named relics have guaranteed functional powers.
+## 64 weapons and 20 armor pieces; eight named relics have guaranteed functional powers.
 const ROWS := [
 	["depth_copperleaf_backsword", "Copperleaf Backsword", "sword", "knight", 25, 1.305, 0, "stagger_power", 0.12, "", 2.82],
 	["depth_saltglass_cutlass", "Saltglass Cutlass", "sword", "knight", 28, 1.363, 6, "crit_chance", 0.025, "", 3.0],
@@ -81,7 +81,11 @@ const ROWS := [
 	["depth_gloomthread_coat", "Gloomthread Coat", "armor", "shadowblade", 25, 0, 0, "move_speed", 0.12, "bloodthirst", 0],
 	["depth_gloomthread_crown", "Gloomthread Crown", "helm", "shadowblade", 38, 0, 0, "move_speed", 0.12, "", 0],
 	["depth_gloomthread_grips", "Gloomthread Grips", "gloves", "shadowblade", 50, 0, 0, "move_speed", 0.12, "relentless", 0],
-	["depth_gloomthread_treads", "Gloomthread Treads", "boots", "shadowblade", 60, 0, 0, "move_speed", 0.12, "", 0]
+	["depth_gloomthread_treads", "Gloomthread Treads", "boots", "shadowblade", 60, 0, 0, "move_speed", 0.12, "", 0],
+	["depth_deepwarden_cuisses", "Deepwarden Cuisses", "leggings", "knight", 44, 0, 0, "max_hp", 35.0, "", 0],
+	["depth_prismkeeper_legwraps", "Prismkeeper Legwraps", "leggings", "mage", 44, 0, 0, "max_mana", 24.0, "", 0],
+	["depth_vaultpath_leggings", "Vaultpath Leggings", "leggings", "ranger", 44, 0, 0, "evasion", 20.0, "", 0],
+	["depth_gloomthread_leggings", "Gloomthread Leggings", "leggings", "shadowblade", 44, 0, 0, "move_speed", 0.12, "", 0]
 ]
 
 static func bases() -> Array:
@@ -112,7 +116,7 @@ static func bases() -> Array:
 			b.element_share = (1.0 if cls == &"mage" else 0.25) if b.element != Elements.PHYSICAL else 0.0
 		else:
 			var factor := 1.0 if cls == &"knight" else 0.6
-			b.defense = (12.0 + level * 1.5) * factor * (1.0 if b.category == &"armor" else 0.5)
+			b.defense = (12.0 + level * 1.5) * factor * (1.0 if b.category == &"armor" else (0.6 if b.category == &"leggings" else 0.5))
 		b.weight = float(r[10]) if weapon else DataItems.default_weight(b)
 		b.flavor = "Recovered from the deeper halls. " + ("A fast weapon trades damage per strike for speed." if weapon and b.attacks_per_second > 1.5 else "Made for long journeys below the surface.")
 		if r[9] != "":

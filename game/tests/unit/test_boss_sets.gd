@@ -46,7 +46,7 @@ func test_fifteen_complete_sets_exact_slots_and_all_bonuses() -> void:
 		var h := _hero(StringName(entry[2]))
 		var slots := BossSets.slots_for_set(set_id)
 		eq(sd.thresholds(), [3, 6, slots.size()], "3, 6, full bonuses: %s" % set_id)
-		eq(slots.size(), 12 if entry[3] in BossSets.TWO_HANDED else 13, "complete legal loadout")
+		eq(slots.size(), 13 if entry[3] in BossSets.TWO_HANDED else 14, "complete legal loadout (Legguards included, bh-024)")
 		for slot in slots:
 			var it := _piece(set_id, slot)
 			ok(it != null and it.base.boss_exclusive, "catalog piece exists and is boss-only")
@@ -72,7 +72,7 @@ func test_fifteen_complete_sets_exact_slots_and_all_bonuses() -> void:
 		ok(not sd.modifiers_for(5).is_empty(), "3-piece bonus survives before six")
 		eq(sd.modifiers_for(2).size(), 0, "no bonus below three pieces")
 		eq(sd.modifiers_for(6).size(), 4, "3 and 6 bonuses accumulate")
-	eq(pieces, 187, "187 distinct pieces across 15 full sets")
+	eq(pieces, 202, "202 distinct pieces across 15 full sets (Legguards included, bh-024)")
 	done()
 
 func test_slot_restrictions_master_rank_and_save_roundtrip() -> void:

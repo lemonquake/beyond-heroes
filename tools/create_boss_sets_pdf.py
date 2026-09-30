@@ -40,7 +40,7 @@ THREE = {
     "shadowblade": "+8% attack speed and +12% Evasion",
 }
 SLOT_LABELS = [("main_weapon", "Weapon"), ("sub_weapon", "Shield"), ("helm", "Crown"), ("inner_garment", "Vestment"),
-               ("armor", "Armor"), ("gloves_1", "Left Gauntlet"), ("gloves_2", "Right Gauntlet"), ("boots_1", "Left Greave"),
+               ("armor", "Armor"), ("leggings", "Legguards"), ("gloves_1", "Left Gauntlet"), ("gloves_2", "Right Gauntlet"), ("boots_1", "Left Greave"),
                ("boots_2", "Right Greave"), ("accessory_1", "Signet"), ("accessory_2", "Seal"), ("accessory_3", "Pendant"),
                ("accessory_4", "Brooch")]
 ACCENT = {  # the sets' glow colours (boss_regalia.SETS)
@@ -145,7 +145,7 @@ def bonus_page(c):
                       "and every piece can hold sockets and crystals.", 40, y, W - 80, size=11) + 14
     rows = [("3 pieces", "By the collection's class: " + "; ".join("<b>%s</b> %s" % (CLASS_NAMES[k], v) for k, v in THREE.items()) + "."),
             ("6 pieces", "+12% damage and +6% resistance for the collection's element."),
-            ("Full collection", "The collection's own effect (13 pieces with a shield, 12 for two-handed collections): listed on each page.")]
+            ("Full collection", "The collection's own effect (14 pieces with a shield, 13 for two-handed collections): listed on each page.")]
     for head, text in rows:
         c.setFillColor(PANEL)
         h = para(text, size=10.5).wrap(W - 260, 1000)[1] + 14
@@ -212,7 +212,7 @@ def set_page(c, n, row):
     c.setFont("Bold", 11.5)
     c.setFillColor(GOLD)
     two = weapon in TWO_HANDED
-    c.drawString(x, H - 86, "%s  ·  %s  ·  %s  ·  %d pieces" % (CLASS_NAMES[cls], weapon.capitalize(), element.capitalize(), 12 if two else 13))
+    c.drawString(x, H - 86, "%s  ·  %s  ·  %s  ·  %d pieces" % (CLASS_NAMES[cls], weapon.capitalize(), element.capitalize(), 13 if two else 14))
     y = H - 98
     y -= draw_para(c, "<i>%s</i>" % escape(LORE[sid]), x, y, tw, size=10.5, color=MUTED) + 12
     # guaranteed effects
