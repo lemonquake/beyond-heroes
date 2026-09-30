@@ -3,11 +3,12 @@ class_name StatCalculator
 ## Each result carries explanation lines so the character screen can show how it was calculated.
 
 # ---- Tunable coefficients (single source of truth) -------------------------------------------------------
-const HP_PER_STR := 2.0
+const HP_PER_STR := 6.0
+const HP_PER_WIS := 4.0
 const HP_PER_SPI := 1.0
-const MANA_PER_INT := 2.0
+const MANA_PER_INT := 4.0
 const MANA_PER_WIS := 1.0
-const MANA_PER_SPI := 0.5
+const MANA_PER_SPI := 3.0
 const HP_REGEN_BASE := 0.2
 const HP_REGEN_PER_SPI := 0.06
 const HP_REGEN_PER_LEVEL := 0.04
@@ -71,7 +72,7 @@ const LIGHTDARK_PER_SPI := 0.0025    # Spirit attunes to Light and Dark: +0.25% 
 const LIGHTDARK_RES_PER_SPI := 0.001
 const PARRY_BASE := 0.18
 const PARRY_MAX := 0.32
-const DEFAULT_ENEMY_EVASION_PER_LEVEL := 6.0   # reference target for the hit-chance display
+const DEFAULT_ENEMY_EVASION_PER_LEVEL := 2.0   # reference target for the hit-chance display
 const UNARMED_MIN := 2.0
 const UNARMED_MAX := 4.0
 
@@ -163,7 +164,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	# ---- Pools --------------------------------------------------------------------------------------------
 	_std(d, agg, &"max_hp", [
 		["Class base", cls.base_hp], ["Level %d x %.0f" % [level, cls.hp_per_level], cls.hp_per_level * (L - 1.0)],
-		["Strength %d x %.1f" % [STR, HP_PER_STR], STR * HP_PER_STR], ["Spirit %d x %.1f" % [SPI, HP_PER_SPI], SPI * HP_PER_SPI]], 1.0, INF, true)
+		["Strength %d x %.1f" % [STR, HP_PER_STR], STR * HP_PER_STR], ["Wisdom %d x %.1f" % [WIS, HP_PER_WIS], WIS * HP_PER_WIS],
+		["Spirit %d x %.1f" % [SPI, HP_PER_SPI], SPI * HP_PER_SPI]], 1.0, INF, true)
 	_std(d, agg, &"max_mana", [
 		["Class base", cls.base_mana], ["Level %d x %.0f" % [level, cls.mana_per_level], cls.mana_per_level * (L - 1.0)],
 		["Intelligence %d x %.1f" % [INT, MANA_PER_INT], INT * MANA_PER_INT], ["Wisdom %d x %.1f" % [WIS, MANA_PER_WIS], WIS * MANA_PER_WIS],
@@ -342,14 +344,14 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	var dt := agg.more(&"damage_taken") * (1.0 + agg.inc(&"damage_taken"))
 	d.set_stat(&"damage_taken", maxf(0.05, dt), agg.lines(&"damage_taken"))
 	# Readable chances for the character sheet (same formulas as the damage pipeline, vs a same-level reference foe).
-	var ref_eva := DEFAULT_ENEMY_EVASION_PER_LEVEL * L + 6.0
+	var ref_eva := DEFAULT_ENEMY_EVASION_PER_LEVEL * (L - 1.0) + 10.0
 	var acc: float = d.get_stat(&"accuracy")
-	d.set_stat(&"accuracy_chance", 1.0 - minf(DamagePipeline.EVADE_CAP, ref_eva / (ref_eva + acc * DamagePipeline.EVADE_ACC_FACTOR)),
+	d.set_stat(&"accuracy_chance", 1.0 - DamagePipeline.evade_chance(ref_eva, acc),
 		PackedStringArray(["Against a level %d enemy with %d Evasion" % [level, roundi(ref_eva)],
 		"Formula: 1 - Evasion / (Evasion + Accuracy x %d)" % roundi(DamagePipeline.EVADE_ACC_FACTOR)]))
 	var eva: float = d.get_stat(&"evasion")
-	var ref_acc := ACCURACY_PER_LEVEL * L * 4.0 + 20.0
-	d.set_stat(&"evade_chance", minf(DamagePipeline.EVADE_CAP, eva / (eva + ref_acc * DamagePipeline.EVADE_ACC_FACTOR)) if eva > 0.0 else 0.0,
+	var ref_acc := 30.0 + EnemyStats.LEVEL_ACCURACY * (L - 1.0)
+	d.set_stat(&"evade_chance", DamagePipeline.evade_chance(eva, ref_acc),
 		PackedStringArray(["Against a level %d enemy with %d Accuracy" % [level, roundi(ref_acc)], "Cap %d%%" % roundi(DamagePipeline.EVADE_CAP * 100)]))
 	d.set_stat(&"physical_armor_dr", armor_dr, PackedStringArray(["Defense / (Defense + %d + %d x level)" % [ARMOR_K_BASE, ARMOR_K_LEVEL]]))
 	_std(d, agg, &"arcane_max", [["Base", 5.0]], 0.0, 10.0, true)

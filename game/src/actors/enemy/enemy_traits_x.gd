@@ -219,8 +219,8 @@ func on_hit(result: DamageResult, req: DamageRequest, attacker: Node) -> void:
 		if _alerted_t < 0.0:
 			_alerted_t = 0.0
 	if req.tags.get(&"mirror_reflect", false) and attacker is Actor and (attacker as Actor).alive and result.total > 0:
-		var back := _req(0.0, Elements.LIGHT, 1.0, 3.0, "Mirror")
-		back.base_min = float(result.total) * 1.5
+		var back := _req(0.0, Elements.LIGHT, 1.0, 0.0, "Mirror")
+		back.base_min = float(result.total) * 0.15
 		back.base_max = back.base_min
 		back.can_crit = false
 		back.tags[&"thorns"] = true
@@ -277,7 +277,7 @@ func prepare_incoming(req: DamageRequest, attacker: Node) -> void:
 			FX.text_popup(e.center() + Vector3.UP, "Immune", Color(0.7, 0.8, 1.0), 0.7)
 	if curled:
 		req.more.append(["Curled", CURL_TAKEN])
-	if e.status.has(&"mirror_guard") and attacker is Node3D:
+	if e.status.has(&"mirror_guard") and attacker is Node3D and not req.tags.has(&"thorns") and not req.tags.has(&"proc"):
 		var to: Vector3 = ((attacker as Node3D).global_position - e.global_position).slide(Vector3.UP)
 		if to.length() > 0.05 and e.forward().angle_to(to.normalized()) < deg_to_rad(75.0):
 			req.more.append(["Mirror Guard", 0.4])

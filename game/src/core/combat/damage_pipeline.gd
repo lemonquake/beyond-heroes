@@ -7,8 +7,8 @@ class_name DamagePipeline
 ##
 ## Deterministic: all randomness comes from the RandomNumberGenerator passed in.
 
-const EVADE_ACC_FACTOR := 4.0
-const EVADE_CAP := 0.5
+const EVADE_ACC_FACTOR := 1.0
+const EVADE_CAP := 0.65
 const SHOCK_TAKEN := 0.15
 const SHOCK_TAKEN_WET := 0.25
 const CURSE_TAKEN := 0.15
@@ -30,6 +30,9 @@ const UMBRAL_MULT := 1.3             # dark into a purged target (light/dark opp
 const MAX_KNOCKBACK := 28.0          # m/s hard cap per hit
 static var debug_enabled := false
 
+static func evade_chance(evasion: float, accuracy: float) -> float:
+	return minf(EVADE_CAP, evasion / (evasion + maxf(1.0, accuracy) * EVADE_ACC_FACTOR)) if evasion > 0.0 else 0.0
+
 static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageResult:
 	var r := DamageResult.new()
 	r.skill = req.tags.get(&"skill", &"")
@@ -45,11 +48,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	var inherited := req.kind == DamageRequest.Kind.SPELL and (req.tags.has(&"proc") or req.tags.has(&"thorns"))
 	r.log_step("== %s (%s) ==" % [req.label, DamageRequest.Kind.keys()[req.kind]])
 
-	# 0. Evasion (weapon attacks only).
-	if req.kind == DamageRequest.Kind.ATTACK and req.evadable and atk != null:
+	# 0. Evasion: respect aimed spells/projectiles explicitly marked evadable too.
+	if req.kind in [DamageRequest.Kind.ATTACK, DamageRequest.Kind.SPELL] and req.evadable and atk != null:
 		var eva := tgt.get_stat(&"evasion")
 		var acc := maxf(1.0, atk.get_stat(&"accuracy"))
-		var evade_chance := minf(EVADE_CAP, eva / (eva + acc * EVADE_ACC_FACTOR)) if eva > 0.0 else 0.0
+		var evade_chance := evade_chance(eva, acc)
 		if st != null and (st.has(&"frozen") or st.has(&"stunned") or st.has(&"staggered")):
 			evade_chance = 0.0
 		var roll := rng.randf()
@@ -253,6 +256,12 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if before_guard > limit:
 			_scale_all(comp, limit / before_guard)
 		r.log_step("Boss defenses x%.2f; burst limit %.0f -> %.1f" % [boss_taken, limit, _sum(comp)])
+
+	# Enemy retaliation is bounded after all bonuses, vulnerabilities and defenses.
+	var retaliation_limit := float(req.tags.get(&"retaliation_limit", INF))
+	var retaliation_total := _sum(comp)
+	if retaliation_total > retaliation_limit:
+		_scale_all(comp, retaliation_limit / retaliation_total)
 
 	# 12. Final damage.
 	var total := 0.0

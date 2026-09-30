@@ -58,7 +58,7 @@ func test_every_node_reaches_level_25() -> void:
 		for n in t.nodes:
 			nodes += 1
 			eq(int(n.max_rank), 25, "%s.%s tops out at level 25" % [id, n.id])
-			ok(int(n.base_rank) >= 1 and int(n.base_rank) <= 5, "%s.%s remembers its old cap (%s)" % [id, n.id, n.base_rank])
+			ok(int(n.base_rank) >= 1 and int(n.base_rank) <= TreeDef.LEVEL_MAX, "%s.%s has a valid authored cap (%s)" % [id, n.id, n.base_rank])
 	ok(nodes > 150, "%d skill and talent nodes checked" % nodes)
 	done()
 

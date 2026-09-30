@@ -39,6 +39,9 @@ var knock_source: DerivedStats            # stats of whoever launched us (for im
 var knock_source_node: Node
 var knock_depth := 0
 var _impact_cd := 0.0
+var _enemy_retaliation_cd := 0.0
+const ENEMY_RETALIATION_HP_CAP := 0.08
+const ENEMY_RETALIATION_COOLDOWN := 0.5
 var _vertical := 0.0
 var _airborne_from_launch := false
 var shield_hp := 0.0                      # absorbs damage (Radiant Ward, elite ward)
@@ -145,11 +148,19 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	req.target = stats
 	req.target_status = status
 	req.target_weight = weight
+	var enemy_retaliation: bool = team != BH.Team.ENEMY and attacker is Actor and attacker.team == BH.Team.ENEMY and req.tags.has(&"thorns")
+	if enemy_retaliation:
+		# One shared window per victim, so cleaving a pack cannot stack lethal returns.
+		if _enemy_retaliation_cd > 0.0:
+			return DamageResult.new()
+		req.tags[&"retaliation_limit"] = maxf(1.0, floorf(max_hp() * ENEMY_RETALIATION_HP_CAP))
 	_positional_bonuses(req, attacker)
 	_prepare_incoming(req, attacker)
 	if attacker is Player:
 		attacker.class_passives.before_hit(req)
 	var result := DamagePipeline.compute(req, rng)
+	if enemy_retaliation and result.total > 0:
+		_enemy_retaliation_cd = ENEMY_RETALIATION_COOLDOWN
 	if attacker != null:
 		last_attacker = attacker
 	_apply_result(result, req, attacker, hit_point)
@@ -346,6 +357,7 @@ func physics_move(delta: float, desired: Vector3) -> void:
 	if not is_finite(delta) or delta <= 0.0:
 		return
 	_impact_cd = maxf(0.0, _impact_cd - delta)
+	_enemy_retaliation_cd = maxf(0.0, _enemy_retaliation_cd - delta)
 	# Knockback decay: constant friction + drag, so strong hits travel far but settle predictably.
 	var ks := knock_velocity.length()
 	if ks > 0.0:

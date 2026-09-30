@@ -1496,8 +1496,9 @@ func _move_input() -> Vector3:
 func _movement(delta: float) -> Vector3:
 	var speed := stats.get_stat(&"move_speed", 5.0)
 	if _dash_t > 0.0:
-		_dash_t -= delta
-		return _dash_vel
+		var step := minf(delta, _dash_t)
+		_dash_t = maxf(0.0, _dash_t - step)
+		return _dash_vel * (step / maxf(delta, 0.000001))
 	var input := _move_input()
 	var mult := 1.0
 	if action != null:

@@ -68,7 +68,7 @@ func to_dict() -> Dictionary:
 	for a in allocated:
 		al[String(a)] = allocated[a]
 	return {"level": level, "xp": xp, "total_xp": total_xp, "allocated": al, "free_points": free_points,
-		"skill_points": skill_points, "talent_points": talent_points}
+		"skill_points": skill_points, "talent_points": talent_points, "point_rules_version": 1}
 
 func from_dict(d: Dictionary) -> void:
 	level = clampi(int(d.get("level", 1)), 1, BH.LEVEL_CAP)
@@ -80,5 +80,9 @@ func from_dict(d: Dictionary) -> void:
 	free_points = int(d.get("free_points", 0))
 	skill_points = int(d.get("skill_points", 0))
 	talent_points = int(d.get("talent_points", 0))
+	# Preserve spent, quest and cheat points; credit only the newly added level rewards.
+	if int(d.get("point_rules_version", 0)) < 1:
+		free_points += (level - 1) * maxi(0, cls.free_points_per_level - 3)
+		skill_points += (level - 1) * maxi(0, cls.skill_points_per_level - 1)
 	xp_changed.emit()
 	points_changed.emit()

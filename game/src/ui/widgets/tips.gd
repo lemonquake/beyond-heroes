@@ -393,6 +393,8 @@ static func skill_text(s: SkillDef, params: Dictionary) -> String:
 		if v is float:
 			txt = str(roundi(v)) if absf(v - roundf(v)) < 0.01 else ("%.1f" % v)
 		t = t.replace("{%s}" % k, txt)
+	if s.movement_limit() > 0.0:
+		t += " Maximum travel distance: %d m." % roundi(s.movement_limit())
 	return t
 
 static func skill(sid: StringName, hero: HeroData, player: Player = null, next_rank := false) -> Control:

@@ -1,0 +1,23 @@
+{
+  "engine": "4.7.2.stable",
+  "artifacts": {
+    "build/survival-balance/windows/BeyondHeroes.exe": {
+      "bytes": 464854296,
+      "sha256": "5357f3e801b78922f22a4d595140f48f52a70d697f95ec9e539a5ac43755a322"
+    },
+    "build/survival-balance/BeyondHeroes.apk": {
+      "bytes": 413504590,
+      "sha256": "5e98103380598d0aab73608fda20aa01de13ffe2332ab1daa1b7bc23e9950785"
+    }
+  },
+  "tests": {
+    "audit_checks": 4467,
+    "existing_failures_reproduced_on_original_main": 9,
+    "audit_failures": 0,
+    "regression_failures": 0,
+    "regression_checks": 7483,
+    "scripts_compiled": 407
+  },
+  "windows": "x64 release; embedded data; headless startup exit 0",
+  "android": "ARM64/ARMv7; debug signed; v2/v3 signatures verified; no device connected"
+}

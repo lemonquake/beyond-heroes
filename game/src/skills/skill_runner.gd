@@ -115,13 +115,13 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 				if first:
 					_arc(skill, p, action)
 		&"dash_strike":
-			var dist := float(p.get("dash", 4.0))
+			var dist := skill.movement_distance(p)
 			var t_hit := maxf(0.08, action.first_hit_time())
 			caster.dash(dir, dist / t_hit, t_hit)
 			action.on_window = func(w: int, first: bool) -> void:
 				_front_strike(skill, p, action)
 		&"leap":
-			var target := _leap_target(aim, float(p.get("range", 10.0)))
+			var target := _leap_target(aim, skill.movement_distance(p))
 			var t_land := maxf(0.2, action.first_hit_time())
 			caster.leap_to(target, t_land)
 			action.on_window = func(w: int, first: bool) -> void:
@@ -183,11 +183,11 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 		&"vault":
 			_vault(skill, p, aim, action)
 		&"shadow_step":
-			var tgt := _step_target(aim, float(p.get("range", 10.0)))
+			var tgt := _step_target(aim, skill.movement_distance(p))
 			if tgt == null:
 				Events.notify.emit("No enemy to step to", &"error")
 				return false
-			_shadow_step(tgt)
+			_shadow_step(tgt, skill.movement_distance(p))
 			action.on_window = func(w: int, first: bool) -> void:
 				if first:
 					_arc(skill, p, action)
@@ -583,7 +583,7 @@ func _blink(skill: SkillDef, p: Dictionary, aim: Vector3) -> void:
 	var origin: Vector3 = caster.global_position
 	var d := aim - origin
 	d.y = 0.0
-	var dist := minf(d.length(), float(p.get("range", 9.0)))
+	var dist := minf(d.length(), skill.movement_distance(p))
 	var target := origin + (d.normalized() if d.length() > 0.1 else caster.forward()) * dist
 	target = CombatQuery.reachable_point(caster.get_world_3d(), origin, target)
 	target = CombatQuery.ground_at(caster.get_world_3d(), target)
@@ -762,7 +762,8 @@ func _vault(skill: SkillDef, p: Dictionary, aim: Vector3, _action: TimedAction) 
 	away.y = 0.0
 	if away.length() < 0.2:
 		away = -caster.forward()
-	var target := _leap_target(origin + away.normalized() * float(p.get("range", 7.0)), float(p.get("range", 7.0)))
+	var travel := skill.movement_distance(p)
+	var target := _leap_target(origin + away.normalized() * travel, travel)
 	caster.leap_to(target, 0.42)
 	var req := make_request(skill, p)
 	req.direct_status[&"slowed"] = 60.0
@@ -779,10 +780,12 @@ func _step_target(aim: Vector3, rng_m: float) -> Actor:
 	return CombatQuery.nearest(cands, aim)
 
 ## Shadow Step: appear behind the target, facing it.
-func _shadow_step(t: Actor) -> void:
+func _shadow_step(t: Actor, max_distance := 12.0) -> void:
 	var origin: Vector3 = caster.global_position
 	var behind: Vector3 = t.global_position - t.forward() * (t.body_radius + 0.9)
-	behind = CombatQuery.reachable_point(caster.get_world_3d(), t.global_position, behind)
+	var offset := (behind - origin).slide(Vector3.UP)
+	behind = origin + offset.limit_length(minf(max_distance, float(SkillDef.MOVEMENT_LIMITS[&"shadow_step"])))
+	behind = CombatQuery.reachable_point(caster.get_world_3d(), origin, behind)
 	behind = CombatQuery.ground_at(caster.get_world_3d(), behind)
 	FX.spawn(VFXLib.particles(Color(0.35, 0.2, 0.5, 0.9), 26, 0.5, true, 0.45, 3.0, 180.0, Vector3.ZERO, 0.5), origin + Vector3.UP)
 	caster.teleport_to(behind)

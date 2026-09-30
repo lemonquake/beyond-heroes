@@ -48,7 +48,7 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	if boss:
 		d.set_stat(&"boss_damage_taken", CombatGrowth.BOSS_DAMAGE_TAKEN)
 		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level)))
-	d.set_stat(&"damage_mult", dmg_mult * scale * CombatGrowth.enemy_damage_bonus(level))
+	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling) * CombatGrowth.enemy_damage_bonus(level))
 	d.set_stat(&"phys_res_flat", agg.flat(&"phys_res"))
 	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))
 	d.set_stat(&"outgoing_damage", maxf(0.05, od))

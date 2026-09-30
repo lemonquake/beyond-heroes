@@ -8,8 +8,8 @@ extends Resource
 @export var model_path: String
 @export var base_attributes := {}          # {&"str": 14, ...}
 @export var growth_per_level := {}         # automatic attribute growth per level
-@export var free_points_per_level := 3
-@export var skill_points_per_level := 1
+@export var free_points_per_level := 10
+@export var skill_points_per_level := 2
 @export var talent_points_per_level := 1
 @export var base_hp := 100.0
 @export var hp_per_level := 10.0

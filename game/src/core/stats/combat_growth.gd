@@ -40,7 +40,14 @@ static func enemy_health_bonus(level: int) -> float:
 	return 1.0 if level < 30 else 1.2 + 0.10 * steps / (1.0 + 0.15 * steps)
 
 static func enemy_damage_bonus(level: int) -> float:
-	return 1.0 + 0.04 * milestone(level)
+	return 1.0 + 0.04 * mini(milestone(level), 3)
+
+## Separate damage from HP growth: softer gains after 25 prevent level-40+ spikes.
+## Half the former per-level damage growth, without sudden difficulty jumps.
+static func enemy_damage_scale(level: int, per_level: float) -> float:
+	var early := float(clampi(level - 1, 0, 24))
+	var late := float(maxi(0, level - 25))
+	return 1.0 + per_level * (early + late * 0.5)
 
 ## Applicable increases share one budget; investment above +200% has
 ## diminishing returns. This limits multiplication without capping hit damage.

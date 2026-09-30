@@ -793,7 +793,7 @@ func _attack_request(a: Dictionary) -> DamageRequest:
 	req.knockback = float(a.get("knockback", 2.0))
 	req.poise = float(a.get("poise", 8.0))
 	req.label = "%s: %s" % [def.display_name, a.id]
-	req.evadable = a.kind in ["melee", "dash", "projectile", "chain", "tongue"]
+	req.evadable = a.kind in ["melee", "dash", "charge", "projectile", "chain", "tongue"]
 	var st: Dictionary = a.get("status", {})
 	for sid in st:
 		req.direct_status[StringName(sid)] = float(st[sid])

@@ -138,7 +138,7 @@ static func knight_tree() -> TreeDef:
 			"requires": [&"judgment"], "req_level": 16, "params": {"length": 4.0, "width": 1.0}, "desc": "Judgment's line is 4 m longer and 1 m wider."},
 		{"id": &"shield_bash", "name": "Shield Bash", "kind": "skill", "skill": &"shield_bash", "icon": ICON % "shield_bash", "pos": Vector2(4, 0), "max_rank": 5, "cost": 1, "requires": [], "req_level": 2},
 		{"id": &"bash_chain", "name": "Battering Ram", "kind": "upgrade", "skill": &"shield_bash", "icon": ICON % "shield_bash", "pos": Vector2(5, 1), "max_rank": 2, "cost": 1,
-			"requires": [&"shield_bash"], "req_level": 5, "params": {"knockback": 4.0, "dash": 1.5}, "desc": "+4 knockback and +1.5 m charge per rank."},
+			"requires": [&"shield_bash"], "req_level": 5, "params": {"knockback": 4.0, "dash": 1.5}, "desc": "+4 knockback and +1.5 m charge per rank. Charge distance is capped at 8 m."},
 		{"id": &"iron_bulwark", "name": "Iron Bulwark", "kind": "skill", "skill": &"iron_bulwark", "icon": ICON % "iron_bulwark", "pos": Vector2(4, 2), "max_rank": 5, "cost": 1,
 			"requires": [&"shield_bash"], "req_level": 5},
 		{"id": &"war_cry", "name": "War Cry", "kind": "skill", "skill": &"war_cry", "icon": ICON % "war_cry", "pos": Vector2(4, 4), "max_rank": 5, "cost": 1,

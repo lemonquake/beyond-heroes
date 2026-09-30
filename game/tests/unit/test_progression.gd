@@ -24,8 +24,8 @@ func test_multi_level_carry_over() -> void:
 	eq(gained, 3, "three levels at once")
 	eq(h.progress.level, 4, "level 4")
 	eq(h.progress.xp, 37, "remainder carried over")
-	eq(h.progress.free_points, 9, "3 attribute points per level")
-	eq(h.progress.skill_points, 3, "skill points")
+	eq(h.progress.free_points, 30, "10 attribute points per level")
+	eq(h.progress.skill_points, 6, "2 skill points per level")
 	eq(h.progress.talent_points, 3, "talent points")
 	eq(h.progress.total_xp, need + 37, "total xp")
 	# Growth applied

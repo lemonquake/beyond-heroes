@@ -259,6 +259,8 @@ func _dummies() -> Array:
 		var e := Spawner.spawn_enemy(Game.current_map, DB.enemy(&"hollow_soldier"), 30, [], pos, DataEnemies.DIFFICULTY[1])
 		if e:
 			e.set_physics_process(false)          # standing targets: no AI, no counter-attacks
+			e.ensure_stats()
+			e.stats.set_stat(&"evasion", 0.0)     # this checks skill delivery; evasion has seeded probability tests
 			out.append(e)
 	return out
 

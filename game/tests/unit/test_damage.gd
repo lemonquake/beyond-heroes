@@ -230,8 +230,8 @@ func test_minimum_and_determinism() -> void:
 	for i in 4000:
 		if DamagePipeline.compute(req, r3).evaded:
 			evades += 1
-	# evade = 40 / (40 + 20*4) = 0.3333
-	near(evades / 4000.0, 1.0 / 3.0, 0.03, "evasion rate matches formula")
+	# evade = min(65%, 40 / (40 + 20)) = 65%.
+	near(evades / 4000.0, 0.65, 0.03, "evasion rate matches formula")
 
 func test_displayed_equals_applied() -> void:
 	# The number shown is result.total; sum of rounded components must round to the same value.

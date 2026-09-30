@@ -37,6 +37,16 @@ extends Resource
 @export var aura_kind := &""                 # offense | defense (auras)
 @export var weapon_req_label := ""            # shown when `requires` is a custom requirement
 
+## Hard horizontal travel limits, applied after every rank and side-passive bonus.
+const MOVEMENT_LIMITS := {&"dash_strike": 8.0, &"leap": 14.0, &"blink": 12.0, &"vault": 10.0, &"shadow_step": 12.0}
+
+func movement_limit() -> float:
+	return float(MOVEMENT_LIMITS.get(behavior, 0.0))
+
+func movement_distance(p: Dictionary) -> float:
+	var key := "dash" if behavior == &"dash_strike" else "range"
+	return clampf(float(p.get(key, params.get(key, 0.0))), 0.0, movement_limit())
+
 func is_aura() -> bool:
 	return behavior == &"aura"
 
@@ -60,6 +70,8 @@ func resolve(rank: int, upgrades: Dictionary = {}) -> Dictionary:
 		else:
 			p[k] = float(p.get(k, 0.0)) + float(v)
 	p["rank"] = r
+	if movement_limit() > 0.0:
+		p["dash" if behavior == &"dash_strike" else "range"] = movement_distance(p)
 	if id == &"spike_tentacle":
 		p["stun_duration"] = minf(1.6, float(p.stun_duration))
 	return p

@@ -11,10 +11,10 @@ func _hero(cls_id := &"knight", with_gear := true) -> HeroData:
 func test_attribute_contributions_knight_level1() -> void:
 	var h := _hero(&"knight", false)
 	var s := h.compute_stats()
-	# Knight L1: STR14 AGI9 INT5 WIS6 SPI9 DEX10. HP = 120 + 0 + 14*2 + 9*1 = 157
-	eq(s.get_stat(&"max_hp"), 157.0, "knight max hp")
-	# Mana = 30 + 5*2 + 6*1 + 9*0.5 = 50.5 -> floor 50
-	eq(s.get_stat(&"max_mana"), 50.0, "knight max mana")
+	# Knight L1: HP = 120 + 14*6 + 6*4 + 9*1 = 237.
+	eq(s.get_stat(&"max_hp"), 237.0, "knight max hp")
+	# Mana = 30 + 5*4 + 6*1 + 9*3 = 83.
+	eq(s.get_stat(&"max_mana"), 83.0, "knight max mana")
 	# Defense = (20 + 14*0.5) * 1.10 (class inc) = 29.7 -> floor 29
 	eq(s.get_stat(&"defense"), 29.0, "knight defense")
 	# Crit = unarmed 5% + DEX 10*0.08% + AGI 9*0.04% = 6.16%
@@ -45,8 +45,8 @@ func test_equip_unequip_applies_once_and_removes_cleanly() -> void:
 	eq(h.equip_from_inventory(ring, &"accessory_1"), "", "equip ok")
 	var with := h.compute_stats()
 	eq(with.get_stat(&"str"), before[&"str"] + 4.0, "+4 str once")
-	# +4 STR -> +8 HP, +12 flat -> +20 HP
-	eq(with.get_stat(&"max_hp"), before[&"max_hp"] + 20.0, "hp from str and affix")
+	# +4 STR -> +24 HP, +12 flat -> +36 HP
+	eq(with.get_stat(&"max_hp"), before[&"max_hp"] + 36.0, "hp from str and affix")
 	near(with.get_stat(&"res_fire"), before[&"res_fire"] + 0.1, 0.00001, "fire res")
 	eq(h.unequip_to_inventory(&"accessory_1"), "", "unequip ok")
 	var after := h.compute_stats().values

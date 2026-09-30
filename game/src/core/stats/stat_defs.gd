@@ -5,12 +5,12 @@ enum Fmt { INT, DEC1, PCT, MULT, SPEED, SECONDS }
 
 # key: [display name, format, short description]
 const DEFS := {
-	&"str": ["Strength", Fmt.INT, "Physical attack and weapon damage, Defense, carry capacity, knockback and Maximum HP."],
-	&"agi": ["Agility", Fmt.INT, "Movement speed, Evasion, Attack Speed, Critical Chance and dodge."],
-	&"int": ["Intelligence", Fmt.INT, "Magic damage, spell power, staff and wand attacks, Maximum Mana."],
-	&"wis": ["Wisdom", Fmt.INT, "Mana efficiency and regeneration, resistances, cooldowns."],
-	&"spi": ["Spirit", Fmt.INT, "HP/Mana regeneration, healing, buff effect, status resistance."],
-	&"dex": ["Dexterity", Fmt.INT, "Accuracy and Critical Chance. Does not increase damage."],
+	&"str": ["Strength", Fmt.INT, "+6 Maximum HP per point. Also improves physical attack, weapon damage, Defense, carry capacity and knockback."],
+	&"agi": ["Agility", Fmt.INT, "+2 Evasion per point, countered by enemy Accuracy. Also improves movement, Attack Speed, Critical Chance and dodge."],
+	&"int": ["Intelligence", Fmt.INT, "+4 Maximum Mana per point. Also improves magic damage, spell power and staff/wand attacks."],
+	&"wis": ["Wisdom", Fmt.INT, "+4 Maximum HP and +1 Maximum Mana per point. Also improves Mana efficiency, regeneration, resistances and cooldowns."],
+	&"spi": ["Spirit", Fmt.INT, "+3 Maximum Mana and +1 Maximum HP per point. Also improves regeneration, healing, buff effect and status resistance."],
+	&"dex": ["Dexterity", Fmt.INT, "+3 Accuracy per point for a higher Hit Rate against Evasion. Also improves Critical Chance and ranged weapon damage."],
 	&"max_hp": ["Maximum HP", Fmt.INT, ""],
 	&"max_mana": ["Maximum Mana", Fmt.INT, ""],
 	&"hp_regen": ["HP Regeneration", Fmt.DEC1, "per second"],
@@ -67,7 +67,7 @@ const DEFS := {
 	&"damage_taken": ["Damage Taken", Fmt.MULT, "Multiplier on all damage you take (Overcharged, Fortified)."],
 	&"parry_window": ["Parry Window", Fmt.SECONDS, "Raising your guard this soon before a hit parries it: no damage and a counter opening."],
 	&"dodge_distance": ["Dodge Distance", Fmt.PCT, "Increased distance of your dodge roll."],
-	&"accuracy_chance": ["Hit Chance", Fmt.PCT, "Chance to hit a same-level enemy with average Evasion."],
+	&"accuracy_chance": ["Hit Rate", Fmt.PCT, "Chance to hit a same-level reference enemy. Dexterity counters Evasion; actual chance depends on the target."],
 	&"evade_chance": ["Evade Chance", Fmt.PCT, "Chance to evade a same-level enemy's attack (cap 50%)."],
 	&"physical_armor_dr": ["Armor Reduction", Fmt.PCT, "Physical damage prevented by Defense against a same-level attacker."],
 	&"res_cap": ["Resistance Cap", Fmt.PCT, ""],
