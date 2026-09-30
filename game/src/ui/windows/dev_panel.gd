@@ -48,7 +48,7 @@ func _ready() -> void:
 	for id in DB.enemies.keys():
 		_enemy_ids.append(id)
 		_enemy.add_item(DB.enemies[id].display_name)
-	_enemy_level = _spin(1, 60, 5)
+	_enemy_level = _spin(1, BH.LEVEL_CAP, 5)
 	v.add_child(_row([_enemy, _enemy_level]))
 	v.add_child(_row([_btn("Spawn Enemy", func(): _spawn(false)), _btn("Spawn Elite", func(): _spawn(true)), _btn("Spawn Boss", _spawn_boss)]))
 	v.add_child(_row([_btn("Kill All Enemies", _kill_all)]))

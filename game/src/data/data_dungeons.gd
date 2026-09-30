@@ -769,6 +769,7 @@ static func record_raid(hero: HeroData, dungeon: StringName, minutes := -1.0) ->
 	var prev: Dictionary = hero.dungeon_raids.get(String(dungeon), {})
 	var rec := {"at": now(), "until": now() + m * 60.0, "count": int(prev.get("count", 0)) + 1}
 	hero.dungeon_raids[String(dungeon)] = rec
+	hero.check_promotions()
 	return rec
 
 ## Seconds until a raided dungeon's monsters return (0 when it is not recovering).

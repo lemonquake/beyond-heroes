@@ -44,7 +44,7 @@ func make_request(skill: SkillDef, p: Dictionary) -> DamageRequest:
 		req.tags[&"launch"] = float(p.launch)
 	# bh-010: synergies, finishers (Combo), Focus shots, Spell Echo copies
 	if float(p.get("syn_pct", 0.0)) > 0.0:
-		req.more.append(["Synergies", 1.0 + float(p.syn_pct) / 100.0])
+		req.bonus_inc += float(p.syn_pct) / 100.0
 	if p.has("_pips"):
 		var pips := float(p._pips)
 		req.tags[&"finisher"] = true

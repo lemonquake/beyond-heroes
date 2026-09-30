@@ -57,6 +57,7 @@ func miniboss_down(e: Enemy, hero: HeroData) -> void:
 	var id := StringName(e.miniboss.id)
 	var rec: Dictionary = hero.miniboss_log.get(id, {"kills": 0, "at": 0.0})
 	hero.miniboss_log[id] = {"kills": int(rec.kills) + 1, "at": hero.play_time}
+	hero.check_promotions()
 	hero.add_clear()
 	Events.miniboss_defeated.emit(id)
 

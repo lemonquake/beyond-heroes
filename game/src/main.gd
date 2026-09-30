@@ -88,7 +88,7 @@ func _on_back() -> void:
 	if Game.in_session and ui and is_instance_valid(ui):
 		ui.back()
 	elif select and is_instance_valid(select):
-		select.back.emit()
+		select.go_back()
 	elif menu and is_instance_valid(menu):
 		menu.go_back()
 
@@ -161,10 +161,10 @@ func _make_ui() -> void:
 	ui = UIRoot.new()
 	add_child(ui)
 
-func _start_new(class_id: StringName, hero_name: String, slot: int, difficulty: int) -> void:
+func _start_new(class_id: StringName, hero_name: String, slot: int, difficulty: int, look := {}) -> void:
 	_clear_menus()
 	_make_ui()
-	await Game.start_new_game(class_id, hero_name, slot, difficulty)
+	await Game.start_new_game(class_id, hero_name, slot, difficulty, look)
 
 func _load(slot: int) -> void:
 	if menu:
@@ -192,6 +192,8 @@ func _quick_start() -> void:
 		await Game.continue_game(slot)
 		return
 	Game.hero = Game.new_hero(cls, String(args.get("name", "Wanderer")))
+	if args.has("look"):                    # --look=<preset id>: a HeroLook preset for captures and probes
+		Game.hero.look = HeroLook.to_save(HeroLook.preset(String(args.look)))
 	var lvl := int(args.get("level", "1"))
 	if lvl > 1:
 		Game.hero.progress.add_xp(XpCurve.total_xp_for_level(lvl))

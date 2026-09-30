@@ -585,7 +585,7 @@ static func affixes() -> Array:
 	var ELITE := BH.Rarity.ELITE
 	var out := [
 		# Weapon prefixes
-		_a(&"local_phys", "Keen", true, &"local_phys", I, [[1, 0.15, 0.30], [10, 0.30, 0.50], [20, 0.50, 0.75], [35, 0.75, 1.0]], WEAP, &"local_phys"),
+		_a(&"local_phys", "Keen", true, &"local_phys", I, [[1, 0.08, 0.15], [10, 0.15, 0.22], [20, 0.22, 0.30], [35, 0.30, 0.40]], WEAP, &"local_phys"),
 		_a(&"added_fire", "Flaming", true, &"added_fire", F, [[1, 2, 4], [12, 5, 9], [25, 10, 16]], WEAP + JEW, &"added_fire", 70, true),
 		_a(&"added_ice", "Frigid", true, &"added_ice", F, [[1, 2, 4], [12, 5, 9], [25, 10, 16]], WEAP + JEW, &"added_ice", 70, true),
 		_a(&"added_lightning", "Crackling", true, &"added_lightning", F, [[1, 1, 6], [12, 2, 13], [25, 3, 24]], WEAP + JEW, &"added_lightning", 70, true),

@@ -129,10 +129,14 @@ func weight() -> float:
 func damage_range() -> Vector2:
 	var q := 1.0 + quality + DataUpgrades.TEMPER_PER_RANK * float(foretech_rank if foretech != &"" else 0)
 	var level := equipment_level()
-	# Old bases and named relics remain useful when found later. Preserve each
-	# weapon's spread, speed and identity by scaling its authored damage budget.
-	var budget := maxf(1.0, (9.0 + 1.9 * level) / (9.0 + 1.9 * base.level_req)) if level > 5 else 1.0
-	return Vector2(base.damage_min, base.damage_max) * budget * CombatGrowth.weapon_factor(level) * q * (1.0 + _local(&"local_phys"))
+	var damage := Vector2(base.damage_min, base.damage_max)
+	if level > 5:
+		var aps := base.weapon_aps()
+		var budget := DataItems.roster_damage(base.weapon_type, level, aps)
+		var authored_avg := maxf(1.0, (damage.x + damage.y) * 0.5)
+		damage *= (budget.x + budget.y) * 0.5 / authored_avg
+	# Quality, tempering and the local damage affix add, rather than multiply.
+	return damage * CombatGrowth.weapon_factor(level) * (q + _local(&"local_phys"))
 
 func equipment_level() -> int:
 	return maxi(base.level_req, clampi(ilvl, 1, BH.LEVEL_CAP + 5)) if rarity != BH.Rarity.BEGINNER else base.level_req
@@ -243,7 +247,7 @@ func affix_lines() -> PackedStringArray:
 
 func to_dict() -> Dictionary:
 	var d := {"base": String(base.id), "rarity": rarity, "ilvl": ilvl, "quality": quality, "affixes": affixes.duplicate(true),
-		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value}
+		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value, "balance_version": 1}
 	if epithet != "":
 		d["epithet"] = epithet
 	if name_prefix != "":
@@ -314,6 +318,7 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 		for i in it.sockets:
 			var gid := String(gs[i]) if gs is Array and i < (gs as Array).size() else ""
 			it.gems.append(gid if gid != "" and DataCrystals.is_crystal(StringName(gid)) and DB.item_base(StringName(gid)) != null else "")
+	ItemGenerator.migrate_balance(it, int(d.get("balance_version", 0)))
 	return it
 
 func clone() -> ItemInstance:

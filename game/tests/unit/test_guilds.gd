@@ -22,7 +22,7 @@ func test_tier_table() -> void:
 	eq(",".join(letters), "E,D,C,B,A,S,SS,SSS", "tier letters in order")
 	for r in range(2, DataGuilds.MAX_RANK + 1):
 		ok(int(DataGuilds.tier(r).level) > int(DataGuilds.tier(r - 1).level), "tier %d needs a higher level than %d" % [r, r - 1])
-		ok(int(DataGuilds.tier(r).fee) > int(DataGuilds.tier(r - 1).fee), "tier %d costs more than %d" % [r, r - 1])
+		ok(r == 2 or int(DataGuilds.tier(r).fee) > int(DataGuilds.tier(r - 1).fee), "tier %d costs more than %d" % [r, r - 1])
 	eq(DataGuilds.rank_for_rarity(BH.Rarity.ELITE), 0, "Elite is not gated")
 	eq(DataGuilds.rank_for_rarity(BH.Rarity.LICENSED), 1, "Licensed needs Class E")
 	eq(DataGuilds.rank_for_rarity(BH.Rarity.MASTER), 2, "Master needs Class D")
@@ -57,14 +57,15 @@ func test_promotion_requirements() -> void:
 	GuildRules.join(h, &"lantern")
 	var p := GuildRules.next_promotion(h)
 	eq(int(p.rank), 2, "next is D")
-	ok(not p.ok and String(p.error).contains("level"), "D needs level 6")
+	ok(not p.ok and String(p.error).contains("level"), "D needs level 2")
 	h.progress.add_xp(XpCurve.total_xp_for_level(6))
-	h.world_flags[&"mq_maelis_orders"] = true
+	for flag in GuildRules.OPENING_DEEDS:
+		h.world_flags[flag] = true
 	h.guild_jobs["done"] = 2
 	var gold := h.inventory.gold
 	eq(GuildRules.promote(h), "", "promoted to D with orders and two jobs")
 	eq(h.tier, 2, "Class D")
-	eq(h.inventory.gold, gold - 150, "D fee charged exactly")
+	eq(h.inventory.gold, gold, "opening promotion is free")
 	h.progress.add_xp(XpCurve.total_xp_for_level(12))
 	h.guild_jobs["done"] = 5
 	h.dungeon_raids["warren"] = {"count": 1}
@@ -161,18 +162,20 @@ func test_inn_rest() -> void:
 
 func test_dialogue_conditions_and_placeholders() -> void:
 	var h := _hero(1000, 6)
-	h.world_flags[&"mq_maelis_orders"] = true
+	for flag in GuildRules.OPENING_DEEDS:
+		h.world_flags[flag] = true
 	h.guild_jobs["done"] = 2
 	var d := Dialogue.new(&"x", {})
 	ok(d.check({"no_guild": true}, h), "no_guild before joining")
 	GuildRules.join(h, &"lantern")
+	h.set_tier(1) # Isolate dialogue eligibility from the automatic join trigger.
 	ok(d.check({"guild": "lantern"}, h), "guild condition")
 	ok(d.check({"not_guild": "swordfin"}, h), "not_guild condition")
 	ok(d.check({"tier_min": 1}, h) and not d.check({"tier_min": 2}, h), "tier_min")
 	ok(d.check({"can_promote": true}, h), "can promote with the required deeds")
 	var t := Dialogue.fill("Rest for {rest_fee}. Next: {next_tier} for {promo_fee}. You are {tier}.", h)
 	ok(not t.contains("{"), "all placeholders filled")
-	ok(t.contains(str(NpcServices.rest_cost(h))) and t.contains("Class D") and t.contains("150"), "live values: %s" % t)
+	ok(t.contains(str(NpcServices.rest_cost(h))) and t.contains("Class D") and t.contains("for 0"), "live values: %s" % t)
 	done()
 
 func test_save_round_trip() -> void:

@@ -20,6 +20,7 @@ static func make_enemy(info: Dictionary, replica: bool) -> Enemy:
 		return null
 	var e := Enemy.new()
 	e.net_replica = replica
+	e.encounter_hp_mult = maxf(0.00000001, float(info.get("encounter_hp_mult", 1.0)))
 	e.setup(def, int(info.lvl), (info.mods as Array).map(func(m): return StringName(m)),
 		DataEnemies.DIFFICULTY[clampi(int(info.diff), 0, DataEnemies.DIFFICULTY.size() - 1)])
 	var md := DataMinibosses.find(StringName(info.get("mb", "")))

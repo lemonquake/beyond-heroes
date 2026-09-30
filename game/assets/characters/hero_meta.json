@@ -1,0 +1,130 @@
+{
+ "fps": 30,
+ "generator": "tools/blender/hero/hero_export.py",
+ "notes": "the player's own clips (models/generic_body_animation) on the shared skeleton",
+ "landmarks": {
+  "eye": [
+   0.0335,
+   -0.128,
+   1.687
+  ],
+  "brow_z": 1.708,
+  "nose_tip": [
+   0.0,
+   -0.16,
+   1.653
+  ],
+  "nose_base": [
+   0.0,
+   -0.122,
+   1.657
+  ],
+  "mouth": [
+   0.0,
+   -0.143,
+   1.616
+  ],
+  "mouth_half": 0.029,
+  "chin": [
+   0.0,
+   -0.128,
+   1.577
+  ],
+  "ear": [
+   0.083,
+   -0.04,
+   1.666
+  ],
+  "jaw": [
+   0.062,
+   -0.065,
+   1.6
+  ],
+  "head_joint_z": 1.6,
+  "head_top": 1.8
+ },
+ "shape_keys": [
+  "nose_size",
+  "nose_long",
+  "nose_wide",
+  "nose_up",
+  "ears_size",
+  "ears_point",
+  "ears_out",
+  "lips_full",
+  "mouth_wide",
+  "mouth_smile",
+  "jaw_wide",
+  "chin_long",
+  "cheeks",
+  "brow_heavy",
+  "eyes_pop",
+  "muscle",
+  "belly",
+  "build",
+  "rear"
+ ],
+ "animations": {
+  "hero_walk": {
+   "length": 1.033,
+   "loop": true,
+   "ground_speed": 1.626,
+   "footsteps": [
+    0.3,
+    0.833
+   ],
+   "direction_deg": 0.0
+  },
+  "hero_run": {
+   "length": 0.633,
+   "loop": true,
+   "ground_speed": 5.588,
+   "footsteps": [
+    0.2,
+    0.533
+   ],
+   "direction_deg": 0.0
+  },
+  "hero_stroll": {
+   "length": 4.167,
+   "loop": true,
+   "ground_speed": 0.771,
+   "footsteps": [
+    0.167,
+    0.933
+   ],
+   "direction_deg": 0.0
+  },
+  "hero_alert": {
+   "length": 4.0,
+   "loop": true
+  },
+  "hero_axe_smash": {
+   "length": 1.333,
+   "loop": false,
+   "hits": [
+    [
+     0.7,
+     0.8
+    ]
+   ],
+   "tip_speed_peak": 87.37,
+   "cancel_after": 1.1,
+   "combo_window": [
+    0.867,
+    1.4
+   ],
+   "footsteps": [
+    0.8
+   ],
+   "props": {
+    "R": "greatsword",
+    "L": null
+   },
+   "source_strike": [
+    1.033,
+    1.1
+   ]
+  }
+ }
+}

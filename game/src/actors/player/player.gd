@@ -135,7 +135,9 @@ func bind(h: HeroData) -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	visual.setup(h.cls.model_path, 1.0, h.cls.tint, h.cls.id)
+	# bh-023: every class wears its gear on the hero's own body (the class models remain for spirits and townsfolk)
+	visual.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else h.cls.model_path, 1.0, h.cls.tint, h.cls.id)
+	visual.set_look(h.look)
 	refresh_equipment_visuals()
 	mark_stats_dirty()
 	ensure_stats()
@@ -177,6 +179,8 @@ func refresh_equipment_visuals() -> void:
 	visual.dress_equipment(hero.equipment)
 	var lo := hero.equipment.loadout()
 	var main := hero.equipment.get_item(&"main_weapon")
+	# bh-023: a great axe's heavy attack is the player's own two-handed smash (same timing as the clip it replaces)
+	visual.clip_alias = {&"gs_heavy": &"hero_axe_smash"} if lo.main_type != null and lo.main_type.id == &"greataxe" else {}
 	var sub := hero.equipment.get_item(&"sub_weapon")
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")

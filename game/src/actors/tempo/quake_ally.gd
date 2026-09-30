@@ -25,7 +25,8 @@ func bind_mate(m: QuakeMate, p_player: Node3D, p_slot := 0) -> QuakeAlly:
 	setup(m.tdata, m.hero, p_player, p_slot)
 	# the fighting AI reads the class and skills from the TempoData; the look is the hero's own
 	tdef = tdef.duplicate()
-	tdef["model"] = m.hero.cls.model_path
+	# bh-023: a fellow hero has a hero's body, their own gear on it and a face of their own
+	tdef["model"] = HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else m.hero.cls.model_path
 	tdef["rig"] = m.hero.cls.id
 	tdef["color"] = Color(1.0, 0.86, 0.5)
 	name = "QuakeAlly_%s" % m.display_name()
@@ -73,6 +74,12 @@ func refresh_equipment_visuals() -> void:
 		return
 	var eq := hero.equipment
 	var lo := eq.loadout()
+	if visual.hero:
+		if visual.hero.look.is_empty() or HeroLook.is_plain(visual.hero.look):
+			var rng := RandomNumberGenerator.new()
+			rng.seed = hash(mate.display_name())
+			visual.set_look(hero.look if not hero.look.is_empty() else HeroLook.random(rng, 0.1))
+		visual.dress_equipment(eq)
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
 	var main := eq.get_item(&"main_weapon")

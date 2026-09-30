@@ -1,0 +1,86 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+AUDIT {"boss_hp":87630,"class":"knight","dps":1947,"enemy_hp":3925,"level":30,"seconds":2.0}
+AUDIT {"boss_hp":62567,"class":"mage","dps":1390,"enemy_hp":3925,"level":30,"seconds":2.8}
+AUDIT {"boss_hp":79618,"class":"ranger","dps":1769,"enemy_hp":3925,"level":30,"seconds":2.2}
+AUDIT {"boss_hp":81091,"class":"shadowblade","dps":1802,"enemy_hp":3925,"level":30,"seconds":2.2}
+AUDIT {"boss_hp":161187,"class":"knight","dps":3582,"enemy_hp":13794,"level":45,"seconds":3.9}
+AUDIT {"boss_hp":139577,"class":"mage","dps":3102,"enemy_hp":13794,"level":45,"seconds":4.4}
+AUDIT {"boss_hp":188195,"class":"ranger","dps":4182,"enemy_hp":13794,"level":45,"seconds":3.3}
+AUDIT {"boss_hp":116800,"class":"shadowblade","dps":2596,"enemy_hp":13794,"level":45,"seconds":5.3}
+AUDIT {"boss_hp":360671,"class":"knight","dps":8015,"enemy_hp":36604,"level":60,"seconds":4.6}
+AUDIT {"boss_hp":232195,"class":"mage","dps":5160,"enemy_hp":36604,"level":60,"seconds":7.1}
+AUDIT {"boss_hp":337645,"class":"ranger","dps":7503,"enemy_hp":36604,"level":60,"seconds":4.9}
+AUDIT {"boss_hp":233746,"class":"shadowblade","dps":5194,"enemy_hp":36604,"level":60,"seconds":7.0}
+AUDIT {"boss_hp":572035,"class":"knight","dps":12712,"enemy_hp":61974,"level":75,"seconds":4.9}
+AUDIT {"boss_hp":360370,"class":"mage","dps":8008,"enemy_hp":61974,"level":75,"seconds":7.7}
+AUDIT {"boss_hp":565178,"class":"ranger","dps":12560,"enemy_hp":61974,"level":75,"seconds":4.9}
+AUDIT {"boss_hp":362816,"class":"shadowblade","dps":8063,"enemy_hp":61974,"level":75,"seconds":7.7}
+AUDIT {"boss_hp":873684,"class":"knight","dps":19415,"enemy_hp":98572,"level":90,"seconds":5.1}
+AUDIT {"boss_hp":539212,"class":"mage","dps":11982,"enemy_hp":98572,"level":90,"seconds":8.2}
+AUDIT {"boss_hp":880428,"class":"ranger","dps":19565,"enemy_hp":98572,"level":90,"seconds":5.0}
+AUDIT {"boss_hp":567705,"class":"shadowblade","dps":12616,"enemy_hp":98572,"level":90,"seconds":7.8}
+AUDIT {"boss_hp":1241802,"class":"knight","dps":27596,"enemy_hp":149317,"level":105,"seconds":5.4}
+AUDIT {"boss_hp":755575,"class":"mage","dps":16791,"enemy_hp":149317,"level":105,"seconds":8.9}
+AUDIT {"boss_hp":1307040,"class":"ranger","dps":29045,"enemy_hp":149317,"level":105,"seconds":5.1}
+AUDIT {"boss_hp":788881,"class":"shadowblade","dps":17531,"enemy_hp":149317,"level":105,"seconds":8.5}
+AUDIT {"boss_hp":22411908,"class":"knight","dps":498042,"enemy_hp":4029797,"level":300,"seconds":8.1}
+AUDIT {"boss_hp":12648042,"class":"mage","dps":281068,"enemy_hp":4029797,"level":300,"seconds":14.3}
+AUDIT {"boss_hp":26867274,"class":"ranger","dps":597051,"enemy_hp":4029797,"level":300,"seconds":6.7}
+AUDIT {"boss_hp":13235505,"class":"shadowblade","dps":294122,"enemy_hp":4029797,"level":300,"seconds":13.7}
+RANGER burst=19985 regular_hp=17850.8905344
+SCREENSHOT corrected bow=(318.4261, 657.6191) crossbow=(706.649, 1068.004) DPS ratio=1.40482885652424
+[FAIL] test_balance_audit.gd — 5 tests, 3937 checks, 1 failures (1355.4 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":19,"hits_to_kill":3.5,"level":5,"skill_hit":36,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":55,"hits_to_kill":3.7,"level":10,"skill_hit":104,"weapon":"artisan_copperleaf_sword","weapon_max":40,"weapon_min":22}
+GROWTH {"class":"knight","enemy_hp":472,"hit":106,"hits_to_kill":4.5,"level":15,"skill_hit":202,"weapon":"duelist_sabre","weapon_max":51,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":270,"hits_to_kill":3.4,"level":20,"skill_hit":514,"weapon":"runed_sword","weapon_max":111,"weapon_min":72}
+GROWTH {"class":"knight","enemy_hp":1611,"hit":340,"hits_to_kill":4.7,"level":25,"skill_hit":647,"weapon":"depth_copperleaf_backsword","weapon_max":167,"weapon_min":90}
+GROWTH {"class":"knight","enemy_hp":3925,"hit":377,"hits_to_kill":10.4,"level":30,"skill_hit":716,"weapon":"artisan_split_crown_sword","weapon_max":179,"weapon_min":96}
+GROWTH {"class":"knight","enemy_hp":13794,"hit":950,"hits_to_kill":14.5,"level":45,"skill_hit":1804,"weapon":"depth_hollowfin_estoc","weapon_max":416,"weapon_min":226}
+GROWTH {"class":"knight","enemy_hp":36604,"hit":1792,"hits_to_kill":20.4,"level":60,"skill_hit":3405,"weapon":"depth_crownless_longsword","weapon_max":578,"weapon_min":312}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":42,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":65,"hits_to_kill":3.2,"level":10,"skill_hit":85,"weapon":"storm_staff","weapon_max":37,"weapon_min":22}
+GROWTH {"class":"mage","enemy_hp":472,"hit":178,"hits_to_kill":2.7,"level":15,"skill_hit":167,"weapon":"storm_staff","weapon_max":67,"weapon_min":39}
+GROWTH {"class":"mage","enemy_hp":920,"hit":268,"hits_to_kill":3.4,"level":20,"skill_hit":275,"weapon":"frost_staff","weapon_max":98,"weapon_min":59}
+GROWTH {"class":"mage","enemy_hp":1611,"hit":607,"hits_to_kill":2.7,"level":25,"skill_hit":435,"weapon":"depth_glowcap_crook","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"mage","enemy_hp":3925,"hit":784,"hits_to_kill":5.0,"level":30,"skill_hit":558,"weapon":"depth_tidal_forkstaff","weapon_max":218,"weapon_min":116}
+GROWTH {"class":"mage","enemy_hp":13794,"hit":1587,"hits_to_kill":8.7,"level":45,"skill_hit":1010,"weapon":"depth_thornseed_branchstaff","weapon_max":368,"weapon_min":199}
+GROWTH {"class":"mage","enemy_hp":36604,"hit":5513,"hits_to_kill":6.6,"level":60,"skill_hit":1685,"weapon":"depth_dawnspire_staff","weapon_max":705,"weapon_min":382}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":31,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":53,"hits_to_kill":3.9,"level":10,"skill_hit":100,"weapon":"composite_bow","weapon_max":49,"weapon_min":25}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":105,"hits_to_kill":4.5,"level":15,"skill_hit":199,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":199,"hits_to_kill":4.6,"level":20,"skill_hit":378,"weapon":"warden_longbow","weapon_max":147,"weapon_min":77}
+GROWTH {"class":"ranger","enemy_hp":1611,"hit":319,"hits_to_kill":5.1,"level":25,"skill_hit":606,"weapon":"depth_rootbend_shortbow","weapon_max":233,"weapon_min":114}
+GROWTH {"class":"ranger","enemy_hp":3925,"hit":443,"hits_to_kill":8.9,"level":30,"skill_hit":842,"weapon":"depth_saltwind_recurve","weapon_max":291,"weapon_min":139}
+GROWTH {"class":"ranger","enemy_hp":13794,"hit":845,"hits_to_kill":16.3,"level":45,"skill_hit":1605,"weapon":"depth_thornwing_bow","weapon_max":492,"weapon_min":239}
+GROWTH {"class":"ranger","enemy_hp":36604,"hit":2347,"hits_to_kill":15.6,"level":60,"skill_hit":4459,"weapon":"depth_dawnfeather_bow","weapon_max":948,"weapon_min":457}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.5,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":21,"hits_to_kill":9.8,"level":10,"skill_hit":40,"weapon":"shadow_kris","weapon_max":23,"weapon_min":12}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":62,"hits_to_kill":7.6,"level":15,"skill_hit":118,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":97,"hits_to_kill":9.5,"level":20,"skill_hit":185,"weapon":"aether_stiletto","weapon_max":64,"weapon_min":33}
+GROWTH {"class":"shadowblade","enemy_hp":1611,"hit":168,"hits_to_kill":9.6,"level":25,"skill_hit":320,"weapon":"depth_rootfang_skinner","weapon_max":108,"weapon_min":66}
+GROWTH {"class":"shadowblade","enemy_hp":3925,"hit":259,"hits_to_kill":15.2,"level":30,"skill_hit":491,"weapon":"depth_keelhook_knife","weapon_max":136,"weapon_min":79}
+GROWTH {"class":"shadowblade","enemy_hp":13794,"hit":461,"hits_to_kill":29.9,"level":45,"skill_hit":876,"weapon":"depth_briar_talon","weapon_max":230,"weapon_min":137}
+GROWTH {"class":"shadowblade","enemy_hp":36604,"hit":1340,"hits_to_kill":27.3,"level":60,"skill_hit":2546,"weapon":"depth_dawnthorn_knife","weapon_max":439,"weapon_min":266}
+[FAIL] test_combat_growth.gd — 6 tests, 134 checks, 7 failures (2146.8 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (267.5 ms)
+[FAIL] test_guilds.gd — 8 tests, 100 checks, 9 failures (42.5 ms)
+  FAIL test_balance_audit.test_ranger_burst_and_proc_scaling: level 49 optimized Ranger no longer reaches reported 48k burst
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: achievements earn rank 6 — expected , got Class S needs the opening story errands
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: one rank per promotion — expected 6, got 5
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: achievements earn rank 7 — expected , got Class S needs the opening story errands
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: one rank per promotion — expected 7, got 5
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: achievements earn rank 8 — expected , got Class S needs the opening story errands
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: one rank per promotion — expected 8, got 5
+  FAIL test_combat_growth.test_rank_requires_distinct_achievements: old saves retain earned ranks — expected 8, got 1
+  FAIL test_guilds.test_dialogue_conditions_and_placeholders: can promote with the required deeds
+  FAIL test_guilds.test_dialogue_conditions_and_placeholders: live values: Rest for 30. Next: Class D for 0. You are Class E — Iron Initiate.
+  FAIL test_guilds.test_promotion_requirements: promoted to D with orders and two jobs — expected , got Class D needs a proven deed: Complete the opening errands for Maelis, Hald, Aldric and Paul David
+  FAIL test_guilds.test_promotion_requirements: Class D — expected 2, got 1
+  FAIL test_guilds.test_promotion_requirements: D fee charged exactly — expected 99800, got 99950
+  FAIL test_guilds.test_promotion_requirements: not promoted without the deed — expected 2, got 1
+  FAIL test_guilds.test_promotion_requirements: promoted to C with the deed — expected , got Class D needs a proven deed: Complete the opening errands for Maelis, Hald, Aldric and Paul David
+  FAIL test_guilds.test_promotion_requirements: tier unchanged after a failed promotion — expected 3, got 1
+  FAIL test_guilds.test_tier_table: tier 2 costs more than 1
+TOTAL: 4231 checks, 17 failures

@@ -88,7 +88,7 @@ static func _aldric() -> NpcDef:
 						"Until we can, the outpost is a place to rest, to mend, to craft and to count heads. The Swordfin and the Lantern share this fire. Out here it does not matter which hall you signed at."],
 					"next": "hub"},
 				"tiers": {"text": [
-						"Level and deeds. Your guild hall in Malasugue registers each promotion for a fee. You are **{tier}** now; next is **{next_tier}**, which asks for level {promo_level} and this deed: {promo_deed_text}.",
+						"Level and deeds. Your rank rises automatically once every requirement is met; later ranks also deduct a registration fee. You are **{tier}** now; next is **{next_tier}**, which asks for level {promo_level} and this deed: {promo_deed_text}.",
 						"Gideon over there is Class B like me. Nell arrived last week, Class E, and has already set two tents on fire."],
 					"next": "hub"},
 				"services": {"text": "**Greggy** at the stall keeps supplies. **Greta** runs the field forge: she sells kit and lets you use the anvil. The **workbench** and **camp kettle** are free to anyone. **Ottilie** will see to your wounds by the fire.",

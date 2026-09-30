@@ -302,8 +302,8 @@ static func _registrar_graph(gid: StringName, who: String, intro: Array, perks: 
 			"promo_info": {"text": "**{next_tier}** needs level **{promo_level}**, a fee of **{promo_fee} gold**, and a proven deed: {promo_deed_text}. You are registered as {tier}.",
 				"next": "hub"},
 			"tiers": {"text": [
-					"Every hero starts **Unranked**. Registering makes you **Class E**. Then **D**, **C**, **B**, **A**, **S**, **SS**, and **SSS**, the rarest title in the Accord.",
-					"Each tier needs a minimum level and a fee, and from **C** to **A** a deed the whole guild can vouch for. In return you may carry better steel: **Licensed** gear at E, **Master** at D, **Mythical** at C, **Legendary** at B, **Aether** relics at A.",
+					"Every hero starts **Unranked**. Completing the opening errands earns **Class E**, or you can register early. Registered heroes earn **Class D** from those errands at level 2. Then **D**, **C**, **B**, **A**, **S**, **SS**, and **SSS**, the rarest title in the Accord.",
+					"Promotions are automatic once every requirement is met. Class D is free; later ranks require levels, recorded deeds and a registration fee. In return you may carry better steel: **Licensed** gear at E, **Master** at D, **Mythical** at C, **Legendary** at B, **Aether** relics at A.",
 					"Every step also carries the **Accord bonus**: +2% Maximum HP and +1% Damage. The tier is yours, not the guild's. Change guilds and you keep it."],
 				"next": "hub"},
 			"perks": {"text": perks, "next": "hub"},

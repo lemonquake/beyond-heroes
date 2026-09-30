@@ -1,8 +1,8 @@
 class_name DamagePipeline
 ## The single authoritative damage pipeline.
 ##
-## Base -> Attribute scaling -> Weapon modifier -> Skill modifier -> Element split/modifier -> Critical check
-## -> Offensive bonuses -> Target defense (armor, penetration) -> Target resistance (affinity, resistance,
+## Base -> Weapon/skill effectiveness -> Element split -> Shared increased damage -> Critical check
+## -> Explicit more bonuses -> Target defense (armor, penetration) -> Target resistance (affinity, resistance,
 ## penetration, immunity, absorption) -> Status modifiers -> Block -> Final (rounded) -> Impact / physics / buildup.
 ##
 ## Deterministic: all randomness comes from the RandomNumberGenerator passed in.
@@ -42,6 +42,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		r.dot_mult = 1.0 + atk.get_stat(&"dot_damage")
 	var atk_level := atk.level if atk != null else tgt.level
 	var st := req.target_status
+	var inherited := req.kind == DamageRequest.Kind.SPELL and (req.tags.has(&"proc") or req.tags.has(&"thorns"))
 	r.log_step("== %s (%s) ==" % [req.label, DamageRequest.Kind.keys()[req.kind]])
 
 	# 0. Evasion (weapon attacks only).
@@ -71,7 +72,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 
 	# 2. Attribute scaling.
 	var attr_scale := 0.0
-	if atk != null:
+	if atk != null and not inherited:
 		match req.kind:
 			DamageRequest.Kind.ATTACK: attr_scale = StatCalculator.attack_scaling(atk, req.hand) if req.use_weapon else atk.get_stat(&"phys_damage")
 			DamageRequest.Kind.SPELL:
@@ -79,12 +80,13 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 				# Reflections and percentage-of-hit/health procs already inherit the scaled source.
 				if not req.tags.has(&"proc") and not req.tags.has(&"thorns"):
 					base *= 1.0 + atk.get_stat(&"spell_power")
-	var dmg := base * (1.0 + attr_scale)
-	r.log_step("Attribute scaling +%.1f%% -> %.1f" % [attr_scale * 100.0, dmg])
+	var dmg := base
+	r.log_step("Attribute increase +%.1f%% joins the shared damage budget" % (attr_scale * 100.0))
 
 	# 3. Weapon modifier, 4. Skill modifier.
-	dmg *= req.weapon_mult
-	r.log_step("Weapon modifier x%.2f -> %.1f" % [req.weapon_mult, dmg])
+	var weapon_mult := CombatGrowth.weapon_effectiveness(req.weapon_mult) if req.kind == DamageRequest.Kind.ATTACK else req.weapon_mult
+	dmg *= weapon_mult
+	r.log_step("Weapon modifier x%.2f -> %.1f" % [weapon_mult, dmg])
 	dmg *= req.skill_mult
 	r.log_step("Skill modifier x%.2f -> %.1f" % [req.skill_mult, dmg])
 
@@ -103,22 +105,22 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		for e in Elements.ELEMENTAL:
 			var added := atk.get_stat(StringName("added_" + String(Elements.key(e))))
 			if added > 0.0:
-				_add(comp, e, added * lerpf(0.8, 1.2, rng.randf()) * req.weapon_mult * req.skill_mult)
+				_add(comp, e, added * lerpf(0.8, 1.2, rng.randf()) * weapon_mult * req.skill_mult)
 	elif req.conversion.is_empty():
 		_add(comp, Elements.PHYSICAL, dmg)
 	else:
 		for e in req.conversion:
 			_add(comp, int(e), dmg * float(req.conversion[e]))
-	if atk != null:
+	if atk != null and not inherited and req.kind != DamageRequest.Kind.DOT:
+		var increased := offensive_increase(req) + attr_scale
 		for e in comp.keys():
-			if e == Elements.PHYSICAL:
-				continue
-			var em := 1.0 + atk.get_stat(&"elemental_damage") + atk.get_stat(Elements.dmg_key(e))
+			var elemental := atk.get_stat(&"elemental_damage") + atk.get_stat(Elements.dmg_key(e)) if e != Elements.PHYSICAL else 0.0
+			var em := 1.0 + CombatGrowth.damage_increase(increased + elemental)
 			comp[e] *= em
 			r.log_step("%s modifier x%.2f -> %.1f" % [Elements.NAMES[e], em, comp[e]])
 
 	# 6. Critical check.
-	if req.can_crit and atk != null and req.kind != DamageRequest.Kind.DOT and req.kind != DamageRequest.Kind.IMPACT:
+	if req.can_crit and atk != null and not inherited and req.kind != DamageRequest.Kind.DOT and req.kind != DamageRequest.Kind.IMPACT:
 		var cc := clampf(atk.get_stat(&"crit_chance") + req.crit_bonus, 0.0, StatCalculator.CRIT_CAP)
 		var roll := rng.randf()
 		r.is_crit = req.force_crit or roll < cc
@@ -129,25 +131,14 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 			r.log_step("CRITICAL x%.2f -> %.1f" % [cm, _sum(comp)])
 
 	# 7. Offensive bonuses.
-	if atk != null and req.kind != DamageRequest.Kind.DOT:
-		var inc := atk.get_stat(&"damage") + req.bonus_inc
-		if req.kind == DamageRequest.Kind.ATTACK:
-			inc += atk.get_stat(&"weapon_damage")
-			if atk.loadout != null and atk.loadout.type_for(req.hand) != null:
-				inc += atk.get_stat(StringName("dmg_wt_" + String(atk.loadout.type_for(req.hand).id)))
-		if req.heavy:
-			inc += atk.get_stat(&"heavy_damage")
-		if req.kind == DamageRequest.Kind.IMPACT:
-			inc += atk.get_stat(&"impact_damage")
-		if req.tags.has(&"projectile"):
-			inc += atk.get_stat(&"projectile_damage")
-		_scale_all(comp, 1.0 + inc)
-		r.log_step("Increased damage +%.1f%% -> %.1f" % [inc * 100.0, _sum(comp)])
+	if atk != null and not inherited and req.kind != DamageRequest.Kind.DOT:
 		var od := atk.get_stat(&"outgoing_damage", 1.0)
 		if od != 1.0:
 			_scale_all(comp, od)
 			r.log_step("Damage dealt x%.2f (buffs/debuffs) -> %.1f" % [od, _sum(comp)])
 	for m in req.more:
+		if inherited and float(m[1]) > 1.0:
+			continue
 		_scale_all(comp, float(m[1]))
 		r.log_step("%s x%.2f -> %.1f" % [m[0], float(m[1]), _sum(comp)])
 	r.pre_mitigation = _sum(comp)
@@ -235,7 +226,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	if taken_mult != 1.0 and req.kind != DamageRequest.Kind.DOT:
 		_scale_all(comp, taken_mult)
 		r.log_step("Damage taken x%.2f -> %.1f" % [taken_mult, _sum(comp)])
-	if req.positional_mult != 1.0:
+	if req.positional_mult != 1.0 and not inherited:
 		_scale_all(comp, req.positional_mult)
 		r.log_step("Positional x%.2f" % req.positional_mult)
 
@@ -252,6 +243,16 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 				_scale_all(comp, 1.0 - bs)
 				r.blocked_amount = before - _sum(comp)
 				r.log_step("%s: %.0f%% prevented -> %.1f" % ["PARRY" if req.perfect_block else "BLOCK", bs * 100.0, _sum(comp)])
+
+	# Boss defenses apply to every source, including crits and inherited procs.
+	var boss_taken := tgt.get_stat(&"boss_damage_taken", 1.0)
+	if boss_taken != 1.0:
+		_scale_all(comp, boss_taken)
+		var before_guard := _sum(comp)
+		var limit := tgt.get_stat(&"boss_hit_limit", INF)
+		if before_guard > limit:
+			_scale_all(comp, limit / before_guard)
+		r.log_step("Boss defenses x%.2f; burst limit %.0f -> %.1f" % [boss_taken, limit, _sum(comp)])
 
 	# 12. Final damage.
 	var total := 0.0
@@ -352,3 +353,21 @@ static func _sum(comp: Dictionary) -> float:
 static func _debug(r: DamageResult) -> void:
 	if debug_enabled:
 		print(r.breakdown())
+
+## Shared by the hit pipeline and equipment previews.
+static func offensive_increase(req: DamageRequest) -> float:
+	var atk := req.attacker
+	if atk == null or req.kind == DamageRequest.Kind.DOT:
+		return 0.0
+	var inc := atk.get_stat(&"damage") + req.bonus_inc
+	if req.kind == DamageRequest.Kind.ATTACK:
+		inc += atk.get_stat(&"weapon_damage")
+		if atk.loadout != null and atk.loadout.type_for(req.hand) != null:
+			inc += atk.get_stat(StringName("dmg_wt_" + String(atk.loadout.type_for(req.hand).id)))
+	if req.heavy:
+		inc += atk.get_stat(&"heavy_damage")
+	if req.kind == DamageRequest.Kind.IMPACT:
+		inc += atk.get_stat(&"impact_damage")
+	if req.tags.has(&"projectile"):
+		inc += atk.get_stat(&"projectile_damage")
+	return inc

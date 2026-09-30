@@ -37,7 +37,7 @@ const CONTROLS := [
 const STEPS := [
 	["Speak to Elder Maelis", "She waits by the hearth, just down the Sanctuary Terrace, and has draughts for a new arrival."],
 	["Stock up", "Anton at the market sells draughts, salts and scrolls. Brannoc's forge by the east yard sells and makes weapons and armour."],
-	["Register as a hero", "The Swordfin Hall and the Lantern House register heroes. Your tier decides the finest gear you may wear; promotions need levels, fees and deeds."],
+	["Register as a hero", "The Swordfin Hall and the Lantern House register heroes. Your tier decides the finest gear you may wear; Complete the opening story errands to earn a rank. Later promotions happen automatically when all levels, fees and deeds are met."],
 	["Bind a second Tempo", "Veyra Ashgrave at the Shrine of the Fallen, east of the terrace stair. You can carry two Tempos."],
 	["Rest", "A night at the Salted Marlin restores you and your Tempos and leaves you Well Rested: more experience for a while."],
 	["Travel", "Waypoint shrines carry you between the places you have woken them in. The Map can track a route to any known place; follow the directions on the right of the screen."],
@@ -110,6 +110,9 @@ func _dungeons() -> void:
 		_para("%s  %s (%s) — levels %d–%d, %d floors. Gate: %s (%s). Lord: %s. %s" % [DataDungeons.tier_stars(id), d.name, DataDungeons.tier_name(id),
 			lr.x, lr.y, DungeonGrowth.total(Game.hero, id), gate.get("name", "?"), DB.map_def(StringName(d.surface.map)).display_name,
 			boss.display_name if boss else "?", DataDungeons.status_text(hero, id)], UITheme.GOLD if gone else UITheme.TEXT)
+	_heading("Damage and enemy progression")
+	_para("The level cap is 300. On a new visit, world enemies advance at levels 30, 45, 60 and every 15 levels after that. Bosses match your level and set their health from your build when the encounter is created. Their health does not change when you switch equipment during the fight. Bosses take 50% less damage and a single hit can remove at most 8% of their maximum health. Their level-based burst limit is 12,000 damage at level 49 and grows with level.")
+	_para("Damage increases add together, with diminishing returns above +200%. Critical damage is capped at 2.5 times normal damage. Weapon skills and charged attacks have diminishing returns above 200% weapon damage, approaching 250%. Dexterity powers bows, crossbows and javelins; Strength powers melee weapons.")
 	_heading("Dungeons as you grow")
 	_para("At Level 25, a passage opens below each defeated dungeon lord. More floors open at levels 35 and 45. Enemy levels catch up gradually over levels 25 to 35, and themed reinforcements join the camps. At Level 50, larger packs and elites with three abilities arrive; further floors open at 55 and 60. Your level is recorded when you enter: leveling inside never changes your current visit.")
 	_para("The added floors remain active during the original dungeon's recovery. Each has a named guardian among its Seal Keepers. Clear that pack to open its treasure; guardians can drop a relic for your class. New weapons have different shapes, attack speeds, elements and bonuses. Deeper encounters and chests provide class-specific equipment. Broken seals stay open, but treasure chests still need time to refill.")

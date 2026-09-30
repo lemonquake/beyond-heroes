@@ -6,6 +6,8 @@ you need is missing here, add it here first (and mark it **provisional** if the 
 
 ### Canon status
 
+- **Author correction — 30 September 2026:** the Holy War has three competing sides: **The Descendants**, **Humankind**, and **Forsaken Ones**. The campaign has four parts of seven main quests. **Kethrax is the boss of Main Quest 8**, after seven substantial main quests, with the player around **level 40+**; he is one strong enemy commander, not the final boss. Aljay, Roydo, and Paul David failed in their greater undertaking but gave humanity hope through their actions. Investigating Aljay is central to the player's journey. Paul David tells their story in **Quest 3**, and the player ranks up after that quest. **Only the author assigns further promotion quests.** These requirements supersede conflicting short-chapter pacing, unified-enemy assumptions, and implied promotion milestones below. The detailed **proposal**, including the assumption that Quest 8 opens Part 2, is [Main Quest Part 1 Roadmap](MAIN_QUEST_PART_1_ROADMAP.md). Its new faction explanations and story details remain provisional; this documentation update does not implement them in the game.
+
 - **Author canon** (given by Aljay Leodones): the world is **Jre**; it has **4 major islands**; **Salmonan** is one of
   them; the hero starts in **Malasugue Town** on Salmonan; heroes have tiers **E, D, C, B, A, S, SS, SSS**, each with
   its own emblem, where higher tiers need a minimum level and unlock features such as higher-tier equipment; heroes get

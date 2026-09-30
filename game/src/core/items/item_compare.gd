@@ -34,20 +34,33 @@ static func stats_with(hero: HeroData, equipment_slots: Dictionary) -> DerivedSt
 	return d
 
 static func _add_weapon_rows(d: DerivedStats) -> void:
-	var mn := d.get_stat(&"weapon_min")
-	var mx := d.get_stat(&"weapon_max")
-	var avg := (mn + mx) * 0.5 * (1.0 + StatCalculator.attack_scaling(d))
-	avg *= 1.0 + d.get_stat(&"damage") + d.get_stat(&"weapon_damage")
-	# Neutral target estimate: elemental resistance, armour and skill multipliers
-	# are encounter-specific and deliberately excluded from the comparison.
-	if d.loadout != null:
-		var share := d.loadout.main_elem_share
-		var bonus := d.get_stat(&"elemental_damage") + d.get_stat(Elements.dmg_key(d.loadout.main_element)) if share > 0.0 else 0.0
-		avg *= 1.0 + share * bonus
+	var avg := basic_hit(d, 0)
+	if d.loadout.dual_wield:
+		avg = (avg + basic_hit(d, 1)) * 0.5
 	d.values[&"weapon_avg"] = avg
 	var aps := d.get_stat(&"attacks_per_second")
-	var crit := clampf(d.get_stat(&"crit_chance"), 0.0, 1.0)
+	var crit := clampf(d.get_stat(&"crit_chance"), 0.0, StatCalculator.CRIT_CAP)
 	d.values[&"weapon_dps"] = avg * aps * (1.0 + crit * (d.get_stat(&"crit_damage", 1.5) - 1.0))
+
+static func basic_hit(d: DerivedStats, hand := 0) -> float:
+	var req := DamageRequest.new()
+	req.attacker = d
+	req.hand = hand
+	var wt := d.loadout.type_for(hand)
+	if wt != null and wt.ranged:
+		req.tags[&"projectile"] = true
+	var inc := DamagePipeline.offensive_increase(req) + StatCalculator.attack_scaling(d, hand)
+	var wr := StatCalculator.weapon_range(d, hand)
+	var base := (wr.x + wr.y) * 0.5
+	var share := d.loadout.elem_share_for(hand)
+	var element := d.loadout.element_for(hand)
+	var avg := base * (1.0 - share) * (1.0 + CombatGrowth.damage_increase(inc))
+	for e in Elements.ELEMENTAL:
+		var amount := d.get_stat(StringName("added_" + String(Elements.key(e))))
+		if e == element:
+			amount += base * share
+		avg += amount * (1.0 + CombatGrowth.damage_increase(inc + d.get_stat(&"elemental_damage") + d.get_stat(Elements.dmg_key(e))))
+	return avg * d.get_stat(&"outgoing_damage", 1.0)
 
 ## Comparison rows for equipping `item` into `slot` (default: auto slot). Only changed stats are returned.
 ## Each row: {key, name, before, after, delta, better, text_before, text_after}

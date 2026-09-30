@@ -65,6 +65,15 @@ func _load_anim_meta() -> void:
 			for k in ca:
 				if not anim_meta.has(k):
 					anim_meta[k] = ca[k]
+	# bh-023: the player's own clips on the hero body (hero_walk, hero_run ...): same schema, new names only
+	var hpath := "res://assets/characters/hero_meta.json"
+	if FileAccess.file_exists(hpath):
+		var h = JSON.parse_string(FileAccess.get_file_as_string(hpath))
+		if h is Dictionary:
+			var ha: Dictionary = h.get("animations", {})
+			for k in ha:
+				if not anim_meta.has(k):
+					anim_meta[k] = ha[k]
 
 func class_def(id: StringName) -> ClassDef:
 	return classes.get(id)

@@ -59,6 +59,7 @@ func _on_died(actor: Node, _killer: Node) -> void:
 	var id := e.def.id
 	var rec: Dictionary = Game.hero.miniboss_log.get(id, {"kills": 0, "at": 0.0})
 	Game.hero.miniboss_log[id] = {"kills": int(rec.kills) + 1, "at": Game.hero.play_time}
+	Game.hero.check_promotions()
 	if not Game.has_flag(DataDungeons.cleared_flag(dungeon)):
 		Game.set_world_flag(DataDungeons.cleared_flag(dungeon), true)
 	var raid := DataDungeons.record_raid(Game.hero, dungeon)

@@ -11,6 +11,7 @@ const LEVEL_EVASION := 2.0
 static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: Array, elite := false, boss := false) -> DerivedStats:
 	var d := DerivedStats.new()
 	d.level = level
+	d.set_stat(&"difficulty_hp", maxf(0.1, float(difficulty.get("hp", 1.0))))
 	d.loadout = WeaponLoadout.new()
 	d.affinity = def.affinity
 	var agg := StatCalculator.Aggregate.new()
@@ -26,7 +27,7 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	var scale := def.scaled(level)
 	var hp_mult := float(difficulty.get("hp", 1.0)) * (2.6 if elite else 1.0)
 	var dmg_mult := float(difficulty.get("damage", 1.0)) * (1.3 if elite else 1.0)
-	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level), 1.0)
+	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level) * CombatGrowth.enemy_health_bonus(level), 1.0)
 	_set_stat(d, agg, &"max_mana", 30.0 + level * 3.0, 0.0)
 	_set_stat(d, agg, &"defense", def.defense * (1.0 + LEVEL_DEFENSE * float(level - 1)), 0.0)
 	_set_stat(d, agg, &"evasion", def.evasion + LEVEL_EVASION * float(level - 1), 0.0)
@@ -44,7 +45,10 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	_set_stat(d, agg, &"impact_strength", 1.0, 0.1)
 	_set_stat(d, agg, &"block_chance", 0.0, 0.0, 0.9)
 	_set_stat(d, agg, &"block_strength", 0.7 if def.blocks_front else 0.4, 0.0, 1.0)
-	d.set_stat(&"damage_mult", dmg_mult * scale)
+	if boss:
+		d.set_stat(&"boss_damage_taken", CombatGrowth.BOSS_DAMAGE_TAKEN)
+		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level)))
+	d.set_stat(&"damage_mult", dmg_mult * scale * CombatGrowth.enemy_damage_bonus(level))
 	d.set_stat(&"phys_res_flat", agg.flat(&"phys_res"))
 	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))
 	d.set_stat(&"outgoing_damage", maxf(0.05, od))
@@ -70,3 +74,32 @@ static func _set_stat(d: DerivedStats, agg: StatCalculator.Aggregate, k: StringN
 static func attack_range(def: EnemyDef, stats: DerivedStats, mult: float) -> Vector2:
 	var m := stats.get_stat(&"damage_mult", 1.0) * mult
 	return Vector2(def.damage_min * m, def.damage_max * m)
+
+## A persistent build snapshot gives roughly 25-45 seconds of basic attacking
+## before defenses, movement and skill use. No in-combat rubber-banding.
+static func boss_health(hero: HeroData, baseline: DerivedStats) -> float:
+	var stats := hero.compute_stats()
+	ItemCompare._add_weapon_rows(stats)
+	var dps := stats.get_stat(&"weapon_dps")
+	var burst := ItemCompare.basic_hit(stats) * stats.get_stat(&"crit_damage", 1.5)
+	for id in hero.learned_skills():
+		var skill := DB.skill(id)
+		var params := hero.resolved_skill(id)
+		if skill == null or not params.has("damage_min") or skill.kind != DamageRequest.Kind.SPELL:
+			continue
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL
+		req.attacker = stats
+		req.target = DerivedStats.new()
+		req.base_min = float(params.damage_min)
+		req.base_max = float(params.get("damage_max", req.base_min))
+		req.conversion = {skill.element: 1.0}
+		var hit := float(DamagePipeline.preview(req).total)
+		var interval := maxf(1.0 / stats.get_stat(&"cast_speed", 1.0), skill.cooldown * (1.0 - stats.get_stat(&"cdr")))
+		dps = maxf(dps, hit / interval)
+		burst = maxf(burst, hit * stats.get_stat(&"crit_damage", 1.5))
+	var difficulty_hp := baseline.get_stat(&"difficulty_hp", 1.0)
+	dps *= CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp
+	burst *= CombatGrowth.BOSS_DAMAGE_TAKEN
+	var reference_dps := CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp * (9.0 + 1.9 * baseline.level) * CombatGrowth.weapon_factor(baseline.level) * (1.0 + CombatGrowth.damage_increase(baseline.level * 0.04)) * 1.5
+	return maxf(reference_dps * 20.0, maxf(burst * 4.0, clampf(baseline.get_stat(&"max_hp"), dps * 25.0, dps * 45.0)))

@@ -175,7 +175,7 @@ static func relic_items(tier: int, level: int, rng: RandomNumberGenerator, magic
 static func _roll_affixes(it: ItemInstance, n: int, bias: int, min_roll: float, rng: RandomNumberGenerator) -> void:
 	var pool: Array = []
 	for a in DB.affixes_for(it.base.category):
-		if it.rarity >= a.min_rarity:
+		if it.rarity >= a.min_rarity and affix_fits(it.base, a):
 			pool.append(a)
 	var used_groups := {}
 	var attempts := 0
@@ -220,7 +220,7 @@ static func _pick_license(base: ItemBaseDef, rng: RandomNumberGenerator) -> Stri
 	var ids := []
 	for id in DB.licenses:
 		var cats: Array = DB.licenses[id].get("categories", [])
-		if cats.is_empty() or cats.has(base.category):
+		if (cats.is_empty() or cats.has(base.category)) and license_fits(base, DB.licenses[id]):
 			ids.append(id)
 	ids.sort()
 	if ids.is_empty():
@@ -230,7 +230,7 @@ static func _pick_license(base: ItemBaseDef, rng: RandomNumberGenerator) -> Stri
 static func _add_power(it: ItemInstance, tier: StringName, rng: RandomNumberGenerator) -> void:
 	var pool := []
 	for p in DB.powers_for(it.base.category):
-		if p.tier == tier and not it.powers.has(String(p.id)):
+		if p.tier == tier and not it.powers.has(String(p.id)) and power_fits(it.base, p):
 			pool.append(p)
 	if pool.is_empty():
 		return
@@ -388,3 +388,78 @@ static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool
 			return null
 	pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
 	return pool[rng.randi_range(0, pool.size() - 1)]
+
+## Neutral equipment supports hybrid builds. Class-labelled gear must support
+## its intended class; elemental stats remain valid for converted attacks.
+static func affix_fits(base: ItemBaseDef, affix: AffixDef) -> bool:
+	var cls := base.class_hint
+	if cls == &"":
+		return true
+	if cls != &"mage" and affix.stat in [&"int", &"magic_damage", &"cast_speed"]:
+		return false
+	if cls == &"mage" and affix.stat in [&"str", &"heavy_damage", &"impact_strength", &"pen_armor"]:
+		return false
+	if cls == &"knight" and affix.stat in [&"projectile_damage", &"focus_gain", &"trap_damage"]:
+		return false
+	if base.is_weapon() and String(affix.stat).begins_with("dmg_") and base.element != Elements.PHYSICAL:
+		return affix.stat == Elements.dmg_key(base.element)
+	return true
+
+static func power_fits(base: ItemBaseDef, power: LegendaryPowerDef) -> bool:
+	return base.class_hint == &"" or power.class_hint == &"" or base.class_hint == power.class_hint
+
+## One-time repair of existing rolls. Keep roll quality, masterwork, number of
+## affixes, identity and player upgrades. Deterministic; no new loot roll.
+static func migrate_balance(it: ItemInstance, version: int) -> void:
+	if version >= 1:
+		return
+	if it.license != &"" and not license_fits(it.base, DB.licenses.get(it.license, {})):
+		var random := RandomNumberGenerator.new()
+		random.seed = it.seed_value
+		it.license = _pick_license(it.base, random)
+	var groups := {}
+	for a in it.affixes:
+		var af := DB.affix(StringName(a.id))
+		if af != null and affix_fits(it.base, af):
+			groups[af.group] = true
+	for a in it.affixes:
+		var af := DB.affix(StringName(a.id))
+		if af == null:
+			continue
+		var tier := clampi(int(a.tier), 0, af.tiers.size() - 1)
+		var old: Array = af.tiers[tier]
+		if af.id == &"local_phys":
+			old = [[1, 0.15, 0.30], [10, 0.30, 0.50], [20, 0.50, 0.75], [35, 0.75, 1.0]][tier]
+		var fraction := clampf(inverse_lerp(float(old[1]), float(old[2]), float(a.value)), 0.0, 1.0) if float(old[2]) > float(old[1]) else 1.0
+		if not affix_fits(it.base, af):
+			var pool := DB.affixes_for(it.base.category).filter(func(candidate): return affix_fits(it.base, candidate) and not groups.has(candidate.group) and not candidate.allowed_tiers(it.ilvl).is_empty() and it.rarity >= candidate.min_rarity)
+			pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
+			if pool.is_empty():
+				continue
+			af = pool[posmod(hash("%s/%s/%d" % [it.base.id, a.id, it.seed_value]), pool.size())]
+			var allowed := af.allowed_tiers(it.ilvl)
+			tier = allowed[mini(tier, allowed.size() - 1)]
+			groups[af.group] = true
+		elif af.id != &"local_phys":
+			continue
+		var bounds: Array = af.tiers[tier]
+		var value := lerpf(float(bounds[1]), float(bounds[2]), 1.0 if a.get("mw", false) else fraction)
+		a.id = String(af.id)
+		a.tier = tier
+		a.value = roundf(value) if af.integer else snappedf(value, 0.001)
+	for i in it.powers.size():
+		var power := DB.power(StringName(it.powers[i]))
+		if power == null or power_fits(it.base, power) or it.base.fixed_powers.has(power.id):
+			continue
+		var pool := DB.powers_for(it.base.category).filter(func(candidate): return candidate.tier == power.tier and power_fits(it.base, candidate) and not it.powers.has(String(candidate.id)))
+		pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
+		if not pool.is_empty():
+			it.powers[i] = String(pool[posmod(hash("%s/%s/%d" % [it.base.id, power.id, it.seed_value]), pool.size())].id)
+
+static func license_fits(base: ItemBaseDef, license: Dictionary) -> bool:
+	for m in license.get("mods", []):
+		var affix := AffixDef.new()
+		affix.stat = StringName(m[0])
+		if not affix_fits(base, affix):
+			return false
+	return true

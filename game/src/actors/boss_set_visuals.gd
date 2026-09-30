@@ -372,12 +372,32 @@ static func _merge(root: Node3D) -> void:
 		mi.material_override = mat
 		root.add_child(mi)
 
-static func wear(visual: Node3D, equipment: Equipment) -> Array[Node3D]:
+## bh-023: the regalia was modelled around the armoured class bodies; the hero's own body is a real person's size,
+## so each piece is scaled (x across, y along the body or limb, z front to back) and shifted to sit on it.
+const HERO_FIT := {
+	"helm": [Vector3(0.74, 0.78, 0.80), Vector3(0.0, -0.095, 0.035)],
+	"armor": [Vector3(0.80, 0.98, 0.74), Vector3(0.0, 0.0, -0.005)],
+	"inner_garment": [Vector3(0.90, 1.0, 0.86), Vector3(0.0, 0.0, -0.01)],
+	"gloves": [Vector3(0.84, 1.0, 0.84), Vector3.ZERO],
+	"boots": [Vector3(0.82, 1.0, 0.82), Vector3.ZERO],
+	"accessory_3": [Vector3.ONE, Vector3(0.0, 0.0, -0.10)],
+	"accessory_4": [Vector3.ONE, Vector3(0.05, -0.02, -0.07)],
+}
+
+static func _hero_fit(slot: String) -> Transform3D:
+	var key := slot
+	if slot.begins_with("gloves") or slot.begins_with("boots"):
+		key = slot.left(slot.length() - 2)
+	if not HERO_FIT.has(key):
+		return Transform3D.IDENTITY
+	return Transform3D(Basis.from_scale(HERO_FIT[key][0]), HERO_FIT[key][1])
+
+static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm := false) -> Array[Node3D]:
 	var result: Array[Node3D] = []
 	var skeleton: Skeleton3D = visual.skeleton
 	if not skeleton: return result
 	for slot in SLOTS:
-		if slot == "main_weapon": continue
+		if slot == "main_weapon" or (slot == "helm" and skip_helm): continue
 		var item := equipment.get_item(StringName(slot))
 		if item == null or not has_theme(item.base.set_id): continue
 		var id := String(item.base.set_id)
@@ -406,6 +426,8 @@ static func wear(visual: Node3D, equipment: Equipment) -> Array[Node3D]:
 		ba.name = "Set_" + slot
 		ba.bone_name = bone
 		skeleton.add_child(ba)
+		if hero:
+			target = Transform3D(target.basis, target.origin + _hero_fit(slot).origin) * Transform3D(_hero_fit(slot).basis, Vector3.ZERO)
 		var piece := _worn_piece(id, slot, item.base.model_path())
 		ba.add_child(piece)
 		piece.transform = rest.affine_inverse() * target

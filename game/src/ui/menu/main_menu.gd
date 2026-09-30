@@ -26,6 +26,7 @@ var _byline: Label
 var wait_intro := false
 
 const CENTER := Vector3(0, 1.4, 4.0)
+const MENU_LOOKS := {&"knight": "veteran", &"mage": "scholar", &"ranger": "wanderer", &"shadowblade": "shade"}
 
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -171,12 +172,16 @@ func build_backdrop(world: Node3D) -> void:
 			continue
 		var v := CharacterVisual.new()
 		backdrop.add_child(v)
-		v.setup(cls.model_path, 1.0, cls.tint, cls.id)
+		# bh-023: the four by the fountain are heroes like the player's: one body, a face each, their starting kit
+		v.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else cls.model_path, 1.0, cls.tint, cls.id)
+		v.set_look(HeroLook.preset(MENU_LOOKS.get(pair[0], "plain")))
 		v.position = pair[1]
 		v.rotation_degrees.y = pair[2]
 		var eq := Equipment.new()
 		for bid in cls.starting_items:
 			var it := DB.make_item(bid, BH.Rarity.BEGINNER, 1, 1)
+			if it and not it.base.is_weapon() and it.base.category != &"shield":
+				eq.slots[eq.auto_slot(it)] = it
 			if it and it.base.is_weapon():
 				var wt := DB.weapon_type(it.base.weapon_type)
 				if wt:
@@ -185,6 +190,7 @@ func build_backdrop(world: Node3D) -> void:
 			elif it and it.base.category == &"shield":
 				v.attach_weapon(&"off", "res://assets/weapons/shield.glb")
 				v.set_stance(&"idle_shield" if v.has_anim(&"idle_shield") else &"idle")
+		v.dress_equipment(eq)
 		_heroes.append(v)
 	# drifting embers and aether motes
 	backdrop.add_child(_particles(UIArt.tex("hud/ember.png"), Color(1.0, 0.65, 0.3), 90, Vector3(0, 0.6, 0), 0.16))

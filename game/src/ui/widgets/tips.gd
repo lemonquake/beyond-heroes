@@ -432,10 +432,23 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 	if params.has("damage_min") and params.has("damage_max"):
 		extra.append("Base damage %d – %d (scales with %s)" % [roundi(params.damage_min), roundi(params.damage_max),
 			"Intelligence" if s.kind == DamageRequest.Kind.SPELL else "your weapon"])
+	if params.has("weapon_pct"):
+		extra.append("Weapon effectiveness above 200% has diminishing returns, approaching 250%; includes Focus and charge bonuses.")
 	if hero and s.kind == DamageRequest.Kind.SPELL and params.has("damage_min") and params.has("damage_max"):
 		var stats := hero.compute_stats()
-		var scale := (1.0 + stats.get_stat(&"spell_power")) * (1.0 + stats.get_stat(&"magic_damage"))
-		extra.append("After spell power and Intelligence: %d – %d, before elements and target resistance" % [roundi(float(params.damage_min) * scale), roundi(float(params.damage_max) * scale)])
+		var request := DamageRequest.new()
+		request.kind = DamageRequest.Kind.SPELL
+		request.attacker = stats
+		request.target = DerivedStats.new()
+		request.conversion = s.conversion.duplicate() if not s.conversion.is_empty() else {s.element: 1.0}
+		request.bonus_inc = float(params.get("syn_pct", 0.0)) / 100.0
+		request.base_min = float(params.damage_min)
+		request.base_max = request.base_min
+		var low := DamagePipeline.preview(request).total
+		request.base_min = float(params.damage_max)
+		request.base_max = request.base_min
+		var high := DamagePipeline.preview(request).total
+		extra.append("With equipment and attributes: %d - %d damage before critical hits, class resources and target defenses." % [low, high])
 	if params.has("range"):
 		extra.append("Range %s m" % StatDefs._num(float(params.range)))
 	if params.has("radius"):

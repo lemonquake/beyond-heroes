@@ -13,6 +13,28 @@ var _drag := false
 var _yaw := 0.0
 var _yaw_vel := 0.0
 var _class_id: StringName = &""
+## bh-023: the look shown when no live hero is given (hero selection, the creator).
+var look := {}
+## bh-023: dress nothing (the creator's "gear off" view), and hold still while the creator plays a pose.
+var bare := false
+var hold_fidgets := false
+## The creator's close-up: leave the helm off so the face can be seen (the hero's own "show helm" choice is kept).
+var no_helm := false
+var _hero: HeroData
+var _key: DirectionalLight3D
+var _rim: OmniLight3D
+var _fill: OmniLight3D
+var _under: OmniLight3D
+
+## bh-023: bare skin under the plinth's strong aether rim reads as glass; a hero's own body gets a softer rig.
+func _light_for_hero(on: bool) -> void:
+	if _rim == null:
+		return
+	_rim.light_energy = 1.0 if on else 2.4
+	_under.light_energy = 0.3 if on else 0.9
+	_fill.light_energy = 1.0 if on else 0.8
+	_fill.light_color = Color(1.0, 0.86, 0.74) if on else Color(0.75, 0.62, 1.0)
+	_key.light_energy = 1.15 if on else 1.25
 var _fidget_t := 6.0
 var _pixel := Vector2i(512, 640)
 
@@ -51,24 +73,28 @@ func _ready() -> void:
 	key.rotation_degrees = Vector3(-35, 35, 0)
 	key.shadow_enabled = true
 	world.add_child(key)
+	_key = key
 	var rim := OmniLight3D.new()
 	rim.light_color = Color(0.5, 0.92, 1.0)
 	rim.light_energy = 2.4
 	rim.omni_range = 6.0
 	rim.position = Vector3(-1.2, 2.4, -1.6)
 	world.add_child(rim)
+	_rim = rim
 	var fill := OmniLight3D.new()
 	fill.light_color = Color(0.75, 0.62, 1.0)
 	fill.light_energy = 0.8
 	fill.omni_range = 7.0
 	fill.position = Vector3(1.8, 1.2, 2.2)
 	world.add_child(fill)
+	_fill = fill
 	var under := OmniLight3D.new()
 	under.light_color = Color(0.45, 0.95, 1.0)
 	under.light_energy = 0.9
 	under.omni_range = 2.2
 	under.position = Vector3(0, 0.15, 0.4)
 	world.add_child(under)
+	_under = under
 	# plinth: dark stone disc with an aether ring
 	var plinth := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
@@ -112,18 +138,41 @@ func _on_resized() -> void:
 	if viewport and not stretch:
 		viewport.size = Vector2i(maxi(64, int(size.x * 2.0)), maxi(64, int(size.y * 2.0)))
 
+## bh-023: what the camera frames: the height it looks at and how far back it stands (the creator moves in on the
+## face). `focus()` glides there.
+var focus_height := 1.02
+var focus_dist := 5.2
+var _focus_tw: Tween
+
 func _place_camera() -> void:
-	var h := 1.02
-	var dist := 5.2 / zoom
-	camera.position = Vector3(0, h + 0.25, dist)
-	camera.look_at(Vector3(0, h - 0.05, 0))
+	var h := focus_height
+	var dist := focus_dist / zoom
+	camera.position = Vector3(0, h + 0.25 * focus_dist / 5.2, dist)
+	camera.look_at(Vector3(0, h - 0.05 * focus_dist / 5.2, 0))
+
+func focus(height: float, dist: float, time := 0.35) -> void:
+	if _focus_tw:
+		_focus_tw.kill()
+	if time <= 0.0 or not is_inside_tree():
+		focus_height = height
+		focus_dist = dist
+		_place_camera()
+		return
+	_focus_tw = create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_focus_tw.tween_method(func(v: float) -> void:
+		focus_height = v
+		_place_camera(), focus_height, height, time)
+	_focus_tw.tween_property(self, "focus_dist", dist, time)
 
 ## Show a hero class (hero select) or a live hero (character/inventory). `hero` may be null.
 func show_class(class_id: StringName, hero: HeroData = null) -> void:
 	var cls := DB.class_def(class_id)
 	if cls == null:
 		return
+	if hero:
+		look = hero.look
 	if visual and _class_id == class_id:
+		visual.set_look(look)
 		dress(hero)
 		return
 	_class_id = class_id
@@ -131,18 +180,35 @@ func show_class(class_id: StringName, hero: HeroData = null) -> void:
 		visual.queue_free()
 	visual = CharacterVisual.new()
 	pivot.add_child(visual)
-	visual.setup(cls.model_path, 1.0, cls.tint, cls.id)
+	visual.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else cls.model_path, 1.0, cls.tint, cls.id)
+	visual.set_look(look)
+	_light_for_hero(visual.hero != null)
 	visual.set_stance(&"idle")
 	dress(hero)
 	_fidget_t = 2.5
+
+## bh-023: change the look of the hero on the plinth (the creator calls this on every slider movement).
+func set_look(p_look: Dictionary) -> void:
+	look = p_look
+	if visual:
+		var helm_before := bool(visual.hero.look.get("show_helm", true)) if visual.hero else true
+		visual.set_look(look)
+		if visual.hero and bool(visual.hero.look.get("show_helm", true)) != helm_before:
+			dress(_hero)
 
 ## Attach the weapons the hero (or, without a hero, the class's starting kit) holds.
 func dress(hero: HeroData) -> void:
 	if visual == null:
 		return
+	_hero = hero
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
-	var eq := hero.equipment if hero else _starting_equipment()
+	var eq := Equipment.new() if bare else (hero.equipment if hero else _starting_equipment())
+	if no_helm and eq.get_item(&"helm") != null:
+		var shown := Equipment.new()
+		for s in eq.slots:
+			shown.slots[s] = eq.slots[s] if s != &"helm" else null
+		eq = shown
 	visual.dress_equipment(eq)
 	var lo := eq.loadout()
 	var main := eq.get_item(&"main_weapon")
@@ -223,7 +289,7 @@ func _process(delta: float) -> void:
 		_yaw_vel = lerpf(_yaw_vel, 0.0, 1.0 - exp(-3.0 * delta))
 	pivot.rotation.y = _yaw
 	_fidget_t -= delta
-	if _fidget_t <= 0.0 and not visual.is_busy():
+	if _fidget_t <= 0.0 and not visual.is_busy() and not hold_fidgets:
 		_fidget_t = randf_range(6.0, 10.0)
 		var opts: Array = [&"idle_look", &"idle_adjust", StringName("idle_%s" % _class_id)].filter(func(a): return visual.has_anim(a))
 		if not opts.is_empty():

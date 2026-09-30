@@ -73,7 +73,9 @@ var _rng := RandomNumberGenerator.new()
 
 static var _overlay_shader: Shader
 ## Networking (bh-008): what this visual looks like and which action it plays, so another machine can mirror it.
-var appearance := {}                        # model, scale, tint, pers, weapons {hand: [path, offset]}
+var appearance := {}                        # model, scale, tint, pers, weapons {hand: [path, offset]}, look (heroes)
+## bh-023: set when the model is the hero's own body (HeroLook.MODEL): the look and the worn equipment live there.
+var hero: HeroBody
 var action_serial := 0                      # bumps on every new action (the same clip twice still restarts remotely)
 var action_rate := 1.0
 
@@ -104,11 +106,49 @@ func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE,
 	_collect_meshes(model)
 	MaterialLibrary.apply_character(_meshes, primary_tint)
 	_setup_overlay()
-	ground_speed_walk = float(DB.anim(&"walk").get("ground_speed", 1.6)) * scale_factor
-	ground_speed_run = float(DB.anim(&"run").get("ground_speed", 5.0)) * scale_factor
+	_set_ground_speeds(scale_factor)
+	_fidget_at = _rng.randf_range(7.0, 12.0)
+	if HeroBody.is_hero(model_path) and not fallback:
+		hero = HeroBody.new(self)
+		if not hero.ok():
+			hero = null
+
+func _set_ground_speeds(scale_factor: float) -> void:
+	ground_speed_walk = float(DB.anim(_loco_clip(&"walk")).get("ground_speed", 1.6)) * scale_factor
+	ground_speed_run = float(DB.anim(_loco_clip(&"run")).get("ground_speed", 5.0)) * scale_factor
 	ground_speed_strafe = float(DB.anim(&"strafe_l").get("ground_speed", 3.2)) * scale_factor
 	ground_speed_back = float(DB.anim(&"walk_back").get("ground_speed", 1.8)) * scale_factor
-	_fidget_at = _rng.randf_range(7.0, 12.0)
+
+## bh-023: the hero walks and runs with the player's own clips out of combat (they ship in hero.glb).
+func _loco_clip(n: StringName) -> StringName:
+	var own := StringName("hero_" + String(n))
+	return own if has_anim(own) else n
+
+## bh-023: a hero's look (HeroLook). Ignored by every other model.
+func set_look(look: Dictionary) -> void:
+	if hero == null:
+		return
+	hero.apply(look)
+	appearance["look"] = HeroLook.to_save(hero.look)
+
+## Overall size of the model (the hero's height slider); keeps the gait speeds in step with the leg length.
+func set_model_scale(s: float) -> void:
+	model_scale = s
+	if model:
+		model.scale = Vector3.ONE * s
+	_set_ground_speeds(s)
+
+## A mesh added after setup (hair, worn equipment) joins the hit flash, the character layer and stealth.
+func adopt_mesh(m: MeshInstance3D) -> void:
+	m.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	m.layers = 2
+	m.material_overlay = _overlay
+	if not _meshes.has(m):
+		_meshes.append(m)
+
+func release_mesh(m: MeshInstance3D) -> void:
+	_meshes.erase(m)
+	_local_mats.erase(m)
 
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:
@@ -140,6 +180,21 @@ func has_anim(n: StringName) -> bool:
 		return false
 	return anim_player.has_animation(n)
 
+## bh-023: clips this character plays in place of others (a hero's great axe heavy is the player's own axe smash).
+## The replacement is authored to the same length and strike moment, so gameplay timing keeps using the original's.
+var clip_alias := {}
+
+## The clip to play for a name: the importer drops a "_loop" suffix ("block_loop" arrives as "block").
+func _clip(n: StringName) -> StringName:
+	if clip_alias.has(n) and has_anim(clip_alias[n]):
+		return clip_alias[n]
+	if has_anim(n):
+		return n
+	var s := String(n)
+	if s.ends_with("_loop") and has_anim(StringName(s.trim_suffix("_loop"))):
+		return StringName(s.trim_suffix("_loop"))
+	return &"idle"
+
 ## First available name from a preference list (lets data ask for "sword_4" and fall back to "sword_1").
 func pick(names: Array) -> StringName:
 	for n in names:
@@ -151,7 +206,7 @@ func pick(names: Array) -> StringName:
 
 func _anim_node(n: StringName) -> AnimationNodeAnimation:
 	var a := AnimationNodeAnimation.new()
-	a.animation = n if has_anim(n) else &"idle"
+	a.animation = _clip(n)
 	return a
 
 func _bs(points: Array) -> AnimationNodeBlendSpace2D:
@@ -175,7 +230,7 @@ func _build_tree() -> void:
 	tree.anim_player = tree.get_path_to(anim_player)
 	tree.root_node = anim_player.root_node
 	var root := AnimationNodeBlendTree.new()
-	var relaxed := _bs([[&"idle", Vector2.ZERO], [&"walk", Vector2(0, 1)], [&"run", Vector2(0, 2)], [&"walk_back", Vector2(0, -1)],
+	var relaxed := _bs([[&"idle", Vector2.ZERO], [_loco_clip(&"walk"), Vector2(0, 1)], [_loco_clip(&"run"), Vector2(0, 2)], [&"walk_back", Vector2(0, -1)],
 		[&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)]])
 	var combat := _bs([[_stance_idle, Vector2.ZERO], [&"walk", Vector2(0, 1)], [&"run_combat", Vector2(0, 2)],
 		[&"walk_back", Vector2(0, -1)], [&"walk_back", Vector2(0, -2)], [&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)],
@@ -477,6 +532,8 @@ func _play_fidget() -> void:
 	_idle_time = 0.0
 	_fidget_at = _rng.randf_range(9.0, 16.0)
 	var set_: Array = FIDGETS.get(personality, [&"idle_look", &"idle_adjust"])
+	if hero and has_anim(&"hero_alert"):
+		set_ = set_ + [&"hero_alert"]              # the player's own idle: a wary look around
 	var n: StringName = set_[_rng.randi_range(0, set_.size() - 1)]
 	if has_anim(n):
 		play_action(n, 1.0, 0.35)
@@ -485,7 +542,7 @@ func is_busy() -> bool:
 	return _in_action and not _is_fidget()
 
 func _is_fidget() -> bool:
-	return _action in [&"idle_look", &"idle_adjust", &"idle_knight", &"idle_mage"]
+	return _action in [&"idle_look", &"idle_adjust", &"idle_knight", &"idle_mage", &"idle_ranger", &"idle_shadowblade", &"hero_alert"]
 
 ## Cancel a fidget when the owner starts moving or fighting.
 func interrupt_fidget() -> void:
@@ -534,7 +591,7 @@ func _start_slot(n: StringName, rate: float, blend: float) -> void:
 	action_rate = rate
 	_slot = &"b" if _slot == &"a" else &"a"
 	var node := _root().get_node(StringName("anim_" + String(_slot))) as AnimationNodeAnimation
-	node.animation = n if has_anim(n) else &"idle"
+	node.animation = _clip(n)
 	tree.set("parameters/%s_ts/scale" % _slot, rate)
 	_request(_slot, blend)
 
@@ -558,7 +615,7 @@ func set_upper(n: StringName, rate := 1.0) -> void:
 		return
 	if n != _upper_anim:
 		_upper_anim = n
-		(_root().get_node(&"upper_anim") as AnimationNodeAnimation).animation = n if has_anim(n) else &"idle"
+		(_root().get_node(&"upper_anim") as AnimationNodeAnimation).animation = _clip(n)
 	tree.set("parameters/upper_ts/scale", rate)
 	_upper_target = 1.0
 
@@ -677,6 +734,14 @@ func dress_equipment(equipment: Equipment) -> void:
 			parts.append("%s:%s" % [slot,item.base.id])
 			worn[slot] = String(item.base.id)
 	var signature := ",".join(parts)
+	if hero:
+		# a hero wears everything: the fitted models of plain gear (HeroWear) and the regalia of the boss collections
+		for slot in HeroWear.SLOTS:
+			var piece := equipment.get_item(slot)
+			if piece:
+				worn[slot] = String(piece.base.id)
+		hero.dress(equipment)
+		signature += "|helm" if bool(hero.look.get("show_helm", true)) else "|bare"
 	appearance["set_gear"] = worn
 	if signature == _set_appearance:
 		return
@@ -686,7 +751,8 @@ func dress_equipment(equipment: Equipment) -> void:
 			if not is_instance_valid(mesh) or old.is_ancestor_of(mesh): _meshes.erase(mesh)
 		old.get_parent().remove_child(old)
 		old.queue_free()
-	_set_nodes = preload("res://src/actors/boss_set_visuals.gd").wear(self,equipment)
+	_set_nodes = preload("res://src/actors/boss_set_visuals.gd").wear(self, equipment, hero != null,
+		hero != null and not bool(hero.look.get("show_helm", true)))
 	for attachment in _set_nodes:
 		var meshes: Array[MeshInstance3D] = []
 		_collect_into(attachment,meshes)
@@ -915,13 +981,16 @@ func _ensure_local_materials() -> void:
 	if not _local_mats.is_empty():
 		return
 	for m in _meshes:
-		if not is_instance_valid(m) or m.mesh == null:
-			continue
+		if not is_instance_valid(m) or m.mesh == null or m.material_override is ShaderMaterial:
+			continue                                   # (hero hair has its own material, driven through HeroBody)
 		var arr: Array = []
 		for i in m.mesh.get_surface_count():
 			var src := m.get_surface_override_material(i)
 			if src == null:
 				src = m.mesh.surface_get_material(i)
+			if src is ShaderMaterial:
+				arr.append(src)                        # the hero's skin: already one per hero, driven through HeroBody
+				continue
 			var c: Material = src.duplicate() if src else StandardMaterial3D.new()
 			if c is BaseMaterial3D:
 				(c as BaseMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_HASH
@@ -940,10 +1009,23 @@ func set_opacity(a: float) -> void:
 		for c in arr:
 			if c is BaseMaterial3D:
 				(c as BaseMaterial3D).albedo_color.a = a
+	if hero:
+		hero.set_opacity(a)
+
+## Meshes changed (the hero put something on): give the new ones their own materials if stealth or decay is active.
+func refresh_local_materials() -> void:
+	if _local_mats.is_empty():
+		return
+	var a := _opacity
+	_local_mats.clear()
+	_opacity = -1.0
+	set_opacity(a)
 
 ## Corpse decay: darken and desaturate the body toward `tint` by `amount` (0..1). Emission dies with it.
 func set_decay(amount: float, tint := Color(0.16, 0.14, 0.12)) -> void:
 	_ensure_local_materials()
+	if hero:
+		hero.set_decay(amount)
 	for arr in _local_mats.values():
 		for c in arr:
 			if not c is BaseMaterial3D:

@@ -33,6 +33,7 @@ static func join(hero: HeroData, gid: StringName) -> String:
 	else:
 		hero.stats_dirty.emit()
 	Events.guild_joined.emit(gid, first)
+	hero.check_promotions()
 	return ""
 
 ## Next promotion: {rank, fee, level, flag, deed, ok, error}. rank = -1 at the top.
@@ -81,6 +82,11 @@ static func missing_requirements(hero: HeroData, rank: int) -> PackedStringArray
 			var line := "a proven deed: %s" % previous.deed
 			if not out.has(line):
 				out.append(line)
+	if rank >= 2:
+		for flag in OPENING_DEEDS:
+			if not bool(hero.world_flags.get(flag, false)):
+				out.append("the opening story errands")
+				break
 	var a := achievements(hero)
 	for k in ["jobs", "champions", "dungeons", "dungeon_tier"]:
 		if int(a[k]) < int(t.get(k, 0)):
@@ -116,7 +122,7 @@ static func migrate_legacy_rank(hero: HeroData) -> void:
 			break
 		earned = r
 	for r in range(earned + 1, hero.tier + 1):
-		hero.inventory.gold += int(DataGuilds.tier(r).fee)
+		hero.inventory.gold += 150 if r == 2 else int(DataGuilds.tier(r).fee)
 	hero.tier = earned
 	hero.equipment.tier_rank = earned
 
@@ -125,8 +131,11 @@ static func promote(hero: HeroData) -> String:
 	if not p.ok:
 		return String(p.error)
 	hero.inventory.gold -= int(p.fee)
-	hero.inventory.changed.emit()
 	hero.set_tier(int(p.rank))
+	var checking := hero._checking_promotions
+	hero._checking_promotions = true
+	hero.inventory.changed.emit()
+	hero._checking_promotions = checking
 	return ""
 
 ## Persistent stat modifiers from the Accord tier bonus and the guild's perks (scale with tier rank).
@@ -285,3 +294,16 @@ static func banner_or_default(hero: HeroData) -> Texture2D:
 	if hero != null and hero.guild != &"":
 		return UIArt.tex(String(DataGuilds.guild(hero.guild).banner))
 	return null
+
+const OPENING_DEEDS := [&"mq_maelis_orders", &"south_gate_open", &"mq_shard_taken", &"mq_three_told"]
+
+## No guild is chosen for the player. The opening story earns Class E even
+## without membership; registered heroes qualify for D at level 2 instead.
+static func auto_promote(hero: HeroData) -> int:
+	var before := hero.tier
+	if hero.tier == 0 and hero.progress.level >= 2 and OPENING_DEEDS.all(func(flag): return bool(hero.world_flags.get(flag, false))):
+		hero.set_tier(1)
+	while bool(next_promotion(hero).ok):
+		if promote(hero) != "":
+			break
+	return hero.tier - before

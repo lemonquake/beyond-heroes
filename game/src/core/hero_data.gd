@@ -12,6 +12,9 @@ const START_TOWN_PORTALS := 5 # free Town Portal Scrolls in a new hero's bag
 
 var cls: ClassDef
 var hero_name := "Hero"
+## bh-023: the hero's customised look (HeroLook; only what differs from the plain hero). Empty = the plain hero, which
+## is what every save from before the creator loads as. Optional in a save.
+var look := {}
 var progress := HeroProgress.new()
 var equipment := Equipment.new()
 var inventory := Inventory.new()
@@ -89,6 +92,7 @@ var starter_name := ""                   # bh-015: the first Tempo's rolled name
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
 var _loading_equipment := false
+var _checking_promotions := false
 
 const RESTED_XP := 0.10
 const RESTED_REGEN := 0.5
@@ -117,6 +121,7 @@ func _dirty() -> void:
 	stats_dirty.emit()
 
 func _on_level(_l: int, _g: int) -> void:
+	check_promotions()
 	stats_dirty.emit()
 	if not quake_team.is_empty():
 		QuakeTeam.sync_owner(self)
@@ -125,6 +130,14 @@ func _inv_changed() -> void:
 	if not _loading_equipment:
 		recover_unequipped_gear()
 	inventory_changed.emit()
+	check_promotions()
+
+func check_promotions() -> void:
+	if _loading_equipment or _checking_promotions:
+		return
+	_checking_promotions = true
+	GuildRules.auto_promote(self)
+	_checking_promotions = false
 
 ## Legacy incompatible off-hand gear returns as space opens, without discarding items from a full bag.
 func recover_unequipped_gear() -> void:
@@ -445,6 +458,7 @@ func to_dict() -> Dictionary:
 		"guild_jobs": GuildJobs.to_dict(self),
 		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
 		"guild_alias": guild_alias, "guild_banner": Marshalls.raw_to_base64(guild_banner) if not guild_banner.is_empty() else "",
+		"look": HeroLook.to_save(HeroLook.sanitize(look)),
 	}
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
@@ -595,6 +609,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 			if qm != null:
 				h.quake_team.append(qm)
 	h.guild_banner = GuildRules.load_banner_bytes(String(d.get("guild_banner", "")))
+	var lk = d.get("look", {})
+	h.look = HeroLook.to_save(HeroLook.sanitize(lk)) if lk is Dictionary else {}
 	var aura := StringName(d.get("active_aura", ""))
 	if aura != &"" and h.skill_tree.rank(aura) > 0 and DB.skill(aura) != null and DB.skill(aura).is_aura():
 		h.active_aura = aura
@@ -605,6 +621,7 @@ static func from_dict(d: Dictionary) -> HeroData:
 		GuildRules.migrate_legacy_rank(h)
 	h._loading_equipment = false
 	h.recover_unequipped_gear()
+	h.check_promotions()
 	return h
 
 # ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------

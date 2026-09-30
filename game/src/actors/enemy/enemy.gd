@@ -22,6 +22,7 @@ var brain := EnemyBrain.new()
 var elite_mods: Array[StringName] = []
 var is_elite := false
 var is_boss := false
+var encounter_hp_mult := 1.0
 ## A named champion holding a camp (DataMinibosses entry) or empty (bh-007).
 var miniboss: Dictionary = {}
 var difficulty := {}
@@ -308,6 +309,8 @@ func rebuild_stats() -> void:
 		mods.append(StatModifier.more(&"outgoing_damage", TraitsExt.RISEN_DAMAGE - 1.0, "Risen"))
 	if ext:
 		ext.stat_mods(mods)
+	if encounter_hp_mult != 1.0:
+		mods.append(StatModifier.more(&"max_hp", encounter_hp_mult - 1.0, "Encounter health"))
 	stats = EnemyStats.build(def, level, difficulty, mods, is_elite, is_boss)
 	if ext:
 		ext.post_stats(stats)

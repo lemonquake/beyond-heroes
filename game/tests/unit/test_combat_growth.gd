@@ -144,6 +144,8 @@ func test_rank_requires_distinct_achievements() -> void:
 		ok(int(t.level) <= BH.LEVEL_CAP, "every player rank is reachable")
 		if t.flag != "":
 			h.world_flags[StringName(t.flag)] = true
+	for flag in GuildRules.OPENING_DEEDS:
+		h.world_flags[flag] = true
 	h.guild_jobs["done"] = 120
 	h.miniboss_log[&"snagtooth"] = {"kills": 10000}
 	h.dungeon_raids["warren"] = {"count": 10000}

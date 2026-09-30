@@ -183,6 +183,7 @@ func run_actions(actions: Array, hero: HeroData) -> Dictionary:
 			hero.progress.points_changed.emit()
 		else:
 			push_warning("Unknown dialogue action %s" % a)
+	hero.check_promotions()
 	return out
 
 ## Fill {placeholders} with live values (prices, tier) so dialogue never quotes a stale fee.

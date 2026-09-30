@@ -193,7 +193,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	d.set_stat(&"phys_res", pres, pl)
 	d.set_stat(&"phys_res_flat", agg.flat(&"phys_res"))
 
-	var res_cap := RES_CAP + agg.flat(&"res_cap")
+	var res_cap := clampf(RES_CAP + agg.flat(&"res_cap"), 0.0, 0.9)
 	for e in Elements.ELEMENTAL:
 		var rk := Elements.res_key(e)
 		var all_flat := agg.flat(&"res_all")
@@ -214,9 +214,10 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	var wcrit := d.loadout.main_crit if not d.loadout.is_unarmed() else 0.05
 	_std(d, agg, &"crit_chance", [["Weapon base", wcrit], ["Dexterity %d x %.2f%%" % [DEX, CRIT_PER_DEX * 100.0], DEX * CRIT_PER_DEX],
 		["Agility %d x %.2f%%" % [AGI, CRIT_PER_AGI * 100.0], AGI * CRIT_PER_AGI]], 0.0, CRIT_CAP)
-	var cd := maxf(1.0, CRIT_DAMAGE_BASE + agg.flat(&"crit_damage")) * agg.more(&"crit_damage")
+	var cd := clampf((CRIT_DAMAGE_BASE + agg.flat(&"crit_damage")) * (1.0 + agg.inc(&"crit_damage")) * agg.more(&"crit_damage"), 1.0, 2.5)
 	var cdl := PackedStringArray(["Base x%.2f" % CRIT_DAMAGE_BASE])
 	cdl.append_array(agg.lines(&"crit_damage"))
+	cdl.append("Maximum x2.50")
 	d.set_stat(&"crit_damage", cd, cdl)
 
 	# ---- Weight ------------------------------------------------------------------------------------------
@@ -279,9 +280,11 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		"Agility %d: -%.1f%% (max %d%%)" % [AGI, minf(DODGE_CDR_CAP, AGI * DODGE_CDR_PER_AGI) * 100.0, roundi(DODGE_CDR_CAP * 100)]]))
 
 	# ---- Offense ------------------------------------------------------------------------------------------
-	var attack := CombatGrowth.physical_attack(STR, level)
+	var attack_attr := DEX if d.loadout.main_type != null and d.loadout.main_type.id in [&"bow", &"crossbow", &"javelin"] else STR
+	var attack := CombatGrowth.physical_attack(attack_attr, level)
 	d.set_stat(&"physical_attack", attack + agg.flat(&"physical_attack"), PackedStringArray([
-		"Strength above 15 adds 0.5 attack per point plus 0.004 x points squared.",
+		"Weapon attribute above 15 adds 0.5 attack per point plus 0.0015 x points squared.",
+		"Bows, crossbows and javelins use Dexterity; melee weapons use Strength.",
 		"Gradually enabled at levels 6-15. Added before damage bonuses."]))
 	var focus := 0.0
 	if d.loadout.main_type != null and d.loadout.main_type.id in [&"staff", &"wand"]:

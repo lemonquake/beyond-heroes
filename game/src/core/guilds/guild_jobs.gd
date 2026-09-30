@@ -137,6 +137,7 @@ static func claim(hero: HeroData, job_id: int) -> String:
 	hero.inventory.changed.emit()
 	var s := state(hero)
 	s.done = int(s.done) + 1
+	hero.check_promotions()
 	s.earned = int(s.earned) + gold
 	abandon(hero, job_id)
 	Events.gold_picked.emit(gold)

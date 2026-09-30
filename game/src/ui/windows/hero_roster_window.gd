@@ -135,9 +135,9 @@ func refresh() -> void:
 	if hero:
 		var p := GuildRules.next_promotion(hero)
 		if hero.guild == &"":
-			_promo.text = "You are not registered with a guild. Register at Swordfin Hall or Lantern House in Malasugue to earn a tier."
+			_promo.text = "Complete the opening story errands to earn Class E, or register at Swordfin Hall or Lantern House. Join a guild for further promotions."
 		elif p.get("ok", false):
-			_promo.text = "You can be promoted to %s now at your guild hall (%d gold)." % [DataGuilds.tier_name(int(p.rank)), int(p.fee)]
+			_promo.text = "You qualify for automatic promotion to %s (%d gold)." % [DataGuilds.tier_name(int(p.rank)), int(p.fee)]
 		elif int(p.get("rank", -1)) > 0:
 			var need := "Level %d" % int(p.get("level", 0))
 			if String(p.get("deed", "")) != "":

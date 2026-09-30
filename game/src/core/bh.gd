@@ -77,7 +77,7 @@ const RARITY_BEAM := [0.0, 0.0, 0.0, 1.2, 1.6, 2.4, 3.2, 4.2, 5.5, 8.0]
 const RARITY_DROP_SOUND := [&"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop_rare", &"loot_drop_rare",
 	&"loot_drop_rare", &"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary"]
 
-const LEVEL_CAP := 60
+const LEVEL_CAP := 300
 
 static func rarity_color(r: int) -> Color:
 	return RARITY_COLORS[clampi(r, 0, RARITY_COUNT - 1)]

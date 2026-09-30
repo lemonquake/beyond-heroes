@@ -13,6 +13,9 @@ var confirm: ConfirmDialog
 var tooltips: TooltipLayer
 var chat: ChatBox
 var touch: TouchControls
+## bh-023: the hero creator while the player changes their look (Character window > Change Look).
+var creator: HeroCreator
+var _paused_by_creator := false
 var _root: Control
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
@@ -134,7 +137,42 @@ func toggle(id: StringName) -> void:
 	else:
 		open(id)
 
+## bh-023: restyle the living hero. The creator covers the screen; the world waits (single player only).
+func open_creator() -> void:
+	if Game.hero == null or (creator and is_instance_valid(creator)):
+		return
+	close_all()
+	creator = HeroCreator.new()
+	creator.hero = Game.hero
+	creator.look = Game.hero.look
+	creator.hero_name = Game.hero.hero_name
+	_root.add_child(creator)
+	if not get_tree().paused and not Net.is_active():
+		get_tree().paused = true
+		_paused_by_creator = true
+	creator.back.connect(_close_creator)
+	creator.done.connect(func(look: Dictionary) -> void:
+		Game.hero.look = look
+		var p := Game.player
+		if p and is_instance_valid(p) and p.visual:
+			p.visual.set_look(look)
+			p.refresh_equipment_visuals()
+		_close_creator()
+		Game.save_now())
+	_update_blocking()
+
+func _close_creator() -> void:
+	if creator and is_instance_valid(creator):
+		creator.queue_free()
+	creator = null
+	if _paused_by_creator:
+		get_tree().paused = false
+		_paused_by_creator = false
+	_update_blocking()
+
 func any_window_open() -> bool:
+	if creator and is_instance_valid(creator):
+		return true
 	for w in windows.values():
 		if w.visible:
 			return true
@@ -142,6 +180,9 @@ func any_window_open() -> bool:
 
 func close_all() -> bool:
 	var closed_any := false
+	if creator and is_instance_valid(creator):
+		_close_creator()
+		return true
 	if chat.is_open():
 		chat.close()
 		return true

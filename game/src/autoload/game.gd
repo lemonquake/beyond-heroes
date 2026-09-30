@@ -73,8 +73,9 @@ func new_hero(class_id: StringName, hero_name: String) -> HeroData:
 ## A new hero: the prologue cutscene (bh-021) shows the waypoint waking and the hero arriving on the Sanctuary
 ## Terrace; Tobren, the starter Tempo, comes through with them, and once the prologue ends he walks them through Tempos
 ## and the controls (DataGuide; skipped if that conversation already ended for this hero).
-func start_new_game(class_id: StringName, hero_name: String, slot: int, diff := 1) -> void:
+func start_new_game(class_id: StringName, hero_name: String, slot: int, diff := 1, look := {}) -> void:
 	hero = new_hero(class_id, hero_name)
+	hero.look = HeroLook.to_save(HeroLook.sanitize(look))
 	TempoRules.grant_starter(hero)
 	hero.difficulty = diff
 	save_slot = slot
@@ -431,6 +432,7 @@ func set_world_flag(flag: StringName, value: Variant = true) -> void:
 	if hero == null:
 		return
 	hero.world_flags[flag] = value
+	hero.check_promotions()
 	Events.world_flag_set.emit(flag, value)
 
 func has_flag(flag: StringName) -> bool:

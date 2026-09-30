@@ -1,0 +1,100 @@
+{
+ "fallback": {
+  "armor": "iron_hauberk",
+  "armor/cloth": "apprentice_robe",
+  "armor/cloth/ranger": "traveler_coat",
+  "armor/cloth/shadowblade": "traveler_coat",
+  "armor/heavy": "iron_hauberk",
+  "boots": "soft_boot",
+  "boots/cloth": "soft_boot",
+  "boots/heavy": "iron_sabaton",
+  "gloves": "silk_glove",
+  "gloves/cloth": "silk_glove",
+  "gloves/heavy": "iron_gauntlet",
+  "helm": "iron_helm",
+  "helm/cloth": "linen_hood",
+  "helm/heavy": "iron_helm",
+  "inner_garment": "padded_gambeson",
+  "inner_garment/cloth": "silk_undershirt",
+  "inner_garment/heavy": "padded_gambeson"
+ },
+ "items": {
+  "_shoes": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.105
+    ]
+   },
+   "sides": true
+  },
+  "_under_body": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.71
+    ],
+    "z": [
+     0.13,
+     1.49
+    ]
+   },
+   "sides": false
+  },
+  "_under_feet": {
+   "hair": "hide",
+   "hide": {
+    "boot": [
+     -1.0,
+     0.135
+    ]
+   },
+   "sides": true
+  },
+  "_under_hands": {
+   "hair": "hide",
+   "hide": {
+    "glove": [
+     0.735,
+     1.0
+    ]
+   },
+   "sides": true
+  },
+  "iron_hauberk": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.47
+    ],
+    "z": [
+     0.13,
+     1.49
+    ]
+   },
+   "sides": false
+  },
+  "iron_helm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "padded_gambeson": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.69
+    ],
+    "z": [
+     0.13,
+     1.49
+    ]
+   },
+   "sides": false
+  }
+ }
+}

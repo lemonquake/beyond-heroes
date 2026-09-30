@@ -5,7 +5,7 @@ extends Control
 ## strengths, weaknesses, starting equipment (hover for item tooltips) and starting skills (hover for details).
 ## Bottom: hero name, game difficulty, save slot; Back / Begin. Emits begin(class_id, name, slot, difficulty).
 
-signal begin(class_id: StringName, hero_name: String, slot: int, difficulty: int)
+signal begin(class_id: StringName, hero_name: String, slot: int, difficulty: int, look: Dictionary)
 signal back
 
 const CLASSES := [&"knight", &"mage", &"ranger", &"shadowblade"]
@@ -14,6 +14,9 @@ const DEFAULT_NAMES := {&"knight": "Aldric", &"mage": "Seraphine", &"ranger": "T
 
 var class_id: StringName = &"knight"
 var preview: CharacterPreview
+## bh-023: the look made in the creator (HeroLook; empty = the plain hero). Kept while the player goes back and forth.
+var look := {}
+var creator: HeroCreator
 var _cards := {}
 var _title: Label
 var _tagline: Label
@@ -246,7 +249,7 @@ func _build_footer() -> void:
 	slv.add_child(_slot)
 	_slot_warn = UITheme.label("", 14, Color(1.0, 0.6, 0.45), UITheme.body_font())
 	slv.add_child(_slot_warn)
-	_begin_btn = UIWindow.button("Begin", _begin, &"PrimaryButton", 230.0)
+	_begin_btn = UIWindow.button("Next: Appearance", _open_creator, &"PrimaryButton", 270.0)
 	_begin_btn.custom_minimum_size.y = 64
 	h.add_child(_begin_btn)
 
@@ -261,6 +264,7 @@ func _select(id: StringName) -> void:
 	for k in _cards:
 		(_cards[k] as Button).button_pressed = k == id
 	var cls := DB.class_def(id)
+	preview.look = look
 	preview.show_class(id)
 	preview.play(StringName("idle_%s" % id))
 	(get_node("Backdrop") as TextureRect).texture = UIArt.tex("tree/tree_bg_%s.png" % id)
@@ -331,8 +335,34 @@ func _validate() -> void:
 	_slot_warn.text = "This will replace the saved hero in this slot." if occupied else ""
 	_begin_btn.disabled = _name.text.strip_edges().length() < 2
 
+## The creator takes over the screen; Back returns here with the look kept, Begin Journey starts the game.
+func _open_creator() -> void:
+	creator = HeroCreator.new()
+	creator.class_id = class_id
+	creator.look = look
+	creator.hero_name = _name.text.strip_edges()
+	add_child(creator)
+	preview.visible = false                 # (one plinth renders at a time)
+	creator.back.connect(func() -> void:
+		look = HeroLook.to_save(creator.look)
+		preview.visible = true
+		preview.look = look
+		preview.set_look(look)
+		creator.queue_free()
+		creator = null)
+	creator.done.connect(func(l: Dictionary) -> void:
+		look = l
+		_begin())
+
+## Back from the phone's button or Escape: out of the creator first.
+func go_back() -> void:
+	if creator and is_instance_valid(creator):
+		creator.back.emit()
+	else:
+		back.emit()
+
 func _begin() -> void:
-	var go := func() -> void: begin.emit(class_id, _name.text.strip_edges(), _slot.selected, _difficulty.selected)
+	var go := func() -> void: begin.emit(class_id, _name.text.strip_edges(), _slot.selected, _difficulty.selected, look)
 	if not SaveSystem.slot_summary(_slot.selected).is_empty():
 		var dlg := ConfirmDialog.new()
 		add_child(dlg)

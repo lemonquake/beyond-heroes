@@ -1,0 +1,41 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+GROWTH {"class":"knight","enemy_hp":66,"hit":19,"hits_to_kill":3.5,"level":5,"skill_hit":36,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":56,"hits_to_kill":3.6,"level":10,"skill_hit":107,"weapon":"artisan_copperleaf_sword","weapon_max":40,"weapon_min":22}
+GROWTH {"class":"knight","enemy_hp":472,"hit":115,"hits_to_kill":4.1,"level":15,"skill_hit":218,"weapon":"duelist_sabre","weapon_max":51,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":293,"hits_to_kill":3.1,"level":20,"skill_hit":556,"weapon":"runed_sword","weapon_max":111,"weapon_min":72}
+GROWTH {"class":"knight","enemy_hp":1611,"hit":372,"hits_to_kill":4.3,"level":25,"skill_hit":707,"weapon":"depth_copperleaf_backsword","weapon_max":167,"weapon_min":90}
+GROWTH {"class":"knight","enemy_hp":2878,"hit":452,"hits_to_kill":6.4,"level":30,"skill_hit":859,"weapon":"artisan_split_crown_sword","weapon_max":198,"weapon_min":107}
+GROWTH {"class":"knight","enemy_hp":10032,"hit":1357,"hits_to_kill":7.4,"level":45,"skill_hit":2578,"weapon":"depth_hollowfin_estoc","weapon_max":581,"weapon_min":316}
+GROWTH {"class":"knight","enemy_hp":26436,"hit":2916,"hits_to_kill":9.1,"level":60,"skill_hit":5540,"weapon":"depth_crownless_longsword","weapon_max":939,"weapon_min":507}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":42,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":67,"hits_to_kill":3.1,"level":10,"skill_hit":85,"weapon":"storm_staff","weapon_max":37,"weapon_min":22}
+GROWTH {"class":"mage","enemy_hp":472,"hit":191,"hits_to_kill":2.5,"level":15,"skill_hit":167,"weapon":"storm_staff","weapon_max":67,"weapon_min":39}
+GROWTH {"class":"mage","enemy_hp":920,"hit":293,"hits_to_kill":3.1,"level":20,"skill_hit":275,"weapon":"frost_staff","weapon_max":98,"weapon_min":59}
+GROWTH {"class":"mage","enemy_hp":1611,"hit":660,"hits_to_kill":2.4,"level":25,"skill_hit":435,"weapon":"depth_glowcap_crook","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"mage","enemy_hp":2878,"hit":925,"hits_to_kill":3.1,"level":30,"skill_hit":567,"weapon":"depth_tidal_forkstaff","weapon_max":242,"weapon_min":128}
+GROWTH {"class":"mage","enemy_hp":10032,"hit":2255,"hits_to_kill":4.4,"level":45,"skill_hit":1074,"weapon":"depth_thornseed_branchstaff","weapon_max":513,"weapon_min":278}
+GROWTH {"class":"mage","enemy_hp":26436,"hit":8939,"hits_to_kill":3.0,"level":60,"skill_hit":1902,"weapon":"depth_dawnspire_staff","weapon_max":1145,"weapon_min":619}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":15,"hits_to_kill":4.2,"level":5,"skill_hit":29,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":49,"hits_to_kill":4.2,"level":10,"skill_hit":93,"weapon":"composite_bow","weapon_max":49,"weapon_min":25}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":98,"hits_to_kill":4.8,"level":15,"skill_hit":187,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":191,"hits_to_kill":4.8,"level":20,"skill_hit":363,"weapon":"warden_longbow","weapon_max":147,"weapon_min":77}
+GROWTH {"class":"ranger","enemy_hp":1611,"hit":311,"hits_to_kill":5.2,"level":25,"skill_hit":591,"weapon":"depth_rootbend_shortbow","weapon_max":233,"weapon_min":114}
+GROWTH {"class":"ranger","enemy_hp":2878,"hit":506,"hits_to_kill":5.7,"level":30,"skill_hit":961,"weapon":"depth_saltwind_recurve","weapon_max":323,"weapon_min":154}
+GROWTH {"class":"ranger","enemy_hp":10032,"hit":1130,"hits_to_kill":8.9,"level":45,"skill_hit":2148,"weapon":"depth_thornwing_bow","weapon_max":686,"weapon_min":334}
+GROWTH {"class":"ranger","enemy_hp":26436,"hit":3879,"hits_to_kill":6.8,"level":60,"skill_hit":7370,"weapon":"depth_dawnfeather_bow","weapon_max":1539,"weapon_min":741}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.5,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":21,"hits_to_kill":9.6,"level":10,"skill_hit":41,"weapon":"shadow_kris","weapon_max":23,"weapon_min":12}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":65,"hits_to_kill":7.3,"level":15,"skill_hit":124,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":104,"hits_to_kill":8.8,"level":20,"skill_hit":198,"weapon":"aether_stiletto","weapon_max":64,"weapon_min":33}
+GROWTH {"class":"shadowblade","enemy_hp":1611,"hit":181,"hits_to_kill":8.9,"level":25,"skill_hit":343,"weapon":"depth_rootfang_skinner","weapon_max":108,"weapon_min":66}
+GROWTH {"class":"shadowblade","enemy_hp":2878,"hit":303,"hits_to_kill":9.5,"level":30,"skill_hit":575,"weapon":"depth_keelhook_knife","weapon_max":150,"weapon_min":88}
+GROWTH {"class":"shadowblade","enemy_hp":10032,"hit":644,"hits_to_kill":15.6,"level":45,"skill_hit":1223,"weapon":"depth_briar_talon","weapon_max":321,"weapon_min":192}
+GROWTH {"class":"shadowblade","enemy_hp":26436,"hit":2136,"hits_to_kill":12.4,"level":60,"skill_hit":4058,"weapon":"depth_dawnthorn_knife","weapon_max":713,"weapon_min":432}
+[PASS] test_combat_growth.gd — 6 tests, 134 checks, 0 failures (1734.3 ms)
+[FAIL] test_damage.gd — 13 tests, 60 checks, 2 failures (233.6 ms)
+[PASS] test_items.gd — 17 tests, 2477 checks, 0 failures (628.9 ms)
+[PASS] test_stats.gd — 8 tests, 159 checks, 0 failures (32.6 ms)
+  FAIL test_damage.test_combined_modifier_chain: pre-mitigation chain — expected 463.32 ± 0.001, got 396.0
+  FAIL test_damage.test_combined_modifier_chain: final combined — expected 400, got 342
+TOTAL: 2830 checks, 2 failures

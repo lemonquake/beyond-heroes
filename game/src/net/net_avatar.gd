@@ -140,6 +140,11 @@ func set_appearance(app: Dictionary) -> void:
 		add_child(visual)
 		visual.setup(String(app.get("model", "")), float(app.get("scale", 1.0)), app.get("tint", Color.WHITE), StringName(app.get("pers", &"")))
 		_built = true
+	# bh-023: another player's hero wears their own look (cleaned by HeroLook before use)
+	if visual.hero:
+		var lk = app.get("look", {})
+		if lk is Dictionary and HeroLook.signature(lk) != HeroLook.signature(visual.hero.look):
+			visual.set_look(lk)
 	var want: Dictionary = app.get("weapons", {})
 	for hand in [&"main", &"off"]:
 		var w = want.get(hand)
@@ -156,7 +161,7 @@ func set_appearance(app: Dictionary) -> void:
 		for slot in BH.SLOTS:
 			var id := StringName(str(gear.get(slot, "")))
 			var base := DB.item_base(id) if id != &"" else null
-			if base != null and base.boss_exclusive and base.equip_slots.has(slot):
+			if base != null and ((base.boss_exclusive and base.equip_slots.has(slot)) or (visual.hero != null and base.equipment_slots().has(slot))):
 				var piece := ItemInstance.new()
 				piece.base = base
 				equipment.slots[slot] = piece

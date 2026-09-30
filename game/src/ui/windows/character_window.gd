@@ -62,6 +62,12 @@ func _build() -> void:
 	_xp_text = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.number_font())
 	_xp_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	left.add_child(_xp_text)
+	# bh-023: the hero's look can be changed at any time
+	var restyle := button("Change Look", func() -> void: Game.ui_root.open_creator(), &"", 220.0)
+	restyle.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	TooltipLayer.attach(restyle, func() -> Control: return Tips.text(
+		"Reshape your hero: face, hair, skin, build and more. It costs nothing and changes no statistics.", "Change Look"))
+	left.add_child(restyle)
 	# hero tier and guild (docs/LORE.md §5)
 	var tr := hbox(10)
 	tr.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -232,7 +238,7 @@ func refresh() -> void:
 	var promotion := GuildRules.next_promotion(hero)
 	_promotion_text.text = String(promotion.error)
 	if int(promotion.rank) > 0:
-		_promotion_text.text = "Class %s · Level %d · %d gold\n%s" % [DataGuilds.letter(int(promotion.rank)), promotion.level, promotion.fee, String(promotion.deed).replace("; ", "\n")]
+		_promotion_text.text = "Automatic: Class %s · Level %d · %d gold\n%s" % [DataGuilds.letter(int(promotion.rank)), promotion.level, promotion.fee, String(promotion.deed).replace("; ", "\n")]
 	_refresh_attrs()
 
 func _guild_tip() -> String:

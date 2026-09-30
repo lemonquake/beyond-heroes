@@ -92,7 +92,7 @@ func _spawn_minibosses() -> void:
 			ground = map.to_global(ground)
 			ground.y = map.global_position.y + NpcDirectory.ground_height(map, Vector3(p.x, float(md.get("y", 0.0)), p.y))
 		var e := Enemy.new()
-		e.setup(edef, mini(BH.LEVEL_CAP, map.def.level_max + int(md.get("level_bonus", 0))), md.get("mods", []), difficulty)
+		e.setup(edef, CombatGrowth.encounter_level(map.def.level_max + int(md.get("level_bonus", 0)), int(growth.level) if dungeon != &"" else (Game.hero.progress.level if Game.hero != null else 1)), md.get("mods", []), difficulty)
 		e.set_meta(&"dungeon_reward_bonus", float(growth.reward_bonus))
 		e.make_miniboss(md)
 		e.name = "Miniboss_%s" % md.id
@@ -200,7 +200,15 @@ static func roll_elite_mods(r: RandomNumberGenerator, lvl: int) -> Array:
 
 static func spawn_enemy(parent: Node, def: EnemyDef, lvl: int, mods: Array, pos: Vector3, diff: Dictionary, guardian: Dictionary = {}) -> Enemy:
 	var e := Enemy.new()
+	var visit_level := Game.hero.progress.level if Game.hero != null else 1
+	var spawner := parent.get_node_or_null("Spawner") as Spawner
+	if spawner != null and spawner.dungeon != &"":
+		visit_level = int(spawner.growth.level)
+	lvl = CombatGrowth.encounter_level(lvl, visit_level, def.archetype == &"boss")
 	e.setup(def, lvl, mods, diff)
+	if e.is_boss and Game.hero != null:
+		var baseline := EnemyStats.build(def, lvl, diff, [], false, true)
+		e.encounter_hp_mult = EnemyStats.boss_health(Game.hero, baseline) / baseline.get_stat(&"max_hp")
 	if not guardian.is_empty():
 		e.make_miniboss(guardian)
 	e.name = "Enemy_%s_%d" % [def.id, parent.get_child_count()]

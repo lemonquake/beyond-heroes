@@ -133,10 +133,10 @@ func test_combined_modifier_chain() -> void:
 	req.more = [["Test more", 1.1]]
 	req.target_status = st
 	var r := DamagePipeline.compute(req, rng())
-	# 100 *1.5 attr =150 *1.2 skill =180 *1.3 fire =234 *1.5 crit =351 *1.2 inc =421.2 *1.1 more =463.32
-	near(r.pre_mitigation, 463.32, 0.001, "pre-mitigation chain")
-	# *0.75 res =347.49 *1.15 curse =399.6135 -> 400
-	eq(r.total, 400, "final combined")
+	# 100 *1.2 skill * (1 + .5 magic + .3 fire + .2 damage) *1.5 crit *1.1 more =396
+	near(r.pre_mitigation, 396.0, 0.001, "pre-mitigation chain")
+	# 396 *0.75 resistance *1.15 curse =341.55 -> 342
+	eq(r.total, 342, "final combined")
 
 func test_block_and_parry() -> void:
 	var tgt := blank_stats()
