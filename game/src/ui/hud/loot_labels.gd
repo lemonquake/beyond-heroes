@@ -28,7 +28,9 @@ func _process(_d: float) -> void:
 	var p := Game.player as Node3D
 	var cam := get_viewport().get_camera_3d()
 	if not _shown() or p == null or not is_instance_valid(p) or cam == null:
-		if Game.hover_loot != null and not is_instance_valid(Game.hover_loot):
+		# bh-027: no tags, nothing to hover — a drop hovered while the tags were up must not stay the click target
+		# (the next attack click went to it: "Too far away", or a pickup the player never asked for)
+		if Game.hover_loot is LootDrop or (Game.hover_loot != null and not is_instance_valid(Game.hover_loot)):
 			Game.hover_loot = null
 		queue_redraw()
 		return

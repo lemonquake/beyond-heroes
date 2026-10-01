@@ -19,7 +19,7 @@ var _paused_by_creator := false
 var _root: Control
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
-	&"world_map": &"world_map", &"tempos": &"tempos", &"guide": &"guide"}
+	&"world_map": &"world_map", &"tempos": &"tempos", &"guide": &"guide", &"guild": &"guild"}
 
 func _init() -> void:
 	layer = 20
@@ -59,6 +59,9 @@ func _ready() -> void:
 	_add_window(&"multiplayer", MultiplayerWindow.new())
 	_add_window(&"guild_jobs", GuildJobsWindow.new())
 	_add_window(&"guild_custom", GuildCustomWindow.new())
+	_add_window(&"guild", GuildWindow.new())                 # bh-027: Z
+	_add_window(&"guild_detail", GuildDetailWindow.new())
+	_add_window(&"showcase", ShowcaseWindow.new())
 	_add_window(&"trade", TradeWindow.new())
 	_add_window(&"socketing", SocketWindow.new())
 	_add_window(&"lape", LapeWindow.new())
@@ -119,13 +122,31 @@ func open_lape(npc_name := "Lape the Ancient") -> void:
 	if w:
 		w.open_for(npc_name)
 
+## bh-027: what you can do with another player (clicking their hero or their party frame).
+func open_player_menu(peer: int) -> void:
+	if not Net.peers.has(peer) or peer == Net.my_id():
+		return
+	PlayerMenu.open_for(_root, peer, _root.get_local_mouse_position())
+
+## bh-027: two heroes' equipped gear side by side.
+func open_showcase(mine: Dictionary, theirs: Dictionary) -> void:
+	var w := window(&"showcase") as ShowcaseWindow
+	if w:
+		w.show_pair(mine, theirs)
+
+## bh-027: the Guild window on a page ("" = where it was).
+func open_guild(page := "") -> void:
+	var w := window(&"guild") as GuildWindow
+	if w:
+		w.open_on(page)
+
 func open(id: StringName) -> void:
 	var w := window(id)
 	if w == null:
 		return
 	# only one large window at a time, except inventory + shop / character side by side handled by the shop itself
 	for k in windows:
-		if k != id and windows[k].visible and not (id == &"shop" and k == &"inventory"):
+		if k != id and windows[k].visible and not (id == &"shop" and k == &"inventory") and id != &"guild_detail":
 			windows[k].close_window()
 	w.open()
 	_update_blocking()

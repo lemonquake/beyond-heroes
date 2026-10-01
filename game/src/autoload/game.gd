@@ -44,11 +44,13 @@ func _ready() -> void:
 			Events.notify.emit(notice, &"discovery"))
 	GuildJobs.connect_events()
 	QuakeTeam.connect_events()
+	OwnGuild.connect_events()
 	StoryDirector.connect_events()
 
 func _process(delta: float) -> void:
 	if hero and in_session:
 		hero.play_time += delta
+		OwnGuild.tick(hero, delta)
 		_autosave_t += delta
 		if _autosave_t >= AUTOSAVE_INTERVAL and not travelling and player and (player as Player) and (player as Player).alive:
 			_autosave_t = 0.0
@@ -106,7 +108,19 @@ func continue_game(slot: int) -> bool:
 	save_slot = slot
 	difficulty = h.difficulty
 	await _begin_session(h.current_map, h.current_spawn)
+	_rebalance_notice(h)
 	return true
+
+## bh-027: an old save was brought up to the survival rebalance on load: say so once, with the new pools.
+func _rebalance_notice(h: HeroData) -> void:
+	if h == null or h.progress.auto_allocated <= 0:
+		return
+	var s := h.compute_stats()
+	Events.notify.emit("Your hero was updated to the new balance: %d attribute points from the new level rewards were spent along your build. Maximum HP %d, Maximum Mana %d.%s" % [
+		h.progress.auto_allocated, roundi(s.get_stat(&"max_hp")), roundi(s.get_stat(&"max_mana")),
+		" You also have %d skill points to spend." % h.progress.skill_points if h.progress.skill_points > 0 else ""], &"discovery")
+	h.progress.auto_allocated = 0
+	save_now()
 
 func _begin_session(map_id: StringName, spawn_id: StringName) -> void:
 	_end_player()
@@ -232,6 +246,7 @@ func load_map(id: StringName, spawn_id: StringName = &"start") -> MapRoot:
 		NpcDirectory.populate(map)
 		TempoParty.spawn_for(map, player, hero)
 		QuakeTeam.spawn_for(map, player, hero)
+		GuildSummons.spawn_for(map, player, hero)
 	TownPortal.spawn_for(map, id)
 	Audio.play_music(def.music)
 	Audio.play_ambience(def.ambience)

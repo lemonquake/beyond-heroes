@@ -4,10 +4,12 @@ class_name GuildRules
 
 ## "" when the hero may join `gid` now, otherwise the reason.
 static func join_error(hero: HeroData, gid: StringName) -> String:
-	if not DataGuilds.GUILDS.has(gid):
+	if not GuildRegistry.joinable(hero, gid):
 		return "Unknown guild"
 	if hero.guild == gid:
-		return "You already carry the %s's seal" % DataGuilds.guild(gid).short
+		return "You already carry the %s's seal" % GuildRegistry.info(hero, gid).short
+	if OwnGuild.is_master(hero):
+		return "You lead %s. Disband it before you join another guild" % hero.own_guild.name
 	var fee := join_fee(hero, gid)
 	if hero.inventory.gold < fee:
 		return "Not enough gold (%d needed)" % fee
@@ -28,6 +30,7 @@ static func join(hero: HeroData, gid: StringName) -> String:
 	hero.inventory.changed.emit()
 	var first := hero.guild == &""
 	hero.guild = gid
+	hero.remote_guild = {}
 	if hero.tier < 1:
 		hero.set_tier(1)
 	else:
@@ -138,33 +141,105 @@ static func promote(hero: HeroData) -> String:
 	hero._checking_promotions = checking
 	return ""
 
-## Persistent stat modifiers from the Accord tier bonus and the guild's perks (scale with tier rank).
+## Persistent stat modifiers from the Accord tier bonus, the guild's perks (scale with tier rank) and — for a guild of a
+## hero's own or a fellow hero's (bh-027) — its guild passives.
 static func modifiers(hero: HeroData) -> Array:
 	var out := []
+	var g := GuildRegistry.info(hero, hero.guild)
+	if not g.is_empty() and not (g.passives as Dictionary).is_empty():
+		out.append_array(OwnGuild.passive_modifiers(g.passives, String(g.short)))
 	var r := hero.tier
 	if r <= 0:
 		return out
 	var src := "Class %s" % DataGuilds.letter(r)
 	out.append(StatModifier.inc(&"max_hp", DataGuilds.ACCORD_HP * r, src))
 	out.append(StatModifier.inc(&"damage", DataGuilds.ACCORD_DAMAGE * r, src))
-	var g := DataGuilds.guild(hero.guild)
 	for p in g.get("perks", []):
-		out.append(StatModifier.inc(p[0], float(p[1]) * r, g.short))
+		var v := float(p[2]) * r
+		out.append(StatModifier.flat(StringName(p[0]), v, g.short) if String(p[1]) == "flat" else StatModifier.inc(StringName(p[0]), v, g.short))
 	return out
+
+## bh-027: the ranks of the hero's guild's passives ({} for the old and the rolled guilds).
+static func passive_ranks(hero: HeroData) -> Dictionary:
+	var g := GuildRegistry.info(hero, hero.guild) if hero else {}
+	return g.get("passives", {}) if not g.is_empty() else {}
+
+## bh-027: Guild War modifiers for `comrades` members of the hero's guild fighting beside them.
+static func war_modifiers(hero: HeroData, comrades: int) -> Array:
+	return OwnGuild.war_modifiers(passive_ranks(hero), comrades)
+
+## How a guild is recognised between players: the same key on two heroes means the same guild.
+static func guild_key(hero: HeroData) -> String:
+	if hero == null or hero.guild == &"":
+		return ""
+	if hero.guild == GuildRegistry.OWN:
+		return OwnGuild.key(hero)
+	if hero.guild == GuildRegistry.REMOTE:
+		return String(hero.remote_guild.get("key", ""))
+	if DataGuilds.GUILDS.has(hero.guild):
+		return "canon/%s" % hero.guild
+	return ""                              # a rolled guild lives in one hero's world only
+
+## Guild members fighting beside `player` right now: Call to Arms fighters and, in multiplayer, fellow players of the
+## same guild on this map, within DataGuildPassives.WAR_RANGE.
+static func comrades(player: Node3D, hero: HeroData) -> int:
+	if player == null or hero == null or hero.guild == &"":
+		return 0
+	var n := 0
+	var r2 := DataGuildPassives.WAR_RANGE * DataGuildPassives.WAR_RANGE
+	for f in GuildSummons.fighters(player.get_tree()):
+		if (f as Actor).alive and (f as Node3D).global_position.distance_squared_to(player.global_position) < r2:
+			n += 1
+	var key := guild_key(hero)
+	if key != "" and Net.is_active():
+		for av in player.get_tree().get_nodes_in_group(&"net_hero"):
+			var a := av as NetAvatar
+			if a and a.alive and String(Net.peers.get(a.owner_peer, {}).get("guild", {}).get("key", "")) == key \
+					and a.global_position.distance_squared_to(player.global_position) < r2:
+				n += 1
+	return n
+
+static func has_war_passives(hero: HeroData) -> bool:
+	var ranks := passive_ranks(hero)
+	for k in ranks:
+		if int(ranks[k]) > 0 and String(DataGuildPassives.passive(StringName(k)).get("kind", "")) == "war":
+			return true
+	return false
+
+## Leave the guild (not one the hero leads: that is disbanded). The tier stays the hero's.
+static func leave(hero: HeroData) -> String:
+	if hero == null or hero.guild == &"":
+		return "You are not in a guild"
+	if OwnGuild.is_master(hero):
+		return "You lead %s: disband it instead" % hero.own_guild.name
+	var was := display_name(hero)
+	if hero.guild == GuildRegistry.REMOTE:
+		Net.guild_left(String(hero.remote_guild.get("master", "")))
+	hero.guild = &""
+	hero.remote_guild = {}
+	hero.guild_alias = ""
+	hero.stats_dirty.emit()
+	Events.notify.emit("You left %s." % was, &"info")
+	Events.guild_changed.emit()
+	Events.guild_customised.emit()
+	return ""
+
+static func _g(hero: HeroData) -> Dictionary:
+	return GuildRegistry.info(hero, hero.guild) if hero else {}
 
 static func shop_discount(hero: HeroData, shop_id: StringName) -> float:
 	if hero == null:
 		return 0.0
-	return float(DataGuilds.guild(hero.guild).get("shop_discount", {}).get(shop_id, 0.0))
+	return float(_g(hero).get("shop_discount", {}).get(shop_id, 0.0))
 
 static func inn_discount(hero: HeroData) -> float:
-	return float(DataGuilds.guild(hero.guild).get("inn_discount", 0.0)) if hero else 0.0
+	return float(_g(hero).get("inn_discount", 0.0)) if hero else 0.0
 
 static func elite_gold_bonus(hero: HeroData) -> float:
-	return float(DataGuilds.guild(hero.guild).get("elite_gold", 0.0)) if hero else 0.0
+	return float(_g(hero).get("elite_gold", 0.0)) if hero else 0.0
 
 static func potion_healing_bonus(hero: HeroData) -> float:
-	return float(DataGuilds.guild(hero.guild).get("potion_healing", 0.0)) if hero else 0.0
+	return float(_g(hero).get("potion_healing", 0.0)) if hero else 0.0
 
 # ---- bh-017: the hero's own guild name and banner ------------------------------------------------------------------
 
@@ -196,22 +271,27 @@ static func clean_alias(text: String) -> String:
 			break
 	return out.strip_edges()
 
-## Any registered hero may rename their guild and fly their own banner, any number of times.
+## Any registered hero may rename their guild and fly their own banner, any number of times (bh-027: not another
+## player's guild — its Guildmaster names it).
 static func can_customise(hero: HeroData) -> bool:
-	return hero != null and hero.guild != &""
+	return hero != null and hero.guild != &"" and hero.guild != GuildRegistry.REMOTE
 
 ## What the hero calls their guild: their own name if they gave one, else the guild's.
 static func display_name(hero: HeroData) -> String:
 	if hero == null or hero.guild == &"":
 		return "No guild"
+	if hero.guild == GuildRegistry.OWN or hero.guild == GuildRegistry.REMOTE:
+		return String(GuildRegistry.info(hero, hero.guild).get("name", "Guild"))
 	if hero.guild_alias != "":
 		return hero.guild_alias
-	return String(DataGuilds.guild(hero.guild).get("name", "Guild"))
+	return String(GuildRegistry.info(hero, hero.guild).get("name", "Guild"))
 
 ## "" on success, else why not. An empty name goes back to the guild's own.
 static func set_alias(hero: HeroData, text: String) -> String:
 	if not can_customise(hero):
 		return "Join a guild first"
+	if hero.guild == GuildRegistry.OWN:
+		return OwnGuild.rename(hero, text) if clean_alias(text) != "" else ""
 	var clean := clean_alias(text)
 	if clean == hero.guild_alias:
 		return ""
@@ -288,12 +368,9 @@ static func banner_texture(hero: HeroData) -> Texture2D:
 
 ## The banner to fly for the hero: the uploaded picture, else the guild's own banner art (null without a guild).
 static func banner_or_default(hero: HeroData) -> Texture2D:
-	var t := banner_texture(hero)
-	if t != null:
-		return t
 	if hero != null and hero.guild != &"":
-		return UIArt.tex(String(DataGuilds.guild(hero.guild).banner))
-	return null
+		return GuildRegistry.banner(hero, hero.guild)
+	return banner_texture(hero)
 
 const OPENING_DEEDS := [&"mq_maelis_orders", &"south_gate_open", &"mq_shard_taken", &"mq_three_told"]
 

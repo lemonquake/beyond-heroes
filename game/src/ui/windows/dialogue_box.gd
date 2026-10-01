@@ -8,7 +8,7 @@ const CPS := 55.0             # characters per second
 ## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
 	&"tempo_revive", &"tempo_renowned", &"field_guide", &"craft_forge", &"craft_alchemy", &"craft_workbench", &"hero_roster", &"camp_rest",
-	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade"]
+	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade", &"guild_window", &"found_guild"]
 
 var session: DialogueSession
 var npc: Npc
@@ -226,6 +226,8 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 					# Capture the definition before opening the next window deferred.
 					_open_socketing.call_deferred(session.npc.display_name, session.npc.shop)
 				&"lape_trade": _open_lape.call_deferred()
+				&"guild_window": (func() -> void: Game.ui_root.open_guild("guilds")).call_deferred()
+				&"found_guild": (func() -> void: Game.ui_root.open_guild("found" if not OwnGuild.has(Game.hero) else "overview")).call_deferred()
 
 func _play_cutscene(id: StringName, who: Npc, resume: String, def: NpcDef) -> void:
 	close()

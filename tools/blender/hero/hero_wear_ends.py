@@ -763,7 +763,12 @@ def _charm_worn(id):
         p.scale((1.2, 1.2, 1.2))
         p.move(at)
     cordp = K.tube([(0.165, -0.112, 1.05), (0.17, -0.118, 1.0), (0.172, -0.12, 0.985)], [0.0018] * 3, pal(s.get("cord", "leather")), n=5)
-    return attach(src + [cordp], bones=["hips", "thigh.L"], keys=False)
+    out = attach(src + [cordp], bones=["hips", "thigh.L"], keys=False)
+    total = sum(tris_of(p) for p in out[:-1])
+    if total > 320:                       # bh-027: the busier charms (knots, bells, dice) are thinned to the jewel budget
+        cord = tris_of(out[-1])
+        out = [simplify(p, max(12, int(tris_of(p) * (255 - cord) / total))) for p in out[:-1]] + out[-1:]
+    return out
 
 
 def _jewel_item(id):
@@ -791,6 +796,11 @@ BOOTS = ["iron_sabaton", "warden_greave", "soft_boot", "wayfarer_boot", "guardia
          "depth_prismkeeper_treads", "depth_vaultpath_treads", "depth_gloomthread_treads"]
 JEWELS = ["copper_ring", "silver_ring", "sigil_ring", "u_band_of_stillness", "bone_amulet", "gold_amulet", "star_pendant",
           "u_heart_of_aether", "rune_charm", "war_talisman"]
+# bh-027: the twenty new accessories
+JEWELS += ["kingsguard_crown_ring", "viper_coil_ring", "twinmoon_band", "starcluster_ring", "thornbrand_ring", "gravewhisper_ring",
+           "tidecaller_moonstone", "sunforged_medallion", "crescent_nighttide", "watchers_eye", "bulwark_locket", "windrider_feather",
+           "wolfclaw_torc", "phial_of_last_light", "wayfarers_knot", "gamblers_bones", "spirit_bell", "stoneheart_idol",
+           "verdant_leaf_charm", "sands_of_tempo"]
 ALL = HELMS + GLOVES + BOOTS + JEWELS
 
 for _id in GLOVES:

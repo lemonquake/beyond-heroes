@@ -120,8 +120,12 @@ func _on_gear_changed() -> void:
 
 # ---- draughts -------------------------------------------------------------------------------------------------------
 
+## bh-027: guild fighters (GuildFighter) fight in multiplayer too; the Quake Team does not.
+func _online_ok() -> bool:
+	return false
+
 func _physics_process(delta: float) -> void:
-	if Net.is_active():
+	if Net.is_active() and not _online_ok():
 		queue_free()      # no Quake Team in multiplayer
 		return
 	super._physics_process(delta)

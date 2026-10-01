@@ -22,6 +22,7 @@ var _t := 0.0
 var _hum: AudioStreamPlayer3D
 var _collecting := false
 var _auto_check := 0.0
+var _settle_t := 0.0        # bh-027: seconds since landing until the one check that the drop rests on the ground
 
 func _ready() -> void:
 	add_to_group(&"loot")
@@ -173,6 +174,11 @@ func _process(delta: float) -> void:
 		pick_up(p)
 		return
 	_auto_check -= delta
+	if _settle_t >= 0.0:
+		_settle_t += delta
+		if _settle_t > 0.6:
+			_settle_t = -1.0
+			_settle()
 	if item != null and _auto_check <= 0.0 and d < AUTO_RANGE:
 		_auto_check = 0.25
 		if wants_auto_loot(p):
@@ -200,8 +206,10 @@ func _magnet(p: Player) -> void:
 			_visual.scale = Vector3.ONE * (1.0 - 0.6 * k), 0.0, 1.0, MAGNET_TIME)
 	tw.tween_callback(func() -> void:
 		if not is_instance_valid(p) or not wants_auto_loot(p) or not pick_up(p):
-			# the bag filled up in the meantime: drop back where it was
+			# the bag filled up in the meantime: drop back where it was, and let it lie a while (it used to fly at the
+			# hero and back every quarter second for as long as they stood there)
 			_collecting = false
+			_auto_check = 4.0
 			global_position = start
 			if _visual:
 				_visual.scale = Vector3.ONE
@@ -242,13 +250,26 @@ func pick_up(p: Player) -> bool:
 		return true
 	var left := p.hero.inventory.add(item)
 	if left > 0:
-		Events.notify.emit("Inventory is full", &"error")
+		Events.notify.emit("Inventory is full: no room for %s" % label_text(), &"error")
 		Audio.play_ui(&"ui_error")
 		return false
 	Events.loot_picked.emit(item)
 	Audio.play_ui(&"item_pickup")
 	_remove()
 	return true
+
+## bh-027: a drop that came to rest in the air (the ground under it was a monster, a moving part or nothing at all)
+## drops to the first walkable ground below, so it is never left hanging out of reach.
+func _settle() -> void:
+	if not is_inside_tree() or _collecting:
+		return
+	var space := get_world_3d().direct_space_state
+	var near = Loot.floor_under(space, global_position, global_position.y, 0.6)
+	if near != null:
+		return
+	var deep = Loot.floor_under(space, global_position, global_position.y, 80.0)
+	if deep != null:
+		global_position = deep
 
 func _remove() -> void:
 	if Game.hover_loot == self:

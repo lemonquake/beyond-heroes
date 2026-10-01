@@ -31,6 +31,9 @@ const POTION_ORDER := {
 }
 const LOW_HP := 0.3
 const INTERACT_RANGE := 2.6
+## bh-027: guild members fighting beside the hero (Guild War passives), recounted every second.
+var guild_comrades := 0
+var _comrade_t := 0.0
 const INTERACT_HEIGHT := 1.6
 const RIPOSTE_WINDOW := 2.0
 const ACCEL := 45.0
@@ -235,6 +238,9 @@ func rebuild_stats() -> void:
 		mods.append(StatModifier.more(&"move_speed", stats.flag(&"dodge_haste") if stats else 0.2, "Windswift"))
 	if stats and stats.has_flag(&"low_hp_dr") and hp < max_hp() * 0.35:
 		mods.append(StatModifier.more(&"damage_taken", -stats.flag(&"low_hp_dr"), "Bastion"))
+	# bh-027: Guild War passives grow with the guild members fighting beside the hero
+	if guild_comrades > 0:
+		mods.append_array(GuildRules.war_modifiers(hero, guild_comrades))
 	stats = hero.compute_stats(mods)
 	affinity = Elements.PHYSICAL
 	level = hero.progress.level
@@ -405,6 +411,13 @@ func _physics_process(delta: float) -> void:
 	if hero == null or not is_finite(delta) or delta <= 0.0:
 		return
 	_time += delta
+	_comrade_t -= delta
+	if _comrade_t <= 0.0:
+		_comrade_t = 1.0
+		var n := GuildRules.comrades(self, hero) if GuildRules.has_war_passives(hero) else 0
+		if n != guild_comrades:
+			guild_comrades = n
+			mark_stats_dirty()
 	ensure_stats()
 	status.tick(delta)
 	if not alive:
@@ -544,7 +557,9 @@ func _read_input(delta: float) -> void:
 		if Game.hover_loot and is_instance_valid(Game.hover_loot):
 			Game.hover_loot.request_pickup(self)
 		elif Game.hover_ally and is_instance_valid(Game.hover_ally) and Game.hover_target == null:
-			Net.trade_prompt((Game.hover_ally as NetAvatar).owner_peer)
+			# bh-027: a fellow player: Whisper, Trade, Invite to Guild, Showcase, Ping
+			if Game.ui_root and Game.ui_root.has_method(&"open_player_menu"):
+				Game.ui_root.open_player_menu((Game.hover_ally as NetAvatar).owner_peer)
 		else:
 			_request(&"light")
 	elif lmb and Settings.attack_hold_repeat and (action == null or action_kind == &"light") and (_queued == &"" or _queued == &"light"):

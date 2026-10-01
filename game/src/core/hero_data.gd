@@ -89,6 +89,11 @@ var guild_alias := ""
 ## bh-017: the AI allies the `quake team` cheat called (QuakeMate), at most QuakeTeam.MAX; optional in a save.
 var quake_team: Array = []
 var guild_banner := PackedByteArray()
+## bh-027: the guilds of the hero's world (the rolled Guild House guilds and other players' guilds seen in multiplayer,
+## GuildRegistry), the guild they founded and lead (OwnGuild) and another player's guild they joined (a snapshot).
+var guild_world := {}
+var own_guild := {}
+var remote_guild := {}
 var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
@@ -460,6 +465,8 @@ func to_dict() -> Dictionary:
 		"guild_jobs": GuildJobs.to_dict(self),
 		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
 		"guild_alias": guild_alias, "guild_banner": Marshalls.raw_to_base64(guild_banner) if not guild_banner.is_empty() else "",
+		"guild_world": GuildRegistry.world_to_plain(self), "own_guild": OwnGuild.to_plain(own_guild),
+		"remote_guild": GuildRegistry.remote_to_plain(remote_guild) if not remote_guild.is_empty() else {},
 		"look": HeroLook.to_save(HeroLook.sanitize(look)),
 	}
 
@@ -547,8 +554,11 @@ static func from_dict(d: Dictionary) -> HeroData:
 	for k in sh:
 		h.shops[StringName(k)] = (sh[k] as Dictionary).duplicate(true)
 	# guild data (absent in older saves: Unranked, nothing equipped is removed)
+	h.guild_world = GuildRegistry.world_from_plain(d.get("guild_world", {}))
+	h.own_guild = OwnGuild.from_plain(d.get("own_guild", {}))
+	h.remote_guild = GuildRegistry.clean_remote(d.get("remote_guild", {}))
 	var g := StringName(d.get("guild", ""))
-	h.guild = g if DataGuilds.GUILDS.has(g) else &""
+	h.guild = g if GuildRegistry.valid_membership(h, g) else &""
 	h.tier_cheat_level = int(d.get("tier_cheat_level", -1))
 	h.tier = clampi(int(d.get("tier", 0)), 0, DataGuilds.MAX_RANK) if h.guild != &"" or h.tier_cheat_level >= 1 else 0
 	h.equipment.tier_rank = h.tier

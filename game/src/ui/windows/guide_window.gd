@@ -27,6 +27,7 @@ const CONTROLS := [
 		[["skills"], "Skills: spend skill points, fill the skill bar"],
 		[["talents"], "Talents: spend talent points"],
 		[["tempos"], "Tempos: your spirits' gear, stats and skills"],
+		[["guild"], "Guild: found or lead a guild, members, passives, Call to Arms"],
 		[["world_map"], "Map: waypoints, places, tracked routes"],
 		[["guide"], "This Field Guide"],
 		[["chat"], "Chat line"],

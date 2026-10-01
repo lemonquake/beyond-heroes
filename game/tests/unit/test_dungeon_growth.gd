@@ -194,7 +194,8 @@ func test_guardian_rewards_and_bundle_variety() -> void:
 				var drops := Loot.equipment_for(guardian, player)
 				ok(drops.size() >= 3 and drops[0].base.is_weapon(), "guardian guarantees gear and a class weapon")
 				for item: ItemInstance in drops:
-					ok(item.base.boss_exclusive or ItemGenerator.class_fit(item.base, cls), "ordinary guardian gear fits receiver; boss collections keep all sets possible")
+					ok(item.base.boss_exclusive or ItemGenerator.class_fit(item.base, cls) or ItemGenerator.accessory_fits(item.base, cls),
+						"ordinary guardian gear fits receiver (accessories suit everyone); boss collections keep all sets possible")
 					ok(not seen.has(item.base.id), "no repeated base in a reward bundle")
 					seen[item.base.id] = true
 					if String(item.base.id).begins_with("depth_") and item.base.unique_name != "":

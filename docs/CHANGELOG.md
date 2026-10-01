@@ -2,6 +2,62 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-027 - Alpha Version 0.3: Guilds of your own, accessories again
+
+Prepared 1 October 2026.
+
+- **Accessories drop again.** Monster and chest drops had been restricted to the hero's class gear, and rings, amulets
+  and charms count as no class's gear, so they could never drop. They now have their own roll: champions and bosses
+  always add one (their second piece), elites often, ordinary monsters about one drop in five, and every chest's
+  second piece is one.
+- **Twenty new accessories**, each a different shape with its own model, icon, worn model and implicit stats:
+  - seven rings: crown, serpent, twin band, star cluster, thorned, skull, moonstone
+  - seven amulets: sun, crescent, eye, shield locket, feather, wolf-claw torc, phial
+  - six charms: endless knot, dice, spirit bell, stone idol, leaf, hourglass
+  - See `game/src/data/data_accessories.gd`.
+- **Guilds of your own** (press Z): found a guild, write its motto and Guild Info, and design its banner or upload a
+  picture.
+  - Adventurers of every class join at levels just below yours, until the guild is full.
+  - You can dismiss any member, and expand the guild from 6 slots to 9, 12 and 15 (10,000 / 15,000 / 25,000 gold).
+  - Thirteen passives: eight guild passives and five Guild War passives. The Guild War passives grow with the guild
+    members fighting beside you.
+  - **Call to Arms** summons your members to fight beside you for 15 minutes, with a 30-minute cooldown. It starts
+    at one member and can be upgraded to six.
+  - See docs/GUILDS.md.
+- **Four more guilds** set up in the Guild House, with names rolled from real words (`GuildNames`) and painted banners.
+  Their names and terms are rolled once per hero and saved with them.
+- **One central Guild Quest Board**, open to every hero whatever their guild: nine postings at a time, fourteen new
+  open postings, and five jobs at once. A job from your own guild pays +10%, and handing jobs in earns your guild
+  renown.
+- **The Guild House was rebuilt.**
+  - Six guild counters with banner stands.
+  - Your guild is *featured* under the town's plaque: Malasugue believes you can rescue Aljay and Roydo together
+    with Paul David.
+  - Fellow heroes' banners hang on the north wall.
+  - A huge animated banner with your guild's name and motto flies outside once you join or found a guild.
+- **Multiplayer** (protocol 13):
+  - Every player's guild travels in their profile, and other players' guilds and banners are imported into your
+    Guild House.
+  - Click a player (or Menu on their party frame) to Whisper (`/w <name>`), Trade, Invite to Guild, Showcase or
+    Ping them.
+  - Invited players join as Sworn Heroes, receive the guild's passives and banner, and stay in sync with the
+    Guildmaster.
+  - Call to Arms fighters fight in multiplayer too.
+- **Showcase**: after the other player agrees, both of you see both heroes' equipped gear and weapons side by side
+  (no stats) and each hero's guild. Click a guild to see its enlarged banner and info.
+- **Pickup fixes.**
+  - A drop from a monster that died in the air or over a ledge fell no further than 4 m and could hang out of
+    reach. It now falls to the first walkable ground (and settles again if it lands on nothing).
+  - A ground tag hovered while the loot tags were shown stayed the click target after they were hidden.
+  - A drop that auto-loot wanted but could not take flew back and forth every quarter second.
+- **Old saves and the survival rebalance.** The level-reward points credited to an old save by the rebalance
+  (free points 3 → 10 and skill points 1 → 2 per level) used to sit unspent, so an old hero's HP and Mana stayed
+  below a new hero's. The credited attribute points are now spent on load along the hero's own build, and a notice
+  shows the new Maximum HP and Mana. Skill points stay yours to place.
+
+Sources: docs/GUILDS.md, game/tests/unit/test_bh027.gd, game/tests/unit/test_bh027_pickup.gd,
+game/tests/unit/test_survival_balance.gd, work/lemondev/bh-027/evidence.
+
 ## BH-026 - The Ember Dragon set
 
 Prepared 1 October 2026.

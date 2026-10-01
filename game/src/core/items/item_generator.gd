@@ -298,6 +298,10 @@ static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 		return base.category == &"inner_garment" and base.weight_class == &"heavy" and class_id in [&"ranger", &"shadowblade"]
 	return false
 
+## bh-027: an accessory any hero of `class_id` may wear (unlabelled, or labelled for that class).
+static func accessory_fits(base: ItemBaseDef, class_id: StringName) -> bool:
+	return base != null and base.category == &"accessory" and (base.class_hint == &"" or base.class_hint == class_id)
+
 ## Random base eligible at an item level (weighted), optionally restricted to categories. Set pieces and uniques are
 ## excluded — they come from dedicated drop rolls (elites/bosses) and special merchant stock. With a `class_hint`,
 ## `fit_chance` of the picks come from that class's own gear (bh-017: a Knight is offered plate and blades, not robes).
@@ -314,7 +318,14 @@ static func random_base(rng: RandomNumberGenerator, ilvl: int, categories: Array
 		pool.append(b)
 	if pool.is_empty():
 		return random_base(rng, ilvl, categories, class_hint, fit_chance) if not excluded.is_empty() else null
-	if class_hint != &"" and rng.randf() < fit_chance:
+	# bh-027: an accessory roll (Loot asks for one alongside the weapons) skips the class-gear filter — rings suit
+	# everyone — but never drops a piece labelled for another class.
+	if not categories.is_empty() and categories.all(func(c): return c == &"accessory"):
+		if class_hint != &"":
+			pool = pool.filter(func(b): return accessory_fits(b, class_hint))
+		if pool.is_empty():
+			return null
+	elif class_hint != &"" and rng.randf() < fit_chance:
 		var mine := pool.filter(func(b): return class_fit(b, class_hint))
 		if not mine.is_empty():
 			pool = mine

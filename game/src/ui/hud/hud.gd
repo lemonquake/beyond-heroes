@@ -964,8 +964,8 @@ func _update_tier(h: HeroData) -> void:
 	_tier_icon.texture = UIArt.tex(DataGuilds.emblem_path(h.tier))
 	_tier_label.text = "Class %s" % t.letter if h.tier > 0 else "Unranked"
 	_tier_label.add_theme_color_override("font_color", t.color)
-	var g := DataGuilds.guild(h.guild)
-	_guild_icon.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
+	var g := GuildRegistry.info(h, h.guild)
+	_guild_icon.texture = (UIArt.tex(String(g.crest)) if g.has("crest") else GuildRegistry.banner(h, h.guild)) if not g.is_empty() else null
 	_guild_icon.visible = not g.is_empty()
 
 func _tier_tooltip() -> String:
@@ -973,13 +973,17 @@ func _tier_tooltip() -> String:
 	var lines := PackedStringArray()
 	lines.append(DataGuilds.tier_name(h.tier))
 	if h.guild == &"":
-		lines.append("Join the Swordfin Company or the Lantern Covenant in Malasugue to be registered as a Class E hero.")
+		lines.append("Join a guild at the Guild House in Malasugue (or found your own, %s) to be registered as a Class E hero." % Settings.binding_text(&"guild"))
 		lines.append("Licensed items need a guild registration.")
 	else:
-		var g := DataGuilds.guild(h.guild)
-		lines.append("%s — \"%s\"" % [g.name, g.motto])
-		for i in g.perk_text.size():
-			lines.append("  %s x%d" % [g.perk_text[i], h.tier])
+		var g := GuildRegistry.info(h, h.guild)
+		lines.append("%s — \"%s\"" % [GuildRules.display_name(h), g.get("motto", "")])
+		for t in g.get("perk_text", []):
+			lines.append("  %s x%d" % [t, h.tier])
+		var ranks: Dictionary = g.get("passives", {})
+		for id in ranks:
+			if int(ranks[id]) > 0:
+				lines.append("  %s %d: %s" % [DataGuildPassives.passive(StringName(id)).name, ranks[id], DataGuildPassives.describe(StringName(id), int(ranks[id]))])
 		lines.append("  Accord bonus: +%d%% Maximum HP, +%d%% Damage" % [roundi(DataGuilds.ACCORD_HP * 100 * h.tier), roundi(DataGuilds.ACCORD_DAMAGE * 100 * h.tier)])
 		var p := GuildRules.next_promotion(h)
 		if int(p.rank) > 0:

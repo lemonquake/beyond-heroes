@@ -93,7 +93,7 @@ func refresh() -> void:
 	if hero == null:
 		return
 	var member := GuildRules.can_customise(hero)
-	var g := DataGuilds.guild(hero.guild)
+	var g := GuildRegistry.info(hero, hero.guild)
 	var accent: Color = g.color if not g.is_empty() else UITheme.TEXT_DIM
 	var st := StyleBoxFlat.new()
 	st.bg_color = Color(0.1, 0.075, 0.06, 0.95)
@@ -105,11 +105,13 @@ func refresh() -> void:
 	_banner_rect.texture = GuildRules.banner_or_default(hero)
 	_banner_name.text = GuildRules.display_name(hero)
 	_banner_name.add_theme_color_override("font_color", accent.lightened(0.3))
-	_official.text = "You joined: %s" % String(g.name) if member else "You are not in a guild yet. Register at the Guild House or a guild hall, then come back to name it."
+	var own := hero.guild == GuildRegistry.OWN
+	_official.text = ("You lead: %s" % String(g.name) if own else "You joined: %s" % String(g.name)) if member else "You are not in a guild yet. Register at the Guild House, found your own (%s), then come back to name it." % Settings.binding_text(&"guild")
 	_name_edit.editable = member
 	_name_edit.placeholder_text = String(g.get("name", "Your guild's name")) if member else "Join a guild first"
-	if _name_edit.text != hero.guild_alias and not _name_edit.has_focus():
-		_name_edit.text = hero.guild_alias
+	var shown := String(hero.own_guild.get("name", "")) if own else hero.guild_alias
+	if _name_edit.text != shown and not _name_edit.has_focus():
+		_name_edit.text = shown
 	_pick.disabled = not member
 	_clear.disabled = not member or hero.guild_banner.is_empty()
 
@@ -129,7 +131,7 @@ func _save_name() -> void:
 	if err != "":
 		_say(err, true)
 		return
-	_name_edit.text = hero.guild_alias
+	_name_edit.text = String(hero.own_guild.get("name", "")) if hero.guild == GuildRegistry.OWN else hero.guild_alias
 	_say("Your guild is now called \"%s\"." % GuildRules.display_name(hero), false)
 	Audio.play_ui(&"ui_open")
 

@@ -29,6 +29,9 @@ const HALLS := [
 	["guild_house", Vector3(-11, 0, -10), 0.0, &"int_guildhouse", "the Guild House"],
 	["guild_hall_lantern", Vector3(-30, 0, -9.5), 90.0, &"int_lantern", "Lantern House"],
 ]
+## bh-027: where the great guild banner stands, in front of the Guild House beside its door, facing the plaza.
+const GUILD_BANNER_AT := Vector3(-5.6, 0, -2.2)
+const GUILD_BANNER_YAW := 18.0
 ## Footprints kept clear of grass, bushes and trees: (centre x, z, yaw, half size x, half size z).
 const FOOTPRINTS := [
 	[-25, 2, 90, 4.3, 3.8], [25, 6, -90, 4.3, 3.8], [-17, 23, 150, 4.3, 3.8], [23, -14, -60, 4.3, 3.8], [-21, -19, 55, 4.3, 3.8],
@@ -285,6 +288,11 @@ func _halls() -> void:
 					light(socket_pos(b, sk) + Vector3(0, -1.6, 0) + fwd * 0.6, Color(0.55, 0.7, 1.0), 1.0, 4.0)
 			"guild_house":
 				light(socket_pos(b, "sign_light"), Color(1.0, 0.78, 0.5), 1.6, 6.0, false, true)
+				# bh-027: the great banner of the hero's guild, flying beside the door once they join or found one
+				var gh := GuildHallBanner.new()
+				gh.position = Vector3(GUILD_BANNER_AT.x, ground(GUILD_BANNER_AT.x, GUILD_BANNER_AT.z), GUILD_BANNER_AT.z)
+				gh.rotation.y = deg_to_rad(GUILD_BANNER_YAW)
+				markers.add_child(gh)
 				for sk in ["banner_l", "banner_r"]:
 					light(socket_pos(b, sk) + Vector3(0, -1.6, 0) + fwd * 0.6, Color(0.55, 0.7, 1.0) if sk == "banner_l" else Color(0.75, 0.55, 1.0), 0.9, 4.0)
 			"guild_hall_lantern":

@@ -5,7 +5,12 @@ class_name GuildJobs
 ## A job: {id, tpl, guild, kind, title, text, goal, progress, reward, map}.
 
 const BOARD_SIZE := 4
-const ACTIVE_MAX := 3
+const ACTIVE_MAX := 5              # bh-027: five (was three) now that the board is shared and longer
+## bh-027: the Guild House keeps one central board, open to every hero whatever their guild (or none): all the guilds'
+## postings together, more of them at once. A job from the hero's own guild pays a little extra.
+const CENTRAL := &"central"
+const CENTRAL_SIZE := 9
+const OWN_GUILD_BONUS := 0.10
 ## Gold paid grows with hero level the way monster gold does, and with the hero's guild tier.
 const LEVEL_GROWTH := 0.12
 const TIER_BONUS := 0.05
@@ -40,7 +45,11 @@ static func tier_multiplier(hero: HeroData) -> float:
 
 ## What the job actually pays this hero today.
 static func payout(hero: HeroData, job: Dictionary) -> int:
-	return int(round(float(job.reward) * tier_multiplier(hero)))
+	var own := OWN_GUILD_BONUS if hero.guild != &"" and String(job.get("guild", "")) == String(hero.guild) else 0.0
+	return int(round(float(job.reward) * (tier_multiplier(hero) + own)))
+
+static func active_max(_hero: HeroData) -> int:
+	return ACTIVE_MAX
 
 static func _map_name(id: String) -> String:
 	var md := DB.map_def(StringName(id)) if id != "" else null
@@ -51,7 +60,14 @@ static func make_job(hero: HeroData, tpl: Dictionary, rng: RandomNumberGenerator
 	s.serial = int(s.serial) + 1
 	var goal := rng.randi_range(int(tpl.goal.x), int(tpl.goal.y))
 	var text := String(tpl.text).replace("{n}", str(goal)).replace("{map}", _map_name(String(tpl.get("map", ""))))
-	return {"id": int(s.serial), "tpl": String(tpl.id), "guild": String(tpl.guild), "kind": String(tpl.kind), "title": String(tpl.title),
+	var issuer := String(tpl.guild)
+	if issuer == "open":
+		# posted by one of the guilds that set up in the Guild House (or, now and then, by the hero's own guild)
+		var npc: Array = GuildRegistry.world(hero).npc
+		issuer = String(npc[rng.randi_range(0, npc.size() - 1)].id) if not npc.is_empty() else "swordfin"
+		if OwnGuild.has(hero) and rng.randf() < 0.2:
+			issuer = String(GuildRegistry.OWN)
+	return {"id": int(s.serial), "tpl": String(tpl.id), "guild": issuer, "kind": String(tpl.kind), "title": String(tpl.title),
 		"text": text, "goal": goal, "progress": 0, "reward": base_reward(tpl, goal, hero.progress.level), "map": String(tpl.get("map", ""))}
 
 static func _eligible(hero: HeroData, gid: StringName) -> Array:
@@ -61,11 +77,15 @@ static func _eligible(hero: HeroData, gid: StringName) -> Array:
 	for j in active(hero):
 		used[j.tpl] = true
 	var lvl := hero.progress.level
-	return DataGuildJobs.for_guild(gid).filter(func(t): return not used.has(String(t.id)) and lvl >= int(t.lvl.x) and lvl <= int(t.lvl.y))
+	var pool := DataGuildJobs.all() if gid == CENTRAL else DataGuildJobs.for_guild(gid)
+	return pool.filter(func(t): return not used.has(String(t.id)) and lvl >= int(t.lvl.x) and lvl <= int(t.lvl.y))
 
-## Drops postings the hero has outgrown and pins the board back up to BOARD_SIZE. Returns the board.
-static func refresh_board(hero: HeroData, gid: StringName) -> Array:
-	if not DataGuilds.GUILDS.has(gid):
+static func board_size(gid: StringName) -> int:
+	return CENTRAL_SIZE if gid == CENTRAL else BOARD_SIZE
+
+## Drops postings the hero has outgrown and pins the board back up to its size. Returns the board.
+static func refresh_board(hero: HeroData, gid: StringName = CENTRAL) -> Array:
+	if not DataGuilds.GUILDS.has(gid) and gid != CENTRAL:
 		return []
 	var b := board(hero, gid)
 	var lvl := hero.progress.level
@@ -74,7 +94,7 @@ static func refresh_board(hero: HeroData, gid: StringName) -> Array:
 		if t.is_empty() or lvl < int(t.lvl.x) or lvl > int(t.lvl.y):
 			b.remove_at(i)
 	var rng := RandomNumberGenerator.new()
-	while b.size() < BOARD_SIZE:
+	while b.size() < board_size(gid):
 		var pool := _eligible(hero, gid)
 		if pool.is_empty():
 			break
@@ -82,12 +102,11 @@ static func refresh_board(hero: HeroData, gid: StringName) -> Array:
 		b.append(make_job(hero, pool[rng.randi() % pool.size()], rng))
 	return b
 
-## "" when the hero may take a posting from `gid`'s board now, otherwise why not.
+## "" when the hero may take a posting from `gid`'s board now, otherwise why not. bh-027: every job is open to every
+## hero, whichever guild posted it and whichever guild (if any) they belong to.
 static func accept_error(hero: HeroData, gid: StringName, job_id: int) -> String:
-	if hero.guild != gid:
-		return "Only registered %s heroes may take these jobs" % DataGuilds.guild(gid).get("short", "guild")
-	if active(hero).size() >= ACTIVE_MAX:
-		return "You already carry %d jobs" % ACTIVE_MAX
+	if active(hero).size() >= active_max(hero):
+		return "You already carry %d jobs" % active_max(hero)
 	for j in board(hero, gid):
 		if int(j.id) == job_id:
 			return ""
@@ -142,7 +161,8 @@ static func claim(hero: HeroData, job_id: int) -> String:
 	abandon(hero, job_id)
 	Events.gold_picked.emit(gold)
 	Events.notify.emit("%s paid: +%d gold" % [j.title, gold], &"loot")
-	refresh_board(hero, StringName(j.guild))
+	OwnGuild.on_job(hero, gold)
+	refresh_board(hero, CENTRAL)
 	Events.guild_jobs_changed.emit()
 	return ""
 
@@ -211,7 +231,7 @@ static func from_dict(d) -> Dictionary:
 	var ab = d.get("board", {})
 	if ab is Dictionary:
 		for g in ab:
-			if DataGuilds.GUILDS.has(StringName(g)) and ab[g] is Array:
+			if (DataGuilds.GUILDS.has(StringName(g)) or StringName(g) == CENTRAL) and ab[g] is Array:
 				out.board[String(g)] = (ab[g] as Array).filter(ok_job).map(func(j): return job_to_plain(j))
 	var act = d.get("active", [])
 	if act is Array:

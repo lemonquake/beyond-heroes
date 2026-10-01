@@ -1,51 +1,27 @@
 class_name GuildJobsWindow
 extends UIWindow
-## The Guild House board (bh-016): pick between the two guilds of Malasugue (join or transfer at the counter), read that
-## guild's job postings and take up to GuildJobs.ACTIVE_MAX miniquests; hand finished ones in for gold. Postings are
-## only open to registered members of the guild that posted them.
+## The Guild House board (bh-016; bh-027: one central board). Every guild of the town posts its odd jobs on the same
+## board and every hero may take any of them, in a guild or not — up to GuildJobs.ACTIVE_MAX at once; hand finished
+## ones in for gold. A job your own guild posted pays a little more, and handing jobs in earns your guild renown.
 
-var guild: StringName = &"swordfin"
-var _tabs := {}
+var guild: StringName = GuildJobs.CENTRAL
 var _info: VBoxContainer
 var _board: VBoxContainer
 var _mine: VBoxContainer
 var _foot: Label
 
 func _init() -> void:
-	super._init("Guild House", Vector2(1300, 940))
+	super._init("Guild Quest Board", Vector2(1400, 960))
 
-## Open the window on one guild's board (`gid` empty = the hero's own guild, else Swordfin).
-func open_on(gid: StringName = &"") -> void:
-	var hero := Game.hero
-	if gid == &"" or not DataGuilds.GUILDS.has(gid):
-		gid = hero.guild if hero and hero.guild != &"" else &"swordfin"
-	guild = gid
+## Open the central board (`gid` is accepted for the old guild boards and ignored: there is one board now).
+func open_on(_gid: StringName = &"") -> void:
+	guild = GuildJobs.CENTRAL
 	Game.ui_root.open(&"guild_jobs")
 
 func _build() -> void:
 	Events.guild_jobs_changed.connect(_on_changed)
 	Events.guild_joined.connect(func(_g: StringName, _f: bool) -> void: _on_changed())
-	# the two guilds
-	var tabs := hbox(16)
-	tabs.alignment = BoxContainer.ALIGNMENT_CENTER
-	body.add_child(tabs)
-	for gid in [&"swordfin", &"lantern"]:
-		var g := DataGuilds.guild(gid)
-		var b := Button.new()
-		b.toggle_mode = true
-		b.text = "  %s" % g.name
-		b.icon = UIArt.tex(g.crest)
-		b.expand_icon = true
-		b.custom_minimum_size = Vector2(430, 62)
-		b.add_theme_font_size_override("font_size", 22)
-		b.add_theme_constant_override("icon_max_width", 44)
-		b.focus_mode = Control.FOCUS_ALL
-		b.pressed.connect(func() -> void:
-			Audio.play_ui(&"ui_click")
-			guild = gid
-			refresh())
-		tabs.add_child(b)
-		_tabs[gid] = b
+	Events.guild_changed.connect(_on_changed)
 	var info_panel := inset()
 	body.add_child(info_panel)
 	_info = vbox(4)
@@ -58,7 +34,7 @@ func _build() -> void:
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	left.size_flags_stretch_ratio = 1.15
 	cols.add_child(left)
-	left.add_child(section("Job Board"))
+	left.add_child(section("Postings of every guild"))
 	var ls := ScrollContainer.new()
 	ls.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	ls.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -99,8 +75,6 @@ func refresh() -> void:
 	var hero := Game.hero
 	if hero == null:
 		return
-	for gid in _tabs:
-		(_tabs[gid] as Button).set_pressed_no_signal(gid == guild)
 	_fill_info(hero)
 	_fill_board(hero)
 	_fill_mine(hero)
@@ -114,31 +88,22 @@ func _clear(c: Control) -> void:
 
 func _fill_info(hero: HeroData) -> void:
 	_clear(_info)
-	var g := DataGuilds.guild(guild)
 	var head := hbox(12)
 	_info.add_child(head)
-	var own_name := GuildRules.display_name(hero) if hero.guild == guild else String(g.name)
-	var gname := UITheme.title(own_name if own_name == String(g.name) else "%s  (%s)" % [own_name, g.short], 24, (g.color as Color).lightened(0.3))
+	var gname := UITheme.title("The Guild Quest Board", 26, UITheme.GOLD)
 	gname.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(gname)
-	if hero.guild == guild:
-		head.add_child(UITheme.label("You are registered: %s" % DataGuilds.tier_name(hero.tier), 19, UITheme.GOOD, UITheme.body_bold()))
-		head.add_child(_btn("Name & Banner", func() -> void: Game.ui_root.open(&"guild_custom"), &"", 210.0))
-		head.add_child(_btn("Name & Banner", func() -> void: Game.ui_root.open(&"guild_custom"), &"", 210.0))
-	else:
-		var fee := GuildRules.join_fee(hero, guild)
-		var verb := "Register with %s" % g.short if hero.guild == &"" else "Transfer to %s" % g.short
-		var b := _btn("%s (%d gold)" % [verb, fee], func() -> void: _join(guild), &"PrimaryButton", 380.0)
-		b.disabled = hero.inventory.gold < fee
-		head.add_child(b)
-	var mo := UITheme.label("“%s”  —  %s" % [g.motto, g.master], 16, UITheme.TEXT_DIM, UITheme.body_font())
-	_info.add_child(mo)
-	var pk := UITheme.label("Seal perks per tier: %s.  %s." % [", ".join(g.perk_text), ".  ".join(g.features)], 16, UITheme.TEXT, UITheme.body_font())
-	pk.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_info.add_child(pk)
-	var tip := "Jobs pay %d%% extra for your Class %s tier." % [roundi((GuildJobs.tier_multiplier(hero) - 1.0) * 100.0), DataGuilds.letter(hero.tier)] \
-		if hero.guild == guild and hero.tier > 0 else "Only registered members of a guild may take its jobs. Your tier stays with you if you change guild."
-	_info.add_child(UITheme.label(tip, 16, UITheme.GOLD, UITheme.body_font()))
+	if hero.guild != &"":
+		head.add_child(UITheme.label("%s · %s" % [GuildRules.display_name(hero), DataGuilds.tier_name(hero.tier)], 18, UITheme.GOOD, UITheme.body_bold()))
+	head.add_child(_btn("Guild (%s)" % Settings.binding_text(&"guild"), func() -> void: Game.ui_root.open_guild(""), &"", 170.0))
+	if not OwnGuild.has(hero):
+		head.add_child(_btn("Found a Guild", func() -> void: Game.ui_root.open_guild("found"), &"PrimaryButton", 200.0))
+	var tip := "Every guild posts here and any hero may take any job. Jobs pay %d%% extra for your Class %s tier%s. Handing jobs in also earns your own guild renown." % [
+		roundi((GuildJobs.tier_multiplier(hero) - 1.0) * 100.0), DataGuilds.letter(hero.tier),
+		(", and %d%% more when your own guild posted them" % roundi(GuildJobs.OWN_GUILD_BONUS * 100.0)) if hero.guild != &"" else ""]
+	var l := UITheme.label(tip, 16, UITheme.TEXT, UITheme.body_font())
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_info.add_child(l)
 
 func _join(gid: StringName) -> void:
 	var h := Game.hero
@@ -170,13 +135,17 @@ func _card(accent: Color) -> Array:
 	p.add_child(v)
 	return [p, v]
 
+func _issuer(hero: HeroData, job: Dictionary) -> Dictionary:
+	var g := GuildRegistry.info(hero, StringName(String(job.get("guild", ""))))
+	return g if not g.is_empty() else {"short": "A guild", "color": UITheme.BRONZE_DIM}
+
 func _fill_board(hero: HeroData) -> void:
 	_clear(_board)
-	var g := DataGuilds.guild(guild)
-	var jobs := GuildJobs.refresh_board(hero, guild)
+	var jobs := GuildJobs.refresh_board(hero, GuildJobs.CENTRAL)
 	if jobs.is_empty():
 		_board.add_child(UITheme.label("Nothing is posted for your level right now.", 18, UITheme.TEXT_DIM, UITheme.body_font()))
 	for j in jobs:
+		var g := _issuer(hero, j)
 		var c := _card((g.color as Color).darkened(0.1))
 		var v: VBoxContainer = c[1]
 		var top := hbox(8)
@@ -184,29 +153,26 @@ func _fill_board(hero: HeroData) -> void:
 		var t := UITheme.label(String(j.title), 21, UITheme.GOLD, UITheme.body_bold())
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		top.add_child(t)
-		top.add_child(UITheme.label(String(DataGuildJobs.KINDS.get(j.kind, "")), 15, UITheme.TEXT_DIM, UITheme.body_font()))
+		top.add_child(UITheme.label("%s · %s" % [String(g.short), String(DataGuildJobs.KINDS.get(j.kind, ""))], 15, (g.color as Color).lightened(0.35), UITheme.body_bold()))
 		var tx := UITheme.label(String(j.text), 16, UITheme.TEXT, UITheme.body_font())
 		tx.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		v.add_child(tx)
 		var bot := hbox(10)
 		v.add_child(bot)
-		var pay := UITheme.label("Pays %d gold" % GuildJobs.payout(hero, j), 18, UITheme.GOOD, UITheme.number_font())
+		var pay := UITheme.label("Pays %d gold%s" % [GuildJobs.payout(hero, j), "  (your guild)" if String(j.guild) == String(hero.guild) else ""], 18, UITheme.GOOD, UITheme.number_font())
 		pay.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		bot.add_child(pay)
 		var id := int(j.id)
-		var err := GuildJobs.accept_error(hero, guild, id)
+		var err := GuildJobs.accept_error(hero, GuildJobs.CENTRAL, id)
 		var b := _btn("Accept", func() -> void: _accept(id), &"PrimaryButton", 150.0)
 		b.disabled = err != ""
 		if err != "":
 			b.tooltip_text = err
 		bot.add_child(b)
 		_board.add_child(c[0])
-	if hero.guild != guild:
-		var l := UITheme.label("Register with %s to accept these jobs." % g.short, 16, UITheme.BAD, UITheme.body_font())
-		_board.add_child(l)
 
 func _accept(id: int) -> void:
-	var err := GuildJobs.accept(Game.hero, guild, id)
+	var err := GuildJobs.accept(Game.hero, GuildJobs.CENTRAL, id)
 	if err != "":
 		Events.notify.emit(err, &"error")
 		Audio.play_ui(&"ui_error")
@@ -216,14 +182,14 @@ func _accept(id: int) -> void:
 func _fill_mine(hero: HeroData) -> void:
 	_clear(_mine)
 	var act := GuildJobs.active(hero)
-	_mine.add_child(UITheme.label("Carrying %d of %d jobs" % [act.size(), GuildJobs.ACTIVE_MAX], 16, UITheme.TEXT_DIM, UITheme.body_font()))
+	_mine.add_child(UITheme.label("Carrying %d of %d jobs" % [act.size(), GuildJobs.active_max(hero)], 16, UITheme.TEXT_DIM, UITheme.body_font()))
 	if act.is_empty():
 		var e := UITheme.label("You carry no jobs. Accept one from the board and come back when it is done.", 17, UITheme.TEXT_DIM, UITheme.body_font())
 		e.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_mine.add_child(e)
 	for j in act:
 		var done := GuildJobs.is_done(j)
-		var g := DataGuilds.guild(StringName(j.guild))
+		var g := _issuer(hero, j)
 		var c := _card(UITheme.GOOD if done else (g.get("color", UITheme.BRONZE_DIM) as Color).darkened(0.1))
 		var v: VBoxContainer = c[1]
 		var top := hbox(8)

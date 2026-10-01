@@ -639,6 +639,47 @@ def ring(s):
         parts.append(K.lathe([(0.0, top - 0.003), (0.005, top - 0.002), (0.004, top + 0.002), (0.0, top + 0.002)], m, 10))
     elif kind == "twist":
         parts.append(K.ring_tube((0, 0, 0.011), 0.0115, 0.0012, s.get("gem", "gold"), axis="y", n=28).rot(Rz(8), (0, 0, 0.011)))
+    elif kind == "crown":                  # bh-027: a coronet of prongs round a raised stone
+        parts.append(K.lathe([(0.0, top - 0.004), (0.008, top - 0.003), (0.0085, top + 0.001), (0.0, top + 0.001)], m, 16))
+        for k in range(6):
+            a = math.radians(60 * k)
+            parts.append(K.cone_spike((0.0078 * math.cos(a), 0.0078 * math.sin(a), top), (0.0092 * math.cos(a), 0.0092 * math.sin(a), top + 0.009), 0.0014, m))
+        parts.append(K.gem((0, 0, top + 0.004), 0.0055, s.get("gem", "ruby"), facets=8))
+    elif kind == "serpent":                # a snake coiled once round the finger, its head on top with gem eyes
+        pts = [(0.0125 * math.cos(a), 0.0035 * (a / (2 * math.pi)) - 0.002, 0.011 + 0.0125 * math.sin(a))
+               for a in np.linspace(-0.4 * math.pi, 2.35 * math.pi, 34)]
+        rad = [0.0012 + 0.0014 * min(1.0, i / 30.0) for i in range(len(pts))]
+        parts[0] = K.tube(pts, rad, m, n=7, up=(0, 1, 0))
+        parts.append(K.sphere(0.0036, (0.0, 0.004, top + 0.0005), m, 10, 6, scale=(1.0, 1.6, 0.7)))
+        for x in (-0.0018, 0.0018):
+            parts.append(K.sphere(0.0011, (x, 0.0075, top + 0.0018), s.get("gem", "emerald"), 6, 4))
+    elif kind == "double":                 # two slim bands, a pearl bridging them
+        parts[0] = K.ring_tube((0, -0.0028, 0.011), 0.011, 0.0016, m, axis="y", n=28)
+        parts.append(K.ring_tube((0, 0.0028, 0.011), 0.011, 0.0016, s.get("band2", "silver"), axis="y", n=28))
+        parts.append(K.sphere(0.0038, (0, 0, top - 0.0005), s.get("gem", "pearl"), 10, 8))
+    elif kind == "cluster":                # three stones in a triangle of claws
+        parts.append(K.lathe([(0.0, top - 0.004), (0.0095, top - 0.003), (0.0095, top), (0.0, top)], m, 12).scale((1, 0.8, 1)))
+        gems = s.get("gems", ["sapphire", "topaz", "amethyst"])
+        for k in range(3):
+            a = math.radians(90 + 120 * k)
+            parts.append(K.gem((0.0052 * math.cos(a), 0.0045 * math.sin(a), top + 0.003), 0.0036, gems[k % len(gems)], facets=6))
+    elif kind == "spiked":                 # a heavy band ringed with thorns
+        parts[0] = K.ring_tube((0, 0, 0.011), 0.0115, 0.0032, m, axis="y", n=28)
+        for k in range(9):
+            a = math.radians(-60 + 26 * k)
+            c = (0.0147 * math.cos(math.radians(90) - a), 0.0, 0.011 + 0.0147 * math.sin(math.radians(90) - a))
+            d = (c[0] * 1.55, 0.0, 0.011 + (c[2] - 0.011) * 1.55)
+            parts.append(K.cone_spike(c, d, 0.0022, s.get("spike", m)))
+        if s.get("gem"):
+            parts.append(K.gem((0, 0, top + 0.006), 0.004, s["gem"]))
+    elif kind == "skull":                  # a tiny skull set on the band, its sockets glowing
+        parts.append(K.sphere(0.0062, (0, 0, top + 0.004), s.get("skull", "bone"), 12, 8, scale=(1.0, 0.92, 0.9)))
+        parts.append(K.box(0.0072, 0.0052, 0.0036, (0, -0.0028, top + 0.0002), s.get("skull", "bone"), 0.001))
+        for x in (-0.0022, 0.0022):
+            parts.append(K.sphere(0.0014, (x, -0.0052, top + 0.0045), s.get("glow", "venom"), 6, 4))
+    elif kind == "moonstone":              # a broad bezel holding a smooth dome of stone
+        parts.append(K.lathe([(0.0, top - 0.004), (0.0092, top - 0.003), (0.0098, top + 0.0015), (0.0, top + 0.0015)], m, 20).scale((1, 0.82, 1)))
+        parts.append(K.sphere(0.0078, (0, 0, top + 0.0012), s.get("gem", "tide"), 16, 10, scale=(1.0, 0.8, 0.55)))
     return _ground(parts)
 
 
@@ -676,6 +717,61 @@ def amulet(s):
         parts.append(K.crystal((0, -0.01, 0.012), 0.03, 0.009, "aether", rot=(90, 0, 0)))
         for k in range(4):
             parts.append(K.ring_tube((0, -0.01, 0.012), 0.013, 0.0012, m, axis="y", n=16).rot(Ry(45 * k), (0, -0.01, 0.012)).rot(Rx(90), (0, -0.01, 0.012)))
+    elif kind == "sun":                    # bh-027: a disc with sixteen alternating rays and a central stone
+        pts = []
+        for i in range(32):
+            a = i * math.pi / 16
+            rr = 0.027 if i % 4 == 0 else (0.021 if i % 2 == 0 else 0.016)
+            pts.append((rr * math.cos(a), rr * math.sin(a) - 0.006))
+        parts.append(M.bevel(K.slab(pts, 0.0035, m, axis="z", center=0.002), 0.0008, 1))
+        parts.append(K.lathe([(0.0, 0.0035), (0.012, 0.0035), (0.0125, 0.006), (0.0, 0.0065)], s.get("inner", m), 20).move((0, -0.006, 0)))
+        parts.append(K.gem((0, -0.006, 0.0085), 0.0065, s.get("gem", "topaz"), facets=8))
+    elif kind == "crescent":               # a moon crescent with a pearl hanging in its bow
+        outer = [(0.026 * math.cos(a), 0.026 * math.sin(a) - 0.008) for a in np.linspace(math.radians(40), math.radians(320), 22)]
+        inner = [(0.019 * math.cos(a) - 0.009, 0.019 * math.sin(a) - 0.008) for a in np.linspace(math.radians(300), math.radians(60), 18)]
+        parts.append(M.bevel(K.slab(outer + inner, 0.004, m, axis="z", center=0.0025), 0.0008, 1))
+        parts.append(K.sphere(0.0048, (0.004, -0.008, 0.0035), s.get("gem", "pearl"), 12, 8))
+        parts.append(K.ring_tube((0.0, 0.0165, 0.003), 0.0028, 0.0008, s.get("chain", m), axis="y", n=10))
+    elif kind == "eye":                    # an almond eye of metal round a gem iris
+        o = [(0.028 * math.cos(a), 0.015 * math.sin(a) * (1.0 - 0.25 * abs(math.cos(a))) - 0.006) for a in np.linspace(0, 2 * math.pi, 30, endpoint=False)]
+        parts.append(M.bevel(K.slab(o, 0.004, m, axis="z", center=0.002), 0.0008, 1))
+        parts.append(K.sphere(0.0105, (0, -0.006, 0.0035), "white", 16, 8, scale=(1.0, 0.95, 0.35)))
+        parts.append(K.sphere(0.0064, (0, -0.006, 0.0058), s.get("gem", "emerald"), 14, 8, scale=(1.0, 1.0, 0.45)))
+        parts.append(K.sphere(0.0027, (0, -0.006, 0.0079), "onyx", 8, 6, scale=(1.0, 1.0, 0.4)))
+    elif kind == "locket":                 # a heater-shield locket with a cross of inlay
+        o = [(-0.02, 0.012), (0.02, 0.012), (0.02, -0.004), (0.012, -0.02), (0.0, -0.03), (-0.012, -0.02), (-0.02, -0.004)]
+        parts.append(M.bevel(K.slab(o, 0.0055, m, axis="z", center=0.003), 0.001, 1))
+        parts.append(K.box(0.0035, 0.034, 0.0015, (0, -0.008, 0.0062), s.get("inlay", "crimson")))
+        parts.append(K.box(0.03, 0.0035, 0.0015, (0, 0.002, 0.0062), s.get("inlay", "crimson")))
+        parts.append(K.gem((0, 0.002, 0.0072), 0.0035, s.get("gem", "sapphire")))
+    elif kind == "feather":                # a single long feather in metal, its vanes cut in slats
+        spine = [(0.0, 0.016, 0.003), (0.003, -0.006, 0.003), (0.001, -0.032, 0.003), (-0.004, -0.048, 0.003)]
+        parts.append(K.tube(spine, [0.0014, 0.0012, 0.001, 0.0005], s.get("quill", m), n=6, up=(0, 0, 1)))
+        for i in range(9):
+            t = i / 8.0
+            y = 0.01 - t * 0.052
+            w = 0.013 * math.sin(math.pi * min(1.0, 0.15 + t * 0.95))
+            for sx in (1, -1):
+                o = [(0.0, y), (sx * w, y - 0.006), (sx * w * 0.9, y - 0.0095), (0.0, y - 0.004)]
+                parts.append(K.slab(o, 0.0012, m, axis="z", center=0.0026, name="vane"))
+        parts.append(K.gem((0.001, 0.014, 0.0045), 0.0035, s.get("gem", "wind"), facets=6))
+    elif kind == "claws":                  # three wolf claws strung on a bar of beads
+        parts.append(K.box(0.042, 0.0035, 0.0035, (0, 0.012, 0.003), s.get("bar", "darkleather"), 0.0008))
+        for k, x in enumerate((-0.014, 0.0, 0.014)):
+            L = 0.03 if k == 1 else 0.024
+            parts.append(K.tube([(x, 0.011, 0.004), (x + 0.002, 0.011 - L * 0.5, 0.004), (x - 0.003, 0.011 - L, 0.0035)],
+                                [0.0042, 0.0034, 0.0004], s.get("claw", "horn"), n=6, up=(0, 0, 1)))
+        for x in (-0.021, -0.007, 0.007, 0.021):
+            parts.append(K.sphere(0.0032, (x, 0.012, 0.0035), s.get("bead", "bone"), 8, 6))
+    elif kind == "vial":                   # a stoppered glass phial holding a glowing draught, caged in wire
+        parts.append(K.lathe([(0.0, -0.028), (0.009, -0.026), (0.011, -0.012), (0.0085, 0.004), (0.004, 0.008), (0.0, 0.008)], "glass", 18)
+                     .rot(Rx(-90), (0, 0, 0)).move((0, 0, 0.011)))
+        parts.append(K.lathe([(0.0, -0.025), (0.0078, -0.023), (0.0092, -0.012), (0.0068, 0.0), (0.0, 0.0)], s.get("liquid", "holy"), 16)
+                     .rot(Rx(-90), (0, 0, 0)).move((0, 0, 0.011)))
+        parts.append(K.lathe([(0.0, 0.007), (0.0046, 0.007), (0.0046, 0.014), (0.0, 0.014)], s.get("cork", "wood"), 10)
+                     .rot(Rx(-90), (0, 0, 0)).move((0, 0, 0.011)))
+        for k in range(3):
+            parts.append(K.ring_tube((0, -0.021 + 0.012 * k, 0.011), 0.0105 - 0.001 * k, 0.0007, m, axis="y", n=18))
     return _ground(parts)
 
 
@@ -695,6 +791,55 @@ def charm(s):
         for sx in (1, -1):
             parts.append(K.tube([(sx * 0.02, 0.018, 0.004), (sx * 0.034, 0.03, 0.005), (sx * 0.03, 0.045, 0.006)], [0.004, 0.003, 0.0006], "horn", n=6, up=(0, 0, 1)))
         parts.append(K.gem((0, 0.0, 0.008), 0.007, s.get("gem", "ruby")))
+    elif kind == "knot":                   # bh-027: an endless knot of three interlaced loops
+        for k in range(3):
+            a = math.radians(90 + 120 * k)
+            c = (0.009 * math.cos(a), 0.009 * math.sin(a) - 0.004, 0.004 + 0.0012 * k)
+            parts.append(K.ring_tube(c, 0.011, 0.0022, m, axis="z", n=26))
+        parts.append(K.gem((0, -0.004, 0.009), 0.004, s.get("gem", "emerald")))
+    elif kind == "dice":                   # a pair of bone dice tied on the cord, pips inked black
+        for (x, y, rz, sz) in ((-0.009, 0.0, 18.0, 0.015), (0.01, -0.012, -24.0, 0.013)):
+            d = K.box(sz, sz, sz, (0, 0, sz / 2), s.get("mat", "bone"), 0.0018).rot(Rz(rz)).move((x, y, 0))
+            parts.append(d)
+            for (px, py) in ((-0.3, -0.3), (0.3, 0.3), (0.0, 0.0), (-0.3, 0.3), (0.3, -0.3)):
+                q = (px * sz, py * sz, sz + 0.0002)
+                ca, sa = math.cos(math.radians(rz)), math.sin(math.radians(rz))
+                parts.append(K.sphere(0.0012, (x + q[0] * ca - q[1] * sa, y + q[0] * sa + q[1] * ca, q[2]), s.get("pip", "black"), 6, 4, scale=(1, 1, 0.4)))
+    elif kind == "bell":                   # a little spirit bell with its clapper and a glowing rim
+        prof = [(0.0, 0.022), (0.004, 0.022), (0.0065, 0.017), (0.0085, 0.006), (0.012, -0.004), (0.0135, -0.007), (0.011, -0.007), (0.0, -0.002)]
+        parts.append(K.lathe(prof, m, 20).rot(Rx(-90), (0, 0, 0)).move((0, 0.0, 0.0135)))
+        parts.append(K.ring_tube((0, -0.0065, 0.0135), 0.0128, 0.0009, s.get("glow", "holy"), axis="y", n=20))
+        parts.append(K.sphere(0.0034, (0, -0.012, 0.0135), s.get("clapper", "iron"), 8, 6))
+        parts.append(K.ring_tube((0, 0.0245, 0.0135), 0.003, 0.0008, m, axis="x", n=10))
+    elif kind == "idol":                   # a squat stone idol with a carved face and ember eyes, a bronze band at the waist
+        parts.append(K.lathe([(0.0, 0.0), (0.012, 0.0), (0.013, 0.006), (0.011, 0.018), (0.0125, 0.026), (0.009, 0.034), (0.0, 0.036)], m, 14)
+                     .rot(Rx(-90), (0, 0, 0)).scale((1.0, 1.0, 0.62)).move((0, -0.036, 0.009)))
+        for x in (-0.0045, 0.0045):
+            parts.append(K.sphere(0.0022, (x, -0.009, 0.0158), s.get("glow", "ember"), 6, 4))
+        parts.append(K.box(0.008, 0.0022, 0.0018, (0, -0.0155, 0.0152), s.get("mouth", "ashstone")))
+        parts.append(K.ring_tube((0, -0.024, 0.009), 0.0118, 0.0016, s.get("band", "bronze"), axis="y", n=20).scale((1.0, 1.0, 0.66), (0, -0.024, 0.009)))
+    elif kind == "leaf":                   # a broad leaf with raised veins and a dewdrop
+        o = []
+        for a in np.linspace(0, 2 * math.pi, 34, endpoint=False):
+            r = 0.02 * (1.0 - 0.35 * math.cos(a) ** 2)
+            o.append((r * math.cos(a) * 0.72, 0.028 * math.sin(a) - 0.01 - 0.004 * abs(math.cos(a))))
+        parts.append(M.bevel(K.slab(o, 0.0028, m, axis="z", center=0.0016), 0.0006, 1))
+        parts.append(K.tube([(0, 0.018, 0.0034), (0, -0.01, 0.0034), (0.001, -0.036, 0.0034)], [0.001, 0.0009, 0.0004], s.get("vein", "stem"), n=5, up=(0, 0, 1)))
+        for i in range(4):
+            y = 0.008 - i * 0.009
+            for sx in (1, -1):
+                parts.append(K.tube([(0, y, 0.0034), (sx * 0.009, y - 0.005, 0.0034)], [0.0007, 0.0003], s.get("vein", "stem"), n=5, up=(0, 0, 1)))
+        parts.append(K.sphere(0.003, (0.005, -0.014, 0.0045), s.get("gem", "tide"), 8, 6, scale=(1, 1, 0.7)))
+    elif kind == "hourglass":              # a brass hourglass whose sand glows like the Tempo spirits
+        up = lambda part: part.rot(Rx(-90), (0, 0, 0)).move((0, -0.036, 0.012))     # lathe axis -> +Y, below the cord
+        for z in (0.0, 0.032):
+            parts.append(up(K.lathe([(0.0, z), (0.011, z), (0.011, z + 0.003), (0.0, z + 0.003)], m, 16)))
+        parts.append(up(K.lathe([(0.0, 0.003), (0.0085, 0.004), (0.0078, 0.012), (0.0015, 0.0175), (0.0078, 0.023), (0.0085, 0.031), (0.0, 0.032)], "glass", 16)))
+        parts.append(up(K.lathe([(0.0, 0.004), (0.0072, 0.005), (0.006, 0.01), (0.0, 0.013)], s.get("sand", "aether"), 14)))
+        for k in range(3):
+            a = math.radians(120 * k + 30)
+            x, z = 0.0102 * math.cos(a), 0.012 + 0.0102 * math.sin(a)
+            parts.append(K.tube([(x, -0.0345, z), (x, -0.0055, z)], [0.0011, 0.0011], m, n=5, up=(0, 0, 1)))
     return _ground(parts)
 
 
@@ -787,4 +932,25 @@ GEAR = {
     "u_heart_of_aether": (amulet, {"kind": "cage", "mat": "silver", "chain": "silver"}),
     "rune_charm": (charm, {"kind": "rune", "mat": "slate", "glow": "tide"}),
     "war_talisman": (charm, {"kind": "talisman", "mat": "bronze", "gem": "ruby"}),
+    # bh-027: twenty more accessories (game/src/data/data_accessories.gd)
+    "kingsguard_crown_ring": (ring, {"mat": "gold", "kind": "crown", "gem": "ruby", "band": 0.0026}),
+    "viper_coil_ring": (ring, {"mat": "brass", "kind": "serpent", "gem": "emerald"}),
+    "twinmoon_band": (ring, {"mat": "silver", "kind": "double", "band2": "paleg", "gem": "pearl"}),
+    "starcluster_ring": (ring, {"mat": "paleg", "kind": "cluster", "gems": ["sapphire", "topaz", "amethyst"]}),
+    "thornbrand_ring": (ring, {"mat": "blackiron", "kind": "spiked", "spike": "darksteel", "gem": "ruby"}),
+    "gravewhisper_ring": (ring, {"mat": "darksteel", "kind": "skull", "skull": "bone", "glow": "venom"}),
+    "tidecaller_moonstone": (ring, {"mat": "silver", "kind": "moonstone", "gem": "tide"}),
+    "sunforged_medallion": (amulet, {"kind": "sun", "mat": "gold", "inner": "sunsteel", "gem": "topaz", "chain": "gold"}),
+    "crescent_nighttide": (amulet, {"kind": "crescent", "mat": "moonsteel", "gem": "pearl", "chain": "silver"}),
+    "watchers_eye": (amulet, {"kind": "eye", "mat": "gold", "gem": "emerald", "chain": "brass"}),
+    "bulwark_locket": (amulet, {"kind": "locket", "mat": "steel", "inlay": "crimson", "gem": "sapphire", "chain": "iron"}),
+    "windrider_feather": (amulet, {"kind": "feather", "mat": "silver", "quill": "paleg", "gem": "wind", "chain": "silver"}),
+    "wolfclaw_torc": (amulet, {"kind": "claws", "claw": "horn", "bead": "bone", "bar": "darkleather", "chain": "leather"}),
+    "phial_of_last_light": (amulet, {"kind": "vial", "mat": "brass", "liquid": "holy", "cork": "wood", "chain": "brass"}),
+    "wayfarers_knot": (charm, {"kind": "knot", "mat": "bronze", "gem": "emerald", "cord": "rope"}),
+    "gamblers_bones": (charm, {"kind": "dice", "mat": "bone", "pip": "black", "cord": "leather"}),
+    "spirit_bell": (charm, {"kind": "bell", "mat": "brass", "glow": "holy", "clapper": "iron", "cord": "redleather"}),
+    "stoneheart_idol": (charm, {"kind": "idol", "mat": "ashstone", "glow": "ember", "band": "bronze", "cord": "leather"}),
+    "verdant_leaf_charm": (charm, {"kind": "leaf", "mat": "leaf", "vein": "stem", "gem": "tide", "cord": "rope"}),
+    "sands_of_tempo": (charm, {"kind": "hourglass", "mat": "brass", "sand": "aether", "cord": "darkleather"}),
 }

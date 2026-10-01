@@ -145,7 +145,7 @@ func test_job_templates_are_sound() -> void:
 	for t in DataGuildJobs.TEMPLATES:
 		ok(not ids.has(t.id), "%s is unique" % t.id)
 		ids[t.id] = true
-		ok(DataGuilds.GUILDS.has(StringName(t.guild)), "%s names a guild" % t.id)
+		ok(DataGuilds.GUILDS.has(StringName(t.guild)) or String(t.guild) == "open", "%s names a guild (or is an open posting, bh-027)" % t.id)
 		ok(DataGuildJobs.KINDS.has(t.kind), "%s has a known kind" % t.id)
 		ok(t.goal.x >= 1 and t.goal.y >= t.goal.x, "%s goal range" % t.id)
 		ok(t.lvl.x >= 1 and t.lvl.y >= t.lvl.x, "%s level range" % t.id)
@@ -165,11 +165,12 @@ func test_take_and_finish_a_job() -> void:
 	h.inventory.gold = 0
 	var sb := GuildJobs.refresh_board(h, &"swordfin")
 	var first: Dictionary = sb[0]
-	ok(GuildJobs.accept_error(h, &"swordfin", int(first.id)).contains("registered"), "no jobs before joining a guild")
+	# bh-027: the jobs are open to every hero, in a guild or not, whichever guild posted them
+	eq(GuildJobs.accept_error(h, &"swordfin", int(first.id)), "", "jobs before joining a guild")
 	h.inventory.gold = 500
 	eq(GuildRules.join(h, &"swordfin"), "", "join Swordfin")
 	h.inventory.gold = 0
-	ok(GuildJobs.accept_error(h, &"lantern", int(GuildJobs.refresh_board(h, &"lantern")[0].id)).contains("Lantern"), "a Swordfin hero cannot take Lantern work")
+	eq(GuildJobs.accept_error(h, &"lantern", int(GuildJobs.refresh_board(h, &"lantern")[0].id)), "", "a Swordfin hero may take Lantern work")
 	eq(GuildJobs.accept(h, &"swordfin", int(first.id)), "", "take the first posting")
 	eq(GuildJobs.active(h).size(), 1, "one job carried")
 	eq(GuildJobs.board(h, &"swordfin").size(), GuildJobs.BOARD_SIZE, "the board is pinned back up")
@@ -296,8 +297,13 @@ func test_guild_house_builds() -> void:
 	for n in host.get_tree().get_nodes_in_group(&"interactable"):
 		if is_instance_valid(n) and n is GuildJobBoard and room.is_ancestor_of(n):
 			boards += 1
-			ok(n.interact_text().contains("job board"), "the board says what it is")
-	eq(boards, 2, "a job board for each guild")
+			ok(n.interact_text().contains("Quest Board"), "the board says what it is")
+	eq(boards, 1, "bh-027: one central Guild Quest Board for every guild")
+	var counters := 0
+	for n in host.get_tree().get_nodes_in_group(&"interactable"):
+		if is_instance_valid(n) and n is GuildCounter and room.is_ancestor_of(n) and n.can_interact(null):
+			counters += 1
+	ok(counters >= 6, "bh-027: at least six guilds keep a counter in the hall (%d)" % counters)
 	var npcs := 0
 	for n in host.get_tree().get_nodes_in_group(&"npc"):
 		if is_instance_valid(n) and n is Npc and room.is_ancestor_of(n):
@@ -317,8 +323,8 @@ func test_dialogue_reaches_the_boards() -> void:
 					if a.has("service"):
 						seen[String(a.service)] = true
 	ok(seen.has("guild_jobs"), "the steward opens the boards")
-	ok(seen.has("guild_jobs_swordfin"), "Bram opens the Swordfin board")
-	ok(seen.has("guild_jobs_lantern"), "Sabeth opens the Lantern board")
+	ok(seen.has("found_guild"), "bh-027: the steward grants charters for new guilds")
+	ok(seen.size() >= 2, "the clerks and the steward open the central board")
 	done()
 
 # ---- Trade --------------------------------------------------------------------------------------------------------

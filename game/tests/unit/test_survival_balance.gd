@@ -28,15 +28,40 @@ func test_old_save_gets_missing_points_once() -> void:
 	old.free_points = 12
 	old.skill_points = 3
 	old.allocated = {"int": 100, "wis": 5}
+	var before := HeroData.from_dict(data.duplicate(true))
 	var loaded := HeroData.from_dict(data)
-	eq(loaded.progress.free_points, 285, "273 missing stat points credited")
-	eq(loaded.progress.skill_points, 42, "39 missing skill points credited")
-	eq(loaded.progress.allocated[&"int"], 100, "existing allocation retained")
+	# bh-027: the 273 missing stat points are spent at once along the hero's build (int : wis = 100 : 5)
+	eq(loaded.progress.auto_allocated, 273, "273 missing stat points credited and spent")
+	eq(loaded.progress.free_points, 12, "the hero's own unspent points stay unspent")
+	eq(loaded.progress.allocated[&"int"], 360, "most of them to Intelligence, as the hero built")
+	eq(loaded.progress.allocated[&"wis"], 18, "a share to Wisdom")
+	eq(loaded.progress.skill_points, 42, "39 missing skill points credited (the player places those)")
+	var stats := loaded.compute_stats()
+	var fresh := Game.new_hero(&"mage", "New save")
+	fresh.progress.add_xp(XpCurve.total_xp_for_level(40))
+	fresh.progress.allocate(&"int", 360)
+	fresh.progress.allocate(&"wis", 18)
+	eq(stats.get_stat(&"max_mana"), fresh.compute_stats().get_stat(&"max_mana"), "an old hero's Maximum Mana matches a new hero with the same build")
+	eq(stats.get_stat(&"max_hp"), fresh.compute_stats().get_stat(&"max_hp"), "and Maximum HP")
+	ok(before.progress.allocated[&"int"] == 360, "loading twice from the same old file gives the same hero")
 	var again := HeroData.from_dict(loaded.to_dict())
 	eq(again.progress.to_dict(), loaded.progress.to_dict(), "reload does not grant twice")
+	eq(again.progress.auto_allocated, 0, "and spends nothing on a second load")
 	loaded.progress.add_xp(XpCurve.xp_to_next(40))
-	eq(loaded.progress.free_points, 295, "new level grants ten after migration")
+	eq(loaded.progress.free_points, 22, "new level grants ten after migration")
 	eq(loaded.progress.skill_points, 44, "new level grants two after migration")
+	# a save from between the rebalance and bh-027 already has the credit, still unspent: it is spent now
+	var mid := Game.new_hero(&"knight", "Between")
+	var md := mid.to_dict()
+	md.progress.level = 20
+	md.progress.point_rules_version = 1
+	md.progress.allocated = {}
+	md.progress.free_points = 19 * 7 + 5
+	var m2 := HeroData.from_dict(md)
+	eq(m2.progress.auto_allocated, 19 * 7, "the credited points are spent")
+	eq(m2.progress.free_points, 5, "points the hero had of their own stay free")
+	ok(int(m2.progress.allocated[&"str"]) > int(m2.progress.allocated[&"dex"]) and int(m2.progress.allocated[&"dex"]) > int(m2.progress.allocated[&"spi"]),
+		"an unallocated knight gets the class's major attributes, Strength first")
 	done()
 
 func test_evasion_and_dexterity_affect_real_aimed_hits() -> void:

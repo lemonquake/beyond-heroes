@@ -1,0 +1,202 @@
+[
+ {
+  "id": "kingsguard_crown_ring",
+  "tris": 632,
+  "size": [
+   0.027,
+   0.018,
+   0.036
+  ],
+  "fallback": false
+ },
+ {
+  "id": "viper_coil_ring",
+  "tris": 648,
+  "size": [
+   0.03,
+   0.013,
+   0.031
+  ],
+  "fallback": false
+ },
+ {
+  "id": "twinmoon_band",
+  "tris": 924,
+  "size": [
+   0.025,
+   0.009,
+   0.029
+  ],
+  "fallback": false
+ },
+ {
+  "id": "starcluster_ring",
+  "tris": 512,
+  "size": [
+   0.026,
+   0.015,
+   0.031
+  ],
+  "fallback": false
+ },
+ {
+  "id": "thornbrand_ring",
+  "tris": 632,
+  "size": [
+   0.043,
+   0.007,
+   0.042
+  ],
+  "fallback": false
+ },
+ {
+  "id": "gravewhisper_ring",
+  "tris": 676,
+  "size": [
+   0.026,
+   0.012,
+   0.036
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tidecaller_moonstone",
+  "tris": 760,
+  "size": [
+   0.026,
+   0.016,
+   0.032
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sunforged_medallion",
+  "tris": 792,
+  "size": [
+   0.08,
+   0.112,
+   0.012
+  ],
+  "fallback": false
+ },
+ {
+  "id": "crescent_nighttide",
+  "tris": 932,
+  "size": [
+   0.08,
+   0.111,
+   0.01
+  ],
+  "fallback": false
+ },
+ {
+  "id": "watchers_eye",
+  "tris": 1036,
+  "size": [
+   0.08,
+   0.097,
+   0.009
+  ],
+  "fallback": false
+ },
+ {
+  "id": "bulwark_locket",
+  "tris": 412,
+  "size": [
+   0.08,
+   0.107,
+   0.009
+  ],
+  "fallback": false
+ },
+ {
+  "id": "windrider_feather",
+  "tris": 588,
+  "size": [
+   0.08,
+   0.128,
+   0.006
+  ],
+  "fallback": false
+ },
+ {
+  "id": "wolfclaw_torc",
+  "tris": 772,
+  "size": [
+   0.08,
+   0.095,
+   0.007
+  ],
+  "fallback": false
+ },
+ {
+  "id": "phial_of_last_light",
+  "tris": 1336,
+  "size": [
+   0.08,
+   0.104,
+   0.022
+  ],
+  "fallback": false
+ },
+ {
+  "id": "wayfarers_knot",
+  "tris": 1166,
+  "size": [
+   0.043,
+   0.093,
+   0.011
+  ],
+  "fallback": false
+ },
+ {
+  "id": "gamblers_bones",
+  "tris": 498,
+  "size": [
+   0.043,
+   0.091,
+   0.016
+  ],
+  "fallback": false
+ },
+ {
+  "id": "spirit_bell",
+  "tris": 790,
+  "size": [
+   0.043,
+   0.087,
+   0.027
+  ],
+  "fallback": false
+ },
+ {
+  "id": "stoneheart_idol",
+  "tris": 554,
+  "size": [
+   0.043,
+   0.107,
+   0.018
+  ],
+  "fallback": false
+ },
+ {
+  "id": "verdant_leaf_charm",
+  "tris": 588,
+  "size": [
+   0.043,
+   0.11,
+   0.006
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sands_of_tempo",
+  "tris": 454,
+  "size": [
+   0.043,
+   0.107,
+   0.023
+  ],
+  "fallback": false
+ }
+]

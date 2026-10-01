@@ -148,6 +148,11 @@
    },
    "sides": false
   },
+  "bulwark_locket": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "chain_shirt": {
    "hair": "hide",
    "hide": {
@@ -176,6 +181,11 @@
    "hair": "hide",
    "hide": {},
    "sides": true
+  },
+  "crescent_nighttide": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
   },
   "cutpurse_trousers": {
    "hair": "hide",
@@ -399,10 +409,20 @@
    "sides": false,
    "skirt": 0.8
   },
+  "gamblers_bones": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "gold_amulet": {
    "hair": "hide",
    "hide": {},
    "sides": false
+  },
+  "gravewhisper_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
   },
   "guardian_cuisses": {
    "hair": "hide",
@@ -514,6 +534,11 @@
    },
    "sides": true
   },
+  "kingsguard_crown_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
   "linen_hood": {
    "hair": "hide",
    "hide": {},
@@ -596,6 +621,11 @@
      1.49
     ]
    },
+   "sides": false
+  },
+  "phial_of_last_light": {
+   "hair": "hide",
+   "hide": {},
    "sides": false
   },
   "riveted_legplates": {
@@ -683,6 +713,11 @@
    "sides": false,
    "skirt": 0.24
   },
+  "sands_of_tempo": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "scholars_breeches": {
    "hair": "hide",
    "hide": {
@@ -762,6 +797,11 @@
    },
    "sides": true
   },
+  "spirit_bell": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "staghide_chaps": {
    "hair": "hide",
    "hide": {
@@ -776,6 +816,31 @@
    "hair": "hide",
    "hide": {},
    "sides": false
+  },
+  "starcluster_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "stoneheart_idol": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "sunforged_medallion": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "thornbrand_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "tidecaller_moonstone": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
   },
   "trackers_breeches": {
    "hair": "hide",
@@ -801,6 +866,11 @@
    },
    "sides": false,
    "skirt": 0.42
+  },
+  "twinmoon_band": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
   },
   "u_band_of_stillness": {
    "hair": "hide",
@@ -902,6 +972,16 @@
    },
    "sides": false
   },
+  "verdant_leaf_charm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "viper_coil_ring": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
   "visored_greathelm": {
    "hair": "hide",
    "hide": {},
@@ -947,6 +1027,11 @@
    "sides": false,
    "skirt": 0.8
   },
+  "watchers_eye": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "wayfarer_boot": {
    "hair": "hide",
    "hide": {
@@ -957,6 +1042,16 @@
    },
    "sides": true
   },
+  "wayfarers_knot": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "windrider_feather": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "windrunner_leggings": {
    "hair": "hide",
    "hide": {
@@ -965,6 +1060,11 @@
      1.065
     ]
    },
+   "sides": false
+  },
+  "wolfclaw_torc": {
+   "hair": "hide",
+   "hide": {},
    "sides": false
   }
  }

@@ -1,6 +1,7 @@
 class_name GuildJobBoard
 extends Node3D
-## A guild's job board in the Guild House (bh-016): Interact opens GuildJobsWindow on that guild's page.
+## A guild's job board in the Guild House (bh-016): Interact opens GuildJobsWindow. bh-027: the hall keeps one central
+## board (GuildJobs.CENTRAL) for every guild and every hero.
 
 var guild: StringName = &"swordfin"
 var interact_range := 2.6
@@ -10,7 +11,7 @@ func _ready() -> void:
 	add_to_group(&"interactable")
 	var g := DataGuilds.guild(guild)
 	_plate = Label3D.new()
-	_plate.text = "%s Jobs\n[Bounties · Errands · Pay]" % String(g.get("short", "Guild"))
+	_plate.text = "Guild Quest Board\n[Every guild's jobs · open to all]" if guild == GuildJobs.CENTRAL else "%s Jobs\n[Bounties · Errands · Pay]" % String(g.get("short", "Guild"))
 	_plate.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_plate.fixed_size = true
 	_plate.pixel_size = 0.0008
@@ -18,7 +19,7 @@ func _ready() -> void:
 	_plate.font_size = 22
 	_plate.outline_size = 8
 	_plate.outline_modulate = Color(0, 0, 0, 0.85)
-	_plate.modulate = (g.get("color", UITheme.PARCHMENT) as Color).lightened(0.45)
+	_plate.modulate = (g.get("color", UITheme.GOLD) as Color).lightened(0.45)
 	_plate.position.y = 2.7
 	_plate.visible = false
 	add_child(_plate)
@@ -31,7 +32,7 @@ func can_interact(_p: Node) -> bool:
 	return not Game.travelling
 
 func interact_text() -> String:
-	return "Read the %s job board" % String(DataGuilds.guild(guild).get("short", "guild"))
+	return "Read the Guild Quest Board" if guild == GuildJobs.CENTRAL else "Read the %s job board" % String(DataGuilds.guild(guild).get("short", "guild"))
 
 func interact_anim() -> StringName:
 	return &""

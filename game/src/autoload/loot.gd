@@ -157,7 +157,10 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 			rarity = maxi(rarity, BH.Rarity.ELITE)
 		elif i == 0 and e.is_elite:
 			rarity = maxi(rarity, BH.Rarity.ADVANCED)
-		var base := ItemGenerator.random_base(rng, ilvl, [&"weapon"] if guaranteed and i == 0 else [], cls, fit, used_bases)
+		var cats := [&"weapon"] if guaranteed and i == 0 else ([&"accessory"] if accessory_slot(e, i) else [])
+		var base := ItemGenerator.random_base(rng, ilvl, cats, cls, fit, used_bases)
+		if base == null and not cats.is_empty():
+			base = ItemGenerator.random_base(rng, ilvl, [], cls, fit, used_bases)
 		if base:
 			used_bases.append(base.id)
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
@@ -178,6 +181,18 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 		if ub:
 			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
 	return drops
+
+## bh-027: accessories drop alongside weapons. Champions and bosses always add a ring, amulet or charm (their second
+## piece), elites often, and an ordinary monster's single drop is sometimes one. (Monster drops are 100% class gear, and
+## accessories are nobody's class gear, so without their own roll they never dropped at all.)
+const ACCESSORY_CHANCE := {"normal": 0.22, "elite": 0.5, "extra": 0.18}
+
+func accessory_slot(e: Enemy, i: int) -> bool:
+	if e.is_boss or e.is_miniboss():
+		return i == 1 or (i >= 2 and rng.randf() < float(ACCESSORY_CHANCE.extra))
+	if e.is_elite:
+		return (i == 1 and rng.randf() < float(ACCESSORY_CHANCE.elite)) or (i >= 2 and rng.randf() < float(ACCESSORY_CHANCE.extra))
+	return rng.randf() < float(ACCESSORY_CHANCE.normal)
 
 ## Soul Embers a kill drops (0 = none): rare on the surface, common in the dungeons, generous from champions.
 func ember_roll(e: Enemy, in_dungeon: bool, find := 0.0) -> int:
@@ -221,7 +236,11 @@ func drop_chest(tier: int, level: int, at: Vector3, hero: HeroData) -> Array:
 			rarity = maxi(rarity, floor_r)
 		if i == 1 and tier == 2 and rng.randf() < 0.5:
 			rarity = maxi(rarity, BH.Rarity.MYTHICAL)
-		var base := ItemGenerator.random_base(rng, ilvl, [], cls, 1.0, used_bases)
+		# bh-027: a chest's second piece is a ring, amulet or charm (and the first piece of a small chest, sometimes)
+		var cats := [&"accessory"] if i == 1 or (n == 1 and rng.randf() < 0.3) else []
+		var base := ItemGenerator.random_base(rng, ilvl, cats, cls, 1.0, used_bases)
+		if base == null and not cats.is_empty():
+			base = ItemGenerator.random_base(rng, ilvl, [], cls, 1.0, used_bases)
 		if base:
 			used_bases.append(base.id)
 			drops.append(ItemGenerator.generate(base, ilvl, rarity, _item_rng()))
@@ -297,12 +316,22 @@ static func landing_point(world: World3D, from: Vector3, angle: float, dist: flo
 		if g != null:
 			return g
 	var g0 = floor_under(space, waist, from.y)
-	return g0 if g0 != null else from
+	if g0 != null:
+		return g0
+	# bh-027: the corpse was in the air or over a drop (knocked back off a ledge, a flyer, a leap): the drop falls to
+	# the first walkable ground below instead of hanging where the monster died, out of everyone's reach.
+	var deep = floor_under(space, from, from.y, 80.0)
+	if deep != null:
+		return deep
+	var p := Game.player as Node3D
+	if p != null and is_instance_valid(p) and p.is_inside_tree() and p.global_position.distance_to(from) < 40.0:
+		return p.global_position + Vector3(cos(angle), 0.0, sin(angle)) * 0.8
+	return from
 
 ## The walkable surface under `p` near height `ref_y` (from 1 m above down to 4 m below), or null. Steep hits (wall
 ## faces) are rejected.
-static func floor_under(space: PhysicsDirectSpaceState3D, p: Vector3, ref_y: float) -> Variant:
-	var q := PhysicsRayQueryParameters3D.create(Vector3(p.x, ref_y + 1.0, p.z), Vector3(p.x, ref_y - 4.0, p.z), BH.LAYER_WORLD | BH.LAYER_GROUND)
+static func floor_under(space: PhysicsDirectSpaceState3D, p: Vector3, ref_y: float, depth := 4.0) -> Variant:
+	var q := PhysicsRayQueryParameters3D.create(Vector3(p.x, ref_y + 1.0, p.z), Vector3(p.x, ref_y - depth, p.z), BH.LAYER_WORLD | BH.LAYER_GROUND)
 	var hit := space.intersect_ray(q)
 	if hit.is_empty() or (hit.normal as Vector3).y < 0.6:
 		return null

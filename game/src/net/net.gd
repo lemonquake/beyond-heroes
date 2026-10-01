@@ -26,13 +26,14 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 12                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+const PROTOCOL := 13                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
                                      # 10 (bh-023): heroes share one body, their looks and all worn gear travel
                                      # 11 (bh-024): the Leggings slot and its items
                                      # 12: roster-identified chat, mentions and host-only cheats
+                                     # 13 (bh-027): guilds in profiles, banners, guild invites, whispers, Showcase
 const SUMMON_WAIT := 30.0            # seconds a summoned player has to answer before it counts as Stay
 const SUMMON_COOLDOWN := 8.0
 const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
@@ -111,6 +112,10 @@ func _ready() -> void:
 		if is_active():
 			leave(false))
 	Events.player_leveled.connect(func(_l: int, _g: int) -> void: update_profile())
+	Events.guild_customised.connect(_on_my_guild_changed)
+	Events.guild_changed.connect(_on_my_guild_changed)
+	Events.guild_joined.connect(func(_g: StringName, _f: bool) -> void: _on_my_guild_changed())
+	peers_changed.connect(_on_peers_for_guilds)
 	var cfg := ConfigFile.new()
 	if cfg.load(RECENT_PATH) == OK:
 		last_room = String(cfg.get_value("net", "last_room", ""))
@@ -146,7 +151,7 @@ func _profile() -> Dictionary:
 	return {"name": h.hero_name if h else "Hero", "cls": String(h.cls.id) if h else "knight",
 		"level": h.progress.level if h else 1, "map": String(Game.current_map_id),
 		"dungeon_level": int(h.world_flags.get(DungeonGrowth.visit_key(DataDungeons.parse(h.current_map)[0]), h.progress.level)) if h else 1,
-		"device": "Mobile" if Settings.is_mobile_device() else "PC"}
+		"device": "Mobile" if Settings.is_mobile_device() else "PC", "guild": guild_profile(h)}
 
 # ---- Host / join / leave ------------------------------------------------------------------------------------------
 
@@ -233,6 +238,9 @@ func leave(reload := true) -> void:
 	_summon = {}
 	_trade_incoming = {}
 	trade_reset()
+	_banner_sent.clear()
+	_sync_sent.clear()
+	_guild_asked = {}
 	_stop_broadcast()
 	_clear_avatars()
 	_appearance_cache.clear()
@@ -264,6 +272,8 @@ func _on_peer_disconnected(id: int) -> void:
 		trade_reset("%s left the game. The trade was cancelled." % who)
 	if int(_trade_incoming.get("peer", -1)) == id:
 		_trade_incoming = {}
+	_banner_sent.erase(id)
+	_sync_sent.erase(id)
 	if is_host():
 		_chat_system("%s left." % who, true)
 		_reassign_worlds()
@@ -683,6 +693,8 @@ func _send_allies() -> void:
 		var e := {"k": pair[0], "s": actor_state(a), "n": a.display_name}
 		if a is Tempo:
 			e["n"] = (a as Tempo).data.tempo_name
+		if a is GuildFighter:
+			e["g"] = (a as GuildFighter).guild_name
 		if a.visual:
 			var sig := hash(str(a.visual.appearance)) ^ hash(String(a.visual._stance_idle))
 			if _ally_count % APPEARANCE_EVERY == 1 or _app_sig.get(pair[0], 0) != sig:
@@ -738,6 +750,7 @@ func _allies(map: String, pack: Array) -> void:
 			_avatars[k] = av
 		if e.has("a"):
 			av.set_appearance(e.a)
+		av.guild_tag = String(e.get("g", ""))
 		av.display_name = String(e.get("n", av.display_name))
 		av.apply_state(e.s)
 	for k in _avatars.keys():
@@ -1755,3 +1768,341 @@ func kick(id: int) -> void:
 		if _peer:
 			_peer.disconnect_peer(id))
 	_chat_system("%s was sent home by the host." % who, true)
+
+# ---- Guilds, whispers and Showcase (bh-027) ----------------------------------------------------------------------------
+##   Profiles   every player's profile carries their guild (GuildRules.guild_key, name, colour, motto, master, level,
+##              members, banner hash). A guild seen on another player is imported into this hero's Guild House.
+##   Banners    an uploaded banner (a JPEG of up to 400 KB) travels once per player and per change, reliably.
+##   Invites    a Guildmaster invites a player (their menu: Invite to Guild); on Accept the player joins as a Sworn Hero
+##              and receives the guild's snapshot (name, motto, info, passives, banner). Changes the Guildmaster makes
+##              reach connected members; a kick or a leave is sent to the other side.
+##   Whisper    a private line to one player (the chat's /w <name> <text>).
+##   Showcase   ask a player to show their equipped gear: on Yes both see both heroes' gear side by side, and their guilds.
+
+var guild_banners := {}              # guild key -> JPEG bytes received from other players
+var _banner_sent := {}               # peer -> banner hash already sent to them
+var _sync_sent := {}                 # peer -> hash of the guild snapshot last sent to them (Guildmaster)
+var _guild_asked := {}               # an invitation waiting for this player's answer {peer, snap}
+var _showcase_t := 0.0
+
+static func guild_profile(h: HeroData) -> Dictionary:
+	if h == null or h.guild == &"":
+		return {}
+	var g := GuildRegistry.info(h, h.guild)
+	if g.is_empty():
+		return {}
+	var bytes: Variant = h.guild_banner if h.guild == GuildRegistry.OWN else (h.remote_guild.get("banner", PackedByteArray()) if h.guild == GuildRegistry.REMOTE else PackedByteArray())
+	return {"key": GuildRules.guild_key(h), "name": GuildRules.display_name(h), "color": (g.color as Color).to_html(false),
+		"motto": String(g.get("motto", "")), "master": String(g.get("master", "")), "level": int(g.get("level", 1)),
+		"members": int(g.get("members", 1)), "info": String(g.get("info", "")), "style": g.get("style", {}), "kind": String(g.kind),
+		"bsig": hash(bytes) if bytes is PackedByteArray and not (bytes as PackedByteArray).is_empty() else 0,
+		"passives": (g.get("passives", {}) as Dictionary).duplicate()}
+
+## Another player by hero name (never this machine's own hero, even when two heroes share a name).
+func peer_by_name(pname: String) -> int:
+	for id in peers:
+		if int(id) != my_id() and GuildRules.clean_alias(String(peers[id].get("name", ""))) == GuildRules.clean_alias(pname):
+			return int(id)
+	return 0
+
+func _on_my_guild_changed() -> void:
+	if not is_active() or connecting:
+		return
+	update_profile()
+	_send_banner_all()
+	# a Guildmaster's changes reach the members who are here
+	var h := Game.hero
+	if OwnGuild.is_master(h):
+		for id in peers:
+			if id != my_id() and OwnGuild.has_player_member(h, String(peers[id].get("name", ""))):
+				_sync_member(int(id))
+
+## Send a member the guild as it is now, once per change (profiles arrive often; a sync is only sent when it differs).
+func _sync_member(id: int) -> void:
+	var snap := OwnGuild.snapshot(Game.hero, false)
+	var sig := hash(snap)
+	if int(_sync_sent.get(id, 0)) == sig:
+		return
+	_sync_sent[id] = sig
+	_guild_sync.rpc_id(id, snap)
+
+## Send my guild's banner picture to everyone who has not got this version of it.
+func _send_banner_all() -> void:
+	var h := Game.hero
+	if h == null or not is_active():
+		return
+	var prof := guild_profile(h)
+	var bytes: PackedByteArray = h.guild_banner if h.guild == GuildRegistry.OWN else PackedByteArray()
+	if prof.is_empty() or bytes.is_empty():
+		return
+	var sig := hash(bytes)
+	for id in peers:
+		if id == my_id() or int(_banner_sent.get(id, 0)) == sig:
+			continue
+		_banner_sent[id] = sig
+		_guild_banner.rpc_id(id, String(prof.key), bytes)
+
+@rpc("any_peer", "reliable")
+func _guild_banner(key: String, bytes: PackedByteArray) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from) or bytes.size() > GuildRules.BANNER_MAX_BYTES:
+		return
+	var probe := Image.new()
+	if probe.load_jpg_from_buffer(bytes) != OK:
+		return
+	guild_banners[key] = bytes
+	_import_peer_guild(from)
+	Events.guild_changed.emit()
+
+## Remember a fellow player's guild in this hero's world (the Guild House hangs their banner).
+func _import_peer_guild(id: int) -> void:
+	var h := Game.hero
+	var g: Dictionary = peers.get(id, {}).get("guild", {})
+	if h == null or g.is_empty() or String(g.get("key", "")) == "" or String(g.get("key", "")).begins_with("canon/"):
+		return
+	if String(g.key) == GuildRules.guild_key(h):
+		return
+	var snap := g.duplicate()
+	snap["banner"] = guild_banners.get(String(g.key), PackedByteArray())
+	GuildRegistry.import_remote(h, snap)
+
+func _on_peers_for_guilds() -> void:
+	if not is_active() or connecting:
+		return
+	_send_banner_all()
+	var h := Game.hero
+	for id in peers:
+		if id == my_id():
+			continue
+		_import_peer_guild(int(id))
+		# a player who still flies my banner but was sent away while they were gone
+		var g: Dictionary = peers[id].get("guild", {})
+		if h and OwnGuild.is_master(h) and String(g.get("kind", "")) == "remote" and String(g.get("master", "")) == GuildRules.clean_alias(h.hero_name) \
+				and not OwnGuild.has_player_member(h, String(peers[id].get("name", ""))) and int(_sync_sent.get(id, 0)) != -1:
+			_sync_sent[id] = -1
+			_guild_kicked.rpc_id(id, GuildRules.clean_alias(h.hero_name))
+		# a fellow member whose Guildmaster is here: bring their copy of the guild up to date
+		if h and OwnGuild.is_master(h) and OwnGuild.has_player_member(h, String(peers[id].get("name", ""))):
+			_sync_member(int(id))
+
+# ---- whispers ----------------------------------------------------------------------------------------------------
+
+func whisper(peer: int, text: String) -> String:
+	var clean := ChatText.clean(text)
+	if not is_active() or not peers.has(peer) or peer == my_id():
+		return "Nobody by that name is here."
+	if clean.is_empty():
+		return "Say something."
+	_whisper.rpc_id(peer, clean)
+	if Game.ui_root and is_instance_valid(Game.ui_root):
+		Game.ui_root.chat.add_line("[To %s] %s" % [peers[peer].get("name", "Hero"), clean], Color(0.85, 0.6, 1.0))
+	return ""
+
+@rpc("any_peer", "reliable")
+func _whisper(text: String) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var clean := ChatText.clean(text)
+	if not peers.has(from) or clean.is_empty():
+		return
+	if Game.ui_root and is_instance_valid(Game.ui_root):
+		Game.ui_root.chat.add_line("[From %s] %s" % [peers[from].get("name", "Hero"), clean], Color(0.85, 0.6, 1.0))
+	Audio.play_ui(&"ui_hover", -4.0)
+
+# ---- guild invitations ------------------------------------------------------------------------------------------
+
+func guild_invite_error(peer: int) -> String:
+	var h := Game.hero
+	if not is_active() or not peers.has(peer) or peer == my_id():
+		return "Nobody by that name is here."
+	if not OwnGuild.is_master(h):
+		return "Found a guild of your own first (Guild window, %s)." % Settings.binding_text(&"guild")
+	var pname := String(peers[peer].get("name", ""))
+	if OwnGuild.has_player_member(h, pname) or String(peers[peer].get("guild", {}).get("key", "")) == OwnGuild.key(h):
+		return "%s is already in %s." % [pname, h.own_guild.name]
+	if OwnGuild.free_slots(h) <= 0:
+		return "%s is full. Expand the guild or dismiss a member." % h.own_guild.name
+	return ""
+
+func guild_invite(peer: int) -> String:
+	var err := guild_invite_error(peer)
+	if err != "":
+		Events.notify.emit(err, &"error")
+		return err
+	_guild_invite_ask.rpc_id(peer, OwnGuild.snapshot(Game.hero, false))
+	Events.notify.emit("Guild invitation sent to %s." % peers[peer].get("name", "them"), &"info")
+	return ""
+
+@rpc("any_peer", "reliable")
+func _guild_invite_ask(snap: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var h := Game.hero
+	var g := GuildRegistry.clean_remote(snap)
+	if not peers.has(from) or h == null or g.is_empty() or Game.ui_root == null or not is_instance_valid(Game.ui_root):
+		return
+	if OwnGuild.is_master(h):
+		_guild_invite_reply.rpc_id(from, false, {"why": "%s leads a guild of their own." % h.hero_name})
+		return
+	_guild_asked = {"peer": from, "snap": g}
+	var now := "" if h.guild == &"" else "\nYou will leave %s (your Class %s tier stays yours)." % [GuildRules.display_name(h), DataGuilds.letter(h.tier)]
+	Game.ui_root.ask("Guild Invitation", "%s invites you to join %s (guild level %d, %d members).\n“%s”%s" % [g.master, g.name, g.level, g.members,
+			g.motto, now], func() -> void: answer_guild_invite(true), "Join %s" % g.name)
+	get_tree().create_timer(40.0).timeout.connect(func() -> void:
+		if int(_guild_asked.get("peer", 0)) == from:
+			answer_guild_invite(false))
+
+func answer_guild_invite(yes: bool) -> void:
+	var from := int(_guild_asked.get("peer", 0))
+	_guild_asked = {}
+	var h := Game.hero
+	if from == 0 or not peers.has(from) or h == null:
+		return
+	_guild_invite_reply.rpc_id(from, yes, {"name": h.hero_name, "cls": String(h.cls.id), "level": h.progress.level, "why": "%s said no." % h.hero_name})
+
+@rpc("any_peer", "reliable")
+func _guild_invite_reply(yes: bool, who: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var h := Game.hero
+	if not peers.has(from) or h == null:
+		return
+	if not yes:
+		Events.notify.emit(String(who.get("why", "The invitation was declined.")), &"info")
+		return
+	var pname := String(peers[from].get("name", who.get("name", "")))
+	var err := OwnGuild.add_player_member(h, pname, String(who.get("cls", "knight")), int(who.get("level", 1)))
+	if err != "":
+		Events.notify.emit(err, &"error")
+		return
+	_guild_welcome.rpc_id(from, OwnGuild.snapshot(h, true))
+	_chat_system("%s joined %s!" % [pname, h.own_guild.name])
+
+@rpc("any_peer", "reliable")
+func _guild_welcome(snap: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var h := Game.hero
+	var g := GuildRegistry.clean_remote(snap)
+	if not peers.has(from) or h == null or g.is_empty() or OwnGuild.is_master(h):
+		return
+	var first := h.guild == &""
+	h.guild = GuildRegistry.REMOTE
+	h.remote_guild = g
+	h.guild_alias = ""
+	if h.tier < 1:
+		h.set_tier(1)
+	h.stats_dirty.emit()
+	Events.guild_joined.emit(GuildRegistry.REMOTE, first)
+	Events.guild_changed.emit()
+	Events.notify.emit("You joined %s, led by %s!" % [g.name, g.master], &"discovery")
+	Game.save_now()
+
+@rpc("any_peer", "reliable")
+func _guild_sync(snap: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var h := Game.hero
+	var g := GuildRegistry.clean_remote(snap)
+	if not peers.has(from) or h == null or g.is_empty() or h.guild != GuildRegistry.REMOTE:
+		return
+	if String(h.remote_guild.get("master", "")) != String(g.master):
+		return
+	if (g.banner as PackedByteArray).is_empty():
+		g.banner = h.remote_guild.get("banner", PackedByteArray())
+	if GuildRegistry._same_snapshot(h.remote_guild, g):
+		return
+	h.remote_guild = g
+	h.stats_dirty.emit()
+	Events.guild_changed.emit()
+
+## The Guildmaster dismissed a fellow player (OwnGuild.kick): tell them if they are here.
+func guild_kick_player(pname: String) -> void:
+	if not is_active():
+		return
+	var id := peer_by_name(pname)
+	if id != 0 and Game.hero:
+		_guild_kicked.rpc_id(id, GuildRules.clean_alias(Game.hero.hero_name))
+
+@rpc("any_peer", "reliable")
+func _guild_kicked(master: String) -> void:
+	var h := Game.hero
+	if h == null or h.guild != GuildRegistry.REMOTE or String(h.remote_guild.get("master", "")) != master:
+		return
+	var was := String(h.remote_guild.get("name", "the guild"))
+	h.guild = &""
+	h.remote_guild = {}
+	h.stats_dirty.emit()
+	Events.guild_changed.emit()
+	Events.notify.emit("%s dismissed you from %s." % [master, was], &"error")
+
+## This player left a fellow hero's guild (GuildRules.leave): tell the Guildmaster if they are here.
+func guild_left(master: String) -> void:
+	if not is_active():
+		return
+	var id := peer_by_name(master)
+	if id != 0:
+		_guild_member_left.rpc_id(id)
+
+@rpc("any_peer", "reliable")
+func _guild_member_left() -> void:
+	var from := multiplayer.get_remote_sender_id()
+	var h := Game.hero
+	if not peers.has(from) or not OwnGuild.is_master(h):
+		return
+	var pname := String(peers[from].get("name", ""))
+	for m in OwnGuild.members(h):
+		if String(m.kind) == "player" and String(m.name) == pname:
+			(h.own_guild.members as Array).erase(m)
+			Events.notify.emit("%s left %s." % [pname, h.own_guild.name], &"info")
+			Events.guild_changed.emit()
+			return
+
+# ---- Showcase ---------------------------------------------------------------------------------------------------
+
+## What a Showcase shows of this hero: name, class, level, look, equipped gear, guild (no stats).
+static func showcase_pack(h: HeroData) -> Dictionary:
+	if h == null:
+		return {}
+	var g := guild_profile(h)
+	if not g.is_empty():
+		var bytes = h.remote_guild.get("banner", PackedByteArray()) if h.guild == GuildRegistry.REMOTE else h.guild_banner
+		g["banner"] = bytes if bytes is PackedByteArray else PackedByteArray()
+		g["id"] = String(h.guild)
+	return {"name": h.hero_name, "cls": String(h.cls.id), "level": h.progress.level, "tier": h.tier, "look": h.look.duplicate(true),
+		"equipment": h.equipment.to_dict(), "guild": g}
+
+func showcase_error(peer: int) -> String:
+	if not is_active() or not peers.has(peer) or peer == my_id():
+		return "Nobody by that name is here."
+	if Time.get_ticks_msec() * 0.001 - _showcase_t < 3.0:
+		return "Wait a moment before asking again."
+	return ""
+
+func request_showcase(peer: int) -> String:
+	var err := showcase_error(peer)
+	if err != "":
+		Events.notify.emit(err, &"error")
+		return err
+	_showcase_t = Time.get_ticks_msec() * 0.001
+	_showcase_ask.rpc_id(peer, showcase_pack(Game.hero))
+	Events.notify.emit("Showcase request sent to %s." % peers[peer].get("name", "them"), &"info")
+	return ""
+
+@rpc("any_peer", "reliable")
+func _showcase_ask(theirs: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from) or Game.hero == null or Game.ui_root == null or not is_instance_valid(Game.ui_root):
+		return
+	var who := String(peers[from].get("name", "A hero"))
+	Game.ui_root.ask("Showcase", "%s would like to see your equipped gear and weapon (only what you wear - no stats).\nShow them? You will see theirs too." % who,
+		func() -> void:
+			if not peers.has(from):
+				return
+			_showcase_reply.rpc_id(from, true, showcase_pack(Game.hero))
+			Game.ui_root.open_showcase(showcase_pack(Game.hero), theirs), "Show My Gear")
+
+@rpc("any_peer", "reliable")
+func _showcase_reply(yes: bool, theirs: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from) or Game.ui_root == null or not is_instance_valid(Game.ui_root):
+		return
+	if not yes:
+		Events.notify.emit("%s would rather not show their gear." % peers[from].get("name", "They"), &"info")
+		return
+	Game.ui_root.open_showcase(showcase_pack(Game.hero), theirs)

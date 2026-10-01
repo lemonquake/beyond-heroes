@@ -178,6 +178,8 @@ def _studio(res=256):
 
 
 LAY_FLAT = set()
+# pendants and charms lie flat, face up: their icons look down on them (rings stand on the band)
+FLAT_JEWELS = {k for k, (fn, _s) in IG.GEAR.items() if fn in (IG.amulet, IG.charm)}
 
 
 def _pose_for(item, ob):
@@ -200,7 +202,7 @@ def _pose_for(item, ob):
     if cat == "shield":
         ob.rotation_euler = (0, math.radians(-12), math.radians(8))
         return 10.0, 0.0
-    if cat in LAY_FLAT or item["id"] in ("bone_amulet", "gold_amulet", "star_pendant", "u_heart_of_aether", "rune_charm", "war_talisman"):
+    if cat in LAY_FLAT or item["id"] in FLAT_JEWELS:
         return 58.0, 12.0
     if cat in ("helm", "boots"):
         return 16.0, 28.0

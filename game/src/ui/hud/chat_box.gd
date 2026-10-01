@@ -164,12 +164,49 @@ func close() -> void:
 	_completion = {}
 	_idle = 0.0
 
+## bh-027: put text on the open line (the player menu's Whisper starts "/w <name> ").
+func prefill(text: String) -> void:
+	if not _open:
+		open()
+	_line.text = text
+	_line.caret_column = text.length()
+	_line.grab_focus()
+
+## "/w <name> <message>" (or /whisper, /tell): [peer, message], or [0, why] when it is not one.
+static func parse_whisper(t: String) -> Array:
+	var lower := t.to_lower()
+	var rest := ""
+	for cmd in ["/w ", "/whisper ", "/tell "]:
+		if lower.begins_with(cmd):
+			rest = t.substr(cmd.length()).strip_edges()
+	if rest == "":
+		return [0, ""]
+	var best := 0
+	var best_len := -1
+	for id in Net.peers:
+		var n := String(Net.peers[id].get("name", ""))
+		if n != "" and (rest.to_lower() == n.to_lower() or rest.to_lower().begins_with(n.to_lower() + " ")) and n.length() > best_len:
+			best = int(id)
+			best_len = n.length()
+	if best == 0:
+		return [0, "Nobody called that is here. Whisper with /w <name> <message>."]
+	return [best, rest.substr(best_len).strip_edges()]
+
 ## Runs a message exactly as if the player had typed it and pressed Enter (also used by tests).
 func submit(text: String) -> void:
 	var t := ChatText.clean(text)
 	if t.is_empty():
 		return
 	var hero: HeroData = Game.hero
+	if t.begins_with("/w ") or t.begins_with("/whisper ") or t.begins_with("/tell ") or t.begins_with("/W "):
+		var w := parse_whisper(t)
+		if int(w[0]) == 0:
+			add_line(String(w[1]) if String(w[1]) != "" else "Whisper with /w <name> <message>.", UITheme.BAD)
+		else:
+			var err := Net.whisper(int(w[0]), String(w[1]))
+			if err != "":
+				add_line(err, UITheme.BAD)
+		return
 	if Cheats.is_code(t):
 		add_line(Cheats.apply(t, hero, Game.player), UITheme.GOLD)
 	else:

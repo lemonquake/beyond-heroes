@@ -60,6 +60,36 @@ const TEMPLATES := [
 		"text": "Camps snuff the roadside lamps. Clear {n} camp(s) so the lamps can be relit."},
 	{"id": "ln_stage", "guild": "lantern", "kind": "stage", "title": "Quiet the Valley", "goal": Vector2i(1, 1), "unit": 120, "lvl": Vector2i(2, 60),
 		"text": "Clear every camp of a combat map in one visit so the Covenant's scribes can work in peace."},
+	# ---- bh-027: open postings, put up by the guilds that set up in the Guild House ("open": the issuer is one of
+	# the hero's rolled guilds, chosen when the job is posted) --------------------------------------------------
+	{"id": "op_causeway", "guild": "open", "kind": "kill_map", "map": "weeping_causeway", "title": "Causeway Sweep", "goal": Vector2i(10, 16), "unit": 11, "lvl": Vector2i(5, 24),
+		"text": "Travellers vanish on the Weeping Causeway. Cut down {n} monsters in {map} and the guild pays."},
+	{"id": "op_west_patrol", "guild": "open", "kind": "kill_map", "map": "westreach", "title": "Westreach Patrol", "goal": Vector2i(14, 20), "unit": 7, "lvl": Vector2i(1, 12),
+		"text": "Walk the Westreach roads with a blade out. Put down {n} monsters in {map}."},
+	{"id": "op_temple_purge", "guild": "open", "kind": "kill_map", "map": "forgotten_temple", "title": "Purge the Oath", "goal": Vector2i(16, 24), "unit": 12, "lvl": Vector2i(10, 30),
+		"text": "The temple's servants still march. Break {n} of them in the {map}."},
+	{"id": "op_deep_catacombs", "guild": "open", "kind": "kill_map", "map": "catacombs", "title": "Down Among the Dead", "goal": Vector2i(16, 24), "unit": 10, "lvl": Vector2i(6, 22),
+		"text": "Something below the catacombs is waking them. Lay {n} of the dead to rest in the {map}."},
+	{"id": "op_heads", "guild": "open", "kind": "kill_elite", "title": "Wanted: Pack Leaders", "goal": Vector2i(3, 5), "unit": 42, "lvl": Vector2i(4, 60),
+		"text": "Posters on every door: the leaders of the packs, dead or dead. Bring down {n} elite monsters."},
+	{"id": "op_champion", "guild": "open", "kind": "miniboss", "title": "Named and Wanted", "goal": Vector2i(1, 2), "unit": 240, "lvl": Vector2i(8, 60),
+		"text": "The guild has a name on the board and a purse beside it. Defeat {n} champion(s)."},
+	{"id": "op_camps", "guild": "open", "kind": "camp", "title": "Burn the Camps", "goal": Vector2i(2, 4), "unit": 50, "lvl": Vector2i(1, 60),
+		"text": "Monster camps are squatting on good land. Wipe out {n} of them."},
+	{"id": "op_stage", "guild": "open", "kind": "stage", "title": "A Quiet Map", "goal": Vector2i(1, 2), "unit": 115, "lvl": Vector2i(3, 60),
+		"text": "Clear every camp of a combat map in one visit, {n} time(s). The guild wants the roads safe for its caravans."},
+	{"id": "op_herbs", "guild": "open", "kind": "herb", "title": "Healer's Satchel", "goal": Vector2i(6, 10), "unit": 9, "lvl": Vector2i(1, 60),
+		"text": "The guild's healers are short of simples. Gather {n} herbs from wild patches."},
+	{"id": "op_smith", "guild": "open", "kind": "craft", "title": "Arms for the Recruits", "goal": Vector2i(2, 4), "unit": 32, "lvl": Vector2i(2, 60),
+		"text": "New recruits arrive with nothing but hope. Craft {n} item(s) at a forge, alchemy table or workbench."},
+	{"id": "op_cull", "guild": "open", "kind": "kill_any", "title": "Thin the Numbers", "goal": Vector2i(25, 40), "unit": 6, "lvl": Vector2i(1, 60),
+		"text": "Too many monsters, not enough heroes. Slay {n} of them anywhere on Salmonan."},
+	{"id": "op_wyman", "guild": "open", "kind": "visit", "map": "wyman_outpost", "title": "Letters to Wyman", "goal": Vector2i(1, 1), "unit": 80, "lvl": Vector2i(2, 60),
+		"text": "A satchel of letters for the soldiers at {map}. Arrive there to deliver them."},
+	{"id": "op_olivar", "guild": "open", "kind": "visit", "map": "olivar", "title": "Olivar Market Run", "goal": Vector2i(1, 1), "unit": 60, "lvl": Vector2i(1, 60),
+		"text": "The guild's factor in {map} is waiting on a sealed purse. Arrive there to hand it over."},
+	{"id": "op_causeway_survey", "guild": "open", "kind": "visit", "map": "weeping_causeway", "title": "Map the Causeway", "goal": Vector2i(1, 1), "unit": 95, "lvl": Vector2i(5, 30),
+		"text": "The guild's charts of {map} are years old. Walk it and bring back fresh notes."},
 ]
 
 static func template(id: String) -> Dictionary:
@@ -70,3 +100,7 @@ static func template(id: String) -> Dictionary:
 
 static func for_guild(gid: StringName) -> Array:
 	return TEMPLATES.filter(func(t): return String(t.guild) == String(gid))
+
+## bh-027: every posting — the central board of the Guild House offers all of them to everyone.
+static func all() -> Array:
+	return TEMPLATES

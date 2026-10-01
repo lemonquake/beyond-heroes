@@ -149,60 +149,88 @@ func _tavern() -> void:
 		lamp(kit("hanging_lantern", lp, 0.0, 1.0, deco), WARM, 2.2, 8.0)
 
 # ------------------------------------------------------------------------------------------------------------
-# The Guild House (bh-016) — Steward Hollis at the reception table, Bram Ostler at the Swordfin counter (west),
-# Sabeth Wynn at the Lantern counter (east); a job board on each side wall
+# The Guild House (bh-016; rebuilt bh-027) — a long hall where every guild of Malasugue keeps a counter. Steward Hollis at
+# the reception table under the featured banner (the hero's own guild once they found one), Bram Ostler at the Swordfin
+# counter (west) and Sabeth Wynn at the Lantern counter (east), the four newer guilds' banners down the side walls,
+# fellow heroes' banners on the north wall, and the one Guild Quest Board in the middle for everyone.
 
 func _guildhouse() -> void:
-	_room(20.0, 12.0, STONE, 2, {}, true, Color(0.52, 0.48, 0.58), 0.46)
-	# both banners, twice: the room belongs to both guilds
-	banner("guild_banner_swordfin", -7.6)
-	banner("guild_banner_swordfin", -4.4)
-	banner("guild_banner_lantern", 4.4)
-	banner("guild_banner_lantern", 7.6)
-	# reception: a long table across the middle of the north wall, the steward behind it
+	_room(28.0, 16.0, STONE, 3, {}, true, Color(0.52, 0.48, 0.58), 0.5)
+	# the old houses' banners at the far corners
+	banner("guild_banner_swordfin", -12.0)
+	banner("guild_banner_swordfin", -9.6)
+	banner("guild_banner_lantern", 9.6)
+	banner("guild_banner_lantern", 12.0)
+	# reception: a long table across the middle of the north side, the steward behind it
 	item("table_long", Vector3(0, 0, -2.3))
 	candles(Vector3(-0.8, 1.0, -2.3), 0.9)
 	candles(Vector3(0.9, 1.0, -2.3), 0.8)
-	kit("rug", Vector3(0, 0.004, 0.9), 0.0, 1.4, deco)
-	torch(Vector3(-1.6, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.6)
-	torch(Vector3(1.6, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.6)
-	# Swordfin side: counter, racks, armor, the west job board
+	kit("rug", Vector3(0, 0.004, 0.6), 0.0, 1.8, deco)
+	torch(Vector3(-2.2, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.8)
+	torch(Vector3(2.2, 2.3, z0 + HALF_WALL + 0.02), 0.0, 2.8)
+	# Swordfin side: counter, racks, armor
 	item("desk_writing", Vector3(-6.4, 0, -2.2), 180.0)
 	candles(Vector3(-6.9, 1.0, -2.1), 0.8)
-	against("weapon_display", "north", -8.9, 0.08)
-	item("armor_stand", Vector3(-9.0, 0, -4.9))
-	item("weapon_rack", Vector3(-9.3, 0, 3.4), 90.0)
-	against("notice_board", "west", 0.2, 0.32)
-	item("bench", Vector3(-7.2, 0, 3.0), 90.0)
-	item("chest", Vector3(-9.0, 0, -1.4), 90.0)
-	lamp(item("lantern_stand", Vector3(-4.0, 0, -4.9)), WARM, 1.6)
-	# Lantern side: counter, shelves, the east job board
+	against("weapon_display", "north", -12.9, 0.08)
+	item("armor_stand", Vector3(-13.0, 0, -6.9))
+	item("weapon_rack", Vector3(-13.3, 0, 6.4), 90.0)
+	item("chest", Vector3(-8.6, 0, -6.9), 0.0)
+	lamp(item("lantern_stand", Vector3(-4.2, 0, -6.9)), WARM, 1.6)
+	# Lantern side: counter, shelves
 	item("desk_writing", Vector3(6.4, 0, -2.2), 180.0)
 	candles(Vector3(5.9, 1.0, -2.1), 0.8)
-	against("bookshelf_full", "east", -3.4, 0.25)
-	against("bookshelf_full", "east", 3.4, 0.25)
-	against("notice_board", "east", 0.2, 0.32)
-	item("lectern", Vector3(8.6, 0, -4.8))
-	item("trunk", Vector3(9.0, 0, -1.3), -90.0)
-	kit("rug_round", Vector3(6.4, 0.005, 2.6), 0.0, 1.0, deco)
-	lamp(item("lantern_stand", Vector3(4.0, 0, -4.9), 180.0), Color(1.0, 0.78, 0.45), 1.8)
+	against("bookshelf_full", "east", -6.0, 0.25)
+	item("lectern", Vector3(12.6, 0, -6.8))
+	item("trunk", Vector3(8.6, 0, -6.9), 0.0)
+	lamp(item("lantern_stand", Vector3(4.2, 0, -6.9), 180.0), Color(1.0, 0.78, 0.45), 1.8)
 	light(Vector3(6.4, 2.8, -2.6), Color(0.7, 0.5, 1.0), 0.9, 6.0, false, true)
 	light(Vector3(-6.4, 2.8, -2.6), Color(0.55, 0.7, 1.0), 0.9, 6.0, false, true)
+	# the newer guilds: a counter and a banner stand each, down the side walls
+	var spots := [[Vector3(x0 + 1.3, 0, -0.6), 90.0], [Vector3(x0 + 1.3, 0, 4.6), 90.0], [Vector3(x1 - 1.3, 0, -0.6), -90.0], [Vector3(x1 - 1.3, 0, 4.6), -90.0]]
+	for i in spots.size():
+		var at: Vector3 = spots[i][0]
+		var yaw: float = spots[i][1]
+		var gc := GuildCounter.new()
+		gc.slot = "npc_%d" % i
+		gc.position = at
+		gc.rotation.y = deg_to_rad(yaw)
+		markers.add_child(gc)
+		var inward := Vector3(1, 0, 0) if yaw > 0.0 else Vector3(-1, 0, 0)
+		item("desk_writing", at + inward * 1.6, yaw + 180.0)
+		candles(at + inward * 1.6 + Vector3(0, 1.0, 0.3), 0.7)
+	# the two old houses get a banner stand of their own by their counters
+	for side in [["swordfin", Vector3(-9.2, 0, -3.4), 0.0], ["lantern", Vector3(9.2, 0, -3.4), 0.0]]:
+		var gc2 := GuildCounter.new()
+		gc2.slot = side[0]
+		gc2.position = side[1]
+		gc2.rotation.y = deg_to_rad(side[2])
+		markers.add_child(gc2)
+	# fellow heroes' guilds met in multiplayer hang on the north wall, between the old houses and the reception
+	for i in 4:
+		var wx: float = [-7.0, -4.6, 4.6, 7.0][i]
+		var fg := GuildCounter.new()
+		fg.slot = "imported:%d" % i
+		fg.on_wall = true
+		fg.position = Vector3(wx, 2.4, z0 + HALF_WALL + 0.06)
+		markers.add_child(fg)
 	# waiting benches and hanging lanterns
-	item("bench", Vector3(-2.6, 0, 3.2))
-	item("bench", Vector3(2.6, 0, 3.2))
-	for lp in [Vector3(-3.5, 0, 1.0), Vector3(3.5, 0, 1.0)]:
+	item("bench", Vector3(-4.2, 0, 5.6))
+	item("bench", Vector3(4.2, 0, 5.6))
+	for lp in [Vector3(-5.0, 0, 1.6), Vector3(5.0, 0, 1.6), Vector3(0, 0, 5.2)]:
 		lamp(kit("hanging_lantern", lp, 0.0, 1.0, deco), WARM, 2.0, 8.0)
-	# the hero's own guild banner (bh-017), centred on the north wall above the reception
+	# the hero's own guild banner (bh-017), centred on the north wall above the reception: featured once they found one
 	var gb := GuildBannerDisplay.new()
-	gb.position = Vector3(0, 2.3, z0 + HALF_WALL + 0.05)
+	gb.position = Vector3(0, 2.6, z0 + HALF_WALL + 0.05)
 	markers.add_child(gb)
-	# the two job boards you can read (the notice boards on the side walls)
-	for side in [[&"swordfin", Vector3(x0 + 1.0, 0, 0.2)], [&"lantern", Vector3(x1 - 1.0, 0, 0.2)]]:
-		var jb := GuildJobBoard.new()
-		jb.guild = side[0]
-		jb.position = side[1]
-		markers.add_child(jb)
+	# the one Guild Quest Board, in the middle of the hall facing the door
+	var board := kit("notice_board", Vector3(0, 0, 2.4), 0.0, 1.25, props)
+	lamp(kit("hanging_lantern", Vector3(0, 0, 3.4), 0.0, 1.0, deco), Color(1.0, 0.8, 0.5), 2.2, 7.0)
+	var jb := GuildJobBoard.new()
+	jb.guild = GuildJobs.CENTRAL
+	jb.position = Vector3(0, 0, 2.6)
+	markers.add_child(jb)
+	if board == null:
+		push_warning("Guild House: no notice_board kit piece")
 
 # ------------------------------------------------------------------------------------------------------------
 # Swordfin Hall — Commander Rhea at the war table, Quartermaster Dax at the register desk

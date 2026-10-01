@@ -9,6 +9,7 @@ const ENTRIES := [
 	["skills", "Skills", "attributes", "intelligence"],
 	["talents", "Talents", "attributes", "wisdom"],
 	["tempos", "Tempos", "classes", "tempo_swordsman"],
+	["guild", "Guild", "ui", "crown"],
 	["world_map", "World Map", "ui", "map"],
 	["guide", "Field Guide", "ui", "quest"],
 	["multiplayer", "Multiplayer", "ui", "teleport"],

@@ -11,7 +11,7 @@ const ACTION_NAMES := [
 	["skill_1", "Skill 1"], ["skill_2", "Skill 2"], ["skill_3", "Skill 3"], ["skill_4", "Skill 4"], ["skill_5", "Skill 5"],
 	["skill_6", "Skill 6"], ["potion_health", "Potion Belt 1"], ["potion_mana", "Potion Belt 2"], ["interact", "Interact"], ["ping", "Ping (mark a spot)"], ["summon_party", "Team Portal"], ["minimap_zoom_in", "Minimap Zoom In"], ["minimap_zoom_out", "Minimap Zoom Out"],
 	["attack_in_place", "Attack in Place"], ["inventory", "Inventory"], ["character", "Character"], ["skills", "Skills"],
-	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["guide", "Field Guide"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
+	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["guild", "Guild"], ["guide", "Field Guide"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
 ]
 
 var _tabs: TabContainer

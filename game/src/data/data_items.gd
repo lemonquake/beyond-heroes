@@ -144,6 +144,7 @@ static func bases() -> Array:
 	out.append(_b(&"star_pendant", "Star Pendant", &"accessory", "amulet_3", {"level_req": 18, "value": 90, "implicit": [StatModifier.inc(&"elemental_damage", 0.08)]}))
 	out.append(_b(&"rune_charm", "Rune Charm", &"accessory", "charm", {"level_req": 4, "value": 30, "implicit": [StatModifier.inc(&"elemental_damage", 0.05)]}))
 	out.append(_b(&"war_talisman", "War Talisman", &"accessory", "charm_2", {"level_req": 12, "value": 55, "implicit": [StatModifier.inc(&"impact_strength", 0.08)]}))
+	out.append_array(DataAccessories.bases())          # bh-027: twenty more rings, amulets and charms
 
 	_sets_and_uniques(out)
 

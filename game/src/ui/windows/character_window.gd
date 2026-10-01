@@ -269,9 +269,9 @@ func refresh() -> void:
 	_tier_emblem.texture = UIArt.tex(DataGuilds.emblem_path(hero.tier))
 	_tier_text.text = DataGuilds.tier_name(hero.tier)
 	_tier_text.add_theme_color_override("font_color", DataGuilds.tier(hero.tier).color)
-	var g := DataGuilds.guild(hero.guild)
+	var g := GuildRegistry.info(hero, hero.guild)
 	_guild_text.text = GuildRules.display_name(hero) if not g.is_empty() else "No guild"
-	_guild_crest.texture = UIArt.tex(String(g.crest)) if not g.is_empty() else null
+	_guild_crest.texture = (UIArt.tex(String(g.crest)) if g.has("crest") else GuildRegistry.banner(hero, hero.guild)) if not g.is_empty() else null
 	var promotion := GuildRules.next_promotion(hero)
 	_promotion_text.text = String(promotion.error)
 	if int(promotion.rank) > 0:
@@ -281,14 +281,14 @@ func refresh() -> void:
 func _guild_tip() -> String:
 	var lines := PackedStringArray()
 	if hero.guild == &"":
-		lines.append("You are not registered with a guild. Join one in Malasugue (Swordfin Hall or Lantern House) to become a Class E hero and equip Licensed gear.")
+		lines.append("You are not registered with a guild. Join one at the Guild House in Malasugue, or found your own (%s), to become a Class E hero and equip Licensed gear." % Settings.binding_text(&"guild"))
 	else:
-		var g := DataGuilds.guild(hero.guild)
-		lines.append("%s — \"%s\"" % [g.name if hero.guild_alias == "" else "%s (%s)" % [hero.guild_alias, g.name], g.motto])
-		lines.append("Click the guild to rename it or change its banner.")
-		for i in g.perk_text.size():
-			lines.append("%s per tier step (now x%d)" % [g.perk_text[i], hero.tier])
-		for f in g.features:
+		var g := GuildRegistry.info(hero, hero.guild)
+		lines.append("%s — \"%s\"" % [GuildRules.display_name(hero), g.get("motto", "")])
+		lines.append("Click the guild to rename it or change its banner." if GuildRules.can_customise(hero) else "Your Guildmaster names the guild and flies its banner.")
+		for t in g.get("perk_text", []):
+			lines.append("%s per tier step (now x%d)" % [t, hero.tier])
+		for f in g.get("features", []):
 			lines.append(f)
 	lines.append("")
 	for r in range(1, DataGuilds.MAX_RANK + 1):

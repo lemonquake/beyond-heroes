@@ -1,6 +1,6 @@
 class_name DataNpcsGuildHouse
-## The three people of the Guild House (bh-016): the steward who explains both guilds and opens the job boards, and one
-## clerk at each guild's counter. Graph format: see Dialogue. Positions are map-local (interior.gd, `int_guildhouse`).
+## The three people of the Guild House (bh-016): the steward who explains the guilds, opens the central quest board and
+## grants charters for new guilds (bh-027), and one clerk at each old guild's counter. Graph format: see Dialogue. Positions are map-local (interior.gd, `int_guildhouse`).
 
 const PORTRAIT := "res://assets/ui/portraits/%s.svg"
 const CHAR := "res://assets/characters/%s.glb"
@@ -20,26 +20,53 @@ static func _npc(id: StringName, name: String, d: Dictionary) -> NpcDef:
 static func _hollis() -> NpcDef:
 	return _npc(&"hollis", "Hollis Varnay", {"title": "Steward of the Guild House", "portrait": PORTRAIT % "keeper",
 		"position": Vector3(0, 0, -3.2), "yaw": 0.0, "model": CHAR % "matron", "tint": Color(0.5, 0.42, 0.3),
-		"services": [&"guild_jobs"],
+		"services": [&"guild_jobs", &"found_guild", &"guild_window"],
 		"graph": {
-			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
+			"entries": [[[{"not_visited": "first"}], "first"], [[{"guild": "own"}, {"not_visited": "featured"}], "featured"], [[], "hub"]],
 			"nodes": {
 				"first": {"text": [
 						"Welcome to the **Guild House**. I am Hollis Varnay, steward. I keep the doors, the ledgers and the peace, mostly in that order.",
-						"The **Swordfin Company** and the **Lantern Covenant** hold their own halls elsewhere in Malasugue. This is the house they share: a counter for each, one board of odd jobs for each, and a rule that nobody draws steel under this roof."],
+						"Every guild in Malasugue keeps a counter under this roof now: the **Swordfin Company**, the **Lantern Covenant**, and the newer companies that came when the roads got worse. Their banners hang along the walls.",
+						"And there is one **Guild Quest Board** for all of them. Any hero may take any job, whatever seal they carry — or none at all."],
 					"next": "hub"},
-				"hub": {"text": "Which counter can I point you to, {hero}?",
+				"featured": {"text": [
+						"{hero}. Look up — that is your banner at the head of the hall. We moved it there this morning.",
+						"I will be plain. Malasugue is tired of waiting. The town believes **you** are the one who can bring our own heroes home: **Aljay and Roydo**, wherever the Spire took them — and that you will do it together with **Paul David**.",
+						"So the House features your guild. Every adventurer who walks in sees it first. Do not make me take it down."],
+					"next": "hub"},
+				"hub": {"text": "What can the House do for you, {hero}?",
 					"choices": [
-						{"text": "Show me the job boards.", "next": "end", "actions": [{"service": "guild_jobs"}]},
+						{"text": "Show me the Guild Quest Board.", "next": "end", "actions": [{"service": "guild_jobs"}]},
+						{"text": "I want to found a guild of my own.", "next": "found", "conditions": [{"not_guild": "own"}], "hidden_if_unmet": true},
+						{"text": "About my guild...", "next": "mine", "conditions": [{"guild": "own"}], "hidden_if_unmet": true},
+						{"text": "Which guilds keep a counter here?", "next": "guilds"},
 						{"text": "How do the jobs work?", "next": "jobs"},
 						{"text": "Tell me about the Swordfin Company.", "next": "swordfin"},
 						{"text": "Tell me about the Lantern Covenant.", "next": "lantern"},
 						{"text": "Which guild should I choose?", "next": "choose"},
 						_end("Thank you, steward."),
 					]},
+				"found": {"text": [
+						"A charter of your own? The town grants one for **{found_fee} gold**. You name the guild, write its words and fly whatever banner you please.",
+						"Adventurers will come to you — every class, at levels not far below your own — until your hall is full. Six to begin with; the hall can be expanded. Lead them well and the guild grows: passives for every member, and for the day you fight many at once.",
+						"And a Guildmaster can **call the guild to arms**: your members march to your side for a quarter of an hour."],
+					"choices": [
+						{"text": "Draw up the charter.", "next": "end", "actions": [{"service": "found_guild"}]},
+						{"text": "Not yet.", "next": "hub"},
+					]},
+				"mine": {"text": "Your ledger is in order. Press **{guild_key}** any time to see your members, your passives and your Call to Arms — or I can open it for you now.",
+					"choices": [
+						{"text": "Open my guild's ledger.", "next": "end", "actions": [{"service": "found_guild"}]},
+						{"text": "Back.", "next": "hub"},
+					]},
+				"guilds": {"text": "The old houses on either side, and the newer companies along the walls. Each counter has its banner and its terms; read them, register with whichever suits you. Heroes from other worlds who pass through leave their banners too — we hang those on the north wall.",
+					"choices": [
+						{"text": "Show me all the guilds.", "next": "end", "actions": [{"service": "guild_window"}]},
+						{"text": "Back.", "next": "hub"},
+					]},
 				"jobs": {"text": [
-						"Each guild posts four jobs at a time, for heroes of your level. **Only a registered member** may take a guild's jobs, and you may carry **three** at once.",
-						"Do the work anywhere on Salmonan; it counts as you go. Come back and hand it in, and the guild pays in gold. Your **tier** adds a little on top, and a fresh posting replaces every one you finish."],
+						"Every guild posts on the **one board** now, and anyone may take anything: a Swordfin hero can carry Covenant errands and a hero with no seal at all can take both. You may carry **five** at once.",
+						"Do the work anywhere on Salmonan; it counts as you go. Hand it in for gold. Your **tier** adds a little on top, a job your own guild posted pays a little more, and every job handed in earns your guild renown."],
 					"next": "hub"},
 				"swordfin": {"text": "Steel work. Culling, camps, elites and champions. **Bram Ostler** keeps their counter, on the left. The Company posts what it needs killed and pays promptly.",
 					"next": "hub"},
@@ -47,7 +74,7 @@ static func _hollis() -> NpcDef:
 					"next": "hub"},
 				"choose": {"text": [
 						"Swordfin if you want to stand in front: physical and impact damage, cheaper steel at Brannoc's forge and better bounty gold from elites.",
-						"Lantern if you would rather know why you are standing there: magic damage, more mana, cheaper rooms at the Salted Marlin and stronger potions. Your tier follows you if you change your mind. It is only the transfer fee that follows you too."],
+						"Lantern if you would rather know why you are standing there: magic damage, more mana, cheaper rooms at the Salted Marlin and stronger potions. The newer companies each have their own terms on their counters. Your tier follows you if you change your mind — or start a guild of your own."],
 					"next": "hub"},
 			},
 		}})
@@ -63,11 +90,11 @@ static func _bram() -> NpcDef:
 					"next": "hub"},
 				"hub": {"text": "Looking for work, {hero}?",
 					"choices": [
-						{"text": "Show me the Company's bounties.", "next": "end", "actions": [{"service": "guild_jobs_swordfin"}]},
+						{"text": "Show me the quest board.", "next": "end", "actions": [{"service": "guild_jobs"}]},
 						{"text": "Do I have to be a member?", "next": "member"},
 						_end("Not today."),
 					]},
-				"member": {"text": "To take Swordfin work, yes. Register at the Company's hall, or use the steward's ledger here. {join_fee} gold to sign on, {transfer_fee} to switch sides. Then the board is yours.",
+				"member": {"text": "Not any more. The steward put every guild's work on the one board and anyone may take it. Sign with the Company if you want our seal: {join_fee} gold at the hall, {transfer_fee} to switch sides.",
 					"next": "hub"},
 			},
 		}})
@@ -83,11 +110,11 @@ static func _sabeth() -> NpcDef:
 					"next": "hub"},
 				"hub": {"text": "Yes? Mind the ink.",
 					"choices": [
-						{"text": "Show me the Covenant's errands.", "next": "end", "actions": [{"service": "guild_jobs_lantern"}]},
+						{"text": "Show me the quest board.", "next": "end", "actions": [{"service": "guild_jobs"}]},
 						{"text": "Do I have to be a member?", "next": "member"},
 						_end("Another time."),
 					]},
-				"member": {"text": "For Covenant errands, yes. Lio keeps the register in Lantern House, and the steward can take a transfer. We are very fond of people who bring back what they were sent for.",
+				"member": {"text": "No — the board is open to everyone now. Lio keeps the register in Lantern House if you want our seal. We are very fond of people who bring back what they were sent for.",
 					"next": "hub"},
 			},
 		}})

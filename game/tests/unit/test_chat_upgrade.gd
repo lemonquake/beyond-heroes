@@ -39,7 +39,7 @@ func test_equipment_and_orbital_gifts_are_atomic_and_saved() -> void:
 		for it: ItemInstance in h.inventory.cells:
 			ok(it.crafted and it.license != &"" and not it.powers.is_empty(), "crafted, licensed special effects")
 			ok(it.display_name() != "", "named equipment")
-			ok(ItemGenerator.class_fit(it.base, cls), "fits class")
+			ok(ItemGenerator.class_fit(it.base, cls) or ItemGenerator.accessory_fits(it.base, cls), "fits class (jewellery suits everyone, bh-027)")
 			var copy := ItemInstance.from_dict(it.to_dict())
 			eq(copy.powers, it.powers, "special effects survive save")
 		var before := h.inventory.to_array()

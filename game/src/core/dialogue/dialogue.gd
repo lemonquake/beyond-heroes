@@ -195,10 +195,11 @@ static func fill(text: String, hero: HeroData) -> String:
 		return text
 	var p := GuildRules.next_promotion(hero)
 	var nxt: int = p.get("rank", -1)
-	var g := DataGuilds.guild(hero.guild)
+	var g := GuildRegistry.info(hero, hero.guild)
 	var vals := {
+		"found_fee": str(DataGuildPassives.FOUND_FEE), "guild_key": Settings.binding_text(&"guild"),
 		"hero": hero.hero_name, "tier": DataGuilds.tier_name(hero.tier), "tier_letter": DataGuilds.letter(hero.tier),
-		"guild": String(g.get("name", "no guild")), "rest_fee": str(NpcServices.rest_cost(hero)),
+		"guild": GuildRules.display_name(hero) if not g.is_empty() else "no guild", "rest_fee": str(NpcServices.rest_cost(hero)),
 		"mystic_fee": str(NpcServices.mystic_heal_cost(hero)),
 		"next_tier": ("Class %s" % DataGuilds.letter(nxt)) if nxt > 0 else "none",
 		"promo_fee": str(p.get("fee", 0)), "promo_level": str(p.get("level", 0)), "promo_deed": String(p.get("deed", "")),

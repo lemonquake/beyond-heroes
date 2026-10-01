@@ -11,6 +11,7 @@ const LERP_RATE := 14.0
 var owner_peer := 0
 var key := ""                       # "p" the hero, "t<uid>" a Tempo
 var is_hero := false
+var guild_tag := ""                  # bh-027: a Call to Arms fighter's guild (shown instead of "X's Tempo")
 var _target_pos := Vector3.ZERO
 var _target_yaw := 0.0
 var _vel := Vector3.ZERO
@@ -242,6 +243,8 @@ func _refresh_tag() -> void:
 		if _sub:
 			var cls := DB.class_def(StringName(p.get("cls", "")))
 			_sub.text = "Level %d %s · %s%s" % [level, cls.display_name if cls else "Hero", p.get("device", "PC"), " · Host" if owner_peer == 1 else ""]
+	elif guild_tag != "":
+		_tag.text = "%s (%s · %s)" % [display_name, guild_tag, p.get("name", "Ally")]
 	else:
 		_tag.text = "%s (%s's Tempo)" % [display_name, p.get("name", "Ally")]
 
