@@ -61,9 +61,10 @@ func test_class_sets_and_powers() -> void:
 func test_milestones_and_full_progression() -> void:
 	for level in [29, 30, 44, 45, 59, 60, 74, 75, 89, 90, 104, 105, 150, 225, 300]:
 		var floor_level := CombatGrowth.encounter_level(5, level)
-		eq(floor_level, 5 if level < 30 else 30 + 15 * floori(float(level - 30) / 15.0), "authored floor and exact checkpoints")
+		# bh-028: from level 30 monsters follow the hero closely (CombatBudget.ENCOUNTER_GAP) instead of 15-level steps
+		eq(floor_level, 5 if level < 30 else level - CombatBudget.ENCOUNTER_GAP, "authored floor, then close behind the hero")
 		if level >= 30:
-			ok(floor_level <= level and floor_level > level - 15, "checkpoint level")
+			ok(floor_level <= level and floor_level >= level - CombatBudget.ENCOUNTER_GAP, "encounter level")
 		eq(CombatGrowth.encounter_level(5, level, true), level, "boss matches hero level")
 		for cid in [&"knight", &"mage", &"ranger", &"shadowblade"]:
 			var h := geared(cid, level)

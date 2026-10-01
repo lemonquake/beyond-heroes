@@ -26,7 +26,7 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 13                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+const PROTOCOL := 14                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
@@ -676,6 +676,10 @@ func _local_allies() -> Array:
 	for t in get_tree().get_nodes_in_group(&"tempo"):
 		if t is Tempo and t.data and is_instance_valid(t):
 			out.append(["t%d" % t.data.uid, t])
+	# bh-028: the Sand Arena's adventurers, on the machine that runs them
+	for f in get_tree().get_nodes_in_group(&"arena_fighter"):
+		if f is ArenaFighter and f.data and is_instance_valid(f) and not f.is_queued_for_deletion():
+			out.append(["a%d" % f.data.uid, f])
 	return out
 
 static func actor_state(a: Actor) -> Array:
@@ -695,6 +699,9 @@ func _send_allies() -> void:
 			e["n"] = (a as Tempo).data.tempo_name
 		if a is GuildFighter:
 			e["g"] = (a as GuildFighter).guild_name
+		if a is ArenaFighter:
+			e["n"] = a.display_name
+			e["af"] = true
 		if a.visual:
 			var sig := hash(str(a.visual.appearance)) ^ hash(String(a.visual._stance_idle))
 			if _ally_count % APPEARANCE_EVERY == 1 or _app_sig.get(pair[0], 0) != sig:
@@ -745,6 +752,7 @@ func _allies(map: String, pack: Array) -> void:
 				continue                       # wait for the appearance
 			var s: Array = e.s
 			av = NetAvatar.new().setup(from, String(e.k), {"name": e.get("n", "Hero"), "lvl": s[11], "mhp": s[4], "hp": s[3]})
+			av.arena_fighter = bool(e.get("af", false))
 			Game.current_map.add_child(av)
 			av.snap_to(s[0], s[1])
 			_avatars[k] = av
@@ -1004,6 +1012,132 @@ func _ally_hit(map: String, epoch: int, key: String, req_d: Dictionary, attacker
 		st.level = target.level
 		req.attacker = st
 	target.receive_hit(req, src if src and is_instance_valid(src) else null, hit_point if hit_point.is_finite() else Vector3.INF)
+
+# ---- bh-028: hero-against-hero hits in the Sand Arena -------------------------------------------------------------
+# The attacker's machine knows the attacker (weapon, skills, crits); the owner's machine knows the target (armour,
+# resistances, evasion, block). So the attacker resolves the offense against a bare target and sends the damage per
+# element; the owner runs the defense half through the same pipeline (Actor._threat_guard adds the arena scaling and
+# the cap there) and answers with the number that landed, which the attacker shows.
+
+func _local_key(n: Node) -> String:
+	if n is Player:
+		return "p"
+	if n is ArenaFighter and (n as ArenaFighter).data:
+		return "a%d" % (n as ArenaFighter).data.uid
+	if n is Tempo and (n as Tempo).data:
+		return "t%d" % (n as Tempo).data.uid
+	return ""
+
+## The offense half of a hit on another machine's hero or adventurer, packed for the owner.
+static func offense_pack(req: DamageRequest, target_level: int, rng_: RandomNumberGenerator) -> Dictionary:
+	var pre := req.clone()
+	var bare := DerivedStats.new()
+	bare.level = target_level
+	bare.loadout = WeaponLoadout.new()
+	bare.values = {&"max_hp": 1000.0}
+	pre.target = bare
+	pre.target_status = null
+	pre.evadable = false
+	pre.blockable = false
+	pre.tags.erase(&"blow_cap")
+	var res := DamagePipeline.compute(pre, rng_)
+	var comp := {}
+	for e in res.components:
+		if float(res.components[e]) > 0.0:
+			comp[int(e)] = float(res.components[e])
+	var atk := req.attacker
+	var pens := {}
+	if atk != null:
+		for e in Elements.ELEMENTAL:
+			var pv := atk.get_stat(Elements.pen_key(e))
+			if pv > 0.0:
+				pens[int(e)] = pv
+	return {"c": comp, "ev": req.evadable, "bl": req.blockable, "crit": res.is_crit, "kb": req.knockback, "po": req.poise,
+		"hv": req.heavy, "lbl": req.label, "lvl": atk.level if atk else target_level, "acc": atk.get_stat(&"accuracy", 30.0) if atk else 30.0,
+		"pa": atk.get_stat(&"pen_armor") if atk else 0.0, "pe": pens, "st": req.direct_status,
+		"push": req.tags.get(&"push_dir", Vector3.ZERO)}
+
+## The defense half: a request that carries the packed damage through the target's own defenses.
+static func defense_request(d: Dictionary) -> DamageRequest:
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.SPELL
+	var comp: Dictionary = d.get("c", {})
+	var total := 0.0
+	for e in comp:
+		total += float(comp[e])
+	req.base_min = total
+	req.base_max = total
+	req.use_weapon = false
+	req.can_crit = false
+	if total > 0.0:
+		for e in comp:
+			req.conversion[int(e)] = float(comp[e]) / total
+	req.evadable = bool(d.get("ev", true))
+	req.blockable = bool(d.get("bl", true))
+	req.knockback = float(d.get("kb", 0.0))
+	req.poise = float(d.get("po", 0.0))
+	req.heavy = bool(d.get("hv", false))
+	req.label = String(d.get("lbl", "Arena blow"))
+	req.direct_status = d.get("st", {})
+	req.tags[&"push_dir"] = d.get("push", Vector3.ZERO)
+	req.tags[&"proc"] = true            # the offense (spell power, bonuses, the critical) is already in the numbers
+	var atk := DerivedStats.new()
+	atk.level = int(d.get("lvl", 1))
+	atk.loadout = WeaponLoadout.new()
+	atk.values = {&"accuracy": float(d.get("acc", 30.0)), &"pen_armor": float(d.get("pa", 0.0)), &"hero_source": 1.0,
+		&"crit_damage": 1.5, &"impact_strength": 1.0}
+	var pe: Dictionary = d.get("pe", {})
+	for e in pe:
+		atk.values[Elements.pen_key(int(e))] = float(pe[e])
+	req.attacker = atk
+	return req
+
+## A local hero or adventurer hit another machine's hero or adventurer in the arena.
+func resolved_hit(av: NetAvatar, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
+	if not is_active() or av == null or req.attacker == null:
+		return
+	var akey := _local_key(attacker)
+	var d := offense_pack(req, av.level, av.rng)
+	_resolved_hit.rpc_id(av.owner_peer, String(Game.current_map_id), av.key, d, akey if akey != "" else "p",
+		hit_point if hit_point.is_finite() else av.center())
+
+@rpc("any_peer", "reliable")
+func _resolved_hit(map: String, key: String, d: Dictionary, akey: String, hit_point: Vector3) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not Game.in_session or not peers.has(from) or map != String(Game.current_map_id):
+		return
+	var target: Actor = null
+	for pair in _local_allies():
+		if pair[0] == key:
+			target = pair[1]
+	if target == null or not target.alive:
+		return
+	var by: Node = avatar(from, akey)
+	var res := target.receive_hit(defense_request(d), by, hit_point)
+	if res == null:
+		return
+	if bool(d.get("crit", false)):
+		res.is_crit = true
+	_resolved_landed.rpc_id(from, map, key, res.total, res.is_crit, res.evaded, res.blocked, int(res.dominant_element), not target.alive, hit_point)
+
+## The owner's answer: show the number that landed on their hero or adventurer.
+@rpc("any_peer", "reliable")
+func _resolved_landed(map: String, key: String, total: int, crit: bool, evaded: bool, blocked: bool, element: int, killed: bool, hit_point: Vector3) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if map != String(Game.current_map_id):
+		return
+	var av := avatar(from, key)
+	if av == null:
+		return
+	var r := DamageResult.new()
+	r.total = total
+	r.is_crit = crit
+	r.evaded = evaded
+	r.blocked = blocked
+	r.dominant_element = element
+	Events.damage_dealt.emit(av, r, hit_point, Game.player)
+	if killed and av.is_hero:
+		Events.notify.emit("You defeated %s in the Sand Arena." % av.display_name, &"loot")
 
 ## A Knight's aura pulse reached another player's hero or Tempo (bh-010): the owner applies the aura's status and stat
 ## bonuses to its real actor, like the Knight's own Tempos get them. Only the aura id and the numbers travel.

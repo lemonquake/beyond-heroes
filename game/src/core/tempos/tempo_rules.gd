@@ -45,6 +45,7 @@ static func shell(class_id: StringName, hero_cls: ClassDef) -> ClassDef:
 	c.base_hp = 0.0
 	c.hp_per_level = 0.0
 	c.level_up_hp = 0.0
+	c.vitality = false
 	c.base_mana = 0.0
 	c.mana_per_level = 0.0
 	c.base_defense = 0.0

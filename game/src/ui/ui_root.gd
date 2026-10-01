@@ -282,6 +282,8 @@ func _on_flag(flag: StringName, _v: Variant) -> void:
 		Events.notify.emit("Press %s any time to open the Field Guide." % Settings.binding_text(&"guide"), &"info")
 
 func _on_player_died() -> void:
+	if ArenaGrounds.handles_death(Game.player):
+		return                            # bh-028: the hero stands up at the arena gate
 	close_all()
 	pause_menu.show_death()
 

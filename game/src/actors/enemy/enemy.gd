@@ -309,6 +309,7 @@ func rebuild_stats() -> void:
 		mods.append(StatModifier.more(&"outgoing_damage", float(miniboss.get("damage", 1.2)) - 1.0, "Champion"))
 		mods.append(StatModifier.more(&"poise", 0.8, "Champion"))
 		mods.append(StatModifier.flat(&"knockback_res", 0.25, "Champion"))
+		mods.append(StatModifier.flat(&"threat_rank", float(CombatBudget.Rank.CHAMPION)))
 	if risen:
 		mods.append(StatModifier.more(&"max_hp", TraitsExt.RISEN_HP - 1.0, "Risen"))
 		mods.append(StatModifier.more(&"outgoing_damage", TraitsExt.RISEN_DAMAGE - 1.0, "Risen"))

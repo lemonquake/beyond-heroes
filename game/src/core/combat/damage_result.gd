@@ -22,6 +22,7 @@ var mana_leech := 0.0               # Mana returned to the attacker
 var reactions: Array[StringName] = []   # elemental reactions that fired (shatter, melt, purify, conduct, extinguish, fan, umbral)
 var dot_mult := 1.0                  # attacker's Damage over Time multiplier (bh-010: Venomcraft)
 var absorbed := 0                   # part of `total` soaked by a ward/shield (HP loss = total - absorbed)
+var capped := false                  # bh-028: the lethal-blow guard limited this hit
 var dominant_element := Elements.PHYSICAL
 var skill: StringName = &""          # id of the skill that dealt this (styled damage numbers), empty for attacks
 var skill_name := ""

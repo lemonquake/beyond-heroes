@@ -26,6 +26,8 @@ var _bar: MeshInstance3D
 var _bar_mat: StandardMaterial3D
 var _was_alive := true
 var interact_range := 2.4
+var arena_fighter := false            # bh-028: an adventurer of the Sand Arena, run on the world authority's machine
+var _arena_hostile := false
 
 func _init() -> void:
 	team = BH.Team.PLAYER
@@ -43,7 +45,10 @@ func setup(peer: int, p_key: String, first: Dictionary) -> NetAvatar:
 
 func _ready() -> void:
 	super._ready()
-	add_to_group(&"net_ally")
+	if arena_fighter:
+		add_to_group(&"arena_avatar")
+	else:
+		add_to_group(&"net_ally")
 	if is_hero:
 		add_to_group(&"net_hero")
 		add_to_group(&"interactable")      # only offered while fallen (can_interact)
@@ -243,6 +248,9 @@ func _refresh_tag() -> void:
 		if _sub:
 			var cls := DB.class_def(StringName(p.get("cls", "")))
 			_sub.text = "Level %d %s · %s%s" % [level, cls.display_name if cls else "Hero", p.get("device", "PC"), " · Host" if owner_peer == 1 else ""]
+	elif arena_fighter:
+		_tag.text = "%s  Lv %d (Sand Arena)" % [display_name, level]
+		_tag.modulate = ArenaFighter.TAG_COLOR
 	elif guild_tag != "":
 		_tag.text = "%s (%s · %s)" % [display_name, guild_tag, p.get("name", "Ally")]
 	else:
@@ -256,12 +264,32 @@ func _process(delta: float) -> void:
 		_ring.visible = alive
 
 ## A monster (on the host) hit this ally: the real one lives on another machine, so the hit goes there.
+## bh-028: in the Sand Arena a hero's blow goes there too, resolved half here (the attacker's offense) and half there.
 func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3.INF) -> DamageResult:
 	var r := DamageResult.new()
 	if not alive:
 		return r
-	Net.forward_ally_hit(self, req, attacker, hit_point)
+	if attacker is Enemy:
+		Net.forward_ally_hit(self, req, attacker, hit_point)
+	elif arena_fighter or _arena_hostile or attacker is ArenaFighter:
+		Net.resolved_hit(self, req, attacker, hit_point)
 	return r
+
+## Another player's hero on the sand while this machine's hero is on it too (ArenaGrounds._avatar_layers): a target.
+func set_arena_hostile(on: bool) -> void:
+	if on == _arena_hostile:
+		return
+	_arena_hostile = on
+	collision_layer = BH.LAYER_ENEMY if on else BH.LAYER_PLAYER
+	if on:
+		add_to_group(&"arena_target")
+	else:
+		remove_from_group(&"arena_target")
+	if _bar_mat:
+		_bar_mat.albedo_color = Color(0.95, 0.35, 0.25) if on else Color(0.3, 0.9, 0.4)
+
+func arena_hostile() -> bool:
+	return _arena_hostile
 
 func heal(_amount: float, _show := true) -> void:
 	pass                                   # the owner's machine heals the real ally

@@ -168,7 +168,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		["Class base", cls.base_hp], ["Level %d x %.0f" % [level, cls.hp_per_level], cls.hp_per_level * (L - 1.0)],
 		["Level-up bonus: %d level-ups x %d" % [level - 1, roundi(cls.level_up_hp)], cls.level_up_hp * (L - 1.0)],
 		["Strength %d x %.1f" % [STR, HP_PER_STR], STR * HP_PER_STR], ["Wisdom %d x %.1f" % [WIS, HP_PER_WIS], WIS * HP_PER_WIS],
-		["Spirit %d x %.1f" % [SPI, HP_PER_SPI], SPI * HP_PER_SPI]], 1.0, INF, true)
+		["Spirit %d x %.1f" % [SPI, HP_PER_SPI], SPI * HP_PER_SPI],
+		["Vitality (%.0f per level after %d)" % [CombatBudget.VITALITY_PER_LEVEL, CombatBudget.VITALITY_FROM], CombatBudget.vitality(level) if cls.vitality else 0.0]], 1.0, INF, true)
 	_std(d, agg, &"max_mana", [
 		["Class base", cls.base_mana], ["Level %d x %.0f" % [level, cls.mana_per_level], cls.mana_per_level * (L - 1.0)],
 		["Intelligence %d x %.1f" % [INT, MANA_PER_INT], INT * MANA_PER_INT], ["Wisdom %d x %.1f" % [WIS, MANA_PER_WIS], WIS * MANA_PER_WIS],
@@ -362,6 +363,8 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	d.set_stat(&"physical_armor_dr", armor_dr, PackedStringArray(["Defense / (Defense + %d + %d x level)" % [ARMOR_K_BASE, ARMOR_K_LEVEL]]))
 	_std(d, agg, &"arcane_max", [["Base", 5.0]], 0.0, 10.0, true)
 	_std(d, agg, &"combo_max", [["Base", ClassResource.COMBO_MAX]], 1.0, 8.0, true)
+	# bh-028: marks a hero's stat block (hero-against-hero hits are scaled by CombatBudget.pvp_mult)
+	d.set_stat(&"hero_source", 1.0)
 
 	# Weapon damage ranges shown on the character sheet (same function the pipeline uses for base rolls).
 	var rng_main := weapon_range(d, 0)

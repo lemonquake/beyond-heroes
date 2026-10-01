@@ -159,7 +159,8 @@ func _ready() -> void:
 	_last_pos = global_position
 	_flank = 1.0 if slot_index % 2 == 0 else -1.0
 	visual.set_stance(_stance_idle())
-	Events.tempo_spawned.emit(self)
+	if _announced():
+		Events.tempo_spawned.emit(self)
 
 func _rng_seed() -> void:
 	rng.seed = hash("%d/%s" % [data.uid, data.tempo_name])
@@ -266,6 +267,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if owner_player == null or not is_instance_valid(owner_player):
 		owner_player = Game.player as Node3D
+	if _hold_back(delta):
+		return
 	_timers(delta)
 	_regen(delta)
 	if action:
@@ -312,7 +315,7 @@ func _regen(delta: float) -> void:
 	if mode == Mode.RETREAT and near > 6.0:
 		_rest_t += delta
 		if _rest_t > 0.6:
-			hr += max_hp() * REST_REGEN
+			hr += max_hp() * _rest_regen()
 			if int(_rest_t * 2.0) != int((_rest_t - delta) * 2.0):
 				FX.spawn(VFXLib.particles(Color(0.55, 1.0, 0.8, 0.8), 8, 0.7, true, 0.12, 1.4, 50.0, Vector3(0, 1.4, 0), 0.4), center())
 	else:
@@ -516,12 +519,12 @@ func _try_skill() -> bool:
 	var p := owner_player
 	var hero_pressed := 0
 	for e in _enemies(8.0, p.global_position):
-		if (e as Enemy).target == p and e.is_aggressive():
+		if _hunts(e, p) and e.is_aggressive():
 			hero_pressed += 1
 	var hero_a := p as Actor
 	var hero_frac := hero_a.hp / maxf(1.0, hero_a.max_hp()) if hero_a and hero_a.alive else 1.0
 	var hero_fighting: bool = hero_a != null and hero_a.alive and hero_a.has_method(&"in_combat") and hero_a.call(&"in_combat")
-	var big: bool = target.is_elite or target.is_boss
+	var big: bool = target is Enemy and (target.is_elite or target.is_boss)
 	var executable := func(sk: Dictionary) -> bool:
 		return sk.has("execute") and target.hp / maxf(1.0, target.max_hp()) < float(sk.execute)
 	for sid in data.skills:
@@ -545,9 +548,9 @@ func _try_skill() -> bool:
 			"volley":
 				ok = d <= float(sk.range) and (_enemies(float(sk.radius) + 0.5, target.global_position).size() >= 2 or big)
 			"disengage":
-				ok = d < float(sk.range) and (target as Enemy).def.preferred_range < 3.0
+				ok = d < float(sk.range) and _preferred_range(target) < 3.0
 			"shadowstep":
-				ok = d <= float(sk.range) and (d > 3.0 or (target as Enemy).target == p or executable.call(sk))
+				ok = d <= float(sk.range) and (d > 3.0 or _hunts(target, p) or executable.call(sk))
 			"venom":
 				ok = d <= 2.6 and _venom_t <= 0.0 and (big or target.hp > max_hp() * 0.8)
 			"smoke":
@@ -563,12 +566,12 @@ func _try_skill() -> bool:
 			"ward":
 				var shielded: bool = hero_a != null and hero_a.status.has(&"shielded")
 				ok = hero_fighting and not shielded and _flat(p.global_position) <= float(sk.range) \
-					and (hero_frac < 0.75 or hero_pressed >= 2 or (big and (target as Enemy).target == p))
+					and (hero_frac < 0.75 or hero_pressed >= 2 or (big and _hunts(target, p)))
 			"rally":
 				ok = hero_fighting and (_enemies(10.0, p.global_position).size() >= 3 or big)
 			"trap":
 				ok = d <= float(sk.range) and (_enemies(float(sk.radius) + 1.0, target.global_position).size() >= 2
-					or ((target as Enemy).def.preferred_range < 3.0 and d < 7.0))
+					or (_preferred_range(target) < 3.0 and d < 7.0))
 		if ok:
 			return _use_skill(sid)
 	return false
@@ -586,7 +589,7 @@ func _engage() -> void:
 		"vanguard":
 			# between the monster and the hero when it hunts the hero; otherwise straight at it
 			var goal := t.global_position
-			if (t as Enemy).target == p:
+			if _hunts(t, p):
 				var side := (p.global_position - t.global_position).slide(Vector3.UP)
 				goal = t.global_position + side.normalized() * minf(reach * 0.7, side.length())
 			else:
@@ -692,8 +695,8 @@ func _melee_window(a: TimedAction, w: int, first: bool, mult: float, arc: float,
 	var step := int(a.data.get("step", 0))
 	var chain_m := float(wt.chain_mults[step]) if wt and step < wt.chain_mults.size() else 1.0
 	var hits := 0
-	for t: Actor in CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), reach, arc, BH.LAYER_ENEMY):
-		if not a.mark_hit(w, t) or CombatQuery.blocked(get_world_3d(), center(), t.center()):
+	for t: Actor in CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), reach, arc, _hit_mask()):
+		if t == self or not a.mark_hit(w, t) or CombatQuery.blocked(get_world_3d(), center(), t.center()):
 			continue
 		var req := _weapon_request(int(a.data.get("hand", 0)), mult * chain_m, bool(a.data.get("heavy", false)), String(a.data.get("label", "strike")))
 		req.knockback *= knock_mult
@@ -731,7 +734,7 @@ func _shoot(a: TimedAction, t: Actor, mult: float, pierce: int, charged: bool, s
 		_decorate(req, sk, t)
 		el = int(sk.get("element", el))
 	var pr := Projectile.spawn(FX.world if FX.world else get_parent(), from, dir.normalized(), wt.projectile_speed * (1.25 if charged else 1.0),
-		req, self, BH.LAYER_ENEMY, el, "bolt" if wt.id == &"crossbow" else ("arrow" if wt.id == &"bow" else ("model:" + wt.model if wt.id == &"javelin" else "orb")))
+		req, self, _hit_mask(), el, "bolt" if wt.id == &"crossbow" else ("arrow" if wt.id == &"bow" else ("model:" + wt.model if wt.id == &"javelin" else "orb")))
 	pr.max_range = wt.reach + (6.0 if charged else 0.0)
 	pr.radius = 0.3
 	pr.pierce = pierce
@@ -868,7 +871,8 @@ func _sk_challenge(sid: StringName, sk: Dictionary) -> bool:
 	a.on_release = func() -> void:
 		var n := 0
 		for e in _enemies(float(sk.range)):
-			(e as Enemy).taunt(self, float(sk.duration))
+			if e is Enemy:
+				(e as Enemy).taunt(self, float(sk.duration))
 			n += 1
 		status.apply(&"fortified", float(sk.duration))
 		FX.spawn(VFXLib.ring_wave(Color(0.6, 0.9, 1.0, 0.9), float(sk.range), 0.5, 0.8), global_position)
@@ -892,8 +896,8 @@ func _sk_charge(sid: StringName, sk: Dictionary) -> bool:
 	var from := global_position
 	a.on_release = func() -> void: pass
 	var line := func() -> void:
-		for e: Actor in CombatQuery.actors_in_line(get_world_3d(), from, dir.normalized(), dist, float(sk.width), BH.LAYER_ENEMY):
-			if hit.has(e.get_instance_id()):
+		for e: Actor in CombatQuery.actors_in_line(get_world_3d(), from, dir.normalized(), dist, float(sk.width), _hit_mask()):
+			if e == self or hit.has(e.get_instance_id()):
 				continue
 			hit[e.get_instance_id()] = true
 			var req := _weapon_request(0, float(sk.mult), true, sk.name)
@@ -930,7 +934,7 @@ func _sk_volley(sid: StringName, sk: Dictionary) -> bool:
 			req.poise = float(sk.poise)
 			var col := _skill_color(sk) if sk.has("element") or sk.has("color") else Color(0.55, 0.95, 1.0)
 			var b := AreaEffects.delayed(FX.world, CombatQuery.ground_at(get_world_3d(), at + off), float(sk.radius), 0.5 + 0.45 * i, req, self,
-				BH.LAYER_ENEMY, Color(col.r, col.g, col.b, 0.35))
+				_hit_mask(), Color(col.r, col.g, col.b, 0.35))
 			b.on_blast = _volley_relay(weakref(self), col, float(sk.radius))
 	return true
 
@@ -945,7 +949,7 @@ func _sk_disengage(sid: StringName, sk: Dictionary) -> bool:
 	a.iframes = Vector2(0.0, 0.4)
 	rotation.y = atan2(away.x, away.z)
 	dash(goal - global_position, maxf(0.5, global_position.distance_to(goal)) / 0.4, 0.4)
-	var h := AreaEffects.hazard(FX.world, snare_at, 2.2, 3.0, null, self, BH.LAYER_ENEMY, Color(0.55, 0.95, 1.0), 0.4)
+	var h := AreaEffects.hazard(FX.world, snare_at, 2.2, 3.0, null, self, _hit_mask(), Color(0.55, 0.95, 1.0), 0.4)
 	h.status_id = &"slowed"
 	Audio.play_at(&"dodge_roll", global_position, -3.0)
 	return true
@@ -994,7 +998,8 @@ func _sk_smoke(sid: StringName, sk: Dictionary) -> bool:
 		for e in _enemies(float(sk.radius)):
 			e.status.apply(&"slowed", float(sk.duration))
 			e.status.apply(&"weakened", float(sk.duration))
-			(e as Enemy).lose_target(self)
+			if e is Enemy:
+				(e as Enemy).lose_target(self)
 		_smoke_t = float(sk.duration)
 		visual.set_opacity(0.25)
 		mark_stats_dirty()
@@ -1049,7 +1054,7 @@ func _sk_nova(sid: StringName, sk: Dictionary) -> bool:
 		var req := _weapon_request(0, float(sk.mult), true, String(sk.name))
 		_decorate(req, sk, null, true)
 		req.evadable = false
-		var hits := AreaEffects.burst(self, global_position, float(sk.radius), BH.LAYER_ENEMY, req, self)
+		var hits := AreaEffects.burst(self, global_position, float(sk.radius), _hit_mask(), req, self)
 		for h in hits:
 			_on_hit_dealt(h[0], h[1])
 		FX.spawn(VFXLib.ring_wave(Color(col.r, col.g, col.b, 0.9), float(sk.radius), 0.45, 0.8), global_position)
@@ -1077,7 +1082,7 @@ func _sk_bolt(sid: StringName, sk: Dictionary) -> bool:
 		_decorate(req, sk, t, true)
 		req.tags[&"projectile"] = true
 		var pr := Projectile.spawn(FX.world if FX.world else get_parent(), from, dir.normalized(), float(sk.get("speed", 24.0)), req, self,
-			BH.LAYER_ENEMY, int(sk.get("element", Elements.LIGHT)), "orb")
+			_hit_mask(), int(sk.get("element", Elements.LIGHT)), "orb")
 		pr.max_range = float(sk.range) + 4.0
 		pr.radius = 0.35
 		pr.pierce = int(sk.get("pierce", 0))
@@ -1160,7 +1165,8 @@ func _sk_ward(sid: StringName, sk: Dictionary) -> bool:
 		if sk.has("taunt"):
 			var n := 0
 			for e in _enemies(float(sk.taunt)):
-				(e as Enemy).taunt(self, dur * 0.75)
+				if e is Enemy:
+					(e as Enemy).taunt(self, dur * 0.75)
 				n += 1
 			status.apply(&"fortified", dur)
 			FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.5, 0.9), float(sk.taunt), 0.5, 0.8), global_position)
@@ -1205,7 +1211,7 @@ func _sk_trap(sid: StringName, sk: Dictionary) -> bool:
 		req.knockback = 0.0
 		req.poise = 2.0
 		var h := AreaEffects.hazard(FX.world, CombatQuery.ground_at(get_world_3d(), at), float(sk.radius), float(sk.duration), req, self,
-			BH.LAYER_ENEMY, col, 0.5)
+			_hit_mask(), col, 0.5)
 		h.status_id = StringName(sk.get("status_id", &"slowed"))
 		Audio.play_at(&"cast_earth", at, -4.0)
 		_log("trap")
@@ -1223,7 +1229,7 @@ func _scan_danger() -> bool:
 	var needed := 0.0
 	# telegraphed blasts (enemy slams, fire-pots, boulders, meteors...)
 	for b in get_tree().get_nodes_in_group(&"telegraph"):
-		if not is_instance_valid(b) or not (b.mask & BH.LAYER_PLAYER) or not b.has_method(&"time_left"):
+		if not is_instance_valid(b) or not (b.mask & _danger_layer()) or not b.has_method(&"time_left") or b.get(&"source") == self:
 			continue
 		var tl: float = b.time_left()
 		if tl <= 0.0:
@@ -1242,7 +1248,7 @@ func _scan_danger() -> bool:
 			needed = maxf(needed, r - d + 0.6)
 	# lingering hazards
 	for h in get_tree().get_nodes_in_group(&"hazard"):
-		if not is_instance_valid(h) or not (h.mask & BH.LAYER_PLAYER):
+		if not is_instance_valid(h) or not (h.mask & _danger_layer()) or h.get(&"source") == self:
 			continue
 		var off2: Vector3 = (pos - h.global_position).slide(Vector3.UP)
 		if off2.length() < h.radius + body_radius + 0.2:
@@ -1252,7 +1258,7 @@ func _scan_danger() -> bool:
 	# monsters winding up blows that will catch this spirit (bosses and elites first of all)
 	for e in _enemies(12.0):
 		var en := e as Enemy
-		if en.action == null or en.current_attack.is_empty():
+		if en == null or en.action == null or en.current_attack.is_empty():
 			continue
 		var atk: Dictionary = en.current_attack
 		var kind := String(atk.get("kind", ""))
@@ -1292,7 +1298,7 @@ func _scan_danger() -> bool:
 				needed = maxf(needed, 3.5)
 	# boss sweeps travelling across the floor
 	for s in get_tree().get_nodes_in_group(&"sweep"):
-		if not is_instance_valid(s) or not (s.mask & BH.LAYER_PLAYER):
+		if not is_instance_valid(s) or not (s.mask & _danger_layer()) or s.get(&"source") == self:
 			continue
 		var rel: Vector3 = (pos - s.global_position).slide(Vector3.UP)
 		var along2 := rel.dot(s.dir)
@@ -1303,7 +1309,7 @@ func _scan_danger() -> bool:
 			needed = maxf(needed, 3.0)
 	# arrows, bolts and fire aimed at this spirit
 	for pr in get_tree().get_nodes_in_group(&"projectile"):
-		if not is_instance_valid(pr) or not (pr.target_mask & BH.LAYER_PLAYER) or pr.source == self:
+		if not is_instance_valid(pr) or not (pr.target_mask & _danger_layer()) or pr.source == self:
 			continue
 		var v: Vector3 = pr.velocity.slide(Vector3.UP)
 		if v.length() < 1.0:
@@ -1479,6 +1485,72 @@ func teleport_to(p: Vector3) -> void:
 	knock_velocity = Vector3.ZERO
 	_last_pos = global_position
 
+# ---- Hooks (bh-028: the Sand Arena's adventurers override these) ------------------------------------------------------
+
+## What this fighter's blows and blasts can hit.
+func _hit_mask() -> int:
+	return BH.LAYER_ENEMY
+
+## Which telegraphs, hazards and missiles are aimed at this fighter.
+func _danger_layer() -> int:
+	return BH.LAYER_PLAYER
+
+func _rest_regen() -> float:
+	return REST_REGEN
+
+## Whether a spawn tells the party frames.
+func _announced() -> bool:
+	return true
+
+## A monster's preferred fighting distance (other foes count as close fighters).
+func _preferred_range(t: Actor) -> float:
+	return (t as Enemy).def.preferred_range if t is Enemy else 2.0
+
+## Is `t` a monster hunting `who`?
+func _hunts(t: Node, who: Node) -> bool:
+	return t is Enemy and (t as Enemy).target == who
+
+# ---- Waiting outside the Sand Arena (bh-028) -------------------------------------------------------------------------
+
+var _waiting := false
+
+## While the hero fights in the Sand Arena, companions wait outside its gate, out of the fight.
+func _hold_back(delta: float) -> bool:
+	var arena := ArenaGrounds.active()
+	var hold := arena != null and arena.holds_back(self)
+	if not hold:
+		if _waiting:
+			_waiting = false
+			invulnerable = false
+			_log("stop waiting")
+		return false
+	if not _waiting:
+		_waiting = true
+		_cancel_action()
+		target = null
+		mode = Mode.FOLLOW
+		invulnerable = true
+		_log("wait outside the arena")
+		var spot := arena.wait_point(self)
+		if arena.contains(global_position) or _flat(spot) > 24.0:
+			teleport_to(CombatQuery.ground_at(get_world_3d(), spot + Vector3.UP * 1.5))
+	_timers(delta)
+	_regen(delta)
+	_move_goal = arena.wait_point(self)
+	var desired := _movement(delta)
+	physics_move(delta, desired)
+	if desired.length() < 0.3:
+		_face(delta, arena.center - global_position)
+	else:
+		_face(delta, desired)
+	if visual:
+		var hv := Vector3(velocity.x, 0, velocity.z)
+		visual.update_locomotion(Vector2((global_transform.basis.inverse() * hv).x, (global_transform.basis.inverse() * hv).z), false, 0.0, delta)
+	return true
+
+func is_waiting() -> bool:
+	return _waiting
+
 # ---- Queries --------------------------------------------------------------------------------------------------------
 
 func _flat(p: Vector3) -> float:
@@ -1492,8 +1564,8 @@ func _enemies(r: float, around := Vector3.INF) -> Array:
 			out.append(e)
 	return out
 
-func _nearest_enemy() -> Enemy:
-	var best: Enemy = null
+func _nearest_enemy() -> Actor:
+	var best: Actor = null
 	var bd := INF
 	for e in get_tree().get_nodes_in_group(&"enemy"):
 		if not e.alive or not e.is_aggressive():
@@ -1509,7 +1581,7 @@ func _nearest_enemy_dist() -> float:
 	return _flat(e.global_position) if e else INF
 
 func _enemies_in_front(r: float, arc: float) -> int:
-	return CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), r, arc, BH.LAYER_ENEMY).size()
+	return CombatQuery.actors_in_arc(get_world_3d(), global_position, forward(), r, arc, _hit_mask()).size()
 
 func _has_los(t: Node3D) -> bool:
 	return not CombatQuery.blocked(get_world_3d(), center(), (t as Actor).center() if t is Actor else t.global_position)
@@ -1556,11 +1628,8 @@ func die(killer: Node) -> void:
 	super.die(killer)
 	collision_layer = 0
 	_dead_since = _time
-	sync_data()
 	remove_from_group(&"ally")
-	Events.tempo_fallen.emit(self)
-	Events.tempo_changed.emit(data.uid)
-	_fall_notice()
+	_announce_fall(killer)
 	Audio.play_at(&"body_fall", global_position)
 	if _bar:
 		_bar.visible = false
@@ -1572,6 +1641,13 @@ func die(killer: Node) -> void:
 	tw.tween_method(func(v: float) -> void: visual.set_opacity(v), 0.84, 0.0, 1.6)
 	tw.parallel().tween_property(_light, "light_energy", 0.0, 1.6)
 	tw.tween_callback(queue_free)
+
+## The party hears of the fall (an arena adventurer reports to the arena instead).
+func _announce_fall(_killer: Node) -> void:
+	sync_data()
+	Events.tempo_fallen.emit(self)
+	Events.tempo_changed.emit(data.uid)
+	_fall_notice()
 
 ## What the player is told when this companion falls (a Quake Team ally says something else).
 func _fall_notice() -> void:

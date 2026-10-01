@@ -158,6 +158,7 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 		req.evadable = false        # bh-028: grazing area hits is the heroes' (and their allies') art, not the monsters'
 	_positional_bonuses(req, attacker)
 	_prepare_incoming(req, attacker)
+	_threat_guard(req)
 	if attacker is Player:
 		attacker.class_passives.before_hit(req)
 	var result := DamagePipeline.compute(req, rng)
@@ -177,7 +178,7 @@ func _positional_bonuses(req: DamageRequest, attacker: Node) -> void:
 		return
 	# Champion-slaying gear (bh-012): more damage against elites, champions and bosses
 	var ed := st.get_stat(&"elite_damage")
-	if ed > 0.0 and (bool(get(&"is_elite")) or bool(get(&"is_boss")) or (has_method(&"is_miniboss") and call(&"is_miniboss"))):
+	if ed > 0.0 and (get(&"is_elite") == true or get(&"is_boss") == true or (has_method(&"is_miniboss") and call(&"is_miniboss"))):
 		req.more.append(["Champion-slaying", 1.0 + ed])
 	if st.has_flag(&"execute") and hp < max_hp() * 0.35:
 		req.more.append(["Ruthless", 1.0 + st.flag(&"execute")])
@@ -186,6 +187,29 @@ func _positional_bonuses(req: DamageRequest, attacker: Node) -> void:
 		to_att.y = 0.0
 		if to_att.length() > 0.05 and forward().dot(to_att.normalized()) < -0.3:
 			req.more.append(["Opportunist", 1.0 + st.flag(&"backstab")])
+
+## bh-028: hero-against-hero scaling and the lethal-blow guard (CombatBudget). Heroes, their companions and arena
+## combatants are guarded; monsters are not.
+func _threat_guard(req: DamageRequest) -> void:
+	req.tags.erase(&"blow_cap")
+	var atk := req.attacker
+	if atk == null or req.kind == DamageRequest.Kind.DOT:
+		return
+	var monster := team == BH.Team.ENEMY and not is_arena_hero()
+	if monster:
+		return
+	if atk.get_stat(&"hero_source") > 0.0:
+		# a hero's blow on another hero (or an arena adventurer)
+		if not req.tags.has(&"pvp_scaled"):
+			req.tags[&"pvp_scaled"] = true
+			req.more.append(["Arena", CombatBudget.pvp_mult(atk.level)])
+		req.tags[&"blow_cap"] = maxf(1.0, max_hp() * CombatBudget.PVP_BLOW_CAP)
+	else:
+		req.tags[&"blow_cap"] = maxf(1.0, max_hp() * CombatBudget.blow_cap(int(atk.get_stat(&"threat_rank"))))
+
+## True for a hero fighting in the Sand Arena (bh-028): blows between such heroes are scaled and capped.
+func is_arena_hero() -> bool:
+	return false
 
 ## HP per second from auras and passives (Aura of Mending, Second Wind); regeneration code adds it.
 func aura_regen() -> float:

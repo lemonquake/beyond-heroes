@@ -48,7 +48,9 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	if boss:
 		d.set_stat(&"boss_damage_taken", CombatGrowth.BOSS_DAMAGE_TAKEN)
 		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level)))
-	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling) * CombatGrowth.enemy_damage_bonus(level))
+	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling))
+	# bh-028: the rank the lethal-blow guard reads (champions add theirs through Enemy.rebuild_stats)
+	d.set_stat(&"threat_rank", float(maxi(CombatBudget.rank_of(elite, agg.flat(&"threat_rank") > 0.0, boss), int(agg.flat(&"threat_rank")))))
 	d.set_stat(&"phys_res_flat", agg.flat(&"phys_res"))
 	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))
 	d.set_stat(&"outgoing_damage", maxf(0.05, od))
@@ -71,7 +73,10 @@ static func _set_stat(d: DerivedStats, agg: StatCalculator.Aggregate, k: StringN
 	d.set_stat(k, clampf(v, lo, hi))
 
 ## Damage range of an enemy attack after level/difficulty scaling (before the pipeline's bonuses).
+## bh-028: a boss's heaviest attacks are compressed (CombatBudget.boss_attack_mult).
 static func attack_range(def: EnemyDef, stats: DerivedStats, mult: float) -> Vector2:
+	if int(stats.get_stat(&"threat_rank")) == CombatBudget.Rank.BOSS:
+		mult = CombatBudget.boss_attack_mult(mult)
 	var m := stats.get_stat(&"damage_mult", 1.0) * mult
 	return Vector2(def.damage_min * m, def.damage_max * m)
 

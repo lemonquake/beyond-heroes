@@ -7,8 +7,19 @@ extends SettlementBuilder
 ## heroes' tents with their guild banners, the commander's lodge, the Hero Register board, the quartermaster's stall,
 ## Greta Stonehand's field forge, a workbench, the healer's camp kettle, a training yard with dummies, a watchtower,
 ## the waypoint and, on the east side, the Marsh Overlook above the reeds and black water of Reedwater Marsh.
+## bh-028: south of the Fen Road, a lane leads to the Sand Arena: a ring of sand inside a palisade, with spectator
+## galleries on two sides, where heroes and wandering adventurers fight each other (ArenaGrounds).
 
 const R := 31.0                          # stockade radius
+const ARENA := Vector2(-35, 44)          # bh-028: the Sand Arena
+const ARENA_R := 20.0
+const ARENA_Y := 0.0                     # the flattened ground under the sand
+const SAND_Y := 0.14                     # the top of the sand
+const ARENA_GATE_HALF := 9.5             # degrees either side of the gate left open in the palisade
+const ARENA_LANE := 4.0                  # half width of the lane from the Fen Road to the gate
+## Degrees around the arena (atan2(z, x) from its centre) of the gate (north, towards the road) and the fighters' door.
+const ARENA_GATE_DEG := -90.0
+const ARENA_DOOR_DEG := 90.0
 const BONFIRE := Vector2(-4, -2)
 const MARSH_X := 36.0
 const MARSH_Y := -1.35
@@ -53,14 +64,17 @@ func compose() -> void:
 	_shrine()
 	_herbs()
 	_wild_camps()
+	keep_clear(ARENA.x, ARENA.y, ARENA_R + 9.0)
+	keep_clear(ARENA.x, ARENA.y - ARENA_R - 4.0, ARENA_LANE + 2.0)
 	var og: Dictionary = DataDungeons.get_def(&"orrery").surface
 	dungeon_gate(&"orrery", og.pos, og.yaw)
 	keep_clear(og.pos.x, og.pos.y, 8.0)
 	_greenery()
+	_arena()
 	spawn(&"start", Vector3(0, 0, 9.0), 180.0, true)
 	spawn(&"north_road", Vector3(7.5, 0, -47.0), 0.0, true)
 	spawn(&"west_road", Vector3(-51.5, 0, 18.4), 100.0, true)
-	set_bounds(AABB(Vector3(-66, -6, -62), Vector3(132, 24, 110)))
+	set_bounds(AABB(Vector3(-66, -6, -62), Vector3(132, 24, 130)))
 	view("overview", Vector3(0, 0, 0), 0.0, 62.0, 100.0, 45.0)
 	view("topdown", Vector3(0, 0, -4), 0.0, 89.5, 118.0, 50.0)
 	view("bonfire", Vector3(0, 1, -2), 0.0, 48.0, 22.0)
@@ -68,6 +82,8 @@ func compose() -> void:
 	view("row_gate", Vector3(4, 1, 15), 0.0, 40.0, 22.0)
 	view("yard", Vector3(-10, 1, 22), 20.0, 48.0, 20.0)
 	view("overlook", Vector3(30, 0, 0), -60.0, 35.0, 30.0)
+	view("arena", Vector3(ARENA.x, 0, ARENA.y), 0.0, 62.0, 58.0, 45.0)
+	view("arena_gate", Vector3(ARENA.x, 1, ARENA.y - ARENA_R + 4.0), 180.0, 38.0, 24.0, 45.0)
 
 ## bh-012: an orc band camped on the Brass path, between the Watch Road and the Orrery gate (the town stays safe).
 func _wild_camps() -> void:
@@ -95,11 +111,20 @@ func _landform(x: float, z: float) -> float:
 	var h := 1.2 * (1.0 - smoothstep(30.0, 44.0, d)) + _noise(x, z) * 0.35
 	# the marsh to the east: the ground sinks under black water
 	h = lerpf(h, -2.2, smoothstep(MARSH_X - 4.0, MARSH_X + 6.0, x))
-	return h
+	return _arena_flat(x, z, h)
+
+## bh-028: the ground under the arena, its lane and its galleries is level.
+func _arena_flat(x: float, z: float, h: float) -> float:
+	var d := Vector2(x, z).distance_to(ARENA)
+	var k := 1.0 - smoothstep(ARENA_R + 6.0, ARENA_R + 11.0, d)
+	if z > ARENA.y - ARENA_R - 12.0 and z < ARENA.y:
+		k = maxf(k, 1.0 - smoothstep(ARENA_LANE + 1.0, ARENA_LANE + 3.0, absf(x - ARENA.x)))
+	return lerpf(h, ARENA_Y, k)
 
 func _shape(x: float, z: float, b: float, _rd: float, _rt: int) -> float:
 	var d := Vector2(x, z).length()
-	return b + _noise(x * 1.9, z * 1.9) * (0.1 if d < R else 0.5)
+	var n := _noise(x * 1.9, z * 1.9) * (0.1 if d < R else 0.5)
+	return b + n * smoothstep(ARENA_R + 5.0, ARENA_R + 10.0, Vector2(x, z).distance_to(ARENA))
 
 func _splat(x: float, z: float) -> Color:
 	var k := _k(x, z)
@@ -113,6 +138,12 @@ func _splat(x: float, z: float) -> Color:
 	var r := clampf(maxf(maxf(trail, trodden * 0.7), fire) + n * 0.1, 0.0, 1.0)
 	var g := clampf(marsh + n * 0.3 + (1.0 - trodden) * 0.35, 0.0, 1.0) * (1.0 - trail)
 	var b := clampf(maxf(road * 0.8, DataTownRows.paved(&"wyman_outpost", x, z) * 0.85), 0.0, 1.0)
+	# bh-028: trodden earth around the arena and along its lane
+	var trod := 1.0 - smoothstep(ARENA_R + 3.0, ARENA_R + 9.0, Vector2(x, z).distance_to(ARENA))
+	if absf(x - ARENA.x) < ARENA_LANE + 1.5 and z > ARENA.y - ARENA_R - 10.0 and z < ARENA.y:
+		trod = 1.0
+	r = maxf(r, trod)
+	g *= 1.0 - trod
 	return Color(r * (1.0 - b), g * (1.0 - b), b)
 
 # ------------------------------------------------------------------------------------------------------------
@@ -214,7 +245,7 @@ func _stockade() -> void:
 	corridor_rails([Vector2(3.2, -55.3), Vector2(-4.0, -54.0), Vector2(-16.0, -50.0), Vector2(-28.0, -46.0), Vector2(-34.0, -44.0)], 5.2)
 	boundary(Vector3(-34.0, -2.0, -50.0), Vector3(-34.0, -2.0, -38.0), 12.0)
 	boundary(Vector3(3.0, -2.0, -62.0), Vector3(13.0, -2.0, -62.0), 12.0)
-	corridor_rails([wg, Vector2(-46.0, 17.0), Vector2(-66.0, 21.2)], 4.6)
+	_fen_road_rails(wg)
 	boundary(Vector3(-66.0, -2.0, 16.4), Vector3(-66.0, -2.0, 26.0), 12.0)
 	exit_zone(&"wyman_watch_road", Vector3(8.0, 0, -57.5), Vector3(8.4, 4.0, 3.0), &"olivar", &"south_road", "Olivar")
 	exit_zone(&"wyman_fen_road", Vector3(-61.5, 0, 20.3), Vector3(3.0, 4.0, 8.4), &"westreach", &"fen_road", "Westreach")
@@ -439,3 +470,121 @@ func _greenery() -> void:
 			continue
 		decor("grass_clump", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.8, 1.3))
 		placed += 1
+
+# ------------------------------------------------------------------------------------------------------------
+# bh-028: the Sand Arena
+
+## The Fen Road's rails, with the south rail open where the arena lane leaves the road.
+func _fen_road_rails(wg: Vector2) -> void:
+	var a := wg
+	var b := Vector2(-46.0, 17.0)
+	corridor_rails([b, Vector2(-66.0, 21.2)], 4.6)
+	var dir := (b - a).normalized()
+	for sgn: float in [-1.0, 1.0]:
+		var off := Vector2(-dir.y, dir.x) * 4.6 * sgn
+		var ra := a + off
+		var rb := b + off
+		if off.y < 0.0:
+			_rail(ra, rb)
+			continue
+		# the south rail: two pieces, either side of the lane
+		var g1 := ra.lerp(rb, (ra.x - (ARENA.x + ARENA_LANE)) / (ra.x - rb.x))
+		var g2 := ra.lerp(rb, (ra.x - (ARENA.x - ARENA_LANE)) / (ra.x - rb.x))
+		_rail(ra, g1)
+		_rail(g2, rb)
+		# the lane's own rails, from the road down to the arena wall
+		for top: Vector2 in [g1, g2]:
+			var gx := ARENA.x + (ARENA_LANE if top == g1 else -ARENA_LANE)
+			var wall_z := ARENA.y - sqrt(ARENA_R * ARENA_R - pow(gx - ARENA.x, 2.0)) + 0.4
+			_rail(Vector2(gx, top.y), Vector2(gx, wall_z))
+
+func _rail(p0: Vector2, p1: Vector2) -> void:
+	boundary(Vector3(p0.x, ground(p0.x, p0.y) - 2.0, p0.y), Vector3(p1.x, ground(p1.x, p1.y) - 2.0, p1.y), 10.0, 0.6)
+
+func _arena_gap(deg: float) -> bool:
+	return absf(wrapf(deg - ARENA_GATE_DEG, -180.0, 180.0)) < ARENA_GATE_HALF or absf(wrapf(deg - ARENA_DOOR_DEG, -180.0, 180.0)) < 4.0
+
+func _arena() -> void:
+	var c := ARENA
+	var arng := RandomNumberGenerator.new()
+	arng.seed = 2804
+	# the sand
+	apron(c, SAND_Y, ARENA_R + 0.6, "sand_path")
+	# the palisade ring, and its collision just outside the stakes
+	var n := int(TAU * ARENA_R / 4.0)
+	for i in n:
+		var a := TAU * (i + 0.5) / n
+		var deg := rad_to_deg(a)
+		if _arena_gap(deg):
+			continue
+		var p := c + Vector2(cos(a), sin(a)) * (ARENA_R + 0.4)
+		kit("palisade_fence", Vector3(p.x, ARENA_Y, p.y), -deg + 90.0 + 180.0, 1.0, props)
+		# a torch on every third post, burning towards the sand
+		if i % 3 == 1:
+			var tp := c + Vector2(cos(a), sin(a)) * (ARENA_R + 0.05)
+			torch(Vector3(tp.x, ARENA_Y + 2.3, tp.y), -deg - 90.0, 2.2)
+	var m := 96
+	for i in m:
+		var a0 := TAU * i / m
+		var a1 := TAU * (i + 1) / m
+		if absf(wrapf(rad_to_deg((a0 + a1) * 0.5) - ARENA_GATE_DEG, -180.0, 180.0)) < ARENA_GATE_HALF:
+			continue
+		var p0 := c + Vector2(cos(a0), sin(a0)) * (ARENA_R + 0.9)
+		var p1 := c + Vector2(cos(a1), sin(a1)) * (ARENA_R + 0.9)
+		boundary(Vector3(p0.x, ARENA_Y - 1.0, p0.y), Vector3(p1.x, ARENA_Y - 1.0, p1.y), 8.0, 0.8)
+	# the gate (north, to the lane) and the fighters' door (south, barred: the adventurers come in through it)
+	var gate := c + Vector2(cos(deg_to_rad(ARENA_GATE_DEG)), sin(deg_to_rad(ARENA_GATE_DEG))) * (ARENA_R + 0.4)
+	gatehouse(gate, rad_to_deg(atan2(gate.x - c.x, gate.y - c.y)))
+	var door := c + Vector2(cos(deg_to_rad(ARENA_DOOR_DEG)), sin(deg_to_rad(ARENA_DOOR_DEG))) * (ARENA_R + 0.4)
+	var dyaw := rad_to_deg(atan2(door.x - c.x, door.y - c.y))
+	kit("gate_iron", Vector3(door.x, ARENA_Y, door.y), dyaw, 1.25, geo)
+	for sx: float in [-1.6, 1.6]:
+		kit("pillar_quoin", Vector3(door.x + sx, ARENA_Y, door.y), dyaw, 0.85, geo)
+	brazier(Vector3(door.x + 2.8, SAND_Y, door.y - 1.6), 2.6)
+	brazier(Vector3(door.x - 2.8, SAND_Y, door.y - 1.6), 2.6)
+	# the lane from the road: lamps either side, a rack for the last look at a blade
+	for gx: float in [ARENA_LANE - 0.6, -(ARENA_LANE - 0.6)]:
+		lamp_post(Vector3(c.x + gx, 0, gate.y - 5.5), 180.0 if gx > 0.0 else 0.0)
+	kit("weapon_rack", Vector3(c.x + ARENA_LANE - 0.7, ARENA_Y, gate.y - 9.5), -90.0, 1.0, props, true)
+	kit("barrel", Vector3(c.x - ARENA_LANE + 0.8, ARENA_Y, gate.y - 9.0), arng.randf() * 360.0, 1.0, props, true)
+	# inside: cover to fight around, arms from earlier bouts, braziers
+	for k in 3:
+		var a := TAU * k / 3.0 + 0.5
+		var p := c + Vector2(cos(a), sin(a)) * 8.5
+		kit("pillar_broken", Vector3(p.x, SAND_Y - 0.05, p.y), rad_to_deg(a) + arng.randf_range(-30, 30), 0.85, geo)
+	for k in 5:
+		var a := arng.randf() * TAU
+		var p := c + Vector2(cos(a), sin(a)) * arng.randf_range(4.0, ARENA_R - 4.0)
+		decor("weapons_discarded", Vector3(p.x, SAND_Y, p.y), arng.randf() * 360.0, arng.randf_range(0.8, 1.1), false)
+	for a_deg: float in [-45.0, -135.0, 45.0, 135.0]:
+		var a := deg_to_rad(a_deg)
+		var p := c + Vector2(cos(a), sin(a)) * (ARENA_R - 2.2)
+		brazier(Vector3(p.x, SAND_Y, p.y), 3.2)
+	for side: float in [-1.0, 1.0]:
+		var p := gate + Vector2(side * 4.6, 4.2)
+		kit("armor_stand", Vector3(p.x, SAND_Y, p.y), 0.0, 1.0, props)
+		kit("weapon_rack", Vector3(p.x + side * 1.6, SAND_Y, p.y + 0.6), 0.0, 1.0, props)
+	# spectator galleries east and west: scaffold platforms with benches on top, stairs up from the outside
+	for side: float in [-1.0, 1.0]:
+		var base_deg := 0.0 if side > 0.0 else 180.0
+		for k in 5:
+			var a := deg_to_rad(base_deg + (k - 2) * 11.0)
+			var p := c + Vector2(cos(a), sin(a)) * (ARENA_R + 2.3)
+			var yaw := -rad_to_deg(a) + 90.0
+			kit("scaffold_platform", Vector3(p.x, ARENA_Y, p.y), yaw, 1.0, geo)
+			kit("bench", Vector3(p.x, ARENA_Y + 4.0, p.y), yaw + 180.0, 1.0, props)
+		var sa := deg_to_rad(base_deg + 36.0)
+		var sp := c + Vector2(cos(sa), sin(sa)) * (ARENA_R + 3.2)
+		kit("stairs_wood", Vector3(sp.x, ARENA_Y, sp.y), -rad_to_deg(sa) + 180.0, 1.0, geo)
+		var lp := c + Vector2(cos(sa + 0.25), sin(sa + 0.25)) * (ARENA_R + 3.0)
+		kit("lantern_stand", Vector3(lp.x, ARENA_Y, lp.y), -rad_to_deg(sa), 1.0, props)
+		light(Vector3(lp.x, ARENA_Y + 2.0, lp.y), Color(1.0, 0.75, 0.45), 1.4, 7.0, false, true)
+	light(Vector3(c.x, SAND_Y + 7.0, c.y), Color(1.0, 0.72, 0.42), 1.6, 26.0)
+	# where the fallen stand up again (just inside the gate), and the arena's own logic
+	var inward := (c - gate).normalized()
+	var stand := gate + inward * 3.0
+	spawn(ArenaGrounds.GATE_SPAWN, Vector3(stand.x, SAND_Y, stand.y), rad_to_deg(atan2(inward.x, inward.y)))
+	var grounds := ArenaGrounds.new().configure(Vector3(c.x, SAND_Y, c.y), ARENA_R, Vector3(stand.x, SAND_Y, stand.y),
+		Vector3(gate.x - c.x, 0, gate.y - c.y), Vector3(door.x, SAND_Y, door.y - 1.0))
+	grounds.position = Vector3(c.x, SAND_Y, c.y)
+	root.add_child(grounds)

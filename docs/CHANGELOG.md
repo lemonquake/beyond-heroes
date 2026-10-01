@@ -2,6 +2,39 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-028 - Combat scaling overhaul and the Sand Arena
+
+Prepared 1 October 2026. Design and numbers: docs/COMBAT_SCALING.md.
+
+- **No more one-shots at level 40-45+.** Hero, monster and boss numbers are now tied together by one budget
+  (`CombatBudget`):
+  - **Monster damage follows the average hero's health.** After level 5 it grows exactly as fast as a reference
+    hero's health, so a blow takes the same share of your health at level 10, 50 or 300. The level-30/45/60 milestone
+    damage bonus is gone, and monster health is one smooth curve with no steps.
+  - **Monsters stay within 2 levels of you** from level 30. They used to jump in 15-level steps, so on your 45th level
+    every monster grew 15 levels at once.
+  - **Vitality.** Every hero gains 16 HP per level after level 5, whatever their build. It shows on the character
+    sheet. A level-50 mage with every point in Intelligence has about 1,470 HP, up from 749.
+  - **Bosses.**
+    - Their attacks hit 20% less overall.
+    - Attack multipliers above 1.6 count at half rate, so a 4.2× slam hits like a 2.9× one.
+    - Their heaviest critical takes at most about 20% of an average-geared hero's health (five hits).
+    - Boss health is unchanged, so fights stay long.
+  - **Lethal-blow guard.** No single hit takes more than 35% of a hero's maximum health, or 25% from a boss and 20%
+    from another hero.
+  - Measured at every level from 10 to 300 for all four classes (`test_bh028`).
+- **The Sand Arena at Wyman Outpost.** A lane south of the Fen Road leads to a 40 m ring of sand inside a palisade.
+  It has a stone gatehouse, spectator galleries, braziers and broken pillars for cover.
+  - Everyone on the sand fights everyone: players, and six randomised adventurers of the party's highest level.
+    The adventurers drink, heal, fall back when hurt and use their escape skills.
+  - Damage between heroes is scaled so a duel lasts about 10 seconds at any level.
+  - A fall costs nothing: you stand up at the gate three seconds later, with full health and a moment's protection.
+  - While you are inside, your Tempos, Quake Team and guild fighters wait outside the gate. They follow again when
+    you come out.
+  - In multiplayer, the host runs the adventurers and blows between machines are resolved on both sides. Network
+    protocol is now 14.
+- **Fixed:** champion-slaying gear raised a script error when it hit a fighter that is not a monster.
+
 ## BH-027 - Alpha Version 0.3: Guilds of your own, accessories again
 
 Prepared 1 October 2026.

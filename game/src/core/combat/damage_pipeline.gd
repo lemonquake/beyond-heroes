@@ -271,6 +271,14 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	if retaliation_total > retaliation_limit:
 		_scale_all(comp, retaliation_limit / retaliation_total)
 
+	# bh-028: the lethal-blow guard (Actor.receive_hit sets it on heroes from CombatBudget.BLOW_CAP)
+	var blow_cap := float(req.tags.get(&"blow_cap", INF))
+	var blow_total := _sum(comp)
+	if blow_total > blow_cap:
+		_scale_all(comp, blow_cap / blow_total)
+		r.capped = true
+		r.log_step("Lethal-blow guard: at most %.0f -> %.1f" % [blow_cap, _sum(comp)])
+
 	# 12. Final damage.
 	var total := 0.0
 	var best := -1.0

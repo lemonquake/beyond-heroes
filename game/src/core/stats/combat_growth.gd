@@ -27,27 +27,22 @@ static func spell_power(intelligence: float, wisdom: float, focus: float, level:
 	var x := maxf(0.0, intelligence - 15.0)
 	return (0.7 * x + 0.006 * x * x + maxf(0.0, wisdom - 10.0) * 0.2 + focus * 0.25) * ramp(level)
 
-## Visits advance at 30, 45, 60 ... 300. Bosses match the hero from the start.
+## bh-028: from level 30 monsters stay within CombatBudget.ENCOUNTER_GAP levels of the hero (the old floor jumped in
+## 15-level steps). Bosses match the hero from the start.
 static func encounter_level(authored: int, hero_level: int, boss := false) -> int:
-	var floor_level := hero_level if boss else (30 + 15 * floori(float(hero_level - 30) / 15.0) if hero_level >= 30 else 1)
+	var floor_level := hero_level if boss else CombatBudget.encounter_floor(hero_level)
 	return clampi(maxi(authored, floor_level), 1, BH.LEVEL_CAP)
 
 static func milestone(level: int) -> int:
 	return 1 + floori(float(level - 30) / 15.0) if level >= 30 else 0
 
+## bh-028: one smooth curve through the old checkpoint values (CombatBudget).
 static func enemy_health_bonus(level: int) -> float:
-	var steps := float(maxi(0, milestone(level) - 1))
-	return 1.0 if level < 30 else 1.2 + 0.10 * steps / (1.0 + 0.15 * steps)
+	return CombatBudget.enemy_health_bonus(level)
 
-static func enemy_damage_bonus(level: int) -> float:
-	return 1.0 + 0.04 * mini(milestone(level), 3)
-
-## Separate damage from HP growth: softer gains after 25 prevent level-40+ spikes.
-## Half the former per-level damage growth, without sudden difficulty jumps.
+## bh-028: monster damage follows the reference hero's health (CombatBudget); the old milestone damage steps are gone.
 static func enemy_damage_scale(level: int, per_level: float) -> float:
-	var early := float(clampi(level - 1, 0, 24))
-	var late := float(maxi(0, level - 25))
-	return 1.0 + per_level * (early + late * 0.5)
+	return CombatBudget.enemy_damage_scale(level, per_level)
 
 ## Applicable increases share one budget; investment above +200% has
 ## diminishing returns. This limits multiplication without capping hit damage.

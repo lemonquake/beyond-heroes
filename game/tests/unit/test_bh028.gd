@@ -95,6 +95,7 @@ func test_fifty_hp_per_level_for_every_save() -> void:
 	var cls := DB.class_def(&"knight").duplicate() as ClassDef
 	cls.class_modifiers = []
 	cls.hp_per_level = 0.0
+	cls.vitality = false
 	var l1 := StatCalculator.compute(cls, 1, {}, [], WeaponLoadout.new()).get_stat(&"max_hp")
 	var l40 := StatCalculator.compute(cls, 40, {}, [], WeaponLoadout.new()).get_stat(&"max_hp")
 	eq(l40 - l1, 39 * 50.0, "39 level-ups give 1,950 bonus HP")

@@ -325,7 +325,11 @@ func _update_touch_aim() -> void:
 
 ## What auto-aim and click targeting may pick: monsters, and the towns' practice dummies (bh-019).
 func _aim_targets() -> Array:
-	return get_tree().get_nodes_in_group(&"enemy") + get_tree().get_nodes_in_group(&"practice_target")
+	var out := get_tree().get_nodes_in_group(&"enemy") + get_tree().get_nodes_in_group(&"practice_target")
+	# bh-028: rivals on the sand, while this hero is on it too
+	if is_arena_hero():
+		out += get_tree().get_nodes_in_group(&"arena_target")
+	return out
 
 func pick_auto_target() -> Actor:
 	var facing := _move_input()
@@ -1243,7 +1247,7 @@ func _aura_tick(delta: float) -> void:
 			(t as Actor).status.apply(sid, AURA_STATUS_TIME, mag, 0.0, Elements.PHYSICAL, aura_mods(s, p, eff))
 	if Net.is_active():
 		for av in Net.avatars():
-			if av.alive and av.global_position.distance_to(global_position) <= radius:
+			if av.alive and not av.arena_hostile() and av.global_position.distance_to(global_position) <= radius:
 				Net.send_aura(av, sid, AURA_STATUS_TIME, mag, s.aura_mods, p, eff)
 	# offensive pulses
 	var pmin := float(p.get("pulse_min", 0.0))
@@ -1635,6 +1639,9 @@ func _cancel_action(interrupting: bool) -> void:
 # ---- Damage intake & reactions ----------------------------------------------------------------------------------
 
 func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3.INF) -> DamageResult:
+	# bh-028: an arena adventurer's blow cannot reach past the palisade
+	if attacker is ArenaFighter and not is_arena_hero():
+		return DamageResult.new()
 	if action != null and action.in_iframes() and req.kind != DamageRequest.Kind.DOT:
 		var r0 := DamageResult.new()
 		r0.evaded = true
@@ -2073,7 +2080,8 @@ func _try_phoenix() -> bool:
 func die(killer: Node) -> void:
 	if not alive:
 		return
-	if _try_phoenix():
+	# bh-028: a fall in the Sand Arena costs nothing, not even a Phoenix Feather
+	if not is_arena_hero() and _try_phoenix():
 		return
 	_cancel_action(false)
 	super.die(killer)
@@ -2083,6 +2091,16 @@ func die(killer: Node) -> void:
 	player_died.emit()
 	Events.player_died.emit()
 	TownPortal.expire("Your Town Portal collapsed when you fell.")
+
+## bh-028: the Sand Arena's protection after standing up at the gate.
+func is_arena_hero() -> bool:
+	return ArenaGrounds.holds(self)
+
+func grant_spawn_guard(seconds: float) -> void:
+	invulnerable = true
+	get_tree().create_timer(seconds, false).timeout.connect(func() -> void:
+		if is_instance_valid(self):
+			invulnerable = false)
 
 func respawn() -> void:
 	alive = true

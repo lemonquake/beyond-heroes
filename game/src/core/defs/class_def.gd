@@ -16,6 +16,8 @@ extends Resource
 ## bh-028: bonus Maximum HP per level-up for every hero class (StatCalculator.LEVEL_UP_HP). Tempo shells set it to 0: they
 ## mirror the hero's HP, bonus included.
 @export var level_up_hp := StatCalculator.LEVEL_UP_HP
+## bh-028: whether the class gains Vitality (CombatBudget.vitality). Tempo shells turn it off for the same reason.
+@export var vitality := true
 @export var base_mana := 50.0
 @export var mana_per_level := 5.0
 @export var mana_regen_mult := 1.0
