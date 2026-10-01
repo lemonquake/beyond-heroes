@@ -1,0 +1,44 @@
+monster attacks Evasion can apply to: 68% (weighted by how often they are chosen); base Accuracy 28-46 (median 34)
+boss attacks Evasion can apply to: 33% (weighted by how often they are chosen); base Accuracy 50-64 (median 60)
+
+dungeon (first floor level) | evadable share of pack attacks | of the boss's attacks
+cellars (2) | 71% | 33%
+burrows (4) | 62% | 44%
+warren (5) | 61% | 12%
+ossuary (6) | 81% | 15%
+deeps (7) | 78% | 37%
+warcamp (9) | 67% | 75%
+ember (10) | 68% | 32%
+hive (12) | 78% | 70%
+barrow (13) | 77% | 25%
+sump (15) | 52% | 18%
+orrery (17) | 72% | 25%
+briar (18) | 62% | 31%
+dunemourn (21) | 85% | 40%
+thunderwell (24) | 63% | 17%
+undercroft (28) | 65% | 33%
+geode (32) | 79% | 20%
+vault (36) | 82% | 50%
+reliquary (40) | 74% | 50%
+wyrmcoil (45) | 57% | 40%
+maw (52) | 61% | 31%
+
+class | lvl | AGI | Evasion | vs median foe | vs most accurate foe | vs boss (+lvl2) | sheet says
+ranger | 10 | 50 | 266 | 65% | 65% | 65% | 65%
+ranger | 20 | 90 | 478 | 65% | 65% | 65% | 65%
+ranger | 30 | 132 | 702 | 65% | 65% | 65% | 65%
+ranger | 40 | 172 | 915 | 65% | 65% | 65% | 65%
+ranger | 50 | 213 | 1133 | 65% | 65% | 65% | 65%
+ranger | 60 | 254 | 1351 | 65% | 65% | 65% | 65%
+ranger | 80 | 335 | 1782 | 65% | 65% | 65% | 65%
+ranger | 100 | 417 | 2218 | 65% | 65% | 65% | 65%
+ranger | 120 | 499 | 2654 | 65% | 65% | 65% | 65%
+shadowblade | 10 | 71 | 377 | 65% | 65% | 65% | 65%
+shadowblade | 20 | 134 | 712 | 65% | 65% | 65% | 65%
+shadowblade | 30 | 196 | 1042 | 65% | 65% | 65% | 65%
+shadowblade | 40 | 259 | 1377 | 65% | 65% | 65% | 65%
+shadowblade | 50 | 321 | 1707 | 65% | 65% | 65% | 65%
+shadowblade | 60 | 384 | 2042 | 65% | 65% | 65% | 65%
+shadowblade | 80 | 509 | 2707 | 65% | 65% | 65% | 65%
+shadowblade | 100 | 634 | 3372 | 65% | 65% | 65% | 65%
+shadowblade | 120 | 759 | 4037 | 65% | 65% | 65% | 65%
