@@ -40,7 +40,7 @@ func _ready() -> void:
 			ids.append_array(d.pools.get(k, []))
 		out.append("%s (%d) | %.0f%% | %.0f%%" % [id, int(d.levels[0][0]), 100.0 * _share(ids, evadable_kinds), 100.0 * _share([d.boss], evadable_kinds)])
 	out.append("")
-	out.append("class | lvl | AGI | Evasion | vs median foe | vs most accurate foe | vs boss (+lvl2) | sheet says")
+	out.append("class | lvl | AGI | Evasion | vs median foe | vs most accurate foe | vs boss (+lvl2) | sheet says | graze vs median foe | graze vs boss | graze, no passives")
 	for cid in [&"ranger", &"shadowblade"]:
 		for lv in LEVELS:
 			var h := Game.new_hero(cid, "Probe")
@@ -54,14 +54,16 @@ func _ready() -> void:
 			cls.class_modifiers = []
 			var st := StatCalculator.compute(cls, lv, h.progress.base_attributes(), mods, WeaponLoadout.new())
 			var eva := st.get_stat(&"evasion")
+			var bare := StatCalculator.compute(cls, lv, h.progress.base_attributes(), h.cls.class_modifiers, WeaponLoadout.new()).get_stat(&"evasion")
 			var med := DataEnemies.build().filter(func(e): return e.accuracy > 0.0).map(func(e): return e.accuracy)
 			med.sort()
 			var med_acc: float = med[med.size() / 2] + EnemyStats.LEVEL_ACCURACY * (lv - 1)
 			var max_acc: float = med[-1] + EnemyStats.LEVEL_ACCURACY * (lv - 1)
 			var boss_acc: float = 64.0 + EnemyStats.LEVEL_ACCURACY * (lv + 1)
-			out.append("%s | %d | %d | %d | %.0f%% | %.0f%% | %.0f%% | %.0f%%" % [cid, lv, st.get_stat(&"agi"), eva,
+			out.append("%s | %d | %d | %d | %.0f%% | %.0f%% | %.0f%% | %.0f%% | %.0f%% | %.0f%% | %.0f%%" % [cid, lv, st.get_stat(&"agi"), eva,
 				100 * DamagePipeline.evade_chance(eva, med_acc), 100 * DamagePipeline.evade_chance(eva, max_acc),
-				100 * DamagePipeline.evade_chance(eva, boss_acc), 100 * st.get_stat(&"evade_chance")])
+				100 * DamagePipeline.evade_chance(eva, boss_acc), 100 * st.get_stat(&"evade_chance"),
+				100 * DamagePipeline.evade_chance(eva, med_acc, true), 100 * DamagePipeline.evade_chance(eva, boss_acc, true), 100 * DamagePipeline.evade_chance(bare, med_acc, true)])
 	var text := "\n".join(out)
 	print(text)
 	var dir := ProjectSettings.globalize_path("res://").path_join("../work/lemondev/bh-028/evidence")

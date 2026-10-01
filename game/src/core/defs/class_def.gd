@@ -13,6 +13,9 @@ extends Resource
 @export var talent_points_per_level := 1
 @export var base_hp := 100.0
 @export var hp_per_level := 10.0
+## bh-028: bonus Maximum HP per level-up for every hero class (StatCalculator.LEVEL_UP_HP). Tempo shells set it to 0: they
+## mirror the hero's HP, bonus included.
+@export var level_up_hp := StatCalculator.LEVEL_UP_HP
 @export var base_mana := 50.0
 @export var mana_per_level := 5.0
 @export var mana_regen_mult := 1.0

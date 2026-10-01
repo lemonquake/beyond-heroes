@@ -8,7 +8,7 @@ const GROUPS := [
 	["Offense", [&"weapon_damage_range", &"attacks_per_second", &"attack_speed", &"cast_speed", &"crit_chance", &"crit_damage",
 		&"accuracy", &"accuracy_chance", &"physical_attack", &"spell_power", &"phys_damage", &"magic_damage", &"elemental_damage", &"pen_armor", &"pen_elemental",
 		&"impact_strength", &"stagger_power", &"status_power", &"life_leech", &"mana_leech", &"skill_levels"]],
-	["Defense", [&"max_hp", &"hp_regen", &"defense", &"physical_armor_dr", &"evasion", &"evade_chance", &"block_chance",
+	["Defense", [&"max_hp", &"hp_regen", &"defense", &"physical_armor_dr", &"evasion", &"evade_chance", &"graze_chance", &"block_chance",
 		&"block_strength", &"parry_window", &"poise", &"knockback_res", &"status_res", &"damage_taken"]],
 	["Resistances", []],
 	["Magic & Utility", [&"max_mana", &"mana_regen", &"mana_cost_reduction", &"cdr", &"healing", &"buff_effect", &"move_speed",

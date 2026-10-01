@@ -5,7 +5,7 @@ extends RefCounted
 ## Stats objects never travel: each side supplies its own attacker/target stats.
 
 const REQ_FIELDS := ["kind", "base_min", "base_max", "hand", "use_weapon", "weapon_mult", "skill_mult", "bonus_inc", "can_crit",
-	"force_crit", "crit_bonus", "evadable", "blockable", "knockback", "poise", "status_power", "heavy", "positional_mult", "label"]
+	"force_crit", "crit_bonus", "evadable", "graze", "blockable", "knockback", "poise", "status_power", "heavy", "positional_mult", "label"]
 const RES_FIELDS := ["total", "healed", "pre_mitigation", "is_crit", "evaded", "blocked", "perfect_block", "blocked_amount", "immune",
 	"shattered", "purified", "knockback", "poise_damage", "leech", "mana_leech", "absorbed", "dominant_element", "skill", "skill_name",
 	"heavy", "finisher"]

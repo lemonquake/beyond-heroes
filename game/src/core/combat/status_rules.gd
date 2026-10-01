@@ -20,6 +20,11 @@ const DEFS := {
 	&"freeze_immune": {"name": "Thawing", "debuff": false, "duration": 4.0, "icon": "", "desc": "Recently frozen; cannot be frozen again yet.", "hidden": true},
 	&"shocked": {"name": "Shocked", "debuff": true, "duration": 4.0, "icon": "shocked", "desc": "Takes increased damage from all sources (15%, 25% while Wet)."},
 	&"wet": {"name": "Wet", "debuff": true, "duration": 6.0, "icon": "wet", "desc": "Lightning hits harder and Shocks twice as fast, Freeze builds twice as fast, Fire is dampened. Extinguishes Burning."},
+	# bh-028: the level 40+ monsters' hex (DataEnemies.hex_attack): a fixed 5 s, never shortened by Status Resistance
+	&"hex_frailty": {"name": "Hex of Frailty", "debuff": true, "duration": 5.0, "icon": "cursed", "fixed_duration": true,
+		"desc": "Hexed: 20% lower elemental resistances, 10% lower physical resistance, 15% lower Status Resistance and 40% less Evasion.",
+		"mods": [[&"res_all", StatModifier.Op.FLAT, -0.2], [&"phys_res", StatModifier.Op.FLAT, -0.1], [&"status_res", StatModifier.Op.FLAT, -0.15],
+			[&"evasion", StatModifier.Op.MORE, -0.4]]},
 	&"cursed": {"name": "Cursed", "debuff": true, "duration": 6.0, "icon": "cursed", "desc": "Takes 15% more damage. Light damage purifies it for a burst."},
 	&"purged": {"name": "Purged", "debuff": true, "duration": 5.0, "icon": "purged", "desc": "Regeneration and healing halved, protective wards suppressed. Dark damage rends it (+30%)."},
 	&"staggered": {"name": "Staggered", "debuff": true, "duration": 1.1, "icon": "staggered", "desc": "Poise broken; interrupted and unable to act."},

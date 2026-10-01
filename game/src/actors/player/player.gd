@@ -480,7 +480,9 @@ func _tick_timers(delta: float) -> void:
 	_second_wind_cd = maxf(0.0, _second_wind_cd - delta)
 	_aura_tick(delta)
 	if resource and resource.kind == &"focus":
-		resource.tick(delta, in_combat(), false, not _enemy_near(ClassResource.FOCUS_CALM_RANGE), _enemy_near(ClassResource.FOCUS_PRESSURE_RANGE),
+		# bh-028: Hunter's Calm holds Focus out of combat; Windrunner builds it on the move as if no enemy were near
+		var calm := not _enemy_near(ClassResource.FOCUS_CALM_RANGE) or (stats.has_flag(&"windrunner") and velocity.length() > 0.5)
+		resource.tick(delta, in_combat(), stats.has_flag(&"focus_hold"), calm, _enemy_near(ClassResource.FOCUS_PRESSURE_RANGE) and not calm,
 			1.0 + stats.get_stat(&"focus_gain"))
 		_sync_status(&"steady", resource.is_steady(_steady_at()))
 	elif resource and resource.kind == &"combo":
@@ -962,6 +964,8 @@ func _start_dodge() -> void:
 	if stats.has_flag(&"dodge_haste"):
 		_haste_t = 2.0
 		mark_stats_dirty()
+	if stats.has_flag(&"dodge_stealth"):
+		status.apply(&"stealth", stats.flag(&"dodge_stealth"))   # bh-028: Phantom Veil (the flag was never read)
 	chain_step = 0
 
 # ---- Guard ------------------------------------------------------------------------------------------------------
@@ -1428,7 +1432,7 @@ func restore_refusal(fx: Dictionary) -> String:
 		return "Your health and mana are already full"
 	return "Your health is already full" if heals else "Your mana is already full"
 
-const CLEANSABLE := [&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"]
+const CLEANSABLE := [&"poisoned", &"burning", &"bleeding", &"cursed", &"hex_frailty", &"chilled", &"slowed", &"weakened"]
 
 func _has_cleansable() -> bool:
 	for sid in CLEANSABLE:
@@ -1635,8 +1639,7 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 		var r0 := DamageResult.new()
 		r0.evaded = true
 		Events.damage_dealt.emit(self, r0, center(), attacker)
-		if stats.has_flag(&"evade_mana"):
-			restore_mana(stats.flag(&"evade_mana"))
+		_evade_rewards()
 		return r0
 	if Game.god_mode:
 		req.base_min = 0.0
@@ -1647,6 +1650,20 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	if not res.evaded and req.kind != DamageRequest.Kind.DOT:
 		mark_combat()
 	return res
+
+## bh-028: an Evasion roll (or graze) counts as evading, exactly like a dodge's i-frames. Before this, Second
+## Nature, Slip and the other "evading restores Mana" passives only woke for dodge rolls.
+func _on_evaded(_attacker: Node) -> void:
+	_evade_rewards()
+
+## What evading an attack gives back: Mana (Second Nature, Slip, Serpent Veil) and the Luna orb's Moonveil heal.
+func _evade_rewards() -> void:
+	if stats == null:
+		return
+	if stats.has_flag(&"evade_mana"):
+		restore_mana(stats.flag(&"evade_mana"))
+	if stats.has_flag(&"evade_heal") and hp < max_hp():
+		heal(max_hp() * stats.flag(&"evade_heal"), false)
 
 func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit_point: Vector3) -> void:
 	# Mana Shield (Mage passive): part of the damage drains Mana instead (1.5 Mana per point).
@@ -1852,6 +1869,8 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 			heal(max_hp() * stats.flag(&"crit_heal"))
 		if stats.has_flag(&"crit_lightning") and (req == null or not req.tags.has(&"proc")):
 			_crit_lightning(target, res)
+		if stats.has_flag(&"crit_sunflare") and (req == null or not req.tags.has(&"proc")):
+			_crit_sunflare(target, res)
 	if stats.has_flag(&"hit_ignite") and rng.randf() < stats.flag(&"hit_ignite") and target.alive:
 		target.status.apply(&"burning", -1.0, 0.0, maxf(1.0, res.total * 0.25), Elements.FIRE)
 	if stats.has_flag(&"burn_spread") and res.components.get(Elements.FIRE, 0.0) > 0.0 and target.status.has(&"burning"):
@@ -1893,6 +1912,28 @@ func _crit_lightning(from_target: Actor, res: DamageResult) -> void:
 		a.receive_hit(req, self, a.center())
 	if n > 0:
 		Audio.play_at(&"lightning_zap", from_target.global_position)
+
+## bh-028: the Sol orb's Sunflare — a crit flares Light onto every other enemy within 5 m of the target.
+func _crit_sunflare(from_target: Actor, res: DamageResult) -> void:
+	var hit := 0
+	for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), from_target.global_position, 5.0, BH.LAYER_ENEMY):
+		if a == from_target or not a.alive:
+			continue
+		hit += 1
+		var req := DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL
+		req.attacker = stats
+		req.base_min = res.total * stats.flag(&"crit_sunflare")
+		req.base_max = req.base_min
+		req.conversion = {Elements.LIGHT: 1.0}
+		req.can_crit = false
+		req.evadable = false
+		req.tags[&"proc"] = true
+		req.label = "Sunflare"
+		a.receive_hit(req, self, a.center())
+	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.8, 0.35), 5.0, 0.35, 0.8), from_target.global_position)
+	if hit > 0:
+		FX.spawn(VFXLib.light_flash(Color(1.0, 0.85, 0.4), 6.0, 6.0, 0.2), from_target.center())
 
 func _spread_burning(src: Actor) -> void:
 	var inst = src.status.statuses.get(&"burning")
@@ -2016,7 +2057,7 @@ func _try_phoenix() -> bool:
 	hero.inventory.consume(&"phoenix_feather", 1)
 	hp = max_hp() * 0.5
 	health_changed.emit(hp, max_hp())
-	status.cleanse([&"poisoned", &"burning", &"bleeding", &"cursed", &"chilled", &"slowed", &"weakened"])
+	status.cleanse([&"poisoned", &"burning", &"bleeding", &"cursed", &"hex_frailty", &"chilled", &"slowed", &"weakened"])
 	status.apply(&"fortified", 3.0, 0.0, 0.0, Elements.PHYSICAL, [StatModifier.more(&"damage_taken", -0.9)])
 	FX.spawn(VFXLib.light_pillar(Color(1.0, 0.55, 0.15), 6.0, 1.2, 0.9), global_position)
 	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.6, 0.2, 0.95), 4.0, 0.6, 0.9), global_position)

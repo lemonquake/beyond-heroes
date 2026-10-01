@@ -442,6 +442,23 @@ static func _defs_bh010() -> Array:
 	]
 
 ## Elite modifiers: id -> {name, color, desc, mods (StatModifiers), flags, res, element}
+## bh-028: from level 40 every monster that fights can lay a Hex of Frailty: a violet sigil under the hero that lowers
+## their resistances and Evasion for 5 seconds (StatusRules hex_frailty). Dodge out of it, or graze it with Evasion.
+const HEX_LEVEL := 40
+
+static func hex_attack(def: EnemyDef) -> Dictionary:
+	var caster := def.archetype in [&"caster", &"support", &"boss"]
+	return {"id": &"hex_frailty", "name": "Hex of Frailty", "anim": StringName(def.attacks[0].get("anim", &"cast_quick")),
+		"range": 16.0 if caster else 11.0, "mult": 0.3, "element": Elements.DARK, "knockback": 0.0, "poise": 0.0,
+		"cooldown": 14.0 if caster else 18.0, "kind": "aoe", "radius": 2.6, "windup": 0.9, "telegraph": "circle",
+		"status": {&"hex_frailty": 250.0}, "hex": true, "tele_color": Color(0.62, 0.22, 1.0, 0.8), "weight": 0.6}
+
+## Attacks a monster gets on top of its def at this level (Enemy.extra_attacks).
+static func extra_attacks(def: EnemyDef, level: int) -> Array:
+	if def == null or level < HEX_LEVEL or def.attacks.is_empty() or def.damage_max <= 0.0:
+		return []
+	return [hex_attack(def)]
+
 static func elite_mods() -> Dictionary:
 	return {
 		&"flaming": {"name": "Flaming", "color": Color(1.0, 0.45, 0.1), "desc": "Attacks add Fire damage and ignite; leaves burning ground on death.",

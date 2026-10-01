@@ -9,11 +9,11 @@ what is done, where the code lives and how to verify it. If you pick this up fro
 | # | Phase | Status |
 |---|---|---|
 | 0 | Research, tooling, this plan | ✅ done |
-| 1 | Evasion investigation + fixes | ⏳ next |
-| 2 | +50 HP per level (old and new saves) | ☐ |
-| 3 | Level 40+ enemy curse (Hex of Frailty) | ☐ |
-| 4 | Celestial orbs: Sora, Luna, Sol, Airah | ☐ |
-| 5 | Five special dungeons after Kethrax | ☐ |
+| 1 | Evasion investigation + fixes | ✅ done |
+| 2 | +50 HP per level (old and new saves) | ✅ done |
+| 3 | Level 40+ enemy curse (Hex of Frailty) | ✅ done |
+| 4 | Celestial orbs: Sora, Luna, Sol, Airah | ✅ done |
+| 5 | Five special dungeons after Kethrax | ⏳ next |
 | 6 | Tests, screenshots, changelog, push | ☐ |
 
 Legend: ✅ done · ⏳ in progress · ☐ not started. Update this table and the phase notes as you go.
@@ -72,7 +72,16 @@ Findings:
   passed to `ClassResource.tick`; `dodge_stealth` applies `stealth` on dodge.
 
 ### Done / notes
-- (fill in as you go)
+- `DamagePipeline.GRAZE_ACC_FACTOR/GRAZE_CAP`, `DamageRequest.graze` (in `NetCodec.REQ_FIELDS`).
+- `Enemy.DIRECT_KINDS`; `_attack_request` marks everything else `graze`. Trait blasts (`enemy_traits_ext._req`), storm
+  strikes, sapper mines, beams, pool ticks and projectile explosions from monsters graze too.
+- `Actor.receive_hit`: monsters never graze (friendly-fire blasts like the Plague Bloater's still hurt them).
+- `Player._on_evaded` / `_evade_rewards`; Focus tick gets `focus_hold` and `windrunner`; `dodge_stealth` on dodge.
+- Sheet: `graze_chance` (StatCalculator, StatDefs, CharacterWindow).
+- Probe after the fix: every level shows 65% evade / 45% graze with full passives, 28–45% graze without them, so
+  passive ranks and Agility now visibly matter at every level.
+- Regression check vs. the baseline worktree (same suites): identical failures (`test_enemies2` 8,
+  `test_dungeon_growth` 1 — both pre-existing).
 
 ---
 
@@ -82,6 +91,8 @@ Findings:
 - It is computed from the level every time stats are built, so **old saves get it on load with no migration** and
   new heroes get it as they level. Tempos/guild fighters built by StatCalculator also get it (they mirror heroes).
 - Test: an old-format save at level 40 has +1,950 HP over the pre-change formula.
+- ✅ Done: `ClassDef.level_up_hp` (default `StatCalculator.LEVEL_UP_HP` = 50). Tempo shells set it to 0 because they
+  mirror half of the hero's HP, bonus included (`test_tempos` caught this).
 
 ---
 
@@ -94,6 +105,9 @@ Findings:
   hero is still in it when it lands, the hex applies. It can be dodged (i-frames) and grazed like any area attack.
   Cooldown 14–18 s; casters/bosses use it more often. Data: `DataEnemies.HEX_ATTACK`.
 - Monsters' own `cursed` affix is unchanged.
+- ✅ Done: `StatusRules.DEFS.hex_frailty` (`fixed_duration`), `StatusController.apply` honours it,
+  `DataEnemies.HEX_LEVEL / hex_attack / extra_attacks`, `Enemy.extra_attacks` (joins `_choose_attack`),
+  violet telegraph + "Hexed!" popup in `Enemy._telegraph_aoe` (`hex`, `tele_color` keys). Cleansable.
 
 ---
 
@@ -112,7 +126,13 @@ Crystalline, Orbital — the socket, shop, naming and drop systems are built on 
 - Names: `CrystalNames` gets single-family tiers, 4 epithets and the 38 new hybrid names (12 families → 66 pairs).
 - Drops: bosses level 40+ can roll celestial orbs (`DataCrystals.roll_drop`), special-dungeon bosses always drop one
   of their dungeon's orb. Socket Specialists sell them (expensive).
-- Icons: rendered in Godot by `tests/tools/render_orb_icons.tscn` → `assets/ui/icons/crystals/<family>_<grade>.png`.
+- Icons: rendered in Godot by `tests/tools/render_orb_icons.tscn` (raw gems → `work/lemondev/bh-028/scratch/orb_raw`),
+  finished by `tools/ui_art/bh028_orb_icons.py` → `assets/ui/icons/crystals/<family>_<grade>.png`. Preview:
+  `work/lemondev/bh-028/evidence/orb_icons.png`. Socket sprites: `tools/ui_art/bh022_sockets.py` (only the 16 new
+  files were kept; regenerating the old ones changes bytes under a different PIL).
+- ✅ Done: `DataCrystals` (`CELESTIAL`, `COMMON`, `is_celestial`, `roll_drop(..., favour)`), `CrystalNames`,
+  `DataShops.crystal_stock`, `Loot` (dungeon `orb` favour + guaranteed orb from special-dungeon lords),
+  `Player._crit_sunflare`. Tests `test_bh018`/`test_bh022` counts updated (48 crystals, 66 pairs).
 
 ---
 

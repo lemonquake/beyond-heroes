@@ -686,7 +686,7 @@ func storm_strikes(a: Dictionary) -> void:
 		if e.is_inside_tree():
 			at = CombatQuery.ground_at(e.get_world_3d(), at)
 		var req := e._attack_request(a)
-		req.evadable = false
+		req.graze = true
 		var d := delay + 0.12 * i
 		var b := AreaEffects.delayed(FX.world, at, radius, d, req, e, BH.LAYER_PLAYER, Color(0.5, 0.85, 1.0, 0.8))
 		b.on_blast = func(pos: Vector3, hits: Array) -> void:
@@ -732,7 +732,7 @@ func plant_mine(a: Dictionary) -> Node3D:
 		at = e.global_position.lerp(e.target.global_position, 0.6)
 	at = CombatQuery.ground_at(e.get_world_3d(), CombatQuery.reachable_point(e.get_world_3d(), e.global_position, at, 0.2))
 	var req := e._attack_request(a)
-	req.evadable = false
+	req.graze = true
 	var mine := SapperMine.new().setup(req, e, float(a.get("radius", 2.6)))
 	FX.world.add_child(mine)
 	mine.global_position = at
@@ -989,6 +989,7 @@ func _beam_step(delta: float) -> void:
 				(_beam.hit as Dictionary)[id] = 0.5
 				var req := e._attack_request(a)
 				req.evadable = true
+				req.graze = true
 				t.receive_hit(req, e, t.center())
 		for k in (_beam.hit as Dictionary).keys():
 			_beam.hit[k] = float(_beam.hit[k]) - 0.2

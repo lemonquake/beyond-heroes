@@ -74,7 +74,7 @@ func apply(id: StringName, duration := -1.0, mag := 0.0, dps := 0.0, element := 
 	if id == &"stunned" and has(&"stun_immune"):
 		return
 	var dur := duration if duration >= 0.0 else StatusRules.base_duration(id)
-	if StatusRules.is_debuff(id):
+	if StatusRules.is_debuff(id) and not bool(StatusRules.DEFS.get(id, {}).get("fixed_duration", false)):
 		dur *= (1.0 - status_res)
 	var inst: Instance = statuses.get(id)
 	var is_new := inst == null

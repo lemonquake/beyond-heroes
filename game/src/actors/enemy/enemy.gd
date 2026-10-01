@@ -16,6 +16,8 @@ const LOS_INTERVAL := 0.3
 const SEPARATION_RADIUS := 1.6
 const TURN_RATE := 8.0
 const RETURN_HEAL_RATE := 0.25
+## bh-028: attack kinds Evasion meets at full odds; every other attack kind is an area hit that can only be grazed.
+const DIRECT_KINDS := ["melee", "dash", "charge", "projectile", "chain", "tongue"]
 
 var def: EnemyDef
 var brain := EnemyBrain.new()
@@ -36,6 +38,8 @@ var bar: EnemyBar
 var action: TimedAction
 var current_attack := {}
 var cooldowns := {}                  # attack/ability id -> seconds
+## bh-028: attacks this monster has on top of its def (the level 40+ hex, DataEnemies.hex_attack).
+var extra_attacks: Array = []
 var phase := 1
 var enraged := false
 var _think_t := 0.0
@@ -114,6 +118,7 @@ func setup(p_def: EnemyDef, p_level: int, mods: Array = [], p_difficulty := {}) 
 	body_radius = def.body_radius
 	body_height = def.body_height
 	affinity = def.affinity
+	extra_attacks = DataEnemies.extra_attacks(def, level)
 	return self
 
 ## Turn this (elite) enemy into a named miniboss before it enters the tree: its name, size and weight.
@@ -749,7 +754,7 @@ func _nearest_ally(r: float) -> Enemy:
 func _choose_attack() -> Dictionary:
 	var candidates := []
 	var total := 0.0
-	for a in def.attacks:
+	for a in def.attacks + extra_attacks:
 		var id: StringName = a.id
 		if cooldowns.has(id):
 			continue
@@ -793,7 +798,9 @@ func _attack_request(a: Dictionary) -> DamageRequest:
 	req.knockback = float(a.get("knockback", 2.0))
 	req.poise = float(a.get("poise", 8.0))
 	req.label = "%s: %s" % [def.display_name, a.id]
-	req.evadable = a.kind in ["melee", "dash", "charge", "projectile", "chain", "tongue"]
+	# bh-028: aimed blows are evaded at full odds; everything else (blasts, pools, strikes, beams) can be grazed
+	req.evadable = true
+	req.graze = not a.kind in DIRECT_KINDS
 	var st: Dictionary = a.get("status", {})
 	for sid in st:
 		req.direct_status[StringName(sid)] = float(st[sid])
@@ -1008,7 +1015,17 @@ func _telegraph_aoe(a: Dictionary, at: Vector3, delay: float) -> void:
 			Events.camera_shake.emit(0.3))
 		return
 	var blast := AreaEffects.delayed(FX.world, CombatQuery.ground_at(get_world_3d(), at), radius, delay, req, self, BH.LAYER_PLAYER,
-		Color(1.0, 0.25, 0.1, 0.75), "ring" if shape == "ring" else "circle", float(a.get("inner_radius", 0.0)))
+		a.get("tele_color", Color(1.0, 0.25, 0.1, 0.75)), "ring" if shape == "ring" else "circle", float(a.get("inner_radius", 0.0)))
+	if a.get("hex", false):
+		# bh-028: a curse sigil, not a slam — no shake, a violet burst and a word over whoever it caught
+		blast.on_blast = func(pos: Vector3, hits: Array) -> void:
+			FX.spawn(VFXLib.ring_wave(Color(0.7, 0.3, 1.0), radius, 0.5, 0.9), pos)
+			FX.spawn(VFXLib.light_flash(Color(0.6, 0.2, 1.0), 4.0, 5.0, 0.25), pos + Vector3.UP)
+			Audio.play_at(&"dark_cast", pos)
+			for h in hits:
+				if h is Actor and (h as Actor).status.has(&"hex_frailty"):
+					FX.text_popup((h as Actor).center() + Vector3.UP, "Hexed!", Color(0.8, 0.45, 1.0), 1.0)
+		return
 	blast.on_blast = func(pos: Vector3, _hits: Array) -> void:
 		var c := Elements.color(el) if el != Elements.PHYSICAL else Color(0.85, 0.7, 0.5)
 		FX.spawn(VFXLib.ring_wave(c, radius, 0.45, 0.8), pos)

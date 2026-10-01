@@ -189,7 +189,8 @@ func _finish(point: Vector3, by_wall: bool) -> void:
 				_hit[a.get_instance_id()] = true
 				var req := request.clone()
 				req.tags[&"aoe"] = true
-				req.evadable = false
+				req.graze = true
+				req.evadable = source is Actor and is_instance_valid(source) and (source as Actor).team == BH.Team.ENEMY
 				var r := a.receive_hit(req, source if is_instance_valid(source) else null, a.center())
 				if on_hit.is_valid():
 					on_hit.call(a, r, a.center())

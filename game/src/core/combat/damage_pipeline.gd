@@ -9,6 +9,10 @@ class_name DamagePipeline
 
 const EVADE_ACC_FACTOR := 1.0
 const EVADE_CAP := 0.65
+## bh-028: area hits (blasts, pools, strikes, beams, mines) can be grazed: the same Evasion against 4x the Accuracy,
+## capped at 45%. Evasion beyond what direct hits need keeps paying off here.
+const GRAZE_ACC_FACTOR := 4.0
+const GRAZE_CAP := 0.45
 const SHOCK_TAKEN := 0.15
 const SHOCK_TAKEN_WET := 0.25
 const CURSE_TAKEN := 0.15
@@ -30,8 +34,12 @@ const UMBRAL_MULT := 1.3             # dark into a purged target (light/dark opp
 const MAX_KNOCKBACK := 28.0          # m/s hard cap per hit
 static var debug_enabled := false
 
-static func evade_chance(evasion: float, accuracy: float) -> float:
-	return minf(EVADE_CAP, evasion / (evasion + maxf(1.0, accuracy) * EVADE_ACC_FACTOR)) if evasion > 0.0 else 0.0
+static func evade_chance(evasion: float, accuracy: float, graze := false) -> float:
+	if evasion <= 0.0:
+		return 0.0
+	if graze:
+		return minf(GRAZE_CAP, evasion / (evasion + maxf(1.0, accuracy) * GRAZE_ACC_FACTOR))
+	return minf(EVADE_CAP, evasion / (evasion + maxf(1.0, accuracy) * EVADE_ACC_FACTOR))
 
 static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageResult:
 	var r := DamageResult.new()
@@ -52,11 +60,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	if req.kind in [DamageRequest.Kind.ATTACK, DamageRequest.Kind.SPELL] and req.evadable and atk != null:
 		var eva := tgt.get_stat(&"evasion")
 		var acc := maxf(1.0, atk.get_stat(&"accuracy"))
-		var evade_chance := evade_chance(eva, acc)
+		var evade_chance := evade_chance(eva, acc, req.graze)
 		if st != null and (st.has(&"frozen") or st.has(&"stunned") or st.has(&"staggered")):
 			evade_chance = 0.0
 		var roll := rng.randf()
-		r.log_step("Evasion: %.1f%% (roll %.3f)" % [evade_chance * 100.0, roll])
+		r.log_step("%s: %.1f%% (roll %.3f)" % ["Graze" if req.graze else "Evasion", evade_chance * 100.0, roll])
 		if roll < evade_chance:
 			r.evaded = true
 			r.log_step("EVADED")

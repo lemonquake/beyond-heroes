@@ -57,8 +57,42 @@ const FAMILIES := {
 			ARMOR: [&"low_hp_dr", [0.04, 0.07, 0.10, 0.14], "Rift Bulwark", "While below 35%% HP you take %s less damage."],
 			JEWEL: [&"crit_cdr", [0.1, 0.2, 0.3, 0.5], "Rift Tempo", "Critical hits cut every skill cooldown by %s."],
 		}},
+	# bh-028: the four celestial orbs. Rarer and dearer than the common eight (a tier higher, like Aetherift); bosses of
+	# level 40+ drop them and each special dungeon behind Kethrax favours its own (DataDungeonsSpecial).
+	&"sora": {"name": "Sora", "color": Color(0.55, 0.85, 1.0), "blurb": "A piece of open sky, still windy inside.", "celestial": true,
+		WEAPON: [[&"accuracy", F, [20, 45, 85, 140]], [&"impact_strength", F, [0.06, 0.12, 0.2, 0.3]]],
+		ARMOR: [[&"res_all", F, [0.03, 0.05, 0.08, 0.12]]],
+		JEWEL: [[&"res_all", F, [0.02, 0.04, 0.06, 0.09]], [&"status_res", F, [0.03, 0.05, 0.08, 0.12]]]},
+	&"luna": {"name": "Luna", "color": Color(0.72, 0.68, 1.0), "blurb": "Moonlight that cooled into glass.", "celestial": true,
+		WEAPON: [[&"added_dark", F, [4, 10, 20, 38]], [&"crit_damage", F, [0.05, 0.1, 0.16, 0.24]]],
+		ARMOR: [[&"evasion", I, [0.05, 0.09, 0.14, 0.2]], [&"res_dark", F, [0.05, 0.09, 0.14, 0.2]]],
+		JEWEL: [[&"mana_regen", F, [0.5, 1.2, 2.2, 3.8]], [&"cdr", F, [0.01, 0.02, 0.035, 0.05]]],
+		"passive": {
+			ARMOR: [&"evade_heal", [0.01, 0.015, 0.02, 0.03], "Moonveil", "Evading or grazing an attack heals %s of your Maximum HP."],
+		}},
+	&"sol": {"name": "Sol", "color": Color(1.0, 0.72, 0.25), "blurb": "A spark of the noon sun, too bright to hold for long.", "celestial": true,
+		WEAPON: [[&"added_light", F, [3, 8, 15, 28]], [&"added_fire", F, [3, 8, 15, 28]]],
+		ARMOR: [[&"max_hp", F, [25, 60, 120, 200]], [&"hp_regen", F, [0.5, 1.2, 2.5, 4.5]]],
+		JEWEL: [[&"healing", F, [0.04, 0.08, 0.12, 0.18]], [&"dmg_light", I, [0.06, 0.12, 0.2, 0.32]]],
+		"passive": {
+			WEAPON: [&"crit_sunflare", [0.15, 0.25, 0.35, 0.5], "Sunflare", "Critical hits flare: enemies near the target take %s of the hit as Light damage."],
+		}},
+	&"airah": {"name": "Airah", "color": Color(0.6, 1.0, 0.82), "blurb": "A breath of the high wind, caught and kept.", "celestial": true,
+		WEAPON: [[&"added_wind", F, [4, 10, 20, 38]], [&"attack_speed", I, [0.02, 0.04, 0.06, 0.09]]],
+		ARMOR: [[&"move_speed", I, [0.02, 0.04, 0.06, 0.08]], [&"res_wind", F, [0.05, 0.09, 0.14, 0.2]], [&"dodge_cooldown", F, [-0.03, -0.06, -0.1, -0.15]]],
+		JEWEL: [[&"cast_speed", I, [0.02, 0.04, 0.07, 0.1]], [&"dodge_distance", I, [0.03, 0.06, 0.1, 0.15]]],
+		"passive": {
+			JEWEL: [&"dodge_haste", [0.1, 0.15, 0.2, 0.3], "Tailwind", "Dodging grants %s more Movement Speed for 2 s."],
+		}},
 }
-const ORDER: Array[StringName] = [&"ember", &"aqua", &"nova", &"thundra", &"vipera", &"bloodrift", &"essencerift", &"aetherift"]
+const ORDER: Array[StringName] = [&"ember", &"aqua", &"nova", &"thundra", &"vipera", &"bloodrift", &"essencerift", &"aetherift",
+	&"sora", &"luna", &"sol", &"airah"]
+## The seven common families (random drops and the specialists' full stock).
+const COMMON: Array[StringName] = [&"ember", &"aqua", &"nova", &"thundra", &"vipera", &"bloodrift", &"essencerift"]
+## bh-028: the celestial orbs, their price multiplier, and the level from which bosses may drop them.
+const CELESTIAL: Array[StringName] = [&"sora", &"luna", &"sol", &"airah"]
+const CELESTIAL_PRICE_MULT := 4
+const CELESTIAL_LEVEL := 40
 
 ## Maximum sockets per equipment tier (rarity): Beginner and Common 1 ... Aether 7.
 const MAX_SOCKETS := [1, 1, 2, 3, 3, 4, 5, 6, 6, 7]
@@ -94,7 +128,11 @@ static func price(base_id: StringName) -> int:
 	var g := grade_of(base_id)
 	if g < 0:
 		return 0
-	return PRICE[g] * (AETHER_PRICE_MULT if family_of(base_id) == &"aetherift" else 1)
+	var f := family_of(base_id)
+	return PRICE[g] * (AETHER_PRICE_MULT if f == &"aetherift" else (CELESTIAL_PRICE_MULT if is_celestial(f) else 1))
+
+static func is_celestial(family: StringName) -> bool:
+	return CELESTIAL.has(family)
 
 ## Which crystal effects a piece of equipment takes (weapon / armour / jewellery), or &"" for non-equipment.
 static func group_for(category: StringName) -> StringName:
@@ -158,7 +196,7 @@ static func describe(base_id: StringName) -> PackedStringArray:
 		out.append("%s: %s" % [GROUP_NAMES[grp], "; ".join(ls)])
 	return out
 
-## The 32 crystal item bases (called from DataItems.bases).
+## The 48 crystal item bases (called from DataItems.bases).
 static func items(out: Array) -> void:
 	for f in ORDER:
 		var fd: Dictionary = FAMILIES[f]
@@ -171,7 +209,7 @@ static func items(out: Array) -> void:
 			b.stack_max = 20
 			b.weight = 0.1
 			b.value = price(b.id)
-			b.fixed_rarity = mini(GRADE_RARITY[g] + (1 if f == &"aetherift" else 0), BH.Rarity.AETHER)
+			b.fixed_rarity = mini(GRADE_RARITY[g] + (1 if f == &"aetherift" or is_celestial(f) else 0), BH.Rarity.AETHER)
 			b.flavor = "%s Set it into a socket at a Socket Specialist." % fd.blurb
 			b.lore = fd.blurb
 			out.append(b)
@@ -180,13 +218,19 @@ static func items(out: Array) -> void:
 
 ## A random crystal for a kill: bosses may drop any grade (better with level), minibosses a Fragment or a Shard.
 ## Aetherift is rare (4% from bosses, 1% from minibosses).
-static func roll_drop(rng: RandomNumberGenerator, level: int, boss: bool) -> StringName:
+## bh-028: from level 40 bosses (8%) and minibosses (3%) may drop a celestial orb instead; `favour` (a special
+## dungeon's own orb) makes that the orb whenever a celestial one is rolled, and doubles the chance.
+static func roll_drop(rng: RandomNumberGenerator, level: int, boss: bool, favour: StringName = &"") -> StringName:
 	var fam: StringName
 	var aether_p := 0.04 if boss else 0.01
-	if rng.randf() < aether_p:
+	var celestial_p := (0.08 if boss else 0.03) * (2.0 if favour != &"" else 1.0) if level >= CELESTIAL_LEVEL else 0.0
+	var roll := rng.randf()
+	if roll < celestial_p:
+		fam = favour if favour != &"" else CELESTIAL[rng.randi_range(0, CELESTIAL.size() - 1)]
+	elif roll < celestial_p + aether_p:
 		fam = &"aetherift"
 	else:
-		fam = ORDER[rng.randi_range(0, ORDER.size() - 2)]
+		fam = COMMON[rng.randi_range(0, COMMON.size() - 1)]
 	var g := 0
 	if boss:
 		# weights Fragment/Shard/Crystalline/Orbital shift toward the top as the boss's level rises

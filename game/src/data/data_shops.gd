@@ -200,9 +200,11 @@ static func crystal_stock(grade_levels: Array, aether_level: int) -> Array:
 	for g in 4:
 		if int(grade_levels[g]) >= 99:
 			continue
-		for f in DataCrystals.ORDER:
-			if f == &"aetherift":
-				continue
+		for f in DataCrystals.COMMON:
 			out.append({"base": DataCrystals.id_of(f, g), "infinite": true, "level_min": int(grade_levels[g])})
 	out.append({"base": DataCrystals.id_of(&"aetherift", 0), "infinite": true, "level_min": aether_level})
+	# bh-028: the celestial orbs, Fragments from level 40 and Shards from 60 (Crystalline and Orbital only drop)
+	for g in 2:
+		for f in DataCrystals.CELESTIAL:
+			out.append({"base": DataCrystals.id_of(f, g), "infinite": true, "level_min": DataCrystals.CELESTIAL_LEVEL + 20 * g})
 	return out

@@ -797,7 +797,7 @@ func _req(mult: float, element: int, conv: float, knock: float, label: String) -
 	if element != Elements.PHYSICAL and conv > 0.0:
 		req.conversion = {element: conv}
 	req.knockback = knock
-	req.evadable = false
+	req.graze = true          # bh-028: trait blasts can be grazed like any area hit
 	req.label = label
 	return req
 

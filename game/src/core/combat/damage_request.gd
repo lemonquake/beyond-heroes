@@ -21,6 +21,7 @@ var can_crit := true
 var force_crit := false
 var crit_bonus := 0.0               # added crit chance for this hit
 var evadable := true
+var graze := false                  # bh-028: an area hit; evaded at the graze odds (DamagePipeline.GRAZE_*)
 var blockable := true
 var guarding := false               # target is actively guarding and the hit is frontal
 var perfect_block := false          # guard started within the parry window
@@ -38,7 +39,7 @@ var label := ""                     # debug label (skill name)
 func clone() -> DamageRequest:
 	var r := DamageRequest.new()
 	for p in ["kind", "attacker", "base_min", "base_max", "hand", "use_weapon", "weapon_mult", "skill_mult", "bonus_inc",
-			"can_crit", "force_crit", "crit_bonus", "evadable", "blockable", "guarding", "perfect_block", "knockback", "poise",
+			"can_crit", "force_crit", "crit_bonus", "evadable", "graze", "blockable", "guarding", "perfect_block", "knockback", "poise",
 			"status_power", "heavy", "target_weight", "positional_mult", "label"]:
 		r.set(p, get(p))
 	r.conversion = conversion.duplicate()

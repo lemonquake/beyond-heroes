@@ -4,6 +4,8 @@ class_name StatCalculator
 
 # ---- Tunable coefficients (single source of truth) -------------------------------------------------------
 const HP_PER_STR := 6.0
+## bh-028: every level-up grants 50 bonus Maximum HP. Derived from the level, so every save (old or new) has it.
+const LEVEL_UP_HP := 50.0
 const HP_PER_WIS := 4.0
 const HP_PER_SPI := 1.0
 const MANA_PER_INT := 4.0
@@ -164,6 +166,7 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	# ---- Pools --------------------------------------------------------------------------------------------
 	_std(d, agg, &"max_hp", [
 		["Class base", cls.base_hp], ["Level %d x %.0f" % [level, cls.hp_per_level], cls.hp_per_level * (L - 1.0)],
+		["Level-up bonus: %d level-ups x %d" % [level - 1, roundi(cls.level_up_hp)], cls.level_up_hp * (L - 1.0)],
 		["Strength %d x %.1f" % [STR, HP_PER_STR], STR * HP_PER_STR], ["Wisdom %d x %.1f" % [WIS, HP_PER_WIS], WIS * HP_PER_WIS],
 		["Spirit %d x %.1f" % [SPI, HP_PER_SPI], SPI * HP_PER_SPI]], 1.0, INF, true)
 	_std(d, agg, &"max_mana", [
@@ -353,6 +356,9 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 	var ref_acc := 30.0 + EnemyStats.LEVEL_ACCURACY * (L - 1.0)
 	d.set_stat(&"evade_chance", DamagePipeline.evade_chance(eva, ref_acc),
 		PackedStringArray(["Against a level %d enemy with %d Accuracy" % [level, roundi(ref_acc)], "Cap %d%%" % roundi(DamagePipeline.EVADE_CAP * 100)]))
+	d.set_stat(&"graze_chance", DamagePipeline.evade_chance(eva, ref_acc, true),
+		PackedStringArray(["Area hits: Evasion against %dx the Accuracy of a level %d enemy" % [roundi(DamagePipeline.GRAZE_ACC_FACTOR), level],
+		"Cap %d%%" % roundi(DamagePipeline.GRAZE_CAP * 100)]))
 	d.set_stat(&"physical_armor_dr", armor_dr, PackedStringArray(["Defense / (Defense + %d + %d x level)" % [ARMOR_K_BASE, ARMOR_K_LEVEL]]))
 	_std(d, agg, &"arcane_max", [["Base", 5.0]], 0.0, 10.0, true)
 	_std(d, agg, &"combo_max", [["Base", ClassResource.COMBO_MAX]], 1.0, 8.0, true)

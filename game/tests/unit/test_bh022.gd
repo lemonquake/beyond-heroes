@@ -26,7 +26,7 @@ func test_every_crystal_combination_has_a_name() -> void:
 			ok(not seen.has(nm), "hybrid name %s is unique" % nm)
 			seen[nm] = true
 			eq(CrystalNames.hybrid_name(fams[j], fams[i]), nm, "pair order does not matter")
-	eq(seen.size(), 28, "all 28 pairs named")
+	eq(seen.size(), 66, "all 66 pairs named (bh-028: twelve families with the celestial orbs)")
 	eq(CrystalNames.suffix_for(_gems([[&"nova", 0], [&"ember", 0]])), "of the Nova Blast", "Nova + Ember is the Nova Blast")
 	eq(CrystalNames.suffix_for(_gems([[&"nova", 3], [&"ember", 3]])), "of the Eternal Nova Blast", "an Orbital pair is Eternal")
 	eq(CrystalNames.suffix_for(_gems([[&"nova", 1], [&"ember", 1]])), "of the Grand Nova Blast", "a Shard pair is Grand")

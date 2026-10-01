@@ -118,7 +118,9 @@ class Hazard:
 				if request:
 					var r := request.clone()
 					r.tags[&"aoe"] = true
-					r.evadable = false
+					# bh-028: a monster's pool can be grazed by an evasive hero; heroes' pools always land
+					r.graze = true
+					r.evadable = source is Actor and is_instance_valid(source) and (source as Actor).team == BH.Team.ENEMY
 					r.blockable = false
 					a.receive_hit(r, source if is_instance_valid(source) else null, a.center())
 				if status_id != &"":

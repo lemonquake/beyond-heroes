@@ -154,6 +154,8 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 		if _enemy_retaliation_cd > 0.0:
 			return DamageResult.new()
 		req.tags[&"retaliation_limit"] = maxf(1.0, floorf(max_hp() * ENEMY_RETALIATION_HP_CAP))
+	if req.graze and team == BH.Team.ENEMY:
+		req.evadable = false        # bh-028: grazing area hits is the heroes' (and their allies') art, not the monsters'
 	_positional_bonuses(req, attacker)
 	_prepare_incoming(req, attacker)
 	if attacker is Player:

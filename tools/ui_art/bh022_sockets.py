@@ -1,7 +1,7 @@
 """bh-022: socket sprites drawn on item cells and tooltips.
 
   game/assets/ui/slots/socket_empty.png          an open socket: antique bronze bezel around a dark pit
-  game/assets/ui/slots/socket_<family>_<g>.png   the bezel holding one crystal (8 families x 4 grades):
+  game/assets/ui/slots/socket_<family>_<g>.png   the bezel holding one crystal (12 families x 4 grades):
       g0 Fragment     a rough chipped shard
       g1 Shard        a long hexagonal crystal
       g2 Crystalline  an octagonal step-cut stone
@@ -27,6 +27,11 @@ FAMILIES = {
     "bloodrift": (0.85, 0.1, 0.16),
     "essencerift": (0.45, 0.45, 1.0),
     "aetherift": (0.7, 0.95, 1.0),
+    # bh-028: the celestial orbs
+    "sora": (0.55, 0.85, 1.0),
+    "luna": (0.72, 0.68, 1.0),
+    "sol": (1.0, 0.72, 0.25),
+    "airah": (0.6, 1.0, 0.82),
 }
 # thundra and nova share a hue family: thundra reads as electric (cooler highlight, violet shadow)
 SHADOW_TINT = {"thundra": (0.35, 0.25, 0.55), "nova": (0.6, 0.42, 0.12)}
@@ -220,7 +225,7 @@ def main():
             finish(im).save(os.path.join(OUT, "socket_%s_%d.png" % (fam, g)))
             count += 1
     # preview sheet
-    sheet = Image.new("RGBA", (SIZE * 9, SIZE * 4), (22, 20, 26, 255))
+    sheet = Image.new("RGBA", (SIZE * (len(FAMILIES) + 1), SIZE * 4), (22, 20, 26, 255))
     for g in range(4):
         sheet.alpha_composite(Image.open(os.path.join(OUT, "socket_empty.png")), (0, g * SIZE))
         for i, fam in enumerate(FAMILIES):

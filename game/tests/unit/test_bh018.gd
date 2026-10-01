@@ -55,7 +55,7 @@ func test_thirty_two_crystals() -> void:
 			ok(DataCrystals.describe(id).size() >= 1, "%s says what it does" % id)
 			var it := DB.make_item(id)
 			eq(it.rarity, b.fixed_rarity, "%s keeps its grade's colour" % id)
-	eq(n, 32, "8 families x 4 grades")
+	eq(n, 48, "12 families x 4 grades (bh-028: four celestial orbs)")
 	eq(DataCrystals.price(&"ember_fragment"), 5000, "the lowest tier costs 5,000 gold")
 	ok(DataCrystals.price(&"ember_orbital") > DataCrystals.price(&"ember_crystalline"), "higher grades cost more")
 	ok(DataCrystals.price(&"aetherift_fragment") > DataCrystals.price(&"ember_fragment"), "Aetherift costs more")

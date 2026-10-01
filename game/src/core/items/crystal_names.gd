@@ -5,7 +5,7 @@ class_name CrystalNames
 ## ranked by power (ties: DataCrystals.ORDER), then:
 ##   one family       its own suffix, by tier = the best crystal's grade, or more when many are set (power 3 / 6 / 10):
 ##                    "of Embers" < "of the Burning" < "of the Blaze" < "of the Inferno"
-##   two families     the pair's hybrid name (all 28 pairs), grander with power:  "of the Nova Blast" <
+##   two families     the pair's hybrid name (all 66 pairs), grander with power:  "of the Nova Blast" <
 ##                    "of the Grand Nova Blast" < "of the Eternal Nova Blast"
 ##   three families   the top pair's name with the third family's epithet:  "of the Venomous Nova Blast"
 ##   four             "of the Fourfold Nova Blast"
@@ -28,12 +28,18 @@ const SINGLE := {
 	&"bloodrift": ["of Leeching", "of the Bloodletter", "of the Crimson Rift", "of the Blood Sovereign"],
 	&"essencerift": ["of Whispers", "of the Mindrift", "of the Soul Siphon", "of the Starved Void"],
 	&"aetherift": ["of the Aether", "of Riftlight", "of the Worldtear", "of the Firmament"],
+	# bh-028: the celestial orbs
+	&"sora": ["of the Open Sky", "of the Skyward", "of the Zenith", "of the Endless Sky"],
+	&"luna": ["of Moonlight", "of the Crescent", "of the Full Moon", "of the Silver Moon"],
+	&"sol": ["of Sunlight", "of the Dawnfire", "of High Noon", "of the Undying Sun"],
+	&"airah": ["of the Breeze", "of the Gale", "of the Windborne", "of the Hurricane"],
 }
 
 ## The epithet a third family lends a hybrid name.
 const EPITHET := {
 	&"ember": "Burning", &"aqua": "Tidal", &"nova": "Radiant", &"thundra": "Thundering",
 	&"vipera": "Venomous", &"bloodrift": "Bloodthirsty", &"essencerift": "Whispering", &"aetherift": "Aetheric",
+	&"sora": "Skyborn", &"luna": "Moonlit", &"sol": "Sunlit", &"airah": "Windswept",
 }
 
 ## Every unordered pair of families -> the hybrid's name (key: the two ids in DataCrystals.ORDER order, "a+b").
@@ -66,6 +72,17 @@ const HYBRID := {
 	"bloodrift+essencerift": "Devourer",
 	"bloodrift+aetherift": "Bleeding Sky",
 	"essencerift+aetherift": "Astral Mind",
+	# bh-028: pairs with the celestial orbs
+	"ember+sora": "Skyfire", "ember+luna": "Ashen Moon", "ember+sol": "Solar Pyre", "ember+airah": "Wildfire",
+	"aqua+sora": "Rainfall", "aqua+luna": "Moonwater", "aqua+sol": "Sunlit Sea", "aqua+airah": "Squall",
+	"nova+sora": "Starward Sky", "nova+luna": "Starlit Moon", "nova+sol": "Daystar", "nova+airah": "Comet Wind",
+	"thundra+sora": "Thunderhead", "thundra+luna": "Storm Moon", "thundra+sol": "Sunstrike", "thundra+airah": "Cyclone",
+	"vipera+sora": "Poisoned Sky", "vipera+luna": "Moonshade", "vipera+sol": "Blight Sun", "vipera+airah": "Miasma",
+	"bloodrift+sora": "Red Sky", "bloodrift+luna": "Crimson Moon", "bloodrift+sol": "Bloodsun", "bloodrift+airah": "Bloodwind",
+	"essencerift+sora": "Dreaming Sky", "essencerift+luna": "Lunar Mind", "essencerift+sol": "Sunlit Mind", "essencerift+airah": "Whispering Wind",
+	"aetherift+sora": "Riven Sky", "aetherift+luna": "Rift Moon", "aetherift+sol": "Rift Sun", "aetherift+airah": "Aether Gale",
+	"sora+luna": "Night Sky", "sora+sol": "Clear Heaven", "sora+airah": "High Wind",
+	"luna+sol": "Eclipse Crown", "luna+airah": "Moonwind", "sol+airah": "Solar Wind",
 }
 
 ## [[family, power, best grade], ...] strongest first, for the crystals in `gems` (ids or "" for an empty socket).
