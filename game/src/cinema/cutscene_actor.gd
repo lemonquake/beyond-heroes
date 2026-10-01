@@ -45,6 +45,38 @@ static func make(id_or_path: String, scale_factor := 1.0, tint := Color.WHITE) -
 				lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
 	return a
 
+## bh-029: the hero's own body as it looks right now: the HeroLook (face, hair, height, build) and every worn piece
+## (HeroWear and boss regalia). A plain `make` of hero.glb showed the bare base body. A CharacterVisual dresses it;
+## its AnimationTree is switched off so the cutscene drives the AnimationPlayer directly like any other actor.
+static func make_hero(app: Dictionary, look: Dictionary, equipment: Equipment) -> CutsceneActor:
+	var a := CutsceneActor.new()
+	a.name = "Actor_hero"
+	a.process_mode = Node.PROCESS_MODE_ALWAYS
+	var cv := CharacterVisual.new()
+	cv.name = "HeroVisual"
+	a.add_child(cv)
+	cv.setup(String(app.get("model", "")), float(app.get("scale", 1.0)), app.get("tint", Color.WHITE), app.get("pers", &""))
+	if not look.is_empty():
+		cv.set_look(look)
+	if equipment:
+		cv.dress_equipment(equipment)
+	if cv.tree:
+		cv.tree.active = false
+	cv.process_mode = Node.PROCESS_MODE_DISABLED
+	a.model = cv
+	a.anim = cv.anim_player
+	if a.anim:
+		a.anim.process_mode = Node.PROCESS_MODE_ALWAYS
+	a.skeleton = cv.skeleton
+	a._collect(cv, a._meshes)
+	if a.anim:
+		for lib_name in a.anim.get_animation_library_list():
+			var lib := a.anim.get_animation_library(lib_name)
+			for an in lib.get_animation_list():
+				lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
+		a.anim.play(&"idle" if a.anim.has_animation(&"idle") else a.anim.current_animation)
+	return a
+
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:
 		return n

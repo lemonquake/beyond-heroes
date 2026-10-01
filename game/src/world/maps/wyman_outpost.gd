@@ -54,6 +54,7 @@ func compose() -> void:
 	_west_gate = _gate_angle(DataIsland.road("wy_west_road").points)
 	_marsh_gate = _gate_angle(DataIsland.road("wy_marsh_road").points)
 	_marsh()
+	_jetty()
 	_stockade()
 	_fire_ring()
 	_tents()
@@ -150,16 +151,22 @@ func _splat(x: float, z: float) -> Color:
 # the marsh and the stockade
 
 func _marsh() -> void:
-	water(Rect2(MARSH_X + 1.0, -72, 105.0 - MARSH_X - 1.0, 140), MARSH_Y, Color(0.1, 0.2, 0.16), Color(0.02, 0.05, 0.04), 0.25, 2.0, 0.12)
+	var w := water(Rect2(MARSH_X + 1.0, -72, 105.0 - MARSH_X - 1.0, 140), MARSH_Y, Color(0.1, 0.2, 0.16), Color(0.02, 0.05, 0.04), 0.25, 2.0, 0.12)
+	# bh-029: still black marsh water. The default near-mirror ripples caught the moon as a grid of white discs.
+	if w.material_override is ShaderMaterial:
+		w.material_override.set_shader_parameter("rough", 0.3)
+		w.material_override.set_shader_parameter("ripple", 0.25)
 	mist(Rect2(MARSH_X + 2.0, -72, 103.0 - MARSH_X, 140), MARSH_Y + 1.0, Color(0.2, 0.25, 0.25), 0.3)
 	for i in 34:
 		var x := MARSH_X + 4.0 + rng.randf() * 60.0
 		var z := -68.0 + rng.randf() * 130.0
-		decor("tree_dead_a" if i % 2 else "tree_dead_b", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.9, 1.4), true, true, 6.0)
+		if not _jetty_lane(x, z, 3.0):
+			decor("tree_dead_a" if i % 2 else "tree_dead_b", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.9, 1.4), true, true, 6.0)
 	for i in 80:
 		var x := MARSH_X - 1.0 + rng.randf() * 24.0
 		var z := -55.0 + rng.randf() * 100.0
-		decor("fern", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.6, 1.0))
+		if not _jetty_lane(x, z, 1.0):
+			decor("fern", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.6, 1.0))
 	for i in 6:
 		decor("pillar_broken", Vector3(MARSH_X + 8.0 + rng.randf() * 18.0, -0.6, -40.0 + i * 14.0), rng.randf() * 360.0, 0.7, true, true, 12.0)
 	# will-o'-lights far out on the water
@@ -168,7 +175,10 @@ func _marsh() -> void:
 		light(p, Color(0.5, 1.0, 0.8), 1.6, 7.0, false, true)
 	# bh-021: the marsh line stays closed except where the Marsh Gate's causeway leaves the camp
 	boundary(Vector3(MARSH_X - 2.0, -4.0, -66.0), Vector3(MARSH_X - 2.0, -4.0, 2.6), 12.0)
-	boundary(Vector3(MARSH_X - 2.0, -4.0, 11.8), Vector3(MARSH_X - 2.0, -4.0, 54.0), 12.0)
+	# bh-029: open where the Marsh Jetty leaves the bank (_jetty)
+	var jz := DataZarael.WY_JETTY_ROOT.y
+	boundary(Vector3(MARSH_X - 2.0, -4.0, 11.8), Vector3(MARSH_X - 2.0, -4.0, jz - 3.6), 12.0)
+	boundary(Vector3(MARSH_X - 2.0, -4.0, jz + 3.6), Vector3(MARSH_X - 2.0, -4.0, 54.0), 12.0)
 
 ## bh-021: the Marsh Gate — an iron gate and a bar across the arch until Sir Aldric opens it (mq_marsh_gate_open), a
 ## short railed causeway of planks out over the reeds, and the boundary into the Weeping Causeway map.
@@ -202,7 +212,184 @@ func _marsh_gate_bar() -> void:
 	spawn(&"marsh_gate", Vector3(c.x - 3.5, 0, c.y - 1.0), -95.0, true)
 
 func _in_gap(deg: float) -> bool:
-	return absf(wrapf(deg - _north_gate, -180.0, 180.0)) < 7.5 or absf(wrapf(deg - _west_gate, -180.0, 180.0)) < 7.5 		or absf(wrapf(deg - _marsh_gate, -180.0, 180.0)) < 7.5
+	return absf(wrapf(deg - _north_gate, -180.0, 180.0)) < 7.5 or absf(wrapf(deg - _west_gate, -180.0, 180.0)) < 7.5 		or absf(wrapf(deg - _marsh_gate, -180.0, 180.0)) < 7.5 or absf(wrapf(deg - DataZarael.WY_JETTY_GATE_DEG, -180.0, 180.0)) < 5.0
+
+## bh-029: the Marsh Jetty — a small gate in the south-east of the stockade, a boardwalk down to the bank, a square
+## landing on the bank and a jetty out over the marsh. Once Kethrax has fallen, Agdao's ship (the Sunwake) lies at its end
+## and Captain Ilsa Rhondar waits by the gangplank (DataNpcsZarael; she sails to Zarael). DataZarael holds every spot.
+## Every piece is a whole `zr_jetty_wood` segment (4 m long, 3 m deck) laid end to end at exactly its own length, so the
+## deck is one unbroken walk from the gate to the gangplank.
+const JETTY_SEG := 4.0
+const JETTY_HALF_W := 1.5
+
+func _jetty() -> void:
+	var root: Vector2 = DataZarael.WY_JETTY_ROOT       # centre of the landing
+	var end: Vector2 = DataZarael.WY_JETTY_END
+	var gate: Vector2 = DataZarael.WY_WALK[0]
+	# deck height: clear of the bank everywhere under the landing, never below the marsh's flood line
+	var deck := MARSH_Y + 1.0
+	for dx in [-JETTY_SEG, 0.0, JETTY_SEG]:
+		for dz in [-3.0, 0.0, 3.0]:
+			deck = maxf(deck, ground(root.x + dx, root.y + dz) + 0.08)
+	# the landing: 2 x 2 segments (8 m x 6 m), mooring posts on the outside edges
+	for ix in 2:
+		for iz in 2:
+			var c := Vector3(root.x + (ix - 0.5) * JETTY_SEG, deck + 0.02, root.y + (iz - 0.5) * 2.0 * JETTY_HALF_W)
+			_jetty_seg(c, 90.0 if iz == 0 else -90.0)
+	# the jetty: whole segments from the landing's east edge to the end. Each segment's own mooring post stands on the
+	# north edge; a matching post on the south edge, and rope rails run post to post along both sides.
+	var x0 := root.x + JETTY_SEG
+	var segs := int(round((end.x - x0) / JETTY_SEG))
+	var tip := x0 + segs * JETTY_SEG
+	for k in segs:
+		_jetty_seg(Vector3(x0 + (k + 0.5) * JETTY_SEG, deck, end.y), 90.0)
+	for side in [-1, 1]:
+		var line: Array[Vector3] = [Vector3(x0 + 0.15, deck, end.y + side * 1.62)]
+		for k in segs:
+			line.append(Vector3(x0 + (k + 0.5) * JETTY_SEG, deck, end.y + side * 1.62))
+		line.append(Vector3(tip - 0.15, deck, end.y + side * 1.62))
+		for i in line.size():
+			if side > 0 or i == 0 or i == line.size() - 1:
+				_post(line[i])
+			if i > 0:
+				_rope(line[i - 1] + Vector3(0, 0.6, 0), line[i] + Vector3(0, 0.6, 0))
+	# the boardwalk: whole segments from the stockade gate down to the landing's centre (hidden under the landing there),
+	# each tilted to follow the bank and never below the deck
+	var dir := (root - gate).normalized()
+	var run := gate.distance_to(root)
+	var n := ceili(run / JETTY_SEG)
+	var step := run / n
+	var hts: Array[float] = []
+	for k in n + 1:
+		var p := gate + dir * step * k
+		var h := maxf(ground(p.x, p.y) + 0.1, deck)
+		if k < n:
+			var m := gate + dir * step * (k + 0.5)
+			h = maxf(h, ground(m.x, m.y) + 0.1)
+		hts.append(h)
+	hts[n] = deck
+	for k in n:
+		var a := gate + dir * step * k
+		var b := gate + dir * step * (k + 1)
+		var a3 := Vector3(a.x, hts[k] + 0.006 * (k % 2), a.y)
+		var b3 := Vector3(b.x, hts[k + 1] + 0.006 * (k % 2), b.y)
+		var f := (b3 - a3).normalized()
+		var x := Vector3.UP.cross(f).normalized()
+		var seg := _jetty_seg((a3 + b3) * 0.5, 0.0)
+		seg.basis = Basis(x, f.cross(x), f * ((b3 - a3).length() / JETTY_SEG))
+		keep_clear(a.x, a.y, 3.0)
+	keep_clear(root.x, root.y, 6.0)
+	# rails: nobody steps off into the black water. The landing's west part rests on the bank (open to the camp).
+	var bx := MARSH_X - 2.0
+	var lz0 := root.y - 2.0 * JETTY_HALF_W
+	var lz1 := root.y + 2.0 * JETTY_HALF_W
+	var lx1 := root.x + JETTY_SEG
+	var y0 := deck - 3.0
+	boundary(Vector3(bx, y0, lz0 - 0.2), Vector3(lx1, y0, lz0 - 0.2), 8.0, 0.4)
+	boundary(Vector3(bx, y0, lz1 + 0.2), Vector3(lx1, y0, lz1 + 0.2), 8.0, 0.4)
+	boundary(Vector3(lx1 + 0.2, y0, lz0), Vector3(lx1 + 0.2, y0, end.y - JETTY_HALF_W), 8.0, 0.4)
+	boundary(Vector3(lx1 + 0.2, y0, end.y + JETTY_HALF_W), Vector3(lx1 + 0.2, y0, lz1), 8.0, 0.4)
+	boundary(Vector3(lx1, y0, end.y - JETTY_HALF_W - 0.2), Vector3(tip, y0, end.y - JETTY_HALF_W - 0.2), 8.0, 0.4)
+	boundary(Vector3(lx1, y0, end.y + JETTY_HALF_W + 0.2), Vector3(tip, y0, end.y + JETTY_HALF_W + 0.2), 8.0, 0.4)
+	boundary(Vector3(tip + 0.2, y0, end.y - JETTY_HALF_W), Vector3(tip + 0.2, y0, end.y + JETTY_HALF_W), 8.0, 0.4)
+	# lamps stand on the deck's edge, their arms over the boards
+	lamp_post(Vector3(lx1 - 0.6, deck + 0.02, lz0 + 0.25), -90.0, false)
+	lamp_post(Vector3(tip - 1.0, deck, end.y + JETTY_HALF_W - 0.25), 90.0, false)
+	spawn(&"jetty", Vector3(DataZarael.WY_SPAWN.x, deck, DataZarael.WY_SPAWN.z), -90.0)
+	signpost(Vector2(root.x - 4.5, lz1 + 1.5), [["Marsh Jetty", Vector2(1, 0)]])
+	if DataZarael.ship_ready(Game.hero):
+		var s := DataZarael.WY_SHIP
+		if ResourceLoader.exists(ENV_DIR % "zr_ship"):
+			var ship := kit("zr_ship", Vector3(s.x, MARSH_Y + 0.1, s.z), 0.0, 1.0, props)
+			ship.add_to_group(&"zr_ship_model")
+		# the gangplank: from the jetty's last boards up onto the ship's rail (hull side at s.x - 3, rail 2.95 m up)
+		_gangplank(Vector3(tip - 0.9, deck, end.y), Vector3(s.x - 2.75, MARSH_Y + 0.1 + 2.98, end.y))
+		light(Vector3(s.x, MARSH_Y + 4.0, s.z - 9.0), Color(1.0, 1.0, 1.0), 2.0, 9.0, false, true)
+		light(Vector3(s.x, MARSH_Y + 4.5, s.z + 9.0), Color(1.0, 1.0, 1.0), 2.0, 9.0, false, true)
+
+## bh-029: true near the jetty, its landing, the boardwalk or the ship (no tree or fern grows through the boards).
+func _jetty_lane(x: float, z: float, margin: float) -> bool:
+	var root: Vector2 = DataZarael.WY_JETTY_ROOT
+	if x > root.x - 5.0 - margin and x < DataZarael.WY_SHIP.x + 4.0 + margin and absf(z - root.y) < 3.2 + margin:
+		return true
+	if absf(x - DataZarael.WY_SHIP.x) < 4.0 + margin and absf(z - DataZarael.WY_SHIP.z) < 15.0 + margin:
+		return true
+	var g: Vector2 = DataZarael.WY_WALK[0]
+	var q := Geometry2D.get_closest_point_to_segment(Vector2(x, z), g, root)
+	return q.distance_to(Vector2(x, z)) < 2.0 + margin
+
+## One jetty segment (deck top at `c`); yaw 90 puts its mooring post on the north (-Z) side, -90 on the south.
+func _jetty_seg(c: Vector3, yaw: float) -> Node3D:
+	return kit("zr_jetty_wood", c, yaw, 1.0, props)
+
+## A mooring post standing in the marsh beside the deck, its top 0.75 m above the boards (matches zr_jetty_wood's own).
+func _post(at: Vector3) -> void:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.14
+	cm.bottom_radius = 0.16
+	cm.height = 3.3
+	cm.radial_segments = 8
+	mi.mesh = cm
+	mi.material_override = MaterialLibrary.env("BH_WoodDark")
+	mi.position = at + Vector3(0, 0.75 - 1.65, 0)
+	props.add_child(mi)
+	var cap := MeshInstance3D.new()
+	var cc := CylinderMesh.new()
+	cc.top_radius = 0.16
+	cc.bottom_radius = 0.16
+	cc.height = 0.06
+	cc.radial_segments = 8
+	cap.mesh = cc
+	cap.material_override = MaterialLibrary.env("BH_Iron")
+	cap.position = at + Vector3(0, 0.75, 0)
+	props.add_child(cap)
+
+## A slack-free rope rail between two points.
+func _rope(a: Vector3, b: Vector3) -> void:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.035
+	cm.bottom_radius = 0.035
+	cm.height = a.distance_to(b)
+	cm.radial_segments = 6
+	cm.rings = 1
+	mi.mesh = cm
+	mi.material_override = MaterialLibrary.env("BH_Rope")
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var up := (b - a).normalized()
+	var side := up.cross(Vector3.FORWARD if absf(up.dot(Vector3.FORWARD)) < 0.95 else Vector3.RIGHT).normalized()
+	mi.transform = Transform3D(Basis(side, up, side.cross(up)), (a + b) * 0.5)
+	deco.add_child(mi)
+
+## A boarding plank with cleats and rope hand-lines, from `a` (on the jetty) to `b` (on the ship's rail).
+func _gangplank(a: Vector3, b: Vector3) -> void:
+	var f := (b - a).normalized()
+	var x := Vector3.UP.cross(f).normalized()
+	var basis := Basis(x, f.cross(x), f)
+	var len := a.distance_to(b)
+	var root3 := Node3D.new()
+	root3.name = "Gangplank"
+	root3.transform = Transform3D(basis, a)
+	props.add_child(root3)
+	var wood := MaterialLibrary.env("BH_Wood")
+	var dark := MaterialLibrary.env("BH_WoodDark")
+	for i in 3:
+		_box(root3, Vector3((i - 1) * 0.29, 0.03, len * 0.5), Vector3(0.27, 0.06, len), wood)
+	for i in int(len / 0.45):
+		_box(root3, Vector3(0, 0.08, 0.3 + i * 0.45), Vector3(0.84, 0.04, 0.06), dark)
+	for sx in [-1, 1]:
+		_box(root3, Vector3(sx * 0.46, 0.45, 0.15), Vector3(0.07, 0.9, 0.07), dark)
+		_rope(a + basis * Vector3(sx * 0.46, 0.85, 0.15), a + basis * Vector3(sx * 0.46, 0.25, len - 0.1))
+
+func _box(parent: Node3D, pos: Vector3, size: Vector3, mat: Material) -> void:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = pos
+	parent.add_child(mi)
 
 func _stockade() -> void:
 	var n := int(TAU * R / 4.0)

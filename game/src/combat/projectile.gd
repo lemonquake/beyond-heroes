@@ -45,6 +45,7 @@ static func spawn(parent: Node, from: Vector3, dir: Vector3, speed: float, p_req
 	p.target_mask = mask
 	p.element = p_element
 	p.velocity = dir.normalized() * speed
+	Perf.mark_fx(p)
 	parent.add_child(p)
 	p.global_position = from
 	p._build_body(look)

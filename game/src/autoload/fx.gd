@@ -151,6 +151,7 @@ func spawn(node: Node3D, pos: Vector3) -> void:
 	if world == null or not is_instance_valid(world):
 		node.queue_free()
 		return
+	Perf.mark_fx(node)
 	world.add_child(node)
 	node.global_position = pos
 

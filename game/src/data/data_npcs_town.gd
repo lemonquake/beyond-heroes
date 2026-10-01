@@ -57,7 +57,7 @@ static func _hesta() -> NpcDef:
 					[[], "rumor_1"],
 				]},
 				"rumor_1": {"text": "Fishers say goblins are picking over the burnt village for anything the dead left behind. And somebody saw **orc** tracks near the old watchtower. Orcs, on Salmonan. I told him to drink less.", "next": "hub"},
-				"rumor_2": {"text": "A caravan from the north road brought word from **Corvessa**: shipyards working through the night, and nobody will say for whom. And the orc tracks were real. Hald's men found a camp.", "next": "hub"},
+				"rumor_2": {"text": "A caravan from the north road brought word from **Zarael**: a ship with a serpent on its stern asking at every harbour for a hero, and nobody will say what for. And the orc tracks were real. Hald's men found a camp.", "next": "hub"},
 				"rumor_3": {"text": "Every lamp in this house leaned east the night the temple seal broke. Marrow swears the tide ran wrong the same hour. The **Lantern** crowd has been very quiet since. That is never good.", "next": "hub"},
 				"rumor_4": {"text": "The dead stopped walking and the whole town slept. Then a ship came in from **Emberhal** with half its crew and a hold full of ash. The war the traders talk about is not a story any more.", "next": "hub"},
 				"warden": {"text": "You are the one who went into the Hollow Throne and came back. Your first night is on the house. Do not argue, it is my house.",
@@ -335,7 +335,7 @@ static func _tessaly() -> NpcDef:
 						"Old folk say the **drowned bells** are rung by people who went into the sea on purpose, a long way from here. My mother said never to row toward the sound. My mother was usually right."],
 					"actions": [{"relationship": 3}], "next": "hub"},
 				"ysmer": {"text": [
-						"Sailors from **Corvessa** talk about a kingdom called **Ysmer**, the **Drowned Crown**. A bell under a wave on deep green. They sing to the great serpents of the deep.",
+						"Sailors from **Zarael** talk about a kingdom called **Ysmer**, the **Drowned Crown**. A bell under a wave on deep green. They sing to the great serpents of the deep.",
 						"If that is who is ringing the bells off our point, then they are singing to what is under this island. And they are patient."],
 					"next": "hub"},
 			},
@@ -358,7 +358,7 @@ static func _aurand() -> NpcDef:
 					]},
 				"islands": {"text": [
 						"**Salmonan**, here in the west: cliffs, coves, old forests, the temple. **Veldmoor** to the north, the biggest, with the Accord's Registry at **Aubren**.",
-						"**Corvessa** in the east: harbours and shipyards and the richest guild houses. **Emberhal** in the south: black sand and hot springs, and closest to trouble."],
+						"**Zarael** in the east: stepped cities older than the Accord, with wire laid in the stone. Few ships come from there now. **Emberhal** in the south: black sand and hot springs, and closest to trouble."],
 					"next": "hub"},
 				"nations": {"text": [
 						"Beyond the Accord's seas, and I draw them with a broad brush because nobody brings back good surveys. The **Kharvenn Dominion**, grey and iron. The **Sulvane Theocracy**, fire temples in the south-east. **Ysmer**, somewhere under the green water, if half the stories are true.",

@@ -316,7 +316,7 @@ const LEGENDS := {
 		"skills": [&"sw_cleave", &"lg_stormbreak", &"sw_charge", &"sw_mend"], "tint": Color(0.42, 0.5, 0.8), "kit": [],
 		"spirit": {"weapon": &"sword", "element": Elements.LIGHTNING, "share": 0.5, "power": 1.4},
 		"mods": [["attack_speed", "more", 0.1], ["crit_chance", "flat", 0.04]],
-		"origin": "A Corvessa duelist who called lightning down her own blade when something vast rose under her ship. The storm took them both.",
+		"origin": "A Zarael duelist who called lightning down her own blade when something vast rose under her ship. The storm took them both.",
 		"pitch": "Lightning in a sword-arm. She clears whole packs in one breath."},
 	&"maudra": {"name": "Maudra Vell", "title": "the Lantern Saint", "class": &"mystic", "trait": &"devoted", "level": 11, "price": 5000,
 		"skills": [&"my_bolt", &"lg_sanctuary", &"my_ward", &"lg_dawn"], "tint": Color(0.7, 0.62, 0.4), "kit": [],
@@ -471,7 +471,7 @@ const MYTHIC_SUMMON := {
 		"skills": [&"my_bolt", &"lg_stormhymn", &"my_mend", &"my_ward"], "tint": Color(0.46, 0.5, 0.86),
 		"spirit": {"weapon": &"staff", "element": Elements.LIGHTNING, "share": 1.0, "power": 1.75},
 		"mods": [["elemental_damage", "inc", 0.32], ["max_mana", "inc", 0.3]], "summon_only": true,
-		"origin": "Sang on the cliffs of Corvessa until the storm he called drowned the fleet that came for them.",
+		"origin": "Sang on the cliffs of Zarael until the storm he called drowned the fleet that came for them.",
 		"pitch": "Lightning that leaps through whole packs."},
 }
 const ETERNAL_SUMMON := {
@@ -531,7 +531,7 @@ const TRAITS := {
 const ORIGINS := [
 	"Fell with the forest garrison the night the village burned.",
 	"Fell on the black sand of Emberhal, holding the line against the orc war-host.",
-	"Drowned off the Corvessa reefs when something vast turned beneath the ship.",
+	"Drowned off the Zarael reefs when something vast turned beneath the ship.",
 	"Fell guarding the Registry gate at Aubren.",
 	"Burned in a Tyrant's fire on the cane fields of Emberhal.",
 	"Crushed beneath an ogre's club on the north road.",

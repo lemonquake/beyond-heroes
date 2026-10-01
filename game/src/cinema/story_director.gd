@@ -8,12 +8,19 @@ class_name StoryDirector
 static func connect_events() -> void:
 	Events.world_flag_set.connect(_on_flag)
 	Events.boss_defeated.connect(_on_boss)
+	Events.map_loaded.connect(_on_map)
+
+## bh-029: Zarael — the ship at Wyman, Terax's welcome, relay pylons, Vaults, the Dawn Engine (ZaraelStory).
+static func _on_map(map_id: StringName) -> void:
+	ZaraelStory.on_map(map_id)
 
 static func _on_flag(flag: StringName, v: Variant) -> void:
+	ZaraelStory.on_flag(flag, v)
 	if flag == &"kethrax_intro_seen" and bool(v) and not Game.has_flag(&"boss_kethrax_defeated"):
 		CutscenePlayer.play(&"kethrax_intro")
 
 static func _on_boss(boss: Node) -> void:
+	ZaraelStory.on_boss(boss)
 	if boss == null or not is_instance_valid(boss) or not ("def" in boss) or boss.def == null:
 		return
 	if boss.def.id != &"kethrax":

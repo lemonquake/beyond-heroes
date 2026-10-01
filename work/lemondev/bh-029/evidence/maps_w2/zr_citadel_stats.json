@@ -1,0 +1,75 @@
+{
+  "build_and_bake_ms": 2189,
+  "mesh_instances": 481,
+  "nav_polygons": 2668,
+  "nodes": 1544,
+  "omni_by_parent": {
+    "@Node3D@260": 1,
+    "@Node3D@262": 1,
+    "@Node3D@264": 1,
+    "@Node3D@266": 1,
+    "@Node3D@268": 1,
+    "@Node3D@270": 1,
+    "@Node3D@272": 1,
+    "@Node3D@274": 1,
+    "@Node3D@276": 1,
+    "@Node3D@282": 1,
+    "@Node3D@291": 2,
+    "@Node3D@293": 1,
+    "@Node3D@294": 1,
+    "DawnEngine": 1,
+    "Lights": 24
+  },
+  "omni_lights": 39,
+  "shadowed_omni": 0,
+  "spawns": [
+    "bridge_road",
+    "start"
+  ],
+  "views": {
+    "abbot_camp": {
+      "draw_calls": 106,
+      "primitives": 161818
+    },
+    "arena": {
+      "draw_calls": 207,
+      "primitives": 385200
+    },
+    "avenue": {
+      "draw_calls": 364,
+      "primitives": 683114
+    },
+    "engine": {
+      "draw_calls": 152,
+      "primitives": 188686
+    },
+    "game_arena": {
+      "draw_calls": 32,
+      "primitives": 32256
+    },
+    "game_gate": {
+      "draw_calls": 48,
+      "primitives": 40150
+    },
+    "game_stairs": {
+      "draw_calls": 54,
+      "primitives": 68520
+    },
+    "gate": {
+      "draw_calls": 371,
+      "primitives": 772496
+    },
+    "overview": {
+      "draw_calls": 460,
+      "primitives": 1021021
+    },
+    "siege_camp": {
+      "draw_calls": 225,
+      "primitives": 282380
+    },
+    "topdown": {
+      "draw_calls": 426,
+      "primitives": 984142
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "build_and_bake_ms": 2166,
+  "mesh_instances": 402,
+  "nav_polygons": 2270,
+  "nodes": 1034,
+  "omni_by_parent": {
+    "@Node3D@310": 1,
+    "@Node3D@312": 1,
+    "@Node3D@314": 1,
+    "@Node3D@316": 1,
+    "@Node3D@318": 1,
+    "@Node3D@320": 1,
+    "@Node3D@322": 1,
+    "@Node3D@324": 1,
+    "@Node3D@326": 1,
+    "@Node3D@332": 1,
+    "@Node3D@341": 2,
+    "@Node3D@343": 1,
+    "@Node3D@344": 1,
+    "Lights": 23,
+    "WardPylon_jade_sepulchre": 1,
+    "WardPylon_obsidian_engine": 1,
+    "WardPylon_veinworks": 1
+  },
+  "omni_lights": 40,
+  "shadowed_omni": 0,
+  "spawns": [
+    "barrens_road",
+    "start",
+    "citadel_road"
+  ],
+  "views": {
+    "game_platform": {
+      "draw_calls": 69,
+      "primitives": 253548
+    },
+    "game_pylon": {
+      "draw_calls": 68,
+      "primitives": 143410
+    },
+    "game_south": {
+      "draw_calls": 93,
+      "primitives": 140596
+    },
+    "game_span": {
+      "draw_calls": 63,
+      "primitives": 136470
+    },
+    "gorge": {
+      "draw_calls": 128,
+      "primitives": 393026
+    },
+    "north_gate": {
+      "draw_calls": 141,
+      "primitives": 99706
+    },
+    "overview": {
+      "draw_calls": 472,
+      "primitives": 795871
+    },
+    "platform": {
+      "draw_calls": 197,
+      "primitives": 349868
+    },
+    "south_gate": {
+      "draw_calls": 224,
+      "primitives": 399104
+    },
+    "span": {
+      "draw_calls": 372,
+      "primitives": 742768
+    },
+    "topdown": {
+      "draw_calls": 413,
+      "primitives": 749260
+    },
+    "ward_pylons": {
+      "draw_calls": 122,
+      "primitives": 284978
+    }
+  }
+}

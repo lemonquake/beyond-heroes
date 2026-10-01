@@ -14,7 +14,8 @@ static func populate(map: MapRoot) -> Array:
 			continue
 		var n := Npc.new().setup(def)
 		holder.add_child(n)
-		n.global_position = map.to_global(def.position) + Vector3.UP * ground_height(map, def.position)
+		# bh-029: position.y only lifts the ground probe (an NPC on top of Agdao's pyramid); the NPC stands on what it finds
+		n.global_position = map.to_global(Vector3(def.position.x, 0.0, def.position.z)) + Vector3.UP * ground_height(map, def.position)
 		out.append(n)
 	return out
 

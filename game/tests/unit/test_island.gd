@@ -76,7 +76,7 @@ func test_data_is_consistent() -> void:
 		var b := DataIsland.place(r.b)
 		ok(not a.is_empty() and not b.is_empty(), "%s joins real places" % r.id)
 		ok(a.map == r.map and b.map == r.map, "%s: both ends on %s" % [r.id, r.map])
-		ok(DataIsland.MAP_ORIGIN.has(StringName(r.map)), "%s is on a charted surface map" % r.id)
+		ok(DataIsland.is_surface(StringName(r.map)), "%s is on a charted surface map" % r.id)
 		ok((r.points[0] as Vector2).distance_to(a.pos) < 0.01, "%s starts on %s" % [r.id, r.a])
 		ok((r.points[r.points.size() - 1] as Vector2).distance_to(b.pos) < 0.01, "%s ends on %s" % [r.id, r.b])
 		ok(r.type in ["road", "trail"], "%s has a road type" % r.id)
@@ -85,7 +85,7 @@ func test_data_is_consistent() -> void:
 		ok(not link_ids.has(l.id), "link id %s unique" % l.id)
 		link_ids[l.id] = true
 		ok(not DataIsland.place(l.a).is_empty() and not DataIsland.place(l.b).is_empty(), "%s joins real places" % l.id)
-		ok(l.mode in ["boundary", "door", "shrine", "dungeon"], "%s has a known mode" % l.id)
+		ok(l.mode in ["boundary", "door", "shrine", "dungeon", "ship"], "%s has a known mode" % l.id)
 		if l.has("flag"):
 			ok(String(l.get("why", "")) != "", "locked link %s explains its lock" % l.id)
 	for id in DataIsland.NETWORK:
@@ -226,7 +226,8 @@ func test_topology_loops_and_early_choices() -> void:
 			adj.get_or_add(pl.id, []).append(end)
 			adj.get_or_add(end, []).append(pl.id)
 	for l in DataIsland.LINKS:
-		if l.mode == "boundary":
+		# bh-029: the ship joins Salmonan's network to Zarael's (Wyman's Marsh Jetty to Agdao's pier)
+		if l.mode == "boundary" or l.mode == "ship":
 			nodes[l.a] = true
 			nodes[l.b] = true
 			edges += 1

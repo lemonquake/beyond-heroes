@@ -46,6 +46,8 @@ func _build() -> void:
 	tree.node_selected.connect(_on_node)
 	tree.ranks_changed.connect(refresh)
 	scroll.add_child(tree)
+	# bh-029: the whole tree stays in view (the Mage's Spells page used to hide its right-hand columns)
+	scroll.resized.connect(func() -> void: tree.fit_to(scroll.size.x - 16.0))
 	var side := vbox(10)
 	side.custom_minimum_size = Vector2(430, 0)
 	row.add_child(side)

@@ -1,9 +1,13 @@
 class_name SkillDef
 extends Resource
+
 ## Active skill definition. Behaviour-specific numbers live in `params` so upgrade nodes can modify them by name.
 ##
 ## Behaviours: melee_arc, projectile, ground_aoe, self_aoe, leap, blink, buff, spin, chain, wave, dash_strike, judgment,
 ## (bh-010) flurry, spiral, aura, storm, sentry, orb, trap, vault, shadow_step, veil, mark
+
+## bh-029: no skill fires faster than once a second, whatever its base cooldown or the hero's Cooldown Reduction.
+const MIN_COOLDOWN := 1.0
 
 @export var id: StringName
 @export var display_name: String

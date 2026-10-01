@@ -181,6 +181,8 @@ func build_map(id: StringName, saved_visit := false) -> MapRoot:
 	if def == null:
 		push_error("Unknown map %s" % id)
 		return null
+	# bh-029: Zarael's Heartwire burns bright once this hero has woken the Dawn Engine
+	MaterialLibrary.wire_restored = DataZarael.has(hero, DataZarael.F_RESTORED)
 	var parsed := DataDungeons.parse(id)
 	if parsed[0] != &"":
 		def = def.duplicate()

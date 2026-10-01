@@ -2,6 +2,38 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-029 - Zarael Island, the corrupted
+
+Prepared 2 October 2026. Story and geography: docs/LORE.md §11, docs/MAPS.md (Zarael Island); contract and evidence:
+work/lemondev/bh-029/.
+
+- **A ship after Kethrax.** Once Kethrax falls, Agdao's ship, the **Sunwake**, lies at a new Marsh Jetty at Wyman
+  Outpost. Captain Ilsa Rhondar sails the hero to **Zarael**, the eastern island, and back. Old saves where Kethrax is
+  already dead get the ship at once.
+- **Agdao.** A new terraced port town bigger than Malasugue: a pier, the Wire Market, five terraces joined by grand
+  stairs, lifts and roof footbridges, a council hall and the **Crown of Steps** pyramid. **Terax**, Warden of Agdao,
+  greets the hero at the pier in a cutscene and tells of **Aljay**, who cleared the three Vaults two winters ago so
+  people could cross the **Bridge of Death**.
+- **Act IV - Zarael, the Corrupted.** The Wirekeeper, three chained relay pylons in the Coilwood, the three Vaults,
+  the Bridge of Death (Varrogh, the Deathspan Colossus), the Heart Citadel (Orvul Dram, the Leash-Abbot) and the
+  Dawn Engine.
+- **Four new regions** (levels 30-52): the Coilwood, the Glasswire Barrens, the Bridge of Death and the Heart Citadel,
+  plus three Vaults (the Jade Sepulchre, the Obsidian Engine, the Veinworks; levels 33-53) with generated floors.
+- **Thirty new monsters** with their own models, from Glyphbound Warriors and Coil Shamans to five bosses.
+- **New art.** Town and wilds kits (pyramids, terraces, houses, pylons, the bridge, the citadel), eight texture sets,
+  portraits and a painted Zarael atlas. The M map shows whichever island the hero is on.
+- **White glows.** Every glow on Zarael is pure white: the Heartwire, glyphs, lamps, pylons, Kharvenn runes and the
+  monsters' eyes and cores. Healthy current burns steady and bright; the corrupted current is dim and stutters.
+- **Six Agdao townsfolk models**: Terax, Wirekeeper Halvessa Orn, Captain Ilsa Rhondar, and Agdao's porters, traders
+  and elders.
+- **Cooldowns.** Cooldown Reduction from all sources now stacks to 50% (was 40%), and no skill fires faster than once a
+  second.
+- **Skill and talent trees fit their window.** Wide trees (the Mage's eight elements) shrink to fit instead of hiding
+  columns behind a scroll bar.
+- **Fixes.** Projectiles, hazards and skill areas no longer freeze onto the minimap. Lakes and marshes no longer show a
+  grid of white discs, and night mist no longer shows round blotches. Leaving efficiency mode after travelling no
+  longer freezes the game: it walked a list of lights from maps that had been freed.
+
 ## BH-028 - Combat scaling, the Sand Arena, evasion, celestial orbs and the Ascendant dungeons
 
 Prepared 1 October 2026. Design and numbers: docs/COMBAT_SCALING.md and docs/PLAN_bh-028.md.

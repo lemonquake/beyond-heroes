@@ -351,7 +351,7 @@ func _refresh_skills() -> void:
 		var skill_name := UITheme.label("%s%s" % [sk.name, "  (heals you)" if heal else ""], 17, UITheme.GOOD if heal else UITheme.PARCHMENT, UITheme.body_bold())
 		skill_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		v.add_child(skill_name)
-		v.add_child(UITheme.label("%d mana · %d s cooldown" % [roundi(float(sk.mana)), roundi(float(sk.cooldown))], 15, UITheme.MANA.lightened(0.3), UITheme.number_font()))
+		v.add_child(UITheme.label("%d mana · %d s cooldown" % [roundi(float(sk.mana)), roundi(maxf(SkillDef.MIN_COOLDOWN, float(sk.cooldown)))], 15, UITheme.MANA.lightened(0.3), UITheme.number_font()))
 		row.add_child(v)
 		var desc := String(sk.desc)
 		TooltipLayer.attach(row, func() -> Control: return Tips.text(desc, sk.name))

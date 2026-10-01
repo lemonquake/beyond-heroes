@@ -1,0 +1,25 @@
+[ward_eye] core: 9748 tris
+[ward_eye] ring_1: 2536 tris
+[ward_eye] ring_2: 3440 tris
+[ward_eye] ring_3: 3416 tris
+[ward_eye] ribbons: 854 tris
+[ward_eye] total 19994 tris
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+04:35:13 | INFO: Starting glTF 2.0 export
+04:35:13 | INFO: Extracting primitive: core
+04:35:13 | INFO: Primitives created: 6
+04:35:13 | INFO: Extracting primitive: ribbons
+04:35:13 | INFO: Primitives created: 5
+04:35:13 | INFO: Extracting primitive: ring_1
+04:35:13 | INFO: Primitives created: 3
+04:35:13 | INFO: Extracting primitive: ring_2
+04:35:13 | INFO: Primitives created: 5
+04:35:13 | INFO: Extracting primitive: ring_3
+04:35:13 | INFO: Primitives created: 3
+04:35:13 | INFO: Finished glTF 2.0 export in 0.13436555862426758 s
+
+[ward_eye] -> A:\Python\beyond-heroes\game\assets\characters\ward_eye.glb
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

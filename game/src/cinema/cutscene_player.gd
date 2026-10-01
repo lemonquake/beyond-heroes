@@ -552,7 +552,18 @@ func copy(key: StringName, who: Node, pos := Vector3.ZERO, yaw := 0.0) -> Cutsce
 	var fresh: bool = not actors.has(key) or not is_instance_valid(actors[key])
 	var a: CutsceneActor = actors.get(key)
 	if fresh:
-		a = CutsceneActor.make(path, float(app.get("scale", 1.0)), app.get("tint", Color.WHITE))
+		var vis = p.get(&"visual") if p and is_instance_valid(p) else null
+		if vis is CharacterVisual and (vis as CharacterVisual).hero != null:
+			# bh-029: the hero's body with their look and worn gear, not the bare base model
+			var eq: Equipment = null
+			if p.get(&"hero") is HeroData:
+				eq = (p.get(&"hero") as HeroData).equipment
+			elif p.get(&"equipment") is Equipment:
+				eq = p.get(&"equipment")
+			var lk: Dictionary = (vis as CharacterVisual).hero.look if (vis as CharacterVisual).hero.look is Dictionary else {}
+			a = CutsceneActor.make_hero(app, lk, eq)
+		else:
+			a = CutsceneActor.make(path, float(app.get("scale", 1.0)), app.get("tint", Color.WHITE))
 		stage().add_child(a)
 		actors[key] = a
 		var wp: Dictionary = app.get("weapons", {})

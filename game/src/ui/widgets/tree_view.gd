@@ -21,6 +21,11 @@ var page := 0
 var _bursts := []            # [{pos, t}]
 var _hover_id: StringName = &""
 var _bg: Texture2D
+## bh-029: wide trees (the Mage's eight elements) shrink to the width their owner gives them (`fit_to`) instead of
+## hiding columns behind a horizontal scroll bar. Drawing and hit-testing happen in unzoomed tree space.
+var zoom := 1.0
+var _content := Vector2.ZERO
+var _fit_width := 0.0
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -35,7 +40,17 @@ func bind(p_hero: HeroData, talents: bool) -> void:
 	var max_p := Vector2.ZERO
 	for n in _nodes():
 		max_p = max_p.max(n.pos)
-	custom_minimum_size = MARGIN * 2.0 + max_p * UNIT + Vector2(40, 40)
+	_content = MARGIN * 2.0 + max_p * UNIT + Vector2(40, 40)
+	_apply_zoom()
+
+## Fit the tree to `w` pixels of width (0 = natural size). Never smaller than 55 %, never larger than 100 %.
+func fit_to(w: float) -> void:
+	_fit_width = w
+	_apply_zoom()
+
+func _apply_zoom() -> void:
+	zoom = clampf(_fit_width / _content.x, 0.55, 1.0) if _fit_width > 0.0 and _content.x > 0.0 else 1.0
+	custom_minimum_size = _content * zoom
 	queue_redraw()
 
 ## Show another page of the tree.
@@ -72,7 +87,8 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if hero == null:
 		return
-	var r := Rect2(Vector2.ZERO, size)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE * zoom)
+	var r := Rect2(Vector2.ZERO, size / zoom)
 	if _bg:
 		draw_texture_rect(_bg, r, false, Color(0.85, 0.85, 0.85))
 	else:
@@ -173,7 +189,7 @@ func _gui_input(e: InputEvent) -> void:
 	if hero == null:
 		return
 	if e is InputEventMouseMotion:
-		var n := _node_at(e.position)
+		var n := _node_at(e.position / zoom)
 		var id: StringName = n.get("id", &"")
 		if id != _hover_id:
 			_hover_id = id
@@ -184,7 +200,7 @@ func _gui_input(e: InputEvent) -> void:
 				TooltipLayer.show_for(self, func() -> Control: return _tip(n))
 	elif e is InputEventMouseButton and not e.pressed and e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
 		# touch play: a quick tap learns; a long press is a right-click (TouchControls) and refunds instead
-		var n := _node_at(e.position)
+		var n := _node_at(e.position / zoom)
 		if not n.is_empty() and n.id == _touch_down_id and Time.get_ticks_msec() - _touch_down_t < 450:
 			_learn(n)
 			queue_redraw()
@@ -192,7 +208,7 @@ func _gui_input(e: InputEvent) -> void:
 		_touch_down_id = &""
 		accept_event()
 	elif e is InputEventMouseButton and e.pressed:
-		var n := _node_at(e.position)
+		var n := _node_at(e.position / zoom)
 		if n.is_empty():
 			return
 		selected_id = n.id

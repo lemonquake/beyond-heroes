@@ -216,6 +216,11 @@ func link_point(leg: Dictionary) -> Variant:
 			for n in get_tree().get_nodes_in_group(&"door"):
 				if map.is_ancestor_of(n) and (n as DoorPortal).destination_map == to_map:
 					return (n as Node3D).global_position
+		"ship":
+			# bh-029: the captain by the Sunwake's gangplank
+			for n in get_tree().get_nodes_in_group(&"npc"):
+				if map.is_ancestor_of(n) and "def" in n and n.def and String(n.def.id).begins_with("ilsa"):
+					return (n as Node3D).global_position
 		"shrine", "dungeon":
 			var from := DataIsland.place(String(leg.get("from", "")))
 			var best: Node3D = null

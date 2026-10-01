@@ -43,7 +43,7 @@ good or evil: the same light that powers a waypoint can wake a sleeping Oros.
 |---|---|---|---|
 | **Salmonan** | West | Green cliffs, fishing coves, old forests, temple ruins. Home of **Malasugue Town**. Legend says the island sleeps on the coil of an Oros. | Author canon |
 | **Veldmoor** *(provisional)* | North | The largest island, seat of the **Four-Island Accord** and its Hero Registry in the city of Aubren *(provisional)*. | Provisional |
-| **Corvessa** *(provisional)* | East | Merchant harbors, shipyards, the richest guild houses. First to hear news from overseas. | Provisional |
+| **Zarael**, the corrupted *(bh-029)* | East | Stepped stone cities older than the Accord, built by the **Wirewrights** over a sleeping Gigas; the **Heartwire** laid in the stone keeps it asleep. Its town is **Agdao**. See §11. | Author canon (names); details provisional |
 | **Emberhal** *(provisional)* | South | Volcanic, hot springs and black sand. Closest to the outside nations; Tyrant sightings began here. | Provisional |
 
 The four islands together are **the Accord Isles**. Their shared government is the **Four-Island Accord**, a treaty
@@ -59,7 +59,7 @@ more than a crown: each island rules itself, but all four register heroes, guild
 | **The Binding** | The first heroes — the **Oathbound** — used the Aether to put the great creatures to sleep and swore oaths to keep them sleeping. On Salmonan the oath was sworn at the **Forgotten Temple**, over the coil of the island's Oros. The oath-keepers became temple wardens. |
 | **The Age of Accord** | Roughly a thousand years *(provisional)* of fragile peace. The four islands signed the Accord; guilds formed to train and rank heroes; waypoint shrines linked the towns. |
 | **Three winters ago** | The **Ashen Circle** infiltrated the Forgotten Temple. Morthar, the last **Warden**, broke his oath to hold back an Aether collapse they caused, and was hollowed out by it. His dead began to march from the Catacombs. The forest village fell. Malasugue lit its hearth wards and held. |
-| **Now** | News from Emberhal and Corvessa: the outside nations have declared a **Holy War**. Monsters grow bolder everywhere. Malasugue's guilds are recruiting, and the waypoint has chosen a new hero. |
+| **Now** | News from Emberhal and Zarael: the outside nations have declared a **Holy War**. Monsters grow bolder everywhere. Malasugue's guilds are recruiting, and the waypoint has chosen a new hero. |
 
 ---
 
@@ -304,7 +304,7 @@ and drifts away before it ever finds its monster, so Tempos bind themselves to l
 | **Classes** | **Swordsmen** who held the line (vanguard: draws the monsters, cleaves, charges), **Archers** who kept the walls (marksman: keeps its distance, pierces lines, rains arrows), **Thieves** who fought from the shadows (shadow: strikes from behind, poisons, vanishes in smoke). Older spirits answer only experienced heroes: **Mystics** who wove the Aether (bolts, wards, lightning, grave-frost, group mending) and **Wardens** who died still standing behind their shields (shield crush, taunting oaths, barriers, earthshaking slams). Each knows a few skills; many carry a **mending** and heal their hero first. |
 | **Strength** | A Tempo's strength is borrowed: bound to a hero it takes a share of what the hero is — **half** for the newly dead, more for older spirits — and grows as the hero grows, plus whatever its own gear gives. |
 | **Grades** *(bh-005)* | The dead are proud: the newly fallen answer anyone, the old ones wait to see what a hero is made of. As a hero rises in level or in deeds, stronger grades answer instead — **Restless** (start, 50%), **Seasoned** (level 4, 55%, Mystics), **Veteran** (level 8 or the first oath's seal broken, 60%, Wardens), **Exalted** (level 12 or the Hollow Warden fallen, 65%), **Ascendant** (level 20, 70%) — with more and rarer skills, at higher prices. The weaker spirits fade from the shrine when that happens; the ones already bound keep their grade. |
-| **The renowned** *(bh-005)* | Five spirits whose names are still sung wait at the shrine for a hero strong enough to carry them (75% of the hero, skills no one else has, a small fortune to bind): **Hollan Greywall, the Unbroken** (Warden; held the Registry gate at Aubren three days against an orc war-host), **Kavira Vane, the Storm-Sworn** (Swordsman; a Corvessa duelist who called lightning down her own blade), **Maudra Vell, the Lantern Saint** (Mystic; carried the forest garrison's wounded out of the Catacombs), **Cindrel Ashreed, the Tyrant's Bane** (Archer; killed a Tyrant on Emberhal's cane fields), **Vessik Thorn, the Quiet End** (Thief; burned by the Ashen Circle for names he never gave). A released one returns to the shrine. |
+| **The renowned** *(bh-005)* | Five spirits whose names are still sung wait at the shrine for a hero strong enough to carry them (75% of the hero, skills no one else has, a small fortune to bind): **Hollan Greywall, the Unbroken** (Warden; held the Registry gate at Aubren three days against an orc war-host), **Kavira Vane, the Storm-Sworn** (Swordsman; a Zarael duelist who called lightning down her own blade), **Maudra Vell, the Lantern Saint** (Mystic; carried the forest garrison's wounded out of the Catacombs), **Cindrel Ashreed, the Tyrant's Bane** (Archer; killed a Tyrant on Emberhal's cane fields), **Vessik Thorn, the Quiet End** (Thief; burned by the Ashen Circle for names he never gave). A released one returns to the shrine. |
 | **Tobren** *(bh-005)* | Every new hero arrives with one Tempo: **Tobren**, a Malasugue guard who died holding the waypoint shrine on the Sanctuary Terrace while the townsfolk reached the hearth wards. When the waypoint woke for the hero, he came through with them. A plain Swordsman with a mend; he is the one who explains Tempos, the Shrine and the controls to a new arrival. |
 | **Gear** | The dead cannot hold what the living have not earned: a Tempo wears gear **one rarity tier below** the best its hero may wear, and only its class's weapons. |
 | **How many** | **Two at a time.** A living heart can only carry so many ghosts. |
@@ -352,3 +352,23 @@ the Registry. Emblem: a split crown with a rising blade of light between the hal
   its master lives. Kethrax has come back to the marsh to hunt for it.
 
 The playable chapter ends with Kethrax defeated, the Hollow Warden laid to rest, and Paul David discussing the Black Spire. The rescue across the sea remains a later chapter. SX belongs to the three story characters; the player cap remains level 60 and Class SSS.
+
+---
+
+## 11. Zarael, the corrupted (bh-029)
+
+*User-supplied names: Zarael, Agdao, Terax, Aljay, the Bridge of Death. Everything else is invented for Jre (no
+real-culture names; the stepped-stone look is visual only). Details are provisional.*
+
+| Topic | Canon |
+|---|---|
+| **The island** | The eastern island of the Accord Isles, about one and a half times Salmonan. Its people say it is named for what sleeps under it: **Zarael, a Gigas**. |
+| **The Wirewrights** | Zarael's ancient builders. They did not swear oaths over their giant; they laid the **Heartwire**, a net of bright wire inlaid through the island's stone, and fed it from the **Dawn Engine** in the **Heart Citadel**. Its slow current is a lullaby that keeps Zarael asleep. As a gift of the same current Agdao's lamps burned without oil, its lifts climbed the terraces, its water ran uphill and its gates knew friend from foe. |
+| **The glow** | Every glow on Zarael is white: wire, glyphs, lamps, the runes on Kharvenn chains, the eyes of its constructs. Healthy current burns **steady and bright**; the corrupted current (the **Blackwire**) burns dim and **stutters** like a sick pulse. |
+| **The Dimming** | Seven winters ago Kharvenn **chain-priests** drove rune-chains into the three **Vaults** where the Heartwire's great lines cross. The current turned. Wirewright constructs went mad, beasts near the lines changed, and people who worked the wires fell **wire-sick**. The Bridge of Death's ward pylons began to burn anyone on the span. |
+| **Aljay** | Two winters ago a man in black dragon-scale with broken chain links hanging from his wrists came over the sea. With **Terax** he went down into the three Vaults — the **Jade Sepulchre**, the **Obsidian Engine**, the **Veinworks** — and killed what held them. People crossed the **Bridge of Death** for the first time in five years. Aljay crossed alone to the Heart Citadel; for one season the wires burned steady. Then he asked for a boat and sailed east without a word. (The Accord says he was taken at the Weeping Causeway three winters ago. Terax: "Then the Accord is wrong, or he walked out of his chains.") |
+| **Now** | The chain-priests are back under **Orvul Dram, the Leash-Abbot**. The Vaults woke again, worse; the Blackwire is in Agdao's streets. When Kethrax fell, Terax sent Agdao's ship, the **Sunwake** (Captain **Ilsa Rhondar**), to Wyman Outpost's Marsh Jetty for the hero who broke a Kharvenn-made chain. |
+| **Agdao** | A port town climbing from its harbour to the **Crown of Steps** in five terraces joined by stairs, lifts and roof footbridges. **Terax**, Warden of Agdao; **Wirekeeper Halvessa Orn** at the top of the Crown; Speaker Caius Wend; Mother Ysenne, healer of the wire-sick; the lift engineer Toma Kettridge. |
+| **The road east** | The Coilwood (jungle over abandoned step-farms, three relay pylons, the Jade Sepulchre), the Glasswire Barrens (red cracked plain, a fallen Wirewright colossus, the Obsidian Engine and the Veinworks), the **Bridge of Death** (a 300 m Wirewright span over the gorge, guarded by **Varrogh, the Deathspan Colossus**) and the **Heart Citadel** (the Dawn Engine; Orvul Dram). |
+| **The Vault lords** | Quorrath, the Jade Sleeper; Kalvex, the Engine Heart; Ysvharn, the Giant's Heart. |
+| **Act IV** | The Ship at Wyman → Agdao (Terax) → The Wirekeeper → Wire-sick (three relays) → the three Vaults → the Bridge of Death → the Leash-Abbot → the Dawn Current (the Heartwire burns steady again; a hook toward Aljay's trail east). |

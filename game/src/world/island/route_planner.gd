@@ -15,6 +15,7 @@ const TRAIL_FACTOR := 1.6           # ROADS: a metre of trail costs this much
 const SHRINE_COST := [600.0, 600.0, 40.0]
 const DOOR_COST := 4.0
 const DUNGEON_COST := 80.0
+const SHIP_COST := 900.0              # bh-029: Agdao's ship between Wyman Outpost and Zarael
 const START := "@start"
 const SHORT_START_M := 12.0          # a first stretch shorter than this is not its own instruction
 
@@ -109,6 +110,8 @@ static func _graph(hero: HeroData, mode: int, respect_locks: bool) -> Dictionary
 				cost = DOOR_COST
 			"dungeon":
 				cost = DUNGEON_COST
+			"ship":
+				cost = SHIP_COST
 			"shrine":
 				cost = SHRINE_COST[mode]
 		if locked:
@@ -254,6 +257,9 @@ static func _describe(out: Dictionary, hero: HeroData) -> void:
 				steps.append({"text": leg.text, "note": "Distance inside is not counted", "metres": 0.0, "kind": "door"})
 			"dungeon":
 				steps.append({"text": leg.text, "note": "Distance inside is not counted", "metres": 0.0, "kind": "dungeon"})
+			"ship":
+				transfers += 1
+				steps.append({"text": leg.text, "note": "Speak with Captain Ilsa Rhondar at the gangplank", "metres": 0.0, "kind": "ship"})
 			"shrine":
 				transfers += 1
 				steps.append({"text": "At %s, use the waypoint to %s" % [_pname(leg.from), _pname(leg.to)],

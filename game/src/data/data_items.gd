@@ -188,6 +188,9 @@ static func bases() -> Array:
 		"flavor": "The broken tip of a black lance, wrapped in oilcloth. It is warm, and it glows red while its master lives."}))
 	out.append(_b(&"quest_chain_seal", "Kethrax's Chain-Seal", &"quest", "quest_chain_seal", {"sellable": false, "value": 0,
 		"flavor": "An iron seal as big as a fist, still threaded with a link of Tyrant-chain. The violet fire in it has gone out."}))
+	# bh-029: what Aljay left with Terax on Zarael
+	out.append(_b(&"quest_broken_link", "Aljay's Broken Link", &"quest", "quest_chain_seal", {"sellable": false, "value": 0,
+		"flavor": "A link of black chain, snapped clean through, the kind the Forsaken Legion forges. It is still warm. Aljay left it in Agdao for whoever finished what he started."}))
 	for base in out:
 		if base.weapon_type == &"bow":
 			base.icon = ICON3D % base.id

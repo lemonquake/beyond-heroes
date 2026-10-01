@@ -85,8 +85,9 @@ func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE,
 	tint_primary = primary_tint
 	personality = p_personality
 	_rng.seed = hash(model_path) ^ get_instance_id()
-	if model_path != "" and ResourceLoader.exists(model_path):
-		var ps: PackedScene = load(model_path)
+	# a model that exists but has not been imported yet (a fresh GLB) loads as null: use the fallback body
+	var ps: PackedScene = load(model_path) as PackedScene if model_path != "" and ResourceLoader.exists(model_path) else null
+	if ps:
 		model = ps.instantiate()
 		add_child(model)
 		model.scale = Vector3.ONE * scale_factor

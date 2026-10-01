@@ -55,6 +55,8 @@ uniform vec4 deep : source_color = vec4(0.02, 0.12, 0.16, 1.0);
 uniform float glow = 0.9;
 uniform float depth_fade = 2.5;
 uniform float foam = 0.35;
+uniform float rough = 0.06;
+uniform float ripple = 0.6;
 uniform sampler2D normal_tex : hint_normal, filter_linear_mipmap, repeat_enable;
 uniform sampler2D depth_tex : hint_depth_texture, filter_linear;
 varying vec3 wpos;
@@ -66,7 +68,7 @@ void fragment() {
 	vec3 n1 = texture(normal_tex, uv + vec2(TIME * 0.012, TIME * 0.008)).rgb;
 	vec3 n2 = texture(normal_tex, uv * 1.7 - vec2(TIME * 0.01, -TIME * 0.014)).rgb;
 	NORMAL_MAP = normalize(mix(n1, n2, 0.5));
-	NORMAL_MAP_DEPTH = 0.6;
+	NORMAL_MAP_DEPTH = ripple;
 	float d = texture(depth_tex, SCREEN_UV).r;
 	vec4 wp = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, d, 1.0);
 	wp.xyz /= wp.w;
@@ -75,7 +77,7 @@ void fragment() {
 	float edge = 1.0 - smoothstep(0.0, 0.18, VERTEX.z - wp.z);
 	ALBEDO = col + vec3(edge * foam);
 	EMISSION = shallow.rgb * glow * (1.0 - diff * 0.7) + vec3(edge * foam * 0.6);
-	ROUGHNESS = 0.06;
+	ROUGHNESS = rough;
 	SPECULAR = 0.6;
 	ALPHA = mix(0.55, 0.93, diff);
 }
@@ -107,10 +109,12 @@ void vertex() {
 	wxz = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
 }
 void fragment() {
-	float w = sin(wxz.x * 0.35 + TIME * 0.6) * sin(wxz.y * 0.28 - TIME * 0.45);
-	float sparkle = smoothstep(0.82, 1.0, w);
-	vec3 col = mix(deep.rgb, shallow.rgb, 0.45 + 0.12 * w);
-	ALBEDO = col * (0.75 + 0.35 * glow) + vec3(sparkle * 0.25);
+	// bh-029: three swells in different directions (never a grid). The old sin(x)*sin(z) "sparkle" drew a lattice of
+	// white discs over every lite-mode lake and marsh.
+	float w = sin(dot(wxz, vec2(0.31, 0.12)) + TIME * 0.6) * 0.45 + sin(dot(wxz, vec2(-0.17, 0.26)) - TIME * 0.45) * 0.35
+		+ sin(dot(wxz, vec2(0.07, -0.41)) + TIME * 0.33) * 0.2;
+	vec3 col = mix(deep.rgb, shallow.rgb, 0.45 + 0.1 * w);
+	ALBEDO = col * (0.75 + 0.35 * glow) + shallow.rgb * 0.18 * smoothstep(0.55, 1.0, w);
 	ALPHA = 0.86;
 }
 """
@@ -168,15 +172,16 @@ void vertex() {
 	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 void fragment() {
-	float a = texture(mist, wpos.xz * 0.02 + vec2(TIME * 0.006, TIME * 0.004)).r;
-	float b = texture(mist, wpos.xz * 0.045 - vec2(TIME * 0.009, 0.0)).r;
+	// bh-029: two broad, slow layers (the old 0.045 layer read as round white discs at night)
+	float a = texture(mist, wpos.xz * 0.017 + vec2(TIME * 0.006, TIME * 0.004)).r;
+	float b = texture(mist, wpos.xz * 0.026 - vec2(TIME * 0.007, -TIME * 0.003)).r;
 	float d = texture(depth_tex, SCREEN_UV).r;
 	vec4 wp = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, d, 1.0);
 	wp.xyz /= wp.w;
 	float soft = clamp((VERTEX.z - wp.z) / 1.5, 0.0, 1.0);
 	float edge = smoothstep(0.0, 0.2, UV.x) * smoothstep(1.0, 0.8, UV.x) * smoothstep(0.0, 0.2, UV.y) * smoothstep(1.0, 0.8, UV.y);
 	ALBEDO = color.rgb;
-	ALPHA = clamp((a * 0.7 + b * 0.5 - 0.35) * 2.0, 0.0, 1.0) * density * soft * edge;
+	ALPHA = (0.35 + 0.65 * smoothstep(0.3, 0.8, a * 0.6 + b * 0.4)) * density * soft * edge;
 }
 """
 	var m := ShaderMaterial.new()

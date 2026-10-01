@@ -27,6 +27,7 @@ static func create(parent: Node, from: Vector3, p_dir: Vector3, req: DamageReque
 	o.mask = p_mask
 	o.dir = p_dir.normalized()
 	o.reach = p_reach
+	Perf.mark_fx(o)
 	parent.add_child(o)
 	o.global_position = from
 	o.add_to_group(&"skill_area")

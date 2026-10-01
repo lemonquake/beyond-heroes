@@ -1,0 +1,59 @@
+== zr_coilwood: navmesh 6557 polygons
+entry agdao_road at (-132.0, 0.328429, 30.0) -> navmesh 0.53 m away
+OK  place zc_west      (-136.0, 30.0): navmesh 0.04 m from the spot, path reaches (4 m, end 0.00)
+OK  place zc_shrine    (-108.0, 18.0): navmesh 0.02 m from the spot, path reaches (28 m, end 0.00)
+OK  place zc_fork      (-60.0, 10.0): navmesh 0.00 m from the spot, path reaches (77 m, end 0.00)
+OK  place zc_relays    (10.0, 0.0): navmesh 0.00 m from the spot, path reaches (149 m, end 0.00)
+OK  place zc_relay_1   (-58.0, -42.0): navmesh 0.87 m from the spot, path reaches (106 m, end 0.00)
+OK  place zc_relay_2   (18.0, 52.0): navmesh 0.87 m from the spot, path reaches (153 m, end 0.00)
+OK  place zc_relay_3   (66.0, -28.0): navmesh 1.11 m from the spot, path reaches (213 m, end 0.00)
+OK  place zc_camp      (28.0, -58.0): navmesh 0.00 m from the spot, path reaches (201 m, end 0.00)
+OK  place zc_jade      (96.0, -58.0): navmesh 0.06 m from the spot, path reaches (259 m, end 0.00)
+OK  place zc_east      (136.0, 8.0): navmesh 0.05 m from the spot, path reaches (281 m, end 0.00)
+OK  spawn coil_shrine      navmesh 0.30 m, path reaches (32 m)
+OK  spawn dg_jade_sepulchre_gate navmesh 0.31 m, path reaches (257 m)
+OK  spawn agdao_road       navmesh 0.53 m, path reaches (0 m)
+OK  spawn start            navmesh 0.53 m, path reaches (0 m)
+OK  spawn barrens_road     navmesh 0.31 m, path reaches (277 m)
+OK  dais coil_shrine            navmesh 0.28 m, path reaches
+OK  dais dg_jade_sepulchre_gate navmesh 0.42 m, path reaches
+OK  road zc_road            worst 0.05 m off at (-131.3184, 28.24438), ends joined: true, walked 31 of 31 m
+OK  road zc_road_2          worst 0.22 m off at (-63.61227, 10.60205), ends joined: true, walked 50 of 49 m
+OK  road zc_road_3          worst 0.06 m off at (-50.19419, 8.038838), ends joined: true, walked 73 of 71 m
+OK  road zc_road_4          worst 0.08 m off at (89.00383, -0.932313), ends joined: true, walked 133 of 128 m
+OK  road zc_relay1_trail    worst 0.14 m off at (-58.0, -39.88923), ends joined: true, walked 55 of 52 m
+OK  road zc_relay2_trail    worst 0.08 m off at (14.9029, 24.51452), ends joined: true, walked 55 of 53 m
+OK  road zc_relay3_trail    worst 0.12 m off at (65.22224, -26.91114), ends joined: true, walked 64 of 66 m
+OK  road zc_camp_trail      worst 0.37 m off at (26.44989, -47.14923), ends joined: true, walked 61 of 61 m
+BAD road zc_jade_trail      worst 1.11 m off at (66.0, -28.0), ends joined: false, walked 48 of 40 m
+OK  exit coilwood_agdao_road -> agdao/coil_gate, path reaches
+OK  exit coilwood_barrens_road -> zr_barrens/coil_road, path reaches
+== zr_coilwood: 1 problem(s)
+== zr_barrens: navmesh 3493 polygons
+entry coil_road at (-124.0, 0.500576, 10.0) -> navmesh 0.41 m away
+OK  place zb_west      (-126.0, 10.0): navmesh 0.01 m from the spot, path reaches (2 m, end 0.00)
+OK  place zb_camp      (-40.0, 30.0): navmesh 0.01 m from the spot, path reaches (88 m, end 0.00)
+OK  place zb_fork      (0.0, 10.0): navmesh 0.00 m from the spot, path reaches (130 m, end 0.00)
+OK  place zb_colossus  (48.0, -28.0): navmesh 0.00 m from the spot, path reaches (187 m, end 0.00)
+OK  place zb_obsidian  (-70.0, -64.0): navmesh 0.06 m from the spot, path reaches (107 m, end 0.00)
+OK  place zb_vein      (84.0, 40.0): navmesh 0.00 m from the spot, path reaches (222 m, end 0.00)
+OK  place zb_north     (30.0, -96.0): navmesh 0.01 m from the spot, path reaches (207 m, end 0.00)
+OK  spawn barrens_shrine   navmesh 0.48 m, path reaches (90 m)
+OK  spawn barrens_camp     navmesh 0.40 m, path reaches (101 m)
+OK  spawn dg_obsidian_engine_gate navmesh 0.49 m, path reaches (107 m)
+OK  spawn dg_veinworks_gate navmesh 0.60 m, path reaches (219 m)
+OK  spawn coil_road        navmesh 0.41 m, path reaches (0 m)
+OK  spawn start            navmesh 0.41 m, path reaches (0 m)
+OK  spawn bridge_road      navmesh 0.28 m, path reaches (203 m)
+OK  dais barrens_shrine         navmesh 0.26 m, path reaches
+OK  dais dg_obsidian_engine_gate navmesh 0.34 m, path reaches
+OK  dais dg_veinworks_gate      navmesh 0.48 m, path reaches
+OK  road zb_road            worst 0.03 m off at (-67.70269, 23.43244), ends joined: true, walked 90 of 89 m
+OK  road zb_road_2          worst 0.04 m off at (-8.238577, 16.17893), ends joined: true, walked 46 of 45 m
+OK  road zb_bridge_road     worst 0.14 m off at (25.56183, -60.15189), ends joined: true, walked 111 of 111 m
+BAD road zb_obsidian_trail  worst 0.53 m off at (-69.84286, -59.68573), ends joined: false, walked 125 of 95 m
+OK  road zb_vein_trail      worst 0.16 m off at (9.486833, 13.16228), ends joined: true, walked 86 of 86 m
+OK  road zb_colossus_trail  worst 0.09 m off at (45.05329, -27.26332), ends joined: true, walked 69 of 68 m
+OK  exit barrens_coil_road -> zr_coilwood/barrens_road, path reaches
+OK  exit barrens_bridge_road -> bridge_of_death/barrens_road, path reaches
+== zr_barrens: 1 problem(s)

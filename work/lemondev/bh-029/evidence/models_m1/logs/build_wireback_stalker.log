@@ -1,0 +1,6 @@
+[compose] A:/Python/beyond-heroes/work/lemondev/bh-029/evidence/models_m1\wireback_stalker_rest_iso.png (1440, 820)
+[compose] A:/Python/beyond-heroes/work/lemondev/bh-029/evidence/models_m1\wireback_stalker_clips.png (1800, 2610)
+[wireback_stalker] mesh 14384 tris, 16 clips, 31 bones
+[wireback_stalker] rest bounds min [-0.282 -0.937 -0.008] max [0.282 1.513 1.017]
+[wireback_stalker] -> A:\Python\beyond-heroes\game\assets\characters\wireback_stalker.glb (1.9 MB), 16 animations, length mismatches: []
+[wireback_stalker] meta merged ['cat_bite', 'cat_pounce', 'cat_roar', 'cat_swipe'] + models.wireback_stalker -> A:\Python\beyond-heroes\game\assets\characters\creature_meta.json (verified: True)

@@ -59,7 +59,7 @@ func _init() -> void:
 	focus_mode = Control.FOCUS_ALL
 
 func _ready() -> void:
-	_base = load(DataIsland.ATLAS_ART) if ResourceLoader.exists(DataIsland.ATLAS_ART) else null
+	_load_base()
 	_fog = ColorRect.new()
 	_fog.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_fog.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -77,6 +77,14 @@ func _ready() -> void:
 	_overlay.draw.connect(_draw_overlay)
 	add_child(_overlay)
 	resized.connect(func() -> void: _clamp_view())
+
+## bh-029: the painted base of the island the atlas shows (DataIsland.show_island).
+var _base_path := ""
+
+func _load_base() -> void:
+	_base_path = DataIsland.ATLAS_ART
+	_base = load(_base_path) if ResourceLoader.exists(_base_path) else null
+	queue_redraw()
 
 # ---- view --------------------------------------------------------------------------------------------------
 
@@ -240,7 +248,7 @@ func visible_places() -> Array:
 		return out
 	var local := zoom_fit_factor() >= LOCAL_ZOOM_FIT
 	for p in DataIsland.PLACES:
-		if not p.get("listed", false) or not Routes.is_known(hero, p):
+		if not p.get("listed", false) or not Routes.is_known(hero, p) or not DataIsland.on_view(p):
 			continue
 		if p.kind == "dungeon":
 			continue
@@ -252,6 +260,8 @@ func visible_places() -> Array:
 # ---- drawing -----------------------------------------------------------------------------------------------
 
 func _draw() -> void:
+	if _base_path != DataIsland.ATLAS_ART:
+		_load_base()
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.02, 0.05, 0.07))
 	if _base:
 		draw_texture_rect(_base, Rect2(to_screen(Vector2.ZERO), DataIsland.ATLAS_SIZE * zoom), false)
@@ -542,7 +552,7 @@ func _draw_hero(c: Control, font: Font) -> void:
 				if StringName(pl.map) == mid:
 					here = pl
 					break
-		if here.is_empty():
+		if here.is_empty() or not DataIsland.on_view(here):
 			return
 		ap = DataIsland.place_atlas(here)
 		heading = PI
@@ -586,7 +596,7 @@ func _draw_party(c: Control) -> void:
 					if StringName(pl.map) == mid:
 						here = pl
 						break
-			if here.is_empty():
+			if here.is_empty() or not DataIsland.on_view(here):
 				continue
 			ap = DataIsland.place_atlas(here)
 		var sp := to_screen(ap)

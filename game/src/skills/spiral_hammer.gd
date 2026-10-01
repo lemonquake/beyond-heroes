@@ -25,6 +25,7 @@ static func create(parent: Node, at: Vector3, angle: float, req: DamageRequest, 
 	h.mask = p_mask
 	h.start_angle = angle
 	h.duration = p_duration
+	Perf.mark_fx(h)
 	parent.add_child(h)
 	h._center = at
 	h.global_position = at

@@ -1023,7 +1023,7 @@ func mana_cost(sid: StringName) -> float:
 
 func skill_cooldown(sid: StringName) -> float:
 	var s := DB.skill(sid)
-	return s.cooldown * (1.0 - stats.get_stat(&"cdr")) if s else 0.0
+	return maxf(SkillDef.MIN_COOLDOWN, s.cooldown * (1.0 - stats.get_stat(&"cdr"))) if s else 0.0
 
 ## Why a skill cannot be used right now ("" = usable). The HUD shows this.
 func skill_block_reason(sid: StringName) -> String:

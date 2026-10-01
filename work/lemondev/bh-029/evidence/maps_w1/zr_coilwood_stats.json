@@ -1,0 +1,38 @@
+{
+  "decor_triangles": {
+    "bones_scatter": 11480,
+    "fern": 35280,
+    "grass_clump": 10296,
+    "log_fallen": 10400,
+    "mushrooms": 39688,
+    "roots": 34816,
+    "rubble_pile": 9460,
+    "stump": 5940,
+    "weapons_discarded": 1068,
+    "zr_agave": 88536,
+    "zr_bush_jungle": 232832,
+    "zr_fern_giant": 281388,
+    "zr_glass_growth": 5340,
+    "zr_palm": 379500,
+    "zr_rock_ochre_medium": 6402,
+    "zr_tree_ceiba": 510530,
+    "zr_vine_curtain": 28840,
+    "zr_wire_conduit_4m": 27360
+  },
+  "enemy_zones": 14,
+  "load_ms": 4296,
+  "mesh_instances": 1031,
+  "nav_polygons": 6557,
+  "nodes": 1885,
+  "omni_lights": 46,
+  "shadow_lights_requested": 1,
+  "spawns": [
+    "coil_shrine",
+    "dg_jade_sepulchre_gate",
+    "agdao_road",
+    "start",
+    "barrens_road"
+  ],
+  "teleporters": 2,
+  "triangles_total": 2188564
+}

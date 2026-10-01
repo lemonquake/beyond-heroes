@@ -8,7 +8,8 @@ const CPS := 55.0             # characters per second
 ## Every {"service": ...} action a dialogue graph may use (the data tests check graphs against this list).
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
 	&"tempo_revive", &"tempo_renowned", &"field_guide", &"craft_forge", &"craft_alchemy", &"craft_workbench", &"hero_roster", &"camp_rest",
-	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade", &"guild_window", &"found_guild"]
+	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade", &"guild_window", &"found_guild",
+	&"sail_zarael", &"sail_wyman"]
 
 var session: DialogueSession
 var npc: Npc
@@ -18,6 +19,9 @@ var _name: Label
 var _title: Label
 var _text: RichTextLabel
 var _choices: VBoxContainer
+var _choice_scroll: ScrollContainer
+const MAX_CHOICE_ROWS := 7
+const CHOICE_ROW_H := 42.0
 var _more: Label
 var _typing := false
 var _chars := 0.0
@@ -37,6 +41,9 @@ func _ready() -> void:
 	_panel.offset_right = 640
 	_panel.offset_top = -370
 	_panel.offset_bottom = -40
+	# bh-029: a long list of choices grows the panel upward (it used to push the last choices off the bottom of the
+	# screen), and past MAX_CHOICE_ROWS rows the list scrolls
+	_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	_panel.gui_input.connect(_on_panel_input)
 	add_child(_panel)
@@ -73,9 +80,14 @@ func _ready() -> void:
 	_text.add_theme_color_override("default_color", UITheme.PARCHMENT)
 	_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(_text)
+	_choice_scroll = ScrollContainer.new()
+	_choice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_choice_scroll.follow_focus = true
+	v.add_child(_choice_scroll)
 	_choices = VBoxContainer.new()
 	_choices.add_theme_constant_override("separation", 4)
-	v.add_child(_choices)
+	_choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_choice_scroll.add_child(_choices)
 	_more = UITheme.label("", 14, UITheme.TEXT_MUTED, UITheme.body_font())
 	_more.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	v.add_child(_more)
@@ -110,6 +122,7 @@ func _on_line(speaker: String, portrait: String, bb: String, index: int, count: 
 		_name.text = speaker
 	for c in _choices.get_children():
 		c.queue_free()
+	_choice_scroll.custom_minimum_size.y = 0.0
 	_text.text = bb
 	_text.visible_characters = 0
 	_chars = 0.0
@@ -139,8 +152,15 @@ func _on_choices(choices: Array) -> void:
 		b.mouse_entered.connect(func() -> void: Audio.play_ui(&"ui_hover"))
 		_choices.add_child(b)
 		i += 1
+	_fit_choices(choices.size())
 	_choices.visible = not _typing
 	_more.text = ""
+
+## Room for every choice up to MAX_CHOICE_ROWS rows (and no more than the screen allows); beyond that the list scrolls.
+func _fit_choices(n: int) -> void:
+	var rows := mini(n, MAX_CHOICE_ROWS)
+	var room := get_viewport_rect().size.y - 40.0 - 330.0 - 40.0
+	_choice_scroll.custom_minimum_size.y = minf(rows * (CHOICE_ROW_H + 4.0), maxf(CHOICE_ROW_H * 2.0, room))
 
 func _process(delta: float) -> void:
 	if not visible or not _typing:
@@ -228,6 +248,9 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				&"lape_trade": _open_lape.call_deferred()
 				&"guild_window": (func() -> void: Game.ui_root.open_guild("guilds")).call_deferred()
 				&"found_guild": (func() -> void: Game.ui_root.open_guild("found" if not OwnGuild.has(Game.hero) else "overview")).call_deferred()
+				# bh-029: Agdao's ship between Wyman Outpost and Zarael
+				&"sail_zarael": (func() -> void: ZaraelVoyage.sail(true)).call_deferred()
+				&"sail_wyman": (func() -> void: ZaraelVoyage.sail(false)).call_deferred()
 
 func _play_cutscene(id: StringName, who: Npc, resume: String, def: NpcDef) -> void:
 	close()

@@ -101,6 +101,23 @@ World flags are set by `FlagTrigger` volumes (walk into them): `catacombs_ritual
 registered with `MapBuilder.hide_when(node, flag)` disappear once the flag is set, including on later loads.
 `boss_warden_defeated` is reserved for the boss encounter.
 
+## Zarael Island (bh-029)
+
+Reached by the **Sunwake** from Wyman Outpost's Marsh Jetty once Kethrax has fallen (`zr_ship`, spawn `jetty` on
+Wyman, spawn `pier` at Agdao). The island has its own atlas (`DataIsland.ZARAEL_*`, 1 m per atlas pixel,
+`tools/ui_art/bh029_atlas.py`); the M map shows whichever island the hero stands on. Every Zarael glow is pure white.
+
+| Map (id) | Levels | Size (m) | Landmarks | Exits |
+|---|---|---|---|---|
+| Agdao (`agdao`) | town | ~170 x 160 | Pier and the Sunwake, harbour ward, Wire Market, five terraces with grand stairs, lifts and roof footbridges, council hall, the Crown of Steps (Wirekeeper at its top), waypoint `agdao_shrine` | East gate → the Coilwood |
+| The Coilwood (`zr_coilwood`) | 30–36 | ~280 x 200 | Overgrown shrine (waypoint), aqueduct fork, three relay pylons, Kharvenn camp, Jade Sepulchre gate | West → Agdao, east → the Barrens |
+| The Glasswire Barrens (`zr_barrens`) | 36–42 | ~260 x 200 | Survivors' camp (waypoint), the fallen colossus, Obsidian Engine and Veinworks gates | West → the Coilwood, north → the Bridge |
+| The Bridge of Death (`bridge_of_death`) | 42–46 | ~80 x 330 | Gatehouses, three ward pylon pairs (one per Vault), Varrogh's platform | South → the Barrens, north → the Citadel (after Varrogh) |
+| The Heart Citadel (`zr_citadel`) | 46–52 | ~200 x 170 | Siege camp, avenue, the Dawn Engine and the Leash-Abbot's arena | South → the Bridge |
+
+Vaults (generated floors, `DataDungeonsZarael`): the Jade Sepulchre (33–40, gate in the Coilwood), the Obsidian Engine
+(39–46) and the Veinworks (45–53) (gates in the Barrens).
+
 ## Gameplay markers for later systems
 
 - `enemy_zone` markers (group `enemy_zone`): position, radius, archetype list, pack size, elite chance — ready for the

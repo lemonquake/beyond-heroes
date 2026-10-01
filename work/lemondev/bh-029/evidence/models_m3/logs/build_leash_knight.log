@@ -1,0 +1,15 @@
+[leash_knight] mesh 19516 tris, 267 parts, 2.3s
+[leash_knight] baked 48 actions in 26.8s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+04:35:02 | INFO: Starting glTF 2.0 export
+04:35:02 | INFO: Extracting primitive: leash_knight
+04:35:02 | INFO: Primitives created: 10
+04:35:07 | INFO: Finished glTF 2.0 export in 5.205341100692749 s
+
+[leash_knight] clip lengths verified (48 clips)
+[leash_knight] -> A:\Python\beyond-heroes\game\assets\characters\leash_knight.glb (3.6 MB)
+[build] done in 34.8s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

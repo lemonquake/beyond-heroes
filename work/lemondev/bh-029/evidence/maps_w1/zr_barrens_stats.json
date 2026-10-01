@@ -1,0 +1,36 @@
+{
+  "decor_triangles": {
+    "barrel": 9136,
+    "bedroll": 2316,
+    "bones_scatter": 16072,
+    "crate": 3208,
+    "grass_clump": 5220,
+    "rock_small": 8800,
+    "rubble_pile": 88924,
+    "tree_dead_a": 34281,
+    "tree_dead_b": 16450,
+    "zr_agave": 54264,
+    "zr_cliff_ochre": 384930,
+    "zr_glass_growth": 107868,
+    "zr_rock_ochre_large": 62608,
+    "zr_rock_ochre_medium": 96612
+  },
+  "enemy_zones": 13,
+  "load_ms": 2832,
+  "mesh_instances": 716,
+  "nav_polygons": 3493,
+  "nodes": 1425,
+  "omni_lights": 49,
+  "shadow_lights_requested": 2,
+  "spawns": [
+    "barrens_shrine",
+    "barrens_camp",
+    "dg_obsidian_engine_gate",
+    "dg_veinworks_gate",
+    "coil_road",
+    "start",
+    "bridge_road"
+  ],
+  "teleporters": 3,
+  "triangles_total": 1219611
+}

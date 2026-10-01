@@ -400,6 +400,124 @@
   "shell_flipped": {
    "length": 1.0,
    "loop": true
+  },
+  "cat_swipe": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.3,
+     0.433
+    ]
+   ]
+  },
+  "cat_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.333,
+     0.433
+    ]
+   ]
+  },
+  "cat_pounce": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.733,
+     0.9
+    ]
+   ]
+  },
+  "cat_roar": {
+   "length": 1.8,
+   "loop": false
+  },
+  "scorp_pinch": {
+   "length": 0.9,
+   "loop": false,
+   "hits": [
+    [
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  "scorp_sting": {
+   "length": 1.1,
+   "loop": false,
+   "hits": [
+    [
+     0.533,
+     0.667
+    ]
+   ]
+  },
+  "scorp_spray": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.467,
+     0.933
+    ]
+   ]
+  },
+  "mhound_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.333,
+     0.433
+    ]
+   ]
+  },
+  "mhound_lunge": {
+   "length": 1.4,
+   "loop": false,
+   "hits": [
+    [
+     0.767,
+     0.9
+    ]
+   ]
+  },
+  "mhound_howl": {
+   "length": 2.5,
+   "loop": false
+  },
+  "beetle_bite": {
+   "length": 0.8,
+   "loop": false,
+   "hits": [
+    [
+     0.367,
+     0.467
+    ]
+   ]
+  },
+  "beetle_ram": {
+   "length": 1.0,
+   "loop": false,
+   "hits": [
+    [
+     0.6,
+     0.733
+    ]
+   ]
+  },
+  "beetle_spit": {
+   "length": 1.333,
+   "loop": false,
+   "hits": [
+    [
+     0.867,
+     1.033
+    ]
+   ]
   }
  },
  "models": {
@@ -1249,6 +1367,360 @@
    },
    "tris": 9058,
    "bones": 30
+  },
+  "wireback_stalker": {
+   "generator": "tools/blender/creatures/build_wireback_stalker.py",
+   "glb": "res://assets/characters/wireback_stalker.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.0,
+     "loop": true,
+     "ground_speed": 1.25
+    },
+    "run": {
+     "length": 0.5,
+     "loop": true,
+     "ground_speed": 5.5
+    },
+    "run_combat": {
+     "length": 0.5,
+     "loop": true,
+     "ground_speed": 5.5
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "cat_swipe": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.3,
+       0.433
+      ]
+     ]
+    },
+    "cat_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.333,
+       0.433
+      ]
+     ]
+    },
+    "cat_pounce": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.733,
+       0.9
+      ]
+     ]
+    },
+    "cat_roar": {
+     "length": 1.8,
+     "loop": false
+    }
+   },
+   "tris": 14384,
+   "bones": 31
+  },
+  "glasswire_scorpion": {
+   "generator": "tools/blender/creatures/build_glasswire_scorpion.py",
+   "glb": "res://assets/characters/glasswire_scorpion.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.867,
+     "loop": true,
+     "ground_speed": 1.5
+    },
+    "run": {
+     "length": 0.467,
+     "loop": true,
+     "ground_speed": 4.2
+    },
+    "run_combat": {
+     "length": 0.467,
+     "loop": true,
+     "ground_speed": 3.8
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "scorp_pinch": {
+     "length": 0.9,
+     "loop": false,
+     "hits": [
+      [
+       0.4,
+       0.5
+      ]
+     ]
+    },
+    "scorp_sting": {
+     "length": 1.1,
+     "loop": false,
+     "hits": [
+      [
+       0.533,
+       0.667
+      ]
+     ]
+    },
+    "scorp_spray": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.467,
+       0.933
+      ]
+     ]
+    }
+   },
+   "tris": 15742,
+   "bones": 49
+  },
+  "marrow_hound": {
+   "generator": "tools/blender/creatures/build_marrow_hound.py",
+   "glb": "res://assets/characters/marrow_hound.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 1.0,
+     "loop": true,
+     "ground_speed": 1.25
+    },
+    "run": {
+     "length": 0.5,
+     "loop": true,
+     "ground_speed": 5.5
+    },
+    "run_combat": {
+     "length": 0.5,
+     "loop": true,
+     "ground_speed": 5.5
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "mhound_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.333,
+       0.433
+      ]
+     ]
+    },
+    "mhound_lunge": {
+     "length": 1.4,
+     "loop": false,
+     "hits": [
+      [
+       0.767,
+       0.9
+      ]
+     ]
+    },
+    "mhound_howl": {
+     "length": 2.5,
+     "loop": false
+    }
+   },
+   "tris": 8020,
+   "bones": 31
+  },
+  "sepulchre_beetle": {
+   "generator": "tools/blender/creatures/build_sepulchre_beetle.py",
+   "glb": "res://assets/characters/sepulchre_beetle.glb",
+   "clips": {
+    "idle": {
+     "length": 3.0,
+     "loop": true
+    },
+    "idle_look": {
+     "length": 2.5,
+     "loop": false
+    },
+    "walk": {
+     "length": 0.733,
+     "loop": true,
+     "ground_speed": 1.3
+    },
+    "run": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 4.0
+    },
+    "run_combat": {
+     "length": 0.333,
+     "loop": true,
+     "ground_speed": 3.8
+    },
+    "hit_light": {
+     "length": 0.4,
+     "loop": false
+    },
+    "hit_heavy": {
+     "length": 0.6,
+     "loop": false
+    },
+    "stagger_small": {
+     "length": 0.8,
+     "loop": false
+    },
+    "knockback": {
+     "length": 0.9,
+     "loop": false
+    },
+    "death": {
+     "length": 1.5,
+     "loop": false
+    },
+    "death_back": {
+     "length": 1.5,
+     "loop": false
+    },
+    "alert": {
+     "length": 1.0,
+     "loop": false
+    },
+    "beetle_bite": {
+     "length": 0.8,
+     "loop": false,
+     "hits": [
+      [
+       0.367,
+       0.467
+      ]
+     ]
+    },
+    "beetle_ram": {
+     "length": 1.0,
+     "loop": false,
+     "hits": [
+      [
+       0.6,
+       0.733
+      ]
+     ]
+    },
+    "beetle_spit": {
+     "length": 1.333,
+     "loop": false,
+     "hits": [
+      [
+       0.867,
+       1.033
+      ]
+     ]
+    }
+   },
+   "tris": 10476,
+   "bones": 31
   }
  }
 }

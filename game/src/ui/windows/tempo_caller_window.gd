@@ -193,7 +193,7 @@ func _card(t: TempoData, mirror: DerivedStats, w: float, err: String, bind_text:
 		row.add_child(nl)
 		var desc := String(sk.desc)
 		var title := String(sk.name)
-		TooltipLayer.attach(row, func() -> Control: return Tips.text("%s\n%d mana · %d s cooldown%s" % [desc, roundi(float(sk.mana)), roundi(float(sk.cooldown)),
+		TooltipLayer.attach(row, func() -> Control: return Tips.text("%s\n%d mana · %d s cooldown%s" % [desc, roundi(float(sk.mana)), roundi(maxf(SkillDef.MIN_COOLDOWN, float(sk.cooldown))),
 			"\nOnly this spirit knows it." if uniq else ""], title))
 		v.add_child(row)
 	v.add_child(Tips.rule())

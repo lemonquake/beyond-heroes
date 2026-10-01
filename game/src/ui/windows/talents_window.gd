@@ -32,6 +32,7 @@ func _build() -> void:
 	tree = TreeView.new()
 	tree.ranks_changed.connect(refresh)
 	scroll.add_child(tree)
+	scroll.resized.connect(func() -> void: tree.fit_to(scroll.size.x - 16.0))
 	var side := vbox(10)
 	side.custom_minimum_size = Vector2(380, 0)
 	row.add_child(side)

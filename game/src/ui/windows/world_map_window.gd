@@ -188,6 +188,8 @@ func refresh() -> void:
 	_search.text = ""
 	_results_panel.visible = false
 	atlas.preview = {}
+	# bh-029: the atlas shows the island the hero stands on (Salmonan or Zarael)
+	DataIsland.show_island(DataIsland.island_of(Game.current_map_id))
 	await get_tree().process_frame
 	_set_view("local" if not DataIsland.MAP_ORIGIN.has(Game.current_map_id) or Game.current_map_id == &"sanctuary" else "island", false)
 	var first := Routes.dest if Routes.active() else _default_selection()

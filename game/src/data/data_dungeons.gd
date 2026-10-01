@@ -631,6 +631,9 @@ static func defs() -> Dictionary:
 		var sp := DataDungeonsSpecial.list()
 		for id in sp:
 			_defs[id] = sp[id]
+		var zr := DataDungeonsZarael.list()
+		for id in zr:
+			_defs[id] = zr[id]
 	return _defs
 
 ## Every dungeon id, easiest (lowest first floor) first.
@@ -666,6 +669,20 @@ static func tier_stars(id: StringName) -> String:
 ## bh-028: a special dungeon (DataDungeonsSpecial): no deeper floors, its own levels, a hero-tier lock on the gate.
 static func is_special(id: StringName) -> bool:
 	return bool(get_def(id).get("special", false))
+
+## bh-029: one of the three Vaults of Zarael (DataDungeonsZarael): special (fixed levels) but no tier lock.
+static func is_zarael(id: StringName) -> bool:
+	return bool(get_def(id).get("zarael", false))
+
+## Room dressing / clutter / gate dressing for a theme, whichever data file defines it.
+static func theme_table(key: String, tid: StringName, fallback: Variant) -> Variant:
+	var srcs := {"DRESS": [DataDungeonsX.DRESS, DataDungeonsSpecial.DRESS, DataDungeonsZarael.DRESS],
+		"CLUTTER": [DataDungeonsX.CLUTTER, DataDungeonsSpecial.CLUTTER, DataDungeonsZarael.CLUTTER],
+		"GATE_DRESS": [DataDungeonsX.GATE_DRESS, DataDungeonsSpecial.GATE_DRESS, DataDungeonsZarael.GATE_DRESS]}
+	for src: Dictionary in srcs.get(key, []):
+		if src.has(tid):
+			return src[tid]
+	return fallback
 
 ## Deeper floors DungeonGrowth may add below the authored ones (none for special dungeons).
 static func max_extra(id: StringName) -> int:
@@ -722,6 +739,8 @@ static func theme(dungeon: StringName) -> Dictionary:
 		return THEMES[t]
 	if DataDungeonsSpecial.THEMES.has(t):
 		return DataDungeonsSpecial.THEMES[t]
+	if DataDungeonsZarael.THEMES.has(t):
+		return DataDungeonsZarael.THEMES[t]
 	return DataDungeonsX.THEMES.get(t, THEMES[&"drowned"])
 
 ## World flag set when floor `n`'s seal breaks (its descent portal opens for good).
@@ -859,6 +878,8 @@ static func _hint(id: StringName, n: int) -> String:
 	if n == champion_floor(id):
 		return "%s guards the portal to the last floor. Beat the champion to break the seal." % d.miniboss.name
 	if n == 1:
+		if is_zarael(id):
+			return "%s One of the three Vaults of Zarael: its lord holds a ward on the Bridge of Death. The way down is sealed by Seal Keepers on every floor." % d.blurb
 		if is_special(id):
 			return "%s An Ascendant dungeon: its monsters are far stronger than anywhere on Salmonan, and only Class A heroes may pass its gate." % d.blurb
 		return "%s The way down is sealed: defeat the Seal Keepers of each floor to open its descent portal." % d.blurb

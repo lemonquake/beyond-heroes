@@ -425,7 +425,7 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 	costs.add_child(lbl("%d Mana" % roundi(mc), 16, Color(0.45, 0.65, 1.0), UITheme.body_bold(), false))
 	if s.valor_cost > 0.0:
 		costs.add_child(lbl("%d Valor" % roundi(s.valor_cost), 16, UITheme.EMBER, UITheme.body_bold(), false))
-	var cd := player.skill_cooldown(sid) if player else s.cooldown
+	var cd := player.skill_cooldown(sid) if player else maxf(SkillDef.MIN_COOLDOWN, s.cooldown)
 	costs.add_child(lbl("%.1f s cooldown" % cd if cd > 0.0 else "No cooldown", 16, UITheme.TEXT, null, false))
 	v.add_child(costs)
 	var el := s.element

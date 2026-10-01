@@ -776,7 +776,7 @@ static func _volley_relay(me: WeakRef, col: Color, radius: float) -> Callable:
 func _pay(sid: StringName) -> void:
 	var sk := DataTempos.skill(sid)
 	spend_mana(float(sk.mana))
-	cooldowns[sid] = float(sk.cooldown)
+	cooldowns[sid] = maxf(SkillDef.MIN_COOLDOWN, float(sk.cooldown))
 	last_skill = sid
 	_combat_t = 0.0
 	_log("skill %s" % sid)

@@ -44,10 +44,62 @@ const CHAIN := [
 		"map": &"olivar", "place": "olv_paul", "npc": &"paul_david", "done_flag": &"", "visit": "spire", "step": "Speak with Paul David in Olivar."},
 ]
 
+## bh-029: Act IV — Zarael, the Corrupted (docs/LORE.md §11; DataZarael). It opens when Kethrax falls (the ship comes to
+## Wyman), so it runs beside Act III: the tracker shows it while the hero is on Zarael (or sailing for it), and once the
+## main chain above is done.
+const ZARAEL_LEVEL := 28
+const ZARAEL := [
+	{"id": "zr_ship", "act": 4, "title": "The Ship at Wyman",
+		"text": "A ship from Zarael, the corrupted island in the east, has put in at Wyman Outpost's Marsh Jetty. Its captain is asking for the hero who killed Kethrax.",
+		"map": &"wyman_outpost", "place": "wy_jetty", "npc": &"ilsa", "done_flag": &"zr_ship_sailed", "step": "Speak with Captain Ilsa Rhondar at the Marsh Jetty.", "level": 30},
+	{"id": "zr_terax", "act": 4, "title": "Agdao",
+		"text": "The ship has carried you to Agdao, Zarael's harbour town. Someone is waiting on the pier.",
+		"map": &"agdao", "place": "agd_pier", "npc": &"terax", "done_flag": &"zr_terax_met", "step": "Meet Terax on Agdao's pier.", "level": 30},
+	{"id": "zr_council", "act": 4, "title": "The Wirekeeper",
+		"text": "Terax says the Wirekeeper, Halvessa Orn, keeps the Heartwire's last working conduit at the top of the Crown of Steps. She will tell you what is killing Agdao.",
+		"map": &"agdao", "place": "agd_crown", "npc": &"wirekeeper", "done_flag": &"zr_wirekeeper_met", "step": "Climb the Crown of Steps and speak with Wirekeeper Halvessa Orn.", "level": 30},
+	{"id": "zr_relays", "act": 4, "title": "Wire-sick",
+		"text": "The Kharvenn chain-priests have chained three relay pylons in the Coilwood, and the Blackwire runs from them straight into Agdao's terraces. Cut the chains.",
+		"map": &"zr_coilwood", "place": "zc_relays", "done_flag": &"zr_relays_cut", "step": "Cut the chains from the three relay pylons in the Coilwood.", "level": 32},
+	{"id": "zr_vault_jade", "act": 4, "title": "The Jade Sepulchre",
+		"text": "The first Vault, where the Wirewright kings sleep. Aljay and Terax emptied it two winters ago; it is full again. Its lord feeds the first ward pylon on the Bridge of Death.",
+		"map": &"zr_coilwood", "place": "zc_jade", "done_flag": &"dg_jade_sepulchre_cleared", "step": "Defeat Quorrath, the Jade Sleeper, in the Jade Sepulchre.", "level": 36},
+	{"id": "zr_vault_obsidian", "act": 4, "title": "The Obsidian Engine",
+		"text": "The second Vault: the machine halls that spun the Heartwire's current up from the island's heat, now stoked with pain.",
+		"map": &"zr_barrens", "place": "zb_obsidian", "done_flag": &"dg_obsidian_engine_cleared", "step": "Defeat Kalvex, the Engine Heart, in the Obsidian Engine.", "level": 42},
+	{"id": "zr_vault_vein", "act": 4, "title": "The Veinworks",
+		"text": "The third Vault goes down into the giant itself. The chains there were driven into something with a pulse.",
+		"map": &"zr_barrens", "place": "zb_vein", "done_flag": &"dg_veinworks_cleared", "step": "Defeat Ysvharn, the Giant's Heart, in the Veinworks.", "level": 48},
+	{"id": "zr_bridge", "act": 4, "title": "The Bridge of Death",
+		"text": "The three Vaults are quiet and their ward pylons burn steady white again. Cross the Bridge of Death; Varrogh, the Deathspan Colossus, still holds the far end.",
+		"map": &"bridge_of_death", "place": "br_platform", "done_flag": &"boss_deathspan_defeated", "step": "Cross the Bridge of Death and defeat Varrogh.", "level": 46},
+	{"id": "zr_abbot", "act": 4, "title": "The Leash-Abbot",
+		"text": "In the Heart Citadel, Orvul Dram, the Leash-Abbot, is chaining the Dawn Engine itself to wake Zarael on a leash.",
+		"map": &"zr_citadel", "place": "hc_engine", "done_flag": &"boss_leash_abbot_defeated", "step": "Defeat Orvul Dram, the Leash-Abbot, at the Dawn Engine.", "level": 50},
+	{"id": "zr_dawn", "act": 4, "title": "The Dawn Current",
+		"text": "The chains on the Dawn Engine are loose. Wake it, and let the old current run clean and white through the Heartwire again.",
+		"map": &"zr_citadel", "place": "hc_engine", "done_flag": &"zr_heartwire_restored", "step": "Wake the Dawn Engine.", "level": 50},
+	{"id": "zr_home", "act": 4, "title": "Agdao Lit",
+		"text": "Every lamp in Agdao is burning steady white. Terax is waiting on the pier, and has one more thing to tell you about Aljay.",
+		"map": &"agdao", "place": "agd_pier", "npc": &"terax", "done_flag": &"", "visit": "dawn", "step": "Return to Terax in Agdao."},
+]
+
 static func current(hero: HeroData) -> Dictionary:
 	if hero == null:
 		return {}
-	for o in CHAIN:
+	var main := _first_open(hero, CHAIN)
+	var zr := _first_open(hero, ZARAEL) if bool(hero.world_flags.get(&"boss_kethrax_defeated", false)) else {}
+	if not zr.is_empty():
+		# on Zarael (or with the main story done) the island's own quest leads; a hero strong enough for Zarael who is
+		# still finishing Act III on Salmonan is pointed at the ship as well
+		if main.is_empty() or DataZarael.is_zarael_map(hero.current_map):
+			return zr
+		if int(main.get("act", 0)) >= 3 and hero.progress.level >= ZARAEL_LEVEL:
+			return zr
+	return main
+
+static func _first_open(hero: HeroData, chain: Array) -> Dictionary:
+	for o in chain:
 		if is_done(hero, o):
 			continue
 		return o
@@ -60,17 +112,18 @@ static func is_done(hero: HeroData, o: Dictionary) -> bool:
 
 static func completed(hero: HeroData) -> Array:
 	var out := []
-	for o in CHAIN:
+	for o in CHAIN + ZARAEL:
 		if is_done(hero, o):
 			out.append(o)
 	return out
 
 static func by_id(id: String) -> Dictionary:
-	for o in CHAIN:
+	for o in CHAIN + ZARAEL:
 		if o.id == id:
 			return o
 	return {}
 
 ## "Act I — The Waypoint's Choice" style header for the tracker.
 static func act_name(act: int) -> String:
-	return ["", "Act I — The Waypoint's Choice", "Act II — The Chain-Marshal", "Act III — The Hollow Warden"][clampi(act, 0, 3)]
+	return ["", "Act I — The Waypoint's Choice", "Act II — The Chain-Marshal", "Act III — The Hollow Warden",
+		"Act IV — Zarael, the Corrupted"][clampi(act, 0, 4)]

@@ -48,10 +48,28 @@ func _on_node_added(n: Node) -> void:
 	elif n is Label3D or n is Sprite3D or n is GPUParticles3D or n is CPUParticles3D or n is Decal:
 		if (n as VisualInstance3D).layers == 1:
 			(n as VisualInstance3D).layers = FX_LAYER
+	elif n is GeometryInstance3D and (n as VisualInstance3D).layers == 1 and _under_fx(n):
+		# bh-029: projectiles, sweeps, hazards, telegraphs and skill areas are meshes too; on layer 1 the minimap's
+		# occasional top-down render froze them onto the map
+		(n as VisualInstance3D).layers = FX_LAYER
 	if n is OmniLight3D or n is SpotLight3D:
 		_lights.append(n)
 	elif n is CharacterVisual:
 		_visuals.append(n)
+
+## Marks `root` (a projectile, sweep, hazard, skill area, effect) so every mesh added under it stays off the minimap.
+static func mark_fx(root: Node) -> void:
+	root.set_meta(&"fx_only", true)
+
+func _under_fx(n: Node) -> bool:
+	var a := n
+	for i in 6:
+		if a == null:
+			return false
+		if a.has_meta(&"fx_only"):
+			return true
+		a = a.get_parent()
+	return false
 
 ## Particle counts in efficiency mode: fewer sparks, same look (at least one).
 func particles(amount: int) -> int:
@@ -90,6 +108,10 @@ func _focus(cam: Camera3D) -> Vector3:
 	return cam.global_position - cam.global_basis.z * 18.0
 
 func _budget_lights(focus: Vector3) -> void:
+	# forget lights that were freed while switched off (their map is gone)
+	for l in _off_lights.keys():
+		if not is_instance_valid(l):
+			_off_lights.erase(l)
 	var cand: Array = []
 	var i := 0
 	while i < _lights.size():
@@ -155,7 +177,9 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 ## Efficiency mode was switched off: give every light back.
 func _restore_lights() -> void:
 	_was_lite = false
-	for l in _off_lights:
+	# iterate a snapshot: walking the dictionary itself hangs Godot 4.7 once its keys include freed lights (a map's
+	# lights left behind after the map was freed)
+	for l in _off_lights.keys():
 		if is_instance_valid(l):
 			RenderingServer.instance_set_visible(l.get_instance(), l.is_visible_in_tree())
 	_off_lights.clear()

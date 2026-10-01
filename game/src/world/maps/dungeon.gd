@@ -79,7 +79,7 @@ func compose() -> void:
 		fd.erase("descent")
 	th = DataDungeons.theme(dungeon)
 	var tid := StringName(dd.get("theme", &"drowned"))
-	dress = DRESS.get(tid, DataDungeonsX.DRESS.get(tid, DataDungeonsSpecial.DRESS.get(tid, DRESS[&"drowned"])))
+	dress = DRESS.get(tid, DataDungeons.theme_table("DRESS", tid, DRESS[&"drowned"]))
 	plan = fd.get("plan", [])
 	rows = plan.size()
 	cols = String(plan[0]).length() if rows > 0 else 0
@@ -531,7 +531,7 @@ func _light_and_dress() -> void:
 			if height.has(c + SIDES[sd]) and absf(height[c + SIDES[sd]] - h) < 0.1:
 				open_n += 1
 		if not walls.is_empty() and open_n >= 2 and rng.randf() < 0.42:
-			var list: Array = CLUTTER.get(StringName(dd.theme), DataDungeonsX.CLUTTER.get(StringName(dd.theme), DataDungeonsSpecial.CLUTTER.get(StringName(dd.theme), [])))
+			var list: Array = CLUTTER.get(StringName(dd.theme), DataDungeons.theme_table("CLUTTER", StringName(dd.theme), []))
 			var sd: String = walls[rng.randi() % walls.size()]
 			var dir: Vector2i = SIDES[sd]
 			var n_items := rng.randi_range(1, 3)

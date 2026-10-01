@@ -993,11 +993,15 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	t.rune_tint = th.rune
 	t.min_tier = DataDungeons.min_tier(dungeon)
 	var tid := StringName(dd.theme)
-	var dress: Array = GATE_DRESS.get(tid, DataDungeonsX.GATE_DRESS.get(tid, DataDungeonsSpecial.GATE_DRESS.get(tid, GATE_DRESS[&"drowned"])))
+	var dress: Array = GATE_DRESS.get(tid, DataDungeons.theme_table("GATE_DRESS", tid, GATE_DRESS[&"drowned"]))
 	var have := func(n: String) -> bool: return ResourceLoader.exists(ENV_DIR % n)
 	# the entrance frame behind the dais, two big pieces flanking it, smaller dressing around
 	if have.call(dress[0]):
-		kit(dress[0], c - fwd * 2.6, yaw, 1.0)
+		# bh-029: a Vault's own portal structure is built round the dais (its origin is the dais centre)
+		if String(dress[0]).begins_with("zr_gate_"):
+			kit(dress[0], c, yaw, 1.0)
+		else:
+			kit(dress[0], c - fwd * 2.6, yaw, 1.0)
 	for sx: float in [-1.0, 1.0]:
 		var q := c - fwd * 1.8 + side * sx * 3.6
 		if have.call(dress[1]):

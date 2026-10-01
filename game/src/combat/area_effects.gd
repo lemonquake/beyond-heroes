@@ -78,6 +78,7 @@ class Sweeper:
 static func sweep(parent: Node, from: Vector3, dir: Vector3, speed: float, length: float, width: float, req: DamageRequest,
 		source: Node, mask: int) -> Sweeper:
 	var s := Sweeper.new()
+	Perf.mark_fx(s)
 	s.source = source
 	s.request = req
 	s.mask = mask
@@ -138,6 +139,7 @@ class Hazard:
 static func hazard(parent: Node, at: Vector3, radius: float, duration: float, req: DamageRequest, source: Node, mask: int,
 		color: Color, interval := 0.5) -> Hazard:
 	var h := Hazard.new()
+	Perf.mark_fx(h)
 	h.source = source
 	h.request = req
 	h.mask = mask
@@ -195,6 +197,7 @@ class DelayedBlast:
 static func delayed(parent: Node, at: Vector3, radius: float, delay: float, req: DamageRequest, source: Node, mask: int,
 		color := Color(1.0, 0.25, 0.1, 0.8), shape := "circle", inner := 0.0) -> DelayedBlast:
 	var b := DelayedBlast.new()
+	Perf.mark_fx(b)
 	b.source = source
 	b.request = req
 	b.mask = mask

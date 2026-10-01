@@ -74,7 +74,32 @@ const ENV := {
 	"BH_GemGold": ["", Color(1.0, 0.86, 0.5), 0.15, 0.0, 1.0, Color(1.0, 0.85, 0.45), 2.6],
 	"BH_GemViolet": ["", Color(0.72, 0.4, 1.0), 0.15, 0.0, 1.0, Color(0.7, 0.35, 1.0), 2.6],
 	"BH_Coals": ["", Color(0.6, 0.15, 0.05), 0.7, 0.0, 1.0, Color(1.0, 0.3, 0.05), 4.0],
+	# bh-029: Zarael (tools/blender/environment/assets_zarael_*.py, tools/textures/gen_zarael_textures.py). Every Zarael
+	# glow is pure white (ZR_GLOW). BH_Wire is the Heartwire: a dim, sick white while the island is corrupted, a bright
+	# steady white once the Dawn Engine wakes (wire_restored, swap_wire).
+	"BH_GlyphStone": ["glyph_stone", Color(0.86, 0.8, 0.7), 0.88, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_GlyphStoneDark": ["glyph_stone", Color(0.5, 0.48, 0.42), 0.9, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_Jade": ["jade_stone", Color(0.62, 0.86, 0.68), 0.35, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_Obsidian": ["obsidian", Color(0.42, 0.4, 0.46), 0.22, 0.1, 0.5, Color.BLACK, 0.0],
+	"BH_LimePlaster": ["lime_plaster", Color(0.9, 0.66, 0.4), 0.92, 0.0, 0.6, Color.BLACK, 0.0],
+	"BH_LimePlasterRed": ["lime_plaster", Color(0.66, 0.26, 0.18), 0.92, 0.0, 0.6, Color.BLACK, 0.0],
+	"BH_TerracePave": ["terrace_paving", Color(0.84, 0.8, 0.72), 0.9, 0.0, 0.4, Color.BLACK, 0.0],
+	"BH_Turquoise": ["turquoise_mosaic", Color(0.7, 0.92, 0.9), 0.5, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_CliffOchre": ["cliff_ochre", Color(0.86, 0.74, 0.62), 0.92, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_Wire": ["", Color(1.0, 1.0, 1.0), 0.35, 0.5, 1.0, Color(1.0, 1.0, 1.0), 1.6],
+	"BH_Glyph": ["", Color(1.0, 1.0, 1.0), 0.4, 0.0, 1.0, Color(1.0, 1.0, 1.0), 1.8],
+	"BH_Blackwire": ["", Color(1.0, 1.0, 1.0), 0.35, 0.5, 1.0, Color(1.0, 1.0, 1.0), 1.8],
+	"BH_Feather": ["cloth", Color(0.16, 0.48, 0.42), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_FeatherRed": ["cloth", Color(0.62, 0.14, 0.1), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_JungleLeaf": ["", Color(0.2, 0.36, 0.16), 0.75, 0.0, 1.0, Color.BLACK, 0.0],
 }
+
+## bh-029: the Heartwire restored (bright white) instead of the Blackwire (dim white). Set from the hero's flag on every
+## map build (Game.load_map) and when the Dawn Engine wakes (swap_wire updates the map in place).
+static var wire_restored := false
+const WIRE_GOLD := [Color(1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0), 4.2]
+## bh-029: the one glow colour of Zarael — wire, glyphs, Kharvenn runes, monster eyes and cores (the user's call)
+const ZR_GLOW := Color(1.0, 1.0, 1.0)
 
 ## bh-012: a dungeon theme swaps the stone of the kit for its own texture set and tint while its map is built
 ## ({"BH_Stone": [texture set, tint], ...}). Cached per theme; `theme_id` is "" outside themed builds.
@@ -114,7 +139,7 @@ static func env(name: String) -> Material:
 	var key := name.get_slice(".", 0)
 	var lite := Perf.lite
 	var themed := theme_over.has(key)
-	var ck := key + ("~lite" if lite else "") + ("~" + theme_id if themed else "")
+	var ck := key + ("~lite" if lite else "") + ("~" + theme_id if themed else "") + ("~gold" if key == "BH_Wire" and wire_restored else "")
 	if _env.has(ck):
 		return _env[ck]
 	if not ENV.has(key):
@@ -176,9 +201,52 @@ static func env(name: String) -> Material:
 		m.albedo_color.a = 0.8
 	if key in ["BH_Flame", "BH_Rune", "BH_Corruption"]:
 		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	if key == "BH_Wire" and wire_restored:
+		m.albedo_color = WIRE_GOLD[0]
+		m.emission = WIRE_GOLD[1]
+		m.emission_energy_multiplier = WIRE_GOLD[2]
 	_env[ck] = m
 	return m
 
+## bh-029: the Heartwire material in a given state, whatever the island's state is (a Bridge ward pylon whose Vault is
+## cleared burns gold while the rest of Zarael is still violet).
+static func wire_material(gold: bool) -> Material:
+	var was := wire_restored
+	wire_restored = gold
+	var m := env("BH_Wire")
+	wire_restored = was
+	return m
+
+## Every surface under `root` that uses material `from` uses `to` instead (surface overrides).
+static func swap_material(root: Node, from: Material, to: Material) -> void:
+	for n in root.find_children("*", "MeshInstance3D", true, false):
+		var mi := n as MeshInstance3D
+		if mi.mesh == null:
+			continue
+		for i in mi.mesh.get_surface_count():
+			if mi.get_surface_override_material(i) == from:
+				mi.set_surface_override_material(i, to)
+
+## bh-029: the Dawn Engine woke — every Heartwire surface under `root` turns gold (meshes and batched decoration).
+static func swap_wire(root: Node, restored: bool) -> void:
+	wire_restored = not restored
+	var old := env("BH_Wire")
+	wire_restored = restored
+	var new_m := env("BH_Wire")
+	for n in root.find_children("*", "GeometryInstance3D", true, false):
+		var mesh: Mesh = null
+		if n is MeshInstance3D:
+			mesh = (n as MeshInstance3D).mesh
+			if mesh:
+				for i in mesh.get_surface_count():
+					if (n as MeshInstance3D).get_surface_override_material(i) == old:
+						(n as MeshInstance3D).set_surface_override_material(i, new_m)
+		elif n is MultiMeshInstance3D and (n as MultiMeshInstance3D).multimesh:
+			mesh = (n as MultiMeshInstance3D).multimesh.mesh
+			if mesh:
+				for i in mesh.get_surface_count():
+					if mesh.surface_get_material(i) == old:
+						mesh.surface_set_material(i, new_m)
 ## Replace every surface material on an environment scene with the library version when the name matches.
 static func apply_environment(root: Node) -> void:
 	if root is MeshInstance3D:
@@ -248,6 +316,12 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 			m.emission = imported.emission
 			# item models (bh-006, "__it_" palettes) carry deliberately soft glows (potion liquids, gems): no 1.0 floor
 			m.emission_energy_multiplier = clampf(imported.emission_energy_multiplier, 0.0 if "__it_" in nm else 1.0, 4.0)
+		# bh-029: every glow on a Zarael model is pure white, whatever colour its source palette was authored in
+		if (base == "BH_Emissive" or base == "BH_WeakPoint") and zr_white_palette(pal):
+			m.albedo_color = ZR_GLOW
+			m.emission_enabled = true
+			m.emission = ZR_GLOW
+			m.emission_energy_multiplier = maxf(m.emission_energy_multiplier, 2.0)
 	elif not d.is_empty():
 		m.albedo_color = d[0]
 	m.rim_enabled = not lite
@@ -255,6 +329,18 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	m.rim_tint = 0.6
 	_char[ck] = m
 	return m
+
+## bh-029: the palettes whose glows are forced white: the Zarael monsters and Agdao's people (their models).
+static var _zr_palettes := {}
+
+static func zr_white_palette(pal: String) -> bool:
+	if _zr_palettes.is_empty():
+		for id: StringName in DataEnemiesZarael.ids():
+			_zr_palettes[String(id)] = true
+		for id in ["terax", "wirekeeper", "ilsa", "agdao_porter", "agdao_vendor", "agdao_elder"]:
+			_zr_palettes[id] = true
+			_zr_palettes["town_" + id] = true
+	return _zr_palettes.has(pal)
 
 ## bh-021: the legends (Aljay, Roydo, Paul David, Kethrax) and their weapons carry a box-projected UV map
 ## (tools/blender/characters/legend_kit.finish_mesh) and real tileable texture sets (tools/textures/gen_legend_textures.py).

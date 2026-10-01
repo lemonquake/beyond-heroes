@@ -1,0 +1,22 @@
+[glasswire_scorpion] numpy-vs-Blender pose check: worst bone head/tail error 0.001 mm
+[glasswire_scorpion] mesh 15742 tris, 8333 verts, 49 bones, 15 clips; rest bounds x -1.111..1.111 y -2.116..1.181 z 0.009..1.758
+[glasswire_scorpion] worst IK reach miss per clip (mm): idle 0.0, idle_look 0.0, walk 0.0, run 0.0, run_combat 0.0, hit_light 0.0, hit_heavy 0.0, stagger_small 0.0, knockback 0.0, death 13.4, death_back 15.8, alert 0.0, scorp_pinch 0.0, scorp_sting 0.0, scorp_spray 0.0
+04:33:29 | INFO: Extracting primitive: glasswire_scorpion
+[glasswire_scorpion] -> A:\Python\beyond-heroes\game\assets\characters\glasswire_scorpion.glb (2.48 MB)
+[glasswire_scorpion] check_lengths: 15 animations in the GLB; mismatches: []
+[glasswire_scorpion]   idle             want  3.000s got 3
+[glasswire_scorpion]   idle_look        want  2.500s got 2.5
+[glasswire_scorpion]   walk             want  0.867s got 0.8666666666666667
+[glasswire_scorpion]   run              want  0.467s got 0.4666666666666667
+[glasswire_scorpion]   run_combat       want  0.467s got 0.4666666666666667
+[glasswire_scorpion]   hit_light        want  0.400s got 0.4
+[glasswire_scorpion]   hit_heavy        want  0.600s got 0.6
+[glasswire_scorpion]   stagger_small    want  0.800s got 0.8
+[glasswire_scorpion]   knockback        want  0.900s got 0.9
+[glasswire_scorpion]   death            want  1.500s got 1.5
+[glasswire_scorpion]   death_back       want  1.500s got 1.5
+[glasswire_scorpion]   alert            want  1.000s got 1
+[glasswire_scorpion]   scorp_pinch      want  0.900s got 0.9
+[glasswire_scorpion]   scorp_sting      want  1.100s got 1.1
+[glasswire_scorpion]   scorp_spray      want  1.400s got 1.4
+[glasswire_scorpion] meta merged ['scorp_pinch', 'scorp_spray', 'scorp_sting'] + models.glasswire_scorpion -> A:\Python\beyond-heroes\game\assets\characters\creature_meta.json (verified: True)

@@ -1,0 +1,15 @@
+[deathspan_colossus] mesh 25576 tris, 283 parts, 2.0s
+[deathspan_colossus] baked 51 actions in 26.3s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+04:34:23 | INFO: Starting glTF 2.0 export
+04:34:23 | INFO: Extracting primitive: deathspan_colossus
+04:34:23 | INFO: Primitives created: 9
+04:34:28 | INFO: Finished glTF 2.0 export in 5.397771120071411 s
+
+[deathspan_colossus] clip lengths verified (51 clips)
+[deathspan_colossus] -> A:\Python\beyond-heroes\game\assets\characters\deathspan_colossus.glb (4.2 MB)
+[build] done in 34.1s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

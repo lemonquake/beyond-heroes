@@ -13,6 +13,9 @@ const SCRIPTS := {
 	&"the_three": "res://src/cinema/scenes/cs_the_three.gd",
 	&"kethrax_intro": "res://src/cinema/scenes/cs_kethrax_intro.gd",
 	&"chain_breaks": "res://src/cinema/scenes/cs_chain_breaks.gd",
+	# bh-029: Zarael — Terax on Agdao's pier, and the Dawn Engine waking
+	&"terax_welcome": "res://src/cinema/scenes/cs_terax_welcome.gd",
+	&"dawn_current": "res://src/cinema/scenes/cs_dawn_current.gd",
 }
 
 static func make(id: StringName) -> Cutscene:

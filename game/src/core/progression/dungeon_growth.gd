@@ -133,6 +133,8 @@ static func floor_plan(dungeon: StringName, floor_n: int) -> Dictionary:
 		"chests": [[Vector2i(2, 2), 1], [Vector2i(17, 2), 2]]}
 
 static func summary(hero: HeroData, dungeon: StringName) -> String:
+	if DataDungeons.is_zarael(dungeon):
+		return "A Vault of Zarael · fixed levels · very strong monsters"
 	if DataDungeons.is_special(dungeon):
 		return "Ascendant · Class A heroes only · very strong monsters"
 	return describe(for_hero(hero, dungeon))

@@ -38,6 +38,8 @@ func _run() -> void:
 		methods.sort()
 		var ts := Time.get_ticks_usec()
 		for m in methods:
+			if OS.has_environment("BH_TEST_TRACE"):
+				print("[TRACE] %s.%s" % [f.get_basename(), m])   # find the test a stuck run is sitting in
 			inst.begin("%s.%s" % [f.get_basename(), m])
 			var d0 := inst._done
 			await inst.call(m)  # tests may be coroutines (e.g. waiting for a navigation sync)

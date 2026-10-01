@@ -1,0 +1,15 @@
+[span_warden] mesh 18950 tris, 253 parts, 1.5s
+[span_warden] baked 46 actions in 18.5s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+04:33:19 | INFO: Starting glTF 2.0 export
+04:33:19 | INFO: Extracting primitive: span_warden
+04:33:19 | INFO: Primitives created: 8
+04:33:23 | INFO: Finished glTF 2.0 export in 3.7589809894561768 s
+
+[span_warden] clip lengths verified (46 clips)
+[span_warden] -> A:\Python\beyond-heroes\game\assets\characters\span_warden.glb (3.5 MB)
+[build] done in 24.1s
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

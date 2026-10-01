@@ -37,7 +37,8 @@ func test_chain_order() -> void:
 	h.mark_dialogue_visited(&"maelis", "warden_fallen")
 	eq(Objectives.current(h).id, "spire", "then the Black Spire with Paul David")
 	h.mark_dialogue_visited(&"paul_david", "spire")
-	ok(Objectives.current(h).is_empty(), "the story so far is complete")
+	# bh-029: with Salmonan's story done, Act IV (Zarael) leads — Kethrax's fall brought the ship
+	eq(Objectives.current(h).id, "zr_ship", "the story on Salmonan is complete; the ship to Zarael is next")
 	for o in Objectives.CHAIN:
 		ok(String(o.get("step", "")) != "" and String(o.get("title", "")) != "", "%s has a title and a step" % o.id)
 		if o.has("npc"):

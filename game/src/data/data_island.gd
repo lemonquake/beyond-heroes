@@ -8,13 +8,13 @@ class_name DataIsland
 ## Every charted map sits on the atlas at one uniform scale (PX_M metres per atlas pixel), so a road's drawn length and
 ## its walked length agree. Dungeon floors are not surface geography: they draw on the Underground view.
 
-const PX_M := 0.7                                   # metres per atlas pixel for every charted surface map
 const ATLAS_SIZE := Vector2(1000, 850)              # atlas coordinate space (the base art is 2x this)
-const ATLAS_ART := "res://assets/ui/atlas/salmonan_atlas.png"
+const SALMONAN_PX_M := 0.7                          # metres per atlas pixel for every charted Salmonan surface map
+const SALMONAN_ART := "res://assets/ui/atlas/salmonan_atlas.png"
 const WALK_SPEED := 5.0                             # m/s used by the walking estimate when no hero is bound
 
 ## Atlas pixel of each surface map's local origin (local x/z metres map to +x/+y pixels at PX_M).
-const MAP_ORIGIN := {
+const SALMONAN_ORIGIN := {
 	&"sanctuary": Vector2(240, 527),
 	&"westreach": Vector2(400, 544),
 	&"ruined_forest": Vector2(366, 402),
@@ -24,7 +24,7 @@ const MAP_ORIGIN := {
 }
 
 ## Surface areas revealed on the atlas once their map is discovered (atlas px ellipses: centre, radii).
-const CHARTED_AREAS := {
+const SALMONAN_CHARTED := {
 	&"sanctuary": [Vector2(240, 527), Vector2(80, 76)],
 	&"westreach": [Vector2(300, 640), Vector2(215, 150)],
 	&"ruined_forest": [Vector2(366, 402), Vector2(130, 92)],
@@ -34,12 +34,77 @@ const CHARTED_AREAS := {
 }
 
 ## Uncharted regions: painted on the base atlas, named here, not routable in this milestone.
-const REGIONS := [
+const SALMONAN_REGIONS := [
 	{"name": "Stillwater Lake", "pos": Vector2(575, 392)},
 	{"name": "Northern Heights", "pos": Vector2(470, 200)},
 	{"name": "Reedwater Marsh", "pos": Vector2(735, 640)},
 	{"name": "Eastern Shore", "pos": Vector2(845, 430)},
 ]
+
+## bh-029: Zarael Island has its own atlas (tools/ui_art/bh029_atlas.py), at 1 m per atlas pixel: the island is bigger.
+## Its maps chain west to east along the south coast (Agdao, the Coilwood, the Glasswire Barrens), then the Bridge of
+## Death runs north over the gorge to the Heart Citadel.
+const ZARAEL_PX_M := 1.0
+const ZARAEL_ART := "res://assets/ui/atlas/zarael_atlas.png"
+const ZARAEL_ORIGIN := {
+	&"agdao": Vector2(230, 705),
+	&"zr_coilwood": Vector2(456, 649),
+	&"zr_barrens": Vector2(728, 647),
+	&"bridge_of_death": Vector2(758, 393),
+	&"zr_citadel": Vector2(758, 149),
+}
+const ZARAEL_CHARTED := {
+	&"agdao": [Vector2(230, 700), Vector2(96, 90)],
+	&"zr_coilwood": [Vector2(456, 649), Vector2(150, 110)],
+	&"zr_barrens": [Vector2(728, 647), Vector2(140, 110)],
+	&"bridge_of_death": [Vector2(758, 393), Vector2(60, 175)],
+	&"zr_citadel": [Vector2(758, 149), Vector2(110, 95)],
+}
+const ZARAEL_REGIONS := [
+	{"name": "The Gorge", "pos": Vector2(520, 392)},
+	{"name": "Wirewright Highlands", "pos": Vector2(400, 200)},
+	{"name": "Step-farms", "pos": Vector2(900, 240)},
+]
+
+## The island the atlas shows (show_island swaps the live tables below; the M map follows the hero).
+static var island := &"salmonan"
+static var PX_M := SALMONAN_PX_M
+static var ATLAS_ART := SALMONAN_ART
+static var MAP_ORIGIN: Dictionary = SALMONAN_ORIGIN
+static var CHARTED_AREAS: Dictionary = SALMONAN_CHARTED
+static var REGIONS: Array = SALMONAN_REGIONS
+
+static func show_island(id: StringName) -> void:
+	island = &"zarael" if id == &"zarael" else &"salmonan"
+	var z := island == &"zarael"
+	PX_M = ZARAEL_PX_M if z else SALMONAN_PX_M
+	ATLAS_ART = ZARAEL_ART if z else SALMONAN_ART
+	MAP_ORIGIN = ZARAEL_ORIGIN if z else SALMONAN_ORIGIN
+	CHARTED_AREAS = ZARAEL_CHARTED if z else SALMONAN_CHARTED
+	REGIONS = ZARAEL_REGIONS if z else SALMONAN_REGIONS
+
+## Which island a map is on: a Zarael surface map, a Vault floor, or (everything else) Salmonan.
+static func island_of(map_id: StringName) -> StringName:
+	if ZARAEL_ORIGIN.has(map_id):
+		return &"zarael"
+	var s := String(map_id)
+	for d in ["dg_jade_sepulchre", "dg_obsidian_engine", "dg_veinworks"]:
+		if s.begins_with(d):
+			return &"zarael"
+	return &"salmonan"
+
+## A surface map charted on either island's atlas.
+static func is_surface(map_id: StringName) -> bool:
+	return SALMONAN_ORIGIN.has(map_id) or ZARAEL_ORIGIN.has(map_id)
+
+## A place that draws on the atlas now showing (its own map, or its anchor's, is on that island).
+static func on_view(p: Dictionary) -> bool:
+	if p.has("atlas"):
+		return island == &"salmonan"
+	if MAP_ORIGIN.has(StringName(p.get("map", ""))):
+		return true
+	var a := String(p.get("anchor", ""))
+	return a != "" and on_view(place(a))
 
 ## kind: town, service, home, shrine, junction, landmark, district, dungeon. listed: shown as a destination (search, the
 ## sidebar list, labels). public: known from the start (charted public geography); others are found by walking near
@@ -282,6 +347,78 @@ const PLACES := [
 		"levels": "Level 7–10", "text": "Halls of the first oath, high in the eastern mountains. Reached through the Catacombs."},
 	{"id": "throne", "name": "The Hollow Throne", "kind": "dungeon", "map": "boss_arena", "listed": true, "public": true, "anchor": "temple",
 		"levels": "Level 10", "text": "Morthar waits beyond the temple's sealed door."},
+	# --- bh-029: the Marsh Jetty at Wyman Outpost, where Agdao's ship lies once Kethrax has fallen ---
+	{"id": "wy_jetty", "name": "Marsh Jetty", "kind": "landmark", "map": "wyman_outpost", "pos": Vector2(41, 26), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "A jetty out over Reedwater Marsh from a small gate in the camp's south-east. Since Kethrax fell, Agdao's ship, the Sunwake, lies at its end."},
+	# --- bh-029: Zarael Island, the corrupted (DataZarael; docs/LORE.md §11). Drawn on the Zarael atlas ---
+	{"id": "agd_pier", "name": "Agdao Pier", "kind": "landmark", "map": "agdao", "pos": Vector2(-20, 47), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "Agdao's stone pier, where the Sunwake moors. Terax, Warden of Agdao, keeps watch at its head."},
+	{"id": "agd_market", "name": "The Wire Market", "kind": "service", "map": "agdao", "pos": Vector2(0, 18), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "The market terrace above the harbour: Obsidian Arms (Dorrit Vask) and Kettle's Remedies (Brisa Kettle) round a wire-wound fountain."},
+	{"id": "agd_shrine", "name": "Agdao Waypoint", "kind": "shrine", "map": "agdao", "pos": Vector2(26, 18), "listed": true, "public": true,
+		"shrine": "agdao_shrine", "levels": "Safe haven", "text": "A waypoint on the east end of the Wire Market. The Aether does not care how wide the sea is."},
+	{"id": "agd_harbour", "name": "The Harbour Ward", "kind": "service", "map": "agdao", "pos": Vector2(-46, 41), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "Mother Ysenne's house, where the wire-sick of Agdao are tended."},
+	{"id": "agd_mid", "name": "The Middle Terrace", "kind": "junction", "map": "agdao", "pos": Vector2(0, -8), "listed": false, "public": true,
+		"levels": "Safe haven", "text": "Houses on the third of Agdao's five terraces, joined by stairs and footbridges."},
+	{"id": "agd_council", "name": "The Council Porch", "kind": "service", "map": "agdao", "pos": Vector2(-30, -8), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "Speaker Caius Wend reads the terraces' complaints on the porch of the council hall."},
+	{"id": "agd_upper", "name": "The Upper Terrace", "kind": "junction", "map": "agdao", "pos": Vector2(0, -30), "listed": false, "public": true,
+		"levels": "Safe haven", "text": "The highest of the houses, and the old lifts. Toma Kettridge tends them."},
+	{"id": "agd_crown", "name": "The Crown of Steps", "kind": "landmark", "map": "agdao", "pos": Vector2(0, -67), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "The great stepped pyramid above Agdao. Wirekeeper Halvessa Orn keeps the Heartwire's last working conduit at its top."},
+	{"id": "agd_gate", "name": "Coilwood Gate", "kind": "junction", "map": "agdao", "pos": Vector2(72, -26), "listed": true, "public": true,
+		"levels": "Safe haven", "text": "Agdao's east gate. The road beyond runs into the Coilwood."},
+	{"id": "zc_west", "name": "Coilwood Road", "kind": "junction", "map": "zr_coilwood", "pos": Vector2(-136, 30), "listed": false, "public": true,
+		"levels": "Level 30–36", "text": "Where the road from Agdao's gate enters the jungle."},
+	{"id": "zc_shrine", "name": "The Overgrown Shrine", "kind": "shrine", "map": "zr_coilwood", "pos": Vector2(-108, 18), "listed": true, "public": true,
+		"shrine": "coil_shrine", "levels": "Level 30–36", "text": "A Wirewright shrine swallowed by the Coilwood, with a waypoint still glowing in it."},
+	{"id": "zc_fork", "name": "Aqueduct Fork", "kind": "junction", "map": "zr_coilwood", "pos": Vector2(-60, 10), "listed": false, "public": true,
+		"levels": "Level 30–36", "text": "Under a broken aqueduct the road forks toward the first relay pylon."},
+	{"id": "zc_relays", "name": "The Relay Lines", "kind": "district", "map": "zr_coilwood", "pos": Vector2(10, 0), "listed": true, "public": true,
+		"levels": "Level 30–36", "text": "The heart of the Coilwood, where three relay pylons carry the Heartwire toward Agdao. The Kharvenn have chained all three."},
+	{"id": "zc_relay_1", "name": "Western Relay", "kind": "landmark", "map": "zr_coilwood", "pos": Vector2(-58, -42), "listed": true, "public": false,
+		"levels": "Level 30–34", "text": "A relay pylon in the step-fields, chained by the chain-priests."},
+	{"id": "zc_relay_2", "name": "Southern Relay", "kind": "landmark", "map": "zr_coilwood", "pos": Vector2(18, 52), "listed": true, "public": false,
+		"levels": "Level 32–35", "text": "A relay pylon by the old cistern, chained by the chain-priests."},
+	{"id": "zc_relay_3", "name": "Eastern Relay", "kind": "landmark", "map": "zr_coilwood", "pos": Vector2(66, -28), "listed": true, "public": false,
+		"levels": "Level 33–36", "text": "A relay pylon on the ridge, chained by the chain-priests."},
+	{"id": "zc_camp", "name": "Kharvenn Camp", "kind": "landmark", "map": "zr_coilwood", "pos": Vector2(28, -58), "listed": true, "public": false,
+		"levels": "Level 33–36", "text": "Iron tents and racks of rune-chains: the chain-priests' camp in the Coilwood."},
+	{"id": "zc_jade", "name": "Jade Sepulchre Gate", "kind": "landmark", "map": "zr_coilwood", "pos": Vector2(92, -50), "listed": true, "public": false,
+		"levels": "Level 33–40", "text": "Serpent jaws of jade in the hillside: the way down into the Jade Sepulchre, the first of the three Vaults."},
+	{"id": "zc_east", "name": "Barrens Road", "kind": "junction", "map": "zr_coilwood", "pos": Vector2(136, 8), "listed": false, "public": true,
+		"levels": "Level 30–36", "text": "The road east out of the jungle into the Glasswire Barrens."},
+	{"id": "zb_west", "name": "Barrens Edge", "kind": "junction", "map": "zr_barrens", "pos": Vector2(-126, 10), "listed": false, "public": true,
+		"levels": "Level 36–42", "text": "Where the Coilwood ends and the ground turns red and glassy."},
+	{"id": "zb_camp", "name": "Survivors' Camp", "kind": "shrine", "map": "zr_barrens", "pos": Vector2(-40, 30), "listed": true, "public": true,
+		"shrine": "barrens_shrine", "levels": "Safe haven", "text": "A walled camp of Agdao's scouts and the farmers who could not get home over the Bridge. Quillan Ashby watches the Bridge from here. A waypoint."},
+	{"id": "zb_fork", "name": "Glass Crossroads", "kind": "junction", "map": "zr_barrens", "pos": Vector2(0, 10), "listed": false, "public": true,
+		"levels": "Level 36–42", "text": "The Barrens road forks: north to the Bridge of Death, east to the Veinworks."},
+	{"id": "zb_colossus", "name": "The Fallen Colossus", "kind": "landmark", "map": "zr_barrens", "pos": Vector2(48, -28), "listed": true, "public": false,
+		"levels": "Level 38–42", "text": "A Wirewright giant of bronze and stone, fallen face-down where the Blackwire broke through the ground."},
+	{"id": "zb_obsidian", "name": "Obsidian Engine Gate", "kind": "landmark", "map": "zr_barrens", "pos": Vector2(-68, -54), "listed": true, "public": false,
+		"levels": "Level 39–46", "text": "Black glass doors in the ground with white light burning in their seams: the way into the Obsidian Engine."},
+	{"id": "zb_vein", "name": "Veinworks Gate", "kind": "landmark", "map": "zr_barrens", "pos": Vector2(80, 40), "listed": true, "public": false,
+		"levels": "Level 45–53", "text": "A cleft of bone and red veins in the stone, warm to the touch: the way down into the Veinworks."},
+	{"id": "zb_north", "name": "Bridge Road", "kind": "junction", "map": "zr_barrens", "pos": Vector2(30, -96), "listed": false, "public": true,
+		"levels": "Level 36–42", "text": "The road north to the Bridge of Death."},
+	{"id": "br_south", "name": "The South Gatehouse", "kind": "junction", "map": "bridge_of_death", "pos": Vector2(0, 148), "listed": true, "public": true,
+		"levels": "Level 42–46", "text": "The south end of the Bridge of Death, under its Wirewright gatehouse."},
+	{"id": "br_platform", "name": "The Far Platform", "kind": "landmark", "map": "bridge_of_death", "pos": Vector2(0, -118), "listed": true, "public": false,
+		"levels": "Level 46", "text": "The broad platform at the north end of the span, where Varrogh, the Deathspan Colossus, stands guard."},
+	{"id": "br_north", "name": "The North Gatehouse", "kind": "junction", "map": "bridge_of_death", "pos": Vector2(0, -156), "listed": false, "public": true,
+		"levels": "Level 46", "text": "The north gatehouse, sealed while Varrogh holds the span."},
+	{"id": "hc_south", "name": "Citadel Approach", "kind": "junction", "map": "zr_citadel", "pos": Vector2(0, 78), "listed": false, "public": true,
+		"levels": "Level 46–52", "text": "Where the road from the Bridge of Death climbs to the Heart Citadel."},
+	{"id": "hc_engine", "name": "The Dawn Engine", "kind": "landmark", "map": "zr_citadel", "pos": Vector2(0, -28), "listed": true, "public": false,
+		"levels": "Level 50–52", "text": "The Wirewrights' engine at the heart of the Citadel, chained by the Leash-Abbot."},
+	{"id": "jade_sepulchre", "name": "The Jade Sepulchre", "kind": "dungeon", "map": "dg_jade_sepulchre_1", "listed": true, "public": false, "anchor": "zc_jade",
+		"levels": "Level 33–40", "text": "The first Vault of Zarael, seven floors down. Quorrath, the Jade Sleeper, holds its throne."},
+	{"id": "obsidian_engine", "name": "The Obsidian Engine", "kind": "dungeon", "map": "dg_obsidian_engine_1", "listed": true, "public": false, "anchor": "zb_obsidian",
+		"levels": "Level 39–46", "text": "The second Vault of Zarael, seven floors of machine halls. Kalvex, the Engine Heart, burns at the bottom."},
+	{"id": "veinworks", "name": "The Veinworks", "kind": "dungeon", "map": "dg_veinworks_1", "listed": true, "public": false, "anchor": "zb_vein",
+		"levels": "Level 45–53", "text": "The third Vault of Zarael, seven floors into the giant. Ysvharn, the Giant's Heart, beats at the bottom."},
 ]
 
 ## Enterable buildings: interior place id -> the interior map (added to PLACES at load; distance inside is not counted).
@@ -436,6 +573,62 @@ const ROADS := [
 		"points": [Vector2(18, 0), Vector2(24, -2), Vector2(27, 8), Vector2(30, 17)]},
 	{"id": "rf_grove_road", "name": "Grove Road", "type": "road", "map": "ruined_forest", "a": "rf_fork", "b": "rf_gate",
 		"points": [Vector2(18, 0), Vector2(30, -4), Vector2(44, -4), Vector2(57, -3), Vector2(60, -3.3)]},
+	# bh-029: the Marsh Jetty path at Wyman Outpost
+	{"id": "wy_jetty_path", "name": "Jetty path", "type": "trail", "map": "wyman_outpost", "a": "wy_camp", "b": "wy_jetty",
+		"points": [Vector2(0, 6), Vector2(12, 12), Vector2(25.4, 17.8), Vector2(29.5, 21.5), Vector2(35, 26), Vector2(41, 26)]},
+	# bh-029: Zarael (the map builders lay their stairs, paving and road beds along these)
+	{"id": "agd_harbour_stair", "name": "Harbour Stair", "type": "road", "map": "agdao", "a": "agd_pier", "b": "agd_market",
+		"points": [Vector2(-20, 47), Vector2(-20, 38), Vector2(-20, 26), Vector2(-10, 18), Vector2(0, 18)]},
+	{"id": "agd_market_row", "name": "Wire Market", "type": "road", "map": "agdao", "a": "agd_market", "b": "agd_shrine",
+		"points": [Vector2(0, 18), Vector2(14, 18), Vector2(26, 18)]},
+	{"id": "agd_quay", "name": "The Quay", "type": "road", "map": "agdao", "a": "agd_pier", "b": "agd_harbour",
+		"points": [Vector2(-20, 47), Vector2(-34, 44), Vector2(-46, 41)]},
+	{"id": "agd_grand_stair", "name": "Grand Stair", "type": "road", "map": "agdao", "a": "agd_market", "b": "agd_mid",
+		"points": [Vector2(0, 18), Vector2(0, 8), Vector2(0, -2), Vector2(0, -8)]},
+	{"id": "agd_council_walk", "name": "Council Walk", "type": "road", "map": "agdao", "a": "agd_mid", "b": "agd_council",
+		"points": [Vector2(0, -8), Vector2(-15, -8), Vector2(-30, -8)]},
+	{"id": "agd_upper_stair", "name": "Upper Stair", "type": "road", "map": "agdao", "a": "agd_mid", "b": "agd_upper",
+		"points": [Vector2(0, -8), Vector2(0, -16), Vector2(0, -26), Vector2(0, -30)]},
+	{"id": "agd_gate_road", "name": "Gate Road", "type": "road", "map": "agdao", "a": "agd_upper", "b": "agd_gate",
+		"points": [Vector2(0, -30), Vector2(20, -30), Vector2(40, -28), Vector2(60, -26), Vector2(72, -26)]},
+	{"id": "agd_crown_stair", "name": "Stair of the Crown", "type": "road", "map": "agdao", "a": "agd_upper", "b": "agd_crown",
+		"points": [Vector2(0, -30), Vector2(0, -37), Vector2(0, -44), Vector2(0, -56), Vector2(0, -67)]},
+	{"id": "zc_road", "name": "Coilwood Road", "type": "road", "map": "zr_coilwood", "a": "zc_west", "b": "zc_shrine",
+		"points": [Vector2(-136, 30), Vector2(-120, 24), Vector2(-108, 18)]},
+	{"id": "zc_road_2", "name": "Coilwood Road", "type": "road", "map": "zr_coilwood", "a": "zc_shrine", "b": "zc_fork",
+		"points": [Vector2(-108, 18), Vector2(-84, 14), Vector2(-60, 10)]},
+	{"id": "zc_road_3", "name": "Coilwood Road", "type": "road", "map": "zr_coilwood", "a": "zc_fork", "b": "zc_relays",
+		"points": [Vector2(-60, 10), Vector2(-40, 6), Vector2(-20, 4), Vector2(10, 0)]},
+	{"id": "zc_road_4", "name": "Coilwood Road", "type": "road", "map": "zr_coilwood", "a": "zc_relays", "b": "zc_east",
+		"points": [Vector2(10, 0), Vector2(40, -4), Vector2(70, -6), Vector2(100, 2), Vector2(136, 8)]},
+	{"id": "zc_relay1_trail", "name": "Step-field trail", "type": "trail", "map": "zr_coilwood", "a": "zc_fork", "b": "zc_relay_1",
+		"points": [Vector2(-60, 10), Vector2(-60, -12), Vector2(-58, -30), Vector2(-58, -42)]},
+	{"id": "zc_relay2_trail", "name": "Cistern trail", "type": "trail", "map": "zr_coilwood", "a": "zc_relays", "b": "zc_relay_2",
+		"points": [Vector2(10, 0), Vector2(14, 20), Vector2(18, 40), Vector2(18, 52)]},
+	{"id": "zc_relay3_trail", "name": "Ridge trail", "type": "trail", "map": "zr_coilwood", "a": "zc_relays", "b": "zc_relay_3",
+		"points": [Vector2(10, 0), Vector2(40, -4), Vector2(56, -14), Vector2(66, -28)]},
+	{"id": "zc_camp_trail", "name": "Chain trail", "type": "trail", "map": "zr_coilwood", "a": "zc_relays", "b": "zc_camp",
+		"points": [Vector2(10, 0), Vector2(18, -22), Vector2(26, -44), Vector2(28, -58)]},
+	{"id": "zc_jade_trail", "name": "Serpent trail", "type": "trail", "map": "zr_coilwood", "a": "zc_relay_3", "b": "zc_jade",
+		"points": [Vector2(66, -28), Vector2(80, -40), Vector2(92, -50)]},
+	{"id": "zb_road", "name": "Barrens Road", "type": "road", "map": "zr_barrens", "a": "zb_west", "b": "zb_camp",
+		"points": [Vector2(-126, 10), Vector2(-90, 16), Vector2(-60, 26), Vector2(-40, 30)]},
+	{"id": "zb_road_2", "name": "Barrens Road", "type": "road", "map": "zr_barrens", "a": "zb_camp", "b": "zb_fork",
+		"points": [Vector2(-40, 30), Vector2(-16, 22), Vector2(0, 10)]},
+	{"id": "zb_bridge_road", "name": "Bridge Road", "type": "road", "map": "zr_barrens", "a": "zb_fork", "b": "zb_north",
+		"points": [Vector2(0, 10), Vector2(14, -20), Vector2(24, -50), Vector2(28, -76), Vector2(30, -96)]},
+	{"id": "zb_obsidian_trail", "name": "Glass trail", "type": "trail", "map": "zr_barrens", "a": "zb_camp", "b": "zb_obsidian",
+		"points": [Vector2(-40, 30), Vector2(-52, 6), Vector2(-62, -30), Vector2(-68, -54)]},
+	{"id": "zb_vein_trail", "name": "Red trail", "type": "trail", "map": "zr_barrens", "a": "zb_fork", "b": "zb_vein",
+		"points": [Vector2(0, 10), Vector2(30, 20), Vector2(60, 34), Vector2(80, 40)]},
+	{"id": "zb_colossus_trail", "name": "Colossus trail", "type": "trail", "map": "zr_barrens", "a": "zb_fork", "b": "zb_colossus",
+		"points": [Vector2(0, 10), Vector2(14, -20), Vector2(32, -24), Vector2(48, -28)]},
+	{"id": "br_span", "name": "The Bridge of Death", "type": "road", "map": "bridge_of_death", "a": "br_south", "b": "br_platform",
+		"points": [Vector2(0, 148), Vector2(0, 100), Vector2(0, 40), Vector2(0, -40), Vector2(0, -100), Vector2(0, -118)]},
+	{"id": "br_span_north", "name": "The Bridge of Death", "type": "road", "map": "bridge_of_death", "a": "br_platform", "b": "br_north",
+		"points": [Vector2(0, -118), Vector2(0, -140), Vector2(0, -156)]},
+	{"id": "hc_road", "name": "Citadel Way", "type": "road", "map": "zr_citadel", "a": "hc_south", "b": "hc_engine",
+		"points": [Vector2(0, 78), Vector2(0, 50), Vector2(0, 20), Vector2(0, 0), Vector2(0, -28)]},
 ]
 
 ## Transitions between places that are not walked on a road. mode: boundary (walk-through map exit, no distance),
@@ -494,6 +687,21 @@ const LINKS := [
 		"why": "Break the seal on the temple sanctum before entering.", "text": "Go through the throne gate in the temple sanctum"},
 	{"id": "throne_return", "mode": "dungeon", "a": "throne", "b": "town_terrace", "flag": "boss_warden_defeated", "oneway": true,
 		"why": "The return waypoint wakes when the Hollow Warden falls.", "text": "Take the return waypoint to Malasugue"},
+	# bh-029: Agdao's ship, and the walk-through boundaries and Vault gates of Zarael
+	{"id": "zarael_ship", "mode": "ship", "a": "wy_jetty", "b": "agd_pier", "flag": "boss_kethrax_defeated",
+		"why": "No ship sails for Zarael while Kethrax lives.", "text": "Sail to Zarael aboard the Sunwake", "back": "Sail to Wyman Outpost aboard the Sunwake"},
+	{"id": "agdao_coil_boundary", "mode": "boundary", "a": "agd_gate", "b": "zc_west",
+		"text": "Leave Agdao by the Coilwood Gate", "back": "Follow the road west into Agdao"},
+	{"id": "coil_barrens_boundary", "mode": "boundary", "a": "zc_east", "b": "zb_west",
+		"text": "Follow the road east into the Glasswire Barrens", "back": "Follow the road west into the Coilwood"},
+	{"id": "barrens_bridge_boundary", "mode": "boundary", "a": "zb_north", "b": "br_south",
+		"text": "Take the Bridge Road north to the Bridge of Death", "back": "Leave the bridge for the Barrens"},
+	{"id": "bridge_citadel_boundary", "mode": "boundary", "a": "br_north", "b": "hc_south", "flag": "boss_deathspan_defeated",
+		"why": "The north gatehouse stays sealed while Varrogh holds the span.", "text": "Pass the north gatehouse to the Heart Citadel",
+		"back": "Go back out over the Bridge of Death"},
+	{"id": "jade_sepulchre_gate", "mode": "dungeon", "a": "zc_jade", "b": "jade_sepulchre", "text": "Take the gate down into the Jade Sepulchre", "back": "Climb out of the Jade Sepulchre"},
+	{"id": "obsidian_engine_gate", "mode": "dungeon", "a": "zb_obsidian", "b": "obsidian_engine", "text": "Take the gate down into the Obsidian Engine", "back": "Climb out of the Obsidian Engine"},
+	{"id": "veinworks_gate", "mode": "dungeon", "a": "zb_vein", "b": "veinworks", "text": "Take the gate down into the Veinworks", "back": "Climb out of the Veinworks"},
 ]
 
 ## Waypoint shrines that form the travel network: any awakened one can reach any other awakened one. Each lands on a
@@ -507,8 +715,13 @@ const NETWORK := {
 	# bh-022: every safe haven on the roads has its own waypoint (the South Gate fork and Old Mill Crossroads)
 	&"gate_shrine": {"map": &"westreach", "spawn": &"gate_shrine", "place": "wr_gate", "name": "South Gate"},
 	&"mill_shrine": {"map": &"westreach", "spawn": &"mill_shrine", "place": "wr_mill", "name": "Old Mill Crossroads"},
+	# bh-029: Zarael — Agdao's Wire Market, the Coilwood's overgrown shrine and the Barrens survivors' camp
+	&"agdao_shrine": {"map": &"agdao", "spawn": &"agdao_shrine", "place": "agd_shrine", "name": "Agdao"},
+	&"coil_shrine": {"map": &"zr_coilwood", "spawn": &"coil_shrine", "place": "zc_shrine", "name": "The Coilwood"},
+	&"barrens_shrine": {"map": &"zr_barrens", "spawn": &"barrens_shrine", "place": "zb_camp", "name": "Survivors' Camp"},
 }
 const NETWORK_SHRINES := [&"sanctuary_waypoint", &"forest_waypoint", &"cove_shrine", &"olivar_shrine", &"wyman_shrine",
+	&"agdao_shrine", &"coil_shrine", &"barrens_shrine",
 	&"gate_shrine", &"mill_shrine"]
 
 # ------------------------------------------------------------------------------------------------------------

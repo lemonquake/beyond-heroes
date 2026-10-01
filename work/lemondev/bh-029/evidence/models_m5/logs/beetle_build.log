@@ -1,0 +1,20 @@
+[sepulchre_beetle] numpy-vs-Blender pose check: worst bone head/tail error 0.002 mm
+[sepulchre_beetle] mesh 10476 tris, 5596 verts, 31 bones, 15 clips; rest bounds x -1.279..1.279 y -1.165..1.196 z -0.026..1.592
+[sepulchre_beetle] -> A:\Python\beyond-heroes\game\assets\characters\sepulchre_beetle.glb (1.60 MB)
+[sepulchre_beetle] check_lengths: 15 animations in the GLB; mismatches: []
+[sepulchre_beetle]   idle             want  3.000s got 3
+[sepulchre_beetle]   idle_look        want  2.500s got 2.5
+[sepulchre_beetle]   walk             want  0.733s got 0.7333333333333333
+[sepulchre_beetle]   run              want  0.333s got 0.3333333333333333
+[sepulchre_beetle]   run_combat       want  0.333s got 0.3333333333333333
+[sepulchre_beetle]   hit_light        want  0.400s got 0.4
+[sepulchre_beetle]   hit_heavy        want  0.600s got 0.6
+[sepulchre_beetle]   stagger_small    want  0.800s got 0.8
+[sepulchre_beetle]   knockback        want  0.900s got 0.9
+[sepulchre_beetle]   death            want  1.500s got 1.5
+[sepulchre_beetle]   death_back       want  1.500s got 1.5
+[sepulchre_beetle]   alert            want  1.000s got 1
+[sepulchre_beetle]   beetle_bite      want  0.800s got 0.8
+[sepulchre_beetle]   beetle_ram       want  1.000s got 1
+[sepulchre_beetle]   beetle_spit      want  1.333s got 1.3333333333333333
+[sepulchre_beetle] meta merged ['beetle_bite', 'beetle_ram', 'beetle_spit'] + models.sepulchre_beetle -> A:\Python\beyond-heroes\game\assets\characters\creature_meta.json (verified: True)

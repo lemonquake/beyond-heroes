@@ -49,7 +49,27 @@ static func build() -> Array:
 			"music": &"dungeon_theme", "ambience": &"amb_temple", "footstep_surface": &"stone", "reverb": 0.3,
 			"world_map_pos": Vector2(0.18, 0.55), "waypoint": false,
 			"loading_hint": "Five Ascendant dungeons lie below the Reach. Their monsters are the strongest on Salmonan, and only a Class A hero may pass a gate. Their lords always leave a celestial orb."}),
-	] + interiors() + DataDungeons.map_defs()
+	] + zarael() + interiors() + DataDungeons.map_defs()
+
+## bh-029: Zarael Island, the corrupted (docs/LORE.md §11; DataZarael). Reached by Agdao's ship from Wyman Outpost.
+static func zarael() -> Array:
+	return [
+		_m(&"agdao", "Agdao", "The terraced harbour of Zarael", {"is_town": true, "level_min": 1, "level_max": 1, "music": &"main_theme",
+			"ambience": &"amb_town", "footstep_surface": &"stone", "reverb": 0.12, "world_map_pos": Vector2(0.86, 0.5),
+			"loading_hint": "Agdao climbs from its harbour to the Crown of Steps in five terraces. Stairs and footbridges join them; the old lifts wait for the Heartwire to burn steady again."}),
+		_m(&"zr_coilwood", "The Coilwood", "Jungle over the Wirewrights' fields", {"level_min": 30, "level_max": 36, "music": &"dungeon_theme",
+			"ambience": &"amb_forest", "footstep_surface": &"dirt", "reverb": 0.05, "world_map_pos": Vector2(0.9, 0.45),
+			"loading_hint": "The Coilwood's relay pylons carry the Blackwire into Agdao. Wire-sick beasts sleep on the warm lines: Water and Earth hurt what the current has changed."}),
+		_m(&"zr_barrens", "The Glasswire Barrens", "Where the Blackwire broke the ground", {"level_min": 36, "level_max": 42, "music": &"dungeon_theme",
+			"ambience": &"amb_temple", "footstep_surface": &"stone", "reverb": 0.08, "world_map_pos": Vector2(0.93, 0.42),
+			"loading_hint": "Two Vaults open in the Barrens: the Obsidian Engine and the Veinworks. Rest at the survivors' camp; its waypoint links back to Agdao."}),
+		_m(&"bridge_of_death", "The Bridge of Death", "Three hundred paces over nothing", {"level_min": 42, "level_max": 46, "music": &"boss_theme",
+			"ambience": &"amb_arena", "footstep_surface": &"stone", "reverb": 0.15, "world_map_pos": Vector2(0.95, 0.38), "waypoint": false,
+			"loading_hint": "While a Vault's lord lives, its ward pylon flickers and throws lightning across its stretch of the span. Clear the Vaults first, or run."}),
+		_m(&"zr_citadel", "The Heart Citadel", "The Dawn Engine", {"level_min": 46, "level_max": 52, "music": &"dungeon_theme",
+			"ambience": &"amb_temple", "footstep_surface": &"stone", "reverb": 0.3, "world_map_pos": Vector2(0.97, 0.34), "waypoint": false,
+			"loading_hint": "The Leash-Abbot leashes giants with pain: Light burns his Kharvenn, and his chains pull you in. Dodge when the censer swings."}),
+	]
 
 ## The buildings of Malasugue you can walk into (doors in sanctuary.gd, rooms in interior.gd).
 static func interiors() -> Array:

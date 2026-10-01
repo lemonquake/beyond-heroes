@@ -99,8 +99,11 @@ func test_data() -> void:
 	var names := {}
 	for n in DB.npcs.values():
 		ok(DB.map_def(n.map) != null, "%s lives on a real map (%s)" % [n.id, n.map])
-		ok(not names.has(n.display_name), "%s has a unique name" % n.display_name)
-		names[n.display_name] = true
+		# one person may stand on two maps under related ids (bh-029: Captain Ilsa at Wyman's jetty and at Agdao's pier)
+		var twin := names.has(n.display_name) and (String(n.id).begins_with(String(names[n.display_name]) + "_")
+			or String(names[n.display_name]).begins_with(String(n.id) + "_"))
+		ok(not names.has(n.display_name) or twin, "%s has a unique name" % n.display_name)
+		names[n.display_name] = n.id
 		for s in n.services:
 			ok(DialogueBox.SERVICES.has(s), "%s service %s is known" % [n.id, s])
 		for node in n.graph.get("nodes", {}).values():

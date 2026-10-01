@@ -27,6 +27,7 @@ static func create(parent: Node, at: Vector3, p_radius: float, p_duration: float
 	s.source = p_source
 	s.mask = p_mask
 	s.style = p_style
+	Perf.mark_fx(s)
 	parent.add_child(s)
 	s.global_position = at
 	s.add_to_group(&"skill_area")
