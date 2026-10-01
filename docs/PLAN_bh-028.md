@@ -13,7 +13,7 @@ what is done, where the code lives and how to verify it. If you pick this up fro
 | 2 | +50 HP per level (old and new saves) | ✅ done |
 | 3 | Level 40+ enemy curse (Hex of Frailty) | ✅ done |
 | 4 | Celestial orbs: Sora, Luna, Sol, Airah | ✅ done |
-| 5 | Five special dungeons after Kethrax | ⏳ next |
+| 5 | Five special dungeons after Kethrax | ⏳ in progress (5a–5b done, 5c+ to do) |
 | 6 | Tests, screenshots, changelog, push | ☐ |
 
 Legend: ✅ done · ⏳ in progress · ☐ not started. Update this table and the phase notes as you go.
@@ -159,6 +159,64 @@ Crystalline, Orbital — the socket, shop, naming and drop systems are built on 
 - Bosses: five new data-driven bosses in `DataEnemiesSpecial` (existing models, new tint/scale/attacks).
 
 ---
+
+### Phase 5 handoff — exact state and next steps
+
+Done (committed):
+- **5a Plans**: `tools/dungeon_gen/gen_plans.py --special` (`SPECIAL_SPECS`) → `game/src/data/data_dungeon_plans_special.gd`
+  (`DataDungeonPlansSpecial.PLANS`, 64 validated floors: prismheart 10, underworld 12, aetherreach 13, eclipse 14,
+  solarium 15; last floor = boss sanctum, second-to-last = champion floor, rest = Seal Keeper floors).
+- **5b Textures**: `tools/textures/gen_textures.py` sets `crystal_facet`, `obsidian_soul`, `aether_opal`, `moonstone`,
+  `sunstone` → `game/assets/textures/<set>_{albedo,normal,rough}.png`. Preview `work/lemondev/bh-028/evidence/special_textures.png`.
+  Open the project once in Godot so their `.import` files are generated.
+
+To do, in this order (all designs are decided above; findings from reading the code):
+1. **`game/src/data/data_dungeons_special.gd`** (`class_name DataDungeonsSpecial`), same shape as `DataDungeonsX`:
+   - `THEMES` for `&"prism"`, `&"underworld"`, `&"aether"`, `&"eclipse"`, `&"solar"` (copy a `DataDungeonsX.THEMES`
+     entry; `"stone": {"BH_Stone": ["crystal_facet", Color(1,1,1)], "BH_StoneDark": ["crystal_facet", Color(0.55,0.55,0.6)]}`
+     etc. — MaterialLibrary picks textures by set name).
+   - `DRESS`, `CLUTTER`, `GATE_DRESS` per theme, using only kit names already used in `DataDungeonsX.DRESS`
+     (crystal_pylon, ice_crystal_large/small, obelisk_corrupted, floating_rock, candles_cluster, statue_knight, ...).
+   - `LIST`: per dungeon `name, theme, tier: 6, special: true, min_tier: 5, orb (sora/luna/airah/luna/sol),
+     material, surface {"map": &"sundered_reach", "pos", "yaw", "place"}, blurb, levels (spread 80–89 / 86–97 /
+     92–104 / 100–112 / 106–120 over the floors, last floor [hi, hi]), pools a/b/seal, music, ambience, footstep,
+     reverb, miniboss, boss, usurper, power {"hp": 1.5, "damage": 1.3}`. Suggested pools:
+     prismheart a [prism_sentinel, star_mote, mirror_knight, aether_wisp] b [rune_golem, shellback_grinder, aegis_acolyte, astral_duelist];
+     underworld a [forsaken_legionnaire, hollow_soldier, gloomwraith, shade_stalker] b [forsaken_chainguard, necromancer, gravecaller, bloodbinder, ghoul_brute];
+     aetherreach a [aether_wisp, aether_sentinel, storm_herald, astral_duelist] b [riftcaller, clockwork_sentry, aegis_acolyte, rune_golem];
+     eclipse a [shade_stalker, mirage_weaver, gloomwraith, astral_duelist] b [void_seer, mirror_knight, riftcaller, soulbound_twin];
+     solarium a [cinder_imp, ashen_cultist, drowned_deckhand, slag_hound] b [magma_golem, brinecaller, forge_thrall, ashen_acolyte, barnacle_hulk].
+   - `static func list()` merging `DataDungeonPlansSpecial.PLANS` as `floors` (like `DataDungeonsX.list()`).
+2. **`DataDungeons`**: merge `DataDungeonsSpecial.list()` in `defs()`; `theme()` also looks in
+   `DataDungeonsSpecial.THEMES`; add `is_special(id)`; `map_defs()` and `floor_def()` must not create growth floors
+   for special dungeons; `DataDungeonsX.TIER_NAMES` append `"Ascendant"` and let `tier_name/tier_stars` handle 6.
+   `dungeon.gd` (`DRESS.get`, `CLUTTER.get`) and `map_builder.gd dungeon_gate` (`GATE_DRESS`) need a third fallback
+   to the special dicts.
+3. **`DungeonGrowth`**: for special dungeons `for_hero` → `extra = 0`; `levels()` returns the authored levels;
+   `pool()` returns the original pool.
+4. **Spawner** (`world/spawner.gd populate`): if special, `s.difficulty = difficulty.duplicate()` with
+   hp × power.hp, damage × power.damage ("very strong").
+5. **Bosses** `game/src/data/data_enemies_special.gd`: duplicate existing boss EnemyDefs (no boss-id-specific code
+   exists, verified) with new id/name/tint/model_scale/hp×1.6/damage×1.25/lore and register them at the end of
+   `DataEnemies.build()`: prismheart←prism_colossus "Seraphel, the Prismheart"; underworld←hollow_dark
+   "Morrowgaunt, King Below"; aetherreach←voltaric "Zephyrion, the Aether Heart"; eclipse←astrarch
+   "Nocthea, the Eclipsed Star"; solarium←forgemaster "Solmara, the Drowned Sun".
+6. **Class A lock**: `world/teleporter.gd` add `var min_tier := 0`; `is_locked()` also true when
+   `Game.hero.tier < min_tier`; hint "Requires Class A". `MapBuilder.dungeon_gate` sets `t.min_tier` from the def.
+7. **Hub map** `sundered_reach`: `game/src/world/maps/sundered_reach.gd` (copy the structure of
+   `weeping_causeway.gd`: environment, terrain or floor tiles, five `dungeon_gate(id, pos, yaw)` calls via
+   `DataDungeons.gates_on(def.id)`, spawn `arrival` + a return teleporter to `sanctuary/waypoint`). Register in
+   `DataMaps.build()` (`waypoint: false`) and add DataIsland entries like `weeping_causeway` (lines ~23, 33, 149, 364).
+8. **Malasugue portal**: in `sanctuary.gd _terrace()` add
+   `teleporter(&"sanctuary_rift", Vector3(7.5, TERRACE_Y, -24.5), &"sundered_reach", &"arrival", "The Sundered Reach", 0.0, true, &"boss_kethrax_defeated", "The rift is sealed. It opens once Kethrax falls.")`
+   (check the `teleporter()` signature in map_builder.gd). The flag is read live → old saves with Kethrax dead are open.
+9. **Centrepieces** in `dungeon.gd _light_and_dress()` like the orrery armillary block: per special theme, emissive
+   SphereMesh/crystal clusters over the basin centre (sun orb for solar, black moon with silver rim for eclipse,
+   floating rocks + Spinner for aether, teal soul-fire columns for underworld, big crystal_pylon ring for prism).
+10. Tests in `test_bh028.gd`: 5 special dungeons, 10–15 floors, levels within 80–120, gates on sundered_reach,
+    min_tier 5, no growth floors, portal locked until `boss_kethrax_defeated`; run `test_dungeon_growth`, `test_maps`,
+    `test_island`, `test_bh013` (they iterate every dungeon). Then screenshots (`capture_bh028.tscn`, see
+    `capture_bh013.gd` / `capture_depths.gd` for how floors are loaded and captured), CHANGELOG BH-028.
 
 ## Phase 6 — Wrap-up
 - New suite `game/tests/unit/test_bh028.gd`.

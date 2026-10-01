@@ -760,12 +760,181 @@ def fungal_stone(seed=2201):
     return alb, h, rough, 5.0
 
 
+# ---- bh-028: the special dungeons behind Kethrax ---------------------------------------------------------------
+
+def _hsv_mix(h, s_, v):
+    """Vectorised HSV -> RGB for hue/saturation/value arrays (0..1)."""
+    i = np.floor(h * 6.0) % 6
+    f = h * 6.0 - np.floor(h * 6.0)
+    p = v * (1 - s_)
+    q = v * (1 - f * s_)
+    t = v * (1 - (1 - f) * s_)
+    r = np.choose(i.astype(int), [v, q, p, p, t, v])
+    g = np.choose(i.astype(int), [t, v, v, q, p, p])
+    b = np.choose(i.astype(int), [p, p, t, v, v, q])
+    return np.stack([r, g, b], -1).astype(np.float32)
+
+
+def crystal_facet(seed=2801):
+    """Prismheart Hollows: faceted crystal growth, violet to sea-cyan, each facet a sloped plane with bright edges."""
+    r = rng(seed)
+    pts = jittered_points(7, 7, seed, 0.9)
+    wx, wy = warp_coords(seed + 1, 4.0, 2.4, 4)
+    f1, edge, i1, _ = voronoi(pts, wx, wy)
+    n = len(pts)
+    ang = r.uniform(0, 2 * math.pi, n).astype(np.float32)
+    hue = (0.72 + r.uniform(-0.1, 0.12, n)).astype(np.float32)
+    lit = r.uniform(0.75, 1.15, n).astype(np.float32)
+    dp = np.stack([wx, wy], -1) - pts[i1]
+    dp = (dp + N / 2) % N - N / 2
+    slope = (dp[..., 0] * np.cos(ang[i1]) + dp[..., 1] * np.sin(ang[i1])) / (N / 7)
+    fine = noise(seed + 2, 1.2, 60)
+    gap = 2.5
+    joint = 1 - sstep(gap - 1, gap + 3, edge)
+    rim = (1 - sstep(gap + 1, gap + 10, edge)) * (1 - joint)
+    h = np.clip(0.55 + slope * 0.35 - joint * 0.5 + 0.01 * fine, 0, 1)
+    v = np.clip(0.42 * lit[i1] + 0.18 * slope + 0.03 * fine, 0.05, 1)
+    alb = _hsv_mix(hue[i1] % 1.0, np.full_like(v, 0.55), v)
+    alb = lerp(alb, col([0.86, 0.9, 1.0]), rim * 0.65)
+    alb = lerp(alb, col([0.08, 0.05, 0.12]), joint * 0.9)
+    inc = (noise(seed + 3, 0.6, 180) > 2.3).astype(np.float32)
+    alb = lerp(alb, col([0.95, 0.92, 1.0]), inc * 0.6)
+    rough = 0.08 + joint * 0.6 + 0.02 * fine
+    return alb, h, rough, 4.0
+
+
+def obsidian_soul(seed=2802):
+    """The Underworld: black volcanic glass flags split by pale soul-fire cracks (teal-white), ash in the joints."""
+    r = rng(seed)
+    pts = jittered_points(5, 5, seed, 0.85)
+    wx, wy = warp_coords(seed + 1, 10.0, 2.4, 3)
+    f1, edge, i1, _ = voronoi(pts, wx, wy)
+    tone = r.uniform(0.75, 1.2, len(pts)).astype(np.float32)
+    cloud = noise(seed + 2, 2.4, 2)
+    fine = noise(seed + 3, 1.3, 50)
+    fpts = r.uniform(0, N, (90, 2)).astype(np.float32)
+    _, fe, _, _ = voronoi(fpts, *warp_coords(seed + 4, 18.0, 2.2, 3))
+    crack = (1 - sstep(0.4, 2.2, fe)) * sstep(0.0, 1.0, noise(seed + 5, 2.0, 4))
+    gap = 4.0
+    joint = 1 - sstep(gap - 1, gap + 5, edge)
+    glow = np.clip(crack + joint * 0.8, 0, 1)
+    h = np.clip(0.2 + sstep(gap, gap + 20, edge) * (0.7 + 0.05 * cloud) - crack * 0.25, 0, 1)
+    alb = mul(fill([0.05, 0.045, 0.06]), tone[i1] * (1 + 0.12 * cloud + 0.05 * fine))
+    sheen = sstep(0.8, 2.0, noise(seed + 6, 2.0, 6)) * 0.25
+    alb = lerp(alb, col([0.25, 0.22, 0.32]), sheen)
+    alb = lerp(alb, col([0.35, 0.95, 0.85]), glow * 0.85)
+    alb = lerp(alb, col([0.85, 1.0, 0.96]), crack * 0.35)
+    rough = 0.12 + joint * 0.6 + 0.04 * cloud
+    return alb, h, rough, 4.5
+
+
+def aether_opal(seed=2803):
+    """The Aether Reach: pale opaline flagstones with an iridescent sheen and fine gold diamond inlay."""
+    r = rng(seed)
+    k = 4
+    cw = N // k
+    gx, gy = XX % cw, YY % cw
+    edge = np.minimum(np.minimum(gx, cw - gx), np.minimum(gy, cw - gy))
+    bid = ((XX // cw) + (YY // cw) * k).astype(np.int32)
+    tone = r.uniform(0.95, 1.05, k * k).astype(np.float32)
+    # diamond inlay inside each flag
+    dx, dy = np.abs(gx - cw / 2), np.abs(gy - cw / 2)
+    dia = np.abs(dx + dy - cw * 0.34)
+    inlay = 1 - sstep(1.5, 4.0, dia)
+    hue = (noise(seed + 1, 2.6, 2) * 0.08 + XX / N * 0.15 + YY / N * 0.1) % 1.0
+    opal = _hsv_mix(hue + 0.45, np.full((N, N), 0.18, np.float32), np.full((N, N), 0.9, np.float32))
+    cloud = noise(seed + 2, 2.4, 3)
+    fine = noise(seed + 3, 1.2, 60)
+    gap = 3.0
+    grout = 1 - sstep(gap - 0.5, gap + 2.0, edge)
+    h = np.clip(0.62 - grout * 0.42 - inlay * 0.06 + 0.01 * fine, 0, 1)
+    alb = mul(fill([0.86, 0.86, 0.84]), tone[bid] * (1 + 0.03 * cloud))
+    alb = lerp(alb, opal, 0.45 + 0.15 * sstep(-1, 1, cloud))
+    alb = lerp(alb, col([0.85, 0.68, 0.32]), inlay * 0.9)
+    alb = lerp(alb, col([0.55, 0.52, 0.5]), grout)
+    rough = 0.2 + grout * 0.5 + inlay * 0.05 + 0.03 * fine
+    return alb, h, rough, 2.5
+
+
+def moonstone(seed=2804):
+    """The Eclipse Vault: silver-indigo hexagonal slabs with a pearly blue sheen and starry inclusions."""
+    r = rng(seed)
+    nx, ny = 8, 8
+    pts = []
+    for j in range(ny):
+        for i in range(nx):
+            pts.append([(i + 0.5 + (0.5 if j % 2 else 0.0)) * N / nx, (j + 0.5) * N / ny])
+    pts = np.array(pts, np.float32) % N
+    f1, edge, i1, _ = voronoi(pts)
+    tone = r.uniform(0.88, 1.1, len(pts)).astype(np.float32)
+    cloud = noise(seed + 1, 2.4, 2)
+    fine = noise(seed + 2, 1.2, 60)
+    sheen = sstep(-0.5, 1.5, noise(seed + 3, 2.8, 2, ax=2.0))
+    gap = 3.0
+    grout = 1 - sstep(gap - 0.5, gap + 2.5, edge)
+    bev = (1 - sstep(gap + 1, gap + 12, edge)) * (1 - grout)
+    star = (noise(seed + 4, 0.4, 240) > 2.6).astype(np.float32)
+    h = np.clip(0.6 - grout * 0.45 - bev * 0.08 + 0.01 * fine, 0, 1)
+    alb = mul(fill([0.42, 0.44, 0.58]), tone[i1] * (1 + 0.06 * cloud + 0.02 * fine))
+    alb = lerp(alb, col([0.72, 0.8, 0.95]), sheen * 0.45)
+    alb = lerp(alb, col([0.86, 0.88, 0.95]), bev * 0.35)
+    alb = lerp(alb, col([1.0, 1.0, 1.0]), star * 0.8)
+    alb = lerp(alb, col([0.1, 0.08, 0.2]), grout)
+    rough = 0.22 + grout * 0.55 - sheen * 0.08 + 0.03 * fine
+    return alb, h, rough, 3.0
+
+
+def sunstone(seed=2805):
+    """The Drowned Solarium: warm gold sandstone blocks with copper sun-ray inlays and sun-bleached grain."""
+    r = rng(seed)
+    rows = split_len(N, 4, r, 0.12)
+    wx, wy = warp_coords(seed + 1, 2.0, 2.2, 6)
+    edge = np.zeros((N, N), np.float32)
+    bid = np.zeros((N, N), np.int32)
+    cxs = np.zeros((N, N), np.float32)
+    cys = np.zeros((N, N), np.float32)
+    nb = 0
+    for ri in range(4):
+        y0, y1 = rows[ri], rows[ri + 1]
+        kk = 3
+        cum = split_len(N, kk, r, 0.15)
+        off = r.integers(0, N)
+        band = (wy >= y0) & (wy < y1)
+        c = (wx - off) % N
+        idx = np.clip(np.searchsorted(cum, c, side="right") - 1, 0, kk - 1)
+        e = np.minimum(np.minimum(c - cum[idx], cum[idx + 1] - c), np.minimum(wy - y0, y1 - wy))
+        edge[band] = e[band]
+        bid[band] = (idx + nb)[band]
+        cxs[band] = (c - (cum[idx] + cum[idx + 1]) / 2)[band]
+        cys[band] = (wy - (y0 + y1) / 2)[band]
+        nb += kk
+    tone = r.uniform(0.9, 1.08, nb).astype(np.float32)
+    ang = np.arctan2(cys, cxs)
+    rad = np.sqrt(cxs ** 2 + cys ** 2)
+    rays = (1 - sstep(0.06, 0.2, np.abs(np.sin(ang * 4)))) * sstep(26, 34, rad) * (1 - sstep(95, 112, rad))
+    disc = (1 - sstep(18, 22, rad)) + (1 - sstep(1.5, 4.0, np.abs(rad - 28)))
+    grain = noise(seed + 2, 1.0, 120)
+    cloud = noise(seed + 3, 2.3, 3)
+    gap = 3.5
+    grout = 1 - sstep(gap - 0.5, gap + 2.5, edge)
+    inlay = np.clip(rays + disc, 0, 1)
+    h = np.clip(0.58 - grout * 0.42 - inlay * 0.07 + 0.015 * grain, 0, 1)
+    alb = mul(fill([0.78, 0.6, 0.34]), tone[bid] * (1 + 0.06 * cloud + 0.04 * grain))
+    alb = lerp(alb, col([0.92, 0.8, 0.55]), sstep(0.8, 2.0, cloud) * 0.35)
+    alb = lerp(alb, col([0.75, 0.4, 0.18]), inlay * 0.9)
+    alb = lerp(alb, col([0.32, 0.22, 0.14]), grout)
+    rough = 0.55 + grout * 0.3 - inlay * 0.3 + 0.03 * grain
+    return alb, h, rough, 3.0
+
+
 SETS = {
     "stone_blocks": stone_blocks, "stone_floor": stone_floor, "cobblestone": cobblestone, "brick": brick,
     "dirt": dirt, "mud": mud, "grass": grass, "forest_floor": forest_floor, "rock_cliff": rock_cliff,
     "wood_planks": wood_planks, "wood_grain": wood_grain, "bark": bark, "moss": moss, "metal_iron": metal_iron, "cloth": cloth,
     "thatch": thatch, "sand_path": sand_path,
     "basalt": basalt, "rime_ice": rime_ice, "marble": marble, "fungal_stone": fungal_stone,  # bh-012
+    "crystal_facet": crystal_facet, "obsidian_soul": obsidian_soul, "aether_opal": aether_opal,  # bh-028
+    "moonstone": moonstone, "sunstone": sunstone,
 }
 
 
