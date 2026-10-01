@@ -33,7 +33,8 @@ ICON_DIR = os.path.join(ROOT, "game", "assets", "ui", "icons", "crystals")
 REPORT = os.path.join(EVID, "models_report.json")
 MODEL_RAW = os.path.join(EVID, "model_raw")   # optional plain model renders for the model sheet
 
-FAMILIES = ["ember", "aqua", "nova", "thundra", "vipera", "bloodrift", "essencerift", "aetherift"]
+# bh-028: the four celestial orbs come last, so the older families keep their seeds (FSEED) and byte-identical models
+FAMILIES = ["ember", "aqua", "nova", "thundra", "vipera", "bloodrift", "essencerift", "aetherift", "sora", "luna", "sol", "airah"]
 GRADES = ["fragment", "shard", "crystalline", "orbital"]
 IDS = [f"{f}_{g}" for f in FAMILIES for g in GRADES]
 SIZE = {"fragment": 0.18, "shard": 0.24, "crystalline": 0.28, "orbital": 0.315}   # largest dimension (m)
@@ -88,8 +89,21 @@ FAM = {
     "aetherift": dict(body=(0.05, 0.75, 1.0), body_em=(0.1, 0.8, 1.0), dull=(0.2, 0.35, 0.5), edge=(1.0, 0.95, 0.85),
                       glow=(0.95, 0.97, 1.0), hot=(1.0, 1.0, 1.0), dark=(0.12, 0.03, 0.25), metal="paleg",
                       halo=(170, 110, 255), halo2=(110, 255, 235)),
+    # bh-028 celestial orbs: sky, moon, sun, wind
+    "sora": dict(body=(0.25, 0.55, 0.95), body_em=(0.4, 0.7, 1.0), dull=(0.08, 0.18, 0.35), edge=(0.85, 0.93, 1.0),
+                 glow=(0.75, 0.9, 1.0), hot=(1.0, 1.0, 1.0), dark=(0.02, 0.05, 0.12), metal="silver",
+                 halo=(120, 180, 255), halo2=(220, 240, 255)),
+    "luna": dict(body=(0.42, 0.4, 0.6), body_em=(0.55, 0.52, 0.85), dull=(0.12, 0.11, 0.2), edge=(0.88, 0.88, 1.0),
+                 glow=(0.85, 0.86, 1.0), hot=(1.0, 1.0, 1.0), dark=(0.02, 0.02, 0.06), metal="moonsteel",
+                 halo=(150, 140, 230), halo2=(225, 225, 255)),
+    "sol": dict(body=(0.95, 0.42, 0.04), body_em=(1.0, 0.55, 0.08), dull=(0.35, 0.14, 0.01), edge=(1.0, 0.85, 0.4),
+                glow=(1.0, 0.82, 0.3), hot=(1.0, 0.98, 0.85), dark=(0.12, 0.04, 0.0), metal="gold",
+                halo=(255, 150, 30), halo2=(255, 230, 140)),
+    "airah": dict(body=(0.3, 0.85, 0.7), body_em=(0.4, 1.0, 0.8), dull=(0.08, 0.25, 0.2), edge=(0.85, 1.0, 0.95),
+                  glow=(0.8, 1.0, 0.92), hot=(1.0, 1.0, 1.0), dark=(0.01, 0.06, 0.05), metal="paleg",
+                  halo=(90, 230, 190), halo2=(210, 255, 240)),
 }
-OUTLINED = ("nova", "essencerift", "aetherift")    # a dark rim under the motif where the body is pale / same hue
+OUTLINED = ("nova", "essencerift", "aetherift", "sora", "luna", "airah")    # a dark rim under the motif where the body is pale / same hue
 # the prismatic facets of the Aetherift (cyan / magenta / gold / pale)
 PRISM = {"body": (0.05, 0.75, 1.0), "mag": (1.0, 0.1, 0.72), "gold": (1.0, 0.66, 0.05), "pale": (0.42, 0.2, 1.0)}
 
@@ -433,6 +447,38 @@ def motif_layers(f, rng=None):
     elif f in ("bloodrift", "essencerift", "aetherift"):
         rng = rng or np.random.default_rng(7)
         L += rift_layers(rng)
+    elif f == "sora":
+        # the sky's ring: a halo with a bright heart and four points of light
+        ring = [(0.42 * math.cos(a), 0.42 * math.sin(a)) for a in np.linspace(0, 2 * math.pi, 28, endpoint=False)]
+        L.append((np.array(ring), "glow", 1))
+        L.append((circle((0, 0), 0.28, 20), "dark", 2))
+        L.append((circle((0, 0), 0.12, 14), "hot", 3))
+        for k in range(4):
+            a = math.pi / 4 + k * math.pi / 2
+            L.append((circle((0.5 * math.cos(a), 0.5 * math.sin(a)), 0.045, 8), "hot", 1))
+    elif f == "luna":
+        # a crescent moon and two stars
+        t = np.linspace(-math.pi / 2, math.pi / 2, 18)
+        outer = np.stack([0.42 * np.cos(t), 0.48 * np.sin(t)], 1)
+        inner = np.stack([0.12 + 0.2 * np.cos(t[::-1]), 0.4 * np.sin(t[::-1])], 1)
+        L.append((np.concatenate([outer, inner]) - np.array([0.06, 0.0]), "glow", 1))
+        for (x, y, r) in ((-0.3, 0.3, 0.05), (-0.36, -0.12, 0.035)):
+            L.append((np.array([(x, y + r * 1.8), (x + r, y), (x, y - r * 1.8), (x - r, y)]), "hot", 1))
+    elif f == "sol":
+        # the sun: a disc with twelve rays
+        rays = []
+        for k in range(24):
+            a = math.pi / 2 + k * math.pi / 12
+            r = 0.5 if k % 2 == 0 else 0.3
+            rays.append((r * math.cos(a), r * math.sin(a)))
+        L.append((np.array(rays), "glow", 1))
+        L.append((circle((0, 0), 0.2, 18), "hot", 2))
+    elif f == "airah":
+        # three gusts of wind curling to the right
+        for (y, w) in ((0.26, 0.06), (0.0, 0.07), (-0.26, 0.06)):
+            pts = [(-0.42, y), (-0.1, y + 0.04), (0.18, y + 0.02), (0.32, y - 0.06), (0.26, y - 0.14), (0.16, y - 0.1)]
+            L.append((thick_line(pts, [0.0, w, w, w * 0.8, w * 0.5, 0.0]), "glow", 1))
+            L.append((thick_line(pts[:3], [0.0, w * 0.4, 0.0]), "hot", 2))
     if f in OUTLINED:
         out = []
         for poly, role, lvl in L:

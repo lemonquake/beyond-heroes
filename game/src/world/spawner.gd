@@ -28,6 +28,12 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 		s.growth = DungeonGrowth.for_hero(Game.hero, s.dungeon)
 		s.depth = int(parsed[1]) - DataDungeons.floor_count(s.dungeon)
 	s.difficulty = DataEnemies.DIFFICULTY[clampi(diff_index, 0, DataEnemies.DIFFICULTY.size() - 1)]
+	if s.dungeon != &"" and DataDungeons.is_special(s.dungeon):
+		# bh-028: special dungeons are very strong on every difficulty
+		var power: Dictionary = DataDungeons.get_def(s.dungeon).get("power", {})
+		s.difficulty = s.difficulty.duplicate()
+		s.difficulty["hp"] = float(s.difficulty.get("hp", 1.0)) * float(power.get("hp", 1.0))
+		s.difficulty["damage"] = float(s.difficulty.get("damage", 1.0)) * float(power.get("damage", 1.0))
 	p_map.add_child(s)
 	var dir := CombatDirector.new()
 	dir.name = "CombatDirector"

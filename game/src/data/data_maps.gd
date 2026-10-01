@@ -44,6 +44,11 @@ static func build() -> Array:
 			"music": &"boss_theme", "ambience": &"amb_arena", "footstep_surface": &"stone", "reverb": 0.2,
 			"world_map_pos": Vector2(0.78, 0.8), "waypoint": false,
 			"loading_hint": "Kethrax's chain drags you to him: dodge when he draws it back. Light burns the Legion; fire does not touch his stolen wrath."}),
+		# bh-028: the shard beyond the rift on the Sanctuary Terrace; the five special dungeons' gates stand here
+		_m(&"sundered_reach", "The Sundered Reach", "Where the sky came apart", {"level_min": 80, "level_max": 120,
+			"music": &"dungeon_theme", "ambience": &"amb_temple", "footstep_surface": &"stone", "reverb": 0.3,
+			"world_map_pos": Vector2(0.18, 0.55), "waypoint": false,
+			"loading_hint": "Five Ascendant dungeons lie below the Reach. Their monsters are the strongest on Salmonan, and only a Class A hero may pass a gate. Their lords always leave a celestial orb."}),
 	] + interiors() + DataDungeons.map_defs()
 
 ## The buildings of Malasugue you can walk into (doors in sanctuary.gd, rooms in interior.gd).

@@ -63,12 +63,16 @@ static func enter(hero: HeroData, destination: StringName) -> void:
 		hero.world_flags[key] = maxi(int(hero.world_flags[key]), STEPS[extra_floor - 1])
 
 static func for_hero(hero: HeroData, dungeon: StringName) -> Dictionary:
-	if hero == null:
-		return profile(1)
-	var level := hero.progress.level
-	if DataDungeons.parse(hero.current_map)[0] == dungeon:
-		level = int(hero.world_flags.get(visit_key(dungeon), level))
-	return profile(level)
+	var p := profile(1)
+	if hero != null:
+		var level := hero.progress.level
+		if DataDungeons.parse(hero.current_map)[0] == dungeon:
+			level = int(hero.world_flags.get(visit_key(dungeon), level))
+		p = profile(level)
+	# bh-028: special dungeons never grow deeper floors (their elite, pack and reward bonuses still apply)
+	if DataDungeons.is_special(dungeon):
+		p.extra = 0
+	return p
 
 static func base_count(dungeon: StringName) -> int:
 	return DataDungeons.get_def(dungeon).floors.size()
@@ -79,7 +83,7 @@ static func total(hero: HeroData, dungeon: StringName) -> int:
 static func levels(dungeon: StringName, floor_n: int, growth: Dictionary) -> Vector2i:
 	var d := DataDungeons.get_def(dungeon)
 	var original: Array = d.levels[mini(floor_n, base_count(dungeon)) - 1]
-	if int(growth.stage) == 0:
+	if int(growth.stage) == 0 or DataDungeons.is_special(dungeon):
 		return Vector2i(original[0], original[1])
 	# Ease old dungeons upward from 25 to 35; full matching begins at 35.
 	var blend := clampf(float(int(growth.level) - 24) / 11.0, 0.0, 1.0)
@@ -94,7 +98,7 @@ static func levels(dungeon: StringName, floor_n: int, growth: Dictionary) -> Vec
 
 static func pool(dungeon: StringName, original: Array, growth: Dictionary, seed_value: int) -> Array:
 	var result := original.duplicate()
-	if int(growth.stage) == 0:
+	if int(growth.stage) == 0 or DataDungeons.is_special(dungeon):
 		return result
 	var theme: StringName = DataDungeons.get_def(dungeon).theme
 	var reinforcements: Array = REINFORCEMENTS.get(theme, [&"rune_golem", &"riftcaller", &"void_seer"])
@@ -129,6 +133,8 @@ static func floor_plan(dungeon: StringName, floor_n: int) -> Dictionary:
 		"chests": [[Vector2i(2, 2), 1], [Vector2i(17, 2), 2]]}
 
 static func summary(hero: HeroData, dungeon: StringName) -> String:
+	if DataDungeons.is_special(dungeon):
+		return "Ascendant · Class A heroes only · very strong monsters"
 	return describe(for_hero(hero, dungeon))
 
 static func describe(g: Dictionary) -> String:

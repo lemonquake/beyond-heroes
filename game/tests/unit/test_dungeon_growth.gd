@@ -60,6 +60,8 @@ func test_visit_snapshot_and_save() -> void:
 
 func test_plans_and_reinforcements() -> void:
 	for id in DataDungeons.order():
+		if DataDungeons.is_special(id):
+			continue                                    # no deeper floors (test_bh028)
 		var dd := DataDungeons.get_def(id)
 		for depth in range(1, 7):
 			var n := DataDungeons.floor_count(id) + depth

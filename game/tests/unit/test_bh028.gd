@@ -199,3 +199,114 @@ func test_celestial_orbs_drop_from_level_forty_bosses() -> void:
 	var stock := DataShops.crystal_stock([1, 10, 99, 99], 30)
 	ok(stock.any(func(s): return s.base == &"sora_fragment" and s.level_min == 40), "specialists sell Sora Fragments from level 40")
 	done()
+
+# ---- Special dungeons ---------------------------------------------------------------------------------------------
+
+func test_special_dungeons_data() -> void:
+	var ids: Array = DataDungeons.order().filter(func(id): return DataDungeons.is_special(id))
+	eq(ids.size(), 5, "five special dungeons")
+	eq(DataDungeons.gates_on(&"sundered_reach").size(), 5, "all five gates stand on The Sundered Reach")
+	var lords := {}
+	for id in ids:
+		var d := DataDungeons.get_def(id)
+		var n := DataDungeons.floor_count(id)
+		ok(n >= 10 and n <= 15, "%s has 10-15 floors (%d)" % [id, n])
+		eq((d.levels as Array).size(), n, "%s has a level range per floor" % id)
+		var prev := 0
+		for lv in d.levels:
+			ok(int(lv[0]) >= 80 and int(lv[1]) <= 120 and int(lv[0]) <= int(lv[1]), "%s floor levels within 80-120 (%s)" % [id, lv])
+			ok(int(lv[0]) >= prev, "%s gets harder floor by floor" % id)
+			prev = int(lv[0])
+		eq(DataDungeons.tier(id), 6, "%s is tier 6" % id)
+		eq(DataDungeons.tier_name(id), "Ascendant", "%s is Ascendant" % id)
+		eq(DataDungeons.min_tier(id), 5, "%s asks for Class A" % id)
+		ok(DataCrystals.is_celestial(StringName(d.orb)), "%s favours a celestial orb (%s)" % [id, d.orb])
+		eq(DataDungeons.max_extra(id), 0, "%s grows no deeper floors" % id)
+		ok(DB.map_def(DataDungeons.map_id(id, n)) != null, "%s sanctum is registered" % id)
+		ok(DB.map_def(DataDungeons.map_id(id, n + 1)) == null, "%s has nothing below its sanctum" % id)
+		var boss := DB.enemy(d.boss)
+		ok(boss != null and boss.archetype == &"boss", "%s lord %s is a boss" % [id, d.boss])
+		lords[d.boss] = true
+		for key in ["miniboss", "usurper"]:
+			ok(DB.enemy(d[key].enemy) != null, "%s %s uses a real monster" % [id, key])
+			ok(not DataMinibosses.find(d[key].id).is_empty(), "%s %s is listed" % [id, key])
+		for pool in d.pools:
+			for eid in d.pools[pool]:
+				ok(DB.enemy(eid) != null, "%s pool %s: %s exists" % [id, pool, eid])
+		# no DungeonGrowth: a level-150 hero meets the authored levels and pools, and no extra floors
+		var g := DungeonGrowth.profile(150)
+		g.extra = DungeonGrowth.for_hero(null, id).extra
+		eq(int(g.extra), 0, "%s: no extra floors" % id)
+		eq(DungeonGrowth.levels(id, 1, g), Vector2i(d.levels[0][0], d.levels[0][1]), "%s keeps its authored levels" % id)
+		eq(DungeonGrowth.pool(id, d.pools.a, g, 7), d.pools.a, "%s keeps its authored pool" % id)
+		ok(not DataIsland.place(String(id)).is_empty(), "%s is on the Underground list" % id)
+		ok(DataIsland.all_links().any(func(l): return l.id == "%s_gate" % id), "%s has a route from the Reach" % id)
+	eq(lords.size(), 5, "five different lords")
+	var seraphel := DB.enemy(&"seraphel")
+	near(seraphel.hp, DB.enemy(&"prism_colossus").hp * DataEnemiesSpecial.HP, 0.01, "a lord is tougher than the boss it was cast from")
+	var rift: Array = DataIsland.all_links().filter(func(l): return l.id == "sundered_rift")
+	ok(rift.size() == 1 and rift[0].flag == "boss_kethrax_defeated", "the rift route opens with Kethrax's fall")
+	done()
+
+func _built(id: StringName, hero: HeroData) -> MapRoot:
+	var prev := Game.hero
+	Game.hero = hero
+	var m := Game.build_map(id)
+	host.add_child(m)
+	Game.hero = prev
+	return m
+
+func test_the_reach_its_gates_and_the_rift() -> void:
+	var h := Game.new_hero(&"knight", "Rift")
+	var prev := Game.hero
+	Game.hero = h
+	# the rift on the Sanctuary Terrace stays shut until Kethrax falls (read live, so old saves open at once)
+	var town := _built(&"sanctuary", h)
+	var rift := town.teleporter(&"sanctuary_rift")
+	ok(rift != null and rift.destination_map == &"sundered_reach", "a rift on the terrace leads to The Sundered Reach")
+	if rift:
+		ok(rift.is_locked(), "sealed before Kethrax falls")
+		h.world_flags[&"boss_kethrax_defeated"] = true
+		ok(not rift.is_locked(), "open once he has")
+	town.free()
+	var reach := _built(&"sundered_reach", h)
+	ok(reach.spawns.has(&"arrival"), "the Reach has its arrival")
+	var back := reach.teleporter(&"reach_return")
+	ok(back != null and back.destination_map == &"sanctuary" and not back.is_locked(), "a dais leads home")
+	var gates := reach.find_children("Teleporter_*", "Teleporter", true, false).filter(func(t): return t.dungeon_gate != &"")
+	eq(gates.size(), 5, "five dungeon gates on the Reach")
+	for t: Teleporter in gates:
+		eq(t.min_tier, 5, "%s asks for Class A" % t.dungeon_gate)
+		ok(reach.spawns.has(DataDungeons.gate_id(t.dungeon_gate)), "%s has its return spawn" % t.dungeon_gate)
+		h.tier = 4
+		ok(t.is_locked() and t.lock_text().contains("Class A"), "%s turns away a Class B hero" % t.dungeon_gate)
+		h.tier = 5
+		ok(not t.is_locked(), "%s lets a Class A hero through" % t.dungeon_gate)
+	reach.free()
+	Game.hero = prev
+	done()
+
+func test_special_floors_build_and_hit_hard() -> void:
+	var h := Game.new_hero(&"knight", "Delver")
+	h.progress.add_xp(XpCurve.total_xp_for_level(90))
+	for id in DataDungeonsSpecial.ORDER:
+		var n := DataDungeons.floor_count(id)
+		for f in [1, n]:
+			var m := _built(DataDungeons.map_id(id, f), h)
+			ok(m != null and m.spawns.has(&"arrival"), "%s floor %d builds" % [id, f])
+			if f == n:
+				var bs := m.find_children("BossSpawn", "Marker3D", true, false)
+				ok(bs.size() == 1 and StringName(bs[0].get_meta(&"boss")) == DataDungeons.get_def(id).boss, "%s sanctum holds its lord" % id)
+			m.free()
+	# the spawner makes their monsters very strong on every difficulty
+	var prev := Game.hero
+	Game.hero = h
+	var floor1 := _built(DataDungeons.map_id(&"prismheart", 1), h)
+	var sp := Spawner.populate(floor1, 1)
+	near(float(sp.difficulty.hp), 1.0 * DataDungeonsSpecial.POWER.hp, 0.0001, "monster health x%.1f" % DataDungeonsSpecial.POWER.hp)
+	near(float(sp.difficulty.damage), 1.0 * DataDungeonsSpecial.POWER.damage, 0.0001, "monster damage x%.1f" % DataDungeonsSpecial.POWER.damage)
+	eq(float(DataEnemies.DIFFICULTY[1].hp), 1.0, "the shared difficulty table is untouched")
+	floor1.free()
+	Game.hero = prev
+	await host.get_tree().physics_frame
+	done()

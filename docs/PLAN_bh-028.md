@@ -13,8 +13,8 @@ what is done, where the code lives and how to verify it. If you pick this up fro
 | 2 | +50 HP per level (old and new saves) | ✅ done |
 | 3 | Level 40+ enemy curse (Hex of Frailty) | ✅ done |
 | 4 | Celestial orbs: Sora, Luna, Sol, Airah | ✅ done |
-| 5 | Five special dungeons after Kethrax | ⏳ in progress (5a–5b done, 5c+ to do) |
-| 6 | Tests, screenshots, changelog, push | ☐ |
+| 5 | Five special dungeons after Kethrax | ✅ done |
+| 6 | Tests, screenshots, changelog, push | ✅ done |
 
 Legend: ✅ done · ⏳ in progress · ☐ not started. Update this table and the phase notes as you go.
 
@@ -222,3 +222,24 @@ To do, in this order (all designs are decided above; findings from reading the c
 - New suite `game/tests/unit/test_bh028.gd`.
 - Screenshots in `work/lemondev/bh-028/evidence/`.
 - `docs/CHANGELOG.md` (BH-028) and this file's status table.
+
+---
+
+## Completion notes (merged on `main`)
+
+- The same day, a second bh-028 effort landed on `main`: the combat budget and the Sand Arena (docs/COMBAT_SCALING.md,
+  `CombatBudget`, `ArenaGrounds`, protocol 14). Its suite is `test_bh028_arena.gd`; this plan's checks stay in
+  `test_bh028.gd`. Vitality (+16 HP per level after 5) and the +50 HP level-up bonus stack; Tempo shells skip both
+  (`ClassDef.vitality = false`, `level_up_hp = 0`).
+- Phase 5 as built:
+  - `DataDungeonsSpecial`: themes, dressing, pools, champions and Usurpers. `list()` spreads `span` over the floors and
+    fills in the tier, `special`, `min_tier`, `power` and the gate spot.
+  - `DataEnemiesSpecial`: the five lords, copied from their template bosses with ×1.6 health and ×1.25 damage.
+  - `DataDungeons`: `is_special`, `max_extra`, `min_tier`. `DungeonGrowth` keeps the special dungeons' floors, levels
+    and pools fixed. The Spawner multiplies difficulty by `POWER`. `Teleporter.min_tier` / `tier_locked` /
+    `lock_text` enforce the Class A lock.
+  - `sundered_reach.gd` hub. The `sanctuary_rift` teleporter is locked by `boss_kethrax_defeated`.
+  - `DataIsland`: the `sr_landing` place, the dungeon places and the `sundered_rift` / `<id>_gate` links. The Reach
+    draws at Malasugue on the atlas.
+  - `dungeon.gd _special_centrepiece`.
+- Evidence: `tests/tools/capture_bh028_special.tscn` → `work/lemondev/bh-028/evidence/special/`.

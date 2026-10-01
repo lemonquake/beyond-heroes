@@ -36,9 +36,10 @@ func _new_ids() -> Array:
 # ---- data -------------------------------------------------------------------------------------------------------
 
 func test_a_twenty_dungeons() -> void:
-	eq(DataDungeons.order().size(), 20, "twenty dungeons")
+	var regular := DataDungeons.order().filter(func(id): return not DataDungeons.is_special(id))
+	eq(regular.size(), 20, "twenty dungeons (besides bh-028's special ones, checked in test_bh028)")
 	var tiers := {}
-	for id in DataDungeons.order():
+	for id in regular:
 		var d := DataDungeons.get_def(id)
 		var n := DataDungeons.floor_count(id)
 		ok(n >= 2 and n <= 5, "%s has 2-5 floors (%d)" % [id, n])

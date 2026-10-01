@@ -29,6 +29,8 @@ const RUNE_LOCKED := Color(0.35, 0.3, 0.45)
 
 var interact_range := 2.1
 var rune_tint := RUNE_ACTIVE                    # dungeon portals glow in their theme's colour (bh-012)
+## bh-028: the hero tier this teleporter asks for (5 = Class A, DataGuilds.TIERS); 0 = none.
+var min_tier := 0
 var dungeon_gate: StringName = &""             # a dungeon's surface gate: also offers every floor the hero has reached                       # flat metres from the dais centre (the dais is 1.3 m across the runes)
 
 var _area: Area3D
@@ -96,11 +98,23 @@ func arrival_point() -> Vector3:
 	return global_position + Vector3(0, 0.47, 0)
 
 func is_locked() -> bool:
+	if tier_locked():
+		return true
 	if not locked:
 		return false
 	if unlock_flag != &"" and Game.hero and Game.hero.world_flags.get(unlock_flag, false):
 		return false
 	return true
+
+## The local hero's tier is below `min_tier`.
+func tier_locked() -> bool:
+	return min_tier > 0 and Game.hero != null and Game.hero.tier < min_tier
+
+## What the hero is told at a locked dais.
+func lock_text() -> String:
+	if tier_locked():
+		return "Only a Class %s hero may pass this gate. You are %s." % [DataGuilds.letter(min_tier), DataGuilds.tier_name(Game.hero.tier)]
+	return locked_hint
 
 func refresh_state() -> void:
 	var active := not is_locked()
@@ -124,7 +138,7 @@ func _on_body_entered(body: Node3D) -> void:
 	discover()
 	refresh_state()
 	if is_locked():
-		Events.notify.emit(locked_hint, &"locked")
+		Events.notify.emit(lock_text(), &"locked")
 		Audio.play(&"ui_error", -6.0)
 
 func _on_body_exited(body: Node3D) -> void:

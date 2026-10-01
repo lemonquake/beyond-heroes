@@ -5,8 +5,8 @@ class_name DataDungeonsX
 ## gone. Floor plans are generated offline (DataDungeonPlans, tools/dungeon_gen/gen_plans.py): 2–5 floors each.
 ## Names are invented for Jre (no borrowed real-culture names — user rule).
 
-## Difficulty tier 1–5 (the old five dungeons are tiers 2–4, see DataDungeons.TIER).
-const TIER_NAMES := ["", "Easy", "Normal", "Hard", "Brutal", "Mythic"]
+## Difficulty tier 1–5 (the old five dungeons are tiers 2–4, see DataDungeons.TIER); 6 is the special dungeons of bh-028.
+const TIER_NAMES := ["", "Easy", "Normal", "Hard", "Brutal", "Mythic", "Ascendant"]
 
 const THEMES := {
 	&"hideout": {

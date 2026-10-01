@@ -318,5 +318,165 @@
    0.273
   ],
   "fallback": false
+ },
+ {
+  "id": "sora_fragment",
+  "tris": 764,
+  "size": [
+   0.18,
+   0.107,
+   0.146
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sora_shard",
+  "tris": 584,
+  "size": [
+   0.112,
+   0.076,
+   0.24
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sora_crystalline",
+  "tris": 800,
+  "size": [
+   0.255,
+   0.173,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sora_orbital",
+  "tris": 3040,
+  "size": [
+   0.315,
+   0.292,
+   0.236
+  ],
+  "fallback": false
+ },
+ {
+  "id": "luna_fragment",
+  "tris": 580,
+  "size": [
+   0.18,
+   0.109,
+   0.156
+  ],
+  "fallback": false
+ },
+ {
+  "id": "luna_shard",
+  "tris": 574,
+  "size": [
+   0.111,
+   0.075,
+   0.24
+  ],
+  "fallback": false
+ },
+ {
+  "id": "luna_crystalline",
+  "tris": 788,
+  "size": [
+   0.254,
+   0.169,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "luna_orbital",
+  "tris": 2700,
+  "size": [
+   0.315,
+   0.292,
+   0.236
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sol_fragment",
+  "tris": 450,
+  "size": [
+   0.18,
+   0.072,
+   0.161
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sol_shard",
+  "tris": 348,
+  "size": [
+   0.111,
+   0.075,
+   0.24
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sol_crystalline",
+  "tris": 566,
+  "size": [
+   0.254,
+   0.158,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "sol_orbital",
+  "tris": 2380,
+  "size": [
+   0.315,
+   0.292,
+   0.236
+  ],
+  "fallback": false
+ },
+ {
+  "id": "airah_fragment",
+  "tris": 422,
+  "size": [
+   0.18,
+   0.078,
+   0.158
+  ],
+  "fallback": false
+ },
+ {
+  "id": "airah_shard",
+  "tris": 444,
+  "size": [
+   0.111,
+   0.076,
+   0.24
+  ],
+  "fallback": false
+ },
+ {
+  "id": "airah_crystalline",
+  "tris": 692,
+  "size": [
+   0.254,
+   0.165,
+   0.28
+  ],
+  "fallback": false
+ },
+ {
+  "id": "airah_orbital",
+  "tris": 2396,
+  "size": [
+   0.315,
+   0.292,
+   0.236
+  ],
+  "fallback": false
  }
 ]

@@ -617,7 +617,7 @@ static var clock_offset := 0.0
 
 # ------------------------------------------------------------------------------------------------------------
 
-## Every dungeon: the five of bh-012 and the fifteen of bh-013 (tier and usurper filled in).
+## Every dungeon: the five of bh-012, the fifteen of bh-013 and the five special ones of bh-028 (tier and usurper filled in).
 static func defs() -> Dictionary:
 	if _defs.is_empty():
 		for id in ORDER:
@@ -628,6 +628,9 @@ static func defs() -> Dictionary:
 		var x := DataDungeonsX.list()
 		for id in x:
 			_defs[id] = x[id]
+		var sp := DataDungeonsSpecial.list()
+		for id in sp:
+			_defs[id] = sp[id]
 	return _defs
 
 ## Every dungeon id, easiest (lowest first floor) first.
@@ -654,11 +657,23 @@ static func tier(id: StringName) -> int:
 	return int(get_def(id).get("tier", 2))
 
 static func tier_name(id: StringName) -> String:
-	return DataDungeonsX.TIER_NAMES[clampi(tier(id), 1, 5)]
+	return DataDungeonsX.TIER_NAMES[clampi(tier(id), 1, DataDungeonsX.TIER_NAMES.size() - 1)]
 
 static func tier_stars(id: StringName) -> String:
-	var t := clampi(tier(id), 1, 5)
-	return "★".repeat(t) + "☆".repeat(5 - t)
+	var t := clampi(tier(id), 1, DataDungeonsX.TIER_NAMES.size() - 1)
+	return "★".repeat(t) + "☆".repeat(maxi(0, 5 - t))
+
+## bh-028: a special dungeon (DataDungeonsSpecial): no deeper floors, its own levels, a hero-tier lock on the gate.
+static func is_special(id: StringName) -> bool:
+	return bool(get_def(id).get("special", false))
+
+## Deeper floors DungeonGrowth may add below the authored ones (none for special dungeons).
+static func max_extra(id: StringName) -> int:
+	return 0 if is_special(id) else DungeonGrowth.MAX_EXTRA
+
+## The hero tier a dungeon's gate asks for (0: none; 5 = Class A).
+static func min_tier(id: StringName) -> int:
+	return int(get_def(id).get("min_tier", 0))
 
 static func level_range(id: StringName) -> Vector2i:
 	if get_def(id).is_empty():
@@ -695,7 +710,7 @@ static func parse(map: StringName) -> Array:
 
 static func floor_def(dungeon: StringName, floor_n: int) -> Dictionary:
 	var d := get_def(dungeon)
-	if d.is_empty() or floor_n < 1 or floor_n > floor_count(dungeon) + DungeonGrowth.MAX_EXTRA:
+	if d.is_empty() or floor_n < 1 or floor_n > floor_count(dungeon) + max_extra(dungeon):
 		return {}
 	if floor_n > floor_count(dungeon):
 		return DungeonGrowth.floor_plan(dungeon, floor_n)
@@ -705,6 +720,8 @@ static func theme(dungeon: StringName) -> Dictionary:
 	var t: StringName = get_def(dungeon).get("theme", &"drowned")
 	if THEMES.has(t):
 		return THEMES[t]
+	if DataDungeonsSpecial.THEMES.has(t):
+		return DataDungeonsSpecial.THEMES[t]
 	return DataDungeonsX.THEMES.get(t, THEMES[&"drowned"])
 
 ## World flag set when floor `n`'s seal breaks (its descent portal opens for good).
@@ -813,7 +830,7 @@ static func map_defs() -> Array:
 	for id in order():
 		var d: Dictionary = get_def(id)
 		var n_floors := floor_count(id)
-		for n in range(1, n_floors + DungeonGrowth.MAX_EXTRA + 1):
+		for n in range(1, n_floors + max_extra(id) + 1):
 			var f := floor_def(id, n)
 			var m := MapDef.new()
 			m.id = map_id(id, n)
@@ -842,6 +859,8 @@ static func _hint(id: StringName, n: int) -> String:
 	if n == champion_floor(id):
 		return "%s guards the portal to the last floor. Beat the champion to break the seal." % d.miniboss.name
 	if n == 1:
+		if is_special(id):
+			return "%s An Ascendant dungeon: its monsters are far stronger than anywhere on Salmonan, and only Class A heroes may pass its gate." % d.blurb
 		return "%s The way down is sealed: defeat the Seal Keepers of each floor to open its descent portal." % d.blurb
 	return "Upper storeys are reached by the stairs. Treasure chests hide on the high galleries; a looted chest refills in time."
 

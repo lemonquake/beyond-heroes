@@ -202,6 +202,10 @@ func _terrace() -> void:
 	# waypoint and its guardians
 	teleporter(&"sanctuary_waypoint", Vector3(0, y, -24.5), &"ruined_forest", &"arrival", "Ruined Forest")
 	spawn(&"waypoint", Vector3(0, y, -20.6), 180.0)
+	# bh-028: the rift Kethrax's fall tore open, to The Sundered Reach (read live: old saves with Kethrax dead see it open)
+	var rift := teleporter(&"sanctuary_rift", Vector3(7.4, y, -26.2), &"sundered_reach", &"arrival", "The Sundered Reach", 0.0, true,
+		&"boss_kethrax_defeated", "A rift hangs over the dais, sealed shut. It will open once Kethrax falls.")
+	rift.rune_tint = Color(0.62, 0.5, 1.0)
 	# where a Town Portal's return end stands: the open west half of the terrace, clear of the statue and braziers
 	spawn(&"town_portal", Vector3(-8.0, y, -24.8), 90.0)
 	for sx in [-6.8, 6.8]:
@@ -212,7 +216,7 @@ func _terrace() -> void:
 	torch(Vector3(-2.0, y + 2.7, r.position.y + 0.42), 0.0)
 	torch(Vector3(2.0, y + 2.7, r.position.y + 0.42), 0.0)
 	kit("candles_cluster", Vector3(-8.6, y, -28.6), 0.0, 1.0, deco)
-	kit("altar", Vector3(8.0, y, -28.4), 0.0)
+	kit("altar", Vector3(3.8, y, -28.6), 0.0)                  # bh-028: moved west for the rift
 	decor("cobweb", Vector3(r.position.x + 0.45, y + 3.9, r.position.y + 0.45), -90.0, 0.9, false)
 
 func _houses() -> void:

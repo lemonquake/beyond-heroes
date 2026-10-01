@@ -2,9 +2,29 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
-## BH-028 - Combat scaling overhaul and the Sand Arena
+## BH-028 - Combat scaling, the Sand Arena, evasion, celestial orbs and the Ascendant dungeons
 
-Prepared 1 October 2026. Design and numbers: docs/COMBAT_SCALING.md.
+Prepared 1 October 2026. Design and numbers: docs/COMBAT_SCALING.md and docs/PLAN_bh-028.md.
+
+- **Five Ascendant dungeons behind Kethrax.** Defeating Kethrax opens a rift beside the waypoint on Malasugue's
+  Sanctuary Terrace. It leads to **The Sundered Reach**, a broken fortress plaza hanging in the dark, with five gates:
+  - The Prismheart Hollows (crystal, 10 floors, levels 80-89), The Underworld of Mourning (a river of the dead,
+    12 floors, 86-97), The Aether Reach (floating islands, 13 floors, 92-104), The Eclipse Vault (a black moon,
+    14 floors, 100-112) and The Drowned Solarium (a sunken sun-temple, 15 floors, 106-120).
+  - Only a **Class A** hero may pass a gate. Their monsters have 50% more health and 30% more damage on every
+    difficulty, and the dungeons do not grow extra floors.
+  - Each has its own textures, lighting and a centrepiece over its basin, a champion, a Usurper and a new lord:
+    Seraphel, Morrowgaunt, Zephyrion, Nocthea and Solmara. Every lord drops its dungeon's celestial orb.
+  - Old saves where Kethrax is already dead find the rift open.
+- **Evasion works at every level.** Area attacks (blasts, pools, beams, mines, strikes) can now be **grazed**:
+  Evasion against four times the attacker's Accuracy, up to 45%. Evasion past the 65% direct-hit cap keeps paying
+  off, and the character sheet shows Graze Chance. Second Nature, Slip, Hunter's Calm, Windrunner and Phantom Veil
+  now actually work.
+- **+50 Maximum HP per level-up** for every hero, old saves included. It stacks with Vitality.
+- **Hex of Frailty.** Monsters of level 40+ can curse you: 20% lower resistances and 40% less Evasion for 5 seconds.
+  The violet sigil can be dodged, and the curse can be cleansed.
+- **Celestial orbs: Sora, Luna, Sol and Airah.** Four new socket crystal families with their own passives
+  (Moonveil, Sunflare, Tailwind). Bosses of level 40+ can drop them, and Socket Specialists sell them.
 
 - **No more one-shots at level 40-45+.** Hero, monster and boss numbers are now tied together by one budget
   (`CombatBudget`):

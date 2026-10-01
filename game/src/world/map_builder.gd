@@ -991,7 +991,9 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 		DataDungeons.floor_title(dungeon, 1), yaw)
 	t.dungeon_gate = dungeon
 	t.rune_tint = th.rune
-	var dress: Array = GATE_DRESS.get(StringName(dd.theme), DataDungeonsX.GATE_DRESS.get(StringName(dd.theme), GATE_DRESS[&"drowned"]))
+	t.min_tier = DataDungeons.min_tier(dungeon)
+	var tid := StringName(dd.theme)
+	var dress: Array = GATE_DRESS.get(tid, DataDungeonsX.GATE_DRESS.get(tid, DataDungeonsSpecial.GATE_DRESS.get(tid, GATE_DRESS[&"drowned"])))
 	var have := func(n: String) -> bool: return ResourceLoader.exists(ENV_DIR % n)
 	# the entrance frame behind the dais, two big pieces flanking it, smaller dressing around
 	if have.call(dress[0]):
@@ -1010,7 +1012,10 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	var sp := c + fwd * 3.4
 	spawn(DataDungeons.gate_id(dungeon), Vector3(sp.x, 0, sp.z), yaw, true)
 	var sg := c + fwd * 3.0 + side * 3.0
-	signpost(Vector2(sg.x, sg.z), [["%s\n%s" % [dd.name, DataDungeons.recommended_levels(dungeon)], Vector2(-fwd.x, -fwd.z)]])
+	var sign_text := "%s\n%s" % [dd.name, DataDungeons.recommended_levels(dungeon)]
+	if t.min_tier > 0:
+		sign_text += "\nClass %s heroes only" % DataGuilds.letter(t.min_tier)
+	signpost(Vector2(sg.x, sg.z), [[sign_text, Vector2(-fwd.x, -fwd.z)]])
 	return t
 
 ## Named point of interest used by previews and (later) the world map / camera cinematics.

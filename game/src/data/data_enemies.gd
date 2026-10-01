@@ -25,7 +25,8 @@ static func build() -> Array:
 		var d: Dictionary = LOOK.get(e.id, {})
 		for k in d:
 			e.set(k, d[k])
-	return out
+	# bh-028: the special dungeons' lords are re-cast copies of existing bosses (looks and traits included)
+	return out + DataEnemiesSpecial.defs(out)
 
 ## Presentation and signature traits per enemy (docs/LORE.md §7; Enemy implements the traits).
 const LOOK := {

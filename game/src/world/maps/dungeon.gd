@@ -79,7 +79,7 @@ func compose() -> void:
 		fd.erase("descent")
 	th = DataDungeons.theme(dungeon)
 	var tid := StringName(dd.get("theme", &"drowned"))
-	dress = DRESS.get(tid, DataDungeonsX.DRESS.get(tid, DRESS[&"drowned"]))
+	dress = DRESS.get(tid, DataDungeonsX.DRESS.get(tid, DataDungeonsSpecial.DRESS.get(tid, DRESS[&"drowned"])))
 	plan = fd.get("plan", [])
 	rows = plan.size()
 	cols = String(plan[0]).length() if rows > 0 else 0
@@ -531,7 +531,7 @@ func _light_and_dress() -> void:
 			if height.has(c + SIDES[sd]) and absf(height[c + SIDES[sd]] - h) < 0.1:
 				open_n += 1
 		if not walls.is_empty() and open_n >= 2 and rng.randf() < 0.42:
-			var list: Array = CLUTTER.get(StringName(dd.theme), DataDungeonsX.CLUTTER.get(StringName(dd.theme), []))
+			var list: Array = CLUTTER.get(StringName(dd.theme), DataDungeonsX.CLUTTER.get(StringName(dd.theme), DataDungeonsSpecial.CLUTTER.get(StringName(dd.theme), [])))
 			var sd: String = walls[rng.randi() % walls.size()]
 			var dir: Vector2i = SIDES[sd]
 			var n_items := rng.randi_range(1, 3)
@@ -613,10 +613,147 @@ func _light_and_dress() -> void:
 				sp.add_child(ring)
 				ring.transform = Transform3D.IDENTITY
 		light(Vector3(ctr.x, 1.5, ctr.z), th.glow, 3.0, 14.0, false, true)
+	if DataDungeons.is_special(dungeon):
+		_special_centrepiece(basin_cells)
 	# a little theme light floating over each storey so the upper galleries never sink into darkness
 	for c: Vector2i in cells:
 		if height[c] > 0.1 and (c.x * 3 + c.y * 5) % 7 == 0:
 			light(cell_pos(c) + Vector3(0, 3.0, 0), th.torch, 1.2, 9.0, false, false)
+
+## bh-028: each special dungeon's centrepiece. Pieces that grow out of water (crystals, soul-fire, the island ring)
+## stand in the floor's largest basin, on the basin cell nearest its middle (over a split basin the mean of all cells
+## lands on solid floor), and need a pool of four cells or more. The sun and the moon hang over that pool, or over the
+## middle of the ground floor when there is none (the sanctums).
+func _special_centrepiece(basin_cells: Array) -> void:
+	var left := {}
+	for c: Vector2i in basin_cells:
+		left[c] = true
+	var best: Array = []
+	while not left.is_empty():
+		var seed_cell: Vector2i = left.keys()[0]
+		left.erase(seed_cell)
+		var pool := [seed_cell]
+		var i := 0
+		while i < pool.size():
+			for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+				var nb: Vector2i = pool[i] + d
+				if left.has(nb):
+					left.erase(nb)
+					pool.append(nb)
+			i += 1
+		if pool.size() > best.size():
+			best = pool
+	var has_pool := best.size() >= 4
+	var ctr := Vector3.ZERO
+	if has_pool:
+		var mean := Vector3.ZERO
+		for c: Vector2i in best:
+			mean += cell_pos(c)
+		mean /= float(best.size())
+		ctr = cell_pos(best[0])
+		for c: Vector2i in best:
+			if cell_pos(c).distance_squared_to(mean) < ctr.distance_squared_to(mean):
+				ctr = cell_pos(c)
+	else:
+		var n := 0
+		for c: Vector2i in height:
+			if height[c] < 0.1:
+				ctr += cell_pos(c)
+				n += 1
+		if n == 0:
+			return
+		ctr /= float(n)
+	ctr.y = 0.0
+	if not has_pool and not StringName(dd.theme) in [&"eclipse", &"solar"]:
+		return
+	match StringName(dd.theme):
+		&"prism":
+			# a cluster of giant crystals growing out of the pool
+			if _has("ice_crystal_large"):
+				kit("ice_crystal_large", Vector3(ctr.x, BASIN_FLOOR, ctr.z), rng.randf() * 360.0, 2.4, deco)
+			for k in 5:
+				var a := TAU * k / 5.0 + 0.4
+				var p := ctr + Vector3(cos(a), 0, sin(a)) * 2.6
+				if _has("crystal_pylon"):
+					kit("crystal_pylon", Vector3(p.x, BASIN_FLOOR, p.z), rad_to_deg(a), rng.randf_range(1.3, 1.8), deco)
+			light(Vector3(ctr.x, 2.0, ctr.z), th.glow, 3.4, 16.0, false, true)
+		&"underworld":
+			# four columns of soul-fire standing on the ghost river
+			for k in 4:
+				var a := TAU * k / 4.0 + 0.78
+				var p := ctr + Vector3(cos(a), 0, sin(a)) * 3.2
+				if _has("obelisk_corrupted"):
+					kit("obelisk_corrupted", Vector3(p.x, BASIN_FLOOR, p.z), rad_to_deg(a), 1.4, deco)
+				for h in [0.0, 1.4, 2.8]:
+					flame(Vector3(p.x, LIQUID_Y + 1.0 + h, p.z), 1.1 - h * 0.15)
+				light(Vector3(p.x, LIQUID_Y + 2.4, p.z), th.glow, 2.4, 10.0, false, true)
+		&"aether":
+			# a ring of islands turning slowly round a crystal spire
+			if _has("crystal_pylon"):
+				kit("crystal_pylon", Vector3(ctr.x, BASIN_FLOOR, ctr.z), 0.0, 2.2, deco)
+			var spin := Spinner.new()
+			spin.axis = Vector3.UP
+			spin.speed = 0.12
+			spin.position = ctr
+			deco.add_child(spin)
+			for k in 5:
+				var a := TAU * k / 5.0
+				if _has("floating_rock"):
+					kit("floating_rock", Vector3(cos(a) * 3.6, LIQUID_Y + 2.2 + (k % 2) * 1.4, sin(a) * 3.6), rad_to_deg(a), rng.randf_range(1.1, 1.6), spin)
+			light(Vector3(ctr.x, 2.4, ctr.z), th.glow, 3.0, 16.0, false, true)
+		&"eclipse":
+			# a black moon with a silver rim hanging over the basin
+			var moon := _orb(0.0, Color(0.02, 0.02, 0.03), 0.0, 1.9)
+			moon.position = ctr + Vector3(0, 5.6, 0)
+			var rim := MeshInstance3D.new()
+			var tm := TorusMesh.new()
+			tm.inner_radius = 2.0
+			tm.outer_radius = 2.25
+			tm.rings = 48
+			rim.mesh = tm
+			rim.material_override = _glow_mat(Color(0.85, 0.85, 1.0), 3.0)
+			rim.rotation_degrees = Vector3(90, 0, 0)
+			var turn := Spinner.new()
+			turn.axis = Vector3.UP
+			turn.speed = 0.08
+			turn.position = moon.position
+			deco.add_child(turn)
+			turn.add_child(rim)
+			light(moon.position + Vector3(0, -2.4, 0), th.glow, 2.6, 14.0, false, false)
+		&"solar":
+			# the drowned sun: a burning orb above the water
+			var sun := _orb(1.0, Color(1.0, 0.72, 0.3), 5.0, 1.6)
+			sun.position = ctr + Vector3(0, 5.4, 0)
+			var corona := _orb(1.0, Color(1.0, 0.55, 0.15), 1.6, 2.1)
+			corona.position = sun.position
+			(corona.material_override as StandardMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			(corona.material_override as StandardMaterial3D).albedo_color.a = 0.25
+			light(sun.position, Color(1.0, 0.75, 0.4), 4.5, 22.0, false, true)
+
+## An unlit glowing material (energy 0: plain matte).
+func _glow_mat(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	if energy > 0.0:
+		m.emission_enabled = true
+		m.emission = c
+		m.emission_energy_multiplier = energy
+	m.roughness = 0.35
+	return m
+
+## A sphere for the special centrepieces (no collision; `alpha` 1 = opaque).
+func _orb(alpha: float, c: Color, energy: float, radius: float) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = radius
+	sm.height = radius * 2.0
+	mi.mesh = sm
+	var m := _glow_mat(Color(c.r, c.g, c.b, alpha), energy)
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if energy > 0.0 else BaseMaterial3D.SHADING_MODE_PER_PIXEL
+	mi.material_override = m
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	deco.add_child(mi)
+	return mi
 
 ## A torch on a west (sx -1) or east (sx 1) wall, facing into the room.
 func _sconce_side(pos: Vector3, sx: float) -> void:
