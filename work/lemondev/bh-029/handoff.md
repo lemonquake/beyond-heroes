@@ -1,6 +1,6 @@
 # bh-029 handoff (continued 2 Oct 2026)
 
-State: IN PROGRESS. Work in the main tree; to be committed and pushed to main with an EXE + APK at the end.
+State: DONE. Pushed to main as 75848de; EXE (build/windows/BeyondHeroes.exe, zipped as build/BeyondHeroes-Windows.zip) and APK (build/BeyondHeroes.apk) built 2 Oct 2026, EXE smoke boot clean.
 
 ## User requests this session
 - Continue bh-029, send screenshots, **replace the glowing colour with pure white**, then push to main and build
@@ -41,7 +41,10 @@ State: IN PROGRESS. Work in the main tree; to be committed and pushed to main wi
   title still gives the healer map icon). test_bh029: an unimported GLB counts as missing instead of crashing.
 - CHANGELOG: NPC models, CDR cap 50% + 1 s minimum cooldown, tree fit, minimap FX layer, water/mist fixes.
 
-## Left
-1. Import M6 final GLBs; captures (monsters, terax, vaults); full suite (baseline: test_balance, test_enemies2,
-   test_inventory_overhaul x15, test_bh017 Fore-Tech, test_dungeon_growth).
-2. Commit/push to main (exclude scratch/raw logs; restore bh-002 report.json + bh-010 balance.json), build EXE + APK.
+## Tests
+`evidence/tests_final.txt`: only the known baseline fails (test_balance x8, test_enemies2 x8, test_inventory_overhaul x15,
+test_bh017 Fore-Tech x1). The full run used to hang in test_perf after test_npcs: Perf._restore_lights walked a
+Dictionary whose keys included freed lights (Godot 4.7 hangs); fixed (iterate keys(), prune freed). The runner prints
+`[TRACE] suite.test` per test when BH_TEST_TRACE is set.
+
+Blind benchmark vs a commercial reference: UNVERIFIED (no independent critic run).
