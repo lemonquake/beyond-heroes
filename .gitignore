@@ -51,6 +51,8 @@ ENV/
 
 # Generated diagnostic log exceeds GitHub's per-file size limit; preserve locally.
 /output/world-polish-20261003/baseline/full-suite-raw.log
+/output/balance-full-tests.log
+/output/balance-full-final-tests.log
 
 # Operating System Files
 .DS_Store

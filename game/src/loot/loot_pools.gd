@@ -132,6 +132,23 @@ const FAMILY_NAMES := {&"bandit": "bandits", &"goblin": "goblins", &"orc": "orcs
 
 static func _build_hints() -> void:
 	var parts := {}
+	# Crystal drops are rolled separately from enemy loot tables. Include their real sources for gem recipes.
+	for family in DataCrystals.ORDER:
+		for grade in DataCrystals.GRADES.size():
+			var id := DataCrystals.id_of(family, grade)
+			var sources := ["Dropped by bosses"]
+			if DataCrystals.is_celestial(family):
+				sources[0] = "Dropped by bosses of level %d or higher" % DataCrystals.CELESTIAL_LEVEL
+			if grade < 2:
+				sources.append("Dropped by champions (minibosses) of level %d or higher" % DataCrystals.CELESTIAL_LEVEL if DataCrystals.is_celestial(family) else "Dropped by champions (minibosses)")
+			# Shop availability is read from the same catalog used by the specialist vendors.
+			for shop: ShopDef in DB.shops.values():
+				for stock in shop.fixed:
+					if StringName(stock.get("base", &"")) == id:
+						var level := int(stock.get("level_min", 1))
+						if level < 99:
+							sources.append("Sold by %s from level %d" % [shop.display_name, maxi(1, level)])
+			parts[id] = sources
 	# family salvage first: "Carried by bandits, goblins, orcs and other armed foes"
 	var fam_by_item := {}
 	for fam in FAMILY_NAMES:
