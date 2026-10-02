@@ -13,12 +13,19 @@ Codex audit started 2 October 2026. Baseline revision: `cd7f368e` (verified with
 - Full Godot suite finished: 122,903 checks, 34 failed assertions, exit 1. Failed suites: `test_balance` (10), `test_bh017` (1), `test_enemies2` (8), `test_inventory_overhaul` (15). Full report copied to `godot-baseline-report.json`. Inspect failures against current intentional class mechanics before changing behavior or test expectations.
 - Restarted the zero-player local official server with the project's managed controls after confirming protocol 15 was stale. Stop saved a backup. Verified the restarted service reports protocol 16, zero players and game_online=true. This fixes the local version mismatch; it is still hosted on the user's PC.
 
-## In progress
+## Additional completed work
 
 - All six baseline render scenarios finished, plus two diagnostic variants and twelve map transitions. Dense combat median frame time: desktop 56.22 ms, mobile renderer 64.17 ms. See `QA_BASELINE_REPORT.md` for all percentiles, caveats and memory/load observations.
 - Windows baseline EXE exported successfully and passed headless startup (exit 0). Android release export failed because release signing is not configured. A separate debug APK exported with the existing identity and passed signature verification, with ARM32/ARM64 libraries. No Android device is attached for launch/performance checks.
 - Draft Linux service/Caddy/client configuration is in `server/deploy/`, with public UDP connectivity, lifecycle, rate-limit and backup verification still required.
+- QA/design/hosting foundation has been committed and pushed to main. Baseline builds and screenshots remain available locally. Only task files were committed; the pre-existing cheats-document edit and female model files were preserved.
+
+## Pending
+
 - Claude UI: screenshots time out; accessibility exposes only an empty window shell; targeting a returned button failed with `coordinate input geometry is unavailable`. User was given the one-sentence brief instruction to paste into Claude Code. Delivery has not been confirmed yet.
+- Gameplay polish/optimization, fixing or classifying the 34 baseline failures, and a clean multiplayer lifecycle rerun.
+- Cloud account/host selection and approved cost, Linux hosting verification, public connectivity and player-data migration if needed.
+- Physical low-end PC/Android testing and a stable Android release signing identity.
 
 ## Findings for Claude to address
 
