@@ -1,0 +1,38 @@
+[
+  {
+    "name": "town-desktop",
+    "exit": 0,
+    "started": "2026-10-02T20:58:45.5336021+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\town-desktop.json"
+  },
+  {
+    "name": "town-mobile-renderer",
+    "exit": 0,
+    "started": "2026-10-02T20:59:12.7379269+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\town-mobile-renderer.json"
+  },
+  {
+    "name": "forest-desktop",
+    "exit": 0,
+    "started": "2026-10-02T20:59:47.0610401+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\forest-desktop.json"
+  },
+  {
+    "name": "forest-mobile-renderer",
+    "exit": 0,
+    "started": "2026-10-02T21:00:19.4480094+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\forest-mobile-renderer.json"
+  },
+  {
+    "name": "forest-combat-desktop",
+    "exit": 0,
+    "started": "2026-10-02T21:00:51.4176581+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\forest-combat-desktop.json"
+  },
+  {
+    "name": "forest-combat-mobile-renderer",
+    "exit": 0,
+    "started": "2026-10-02T21:01:36.1617306+08:00",
+    "report": "A:\\Python\\beyond-heroes\\output\\beta-20261002\\forest-combat-mobile-renderer.json"
+  }
+]

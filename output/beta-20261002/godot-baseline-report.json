@@ -1,0 +1,466 @@
+{
+  "checks": 122903,
+  "elapsed_ms": 835172,
+  "engine": "4.7.2-stable (official)",
+  "failures": [
+    "test_balance.test_power_is_within_band_at_every_level: L1 knight power 480.6 is within 20% of the mean 347.8 (+38%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 mage power 479.9 is within 20% of the mean 347.8 (+38%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 430.6 is within 20% of the mean 347.8 (+24%)",
+    "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 347.8 (-100%)",
+    "test_balance.test_power_is_within_band_at_every_level: L10 knight power 5046.0 is within 20% of the mean 3189.7 (+58%)",
+    "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1237.0 is within 20% of the mean 3189.7 (-61%)",
+    "test_balance.test_power_is_within_band_at_every_level: L20 knight power 30160.4 is within 20% of the mean 16806.4 (+79%)",
+    "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5464.6 is within 20% of the mean 16806.4 (-67%)",
+    "test_balance.test_power_is_within_band_at_every_level: L30 ranger power 51522.4 is within 20% of the mean 37264.4 (+38%)",
+    "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 13373.8 is within 20% of the mean 37264.4 (-64%)",
+    "test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445",
+    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+    "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 311)",
+    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 328)",
+    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+    "test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)",
+    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375",
+    "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625"
+  ],
+  "suites": {
+    "test_armory_cheats.gd": {
+      "checks": 152,
+      "failures": [],
+      "ms": 9.486,
+      "tests": 4
+    },
+    "test_artisan_weapons.gd": {
+      "checks": 305,
+      "failures": [],
+      "ms": 198.758,
+      "tests": 1
+    },
+    "test_auto_loot_filters.gd": {
+      "checks": 30,
+      "failures": [],
+      "ms": 15.289,
+      "tests": 4
+    },
+    "test_balance.gd": {
+      "checks": 16,
+      "failures": [
+        "test_balance.test_power_is_within_band_at_every_level: L1 knight power 480.6 is within 20% of the mean 347.8 (+38%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 mage power 479.9 is within 20% of the mean 347.8 (+38%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 430.6 is within 20% of the mean 347.8 (+24%)",
+        "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 347.8 (-100%)",
+        "test_balance.test_power_is_within_band_at_every_level: L10 knight power 5046.0 is within 20% of the mean 3189.7 (+58%)",
+        "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1237.0 is within 20% of the mean 3189.7 (-61%)",
+        "test_balance.test_power_is_within_band_at_every_level: L20 knight power 30160.4 is within 20% of the mean 16806.4 (+79%)",
+        "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5464.6 is within 20% of the mean 16806.4 (-67%)",
+        "test_balance.test_power_is_within_band_at_every_level: L30 ranger power 51522.4 is within 20% of the mean 37264.4 (+38%)",
+        "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 13373.8 is within 20% of the mean 37264.4 (-64%)"
+      ],
+      "ms": 368104.055,
+      "tests": 1
+    },
+    "test_balance_audit.gd": {
+      "checks": 4452,
+      "failures": [],
+      "ms": 2086.459,
+      "tests": 9
+    },
+    "test_bh011.gd": {
+      "checks": 45,
+      "failures": [],
+      "ms": 8831.552,
+      "tests": 6
+    },
+    "test_bh012.gd": {
+      "checks": 1142,
+      "failures": [],
+      "ms": 2363.76,
+      "tests": 11
+    },
+    "test_bh013.gd": {
+      "checks": 1025,
+      "failures": [],
+      "ms": 7981.491,
+      "tests": 11
+    },
+    "test_bh014.gd": {
+      "checks": 30,
+      "failures": [],
+      "ms": 495.387,
+      "tests": 10
+    },
+    "test_bh015.gd": {
+      "checks": 10107,
+      "failures": [],
+      "ms": 934.439,
+      "tests": 11
+    },
+    "test_bh016.gd": {
+      "checks": 1560,
+      "failures": [],
+      "ms": 1040.075,
+      "tests": 15
+    },
+    "test_bh017.gd": {
+      "checks": 885,
+      "failures": [
+        "test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445"
+      ],
+      "ms": 32435.296,
+      "tests": 27
+    },
+    "test_bh018.gd": {
+      "checks": 602,
+      "failures": [],
+      "ms": 1368.178,
+      "tests": 18
+    },
+    "test_bh019.gd": {
+      "checks": 393,
+      "failures": [],
+      "ms": 2637.161,
+      "tests": 11
+    },
+    "test_bh020.gd": {
+      "checks": 41,
+      "failures": [],
+      "ms": 819.249,
+      "tests": 2
+    },
+    "test_bh021.gd": {
+      "checks": 382,
+      "failures": [],
+      "ms": 3699.76,
+      "tests": 13
+    },
+    "test_bh022.gd": {
+      "checks": 949,
+      "failures": [],
+      "ms": 840.061,
+      "tests": 7
+    },
+    "test_bh023.gd": {
+      "checks": 1711,
+      "failures": [],
+      "ms": 982.383,
+      "tests": 16
+    },
+    "test_bh024.gd": {
+      "checks": 1258,
+      "failures": [],
+      "ms": 311.686,
+      "tests": 14
+    },
+    "test_bh025.gd": {
+      "checks": 956,
+      "failures": [],
+      "ms": 248.021,
+      "tests": 13
+    },
+    "test_bh026.gd": {
+      "checks": 105,
+      "failures": [],
+      "ms": 767.99,
+      "tests": 10
+    },
+    "test_bh027.gd": {
+      "checks": 1195,
+      "failures": [],
+      "ms": 4751.019,
+      "tests": 13
+    },
+    "test_bh027_pickup.gd": {
+      "checks": 5,
+      "failures": [],
+      "ms": 10167.419,
+      "tests": 2
+    },
+    "test_bh028.gd": {
+      "checks": 920,
+      "failures": [],
+      "ms": 1604.322,
+      "tests": 13
+    },
+    "test_bh028_arena.gd": {
+      "checks": 849,
+      "failures": [],
+      "ms": 19998.957,
+      "tests": 12
+    },
+    "test_bh029.gd": {
+      "checks": 562,
+      "failures": [],
+      "ms": 374.882,
+      "tests": 12
+    },
+    "test_bh030.gd": {
+      "checks": 151,
+      "failures": [],
+      "ms": 167.986,
+      "tests": 8
+    },
+    "test_bh031.gd": {
+      "checks": 3686,
+      "failures": [],
+      "ms": 176.089,
+      "tests": 12
+    },
+    "test_boss_set_network.gd": {
+      "checks": 6,
+      "failures": [],
+      "ms": 59.119,
+      "tests": 1
+    },
+    "test_boss_set_visuals.gd": {
+      "checks": 1612,
+      "failures": [],
+      "ms": 426.571,
+      "tests": 2
+    },
+    "test_boss_sets.gd": {
+      "checks": 6178,
+      "failures": [],
+      "ms": 5998.183,
+      "tests": 7
+    },
+    "test_character_skills_layout.gd": {
+      "checks": 255,
+      "failures": [],
+      "ms": 10498.635,
+      "tests": 2
+    },
+    "test_chat.gd": {
+      "checks": 52,
+      "failures": [],
+      "ms": 1744.68,
+      "tests": 9
+    },
+    "test_chat_upgrade.gd": {
+      "checks": 253,
+      "failures": [],
+      "ms": 297.371,
+      "tests": 7
+    },
+    "test_class_rework.gd": {
+      "checks": 77,
+      "failures": [],
+      "ms": 3882.67,
+      "tests": 12
+    },
+    "test_combat_growth.gd": {
+      "checks": 134,
+      "failures": [],
+      "ms": 1567.344,
+      "tests": 6
+    },
+    "test_crafting.gd": {
+      "checks": 689,
+      "failures": [],
+      "ms": 22202.368,
+      "tests": 11
+    },
+    "test_crossbow_pose.gd": {
+      "checks": 909,
+      "failures": [],
+      "ms": 36.811,
+      "tests": 1
+    },
+    "test_crossbows.gd": {
+      "checks": 10766,
+      "failures": [],
+      "ms": 444.636,
+      "tests": 8
+    },
+    "test_damage.gd": {
+      "checks": 60,
+      "failures": [],
+      "ms": 189.248,
+      "tests": 13
+    },
+    "test_dungeon_growth.gd": {
+      "checks": 23123,
+      "failures": [],
+      "ms": 7054.239,
+      "tests": 6
+    },
+    "test_enemies.gd": {
+      "checks": 464,
+      "failures": [],
+      "ms": 2614.967,
+      "tests": 6
+    },
+    "test_enemies2.gd": {
+      "checks": 598,
+      "failures": [
+        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+        "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 311)",
+        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 328)",
+        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+        "test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)",
+        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+      ],
+      "ms": 56407.947,
+      "tests": 19
+    },
+    "test_guide.gd": {
+      "checks": 141,
+      "failures": [],
+      "ms": 691.858,
+      "tests": 5
+    },
+    "test_guilds.gd": {
+      "checks": 100,
+      "failures": [],
+      "ms": 33.388,
+      "tests": 8
+    },
+    "test_inventory_overhaul.gd": {
+      "checks": 2087,
+      "failures": [
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375",
+        "test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625"
+      ],
+      "ms": 62.742,
+      "tests": 6
+    },
+    "test_island.gd": {
+      "checks": 1669,
+      "failures": [],
+      "ms": 11462.268,
+      "tests": 13
+    },
+    "test_items.gd": {
+      "checks": 2483,
+      "failures": [],
+      "ms": 608.537,
+      "tests": 17
+    },
+    "test_loot.gd": {
+      "checks": 4060,
+      "failures": [],
+      "ms": 29135.776,
+      "tests": 17
+    },
+    "test_maps.gd": {
+      "checks": 633,
+      "failures": [],
+      "ms": 8845.074,
+      "tests": 14
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.48,
+      "tests": 4
+    },
+    "test_npcs.gd": {
+      "checks": 474,
+      "failures": [],
+      "ms": 19220.023,
+      "tests": 3
+    },
+    "test_official_server.gd": {
+      "checks": 29,
+      "failures": [],
+      "ms": 110.492,
+      "tests": 6
+    },
+    "test_perf.gd": {
+      "checks": 245,
+      "failures": [],
+      "ms": 7086.435,
+      "tests": 7
+    },
+    "test_progression.gd": {
+      "checks": 51,
+      "failures": [],
+      "ms": 9.113,
+      "tests": 7
+    },
+    "test_shops_dialogue.gd": {
+      "checks": 1401,
+      "failures": [],
+      "ms": 585.114,
+      "tests": 10
+    },
+    "test_skills.gd": {
+      "checks": 3519,
+      "failures": [],
+      "ms": 46608.292,
+      "tests": 11
+    },
+    "test_stats.gd": {
+      "checks": 162,
+      "failures": [],
+      "ms": 21.242,
+      "tests": 8
+    },
+    "test_status.gd": {
+      "checks": 24,
+      "failures": [],
+      "ms": 72.165,
+      "tests": 8
+    },
+    "test_survival_balance.gd": {
+      "checks": 866,
+      "failures": [],
+      "ms": 430.585,
+      "tests": 6
+    },
+    "test_team_loot.gd": {
+      "checks": 21649,
+      "failures": [],
+      "ms": 26525.489,
+      "tests": 3
+    },
+    "test_tempo_layout.gd": {
+      "checks": 13,
+      "failures": [],
+      "ms": 825.376,
+      "tests": 1
+    },
+    "test_tempos.gd": {
+      "checks": 3748,
+      "failures": [],
+      "ms": 32741.325,
+      "tests": 16
+    },
+    "test_westreach_bridges.gd": {
+      "checks": 14,
+      "failures": [],
+      "ms": 57905.692,
+      "tests": 1
+    }
+  },
+  "timestamp": "2026-10-02T20:58:16"
+}

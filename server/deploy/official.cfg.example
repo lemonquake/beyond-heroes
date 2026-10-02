@@ -1,0 +1,4 @@
+# Public client endpoint. Do not bundle the loopback private key or server key.
+[server]
+url="https://game.example.com"
+certificate=""

@@ -1,0 +1,30 @@
+# Draft; validate on the chosen Linux VPS before enabling.
+[Unit]
+Description=Beyond Heroes account service and game coordinator
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=beyond-heroes
+Group=beyond-heroes
+WorkingDirectory=/opt/beyond-heroes/current
+StateDirectory=beyond-heroes
+StateDirectoryMode=0700
+Environment=PYTHONUNBUFFERED=1
+UMask=0077
+ExecStart=/opt/beyond-heroes/current/.venv/bin/python -m server.run_server --godot /opt/godot/godot --config /var/lib/beyond-heroes/server.json
+Restart=always
+RestartSec=5
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutStopSec=45
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

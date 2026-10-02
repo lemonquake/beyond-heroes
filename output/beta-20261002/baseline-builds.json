@@ -1,0 +1,30 @@
+{
+  "label": "QA baseline; unresolved test failures; not a polished beta release",
+  "builds": [
+    {
+      "preset": "Windows",
+      "path": "A:\\Python\\beyond-heroes\\build\\beta-20261002\\BeyondHeroes-baseline.exe",
+      "bytes": 572186016,
+      "sha256": "ba2cd4f3ead85616ed7ca3b8f9efb26c3ba38a5d798d0488b7f1b16916b71806",
+      "export_exit": 0
+    },
+    {
+      "preset": "Android",
+      "debug": true,
+      "path": "A:\\Python\\beyond-heroes\\build\\beta-20261002\\BeyondHeroes-baseline-debug.apk",
+      "bytes": 521007252,
+      "sha256": "63d744dd5387301501cf3dc746e7d8b8346402a84c013fdae826819c641b1975",
+      "export_exit": 0
+    }
+  ],
+  "windows_headless_startup_exit": 0,
+  "android_signature_verify_exit": 0,
+  "android_min_sdk": 24,
+  "android_target_sdk": 36,
+  "android_architectures": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "android_device_install": "pending; no ADB device",
+  "private_server_file_scan": "passed"
+}
