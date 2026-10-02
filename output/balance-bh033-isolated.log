@@ -1,0 +1,118 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_req'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:853)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+ERROR: The object does not have any 'meta' values with the key 'bud_mother'.
+   at: get_meta (core/object/object.cpp:1053)
+   GDScript backtrace (most recent call first):
+       [0] _bud_bloom (res://src/actors/enemy/enemy_traits_ext.gd:864)
+       [1] _bud_tick (res://src/actors/enemy/enemy_traits_ext.gd:846)
+       [2] pre_tick (res://src/actors/enemy/enemy_traits_ext.gd:153)
+       [3] pre_tick (res://src/actors/enemy/enemy_traits_x.gd:125)
+       [4] test_verdigast_buds_bloom_or_break (res://tests/unit/test_bh033.gd:594)
+[FAIL] test_bh033.gd — 20 tests, 27477 checks, 12 failures (35935.8 ms)
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: ember_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: aqua_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: nova_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: thundra_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: vipera_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: bloodrift_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: essencerift_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: aetherift_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: sora_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: luna_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: sol_fragment has a source hint
+  FAIL test_bh033.test_source_hints_come_from_resolved_pools: airah_fragment has a source hint
+TOTAL: 27477 checks, 12 failures
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

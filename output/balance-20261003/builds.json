@@ -2,18 +2,71 @@
   "builds": {
     "Windows": {
       "path": "A:\\Python\\beyond-heroes\\build\\windows\\BeyondHeroes.exe",
-      "bytes": 641269240,
-      "sha256": "4249792ac9f70a41ca26886a69d00a262832b46bef9fb67e30a7b80171ec18ff",
+      "bytes": 641270280,
+      "sha256": "ff3bff91caed5f635902852c97a6ffcc09d160d2b22ed985de738b73ef9eb707",
       "mode": "--export-release",
       "export_exit": 0
     },
     "Android": {
       "path": "A:\\Python\\beyond-heroes\\build\\BeyondHeroes.apk",
       "bytes": 590212218,
-      "sha256": "80212786fbd5b15cb7e6b0f05eee6e2bd9eb6c466fe02d6b7cbd6d04cfd257c2",
+      "sha256": "10e1437a07ba92008684b1fc6f55b4776ec8bdd48a21fad0d3d0bf3e6642bda1",
       "mode": "--export-debug",
       "export_exit": 0
+    },
+    "Windows ZIP": {
+      "path": "A:\\Python\\beyond-heroes\\build\\BeyondHeroes-Windows.zip",
+      "bytes": 561566054,
+      "sha256": "2b1daee2b4fcd947efc1c568e20f329074e8dd35cad66955f6003064630cd055"
     }
   },
-  "source_commit": "f7109cfd03568c2e93c237a6a4a8445cedeed4b0"
+  "source_commit": "7324e7aeea3afa5284295139cb7ae12297c8941b",
+  "windows_smoke_exit": 0,
+  "android_signature": "Verified APK signature schemes v2 and v3; debug signing identity",
+  "android_device_testing": "No connected Android device; installation and play testing not performed",
+  "android_abis": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "package_source_check": {
+    "passed": true,
+    "scripts": {
+      "src/actors/actor.gdc": {
+        "bytes": 16213,
+        "identical": true
+      },
+      "src/core/combat/damage_pipeline.gdc": {
+        "bytes": 13443,
+        "identical": true
+      },
+      "src/core/combat/status_controller.gdc": {
+        "bytes": 7666,
+        "identical": true
+      },
+      "src/core/crafting/crafting.gdc": {
+        "bytes": 6365,
+        "identical": true
+      },
+      "src/core/defs/skill_def.gdc": {
+        "bytes": 2502,
+        "identical": true
+      },
+      "src/core/progression/tree_def.gdc": {
+        "bytes": 1722,
+        "identical": true
+      },
+      "src/core/progression/tree_state.gdc": {
+        "bytes": 4243,
+        "identical": true
+      },
+      "src/data/data_crystals.gdc": {
+        "bytes": 11130,
+        "identical": true
+      },
+      "src/loot/loot_pools.gdc": {
+        "bytes": 7594,
+        "identical": true
+      }
+    }
+  }
 }

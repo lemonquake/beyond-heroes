@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+src/actors/actor.gdc: identical Windows/Android compiled script = true
+src/core/combat/status_controller.gdc: identical Windows/Android compiled script = true
+src/core/combat/damage_pipeline.gdc: identical Windows/Android compiled script = true
+src/core/progression/tree_def.gdc: identical Windows/Android compiled script = true
+src/core/progression/tree_state.gdc: identical Windows/Android compiled script = true
+src/core/defs/skill_def.gdc: identical Windows/Android compiled script = true
+src/data/data_crystals.gdc: identical Windows/Android compiled script = true
+src/core/crafting/crafting.gdc: identical Windows/Android compiled script = true
+src/loot/loot_pools.gdc: identical Windows/Android compiled script = true

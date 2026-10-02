@@ -1,0 +1,588 @@
+{
+  "balance-final-focused-tests.log": {
+    "suites": {
+      "test_bh018.gd": {
+        "status": "PASS",
+        "tests": 18,
+        "checks": 602,
+        "failures": 0
+      },
+      "test_class_rework.gd": {
+        "status": "PASS",
+        "tests": 12,
+        "checks": 77,
+        "failures": 0
+      },
+      "test_control_limits.gd": {
+        "status": "PASS",
+        "tests": 4,
+        "checks": 181,
+        "failures": 0
+      },
+      "test_crafting.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 977,
+        "failures": 0
+      },
+      "test_damage.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 60,
+        "failures": 0
+      },
+      "test_gem_upgrades.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 424,
+        "failures": 0
+      },
+      "test_inventory_overhaul.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 2078,
+        "failures": 0
+      },
+      "test_net_guard.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 44,
+        "failures": 0
+      },
+      "test_progression.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 51,
+        "failures": 0
+      },
+      "test_skills.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 3519,
+        "failures": 0
+      }
+    },
+    "total": "TOTAL: 8013 checks, 0 failures",
+    "failure_details": [],
+    "script_error_count": 0
+  },
+  "balance-final-control-tests.log": {
+    "suites": {
+      "test_class_rework.gd": {
+        "status": "PASS",
+        "tests": 12,
+        "checks": 77,
+        "failures": 0
+      },
+      "test_control_limits.gd": {
+        "status": "PASS",
+        "tests": 5,
+        "checks": 185,
+        "failures": 0
+      },
+      "test_damage.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 60,
+        "failures": 0
+      },
+      "test_gem_upgrades.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 424,
+        "failures": 0
+      },
+      "test_net_guard.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 44,
+        "failures": 0
+      },
+      "test_status.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 24,
+        "failures": 0
+      }
+    },
+    "total": "TOTAL: 814 checks, 0 failures",
+    "failure_details": [],
+    "script_error_count": 0
+  },
+  "balance-full-final-tests.log": {
+    "suites": {
+      "test_armory_cheats.gd": {
+        "status": "PASS",
+        "tests": 4,
+        "checks": 152,
+        "failures": 0
+      },
+      "test_artisan_weapons.gd": {
+        "status": "PASS",
+        "tests": 1,
+        "checks": 305,
+        "failures": 0
+      },
+      "test_auto_loot_filters.gd": {
+        "status": "PASS",
+        "tests": 4,
+        "checks": 30,
+        "failures": 0
+      },
+      "test_balance_audit.gd": {
+        "status": "PASS",
+        "tests": 9,
+        "checks": 4457,
+        "failures": 0
+      },
+      "test_bh011.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 45,
+        "failures": 0
+      },
+      "test_bh012.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 1141,
+        "failures": 0
+      },
+      "test_bh013.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 1025,
+        "failures": 0
+      },
+      "test_bh014.gd": {
+        "status": "PASS",
+        "tests": 10,
+        "checks": 30,
+        "failures": 0
+      },
+      "test_bh015.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 10107,
+        "failures": 0
+      },
+      "test_bh016.gd": {
+        "status": "PASS",
+        "tests": 15,
+        "checks": 1560,
+        "failures": 0
+      },
+      "test_bh017.gd": {
+        "status": "PASS",
+        "tests": 27,
+        "checks": 886,
+        "failures": 0
+      },
+      "test_bh018.gd": {
+        "status": "PASS",
+        "tests": 18,
+        "checks": 602,
+        "failures": 0
+      },
+      "test_bh019.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 393,
+        "failures": 0
+      },
+      "test_bh020.gd": {
+        "status": "PASS",
+        "tests": 2,
+        "checks": 41,
+        "failures": 0
+      },
+      "test_bh021.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 382,
+        "failures": 0
+      },
+      "test_bh022.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 949,
+        "failures": 0
+      },
+      "test_bh023.gd": {
+        "status": "PASS",
+        "tests": 16,
+        "checks": 1711,
+        "failures": 0
+      },
+      "test_bh024.gd": {
+        "status": "PASS",
+        "tests": 14,
+        "checks": 1258,
+        "failures": 0
+      },
+      "test_bh025.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 958,
+        "failures": 0
+      },
+      "test_bh026.gd": {
+        "status": "PASS",
+        "tests": 10,
+        "checks": 105,
+        "failures": 0
+      },
+      "test_bh027.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 1195,
+        "failures": 0
+      },
+      "test_bh027_pickup.gd": {
+        "status": "PASS",
+        "tests": 2,
+        "checks": 5,
+        "failures": 0
+      },
+      "test_bh028.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 920,
+        "failures": 0
+      },
+      "test_bh028_arena.gd": {
+        "status": "FAIL",
+        "tests": 12,
+        "checks": 849,
+        "failures": 2
+      },
+      "test_bh029.gd": {
+        "status": "PASS",
+        "tests": 12,
+        "checks": 562,
+        "failures": 0
+      },
+      "test_bh030.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 151,
+        "failures": 0
+      },
+      "test_bh031.gd": {
+        "status": "PASS",
+        "tests": 12,
+        "checks": 3687,
+        "failures": 0
+      },
+      "test_bh032.gd": {
+        "status": "PASS",
+        "tests": 5,
+        "checks": 31,
+        "failures": 0
+      },
+      "test_bh033.gd": {
+        "status": "FAIL",
+        "tests": 20,
+        "checks": 27477,
+        "failures": 12
+      },
+      "test_boss_set_network.gd": {
+        "status": "PASS",
+        "tests": 1,
+        "checks": 6,
+        "failures": 0
+      },
+      "test_boss_set_visuals.gd": {
+        "status": "PASS",
+        "tests": 2,
+        "checks": 1612,
+        "failures": 0
+      },
+      "test_boss_sets.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 6178,
+        "failures": 0
+      },
+      "test_character_skills_layout.gd": {
+        "status": "FAIL",
+        "tests": 2,
+        "checks": 255,
+        "failures": 3
+      },
+      "test_chat.gd": {
+        "status": "PASS",
+        "tests": 9,
+        "checks": 52,
+        "failures": 0
+      },
+      "test_chat_upgrade.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 255,
+        "failures": 0
+      },
+      "test_class_rework.gd": {
+        "status": "PASS",
+        "tests": 12,
+        "checks": 77,
+        "failures": 0
+      },
+      "test_combat_growth.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 134,
+        "failures": 0
+      },
+      "test_control_limits.gd": {
+        "status": "PASS",
+        "tests": 5,
+        "checks": 185,
+        "failures": 0
+      },
+      "test_crafting.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 977,
+        "failures": 0
+      },
+      "test_crossbow_pose.gd": {
+        "status": "PASS",
+        "tests": 1,
+        "checks": 909,
+        "failures": 0
+      },
+      "test_crossbows.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 10766,
+        "failures": 0
+      },
+      "test_damage.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 60,
+        "failures": 0
+      },
+      "test_dungeon_growth.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 23123,
+        "failures": 0
+      },
+      "test_enemies.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 464,
+        "failures": 0
+      },
+      "test_enemies2.gd": {
+        "status": "PASS",
+        "tests": 19,
+        "checks": 595,
+        "failures": 0
+      },
+      "test_gem_upgrades.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 424,
+        "failures": 0
+      },
+      "test_guide.gd": {
+        "status": "PASS",
+        "tests": 5,
+        "checks": 141,
+        "failures": 0
+      },
+      "test_guilds.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 100,
+        "failures": 0
+      },
+      "test_inventory_overhaul.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 2078,
+        "failures": 0
+      },
+      "test_island.gd": {
+        "status": "PASS",
+        "tests": 13,
+        "checks": 1669,
+        "failures": 0
+      },
+      "test_items.gd": {
+        "status": "PASS",
+        "tests": 17,
+        "checks": 2483,
+        "failures": 0
+      },
+      "test_loot.gd": {
+        "status": "PASS",
+        "tests": 17,
+        "checks": 4060,
+        "failures": 0
+      },
+      "test_map_design.gd": {
+        "status": "FAIL",
+        "tests": 10,
+        "checks": 3449,
+        "failures": 1
+      },
+      "test_maps.gd": {
+        "status": "PASS",
+        "tests": 14,
+        "checks": 809,
+        "failures": 0
+      },
+      "test_net.gd": {
+        "status": "PASS",
+        "tests": 4,
+        "checks": 845,
+        "failures": 0
+      },
+      "test_net_guard.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 44,
+        "failures": 0
+      },
+      "test_npcs.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 474,
+        "failures": 0
+      },
+      "test_official_server.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 29,
+        "failures": 0
+      },
+      "test_perf.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 281,
+        "failures": 0
+      },
+      "test_progression.gd": {
+        "status": "PASS",
+        "tests": 7,
+        "checks": 51,
+        "failures": 0
+      },
+      "test_shops_dialogue.gd": {
+        "status": "PASS",
+        "tests": 10,
+        "checks": 1401,
+        "failures": 0
+      },
+      "test_skills.gd": {
+        "status": "PASS",
+        "tests": 11,
+        "checks": 3519,
+        "failures": 0
+      },
+      "test_stats.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 162,
+        "failures": 0
+      },
+      "test_status.gd": {
+        "status": "PASS",
+        "tests": 8,
+        "checks": 24,
+        "failures": 0
+      },
+      "test_survival_balance.gd": {
+        "status": "PASS",
+        "tests": 6,
+        "checks": 872,
+        "failures": 0
+      },
+      "test_team_loot.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 21593,
+        "failures": 0
+      },
+      "test_tempo_layout.gd": {
+        "status": "PASS",
+        "tests": 1,
+        "checks": 13,
+        "failures": 0
+      },
+      "test_tempos.gd": {
+        "status": "PASS",
+        "tests": 16,
+        "checks": 3748,
+        "failures": 0
+      },
+      "test_westreach_bridges.gd": {
+        "status": "PASS",
+        "tests": 1,
+        "checks": 14,
+        "failures": 0
+      }
+    },
+    "total": "TOTAL: 154945 checks, 18 failures",
+    "failure_details": [
+      "FAIL test_bh028_arena.test_adventurers_fight_each_other_and_fall_back: Belryn falls back at 15% health",
+      "FAIL test_bh028_arena.test_adventurers_fight_each_other_and_fall_back: the retreat is logged",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: ember_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: aqua_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: nova_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: thundra_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: vipera_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: bloodrift_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: essencerift_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: aetherift_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: sora_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: luna_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: sol_fragment has a source hint",
+      "FAIL test_bh033.test_source_hints_come_from_resolved_pools: airah_fragment has a source hint",
+      "FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1920, 1080) \u2014 expected (1560.0, 900.0), got (1560.0, 933.0)",
+      "FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1600, 900) \u2014 expected (1560.0, 900.0), got (1560.0, 933.0)",
+      "FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1280, 720) \u2014 expected (1560.0, 900.0), got (1560.0, 933.0)",
+      "FAIL test_map_design.test_dungeon_rooms_have_roles_and_keep_markers_clear: a fungal growth floor is not dressed as the drowned Deeps ([\"fungal_log\", \"pod_cluster\", \"fungal_log\", \"pod_cluster\", \"timber_fall\", \"storage_wet\", \"timber_fall\", \"fungal_log\", \"storage_wet\", \"timber_fall\", \"fungal_stump\", \"fungal_log\", \"timber_fall\", \"pod_cluster\", \"timber_fall\", \"pod_cluster\", \"timber_fall\", \"fungal_log\"])"
+    ],
+    "script_error_count": 0
+  },
+  "balance-final-gem-hints-tests.log": {
+    "suites": {
+      "test_bh033.gd": {
+        "status": "PASS",
+        "tests": 20,
+        "checks": 27477,
+        "failures": 0
+      },
+      "test_control_limits.gd": {
+        "status": "PASS",
+        "tests": 5,
+        "checks": 185,
+        "failures": 0
+      },
+      "test_gem_upgrades.gd": {
+        "status": "PASS",
+        "tests": 3,
+        "checks": 424,
+        "failures": 0
+      }
+    },
+    "total": "TOTAL: 28086 checks, 0 failures",
+    "failure_details": [],
+    "script_error_count": 0
+  },
+  "source_commit": "7324e7aeea3afa5284295139cb7ae12297c8941b",
+  "resolved_after_broad_run": {
+    "test_bh033.gd": {
+      "previous_failures": 12,
+      "final_checks": 27477,
+      "final_failures": 0,
+      "log": "output/balance-final-gem-hints-tests.log"
+    }
+  },
+  "remaining_broad_assertions": 6,
+  "separate_combat_power_assertions": 8
+}

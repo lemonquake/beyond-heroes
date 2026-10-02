@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "scripts": {
+    "src/actors/actor.gdc": {
+      "bytes": 16213,
+      "identical": true
+    },
+    "src/core/combat/damage_pipeline.gdc": {
+      "bytes": 13443,
+      "identical": true
+    },
+    "src/core/combat/status_controller.gdc": {
+      "bytes": 7666,
+      "identical": true
+    },
+    "src/core/crafting/crafting.gdc": {
+      "bytes": 6365,
+      "identical": true
+    },
+    "src/core/defs/skill_def.gdc": {
+      "bytes": 2502,
+      "identical": true
+    },
+    "src/core/progression/tree_def.gdc": {
+      "bytes": 1722,
+      "identical": true
+    },
+    "src/core/progression/tree_state.gdc": {
+      "bytes": 4243,
+      "identical": true
+    },
+    "src/data/data_crystals.gdc": {
+      "bytes": 11130,
+      "identical": true
+    },
+    "src/loot/loot_pools.gdc": {
+      "bytes": 7594,
+      "identical": true
+    }
+  }
+}

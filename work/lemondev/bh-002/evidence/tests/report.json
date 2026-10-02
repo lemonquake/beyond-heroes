@@ -1,69 +1,27 @@
 {
-  "checks": 8013,
-  "elapsed_ms": 102653,
+  "checks": 28086,
+  "elapsed_ms": 35249,
   "engine": "4.7.2-stable (official)",
   "failures": [],
   "suites": {
-    "test_bh018.gd": {
-      "checks": 602,
+    "test_bh033.gd": {
+      "checks": 27477,
       "failures": [],
-      "ms": 3298.303,
-      "tests": 18
-    },
-    "test_class_rework.gd": {
-      "checks": 77,
-      "failures": [],
-      "ms": 5059.666,
-      "tests": 12
+      "ms": 34879.594,
+      "tests": 20
     },
     "test_control_limits.gd": {
-      "checks": 181,
+      "checks": 185,
       "failures": [],
-      "ms": 9.186,
-      "tests": 4
-    },
-    "test_crafting.gd": {
-      "checks": 977,
-      "failures": [],
-      "ms": 40298.745,
-      "tests": 11
-    },
-    "test_damage.gd": {
-      "checks": 60,
-      "failures": [],
-      "ms": 287.091,
-      "tests": 13
+      "ms": 5.181,
+      "tests": 5
     },
     "test_gem_upgrades.gd": {
       "checks": 424,
       "failures": [],
-      "ms": 247.666,
+      "ms": 137.051,
       "tests": 3
-    },
-    "test_inventory_overhaul.gd": {
-      "checks": 2078,
-      "failures": [],
-      "ms": 122.363,
-      "tests": 6
-    },
-    "test_net_guard.gd": {
-      "checks": 44,
-      "failures": [],
-      "ms": 1.499,
-      "tests": 6
-    },
-    "test_progression.gd": {
-      "checks": 51,
-      "failures": [],
-      "ms": 17.526,
-      "tests": 7
-    },
-    "test_skills.gd": {
-      "checks": 3519,
-      "failures": [],
-      "ms": 51728.456,
-      "tests": 11
     }
   },
-  "timestamp": "2026-10-03T07:00:28"
+  "timestamp": "2026-10-03T07:15:40"
 }
