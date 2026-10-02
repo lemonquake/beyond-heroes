@@ -7,8 +7,9 @@ extends RefCounted
 ## Slot names as the player knows them: the bound key on a PC, the orb on a phone.
 static func slot_name(slot: int) -> String:
 	if Settings.touch_mode:
-		return "HP orb" if slot == 0 else "Mana orb"
-	return Settings.binding_text(&"potion_health" if slot == 0 else &"potion_mana")
+		return "HP orb" if slot == 0 else ("Mana orb" if slot == 1 else "Quick slot %d" % (slot - 1))
+	var key := Settings.binding_text(HeroData.belt_action(slot))
+	return key if key != "" else "Quick slot %d" % (slot - 1)
 
 ## Bind and tell the player.
 static func bind(hero: HeroData, slot: int, id: StringName) -> void:
@@ -16,7 +17,10 @@ static func bind(hero: HeroData, slot: int, id: StringName) -> void:
 		return
 	hero.set_belt(slot, id)
 	Audio.play_ui(&"ui_equip")
-	Events.notify.emit("%s now uses: %s" % [slot_name(slot), HeroData.belt_label(hero.potion_belt[slot])], &"info")
+	if hero.potion_belt[slot] == &"":
+		Events.notify.emit("%s is empty now" % slot_name(slot), &"info")
+	else:
+		Events.notify.emit("%s now uses: %s" % [slot_name(slot), HeroData.belt_label(hero.potion_belt[slot])], &"info")
 	hero.inventory.changed.emit()
 
 ## The menu entries: [id, label, icon] — the two automatic choices, then each distinct consumable in the bag.
@@ -54,8 +58,18 @@ static func open(anchor: Control, hero: HeroData, slot: int) -> PopupMenu:
 			menu.add_separator("From your bag")
 	if list.size() <= 2:
 		menu.add_separator("No other consumables in your bag")
+	if slot >= HeroData.ORB_SLOTS:
+		menu.add_separator()
+		menu.add_item("Clear this slot", 9999)
+		if not Settings.touch_mode:
+			menu.add_item("Change key (%s)…" % slot_name(slot), 9998)
 	menu.id_pressed.connect(func(id: int) -> void:
-		bind(hero, slot, list[id][0]))
+		if id == 9999:
+			bind(hero, slot, &"")
+		elif id == 9998:
+			HotkeyCapture.start(HeroData.belt_action(slot), anchor)
+		else:
+			bind(hero, slot, list[id][0]))
 	menu.popup_hide.connect(menu.queue_free)
 	anchor.get_tree().root.add_child(menu)
 	var r := anchor.get_global_rect()

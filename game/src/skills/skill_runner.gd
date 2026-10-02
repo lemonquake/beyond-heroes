@@ -67,6 +67,9 @@ func make_request(skill: SkillDef, p: Dictionary) -> DamageRequest:
 	return req
 
 func _hit(skill: SkillDef, target: Actor, res: DamageResult) -> void:
+	# bh-030: a delayed blast or a stray bolt can land after its caster or its target is gone
+	if not is_instance_valid(caster) or not is_instance_valid(target):
+		return
 	if res != null and not res.evaded and target != null and target.alive and not skill.on_hit_status.is_empty():
 		_apply_statuses(skill, target, caster.skill_params(skill.id) if caster.has_method(&"skill_params") else skill.resolve(1))
 	if caster.has_method(&"on_skill_hit"):

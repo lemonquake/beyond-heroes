@@ -11,6 +11,8 @@ Shader attributes on every vertex (read by res://src/actors/hero/hero_skin.gdsha
   COLOR.r  = 1 on the front of the head (so the face is not mirrored onto the back of the skull)
   COLOR.g  = rest y, packed as (y + Y_PACK) / (2 * Y_PACK)
 """
+import os
+
 import numpy as np
 
 Y_PACK = 0.32
@@ -190,10 +192,39 @@ def shape_keys(V, T):
         d[:, 1] += 0.045 * wg
         d[:, 0] += sx * 0.008 * wg
     add("rear", d)
+    fd = female_delta(V)
+    if fd is not None:
+        # bh-031: her body is fitted from models/female_generic.obj (hero_female.py); the face is the hero's own (the
+        # shader draws the eyes and brows at fixed landmarks), softened with the face keys
+        for k, c in FEMALE_FACE.items():
+            fd = fd + c * out[k]
+        add("female", fd)
     return out
 
 
-BODY_KEYS = ("muscle", "belly", "build", "rear")      # the keys clothing must follow
+FEMALE_DELTA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "female_delta.npz")
+FEMALE_FACE = {"jaw_wide": -0.55, "brow_heavy": -0.7, "chin_long": -0.15, "nose_size": -0.25, "nose_wide": -0.2,
+               "lips_full": 0.45, "cheeks": 0.25}
+
+
+def female_delta(V):
+    """The fitted female displacement for these vertices (nearest stored vertex when the body was rebuilt)."""
+    if not os.path.exists(FEMALE_DELTA):
+        return None
+    d = np.load(FEMALE_DELTA)
+    V0, D0 = d["V"].astype(float), d["delta"].astype(float)
+    if V0.shape == V.shape and np.abs(V0 - V).max() < 1e-4:
+        return D0
+    out = np.zeros_like(V)
+    for i in range(0, len(V), 512):
+        q = V[i:i + 512]
+        j = np.argmin(((q[:, None, :] - V0[None, :, :]) ** 2).sum(-1), 1)
+        out[i:i + 512] = D0[j]
+    print("[hero] female delta re-mapped by nearest vertex (%d -> %d): refit with hero_female.py" % (len(V0), len(V)))
+    return out
+
+
+BODY_KEYS = ("muscle", "belly", "build", "rear", "female")      # the keys clothing must follow
 FACE_KEYS = ("nose_size", "nose_long", "nose_wide", "nose_up", "ears_size", "ears_point", "ears_out", "lips_full",
              "mouth_wide", "mouth_smile", "jaw_wide", "chin_long", "cheeks", "brow_heavy", "eyes_pop")
 

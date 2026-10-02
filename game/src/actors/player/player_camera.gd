@@ -2,6 +2,9 @@ class_name PlayerCamera
 extends Camera3D
 ## Isometric follow camera: critically-damped follow with a small look-ahead toward the aim point, wheel zoom,
 ## trauma-based screen shake (Settings.screen_shake), and occlusion fading of architecture between camera and hero.
+## bh-030: first-person view. The camera sits at the hero's eyes and looks where the mouse turns it (captured while
+## no window is open); WASD moves relative to the view, the hero always faces it, and attacks go to the crosshair.
+## On a touch screen a drag on the open screen turns the view.
 
 const PITCH := 54.0
 const YAW := 0.0
@@ -23,9 +26,19 @@ var _t := 0.0
 var _noise := FastNoiseLite.new()
 var _faded := {}                    # MeshInstance3D -> {surface: original override material}
 var _fade_timer := 0.0
+var first_person := false
+var fp_yaw := 0.0                   # radians; 0 looks toward -Z like the isometric view
+var fp_pitch := -0.12
+const EYE := 1.62
+const EYE_FORWARD := 0.22           # just in front of the face, so the inside of a helmet never fills the screen
+const FP_SENS := 0.0028
+const PITCH_LIMIT := 1.35
+var _captured := false
 
 func _ready() -> void:
 	top_level = true
+	# bh-030: keeps running while the game is paused, so the pause menu always gets the mouse back in first person
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	fov = 40.0
 	far = 90.0 if Perf.lite else 400.0   # efficiency mode: the fog hides the horizon anyway
 	near = 0.3
@@ -52,12 +65,65 @@ func offset_dir() -> Vector3:
 
 ## World-space right/forward on the ground plane (for camera-relative movement input).
 func ground_basis() -> Basis:
-	return Basis(Vector3.UP, deg_to_rad(YAW))
+	return Basis(Vector3.UP, fp_yaw) if first_person else Basis(Vector3.UP, deg_to_rad(YAW))
+
+## bh-030: switch between the isometric and the first-person view. The view starts looking the way the hero faces.
+func set_first_person(on: bool) -> void:
+	first_person = on
+	clear_occlusion()
+	near = 0.05 if on else 0.3
+	if on and target:
+		var f: Vector3 = target.global_transform.basis.z
+		fp_yaw = atan2(-f.x, -f.z)
+		fp_pitch = -0.12
+	apply_fov()
+	_update_capture()
+
+func apply_fov() -> void:
+	fov = clampf(Settings.fp_fov, 50.0, 120.0) if first_person else 40.0
+
+## The direction the first-person view looks (the crosshair).
+func look_dir() -> Vector3:
+	return -global_transform.basis.z
+
+## Mouse look: the mouse is captured while playing in first person and freed for any window, menu or pause.
+func _update_capture() -> void:
+	var want := first_person and not Settings.touch_mode and Game.in_session and not Game.ui_blocking and not get_tree().paused \
+		and DisplayServer.get_name() != "headless"
+	if want != _captured:
+		_captured = want
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if want else Input.MOUSE_MODE_VISIBLE
+
+func _unhandled_input(e: InputEvent) -> void:
+	if not first_person:
+		return
+	if e is InputEventMouseMotion and _captured:
+		_turn((e as InputEventMouseMotion).relative * FP_SENS * Settings.mouse_sensitivity)
+	elif e is InputEventScreenDrag and Settings.touch_mode:
+		# a drag that no on-screen control took turns the view
+		_turn((e as InputEventScreenDrag).relative * FP_SENS * 1.6 * Settings.mouse_sensitivity)
+
+func _turn(d: Vector2) -> void:
+	fp_yaw = wrapf(fp_yaw - d.x, -PI, PI)
+	fp_pitch = clampf(fp_pitch - d.y, -PITCH_LIMIT, PITCH_LIMIT)
+
+func _exit_tree() -> void:
+	if _captured:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		_captured = false
 
 func _process(delta: float) -> void:
 	if target == null or not is_instance_valid(target) or not is_finite(delta):
 		return
+	if get_tree().paused:
+		_update_capture()
+		return
 	_t += delta
+	if first_person:
+		_update_capture()
+		_trauma = maxf(0.0, _trauma - SHAKE_DECAY * delta)
+		_apply_first_person()
+		return
 	dist = lerpf(dist, _dist_target, 1.0 - exp(-10.0 * delta))
 	var want := target.global_position + Vector3.UP * 1.1
 	if target.get("aim_point") != null:
@@ -86,6 +152,15 @@ func _apply(_delta: float) -> void:
 	global_position = pos
 	look_at(pos - off, Vector3.UP)
 	rotate_object_local(Vector3.FORWARD, roll)
+
+func _apply_first_person() -> void:
+	var flat := Vector3(-sin(fp_yaw), 0.0, -cos(fp_yaw))
+	var pos: Vector3 = target.global_position + Vector3.UP * EYE + flat * EYE_FORWARD
+	if _trauma > 0.0 and not Settings.reduced_motion:
+		var s := _trauma * _trauma * 0.25
+		pos += Vector3(_noise.get_noise_2d(_t * 23.0, 1.0), _noise.get_noise_2d(_t * 23.0, 50.0), 0.0) * SHAKE_MAX_OFFSET * s
+	global_position = pos
+	global_rotation = Vector3(fp_pitch, fp_yaw, 0.0)
 
 ## Fade architecture that hides the hero (dithered alpha copy of each material), restore when clear.
 func _update_occlusion() -> void:

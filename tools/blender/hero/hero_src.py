@@ -69,4 +69,71 @@ def load():
         parent[b.name] = b.parent.name if b.parent else None
     bpy.data.objects.remove(ob)
     bpy.data.objects.remove(arm)
+    V, T, UV, W = refine(V, T, UV, W, chest_triangles(V, T))
     return dict(V=V, T=T, UV=UV, W=W, joints=joints, parent=parent)
+
+
+def chest_triangles(V, T):
+    """bh-031: the front of the chest, where the female shape key forms a bust (source space: 1.70 m, facing -Y)."""
+    h = float(V[:, 2].max())
+    c = V[T].mean(1)
+    zr = c[:, 2] / h
+    return (zr > 0.62) & (zr < 0.83) & (np.abs(c[:, 0]) < 0.15 * h) & (c[:, 1] < 0.03)
+
+
+def refine(V, T, UV, W, mark):
+    """Split the marked triangles 1 -> 4 (edge midpoints) and their neighbours 1 -> 2 / 3, so no crack opens at the
+    border of the refined patch. UVs are per corner (seams survive), weights are averaged at the new vertices."""
+    n0 = len(V)
+    mids = {}
+
+    def mid(a, b):
+        k = (a, b) if a < b else (b, a)
+        if k not in mids:
+            mids[k] = n0 + len(mids)
+        return mids[k]
+    for t in np.where(mark)[0]:
+        a, b, c = T[t]
+        mid(a, b), mid(b, c), mid(c, a)
+    if not mids:
+        return V, T, UV, W
+    keys = list(mids)
+    newV = np.array([(V[a] + V[b]) * 0.5 for a, b in keys])
+    W = {k: np.concatenate([w, np.array([(w[a] + w[b]) * 0.5 for a, b in keys])]) for k, w in W.items()}
+    outT, outUV = [], []
+    for t in range(len(T)):
+        tri, uv = T[t], UV[t]
+        e = []
+        for i in range(3):
+            a, b = int(tri[i]), int(tri[(i + 1) % 3])
+            k = (a, b) if a < b else (b, a)
+            e.append(mids.get(k))
+        cnt = sum(x is not None for x in e)
+        if cnt == 0:
+            outT.append(tri)
+            outUV.append(uv)
+            continue
+        P = [int(tri[0]), int(tri[1]), int(tri[2])]
+        Q = [uv[0], uv[1], uv[2]]
+        M = [e[i] for i in range(3)]
+        MQ = [(uv[i] + uv[(i + 1) % 3]) * 0.5 for i in range(3)]
+        if cnt == 3:
+            for f in ((P[0], M[0], M[2], Q[0], MQ[0], MQ[2]), (P[1], M[1], M[0], Q[1], MQ[1], MQ[0]),
+                      (P[2], M[2], M[1], Q[2], MQ[2], MQ[1]), (M[0], M[1], M[2], MQ[0], MQ[1], MQ[2])):
+                outT.append(f[:3])
+                outUV.append(f[3:])
+            continue
+        # rotate so the first split edge is edge 0 (P0-P1)
+        r = next(i for i in range(3) if M[i] is not None)
+        P, Q, M, MQ = P[r:] + P[:r], Q[r:] + Q[:r], M[r:] + M[:r], MQ[r:] + MQ[:r]
+        if cnt == 1:
+            outT += [(P[0], M[0], P[2]), (M[0], P[1], P[2])]
+            outUV += [(Q[0], MQ[0], Q[2]), (MQ[0], Q[1], Q[2])]
+        elif M[1] is not None:          # edges 0 and 1 split
+            outT += [(P[0], M[0], P[2]), (M[0], M[1], P[2]), (M[0], P[1], M[1])]
+            outUV += [(Q[0], MQ[0], Q[2]), (MQ[0], MQ[1], Q[2]), (MQ[0], Q[1], MQ[1])]
+        else:                            # edges 0 and 2 split
+            outT += [(P[0], M[0], M[2]), (M[0], P[2], M[2]), (M[0], P[1], P[2])]
+            outUV += [(Q[0], MQ[0], MQ[2]), (MQ[0], Q[2], MQ[2]), (MQ[0], Q[1], Q[2])]
+    print("[hero] refined %d chest triangles: %d -> %d verts" % (int(mark.sum()), n0, n0 + len(keys)))
+    return np.vstack([V, newV]), np.array(outT, dtype=int), np.array(outUV, dtype=float), W

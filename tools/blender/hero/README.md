@@ -9,6 +9,9 @@ B="C:\Program Files\Blender Foundation\Blender 5.2\blender.exe"
 python tools/blender/hero/hero_skin.py                                           # hero_skin.png, hero_masks.png
 "$B" -b --factory-startup --python tools/blender/hero/hero_hair.py -- all      # hero/hair/*.glb, hero/beard/*.glb
 "$B" -b --factory-startup --python tools/blender/hero/hero_wear.py -- all      # hero/wear/*.glb (worn equipment)
+# bh-031 female figure (re-run before the export above when the hero mesh or the scan changes):
+"$B" -b --factory-startup --python tools/blender/hero/hero_female_src.py       # scan -> work/lemondev/bh-031/scratch/female
+python tools/blender/hero/hero_female.py                                         # -> data/female_delta.npz (needs scipy)
 # previews (work/lemondev/bh-023/scratch): hero_body.py -- preview | shapes | retarget
 ```
 
@@ -21,6 +24,9 @@ python tools/blender/hero/hero_skin.py                                          
 | `hero_export.py` | `hero.glb`: body + shape keys + the whole action library (`tools/blender/characters`) + the source clips |
 | `hero_skin.py` | skin detail texture and region masks from `models/generic_body.jpg` |
 | `hero_hair.py` | hair and beard models |
+| `hero_female_src.py` | bh-031: `models/female_generic.obj` (1M-vertex scan, vertex colours, no rig) decimated to numpy |
+| `hero_female.py` | bh-031: the hero body fitted onto the scan (limbs conformed to the rig, shrink-wrap, a round bust) -> the `female` shape key (`data/female_delta.npz`, read by `hero_shapes.py`) |
+| `hero_female_anims.py` | bh-031: `fem_idle`, `fem_walk`, `fem_stroll`, `fem_run` layered over the hero's clips (pelvis sway, counter-turned shoulders, narrower steps) |
 | `hero_wear.py` | worn equipment, skinned to the shared skeleton and following the body's shape keys (`-- all`, `-- <ids>`, `-- preview <a+b+c outfits>`) |
 | `hero_wear_kit.py` | shell() / attach() / build_object(), the registry (`@item`), `plate()` (worn plate material), the manifest |
 | `hero_wear_torso.py` | the 16 armours and inner garments (they stop at the hips; `skirt=` records how low a skirt hangs) |
@@ -60,7 +66,9 @@ shape-key displacements.
 * Hair / beard GLBs: one mesh in model space (not moved to the head joint), material `BH_HeroHair`, vertex colour
   R = how freely that vertex sways (0 at the scalp, 1 at the tips), optional shape key `length`.
 * Worn equipment GLBs: meshes skinned to the shared bone names, materials `<BH base>__it_<key>` as the item models
-  use, shape keys `muscle`, `belly`, `build`, `rear` copied from the body so clothing follows the body sliders.
+  use, shape keys `muscle`, `belly`, `build`, `rear`, `female` copied from the body so clothing follows the body sliders.
+* bh-031: `hero_src.load()` refines the chest triangles 1 -> 4 (crack-free) so the female key can hold a bust; the
+  body is 5,919 vertices / 11,784 triangles.
 * bh-024 mesh groups: a piece may return `{group: [WParts]}`; its GLB then holds `wear` and `wear_<group>` meshes. Leggings
   use `waist` (belt, panels, tassets), `hip` (thigh plates and guards, pouches), `knee` (knee cops and pads) and
   `ankle_L` / `ankle_R` (cuffs, low wraps); HeroWear.plan leaves a group off under a shirt, a skirt below 0.80 m, a robe
@@ -68,5 +76,5 @@ shape-key displacements.
 * Layers: inner garments 5-9 mm, armour cloth 10-16 mm, plates beyond; leggings are tucked in at 3.5 mm under the body
   garments' hems (which stand 6.5 mm or more out) and stay within 6.5 mm below the calf so boot shafts (10-16 mm) close
   over them.
-* Budgets (game/tests/unit/test_bh023.gd, test_bh024.gd): helm 1,600, inner garment 5,600, armour 7,200, leggings
+* Budgets (game/tests/unit/test_bh023.gd, test_bh024.gd): helm 1,600, inner garment 5,600, armour 8,400, leggings
   6,500, gloves 1,800 and boots 1,600 a side, jewellery 300.

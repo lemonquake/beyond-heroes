@@ -121,7 +121,11 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	visual.setup(String(tdef.get("model", "res://assets/characters/knight.glb")), 1.0, data.tint, tdef.get("rig", &"knight"))
+	# bh-031: a Tempo is the hero's own body with a face of its own (Persona.setup_tempo)
+	# (a fellow hero — QuakeAlly — already asks for the hero body and dresses it in that hero's own look)
+	if String(tdef.get("model", "")) == HeroLook.MODEL \
+			or not Persona.setup_tempo(visual, data.uid, data.class_id, data.tint, tdef.get("color", data.tint), tdef.get("rig", &"knight")):
+		visual.setup(String(tdef.get("model", "res://assets/characters/knight.glb")), 1.0, data.tint, tdef.get("rig", &"knight"))
 	_spirit_look()
 	refresh_equipment_visuals()
 	_rng_seed()
@@ -192,7 +196,7 @@ func _spirit_look() -> void:
 func refresh_equipment_visuals() -> void:
 	if visual == null:
 		return
-	visual.dress_equipment(data.equipment)
+	visual.dress_equipment(Persona.tempo_equipment(data.equipment, data.class_id) if visual.hero else data.equipment)
 	var lo := TempoRules.loadout(data, _level())
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")

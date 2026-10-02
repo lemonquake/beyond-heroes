@@ -31,6 +31,15 @@ var hover_ally: Node                  # another player's hero under the cursor (
 var god_mode := false
 var in_cutscene := false             # bh-021: a CutscenePlayer owns the screen
 var infinite_mana := false
+## bh-030: switches of the Debug console (DebugWindow). Never saved; a new session starts clean.
+var debug_damage_mult := 1.0          # the hero's hits on monsters
+var debug_one_hit := false            # the hero's hits kill any monster
+var debug_no_cooldowns := false       # skills, potions and dodge never wait
+var debug_speed_mult := 1.0           # hero movement
+var debug_freeze_ai := false          # monsters stand still
+var debug_xp_mult := 1.0              # experience from kills
+var debug_gold_mult := 1.0            # gold from kills
+var debug_min_drop := -1              # drops are at least this rarity (-1 = off)
 
 const AUTOSAVE_INTERVAL := 120.0
 

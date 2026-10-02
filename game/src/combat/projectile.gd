@@ -23,8 +23,16 @@ var explode_radius := 0.0          # >0: area burst at the end point (hits every
 var homing := 0.0                  # turn rate (rad/s) toward `homing_target`
 var homing_target: Node3D
 var deflectable := true            # can be destroyed by Gale Burst / parries
-var on_hit: Callable               # func(target, result, point)
-var on_end: Callable               # func(point, by_wall)
+var on_hit: Callable:               # func(target, result, point)
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
+var on_end: Callable:               # func(point, by_wall)
+	set(v):
+		on_end = v
+		_on_end_owner = SafeCallable.owner_of(v)
+var _on_end_owner := 0
 var hit_sound := &""
 var body: Node3D
 var projectile_look := "orb"
@@ -174,7 +182,7 @@ func _hit_target(a: Actor, point: Vector3) -> void:
 	if hit_sound != &"":
 		Audio.play_at(hit_sound, point)
 	hit_actor.emit(a, r, point)
-	if on_hit.is_valid():
+	if SafeCallable.alive(on_hit, _on_hit_owner):
 		on_hit.call(a, r, point)
 
 func _finish(point: Vector3, by_wall: bool) -> void:
@@ -191,11 +199,11 @@ func _finish(point: Vector3, by_wall: bool) -> void:
 				var req := request.clone()
 				req.tags[&"aoe"] = true
 				req.graze = true
-				req.evadable = source is Actor and is_instance_valid(source) and (source as Actor).team == BH.Team.ENEMY
+				req.evadable = is_instance_valid(source) and source is Actor and (source as Actor).team == BH.Team.ENEMY
 				var r := a.receive_hit(req, source if is_instance_valid(source) else null, a.center())
-				if on_hit.is_valid():
+				if SafeCallable.alive(on_hit, _on_hit_owner):
 					on_hit.call(a, r, a.center())
-	if on_end.is_valid():
+	if SafeCallable.alive(on_end, _on_end_owner):
 		on_end.call(point, by_wall)
 	expired.emit(point, by_wall)
 	# let trail particles fade before freeing

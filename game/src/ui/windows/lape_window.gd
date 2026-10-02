@@ -49,7 +49,10 @@ func _build() -> void:
 	por.custom_minimum_size = Vector2(170, 170)
 	por.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	por.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	if ResourceLoader.exists("res://assets/ui/portraits/lape.svg"):
+	var lape := DB.npc(&"lape")
+	if lape and lape.portrait != "" and ResourceLoader.exists(lape.portrait):
+		por.texture = UIArt.tex(lape.portrait)
+	elif ResourceLoader.exists("res://assets/ui/portraits/lape.svg"):
 		por.texture = load("res://assets/ui/portraits/lape.svg")
 	top.add_child(por)
 	var sp := inset(Vector2(0, 250))

@@ -26,7 +26,7 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 15                 # 15: official accounts, dedicated coordinator and separate custom rooms
+const PROTOCOL := 16                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
@@ -331,6 +331,8 @@ func leave(reload := true) -> void:
 	_trade_incoming = {}
 	trade_reset()
 	_banner_sent.clear()
+	_pic_sent.clear()
+	profile_pictures.clear()
 	_sync_sent.clear()
 	_guild_asked = {}
 	_stop_broadcast()
@@ -370,6 +372,8 @@ func _on_peer_disconnected(id: int) -> void:
 	if int(_trade_incoming.get("peer", -1)) == id:
 		_trade_incoming = {}
 	_banner_sent.erase(id)
+	_pic_sent.erase(id)
+	profile_pictures.erase(id)
 	_sync_sent.erase(id)
 	if is_host():
 		_chat_system("%s left." % who, true)
@@ -2116,6 +2120,9 @@ func kick(id: int) -> void:
 ##   Showcase   ask a player to show their equipped gear: on Yes both see both heroes' gear side by side, and their guilds.
 
 var guild_banners := {}              # guild key -> JPEG bytes received from other players
+## bh-030: other players' profile pictures (peer -> JPEG bytes) and the version of mine each peer already has.
+var profile_pictures := {}
+var _pic_sent := {}
 var _banner_sent := {}               # peer -> banner hash already sent to them
 var _sync_sent := {}                 # peer -> hash of the guild snapshot last sent to them (Guildmaster)
 var _guild_asked := {}               # an invitation waiting for this player's answer {peer, snap}
@@ -2162,6 +2169,37 @@ func _sync_member(id: int) -> void:
 	_sync_sent[id] = sig
 	_guild_sync.rpc_id(id, snap)
 
+## bh-030: send my profile picture to every player who does not have this version yet (an empty picture is sent too,
+## once, so a removed picture disappears for everyone).
+func send_profile_picture_all() -> void:
+	var h := Game.hero
+	if h == null or not is_active() or connecting:
+		return
+	# bh-031: without a profile picture the hero shares their ID picture (an ID shot of their own model)
+	var pic := ProfilePicture.shown_bytes(h)
+	var sig := hash(pic) if not pic.is_empty() else 1
+	for id in peers:
+		if id == my_id() or int(_pic_sent.get(id, 0)) == sig:
+			continue
+		if sig == 1 and not _pic_sent.has(id):
+			_pic_sent[id] = sig          # nothing to clear on a player who never had one
+			continue
+		_pic_sent[id] = sig
+		_profile_picture.rpc_id(id, pic)
+
+@rpc("any_peer", "reliable")
+func _profile_picture(bytes: PackedByteArray) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from):
+		return
+	if bytes.is_empty():
+		profile_pictures.erase(from)
+	elif ProfilePicture.valid(bytes):
+		profile_pictures[from] = bytes
+	else:
+		return
+	Events.profile_picture_changed.emit(from)
+
 ## Send my guild's banner picture to everyone who has not got this version of it.
 func _send_banner_all() -> void:
 	var h := Game.hero
@@ -2206,6 +2244,7 @@ func _on_peers_for_guilds() -> void:
 	if not is_active() or connecting:
 		return
 	_send_banner_all()
+	send_profile_picture_all()
 	var h := Game.hero
 	for id in peers:
 		if id == my_id():

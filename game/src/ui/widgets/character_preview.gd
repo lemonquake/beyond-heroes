@@ -243,13 +243,14 @@ func show_tempo(t: TempoData, level := 1) -> void:
 		visual = CharacterVisual.new()
 		pivot.add_child(visual)
 		var td := t.class_def()
-		visual.setup(String(td.get("model", "res://assets/characters/knight.glb")), 1.0, t.tint, &"knight" if t.class_id == &"swordsman" else &"mage")
+		if not Persona.setup_tempo(visual, t.uid, t.class_id, t.tint, td.get("color", t.tint), &"knight" if t.class_id == &"swordsman" else &"mage"):
+			visual.setup(String(td.get("model", "res://assets/characters/knight.glb")), 1.0, t.tint, &"knight" if t.class_id == &"swordsman" else &"mage")
 		visual.set_rim(DataTempos.SPIRIT_TINT, 0.75)
 		_fidget_t = 2.5
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
 	var lo := TempoRules.loadout(t, level)
-	visual.dress_equipment(t.equipment)
+	visual.dress_equipment(Persona.tempo_equipment(t.equipment, t.class_id) if visual.hero else t.equipment)
 	var main := t.equipment.get_item(&"main_weapon")
 	var sub := t.equipment.get_item(&"sub_weapon")
 	if lo.main_type != null:

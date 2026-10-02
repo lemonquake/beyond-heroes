@@ -44,6 +44,10 @@ func _init() -> void:
 		maps[m.id] = m
 	for n in DataNpcs.build() + DataNpcsTown.build() + DataNpcsOlivar.build() + DataNpcsWyman.build() + DataNpcsGuildHouse.build() + DataNpcsSockets.build() + DataNpcsLape.build() + DataNpcsLegend.build() + DataNpcsZarael.build():
 		npcs[n.id] = n
+		# bh-031: the dialogue, shop and register portrait is an ID shot of their own model (tests/tools/bake_portraits)
+		var pp := DataPersonas.portrait_path(n.id)
+		if pp != "":
+			n.portrait = pp
 	for sh in DataShops.build():
 		shops[sh.id] = sh
 	_load_anim_meta()

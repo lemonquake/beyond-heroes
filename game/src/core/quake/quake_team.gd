@@ -111,6 +111,24 @@ static func sync_owner(hero: HeroData) -> void:
 		if a:
 			a.mark_stats_dirty()
 
+## bh-030: send a mate home (the `quake quake` cheat, the Debug console): the most recently called one unless `mate`
+## is given. Its actor and its Tempo leave the world at once. Returns {ok, text}.
+static func dismiss(hero: HeroData, mate: QuakeMate = null) -> Dictionary:
+	if hero == null or hero.quake_team.is_empty():
+		return {"ok": false, "text": "No Quake Team ally is with you."}
+	if mate == null or not hero.quake_team.has(mate):
+		mate = hero.quake_team[-1]
+	var a := actor_for(mate)
+	if a:
+		FX.spawn(VFXLib.particles(Color(1.0, 0.85, 0.5, 0.8), 24, 0.8, true, 0.1, 2.0, 180.0, Vector3(0, 1.5, 0), 0.5), a.global_position + Vector3.UP)
+		a.queue_free()
+	for t in TempoParty.actors():
+		if t is Tempo and (t as Tempo).hero == mate.hero:
+			t.queue_free()
+	hero.quake_team.erase(mate)
+	Events.quake_team_changed.emit()
+	return {"ok": true, "text": "Quake Team: %s leaves your side (%d of %d remain)." % [mate.display_name(), hero.quake_team.size(), MAX]}
+
 ## No Quake Team in a multiplayer session: whoever is standing in the world leaves.
 static func dismiss_actors() -> void:
 	for a in actors():

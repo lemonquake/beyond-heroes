@@ -117,7 +117,10 @@ func _open(def: NpcDef, at := "") -> void:
 	session.begin(at)
 
 func _on_line(speaker: String, portrait: String, bb: String, index: int, count: int) -> void:
-	_portrait.texture = UIArt.tex(portrait) if portrait != "" else null
+	if portrait.begins_with("tempo:"):      # bh-031: a Tempo speaking shows its own face
+		PortraitStudio.tempo_portrait(int(portrait.substr(6)), _portrait, UIArt.tex("res://assets/ui/icons/classes/tempo_swordsman.svg"))
+	else:
+		_portrait.texture = UIArt.tex(portrait) if portrait != "" else null
 	if speaker != "":
 		_name.text = speaker
 	for c in _choices.get_children():

@@ -145,7 +145,7 @@
   {
     "class": "mage",
     "enemy_hp": 3140,
-    "hit": 784,
+    "hit": 787,
     "hits_to_kill": 4.0,
     "level": 30,
     "skill_hit": 558,
@@ -156,8 +156,8 @@
   {
     "class": "mage",
     "enemy_hp": 10759,
-    "hit": 1587,
-    "hits_to_kill": 6.8,
+    "hit": 1610,
+    "hits_to_kill": 6.7,
     "level": 45,
     "skill_hit": 1010,
     "weapon": "depth_thornseed_branchstaff",
@@ -167,7 +167,7 @@
   {
     "class": "mage",
     "enemy_hp": 27531,
-    "hit": 5513,
+    "hit": 5558,
     "hits_to_kill": 5.0,
     "level": 60,
     "skill_hit": 1685,
@@ -255,10 +255,10 @@
   {
     "class": "ranger",
     "enemy_hp": 27531,
-    "hit": 2347,
+    "hit": 2354,
     "hits_to_kill": 11.7,
     "level": 60,
-    "skill_hit": 4459,
+    "skill_hit": 4472,
     "weapon": "depth_dawnfeather_bow",
     "weapon_max": 948,
     "weapon_min": 457
@@ -343,10 +343,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 27531,
-    "hit": 1340,
-    "hits_to_kill": 20.5,
+    "hit": 1403,
+    "hits_to_kill": 19.6,
     "level": 60,
-    "skill_hit": 2546,
+    "skill_hit": 2666,
     "weapon": "depth_dawnthorn_knife",
     "weapon_max": 439,
     "weapon_min": 266

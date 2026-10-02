@@ -15,7 +15,10 @@ const BINDINGS := {
 	"show_loot": [KEY_ALT],
 	"minimap_zoom_in": [KEY_EQUAL, KEY_KP_ADD], "minimap_zoom_out": [KEY_MINUS, KEY_KP_SUBTRACT],
 	"dev_panel": [KEY_F1], "dev_fps": [KEY_F3],
+	"view_toggle": [KEY_V], "debug_console": [KEY_F2],
 }
+## bh-030: the four extra quick-use belt slots, Alt+Q / W / E / R by default (any key or combination can be bound).
+const ALT_BINDINGS := {"quick_1": KEY_Q, "quick_2": KEY_W, "quick_3": KEY_E, "quick_4": KEY_R}
 
 func _enter_tree() -> void:
 	install_defaults()
@@ -38,6 +41,14 @@ func install_defaults() -> void:
 				k.physical_keycode = code
 				ev = k
 			InputMap.action_add_event(action, ev)
+	for action in ALT_BINDINGS:
+		if not InputMap.has_action(action):
+			InputMap.add_action(action, 0.2)
+		InputMap.action_erase_events(action)
+		var k := InputEventKey.new()
+		k.physical_keycode = ALT_BINDINGS[action]
+		k.alt_pressed = true
+		InputMap.action_add_event(action, k)
 	# Controller support (movement + face buttons) — rumble architecture lives in FX.
 	_joy("move_left", JOY_AXIS_LEFT_X, -1.0)
 	_joy("move_right", JOY_AXIS_LEFT_X, 1.0)

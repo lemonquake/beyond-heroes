@@ -47,8 +47,21 @@ func _build(at: Vector2) -> void:
 	v.add_theme_constant_override("separation", 6)
 	_panel.add_child(v)
 	var cls := DB.class_def(StringName(info.get("cls", "knight")))
-	v.add_child(UITheme.label("◆ %s" % info.get("name", "Hero"), 22, Net.player_color(peer).lightened(0.3), UITheme.body_bold()))
-	v.add_child(UITheme.label("Level %d %s" % [int(info.get("level", 1)), cls.display_name if cls else "Hero"], 15, UITheme.TEXT_DIM, UITheme.body_font()))
+	# bh-030: the player's own picture beside their name
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 10)
+	v.add_child(head)
+	var pic := TextureRect.new()
+	pic.texture = ProfilePicture.peer_portrait(peer, String(info.get("cls", "knight")))
+	pic.custom_minimum_size = Vector2(72, 72)
+	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	head.add_child(pic)
+	var nv := VBoxContainer.new()
+	nv.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	head.add_child(nv)
+	nv.add_child(UITheme.label("◆ %s" % info.get("name", "Hero"), 22, Net.player_color(peer).lightened(0.3), UITheme.body_bold()))
+	nv.add_child(UITheme.label("Level %d %s" % [int(info.get("level", 1)), cls.display_name if cls else "Hero"], 15, UITheme.TEXT_DIM, UITheme.body_font()))
 	var g: Dictionary = info.get("guild", {})
 	if not g.is_empty():
 		v.add_child(UITheme.label("⚑ %s" % g.get("name", "Guild"), 15, Color(String(g.get("color", "c9a24a"))).lightened(0.3), UITheme.body_bold()))

@@ -16,6 +16,7 @@ signal back
 const PAGES := [
 	["looks", "Looks", "body", [["presets"], ["tools"]]],
 	["body", "Body", "body", [
+		["slider", "female", "Figure", "Masculine", "Feminine"],
 		["slider", "height", "Height", "Short", "Towering"], ["slider", "build", "Build", "Lean", "Stout"],
 		["slider", "muscle", "Muscle", "Wiry", "Mighty"], ["slider", "belly", "Belly", "Flat", "Round"],
 		["slider", "rear", "Rear", "Flat", "Ample"], ["slider", "head", "Head", "Small", "Enormous"],

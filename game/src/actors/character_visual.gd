@@ -121,9 +121,32 @@ func _set_ground_speeds(scale_factor: float) -> void:
 	ground_speed_back = float(DB.anim(&"walk_back").get("ground_speed", 1.8)) * scale_factor
 
 ## bh-023: the hero walks and runs with the player's own clips out of combat (they ship in hero.glb).
+## bh-031: a female look stands and walks in her own (fem_idle, fem_walk, fem_run).
 func _loco_clip(n: StringName) -> StringName:
+	if _female:
+		var fem := StringName("fem_" + String(n))
+		if has_anim(fem):
+			return fem
 	var own := StringName("hero_" + String(n))
 	return own if has_anim(own) else n
+
+var _female := false
+
+## Swap the relaxed idle / walk / run for the body's own set when the look's figure changes.
+func _refresh_loco() -> void:
+	_set_ground_speeds(model_scale)
+	if tree == null:
+		return
+	var bs := (tree.tree_root as AnimationNodeBlendTree).get_node(&"relaxed_bs") as AnimationNodeBlendSpace2D
+	if bs == null:
+		return
+	for i in bs.get_blend_point_count():
+		var a := bs.get_blend_point_node(i) as AnimationNodeAnimation
+		if a == null:
+			continue
+		var base := String(a.animation).trim_prefix("fem_").trim_prefix("hero_")
+		if base in ["idle", "walk", "run"]:
+			a.animation = _clip(_loco_clip(StringName(base)))
 
 ## bh-023: a hero's look (HeroLook). Ignored by every other model.
 func set_look(look: Dictionary) -> void:
@@ -131,6 +154,20 @@ func set_look(look: Dictionary) -> void:
 		return
 	hero.apply(look)
 	appearance["look"] = HeroLook.to_save(hero.look)
+	var fem := float(hero.look.get("female", 0.0)) >= 0.5
+	if fem != _female:
+		_female = fem
+		_refresh_loco()
+
+## bh-031: a persona's colours for its worn pieces (HeroWear.dye_key -> hex); takes effect at the next dress.
+func set_dyes(d: Dictionary) -> void:
+	if hero == null:
+		return
+	hero.dyes = d.duplicate()
+	if d.is_empty():
+		appearance.erase("dye")
+	else:
+		appearance["dye"] = d.duplicate()
 
 ## Overall size of the model (the hero's height slider); keeps the gait speeds in step with the leg length.
 func set_model_scale(s: float) -> void:
@@ -231,7 +268,7 @@ func _build_tree() -> void:
 	tree.anim_player = tree.get_path_to(anim_player)
 	tree.root_node = anim_player.root_node
 	var root := AnimationNodeBlendTree.new()
-	var relaxed := _bs([[&"idle", Vector2.ZERO], [_loco_clip(&"walk"), Vector2(0, 1)], [_loco_clip(&"run"), Vector2(0, 2)], [&"walk_back", Vector2(0, -1)],
+	var relaxed := _bs([[_loco_clip(&"idle"), Vector2.ZERO], [_loco_clip(&"walk"), Vector2(0, 1)], [_loco_clip(&"run"), Vector2(0, 2)], [&"walk_back", Vector2(0, -1)],
 		[&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)]])
 	var combat := _bs([[_stance_idle, Vector2.ZERO], [&"walk", Vector2(0, 1)], [&"run_combat", Vector2(0, 2)],
 		[&"walk_back", Vector2(0, -1)], [&"walk_back", Vector2(0, -2)], [&"strafe_l", Vector2(-1, 0)], [&"strafe_r", Vector2(1, 0)],

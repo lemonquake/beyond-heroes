@@ -62,7 +62,8 @@
   "muscle",
   "belly",
   "build",
-  "rear"
+  "rear",
+  "female"
  ],
  "animations": {
   "hero_walk": {
@@ -125,6 +126,40 @@
     1.033,
     1.1
    ]
+  },
+  "fem_walk": {
+   "length": 1.033,
+   "loop": true,
+   "ground_speed": 1.679,
+   "footsteps": [
+    0.3,
+    0.833
+   ],
+   "direction_deg": 0.0
+  },
+  "fem_stroll": {
+   "length": 4.167,
+   "loop": true,
+   "ground_speed": 0.793,
+   "footsteps": [
+    0.1,
+    0.6
+   ],
+   "direction_deg": 0.0
+  },
+  "fem_run": {
+   "length": 0.633,
+   "loop": true,
+   "ground_speed": 5.646,
+   "footsteps": [
+    0.2,
+    0.533
+   ],
+   "direction_deg": 0.0
+  },
+  "fem_idle": {
+   "length": 4.0,
+   "loop": true
   }
  }
 }

@@ -17,9 +17,21 @@ var combo_close := 0.0               # ... until here; later input starts a fres
 var iframes := Vector2(-1.0, -1.0)   # invulnerability window (scaled), dodges
 var travel := 0.0                    # horizontal distance covered (dodges)
 var move_mult := 0.0                 # 0 = rooted during the action
-var on_window: Callable              # func(window_index: int, first_frame: bool)
-var on_release: Callable             # func()
-var on_end: Callable                 # func(completed: bool)
+var on_window: Callable:              # func(window_index: int, first_frame: bool)
+	set(v):
+		on_window = v
+		_on_window_owner = SafeCallable.owner_of(v)
+var _on_window_owner := 0
+var on_release: Callable:             # func()
+	set(v):
+		on_release = v
+		_on_release_owner = SafeCallable.owner_of(v)
+var _on_release_owner := 0
+var on_end: Callable:                 # func(completed: bool)
+	set(v):
+		on_end = v
+		_on_end_owner = SafeCallable.owner_of(v)
+var _on_end_owner := 0
 var hit_ids := {}                    # window index -> {instance_id: true}; each target once per window
 var released := false
 var finished := false
@@ -66,11 +78,11 @@ func step(delta: float) -> bool:
 		var w: Array = windows[i]
 		if elapsed >= w[0] and prev <= w[1]:
 			var first: bool = prev < w[0] or (prev == 0.0 and w[0] == 0.0)
-			if on_window.is_valid():
+			if SafeCallable.alive(on_window, _on_window_owner):
 				on_window.call(i, first)
 	if not released and release_t >= 0.0 and elapsed >= release_t:
 		released = true
-		if on_release.is_valid():
+		if SafeCallable.alive(on_release, _on_release_owner):
 			on_release.call()
 	if elapsed >= duration:
 		finish(true)
@@ -81,7 +93,7 @@ func finish(completed: bool) -> void:
 	if finished:
 		return
 	finished = true
-	if on_end.is_valid():
+	if SafeCallable.alive(on_end, _on_end_owner):
 		on_end.call(completed)
 
 func can_cancel() -> bool:

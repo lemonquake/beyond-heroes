@@ -171,6 +171,9 @@ func set_appearance(app: Dictionary) -> void:
 				var piece := ItemInstance.new()
 				piece.base = base
 				equipment.slots[slot] = piece
+	if visual.hero:
+		var dye = app.get("dye", {})
+		visual.set_dyes(dye if dye is Dictionary else {})
 	visual.dress_equipment(equipment)
 	if app.has("stance"):
 		visual.set_stance(StringName(app.stance))

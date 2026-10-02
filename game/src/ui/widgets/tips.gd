@@ -162,7 +162,7 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	elif it.crafted:
 		v.add_child(lbl("Crafted", 14, UITheme.TEXT_DIM))
 	for m in it.base.implicit:
-		v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, m.value), 15, UITheme.PARCHMENT))
+		v.add_child(lbl(StatDefs.format_modifier(m.stat, m.op, it.implicit_value(m)), 15, UITheme.PARCHMENT))
 	# consumables
 	if it.base.is_consumable() or it.base.category == &"material" or it.base.is_quest():
 		if it.base.flavor != "":

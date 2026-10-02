@@ -13,7 +13,11 @@ var radius := 2.5
 var trigger := 1.4
 var arm_time := 0.6
 var lifetime := 20.0
-var on_hit: Callable
+var on_hit: Callable:
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
 var _t := 0.0
 var _armed := false
 var _body: Node3D
@@ -127,6 +131,6 @@ func _spring() -> void:
 			r.tags[&"aoe"] = true
 			r.tags[&"push_dir"] = (a.global_position - global_position).slide(Vector3.UP).normalized()
 			var res := a.receive_hit(r, src, a.center())
-			if on_hit.is_valid():
+			if SafeCallable.alive(on_hit, _on_hit_owner):
 				on_hit.call(a, res)
 	queue_free()

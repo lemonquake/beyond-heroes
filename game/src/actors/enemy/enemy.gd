@@ -171,7 +171,13 @@ func _ready() -> void:
 	visual.full_sync = is_boss or is_miniboss()
 	add_child(visual)
 	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0)) * size_mult
-	visual.setup(def.model, sc, def.tint, &"")
+	# bh-031: humanoid monsters are the hero's own body in their family's look and gear (DataPersonas)
+	var persona := Persona.for_enemy(def)
+	if not persona.is_empty():
+		visual.setup(Persona.MODEL, sc * float(persona.get("size", 1.0)), def.tint, &"")
+		Persona.apply(visual, persona)
+	else:
+		visual.setup(def.model, sc, def.tint, &"")
 	if def.weapon != "":
 		visual.attach_weapon(&"main", def.weapon)
 	visual.float_hover = float(def.anim_map.get("hover", 1.2))
@@ -330,6 +336,9 @@ func _physics_process(delta: float) -> void:
 		_net_step(delta)
 		return
 	ensure_stats()
+	if Game.debug_freeze_ai and alive:
+		velocity = Vector3.ZERO      # bh-030: the Debug console froze every monster in place
+		return
 	if _sim_sleep(delta):
 		return
 	status.tick(delta)

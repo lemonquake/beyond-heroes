@@ -75,6 +75,7 @@ func _ready() -> void:
 	_add_window(&"socketing", SocketWindow.new())
 	_add_window(&"lape", LapeWindow.new())
 	_add_window(&"vault", VaultWindow.new())
+	_add_window(&"debug", DebugWindow.new())               # bh-030: unlocked by `azrin azrael`
 	dialogue = DialogueBox.new()
 	_root.add_child(dialogue)
 	pause_menu = PauseMenu.new()
@@ -267,6 +268,10 @@ func _unhandled_input(e: InputEvent) -> void:
 			toggle(HOTKEYS[action])
 			get_viewport().set_input_as_handled()
 			return
+	if e.is_action_pressed(&"debug_console") and Game.hero and Game.hero.debug_unlocked:
+		toggle(&"debug")
+		get_viewport().set_input_as_handled()
+		return
 	if e.is_action_pressed(&"dev_panel") and Dev.enabled:
 		dev_panel.toggle()
 		get_viewport().set_input_as_handled()

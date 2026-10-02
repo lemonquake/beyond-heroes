@@ -4,7 +4,7 @@ func _init() -> void:
 	strict = true
 
 func test_exact_codes_null_hero_and_documentation() -> void:
-	eq(Cheats.CODES.size(), 26, "all current cheat codes")
+	eq(Cheats.CODES.size(), 28, "all current cheat codes (bh-030: quake quake, azrin azrael)")
 	eq(Cheats.DESCRIPTIONS.size(), Cheats.CODES.size(), "complete reference")
 	for code in Cheats.CODES:
 		ok(Cheats.DESCRIPTIONS.has(code), "documented " + code)

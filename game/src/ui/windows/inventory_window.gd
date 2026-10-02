@@ -59,10 +59,11 @@ var _btn_destroy: Button
 var _belt_slots: Array[SkillButton] = []
 var _belt_names: Array[Label] = []
 var _btn_belt: Array[Button] = []
+var _belt_keys: Array[Button] = []
 var _hover_slot: ItemSlot
 
 func _init() -> void:
-	super._init("Inventory", Vector2(1680, 960))
+	super._init("Inventory", Vector2(1680, 1040))
 
 func _build() -> void:
 	var row := hbox(22)
@@ -70,6 +71,7 @@ func _build() -> void:
 	body.add_child(row)
 	row.add_child(_build_paper_doll())
 	row.add_child(_build_bag())
+	body.add_child(_build_belt_strip())
 
 func _build_paper_doll() -> Control:
 	var col := vbox(10)
@@ -101,7 +103,6 @@ func _build_paper_doll() -> Control:
 		l.size = Vector2(112, 20)
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		doll.add_child(l)
-	col.add_child(_build_belt())
 	var info := hbox(14)
 	col.add_child(info)
 	var sum_box := inset(Vector2(330, 0))
@@ -117,32 +118,64 @@ func _build_paper_doll() -> Control:
 	set_box.add_child(_sets)
 	return col
 
-func _build_belt() -> Control:
-	var box := inset(Vector2(620, 0))
-	var row := hbox(12)
+## bh-030: the Potion & Scroll Belt, always at the bottom of the window: its 16 cells and the six belt keys (Q, E and
+## the quick keys Alt+Q / W / E / R). Click a key slot to choose what it uses (or drop a consumable on it); the small
+## key button under each slot changes its key.
+func _build_belt_strip() -> Control:
+	var box := inset()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var row := hbox(16)
 	box.add_child(row)
-	var t := UITheme.label("Quick Use", 18, UITheme.GOLD, UITheme.title_font())
-	t.custom_minimum_size = Vector2(118, 0)
-	t.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	row.add_child(t)
+	var head := vbox(4)
+	head.custom_minimum_size = Vector2(150, 0)
+	head.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(head)
+	head.add_child(UITheme.label("Potion &\nScroll Belt", 20, UITheme.GOLD, UITheme.title_font()))
+	_belt_heading = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.body_font())
+	_belt_heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	head.add_child(_belt_heading)
+	_belt_section = vbox(0)
+	_belt_section.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(_belt_section)
+	_add_grid(_belt_section, Inventory.BAG_CAPACITY, Inventory.BAG_CAPACITY + Inventory.BELT_CAPACITY, 8)
+	row.add_child(VSeparator.new())
+	var keys := vbox(4)
+	keys.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(keys)
+	keys.add_child(UITheme.label("Belt Keys" if not Settings.touch_mode else "Belt Slots", 18, UITheme.GOLD, UITheme.body_bold()))
+	var slots := hbox(10)
+	keys.add_child(slots)
 	for i in HeroData.BELT_SIZE:
-		var b := SkillButton.new(&"potion_health" if i == 0 else &"potion_mana", 54.0)
-		b.set_potion(&"health_potion" if i == 0 else &"mana_potion")
-		b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		var slot := i
+		var colv := vbox(3)
+		colv.custom_minimum_size = Vector2(104, 0)
+		slots.add_child(colv)
+		var b := SkillButton.new(HeroData.belt_action(i), 58.0)
+		b.set_potion(HeroData.belt_default(i) if i >= HeroData.ORB_SLOTS else (&"health_potion" if i == 0 else &"mana_potion"))
+		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		b.activated.connect(func(sb: SkillButton) -> void: BeltPicker.open(sb, hero, slot))
 		b.context.connect(func(sb: SkillButton) -> void: BeltPicker.open(sb, hero, slot))
 		b.item_dropped.connect(func(_sb: SkillButton, it: ItemInstance) -> void: if it: BeltPicker.bind(hero, slot, it.base.id))
 		TooltipLayer.attach(b, func() -> Control: return Tips.text("Click to choose what %s uses. You can also drag a consumable here%s." % [
-			BeltPicker.slot_name(slot), "" if Settings.touch_mode else ", or hover one in the bag and press %s" % BeltPicker.slot_name(slot)], "Potion Belt"))
-		row.add_child(b)
+			BeltPicker.slot_name(slot), "" if Settings.touch_mode else ", or hover one in the bag and press %s" % BeltPicker.slot_name(slot)], "Belt Key"))
+		colv.add_child(b)
 		_belt_slots.append(b)
-		var n := UITheme.label("", 15, UITheme.PARCHMENT, UITheme.body_font())
-		n.custom_minimum_size = Vector2(180, 0)
+		var n := UITheme.label("", 13, UITheme.PARCHMENT, UITheme.body_font())
+		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		n.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		n.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(n)
+		n.custom_minimum_size = Vector2(104, 34)
+		colv.add_child(n)
 		_belt_names.append(n)
+		if not Settings.touch_mode:
+			var kb := button("Key: %s" % Settings.binding_text(HeroData.belt_action(i)), func() -> void:
+				var c := HotkeyCapture.start(HeroData.belt_action(slot), b)
+				if c:
+					c.finished.connect(func(_a: StringName, _ok: bool) -> void: _refresh_belt()), &"", 0.0)
+			kb.add_theme_font_size_override("font_size", 13)
+			kb.custom_minimum_size = Vector2(104, 30)
+			kb.set_meta(&"belt_key", i)
+			colv.add_child(kb)
+			_belt_keys.append(kb)
 	return box
 
 func _refresh_belt() -> void:
@@ -150,8 +183,11 @@ func _refresh_belt() -> void:
 		var bp := hero.belt_preview(i)
 		if bp.base != _belt_slots[i].potion_base:
 			_belt_slots[i].set_potion(bp.base)
-		_belt_slots[i].update_state(0.0, 0.0, "", int(bp.count))
+		_belt_slots[i].update_state(0.0, 0.0, "", int(bp.count) if bp.base != &"" else -1)
 		_belt_names[i].text = HeroData.belt_label(hero.potion_belt[i])
+		_belt_slots[i].queue_redraw()
+	for kb in _belt_keys:
+		kb.text = "Key: %s" % Settings.binding_text(HeroData.belt_action(int(kb.get_meta(&"belt_key"))))
 
 func _equip_slot(slot: StringName, px := 76.0) -> ItemSlot:
 	var s := ItemSlot.new(ItemSlot.Kind.EQUIPMENT, px)
@@ -169,12 +205,12 @@ func _build_bag() -> Control:
 	var col := vbox(10)
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_bag_tabs = TabBar.new()
-	for label in ["All Bags", "Gear Bag", "Utility Bag", "Potion & Scroll Belt"]:
+	for label in ["All Bags", "Gear Bag", "Utility Bag"]:
 		_bag_tabs.add_tab(label)
 	_bag_tabs.add_theme_font_size_override("font_size", 20)
 	_bag_tabs.add_theme_font_override("font", UITheme.body_bold())
 	_bag_tabs.tab_changed.connect(func(i: int) -> void:
-		bag_view = ["all", "gear", "utility", "belt"][i]
+		bag_view = ["all", "gear", "utility"][i]
 		_select(null)
 		_apply_filter())
 	col.add_child(_bag_tabs)
@@ -266,11 +302,6 @@ func _build_bag() -> Control:
 	_bag_heading = UITheme.label("Gear & Utility Bags · 84 shared slots", 19, UITheme.GOLD, UITheme.body_bold())
 	_bag_section.add_child(_bag_heading)
 	_add_grid(_bag_section, 0, Inventory.BAG_CAPACITY, 12)
-	_belt_section = vbox(8)
-	sections.add_child(_belt_section)
-	_belt_heading = UITheme.label("Potion & Scroll Belt · 16 separate slots", 19, UITheme.GOLD, UITheme.body_bold())
-	_belt_section.add_child(_belt_heading)
-	_add_grid(_belt_section, Inventory.BAG_CAPACITY, Inventory.BAG_CAPACITY + Inventory.BELT_CAPACITY, 8)
 	_empty = UITheme.label("No items match these filters.", 20, UITheme.TEXT_DIM, UITheme.body_font())
 	sections.add_child(_empty)
 	var status := hbox(10)
@@ -330,11 +361,29 @@ func _build_bag() -> Control:
 	_btn_junk = button("Mark to Sell", func() -> void: _toggle_flag("junk"), &"", 150.0)
 	_btn_drop = button("Drop", func() -> void: _drop(_sel_item()), &"", 96.0)
 	_btn_destroy = button("Destroy", func() -> void: _destroy(_sel_item()), &"", 120.0)
-	for i in HeroData.BELT_SIZE:
+	for i in HeroData.ORB_SLOTS:
 		var slot := i
 		_btn_belt.append(button("Put on %s" % BeltPicker.slot_name(i), func() -> void:
 			if _sel_item():
 				BeltPicker.bind(hero, slot, _sel_item().base.id), &"", 150.0))
+	# bh-030: the quick keys share one button: a menu of the four
+	var quick_btn: Button
+	quick_btn = button("Put on Quick Key", func() -> void:
+		if _sel_item() == null:
+			return
+		var menu := PopupMenu.new()
+		menu.add_theme_font_size_override("font_size", 22 if Settings.touch_mode else 17)
+		for q in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
+			menu.add_item("%s  (now: %s)" % [BeltPicker.slot_name(q), HeroData.belt_label(hero.potion_belt[q])], q)
+		var base_id: StringName = _sel_item().base.id
+		menu.id_pressed.connect(func(q: int) -> void: BeltPicker.bind(hero, q, base_id))
+		menu.popup_hide.connect(menu.queue_free)
+		get_tree().root.add_child(menu)
+		var k := get_viewport().get_final_transform().x.x
+		menu.reset_size()
+		var at := quick_btn.get_global_rect().position - Vector2(0, menu.size.y / maxf(k, 0.01) + 6.0)
+		menu.popup(Rect2i(Vector2i((at * k).round()), Vector2i.ZERO)), &"", 190.0)
+	_btn_belt.append(quick_btn)
 	for b in [_btn_use, _btn_split, _btn_lock, _btn_fav, _btn_junk, _btn_drop, _btn_destroy]:
 		b.add_theme_font_override("font", UITheme.body_bold())
 		b.custom_minimum_size.y = 46
@@ -439,25 +488,30 @@ func _apply_filter() -> void:
 		return
 	var matches := 0
 	var bag_visible := 0
-	var belt_visible := 0
 	var filtering := filter != "all" or min_rarity > 0 or search.strip_edges() != ""
 	for c in cells:
 		var in_belt := c.index >= hero.inventory.bag_capacity
-		var in_view := bag_view == "all" or (bag_view == "belt" and in_belt)
+		if in_belt:
+			# bh-030: the belt strip never hides a cell; filters only dim what does not match
+			c.visible = true
+			c.dim = filtering and (c.item == null or not Inventory.matches_filter(c.item, filter, min_rarity, search))
+			if c.item and not c.dim:
+				matches += 1
+			c.queue_redraw()
+			continue
+		var in_view := bag_view == "all"
 		if bag_view in ["gear", "utility"]:
-			in_view = not in_belt and (c.item == null or hero.inventory.bag_of(c.index) == bag_view)
+			in_view = c.item == null or hero.inventory.bag_of(c.index) == bag_view
 		c.visible = in_view and (Inventory.matches_filter(c.item, filter, min_rarity, search) if c.item else not filtering)
 		c.dim = false
 		if c.visible:
-			if in_belt: belt_visible += 1
-			else: bag_visible += 1
+			bag_visible += 1
 			if c.item: matches += 1
 		c.queue_redraw()
 	_bag_section.visible = bag_visible > 0
-	_belt_section.visible = belt_visible > 0
-	_empty.visible = bag_visible + belt_visible == 0
+	_empty.visible = bag_visible == 0
 	_bag_heading.text = "%s · %d / 84 shared slots free" % [{"all": "Gear & Utility Bags", "gear": "Gear Bag", "utility": "Utility Bag"}.get(bag_view, "Bags"), hero.inventory.free_cells()]
-	_belt_heading.text = "Potion & Scroll Belt · %d / 16 slots free" % (hero.inventory.free_cells(true) - hero.inventory.free_cells())
+	_belt_heading.text = "%d / 16 slots free" % (hero.inventory.free_cells(true) - hero.inventory.free_cells())
 	_results.text = "%d item stacks · Favorites first · Gear and Utility share space" % matches
 	if selected and selected.kind == ItemSlot.Kind.INVENTORY and not selected.visible:
 		_select(null)
@@ -578,7 +632,7 @@ func _on_hover(s: ItemSlot, inside: bool) -> void:
 	var equipped := s.kind == ItemSlot.Kind.EQUIPMENT
 	var hint := "Right-click to unequip" if equipped else ("Right-click to use" if s.item.base.is_consumable() else ("Right-click to equip" if s.item.is_equipment() else ""))
 	if not equipped and s.item.base.is_consumable() and not Settings.touch_mode:
-		hint += " · %s / %s: put on the belt" % [BeltPicker.slot_name(0), BeltPicker.slot_name(1)]
+		hint += " · %s / %s / %s...: put on that belt key" % [BeltPicker.slot_name(0), BeltPicker.slot_name(1), BeltPicker.slot_name(2)]
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(s.item, {"hero": hero, "equipped": equipped, "hint": hint}))
 
 ## Hover a consumable in the bag and press a belt key (Q / E): that key now uses it.
@@ -587,8 +641,9 @@ func _unhandled_input(e: InputEvent) -> void:
 		return
 	if _hover_slot.kind != ItemSlot.Kind.INVENTORY or not _hover_slot.item.base.is_consumable():
 		return
-	for i in HeroData.BELT_SIZE:
-		if e.is_action_pressed(&"potion_health" if i == 0 else &"potion_mana"):
+	# quick keys first: Alt+Q also matches Q
+	for i in range(HeroData.BELT_SIZE - 1, -1, -1):
+		if e.is_action_pressed(HeroData.belt_action(i)):
 			BeltPicker.bind(hero, i, _hover_slot.item.base.id)
 			get_viewport().set_input_as_handled()
 			return

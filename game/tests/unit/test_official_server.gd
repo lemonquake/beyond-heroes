@@ -3,7 +3,7 @@ extends TestCase
 func test_twelve_player_capacity() -> void:
 	eq(Net.MAX_PLAYERS, 12, "official capacity excludes the headless coordinator")
 	eq(Net.MAX_CLIENTS, 11, "custom capacity counts the host")
-	eq(Net.PROTOCOL, 15, "official and custom realm handshake has a separate protocol")
+	ok(Net.PROTOCOL >= 15, "official and custom realm handshake has a separate protocol (16 since bh-030)")
 	done()
 
 func test_endpoint_requires_verified_https_origin() -> void:

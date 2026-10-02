@@ -34,7 +34,11 @@ class Sweeper:
 	var length := 10.0
 	var width := 2.0
 	var push_along := false          # knock targets along the sweep direction (tidal wave)
-	var on_hit: Callable
+	var on_hit: Callable:
+		set(v):
+			on_hit = v
+			_on_hit_owner = SafeCallable.owner_of(v)
+	var _on_hit_owner := 0
 	var hit_ids := {}
 	var travelled := 0.0
 	var visual: Node3D
@@ -59,7 +63,7 @@ class Sweeper:
 			r.tags[&"aoe"] = true
 			r.tags[&"push_dir"] = dir if push_along else (a.global_position - global_position).slide(Vector3.UP).normalized()
 			var res := a.receive_hit(r, source if is_instance_valid(source) else null, a.center())
-			if on_hit.is_valid():
+			if SafeCallable.alive(on_hit, _on_hit_owner):
 				on_hit.call(a, res)
 		global_position = to
 		travelled += step
@@ -121,7 +125,7 @@ class Hazard:
 					r.tags[&"aoe"] = true
 					# bh-028: a monster's pool can be grazed by an evasive hero; heroes' pools always land
 					r.graze = true
-					r.evadable = source is Actor and is_instance_valid(source) and (source as Actor).team == BH.Team.ENEMY
+					r.evadable = is_instance_valid(source) and source is Actor and (source as Actor).team == BH.Team.ENEMY
 					r.blockable = false
 					a.receive_hit(r, source if is_instance_valid(source) else null, a.center())
 				if status_id != &"":
@@ -167,7 +171,11 @@ class DelayedBlast:
 	var radius := 3.0
 	var inner := 0.0                 # ring blasts spare the inside
 	var delay := 1.0
-	var on_blast: Callable           # func(position, hits)
+	var on_blast: Callable:           # func(position, hits)
+		set(v):
+			on_blast = v
+			_on_blast_owner = SafeCallable.owner_of(v)
+	var _on_blast_owner := 0
 	var _t := 0.0
 
 	func time_left() -> float:
@@ -190,7 +198,7 @@ class DelayedBlast:
 				for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), global_position, inner, mask):
 					excl.append(a)
 			hits = AreaEffects.burst(self, global_position, radius, mask, request, source if is_instance_valid(source) else null, excl)
-		if on_blast.is_valid():
+		if SafeCallable.alive(on_blast, _on_blast_owner):
 			on_blast.call(global_position, hits)
 		queue_free()
 

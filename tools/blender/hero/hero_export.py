@@ -85,6 +85,7 @@ def export(argv, log=print):
         acts[an.name] = A.bake_action(arm, rig, an)
     log("[hero] baked %d library actions, %.1fs" % (len(acts), time.time() - t0))
     meta = {}
+    rts = {}
     for name, (src_action, loop) in RT.CLIPS.items():
         if only and name not in only:
             continue
@@ -106,7 +107,16 @@ def export(argv, log=print):
             continue
         acts[name] = RT.bake(arm, name, rt, loop)
         meta[name] = RT.measure(rt, loop, hit=False)
+        rts[name] = rt
         log("[hero] %s <- %s: %s" % (name, src_action, meta[name]))
+    # bh-031: the female body's idle and gaits, layered over the clips above
+    import hero_female_anims as FA
+    for name, (rt, loop) in FA.make(arm, rts, acts, r["info"]["J"], log).items():
+        if only and name not in only:
+            continue
+        acts[name] = RT.bake(arm, name, rt, loop)
+        meta[name] = RT.measure(rt, loop, hit=False)
+        log("[hero] %s: %s" % (name, meta[name]))
     ad = arm.animation_data or arm.animation_data_create()
     ad.action = None
     for an_name, act in acts.items():

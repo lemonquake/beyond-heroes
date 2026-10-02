@@ -9,6 +9,8 @@ class_name Cheats
 ##          wearable from Class E, four sockets open; knights only (DataSpecialWeapons)
 ##   quake team  calls an AI ally hero to fight beside you (up to 3, Single Player only): it follows, protects, shops for the
 ##               best gear, binds a Tempo and heals itself (QuakeTeam)
+##   quake quake sends the most recently called Quake Team ally home (bh-030)
+##   azrin azrael unlocks the Debug console for this hero: a Debug button on the HUD (bh-030, DebugWindow)
 
 const GOLD := 5000
 const SMALL_GOLD := 1000
@@ -18,7 +20,8 @@ const CODES := {"lemonq": "gold", "taicho": "small_gold", "greg": "small_gold", 
 	"qwe": "thirty_skills", "asd": "thirty_stats", "qqq": "tier_up", "www": "tier_down", "zzz": "custom_equipment", "orb": "orbitals",
 	"deep pockets": "rich", "talenttime": "talent_points", "oneup": "one_level", "redbottle": "health_items",
 	"bluebottle": "mana_items", "homeward": "portal_items", "embers": "ember_items", "wellrested": "rest",
-	"freshstart": "reset_stats", "secondwind": "revive_tempos", "alj": "special_weapons"}
+	"freshstart": "reset_stats", "secondwind": "revive_tempos", "alj": "special_weapons",
+	"quake quake": "quake_dismiss", "azrin azrael": "debug_unlock"}
 
 ## Player-facing reference, also used by tools/create_cheats_pdf.py. Keep one entry for every code.
 const DESCRIPTIONS := {
@@ -28,6 +31,8 @@ const DESCRIPTIONS := {
 	"azrin": "Gain 3 levels and their normal stat, skill and talent points; stops at the level cap.",
 	"azrael": "Fully restore HP and mana for your living hero and living active Tempos. Does not revive the hero.",
 	"quake team": "Call one AI ally, up to three allies. Single Player only.",
+	"quake quake": "Send the most recently called AI ally home. Single Player only.",
+	"azrin azrael": "Unlock the Debug console for this hero: a Debug button appears on the screen (also F2). It holds every cheat and many more, with numbers you can set.",
 	"asdf": "Add 50,000 gold.",
 	"lel": "Add 10 unspent skill points. Replaces lol, which is now ordinary chat.",
 	"qwe": "Add 30 unspent skill points.",
@@ -148,6 +153,15 @@ static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 		"quake_team":
 			var r := QuakeTeam.summon(hero, player as Node3D)
 			return ("Cheat: " if r.ok else "") + String(r.text)
+		"quake_dismiss":
+			var r2 := QuakeTeam.dismiss(hero)
+			return ("Cheat: " if r2.ok else "") + String(r2.text)
+		"debug_unlock":
+			if hero.debug_unlocked:
+				return "Cheat: the Debug console is already unlocked (the Debug button, or F2)."
+			hero.debug_unlocked = true
+			Events.debug_unlocked.emit()
+			return "Cheat: Debug console unlocked. Press the Debug button (or F2) to open it."
 		"special_weapons":
 			return _give_special(hero)
 		"restore":

@@ -11,7 +11,11 @@ var radius := 4.0
 var duration := 3.0
 var tick := 0.5
 var style := "ice"                   # ice | arrows
-var on_hit: Callable                 # func(actor, result)
+var on_hit: Callable:                 # func(actor, result)
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
 var _t := 0.0
 var _acc := 0.0
 var _rain: GPUParticles3D
@@ -94,6 +98,6 @@ func _pulse() -> void:
 		r.tags[&"aoe"] = true
 		r.tags[&"push_dir"] = (a.global_position - global_position).slide(Vector3.UP).normalized()
 		var res := a.receive_hit(r, src, a.center())
-		if on_hit.is_valid():
+		if SafeCallable.alive(on_hit, _on_hit_owner):
 			on_hit.call(a, res)
 	Audio.play_at(&"freeze" if style == "ice" else &"arrow_impact", global_position, -8.0)

@@ -141,7 +141,8 @@ static func sealers(cs: CutscenePlayer, origin: Vector3, count: int, spacing: fl
 	for i in count:
 		var off := Basis(Vector3.UP, deg_to_rad(yaw + 90.0)) * Vector3(0, 0, (i - (count - 1) * 0.5) * spacing)
 		var a := cs.actor(StringName("sealer_%d" % i), "res://assets/characters/mage.glb", 1.0, origin + off, yaw)
-		MaterialLibrary.apply_character(a._meshes, Color(0.72, 0.78, 0.9))
+		if not (a.model is CharacterVisual):      # bh-031: on the hero body the robes are already dyed
+			MaterialLibrary.apply_character(a._meshes, Color(0.72, 0.78, 0.9))
 		a.attach(&"main", "res://assets/weapons/staff.glb")
 		a.play(&"idle_staff" if a.has_clip(&"idle_staff") else &"idle", 0.0)
 		out.append(a)

@@ -158,7 +158,9 @@ func slot_summary(slot: int) -> Dictionary:
 		return {}
 	var h: Dictionary = data.get("hero", {})
 	return {"name": h.get("name", "?"), "class": h.get("class", "?"), "level": h.get("progress", {}).get("level", 1),
-		"map": h.get("map", "sanctuary"), "saved_at": data.get("saved_at", 0), "play_time": h.get("play_time", 0.0)}
+		"map": h.get("map", "sanctuary"), "saved_at": data.get("saved_at", 0), "play_time": h.get("play_time", 0.0),
+		# bh-031: the card shows the hero's picture (profile picture, else the ID shot of their model)
+		"pic": ProfilePicture.bytes_of_save(h), "hero": h}
 
 func delete_slot(slot: int) -> void:
 	if scope == "official":

@@ -43,6 +43,8 @@ var hero: HeroData
 var resource: ClassResource
 var runner: SkillRunner
 var camera: PlayerCamera
+## bh-030: playing in first-person view (PlayerCamera.first_person); V toggles, saved in Settings.first_person.
+var first_person := false
 var aim_point := Vector3.ZERO
 var input_enabled := true
 var aim_override := Vector3.INF        # automated playtests aim here instead of at the mouse
@@ -122,6 +124,15 @@ func _ready() -> void:
 	camera.target = self
 	add_child(camera)
 	camera.make_current()
+	if Settings.first_person:
+		set_first_person.call_deferred(true)
+	# the Settings window can switch the view and its field of view too
+	Settings.changed.connect(func() -> void:
+		if not is_instance_valid(self) or camera == null:
+			return
+		if Settings.first_person != first_person:
+			set_first_person(Settings.first_person)
+		camera.apply_fov())
 	runner = SkillRunner.new(self)
 	Events.actor_died.connect(_on_actor_died)
 
@@ -180,6 +191,8 @@ func refresh_equipment_visuals() -> void:
 	if visual == null or hero == null:
 		return
 	visual.dress_equipment(hero.equipment)
+	if hero == Game.hero:
+		IdPicture.refresh.call_deferred(hero)     # bh-031: the ID picture shows what they wear now
 	var lo := hero.equipment.loadout()
 	var main := hero.equipment.get_item(&"main_weapon")
 	# bh-023: a great axe's heavy attack is the player's own two-handed smash (same timing as the clip it replaces)
@@ -274,11 +287,43 @@ func is_low_hp() -> bool:
 
 # ---- Aim ----------------------------------------------------------------------------------------------------
 
+## bh-030: switch the first-person view on or off (remembered for the next session).
+func set_first_person(on: bool) -> void:
+	first_person = on
+	if camera:
+		camera.set_first_person(on)
+	# remembered in Settings, but never by probes and captures (hidden save slots 90+ must not touch the player's file)
+	if Settings.first_person != on and Game.save_slot < 90:
+		Settings.first_person = on
+		Settings.save_file()
+	Events.notify.emit("First-person view%s" % ("  ·  %s returns to the classic view" % Settings.binding_text(&"view_toggle") if on else " off"), &"info")
+
+## bh-030: first person aims where the crosshair (the centre of the screen) points.
+func _update_fp_aim() -> void:
+	var from := camera.global_position
+	var dir := camera.look_dir()
+	var q := PhysicsRayQueryParameters3D.create(from, from + dir * 60.0, BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS)
+	var hit := get_world_3d().direct_space_state.intersect_ray(q)
+	var enemy := _enemy_under_cursor(from, dir)
+	if enemy and (hit.is_empty() or from.distance_to(enemy.center()) < from.distance_to(hit.position)):
+		aim_point = enemy.global_position
+		Game.hover_target = enemy
+	else:
+		aim_point = hit.position if not hit.is_empty() else from + dir * 40.0
+		Game.hover_target = null
+	_fp_aim_3d = enemy.center() if Game.hover_target else aim_point
+	Game.hover_ally = _ally_under_cursor(from, dir) if Game.hover_target == null and Net.is_active() else null
+
+var _fp_aim_3d := Vector3.ZERO
+
 func _update_aim() -> void:
 	if camera == null or not is_inside_tree():
 		return
 	if aim_override.is_finite():
 		aim_point = aim_override
+		return
+	if first_person and not (Settings.touch_mode and touch_aim_dir.length() > 0.1):
+		_update_fp_aim()
 		return
 	if Settings.touch_mode:
 		_update_touch_aim()
@@ -404,6 +449,8 @@ func cast_point() -> Vector3:
 
 ## Projectile aim retains elevation; facing and melee continue to use horizontal aim_dir().
 func projectile_dir() -> Vector3:
+	if first_person and not aim_override.is_finite():
+		return (_fp_aim_3d - cast_point()).normalized()
 	var target := aim_point + Vector3.UP * 1.0
 	if is_instance_valid(Game.hover_target) and Game.hover_target is Actor and aim_point.distance_squared_to(Game.hover_target.global_position) < 0.01:
 		target = Game.hover_target.center()
@@ -461,8 +508,8 @@ func _tick_timers(delta: float) -> void:
 			Events.skill_ready.emit(k)
 	if changed:
 		cooldowns_changed.emit()
-	potion_cd = maxf(0.0, potion_cd - delta)
-	dodge_cd = maxf(0.0, dodge_cd - delta)
+	potion_cd = maxf(0.0, potion_cd - delta) if not Game.debug_no_cooldowns else 0.0
+	dodge_cd = maxf(0.0, dodge_cd - delta) if not Game.debug_no_cooldowns else 0.0
 	_chain_lock = maxf(0.0, _chain_lock - delta)
 	_riposte_t = maxf(0.0, _riposte_t - delta)
 	_pulse_cd = maxf(0.0, _pulse_cd - delta)
@@ -597,16 +644,24 @@ func _read_input(delta: float) -> void:
 		var idx := hero.skill_bar.find(channel_skill)
 		if idx < 0 or not Input.is_action_pressed(StringName("skill_%d" % (idx + 1))):
 			_stop_channel()
-	if Input.is_action_just_pressed(&"potion_health"):
+	# bh-030: the quick belt (Alt+Q / W / E / R) first: Alt+Q must not also drink from Q, Alt+R must not also interact
+	var quick := false
+	for i in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
+		if Input.is_action_just_pressed(HeroData.belt_action(i)):
+			use_belt(i)
+			quick = true
+	if not quick and Input.is_action_just_pressed(&"potion_health"):
 		use_belt(0)
-	if Input.is_action_just_pressed(&"potion_mana"):
+	if not quick and Input.is_action_just_pressed(&"potion_mana"):
 		use_belt(1)
-	if Input.is_action_just_pressed(&"interact"):
+	if not quick and Input.is_action_just_pressed(&"interact"):
 		interact()
 	if Input.is_action_just_pressed(&"ping"):
 		ping_here()
 	if Input.is_action_just_pressed(&"summon_party") and Net.is_active():
 		Net.open_team_portal()
+	if Input.is_action_just_pressed(&"view_toggle"):
+		set_first_person(not first_person)
 	if Input.is_action_just_pressed(&"zoom_in"):
 		camera.zoom(-1)
 	elif Input.is_action_just_pressed(&"zoom_out"):
@@ -1087,7 +1142,7 @@ func _pay_skill(s: SkillDef) -> void:
 	var paid := mana_cost(s.id)
 	if spend_mana(paid):
 		class_passives.refund(s, paid)
-	var cd := skill_cooldown(s.id)
+	var cd := skill_cooldown(s.id) if not Game.debug_no_cooldowns else 0.0
 	if cd > 0.0:
 		cooldowns[s.id] = cd
 		cooldown_total[s.id] = cd
@@ -1321,6 +1376,9 @@ func use_belt(slot: int) -> bool:
 	if hero == null or slot < 0 or slot >= HeroData.BELT_SIZE or not alive:
 		return false
 	var id: StringName = hero.potion_belt[slot]
+	if id == &"":
+		Events.notify.emit("Nothing is on that belt slot. Put a potion or scroll on it in the Inventory (I).", &"info")
+		return false
 	if id == HeroData.BELT_AUTO_HEAL:
 		return use_potion(&"heal")
 	if id == HeroData.BELT_AUTO_MANA:
@@ -1517,7 +1575,7 @@ func _move_input() -> Vector3:
 	return (camera.ground_basis() * Vector3(v.x, 0, v.y)).normalized() * minf(v.length(), 1.0)
 
 func _movement(delta: float) -> Vector3:
-	var speed := stats.get_stat(&"move_speed", 5.0)
+	var speed := stats.get_stat(&"move_speed", 5.0) * Game.debug_speed_mult
 	if _dash_t > 0.0:
 		var step := minf(delta, _dash_t)
 		_dash_t = maxf(0.0, _dash_t - step)
@@ -1580,6 +1638,10 @@ func teleport_to(p: Vector3) -> void:
 	knock_velocity = Vector3.ZERO
 
 func _update_facing(delta: float, desired: Vector3) -> void:
+	if first_person and camera and action_kind != &"dodge":
+		var f := camera.look_dir()
+		rotation.y = atan2(f.x, f.z)       # first person: the hero always faces the view
+		return
 	if action != null and action_kind != &"dodge" and not action.can_cancel():
 		return
 	var face_aim := in_combat() or guarding or charging or channel_skill != &"" or action_kind in [&"light", &"heavy", &"skill", &"charge_release"]

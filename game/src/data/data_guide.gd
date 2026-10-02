@@ -13,6 +13,13 @@ static func intro() -> NpcDef:
 	var portrait := DataTempos.portrait_path(String(st.portrait))
 	if portrait == "":
 		portrait = "res://assets/ui/icons/classes/tempo_swordsman.svg"
+	# bh-031: the starter Tempo speaks with its own face (an ID shot of its model, PortraitStudio.tempo_portrait)
+	var h := Game.hero
+	if h != null and Persona.available():
+		for t in h.tempos:
+			if t is TempoData and ((t as TempoData).tempo_name == Dialogue.starter_name(h) or h.tempos.size() == 1):
+				portrait = "tempo:%d" % (t as TempoData).uid
+				break
 	return NpcDef.make(ID, Dialogue.starter_name(Game.hero), {"title": "Your Tempo  ·  Swordsman", "portrait": portrait, "map": &"",
 		"graph": graph()})
 

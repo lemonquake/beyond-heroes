@@ -11,6 +11,8 @@ uniform sampler2D mask_tex : filter_linear_mipmap, repeat_disable;
 // colours are passed as sRGB triplets and converted here (the detail texture is a ratio in sRGB space)
 uniform vec3 skin_color = vec3(0.6985, 0.4925, 0.3833);
 uniform vec3 underwear_color = vec3(0.09, 0.09, 0.10);
+// bh-031: the female body (shape key "female") wears a wrap top in the underwear's colour
+uniform float top_wrap = 0.0;
 uniform int pattern = 0;
 uniform vec3 pattern_color = vec3(0.12, 0.08, 0.06);
 uniform float pattern_amount = 1.0;
@@ -292,7 +294,12 @@ void fragment() {
 	hairy *= mix(smoothstep(0.25, 0.75, grain), 1.0, hairy * hairy);
 	skin = mix(skin, hair_color * (0.8 + 0.4 * grain), hairy);
 	skin = mix(skin, mix(lip_color * detail, lip_color, 0.35), mk.a * lip_amount);
-	vec3 col = mix(skin, underwear_color * (0.45 + 0.55 * detail.g), mk.r);
+	float under = mk.r;
+	if (top_wrap > 0.0 && ax < 0.24) {
+		float band = smoothstep(1.245, 1.258, rest.z) * (1.0 - smoothstep(1.392, 1.405, rest.z)) * (1.0 - smoothstep(0.180, 0.192, ax));
+		under = max(under, band * top_wrap);
+	}
+	vec3 col = mix(skin, underwear_color * (0.45 + 0.55 * detail.g), under);
 
 	// the face: eyes, brows and markings, drawn in the rest-pose face plane
 	float eglow = 0.0;

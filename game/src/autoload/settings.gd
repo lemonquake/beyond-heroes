@@ -48,6 +48,8 @@ var auto_loot_rules := {}           # AutoLootRules: category and advanced filte
 var show_enemy_bars := true
 var loot_labels_always := true      # false: only while Alt is held
 var camera_zoom := 1.0
+var first_person := false           # bh-030: play in first-person view (V toggles)
+var fp_fov := 80.0                  # bh-030: first-person field of view (degrees)
 var reduced_motion := false
 var ui_scale := 1.0
 var show_minimap := true
@@ -65,7 +67,7 @@ var efficiency_mode := false
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "combat_music", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "reduced_motion", "ui_scale", "show_minimap",
+	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "first_person", "fp_fov", "reduced_motion", "ui_scale", "show_minimap",
 	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
@@ -328,9 +330,16 @@ func _apply_world() -> void:
 
 # ---- Key bindings ------------------------------------------------------------------------------------------------
 
+const MODIFIER_KEYS := [KEY_ALT, KEY_CTRL, KEY_SHIFT, KEY_META]
+
 static func event_to_desc(e: InputEvent) -> Dictionary:
 	if e is InputEventKey:
-		return {"type": "key", "code": int(e.physical_keycode if e.physical_keycode != 0 else e.keycode)}
+		var d := {"type": "key", "code": int(e.physical_keycode if e.physical_keycode != 0 else e.keycode)}
+		# bh-030: combinations (Alt+Q). A plain key stays {type, code} so older settings files read the same.
+		for m in [["alt", e.alt_pressed], ["ctrl", e.ctrl_pressed], ["shift", e.shift_pressed]]:
+			if m[1] and not MODIFIER_KEYS.has(d.code):
+				d[m[0]] = true
+		return d
 	if e is InputEventMouseButton:
 		return {"type": "mouse", "button": int(e.button_index)}
 	if e is InputEventJoypadButton:
@@ -344,6 +353,9 @@ static func desc_to_event(d: Dictionary) -> InputEvent:
 		"key":
 			var k := InputEventKey.new()
 			k.physical_keycode = int(d.code) as Key
+			k.alt_pressed = bool(d.get("alt", false))
+			k.ctrl_pressed = bool(d.get("ctrl", false))
+			k.shift_pressed = bool(d.get("shift", false))
 			return k
 		"mouse":
 			var m := InputEventMouseButton.new()
@@ -443,7 +455,8 @@ static func binding_text(action: StringName) -> String:
 	for e in InputMap.action_get_events(action):
 		if e is InputEventKey:
 			var code: Key = e.physical_keycode if e.physical_keycode != 0 else e.keycode
-			return OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 and DisplayServer.get_name() != "headless" else code)
+			var mods := ("Ctrl+" if e.ctrl_pressed else "") + ("Alt+" if e.alt_pressed else "") + ("Shift+" if e.shift_pressed and code != KEY_SHIFT else "")
+			return mods + OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 and DisplayServer.get_name() != "headless" else code)
 		if e is InputEventMouseButton:
 			return {MOUSE_BUTTON_LEFT: "LMB", MOUSE_BUTTON_RIGHT: "RMB", MOUSE_BUTTON_MIDDLE: "MMB",
 				MOUSE_BUTTON_WHEEL_UP: "Wheel Up", MOUSE_BUTTON_WHEEL_DOWN: "Wheel Down"}.get(e.button_index, "Mouse %d" % e.button_index)

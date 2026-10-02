@@ -121,8 +121,25 @@ func _local(stat: StringName) -> float:
 	for a in affixes:
 		var def := DB.affix(StringName(a.id))
 		if def != null and def.stat == stat:
-			t += float(a.value)
+			t += affix_value(a)
 	return t
+
+## bh-030: a rolled enchantment's value on this item: flat sizes (Health, attributes, Defense, added damage) grow with
+## the item level past their affix's top tier (GearScaling); percentages are exactly as rolled.
+func affix_value(a: Dictionary) -> float:
+	var v := float(a.get("value", 0.0))
+	var def := DB.affix(StringName(a.get("id", "")))
+	if def == null:
+		return v
+	var m := GearScaling.affix_mult(def, equipment_level())
+	return v if m == 1.0 else (roundf(v * m) if def.integer else snappedf(v * m, 0.001))
+
+## bh-030: a flat implicit of the base, grown from the base's own level to the item's (percentages unchanged).
+func implicit_value(m: StatModifier) -> float:
+	if m.op != StatModifier.Op.FLAT:
+		return m.value
+	var mult := GearScaling.flat_mult(m.stat, base.level_req, equipment_level())
+	return m.value if mult == 1.0 else snappedf(m.value * mult, 0.01)
 
 ## Carried weight of this stack (unit weight x count).
 func weight() -> float:
@@ -147,7 +164,7 @@ func required_level() -> int:
 	return maxi(base.level_req, mini(BH.LEVEL_CAP, equipment_level() - 3)) if is_equipment() else base.level_req
 
 func defense_value() -> float:
-	return (base.defense * CombatGrowth.armor_factor(equipment_level()) * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
+	return (GearScaling.defense(base, equipment_level()) * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
 
 ## bh-017: the element the weapon deals (an Enchantment replaces the blade's own) and the share of its damage that is elemental.
 func weapon_element() -> int:
@@ -172,7 +189,7 @@ func modifiers() -> Array:
 	var out: Array = []
 	var src := display_name()
 	for m in base.implicit:
-		out.append(StatModifier.new(m.stat, m.op, m.value, src))
+		out.append(StatModifier.new(m.stat, m.op, implicit_value(m), src))
 	for m in base.fixed_mods:
 		out.append(StatModifier.new(m.stat, m.op, m.value, src))
 	if base.category != &"weapon":
@@ -183,7 +200,7 @@ func modifiers() -> Array:
 		var def := DB.affix(StringName(a.id))
 		if def == null or String(def.stat).begins_with("local_"):
 			continue
-		out.append(StatModifier.new(def.stat, def.op, float(a.value), src))
+		out.append(StatModifier.new(def.stat, def.op, affix_value(a), src))
 	if enchant != &"" and enchant_rank > 0:
 		out.append_array(DataUpgrades.enchant_mods(enchant, enchant_rank, "%s %s" % [DataUpgrades.enchant(enchant).get("name", "Enchantment"), DataUpgrades.roman(enchant_rank)]))
 	if foretech != &"" and foretech_rank > 0:
@@ -239,9 +256,9 @@ func affix_lines() -> PackedStringArray:
 		elif def.stat == &"local_def":
 			line = "%d%% increased Defense" % roundi(float(a.value) * 100.0)
 		elif def.stat == &"local_def_flat":
-			line = "+%d Defense" % roundi(float(a.value))
+			line = "+%d Defense" % roundi(affix_value(a))
 		else:
-			line = StatDefs.format_modifier(def.stat, def.op, float(a.value))
+			line = StatDefs.format_modifier(def.stat, def.op, affix_value(a))
 		if a.get("mw", false):
 			line += "  (Masterwork)"
 		out.append(line)

@@ -34,7 +34,19 @@ func _build() -> void:
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	left.size_flags_stretch_ratio = 1.15
 	cols.add_child(left)
-	left.add_child(section("Postings of every guild"))
+	var lhead := hbox(10)
+	left.add_child(lhead)
+	var sec := section("Postings of every guild")
+	sec.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lhead.add_child(sec)
+	# bh-030: new postings on demand (the board also restocks itself after every accepted or finished job)
+	var rp := _btn("Post New Jobs", func() -> void:
+		GuildJobs.repost(Game.hero, GuildJobs.CENTRAL)
+		Audio.play_ui(&"ui_open")
+		Events.notify.emit("The steward pins fresh postings to the board.", &"info"), &"", 190.0)
+	rp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	TooltipLayer.attach(rp, func() -> Control: return Tips.text("Takes down every posting you have not accepted and pins up new ones: dungeon delves, lord hunts, expeditions and patrols of the places you know.", "Post New Jobs"))
+	lhead.add_child(rp)
 	var ls := ScrollContainer.new()
 	ls.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	ls.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED

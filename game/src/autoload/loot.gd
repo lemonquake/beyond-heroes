@@ -68,7 +68,7 @@ func xp_for(e: Enemy, player: Player) -> int:
 	return maxi(1, int(round(base * mult)))
 
 func award_xp(e: Enemy, player: Player) -> void:
-	var xp := xp_for(e, player)
+	var xp := maxi(1, roundi(float(xp_for(e, player)) * Game.debug_xp_mult))
 	player.hero.progress.add_xp(xp)
 	Events.xp_gained.emit(xp)
 	FX.text_popup(e.center() + Vector3.UP * 1.2, "+%d XP" % xp, Color(0.75, 0.6, 1.0), 0.8)
@@ -156,7 +156,7 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 	var fit := 1.0
 	var used_bases := []
 	for i in n:
-		var rarity := ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl)
+		var rarity := maxi(ItemGenerator.roll_rarity(rng, mf, rank_bonus, ilvl), Game.debug_min_drop)
 		if e.is_boss:
 			rarity = maxi(rarity, BH.Rarity.MASTER)
 		elif e.is_miniboss():
@@ -288,6 +288,7 @@ func spawn_item(item: ItemInstance, from: Vector3, angle := 0.0, dist := 1.2) ->
 	return d
 
 func spawn_gold(from: Vector3, amount: int) -> LootDrop:
+	amount = maxi(1, roundi(float(amount) * Game.debug_gold_mult))
 	if FX.world == null:
 		return null
 	var d := LootDrop.new()

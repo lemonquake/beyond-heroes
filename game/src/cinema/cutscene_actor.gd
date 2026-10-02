@@ -77,6 +77,45 @@ static func make_hero(app: Dictionary, look: Dictionary, equipment: Equipment) -
 		a.anim.play(&"idle" if a.anim.has_animation(&"idle") else a.anim.current_animation)
 	return a
 
+## bh-031: a person drawn on the hero body (Persona: an NPC such as Paul David, a humanoid boss such as Kethrax). The
+## cinematic clips (cs_*) authored on their old model are carried over: every character shares the 24-bone rig, so
+## the tracks only need pointing at the hero's skeleton.
+static func make_persona(persona: Dictionary, clips_from := "", scale_factor := 1.0) -> CutsceneActor:
+	var a := make_hero({"model": Persona.MODEL, "scale": scale_factor * float(persona.get("size", 1.0))}, {}, null)
+	a.name = "Actor_persona"
+	var cv := a.model as CharacterVisual
+	if cv and cv.hero:
+		cv.process_mode = Node.PROCESS_MODE_INHERIT
+		# weapons are the cutscene's to attach (a copy carries the live character's, a legend its own)
+		var bare := persona.duplicate()
+		bare.erase("main")
+		bare.erase("off")
+		Persona.apply(cv, bare)
+		if cv.tree:
+			cv.tree.active = false
+		cv.process_mode = Node.PROCESS_MODE_DISABLED
+		a._meshes.clear()
+		a._collect(cv, a._meshes)
+	var src := clips_from if clips_from.begins_with("res://") or clips_from == "" else CHARS % clips_from
+	if src != "" and a.anim and ResourceLoader.exists(src):
+		var node: Node = (load(src) as PackedScene).instantiate()
+		var sap := a._find(node, "AnimationPlayer") as AnimationPlayer
+		if sap:
+			var skel_path := String(a.anim.get_node(a.anim.root_node).get_path_to(a.skeleton)) if a.skeleton else "Skeleton3D"
+			var lib := a.anim.get_animation_library(&"")
+			for an in sap.get_animation_list():
+				if not String(an).begins_with("cs_") or a.anim.has_animation(an):
+					continue
+				var anim := sap.get_animation(an).duplicate(true) as Animation
+				for t in anim.get_track_count():
+					var p := anim.track_get_path(t)
+					if p.get_subname_count() > 0:
+						anim.track_set_path(t, NodePath(skel_path + ":" + String(p.get_subname(0))))
+				anim.loop_mode = Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
+				lib.add_animation(an, anim)
+		node.free()
+	return a
+
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:
 		return n
@@ -181,6 +220,14 @@ func face(target: Vector3) -> void:
 
 ## Recolour every glowing surface (the Legion's eyes violet instead of the garrison's green).
 func recolor_emission(c: Color, energy := -1.0) -> void:
+	# bh-031: on the hero body the glow is in the eyes (drawn by the skin shader)
+	var cv := model as CharacterVisual
+	if cv and cv.hero:
+		var lk: Dictionary = cv.hero.look.duplicate()
+		lk["eye"] = "glowing"
+		lk["eye_color"] = c.to_html(false)
+		lk["eye_glow"] = 1.0
+		cv.set_look(lk)
 	for mi in _meshes:
 		if mi.mesh == null:
 			continue

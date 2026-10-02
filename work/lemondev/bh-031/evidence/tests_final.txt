@@ -1,0 +1,114 @@
+bh-031 full suite (Godot 4.7.2, headless), 2026-10-02
+[PASS] test_armory_cheats.gd — 4 tests, 152 checks, 0 failures (6.0 ms)
+[PASS] test_artisan_weapons.gd — 1 tests, 305 checks, 0 failures (114.2 ms)
+[PASS] test_auto_loot_filters.gd — 4 tests, 30 checks, 0 failures (7.4 ms)
+[FAIL] test_balance.gd — 1 tests, 16 checks, 9 failures (372558.4 ms)
+[PASS] test_balance_audit.gd — 9 tests, 4455 checks, 0 failures (2425.0 ms)
+[PASS] test_bh011.gd — 6 tests, 45 checks, 0 failures (9583.4 ms)
+[PASS] test_bh012.gd — 11 tests, 1142 checks, 0 failures (2977.4 ms)
+[PASS] test_bh013.gd — 11 tests, 1025 checks, 0 failures (9591.4 ms)
+[PASS] test_bh014.gd — 10 tests, 30 checks, 0 failures (516.6 ms)
+[PASS] test_bh015.gd — 11 tests, 10107 checks, 0 failures (1235.9 ms)
+[PASS] test_bh016.gd — 15 tests, 1560 checks, 0 failures (1014.7 ms)
+[FAIL] test_bh017.gd — 27 tests, 885 checks, 1 failures (33793.9 ms)
+[PASS] test_bh018.gd — 18 tests, 602 checks, 0 failures (1501.0 ms)
+[PASS] test_bh019.gd — 11 tests, 393 checks, 0 failures (2890.6 ms)
+[PASS] test_bh020.gd — 2 tests, 41 checks, 0 failures (1467.9 ms)
+[PASS] test_bh021.gd — 13 tests, 382 checks, 0 failures (3348.6 ms)
+[PASS] test_bh022.gd — 7 tests, 949 checks, 0 failures (1282.3 ms)
+[FAIL] test_bh023.gd — 16 tests, 1711 checks, 3 failures (1158.0 ms)
+[PASS] test_bh024.gd — 14 tests, 1258 checks, 0 failures (562.3 ms)
+[PASS] test_bh025.gd — 13 tests, 956 checks, 0 failures (272.9 ms)
+[PASS] test_bh026.gd — 10 tests, 105 checks, 0 failures (879.9 ms)
+[FAIL] test_bh027.gd — 13 tests, 1195 checks, 1 failures (4607.0 ms)
+[PASS] test_bh027_pickup.gd — 2 tests, 5 checks, 0 failures (10063.3 ms)
+[PASS] test_bh028.gd — 13 tests, 920 checks, 0 failures (1556.5 ms)
+[FAIL] test_bh028_arena.gd — 12 tests, 849 checks, 2 failures (21251.6 ms)
+[PASS] test_bh029.gd — 12 tests, 562 checks, 0 failures (546.8 ms)
+[PASS] test_bh030.gd — 8 tests, 151 checks, 0 failures (186.2 ms)
+[PASS] test_bh031.gd — 12 tests, 3686 checks, 0 failures (194.6 ms)
+[PASS] test_boss_set_network.gd — 1 tests, 6 checks, 0 failures (61.6 ms)
+[PASS] test_boss_set_visuals.gd — 2 tests, 1612 checks, 0 failures (329.1 ms)
+[PASS] test_boss_sets.gd — 7 tests, 6178 checks, 0 failures (5370.6 ms)
+[PASS] test_character_skills_layout.gd — 2 tests, 255 checks, 0 failures (11147.5 ms)
+[PASS] test_chat.gd — 9 tests, 52 checks, 0 failures (1610.5 ms)
+[PASS] test_chat_upgrade.gd — 7 tests, 254 checks, 0 failures (306.2 ms)
+[PASS] test_class_rework.gd — 12 tests, 77 checks, 0 failures (3846.9 ms)
+[PASS] test_combat_growth.gd — 6 tests, 134 checks, 0 failures (1465.9 ms)
+[PASS] test_crafting.gd — 11 tests, 689 checks, 0 failures (20457.2 ms)
+[PASS] test_crossbow_pose.gd — 1 tests, 909 checks, 0 failures (34.1 ms)
+[PASS] test_crossbows.gd — 8 tests, 10766 checks, 0 failures (375.4 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (155.8 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 23123 checks, 0 failures (6619.9 ms)
+[PASS] test_enemies.gd — 6 tests, 464 checks, 0 failures (2572.8 ms)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 8 failures (50240.3 ms)
+[PASS] test_guide.gd — 5 tests, 141 checks, 0 failures (748.1 ms)
+[PASS] test_guilds.gd — 8 tests, 100 checks, 0 failures (32.0 ms)
+[FAIL] test_inventory_overhaul.gd — 6 tests, 2087 checks, 15 failures (60.2 ms)
+[PASS] test_island.gd — 13 tests, 1669 checks, 0 failures (11745.2 ms)
+[PASS] test_items.gd — 17 tests, 2483 checks, 0 failures (678.9 ms)
+[PASS] test_loot.gd — 17 tests, 4060 checks, 0 failures (28563.1 ms)
+[PASS] test_maps.gd — 14 tests, 633 checks, 0 failures (10051.4 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.3 ms)
+[PASS] test_npcs.gd — 3 tests, 474 checks, 0 failures (18450.6 ms)
+[PASS] test_official_server.gd — 6 tests, 29 checks, 0 failures (157.5 ms)
+[PASS] test_perf.gd — 7 tests, 245 checks, 0 failures (7410.0 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (9.0 ms)
+[PASS] test_shops_dialogue.gd — 10 tests, 1401 checks, 0 failures (582.0 ms)
+[PASS] test_skills.gd — 11 tests, 3519 checks, 0 failures (47052.9 ms)
+[PASS] test_stats.gd — 8 tests, 162 checks, 0 failures (25.9 ms)
+[PASS] test_status.gd — 8 tests, 24 checks, 0 failures (87.1 ms)
+[PASS] test_survival_balance.gd — 6 tests, 866 checks, 0 failures (499.2 ms)
+[PASS] test_team_loot.gd — 3 tests, 21651 checks, 0 failures (27486.5 ms)
+[PASS] test_tempo_layout.gd — 1 tests, 13 checks, 0 failures (900.8 ms)
+[PASS] test_tempos.gd — 16 tests, 3748 checks, 0 failures (33557.9 ms)
+[PASS] test_westreach_bridges.gd — 1 tests, 14 checks, 0 failures (57857.5 ms)
+TOTAL: 122909 checks, 39 failures
+
+Failures:
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 knight power 635.9 is within 20% of the mean 388.4 (+64%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 mage power 487.4 is within 20% of the mean 388.4 (+25%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 388.4 (-100%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 5013.7 is within 20% of the mean 3117.7 (+61%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1095.4 is within 20% of the mean 3117.7 (-65%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 26626.4 is within 20% of the mean 15668.7 (+70%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5711.6 is within 20% of the mean 15668.7 (-64%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 ranger power 50795.3 is within 20% of the mean 37004.5 (+37%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 15408.4 is within 20% of the mean 37004.5 (-58%)
+  FAIL test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445
+  FAIL test_bh023.test_worn_models_fit_the_skeleton_and_the_budget: depth_deepwarden_coat within its triangle budget (8275 of 7200)
+  FAIL test_bh023.test_worn_models_fit_the_skeleton_and_the_budget: warden_plate within its triangle budget (7971 of 7200)
+  FAIL test_bh023.test_worn_models_fit_the_skeleton_and_the_budget: guardian_plate within its triangle budget (8275 of 7200)
+  FAIL test_bh027.test_the_guild_house_guilds_are_rolled_once_and_saved: the same guilds after saving and loading — expected [{ "id": "npc_0", "name": "Fellowship of the Golden Bear", "short": "Golden Bear", "motto": "Salt in the blood, fire in the heart.", "master": "Provost Maeltheros", "hall": 
+  FAIL test_bh028_arena.test_adventurers_fight_each_other_and_fall_back: Kaelmorane falls back at 15% health
+  FAIL test_bh028_arena.test_adventurers_fight_each_other_and_fall_back: the retreat is logged
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 315)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 328)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625
+
+After raising the bh023 armour budget (refined chest) - rerun:
+[PASS] test_bh023.gd — 16 tests, 1711 checks, 0 failures
+[PASS] test_bh028_arena.gd — 12 tests, 849 checks, 0 failures (the first run's 2 failures did not reproduce)
+[PASS] test_bh031.gd — 12 tests, 3686 checks, 0 failures
+
+Known baseline: test_balance, test_enemies2. test_bh017 (tempering), test_bh027 (guild hall name length) and test_inventory_overhaul (Dexterity on ranged weapons) exercise stat and guild code this run did not touch.

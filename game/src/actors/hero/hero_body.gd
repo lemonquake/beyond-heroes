@@ -27,6 +27,16 @@ var _hair_mat: ShaderMaterial
 var _beard_mat: ShaderMaterial
 var _wear: Array[MeshInstance3D] = []
 var _wear_sig := "-"
+## bh-031: a persona's colours for its worn pieces (HeroWear.dye_key -> hex); empty for a player's hero
+var dyes := {}
+## bh-031: set for personas (they never change clothes): the outfit is baked into one shared mesh under this key
+var merge_key := ""
+
+func _body_key_sig() -> String:
+	var parts := PackedStringArray()
+	for k in HeroLook.BODY_KEYS:
+		parts.append("%.3f" % float(look.get(k, 0.0)))
+	return ",".join(parts)
 var _hide_hair := false
 var _opacity := 1.0
 var _decay := 0.0
@@ -66,6 +76,7 @@ func apply(src: Dictionary) -> void:
 	var l := look
 	skin.set_shader_parameter(&"skin_color", HeroLook.rgb(l, "skin"))
 	skin.set_shader_parameter(&"underwear_color", HeroLook.rgb(l, "underwear"))
+	skin.set_shader_parameter(&"top_wrap", smoothstep(0.25, 0.6, float(l["female"])))
 	skin.set_shader_parameter(&"pattern", HeroLook.choice_index("pattern", l["pattern"]))
 	skin.set_shader_parameter(&"pattern_color", HeroLook.rgb(l, "pattern_color"))
 	skin.set_shader_parameter(&"pattern_amount", l["pattern_amount"])
@@ -137,16 +148,11 @@ func _set_hair(beard: bool, path: String, col: Vector3, length: float) -> void:
 			cur.queue_free()
 		cur = null
 		if path != "" and visual.skeleton:
-			var scene: Node3D = (load(path) as PackedScene).instantiate()
-			var found := scene.find_children("*", "MeshInstance3D", true, false)
-			if scene is MeshInstance3D:
-				found.append(scene)
-			if not found.is_empty():
-				cur = found[0]
-				var xf := _model_xf(cur, scene)
-				if cur.get_parent():
-					cur.get_parent().remove_child(cur)
-				cur.owner = null
+			var src := _hair_src(path)
+			if not src.is_empty():
+				cur = MeshInstance3D.new()
+				cur.mesh = src[0]
+				var xf: Transform3D = src[1]
 				var at := _head_attachment()
 				at.add_child(cur)
 				var rest := visual.skeleton.get_bone_global_rest(visual.skeleton.find_bone("head"))
@@ -161,8 +167,6 @@ func _set_hair(beard: bool, path: String, col: Vector3, length: float) -> void:
 					_beard_mat = mat
 				else:
 					_hair_mat = mat
-			if cur != scene:
-				scene.free()
 		if beard:
 			_beard = cur
 			_beard_path = path
@@ -177,6 +181,38 @@ func _set_hair(beard: bool, path: String, col: Vector3, length: float) -> void:
 		var i := cur.find_blend_shape_by_name(&"length")
 		if i >= 0:
 			cur.set_blend_shape_value(i, length)
+
+## bh-031: a persona's cloth colour by layer, so a shirt, a coat and breeches never melt into one suit: the inner
+## garment leans to undyed linen ("inner" sets it), the legs go darker ("legs" sets them).
+static func layer_dye(d: Dictionary, slot: String) -> Dictionary:
+	if not d.has("cloth"):
+		return d
+	var out := d.duplicate()
+	var c := Color(String(d.cloth))
+	if slot == "leggings":
+		out["cloth"] = String(d.get("legs", c.darkened(0.4).to_html(false)))
+	elif slot == "inner_garment":
+		out["cloth"] = String(d.get("inner", c.lerp(Color("d8d0bc"), 0.6).to_html(false)))
+	return out
+
+## bh-031: a hair or beard model read once: [mesh, transform in model space] (every NPC with a ponytail shares it).
+static var _hair_cache := {}
+
+static func _hair_src(path: String) -> Array:
+	if _hair_cache.has(path):
+		return _hair_cache[path]
+	var out: Array = []
+	var ps := load(path) as PackedScene
+	if ps:
+		var scene: Node = ps.instantiate()
+		var found := scene.find_children("*", "MeshInstance3D", true, false)
+		if scene is MeshInstance3D:
+			found.append(scene)
+		if not found.is_empty():
+			out = [(found[0] as MeshInstance3D).mesh, _model_xf(found[0], scene)]
+		scene.free()
+	_hair_cache[path] = out
+	return out
 
 ## A node's transform relative to the root of the scene it was loaded in.
 static func _model_xf(n: Node3D, root: Node) -> Transform3D:
@@ -202,7 +238,7 @@ func dress(equipment: Equipment) -> void:
 		return
 	var show_helm := bool(look.get("show_helm", true))
 	var plan := HeroWear.plan(equipment, show_helm)
-	var sig: String = plan.sig
+	var sig: String = plan.sig + ("|%d" % dyes.hash() if not dyes.is_empty() else "")
 	if sig == _wear_sig:
 		return
 	_wear_sig = sig
@@ -212,11 +248,37 @@ func dress(equipment: Equipment) -> void:
 			m.get_parent().remove_child(m)
 			m.queue_free()
 	_wear.clear()
+	var mkey := "%s|%s|%s" % [merge_key, sig, _body_key_sig()]
+	if merge_key != "" and HeroWear._merged.has(mkey):
+		# another wearer of this exact outfit already baked it: share that mesh, build nothing
+		var shared := HeroWear.merge([] as Array[MeshInstance3D], visual.skeleton, mkey)
+		if shared:
+			_wear.append(shared)
+			visual.adopt_mesh(shared)
+			_finish_dress(plan)
+			return
 	for piece in plan.pieces:
+		if not dyes.is_empty():
+			piece["dye"] = layer_dye(dyes, String(piece.get("slot", "")))
 		for m in HeroWear.build(piece, visual.skeleton):
 			visual.adopt_mesh(m)
 			_wear.append(m)
 	_apply_body_keys()
+	if merge_key != "" and _wear.size() > 1:
+		# bh-031: a persona never changes clothes: one baked mesh for the whole outfit (HeroWear.merge)
+		var merged := HeroWear.merge(_wear, visual.skeleton, mkey)
+		if merged:
+			for m in _wear:
+				visual.release_mesh(m)
+				m.get_parent().remove_child(m)
+				m.queue_free()
+			_wear.clear()
+			_wear.append(merged)
+			visual.adopt_mesh(merged)
+	_finish_dress(plan)
+
+## The body's cut-outs under what is worn, and the hair under a helm.
+func _finish_dress(plan: Dictionary) -> void:
 	var hide: Dictionary = plan.hide
 	skin.set_shader_parameter(&"hide_sleeve", hide.get("sleeve", NO_HIDE))
 	skin.set_shader_parameter(&"hide_glove_l", hide.get("glove_l", NO_HIDE))

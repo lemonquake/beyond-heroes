@@ -22,6 +22,9 @@ var _pace_wait := 0.0
 var _home := Vector3.ZERO
 var _emblem: Sprite3D
 var _legend_plate: LegendPlate
+## bh-031: who they are on the hero body (Persona) and what they wear (cutscenes copy both)
+var persona := {}
+var equipment: Equipment
 
 func setup(p_def: NpcDef) -> Npc:
 	def = p_def
@@ -52,8 +55,15 @@ func _ready() -> void:
 		personality = &"mage"
 	elif def.model.ends_with("knight.glb"):
 		personality = &"knight"
-	visual.setup(def.model, def.model_scale, def.tint, personality)
-	visual.set_stance(&"idle")
+	# bh-031: townsfolk are the hero's own body with their own look and clothes (DataPersonas)
+	persona = Persona.for_npc(def)
+	if not persona.is_empty():
+		visual.setup(Persona.MODEL, float(persona.get("size", 1.0)), def.tint, personality)
+		visual.set_stance(&"idle")
+		equipment = Persona.apply(visual, persona)
+	else:
+		visual.setup(def.model, def.model_scale, def.tint, personality)
+		visual.set_stance(&"idle")
 	_arm()
 	_plate = Label3D.new()
 	_plate.text = plate_text()
@@ -67,12 +77,12 @@ func _ready() -> void:
 	_plate.modulate = UITheme.GOLD
 	_plate.no_depth_test = true
 	_plate.render_priority = 8
-	_plate.position.y = 2.25 * def.model_scale
+	_plate.position.y = 2.25 * _size()
 	_plate.visible = false
 	add_child(_plate)
 	if def.legend != &"":
 		# bh-021: a legend's plate burns in their colours (the plain plate stays hidden)
-		_legend_plate = LegendPlate.make(def.legend, 2.35 * def.model_scale)
+		_legend_plate = LegendPlate.make(def.legend, 2.35 * _size())
 		_legend_plate.visible = false
 		add_child(_legend_plate)
 	if def.is_hero():
@@ -236,3 +246,9 @@ func gesture() -> void:
 func end_talk() -> void:
 	talking = false
 	_face_target = null
+
+## How tall the body stands against the 1.8 m hero (name plates sit above it).
+func _size() -> float:
+	if not persona.is_empty():
+		return float(persona.get("size", 1.0)) * float(Persona.look_of(persona).get("height", 1.0))
+	return def.model_scale

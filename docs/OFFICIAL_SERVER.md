@@ -63,6 +63,14 @@ persistent MMO world database.
 
 ## Set up this PC
 
+**To start the configured server on this PC, double-click `Start Official Server.cmd` in the
+project folder.** It confirms the server is online and keeps it running in the background after
+you close the window. Double-click `Stop Official Server.cmd` to stop both services and save a
+final backup. Start can be clicked again safely; it does not launch duplicate managed servers.
+If startup fails, the window stays open with the error and the log folder location.
+
+The commands below are for first-time setup or a foreground PowerShell session:
+
 From the project folder in PowerShell:
 
 ```powershell
@@ -93,6 +101,36 @@ hashes, recovery-code hashes and character database. Share a client game build a
 only the public `.crt` file.
 
 ## Friends on LAN or Radmin VPN
+
+### Desktop controls on this PC
+
+The desktop now contains **Start Beyond Heroes Server**, **Stop Beyond Heroes Server** and
+**Play Beyond Heroes** shortcuts. Start runs both services in the background without a terminal.
+Repeated clicks do not launch duplicate managed servers. Stop shuts down both services and makes
+a final verified backup. It does not close the game editor or unrelated applications. The server
+does not automatically start after rebooting; use the Start shortcut again.
+
+The managed launcher uses `server/data/launcher.pid`, `launcher.lock` and `stop.request` to control
+its own instance. Its logs remain in `server/data/logs`. The equivalent commands are:
+
+```powershell
+python -m server.control start
+python -m server.control status
+python -m server.control stop
+```
+
+Setup checks confirmed the server heartbeat and verified TLS on localhost, the LAN address and
+the Radmin VPN address. These checks were from the host PC; another PC's access still needs a
+friends connectivity test. Windows Firewall was not changed in this session. In an administrator
+PowerShell window, run the prepared restricted rule script yourself:
+
+```powershell
+& 'A:\Python\beyond-heroes\server\allow_friend_connections.ps1'
+```
+
+It allows TCP 8443 for this Python/pythonw installation and UDP 24680 for this Godot executable, only on
+Ethernet/Radmin interfaces from their local subnets. It does not open router ports or change
+Windows Firewall defaults. Friends on other networks should join your Radmin network first.
 
 The generated certificate includes this PC's LAN and VPN IPv4 addresses at setup time. On this PC,
 the addresses detected during setup were:

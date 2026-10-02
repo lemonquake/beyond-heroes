@@ -11,6 +11,7 @@ const MODEL := "res://assets/characters/hero.glb"
 
 ## Sliders: key -> [default, min, max]. The top of many ranges is deliberately silly.
 const SLIDERS := {
+	"female": [0.0, 0.0, 1.0],
 	"height": [1.0, 0.82, 1.18], "head": [1.0, 0.7, 2.2], "hands": [1.0, 0.7, 2.4], "feet": [1.0, 0.7, 2.4],
 	"muscle": [0.0, -1.0, 1.5], "belly": [0.0, -0.6, 2.2], "build": [0.0, -1.0, 2.0], "rear": [0.0, -0.5, 2.5],
 	"nose_size": [0.0, -0.8, 3.0], "nose_long": [0.0, -0.4, 3.5], "nose_wide": [0.0, -0.8, 2.5], "nose_up": [0.0, -1.5, 1.5],
@@ -26,9 +27,10 @@ const SLIDERS := {
 }
 ## The sliders that are shape keys on the body mesh (tools/blender/hero/hero_shapes.py).
 const SHAPE_KEYS := ["nose_size", "nose_long", "nose_wide", "nose_up", "ears_size", "ears_point", "ears_out", "lips_full",
-	"mouth_wide", "mouth_smile", "jaw_wide", "chin_long", "cheeks", "brow_heavy", "eyes_pop", "muscle", "belly", "build", "rear"]
-## The shape keys clothing follows.
-const BODY_KEYS := ["muscle", "belly", "build", "rear"]
+	"mouth_wide", "mouth_smile", "jaw_wide", "chin_long", "cheeks", "brow_heavy", "eyes_pop", "muscle", "belly", "build", "rear", "female"]
+## The shape keys clothing follows. bh-031: "female" is the body fitted from the player's female model
+## (tools/blender/hero/hero_female.py); worn pieces carry it too.
+const BODY_KEYS := ["muscle", "belly", "build", "rear", "female"]
 ## Colours: key -> default hex ("" = follow the hair colour).
 const COLORS := {
 	"skin": "b27e62", "pattern_color": "2a1c16", "underwear": "17171a", "hair_color": "2b1d14", "brow_color": "",
@@ -190,6 +192,7 @@ static func _pick(rng: RandomNumberGenerator, list: Array) -> Variant:
 static func random(rng: RandomNumberGenerator, silly := 0.0) -> Dictionary:
 	var d := defaults()
 	var natural := silly < 0.5
+	var woman := rng.randf() < 0.5
 	d["skin"] = _pick(rng, SKIN_TONES.slice(0, 10) if natural else SKIN_TONES)
 	d["hair_color"] = _pick(rng, HAIR_TONES.slice(0, 12) if natural else HAIR_TONES)
 	d["eye_color"] = _pick(rng, EYE_TONES.slice(0, 8) if natural else EYE_TONES)
@@ -205,7 +208,7 @@ static func random(rng: RandomNumberGenerator, silly := 0.0) -> Dictionary:
 		d["pattern"] = _pick(rng, choice_ids("pattern"))
 		d["pattern_color"] = _pick(rng, HAIR_TONES + MARK_TONES)
 	for k in SLIDERS:
-		if k in ["stubble", "pattern_amount", "pattern_scale", "eye_glow", "lip_amount"]:
+		if k in ["stubble", "pattern_amount", "pattern_scale", "eye_glow", "lip_amount", "female"]:
 			continue
 		var s: Array = SLIDERS[k]
 		# a bell around the default; the wider the sillier
@@ -218,7 +221,25 @@ static func random(rng: RandomNumberGenerator, silly := 0.0) -> Dictionary:
 	if natural:
 		d["hair_length"] = clampf(float(d["hair_length"]), 0.0, 1.2)
 		d["beard_length"] = clampf(float(d["beard_length"]), 0.0, 1.2)
+	if woman:
+		feminize(d, rng)
 	return sanitize(d)
+
+## bh-031: turn a look into a woman's: the female figure, no beard or stubble, finer brows, a little shorter and
+## lighter-built, longer hair more often. Keeps everything else (colours, face sliders, markings).
+static func feminize(d: Dictionary, rng: RandomNumberGenerator = null) -> Dictionary:
+	d["female"] = 1.0
+	d["beard"] = "none"
+	d["stubble"] = 0.0
+	if String(d.get("brow", "natural")) in ["bushy", "single"]:
+		d["brow"] = "arched"
+	d["brow_thick"] = minf(float(d.get("brow_thick", 1.0)), 0.85)
+	d["height"] = float(d.get("height", 1.0)) * 0.95
+	d["build"] = float(d.get("build", 0.0)) - 0.15
+	d["muscle"] = float(d.get("muscle", 0.0)) - 0.2
+	if rng != null and String(d.get("hair", "")) in ["shaved", "bald", "crop", "bowl", "tonsure", "spiky"] and rng.randf() < 0.8:
+		d["hair"] = ["long", "ponytail", "braids", "topknot", "curly", "pigtails", "sidepart"][rng.randi_range(0, 6)]
+	return d
 
 ## The creator's ready-made starting points: [id, label, look overrides].
 const PRESETS := [
@@ -244,6 +265,15 @@ const PRESETS := [
 	["golem", "Stone Golem", {"hair": "bald", "stubble": 0.0, "pattern": "stone", "pattern_color": "1a1a1c", "skin": "8a8a8e",
 		"eye": "glowing", "eye_color": "20c0d0", "brow": "none", "muscle": 1.5, "build": 1.4, "jaw_wide": 1.5,
 		"brow_heavy": 2.0, "hands": 1.7, "height": 1.15}],
+	["shieldmaiden", "Shieldmaiden", {"female": 1.0, "hair": "braids", "hair_color": "b07a3a", "hair_length": 0.8, "stubble": 0.0,
+		"skin": "e8bfa2", "eye": "keen", "eye_color": "3f6fa8", "brow": "straight", "brow_thick": 0.8, "muscle": 0.5,
+		"jaw_wide": 0.1, "height": 0.97, "marking": "freckles", "marking_color": "80523a"}],
+	["huntress", "Huntress", {"female": 1.0, "hair": "ponytail", "hair_color": "2b1d14", "hair_length": 0.6, "stubble": 0.0,
+		"skin": "9b6a4f", "eye": "cat", "eye_color": "5a7a3a", "brow": "arched", "brow_thick": 0.7, "build": -0.4,
+		"height": 0.95, "lips_full": 0.4, "lip_amount": 0.3, "lip_color": "8c3a3a", "cheeks": -0.3}],
+	["matron", "Matron", {"female": 1.0, "hair": "topknot", "hair_color": "8a8a8e", "stubble": 0.0, "skin": "d9a585",
+		"eye": "sleepy", "eye_color": "5b4a3a", "brow": "thin", "belly": 0.6, "build": 0.4, "cheeks": 0.6, "height": 0.92,
+		"mouth_smile": 0.6, "marking": "rosy", "marking_color": "c2605a"}],
 	["jester", "Jester", {"hair": "pigtails", "hair_color": "d14a8a", "stubble": 0.0, "pattern": "halves", "pattern_color": "e8e2d2",
 		"skin": "b5523f", "marking": "painted", "marking_color": "c02a2a", "eye": "round", "eye_size": 1.6, "mouth_smile": 1.8,
 		"mouth_wide": 0.9, "nose_size": 1.4, "underwear": "c89a2a", "lip_amount": 0.8, "lip_color": "b0306a"}],

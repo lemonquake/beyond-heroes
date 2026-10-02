@@ -25,6 +25,8 @@ var _tier_key := ""
 var _guild_icon: TextureRect
 var _rested_label: Label
 var _portrait: TextureRect
+var _crosshair: Control
+var _debug_btn: Button
 var _buffs: HBoxContainer
 var _debuffs: HBoxContainer
 var _boss_box: VBoxContainer
@@ -117,13 +119,27 @@ func _ready() -> void:
 	_apply_mode()
 	# bh-015: a resize, a minimise / restore or a map load lays the HUD out again from its anchors
 	get_viewport().size_changed.connect(_relayout)
+	# bh-030: the first-person crosshair
+	_crosshair = Control.new()
+	_crosshair.set_anchors_preset(Control.PRESET_CENTER)
+	_crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_crosshair.draw.connect(func() -> void:
+		var col := Color(1.0, 0.35, 0.25, 0.95) if Game.hover_target else Color(1.0, 0.95, 0.85, 0.85)
+		for d in [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]:
+			_crosshair.draw_line(d * 6.0, d * 15.0, Color(0, 0, 0, 0.6), 4.0)
+			_crosshair.draw_line(d * 6.0, d * 15.0, col, 2.0)
+		_crosshair.draw_circle(Vector2.ZERO, 2.0, col))
+	add_child(_crosshair)
+	Events.profile_picture_changed.connect(func(peer: int) -> void:
+		if peer == 0 and player and player.hero:
+			_portrait.texture = ProfilePicture.portrait(player.hero))
 	Events.map_loaded.connect(func(_m: StringName) -> void: _relayout.call_deferred())
 
 func bind(p: Node) -> void:
 	player = p as Player
 	if player == null:
 		return
-	_portrait.texture = UIArt.portrait(String(player.hero.cls.id))
+	_portrait.texture = ProfilePicture.portrait(player.hero)
 	_name_label.text = player.hero.hero_name
 	var kind := player.hero.cls.resource_kind
 	var is_bar := kind in [&"valor", &"focus"]     # Valor and Focus are gauges; Arcane Charge and Combo are pips
@@ -158,7 +174,7 @@ func _build_top_left() -> void:
 	_portrait = TextureRect.new()
 	_portrait.custom_minimum_size = Vector2(76, 76)
 	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	pf.add_child(_portrait)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 2)
@@ -172,6 +188,17 @@ func _build_top_left() -> void:
 	_level_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	_level_label.add_theme_constant_override("outline_size", 4)
 	nh.add_child(_level_label)
+	# bh-030: the Debug console's button, once `azrin azrael` unlocked it for this hero
+	_debug_btn = Button.new()
+	_debug_btn.text = "Debug"
+	_debug_btn.theme_type_variation = &"PrimaryButton"
+	_debug_btn.focus_mode = Control.FOCUS_NONE
+	_debug_btn.add_theme_font_size_override("font_size", 18 if Settings.touch_mode else 15)
+	_debug_btn.custom_minimum_size = Vector2(110, 44) if Settings.touch_mode else Vector2(84, 30)
+	_debug_btn.visible = false
+	_debug_btn.pressed.connect(func() -> void: if Game.ui_root: Game.ui_root.toggle(&"debug"))
+	TooltipLayer.attach(_debug_btn, func() -> Control: return Tips.text("Every cheat and many more: item and Tempo summoners, numbers you can set, technical switches. (%s)" % Settings.binding_text(&"debug_console"), "Debug Console"))
+	nh.add_child(_debug_btn)
 	# hero tier identifier (docs/LORE.md §5): emblem + class letter, guild crest; hover for details
 	var th := HBoxContainer.new()
 	th.add_theme_constant_override("separation", 6)
@@ -323,8 +350,8 @@ func _build_bottom() -> void:
 	# centre cluster: HP orb | resource + skill plate | Mana orb
 	var cluster := HBoxContainer.new()
 	cluster.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	cluster.offset_left = -520
-	cluster.offset_right = 520
+	cluster.offset_left = -600
+	cluster.offset_right = 600
 	cluster.offset_top = -214
 	cluster.offset_bottom = -30
 	cluster.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -373,14 +400,20 @@ func _build_bottom() -> void:
 		_skills.append(b)
 	var sep := VSeparator.new()
 	bar.add_child(sep)
-	for pk in [[&"potion_health", &"health_potion", 0], [&"potion_mana", &"mana_potion", 1]]:
-		# the potion belt (bh-011): each key uses whatever the player bound to it; right-click or drop a consumable to change
-		var pb := SkillButton.new(pk[0], 58.0)
-		pb.set_potion(pk[1])
+	for slot in HeroData.BELT_SIZE:
+		# the potion belt (bh-011): each key uses whatever the player bound to it; right-click or drop a consumable to change.
+		# bh-030: after Q and E, the four quick slots (Alt+Q / W / E / R), a little smaller
+		if slot == HeroData.ORB_SLOTS:
+			bar.add_child(VSeparator.new())
+		var pb := SkillButton.new(HeroData.belt_action(slot), 58.0 if slot < HeroData.ORB_SLOTS else 50.0)
+		pb.set_potion(HeroData.belt_default(slot) if slot >= HeroData.ORB_SLOTS else (&"health_potion" if slot == 0 else &"mana_potion"))
 		pb.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		var slot: int = pk[2]
 		pb.set_meta(&"belt_slot", slot)
-		pb.activated.connect(func(_s): if player: player.use_belt(slot))
+		pb.activated.connect(func(b: SkillButton) -> void:
+			if player and player.hero.potion_belt[slot] == &"":
+				BeltPicker.open(b, player.hero, slot)
+			elif player:
+				player.use_belt(slot))
 		pb.context.connect(func(b: SkillButton) -> void: if player: BeltPicker.open(b, player.hero, slot))
 		pb.item_dropped.connect(func(_b: SkillButton, it: ItemInstance) -> void: if player and it: BeltPicker.bind(player.hero, slot, it.base.id))
 		TooltipLayer.attach(pb, func() -> Control: return _belt_tip(slot))
@@ -665,6 +698,10 @@ func _process(delta: float) -> void:
 	if player == null or not is_instance_valid(player) or player.hero == null:
 		return
 	var p := player
+	_debug_btn.visible = p.hero.debug_unlocked
+	_crosshair.visible = p.first_person and not Game.ui_blocking
+	if _crosshair.visible:
+		_crosshair.queue_redraw()
 	p.ensure_stats()
 	_hp_orb.set_value(p.hp, p.max_hp())
 	_mana_orb.set_value(p.mana, p.max_mana())
@@ -728,15 +765,18 @@ func _refresh_slots() -> void:
 		var n: int = bp.count
 		if bp.base != pb.potion_base:
 			pb.set_potion(bp.base)
-		pb.update_state(p.potion_cd, Player.POTION_COOLDOWN, "", n)
+		var heals: bool = bp.auto != &"" or (DB.item_base(bp.base) != null and (DB.item_base(bp.base).consumable_effect.has("heal") or DB.item_base(bp.base).consumable_effect.has("mana")))
+		pb.update_state(p.potion_cd if heals else 0.0, Player.POTION_COOLDOWN, "", n if bp.base != &"" else -1)
 
 ## Belt slot tooltip: what the key uses now and how to change it.
 func _belt_tip(slot: int) -> Control:
 	if player == null or player.hero == null:
 		return null
 	var id: StringName = player.hero.potion_belt[slot]
-	var key := Settings.binding_text(&"potion_health" if slot == 0 else &"potion_mana")
+	var key := BeltPicker.slot_name(slot)
 	var what := HeroData.belt_label(id)
+	if id == &"":
+		return Tips.text("Click or right-click to choose a potion or scroll for this key, or drag one from your bag onto it. The key itself can be changed from the same menu, or in Settings.", "%s: empty" % key)
 	var body := (DB.item_base(id).flavor if DB.item_base(id) else "")
 	if HeroData.belt_is_auto(id):
 		body = "Drinks your strongest %s draught. Restores over 2 seconds; shared cooldown %.1f s." % [

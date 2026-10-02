@@ -29,7 +29,7 @@ var _server_menu: ServerMenu
 var wait_intro := false
 
 const CENTER := Vector3(0, 1.4, 4.0)
-const MENU_LOOKS := {&"knight": "veteran", &"mage": "scholar", &"ranger": "wanderer", &"shadowblade": "shade"}
+const MENU_LOOKS := {&"knight": "veteran", &"mage": "scholar", &"ranger": "huntress", &"shadowblade": "shade"}   # bh-031: the huntress is a woman
 
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -373,7 +373,9 @@ static func slot_card(s: int, on_load: Callable, on_delete: Callable, action_tex
 	var por := TextureRect.new()
 	por.custom_minimum_size = Vector2(72, 72)
 	por.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	por.texture = UIArt.portrait(String(sum.get("class", ""))) if not sum.is_empty() else null
+	por.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	if not sum.is_empty():
+		hero_picture(por, sum.get("hero", {}), String(sum.get("class", "")))
 	h.add_child(por)
 	var v := VBoxContainer.new()
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -451,3 +453,30 @@ func fade_out() -> void:
 	var tw := create_tween()
 	tw.tween_property(_fade, "modulate:a", 1.0, 0.5)
 	await tw.finished
+
+## bh-031: a hero card's picture: their profile picture, else the ID shot of their model (taken now, once, for an
+## older save that has none yet; the class portrait shows meanwhile).
+static var _card_shots := {}
+
+static func hero_picture(por: TextureRect, hero: Dictionary, cls: String) -> void:
+	var t := ProfilePicture.texture_of(ProfilePicture.bytes_of_save(hero))
+	por.texture = t if t else UIArt.portrait(cls)
+	if t != null or not hero.has("progress"):      # a server summary carries no look to shoot
+		return
+	var key := hash([hero.get("look", {}), hero.get("equipment", {})])
+	if _card_shots.has(key):
+		por.texture = _card_shots[key]
+		return
+	_shoot_card(por, hero, key)
+
+static func _shoot_card(por: TextureRect, hero: Dictionary, key: int) -> void:
+	var eq := Equipment.new()
+	eq.from_dict(hero.get("equipment", {}))
+	var lk = hero.get("look", {})
+	var img := await PortraitStudio.render_hero(lk if lk is Dictionary else {}, eq, ProfilePicture.SIZE)
+	if img == null:
+		return
+	var tex := ImageTexture.create_from_image(img)
+	_card_shots[key] = tex
+	if is_instance_valid(por):
+		por.texture = tex

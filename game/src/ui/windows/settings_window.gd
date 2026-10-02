@@ -9,7 +9,7 @@ const ACTION_NAMES := [
 	["move_up", "Move Up"], ["move_down", "Move Down"], ["move_left", "Move Left"], ["move_right", "Move Right"],
 	["primary", "Attack / Interact"], ["secondary", "Heavy Attack"], ["dodge", "Dodge"], ["guard", "Guard / Block"],
 	["skill_1", "Skill 1"], ["skill_2", "Skill 2"], ["skill_3", "Skill 3"], ["skill_4", "Skill 4"], ["skill_5", "Skill 5"],
-	["skill_6", "Skill 6"], ["potion_health", "Potion Belt 1"], ["potion_mana", "Potion Belt 2"], ["interact", "Interact"], ["ping", "Ping (mark a spot)"], ["summon_party", "Team Portal"], ["minimap_zoom_in", "Minimap Zoom In"], ["minimap_zoom_out", "Minimap Zoom Out"],
+	["skill_6", "Skill 6"], ["potion_health", "Potion Belt 1"], ["potion_mana", "Potion Belt 2"], ["quick_1", "Quick Belt 3"], ["quick_2", "Quick Belt 4"], ["quick_3", "Quick Belt 5"], ["quick_4", "Quick Belt 6"], ["view_toggle", "First-Person View"], ["interact", "Interact"], ["ping", "Ping (mark a spot)"], ["summon_party", "Team Portal"], ["minimap_zoom_in", "Minimap Zoom In"], ["minimap_zoom_out", "Minimap Zoom Out"],
 	["attack_in_place", "Attack in Place"], ["inventory", "Inventory"], ["character", "Character"], ["skills", "Skills"],
 	["talents", "Talents"], ["world_map", "World Map"], ["tempos", "Tempos"], ["guild", "Guild"], ["guide", "Field Guide"], ["chat", "Chat"], ["show_loot", "Show Loot Labels"], ["pause", "Pause"],
 ]
@@ -217,11 +217,16 @@ func _gameplay(v: VBoxContainer) -> void:
 	_check(v, "Always Show Loot Labels", "loot_labels_always", "Off: labels appear only while the Show Loot key is held.")
 	v.add_child(section("Interface"))
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)
+	_check(v, "First-Person View", "first_person", "Play from your hero's eyes: the mouse looks around, attacks go to the crosshair. %s switches any time." % Settings.binding_text(&"view_toggle"))
+	_slider(v, "First-Person Field of View", "fp_fov", 60.0, 110.0, 1.0, "%d°", 1.0)
 	_slider(v, "Interface Scale", "ui_scale", 0.75, 1.5, 0.05, "%d%%", 100.0)
 	_check(v, "Minimap", "show_minimap")
 	_option(v, "Minimap Zoom", "minimap_zoom", ["Close (16 m)", "Normal (26 m)", "Wide (42 m)"], "Also: the mouse wheel over the minimap, or the Minimap Zoom keys.")
 
+var _capture_mod := 0
+
 func _begin_capture(action: StringName, b: Button) -> void:
+	_capture_mod = 0
 	_capture_action = action
 	_capture_button = b
 	b.text = "Press a key..."
@@ -234,7 +239,17 @@ func _input(e: InputEvent) -> void:
 		if e.keycode == KEY_ESCAPE:
 			_end_capture()
 			return
+		# bh-030: a modifier on its own waits for the key it is held with (Alt+Q); Shift and Alt still bind alone
+		# when released without another key (see below)
+		if e.keycode in [KEY_ALT, KEY_CTRL, KEY_META] or (e.keycode == KEY_SHIFT and not _capture_action in [&"attack_in_place"]):
+			_capture_mod = e.keycode
+			return
 		_finish_capture(e)
+	elif e is InputEventKey and not e.pressed and _capture_mod != 0 and e.keycode == _capture_mod:
+		get_viewport().set_input_as_handled()
+		var k := InputEventKey.new()
+		k.physical_keycode = e.physical_keycode
+		_finish_capture(k)
 	elif e is InputEventMouseButton and e.pressed:
 		get_viewport().set_input_as_handled()
 		_finish_capture(e)
@@ -247,6 +262,7 @@ func _finish_capture(e: InputEvent) -> void:
 
 func _end_capture() -> void:
 	_capture_action = &""
+	_capture_mod = 0
 	for a in _bind_buttons:
 		var t := Settings.binding_text(a)
 		(_bind_buttons[a] as Button).text = t if t != "" else "Unbound"

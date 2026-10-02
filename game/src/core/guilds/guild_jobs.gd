@@ -59,7 +59,8 @@ static func make_job(hero: HeroData, tpl: Dictionary, rng: RandomNumberGenerator
 	var s := state(hero)
 	s.serial = int(s.serial) + 1
 	var goal := rng.randi_range(int(tpl.goal.x), int(tpl.goal.y))
-	var text := String(tpl.text).replace("{n}", str(goal)).replace("{map}", _map_name(String(tpl.get("map", ""))))
+	var place := String(tpl.place) if tpl.has("place") else _map_name(String(tpl.get("map", "")))
+	var text := String(tpl.text).replace("{n}", str(goal)).replace("{map}", place)
 	var issuer := String(tpl.guild)
 	if issuer == "open":
 		# posted by one of the guilds that set up in the Guild House (or, now and then, by the hero's own guild)
@@ -78,7 +79,20 @@ static func _eligible(hero: HeroData, gid: StringName) -> Array:
 		used[j.tpl] = true
 	var lvl := hero.progress.level
 	var pool := DataGuildJobs.all() if gid == CENTRAL else DataGuildJobs.for_guild(gid)
-	return pool.filter(func(t): return not used.has(String(t.id)) and lvl >= int(t.lvl.x) and lvl <= int(t.lvl.y))
+	var fixed := pool.filter(func(t): return not used.has(String(t.id)) and fits_level(t, lvl))
+	if gid != CENTRAL:
+		return fixed
+	# bh-030: the world's own postings: every reachable dungeon and discovered combat map, so the board never runs dry
+	var dyn := DataGuildJobs.dynamic_for(hero).filter(func(t): return not used.has(String(t.id)))
+	return fixed + dyn
+
+## bh-030: hand-written templates that reached the old level cap stay open to the new one.
+static func fits_level(t: Dictionary, lvl: int) -> bool:
+	var top := int(t.lvl.y)
+	return lvl >= int(t.lvl.x) and (lvl <= top or top >= DataGuildJobs.OPEN_TOP)
+
+## How many of the board's postings are dungeon work (bh-030): a third or more, when any dungeon is open.
+const DUNGEON_SHARE := 0.45
 
 static func board_size(gid: StringName) -> int:
 	return CENTRAL_SIZE if gid == CENTRAL else BOARD_SIZE
@@ -91,7 +105,7 @@ static func refresh_board(hero: HeroData, gid: StringName = CENTRAL) -> Array:
 	var lvl := hero.progress.level
 	for i in range(b.size() - 1, -1, -1):
 		var t := DataGuildJobs.template(String(b[i].tpl))
-		if t.is_empty() or lvl < int(t.lvl.x) or lvl > int(t.lvl.y):
+		if t.is_empty() or not fits_level(t, lvl):
 			b.remove_at(i)
 	var rng := RandomNumberGenerator.new()
 	while b.size() < board_size(gid):
@@ -99,7 +113,18 @@ static func refresh_board(hero: HeroData, gid: StringName = CENTRAL) -> Array:
 		if pool.is_empty():
 			break
 		rng.seed = hash([hero.hero_name, int(state(hero).serial), String(gid)])
-		b.append(make_job(hero, pool[rng.randi() % pool.size()], rng))
+		# bh-030: dungeon work gets a fair share of the board instead of drowning in (or under) the rest
+		var dungeon := pool.filter(func(t): return String(t.kind).begins_with("dungeon_"))
+		var other := pool.filter(func(t): return not String(t.kind).begins_with("dungeon_"))
+		var src := dungeon if (not dungeon.is_empty() and (other.is_empty() or rng.randf() < DUNGEON_SHARE)) else other
+		b.append(make_job(hero, src[rng.randi() % src.size()], rng))
+	return b
+
+## bh-030: take down every posting nobody accepted and pin up fresh ones.
+static func repost(hero: HeroData, gid: StringName = CENTRAL) -> Array:
+	board(hero, gid).clear()
+	var b := refresh_board(hero, gid)
+	Events.guild_jobs_changed.emit()
 	return b
 
 ## "" when the hero may take a posting from `gid`'s board now, otherwise why not. bh-027: every job is open to every
@@ -176,9 +201,12 @@ static func progress(hero: HeroData, kind: String, n := 1, map_id := "") -> Arra
 	for j in active(hero):
 		if String(j.kind) != kind or is_done(j):
 			continue
-		if (kind == "kill_map" or kind == "visit") and String(j.map) != map_id:
+		if DataGuildJobs.PLACE_KINDS.has(kind) and String(j.map) != map_id:
 			continue
-		j.progress = mini(int(j.goal), int(j.progress) + n)
+		if kind == "dungeon_depth":
+			j.progress = mini(int(j.goal), maxi(int(j.progress), n))     # n = the floor reached
+		else:
+			j.progress = mini(int(j.goal), int(j.progress) + n)
 		if is_done(j):
 			finished.append(j)
 			Events.notify.emit("Job done: %s. Hand it in at the Guild House." % j.title, &"info")
@@ -194,6 +222,12 @@ static func on_kill(hero: HeroData, is_elite: bool, map_id: String) -> void:
 	progress(hero, "kill_map", 1, map_id)
 	if is_elite:
 		progress(hero, "kill_elite", 1)
+	# bh-030: inside a dungeon, the dungeon's own postings count too (any floor)
+	var dg: StringName = DataDungeons.parse(StringName(map_id))[0]
+	if dg != &"":
+		progress(hero, "dungeon_kill", 1, String(dg))
+		if is_elite:
+			progress(hero, "dungeon_elite", 1, String(dg))
 
 ## Wire the world events to the active hero's jobs (called once by Game).
 static func connect_events() -> void:
@@ -203,7 +237,23 @@ static func connect_events() -> void:
 	Events.camp_cleared.connect(func(_m: StringName, _z: String, _l: int, _t: int) -> void: progress(Game.hero, "camp", 1))
 	Events.stage_cleared.connect(func(_m: StringName) -> void: progress(Game.hero, "stage", 1))
 	Events.miniboss_defeated.connect(func(_id: StringName) -> void: progress(Game.hero, "miniboss", 1))
-	Events.map_loaded.connect(func(id: StringName) -> void: progress(Game.hero, "visit", 1, String(id)))
+	Events.map_loaded.connect(func(id: StringName) -> void:
+		progress(Game.hero, "visit", 1, String(id))
+		var p := DataDungeons.parse(id)
+		if p[0] != &"":
+			progress(Game.hero, "dungeon_depth", int(p[1]), String(p[0])))
+	# bh-030: dungeon camps and the dungeon's champion, lord or usurper
+	Events.camp_cleared.connect(func(m: StringName, _z: String, _l: int, _t: int) -> void:
+		var p := DataDungeons.parse(m)
+		if p[0] != &"":
+			progress(Game.hero, "dungeon_camp", 1, String(p[0])))
+	Events.actor_died.connect(func(a: Node, _k: Node) -> void:
+		var e := a as Enemy
+		if e == null or not (e.is_boss or e.is_miniboss()):
+			return
+		var p := DataDungeons.parse(Game.current_map_id)
+		if p[0] != &"":
+			progress(Game.hero, "dungeon_boss", 1, String(p[0])))
 
 # ---- saving ----------------------------------------------------------------------------------------------------
 

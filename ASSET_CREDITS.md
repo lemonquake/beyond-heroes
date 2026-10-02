@@ -9,6 +9,8 @@ author supplied in bh-025 (the last audio row below).
 | Tileable PBR textures | `game/assets/textures/` | Beyond Heroes project (procedural, numpy/PIL) | `tools/textures/` | Project-owned | — |
 | Sound effects, ambience and music | `game/assets/audio/` | Beyond Heroes project (synthesised) | `tools/audio/` | Project-owned | — |
 | Recorded themes (7 MP3) and weapon and spell sounds (25 MP3) | `audio/`; in the game as `game/assets/audio/music/*.mp3` and the matching `game/assets/audio/sfx/*.wav` | Supplied by the project author (bh-025) | `audio/` | To be confirmed by the author: origin and licence were not supplied with the files | Sounds cut to length, mixed to mono and levelled by `tools/audio/import_pack.py`; music unchanged |
+| Hero body (`hero.glb`), its female shape key and the worn models | `game/assets/characters/hero.glb`, `game/assets/characters/hero/` | Supplied by the project author as `models/generic_body*` (bh-023) and `models/female_generic.obj` (bh-031) | `tools/blender/hero/` | To be confirmed by the author | Conformed to the shared skeleton; the female scan is fitted onto the hero mesh as a shape key (`hero_female.py`) |
+| NPC ID portraits (PNG) | `game/assets/ui/portraits/npc/` | Beyond Heroes project (rendered from the characters' models) | `tests/tools/bake_portraits.tscn` | Project-owned | — |
 | UI icons and emblem art (SVG) | `game/assets/ui/` | Beyond Heroes project (hand-authored SVG via scripts) | `tools/ui_art/` | Project-owned | — |
 | Fonts | not bundled | System fonts referenced through Godot `SystemFont` (Book Antiqua, Palatino Linotype, Felix Titling, Georgia) | Host OS | Host OS licence | — |
 

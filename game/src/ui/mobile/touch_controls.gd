@@ -65,6 +65,11 @@ func _ready() -> void:
 	var mp := _make(&"potion_mana", 60.0)
 	mp.style = &"badge"
 	mp.hit_scale = 1.0
+	# bh-030: the four quick belt slots, between the orbs
+	for q in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
+		var qb := _make(HeroData.belt_action(q), 34.0)
+		qb.style = &"badge"
+		qb.hit_scale = 1.2
 	var it := _make(&"interact", 56.0)
 	it.icon = UIArt.ui_icon("talk")
 	it.accent = UITheme.GOLD
@@ -260,7 +265,7 @@ func _refresh() -> void:
 	var dmax: float = p.stats.get_stat(&"dodge_cooldown", 1.0) if p.stats else 1.0
 	button(&"dodge").set_state(p.dodge_cd, dmax)
 	button(&"roll").set_state(p.dodge_cd, dmax)
-	for i in HeroData.BELT_SIZE:
+	for i in HeroData.ORB_SLOTS:
 		# the orbs use whatever the potion belt holds (bh-011: any consumable, chosen in the Bag)
 		var pb := button(&"potion_health" if i == 0 else &"potion_mana")
 		var bp := hero.belt_preview(i)
@@ -270,6 +275,14 @@ func _refresh() -> void:
 			pb.set_meta(&"base", best)
 			pb.set_icon(load(base.icon_path()) if ResourceLoader.exists(base.icon_path()) else null)
 		pb.set_state(p.potion_cd, Player.POTION_COOLDOWN, false, int(bp.count))
+	for q in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
+		var qb := button(HeroData.belt_action(q))
+		var qp := hero.belt_preview(q)
+		var qbase := DB.item_base(qp.base)
+		if qb.get_meta(&"base", &"-") != qp.base:
+			qb.set_meta(&"base", qp.base)
+			qb.set_icon(load(qbase.icon_path()) if qbase and ResourceLoader.exists(qbase.icon_path()) else UIArt.ui_icon("plus"))
+		qb.set_state(0.0, 1.0, false, int(qp.count) if qp.base != &"" else -1)
 	_place_potions()
 	var it := button(&"interact")
 	it.visible = _interact_text != ""
@@ -305,6 +318,17 @@ func _place_potions() -> void:
 		b.place(r.get_center() - global_position, rad)
 		b.badge_radius = 30.0 * _k
 		b.badge_offset = Vector2(-rad * 0.72 if i == 0 else rad * 0.72, -rad * 0.72)
+	# the quick slots in a row between the orbs, a little above their centres
+	var r0: Rect2 = rs[0]
+	var r1: Rect2 = rs[1]
+	var mid := (r0.get_center() + r1.get_center()) * 0.5 - global_position
+	# fitted to the gap between the orbs (each orb keeps its own rim clear)
+	var gap := maxf(120.0, r1.position.x - r0.end.x - 12.0 * _k)
+	var step := minf(84.0 * _k, gap / 4.0)
+	var qr := minf(34.0 * _k, step * 0.46)
+	for q in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
+		var off := float(q - HeroData.ORB_SLOTS) - 1.5
+		button(HeroData.belt_action(q)).place(mid + Vector2(off * step, 18.0 * _k), qr)
 
 # ---- Touches ------------------------------------------------------------------------------------------------------
 
@@ -411,6 +435,13 @@ func _press(b: TouchButton, idx: int) -> void:
 				player.request_roll_forward()
 			_tap(&"dodge")
 		&"potion_health", &"potion_mana", &"interact": _tap(b.id)
+		&"quick_1", &"quick_2", &"quick_3", &"quick_4":
+			# an empty slot opens the chooser; a filled one uses it
+			var slot := HeroData.BELT_ACTIONS.find(b.id)
+			if player and player.hero.potion_belt[slot] == &"":
+				BeltPicker.open(b, player.hero, slot)
+			elif player:
+				player.use_belt(slot)
 		_:
 			if String(b.id).begins_with("skill_"):
 				var sid: StringName = b.get_meta(&"skill", &"")

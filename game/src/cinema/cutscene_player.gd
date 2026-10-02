@@ -521,7 +521,12 @@ func g(p: Vector3) -> Vector3:
 func actor(key: StringName, model: String, scale := 1.0, pos := Vector3.ZERO, yaw := 0.0) -> CutsceneActor:
 	var a: CutsceneActor = actors.get(key)
 	if a == null or not is_instance_valid(a):
-		a = CutsceneActor.make(model, scale)
+		var persona := DataPersonas.for_model(model)
+		if not persona.is_empty() and Persona.available():
+			# bh-031: soldiers, sealers and spirits are people too: the hero body in their own look
+			a = CutsceneActor.make_persona(persona, model, scale)
+		else:
+			a = CutsceneActor.make(model, scale)
 		stage().add_child(a)
 		actors[key] = a
 	place(a, pos, yaw)
@@ -531,6 +536,17 @@ func actor(key: StringName, model: String, scale := 1.0, pos := Vector3.ZERO, ya
 func legend(key: StringName, id: StringName, pos := Vector3.ZERO, yaw := 0.0, armed := true) -> CutsceneActor:
 	var L := DataLegends.legend(id)
 	var fresh: bool = not actors.has(key) or not is_instance_valid(actors[key])
+	# bh-031: a legend who is also a townsperson or a humanoid boss looks the way they do in the world
+	var persona := DataPersonas.npc(id)
+	if persona.is_empty() and DB.enemy(id) != null:
+		persona = Persona.for_enemy(DB.enemy(id))
+		if not persona.is_empty():
+			persona = persona.duplicate(true)
+			persona["size"] = float(persona.get("size", 1.0)) * DB.enemy(id).model_scale
+	if fresh and not persona.is_empty() and Persona.available():
+		var pa := CutsceneActor.make_persona(persona, String(L.get("model", id)))
+		stage().add_child(pa)
+		actors[key] = pa
 	var a := actor(key, String(L.get("model", id)), float(L.get("scale", 1.0)), pos, yaw)
 	if fresh and armed and String(L.get("weapon", "")) != "":
 		a.attach(&"main", String(L.weapon))
@@ -553,7 +569,11 @@ func copy(key: StringName, who: Node, pos := Vector3.ZERO, yaw := 0.0) -> Cutsce
 	var a: CutsceneActor = actors.get(key)
 	if fresh:
 		var vis = p.get(&"visual") if p and is_instance_valid(p) else null
-		if vis is CharacterVisual and (vis as CharacterVisual).hero != null:
+		var pp = p.get(&"persona") if p and is_instance_valid(p) else null
+		if pp is Dictionary and not (pp as Dictionary).is_empty() and vis is CharacterVisual and (vis as CharacterVisual).hero != null:
+			# bh-031: a townsperson on the hero body: their look, clothes and colours
+			a = CutsceneActor.make_persona(pp)
+		elif vis is CharacterVisual and (vis as CharacterVisual).hero != null:
 			# bh-029: the hero's body with their look and worn gear, not the bare base model
 			var eq: Equipment = null
 			if p.get(&"hero") is HeroData:

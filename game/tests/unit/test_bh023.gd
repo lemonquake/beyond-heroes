@@ -201,7 +201,7 @@ func test_every_wearable_has_a_worn_model() -> void:
 
 func test_worn_models_fit_the_skeleton_and_the_budget() -> void:
 	var v := _visual()
-	var limits := {&"helm": 1600, &"inner_garment": 5600, &"armor": 7200, &"gloves": 1800, &"boots": 1600, &"accessory": 300}
+	var limits := {&"helm": 1600, &"inner_garment": 5600, &"armor": 8400, &"gloves": 1800, &"boots": 1600, &"accessory": 300}   # bh-031: the refined chest (female bust) adds ~1,100 to plate coats
 	for b: ItemBaseDef in _wearables():
 		if not HeroWear.has_model(String(b.id)):
 			continue

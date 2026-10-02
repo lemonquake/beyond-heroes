@@ -37,8 +37,11 @@ var play_time := 0.0
 ## BELT_AUTO_HEAL / BELT_AUTO_MANA (the strongest draught of that kind the bag holds) or any consumable's base id.
 const BELT_AUTO_HEAL := &"auto_heal"
 const BELT_AUTO_MANA := &"auto_mana"
-const BELT_SIZE := 2
-var potion_belt: Array[StringName] = [BELT_AUTO_HEAL, BELT_AUTO_MANA]
+## bh-030: four more quick-use slots (Alt+Q / W / E / R by default), empty until the player puts something on them.
+const BELT_SIZE := 6
+const ORB_SLOTS := 2
+const BELT_ACTIONS: Array[StringName] = [&"potion_health", &"potion_mana", &"quick_1", &"quick_2", &"quick_3", &"quick_4"]
+var potion_belt: Array[StringName] = [BELT_AUTO_HEAL, BELT_AUTO_MANA, &"", &"", &"", &""]
 var difficulty := 1
 ## Per-NPC memory: npc id -> {"visited": {node_id: true}, "rel": int}. Relationship is reputation-ready (-100..100).
 var dialogue := {}
@@ -89,6 +92,14 @@ var guild_alias := ""
 ## bh-017: the AI allies the `quake team` cheat called (QuakeMate), at most QuakeTeam.MAX; optional in a save.
 var quake_team: Array = []
 var guild_banner := PackedByteArray()
+## bh-030: the `azrin azrael` cheat unlocked the Debug console for this hero (optional in a save).
+var debug_unlocked := false
+## bh-030: the hero's profile picture (a square JPEG, empty = the class portrait). Optional in a save; travels to
+## other players in multiplayer (Net) like a guild banner.
+var profile_pic := PackedByteArray()
+## bh-031: the hero's ID picture, an ID shot of their own model (IdPicture keeps it current). Shown wherever the hero's
+## face is, unless they set a profile picture. Optional in a save.
+var id_pic := PackedByteArray()
 ## bh-027: the guilds of the hero's world (the rolled Guild House guilds and other players' guilds seen in multiplayer,
 ## GuildRegistry), the guild they founded and lead (OwnGuild) and another player's guild they joined (a snapshot).
 var guild_world := {}
@@ -465,6 +476,8 @@ func to_dict() -> Dictionary:
 		"guild_jobs": GuildJobs.to_dict(self),
 		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
 		"guild_alias": guild_alias, "guild_banner": Marshalls.raw_to_base64(guild_banner) if not guild_banner.is_empty() else "",
+		"debug_unlocked": debug_unlocked, "profile_pic": Marshalls.raw_to_base64(profile_pic) if not profile_pic.is_empty() else "",
+		"id_pic": Marshalls.raw_to_base64(id_pic) if not id_pic.is_empty() else "",
 		"guild_world": GuildRegistry.world_to_plain(self), "own_guild": OwnGuild.to_plain(own_guild),
 		"remote_guild": GuildRegistry.remote_to_plain(remote_guild) if not remote_guild.is_empty() else {},
 		"look": HeroLook.to_save(HeroLook.sanitize(look)),
@@ -622,6 +635,9 @@ static func from_dict(d: Dictionary) -> HeroData:
 			if qm != null:
 				h.quake_team.append(qm)
 	h.guild_banner = GuildRules.load_banner_bytes(String(d.get("guild_banner", "")))
+	h.debug_unlocked = bool(d.get("debug_unlocked", false))
+	h.profile_pic = ProfilePicture.load_bytes(String(d.get("profile_pic", "")))
+	h.id_pic = ProfilePicture.load_bytes(String(d.get("id_pic", "")))
 	var lk = d.get("look", {})
 	h.look = HeroLook.to_save(HeroLook.sanitize(lk)) if lk is Dictionary else {}
 	var aura := StringName(d.get("active_aura", ""))
@@ -639,9 +655,14 @@ static func from_dict(d: Dictionary) -> HeroData:
 
 # ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------
 
-## The default binding of a belt slot: slot 0 the strongest health draught, slot 1 the strongest mana draught.
+## The default binding of a belt slot: slot 0 the strongest health draught, slot 1 the strongest mana draught, the
+## quick slots (bh-030) nothing.
 static func belt_default(slot: int) -> StringName:
-	return BELT_AUTO_HEAL if slot == 0 else BELT_AUTO_MANA
+	return BELT_AUTO_HEAL if slot == 0 else (BELT_AUTO_MANA if slot == 1 else &"")
+
+## The input action of a belt slot (Q, E, then the four quick keys).
+static func belt_action(slot: int) -> StringName:
+	return BELT_ACTIONS[clampi(slot, 0, BELT_SIZE - 1)]
 
 static func belt_is_auto(id: StringName) -> bool:
 	return id == BELT_AUTO_HEAL or id == BELT_AUTO_MANA
@@ -660,6 +681,8 @@ func set_belt(slot: int, id: StringName) -> void:
 ## the bag has none, for its picture) and how many uses the bag holds for it.
 func belt_preview(slot: int) -> Dictionary:
 	var id: StringName = potion_belt[slot] if slot >= 0 and slot < BELT_SIZE else &""
+	if id == &"":
+		return {"base": &"", "count": 0, "auto": &""}
 	if belt_is_auto(id):
 		var kind := &"heal" if id == BELT_AUTO_HEAL else &"mana"
 		var n := 0
@@ -676,6 +699,8 @@ func belt_preview(slot: int) -> Dictionary:
 
 ## Plain words for a belt binding ("Strongest health draught", "Frost Flask").
 static func belt_label(id: StringName) -> String:
+	if id == &"":
+		return "Empty"
 	if id == BELT_AUTO_HEAL:
 		return "Strongest health draught"
 	if id == BELT_AUTO_MANA:

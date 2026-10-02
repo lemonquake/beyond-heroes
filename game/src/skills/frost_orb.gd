@@ -14,7 +14,11 @@ var shard_every := 0.09
 var shard_speed := 16.0
 var shard_range := 7.0
 var burst_count := 12
-var on_hit: Callable
+var on_hit: Callable:
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
 var _travelled := 0.0
 var _acc := 0.0
 var _spin := 0.0
@@ -66,8 +70,8 @@ func _shard(d: Vector3) -> void:
 	pr.max_range = shard_range
 	pr.radius = 0.25
 	pr.request.tags[&"projectile"] = true
-	if on_hit.is_valid():
-		pr.on_hit = func(a: Actor, res: DamageResult, _pt: Vector3) -> void: on_hit.call(a, res)
+	if SafeCallable.alive(on_hit, _on_hit_owner):
+		pr.on_hit = func(a: Actor, res: DamageResult, _pt: Vector3) -> void: if SafeCallable.alive(on_hit, _on_hit_owner): on_hit.call(a, res)
 
 func _burst() -> void:
 	set_physics_process(false)

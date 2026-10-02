@@ -17,6 +17,7 @@ func _init() -> void:
 func _ready() -> void:
 	Net.peers_changed.connect(_rebuild)
 	Net.state_changed.connect(_rebuild)
+	Events.profile_picture_changed.connect(func(peer: int) -> void: if peer != 0: _rebuild())
 	_rebuild()
 
 func _others() -> Array:
@@ -76,7 +77,7 @@ func _row(id: int) -> Control:
 	h.add_theme_constant_override("separation", 8)
 	p.add_child(h)
 	var por := TextureRect.new()
-	por.texture = UIArt.portrait(String(info.get("cls", "knight")))
+	por.texture = ProfilePicture.peer_portrait(id, String(info.get("cls", "knight")))
 	por.custom_minimum_size = Vector2(44, 44)
 	por.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	por.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

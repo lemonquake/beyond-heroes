@@ -41,6 +41,31 @@ var _hold_wait := 0.0
 func _init() -> void:
 	super._init("Character", Vector2(1560, 900))
 
+var _pic: TextureRect
+var _pic_clear: Button
+var _pic_dialog: FileDialog
+
+## bh-030: choose a picture file (any PNG, JPG, WebP, BMP or TGA; dropping a file on the window works too).
+func _pick_picture() -> void:
+	if _pic_dialog == null:
+		_pic_dialog = FileDialog.new()
+		_pic_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		_pic_dialog.access = FileDialog.ACCESS_FILESYSTEM
+		_pic_dialog.use_native_dialog = true
+		_pic_dialog.title = "Choose a profile picture"
+		_pic_dialog.filters = PackedStringArray(GuildCustomWindow.PICTURE_FILTERS)
+		_pic_dialog.file_selected.connect(_on_picture_picked)
+		add_child(_pic_dialog)
+	_pic_dialog.popup_centered_ratio(0.7)
+
+func _on_picture_picked(path: String) -> void:
+	if hero == null:
+		return
+	var img := GuildCustomWindow.load_picture(path)
+	var err := ProfilePicture.set_picture(hero, img) if img != null else "That file could not be read as a picture."
+	Events.notify.emit(err if err != "" else "Profile picture updated.", &"error" if err != "" else &"info")
+	refresh()
+
 func _build() -> void:
 	var row := hbox(22)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -65,12 +90,38 @@ func _build() -> void:
 	_xp_text = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.number_font())
 	_xp_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	left.add_child(_xp_text)
-	# bh-023: the hero's look can be changed at any time
-	var restyle := button("Change Look", func() -> void: Game.ui_root.open_creator(), &"", 220.0)
-	restyle.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	# bh-023: the hero's look can be changed at any time; bh-030: and their profile picture
+	var prow := hbox(10)
+	prow.alignment = BoxContainer.ALIGNMENT_CENTER
+	left.add_child(prow)
+	var pframe := PanelContainer.new()
+	pframe.theme_type_variation = &"GlassPanel"
+	prow.add_child(pframe)
+	_pic = TextureRect.new()
+	_pic.custom_minimum_size = Vector2(64, 64)
+	_pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	pframe.add_child(_pic)
+	TooltipLayer.attach(pframe, func() -> Control: return Tips.text("Your profile picture: on your HUD, and in multiplayer on every player's party frames and menus.", "Profile Picture"))
+	var pbtns := vbox(4)
+	prow.add_child(pbtns)
+	var restyle := button("Change Look", func() -> void: Game.ui_root.open_creator(), &"", 200.0)
 	TooltipLayer.attach(restyle, func() -> Control: return Tips.text(
 		"Reshape your hero: face, hair, skin, build and more. It costs nothing and changes no statistics.", "Change Look"))
-	left.add_child(restyle)
+	pbtns.add_child(restyle)
+	var ph := hbox(4)
+	pbtns.add_child(ph)
+	ph.add_child(button("Picture...", _pick_picture, &"", 120.0))
+	_pic_clear = button("Remove", func() -> void:
+		ProfilePicture.clear(hero)
+		refresh(), &"", 76.0)
+	ph.add_child(_pic_clear)
+	Events.profile_picture_changed.connect(func(peer: int) -> void: if peer == 0 and visible: refresh())
+	var win := get_window()
+	if win:
+		win.files_dropped.connect(func(files: PackedStringArray) -> void:
+			if visible and not files.is_empty():
+				_on_picture_picked(files[0]))
 	# hero tier and guild (docs/LORE.md §5)
 	var tr := hbox(10)
 	tr.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -269,6 +320,8 @@ func refresh() -> void:
 	if not hero.stats_dirty.is_connected(_on_dirty):
 		hero.stats_dirty.connect(_on_dirty)
 	preview.show_class(hero.cls.id, hero)
+	_pic.texture = ProfilePicture.portrait(hero)
+	_pic_clear.disabled = hero.profile_pic.is_empty()
 	_class_label.text = "%s — %s" % [hero.hero_name, hero.cls.display_name]
 	_level_label.text = "Level %d" % hero.progress.level
 	var need := XpCurve.xp_to_next(hero.progress.level)

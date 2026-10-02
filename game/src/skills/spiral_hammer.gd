@@ -12,7 +12,11 @@ var turn_rate := 5.2                 # rad/s
 var growth := 1.9                    # radius grows this many metres per second
 var start_radius := 0.8
 var hit_radius := 1.0
-var on_hit: Callable
+var on_hit: Callable:
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
 var _center := Vector3.ZERO
 var _t := 0.0
 var _last_hit := {}
@@ -91,6 +95,6 @@ func _physics_process(delta: float) -> void:
 		r.tags[&"push_dir"] = (a.global_position - _center).slide(Vector3.UP).normalized()
 		var res := a.receive_hit(r, src, a.center())
 		FX.spawn(VFXLib.impact_flash(Color(1.0, 0.9, 0.55), 0.9, 0.14, 6), a.center())
-		if on_hit.is_valid():
+		if SafeCallable.alive(on_hit, _on_hit_owner):
 			on_hit.call(a, res)
 		Audio.play_at(&"holy_strike", a.global_position, -6.0)

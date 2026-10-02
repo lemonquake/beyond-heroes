@@ -15,7 +15,11 @@ var reach := 14.0                     # turret: target range; blades: damage rad
 var element := Elements.FIRE
 var look := "orb"
 var speed := 22.0
-var on_hit: Callable
+var on_hit: Callable:
+	set(v):
+		on_hit = v
+		_on_hit_owner = SafeCallable.owner_of(v)
+var _on_hit_owner := 0
 var _t := 0.0
 var _acc := 0.0
 var _spin: Node3D
@@ -140,8 +144,8 @@ func _shoot() -> void:
 	var pr := Projectile.spawn(get_parent(), from, dir.normalized(), speed, request.clone(), source if is_instance_valid(source) else null, mask, element, look)
 	pr.max_range = reach + 3.0
 	pr.radius = 0.3
-	if on_hit.is_valid():
-		pr.on_hit = func(a: Actor, res: DamageResult, _pt: Vector3) -> void: on_hit.call(a, res)
+	if SafeCallable.alive(on_hit, _on_hit_owner):
+		pr.on_hit = func(a: Actor, res: DamageResult, _pt: Vector3) -> void: if SafeCallable.alive(on_hit, _on_hit_owner): on_hit.call(a, res)
 	Audio.play_at(&"cast_fire" if element == Elements.FIRE else &"swing_light", from, -8.0)
 
 func _cut() -> void:
@@ -154,6 +158,6 @@ func _cut() -> void:
 		r.tags[&"aoe"] = true
 		r.tags[&"push_dir"] = (a.global_position - global_position).slide(Vector3.UP).normalized()
 		var res := a.receive_hit(r, src, a.center())
-		if on_hit.is_valid():
+		if SafeCallable.alive(on_hit, _on_hit_owner):
 			on_hit.call(a, res)
 	Audio.play_at(&"swing_light", global_position, -10.0)

@@ -162,6 +162,12 @@ func receive_hit(req: DamageRequest, attacker: Node = null, hit_point := Vector3
 	if attacker is Player:
 		attacker.class_passives.before_hit(req)
 	var result := DamagePipeline.compute(req, rng)
+	# bh-030: the Debug console's damage switches (the hero against monsters only)
+	if attacker is Player and team == BH.Team.ENEMY and not result.evaded:
+		if Game.debug_one_hit:
+			result.total = maxi(result.total, ceili(hp + shield_hp) + 1)
+		elif Game.debug_damage_mult != 1.0:
+			result.total = maxi(0, roundi(float(result.total) * Game.debug_damage_mult))
 	if enemy_retaliation and result.total > 0:
 		_enemy_retaliation_cd = ENEMY_RETALIATION_COOLDOWN
 	if attacker != null:

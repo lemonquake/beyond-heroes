@@ -24,7 +24,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-PROTOCOL = 15
+PROTOCOL = 16
 SAVE_VERSION = 4
 MAX_PLAYERS = 12
 MAX_BODY = 2 * 1024 * 1024
@@ -59,6 +59,16 @@ def integer(value, low, high, label):
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or int(value) != value or not low <= value <= high:
         raise ApiError(400, f"Invalid {label}.", "invalid_data")
     return int(value)
+
+
+def _card_picture(hero):
+    """bh-031: the picture a character card shows: the profile picture, else the ID shot of the hero's model (base64
+    JPEG strings the game wrote; anything else is dropped)."""
+    for key in ("profile_pic", "id_pic"):
+        pic = hero.get(key)
+        if isinstance(pic, str) and 0 < len(pic) <= 320000:
+            return pic
+    return ""
 
 
 def validate_save(data):
@@ -261,7 +271,9 @@ class Store:
         hero = json.loads(row["data"])["hero"]
         return {"id": row["id"], "slot": row["slot"], "name": hero["name"], "class": hero["class"],
                 "level": hero["progress"].get("level", 1), "map": hero.get("map", "sanctuary"),
-                "saved_at": row["saved"], "revision": row["revision"], "imported": bool(row["imported"])}
+                "saved_at": row["saved"], "revision": row["revision"], "imported": bool(row["imported"]),
+                # bh-031: the character card's picture (profile picture, else the ID shot of their model)
+                "pic": _card_picture(hero)}
 
     def handle(self, method, path, body=None, *, token="", ip="127.0.0.1", internal=False):
         body = {} if body is None else body
