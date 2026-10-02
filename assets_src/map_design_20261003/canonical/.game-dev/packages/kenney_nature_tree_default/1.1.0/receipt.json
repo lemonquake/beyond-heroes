@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:16.495Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_default",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "aa35b227bb94dda437b7d7e30ebbcca145372e87a3baa38806c8624d1b96e178",
+  "packageId": "pkg_4a076b6777155ec87a1cedcf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 9428,
+    "fileName": "tree_default.glb",
+    "sha256": "562d29638c902de3c7bee465d3a53bb77117efbc392ae04ed894faf6b5dc691d"
+  }
+}

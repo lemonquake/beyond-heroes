@@ -1,4 +1,6 @@
-# Public client endpoint. Do not bundle the loopback private key or server key.
+# Public client endpoint, written for you by `python -m server.setup_server --public-host ...` as <data dir>/official.cfg.
+# Copy it to game/server/official.cfg before exporting the client. Normal certificate trust: `certificate` stays empty.
+# Never put the loopback certificate, its key or the internal server key in a client build.
 [server]
 url="https://game.example.com"
 certificate=""

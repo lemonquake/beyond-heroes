@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_9ab762ce-7f0f-4da9-8685-d40a60a4665f",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_gravestone_broken\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:44.633Z",
+  "updatedAt": "2026-10-02T21:12:44.683Z",
+  "startedAt": "2026-10-02T21:12:44.639Z",
+  "completedAt": "2026-10-02T21:12:44.683Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-126285ae-bd2e-4c96-b0de-46a406ea1ece' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_gravestone_broken\r'",
+    "retryable": false
+  }
+}

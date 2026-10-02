@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d8aa16f4-6727-495c-8fb1-dc823b919a0b",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:28.354Z",
+  "updatedAt": "2026-10-02T21:12:28.388Z",
+  "startedAt": "2026-10-02T21:12:28.360Z",
+  "completedAt": "2026-10-02T21:12:28.388Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_d8aa16f4-6727-495c-8fb1-dc823b919a0b\\receipt.json"
+}

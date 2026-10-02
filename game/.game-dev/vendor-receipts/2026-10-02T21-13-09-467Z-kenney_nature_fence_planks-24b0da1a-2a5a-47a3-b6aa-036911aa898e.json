@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_ea2add7e500306c4c47de686",
+  "assetId": "kenney_nature_fence_planks",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_fence_planks",
+  "modelSha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9",
+  "manifestSha256": "95e47b88a0e0bd0934124600bb24832672a5ecf9986f700cfff0de2f23ad4c45",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:09.467Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_planks\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

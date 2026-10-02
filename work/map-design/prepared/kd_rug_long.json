@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_furniture_rugrectangle",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_rug_long.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0",
+ "source_sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+ "derived_sha256": "b5ba2aa342b664f04f4d64ccc923f0269638a9893569d006e64b9b0773c68b31",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_ClothRed",
+  "BH_ClothOchre"
+ ],
+ "part_faces": {
+  "BH_ClothRed": 20,
+  "BH_ClothOchre": 8
+ },
+ "source_to_material": {
+  "carpet": "BH_ClothRed",
+  "carpetDarker": "BH_ClothOchre"
+ },
+ "triangles": 28,
+ "surfaces": 2,
+ "source_triangles": 28,
+ "source_meshes": 1,
+ "bounds_m": [
+  3.14,
+  0.02,
+  1.84
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

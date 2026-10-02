@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_armory_cheats.gd — 4 tests, 152 checks, 0 failures (6.8 ms)
+[PASS] test_artisan_weapons.gd — 1 tests, 305 checks, 0 failures (773.1 ms)
+[PASS] test_auto_loot_filters.gd — 4 tests, 30 checks, 0 failures (8.2 ms)
+BALANCE L1 knight      single     7.5  aoe    17.5  ehp    2376  power    558.4
+BALANCE L1 mage        single    16.7  aoe    24.9  ehp     690  power    535.7

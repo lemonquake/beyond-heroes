@@ -48,7 +48,7 @@ func _hero(cls := &"knight", level := 1) -> HeroData:
 
 # ---- 25 levels ----------------------------------------------------------------------------------------------------
 
-func test_every_node_reaches_level_25() -> void:
+func test_main_nodes_reach_25_and_side_nodes_have_limits() -> void:
 	var nodes := 0
 	for id in [&"knight_skills", &"mage_skills", &"ranger_skills", &"shadowblade_skills", &"knight_talents", &"mage_talents", &"ranger_talents", &"shadowblade_talents"]:
 		var t := DB.tree(id)
@@ -57,7 +57,12 @@ func test_every_node_reaches_level_25() -> void:
 			continue
 		for n in t.nodes:
 			nodes += 1
-			eq(int(n.max_rank), 25, "%s.%s tops out at level 25" % [id, n.id])
+			var cap := 25
+			if n.kind == "upgrade":
+				cap = 1 if int(n.base_rank) <= 1 else 4
+			elif n.kind in ["major", "keystone"]:
+				cap = 1
+			eq(int(n.max_rank), cap, "%s.%s tops out at level %d" % [id, n.id, cap])
 			ok(int(n.base_rank) >= 1 and int(n.base_rank) <= TreeDef.LEVEL_MAX, "%s.%s has a valid authored cap (%s)" % [id, n.id, n.base_rank])
 	ok(nodes > 150, "%d skill and talent nodes checked" % nodes)
 	done()

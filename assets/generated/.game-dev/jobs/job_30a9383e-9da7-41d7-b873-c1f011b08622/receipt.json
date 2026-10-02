@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_crate_bottles\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_pirate_crate_bottles",
+      "category": "environment_prop",
+      "description": "Crate holding bottles. Intended use: Tavern stock and merchant delivery scene",
+      "displayName": "kenney_pirate_crate_bottles",
+      "files": [
+        {
+          "bytes": 68704,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "3f856e1a9bb78ae9cf69c5d3ed57a4367e4e0856623d275dd99bae23e80886c1"
+        },
+        {
+          "bytes": 1738,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "3fab6ad23f4b40bc857aa5bf35ca2de9a704f4831b665e95aceefa1bbc674926"
+        },
+        {
+          "bytes": 1086,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "010d9b5498059bbbb5713517bede273d8fa63b4c412a13f8623bf64845f636e4"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "b9c729c52b2bc578352c7c4e1114adef910ba7b1aad9a38d110d2c405d69b086"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f871655e6c6f9f333f10b4bf",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:23.921Z"
+}

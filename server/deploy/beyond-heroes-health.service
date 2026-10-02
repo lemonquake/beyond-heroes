@@ -1,0 +1,17 @@
+[Unit]
+Description=Beyond Heroes health check (public URL, certificate, protocol, coordinator heartbeat)
+
+[Service]
+Type=oneshot
+User=beyond-heroes
+Group=beyond-heroes
+EnvironmentFile=/etc/beyond-heroes/build.env
+WorkingDirectory=/opt/beyond-heroes/current
+# BH_PUBLIC_URL (https://your.host) and BH_PROTOCOL are written by install.sh into build.env. A non-zero exit marks this unit
+# failed, which `systemctl --failed` and any monitoring that watches units will show. Exit 2 is a warning (certificate soon).
+ExecStart=/opt/beyond-heroes/current/.venv/bin/python -m server.healthcheck --url ${BH_PUBLIC_URL} --expect-protocol ${BH_PROTOCOL}
+SuccessExitStatus=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true

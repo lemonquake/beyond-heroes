@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:50.890Z",
+  "destination": {
+    "assetId": "kenney_graveyard_gravestone_broken",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "0257ee29207105848b6535b5cad3fc484651515df3a82ba9c4cfac254117012c",
+  "packageId": "pkg_bc04f257f96bb78629daf760",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 23944,
+    "fileName": "kenney_graveyard_gravestone_broken.glb",
+    "sha256": "c8650f83629f12c4b177a7b6b63e62fd5646c276767d9df0b16398403dd7b6e5"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:52.066Z",
+  "destination": {
+    "assetId": "kenney_nature_crop_carrot",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "e0c27646cd176b0ed305a808b9ab123270201c4f4ecfbabf7fbb3eb6ef9b9ea5",
+  "packageId": "pkg_53d1901568252e5ad2c873ae",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 12664,
+    "fileName": "crop_carrot.glb",
+    "sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8"
+  }
+}

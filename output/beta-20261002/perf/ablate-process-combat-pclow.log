@@ -1,0 +1,72 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+APROC all_on 43.53 ms (56 groups)
+APROC  30.05 ms  script:debug_window.gd                   x1
+APROC  29.78 ms  script:dialogue_box.gd                   x1
+APROC  29.41 ms  script:tooltip_layer.gd                  x1
+APROC  29.09 ms  script:guild_window.gd                   x1
+APROC  28.93 ms  script:multiplayer_window.gd             x1
+APROC  28.73 ms  script:gacha_reveal_window.gd            x1
+APROC  28.09 ms  script:tempo_window.gd                   x1
+APROC  28.00 ms  script:tempo_caller_window.gd            x1
+APROC  27.84 ms  script:atlas_view.gd                     x1
+APROC  27.70 ms  script:shop_window.gd                    x1
+APROC  27.08 ms  script:minimap.gd                        x1
+APROC  26.92 ms  script:tree_view.gd                      x2
+APROC  26.15 ms  script:character_window.gd               x1
+APROC  25.18 ms  script:character_preview.gd              x3
+APROC  24.81 ms  script:touch_controls.gd                 x1
+APROC  24.50 ms  script:touch_button.gd                   x25
+APROC  23.58 ms  script:chat_box.gd                       x1
+APROC  21.83 ms  script:party_frames.gd                   x1
+APROC  21.27 ms  script:enemy.gd                          x102
+APROC  16.56 ms  script:tempo_frames.gd                   x1
+APROC  15.20 ms  script:skill_button.gd                   x18
+APROC  14.54 ms  script:orb.gd                            x2
+APROC  14.35 ms  script:stage_tracker.gd                  x1
+APROC  13.45 ms  script:directions_panel.gd               x1
+APROC  10.49 ms  script:art_bar.gd                        x9
+APROC  10.11 ms  script:lob.gd                            x1
+APROC   8.98 ms  script:ui_root.gd                        x1
+APROC   8.20 ms  script:tempo_bar.gd                      x1
+APROC   7.78 ms  script:projectile.gd                     x1
+APROC   6.81 ms  script:routes.gd                         x1
+APROC   3.30 ms  script:hud.gd                            x1
+APROC   3.02 ms  internal:Timer                           x9
+APROC   1.99 ms  internal:AudioStreamPlayer3D             x29
+APROC   1.23 ms  internal:AnimationTree                   x46
+APROC   0.77 ms  internal:AudioStreamPlayer               x2
+APROC   0.39 ms  script:dev_tools.gd                      x1
+APROC   0.34 ms  script:loot_labels.gd                    x1
+APROC  -1.30 ms  script:net.gd                            x1
+APROC  -1.60 ms  script:official_service.gd               x1
+APROC  -2.07 ms  script:enemy_bar.gd                      x102
+APROC  -2.10 ms  script:fx.gd                             x1
+APROC  -2.45 ms  internal:GPUParticles3D                  x150
+APROC  -2.58 ms  script:perf.gd                           x1
+APROC  -2.74 ms  script:                                  x2
+APROC  -3.12 ms  script:game.gd                           x1
+APROC  -3.17 ms  script:player.gd                         x1
+APROC  -4.21 ms  script:combat_director.gd                x1
+APROC  -4.38 ms  script:tempo.gd                          x1
+APROC  -4.91 ms  script:flicker_light.gd                  x25
+APROC  -5.04 ms  script:sign_labels.gd                    x5
+APROC  -5.76 ms  internal:NavigationAgent3D               x103
+APROC  -6.59 ms  script:music_director.gd                 x1
+APROC -13.24 ms  internal:Skeleton3D                      x104
+APROC -14.33 ms  script:gather_node.gd                    x5
+APROC -15.68 ms  script:player_camera.gd                  x1
+APROC -31.05 ms  script:character_visual.gd               x72
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 312 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+exit=0

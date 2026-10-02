@@ -29,6 +29,8 @@ func _ready() -> void:
 	Settings.apply()
 	var vp := get_viewport().get_viewport_rid()
 	RenderingServer.viewport_set_measure_render_time(vp, true)
+	if args.has("max_steps"):               # experiment: how many physics steps a slow frame may catch up with
+		Engine.max_physics_steps_per_frame = int(args.max_steps)
 	await _wait(90)
 	var map: MapRoot = Game.current_map
 	if args.has("ablate_hud"):
@@ -36,6 +38,62 @@ func _ready() -> void:
 		await _wait(60)
 		var hud: Node = Game.ui_root.find_children("*", "HUD", true, false)[0] if not Game.ui_root.find_children("*", "HUD", true, false).is_empty() else null
 		print("ABLATE all_on %.2f ms" % await _median())
+		if args.has("minimap_parts"):       # what inside the minimap costs: its icon layers, its map render, its update script
+			var mm: MiniMap = Game.ui_root.find_children("*", "MiniMap", true, false)[0]
+			mm._markers.visible = false
+			(mm._markers.get_meta(&"over") as Control).visible = false
+			await _wait(10)
+			print("ABLATE minimap icons hidden %.2f ms" % await _median())
+			mm._vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
+			mm.set_process(false)
+			await _wait(10)
+			print("ABLATE minimap script off too %.2f ms" % await _median())
+			mm.set_process(true)
+			mm._update_t = 1.0e9      # no more re-renders from the script either
+			await _wait(10)
+			print("ABLATE minimap script on, map render never refreshed %.2f ms" % await _median())
+			if ResourceLoader.exists("res://src/ui/hud/minimap_prof_x.gd"):
+				var prof2 = load("res://src/ui/hud/minimap_prof_x.gd")
+				prof2.us.clear()
+				mm.set_process(true)
+				await _wait(120)
+				print("MMPROF per frame (ms): ", prof2.us.keys().map(func(k): return "%s=%.2f" % [k, float(prof2.us[k]) / 120000.0]))
+			mm.set_process(true)
+			mm._update_t = 1.0e9
+			var pend := 0
+			var worlds_differ := 0
+			for f in 120:
+				await get_tree().process_frame
+				if mm._vp.render_target_update_mode == SubViewport.UPDATE_ONCE:
+					pend += 1
+				if mm._vp.world_3d != (Game.player as Node3D).get_world_3d():
+					worlds_differ += 1
+			print("MMDIAG pending-render frames %d/120, vp world differs from hero world on %d/120" % [pend, worlds_differ])
+			for part in ["_view", "_frame", "_btn_in", "_btn_out", "_map_label", "_sub_label"]:
+				(mm.get(part) as CanvasItem).visible = false
+				await _wait(10)
+				print("ABLATE (script on) hide %s -> %.2f ms" % [part, await _median()])
+			mm.set_process(false)
+			var t0 := Time.get_ticks_usec()
+			for i in 100:
+				mm._quest.update(0.016)
+			var t1 := Time.get_ticks_usec()
+			for i in 20:
+				mm._collect_pois()
+			var t2 := Time.get_ticks_usec()
+			var def: MapDef = Game.current_map.def
+			for i in 20:
+				mm._sub_text(def)
+			var t3 := Time.get_ticks_usec()
+			print("MINIMAP parts: quest.update %.3f ms/call, collect_pois %.3f ms/call, sub_text %.3f ms/call" % [(t1 - t0) / 100000.0, (t2 - t1) / 20000.0, (t3 - t2) / 20000.0])
+			mm.visible = false
+			await _wait(10)
+			print("ABLATE minimap hidden %.2f ms" % await _median())
+			if ResourceLoader.exists("res://src/ui/hud/minimap_prof_x.gd"):
+				var prof = load("res://src/ui/hud/minimap_prof_x.gd")
+				print("MMPROF ", prof.us)
+			get_tree().quit()
+			return
 		var roots := [(Game.ui_root.find_children("*", "Hud", true, false) + [Game.ui_root])[0]]
 		if args.has("hud_under"):     # descend into the subtree holding this script (e.g. minimap.gd)
 			for d in Game.ui_root.find_children("*", "", true, false):
@@ -255,6 +313,33 @@ func _stress(map: MapRoot) -> void:
 			pbs.free()
 			nfree += 1
 		print("freed %d PhysicalBoneSimulator3D" % nfree)
+	if args.has("no_anim"):                 # experiment: every monster's AnimationTree off (what animation costs the crowd)
+		var off := 0
+		for t in get_tree().root.find_children("*", "AnimationTree", true, false):
+			if t.get_parent() and t.owner != Game.player:
+				t.active = false
+				off += 1
+		print("animation trees switched off: ", off)
+	match String(args.get("freeze", "")):  # experiments: take one whole subsystem out of the loop and read the frame
+		"physics":
+			PhysicsServer3D.set_active(false)
+		"nav":
+			NavigationServer3D.set_active(false)
+		"enemies":
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				e.set_physics_process(false)
+		"hide":
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				e.visible = false
+		"enemies_hide":
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				e.set_physics_process(false)
+				e.visible = false
+	if args.has("no_bars"):                 # experiment: monster health bars hidden
+		for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+			if e.bar:
+				e.bar.visible = false
+				e.bar.set_process(false)
 	if args.has("no_enemy_collide"):
 		for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
 			e.collision_mask &= ~BH.LAYER_ENEMY
@@ -283,6 +368,9 @@ func _stress(map: MapRoot) -> void:
 		ks.sort_custom(func(a, b): return cls[a] > cls[b])
 		for k in ks:
 			print("CENSUS %5d %s" % [cls[k], k])
+		return
+	if args.has("enemy_cost"):
+		await _enemy_cost()
 		return
 	if args.has("ablate_process"):
 		await _ablate_process()
@@ -333,12 +421,54 @@ func _stress(map: MapRoot) -> void:
 	var report := {"map": String(Game.current_map_id), "renderer": RenderingServer.get_current_rendering_method(),
 		"lite": Settings.lite, "stress": n, "engaged_at_end": engaged, "window": [DisplayServer.window_get_size().x, DisplayServer.window_get_size().y],
 		"total": _summary(rows)}
+	# frame time over the run (median of each 30-frame bucket): shows whether the cost is a spike at the start of a brawl or steady
+	var timeline := []
+	for b in range(0, rows.size() - 29, 30):
+		var vals: Array[float] = []
+		for r in range(b, b + 30):
+			vals.append(float(rows[r].frame))
+		vals.sort()
+		timeline.append(snappedf(vals[15], 0.1))
+	report["timeline_ms"] = timeline
+	if ResourceLoader.exists("res://src/actors/enemy/enemy_prof_x.gd"):    # temporary section timer, only present while investigating
+		var prof = load("res://src/actors/enemy/enemy_prof_x.gd")
+		var parts := []
+		for k in prof.us:
+			parts.append("%s=%.1fms/frame" % [k, float(prof.us[k]) / 1000.0 / maxf(1.0, float(rows.size()))])
+		print("EPROF ", ", ".join(parts))
+	report["enemies_in_map"] = get_tree().get_nodes_in_group(&"enemy").size()
 	print("STRESS ", JSON.stringify(report.total.frame), " gpu=", JSON.stringify(report.total.gpu), " process=", JSON.stringify(report.total.script),
 		" physics=", JSON.stringify(report.total.physics), " nav=", JSON.stringify(report.total.nav), " engaged=", engaged, " map=", report.map, " lite=", report.lite)
 	if args.has("out"):
 		var fo := FileAccess.open(String(args.out), FileAccess.WRITE)
 		fo.store_string(JSON.stringify(report, "  "))
 		fo.close()
+
+## Script cost of the live enemies, measured by calling their per-frame callbacks by hand (the engine's own physics step and
+## rendering are not in these numbers). Switching callbacks off in turn and watching the frame (_ablate_process) drifts by tens of
+## milliseconds during a brawl, so it cannot rank small costs; this can. Prints milliseconds per frame for the whole crowd.
+func _enemy_cost() -> void:
+	var es: Array = get_tree().get_nodes_in_group(&"enemy").filter(func(e): return e is Enemy and e.alive)
+	for e: Enemy in es:
+		e.set_physics_process(false)
+		e.set_process(false)
+	await _wait(10)
+	var n := 120
+	var dt := 1.0 / 60.0
+	var phys_ms: Array[float] = []
+	for i in n:
+		var t0 := Time.get_ticks_usec()
+		for e: Enemy in es:
+			if is_instance_valid(e) and e.alive:
+				e._physics_process(dt)
+		var t1 := Time.get_ticks_usec()
+		phys_ms.append((t1 - t0) / 1000.0)
+		await get_tree().physics_frame
+	phys_ms.sort()
+	print("ENEMYCOST enemies=%d physics_process median %.2f ms p95 %.2f ms (%.0f us per enemy)" % [
+		es.size(), phys_ms[n / 2], phys_ms[int(n * 0.95)], phys_ms[n / 2] * 1000.0 / es.size()])
+	var ticks := Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0
+	print("ENEMYCOST engine physics step with enemies idle: %.2f ms; objects=%d bodies=%d active=%d" % [ticks, Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.PHYSICS_3D_COLLISION_PAIRS), Performance.get_monitor(Performance.PHYSICS_3D_ACTIVE_OBJECTS)])
 
 ## Per-script attribution (bh-014): for each script (or engine class with internal processing), switch its per-frame
 ## callbacks off, take the median frame, switch them back on. The drop is that group's share of the frame.

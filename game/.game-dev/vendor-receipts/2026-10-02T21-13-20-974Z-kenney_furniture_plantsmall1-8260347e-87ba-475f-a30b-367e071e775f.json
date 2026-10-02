@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_0cf747014c9aa9e88182ef07",
+  "assetId": "kenney_furniture_plantsmall1",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_plantsmall1",
+  "modelSha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+  "manifestSha256": "bb5bd18b88a060458cd2b63a12c4ae456a5d04267fec249e3a3e1f89b57ddbc0",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:20.974Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_plantsmall1\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

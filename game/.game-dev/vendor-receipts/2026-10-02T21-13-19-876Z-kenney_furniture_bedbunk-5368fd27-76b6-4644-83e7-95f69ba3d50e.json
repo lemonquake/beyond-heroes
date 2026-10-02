@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_24614f2c0fc75fb7de19ec8c",
+  "assetId": "kenney_furniture_bedbunk",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_bedbunk",
+  "modelSha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+  "manifestSha256": "c2e8f5b3cebe113de6aced43948e68276aef7184771d875ce46ee4ec00312e23",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:19.876Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bedbunk\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_roof\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_pirate_structure_roof",
+      "category": "environment_prop",
+      "description": "Small timber canopy roof. Intended use: Cargo shelter; restyle and preserve camera visibility",
+      "displayName": "kenney_pirate_structure_roof",
+      "files": [
+        {
+          "bytes": 44596,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781"
+        },
+        {
+          "bytes": 1754,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "29c26e7daa6589b1a34b91005842532fa4b6ef20ce728981aa077f3a76d1af8e"
+        },
+        {
+          "bytes": 1088,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "13ca2a07b52b65417fbb947bc4f062182dadb7fabb51a0daf87abc4c1da8e4d1"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "67955b56a3b264682b6bc9347141895c8d954ddd68a74f5c60a1d026819c1765"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_9d2c1dc701a2ebe8c4824c03",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:36.911Z"
+}

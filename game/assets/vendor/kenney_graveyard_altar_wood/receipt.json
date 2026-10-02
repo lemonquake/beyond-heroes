@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:40.320Z",
+  "destination": {
+    "assetId": "kenney_graveyard_altar_wood",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "2dd4ad3e08f036528f36e520256894bba472c0d0034aada4e78c49a79f7fd759",
+  "packageId": "pkg_7d8032e7d9e6348bba861953",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 39388,
+    "fileName": "kenney_graveyard_altar_wood.glb",
+    "sha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60"
+  }
+}

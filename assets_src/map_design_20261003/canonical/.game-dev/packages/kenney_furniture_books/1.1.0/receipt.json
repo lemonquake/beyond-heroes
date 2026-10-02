@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:11.864Z",
+  "destination": {
+    "assetId": "kenney_furniture_books",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "94bfe764e0024fec28d3fe8c0061334e9002b2544c82bcd1087200c6dda3b533",
+  "packageId": "pkg_5b38d7fea2220bc7f82d2ce6",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 6864,
+    "fileName": "books.glb",
+    "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c"
+  }
+}

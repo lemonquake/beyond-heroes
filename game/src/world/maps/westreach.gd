@@ -55,6 +55,12 @@ const PADS := [[4.0, -21.0, 7.5], [46.0, 94.0, 6.5], [20.0, 128.0, 6.0], [-150.0
 	[-168.0, 86.0, 4.5], [0.0, 0.0, 8.0], [-112.0, 50.0, 6.0], [-122.0, 49.0, 5.0], [-7.5, 11.0, 5.0]]
 ## The short stretch from the gate arch down to the fork (not a separate route edge: the South Gate link lands on it).
 const GATE_APPROACH := [Vector2(-112, 26), Vector2(-112, 40)]
+## map-design pass: what each plot grows, and the row spacing (column, row) of each crop
+const PLOT_CROPS := ["kd_wheat", "kd_carrots", "kd_wheat", "kd_pumpkin"]
+const CROP_STEP := {"kd_wheat": Vector2(1.6, 2.0), "kd_carrots": Vector2(0.8, 1.3), "kd_pumpkin": Vector2(1.7, 1.8)}
+## Encounter clearings (the roadside camps of _encounters) kept free of authored groups
+const CAMPS := [Vector2(32, -9), Vector2(62, -26), Vector2(22, 44), Vector2(18, 76), Vector2(50, 118), Vector2(76, 62),
+	Vector2(-86, 86), Vector2(-128, 110)]
 const WOLVES := Vector2(-70, 112)
 const GOBLIN_CAMP := Vector2(-30, 52)
 const FIELD_RAID := Vector2(44, 84)
@@ -93,6 +99,7 @@ func compose() -> void:
 	_dungeon_gates()
 	_herbs()
 	_greenery()
+	_map_design()
 	spawn(&"start", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
 	spawn(&"town_gate", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
 	spawn(&"forest_road", Vector3(-49, 0, -45), 140.0, true)
@@ -536,18 +543,26 @@ func _mill() -> void:
 
 func _fields() -> void:
 	# crop rows (leafy rows in dark soil) inside low fences, with a lantern at every corner
-	for pl in PLOTS:
+	# map-design pass: each plot grows one crop in short rows; the eastern part of every plot is already harvested
+	# (bare soil and a few left-behind heads), so the farm reads as worked rather than wallpapered
+	for pi in PLOTS.size():
+		var pl: Array = PLOTS[pi]
 		var cx: float = pl[0]
 		var cz: float = pl[1]
 		var hx: float = pl[2]
 		var hz: float = pl[3]
-		var row := -hz + 0.7
+		var crop: String = PLOT_CROPS[pi]
+		var step: Vector2 = CROP_STEP[crop]
+		var cut := -hx + (hx * 2.0) * (0.62 + 0.1 * (pi % 2))
+		var row := -hz + 0.8
 		while row < hz - 0.4:
-			var col := -hx + 0.8
-			while col < hx - 0.5:
-				decor("fern", Vector3(cx + col + rng.randf_range(-0.2, 0.2), 0, cz + row), rng.randf() * 360.0, rng.randf_range(0.45, 0.65))
-				col += 1.25
-			row += 1.4
+			var col := -hx + 0.9
+			while col < hx - 0.6:
+				var harvested := col > cut
+				if not harvested or rng.randf() < 0.08:
+					decor(crop, Vector3(cx + col + rng.randf_range(-0.15, 0.15), 0, cz + row), rng.randf_range(-20, 20), rng.randf_range(0.85, 1.05))
+				col += step.x
+			row += step.y
 		for sx: float in [-1.0, 1.0]:
 			var fx := cx + sx * (hx + 0.8)
 			var zz := -hz
@@ -794,3 +809,61 @@ func _herbs() -> void:
 	herb_patch(&"emberroot", Vector3(-22.0, 0, 61.0))
 	for p: Vector2 in [Vector2(-20.0, -46.0), Vector2(18.0, -42.0)]:
 		herb_patch(&"brightcap", Vector3(p.x, 0, p.y))
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): three districts that read apart — the working farm, the mill's timber yard and the
+# cove's tide line — with the prepared Kenney pieces (DataVignettes). Roads, the stream, crop plots, shrines, gates
+# and every encounter clearing stay clear; a group that does not fit is skipped and reported.
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	var k := _k(x, z)
+	if _rd[k] < r + (3.5 if _rt[k] == 1 else 2.5) or _sea[k] > -1.0 or _ds[k] < r + 1.0:
+		return false
+	for pl in PLOTS:
+		if absf(x - pl[0]) < pl[2] + r + 0.6 and absf(z - pl[1]) < pl[3] + r + 0.6:
+			return false
+	var p := Vector2(x, z)
+	for c: Vector2 in CAMPS + [WOLVES, GOBLIN_CAMP, FIELD_RAID, SMUGGLERS, FOREST_WATCH]:
+		if p.distance_to(c) < r + 7.0:
+			return false
+	for c: Vector2 in [SHRINE, GATE_SHRINE, MILL_SHRINE, BRIDGE, FEN_BRIDGE, CAVE]:
+		if p.distance_to(c) < r + 5.0:
+			return false
+	for gid in DataDungeons.gates_on(MAP):
+		if p.distance_to(DataDungeons.get_def(gid).surface.pos) < r + 7.0:
+			return false
+	return p.distance_to(TOWN) > TOWN_FENCE + r + 2.0
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	# ---- Lantern Fields: one farm-work scene by the raided store, produce waiting by the cottage ----------------
+	place_near("harvest_rest", Vector3(41.0, 0, 97.0), Vector3(44.0, 0, 95.0), 4.0, 10.0, 60.0)
+	place_near("kitchen_garden", Vector3(24.0, 0, 122.0), Vector3(20.0, 0, 128.0), 5.0, 11.0, 180.0)
+	place_near("woodpile", Vector3(51.0, 0, 98.0), Vector3(46.0, 0, 94.0), 5.0, 10.0, -90.0)
+	# ---- the Old Mill: its timber store and the tools of the race, worn ground round the yard -------------------
+	var m := Vector3(MILL_HOUSE.x, 0, MILL_HOUSE.y)
+	place_near("timber_store", m + Vector3(-8.0, 0, 2.0), m, 6.0, 12.0, 90.0)
+	place_near("tool_corner", m + Vector3(6.5, 0, -4.0), m, 5.0, 11.0, -90.0)
+	place_near("supply_corner", m + Vector3(-7.0, 0, -5.0), m, 6.0, 12.0, 0.0)
+	# ---- Tideglass Cove: layered shore rocks, a few palms, the tide line's leavings and the old wreck offshore -----
+	for c in [[Vector3(-204.0, 0, 99.0), 20.0, "kd_shore_rocks_a"], [Vector3(-199.0, 0, 109.0), 140.0, "kd_shore_rocks_c"],
+			[Vector3(-147.0, 0, 115.0), 250.0, "kd_shore_rocks_b"], [Vector3(-142.0, 0, 120.0), 80.0, "kd_shore_rocks_c"]]:
+		kit(c[2], c[0], c[1], 1.0, props, true)
+	for c in [Vector3(-196.0, 0, 91.0), Vector3(-154.0, 0, 92.0)]:
+		vignette("palm_pair", c, rng.randf() * 360.0)
+	for c in [Vector3(-166.0, 0, 106.5), Vector3(-191.0, 0, 104.5), Vector3(-181.0, 0, 107.0)]:
+		vignette("shore_debris", c, rng.randf() * 360.0, {"check": false})
+	vignette("wreck", Vector3(-192.0, SEA_Y - 1.6, 125.0), 35.0, {"on_ground": false, "check": false})
+	# ---- clifftop and roadside: a few strong rock silhouettes, grouped trees where the woods begin --------------
+	for c in [Vector3(-118.0, 0, 135.0), Vector3(-60.0, 0, 138.0), Vector3(8.0, 0, 136.5)]:
+		vignette("rock_tall", c, rng.randf() * 360.0, {"check": false})
+	for c in [Vector3(-30.0, 0, -20.0), Vector3(30.0, 0, -40.0), Vector3(-90.0, 0, -30.0)]:
+		place_near("pine_group", c, c, 0.0, 10.0, rng.randf() * 360.0)
+	for c in [Vector3(-75.0, 0, 60.0), Vector3(70.0, 0, 40.0)]:
+		place_near("tree_group", c, c, 0.0, 10.0, rng.randf() * 360.0)
+	place_near("fallen_tree", Vector3(-10.0, 0, -36.0), Vector3(-10.0, 0, -36.0), 0.0, 10.0, 30.0)
+	# ambient accents: the mill race, the cove's surf, the coast road's fires
+	accent(Vector3(15.6, -3.0, MILL_HOUSE.y), &"water_splash", -12.0)
+	for p in [Vector3(-176.0, -12.5, 106.0), Vector3(-160.0, -12.5, 108.0)]:
+		accent(p, &"water_wave", -16.0)
+	accent(Vector3(-170.0, -12.0, 97.5), &"fire_campfire", -14.0)

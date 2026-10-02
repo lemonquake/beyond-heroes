@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:37.572Z",
+  "destination": {
+    "assetId": "kenney_pirate_flag_pennant",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "38efc177978aa52cd7b785408d4459f62ac021a5d813961b0b6cccb334dd9edf",
+  "packageId": "pkg_0f7a009a7fb1ade03d075b0b",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 23752,
+    "fileName": "kenney_pirate_flag_pennant.glb",
+    "sha256": "0e29dc688cbeecf4c97c884d312379563367c0c4c80196052bb775efc7dacb59"
+  }
+}

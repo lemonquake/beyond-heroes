@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_flower_purplea",
+  "category": "foliage",
+  "description": "Purple flowering stem. Intended use: Malasugue house garden accents",
+  "displayName": "kenney_nature_flower_purplea",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.054563019424676895,
+        0.1924999922513962,
+        0.09052953124046326
+      ],
+      "min": [
+        -0.10453449934720993,
+        -0.05,
+        -0.09052953124046326
+      ],
+      "sizeMeters": [
+        0.15909751877188683,
+        0.24249999225139618,
+        0.1810590624809265
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 7112,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 76,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 268,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

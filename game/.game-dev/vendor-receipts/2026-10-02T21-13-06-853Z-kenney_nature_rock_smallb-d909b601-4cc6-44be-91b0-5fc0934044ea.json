@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e12627e0e8b2163aa65a2c34",
+  "assetId": "kenney_nature_rock_smallb",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_rock_smallb",
+  "modelSha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763",
+  "manifestSha256": "24d67fde68c897b9b45b932bbc1ceda9b322c21f8056f31bf8c20a6e83590a01",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:06.853Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smallb\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

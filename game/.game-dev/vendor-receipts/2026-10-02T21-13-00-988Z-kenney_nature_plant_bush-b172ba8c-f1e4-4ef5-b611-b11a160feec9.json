@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_650645298bb5c29cefef99a8",
+  "assetId": "kenney_nature_plant_bush",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_plant_bush",
+  "modelSha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+  "manifestSha256": "99e484cbd758944596396e9752c2b50d295cfa80fdd3d3e0e02d7820b0227504",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:00.988Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_plant_bush\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

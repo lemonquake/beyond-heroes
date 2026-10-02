@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_furniture_chair",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_chair.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_chair/1.1.0",
+ "source_sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883",
+ "derived_sha256": "b0d242aaeed5b3c52f80affbe504753890b229cb76f9db3807f1e42a812db1eb",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Wood": 170
+ },
+ "source_to_material": {
+  "wood": "BH_Wood"
+ },
+ "triangles": 170,
+ "surfaces": 1,
+ "source_triangles": 170,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.45,
+  1.058,
+  0.45
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

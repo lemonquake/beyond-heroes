@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tree_pineRoundA.glb",
+    "fileBytes": 14488,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 632,
+    "triangleCount": 204,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.3085094094276428,
+        -0.050000000000000065,
+        -0.3562360107898712
+      ],
+      "max": [
+        0.3085094094276428,
+        1.3164371967315673,
+        0.3562360107898712
+      ],
+      "sizeMeters": [
+        0.6170188188552856,
+        1.3664371967315674,
+        0.7124720215797424
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tree_pineRoundA.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 204,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.6170188188552856,
+        1.3664371967315674,
+        0.7124720215797424
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_pinerounda\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_tree_pinerounda",
+        "category": "foliage",
+        "description": "Round tiered conifer. Intended use: Forest borders with a different crown silhouette",
+        "displayName": "kenney_nature_tree_pinerounda",
+        "files": [
+          {
+            "bytes": 14488,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e"
+          },
+          {
+            "bytes": 1619,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "8de244584c25e64a44685f8617e433e5aff8b61418bcab97c407f6c6d83265a0"
+          },
+          {
+            "bytes": 837,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "a62c4f69f52dd1261632cf8ccd53f0a6ceeb0d213d1abdc9d0babe4271ff81b2"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "91d1d3b552bb80fa1cef309843e046fbb7063fa459e7a7c4a8e39a91d0bfb9a1"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_0679f7759861878a68d00bad",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+  "embedded_textures": []
+}

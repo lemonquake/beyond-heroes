@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5bd2bde1-aacf-4eec-a12b-32eb9a4bbf08",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_flower_yellowa\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:45.350Z",
+  "updatedAt": "2026-10-02T21:11:45.405Z",
+  "startedAt": "2026-10-02T21:11:45.357Z",
+  "completedAt": "2026-10-02T21:11:45.405Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-28ac3a3d-dd84-45f0-a4fa-4b5554c75bcc' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_flower_yellowa\r'",
+    "retryable": false
+  }
+}

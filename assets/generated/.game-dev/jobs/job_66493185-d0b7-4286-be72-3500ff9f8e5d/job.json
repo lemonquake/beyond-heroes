@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_66493185-d0b7-4286-be72-3500ff9f8e5d",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_bottle\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:24.968Z",
+  "updatedAt": "2026-10-02T21:12:25.016Z",
+  "startedAt": "2026-10-02T21:12:24.974Z",
+  "completedAt": "2026-10-02T21:12:25.016Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-01674688-2b3d-4f0c-aa95-69bbb9d6d850' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_bottle\r'",
+    "retryable": false
+  }
+}

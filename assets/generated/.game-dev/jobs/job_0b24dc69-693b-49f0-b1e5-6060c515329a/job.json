@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_0b24dc69-693b-49f0-b1e5-6060c515329a",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_stoolbarsquare\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:01.371Z",
+  "updatedAt": "2026-10-02T20:15:01.399Z",
+  "startedAt": "2026-10-02T20:15:01.377Z",
+  "completedAt": "2026-10-02T20:15:01.399Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_0b24dc69-693b-49f0-b1e5-6060c515329a\\receipt.json"
+}

@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/graveyard-kit/ba8d4b4517-1760691807/kenney_graveyard-kit_5.0.zip",
+  "licenseEvidence": "licenses/graveyard-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "1a93613f2e5675f3310acf49ec9ef13ae7adeb756ac3b205bfb6cc9311a81062",
+  "originalModelSha256": "46974a0a6bc94e1e8873c6629b17733746d0643764ae0d849cac9ed1daaae796",
+  "originalRelativePath": "sources/graveyard-kit/Models/GLB format/coffin-old.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 10965,
+      "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 30972,
+    "fileName": "kenney_graveyard_coffin_old.glb",
+    "sha256": "d719c8f614074642af74f3edd8e56fa5adc73b325f0a21c30f21551f830dcd5e"
+  },
+  "sourceUri": "https://kenney.nl/assets/graveyard-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:06.484Z",
+  "destination": {
+    "assetId": "kenney_furniture_sidetabledrawers",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "47ee052ee57d37a26dae2f85a379ae811fc5cd2c5baa93f0a1a91acc746ee407",
+  "packageId": "pkg_56e6b8030c33ff467ea6a9e5",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 19072,
+    "fileName": "sideTableDrawers.glb",
+    "sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf"
+  }
+}

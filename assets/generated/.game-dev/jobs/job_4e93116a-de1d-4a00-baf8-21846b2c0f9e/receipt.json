@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_detail_chalice\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_detail_chalice",
+      "category": "environment_prop",
+      "description": "Ritual chalice. Intended use: Altar grouping and ruined temple offering table",
+      "displayName": "kenney_graveyard_detail_chalice",
+      "files": [
+        {
+          "bytes": 13816,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "e7eeba55e5f1881095a3da159fc0a275ea4b59cc1cdce574d54662160ccdcc41"
+        },
+        {
+          "bytes": 1754,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "459609f8be7bb8d5574f5fdf715f56a9a659a78592115e8e06112de662811353"
+        },
+        {
+          "bytes": 816,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c4c69c7316c57569e434da97b942fdf4b0df5772b0df591e5d486a4310b43e88"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "f201959fd9ade6526644e323e0a7e969ce36a6b4a1c804e8b837e63770ef6e03"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_8fe33fa73806a4acfe7a327e",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:44.394Z"
+}

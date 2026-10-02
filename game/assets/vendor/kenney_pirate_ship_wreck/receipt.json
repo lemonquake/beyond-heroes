@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:30.417Z",
+  "destination": {
+    "assetId": "kenney_pirate_ship_wreck",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "82223913b590d9bd1ad2a9ec25a9a5817537854464a46932146186c85cc76965",
+  "packageId": "pkg_90d4ddc81bbc1c105b273cb4",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 233612,
+    "fileName": "kenney_pirate_ship_wreck.glb",
+    "sha256": "28c2ca697025ebdb0adc1a7a4b143d40cb2ca474d96b1db51d9cc2f6af7c16c2"
+  }
+}

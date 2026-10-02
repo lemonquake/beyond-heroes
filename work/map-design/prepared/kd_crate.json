@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_crate",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_crate.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_crate/1.1.0",
+ "source_sha256": "000d22f877d2a6f766d07d8cb3ea2b798c940b3480304d973e94e93069dd3a83",
+ "derived_sha256": "47d3803176c66902321d247339252d7b2d298c93a4ebbad7bdf8d18c1a0bd062",
+ "scale": 0.9,
+ "scale_rule": [
+  "s",
+  0.9
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_WoodDark",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 36,
+  "BH_Wood": 40
+ },
+ "source_to_material": {
+  "wood_dark": "BH_WoodDark",
+  "wood": "BH_Wood"
+ },
+ "triangles": 76,
+ "surfaces": 2,
+ "source_triangles": 76,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.97,
+  0.693,
+  1.178
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

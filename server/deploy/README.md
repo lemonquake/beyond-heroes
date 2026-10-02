@@ -1,51 +1,133 @@
-# Off-PC hosting draft
+# Hosting the official server on a Linux VM
 
-This package is prepared for a Linux VM with public IPv4 and UDP support. It has not been installed or verified on Linux for this request. The local server remains on the user's PC. Claude should review the lifecycle and rate-limit issues below before community use.
+This package runs the account service and the game coordinator on one public Linux VM. **It has not been installed on a real VM
+yet**: no cloud account, hostname or budget has been supplied, and no Linux machine was available while it was written. What was
+verified is listed under "Verified so far"; everything in "Verify on the VM" still has to be done and recorded.
 
-## Host and network
+## What the owner has to provide
 
-Start with a Singapore VM, 2 GB RAM and 1-2 vCPUs, then size from representative load. DigitalOcean currently lists US$12/month for 2 GB/1 vCPU and US$18/month for 2 GB/2 vCPUs: [official pricing](https://www.digitalocean.com/pricing/droplets). Domain registration, backups and other extras are separate choices. No cloud purchase has been made.
+| Needed | Why |
+| --- | --- |
+| Provider, region and monthly budget approval | Nothing is bought without it. Singapore, 2 GB RAM, 1–2 vCPU is the starting guess. |
+| A host name (for example `play.example.com`) with an A record pointing at the VM | Caddy obtains the normal public certificate for it. Use DNS only: no proxy in front, UDP must reach the VM directly. |
+| SSH access to the VM | To run `install.sh` and later `update.sh`. |
+| The Godot 4.7.2 Linux zip and its SHA-512 from godotengine.org | `install.sh` refuses an unchecked binary. |
+| An off-VM backup destination (rclone remote or an rsync target) | Backups on the VM only protect against mistakes, not against losing the VM. |
 
-Use a DNS-only public hostname that resolves directly to the VM. The account API uses public HTTPS TCP 443 through Caddy. Game traffic uses UDP 24680 directly; ordinary HTTP proxies/tunnels cannot carry ENet. TCP 80 supports certificate issuance/redirects. Keep TCP 8443 bound to loopback. Limit administrative access to the administrator's chosen route. These instructions apply to the new VM; they do not change the current PC's firewall or network settings.
+## Network
 
-## Connection design
+| Port | Protocol | Open to | Used for |
+| --- | --- | --- | --- |
+| 24680 | UDP | everyone | the game (ENet). Plain HTTP proxies and tunnels cannot carry it. |
+| 443 | TCP | everyone | accounts and saves, through Caddy |
+| 80 | TCP | everyone | Caddy's certificate issuance and redirect |
+| 22 | TCP | the administrator only | SSH |
+| 8443 | TCP | **nobody** | the account service listens on `127.0.0.1` only |
 
-The existing Godot coordinator connects to `https://127.0.0.1:8443` and verifies the configured local certificate. Keep that self-signed loopback certificate with localhost/127.0.0.1 SANs. Caddy serves the public hostname using its managed public certificate, then verifies the private upstream with the public part of that local certificate. This avoids replacing the coordinator's loopback identity with a public-domain certificate.
+## Layout
 
-`Caddyfile.example` blocks public `/internal` routes and removes incoming `X-Server-Key` headers. `official.cfg.example` uses normal public certificate trust for clients. The TLS trust-pool and server-name settings follow [Caddy's reverse proxy reference](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy). Public DNS/port prerequisites and renewal follow [automatic HTTPS documentation](https://caddyserver.com/docs/automatic-https).
+```
+/opt/beyond-heroes/releases/<commit>/   code, its own .venv with pinned dependencies, imported Godot project (read only at run time)
+/opt/beyond-heroes/current              symlink to the serving release
+/opt/godot/godot                        Godot 4.7.2 headless, checked against its published SHA-512
+/var/lib/beyond-heroes/                 ALL player data and secrets; owned by the service user, mode 0700
+    server.json (0600)                  full configuration: TLS private key path, internal key, ports, trusted proxy
+    coordinator.json (0600)             what the game coordinator is given: loopback certificate and internal key, never the TLS private key
+    server.key (0600) server.crt        the loopback certificate pair (self-signed, 730 days)
+    upstream.crt, official.cfg          public only: the first for Caddy, the second for client builds
+    beyond_heroes.sqlite3 (+ -wal)      accounts, characters, leases
+    backups/                            verified SQLite backups (every 15 min recent, one per day for 30 days)
+/etc/beyond-heroes/build.env            release id, protocol, public URL (no secrets)
+/etc/caddy/Caddyfile                    public TLS, blocks /internal, one forwarded address per request, bounded access log
+```
 
-## Prepare a fresh server
+Two certificates, on purpose. Players see Caddy's public certificate (normal trust, renewed automatically by Caddy). The account
+service and the coordinator talk to each other on `127.0.0.1` with a private self-signed certificate that only they and Caddy
+trust; a public-name certificate would never match the loopback address, and turning verification off is not an option.
 
-1. Obtain the user's chosen VM/hostname and confirm its actual cost before provisioning. Install Python 3.12+, matching Godot 4.7.2 for the VM architecture, and current Caddy from their official distributions.
-2. Create a service user `beyond-heroes` with its home/data directory at `/var/lib/beyond-heroes`. Install a reviewed revision in `/opt/beyond-heroes/releases/<commit>` and point `/opt/beyond-heroes/current` to it. Preserve this path and service ownership when updating.
-3. Create `.venv` in the release, install `server/requirements.txt`, and save the resolved dependency versions. Import the Godot project on Linux under the service user's identity before startup; Windows import caches are not a substitute. Confirm the engine can load the project headlessly.
-4. On this fresh VM checkout only, run `server.setup_server` with the real public hostname. Never run it again in the configured PC checkout or over an existing server identity. Transfer the newly generated configuration/certificate/key to the persistent data directory, update their absolute paths, and set `bind` to `127.0.0.1`. Set `game_host` to the directly reachable VM hostname and `game_port` to 24680.
-5. Keep `server.json`, the TLS private key, SQLite database, WAL files and backups accessible only to the service identity. Copy only the public upstream certificate to `/etc/beyond-heroes/upstream.crt` for Caddy. Do not give Caddy the private key or internal server key.
-6. Replace placeholder paths/hostname in the examples. Validate with `systemd-analyze verify` and `caddy validate` on the actual host. Install/enable the service and Caddy only after these checks. Review/restrict journal retention on the VM and preserve Caddy's certificate storage.
-7. Build clients with the public `official.cfg`, keeping `certificate=""`. Existing testers who saved a different endpoint need to select the new hostname and clear the old certificate path in Server Settings. Do not replace an intentionally selected custom server without explanation.
+Secrets: the internal key lives in `server.json` and `coordinator.json` only. Caddy removes any `X-Server-Key` header and the
+service refuses internal routes for anything that came through the proxy, so it cannot be used from the internet even if guessed.
+Nothing under `/var/lib/beyond-heroes` goes into Git, a client build, a screenshot or a bug report.
 
-## Verification before publishing the address
+## Install
 
-- HTTPS health reports protocol 16 and game_online=true with normal certificate validation.
-- Public `/internal/start` and the other internal routes return 404; TCP 8443 is not publicly reachable.
-- Two independent internet clients register/join, exchange gameplay and resume confirmed progress. Check actual UDP connectivity from another network, not only HTTP health on the VM.
-- Repeat the twelve-client probe with test data, inspect script errors, then exercise disconnects/restarts and map-owner handoffs interactively.
-- Reboot the VM and verify both services recover. Deliberately stop each child in a staging test and verify the parent/restart behavior.
-- Produce a verified SQLite backup with the application's backup command, restore it into a separate staging directory, check integrity and character/trade state, then test reconnect.
-- Verify certificate renewal, bounded disk/log growth and client version rejection.
+```bash
+git clone <repository> && cd beyond-heroes && git checkout <reviewed commit>
+sudo ./server/deploy/install.sh --public-host play.example.com \
+     --godot-zip ~/Godot_v4.7.2-stable_linux.x86_64.zip --godot-sha512 <hash>
+```
 
-## Known implementation gaps
+The script is repeatable: it never replaces an existing configuration, certificate or database. It creates the service user,
+installs the release with `server/requirements.lock`, imports the Godot project as the service user, runs
+`setup_server --public-host`, installs and verifies the systemd units, writes the Caddyfile (keeping a copy of any existing one),
+limits the journal, and starts everything on boot.
 
-The supervisor uses `Restart=always` because `server.run_server` currently returns zero after a child stops. SIGINT allows the Python parent to reach its existing backup/cleanup path. A child shutdown timeout can still skip later cleanup; fix and test that path before declaring supervised shutdown reliable.
+Then build the client: copy `/var/lib/beyond-heroes/official.cfg` to `game/server/official.cfg` (it holds only the URL; the
+certificate field stays empty) and export. Players using an older build that saved another server in Server Settings must pick
+the new address there.
 
-The reverse proxy causes the account service to see loopback as the source IP. Its per-account/user limits remain, but IP rate limits become shared. Claude should add explicit trusted-proxy handling with a configured loopback trust boundary, or validate an equivalent proxy-side limit. Never trust arbitrary client-supplied forwarding headers.
+## Operations
 
-Current automatic backups run every fifteen minutes and retain fourteen files on the same machine. That is a short recovery window, not off-site protection. Choose an authorized off-VM backup destination and longer retention, then test restoration before opening community access.
+| Task | Command |
+| --- | --- |
+| State, logs | `systemctl status beyond-heroes`, `journalctl -u beyond-heroes -f` |
+| Health (public) | `python -m server.healthcheck --url https://play.example.com` (also runs every 2 minutes as `beyond-heroes-health.timer`; a failing check marks the unit failed: `systemctl --failed`) |
+| Manual backup | `sudo -u beyond-heroes /opt/beyond-heroes/current/.venv/bin/python -m server.maintenance backup --config /var/lib/beyond-heroes/server.json` |
+| Check a backup | `python -m server.maintenance verify FILE` |
+| Restore drill (safe, any time) | `python -m server.deploy.restore_drill` |
+| Restore into staging | `python -m server.maintenance restore FILE --into /tmp/staging` |
+| Restore for real | `systemctl stop beyond-heroes`, then `python -m server.maintenance restore FILE --replace --config /var/lib/beyond-heroes/server.json --yes`, then start. The old database is kept in `before-restore-<time>/`. |
+| Update | `sudo ./server/deploy/update.sh` from a checkout of the new reviewed commit |
+| Roll back | `sudo ./server/deploy/update.sh --rollback` |
+| Rotate the loopback certificate (yearly) | `python -m server.setup_server --rotate --data-dir /var/lib/beyond-heroes`, copy `upstream.crt` to `/etc/beyond-heroes/`, restart both |
 
-Combat remains client simulated. Hosting this package elsewhere does not establish cheat-resistant gameplay or persistent world simulation.
+Backups: the service saves one on every start and stop and every 15 minutes while running (newest 16 plus one per UTC day for
+30 days, so disk use is bounded), and the daily timer takes another and, when `/etc/beyond-heroes/offsite.env` names a destination,
+copies the newest verified one off the VM. Logs go to the journal only, capped by `journald-beyond-heroes.conf`; Caddy's access log
+rolls at 10 MB and keeps five files.
 
-## Update, rollback and existing data
+Updates: announce a window, wait for saves to go idle, then run `update.sh`. It takes a verified backup, stages the new release
+beside the old, refuses a release that cannot read the current database, stops, switches, starts, waits for a healthy answer and
+switches back by itself if there is none. Data is never inside a release. The service and the game must agree on the protocol
+number (`PROTOCOL` in `server/service.py` and `game/src/net/net.gd`, shown by `/health` and on the game's title screen as "online
+version"). The game tells a player whether their game or the server is the older one. Roll back code only when the older release
+understands the database; otherwise restore the matching backup into staging first.
 
-Keep the private data directory outside versioned releases. Before an update, announce a maintenance window, wait for confirmed saves, stop the supervised service, verify a backup, install the reviewed revision, update the `current` link and restart. Check health and two-client behavior before reopening testing. Roll back code only if the old revision supports the current database schema; otherwise restore the corresponding verified backup into staging first.
+Shutdown: `systemctl stop` sends SIGTERM to `run_server`, which stops the coordinator, lets the account service finish requests
+and write a backup, and kills anything that takes longer than 20 seconds. If either child dies, `run_server` stops the other and
+exits non-zero, and systemd restarts the pair (`Restart=on-failure`, at most five times in five minutes).
 
-The current PC's player database has not been copied or migrated. Any migration needs the actual destination, a private transfer path and a staging restore check. Keep the PC's source data intact until that succeeds. No private data belongs in Git, public downloads or screenshots.
+## Verified so far (on the development PC, Windows)
+
+* `python -m unittest server.test_service server.test_hardening`: database invariants, HTTP boundary (oversize, malformed JSON,
+  wrong content type, `X-Forwarded-For` trusted only from the proxy, internal routes unreachable through the proxy), pruning,
+  backup/verify/restore (including damaged and foreign files and a busy database), runner failure and stop-file shutdown.
+* `python -m server.deploy.restore_drill`: backup, restore into staging, second service signs the account in and lists the character.
+* `python -m server.integration_probe`: real HTTPS + ENet clients, twelve players and a refused thirteenth, restart and resume,
+  atomic trade, custom room, map-owner hand-off, separate maps, dropped connection and reload, malformed and flooding input.
+  Each stage also fails if a process log contains a script or engine error.
+* Shell scripts parse (`bash -n`).
+
+## Verify on the VM (not done)
+
+- [ ] `systemd-analyze verify /etc/systemd/system/beyond-heroes.service`, `caddy validate`
+- [ ] `https://HOST/health` from another network: valid public certificate, protocol 17, `game_online: true`
+- [ ] `https://HOST/internal/start` returns 404; `nc -vz HOST 8443` fails from outside
+- [ ] Two game clients on **different networks** join the server over UDP 24680, see each other and trade; one on mobile data
+- [ ] `python -m server.integration_probe` against the VM with test accounts, then the log scan is clean
+- [ ] `systemctl stop beyond-heroes` returns within the time-out and writes a backup; `kill -9` of the coordinator and of the account service each bring the pair back
+- [ ] Reboot the VM: both services and Caddy return by themselves
+- [ ] Restore drill on the VM, then a restore of the newest real backup into staging
+- [ ] `update.sh` to a second commit and `--rollback`
+- [ ] Certificate renewal: `caddy` log shows the issuance; `healthcheck` reports the days left
+- [ ] Journal size stays under its cap after a day of use; Caddy log rotates
+- [ ] Godot's headless run on Linux with a read-only project directory: confirm it does not need to write inside the release
+
+## Known limits
+
+* Combat and rewards are simulated by players' game clients. Hosting elsewhere does not change that; see
+  `docs/OFFICIAL_SERVER.md`, "What the server decides".
+* The Windows PC server (this repository's `Start Official Server.cmd`) keeps working unchanged. Nothing here copies or migrates
+  its player database; any migration needs the destination, a private transfer path and a staging restore first.
+* Public IP rate limits depend on Caddy passing exactly one forwarded address (`header_up X-Forwarded-For {remote_host}`); keep that
+  line when editing the Caddyfile.

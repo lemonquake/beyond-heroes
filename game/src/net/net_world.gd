@@ -12,7 +12,7 @@ static func capture(enemies: Dictionary) -> Dictionary:
 			live.append(info)
 	var sp := Spawner.current()
 	return {"difficulty": maxi(0, DataEnemies.DIFFICULTY.find(sp.difficulty)) if sp else Game.difficulty, "enemies": live, "camps": sp.camps.keys() if sp else [],
-		"cleared": sp.cleared_camps.duplicate() if sp else {}, "done": sp.stage_done if sp else false}
+		"cleared": sp.cleared_camps.duplicate() if sp else {}, "done": sp.stage_done if sp else false, "arena": ArenaState.capture(Game.current_map)}
 
 static func make_enemy(info: Dictionary, replica: bool) -> Enemy:
 	var def := DB.enemy(StringName(info.get("def", "")))
@@ -62,6 +62,7 @@ static func restore(state: Dictionary) -> void:
 		sp.camps[camp] = []
 	sp.cleared_camps = state.get("cleared", {}).duplicate()
 	sp.stage_done = bool(state.get("done", false))
+	ArenaState.apply(map, state.get("arena", {}))
 	for info in state.get("enemies", []):
 		var e := make_enemy(info, false)
 		if e == null:

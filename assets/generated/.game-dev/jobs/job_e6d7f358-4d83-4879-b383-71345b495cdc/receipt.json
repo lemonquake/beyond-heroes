@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_pinerounda\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_pinerounda",
+      "category": "foliage",
+      "description": "Round tiered conifer. Intended use: Forest borders with a different crown silhouette",
+      "displayName": "kenney_nature_tree_pinerounda",
+      "files": [
+        {
+          "bytes": 14488,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e"
+        },
+        {
+          "bytes": 1619,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "8de244584c25e64a44685f8617e433e5aff8b61418bcab97c407f6c6d83265a0"
+        },
+        {
+          "bytes": 800,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "bf4ef732707aa772bd80bd8a2695efda336e60a225df8c6b2a27d76c8df488eb"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "91d1d3b552bb80fa1cef309843e046fbb7063fa459e7a7c4a8e39a91d0bfb9a1"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_657887b8aef78119325a327c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:12.593Z"
+}

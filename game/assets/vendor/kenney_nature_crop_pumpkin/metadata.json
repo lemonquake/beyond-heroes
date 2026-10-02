@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_crop_pumpkin",
+  "category": "environment_prop",
+  "description": "Pumpkin produce. Intended use: Market baskets and farm storage clusters",
+  "displayName": "kenney_nature_crop_pumpkin",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2206350564956665,
+        0.28382999897003175,
+        0.22597205638885498
+      ],
+      "min": [
+        -0.2206350564956665,
+        -0.05,
+        -0.22597205638885498
+      ],
+      "sizeMeters": [
+        0.441270112991333,
+        0.33382999897003174,
+        0.45194411277770996
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 10840,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 120,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 468,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

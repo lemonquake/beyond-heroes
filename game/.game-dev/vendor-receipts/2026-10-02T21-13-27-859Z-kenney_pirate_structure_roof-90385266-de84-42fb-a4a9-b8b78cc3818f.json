@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_9d2c1dc701a2ebe8c4824c03",
+  "assetId": "kenney_pirate_structure_roof",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_structure_roof",
+  "modelSha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781",
+  "manifestSha256": "4e97dc09f942b0ec6d56c3997580ea9b48d8969cf40d5ce97b03cfdb9b94f81b",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:27.859Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_roof\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

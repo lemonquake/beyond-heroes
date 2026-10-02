@@ -1,0 +1,40 @@
+{
+ "source_id": "kenney_nature_tent_smallopen",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_tent.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0",
+ "source_sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd",
+ "derived_sha256": "d91396552281f79996bd49f314ec4a09e35627dcf18c95bffe48cab327a3ce74",
+ "scale": 3.9207,
+ "scale_rule": [
+  "h",
+  2.2
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_ClothCream",
+  "BH_Cloth",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_ClothCream": 166,
+  "BH_Cloth": 10,
+  "BH_Wood": 48
+ },
+ "source_to_material": {
+  "colorRed": "BH_ClothCream",
+  "colorRedDark": "BH_Cloth",
+  "wood": "BH_Wood"
+ },
+ "triangles": 224,
+ "surfaces": 3,
+ "source_triangles": 224,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.147,
+  2.2,
+  2.613
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

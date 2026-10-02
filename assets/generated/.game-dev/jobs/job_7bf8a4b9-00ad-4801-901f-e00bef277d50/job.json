@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_7bf8a4b9-00ad-4801-901f-e00bef277d50",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_modular-dungeon_template_floor_detail_a"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:35.041Z",
+  "updatedAt": "2026-10-02T21:13:35.104Z",
+  "startedAt": "2026-10-02T21:13:35.047Z",
+  "completedAt": "2026-10-02T21:13:35.104Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_7bf8a4b9-00ad-4801-901f-e00bef277d50\\receipt.json"
+}

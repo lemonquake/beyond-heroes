@@ -274,7 +274,7 @@ static func _scaled_icon(path: String) -> Texture2D:
 	if img.is_compressed():
 		img.decompress()
 	var sz := UIArt.size_of(path)
-	var ui := maxf(1.0, Settings.ui_scale if Settings else 1.0)
+	var ui := maxf(1.0, Settings.effective_ui_scale() if Settings else 1.0)
 	img.resize(maxi(1, int(sz.x * ui)), maxi(1, int(sz.y * ui)), Image.INTERPOLATE_LANCZOS)
 	return ImageTexture.create_from_image(img)
 

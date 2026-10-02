@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_barrel\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_barrel",
+      "category": "environment_prop",
+      "description": "Wooden barrel. Intended use: Harbour cargo, tavern cellar edge and Wyman stores",
+      "displayName": "kenney_pirate_barrel",
+      "files": [
+        {
+          "bytes": 14092,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "7616dedf7c1023afa6ecd3c52a4609460aae0e582dee14e60ec5e47c1174793b"
+        },
+        {
+          "bytes": 1724,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "83f0260bb3edf6a2a97108d8d9c8429791a7ba065acb0119df11737216690305"
+        },
+        {
+          "bytes": 781,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "91b80a3e6f49924d1ba04d057c39e8af4a7aed7f745f3f17d94f8ba70eb053e1"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e5e30da6f645b6243308c898ebda152226ab5b9a50c08b6ad5f7df0782d3ac09"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7b90a5b4e1c7f3761ad55d27",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:17.032Z"
+}

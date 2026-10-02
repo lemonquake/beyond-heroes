@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "vendor.admit",
+  "result": {
+    "reused": false,
+    "packageId": "pkg_8eeb019899e746435f92c55a",
+    "projectRoot": "A:\\Python\\beyond-heroes\\game",
+    "destination": "A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_rock_talla",
+    "lockPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-receipts\\2026-10-02T21-13-07-626Z-kenney_nature_rock_talla-4b110984-706b-4e37-823c-c81a5232b4ed.json"
+  },
+  "completedAt": "2026-10-02T21:13:07.650Z"
+}

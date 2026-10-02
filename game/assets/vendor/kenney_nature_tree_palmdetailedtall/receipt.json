@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:25.467Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_palmdetailedtall",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c5f4a5cf005cedfd94e01585aae436c0e0c54c7086a5caecc27b8876c7f063cc",
+  "packageId": "pkg_aba9a4793524330752d50b20",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 28204,
+    "fileName": "tree_palmDetailedTall.glb",
+    "sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683"
+  }
+}

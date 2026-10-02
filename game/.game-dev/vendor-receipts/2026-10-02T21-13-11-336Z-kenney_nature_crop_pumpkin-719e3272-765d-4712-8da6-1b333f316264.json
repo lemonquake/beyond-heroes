@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_11fbdd63f46c808d7354656d",
+  "assetId": "kenney_nature_crop_pumpkin",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_crop_pumpkin",
+  "modelSha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+  "manifestSha256": "335a60de551fd2753b8ad7f0af9dc43a56363f1c4a8eb3f6af1262cd6914da2a",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:11.336Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_pumpkin\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

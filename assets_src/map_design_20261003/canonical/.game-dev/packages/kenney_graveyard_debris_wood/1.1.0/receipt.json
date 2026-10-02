@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:49.995Z",
+  "destination": {
+    "assetId": "kenney_graveyard_debris_wood",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "b1ea9600dabe3104991c25a01b2b34ad9884826f8c090f65d5cd33e51668b8f4",
+  "packageId": "pkg_844b50b23087e2b9589796c6",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 21832,
+    "fileName": "kenney_graveyard_debris_wood.glb",
+    "sha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8"
+  }
+}

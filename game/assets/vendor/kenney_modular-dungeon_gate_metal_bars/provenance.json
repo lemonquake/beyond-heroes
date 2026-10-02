@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/modular-dungeon-kit/7bed87605b-1771926065/kenney_modular-dungeon-kit_1.0.zip",
+  "licenseEvidence": "licenses/modular-dungeon-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "dd0aa6776db8912283cdca60161dee6a8839bbda3558eba2ea501419eb5b4623",
+  "originalModelSha256": "e3a2228906e1601c6d4fbb53d615f03541094177a624168e77b1ab0220e081f4",
+  "originalRelativePath": "sources/modular-dungeon-kit/Models/GLB format/gate-metal-bars.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 28309,
+      "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 96532,
+    "fileName": "kenney_modular-dungeon_gate_metal_bars.glb",
+    "sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620"
+  },
+  "sourceUri": "https://kenney.nl/assets/modular-dungeon-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

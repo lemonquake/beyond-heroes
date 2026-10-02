@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:10.053Z",
+  "destination": {
+    "assetId": "kenney_furniture_bookcaseclosed",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "7fde8ca3c146b4ac4726c581fb1aa9888c53f24ad16b31d8c536e621a0a67327",
+  "packageId": "pkg_e58a9b3b99878a042a5efa14",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 23132,
+    "fileName": "bookcaseClosed.glb",
+    "sha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047"
+  }
+}

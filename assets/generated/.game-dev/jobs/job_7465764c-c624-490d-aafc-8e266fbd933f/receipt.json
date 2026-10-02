@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_fire_basket\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_fire_basket",
+      "category": "environment_prop",
+      "description": "Iron fire basket. Intended use: Emberforge work alcove and Obsidian Engine service room",
+      "displayName": "kenney_graveyard_fire_basket",
+      "files": [
+        {
+          "bytes": 18740,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f72e5a3f69711b30055219961d16824fe6d1ac5a8240d456d7f1a1a2cb7d5433"
+        },
+        {
+          "bytes": 1755,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "31a50d073ad5f1e26e404ce6dedccc26dd7b1974cedecbf839839c81a9c79ac5"
+        },
+        {
+          "bytes": 810,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "6e4fd624cae558238c87013f582c4207ccadc06e83e2c9fa1a914ce9177873b5"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "dbe0b43d2e5ce6bbeb29235d63763eb1af936e02054e7cf32a3db64f0e337312"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_6013a76afdba9457422c8d82",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:41.662Z"
+}

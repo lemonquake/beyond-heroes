@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_pinetalla\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_pinetalla",
+      "category": "foliage",
+      "description": "Tall conifer. Intended use: Distant tree line and selected forest landmarks",
+      "displayName": "kenney_nature_tree_pinetalla",
+      "files": [
+        {
+          "bytes": 7200,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196"
+        },
+        {
+          "bytes": 1594,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2221a030c5f53a93f10dbaa9874eae61da9057a898e0138744435cb29379aa47"
+        },
+        {
+          "bytes": 797,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "8e210f416345a8196bb2399ddc134d7a346c90e1fdc1fc8b50dbdbdf279e9784"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "0ece469dd20d44731cf7accc9b369aec186bc4e38602849f95b13c4042737cba"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_92cb00d6e01fcf68b6c3badc",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:13.505Z"
+}

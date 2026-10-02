@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_3f77431dab70dd610362a87f",
+  "assetId": "kenney_nature_mushroom_tangroup",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_mushroom_tangroup",
+  "modelSha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e",
+  "manifestSha256": "ead2e765d9c205d747f42b9fd2abc95a34b534c0f6ddc3c2de5e61bb721dcb82",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:04.275Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_mushroom_tangroup\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_bedsingle",
+  "category": "environment_prop",
+  "description": "Single bed. Intended use: Existing domestic interiors after linen and wood restyle",
+  "displayName": "kenney_furniture_bedsingle",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.9559999920426173,
+        0.375,
+        0
+      ],
+      "min": [
+        0.38500000250536454,
+        3.311768719503616e-14,
+        -1.125
+      ],
+      "sizeMeters": [
+        0.5709999895372528,
+        0.37499999999996686,
+        1.125
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 18636,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 4,
+    "meshCount": 3,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 6,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 214,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 768,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

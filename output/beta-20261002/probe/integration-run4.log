@@ -1,0 +1,9 @@
+PASS: 12 real HTTPS/ENet clients; thirteenth refused; committed saves confirmed; process logs clean
+PASS: server restart; two real map clients resumed progress, traded atomically and saved on exit; process logs clean
+PASS: custom host and client; separate fresh characters; shared directory listing; process logs clean
+PASS: map owner left; the other hero took over its live monsters; process logs clean
+PASS: heroes on different maps each ran their own map; process logs clean
+PASS: dropped connection, refused duplicate play, release, reload with progress, rejoin; process logs clean
+PASS: malformed, oversized, non-finite and flooding messages were absorbed; process logs clean
+STAGES PASSED: capacity, restart, custom, world-handoff, world-separate, world-reconnect, hostile
+exit=0

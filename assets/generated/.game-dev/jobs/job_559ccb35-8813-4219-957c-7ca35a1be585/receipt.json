@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "vendor.admit",
+  "result": {
+    "reused": false,
+    "packageId": "pkg_7dc92b74c3070ffd1c984f49",
+    "projectRoot": "A:\\Python\\beyond-heroes\\game",
+    "destination": "A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_bench",
+    "lockPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-receipts\\2026-10-02T21-13-13-594Z-kenney_furniture_bench-8f475aa4-5ff6-4302-ae91-0dc682663187.json"
+  },
+  "completedAt": "2026-10-02T21:13:13.618Z"
+}

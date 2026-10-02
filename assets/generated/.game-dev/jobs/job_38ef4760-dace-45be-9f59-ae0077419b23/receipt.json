@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "vendor.admit",
+  "result": {
+    "reused": false,
+    "packageId": "pkg_2778d1e4366f9ecf83ddedba",
+    "projectRoot": "A:\\Python\\beyond-heroes\\game",
+    "destination": "A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_barrel",
+    "lockPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-receipts\\2026-10-02T21-13-22-075Z-kenney_pirate_barrel-a28d918d-d83e-4319-be33-5a022d4dbf29.json"
+  },
+  "completedAt": "2026-10-02T21:13:22.102Z"
+}

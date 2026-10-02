@@ -1,0 +1,38 @@
+{
+ "source_id": "kenney_nature_rock_talla",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_rock_tall.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0",
+ "source_sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+ "derived_sha256": "1436c2025b0e17a3a822ed36f6263f81297cba67435177dcb0f1478efea8acf4",
+ "scale": 2.8115,
+ "scale_rule": [
+  "h",
+  2.8
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Rock",
+  "BH_Moss"
+ ],
+ "part_faces": {
+  "BH_Rock": 110,
+  "BH_Moss": 26
+ },
+ "source_to_material": {
+  "dirt": "BH_Rock",
+  "grass": "BH_Moss",
+  "_defaultMat": "BH_Rock"
+ },
+ "triangles": 136,
+ "surfaces": 2,
+ "source_triangles": 136,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.764,
+  2.8,
+  1.921
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

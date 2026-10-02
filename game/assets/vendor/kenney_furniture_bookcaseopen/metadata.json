@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_bookcaseopen",
+  "category": "environment_prop",
+  "description": "Tall open bookcase. Intended use: Cartographer and Lantern House library wall",
+  "displayName": "kenney_furniture_bookcaseopen",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.4000000059604645,
+        0.8799999356269836,
+        0
+      ],
+      "min": [
+        0,
+        0,
+        -0.25
+      ],
+      "sizeMeters": [
+        0.4000000059604645,
+        0.8799999356269836,
+        0.25
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 18020,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 320,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 400,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

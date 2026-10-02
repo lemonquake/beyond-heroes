@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_chairrounded\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_chairrounded",
+      "category": "environment_prop",
+      "description": "Rounded-back chair. Intended use: Council and guild meeting rooms after timber restyle",
+      "displayName": "kenney_furniture_chairrounded",
+      "files": [
+        {
+          "bytes": 17156,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "53f4933ec547179c499f04dbda1231cf44b83ec82c7f4ab981cdf680aee5c973"
+        },
+        {
+          "bytes": 1581,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "eda93e2f2b5a9e263eebef6435ef7d905169799429f1f6be9699cc387c7dbff4"
+        },
+        {
+          "bytes": 846,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "375b288b7836b08f085ea81476b5cbfd96f92931ac7df1faf2d1ad5e64504971"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "758cd3ee5fefecca429d12bc131379fa311c0cf97433523da8a1a3f4205f4a7c"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_cc7b79a2be013f5d29b6037a",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:00.547Z"
+}

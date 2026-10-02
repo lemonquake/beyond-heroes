@@ -1,0 +1,19 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+  "licenseEvidence": "licenses/nature-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+  "originalModelSha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02",
+  "originalRelativePath": "sources/nature-kit/Models/GLTF format/plant_bushLarge.glb",
+  "originalTextureDependencies": [],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 6436,
+    "fileName": "plant_bushLarge.glb",
+    "sha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02"
+  },
+  "sourceUri": "https://kenney.nl/assets/nature-kit",
+  "transformations": []
+}

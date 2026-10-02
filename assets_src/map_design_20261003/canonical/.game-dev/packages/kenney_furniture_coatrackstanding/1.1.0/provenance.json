@@ -1,0 +1,19 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+  "licenseEvidence": "licenses/furniture-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+  "originalModelSha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+  "originalRelativePath": "sources/furniture-kit/Models/GLTF format/coatRackStanding.glb",
+  "originalTextureDependencies": [],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 13288,
+    "fileName": "coatRackStanding.glb",
+    "sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91"
+  },
+  "sourceUri": "https://kenney.nl/assets/furniture-kit",
+  "transformations": []
+}

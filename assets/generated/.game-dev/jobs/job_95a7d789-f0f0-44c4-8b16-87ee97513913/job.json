@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_95a7d789-f0f0-44c4-8b16-87ee97513913",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_yellowa\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:24.495Z",
+  "updatedAt": "2026-10-02T20:01:24.520Z",
+  "startedAt": "2026-10-02T20:01:24.500Z",
+  "completedAt": "2026-10-02T20:01:24.520Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_95a7d789-f0f0-44c4-8b16-87ee97513913\\receipt.json"
+}

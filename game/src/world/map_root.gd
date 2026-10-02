@@ -39,6 +39,13 @@ func refresh_teleporters() -> void:
 ## collider stops colliding too (the South Gate's bar), so the way is really open, not just invisible.
 func apply_flag_visuals(flag: StringName = &"", animate := false) -> void:
 	for n in get_tree().get_nodes_in_group(&"flag_visual") if is_inside_tree() else find_children("*", "", true, false):
+		# bh-033: details a quest flag brings in (a returned trader's cart): hidden and switched off until the flag is held
+		if n.has_meta(&"show_when_flag"):
+			var held := Game.hero != null and bool(Game.hero.world_flags.get(StringName(n.get_meta(&"show_when_flag")), false))
+			if n is Node3D:
+				(n as Node3D).visible = held
+			n.process_mode = Node.PROCESS_MODE_INHERIT if held else Node.PROCESS_MODE_DISABLED
+			continue
 		if not n.has_meta(&"hide_when_flag"):
 			continue
 		var f: StringName = n.get_meta(&"hide_when_flag")

@@ -54,6 +54,7 @@ func compose() -> void:
 	_storage()
 	_ossuary()
 	_cistern()
+	_map_design()
 	set_bounds(AABB(Vector3(-36, -6, -62), Vector3(84, 16, 92)))
 	view("overview", Vector3(4, 0, -16), 0.0, 78.0, 118.0, 45.0)
 	view("entrance", Vector3(0, 0, 21), 0.0, 52.0, 24.0)
@@ -365,3 +366,54 @@ func _cistern() -> void:
 	enemy_zone("cistern_ledge_w", Vector3(21, 0, -6), 3.5, [&"grave_archer", &"hollow_soldier"], 4, 0.0)
 	enemy_zone("cistern_ledge_e", Vector3(43, 0, -6), 3.5, [&"shade_stalker", &"grave_archer"], 4, 0.25)
 	enemy_zone("cistern_bridge", Vector3(32, 0, BRIDGE_Z), 3.0, [&"bonewarden"], 1, 0.5)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): each room's own function, sharper — a holding cell at the back of the guard hall, urn
+# niches in the burial hall, a bunk in the barracks, cargo and fuel in the storeroom, old coffins and a broken marker
+# in the ossuary, offerings left on the ritual altar, and in the cistern amber lanterns on the ledges against the teal
+# water, moss down its wet walls, timber drifting in the pool. The ritual flag, chests, camps and every door stay clear.
+
+func _on(n: Node3D, nm: String, piece: String, off: Vector3, yaw := 0.0, scale := 1.0) -> Node3D:
+	if n == null:
+		return null
+	var top := MapBuilder._local_box(nm, n).end.y * n.scale.y
+	return kit(piece, n.position + Vector3(off.x, top + off.y, off.z), yaw, scale, deco)
+
+func _map_design() -> void:
+	kit("kd_floor_inlay", Vector3(0, 0.012, 19.4), 0.0, 0.9, deco)
+	# guard hall: the cell where the watch held what it caught; a lantern on the duty table
+	# (north wall, west bay: the middle bay is the arch to the burial hall, the torches stand at -9 and -5)
+	kit("kd_bars_gate", Vector3(-7.0, 0, -4.0 + 0.15 + 0.4), 0.0, 0.6, props)
+	kit("kd_lantern_candle", Vector3(-6.5, 0.92, 3.0), 0.0, 1.0, deco)
+	# burial hall: urns in niches along the side walls (clear of the aisle and the torches)
+	for c in [[Vector3(-9.4, 0, -12.0), 90.0], [Vector3(9.4, 0, -20.0), -90.0]]:
+		var p: Vector3 = c[0]
+		var ax := Vector3(0, 0, 1)
+		kit("kd_urn_round", p - ax * 0.7, c[1], 1.0, props)
+		kit("kd_urn_square", p, c[1], 1.0, props)
+		kit("kd_urn_round", p + ax * 0.65, c[1] + 30.0, 0.8, props)
+		kit("kd_candles", p + Vector3(0.5 if c[1] > 0.0 else -0.5, 0, 0.0), 0.0, 0.7, deco)
+	# barracks: one more sleeper's bunk against the north wall, between the beds and the table
+	kit("kd_bed_bunk", Vector3(-29.0, 0, -8.0 + 0.15 + 0.58), 90.0, 1.0, props)
+	# storage: bottles in their crate, fuel stacked, a shovel left against the wall
+	kit("kd_crate_bottles", Vector3(-28.6, 0, -23.25), 0.0, 1.0, props)
+	kit("kd_log_stack", Vector3(-33.25, 0, -18.4), 90.0, 0.9, props)
+	kit("kd_shovel", Vector3(-22.55, 0, -19.2), -90.0, 1.0, deco)
+	# ossuary: an urn niche on the north wall of the east run, a broken marker where the run turns (the 4 m way stays open)
+	kit("kd_urn_square", Vector3(-25.0, 0, -35.1), 0.0, 1.0, props)
+	kit("kd_urn_round", Vector3(-24.3, 0, -35.15), 20.0, 0.85, props)
+	kit("kd_grave_broken", Vector3(-29.3, 0, -35.3), 30.0, 0.8, props)
+	# ritual chamber: what the cult left on the altar
+	var alt: Node3D = props.find_child("altar_*", false, false)
+	_on(alt, "altar", "kd_offering_bowl", Vector3(-0.45, 0, 0.05))
+	_on(alt, "altar", "kd_chalice", Vector3(0.4, 0, 0.0))
+	# the cistern: amber lanterns on the ledges, moss down the pool walls, timber drifting
+	for p in [Vector3(25.2, 0, -2.0), Vector3(39.0, 0, -15.6), Vector3(39.2, 0, 4.0)]:
+		kit("kd_lantern_candle", p, 0.0, 1.0, deco)
+	for x in [28.6, 33.0, 35.6]:
+		kit("kd_hanging_moss", Vector3(x, WATER_Y + 0.6, POOL.position.y + 0.12), 0.0, 1.4, deco)
+	for c in [[Vector3(33.0, WATER_Y - 0.06, 2.4), 40.0], [Vector3(30.0, WATER_Y - 0.06, -12.6), 110.0]]:
+		kit("kd_debris_wood", c[0], c[1], 1.1, deco)
+	kit("kd_planks", Vector3(23.0, -0.38, -16.0), 90.0, 0.6, deco)
+	# ambient accents: the cistern's water
+	accent(Vector3(32.0, WATER_Y + 0.3, -6.0), &"water_wave", -18.0)

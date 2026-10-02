@@ -1,0 +1,327 @@
+{
+ "wooden_crate_01": {
+  "glb": "ph_wooden_crate_01.glb",
+  "triangles_before": 6576,
+  "triangles_after": 6576,
+  "texture": 512,
+  "collider": true,
+  "size_m": [
+   0.825,
+   0.35,
+   0.409
+  ],
+  "bytes": 301424
+ },
+ "wooden_crate_02": {
+  "glb": "ph_wooden_crate_02.glb",
+  "triangles_before": 5176,
+  "triangles_after": 5176,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   0.529,
+   0.464,
+   1.166
+  ],
+  "bytes": 2236900
+ },
+ "wooden_bucket_01": {
+  "glb": "ph_wooden_bucket_01.glb",
+  "triangles_before": 5116,
+  "triangles_after": 5116,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.367,
+   0.55,
+   0.342
+  ],
+  "bytes": 275380
+ },
+ "wooden_bucket_02": {
+  "glb": "ph_wooden_bucket_02.glb",
+  "triangles_before": 7252,
+  "triangles_after": 5197,
+  "texture": 512,
+  "collider": true,
+  "size_m": [
+   0.615,
+   0.351,
+   0.616
+  ],
+  "bytes": 307616
+ },
+ "wooden_lantern_01": {
+  "glb": "ph_wooden_lantern_01.glb",
+  "triangles_before": 8321,
+  "triangles_after": 5998,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.221,
+   0.53,
+   0.235
+  ],
+  "bytes": 638800
+ },
+ "wicker_basket_01": {
+  "glb": "ph_wicker_basket_01.glb",
+  "triangles_before": 22276,
+  "triangles_after": 3999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.384,
+   0.119,
+   0.293
+  ],
+  "bytes": 274360
+ },
+ "wicker_basket_02": {
+  "glb": "ph_wicker_basket_02.glb",
+  "triangles_before": 17850,
+  "triangles_after": 2999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.374,
+   0.217,
+   0.271
+  ],
+  "bytes": 238452
+ },
+ "wine_barrel_01": {
+  "glb": "ph_wine_barrel_01.glb",
+  "triangles_before": 10820,
+  "triangles_after": 5998,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   0.742,
+   0.871,
+   0.756
+  ],
+  "bytes": 809568
+ },
+ "painted_wooden_bench": {
+  "glb": "ph_painted_wooden_bench.glb",
+  "triangles_before": 630,
+  "triangles_after": 630,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.165,
+   0.889,
+   0.497
+  ],
+  "bytes": 1990368
+ },
+ "planter_box_01": {
+  "glb": "ph_planter_box_01.glb",
+  "triangles_before": 8094,
+  "triangles_after": 6000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   0.913,
+   0.425,
+   0.414
+  ],
+  "bytes": 2285088
+ },
+ "tree_stump_01": {
+  "glb": "ph_tree_stump_01.glb",
+  "triangles_before": 41046,
+  "triangles_after": 6000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.425,
+   0.572,
+   1.591
+  ],
+  "bytes": 3143856
+ },
+ "WoodenTable_01": {
+  "glb": "ph_woodentable_01.glb",
+  "triangles_before": 952,
+  "triangles_after": 952,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.8,
+   0.549,
+   0.657
+  ],
+  "bytes": 555440
+ },
+ "round_wooden_table_01": {
+  "glb": "ph_round_wooden_table_01.glb",
+  "triangles_before": 8640,
+  "triangles_after": 5999,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.399,
+   1.005,
+   1.399
+  ],
+  "bytes": 488056
+ },
+ "wooden_stool_01": {
+  "glb": "ph_wooden_stool_01.glb",
+  "triangles_before": 10946,
+  "triangles_after": 4000,
+  "texture": 512,
+  "collider": true,
+  "size_m": [
+   0.425,
+   0.437,
+   0.442
+  ],
+  "bytes": 245980
+ },
+ "wooden_stool_02": {
+  "glb": "ph_wooden_stool_02.glb",
+  "triangles_before": 11146,
+  "triangles_after": 2999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.265,
+   0.182,
+   0.183
+  ],
+  "bytes": 210948
+ },
+ "folding_wooden_stool": {
+  "glb": "ph_folding_wooden_stool.glb",
+  "triangles_before": 6324,
+  "triangles_after": 3999,
+  "texture": 512,
+  "collider": true,
+  "size_m": [
+   0.528,
+   0.442,
+   0.547
+  ],
+  "bytes": 255940
+ },
+ "GothicBed_01": {
+  "glb": "ph_gothicbed_01.glb",
+  "triangles_before": 18745,
+  "triangles_after": 10000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.492,
+   1.535,
+   2.041
+  ],
+  "bytes": 889356
+ },
+ "GothicCabinet_01": {
+  "glb": "ph_gothiccabinet_01.glb",
+  "triangles_before": 12170,
+  "triangles_after": 7998,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.719,
+   2.361,
+   1.129
+  ],
+  "bytes": 875956
+ },
+ "wooden_bookshelf_worn": {
+  "glb": "ph_wooden_bookshelf_worn.glb",
+  "triangles_before": 10106,
+  "triangles_after": 8000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.374,
+   2.063,
+   0.581
+  ],
+  "bytes": 2727680
+ },
+ "ceramic_pot": {
+  "glb": "ph_ceramic_pot.glb",
+  "triangles_before": 3592,
+  "triangles_after": 3592,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.656,
+   0.372,
+   0.502
+  ],
+  "bytes": 181928
+ },
+ "wooden_bowl_01": {
+  "glb": "ph_wooden_bowl_01.glb",
+  "triangles_before": 14122,
+  "triangles_after": 1999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.313,
+   0.094,
+   0.309
+  ],
+  "bytes": 129980
+ },
+ "carved_wooden_plate": {
+  "glb": "ph_carved_wooden_plate.glb",
+  "triangles_before": 2112,
+  "triangles_after": 2112,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.272,
+   0.038,
+   0.269
+  ],
+  "bytes": 126420
+ },
+ "wooden_cutting_board": {
+  "glb": "ph_wooden_cutting_board.glb",
+  "triangles_before": 3520,
+  "triangles_after": 1999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.45,
+   0.041,
+   0.247
+  ],
+  "bytes": 138804
+ },
+ "wooden_axe": {
+  "glb": "ph_wooden_axe.glb",
+  "triangles_before": 3348,
+  "triangles_after": 2500,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.047,
+   0.63,
+   0.214
+  ],
+  "bytes": 175136
+ },
+ "treasure_chest": {
+  "glb": "ph_treasure_chest.glb",
+  "triangles_before": 103330,
+  "triangles_after": 7997,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   0.961,
+   0.619,
+   0.522
+  ],
+  "bytes": 2989368
+ }
+}

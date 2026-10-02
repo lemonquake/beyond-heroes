@@ -1,0 +1,57 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "boss": "boss_warden",
+  "charge_started": {
+    "attack": "charge",
+    "boss_to_pillar": 25.2463130950928,
+    "boss_to_player": 22.6554279327393,
+    "charge": true,
+    "state": 7
+  },
+  "engine": "4.7.2-stable (official)",
+  "pillars_left_after_bait": 7,
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "shots": [
+    {
+      "name": "warden_01_anticipation_charge_line",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "warden_02_response_pillar_breaks_stun",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "warden_03_later_phase_guidance",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "warden_04_phase3_charge_trail",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "warden_05_wipe_explains",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

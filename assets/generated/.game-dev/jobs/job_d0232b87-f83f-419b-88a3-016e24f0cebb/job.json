@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d0232b87-f83f-419b-88a3-016e24f0cebb",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smallb\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:14:40.579Z",
+  "updatedAt": "2026-10-02T20:14:40.605Z",
+  "startedAt": "2026-10-02T20:14:40.584Z",
+  "completedAt": "2026-10-02T20:14:40.605Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_d0232b87-f83f-419b-88a3-016e24f0cebb\\receipt.json"
+}

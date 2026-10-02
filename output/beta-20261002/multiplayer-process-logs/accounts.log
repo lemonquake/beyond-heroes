@@ -1,0 +1,40 @@
+Beyond Heroes account service listening on HTTPS port 18443; data: C:\Users\LEMONP~1\AppData\Local\Temp\beyond-heroes-official-642x2uuc\beyond_heroes.sqlite3
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 60359)
+Traceback (most recent call last):
+  File "A:\Python\beyond-heroes\server\service.py", line 632, in dispatch
+    result = self.server.store.handle(method, path, body, token=token, ip=self.client_address[0], internal=internal)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "A:\Python\beyond-heroes\server\service.py", line 465, in handle
+    raise ApiError(409, "Your play session expired. Sign in and load your last server save.", "lease_expired")
+ApiError: (409, 'Your play session expired. Sign in and load your last server save.', 'lease_expired')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "A:\Python\beyond-heroes\server\service.py", line 612, in do_POST
+    self.dispatch("POST")
+  File "A:\Python\beyond-heroes\server\service.py", line 635, in dispatch
+    self.reply(error.status, {"error": error.message, "code": error.code})
+  File "A:\Python\beyond-heroes\server\service.py", line 653, in reply
+    self.wfile.write(payload)
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1210, in sendall
+    v = self.send(byte_view[count:])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lemon PC\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1179, in send
+    return self._sslobj.write(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:2427)
+----------------------------------------

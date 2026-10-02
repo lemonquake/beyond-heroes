@@ -86,6 +86,10 @@ func test_lite_build_is_lighter_with_the_same_gameplay() -> void:
 		if cf.decor_instances.has("fern"):
 			ok(cl.decor_instances.get("fern", 0) < cf.decor_instances.fern * 0.35, "%s: undergrowth thinned" % id)
 		for asset in cf.decor_instances:
+			if String(asset).ends_with("~o"):
+				# map-design pass: optional storytelling details (DataVignettes "o") are left out on Low by design
+				eq(cl.decor_instances.get(asset, 0), 0, "%s: optional detail %s left out" % [id, asset])
+				continue
 			if not MapBuilder.LITE_KEEP.has(asset):
 				eq(cl.decor_instances.get(asset, 0), cf.decor_instances[asset], "%s: %s (not thinned) kept whole" % [id, asset])
 		# gameplay geometry is identical: the same ground heights, colliders, spawns, teleporters, exits
@@ -141,17 +145,19 @@ func test_light_budget() -> void:
 	var holder := Node3D.new()
 	host.add_child(holder)
 	var lights: Array[OmniLight3D] = []
+	# measured far from the origin, where other suites' maps (and their lights) may still stand
+	var o := Vector3(5000, 0, 0)
 	for i in 12:
 		var l := OmniLight3D.new()
 		l.omni_range = 8.0
-		l.position = Vector3(i * 4.0, 2, 0)
+		l.position = o + Vector3(i * 4.0, 2, 0)
 		holder.add_child(l)
 		lights.append(l)
 	var hidden := OmniLight3D.new()     # a light its owner switched off stays off
 	hidden.visible = false
-	hidden.position = Vector3(1, 2, 0)
+	hidden.position = o + Vector3(1, 2, 0)
 	holder.add_child(hidden)
-	Perf._budget_lights(Vector3.ZERO)
+	Perf._budget_lights(o)
 	eq(Perf.stats.lights_on, Perf.LIGHT_BUDGET, "only the budgeted number of lights shine")
 	for i in Perf.LIGHT_BUDGET:
 		ok(not Perf._off_lights.has(lights[i]), "light %d (among the nearest) is on" % i)
@@ -159,7 +165,7 @@ func test_light_budget() -> void:
 	ok(Perf._off_lights.has(hidden), "a hidden light never takes a slot")
 	ok(lights[11].visible, "the budget never touches the node's own visibility")
 	# walk to the other end: the budget follows
-	Perf._budget_lights(Vector3(44, 0, 0))
+	Perf._budget_lights(o + Vector3(44, 0, 0))
 	ok(not Perf._off_lights.has(lights[11]) and Perf._off_lights.has(lights[0]), "the budget follows the hero")
 	Settings.efficiency_mode = false
 	Perf._restore()

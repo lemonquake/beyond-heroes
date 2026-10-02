@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_2dc4b23c-4668-40dc-ba5b-d24a2e01f102",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_barrel\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:22.785Z",
+  "updatedAt": "2026-10-02T21:12:22.839Z",
+  "startedAt": "2026-10-02T21:12:22.792Z",
+  "completedAt": "2026-10-02T21:12:22.839Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-7241df86-b8de-464d-8383-ba1e87543301' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_barrel\r'",
+    "retryable": false
+  }
+}

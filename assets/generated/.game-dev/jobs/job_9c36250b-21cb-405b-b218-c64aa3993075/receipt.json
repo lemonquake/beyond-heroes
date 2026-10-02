@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smalla\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_smalla",
+      "category": "environment_prop",
+      "description": "Small irregular rock. Intended use: Transition scatter around larger rocks",
+      "displayName": "kenney_nature_rock_smalla",
+      "files": [
+        {
+          "bytes": 3044,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1"
+        },
+        {
+          "bytes": 1614,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "037b7f8d7d80a835d7301e8cdadd6e3eb49ca27d25bd5c15dce40cb41b3b2d47"
+        },
+        {
+          "bytes": 828,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "732dacdf38ea7c69beb9be54df804db5c4280c792fcc70e1013c3a2187bbcf93"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "99c54be205e692b12fea9894577b694febea93c81f32d1b6c9c43f7127ce8c28"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_19d092d84a5a2451c4fda100",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:51.043Z"
+}

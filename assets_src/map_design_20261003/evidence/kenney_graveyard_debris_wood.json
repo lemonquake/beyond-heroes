@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_debris_wood.glb",
+    "fileBytes": 21832,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 180,
+    "triangleCount": 108,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10965
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.2292555272579193,
+        0,
+        -0.25138676166534424
+      ],
+      "max": [
+        0.2292555272579193,
+        0.10000000149011612,
+        0.25283801555633545
+      ],
+      "sizeMeters": [
+        0.4585110545158386,
+        0.10000000149011612,
+        0.5042247772216797
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_debris_wood.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 108,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        0.4585110545158386,
+        0.10000000149011612,
+        0.5042247772216797
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_debris_wood\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_graveyard_debris_wood",
+        "category": "environment_prop",
+        "description": "Broken timber debris. Intended use: Flooded Deeps wreck edge and abandoned storeroom",
+        "displayName": "kenney_graveyard_debris_wood",
+        "files": [
+          {
+            "bytes": 21832,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8"
+          },
+          {
+            "bytes": 1751,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "bdd0bd0c6a902ec2ce1fa559795373d97c08cf70a3d6610a9b2574b10e502e64"
+          },
+          {
+            "bytes": 1104,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "f0ae3d0b815e3da20fbb0b716f8d020f485b60c0ae1976e48459a1ee1998cf43"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "a18b89fabd644887cf48d80216f0ad4ae5abcc24631bb5d3388360ca599ae29e"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_844b50b23087e2b9589796c6",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "f0cf5285322f7d75125487f1574a61cca2fd96edb0e702a2773ae5cbb0244133",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+      "bytes": 10965
+    }
+  ]
+}

@@ -92,6 +92,18 @@ const ENV := {
 	"BH_Feather": ["cloth", Color(0.16, 0.48, 0.42), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_FeatherRed": ["cloth", Color(0.62, 0.14, 0.1), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_JungleLeaf": ["", Color(0.2, 0.36, 0.16), 0.75, 0.0, 1.0, Color.BLACK, 0.0],
+	# map-design pass (2026-10-03): the prepared Kenney pieces (kd_*, tools/blender/environment/prepare_kenney.py) map
+	# their parts onto the existing contract plus these few. Solid low-poly crowns take the moss grain so they read as
+	# leaf mass rather than flat plastic; colours are muted to sit beside the painted kit.
+	"BH_Foliage": ["moss", Color(0.46, 0.56, 0.32), 0.88, 0.0, 0.7, Color.BLACK, 0.0],
+	"BH_FoliageDark": ["moss", Color(0.27, 0.36, 0.24), 0.9, 0.0, 0.7, Color.BLACK, 0.0],
+	"BH_Rock": ["rock_cliff", Color(0.74, 0.72, 0.68), 0.92, 0.0, 0.35, Color.BLACK, 0.0],
+	"BH_Terracotta": ["red_clay", Color(0.8, 0.56, 0.42), 0.88, 0.0, 0.6, Color.BLACK, 0.0],
+	"BH_Produce": ["", Color(0.58, 0.36, 0.17), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_MushroomPale": ["", Color(0.76, 0.64, 0.48), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_FlowerYellow": ["", Color(0.84, 0.68, 0.26), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_FlowerViolet": ["", Color(0.5, 0.38, 0.62), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
+	"BH_FlowerWhite": ["", Color(0.88, 0.86, 0.8), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
 }
 
 ## bh-029: the Heartwire restored (bright white) instead of the Blackwire (dim white). Set from the hero's flag on every

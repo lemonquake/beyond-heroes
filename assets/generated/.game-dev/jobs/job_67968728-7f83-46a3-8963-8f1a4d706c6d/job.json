@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_67968728-7f83-46a3-8963-8f1a4d706c6d",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:45.787Z",
+  "updatedAt": "2026-10-02T21:11:45.826Z",
+  "startedAt": "2026-10-02T21:11:45.793Z",
+  "completedAt": "2026-10-02T21:11:45.826Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_67968728-7f83-46a3-8963-8f1a4d706c6d\\receipt.json"
+}

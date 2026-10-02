@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_furniture_plantsmall2",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_plant_pot_b.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0",
+ "source_sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9",
+ "derived_sha256": "3ac220145e191675768dbf8d7f9136802a7f232b4ceb8450baccfa878654f2b1",
+ "scale": 2.4,
+ "scale_rule": [
+  "s",
+  2.4
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Terracotta",
+  "BH_Foliage"
+ ],
+ "part_faces": {
+  "BH_Terracotta": 58,
+  "BH_Foliage": 100
+ },
+ "source_to_material": {
+  "wood": "BH_Terracotta",
+  "plant": "BH_Foliage"
+ },
+ "triangles": 158,
+ "surfaces": 2,
+ "source_triangles": 158,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.227,
+  0.336,
+  0.227
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

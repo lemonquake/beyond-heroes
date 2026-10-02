@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_513cad04-dab4-4487-8bdd-7b3360c42fdc",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_stone_largea\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:14:43.239Z",
+  "updatedAt": "2026-10-02T20:14:43.267Z",
+  "startedAt": "2026-10-02T20:14:43.244Z",
+  "completedAt": "2026-10-02T20:14:43.267Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_513cad04-dab4-4487-8bdd-7b3360c42fdc\\receipt.json"
+}

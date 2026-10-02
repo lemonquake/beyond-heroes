@@ -49,6 +49,9 @@ ENV/
 /game/server/official.cfg
 /game/server/official_ca.crt
 
+# Generated diagnostic log exceeds GitHub's per-file size limit; preserve locally.
+/output/world-polish-20261003/baseline/full-suite-raw.log
+
 # Operating System Files
 .DS_Store
 Thumbs.db

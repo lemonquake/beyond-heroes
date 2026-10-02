@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_rock_talla",
+  "category": "environment_prop",
+  "description": "Tall narrow rock. Intended use: Sparse rocky coast silhouettes",
+  "displayName": "kenney_nature_rock_talla",
+  "files": [
+    {
+      "bytes": 12072,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d"
+    },
+    {
+      "bytes": 1584,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "b3b67cc69467448e04859edb02fccbd523a7ded9d61286bb99ffdc5a1cbd2285"
+    },
+    {
+      "bytes": 827,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "d8f68e9912c4cc648d7641f1b4b59f05b592f7a5584aed75d73da52468530cd2"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "7de0e0cf7aaaa767c98537ca6fef327b3303900848f74dea143d23c8229b1a26"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_8eeb019899e746435f92c55a",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

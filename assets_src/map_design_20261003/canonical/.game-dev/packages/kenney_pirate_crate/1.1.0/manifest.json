@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_pirate_crate",
+  "category": "environment_prop",
+  "description": "Wooden cargo crate. Intended use: Agdao pier handling area and Westreach stolen cargo",
+  "displayName": "kenney_pirate_crate",
+  "files": [
+    {
+      "bytes": 19348,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "000d22f877d2a6f766d07d8cb3ea2b798c940b3480304d973e94e93069dd3a83"
+    },
+    {
+      "bytes": 1728,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "02569e00c31a4b641186f62456cae43d536469253f5955efd48243378f363026"
+    },
+    {
+      "bytes": 1070,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "287034b6570b68c89ce22789b7d808101b78cbe2bb453eace52ec50e7121fe73"
+    },
+    {
+      "bytes": 3649,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "b14e6a52a7bce3d5acd0c1b5331308501cb99c8fec7ea090b00c17cd61f3b7ec"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_cf5bb545d8bfc207381261aa",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

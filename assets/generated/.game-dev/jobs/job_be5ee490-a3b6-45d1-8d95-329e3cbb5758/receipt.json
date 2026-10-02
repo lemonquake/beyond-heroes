@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_books\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_books",
+      "category": "environment_prop",
+      "description": "Small stack of books. Intended use: Cartographer desk and council reading table",
+      "displayName": "kenney_furniture_books",
+      "files": [
+        {
+          "bytes": 6864,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c"
+        },
+        {
+          "bytes": 1558,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2ad690573afe304a05475d8f076ea414cf3811d1926fc12b61c19130ee5acebc"
+        },
+        {
+          "bytes": 831,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "31132d8a9b3ef4b98c70d65d0e4edc19999c6be64df65ea50f3d54392ce7d633"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "0035b7357b6306bc58f97007050fff28d83b058d7551edf90bcef05e28563428"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_5b38d7fea2220bc7f82d2ce6",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:16.449Z"
+}

@@ -1,0 +1,6 @@
+town-desktop: frame median=7.46ms p95=12.13ms p99=12.8ms
+town-mobile-renderer: frame median=9.73ms p95=15.29ms p99=16.2ms
+forest-desktop: frame median=10.78ms p95=16.88ms p99=20.36ms
+forest-mobile-renderer: frame median=12.38ms p95=19.52ms p99=22.67ms
+forest-combat-desktop: frame median=56.22ms p95=79.82ms p99=110.11ms
+forest-combat-mobile-renderer: frame median=64.17ms p95=80.83ms p99=157.79ms

@@ -127,6 +127,31 @@ func modifiers() -> Array:
 		var sd := DB.item_set(set_id)
 		if sd != null:
 			out.append_array(sd.modifiers_for(set_counts()[set_id]))
+	out.append_array(resistance_limit(out))
+	return out
+
+## bh-033: equipment as a whole (enchantments, crystals, licenses, set bonuses, powers and implicits) may grant at most
+## GEAR_RES_LIMIT of any one elemental resistance; All Resistances counts toward every element. Wisdom, Spirit, talents,
+## guild passives and buffs add on top, up to the normal 75% cap. The limit appears as its own line in the breakdown.
+const GEAR_RES_LIMIT := 0.50
+
+static func resistance_limit(mods: Array) -> Array:
+	var per := {}
+	var all := 0.0
+	for m in mods:
+		var sm := m as StatModifier
+		if sm == null or sm.op != StatModifier.Op.FLAT:
+			continue
+		if sm.stat == &"res_all":
+			all += sm.value
+		elif String(sm.stat).begins_with("res_") and sm.stat != &"res_cap":
+			per[sm.stat] = float(per.get(sm.stat, 0.0)) + sm.value
+	var out := []
+	for e in Elements.ELEMENTAL:
+		var k := Elements.res_key(e)
+		var total := float(per.get(k, 0.0)) + all
+		if total > GEAR_RES_LIMIT + 0.0001:
+			out.append(StatModifier.flat(k, GEAR_RES_LIMIT - total, "Equipment limit: gear gives at most %d%%" % roundi(GEAR_RES_LIMIT * 100.0)))
 	return out
 
 ## Distinct equipped pieces per set: {set_id: count}. The same base in two slots (two rings) counts once.

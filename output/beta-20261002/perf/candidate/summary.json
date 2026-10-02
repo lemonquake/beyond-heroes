@@ -1,0 +1,522 @@
+{
+  "combat-12/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 12.65,
+      "p95": 20.64,
+      "p99": 28.52
+    },
+    "gpu": {
+      "median": 6.25,
+      "p95": 8.09
+    },
+    "script": {
+      "median": 13.81,
+      "p95": 20.34
+    },
+    "physics": {
+      "median": 7.44,
+      "p95": 9.28
+    },
+    "draws": {
+      "median": 685.0,
+      "p95": 770.0
+    },
+    "prims": {
+      "median": 333853.0,
+      "p95": 383683.0
+    },
+    "objects": {
+      "median": 1327.0,
+      "p95": 1418.0
+    },
+    "lights": {
+      "median": 0.0,
+      "p95": 0.0
+    },
+    "cpu_render": {
+      "median": 4.87,
+      "p95": 7.74
+    }
+  },
+  "combat-12/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 8.64,
+      "p95": 15.34,
+      "p99": 17.93
+    },
+    "gpu": {
+      "median": 1.71,
+      "p95": 2.2
+    },
+    "script": {
+      "median": 11.31,
+      "p95": 36.6
+    },
+    "physics": {
+      "median": 7.49,
+      "p95": 19.72
+    },
+    "draws": {
+      "median": 630.5,
+      "p95": 693.0
+    },
+    "prims": {
+      "median": 394346.0,
+      "p95": 425459.0
+    },
+    "objects": {
+      "median": 1265.0,
+      "p95": 1354.0
+    },
+    "lights": {
+      "median": 0.0,
+      "p95": 0.0
+    },
+    "cpu_render": {
+      "median": 1.36,
+      "p95": 2.44
+    }
+  },
+  "combat/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 58.79,
+      "p95": 83.2,
+      "p99": 91.91
+    },
+    "gpu": {
+      "median": 18.21,
+      "p95": 24.34
+    },
+    "script": {
+      "median": 40.26,
+      "p95": 51.84
+    },
+    "physics": {
+      "median": 14.97,
+      "p95": 24.62
+    },
+    "draws": {
+      "median": 1838.0,
+      "p95": 1921.0
+    },
+    "prims": {
+      "median": 1012764.0,
+      "p95": 1065415.0
+    },
+    "objects": {
+      "median": 2399.5,
+      "p95": 2634.0
+    },
+    "lights": {
+      "median": 0.0,
+      "p95": 0.0
+    },
+    "cpu_render": {
+      "median": 21.23,
+      "p95": 27.93
+    }
+  },
+  "combat/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 35.11,
+      "p95": 79.58,
+      "p99": 141.43
+    },
+    "gpu": {
+      "median": 9.02,
+      "p95": 20.71
+    },
+    "script": {
+      "median": 25.32,
+      "p95": 76.39
+    },
+    "physics": {
+      "median": 15.82,
+      "p95": 505.14
+    },
+    "draws": {
+      "median": 1770.0,
+      "p95": 1857.0
+    },
+    "prims": {
+      "median": 1133214.0,
+      "p95": 1180261.0
+    },
+    "objects": {
+      "median": 2468.0,
+      "p95": 2551.0
+    },
+    "lights": {
+      "median": 0.0,
+      "p95": 0.0
+    },
+    "cpu_render": {
+      "median": 3.08,
+      "p95": 5.44
+    }
+  },
+  "dungeon/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 5.74,
+      "p95": 11.33,
+      "p99": 14.2
+    },
+    "gpu": {
+      "median": 3.03,
+      "p95": 4.98
+    },
+    "script": {
+      "median": 15.66,
+      "p95": 23.11
+    },
+    "draws": {
+      "median": 457.0,
+      "p95": 574.0
+    },
+    "prims": {
+      "median": 159204.0,
+      "p95": 257390.0
+    },
+    "objects": {
+      "median": 960.0,
+      "p95": 1026.0
+    },
+    "lights": {
+      "median": 6.0,
+      "p95": 6.0
+    },
+    "cpu_render": {
+      "median": 2.55,
+      "p95": 4.75
+    }
+  },
+  "dungeon/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 3.05,
+      "p95": 5.99,
+      "p99": 8.23
+    },
+    "gpu": {
+      "median": 0.93,
+      "p95": 1.05
+    },
+    "script": {
+      "median": 22.35,
+      "p95": 47.9
+    },
+    "draws": {
+      "median": 349.0,
+      "p95": 358.0
+    },
+    "prims": {
+      "median": 177888.0,
+      "p95": 182544.0
+    },
+    "objects": {
+      "median": 979.0,
+      "p95": 1021.0
+    },
+    "lights": {
+      "median": 69.0,
+      "p95": 69.0
+    },
+    "cpu_render": {
+      "median": 0.58,
+      "p95": 1.07
+    }
+  },
+  "forest/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 6.32,
+      "p95": 10.57,
+      "p99": 14.15
+    },
+    "gpu": {
+      "median": 3.66,
+      "p95": 4.9
+    },
+    "script": {
+      "median": 16.87,
+      "p95": 77.17
+    },
+    "draws": {
+      "median": 443.0,
+      "p95": 501.0
+    },
+    "prims": {
+      "median": 131505.0,
+      "p95": 178969.0
+    },
+    "objects": {
+      "median": 1024.0,
+      "p95": 1294.0
+    },
+    "lights": {
+      "median": 6.0,
+      "p95": 6.0
+    },
+    "cpu_render": {
+      "median": 2.82,
+      "p95": 5.05
+    }
+  },
+  "forest/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 2.57,
+      "p95": 9.64,
+      "p99": 11.54
+    },
+    "gpu": {
+      "median": 1.47,
+      "p95": 1.76
+    },
+    "script": {
+      "median": 31.76,
+      "p95": 93.17
+    },
+    "draws": {
+      "median": 364.0,
+      "p95": 445.0
+    },
+    "prims": {
+      "median": 126478.0,
+      "p95": 179812.0
+    },
+    "objects": {
+      "median": 1013.0,
+      "p95": 1222.0
+    },
+    "lights": {
+      "median": 47.0,
+      "p95": 47.0
+    },
+    "cpu_render": {
+      "median": 0.56,
+      "p95": 1.57
+    }
+  },
+  "interior/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 4.7,
+      "p95": 8.64,
+      "p99": 9.81
+    },
+    "gpu": {
+      "median": 3.97,
+      "p95": 5.41
+    },
+    "script": {
+      "median": 10.93,
+      "p95": 1231.72
+    },
+    "draws": {
+      "median": 539.0,
+      "p95": 549.0
+    },
+    "prims": {
+      "median": 213134.0,
+      "p95": 213422.0
+    },
+    "objects": {
+      "median": 906.0,
+      "p95": 1050.0
+    },
+    "lights": {
+      "median": 6.0,
+      "p95": 6.0
+    },
+    "cpu_render": {
+      "median": 2.8,
+      "p95": 5.33
+    }
+  },
+  "interior/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 1.94,
+      "p95": 4.31,
+      "p99": 6.06
+    },
+    "gpu": {
+      "median": 0.64,
+      "p95": 0.72
+    },
+    "script": {
+      "median": 49.04,
+      "p95": 1761.87
+    },
+    "draws": {
+      "median": 455.0,
+      "p95": 464.0
+    },
+    "prims": {
+      "median": 226172.0,
+      "p95": 226458.0
+    },
+    "objects": {
+      "median": 907.0,
+      "p95": 1050.0
+    },
+    "lights": {
+      "median": 15.0,
+      "p95": 15.0
+    },
+    "cpu_render": {
+      "median": 0.54,
+      "p95": 1.25
+    }
+  },
+  "town-wide-map/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 4.4,
+      "p95": 8.13,
+      "p99": 9.6
+    },
+    "gpu": {
+      "median": 2.94,
+      "p95": 4.39
+    },
+    "script": {
+      "median": 11.76,
+      "p95": 51.71
+    },
+    "draws": {
+      "median": 402.0,
+      "p95": 492.0
+    },
+    "prims": {
+      "median": 161981.0,
+      "p95": 200637.0
+    },
+    "objects": {
+      "median": 804.0,
+      "p95": 890.0
+    },
+    "lights": {
+      "median": 6.0,
+      "p95": 6.0
+    },
+    "cpu_render": {
+      "median": 2.46,
+      "p95": 4.93
+    }
+  },
+  "town-wide-map/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 2.39,
+      "p95": 5.15,
+      "p99": 6.25
+    },
+    "gpu": {
+      "median": 1.44,
+      "p95": 2.24
+    },
+    "script": {
+      "median": 27.59,
+      "p95": 3371.57
+    },
+    "draws": {
+      "median": 412.0,
+      "p95": 435.0
+    },
+    "prims": {
+      "median": 226749.0,
+      "p95": 247653.0
+    },
+    "objects": {
+      "median": 833.0,
+      "p95": 1133.0
+    },
+    "lights": {
+      "median": 88.0,
+      "p95": 88.0
+    },
+    "cpu_render": {
+      "median": 0.55,
+      "p95": 1.33
+    }
+  },
+  "town/mobile": {
+    "runs": 3,
+    "frame": {
+      "median": 4.33,
+      "p95": 8.27,
+      "p99": 9.36
+    },
+    "gpu": {
+      "median": 3.02,
+      "p95": 4.45
+    },
+    "script": {
+      "median": 10.29,
+      "p95": 59.91
+    },
+    "draws": {
+      "median": 388.0,
+      "p95": 501.0
+    },
+    "prims": {
+      "median": 160676.0,
+      "p95": 233361.0
+    },
+    "objects": {
+      "median": 783.0,
+      "p95": 899.0
+    },
+    "lights": {
+      "median": 6.0,
+      "p95": 6.0
+    },
+    "cpu_render": {
+      "median": 2.44,
+      "p95": 4.81
+    }
+  },
+  "town/pc-low": {
+    "runs": 3,
+    "frame": {
+      "median": 2.56,
+      "p95": 5.03,
+      "p99": 6.21
+    },
+    "gpu": {
+      "median": 1.34,
+      "p95": 2.16
+    },
+    "script": {
+      "median": 27.58,
+      "p95": 40.06
+    },
+    "draws": {
+      "median": 388.0,
+      "p95": 420.0
+    },
+    "prims": {
+      "median": 227586.0,
+      "p95": 331133.0
+    },
+    "objects": {
+      "median": 810.0,
+      "p95": 1203.0
+    },
+    "lights": {
+      "median": 88.0,
+      "p95": 88.0
+    },
+    "cpu_render": {
+      "median": 0.6,
+      "p95": 1.31
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "description": "Plain pennant flag. Intended use: Town accents with canon colours and no pirate markings",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/pirate-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+    "originalArchiveSha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+    "originalModelSha256": "05956b9389135492e0644bd7d49711d1e4f865cd67808f7da5709a23e02d7d6f",
+    "originalRelativePath": "sources/pirate-kit/Models/GLB format/flag-pennant.glb",
+    "licenseEvidence": "licenses/pirate-kit.txt",
+    "transformations": [
+      "Embedded external image bytes in GLB; geometry/material values unchanged"
+    ],
+    "originalTextureDependencies": [
+      {
+        "uri": "Textures/colormap.png",
+        "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+        "bytes": 10061
+      }
+    ],
+    "downloadDate": "2026-10-03"
+  }
+}

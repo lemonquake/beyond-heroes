@@ -1,0 +1,19 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+  "licenseEvidence": "licenses/nature-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+  "originalModelSha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68",
+  "originalRelativePath": "sources/nature-kit/Models/GLTF format/log_stack.glb",
+  "originalTextureDependencies": [],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 10896,
+    "fileName": "log_stack.glb",
+    "sha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68"
+  },
+  "sourceUri": "https://kenney.nl/assets/nature-kit",
+  "transformations": []
+}

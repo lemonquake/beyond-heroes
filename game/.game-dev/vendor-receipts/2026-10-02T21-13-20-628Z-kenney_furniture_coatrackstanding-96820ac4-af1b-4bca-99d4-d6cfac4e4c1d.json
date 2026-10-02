@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_2b35cacbc798193213a84065",
+  "assetId": "kenney_furniture_coatrackstanding",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_coatrackstanding",
+  "modelSha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+  "manifestSha256": "4a59c6537af2d7420c22f7d7bd5802a6d40106290c2a7796b9da2284a52aab7d",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:20.628Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_coatrackstanding\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

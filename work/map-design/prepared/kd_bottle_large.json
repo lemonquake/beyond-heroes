@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_bottle_large",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_bottle_large.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0",
+ "source_sha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c",
+ "derived_sha256": "7c5dd95a52fb13e2c43b7fbb7d5087998c56f77e8239fab2d6586f87cd7b6662",
+ "scale": 0.5054,
+ "scale_rule": [
+  "h",
+  0.45
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Terracotta",
+  "BH_Rope"
+ ],
+ "part_faces": {
+  "BH_Terracotta": 92,
+  "BH_Rope": 16
+ },
+ "source_to_material": {
+  "wood": "BH_Terracotta",
+  "cream": "BH_Rope"
+ },
+ "triangles": 108,
+ "surfaces": 2,
+ "source_triangles": 108,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.235,
+  0.45,
+  0.235
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

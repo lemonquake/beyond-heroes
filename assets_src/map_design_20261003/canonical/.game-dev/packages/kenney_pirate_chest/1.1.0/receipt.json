@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:25.970Z",
+  "destination": {
+    "assetId": "kenney_pirate_chest",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "de24cfe042a84afa165740cf3ad8fc35359572bfaf5e594570910fbed4ed7089",
+  "packageId": "pkg_8524e1bd47070a4dfd2a7e20",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 35352,
+    "fileName": "kenney_pirate_chest.glb",
+    "sha256": "67765386e504069b85b33cfcb7b13504a49c64d206d8b8302c420f72e0ba6631"
+  }
+}

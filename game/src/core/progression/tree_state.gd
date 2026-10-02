@@ -144,10 +144,16 @@ func to_dict() -> Dictionary:
 		d[String(id)] = ranks[id]
 	return d
 
-func from_dict(d: Dictionary) -> void:
+## Returns points removed by the new side-ability caps, for old-save migration.
+func from_dict(d: Dictionary) -> int:
 	ranks.clear()
+	var refunded := 0
 	for k in d:
 		var id := StringName(k)
-		if not tree.node(id).is_empty():
-			ranks[id] = clampi(int(d[k]), 0, int(tree.node(id).get("max_rank", 1)))
+		var n := tree.node(id)
+		if not n.is_empty():
+			var old_rank := clampi(int(d[k]), 0, TreeDef.LEVEL_MAX)
+			ranks[id] = mini(old_rank, int(n.get("max_rank", 1)))
+			refunded += (old_rank - int(ranks[id])) * int(n.get("cost", 1))
 	changed.emit()
+	return refunded

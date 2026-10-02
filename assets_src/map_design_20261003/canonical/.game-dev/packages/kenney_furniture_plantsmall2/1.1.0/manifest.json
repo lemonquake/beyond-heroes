@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_plantsmall2",
+  "category": "environment_prop",
+  "description": "Second small potted plant. Intended use: Apothecary herb display and house shelves",
+  "displayName": "kenney_furniture_plantsmall2",
+  "files": [
+    {
+      "bytes": 12996,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9"
+    },
+    {
+      "bytes": 1612,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "f0b1b5f17cdd07e5b8a0e5b06926f2ab9d30c9e8c1f08e6f5e083bd25774f487"
+    },
+    {
+      "bytes": 844,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "fa6c13090258599fda944d42b5c285eab9fed85b35b302da996090fe1f26cbb3"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "2828e4ce349adfa3cd1f3de4343135e72c245c69343f3faa06ec79b50c5a845d"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_7c94ca94c73f0e99eaaaa45c",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_e36e9e1a-85ba-4206-b030-236a93a6b9f0",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_planks\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:41.059Z",
+  "updatedAt": "2026-10-02T20:01:41.085Z",
+  "startedAt": "2026-10-02T20:01:41.064Z",
+  "completedAt": "2026-10-02T20:01:41.085Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_e36e9e1a-85ba-4206-b030-236a93a6b9f0\\receipt.json"
+}

@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\pot_small.glb",
+    "fileBytes": 7004,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 3,
+    "vertexCount": 360,
+    "triangleCount": 72,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 3,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.16172480583190918,
+        -0.05,
+        -0.1400577872991562
+      ],
+      "max": [
+        0.16172480583190918,
+        0.21799997687339784,
+        0.1400577872991562
+      ],
+      "sizeMeters": [
+        0.32344961166381836,
+        0.2679999768733978,
+        0.2801155745983124
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\pot_small.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 72,
+      "materials": 3,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.32344961166381836,
+        0.2679999768733978,
+        0.2801155745983124
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_pot_small\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_pot_small",
+        "category": "environment_prop",
+        "description": "Small earthen pot. Intended use: Herbs, kitchen storage and market table grouping",
+        "displayName": "kenney_nature_pot_small",
+        "files": [
+          {
+            "bytes": 7004,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8"
+          },
+          {
+            "bytes": 1599,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "61d80582fa92ae4dc0291ae211ef2610e6968fe8a2507a72636652c6427f79ab"
+          },
+          {
+            "bytes": 824,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "d7eae781ddb1f54db170b7f99cc14182987dfbae7eac8b26a7fd695f320d28e8"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "b546bddd08cf1ce71644576b71795fabf464cb9f78211b31e8ac424eb4d763b2"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_f7cfd962294f01e456e13736",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8",
+  "embedded_textures": []
+}

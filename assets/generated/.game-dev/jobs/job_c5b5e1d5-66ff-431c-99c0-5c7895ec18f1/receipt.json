@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_stoolbarsquare\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_stoolbarsquare",
+      "category": "environment_prop",
+      "description": "Square stool. Intended use: Tavern counter and smithy work corner",
+      "displayName": "kenney_furniture_stoolbarsquare",
+      "files": [
+        {
+          "bytes": 9784,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b"
+        },
+        {
+          "bytes": 1599,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "460614a48ca470d264ac16a966fdf12bec3b7dbcaf2f8d36f96a3915a986a3d8"
+        },
+        {
+          "bytes": 812,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c36ef05431f542e0eeb7a4794e0f8e8a8b4eb032dfdb2a47a41aa4f573c1c922"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "5e6e3fe8c62a3e33ae38de99a70e45b03c46003681abc0ae8e8c336576a74268"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_fd94ada01a8738a14f9d190a",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:54.955Z"
+}

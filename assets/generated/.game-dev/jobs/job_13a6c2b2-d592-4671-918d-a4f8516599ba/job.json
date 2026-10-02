@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_13a6c2b2-d592-4671-918d-a4f8516599ba",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:44.282Z",
+  "updatedAt": "2026-10-02T21:12:44.318Z",
+  "startedAt": "2026-10-02T21:12:44.288Z",
+  "completedAt": "2026-10-02T21:12:44.318Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_13a6c2b2-d592-4671-918d-a4f8516599ba\\receipt.json"
+}

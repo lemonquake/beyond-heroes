@@ -28,6 +28,7 @@ var _guild_text: Label
 var _guild_crest: TextureRect
 var _promotion_text: Label
 var _promotion_scroll: ScrollContainer
+var _track_btn: Button
 var _points: Label
 var _attr_rows := {}              # attr -> {value: Label, plus: Button, pending: Label}
 var _pending := {}                # attr -> points not yet committed
@@ -181,6 +182,13 @@ func _build() -> void:
 	_promotion_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_promotion_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_promotion_scroll.add_child(_promotion_text)
+	# bh-033: the optional HUD checklist for the next rank (the player's choice is kept per hero)
+	_track_btn = button("Track Rank Up", func() -> void:
+		if hero:
+			hero.rank_tracker = "expanded" if hero.rank_tracker == "hidden" else "hidden"
+			Events.rank_tracker_changed.emit()
+			refresh(), &"", 240.0)
+	mid.add_child(_track_btn)
 	# right: derived stats (scrolling)
 	var right := vbox(6)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -333,10 +341,23 @@ func refresh() -> void:
 	var g := GuildRegistry.info(hero, hero.guild)
 	_guild_text.text = GuildRules.display_name(hero) if not g.is_empty() else "No guild"
 	_guild_crest.texture = (UIArt.tex(String(g.crest)) if g.has("crest") else GuildRegistry.banner(hero, hero.guild)) if not g.is_empty() else null
-	var promotion := GuildRules.next_promotion(hero)
-	_promotion_text.text = String(promotion.error)
-	if int(promotion.rank) > 0:
-		_promotion_text.text = "Automatic: Class %s · Level %d · %d gold\n%s" % [DataGuilds.letter(int(promotion.rank)), promotion.level, promotion.fee, String(promotion.deed).replace("; ", "\n")]
+	# bh-033: one rank ahead, from the same rules that promote (no future ladder, no story spoilers)
+	var guide := GuildRules.rank_guide(hero)
+	var pl := PackedStringArray()
+	if guide.state == "max":
+		pl.append("You hold the highest rank.")
+	else:
+		pl.append("%s  ->  %s" % [DataGuilds.tier_name(hero.tier), String(guide.title)])
+		pl.append("Ready to rank up: promotion happens automatically." if guide.ready else "Next: %s. %s" % [String(guide.next_action), String(guide.next_hint)])
+		for st in guide.steps:
+			var cnt := ""
+			if int(st.need) > 1:
+				cnt = " (%d / %d)" % [int(st.have) if st.key == "fee" else mini(int(st.have), int(st.need)), int(st.need)]
+			pl.append("%s %s%s" % ["✓" if st.done else "○", String(st.label), cnt])
+		pl.append(String(guide.note))
+	_promotion_text.text = "\n".join(pl)
+	_track_btn.text = "Track Rank Up" if hero.rank_tracker == "hidden" else "Stop Tracking"
+	_track_btn.visible = guide.state != "max"
 	_refresh_attrs()
 
 func _guild_tip() -> String:

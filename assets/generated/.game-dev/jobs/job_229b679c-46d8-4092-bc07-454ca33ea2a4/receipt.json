@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smallb\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_smallb",
+      "category": "environment_prop",
+      "description": "Second small rock silhouette. Intended use: Shore and farm-edge accents",
+      "displayName": "kenney_nature_rock_smallb",
+      "files": [
+        {
+          "bytes": 3528,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763"
+        },
+        {
+          "bytes": 1610,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "c6ed0d05596f8664fa04ac4ba0b64a70b86930e5de330b96e9e3b77239e1fe74"
+        },
+        {
+          "bytes": 828,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c944a374f775e0d98df9a96698804ea204012b0aa5929630b6acc4a98016c592"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7145a0dd5bfe7c2fd32e54ac98e81396cb8e2937483f0c354d8e0c82026aed7a"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_e12627e0e8b2163aa65a2c34",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:51.854Z"
+}

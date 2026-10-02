@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:19.808Z",
+  "destination": {
+    "assetId": "kenney_furniture_plantsmall2",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4167127fa0a1ba3dcc943dac941046f939439aea14de6fe9d414342f2ac2283f",
+  "packageId": "pkg_7c94ca94c73f0e99eaaaa45c",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 12996,
+    "fileName": "plantSmall2.glb",
+    "sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9"
+  }
+}

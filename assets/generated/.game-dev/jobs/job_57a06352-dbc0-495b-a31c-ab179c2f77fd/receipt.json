@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_wall_half\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_modular_dungeon_template_wall_half",
+      "category": "environment_prop",
+      "description": "Half-height stone wall. Intended use: Cutaway dungeon side alcoves after scale and collision audit",
+      "displayName": "kenney_modular-dungeon_template_wall_half",
+      "files": [
+        {
+          "bytes": 27220,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "69b0cabe772ca9fb88545ef21e303e434a57cde2fb3bd2373627136534168c56"
+        },
+        {
+          "bytes": 1735,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "340be8c50d6f502cfc242254c8035bf7a45f0e5bac777b80c17cc244e15101a1"
+        },
+        {
+          "bytes": 854,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "e44e429fb9bfe2dfe7de3132bf8bf3b40fab62eea84fdad7603fd946de6e4923"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "92b62996caf62cbfa0373e70ebb5cdf0cea892cbed1143b59bfa19199fa6a42c"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_19212030ff48e43beb15a61b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:52.009Z"
+}

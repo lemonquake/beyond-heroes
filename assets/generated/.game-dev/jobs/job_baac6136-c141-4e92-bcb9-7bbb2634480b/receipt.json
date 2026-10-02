@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "vendor.admit",
+  "result": {
+    "reused": false,
+    "packageId": "pkg_2ceafe1ff64b759b23199be3",
+    "projectRoot": "A:\\Python\\beyond-heroes\\game",
+    "destination": "A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_modular-dungeon_gate_metal_bars",
+    "lockPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "A:\\Python\\beyond-heroes\\game\\.game-dev\\vendor-receipts\\2026-10-02T21-13-34-288Z-kenney_modular_dungeon_gate_metal_bars-dd29b23a-2d65-4a35-9da7-1e49330f08ac.json"
+  },
+  "completedAt": "2026-10-02T21:13:34.314Z"
+}

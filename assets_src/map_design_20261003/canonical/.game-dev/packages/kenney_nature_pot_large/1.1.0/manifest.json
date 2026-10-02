@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_pot_large",
+  "category": "environment_prop",
+  "description": "Large earthen pot. Intended use: Agdao courtyard planters and town storage",
+  "displayName": "kenney_nature_pot_large",
+  "files": [
+    {
+      "bytes": 6168,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "57e60214bc6ab1dc3764c9ffe80091ff45f2bfd49fbc313c1b68dcaab1537aef"
+    },
+    {
+      "bytes": 1595,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "81198692bba6698e091770ba48e0a8934ea0c61d137855b671cbdad5dc4846a2"
+    },
+    {
+      "bytes": 824,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "9c15640c6453eccdd7996906fd237f5d511861322c147c6b2fc69e6ea89483b6"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "1e0d7737e0e4627735cd3e09d94bacc332acf0f3e40fc821d9c5f72ef257dc6d"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_be8ca0dee8e8568a3c3abea9",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

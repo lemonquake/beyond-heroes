@@ -128,20 +128,20 @@ func weight() -> float:
 			w += (c as ItemInstance).weight()
 	return w
 
-func count_of(base_id: StringName) -> int:
+func count_of(base_id: StringName, include_protected := true) -> int:
 	var n := 0
 	for c in cells:
-		if c != null and c.base.id == base_id:
+		if c != null and c.base.id == base_id and (include_protected or not c.is_protected()):
 			n += c.count
 	return n
 
 ## Consume `n` of a stackable base. Returns true if enough existed.
-func consume(base_id: StringName, n := 1) -> bool:
-	if count_of(base_id) < n:
+func consume(base_id: StringName, n := 1, include_protected := true) -> bool:
+	if count_of(base_id, include_protected) < n:
 		return false
 	for i in cells.size():
 		var c: ItemInstance = cells[i]
-		if c != null and c.base.id == base_id:
+		if c != null and c.base.id == base_id and (include_protected or not c.is_protected()):
 			var used := mini(n, c.count)
 			c.count -= used
 			n -= used

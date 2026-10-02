@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_plant_flattall\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_plant_flattall",
+      "category": "foliage",
+      "description": "Tall leafy plant. Intended use: Agdao planters and Coilwood trail margins",
+      "displayName": "kenney_nature_plant_flattall",
+      "files": [
+        {
+          "bytes": 3480,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633"
+        },
+        {
+          "bytes": 1593,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "72774dfd28cdfe8b467754bc36df1e348b2c4141441c09d1309924d8e3b858dc"
+        },
+        {
+          "bytes": 834,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "688035298e13a3c4d672c81aa19acf558bd19a9cac1a53a28f6e8c9fd334d5bc"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "142d6fc1470f3be5c6fb5d49df07ec1861539384fb5614f490687d6240f4f0ac"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f1adb1c2b5025b5f7cc5c0a8",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:41.869Z"
+}

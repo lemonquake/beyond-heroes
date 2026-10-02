@@ -25,6 +25,7 @@ func compose() -> void:
 	_dais()
 	_approach()
 	_abyss()
+	_map_design()
 	set_bounds(AABB(Vector3(-22, -2, -22), Vector3(44, 12, 64)))
 	view("overview", Vector3(0, 0, 6), 0.0, 72.0, 85.0, 45.0)
 	view("arrival", Vector3(0, 0, 30), 0.0, 45.0, 26.0)
@@ -142,3 +143,12 @@ func _abyss() -> void:
 		var a := TAU * i / 3.0 + 0.8
 		var p := Vector3(cos(a) * 110.0, -60.0, sin(a) * 110.0)
 		decor("cliff_b", p, rng.randf() * 360.0, 10.0, false)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the approach stays quiet — a threshold under the arrival and two pieces of fallen
+# masonry at the ledge's far corners. Nothing enters the ring, the charge lanes or the space round the eight pillars.
+
+func _map_design() -> void:
+	kit("kd_floor_inlay", Vector3(0, 0.012, 32.0), 0.0, 0.8, deco)
+	for c in [[Vector3(-6.6, 0, 38.8), 20.0], [Vector3(6.7, 0, 30.9), 200.0]]:
+		kit("kd_debris_stone", c[0], c[1], 1.0, deco)

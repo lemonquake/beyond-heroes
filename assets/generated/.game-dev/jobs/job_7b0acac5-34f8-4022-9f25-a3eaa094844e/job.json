@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_7b0acac5-34f8-4022-9f25-a3eaa094844e",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bedbunk\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:14.838Z",
+  "updatedAt": "2026-10-02T20:15:14.866Z",
+  "startedAt": "2026-10-02T20:15:14.843Z",
+  "completedAt": "2026-10-02T20:15:14.866Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_7b0acac5-34f8-4022-9f25-a3eaa094844e\\receipt.json"
+}

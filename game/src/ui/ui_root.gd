@@ -28,6 +28,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	Game.ui_root = self
+	TouchText.install(self)
 	get_tree().root.theme = UITheme.theme()   # also themes the tooltip layer and drag previews
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)

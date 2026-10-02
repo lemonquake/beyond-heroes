@@ -61,6 +61,8 @@ func build(p_def: MapDef) -> MapRoot:
 	nav.navigation_mesh = nm
 	compose()
 	_flush_batches()
+	root.set_meta(&"vignettes", _vignettes)
+	root.set_meta(&"vignettes_skipped", _vignettes_skipped)
 	return root
 
 ## Override in map scripts.
@@ -124,7 +126,58 @@ func kit(name: String, pos: Vector3, yaw_deg := 0.0, scale := 1.0, parent: Node3
 	n.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)).scaled(Vector3.ONE * scale), p)
 	(parent if parent else props).add_child(n)
 	MaterialLibrary.apply_environment(n)
+	if parent == null or parent == props or parent == geo:
+		_note_solid(name, n)
 	return n
+
+# Footprints of the solid pieces placed so far (map-design pass): [inverse transform, local rect (x, z, w, d), y, top].
+# Vignettes avoid them, so a group is never set into a house, a cart or a wall. Flat pieces (floor tiles, planks,
+# rugs: under 0.35 m tall) are walked on, not around, and are not recorded.
+var _solids: Array = []
+static var _piece_box := {}
+
+static func _local_box(name: String, n: Node3D) -> AABB:
+	if _piece_box.has(name):
+		return _piece_box[name]
+	var box := AABB()
+	var first := true
+	for c in n.find_children("*", "MeshInstance3D", true, false):
+		var mi := c as MeshInstance3D
+		if mi.mesh == null:
+			continue
+		var t := Transform3D.IDENTITY
+		var q: Node = mi
+		while q != null and q != n:
+			if q is Node3D:
+				t = (q as Node3D).transform * t
+			q = q.get_parent()
+		var b := t * mi.get_aabb()
+		box = b if first else box.merge(b)
+		first = false
+	_piece_box[name] = box
+	return box
+
+func _note_solid(name: String, n: Node3D) -> void:
+	var b := _local_box(name, n)
+	if b.size.y < 0.35 or b.size.x * b.size.z < 0.04:
+		return
+	_solids.append([n.transform.affine_inverse(), Rect2(b.position.x, b.position.z, b.size.x, b.size.z), n.position.y + b.position.y,
+		n.position.y + b.end.y * n.transform.basis.get_scale().y])
+
+## True when a circle of radius r at p (same storey: within 2.5 m height) touches a solid piece placed so far.
+func touches_solid(p: Vector3, r: float) -> bool:
+	for s in _solids:
+		if p.y < float(s[2]) - 2.5 or p.y > float(s[3]) + 0.5:
+			continue
+		var inv: Transform3D = s[0]
+		var lp := inv * p
+		var rect: Rect2 = s[1]
+		var sc := inv.basis.get_scale().x
+		var dx := maxf(maxf(rect.position.x - lp.x, lp.x - rect.end.x), 0.0)
+		var dz := maxf(maxf(rect.position.y - lp.z, lp.z - rect.end.y), 0.0)
+		if Vector2(dx, dz).length() < r * sc:
+			return true
+	return false
 
 ## Architecture piece (goes under Geometry).
 func arch(name: String, pos: Vector3, yaw_deg := 0.0, scale := 1.0) -> Node3D:
@@ -147,11 +200,7 @@ static func library_mesh(name: String) -> Mesh:
 	if _lib_meshes.has(ck):
 		return _lib_meshes[ck]
 	var inst := scene(name).instantiate()
-	var found: MeshInstance3D = null
-	for c in inst.find_children("*", "MeshInstance3D", true, false):
-		found = c
-		break
-	var mesh: Mesh = found.mesh.duplicate() if found else null
+	var mesh := _merged_mesh(inst)
 	if mesh:
 		for i in mesh.get_surface_count():
 			var mat := mesh.surface_get_material(i)
@@ -162,6 +211,47 @@ static func library_mesh(name: String) -> Mesh:
 	_lib_meshes[ck] = mesh
 	return mesh
 
+## Every visible part of a kit scene as one mesh in the scene root's space (map-design pass). A single part with an
+## identity transform is used as-is (keeping its imported LODs); several parts, or a part under a transformed node, are
+## merged with their transforms applied, one surface per source material, so a batched object never loses pieces or
+## comes out at the wrong size or angle. Collision-only children are not MeshInstance3D and are skipped.
+static func _merged_mesh(inst: Node) -> Mesh:
+	var parts: Array = []
+	for c in inst.find_children("*", "MeshInstance3D", true, false):
+		var mi := c as MeshInstance3D
+		if mi.mesh == null:
+			continue
+		var t := Transform3D.IDENTITY
+		var n: Node = mi
+		while n != null and n != inst:
+			if n is Node3D:
+				t = (n as Node3D).transform * t
+			n = n.get_parent()
+		parts.append([mi.mesh, t])
+	if parts.is_empty():
+		return null
+	if parts.size() == 1 and (parts[0][1] as Transform3D).is_equal_approx(Transform3D.IDENTITY):
+		return (parts[0][0] as Mesh).duplicate()
+	var tools := {}        # material key -> [SurfaceTool, Material]
+	var order: Array = []
+	for p in parts:
+		var m: Mesh = p[0]
+		for i in m.get_surface_count():
+			var mat := m.surface_get_material(i)
+			var key := mat.resource_name.get_slice(".", 0) if mat and mat.resource_name != "" else str(mat.get_instance_id() if mat else 0)
+			if not tools.has(key):
+				var st := SurfaceTool.new()
+				st.begin(Mesh.PRIMITIVE_TRIANGLES)
+				tools[key] = [st, mat]
+				order.append(key)
+			(tools[key][0] as SurfaceTool).append_from(m, i, p[1])
+	var out := ArrayMesh.new()
+	for key in order:
+		var st: SurfaceTool = tools[key][0]
+		st.commit(out)
+		out.surface_set_material(out.get_surface_count() - 1, tools[key][1])
+	return out
+
 ## Decoration is cut into CHUNK-metre cells, one MultiMesh per asset per cell, so the camera culls what it cannot see
 ## (a map-wide MultiMesh is drawn whole every frame: Westreach's ferns alone were half a million triangles).
 const CHUNK := 24.0
@@ -169,11 +259,23 @@ const CHUNK := 24.0
 ## cliffs and anything not listed stay whole, so forest edges and walls still read as edges and walls.
 const LITE_KEEP := {"fern": 0.2, "grass_clump": 0.35, "mushrooms": 0.3, "roots": 0.4, "bush_a": 0.5, "bush_b": 0.5,
 	"bones_scatter": 0.5, "skull_pile": 0.6, "rubble_pile": 0.6, "rock_small": 0.5, "rock_medium": 0.8, "stump": 0.7,
-	"tree_pine": 0.8, "tree_oak_twisted": 0.8, "tree_dead_a": 0.7, "tree_dead_b": 0.7, "cobweb": 0.4}
+	"tree_pine": 0.8, "tree_oak_twisted": 0.8, "tree_dead_a": 0.7, "tree_dead_b": 0.7, "cobweb": 0.4,
+	# map-design pass: every prepared Kenney piece that can be batched. Canopy keeps ~80 % of its silhouettes, tiny
+	# clutter and undergrowth thin to 20-35 %, mid-size pieces sit between (brief: Low keeps landmarks, thins detail).
+	"kd_tree_oak": 0.8, "kd_tree_broadleaf": 0.8, "kd_tree_detailed": 0.85, "kd_tree_thin": 0.8, "kd_tree_small": 0.7,
+	"kd_pine": 0.8, "kd_pine_round": 0.8, "kd_pine_tall": 0.85, "kd_palm": 0.8, "kd_palm_bend": 0.8, "kd_palm_short": 0.7,
+	"kd_palm_tall": 0.85, "kd_bamboo": 0.6, "kd_bush": 0.5, "kd_bush_large": 0.6, "kd_plant_leafy": 0.35,
+	"kd_grass": 0.25, "kd_grass_large": 0.3, "kd_ground_leaves": 0.25, "kd_flower_yellow": 0.3, "kd_flower_purple": 0.3,
+	"kd_mushrooms_pale": 0.3, "kd_lily": 0.5, "kd_hanging_moss": 0.3, "kd_rock_small_a": 0.35, "kd_rock_small_b": 0.35,
+	"kd_rock_flat": 0.35, "kd_rock_a": 0.85, "kd_rock_b": 0.85, "kd_rock_c": 0.85, "kd_rock_tall": 0.9, "kd_stump_old": 0.7,
+	"kd_stump_cut": 0.7, "kd_log": 0.8, "kd_debris_stone": 0.5, "kd_debris_wood": 0.5, "kd_carrots": 0.35, "kd_wheat": 0.4,
+	"kd_pumpkin": 0.5, "kd_bottle": 0.3, "kd_bottle_large": 0.4, "kd_books": 0.35, "kd_candles": 0.5, "kd_chalice": 0.4,
+	"kd_offering_bowl": 0.4, "kd_pot_small": 0.5, "kd_plant_pot_a": 0.4, "kd_plant_pot_b": 0.4, "kd_grave_broken": 0.7,
+	"kd_urn_round": 0.7, "kd_urn_square": 0.7, "kd_shovel": 0.5, "kd_paddle": 0.5, "kd_floor_inlay": 0.8}
 
 func _flush_batches() -> void:
 	for name in _batches:
-		var mesh := library_mesh(name)
+		var mesh := library_mesh(String(name).get_slice("~", 0))
 		if mesh == null:
 			continue
 		var tr: Array = _batches[name].transforms
@@ -204,6 +306,99 @@ func _flush_batches() -> void:
 			deco.add_child(mmi)
 	_batches.clear()
 
+## Map-design pass: a colliding kit piece drawn through the batches (one MultiMesh per piece kind per 24 m cell instead
+## of a node and its draw calls per piece). Its collision is the piece's own shapes, scaled and placed on a StaticBody3D
+## under Props, so the navmesh carves round it exactly as round a kit() piece. Solids are never thinned on Low.
+func solid(name: String, xf: Transform3D, shadows := true) -> void:
+	var key := name + "~s"
+	if not _batches.has(key):
+		_batches[key] = {"transforms": [], "shadows": shadows}
+	_batches[key].transforms.append(xf)
+	var sc := xf.basis.get_scale().x
+	var shapes := _solid_shapes(name, sc)
+	if not shapes.is_empty():
+		var sb := StaticBody3D.new()
+		sb.name = "%s_solid_%d" % [name, props.get_child_count()]
+		sb.transform = Transform3D(xf.basis.orthonormalized(), xf.origin)
+		sb.collision_layer = shapes[0][1]
+		sb.collision_mask = shapes[0][2]
+		for sh in shapes:
+			var cs := CollisionShape3D.new()
+			cs.shape = sh[0]
+			sb.add_child(cs)
+		props.add_child(sb)
+	var box := _local_box_of(name)
+	if box.size.y >= 0.35 and box.size.x * box.size.z >= 0.04:
+		_solids.append([xf.affine_inverse(), Rect2(box.position.x, box.position.z, box.size.x, box.size.z), xf.origin.y + box.position.y * sc,
+			xf.origin.y + box.end.y * sc])
+
+static var _shape_cache := {}
+
+## A piece's collision shapes baked to one scale, in the piece root's space: [shape, layer, mask] (cached).
+static func _solid_shapes(name: String, sc: float) -> Array:
+	var ck := "%s@%.3f" % [name, sc]
+	if _shape_cache.has(ck):
+		return _shape_cache[ck]
+	var out: Array = []
+	var inst := scene(name).instantiate()
+	for b in inst.find_children("*", "CollisionObject3D", true, false):
+		var co := b as CollisionObject3D
+		var bt := Transform3D.IDENTITY
+		var q: Node = co
+		while q != null and q != inst:
+			if q is Node3D:
+				bt = (q as Node3D).transform * bt
+			q = q.get_parent()
+		for c in co.find_children("*", "CollisionShape3D", true, false):
+			var cs := c as CollisionShape3D
+			var t := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * sc), Vector3.ZERO) * bt * cs.transform
+			var shape: Shape3D = null
+			if cs.shape is ConcavePolygonShape3D:
+				var faces := (cs.shape as ConcavePolygonShape3D).get_faces()
+				for i in faces.size():
+					faces[i] = t * faces[i]
+				var cp := ConcavePolygonShape3D.new()
+				cp.set_faces(faces)
+				shape = cp
+			elif cs.shape is ConvexPolygonShape3D:
+				var pts := (cs.shape as ConvexPolygonShape3D).points
+				for i in pts.size():
+					pts[i] = t * pts[i]
+				var cv := ConvexPolygonShape3D.new()
+				cv.points = pts
+				shape = cv
+			elif cs.shape is BoxShape3D:
+				# boxes stay boxes: fold the transform into a convex hull of the eight corners
+				var bs := cs.shape as BoxShape3D
+				var h := bs.size * 0.5
+				var pts := PackedVector3Array()
+				for x in [-1, 1]:
+					for y in [-1, 1]:
+						for z in [-1, 1]:
+							pts.append(t * Vector3(h.x * x, h.y * y, h.z * z))
+				var cv := ConvexPolygonShape3D.new()
+				cv.points = pts
+				shape = cv
+			if shape:
+				out.append([shape, co.collision_layer, co.collision_mask])
+	inst.free()
+	_shape_cache[ck] = out
+	return out
+
+static func _local_box_of(name: String) -> AABB:
+	if _piece_box.has(name):
+		return _piece_box[name]
+	var inst := scene(name).instantiate() as Node3D
+	var b := _local_box(name, inst)
+	inst.free()
+	return b
+
+## Decoration batched with a full transform (a tilted barrel, a fallen column), like decor() otherwise.
+func decor_xf(name: String, xf: Transform3D, shadows := false) -> void:
+	if not _batches.has(name):
+		_batches[name] = {"transforms": [], "shadows": shadows}
+	_batches[name].transforms.append(xf)
+
 func breakable(kind: String, pos: Vector3, yaw_deg := 0.0, hp := 20.0, on_ground := false) -> Breakable:
 	var b := Breakable.new().setup(kind, hp)
 	var p := pos
@@ -211,6 +406,7 @@ func breakable(kind: String, pos: Vector3, yaw_deg := 0.0, hp := 20.0, on_ground
 		p.y += ground(pos.x, pos.z)
 	b.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), p)
 	props.add_child(b)
+	_solids.append([b.transform.affine_inverse(), Rect2(-0.6, -0.6, 1.2, 1.2), p.y, p.y + 1.2])
 	return b
 
 ## Scatter kit/decor pieces inside a rect (x, z, w, d) with minimum spacing and an optional reject predicate
@@ -1030,6 +1226,111 @@ func view(name: String, target: Vector3, yaw_deg := 0.0, pitch_deg := 50.0, dist
 func hide_when(n: Node, flag: StringName) -> void:
 	n.set_meta(&"hide_when_flag", flag)
 	n.add_to_group(&"flag_visual")
+
+## bh-033: show `n` only once the hero holds `flag` (a returned trader, a shrine token); until then it is hidden and
+## switched off, so its collider does not block. Applied on load and when the flag fires (MapRoot.apply_flag_visuals).
+func show_when(n: Node, flag: StringName) -> void:
+	n.set_meta(&"show_when_flag", flag)
+	n.add_to_group(&"flag_visual")
+
+# ------------------------------------------------------------------------------------------------------------
+# map-design pass (2026-10-03): authored vignettes (DataVignettes)
+
+## The map's walking lines: (x, z, radius) -> true when a group of that footprint can stand there. Unset = anywhere.
+var clear_fn: Callable
+var _vignettes: Array = []
+var _vignettes_skipped: Array = []
+
+## Place an authored group (DataVignettes) at `origin` turned by `yaw`. Each piece is grounded on its own spot, so a
+## group follows the slope it stands on; with `on_ground` false every piece sits at origin.y instead (a quay, a roof,
+## an Agdao terrace — never the terrain under a raised surface). The footprint is checked against `clear_fn` and the
+## group is skipped (and reported on the map as `vignettes_skipped`) rather than forced onto a walking line.
+## opts: on_ground (true), scale (1.0), check (true), skip ([piece indices]).
+## Decoration ("d"/"o"/"b") never collides: any collider a decorative piece brings is removed, so the navmesh and the
+## physics agree. Optional details ("o") are left out on Low; colliding pieces and landmarks never vary by quality.
+## A group origin at its standing height (grounded groups: the terrain under it plus origin.y).
+func _at_ground(p: Vector3, opts: Dictionary) -> Vector3:
+	return Vector3(p.x, ground(p.x, p.z) + p.y if opts.get("on_ground", true) else p.y, p.z)
+
+## True when a footprint of radius r at p would overlap a group already placed (groups may touch, not interpenetrate).
+func group_overlaps(p: Vector3, r: float) -> bool:
+	for g in _vignettes:
+		if Vector2(p.x - g.origin.x, p.z - g.origin.z).length() < (r + float(g.r)) * 0.85 and absf(p.y - (g.origin as Vector3).y) < 2.5:
+			return true
+	return false
+
+func vignette(vname: String, origin: Vector3, yaw := 0.0, opts := {}) -> Node3D:
+	var d := DataVignettes.get_def(vname)
+	if d.is_empty():
+		push_error("unknown vignette %s" % vname)
+		return null
+	var s := float(opts.get("scale", 1.0))
+	var r := float(d.r) * s
+	if opts.get("check", true) and (clear_fn.is_valid() and not clear_fn.call(origin.x, origin.z, r) or group_overlaps(origin, r) 			or touches_solid(_at_ground(origin, opts), r * 0.8)):
+		_vignettes_skipped.append("%s at (%.1f, %.1f)" % [vname, origin.x, origin.z])
+		return null
+	var grounded: bool = opts.get("on_ground", true)
+	var basis := Basis(Vector3.UP, deg_to_rad(yaw))
+	var vr := RandomNumberGenerator.new()
+	vr.seed = hash("%s/%s/%.1f/%.1f" % [def.id, vname, origin.x, origin.z])
+	var skip: Array = opts.get("skip", [])
+	for i in (d.pieces as Array).size():
+		if i in skip:
+			continue
+		var p: Array = d.pieces[i]
+		var kind: String = p[4]
+		if kind == "o" and Perf.lite:
+			continue
+		var off: Vector3 = p[1]
+		var at := origin + basis * Vector3(off.x, 0, off.z) * s
+		var y := (ground(at.x, at.z) + origin.y if grounded else origin.y) + off.y * s
+		var pos := Vector3(at.x, y, at.z)
+		var pyaw := yaw + float(p[2]) + vr.randf_range(-5.0, 5.0)
+		var xf := Transform3D(Basis(Vector3.UP, deg_to_rad(pyaw)).scaled(Vector3.ONE * float(p[3]) * s), pos)
+		match kind:
+			"k":
+				solid(p[0], xf)
+			"b":
+				decor(p[0], pos, pyaw, float(p[3]) * s, false)
+			"o":
+				decor_xf(p[0] + "~o", xf, true)          # optional detail: its own batch, absent on Low
+			_:
+				decor_xf(p[0], xf, true)
+	_vignettes.append({"name": vname, "origin": origin, "yaw": yaw, "r": r, "checked": bool(opts.get("check", true)) or bool(opts.get("near", false))})
+	return root
+
+## Place a group at the clear spot (clear_fn, no overlap) nearest `prefer`, searching rings rmin..rmax round `around`.
+## Reports the group as skipped when nothing in reach is clear.
+func place_near(vname: String, prefer: Vector3, around: Vector3, rmin: float, rmax: float, yaw: float, opts := {}) -> Node3D:
+	var r := float(DataVignettes.get_def(vname).get("r", 1.0)) * float(opts.get("scale", 1.0))
+	var best := Vector3.INF
+	var bd := INF
+	var rr := rmin
+	while rr <= rmax:
+		var steps := maxi(1, int(TAU * maxf(rr, 0.5) / 1.2))
+		for i in steps:
+			var a := TAU * i / steps
+			var c := around + Vector3(cos(a) * rr, 0, sin(a) * rr)
+			if (clear_fn.is_valid() and not clear_fn.call(c.x, c.z, r)) or group_overlaps(c, r) or touches_solid(_at_ground(c, opts), r * 0.8):
+				continue
+			var dd := c.distance_to(prefer)
+			if dd < bd:
+				bd = dd
+				best = c
+		rr += 0.75
+	if best == Vector3.INF:
+		_vignettes_skipped.append("%s near (%.1f, %.1f): no clear spot" % [vname, around.x, around.z])
+		return null
+	return vignette(vname, best, yaw, opts.merged({"check": false, "near": true}))
+
+## An ambient accent spot (AmbientAccents): an existing sound played now and then near the hero, quietly.
+func accent(pos: Vector3, sound: StringName, volume_db := -14.0) -> void:
+	var a := root.get_node_or_null("AmbientAccents") as AmbientAccents
+	if a == null:
+		a = AmbientAccents.new()
+		a.name = "AmbientAccents"
+		root.add_child(a)
+	a.add(pos, sound, volume_db)
 
 func set_bounds(aabb: AABB) -> void:
 	root.bounds = aabb

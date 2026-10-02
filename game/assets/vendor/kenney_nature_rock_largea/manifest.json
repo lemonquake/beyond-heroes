@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_rock_largea",
+  "category": "environment_prop",
+  "description": "Large irregular boulder. Intended use: Westreach coastal clusters and Agdao shore anchors",
+  "displayName": "kenney_nature_rock_largea",
+  "files": [
+    {
+      "bytes": 7552,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25"
+    },
+    {
+      "bytes": 1625,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2300ddd3be2c53a54a54281d2ab6c80db9820a3e9f9c5e937fc429086929338f"
+    },
+    {
+      "bytes": 828,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "becf282a43a4f8c93a2bcba499539abd36322e34f548633b55aea96f1420d23f"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "0fa5b0198193ed4ed55b9cbe2fdba72b59bd1d4b8c7669decf9fdd99099ed172"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_7e53efd9531b51f9c6c09644",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

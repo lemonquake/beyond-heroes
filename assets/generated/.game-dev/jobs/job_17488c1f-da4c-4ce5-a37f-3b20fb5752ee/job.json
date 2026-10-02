@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_17488c1f-da4c-4ce5-a37f-3b20fb5752ee",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_pillow\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:15.705Z",
+  "updatedAt": "2026-10-02T20:15:15.731Z",
+  "startedAt": "2026-10-02T20:15:15.710Z",
+  "completedAt": "2026-10-02T20:15:15.731Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_17488c1f-da4c-4ce5-a37f-3b20fb5752ee\\receipt.json"
+}

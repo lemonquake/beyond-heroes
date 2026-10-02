@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_nature_plant_flattall",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_plant_leafy.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0",
+ "source_sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633",
+ "derived_sha256": "007d428c7496226876adfaa1aa54247fdebc7eec3194e32ffec595e6ba23f447",
+ "scale": 2.8138,
+ "scale_rule": [
+  "h",
+  0.8
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_JungleLeaf"
+ ],
+ "part_faces": {
+  "BH_JungleLeaf": 32
+ },
+ "source_to_material": {
+  "leafsGreen": "BH_JungleLeaf"
+ },
+ "triangles": 32,
+ "surfaces": 1,
+ "source_triangles": 32,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.764,
+  0.8,
+  0.764
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

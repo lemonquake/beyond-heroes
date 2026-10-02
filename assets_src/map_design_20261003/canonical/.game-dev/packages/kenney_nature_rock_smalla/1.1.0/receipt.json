@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:39.443Z",
+  "destination": {
+    "assetId": "kenney_nature_rock_smalla",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "7593812c7a8b00ac343fa7f2a60310c4c3670cb44abc1e71bd3233c3bb3497d6",
+  "packageId": "pkg_19d092d84a5a2451c4fda100",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 3044,
+    "fileName": "rock_smallA.glb",
+    "sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1"
+  }
+}

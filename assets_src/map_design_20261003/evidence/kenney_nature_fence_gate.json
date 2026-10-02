@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\fence_gate.glb",
+    "fileBytes": 27652,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 2,
+    "primitiveCount": 5,
+    "vertexCount": 1476,
+    "triangleCount": 524,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 3,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.5,
+        -0.05,
+        -0.5000000121219186
+      ],
+      "max": [
+        0.5,
+        0.29502729773521424,
+        -0.42999999821870993
+      ],
+      "sizeMeters": [
+        1,
+        0.34502729773521423,
+        0.07000001390320865
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\fence_gate.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 524,
+      "materials": 3,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        1,
+        0.34502729773521423,
+        0.07000001390320865
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_gate\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_fence_gate",
+        "category": "environment_prop",
+        "description": "Farm fence gate. Intended use: Garden and field entrances with a clear passage",
+        "displayName": "kenney_nature_fence_gate",
+        "files": [
+          {
+            "bytes": 27652,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436"
+          },
+          {
+            "bytes": 1555,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "b74a94ba5e486847f01565944bcec5789995ee1e26ccaf0fbdce4b567b19d0fc"
+          },
+          {
+            "bytes": 827,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "e8efbc00364b36ea352f41e514ff7df45a864c7db2f6be7f2967bb486df1c2f2"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "44be93803231e62c311e1a0d18124a907dad205c8c697f418efec03e83d2e78f"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_21388b31dbf28730c2f2edcc",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436",
+  "embedded_textures": []
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_2c3474d5-ec3e-44d4-846c-6e59bc1e58fd",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:54.115Z",
+  "updatedAt": "2026-10-02T21:11:54.150Z",
+  "startedAt": "2026-10-02T21:11:54.121Z",
+  "completedAt": "2026-10-02T21:11:54.150Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_2c3474d5-ec3e-44d4-846c-6e59bc1e58fd\\receipt.json"
+}

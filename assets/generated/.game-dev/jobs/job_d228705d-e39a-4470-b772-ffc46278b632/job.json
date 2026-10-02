@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d228705d-e39a-4470-b772-ffc46278b632",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass_leafs\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:14:31.717Z",
+  "updatedAt": "2026-10-02T20:14:31.743Z",
+  "startedAt": "2026-10-02T20:14:31.722Z",
+  "completedAt": "2026-10-02T20:14:31.743Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_d228705d-e39a-4470-b772-ffc46278b632\\receipt.json"
+}

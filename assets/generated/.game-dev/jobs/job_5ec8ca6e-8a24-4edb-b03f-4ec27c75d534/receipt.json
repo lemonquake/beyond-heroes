@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bedbunk\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_bedbunk",
+      "category": "environment_prop",
+      "description": "Bunk bed. Intended use: Wyman lodging only if an existing interior supports it",
+      "displayName": "kenney_furniture_bedbunk",
+      "files": [
+        {
+          "bytes": 40784,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e"
+        },
+        {
+          "bytes": 1578,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "d82527d77c478297b5e4de323a638576e96fa162af2adbe4851d8f8830b07e52"
+        },
+        {
+          "bytes": 799,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "1d7b406df3195ba82724701c741790b2b2aecf0974e832b8375d9e039ce3522e"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c6546de40384e6ed98674bfd6aa383ddccf60f0deab9c51bbec0b6a0a5a6183e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_554a35ebc5c2be3042d88c24",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:09.357Z"
+}

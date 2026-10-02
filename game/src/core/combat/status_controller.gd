@@ -29,6 +29,8 @@ const POISE_RECOVER_RATE := 0.35     # fraction of poise per second
 const BURN_DPS_FRACTION := 0.25      # burning dps = 25% of the igniting hit's fire damage
 const BLEED_DPS_FRACTION := 0.2
 const CHILL_SLOW := 0.25
+const MAX_STAGGER_DURATION := 0.75
+const STAGGER_RECOVERY := 0.6
 const POISON_DPS_FRACTION := 0.35
 
 var statuses := {}                   # id -> Instance
@@ -40,6 +42,7 @@ var grants_stagger_window := false   # elites and bosses become Exposed after a 
 var immunities := {}                 # status id -> true (bosses: frozen, stunned)
 var _since_buildup := 0.0
 var _since_poise := 0.0
+var _stagger_recovery := 0.0
 
 func has(id: StringName) -> bool:
 	return statuses.has(id)
@@ -64,6 +67,8 @@ func is_immune(id: StringName) -> bool:
 
 ## Apply or refresh a status. Single instance per id: duration refreshes to the larger value, magnitude/dps keep the max.
 func apply(id: StringName, duration := -1.0, mag := 0.0, dps := 0.0, element := Elements.PHYSICAL, mods: Array = []) -> void:
+	if id == &"staggered" and (has(id) or _stagger_recovery > 0.0):
+		return
 	if immunities.has(id):
 		# Bosses shrug off hard control: Freeze becomes a heavy Chill, Stun becomes a Stagger.
 		if id == &"frozen" and not immunities.has(&"chilled"):
@@ -76,6 +81,10 @@ func apply(id: StringName, duration := -1.0, mag := 0.0, dps := 0.0, element := 
 	var dur := duration if duration >= 0.0 else StatusRules.base_duration(id)
 	if StatusRules.is_debuff(id) and not bool(StatusRules.DEFS.get(id, {}).get("fixed_duration", false)):
 		dur *= (1.0 - status_res)
+	if id == &"staggered":
+		if dur <= 0.0:
+			return
+		dur = minf(dur, MAX_STAGGER_DURATION)
 	var inst: Instance = statuses.get(id)
 	var is_new := inst == null
 	if is_new:
@@ -107,6 +116,8 @@ func remove(id: StringName) -> void:
 		apply(&"freeze_immune")
 	elif id == &"stunned":
 		apply(&"stun_immune")
+	elif id == &"staggered":
+		_stagger_recovery = STAGGER_RECOVERY
 	status_removed.emit(id)
 	changed.emit()
 
@@ -116,6 +127,7 @@ func clear() -> void:
 		status_removed.emit(id)
 	buildup.clear()
 	poise_meter = 0.0
+	_stagger_recovery = 0.0
 	changed.emit()
 
 func _on_added(id: StringName) -> void:
@@ -201,7 +213,7 @@ func receive_hit(result: DamageResult) -> void:
 					buildup[sid] = 0.0
 					apply(sid)
 	# Poise.
-	if result.poise_damage > 0.0:
+	if result.poise_damage > 0.0 and not has(&"staggered") and _stagger_recovery <= 0.0:
 		_since_poise = 0.0
 		poise_meter += result.poise_damage
 		if poise_meter >= max_poise:
@@ -220,6 +232,7 @@ func _add_buildup(id: StringName, amt: float) -> void:
 func tick(dt: float) -> void:
 	if not is_finite(dt) or dt <= 0.0:
 		return
+	_stagger_recovery = maxf(0.0, _stagger_recovery - dt)
 	var expired: Array[StringName] = []
 	for id in statuses.keys():
 		var inst: Instance = statuses.get(id)

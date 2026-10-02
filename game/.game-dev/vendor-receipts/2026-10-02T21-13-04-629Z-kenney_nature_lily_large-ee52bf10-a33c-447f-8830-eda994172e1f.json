@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e3ce3663255a25515b8bd8f6",
+  "assetId": "kenney_nature_lily_large",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_lily_large",
+  "modelSha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2",
+  "manifestSha256": "80d055c56c57ba76ac765327f3e6addc60867544f428704d8ac957f38a1c0736",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:04.629Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_lily_large\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

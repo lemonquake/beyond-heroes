@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_column_large\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_column_large",
+      "category": "environment_prop",
+      "description": "Large stone column. Intended use: Ruined Temple side arcade and sparse tomb focal structure",
+      "displayName": "kenney_graveyard_column_large",
+      "files": [
+        {
+          "bytes": 48564,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "71b3a1b0e84137eb27ce3ec8ffac599deab5a2ef038e6bc6a5fec6f06febeb9c"
+        },
+        {
+          "bytes": 1762,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "d57a49c50557e566a684c53622a33019b2b64908802152fa0849859868c2d2fc"
+        },
+        {
+          "bytes": 1106,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "ec91a6e7fbea71453a78de65d8e2121a78a68adc2d4286cb15dcfff6f4ce4f41"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e39098aa2825cbe03e4ad1663ce8c2d0c77f6787e701e421aa9e1da36ffad79e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_38926103c765cbf16ca6b62c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:52.055Z"
+}

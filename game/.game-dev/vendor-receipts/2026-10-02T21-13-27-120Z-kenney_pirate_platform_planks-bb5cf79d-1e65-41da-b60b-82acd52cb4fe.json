@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_09c99d408a37fba51cefdb0c",
+  "assetId": "kenney_pirate_platform_planks",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_platform_planks",
+  "modelSha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e",
+  "manifestSha256": "5593d7316097ca373447feabaf11bd0f307286826ebb00a552c211ab61cf8b1d",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:27.120Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_platform_planks\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

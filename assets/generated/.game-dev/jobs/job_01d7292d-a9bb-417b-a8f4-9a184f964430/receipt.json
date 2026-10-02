@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_boat_row_small\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_boat_row_small",
+      "category": "environment_prop",
+      "description": "Small rowing boat. Intended use: Agdao quay secondary mooring",
+      "displayName": "kenney_pirate_boat_row_small",
+      "files": [
+        {
+          "bytes": 17616,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "846d9b17a73f80e03f7201d3bf0ad1b1bbb49e114b99697740d3426e4f42482d"
+        },
+        {
+          "bytes": 1742,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "93a7c905ab2138ec6054c27e22f1d6dcb9647ebda06a98c7b2890274ee10542d"
+        },
+        {
+          "bytes": 797,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9e27a2aa94a1d819bba53274860f3226f86d405f0d5aa22836b7fc08d27b8a47"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "f0689da71bc66df9de526cf62b5193e6463381c9ae41ee6daa280057ddbb6253"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_54db6566290848bc3854c13f",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:24.579Z"
+}

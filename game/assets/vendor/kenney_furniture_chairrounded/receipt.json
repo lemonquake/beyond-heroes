@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:00.303Z",
+  "destination": {
+    "assetId": "kenney_furniture_chairrounded",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "aa6c930f5cde919e42296d4b0a6c39be8ba24cca4286a2ca1db3ffc959d7ddb5",
+  "packageId": "pkg_cc7b79a2be013f5d29b6037a",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 17156,
+    "fileName": "chairRounded.glb",
+    "sha256": "53f4933ec547179c499f04dbda1231cf44b83ec82c7f4ab981cdf680aee5c973"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_ruground\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_ruground",
+      "category": "environment_prop",
+      "description": "Round rug. Intended use: Council seating group and domestic corner",
+      "displayName": "kenney_furniture_ruground",
+      "files": [
+        {
+          "bytes": 10164,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db"
+        },
+        {
+          "bytes": 1551,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "7b5d9d84a0bb9fa5494d2a27e6d468e8d688d2dd99bd2e609a8cae205447d2ac"
+        },
+        {
+          "bytes": 801,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c01536fc0a1c6cacc1336e7feb443ba8458e236d0e65e4ed9dc522da2ac4040a"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e73fee05cc467abcd20ecca5092da1176b96a567fdd075aa259a580ee2b073b3"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_18476164ba43a1e6fec490da",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:12.252Z"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_31c6a20f-45d4-4ff9-ada4-73c282cc31a4",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_tablecross\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:09.949Z",
+  "updatedAt": "2026-10-02T21:12:10.003Z",
+  "startedAt": "2026-10-02T21:12:09.955Z",
+  "completedAt": "2026-10-02T21:12:10.003Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-ed5cf38e-8068-4e52-ab2a-08b940c44abe' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_tablecross\r'",
+    "retryable": false
+  }
+}

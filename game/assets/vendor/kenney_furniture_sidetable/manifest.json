@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_sidetable",
+  "category": "environment_prop",
+  "description": "Small side table. Intended use: Bedside storage and document corner",
+  "displayName": "kenney_furniture_sidetable",
+  "files": [
+    {
+      "bytes": 8800,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472"
+    },
+    {
+      "bytes": 1592,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "7ac8231d65a5e0107e4d895f0bee36e4a37a47fc9e92f51c4f685664017be533"
+    },
+    {
+      "bytes": 839,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "dced4448f4bb9effe0afe9a873c0a2cc94ac46d8256856f3a241c5b755cea35c"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "c3eba91b394d3c5654fce52bbecc005d6ddd7b9d937b522301755b8aa9e50937"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_39efd406d36504d4f1ac9b2d",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

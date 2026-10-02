@@ -1,0 +1,7 @@
+# Track canonical source packages, not the host-local catalog/events.
+.game-dev/*
+!.game-dev/packages/
+.jobs/
+# Superseded local 1.0.0 library; some models had external image references.
+# Track the complete verified portable 1.1.0 library.
+.game-dev/packages/*/1.0.0/

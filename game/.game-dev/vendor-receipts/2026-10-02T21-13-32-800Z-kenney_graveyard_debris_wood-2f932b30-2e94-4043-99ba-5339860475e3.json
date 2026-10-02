@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_844b50b23087e2b9589796c6",
+  "assetId": "kenney_graveyard_debris_wood",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_debris_wood",
+  "modelSha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8",
+  "manifestSha256": "b1ea9600dabe3104991c25a01b2b34ad9884826f8c090f65d5cd33e51668b8f4",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:32.800Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_debris_wood\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

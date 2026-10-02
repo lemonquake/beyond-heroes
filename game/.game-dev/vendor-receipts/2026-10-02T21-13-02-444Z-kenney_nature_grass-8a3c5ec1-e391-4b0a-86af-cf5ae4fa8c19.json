@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_265a18a96963c134984c271d",
+  "assetId": "kenney_nature_grass",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_grass",
+  "modelSha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+  "manifestSha256": "998708b24c1aa5494a446f02618fc4106c154feebec5dba39cf220728945264b",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:02.444Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

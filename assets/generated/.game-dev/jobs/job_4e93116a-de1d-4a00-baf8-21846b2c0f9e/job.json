@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_4e93116a-de1d-4a00-baf8-21846b2c0f9e",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_detail_chalice\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:02:44.372Z",
+  "updatedAt": "2026-10-02T20:02:44.396Z",
+  "startedAt": "2026-10-02T20:02:44.376Z",
+  "completedAt": "2026-10-02T20:02:44.396Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_4e93116a-de1d-4a00-baf8-21846b2c0f9e\\receipt.json"
+}

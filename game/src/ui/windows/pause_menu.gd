@@ -42,6 +42,9 @@ func _ready() -> void:
 	_sub = UITheme.label("", 17, UITheme.TEXT_DIM, UITheme.body_font())
 	_sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	# bh-033: wrap inside the frame's art border (a long line used to run under the ornaments)
+	_sub.custom_minimum_size = Vector2(320, 0)
+	_sub.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_box.add_child(_sub)
 
 func _rebuild() -> void:
@@ -102,6 +105,12 @@ func show_death() -> void:
 		("\nYou will lose %d gold." % lost) if lost > 0 else ""]
 	if Net.is_active() and Net.player_count() > 1:
 		_sub.text = "A friend can revive you right here: they stand beside you and press Interact.\n" + _sub.text
+	# bh-033: fallen to a boss — what happened and what to try next
+	for e in get_tree().get_nodes_in_group(&"enemy"):
+		var en := e as Enemy
+		if en and en.alive and en.is_boss and DataBossGuides.wipe_line(en.def.id) != "":
+			_sub.text = DataBossGuides.wipe_line(en.def.id) + "\n\n" + _sub.text
+			break
 	_rebuild()
 	visible = true
 	modulate.a = 0.0

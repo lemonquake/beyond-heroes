@@ -75,9 +75,11 @@ func _end() -> void:
 	FX.world = _saved.fx_world if is_instance_valid(_saved.fx_world) else null
 	Enemy._corpses.clear()
 
-## A point `ahead` metres in front of the hero and `side` metres to the side, on the ground.
+## A point `ahead` metres from the hero (towards -Z, where the plaza is open: a wall stands within 3 m of the start point
+## towards +Z, so a monster placed there has no line of sight and its ranged and chain attacks never connect) and `side`
+## metres to the side, on the ground.
 func _at(ahead: float, side := 0.0) -> Vector3:
-	var p := _player.global_position + Vector3(side, 0, ahead)
+	var p := _player.global_position + Vector3(side, 0, -ahead)
 	return CombatQuery.ground_at(_player.get_world_3d(), p)
 
 func _spawn(id: StringName, pos: Vector3, lvl := 5, frozen := true) -> Enemy:
@@ -170,6 +172,10 @@ func test_balance_against_the_roster() -> void:
 	for id in NEW:
 		var d: EnemyDef = DB.enemy(id)
 		var r: EnemyDef = DB.enemy(REFERENCE[id])
+		if d.damage_max <= 0.0:
+			# a totem is an objective, not a fighter: it never attacks, so the fighter band for health and defence does not apply
+			ok(d.move_speed <= 0.0, "%s deals no damage and does not move" % id)
+			continue
 		ok(d.hp <= r.hp * 1.25 + 0.01, "%s HP %.0f within 125%% of %s (%.0f)" % [id, d.hp, r.id, r.hp])
 		ok(d.damage_max <= r.damage_max * 1.25 + 0.01, "%s damage %.0f within 125%% of %s (%.0f)" % [id, d.damage_max, r.id, r.damage_max])
 		ok(d.defense <= maxf(r.defense * 1.25, r.defense + 8.0), "%s defense %.0f near %s (%.0f)" % [id, d.defense, r.id, r.defense])
@@ -341,13 +347,14 @@ func test_bloater_burst_hurts_heroes_and_monsters() -> void:
 	b.hp = b.max_hp() * 0.3
 	b.ext.tick(DT)
 	ok(b.ext.swollen, "a badly hurt bloater swells first (the warning)")
-	var hero_hp := _player.hp
+	var hurt := [0]       # hits that reached the hero (HP cannot be compared: the kill levels the hero up, which heals and raises it)
+	_player.hit_taken.connect(func(_r: DamageResult) -> void: hurt[0] += 1)
 	orc.ensure_stats()
 	var orc_hp := orc.hp
 	b.die(_player)
 	ok(_tree().get_nodes_in_group(&"telegraph").size() > 0, "its burst is telegraphed")
 	await _tree().create_timer(Ext.BURST_DELAY + 0.4).timeout
-	ok(_player.hp < hero_hp, "the burst hurts the hero (%.0f -> %.0f)" % [hero_hp, _player.hp])
+	ok(hurt[0] > 0, "the burst hurts the hero (%d hit%s landed)" % [hurt[0], "" if hurt[0] == 1 else "s"])
 	ok(orc.hp < orc_hp, "and the monster beside it (%.0f -> %.0f)" % [orc_hp, orc.hp])
 	var clouds := _tree().get_nodes_in_group(&"hazard").filter(func(h): return h.mask & BH.LAYER_ENEMY != 0)
 	ok(not clouds.is_empty(), "it leaves a toxic cloud that also poisons monsters")
@@ -374,12 +381,13 @@ func test_bombardier_lights_its_keg() -> void:
 	# on contact
 	var c := _spawn(&"bandit_bombardier", _at(1.2))
 	_engage(c, _player)
-	var hp0 := _player.hp
+	var hurt := [0]       # the kill levels the hero up (a full heal), so count hits instead of comparing HP
+	_player.hit_taken.connect(func(_r: DamageResult) -> void: hurt[0] += 1)
 	c.hp = c.max_hp() * 0.2
 	c.ext.tick(DT)
 	c.ext.tick(DT)
 	ok(not c.alive, "touching the hero sets it off at once")
-	ok(_player.hp < hp0, "the blast hurts the hero (%.0f -> %.0f)" % [hp0, _player.hp])
+	ok(hurt[0] > 0, "the blast hurts the hero (%d hit%s landed)" % [hurt[0], "" if hurt[0] == 1 else "s"])
 	await _end()
 	done()
 

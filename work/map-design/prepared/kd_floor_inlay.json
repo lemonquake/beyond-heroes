@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_modular-dungeon_template_floor_detail_a",
+ "kit": "modular-dungeon-kit",
+ "runtime": "res://assets/environment/kd_floor_inlay.glb",
+ "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0",
+ "source_sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833",
+ "derived_sha256": "91fb27d7a5412081da8e239618a4690334c64312f225481a446d440460ac6c90",
+ "scale": 0.75,
+ "scale_rule": [
+  "s",
+  0.75
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Stone": 204
+ },
+ "source_to_material": {
+  "wood": "BH_Stone",
+  "wood_dark": "BH_Stone"
+ },
+ "triangles": 204,
+ "surfaces": 1,
+ "source_triangles": 204,
+ "source_meshes": 1,
+ "bounds_m": [
+  3.0,
+  0.075,
+  3.0
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

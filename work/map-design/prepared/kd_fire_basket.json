@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_fire_basket",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_fire_basket.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0",
+ "source_sha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916",
+ "derived_sha256": "86cd7a3fc362d5e3a8962c52139a818ebabc4a6025dd54ccaf0069649c471661",
+ "scale": 2.4,
+ "scale_rule": [
+  "s",
+  2.4
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Iron"
+ ],
+ "part_faces": {
+  "BH_Iron": 196
+ },
+ "source_to_material": {
+  "teal": "BH_Iron"
+ },
+ "triangles": 196,
+ "surfaces": 1,
+ "source_triangles": 196,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.0,
+  0.403,
+  1.0
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

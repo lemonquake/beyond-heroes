@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass_large\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_grass_large",
+      "category": "foliage",
+      "description": "Large grass tuft. Intended use: Grouped banks, avoiding central travel lanes",
+      "displayName": "kenney_nature_grass_large",
+      "files": [
+        {
+          "bytes": 18504,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd"
+        },
+        {
+          "bytes": 1588,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "58b989b3b4a1a5d0149f7d392d46f5c0731b763a8a74ea9ed93da1656588077e"
+        },
+        {
+          "bytes": 792,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "53575af868c6685b161ee0b467a507a134fd3ec2c314af72d0fdbae67d3b44d0"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7ec79af65dd7d619d259f55087f938a9ecc3d028c45c2dbab02ff183ea0f6852"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_9867193c418854d98472050b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:22.728Z"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_70f829b7ac0c3438c0d11887",
+  "assetId": "kenney_nature_flower_purplea",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_flower_purplea",
+  "modelSha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+  "manifestSha256": "fb5817d8b26be4cbb3a97c47f2a745ca5483e1469cc1dcbcc7e55d10bd618715",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:03.905Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_purplea\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

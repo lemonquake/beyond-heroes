@@ -33,6 +33,7 @@ var _boss_box: VBoxContainer
 var _boss_bar: ArtBar
 var _boss_name: Label
 var _boss_phase: Label
+var _boss_guide: Label                  # bh-033: what this phase asks of you (DataBossGuides)
 var _boss: Enemy
 var _target_box: VBoxContainer
 var _target_bar: ArtBar
@@ -70,6 +71,7 @@ var _plate: PanelContainer
 var _top_right: VBoxContainer
 var _top_center: VBoxContainer
 var _mobile := false
+var rank_tracker: RankTracker
 var _quest_panels: Array[Control] = []  # directions, stage tracker, objective: top right, or the left column in touch play
 var _left_col: VBoxContainer
 
@@ -255,6 +257,16 @@ func _build_top_center() -> void:
 	_boss_bar = ArtBar.new("hud/bar_frame_boss.png", Color(0.78, 0.08, 0.06), 64.0)
 	_boss_bar.text_size = 16
 	_boss_box.add_child(_boss_bar)
+	_boss_guide = UITheme.label("", 16, UITheme.PARCHMENT, UITheme.body_font())
+	_boss_guide.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_boss_guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_boss_guide.custom_minimum_size = Vector2(620, 0)
+	_boss_guide.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	_boss_guide.add_theme_constant_override("outline_size", 4)
+	_boss_box.add_child(_boss_guide)
+	Events.boss_phase.connect(func(b: Node, ph: int) -> void:
+		if b == _boss and _boss_guide:
+			_boss_guide.text = DataBossGuides.phase_line(_boss.def.id, ph))
 	_target_box = VBoxContainer.new()
 	_target_box.add_theme_constant_override("separation", 0)
 	_target_box.custom_minimum_size = Vector2(440, 0)
@@ -324,6 +336,10 @@ func _build_top_right() -> void:
 	_objective_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_objective_text.custom_minimum_size = Vector2(270, 0)
 	ov.add_child(_objective_text)
+	# bh-033: the optional next-rank checklist sits under the objective and travels with the quest panels
+	rank_tracker = RankTracker.new()
+	_quest_panels.append(rank_tracker)
+	col.add_child(rank_tracker)
 
 func _build_bottom() -> void:
 	# XP bar along the bottom edge
@@ -635,7 +651,11 @@ func _update_side() -> void:
 		_portal_label.text = "Portal: %s" % _portal_place()
 	# sit just left of the HP orb, bottoms aligned
 	var r := _hp_orb.get_global_rect()
-	_side.global_position = Vector2(r.position.x - _side.size.x - 10.0, r.end.y - _side.size.y - 6.0)
+	var at := Vector2(r.position.x - _side.size.x - 10.0, r.end.y - _side.size.y - 6.0)
+	if at.x < 8.0:
+		# a small window leaves no room beside the orb (the interface is drawn larger there): sit just above it instead
+		at = Vector2(maxf(8.0, r.position.x), r.position.y - _side.size.y - 8.0)
+	_side.global_position = at
 
 func _build_center() -> void:
 	_prompt_panel = PanelContainer.new()
@@ -901,6 +921,7 @@ func _on_boss(b: Node) -> void:
 			marks.append(h)
 	_boss_bar.tick_marks = marks
 	_boss_bar.set_ratio(_boss.hp / maxf(1.0, _boss.max_hp()), true)
+	_boss_guide.text = DataBossGuides.phase_line(_boss.def.id, maxi(1, _boss.phase))
 	if not _boss.is_miniboss():          # champions are named by the bar and their own plate; no banner over them
 		banner(_boss.display_name, "", Color(1.0, 0.45, 0.35))
 

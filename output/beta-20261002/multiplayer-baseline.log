@@ -1,0 +1,3 @@
+PASS: 12 real HTTPS/ENet clients; thirteenth refused; committed saves confirmed
+PASS: server restart; two real map clients resumed progress, traded atomically and saved on exit
+PASS: custom host and client; separate fresh characters; shared directory listing

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_37a54d7a-0b25-4cd6-a873-cec297562865",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_tree_pinerounda\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:35.388Z",
+  "updatedAt": "2026-10-02T21:11:35.442Z",
+  "startedAt": "2026-10-02T21:11:35.395Z",
+  "completedAt": "2026-10-02T21:11:35.442Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-70859d04-6465-45bc-93d6-f627cda5beaf' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_tree_pinerounda\r'",
+    "retryable": false
+  }
+}

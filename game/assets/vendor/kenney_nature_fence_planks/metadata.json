@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_fence_planks",
+  "category": "environment_prop",
+  "description": "Plank fence span. Intended use: Westreach farm boundaries and house lots",
+  "displayName": "kenney_nature_fence_planks",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.5,
+        0.29502729773521424,
+        -0.4300000071525574
+      ],
+      "min": [
+        -0.5,
+        -0.05,
+        -0.5259000062942505
+      ],
+      "sizeMeters": [
+        1,
+        0.34502729773521423,
+        0.09589999914169312
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 7720,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 96,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 160,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_f3e0e325-3b71-4f1d-8da6-543a1473e113",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_plant_bushsmall\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:41.436Z",
+  "updatedAt": "2026-10-02T21:11:41.484Z",
+  "startedAt": "2026-10-02T21:11:41.443Z",
+  "completedAt": "2026-10-02T21:11:41.484Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-04e74490-d948-4c22-8c2a-4e45b8a838de' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_plant_bushsmall\r'",
+    "retryable": false
+  }
+}

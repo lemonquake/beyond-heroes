@@ -1,0 +1,6727 @@
+[
+ {
+  "file": "kenney/extracted/Models/GLB format/balcony-wall-fence.glb",
+  "triangles": 102,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "16c43dfd257121fb93767e973b0fde09672502ca85383028c916e48126c049bc"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/balcony-wall.glb",
+  "triangles": 64,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3d504c3facb858d3110dcb2bba88af2c5be57d82bb07d52334a49195d022b84c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/banner-green.glb",
+  "triangles": 102,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.05,
+   0.839,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5c9a1bb7d564270306fe438fd4a141fc6de0d102b355bbd1d2710249c489868a"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/banner-red.glb",
+  "triangles": 98,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.05,
+   0.839,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4e4a83de16e5979d2b34bb206d3bf3703a9039711bc658b37e3738d43090703d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/blade.glb",
+  "triangles": 180,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.111,
+   2.0,
+   0.43
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ef54ee87322191f18f7bf93d065add896fc584578c4c913eb99ea0bb18495a14"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/cart-high.glb",
+  "triangles": 1028,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.65,
+   0.861,
+   1.39
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4b0bce37e8645f3719a9032bf4d49048b7779ac891758ae6e2693238911c5eec"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/cart.glb",
+  "triangles": 608,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.65,
+   0.536,
+   1.34
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "63503cd0a7398310e01aabc8e3663f711a7517394d23d179d0695157fee99d40"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/chimney-base.glb",
+  "triangles": 78,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.344,
+   1.0,
+   0.52
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f7da0ca85be73a00f65aa297023e136e6bed93b7667ef49861a97ce89fd3a6e9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/chimney-top.glb",
+  "triangles": 78,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.252,
+   0.625,
+   0.34
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "639eb7e9add8e491aa64aac94bd4ecbf1e67f8c628f3e0173f029f1c667b7590"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/chimney.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.212,
+   1.0,
+   0.34
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a15cdbd13860092f6d793e5b785043eb90a49cdaa725bb71df9fd154ca68dac6"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fence-broken.glb",
+  "triangles": 124,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.255,
+   0.38,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "caa25191602fd94389e022c8e1f6a4963dd3b1457768e3ccff1dc8dbf4671aa4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fence-curved.glb",
+  "triangles": 308,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.38,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "be132586a950f4e4830815b909d9d53fb7e8653ff14c9f03c38c9fc550f4e797"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fence-gate.glb",
+  "triangles": 560,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.519,
+   0.55,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "cee58694ea5fdcca18e01318b355bfcd38eac6fad21b83f860039c287b150cc6"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fence.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.075,
+   0.38,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "92261b9419108d84f3db0def5eadeffa783032029897562b1f512e4a7570ef48"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-center.glb",
+  "triangles": 4,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "bd2337361b7ce93c73b69d2a8d6fbf4fe6bcffea6469f16d1643c960781fa2ba"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-corner-inner-square.glb",
+  "triangles": 46,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.28,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "76c96385cddbe153a75088d717f63624ac5e1dd948e84f6ae540140d23825ec2"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-corner-inner.glb",
+  "triangles": 146,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.28,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d92a3d5aa8e5fd8dd3c4b1349171b549c57b6fe7e49e3c4776ad5d0106ec37ee"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-corner.glb",
+  "triangles": 60,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.28,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "fb63467da36c0e14799ac2071791f9cb537eb2558206c81abf0e280753e19176"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-curved.glb",
+  "triangles": 266,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.28,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "aec3a6ebb4eda01f392054d3ee203d8cee74c9c45d584d3d9e5e2052949bca3e"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-edge.glb",
+  "triangles": 36,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.28,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e75beda6d401c6c5f6a55ddc40f560a51f901156cc7ec17ad6a8150dfaec5650"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-round-detail.glb",
+  "triangles": 1628,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   2.0,
+   0.48,
+   2.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "05cdd740e3175c2d3208d4cb6630a279a9b4cbc48393b28c92e3e40cca2a5d6b"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-round.glb",
+  "triangles": 1002,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   2.0,
+   0.28,
+   2.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8d19741e2cca6cbdce114b950b4aa12af625979bbc17b2910ef2366834af5565"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-square-detail.glb",
+  "triangles": 334,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   2.0,
+   0.48,
+   2.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c201d8e39a8699c5551c543f5dae7779b1303cce71d7769661e66282cd628f63"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/fountain-square.glb",
+  "triangles": 270,
+  "materials": 2,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   2.0,
+   0.455,
+   2.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "bc5613a8f1f514fac805f29f2f8f1ba3dd4cb64b449f51dd02cf565a3e5c9523"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge-curved.glb",
+  "triangles": 280,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.25,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "60e7a954c1dc308193f8330d624e59d8bd2f688d1d7c5b0c1da608eb5cd431c2"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge-gate.glb",
+  "triangles": 76,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.25,
+   0.25,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "688772aecf1c61410bfe0a257f51082bccaabed65d1794bad04226d444e7629e"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge-large-curved.glb",
+  "triangles": 252,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.6,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "aee5d522711385fbc66f39c4f91e955a806b31128522ba2285c5d3374fbc9047"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge-large-gate.glb",
+  "triangles": 164,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.4,
+   0.6,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "22525eeeb1075a220d552085100620b8f0de6877bb903e3407c455d365d89a33"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge-large.glb",
+  "triangles": 90,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.4,
+   0.6,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f3aafd7064fcb53a1783cb04997d2f676038a55e0941bada74f39bcc7c86afd3"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/hedge.glb",
+  "triangles": 54,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.25,
+   0.25,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "12001b57dbd3ccaddd217c49e541620137d3e835d873ce0bcedc0e01180a08a9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/lantern.glb",
+  "triangles": 158,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.216,
+   1.556,
+   0.224
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f270637e3083d6e84a30626ee05df2b09597a642985a7f5c3e4ab5bb1c7a8d55"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/overhang.glb",
+  "triangles": 68,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.285,
+   0.33,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "515edba27d8c6326cee6f5912b7270224672f9f3dd61e43e85e1d504913ef19c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/pillar-stone.glb",
+  "triangles": 124,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.16,
+   1.0,
+   0.16
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "1eda742ccbc67ead6edead25c687f55d8671b88786b9e23c08ae7982bccb4b7c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/pillar-wood.glb",
+  "triangles": 44,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.16,
+   1.0,
+   0.16
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "569c83dade6063399576640e80db35c34e422817ec132419fc2e2695189be5cf"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/planks-half.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.5,
+   0.06,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "fe096b7ed7b29104724feab61d65ebc06966075955bf6e044eea635ef1076043"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/planks-opening.glb",
+  "triangles": 144,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.06,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "20540c1d80f8b4af816e139a31f6a385f436dbf2d03314176ab99ca35452e11c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/planks.glb",
+  "triangles": 96,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.06,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "619705afa7ad290bfa499a701fd7ea07210ad535126cb3abc245b6f16e1420ab"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/poles-horizontal.glb",
+  "triangles": 40,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "058d3816d57dca64dbc1e9a30e85c6e5e3aca2561bf57083acdce0ed3f375b29"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/poles.glb",
+  "triangles": 28,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5e6e9cbbcf29b042191781f830f928471c57f1dc7843ee33e2f7c1bff3edf522"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-bend.glb",
+  "triangles": 280,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   3.0,
+   0.05,
+   3.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a4d8fbe9080849dccb45de7ac5f5ded2e17a3d893b8c07338e24193b28e1f03f"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-corner-inner.glb",
+  "triangles": 146,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.05,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "0a998ac30f4be6f3a7d9f2e1f4e61edf35c5d9d99201b1389024921d45038661"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-corner.glb",
+  "triangles": 150,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.05,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "96525a726a15410faf52bb4b813a985704fdbca37aec6d93808b8c18b9ec1e7d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-curb-end.glb",
+  "triangles": 36,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.05,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d3381ca4cae823dfa3f5f361810b6259197486e73c083793ac62ca312f182f6e"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-curb.glb",
+  "triangles": 12,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.05,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "236faeba46e3a0f5e3ec2b80f8ed57048e5b95a1a407526ebda35a3da143317c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-edge-slope.glb",
+  "triangles": 38,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.25,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "afbdfd9ef63c5c1dc9a99bb4f3ecbc94308300995b7958483014cd7f234484fc"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-edge.glb",
+  "triangles": 36,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.05,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "fdefb02b17eddb4543379841a727c41a9ca0b800953a681974e63798f80ce410"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road-slope.glb",
+  "triangles": 12,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.225,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "97d7e6c5aa5762de408c2053ceed88b4be77ac6d3ca79588d11ab3e1e0fa9094"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/road.glb",
+  "triangles": 12,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.025,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "85630c89588bdc19285a7b5e894c1ddac69d7ce2b069966453800519e446f900"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/rock-large.glb",
+  "triangles": 200,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.67,
+   1.163,
+   1.549
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "425bea0dd3c8d9198a067a2faad1df8860c5b9eb53560ce5c67347a79852b9d1"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/rock-small.glb",
+  "triangles": 128,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.998,
+   1.02,
+   1.326
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2f2ca3e9970124b81bde77cec3b1a337410a5c76336ce5dec5760aff1b415316"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/rock-wide.glb",
+  "triangles": 156,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.094,
+   1.02,
+   1.567
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "236082a8c9dec4cef61f00f7f77e4a2050d1083852af65d27dd3c16a53c54b64"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-corner-inner.glb",
+  "triangles": 30,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.626,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2b2f61d1695b88acdef05f0263ed20fb3a4f8d5c6aee12d3f9e5cebe29e08d9c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-corner-round.glb",
+  "triangles": 44,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.067,
+   0.648,
+   1.067
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "86285841d25d70921548bce543ecde08b66e1171c49ee1cc6f6ddf23d7aa7577"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-corner.glb",
+  "triangles": 36,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.067,
+   0.648,
+   1.067
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "122d00bf873e5928eecf334785f1daf005c6f04033552258e97bf1cb1000b353"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-flat.glb",
+  "triangles": 20,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.126,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "48bc045365398c92291f65ab80038670b14f85974aadedc3d17847254a0881b5"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-gable-detail.glb",
+  "triangles": 128,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   0.677,
+   1.212
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "41ffddc760e9599428310188d96a44af80f23a243f9255748f418fd70123fdc2"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-gable-end.glb",
+  "triangles": 50,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.085,
+   0.571,
+   1.071
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2ee635e8550180bb7840f7fdfff0b0835a34a425ffb903f19657cde65c261704"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-gable-top.glb",
+  "triangles": 56,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.376,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "584761438f511db6c0c36a602b0cb7a84484acaebf94b96c722d6c8f188d57e9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-gable.glb",
+  "triangles": 72,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   0.571,
+   1.071
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4bb6bdbcadbb8ebeb69d720e29f6c2e57c99d98966baa41fd86914d3c13d6039"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-corner-round.glb",
+  "triangles": 48,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.071,
+   1.176,
+   1.071
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "fa4736aa73d17b55b20b5cfcbfc83160c4a18a4e9563ede334d0c7d2327ed727"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-corner.glb",
+  "triangles": 36,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.071,
+   1.176,
+   1.071
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3ecd2f3fadaed67a2c713b272c7b8f73f60709752f8529bb34f9f92925123a4f"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-cornerinner.glb",
+  "triangles": 30,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.141,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e1ab3e28f921d131c6f6ede216f6df1a0497ce1556fcfa94cacdce44b7ec31b3"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-flat.glb",
+  "triangles": 20,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.141,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ff3cff6e3fa40a6f82271b82c425d732f32374e14c1c63f7e9c0db1d55d54cb2"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-gable-detail.glb",
+  "triangles": 140,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   1.313,
+   1.268
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d0b95f79cca6bc347d9479fa7a80dfc2b65b56f0f1ed00799893a21b0d9b5f68"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-gable-end.glb",
+  "triangles": 52,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.118,
+   1.157,
+   1.134
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5f31970df848c6ffa95de3300f786bec2a331c63b1cb505ad893027ca67bf187"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-gable-top.glb",
+  "triangles": 56,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.641,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5e94a86388c83c330f2b7178e6fb96bdb6674528538e1c5b29d4acfca3de995a"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-gable.glb",
+  "triangles": 72,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   1.157,
+   1.134
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "21c54b2645ba33846f43410e6cef4d4f9239bc172bfb12f3227a6ec232977e2d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-left.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.141,
+   1.261,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f4cf3fc08e5155015af7bd28dca8b2effe96fe3743276a5561119a3e7368cba4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-point.glb",
+  "triangles": 44,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   1.0,
+   1.1
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "dd26c8d572f05a4725317de01415a17819b2d12cf01c8907bb2116b4ad8e85e9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-right.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.141,
+   1.261,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "1c04bb5ecf61a660126cf28d64f2d06ddbf645a9e76598bb7af5828325968f79"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high-window.glb",
+  "triangles": 258,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.071,
+   1.176,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "b5bea885f9dc0a2b1195748a1c4b9994e16256ab740b6cdc6783ebbcf8b96946"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-high.glb",
+  "triangles": 64,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.071,
+   1.176,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7d39cd8fdcb8bd652d8a40f5f54e5e3d2c41bc1bb84691334f75bc411024cb12"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-left.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.134,
+   0.721,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ff3fdc7d3572ee0f20746ae4d5b02a6ad26c185468b48fd0950852231cf81f15"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-point.glb",
+  "triangles": 44,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.1,
+   0.5,
+   1.1
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a7dfd157128e04105e976d7a47f772e95e4bd9f3d73b87a00b43861f406b94f8"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-right.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.134,
+   0.721,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5f88d69d73a0beb5d74a69928adcb8aa6464c4ec3ad34b7c154c4ddcb17ad5f3"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof-window.glb",
+  "triangles": 176,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.067,
+   0.648,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "9c95c71b7ea2a284f9ea37d0f684fe5aa654cdff14815969bc97d234014bbd53"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/roof.glb",
+  "triangles": 64,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.067,
+   0.648,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8f245dfc04b8e76b2833081462f7530c2aea9114a703161c1d9a4a975927347d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-full-corner-inner.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4065d32494ad3ffca8d4d351f27f7927ff0c4c8f8deb99a2464210bcef58a208"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-full-corner-outer.glb",
+  "triangles": 100,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   0.5,
+   1.02
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "61431fa509a2ea13c43c5cb532dae2c70a08f56267ba83fe2ad76fa2e53ddb68"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-full.glb",
+  "triangles": 68,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d2ebf8c1ec86f75024d9f7931951d7e8fc4665349365b9e6886fadebbd108e9d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-stone-corner.glb",
+  "triangles": 144,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4fd7ab97b286ab1c57ae66ab62eb0325a0f9b25880eeb24767a42036146bb5d7"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-stone-handrail.glb",
+  "triangles": 272,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.445,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "715e36185b27fcc37a84c345740584a10897a9148ba66050cda4a49eae4f7262"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-stone-round.glb",
+  "triangles": 154,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.862,
+   1.0,
+   0.495
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "78794e160a030dedc6b5b7a376d50b129f7052683b3cdae9904a4ad5dbe96f38"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-stone.glb",
+  "triangles": 136,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.0,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ce92a069280c069d675f030a7258a50f5271cd8070e84339c120faa6c115e61d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wide-stone-handrail.glb",
+  "triangles": 272,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.445,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "def3d44694a5393d3ddc1c002d09db90387dcef820286961ac506b0b9fc7009b"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wide-stone.glb",
+  "triangles": 136,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "b28dae600de5c1759993dd363e18eebb40db6db544d94f7f56fb8829bc7f38be"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wide-wood-handrail.glb",
+  "triangles": 560,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.445,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "474816e2464c0a4a2e0b1d15ac999b9aa4b4f9a47a3521342cd8fdb77599a872"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wide-wood.glb",
+  "triangles": 424,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "33f06f1d5f926997e2709741884fd1f4bd86ce4cfc753a74257d2a9e3efffdb6"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wood-handrail.glb",
+  "triangles": 568,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.445,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "206895c4887b620590c9e31ce00aa57179c042f6b1756c0d03c21a17a0431bbf"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stairs-wood.glb",
+  "triangles": 432,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.02,
+   1.0,
+   0.5
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f6be9e5f77572d493dce374b68d231f116800ce388a3dcb0d646032162ccadd9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stall-bench.glb",
+  "triangles": 180,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.26,
+   0.226,
+   0.94
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5a4b379488241394916991c4b482ec4863c05bb548ca8751f5c3935f1f6e5b9c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stall-green.glb",
+  "triangles": 322,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.237,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2da2f7b31cde5d943d7c08c457bbb39797ef0a607921fde0b8455f338ce40205"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stall-red.glb",
+  "triangles": 270,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.237,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "aa20a630f417032c46aaefbc779fd2b3355b451bf05d31acc36fd664146866b1"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stall-stool.glb",
+  "triangles": 180,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.26,
+   0.226,
+   0.26
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "50c6b512d810687f40e27c7a43b2864e5f7bc84f16ff7a4112cea4807676c336"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/stall.glb",
+  "triangles": 106,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.65,
+   0.366,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f0a636fccb7d57c38f5acd58881c468f4872f1bcda1e9fd9b1118e76110565a1"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/tree-crooked.glb",
+  "triangles": 178,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.023,
+   2.413,
+   1.023
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "da4349701dd3fc474f7bb03cfe8b230bec0919025d8d1ecac0d1061a23c5e910"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/tree-high-crooked.glb",
+  "triangles": 210,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.023,
+   2.973,
+   1.023
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a9af8768a5328c62694a42f67858a88eea974ad4540c5c3c54a7a70fdead7505"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/tree-high-round.glb",
+  "triangles": 126,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.019,
+   2.751,
+   1.019
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7f372e338cbf5514a41e8d2afda81acd67277a4c5ad4e6e35a9acfa4a6e3bc4b"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/tree-high.glb",
+  "triangles": 200,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.023,
+   2.973,
+   1.023
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2dbb718a81d9c3697c069495f58840f6c2002c8cdd13388be560c2199f6d03e7"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/tree.glb",
+  "triangles": 168,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.023,
+   2.413,
+   1.023
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e8d81b97297de62699b92559cee7b247da84b1815df2515e42fd5a318a30b8d7"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-arch-top-detail.glb",
+  "triangles": 168,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.16,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "24457e03e5dff3e074a79f9789953dd7fbb93bbd89254cdb751ddf4363a9a6de"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-arch-top.glb",
+  "triangles": 146,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ae5f068bed777a7a698a770011b340e62b590751ebcc61d662b5b4a48369b698"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-arch.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   0.3
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "18076d2770925a570c10708c2726e92f99226a940beb8435b21dfb71e20adcf9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-block-half.glb",
+  "triangles": 76,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c875a1d86faf9eab5af9152c0fd06b91cea4693e92780f949d505a5186925e32"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-block.glb",
+  "triangles": 76,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "daa35e5b32d7941f3dc61f64f6f9630b70441478d652989cd6c02a908b84af86"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-broken.glb",
+  "triangles": 166,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.117,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "043f74b83254c32379d0fe60b066c5ded7f3396ccc91df443aea1763d492fa23"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-corner-detail.glb",
+  "triangles": 176,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.16,
+   1.0,
+   0.16
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2382ce760563264c57e3e5fcccd9b31a80a97dc316b289813558d053ec22495b"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-corner-diagonal-half.glb",
+  "triangles": 34,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.55,
+   1.0,
+   0.975
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3e689a3e266865a44030d22fd645dd7605a1b6e7fb679bbb2355c18da6258344"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-corner-diagonal.glb",
+  "triangles": 48,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "6218647612c1138f1897d4cde4774f399570a91411cca28d4095ee4d1e19f1e4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-corner-edge.glb",
+  "triangles": 40,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "dd8d24f82cd3d4d0ac9776a4d54aaefb69312d834bcfb0907bf8e63d1699ffda"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-corner.glb",
+  "triangles": 52,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d67d4c6210d5e877ce24ccfb42cb3eab1576f7addb689924e7776d6b73e4165a"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-curved.glb",
+  "triangles": 120,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d55b3e931383c0f9f6311a586a01cca57d64e06146d260c8d08a9d39987f6d59"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-detail-cross.glb",
+  "triangles": 80,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7af8fba9e7022c500289bee84fcbe02a1fdad0c2afc0276155a82c1021d6456d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-detail-diagonal.glb",
+  "triangles": 56,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c568992d9f558b0f8778124c965770a7486d5ca7b371dc2fb3154cd6c0dfd528"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-detail-horizontal.glb",
+  "triangles": 46,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ff7607024a93d3e7256dc4975afb038e9299a08bdfb40a544fcabe40c9be29e4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-diagonal.glb",
+  "triangles": 38,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "b1be46b9aae995aa34101e6aa62987624fbf9b3d814a67b4cb48d57958e38290"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-door.glb",
+  "triangles": 376,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.525,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "79b2d40db110ca96a6e77d4261da665fdf8c68f4c20c2afef5bce1c28ad72857"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-doorway-base.glb",
+  "triangles": 64,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4e2629d59e471e96c6661e29044cd32567191745671d00d75666328b2c7e1a05"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-doorway-round.glb",
+  "triangles": 172,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "773ccde0f2b39d7fa61e5093fc4f11b137732a5becbe278c9dae03917895fe98"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-doorway-square-wide-curved.glb",
+  "triangles": 166,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d29b18fafb53b9280c7781b79514c5b3059a12c26586a78e0391eb055135b4a2"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-doorway-square-wide.glb",
+  "triangles": 46,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "74bd794d5b0b45902541da75555d60cc690359390d05f5cf364606347a0dd9ba"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-doorway-square.glb",
+  "triangles": 70,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "1ad6ca0f201c602d7ead56f395744ffd87ba8e5d6e16148d60d0c13e31cf85f3"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-half.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "b64b5d8a8d3aa472162e3c00197fc24253a791a6100b8b63590d42eb2fb62eb4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-rounded.glb",
+  "triangles": 136,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a09474e4d3992b5656e4999ceafa8c92500373b82c17f83216563c80dd6f6b54"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-side.glb",
+  "triangles": 22,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   0.26
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "0ac077f8aa296060f548614e82a7fbfe6a09b5f8bad3453c7c6bb27e7df95119"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-slope.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a7a1ea684f57370a796009353fb469b3f8eb676be544b7980e1b1059ddb5d2af"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-window-glass.glb",
+  "triangles": 178,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "b0d666b1850d0b92734bdea736a062b4424fd909d13495f4a73719eb51bb41f4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-window-round.glb",
+  "triangles": 278,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ec911d8b3bd041ff46d5f5b21a04c2e1bcd006c51262866da94dc24a2c21e41c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-window-shutters.glb",
+  "triangles": 286,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.175,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "58a641a03fc4a5a225663969cc257fcf4f2fc63c199b4aca16b612142ff9eed0"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-window-small.glb",
+  "triangles": 102,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "44516aac3d06ee8d2694cfd57d0c6e1e27ca2d0bc45b738ea1f0d1821da10110"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-window-stone.glb",
+  "triangles": 140,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.15,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7ed37c9b795febc8b414d75ccdf9e8c04a94a791a9adbf6e548ed6ddbf0aba3c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-arch-top-detail.glb",
+  "triangles": 168,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.16,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "6ad402b907878ba59bb148610eb50fa8439ac27b78eb3ede2e621f2d12235621"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-arch-top.glb",
+  "triangles": 146,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "595a0235499eb7adc79c4bb8ddd49cda81e170d70632e22bfa83756909eae345"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-arch.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   0.3
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "bdfa9cfc79b0e7fd272d726acd8f087e97acbd2db7ec36348c2736b7bb7c046a"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-block-half.glb",
+  "triangles": 76,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8a31ac1fba82a195a02ef225f83e0bbe35208b604b4bd733142aa3c26810b490"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-block.glb",
+  "triangles": 76,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c405053f4ac8ae0c85e9973613d205f0bc9dff0a5fe95a4910823384e131e824"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-broken.glb",
+  "triangles": 166,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.113,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "53b61a341f0d6bd82256955f8dc29c4c714fcee115a9e803b28938fcfe1ae597"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-corner-diagonal-half.glb",
+  "triangles": 34,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.55,
+   1.0,
+   0.975
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "712d57235e7d58e5b38b6766681834cb196c4efac5ffae5f0b5e5e270fdd91f6"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-corner-diagonal.glb",
+  "triangles": 48,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "43926de9d29254661bb5ee5cd939c3a32d495e763139c321d5c0a41fc362d801"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-corner-edge.glb",
+  "triangles": 40,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f70b92efea5af19f4ac9c0c19af7727e8105f28a4c415313e8878fc4bde9d326"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-corner.glb",
+  "triangles": 52,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f4c38de352c80c110874fabe7323577d985af191c25242887574238146dc7d82"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-curved.glb",
+  "triangles": 120,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2b7a46fea0256cb09262242a32e4842ca78a33d4e9feb89aeed0e7da3b67327f"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-detail-cross.glb",
+  "triangles": 80,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "0335f9f55d541a2c044d11242103d5de70359ca5758e6734c8936ec27ab58043"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-detail-diagonal.glb",
+  "triangles": 56,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3b1ef50674432944f3f9561e511c0867571393c58e3c73d475d383c5bfc469fc"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-detail-horizontal.glb",
+  "triangles": 46,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ee27ac4f7b2a9dd944e1d3ee3e52d0018281033c768017afbc248b66e0d99764"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-diagonal.glb",
+  "triangles": 38,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "760c3c9b8a3330a47c895e653e811ebf8be530a08a694d93514a601632a6c79e"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-door.glb",
+  "triangles": 376,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.525,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2aa4e982fcb6434be4e6051fcee7972799ff5350a3f36ca8bf71530b84608123"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-doorway-base.glb",
+  "triangles": 64,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "041c898ba4de75f1b1b163dd379b126d72abcd319ba5fa9b510521742543cb5e"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-doorway-round.glb",
+  "triangles": 172,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5dcc990fa07242d74dc4382ed3f95a22f29777068c1c1795b22ef5d4448ac127"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-doorway-square-wide-curved.glb",
+  "triangles": 166,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a246e8c19492085694a4874634b6027e12dfc8aea189872dee0b9085baf296b6"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-doorway-square-wide.glb",
+  "triangles": 46,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "572c223df38d8b1e206446983dd9e3c92c944e7719c655a65880690a78ae0b14"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-doorway-square.glb",
+  "triangles": 82,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "58b8f042cb1bafc282887d216340f406220b3407685f94e33c6a2f127dc68380"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-half.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   0.5,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "4b56875dcb488a0c17c01ebe8ce7337e891b3326860799b49f163f793cb882df"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-rounded.glb",
+  "triangles": 136,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "79fcfcfcf37716139ae76cc5fde7aea993a542751aa0df90a39cb569b2f319b8"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-side.glb",
+  "triangles": 22,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   0.26
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2d0ae2509f596a929ae6ca24ff27ab96c0a2dbdd43847b02a2b8732106e9356c"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-slope.glb",
+  "triangles": 84,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "56bdc7b8755fab80c753c1f6a7c856be15442fd89d0e53a1588ac2baba2401b8"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-window-glass.glb",
+  "triangles": 122,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e0bb383a908d473181ad89ad7c676a0632f7ecd0f23e5f912216391d3e62bb69"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-window-round.glb",
+  "triangles": 294,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.2,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8bc2d9ce7246b1c9896ff2b285668f908755131faf2c2096b23b4a411f7e9aa9"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-window-shutters.glb",
+  "triangles": 122,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c45a63690760cd5de3842ffbe222092e8cd483524679c4ba92fef4d1e52f7248"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-window-small.glb",
+  "triangles": 134,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.2,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3c9118d167d8e75ee78f884b9edb90101f9c1928d4fcc2afaedcc349bf8c672b"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood-window-stone.glb",
+  "triangles": 202,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.15,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d40eb3fe491c09e48fe17168d2445d60ca6d6b4ecc7c2f1caeafa22051000d98"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall-wood.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8699614fdbc99f565942709c0977c964e2c12f3b3c60098a6e2c397c973f08db"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wall.glb",
+  "triangles": 32,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.1,
+   1.0,
+   1.0
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "cab1dff37610e2a214237cc62ec0b1506e8fd76bb66c29f6c585b4b643b569c4"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/watermill-wide.glb",
+  "triangles": 600,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   1.05,
+   1.799,
+   1.799
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3644d4092799f5ff672a5b07ff124f68259c8c9bd45d37f9659eea4426534b7d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/watermill.glb",
+  "triangles": 600,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.85,
+   1.799,
+   1.799
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "177e76c12f43845303638d1375c323675c3937b053b8762042fe19d3d7d27c5d"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/wheel.glb",
+  "triangles": 192,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.238,
+   0.483,
+   0.468
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c049e479d0fa31d7cae7a3f4fe239172e7117789fdd10be4be5bddde6239d59f"
+ },
+ {
+  "file": "kenney/extracted/Models/GLB format/windmill.glb",
+  "triangles": 732,
+  "materials": 1,
+  "textures": [
+   [
+    "Textures/colormap.png",
+    [
+     512,
+     512
+    ]
+   ]
+  ],
+  "size_m": [
+   0.471,
+   3.113,
+   3.113
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "72562df164f5fd36670521462da8f4161cf2c4c1c889799443f0fb44532ad5db"
+ },
+ {
+  "file": "polyhaven/Barrel_01/Barrel_01_1k.gltf",
+  "triangles": 2682,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/Barrel_01_explosive_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/Barrel_01_explosive_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/Barrel_01_explosive_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.563,
+   0.88,
+   0.563
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e084945dedd6a3379c6f3e97842cac89df7169797707e123a5e5b42c135d6888"
+ },
+ {
+  "file": "polyhaven/carved_wooden_plate/carved_wooden_plate_1k.gltf",
+  "triangles": 2112,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/carved_wooden_plate_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/carved_wooden_plate_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/carved_wooden_plate_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.272,
+   0.038,
+   0.269
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "90ec83004a3fd256fb846c7b04fbf0b2514f0e99b2bb7aeb586f62b844ed9219"
+ },
+ {
+  "file": "polyhaven/ceramic_pot/ceramic_pot_1k.gltf",
+  "triangles": 3592,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/ceramic_pot_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/ceramic_pot_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/ceramic_pot_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.656,
+   0.372,
+   0.502
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7d8c28f171f701a422341c82322d439ea5041a6edd4443a85e3c8f88ce12ab0e"
+ },
+ {
+  "file": "polyhaven/folding_wooden_stool/folding_wooden_stool_1k.gltf",
+  "triangles": 6324,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/folding_wooden_stool_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/folding_wooden_stool_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/folding_wooden_stool_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.528,
+   0.442,
+   0.547
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c8ae926ce28737ca8b8f2ef928094fe114d7c71ca32e1040bace53337290a819"
+ },
+ {
+  "file": "polyhaven/GothicBed_01/GothicBed_01_1k.gltf",
+  "triangles": 18745,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/GothicBed_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/GothicBed_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/GothicBed_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.494,
+   1.534,
+   2.04
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "67df189dd3a645936827f3cc123fb9e97ca9d2201d1e4090762bf477cab82fc0"
+ },
+ {
+  "file": "polyhaven/GothicCabinet_01/GothicCabinet_01_1k.gltf",
+  "triangles": 12170,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/GothicCabinet_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/GothicCabinet_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/GothicCabinet_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.719,
+   2.81,
+   1.016
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "1b3506f78e263c66e90d4a84b9efa883fe0bb02a13ff8ead2b3a265024e045ce"
+ },
+ {
+  "file": "polyhaven/hatchet/hatchet_1k.gltf",
+  "triangles": 5250,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/hatchet_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/hatchet_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/hatchet_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.026,
+   0.289,
+   0.104
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "db11c85ef102708ca71a4a53a6367703fd325be6a7bc7d06522d37eaab7dbf61"
+ },
+ {
+  "file": "polyhaven/jug_01/jug_01_1k.gltf",
+  "triangles": 5770,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/jug_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/jug_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/jug_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.275,
+   0.211,
+   0.168
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "87dc40eb3e45b0185699f18cf5988b81fe5b1a01f0cf76c1daa93774878d7e44"
+ },
+ {
+  "file": "polyhaven/Lantern_01/Lantern_01_1k.gltf",
+  "triangles": 33902,
+  "materials": 2,
+  "textures": [
+   [
+    "textures/Lantern_01_brass_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/Lantern_01_brass_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/Lantern_01_brass_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/Lantern_01_brass_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.122,
+   0.294,
+   0.097
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819"
+ },
+ {
+  "file": "polyhaven/painted_wooden_bench/painted_wooden_bench_1k.gltf",
+  "triangles": 630,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/painted_wooden_bench_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/painted_wooden_bench_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/painted_wooden_bench_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.165,
+   0.889,
+   0.497
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2289ab82f3fe3045bf18f7b9541743d2c65b9f071cb34bbe424d2bc998f3e507"
+ },
+ {
+  "file": "polyhaven/planter_box_01/planter_box_01_1k.gltf",
+  "triangles": 8094,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/planter_box_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/planter_box_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/planter_box_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.913,
+   0.425,
+   0.414
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "15c7ff7396d872e5cad6743c796ff0f42e1f3f831fd334a26aa1fdbd11834a1f"
+ },
+ {
+  "file": "polyhaven/pot_enamel_01/pot_enamel_01_1k.gltf",
+  "triangles": 11416,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/pot_enamel_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/pot_enamel_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/pot_enamel_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.263,
+   0.178,
+   0.18
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ca60a8399463429cf23e04784334cbe344886e5c8747860ad9ad44c044e03dde"
+ },
+ {
+  "file": "polyhaven/round_wooden_table_01/round_wooden_table_01_1k.gltf",
+  "triangles": 8640,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/round_wooden_table_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/round_wooden_table_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/round_wooden_table_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.399,
+   1.005,
+   1.399
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "dd09c1663b10d15a1fda12ba4f53743e8b8379b17254a78be22100d584738b48"
+ },
+ {
+  "file": "polyhaven/treasure_chest/treasure_chest_1k.gltf",
+  "triangles": 103330,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/treasure_chest_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/treasure_chest_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/treasure_chest_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.959,
+   0.578,
+   0.779
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "5edb8df3a45d2709b9407102ba4dd63025adff401ed8eba939d0117a74dd8dd5"
+ },
+ {
+  "file": "polyhaven/tree_stump_01/tree_stump_01_1k.gltf",
+  "triangles": 41046,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/tree_stump_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/tree_stump_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/tree_stump_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.426,
+   0.573,
+   1.59
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "9c66ba87d693f35eb404acaa96e0eeff831c295b61a0a903795584cbcc3527c9"
+ },
+ {
+  "file": "polyhaven/wicker_basket_01/wicker_basket_01_1k.gltf",
+  "triangles": 22276,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wicker_basket_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wicker_basket_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wicker_basket_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.383,
+   0.117,
+   0.295
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "9ad86c33f00f46a18c9bc8bfc28c0036090ee819f7270d0028ec408512c04094"
+ },
+ {
+  "file": "polyhaven/wicker_basket_02/wicker_basket_02_1k.gltf",
+  "triangles": 17850,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wicker_basket_02_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wicker_basket_02_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wicker_basket_02_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.23,
+   0.221,
+   0.216
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "78c7a3bdd7025eb092b3ac744e9d83e9a75fbb242696b5dce87ec215af617768"
+ },
+ {
+  "file": "polyhaven/wine_barrel_01/wine_barrel_01_1k.gltf",
+  "triangles": 10820,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wine_barrel_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wine_barrel_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wine_barrel_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.742,
+   0.871,
+   0.756
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "503d3339677217c3241a3cdbc1c803ed1eb82d1a48f51436d1545ec5745ae8d8"
+ },
+ {
+  "file": "polyhaven/WoodenTable_01/WoodenTable_01_1k.gltf",
+  "triangles": 952,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/WoodenTable_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/WoodenTable_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/WoodenTable_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.8,
+   0.549,
+   0.657
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "413804e054055c397b4cfbd0916027097d2a20853b165b533007a46d131e1d17"
+ },
+ {
+  "file": "polyhaven/WoodenTable_03/WoodenTable_03_1k.gltf",
+  "triangles": 2298,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/WoodenTable_03_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/WoodenTable_03_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/WoodenTable_03_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.327,
+   1.201,
+   0.723
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "d7e7fc5f8941a45c5135cdad7b449ef47447dafe093a1fa6ad4f0d1c5d5046b1"
+ },
+ {
+  "file": "polyhaven/wooden_axe/wooden_axe_1k.gltf",
+  "triangles": 3348,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_axe_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_axe_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_axe_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.047,
+   0.63,
+   0.214
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c1f0015f482a7ac0dd0378e28df5948d4281f951c89485015d392c8b7b1218ee"
+ },
+ {
+  "file": "polyhaven/wooden_barrels_01/wooden_barrels_01_1k.gltf",
+  "triangles": 33142,
+  "materials": 3,
+  "textures": [
+   [
+    "textures/wooden_barrels_01_barrel01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_barrel01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_barrel01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_barrel02_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_barrel02_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_barrel02_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_pieces_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_pieces_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_barrels_01_pieces_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.753,
+   0.97,
+   0.888
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "ff785e2150198c4cdb3cc74e532b02ce9574d6a7fc3606f5801fcbf68e3136af"
+ },
+ {
+  "file": "polyhaven/wooden_bookshelf_worn/wooden_bookshelf_worn_1k.gltf",
+  "triangles": 10106,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_bookshelf_worn_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bookshelf_worn_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bookshelf_worn_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   1.374,
+   2.063,
+   0.581
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "a1c5b3f1e71ae0b5eb73047e8097bceaa5f17e5d2d0d7ae1b8053d5ec0878fc6"
+ },
+ {
+  "file": "polyhaven/wooden_bowl_01/wooden_bowl_01_1k.gltf",
+  "triangles": 14122,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_bowl_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bowl_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bowl_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.313,
+   0.094,
+   0.309
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "7fe0d6aa4b58e1b9bfc704a8142f4f23f651640c5701b26037fbee3c01613c3b"
+ },
+ {
+  "file": "polyhaven/wooden_bucket_01/wooden_bucket_01_1k.gltf",
+  "triangles": 5116,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_bucket_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bucket_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bucket_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.367,
+   0.357,
+   0.342
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f5338d760391b1f6183f09cbb3dfcb0d6b5d954d9a1d388e7debabce46fd999d"
+ },
+ {
+  "file": "polyhaven/wooden_bucket_02/wooden_bucket_02_1k.gltf",
+  "triangles": 7252,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_bucket_02_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bucket_02_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_bucket_02_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.615,
+   0.408,
+   0.616
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "9ced8ec4849e59e7135d1ab342dbb106adc8c927d2178b1643f1089f19d548b5"
+ },
+ {
+  "file": "polyhaven/wooden_crate_01/wooden_crate_01_1k.gltf",
+  "triangles": 6576,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_crate_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_crate_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_crate_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.825,
+   0.35,
+   0.409
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "fd9c6073acfc671e12b64666053f2805ae33aff5d3dbbcfe5c97c08c06644927"
+ },
+ {
+  "file": "polyhaven/wooden_crate_02/wooden_crate_02_1k.gltf",
+  "triangles": 5176,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_crate_02_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_crate_02_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_crate_02_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.529,
+   0.469,
+   1.166
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "e90985d317664668988cb95ce707784c94ab0ccc6d13c980ca789fa69a5cf7b6"
+ },
+ {
+  "file": "polyhaven/wooden_cutting_board/wooden_cutting_board_1k.gltf",
+  "triangles": 3520,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_cutting_board_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_cutting_board_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_cutting_board_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.45,
+   0.041,
+   0.247
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "89fa89f6987c5087c0c7a8ac8ccbe451cfa8976ae46377d83a423e658cff9de4"
+ },
+ {
+  "file": "polyhaven/wooden_display_shelves_01/wooden_display_shelves_01_1k.gltf",
+  "triangles": 3174,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_display_shelves_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_display_shelves_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_display_shelves_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.372,
+   1.556,
+   1.078
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "3784953c451b088d24ac1b0e6946c7f7bd589115f51e6549fdb8fe9f7c10600e"
+ },
+ {
+  "file": "polyhaven/wooden_hammer_01/wooden_hammer_01_1k.gltf",
+  "triangles": 3617,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_hammer_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_hammer_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_hammer_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.112,
+   0.279,
+   0.023
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "c2149d9f54bd2115af7edeac528e4890e8e68f0d2e3e939367268547837c6b29"
+ },
+ {
+  "file": "polyhaven/wooden_lantern_01/wooden_lantern_01_1k.gltf",
+  "triangles": 8321,
+  "materials": 2,
+  "textures": [
+   [
+    "textures/wooden_lantern_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_lantern_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_lantern_01_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_lantern_01_glass_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_lantern_01_glass_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_lantern_01_glass_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.245,
+   0.547,
+   0.221
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "2380275a5c90bf3442c426f3363e826e6b1ceff12a7e65f83b03cc8fac70a099"
+ },
+ {
+  "file": "polyhaven/wooden_stool_01/wooden_stool_01_1k.gltf",
+  "triangles": 10946,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_stool_01_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_stool_01_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_stool_01_rough_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.425,
+   0.437,
+   0.442
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "f28566454af27175839c10645a37a2a16b373e4be8aecddd0d8a3d704cfc0330"
+ },
+ {
+  "file": "polyhaven/wooden_stool_02/wooden_stool_02_1k.gltf",
+  "triangles": 11146,
+  "materials": 1,
+  "textures": [
+   [
+    "textures/wooden_stool_02_nor_gl_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_stool_02_diff_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "textures/wooden_stool_02_arm_1k.jpg",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_m": [
+   0.265,
+   0.182,
+   0.183
+  ],
+  "skins": 0,
+  "joints": 0,
+  "animations": [],
+  "sha256": "8bb8bc3e420db0f69cee3d2ee74eccad7cabd1110a864a7d945549684e6f32cf"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Alien.gltf",
+  "triangles": 7676,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.547,
+   1.488
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "e6fec42f9d4db3c3177da9027c5cdb2c4abd71cb934ea4f4788aea155f267124"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Birb.gltf",
+  "triangles": 5704,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.328,
+   1.65
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "d2422f23943125b397078377026172d36ccfd5a657057ffc3803be4a9e983307"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/BlueDemon.gltf",
+  "triangles": 5800,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.628,
+   2.841,
+   2.157
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "9eb899fc619dff9a973669e0962452990c8ec44d4501dd41fe4f4fe5afd631f4"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Bunny.gltf",
+  "triangles": 8284,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.791,
+   3.444,
+   1.81
+  ],
+  "skins": 1,
+  "joints": 49,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "89fce228bdcefac4e498378fa061b9d928bca01b680101530648f8b28c9c9ad9"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Cactoro.gltf",
+  "triangles": 6398,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.957,
+   2.136
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "29051fc39751fa5b3af69f7bce77297c620651b1b2235bbd644962bd6a895461"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Demon.gltf",
+  "triangles": 6712,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.656,
+   3.12,
+   2.32
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "9ce361b41a0e80d42a70f6325169b9c70a6e3304b8d856b8344a2b7f185067af"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Dino.gltf",
+  "triangles": 5414,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.226,
+   1.919
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "d7c57a4ad6444f9c845ecdc13782a7430fcb377594a00f719cd2d37b9434b6de"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Fish.gltf",
+  "triangles": 6854,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.662,
+   3.755,
+   2.364
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "9549f80351ad7c8e97c6894662a80fb42e4df8ebc7588b6912ea8f9e2ec6b9b1"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Frog.gltf",
+  "triangles": 5016,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   2.695,
+   1.556
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "8a73522affc7483fbd43736e95d5581ff993685312995d2c7ebb112eb7d5c004"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Monkroose.gltf",
+  "triangles": 5824,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   2.985,
+   1.493
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "4e984e22bef1a49da0ff92154f5747d3e61997637937532bc066867f08e8e719"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/MushroomKing.gltf",
+  "triangles": 6044,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.648,
+   3.609,
+   2.056
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "ccf27e126b881d80a2046c3ab96ddd94eb996837480e783142009ecd6629a3a4"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Ninja.gltf",
+  "triangles": 5964,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.021,
+   3.049
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "f1042e533bd24b98ceee179eaf4119517051fd745feb8d71af1b78a4ac3c88a3"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Orc.gltf",
+  "triangles": 7344,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.685,
+   3.209,
+   1.871
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "e61a37f8d9b2eee28928bdfad2c55e0798cc0a212e925cc5dcc66b243526c1a3"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Orc_Skull.gltf",
+  "triangles": 7364,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.688,
+   3.268,
+   1.861
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "e27e3acf826e9f5cad021c647bd3ce6f1c82d2aaa3530c03ee442df4828a710e"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Tribal.gltf",
+  "triangles": 6620,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   3.929,
+   1.359
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "ffe686b0f0e7a2fb968ea9829358f059df903d2a60c9a94bd3516b1c3d42b7c4"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Big/glTF/Yeti.gltf",
+  "triangles": 6094,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.649,
+   2.828,
+   1.472
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Duck",
+   "HitReact",
+   "Idle",
+   "Jump",
+   "Jump_Idle",
+   "Jump_Land",
+   "No",
+   "Punch",
+   "Run",
+   "Walk",
+   "Wave",
+   "Weapon",
+   "Yes"
+  ],
+  "sha256": "ab60f4fbc1c2e1fdc3ed4f63023dc2185240dbd55751df568099557b29af6fd5"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Alien.gltf",
+  "triangles": 2616,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   3.869,
+   3.243,
+   1.941
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "9779ff35883ddf0afea041d4e05628e2233d374472d242310ff2d31c7c0a5108"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Birb.gltf",
+  "triangles": 3164,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.795,
+   2.612,
+   2.757
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "af555c16465c10e1ea4c1c3a8e6df15d199fc3cbcbfa4b3c788e1aff685ce11f"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Cactoro.gltf",
+  "triangles": 2388,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.074,
+   3.574,
+   3.669
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "a11045fd73ea27f43ddc4ba989e76d29acf569c8a6e6de865f0b3794fc637434"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Cat.gltf",
+  "triangles": 1772,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.099,
+   1.944,
+   1.724
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "59aba7e4ea6da3ac11be9d5220304e649de8cb8cf975eef588d30a003c6cd275"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Chicken.gltf",
+  "triangles": 2904,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.349,
+   2.347,
+   2.102
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "a8ad394817989e1e68c111a3a60b3203b203a3ab4563350b4f3a6e1b5a6c98b1"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Dog.gltf",
+  "triangles": 1392,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.136,
+   1.828,
+   1.721
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "21ed475bbf4d5fb7016085290f79663ad7107aedd2a5856318f2716c7ecc6402"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Fish.gltf",
+  "triangles": 3346,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.795,
+   2.731,
+   2.823
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "97f6439faff6a85a4ea390a4eb85a54feaa358db8436d920af0be5a1a0432d7e"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/GreenBlob.gltf",
+  "triangles": 1520,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.249,
+   1.853,
+   2.195
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "e2d2049ebe8d243bd0f60a3f48a7e174444f641ebc40cbea2f6c23cb97a82519"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/GreenSpikyBlob.gltf",
+  "triangles": 4888,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   3.5,
+   4.143,
+   4.159
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "ff55e6424f20576cac02578d012b3527af642ef15e7bab4abd2fd8d1f51b3e7e"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Mushnub.gltf",
+  "triangles": 1248,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.751,
+   3.296,
+   2.751
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "15e44e46e6c52ff677d946c70d41c4cbb1acb6598e7ec09f8642ee942d7751e2"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Mushnub_Evolved.gltf",
+  "triangles": 3072,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   3.402,
+   4.411,
+   3.52
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "ea6c90e8522eeeba7c6c4cece3a031706de55e9b7e660b362f261a4e5bfaff95"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Ninja.gltf",
+  "triangles": 2160,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.483,
+   3.011,
+   2.663
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "41974ce0c56d660950e554d672742e056776518a888e376341bebcce5951178e"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Orc.gltf",
+  "triangles": 2296,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.638,
+   2.347,
+   1.653
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "23d3e6e15c9594e8d958e642208ddade1f369e31b762caf2b14c4ef89358b026"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Pigeon.gltf",
+  "triangles": 2184,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.349,
+   1.802,
+   2.012
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "32a03c1018936d06e4dd0c8c5e93e0f6ff5ff73aad47a1653216a7be32e3c62f"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/PinkBlob.gltf",
+  "triangles": 1030,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   1.834,
+   2.009,
+   1.738
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "0cc6c64f3e2bad775a7ff82b3ccc11e26359266967a765740655cdaccc5c7ff4"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Wizard.gltf",
+  "triangles": 1674,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.33,
+   2.601,
+   2.309
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "074302ab7039f3a6644c8f0be2580a0d747e8981bfa9725bcc6af422222c155a"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Blob/glTF/Yeti.gltf",
+  "triangles": 2136,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   2.547,
+   2.437,
+   2.592
+  ],
+  "skins": 1,
+  "joints": 4,
+  "animations": [
+   "Bite_Front",
+   "Dance",
+   "Death",
+   "HitRecieve",
+   "Idle",
+   "Jump",
+   "No",
+   "Walk",
+   "Yes"
+  ],
+  "sha256": "44b0627cc65112756642f2d0de529a1fba9d74c4fbc9829b572d90625bbb842f"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Alpaking.gltf",
+  "triangles": 2508,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   2.139,
+   2.238
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "91763421d7f193d0a6693094031b251f5aee1c8c689ef04ef43124e5797cfba7"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Alpaking_Evolved.gltf",
+  "triangles": 4684,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   3.192,
+   2.973
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "c91321aa08a94c58f4a05d73e1469adf4d0caec5472abeaccdb67ae001212c50"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Armabee.gltf",
+  "triangles": 2280,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   1.886,
+   2.059
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "10ca05955ab7f7f6e2f9bd8fd85f28ed1351c945e390b1fd0fa84428b43a5916"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Armabee_Evolved.gltf",
+  "triangles": 3200,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   2.138,
+   2.046
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "1ad3e42c088e01e0c179d54537c63efad0dd185031df61d2833b9f1709362730"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Demon.gltf",
+  "triangles": 4784,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.472,
+   1.676,
+   2.064
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Flying_Idle"
+  ],
+  "sha256": "e836b7b97506b3032106528aa5c324fe4158df143f285209ac6d2b5b35e524f1"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Dragon.gltf",
+  "triangles": 4562,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.382,
+   1.541,
+   2.43
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "d219a29b5e928da26c24218a64284bbf999b88484a508ac6c01e0edad9f1f56c"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Dragon_Evolved.gltf",
+  "triangles": 7440,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.475,
+   2.858,
+   2.416
+  ],
+  "skins": 1,
+  "joints": 46,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "39ba6ea24b5f27acf68bbf4c19fe80ba070dbec167ff14bbe933453303426f5c"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Ghost.gltf",
+  "triangles": 3192,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.5,
+   3.101,
+   1.236
+  ],
+  "skins": 1,
+  "joints": 38,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "40bea9d887874cc86b391b83e72cc5ac2cac340892e23f3d8068a568b6e61457"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Ghost_Skull.gltf",
+  "triangles": 3146,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.5,
+   3.101,
+   1.534
+  ],
+  "skins": 1,
+  "joints": 38,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "5bf24cf0f22aa94b0b58315e7d879afc53a0964a5b326aa0c844ba3278cae1da"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Glub.gltf",
+  "triangles": 2528,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   2.351,
+   2.171
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "54f638cef5aae04f4d00874d8cbbfadd863697157fedad7c5e6e5cb9724abbb0"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Glub_Evolved.gltf",
+  "triangles": 4452,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.304,
+   3.707,
+   2.008
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "5b9f9f35246eae72fa5907dc5120cf25c7f4810579d6e2b36fdf5d0aaa3ae6f6"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Goleling.gltf",
+  "triangles": 3696,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.382,
+   1.552,
+   1.942
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "fad1c4d98e88b21a139fadd74e96c370f1c8ece8d1ae8c4b3bec80d1d7163c29"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Goleling_Evolved.gltf",
+  "triangles": 5864,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.382,
+   2.568,
+   2.186
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "a36f8c1636b692d44fd74fbca07e1164ad14acc5db71300a92d5e51bc1a476ca"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Hywirl.gltf",
+  "triangles": 3296,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.543,
+   2.745,
+   1.768
+  ],
+  "skins": 1,
+  "joints": 38,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "aed5759f91d18ce1922723d5698f5afad2c8d8b26f5c6f11b018ca967898fa50"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Pigeon.gltf",
+  "triangles": 3512,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   4.135,
+   1.37,
+   2.172
+  ],
+  "skins": 1,
+  "joints": 13,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "502f0530567fd912b24ba15990e4a4ccca84cf4e4f63f1d7376d73202089a763"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Squidle.gltf",
+  "triangles": 4880,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.472,
+   1.987,
+   2.123
+  ],
+  "skins": 1,
+  "joints": 43,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "ed41b8a3e4a49d0eb9522e52d3055a85e7c051607c6f1092aeb4242e0c87c77b"
+ },
+ {
+  "file": "quaternius/ultimate_monsters/Flying/glTF/Tribal.gltf",
+  "triangles": 5252,
+  "materials": 1,
+  "textures": [
+   [
+    "embedded",
+    null
+   ]
+  ],
+  "size_m": [
+   5.5,
+   4.108,
+   1.377
+  ],
+  "skins": 1,
+  "joints": 38,
+  "animations": [
+   "Death",
+   "Fast_Flying",
+   "Flying_Idle",
+   "Headbutt",
+   "HitReact",
+   "No",
+   "Punch",
+   "Yes"
+  ],
+  "sha256": "689db4c3375bc14a82a831f8fc575c0791a85bee40d1fe42ec8ac16545940afa"
+ }
+]

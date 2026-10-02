@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_flower_purplea",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_flower_purple.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0",
+ "source_sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+ "derived_sha256": "b47abdb9fa80dd29ffd0ee8f0ad986195b04f00acb0bc6d343c56001903b2a07",
+ "scale": 2.0619,
+ "scale_rule": [
+  "h",
+  0.5
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage",
+  "BH_FlowerViolet"
+ ],
+ "part_faces": {
+  "BH_Foliage": 40,
+  "BH_FlowerViolet": 36
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage",
+  "colorPurple": "BH_FlowerViolet"
+ },
+ "triangles": 76,
+ "surfaces": 2,
+ "source_triangles": 76,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.328,
+  0.5,
+  0.373
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

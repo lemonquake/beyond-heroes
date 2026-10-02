@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_9b42afa2-f0cc-471d-8780-23cb1db28026",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:38.751Z",
+  "updatedAt": "2026-10-02T21:11:38.790Z",
+  "startedAt": "2026-10-02T21:11:38.757Z",
+  "completedAt": "2026-10-02T21:11:38.790Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_9b42afa2-f0cc-471d-8780-23cb1db28026\\receipt.json"
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_crop_carrot",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_carrots.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0",
+ "source_sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8",
+ "derived_sha256": "39af1b869f0f2bdcccaa3629d0f6a226e4441c1bdfa84eb8a3e4d3d3368f7418",
+ "scale": 0.7265,
+ "scale_rule": [
+  "h",
+  0.45
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage",
+  "BH_Produce"
+ ],
+ "part_faces": {
+  "BH_Foliage": 98,
+  "BH_Produce": 50
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage",
+  "leafsFall": "BH_Produce"
+ },
+ "triangles": 148,
+ "surfaces": 2,
+ "source_triangles": 148,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.249,
+  0.45,
+  0.249
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

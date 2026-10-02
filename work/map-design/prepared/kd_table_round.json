@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_furniture_tableround",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_table_round.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0",
+ "source_sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+ "derived_sha256": "7413cb2f6e314e4664a4901d26b13e37ae6d9fa48b38680b4b8789caa10c6de7",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Wood": 80
+ },
+ "source_to_material": {
+  "wood": "BH_Wood"
+ },
+ "triangles": 80,
+ "surfaces": 1,
+ "source_triangles": 80,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.559,
+  0.825,
+  1.8
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:54.830Z",
+  "destination": {
+    "assetId": "kenney_nature_crops_bamboostageb",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c62e1de1d1b29c3dbbb57afc2dbf9ea84d0d083fe2115616123da87ef28f67b1",
+  "packageId": "pkg_0cd47a3397ee30b0dedf2c43",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 40144,
+    "fileName": "crops_bambooStageB.glb",
+    "sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6"
+  }
+}

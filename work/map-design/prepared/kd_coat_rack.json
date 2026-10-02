@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_furniture_coatrackstanding",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_coat_rack.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0",
+ "source_sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+ "derived_sha256": "856b4f20c3b333ef69e8916a5bdb826cf4ced31b0d3b675dadde4acec2923eb9",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 190
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark"
+ },
+ "triangles": 190,
+ "surfaces": 1,
+ "source_triangles": 190,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.614,
+  1.732,
+  0.614
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

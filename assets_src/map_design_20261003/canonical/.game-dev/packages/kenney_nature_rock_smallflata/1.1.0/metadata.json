@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_rock_smallflata",
+  "category": "environment_prop",
+  "description": "Flat low rock. Intended use: Ground transitions and stream banks",
+  "displayName": "kenney_nature_rock_smallflata",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.24789486825466156,
+        0.01494399160146713,
+        0.21478867530822754
+      ],
+      "min": [
+        -0.24789486825466156,
+        -0.05,
+        -0.21478867530822754
+      ],
+      "sizeMeters": [
+        0.4957897365093231,
+        0.06494399160146713,
+        0.4295773506164551
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 3300,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 20,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 72,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

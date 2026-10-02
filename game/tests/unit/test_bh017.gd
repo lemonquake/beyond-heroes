@@ -254,7 +254,10 @@ func test_fore_tech_refits_a_weapon() -> void:
 		eq(w.foretech_rank, rank, "rank +%d" % rank)
 	ok(w.display_name().ends_with("+5"), "the name shows +5 (%s)" % w.display_name())
 	ok(w.display_name().begins_with(name0), "the old name is kept")
-	near(w.damage_range().y / d0.y, (1.0 + w.quality + 0.10) / (1.0 + w.quality), 0.0005, "tempering adds 2% weapon damage per rank")
+	# quality, tempering and the weapon's own local damage affix add into one multiplier (ItemInstance.damage_range), so the
+	# 2% per rank is measured against that whole sum, not against quality alone
+	var local := w._local(&"local_phys")
+	near(w.damage_range().y / d0.y, (1.0 + w.quality + local + 0.10) / (1.0 + w.quality + local), 0.0005, "tempering adds 2% weapon damage per rank")
 	ok(w.modifiers().any(func(m): return m.stat == &"phys_damage"), "the refit adds its own bonus")
 	ok(not WeaponUpgrades.apply(h, w, WeaponUpgrades.FORETECH, &"whet", &"forge").ok, "+5 is the top")
 	# it stacks with an enchantment

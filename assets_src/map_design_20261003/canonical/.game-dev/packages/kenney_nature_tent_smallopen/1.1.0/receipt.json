@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:55.711Z",
+  "destination": {
+    "assetId": "kenney_nature_tent_smallopen",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c160dc8490a1a7656a24d842a3d5dafa45a76deb7f9c6b10f67a129713c62b76",
+  "packageId": "pkg_812d87960ee97b0deb0f8cee",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 13604,
+    "fileName": "tent_smallOpen.glb",
+    "sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd"
+  }
+}

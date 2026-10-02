@@ -1,0 +1,779 @@
+{
+ "agdao": {
+  "build_ms": 720,
+  "census": {
+   "kd": {
+    "kd_bamboo": 4,
+    "kd_barrel": 9,
+    "kd_bench": 7,
+    "kd_bush": 2,
+    "kd_canopy": 1,
+    "kd_carrots": 5,
+    "kd_crate": 15,
+    "kd_fence": 1,
+    "kd_fence_gate": 1,
+    "kd_flower_purple": 3,
+    "kd_flower_yellow": 3,
+    "kd_grass": 3,
+    "kd_grass_large": 3,
+    "kd_ground_leaves": 2,
+    "kd_log": 1,
+    "kd_log_stack": 4,
+    "kd_paddle": 2,
+    "kd_palm": 3,
+    "kd_palm_bend": 4,
+    "kd_palm_short": 2,
+    "kd_palm_tall": 3,
+    "kd_planks": 1,
+    "kd_plant_leafy": 3,
+    "kd_plant_tall": 9,
+    "kd_planter": 7,
+    "kd_pot_small": 1,
+    "kd_pumpkin": 2,
+    "kd_rock_a": 2,
+    "kd_rock_b": 6,
+    "kd_rock_c": 6,
+    "kd_rock_flat": 3,
+    "kd_rock_small_a": 1,
+    "kd_rowboat": 2,
+    "kd_side_table": 1,
+    "kd_stool_square": 2,
+    "kd_stump_cut": 1,
+    "kd_table_round": 1,
+    "kd_tree_small": 1
+   },
+   "kd_kinds": 38,
+   "mesh_instances": 313,
+   "multimeshes": 287
+  },
+  "dressing_skipped": [],
+  "skipped": [
+   "palm_pair near (56.0, 40.0): no clear spot",
+   "herb_pots near (16.0, 26.0): no clear spot"
+  ],
+  "vignettes": [
+   "cargo_stack@(-32.3,39.5)",
+   "supply_corner@(-8.3,40.0)",
+   "moored_rowboat@(-55.0,53.5)",
+   "moored_rowboat@(14.0,54.0)",
+   "palm_pair@(-72.0,36.0)",
+   "bench_view@(-52.3,39.5)",
+   "covered_store@(-45.1,13.7)",
+   "produce_display@(-18.0,18.7)",
+   "cargo_stack@(44.0,12.0)",
+   "bench_view@(-12.0,9.0)",
+   "bench_view@(12.0,9.0)",
+   "civic_planters@(-34.3,19.8)",
+   "civic_planters@(35.7,19.3)",
+   "civic_planters@(-58.3,19.8)",
+   "civic_record@(-21.0,-4.5)",
+   "civic_planters@(-41.4,-5.8)",
+   "garden_bed@(-4.3,-4.0)",
+   "flower_border@(32.0,-6.0)",
+   "supply_corner@(46.7,-15.7)",
+   "tool_corner@(46.1,-32.0)",
+   "tool_corner@(45.7,8.5)",
+   "timber_store@(60.7,-30.7)",
+   "garden_bed@(-22.5,-40.0)",
+   "bamboo_garden@(-36.0,-41.0)",
+   "bamboo_garden@(34.0,-17.4)",
+   "tea_corner@(-30.3,16.5)",
+   "kitchen_garden@(-12.4,-40.4)",
+   "rock_cluster_m@(-34.0,-62.0)",
+   "rock_cluster_m@(35.0,-66.0)",
+   "flower_border@(-30.0,-78.0)",
+   "flower_border@(31.0,-79.0)",
+   "flower_border@(51.0,-42.1)",
+   "garden_bed@(75.0,-42.3)",
+   "rock_cluster_l@(-87.0,40.0)",
+   "rock_cluster_l@(71.0,40.0)",
+   "palm_group@(-81.0,18.0)",
+   "palm_group@(77.0,18.0)",
+   "rock_cluster_l@(-75.0,-7.0)",
+   "rock_cluster_l@(81.0,-7.0)",
+   "palm_group@(-67.0,-32.0)",
+   "rock_cluster_l@(-51.0,-64.0)",
+   "rock_cluster_l@(51.0,-64.0)"
+  ]
+ },
+ "boss_arena": {
+  "build_ms": 115,
+  "census": {
+   "kd": {
+    "kd_debris_stone": 2,
+    "kd_floor_inlay": 1
+   },
+   "kd_kinds": 2,
+   "mesh_instances": 197,
+   "multimeshes": 26
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "bridge_of_death": {
+  "build_ms": 362,
+  "census": {
+   "kd": {
+    "kd_debris_stone": 4,
+    "kd_planks": 4
+   },
+   "kd_kinds": 2,
+   "mesh_instances": 239,
+   "multimeshes": 146
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "catacombs": {
+  "build_ms": 100,
+  "census": {
+   "kd": {
+    "kd_bars_gate": 1,
+    "kd_bed_bunk": 1,
+    "kd_candles": 2,
+    "kd_chalice": 1,
+    "kd_crate_bottles": 1,
+    "kd_debris_wood": 2,
+    "kd_floor_inlay": 1,
+    "kd_grave_broken": 1,
+    "kd_hanging_moss": 3,
+    "kd_lantern_candle": 4,
+    "kd_log_stack": 1,
+    "kd_offering_bowl": 1,
+    "kd_planks": 1,
+    "kd_shovel": 1,
+    "kd_urn_round": 5,
+    "kd_urn_square": 3
+   },
+   "kd_kinds": 16,
+   "mesh_instances": 650,
+   "multimeshes": 17
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "forgotten_temple": {
+  "build_ms": 83,
+  "census": {
+   "kd": {
+    "kd_bookcase_open": 1,
+    "kd_books": 3,
+    "kd_chalice": 1,
+    "kd_column": 1,
+    "kd_debris_stone": 1,
+    "kd_debris_wood": 1,
+    "kd_floor_inlay": 1,
+    "kd_hanging_moss": 1,
+    "kd_offering_bowl": 1,
+    "kd_urn_round": 1
+   },
+   "kd_kinds": 10,
+   "mesh_instances": 350,
+   "multimeshes": 35
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_cartographer": {
+  "build_ms": 2,
+  "census": {
+   "kd": {
+    "kd_bookcase_low": 1,
+    "kd_books": 2,
+    "kd_candles": 1,
+    "kd_plant_pot_b": 1,
+    "kd_side_table": 1
+   },
+   "kd_kinds": 5,
+   "mesh_instances": 27,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_guildhouse": {
+  "build_ms": 16,
+  "census": {
+   "kd": {
+    "kd_bookcase_low": 2,
+    "kd_books": 3,
+    "kd_coat_rack": 1,
+    "kd_drawers": 1,
+    "kd_plant_tall": 2
+   },
+   "kd_kinds": 5,
+   "mesh_instances": 99,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_keeper": {
+  "build_ms": 2,
+  "census": {
+   "kd": {
+    "kd_bookcase_closed": 1,
+    "kd_books": 1,
+    "kd_lantern_candle": 2,
+    "kd_side_table": 1
+   },
+   "kd_kinds": 4,
+   "mesh_instances": 25,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_lantern": {
+  "build_ms": 1,
+  "census": {
+   "kd": {
+    "kd_books": 2,
+    "kd_chair_round": 1,
+    "kd_side_table": 1
+   },
+   "kd_kinds": 3,
+   "mesh_instances": 38,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_netmender": {
+  "build_ms": 6,
+  "census": {
+   "kd": {
+    "kd_bottle_large": 1,
+    "kd_candles": 1,
+    "kd_crate": 1,
+    "kd_paddle": 1,
+    "kd_side_table": 1
+   },
+   "kd_kinds": 5,
+   "mesh_instances": 29,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_refugee": {
+  "build_ms": 5,
+  "census": {
+   "kd": {
+    "kd_bed_bunk": 1,
+    "kd_bottle": 1,
+    "kd_pot_small": 1
+   },
+   "kd_kinds": 3,
+   "mesh_instances": 26,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_swordfin": {
+  "build_ms": 8,
+  "census": {
+   "kd": {
+    "kd_books": 1,
+    "kd_chair_round": 2,
+    "kd_drawers": 1,
+    "kd_rug_long": 1
+   },
+   "kd_kinds": 4,
+   "mesh_instances": 49,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_tavern": {
+  "build_ms": 193,
+  "census": {
+   "kd": {
+    "kd_bench": 1,
+    "kd_bottle": 1,
+    "kd_bottle_large": 1,
+    "kd_chair": 3,
+    "kd_coat_rack": 1,
+    "kd_crate_bottles": 1
+   },
+   "kd_kinds": 6,
+   "mesh_instances": 78,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "int_widow": {
+  "build_ms": 4,
+  "census": {
+   "kd": {
+    "kd_chair": 1,
+    "kd_plant_pot_a": 1,
+    "kd_pot_small": 1
+   },
+   "kd_kinds": 3,
+   "mesh_instances": 25,
+   "multimeshes": 0
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "olivar": {
+  "build_ms": 578,
+  "census": {
+   "kd": {
+    "kd_barrel": 3,
+    "kd_bench": 4,
+    "kd_bush": 1,
+    "kd_bush_large": 1,
+    "kd_canoe": 1,
+    "kd_crate": 4,
+    "kd_dock_small": 1,
+    "kd_flower_purple": 3,
+    "kd_flower_yellow": 5,
+    "kd_grass": 2,
+    "kd_grass_large": 2,
+    "kd_lily": 11,
+    "kd_paddle": 1,
+    "kd_planks": 1,
+    "kd_plant_leafy": 1,
+    "kd_plant_pot_a": 1,
+    "kd_planter": 7,
+    "kd_tree_broadleaf": 3,
+    "kd_tree_oak": 3,
+    "kd_tree_thin": 4
+   },
+   "kd_kinds": 20,
+   "mesh_instances": 276,
+   "multimeshes": 251
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": [
+   "canoe_mooring@(-8.3,-42.5)",
+   "cargo_stack@(12.8,-35.0)",
+   "boat_landing@(-20.3,-41.5)",
+   "bench_view@(-14.5,-36.5)",
+   "bench_view@(19.0,-34.2)",
+   "herb_pots@(-25.0,-4.5)",
+   "garden_bed@(-24.7,-12.5)",
+   "flower_border@(-27.3,29.5)",
+   "garden_bed@(-37.3,40.3)",
+   "flower_border@(29.1,14.8)",
+   "garden_bed@(35.7,27.3)",
+   "garden_bed@(24.0,-25.8)",
+   "flower_border@(-36.9,-14.3)",
+   "garden_bed@(10.8,26.3)",
+   "tree_group@(-38.0,28.0)",
+   "tree_group@(39.9,29.2)",
+   "tree_group@(-40.4,-30.6)",
+   "lane_tree@(-14.9,33.3)",
+   "lane_tree@(17.9,20.8)",
+   "lane_tree@(-19.1,10.9)",
+   "lane_tree@(33.5,8.8)",
+   "garden_bed@(-11.4,10.3)",
+   "garden_bed@(5.2,-9.5)"
+  ]
+ },
+ "ruined_forest": {
+  "build_ms": 833,
+  "census": {
+   "kd": {
+    "kd_debris_wood": 3,
+    "kd_grass": 2,
+    "kd_grave_broken": 1,
+    "kd_ground_leaves": 1,
+    "kd_log": 6,
+    "kd_log_stack": 1,
+    "kd_mushrooms_pale": 3,
+    "kd_offering_bowl": 1,
+    "kd_pine": 12,
+    "kd_pine_round": 12,
+    "kd_pine_tall": 12,
+    "kd_rock_a": 2,
+    "kd_rock_small_b": 7,
+    "kd_stump_cut": 1,
+    "kd_stump_old": 5
+   },
+   "kd_kinds": 15,
+   "mesh_instances": 208,
+   "multimeshes": 307
+  },
+  "dressing_skipped": [],
+  "skipped": [
+   "pine_group near (-42.4, 25.0): no clear spot",
+   "pine_group near (-47.8, -3.1): no clear spot",
+   "pine_group near (27.6, -3.2): no clear spot",
+   "fallen_tree near (58.0, 24.0): no clear spot",
+   "rock_cluster_m near (-6.0, 36.0): no clear spot",
+   "salvage at (-15.0, -9.0)"
+  ],
+  "vignettes": [
+   "pine_group@(-48.4,18.9)",
+   "pine_group@(-69.6,20.5)",
+   "pine_group@(-64.7,-3.0)",
+   "pine_group@(-17.3,25.1)",
+   "pine_group@(-17.4,-11.5)",
+   "pine_group@(9.5,-7.8)",
+   "pine_group@(18.4,-28.9)",
+   "pine_group@(24.8,37.6)",
+   "pine_group@(17.5,17.4)",
+   "pine_group@(39.2,13.1)",
+   "pine_group@(65.8,11.8)",
+   "pine_group@(50.0,-11.1)",
+   "fallen_tree@(-10.9,-19.4)",
+   "fallen_tree@(10.9,21.2)",
+   "fallen_tree@(-56.4,-29.3)",
+   "fallen_tree@(44.6,-14.7)",
+   "fallen_tree@(-11.1,27.1)",
+   "rock_cluster_m@(-61.1,-8.0)",
+   "rock_cluster_m@(30.0,-32.0)",
+   "grave_cluster@(-37.5,26.5)",
+   "offering@(-45.0,36.6)",
+   "woodpile@(9.0,-19.1)"
+  ]
+ },
+ "sanctuary": {
+  "build_ms": 1521,
+  "census": {
+   "kd": {
+    "kd_barrel": 7,
+    "kd_bench": 11,
+    "kd_bush": 2,
+    "kd_bush_large": 3,
+    "kd_carrots": 1,
+    "kd_crate": 8,
+    "kd_crate_bottles": 1,
+    "kd_fence": 1,
+    "kd_fence_gate": 1,
+    "kd_flower_purple": 3,
+    "kd_flower_yellow": 1,
+    "kd_grass": 2,
+    "kd_grass_large": 3,
+    "kd_log": 2,
+    "kd_log_stack": 2,
+    "kd_pine": 7,
+    "kd_pine_round": 7,
+    "kd_pine_tall": 7,
+    "kd_plant_pot_a": 1,
+    "kd_plant_tall": 1,
+    "kd_planter": 1,
+    "kd_pumpkin": 4,
+    "kd_rock_b": 1,
+    "kd_rock_c": 1,
+    "kd_rock_small_b": 2,
+    "kd_rock_tall": 1,
+    "kd_stump_cut": 2,
+    "kd_tree_broadleaf": 4,
+    "kd_tree_detailed": 1,
+    "kd_tree_oak": 4,
+    "kd_tree_small": 1
+   },
+   "kd_kinds": 31,
+   "mesh_instances": 302,
+   "multimeshes": 170
+  },
+  "dressing_skipped": [
+   "ph_wine_barrel_01 at (25.6, 22.6)"
+  ],
+  "skipped": [
+   "produce_display at (6.4, 12.6)"
+  ],
+  "vignettes": [
+   "bench_view@(6.9,7.2)",
+   "garden_bed@(7.1,11.3)",
+   "bench_view@(-3.2,10.9)",
+   "bench_view@(3.2,-2.9)",
+   "bench_view@(-5.5,-19.4)",
+   "bench_view@(4.5,-19.4)",
+   "woodpile@(-11.5,33.0)",
+   "supply_corner@(-9.4,27.4)",
+   "flower_border@(-5.6,25.5)",
+   "flower_border@(5.4,27.0)",
+   "flower_border@(-5.6,18.0)",
+   "flower_border@(5.4,19.5)",
+   "produce_display@(6.0,15.5)",
+   "cargo_stack@(12.5,35.6)",
+   "book_corner@(23.8,-0.9)",
+   "kitchen_garden@(-17.0,32.3)",
+   "woodpile@(18.4,-20.3)",
+   "supply_corner@(-28.8,-19.0)",
+   "tavern_stock@(-21.1,8.9)",
+   "tree_group@(-34.5,-1.0)",
+   "tree_group@(33.5,12.5)",
+   "tree_group@(-6.0,-33.5)",
+   "tree_group@(14.0,-31.0)",
+   "pine_group@(42.4,11.7)",
+   "pine_group@(17.3,40.5)",
+   "pine_group@(-20.9,38.7)",
+   "pine_group@(-43.3,7.9)",
+   "pine_group@(-33.1,-28.9)",
+   "pine_group@(2.0,-44.0)",
+   "pine_group@(35.6,-25.9)",
+   "rock_cluster_l@(-41.0,20.0)",
+   "rock_tall@(38.5,-24.0)"
+  ]
+ },
+ "sundered_reach": {
+  "build_ms": 118,
+  "census": {
+   "kd": {
+    "kd_column": 1,
+    "kd_debris_stone": 7,
+    "kd_floor_inlay": 1
+   },
+   "kd_kinds": 3,
+   "mesh_instances": 277,
+   "multimeshes": 8
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "weeping_causeway": {
+  "build_ms": 119,
+  "census": {
+   "kd": {
+    "kd_barrel": 4,
+    "kd_crate": 4,
+    "kd_debris_stone": 1,
+    "kd_debris_wood": 6,
+    "kd_grass_large": 2,
+    "kd_log": 2
+   },
+   "kd_kinds": 6,
+   "mesh_instances": 214,
+   "multimeshes": 59
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": []
+ },
+ "westreach": {
+  "build_ms": 1932,
+  "census": {
+   "kd": {
+    "kd_barrel": 6,
+    "kd_bush": 1,
+    "kd_bush_large": 2,
+    "kd_carrots": 74,
+    "kd_crate": 5,
+    "kd_debris_wood": 3,
+    "kd_fence": 1,
+    "kd_fence_gate": 1,
+    "kd_log": 3,
+    "kd_log_stack": 4,
+    "kd_palm_bend": 2,
+    "kd_pine": 2,
+    "kd_pine_round": 2,
+    "kd_pine_tall": 2,
+    "kd_pumpkin": 23,
+    "kd_rock_flat": 1,
+    "kd_rock_small_a": 3,
+    "kd_rock_tall": 3,
+    "kd_shore_rocks_a": 1,
+    "kd_shore_rocks_b": 1,
+    "kd_shore_rocks_c": 2,
+    "kd_stump_cut": 2,
+    "kd_stump_old": 1,
+    "kd_tree_broadleaf": 2,
+    "kd_tree_oak": 2,
+    "kd_tree_small": 1,
+    "kd_wheat": 57,
+    "kd_wreck": 1
+   },
+   "kd_kinds": 28,
+   "mesh_instances": 535,
+   "multimeshes": 502
+  },
+  "dressing_skipped": [],
+  "skipped": [
+   "pine_group near (-90.0, -30.0): no clear spot"
+  ],
+  "vignettes": [
+   "harvest_rest@(39.9,97.4)",
+   "kitchen_garden@(23.8,121.0)",
+   "woodpile@(51.3,91.7)",
+   "timber_store@(-4.1,-19.2)",
+   "tool_corner@(5.5,-28.9)",
+   "supply_corner@(-3.4,-26.1)",
+   "palm_pair@(-196.0,91.0)",
+   "palm_pair@(-154.0,92.0)",
+   "shore_debris@(-166.0,106.5)",
+   "shore_debris@(-191.0,104.5)",
+   "shore_debris@(-181.0,107.0)",
+   "wreck@(-192.0,125.0)",
+   "rock_tall@(-118.0,135.0)",
+   "rock_tall@(-60.0,138.0)",
+   "rock_tall@(8.0,136.5)",
+   "pine_group@(-31.5,-18.3)",
+   "pine_group@(37.2,-33.4)",
+   "tree_group@(-75.0,60.0)",
+   "tree_group@(70.0,40.0)",
+   "fallen_tree@(-10.0,-36.0)"
+  ]
+ },
+ "wyman_outpost": {
+  "build_ms": 586,
+  "census": {
+   "kd": {
+    "kd_barrel": 3,
+    "kd_bench": 1,
+    "kd_crate": 5,
+    "kd_fire_ring": 1,
+    "kd_grass_large": 4,
+    "kd_lantern_candle": 1,
+    "kd_lily": 9,
+    "kd_log": 3,
+    "kd_log_stack": 3,
+    "kd_rowboat": 1,
+    "kd_stump_cut": 2,
+    "kd_tent": 1
+   },
+   "kd_kinds": 12,
+   "mesh_instances": 381,
+   "multimeshes": 220
+  },
+  "dressing_skipped": [],
+  "skipped": [
+   "tent_pitch near (7.0, -27.0): no clear spot"
+  ],
+  "vignettes": [
+   "timber_store@(-13.7,3.2)",
+   "supply_corner@(0.3,-18.5)",
+   "tool_corner@(20.1,8.6)",
+   "tent_pitch@(-26.4,-3.4)",
+   "camp_seating@(25.4,25.2)",
+   "waiting_place@(29.5,30.6)",
+   "moored_rowboat@(39.0,31.6)"
+  ]
+ },
+ "zr_barrens": {
+  "build_ms": 1465,
+  "census": {
+   "kd": {
+    "kd_barrel": 7,
+    "kd_crate": 10,
+    "kd_debris_stone": 5,
+    "kd_fire_basket": 1,
+    "kd_log_stack": 1,
+    "kd_planks": 2,
+    "kd_shore_rocks_b": 1
+   },
+   "kd_kinds": 7,
+   "mesh_instances": 276,
+   "multimeshes": 439
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": [
+   "salvage@(-62.4,31.8)",
+   "tool_corner@(-39.7,52.5)",
+   "supply_corner@(-22.0,43.5)",
+   "excavation@(30.2,-28.8)",
+   "salvage@(62.8,-18.9)",
+   "cargo_stack@(-75.3,-54.9)",
+   "excavation@(76.0,33.3)"
+  ]
+ },
+ "zr_citadel": {
+  "build_ms": 594,
+  "census": {
+   "kd": {
+    "kd_barrel": 6,
+    "kd_crate": 10,
+    "kd_debris_stone": 4,
+    "kd_debris_wood": 1,
+    "kd_flower_purple": 1,
+    "kd_flower_yellow": 2,
+    "kd_grass": 1,
+    "kd_log": 2,
+    "kd_log_stack": 1,
+    "kd_mushrooms_pale": 2,
+    "kd_palm_bend": 2,
+    "kd_palm_short": 1,
+    "kd_planks": 2,
+    "kd_stump_old": 2
+   },
+   "kd_kinds": 14,
+   "mesh_instances": 359,
+   "multimeshes": 134
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": [
+   "supply_corner@(-27.3,71.5)",
+   "cargo_stack@(26.7,78.0)",
+   "tool_corner@(-10.0,76.0)",
+   "salvage@(-7.3,44.0)",
+   "salvage@(7.9,41.8)",
+   "excavation@(-19.7,16.9)",
+   "excavation@(19.8,18.0)",
+   "flower_border@(-52.3,19.8)",
+   "flower_border@(51.5,19.8)",
+   "fallen_tree@(-53.0,-36.0)",
+   "fallen_tree@(52.0,-32.0)",
+   "flower_border@(-30.0,48.0)",
+   "palm_pair@(-51.5,51.7)",
+   "palm_pair@(44.3,9.8)"
+  ]
+ },
+ "zr_coilwood": {
+  "build_ms": 1883,
+  "census": {
+   "kd": {
+    "kd_candles": 1,
+    "kd_column": 1,
+    "kd_debris_stone": 3,
+    "kd_ground_leaves": 1,
+    "kd_log": 3,
+    "kd_mushrooms_pale": 3,
+    "kd_offering_bowl": 1,
+    "kd_palm": 2,
+    "kd_palm_bend": 2,
+    "kd_palm_short": 1,
+    "kd_palm_tall": 2,
+    "kd_plant_leafy": 2,
+    "kd_rock_a": 4,
+    "kd_rock_flat": 1,
+    "kd_rock_small_b": 1,
+    "kd_stump_old": 3,
+    "kd_urn_round": 1,
+    "kd_urn_square": 2
+   },
+   "kd_kinds": 18,
+   "mesh_instances": 330,
+   "multimeshes": 710
+  },
+  "dressing_skipped": [],
+  "skipped": [],
+  "vignettes": [
+   "offering@(-98.6,12.2)",
+   "jade_threshold@(96.3,-47.0)",
+   "fallen_tree@(-40.0,30.0)",
+   "fallen_tree@(39.7,-9.7)",
+   "fallen_tree@(-20.0,-60.0)",
+   "rock_cluster_m@(-70.0,34.0)",
+   "rock_cluster_m@(10.0,24.0)",
+   "rock_cluster_m@(60.0,30.0)",
+   "rock_cluster_m@(-30.0,-30.0)",
+   "palm_group@(-60.3,16.7)",
+   "palm_group@(30.9,8.8)"
+  ]
+ }
+}

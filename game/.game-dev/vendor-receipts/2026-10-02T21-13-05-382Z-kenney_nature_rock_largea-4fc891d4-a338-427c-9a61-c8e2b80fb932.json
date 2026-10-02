@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_7e53efd9531b51f9c6c09644",
+  "assetId": "kenney_nature_rock_largea",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_rock_largea",
+  "modelSha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+  "manifestSha256": "467358c36175795cd6b4ffa75bc1a22f36130195f575911d48b1213b45b577c0",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:05.382Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_largea\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

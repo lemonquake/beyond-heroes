@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_graveyard_coffin",
+  "category": "environment_prop",
+  "description": "Intact coffin. Intended use: Burial room rows, retaining broad central combat space",
+  "displayName": "kenney_graveyard_coffin",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2869037389755249,
+        0.325,
+        0.41891196370124817
+      ],
+      "min": [
+        -0.2869037389755249,
+        0,
+        -0.41891196370124817
+      ],
+      "sizeMeters": [
+        0.5738074779510498,
+        0.325,
+        0.8378239274024963
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 35716,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10965,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 256,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 436,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

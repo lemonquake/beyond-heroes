@@ -1,0 +1,52 @@
+[
+  {
+    "kit": "nature-kit",
+    "source_page": "https://kenney.nl/assets/nature-kit",
+    "download_url": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+    "archive_sha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+    "archive_bytes": 10537521,
+    "license": "CC0-1.0",
+    "license_file": "licenses/nature-kit.txt",
+    "downloaded": "2026-10-03"
+  },
+  {
+    "kit": "furniture-kit",
+    "source_page": "https://kenney.nl/assets/furniture-kit",
+    "download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+    "archive_sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+    "archive_bytes": 5130729,
+    "license": "CC0-1.0",
+    "license_file": "licenses/furniture-kit.txt",
+    "downloaded": "2026-10-03"
+  },
+  {
+    "kit": "pirate-kit",
+    "source_page": "https://kenney.nl/assets/pirate-kit",
+    "download_url": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+    "archive_sha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+    "archive_bytes": 3154665,
+    "license": "CC0-1.0",
+    "license_file": "licenses/pirate-kit.txt",
+    "downloaded": "2026-10-03"
+  },
+  {
+    "kit": "graveyard-kit",
+    "source_page": "https://kenney.nl/assets/graveyard-kit",
+    "download_url": "https://kenney.nl/media/pages/assets/graveyard-kit/ba8d4b4517-1760691807/kenney_graveyard-kit_5.0.zip",
+    "archive_sha256": "1a93613f2e5675f3310acf49ec9ef13ae7adeb756ac3b205bfb6cc9311a81062",
+    "archive_bytes": 3623408,
+    "license": "CC0-1.0",
+    "license_file": "licenses/graveyard-kit.txt",
+    "downloaded": "2026-10-03"
+  },
+  {
+    "kit": "modular-dungeon-kit",
+    "source_page": "https://kenney.nl/assets/modular-dungeon-kit",
+    "download_url": "https://kenney.nl/media/pages/assets/modular-dungeon-kit/7bed87605b-1771926065/kenney_modular-dungeon-kit_1.0.zip",
+    "archive_sha256": "dd0aa6776db8912283cdca60161dee6a8839bbda3558eba2ea501419eb5b4623",
+    "archive_bytes": 6886434,
+    "license": "CC0-1.0",
+    "license_file": "licenses/modular-dungeon-kit.txt",
+    "downloaded": "2026-10-03"
+  }
+]

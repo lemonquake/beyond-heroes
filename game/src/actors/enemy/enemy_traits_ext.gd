@@ -21,7 +21,7 @@ extends RefCounted
 ##   brood           Broodmother (summon ability with spiderlings)
 
 const NEW_TRAITS := [&"raise_dead", &"chill_aura", &"shatter_death", &"death_burst", &"powder_keg", &"troll_regen",
-	&"rune_shift", &"mimic", &"totem", &"brood", &"spore_pop"]
+	&"rune_shift", &"mimic", &"totem", &"brood", &"spore_pop", &"rot_bud"]
 const NEW_ABILITIES := ["raise", "summon", "totem", "ward"]
 const NEW_ATTACKS := ["chain", "tongue"]
 
@@ -65,6 +65,13 @@ var _rune_light: OmniLight3D
 var _keg_ring: Node3D
 var raise_cap := 3
 var totem_cap := 1
+# bh-033 rot bud (Verdigast): grows for bud_bloom seconds, then turns the ground under its warning circle into rot
+var bud_t := 0.0
+var bud_bloom := 9.0
+var bud_radius := 4.2
+var bud_duration := 30.0
+var _bud_warn: Node = null
+const ROT_PATCH_CAP := 4
 
 static func wants(d: EnemyDef) -> bool:
 	for t in d.traits:
@@ -98,6 +105,8 @@ func setup() -> void:
 		if e.visual:
 			e.visual.hold_action(&"mimic_dormant")
 		_settle_as_chest.call_deferred()
+	if has(&"rot_bud"):
+		_bud_setup()
 	if has(&"totem") and e.visual:
 		e.visual.play_action(&"alert")         # planting
 		var glow := VFXLib.particles(Color(1.0, 0.35, 0.2, 0.7), 10, 1.2, false, 0.25, 0.6, 30.0, Vector3(0, 1.0, 0), 0.25)
@@ -139,6 +148,10 @@ func pre_tick(delta: float) -> bool:
 			if h:
 				wake(h)
 		return dormant
+	if has(&"rot_bud"):
+		e.knock_velocity = Vector3.ZERO
+		_bud_tick(delta)
+		return true
 	if has(&"totem"):
 		_run_jobs(delta)
 		e.knock_velocity = Vector3.ZERO
@@ -220,6 +233,8 @@ func on_hit(result: DamageResult, _req: DamageRequest, attacker: Node) -> void:
 		regen_block = FIRE_BLOCK
 
 func on_death(killer: Node) -> void:
+	if has(&"rot_bud"):
+		_bud_cancel(true)
 	if has(&"shatter_death"):
 		_shatter()
 	if has(&"death_burst"):
@@ -809,3 +824,56 @@ func _tele(shape: String, radius: float, t: float, c: Color, at: Vector3, parent
 		FX.spawn(tl, at)
 	if is_instance_valid(tl) and tl.is_inside_tree():
 		tl.get_tree().create_timer(t + 0.05, false).timeout.connect(tl.queue_free)
+
+# ---- bh-033: Verdigast's rot buds ----------------------------------------------------------------------------------
+
+## The warning circle is the exact patch the bloom will rot (shared with every player); the bud swells as it grows.
+func _bud_setup() -> void:
+	if e.visual:
+		e.visual.scale = Vector3.ONE * 0.45
+
+func _bud_tick(delta: float) -> void:
+	if bud_t == 0.0 and FX.world and not e.net_replica:
+		# placed now (the spawner sets the position after adding it): warn exactly where it will rot
+		var at := e.global_position
+		_bud_warn = AreaEffects.delayed(FX.world, at, bud_radius, bud_bloom, null, e, 0, Color(0.55, 0.85, 0.15, 0.55))
+		Net.share_telegraph(at, bud_radius, bud_bloom, Color(0.55, 0.85, 0.15, 0.55), "circle", 0.0, e)
+	bud_t += delta
+	var f := clampf(bud_t / maxf(bud_bloom, 0.1), 0.0, 1.0)
+	if e.visual:
+		e.visual.scale = Vector3.ONE * lerpf(0.45, 1.25, f)
+	if f >= 1.0 and e.alive and not e.net_replica:
+		_bud_bloom()
+
+## It bloomed: that section of floor is rot for a while (bounded: the oldest patch fades first). The bud is spent.
+func _bud_bloom() -> void:
+	var at := e.global_position
+	_bud_cancel(false)
+	# the mother's own bud attack (her level, her poison); a bud planted without one rots for a token amount
+	var req: DamageRequest = e.get_meta(&"bud_req", null)
+	if req == null:
+		req = DamageRequest.new()
+		req.kind = DamageRequest.Kind.SPELL
+		req.base_min = 4.0
+		req.base_max = 6.0
+	var patches := e.get_tree().get_nodes_in_group(&"rot_patch")
+	while patches.size() >= ROT_PATCH_CAP:
+		var old: Node = patches.pop_front()
+		if is_instance_valid(old):
+			old.queue_free()
+	var h := AreaEffects.hazard(FX.world, at, bud_radius, bud_duration, req, e.get_meta(&"bud_mother", null), BH.LAYER_PLAYER, Color(0.5, 0.75, 0.12), 0.6)
+	h.add_to_group(&"rot_patch")
+	Net.arena_event(&"rot", -1, {"at": at, "r": bud_radius, "d": bud_duration})
+	FX.spawn(VFXLib.particles(Color(0.6, 0.85, 0.2, 0.9), 50, 1.4, true, 1.2, 3.0, 150.0, Vector3(0, 2.5, 0), bud_radius * 0.5), at + Vector3.UP * 0.4)
+	Audio.play_at(&"ghoul_growl", at, 3.0)
+	# leaves without dying: no reward for a bloom (alive until freed, so every client drops its copy too)
+	e.remove_from_group(&"enemy")
+	e.queue_free()
+
+## Broken in time: the circle fades and that ground stays clean.
+func _bud_cancel(broken: bool) -> void:
+	if is_instance_valid(_bud_warn):
+		_bud_warn.queue_free()
+	_bud_warn = null
+	if broken and e.is_inside_tree():
+		FX.text_popup(e.center() + Vector3.UP, "Bud broken: ground saved", Color(0.75, 1.0, 0.45), 1.0)

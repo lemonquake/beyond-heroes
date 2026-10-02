@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_pinedefaulta\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_pinedefaulta",
+      "category": "foliage",
+      "description": "Straight layered conifer. Intended use: Ruined Forest silhouette and high ground",
+      "displayName": "kenney_nature_tree_pinedefaulta",
+      "files": [
+        {
+          "bytes": 17220,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "60d8f352fa3659ed275e06cbddfecf8f92c8effe2977c2f2d7b29b6c9b582e46"
+        },
+        {
+          "bytes": 1603,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "30597922733478121f33864468a9cfbf822e250cee5d17b56f7092b65f32ec70"
+        },
+        {
+          "bytes": 841,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "2809de0c24beb5d4f0e418519a93da949e595bddf14c11c0bda9333c29f1740c"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "99d7df11a2b88f74dc0b5851f2aeab872465ad7ed33050c3be6c7bc1538298eb"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_78203da265fdaed4d69e2471",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:20.307Z"
+}

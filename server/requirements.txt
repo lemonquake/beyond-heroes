@@ -1,1 +1,3 @@
+# Constraint for development. Deployments use requirements.lock (exact versions).
+# Only server.setup_server needs cryptography (certificate generation); the service and runner are standard library only.
 cryptography>=46.0.0,<48

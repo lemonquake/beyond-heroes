@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:43.029Z",
+  "destination": {
+    "assetId": "kenney_nature_stone_largea",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "e3f492f6d401bb190a1ff7a7b9814eb1d9d12bc97ac16df506cd87e105c718a3",
+  "packageId": "pkg_5f8436b1aecbe1f5d583e4d8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7124,
+    "fileName": "stone_largeA.glb",
+    "sha256": "fe486a13775e833b1aca99413a89e013f300841de80f42ecd44ceaf43720f17b"
+  }
+}

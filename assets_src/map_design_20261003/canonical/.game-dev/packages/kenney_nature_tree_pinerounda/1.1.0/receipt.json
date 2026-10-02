@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:20.951Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_pinerounda",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c18605646c8cf274574fdf26f9e687ba0effcaef612c4233ec691fa54c40a121",
+  "packageId": "pkg_0679f7759861878a68d00bad",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 14488,
+    "fileName": "tree_pineRoundA.glb",
+    "sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e"
+  }
+}

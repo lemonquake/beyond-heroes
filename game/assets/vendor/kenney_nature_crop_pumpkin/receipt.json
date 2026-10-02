@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:53.029Z",
+  "destination": {
+    "assetId": "kenney_nature_crop_pumpkin",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "335a60de551fd2753b8ad7f0af9dc43a56363f1c4a8eb3f6af1262cd6914da2a",
+  "packageId": "pkg_11fbdd63f46c808d7354656d",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 10840,
+    "fileName": "crop_pumpkin.glb",
+    "sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077"
+  }
+}

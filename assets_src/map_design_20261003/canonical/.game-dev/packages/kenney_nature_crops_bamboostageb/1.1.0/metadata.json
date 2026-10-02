@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_crops_bamboostageb",
+  "category": "environment_prop",
+  "description": "Mature bamboo patch. Intended use: Sparse Agdao back gardens and Coilwood framing",
+  "displayName": "kenney_nature_crops_bamboostageb",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.163276806473732,
+        0.8399999260902404,
+        0.14678002893924713
+      ],
+      "min": [
+        -0.17681777477264404,
+        -0.05,
+        -0.161227747797966
+      ],
+      "sizeMeters": [
+        0.34009458124637604,
+        0.8899999260902405,
+        0.30800777673721313
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 40144,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 564,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 996,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

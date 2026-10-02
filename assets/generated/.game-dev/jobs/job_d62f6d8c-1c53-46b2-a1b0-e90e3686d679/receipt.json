@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crops_bamboostageb\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_crops_bamboostageb",
+      "category": "environment_prop",
+      "description": "Mature bamboo patch. Intended use: Sparse Agdao back gardens and Coilwood framing",
+      "displayName": "kenney_nature_crops_bamboostageb",
+      "files": [
+        {
+          "bytes": 40144,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6"
+        },
+        {
+          "bytes": 1617,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "bebd04f0bbb889283196bbe09528c15dc49dfd4935887d63e9fdf98db7bd2640"
+        },
+        {
+          "bytes": 843,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9b3bbeed2bf9e66f66962d87b4cc1c5b9ba278c5552cd9807d23a59432e527bf"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a16d725776e332105bc5c72ed155b704bf63106700616c15b4c66676829d2a6e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_0cd47a3397ee30b0dedf2c43",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:55.047Z"
+}

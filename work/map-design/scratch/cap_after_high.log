@@ -1,0 +1,282 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+SHOT mal_01_gate__after_high_hud
+SHOT mal_01_gate__after_high_clean
+SHOT mal_02_plaza__after_high_hud
+SHOT mal_02_plaza__after_high_clean
+SHOT mal_03_market__after_high_hud
+SHOT mal_03_market__after_high_clean
+SHOT mal_04_terrace__after_high_hud
+SHOT mal_04_terrace__after_high_clean
+SHOT mal_05_tavern_yard__after_high_hud
+SHOT mal_05_tavern_yard__after_high_clean
+SHOT mal_06_hald_garden__after_high_hud
+SHOT mal_06_hald_garden__after_high_clean
+SHOT wr_01_fields__after_high_hud
+SHOT wr_01_fields__after_high_clean
+SHOT wr_02_mill__after_high_hud
+SHOT wr_02_mill__after_high_clean
+SHOT wr_03_cove__after_high_hud
+SHOT wr_03_cove__after_high_clean
+SHOT ol_01_plaza__after_high_hud
+SHOT ol_01_plaza__after_high_clean
+SHOT ol_02_docks__after_high_hud
+SHOT ol_02_docks__after_high_clean
+SHOT ol_03_apothecary__after_high_hud
+SHOT ol_03_apothecary__after_high_clean
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] load_map (res://src/autoload/game.gd:251)
+       [2] _view (res://tests/tools/capture_map_design.gd:130)
+       [3] _run (res://tests/tools/capture_map_design.gd:120)
+       [4] _view (res://tests/tools/capture_map_design.gd:151)
+       [5] _shot (res://tests/tools/capture_map_design.gd:93)
+SHOT wy_01_bonfire__after_high_hud
+SHOT wy_01_bonfire__after_high_clean
+SHOT wy_02_jetty__after_high_hud
+SHOT wy_02_jetty__after_high_clean
+SHOT wy_03_forge__after_high_hud
+SHOT wy_03_forge__after_high_clean
+SHOT rf_01_arrival__after_high_hud
+SHOT rf_01_arrival__after_high_clean
+SHOT rf_02_village__after_high_hud
+SHOT rf_02_village__after_high_clean
+SHOT rf_03_camp__after_high_hud
+SHOT rf_03_camp__after_high_clean
+SHOT wc_01_causeway__after_high_hud
+SHOT wc_01_causeway__after_high_clean
+SHOT sr_01_arrival__after_high_hud
+SHOT sr_01_arrival__after_high_clean
+SHOT ag_01_pier__after_high_hud
+SHOT ag_01_pier__after_high_clean
+SHOT ag_02_harbour__after_high_hud
+SHOT ag_02_harbour__after_high_clean
+SHOT ag_03_market__after_high_hud
+SHOT ag_03_market__after_high_clean
+SHOT ag_04_middle__after_high_hud
+SHOT ag_04_middle__after_high_clean
+SHOT ag_05_upper__after_high_hud
+SHOT ag_05_upper__after_high_clean
+SHOT ag_06_crown__after_high_hud
+SHOT ag_06_crown__after_high_clean
+SHOT ag_07_gate__after_high_hud
+SHOT ag_07_gate__after_high_clean
+SHOT zc_01_shrine__after_high_hud
+SHOT zc_01_shrine__after_high_clean
+SHOT zc_02_aqueduct__after_high_hud
+SHOT zc_02_aqueduct__after_high_clean
+SHOT zb_01_camp__after_high_hud
+SHOT zb_01_camp__after_high_clean
+SHOT zb_02_colossus__after_high_hud
+SHOT zb_02_colossus__after_high_clean
+SHOT bd_01_south__after_high_hud
+SHOT bd_01_south__after_high_clean
+SHOT hc_01_siege__after_high_hud
+SHOT hc_01_siege__after_high_clean
+SHOT hc_02_avenue__after_high_hud
+SHOT hc_02_avenue__after_high_clean
+SHOT in_tavern_door__after_high_hud
+SHOT in_tavern_door__after_high_clean
+SHOT in_tavern_room__after_high_hud
+SHOT in_tavern_room__after_high_clean
+SHOT in_guild_door__after_high_hud
+SHOT in_guild_door__after_high_clean
+SHOT in_guild_hall__after_high_hud
+SHOT in_guild_hall__after_high_clean
+SHOT in_swordfin__after_high_hud
+SHOT in_swordfin__after_high_clean
+SHOT in_lantern__after_high_hud
+SHOT in_lantern__after_high_clean
+SHOT in_netmender__after_high_hud
+SHOT in_netmender__after_high_clean
+SHOT in_cartographer__after_high_hud
+SHOT in_cartographer__after_high_clean
+SHOT in_widow__after_high_hud
+SHOT in_widow__after_high_clean
+SHOT in_keeper__after_high_hud
+SHOT in_keeper__after_high_clean
+SHOT in_refugee__after_high_hud
+SHOT in_refugee__after_high_clean
+SHOT st_cat_guard__after_high_hud
+SHOT st_cat_guard__after_high_clean
+SHOT st_cat_cistern__after_high_hud
+SHOT st_cat_cistern__after_high_clean
+SHOT st_cat_west__after_high_hud
+SHOT st_cat_west__after_high_clean
+SHOT st_cat_ritual__after_high_hud
+SHOT st_cat_ritual__after_high_clean
+SHOT st_tmp_nave__after_high_hud
+SHOT st_tmp_nave__after_high_clean
+SHOT st_tmp_library__after_high_hud
+SHOT st_tmp_library__after_high_clean
+SHOT st_tmp_sanctum__after_high_hud
+SHOT st_tmp_sanctum__after_high_clean
+SHOT st_throne_arrival__after_high_hud
+SHOT st_throne_arrival__after_high_clean
+SHOT dg_deeps_2_arrival__after_high_hud
+SHOT dg_deeps_2_arrival__after_high_clean
+SHOT dg_deeps_2_descent__after_high_hud
+SHOT dg_deeps_2_descent__after_high_clean
+SHOT dg_warren_2_arrival__after_high_hud
+SHOT dg_warren_2_arrival__after_high_clean
+SHOT dg_warren_2_descent__after_high_hud
+SHOT dg_warren_2_descent__after_high_clean
+SHOT dg_ember_3_arrival__after_high_hud
+SHOT dg_ember_3_arrival__after_high_clean
+SHOT dg_ember_3_descent__after_high_hud
+SHOT dg_ember_3_descent__after_high_clean
+SHOT dg_barrow_2_arrival__after_high_hud
+SHOT dg_barrow_2_arrival__after_high_clean
+SHOT dg_barrow_2_descent__after_high_hud
+SHOT dg_barrow_2_descent__after_high_clean
+WARNING: Adding 'ring_a' as child to '@Node3D@17507' will make owner 'armillary_sphere_123' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:151)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+WARNING: Adding 'ring_b' as child to '@Node3D@17508' will make owner 'armillary_sphere_123' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:151)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+WARNING: Adding 'ring_c' as child to '@Node3D@17509' will make owner 'armillary_sphere_123' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:151)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+SHOT dg_orrery_2_arrival__after_high_hud
+SHOT dg_orrery_2_arrival__after_high_clean
+SHOT dg_orrery_2_descent__after_high_hud
+SHOT dg_orrery_2_descent__after_high_clean
+SHOT dg_jade_3_arrival__after_high_hud
+SHOT dg_jade_3_arrival__after_high_clean
+SHOT dg_jade_3_descent__after_high_hud
+SHOT dg_jade_3_descent__after_high_clean
+SHOT dg_obsidian_3_arrival__after_high_hud
+SHOT dg_obsidian_3_arrival__after_high_clean
+SHOT dg_obsidian_3_descent__after_high_hud
+SHOT dg_obsidian_3_descent__after_high_clean
+SHOT dg_vein_7_arrival__after_high_hud
+SHOT dg_vein_7_arrival__after_high_clean
+SHOT dg_vein_7_exit__after_high_hud
+SHOT dg_vein_7_exit__after_high_clean
+SHOT dg_ossuary_2_arrival__after_high_hud
+SHOT dg_ossuary_2_arrival__after_high_clean
+SHOT dg_ossuary_2_descent__after_high_hud
+SHOT dg_ossuary_2_descent__after_high_clean
+SHOT dg_reliquary_3_arrival__after_high_hud
+SHOT dg_reliquary_3_arrival__after_high_clean
+SHOT dg_reliquary_3_descent__after_high_hud
+SHOT dg_reliquary_3_descent__after_high_clean
+SHOT dg_cellars_1_arrival__after_high_hud
+SHOT dg_cellars_1_arrival__after_high_clean
+SHOT dg_cellars_1_descent__after_high_hud
+SHOT dg_cellars_1_descent__after_high_clean
+SHOT dg_burrows_2_arrival__after_high_hud
+SHOT dg_burrows_2_arrival__after_high_clean
+SHOT dg_burrows_2_descent__after_high_hud
+SHOT dg_burrows_2_descent__after_high_clean
+SHOT dg_warcamp_1_arrival__after_high_hud
+SHOT dg_warcamp_1_arrival__after_high_clean
+SHOT dg_warcamp_1_descent__after_high_hud
+SHOT dg_warcamp_1_descent__after_high_clean
+SHOT dg_hive_2_arrival__after_high_hud
+SHOT dg_hive_2_arrival__after_high_clean
+SHOT dg_hive_2_descent__after_high_hud
+SHOT dg_hive_2_descent__after_high_clean
+SHOT dg_sump_2_arrival__after_high_hud
+SHOT dg_sump_2_arrival__after_high_clean
+SHOT dg_sump_2_descent__after_high_hud
+SHOT dg_sump_2_descent__after_high_clean
+SHOT dg_briar_2_arrival__after_high_hud
+SHOT dg_briar_2_arrival__after_high_clean
+SHOT dg_briar_2_descent__after_high_hud
+SHOT dg_briar_2_descent__after_high_clean
+SHOT dg_dunemourn_2_arrival__after_high_hud
+SHOT dg_dunemourn_2_arrival__after_high_clean
+SHOT dg_dunemourn_2_descent__after_high_hud
+SHOT dg_dunemourn_2_descent__after_high_clean
+SHOT dg_thunderwell_2_arrival__after_high_hud
+SHOT dg_thunderwell_2_arrival__after_high_clean
+SHOT dg_thunderwell_2_descent__after_high_hud
+SHOT dg_thunderwell_2_descent__after_high_clean
+SHOT dg_undercroft_2_arrival__after_high_hud
+SHOT dg_undercroft_2_arrival__after_high_clean
+SHOT dg_undercroft_2_descent__after_high_hud
+SHOT dg_undercroft_2_descent__after_high_clean
+SHOT dg_geode_2_arrival__after_high_hud
+SHOT dg_geode_2_arrival__after_high_clean
+SHOT dg_geode_2_descent__after_high_hud
+SHOT dg_geode_2_descent__after_high_clean
+SHOT dg_vault_2_arrival__after_high_hud
+SHOT dg_vault_2_arrival__after_high_clean
+SHOT dg_vault_2_descent__after_high_hud
+SHOT dg_vault_2_descent__after_high_clean
+SHOT dg_wyrmcoil_3_arrival__after_high_hud
+SHOT dg_wyrmcoil_3_arrival__after_high_clean
+SHOT dg_wyrmcoil_3_descent__after_high_hud
+SHOT dg_wyrmcoil_3_descent__after_high_clean
+SHOT dg_maw_3_arrival__after_high_hud
+SHOT dg_maw_3_arrival__after_high_clean
+SHOT dg_maw_3_descent__after_high_hud
+SHOT dg_maw_3_descent__after_high_clean
+SHOT dg_prismheart_5_arrival__after_high_hud
+SHOT dg_prismheart_5_arrival__after_high_clean
+SHOT dg_prismheart_5_descent__after_high_hud
+SHOT dg_prismheart_5_descent__after_high_clean
+SHOT dg_underworld_6_arrival__after_high_hud
+SHOT dg_underworld_6_arrival__after_high_clean
+SHOT dg_underworld_6_descent__after_high_hud
+SHOT dg_underworld_6_descent__after_high_clean
+SHOT dg_aetherreach_7_arrival__after_high_hud
+SHOT dg_aetherreach_7_arrival__after_high_clean
+SHOT dg_aetherreach_7_descent__after_high_hud
+SHOT dg_aetherreach_7_descent__after_high_clean
+SHOT dg_eclipse_7_arrival__after_high_hud
+SHOT dg_eclipse_7_arrival__after_high_clean
+SHOT dg_eclipse_7_descent__after_high_hud
+SHOT dg_eclipse_7_descent__after_high_clean
+SHOT dg_solarium_8_arrival__after_high_hud
+SHOT dg_solarium_8_arrival__after_high_clean
+SHOT dg_solarium_8_descent__after_high_hud
+SHOT dg_solarium_8_descent__after_high_clean
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 23 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 5 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

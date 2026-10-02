@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\stone_smallFlatA.glb",
+    "fileBytes": 2872,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 36,
+    "triangleCount": 20,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.24789486825466156,
+        -0.05,
+        -0.21478867530822754
+      ],
+      "max": [
+        0.24789486825466156,
+        0.01494399160146713,
+        0.21478867530822754
+      ],
+      "sizeMeters": [
+        0.4957897365093231,
+        0.06494399160146713,
+        0.4295773506164551
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\stone_smallFlatA.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 20,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.4957897365093231,
+        0.06494399160146713,
+        0.4295773506164551
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_stone_smallflata\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_stone_smallflata",
+        "category": "environment_prop",
+        "description": "Flat pale stone. Intended use: Olivar shore, ruin floor edges and garden trim",
+        "displayName": "kenney_nature_stone_smallflata",
+        "files": [
+          {
+            "bytes": 2872,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a"
+          },
+          {
+            "bytes": 1610,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "2cad74229fd382b7871c424eb734ed2aefdc89c29f9e8855bcf03aa810d21d85"
+          },
+          {
+            "bytes": 838,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "902aaa52e47b31ae7032a2234fe93e55fda3d8955070795a74a20dad1090a72d"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "9913ff8078ee24f7dead73beac31cf01b797a8cabada84fa45d9699153cf3a93"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_f0fb7eae659de4fe84bc8153",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a",
+  "embedded_textures": []
+}

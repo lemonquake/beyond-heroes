@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_rock_smallflata",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_rock_flat.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0",
+ "source_sha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21",
+ "derived_sha256": "4cc73bbbc42de7212baece851845a096ad17615224c0224d08f4b8cb278a5800",
+ "scale": 2.4,
+ "scale_rule": [
+  "s",
+  2.4
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Rock",
+  "BH_Moss"
+ ],
+ "part_faces": {
+  "BH_Rock": 16,
+  "BH_Moss": 4
+ },
+ "source_to_material": {
+  "dirt": "BH_Rock",
+  "grass": "BH_Moss"
+ },
+ "triangles": 20,
+ "surfaces": 2,
+ "source_triangles": 20,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.19,
+  0.156,
+  1.031
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

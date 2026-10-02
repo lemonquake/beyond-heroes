@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_plant_bush",
+  "category": "foliage",
+  "description": "Rounded shrub. Intended use: House foundations and village lot boundaries",
+  "displayName": "kenney_nature_plant_bush",
+  "files": [
+    {
+      "bytes": 4396,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590"
+    },
+    {
+      "bytes": 1581,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "5159936be09688d5e168db30ff53a7648266f859825f7476b4c0d02996dfd4fb"
+    },
+    {
+      "bytes": 826,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "53a920fd484002c0a218667e79c8d652ef2aa9df3dcfd8953e1b44130b28900b"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "a364f7b06201245ba483d9b589001d9bdd3e5d26079680ad17a7d370d2e41c14"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_650645298bb5c29cefef99a8",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

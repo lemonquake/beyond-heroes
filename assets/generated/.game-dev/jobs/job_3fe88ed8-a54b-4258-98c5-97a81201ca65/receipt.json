@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_purplea\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_flower_purplea",
+      "category": "foliage",
+      "description": "Purple flowering stem. Intended use: Malasugue house garden accents",
+      "displayName": "kenney_nature_flower_purplea",
+      "files": [
+        {
+          "bytes": 7112,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4"
+        },
+        {
+          "bytes": 1589,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "e96116c4eec6fd0efc02446255fc5824de4ccbec20a0ee0306c5c107b39654a9"
+        },
+        {
+          "bytes": 834,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d403205dc4550fc4d2091847e54c751e45a234876567ffbf4586dd09b6b52400"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "22dccaff373b7e2cc5957ad7fc31ecac937214e86b45d26e39cbf7d55a9db462"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_70f829b7ac0c3438c0d11887",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:33.468Z"
+}

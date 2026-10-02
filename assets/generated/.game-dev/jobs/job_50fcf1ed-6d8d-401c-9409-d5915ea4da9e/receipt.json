@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_largea\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_largea",
+      "category": "environment_prop",
+      "description": "Large irregular boulder. Intended use: Westreach coastal clusters and Agdao shore anchors",
+      "displayName": "kenney_nature_rock_largea",
+      "files": [
+        {
+          "bytes": 7552,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25"
+        },
+        {
+          "bytes": 1625,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2300ddd3be2c53a54a54281d2ab6c80db9820a3e9f9c5e937fc429086929338f"
+        },
+        {
+          "bytes": 791,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "67803ef22f83f39d01baad262aa15310d315a8fba2c93c741213ee0903603918"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "0fa5b0198193ed4ed55b9cbe2fdba72b59bd1d4b8c7669decf9fdd99099ed172"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_6049dee33feb1b06135735e5",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:29.205Z"
+}

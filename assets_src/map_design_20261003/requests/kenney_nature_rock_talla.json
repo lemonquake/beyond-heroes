@@ -1,0 +1,29 @@
+{
+  "description": "Tall narrow rock. Intended use: Sparse rocky coast silhouettes",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/nature-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+    "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+    "originalModelSha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+    "originalRelativePath": "sources/nature-kit/Models/GLTF format/rock_tallA.glb",
+    "licenseEvidence": "licenses/nature-kit.txt",
+    "transformations": [],
+    "originalTextureDependencies": [],
+    "downloadDate": "2026-10-03"
+  }
+}

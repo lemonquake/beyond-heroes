@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_56f721a8-e8a6-4194-8405-dec62861d2a6",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_bedsingle"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:19.490Z",
+  "updatedAt": "2026-10-02T21:13:19.553Z",
+  "startedAt": "2026-10-02T21:13:19.496Z",
+  "completedAt": "2026-10-02T21:13:19.553Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_56f721a8-e8a6-4194-8405-dec62861d2a6\\receipt.json"
+}

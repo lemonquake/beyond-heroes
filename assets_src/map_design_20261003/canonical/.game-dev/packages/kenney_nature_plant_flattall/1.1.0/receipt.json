@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:28.956Z",
+  "destination": {
+    "assetId": "kenney_nature_plant_flattall",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "f1a3f7e6cd769ad757ad0fb4c393de723be4880a0f114245dfe5d6efe45f17ae",
+  "packageId": "pkg_f1adb1c2b5025b5f7cc5c0a8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 3480,
+    "fileName": "plant_flatTall.glb",
+    "sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633"
+  }
+}

@@ -1,0 +1,4 @@
+PASS: per-client traffic measured with 2, 4 and 6 heroes on one map (see bandwidth-summary.txt); process logs clean
+PASS: a game with another protocol number was refused with both versions named; process logs clean
+STAGES PASSED: bandwidth, version
+exit=0

@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+SHOT 01_town_hud (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 02_chat_open (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 03_pause (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_inventory (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_character (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_skills (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_multiplayer (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_settings (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 1_world_map (1280, 720) window (1280, 720) ui_scale 1.5
+SHOT 20_back_to_play (1280, 720) window (1280, 720) ui_scale 1.5
+CAPTURE DONE
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\stoolBarSquare.glb",
+    "fileBytes": 9784,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 388,
+    "triangleCount": 142,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        0.055970001965761185,
+        0,
+        -0.18875089287757874
+      ],
+      "max": [
+        0.2094699889421463,
+        0.4049999713897705,
+        -0.041126884520053864
+      ],
+      "sizeMeters": [
+        0.15349998697638512,
+        0.4049999713897705,
+        0.14762400835752487
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\stoolBarSquare.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 142,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.15349998697638512,
+        0.4049999713897705,
+        0.14762400835752487
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_stoolbarsquare\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_furniture_stoolbarsquare",
+        "category": "environment_prop",
+        "description": "Square stool. Intended use: Tavern counter and smithy work corner",
+        "displayName": "kenney_furniture_stoolbarsquare",
+        "files": [
+          {
+            "bytes": 9784,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b"
+          },
+          {
+            "bytes": 1599,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "460614a48ca470d264ac16a966fdf12bec3b7dbcaf2f8d36f96a3915a986a3d8"
+          },
+          {
+            "bytes": 849,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "c24b050a70c2afb2961fcb4e64cbace27c2fc05ac87464494a54df59a41ac115"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "5e6e3fe8c62a3e33ae38de99a70e45b03c46003681abc0ae8e8c336576a74268"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_1a2f4ca245f1ee867b253657",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+  "embedded_textures": []
+}

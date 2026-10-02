@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d016a5b4-d628-463c-9028-87f4389d91cd",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:35.144Z",
+  "updatedAt": "2026-10-02T21:12:35.179Z",
+  "startedAt": "2026-10-02T21:12:35.149Z",
+  "completedAt": "2026-10-02T21:12:35.179Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_d016a5b4-d628-463c-9028-87f4389d91cd\\receipt.json"
+}

@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_pot_small",
+  "category": "environment_prop",
+  "description": "Small earthen pot. Intended use: Herbs, kitchen storage and market table grouping",
+  "displayName": "kenney_nature_pot_small",
+  "files": [
+    {
+      "bytes": 7004,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8"
+    },
+    {
+      "bytes": 1599,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "61d80582fa92ae4dc0291ae211ef2610e6968fe8a2507a72636652c6427f79ab"
+    },
+    {
+      "bytes": 824,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "d7eae781ddb1f54db170b7f99cc14182987dfbae7eac8b26a7fd695f320d28e8"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "b546bddd08cf1ce71644576b71795fabf464cb9f78211b31e8ac424eb4d763b2"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_f7cfd962294f01e456e13736",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

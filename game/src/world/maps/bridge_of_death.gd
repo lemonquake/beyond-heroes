@@ -65,6 +65,7 @@ func compose() -> void:
 	_rims()
 	_gorge()
 	_ledge_dressing()
+	_map_design()
 	_wind()
 	_camps()
 	_boss()
@@ -439,3 +440,20 @@ func _brazier(p: Vector3, energy := 2.8, shadow := false) -> void:
 	var f := socket_pos(n, "flame")
 	flame(f, 1.1)
 	light(f + Vector3(0, 0.5, 0), FIRE, energy, 11.0, shadow, true)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the span's history on its safe margins — a few repaired plank patches let into the deck
+# beside the parapets (flat, walkable, never across the lanes or under a ward pylon) and fallen masonry on the ledges.
+# One silhouette, few unique pieces: no repeated railing props.
+
+func _map_design() -> void:
+	for k in [3, 9, 16, 24]:
+		var z: float = SPAN_Z0 - SEG * (k + 0.5)
+		var sx: float = -1.0 if k % 2 == 0 else 1.0
+		kit("kd_planks", Vector3(sx * 4.0, -0.4, z + 1.0), 90.0 + k * 7.0, 0.9, deco)
+	for c in [[Vector3(-8.5, GROUND_Y, SOUTH_GATE_Z + 7.0), 20.0], [Vector3(8.8, GROUND_Y, SOUTH_GATE_Z + 9.5), 160.0],
+			[Vector3(-8.2, GROUND_Y, NORTH_GATE_Z - 8.0), 80.0], [Vector3(8.6, GROUND_Y, NORTH_GATE_Z - 11.0), 250.0]]:
+		kit("kd_debris_stone", c[0], c[1], 1.4, deco)
+	# ambient accents: wind across the span (rare and quiet: the fights carry their own sound)
+	for z in [100.0, 30.0, -50.0]:
+		accent(Vector3(0, 2.0, z), &"wind_gust", -18.0)

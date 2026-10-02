@@ -1,8 +1,0 @@
-# creature_meta.json merge proof (git diff vs HEAD: insertions only)
- game/assets/characters/creature_meta.json | 298 ++++++++++++++++++++++++++++++
- 1 file changed, 298 insertions(+)
-deleted/changed lines: 0
-HEAD top keys: ['fps', 'generator', 'notes', 'animations'] -> now: ['fps', 'generator', 'notes', 'animations', 'models']
-non-animation top keys changed: []
-dire_wolf animation entries: 16 changed: []
-added animation entries: ['spider_bite', 'spider_spit', 'spider_pounce', 'spider_brood', 'mimic_dormant', 'mimic_wake', 'mimic_bite', 'mimic_tongue', 'mimic_slam', 'totem_pulse']

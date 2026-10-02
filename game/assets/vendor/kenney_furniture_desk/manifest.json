@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_desk",
+  "category": "environment_prop",
+  "description": "Writing desk. Intended use: Cartographer and guild administration",
+  "displayName": "kenney_furniture_desk",
+  "files": [
+    {
+      "bytes": 15048,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42"
+    },
+    {
+      "bytes": 1580,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "281c512906d3f2c196e9de4619616a39c50fc1c6874603dd7c292de34549e799"
+    },
+    {
+      "bytes": 830,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "c3f2998dd6efd5e2186c15ae0cecf40f2e586c4a235c63f4f02b91590c8c945c"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "9ff458d1c42452e260ab419aed1f1a999a5d374e7aa4f47ceea070dab7dcc091"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_482e5ef30f7d289aa87fa725",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

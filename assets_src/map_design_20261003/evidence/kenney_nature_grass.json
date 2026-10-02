@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\grass.glb",
+    "fileBytes": 11496,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 264,
+    "triangleCount": 132,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.19883659482002258,
+        -0.05,
+        -0.23933875560760498
+      ],
+      "max": [
+        0.1822374016046524,
+        0.2040000081062317,
+        0.15284404158592224
+      ],
+      "sizeMeters": [
+        0.381073996424675,
+        0.2540000081062317,
+        0.3921827971935272
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\grass.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 132,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.381073996424675,
+        0.2540000081062317,
+        0.3921827971935272
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_grass",
+        "category": "foliage",
+        "description": "Small grass tuft. Intended use: Sparse path-to-ground transitions",
+        "displayName": "kenney_nature_grass",
+        "files": [
+          {
+            "bytes": 11496,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7"
+          },
+          {
+            "bytes": 1566,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "1df3bdc7671d80102e36de3e6559d9c3482ffdf07bb8d9bcd3f42bc2a6ab5e7f"
+          },
+          {
+            "bytes": 817,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "6cc4411d7b208b297c82b11a8a599fed421cc495826c0122f05953b671723c81"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "06c598b82492df87d823a8c2802a4a373a93ecb6074193b0e85e86843b1b5af5"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_265a18a96963c134984c271d",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+  "embedded_textures": []
+}

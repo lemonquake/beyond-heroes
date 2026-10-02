@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_graveyard_urn_round",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_urn_round.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0",
+ "source_sha256": "b59c015da7dce4ce236a9a967fcb058ca9cff4660c59edaf40768fec086cd437",
+ "derived_sha256": "8e5c5478b655621f1e3320a1533007205da6c529961446a46e62632c33f870c5",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_StoneDark",
+  "BH_Terracotta"
+ ],
+ "part_faces": {
+  "BH_StoneDark": 104,
+  "BH_Terracotta": 126
+ },
+ "source_to_material": {
+  "grey_dark": "BH_StoneDark",
+  "grey": "BH_Terracotta"
+ },
+ "triangles": 230,
+ "surfaces": 2,
+ "source_triangles": 230,
+ "source_meshes": 2,
+ "bounds_m": [
+  0.529,
+  0.768,
+  0.529
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

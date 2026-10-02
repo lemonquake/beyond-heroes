@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+  "licenseEvidence": "licenses/pirate-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+  "originalModelSha256": "b468372526e419c712f50b824eff50d6e7838de646eaa5a6aacfc4dcdfcfa265",
+  "originalRelativePath": "sources/pirate-kit/Models/GLB format/tool-shovel.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 10061,
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 26264,
+    "fileName": "kenney_pirate_tool_shovel.glb",
+    "sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5"
+  },
+  "sourceUri": "https://kenney.nl/assets/pirate-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

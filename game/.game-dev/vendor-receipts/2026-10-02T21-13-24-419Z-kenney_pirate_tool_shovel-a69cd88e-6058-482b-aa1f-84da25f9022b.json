@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_6d1b4d0e8c0d1e8d7d0a2971",
+  "assetId": "kenney_pirate_tool_shovel",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_tool_shovel",
+  "modelSha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5",
+  "manifestSha256": "5e1b3370eadc1f1e38bdfc7120614be66cdc1b45e9ed4a71eb06f500725ba40c",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:24.419Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_tool_shovel\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

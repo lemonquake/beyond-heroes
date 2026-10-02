@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_cb371573-6ee8-4b53-9457-84a8239b0a91",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_fence_gate\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:58.107Z",
+  "updatedAt": "2026-10-02T21:11:58.153Z",
+  "startedAt": "2026-10-02T21:11:58.112Z",
+  "completedAt": "2026-10-02T21:11:58.153Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-8268ada0-a8fe-4adc-88d6-570c3396007c' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_fence_gate\r'",
+    "retryable": false
+  }
+}

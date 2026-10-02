@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:18.266Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_thin",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "b252a928559f599a1414867d03f616bbd2e0ff7f80d6454ac9a9e04a4130e1c8",
+  "packageId": "pkg_017dde884273893e4f2d4715",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 17200,
+    "fileName": "tree_thin.glb",
+    "sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3"
+  }
+}

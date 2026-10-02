@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\bookcaseClosedWide.glb",
+    "fileBytes": 23140,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 540,
+    "triangleCount": 372,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        0,
+        0,
+        -0.25
+      ],
+      "max": [
+        0.800000011920929,
+        0.7899999618530273,
+        0
+      ],
+      "sizeMeters": [
+        0.800000011920929,
+        0.7899999618530273,
+        0.25
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\bookcaseClosedWide.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 372,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.800000011920929,
+        0.7899999618530273,
+        0.25
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseclosedwide\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_furniture_bookcaseclosedwide",
+        "category": "environment_prop",
+        "description": "Wide closed bookcase. Intended use: Guild House archival wall",
+        "displayName": "kenney_furniture_bookcaseclosedwide",
+        "files": [
+          {
+            "bytes": 23140,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a"
+          },
+          {
+            "bytes": 1532,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "b0d66a779a4674eb0b3fbedb99ab1572a49941311c9fbb5966bc0afd79464d28"
+          },
+          {
+            "bytes": 858,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "557937fd4c98e0bb27562b568c3e233f6de1ac5b5beba9e833b93e8f647a5f28"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "e373a3cc35ad7ba180263cc1b8eb28dad45f733f2d202f0456a869a82cb39b59"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_954fc0e2975349273e5e7aff",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+  "embedded_textures": []
+}

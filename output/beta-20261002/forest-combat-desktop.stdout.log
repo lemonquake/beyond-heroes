@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+STRESS {"avg":59.46,"max":216.13,"median":56.22,"p95":79.82,"p99":110.11,"samples":300} gpu={"avg":14.86,"median":14.49,"p95":19.62,"samples":300} process={"avg":34.91,"median":33.27,"p95":59.47,"samples":300} physics={"avg":21.77,"median":15.72,"p95":30.02,"samples":300} nav={"avg":0.01,"median":0.01,"p95":0.02,"samples":300} engaged=54 map=ruined_forest lite=false
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.

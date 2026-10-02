@@ -1,0 +1,29 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh033/quaternius/ultimate_monsters/Flying/glTF/Ghost_Skull.gltf",
+ "out": "res://assets/characters/bh033/gloomwraith_q.scn",
+ "height": 1.9,
+ "tint": [
+  0.78,
+  0.72,
+  0.95
+ ],
+ "saturation": 0.75,
+ "value": 0.35,
+ "rough": 0.8,
+ "clips": {
+  "idle": "Flying_Idle",
+  "idle_look": "Flying_Idle",
+  "alert": "Yes",
+  "walk": "Fast_Flying",
+  "run": "Fast_Flying",
+  "run_combat": "Fast_Flying",
+  "hit_light": "HitReact",
+  "hit_heavy": "HitReact",
+  "stagger_small": "HitReact",
+  "knockback": "HitReact",
+  "death": "Death",
+  "death_back": "Death",
+  "cast_quick": "Punch",
+  "cast_area": "Headbutt"
+ }
+}

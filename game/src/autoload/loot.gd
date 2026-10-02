@@ -97,12 +97,20 @@ func drop_for(e: Enemy, player: Player) -> void:
 			var cb := ItemGenerator.random_consumable(rng, ilvl)
 			if cb:
 				drops.append(DB.make_item(cb.id, BH.Rarity.COMMON, ilvl, rng.randi()))
-	for entry in e.def.loot:
-		if rng.randf() < float(entry[1]):
-			var it := DB.make_item(StringName(entry[0]), BH.Rarity.COMMON, ilvl, rng.randi())
-			if it:
-				it.count = rng.randi_range(int(entry[2]), int(entry[3]))
-				drops.append(it)
+	# bh-033: monster, family, dungeon-theme and region pools (DataLootPools), one resolution shared with the audit
+	for got in LootPools.roll(LootPools.resolve(e.def, LootPools.context_for_map(Game.current_map_id)), rng, player.hero):
+		var it := DB.make_item(got[0], BH.Rarity.COMMON, ilvl, rng.randi())
+		if it:
+			it.count = int(got[1])
+			drops.append(it)
+	# a dungeon lord's fall (once per hero) or a later raid's usurper: reliable progression supplies
+	var dg: StringName = DataDungeons.parse(Game.current_map_id)[0]
+	if dg != &"" and (e.def.id == DataDungeons.get_def(dg).get("boss", &"") or String(e.miniboss.get("id", "")).ends_with("_usurper")):
+		for got in LootPools.completion(dg, not e.is_boss, rng):
+			var sup := DB.make_item(got[0], BH.Rarity.COMMON, ilvl, rng.randi())
+			if sup:
+				sup.count = int(got[1])
+				drops.append(sup)
 	if e.is_miniboss():
 		# the champion's essence (Elite and Master crafting) and, sometimes, a recipe scroll
 		var ce := DB.make_item(&"champion_essence", BH.Rarity.COMMON, ilvl, rng.randi())
@@ -253,6 +261,12 @@ func drop_chest(tier: int, level: int, at: Vector3, hero: HeroData) -> Array:
 	var em := DB.make_item(&"soul_ember", BH.Rarity.COMMON, ilvl, rng.randi())
 	em.count = int(round(float([rng.randi_range(3, 6), rng.randi_range(8, 15), rng.randi_range(25, 40)][clampi(tier, 0, 2)]) * (1.0 + ef)))
 	drops.append(em)
+	# bh-033: crafting supplies (DataLootPools.CHEST_SUPPLY; the dungeon's signature material inside a dungeon)
+	for got in LootPools.chest_supply(DataDungeons.parse(Game.current_map_id)[0], tier, rng):
+		var sup := DB.make_item(got[0], BH.Rarity.COMMON, ilvl, rng.randi())
+		if sup:
+			sup.count = int(got[1])
+			drops.append(sup)
 	for i in tier + 1:
 		var cb := ItemGenerator.random_consumable(rng, ilvl)
 		if cb and rng.randf() < 0.6:

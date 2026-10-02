@@ -1,0 +1,229 @@
+{
+ "count": 28,
+ "dungeons": {
+  "aetherreach": {
+   "boss": "zephyrion",
+   "floors": 13,
+   "name": "The Aether Reach",
+   "special": true,
+   "surface": "sundered_reach",
+   "theme": "aether"
+  },
+  "barrow": {
+   "boss": "winter_crown",
+   "floors": 4,
+   "name": "Rimeglass Barrow",
+   "special": false,
+   "surface": "ruined_forest",
+   "theme": "rime"
+  },
+  "briar": {
+   "boss": "thornmother",
+   "floors": 4,
+   "name": "Briarheart Hollow",
+   "special": false,
+   "surface": "westreach",
+   "theme": "thorn"
+  },
+  "burrows": {
+   "boss": "goblin_king",
+   "floors": 3,
+   "name": "Gnashgut Burrows",
+   "special": false,
+   "surface": "ruined_forest",
+   "theme": "hideout"
+  },
+  "cellars": {
+   "boss": "cellar_king",
+   "floors": 2,
+   "name": "Cutpurse Cellars",
+   "special": false,
+   "surface": "westreach",
+   "theme": "hideout"
+  },
+  "deeps": {
+   "boss": "bell_warden",
+   "floors": 4,
+   "name": "Saltmouth Deeps",
+   "special": false,
+   "surface": "westreach",
+   "theme": "drowned"
+  },
+  "dunemourn": {
+   "boss": "buried_sovereign",
+   "floors": 4,
+   "name": "Dunemourn Tomb",
+   "special": false,
+   "surface": "olivar",
+   "theme": "sandtomb"
+  },
+  "eclipse": {
+   "boss": "nocthea",
+   "floors": 14,
+   "name": "The Eclipse Vault",
+   "special": true,
+   "surface": "sundered_reach",
+   "theme": "eclipse"
+  },
+  "ember": {
+   "boss": "forgemaster",
+   "floors": 4,
+   "name": "Emberforge Depths",
+   "special": false,
+   "surface": "westreach",
+   "theme": "ember"
+  },
+  "geode": {
+   "boss": "prism_colossus",
+   "floors": 4,
+   "name": "Prismdeep Geode",
+   "special": false,
+   "surface": "westreach",
+   "theme": "crystal"
+  },
+  "hive": {
+   "boss": "waxen_queen",
+   "floors": 3,
+   "name": "The Waxen Hive",
+   "special": false,
+   "surface": "westreach",
+   "theme": "hive"
+  },
+  "jade_sepulchre": {
+   "boss": "jade_king",
+   "floors": 7,
+   "name": "The Jade Sepulchre",
+   "special": true,
+   "surface": "zr_coilwood",
+   "theme": "jade"
+  },
+  "maw": {
+   "boss": "oblivore",
+   "floors": 5,
+   "name": "The Maw Beneath",
+   "special": false,
+   "surface": "westreach",
+   "theme": "abyss"
+  },
+  "obsidian_engine": {
+   "boss": "engine_heart",
+   "floors": 7,
+   "name": "The Obsidian Engine",
+   "special": true,
+   "surface": "zr_barrens",
+   "theme": "obsidian"
+  },
+  "orrery": {
+   "boss": "astrarch",
+   "floors": 4,
+   "name": "The Shattered Orrery",
+   "special": false,
+   "surface": "wyman_outpost",
+   "theme": "orrery"
+  },
+  "ossuary": {
+   "boss": "ossuarch",
+   "floors": 3,
+   "name": "Blackvault Ossuary",
+   "special": false,
+   "surface": "ruined_forest",
+   "theme": "crypt"
+  },
+  "prismheart": {
+   "boss": "seraphel",
+   "floors": 10,
+   "name": "The Prismheart Hollows",
+   "special": true,
+   "surface": "sundered_reach",
+   "theme": "prism"
+  },
+  "reliquary": {
+   "boss": "twin_regent",
+   "floors": 5,
+   "name": "Twinspire Reliquary",
+   "special": false,
+   "surface": "westreach",
+   "theme": "crypt"
+  },
+  "solarium": {
+   "boss": "solmara",
+   "floors": 15,
+   "name": "The Drowned Solarium",
+   "special": true,
+   "surface": "sundered_reach",
+   "theme": "solar"
+  },
+  "sump": {
+   "boss": "sump_tyrant",
+   "floors": 4,
+   "name": "Blackwater Sump",
+   "special": false,
+   "surface": "westreach",
+   "theme": "mire"
+  },
+  "thunderwell": {
+   "boss": "voltaric",
+   "floors": 4,
+   "name": "Thunderwell Spire",
+   "special": false,
+   "surface": "ruined_forest",
+   "theme": "storm"
+  },
+  "undercroft": {
+   "boss": "hollow_dark",
+   "floors": 4,
+   "name": "The Umbral Undercroft",
+   "special": false,
+   "surface": "westreach",
+   "theme": "umbral"
+  },
+  "underworld": {
+   "boss": "morrowgaunt",
+   "floors": 12,
+   "name": "The Underworld of Mourning",
+   "special": true,
+   "surface": "sundered_reach",
+   "theme": "underworld"
+  },
+  "vault": {
+   "boss": "hoard_maw",
+   "floors": 4,
+   "name": "The Gilded Vault",
+   "special": false,
+   "surface": "olivar",
+   "theme": "gilded"
+  },
+  "veinworks": {
+   "boss": "vein_mother",
+   "floors": 7,
+   "name": "The Veinworks",
+   "special": true,
+   "surface": "zr_barrens",
+   "theme": "vein"
+  },
+  "warcamp": {
+   "boss": "ironjaw",
+   "floors": 3,
+   "name": "Ironjaw Warcamp",
+   "special": false,
+   "surface": "westreach",
+   "theme": "hideout"
+  },
+  "warren": {
+   "boss": "rot_mother",
+   "floors": 4,
+   "name": "Hollowroot Warren",
+   "special": false,
+   "surface": "westreach",
+   "theme": "fungal"
+  },
+  "wyrmcoil": {
+   "boss": "coiled_wyrm",
+   "floors": 5,
+   "name": "Wyrmcoil Caverns",
+   "special": false,
+   "surface": "westreach",
+   "theme": "cavern"
+  }
+ }
+}

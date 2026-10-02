@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_0fed6d85-922b-4652-8ac9-eb3153f6b800",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_coatrackstanding\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:19.878Z",
+  "updatedAt": "2026-10-02T21:12:19.924Z",
+  "startedAt": "2026-10-02T21:12:19.883Z",
+  "completedAt": "2026-10-02T21:12:19.924Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-e7b93ec0-a375-4bfb-b3b5-808e566304dc' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_coatrackstanding\r'",
+    "retryable": false
+  }
+}

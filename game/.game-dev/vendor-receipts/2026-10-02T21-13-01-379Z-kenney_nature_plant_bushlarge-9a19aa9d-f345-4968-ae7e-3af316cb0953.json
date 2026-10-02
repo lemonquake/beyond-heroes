@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_39762a6284adb1f5d6d0457f",
+  "assetId": "kenney_nature_plant_bushlarge",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_plant_bushlarge",
+  "modelSha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02",
+  "manifestSha256": "9270a291f708da4dab411889e9114ea744f0cd864681426b2a19535fc3ac763d",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:01.379Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_plant_bushlarge\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

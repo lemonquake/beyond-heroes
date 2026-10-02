@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:15.575Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_oak",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "9b55b0f01f018cc8ff13f1f4688a8aa609e8479c60473c8dcf45354801ba5e36",
+  "packageId": "pkg_774bb27c8f586964c9a16d0a",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 14644,
+    "fileName": "tree_oak.glb",
+    "sha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3"
+  }
+}

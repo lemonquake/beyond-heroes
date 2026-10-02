@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:32.370Z",
+  "destination": {
+    "assetId": "kenney_nature_flower_yellowa",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "7b8870d5716f0aa0deb9b42862ff99cc5e5a2bd189cc9192ddee3e568fba9fec",
+  "packageId": "pkg_25b2595c03983dff5d73f8ef",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7120,
+    "fileName": "flower_yellowA.glb",
+    "sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_fcec63e42cfd50d92645a367",
+  "assetId": "kenney_graveyard_altar_stone",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_altar_stone",
+  "modelSha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0",
+  "manifestSha256": "b7c5b680de628ed6b48aa6d1d89567bf08378465fb135bbcd2eb4f0fe30ff75a",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:28.206Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_stone\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

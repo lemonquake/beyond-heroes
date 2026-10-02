@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\rock_smallB.glb",
+    "fileBytes": 3528,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 84,
+    "triangleCount": 24,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.18039999902248383,
+        -0.04999999999999999,
+        -0.18039999902248383
+      ],
+      "max": [
+        0.18039999902248383,
+        0.1267920106649399,
+        0.18039999902248383
+      ],
+      "sizeMeters": [
+        0.36079999804496765,
+        0.17679201066493988,
+        0.36079999804496765
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\rock_smallB.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 24,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.36079999804496765,
+        0.17679201066493988,
+        0.36079999804496765
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smallb\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_rock_smallb",
+        "category": "environment_prop",
+        "description": "Second small rock silhouette. Intended use: Shore and farm-edge accents",
+        "displayName": "kenney_nature_rock_smallb",
+        "files": [
+          {
+            "bytes": 3528,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763"
+          },
+          {
+            "bytes": 1610,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "c6ed0d05596f8664fa04ac4ba0b64a70b86930e5de330b96e9e3b77239e1fe74"
+          },
+          {
+            "bytes": 828,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "c944a374f775e0d98df9a96698804ea204012b0aa5929630b6acc4a98016c592"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "7145a0dd5bfe7c2fd32e54ac98e81396cb8e2937483f0c354d8e0c82026aed7a"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_e12627e0e8b2163aa65a2c34",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763",
+  "embedded_textures": []
+}

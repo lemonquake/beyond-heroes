@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_52229af1-2538-4a68-9695-669381d01f7a",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:42.640Z",
+  "updatedAt": "2026-10-02T21:11:42.702Z",
+  "startedAt": "2026-10-02T21:11:42.646Z",
+  "completedAt": "2026-10-02T21:11:42.702Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_52229af1-2538-4a68-9695-669381d01f7a\\receipt.json"
+}

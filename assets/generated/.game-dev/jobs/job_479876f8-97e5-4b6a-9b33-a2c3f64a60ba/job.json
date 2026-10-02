@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_479876f8-97e5-4b6a-9b33-a2c3f64a60ba",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_canoe/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_canoe\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:04.789Z",
+  "updatedAt": "2026-10-02T21:12:04.838Z",
+  "startedAt": "2026-10-02T21:12:04.795Z",
+  "completedAt": "2026-10-02T21:12:04.838Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-c0a17638-d3f1-40f8-934e-2dc8762cf1d7' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_canoe\r'",
+    "retryable": false
+  }
+}

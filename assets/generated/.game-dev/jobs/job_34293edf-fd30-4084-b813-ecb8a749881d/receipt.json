@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_chest\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_chest",
+      "category": "environment_prop",
+      "description": "Wooden chest. Intended use: House storage; keep existing loot chest logic intact",
+      "displayName": "kenney_pirate_chest",
+      "files": [
+        {
+          "bytes": 25240,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "26d26c4c032a12320fe05b5005a72eba96db7167db0d35873639a4b7dcc06bcb"
+        },
+        {
+          "bytes": 1721,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "7f75f533dc66195c3fc64297c28ca5ffbd3753f54419dde7a72d61ff5b18ccd9"
+        },
+        {
+          "bytes": 779,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "eed03b94c1cfa48bf0ef4075a3eeb2379bceedb995436de6fe0ea99adaf095a9"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "4d7da9fa4828b7bc647a22e45cac2e529132b8189ff81bbb1c416bc8ffe80f35"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7497896b60c3a937f8cbc2f6",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:21.783Z"
+}

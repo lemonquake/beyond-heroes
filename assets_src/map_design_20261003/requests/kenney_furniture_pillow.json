@@ -1,0 +1,29 @@
+{
+  "description": "Simple pillow. Intended use: Existing beds; remove modern-looking material gloss",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/furniture-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+    "originalArchiveSha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+    "originalModelSha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+    "originalRelativePath": "sources/furniture-kit/Models/GLTF format/pillow.glb",
+    "licenseEvidence": "licenses/furniture-kit.txt",
+    "transformations": [],
+    "originalTextureDependencies": [],
+    "downloadDate": "2026-10-03"
+  }
+}

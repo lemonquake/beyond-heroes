@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_barrel.glb",
+    "fileBytes": 24208,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 248,
+    "triangleCount": 148,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.6680490970611572,
+        0,
+        -0.6680490970611572
+      ],
+      "max": [
+        0.6680490970611572,
+        1.229142665863037,
+        0.6680490970611572
+      ],
+      "sizeMeters": [
+        1.3360981941223145,
+        1.229142665863037,
+        1.3360981941223145
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_barrel.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 148,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        1.3360981941223145,
+        1.229142665863037,
+        1.3360981941223145
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_barrel\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_barrel",
+        "category": "environment_prop",
+        "description": "Wooden barrel. Intended use: Harbour cargo, tavern cellar edge and Wyman stores",
+        "displayName": "kenney_pirate_barrel",
+        "files": [
+          {
+            "bytes": 24208,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "fa80c76d56fb301c377b01a5864360dc71804e098081a8b10afbd2e3ba188fd2"
+          },
+          {
+            "bytes": 1724,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "97406008e73564b3fe77d40ce3996afa63c89711f8524250e6cef63e36cf7965"
+          },
+          {
+            "bytes": 1072,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "e5e062f12737ae7e75b6e876c29bd6749302736652b7f0d1716e17f56c23a220"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "e5e30da6f645b6243308c898ebda152226ab5b9a50c08b6ad5f7df0782d3ac09"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_2778d1e4366f9ecf83ddedba",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "7616dedf7c1023afa6ecd3c52a4609460aae0e582dee14e60ec5e47c1174793b",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

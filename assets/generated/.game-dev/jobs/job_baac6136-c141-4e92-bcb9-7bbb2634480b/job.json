@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_baac6136-c141-4e92-bcb9-7bbb2634480b",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_modular-dungeon_gate_metal_bars"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:34.258Z",
+  "updatedAt": "2026-10-02T21:13:34.317Z",
+  "startedAt": "2026-10-02T21:13:34.264Z",
+  "completedAt": "2026-10-02T21:13:34.317Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_baac6136-c141-4e92-bcb9-7bbb2634480b\\receipt.json"
+}

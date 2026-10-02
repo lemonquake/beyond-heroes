@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:27.741Z",
+  "destination": {
+    "assetId": "kenney_pirate_tool_paddle",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "f183c8b370bdef24ac0efffce3566683934e0bd71b081a1569bfab3139e909b3",
+  "packageId": "pkg_e04eb9d37f7c4a7f44988c72",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 16980,
+    "fileName": "kenney_pirate_tool_paddle.glb",
+    "sha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1"
+  }
+}

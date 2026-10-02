@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_stump_old\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_stump_old",
+      "category": "environment_prop",
+      "description": "Weathered tree stump. Intended use: Ruined Forest logging remnants",
+      "displayName": "kenney_nature_stump_old",
+      "files": [
+        {
+          "bytes": 9564,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "4c2d2da34804c1662c6a776a9d60fe4449e6f6fdd50914bfec7d5cca3e9ceddb"
+        },
+        {
+          "bytes": 1586,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6d0940b1f943439c2d39bb7c4a2c29105eb4b925ea60bb58064c42b48ed4ab7d"
+        },
+        {
+          "bytes": 824,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "155df7dc3beed5201d8c8286b6c60752bdc19b5f4be77976c63493e2024bffc2"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "eba96498cd8709463ac50260687938dac982bac3c671584e66350f7abe876db0"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_1bde02d67e024c7272a60d93",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:54.147Z"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e89b9c424066ba0f8328df4b",
+  "assetId": "kenney_pirate_bottle_large",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_bottle_large",
+  "modelSha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c",
+  "manifestSha256": "adad7bc0bf5f44f97b7a9e8c99dd25b4f211ca17e6d700e076e590ff38d355ac",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:23.604Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_bottle_large\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

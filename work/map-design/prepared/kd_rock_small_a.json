@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_rock_smalla",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_rock_small_a.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0",
+ "source_sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1",
+ "derived_sha256": "df6dc333e4c4402543e130db1a732fa91ed16b78de1ad68f3ff33e7bd2859d19",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Moss",
+  "BH_Rock"
+ ],
+ "part_faces": {
+  "BH_Moss": 3,
+  "BH_Rock": 13
+ },
+ "source_to_material": {
+  "grass": "BH_Moss",
+  "dirt": "BH_Rock"
+ },
+ "triangles": 16,
+ "surfaces": 2,
+ "source_triangles": 16,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.722,
+  0.382,
+  0.722
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

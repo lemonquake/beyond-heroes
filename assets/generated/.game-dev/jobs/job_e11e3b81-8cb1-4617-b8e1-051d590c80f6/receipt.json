@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_chair\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_chair",
+      "category": "environment_prop",
+      "description": "Plain timber chair. Intended use: Tavern tables and domestic interiors",
+      "displayName": "kenney_furniture_chair",
+      "files": [
+        {
+          "bytes": 10756,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883"
+        },
+        {
+          "bytes": 1549,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "57c1a3d42042614807a3b859beee610de3b2db7e20322a82f1dfce475c9af817"
+        },
+        {
+          "bytes": 832,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "6ac4fd00c1098c0529f86dd251059bfcb4de630fa130d12ec033944a1f6f0965"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "b6ea1c5acacd99b570ff3de62f4b62f28340c39858b191681f042d7756a53ccb"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_64ec9e112cf4fbc0973d5a9d",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:59.610Z"
+}

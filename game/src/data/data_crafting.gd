@@ -16,9 +16,9 @@ const R := BH.Rarity
 const ICON3D := "res://assets/ui/icons/items3d/%s.png"
 
 const STATIONS := {
-	&"forge": {"name": "Forge", "verb": "Forge", "text": "Metalwork: ingots, whetstones, weapons and armor. Salvage gear for its metal. Refit a weapon: Fore-Tech."},
-	&"alchemy": {"name": "Alchemy Table", "verb": "Brew", "text": "Draughts, tonics, wards and elixirs from herbs and monster parts. Etch a rune on a weapon: Enchantment."},
-	&"workbench": {"name": "Workbench", "verb": "Make", "text": "Leather, bombs, scrolls and charms. Salvage gear for hide and cloth."},
+	&"forge": {"name": "Forge", "verb": "Forge", "text": "Metalwork, weapons and armor. Upgrade 4 matching gems to the next tier (Orbital maximum). Salvage gear or refit a weapon: Fore-Tech."},
+	&"alchemy": {"name": "Alchemy Table", "verb": "Brew", "text": "Draughts, tonics and elixirs. Upgrade 4 matching gems to the next tier (Orbital maximum). Etch a rune on a weapon: Enchantment."},
+	&"workbench": {"name": "Workbench", "verb": "Make", "text": "Leather, bombs, scrolls and charms. Upgrade 4 matching gems to the next tier (Orbital maximum). Salvage gear for hide and cloth."},
 }
 
 ## [id, name, value, stack, drop weight, flavor]. Monster parts drop from their family (DataEnemies loot tables), herbs
@@ -213,7 +213,7 @@ static func recipes() -> Array:
 			"inputs": [[&"steel_ingot", 5], [&"champion_essence", 3], [&"rune_plate", 2], [&"aether_shard", 5]],
 			"out": {"gear": {"rarity": R.MASTER, "quality": [0.16, 0.2], "ilvl_bonus": 2}}, "variants": _weapon_variants(),
 			"text": "A Master weapon, two levels above yours."},
-	]
+	] + DataCrystals.upgrade_recipes()
 
 static var _by_id := {}
 
@@ -233,7 +233,10 @@ static func salvage_yield(it: ItemInstance) -> Array:
 	if it == null or not it.is_equipment():
 		return []
 	var tier := clampi(it.rarity, 0, BH.RARITY_COUNT - 1)
-	var bulk := 1 + int(tier / 2) + int(it.ilvl / 10)
+	# bh-033: item level adds at most 5, and crafted gear returns about half: salvaging never repays a recipe's metal
+	var bulk := 1 + int(tier / 2) + mini(5, int(it.ilvl / 10))
+	if it.crafted:
+		bulk = maxi(1, bulk / 2)
 	var out := []
 	var b := it.base
 	match b.category:

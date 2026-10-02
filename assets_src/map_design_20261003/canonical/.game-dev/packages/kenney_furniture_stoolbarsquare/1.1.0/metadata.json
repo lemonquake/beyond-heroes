@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_stoolbarsquare",
+  "category": "environment_prop",
+  "description": "Square stool. Intended use: Tavern counter and smithy work corner",
+  "displayName": "kenney_furniture_stoolbarsquare",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2094699889421463,
+        0.4049999713897705,
+        -0.041126884520053864
+      ],
+      "min": [
+        0.055970001965761185,
+        0,
+        -0.18875089287757874
+      ],
+      "sizeMeters": [
+        0.15349998697638512,
+        0.4049999713897705,
+        0.14762400835752487
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 9784,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 142,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 388,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

@@ -43,6 +43,7 @@ const DISC := 0.376                  # visible disc radius / diameter: fills the
 const MARGIN := 12.0
 const REFRESH := 4.0
 const LITE_HZ := 12.0
+const PC_HZ := 20.0                  # bh-032: the icon layers are redrawn this often on a PC (they were redrawn every frame: ~3 ms of a 6 ms town frame)
 
 const C_QUEST := Color(1.0, 0.8, 0.28)
 const C_ROUTE := Color(0.5, 0.95, 1.0)
@@ -90,7 +91,10 @@ func _ready() -> void:
 	_font = UITheme.body_bold()
 	_zoom_i = clampi(Settings.minimap_zoom, 0, ZOOMS.size() - 1)
 	radius_m = ZOOMS[_zoom_i]
-	_render_r = float(ZOOMS[ZOOMS.size() - 1]) + MARGIN
+	# The render must cover the widest zoom's disc (rim distance / MASK_R) plus a margin to slide in. It used to be rim + MARGIN, which
+	# is smaller than the Wide zoom's disc (42 / 0.7625 = 55 m), so at Wide the "disc about to slide off" test was true on every frame
+	# and the whole map was drawn top-down again 60 times a second.
+	_render_r = float(ZOOMS[ZOOMS.size() - 1]) / MASK_R + MARGIN
 	_disc_r = diameter * DISC
 	var inner := _disc_r * 2.0 / MASK_R
 	_vp = SubViewport.new()
@@ -276,7 +280,7 @@ func _process(delta: float) -> void:
 	var hero := p.global_position
 	var off := Vector2(hero.x - _cam.global_position.x, hero.z - _cam.global_position.z)
 	# re-render when the disc is about to slide off the render, when the map changed, and now and then for doors
-	var slack := _render_r - radius_m / MASK_R - 1.0
+	var slack := maxf(2.0, _render_r - radius_m / MASK_R - 1.0)      # never below 2 m: a non-positive slack would re-render every frame
 	var new_world := _rendered_world != _vp.world_3d
 	var due := new_world or absf(off.x) > slack or absf(off.y) > slack \
 		or _update_t <= 0.0 and off.length() > 0.5 or _update_t <= -REFRESH
@@ -303,8 +307,8 @@ func _process(delta: float) -> void:
 		_sub_t = 0.5
 		_sub_label.text = _sub_text(def)
 	_marker_t -= delta
-	if _marker_t <= 0.0 or not Perf.lite:
-		_marker_t = 1.0 / LITE_HZ
+	if _marker_t <= 0.0:
+		_marker_t = 1.0 / (LITE_HZ if Perf.lite else PC_HZ)
 		_markers.queue_redraw()
 		(_markers.get_meta(&"over") as Control).queue_redraw()
 	_btn_in.disabled = _zoom_i == 0

@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_mast_ropes.glb",
+    "fileBytes": 46252,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 3,
+    "primitiveCount": 3,
+    "vertexCount": 638,
+    "triangleCount": 350,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -2.1928341388702393,
+        -0.02449793741106987,
+        -1.1788901090622064
+      ],
+      "max": [
+        2.1928329467773438,
+        7.86352014541626,
+        1.1699492931365967
+      ],
+      "sizeMeters": [
+        4.385667085647583,
+        7.88801808282733,
+        2.348839402198803
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_mast_ropes.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 350,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        4.385667085647583,
+        7.88801808282733,
+        2.348839402198803
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_mast_ropes\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_mast_ropes",
+        "category": "environment_prop",
+        "description": "Rope-equipped mast. Intended use: Harbour rigging vignette, static mesh and no new sail physics",
+        "displayName": "kenney_pirate_mast_ropes",
+        "files": [
+          {
+            "bytes": 46252,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "c7c5d6509c73b3d96e69fb83bc6bf995361fbad70ea0cf476837bc1a52659364"
+          },
+          {
+            "bytes": 1763,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "6a0aa8cef84da4b9480b79d8e50ccc5ce3d1e6cf7ba7f5fcd0becb6603cb19e7"
+          },
+          {
+            "bytes": 1080,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "25fda4d3447322968e8182b13a771c674935fdd1d39ae91a1d16ce2e0c52d7ac"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "7f697fa3b66feaa536760cde6b5c98fd20a8adc100ea9ce4fc2d1a42e5001f18"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_4a5c8bc9b0ade8aafbb428cf",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "ad2bd14acacd3f4901177d8b13bcc6158f558e8c1959b6e19576e17ea8b10570",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

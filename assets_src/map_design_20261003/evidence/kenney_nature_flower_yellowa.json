@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\flower_yellowA.glb",
+    "fileBytes": 7120,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 268,
+    "triangleCount": 76,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.10453449934720993,
+        -0.05,
+        -0.09052953124046326
+      ],
+      "max": [
+        0.054563019424676895,
+        0.14249999523162843,
+        0.09052953124046326
+      ],
+      "sizeMeters": [
+        0.15909751877188683,
+        0.19249999523162842,
+        0.1810590624809265
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\flower_yellowA.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 76,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.15909751877188683,
+        0.19249999523162842,
+        0.1810590624809265
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_yellowa\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_flower_yellowa",
+        "category": "foliage",
+        "description": "Yellow flowering stem. Intended use: Olivar gardens and domestic planted beds",
+        "displayName": "kenney_nature_flower_yellowa",
+        "files": [
+          {
+            "bytes": 7120,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d"
+          },
+          {
+            "bytes": 1600,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "1d708040fb62e1c30810ec22488834efac6834afda4ac270afa11197fb49368f"
+          },
+          {
+            "bytes": 834,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "5057098e38adac7f80cc8412da5a540f9fb6461019600d42afe0686a6f38bf2c"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "a0654b342cf069a3c5e5fe1e8cf676402484474f610afa97647146ee5db4b870"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_25b2595c03983dff5d73f8ef",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+  "embedded_textures": []
+}

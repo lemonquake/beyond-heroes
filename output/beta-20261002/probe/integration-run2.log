@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "A:\Python\beyond-heroes\server\integration_probe.py", line 214, in <module>
+    main()
+  File "A:\Python\beyond-heroes\server\integration_probe.py", line 183, in main
+    finish(pair, 150, "Map owner hand-off probe failed")
+  File "A:\Python\beyond-heroes\server\integration_probe.py", line 123, in finish
+    assert process.wait(timeout=limit) == 0, why
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Map owner hand-off probe failed
+exit=1

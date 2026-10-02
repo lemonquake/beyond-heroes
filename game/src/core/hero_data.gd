@@ -79,6 +79,10 @@ var gather_log := {}
 var chest_log := {}
 ## Dungeon raids (bh-013): dungeon id -> {at, until (unix seconds), count}; DataDungeons.record_raid / recovering.
 var dungeon_raids := {}
+## bh-033 bad-luck protection: base id -> kills in a row that could have dropped it and did not (LootPools.roll).
+var loot_pity := {}
+## bh-033 next-rank tracker on the HUD, chosen per hero: "hidden" (default), "minimized" or "expanded".
+var rank_tracker := "hidden"
 ## Tempo summoning (bh-012, TempoGacha): calls made, calls since the last 4-star / 5-star (pity), the welcome gift,
 ## and the last summons for the history list.
 var summon := {}
@@ -471,7 +475,7 @@ func to_dict() -> Dictionary:
 		"known_recipes": known_recipes.keys().map(func(k): return String(k)), "crafted_count": crafted_count,
 		"clear_count": clear_count, "stages_cleared": _keyed_plain(stages_cleared), "miniboss_log": _keyed_out(miniboss_log),
 		"checkpoint": checkpoint.duplicate(true), "gather_log": gather_log.duplicate(),
-		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true),
+		"active_aura": String(active_aura), "chest_log": chest_log.duplicate(), "summon": summon.duplicate(true), "dungeon_raids": dungeon_raids.duplicate(true), "loot_pity": loot_pity.duplicate(), "rank_tracker": rank_tracker,
 		"spirit_hall": spirit_hall.map(func(t): return t.to_dict()), "starter_name": starter_name,
 		"guild_jobs": GuildJobs.to_dict(self),
 		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
@@ -523,8 +527,8 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.equipment.from_dict(d.get("equipment", {}))
 	h.inventory.from_array(d.get("inventory", []))
 	h.inventory.gold = int(d.get("gold", 0))
-	h.skill_tree.from_dict(d.get("skills", {}))
-	h.talent_tree.from_dict(d.get("talents", {}))
+	h.progress.skill_points += h.skill_tree.from_dict(d.get("skills", {}))
+	h.progress.talent_points += h.talent_tree.from_dict(d.get("talents", {}))
 	var bar: Array = d.get("skill_bar", [])
 	for i in SKILL_BAR_SIZE:
 		h.skill_bar[i] = StringName(bar[i]) if i < bar.size() else &""
@@ -617,6 +621,12 @@ static func from_dict(d: Dictionary) -> HeroData:
 		for k in dr:
 			if dr[k] is Dictionary:
 				h.dungeon_raids[String(k)] = {"at": float(dr[k].get("at", 0.0)), "until": float(dr[k].get("until", 0.0)), "count": int(dr[k].get("count", 1))}
+	var rtk := String(d.get("rank_tracker", "hidden"))
+	h.rank_tracker = rtk if rtk in ["hidden", "minimized", "expanded"] else "hidden"
+	var lp = d.get("loot_pity", {})
+	if lp is Dictionary:
+		for k in lp:
+			h.loot_pity[String(k)] = clampi(int(lp[k]), 0, 99)
 	var sm = d.get("summon", {})
 	if sm is Dictionary:
 		h.summon = sm.duplicate(true)

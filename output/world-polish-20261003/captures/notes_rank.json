@@ -1,0 +1,64 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "engine": "4.7.2-stable (official)",
+  "ready_guide": true,
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "shots": [
+    {
+      "name": "rank_touch_01_unranked_expanded",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_02_expanded",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_03_minimized",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_04_hidden_character_track_button",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_05_restored",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_06_ready",
+      "size": [
+        1920,
+        864
+      ]
+    },
+    {
+      "name": "rank_touch_07_promoted_next",
+      "size": [
+        1920,
+        864
+      ]
+    }
+  ],
+  "tier_after": 3,
+  "touch": true,
+  "window": [
+    1920,
+    864
+  ]
+}

@@ -1,0 +1,19 @@
+[Unit]
+Description=Beyond Heroes verified database backup (and optional off-VM copy)
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=beyond-heroes
+Group=beyond-heroes
+Environment=HOME=/var/lib/beyond-heroes/home
+WorkingDirectory=/opt/beyond-heroes/current
+UMask=0077
+ExecStart=/opt/beyond-heroes/current/.venv/bin/python -m server.maintenance backup --config /var/lib/beyond-heroes/server.json
+# optional: copies the newest backup off this VM when /etc/beyond-heroes/offsite.env names a destination
+ExecStartPost=/opt/beyond-heroes/current/server/deploy/backup-offsite.sh
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/beyond-heroes

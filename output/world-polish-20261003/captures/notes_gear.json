@@ -1,0 +1,48 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "engine": "4.7.2-stable (official)",
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "shots": [
+    {
+      "name": "gear_01_forge_hints",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "gear_02_forge_steel_from_iron",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "gear_03_fire_resistance_equipment_limit",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "gear_04_new_legendary_armor_and_weapon",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "gear_05_material_tooltip_sources",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

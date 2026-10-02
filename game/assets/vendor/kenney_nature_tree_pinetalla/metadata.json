@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_tree_pinetalla",
+  "category": "foliage",
+  "description": "Tall conifer. Intended use: Distant tree line and selected forest landmarks",
+  "displayName": "kenney_nature_tree_pinetalla",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2070934921503067,
+        1.4796059846878051,
+        0.19803650677204132
+      ],
+      "min": [
+        -0.17917943000793457,
+        -0.05,
+        -0.1939135044813156
+      ],
+      "sizeMeters": [
+        0.38627292215824127,
+        1.5296059846878052,
+        0.39195001125335693
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 7200,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 78,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 272,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

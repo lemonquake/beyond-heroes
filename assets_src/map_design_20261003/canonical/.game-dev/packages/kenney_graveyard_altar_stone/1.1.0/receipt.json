@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:39.451Z",
+  "destination": {
+    "assetId": "kenney_graveyard_altar_stone",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "b7c5b680de628ed6b48aa6d1d89567bf08378465fb135bbcd2eb4f0fe30ff75a",
+  "packageId": "pkg_fcec63e42cfd50d92645a367",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 28184,
+    "fileName": "kenney_graveyard_altar_stone.glb",
+    "sha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0"
+  }
+}

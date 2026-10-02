@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_c072973af3e82e8011bb3bea",
+  "assetId": "kenney_nature_grass_leafs",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_grass_leafs",
+  "modelSha256": "8bc4c0b17c2e64c34e1acbf7c4a2fd8c04cfcd7155328e61767887b2ced112c7",
+  "manifestSha256": "2f670d5adf73b2a35afeaa9ceef9584ebeb9bf24fab38aa22a335124f29b0290",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:03.109Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass_leafs\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

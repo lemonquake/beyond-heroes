@@ -1,0 +1,19 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+  "licenseEvidence": "licenses/nature-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+  "originalModelSha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+  "originalRelativePath": "sources/nature-kit/Models/GLTF format/hanging_moss.glb",
+  "originalTextureDependencies": [],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 4776,
+    "fileName": "hanging_moss.glb",
+    "sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0"
+  },
+  "sourceUri": "https://kenney.nl/assets/nature-kit",
+  "transformations": []
+}

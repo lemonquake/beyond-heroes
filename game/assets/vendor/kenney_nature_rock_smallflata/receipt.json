@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:41.266Z",
+  "destination": {
+    "assetId": "kenney_nature_rock_smallflata",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c1e511ed257f4703bcf011ebf72650562bcceb94788978aa6ea0b486b1880fa6",
+  "packageId": "pkg_82ee8930ac58b1b252a2f4bf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 3300,
+    "fileName": "rock_smallFlatA.glb",
+    "sha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21"
+  }
+}

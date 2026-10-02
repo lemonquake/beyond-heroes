@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_graveyard_pillar_obelisk",
+  "category": "environment_prop",
+  "description": "Stone obelisk. Intended use: Crypt or Jade chamber landmark after canon glyph treatment",
+  "displayName": "kenney_graveyard_pillar_obelisk",
+  "files": [
+    {
+      "bytes": 19572,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1"
+    },
+    {
+      "bytes": 1759,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "3c841d09226815b341c6333ab5370762add2a8f5eb9bd1d2e90665a9ec870b85"
+    },
+    {
+      "bytes": 1110,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "c7959dce5f04f806c35802097f254ee91c24d10c0005ed7fd3451e4b76fd1e04"
+    },
+    {
+      "bytes": 3649,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "321c63db166ecd4f2b5fff397c3111ee2ecbef34470526ebbbcbee370d0d2cdc"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_2a24e5ba7bc7ea2083785ecd",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_platform_planks",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_planks.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0",
+ "source_sha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e",
+ "derived_sha256": "caaef662929b1b29bf35ea5762daf894cc5f2f2ab18f17b82d0a81c9d9995b6d",
+ "scale": 1.0,
+ "scale_rule": [
+  "s",
+  1.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Wood",
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_Wood": 8,
+  "BH_WoodDark": 40
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "wood_dark": "BH_WoodDark"
+ },
+ "triangles": 48,
+ "surfaces": 2,
+ "source_triangles": 48,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.894,
+  0.428,
+  2.702
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

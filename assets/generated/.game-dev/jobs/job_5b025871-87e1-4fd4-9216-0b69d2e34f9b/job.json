@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5b025871-87e1-4fd4-9216-0b69d2e34f9b",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_hanging_moss\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:48.374Z",
+  "updatedAt": "2026-10-02T21:11:48.426Z",
+  "startedAt": "2026-10-02T21:11:48.380Z",
+  "completedAt": "2026-10-02T21:11:48.426Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-25426a26-38c8-4328-a7c5-8e1ac7b995ac' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_hanging_moss\r'",
+    "retryable": false
+  }
+}

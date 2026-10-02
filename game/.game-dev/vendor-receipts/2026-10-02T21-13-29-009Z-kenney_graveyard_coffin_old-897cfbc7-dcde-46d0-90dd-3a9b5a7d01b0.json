@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_6da00133820b115c759099a7",
+  "assetId": "kenney_graveyard_coffin_old",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_coffin_old",
+  "modelSha256": "d719c8f614074642af74f3edd8e56fa5adc73b325f0a21c30f21551f830dcd5e",
+  "manifestSha256": "a81ee89745a47f7471cde78e1575e75e9a3f2c719b83636d1cd17e57daf89ed6",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:29.009Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_coffin_old\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -87,7 +87,7 @@ func _ready() -> void:
 	_add(&"settings", "Settings", _show_settings)
 	_add(&"credits", "Credits", _show_credits)
 	_add(&"exit", "Exit", _ask_exit)
-	var ver := UITheme.label("Development build · %s" % ProjectSettings.get_setting("application/config/name"), 14, UITheme.TEXT_MUTED, UITheme.body_font())
+	var ver := UITheme.label("Beta %s · online version %d" % [ProjectSettings.get_setting("application/config/version", "0.8.0"), Net.PROTOCOL], 16, UITheme.TEXT_DIM, UITheme.body_font())
 	ver.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	ver.offset_left = -420
 	ver.offset_top = -40
@@ -129,11 +129,27 @@ func reveal() -> void:
 	if _server_menu:
 		_server_menu.move_to_front()
 
+## The title column is placed in pixels for a 1920x1080 canvas, so it keeps the engine's own scaling; the realm pages (ServerMenu)
+## adapt to any canvas and use the larger interface of a small window. Hold the design scale only while no realm page is up.
+var _design_held := false
+
+func _sync_design_hold() -> void:
+	var want := _server_menu == null or not is_instance_valid(_server_menu)
+	if want != _design_held:
+		_design_held = want
+		Settings.hold_design_scale(want)
+
+func _exit_tree() -> void:
+	if _design_held:
+		_design_held = false
+		Settings.hold_design_scale(false)
+
 func show_servers() -> void:
 	if _server_menu and is_instance_valid(_server_menu):
 		return
 	_server_menu = ServerMenu.new()
 	add_child(_server_menu)
+	_sync_design_hold()
 	_server_menu.official_play.connect(official_play.emit)
 	_server_menu.official_new.connect(func() -> void:
 		SaveSystem.scope = "official"
@@ -143,6 +159,7 @@ func show_servers() -> void:
 		if mode == "back":
 			_server_menu.queue_free()
 			_server_menu = null
+			_sync_design_hold()
 			return
 		if mode == "offline":
 			SaveSystem.scope = "legacy"
@@ -154,6 +171,7 @@ func show_servers() -> void:
 		server_selected.emit(mode, room)
 		_server_menu.queue_free()
 		_server_menu = null
+		_sync_design_hold()
 		var has_save := _latest_slot() >= 0
 		for button in _buttons:
 			if button.name in ["continue", "load"]:

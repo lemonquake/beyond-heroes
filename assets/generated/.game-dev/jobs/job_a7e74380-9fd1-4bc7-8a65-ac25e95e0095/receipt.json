@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_beddouble\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_beddouble",
+      "category": "environment_prop",
+      "description": "Double bed. Intended use: Hald house sleeping corner; verify room clearance",
+      "displayName": "kenney_furniture_beddouble",
+      "files": [
+        {
+          "bytes": 23368,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c"
+        },
+        {
+          "bytes": 1528,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2fe67b36ad33333c3e5a9eaa9c22bb232c2bd59901cd11e77235e4ea60d01338"
+        },
+        {
+          "bytes": 803,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d694692fec07f156420690fa97aa076f5f0148090ef0570ebfe05eb93094f602"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "61206dfee4f0a1f6469e451f5644ccb21d582fffe7ad9016db459681b3c412fb"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_bed2eb320619e8d1018a7d1f",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:08.396Z"
+}

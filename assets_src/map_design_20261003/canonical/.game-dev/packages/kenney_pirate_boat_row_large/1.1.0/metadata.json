@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_boat_row_large",
+  "category": "environment_prop",
+  "description": "Larger rowing boat. Intended use: Olivar landing; static decoration or shared gentle bob",
+  "displayName": "kenney_pirate_boat_row_large",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        1.3742690086365137,
+        0.8476955137593079,
+        1.4260733127593994
+      ],
+      "min": [
+        -1.3742690086364355,
+        -6.767919641759458e-17,
+        -1.4260733127593994
+      ],
+      "sizeMeters": [
+        2.748538017272949,
+        0.847695513759308,
+        2.852146625518799
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 26080,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 174,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 258,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tree_small.glb",
+    "fileBytes": 6500,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 240,
+    "triangleCount": 62,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.17731867730617523,
+        -0.05,
+        -0.2047499716281891
+      ],
+      "max": [
+        0.17731867730617523,
+        1.0600374460220336,
+        0.2047499716281891
+      ],
+      "sizeMeters": [
+        0.35463735461235046,
+        1.1100374460220337,
+        0.4094999432563782
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tree_small.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 62,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.35463735461235046,
+        1.1100374460220337,
+        0.4094999432563782
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_small\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_tree_small",
+        "category": "foliage",
+        "description": "Small broadleaf tree. Intended use: Gardens behind houses, away from door approaches",
+        "displayName": "kenney_nature_tree_small",
+        "files": [
+          {
+            "bytes": 6500,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "d26c0eeed65cc681667f50042ef23ec72ce47ae3b39837bfeec170b05ba6ab6a"
+          },
+          {
+            "bytes": 1594,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "fb460a13b0283848f4b704c18937db5089cef3dcc0e0eed4d6a22498ec022106"
+          },
+          {
+            "bytes": 826,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "374805c916a3405ea18148377cb7a1947aaa3e527def94d24f2c9eb72c7dcda8"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "559f6c4778b0e04ad12d877e6d02415e69743409f8c3737f27de0cdbe9bb093c"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_cb837a0b9ec13a85a5869b78",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "d26c0eeed65cc681667f50042ef23ec72ce47ae3b39837bfeec170b05ba6ab6a",
+  "embedded_textures": []
+}

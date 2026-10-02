@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:03.790Z",
+  "destination": {
+    "assetId": "kenney_furniture_tablecross",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "df171e49cb025f9a7624de4bc2c1ae6ca10f6fb633fcf54184c34000923a1f0a",
+  "packageId": "pkg_472a2b4ceca57de0fe6e8038",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 12140,
+    "fileName": "tableCross.glb",
+    "sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3"
+  }
+}

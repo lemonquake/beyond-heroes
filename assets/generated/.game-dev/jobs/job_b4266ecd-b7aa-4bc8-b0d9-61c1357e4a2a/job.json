@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_b4266ecd-b7aa-4bc8-b0d9-61c1357e4a2a",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_tool_shovel"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:24.385Z",
+  "updatedAt": "2026-10-02T21:13:24.448Z",
+  "startedAt": "2026-10-02T21:13:24.391Z",
+  "completedAt": "2026-10-02T21:13:24.448Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_b4266ecd-b7aa-4bc8-b0d9-61c1357e4a2a\\receipt.json"
+}

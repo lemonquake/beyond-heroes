@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_candle_multiple\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_candle_multiple",
+      "category": "environment_prop",
+      "description": "Cluster of candles. Intended use: Tomb and ritual staging; share capped existing flame effects",
+      "displayName": "kenney_graveyard_candle_multiple",
+      "files": [
+        {
+          "bytes": 28320,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "5b8d03622b1e99dfb2d492acfc1b9a22c9dd9a669f5a87009e7426573e3495ca"
+        },
+        {
+          "bytes": 1770,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "82099f295736b72a7e27071c5ffab98f4d2db1ce26e08ab7c8353bae25febc4f"
+        },
+        {
+          "bytes": 1112,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "af4f1a5f93c7b6641a2a469205342272ec6ac3741a78b360bcc51c7eae1016f7"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "f8ba587ebd932d0dbd51b17a1ab32745c3706a1b7c8985f2c7ae3c073b7a9255"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_6909a4b768ebe6e7e6d829c0",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:37.494Z"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d99bb215-1aff-48c9-84e2-40820a2be94a",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_bookcaseclosed\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:15.237Z",
+  "updatedAt": "2026-10-02T21:12:15.293Z",
+  "startedAt": "2026-10-02T21:12:15.244Z",
+  "completedAt": "2026-10-02T21:12:15.293Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-5e765b50-13da-42b3-920e-00725ad6c967' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_bookcaseclosed\r'",
+    "retryable": false
+  }
+}

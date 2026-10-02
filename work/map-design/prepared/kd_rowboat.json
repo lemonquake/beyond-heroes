@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_pirate_boat_row_small",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_rowboat.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0",
+ "source_sha256": "5963b12af7466ca99f0c31fe7fb2ccfd08ae710f5c91e8aae73412fded399e6d",
+ "derived_sha256": "312d2f07c6af29d2de988be52a6f2111181fbaba21410a9418079fdbe5e0fc55",
+ "scale": 1.3,
+ "scale_rule": [
+  "s",
+  1.3
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Wood": 168
+ },
+ "source_to_material": {
+  "wood": "BH_Wood"
+ },
+ "triangles": 168,
+ "surfaces": 1,
+ "source_triangles": 168,
+ "source_meshes": 2,
+ "bounds_m": [
+  3.573,
+  1.102,
+  3.084
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -70,6 +70,7 @@ func compose() -> void:
 	_gate()
 	_heartwire()
 	_hills()
+	_map_design()
 	spawn(&"pier", Vector3(DataZarael.AG_SPAWN.x, DataZarael.AG_DECK_Y, DataZarael.AG_SPAWN.z), 180.0)
 	spawn(&"start", Vector3(-20.0, 0, 40.0), 180.0, true)
 	spawn(&"coil_gate", DataZarael.AG_GATE_SPAWN, -90.0, true)
@@ -386,7 +387,8 @@ func _heartwire() -> void:
 
 func _hills() -> void:
 	# jungle on the slopes either side of the town and the mountain behind the Crown
-	scatter(["zr_tree_ceiba", "zr_palm", "zr_palm", "zr_fern_giant", "zr_bush_jungle"], Rect2(-110, -110, 220, 162), 260, 7.0,
+	# map-design pass: a lighter even scatter; _map_design() adds canopy and rock clusters that follow the grade
+	scatter(["zr_tree_ceiba", "zr_palm", "zr_palm", "zr_fern_giant", "zr_bush_jungle"], Rect2(-110, -110, 220, 162), 200, 7.0,
 		Vector2(0.8, 1.25), func(x, z):
 			var i := tier_at(z + 1.6)
 			var t: Dictionary = TIERS[i]
@@ -406,3 +408,110 @@ func _hills() -> void:
 			boundary(Vector3(float(t.x1) + 0.5, y - 2.0, float(t.z0)), Vector3(float(t.x1) + 0.5, y - 2.0, float(t.z1)), 10.0)
 	var top: Dictionary = TIERS[4]
 	boundary(Vector3(float(top.x0), tier_y(4) - 2.0, float(top.z0) + 0.5), Vector3(float(top.x1), tier_y(4) - 2.0, float(top.z0) + 0.5), 10.0)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): each terrace dressed for what it does — cargo sorted on the quay with a repaired landing
+# and boats moored off it, the Wire Market's stock under cover and seats at its margins, a civic porch at the council
+# hall, maintenance stores by the old lifts, sparse stone and planting at the Crown's edges. Every group stands on its
+# own terrace at that terrace's height (never grounded to the terrain under a raised surface), off the town's routes,
+# stair landings, lifts, doors and the procession to the pyramid. Glow stays white: nothing here adds a light.
+
+var _want_tier := 0
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	var i := tier_at(z + 1.6)
+	if i != _want_tier:
+		return false
+	var t: Dictionary = TIERS[i]
+	var south := float(t.z1) - (1.0 if i == 0 else 2.6)
+	if x < float(t.x0) + r + 1.0 or x > float(t.x1) - r - 1.0 or z < float(t.z0) + r * 0.6 + 0.4 or z > south - r:
+		return false
+	if absf(x - DataZarael.AG_PIER_X) < r + 4.0 and i == 0 and z > 40.0:
+		return false
+	return road_dist(x, z) > r + 1.8 and is_clear(x, z, r * 0.6)
+
+## A group on terrace `i`: the nearest clear spot to `prefer` within `reach`, standing at the terrace's height.
+func _on_tier(i: int, vname: String, prefer: Vector2, reach: float, yaw: float, opts := {}) -> Node3D:
+	_want_tier = i
+	var y := tier_y(i)
+	return place_near(vname, Vector3(prefer.x, y, prefer.y), Vector3(prefer.x, y, prefer.y), 0.0, reach, yaw, opts.merged({"on_ground": false}))
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	# ---- the Harbour: a handling corner on the quay, a repaired landing, rowboats moored off it, sparse palms -----
+	_on_tier(0, "cargo_stack", Vector2(-32.0, 44.0), 8.0, 0.0)
+	_on_tier(0, "supply_corner", Vector2(-8.0, 41.5), 8.0, 10.0)
+	# the repaired landing: new planks let into the old quay edge, a paddle left on them (flat: the quay stays walkable)
+	for c in [[Vector3(-60.0, tier_y(0) - 0.32, 48.6), 0.0, "kd_planks"], [Vector3(-57.6, tier_y(0) + 0.06, 48.2), 80.0, "kd_paddle"]]:
+		kit(c[2], c[0], c[1], 1.0, deco)
+	vignette("moored_rowboat", Vector3(-55.0, SEA_Y + 0.05, 53.5), 80.0, {"on_ground": false, "check": false})
+	vignette("moored_rowboat", Vector3(14.0, SEA_Y + 0.05, 54.0), 100.0, {"on_ground": false, "check": false})
+	_on_tier(0, "palm_pair", Vector2(-72.0, 36.0), 5.0, 0.0)
+	_on_tier(0, "palm_pair", Vector2(56.0, 40.0), 9.0, 180.0)
+	_on_tier(0, "bench_view", Vector2(-52.0, 41.0), 8.0, 180.0)
+	# ---- the Wire Market: stock under cover at the margins, seats facing the fountain, planter pockets ----------
+	_on_tier(1, "covered_store", Vector2(-46.0, 12.5), 7.0, 0.0)
+	_on_tier(1, "produce_display", Vector2(-15.5, 21.5), 4.0, 30.0)
+	_on_tier(1, "herb_pots", Vector2(16.0, 26.0), 6.0, -20.0)
+	_on_tier(1, "cargo_stack", Vector2(44.0, 12.0), 7.0, 0.0)
+	# waiting seats on the market's north margin, looking south over the fountain and the harbour
+	for q in [Vector2(-12.0, 9.0), Vector2(12.0, 9.0)]:
+		_on_tier(1, "bench_view", q, 7.0, 0.0)
+	for q in [Vector2(-34.0, 25.0), Vector2(36.0, 24.5), Vector2(-58.0, 22.0)]:
+		_on_tier(1, "civic_planters", q, 8.0, 0.0)
+	# ---- the Middle Terrace: the council porch, domestic courtyards and service corners -------------------------
+	_on_tier(2, "civic_record", Vector2(HALL.x + 9.0, HALL.y + 9.5), 5.0, 0.0)
+	_on_tier(2, "civic_planters", Vector2(HALL.x - 9.0, HALL.y + 10.0), 5.0, 0.0)
+	_on_tier(2, "garden_bed", Vector2(-4.0, -7.0), 6.0, 0.0)
+	_on_tier(2, "flower_border", Vector2(32.0, -6.0), 6.0, 0.0)
+	_on_tier(2, "supply_corner", Vector2(50.0, -17.5), 6.0, 0.0)
+	# ---- the Upper Terrace: stores for the lifts' upkeep, gardens that soften the stone -------------------------
+	_on_tier(3, "tool_corner", Vector2(LIFT_X - 8.0, -24.0), 10.0, 0.0)
+	_on_tier(1, "tool_corner", Vector2(LIFT_X - 6.0, 10.0), 8.0, 0.0)
+	_on_tier(3, "timber_store", Vector2(LIFT_X + 9.0, -24.0), 7.0, 0.0)
+	_on_tier(3, "garden_bed", Vector2(-24.0, -40.0), 6.0, 0.0)
+	_on_tier(3, "bamboo_garden", Vector2(-36.0, -41.0), 8.0, 0.0)
+	_on_tier(2, "bamboo_garden", Vector2(40.0, -18.0), 8.0, 0.0)
+	_on_tier(1, "tea_corner", Vector2(-30.0, 9.0), 8.0, 0.0)
+	_on_tier(3, "kitchen_garden", Vector2(-12.0, -41.0), 9.0, 0.0)
+	# ---- the Crown: sparse stone and planting at the edges; the procession stays bare ---------------------------
+	for q in [Vector2(-34.0, -62.0), Vector2(35.0, -66.0)]:
+		_on_tier(4, "rock_cluster_m", q, 5.0, rng.randf() * 360.0)
+	for q in [Vector2(-30.0, -78.0), Vector2(31.0, -79.0)]:
+		_on_tier(4, "flower_border", q, 4.0, 0.0)
+	# ---- each terrace's back wall: a rhythm of planting, seating and stores against the retaining stone, so the long
+	# paving meets an edge with life on it (skipped wherever a house, stair, lift, stall or route is in the way)
+	var rhythm := [["garden_bed", "bench_view", "civic_planters", "supply_corner", "bamboo_garden", "flower_border"],
+		["civic_planters", "covered_store", "bench_view", "garden_bed", "tea_corner"],
+		["garden_bed", "bench_view", "flower_border", "supply_corner", "civic_planters"],
+		["flower_border", "garden_bed", "tool_corner", "bench_view", "bamboo_garden"]]
+	for i in 4:
+		var t: Dictionary = TIERS[i]
+		var list: Array = rhythm[i]
+		var k := 0
+		var x := float(t.x0) + 8.0 + float(i) * 3.0
+		while x < float(t.x1) - 8.0:
+			var vn: String = list[k % list.size()]
+			var r := float(DataVignettes.get_def(vn).r)
+			var z := float(t.z0) + r * 0.7 + 0.6
+			_want_tier = i
+			if _clear_here(x, z, r) and not group_overlaps(Vector3(x, tier_y(i), z), r) and not touches_solid(Vector3(x, tier_y(i), z), r * 0.8):
+				vignette(vn, Vector3(x, tier_y(i), z), 0.0, {"on_ground": false, "check": false, "near": true})
+				k += 1
+				x += 16.0
+			else:
+				x += 4.0
+	# ---- the slopes: canopy and outcrops that follow the grade, so the town's edges read as hillside -------------
+	for i in TIERS.size():
+		var t: Dictionary = TIERS[i]
+		var zc := (float(t.z0) + float(t.z1)) * 0.5
+		for side in [-1.0, 1.0]:
+			var x := (float(t.x0) - 9.0) if side < 0.0 else (float(t.x1) + 9.0)
+			if i == 3 and side > 0.0:
+				continue              # the Coilwood Gate road leaves here
+			vignette("palm_group" if (i + int(side)) % 2 == 0 else "rock_cluster_l", Vector3(x, 0, zc), rng.randf() * 360.0, {"check": false})
+	# ambient accents: the quay, the Wire Market's fountain, the harbour brazier
+	for qx in [-34.0, 0.0, 26.0]:
+		accent(Vector3(qx, tier_y(0), 49.0), &"water_wave", -18.0)
+	accent(Vector3(FOUNTAIN.x, tier_y(1) + 0.8, FOUNTAIN.y), &"water_splash", -20.0)
+	accent(Vector3(30.0, tier_y(0) + 1.2, 40.0), &"torch_crackle", -16.0)

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_c4bd35d2-1369-4f9f-82c6-268d3250ce69",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:02.210Z",
+  "updatedAt": "2026-10-02T21:12:02.243Z",
+  "startedAt": "2026-10-02T21:12:02.216Z",
+  "completedAt": "2026-10-02T21:12:02.243Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_c4bd35d2-1369-4f9f-82c6-268d3250ce69\\receipt.json"
+}

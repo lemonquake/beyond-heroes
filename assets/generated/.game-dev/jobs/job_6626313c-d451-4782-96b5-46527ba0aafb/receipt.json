@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_candle_multiple\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_candle_multiple",
+      "category": "environment_prop",
+      "description": "Cluster of candles. Intended use: Tomb and ritual staging; share capped existing flame effects",
+      "displayName": "kenney_graveyard_candle_multiple",
+      "files": [
+        {
+          "bytes": 17304,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "e747e04390e8f431e0d80b17696ef01cfa935dd8efff44f7008de6408236b547"
+        },
+        {
+          "bytes": 1770,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "847e18004e17f62591421496e94f7ae68665e843564c9f84455f576634d57148"
+        },
+        {
+          "bytes": 818,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "e2b8cc78a2bd268e980eff376d7482f7e502dcbe37691900024ba06f3c65e2f5"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "f8ba587ebd932d0dbd51b17a1ab32745c3706a1b7c8985f2c7ae3c073b7a9255"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_cb7f8a45a403289ca89fbbe7",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:39.793Z"
+}

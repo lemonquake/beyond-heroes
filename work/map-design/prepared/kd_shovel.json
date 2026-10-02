@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_tool_shovel",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_shovel.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0",
+ "source_sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5",
+ "derived_sha256": "d94b5eb7ffbd04eaaf83e65625d4e24b6d8f6cb4934419d16a221fc57c3dff77",
+ "scale": 0.5534,
+ "scale_rule": [
+  "h",
+  1.3
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Iron",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Iron": 140,
+  "BH_Wood": 28
+ },
+ "source_to_material": {
+  "grey": "BH_Iron",
+  "wood": "BH_Wood"
+ },
+ "triangles": 168,
+ "surfaces": 2,
+ "source_triangles": 168,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.364,
+  1.3,
+  0.157
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

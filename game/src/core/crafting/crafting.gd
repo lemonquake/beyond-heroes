@@ -23,11 +23,14 @@ static func scroll_for(recipe_id: StringName) -> StringName:
 static func is_gear(r: Dictionary) -> bool:
 	return (r.out as Dictionary).has("gear")
 
+static func ingredient_count(hero: HeroData, r: Dictionary, id: StringName) -> int:
+	return hero.inventory.count_of(id, not bool(r.get("gem_upgrade", false)))
+
 ## How many times the hero could make this right now (materials and gold; ignores bag space).
 static func max_craftable(hero: HeroData, r: Dictionary) -> int:
 	var n := MAX_BATCH
 	for inp in r.inputs:
-		n = mini(n, hero.inventory.count_of(inp[0]) / maxi(1, int(inp[1])))
+		n = mini(n, ingredient_count(hero, r, inp[0]) / maxi(1, int(inp[1])))
 	var fee := int(r.get("gold", 0))
 	if fee > 0:
 		n = mini(n, hero.inventory.gold / fee)
@@ -47,7 +50,7 @@ static func check(hero: HeroData, r: Dictionary, station: StringName, times := 1
 		return "Invalid amount"
 	for inp in r.inputs:
 		var need := int(inp[1]) * times
-		var have := hero.inventory.count_of(inp[0])
+		var have := ingredient_count(hero, r, inp[0])
 		if have < need:
 			var b := DB.item_base(inp[0])
 			return "Missing %s (%d / %d)" % [b.display_name if b else String(inp[0]), have, need]
@@ -68,7 +71,7 @@ static func check(hero: HeroData, r: Dictionary, station: StringName, times := 1
 static func _fits(hero: HeroData, r: Dictionary, times: int) -> bool:
 	var trial := hero.inventory.copy()
 	for inp in r.inputs:
-		trial.consume(inp[0], int(inp[1]) * times)
+		trial.consume(inp[0], int(inp[1]) * times, not bool(r.get("gem_upgrade", false)))
 	if is_gear(r):
 		return trial.free_cells() >= times
 	var output: Dictionary = r.out
@@ -134,7 +137,7 @@ static func craft(hero: HeroData, r: Dictionary, station: StringName, times := 1
 			it2.count = int(out.get("count", 1))
 			made.append(it2)
 	for inp in r.inputs:
-		hero.inventory.consume(inp[0], int(inp[1]) * times)
+		hero.inventory.consume(inp[0], int(inp[1]) * times, not bool(r.get("gem_upgrade", false)))
 	var fee := int(r.get("gold", 0)) * times
 	hero.inventory.gold -= fee
 	for it in made:

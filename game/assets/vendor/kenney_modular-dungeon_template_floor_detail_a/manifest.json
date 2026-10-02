@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+  "category": "environment_prop",
+  "description": "Detailed stone floor insert. Intended use: Sparse threshold accent and repaired temple paving",
+  "displayName": "kenney_modular-dungeon_template_floor_detail_a",
+  "files": [
+    {
+      "bytes": 51032,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833"
+    },
+    {
+      "bytes": 1692,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2ea9c97960e40632e89bc4c0cdf1259f6a42f72895562a3fd9c9f24825fb6951"
+    },
+    {
+      "bytes": 1164,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "7a082e89aeece8095c00b284466514be943a04f9403f4c0b8dec58ff519eb797"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "6a386e43f86e33cdd7f8c21ba5c22c0f001bb1916117c84a1f160654eb944d55"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_06a0737329ac52c503bb5b26",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

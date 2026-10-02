@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:47.327Z",
+  "destination": {
+    "assetId": "kenney_graveyard_detail_chalice",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "1259b86bf886e844864e19a3e493ac35b8a793cc99c6d12b7a153e9e8921e401",
+  "packageId": "pkg_caa38c4ef9a6cf47ac518a4f",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 24828,
+    "fileName": "kenney_graveyard_detail_chalice.glb",
+    "sha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8"
+  }
+}

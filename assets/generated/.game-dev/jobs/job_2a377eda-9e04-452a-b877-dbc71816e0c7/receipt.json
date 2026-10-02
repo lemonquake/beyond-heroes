@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_mast_ropes\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_mast_ropes",
+      "category": "environment_prop",
+      "description": "Rope-equipped mast. Intended use: Harbour rigging vignette, static mesh and no new sail physics",
+      "displayName": "kenney_pirate_mast_ropes",
+      "files": [
+        {
+          "bytes": 36156,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "ad2bd14acacd3f4901177d8b13bcc6158f558e8c1959b6e19576e17ea8b10570"
+        },
+        {
+          "bytes": 1763,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "196d0830e28869be3a500f1dceed4410864fa746735988fd96cbd8322e08225c"
+        },
+        {
+          "bytes": 789,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c5e4d057ecc810d2670b5160c0fb1a973000c1aef644fe1c33892759aba16e2b"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7f697fa3b66feaa536760cde6b5c98fd20a8adc100ea9ce4fc2d1a42e5001f18"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_06b4ad6a7a9ddbc1a984029f",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:35.141Z"
+}

@@ -1,0 +1,452 @@
+{
+  "coverage": [
+    {
+      "best_per_kill": 1.5,
+      "earliest_source_level": 1,
+      "first_use_level": 1,
+      "flags": [],
+      "hint": "Dropped by Ogre Crusher, Dire Wolf and others. Signature of Gnashgut Burrows",
+      "item": "beast_hide",
+      "monster_places": 132,
+      "name": "Beast Hide",
+      "other": [],
+      "uses": 3
+    },
+    {
+      "best_per_kill": 0.675,
+      "earliest_source_level": 1,
+      "first_use_level": 1,
+      "flags": [],
+      "hint": "Dropped by Necromancer, Bonewarden and others",
+      "item": "grave_dust",
+      "monster_places": 58,
+      "name": "Grave Dust",
+      "other": [],
+      "uses": 6
+    },
+    {
+      "best_per_kill": 2.1,
+      "earliest_source_level": 1,
+      "first_use_level": 1,
+      "flags": [],
+      "hint": "Dropped by Aether Sentinel, Kharvenn Chain-Bearer and others. Signature of Cutpurse Cellars",
+      "item": "iron_shard",
+      "monster_places": 169,
+      "name": "Iron Shard",
+      "other": [],
+      "uses": 8
+    },
+    {
+      "best_per_kill": 0.6,
+      "earliest_source_level": 1,
+      "first_use_level": 1,
+      "flags": [],
+      "hint": "Gathered from herb patches. Dropped by Mire Troll, Briar Lasher and others",
+      "item": "mirebloom",
+      "monster_places": 18,
+      "name": "Mirebloom",
+      "other": [
+        "herb patches (9)"
+      ],
+      "uses": 6
+    },
+    {
+      "best_per_kill": 0.525,
+      "earliest_source_level": 1,
+      "first_use_level": 1,
+      "flags": [],
+      "hint": "Gathered from herb patches. Dropped by Briar Lasher, Rootweaver and others",
+      "item": "silverleaf",
+      "monster_places": 35,
+      "name": "Silverleaf",
+      "other": [
+        "herb patches (11)"
+      ],
+      "uses": 9
+    },
+    {
+      "best_per_kill": 0.0,
+      "earliest_source_level": 1,
+      "first_use_level": 2,
+      "flags": [],
+      "hint": "Workbench from Beast Hide x2",
+      "item": "cured_leather",
+      "monster_places": 0,
+      "name": "Cured Leather",
+      "other": [
+        "crafted: Cured Leather"
+      ],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 0.0,
+      "earliest_source_level": 1,
+      "first_use_level": 2,
+      "flags": [],
+      "hint": "Forge from Iron Shard x5",
+      "item": "steel_ingot",
+      "monster_places": 0,
+      "name": "Steel Ingot",
+      "other": [
+        "crafted: Steel Ingot"
+      ],
+      "uses": 10
+    },
+    {
+      "best_per_kill": 0.6,
+      "earliest_source_level": 1,
+      "first_use_level": 2,
+      "flags": [],
+      "hint": "Dropped by Bandit Bombardier, Bandit Marksman and others. Salvage gear",
+      "item": "stolen_linen",
+      "monster_places": 76,
+      "name": "Bolt of Linen",
+      "other": [],
+      "uses": 4
+    },
+    {
+      "best_per_kill": 0.75,
+      "earliest_source_level": 7,
+      "first_use_level": 2,
+      "flags": [],
+      "hint": "Dropped by Aether Wisp, Relay Mote and others. Salvage gear",
+      "item": "wisp_mote",
+      "monster_places": 93,
+      "name": "Wisp Mote",
+      "other": [],
+      "uses": 21
+    },
+    {
+      "best_per_kill": 0.675,
+      "earliest_source_level": 1,
+      "first_use_level": 2,
+      "flags": [],
+      "hint": "Dropped by Dire Wolf",
+      "item": "wolf_fang",
+      "monster_places": 6,
+      "name": "Wolf Fang",
+      "other": [],
+      "uses": 6
+    },
+    {
+      "best_per_kill": 0.45,
+      "earliest_source_level": 1,
+      "first_use_level": 3,
+      "flags": [],
+      "hint": "Gathered from herb patches. Dropped by Mycelid Hulk, Waxen Hive and others",
+      "item": "brightcap",
+      "monster_places": 88,
+      "name": "Brightcap",
+      "other": [
+        "herb patches (5)"
+      ],
+      "uses": 7
+    },
+    {
+      "best_per_kill": 0.9,
+      "earliest_source_level": 1,
+      "first_use_level": 3,
+      "flags": [],
+      "hint": "Dropped by Warband Chieftain, Orc Reaver and others",
+      "item": "orc_tusk",
+      "monster_places": 16,
+      "name": "Orc Tusk",
+      "other": [],
+      "uses": 8
+    },
+    {
+      "best_per_kill": 2.4,
+      "earliest_source_level": 1,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Treasure Gremlin, Mimic and others. Signature of The Waxen Hive",
+      "item": "arcane_dust",
+      "monster_places": 153,
+      "name": "Arcane Dust",
+      "other": [],
+      "uses": 21
+    },
+    {
+      "best_per_kill": 0.6,
+      "earliest_source_level": 1,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Magma Golem, Ashen Cultist and others. Signature of The Obsidian Engine",
+      "item": "ember_core",
+      "monster_places": 74,
+      "name": "Ember Core",
+      "other": [],
+      "uses": 4
+    },
+    {
+      "best_per_kill": 0.675,
+      "earliest_source_level": 1,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Frost Revenant, Ice Wraith and others. Signature of Prismdeep Geode",
+      "item": "frost_crystal",
+      "monster_places": 69,
+      "name": "Frost Crystal",
+      "other": [],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 1.2,
+      "earliest_source_level": 1,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Waxen Hive, Goblin Skulker and others",
+      "item": "goblin_resin",
+      "monster_places": 15,
+      "name": "Fire-pot Resin",
+      "other": [],
+      "uses": 3
+    },
+    {
+      "best_per_kill": 0.6,
+      "earliest_source_level": 7,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Mossback Idol, Span Warden and others",
+      "item": "rune_plate",
+      "monster_places": 102,
+      "name": "Rune Plate",
+      "other": [],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 0.35,
+      "earliest_source_level": 1,
+      "first_use_level": 4,
+      "flags": [],
+      "hint": "Dropped by Aether Wisp, Heartwire Wraith and others. Signature of Thunderwell Spire",
+      "item": "storm_essence",
+      "monster_places": 112,
+      "name": "Storm Essence",
+      "other": [],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 0.35,
+      "earliest_source_level": 1,
+      "first_use_level": 6,
+      "flags": [],
+      "hint": "Dropped by Ashen Cultist, Ashen Acolyte",
+      "item": "ash_sigil",
+      "monster_places": 22,
+      "name": "Ash Sigil",
+      "other": [],
+      "uses": 2
+    },
+    {
+      "best_per_kill": 0.3,
+      "earliest_source_level": 1,
+      "first_use_level": 6,
+      "flags": [],
+      "hint": "Gathered from herb patches. Dropped by Briar Lasher, Ashen Cultist and others",
+      "item": "emberroot",
+      "monster_places": 27,
+      "name": "Emberroot",
+      "other": [
+        "herb patches (3)"
+      ],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 0.9,
+      "earliest_source_level": 1,
+      "first_use_level": 7,
+      "flags": [],
+      "hint": "Dropped by Broodhost, Plague Bloater and others",
+      "item": "ghoul_bile",
+      "monster_places": 41,
+      "name": "Ghoul Bile",
+      "other": [],
+      "uses": 2
+    },
+    {
+      "best_per_kill": 2.5,
+      "earliest_source_level": 2,
+      "first_use_level": 8,
+      "flags": [],
+      "hint": "Every champion (miniboss) drops 1-2. Dropped by Treasure Gremlin",
+      "item": "champion_essence",
+      "monster_places": 10,
+      "name": "Champion Essence",
+      "other": [
+        "every champion"
+      ],
+      "uses": 13
+    },
+    {
+      "best_per_kill": 1.05,
+      "earliest_source_level": 1,
+      "first_use_level": 8,
+      "flags": [],
+      "hint": "Dropped by Ogre Crusher, Kharvenn Chain-Bearer and others",
+      "item": "ogre_sinew",
+      "monster_places": 19,
+      "name": "Ogre Sinew",
+      "other": [],
+      "uses": 5
+    },
+    {
+      "best_per_kill": 3.0,
+      "earliest_source_level": 2,
+      "first_use_level": 14,
+      "flags": [],
+      "hint": "Dropped by Treasure Gremlin, Mimic and others. Signature of The Jade Sepulchre",
+      "item": "aether_shard",
+      "monster_places": 82,
+      "name": "Aether Shard",
+      "other": [],
+      "uses": 1
+    }
+  ],
+  "errors": [
+    "DUNGEON twinspire is not a dungeon"
+  ],
+  "first_craft": [
+    {
+      "goal": "Steel Ingot",
+      "kills": 21,
+      "limited_by": "iron_shard",
+      "westreach_clears": 0.5
+    },
+    {
+      "goal": "Tempered Weapon",
+      "kills": 41,
+      "limited_by": "iron_shard",
+      "westreach_clears": 1.0
+    },
+    {
+      "goal": "Tempered Armor",
+      "kills": 36,
+      "limited_by": "beast_hide",
+      "westreach_clears": 0.9
+    },
+    {
+      "goal": "Hunter's Charm",
+      "kills": 31,
+      "limited_by": "wolf_fang",
+      "westreach_clears": 0.8
+    },
+    {
+      "goal": "Fore-Tech rank 1",
+      "kills": 37,
+      "limited_by": "iron_shard",
+      "westreach_clears": 0.9
+    }
+  ],
+  "routes": [
+    {
+      "kills": 41.0,
+      "route": "westreach",
+      "units": {
+        "beast_hide": 6.9,
+        "bone_fragment": 5.5,
+        "brightcap": 1.0,
+        "ember_core": 0.2,
+        "emberroot": 0.1,
+        "firebomb": 0.2,
+        "glowcap_spore": 0.8,
+        "goblin_resin": 8.4,
+        "grave_dust": 3.1,
+        "iron_shard": 10.0,
+        "silverleaf": 3.1,
+        "slag_ember": 0.6,
+        "stolen_linen": 7.1,
+        "tide_pearl": 0.2,
+        "wolf_fang": 4.0
+      }
+    },
+    {
+      "kills": 52.0,
+      "route": "ruined_forest",
+      "units": {
+        "arcane_dust": 1.3,
+        "ash_sigil": 1.0,
+        "beast_hide": 12.7,
+        "bone_fragment": 15.5,
+        "brightcap": 0.6,
+        "ember_core": 0.6,
+        "emberroot": 0.4,
+        "firebomb": 0.1,
+        "frost_crystal": 0.4,
+        "ghoul_bile": 1.7,
+        "goblin_resin": 5.0,
+        "grave_dust": 9.2,
+        "iron_shard": 14.9,
+        "mirebloom": 0.6,
+        "ogre_sinew": 0.1,
+        "orc_tusk": 1.4,
+        "rime_shard": 0.2,
+        "shadow_silk": 2.1,
+        "silverleaf": 1.3,
+        "stolen_linen": 3.6,
+        "storm_essence": 0.3,
+        "wolf_fang": 6.1
+      }
+    },
+    {
+      "kills": 39.0,
+      "route": "catacombs",
+      "units": {
+        "aether_shard": 0.1,
+        "arcane_dust": 3.8,
+        "ash_sigil": 1.3,
+        "beast_hide": 1.2,
+        "bone_fragment": 22.0,
+        "brightcap": 1.3,
+        "ember_core": 0.4,
+        "emberroot": 0.3,
+        "frost_crystal": 0.7,
+        "ghoul_bile": 2.5,
+        "grave_dust": 15.3,
+        "iron_shard": 11.6,
+        "shadow_silk": 3.6,
+        "silverleaf": 0.6
+      }
+    },
+    {
+      "kills": 20.0,
+      "route": "warren floor 1",
+      "units": {
+        "beast_hide": 4.6,
+        "brightcap": 3.9,
+        "glowcap_spore": 5.3,
+        "shadow_silk": 1.0,
+        "silverleaf": 3.1
+      }
+    },
+    {
+      "kills": 12.0,
+      "route": "cellars floor 1",
+      "units": {
+        "aether_shard": 0.9,
+        "arcane_dust": 3.6,
+        "beast_hide": 0.6,
+        "champion_essence": 0.2,
+        "firebomb": 0.4,
+        "goblin_resin": 1.6,
+        "iron_shard": 5.1,
+        "star_glass": 0.4,
+        "stolen_linen": 5.7
+      }
+    },
+    {
+      "kills": 20.0,
+      "route": "deeps floor 1",
+      "units": {
+        "arcane_dust": 1.1,
+        "bone_fragment": 4.5,
+        "iron_shard": 7.8,
+        "mirebloom": 3.0,
+        "stolen_linen": 6.1,
+        "storm_essence": 0.4,
+        "tide_pearl": 3.9
+      }
+    }
+  ],
+  "unresolved": []
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_7d179b2b-7a4f-4554-a287-cd2168d2dc9c",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:38.235Z",
+  "updatedAt": "2026-10-02T21:12:38.277Z",
+  "startedAt": "2026-10-02T21:12:38.242Z",
+  "completedAt": "2026-10-02T21:12:38.277Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_7d179b2b-7a4f-4554-a287-cd2168d2dc9c\\receipt.json"
+}

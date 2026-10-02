@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_furniture_bench",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_bench.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_bench/1.1.0",
+ "source_sha256": "ba05a6d23a5a5a44da016757632070e47ff7587ce10e2f6d6d52328b4cf5489b",
+ "derived_sha256": "99ea4ec193790ef6fa47c6beda62fad4312a48de80ce920d97e05b96576e5180",
+ "scale": 2.1,
+ "scale_rule": [
+  "s",
+  2.1
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Wood": 170
+ },
+ "source_to_material": {
+  "wood": "BH_Wood"
+ },
+ "triangles": 170,
+ "surfaces": 1,
+ "source_triangles": 170,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.84,
+  0.987,
+  0.42
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

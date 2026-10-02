@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_talla\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_talla",
+      "category": "environment_prop",
+      "description": "Tall narrow rock. Intended use: Sparse rocky coast silhouettes",
+      "displayName": "kenney_nature_rock_talla",
+      "files": [
+        {
+          "bytes": 12072,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d"
+        },
+        {
+          "bytes": 1584,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "b3b67cc69467448e04859edb02fccbd523a7ded9d61286bb99ffdc5a1cbd2285"
+        },
+        {
+          "bytes": 790,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "5f811f2184527ff80649a12e8e47c2a08247305ef07fb63b3e2db48267991cbd"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7de0e0cf7aaaa767c98537ca6fef327b3303900848f74dea143d23c8229b1a26"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_1a101c5cda812f65e705a04c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:34.758Z"
+}

@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BALANCE L1 knight      single    10.8  aoe    20.6  ehp    2376  power    727.0
+BALANCE L1 mage        single    13.3  aoe    19.7  ehp     690  power    425.3
+BALANCE L1 ranger      single    13.3  aoe    14.1  ehp     926  power    416.7
+BALANCE L1 shadowblade single    17.0  aoe    34.9  ehp     916  power    737.4
+BALANCE L10 knight      single    39.7  aoe   152.8  ehp    5567  power   5811.3
+BALANCE L10 mage        single    29.7  aoe    59.6  ehp    2787  power   2221.0
+BALANCE L10 ranger      single    49.8  aoe    98.9  ehp    3046  power   3873.3
+BALANCE L10 shadowblade single    22.5  aoe    28.4  ehp    3042  power   1394.3
+BALANCE L20 knight      single   131.2  aoe   511.4  ehp    9653  power  25449.5
+BALANCE L20 mage        single   114.1  aoe   334.8  ehp    4934  power  13729.5
+BALANCE L20 ranger      single   125.2  aoe   466.5  ehp    5211  power  17446.5
+BALANCE L20 shadowblade single    49.2  aoe   130.0  ehp    5205  power   5769.9
+BALANCE L30 knight      single   230.7  aoe   686.0  ehp   13419  power  46083.1
+BALANCE L30 mage        single   285.2  aoe   837.4  ehp    7263  power  41648.1
+BALANCE L30 ranger      single   228.7  aoe  1243.1  ehp    8502  power  49163.7
+BALANCE L30 shadowblade single   100.5  aoe   288.9  ehp    7556  power  14811.2
+[FAIL] test_balance.gd — 1 tests, 16 checks, 12 failures (382954.8 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 knight power 727.0 is within 20% of the mean 576.6 (+26%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 mage power 425.3 is within 20% of the mean 576.6 (-26%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 ranger power 416.7 is within 20% of the mean 576.6 (-28%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 737.4 is within 20% of the mean 576.6 (+28%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 5811.3 is within 20% of the mean 3325.0 (+75%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 mage power 2221.0 is within 20% of the mean 3325.0 (-33%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1394.3 is within 20% of the mean 3325.0 (-58%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 25449.5 is within 20% of the mean 15598.9 (+63%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5769.9 is within 20% of the mean 15598.9 (-63%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 knight power 46083.1 is within 20% of the mean 37926.5 (+22%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 ranger power 49163.7 is within 20% of the mean 37926.5 (+30%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 14811.2 is within 20% of the mean 37926.5 (-61%)
+TOTAL: 16 checks, 12 failures
+WARNING: 250 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+exit=1

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_rocks_a\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_rocks_a",
+      "category": "environment_prop",
+      "description": "Grouped shoreline rocks. Intended use: Agdao harbour mouth and cove shore",
+      "displayName": "kenney_pirate_rocks_a",
+      "files": [
+        {
+          "bytes": 27644,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "df8f27bd88a9b624337b08adde53c73dd25ddabd52dbee1de9da412d68bb4f08"
+        },
+        {
+          "bytes": 1718,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6fe913558ed485ef5f90d457b15637f0a668ebe64fcc052a4ae9ba34f0fd3890"
+        },
+        {
+          "bytes": 783,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "ff29ee43111e4aee53f93c22c9b8dcc9686b9962a54fadf35333e5f95cbdb1c5"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c60347bb5387c2eff2bd53ce2f1a0f0c2f70a24b5653dde58de2d1d0abe85eca"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_43957b0569e5fd8893e5715c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:27.467Z"
+}

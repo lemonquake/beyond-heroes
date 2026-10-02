@@ -15,6 +15,7 @@ static func cast(runner: SkillRunner, skill: SkillDef, p: Dictionary, aim: Vecto
 				target.ensure_stats()
 				var offset := (target.global_position - at).slide(Vector3.UP)
 				var distance := maxf(0.0, offset.length() - target.body_radius - 0.5) * (1.0 - clampf(target.stats.get_stat(&"knockback_res"), 0.0, 1.0))
+				distance = minf(distance, Actor.MAX_KNOCK_DISTANCE)
 				# Sweep the actual body so instant movement cannot cross walls or terrain.
 				target.move_and_collide(-offset.normalized() * distance)
 				runner._hit(skill, target, target.receive_hit(req.clone(), caster, target.center()))

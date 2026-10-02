@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_tree_pinedefaulta",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_pine.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0",
+ "source_sha256": "60d8f352fa3659ed275e06cbddfecf8f92c8effe2977c2f2d7b29b6c9b582e46",
+ "derived_sha256": "ecd2eca31786551487610e049feaa31cc75c3c1976ba73655129295af2bd7ff9",
+ "scale": 5.4986,
+ "scale_rule": [
+  "h",
+  8.5
+ ],
+ "origin": "trunk base",
+ "collision": "trunk",
+ "materials": [
+  "BH_FoliageDark",
+  "BH_Bark"
+ ],
+ "part_faces": {
+  "BH_FoliageDark": 180,
+  "BH_Bark": 50
+ },
+ "source_to_material": {
+  "leafsDark": "BH_FoliageDark",
+  "woodBarkDark": "BH_Bark"
+ },
+ "triangles": 230,
+ "surfaces": 2,
+ "source_triangles": 230,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.925,
+  8.5,
+  2.925
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

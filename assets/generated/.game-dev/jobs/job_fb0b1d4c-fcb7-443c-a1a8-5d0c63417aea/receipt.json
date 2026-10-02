@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_platform_planks\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_platform_planks",
+      "category": "environment_prop",
+      "description": "Plank deck piece. Intended use: Dock repair vignette, visual only unless navigation updated",
+      "displayName": "kenney_pirate_platform_planks",
+      "files": [
+        {
+          "bytes": 6524,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "4313f45d4feb8cd01adbb4b4785f368c7df091f33e473dea536172868805b167"
+        },
+        {
+          "bytes": 1752,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "4fb2ae1bc01664afd91e154bba698c28b0e4367e01ff1a278b233a747b729804"
+        },
+        {
+          "bytes": 798,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "4cc1b561669bf172864dec350f03ae67ee23977ed60aa96c8f8bfd2867c7e958"
+        },
+        {
+          "bytes": 3649,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7671cad45dbe944567bb083ece859d4705474deaa12a97ee054bad454a141363"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_c8608183067c8e8439aac716",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:30.327Z"
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_tree_palmdetailedtall",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_palm_tall.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0",
+ "source_sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683",
+ "derived_sha256": "f0850fc58e6982514e27c084c2be44336aa21dbc29fa9d5580f5fa4b4d96ec4a",
+ "scale": 6.6738,
+ "scale_rule": [
+  "h",
+  9.5
+ ],
+ "origin": "trunk base",
+ "collision": "trunk",
+ "materials": [
+  "BH_Bark",
+  "BH_JungleLeaf"
+ ],
+ "part_faces": {
+  "BH_Bark": 36,
+  "BH_JungleLeaf": 300
+ },
+ "source_to_material": {
+  "woodBark": "BH_Bark",
+  "leafsGreen": "BH_JungleLeaf"
+ },
+ "triangles": 336,
+ "surfaces": 2,
+ "source_triangles": 336,
+ "source_meshes": 3,
+ "bounds_m": [
+  6.903,
+  9.5,
+  6.903
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_crate",
+  "category": "environment_prop",
+  "description": "Wooden cargo crate. Intended use: Agdao pier handling area and Westreach stolen cargo",
+  "displayName": "kenney_pirate_crate",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.5389999747276306,
+        0.7699999809265137,
+        0.6545000076293945
+      ],
+      "min": [
+        -0.5389999747276306,
+        0,
+        -0.6545000076293945
+      ],
+      "sizeMeters": [
+        1.0779999494552612,
+        0.7699999809265137,
+        1.309000015258789
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 19348,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 76,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 152,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

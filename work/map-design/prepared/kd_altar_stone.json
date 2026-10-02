@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_altar_stone",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_altar_stone.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0",
+ "source_sha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0",
+ "derived_sha256": "3ccf812b994bdfd5ca671c2db897070ada891368c4ddb32490cc75a2f5630f66",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Stone": 166
+ },
+ "source_to_material": {
+  "grey": "BH_Stone"
+ },
+ "triangles": 166,
+ "surfaces": 1,
+ "source_triangles": 166,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.079,
+  0.975,
+  1.306
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e04eb9d37f7c4a7f44988c72",
+  "assetId": "kenney_pirate_tool_paddle",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_tool_paddle",
+  "modelSha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1",
+  "manifestSha256": "f183c8b370bdef24ac0efffce3566683934e0bd71b081a1569bfab3139e909b3",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:24.807Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_tool_paddle\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

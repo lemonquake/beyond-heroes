@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_1a74d426e146dc05e18450bb",
+  "assetId": "kenney_nature_tree_palmshort",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_tree_palmshort",
+  "modelSha256": "d2526ca31c144a238820aa5c0f6183c5b9cf37fd3cc037932e637cf7c473ba27",
+  "manifestSha256": "267e2c971c91e518d65499a77637223ed43d0e221b9fcb29caf5a372a1834cfe",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:00.245Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_palmshort\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

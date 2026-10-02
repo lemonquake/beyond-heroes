@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_tablecross",
+  "category": "environment_prop",
+  "description": "Cross-braced table. Intended use: Guild meeting table and workshop",
+  "displayName": "kenney_furniture_tablecross",
+  "files": [
+    {
+      "bytes": 12140,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3"
+    },
+    {
+      "bytes": 1553,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "e19afbb4e259ff3cafbee7d1b3068c04566cdd645546026f3c7bd6168a4b8b7f"
+    },
+    {
+      "bytes": 842,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "a5d4308339eb9e598795aac5b748b443fdb681d5a7b0520eddff23f9c8601a5b"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "b7b7fa0e5a2fdbb1896990a3fe01b7e3a4ce8343daa0028ecf2f4aebdc9b291b"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_472a2b4ceca57de0fe6e8038",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_96569685-50a3-4a95-ada2-910f96c79123",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_structure_roof"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:27.831Z",
+  "updatedAt": "2026-10-02T21:13:27.885Z",
+  "startedAt": "2026-10-02T21:13:27.836Z",
+  "completedAt": "2026-10-02T21:13:27.885Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_96569685-50a3-4a95-ada2-910f96c79123\\receipt.json"
+}

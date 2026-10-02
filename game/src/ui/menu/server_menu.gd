@@ -124,7 +124,7 @@ func _header() -> Control:
 	tv.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(tv)
 	tv.add_child(UITheme.title("Beyond Heroes", _fs(40), UITheme.GOLD))
-	var sub := UITheme.label("Choose where your story is kept", _fs(18), UITheme.TEXT_DIM, UITheme.body_font())
+	var sub := UITheme.label("Choose How to Play", _fs(18), UITheme.TEXT_DIM, UITheme.body_font())
 	sub.name = "Subtitle"
 	tv.add_child(sub)
 	_status_pill = UITheme.label("Checking the official server…", _fs(17), UITheme.TEXT_DIM, UITheme.body_bold())
@@ -287,7 +287,7 @@ func _show_servers() -> void:
 	var official_note := "Signed in as %s" % Official.userid if Official.token != "" else ("%d saved account%s on this device" % [saved.size(), "" if saved.size() == 1 else "s"] if not saved.is_empty() else "Create an account or sign in")
 	row.add_child(_mode_card("crown", OFFICIAL_COLOR, "Official Server", _official_status_text(),
 		"Up to 12 players. Your characters are saved on the server and follow you to any device. Existing offline progress can be imported once.",
-		official_note, "Enter the Realm", _official_warning))
+		official_note, "Play Online", _official_warning))
 	row.add_child(_mode_card("save", OFFLINE_COLOR, "Offline Play", "Always available",
 		"No internet, no account. Continue your heroes on this device or start a new one.",
 		"Saves stay on this device", "Play Offline", func() -> void: selected.emit("offline", {})))
@@ -502,17 +502,29 @@ func _game_card(game: Dictionary) -> Control:
 
 func _show_settings() -> void:
 	_view = "settings"
-	_clear("Official Server Settings")
+	_clear("Server Settings")
 	var c := _centered_card(1000.0)
 	c.add_child(_heading("Server Address"))
-	c.add_child(_text("Use the address and public certificate supplied by the server owner. Account connections always verify encryption. Never share the server's private key.", _fs(17), UITheme.TEXT_DIM))
-	var address := _field(c, "Server address", "https://192.168.1.20:8443")
+	c.add_child(_text("Use the address the server owner gave you. Your connection to the server is always encrypted.", _fs(18), UITheme.TEXT_DIM))
+	var address := _field(c, "Server address", "https://game.example.com")
 	address.text = Official.url
-	var certificate := _field(c, "Public certificate file (blank for a public certificate authority)", "res://server/official_ca.crt")
+	# A server on a home computer signs its own certificate and its owner gives players a certificate file. Public servers need
+	# nothing here, so the file choice stays folded away unless one is already in use.
+	var certificate := LineEdit.new()
+	var advanced := VBoxContainer.new()
+	advanced.add_theme_constant_override("separation", 10)
+	advanced.visible = Official.certificate_path != "" and not Official.certificate_path.begins_with("res://")
+	var toggle := _button("Advanced: certificate file", func() -> void:
+		advanced.visible = not advanced.visible, c, false, 360.0)
+	c.add_child(advanced)
+	advanced.add_child(_text("Only needed when the server owner gave you a certificate file (a server run on a home computer). Leave it empty for a public server.", _fs(17), UITheme.TEXT_DIM))
+	advanced.add_child(UITheme.label("Certificate file", _fs(18), UITheme.TEXT_DIM, UITheme.body_bold()))
+	certificate.placeholder_text = "Empty: use the normal trusted certificates"
+	certificate.custom_minimum_size.y = 74.0 if _mobile() else 56.0
+	certificate.add_theme_font_size_override("font_size", _fs(22))
+	certificate.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	certificate.text = Official.certificate_path
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 12)
-	c.add_child(row)
+	advanced.add_child(certificate)
 	_button("Choose Certificate File", func() -> void:
 		var dialog := FileDialog.new()
 		dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -523,8 +535,12 @@ func _show_settings() -> void:
 			certificate.text = path
 			dialog.queue_free())
 		dialog.canceled.connect(dialog.queue_free)
-		dialog.popup_centered_ratio(0.75), row, false, 300.0)
-	_button("Save Settings", func() -> void:
+		dialog.popup_centered_ratio(0.75), advanced, false, 360.0)
+	advanced.add_child(_text("Never share a server's private key. Only its public certificate is ever needed here.", _fs(16), UITheme.TEXT_MUTED))
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	c.add_child(row)
+	_button("Save", func() -> void:
 		var error := Official.configure(address.text, certificate.text)
 		if error == "":
 			notify("Server settings saved.")

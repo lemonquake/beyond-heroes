@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_furniture_stoolbarsquare",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_stool_square.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0",
+ "source_sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+ "derived_sha256": "3e17c355413877ad6426dd7194dd3736781a89132d7ec5f00efa7254a14a3dde",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Wood",
+  "BH_Leather"
+ ],
+ "part_faces": {
+  "BH_Wood": 104,
+  "BH_Leather": 38
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "carpet": "BH_Leather"
+ },
+ "triangles": 142,
+ "surfaces": 2,
+ "source_triangles": 142,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.307,
+  0.81,
+  0.295
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

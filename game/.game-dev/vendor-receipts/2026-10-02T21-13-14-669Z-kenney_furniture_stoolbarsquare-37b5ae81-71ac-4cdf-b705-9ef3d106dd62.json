@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_1a2f4ca245f1ee867b253657",
+  "assetId": "kenney_furniture_stoolbarsquare",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_stoolbarsquare",
+  "modelSha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+  "manifestSha256": "6aded95317b782bdfc6eaf11b7845c581c3b311ed8deb60f270d4dff4e7fc2f6",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:14.669Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_stoolbarsquare\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

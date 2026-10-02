@@ -1,0 +1,40 @@
+{
+ "source_id": "kenney_nature_lily_large",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_lily.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0",
+ "source_sha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2",
+ "derived_sha256": "e32f5c514b317fe6ecde8c7d17d2b54c9126bc8d8f69198f16b1f67986602a76",
+ "scale": 3.0,
+ "scale_rule": [
+  "s",
+  3.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage",
+  "BH_FlowerWhite",
+  "BH_FoliageDark"
+ ],
+ "part_faces": {
+  "BH_Foliage": 47,
+  "BH_FlowerWhite": 28,
+  "BH_FoliageDark": 11
+ },
+ "source_to_material": {
+  "leafsGreen": "BH_Foliage",
+  "colorRed": "BH_FlowerWhite",
+  "leafsDark": "BH_FoliageDark"
+ },
+ "triangles": 86,
+ "surfaces": 3,
+ "source_triangles": 86,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.816,
+  0.294,
+  0.942
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_furniture_desk",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_desk.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_desk/1.1.0",
+ "source_sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+ "derived_sha256": "0070b4812932200b5f0c5f4158f472a8350d122088c365e7e2e7560d097bb456",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_Iron"
+ ],
+ "part_faces": {
+  "BH_Wood": 188,
+  "BH_Iron": 10
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "metal": "BH_Iron"
+ },
+ "triangles": 198,
+ "surfaces": 2,
+ "source_triangles": 198,
+ "source_meshes": 2,
+ "bounds_m": [
+  1.653,
+  0.865,
+  0.883
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_structure_roof.glb",
+    "fileBytes": 44596,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 636,
+    "triangleCount": 348,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -1.544030785560608,
+        0,
+        -1.6172595024108887
+      ],
+      "max": [
+        1.5414282083511353,
+        3.4000000953674316,
+        1.6165567636489868
+      ],
+      "sizeMeters": [
+        3.085458993911743,
+        3.4000000953674316,
+        3.2338162660598755
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_structure_roof.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 348,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        3.085458993911743,
+        3.4000000953674316,
+        3.2338162660598755
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_roof\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_structure_roof",
+        "category": "environment_prop",
+        "description": "Small timber canopy roof. Intended use: Cargo shelter; restyle and preserve camera visibility",
+        "displayName": "kenney_pirate_structure_roof",
+        "files": [
+          {
+            "bytes": 44596,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781"
+          },
+          {
+            "bytes": 1754,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "29c26e7daa6589b1a34b91005842532fa4b6ef20ce728981aa077f3a76d1af8e"
+          },
+          {
+            "bytes": 1088,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "13ca2a07b52b65417fbb947bc4f062182dadb7fabb51a0daf87abc4c1da8e4d1"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "67955b56a3b264682b6bc9347141895c8d954ddd68a74f5c60a1d026819c1765"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_9d2c1dc701a2ebe8c4824c03",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "d7518ffa7cf209b91dc07920e762f28706a367742edc45c27ae45c434b089329",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

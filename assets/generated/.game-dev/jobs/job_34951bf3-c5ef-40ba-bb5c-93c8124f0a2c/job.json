@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_34951bf3-c5ef-40ba-bb5c-93c8124f0a2c",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_candle_multiple"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:29.742Z",
+  "updatedAt": "2026-10-02T21:13:29.808Z",
+  "startedAt": "2026-10-02T21:13:29.748Z",
+  "completedAt": "2026-10-02T21:13:29.808Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_34951bf3-c5ef-40ba-bb5c-93c8124f0a2c\\receipt.json"
+}

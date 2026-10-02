@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_nature_grass",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_grass.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_grass/1.1.0",
+ "source_sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+ "derived_sha256": "e7575928c4866f09cb1447b4dfaab8a65ae8ce9b1eccf727d2772c04b7a3a060",
+ "scale": 1.378,
+ "scale_rule": [
+  "h",
+  0.35
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage"
+ ],
+ "part_faces": {
+  "BH_Foliage": 132
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage"
+ },
+ "triangles": 132,
+ "surfaces": 1,
+ "source_triangles": 132,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.525,
+  0.35,
+  0.54
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

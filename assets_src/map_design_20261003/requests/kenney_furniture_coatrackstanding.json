@@ -1,0 +1,29 @@
+{
+  "description": "Standing coat rack. Intended use: Tavern vestibule and guild reception",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/furniture-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+    "originalArchiveSha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+    "originalModelSha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+    "originalRelativePath": "sources/furniture-kit/Models/GLTF format/coatRackStanding.glb",
+    "licenseEvidence": "licenses/furniture-kit.txt",
+    "transformations": [],
+    "originalTextureDependencies": [],
+    "downloadDate": "2026-10-03"
+  }
+}

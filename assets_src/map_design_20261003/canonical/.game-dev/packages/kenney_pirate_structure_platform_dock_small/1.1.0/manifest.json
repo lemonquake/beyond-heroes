@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_pirate_structure_platform_dock_small",
+  "category": "environment_prop",
+  "description": "Small dock platform. Intended use: Supplemental mooring beside existing traversable pier",
+  "displayName": "kenney_pirate_structure_platform_dock_small",
+  "files": [
+    {
+      "bytes": 42276,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f"
+    },
+    {
+      "bytes": 1778,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2a03427b24430ff10c1718c151f919291d0ea36a3b09b68afb9218fdd8abc8ce"
+    },
+    {
+      "bytes": 1118,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "e60a62515fe23113274add0008594e9476de5204562f9a712fa69d57882cc875"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "2aabfc2bb57c90ff6a0ae9c731290560fb86fdbe7dc17de171eb71222eb1f010"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_477b39eb76cb67bea66a6fa1",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

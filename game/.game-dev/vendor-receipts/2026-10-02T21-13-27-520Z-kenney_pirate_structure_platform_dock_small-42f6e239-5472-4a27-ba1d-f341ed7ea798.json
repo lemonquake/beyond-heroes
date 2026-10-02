@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_477b39eb76cb67bea66a6fa1",
+  "assetId": "kenney_pirate_structure_platform_dock_small",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_structure_platform_dock_small",
+  "modelSha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f",
+  "manifestSha256": "739a8d5e75b4a0d60dc552701205eb67ccb9b81e67a9daa4382ed2c31f706c93",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:27.520Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_platform_dock_small\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

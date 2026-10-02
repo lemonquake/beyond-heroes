@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_sidetable\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_sidetable",
+      "category": "environment_prop",
+      "description": "Small side table. Intended use: Bedside storage and document corner",
+      "displayName": "kenney_furniture_sidetable",
+      "files": [
+        {
+          "bytes": 8800,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472"
+        },
+        {
+          "bytes": 1592,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "7ac8231d65a5e0107e4d895f0bee36e4a37a47fc9e92f51c4f685664017be533"
+        },
+        {
+          "bytes": 802,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "27ee1b83fdc110925cdbee327f27552952cb917e85665a0d0b664ba6aa4703a7"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c3eba91b394d3c5654fce52bbecc005d6ddd7b9d937b522301755b8aa9e50937"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_620a87466717c3cb96b76e2f",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:59.902Z"
+}

@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_coatrackstanding",
+  "category": "environment_prop",
+  "description": "Standing coat rack. Intended use: Tavern vestibule and guild reception",
+  "displayName": "kenney_furniture_coatrackstanding",
+  "files": [
+    {
+      "bytes": 13288,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91"
+    },
+    {
+      "bytes": 1623,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "36431593922a8feb5db7f18a12c48dbd091a8f2958a7c78b6be61206ab056833"
+    },
+    {
+      "bytes": 854,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "5c85f9da4626f8ebfe7a27d630bdf6d732ec59b0264f64456deaf5b0cd831a97"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "75504cc42f31280fb13aac80ff6873f1e58734e05a0d152c0c4df970e012fdb0"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_2b35cacbc798193213a84065",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_f8584ecb16718669f1a7df05",
+  "assetId": "kenney_furniture_tableround",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_tableround",
+  "modelSha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+  "manifestSha256": "9980bf2358306c0238e0d8061d0581822c523f87e4a5ee3fa5b7e318f2fa4a2a",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:15.339Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_tableround\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

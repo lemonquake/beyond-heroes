@@ -71,6 +71,7 @@ func compose() -> void:
 	dungeon_gate(&"orrery", og.pos, og.yaw)
 	keep_clear(og.pos.x, og.pos.y, 8.0)
 	_greenery()
+	_map_design()
 	_arena()
 	spawn(&"start", Vector3(0, 0, 9.0), 180.0, true)
 	spawn(&"north_road", Vector3(7.5, 0, -47.0), 0.0, true)
@@ -775,3 +776,47 @@ func _arena() -> void:
 		Vector3(gate.x - c.x, 0, gate.y - c.y), Vector3(door.x, SAND_Y, door.y - 1.0))
 	grounds.position = Vector3(c.x, SAND_Y, c.y)
 	root.add_child(grounds)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the camp's functions made evident — fuel stacked at the fire's edge, stores by the lodge,
+# tools by Greta's forge, a few more pitched tents for the lodgers — and a waiting and loading place where the boardwalk
+# meets the jetty, with a rowboat tied alongside. The bonfire ring, training yard, register, quartermaster row, roads
+# and the jetty lane stay open. No town furniture: this is a camp.
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	return road_dist(x, z) > r + 2.0 and is_clear(x, z, r * 0.6) and not _jetty_lane(x, z, r * 0.5) 		and Vector2(x, z).distance_to(BONFIRE) > r + 6.0 and Vector2(x, z).distance_to(ARENA) > ARENA_R + r + 6.0
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	var bf := Vector3(BONFIRE.x, 0, BONFIRE.y)
+	place_near("timber_store", bf + Vector3(-9.0, 0, 6.0), bf, 8.0, 14.0, 30.0)
+	place_near("supply_corner", Vector3(LODGE.x + 6.5, 0, LODGE.y + 1.0), Vector3(LODGE.x, 0, LODGE.y), 5.0, 10.0, -20.0)
+	place_near("tool_corner", Vector3(FORGE.x + 4.0, 0, FORGE.y - 4.0), Vector3(FORGE.x, 0, FORGE.y), 4.0, 9.0, -90.0)
+	for c in [Vector3(-26.0, 0, -4.0), Vector3(7.0, 0, -27.0)]:
+		place_near("tent_pitch", c, c, 0.0, 5.0, rad_to_deg(atan2(BONFIRE.x - c.x, BONFIRE.y - c.z)))
+	place_near("camp_seating", Vector3(22.0, 0, 18.0), Vector3(20.0, 0, 24.0), 4.0, 8.0, 0.0)
+	# ---- the Marsh Jetty: a waiting and loading place on the bank, a rowboat tied at the landing ------------------
+	var root2: Vector2 = DataZarael.WY_JETTY_ROOT
+	var wait := Vector3(root2.x - 5.5, 0, root2.y + 4.6)
+	if not touches_solid(Vector3(wait.x, height_at(wait.x, wait.z), wait.z), 1.4):
+		vignette("waiting_place", wait, 180.0, {"check": false})
+	vignette("moored_rowboat", Vector3(root2.x + 4.0, MARSH_Y + 0.08, root2.y + 5.6), 95.0, {"on_ground": false, "check": false})
+	# lilies and reeds in the still pools south of the jetty, away from the boards
+	var lr := RandomNumberGenerator.new()
+	lr.seed = hash("wyman_marsh")
+	for i in 14:
+		var x := MARSH_X + 3.0 + lr.randf() * 14.0
+		var z := 34.0 + lr.randf() * 16.0
+		if _jetty_lane(x, z, 2.0):
+			continue
+		decor("kd_lily", Vector3(x, MARSH_Y + 0.02, z), lr.randf() * 360.0, lr.randf_range(0.8, 1.1), false)
+	for i in 18:
+		var x := MARSH_X - 3.0 + lr.randf() * 4.0
+		var z := -30.0 + lr.randf() * 50.0
+		if _jetty_lane(x, z, 2.0) or absf(z - DataZarael.WY_WALK[0].y) < 4.0:
+			continue
+		decor("kd_grass_large", Vector3(x, 0, z), lr.randf() * 360.0, lr.randf_range(1.0, 1.5))
+	# ambient accents: the bonfire, the marsh at the jetty, the field forge
+	accent(Vector3(BONFIRE.x, 1.0, BONFIRE.y), &"fire_campfire", -12.0)
+	accent(Vector3(DataZarael.WY_JETTY_ROOT.x + 6.0, MARSH_Y + 0.5, DataZarael.WY_JETTY_ROOT.y), &"water_wave", -18.0)
+	accent(Vector3(FORGE.x, 1.0, FORGE.y), &"torch_crackle", -14.0)

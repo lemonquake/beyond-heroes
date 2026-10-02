@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_dd67d13f-80f5-4c09-98fc-3d03d7d1ba95",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_rock_largea\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:49.111Z",
+  "updatedAt": "2026-10-02T21:11:49.160Z",
+  "startedAt": "2026-10-02T21:11:49.117Z",
+  "completedAt": "2026-10-02T21:11:49.159Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-469969dc-0656-4d3a-a267-b12adb0e5274' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_rock_largea\r'",
+    "retryable": false
+  }
+}

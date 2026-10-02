@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:36.656Z",
+  "destination": {
+    "assetId": "kenney_pirate_structure_roof",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4e97dc09f942b0ec6d56c3997580ea9b48d8969cf40d5ce97b03cfdb9b94f81b",
+  "packageId": "pkg_9d2c1dc701a2ebe8c4824c03",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 44596,
+    "fileName": "kenney_pirate_structure_roof.glb",
+    "sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781"
+  }
+}

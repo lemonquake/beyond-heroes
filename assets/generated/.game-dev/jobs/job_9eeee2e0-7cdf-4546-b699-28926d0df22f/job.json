@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_9eeee2e0-7cdf-4546-b699-28926d0df22f",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_chest/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_chest\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:26.469Z",
+  "updatedAt": "2026-10-02T21:12:26.525Z",
+  "startedAt": "2026-10-02T21:12:26.475Z",
+  "completedAt": "2026-10-02T21:12:26.525Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-b3503ebd-0884-4a07-bb04-c0a71cf7e6e2' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_chest\r'",
+    "retryable": false
+  }
+}

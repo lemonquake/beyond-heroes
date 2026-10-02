@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_wood\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_altar_wood",
+      "category": "environment_prop",
+      "description": "Timber ritual altar. Intended use: Forest cult shelter and abandoned dungeon chapel",
+      "displayName": "kenney_graveyard_altar_wood",
+      "files": [
+        {
+          "bytes": 28368,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f1702fc2cbbbb417670ef96bd543209ac5764afdb4e43dbdf267328b62f75968"
+        },
+        {
+          "bytes": 1746,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "0f7c8c5f8e6d5228358e6b62fb1bc46d78c6d5ecd1018e9520126faf6e784e4e"
+        },
+        {
+          "bytes": 808,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "829c7e731aa7ef3268699f67158a12a0834daf2f7c96301a5917c9042cbd2935"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "cc970c6f545c7e0a85412026fab10a5af4b7acae3c9223efe2829dcd8e4cca8f"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_d99791ee1a768c638a710f9a",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:37.050Z"
+}

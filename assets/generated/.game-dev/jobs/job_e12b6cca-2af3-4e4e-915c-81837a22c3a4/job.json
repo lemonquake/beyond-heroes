@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_e12b6cca-2af3-4e4e-915c-81837a22c3a4",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smalla\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:31.977Z",
+  "updatedAt": "2026-10-02T20:01:32.008Z",
+  "startedAt": "2026-10-02T20:01:31.981Z",
+  "completedAt": "2026-10-02T20:01:32.008Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_e12b6cca-2af3-4e4e-915c-81837a22c3a4\\receipt.json"
+}

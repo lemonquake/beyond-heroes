@@ -1,0 +1,37 @@
+{
+  "description": "Detailed stone floor insert. Intended use: Sparse threshold accent and repaired temple paving",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/modular-dungeon-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/modular-dungeon-kit/7bed87605b-1771926065/kenney_modular-dungeon-kit_1.0.zip",
+    "originalArchiveSha256": "dd0aa6776db8912283cdca60161dee6a8839bbda3558eba2ea501419eb5b4623",
+    "originalModelSha256": "403a357e1d59760f171d9def9db4ff01859372bde885dad2322e1519dafa4351",
+    "originalRelativePath": "sources/modular-dungeon-kit/Models/GLB format/template-floor-detail-a.glb",
+    "licenseEvidence": "licenses/modular-dungeon-kit.txt",
+    "transformations": [
+      "Embedded external image bytes in GLB; geometry/material values unchanged"
+    ],
+    "originalTextureDependencies": [
+      {
+        "uri": "Textures/colormap.png",
+        "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+        "bytes": 28309
+      }
+    ],
+    "downloadDate": "2026-10-03"
+  }
+}

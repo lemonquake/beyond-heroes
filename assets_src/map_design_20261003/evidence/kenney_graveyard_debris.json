@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_debris.glb",
+    "fileBytes": 36156,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 456,
+    "triangleCount": 240,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10965
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.2877454161643982,
+        0,
+        -0.3107205629348755
+      ],
+      "max": [
+        0.2484707236289978,
+        0.1599999964237213,
+        0.23654921352863312
+      ],
+      "sizeMeters": [
+        0.536216139793396,
+        0.1599999964237213,
+        0.5472697764635086
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_debris.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 240,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        0.536216139793396,
+        0.1599999964237213,
+        0.5472697764635086
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_debris\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_graveyard_debris",
+        "category": "environment_prop",
+        "description": "Stone debris pile. Intended use: Collapsed crypt wall or exhausted mine edge",
+        "displayName": "kenney_graveyard_debris",
+        "files": [
+          {
+            "bytes": 36156,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "64a7536b6fc9dc3ec913c6fa187096ecd483e6e2d2bbda7556c0ba43dfdce2c8"
+          },
+          {
+            "bytes": 1729,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "fa3a78ac7a1c05165f4606edafe01bc02f145e12b4b86affc252d797e3afd82e"
+          },
+          {
+            "bytes": 1094,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "7f62b43aa025295f7fe786a13872a86fcbd3bbf23f00aef6340c2b41d4c75f6c"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "ab484fec6d3b5051d42059e4ed5f97792664d6393da746ced73aa8835ccbb579"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_5fcccccd6808ae8795ca96d1",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "bf584bb5a4c1a7d4b7aed9ced00473a8678e9d402db1cfafc17e84e46aa2d42a",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+      "bytes": 10965
+    }
+  ]
+}

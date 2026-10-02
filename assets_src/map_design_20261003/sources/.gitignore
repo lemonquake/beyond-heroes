@@ -1,0 +1,4 @@
+# Original full ZIPs/alternate formats stay locally available outside Godot.
+# The portable selected GLB packages, licenses and hashes are tracked in ../.
+*
+!.gitignore

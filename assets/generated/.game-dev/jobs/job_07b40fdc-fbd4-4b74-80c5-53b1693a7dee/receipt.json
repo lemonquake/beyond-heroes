@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bench\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_bench",
+      "category": "environment_prop",
+      "description": "Plain bench. Intended use: Town resting corners, harbour seating and tavern wall",
+      "displayName": "kenney_furniture_bench",
+      "files": [
+        {
+          "bytes": 10756,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "ba05a6d23a5a5a44da016757632070e47ff7587ce10e2f6d6d52328b4cf5489b"
+        },
+        {
+          "bytes": 1557,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "a2fd734f6f1b4358796c080ade4cf47efd3066b199a8dc63cc64ee4dfc759701"
+        },
+        {
+          "bytes": 795,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "4d3bc8826439caf2b1e0685ea6e86c8e2cec30275b226d39990cadaeb1bad186"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "19f5e27ca24cee2df7969481247ef3457d96c47502584ac1f5ba0e0020215d40"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_313b26d89be76d8e257ea2c4",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:51.969Z"
+}

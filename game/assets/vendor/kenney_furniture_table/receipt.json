@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:02.024Z",
+  "destination": {
+    "assetId": "kenney_furniture_table",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "ee1c70a43b40b969cb7d0ca39f51ba207a814bd745f7c2def8bf9a93130b8c2d",
+  "packageId": "pkg_f0c7867e55d132c1dbcff6e3",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 8196,
+    "fileName": "table.glb",
+    "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61"
+  }
+}

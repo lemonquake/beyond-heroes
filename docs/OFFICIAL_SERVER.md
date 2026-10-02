@@ -61,6 +61,33 @@ is offline; the shared internet list needs that service. Character storage is ce
 but guild/world messages retain their existing peer synchronization behavior; this is not a
 persistent MMO world database.
 
+## What the server decides (and what it does not)
+
+Be exact when describing the official server. Combat is **not** server-authoritative.
+
+| Decided by the server (cannot be forged by a modified game) | Decided by players' game clients (can be forged) |
+| --- | --- |
+| Who an account is; passwords (scrypt), sessions, recovery | Whether a monster was hit, for how much, and whether it died |
+| Which character an account may open; one session per account | Experience, gold, loot and quest rewards that follow a kill |
+| Save revisions, replayed saves, stale saves, class changes | The contents of a save (the server checks structure and ranges, not how it was earned) |
+| Trades: both owners approve matching offers, both bags change in one transaction | Where a hero stands and what it does; which map a hero is on |
+| Twelve-player capacity; protocol version; who may call internal routes | Which monsters exist on a map: the first hero on a map runs them for everyone there |
+
+What changed in the beta hardening pass, and what did not:
+
+* Fixed: every network message from another machine is now bounded and typed before use (`NetGuard`): profiles keep known keys,
+  strings and levels are clamped; non-finite positions and numbers are refused; snapshots, effects, pings, chat and map changes are
+  rate limited per sender; a reported hit must come from a hero near the monster and is clamped to a possible size; checkpoints are
+  size-limited. A modified client can no longer crash a handler with a wrong type or flood the room.
+* Fixed: the coordinator now keeps each map's latest checkpoint, so when the hero running a map leaves, the next hero takes over its
+  live monsters and cleared camps instead of an empty map. Covered by the integration probe.
+* Added: confirmed saves that jump implausibly (level +10, gold +20 million, experience going backwards, an impossible experience
+  rate) are recorded in the audit table as `suspicious_progress:*` for the operator to review. They are **not** rejected, because
+  a false rejection would discard an honest player's progress.
+* Not fixed: a modified client can still invent kills and rewards, and can claim any hero state in an import. That is acceptable for a
+  trusted friends beta and **blocks an open community or competitive release**. Closing it means the server (or a trusted referee
+  process) simulating combat and rewards, which is an architecture change, not a patch.
+
 ## Set up this PC
 
 **To start the configured server on this PC, double-click `Start Official Server.cmd` in the

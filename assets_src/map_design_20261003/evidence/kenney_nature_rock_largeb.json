@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\rock_largeB.glb",
+    "fileBytes": 8560,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 3,
+    "vertexCount": 489,
+    "triangleCount": 85,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 3,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.38335755467414856,
+        -0.05000000000000059,
+        -0.5077307224273682
+      ],
+      "max": [
+        0.38335755467414856,
+        0.3802540123462677,
+        0.5077307224273682
+      ],
+      "sizeMeters": [
+        0.7667151093482971,
+        0.4302540123462683,
+        1.0154614448547363
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\rock_largeB.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 85,
+      "materials": 3,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.7667151093482971,
+        0.4302540123462683,
+        1.0154614448547363
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_largeb\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_rock_largeb",
+        "category": "environment_prop",
+        "description": "Second large boulder silhouette. Intended use: Asymmetric rock clusters beside broad walking spaces",
+        "displayName": "kenney_nature_rock_largeb",
+        "files": [
+          {
+            "bytes": 8560,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b"
+          },
+          {
+            "bytes": 1634,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "6f3e7acada8e7c55f5a6b0941d5fc0d28297d3333ee955cc1dc1ddb51bf15b82"
+          },
+          {
+            "bytes": 828,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "f33233e71df8a089f67360b5254b542f5ad19e0b485769301671989731ba0852"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "64708b2d1656cd84e7ffcec1b03decc1dd9b7f8eb123450043b74b475d48b525"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_3a50be0d89e4a3b8ec503d7d",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b",
+  "embedded_textures": []
+}

@@ -1,0 +1,37 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh033/quaternius/ultimate_monsters/Blob/glTF/Mushnub.gltf",
+ "out": "res://assets/characters/bh033/sporeling_q.scn",
+ "height": 1.0,
+ "tint": [
+  1.0,
+  0.95,
+  0.95
+ ],
+ "saturation": 0.75,
+ "value": 0.3,
+ "rough": 0.9,
+ "clips": {
+  "idle": "Idle",
+  "idle_look": "Idle",
+  "alert": "Yes",
+  "walk": "Walk",
+  "run": "Walk",
+  "run_combat": "Walk",
+  "axe_1": "Bite_Front",
+  "axe_2": "Jump",
+  "cast_quick": "Dance",
+  "hit_light": "HitRecieve",
+  "hit_heavy": "HitRecieve",
+  "stagger_small": "HitRecieve",
+  "knockback": "HitRecieve",
+  "death": "Death",
+  "death_back": "Death"
+ },
+ "hue_map": [
+  [
+   0.4,
+   0.66,
+   0.88
+  ]
+ ]
+}

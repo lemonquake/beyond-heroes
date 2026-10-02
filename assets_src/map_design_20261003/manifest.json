@@ -1,0 +1,4122 @@
+{
+  "date": "2026-10-03",
+  "count": 114,
+  "assets": [
+    {
+      "number": 1,
+      "id": "kenney_nature_tree_oak",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_oak.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0",
+      "package_id": "pkg_774bb27c8f586964c9a16d0a",
+      "description": "Broad oak with a rounded crown",
+      "placement": "Malasugue outskirts and Olivar lakeside shade",
+      "source_sha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3",
+      "package_model_sha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3",
+      "embedded_textures": [],
+      "triangles": 196,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.6405540108680725,
+        1.2262399196624756,
+        0.7396479845046997
+      ],
+      "bytes": 14644,
+      "source_bytes": 14644,
+      "preview": "previews/kenney_nature_tree_oak.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 2,
+      "id": "kenney_nature_tree_default",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_default.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0",
+      "package_id": "pkg_4a076b6777155ec87a1cedcf",
+      "description": "Compact broadleaf tree",
+      "placement": "Residential gardens and Westreach hedgerow breaks",
+      "source_sha256": "562d29638c902de3c7bee465d3a53bb77117efbc392ae04ed894faf6b5dc691d",
+      "package_model_sha256": "562d29638c902de3c7bee465d3a53bb77117efbc392ae04ed894faf6b5dc691d",
+      "embedded_textures": [],
+      "triangles": 114,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.7550000548362732,
+        1.7078874111175537,
+        0.6538490056991577
+      ],
+      "bytes": 9428,
+      "source_bytes": 9428,
+      "preview": "previews/kenney_nature_tree_default.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 3,
+      "id": "kenney_nature_tree_detailed",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_detailed.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0",
+      "package_id": "pkg_75bb6e3fd64efc2c62e38584",
+      "description": "Branching broadleaf tree",
+      "placement": "A few focal trees beside town courtyards",
+      "source_sha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b",
+      "package_model_sha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b",
+      "embedded_textures": [],
+      "triangles": 402,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.8471150398254395,
+        1.3324170112609863,
+        0.7616024911403656
+      ],
+      "bytes": 31412,
+      "source_bytes": 31412,
+      "preview": "previews/kenney_nature_tree_detailed.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 4,
+      "id": "kenney_nature_tree_thin",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_thin.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0",
+      "package_id": "pkg_017dde884273893e4f2d4715",
+      "description": "Narrow broadleaf tree",
+      "placement": "Olivar lanes where wide crowns obstruct the camera",
+      "source_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+      "package_model_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+      "embedded_textures": [],
+      "triangles": 228,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.6804364919662476,
+        1.4902979135513306,
+        0.6165225207805634
+      ],
+      "bytes": 17200,
+      "source_bytes": 17200,
+      "preview": "previews/kenney_nature_tree_thin.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 5,
+      "id": "kenney_nature_tree_small",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_small.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0",
+      "package_id": "pkg_cb837a0b9ec13a85a5869b78",
+      "description": "Small broadleaf tree",
+      "placement": "Gardens behind houses, away from door approaches",
+      "source_sha256": "d26c0eeed65cc681667f50042ef23ec72ce47ae3b39837bfeec170b05ba6ab6a",
+      "package_model_sha256": "d26c0eeed65cc681667f50042ef23ec72ce47ae3b39837bfeec170b05ba6ab6a",
+      "embedded_textures": [],
+      "triangles": 62,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.35463735461235046,
+        1.1100374460220337,
+        0.4094999432563782
+      ],
+      "bytes": 6500,
+      "source_bytes": 6500,
+      "preview": "previews/kenney_nature_tree_small.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 6,
+      "id": "kenney_nature_tree_pinedefaulta",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_pineDefaultA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0",
+      "package_id": "pkg_78203da265fdaed4d69e2471",
+      "description": "Straight layered conifer",
+      "placement": "Ruined Forest silhouette and high ground",
+      "source_sha256": "60d8f352fa3659ed275e06cbddfecf8f92c8effe2977c2f2d7b29b6c9b582e46",
+      "package_model_sha256": "60d8f352fa3659ed275e06cbddfecf8f92c8effe2977c2f2d7b29b6c9b582e46",
+      "embedded_textures": [],
+      "triangles": 230,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.5319600105285645,
+        1.5458356142044067,
+        0.5319600105285645
+      ],
+      "bytes": 17220,
+      "source_bytes": 17220,
+      "preview": "previews/kenney_nature_tree_pinedefaulta.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 7,
+      "id": "kenney_nature_tree_pinerounda",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_pineRoundA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0",
+      "package_id": "pkg_0679f7759861878a68d00bad",
+      "description": "Round tiered conifer",
+      "placement": "Forest borders with a different crown silhouette",
+      "source_sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+      "package_model_sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+      "embedded_textures": [],
+      "triangles": 204,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.6170188188552856,
+        1.3664371967315674,
+        0.7124720215797424
+      ],
+      "bytes": 14488,
+      "source_bytes": 14488,
+      "preview": "previews/kenney_nature_tree_pinerounda.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 8,
+      "id": "kenney_nature_tree_pinetalla",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_pineTallA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0",
+      "package_id": "pkg_0abc697b759ea8c5f904a4bf",
+      "description": "Tall conifer",
+      "placement": "Distant tree line and selected forest landmarks",
+      "source_sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196",
+      "package_model_sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196",
+      "embedded_textures": [],
+      "triangles": 78,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.38627292215824127,
+        1.5296059846878052,
+        0.39195001125335693
+      ],
+      "bytes": 7200,
+      "source_bytes": 7200,
+      "preview": "previews/kenney_nature_tree_pinetalla.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 9,
+      "id": "kenney_nature_tree_palm",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_palm.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0",
+      "package_id": "pkg_ea48ee188a5dd65b515e294f",
+      "description": "Straight palm",
+      "placement": "Agdao harbour gardens and Tideglass Cove",
+      "source_sha256": "27bbb23d26ed788d84de6df2f7fab0acc3fe0ff16c7d08cdcfa1fffcb11de324",
+      "package_model_sha256": "27bbb23d26ed788d84de6df2f7fab0acc3fe0ff16c7d08cdcfa1fffcb11de324",
+      "embedded_textures": [],
+      "triangles": 186,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.9354897141456604,
+        1.5145906209945679,
+        1.012763500213623
+      ],
+      "bytes": 13616,
+      "source_bytes": 13616,
+      "preview": "previews/kenney_nature_tree_palm.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 10,
+      "id": "kenney_nature_tree_palmbend",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_palmBend.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0",
+      "package_id": "pkg_6d118650739a3b717105c9a0",
+      "description": "Leaning palm",
+      "placement": "Agdao waterfront silhouette, leaning away from walkways",
+      "source_sha256": "8af9dae16ce3c03183f9457996ebdd135167199514e8f4f944ee2bd82828d5c9",
+      "package_model_sha256": "8af9dae16ce3c03183f9457996ebdd135167199514e8f4f944ee2bd82828d5c9",
+      "embedded_textures": [],
+      "triangles": 200,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.9354897141456604,
+        1.3799107074737549,
+        1.012763500213623
+      ],
+      "bytes": 14820,
+      "source_bytes": 14820,
+      "preview": "previews/kenney_nature_tree_palmbend.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 11,
+      "id": "kenney_nature_tree_palmshort",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_palmShort.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0",
+      "package_id": "pkg_1a74d426e146dc05e18450bb",
+      "description": "Low palm",
+      "placement": "Agdao small planted courtyards",
+      "source_sha256": "d2526ca31c144a238820aa5c0f6183c5b9cf37fd3cc037932e637cf7c473ba27",
+      "package_model_sha256": "d2526ca31c144a238820aa5c0f6183c5b9cf37fd3cc037932e637cf7c473ba27",
+      "embedded_textures": [],
+      "triangles": 190,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        1.0343291759490967,
+        1.0562318563461304,
+        1.0343291759490967
+      ],
+      "bytes": 15596,
+      "source_bytes": 15596,
+      "preview": "previews/kenney_nature_tree_palmshort.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 12,
+      "id": "kenney_nature_tree_palmdetailedtall",
+      "kit": "nature-kit",
+      "kind": "tree",
+      "source_model": "sources/nature-kit/Models/GLTF format/tree_palmDetailedTall.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0",
+      "package_id": "pkg_aba9a4793524330752d50b20",
+      "description": "Detailed tall palm",
+      "placement": "Sparse focal trees beside the harbour approach",
+      "source_sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683",
+      "package_model_sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683",
+      "embedded_textures": [],
+      "triangles": 336,
+      "meshes": 3,
+      "surfaces": 3,
+      "materials": 2,
+      "size_metres": [
+        1.0343290567398071,
+        1.423466974036579,
+        1.0343290567398071
+      ],
+      "bytes": 28204,
+      "source_bytes": 28204,
+      "preview": "previews/kenney_nature_tree_palmdetailedtall.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 13,
+      "id": "kenney_nature_plant_bush",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/plant_bush.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0",
+      "package_id": "pkg_650645298bb5c29cefef99a8",
+      "description": "Rounded shrub",
+      "placement": "House foundations and village lot boundaries",
+      "source_sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+      "package_model_sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+      "embedded_textures": [],
+      "triangles": 32,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.3959999978542328,
+        0.24444358050823212,
+        0.3959999978542328
+      ],
+      "bytes": 4396,
+      "source_bytes": 4396,
+      "preview": "previews/kenney_nature_plant_bush.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 14,
+      "id": "kenney_nature_plant_bushlarge",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/plant_bushLarge.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0",
+      "package_id": "pkg_39762a6284adb1f5d6d0457f",
+      "description": "Large shrub mass",
+      "placement": "Olivar garden corners and Agdao hill edges",
+      "source_sha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02",
+      "package_model_sha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02",
+      "embedded_textures": [],
+      "triangles": 60,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.3743099868297577,
+        0.24293301999568942,
+        0.3356877863407135
+      ],
+      "bytes": 6436,
+      "source_bytes": 6436,
+      "preview": "previews/kenney_nature_plant_bushlarge.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 15,
+      "id": "kenney_nature_plant_bushsmall",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/plant_bushSmall.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0",
+      "package_id": "pkg_ac64975883efec5942345202",
+      "description": "Small shrub",
+      "placement": "Low edging beside stairs and houses",
+      "source_sha256": "a9620a7d1fb165ae68d323676f80dbb2a9e3aafb21110d18d18d90b07026b91d",
+      "package_model_sha256": "a9620a7d1fb165ae68d323676f80dbb2a9e3aafb21110d18d18d90b07026b91d",
+      "embedded_textures": [],
+      "triangles": 16,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.382977157831192,
+        0.20729249715805054,
+        0.3363422751426697
+      ],
+      "bytes": 3212,
+      "source_bytes": 3212,
+      "preview": "previews/kenney_nature_plant_bushsmall.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 16,
+      "id": "kenney_nature_plant_flattall",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/plant_flatTall.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0",
+      "package_id": "pkg_f1adb1c2b5025b5f7cc5c0a8",
+      "description": "Tall leafy plant",
+      "placement": "Agdao planters and Coilwood trail margins",
+      "source_sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633",
+      "package_model_sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633",
+      "embedded_textures": [],
+      "triangles": 32,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.2716556191444397,
+        0.28430941700935364,
+        0.2716556191444397
+      ],
+      "bytes": 3480,
+      "source_bytes": 3480,
+      "preview": "previews/kenney_nature_plant_flattall.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 17,
+      "id": "kenney_nature_grass",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/grass.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_grass/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_grass/1.1.0",
+      "package_id": "pkg_265a18a96963c134984c271d",
+      "description": "Small grass tuft",
+      "placement": "Sparse path-to-ground transitions",
+      "source_sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+      "package_model_sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+      "embedded_textures": [],
+      "triangles": 132,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.381073996424675,
+        0.2540000081062317,
+        0.3921827971935272
+      ],
+      "bytes": 11496,
+      "source_bytes": 11496,
+      "preview": "previews/kenney_nature_grass.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 18,
+      "id": "kenney_nature_grass_large",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/grass_large.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0",
+      "package_id": "pkg_930d7ce0942d9cac7ac0d8c2",
+      "description": "Large grass tuft",
+      "placement": "Grouped banks, avoiding central travel lanes",
+      "source_sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd",
+      "package_model_sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd",
+      "embedded_textures": [],
+      "triangles": 224,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4089978337287903,
+        0.2540000081062317,
+        0.4078889787197113
+      ],
+      "bytes": 18504,
+      "source_bytes": 18504,
+      "preview": "previews/kenney_nature_grass_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 19,
+      "id": "kenney_nature_grass_leafs",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/grass_leafs.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0",
+      "package_id": "pkg_c072973af3e82e8011bb3bea",
+      "description": "Broad leaf ground plant",
+      "placement": "Agdao jungle edge and Coilwood undergrowth",
+      "source_sha256": "8bc4c0b17c2e64c34e1acbf7c4a2fd8c04cfcd7155328e61767887b2ced112c7",
+      "package_model_sha256": "8bc4c0b17c2e64c34e1acbf7c4a2fd8c04cfcd7155328e61767887b2ced112c7",
+      "embedded_textures": [],
+      "triangles": 36,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.23448599874973297,
+        0.14249999821186082,
+        0.2573082521557808
+      ],
+      "bytes": 4608,
+      "source_bytes": 4608,
+      "preview": "previews/kenney_nature_grass_leafs.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 20,
+      "id": "kenney_nature_flower_yellowa",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/flower_yellowA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0",
+      "package_id": "pkg_25b2595c03983dff5d73f8ef",
+      "description": "Yellow flowering stem",
+      "placement": "Olivar gardens and domestic planted beds",
+      "source_sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+      "package_model_sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+      "embedded_textures": [],
+      "triangles": 76,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.15909751877188683,
+        0.19249999523162842,
+        0.1810590624809265
+      ],
+      "bytes": 7120,
+      "source_bytes": 7120,
+      "preview": "previews/kenney_nature_flower_yellowa.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 21,
+      "id": "kenney_nature_flower_purplea",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/flower_purpleA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0",
+      "package_id": "pkg_70f829b7ac0c3438c0d11887",
+      "description": "Purple flowering stem",
+      "placement": "Malasugue house garden accents",
+      "source_sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+      "package_model_sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+      "embedded_textures": [],
+      "triangles": 76,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.15909751877188683,
+        0.24249999225139618,
+        0.1810590624809265
+      ],
+      "bytes": 7112,
+      "source_bytes": 7112,
+      "preview": "previews/kenney_nature_flower_purplea.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 22,
+      "id": "kenney_nature_mushroom_tangroup",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/mushroom_tanGroup.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0",
+      "package_id": "pkg_3f77431dab70dd610362a87f",
+      "description": "Cluster of pale mushrooms",
+      "placement": "Damp forest logs and crypt threshold edges",
+      "source_sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e",
+      "package_model_sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e",
+      "embedded_textures": [],
+      "triangles": 144,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.2696309983730316,
+        0.2504880130290985,
+        0.2541965991258621
+      ],
+      "bytes": 14956,
+      "source_bytes": 14956,
+      "preview": "previews/kenney_nature_mushroom_tangroup.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 23,
+      "id": "kenney_nature_lily_large",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/lily_large.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0",
+      "package_id": "pkg_e3ce3663255a25515b8bd8f6",
+      "description": "Large lily pad",
+      "placement": "Olivar sheltered lake edge and marsh pools",
+      "source_sha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2",
+      "package_model_sha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2",
+      "embedded_textures": [],
+      "triangles": 86,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.2718626856803894,
+        0.09799999743700027,
+        0.3139200210571289
+      ],
+      "bytes": 8044,
+      "source_bytes": 8044,
+      "preview": "previews/kenney_nature_lily_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 24,
+      "id": "kenney_nature_hanging_moss",
+      "kit": "nature-kit",
+      "kind": "foliage",
+      "source_model": "sources/nature-kit/Models/GLTF format/hanging_moss.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0",
+      "package_id": "pkg_ce7ffd1716bd47c85245b0d6",
+      "description": "Hanging moss strands",
+      "placement": "Sparse damp ruin details; test opacity and overdraw",
+      "source_sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+      "package_model_sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+      "embedded_textures": [],
+      "triangles": 52,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.15983359515666962,
+        0.47848010063171387,
+        0.034999996423721313
+      ],
+      "bytes": 4776,
+      "source_bytes": 4776,
+      "preview": "previews/kenney_nature_hanging_moss.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 25,
+      "id": "kenney_nature_rock_largea",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_largeA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0",
+      "package_id": "pkg_7e53efd9531b51f9c6c09644",
+      "description": "Large irregular boulder",
+      "placement": "Westreach coastal clusters and Agdao shore anchors",
+      "source_sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+      "package_model_sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+      "embedded_textures": [],
+      "triangles": 80,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.7849066853523254,
+        0.25977596640586886,
+        1.0154614448547363
+      ],
+      "bytes": 7552,
+      "source_bytes": 7552,
+      "preview": "previews/kenney_nature_rock_largea.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 26,
+      "id": "kenney_nature_rock_largeb",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_largeB.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0",
+      "package_id": "pkg_3a50be0d89e4a3b8ec503d7d",
+      "description": "Second large boulder silhouette",
+      "placement": "Asymmetric rock clusters beside broad walking spaces",
+      "source_sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b",
+      "package_model_sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b",
+      "embedded_textures": [],
+      "triangles": 85,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.7667151093482971,
+        0.4302540123462683,
+        1.0154614448547363
+      ],
+      "bytes": 8560,
+      "source_bytes": 8560,
+      "preview": "previews/kenney_nature_rock_largeb.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 27,
+      "id": "kenney_nature_rock_largec",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_largeC.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0",
+      "package_id": "pkg_a1cac19e953d1b736f8d297b",
+      "description": "Third large boulder silhouette",
+      "placement": "Cliff foot and forest clearing boundary",
+      "source_sha256": "23aee8b727adeaf260207af3e0615dc69aa766c6d87de1d44cbc8c2711d74dd1",
+      "package_model_sha256": "23aee8b727adeaf260207af3e0615dc69aa766c6d87de1d44cbc8c2711d74dd1",
+      "embedded_textures": [],
+      "triangles": 72,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        1.064409852027893,
+        0.321112006902695,
+        1.0156620740890503
+      ],
+      "bytes": 7004,
+      "source_bytes": 7004,
+      "preview": "previews/kenney_nature_rock_largec.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 28,
+      "id": "kenney_nature_rock_smalla",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_smallA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0",
+      "package_id": "pkg_19d092d84a5a2451c4fda100",
+      "description": "Small irregular rock",
+      "placement": "Transition scatter around larger rocks",
+      "source_sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1",
+      "package_model_sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1",
+      "embedded_textures": [],
+      "triangles": 16,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.36079999804496765,
+        0.19122400879859924,
+        0.36079999804496765
+      ],
+      "bytes": 3044,
+      "source_bytes": 3044,
+      "preview": "previews/kenney_nature_rock_smalla.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 29,
+      "id": "kenney_nature_rock_smallb",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_smallB.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0",
+      "package_id": "pkg_e12627e0e8b2163aa65a2c34",
+      "description": "Second small rock silhouette",
+      "placement": "Shore and farm-edge accents",
+      "source_sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763",
+      "package_model_sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763",
+      "embedded_textures": [],
+      "triangles": 24,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.36079999804496765,
+        0.17679201066493988,
+        0.36079999804496765
+      ],
+      "bytes": 3528,
+      "source_bytes": 3528,
+      "preview": "previews/kenney_nature_rock_smallb.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 30,
+      "id": "kenney_nature_rock_smallflata",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_smallFlatA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0",
+      "package_id": "pkg_82ee8930ac58b1b252a2f4bf",
+      "description": "Flat low rock",
+      "placement": "Ground transitions and stream banks",
+      "source_sha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21",
+      "package_model_sha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21",
+      "embedded_textures": [],
+      "triangles": 20,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.4957897365093231,
+        0.06494399160146713,
+        0.4295773506164551
+      ],
+      "bytes": 3300,
+      "source_bytes": 3300,
+      "preview": "previews/kenney_nature_rock_smallflata.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 31,
+      "id": "kenney_nature_rock_talla",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/rock_tallA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0",
+      "package_id": "pkg_8eeb019899e746435f92c55a",
+      "description": "Tall narrow rock",
+      "placement": "Sparse rocky coast silhouettes",
+      "source_sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+      "package_model_sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+      "embedded_textures": [],
+      "triangles": 136,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.9830688834190369,
+        0.9959259033203125,
+        0.6832107901573181
+      ],
+      "bytes": 12072,
+      "source_bytes": 12072,
+      "preview": "previews/kenney_nature_rock_talla.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 32,
+      "id": "kenney_nature_stone_largea",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/stone_largeA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0",
+      "package_id": "pkg_5f8436b1aecbe1f5d583e4d8",
+      "description": "Large stone boulder",
+      "placement": "Pale inland rock and terrace garden anchors",
+      "source_sha256": "fe486a13775e833b1aca99413a89e013f300841de80f42ecd44ceaf43720f17b",
+      "package_model_sha256": "fe486a13775e833b1aca99413a89e013f300841de80f42ecd44ceaf43720f17b",
+      "embedded_textures": [],
+      "triangles": 80,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.7849066853523254,
+        0.25977596640586886,
+        1.0154614448547363
+      ],
+      "bytes": 7124,
+      "source_bytes": 7124,
+      "preview": "previews/kenney_nature_stone_largea.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 33,
+      "id": "kenney_nature_stone_smallflata",
+      "kit": "nature-kit",
+      "kind": "rock",
+      "source_model": "sources/nature-kit/Models/GLTF format/stone_smallFlatA.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0",
+      "package_id": "pkg_f0fb7eae659de4fe84bc8153",
+      "description": "Flat pale stone",
+      "placement": "Olivar shore, ruin floor edges and garden trim",
+      "source_sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a",
+      "package_model_sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a",
+      "embedded_textures": [],
+      "triangles": 20,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4957897365093231,
+        0.06494399160146713,
+        0.4295773506164551
+      ],
+      "bytes": 2872,
+      "source_bytes": 2872,
+      "preview": "previews/kenney_nature_stone_smallflata.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 34,
+      "id": "kenney_nature_stump_old",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/stump_old.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0",
+      "package_id": "pkg_1bde02d67e024c7272a60d93",
+      "description": "Weathered tree stump",
+      "placement": "Ruined Forest logging remnants",
+      "source_sha256": "4c2d2da34804c1662c6a776a9d60fe4449e6f6fdd50914bfec7d5cca3e9ceddb",
+      "package_model_sha256": "4c2d2da34804c1662c6a776a9d60fe4449e6f6fdd50914bfec7d5cca3e9ceddb",
+      "embedded_textures": [],
+      "triangles": 120,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.3565270006656647,
+        0.26649996638298035,
+        0.3709999918937683
+      ],
+      "bytes": 9564,
+      "source_bytes": 9564,
+      "preview": "previews/kenney_nature_stump_old.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 35,
+      "id": "kenney_nature_stump_rounddetailed",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/stump_roundDetailed.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0",
+      "package_id": "pkg_bfdc3da7ae0f0a76086e637d",
+      "description": "Cut stump with irregular surface",
+      "placement": "Westreach woodcutting patch and Wyman firewood corner",
+      "source_sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768",
+      "package_model_sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768",
+      "embedded_textures": [],
+      "triangles": 96,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.3565270006656647,
+        0.20649999380111694,
+        0.3709999918937683
+      ],
+      "bytes": 8188,
+      "source_bytes": 8188,
+      "preview": "previews/kenney_nature_stump_rounddetailed.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 36,
+      "id": "kenney_nature_log",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/log.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_log/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_log/1.1.0",
+      "package_id": "pkg_46ed0eca9980d81ced3e3db1",
+      "description": "Fallen log",
+      "placement": "Forest floor composition and simple camp seating",
+      "source_sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6",
+      "package_model_sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6",
+      "embedded_textures": [],
+      "triangles": 200,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.23396100848913193,
+        0.1732050925498877,
+        0.7099999785423279
+      ],
+      "bytes": 14288,
+      "source_bytes": 14288,
+      "preview": "previews/kenney_nature_log.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 37,
+      "id": "kenney_nature_log_stack",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/log_stack.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0",
+      "package_id": "pkg_324612651728a4aa623454a3",
+      "description": "Stacked cut timber",
+      "placement": "Wyman supply corner and Malasugue forge fuel",
+      "source_sha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68",
+      "package_model_sha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68",
+      "embedded_textures": [],
+      "triangles": 184,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.42471714317798615,
+        0.34641020894050456,
+        0.7099999785423279
+      ],
+      "bytes": 10896,
+      "source_bytes": 10896,
+      "preview": "previews/kenney_nature_log_stack.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 38,
+      "id": "kenney_nature_fence_planks",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/fence_planks.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0",
+      "package_id": "pkg_ea2add7e500306c4c47de686",
+      "description": "Plank fence span",
+      "placement": "Westreach farm boundaries and house lots",
+      "source_sha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9",
+      "package_model_sha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9",
+      "embedded_textures": [],
+      "triangles": 96,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1,
+        0.34502729773521423,
+        0.09589999914169312
+      ],
+      "bytes": 7720,
+      "source_bytes": 7720,
+      "preview": "previews/kenney_nature_fence_planks.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 39,
+      "id": "kenney_nature_fence_gate",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/fence_gate.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0",
+      "package_id": "pkg_21388b31dbf28730c2f2edcc",
+      "description": "Farm fence gate",
+      "placement": "Garden and field entrances with a clear passage",
+      "source_sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436",
+      "package_model_sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436",
+      "embedded_textures": [],
+      "triangles": 524,
+      "meshes": 2,
+      "surfaces": 5,
+      "materials": 3,
+      "size_metres": [
+        1,
+        0.34502729773521423,
+        0.07000001390320865
+      ],
+      "bytes": 27652,
+      "source_bytes": 27652,
+      "preview": "previews/kenney_nature_fence_gate.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 40,
+      "id": "kenney_nature_pot_small",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/pot_small.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0",
+      "package_id": "pkg_f7cfd962294f01e456e13736",
+      "description": "Small earthen pot",
+      "placement": "Herbs, kitchen storage and market table grouping",
+      "source_sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8",
+      "package_model_sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8",
+      "embedded_textures": [],
+      "triangles": 72,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.32344961166381836,
+        0.2679999768733978,
+        0.2801155745983124
+      ],
+      "bytes": 7004,
+      "source_bytes": 7004,
+      "preview": "previews/kenney_nature_pot_small.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 41,
+      "id": "kenney_nature_pot_large",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/pot_large.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0",
+      "package_id": "pkg_be8ca0dee8e8568a3c3abea9",
+      "description": "Large earthen pot",
+      "placement": "Agdao courtyard planters and town storage",
+      "source_sha256": "57e60214bc6ab1dc3764c9ffe80091ff45f2bfd49fbc313c1b68dcaab1537aef",
+      "package_model_sha256": "57e60214bc6ab1dc3764c9ffe80091ff45f2bfd49fbc313c1b68dcaab1537aef",
+      "embedded_textures": [],
+      "triangles": 68,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.5635964274406433,
+        0.20000000298023224,
+        0.48808884620666504
+      ],
+      "bytes": 6168,
+      "source_bytes": 6168,
+      "preview": "previews/kenney_nature_pot_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 42,
+      "id": "kenney_nature_crop_carrot",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/crop_carrot.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0",
+      "package_id": "pkg_53d1901568252e5ad2c873ae",
+      "description": "Carrot produce",
+      "placement": "Westreach farm beds and market produce display",
+      "source_sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8",
+      "package_model_sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8",
+      "embedded_textures": [],
+      "triangles": 148,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.34314197301864624,
+        0.6194037199020386,
+        0.34314197301864624
+      ],
+      "bytes": 12664,
+      "source_bytes": 12664,
+      "preview": "previews/kenney_nature_crop_carrot.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 43,
+      "id": "kenney_nature_crop_pumpkin",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/crop_pumpkin.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0",
+      "package_id": "pkg_11fbdd63f46c808d7354656d",
+      "description": "Pumpkin produce",
+      "placement": "Market baskets and farm storage clusters",
+      "source_sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+      "package_model_sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+      "embedded_textures": [],
+      "triangles": 120,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.441270112991333,
+        0.33382999897003174,
+        0.45194411277770996
+      ],
+      "bytes": 10840,
+      "source_bytes": 10840,
+      "preview": "previews/kenney_nature_crop_pumpkin.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 44,
+      "id": "kenney_nature_crops_wheatstageb",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/crops_wheatStageB.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0",
+      "package_id": "pkg_dc991b53a93804b70efe3403",
+      "description": "Mature wheat patch",
+      "placement": "Small authored Westreach farm beds",
+      "source_sha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852",
+      "package_model_sha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852",
+      "embedded_textures": [],
+      "triangles": 360,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.5396078824996948,
+        0.5349356532096863,
+        0.4466991424560547
+      ],
+      "bytes": 30040,
+      "source_bytes": 30040,
+      "preview": "previews/kenney_nature_crops_wheatstageb.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 45,
+      "id": "kenney_nature_crops_bamboostageb",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/crops_bambooStageB.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0",
+      "package_id": "pkg_0cd47a3397ee30b0dedf2c43",
+      "description": "Mature bamboo patch",
+      "placement": "Sparse Agdao back gardens and Coilwood framing",
+      "source_sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6",
+      "package_model_sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6",
+      "embedded_textures": [],
+      "triangles": 564,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.34009458124637604,
+        0.8899999260902405,
+        0.30800777673721313
+      ],
+      "bytes": 40144,
+      "source_bytes": 40144,
+      "preview": "previews/kenney_nature_crops_bamboostageb.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 46,
+      "id": "kenney_nature_tent_smallopen",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/tent_smallOpen.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0",
+      "package_id": "pkg_812d87960ee97b0deb0f8cee",
+      "description": "Small open tent",
+      "placement": "Wyman and survivor camp edge, preserve entrances",
+      "source_sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd",
+      "package_model_sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd",
+      "embedded_textures": [],
+      "triangles": 224,
+      "meshes": 1,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.5475999712944031,
+        0.5611308217048647,
+        0.6663999855518341
+      ],
+      "bytes": 13604,
+      "source_bytes": 13604,
+      "preview": "previews/kenney_nature_tent_smallopen.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 47,
+      "id": "kenney_nature_campfire_stones",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/campfire_stones.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0",
+      "package_id": "pkg_8e7cb954ca65fc75726cbdf8",
+      "description": "Stone campfire ring",
+      "placement": "Camp seating group; reuse existing fire effects",
+      "source_sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+      "package_model_sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+      "embedded_textures": [],
+      "triangles": 264,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.540837898850441,
+        0.07775100320577633,
+        0.5155070424079895
+      ],
+      "bytes": 17344,
+      "source_bytes": 17344,
+      "preview": "previews/kenney_nature_campfire_stones.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 48,
+      "id": "kenney_nature_canoe",
+      "kit": "nature-kit",
+      "kind": "prop",
+      "source_model": "sources/nature-kit/Models/GLTF format/canoe.glb",
+      "model": "canonical/.game-dev/packages/kenney_nature_canoe/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_nature_canoe/1.1.0",
+      "package_id": "pkg_0dfc868f843cf35e40344096",
+      "description": "Simple canoe hull",
+      "placement": "Olivar dock or cove mooring, not a new travel mechanic",
+      "source_sha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941",
+      "package_model_sha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941",
+      "embedded_textures": [],
+      "triangles": 200,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.30000001192092896,
+        0.18250000476837158,
+        1.149999976158142
+      ],
+      "bytes": 15780,
+      "source_bytes": 15780,
+      "preview": "previews/kenney_nature_canoe.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 49,
+      "id": "kenney_furniture_bench",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bench.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bench/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bench/1.1.0",
+      "package_id": "pkg_7dc92b74c3070ffd1c984f49",
+      "description": "Plain bench",
+      "placement": "Town resting corners, harbour seating and tavern wall",
+      "source_sha256": "ba05a6d23a5a5a44da016757632070e47ff7587ce10e2f6d6d52328b4cf5489b",
+      "package_model_sha256": "ba05a6d23a5a5a44da016757632070e47ff7587ce10e2f6d6d52328b4cf5489b",
+      "embedded_textures": [],
+      "triangles": 170,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4000000059604645,
+        0.4699999988079071,
+        0.20000000298023224
+      ],
+      "bytes": 10756,
+      "source_bytes": 10756,
+      "preview": "previews/kenney_furniture_bench.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 50,
+      "id": "kenney_furniture_chair",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/chair.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_chair/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_chair/1.1.0",
+      "package_id": "pkg_64ec9e112cf4fbc0973d5a9d",
+      "description": "Plain timber chair",
+      "placement": "Tavern tables and domestic interiors",
+      "source_sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883",
+      "package_model_sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883",
+      "embedded_textures": [],
+      "triangles": 170,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.20000000298023224,
+        0.4699999988079071,
+        0.20000000298023224
+      ],
+      "bytes": 10756,
+      "source_bytes": 10756,
+      "preview": "previews/kenney_furniture_chair.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 51,
+      "id": "kenney_furniture_chairrounded",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/chairRounded.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0",
+      "package_id": "pkg_cc7b79a2be013f5d29b6037a",
+      "description": "Rounded-back chair",
+      "placement": "Council and guild meeting rooms after timber restyle",
+      "source_sha256": "53f4933ec547179c499f04dbda1231cf44b83ec82c7f4ab981cdf680aee5c973",
+      "package_model_sha256": "53f4933ec547179c499f04dbda1231cf44b83ec82c7f4ab981cdf680aee5c973",
+      "embedded_textures": [],
+      "triangles": 280,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.20000000298023224,
+        0.45499998331069946,
+        0.20000000298023224
+      ],
+      "bytes": 17156,
+      "source_bytes": 17156,
+      "preview": "previews/kenney_furniture_chairrounded.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 52,
+      "id": "kenney_furniture_stoolbarsquare",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/stoolBarSquare.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0",
+      "package_id": "pkg_1a2f4ca245f1ee867b253657",
+      "description": "Square stool",
+      "placement": "Tavern counter and smithy work corner",
+      "source_sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+      "package_model_sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+      "embedded_textures": [],
+      "triangles": 142,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.15349998697638512,
+        0.4049999713897705,
+        0.14762400835752487
+      ],
+      "bytes": 9784,
+      "source_bytes": 9784,
+      "preview": "previews/kenney_furniture_stoolbarsquare.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 53,
+      "id": "kenney_furniture_table",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/table.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_table/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_table/1.1.0",
+      "package_id": "pkg_f0c7867e55d132c1dbcff6e3",
+      "description": "Rectangular table",
+      "placement": "Tavern eating group and netmender work area",
+      "source_sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "package_model_sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "embedded_textures": [],
+      "triangles": 120,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.8414879441261292,
+        0.3267339766025543,
+        0.44737333059310913
+      ],
+      "bytes": 8196,
+      "source_bytes": 8196,
+      "preview": "previews/kenney_furniture_table.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 54,
+      "id": "kenney_furniture_tableround",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/tableRound.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0",
+      "package_id": "pkg_f8584ecb16718669f1a7df05",
+      "description": "Round table",
+      "placement": "Small tavern seating groups",
+      "source_sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+      "package_model_sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+      "embedded_textures": [],
+      "triangles": 80,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.6928203105926514,
+        0.36673396080732346,
+        0.800000011920929
+      ],
+      "bytes": 6444,
+      "source_bytes": 6444,
+      "preview": "previews/kenney_furniture_tableround.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 55,
+      "id": "kenney_furniture_tablecross",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/tableCross.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0",
+      "package_id": "pkg_472a2b4ceca57de0fe6e8038",
+      "description": "Cross-braced table",
+      "placement": "Guild meeting table and workshop",
+      "source_sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3",
+      "package_model_sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3",
+      "embedded_textures": [],
+      "triangles": 178,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.8521200370788574,
+        0.3474133336544037,
+        0.44737332344055175
+      ],
+      "bytes": 12140,
+      "source_bytes": 12140,
+      "preview": "previews/kenney_furniture_tablecross.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 56,
+      "id": "kenney_furniture_tablecloth",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/tableCloth.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0",
+      "package_id": "pkg_b85b2ce9bfdbeee44958068e",
+      "description": "Cloth-covered table",
+      "placement": "Market or domestic dining after linen recolour",
+      "source_sha256": "64de52b5c4370724c29feefd68a65b157c55c88592e2096987bbce007ae80bcb",
+      "package_model_sha256": "64de52b5c4370724c29feefd68a65b157c55c88592e2096987bbce007ae80bcb",
+      "embedded_textures": [],
+      "triangles": 144,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.8414879441261292,
+        0.3267339766025543,
+        0.44737333059323725
+      ],
+      "bytes": 9920,
+      "source_bytes": 9920,
+      "preview": "previews/kenney_furniture_tablecloth.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 57,
+      "id": "kenney_furniture_sidetable",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/sideTable.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0",
+      "package_id": "pkg_39efd406d36504d4f1ac9b2d",
+      "description": "Small side table",
+      "placement": "Bedside storage and document corner",
+      "source_sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+      "package_model_sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+      "embedded_textures": [],
+      "triangles": 118,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.5344754550606012,
+        0.38440755009651184,
+        0.21999999321997166
+      ],
+      "bytes": 8800,
+      "source_bytes": 8800,
+      "preview": "previews/kenney_furniture_sidetable.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 58,
+      "id": "kenney_furniture_sidetabledrawers",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/sideTableDrawers.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0",
+      "package_id": "pkg_56e6b8030c33ff467ea6a9e5",
+      "description": "Drawer side table",
+      "placement": "Keeper and cartographer storage",
+      "source_sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+      "package_model_sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+      "embedded_textures": [],
+      "triangles": 238,
+      "meshes": 3,
+      "surfaces": 4,
+      "materials": 3,
+      "size_metres": [
+        0.5344754550606012,
+        0.38440755009651184,
+        0.2222999926669693
+      ],
+      "bytes": 19072,
+      "source_bytes": 19072,
+      "preview": "previews/kenney_furniture_sidetabledrawers.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 59,
+      "id": "kenney_furniture_desk",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/desk.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_desk/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_desk/1.1.0",
+      "package_id": "pkg_482e5ef30f7d289aa87fa725",
+      "description": "Writing desk",
+      "placement": "Cartographer and guild administration",
+      "source_sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "package_model_sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "embedded_textures": [],
+      "triangles": 198,
+      "meshes": 2,
+      "surfaces": 3,
+      "materials": 2,
+      "size_metres": [
+        0.7344754431396723,
+        0.38440755009651184,
+        0.39229999445510866
+      ],
+      "bytes": 15048,
+      "source_bytes": 15048,
+      "preview": "previews/kenney_furniture_desk.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 60,
+      "id": "kenney_furniture_bookcaseopen",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bookcaseOpen.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0",
+      "package_id": "pkg_d6c05cd0a99ba7ace3b74ac9",
+      "description": "Tall open bookcase",
+      "placement": "Cartographer and Lantern House library wall",
+      "source_sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "package_model_sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "embedded_textures": [],
+      "triangles": 320,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4000000059604645,
+        0.8799999356269836,
+        0.25
+      ],
+      "bytes": 18020,
+      "source_bytes": 18020,
+      "preview": "previews/kenney_furniture_bookcaseopen.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 61,
+      "id": "kenney_furniture_bookcaseopenlow",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bookcaseOpenLow.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0",
+      "package_id": "pkg_e65a06adfc7d5e3b0a08dc24",
+      "description": "Low open bookcase",
+      "placement": "Guild room divider without camera obstruction",
+      "source_sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "package_model_sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "embedded_textures": [],
+      "triangles": 184,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4000000059604645,
+        0.4000000059604645,
+        0.25
+      ],
+      "bytes": 11520,
+      "source_bytes": 11520,
+      "preview": "previews/kenney_furniture_bookcaseopenlow.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 62,
+      "id": "kenney_furniture_bookcaseclosed",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bookcaseClosed.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0",
+      "package_id": "pkg_e58a9b3b99878a042a5efa14",
+      "description": "Closed timber bookcase",
+      "placement": "Keeper house and council archives",
+      "source_sha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047",
+      "package_model_sha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047",
+      "embedded_textures": [],
+      "triangles": 372,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4000000059604645,
+        0.8499999642372131,
+        0.25
+      ],
+      "bytes": 23132,
+      "source_bytes": 23132,
+      "preview": "previews/kenney_furniture_bookcaseclosed.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 63,
+      "id": "kenney_furniture_bookcaseclosedwide",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bookcaseClosedWide.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0",
+      "package_id": "pkg_954fc0e2975349273e5e7aff",
+      "description": "Wide closed bookcase",
+      "placement": "Guild House archival wall",
+      "source_sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "package_model_sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "embedded_textures": [],
+      "triangles": 372,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.800000011920929,
+        0.7899999618530273,
+        0.25
+      ],
+      "bytes": 23140,
+      "source_bytes": 23140,
+      "preview": "previews/kenney_furniture_bookcaseclosedwide.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 64,
+      "id": "kenney_furniture_books",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/books.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_books/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_books/1.1.0",
+      "package_id": "pkg_5b38d7fea2220bc7f82d2ce6",
+      "description": "Small stack of books",
+      "placement": "Cartographer desk and council reading table",
+      "source_sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "package_model_sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "embedded_textures": [],
+      "triangles": 62,
+      "meshes": 1,
+      "surfaces": 4,
+      "materials": 4,
+      "size_metres": [
+        0.15044759213924408,
+        0.10390225797891617,
+        0.09449999779462814
+      ],
+      "bytes": 6864,
+      "source_bytes": 6864,
+      "preview": "previews/kenney_furniture_books.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 65,
+      "id": "kenney_furniture_bedsingle",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bedSingle.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0",
+      "package_id": "pkg_319616bc8c0ea5dc7fb66f7a",
+      "description": "Single bed",
+      "placement": "Existing domestic interiors after linen and wood restyle",
+      "source_sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "package_model_sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "embedded_textures": [],
+      "triangles": 214,
+      "meshes": 3,
+      "surfaces": 6,
+      "materials": 4,
+      "size_metres": [
+        0.5709999895372528,
+        0.37499999999996686,
+        1.125
+      ],
+      "bytes": 18636,
+      "source_bytes": 18636,
+      "preview": "previews/kenney_furniture_bedsingle.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 66,
+      "id": "kenney_furniture_beddouble",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bedDouble.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0",
+      "package_id": "pkg_534cb8ed6dbb22ebb3961a3c",
+      "description": "Double bed",
+      "placement": "Hald house sleeping corner; verify room clearance",
+      "source_sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "package_model_sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "embedded_textures": [],
+      "triangles": 264,
+      "meshes": 4,
+      "surfaces": 6,
+      "materials": 4,
+      "size_metres": [
+        0.9559999929219009,
+        0.375,
+        1.125
+      ],
+      "bytes": 23368,
+      "source_bytes": 23368,
+      "preview": "previews/kenney_furniture_beddouble.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 67,
+      "id": "kenney_furniture_bedbunk",
+      "kit": "furniture-kit",
+      "kind": "furniture",
+      "source_model": "sources/furniture-kit/Models/GLTF format/bedBunk.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0",
+      "package_id": "pkg_24614f2c0fc75fb7de19ec8c",
+      "description": "Bunk bed",
+      "placement": "Wyman lodging only if an existing interior supports it",
+      "source_sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "package_model_sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "embedded_textures": [],
+      "triangles": 580,
+      "meshes": 5,
+      "surfaces": 5,
+      "materials": 3,
+      "size_metres": [
+        0.5709999895372528,
+        0.8499999642372131,
+        1.0950000286102295
+      ],
+      "bytes": 40784,
+      "source_bytes": 40784,
+      "preview": "previews/kenney_furniture_bedbunk.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 68,
+      "id": "kenney_furniture_pillow",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/pillow.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0",
+      "package_id": "pkg_cbd9d58b7c2933157863966d",
+      "description": "Simple pillow",
+      "placement": "Existing beds; remove modern-looking material gloss",
+      "source_sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+      "package_model_sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+      "embedded_textures": [],
+      "triangles": 50,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.23000000417232513,
+        0.22216293215751648,
+        0.08848358690738678
+      ],
+      "bytes": 5044,
+      "source_bytes": 5044,
+      "preview": "previews/kenney_furniture_pillow.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 69,
+      "id": "kenney_furniture_rugrectangle",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/rugRectangle.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0",
+      "package_id": "pkg_bd3a83c1c16d1dcf4e2d5d2e",
+      "description": "Rectangular rug",
+      "placement": "Tavern and guild seating area anchor",
+      "source_sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "package_model_sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "embedded_textures": [],
+      "triangles": 28,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        1.5699999332427979,
+        0.009999999776482582,
+        0.9200000166893005
+      ],
+      "bytes": 3188,
+      "source_bytes": 3188,
+      "preview": "previews/kenney_furniture_rugrectangle.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 70,
+      "id": "kenney_furniture_ruground",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/rugRound.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0",
+      "package_id": "pkg_ec4be0d05e5beac9c1e099b0",
+      "description": "Round rug",
+      "placement": "Council seating group and domestic corner",
+      "source_sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "package_model_sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "embedded_textures": [],
+      "triangles": 188,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.9200000166893005,
+        0.009999999776482582,
+        0.9200000166893005
+      ],
+      "bytes": 10164,
+      "source_bytes": 10164,
+      "preview": "previews/kenney_furniture_ruground.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 71,
+      "id": "kenney_furniture_coatrackstanding",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/coatRackStanding.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0",
+      "package_id": "pkg_2b35cacbc798193213a84065",
+      "description": "Standing coat rack",
+      "placement": "Tavern vestibule and guild reception",
+      "source_sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+      "package_model_sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+      "embedded_textures": [],
+      "triangles": 190,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.2727999985218048,
+        0.7699999809265137,
+        0.2727999985218048
+      ],
+      "bytes": 13288,
+      "source_bytes": 13288,
+      "preview": "previews/kenney_furniture_coatrackstanding.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 72,
+      "id": "kenney_furniture_plantsmall1",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/plantSmall1.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0",
+      "package_id": "pkg_0cf747014c9aa9e88182ef07",
+      "description": "Small potted plant",
+      "placement": "House windows and Agdao market counters",
+      "source_sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+      "package_model_sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+      "embedded_textures": [],
+      "triangles": 102,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.09466072918271774,
+        0.14000000059604645,
+        0.09466073093126733
+      ],
+      "bytes": 8224,
+      "source_bytes": 8224,
+      "preview": "previews/kenney_furniture_plantsmall1.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 73,
+      "id": "kenney_furniture_plantsmall2",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/plantSmall2.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0",
+      "package_id": "pkg_7c94ca94c73f0e99eaaaa45c",
+      "description": "Second small potted plant",
+      "placement": "Apothecary herb display and house shelves",
+      "source_sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9",
+      "package_model_sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9",
+      "embedded_textures": [],
+      "triangles": 158,
+      "meshes": 1,
+      "surfaces": 2,
+      "materials": 2,
+      "size_metres": [
+        0.09466072918271774,
+        0.14000000059604645,
+        0.09466073093126733
+      ],
+      "bytes": 12996,
+      "source_bytes": 12996,
+      "preview": "previews/kenney_furniture_plantsmall2.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 74,
+      "id": "kenney_furniture_pottedplant",
+      "kit": "furniture-kit",
+      "kind": "prop",
+      "source_model": "sources/furniture-kit/Models/GLTF format/pottedPlant.glb",
+      "model": "canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0",
+      "package_id": "pkg_5ca1bce6e8cc60adeab735a8",
+      "description": "Tall potted plant",
+      "placement": "Agdao courtyard and council entrance",
+      "source_sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+      "package_model_sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+      "embedded_textures": [],
+      "triangles": 60,
+      "meshes": 2,
+      "surfaces": 3,
+      "materials": 3,
+      "size_metres": [
+        0.21205927431583405,
+        0.6540167939567566,
+        0.24146194756031036
+      ],
+      "bytes": 7576,
+      "source_bytes": 7576,
+      "preview": "previews/kenney_furniture_pottedplant.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+        "no base colour texture on any material: the asset is untextured and will read as flat colour"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 75,
+      "id": "kenney_pirate_barrel",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/barrel.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0",
+      "package_id": "pkg_2778d1e4366f9ecf83ddedba",
+      "description": "Wooden barrel",
+      "placement": "Harbour cargo, tavern cellar edge and Wyman stores",
+      "source_sha256": "7616dedf7c1023afa6ecd3c52a4609460aae0e582dee14e60ec5e47c1174793b",
+      "package_model_sha256": "fa80c76d56fb301c377b01a5864360dc71804e098081a8b10afbd2e3ba188fd2",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 148,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.3360981941223145,
+        1.229142665863037,
+        1.3360981941223145
+      ],
+      "bytes": 24208,
+      "source_bytes": 14092,
+      "preview": "previews/kenney_pirate_barrel.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 76,
+      "id": "kenney_pirate_crate",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/crate.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_crate/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_crate/1.1.0",
+      "package_id": "pkg_cf5bb545d8bfc207381261aa",
+      "description": "Wooden cargo crate",
+      "placement": "Agdao pier handling area and Westreach stolen cargo",
+      "source_sha256": "b525674e07c8b83667512a8dd93be0d7684358347d0e64d2bb16b156ac382ed1",
+      "package_model_sha256": "000d22f877d2a6f766d07d8cb3ea2b798c940b3480304d973e94e93069dd3a83",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 76,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.0779999494552612,
+        0.7699999809265137,
+        1.309000015258789
+      ],
+      "bytes": 19348,
+      "source_bytes": 9232,
+      "preview": "previews/kenney_pirate_crate.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 77,
+      "id": "kenney_pirate_crate_bottles",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/crate-bottles.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0",
+      "package_id": "pkg_f871655e6c6f9f333f10b4bf",
+      "description": "Crate holding bottles",
+      "placement": "Tavern stock and merchant delivery scene",
+      "source_sha256": "8412a3d3dc00a81ac61f0975682ef9f08288bee5c5eb783b09dbc1144e655302",
+      "package_model_sha256": "3f856e1a9bb78ae9cf69c5d3ed57a4367e4e0856623d275dd99bae23e80886c1",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 572,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.0779999494552612,
+        1.0568609237670898,
+        1.309000015258789
+      ],
+      "bytes": 68704,
+      "source_bytes": 58588,
+      "preview": "previews/kenney_pirate_crate_bottles.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 78,
+      "id": "kenney_pirate_bottle",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/bottle.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0",
+      "package_id": "pkg_e8c9373f5fe106feff8757dd",
+      "description": "Small bottle",
+      "placement": "Tavern tables and apothecary shelves",
+      "source_sha256": "b59ff617014ace27dacf2909bba94f3ad3a9a9d1660c6ae4d468b5e8561637ae",
+      "package_model_sha256": "0d176bdb350ad7b6d29ac60f7064c0f84c645105e33276c24dc81c97e8dc5a6c",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 124,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.36432087421417236,
+        0.8904509544372559,
+        0.36432087421417236
+      ],
+      "bytes": 23908,
+      "source_bytes": 13796,
+      "preview": "previews/kenney_pirate_bottle.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 79,
+      "id": "kenney_pirate_bottle_large",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/bottle-large.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0",
+      "package_id": "pkg_e89b9c424066ba0f8328df4b",
+      "description": "Large bottle",
+      "placement": "Grouped apothecary and market storage",
+      "source_sha256": "03ae246d2fe0a76c448626b5e6e12ff10313175d713489abac7cbf42f14c0b1f",
+      "package_model_sha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 108,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4658176004886627,
+        0.8904509544372559,
+        0.4658176004886627
+      ],
+      "bytes": 22340,
+      "source_bytes": 12232,
+      "preview": "previews/kenney_pirate_bottle_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 80,
+      "id": "kenney_pirate_chest",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/chest.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_chest/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_chest/1.1.0",
+      "package_id": "pkg_8524e1bd47070a4dfd2a7e20",
+      "description": "Wooden chest",
+      "placement": "House storage; keep existing loot chest logic intact",
+      "source_sha256": "26d26c4c032a12320fe05b5005a72eba96db7167db0d35873639a4b7dcc06bcb",
+      "package_model_sha256": "67765386e504069b85b33cfcb7b13504a49c64d206d8b8302c420f72e0ba6631",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 232,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        1.2749999856571201,
+        1.147499988079071,
+        1.2749999856948853
+      ],
+      "bytes": 35352,
+      "source_bytes": 25240,
+      "preview": "previews/kenney_pirate_chest.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 81,
+      "id": "kenney_pirate_tool_shovel",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/tool-shovel.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0",
+      "package_id": "pkg_6d1b4d0e8c0d1e8d7d0a2971",
+      "description": "Hand shovel",
+      "placement": "Farm shed and garden work corner",
+      "source_sha256": "b468372526e419c712f50b824eff50d6e7838de646eaa5a6aacfc4dcdfcfa265",
+      "package_model_sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 168,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.6578308939933777,
+        2.3491268157958984,
+        0.28290000557899475
+      ],
+      "bytes": 26264,
+      "source_bytes": 16144,
+      "preview": "previews/kenney_pirate_tool_shovel.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 82,
+      "id": "kenney_pirate_tool_paddle",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/tool-paddle.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0",
+      "package_id": "pkg_e04eb9d37f7c4a7f44988c72",
+      "description": "Wooden paddle",
+      "placement": "Olivar boathouse and harbour boat-rest area",
+      "source_sha256": "2a387ead62c44ec4218d664582a956f92a66b3c7db168d68394ccfabefae58b8",
+      "package_model_sha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 60,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.6578308939933777,
+        2.3491265773773193,
+        0.2075311839580536
+      ],
+      "bytes": 16980,
+      "source_bytes": 6864,
+      "preview": "previews/kenney_pirate_tool_paddle.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 83,
+      "id": "kenney_pirate_boat_row_small",
+      "kit": "pirate-kit",
+      "kind": "vehicle",
+      "source_model": "sources/pirate-kit/Models/GLB format/boat-row-small.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0",
+      "package_id": "pkg_e9f130ce8073f6b9b12f60bb",
+      "description": "Small rowing boat",
+      "placement": "Agdao quay secondary mooring",
+      "source_sha256": "846d9b17a73f80e03f7201d3bf0ad1b1bbb49e114b99697740d3426e4f42482d",
+      "package_model_sha256": "5963b12af7466ca99f0c31fe7fb2ccfd08ae710f5c91e8aae73412fded399e6d",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 168,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        2.748538017272949,
+        0.847695513759308,
+        2.3721463680267334
+      ],
+      "bytes": 27724,
+      "source_bytes": 17616,
+      "preview": "previews/kenney_pirate_boat_row_small.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 84,
+      "id": "kenney_pirate_boat_row_large",
+      "kit": "pirate-kit",
+      "kind": "vehicle",
+      "source_model": "sources/pirate-kit/Models/GLB format/boat-row-large.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0",
+      "package_id": "pkg_7dc30f7ed75be6b3f2011ca8",
+      "description": "Larger rowing boat",
+      "placement": "Olivar landing; static decoration or shared gentle bob",
+      "source_sha256": "b496c0d5f9053ebc7e9b9a39a4770d5ccaff5510c51b7c72c1b8391442e61d0f",
+      "package_model_sha256": "0cc1c3b863563cb616c95690f229a159bb646df9cfe8659f94e370c74f10e164",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 174,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        2.748538017272949,
+        0.847695513759308,
+        2.852146625518799
+      ],
+      "bytes": 26080,
+      "source_bytes": 15972,
+      "preview": "previews/kenney_pirate_boat_row_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 85,
+      "id": "kenney_pirate_ship_wreck",
+      "kit": "pirate-kit",
+      "kind": "landmark",
+      "source_model": "sources/pirate-kit/Models/GLB format/ship-wreck.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0",
+      "package_id": "pkg_90d4ddc81bbc1c105b273cb4",
+      "description": "Broken ship hull",
+      "placement": "Tideglass Cove story vignette, no collision across approach",
+      "source_sha256": "0b2cac74f23ffdc3bf5020880126338287a0a0317d6a98ce4250123d8821ad2b",
+      "package_model_sha256": "28c2ca697025ebdb0adc1a7a4b143d40cb2ca474d96b1db51d9cc2f6af7c16c2",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 2282,
+      "meshes": 16,
+      "surfaces": 16,
+      "materials": 1,
+      "size_metres": [
+        4.800000190734863,
+        9.963520050048828,
+        10.599999904632568
+      ],
+      "bytes": 233612,
+      "source_bytes": 223676,
+      "preview": "previews/kenney_pirate_ship_wreck.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 86,
+      "id": "kenney_pirate_rocks_a",
+      "kit": "pirate-kit",
+      "kind": "rock",
+      "source_model": "sources/pirate-kit/Models/GLB format/rocks-a.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0",
+      "package_id": "pkg_9826529bfb8c770a5a286a49",
+      "description": "Grouped shoreline rocks",
+      "placement": "Agdao harbour mouth and cove shore",
+      "source_sha256": "df8f27bd88a9b624337b08adde53c73dd25ddabd52dbee1de9da412d68bb4f08",
+      "package_model_sha256": "e38a431e7c6efea635555aadc0a53770dd19219044aeaa5514e8a770ea1f710a",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 264,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        5.112595558166504,
+        2.8980000019073486,
+        4.386431694030762
+      ],
+      "bytes": 37760,
+      "source_bytes": 27644,
+      "preview": "previews/kenney_pirate_rocks_a.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 87,
+      "id": "kenney_pirate_rocks_b",
+      "kit": "pirate-kit",
+      "kind": "rock",
+      "source_model": "sources/pirate-kit/Models/GLB format/rocks-b.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0",
+      "package_id": "pkg_0cb980bf72f53ac0b1dd9793",
+      "description": "Second grouped shoreline rocks",
+      "placement": "Coastal silhouette variety",
+      "source_sha256": "218cf9bfbe51228c78c9fa48a8543bef1037a695024f8fd5f3c47eec4c3a26d4",
+      "package_model_sha256": "99e962600fb419faa6e9a2c8d36bb89313f6ffb9f8da2ab5b5a81c6e467a12f8",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 300,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        4.436958074569702,
+        3.6544718742370605,
+        4.704512596130371
+      ],
+      "bytes": 41428,
+      "source_bytes": 31316,
+      "preview": "previews/kenney_pirate_rocks_b.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 88,
+      "id": "kenney_pirate_rocks_c",
+      "kit": "pirate-kit",
+      "kind": "rock",
+      "source_model": "sources/pirate-kit/Models/GLB format/rocks-c.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0",
+      "package_id": "pkg_3044095204d8b678c3c6d3c0",
+      "description": "Third grouped shoreline rocks",
+      "placement": "Cliff-to-water boundary",
+      "source_sha256": "67c086e5d522fda43f3c84b34092ae88c4b142ad23c11be9cf9743659a138032",
+      "package_model_sha256": "8bd8ebbf275540047f4f4f44765c04b1813ef0000e40db7ce5c99cb40ffdb913",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 232,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        3.642709493637085,
+        2.299999952316284,
+        3.6692001819610596
+      ],
+      "bytes": 34688,
+      "source_bytes": 24572,
+      "preview": "previews/kenney_pirate_rocks_c.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 89,
+      "id": "kenney_pirate_platform_planks",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/platform-planks.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0",
+      "package_id": "pkg_09c99d408a37fba51cefdb0c",
+      "description": "Plank deck piece",
+      "placement": "Dock repair vignette, visual only unless navigation updated",
+      "source_sha256": "4313f45d4feb8cd01adbb4b4785f368c7df091f33e473dea536172868805b167",
+      "package_model_sha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 48,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.893878698348999,
+        0.42799997329711914,
+        2.7023714780807495
+      ],
+      "bytes": 16644,
+      "source_bytes": 6524,
+      "preview": "previews/kenney_pirate_platform_planks.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 90,
+      "id": "kenney_pirate_structure_fence",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/structure-fence.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0",
+      "package_id": "pkg_399a886e575edc7e945d6c58",
+      "description": "Timber rail span",
+      "placement": "Harbour railing repairs beside existing geometry",
+      "source_sha256": "d4b9eca0f219efc7ec37d45170c5888a4ba6e0e8f39905f9d92d491ae5de7281",
+      "package_model_sha256": "a973071d2097fb3a7317f0dc03c14f21687dd49081432cbe03b790e8f0be344a",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 356,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        2.5,
+        2.200000047683716,
+        2.5
+      ],
+      "bytes": 45872,
+      "source_bytes": 35752,
+      "preview": "previews/kenney_pirate_structure_fence.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 91,
+      "id": "kenney_pirate_structure_platform_dock_small",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/structure-platform-dock-small.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0",
+      "package_id": "pkg_477b39eb76cb67bea66a6fa1",
+      "description": "Small dock platform",
+      "placement": "Supplemental mooring beside existing traversable pier",
+      "source_sha256": "63fb708c20db73860da2380ba6c13e4725930c07535bb2ed5958a2f30eeea36c",
+      "package_model_sha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 312,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.899999976158142,
+        1.3123000860214233,
+        2.5118346214294434
+      ],
+      "bytes": 42276,
+      "source_bytes": 32156,
+      "preview": "previews/kenney_pirate_structure_platform_dock_small.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 92,
+      "id": "kenney_pirate_structure_roof",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/structure-roof.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0",
+      "package_id": "pkg_9d2c1dc701a2ebe8c4824c03",
+      "description": "Small timber canopy roof",
+      "placement": "Cargo shelter; restyle and preserve camera visibility",
+      "source_sha256": "d7518ffa7cf209b91dc07920e762f28706a367742edc45c27ae45c434b089329",
+      "package_model_sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 348,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        3.085458993911743,
+        3.4000000953674316,
+        3.2338162660598755
+      ],
+      "bytes": 44596,
+      "source_bytes": 34480,
+      "preview": "previews/kenney_pirate_structure_roof.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 93,
+      "id": "kenney_pirate_flag_pennant",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/flag-pennant.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0",
+      "package_id": "pkg_0f7a009a7fb1ade03d075b0b",
+      "description": "Plain pennant flag",
+      "placement": "Town accents with canon colours and no pirate markings",
+      "source_sha256": "05956b9389135492e0644bd7d49711d1e4f865cd67808f7da5709a23e02d7d6f",
+      "package_model_sha256": "0e29dc688cbeecf4c97c884d312379563367c0c4c80196052bb775efc7dacb59",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 118,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.7615543007850647,
+        2.0968432426452637,
+        0.39890821278095245
+      ],
+      "bytes": 23752,
+      "source_bytes": 13640,
+      "preview": "previews/kenney_pirate_flag_pennant.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 94,
+      "id": "kenney_pirate_mast_ropes",
+      "kit": "pirate-kit",
+      "kind": "prop",
+      "source_model": "sources/pirate-kit/Models/GLB format/mast-ropes.glb",
+      "model": "canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0",
+      "package_id": "pkg_4a5c8bc9b0ade8aafbb428cf",
+      "description": "Rope-equipped mast",
+      "placement": "Harbour rigging vignette, static mesh and no new sail physics",
+      "source_sha256": "ad2bd14acacd3f4901177d8b13bcc6158f558e8c1959b6e19576e17ea8b10570",
+      "package_model_sha256": "c7c5d6509c73b3d96e69fb83bc6bf995361fbad70ea0cf476837bc1a52659364",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+          "bytes": 10061
+        }
+      ],
+      "triangles": 350,
+      "meshes": 3,
+      "surfaces": 3,
+      "materials": 1,
+      "size_metres": [
+        4.385667085647583,
+        7.88801808282733,
+        2.348839402198803
+      ],
+      "bytes": 46252,
+      "source_bytes": 36156,
+      "preview": "previews/kenney_pirate_mast_ropes.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 95,
+      "id": "kenney_graveyard_altar_stone",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/altar-stone.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0",
+      "package_id": "pkg_fcec63e42cfd50d92645a367",
+      "description": "Stone ritual altar",
+      "placement": "Catacomb ritual room, temple side chapel and Jade tomb niche",
+      "source_sha256": "6cdcdc19c2d979fc0fafa073bc31db9a45ddc76390bfef366f23e92768d7dde9",
+      "package_model_sha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 166,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.039592981338501,
+        0.4875999987125397,
+        0.6531999707221985
+      ],
+      "bytes": 28184,
+      "source_bytes": 17164,
+      "preview": "previews/kenney_graveyard_altar_stone.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 96,
+      "id": "kenney_graveyard_altar_wood",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/altar-wood.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0",
+      "package_id": "pkg_7d8032e7d9e6348bba861953",
+      "description": "Timber ritual altar",
+      "placement": "Forest cult shelter and abandoned dungeon chapel",
+      "source_sha256": "f1702fc2cbbbb417670ef96bd543209ac5764afdb4e43dbdf267328b62f75968",
+      "package_model_sha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 306,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        1.0450929403305054,
+        0.5375999808311462,
+        0.6586999893188477
+      ],
+      "bytes": 39388,
+      "source_bytes": 28368,
+      "preview": "previews/kenney_graveyard_altar_wood.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 97,
+      "id": "kenney_graveyard_coffin_old",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/coffin-old.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0",
+      "package_id": "pkg_6da00133820b115c759099a7",
+      "description": "Weathered coffin",
+      "placement": "Blackvault Ossuary and drowned crypt wall alcoves",
+      "source_sha256": "46974a0a6bc94e1e8873c6629b17733746d0643764ae0d849cac9ed1daaae796",
+      "package_model_sha256": "d719c8f614074642af74f3edd8e56fa5adc73b325f0a21c30f21551f830dcd5e",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 216,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.5738074779510498,
+        0.20000000298023224,
+        0.8378239274024963
+      ],
+      "bytes": 30972,
+      "source_bytes": 19952,
+      "preview": "previews/kenney_graveyard_coffin_old.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 98,
+      "id": "kenney_graveyard_coffin",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/coffin.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0",
+      "package_id": "pkg_8f27f0b1d7dd8775d867aff0",
+      "description": "Intact coffin",
+      "placement": "Burial room rows, retaining broad central combat space",
+      "source_sha256": "e372964ef6d9d623f6ea5dacd9b4d68eda417706b4246a9b62a38106adf2defd",
+      "package_model_sha256": "4dcfb3534eb7767a65ac5991827d1b89e913d25a1192da84119113c219f644c7",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 256,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        0.5738074779510498,
+        0.325,
+        0.8378239274024963
+      ],
+      "bytes": 35716,
+      "source_bytes": 24696,
+      "preview": "previews/kenney_graveyard_coffin.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 99,
+      "id": "kenney_graveyard_candle_multiple",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/candle-multiple.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0",
+      "package_id": "pkg_6909a4b768ebe6e7e6d829c0",
+      "description": "Cluster of candles",
+      "placement": "Tomb and ritual staging; share capped existing flame effects",
+      "source_sha256": "e747e04390e8f431e0d80b17696ef01cfa935dd8efff44f7008de6408236b547",
+      "package_model_sha256": "5b8d03622b1e99dfb2d492acfc1b9a22c9dd9a669f5a87009e7426573e3495ca",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 162,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.25519199669361115,
+        0.2001657485961914,
+        0.2667401432991028
+      ],
+      "bytes": 28320,
+      "source_bytes": 17304,
+      "preview": "previews/kenney_graveyard_candle_multiple.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 100,
+      "id": "kenney_graveyard_lantern_candle",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/lantern-candle.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0",
+      "package_id": "pkg_7b991b57d960b7ea8fb83d72",
+      "description": "Candle lantern housing",
+      "placement": "Crypt route accents and flooded cistern pier",
+      "source_sha256": "c78da0717e38ea019617a39a2ad263c54ecc3b0efbdcd3da124db6550657e90e",
+      "package_model_sha256": "0bb7aa2c7b40162e5ceb7f16d60f8e3c1942637483e9a58948f9374f051badfa",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 224,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.24000000953674316,
+        0.3876776695251465,
+        0.24000000953674316
+      ],
+      "bytes": 33148,
+      "source_bytes": 22124,
+      "preview": "previews/kenney_graveyard_lantern_candle.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 101,
+      "id": "kenney_graveyard_fire_basket",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/fire-basket.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0",
+      "package_id": "pkg_5d87db31765e11e633406e48",
+      "description": "Iron fire basket",
+      "placement": "Emberforge work alcove and Obsidian Engine service room",
+      "source_sha256": "f72e5a3f69711b30055219961d16824fe6d1ac5a8240d456d7f1a1a2cb7d5433",
+      "package_model_sha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 196,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4165577292442322,
+        0.16779901087284088,
+        0.41655778884887695
+      ],
+      "bytes": 29764,
+      "source_bytes": 18740,
+      "preview": "previews/kenney_graveyard_fire_basket.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 102,
+      "id": "kenney_graveyard_urn_round",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/urn-round.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0",
+      "package_id": "pkg_4c6205187460b62220408ec2",
+      "description": "Round funerary urn",
+      "placement": "Catacomb niches and Jade Sepulchre memorial corners",
+      "source_sha256": "9a80d295c1c2124435eea72166fc16d7a4fe54e538950aa320dfb63a704b5e37",
+      "package_model_sha256": "b59c015da7dce4ce236a9a967fcb058ca9cff4660c59edaf40768fec086cd437",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 230,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        0.2644200026988983,
+        0.38399999737739565,
+        0.2644200026988983
+      ],
+      "bytes": 34732,
+      "source_bytes": 23712,
+      "preview": "previews/kenney_graveyard_urn_round.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 103,
+      "id": "kenney_graveyard_urn_square",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/urn-square.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0",
+      "package_id": "pkg_de787d3dd6bfaf24f1642539",
+      "description": "Square funerary urn",
+      "placement": "Burial chamber silhouette variation",
+      "source_sha256": "1cebfae88912999cd1c23d18a6c3567be1bcc95ebd6f28636569491dd42d1a15",
+      "package_model_sha256": "bc29468805e87aa233d0e6177cdf9cb7244df6abbede7001789e0ef438c4d013",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 218,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        0.2644200026988983,
+        0.38399999737739565,
+        0.2644200026988983
+      ],
+      "bytes": 33484,
+      "source_bytes": 22460,
+      "preview": "previews/kenney_graveyard_urn_square.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 104,
+      "id": "kenney_graveyard_detail_chalice",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/detail-chalice.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0",
+      "package_id": "pkg_caa38c4ef9a6cf47ac518a4f",
+      "description": "Ritual chalice",
+      "placement": "Altar grouping and ruined temple offering table",
+      "source_sha256": "e7eeba55e5f1881095a3da159fc0a275ea4b59cc1cdce574d54662160ccdcc41",
+      "package_model_sha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 136,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.16422000527381897,
+        0.24900001287460327,
+        0.16422000527381897
+      ],
+      "bytes": 24828,
+      "source_bytes": 13816,
+      "preview": "previews/kenney_graveyard_detail_chalice.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 105,
+      "id": "kenney_graveyard_detail_bowl",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/detail-bowl.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0",
+      "package_id": "pkg_e2f1b5a2156621eab4d6a8b9",
+      "description": "Offering bowl",
+      "placement": "Temple and tomb ritual table composition",
+      "source_sha256": "84ef12ff1eac613fd96fb0be19f905caa66f019a642fa527b92429f0459fc710",
+      "package_model_sha256": "63e0bf23875f080a69cbbaf7b748c6980400887c1f2624b8229e008337cd8eb1",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 176,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.20092110335826874,
+        0.12999999523162842,
+        0.20092110335826874
+      ],
+      "bytes": 28488,
+      "source_bytes": 17472,
+      "preview": "previews/kenney_graveyard_detail_bowl.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 106,
+      "id": "kenney_graveyard_debris",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/debris.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0",
+      "package_id": "pkg_5fcccccd6808ae8795ca96d1",
+      "description": "Stone debris pile",
+      "placement": "Collapsed crypt wall or exhausted mine edge",
+      "source_sha256": "bf584bb5a4c1a7d4b7aed9ced00473a8678e9d402db1cfafc17e84e46aa2d42a",
+      "package_model_sha256": "64a7536b6fc9dc3ec913c6fa187096ecd483e6e2d2bbda7556c0ba43dfdce2c8",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 240,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.536216139793396,
+        0.1599999964237213,
+        0.5472697764635086
+      ],
+      "bytes": 36156,
+      "source_bytes": 25132,
+      "preview": "previews/kenney_graveyard_debris.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 107,
+      "id": "kenney_graveyard_debris_wood",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/debris-wood.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0",
+      "package_id": "pkg_844b50b23087e2b9589796c6",
+      "description": "Broken timber debris",
+      "placement": "Flooded Deeps wreck edge and abandoned storeroom",
+      "source_sha256": "f0cf5285322f7d75125487f1574a61cca2fd96edb0e702a2773ae5cbb0244133",
+      "package_model_sha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 108,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.4585110545158386,
+        0.10000000149011612,
+        0.5042247772216797
+      ],
+      "bytes": 21832,
+      "source_bytes": 10820,
+      "preview": "previews/kenney_graveyard_debris_wood.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 108,
+      "id": "kenney_graveyard_gravestone_broken",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/gravestone-broken.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0",
+      "package_id": "pkg_bc04f257f96bb78629daf760",
+      "description": "Broken headstone",
+      "placement": "Ruined Forest graveyard and Blackvault threshold",
+      "source_sha256": "67693974f6b30d49da8c56a436b78de4f49007be68d985bfb42d433119cc527a",
+      "package_model_sha256": "c8650f83629f12c4b177a7b6b63e62fd5646c276767d9df0b16398403dd7b6e5",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 134,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.5090253949165344,
+        0.34108099341392517,
+        0.3915451765060425
+      ],
+      "bytes": 23944,
+      "source_bytes": 12920,
+      "preview": "previews/kenney_graveyard_gravestone_broken.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 109,
+      "id": "kenney_graveyard_column_large",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/column-large.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0",
+      "package_id": "pkg_38926103c765cbf16ca6b62c",
+      "description": "Large stone column",
+      "placement": "Ruined Temple side arcade and sparse tomb focal structure",
+      "source_sha256": "1665820bc039aced692d15cb763dc73ca6c67515044b9d2106134e2951a33fd2",
+      "package_model_sha256": "71b3a1b0e84137eb27ce3ec8ffac599deab5a2ef038e6bc6a5fec6f06febeb9c",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 394,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.39000001549720764,
+        1.1299999952316284,
+        0.39000001549720764
+      ],
+      "bytes": 48564,
+      "source_bytes": 37540,
+      "preview": "previews/kenney_graveyard_column_large.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 110,
+      "id": "kenney_graveyard_pillar_obelisk",
+      "kit": "graveyard-kit",
+      "kind": "dungeon",
+      "source_model": "sources/graveyard-kit/Models/GLB format/pillar-obelisk.glb",
+      "model": "canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0",
+      "package_id": "pkg_2a24e5ba7bc7ea2083785ecd",
+      "description": "Stone obelisk",
+      "placement": "Crypt or Jade chamber landmark after canon glyph treatment",
+      "source_sha256": "f7a9d985522d8bb1eef765ce2b841588b43c8607b32c87056945696a172b3bf1",
+      "package_model_sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+          "bytes": 10965
+        }
+      ],
+      "triangles": 76,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        0.3499999940395355,
+        1.0120000839233398,
+        0.3499999940395355
+      ],
+      "bytes": 19572,
+      "source_bytes": 8552,
+      "preview": "previews/kenney_graveyard_pillar_obelisk.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 111,
+      "id": "kenney_modular-dungeon_gate_metal_bars",
+      "kit": "modular-dungeon-kit",
+      "kind": "dungeon",
+      "source_model": "sources/modular-dungeon-kit/Models/GLB format/gate-metal-bars.glb",
+      "model": "canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0",
+      "package_id": "pkg_2ceafe1ff64b759b23199be3",
+      "description": "Metal barred gate",
+      "placement": "Visual side-cell gate, preserve existing sealed-door state logic",
+      "source_sha256": "e3a2228906e1601c6d4fbb53d615f03541094177a624168e77b1ab0220e081f4",
+      "package_model_sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+          "bytes": 28309
+        }
+      ],
+      "triangles": 720,
+      "meshes": 2,
+      "surfaces": 2,
+      "materials": 1,
+      "size_metres": [
+        4.400000095367432,
+        4.399999618530273,
+        1.4000002145767212
+      ],
+      "bytes": 96532,
+      "source_bytes": 68172,
+      "preview": "previews/kenney_modular-dungeon_gate_metal_bars.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 112,
+      "id": "kenney_modular-dungeon_template_wall_half",
+      "kit": "modular-dungeon-kit",
+      "kind": "dungeon",
+      "source_model": "sources/modular-dungeon-kit/Models/GLB format/template-wall-half.glb",
+      "model": "canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0",
+      "package_id": "pkg_ac199b21b9db9c5d02611f5d",
+      "description": "Half-height stone wall",
+      "placement": "Cutaway dungeon side alcoves after scale and collision audit",
+      "source_sha256": "69b0cabe772ca9fb88545ef21e303e434a57cde2fb3bd2373627136534168c56",
+      "package_model_sha256": "706e286aaa725028cdebb70825f55cc3f7a6bc75c864e4f27935f41739b17eaf",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+          "bytes": 28309
+        }
+      ],
+      "triangles": 276,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        2,
+        4.150000095367432,
+        1.8073967099189758
+      ],
+      "bytes": 55584,
+      "source_bytes": 27220,
+      "preview": "previews/kenney_modular-dungeon_template_wall_half.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 113,
+      "id": "kenney_modular-dungeon_template_floor_layer_raised",
+      "kit": "modular-dungeon-kit",
+      "kind": "dungeon",
+      "source_model": "sources/modular-dungeon-kit/Models/GLB format/template-floor-layer-raised.glb",
+      "model": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0",
+      "package_id": "pkg_8846a0992dc1a9cad254ba89",
+      "description": "Raised stone floor insert",
+      "placement": "Dry island in damp crypt or small ritual plinth",
+      "source_sha256": "7fc682e72dce4eb16e524d0af577f1ccdc0c4681f309fc5f450dd80e4676a9bc",
+      "package_model_sha256": "579dcb0879a95c49fdbd337f021de32bebaf71c6593afa6fd5227a96f3e23e26",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+          "bytes": 28309
+        }
+      ],
+      "triangles": 312,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        4.023741722106934,
+        3,
+        4.000000476837158
+      ],
+      "bytes": 62068,
+      "source_bytes": 33704,
+      "preview": "previews/kenney_modular-dungeon_template_floor_layer_raised.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    },
+    {
+      "number": 114,
+      "id": "kenney_modular-dungeon_template_floor_detail_a",
+      "kit": "modular-dungeon-kit",
+      "kind": "dungeon",
+      "source_model": "sources/modular-dungeon-kit/Models/GLB format/template-floor-detail-a.glb",
+      "model": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0/model.glb",
+      "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0",
+      "package_id": "pkg_06a0737329ac52c503bb5b26",
+      "description": "Detailed stone floor insert",
+      "placement": "Sparse threshold accent and repaired temple paving",
+      "source_sha256": "403a357e1d59760f171d9def9db4ff01859372bde885dad2322e1519dafa4351",
+      "package_model_sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833",
+      "embedded_textures": [
+        {
+          "uri": "Textures/colormap.png",
+          "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+          "bytes": 28309
+        }
+      ],
+      "triangles": 204,
+      "meshes": 1,
+      "surfaces": 1,
+      "materials": 1,
+      "size_metres": [
+        4,
+        0.10000000149011612,
+        4
+      ],
+      "bytes": 51032,
+      "source_bytes": 22668,
+      "preview": "previews/kenney_modular-dungeon_template_floor_detail_a.png",
+      "license": "CC0-1.0",
+      "source_validation_passed": true,
+      "warnings": [
+        "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+        "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+      ],
+      "runtime_integrated": false
+    }
+  ]
+}

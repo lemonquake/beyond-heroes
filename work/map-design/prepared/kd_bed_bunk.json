@@ -1,0 +1,40 @@
+{
+ "source_id": "kenney_furniture_bedbunk",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_bed_bunk.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0",
+ "source_sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+ "derived_sha256": "8b26e5992e8f33207e81e3ab4f022faaa18faf4f4c6f4d7409d1824d6d8b9193",
+ "scale": 1.9,
+ "scale_rule": [
+  "s",
+  1.9
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_ClothCream",
+  "BH_Cloth"
+ ],
+ "part_faces": {
+  "BH_Wood": 300,
+  "BH_ClothCream": 220,
+  "BH_Cloth": 60
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "carpetWhite": "BH_ClothCream",
+  "carpet": "BH_Cloth"
+ },
+ "triangles": 580,
+ "surfaces": 3,
+ "source_triangles": 580,
+ "source_meshes": 5,
+ "bounds_m": [
+  1.085,
+  1.615,
+  2.081
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

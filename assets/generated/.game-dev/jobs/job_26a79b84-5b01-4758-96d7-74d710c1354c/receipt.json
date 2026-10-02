@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_stump_rounddetailed\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_stump_rounddetailed",
+      "category": "environment_prop",
+      "description": "Cut stump with irregular surface. Intended use: Westreach woodcutting patch and Wyman firewood corner",
+      "displayName": "kenney_nature_stump_rounddetailed",
+      "files": [
+        {
+          "bytes": 8188,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768"
+        },
+        {
+          "bytes": 1640,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "1a7914269a6087c3753de16648ab4e5bbbaf616b8cbf9d267af0c31c57f49433"
+        },
+        {
+          "bytes": 807,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "cf4df050b7a837b96a2241ecfaf035b8dcf8eeb5028250a9f5f927eda4da848b"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "9e6db9a0da7c2478e7000a1e5281fa030e4867e056d3edd747f14df092ba27d1"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_c0af77fd89770d731940c2d9",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:38.411Z"
+}

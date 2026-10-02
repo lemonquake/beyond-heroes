@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_log\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_log",
+      "category": "environment_prop",
+      "description": "Fallen log. Intended use: Forest floor composition and simple camp seating",
+      "displayName": "kenney_nature_log",
+      "files": [
+        {
+          "bytes": 14288,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6"
+        },
+        {
+          "bytes": 1600,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "791bca5d886354bb994cee4a4c668ad5447742823fb48dc5ac30410358da99d8"
+        },
+        {
+          "bytes": 776,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9670082ad29a1a635b38cdc3e01130a842dbba30b53ca932b907ba743bda57ba"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a8e4183139941096a3986702fc04a23eea0ea8f4cbcc89d1fc907a778145910f"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_c705831ffb1cf5c1c19524c0",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:39.265Z"
+}

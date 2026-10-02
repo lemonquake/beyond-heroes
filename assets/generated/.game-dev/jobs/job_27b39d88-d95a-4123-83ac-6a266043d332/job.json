@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_27b39d88-d95a-4123-83ac-6a266043d332",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_chest\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:26.183Z",
+  "updatedAt": "2026-10-02T20:15:26.209Z",
+  "startedAt": "2026-10-02T20:15:26.189Z",
+  "completedAt": "2026-10-02T20:15:26.209Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_27b39d88-d95a-4123-83ac-6a266043d332\\receipt.json"
+}

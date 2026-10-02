@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_tree_pinerounda",
+  "category": "foliage",
+  "description": "Round tiered conifer. Intended use: Forest borders with a different crown silhouette",
+  "displayName": "kenney_nature_tree_pinerounda",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.3085094094276428,
+        1.3164371967315673,
+        0.3562360107898712
+      ],
+      "min": [
+        -0.3085094094276428,
+        -0.050000000000000065,
+        -0.3562360107898712
+      ],
+      "sizeMeters": [
+        0.6170188188552856,
+        1.3664371967315674,
+        0.7124720215797424
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 14488,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 204,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 632,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

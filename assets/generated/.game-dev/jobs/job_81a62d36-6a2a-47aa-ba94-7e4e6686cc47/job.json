@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_81a62d36-6a2a-47aa-ba94-7e4e6686cc47",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_pot_large\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:59.564Z",
+  "updatedAt": "2026-10-02T21:11:59.612Z",
+  "startedAt": "2026-10-02T21:11:59.571Z",
+  "completedAt": "2026-10-02T21:11:59.612Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-7ecaedff-a9da-43c6-8782-0021759d0fc4' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_pot_large\r'",
+    "retryable": false
+  }
+}

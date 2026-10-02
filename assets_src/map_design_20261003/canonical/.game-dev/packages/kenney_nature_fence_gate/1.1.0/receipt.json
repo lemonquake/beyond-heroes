@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:49.349Z",
+  "destination": {
+    "assetId": "kenney_nature_fence_gate",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "6bbb52bc65d7baa94a44733e1a1eff9fb4285f42c67e8bb45fd71407d4b3d6be",
+  "packageId": "pkg_21388b31dbf28730c2f2edcc",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 27652,
+    "fileName": "fence_gate.glb",
+    "sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436"
+  }
+}

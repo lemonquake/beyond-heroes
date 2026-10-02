@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:33.233Z",
+  "destination": {
+    "assetId": "kenney_nature_flower_purplea",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "fb5817d8b26be4cbb3a97c47f2a745ca5483e1469cc1dcbcc7e55d10bd618715",
+  "packageId": "pkg_70f829b7ac0c3438c0d11887",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7112,
+    "fileName": "flower_purpleA.glb",
+    "sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4"
+  }
+}

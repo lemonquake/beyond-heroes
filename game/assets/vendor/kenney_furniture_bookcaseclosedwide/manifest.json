@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_bookcaseclosedwide",
+  "category": "environment_prop",
+  "description": "Wide closed bookcase. Intended use: Guild House archival wall",
+  "displayName": "kenney_furniture_bookcaseclosedwide",
+  "files": [
+    {
+      "bytes": 23140,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a"
+    },
+    {
+      "bytes": 1532,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "b0d66a779a4674eb0b3fbedb99ab1572a49941311c9fbb5966bc0afd79464d28"
+    },
+    {
+      "bytes": 858,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "557937fd4c98e0bb27562b568c3e233f6de1ac5b5beba9e833b93e8f647a5f28"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "e373a3cc35ad7ba180263cc1b8eb28dad45f733f2d202f0456a869a82cb39b59"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_954fc0e2975349273e5e7aff",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

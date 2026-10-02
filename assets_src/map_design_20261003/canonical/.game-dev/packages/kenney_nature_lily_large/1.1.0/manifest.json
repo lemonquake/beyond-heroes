@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_lily_large",
+  "category": "foliage",
+  "description": "Large lily pad. Intended use: Olivar sheltered lake edge and marsh pools",
+  "displayName": "kenney_nature_lily_large",
+  "files": [
+    {
+      "bytes": 8044,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2"
+    },
+    {
+      "bytes": 1583,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "fc2c7902435e7a3e652c00fad968352252a49127f2d5e719091c47bf4fb09152"
+    },
+    {
+      "bytes": 826,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "b98f4eec8f10af727d8e6aa6d42fb9b3fb5ecc4a34ceeb9870fcdbd50fe5ccf3"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "2708dd03f88cb3dba63f7c1b2a01a10f36658285bb3fd7903bbe8e3a4eee4bb6"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_e3ce3663255a25515b8bd8f6",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

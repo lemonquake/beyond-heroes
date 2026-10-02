@@ -212,6 +212,8 @@ func _basins() -> void:
 					_wall(c, s, BASIN_FLOOR, "wall_stone_capped", false, false)
 			if is_basin(c):
 				n += 1
+				if n % 4 == 1:
+					accent(Vector3(p.x, LIQUID_Y + 0.3, p.z), &"water_wave", -20.0)
 				if n % 3 == 0:
 					light(Vector3(p.x, LIQUID_Y + 1.4, p.z), th.glow, 3.0, 12.0, false, false)
 				# arches standing in the water, away from the bridges (the reference's cistern)
@@ -490,6 +492,7 @@ func _seal_ward(p: Vector3, flag: StringName) -> void:
 # light and dressing
 
 func _light_and_dress() -> void:
+	_dress_rooms()
 	var cells: Array = height.keys()
 	cells.sort()
 	for c: Vector2i in cells:
@@ -521,47 +524,10 @@ func _light_and_dress() -> void:
 				_sconce_side(Vector3(p.x + sx * (2.0 - 0.42), h + 2.7, p.z), sx)
 		if _used.has(c):
 			continue
-		# clutter against a wall (room cells only: a corridor keeps its way clear)
-		var walls := []
-		for sd in ["north", "west", "east"]:
-			if ch(c + SIDES[sd]) == "." or (height.has(c + SIDES[sd]) and height[c + SIDES[sd]] > h + 0.5):
-				walls.append(sd)
-		var open_n := 0
-		for sd in SIDES:
-			if height.has(c + SIDES[sd]) and absf(height[c + SIDES[sd]] - h) < 0.1:
-				open_n += 1
-		if not walls.is_empty() and open_n >= 2 and rng.randf() < 0.42:
-			var list: Array = CLUTTER.get(StringName(dd.theme), DataDungeons.theme_table("CLUTTER", StringName(dd.theme), []))
-			var sd: String = walls[rng.randi() % walls.size()]
-			var dir: Vector2i = SIDES[sd]
-			var n_items := rng.randi_range(1, 3)
-			for k in n_items:
-				var pc2: String = list[rng.randi() % list.size()] if not list.is_empty() else ""
-				if pc2 == "" or not _has(pc2):
-					continue
-				var along := Vector3(dir.y, 0, dir.x) * rng.randf_range(-1.3, 1.3)
-				var pos := p + Vector3(dir.x, 0, dir.y) * 1.25 + along
-				var yaw := rad_to_deg(atan2(-float(dir.x), -float(dir.y))) + rng.randf_range(-12, 12)
-				if pc2 in ["barrel", "crate", "urn"]:
-					breakable(pc2, pos, rng.randf() * 360.0, 12.0 if pc2 == "urn" else 20.0)
-				else:
-					kit(pc2, pos, yaw, 1.0)
-			_used[c] = true
-			continue
-		# a big prop in corners (two perpendicular void sides)
+		# (map-design pass: walls and corners are dressed by room role in _dress_rooms; these are the leftovers)
 		var vn := ch(c + SIDES.north) == "."
 		var vw := ch(c + SIDES.west) == "."
 		var ve := ch(c + SIDES.east) == "."
-		if vn and (vw or ve) and rng.randf() < 0.75:
-			var pc: String = dress.corner[rng.randi() % (dress.corner as Array).size()]
-			if _has(pc):
-				var off := Vector3(-1.1 if vw else 1.1, 0, -1.1)
-				var big := pc in ["mushroom_giant", "forge_furnace", "armillary_sphere"]
-				kit(pc, p + off * (0.6 if big else 1.0), rng.randf_range(-20, 20) + (0.0 if not big else 0.0), 1.0 if not big else 0.85)
-				if pc in ["forge_furnace", "lava_crucible", "crystal_pylon", "mushroom_giant"]:
-					light(p + off + Vector3(0, 2.2, 0.6), th.glow, 2.0, 8.0, false, true)
-				_used[c] = true
-				continue
 		# breakables against walls
 		if (vn or vw or ve) and rng.randf() < 0.14:
 			breakable(String(dress.breakable), p + Vector3((-1.3 if vw else (1.3 if ve else rng.randf_range(-1, 1))), 0, -1.3 if vn else 0.0),
@@ -775,3 +741,336 @@ func _has(asset: String) -> bool:
 	if not _exists.has(asset):
 		_exists[asset] = ResourceLoader.exists(ENV_DIR % asset)
 	return _exists[asset]
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): rooms with a purpose (DataDungeonRoles). A floor's rooms are its connected cells of one
+# storey; each gets a role from the floor's own markers — the arrival room, the seal chamber (and the goal's room), the
+# boss arena — and the others become work/storage, the theme's own function (burial, study, ritual, organic...) or a
+# traversal room on a basin edge. A role dresses a few wall cells with its motifs. Never dressed: cells holding a
+# marker, camp, chest or the arrival/goal, their neighbours, cells beside stairs or bridges, one-cell corridors and the
+# south (camera) side. Deep floors swap a work motif for the theme's decay. Lights from motifs are capped and High only.
+
+const ROLE_LIGHTS := 5
+var _rooms: Array = []
+var _role_lights := 0
+var _room_rng := RandomNumberGenerator.new()
+
+## Connected cells of one storey (bridges excluded): the floor's rooms.
+func _regions() -> Array:
+	var seen := {}
+	var out: Array = []
+	var cells: Array = height.keys()
+	cells.sort()
+	for c: Vector2i in cells:
+		if seen.has(c) or is_bridge(c):
+			continue
+		var h: float = height[c]
+		var reg: Array = [c]
+		seen[c] = true
+		var i := 0
+		while i < reg.size():
+			for d: Vector2i in SIDES.values():
+				var nb: Vector2i = reg[i] + d
+				if height.has(nb) and not is_bridge(nb) and not seen.has(nb) and absf(float(height[nb]) - h) < 0.1:
+					seen[nb] = true
+					reg.append(nb)
+			i += 1
+		out.append(reg)
+	return out
+
+## A storey's area split into zones (the floor's "rooms"): seeds at its markers, then farthest-point seeds until every
+## cell is within a few cells of one (about one zone per eight cells); each cell joins its nearest seed (BFS in the area).
+func _zones(reg: Array, keep: Dictionary) -> Array:
+	var inside := {}
+	for c in reg:
+		inside[c] = true
+	var seeds: Array = []
+	for c in reg:
+		if keep.has(c) and String(keep[c]) in ["arrival", "seal", "boss", "descent", "exit", "miniboss"]:
+			seeds.append(c)
+	var target := maxi(1, int(ceil(reg.size() / 8.0)))
+	if seeds.is_empty():
+		seeds.append(reg[0])
+	var dist := _multi_bfs(seeds, inside)
+	while seeds.size() < target:
+		var far: Vector2i = reg[0]
+		var fd2 := -1
+		for c: Vector2i in reg:
+			if int(dist.get(c, 0)) > fd2:
+				fd2 = int(dist.get(c, 0))
+				far = c
+		if fd2 < 3:
+			break
+		seeds.append(far)
+		dist = _multi_bfs(seeds, inside)
+	var owner := _multi_bfs(seeds, inside, true)
+	var zones: Array = []
+	for i in seeds.size():
+		zones.append([])
+	for c: Vector2i in reg:
+		zones[int(owner.get(c, 0))].append(c)
+	return zones.filter(func(z): return not z.is_empty())
+
+## Breadth-first distance from the seeds inside an area (or, with `ids`, which seed reached each cell first).
+func _multi_bfs(seeds: Array, inside: Dictionary, ids := false) -> Dictionary:
+	var out := {}
+	var q: Array = []
+	for i in seeds.size():
+		out[seeds[i]] = i if ids else 0
+		q.append([seeds[i], i, 0])
+	var h := 0
+	while h < q.size():
+		var cur: Array = q[h]
+		h += 1
+		for d: Vector2i in SIDES.values():
+			var nb: Vector2i = cur[0] + d
+			if inside.has(nb) and not out.has(nb):
+				out[nb] = cur[1] if ids else int(cur[2]) + 1
+				q.append([nb, cur[1], int(cur[2]) + 1])
+	return out
+
+## A cell that must stay open: a marker cell (portal, seal, boss, camp, chest), the spawn cell beside a portal, or a
+## cell next to stairs or a bridge (their approaches). A motif in a marker's other neighbours stands against that cell's
+## far wall, 2 m or more from anything on the marker cell.
+func _protected(c: Vector2i, keep: Dictionary, spawns: Dictionary) -> bool:
+	if keep.has(c) or spawns.has(c):
+		return true
+	for dx in [-1, 0, 1]:
+		for dz in [-1, 0, 1]:
+			var q := c + Vector2i(dx, dz)
+			if is_stair(q) or is_bridge(q):
+				return true
+	return false
+
+## The cell a portal's spawn stands on (MapBuilder spawns sit 3 m into the neighbour _beside() picks).
+func _spawn_cell(c: Vector2i) -> Vector2i:
+	var p := cell_pos(c)
+	for d in [Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1)]:
+		var nb: Vector2i = c + d
+		if height.has(nb) and absf(float(height[nb]) - p.y) < 0.1 and not is_bridge(nb):
+			return nb
+	return c
+
+## Wall sides of a cell a motif can stand against (north first: the back wall faces the camera).
+func _wall_sides(c: Vector2i) -> Array:
+	var h: float = height[c]
+	var out: Array = []
+	for sd in ["north", "west", "east"]:
+		var nb: Vector2i = c + SIDES[sd]
+		if ch(nb) == "." or (height.has(nb) and float(height[nb]) > h + 0.5):
+			out.append(sd)
+	if out.has("west") and out.has("east"):
+		return []            # a one-cell corridor keeps its way clear
+	var open_n := 0
+	for sd in SIDES:
+		var nb: Vector2i = c + SIDES[sd]
+		if height.has(nb) and absf(float(height[nb]) - h) < 0.1:
+			open_n += 1
+	return out if open_n >= 2 else []
+
+func _dress_rooms() -> void:
+	_room_rng.seed = hash(String(def.id) + "/rooms")
+	var t := DataDungeonRoles.table(StringName(dd.theme), dungeon)
+	var keep := {}
+	for k in ["arrival", "descent", "exit", "seal", "boss", "miniboss"]:
+		if fd.has(k):
+			keep[fd[k]] = k
+	for cp in fd.get("camps", []):
+		keep[cp[0]] = "camp"
+	for cp in fd.get("chests", []):
+		keep[cp[0]] = "chest"
+	var spawns := {}
+	for k in ["arrival", "descent", "exit"]:
+		if fd.has(k):
+			spawns[_spawn_cell(fd[k])] = true
+	var deep := floor_n >= 3 or floor_n > DataDungeons.floor_count(dungeon)
+	var regs: Array = []
+	for reg: Array in _regions():
+		regs.append_array(_zones(reg, keep))
+	regs.sort_custom(func(x, y): return x.size() > y.size())
+	var n_free := 0
+	for reg: Array in regs:
+		var role := ""
+		for c: Vector2i in reg:
+			match String(keep.get(c, "")):
+				"boss": role = "boss"
+				"arrival": role = "arrival" if role != "boss" else role
+				"seal", "miniboss", "descent", "exit":
+					if role == "":
+						role = "seal"
+		var edge := reg.any(func(c): return SIDES.values().any(func(d): return is_basin(c + d) or is_bridge(c + d)))
+		if role == "":
+			if edge and reg.size() <= 8:
+				role = "traversal"
+			else:
+				role = "function" if n_free % 2 == 0 else "work"
+				n_free += 1
+		var rec := {"role": role, "cells": reg.size(), "groups": []}
+		if role == "boss":
+			_boss_silhouettes(reg, t, rec)
+		else:
+			var want := clampi(reg.size() / 4, 1, 2) if role in ["arrival", "seal", "traversal"] else clampi(reg.size() / 3, 1, 3)
+			var cands: Array = []
+			for c: Vector2i in reg:
+				if _used.has(c) or _protected(c, keep, spawns) or _wall_sides(c).is_empty():
+					continue
+				cands.append(c)
+			# spread out: shuffle deterministically, then take cells at least two apart
+			for i in range(cands.size() - 1, 0, -1):
+				var j := _room_rng.randi_range(0, i)
+				var tmp = cands[i]
+				cands[i] = cands[j]
+				cands[j] = tmp
+			var taken: Array = []
+			var list: Array = t.get(role, t.function)
+			for c: Vector2i in cands:
+				if taken.size() >= want:
+					break
+				if taken.any(func(q): return absi(q.x - c.x) + absi(q.y - c.y) < 2):
+					continue
+				# each group in a room is a different motif: the role's list first, then the theme's work motifs
+				var pool: Array = list.duplicate()
+				for w in t.work:
+					if not pool.has(w):
+						pool.append(w)
+				var start := _room_rng.randi() % list.size()
+				var motif := ""
+				for k in pool.size():
+					var cand: String = pool[(start + k) % list.size()] if k < list.size() else pool[k]
+					if not rec.groups.any(func(g): return g.motif == cand):
+						motif = cand
+						break
+				if motif == "":
+					break
+				if role == "work" and deep and taken.size() == 0:
+					motif = (t.decay as Array)[0]
+				if _place_motif(motif, c):
+					taken.append(c)
+					_used[c] = true
+					rec.groups.append({"motif": motif, "cell": [c.x, c.y]})
+		_rooms.append(rec)
+	_arrival_inlay()
+	_parapet_details(t)
+	root.set_meta(&"rooms", _rooms)
+	root.set_meta(&"room_seed", hash(String(def.id) + "/rooms"))
+	root.set_meta(&"room_keep", keep.keys().map(func(c): return [c.x, c.y]))
+
+## One motif against a wall of cell c (or into its corner). False when the cell cannot take it.
+func _place_motif(motif: String, c: Vector2i) -> bool:
+	var m: Dictionary = DataDungeonRoles.M.get(motif, {})
+	if m.is_empty():
+		return false
+	var sides := _wall_sides(c)
+	var corner: bool = m.get("corner", false)
+	var p0 := cell_pos(c)
+	var origin: Vector3
+	var ax: Vector3            # local x (along the wall / out from the side wall)
+	var az: Vector3            # local z (out from the wall into the room)
+	if corner:
+		if not sides.has("north") or not (sides.has("west") or sides.has("east")):
+			return false
+		var side := "west" if sides.has("west") else "east"
+		var dn := Vector3(0, 0, -1)
+		var ds := Vector3(float(SIDES[side].x), 0, 0)
+		origin = p0 + dn * 1.85 + ds * 1.85
+		ax = -ds
+		az = -dn
+	else:
+		var sd: String = sides[0] if sides[0] == "north" or sides.size() == 1 else sides[_room_rng.randi() % sides.size()]
+		var d := Vector3(float(SIDES[sd].x), 0, float(SIDES[sd].y))
+		origin = p0 + d * 1.85
+		az = -d
+		ax = Vector3.UP.cross(az)
+	var face_yaw := rad_to_deg(atan2(az.x, az.z))
+	for pc: Array in m.pieces:
+		var nm: String = pc[0]
+		var off: Vector3 = pc[1]
+		var pos: Vector3 = origin + ax * off.x + az * off.z + Vector3(0, off.y, 0)
+		var kind: String = pc[4]
+		if nm == "@fire" or nm == "@glow":
+			if Perf.lite or _role_lights >= ROLE_LIGHTS:
+				continue
+			_role_lights += 1
+			if nm == "@fire":
+				flame(pos, float(pc[3]))
+				light(pos + Vector3(0, 0.5, 0), FIRE, 2.0, 7.0, false, true)
+				accent(pos, &"torch_crackle", -14.0)
+			else:
+				light(pos, th.torch, 1.1, 5.5, false, false)
+			continue
+		if kind == "o" and Perf.lite:
+			continue
+		if not _has(nm):
+			continue
+		var b := Basis(Vector3.UP, deg_to_rad(face_yaw + float(pc[2])))
+		if pc.size() > 5:
+			b = b * Basis(Vector3(0, 0, 1), deg_to_rad(float(pc[5])))
+		var xf := Transform3D(b.scaled(Vector3.ONE * float(pc[3])), pos)
+		if kind == "k":
+			solid(nm, xf)
+		else:
+			decor_xf(nm + ("~o" if kind == "o" else ""), xf, false)
+	return true
+
+## The arena keeps its middle empty: the theme's one silhouette in the two dressable cells farthest from the boss.
+func _boss_silhouettes(reg: Array, t: Dictionary, rec: Dictionary) -> void:
+	if not fd.has("boss"):
+		return
+	var bc: Vector2i = fd.boss
+	var far: Array = reg.filter(func(c): return not _used.has(c) and not _wall_sides(c).is_empty() and not is_stair(c) \
+		and absi(c.x - bc.x) + absi(c.y - bc.y) >= 3)
+	far.sort_custom(func(x, y): return (x - bc).length_squared() > (y - bc).length_squared())
+	var placed: Array = []
+	for c: Vector2i in far:
+		if placed.size() >= 2:
+			break
+		if placed.any(func(q): return absi(q.x - c.x) + absi(q.y - c.y) < 3):
+			continue
+		var sides := _wall_sides(c)
+		var p := cell_pos(c)
+		var off := Vector3.ZERO
+		for sd in sides:
+			off += Vector3(float(SIDES[sd].x), 0, float(SIDES[sd].y)) * 1.0
+		var nm: String = t.boss[0]
+		if not _has(nm):
+			return
+		kit(nm, p + off, _room_rng.randf() * 360.0, float(t.boss[1]), props)
+		_used[c] = true
+		placed.append(c)
+		rec.groups.append({"motif": "boss:" + nm, "cell": [c.x, c.y]})
+
+## A threshold inlay on the arrival spawn's cell: the first thing under the hero's feet says where they are.
+func _arrival_inlay() -> void:
+	var arr: Vector2i = fd.arrival
+	var p := cell_pos(arr)
+	for d in [Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1)]:
+		var nb: Vector2i = arr + d
+		if height.has(nb) and absf(float(height[nb]) - p.y) < 0.1 and not is_bridge(nb):
+			var q := cell_pos(nb)
+			kit("kd_floor_inlay", Vector3(q.x, q.y + 0.012, q.z), 0.0, 0.85, deco)
+			return
+
+## Small single pieces along basin and gallery parapets (every other edge cell, at most six a floor), never colliding.
+func _parapet_details(t: Dictionary) -> void:
+	var n := 0
+	var cells: Array = height.keys()
+	cells.sort()
+	var edge_list: Array = t.get("edge", [])
+	if edge_list.is_empty():
+		return
+	for c: Vector2i in cells:
+		if n >= 6 or _used.has(c) or is_bridge(c) or is_stair(c) or (c.x + c.y) % 2 == 1:
+			continue
+		for sd in ["south", "west", "east", "north"]:
+			var nb: Vector2i = c + SIDES[sd]
+			if not is_basin(nb):
+				continue
+			var d := Vector3(float(SIDES[sd].x), 0, float(SIDES[sd].y))
+			var along := Vector3.UP.cross(d) * _room_rng.randf_range(-1.2, 1.2)
+			var nm: String = edge_list[_room_rng.randi() % edge_list.size()]
+			if _has(nm):
+				var e := kit(nm, cell_pos(c) + d * 1.45 + along, _room_rng.randf() * 360.0, 1.0, deco)
+				for col in e.find_children("*", "CollisionObject3D", true, false):
+					col.free()
+				n += 1
+			break

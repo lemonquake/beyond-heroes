@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_ff5c7f1e-5a79-4863-a80f-75148b08e6b6",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:31.420Z",
+  "updatedAt": "2026-10-02T21:12:31.455Z",
+  "startedAt": "2026-10-02T21:12:31.427Z",
+  "completedAt": "2026-10-02T21:12:31.455Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_ff5c7f1e-5a79-4863-a80f-75148b08e6b6\\receipt.json"
+}

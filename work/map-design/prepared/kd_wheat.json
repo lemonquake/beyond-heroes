@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_nature_crops_wheatstageb",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_wheat.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0",
+ "source_sha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852",
+ "derived_sha256": "82f5815ead4f77bf1218ea72291b64eda0a9bf9cd35f888acbdf069c2f93b570",
+ "scale": 1.8694,
+ "scale_rule": [
+  "h",
+  1.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Thatch"
+ ],
+ "part_faces": {
+  "BH_Thatch": 360
+ },
+ "source_to_material": {
+  "woodInner": "BH_Thatch",
+  "_defaultMat": "BH_Thatch"
+ },
+ "triangles": 360,
+ "surfaces": 1,
+ "source_triangles": 360,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.009,
+  1.0,
+  0.835
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

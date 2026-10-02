@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:29.489Z",
+  "destination": {
+    "assetId": "kenney_pirate_boat_row_large",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "90455e32e0a8282c6088b043a0ffa88505db3caec87b273e8e9f132b7d29fe19",
+  "packageId": "pkg_7dc30f7ed75be6b3f2011ca8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 26080,
+    "fileName": "kenney_pirate_boat_row_large.glb",
+    "sha256": "0cc1c3b863563cb616c95690f229a159bb646df9cfe8659f94e370c74f10e164"
+  }
+}

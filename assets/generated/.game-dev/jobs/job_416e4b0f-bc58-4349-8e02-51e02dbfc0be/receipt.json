@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_stone\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_altar_stone",
+      "category": "environment_prop",
+      "description": "Stone ritual altar. Intended use: Catacomb ritual room, temple side chapel and Jade tomb niche",
+      "displayName": "kenney_graveyard_altar_stone",
+      "files": [
+        {
+          "bytes": 17164,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "6cdcdc19c2d979fc0fafa073bc31db9a45ddc76390bfef366f23e92768d7dde9"
+        },
+        {
+          "bytes": 1758,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "0c98d2bc6a842dd2e462868d5a89c85c500fcb370c4a4673abf9f2d229465875"
+        },
+        {
+          "bytes": 810,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "533ce09bfc167dc1df1ad2f169f686d862a51a5a49c9777f1c93eb654901bfa4"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "56775800934067878b5b54580c33cf4adc07270703d5b5f6fb8712d6545479c0"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7e231cdb7a7c119064552d22",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:36.072Z"
+}

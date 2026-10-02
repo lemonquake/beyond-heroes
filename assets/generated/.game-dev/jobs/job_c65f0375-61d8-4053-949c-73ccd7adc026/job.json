@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_c65f0375-61d8-4053-949c-73ccd7adc026",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_rock_largea"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:05.353Z",
+  "updatedAt": "2026-10-02T21:13:05.409Z",
+  "startedAt": "2026-10-02T21:13:05.359Z",
+  "completedAt": "2026-10-02T21:13:05.409Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_c65f0375-61d8-4053-949c-73ccd7adc026\\receipt.json"
+}

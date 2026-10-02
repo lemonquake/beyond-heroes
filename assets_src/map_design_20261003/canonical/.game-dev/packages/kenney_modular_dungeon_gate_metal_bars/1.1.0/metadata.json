@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_modular_dungeon_gate_metal_bars",
+  "category": "environment_prop",
+  "description": "Metal barred gate. Intended use: Visual side-cell gate, preserve existing sealed-door state logic",
+  "displayName": "kenney_modular-dungeon_gate_metal_bars",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        2.200000047683716,
+        4.399999618530273,
+        0.7000001072883606
+      ],
+      "min": [
+        -2.200000047683716,
+        0,
+        -0.7000001072883606
+      ],
+      "sizeMeters": [
+        4.400000095367432,
+        4.399999618530273,
+        1.4000002145767212
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 96532,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 28309,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 720,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 1264,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

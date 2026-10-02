@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_408765cb-1dcd-4897-a2fd-e98a9f27ba1d",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_pot_small\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:42.924Z",
+  "updatedAt": "2026-10-02T20:01:42.954Z",
+  "startedAt": "2026-10-02T20:01:42.929Z",
+  "completedAt": "2026-10-02T20:01:42.954Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_408765cb-1dcd-4897-a2fd-e98a9f27ba1d\\receipt.json"
+}

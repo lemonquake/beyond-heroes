@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_fence\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_structure_fence",
+      "category": "environment_prop",
+      "description": "Timber rail span. Intended use: Harbour railing repairs beside existing geometry",
+      "displayName": "kenney_pirate_structure_fence",
+      "files": [
+        {
+          "bytes": 35752,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "d4b9eca0f219efc7ec37d45170c5888a4ba6e0e8f39905f9d92d491ae5de7281"
+        },
+        {
+          "bytes": 1657,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "0fdf0a014d81b3cbb93611e2469b29beab173d71f13ec09e4439f3c83ddb6209"
+        },
+        {
+          "bytes": 799,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "56ed86afde37aa88e84bd7d1d6342e2145d708ddf14eca647ebd2e724c6fe5be"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a5bca63c2f2213bde9e273656195c7194a05206ffae2a0d9510419e24017e164"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_75c667da151c1b8453a777b1",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:31.264Z"
+}

@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_tree_pinetalla",
+  "category": "foliage",
+  "description": "Tall conifer. Intended use: Distant tree line and selected forest landmarks",
+  "displayName": "kenney_nature_tree_pinetalla",
+  "files": [
+    {
+      "bytes": 7200,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196"
+    },
+    {
+      "bytes": 1594,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2221a030c5f53a93f10dbaa9874eae61da9057a898e0138744435cb29379aa47"
+    },
+    {
+      "bytes": 834,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "64a14f88f9c58d59798a30f74c0f24b7a54b9c2b923f26a3d81ac4d875a8a67d"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "0ece469dd20d44731cf7accc9b369aec186bc4e38602849f95b13c4042737cba"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_0abc697b759ea8c5f904a4bf",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

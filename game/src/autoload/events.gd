@@ -57,6 +57,7 @@ signal debug_unlocked                            # bh-030: `azrin azrael` unlock
 signal quake_team_changed                       # a Quake Team ally was called or dismissed (bh-017)
 signal guild_customised                          # the hero renamed their guild or changed its banner (bh-017)
 signal tier_changed(rank: int)
+signal rank_tracker_changed                      # bh-033: the hero showed, minimized or hid the next-rank tracker
 signal guild_changed                             # bh-027: a guild's roster, passives, summons or the known guilds changed
 signal guild_jobs_changed                        # a Guild House job was taken, moved on, handed in or dropped
 signal rested(fee: int)

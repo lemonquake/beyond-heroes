@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_2c5635ac-fb0e-4f11-9277-b5f591b4dcfd",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_tree_detailed\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:32.345Z",
+  "updatedAt": "2026-10-02T21:11:32.390Z",
+  "startedAt": "2026-10-02T21:11:32.350Z",
+  "completedAt": "2026-10-02T21:11:32.390Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-3d571498-c1fe-4e1b-b13e-c2cdc9690493' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_tree_detailed\r'",
+    "retryable": false
+  }
+}

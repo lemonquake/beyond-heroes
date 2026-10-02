@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_structure_platform_dock_small.glb",
+    "fileBytes": 42276,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 592,
+    "triangleCount": 312,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.949999988079071,
+        0,
+        -1.2559173107147217
+      ],
+      "max": [
+        0.949999988079071,
+        1.3123000860214233,
+        1.2559173107147217
+      ],
+      "sizeMeters": [
+        1.899999976158142,
+        1.3123000860214233,
+        2.5118346214294434
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_structure_platform_dock_small.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 312,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        1.899999976158142,
+        1.3123000860214233,
+        2.5118346214294434
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_platform_dock_small\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_structure_platform_dock_small",
+        "category": "environment_prop",
+        "description": "Small dock platform. Intended use: Supplemental mooring beside existing traversable pier",
+        "displayName": "kenney_pirate_structure_platform_dock_small",
+        "files": [
+          {
+            "bytes": 42276,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f"
+          },
+          {
+            "bytes": 1778,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "2a03427b24430ff10c1718c151f919291d0ea36a3b09b68afb9218fdd8abc8ce"
+          },
+          {
+            "bytes": 1118,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "e60a62515fe23113274add0008594e9476de5204562f9a712fa69d57882cc875"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "2aabfc2bb57c90ff6a0ae9c731290560fb86fdbe7dc17de171eb71222eb1f010"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_477b39eb76cb67bea66a6fa1",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "63fb708c20db73860da2380ba6c13e4725930c07535bb2ed5958a2f30eeea36c",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

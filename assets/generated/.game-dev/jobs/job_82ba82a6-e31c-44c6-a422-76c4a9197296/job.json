@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_82ba82a6-e31c-44c6-a422-76c4a9197296",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:34.988Z",
+  "updatedAt": "2026-10-02T21:11:35.026Z",
+  "startedAt": "2026-10-02T21:11:34.994Z",
+  "completedAt": "2026-10-02T21:11:35.026Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_82ba82a6-e31c-44c6-a422-76c4a9197296\\receipt.json"
+}

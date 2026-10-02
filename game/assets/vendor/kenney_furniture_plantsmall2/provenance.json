@@ -1,0 +1,19 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+  "licenseEvidence": "licenses/furniture-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+  "originalModelSha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9",
+  "originalRelativePath": "sources/furniture-kit/Models/GLTF format/plantSmall2.glb",
+  "originalTextureDependencies": [],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 12996,
+    "fileName": "plantSmall2.glb",
+    "sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9"
+  },
+  "sourceUri": "https://kenney.nl/assets/furniture-kit",
+  "transformations": []
+}

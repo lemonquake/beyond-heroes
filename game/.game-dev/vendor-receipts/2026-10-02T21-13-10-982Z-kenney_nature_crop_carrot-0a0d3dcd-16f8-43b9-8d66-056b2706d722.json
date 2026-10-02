@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_53d1901568252e5ad2c873ae",
+  "assetId": "kenney_nature_crop_carrot",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_crop_carrot",
+  "modelSha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8",
+  "manifestSha256": "e0c27646cd176b0ed305a808b9ab123270201c4f4ecfbabf7fbb3eb6ef9b9ea5",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:10.982Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_carrot\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

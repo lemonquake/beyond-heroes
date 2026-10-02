@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_plantsmall1\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_plantsmall1",
+      "category": "environment_prop",
+      "description": "Small potted plant. Intended use: House windows and Agdao market counters",
+      "displayName": "kenney_furniture_plantsmall1",
+      "files": [
+        {
+          "bytes": 8224,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15"
+        },
+        {
+          "bytes": 1602,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "4973d762f2c28d1a934e5e0eb9a45db45304b8abf0ba473582ba7e425ad37a93"
+        },
+        {
+          "bytes": 806,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "667381f0a581a94d705fdb22c43ef36de60a06ea4183fc70520efe6d6858d487"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a5cfa864cf40a0ef81a383beb3205dad48b76886ae97a85d8c0fba2c6d44a2be"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_230840ee91364bfa35e4490b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:14.120Z"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_gravestone_broken\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_gravestone_broken",
+      "category": "environment_prop",
+      "description": "Broken headstone. Intended use: Ruined Forest graveyard and Blackvault threshold",
+      "displayName": "kenney_graveyard_gravestone_broken",
+      "files": [
+        {
+          "bytes": 12920,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "67693974f6b30d49da8c56a436b78de4f49007be68d985bfb42d433119cc527a"
+        },
+        {
+          "bytes": 1745,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "5b9c22db9f13befa599fb15469eb756504b2c63cfc2420ee70f60e2cb2998753"
+        },
+        {
+          "bytes": 822,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "b2d8da04dbc13992eee13a98488afdfa1f603765e19caa6a710c3cc08f14c437"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "6d394324b188e0bd29a12c9f0c2bea9471b1ed57c9e6b39eabb1b99e4536ab63"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_9d15bff8d0f8d186e639674c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:48.225Z"
+}

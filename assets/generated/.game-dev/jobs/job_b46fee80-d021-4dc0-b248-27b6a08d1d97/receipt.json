@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_palmshort\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_palmshort",
+      "category": "foliage",
+      "description": "Low palm. Intended use: Agdao small planted courtyards",
+      "displayName": "kenney_nature_tree_palmshort",
+      "files": [
+        {
+          "bytes": 15596,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "d2526ca31c144a238820aa5c0f6183c5b9cf37fd3cc037932e637cf7c473ba27"
+        },
+        {
+          "bytes": 1570,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "c7b1c18342bea2e3c2f7be285f5e13a1941d2536ede37e03ac7330c355c6f52f"
+        },
+        {
+          "bytes": 835,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "6f73725ea5e8da571fd4e1374c7e3c91a9fdc5ca9405b028eca78cb8d1392f75"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e182f5998dbc51ecabc760bbf5d8a895fb14d2bb0a27ca1a6ec2cb9146bdad61"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_1a74d426e146dc05e18450bb",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:24.763Z"
+}

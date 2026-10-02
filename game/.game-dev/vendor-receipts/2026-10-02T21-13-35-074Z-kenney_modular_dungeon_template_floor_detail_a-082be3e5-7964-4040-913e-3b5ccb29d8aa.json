@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_06a0737329ac52c503bb5b26",
+  "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_modular-dungeon_template_floor_detail_a",
+  "modelSha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833",
+  "manifestSha256": "f4ada44c6b0efe8cc160f322846facd9714745bf8805bd245f7bfc4b23e4bcca",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:35.074Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_floor_detail_a\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

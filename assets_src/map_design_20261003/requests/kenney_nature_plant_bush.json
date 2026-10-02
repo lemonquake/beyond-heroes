@@ -1,0 +1,29 @@
+{
+  "description": "Rounded shrub. Intended use: House foundations and village lot boundaries",
+  "category": "foliage",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/nature-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+    "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+    "originalModelSha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+    "originalRelativePath": "sources/nature-kit/Models/GLTF format/plant_bush.glb",
+    "licenseEvidence": "licenses/nature-kit.txt",
+    "transformations": [],
+    "originalTextureDependencies": [],
+    "downloadDate": "2026-10-03"
+  }
+}

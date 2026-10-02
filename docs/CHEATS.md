@@ -1,5 +1,5 @@
 # Beyond Heroes cheat codes
-
+9HwdLc7FDP7kGd1KRwhShopXIoC-2-LG
 On desktop, press Enter to open chat, type one code and press Enter again. On touch controls, open Chat, enter the code and tap Send. Codes ignore capitalization and spaces at the beginning or end; enter the full code as one message. In Multiplayer, only the host can use cheats. Codes and cheat results are private and never appear in hero speech bubbles.
 
 Codes can be repeated. Rewards and point changes are kept by the normal save system. Item gifts add nothing if the entire gift will not fit. Skill, stat and talent points are separate pools.

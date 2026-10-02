@@ -22,19 +22,26 @@ extends Resource
 var nodes: Array = []
 var _index := {}
 
-## Every skill and talent can be raised to this level (bh-016).
+## Main skills, passives and minor talents can be raised to this level.
 const LEVEL_MAX := 25
 ## Past the level a node used to top out at (its `base_rank`) each extra level is worth this share of a normal one;
 ## single-level nodes (majors, keystones, one-off upgrades) grow far more slowly.
 const TAIL := 0.5
 const TAIL_SINGLE := 0.1
 
-## Raises every node to LEVEL_MAX; the old cap is kept as `base_rank`. Safe to call twice.
+## Side upgrades have one or four levels; major talents and keystones are learned once.
+## The authored cap is kept as `base_rank`. Safe to call twice.
 func finalize_levels() -> void:
 	for n in nodes:
 		if not n.has("base_rank"):
 			n["base_rank"] = int(n.get("max_rank", 1))
-		n["max_rank"] = LEVEL_MAX
+		match n.get("kind", ""):
+			"upgrade":
+				n["max_rank"] = 1 if int(n.base_rank) <= 1 else 4
+			"major", "keystone":
+				n["max_rank"] = 1
+			_:
+				n["max_rank"] = LEVEL_MAX
 
 ## Effective number of "ranks worth" of effect at `rank`: identical to `rank` up to `base`, then diminishing.
 static func rank_power(rank: int, base: int) -> float:
@@ -44,7 +51,7 @@ static func rank_power(rank: int, base: int) -> float:
 
 func power_of(id: StringName, rank: int) -> float:
 	var n := node(id)
-	return rank_power(rank, int(n.get("base_rank", n.get("max_rank", 1))))
+	return rank_power(clampi(rank, 0, int(n.get("max_rank", 1))), int(n.get("base_rank", n.get("max_rank", 1))))
 
 func index() -> Dictionary:
 	if _index.is_empty():

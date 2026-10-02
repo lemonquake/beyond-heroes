@@ -250,14 +250,21 @@ func _show_choice() -> void:
 		sl.set_item(sample)
 		sl.hovered.connect(func(s2: ItemSlot, inside: bool) -> void:
 			if inside:
-				TooltipLayer.show_for(s2, func() -> Control: return Tips.item(sample, {"hero": hero}))
+				TooltipLayer.show_for(s2, func() -> Control: return Tips.item(sample, {"hero": hero, "hint": LootPools.source_hint(inp[0])}))
 			else:
 				TooltipLayer.hide_for(s2))
 		line.add_child(sl)
-		var nl := UITheme.label(b.display_name if b else String(inp[0]), 18, UITheme.TEXT, UITheme.body_font())
-		nl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		nl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		line.add_child(nl)
+		# bh-033: a missing ingredient says where it comes from (resolved loot pools, refinement steps)
+		var names := VBoxContainer.new()
+		names.add_theme_constant_override("separation", 0)
+		names.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		names.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		names.add_child(UITheme.label(b.display_name if b else String(inp[0]), 18, UITheme.TEXT, UITheme.body_font()))
+		if have < int(inp[1]) and LootPools.source_hint(inp[0]) != "":
+			var hl := UITheme.label(LootPools.source_hint(inp[0]), 14, UITheme.TEXT_DIM, UITheme.body_font())
+			hl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			names.add_child(hl)
+		line.add_child(names)
 		var cl := UITheme.label("%d / %d" % [have, int(inp[1])], 19, UITheme.GOOD if have >= int(inp[1]) else UITheme.BAD, UITheme.number_font())
 		cl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		line.add_child(cl)

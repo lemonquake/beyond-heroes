@@ -29,6 +29,7 @@ func compose() -> void:
 	_causeway()
 	_ring()
 	_battlefield()
+	_map_design()
 	spawn(&"arrival", Vector3(WEST + 5.0, 0, 0), 90.0)
 	spawn(&"start", Vector3(WEST + 5.0, 0, 0), 90.0)
 	exit_zone(&"causeway_marsh_gate", Vector3(WEST - 0.5, 0, 0), Vector3(2.0, 4.0, HALF * 2.0), &"wyman_outpost", &"marsh_gate",
@@ -167,3 +168,36 @@ func _battlefield() -> void:
 	kit("banner_torn", Vector3(-14.0, 0.2, 3.0), 10.0, 1.0, deco).rotation.x = deg_to_rad(80.0)
 	scatter(["rubble_pile", "rock_small"], Rect2(-60, -3.4, 44, 6.8), 10, 5.0, Vector2(0.5, 0.9),
 		func(x, z): return absf(z) < 2.0)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the route's length told by its edges — waterlogged timber and broken cargo drifting
+# against the causeway's sides, eroded stone at the water line, reeds — and the drowned tollhouse's own leavings by the
+# ring. Nothing stands on the 8 m deck or inside the ring: every encounter keeps its ground.
+
+func _map_design() -> void:
+	var dr := RandomNumberGenerator.new()
+	dr.seed = hash("causeway_edges")
+	var x := WEST + 4.0
+	while x < EAST - 2.0:
+		var side := -1.0 if dr.randf() < 0.5 else 1.0
+		var z := side * (HALF + dr.randf_range(1.4, 3.6))
+		match int(dr.randi() % 4):
+			0: kit("kd_debris_wood", Vector3(x, WATER_Y - 0.05, z), dr.randf() * 360.0, dr.randf_range(1.0, 1.4), deco)
+			1: kit("kd_barrel", Vector3(x, WATER_Y - 0.45, z), dr.randf() * 360.0, 0.9, deco).rotation.z = deg_to_rad(dr.randf_range(50, 80))
+			2: kit("kd_crate", Vector3(x, WATER_Y - 0.4, z), dr.randf() * 360.0, 0.9, deco).rotation.x = deg_to_rad(dr.randf_range(-15, 15))
+			_: decor("kd_rock_flat", Vector3(x, WATER_Y - 0.08, side * (HALF + 0.9)), dr.randf() * 360.0, dr.randf_range(1.0, 1.5), false)
+		if dr.randf() < 0.6:
+			decor("kd_grass_large", Vector3(x + dr.randf_range(-1.5, 1.5), WATER_Y + 0.05, side * (HALF + dr.randf_range(2.0, 4.0))),
+				dr.randf() * 360.0, dr.randf_range(1.2, 1.8), false)
+		x += dr.randf_range(3.5, 6.5)
+	# the drowned tollhouse: its goods spilled where the north-east wall fell into the marsh
+	for c in [[Vector3(13.5, WATER_Y - 0.3, -15.0), "kd_debris_stone", 1.6], [Vector3(16.0, WATER_Y - 0.5, -12.5), "kd_crate", 1.0],
+			[Vector3(18.5, WATER_Y - 0.1, -10.0), "kd_debris_wood", 1.5], [Vector3(-12.0, WATER_Y - 0.5, 15.5), "kd_barrel", 1.0],
+			[Vector3(-15.5, WATER_Y - 0.3, 13.0), "kd_debris_wood", 1.3]]:
+		kit(c[1], c[0], rng.randf() * 360.0, c[2], deco)
+	# and the long view toward it: two leaning dead trees closer to the deck mark the approach
+	for c in [Vector3(-30.0, WATER_Y, -9.5), Vector3(-22.0, WATER_Y, 9.0)]:
+		decor("kd_log", c, rng.randf() * 360.0, 1.2, false, false, 10.0)
+	# ambient accents: black water against the causeway's sides
+	for ax in [-58.0, -40.0, -24.0]:
+		accent(Vector3(ax, WATER_Y + 0.3, HALF + 2.0), &"water_splash", -18.0)

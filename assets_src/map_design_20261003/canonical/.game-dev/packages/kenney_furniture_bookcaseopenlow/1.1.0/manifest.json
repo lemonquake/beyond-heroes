@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_bookcaseopenlow",
+  "category": "environment_prop",
+  "description": "Low open bookcase. Intended use: Guild room divider without camera obstruction",
+  "displayName": "kenney_furniture_bookcaseopenlow",
+  "files": [
+    {
+      "bytes": 11520,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75"
+    },
+    {
+      "bytes": 1545,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "7fe2629e635922d8d9c20f15bc17cb19222d5225a05b05cd623472da45056f08"
+    },
+    {
+      "bytes": 852,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "fe39f0693b8d7e48feb1ef6e6938bd21a6ec4affa364388b4427520c647061e0"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "7dd96ab8f0be8f1c4579537ab9d36bf5ccc78d0f2d8b8e30e25bdd731fb772b1"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_e65a06adfc7d5e3b0a08dc24",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

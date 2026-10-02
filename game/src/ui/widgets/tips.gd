@@ -171,6 +171,10 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			var uses := Tips.material_uses(it.base.id)
 			if uses != "":
 				v.add_child(lbl(uses, 14, UITheme.TEXT_DIM))
+			# bh-033: where more comes from (resolved loot pools), unless the caller already passes it as the hint
+			var src := LootPools.source_hint(it.base.id)
+			if src != "" and String(opts.get("hint", "")) != src:
+				v.add_child(lbl("Find: " + src, 14, UITheme.TEXT_DIM))
 	# enchantments
 	var aff := it.affix_lines()
 	if not aff.is_empty():

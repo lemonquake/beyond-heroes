@@ -58,6 +58,7 @@ func compose() -> void:
 	_halls()
 	_greenery()
 	_background()
+	_bh033_dressing()
 	spawn(&"start", Vector3(0, 0, 14.5), 180.0, true)
 	spawn(&"gate", Vector3(0, 0, 30.0), 180.0, true)
 	set_bounds(AABB(Vector3(-42, -2, -42), Vector3(84, 12, 84)))
@@ -344,3 +345,190 @@ func _background() -> void:
 	mist(Rect2(-160, -160, 320, 320), -9.0, Color(0.25, 0.3, 0.42), 0.55)
 	# moonlit fill so the valley edge reads against the sky
 	light(Vector3(0, 12, 36), Color(0.45, 0.55, 0.9), 0.8, 30.0)
+
+# ------------------------------------------------------------------------------------------------------------
+# bh-033: the route dressed for daily life (Poly Haven CC0 props, ph_*, docs/ASSET_SOURCES.md) and readable signage.
+# Every placement is checked against the town's walking lines, building footprints and shop customer spots; one that
+# would block is skipped and reported (`dressing_skipped` on the map root), never forced in.
+
+## Walking lines: gate -> plaza -> terrace stair, and the plaza to every door (the same lines the ground paint uses).
+func _walk_lines() -> Array:
+	var out := [[Vector2(0, 38), Vector2(0, 12)], [Vector2(0, -4), Vector2(0, -16)]]
+	for t in [Vector2(-20.6, 2), Vector2(20.6, 6), Vector2(-15, 19.5), Vector2(19.5, -12), Vector2(-17.7, -16.7),
+			Vector2(-23.5, 13.5), Vector2(26.4, -4.8), Vector2(-24.9, -9.5)]:
+		# people walk round the fountain: a door's line starts at the plaza ring, not at the basin
+		var c := Vector2(PLAZA.x, PLAZA.z)
+		out.append([c + (t - c).normalized() * 8.5, t])
+	return out
+
+func _clear_spot(p: Vector3, radius: float) -> bool:
+	var q := Vector2(p.x, p.z)
+	for l in _walk_lines():
+		if _seg_dist(q, l[0], l[1]) < radius + 1.3:
+			return false
+	for f in FOOTPRINTS:
+		var local := Vector2(p.x - f[0], p.z - f[1]).rotated(deg_to_rad(f[2]))
+		if absf(local.x) < f[3] + radius + 0.6 and absf(local.y) < f[4] + radius + 0.6:
+			return false
+	for st in DataTownRows.row(def.id).get("stands", []):
+		var cw3 := DataTownRows.customer_spot(st)
+		if q.distance_to(Vector2(cw3.x, cw3.z)) < radius + 1.4 or q.distance_to(Vector2(st.pos.x, st.pos.z)) < radius + 1.8:
+			return false
+	return q.length() < FENCE_R - 1.5
+
+var _skipped: Array = []
+
+## A prop if its spot is clear (radius = its footprint), else nothing.
+func _dress(name: String, p: Vector3, yaw: float, radius := 0.5, check := true) -> Node3D:
+	if check and not _clear_spot(p, radius):
+		_skipped.append("%s at (%.1f, %.1f)" % [name, p.x, p.z])
+		return null
+	return kit(name, p, yaw, 1.0, props, true)
+
+func _bh033_dressing() -> void:
+	clear_fn = func(x: float, z: float, r: float) -> bool: return _clear_spot(Vector3(x, 0, z), r)
+	# ---- fountain plaza: benches facing the water in three uneven groups, a planted bed beside each ----------------
+	# (map-design pass: real benches instead of tables, and soil beds that break the paving at the ring's edge)
+	var placed := []
+	for i in 36:
+		var a := TAU * (i + 0.5) / 36.0
+		var at := PLAZA + Vector3(cos(a) * 7.6, 0, sin(a) * 7.6)
+		if placed.size() >= 3 or placed.any(func(b): return absf(angle_difference(b, a)) < 1.5) or not _clear_spot(at, 1.4):
+			continue
+		if vignette("bench_view", at, rad_to_deg(atan2(-cos(a), -sin(a))), {"check": false}):
+			placed.append(a)
+			for da in [0.36, -0.36, 0.6]:
+				var pl := PLAZA + Vector3(cos(a + da) * 10.2, 0, sin(a + da) * 10.2)
+				if _clear_spot(pl, 1.35):
+					vignette("garden_bed", pl, rad_to_deg(-a) + 90.0, {"scale": 0.9, "check": false})
+					break
+	root.set_meta(&"plaza_benches", placed.size())
+	# ---- the fishmonger's corner by the netmender's house: racks, nets, the morning's catch in crates and baskets -----
+	# the clear 3 m spot nearest the netmender's house (Tessaly mends the nets; the catch is sold by her door)
+	var fish := Vector3.INF
+	var best := INF
+	for r in [12.5, 14.0, 16.0, 18.0, 20.0]:
+		for deg in range(0, 360, 5):
+			var cand := PLAZA + Vector3(cos(deg_to_rad(deg)) * r, 0, sin(deg_to_rad(deg)) * r)
+			if Rect2(4.0, 9.0, 24.0, 26.0).has_point(Vector2(cand.x, cand.z)) or not _clear_spot(cand, 2.4):
+				continue
+			var dd := Vector2(cand.x, cand.z).distance_to(Vector2(-20.6, 2.0))
+			if dd < best:
+				best = dd
+				fish = cand
+	if fish == Vector3.INF:
+		fish = Vector3(-14.5, 0, -1.0)
+	root.set_meta(&"fish_corner", fish)
+	_dress("fish_rack", fish + Vector3(-1.4, 0, -1.2), 75.0, 0.9)
+	_dress("fishing_nets", fish + Vector3(1.0, 0, -2.4), 20.0, 0.8)
+	_dress("ph_wooden_crate_01", fish + Vector3(1.6, 0, 0.2), 15.0, 0.5)
+	_dress("ph_wooden_crate_01", fish + Vector3(2.5, 0, -0.6), -20.0, 0.5)
+	_dress("ph_wicker_basket_01", fish + Vector3(0.6, 0, 1.0), 40.0, 0.3)
+	_dress("ph_wooden_bucket_02", fish + Vector3(-0.6, 0, 0.9), 0.0, 0.4)
+	_dress("ph_folding_wooden_stool", fish + Vector3(-0.2, 0, -0.4), 160.0, 0.35)
+	# ---- signs at the plaza's edges: every service named once, pointing the way ----------------------------------
+	signpost(Vector2(3.4, 13.5), [["Merchant Quarter", Vector2(1, 0.6)], ["South Gate", Vector2(0, 1)], ["Waypoint Terrace", Vector2(0, -1)]])
+	signpost(Vector2(-3.4, -5.5), [["Waypoint Terrace", Vector2(0, -1)], ["Guild House", Vector2(-0.6, -0.4)], ["Swordfin Hall", Vector2(1, -0.3)]])
+	signpost(Vector2(-11.0, 10.5), [["The Salted Marlin", Vector2(-1, 0.4)], ["Lantern House", Vector2(-1, -0.7)]])
+	# ---- the south gate: the watch's post, and a trader's cart once Captain Hald opens the gate -----------------
+	var gz := FENCE_R - 0.6
+	_dress("ph_woodentable_01", Vector3(-6.8, 0, gz - 6.5), 90.0, 0.7)
+	_dress("ph_wine_barrel_01", Vector3(-6.4, 0, gz - 8.4), 30.0, 0.5)
+	_dress("ph_wooden_lantern_01", Vector3(-6.0, 0, gz - 5.4), 0.0, 0.3)
+	var cart := _dress("cart_hay", Vector3(6.2, 0, gz - 7.2), -15.0, 1.4)
+	if cart:
+		show_when(cart, &"south_gate_open")
+		for d in [[Vector3(4.6, 0, gz - 8.6), "ph_wooden_crate_02", 80.0], [Vector3(5.0, 0, gz - 9.6), "ph_wicker_basket_02", 0.0]]:
+			var n := _dress(d[1], d[0], d[2], 0.4)
+			if n:
+				show_when(n, &"south_gate_open")
+	# ---- the waypoint terrace: benches looking out over the plaza, planters on the parapet -----------------------
+	for sx in [-5.0, 5.0]:
+		vignette("bench_view", Vector3(sx - 0.5, TERRACE_Y, -19.4), 0.0, {"on_ground": false, "check": false})
+		kit("ph_planter_box_01", Vector3(sx * 1.6, TERRACE_Y, -18.7), 0.0, 1.0, props)
+		decor("kd_flower_purple" if sx < 0 else "kd_flower_yellow", Vector3(sx * 1.6 - 0.2, TERRACE_Y + 0.35, -18.7), 0.0, 0.9, false)
+		decor("bush_a", Vector3(sx * 1.6 + 0.3, TERRACE_Y + 0.35, -18.7), 30.0, 0.45, false)
+	# ---- Brannoc's smithy: quench tub, the chopping stump with its axe, stock in crates ---------------------------
+	var smithy := Vector3(21.2, 0, 22.4)
+	_dress("ph_wooden_bucket_02", smithy + Vector3(1.8, 0, -2.6), 0.0, 0.4)
+	_dress("ph_tree_stump_01", smithy + Vector3(2.8, 0, -3.6), 30.0, 0.7)
+	var axe := _dress("ph_wooden_axe", smithy + Vector3(2.7, 0.3, -3.6), 60.0, 0.1, false)
+	if axe:
+		axe.rotation_degrees.z = 25.0
+	_dress("ph_wooden_crate_02", smithy + Vector3(4.0, 0, -1.2), 90.0, 0.6)
+	_dress("ph_wine_barrel_01", smithy + Vector3(4.4, 0, 0.2), 0.0, 0.5)
+	# ---- the market square: goods waiting by the stalls -------------------------------------------------------------
+	for d in [[Vector3(12.3, 0, 12.6), "ph_wicker_basket_02"], [Vector3(13.1, 0, 12.4), "ph_wicker_basket_01"], [Vector3(18.6, 0, 12.2), "ph_wooden_crate_01"],
+			[Vector3(7.4, 0, 24.2), "ph_wooden_bucket_01"], [Vector3(7.8, 0, 18.4), "ph_wooden_crate_02"], [Vector3(23.0, 0, 30.6), "ph_wooden_bucket_02"]]:
+		_dress(d[1], d[0], rng.randf() * 360.0, 0.4)
+	# ---- the shrine of the fallen: an offering once the Warden is laid to rest -------------------------------------
+	var token := _dress("ph_ceramic_pot", Vector3(10.6, 0, 27.4), 0.0, 0.3, false)
+	if token:
+		show_when(token, &"boss_warden_defeated")
+	root.set_meta(&"dressing_skipped", _skipped)
+	_map_design()
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the fishing town's working corners, yards and edges, with the prepared Kenney pieces
+# (kd_*, DataVignettes). Every group has a purpose and sits at an edge; the walking lines, door approaches and shop
+# customer spots stay clear (clear_fn), and a group that would block is skipped and reported, not forced in.
+
+## The first candidate spot that is clear gets the group.
+func _first_clear(vname: String, cands: Array, yaw: float, opts := {}) -> Node3D:
+	for c: Vector3 in cands:
+		var n := vignette(vname, c, yaw, opts)
+		if n:
+			return n
+	return null
+
+func _map_design() -> void:
+	var gz := FENCE_R - 0.6
+	# ---- south-gate arrival: the watch's woodpile and stores west of the road, planted road edges ----------------
+	_first_clear("woodpile", [Vector3(-11.5, 0, 33.0), Vector3(-12.5, 0, 30.5), Vector3(-10.5, 0, 28.0)], -25.0)
+	_first_clear("supply_corner", [Vector3(-9.4, 0, 27.4), Vector3(-11.0, 0, 25.0)], 15.0)
+	for z in [25.5, 18.0]:
+		vignette("flower_border", Vector3(-5.6, 0, z), 90.0)
+		vignette("flower_border", Vector3(5.4, 0, z + 1.5), -90.0)
+	# ---- Merchant Quarter: produce by the provisioner, fuel by the forge, deliveries waiting at the south end ------
+	_first_clear("produce_display", [Vector3(6.4, 0, 12.6), Vector3(6.0, 0, 15.5)], 20.0)
+	var fuel := Vector3(24.4, 0, 17.4)
+	if _clear_spot(fuel, 0.9):
+		kit("kd_log_stack", fuel, 90.0, 0.9, props, true)
+	place_near("cargo_stack", Vector3(12.0, 0, 35.0), Vector3(14.0, 0, 33.0), 0.0, 6.0, 8.0)
+	# ---- houses and the tavern: each yard does what its household does -----------------------------------------
+	# (Tessaly's yard already has the fishmonger's corner with her racks and nets, bh-033)
+	var yard := {&"int_netmender": "", &"int_cartographer": "book_corner", &"int_widow": "kitchen_garden",
+		&"int_keeper": "woodpile", &"int_refugee": "supply_corner"}
+	for lot in HOUSE_LOTS:
+		var p: Vector3 = lot[0]
+		var yaw: float = lot[1]
+		var fwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(yaw))
+		var side := fwd.cross(Vector3.UP)
+		var vn: String = yard[lot[2]]
+		if vn == "":
+			continue
+		place_near(vn, p + side * 6.5 + fwd * 1.0, p, 5.5, 10.5, yaw)
+	var tv: Array = HALLS[0]
+	var tfwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(tv[2]))
+	var tside := tfwd.cross(Vector3.UP)
+	place_near("tavern_stock", tv[1] - tside * 7.0 + tfwd * 1.0, tv[1], 6.0, 11.0, tv[2])
+	# ---- greenery: grouped trees inside the walls where lots leave room, pine stands outside the palisade --------
+	for c in [Vector3(-34.5, 0, -1.0), Vector3(33.5, 0, 12.5), Vector3(-6.0, 0, -33.5), Vector3(14.0, 0, -31.0)]:
+		if _clear_spot(c, 2.0):
+			vignette("tree_group", c, rng.randf() * 360.0, {"scale": 0.85, "check": false})
+	for i in 7:
+		var a := TAU * (i + 0.3) / 7.0
+		if sin(a) > 0.2:
+			continue          # nothing tall south of the town: the camera looks north over it (and the road stays open)
+		vignette("pine_group", Vector3(cos(a) * 44.0, 0, sin(a) * 44.0), rad_to_deg(a), {"check": false})
+	vignette("rock_cluster_l", Vector3(-41.0, 0, 20.0), 30.0, {"check": false})
+	# one focal tree in the open lot between the Guild House and Swordfin Hall
+	for c in [Vector3(18.0, 0, -6.0), Vector3(16.0, 0, -9.0), Vector3(-36.0, 0, 10.0)]:
+		if _clear_spot(c, 1.6) and not touches_solid(c, 1.6):
+			kit("kd_tree_detailed", c, rng.randf() * 360.0, 0.95, props, true)
+			break
+	vignette("rock_tall", Vector3(38.5, 0, -24.0), 200.0, {"check": false})
+	# ambient accents: the forge, the fountain, the gate's braziers
+	accent(Vector3(22.6, 1.0, 21.6), &"torch_crackle", -12.0)
+	accent(PLAZA + Vector3(0, 0.8, 0), &"water_splash", -20.0)
+	accent(Vector3(0, 1.0, FENCE_R - 2.2), &"torch_crackle", -16.0)

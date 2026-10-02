@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/modular-dungeon-kit/7bed87605b-1771926065/kenney_modular-dungeon-kit_1.0.zip",
+  "licenseEvidence": "licenses/modular-dungeon-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "dd0aa6776db8912283cdca60161dee6a8839bbda3558eba2ea501419eb5b4623",
+  "originalModelSha256": "403a357e1d59760f171d9def9db4ff01859372bde885dad2322e1519dafa4351",
+  "originalRelativePath": "sources/modular-dungeon-kit/Models/GLB format/template-floor-detail-a.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 28309,
+      "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 51032,
+    "fileName": "kenney_modular-dungeon_template_floor_detail_a.glb",
+    "sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833"
+  },
+  "sourceUri": "https://kenney.nl/assets/modular-dungeon-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_lantern_candle\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_lantern_candle",
+      "category": "environment_prop",
+      "description": "Candle lantern housing. Intended use: Crypt route accents and flooded cistern pier",
+      "displayName": "kenney_graveyard_lantern_candle",
+      "files": [
+        {
+          "bytes": 33148,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "0bb7aa2c7b40162e5ceb7f16d60f8e3c1942637483e9a58948f9374f051badfa"
+        },
+        {
+          "bytes": 1757,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "162d4be1518c14f91b6add1c3b228de2306d5a43d50a13d5673c086f8427b267"
+        },
+        {
+          "bytes": 1110,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "b30e9c20a3c401677dc8373bd1d8ef2ac58f796674f9da6226cb6e8168b9f183"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e27e7ef0328ca4163ffd4e7f7b42f2d3d90db705684cef224855bb941746f00f"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7b991b57d960b7ea8fb83d72",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:38.273Z"
+}

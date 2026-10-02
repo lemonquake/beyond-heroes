@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_79415d25-efdc-4a3d-89d6-724f612babb6",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseclosedwide\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:02:05.513Z",
+  "updatedAt": "2026-10-02T20:02:05.540Z",
+  "startedAt": "2026-10-02T20:02:05.518Z",
+  "completedAt": "2026-10-02T20:02:05.540Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_79415d25-efdc-4a3d-89d6-724f612babb6\\receipt.json"
+}

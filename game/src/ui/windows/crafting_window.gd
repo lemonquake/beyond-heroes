@@ -384,7 +384,7 @@ func _refresh_detail() -> void:
 	var it := _preview(r, v)
 	_out_slot.set_item(it)
 	_out_name.text = String(r.name)
-	var verb := String(DataCrafting.STATIONS.get(station, {}).get("verb", "Craft"))
+	var verb := String(r.get("verb", DataCrafting.STATIONS.get(station, {}).get("verb", "Craft")))
 	var meta := [DataCrafting.station_names(r.stations), "Level %d" % int(r.get("level", 1))]
 	if int(r.get("gold", 0)) > 0:
 		meta.append("Fee %d gold" % int(r.gold))
@@ -404,7 +404,7 @@ func _refresh_detail() -> void:
 	for inp in r.inputs:
 		var b := DB.item_base(inp[0])
 		var need := int(inp[1]) * times
-		var have := hero.inventory.count_of(inp[0])
+		var have := Crafting.ingredient_count(hero, r, inp[0])
 		var line := hbox(12)
 		var sl := ItemSlot.new(ItemSlot.Kind.DISPLAY, 48.0)
 		sl.drag_enabled = false
@@ -416,10 +416,18 @@ func _refresh_detail() -> void:
 			else:
 				TooltipLayer.hide_for(s2))
 		line.add_child(sl)
-		var nl := UITheme.label(b.display_name if b else String(inp[0]), 19, UITheme.TEXT, UITheme.body_font())
-		nl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		nl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		line.add_child(nl)
+		# bh-033: the name, then one short line saying where it comes from (resolved loot pools, refinement steps)
+		var names := VBoxContainer.new()
+		names.add_theme_constant_override("separation", 0)
+		names.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		names.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		names.add_child(UITheme.label(b.display_name if b else String(inp[0]), 19, UITheme.TEXT, UITheme.body_font()))
+		var hint := _where(inp[0])
+		if hint != "" and have < need:
+			var hl := UITheme.label(hint, 14, UITheme.TEXT_DIM, UITheme.body_font())
+			hl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			names.add_child(hl)
+		line.add_child(names)
 		var cl := UITheme.label("%d / %d" % [have, need], 20, UITheme.GOOD if have >= need else UITheme.BAD, UITheme.number_font())
 		cl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		line.add_child(cl)
@@ -432,21 +440,9 @@ func _refresh_detail() -> void:
 		_result.text = err
 	_max_btn.disabled = Crafting.max_craftable(hero, r) <= 1
 
-## Where an ingredient comes from (tooltip hint).
+## Where an ingredient comes from (tooltip hint and the line under a missing ingredient), from the resolved pools.
 func _where(id: StringName) -> String:
-	if GatherNode.LOOK.has(id):
-		return "Gathered from herb patches in the wild."
-	var from := []
-	for e: EnemyDef in DB.enemies.values():
-		for l in e.loot:
-			if l[0] == id and not from.has(e.display_name):
-				from.append(e.display_name)
-	if id == &"champion_essence":
-		return "Dropped by minibosses and the Hollow Warden."
-	for r in DataCrafting.all():
-		if (r.out as Dictionary).get("base", &"") == id:
-			from.append("crafted (%s)" % r.name)
-	return ("Dropped by: " + ", ".join(from)) if not from.is_empty() else ""
+	return LootPools.source_hint(id)
 
 func _fill_variants(r: Dictionary) -> void:
 	var vs: Array = r.get("variants", [])

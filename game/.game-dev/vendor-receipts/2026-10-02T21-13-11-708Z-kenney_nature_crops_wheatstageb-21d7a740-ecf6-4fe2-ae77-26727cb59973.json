@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_dc991b53a93804b70efe3403",
+  "assetId": "kenney_nature_crops_wheatstageb",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_crops_wheatstageb",
+  "modelSha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852",
+  "manifestSha256": "38c001efc12c3b5157972e146874acee6040abcc73a2055d0ca4ce1086a894f4",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:11.708Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crops_wheatstageb\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

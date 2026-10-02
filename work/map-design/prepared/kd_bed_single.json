@@ -1,0 +1,43 @@
+{
+ "source_id": "kenney_furniture_bedsingle",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_bed_single.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0",
+ "source_sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+ "derived_sha256": "03a4e522156245966328203e20d1952a5a2c78a25a4288ceaf6f0c561ce31c9e",
+ "scale": 1.9,
+ "scale_rule": [
+  "s",
+  1.9
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_ClothCream",
+  "BH_Wood",
+  "BH_Iron",
+  "BH_ClothRed"
+ ],
+ "part_faces": {
+  "BH_ClothCream": 92,
+  "BH_Wood": 52,
+  "BH_Iron": 40,
+  "BH_ClothRed": 30
+ },
+ "source_to_material": {
+  "carpetWhite": "BH_ClothCream",
+  "wood": "BH_Wood",
+  "metal": "BH_Iron",
+  "carpet": "BH_ClothRed"
+ },
+ "triangles": 214,
+ "surfaces": 4,
+ "source_triangles": 214,
+ "source_meshes": 3,
+ "bounds_m": [
+  1.085,
+  0.712,
+  2.138
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

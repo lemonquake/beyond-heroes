@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:46.643Z",
+  "destination": {
+    "assetId": "kenney_nature_log",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "91d558e01da024f0f091e62fc2ffa1cee9174f44f6367e083213af81e4d78dfd",
+  "packageId": "pkg_46ed0eca9980d81ced3e3db1",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 14288,
+    "fileName": "log.glb",
+    "sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6"
+  }
+}

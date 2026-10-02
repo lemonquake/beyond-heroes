@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_coatrackstanding",
+  "category": "environment_prop",
+  "description": "Standing coat rack. Intended use: Tavern vestibule and guild reception",
+  "displayName": "kenney_furniture_coatrackstanding",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.1363999992609024,
+        0.7699999809265137,
+        0.1363999992609024
+      ],
+      "min": [
+        -0.1363999992609024,
+        3.0776935281025807e-29,
+        -0.1363999992609024
+      ],
+      "sizeMeters": [
+        0.2727999985218048,
+        0.7699999809265137,
+        0.2727999985218048
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 13288,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 190,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 300,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

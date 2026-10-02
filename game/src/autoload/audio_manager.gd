@@ -192,8 +192,32 @@ func play_at(name: StringName, pos: Vector3, volume_db := 0.0, pitch_var := 0.08
 	p.stream = v[randi() % v.size()]
 	p.global_position = pos
 	p.volume_db = volume_db
+	p.max_distance = 45.0          # an accent may have shortened this voice's reach
 	p.pitch_scale = 1.0 + randf_range(-pitch_var, pitch_var)
 	p.play()
+
+## Map-design pass: a 3D sound that never steals a voice — used by ambient accents (AmbientAccents), which give way to
+## combat and voices whenever the pool is busy. Returns false when nothing was played.
+func play_at_if_free(name: StringName, pos: Vector3, volume_db := 0.0, max_distance := 22.0) -> bool:
+	var v := _variations(name)
+	if v.is_empty():
+		return false
+	var busy := 0
+	var p: AudioStreamPlayer3D = null
+	for q in _pool3d:
+		if q.playing:
+			busy += 1
+		elif p == null:
+			p = q
+	if p == null or busy > _pool3d.size() / 2:
+		return false
+	p.stream = v[randi() % v.size()]
+	p.global_position = pos
+	p.volume_db = volume_db
+	p.max_distance = max_distance
+	p.pitch_scale = 1.0 + randf_range(-0.06, 0.06)
+	p.play()
+	return true
 
 ## Looping 3D emitter owned by the caller (torches, teleporter hum, whirlwind).
 func make_loop(name: StringName, parent: Node3D, volume_db := -6.0, max_distance := 18.0) -> AudioStreamPlayer3D:

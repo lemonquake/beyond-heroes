@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:44.666Z",
+  "destination": {
+    "assetId": "kenney_graveyard_fire_basket",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "987df3408d0604da01391c731b98218381971149afafdaeb630aefd71b94f2f6",
+  "packageId": "pkg_5d87db31765e11e633406e48",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 29764,
+    "fileName": "kenney_graveyard_fire_basket.glb",
+    "sha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916"
+  }
+}

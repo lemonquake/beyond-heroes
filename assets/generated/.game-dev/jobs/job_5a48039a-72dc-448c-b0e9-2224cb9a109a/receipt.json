@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_plantsmall2\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_plantsmall2",
+      "category": "environment_prop",
+      "description": "Second small potted plant. Intended use: Apothecary herb display and house shelves",
+      "displayName": "kenney_furniture_plantsmall2",
+      "files": [
+        {
+          "bytes": 12996,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9"
+        },
+        {
+          "bytes": 1612,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "f0b1b5f17cdd07e5b8a0e5b06926f2ab9d30c9e8c1f08e6f5e083bd25774f487"
+        },
+        {
+          "bytes": 807,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9b799dda84aa768e6951b7cbf347779322a535054642635b91b93ac9c6b86bf1"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "2828e4ce349adfa3cd1f3de4343135e72c245c69343f3faa06ec79b50c5a845d"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_fd5125944348d824af711c64",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:15.086Z"
+}

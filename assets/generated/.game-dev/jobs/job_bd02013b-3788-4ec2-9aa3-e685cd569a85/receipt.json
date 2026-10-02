@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_crate\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_crate",
+      "category": "environment_prop",
+      "description": "Wooden cargo crate. Intended use: Agdao pier handling area and Westreach stolen cargo",
+      "displayName": "kenney_pirate_crate",
+      "files": [
+        {
+          "bytes": 9232,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b525674e07c8b83667512a8dd93be0d7684358347d0e64d2bb16b156ac382ed1"
+        },
+        {
+          "bytes": 1727,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6b7ecd34bc9b5e418855e519f2ec534379a35d71c6e9ccad396396de47724b85"
+        },
+        {
+          "bytes": 778,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "22c19b4ee7b137f918b371f4a5a52a26e4cfa2e8fb99bd82449a5ad98c078fd7"
+        },
+        {
+          "bytes": 3649,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "b14e6a52a7bce3d5acd0c1b5331308501cb99c8fec7ea090b00c17cd61f3b7ec"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_b34cd0516e3a9b20d06a2495",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:17.965Z"
+}

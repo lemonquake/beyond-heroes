@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_graveyard_altar_stone",
+  "category": "environment_prop",
+  "description": "Stone ritual altar. Intended use: Catacomb ritual room, temple side chapel and Jade tomb niche",
+  "displayName": "kenney_graveyard_altar_stone",
+  "files": [
+    {
+      "bytes": 28184,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0"
+    },
+    {
+      "bytes": 1758,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "b5a6e1a351a8517fcdb8d96753223303edb0f26b889163c9e19585bed6e05968"
+    },
+    {
+      "bytes": 1104,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "5e52f09caa9478e92dcf084e183810727c23daeba476122f1d402e3b51959d5b"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "56775800934067878b5b54580c33cf4adc07270703d5b5f6fb8712d6545479c0"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_fcec63e42cfd50d92645a367",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

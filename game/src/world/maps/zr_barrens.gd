@@ -86,6 +86,7 @@ func compose() -> void:
 	_outcrops()
 	_encounters()
 	_scrub()
+	_map_design()
 	spawn(&"coil_road", Vector3(DataZarael.GB_WEST.x, 0, DataZarael.GB_WEST.z), 90.0, true)
 	spawn(&"start", Vector3(DataZarael.GB_WEST.x, 0, DataZarael.GB_WEST.z), 90.0, true)
 	spawn(&"bridge_road", Vector3(DataZarael.GB_NORTH.x, 0, DataZarael.GB_NORTH.z), 0.0, true)
@@ -522,3 +523,41 @@ func _scrub() -> void:
 			continue
 		decor("grass_clump", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.6, 1.1))
 		placed += 1
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): scraps of salvage and labour where people work — round the survivors' camp, at the
+# fallen colossus being picked over, and at the two Vault mouths, which differ: the Obsidian Engine keeps a service
+# entrance (a fire basket, stacked stores), the Veinworks an abandoned extraction (spoil, tipped barrels, a shovel).
+# Bare shattered rock (no moss, no grass): the barrens stay barren.
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	var p := Vector2(x, z)
+	for c in CAMPS:
+		if p.distance_to(c[1]) < float(c[2]) + r + 3.0:
+			return false
+	return not _near_route(x, z, r + 3.0, r + 2.0) and is_clear(x, z, r * 0.5)
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	var camp := Vector3(-40.0, 0, 30.0)
+	for c in [["salvage", Vector3(-58.0, 0, 30.0)], ["tool_corner", Vector3(-40.0, 0, 50.0)], ["supply_corner", Vector3(-24.0, 0, 42.0)]]:
+		place_near(c[0], c[1], camp, 15.0, 24.0, rng.randf() * 360.0, {"check": false})
+	place_near("excavation", COLOSSUS + Vector3(-16.0, 0, 14.0), COLOSSUS, 18.0, 28.0, 30.0)
+	place_near("salvage", COLOSSUS + Vector3(18.0, 0, 10.0), COLOSSUS, 18.0, 28.0, -40.0)
+	var ob: Vector2 = DataDungeons.get_def(&"obsidian_engine").surface.pos
+	var basket := Vector3(ob.x + 6.5, 0, ob.y + 7.0)
+	if not touches_solid(Vector3(basket.x, height_at(basket.x, basket.z), basket.z), 1.0):
+		kit("kd_fire_basket", basket, 0.0, 1.0, props, true)
+		flame(Vector3(basket.x, height_at(basket.x, basket.z) + 0.45, basket.z), 0.9)
+		light(Vector3(basket.x, height_at(basket.x, basket.z) + 1.4, basket.z), FIRE, 2.0, 8.0, false, true)
+	place_near("cargo_stack", Vector3(ob.x - 7.0, 0, ob.y + 7.0), Vector3(ob.x, 0, ob.y), 6.0, 12.0, 160.0)
+	var vn: Vector2 = DataDungeons.get_def(&"veinworks").surface.pos
+	place_near("excavation", Vector3(vn.x - 7.0, 0, vn.y - 5.0), Vector3(vn.x, 0, vn.y), 6.0, 12.0, 250.0)
+	for c in [Vector3(vn.x - 5.0, 0, vn.y + 6.5), Vector3(vn.x + 6.0, 0, vn.y - 7.0)]:
+		if not touches_solid(Vector3(c.x, height_at(c.x, c.z), c.z), 0.8):
+			kit("kd_barrel", c + Vector3(0, 0.45, 0), rng.randf() * 360.0, 0.9, deco, true).rotation.z = deg_to_rad(84.0)
+	for q in [[Vector3(-80.0, 0, 20.0), "kd_shore_rocks_a"], [Vector3(-10.0, 0, 30.0), "kd_shore_rocks_c"], [Vector3(30.0, 0, -10.0), "kd_shore_rocks_b"],
+			[Vector3(-60.0, 0, -40.0), "kd_shore_rocks_c"], [Vector3(60.0, 0, 20.0), "kd_shore_rocks_a"]]:
+		var p: Vector3 = q[0]
+		if _clear_here(p.x, p.z, 3.5) and not touches_solid(Vector3(p.x, height_at(p.x, p.z), p.z), 3.0):
+			kit(q[1], p - Vector3(0, 0.4, 0), rng.randf() * 360.0, rng.randf_range(0.8, 1.1), props, true)

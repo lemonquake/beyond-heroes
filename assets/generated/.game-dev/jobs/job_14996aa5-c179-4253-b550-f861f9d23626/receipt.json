@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_bottle_large\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_pirate_bottle_large",
+      "category": "environment_prop",
+      "description": "Large bottle. Intended use: Grouped apothecary and market storage",
+      "displayName": "kenney_pirate_bottle_large",
+      "files": [
+        {
+          "bytes": 22340,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c"
+        },
+        {
+          "bytes": 1728,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "24a3725a2641007c01784f5d6b2f9c1370ca06feb626d2b9098deb5d3819bd63"
+        },
+        {
+          "bytes": 1084,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "1834f8a2bf76a66ad68966d00e15314ecc1910da23212aa54f96b020d311cca7"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "bd4a1b05e8b14f732e22288cc9d72a27e537c7e5cecd55aaeb18f92d1f302e5e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_e89b9c424066ba0f8328df4b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:25.390Z"
+}

@@ -1,0 +1,37 @@
+{
+  "description": "Grouped shoreline rocks. Intended use: Agdao harbour mouth and cove shore",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/pirate-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+    "originalArchiveSha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+    "originalModelSha256": "df8f27bd88a9b624337b08adde53c73dd25ddabd52dbee1de9da412d68bb4f08",
+    "originalRelativePath": "sources/pirate-kit/Models/GLB format/rocks-a.glb",
+    "licenseEvidence": "licenses/pirate-kit.txt",
+    "transformations": [
+      "Embedded external image bytes in GLB; geometry/material values unchanged"
+    ],
+    "originalTextureDependencies": [
+      {
+        "uri": "Textures/colormap.png",
+        "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+        "bytes": 10061
+      }
+    ],
+    "downloadDate": "2026-10-03"
+  }
+}

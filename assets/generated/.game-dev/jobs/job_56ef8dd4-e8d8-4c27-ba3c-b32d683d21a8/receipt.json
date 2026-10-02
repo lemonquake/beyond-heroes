@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_floor_layer_raised\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_modular_dungeon_template_floor_layer_raised",
+      "category": "environment_prop",
+      "description": "Raised stone floor insert. Intended use: Dry island in damp crypt or small ritual plinth",
+      "displayName": "kenney_modular-dungeon_template_floor_layer_raised",
+      "files": [
+        {
+          "bytes": 33704,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "7fc682e72dce4eb16e524d0af577f1ccdc0c4681f309fc5f450dd80e4676a9bc"
+        },
+        {
+          "bytes": 1755,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "e790e321ada549d3664d81e866a4df50da8198ac07bfdc0447eea6ee9d0e656c"
+        },
+        {
+          "bytes": 872,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "27f668e4cfc63d75820c2757ce78e2b2a5f9bc9d0d89a82ead3f60e921078f61"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "0bf68aa64fb623c6b98df3e6663cfa3d22232dc97294312887686e64afffa0b1"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f8250b269c383ec2f7b4b5cd",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:52.994Z"
+}

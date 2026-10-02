@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:17.205Z",
+  "destination": {
+    "assetId": "kenney_furniture_ruground",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "e1953e7a4fe6c4de34103c0a55826ff4beb95d718a53fdbc02cf2d033d0cde60",
+  "packageId": "pkg_ec4be0d05e5beac9c1e099b0",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 10164,
+    "fileName": "rugRound.glb",
+    "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db"
+  }
+}

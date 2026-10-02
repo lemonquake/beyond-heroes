@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_modular-dungeon_template_floor_detail_a.glb",
+    "fileBytes": 51032,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 408,
+    "triangleCount": 204,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 28309
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -2,
+        0,
+        -2
+      ],
+      "max": [
+        2,
+        0.10000000149011612,
+        2
+      ],
+      "sizeMeters": [
+        4,
+        0.10000000149011612,
+        4
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_modular-dungeon_template_floor_detail_a.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 204,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        4,
+        0.10000000149011612,
+        4
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_floor_detail_a\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+        "category": "environment_prop",
+        "description": "Detailed stone floor insert. Intended use: Sparse threshold accent and repaired temple paving",
+        "displayName": "kenney_modular-dungeon_template_floor_detail_a",
+        "files": [
+          {
+            "bytes": 51032,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833"
+          },
+          {
+            "bytes": 1692,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "2ea9c97960e40632e89bc4c0cdf1259f6a42f72895562a3fd9c9f24825fb6951"
+          },
+          {
+            "bytes": 1164,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "7a082e89aeece8095c00b284466514be943a04f9403f4c0b8dec58ff519eb797"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "6a386e43f86e33cdd7f8c21ba5c22c0f001bb1916117c84a1f160654eb944d55"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_06a0737329ac52c503bb5b26",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "403a357e1d59760f171d9def9db4ff01859372bde885dad2322e1519dafa4351",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+      "bytes": 28309
+    }
+  ]
+}

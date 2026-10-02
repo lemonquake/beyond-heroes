@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_b70e8b90-0a4c-4e89-9b3c-a111ced81abb",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_plant_flattall\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:42.215Z",
+  "updatedAt": "2026-10-02T21:11:42.275Z",
+  "startedAt": "2026-10-02T21:11:42.223Z",
+  "completedAt": "2026-10-02T21:11:42.275Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-ea3bb6c2-6830-4444-8085-4cac35b9a982' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_plant_flattall\r'",
+    "retryable": false
+  }
+}

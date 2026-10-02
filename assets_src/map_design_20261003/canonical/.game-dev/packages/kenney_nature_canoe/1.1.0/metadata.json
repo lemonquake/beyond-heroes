@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_canoe",
+  "category": "environment_prop",
+  "description": "Simple canoe hull. Intended use: Olivar dock or cove mooring, not a new travel mechanic",
+  "displayName": "kenney_nature_canoe",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.15000000596046448,
+        0.1325000047683716,
+        0.574999988079071
+      ],
+      "min": [
+        -0.15000000596046448,
+        -0.05,
+        -0.574999988079071
+      ],
+      "sizeMeters": [
+        0.30000001192092896,
+        0.18250000476837158,
+        1.149999976158142
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 15780,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 200,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 720,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

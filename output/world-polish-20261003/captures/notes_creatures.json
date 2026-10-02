@@ -1,0 +1,54 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "alive": 12,
+  "engine": "4.7.2-stable (official)",
+  "models": {
+    "gloomwraith": "res://assets/characters/bh033/gloomwraith_q.scn",
+    "hive_drone": "res://assets/characters/bh033/hive_drone_q.scn",
+    "sporeling": "res://assets/characters/bh033/sporeling_q.scn"
+  },
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "shots": [
+    {
+      "name": "creatures_01_group_far",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "creatures_02_close_gloomwraith",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "creatures_02_close_hive_drone",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "creatures_02_close_sporeling",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "creatures_03_combat",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

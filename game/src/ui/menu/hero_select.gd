@@ -35,6 +35,12 @@ var _slot: OptionButton
 var _slot_warn: Label
 var _begin_btn: Button
 
+func _enter_tree() -> void:
+	Settings.hold_design_scale(true)
+
+func _exit_tree() -> void:
+	Settings.hold_design_scale(false)
+
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 

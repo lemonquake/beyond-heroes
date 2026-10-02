@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_25b2595c03983dff5d73f8ef",
+  "assetId": "kenney_nature_flower_yellowa",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_flower_yellowa",
+  "modelSha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+  "manifestSha256": "7b8870d5716f0aa0deb9b42862ff99cc5e5a2bd189cc9192ddee3e568fba9fec",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:03.499Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_yellowa\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

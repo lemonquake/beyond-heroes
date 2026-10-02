@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_99435ffa-1d3b-4795-b66a-470c24cc750a",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:45.796Z",
+  "updatedAt": "2026-10-02T21:12:45.832Z",
+  "startedAt": "2026-10-02T21:12:45.803Z",
+  "completedAt": "2026-10-02T21:12:45.832Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_99435ffa-1d3b-4795-b66a-470c24cc750a\\receipt.json"
+}

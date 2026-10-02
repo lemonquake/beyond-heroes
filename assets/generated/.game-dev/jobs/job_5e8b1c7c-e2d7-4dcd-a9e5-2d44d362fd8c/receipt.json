@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_largec\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_largec",
+      "category": "environment_prop",
+      "description": "Third large boulder silhouette. Intended use: Cliff foot and forest clearing boundary",
+      "displayName": "kenney_nature_rock_largec",
+      "files": [
+        {
+          "bytes": 7004,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "23aee8b727adeaf260207af3e0615dc69aa766c6d87de1d44cbc8c2711d74dd1"
+        },
+        {
+          "bytes": 1616,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "a732629e04434dd8fe0b2667ce893237e60894a268cae17174606e9303891efc"
+        },
+        {
+          "bytes": 791,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "f9129d06232583ddf129912052f373b4fe34fb5e10e1852106aaa8c8788f4113"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "3c878b96c8fdedc9b58d89e2075e823853fb786e502ba0530f8d55a985807447"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_921272611da2462bd417c0d1",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:31.096Z"
+}

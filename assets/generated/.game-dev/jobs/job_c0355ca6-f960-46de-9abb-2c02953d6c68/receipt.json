@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_log_stack\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_log_stack",
+      "category": "environment_prop",
+      "description": "Stacked cut timber. Intended use: Wyman supply corner and Malasugue forge fuel",
+      "displayName": "kenney_nature_log_stack",
+      "files": [
+        {
+          "bytes": 10896,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68"
+        },
+        {
+          "bytes": 1614,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "9c858ebf9faaf72906b16e7f6cc65c1d36ead5c386c75a5dbd1297c082fefdfa"
+        },
+        {
+          "bytes": 825,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "3f984b6d435a81c730235d839165fbafeba7285ea68774b81f1291efe21db9a1"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "dbacb18b5e97b1694553be5dc53d1fb9923746b8fc67488a369e8991fd17b06b"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_324612651728a4aa623454a3",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:56.386Z"
+}

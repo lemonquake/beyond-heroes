@@ -26,7 +26,7 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 16                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures
+const PROTOCOL := 17                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
@@ -43,6 +43,7 @@ const MAX_PLAYERS := 12
 const MAX_CLIENTS := MAX_PLAYERS - 1 # Custom host occupies one player slot; a dedicated server occupies none.
 const ALLY_RATE := 15.0
 const ENEMY_RATE := 12.0
+const ENEMY_BATCH := 8              # monsters per unreliable state packet (about 130 bytes each: stays under the MTU)
 const ENEMY_RANGE := 70.0            # monsters farther than this from a client's hero are not streamed to it
 const APPEARANCE_EVERY := 30         # full appearance every N ally snapshots (and whenever gear changes)
 const GONE_AFTER := 4.0
@@ -70,6 +71,7 @@ var _server_config := {}
 var _server_leases := {}
 var _introductions := {}
 var _heartbeat_t := 0.0
+var _stats_t := 30.0
 var _server_healthy := true
 var _directory_secret := ""
 var _directory_t := 0.0
@@ -158,6 +160,19 @@ func player_color(peer: int) -> Color:
 
 func player_count() -> int:
 	return peers.size()
+
+var _traffic_msec := 0
+
+## Bytes this machine's ENet host has sent and received since the previous call: {"sent", "received", "seconds"}.
+## The dedicated coordinator logs it every 30 seconds; the performance probes read it to measure bandwidth per player count.
+func pop_traffic() -> Dictionary:
+	var now := Time.get_ticks_msec()
+	var seconds := maxf(0.001, (now - (_traffic_msec if _traffic_msec > 0 else now - 30000)) * 0.001)
+	_traffic_msec = now
+	var host: ENetConnection = _peer.get_host() if _peer else null
+	if host == null:
+		return {"sent": 0.0, "received": 0.0, "seconds": seconds}
+	return {"sent": host.pop_statistic(ENetConnection.HOST_TOTAL_SENT_DATA), "received": host.pop_statistic(ENetConnection.HOST_TOTAL_RECEIVED_DATA), "seconds": seconds}
 
 func _profile() -> Dictionary:
 	var h: HeroData = Game.hero
@@ -357,6 +372,7 @@ func _on_peer_disconnected(id: int) -> void:
 		return
 	var who: String = peers.get(id, {}).get("name", "A hero")
 	_introductions.erase(id)
+	NetGuard.forget(id)
 	if dedicated and _server_leases.has(id):
 		_server_request("/internal/disconnect", {"lease": _server_leases[id]})
 		_server_leases.erase(id)
@@ -399,8 +415,18 @@ func _remember_room(addr: String) -> void:
 	cfg.set_value("net", "last_room", addr)
 	cfg.save(RECENT_PATH)
 
+## Why joining did not work, for the player. Signing in already succeeded for an official server, so the game port is the likely
+## problem there; for a custom game it is the room code or the host's network.
+func _join_failure_text(waited_out: bool) -> String:
+	if Official.active:
+		return "Signed in, but the game connection to %s could not be made%s. The server may have just restarted, or this network may block UDP port %d. Try again, or try another network (for example mobile data)." % [
+			Official.url.trim_prefix("https://").get_slice(":", 0), " in time" if waited_out else "", PORT]
+	if waited_out:
+		return "No answer from %s. Check the room code, that the host pressed Host Game, and that you are on the same network (or the same VPN)." % _joining_addr
+	return "Could not connect to the host. Check the room code and that the host pressed Host Game."
+
 func _on_connection_failed() -> void:
-	last_error = "Could not connect to the host. Check the room code and that the host pressed Host Game."
+	last_error = _join_failure_text(false)
 	Events.notify.emit(last_error, &"error")
 	if Official.active:
 		Official.game_disconnected(last_error)
@@ -421,11 +447,17 @@ func _hello(proto: int, profile: Dictionary) -> void:
 	var id := multiplayer.get_remote_sender_id()
 	if peers.has(id) or (dedicated and _introductions.get(id, -1) < 0):
 		return
+	if not NetGuard.allow(id, "hello", 0.5, 2.0):
+		return
 	if proto != PROTOCOL:
-		_rejected.rpc_id(id, "Different game versions (host %d, you %d). Update both games." % [PROTOCOL, proto])
+		_rejected.rpc_id(id, version_refusal(PROTOCOL, proto))
 		get_tree().create_timer(0.5).timeout.connect(func() -> void:
 			if _peer:
 				_peer.disconnect_peer(id))
+		return
+	profile = NetGuard.clean_profile(profile)
+	if profile.is_empty():
+		_reject_peer(id, "The game could not read your player information. Update the game and try again.")
 		return
 	if dedicated:
 		_introductions[id] = -1 # One redemption per peer, even if it sends overlapping introductions.
@@ -460,6 +492,12 @@ func _hello(proto: int, profile: Dictionary) -> void:
 	_chat_system("%s joined (%s)." % [profile.get("name", "A hero"), profile.get("device", "PC")], true)
 	_rpc_peers()
 	peers_changed.emit()
+
+## What a player is told when their game and the one they are joining speak different online versions.
+static func version_refusal(host_version: int, your_version: int) -> String:
+	if your_version < host_version:
+		return "Your game is older than this one (online version %d, yours is %d). Update your game, then try again." % [host_version, your_version]
+	return "This game is older than yours (online version %d, yours is %d). Ask the host or server owner to update, or play offline meanwhile." % [host_version, your_version]
 
 func _reject_peer(id: int, reason: String) -> void:
 	if _peer and multiplayer.get_peers().has(id):
@@ -498,7 +536,21 @@ func _welcome(info: Dictionary) -> void:
 		_follow(StringName(info.map), info.pos, float(info.yaw))
 
 func _rpc_peers() -> void:
-	_peers_update.rpc(peers, _worlds)
+	for id in _live_peers():
+		_peers_update.rpc_id(id, peers, _worlds)
+
+## Peers this machine can still send to. ENet empties a lost client's channels a few frames before the engine reports
+## the disconnect, so a broadcast made while handling one departure logs "max channels: 0" for every other client
+## that left in the same frame (twelve probe clients quitting together produced dozens of these).
+func _live_peers() -> Array:
+	var out := []
+	if _peer == null:
+		return out
+	for id in multiplayer.get_peers():
+		var link := _peer.get_peer(id)
+		if link == null or link.get_state() == ENetPacketPeer.STATE_CONNECTED:
+			out.append(id)
+	return out
 
 @rpc("authority", "reliable")
 func _peers_update(p: Dictionary, worlds: Dictionary) -> void:
@@ -624,7 +676,10 @@ func _send_checkpoint() -> void:
 	var map := String(Game.current_map_id)
 	if is_host():
 		_worlds[map]["state"] = state
-	for pid in peers:
+	var targets := peers.keys()
+	if not is_host() and not peers.has(1):
+		targets.append(1)       # the dedicated coordinator is not on the roster but must hold the latest state for a hand-off
+	for pid in targets:
 		if int(pid) != my_id() and (int(pid) == 1 or _peer_map(pid) == map):
 			_world_checkpoint.rpc_id(pid, map, _world_epoch, state)
 
@@ -632,6 +687,8 @@ func _send_checkpoint() -> void:
 func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
 	var entry: Dictionary = _worlds.get(map, {})
 	if int(entry.get("owner", 0)) != multiplayer.get_remote_sender_id() or int(entry.get("epoch", -1)) != epoch:
+		return
+	if not NetGuard.fits(state, NetGuard.MAX_CHECKPOINT_BYTES):
 		return
 	entry["state"] = state
 	if _world_sender(map, epoch) and Game.current_map:
@@ -648,6 +705,8 @@ func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
 		if sp.cleared_camps.has(DataDungeons.SEAL_ZONE):
 			Events.camp_cleared.emit(StringName(map), DataDungeons.SEAL_ZONE, 0, sp.camps.size())
 		sp.stage_done = bool(state.get("done", false))
+		if state.get("arena", {}) is Dictionary:
+			ArenaState.apply(Game.current_map, state.get("arena", {}))
 		sp.minibosses.clear()
 		for e: Enemy in _replicas.values():
 			if is_instance_valid(e) and e.is_miniboss():
@@ -691,7 +750,7 @@ func _in_map(map: String) -> void:
 	if not is_host() or DB.map_def(StringName(map)) == null:
 		return
 	var id := multiplayer.get_remote_sender_id()
-	if not peers.has(id):
+	if not peers.has(id) or not NetGuard.allow(id, "map", 3.0, 8.0):
 		return
 	peers[id]["map"] = map
 	_known[id] = {}
@@ -794,6 +853,11 @@ func _process(delta: float) -> void:
 		if _heartbeat_t <= 0.0:
 			_heartbeat_t = 10.0
 			_server_heartbeat()
+		_stats_t -= delta
+		if _stats_t <= 0.0:
+			var t := pop_traffic()
+			_stats_t = 30.0
+			print("NET_STATS players=%d sent_kbps=%.1f received_kbps=%.1f over=%.0fs" % [peers.size(), t.sent * 8.0 / 1000.0 / t.seconds, t.received * 8.0 / 1000.0 / t.seconds, t.seconds])
 		for id in _introductions.keys():
 			var stamp: int = _introductions[id]
 			if stamp >= 0 and Time.get_ticks_msec() - stamp > 15000:
@@ -814,7 +878,7 @@ func _process(delta: float) -> void:
 	if connecting:
 		_connect_t += delta
 		if _connect_t > CONNECT_TIMEOUT:
-			last_error = "No answer from %s. Check the room code, that the host pressed Host Game, and that you are on the same network (or the same VPN)." % _joining_addr
+			last_error = _join_failure_text(true)
 			Events.notify.emit(last_error, &"error")
 			if Official.active:
 				Official.game_disconnected(last_error)
@@ -894,15 +958,16 @@ func _send_allies() -> void:
 @rpc("any_peer", "reliable")
 func _appearances(pack: Array) -> void:
 	var from := multiplayer.get_remote_sender_id()
-	if not peers.has(from):
+	if not peers.has(from) or not NetGuard.allow(from, "look", 4.0, 10.0) or pack.size() > NetGuard.MAX_ALLIES_PER_PACK:
 		return
 	for entry in pack:
-		_appearance_cache["%d:%s" % [from, entry.k]] = entry.a
+		if entry is Dictionary and entry.get("k", null) is String and entry.get("a", null) is Dictionary and NetGuard.fits(entry.a, NetGuard.MAX_APPEARANCE_BYTES):
+			_appearance_cache["%d:%s" % [from, entry.k]] = entry.a
 
 @rpc("any_peer", "call_remote", "unreliable_ordered", 1)
 func _allies(map: String, pack: Array) -> void:
 	var from := multiplayer.get_remote_sender_id()
-	if not peers.has(from) or _peer_map(from) != map:
+	if not peers.has(from) or _peer_map(from) != map or not NetGuard.allow(from, "allies", 30.0, 60.0) or not NetGuard.ally_pack_ok(pack):
 		return
 	for e in pack:
 		if e.get("k", "") == "p" and (e.s as Array).size() >= 12:
@@ -1012,7 +1077,13 @@ func _send_enemies() -> void:
 		if pid == my_id() or _peer_map(pid) != here:
 			continue
 		var av := avatar(pid)
-		var center: Vector3 = av.global_position if av else (Game.player as Node3D).global_position
+		var center: Vector3
+		if av:
+			center = av.global_position
+		elif Game.player is Node3D and is_instance_valid(Game.player):
+			center = (Game.player as Node3D).global_position
+		else:
+			continue                           # no hero on this machine and no avatar yet: nothing to measure range from
 		var known: Dictionary = _known.get_or_add(pid, {})
 		var infos := []
 		var states := []
@@ -1030,8 +1101,10 @@ func _send_enemies() -> void:
 				v.action_serial if v else 0, v.action_rate if v else 1.0, bool(v._action_loop) if v else false, e.brain.is_engaged(), e.shield_hp])
 		if not infos.is_empty():
 			_enemy_spawn.rpc_id(pid, here, _world_epoch, infos)
-		if not states.is_empty():
-			_enemy_states.rpc_id(pid, here, _world_epoch, states)
+		# unreliable packets above the MTU (~1392 bytes) are fragmented and lost more often (and the engine warns, which
+		# costs the owner a frame), so a big snapshot goes out in packets of ENEMY_BATCH monsters
+		for i in range(0, states.size(), ENEMY_BATCH):
+			_enemy_states.rpc_id(pid, here, _world_epoch, states.slice(i, i + ENEMY_BATCH))
 
 func _on_actor_died(actor: Node, killer: Node) -> void:
 	if not is_world_authority() or not (actor is Enemy) or not actor.has_meta(&"net_id"):
@@ -1057,10 +1130,18 @@ func _client_hit(map: String, epoch: int, eid: int, res: Dictionary, hit_point: 
 	if e == null or not is_instance_valid(e) or not e.alive:
 		return
 	var from := multiplayer.get_remote_sender_id()
+	if not NetGuard.allow(from, "hit", 40.0, 80.0) or not NetGuard.finite_vec(hit_point):
+		return
 	var av := avatar(from, key)
 	if av == null:
 		av = avatar(from, "p")
 	if av == null or not av.alive:
+		return
+	# a reported hit has to come from a hero that is near the monster and near the point it claims
+	if av.global_position.distance_to(e.global_position) > NetGuard.HIT_REACH or av.global_position.distance_to(hit_point) > NetGuard.HIT_REACH:
+		return
+	res = NetGuard.clean_result(res)
+	if res.is_empty():
 		return
 	var result := NetCodec.decode_result(res)
 	var req := DamageRequest.new()
@@ -1083,9 +1164,11 @@ func forward_ally_hit(av: NetAvatar, req: DamageRequest, attacker: Node, hit_poi
 
 @rpc("any_peer", "reliable")
 func _enemy_spawn(map: String, epoch: int, infos: Array) -> void:
-	if not _world_sender(map, epoch) or Game.current_map == null:
+	if not _world_sender(map, epoch) or Game.current_map == null or infos.size() > 256:
 		return
 	for info in infos:
+		if not info is Dictionary or not info.get("id", null) is int:
+			continue
 		var id := int(info.id)
 		if _replicas.has(id) and is_instance_valid(_replicas[id]):
 			continue
@@ -1098,8 +1181,12 @@ func _enemy_spawn(map: String, epoch: int, infos: Array) -> void:
 func _enemy_states(map: String, epoch: int, states: Array) -> void:
 	if not _world_sender(map, epoch):
 		return
+	if states.size() > 512:
+		return
 	var now := Time.get_ticks_msec() * 0.001
 	for s in states:
+		if not s is Array or (s as Array).size() < 12 or not NetGuard.finite_vec(s[1]) or not NetGuard.finite(s[4]):
+			continue
 		var e: Enemy = _replicas.get(int(s[0]))
 		if e and is_instance_valid(e):
 			e.net_apply(s)
@@ -1210,6 +1297,13 @@ static func offense_pack(req: DamageRequest, target_level: int, rng_: RandomNumb
 	bare.level = target_level
 	bare.loadout = WeaponLoadout.new()
 	bare.values = {&"max_hp": 1000.0}
+	# elemental penetration is applied once, by the defender against its real resistance (defense_request carries it):
+	# the stand-in holds a matching resistance so this pass does not drive it negative and apply it a second time
+	if req.attacker != null:
+		for e in Elements.ELEMENTAL:
+			var pv := req.attacker.get_stat(Elements.pen_key(e))
+			if pv > 0.0:
+				bare.values[Elements.res_key(e)] = pv
 	pre.target = bare
 	pre.target_status = null
 	pre.evadable = false
@@ -1365,6 +1459,11 @@ func owns_source(source: Node) -> bool:
 		return is_world_authority() and not (source as Enemy).net_replica
 	return source is Player or source is Tempo
 
+## Shared effects from a roster member, at a sane rate.
+func _fx_allowed() -> bool:
+	var from := multiplayer.get_remote_sender_id()
+	return peers.has(from) and NetGuard.allow(from, "fx", 40.0, 80.0)
+
 func share_projectile(p: Projectile, from: Vector3, dir: Vector3, speed: float, element: int, look: String) -> void:
 	if not is_active() or not owns_source(p.source):
 		return
@@ -1379,6 +1478,13 @@ func _fx_projectile(p: Projectile, from: Vector3, dir: Vector3, speed: float, el
 func _remote_projectile(map: String, from: Vector3, dir: Vector3, speed: float, element: int, look: String, reach: float, radius: float) -> void:
 	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
 		return
+	if not _fx_allowed():
+		return
+	if not (from.is_finite() and dir.is_finite() and is_finite(speed) and is_finite(reach) and is_finite(radius)) or look.length() > 48:
+		return
+	speed = clampf(speed, 0.0, 120.0)
+	reach = clampf(reach, 0.0, 120.0)
+	radius = clampf(radius, 0.0, 12.0)
 	var p := Projectile.spawn(FX.world, from, dir, speed, null, null, 0, element, look)
 	p.max_range = reach
 	p.radius = radius
@@ -1393,6 +1499,8 @@ func share_skill_fx(kind: String, at: Vector3, dir: Vector3, extra: Dictionary) 
 @rpc("any_peer", "unreliable")
 func _remote_skill_fx(map: String, kind: String, at: Vector3, dir: Vector3, extra: Dictionary) -> void:
 	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
+		return
+	if not _fx_allowed() or not (at.is_finite() and dir.is_finite()) or not NetGuard.fits(extra, 600):
 		return
 	match kind:
 		"spiral":
@@ -1410,6 +1518,35 @@ func _remote_skill_fx(map: String, kind: String, at: Vector3, dir: Vector3, extr
 			FX.spawn(VFXLib.particles(Color(0.35, 0.33, 0.38, 0.75), 70, 2.2, true, 1.6, 2.5, 180.0, Vector3(0, 0.4, 0), radius * 0.5, false), at + Vector3.UP * 0.6)
 			FX.spawn(VFXLib.ring_wave(Color(0.5, 0.4, 0.65, 0.7), radius, 0.5), at)
 
+## bh-033: an arena fixture changed on the map owner's machine (a pillar broke): every player on the map applies it.
+func arena_event(kind: StringName, idx: int, data: Dictionary = {}) -> void:
+	if not is_active() or not is_world_authority():
+		return
+	var here := String(Game.current_map_id)
+	for pid in peers:
+		if pid != my_id() and _peer_map(pid) == here:
+			_arena_event.rpc_id(pid, here, _world_epoch, String(kind), idx, data)
+	if kind == &"pillar":
+		_send_checkpoint.call_deferred()
+
+## The owner's arena change, applied on this machine: a pillar breaks (state, also in checkpoints) or a rot patch
+## appears (visual only here: the owner's copy does the damage).
+@rpc("any_peer", "reliable")
+func _arena_event(map: String, epoch: int, kind: String, idx: int, data: Dictionary) -> void:
+	if not _world_sender(map, epoch) or Game.current_map == null or FX.world == null:
+		return
+	match kind:
+		"pillar":
+			if idx >= 0 and idx <= 63:
+				ArenaState.break_pillar(Game.current_map, idx)
+		"rot":
+			var at = data.get("at", null)
+			var r := clampf(float(data.get("r", 4.0)), 0.5, 8.0)
+			var d := clampf(float(data.get("d", 20.0)), 1.0, 60.0)
+			if at is Vector3 and (at as Vector3).is_finite() and get_tree().get_nodes_in_group(&"rot_patch").size() < 8:
+				var h := AreaEffects.hazard(FX.world, at, r, d, null, null, 0, Color(0.5, 0.75, 0.12), 0.6)
+				h.add_to_group(&"rot_patch")
+
 func share_telegraph(pos: Vector3, radius: float, delay: float, color: Color, shape: String, inner: float, source: Node) -> void:
 	if not is_active() or not owns_source(source):
 		return
@@ -1419,6 +1556,13 @@ func share_telegraph(pos: Vector3, radius: float, delay: float, color: Color, sh
 func _remote_telegraph(map: String, pos: Vector3, radius: float, delay: float, color: Color, shape: String, inner: float) -> void:
 	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
 		return
+	if not _fx_allowed():
+		return
+	if not (pos.is_finite() and is_finite(radius) and is_finite(delay) and is_finite(inner)) or shape.length() > 24:
+		return
+	radius = clampf(radius, 0.0, 40.0)
+	delay = clampf(delay, 0.0, 10.0)
+	inner = clampf(inner, 0.0, radius)
 	AreaEffects.delayed(FX.world, pos, radius, delay, null, null, 0, color, shape, inner)
 
 # ---- Chat ---------------------------------------------------------------------------------------------------------
@@ -1434,7 +1578,9 @@ func send_chat(text: String) -> void:
 
 @rpc("any_peer", "reliable")
 func _chat(text: String) -> void:
-	receive_chat(multiplayer.get_remote_sender_id(), text)
+	var from := multiplayer.get_remote_sender_id()
+	if NetGuard.allow(from, "chat", 1.0, 5.0):
+		receive_chat(from, text)
 
 ## Resolve identity from the connected roster, never from a supplied display name.
 func receive_chat(peer: int, text: String) -> void:
@@ -1449,7 +1595,8 @@ func _chat_system(text: String, notice := false) -> void:
 	if notice:
 		Events.notify.emit(text, &"info")
 	if is_host():
-		_chat_sys_remote.rpc(text, notice)
+		for id in _live_peers():
+			_chat_sys_remote.rpc_id(id, text, notice)
 
 @rpc("authority", "reliable")
 func _chat_sys_remote(text: String, notice := false) -> void:
@@ -1473,8 +1620,12 @@ func update_profile() -> void:
 @rpc("any_peer", "reliable")
 func _profile_changed(profile: Dictionary) -> void:
 	var id := multiplayer.get_remote_sender_id()
-	if not is_host() or not peers.has(id):
+	if not is_host() or not peers.has(id) or not NetGuard.allow(id, "profile", 2.0, 6.0):
 		return
+	profile = NetGuard.clean_profile(profile)
+	if profile.is_empty():
+		return
+	profile.erase("ticket")
 	var keep: String = peers[id].get("map", "")
 	if dedicated:
 		for field in ["name", "cls", "userid", "character"]:
@@ -2085,7 +2236,11 @@ func ping(at: Vector3) -> void:
 func _remote_ping(map: String, at: Vector3, who: String) -> void:
 	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
 		return
-	show_ping(at, who, player_color(multiplayer.get_remote_sender_id()))
+	var from := multiplayer.get_remote_sender_id()
+	if not peers.has(from) or not at.is_finite() or not NetGuard.allow(from, "ping", 1.0, 3.0):
+		return
+	who = ChatText.clean(who).left(18)
+	show_ping(at, who, player_color(from))
 	Events.notify.emit("%s marked a spot." % who, &"info")
 
 func show_ping(at: Vector3, who: String, col: Color) -> void:

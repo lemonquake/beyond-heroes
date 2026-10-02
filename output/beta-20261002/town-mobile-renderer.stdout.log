@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+PERF {"cpu_render":{"avg":3.88,"median":3.35,"p95":5.97,"samples":900},"draws":{"avg":1651.58,"median":1639.0,"p95":1684.0,"samples":900},"frame":{"avg":10.6,"max":17.58,"median":9.73,"p95":15.29,"p99":16.2,"samples":900},"gpu":{"avg":3.66,"median":3.3,"p95":4.95,"samples":900},"lights":{"avg":6.0,"median":6.0,"p95":6.0,"samples":900},"objects":{"avg":2157.94,"median":2166.0,"p95":2219.0,"samples":900},"prims":{"avg":792599.21,"median":801164.0,"p95":818491.0,"samples":900},"script":{"avg":147.43,"median":17.6,"p95":434.27,"samples":900}} renderer=gl_compatibility lite=true map=sanctuary lights_in_map=81 vmem=267.2
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.

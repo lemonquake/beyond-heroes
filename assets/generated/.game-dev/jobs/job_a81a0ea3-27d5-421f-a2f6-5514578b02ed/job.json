@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_a81a0ea3-27d5-421f-a2f6-5514578b02ed",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_chair\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:52.972Z",
+  "updatedAt": "2026-10-02T20:01:53.011Z",
+  "startedAt": "2026-10-02T20:01:52.978Z",
+  "completedAt": "2026-10-02T20:01:53.011Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_a81a0ea3-27d5-421f-a2f6-5514578b02ed\\receipt.json"
+}

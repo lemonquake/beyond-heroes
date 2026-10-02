@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d27f26f4-f147-4ef1-82d5-7e5ff4fe8042",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_crops_wheatstageb\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:01.801Z",
+  "updatedAt": "2026-10-02T21:12:01.850Z",
+  "startedAt": "2026-10-02T21:12:01.808Z",
+  "completedAt": "2026-10-02T21:12:01.850Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-47546a98-c915-4e70-82af-3d03848c9d1f' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_crops_wheatstageb\r'",
+    "retryable": false
+  }
+}

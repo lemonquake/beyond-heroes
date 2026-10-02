@@ -1,0 +1,41 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "engine": "4.7.2-stable (official)",
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "shots": [
+    {
+      "name": "tavern_after_01_door",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "tavern_after_02_room",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "tavern_after_03_bar",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "tavern_after_04_hearth",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e58a9b3b99878a042a5efa14",
+  "assetId": "kenney_furniture_bookcaseclosed",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_bookcaseclosed",
+  "modelSha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047",
+  "manifestSha256": "7fde8ca3c146b4ac4726c581fb1aa9888c53f24ad16b31d8c536e621a0a67327",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:18.330Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseclosed\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

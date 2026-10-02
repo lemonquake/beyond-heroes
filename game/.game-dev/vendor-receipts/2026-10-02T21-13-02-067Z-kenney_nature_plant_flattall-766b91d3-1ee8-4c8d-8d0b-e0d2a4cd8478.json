@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_f1adb1c2b5025b5f7cc5c0a8",
+  "assetId": "kenney_nature_plant_flattall",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_plant_flattall",
+  "modelSha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633",
+  "manifestSha256": "f1a3f7e6cd769ad757ad0fb4c393de723be4880a0f114245dfe5d6efe45f17ae",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:02.067Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_plant_flattall\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

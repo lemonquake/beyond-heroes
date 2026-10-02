@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_graveyard_pillar_obelisk",
+  "category": "environment_prop",
+  "description": "Stone obelisk. Intended use: Crypt or Jade chamber landmark after canon glyph treatment",
+  "displayName": "kenney_graveyard_pillar_obelisk",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.17499999701976776,
+        1.0120000839233398,
+        0.17499999701976776
+      ],
+      "min": [
+        -0.17499999701976776,
+        0,
+        -0.17499999701976776
+      ],
+      "sizeMeters": [
+        0.3499999940395355,
+        1.0120000839233398,
+        0.3499999940395355
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 19572,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10965,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 76,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 136,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

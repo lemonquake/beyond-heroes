@@ -1,0 +1,5 @@
+PASS: map owner left; the other hero took over its live monsters; process logs clean
+PASS: heroes on different maps each ran their own map; process logs clean
+PASS: dropped connection, refused duplicate play, release, reload with progress, rejoin; process logs clean
+STAGES PASSED: world-handoff, world-separate, world-reconnect
+exit=0

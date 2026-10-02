@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_carrot\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_crop_carrot",
+      "category": "environment_prop",
+      "description": "Carrot produce. Intended use: Westreach farm beds and market produce display",
+      "displayName": "kenney_nature_crop_carrot",
+      "files": [
+        {
+          "bytes": 12664,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8"
+        },
+        {
+          "bytes": 1617,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "76e24039fb45c0cf916c4c1fe1713aac597f05e9b1d09fc24a9cee94355632df"
+        },
+        {
+          "bytes": 829,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d57b99e90630385b20161b6591d33dd54b7d82910ea5c0bc109053e2794871da"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "5d80295d135202928f518d5d8a52211153842e836e667c569998d6fed55974ae"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_53d1901568252e5ad2c873ae",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:59.997Z"
+}

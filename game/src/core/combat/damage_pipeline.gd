@@ -31,7 +31,8 @@ const EARTH_POISE_BONUS := 0.5
 const DARK_DRAIN := 0.10
 const MELT_MULT := 1.5               # fire into a frozen target
 const UMBRAL_MULT := 1.3             # dark into a purged target (light/dark opposition)
-const MAX_KNOCKBACK := 28.0          # m/s hard cap per hit
+const MAX_KNOCKBACK := 12.0          # m/s hard cap after all impact/critical/weight modifiers
+const MAX_LAUNCH := 6.0             # m/s upward throw cap after weight scaling
 static var debug_enabled := false
 
 static func evade_chance(evasion: float, accuracy: float, graze := false) -> float:

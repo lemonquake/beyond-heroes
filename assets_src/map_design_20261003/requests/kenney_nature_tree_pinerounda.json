@@ -1,0 +1,29 @@
+{
+  "description": "Round tiered conifer. Intended use: Forest borders with a different crown silhouette",
+  "category": "foliage",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/nature-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+    "originalArchiveSha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+    "originalModelSha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+    "originalRelativePath": "sources/nature-kit/Models/GLTF format/tree_pineRoundA.glb",
+    "licenseEvidence": "licenses/nature-kit.txt",
+    "transformations": [],
+    "originalTextureDependencies": [],
+    "downloadDate": "2026-10-03"
+  }
+}

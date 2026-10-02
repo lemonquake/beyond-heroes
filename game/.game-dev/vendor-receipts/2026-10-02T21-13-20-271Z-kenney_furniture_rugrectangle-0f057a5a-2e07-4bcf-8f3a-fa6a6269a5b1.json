@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_bd3a83c1c16d1dcf4e2d5d2e",
+  "assetId": "kenney_furniture_rugrectangle",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_rugrectangle",
+  "modelSha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+  "manifestSha256": "fbffd3a2305d74a36c45087de77479f31dc6ba13b098c779fc9b18e2d022285d",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:20.271Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_rugrectangle\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_structure_roof",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_canopy.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0",
+ "source_sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781",
+ "derived_sha256": "cbdee26c6515d883024036c016a6f38e4d6d62b3e2be82fc446a5f94a2a7978f",
+ "scale": 1.0,
+ "scale_rule": [
+  "s",
+  1.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Wood",
+  "BH_ClothCream"
+ ],
+ "part_faces": {
+  "BH_Wood": 136,
+  "BH_ClothCream": 212
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "cream": "BH_ClothCream"
+ },
+ "triangles": 348,
+ "surfaces": 2,
+ "source_triangles": 348,
+ "source_meshes": 1,
+ "bounds_m": [
+  3.085,
+  3.4,
+  3.234
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

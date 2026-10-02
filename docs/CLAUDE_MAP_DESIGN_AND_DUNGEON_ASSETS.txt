@@ -1,0 +1,1689 @@
+BEYOND HEROES — MAP DESIGN, INTERIORS AND DUNGEON ATMOSPHERE
+Prepared for Claude Code on 3 October 2026 by Codex.
+Repository: A:\Python\beyond-heroes
+
+START HERE — USER REQUEST AND AUTHORIZATION
+
+Read this entire file and assets_src/map_design_20261003/manifest.json, then
+implement a substantial map presentation and composition improvement. The user
+requested downloaded objects, trees, rocks, town/interior furnishings, more life,
+professional care, and good frame rates on low-end phones. The follow-up explicitly
+adds dungeons, strong consideration of their themes, atmosphere, and twenty more
+downloaded assets. All are required scope. Do the work, verify it, compile both
+Windows EXE and Android APK, commit the completed project changes and push to main.
+Do not stop after adding a handful of barrels or after writing another plan.
+
+This file supersedes the earlier world-polish brief's small town-only presentation
+milestone and twenty-object download target. Its unrelated equipment, enemy, boss,
+beta stability and service requirements remain governed by the existing briefs.
+Coordinate the work with your current milestone; do not undo completed bh-033
+town/interior work. This is an additional, broader environmental design pass.
+
+Codex's deliverable is a curated source library and this implementation brief.
+It does not itself implement the map redesign, certify runtime performance,
+build a new game release, commit changes or push main. Do not mistake source
+validation for an engine/render/playtest pass. The source model preview images
+are the creator's previews, not screenshots of their integration into this game.
+
+DELIVERABLES AND WHAT "DONE" MEANS
+
+1. A coherent improvement across Salmonan (first island), Zarael (second island,
+   including Agdao), the existing enterable interiors, the fixed story dungeons,
+   and the registered dungeon families. Preserve lore and gameplay progression.
+2. Use a curated subset of at least 70 distinct downloaded source objects across
+   the finished world, including meaningful nature, town/interior and dungeon
+   additions. Count unique source models, not recolours, rotations or instances.
+   The library contains 94 initial environment/interior/coastal models plus
+   20 additional dungeon models, 114 total. Do not force every candidate into the
+   game. Mark each accepted/deferred/rejected model with its reason and map uses.
+   Consider all twenty dungeon additions individually; reuse existing bespoke
+   fungal, ice, crystal, chain and machinery models where they express the theme
+   better. The user asked for better design, not maximum object count on screen.
+3. At least three clearly authored environmental groupings in each surface town,
+   purpose-specific furniture in every existing domestic/guild/tavern interior,
+   and at least three composed landmarks or transitions in each outdoor combat
+   map. Every registered dungeon theme needs its own room-dressing rules; every
+   dungeon needs a distinct arrival, meaningful room functions and a boss approach.
+4. Reproducible imports/material preparation, source credits, asset inventory,
+   matched screenshots, navigation/gameplay checks and performance comparisons.
+5. Finished Windows EXE and installable Android APK from the final source revision,
+   export logs, versions, ABI/signature checks, SHA-256 hashes and exact paths.
+6. Completed source changes committed and pushed to main. Preserve user work and
+   other tasks' changes; review ownership before staging. No reset, force push or
+   wholesale overwrite of a dirty checkout. If a real blocker exists, report its
+   exact state; do not call the milestone complete with missing builds or push.
+
+FILES AND EXISTING IMPLEMENTATION TO READ
+
+- Applicable repository instructions; user preferences require direct readable
+  wording, no slogans or military-style UI labels. Existing lore names remain.
+- docs/LORE.md, docs/MAPS.md, docs/DUNGEON_GROWTH.md,
+  docs/CLAUDE_WORLD_AND_BOSS_POLISH_BRIEF.md, docs/BETA_RELEASE_PLAN.md,
+  output/beta-20261002/CLAUDE_REPORT.md and the most recent subsequent handoffs.
+- work/lemondev/bh-001/art_direction.md and available references/ images.
+- game/src/world/map_builder.gd, settlement_builder.gd (under world/maps),
+  material_library.gd, map_root.gd, town_row_builder.gd and world_shaders.gd.
+- game/src/world/maps/{sanctuary,westreach,ruined_forest,olivar,wyman_outpost,
+  catacombs,forgotten_temple,boss_arena,weeping_causeway,sundered_reach}.gd.
+- game/src/world/maps/{agdao,zr_coilwood,zr_barrens,bridge_of_death,zr_citadel}.gd.
+- game/src/world/maps/interior.gd and dungeon.gd.
+- game/src/data/data_island.gd, data_zarael.gd, data_maps.gd, data_town_rows.gd,
+  data_npcs_zarael.gd, data_dungeons.gd, data_dungeons_x.gd,
+  data_dungeons_special.gd and data_dungeons_zarael.gd.
+- game/src/core/progression/dungeon_growth.gd, game/src/autoload/settings.gd,
+  game/tests/tools/{perf_probe,beta_release_perf,nav_maps,time_maps}.gd,
+  tools/perf_matrix.py and existing map/interior capture scenes.
+
+The current registry merges 5 original + 15 expansion + 5 special + 3 Zarael
+dungeons (28 registered dungeon definitions, 25 theme keys). Several comments and
+older documents still say twenty. Inspect DataDungeons.defs() at implementation
+time and produce your final inventory from it; do not silently omit later content.
+The standalone Catacombs/Temple/Throne story chain is additional presentation scope.
+
+DOWNLOADED LIBRARY AND EVIDENCE
+
+Base folder: assets_src/map_design_20261003/
+manifest.json: complete per-model metadata and exact canonical model/package paths.
+asset_catalog.csv: convenient sortable inventory.
+downloads.json: creator page, original ZIP URL, ZIP bytes and SHA-256.
+licenses/: untouched Kenney license documents for all five packs (CC0-1.0).
+previews/: per-model creator previews, where supplied.
+contact_sheets/: labelled visual selection sheets prepared from those previews.
+evidence/: source inspection, explicit validation and package verification results.
+requests/: package metadata, provenance and validation policy used for every model.
+canonical/.game-dev/packages/: immutable canonical GLB packages and receipts.
+Use only the 1.1.0 packages selected in manifest.json. Superseded 1.0.0 packages
+remain locally for audit and are Git-ignored; some contained external texture refs.
+sources/: original complete downloads kept locally; redundant ZIPs and alternate
+formats are excluded from Git by that folder's .gitignore, and are outside game/.
+
+Sources, creator Kenney:
+https://kenney.nl/assets/nature-kit
+https://kenney.nl/assets/furniture-kit
+https://kenney.nl/assets/pirate-kit
+https://kenney.nl/assets/graveyard-kit
+https://kenney.nl/assets/modular-dungeon-kit
+License reference: https://creativecommons.org/publicdomain/zero/1.0/
+The archive license files specify Nature 2.1, Furniture 2.0, Pirate 2.1,
+Graveyard 5.0 and Modular Dungeon 2.1. Some page update lists/ZIP filenames differ;
+retain source archive hashes instead of assuming a filename proves a version.
+
+The source suitability policy uses UVs and normals, a 2,500 triangle cap for most
+models and 6,000 for boats/wrecks, four materials as a warning threshold, and
+128-pixel minimum texture size when textures exist. These are source admission
+criteria, not a complete mobile shipping policy. Model counts, surfaces, dimensions
+and warnings are recorded. Flat/unlit palette materials require visual adaptation.
+Some original GLBs reference external texture PNGs. Their portable package copies
+embed the unchanged image bytes, with original/derived model and texture hashes
+and the transformation recorded. Never use a raw GLB without its dependencies.
+Do not loosen a failed runtime budget to make a report green.
+
+Regeneration: python tools/curate_map_assets.py --cli "<installed game-dev dist/cli.js>"
+The script requires the complete original pack folders under sources/.
+tools/download_map_asset_sources.py can restore them from downloads.json and checks
+ZIP hashes before extraction. Preserve immutable sources; write prepared GLBs
+elsewhere and keep original-to-derived SHA-256 and transform/material receipts.
+
+The installed game-dev 1.0.2 tool raises EPERM during directory fsync on this
+Windows filesystem. tools/game_dev_windows.mjs is a local invocation shim that
+suppresses only that Windows error on an actual directory handle. File sync errors,
+hash checks, model validation and all package verification remain intact. No
+installed plugin files were changed. This is a durability limitation of directory
+sync, not permission to ignore validation failures. Use the shim when necessary.
+
+Before importing an accepted source, verify its exact package and plan its admission:
+game-dev package verify "<package path from manifest>" --json
+game-dev vendor admit "<package path>" --project "A:\Python\beyond-heroes\game" --destination "assets/vendor/<asset id>" --json
+Then admit the selected package using --confirm under the user's authorized
+implementation scope and applicable tool requirements. Record project lock receipts.
+Canonical admission is a source integrity step. Put the prepared single-mesh runtime
+derivative in assets/environment/ using stable new names, or implement a deliberate
+registry that supports nested assets. Do not copy unverified loose downloads into
+runtime folders. Do not import every unused source or export source package JSON.
+
+ART DIRECTION AND COMPOSITION
+
+Retain the game's grounded fantasy appearance: weathered timber, worked stone,
+worn fabrics, distinct regional vegetation, substantial architectural silhouettes.
+The Kenney source previews are much brighter and simpler than existing gameplay.
+Strip unintended KHR_materials_unlit behavior, avoid plastic shine, reduce toy-like
+saturation, apply shared game materials deliberately, and compare next to the hero
+and current buildings at the actual gameplay camera. Do not turn the whole game
+into the source packs' cartoon sample scenes. Do not blanket a palette texture with
+one brown material and lose all object parts. Keep one/two shared material surfaces
+where practical. Small accents may keep flat colours after palette correction;
+large close-view surfaces should match existing timber/stone/cloth treatment.
+
+Design in three scales:
+- Large: coast/cliff shape, canopy groups, terrace edges, bridges, landmark silhouettes
+  and negative space determine where the player is and where movement leads.
+- Medium: a workshop, garden, boat landing, burial bay or collapsed room is a
+  deliberately arranged group with a purpose, rather than a random scatter field.
+- Small: tools, bottles, produce, books, offerings and ground transitions reward
+  nearby observation. Reduce these first on phones; do not remove main landmarks.
+
+Use an approach view -> landmark -> destination rhythm. Every authored area must
+have a clear route, a readable focus and a reason for its contents. Asymmetry,
+varied spacing and limited believable wear improve quality without new effects.
+Avoid identical pot/barrel pairs outside every doorway and uniform trees on a grid.
+Clutter belongs near walls, edges and furniture, leaving central paths and combat
+space clear. A bench faces a view or an activity. Firewood sits near its user.
+Produce is beside a farm or vendor; wet cargo and repairs are beside a landing.
+Foliage follows moisture, sunlight and disturbance. Bare, maintained town paving
+does not need dense grass; use narrow soil beds and actual garden boundaries.
+
+Keep clear visual hierarchy in night/dark scenes. Lift floor visibility sufficiently
+to read threats, steps, pickups and interactables on a small screen. Maintain warm
+local light against cool ambience where the current theme calls for it. Use shared
+ambient/material response and restrained static shading to ground props on Low;
+atmosphere cannot depend exclusively on SSAO, bloom or volumetrics being enabled.
+Avoid coloured fog obscuring enemies, glowing clutter mimicking loot, and bright
+lights that flatten materials. Preserve all Zarael magical glow/runes as WHITE.
+Non-emissive jade/ochre/vegetation can be coloured; ordinary fire keeps fire colours.
+Do not colour the Heartwire green, cyan or pink because a source kit uses that hue.
+
+SALMONAN — FIRST ISLAND DESIGN PLAN
+
+Malasugue Town (sanctuary): strengthen the plateau fishing town identity. Keep the
+fountain plaza, guild institutions, burnt-house story landmark and Shrine of the
+Fallen. Preserve sanctuary as the save/map ID and existing named shops/NPCs.
+Compose these authored areas rather than just filling empty cobbles:
+- South-gate arrival: maintained entry path, small repair/supply corner, wood stack,
+  and planted edge. Preserve Captain Hald's gate and unlocked/locked states.
+- Plaza: keep the fountain and routes dominant; offset bench seating, garden beds
+  and low shrub groups define the square's edge without surrounding it with clutter.
+- Merchant Quarter: make delivery/storage, craft/work and customer walking areas
+  distinct. Add produce displays, pot/bottle stock, tools and fuel appropriate to
+  individual merchants. Reduce overlapping labels and competing glow where present.
+- Houses and tavern: domestic yards, working netmender corner, small book/plant
+  details by the cartographer and tavern stock beside service access. Match each
+  interior's purpose. Keep household footprints and door access clear.
+- Shrine/terrace: deliberate spacing, quieter planting and a clear silhouette for
+  the statues/shrine. Do not cover story symbols with new imported obelisks.
+
+The existing town_before_desktop images in output/world-polish-20261003/town show
+large stretches of repeated paving and isolated craft furniture. Retain useful
+existing bh-033 object work; turn it into coherent small places, connect it to the
+edges and buildings, and vary surface treatment locally. Do not hide the pavement
+problem beneath indiscriminate object density. Refresh baselines from current HEAD
+and working state before judging your own result.
+
+Westreach: reinforce farm/crossroads, clifftop and cove as three separate districts.
+Lantern Fields gets short crop rows, interrupted fences, harvested produce and a
+single farm-work vignette; the Old Mill gets timber/work storage and worn approach
+ground; Tideglass Cove gets layered rocks, sparse palms, a moored boat, tide-line
+debris and one wreck vignette. Reuse existing terrain/shore geometry. Keep both road
+loops, Fen Bridge, Lake Shore Road, shrine/gates and encounter clearing approaches.
+
+Olivar: a maintained lake-trade settlement, softer and greener than Malasugue.
+Arrange sheltered moorings, delivery crates, benches facing water, garden pockets,
+apothecary herbs and appropriate stock around the plaza. Use lilies only in quiet
+shallow water. Keep Founder's statue and Lake Terrace waypoint legible. Differentiate
+residential landscaping from the dock working area. Preserve named NPCs/stations.
+
+Wyman Outpost: make existing camp functions evident with organized fuel, stores,
+repair tools, simple camp seating, tents and lodging accents. Keep central bonfire,
+training space, register/quartermaster access and Marsh Jetty voyage approach open.
+The jetty needs a small waiting/loading place and a visible boat-related scene.
+Do not turn the camp into a miniature city or introduce modern furnishings.
+
+Ruined Forest: canopy groups frame clearings; old trunks/stumps, fallen logs, moss,
+fungi and sparse stones show disturbance and moisture. Preserve burnt village,
+survivors' camp, graveyard, watchtower, ravine bridge and corrupted grove identities.
+Use broken markers and coffins only where burial/story context supports them.
+Separate a safe surviving camp from damaged lots by maintenance, colour and layout.
+Do not make every clearing a dense fern carpet. Keep enemy silhouettes and path exits
+visible, especially on Low. Existing dead/corrupted tree models remain appropriate.
+
+Weeping Causeway: drowned tollhouse, waterlogged timber, broken cargo and reeds at
+the edges. Emphasize the length of the route with irregular erosion and a clear
+destination silhouette; preserve traversable causeway width and all encounter spots.
+
+Sundered Reach: use existing fractured/aether landmarks, sparse broken stone and
+purposeful debris at landings. This area's lore and distant geometry take priority
+over adding ordinary village trees. Keep original special dungeon access readable.
+
+ZARAEL — SECOND ISLAND DESIGN PLAN
+
+Agdao is a terraced harbour town, not a recoloured first-island plaza. Preserve the
+five stepped terraces, tall houses, roof bridges, old lifts, council hall, Crown of
+Steps, Mother Ysenne's ward and Wirekeeper Halvessa Orn. Preserve the Sunwake ship,
+voyage conditions, shrine and Coilwood Gate. Use handmade glyph-stone, warm ochre,
+limited jade and neutral textiles with the white Heartwire as the continuous motif.
+
+Use agdao.gd's real coordinates and tier heights as anchors; treat the locations
+below as design areas, not exact collision-approved prop transforms:
+- Harbour tier: y=1.6, z=30..50. The quay working strip and arrival mooring get cargo
+  sorted into a handling corner, one repaired dock vignette and secondary rowboats.
+  Add sparse palms away from the pier and south-facing camera sightlines. Preserve
+  DataZarael.AG_SPAWN, AG_DECK_Y and the boarding/return path. Do not replace Sunwake
+  with a source pirate ship or add pirate flags/cannons by convenience.
+- Wire Market: y=5.6, z=6..30, fountain around (0,20). Arrange merchandise by shop,
+  covered storage, planter pockets and waiting seats near the margins. Keep the
+  fountain/white wire channels and shrine as the shared visual centre. Stalls are
+  currently authored around (-12,24), (12,24), (-24,22) and (20,14); respect their
+  NPCs and footprint access. Avoid piles across grand stair landings.
+- Middle Terrace: y=9.6, z=-20..6. Council hall near (-30,-14) becomes a civic place:
+  restrained planters, stone trim, seating and a document/storage detail where
+  supported by actual geometry. Houses have domestic courtyards and useful service
+  corners, keeping footbridge approaches and door-facing views clear.
+- Upper Terrace: y=13.6, z=-44..-20. Dress old lift machinery surroundings with
+  sensible maintenance storage, timber and tools while preserving lift function.
+  Keep Coilwood Gate east and all roof traversal open. Garden clusters soften stone
+  without disguising changes in height.
+- Crown: y=17.6, z=-84..-44, pyramid centred around (0,-70). Use sparse intentional
+  stone/plant grouping at edges, a clean procession route and visible white inlays.
+  Preserve the top NPC, stairs and crest sightline. Do not place forest-scale palms
+  across the ritual view or mistake terrain height for the pyramid top height.
+- Town slopes: replace uniform scatter with canopy/rock clusters that follow grade,
+  exposed stone and moisture. Existing _hills() already places jungle assets; edit
+  the composition rather than layering a second random field over it. Retain the
+  town's functional boundaries, and make visible slope/rock treatment explain them.
+
+Agdao props must be placed on the correct actual terrace/roof/pier surface. Passing
+on_ground=true can ground to the terrain under a raised bridge or house, which is
+wrong. Use explicit height/geometry-aware placement on constructed surfaces. Audit
+stair constants and tier transitions, especially side stairs and lifts.
+
+Coilwood: jungle groups, roots, aqueduct remnants and modest moss/rock transitions.
+Use palms and leafy ground plants sparingly among existing ceiba/giant fern assets.
+The shrine and relay pylons must remain identifiable from the trail; Jade Sepulchre
+gets its own stone/urn/vegetation transition. All runes/relay effects stay white.
+
+Glasswire Barrens: sparse shattered rock, exposed ochre/blackwire soil and existing
+glass growths. Deliberate scraps of salvage/labour around survivor camp, fallen
+colossus and Vault entrances. Do not cover the barren terrain with green grass.
+Keep Obsidian Engine and Veinworks entrances visually distinct.
+
+Bridge of Death: strong long silhouette, repaired/failed structural details and
+sparse weathering on safe margins. Keep all three paired ward pylons, Varrogh's
+platform and encounter movement lanes unblocked. Preserve forward visibility and
+avoid repetitive railing props generating hundreds of new unique draw calls.
+
+Heart Citadel: differentiated arrival siege camp, damaged civic avenue, controlled
+approach to Dawn Engine and the Leash-Abbot arena. Use civic stone, glyphs, a few
+broken storage/work details and restrained vegetation reclaiming side courts. The
+restored wire state must change the intended white accents without resetting quests.
+
+INTERIORS — ACTUAL ROOMS WITH PURPOSE
+
+Work in existing interior IDs; do not invent an Agdao-enterable interior just to
+meet an object target if no entrance/system exists. Dress supported Agdao spaces and
+existing interior systems intentionally; new interiors require complete doors,
+return spawns, bounds, navigation and save/travel registration, not a fake doorway.
+
+- int_tavern: varied eating groups with chairs oriented toward tables, accessible
+  serving counter, bottle stock, cloth/rug anchors, bench and coat storage. Avoid
+  filling every table with identical bottles. Maintain Veyra/other NPC approach.
+- int_netmender: work table, useful storage, tools, net/rope context using existing
+  nets plus a few new objects; a small sleeping/domestic corner away from work.
+- int_cartographer: writing desk and books, reachable wall shelves, a reading stool,
+  a quiet resting corner; use existing map/scroll props where available.
+- int_widow: maintained but modest sleeping/eating area, stored household items and
+  deliberate quiet space. Do not use random ritual coffins as generic decoration.
+- int_keeper: book/record storage, lamp housing and domestic furniture appropriate
+  to the keeper; keep story interactables prominent.
+- int_refugee: compact improvised furniture and restrained possessions; distinguish
+  through condition and arrangement rather than adding a new melodramatic story.
+- int_guildhouse: reception, shared circulation, two guild counters/boards and
+  archival/storage wall. Preserve Hollis, Bram and Sabeth and job board access.
+- int_swordfin / int_lantern: meeting/training records versus study/reading function
+  as established in lore. Reuse distinctive existing guild props and banners.
+
+Keep the south cutaway walls, window/door locations, return portals and floor heights.
+Furniture back faces should align with walls, legs contact the floor, books/cups
+contact tabletops, and drawers/chairs must not block NPCs. Use one shared lighting
+idea per room, not a new light on every imported candle. No fridges, laptops, modern
+sofas, office chairs, plumbing, electric fans or branded cardboard boxes.
+
+DUNGEONS — REQUIRED THEME AND ATMOSPHERE PASS
+
+Every theme gets a small material/prop/lighting/ambient palette and purpose-driven
+room roles. The shared generated builder must support authored role rules without
+breaking the floor plans. Keep current plans, height changes, basins, bridge cells,
+stair directions, floor IDs, seals, boss/champion placement, loot, growth and returns.
+Build atmosphere on the existing multi-storey diorama; do not flatten it into a
+single floor or put the downloaded complete room kits over its navigation lattice.
+
+Room roles to author and reuse with deterministic variation:
+- Arrival/vestibule: visible theme landmark, safe return point and clear route.
+- Work/storage/support: objects show what this part of the dungeon used to do.
+- Burial/study/ritual/organic chamber: choose the actual theme-specific function.
+- Traversal feature: basin, bridge, gallery, broken vista or stair approach with
+  strong level separation and safe parapet/cutaway readability.
+- Seal chamber: entrance and guardian movement are clear; clutter stays peripheral.
+- Boss approach/arena: one memorable silhouette and quiet negative space that lets
+  the existing fight, mechanics and telegraphs remain the focus.
+
+Do not repeat all six functions on every tiny floor. Select roles matching room
+shape/lore; even small floors should have a distinctive entry and goal. Reuse motifs
+with spacing/condition changes as depth increases, not ever-growing clutter density.
+Make room roles data-driven per theme and floor; record their seed and exclusions.
+Protect _used cells, arrival, descent/exit, stairs, narrow bridges, chests, seal packs
+and boss positions. A blocked side room is not acceptable because the main exit works.
+
+Theme-specific requirements (reuse bespoke existing assets as named):
+
+Hollowroot Warren / fungal:
+Root arches, wet earth, fungal growth around timber/stone remnants; pale mushrooms
+cluster at rot and moisture. Use existing giant fungi/spore pods, imported logs,
+stumps and small mushroom groups. Lime/green fungal accents against warm refuge
+light, with restrained spore motes. Central threat lanes remain clean.
+
+Saltmouth Deeps / drowned:
+Weathered timber, damp stone, teal water against amber candles, broken boats/cargo,
+sea growth at basin edges. Import old coffin, timber debris, lantern, cargo and boat
+pieces where burial/shipwreck context supports them. Distinguish dry storage,
+flooded hall and gallery approach. Reuse existing kelp/coral/barnacle pillars.
+
+Emberforge Depths / ember:
+Worked basalt, cooled slag, heat-darkened wood, forge stations, service alcoves and
+transport/storage remnants. Fire baskets, tools, crates and stone debris supplement
+existing furnace, crucible, ore cart and anvil. Warm heat is concentrated at actual
+furnaces; smoke remains sparse and stationary enough to read the room.
+
+Rimeglass Barrow / rime:
+Cold stone, frost, frozen burials, wind-exposed thresholds and restrained snowdrifts.
+New coffins/urns get a derived frost material alongside existing frozen coffin,
+icicles and ice crystals. Use a few sheltered warm candle landmarks to orient the
+player. Do not bury combat floors beneath opaque drifting particles.
+
+Shattered Orrery / orrery:
+An abandoned celestial study with archive corners and a damaged instrument centre.
+Books, bookcases, desk, offering objects and broken stone support existing armillary
+sphere/telescopes/lecterns. Cool violet cosmic accent, warm reading pools, calm
+negative space around instruments. Avoid filling it with generic coffin rows.
+
+Cutpurse Cellars / hideout:
+Stolen cargo sorted into caches, eating/work benches, lamp housing and narrow
+service areas; worn timber and grubby stone. Keep an identifiable stash corner.
+Gnashgut Burrows / hideout: rougher shelter and scavenged timber, animal-remnant
+context using existing bones, low improvised storage, fewer orderly tables.
+Ironjaw Warcamp / hideout: deliberate supplies/repair/eating functions using existing
+weapons/tents, crates and fuel; distinguish it from the two other hideouts through
+layout, silhouette and condition. A shared theme key must not make all three copies.
+
+Blackvault Ossuary / crypt:
+Ordered burial bays interrupted by localized collapse; urns, old/intact coffins,
+broken marker, stone altar and restrained candle clusters. Dark worked stone with
+legible ledges and occasional warm orientation pools. Existing bones/sarcophagi
+support the identity. Do not place decorative foreign religious symbols by default.
+Twinspire Reliquary / crypt: paired civic/ritual structures and precious ceremonial
+storage, more formal and vertical than Blackvault; emphasize its twin landmark
+concept with existing architecture, not simply more skulls.
+
+Waxen Hive / hive:
+Living organic chambers with clustered pods/root forms and wax-toned surfaces;
+reuse existing pod/giant mushroom geometry. Timber remnants and mushroom groups
+remain secondary. No stock coffin/chair group in every room. Motion limited to
+small localized pulses/motes while enemies and route boundaries stay readable.
+
+Blackwater Sump / mire:
+Low water, sodden supports, fallen timber, moss and sparse debris, sickly muted
+green/brown wet surfaces with clear dry walkways. Reuse roots, low plants and
+barrels; stable reflection/ripple simplification on phones. Keep basin depth legible.
+
+Briarheart Hollow / thorn:
+Root pressure invading ruined masonry, trunks and split timber concentrated at
+seams. Existing root arches/dead trees plus logs/stumps and sparse foliage frame
+walkable spaces. Build a readable silhouette of constriction without adding actual
+collision across already authored passages.
+
+Dunemourn Tomb / sandtomb:
+Dusty pale/ochre stone, sparse broken columns, offering bowls, stone altars and urns.
+Localized windblown deposits, dry ritual/storage distinctions and readable tomb
+axes. No wet moss layer or ubiquitous glowing mushrooms. Use existing sandy theme
+materials and avoid real-culture borrowed iconography/names.
+
+Thunderwell Spire / storm:
+High exposed stone, damaged instrument/service corners, metal fittings and existing
+chain hoist/telescope/armillary forms. Cool storm illumination interrupted by sparse
+warm shelter lamps. Lightning/electrical motion remains rare and off main telegraph
+space; no constant full-screen flashes or new physics rope simulation.
+
+Umbral Undercroft / umbral:
+Dark carved stone, broken altars, peripheral urns, fallen stone and restrained candle
+orientation. The setting can be dim without losing silhouettes. Use existing
+corruption objects rather than filling every surface with bright emissive bottles.
+
+Prismdeep Geode / crystal:
+Geological facets and existing crystals/rocks, dry shelves around a basin, low debris.
+Source boulders should use consistent mineral material; keep ordinary furniture out
+of natural crystal rooms except at a clearly authored expedition remnant.
+
+Gilded Vault / gilded:
+Maintained ceremonial stone/metal, storage and archival rooms, cloth accents and
+careful display spacing. Existing armour stands/weapon displays and imported chest,
+bookcase, cloth table and chalice. Precious surfaces are restrained so loot still
+looks special. Avoid turning the whole floor into mirror-like gold.
+
+Wyrmcoil Caverns / cavern:
+Heavy natural rock, mineral seams and mining/transport remnants using existing ore
+cart plus sparse timber, shovel and debris. Clusters follow wall shape, with large
+geological silhouettes over fine scatter. Keep paths distinct from void/water.
+
+Maw Beneath / abyss:
+Broken stone at a vast boundary, sparse corrupted monuments, discarded objects and
+localized burial remnants. Existing obelisks/skulls/spikes serve the lore. Fewer
+strong silhouettes beat a carpet of random debris; preserve safe-edge contrast.
+
+Prismheart Hollows / prism (special):
+More ordered luminous mineral forms than Prismdeep, existing crystal pylons and
+major facets. A strong central composition with rare expedition/relic fragments.
+The palette and room scale follow the current special theme, not ordinary ice.
+Underworld of Mourning / underworld (special):
+Formal funereal spaces, fragmented memorials, old coffins/urns, offering arrangements,
+and a readable descent into stillness. Retain existing corruption/tomb structure.
+Aether Reach / aether (special):
+Light stone, celestial instrument fragments and restrained scholarly traces; reuse
+armillary/telescope geometry, books and damaged platforms. Keep floating forms sparse
+and their motion visual-only; no new collision/physics on traversal paths.
+Eclipse Vault / eclipse (special):
+Dark/light architectural contrast, existing knight statue/obelisk forms, deliberate
+candle and altar niches. Maintain the authored special encounter's readable arena.
+Drowned Solarium / solar (special):
+Flooded civic/ceremonial architecture with warm sun-toned stone, offering objects,
+broken columns and dry gallery approach. Distinguish from the shipwreck Deeps;
+follow its existing solar palette and basin treatment rather than copying all teal.
+
+Zarael Vaults — PURE WHITE MAGIC throughout, with ordinary coloured surfaces/fire:
+Jade Sepulchre / jade: serpent/glyph-stone, memorial urn/altar groupings, ordered
+burial bays and root invasion around secondary walls. Retain existing serpent
+statue, glyph stele, sarcophagi and white lines; green jade is a stone colour.
+Obsidian Engine / obsidian: black worked stone, chained machinery, cooled service
+areas and heat sources using existing crucibles/chain racks/glass growth. New fire
+basket, tools and crates are supporting service objects. White conduits remain
+distinct from orange forge fire; preserve Vault flags/pylon outcomes.
+Veinworks / vein: vein-like wire channels, extraction remnants, oppressive chain
+structures and damaged maintenance areas. Reuse existing glass growths/chain spikes,
+limited stone/timber debris and old service storage. Concentrate sinister colour in
+non-magic surfaces/ambient context; don't recolour rune glow pink or red.
+
+Fixed story chain:
+Ancient Catacombs: explicit guard hall, burial hall, barracks, storage, ossuary,
+ritual chamber, treasure alcove and flooded cistern. Tables/beds belong in barracks,
+cargo in storage, urns/coffins in burials. Cistern uses wet vertical architecture,
+scaffolding/boat/wood debris and restrained teal/amber contrast. Preserve ritual flag.
+Forgotten Temple: broken colonnade, ruined library, flooded chapel and raised sanctum
+read separately. New columns/debris/offerings and books improve their functions;
+keep the seal altar and throne gate visually prominent.
+Hollow Throne: quiet approach, abyss depth, decisive ring silhouette and restrained
+debris at the margins. Keep all eight impact pillars/boss stun mechanics, binding
+circle and throne dais. No clutter across charges, dodge space or arena centre.
+
+CHEAP LIFE AND SOUND
+
+Use existing ambience/music/reverb assets and systems first; do not add unaudited
+downloads or replace music. Choose an ambient bed per region/theme, with occasional
+quiet localized accents and distance attenuation. Scope reverb by existing rooms.
+Cap simultaneous voices; no AudioStreamPlayer per decorative object. Keep voice,
+enemy cues and combat sounds intelligible above atmosphere.
+
+Low-cost visual life: shared shader time for slight canopy/cloth sway on a few
+accepted meshes, subtle shared boat bob, sparse dust/spore/fire motes at authored
+foci and gentle existing flame animation. Avoid new _process callbacks per prop,
+wind physics, falling leaves everywhere, flocks, cloth/rope simulation and active
+RigidBody3D clutter. Use existing inhabitants if available; any extra background
+figures should be pooled/capped and cannot block routes or add unnecessary network
+entities. On Low retain static storytelling and existing necessary fire; remove
+optional motion/effects before removing useful design.
+
+ENGINE IMPORT AND MATERIAL PITFALLS — REQUIRED FIXES
+
+1. MapBuilder.library_mesh currently finds only the first MeshInstance3D, duplicates
+   its mesh, and does not apply that child's source transform. Multi-mesh or
+   transformed source objects can lose pieces or be the wrong size/orientation.
+   Prepare a single identity-transform mesh with correctly applied child transforms
+   for batched decor, or implement and validate a multi-mesh-aware batching system.
+   Preserve all required surfaces; don't just select the first primitive/material.
+2. ENV_DIR currently resolves res://assets/environment/%s.glb. Explicitly prepare
+   source-to-runtime names (e.g. kd_tree_oak, kd_barrel, kd_urn_round), avoid existing
+   filenames, and record mapping. Don't assume nested vendor models resolve by stem.
+3. Imported materials are not named BH_*. MaterialLibrary relies on a material-name
+   contract. Map parts to suitable existing shared BH_* materials or a small explicit
+   imported palette registry. Preserve theme cache isolation, push_theme/pop_theme
+   order and reset state when moving between dungeons and towns.
+4. Existing source sizes are small kit units, not guaranteed game metres. Read the
+   exact per-model AABB. Target broadleaf trees roughly 4–8m, palms 5–10m, shrubs
+   0.4–1.5m, chairs around 0.45m seat height, benches around 0.45–0.5m seat height,
+   table surfaces around 0.75m and ordinary doors matching the game's hero. These
+   are initial art targets, then compare against real game characters/buildings.
+   Apply source pivot offsets: some origins are beneath the object's visible base.
+   Use Y-up, intended front +Z, ground contact and appropriate height on platforms.
+5. Inspect any source animation/skinning (coffins/gates/flags may have it). Static
+   decoration derivatives should not carry unnecessary AnimationPlayer or skeleton
+   nodes. Reuse current interaction/state logic for doors/chests/breakables. A
+   decorative mesh is not automatically interactable or a new loot source.
+6. Existing _flush_batches uses 24m CHUNK cells. Retain spatial subdivision and good
+   bounds; don't merge a whole map into one giant MultiMesh. For stacked Agdao tiers,
+   consider height-aware subdivisions only where measurements justify them.
+7. LITE_KEEP only knows the older kit names. Register retention for EVERY new decor
+   name/class so Low doesn't draw 100% of new grass/moss/bottles by accident. Use
+   stable position/seed filtering to preserve main silhouettes and coherent groups.
+   Landmark, collision and important interaction presence must not vary by quality.
+8. Do not duplicate materials for each placement. Keep surface/material counts
+   visible in the model report and scene census; meshes with many surfaces increase
+   draw calls even when their triangle counts are tiny.
+9. Separate collision from visual detail. Use simple static shapes only on meaningful
+   barriers, trunks, large rocks and furnishings players actually encounter. No
+   per-bottle/candle/moss collision or triangle-mesh collider per tiny prop. All
+   obstacle geometry must participate in the established navigation setup; keep
+   decorative terrain/overhangs from accidentally carving large navmesh holes.
+10. Shared builders are high-impact. Add targeted regression coverage for new multi-
+    mesh preparation, material isolation, deterministic dressing/exclusions and
+    quality invariants; don't write hundreds of tests that merely mirror coordinates.
+
+PERFORMANCE BUDGETS AND DECISIONS
+
+Set baselines from the actual current source state before changes. Historic PC
+performance in output/beta-20261002/perf already shows dense-combat problems; it is
+not permission to spend more frame time. Budget by active gameplay view, not total
+downloaded asset count. The following are starting limits for NEW environment work;
+verify and tighten where device measurements require. Existing scenery should be
+optimized alongside additions when needed to stay within the whole-scene budget.
+
+- Frequently repeated tree: aim <=600 triangles; focal tree <=1,200, very sparse.
+- Repeated shrub/ground tuft/small debris: aim 20–160 triangles; one surface preferred.
+- Repeated rock <=200; focal boulder <=500. Reuse 3–5 silhouettes per region.
+- Repeated small prop <=250, large furniture <=600, boats/focal wreck <=2,500 after
+  preparation. Avoid multiplying large full ship meshes behind every town.
+- Common object one/two material surfaces; shared opaque materials preferred.
+- Shared textures generally 256–512px, up to 1,024 only for justified close-view
+  architectural/hero props. Keep source atlases shared, use correct mipmaps, audit
+  Android compression/VRAM rather than shipping 4K maps on dozens of props.
+- Low: roughly 6–10 active repeated decor types per 24m cell, thin tiny clutter and
+  undergrowth aggressively (20–35% of High), retain 70–85% of canopy silhouettes,
+  use no new decorative local shadows, no SSAO/volumetrics dependency and no dense
+  transparency layers. Check actual surfaces when counting types/batches.
+- Initial allowance for new visible scenery on Low: <=25 extra draws and <=30,000
+  triangles per sampled gameplay view; target replacing expensive existing objects
+  or recovering their cost so whole-scene performance stays level or improves.
+- New optional per-map animated decor nodes <=8 active nearby, optional emitters <=3
+  nearby and <=96 particles total on Low; fewer if profiling shows overdraw.
+- New optional positional lights on Low: zero by default; reuse current capped
+  lights. On High allow only a few focal lights with distance culling and a measured
+  total budget. Emission does not require an extra shadow-casting light per object.
+- Set an initial additional prepared environment texture memory budget <=16MiB on
+  the mobile profile and additional warm runtime scene memory <=32MiB; measure
+  engine/GPU memory and report compression. These aren't promises derived from ZIP
+  size. Keep packed release growth <=20MiB for this pass unless measured quality
+  gains justify a documented revision, and exclude all unused source formats.
+
+Use identical routes, resolution, renderer, actors, particle/lighting settings and
+warm-up. Capture uncapped frame times (cap obscures available headroom), then test
+the normal 30fps mobile cap for pacing. Compare median/p95/p99, CPU/script/physics,
+GPU, draws, triangles, node/instance count, memory and map load/navmesh time. Run at
+least three repeats for baseline and candidate at the same hardware/settings.
+
+Acceptance targets: on the selected low-end Android device aim for sustained 30fps
+after a 10–15 minute thermal run, p95 frame time <=33.3ms on normal travel and no
+recurring decorative stutter. On desktop Low aim for 60fps normal exploration.
+For matched map scenarios target median and p95 equal to or better than baseline;
+allow only <=5% variation consistent with repeated-run noise and investigate p99
+spikes. If already over budget, optimize until new scenery has no added cost and
+report remaining broader bottlenecks truthfully. Do not lower resolution only in
+the candidate, reduce enemy counts to hide a regression, or certify a desktop touch
+preview as a low-end phone result. Missing Android access means device FPS remains
+unverified; still produce the APK and clear report of the outstanding measurement.
+
+Specific benchmark coverage:
+- Malasugue arrival/market/terrace and wide minimap; Westreach farm/cove; Olivar
+  dock/plaza; Wyman bonfire/jetty; Ruined Forest canopy/combat clearing.
+- Agdao pier/harbour, Wire Market, middle terrace, upper lift/roof bridges, Crown
+  and gate. Include both restored and dim white-wire states where available.
+- Coilwood dense trail, Barrens gates, Bridge pylons and Citadel approach.
+- Tavern and Guild House clutter-heavy views plus a domestic interior.
+- Flooded cistern, fungal hall, Emberforge, rime burial, archive/Orrery, Jade,
+  Obsidian and Veinworks boss approach. Also overview/purpose checks for all other
+  registered dungeon themes, including extension floors where applicable.
+- Actual populated combat: 12-player/party-compatible case and existing dense stress
+  case, preserving actor counts and telegraphs. Source triangle counts alone do not
+  prove this pass preserves FPS.
+
+Extend tools/perf_matrix.py with explicit Agdao/dungeon/other island routes and a
+new output label/root if necessary. Existing script's mobile profile is a PC run
+with Compatibility and mobile settings. Keep that label honest and report actual
+Android model, SoC, RAM, OS, renderer and thermals separately. Never run GPU FPS
+probes in headless mode and present the results as rendered performance.
+
+VALIDATION AND EVIDENCE
+
+Create output/map-design-20261003/ with a status report, baseline/candidate captures,
+perf JSON/logs, nav/travel logs, accepted-assets mapping, source/build revision and
+release receipts. Keep new data separate from older milestones. No fabricated images.
+
+Capture both a clean world view and actual HUD/gameplay view. Same camera transform,
+time/light state, quality and resolution before/after. Include High and mobile/Low:
+- Town entrances, plaza/market/work corner, water edge and one domestic exterior.
+- All five Agdao terraces, correct tier/roof contact and gate approach.
+- Every existing interior at entrance and at its principal furniture composition.
+- Per dungeon: arrival, a purposeful side room, basin/gallery transition and boss
+  approach; overview for each registered theme. At minimum inspect first and final
+  authored floor of each definition, representative middle floors, and one deepest
+  growth extension for each eligible theme. Added floors cannot fall back to generic
+  drowned clutter or lose return/seal/chest behavior.
+
+Check all stairs, side stair landings, roof bridges, lift entrances, narrow paths,
+doors, pier boarding, town exits, shrines, crafting/guild/quest NPC approaches and
+boss lanes with the actual pawn/collision. Maintain existing actor radius/clearance;
+keep main town route widths around >=3m and local approaches >=1.5m where feasible
+without changing authored narrow dungeon passage design. Verify navmesh pathfinding
+and a physical walkthrough, not only a top-down nav screenshot. No floating props,
+sunken benches, z-fighting rugs, missing object parts or opaque foliage hiding foes.
+
+Run appropriate existing tests after shared-builder/material/import changes and
+the full release suite after completion. Inspect runner syntax and actual available
+suite names before use. Existing entry points include:
+<Godot> --headless --path game res://tests/run_tests.tscn
+<Godot> --headless --path game res://tests/tools/time_maps.tscn -- --maps=sanctuary,agdao,zr_coilwood
+<Godot> --headless --path game res://tests/tools/nav_maps.tscn -- --out=<new output path>
+<Godot> --path game --resolution 1600x900 res://tests/tools/capture_maps.tscn -- --out=<new output path>
+python tools/perf_matrix.py run --label map-design-baseline --godot "<actual Godot console exe>" --repeats 3
+python tools/perf_matrix.py run --label map-design-candidate --godot "<same exe>" --repeats 3
+python tools/perf_matrix.py compare map-design-baseline map-design-candidate
+python -m unittest server.test_service server.test_hardening
+
+Adapt probes that don't currently cover generated/Agdao maps; do not claim existing
+capture scenes cover them automatically. Preserve user saves and settings, use
+scratch slots and restore any runtime-only settings. Check material theme isolation
+by travelling town -> dungeon -> Agdao -> another dungeon -> town. Test solo and
+cooperative travel/state replication after scene/collision/interactive prop changes.
+Environmental decoration must not add network entities for static props.
+
+RELEASE, MAIN PUSH AND BUILDS — REQUIRED FINAL STEP
+
+Finish implementation and validation, review the complete relevant diff and credits,
+then commit/push the completed work to main using the existing configured remote.
+Inspect remote/main before integration; resolve ordinary conflicts while preserving
+user work. Do not force push. Include this brief, curation scripts, canonical selected
+source packages, manifests/licenses and the implemented runtime derivatives needed
+to reproduce the game. Do not indiscriminately git add all: the workspace already
+contains unrelated uncommitted network/server/equipment/UI work and possible secrets.
+Coordinate those milestones and include their reviewed completed work as appropriate
+under the user's "push all" instruction; do not discard or silently omit needed work.
+
+Update ASSET_CREDITS.md to reflect accepted Kenney assets and transformations, removing
+the stale statement that all environment models are procedural if it remains. Use
+ASSET_CREDITS_MAP_DESIGN.md as the source-library supplement. Record rejected/deferred
+items separately so the release cannot imply they were integrated.
+
+Use the project's installed Godot version and matching export templates (latest
+beta reports say 4.7.2; verify installed binary rather than guessing its path).
+Existing local game/export_presets.cfg has Windows and Android presets, and is
+Git-ignored. Inspect/update it locally and produce sanitized reproducible release
+configuration/instructions without private keys/passwords. Current recorded version
+mismatch (Android 0.8.0 versus Windows 1.0.0) must be resolved consistently. Preserve
+the Android application ID and signing identity so updates continue to work.
+
+Export from the final committed source state; confirm clean relevant tracked files:
+<GodotConsoleExe> --headless --path "A:\Python\beyond-heroes\game" --import
+<GodotConsoleExe> --headless --path "A:\Python\beyond-heroes\game" --export-release "Windows" "A:\Python\beyond-heroes\build\map-design-20261003\BeyondHeroes.exe"
+<GodotConsoleExe> --headless --path "A:\Python\beyond-heroes\game" --export-release "Android" "A:\Python\beyond-heroes\build\map-design-20261003\BeyondHeroes.apk"
+
+Create the build folder first and preserve prior known-good builds. If the EXE
+exports a separate PCK, deliver it alongside the EXE. Verify each process exit code
+and artifact existence, then hash the actual files and associate them with the
+same final commit SHA. Review export filters/resources, not just file size: exclude
+tests, unused vendor/source models and receipt data, raw assets_src, private server
+configs/certificates/DB, logs, signing material and source-only tooling. Preserve
+only intentionally public client endpoint/trust configuration. Existing all_resources
+exports can include unused files inside game/assets, so audit runtime vendor paths.
+
+Smoke-test the EXE through real startup, load, travel and a redesigned town/dungeon;
+check missing resource errors. Verify APK package/version/ABI (existing presets
+enable arm64-v8a and armeabi-v7a), apksigner verification and install/launch on an
+available device. Record exact renderer/settings. Release-sign with the existing
+owner identity when available. If only debug signing exists, create an explicitly
+named debug testing APK and report the release-signing blocker; never imply it is
+the signed release or invent a replacement key. Never print signing credentials.
+
+Binary artifacts live under ignored build/ and are not automatically part of a main
+push. Deliver their exact paths plus checksums and a release manifest alongside the
+artifacts; track reproducible export configuration and the validation summary. If
+a separate receipt-only documentation commit follows, report both the pushed main
+SHA and the exact game source SHA used for the builds; do not mislabel the latter. Use
+the existing artifact/release workflow if one exists; do not cram oversized binaries
+into normal Git or publish to a new external service without appropriate authority.
+Push source to main and verify the remote commit. If final smoke tests require fixes,
+commit/push those fixes and rebuild both artifacts so source SHA and binary receipt
+agree. Do not conclude with "ready to push" when the push is authorized and possible.
+
+ORDER OF WORK
+
+1. Inspect current changes, establish baseline captures/performance and registry.
+2. Verify/download source receipts, prepare a small representative set: one broadleaf
+   tree, palm, boulder, barrel, chair, table, bookcase, coffin, altar and candle group.
+   Resolve import/material/scale/multi-mesh issues first and compare in real scenes.
+3. Finish a connected Malasugue route plus one interior and Agdao harbour-to-market
+   route. Measure before scaling. Continue all five Agdao terraces and remaining towns.
+4. Complete outdoor biomes and interiors, maintain both islands' route clarity.
+5. Implement reusable theme/room-role dressing and all dungeon identities above,
+   including fixed story chain, Zarael Vaults and growth extensions.
+6. Improve low-cost ambient life/sound and mobile retention; remove costly clutter
+   until the matched performance results pass. Retest affected navigation/materials.
+7. Complete evidence, full release checks, source credits, main commit/push and
+   Windows/Android exports tied to the final revision. Deliver the actual files.
+
+Do not stop after the pilot routes: they establish a sound pipeline for the required
+broader scope. Final report should make clear what changed visually, where assets
+were used, test/performance evidence, exact main SHA and build paths/hashes, and any
+real unresolved device/signing limitations. Use plain readable language.
+
+APPENDIX — DOWNLOADED OBJECTS
+The numbered per-object descriptions and model paths below are generated from the
+verified source manifest. They are curation suggestions; validate actual placement
+and use the full source/material evidence before integration.
+
+VERIFIED NUMBERED INVENTORY
+
+001. kenney_nature_tree_oak
+     Object: Broad oak with a rounded crown.
+     Suggested use: Malasugue outskirts and Olivar lakeside shade.
+     Source: Kenney nature-kit, CC0-1.0. 196 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.641 x 1.226 x 0.740. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0
+
+002. kenney_nature_tree_default
+     Object: Compact broadleaf tree.
+     Suggested use: Residential gardens and Westreach hedgerow breaks.
+     Source: Kenney nature-kit, CC0-1.0. 114 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.755 x 1.708 x 0.654. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0
+
+003. kenney_nature_tree_detailed
+     Object: Branching broadleaf tree.
+     Suggested use: A few focal trees beside town courtyards.
+     Source: Kenney nature-kit, CC0-1.0. 402 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.847 x 1.332 x 0.762. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0
+
+004. kenney_nature_tree_thin
+     Object: Narrow broadleaf tree.
+     Suggested use: Olivar lanes where wide crowns obstruct the camera.
+     Source: Kenney nature-kit, CC0-1.0. 228 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.680 x 1.490 x 0.617. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0
+
+005. kenney_nature_tree_small
+     Object: Small broadleaf tree.
+     Suggested use: Gardens behind houses, away from door approaches.
+     Source: Kenney nature-kit, CC0-1.0. 62 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.355 x 1.110 x 0.409. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0
+
+006. kenney_nature_tree_pinedefaulta
+     Object: Straight layered conifer.
+     Suggested use: Ruined Forest silhouette and high ground.
+     Source: Kenney nature-kit, CC0-1.0. 230 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.532 x 1.546 x 0.532. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0
+
+007. kenney_nature_tree_pinerounda
+     Object: Round tiered conifer.
+     Suggested use: Forest borders with a different crown silhouette.
+     Source: Kenney nature-kit, CC0-1.0. 204 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.617 x 1.366 x 0.712. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0
+
+008. kenney_nature_tree_pinetalla
+     Object: Tall conifer.
+     Suggested use: Distant tree line and selected forest landmarks.
+     Source: Kenney nature-kit, CC0-1.0. 78 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.386 x 1.530 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0
+
+009. kenney_nature_tree_palm
+     Object: Straight palm.
+     Suggested use: Agdao harbour gardens and Tideglass Cove.
+     Source: Kenney nature-kit, CC0-1.0. 186 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.935 x 1.515 x 1.013. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0
+
+010. kenney_nature_tree_palmbend
+     Object: Leaning palm.
+     Suggested use: Agdao waterfront silhouette, leaning away from walkways.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.935 x 1.380 x 1.013. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0
+
+011. kenney_nature_tree_palmshort
+     Object: Low palm.
+     Suggested use: Agdao small planted courtyards.
+     Source: Kenney nature-kit, CC0-1.0. 190 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.034 x 1.056 x 1.034. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0
+
+012. kenney_nature_tree_palmdetailedtall
+     Object: Detailed tall palm.
+     Suggested use: Sparse focal trees beside the harbour approach.
+     Source: Kenney nature-kit, CC0-1.0. 336 triangles; 3 mesh(es), 3 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.034 x 1.423 x 1.034. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0
+
+013. kenney_nature_plant_bush
+     Object: Rounded shrub.
+     Suggested use: House foundations and village lot boundaries.
+     Source: Kenney nature-kit, CC0-1.0. 32 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.396 x 0.244 x 0.396. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0
+
+014. kenney_nature_plant_bushlarge
+     Object: Large shrub mass.
+     Suggested use: Olivar garden corners and Agdao hill edges.
+     Source: Kenney nature-kit, CC0-1.0. 60 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.374 x 0.243 x 0.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0
+
+015. kenney_nature_plant_bushsmall
+     Object: Small shrub.
+     Suggested use: Low edging beside stairs and houses.
+     Source: Kenney nature-kit, CC0-1.0. 16 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.383 x 0.207 x 0.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0
+
+016. kenney_nature_plant_flattall
+     Object: Tall leafy plant.
+     Suggested use: Agdao planters and Coilwood trail margins.
+     Source: Kenney nature-kit, CC0-1.0. 32 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.272 x 0.284 x 0.272. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0
+
+017. kenney_nature_grass
+     Object: Small grass tuft.
+     Suggested use: Sparse path-to-ground transitions.
+     Source: Kenney nature-kit, CC0-1.0. 132 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.381 x 0.254 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass/1.1.0
+
+018. kenney_nature_grass_large
+     Object: Large grass tuft.
+     Suggested use: Grouped banks, avoiding central travel lanes.
+     Source: Kenney nature-kit, CC0-1.0. 224 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.409 x 0.254 x 0.408. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0
+
+019. kenney_nature_grass_leafs
+     Object: Broad leaf ground plant.
+     Suggested use: Agdao jungle edge and Coilwood undergrowth.
+     Source: Kenney nature-kit, CC0-1.0. 36 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.234 x 0.142 x 0.257. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0
+
+020. kenney_nature_flower_yellowa
+     Object: Yellow flowering stem.
+     Suggested use: Olivar gardens and domestic planted beds.
+     Source: Kenney nature-kit, CC0-1.0. 76 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.159 x 0.192 x 0.181. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0
+
+021. kenney_nature_flower_purplea
+     Object: Purple flowering stem.
+     Suggested use: Malasugue house garden accents.
+     Source: Kenney nature-kit, CC0-1.0. 76 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.159 x 0.242 x 0.181. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0
+
+022. kenney_nature_mushroom_tangroup
+     Object: Cluster of pale mushrooms.
+     Suggested use: Damp forest logs and crypt threshold edges.
+     Source: Kenney nature-kit, CC0-1.0. 144 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.270 x 0.250 x 0.254. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0
+
+023. kenney_nature_lily_large
+     Object: Large lily pad.
+     Suggested use: Olivar sheltered lake edge and marsh pools.
+     Source: Kenney nature-kit, CC0-1.0. 86 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.272 x 0.098 x 0.314. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0
+
+024. kenney_nature_hanging_moss
+     Object: Hanging moss strands.
+     Suggested use: Sparse damp ruin details; test opacity and overdraw.
+     Source: Kenney nature-kit, CC0-1.0. 52 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.160 x 0.478 x 0.035. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0
+
+025. kenney_nature_rock_largea
+     Object: Large irregular boulder.
+     Suggested use: Westreach coastal clusters and Agdao shore anchors.
+     Source: Kenney nature-kit, CC0-1.0. 80 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.785 x 0.260 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0
+
+026. kenney_nature_rock_largeb
+     Object: Second large boulder silhouette.
+     Suggested use: Asymmetric rock clusters beside broad walking spaces.
+     Source: Kenney nature-kit, CC0-1.0. 85 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.767 x 0.430 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0
+
+027. kenney_nature_rock_largec
+     Object: Third large boulder silhouette.
+     Suggested use: Cliff foot and forest clearing boundary.
+     Source: Kenney nature-kit, CC0-1.0. 72 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.064 x 0.321 x 1.016. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0
+
+028. kenney_nature_rock_smalla
+     Object: Small irregular rock.
+     Suggested use: Transition scatter around larger rocks.
+     Source: Kenney nature-kit, CC0-1.0. 16 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.361 x 0.191 x 0.361. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0
+
+029. kenney_nature_rock_smallb
+     Object: Second small rock silhouette.
+     Suggested use: Shore and farm-edge accents.
+     Source: Kenney nature-kit, CC0-1.0. 24 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.361 x 0.177 x 0.361. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0
+
+030. kenney_nature_rock_smallflata
+     Object: Flat low rock.
+     Suggested use: Ground transitions and stream banks.
+     Source: Kenney nature-kit, CC0-1.0. 20 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.496 x 0.065 x 0.430. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0
+
+031. kenney_nature_rock_talla
+     Object: Tall narrow rock.
+     Suggested use: Sparse rocky coast silhouettes.
+     Source: Kenney nature-kit, CC0-1.0. 136 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.983 x 0.996 x 0.683. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0
+
+032. kenney_nature_stone_largea
+     Object: Large stone boulder.
+     Suggested use: Pale inland rock and terrace garden anchors.
+     Source: Kenney nature-kit, CC0-1.0. 80 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.785 x 0.260 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0
+
+033. kenney_nature_stone_smallflata
+     Object: Flat pale stone.
+     Suggested use: Olivar shore, ruin floor edges and garden trim.
+     Source: Kenney nature-kit, CC0-1.0. 20 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.496 x 0.065 x 0.430. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0
+
+034. kenney_nature_stump_old
+     Object: Weathered tree stump.
+     Suggested use: Ruined Forest logging remnants.
+     Source: Kenney nature-kit, CC0-1.0. 120 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.357 x 0.266 x 0.371. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0
+
+035. kenney_nature_stump_rounddetailed
+     Object: Cut stump with irregular surface.
+     Suggested use: Westreach woodcutting patch and Wyman firewood corner.
+     Source: Kenney nature-kit, CC0-1.0. 96 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.357 x 0.206 x 0.371. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0
+
+036. kenney_nature_log
+     Object: Fallen log.
+     Suggested use: Forest floor composition and simple camp seating.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.234 x 0.173 x 0.710. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log/1.1.0
+
+037. kenney_nature_log_stack
+     Object: Stacked cut timber.
+     Suggested use: Wyman supply corner and Malasugue forge fuel.
+     Source: Kenney nature-kit, CC0-1.0. 184 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.425 x 0.346 x 0.710. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0
+
+038. kenney_nature_fence_planks
+     Object: Plank fence span.
+     Suggested use: Westreach farm boundaries and house lots.
+     Source: Kenney nature-kit, CC0-1.0. 96 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.000 x 0.345 x 0.096. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0
+
+039. kenney_nature_fence_gate
+     Object: Farm fence gate.
+     Suggested use: Garden and field entrances with a clear passage.
+     Source: Kenney nature-kit, CC0-1.0. 524 triangles; 2 mesh(es), 5 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 1.000 x 0.345 x 0.070. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0
+
+040. kenney_nature_pot_small
+     Object: Small earthen pot.
+     Suggested use: Herbs, kitchen storage and market table grouping.
+     Source: Kenney nature-kit, CC0-1.0. 72 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.323 x 0.268 x 0.280. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0
+
+041. kenney_nature_pot_large
+     Object: Large earthen pot.
+     Suggested use: Agdao courtyard planters and town storage.
+     Source: Kenney nature-kit, CC0-1.0. 68 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.564 x 0.200 x 0.488. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0
+
+042. kenney_nature_crop_carrot
+     Object: Carrot produce.
+     Suggested use: Westreach farm beds and market produce display.
+     Source: Kenney nature-kit, CC0-1.0. 148 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.343 x 0.619 x 0.343. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0
+
+043. kenney_nature_crop_pumpkin
+     Object: Pumpkin produce.
+     Suggested use: Market baskets and farm storage clusters.
+     Source: Kenney nature-kit, CC0-1.0. 120 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.441 x 0.334 x 0.452. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0
+
+044. kenney_nature_crops_wheatstageb
+     Object: Mature wheat patch.
+     Suggested use: Small authored Westreach farm beds.
+     Source: Kenney nature-kit, CC0-1.0. 360 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.540 x 0.535 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0
+
+045. kenney_nature_crops_bamboostageb
+     Object: Mature bamboo patch.
+     Suggested use: Sparse Agdao back gardens and Coilwood framing.
+     Source: Kenney nature-kit, CC0-1.0. 564 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.340 x 0.890 x 0.308. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0
+
+046. kenney_nature_tent_smallopen
+     Object: Small open tent.
+     Suggested use: Wyman and survivor camp edge, preserve entrances.
+     Source: Kenney nature-kit, CC0-1.0. 224 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.548 x 0.561 x 0.666. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0
+
+047. kenney_nature_campfire_stones
+     Object: Stone campfire ring.
+     Suggested use: Camp seating group; reuse existing fire effects.
+     Source: Kenney nature-kit, CC0-1.0. 264 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.541 x 0.078 x 0.516. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0
+
+048. kenney_nature_canoe
+     Object: Simple canoe hull.
+     Suggested use: Olivar dock or cove mooring, not a new travel mechanic.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.300 x 0.183 x 1.150. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_canoe/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_canoe/1.1.0
+
+049. kenney_furniture_bench
+     Object: Plain bench.
+     Suggested use: Town resting corners, harbour seating and tavern wall.
+     Source: Kenney furniture-kit, CC0-1.0. 170 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.470 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bench/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bench/1.1.0
+
+050. kenney_furniture_chair
+     Object: Plain timber chair.
+     Suggested use: Tavern tables and domestic interiors.
+     Source: Kenney furniture-kit, CC0-1.0. 170 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.200 x 0.470 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chair/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chair/1.1.0
+
+051. kenney_furniture_chairrounded
+     Object: Rounded-back chair.
+     Suggested use: Council and guild meeting rooms after timber restyle.
+     Source: Kenney furniture-kit, CC0-1.0. 280 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.200 x 0.455 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0
+
+052. kenney_furniture_stoolbarsquare
+     Object: Square stool.
+     Suggested use: Tavern counter and smithy work corner.
+     Source: Kenney furniture-kit, CC0-1.0. 142 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.153 x 0.405 x 0.148. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0
+
+053. kenney_furniture_table
+     Object: Rectangular table.
+     Suggested use: Tavern eating group and netmender work area.
+     Source: Kenney furniture-kit, CC0-1.0. 120 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.841 x 0.327 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_table/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_table/1.1.0
+
+054. kenney_furniture_tableround
+     Object: Round table.
+     Suggested use: Small tavern seating groups.
+     Source: Kenney furniture-kit, CC0-1.0. 80 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.693 x 0.367 x 0.800. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0
+
+055. kenney_furniture_tablecross
+     Object: Cross-braced table.
+     Suggested use: Guild meeting table and workshop.
+     Source: Kenney furniture-kit, CC0-1.0. 178 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.852 x 0.347 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0
+
+056. kenney_furniture_tablecloth
+     Object: Cloth-covered table.
+     Suggested use: Market or domestic dining after linen recolour.
+     Source: Kenney furniture-kit, CC0-1.0. 144 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.841 x 0.327 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0
+
+057. kenney_furniture_sidetable
+     Object: Small side table.
+     Suggested use: Bedside storage and document corner.
+     Source: Kenney furniture-kit, CC0-1.0. 118 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.534 x 0.384 x 0.220. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0
+
+058. kenney_furniture_sidetabledrawers
+     Object: Drawer side table.
+     Suggested use: Keeper and cartographer storage.
+     Source: Kenney furniture-kit, CC0-1.0. 238 triangles; 3 mesh(es), 4 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.534 x 0.384 x 0.222. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0
+
+059. kenney_furniture_desk
+     Object: Writing desk.
+     Suggested use: Cartographer and guild administration.
+     Source: Kenney furniture-kit, CC0-1.0. 198 triangles; 2 mesh(es), 3 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.734 x 0.384 x 0.392. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_desk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_desk/1.1.0
+
+060. kenney_furniture_bookcaseopen
+     Object: Tall open bookcase.
+     Suggested use: Cartographer and Lantern House library wall.
+     Source: Kenney furniture-kit, CC0-1.0. 320 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.880 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0
+
+061. kenney_furniture_bookcaseopenlow
+     Object: Low open bookcase.
+     Suggested use: Guild room divider without camera obstruction.
+     Source: Kenney furniture-kit, CC0-1.0. 184 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.400 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0
+
+062. kenney_furniture_bookcaseclosed
+     Object: Closed timber bookcase.
+     Suggested use: Keeper house and council archives.
+     Source: Kenney furniture-kit, CC0-1.0. 372 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.850 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0
+
+063. kenney_furniture_bookcaseclosedwide
+     Object: Wide closed bookcase.
+     Suggested use: Guild House archival wall.
+     Source: Kenney furniture-kit, CC0-1.0. 372 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.800 x 0.790 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0
+
+064. kenney_furniture_books
+     Object: Small stack of books.
+     Suggested use: Cartographer desk and council reading table.
+     Source: Kenney furniture-kit, CC0-1.0. 62 triangles; 1 mesh(es), 4 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.150 x 0.104 x 0.094. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_books/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_books/1.1.0
+
+065. kenney_furniture_bedsingle
+     Object: Single bed.
+     Suggested use: Existing domestic interiors after linen and wood restyle.
+     Source: Kenney furniture-kit, CC0-1.0. 214 triangles; 3 mesh(es), 6 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.571 x 0.375 x 1.125. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0
+
+066. kenney_furniture_beddouble
+     Object: Double bed.
+     Suggested use: Hald house sleeping corner; verify room clearance.
+     Source: Kenney furniture-kit, CC0-1.0. 264 triangles; 4 mesh(es), 6 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.956 x 0.375 x 1.125. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0
+
+067. kenney_furniture_bedbunk
+     Object: Bunk bed.
+     Suggested use: Wyman lodging only if an existing interior supports it.
+     Source: Kenney furniture-kit, CC0-1.0. 580 triangles; 5 mesh(es), 5 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.571 x 0.850 x 1.095. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0
+
+068. kenney_furniture_pillow
+     Object: Simple pillow.
+     Suggested use: Existing beds; remove modern-looking material gloss.
+     Source: Kenney furniture-kit, CC0-1.0. 50 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.230 x 0.222 x 0.088. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0
+
+069. kenney_furniture_rugrectangle
+     Object: Rectangular rug.
+     Suggested use: Tavern and guild seating area anchor.
+     Source: Kenney furniture-kit, CC0-1.0. 28 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.570 x 0.010 x 0.920. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0
+
+070. kenney_furniture_ruground
+     Object: Round rug.
+     Suggested use: Council seating group and domestic corner.
+     Source: Kenney furniture-kit, CC0-1.0. 188 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.920 x 0.010 x 0.920. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0
+
+071. kenney_furniture_coatrackstanding
+     Object: Standing coat rack.
+     Suggested use: Tavern vestibule and guild reception.
+     Source: Kenney furniture-kit, CC0-1.0. 190 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.273 x 0.770 x 0.273. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0
+
+072. kenney_furniture_plantsmall1
+     Object: Small potted plant.
+     Suggested use: House windows and Agdao market counters.
+     Source: Kenney furniture-kit, CC0-1.0. 102 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.095 x 0.140 x 0.095. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0
+
+073. kenney_furniture_plantsmall2
+     Object: Second small potted plant.
+     Suggested use: Apothecary herb display and house shelves.
+     Source: Kenney furniture-kit, CC0-1.0. 158 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.095 x 0.140 x 0.095. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0
+
+074. kenney_furniture_pottedplant
+     Object: Tall potted plant.
+     Suggested use: Agdao courtyard and council entrance.
+     Source: Kenney furniture-kit, CC0-1.0. 60 triangles; 2 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.212 x 0.654 x 0.241. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0
+
+075. kenney_pirate_barrel
+     Object: Wooden barrel.
+     Suggested use: Harbour cargo, tavern cellar edge and Wyman stores.
+     Source: Kenney pirate-kit, CC0-1.0. 148 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.336 x 1.229 x 1.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0
+
+076. kenney_pirate_crate
+     Object: Wooden cargo crate.
+     Suggested use: Agdao pier handling area and Westreach stolen cargo.
+     Source: Kenney pirate-kit, CC0-1.0. 76 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.078 x 0.770 x 1.309. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate/1.1.0
+
+077. kenney_pirate_crate_bottles
+     Object: Crate holding bottles.
+     Suggested use: Tavern stock and merchant delivery scene.
+     Source: Kenney pirate-kit, CC0-1.0. 572 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.078 x 1.057 x 1.309. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0
+
+078. kenney_pirate_bottle
+     Object: Small bottle.
+     Suggested use: Tavern tables and apothecary shelves.
+     Source: Kenney pirate-kit, CC0-1.0. 124 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.364 x 0.890 x 0.364. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0
+
+079. kenney_pirate_bottle_large
+     Object: Large bottle.
+     Suggested use: Grouped apothecary and market storage.
+     Source: Kenney pirate-kit, CC0-1.0. 108 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.466 x 0.890 x 0.466. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0
+
+080. kenney_pirate_chest
+     Object: Wooden chest.
+     Suggested use: House storage; keep existing loot chest logic intact.
+     Source: Kenney pirate-kit, CC0-1.0. 232 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.275 x 1.147 x 1.275. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_chest/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_chest/1.1.0
+
+081. kenney_pirate_tool_shovel
+     Object: Hand shovel.
+     Suggested use: Farm shed and garden work corner.
+     Source: Kenney pirate-kit, CC0-1.0. 168 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.658 x 2.349 x 0.283. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0
+
+082. kenney_pirate_tool_paddle
+     Object: Wooden paddle.
+     Suggested use: Olivar boathouse and harbour boat-rest area.
+     Source: Kenney pirate-kit, CC0-1.0. 60 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.658 x 2.349 x 0.208. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0
+
+083. kenney_pirate_boat_row_small
+     Object: Small rowing boat.
+     Suggested use: Agdao quay secondary mooring.
+     Source: Kenney pirate-kit, CC0-1.0. 168 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.749 x 0.848 x 2.372. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0
+
+084. kenney_pirate_boat_row_large
+     Object: Larger rowing boat.
+     Suggested use: Olivar landing; static decoration or shared gentle bob.
+     Source: Kenney pirate-kit, CC0-1.0. 174 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.749 x 0.848 x 2.852. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0
+
+085. kenney_pirate_ship_wreck
+     Object: Broken ship hull.
+     Suggested use: Tideglass Cove story vignette, no collision across approach.
+     Source: Kenney pirate-kit, CC0-1.0. 2282 triangles; 16 mesh(es), 16 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.800 x 9.964 x 10.600. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0
+
+086. kenney_pirate_rocks_a
+     Object: Grouped shoreline rocks.
+     Suggested use: Agdao harbour mouth and cove shore.
+     Source: Kenney pirate-kit, CC0-1.0. 264 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 5.113 x 2.898 x 4.386. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0
+
+087. kenney_pirate_rocks_b
+     Object: Second grouped shoreline rocks.
+     Suggested use: Coastal silhouette variety.
+     Source: Kenney pirate-kit, CC0-1.0. 300 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.437 x 3.654 x 4.705. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0
+
+088. kenney_pirate_rocks_c
+     Object: Third grouped shoreline rocks.
+     Suggested use: Cliff-to-water boundary.
+     Source: Kenney pirate-kit, CC0-1.0. 232 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 3.643 x 2.300 x 3.669. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0
+
+089. kenney_pirate_platform_planks
+     Object: Plank deck piece.
+     Suggested use: Dock repair vignette, visual only unless navigation updated.
+     Source: Kenney pirate-kit, CC0-1.0. 48 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.894 x 0.428 x 2.702. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0
+
+090. kenney_pirate_structure_fence
+     Object: Timber rail span.
+     Suggested use: Harbour railing repairs beside existing geometry.
+     Source: Kenney pirate-kit, CC0-1.0. 356 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.500 x 2.200 x 2.500. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0
+
+091. kenney_pirate_structure_platform_dock_small
+     Object: Small dock platform.
+     Suggested use: Supplemental mooring beside existing traversable pier.
+     Source: Kenney pirate-kit, CC0-1.0. 312 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.900 x 1.312 x 2.512. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0
+
+092. kenney_pirate_structure_roof
+     Object: Small timber canopy roof.
+     Suggested use: Cargo shelter; restyle and preserve camera visibility.
+     Source: Kenney pirate-kit, CC0-1.0. 348 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 3.085 x 3.400 x 3.234. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0
+
+093. kenney_pirate_flag_pennant
+     Object: Plain pennant flag.
+     Suggested use: Town accents with canon colours and no pirate markings.
+     Source: Kenney pirate-kit, CC0-1.0. 118 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.762 x 2.097 x 0.399. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0
+
+094. kenney_pirate_mast_ropes
+     Object: Rope-equipped mast.
+     Suggested use: Harbour rigging vignette, static mesh and no new sail physics.
+     Source: Kenney pirate-kit, CC0-1.0. 350 triangles; 3 mesh(es), 3 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.386 x 7.888 x 2.349. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0
+
+095. kenney_graveyard_altar_stone
+     Object: Stone ritual altar.
+     Suggested use: Catacomb ritual room, temple side chapel and Jade tomb niche.
+     Source: Kenney graveyard-kit, CC0-1.0. 166 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.040 x 0.488 x 0.653. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0
+
+096. kenney_graveyard_altar_wood
+     Object: Timber ritual altar.
+     Suggested use: Forest cult shelter and abandoned dungeon chapel.
+     Source: Kenney graveyard-kit, CC0-1.0. 306 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.045 x 0.538 x 0.659. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0
+
+097. kenney_graveyard_coffin_old
+     Object: Weathered coffin.
+     Suggested use: Blackvault Ossuary and drowned crypt wall alcoves.
+     Source: Kenney graveyard-kit, CC0-1.0. 216 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.574 x 0.200 x 0.838. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0
+
+098. kenney_graveyard_coffin
+     Object: Intact coffin.
+     Suggested use: Burial room rows, retaining broad central combat space.
+     Source: Kenney graveyard-kit, CC0-1.0. 256 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.574 x 0.325 x 0.838. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0
+
+099. kenney_graveyard_candle_multiple
+     Object: Cluster of candles.
+     Suggested use: Tomb and ritual staging; share capped existing flame effects.
+     Source: Kenney graveyard-kit, CC0-1.0. 162 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.255 x 0.200 x 0.267. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0
+
+100. kenney_graveyard_lantern_candle
+     Object: Candle lantern housing.
+     Suggested use: Crypt route accents and flooded cistern pier.
+     Source: Kenney graveyard-kit, CC0-1.0. 224 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.240 x 0.388 x 0.240. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0
+
+101. kenney_graveyard_fire_basket
+     Object: Iron fire basket.
+     Suggested use: Emberforge work alcove and Obsidian Engine service room.
+     Source: Kenney graveyard-kit, CC0-1.0. 196 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.417 x 0.168 x 0.417. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0
+
+102. kenney_graveyard_urn_round
+     Object: Round funerary urn.
+     Suggested use: Catacomb niches and Jade Sepulchre memorial corners.
+     Source: Kenney graveyard-kit, CC0-1.0. 230 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.264 x 0.384 x 0.264. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0
+
+103. kenney_graveyard_urn_square
+     Object: Square funerary urn.
+     Suggested use: Burial chamber silhouette variation.
+     Source: Kenney graveyard-kit, CC0-1.0. 218 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.264 x 0.384 x 0.264. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0
+
+104. kenney_graveyard_detail_chalice
+     Object: Ritual chalice.
+     Suggested use: Altar grouping and ruined temple offering table.
+     Source: Kenney graveyard-kit, CC0-1.0. 136 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.164 x 0.249 x 0.164. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0
+
+105. kenney_graveyard_detail_bowl
+     Object: Offering bowl.
+     Suggested use: Temple and tomb ritual table composition.
+     Source: Kenney graveyard-kit, CC0-1.0. 176 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.201 x 0.130 x 0.201. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0
+
+106. kenney_graveyard_debris
+     Object: Stone debris pile.
+     Suggested use: Collapsed crypt wall or exhausted mine edge.
+     Source: Kenney graveyard-kit, CC0-1.0. 240 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.536 x 0.160 x 0.547. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0
+
+107. kenney_graveyard_debris_wood
+     Object: Broken timber debris.
+     Suggested use: Flooded Deeps wreck edge and abandoned storeroom.
+     Source: Kenney graveyard-kit, CC0-1.0. 108 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.459 x 0.100 x 0.504. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0
+
+108. kenney_graveyard_gravestone_broken
+     Object: Broken headstone.
+     Suggested use: Ruined Forest graveyard and Blackvault threshold.
+     Source: Kenney graveyard-kit, CC0-1.0. 134 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.509 x 0.341 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0
+
+109. kenney_graveyard_column_large
+     Object: Large stone column.
+     Suggested use: Ruined Temple side arcade and sparse tomb focal structure.
+     Source: Kenney graveyard-kit, CC0-1.0. 394 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.390 x 1.130 x 0.390. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0
+
+110. kenney_graveyard_pillar_obelisk
+     Object: Stone obelisk.
+     Suggested use: Crypt or Jade chamber landmark after canon glyph treatment.
+     Source: Kenney graveyard-kit, CC0-1.0. 76 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.350 x 1.012 x 0.350. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0
+
+111. kenney_modular-dungeon_gate_metal_bars
+     Object: Metal barred gate.
+     Suggested use: Visual side-cell gate, preserve existing sealed-door state logic.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 720 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.400 x 4.400 x 1.400. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0
+
+112. kenney_modular-dungeon_template_wall_half
+     Object: Half-height stone wall.
+     Suggested use: Cutaway dungeon side alcoves after scale and collision audit.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 276 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.000 x 4.150 x 1.807. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0
+
+113. kenney_modular-dungeon_template_floor_layer_raised
+     Object: Raised stone floor insert.
+     Suggested use: Dry island in damp crypt or small ritual plinth.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 312 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.024 x 3.000 x 4.000. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0
+
+114. kenney_modular-dungeon_template_floor_detail_a
+     Object: Detailed stone floor insert.
+     Suggested use: Sparse threshold accent and repaired temple paving.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 204 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.000 x 0.100 x 4.000. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_ec02c472-35dc-4066-b6c0-9d17d64a1962",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_rugrectangle\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:16.551Z",
+  "updatedAt": "2026-10-02T20:15:16.577Z",
+  "startedAt": "2026-10-02T20:15:16.556Z",
+  "completedAt": "2026-10-02T20:15:16.577Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_ec02c472-35dc-4066-b6c0-9d17d64a1962\\receipt.json"
+}

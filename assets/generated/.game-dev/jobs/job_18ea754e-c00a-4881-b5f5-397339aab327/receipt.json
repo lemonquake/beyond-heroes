@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_detailed\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_detailed",
+      "category": "foliage",
+      "description": "Branching broadleaf tree. Intended use: A few focal trees beside town courtyards",
+      "displayName": "kenney_nature_tree_detailed",
+      "files": [
+        {
+          "bytes": 31412,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b"
+        },
+        {
+          "bytes": 1597,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "dc8eba08344a41c42485ab42eb3c330e872dd13b78fb12d004f5c159313edb3f"
+        },
+        {
+          "bytes": 833,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "94491296b403af7638ec8469088cbcdddc86569c5b00b396e5b1be20a1628a9b"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "87b602d79f487c46dcc7339ee6e1a89233e9aae8108980b928ad18ba146b0ca7"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_75bb6e3fd64efc2c62e38584",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:17.619Z"
+}

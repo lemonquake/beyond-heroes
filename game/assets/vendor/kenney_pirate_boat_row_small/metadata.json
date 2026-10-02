@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_boat_row_small",
+  "category": "environment_prop",
+  "description": "Small rowing boat. Intended use: Agdao quay secondary mooring",
+  "displayName": "kenney_pirate_boat_row_small",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        1.374269008636515,
+        0.8476955137593079,
+        1.1860731840133667
+      ],
+      "min": [
+        -1.3742690086364342,
+        -6.767919641759458e-17,
+        -1.1860731840133667
+      ],
+      "sizeMeters": [
+        2.748538017272949,
+        0.847695513759308,
+        2.3721463680267334
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 27724,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 168,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 292,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

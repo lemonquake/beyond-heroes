@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:25.064Z",
+  "destination": {
+    "assetId": "kenney_pirate_bottle_large",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "adad7bc0bf5f44f97b7a9e8c99dd25b4f211ca17e6d700e076e590ff38d355ac",
+  "packageId": "pkg_e89b9c424066ba0f8328df4b",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 22340,
+    "fileName": "kenney_pirate_bottle_large.glb",
+    "sha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c"
+  }
+}

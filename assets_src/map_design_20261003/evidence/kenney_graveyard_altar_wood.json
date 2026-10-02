@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_altar_wood.glb",
+    "fileBytes": 39388,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 516,
+    "triangleCount": 306,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10965
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.5225464701652527,
+        0,
+        -0.32934999465942383
+      ],
+      "max": [
+        0.5225464701652527,
+        0.5375999808311462,
+        0.32934999465942383
+      ],
+      "sizeMeters": [
+        1.0450929403305054,
+        0.5375999808311462,
+        0.6586999893188477
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_altar_wood.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 306,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        1.0450929403305054,
+        0.5375999808311462,
+        0.6586999893188477
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_wood\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_graveyard_altar_wood",
+        "category": "environment_prop",
+        "description": "Timber ritual altar. Intended use: Forest cult shelter and abandoned dungeon chapel",
+        "displayName": "kenney_graveyard_altar_wood",
+        "files": [
+          {
+            "bytes": 39388,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60"
+          },
+          {
+            "bytes": 1746,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "744d3e30f48caf3fd6b0db5070adc8f9e67a24ac4374c17ab0f75ca20fbdb799"
+          },
+          {
+            "bytes": 1102,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "5932ff00cdef02056e5a395d0cc34a5bfbf4948b39cf13ca1568746b73c761c7"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "cc970c6f545c7e0a85412026fab10a5af4b7acae3c9223efe2829dcd8e4cca8f"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_7d8032e7d9e6348bba861953",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "f1702fc2cbbbb417670ef96bd543209ac5764afdb4e43dbdf267328b62f75968",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+      "bytes": 10965
+    }
+  ]
+}

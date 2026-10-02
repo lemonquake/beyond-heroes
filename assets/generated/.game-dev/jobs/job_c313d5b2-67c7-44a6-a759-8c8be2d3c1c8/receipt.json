@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_tablecross\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_tablecross",
+      "category": "environment_prop",
+      "description": "Cross-braced table. Intended use: Guild meeting table and workshop",
+      "displayName": "kenney_furniture_tablecross",
+      "files": [
+        {
+          "bytes": 12140,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3"
+        },
+        {
+          "bytes": 1553,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "e19afbb4e259ff3cafbee7d1b3068c04566cdd645546026f3c7bd6168a4b8b7f"
+        },
+        {
+          "bytes": 805,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c74e9a9c477f92ee508de477162f71a1dcae0dc8554f447747907844238bbb6d"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "b7b7fa0e5a2fdbb1896990a3fe01b7e3a4ce8343daa0028ecf2f4aebdc9b291b"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_89f7e380e32cacbf414d775e",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:57.939Z"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_324612651728a4aa623454a3",
+  "assetId": "kenney_nature_log_stack",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_log_stack",
+  "modelSha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68",
+  "manifestSha256": "ac45e55fbc6f7dc21b749cf882509414aa3cbba2478b8b4c4e4bccc1259b1d6c",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:09.113Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_log_stack\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

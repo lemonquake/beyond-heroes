@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_cc24ecfc-f6a6-4dee-ab80-9d198e4c67c5",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_detail_chalice\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:41.577Z",
+  "updatedAt": "2026-10-02T21:12:41.631Z",
+  "startedAt": "2026-10-02T21:12:41.584Z",
+  "completedAt": "2026-10-02T21:12:41.631Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-3982b227-a663-42e6-b016-4295f533dcf0' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_detail_chalice\r'",
+    "retryable": false
+  }
+}

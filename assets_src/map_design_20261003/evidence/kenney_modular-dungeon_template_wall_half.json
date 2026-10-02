@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_modular-dungeon_template_wall_half.glb",
+    "fileBytes": 55584,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 496,
+    "triangleCount": 276,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 28309
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -1,
+        0,
+        -1.807396650314331
+      ],
+      "max": [
+        1,
+        4.150000095367432,
+        5.960464477539063e-08
+      ],
+      "sizeMeters": [
+        2,
+        4.150000095367432,
+        1.8073967099189758
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_modular-dungeon_template_wall_half.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 276,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        2,
+        4.150000095367432,
+        1.8073967099189758
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_wall_half\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_modular_dungeon_template_wall_half",
+        "category": "environment_prop",
+        "description": "Half-height stone wall. Intended use: Cutaway dungeon side alcoves after scale and collision audit",
+        "displayName": "kenney_modular-dungeon_template_wall_half",
+        "files": [
+          {
+            "bytes": 55584,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "706e286aaa725028cdebb70825f55cc3f7a6bc75c864e4f27935f41739b17eaf"
+          },
+          {
+            "bytes": 1735,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "447606ecd2db056cd4081169998e64af0df91741fcce0bd18a78eae55f9d58fc"
+          },
+          {
+            "bytes": 1154,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "76600947e8e325a5f6ca40fcdad99f41ae5e59e3b7b4e5eedc9b07960a9504ac"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "92b62996caf62cbfa0373e70ebb5cdf0cea892cbed1143b59bfa19199fa6a42c"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_ac199b21b9db9c5d02611f5d",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "69b0cabe772ca9fb88545ef21e303e434a57cde2fb3bd2373627136534168c56",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "fc9e729b10296cccc9466ecbb4dac7ea0575e2a0798a72ed94d41b0b8a73d824",
+      "bytes": 28309
+    }
+  ]
+}

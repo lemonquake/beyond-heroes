@@ -181,7 +181,9 @@ static func _roll_affixes(it: ItemInstance, n: int, bias: int, min_roll: float, 
 	var attempts := 0
 	while it.affixes.size() < n and attempts < 64:
 		attempts += 1
-		var a := _weighted_pick(pool, rng, used_groups)
+		# bh-033: only affixes the piece's identity still has room for; a weapon's first enchantment is offensive.
+		var open := pool.filter(func(c): return can_add(it, c) and (not it.base.is_weapon() or not it.affixes.is_empty() or affix_family(c) == &"offense"))
+		var a := _weighted_pick(open, rng, used_groups)
 		if a == null:
 			break
 		var tiers := a.allowed_tiers(it.ilvl)
@@ -199,6 +201,137 @@ static func _roll_affixes(it: ItemInstance, n: int, bias: int, min_roll: float, 
 		v = roundf(v) if a.integer else snappedf(v, 0.001)
 		it.affixes.append({"id": String(a.id), "tier": tier, "value": v})
 		used_groups[a.group] = true
+	_fit_budget(it)
+
+# ---- bh-033: coherent equipment identities ---------------------------------------------------------------------------
+## Every affix belongs to one family. A piece's category limits how many affix slots of each family it may carry, so an
+## armour roll cannot be four resistances and a weapon roll cannot be mostly mana and regeneration. Families missing from
+## a category's row are unlimited (weapons: offense; armour: defense). See docs/GEAR_BALANCE.md.
+const FAMILY_STATS := {
+	&"defense": [&"local_def", &"local_def_flat", &"max_hp", &"evasion", &"block_chance", &"knockback_res", &"status_res", &"thorns"],
+	&"attribute": [&"str", &"agi", &"int", &"wis", &"spi", &"dex"],
+	&"support": [&"max_mana", &"mana_regen", &"hp_regen", &"healing", &"move_speed", &"cdr", &"life_leech", &"mana_leech",
+		&"hp_on_kill", &"mana_on_kill", &"potion_power"],
+	&"fortune": [&"magic_find", &"gold_find", &"xp_gain", &"ember_find"],
+}
+const FAMILY_LIMITS := {
+	&"weapon": {&"resist": 0, &"attribute": 2, &"support": 1, &"fortune": 0, &"defense": 0},
+	&"gloves": {&"resist": 2, &"attribute": 2, &"offense": 2, &"support": 2, &"fortune": 1},
+	&"helm": {&"resist": 2, &"attribute": 2, &"offense": 2, &"support": 2, &"fortune": 1},
+	&"accessory": {&"resist": 2, &"attribute": 2, &"offense": 3, &"support": 2, &"fortune": 1},
+	&"_armour": {&"resist": 2, &"attribute": 2, &"offense": 1, &"support": 2, &"fortune": 1},
+}
+## All Resistances fills both resistance slots, so it never shares a piece with a single-element resistance.
+const WIDE_AFFIXES := {&"res_all": 2}
+## Strength cost of a full-value roll (1.0 = an ordinary affix at the top of its best tier).
+const AFFIX_COST := {&"res_all": 2.0, &"skill_levels": 2.0}
+## Total affix strength a piece may carry by rarity (sum of cost x value / best value). Rolls above it are pulled down
+## toward their tier minimum; a masterwork enchantment is never reduced.
+const RARITY_BUDGET := [0.0, 0.0, 1.0, 2.0, 2.6, 3.5, 4.0, 4.6, 5.0, 5.8]
+const RANGED_WEAPONS := [&"bow", &"crossbow", &"javelin"]
+
+static func affix_family(a: AffixDef) -> StringName:
+	var s := String(a.stat)
+	if s.begins_with("res_"):
+		return &"resist"
+	for fam in FAMILY_STATS:
+		if (FAMILY_STATS[fam] as Array).has(a.stat):
+			return fam
+	return &"offense"
+
+static func affix_cost(a: AffixDef) -> float:
+	return float(AFFIX_COST.get(a.stat, 1.0))
+
+static func family_limit(category: StringName, family: StringName) -> int:
+	var row: Dictionary = FAMILY_LIMITS.get(category, FAMILY_LIMITS[&"_armour"])
+	return int(row.get(family, 99))
+
+## Whether `a` may join `it`'s current enchantments (ignoring the one at index `skip`, for replacements): a free group,
+## room in its family, and — on weapons — relevance to what the weapon actually deals.
+static func can_add(it: ItemInstance, a: AffixDef, skip := -1) -> bool:
+	var fam := affix_family(a)
+	var used := 0
+	for i in it.affixes.size():
+		if i == skip:
+			continue
+		var d := DB.affix(StringName(it.affixes[i].id))
+		if d == null:
+			continue
+		if d.group == a.group:
+			return false
+		if affix_family(d) == fam:
+			used += int(WIDE_AFFIXES.get(d.stat, 1))
+	if used + int(WIDE_AFFIXES.get(a.stat, 1)) > family_limit(it.base.category, fam):
+		return false
+	return not it.base.is_weapon() or weapon_relevant(it, a, skip)
+
+## A weapon's elemental increase or penetration needs that element on the weapon (its own, or a rolled added-damage
+## affix); projectile damage only helps weapons that shoot or throw.
+static func weapon_relevant(it: ItemInstance, a: AffixDef, skip := -1) -> bool:
+	var s := String(a.stat)
+	if a.stat == &"projectile_damage":
+		return it.base.weapon_type in RANGED_WEAPONS
+	var elem := ""
+	if s.begins_with("dmg_"):
+		elem = s.substr(4)
+	elif s.begins_with("pen_") and a.stat != &"pen_armor" and a.stat != &"pen_elemental":
+		elem = s.substr(4)
+	if elem == "":
+		return true
+	if Elements.key(it.base.element) == StringName(elem):
+		return true
+	for i in it.affixes.size():
+		var d := DB.affix(StringName(it.affixes[i].id))
+		if i != skip and d != null and String(d.stat) == "added_" + elem:
+			return true
+	return false
+
+## Strength of one rolled affix: its cost times its value relative to the best value it can ever reach.
+static func affix_strength(a: Dictionary) -> float:
+	var d := DB.affix(StringName(a.get("id", "")))
+	if d == null or d.tiers.is_empty():
+		return 0.0
+	var top := absf(float(d.tiers[d.tiers.size() - 1][2]))
+	return affix_cost(d) * absf(float(a.get("value", 0.0))) / maxf(top, 0.0001)
+
+static func item_strength(it: ItemInstance) -> float:
+	var t := 0.0
+	for a in it.affixes:
+		t += affix_strength(a)
+	return t
+
+## Pull the strongest non-masterwork rolls toward their tier minimum until the piece fits its rarity budget.
+static func _fit_budget(it: ItemInstance) -> void:
+	var budget: float = RARITY_BUDGET[clampi(it.rarity, 0, RARITY_BUDGET.size() - 1)]
+	if budget <= 0.0:
+		return
+	for _pass in 12:
+		var over := item_strength(it) - budget
+		if over <= 0.001:
+			return
+		var best := -1
+		var best_s := 0.0
+		for i in it.affixes.size():
+			var a: Dictionary = it.affixes[i]
+			var d := DB.affix(StringName(a.id))
+			if a.get("mw", false) or d == null:
+				continue
+			var floor_v := float(d.tiers[int(a.tier)][1])
+			if absf(float(a.value)) - absf(floor_v) <= 0.0001:
+				continue
+			var s := affix_strength(a)
+			if s > best_s:
+				best_s = s
+				best = i
+		if best < 0:
+			return
+		var a2: Dictionary = it.affixes[best]
+		var d2 := DB.affix(StringName(a2.id))
+		var top := absf(float(d2.tiers[d2.tiers.size() - 1][2]))
+		var want := float(a2.value) - signf(float(a2.value)) * over * top / affix_cost(d2)
+		var lo := float(d2.tiers[int(a2.tier)][1])
+		var v := maxf(want, lo) if float(a2.value) >= 0.0 else minf(want, lo)
+		a2.value = roundf(v) if d2.integer else snappedf(v, 0.001)
 
 ## Masterwork: one enchantment is raised to the maximum value of the best tier available at this item level.
 static func _perfect_one(it: ItemInstance, rng: RandomNumberGenerator) -> void:
@@ -421,9 +554,73 @@ static func power_fits(base: ItemBaseDef, power: LegendaryPowerDef) -> bool:
 
 ## One-time repair of existing rolls. Keep roll quality, masterwork, number of
 ## affixes, identity and player upgrades. Deterministic; no new loot roll.
+const BALANCE_VERSION := 2
+
 static func migrate_balance(it: ItemInstance, version: int) -> void:
-	if version >= 1:
+	if version < 1:
+		_migrate_v1(it)
+	if version < 2:
+		_migrate_v2(it)
+
+## bh-033: a saved piece whose enchantments break its identity (three or more resistances, All Resistances beside a
+## single one, a weapon's second support roll, an elemental increase its weapon never deals) keeps the strongest of the
+## clashing rolls; each other one becomes a deterministic eligible affix at the same tier index and the same percentile
+## within its range. Count, masterwork, quality, sockets, upgrades and name stay. Values are not budget-trimmed: a legacy
+## roll the player already owns keeps its strength.
+static func _migrate_v2(it: ItemInstance) -> void:
+	if it.base == null or not it.is_equipment() or it.affixes.is_empty():
 		return
+	# Strongest first, so the rolls that survive are the ones the player valued most.
+	var order := range(it.affixes.size())
+	order.sort_custom(func(x, y): return affix_strength(it.affixes[x]) > affix_strength(it.affixes[y]) or (affix_strength(it.affixes[x]) == affix_strength(it.affixes[y]) and x < y))
+	var kept := []
+	var bad := []
+	var probe := ItemInstance.new()
+	probe.base = it.base
+	probe.ilvl = it.ilvl
+	probe.rarity = it.rarity
+	for i in order:
+		var d := DB.affix(StringName(it.affixes[i].id))
+		if d != null and can_add(probe, d):
+			probe.affixes.append(it.affixes[i])
+			kept.append(i)
+		else:
+			bad.append(i)
+	# Relevance can depend on a later roll (dmg_fire is fine beside added_fire): one more pass with everything kept.
+	for i in bad.duplicate():
+		var d := DB.affix(StringName(it.affixes[i].id))
+		if d != null and can_add(probe, d):
+			probe.affixes.append(it.affixes[i])
+			bad.erase(i)
+	for i in bad:
+		var a: Dictionary = it.affixes[i]
+		var old := DB.affix(StringName(a.id))
+		var fraction := 1.0
+		if old != null:
+			var ob: Array = old.tiers[clampi(int(a.tier), 0, old.tiers.size() - 1)]
+			fraction = clampf(inverse_lerp(float(ob[1]), float(ob[2]), float(a.value)), 0.0, 1.0) if float(ob[2]) != float(ob[1]) else 1.0
+		var pool := DB.affixes_for(it.base.category).filter(func(c): return it.rarity >= c.min_rarity and affix_fits(it.base, c) and not c.allowed_tiers(it.ilvl).is_empty() and can_add(probe, c))
+		pool.sort_custom(func(x, y): return String(x.id) < String(y.id))
+		if pool.is_empty():
+			continue
+		var af: AffixDef = pool[posmod(hash("bh033/%s/%s/%d" % [it.base.id, a.id, it.seed_value]), pool.size())]
+		var allowed := af.allowed_tiers(it.ilvl)
+		var tier: int = allowed[mini(int(a.tier), allowed.size() - 1)]
+		var b: Array = af.tiers[tier]
+		var v := lerpf(float(b[1]), float(b[2]), 1.0 if a.get("mw", false) else fraction)
+		var e := {"id": String(af.id), "tier": tier, "value": roundf(v) if af.integer else snappedf(v, 0.001)}
+		if a.get("mw", false):
+			e["mw"] = true
+		it.affixes[i] = e
+		probe.affixes.append(e)
+	# Rolls with no eligible replacement are dropped rather than kept in breach of the rule.
+	var cleaned := []
+	for i in it.affixes.size():
+		if not bad.has(i) or probe.affixes.has(it.affixes[i]):
+			cleaned.append(it.affixes[i])
+	it.affixes = cleaned
+
+static func _migrate_v1(it: ItemInstance) -> void:
 	if it.license != &"" and not license_fits(it.base, DB.licenses.get(it.license, {})):
 		var random := RandomNumberGenerator.new()
 		random.seed = it.seed_value

@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_grass_large",
+  "category": "foliage",
+  "description": "Large grass tuft. Intended use: Grouped banks, avoiding central travel lanes",
+  "displayName": "kenney_nature_grass_large",
+  "files": [
+    {
+      "bytes": 18504,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd"
+    },
+    {
+      "bytes": 1588,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "58b989b3b4a1a5d0149f7d392d46f5c0731b763a8a74ea9ed93da1656588077e"
+    },
+    {
+      "bytes": 829,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "30b1c72cb19ee887780cd82c816e2637ea78842de9263ae209af43056ebd2b8a"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "7ec79af65dd7d619d259f55087f938a9ecc3d028c45c2dbab02ff183ea0f6852"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_930d7ce0942d9cac7ac0d8c2",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

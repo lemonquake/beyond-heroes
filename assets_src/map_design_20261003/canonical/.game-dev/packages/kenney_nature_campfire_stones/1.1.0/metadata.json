@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_campfire_stones",
+  "category": "environment_prop",
+  "description": "Stone campfire ring. Intended use: Camp seating group; reuse existing fire effects",
+  "displayName": "kenney_nature_campfire_stones",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2908634841442108,
+        0.027751003205776212,
+        0.25775352120399475
+      ],
+      "min": [
+        -0.24997441470623016,
+        -0.050000000000000114,
+        -0.25775352120399475
+      ],
+      "sizeMeters": [
+        0.540837898850441,
+        0.07775100320577633,
+        0.5155070424079895
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 17344,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 264,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 396,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

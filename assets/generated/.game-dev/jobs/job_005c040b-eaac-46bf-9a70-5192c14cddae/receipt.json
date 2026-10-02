@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_tool_paddle\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_pirate_tool_paddle",
+      "category": "environment_prop",
+      "description": "Wooden paddle. Intended use: Olivar boathouse and harbour boat-rest area",
+      "displayName": "kenney_pirate_tool_paddle",
+      "files": [
+        {
+          "bytes": 16980,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1"
+        },
+        {
+          "bytes": 1730,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "cd70da3f5cec4af2a7f021983ad937328dce6363c142e43346060a23543f5803"
+        },
+        {
+          "bytes": 1082,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9d346c5b1cbac4ec71242f6d05f42f9af4a586c18c327640fdedeba56e773a4b"
+        },
+        {
+          "bytes": 3649,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "cc74ba23febb48857dc26136aa0eed56e27fdea0d0fd56c58ab771d5dd96619b"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_e04eb9d37f7c4a7f44988c72",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:27.981Z"
+}

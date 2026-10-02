@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_pillow",
+  "category": "environment_prop",
+  "description": "Simple pillow. Intended use: Existing beds; remove modern-looking material gloss",
+  "displayName": "kenney_furniture_pillow",
+  "files": [
+    {
+      "bytes": 5044,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6"
+    },
+    {
+      "bytes": 1560,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "82afa901c4715fae3fd8c2e58f334f6f36ee21a913584f4db88448fae84069fe"
+    },
+    {
+      "bytes": 833,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "92eebbca1b1a1b33bff21e480624ab00ba07953e8de1075cda871a90c8209e71"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "add43fa3b23ad9d42c61607fca74452c357e6dc13c2b5c65e37b7e8a3343adbd"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_cbd9d58b7c2933157863966d",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://tests/tools/gear_balance_sheet.gd" id="1"]
+[node name="GearBalanceSheet" type="Node"]
+script = ExtResource("1")

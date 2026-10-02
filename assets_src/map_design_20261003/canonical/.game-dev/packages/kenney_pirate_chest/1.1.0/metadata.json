@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_chest",
+  "category": "environment_prop",
+  "description": "Wooden chest. Intended use: House storage; keep existing loot chest logic intact",
+  "displayName": "kenney_pirate_chest",
+  "inspection": {
+    "animationCount": 3,
+    "boundingBox": {
+      "max": [
+        0.637499988079071,
+        1.147499988079071,
+        0.637499988079071
+      ],
+      "min": [
+        -0.6374999975780491,
+        0,
+        -0.6374999976158142
+      ],
+      "sizeMeters": [
+        1.2749999856571201,
+        1.147499988079071,
+        1.2749999856948853
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 35352,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 232,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 378,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

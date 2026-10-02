@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:18.098Z",
+  "destination": {
+    "assetId": "kenney_furniture_coatrackstanding",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4a59c6537af2d7420c22f7d7bd5802a6d40106290c2a7796b9da2284a52aab7d",
+  "packageId": "pkg_2b35cacbc798193213a84065",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 13288,
+    "fileName": "coatRackStanding.glb",
+    "sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91"
+  }
+}

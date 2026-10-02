@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_tree_thin",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_tree_thin.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0",
+ "source_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+ "derived_sha256": "58ef254b3ffa504d608c54ae9889df98001103e8121bc8e4195747790e2bb4ae",
+ "scale": 4.2944,
+ "scale_rule": [
+  "h",
+  6.4
+ ],
+ "origin": "trunk base",
+ "collision": "trunk",
+ "materials": [
+  "BH_Foliage",
+  "BH_Bark"
+ ],
+ "part_faces": {
+  "BH_Foliage": 162,
+  "BH_Bark": 66
+ },
+ "source_to_material": {
+  "leafsGreen": "BH_Foliage",
+  "woodBark": "BH_Bark"
+ },
+ "triangles": 228,
+ "surfaces": 2,
+ "source_triangles": 228,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.922,
+  6.4,
+  2.648
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

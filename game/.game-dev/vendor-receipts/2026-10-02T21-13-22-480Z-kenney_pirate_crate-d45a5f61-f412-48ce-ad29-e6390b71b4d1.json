@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_cf5bb545d8bfc207381261aa",
+  "assetId": "kenney_pirate_crate",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_crate",
+  "modelSha256": "000d22f877d2a6f766d07d8cb3ea2b798c940b3480304d973e94e93069dd3a83",
+  "manifestSha256": "95e48884d3489ba38be60b762e0242948c008a9643a4d57d78361d382d27622a",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:22.480Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_crate\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

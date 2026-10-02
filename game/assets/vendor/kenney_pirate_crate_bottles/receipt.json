@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:23.275Z",
+  "destination": {
+    "assetId": "kenney_pirate_crate_bottles",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "51f7184d8f4dfb1a788899ca8dd7d6cab66ef0b0298f1ad909bcb57c2834d846",
+  "packageId": "pkg_f871655e6c6f9f333f10b4bf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 68704,
+    "fileName": "kenney_pirate_crate_bottles.glb",
+    "sha256": "3f856e1a9bb78ae9cf69c5d3ed57a4367e4e0856623d275dd99bae23e80886c1"
+  }
+}

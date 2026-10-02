@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_bea74cb2-223f-491f-a3d0-13cd7c87d114",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_pumpkin\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:45.952Z",
+  "updatedAt": "2026-10-02T20:01:45.988Z",
+  "startedAt": "2026-10-02T20:01:45.959Z",
+  "completedAt": "2026-10-02T20:01:45.988Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_bea74cb2-223f-491f-a3d0-13cd7c87d114\\receipt.json"
+}

@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_beddouble",
+  "category": "environment_prop",
+  "description": "Double bed. Intended use: Hald house sleeping corner; verify room clearance",
+  "displayName": "kenney_furniture_beddouble",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.9559999920426173,
+        0.375,
+        0
+      ],
+      "min": [
+        -8.792835244630925e-10,
+        0,
+        -1.125
+      ],
+      "sizeMeters": [
+        0.9559999929219009,
+        0.375,
+        1.125
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 23368,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 4,
+    "meshCount": 4,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 6,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 264,
+    "undrawnMeshCount": 1,
+    "undrawnPrimitiveCount": 1,
+    "undrawnTriangleCount": 50,
+    "vertexCount": 866,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

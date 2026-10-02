@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_modular_dungeon_template_floor_layer_raised",
+  "category": "environment_prop",
+  "description": "Raised stone floor insert. Intended use: Dry island in damp crypt or small ritual plinth",
+  "displayName": "kenney_modular-dungeon_template_floor_layer_raised",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        2.011870861053467,
+        3,
+        2.000000238418579
+      ],
+      "min": [
+        -2.011870861053467,
+        0,
+        -2.000000238418579
+      ],
+      "sizeMeters": [
+        4.023741722106934,
+        3,
+        4.000000476837158
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 62068,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 28309,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 312,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 624,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

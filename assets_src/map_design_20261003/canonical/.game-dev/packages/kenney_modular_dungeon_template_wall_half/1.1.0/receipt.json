@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:54.593Z",
+  "destination": {
+    "assetId": "kenney_modular_dungeon_template_wall_half",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "b546102428e328de65ec47e9bc50141f14495b163e7d6843c609a5dc69d3bcfe",
+  "packageId": "pkg_ac199b21b9db9c5d02611f5d",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 55584,
+    "fileName": "kenney_modular-dungeon_template_wall_half.glb",
+    "sha256": "706e286aaa725028cdebb70825f55cc3f7a6bc75c864e4f27935f41739b17eaf"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:52.747Z",
+  "destination": {
+    "assetId": "kenney_graveyard_pillar_obelisk",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "5123f6ad4422a249219e45c6b1d79a3ab6682944cbb8451b20add5618bb6dd18",
+  "packageId": "pkg_2a24e5ba7bc7ea2083785ecd",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 19572,
+    "fileName": "kenney_graveyard_pillar_obelisk.glb",
+    "sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1"
+  }
+}

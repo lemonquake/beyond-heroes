@@ -56,6 +56,7 @@ func compose() -> void:
 	_siege_works()
 	_hills()
 	_camps()
+	_map_design()
 	for gid in DataDungeons.gates_on(def.id):
 		var gs: Dictionary = DataDungeons.get_def(gid).surface
 		dungeon_gate(gid, gs.pos, gs.yaw)
@@ -346,3 +347,33 @@ func _brazier(p: Vector3, energy := 2.8, shadow := false, on_ground := false) ->
 	var f := socket_pos(n, "flame")
 	flame(f, 1.1)
 	light(f + Vector3(0, 0.5, 0), FIRE, energy, 11.0, shadow, true)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): a siege camp that keeps stores and works on its gear before the gate; broken storage and
+# fallen masonry along the civic avenue's sides; green reclaiming the side courts against the walls. The avenue's
+# middle, the stairs, the arena round the Dawn Engine and every camp ring stay clear.
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	var p := Vector2(x, z)
+	for c in CAMPS:
+		if p.distance_to(Vector2(c[1], c[2])) < r + 7.0:
+			return false
+	if absf(x) < r + 4.5 or p.distance_to(ARENA) < DataZarael.HC_ARENA_R + r + 3.0:
+		return false
+	if absf(z - 30.0) < r + 6.0 or absf(z) < r + 6.0:
+		return false              # the retaining rows and their stairs
+	return road_dist(x, z) > r + 2.0 and is_clear(x, z, r * 0.5) and absf(x) < X_WALL - 3.0 - r
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	# the siege camp before the gate (on the approach ridge)
+	for c in [["supply_corner", Vector3(-27.0, 0, 70.0)], ["cargo_stack", Vector3(27.0, 0, 69.0)], ["tool_corner", Vector3(-10.0, 0, 76.0)]]:
+		place_near(c[0], c[1], c[1], 0.0, 11.0, rng.randf() * 360.0)
+	# the damaged avenue: fallen masonry and broken stores along its sides, the middle kept clear
+	for c in [Vector3(-11.0, 0, 44.0), Vector3(12.0, 0, 40.0), Vector3(-12.0, 0, 14.0), Vector3(11.5, 0, 18.0)]:
+		place_near("salvage" if c.z > 30.0 else "excavation", c, c, 0.0, 10.0, rng.randf() * 360.0)
+	# green reclaiming the side courts
+	for c in [Vector3(-52.0, 0, 22.0), Vector3(53.0, 0, 24.0), Vector3(-53.0, 0, -36.0), Vector3(52.0, 0, -32.0), Vector3(-30.0, 0, 48.0)]:
+		place_near("flower_border" if c.z > 0.0 else "fallen_tree", c, c, 0.0, 6.0, rng.randf() * 360.0)
+	for c in [Vector3(-50.0, 0, 50.0), Vector3(50.0, 0, 8.0)]:
+		place_near("palm_pair", c, c, 0.0, 6.0, rng.randf() * 360.0)

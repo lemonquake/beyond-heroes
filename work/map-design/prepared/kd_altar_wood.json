@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_graveyard_altar_wood",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_altar_wood.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0",
+ "source_sha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60",
+ "derived_sha256": "e8cb69f2252d5b58c2323c16d2ddc4c4ea8084b89f7204a6681a21b1d7bd6822",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_Iron"
+ ],
+ "part_faces": {
+  "BH_Wood": 186,
+  "BH_Iron": 120
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "grey": "BH_Iron"
+ },
+ "triangles": 306,
+ "surfaces": 2,
+ "source_triangles": 306,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.09,
+  1.075,
+  1.317
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

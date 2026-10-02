@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:26.310Z",
+  "destination": {
+    "assetId": "kenney_nature_plant_bush",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "99e484cbd758944596396e9752c2b50d295cfa80fdd3d3e0e02d7820b0227504",
+  "packageId": "pkg_650645298bb5c29cefef99a8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 4396,
+    "fileName": "plant_bush.glb",
+    "sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590"
+  }
+}

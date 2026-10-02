@@ -266,7 +266,7 @@ func affix_lines() -> PackedStringArray:
 
 func to_dict() -> Dictionary:
 	var d := {"base": String(base.id), "rarity": rarity, "ilvl": ilvl, "quality": quality, "affixes": affixes.duplicate(true),
-		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value, "balance_version": 1}
+		"powers": powers.duplicate(), "count": count, "name": custom_name, "seed": seed_value, "balance_version": ItemGenerator.BALANCE_VERSION}
 	if epithet != "":
 		d["epithet"] = epithet
 	if name_prefix != "":

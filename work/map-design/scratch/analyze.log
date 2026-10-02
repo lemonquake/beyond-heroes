@@ -1,0 +1,497 @@
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_oak
+04:28:17 | INFO: glTF import finished in 0.02s
+A:\Python\beyond-heroes\tools\blender\environment\kenney_analyze.py:38: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if mat and mat.use_nodes:
+ANALYZED kenney_nature_tree_oak 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_default
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_default 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_detailed
+04:28:17 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_nature_tree_detailed 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_thin
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_thin 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_small
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_small 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_pineDefaultA
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_pinedefaulta 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_pineRoundA
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_pinerounda 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_pineTallA
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_pinetalla 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_palm
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_palm 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_palmBend
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_palmbend 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_palmShort
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tree_palmshort 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh tree_palmDetailedTall
+04:28:17 | INFO: Blender create Mesh node Mesh leafs
+04:28:17 | INFO: Blender create Mesh node Mesh leafs
+04:28:17 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_nature_tree_palmdetailedtall 0
+04:28:17 | INFO: Data are loaded, start creating Blender stuff
+04:28:17 | INFO: Blender create Mesh node Mesh plant_bush
+04:28:17 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_plant_bush 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh plant_bushLarge
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_plant_bushlarge 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh plant_bushSmall
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_plant_bushsmall 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh plant_flatTall
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_plant_flattall 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh grass
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_grass 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh grass_large
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_grass_large 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh grass_leafs
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_grass_leafs 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh flower_yellowA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_flower_yellowa 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh flower_purpleA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_flower_purplea 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh mushroom_tanGroup
+04:28:18 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_nature_mushroom_tangroup 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh lily_large
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_lily_large 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh hanging_moss
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_hanging_moss 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_largeA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_largea 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_largeB
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_largeb 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_largeC
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_largec 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_smallA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_smalla 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_smallB
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_smallb 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_smallFlatA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_smallflata 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh rock_tallA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_rock_talla 0
+04:28:18 | INFO: Data are loaded, start creating Blender stuff
+04:28:18 | INFO: Blender create Mesh node Mesh stone_largeA
+04:28:18 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_stone_largea 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh stone_smallFlatA
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_stone_smallflata 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh stump_old
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_stump_old 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh stump_roundDetailed
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_stump_rounddetailed 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh log
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_log 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh log_stack
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_log_stack 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh fence_planks
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_fence_planks 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh fence_gate
+04:28:19 | INFO: Blender create Mesh node Mesh gate
+04:28:19 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_nature_fence_gate 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh pot_small
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_pot_small 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh pot_large
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_pot_large 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh crop_carrot
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_crop_carrot 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh crop_pumpkin
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_crop_pumpkin 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh crops_wheatStageB
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_crops_wheatstageb 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh crops_bambooStageB
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_crops_bamboostageb 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh tent_smallOpen
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_tent_smallopen 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh campfire_stones
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_campfire_stones 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh canoe
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_nature_canoe 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh bench
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bench 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh chair
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_chair 0
+04:28:19 | INFO: Data are loaded, start creating Blender stuff
+04:28:19 | INFO: Blender create Mesh node Mesh chairRounded
+04:28:19 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_chairrounded 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh stoolBarSquare
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_stoolbarsquare 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh table
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_table 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh tableRound
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_tableround 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh tableCross
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_tablecross 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh tableCloth
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_tablecloth 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh sideTable
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_sidetable 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh sideTableDrawers
+04:28:20 | INFO: Blender create Mesh node Mesh drawer
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_sidetabledrawers 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh desk
+04:28:20 | INFO: Blender create Mesh node Mesh drawer
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_desk 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bookcaseOpen
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bookcaseopen 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bookcaseOpenLow
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bookcaseopenlow 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bookcaseClosed
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bookcaseclosed 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bookcaseClosedWide
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bookcaseclosedwide 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh books
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_books 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bedSingle
+04:28:20 | INFO: Blender create Mesh node Mesh cover
+04:28:20 | INFO: Blender create Mesh node Mesh pillowLeft
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_bedsingle 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bedDouble
+04:28:20 | INFO: Blender create Mesh node Mesh cover
+04:28:20 | INFO: Blender create Mesh node Mesh pillowLeft
+04:28:20 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_furniture_beddouble 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh bedBunk
+04:28:20 | INFO: Blender create Mesh node Mesh cover
+04:28:20 | INFO: Blender create Mesh node Mesh pillowLeft
+04:28:20 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_furniture_bedbunk 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh pillow
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_pillow 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh rugRectangle
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_rugrectangle 0
+04:28:20 | INFO: Data are loaded, start creating Blender stuff
+04:28:20 | INFO: Blender create Mesh node Mesh rugRound
+04:28:20 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_ruground 0
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node Mesh coatRackStanding
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_coatrackstanding 0
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node Mesh plantSmall1
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_plantsmall1 0
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node Mesh plantSmall2
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_plantsmall2 0
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node Mesh pottedPlant
+04:28:21 | INFO: Blender create Mesh node Mesh plant
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_furniture_pottedplant 0
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node barrel
+04:28:21 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_pirate_barrel 19
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node crate
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_crate 10
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node crate-bottles
+04:28:21 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_pirate_crate_bottles 26
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node bottle
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_bottle 16
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node bottle-large
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_bottle_large 13
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node chest
+04:28:21 | INFO: Blender create Mesh node lid
+04:28:21 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_pirate_chest 48
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node tool-shovel
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_tool_shovel 30
+04:28:21 | INFO: Data are loaded, start creating Blender stuff
+04:28:21 | INFO: Blender create Mesh node tool-paddle
+04:28:21 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_tool_paddle 13
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node boat-row-small
+04:28:22 | INFO: Blender create Mesh node paddles
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_boat_row_small 33
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node boat-row-large
+04:28:22 | INFO: Blender create Mesh node paddles
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_boat_row_large 40
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node ship-wreck
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node grass
+04:28:22 | INFO: Blender create Mesh node Group
+04:28:22 | INFO: Blender create Mesh node sail-a
+04:28:22 | INFO: Blender create Mesh node Group
+04:28:22 | INFO: Blender create Mesh node Group
+04:28:22 | INFO: Blender create Mesh node Group
+04:28:22 | INFO: Blender create Mesh node Group
+04:28:22 | INFO: glTF import finished in 0.02s
+ANALYZED kenney_pirate_ship_wreck 192
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node rocks-a
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_rocks_a 29
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node rocks-b
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_rocks_b 27
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node rocks-c
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_rocks_c 21
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node platform-planks
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_platform_planks 4
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node structure-fence
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_structure_fence 23
+04:28:22 | INFO: Data are loaded, start creating Blender stuff
+04:28:22 | INFO: Blender create Mesh node structure-platform-dock-small
+04:28:22 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_structure_platform_dock_small 18
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node structure-roof
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_structure_roof 22
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node flag-pennant
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_pirate_flag_pennant 24
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node mast-ropes
+04:28:23 | INFO: Blender create Mesh node sail-a
+04:28:23 | INFO: Blender create Mesh node flag-c
+04:28:23 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_pirate_mast_ropes 37
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node altar-stone
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_altar_stone 16
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node altar-wood
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_altar_wood 21
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node coffin-old
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_coffin_old 32
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node coffin
+04:28:23 | INFO: Blender create Mesh node lid
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_coffin 15
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node candle-multiple
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_candle_multiple 11
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node lantern-candle
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_lantern_candle 23
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node fire-basket
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_fire_basket 26
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node urn-round
+04:28:23 | INFO: Blender create Mesh node lid
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_urn_round 24
+04:28:23 | INFO: Data are loaded, start creating Blender stuff
+04:28:23 | INFO: Blender create Mesh node urn-square
+04:28:23 | INFO: Blender create Mesh node lid
+04:28:23 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_urn_square 23
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node detail-chalice
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_detail_chalice 15
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node detail-bowl
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_detail_bowl 14
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node debris
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_debris 4
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node debris-wood
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_debris_wood 4
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node gravestone-broken
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_gravestone_broken 27
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node column-large
+04:28:24 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_graveyard_column_large 17
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node pillar-obelisk
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_graveyard_pillar_obelisk 8
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node gate-metal-bars
+04:28:24 | INFO: Blender create Mesh node gate
+04:28:24 | INFO: glTF import finished in 0.01s
+ANALYZED kenney_modular-dungeon_gate_metal_bars 49
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node template-wall-half
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_modular-dungeon_template_wall_half 21
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node template-floor-layer-raised
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_modular-dungeon_template_floor_layer_raised 26
+04:28:24 | INFO: Data are loaded, start creating Blender stuff
+04:28:24 | INFO: Blender create Mesh node template-floor-detail-a
+04:28:24 | INFO: glTF import finished in 0.00s
+ANALYZED kenney_modular-dungeon_template_floor_detail_a 9
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

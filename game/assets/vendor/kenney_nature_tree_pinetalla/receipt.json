@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:21.807Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_pinetalla",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "36232bf7601b751817c29755fb9a1134ad8c290a38f5eaeedc1ade9d7d93e908",
+  "packageId": "pkg_0abc697b759ea8c5f904a4bf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7200,
+    "fileName": "tree_pineTallA.glb",
+    "sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196"
+  }
+}

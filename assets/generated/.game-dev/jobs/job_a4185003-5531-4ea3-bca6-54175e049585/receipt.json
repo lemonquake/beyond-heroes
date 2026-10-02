@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_bottle\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_bottle",
+      "category": "environment_prop",
+      "description": "Small bottle. Intended use: Tavern tables and apothecary shelves",
+      "displayName": "kenney_pirate_bottle",
+      "files": [
+        {
+          "bytes": 13796,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b59ff617014ace27dacf2909bba94f3ad3a9a9d1660c6ae4d468b5e8561637ae"
+        },
+        {
+          "bytes": 1717,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2fabcd1fc82e0b5345d827d9247b2513fd36d81aedeb22c311b699912f3665e2"
+        },
+        {
+          "bytes": 781,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9c6c48dc91af43215dfefcda4b08c8aee3ad383a0bb7142a3cc925ab18a00965"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "1ac6cd376802bb10d42ff9c3af9037dda3d7e4321b05535b9240e01d13bdf008"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_c374cd9d101c2c6dbe597004",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:19.806Z"
+}

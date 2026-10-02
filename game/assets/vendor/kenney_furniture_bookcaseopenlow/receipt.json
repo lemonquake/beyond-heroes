@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:09.172Z",
+  "destination": {
+    "assetId": "kenney_furniture_bookcaseopenlow",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "af6aea261bfd15fa2e8db19cbabbf9b47cf859d867d6c6f930a2c6217746973b",
+  "packageId": "pkg_e65a06adfc7d5e3b0a08dc24",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 11520,
+    "fileName": "bookcaseOpenLow.glb",
+    "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75"
+  }
+}

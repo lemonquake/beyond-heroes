@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_cda83e3a-4126-4f48-b553-d5e1828f5a79",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_flag_pennant\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:02:34.127Z",
+  "updatedAt": "2026-10-02T20:02:34.155Z",
+  "startedAt": "2026-10-02T20:02:34.132Z",
+  "completedAt": "2026-10-02T20:02:34.155Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_cda83e3a-4126-4f48-b553-d5e1828f5a79\\receipt.json"
+}

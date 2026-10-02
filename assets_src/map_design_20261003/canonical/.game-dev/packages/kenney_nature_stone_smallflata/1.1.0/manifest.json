@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_stone_smallflata",
+  "category": "environment_prop",
+  "description": "Flat pale stone. Intended use: Olivar shore, ruin floor edges and garden trim",
+  "displayName": "kenney_nature_stone_smallflata",
+  "files": [
+    {
+      "bytes": 2872,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a"
+    },
+    {
+      "bytes": 1610,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2cad74229fd382b7871c424eb734ed2aefdc89c29f9e8855bcf03aa810d21d85"
+    },
+    {
+      "bytes": 838,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "902aaa52e47b31ae7032a2234fe93e55fda3d8955070795a74a20dad1090a72d"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "9913ff8078ee24f7dead73beac31cf01b797a8cabada84fa45d9699153cf3a93"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_f0fb7eae659de4fe84bc8153",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:56.322Z",
+  "destination": {
+    "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "f4ada44c6b0efe8cc160f322846facd9714745bf8805bd245f7bfc4b23e4bcca",
+  "packageId": "pkg_06a0737329ac52c503bb5b26",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 51032,
+    "fileName": "kenney_modular-dungeon_template_floor_detail_a.glb",
+    "sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833"
+  }
+}

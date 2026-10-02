@@ -76,6 +76,9 @@ func resolve(rank: int, upgrades: Dictionary = {}) -> Dictionary:
 	p["rank"] = r
 	if movement_limit() > 0.0:
 		p["dash" if behavior == &"dash_strike" else "range"] = movement_distance(p)
+	for key in ["knockback", "launch"]:
+		if p.has(key):
+			p[key] = clampf(float(p[key]), 0.0, DamagePipeline.MAX_KNOCKBACK if key == "knockback" else DamagePipeline.MAX_LAUNCH)
 	if id == &"spike_tentacle":
 		p["stun_duration"] = minf(1.6, float(p.stun_duration))
 	return p

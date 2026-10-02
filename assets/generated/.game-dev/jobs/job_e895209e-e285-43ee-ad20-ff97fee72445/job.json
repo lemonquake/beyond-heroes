@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_e895209e-e285-43ee-ad20-ff97fee72445",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_stump_rounddetailed"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:08.301Z",
+  "updatedAt": "2026-10-02T21:13:08.368Z",
+  "startedAt": "2026-10-02T21:13:08.308Z",
+  "completedAt": "2026-10-02T21:13:08.368Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_e895209e-e285-43ee-ad20-ff97fee72445\\receipt.json"
+}

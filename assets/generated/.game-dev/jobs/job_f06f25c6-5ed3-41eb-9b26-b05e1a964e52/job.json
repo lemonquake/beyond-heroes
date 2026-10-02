@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_f06f25c6-5ed3-41eb-9b26-b05e1a964e52",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:35.898Z",
+  "updatedAt": "2026-10-02T21:12:35.964Z",
+  "startedAt": "2026-10-02T21:12:35.915Z",
+  "completedAt": "2026-10-02T21:12:35.964Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_f06f25c6-5ed3-41eb-9b26-b05e1a964e52\\receipt.json"
+}

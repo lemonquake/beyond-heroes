@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\books.glb",
+    "fileBytes": 6864,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 4,
+    "vertexCount": 424,
+    "triangleCount": 62,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 4,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        0,
+        0,
+        -0.09449999779462814
+      ],
+      "max": [
+        0.15044759213924408,
+        0.10390225797891617,
+        0
+      ],
+      "sizeMeters": [
+        0.15044759213924408,
+        0.10390225797891617,
+        0.09449999779462814
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\books.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 62,
+      "materials": 4,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.15044759213924408,
+        0.10390225797891617,
+        0.09449999779462814
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_books\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_furniture_books",
+        "category": "environment_prop",
+        "description": "Small stack of books. Intended use: Cartographer desk and council reading table",
+        "displayName": "kenney_furniture_books",
+        "files": [
+          {
+            "bytes": 6864,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c"
+          },
+          {
+            "bytes": 1558,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "2ad690573afe304a05475d8f076ea414cf3811d1926fc12b61c19130ee5acebc"
+          },
+          {
+            "bytes": 831,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "31132d8a9b3ef4b98c70d65d0e4edc19999c6be64df65ea50f3d54392ce7d633"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "0035b7357b6306bc58f97007050fff28d83b058d7551edf90bcef05e28563428"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_5b38d7fea2220bc7f82d2ce6",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+  "embedded_textures": []
+}

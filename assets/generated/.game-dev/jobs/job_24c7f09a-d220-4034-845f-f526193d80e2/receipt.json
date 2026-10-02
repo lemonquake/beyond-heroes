@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseopen\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_bookcaseopen",
+      "category": "environment_prop",
+      "description": "Tall open bookcase. Intended use: Cartographer and Lantern House library wall",
+      "displayName": "kenney_furniture_bookcaseopen",
+      "files": [
+        {
+          "bytes": 18020,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c"
+        },
+        {
+          "bytes": 1538,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "91b8396a6bc78e3245fd2dbf66bc092235c482eb780e249e592a309c3c55024a"
+        },
+        {
+          "bytes": 846,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "34dbb29457dcc94c4ffd88122c8a3109f4f11f5591e2fb901b3345c52831f2c2"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "f0a22b83617f01d46d8b030eedfbfac809477dad37e7a1e16b92029609f9ca57"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_d6c05cd0a99ba7ace3b74ac9",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:08.548Z"
+}

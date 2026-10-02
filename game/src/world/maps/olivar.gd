@@ -50,6 +50,7 @@ func compose() -> void:
 		dungeon_gate(gid, gs.pos, gs.yaw)
 	_herbs()
 	_greenery()
+	_map_design()
 	spawn(&"start", Vector3(0, 0, 9.0), 180.0, true)
 	spawn(&"west_road", Vector3(-54, 0, 12), 90.0, true)
 	spawn(&"south_road", Vector3(20, 0, 49), 180.0, true)
@@ -330,3 +331,51 @@ func _greenery() -> void:
 		if absf(x - PIER_X) < 4.0:
 			continue
 		decor("fern", Vector3(x, 0, -41.5 - rng.randf() * 2.5), rng.randf() * 360.0, rng.randf_range(0.6, 0.9))
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): softer and greener than Malasugue — sheltered moorings and deliveries by the pier,
+# benches facing the water, lilies only in the quiet bay west of the pier, herbs at the apothecary and garden pockets
+# round the houses, so the residential lanes and the working dock read apart. Founder's statue and the Lake Terrace
+# waypoint keep their open ground (keep_clear), and roads stay free.
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	return road_dist(x, z) > r + 2.4 and is_clear(x, z, r * 0.6) and z > -43.0 and x > WALL_W + 1.5 and x < WALL_E - 1.5 		and z < WALL_S - 1.5
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	# ---- the dock: a canoe drawn up beside the pier, deliveries stacked where the Dock Walk meets the sand -------
+	place_near("canoe_mooring", Vector3(-8.0, 0, -42.0), Vector3(-8.0, 0, -41.0), 0.0, 5.0, 75.0)
+	place_near("cargo_stack", Vector3(13.0, 0, -34.5), Vector3(12.0, 0, -35.0), 0.0, 6.0, 15.0)
+	place_near("boat_landing", Vector3(-20.0, 0, -41.0), Vector3(-20.0, 0, -40.0), 0.0, 5.0, 10.0)
+	# a small mooring stage in the west bay beside the canoe (visual: it stands in the water, off the walkways)
+	kit("kd_dock_small", Vector3(-11.5, LAKE_Y - 0.55, -46.6), 0.0, 1.0, deco)
+	# ---- benches facing the water, on the shore path between the two working ends ------------------------------
+	for c in [Vector3(-14.5, 0, -36.5), Vector3(20.5, 0, -32.5)]:
+		place_near("bench_view", c, c, 0.0, 3.0, 180.0)
+	# lilies in the shallows of the quiet west bay only (the pier side is kept open water)
+	var lr := RandomNumberGenerator.new()
+	lr.seed = hash("olivar_lilies")
+	for i in 16:
+		var x := -38.0 + lr.randf() * 18.0
+		var z := -46.5 - lr.randf() * 4.5
+		decor("kd_lily", Vector3(x, LAKE_Y + 0.02, z), lr.randf() * 360.0, lr.randf_range(0.8, 1.2), false)
+	# ---- Apothecary Lane: Angkol Les' herbs in pots by the door and along the garden fence ----------------------
+	var ap := Vector3(APOTHECARY.x, 0, APOTHECARY.y)
+	place_near("herb_pots", ap + Vector3(5.0, 0, 3.6), ap, 4.5, 8.0, 90.0)
+	place_near("garden_bed", ap + Vector3(6.0, 0, -4.0), ap, 5.0, 9.0, 90.0)
+	# ---- residential yards: planted beds and shade trees, no cargo ---------------------------------------------
+	for hd in HOUSES:
+		var p := Vector3(hd[0], 0, hd[1])
+		var fwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(hd[2]))
+		var side := fwd.cross(Vector3.UP)
+		place_near("flower_border" if int(hd[0]) % 2 == 0 else "garden_bed", p + side * 6.0 + fwd * 2.0, p, 5.0, 9.0, hd[2])
+	for c in [Vector3(-38.0, 0, 28.0), Vector3(39.0, 0, 28.0), Vector3(-40.0, 0, -30.0)]:
+		place_near("tree_group", c, c, 0.0, 6.0, rng.randf() * 360.0, {"scale": 0.8})
+	for c in [Vector3(-18.0, 0, 30.0), Vector3(16.0, 0, 22.0), Vector3(-20.0, 0, 8.0), Vector3(36.0, 0, 6.0)]:
+		place_near("lane_tree", c, c, 0.0, 7.0, rng.randf() * 360.0)
+	# ---- the plaza edge: a planted bed by each bench, so the paving meets soil, not more paving -----------------
+	place_near("garden_bed", Vector3(-11.5, 0, 10.5), Vector3(-9.0, 0, 8.5), 1.5, 4.0, 60.0)
+	place_near("garden_bed", Vector3(4.0, 0, -11.0), Vector3(5.5, 0, -8.0), 1.5, 4.0, 200.0)
+	# ambient accents: water at the pier and the quiet bay
+	for p in [Vector3(PIER_X, LAKE_Y + 0.5, -46.0), Vector3(-20.0, LAKE_Y + 0.5, -44.0)]:
+		accent(p, &"water_wave", -18.0)

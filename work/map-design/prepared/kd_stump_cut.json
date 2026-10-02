@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_stump_rounddetailed",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_stump_cut.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0",
+ "source_sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768",
+ "derived_sha256": "b9f3e86fb0325b0c91e757702e1af138ff368e595eb4fcbb5ab4ba852baa77c3",
+ "scale": 2.1792,
+ "scale_rule": [
+  "h",
+  0.45
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Bark",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Bark": 80,
+  "BH_Wood": 16
+ },
+ "source_to_material": {
+  "woodBark": "BH_Bark",
+  "woodInner": "BH_Wood"
+ },
+ "triangles": 96,
+ "surfaces": 2,
+ "source_triangles": 96,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.777,
+  0.45,
+  0.808
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_graveyard_urn_square",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_urn_square.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0",
+ "source_sha256": "bc29468805e87aa233d0e6177cdf9cb7244df6abbede7001789e0ef438c4d013",
+ "derived_sha256": "f6b33098007f38419056dea99a2fcd6b3b170ac9a7629771242cee662755eab4",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Stone",
+  "BH_StoneDark"
+ ],
+ "part_faces": {
+  "BH_Stone": 196,
+  "BH_StoneDark": 22
+ },
+ "source_to_material": {
+  "grey": "BH_Stone",
+  "grey_dark": "BH_StoneDark"
+ },
+ "triangles": 218,
+ "surfaces": 2,
+ "source_triangles": 218,
+ "source_meshes": 2,
+ "bounds_m": [
+  0.529,
+  0.768,
+  0.529
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

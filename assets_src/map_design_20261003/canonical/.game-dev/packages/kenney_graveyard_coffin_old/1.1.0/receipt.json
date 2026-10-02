@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:41.162Z",
+  "destination": {
+    "assetId": "kenney_graveyard_coffin_old",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "a81ee89745a47f7471cde78e1575e75e9a3f2c719b83636d1cd17e57daf89ed6",
+  "packageId": "pkg_6da00133820b115c759099a7",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 30972,
+    "fileName": "kenney_graveyard_coffin_old.glb",
+    "sha256": "d719c8f614074642af74f3edd8e56fa5adc73b325f0a21c30f21551f830dcd5e"
+  }
+}

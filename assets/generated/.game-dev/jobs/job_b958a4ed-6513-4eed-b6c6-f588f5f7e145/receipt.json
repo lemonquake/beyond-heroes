@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_stone_smallflata\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_stone_smallflata",
+      "category": "environment_prop",
+      "description": "Flat pale stone. Intended use: Olivar shore, ruin floor edges and garden trim",
+      "displayName": "kenney_nature_stone_smallflata",
+      "files": [
+        {
+          "bytes": 2872,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "04f2d1bf9dba77426a5fa076a07d7b1319fb78021b7fe619a6ca3599d96d762a"
+        },
+        {
+          "bytes": 1610,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2cad74229fd382b7871c424eb734ed2aefdc89c29f9e8855bcf03aa810d21d85"
+        },
+        {
+          "bytes": 801,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "399067dda12eab7fdbb1437c6e2c534c6ce8607f911ea7ba02fdf8368f8114e3"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "9913ff8078ee24f7dead73beac31cf01b797a8cabada84fa45d9699153cf3a93"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7c3aa300f83ca7353a11c12d",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:36.549Z"
+}

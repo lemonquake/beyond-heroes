@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:16.337Z",
+  "destination": {
+    "assetId": "kenney_furniture_rugrectangle",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "fbffd3a2305d74a36c45087de77479f31dc6ba13b098c779fc9b18e2d022285d",
+  "packageId": "pkg_bd3a83c1c16d1dcf4e2d5d2e",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 3188,
+    "fileName": "rugRectangle.glb",
+    "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb"
+  }
+}

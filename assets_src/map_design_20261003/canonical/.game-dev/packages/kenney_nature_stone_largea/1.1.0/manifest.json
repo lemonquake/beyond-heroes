@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_stone_largea",
+  "category": "environment_prop",
+  "description": "Large stone boulder. Intended use: Pale inland rock and terrace garden anchors",
+  "displayName": "kenney_nature_stone_largea",
+  "files": [
+    {
+      "bytes": 7124,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "fe486a13775e833b1aca99413a89e013f300841de80f42ecd44ceaf43720f17b"
+    },
+    {
+      "bytes": 1616,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "d9b50e22986addf0871f056a271ea6fcff2d92ea73517184fb3f68389f8ba91c"
+    },
+    {
+      "bytes": 830,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "dfc35b3aa86568b498fc57669be68e852cc14fcd4b3266c044ca49cd6fe5b03f"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "a0db02c0fad19b697d4b98a58886c65bad1e89b76fcff62da53e079eda090522"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_5f8436b1aecbe1f5d583e4d8",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

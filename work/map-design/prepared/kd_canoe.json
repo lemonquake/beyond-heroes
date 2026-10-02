@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_canoe",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_canoe.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_canoe/1.1.0",
+ "source_sha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941",
+ "derived_sha256": "e698c20cb1c8b462e5fe2cceb3217f34c6e2588d0a80fd3001a06fe1c119c215",
+ "scale": 3.0,
+ "scale_rule": [
+  "s",
+  3.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_WoodDark",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 62,
+  "BH_Wood": 138
+ },
+ "source_to_material": {
+  "leafsFall": "BH_WoodDark",
+  "wood": "BH_Wood"
+ },
+ "triangles": 200,
+ "surfaces": 2,
+ "source_triangles": 200,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.9,
+  0.548,
+  3.45
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

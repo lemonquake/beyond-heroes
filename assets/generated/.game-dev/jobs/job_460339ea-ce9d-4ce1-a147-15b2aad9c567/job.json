@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_460339ea-ce9d-4ce1-a147-15b2aad9c567",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_plantsmall1\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:19.154Z",
+  "updatedAt": "2026-10-02T20:15:19.179Z",
+  "startedAt": "2026-10-02T20:15:19.159Z",
+  "completedAt": "2026-10-02T20:15:19.179Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_460339ea-ce9d-4ce1-a147-15b2aad9c567\\receipt.json"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass_leafs\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_grass_leafs",
+      "category": "foliage",
+      "description": "Broad leaf ground plant. Intended use: Agdao jungle edge and Coilwood undergrowth",
+      "displayName": "kenney_nature_grass_leafs",
+      "files": [
+        {
+          "bytes": 4608,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "8bc4c0b17c2e64c34e1acbf7c4a2fd8c04cfcd7155328e61767887b2ced112c7"
+        },
+        {
+          "bytes": 1611,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "60512c19e37ff5d93d83134c2d88dc095ae1d842e99378de30023866fb09530b"
+        },
+        {
+          "bytes": 791,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "219847b7d5c072ae4884393c774de36e7e34515634806e5886209525ea3e36a1"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "da68fe145626f416fe1adbcab27afcee3f107712a3a0f82de42b6b5a21052964"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_6bd4d5cc53f10fd5f0a417b9",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:23.592Z"
+}

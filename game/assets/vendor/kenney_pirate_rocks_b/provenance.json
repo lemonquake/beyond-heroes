@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+  "licenseEvidence": "licenses/pirate-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+  "originalModelSha256": "218cf9bfbe51228c78c9fa48a8543bef1037a695024f8fd5f3c47eec4c3a26d4",
+  "originalRelativePath": "sources/pirate-kit/Models/GLB format/rocks-b.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 10061,
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 41428,
+    "fileName": "kenney_pirate_rocks_b.glb",
+    "sha256": "99e962600fb419faa6e9a2c8d36bb89313f6ffb9f8da2ab5b5a81c6e467a12f8"
+  },
+  "sourceUri": "https://kenney.nl/assets/pirate-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

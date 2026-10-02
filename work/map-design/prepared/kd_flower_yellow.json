@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_flower_yellowa",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_flower_yellow.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0",
+ "source_sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+ "derived_sha256": "8e373cce2ac274b3c9071ef8376ac14c7d986eee189ac595b1ac5f52c807e1db",
+ "scale": 2.3377,
+ "scale_rule": [
+  "h",
+  0.45
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage",
+  "BH_FlowerYellow"
+ ],
+ "part_faces": {
+  "BH_Foliage": 40,
+  "BH_FlowerYellow": 36
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage",
+  "colorYellow": "BH_FlowerYellow"
+ },
+ "triangles": 76,
+ "surfaces": 2,
+ "source_triangles": 76,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.372,
+  0.45,
+  0.423
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

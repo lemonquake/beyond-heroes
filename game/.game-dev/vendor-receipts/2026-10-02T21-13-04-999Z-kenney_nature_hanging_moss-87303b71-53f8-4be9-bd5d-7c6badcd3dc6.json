@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_ce7ffd1716bd47c85245b0d6",
+  "assetId": "kenney_nature_hanging_moss",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_hanging_moss",
+  "modelSha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+  "manifestSha256": "762335d88839c8107d5467246bf3d0642c8b5d624fcf02aefe927145f7c7c727",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:04.999Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_hanging_moss\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_barrel",
+  "category": "environment_prop",
+  "description": "Wooden barrel. Intended use: Harbour cargo, tavern cellar edge and Wyman stores",
+  "displayName": "kenney_pirate_barrel",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.6680490970611572,
+        1.229142665863037,
+        0.6680490970611572
+      ],
+      "min": [
+        -0.6680490970611572,
+        0,
+        -0.6680490970611572
+      ],
+      "sizeMeters": [
+        1.3360981941223145,
+        1.229142665863037,
+        1.3360981941223145
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 24208,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 148,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 248,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

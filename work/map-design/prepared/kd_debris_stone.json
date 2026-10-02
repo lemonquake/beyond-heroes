@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_debris",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_debris_stone.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0",
+ "source_sha256": "64a7536b6fc9dc3ec913c6fa187096ecd483e6e2d2bbda7556c0ba43dfdce2c8",
+ "derived_sha256": "05dd37413b98a572106f6e6728a18c73026210d2790a021136fa413a0102fd52",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Stone": 240
+ },
+ "source_to_material": {
+  "grey": "BH_Stone"
+ },
+ "triangles": 240,
+ "surfaces": 1,
+ "source_triangles": 240,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.072,
+  0.32,
+  1.095
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

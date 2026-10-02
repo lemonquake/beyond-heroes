@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_rugrectangle\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_rugrectangle",
+      "category": "environment_prop",
+      "description": "Rectangular rug. Intended use: Tavern and guild seating area anchor",
+      "displayName": "kenney_furniture_rugrectangle",
+      "files": [
+        {
+          "bytes": 3188,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb"
+        },
+        {
+          "bytes": 1557,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "e7be4ec606eacacc5b874a8c33a617bb9deb5230acd511f0106193094de2e573"
+        },
+        {
+          "bytes": 845,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "b9b253d63ec7906e222ef39e411feea38fa4e76fbb70950bd385043cbc29f2f9"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7b4dc6284ad154a6ed22ed07ab16db8329e649ed144675797590816d93cee3df"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_bd3a83c1c16d1dcf4e2d5d2e",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:16.575Z"
+}

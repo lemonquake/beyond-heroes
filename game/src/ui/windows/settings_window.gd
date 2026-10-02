@@ -204,7 +204,7 @@ func _gameplay(v: VBoxContainer) -> void:
 	_check(v, "Reduced Motion", "reduced_motion", "Removes screen shake and softens flashes.")
 	v.add_child(section("Loot"))
 	_check(v, "Auto Loot", "auto_loot_enabled", "Walking near a drop picks it up automatically (also the checkbox beside the HP orb).")
-	_option(v, "Auto Loot Picks Up", "auto_loot_mode", Settings.AUTO_LOOT_NAMES, "Which drops Auto Loot takes. Gold is always collected on contact.")
+	_option(v, "Auto Loot Picks Up", "auto_loot_mode", Settings.AUTO_LOOT_NAMES, "The lowest equipment rarity Auto Loot takes. Materials, potions and crystals follow their category switches. Gold is always collected on contact.")
 	v.add_child(button("Auto-Loot Categories & Advanced Filters", func() -> void:
 		if Game.ui_root:
 			Game.ui_root.open(&"auto_loot")
@@ -219,7 +219,8 @@ func _gameplay(v: VBoxContainer) -> void:
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)
 	_check(v, "First-Person View", "first_person", "Play from your hero's eyes: the mouse looks around, attacks go to the crosshair. %s switches any time." % Settings.binding_text(&"view_toggle"))
 	_slider(v, "First-Person Field of View", "fp_fov", 60.0, 110.0, 1.0, "%d°", 1.0)
-	_slider(v, "Interface Scale", "ui_scale", 0.75, 1.5, 0.05, "%d%%", 100.0)
+	_slider(v, "Interface Scale", "ui_scale", 0.75, 1.5, 0.05, "%d%%", 100.0, "Size of all text and panels.")
+	_check(v, "Larger Interface in Small Windows", "ui_auto", "Text and panels grow when the window is smaller than 1920 by 1080, so they stay readable. Turn off to use Interface Scale alone.")
 	_check(v, "Minimap", "show_minimap")
 	_option(v, "Minimap Zoom", "minimap_zoom", ["Close (16 m)", "Normal (26 m)", "Wide (42 m)"], "Also: the mouse wheel over the minimap, or the Minimap Zoom keys.")
 

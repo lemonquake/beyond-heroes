@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_7478febe-9f2d-47b6-9a7c-4bf84b1e7792",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_stump_old\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:54.487Z",
+  "updatedAt": "2026-10-02T21:11:54.537Z",
+  "startedAt": "2026-10-02T21:11:54.493Z",
+  "completedAt": "2026-10-02T21:11:54.537Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-d951e1e4-ba7c-4a63-9766-051d2e11ff30' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_stump_old\r'",
+    "retryable": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_graveyard_detail_bowl",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_offering_bowl.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0",
+ "source_sha256": "63e0bf23875f080a69cbbaf7b748c6980400887c1f2624b8229e008337cd8eb1",
+ "derived_sha256": "eda005c3a0d8802df76ea88848187afe675a57d06fbb87e6a9afb8eb4390fab1",
+ "scale": 1.4,
+ "scale_rule": [
+  "s",
+  1.4
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Brass"
+ ],
+ "part_faces": {
+  "BH_Brass": 176
+ },
+ "source_to_material": {
+  "cream": "BH_Brass",
+  "wood": "BH_Brass"
+ },
+ "triangles": 176,
+ "surfaces": 1,
+ "source_triangles": 176,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.281,
+  0.182,
+  0.281
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

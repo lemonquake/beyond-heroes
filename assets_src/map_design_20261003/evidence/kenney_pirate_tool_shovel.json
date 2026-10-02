@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_tool_shovel.glb",
+    "fileBytes": 26264,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 278,
+    "triangleCount": 168,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.32891544699668884,
+        0,
+        -0.14145000278949738
+      ],
+      "max": [
+        0.32891544699668884,
+        2.3491268157958984,
+        0.14145000278949738
+      ],
+      "sizeMeters": [
+        0.6578308939933777,
+        2.3491268157958984,
+        0.28290000557899475
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_tool_shovel.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 168,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        0.6578308939933777,
+        2.3491268157958984,
+        0.28290000557899475
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_tool_shovel\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_tool_shovel",
+        "category": "environment_prop",
+        "description": "Hand shovel. Intended use: Farm shed and garden work corner",
+        "displayName": "kenney_pirate_tool_shovel",
+        "files": [
+          {
+            "bytes": 26264,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5"
+          },
+          {
+            "bytes": 1721,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "c921421e51e09c481a96d9bb1602fb7d05da89dd5517175c39870fe0b0a52d16"
+          },
+          {
+            "bytes": 1082,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "b8a4516f9c0b00f5b43bd68f08ccb6a404f2a7cf63d977dd673dfbc96a7f5d69"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "e9fac7f3728ac30f6d2416973e51167449b661cc8daf1a9864084d787e4d2b1d"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_6d1b4d0e8c0d1e8d7d0a2971",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "b468372526e419c712f50b824eff50d6e7838de646eaa5a6aacfc4dcdfcfa265",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

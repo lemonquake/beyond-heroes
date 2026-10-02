@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:38.517Z",
+  "destination": {
+    "assetId": "kenney_pirate_mast_ropes",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "ea369b9742396331800899b547c4b24d83bc31f2482e068fa1c984184dc41403",
+  "packageId": "pkg_4a5c8bc9b0ade8aafbb428cf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 46252,
+    "fileName": "kenney_pirate_mast_ropes.glb",
+    "sha256": "c7c5d6509c73b3d96e69fb83bc6bf995361fbad70ea0cf476837bc1a52659364"
+  }
+}

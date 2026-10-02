@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crops_wheatstageb\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_crops_wheatstageb",
+      "category": "environment_prop",
+      "description": "Mature wheat patch. Intended use: Small authored Westreach farm beds",
+      "displayName": "kenney_nature_crops_wheatstageb",
+      "files": [
+        {
+          "bytes": 30040,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852"
+        },
+        {
+          "bytes": 1603,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "0e1ff14a3353d832e9ad596df4054e8187fc00221fefdd3053b2ea4b884c286c"
+        },
+        {
+          "bytes": 841,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "f67ef044940575571f65cff27bac40bc840138ecd12429bb5c5feb8b6581bc65"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "b6a65d74151a7783582c508c2a3f83cb4addd0592827b3732445719cfe3eaaf6"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_dc991b53a93804b70efe3403",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:54.170Z"
+}

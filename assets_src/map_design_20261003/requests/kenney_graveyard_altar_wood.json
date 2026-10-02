@@ -1,0 +1,37 @@
+{
+  "description": "Timber ritual altar. Intended use: Forest cult shelter and abandoned dungeon chapel",
+  "category": "environment_prop",
+  "policy": {
+    "requireUVs": true,
+    "requireNormals": true,
+    "requireTangentsWithNormalMap": true,
+    "requireBaseColorTexture": false,
+    "maxTriangles": 2500,
+    "maxMaterials": 4,
+    "minTextureSize": 128,
+    "requirePowerOfTwoTextures": true,
+    "maxDimensionMeters": 100,
+    "minDimensionMeters": 0.001
+  },
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney",
+    "sourceUri": "https://kenney.nl/assets/graveyard-kit",
+    "downloadUri": "https://kenney.nl/media/pages/assets/graveyard-kit/ba8d4b4517-1760691807/kenney_graveyard-kit_5.0.zip",
+    "originalArchiveSha256": "1a93613f2e5675f3310acf49ec9ef13ae7adeb756ac3b205bfb6cc9311a81062",
+    "originalModelSha256": "f1702fc2cbbbb417670ef96bd543209ac5764afdb4e43dbdf267328b62f75968",
+    "originalRelativePath": "sources/graveyard-kit/Models/GLB format/altar-wood.glb",
+    "licenseEvidence": "licenses/graveyard-kit.txt",
+    "transformations": [
+      "Embedded external image bytes in GLB; geometry/material values unchanged"
+    ],
+    "originalTextureDependencies": [
+      {
+        "uri": "Textures/colormap.png",
+        "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+        "bytes": 10965
+      }
+    ],
+    "downloadDate": "2026-10-03"
+  }
+}

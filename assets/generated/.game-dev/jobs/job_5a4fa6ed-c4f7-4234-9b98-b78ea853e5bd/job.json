@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5a4fa6ed-c4f7-4234-9b98-b78ea853e5bd",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_modular-dungeon_template_floor_layer_raised\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:47.640Z",
+  "updatedAt": "2026-10-02T21:12:47.698Z",
+  "startedAt": "2026-10-02T21:12:47.647Z",
+  "completedAt": "2026-10-02T21:12:47.698Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-e1a96f2a-1c2a-4d71-aab2-772d2d2672c6' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_modular-dungeon_template_floor_layer_raised\r'",
+    "retryable": false
+  }
+}

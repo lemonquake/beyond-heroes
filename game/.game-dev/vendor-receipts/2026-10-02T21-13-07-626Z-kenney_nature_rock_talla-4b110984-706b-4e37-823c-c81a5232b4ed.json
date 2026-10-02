@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_8eeb019899e746435f92c55a",
+  "assetId": "kenney_nature_rock_talla",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_rock_talla",
+  "modelSha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+  "manifestSha256": "b8b47c479d8b9d98b778a9131fa18f4e2ead84aa5021ec92ede89aefc5757c3c",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:07.626Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_talla\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

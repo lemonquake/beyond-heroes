@@ -1,0 +1,911 @@
+001. kenney_nature_tree_oak
+     Object: Broad oak with a rounded crown.
+     Suggested use: Malasugue outskirts and Olivar lakeside shade.
+     Source: Kenney nature-kit, CC0-1.0. 196 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.641 x 1.226 x 0.740. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0
+
+002. kenney_nature_tree_default
+     Object: Compact broadleaf tree.
+     Suggested use: Residential gardens and Westreach hedgerow breaks.
+     Source: Kenney nature-kit, CC0-1.0. 114 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.755 x 1.708 x 0.654. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0
+
+003. kenney_nature_tree_detailed
+     Object: Branching broadleaf tree.
+     Suggested use: A few focal trees beside town courtyards.
+     Source: Kenney nature-kit, CC0-1.0. 402 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.847 x 1.332 x 0.762. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0
+
+004. kenney_nature_tree_thin
+     Object: Narrow broadleaf tree.
+     Suggested use: Olivar lanes where wide crowns obstruct the camera.
+     Source: Kenney nature-kit, CC0-1.0. 228 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.680 x 1.490 x 0.617. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0
+
+005. kenney_nature_tree_small
+     Object: Small broadleaf tree.
+     Suggested use: Gardens behind houses, away from door approaches.
+     Source: Kenney nature-kit, CC0-1.0. 62 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.355 x 1.110 x 0.409. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0
+
+006. kenney_nature_tree_pinedefaulta
+     Object: Straight layered conifer.
+     Suggested use: Ruined Forest silhouette and high ground.
+     Source: Kenney nature-kit, CC0-1.0. 230 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.532 x 1.546 x 0.532. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0
+
+007. kenney_nature_tree_pinerounda
+     Object: Round tiered conifer.
+     Suggested use: Forest borders with a different crown silhouette.
+     Source: Kenney nature-kit, CC0-1.0. 204 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.617 x 1.366 x 0.712. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0
+
+008. kenney_nature_tree_pinetalla
+     Object: Tall conifer.
+     Suggested use: Distant tree line and selected forest landmarks.
+     Source: Kenney nature-kit, CC0-1.0. 78 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.386 x 1.530 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0
+
+009. kenney_nature_tree_palm
+     Object: Straight palm.
+     Suggested use: Agdao harbour gardens and Tideglass Cove.
+     Source: Kenney nature-kit, CC0-1.0. 186 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.935 x 1.515 x 1.013. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0
+
+010. kenney_nature_tree_palmbend
+     Object: Leaning palm.
+     Suggested use: Agdao waterfront silhouette, leaning away from walkways.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.935 x 1.380 x 1.013. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0
+
+011. kenney_nature_tree_palmshort
+     Object: Low palm.
+     Suggested use: Agdao small planted courtyards.
+     Source: Kenney nature-kit, CC0-1.0. 190 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.034 x 1.056 x 1.034. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0
+
+012. kenney_nature_tree_palmdetailedtall
+     Object: Detailed tall palm.
+     Suggested use: Sparse focal trees beside the harbour approach.
+     Source: Kenney nature-kit, CC0-1.0. 336 triangles; 3 mesh(es), 3 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.034 x 1.423 x 1.034. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0
+
+013. kenney_nature_plant_bush
+     Object: Rounded shrub.
+     Suggested use: House foundations and village lot boundaries.
+     Source: Kenney nature-kit, CC0-1.0. 32 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.396 x 0.244 x 0.396. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0
+
+014. kenney_nature_plant_bushlarge
+     Object: Large shrub mass.
+     Suggested use: Olivar garden corners and Agdao hill edges.
+     Source: Kenney nature-kit, CC0-1.0. 60 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.374 x 0.243 x 0.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0
+
+015. kenney_nature_plant_bushsmall
+     Object: Small shrub.
+     Suggested use: Low edging beside stairs and houses.
+     Source: Kenney nature-kit, CC0-1.0. 16 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.383 x 0.207 x 0.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0
+
+016. kenney_nature_plant_flattall
+     Object: Tall leafy plant.
+     Suggested use: Agdao planters and Coilwood trail margins.
+     Source: Kenney nature-kit, CC0-1.0. 32 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.272 x 0.284 x 0.272. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0
+
+017. kenney_nature_grass
+     Object: Small grass tuft.
+     Suggested use: Sparse path-to-ground transitions.
+     Source: Kenney nature-kit, CC0-1.0. 132 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.381 x 0.254 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass/1.1.0
+
+018. kenney_nature_grass_large
+     Object: Large grass tuft.
+     Suggested use: Grouped banks, avoiding central travel lanes.
+     Source: Kenney nature-kit, CC0-1.0. 224 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.409 x 0.254 x 0.408. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0
+
+019. kenney_nature_grass_leafs
+     Object: Broad leaf ground plant.
+     Suggested use: Agdao jungle edge and Coilwood undergrowth.
+     Source: Kenney nature-kit, CC0-1.0. 36 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.234 x 0.142 x 0.257. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0
+
+020. kenney_nature_flower_yellowa
+     Object: Yellow flowering stem.
+     Suggested use: Olivar gardens and domestic planted beds.
+     Source: Kenney nature-kit, CC0-1.0. 76 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.159 x 0.192 x 0.181. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0
+
+021. kenney_nature_flower_purplea
+     Object: Purple flowering stem.
+     Suggested use: Malasugue house garden accents.
+     Source: Kenney nature-kit, CC0-1.0. 76 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.159 x 0.242 x 0.181. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0
+
+022. kenney_nature_mushroom_tangroup
+     Object: Cluster of pale mushrooms.
+     Suggested use: Damp forest logs and crypt threshold edges.
+     Source: Kenney nature-kit, CC0-1.0. 144 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.270 x 0.250 x 0.254. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0
+
+023. kenney_nature_lily_large
+     Object: Large lily pad.
+     Suggested use: Olivar sheltered lake edge and marsh pools.
+     Source: Kenney nature-kit, CC0-1.0. 86 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.272 x 0.098 x 0.314. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0
+
+024. kenney_nature_hanging_moss
+     Object: Hanging moss strands.
+     Suggested use: Sparse damp ruin details; test opacity and overdraw.
+     Source: Kenney nature-kit, CC0-1.0. 52 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.160 x 0.478 x 0.035. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0
+
+025. kenney_nature_rock_largea
+     Object: Large irregular boulder.
+     Suggested use: Westreach coastal clusters and Agdao shore anchors.
+     Source: Kenney nature-kit, CC0-1.0. 80 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.785 x 0.260 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0
+
+026. kenney_nature_rock_largeb
+     Object: Second large boulder silhouette.
+     Suggested use: Asymmetric rock clusters beside broad walking spaces.
+     Source: Kenney nature-kit, CC0-1.0. 85 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.767 x 0.430 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0
+
+027. kenney_nature_rock_largec
+     Object: Third large boulder silhouette.
+     Suggested use: Cliff foot and forest clearing boundary.
+     Source: Kenney nature-kit, CC0-1.0. 72 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.064 x 0.321 x 1.016. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0
+
+028. kenney_nature_rock_smalla
+     Object: Small irregular rock.
+     Suggested use: Transition scatter around larger rocks.
+     Source: Kenney nature-kit, CC0-1.0. 16 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.361 x 0.191 x 0.361. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0
+
+029. kenney_nature_rock_smallb
+     Object: Second small rock silhouette.
+     Suggested use: Shore and farm-edge accents.
+     Source: Kenney nature-kit, CC0-1.0. 24 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.361 x 0.177 x 0.361. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0
+
+030. kenney_nature_rock_smallflata
+     Object: Flat low rock.
+     Suggested use: Ground transitions and stream banks.
+     Source: Kenney nature-kit, CC0-1.0. 20 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.496 x 0.065 x 0.430. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0
+
+031. kenney_nature_rock_talla
+     Object: Tall narrow rock.
+     Suggested use: Sparse rocky coast silhouettes.
+     Source: Kenney nature-kit, CC0-1.0. 136 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.983 x 0.996 x 0.683. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0
+
+032. kenney_nature_stone_largea
+     Object: Large stone boulder.
+     Suggested use: Pale inland rock and terrace garden anchors.
+     Source: Kenney nature-kit, CC0-1.0. 80 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.785 x 0.260 x 1.015. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0
+
+033. kenney_nature_stone_smallflata
+     Object: Flat pale stone.
+     Suggested use: Olivar shore, ruin floor edges and garden trim.
+     Source: Kenney nature-kit, CC0-1.0. 20 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.496 x 0.065 x 0.430. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0
+
+034. kenney_nature_stump_old
+     Object: Weathered tree stump.
+     Suggested use: Ruined Forest logging remnants.
+     Source: Kenney nature-kit, CC0-1.0. 120 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.357 x 0.266 x 0.371. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0
+
+035. kenney_nature_stump_rounddetailed
+     Object: Cut stump with irregular surface.
+     Suggested use: Westreach woodcutting patch and Wyman firewood corner.
+     Source: Kenney nature-kit, CC0-1.0. 96 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.357 x 0.206 x 0.371. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0
+
+036. kenney_nature_log
+     Object: Fallen log.
+     Suggested use: Forest floor composition and simple camp seating.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.234 x 0.173 x 0.710. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log/1.1.0
+
+037. kenney_nature_log_stack
+     Object: Stacked cut timber.
+     Suggested use: Wyman supply corner and Malasugue forge fuel.
+     Source: Kenney nature-kit, CC0-1.0. 184 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.425 x 0.346 x 0.710. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0
+
+038. kenney_nature_fence_planks
+     Object: Plank fence span.
+     Suggested use: Westreach farm boundaries and house lots.
+     Source: Kenney nature-kit, CC0-1.0. 96 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.000 x 0.345 x 0.096. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0
+
+039. kenney_nature_fence_gate
+     Object: Farm fence gate.
+     Suggested use: Garden and field entrances with a clear passage.
+     Source: Kenney nature-kit, CC0-1.0. 524 triangles; 2 mesh(es), 5 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 1.000 x 0.345 x 0.070. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0
+
+040. kenney_nature_pot_small
+     Object: Small earthen pot.
+     Suggested use: Herbs, kitchen storage and market table grouping.
+     Source: Kenney nature-kit, CC0-1.0. 72 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.323 x 0.268 x 0.280. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0
+
+041. kenney_nature_pot_large
+     Object: Large earthen pot.
+     Suggested use: Agdao courtyard planters and town storage.
+     Source: Kenney nature-kit, CC0-1.0. 68 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.564 x 0.200 x 0.488. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0
+
+042. kenney_nature_crop_carrot
+     Object: Carrot produce.
+     Suggested use: Westreach farm beds and market produce display.
+     Source: Kenney nature-kit, CC0-1.0. 148 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.343 x 0.619 x 0.343. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0
+
+043. kenney_nature_crop_pumpkin
+     Object: Pumpkin produce.
+     Suggested use: Market baskets and farm storage clusters.
+     Source: Kenney nature-kit, CC0-1.0. 120 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.441 x 0.334 x 0.452. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0
+
+044. kenney_nature_crops_wheatstageb
+     Object: Mature wheat patch.
+     Suggested use: Small authored Westreach farm beds.
+     Source: Kenney nature-kit, CC0-1.0. 360 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.540 x 0.535 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0
+
+045. kenney_nature_crops_bamboostageb
+     Object: Mature bamboo patch.
+     Suggested use: Sparse Agdao back gardens and Coilwood framing.
+     Source: Kenney nature-kit, CC0-1.0. 564 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.340 x 0.890 x 0.308. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0
+
+046. kenney_nature_tent_smallopen
+     Object: Small open tent.
+     Suggested use: Wyman and survivor camp edge, preserve entrances.
+     Source: Kenney nature-kit, CC0-1.0. 224 triangles; 1 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.548 x 0.561 x 0.666. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0
+
+047. kenney_nature_campfire_stones
+     Object: Stone campfire ring.
+     Suggested use: Camp seating group; reuse existing fire effects.
+     Source: Kenney nature-kit, CC0-1.0. 264 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.541 x 0.078 x 0.516. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0
+
+048. kenney_nature_canoe
+     Object: Simple canoe hull.
+     Suggested use: Olivar dock or cove mooring, not a new travel mechanic.
+     Source: Kenney nature-kit, CC0-1.0. 200 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.300 x 0.183 x 1.150. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_canoe/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_canoe/1.1.0
+
+049. kenney_furniture_bench
+     Object: Plain bench.
+     Suggested use: Town resting corners, harbour seating and tavern wall.
+     Source: Kenney furniture-kit, CC0-1.0. 170 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.470 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bench/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bench/1.1.0
+
+050. kenney_furniture_chair
+     Object: Plain timber chair.
+     Suggested use: Tavern tables and domestic interiors.
+     Source: Kenney furniture-kit, CC0-1.0. 170 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.200 x 0.470 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chair/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chair/1.1.0
+
+051. kenney_furniture_chairrounded
+     Object: Rounded-back chair.
+     Suggested use: Council and guild meeting rooms after timber restyle.
+     Source: Kenney furniture-kit, CC0-1.0. 280 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.200 x 0.455 x 0.200. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0
+
+052. kenney_furniture_stoolbarsquare
+     Object: Square stool.
+     Suggested use: Tavern counter and smithy work corner.
+     Source: Kenney furniture-kit, CC0-1.0. 142 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.153 x 0.405 x 0.148. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0
+
+053. kenney_furniture_table
+     Object: Rectangular table.
+     Suggested use: Tavern eating group and netmender work area.
+     Source: Kenney furniture-kit, CC0-1.0. 120 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.841 x 0.327 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_table/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_table/1.1.0
+
+054. kenney_furniture_tableround
+     Object: Round table.
+     Suggested use: Small tavern seating groups.
+     Source: Kenney furniture-kit, CC0-1.0. 80 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.693 x 0.367 x 0.800. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0
+
+055. kenney_furniture_tablecross
+     Object: Cross-braced table.
+     Suggested use: Guild meeting table and workshop.
+     Source: Kenney furniture-kit, CC0-1.0. 178 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.852 x 0.347 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0
+
+056. kenney_furniture_tablecloth
+     Object: Cloth-covered table.
+     Suggested use: Market or domestic dining after linen recolour.
+     Source: Kenney furniture-kit, CC0-1.0. 144 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.841 x 0.327 x 0.447. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0
+
+057. kenney_furniture_sidetable
+     Object: Small side table.
+     Suggested use: Bedside storage and document corner.
+     Source: Kenney furniture-kit, CC0-1.0. 118 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.534 x 0.384 x 0.220. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0
+
+058. kenney_furniture_sidetabledrawers
+     Object: Drawer side table.
+     Suggested use: Keeper and cartographer storage.
+     Source: Kenney furniture-kit, CC0-1.0. 238 triangles; 3 mesh(es), 4 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.534 x 0.384 x 0.222. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0
+
+059. kenney_furniture_desk
+     Object: Writing desk.
+     Suggested use: Cartographer and guild administration.
+     Source: Kenney furniture-kit, CC0-1.0. 198 triangles; 2 mesh(es), 3 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.734 x 0.384 x 0.392. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_desk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_desk/1.1.0
+
+060. kenney_furniture_bookcaseopen
+     Object: Tall open bookcase.
+     Suggested use: Cartographer and Lantern House library wall.
+     Source: Kenney furniture-kit, CC0-1.0. 320 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.880 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0
+
+061. kenney_furniture_bookcaseopenlow
+     Object: Low open bookcase.
+     Suggested use: Guild room divider without camera obstruction.
+     Source: Kenney furniture-kit, CC0-1.0. 184 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.400 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0
+
+062. kenney_furniture_bookcaseclosed
+     Object: Closed timber bookcase.
+     Suggested use: Keeper house and council archives.
+     Source: Kenney furniture-kit, CC0-1.0. 372 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.400 x 0.850 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0
+
+063. kenney_furniture_bookcaseclosedwide
+     Object: Wide closed bookcase.
+     Suggested use: Guild House archival wall.
+     Source: Kenney furniture-kit, CC0-1.0. 372 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.800 x 0.790 x 0.250. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0
+
+064. kenney_furniture_books
+     Object: Small stack of books.
+     Suggested use: Cartographer desk and council reading table.
+     Source: Kenney furniture-kit, CC0-1.0. 62 triangles; 1 mesh(es), 4 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.150 x 0.104 x 0.094. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_books/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_books/1.1.0
+
+065. kenney_furniture_bedsingle
+     Object: Single bed.
+     Suggested use: Existing domestic interiors after linen and wood restyle.
+     Source: Kenney furniture-kit, CC0-1.0. 214 triangles; 3 mesh(es), 6 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.571 x 0.375 x 1.125. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0
+
+066. kenney_furniture_beddouble
+     Object: Double bed.
+     Suggested use: Hald house sleeping corner; verify room clearance.
+     Source: Kenney furniture-kit, CC0-1.0. 264 triangles; 4 mesh(es), 6 surfaces, 4 materials.
+     Source bounds (X/Y/Z metres): 0.956 x 0.375 x 1.125. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0
+
+067. kenney_furniture_bedbunk
+     Object: Bunk bed.
+     Suggested use: Wyman lodging only if an existing interior supports it.
+     Source: Kenney furniture-kit, CC0-1.0. 580 triangles; 5 mesh(es), 5 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.571 x 0.850 x 1.095. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0
+
+068. kenney_furniture_pillow
+     Object: Simple pillow.
+     Suggested use: Existing beds; remove modern-looking material gloss.
+     Source: Kenney furniture-kit, CC0-1.0. 50 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.230 x 0.222 x 0.088. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0
+
+069. kenney_furniture_rugrectangle
+     Object: Rectangular rug.
+     Suggested use: Tavern and guild seating area anchor.
+     Source: Kenney furniture-kit, CC0-1.0. 28 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 1.570 x 0.010 x 0.920. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0
+
+070. kenney_furniture_ruground
+     Object: Round rug.
+     Suggested use: Council seating group and domestic corner.
+     Source: Kenney furniture-kit, CC0-1.0. 188 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.920 x 0.010 x 0.920. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0
+
+071. kenney_furniture_coatrackstanding
+     Object: Standing coat rack.
+     Suggested use: Tavern vestibule and guild reception.
+     Source: Kenney furniture-kit, CC0-1.0. 190 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.273 x 0.770 x 0.273. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0
+
+072. kenney_furniture_plantsmall1
+     Object: Small potted plant.
+     Suggested use: House windows and Agdao market counters.
+     Source: Kenney furniture-kit, CC0-1.0. 102 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.095 x 0.140 x 0.095. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0
+
+073. kenney_furniture_plantsmall2
+     Object: Second small potted plant.
+     Suggested use: Apothecary herb display and house shelves.
+     Source: Kenney furniture-kit, CC0-1.0. 158 triangles; 1 mesh(es), 2 surfaces, 2 materials.
+     Source bounds (X/Y/Z metres): 0.095 x 0.140 x 0.095. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0
+
+074. kenney_furniture_pottedplant
+     Object: Tall potted plant.
+     Suggested use: Agdao courtyard and council entrance.
+     Source: Kenney furniture-kit, CC0-1.0. 60 triangles; 2 mesh(es), 3 surfaces, 3 materials.
+     Source bounds (X/Y/Z metres): 0.212 x 0.654 x 0.241. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0
+
+075. kenney_pirate_barrel
+     Object: Wooden barrel.
+     Suggested use: Harbour cargo, tavern cellar edge and Wyman stores.
+     Source: Kenney pirate-kit, CC0-1.0. 148 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.336 x 1.229 x 1.336. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0
+
+076. kenney_pirate_crate
+     Object: Wooden cargo crate.
+     Suggested use: Agdao pier handling area and Westreach stolen cargo.
+     Source: Kenney pirate-kit, CC0-1.0. 76 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.078 x 0.770 x 1.309. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate/1.1.0
+
+077. kenney_pirate_crate_bottles
+     Object: Crate holding bottles.
+     Suggested use: Tavern stock and merchant delivery scene.
+     Source: Kenney pirate-kit, CC0-1.0. 572 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.078 x 1.057 x 1.309. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0
+
+078. kenney_pirate_bottle
+     Object: Small bottle.
+     Suggested use: Tavern tables and apothecary shelves.
+     Source: Kenney pirate-kit, CC0-1.0. 124 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.364 x 0.890 x 0.364. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0
+
+079. kenney_pirate_bottle_large
+     Object: Large bottle.
+     Suggested use: Grouped apothecary and market storage.
+     Source: Kenney pirate-kit, CC0-1.0. 108 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.466 x 0.890 x 0.466. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0
+
+080. kenney_pirate_chest
+     Object: Wooden chest.
+     Suggested use: House storage; keep existing loot chest logic intact.
+     Source: Kenney pirate-kit, CC0-1.0. 232 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.275 x 1.147 x 1.275. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_chest/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_chest/1.1.0
+
+081. kenney_pirate_tool_shovel
+     Object: Hand shovel.
+     Suggested use: Farm shed and garden work corner.
+     Source: Kenney pirate-kit, CC0-1.0. 168 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.658 x 2.349 x 0.283. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0
+
+082. kenney_pirate_tool_paddle
+     Object: Wooden paddle.
+     Suggested use: Olivar boathouse and harbour boat-rest area.
+     Source: Kenney pirate-kit, CC0-1.0. 60 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.658 x 2.349 x 0.208. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0
+
+083. kenney_pirate_boat_row_small
+     Object: Small rowing boat.
+     Suggested use: Agdao quay secondary mooring.
+     Source: Kenney pirate-kit, CC0-1.0. 168 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.749 x 0.848 x 2.372. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0
+
+084. kenney_pirate_boat_row_large
+     Object: Larger rowing boat.
+     Suggested use: Olivar landing; static decoration or shared gentle bob.
+     Source: Kenney pirate-kit, CC0-1.0. 174 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.749 x 0.848 x 2.852. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0
+
+085. kenney_pirate_ship_wreck
+     Object: Broken ship hull.
+     Suggested use: Tideglass Cove story vignette, no collision across approach.
+     Source: Kenney pirate-kit, CC0-1.0. 2282 triangles; 16 mesh(es), 16 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.800 x 9.964 x 10.600. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0
+
+086. kenney_pirate_rocks_a
+     Object: Grouped shoreline rocks.
+     Suggested use: Agdao harbour mouth and cove shore.
+     Source: Kenney pirate-kit, CC0-1.0. 264 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 5.113 x 2.898 x 4.386. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0
+
+087. kenney_pirate_rocks_b
+     Object: Second grouped shoreline rocks.
+     Suggested use: Coastal silhouette variety.
+     Source: Kenney pirate-kit, CC0-1.0. 300 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.437 x 3.654 x 4.705. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0
+
+088. kenney_pirate_rocks_c
+     Object: Third grouped shoreline rocks.
+     Suggested use: Cliff-to-water boundary.
+     Source: Kenney pirate-kit, CC0-1.0. 232 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 3.643 x 2.300 x 3.669. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0
+
+089. kenney_pirate_platform_planks
+     Object: Plank deck piece.
+     Suggested use: Dock repair vignette, visual only unless navigation updated.
+     Source: Kenney pirate-kit, CC0-1.0. 48 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.894 x 0.428 x 2.702. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0
+
+090. kenney_pirate_structure_fence
+     Object: Timber rail span.
+     Suggested use: Harbour railing repairs beside existing geometry.
+     Source: Kenney pirate-kit, CC0-1.0. 356 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.500 x 2.200 x 2.500. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0
+
+091. kenney_pirate_structure_platform_dock_small
+     Object: Small dock platform.
+     Suggested use: Supplemental mooring beside existing traversable pier.
+     Source: Kenney pirate-kit, CC0-1.0. 312 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.900 x 1.312 x 2.512. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0
+
+092. kenney_pirate_structure_roof
+     Object: Small timber canopy roof.
+     Suggested use: Cargo shelter; restyle and preserve camera visibility.
+     Source: Kenney pirate-kit, CC0-1.0. 348 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 3.085 x 3.400 x 3.234. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0
+
+093. kenney_pirate_flag_pennant
+     Object: Plain pennant flag.
+     Suggested use: Town accents with canon colours and no pirate markings.
+     Source: Kenney pirate-kit, CC0-1.0. 118 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.762 x 2.097 x 0.399. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0
+
+094. kenney_pirate_mast_ropes
+     Object: Rope-equipped mast.
+     Suggested use: Harbour rigging vignette, static mesh and no new sail physics.
+     Source: Kenney pirate-kit, CC0-1.0. 350 triangles; 3 mesh(es), 3 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.386 x 7.888 x 2.349. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0
+
+095. kenney_graveyard_altar_stone
+     Object: Stone ritual altar.
+     Suggested use: Catacomb ritual room, temple side chapel and Jade tomb niche.
+     Source: Kenney graveyard-kit, CC0-1.0. 166 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.040 x 0.488 x 0.653. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0
+
+096. kenney_graveyard_altar_wood
+     Object: Timber ritual altar.
+     Suggested use: Forest cult shelter and abandoned dungeon chapel.
+     Source: Kenney graveyard-kit, CC0-1.0. 306 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 1.045 x 0.538 x 0.659. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0
+
+097. kenney_graveyard_coffin_old
+     Object: Weathered coffin.
+     Suggested use: Blackvault Ossuary and drowned crypt wall alcoves.
+     Source: Kenney graveyard-kit, CC0-1.0. 216 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.574 x 0.200 x 0.838. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0
+
+098. kenney_graveyard_coffin
+     Object: Intact coffin.
+     Suggested use: Burial room rows, retaining broad central combat space.
+     Source: Kenney graveyard-kit, CC0-1.0. 256 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.574 x 0.325 x 0.838. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0
+
+099. kenney_graveyard_candle_multiple
+     Object: Cluster of candles.
+     Suggested use: Tomb and ritual staging; share capped existing flame effects.
+     Source: Kenney graveyard-kit, CC0-1.0. 162 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.255 x 0.200 x 0.267. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0
+
+100. kenney_graveyard_lantern_candle
+     Object: Candle lantern housing.
+     Suggested use: Crypt route accents and flooded cistern pier.
+     Source: Kenney graveyard-kit, CC0-1.0. 224 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.240 x 0.388 x 0.240. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0
+
+101. kenney_graveyard_fire_basket
+     Object: Iron fire basket.
+     Suggested use: Emberforge work alcove and Obsidian Engine service room.
+     Source: Kenney graveyard-kit, CC0-1.0. 196 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.417 x 0.168 x 0.417. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0
+
+102. kenney_graveyard_urn_round
+     Object: Round funerary urn.
+     Suggested use: Catacomb niches and Jade Sepulchre memorial corners.
+     Source: Kenney graveyard-kit, CC0-1.0. 230 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.264 x 0.384 x 0.264. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0
+
+103. kenney_graveyard_urn_square
+     Object: Square funerary urn.
+     Suggested use: Burial chamber silhouette variation.
+     Source: Kenney graveyard-kit, CC0-1.0. 218 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.264 x 0.384 x 0.264. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0
+
+104. kenney_graveyard_detail_chalice
+     Object: Ritual chalice.
+     Suggested use: Altar grouping and ruined temple offering table.
+     Source: Kenney graveyard-kit, CC0-1.0. 136 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.164 x 0.249 x 0.164. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0
+
+105. kenney_graveyard_detail_bowl
+     Object: Offering bowl.
+     Suggested use: Temple and tomb ritual table composition.
+     Source: Kenney graveyard-kit, CC0-1.0. 176 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.201 x 0.130 x 0.201. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0
+
+106. kenney_graveyard_debris
+     Object: Stone debris pile.
+     Suggested use: Collapsed crypt wall or exhausted mine edge.
+     Source: Kenney graveyard-kit, CC0-1.0. 240 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.536 x 0.160 x 0.547. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0
+
+107. kenney_graveyard_debris_wood
+     Object: Broken timber debris.
+     Suggested use: Flooded Deeps wreck edge and abandoned storeroom.
+     Source: Kenney graveyard-kit, CC0-1.0. 108 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.459 x 0.100 x 0.504. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0
+
+108. kenney_graveyard_gravestone_broken
+     Object: Broken headstone.
+     Suggested use: Ruined Forest graveyard and Blackvault threshold.
+     Source: Kenney graveyard-kit, CC0-1.0. 134 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.509 x 0.341 x 0.392. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0
+
+109. kenney_graveyard_column_large
+     Object: Large stone column.
+     Suggested use: Ruined Temple side arcade and sparse tomb focal structure.
+     Source: Kenney graveyard-kit, CC0-1.0. 394 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.390 x 1.130 x 0.390. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0
+
+110. kenney_graveyard_pillar_obelisk
+     Object: Stone obelisk.
+     Suggested use: Crypt or Jade chamber landmark after canon glyph treatment.
+     Source: Kenney graveyard-kit, CC0-1.0. 76 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 0.350 x 1.012 x 0.350. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0
+
+111. kenney_modular-dungeon_gate_metal_bars
+     Object: Metal barred gate.
+     Suggested use: Visual side-cell gate, preserve existing sealed-door state logic.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 720 triangles; 2 mesh(es), 2 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.400 x 4.400 x 1.400. MULTI-MESH: prepare all parts before batching. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0
+
+112. kenney_modular-dungeon_template_wall_half
+     Object: Half-height stone wall.
+     Suggested use: Cutaway dungeon side alcoves after scale and collision audit.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 276 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 2.000 x 4.150 x 1.807. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0
+
+113. kenney_modular-dungeon_template_floor_layer_raised
+     Object: Raised stone floor insert.
+     Suggested use: Dry island in damp crypt or small ritual plinth.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 312 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.024 x 3.000 x 4.000. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0
+
+114. kenney_modular-dungeon_template_floor_detail_a
+     Object: Detailed stone floor insert.
+     Suggested use: Sparse threshold accent and repaired temple paving.
+     Source: Kenney modular-dungeon-kit, CC0-1.0. 204 triangles; 1 mesh(es), 1 surfaces, 1 materials.
+     Source bounds (X/Y/Z metres): 4.000 x 0.100 x 4.000. Restyle and scale for this game.
+     Model: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0/model.glb
+     Package: assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0

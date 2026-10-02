@@ -1,15 +1,38 @@
-# Draft for a new Linux VPS. Replace the hostname and validate on that host.
-# The public certificate is managed by Caddy; the private loopback service
-# retains its existing localhost certificate for the Godot coordinator.
+# Replace game.example.com with the real public host name, then `caddy validate --config /etc/caddy/Caddyfile`.
+# Caddy obtains and renews the public certificate for that name automatically (DNS must point at this VM, TCP 80 and 443 open).
+# The account service itself listens only on 127.0.0.1:8443 with its own private certificate, which only Caddy and the local game
+# coordinator ever see: Caddy verifies it with the public half copied to /etc/beyond-heroes/upstream.crt.
 game.example.com {
+    encode zstd gzip
+
+    # nothing but the game's own endpoints is ever forwarded
     @internal path /internal /internal/*
     respond @internal "Not found" 404
 
+    # bodies are small JSON saves; the service enforces 2 MB as well
+    request_body {
+        max_size 2.5MB
+    }
+
     reverse_proxy https://127.0.0.1:8443 {
+        # the service must never accept the coordinator's key from the internet, and it counts rate limits per client address:
+        # hand it exactly one forwarded address, the one Caddy saw
         header_up -X-Server-Key
+        header_up X-Forwarded-For {remote_host}
         transport http {
             tls_trust_pool file /etc/beyond-heroes/upstream.crt
             tls_server_name localhost
+            dial_timeout 5s
+            response_header_timeout 20s
+        }
+    }
+
+    # bounded access log: size-rolled, five files kept, no request bodies or credentials are ever logged
+    log {
+        output file /var/log/caddy/beyond-heroes-access.log {
+            roll_size 10MiB
+            roll_keep 5
+            roll_keep_for 168h
         }
     }
 }

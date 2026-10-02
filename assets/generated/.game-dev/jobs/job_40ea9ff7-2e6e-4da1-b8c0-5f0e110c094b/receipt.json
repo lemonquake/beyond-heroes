@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_pillar_obelisk\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_pillar_obelisk",
+      "category": "environment_prop",
+      "description": "Stone obelisk. Intended use: Crypt or Jade chamber landmark after canon glyph treatment",
+      "displayName": "kenney_graveyard_pillar_obelisk",
+      "files": [
+        {
+          "bytes": 8552,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f7a9d985522d8bb1eef765ce2b841588b43c8607b32c87056945696a172b3bf1"
+        },
+        {
+          "bytes": 1758,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "d90c32dcb8c93598ed354164b7d0e769e1cfd5180e2dd9ce6e6861e638092b64"
+        },
+        {
+          "bytes": 815,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "062466db93024cf941a35075e887569d1933e0db323d2718b944cd9993b31f9e"
+        },
+        {
+          "bytes": 3649,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "321c63db166ecd4f2b5fff397c3111ee2ecbef34470526ebbbcbee370d0d2cdc"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_676db3ee8a7e59245a12afea",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:50.112Z"
+}

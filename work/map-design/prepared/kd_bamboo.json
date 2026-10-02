@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_nature_crops_bamboostageb",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_bamboo.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0",
+ "source_sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6",
+ "derived_sha256": "807b133e418d4a35ec6a803afee5fad0ab8e2665b4c688ec7820d28ae1728385",
+ "scale": 3.5955,
+ "scale_rule": [
+  "h",
+  3.2
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage"
+ ],
+ "part_faces": {
+  "BH_Foliage": 564
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage"
+ },
+ "triangles": 564,
+ "surfaces": 1,
+ "source_triangles": 564,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.223,
+  3.2,
+  1.107
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

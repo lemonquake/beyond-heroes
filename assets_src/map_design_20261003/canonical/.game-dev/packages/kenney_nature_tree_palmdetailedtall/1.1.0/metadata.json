@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_tree_palmdetailedtall",
+  "category": "foliage",
+  "description": "Detailed tall palm. Intended use: Sparse focal trees beside the harbour approach",
+  "displayName": "kenney_nature_tree_palmdetailedtall",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.5171645461356535,
+        1.373466974036579,
+        0.5197316133699036
+      ],
+      "min": [
+        -0.5171645106041536,
+        -0.05,
+        -0.5145974433699035
+      ],
+      "sizeMeters": [
+        1.0343290567398071,
+        1.423466974036579,
+        1.0343290567398071
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 28204,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 3,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 3,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 336,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 640,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

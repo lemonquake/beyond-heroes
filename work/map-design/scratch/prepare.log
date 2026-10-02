@@ -1,0 +1,1091 @@
+04:31:53 | INFO: Data are loaded, start creating Blender stuff
+04:31:53 | INFO: Blender create Mesh node Mesh tree_oak
+04:31:53 | INFO: glTF import finished in 0.01s
+A:\Python\beyond-heroes\tools\blender\environment\prepare_kenney.py:213: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if mat and mat.use_nodes:
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_tree_oak
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_tree_oak-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.05345582962036133 s
+
+PREPARED kd_tree_oak tris 196 surfaces 2 size [3.395, 6.5, 3.921] ['BH_Foliage', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_default
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_tree_broadleaf
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_tree_broadleaf-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.006325960159301758 s
+
+PREPARED kd_tree_broadleaf tris 114 surfaces 2 size [2.652, 6.0, 2.297] ['BH_Bark', 'BH_Foliage']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_detailed
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_tree_detailed
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_tree_detailed-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.0076961517333984375 s
+
+PREPARED kd_tree_detailed tris 402 surfaces 2 size [4.323, 6.8, 3.887] ['BH_Foliage', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_thin
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_tree_thin
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_tree_thin-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.007586240768432617 s
+
+PREPARED kd_tree_thin tris 228 surfaces 2 size [2.922, 6.4, 2.648] ['BH_Foliage', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_small
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_tree_small
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_tree_small-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.006014585494995117 s
+
+PREPARED kd_tree_small tris 62 surfaces 2 size [1.15, 3.6, 1.328] ['BH_Bark', 'BH_Foliage']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_pineDefaultA
+04:31:54 | INFO: glTF import finished in 0.01s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_pine
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_pine-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.0072479248046875 s
+
+PREPARED kd_pine tris 230 surfaces 2 size [2.925, 8.5, 2.925] ['BH_FoliageDark', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_pineRoundA
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_pine_round
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_pine_round-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.007375001907348633 s
+
+PREPARED kd_pine_round tris 204 surfaces 2 size [3.251, 7.2, 3.754] ['BH_Bark', 'BH_FoliageDark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_pineTallA
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_pine_tall
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_pine_tall-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.009331941604614258 s
+
+PREPARED kd_pine_tall tris 78 surfaces 2 size [2.778, 11.0, 2.819] ['BH_Bark', 'BH_FoliageDark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_palm
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_palm
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_palm-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.007761240005493164 s
+
+PREPARED kd_palm tris 186 surfaces 2 size [4.632, 7.5, 5.015] ['BH_Bark', 'BH_JungleLeaf']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_palmBend
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_palm_bend
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_palm_bend-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.0068089962005615234 s
+
+PREPARED kd_palm_bend tris 200 surfaces 2 size [4.746, 7.0, 5.138] ['BH_JungleLeaf', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_palmShort
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_palm_short
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Finished glTF 2.0 export in 0.009557485580444336 s
+
+PREPARED kd_palm_short tris 190 surfaces 2 size [3.329, 3.4, 3.329] ['BH_JungleLeaf', 'BH_Bark']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh tree_palmDetailedTall
+04:31:54 | INFO: Blender create Mesh node Mesh leafs
+04:31:54 | INFO: Blender create Mesh node Mesh leafs
+04:31:54 | INFO: glTF import finished in 0.01s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_palm_tall
+04:31:54 | INFO: Primitives created: 2
+04:31:54 | INFO: Extracting primitive: kd_palm_tall-colonly
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.007034778594970703 s
+
+PREPARED kd_palm_tall tris 336 surfaces 2 size [6.903, 9.5, 6.903] ['BH_Bark', 'BH_JungleLeaf']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh plant_bush
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_bush
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.003769397735595703 s
+
+PREPARED kd_bush tris 32 surfaces 1 size [1.458, 0.9, 1.458] ['BH_Foliage']
+04:31:54 | INFO: Data are loaded, start creating Blender stuff
+04:31:54 | INFO: Blender create Mesh node Mesh plant_bushLarge
+04:31:54 | INFO: glTF import finished in 0.00s
+04:31:54 | INFO: Starting glTF 2.0 export
+04:31:54 | INFO: Extracting primitive: kd_bush_large
+04:31:54 | INFO: Primitives created: 1
+04:31:54 | INFO: Finished glTF 2.0 export in 0.0048863887786865234 s
+
+PREPARED kd_bush_large tris 60 surfaces 1 size [1.849, 1.2, 1.658] ['BH_Foliage']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh plant_bushSmall
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_bush_small
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.0035164356231689453 s
+
+PREPARED kd_bush_small tris 16 surfaces 1 size [1.016, 0.55, 0.892] ['BH_Foliage']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh plant_flatTall
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_plant_leafy
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.0035076141357421875 s
+
+PREPARED kd_plant_leafy tris 32 surfaces 1 size [0.764, 0.8, 0.764] ['BH_JungleLeaf']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh grass
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_grass
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.003707408905029297 s
+
+PREPARED kd_grass tris 132 surfaces 1 size [0.525, 0.35, 0.54] ['BH_Foliage']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh grass_large
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_grass_large
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.0037615299224853516 s
+
+PREPARED kd_grass_large tris 224 surfaces 1 size [0.725, 0.45, 0.723] ['BH_Foliage']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh grass_leafs
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_ground_leaves
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.003556966781616211 s
+
+PREPARED kd_ground_leaves tris 36 surfaces 1 size [0.494, 0.3, 0.542] ['BH_JungleLeaf']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh flower_yellowA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_flower_yellow
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.005918741226196289 s
+
+PREPARED kd_flower_yellow tris 76 surfaces 2 size [0.372, 0.45, 0.423] ['BH_Foliage', 'BH_FlowerYellow']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh flower_purpleA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_flower_purple
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.005288362503051758 s
+
+PREPARED kd_flower_purple tris 76 surfaces 2 size [0.328, 0.5, 0.373] ['BH_Foliage', 'BH_FlowerViolet']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh mushroom_tanGroup
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_mushrooms_pale
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.007084369659423828 s
+
+PREPARED kd_mushrooms_pale tris 144 surfaces 2 size [0.377, 0.35, 0.355] ['BH_Fungus', 'BH_MushroomPale']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh lily_large
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_lily
+04:31:55 | INFO: Primitives created: 3
+04:31:55 | INFO: Finished glTF 2.0 export in 0.006772279739379883 s
+
+PREPARED kd_lily tris 86 surfaces 3 size [0.816, 0.294, 0.942] ['BH_Foliage', 'BH_FlowerWhite', 'BH_FoliageDark']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh hanging_moss
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_hanging_moss
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.00336456298828125 s
+
+PREPARED kd_hanging_moss tris 52 surfaces 1 size [0.468, 1.4, 0.102] ['BH_Moss']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_largeA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_a
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Extracting primitive: kd_rock_a-colonly
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.010199308395385742 s
+
+PREPARED kd_rock_a tris 80 surfaces 2 size [2.355, 0.779, 3.046] ['BH_Rock', 'BH_Moss']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_largeB
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_b
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Extracting primitive: kd_rock_b-colonly
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.007683515548706055 s
+
+PREPARED kd_rock_b tris 85 surfaces 2 size [2.3, 1.291, 3.046] ['BH_Rock', 'BH_Moss']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_largeC
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_c
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Extracting primitive: kd_rock_c-colonly
+04:31:55 | INFO: Primitives created: 1
+04:31:55 | INFO: Finished glTF 2.0 export in 0.00584864616394043 s
+
+PREPARED kd_rock_c tris 72 surfaces 2 size [3.193, 0.963, 3.047] ['BH_Rock', 'BH_Moss']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_smallA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_small_a
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.005206108093261719 s
+
+PREPARED kd_rock_small_a tris 16 surfaces 2 size [0.722, 0.382, 0.722] ['BH_Moss', 'BH_Rock']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_smallB
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_small_b
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.005621671676635742 s
+
+PREPARED kd_rock_small_b tris 24 surfaces 2 size [0.722, 0.354, 0.722] ['BH_Moss', 'BH_Rock']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_smallFlatA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_flat
+04:31:55 | INFO: Primitives created: 2
+04:31:55 | INFO: Finished glTF 2.0 export in 0.005173444747924805 s
+
+PREPARED kd_rock_flat tris 20 surfaces 2 size [1.19, 0.156, 1.031] ['BH_Rock', 'BH_Moss']
+04:31:55 | INFO: Data are loaded, start creating Blender stuff
+04:31:55 | INFO: Blender create Mesh node Mesh rock_tallA
+04:31:55 | INFO: glTF import finished in 0.00s
+04:31:55 | INFO: Starting glTF 2.0 export
+04:31:55 | INFO: Extracting primitive: kd_rock_tall
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Extracting primitive: kd_rock_tall-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.008753776550292969 s
+
+PREPARED kd_rock_tall tris 136 surfaces 2 size [2.764, 2.8, 1.921] ['BH_Rock', 'BH_Moss']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh stump_old
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_stump_old
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Extracting primitive: kd_stump_old-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.004854917526245117 s
+
+PREPARED kd_stump_old tris 120 surfaces 1 size [0.803, 0.6, 0.835] ['BH_Bark']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh stump_roundDetailed
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_stump_cut
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Extracting primitive: kd_stump_cut-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.006161928176879883 s
+
+PREPARED kd_stump_cut tris 96 surfaces 2 size [0.777, 0.45, 0.808] ['BH_Bark', 'BH_Wood']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh log
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_log
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Extracting primitive: kd_log-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.006964206695556641 s
+
+PREPARED kd_log tris 200 surfaces 2 size [0.842, 0.624, 2.556] ['BH_Bark', 'BH_Wood']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh log_stack
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_log_stack
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Extracting primitive: kd_log_stack-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.006918430328369141 s
+
+PREPARED kd_log_stack tris 184 surfaces 2 size [1.104, 0.901, 1.846] ['BH_Bark', 'BH_Wood']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh fence_planks
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_fence
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Extracting primitive: kd_fence-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.004987001419067383 s
+
+PREPARED kd_fence tris 96 surfaces 1 size [2.6, 0.897, 0.249] ['BH_WoodDark']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh fence_gate
+04:31:56 | INFO: Blender create Mesh node Mesh gate
+04:31:56 | INFO: glTF import finished in 0.01s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_fence_gate
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Finished glTF 2.0 export in 0.007264137268066406 s
+
+PREPARED kd_fence_gate tris 524 surfaces 2 size [2.6, 0.897, 0.182] ['BH_WoodDark', 'BH_Stone']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh pot_small
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_pot_small
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Finished glTF 2.0 export in 0.0053446292877197266 s
+
+PREPARED kd_pot_small tris 72 surfaces 2 size [0.664, 0.55, 0.575] ['BH_Terracotta', 'BH_Dirt']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh pot_large
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_planter
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Extracting primitive: kd_planter-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.036725521087646484 s
+
+PREPARED kd_planter tris 68 surfaces 2 size [1.24, 0.44, 1.074] ['BH_Terracotta', 'BH_Dirt']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh crop_carrot
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_carrots
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Finished glTF 2.0 export in 0.00715327262878418 s
+
+PREPARED kd_carrots tris 148 surfaces 2 size [0.249, 0.45, 0.249] ['BH_Foliage', 'BH_Produce']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh crop_pumpkin
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_pumpkin
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Finished glTF 2.0 export in 0.008495569229125977 s
+
+PREPARED kd_pumpkin tris 120 surfaces 2 size [0.595, 0.45, 0.609] ['BH_Produce', 'BH_Foliage']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh crops_wheatStageB
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_wheat
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.004757881164550781 s
+
+PREPARED kd_wheat tris 360 surfaces 1 size [1.009, 1.0, 0.835] ['BH_Thatch']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh crops_bambooStageB
+04:31:56 | INFO: glTF import finished in 0.01s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_bamboo
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.006577968597412109 s
+
+PREPARED kd_bamboo tris 564 surfaces 1 size [1.223, 3.2, 1.107] ['BH_Foliage']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh tent_smallOpen
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_tent
+04:31:56 | INFO: Primitives created: 3
+04:31:56 | INFO: Extracting primitive: kd_tent-colonly
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.009650707244873047 s
+
+PREPARED kd_tent tris 224 surfaces 3 size [2.147, 2.2, 2.613] ['BH_ClothCream', 'BH_Cloth', 'BH_Wood']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh campfire_stones
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_fire_ring
+04:31:56 | INFO: Primitives created: 1
+04:31:56 | INFO: Finished glTF 2.0 export in 0.00564885139465332 s
+
+PREPARED kd_fire_ring tris 264 surfaces 1 size [1.19, 0.171, 1.134] ['BH_Stone']
+04:31:56 | INFO: Data are loaded, start creating Blender stuff
+04:31:56 | INFO: Blender create Mesh node Mesh canoe
+04:31:56 | INFO: glTF import finished in 0.00s
+04:31:56 | INFO: Starting glTF 2.0 export
+04:31:56 | INFO: Extracting primitive: kd_canoe
+04:31:56 | INFO: Primitives created: 2
+04:31:56 | INFO: Finished glTF 2.0 export in 0.008295774459838867 s
+
+PREPARED kd_canoe tris 200 surfaces 2 size [0.9, 0.548, 3.45] ['BH_WoodDark', 'BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bench
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bench
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_bench-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.0064656734466552734 s
+
+PREPARED kd_bench tris 170 surfaces 1 size [0.84, 0.987, 0.42] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh chair
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_chair
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_chair-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.006819963455200195 s
+
+PREPARED kd_chair tris 170 surfaces 1 size [0.45, 1.058, 0.45] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh chairRounded
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_chair_round
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_chair_round-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.005575418472290039 s
+
+PREPARED kd_chair_round tris 280 surfaces 1 size [0.45, 1.024, 0.45] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh stoolBarSquare
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_stool_square
+04:31:57 | INFO: Primitives created: 2
+04:31:57 | INFO: Finished glTF 2.0 export in 0.005457162857055664 s
+
+PREPARED kd_stool_square tris 142 surfaces 2 size [0.307, 0.81, 0.295] ['BH_Wood', 'BH_Leather']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh table
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_table
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_table-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.004883527755737305 s
+
+PREPARED kd_table tris 120 surfaces 1 size [1.893, 0.735, 1.007] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh tableRound
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_table_round
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_table_round-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.00476527214050293 s
+
+PREPARED kd_table_round tris 80 surfaces 1 size [1.559, 0.825, 1.8] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh tableCross
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_table_cross
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_table_cross-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.00651097297668457 s
+
+PREPARED kd_table_cross tris 178 surfaces 1 size [1.917, 0.782, 1.007] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh tableCloth
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_table_cloth
+04:31:57 | INFO: Primitives created: 2
+04:31:57 | INFO: Extracting primitive: kd_table_cloth-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.006773471832275391 s
+
+PREPARED kd_table_cloth tris 144 surfaces 2 size [1.893, 0.735, 1.007] ['BH_Wood', 'BH_ClothCream']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh sideTable
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_side_table
+04:31:57 | INFO: Primitives created: 2
+04:31:57 | INFO: Extracting primitive: kd_side_table-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.009516716003417969 s
+
+PREPARED kd_side_table tris 118 surfaces 2 size [1.203, 0.865, 0.495] ['BH_Wood', 'BH_WoodDark']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh sideTableDrawers
+04:31:57 | INFO: Blender create Mesh node Mesh drawer
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_drawers
+04:31:57 | INFO: Primitives created: 3
+04:31:57 | INFO: Extracting primitive: kd_drawers-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.009247303009033203 s
+
+PREPARED kd_drawers tris 238 surfaces 3 size [1.203, 0.865, 0.5] ['BH_Wood', 'BH_WoodDark', 'BH_Iron']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh desk
+04:31:57 | INFO: Blender create Mesh node Mesh drawer
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_desk
+04:31:57 | INFO: Primitives created: 2
+04:31:57 | INFO: Extracting primitive: kd_desk-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.00996088981628418 s
+
+PREPARED kd_desk tris 198 surfaces 2 size [1.653, 0.865, 0.883] ['BH_Wood', 'BH_Iron']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bookcaseOpen
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bookcase_open
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_bookcase_open-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.006598234176635742 s
+
+PREPARED kd_bookcase_open tris 320 surfaces 1 size [0.9, 1.98, 0.562] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bookcaseOpenLow
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bookcase_low
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_bookcase_low-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.005938053131103516 s
+
+PREPARED kd_bookcase_low tris 184 surfaces 1 size [0.9, 0.9, 0.562] ['BH_Wood']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bookcaseClosed
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bookcase_closed
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_bookcase_closed-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.005788564682006836 s
+
+PREPARED kd_bookcase_closed tris 372 surfaces 1 size [0.9, 1.912, 0.562] ['BH_WoodDark']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bookcaseClosedWide
+04:31:57 | INFO: glTF import finished in 0.00s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bookcase_wide
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Extracting primitive: kd_bookcase_wide-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:57 | INFO: Finished glTF 2.0 export in 0.0077800750732421875 s
+
+PREPARED kd_bookcase_wide tris 372 surfaces 1 size [1.8, 1.777, 0.562] ['BH_WoodDark']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh books
+04:31:57 | INFO: glTF import finished in 0.01s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_books
+04:31:57 | INFO: Primitives created: 4
+04:31:57 | INFO: Finished glTF 2.0 export in 0.01443171501159668 s
+
+PREPARED kd_books tris 62 surfaces 4 size [0.339, 0.234, 0.213] ['BH_Leather', 'BH_Paper', 'BH_ClothGreen', 'BH_Brass']
+04:31:57 | INFO: Data are loaded, start creating Blender stuff
+04:31:57 | INFO: Blender create Mesh node Mesh bedSingle
+04:31:57 | INFO: Blender create Mesh node Mesh cover
+04:31:57 | INFO: Blender create Mesh node Mesh pillowLeft
+04:31:57 | INFO: glTF import finished in 0.01s
+04:31:57 | INFO: Starting glTF 2.0 export
+04:31:57 | INFO: Extracting primitive: kd_bed_single
+04:31:57 | INFO: Primitives created: 4
+04:31:57 | INFO: Extracting primitive: kd_bed_single-colonly
+04:31:57 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.010280847549438477 s
+
+PREPARED kd_bed_single tris 214 surfaces 4 size [1.085, 0.712, 2.138] ['BH_ClothCream', 'BH_Wood', 'BH_Iron', 'BH_ClothRed']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh bedBunk
+04:31:58 | INFO: Blender create Mesh node Mesh cover
+04:31:58 | INFO: Blender create Mesh node Mesh pillowLeft
+04:31:58 | INFO: glTF import finished in 0.01s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_bed_bunk
+04:31:58 | INFO: Primitives created: 3
+04:31:58 | INFO: Extracting primitive: kd_bed_bunk-colonly
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.00947880744934082 s
+
+PREPARED kd_bed_bunk tris 580 surfaces 3 size [1.085, 1.615, 2.081] ['BH_Wood', 'BH_ClothCream', 'BH_Cloth']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh rugRectangle
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_rug_long
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Finished glTF 2.0 export in 0.005235433578491211 s
+
+PREPARED kd_rug_long tris 28 surfaces 2 size [3.14, 0.02, 1.84] ['BH_ClothRed', 'BH_ClothOchre']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh coatRackStanding
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_coat_rack
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Extracting primitive: kd_coat_rack-colonly
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.005428314208984375 s
+
+PREPARED kd_coat_rack tris 190 surfaces 1 size [0.614, 1.732, 0.614] ['BH_WoodDark']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh plantSmall1
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_plant_pot_a
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Finished glTF 2.0 export in 0.0072345733642578125 s
+
+PREPARED kd_plant_pot_a tris 102 surfaces 2 size [0.227, 0.336, 0.227] ['BH_Terracotta', 'BH_Foliage']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh plantSmall2
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_plant_pot_b
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Finished glTF 2.0 export in 0.006320476531982422 s
+
+PREPARED kd_plant_pot_b tris 158 surfaces 2 size [0.227, 0.336, 0.227] ['BH_Terracotta', 'BH_Foliage']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node Mesh pottedPlant
+04:31:58 | INFO: Blender create Mesh node Mesh plant
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_plant_tall
+04:31:58 | INFO: Primitives created: 3
+04:31:58 | INFO: Finished glTF 2.0 export in 0.009875297546386719 s
+
+PREPARED kd_plant_tall tris 60 surfaces 3 size [0.477, 1.472, 0.543] ['BH_Terracotta', 'BH_Dirt', 'BH_Foliage']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node barrel
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_barrel
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Extracting primitive: kd_barrel-colonly
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.0064046382904052734 s
+
+PREPARED kd_barrel tris 148 surfaces 2 size [1.033, 0.95, 1.033] ['BH_Wood', 'BH_Iron']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node crate
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_crate
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Extracting primitive: kd_crate-colonly
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.007781505584716797 s
+
+PREPARED kd_crate tris 76 surfaces 2 size [0.97, 0.693, 1.178] ['BH_WoodDark', 'BH_Wood']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node crate-bottles
+04:31:58 | INFO: glTF import finished in 0.01s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_crate_bottles
+04:31:58 | INFO: Primitives created: 4
+04:31:58 | INFO: Extracting primitive: kd_crate_bottles-colonly
+04:31:58 | INFO: Primitives created: 1
+04:31:58 | INFO: Finished glTF 2.0 export in 0.013428211212158203 s
+
+PREPARED kd_crate_bottles tris 572 surfaces 4 size [0.97, 0.951, 1.178] ['BH_Wood', 'BH_WoodDark', 'BH_Thatch', 'BH_Bottle']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node bottle
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_bottle
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Finished glTF 2.0 export in 0.0057220458984375 s
+
+PREPARED kd_bottle tris 124 surfaces 2 size [0.123, 0.3, 0.123] ['BH_Bottle', 'BH_Rope']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node bottle-large
+04:31:58 | INFO: glTF import finished in 0.00s
+04:31:58 | INFO: Starting glTF 2.0 export
+04:31:58 | INFO: Extracting primitive: kd_bottle_large
+04:31:58 | INFO: Primitives created: 2
+04:31:58 | INFO: Finished glTF 2.0 export in 0.007489681243896484 s
+
+PREPARED kd_bottle_large tris 108 surfaces 2 size [0.235, 0.45, 0.235] ['BH_Terracotta', 'BH_Rope']
+04:31:58 | INFO: Data are loaded, start creating Blender stuff
+04:31:58 | INFO: Blender create Mesh node chest
+04:31:58 | INFO: Blender create Mesh node lid
+04:31:58 | INFO: glTF import finished in 0.01s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_chest
+04:31:59 | INFO: Primitives created: 2
+04:31:59 | INFO: Extracting primitive: kd_chest-colonly
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.008737802505493164 s
+
+PREPARED kd_chest tris 232 surfaces 2 size [0.662, 0.7, 0.682] ['BH_Iron', 'BH_Wood']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node tool-shovel
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_shovel
+04:31:59 | INFO: Primitives created: 2
+04:31:59 | INFO: Finished glTF 2.0 export in 0.006339311599731445 s
+
+PREPARED kd_shovel tris 168 surfaces 2 size [0.364, 1.3, 0.157] ['BH_Iron', 'BH_Wood']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node tool-paddle
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_paddle
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.0038013458251953125 s
+
+PREPARED kd_paddle tris 60 surfaces 1 size [0.448, 1.6, 0.141] ['BH_Wood']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node boat-row-small
+04:31:59 | INFO: Blender create Mesh node paddles
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_rowboat
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.004236459732055664 s
+
+PREPARED kd_rowboat tris 168 surfaces 1 size [3.573, 1.102, 3.084] ['BH_Wood']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node ship-wreck
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node grass
+04:31:59 | INFO: Blender create Mesh node Group
+04:31:59 | INFO: Blender create Mesh node sail-a
+04:31:59 | INFO: Blender create Mesh node Group
+04:31:59 | INFO: Blender create Mesh node Group
+04:31:59 | INFO: Blender create Mesh node Group
+04:31:59 | INFO: Blender create Mesh node Group
+04:31:59 | INFO: glTF import finished in 0.02s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_wreck
+04:31:59 | INFO: Primitives created: 4
+04:31:59 | INFO: Finished glTF 2.0 export in 0.014903545379638672 s
+
+PREPARED kd_wreck tris 2282 surfaces 4 size [5.52, 11.458, 12.19] ['BH_WoodDark', 'BH_Iron', 'BH_Wood', 'BH_Kelp']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node rocks-a
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_a
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_a-colonly
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.0063648223876953125 s
+
+PREPARED kd_shore_rocks_a tris 264 surfaces 1 size [6.135, 3.478, 5.264] ['BH_Rock']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node rocks-b
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_b
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_b-colonly
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.006018638610839844 s
+
+PREPARED kd_shore_rocks_b tris 300 surfaces 1 size [5.324, 4.385, 5.645] ['BH_Rock']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node rocks-c
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_c
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Extracting primitive: kd_shore_rocks_c-colonly
+04:31:59 | INFO: Primitives created: 1
+04:31:59 | INFO: Finished glTF 2.0 export in 0.0063970088958740234 s
+
+PREPARED kd_shore_rocks_c tris 232 surfaces 1 size [4.371, 2.76, 4.403] ['BH_Rock']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node platform-planks
+04:31:59 | INFO: glTF import finished in 0.00s
+04:31:59 | INFO: Starting glTF 2.0 export
+04:31:59 | INFO: Extracting primitive: kd_planks
+04:31:59 | INFO: Primitives created: 2
+04:31:59 | INFO: Finished glTF 2.0 export in 0.008199214935302734 s
+
+PREPARED kd_planks tris 48 surfaces 2 size [1.894, 0.428, 2.702] ['BH_Wood', 'BH_WoodDark']
+04:31:59 | INFO: Data are loaded, start creating Blender stuff
+04:31:59 | INFO: Blender create Mesh node structure-platform-dock-small
+04:31:59 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_dock_small
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.00625157356262207 s
+
+PREPARED kd_dock_small tris 312 surfaces 1 size [1.9, 1.312, 2.512] ['BH_WoodDark']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node structure-roof
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_canopy
+04:32:00 | INFO: Primitives created: 2
+04:32:00 | INFO: Finished glTF 2.0 export in 0.0075016021728515625 s
+
+PREPARED kd_canopy tris 348 surfaces 2 size [3.085, 3.4, 3.234] ['BH_Wood', 'BH_ClothCream']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node altar-stone
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_altar_stone
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Extracting primitive: kd_altar_stone-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.006025791168212891 s
+
+PREPARED kd_altar_stone tris 166 surfaces 1 size [2.079, 0.975, 1.306] ['BH_Stone']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node altar-wood
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_altar_wood
+04:32:00 | INFO: Primitives created: 2
+04:32:00 | INFO: Extracting primitive: kd_altar_wood-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.0068552494049072266 s
+
+PREPARED kd_altar_wood tris 306 surfaces 2 size [2.09, 1.075, 1.317] ['BH_Wood', 'BH_Iron']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node coffin-old
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_coffin_old
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Extracting primitive: kd_coffin_old-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.0068149566650390625 s
+
+PREPARED kd_coffin_old tris 216 surfaces 1 size [1.32, 0.46, 1.927] ['BH_WoodDark']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node coffin
+04:32:00 | INFO: Blender create Mesh node lid
+04:32:00 | INFO: glTF import finished in 0.01s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_coffin
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Extracting primitive: kd_coffin-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.006566524505615234 s
+
+PREPARED kd_coffin tris 256 surfaces 1 size [1.32, 0.747, 1.927] ['BH_WoodDark']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node candle-multiple
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_candles
+04:32:00 | INFO: Primitives created: 2
+04:32:00 | INFO: Finished glTF 2.0 export in 0.006279945373535156 s
+
+PREPARED kd_candles tris 162 surfaces 2 size [0.408, 0.32, 0.427] ['BH_Candle', 'BH_Wood']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node lantern-candle
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_lantern_candle
+04:32:00 | INFO: Primitives created: 3
+04:32:00 | INFO: Finished glTF 2.0 export in 0.008984804153442383 s
+
+PREPARED kd_lantern_candle tris 224 surfaces 3 size [0.384, 0.62, 0.384] ['BH_Iron', 'BH_Candle', 'BH_Wood']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node fire-basket
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_fire_basket
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Extracting primitive: kd_fire_basket-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.0054759979248046875 s
+
+PREPARED kd_fire_basket tris 196 surfaces 1 size [1.0, 0.403, 1.0] ['BH_Iron']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node urn-round
+04:32:00 | INFO: Blender create Mesh node lid
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:00 | INFO: Starting glTF 2.0 export
+04:32:00 | INFO: Extracting primitive: kd_urn_round
+04:32:00 | INFO: Primitives created: 2
+04:32:00 | INFO: Extracting primitive: kd_urn_round-colonly
+04:32:00 | INFO: Primitives created: 1
+04:32:00 | INFO: Finished glTF 2.0 export in 0.010930776596069336 s
+
+PREPARED kd_urn_round tris 230 surfaces 2 size [0.529, 0.768, 0.529] ['BH_StoneDark', 'BH_Terracotta']
+04:32:00 | INFO: Data are loaded, start creating Blender stuff
+04:32:00 | INFO: Blender create Mesh node urn-square
+04:32:00 | INFO: Blender create Mesh node lid
+04:32:00 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_urn_square
+04:32:01 | INFO: Primitives created: 2
+04:32:01 | INFO: Extracting primitive: kd_urn_square-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.010049104690551758 s
+
+PREPARED kd_urn_square tris 218 surfaces 2 size [0.529, 0.768, 0.529] ['BH_Stone', 'BH_StoneDark']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node detail-chalice
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_chalice
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.005232810974121094 s
+
+PREPARED kd_chalice tris 136 surfaces 1 size [0.164, 0.249, 0.164] ['BH_Brass']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node detail-bowl
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_offering_bowl
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.004407405853271484 s
+
+PREPARED kd_offering_bowl tris 176 surfaces 1 size [0.281, 0.182, 0.281] ['BH_Brass']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node debris
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_debris_stone
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.004681825637817383 s
+
+PREPARED kd_debris_stone tris 240 surfaces 1 size [1.072, 0.32, 1.095] ['BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node debris-wood
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_debris_wood
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.004060983657836914 s
+
+PREPARED kd_debris_wood tris 108 surfaces 1 size [1.009, 0.22, 1.109] ['BH_WoodDark']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node gravestone-broken
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_grave_broken
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Extracting primitive: kd_grave_broken-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.006875276565551758 s
+
+PREPARED kd_grave_broken tris 134 surfaces 1 size [1.018, 0.682, 0.783] ['BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node column-large
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_column
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Extracting primitive: kd_column-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.006354570388793945 s
+
+PREPARED kd_column tris 394 surfaces 1 size [1.014, 2.938, 1.014] ['BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node pillar-obelisk
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_obelisk
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Extracting primitive: kd_obelisk-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.0067903995513916016 s
+
+PREPARED kd_obelisk tris 76 surfaces 1 size [0.91, 2.631, 0.91] ['BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node gate-metal-bars
+04:32:01 | INFO: Blender create Mesh node gate
+04:32:01 | INFO: glTF import finished in 0.01s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_bars_gate
+04:32:01 | INFO: Primitives created: 2
+04:32:01 | INFO: Extracting primitive: kd_bars_gate-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.00801992416381836 s
+
+PREPARED kd_bars_gate tris 720 surfaces 2 size [3.96, 3.96, 1.26] ['BH_Iron', 'BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node template-floor-layer-raised
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_dais
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Extracting primitive: kd_dais-colonly
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.005823850631713867 s
+
+PREPARED kd_dais tris 312 surfaces 1 size [3.018, 2.25, 3.0] ['BH_Stone']
+04:32:01 | INFO: Data are loaded, start creating Blender stuff
+04:32:01 | INFO: Blender create Mesh node template-floor-detail-a
+04:32:01 | INFO: glTF import finished in 0.00s
+04:32:01 | INFO: Starting glTF 2.0 export
+04:32:01 | INFO: Extracting primitive: kd_floor_inlay
+04:32:01 | INFO: Primitives created: 1
+04:32:01 | INFO: Finished glTF 2.0 export in 0.004034519195556641 s
+
+PREPARED kd_floor_inlay tris 204 surfaces 1 size [3.0, 0.075, 3.0] ['BH_Stone']
+DONE accepted 104 deferred 10
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

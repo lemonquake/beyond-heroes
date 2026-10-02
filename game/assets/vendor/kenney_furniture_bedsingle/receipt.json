@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:12.757Z",
+  "destination": {
+    "assetId": "kenney_furniture_bedsingle",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4583c1f9a5219068650fbb2e6a3be10afd2adc425cbb53187245ea2f5bcbf8b0",
+  "packageId": "pkg_319616bc8c0ea5dc7fb66f7a",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 18636,
+    "fileName": "bedSingle.glb",
+    "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1"
+  }
+}

@@ -10,6 +10,8 @@ import time
 import urllib.request
 from pathlib import Path
 
+from server.service import PROTOCOL
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "server" / "data"
 GODOT = Path(r"A:\Installer\Godot_v4.7.2-stable_win64\Godot_v4.7.2-stable_win64.exe")
@@ -41,11 +43,24 @@ def health():
         return json.load(response)
 
 
-def main():
+def require_online(service):
+    """A live launcher alone does not mean current clients can use the server."""
+    if service.get("protocol") != PROTOCOL:
+        raise SystemExit(
+            "The running server uses protocol %s; this game needs %s. "
+            'Double-click "Stop Official Server.cmd", then "Start Official Server.cmd" to load the updated server.'
+            % (service.get("protocol", "unknown"), PROTOCOL))
+    if not service.get("game_online"):
+        raise SystemExit(
+            "The account service is running, but the game coordinator is offline or still starting. "
+            "Try again shortly; if it stays offline, check server/data/logs.")
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=["start", "stop", "status"])
     parser.add_argument("--godot", type=Path, default=GODOT)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if os.name != "nt":
         raise SystemExit("These desktop controls are for Windows.")
     if args.action == "status":
@@ -63,7 +78,12 @@ def main():
             time.sleep(0.25)
         raise SystemExit("The server is still stopping. Check server/data/logs before starting again.")
     if running():
-        print("Official server is already running.")
+        try:
+            service = health()
+        except (OSError, ValueError) as error:
+            raise SystemExit("The launcher is running, but the account service did not answer. Check server/data/logs.\n%s" % error)
+        require_online(service)
+        print("Official server is already running and online (protocol %s)." % PROTOCOL)
         return
     if not args.godot.is_file() or not (DATA / "server.json").is_file():
         raise SystemExit("Server configuration or Godot is missing.")
@@ -84,7 +104,9 @@ def main():
         if process.poll() is not None:
             raise SystemExit("The launcher stopped. Check server/data/logs.")
         try:
-            if health().get("game_online"):
+            service = health()
+            if service.get("game_online"):
+                require_online(service)
                 print("Official Beyond Heroes server is online; maximum 12 players.")
                 return
         except (OSError, ValueError):

@@ -257,6 +257,18 @@ func test_environment_kit_is_valid() -> void:
 			continue
 		n += 1
 		var inst: Node = (load("res://assets/environment/" + f) as PackedScene).instantiate()
+		if f.begins_with("ph_"):
+			# bh-033: downloaded CC0 props (Poly Haven) keep their own scanned PBR materials instead of the kit's
+			# contract set; they must still be textured and stay inside the prop budget (docs/ASSET_SOURCES.md)
+			var tris := 0
+			for mi in inst.find_children("*", "MeshInstance3D", true, false):
+				for i in mi.mesh.get_surface_count():
+					var m := mi.mesh.surface_get_material(i) as BaseMaterial3D
+					ok(m != null and m.albedo_texture != null, "%s surface %d is textured" % [f, i])
+					tris += mi.mesh.surface_get_array_len(i) / 3 if mi.mesh.surface_get_format(i) & Mesh.ARRAY_FORMAT_INDEX == 0 else mi.mesh.surface_get_array_index_len(i) / 3
+			ok(tris <= 10500, "%s stays within the prop budget (%d triangles)" % [f, tris])
+			inst.free()
+			continue
 		var bad := []
 		for mi in inst.find_children("*", "MeshInstance3D", true, false):
 			for i in mi.mesh.get_surface_count():

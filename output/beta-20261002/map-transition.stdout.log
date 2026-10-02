@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+LOAD sanctuary 359 ms enemies=0
+LOAD ruined_forest 1743 ms enemies=54
+LOAD int_tavern 228 ms enemies=0
+LOAD sanctuary 495 ms enemies=0
+LOAD ruined_forest 1330 ms enemies=54
+LOAD int_tavern 55 ms enemies=0
+LOAD sanctuary 630 ms enemies=0
+LOAD ruined_forest 1536 ms enemies=54
+LOAD int_tavern 54 ms enemies=0
+LOAD sanctuary 432 ms enemies=0
+LOAD ruined_forest 1211 ms enemies=54
+LOAD int_tavern 55 ms enemies=0
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.

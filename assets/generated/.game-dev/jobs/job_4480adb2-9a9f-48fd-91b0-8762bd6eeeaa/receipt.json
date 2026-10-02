@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_oak\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_tree_oak",
+      "category": "foliage",
+      "description": "Broad oak with a rounded crown. Intended use: Malasugue outskirts and Olivar lakeside shade",
+      "displayName": "kenney_nature_tree_oak",
+      "files": [
+        {
+          "bytes": 14644,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3"
+        },
+        {
+          "bytes": 1599,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6c93e734fd2fec373f81d094716db75fca05ab183416adaebb33cf89e32b12e8"
+        },
+        {
+          "bytes": 786,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "b931b8194b899aa1b85c747adf624db6cc5305ba5c3b2af72c3b86b818dc92ae"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "6bf0b1edc5fcd634f2960c536bfe17c19a9a468c3c4f2b95cbf2f652405bb79a"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_cd409e65263ef463625a2f30",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:00:39.277Z"
+}

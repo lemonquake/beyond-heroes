@@ -27,7 +27,7 @@ const DEFS := {
 			[&"evasion", StatModifier.Op.MORE, -0.4]]},
 	&"cursed": {"name": "Cursed", "debuff": true, "duration": 6.0, "icon": "cursed", "desc": "Takes 15% more damage. Light damage purifies it for a burst."},
 	&"purged": {"name": "Purged", "debuff": true, "duration": 5.0, "icon": "purged", "desc": "Regeneration and healing halved, protective wards suppressed. Dark damage rends it (+30%)."},
-	&"staggered": {"name": "Staggered", "debuff": true, "duration": 1.1, "icon": "staggered", "desc": "Poise broken; interrupted and unable to act."},
+	&"staggered": {"name": "Staggered", "debuff": true, "duration": 0.75, "icon": "staggered", "desc": "Poise broken; unable to act for at most 0.75 s, followed by 0.6 s protection from another stagger."},
 	&"stagger_window": {"name": "Exposed", "debuff": true, "duration": 4.0, "icon": "staggered", "desc": "Takes 30% more damage while recovering from a stagger."},
 	&"stunned": {"name": "Stunned", "debuff": true, "duration": 1.2, "icon": "stunned", "desc": "Cannot act."},
 	&"stun_immune": {"name": "", "debuff": false, "duration": 3.0, "icon": "", "desc": "", "hidden": true},

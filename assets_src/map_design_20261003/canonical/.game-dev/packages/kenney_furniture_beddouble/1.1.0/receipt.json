@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:13.696Z",
+  "destination": {
+    "assetId": "kenney_furniture_beddouble",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "162158aa0cba88412d015c88970b0503285ea5665261d6921d272686781790f0",
+  "packageId": "pkg_534cb8ed6dbb22ebb3961a3c",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 23368,
+    "fileName": "bedDouble.glb",
+    "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c"
+  }
+}

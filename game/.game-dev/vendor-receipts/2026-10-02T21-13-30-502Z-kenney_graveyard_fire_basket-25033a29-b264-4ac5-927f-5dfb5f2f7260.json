@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_5d87db31765e11e633406e48",
+  "assetId": "kenney_graveyard_fire_basket",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_fire_basket",
+  "modelSha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916",
+  "manifestSha256": "987df3408d0604da01391c731b98218381971149afafdaeb630aefd71b94f2f6",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:30.502Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_fire_basket\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

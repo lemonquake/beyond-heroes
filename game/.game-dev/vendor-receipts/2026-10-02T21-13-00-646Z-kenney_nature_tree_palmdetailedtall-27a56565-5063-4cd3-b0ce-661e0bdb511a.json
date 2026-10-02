@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_aba9a4793524330752d50b20",
+  "assetId": "kenney_nature_tree_palmdetailedtall",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_tree_palmdetailedtall",
+  "modelSha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683",
+  "manifestSha256": "c5f4a5cf005cedfd94e01585aae436c0e0c54c7086a5caecc27b8876c7f063cc",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:00.646Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_palmdetailedtall\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

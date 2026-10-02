@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_caa38c4ef9a6cf47ac518a4f",
+  "assetId": "kenney_graveyard_detail_chalice",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_detail_chalice",
+  "modelSha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8",
+  "manifestSha256": "1259b86bf886e844864e19a3e493ac35b8a793cc99c6d12b7a153e9e8921e401",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:31.635Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_detail_chalice\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

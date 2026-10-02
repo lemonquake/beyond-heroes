@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_319616bc8c0ea5dc7fb66f7a",
+  "assetId": "kenney_furniture_bedsingle",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_bedsingle",
+  "modelSha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+  "manifestSha256": "4583c1f9a5219068650fbb2e6a3be10afd2adc425cbb53187245ea2f5bcbf8b0",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:19.523Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bedsingle\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

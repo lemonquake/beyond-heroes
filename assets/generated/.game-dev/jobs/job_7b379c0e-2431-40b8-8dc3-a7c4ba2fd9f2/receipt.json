@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_largeb\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_rock_largeb",
+      "category": "environment_prop",
+      "description": "Second large boulder silhouette. Intended use: Asymmetric rock clusters beside broad walking spaces",
+      "displayName": "kenney_nature_rock_largeb",
+      "files": [
+        {
+          "bytes": 8560,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b"
+        },
+        {
+          "bytes": 1634,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6f3e7acada8e7c55f5a6b0941d5fc0d28297d3333ee955cc1dc1ddb51bf15b82"
+        },
+        {
+          "bytes": 828,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "f33233e71df8a089f67360b5254b542f5ad19e0b485769301671989731ba0852"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "64708b2d1656cd84e7ffcec1b03decc1dd9b7f8eb123450043b74b475d48b525"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_3a50be0d89e4a3b8ec503d7d",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:11:49.563Z"
+}

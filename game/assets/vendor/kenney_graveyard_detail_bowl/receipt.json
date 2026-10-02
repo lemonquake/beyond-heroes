@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:48.181Z",
+  "destination": {
+    "assetId": "kenney_graveyard_detail_bowl",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c533ccf86cb9fa9ea8d073903e5dc18cd8a8584c54e27addbfc88ddf310576ce",
+  "packageId": "pkg_e2f1b5a2156621eab4d6a8b9",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 28488,
+    "fileName": "kenney_graveyard_detail_bowl.glb",
+    "sha256": "63e0bf23875f080a69cbbaf7b748c6980400887c1f2624b8229e008337cd8eb1"
+  }
+}

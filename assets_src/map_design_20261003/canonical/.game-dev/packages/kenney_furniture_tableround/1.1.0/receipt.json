@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:02.893Z",
+  "destination": {
+    "assetId": "kenney_furniture_tableround",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "9980bf2358306c0238e0d8061d0581822c523f87e4a5ee3fa5b7e318f2fa4a2a",
+  "packageId": "pkg_f8584ecb16718669f1a7df05",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 6444,
+    "fileName": "tableRound.glb",
+    "sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b"
+  }
+}

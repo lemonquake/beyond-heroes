@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_tree_palmdetailedtall",
+  "category": "foliage",
+  "description": "Detailed tall palm. Intended use: Sparse focal trees beside the harbour approach",
+  "displayName": "kenney_nature_tree_palmdetailedtall",
+  "files": [
+    {
+      "bytes": 28204,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683"
+    },
+    {
+      "bytes": 1609,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "1d626015c01236e1e9d302fcad1595214d9e6fb6a74486e2dee20662107b82ae"
+    },
+    {
+      "bytes": 849,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "4e1c57e5c4b36a540b3976b2b3f880b3b972cde43ec501b2959a6141abe39d88"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "054da374173668a4e5883223ed9ee54561b2295ae7db5be82522784bb92ee2e0"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_aba9a4793524330752d50b20",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

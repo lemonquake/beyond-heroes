@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+SHOT 01_main_menu (1920, 1080)
+SHOT 02_credits (1920, 1080)
+SHOT 03_settings_video (1920, 1080)
+SHOT 04_settings_controls (1920, 1080)
+SHOT 05_hero_select_knight (1920, 1080)
+SHOT 06_hero_select_mage (1920, 1080)
+ERROR: Lambda capture at index 0 was freed. Passed "null" instead.
+   at: call (modules/gdscript/gdscript_lambda_callable.cpp:110)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://src/ui/menu/title_intro.gd:475)
+SHOT 06b_hero_select_ranger (1920, 1080)
+SHOT 06c_hero_select_shadowblade (1920, 1080)
+CAPTURE DONE
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+exit=0

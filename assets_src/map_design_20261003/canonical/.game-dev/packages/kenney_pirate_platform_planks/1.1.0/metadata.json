@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_platform_planks",
+  "category": "environment_prop",
+  "description": "Plank deck piece. Intended use: Dock repair vignette, visual only unless navigation updated",
+  "displayName": "kenney_pirate_platform_planks",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.9469393491744995,
+        0.42799997329711914,
+        1.35118567943573
+      ],
+      "min": [
+        -0.9469393491744995,
+        0,
+        -1.3511857986450195
+      ],
+      "sizeMeters": [
+        1.893878698348999,
+        0.42799997329711914,
+        2.7023714780807495
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 16644,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 48,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 96,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

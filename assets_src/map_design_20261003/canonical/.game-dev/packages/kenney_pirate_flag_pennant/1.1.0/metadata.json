@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_flag_pennant",
+  "category": "environment_prop",
+  "description": "Plain pennant flag. Intended use: Town accents with canon colours and no pirate markings",
+  "displayName": "kenney_pirate_flag_pennant",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        1.5621001720428467,
+        2.0968432426452637,
+        0.19945411384105682
+      ],
+      "min": [
+        -0.19945412874221802,
+        0,
+        -0.19945409893989563
+      ],
+      "sizeMeters": [
+        1.7615543007850647,
+        2.0968432426452637,
+        0.39890821278095245
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 23752,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 118,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 238,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

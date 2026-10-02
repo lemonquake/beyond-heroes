@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:14.624Z",
+  "destination": {
+    "assetId": "kenney_furniture_bedbunk",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c2e8f5b3cebe113de6aced43948e68276aef7184771d875ce46ee4ec00312e23",
+  "packageId": "pkg_24614f2c0fc75fb7de19ec8c",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 40784,
+    "fileName": "bedBunk.glb",
+    "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e"
+  }
+}

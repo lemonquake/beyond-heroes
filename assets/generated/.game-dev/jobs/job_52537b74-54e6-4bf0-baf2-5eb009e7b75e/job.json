@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_52537b74-54e6-4bf0-baf2-5eb009e7b75e",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_fence_planks\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:57.357Z",
+  "updatedAt": "2026-10-02T21:11:57.413Z",
+  "startedAt": "2026-10-02T21:11:57.363Z",
+  "completedAt": "2026-10-02T21:11:57.413Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-b87d64f3-de08-4187-9899-63a251707056' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_fence_planks\r'",
+    "retryable": false
+  }
+}

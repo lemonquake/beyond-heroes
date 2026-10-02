@@ -1,0 +1,5 @@
+# Exact versions the server tools were built and tested with (Windows, Python 3.12). Used by deploy/install.sh and update.sh.
+# Only `python -m server.setup_server` needs these: the account service and runner use the standard library alone.
+cryptography==47.0.0
+cffi==2.0.0
+pycparser==3.0

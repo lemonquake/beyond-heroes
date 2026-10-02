@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_coffin\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_coffin",
+      "category": "environment_prop",
+      "description": "Intact coffin. Intended use: Burial room rows, retaining broad central combat space",
+      "displayName": "kenney_graveyard_coffin",
+      "files": [
+        {
+          "bytes": 24696,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "e372964ef6d9d623f6ea5dacd9b4d68eda417706b4246a9b62a38106adf2defd"
+        },
+        {
+          "bytes": 1712,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "4ccdb7ad0afeaa9f4eded4995a2f72d1ccbe2636a3b99520f6cb86efc1f0322f"
+        },
+        {
+          "bytes": 800,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "bfbfaa4905f14126c4dd279430a3a33e883cd03545bc1d6095e0397947846c8f"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "38eac725b9fe3b63f9d123100c943746762d7fa68406cefd59104a67733fb363"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_105512d9a6693cdc721b3710",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:38.842Z"
+}

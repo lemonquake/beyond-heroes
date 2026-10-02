@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_pirate_barrel",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_barrel.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0",
+ "source_sha256": "fa80c76d56fb301c377b01a5864360dc71804e098081a8b10afbd2e3ba188fd2",
+ "derived_sha256": "d497ce3a40ec9eee2b30aac6f7eac23431ede5cc009bed81d7bd4d613ea82c59",
+ "scale": 0.7729,
+ "scale_rule": [
+  "h",
+  0.95
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_Iron"
+ ],
+ "part_faces": {
+  "BH_Wood": 92,
+  "BH_Iron": 56
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "grey": "BH_Iron"
+ },
+ "triangles": 148,
+ "surfaces": 2,
+ "source_triangles": 148,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.033,
+  0.95,
+  1.033
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

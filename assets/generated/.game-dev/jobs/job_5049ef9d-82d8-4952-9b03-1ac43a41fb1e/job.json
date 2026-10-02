@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5049ef9d-82d8-4952-9b03-1ac43a41fb1e",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_tent_smallopen\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:03.271Z",
+  "updatedAt": "2026-10-02T21:12:03.325Z",
+  "startedAt": "2026-10-02T21:12:03.276Z",
+  "completedAt": "2026-10-02T21:12:03.325Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-6b1ad01f-d727-4b4b-8f5a-02a75051137c' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_tent_smallopen\r'",
+    "retryable": false
+  }
+}

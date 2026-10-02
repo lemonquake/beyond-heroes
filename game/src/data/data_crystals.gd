@@ -10,6 +10,7 @@ const I := StatModifier.Op.INC
 
 const GRADES: Array[StringName] = [&"fragment", &"shard", &"crystalline", &"orbital"]
 const GRADE_NAMES := ["Fragment", "Shard", "Crystalline", "Orbital"]
+const UPGRADE_COUNT := 4
 ## Colour tier of each grade in names and loot beams (Aetherift one tier higher).
 const GRADE_RARITY := [BH.Rarity.ADVANCED, BH.Rarity.ELITE, BH.Rarity.MYTHICAL, BH.Rarity.LEGENDARY]
 ## Shop price of one crystal; Aetherift costs AETHER_PRICE_MULT times as much.
@@ -121,6 +122,19 @@ static func grade_of(base_id: StringName) -> int:
 static func name_of(family: StringName, grade: int) -> String:
 	return "%s %s" % [FAMILIES[family].name, GRADE_NAMES[clampi(grade, 0, 3)]]
 
+## Four matching loose crystals become one of the next grade; Orbital has no upgrade.
+static func upgrade_recipes() -> Array:
+	var out := []
+	for family in ORDER:
+		for grade in GRADES.size() - 1:
+			var input := id_of(family, grade)
+			var next := id_of(family, grade + 1)
+			out.append({"id": StringName("upgrade_" + String(input)), "name": "Upgrade to %s" % name_of(family, grade + 1),
+				"stations": [&"forge", &"alchemy", &"workbench"], "group": "Gem Upgrades", "level": 1, "gold": 0, "known": true,
+				"gem_upgrade": true, "verb": "Upgrade", "inputs": [[input, UPGRADE_COUNT]], "out": {"base": next, "count": 1},
+				"text": "Combine 4 %s gems into 1 %s. Gems must match in type and tier. Orbital is the maximum tier. Locked and favorite gems are kept." % [name_of(family, grade), name_of(family, grade + 1)]})
+	return out
+
 static func weapon_only(family: StringName) -> bool:
 	return bool(FAMILIES.get(family, {}).get("weapon_only", false))
 
@@ -211,6 +225,7 @@ static func items(out: Array) -> void:
 			b.value = price(b.id)
 			b.fixed_rarity = mini(GRADE_RARITY[g] + (1 if f == &"aetherift" or is_celestial(f) else 0), BH.Rarity.AETHER)
 			b.flavor = "%s Set it into a socket at a Socket Specialist." % fd.blurb
+			b.flavor += (" Combine 4 matching gems at a Forge, Alchemy Table or Workbench to upgrade to %s." % name_of(f, g + 1)) if g < GRADES.size() - 1 else " Orbital is the maximum gem tier."
 			b.lore = fd.blurb
 			out.append(b)
 

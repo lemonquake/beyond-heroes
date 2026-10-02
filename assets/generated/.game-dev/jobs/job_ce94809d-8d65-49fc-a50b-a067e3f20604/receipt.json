@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_plant_bushsmall\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_plant_bushsmall",
+      "category": "foliage",
+      "description": "Small shrub. Intended use: Low edging beside stairs and houses",
+      "displayName": "kenney_nature_plant_bushsmall",
+      "files": [
+        {
+          "bytes": 3212,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "a9620a7d1fb165ae68d323676f80dbb2a9e3aafb21110d18d18d90b07026b91d"
+        },
+        {
+          "bytes": 1579,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "4600ba93f91974b3e8eb95de466e7892a0cf4a6a7a89741f59cbf3ef4d5ef06f"
+        },
+        {
+          "bytes": 836,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "7eb35971d10ede3716cde91c5d412825907124751d2c3f037123f8f1f1e514b5"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "aa591f0071120de90b18708a2fb11c6b98aa7b55948233fb61e59d3654cb8f63"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_ac64975883efec5942345202",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:28.297Z"
+}

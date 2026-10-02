@@ -82,6 +82,7 @@ func compose() -> void:
 	_encounters()
 	_atmosphere()
 	_greenery()
+	_map_design()
 	spawn(&"agdao_road", Vector3(DataZarael.CW_WEST.x, 0, DataZarael.CW_WEST.z), 90.0, true)
 	spawn(&"start", Vector3(DataZarael.CW_WEST.x, 0, DataZarael.CW_WEST.z), 90.0, true)
 	spawn(&"barrens_road", Vector3(DataZarael.CW_EAST.x, 0, DataZarael.CW_EAST.z), -90.0, true)
@@ -662,3 +663,30 @@ func _greenery() -> void:
 			continue
 		decor("grass_clump", Vector3(x, 0, z), rng.randf() * 360.0, rng.randf_range(0.9, 1.5))
 		placed += 1
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the jungle's groups and transitions — moss and rock where the ground breaks, fallen
+# trunks under the canopy, the aqueduct's fallen stones beside the road it once crossed, an offering at the shrine's
+# foot and a threshold of memorial urns before the Jade Sepulchre. The shrine and relay pylons stay clear of the trail
+# view; nothing glows (all relay light stays the island's white).
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	return not _blocked(x, z, r + 3.0, r + 2.0) and not _in_field(x, z, r)
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	var sh := Vector3(SHRINE.x, 0, SHRINE.y)
+	place_near("offering", sh + Vector3(6.0, 0, 8.0), sh, 9.0, 15.0, 0.0)
+	var jade: Vector2 = DataDungeons.get_def(&"jade_sepulchre").surface.pos
+	place_near("jade_threshold", Vector3(jade.x - 2.0, 0, jade.y + 7.0), Vector3(jade.x, 0, jade.y), 8.0, 15.0, 200.0)
+	# the aqueduct's fallen spans: stones and a toppled column on the verges either side of the gap the road uses
+	for c in [[Vector3(AQ_X - 5.5, 0, 9.0), 0.0], [Vector3(AQ_X + 5.8, 0, 19.0), 120.0], [Vector3(AQ_X - 5.0, 0, -20.0), 60.0]]:
+		kit("kd_debris_stone", c[0], c[1], 1.5, deco, true)
+	var col := kit("kd_column", Vector3(AQ_X + 6.5, 0.5, 12.0), 15.0, 0.9, deco, true)
+	col.rotation = Vector3(0, deg_to_rad(15.0), deg_to_rad(84.0))
+	for q in [Vector3(-40.0, 0, 30.0), Vector3(40.0, 0, -6.0), Vector3(-20.0, 0, -60.0)]:
+		place_near("fallen_tree", q, q, 0.0, 12.0, rng.randf() * 360.0)
+	for q in [Vector3(-70.0, 0, 34.0), Vector3(10.0, 0, 24.0), Vector3(60.0, 0, 30.0), Vector3(-30.0, 0, -30.0)]:
+		place_near("rock_cluster_m", q, q, 0.0, 12.0, rng.randf() * 360.0)
+	for q in [Vector3(-60.0, 0, 10.0), Vector3(30.0, 0, 10.0)]:
+		place_near("palm_group", q, q, 0.0, 14.0, rng.randf() * 360.0)

@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_e1a7e84d-7805-4560-8268-7545100f35b3",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_tree_palmshort"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:00.205Z",
+  "updatedAt": "2026-10-02T21:13:00.275Z",
+  "startedAt": "2026-10-02T21:13:00.213Z",
+  "completedAt": "2026-10-02T21:13:00.275Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_e1a7e84d-7805-4560-8268-7545100f35b3\\receipt.json"
+}

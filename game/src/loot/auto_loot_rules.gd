@@ -50,7 +50,9 @@ static func item_reason(item: ItemInstance, hero: HeroData, rules: Dictionary, l
 	if bool(rules.get("always_unique", false)) and (item.base.unique_name != "" or item.base.set_id != &""): return ""
 	var categories: Dictionary = rules.get("categories", {})
 	if not bool(categories.get(category(item), true)): return "Category disabled"
-	if item.rarity < int(rules.get("min_rarity", legacy_rarity)): return "Below minimum rarity"
+	# bh-033: the rarity minimum is an equipment filter. Materials, potions and crystals are judged by their category
+	# switches; a Common Iron Shard is never refused because the hero only wants Elite gear.
+	if item.is_equipment() and item.rarity < int(rules.get("min_rarity", legacy_rarity)): return "Below minimum rarity"
 	var include := String(rules.get("include", "")).strip_edges()
 	if include != "" and not _name_matches(item, include): return "Name does not match"
 	if item.is_equipment():
@@ -95,4 +97,4 @@ static func summary(rules: Dictionary, legacy_rarity := 0) -> String:
 	for key in CATEGORIES:
 		if bool(categories.get(key, true)): names.append(CATEGORIES[key])
 	var rarity := clampi(int(rules.get("min_rarity", legacy_rarity)), 0, BH.RARITY_COUNT - 1)
-	return "%s · %s and better" % ["All categories" if names.size() == CATEGORIES.size() else (", ".join(names) if not names.is_empty() else "No categories"), BH.RARITY_NAMES[rarity]]
+	return "%s · equipment %s and better" % ["All categories" if names.size() == CATEGORIES.size() else (", ".join(names) if not names.is_empty() else "No categories"), BH.RARITY_NAMES[rarity]]

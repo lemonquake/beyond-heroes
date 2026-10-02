@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:50.246Z",
+  "destination": {
+    "assetId": "kenney_nature_pot_small",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "0b2a98984dafcad0305f2244cb05b5818d12f01436857802b95ce1a9777656bc",
+  "packageId": "pkg_f7cfd962294f01e456e13736",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7004,
+    "fileName": "pot_small.glb",
+    "sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8"
+  }
+}

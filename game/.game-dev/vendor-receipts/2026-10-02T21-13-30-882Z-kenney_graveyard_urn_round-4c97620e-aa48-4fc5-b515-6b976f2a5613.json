@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_4c6205187460b62220408ec2",
+  "assetId": "kenney_graveyard_urn_round",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_urn_round",
+  "modelSha256": "b59c015da7dce4ce236a9a967fcb058ca9cff4660c59edaf40768fec086cd437",
+  "manifestSha256": "3e0b40b6d604817c0774b83f2bbb6a4f3777dab4f3469305b800709b6d0d821c",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:30.882Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_urn_round\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

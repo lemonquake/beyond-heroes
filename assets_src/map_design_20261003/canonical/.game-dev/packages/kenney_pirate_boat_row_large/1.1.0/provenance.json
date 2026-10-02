@@ -1,0 +1,27 @@
+{
+  "downloadDate": "2026-10-03",
+  "downloadUri": "https://kenney.nl/media/pages/assets/pirate-kit/e6d4bb1525-1771333093/kenney_pirate-kit.zip",
+  "licenseEvidence": "licenses/pirate-kit.txt",
+  "origin": "imported",
+  "originalArchiveSha256": "667ed2caf92954ddb98f7b7cede831fe99ab75063c26b25e23d32715bee9c943",
+  "originalModelSha256": "b496c0d5f9053ebc7e9b9a39a4770d5ccaff5510c51b7c72c1b8391442e61d0f",
+  "originalRelativePath": "sources/pirate-kit/Models/GLB format/boat-row-large.glb",
+  "originalTextureDependencies": [
+    {
+      "bytes": 10061,
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "uri": "Textures/colormap.png"
+    }
+  ],
+  "provider": "Kenney",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 26080,
+    "fileName": "kenney_pirate_boat_row_large.glb",
+    "sha256": "0cc1c3b863563cb616c95690f229a159bb646df9cfe8659f94e370c74f10e164"
+  },
+  "sourceUri": "https://kenney.nl/assets/pirate-kit",
+  "transformations": [
+    "Embedded external image bytes in GLB; geometry/material values unchanged"
+  ]
+}

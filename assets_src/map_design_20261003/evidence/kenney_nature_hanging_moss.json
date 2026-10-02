@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\hanging_moss.glb",
+    "fileBytes": 4776,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 84,
+    "triangleCount": 52,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.07991679757833481,
+        -0.05,
+        0.4650000035762787
+      ],
+      "max": [
+        0.07991679757833481,
+        0.4284801006317139,
+        0.5
+      ],
+      "sizeMeters": [
+        0.15983359515666962,
+        0.47848010063171387,
+        0.034999996423721313
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\hanging_moss.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 52,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.15983359515666962,
+        0.47848010063171387,
+        0.034999996423721313
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_hanging_moss\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_hanging_moss",
+        "category": "foliage",
+        "description": "Hanging moss strands. Intended use: Sparse damp ruin details; test opacity and overdraw",
+        "displayName": "kenney_nature_hanging_moss",
+        "files": [
+          {
+            "bytes": 4776,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0"
+          },
+          {
+            "bytes": 1587,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "99bb44253f2bff2d904c3913e243e63d762c2ac8aaca669e9c6da9bdb15bd396"
+          },
+          {
+            "bytes": 830,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "a71027de73f96d640f960c5a5e766a57aa3a81320fdda8d86030e5971ee1b7fb"
+          },
+          {
+            "bytes": 2997,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "d0edffe431df62edd76b06e401169c882dc7211c1a13d7bcc4ca6ee1d102047f"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_ce7ffd1716bd47c85245b0d6",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+  "embedded_textures": []
+}

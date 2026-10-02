@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_beefd1f2-55e4-4e17-8c87-eaaaecc5fdbe",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_altar_stone\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:34.750Z",
+  "updatedAt": "2026-10-02T21:12:34.806Z",
+  "startedAt": "2026-10-02T21:12:34.759Z",
+  "completedAt": "2026-10-02T21:12:34.806Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-14f063c2-be7b-49d2-850f-061ed84fd7ed' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_altar_stone\r'",
+    "retryable": false
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\sideTableDrawers.glb",
+    "fileBytes": 19072,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 3,
+    "primitiveCount": 4,
+    "vertexCount": 732,
+    "triangleCount": 238,
+    "undrawnMeshCount": 1,
+    "undrawnPrimitiveCount": 2,
+    "undrawnTriangleCount": 44,
+    "sceneGraphFallback": false,
+    "materialCount": 3,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.009999999776482582,
+        0,
+        -0.20999999344348907
+      ],
+      "max": [
+        0.5244754552841187,
+        0.38440755009651184,
+        0.012299999223480212
+      ],
+      "sizeMeters": [
+        0.5344754550606012,
+        0.38440755009651184,
+        0.2222999926669693
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\sideTableDrawers.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 238,
+      "materials": 3,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.5344754550606012,
+        0.38440755009651184,
+        0.2222999926669693
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_sidetabledrawers\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_furniture_sidetabledrawers",
+        "category": "environment_prop",
+        "description": "Drawer side table. Intended use: Keeper and cartographer storage",
+        "displayName": "kenney_furniture_sidetabledrawers",
+        "files": [
+          {
+            "bytes": 19072,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf"
+          },
+          {
+            "bytes": 1604,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "1a7224e35e9d44df7cbeaa1b27af894a7ac0af5cf7d9cb1ea8ebc151d3846f69"
+          },
+          {
+            "bytes": 854,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "5761ce61d35fe47d2786839fd620920208e0c0e0c48bfe7342b8c452504125a0"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "6e0e8bad3fb874259cf7081eb3aaba6c6f85414fcdfbe8822cc1baf85e3a64e5"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_56e6b8030c33ff467ea6a9e5",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+  "embedded_textures": []
+}

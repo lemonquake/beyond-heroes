@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:59.360Z",
+  "destination": {
+    "assetId": "kenney_furniture_chair",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "b08037120383c4b3ca94d7b80c84d72fab1fa289ec48ede734f3f944b35865b5",
+  "packageId": "pkg_64ec9e112cf4fbc0973d5a9d",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 10756,
+    "fileName": "chair.glb",
+    "sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883"
+  }
+}

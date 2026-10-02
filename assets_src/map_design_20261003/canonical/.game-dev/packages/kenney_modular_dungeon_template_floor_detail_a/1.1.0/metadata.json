@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+  "category": "environment_prop",
+  "description": "Detailed stone floor insert. Intended use: Sparse threshold accent and repaired temple paving",
+  "displayName": "kenney_modular-dungeon_template_floor_detail_a",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        2,
+        0.10000000149011612,
+        2
+      ],
+      "min": [
+        -2,
+        0,
+        -2
+      ],
+      "sizeMeters": [
+        4,
+        0.10000000149011612,
+        4
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 51032,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 28309,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 204,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 408,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

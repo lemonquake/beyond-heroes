@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5157e745-f386-4546-8726-4dfd41d1d43d",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_stone\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:39.664Z",
+  "updatedAt": "2026-10-02T20:15:39.689Z",
+  "startedAt": "2026-10-02T20:15:39.669Z",
+  "completedAt": "2026-10-02T20:15:39.689Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_5157e745-f386-4546-8726-4dfd41d1d43d\\receipt.json"
+}

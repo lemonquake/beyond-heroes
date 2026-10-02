@@ -28,6 +28,7 @@ func compose() -> void:
 	_chapels()
 	_sanctum()
 	_surroundings()
+	_map_design()
 	set_bounds(AABB(Vector3(-24, -2, -46), Vector3(48, 14, 72)))
 	view("overview", Vector3(0, 0, -12), 0.0, 75.0, 95.0, 45.0)
 	view("courtyard", Vector3(0, 0, 16), 0.0, 48.0, 26.0)
@@ -203,3 +204,30 @@ func _surroundings() -> void:
 	mist(Rect2(-150, -160, 300, 300), -8.0, Color(0.22, 0.2, 0.34), 0.6)
 	# the space outside the built area is a sheer drop: keep the player inside the walls
 	boundary(Vector3(-14, 0, 24.4), Vector3(14, 0, 24.4), 6.0)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the four parts read apart — the colonnade's fallen drum and masonry, the library's
+# books spilled from a toppled case, the flooded chapel's drift and a half-sunk urn, the sanctum's offerings on the
+# altar of the first oath and a threshold before it. The seal altar, the throne gate and the nave's aisle stay clear.
+
+func _map_design() -> void:
+	# colonnade: a fallen column drum along the west aisle, masonry by the broken pillar
+	var col := kit("kd_column", Vector3(-7.6, 0.45, -5.0), 0.0, 0.85, deco)
+	col.rotation = Vector3(deg_to_rad(84.0), deg_to_rad(6.0), 0.0)
+	kit("kd_debris_stone", Vector3(6.9, 0, -5.8), 30.0, 1.1, deco)
+	# library: a toppled case and its books across the floor by the fallen wall
+	var case := kit("kd_bookcase_open", Vector3(19.0, 0.28, -12.6), 0.0, 1.0, deco)
+	case.rotation = Vector3(deg_to_rad(-84.0), deg_to_rad(20.0), 0.0)
+	for c in [[Vector3(17.2, 0, -11.2), 30.0], [Vector3(13.4, 0, -10.2), 110.0], [Vector3(18.6, 0, -15.4), 250.0]]:
+		kit("kd_books", c[0], c[1], 1.1, deco)
+	# flooded chapel: timber drifting, an urn half sunk, moss at the waterline
+	kit("kd_debris_wood", Vector3(-13.4, 0.1, -3.4), 50.0, 1.0, deco)
+	kit("kd_urn_round", Vector3(-12.6, -0.25, -10.6), 20.0, 0.9, deco).rotation.z = deg_to_rad(18.0)
+	kit("kd_hanging_moss", Vector3(-17.5, 1.2, WEST_CHAPEL.position.y + 0.15), 0.0, 1.2, deco)
+	# sanctum: offerings on the altar of the first oath, a threshold where the oath was taken
+	var alt: Node3D = props.find_child("altar_*", false, false)
+	if alt:
+		var top := MapBuilder._local_box("altar", alt).end.y
+		kit("kd_offering_bowl", alt.position + Vector3(-0.5, top, 0.05), 0.0, 1.0, deco)
+		kit("kd_chalice", alt.position + Vector3(0.45, top, 0.0), 0.0, 1.0, deco)
+	kit("kd_floor_inlay", Vector3(0, SY + 0.012, -29.4), 0.0, 0.9, deco)

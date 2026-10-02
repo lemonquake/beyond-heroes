@@ -73,28 +73,100 @@ static func achievements(hero: HeroData) -> Dictionary:
 			champions += 1
 	return {"jobs": maxi(0, int(hero.guild_jobs.get("done", 0))), "dungeons": dungeons, "champions": champions, "dungeon_tier": hardest}
 
+## Unmet requirements of `rank` as short lines (next_promotion, auto_promote, the registrars). Derived from
+## requirement_steps, so the rank tracker and the promotion rules can never disagree.
 static func missing_requirements(hero: HeroData, rank: int) -> PackedStringArray:
 	var out := PackedStringArray()
+	for s in requirement_steps(hero, rank):
+		if not s.done and not out.has(String(s.text)):
+			out.append(String(s.text))
+	return out
+
+## bh-033: every requirement of `rank` as a checklist step (THE rule set; promotions stay cumulative, including when a
+## legacy save is validated). Step: {key, label, done, have, need, hint, detail, story, text}.
+## `label` is plain and spoiler-free; a story deed's own wording is kept in `detail` (shown on request).
+static func requirement_steps(hero: HeroData, rank: int) -> Array:
+	var steps := []
 	var t := DataGuilds.tier(rank)
-	if hero.progress.level < int(t.level):
-		out.append("level %d (%d / %d)" % [t.level, hero.progress.level, t.level])
-	# Promotions remain cumulative, including when validating a legacy save.
+	var lvl := hero.progress.level
+	steps.append({"key": "level", "label": "Reach level %d" % int(t.level), "done": lvl >= int(t.level), "have": lvl, "need": int(t.level),
+		"hint": "Defeat monsters and finish quests.", "detail": "", "story": false, "text": "level %d (%d / %d)" % [t.level, lvl, t.level]})
+	var seen := {}
 	for r in range(2, rank + 1):
 		var previous := DataGuilds.tier(r)
-		if String(previous.flag) != "" and not bool(hero.world_flags.get(StringName(previous.flag), false)):
-			var line := "a proven deed: %s" % previous.deed
-			if not out.has(line):
-				out.append(line)
+		if String(previous.flag) == "" or seen.has(String(previous.deed)):
+			continue
+		seen[String(previous.deed)] = true
+		var done := bool(hero.world_flags.get(StringName(previous.flag), false))
+		steps.append({"key": "deed:%s" % previous.flag, "label": "Continue the main story", "done": done, "have": 1 if done else 0, "need": 1,
+			"hint": _story_hint(hero), "detail": String(previous.deed), "story": true, "text": "a proven deed: %s" % previous.deed})
 	if rank >= 2:
-		for flag in OPENING_DEEDS:
-			if not bool(hero.world_flags.get(flag, false)):
-				out.append("the opening story errands")
-				break
+		var n := OPENING_DEEDS.filter(func(f): return bool(hero.world_flags.get(f, false))).size()
+		steps.append({"key": "opening", "label": "Finish the opening errands", "done": n >= OPENING_DEEDS.size(), "have": n, "need": OPENING_DEEDS.size(),
+			"hint": _story_hint(hero), "detail": "Maelis, Captain Hald, Sir Aldric and Paul David", "story": true, "text": "the opening story errands"})
 	var a := achievements(hero)
 	for k in ["jobs", "champions", "dungeons", "dungeon_tier"]:
-		if int(a[k]) < int(t.get(k, 0)):
-			out.append("%s (%d / %d)" % [_achievement_name(k), a[k], t[k]])
-	return out
+		var need := int(t.get(k, 0))
+		if need > 0:
+			var label := String(ACHIEVEMENT_ONE[k]) if need == 1 else String(ACHIEVEMENT_LABELS[k]) % need
+			steps.append({"key": k, "label": label, "done": int(a[k]) >= need, "have": int(a[k]), "need": need,
+				"hint": String(ACHIEVEMENT_HINTS[k]), "detail": "", "story": false, "text": "%s (%d / %d)" % [_achievement_name(k), a[k], need]})
+	return steps
+
+const ACHIEVEMENT_LABELS := {"jobs": "Hand in %d guild jobs", "champions": "Defeat %d different champions",
+	"dungeons": "Clear %d different dungeons", "dungeon_tier": "Clear a tier %d dungeon"}
+const ACHIEVEMENT_ONE := {"jobs": "Hand in a guild job", "champions": "Defeat a champion", "dungeons": "Clear a dungeon",
+	"dungeon_tier": "Clear a tier 1 dungeon"}
+const ACHIEVEMENT_HINTS := {"jobs": "Take jobs from your guild's board and hand them in.",
+	"champions": "Champions are named elites: Westreach, the Ruined Forest and the Catacombs each hold some.",
+	"dungeons": "Defeat a dungeon's lord. The world map's Underground list shows each dungeon.",
+	"dungeon_tier": "The Underground list shows each dungeon's tier."}
+
+## The current story step, as the quest tracker shows it (never a later one).
+static func _story_hint(hero: HeroData) -> String:
+	var o := Objectives.current(hero)
+	return String(o.get("step", "")) if not o.is_empty() else ""
+
+## bh-033: the optional next-rank guide (Character screen and HUD tracker). One rank ahead only:
+## {state: "max" | "unranked" | "next", rank, title, steps, ready, done, total, next_action, next_hint, note}.
+## Promotion is automatic (auto_promote runs on every progress event), so `ready` means it is about to happen.
+static func rank_guide(hero: HeroData) -> Dictionary:
+	if hero == null:
+		return {"state": "max", "steps": []}
+	if hero.tier >= DataGuilds.MAX_RANK:
+		return {"state": "max", "rank": hero.tier, "title": DataGuilds.tier_name(hero.tier), "steps": [], "ready": false, "done": 0, "total": 0,
+			"next_action": "You hold the highest rank.", "next_hint": "", "note": ""}
+	var steps := []
+	var state := "next"
+	var rank := hero.tier + 1
+	var note := "Promotion is automatic once every step is done."
+	if hero.tier == 0:
+		state = "unranked"
+		var n := OPENING_DEEDS.filter(func(f): return bool(hero.world_flags.get(f, false))).size()
+		steps.append({"key": "level", "label": "Reach level 2", "done": hero.progress.level >= 2, "have": hero.progress.level, "need": 2,
+			"hint": "Defeat monsters and finish quests.", "detail": "", "story": false})
+		steps.append({"key": "opening", "label": "Finish the opening errands", "done": n >= OPENING_DEEDS.size(), "have": n, "need": OPENING_DEEDS.size(),
+			"hint": _story_hint(hero), "detail": "Maelis, Captain Hald, Sir Aldric and Paul David", "story": true})
+		note = "Class E is granted automatically after the opening errands. Registering with a guild (%d gold) also ranks you at once." % int(DataGuilds.tier(1).fee)
+	else:
+		if hero.guild == &"":
+			steps.append({"key": "guild", "label": "Register with a guild", "done": false, "have": 0, "need": 1,
+				"hint": "Speak with Dax (Swordfin Company) or Lio (Lantern Covenant) in their Malasugue halls.", "detail": "", "story": false})
+		steps.append_array(requirement_steps(hero, rank))
+		var fee := int(DataGuilds.tier(rank).fee)
+		if fee > 0:
+			var gold := hero.inventory.gold
+			steps.append({"key": "fee", "label": "Carry the %d gold fee" % fee, "done": gold >= fee, "have": gold, "need": fee,
+				"hint": "The fee is taken automatically when you are promoted.", "detail": "", "story": false})
+	var done := steps.filter(func(s): return s.done).size()
+	var first := {}
+	for s in steps:
+		if not s.done:
+			first = s
+			break
+	return {"state": state, "rank": rank, "title": DataGuilds.tier_name(rank), "steps": steps, "ready": first.is_empty(),
+		"done": done, "total": steps.size(), "next_action": String(first.get("label", "Ready to rank up")),
+		"next_hint": String(first.get("hint", note)), "note": note}
 
 static func _achievement_name(key: String) -> String:
 	return {"jobs": "guild jobs handed in", "champions": "different champions defeated", "dungeons": "different dungeons cleared", "dungeon_tier": "highest dungeon tier cleared"}.get(key, key)

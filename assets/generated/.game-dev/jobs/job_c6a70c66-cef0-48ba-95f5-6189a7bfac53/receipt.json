@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_pottedplant\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_pottedplant",
+      "category": "environment_prop",
+      "description": "Tall potted plant. Intended use: Agdao courtyard and council entrance",
+      "displayName": "kenney_furniture_pottedplant",
+      "files": [
+        {
+          "bytes": 7576,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15"
+        },
+        {
+          "bytes": 1579,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "dc052e2cde7c133f03d506213f83c0db3a3c5bc998dbde6f5b66ebd59856085a"
+        },
+        {
+          "bytes": 806,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "22378f6537aa473528ed86448021674557772545885ea0dec3ee83cd018026d0"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "613c9006dec8897c71db8a7021c54ec6f28410399f20e02c00d15ced277d1df9"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_ed35ca4e558945f0ae1bcfa3",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:16.052Z"
+}

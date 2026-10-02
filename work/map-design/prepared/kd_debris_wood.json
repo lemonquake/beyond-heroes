@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_debris_wood",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_debris_wood.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0",
+ "source_sha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8",
+ "derived_sha256": "d1b597bff0b4237527da3c800e5d20a696036d3ffaa0bb335926b5a908abee52",
+ "scale": 2.2,
+ "scale_rule": [
+  "s",
+  2.2
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 108
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark"
+ },
+ "triangles": 108,
+ "surfaces": 1,
+ "source_triangles": 108,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.009,
+  0.22,
+  1.109
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

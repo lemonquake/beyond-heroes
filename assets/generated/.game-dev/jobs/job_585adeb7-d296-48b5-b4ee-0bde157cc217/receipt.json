@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_desk\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_desk",
+      "category": "environment_prop",
+      "description": "Writing desk. Intended use: Cartographer and guild administration",
+      "displayName": "kenney_furniture_desk",
+      "files": [
+        {
+          "bytes": 15048,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42"
+        },
+        {
+          "bytes": 1580,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "281c512906d3f2c196e9de4619616a39c50fc1c6874603dd7c292de34549e799"
+        },
+        {
+          "bytes": 793,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "59730d1ee6effe92a3409bb43ee1df4468311a46d300545f204680d3d7013a85"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "9ff458d1c42452e260ab419aed1f1a999a5d374e7aa4f47ceea070dab7dcc091"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_5a693099627e95a07cec5839",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:01.759Z"
+}

@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_rocks_a",
+  "category": "environment_prop",
+  "description": "Grouped shoreline rocks. Intended use: Agdao harbour mouth and cove shore",
+  "displayName": "kenney_pirate_rocks_a",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        2.417023181915283,
+        2.8980000019073486,
+        2.133376121520996
+      ],
+      "min": [
+        -2.6955723762512207,
+        0,
+        -2.2530555725097656
+      ],
+      "sizeMeters": [
+        5.112595558166504,
+        2.8980000019073486,
+        4.386431694030762
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 37760,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 264,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 504,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

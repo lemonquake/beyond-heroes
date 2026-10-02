@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_a66999dc-a187-404d-8177-6f39fe2b2098",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_mushroom_tangroup\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:46.865Z",
+  "updatedAt": "2026-10-02T21:11:46.919Z",
+  "startedAt": "2026-10-02T21:11:46.872Z",
+  "completedAt": "2026-10-02T21:11:46.919Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-0778d495-0ac5-4c7c-8f55-1b768af99236' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_mushroom_tangroup\r'",
+    "retryable": false
+  }
+}

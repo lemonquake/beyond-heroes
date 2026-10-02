@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_b1324bd0-d4b1-47c0-a285-9bb7ef6d266d",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:47.263Z",
+  "updatedAt": "2026-10-02T21:11:47.298Z",
+  "startedAt": "2026-10-02T21:11:47.268Z",
+  "completedAt": "2026-10-02T21:11:47.298Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_b1324bd0-d4b1-47c0-a285-9bb7ef6d266d\\receipt.json"
+}

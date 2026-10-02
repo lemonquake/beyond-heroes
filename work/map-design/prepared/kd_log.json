@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_log",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_log.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_log/1.1.0",
+ "source_sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6",
+ "derived_sha256": "5c61bcec503297a79566c3a615ae3e15d838735f618c0107de5c2c2821a444b2",
+ "scale": 3.6,
+ "scale_rule": [
+  "s",
+  3.6
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Bark",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Bark": 68,
+  "BH_Wood": 132
+ },
+ "source_to_material": {
+  "woodBark": "BH_Bark",
+  "woodInner": "BH_Wood"
+ },
+ "triangles": 200,
+ "surfaces": 2,
+ "source_triangles": 200,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.842,
+  0.624,
+  2.556
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_boat_row_large.glb",
+    "fileBytes": 26080,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 2,
+    "primitiveCount": 2,
+    "vertexCount": 258,
+    "triangleCount": 174,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -1.3742690086364355,
+        -6.767919641759458e-17,
+        -1.4260733127593994
+      ],
+      "max": [
+        1.3742690086365137,
+        0.8476955137593079,
+        1.4260733127593994
+      ],
+      "sizeMeters": [
+        2.748538017272949,
+        0.847695513759308,
+        2.852146625518799
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_boat_row_large.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 174,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        2.748538017272949,
+        0.847695513759308,
+        2.852146625518799
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_boat_row_large\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_boat_row_large",
+        "category": "environment_prop",
+        "description": "Larger rowing boat. Intended use: Olivar landing; static decoration or shared gentle bob",
+        "displayName": "kenney_pirate_boat_row_large",
+        "files": [
+          {
+            "bytes": 26080,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "0cc1c3b863563cb616c95690f229a159bb646df9cfe8659f94e370c74f10e164"
+          },
+          {
+            "bytes": 1769,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "869d436b594241ac167457d78b6e8f9e70546927eb419ed39268f33ae1be50ef"
+          },
+          {
+            "bytes": 1088,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "b70618fcc6924de8948b66f313d1528eaaa04691078baa5174affa5c8fa5cce2"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "c93601a1988f739b64211e787fb8d2e004853dd09b95acf1581bd24e3e03a889"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_7dc30f7ed75be6b3f2011ca8",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "b496c0d5f9053ebc7e9b9a39a4770d5ccaff5510c51b7c72c1b8391442e61d0f",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

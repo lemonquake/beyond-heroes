@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_fire_basket\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_fire_basket",
+      "category": "environment_prop",
+      "description": "Iron fire basket. Intended use: Emberforge work alcove and Obsidian Engine service room",
+      "displayName": "kenney_graveyard_fire_basket",
+      "files": [
+        {
+          "bytes": 29764,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916"
+        },
+        {
+          "bytes": 1755,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "73c96d94533a760a7d668a261c1c57ec93f961d294dd6eee98a938afb670f7d7"
+        },
+        {
+          "bytes": 1104,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "39edb73357c4460f145a6fc639a0912382e82b8b370f8d6fe158c71f63b0bbf8"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "dbe0b43d2e5ce6bbeb29235d63763eb1af936e02054e7cf32a3db64f0e337312"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_5d87db31765e11e633406e48",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:44.903Z"
+}

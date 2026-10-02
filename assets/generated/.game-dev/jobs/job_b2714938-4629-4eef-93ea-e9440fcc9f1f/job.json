@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_b2714938-4629-4eef-93ea-e9440fcc9f1f",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_boat_row_small\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:28.681Z",
+  "updatedAt": "2026-10-02T21:12:28.734Z",
+  "startedAt": "2026-10-02T21:12:28.687Z",
+  "completedAt": "2026-10-02T21:12:28.734Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-b8c64e2f-8709-4171-8f6b-79d839ec5231' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_boat_row_small\r'",
+    "retryable": false
+  }
+}

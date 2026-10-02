@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_debris_wood\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_debris_wood",
+      "category": "environment_prop",
+      "description": "Broken timber debris. Intended use: Flooded Deeps wreck edge and abandoned storeroom",
+      "displayName": "kenney_graveyard_debris_wood",
+      "files": [
+        {
+          "bytes": 10820,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f0cf5285322f7d75125487f1574a61cca2fd96edb0e702a2773ae5cbb0244133"
+        },
+        {
+          "bytes": 1751,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "97ad400ecdf02bc265ee50cf3a78cb049bebdc4305b1f7545e181d6bc6d9c5f3"
+        },
+        {
+          "bytes": 810,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "7b9b20eef8f3b8bc709909f9725c808af58cdc64f772fc78deba129f72c7d074"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a18b89fabd644887cf48d80216f0ad4ae5abcc24631bb5d3388360ca599ae29e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_df42c5dad607a26c767ab3ea",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:47.302Z"
+}

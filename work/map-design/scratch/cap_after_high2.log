@@ -1,0 +1,208 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+SHOT dg_deeps_2_arrival__after_high_hud
+SHOT dg_deeps_2_arrival__after_high_clean
+SHOT dg_deeps_2_descent__after_high_hud
+SHOT dg_deeps_2_descent__after_high_clean
+SHOT dg_warren_2_arrival__after_high_hud
+SHOT dg_warren_2_arrival__after_high_clean
+SHOT dg_warren_2_descent__after_high_hud
+SHOT dg_warren_2_descent__after_high_clean
+SHOT dg_ember_3_arrival__after_high_hud
+SHOT dg_ember_3_arrival__after_high_clean
+SHOT dg_ember_3_descent__after_high_hud
+SHOT dg_ember_3_descent__after_high_clean
+SHOT dg_barrow_2_arrival__after_high_hud
+SHOT dg_barrow_2_arrival__after_high_clean
+SHOT dg_barrow_2_descent__after_high_hud
+SHOT dg_barrow_2_descent__after_high_clean
+WARNING: Adding 'ring_a' as child to '@Node3D@5521' will make owner 'armillary_sphere_126' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:156)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+WARNING: Adding 'ring_b' as child to '@Node3D@5522' will make owner 'armillary_sphere_126' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:156)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+WARNING: Adding 'ring_c' as child to '@Node3D@5523' will make owner 'armillary_sphere_126' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _view (res://tests/tools/capture_map_design.gd:130)
+       [6] _run (res://tests/tools/capture_map_design.gd:120)
+       [7] _view (res://tests/tools/capture_map_design.gd:156)
+       [8] _shot (res://tests/tools/capture_map_design.gd:93)
+SHOT dg_orrery_2_arrival__after_high_hud
+SHOT dg_orrery_2_arrival__after_high_clean
+SHOT dg_orrery_2_descent__after_high_hud
+SHOT dg_orrery_2_descent__after_high_clean
+SHOT dg_jade_3_arrival__after_high_hud
+SHOT dg_jade_3_arrival__after_high_clean
+SHOT dg_jade_3_descent__after_high_hud
+SHOT dg_jade_3_descent__after_high_clean
+SHOT dg_obsidian_3_arrival__after_high_hud
+SHOT dg_obsidian_3_arrival__after_high_clean
+SHOT dg_obsidian_3_descent__after_high_hud
+SHOT dg_obsidian_3_descent__after_high_clean
+SHOT dg_vein_7_arrival__after_high_hud
+SHOT dg_vein_7_arrival__after_high_clean
+SHOT dg_vein_7_exit__after_high_hud
+SHOT dg_vein_7_exit__after_high_clean
+SHOT dg_ossuary_2_arrival__after_high_hud
+SHOT dg_ossuary_2_arrival__after_high_clean
+SHOT dg_ossuary_2_descent__after_high_hud
+SHOT dg_ossuary_2_descent__after_high_clean
+SHOT dg_reliquary_3_arrival__after_high_hud
+SHOT dg_reliquary_3_arrival__after_high_clean
+SHOT dg_reliquary_3_descent__after_high_hud
+SHOT dg_reliquary_3_descent__after_high_clean
+SHOT dg_cellars_1_arrival__after_high_hud
+SHOT dg_cellars_1_arrival__after_high_clean
+SHOT dg_cellars_1_descent__after_high_hud
+SHOT dg_cellars_1_descent__after_high_clean
+SHOT dg_burrows_2_arrival__after_high_hud
+SHOT dg_burrows_2_arrival__after_high_clean
+SHOT dg_burrows_2_descent__after_high_hud
+SHOT dg_burrows_2_descent__after_high_clean
+SHOT dg_warcamp_1_arrival__after_high_hud
+SHOT dg_warcamp_1_arrival__after_high_clean
+SHOT dg_warcamp_1_descent__after_high_hud
+SHOT dg_warcamp_1_descent__after_high_clean
+SHOT dg_hive_2_arrival__after_high_hud
+SHOT dg_hive_2_arrival__after_high_clean
+SHOT dg_hive_2_descent__after_high_hud
+SHOT dg_hive_2_descent__after_high_clean
+SHOT dg_sump_2_arrival__after_high_hud
+SHOT dg_sump_2_arrival__after_high_clean
+SHOT dg_sump_2_descent__after_high_hud
+SHOT dg_sump_2_descent__after_high_clean
+SHOT dg_briar_2_arrival__after_high_hud
+SHOT dg_briar_2_arrival__after_high_clean
+SHOT dg_briar_2_descent__after_high_hud
+SHOT dg_briar_2_descent__after_high_clean
+SHOT dg_dunemourn_2_arrival__after_high_hud
+SHOT dg_dunemourn_2_arrival__after_high_clean
+SHOT dg_dunemourn_2_descent__after_high_hud
+SHOT dg_dunemourn_2_descent__after_high_clean
+SHOT dg_thunderwell_2_arrival__after_high_hud
+SHOT dg_thunderwell_2_arrival__after_high_clean
+SHOT dg_thunderwell_2_descent__after_high_hud
+SHOT dg_thunderwell_2_descent__after_high_clean
+SHOT dg_undercroft_2_arrival__after_high_hud
+SHOT dg_undercroft_2_arrival__after_high_clean
+SHOT dg_undercroft_2_descent__after_high_hud
+SHOT dg_undercroft_2_descent__after_high_clean
+SHOT dg_geode_2_arrival__after_high_hud
+SHOT dg_geode_2_arrival__after_high_clean
+SHOT dg_geode_2_descent__after_high_hud
+SHOT dg_geode_2_descent__after_high_clean
+SHOT dg_vault_2_arrival__after_high_hud
+SHOT dg_vault_2_arrival__after_high_clean
+SHOT dg_vault_2_descent__after_high_hud
+SHOT dg_vault_2_descent__after_high_clean
+SHOT dg_wyrmcoil_3_arrival__after_high_hud
+SHOT dg_wyrmcoil_3_arrival__after_high_clean
+SHOT dg_wyrmcoil_3_descent__after_high_hud
+SHOT dg_wyrmcoil_3_descent__after_high_clean
+SHOT dg_maw_3_arrival__after_high_hud
+SHOT dg_maw_3_arrival__after_high_clean
+SHOT dg_maw_3_descent__after_high_hud
+SHOT dg_maw_3_descent__after_high_clean
+SHOT dg_prismheart_5_arrival__after_high_hud
+SHOT dg_prismheart_5_arrival__after_high_clean
+SHOT dg_prismheart_5_descent__after_high_hud
+SHOT dg_prismheart_5_descent__after_high_clean
+SHOT dg_underworld_6_arrival__after_high_hud
+SHOT dg_underworld_6_arrival__after_high_clean
+SHOT dg_underworld_6_descent__after_high_hud
+SHOT dg_underworld_6_descent__after_high_clean
+SHOT dg_aetherreach_7_arrival__after_high_hud
+SHOT dg_aetherreach_7_arrival__after_high_clean
+SHOT dg_aetherreach_7_descent__after_high_hud
+SHOT dg_aetherreach_7_descent__after_high_clean
+SHOT dg_eclipse_7_arrival__after_high_hud
+SHOT dg_eclipse_7_arrival__after_high_clean
+SHOT dg_eclipse_7_descent__after_high_hud
+SHOT dg_eclipse_7_descent__after_high_clean
+SHOT dg_solarium_8_arrival__after_high_hud
+SHOT dg_solarium_8_arrival__after_high_clean
+SHOT dg_solarium_8_descent__after_high_hud
+SHOT dg_solarium_8_descent__after_high_clean
+SHOT ag_01_pier__after_high_hud
+SHOT ag_01_pier__after_high_clean
+SHOT ag_02_harbour__after_high_hud
+SHOT ag_02_harbour__after_high_clean
+SHOT ag_03_market__after_high_hud
+SHOT ag_03_market__after_high_clean
+SHOT ag_04_middle__after_high_hud
+SHOT ag_04_middle__after_high_clean
+SHOT ag_05_upper__after_high_hud
+SHOT ag_05_upper__after_high_clean
+SHOT ag_06_crown__after_high_hud
+SHOT ag_06_crown__after_high_clean
+SHOT ag_07_gate__after_high_hud
+SHOT ag_07_gate__after_high_clean
+SHOT zc_01_shrine__after_high_hud
+SHOT zc_01_shrine__after_high_clean
+SHOT zc_02_aqueduct__after_high_hud
+SHOT zc_02_aqueduct__after_high_clean
+SHOT zb_01_camp__after_high_hud
+SHOT zb_01_camp__after_high_clean
+SHOT zb_02_colossus__after_high_hud
+SHOT zb_02_colossus__after_high_clean
+SHOT bd_01_south__after_high_hud
+SHOT bd_01_south__after_high_clean
+SHOT hc_01_siege__after_high_hud
+SHOT hc_01_siege__after_high_clean
+SHOT hc_02_avenue__after_high_hud
+SHOT hc_02_avenue__after_high_clean
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

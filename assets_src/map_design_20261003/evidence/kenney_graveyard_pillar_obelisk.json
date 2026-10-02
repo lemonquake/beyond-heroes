@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_pillar_obelisk.glb",
+    "fileBytes": 19572,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 136,
+    "triangleCount": 76,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10965
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.17499999701976776,
+        0,
+        -0.17499999701976776
+      ],
+      "max": [
+        0.17499999701976776,
+        1.0120000839233398,
+        0.17499999701976776
+      ],
+      "sizeMeters": [
+        0.3499999940395355,
+        1.0120000839233398,
+        0.3499999940395355
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_graveyard_pillar_obelisk.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 76,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        0.3499999940395355,
+        1.0120000839233398,
+        0.3499999940395355
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_pillar_obelisk\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_graveyard_pillar_obelisk",
+        "category": "environment_prop",
+        "description": "Stone obelisk. Intended use: Crypt or Jade chamber landmark after canon glyph treatment",
+        "displayName": "kenney_graveyard_pillar_obelisk",
+        "files": [
+          {
+            "bytes": 19572,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1"
+          },
+          {
+            "bytes": 1759,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "3c841d09226815b341c6333ab5370762add2a8f5eb9bd1d2e90665a9ec870b85"
+          },
+          {
+            "bytes": 1110,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "c7959dce5f04f806c35802097f254ee91c24d10c0005ed7fd3451e4b76fd1e04"
+          },
+          {
+            "bytes": 3649,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "321c63db166ecd4f2b5fff397c3111ee2ecbef34470526ebbbcbee370d0d2cdc"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_2a24e5ba7bc7ea2083785ecd",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "f7a9d985522d8bb1eef765ce2b841588b43c8607b32c87056945696a172b3bf1",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "a94b4dc4f77a4b8aec96bde94f63912a1ce12aa98eec2c1e9a37c89e20a5f091",
+      "bytes": 10965
+    }
+  ]
+}

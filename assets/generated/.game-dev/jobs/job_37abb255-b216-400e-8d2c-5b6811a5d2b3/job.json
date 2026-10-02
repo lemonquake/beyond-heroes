@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_37abb255-b216-400e-8d2c-5b6811a5d2b3",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_carrot\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:44.917Z",
+  "updatedAt": "2026-10-02T20:01:44.947Z",
+  "startedAt": "2026-10-02T20:01:44.922Z",
+  "completedAt": "2026-10-02T20:01:44.947Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_37abb255-b216-400e-8d2c-5b6811a5d2b3\\receipt.json"
+}

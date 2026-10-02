@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_rocks_c\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_rocks_c",
+      "category": "environment_prop",
+      "description": "Third grouped shoreline rocks. Intended use: Cliff-to-water boundary",
+      "displayName": "kenney_pirate_rocks_c",
+      "files": [
+        {
+          "bytes": 24572,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "67c086e5d522fda43f3c84b34092ae88c4b142ad23c11be9cf9743659a138032"
+        },
+        {
+          "bytes": 1712,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "9d6fa796eee8be73949eaad46f60be8d416ccbae049d601e560e6a8f34e30e22"
+        },
+        {
+          "bytes": 783,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "1fbe188c946d1cd7d6888faef88c7f46fc61fbfb14f4435f98fe7a4493d4c5da"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c8f9c957ce0bbf998478a4194d9dc2aa38b36ac4222fc665d69fef517be3340a"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_7ba2590ad4bdecd68a113c19",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:29.345Z"
+}

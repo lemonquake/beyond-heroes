@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_flag_pennant.glb",
+    "fileBytes": 23752,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 238,
+    "triangleCount": 118,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.19945412874221802,
+        0,
+        -0.19945409893989563
+      ],
+      "max": [
+        1.5621001720428467,
+        2.0968432426452637,
+        0.19945411384105682
+      ],
+      "sizeMeters": [
+        1.7615543007850647,
+        2.0968432426452637,
+        0.39890821278095245
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_flag_pennant.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 118,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        1.7615543007850647,
+        2.0968432426452637,
+        0.39890821278095245
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_flag_pennant\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_flag_pennant",
+        "category": "environment_prop",
+        "description": "Plain pennant flag. Intended use: Town accents with canon colours and no pirate markings",
+        "displayName": "kenney_pirate_flag_pennant",
+        "files": [
+          {
+            "bytes": 23752,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "0e29dc688cbeecf4c97c884d312379563367c0c4c80196052bb775efc7dacb59"
+          },
+          {
+            "bytes": 1751,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "3fca1dc33ced3ecb0bd2e445bf34fce5f8043366260ce2285a97b3bc1a9c2af9"
+          },
+          {
+            "bytes": 1084,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "f87d1544c30daaaf62a96f41298fe62596a6456633317d8598cb72f9fbb9b258"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "984d68cc1bcb0578e26782d4f1719f6d987ea2c8b29e420e064c2e3e6ffe5ebd"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_0f7a009a7fb1ade03d075b0b",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "05956b9389135492e0644bd7d49711d1e4f865cd67808f7da5709a23e02d7d6f",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

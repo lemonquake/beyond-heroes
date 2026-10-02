@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_cc6830bf-6e01-47ea-ab50-1e01f3555e6f",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_tableround\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:56.956Z",
+  "updatedAt": "2026-10-02T20:01:56.982Z",
+  "startedAt": "2026-10-02T20:01:56.961Z",
+  "completedAt": "2026-10-02T20:01:56.982Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_cc6830bf-6e01-47ea-ab50-1e01f3555e6f\\receipt.json"
+}

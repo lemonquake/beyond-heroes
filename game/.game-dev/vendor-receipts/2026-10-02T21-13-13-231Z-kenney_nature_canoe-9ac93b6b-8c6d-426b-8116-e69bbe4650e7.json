@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_0dfc868f843cf35e40344096",
+  "assetId": "kenney_nature_canoe",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_canoe",
+  "modelSha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941",
+  "manifestSha256": "258141ef12d658a0845429d86a0d14f3087c099dba143b29cb418ba73eac797c",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:13.231Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_canoe\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

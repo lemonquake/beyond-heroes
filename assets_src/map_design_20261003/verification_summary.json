@@ -1,0 +1,23 @@
+{
+  "distinct_models": 114,
+  "by_kit": {
+    "nature-kit": 48,
+    "furniture-kit": 26,
+    "pirate-kit": 20,
+    "graveyard-kit": 16,
+    "modular-dungeon-kit": 4
+  },
+  "dungeon_additions": 20,
+  "model_bytes": 2545532,
+  "triangles_min": 16,
+  "triangles_max": 2282,
+  "triangles_median": 170,
+  "multi_mesh_models": 17,
+  "previews": 114,
+  "static_validation_passed": 114,
+  "package_hashes_verified": 114,
+  "embedded_dependencies_checked": 114,
+  "runtime_integration": "Pending Claude Code",
+  "models_with_embedded_sidecar_textures": 40,
+  "fps_measurement": "Not performed; requires integration and device tests"
+}

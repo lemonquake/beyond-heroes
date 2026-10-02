@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_flower_yellowa\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_flower_yellowa",
+      "category": "foliage",
+      "description": "Yellow flowering stem. Intended use: Olivar gardens and domestic planted beds",
+      "displayName": "kenney_nature_flower_yellowa",
+      "files": [
+        {
+          "bytes": 7120,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d"
+        },
+        {
+          "bytes": 1600,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "1d708040fb62e1c30810ec22488834efac6834afda4ac270afa11197fb49368f"
+        },
+        {
+          "bytes": 797,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "e936118fb41e9aeb18da035d5e9d52d51f90b07c19f6a39a3133625c340650fb"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "a0654b342cf069a3c5e5fe1e8cf676402484474f610afa97647146ee5db4b870"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_035ec883305f273f80fabfb0",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:24.518Z"
+}

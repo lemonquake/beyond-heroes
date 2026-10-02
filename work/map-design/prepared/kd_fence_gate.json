@@ -1,0 +1,38 @@
+{
+ "source_id": "kenney_nature_fence_gate",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_fence_gate.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0",
+ "source_sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436",
+ "derived_sha256": "4bb776f96efc57f109146c0fcc881db075a7add1b2cc2c3e201ef3144372e59f",
+ "scale": 2.6,
+ "scale_rule": [
+  "s",
+  2.6
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_WoodDark",
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 512,
+  "BH_Stone": 12
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark",
+  "woodDark": "BH_WoodDark",
+  "stone": "BH_Stone"
+ },
+ "triangles": 524,
+ "surfaces": 2,
+ "source_triangles": 524,
+ "source_meshes": 2,
+ "bounds_m": [
+  2.6,
+  0.897,
+  0.182
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:21.568Z",
+  "destination": {
+    "assetId": "kenney_pirate_barrel",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "196806ba16d6ab98f256fbe932f61a9e788da63a91edc78e8ab3868c88e8cc0b",
+  "packageId": "pkg_2778d1e4366f9ecf83ddedba",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 24208,
+    "fileName": "kenney_pirate_barrel.glb",
+    "sha256": "fa80c76d56fb301c377b01a5864360dc71804e098081a8b10afbd2e3ba188fd2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_pirate_ship_wreck",
+  "category": "environment_prop",
+  "description": "Broken ship hull. Intended use: Tideglass Cove story vignette, no collision across approach",
+  "displayName": "kenney_pirate_ship_wreck",
+  "files": [
+    {
+      "bytes": 233612,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "28c2ca697025ebdb0adc1a7a4b143d40cb2ca474d96b1db51d9cc2f6af7c16c2"
+    },
+    {
+      "bytes": 1746,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "61cc8564fdfc33783bb908a0f0b0637af9bd6d82849186deebea14ee492aa85a"
+    },
+    {
+      "bytes": 1081,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "313c7a31d22437f0ccc6291f5cee6858fc582a6d2ceabd949a109e1e44049014"
+    },
+    {
+      "bytes": 3655,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "4abc1a0ad2106f8c1c0b31ca4e76aff31cfe817a99593fbabcf3bb5959cf3e6c"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_90d4ddc81bbc1c105b273cb4",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

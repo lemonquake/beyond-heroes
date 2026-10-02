@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_pottedplant",
+  "category": "environment_prop",
+  "description": "Tall potted plant. Intended use: Agdao courtyard and council entrance",
+  "displayName": "kenney_furniture_pottedplant",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.10602963431583405,
+        0.6540167939567566,
+        0.1207309738
+      ],
+      "min": [
+        -0.10602964,
+        0,
+        -0.12073097376031036
+      ],
+      "sizeMeters": [
+        0.21205927431583405,
+        0.6540167939567566,
+        0.24146194756031036
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 7576,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 3,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 3,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 60,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 192,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

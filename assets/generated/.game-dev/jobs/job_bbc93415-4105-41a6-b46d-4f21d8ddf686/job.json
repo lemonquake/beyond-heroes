@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_bbc93415-4105-41a6-b46d-4f21d8ddf686",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_fire_basket\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:39.368Z",
+  "updatedAt": "2026-10-02T21:12:39.420Z",
+  "startedAt": "2026-10-02T21:12:39.374Z",
+  "completedAt": "2026-10-02T21:12:39.420Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-14c3c145-713e-4ee5-a4fb-c8fea52ab52a' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_fire_basket\r'",
+    "retryable": false
+  }
+}

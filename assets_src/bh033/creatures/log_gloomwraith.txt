@@ -1,0 +1,20 @@
+03:14:50 | INFO: Data are loaded, start creating Blender stuff
+03:14:50 | INFO: Blender create Mesh node Cube.001
+03:14:50 | INFO: glTF import finished in 0.11s
+A:\Python\beyond-heroes\assets_src\bh033\creatures\convert_creature.py:61: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if not mat.use_nodes:
+A:\Python\beyond-heroes\assets_src\bh033\creatures\convert_creature.py:100: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if not mat.use_nodes:
+SOURCE ACTIONS ['Death', 'Fast_Flying', 'Flying_Idle', 'Headbutt', 'HitReact', 'No', 'Punch', 'Yes']
+HEIGHT 4.249 -> 1.9 scale 0.4472
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+03:14:50 | INFO: Starting glTF 2.0 export
+03:14:50 | INFO: Extracting primitive: Cube.001
+03:14:50 | INFO: Primitives created: 1
+03:14:51 | INFO: Finished glTF 2.0 export in 1.1724321842193604 s
+
+EXPORTED A:/Python/beyond-heroes/assets_src/bh033/creatures/out/gloomwraith_q.glb clips ['idle', 'idle_look', 'alert', 'walk', 'run', 'run_combat', 'hit_light', 'hit_heavy', 'stagger_small', 'knockback', 'death', 'death_back', 'cast_quick', 'cast_area']
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

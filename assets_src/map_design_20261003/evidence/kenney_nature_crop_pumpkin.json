@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\crop_pumpkin.glb",
+    "fileBytes": 10840,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 2,
+    "vertexCount": 468,
+    "triangleCount": 120,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 2,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.2206350564956665,
+        -0.05,
+        -0.22597205638885498
+      ],
+      "max": [
+        0.2206350564956665,
+        0.28382999897003175,
+        0.22597205638885498
+      ],
+      "sizeMeters": [
+        0.441270112991333,
+        0.33382999897003174,
+        0.45194411277770996
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\crop_pumpkin.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 120,
+      "materials": 2,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.441270112991333,
+        0.33382999897003174,
+        0.45194411277770996
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crop_pumpkin\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_crop_pumpkin",
+        "category": "environment_prop",
+        "description": "Pumpkin produce. Intended use: Market baskets and farm storage clusters",
+        "displayName": "kenney_nature_crop_pumpkin",
+        "files": [
+          {
+            "bytes": 10840,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077"
+          },
+          {
+            "bytes": 1597,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "37e7799880f4c8d7a791ad9e12860f69f3264fe0c4a905942cce6f441279d0f2"
+          },
+          {
+            "bytes": 831,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "55abe47213d0d7897b8f375e593116e90349d5881ab531d1b0a84a6adfc95ae3"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "8e424d6e9c03ab6966c41b4ce8931de9485cfe89077e567c38ac9b9dfc4bf116"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_11fbdd63f46c808d7354656d",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+  "embedded_textures": []
+}

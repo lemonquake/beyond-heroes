@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_graveyard_detail_chalice",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_chalice.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0",
+ "source_sha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8",
+ "derived_sha256": "892488d49682e0fc204dc2040701e084db8b72914ccd72706526cccf935a8dae",
+ "scale": 1.0,
+ "scale_rule": [
+  "s",
+  1.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Brass"
+ ],
+ "part_faces": {
+  "BH_Brass": 136
+ },
+ "source_to_material": {
+  "wood": "BH_Brass",
+  "cream": "BH_Brass"
+ },
+ "triangles": 136,
+ "surfaces": 1,
+ "source_triangles": 136,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.164,
+  0.249,
+  0.164
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

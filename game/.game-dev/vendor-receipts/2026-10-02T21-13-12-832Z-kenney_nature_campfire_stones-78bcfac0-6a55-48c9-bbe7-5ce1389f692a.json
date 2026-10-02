@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_8e7cb954ca65fc75726cbdf8",
+  "assetId": "kenney_nature_campfire_stones",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_campfire_stones",
+  "modelSha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+  "manifestSha256": "00c32ab3325d9c7ae54d604844bc874aa488c292170acdd422bea651c5c708c2",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:12.832Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_campfire_stones\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

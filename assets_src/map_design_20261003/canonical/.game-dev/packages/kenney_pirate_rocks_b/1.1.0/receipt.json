@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:32.159Z",
+  "destination": {
+    "assetId": "kenney_pirate_rocks_b",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "ca57b40e802a2d61dee363e46c5ba767af75ca3181f4ac2b5cbf90b86b755cfe",
+  "packageId": "pkg_0cb980bf72f53ac0b1dd9793",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 41428,
+    "fileName": "kenney_pirate_rocks_b.glb",
+    "sha256": "99e962600fb419faa6e9a2c8d36bb89313f6ffb9f8da2ab5b5a81c6e467a12f8"
+  }
+}

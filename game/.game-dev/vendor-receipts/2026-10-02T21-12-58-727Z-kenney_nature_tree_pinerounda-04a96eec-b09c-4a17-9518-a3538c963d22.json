@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_0679f7759861878a68d00bad",
+  "assetId": "kenney_nature_tree_pinerounda",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_tree_pinerounda",
+  "modelSha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+  "manifestSha256": "c18605646c8cf274574fdf26f9e687ba0effcaef612c4233ec691fa54c40a121",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:12:58.727Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_pinerounda\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

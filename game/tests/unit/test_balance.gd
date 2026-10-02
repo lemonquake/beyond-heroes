@@ -134,7 +134,11 @@ func _spawn(n: int, lvl: int, at: Vector3) -> Array:
 ## Damage the class deals to `n` dummies in SIM_SECONDS of play, per second.
 func _dps(h: HeroData, lvl: int, n: int) -> float:
 	await _begin(h)
-	var dist := 7.0 if h.cls.id in RANGED else 2.4
+	# A melee player steps up to the blow: stand where the weapon reaches. The old fixed 2.4 m is out of a dagger's 1.9 m reach, so a
+	# Shadowblade bot never landed an attack (0.7 damage a second) and every other class then measured far above the mean.
+	var loadout := h.compute_stats().loadout
+	var reach: float = loadout.main_type.reach if loadout and loadout.main_type else 2.4
+	var dist := 7.0 if h.cls.id in RANGED else (2.4 if reach >= 2.4 else reach * 0.85)
 	var fwd := _player.forward()
 	var center := _player.global_position + fwd * (dist + (1.4 if n > 1 else 0.0))
 	var es := _spawn(n, lvl, center)

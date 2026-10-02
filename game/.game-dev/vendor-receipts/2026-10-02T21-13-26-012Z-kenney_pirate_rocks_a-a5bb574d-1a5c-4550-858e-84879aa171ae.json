@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_9826529bfb8c770a5a286a49",
+  "assetId": "kenney_pirate_rocks_a",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_rocks_a",
+  "modelSha256": "e38a431e7c6efea635555aadc0a53770dd19219044aeaa5514e8a770ea1f710a",
+  "manifestSha256": "c370a827e4e8192d1fc8d5bcbc7bc00fd05f44dd49ec42dd51730965700b5332",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:26.012Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_rocks_a\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:34.801Z",
+  "destination": {
+    "assetId": "kenney_pirate_structure_fence",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "d1d8276916f87993cf33b51e8079afc110b0b4ffbbe061fdf8316d056ccb1ca7",
+  "packageId": "pkg_399a886e575edc7e945d6c58",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 45872,
+    "fileName": "kenney_pirate_structure_fence.glb",
+    "sha256": "a973071d2097fb3a7317f0dc03c14f21687dd49081432cbe03b790e8f0be344a"
+  }
+}

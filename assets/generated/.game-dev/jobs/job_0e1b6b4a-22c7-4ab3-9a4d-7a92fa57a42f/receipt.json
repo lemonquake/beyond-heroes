@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_boat_row_large\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_boat_row_large",
+      "category": "environment_prop",
+      "description": "Larger rowing boat. Intended use: Olivar landing; static decoration or shared gentle bob",
+      "displayName": "kenney_pirate_boat_row_large",
+      "files": [
+        {
+          "bytes": 15972,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b496c0d5f9053ebc7e9b9a39a4770d5ccaff5510c51b7c72c1b8391442e61d0f"
+        },
+        {
+          "bytes": 1769,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "8175288e0b4c44559534228fef5fa72fdf6c1296c630b6a390f497acc5ec1c8f"
+        },
+        {
+          "bytes": 797,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "408fdf37ea7c2de7f8e99511487ffd0146d0ebd8c59bb27e3fd7eea0e8718cda"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c93601a1988f739b64211e787fb8d2e004853dd09b95acf1581bd24e3e03a889"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_25fe722f0857a16334a27a34",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:25.565Z"
+}

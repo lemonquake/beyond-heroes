@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_urn_round\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_urn_round",
+      "category": "environment_prop",
+      "description": "Round funerary urn. Intended use: Catacomb niches and Jade Sepulchre memorial corners",
+      "displayName": "kenney_graveyard_urn_round",
+      "files": [
+        {
+          "bytes": 23712,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "9a80d295c1c2124435eea72166fc16d7a4fe54e538950aa320dfb63a704b5e37"
+        },
+        {
+          "bytes": 1749,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "c67f27067176bcb7455c5d7e2cfe66ddf1c723932dbec60c2a1e9c696f37f388"
+        },
+        {
+          "bytes": 806,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "39c0095cbaec0f70f2083d4328e4e699550e06c6cd46e497bb6d9bb8ca163eb1"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "8327b96f23c2994c4b83b3664af59247718e0dd0a2b79377364e095b2167264a"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_408b54ee4f752fa8424852fb",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:42.574Z"
+}

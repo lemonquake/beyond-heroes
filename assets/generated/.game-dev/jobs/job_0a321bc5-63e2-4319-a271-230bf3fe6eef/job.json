@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_0a321bc5-63e2-4319-a271-230bf3fe6eef",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tent_smallopen\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:01:48.958Z",
+  "updatedAt": "2026-10-02T20:01:48.988Z",
+  "startedAt": "2026-10-02T20:01:48.962Z",
+  "completedAt": "2026-10-02T20:01:48.988Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_0a321bc5-63e2-4319-a271-230bf3fe6eef\\receipt.json"
+}

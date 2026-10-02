@@ -1,0 +1,38 @@
+{
+ "source_id": "kenney_pirate_chest",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_chest.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_chest/1.1.0",
+ "source_sha256": "67765386e504069b85b33cfcb7b13504a49c64d206d8b8302c420f72e0ba6631",
+ "derived_sha256": "11bdf4ddd175309f01b254e928f72368382a40a6a186fbe01a2130e4c4072e05",
+ "scale": 0.5194,
+ "scale_rule": [
+  "h",
+  0.7
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Iron",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Iron": 182,
+  "BH_Wood": 50
+ },
+ "source_to_material": {
+  "dark": "BH_Iron",
+  "grey": "BH_Iron",
+  "wood": "BH_Wood"
+ },
+ "triangles": 232,
+ "surfaces": 2,
+ "source_triangles": 232,
+ "source_meshes": 2,
+ "bounds_m": [
+  0.662,
+  0.7,
+  0.682
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

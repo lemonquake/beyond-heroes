@@ -1,0 +1,50 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "boss": "rot_mother",
+  "engine": "4.7.2-stable (official)",
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "rot_patches": 1,
+  "shots": [
+    {
+      "name": "verdigast_01_buds_and_warnings",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "verdigast_02_bud_broken_ground_saved",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "verdigast_03_unbroken_bud_bloomed_rot",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "verdigast_04_phase2_ring_and_buds",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "verdigast_05_wipe_explains",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

@@ -1,0 +1,110 @@
+{
+ "0": {
+  "pack": {
+   "acc": 1216.0,
+   "bl": false,
+   "c": {
+    "0": 3207.2530628642,
+    "6": 890.942693554523
+   },
+   "crit": false,
+   "ev": false,
+   "hv": false,
+   "kb": 0.0,
+   "lbl": "",
+   "lvl": 50,
+   "pa": 0.0,
+   "pe": {
+    "1": 0.092,
+    "2": 0.092,
+    "3": 0.092,
+    "4": 0.092,
+    "5": 0.092,
+    "6": 0.092,
+    "7": 0.092,
+    "8": 0.092
+   },
+   "po": 0.0,
+   "push": "(0.0, 0.0, 0.0)",
+   "st": {}
+  },
+  "split": 1923,
+  "split_log": [
+   "==  (SPELL) ==",
+   "Base roll 4098.2",
+   "Attribute increase +0.0% joins the shared damage budget",
+   "Weapon modifier x1.00 -> 4098.2",
+   "Skill modifier x1.00 -> 4098.2",
+   "Defense 1467 (pen 0%) vs level 50: -69.6% physical -> 974.2",
+   "Water: affinity x1.00, resistance 3% - pen 9% -> 948.9",
+   "FINAL 1923"
+  ],
+  "whole": 1843,
+  "whole_log": [
+   "==  (ATTACK) ==",
+   "Base weapon roll 956.4 (range 784.7-1182.6)",
+   "Attribute increase +389.0% joins the shared damage budget",
+   "Weapon modifier x1.00 -> 956.4",
+   "Skill modifier x1.00 -> 956.4",
+   "Physical modifier x4.19 -> 3207.3",
+   "Water modifier x4.27 -> 815.9",
+   "Defense 1467 (pen 0%) vs level 50: -69.6% physical -> 974.2",
+   "Water: affinity x1.00, resistance 3% - pen 9% -> 868.9",
+   "FINAL 1843"
+  ]
+ },
+ "1": {
+  "pack": {
+   "acc": 1216.0,
+   "bl": false,
+   "c": {
+    "1": 714.4112976,
+    "3": 321.2393184
+   },
+   "crit": false,
+   "ev": false,
+   "hv": false,
+   "kb": 0.0,
+   "lbl": "",
+   "lvl": 50,
+   "pa": 0.0,
+   "pe": {
+    "1": 0.092,
+    "2": 0.092,
+    "3": 0.092,
+    "4": 0.092,
+    "5": 0.092,
+    "6": 0.092,
+    "7": 0.092,
+    "8": 0.092
+   },
+   "po": 0.0,
+   "push": "(0.0, 0.0, 0.0)",
+   "st": {}
+  },
+  "split": 1017,
+  "split_log": [
+   "==  (SPELL) ==",
+   "Base roll 1035.7",
+   "Attribute increase +0.0% joins the shared damage budget",
+   "Weapon modifier x1.00 -> 1035.7",
+   "Skill modifier x1.00 -> 1035.7",
+   "Fire: affinity x1.00, resistance 3% - pen 9% -> 760.8",
+   "Lightning: affinity x1.00, resistance 29% - pen 9% -> 256.3",
+   "FINAL 1017"
+  ],
+  "whole": 931,
+  "whole_log": [
+   "==  (SPELL) ==",
+   "Base roll 400.0",
+   "Attribute increase +83.8% joins the shared damage budget",
+   "Weapon modifier x1.00 -> 484.0",
+   "Skill modifier x1.00 -> 484.0",
+   "Fire modifier x1.93 -> 654.2",
+   "Lightning modifier x2.03 -> 294.2",
+   "Fire: affinity x1.00, resistance 3% - pen 9% -> 696.7",
+   "Lightning: affinity x1.00, resistance 29% - pen 9% -> 234.8",
+   "FINAL 931"
+  ]
+ }
+}

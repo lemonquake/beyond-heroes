@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:33.923Z",
+  "destination": {
+    "assetId": "kenney_pirate_platform_planks",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "5593d7316097ca373447feabaf11bd0f307286826ebb00a552c211ab61cf8b1d",
+  "packageId": "pkg_09c99d408a37fba51cefdb0c",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 16644,
+    "fileName": "kenney_pirate_platform_planks.glb",
+    "sha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e"
+  }
+}

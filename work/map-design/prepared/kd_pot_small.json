@@ -1,0 +1,38 @@
+{
+ "source_id": "kenney_nature_pot_small",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_pot_small.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0",
+ "source_sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8",
+ "derived_sha256": "8f6370b651aa0fcbf5523e3da9d2e6b7aaf050dd5137373234c798f26b6430ee",
+ "scale": 2.0522,
+ "scale_rule": [
+  "h",
+  0.55
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Terracotta",
+  "BH_Dirt"
+ ],
+ "part_faces": {
+  "BH_Terracotta": 68,
+  "BH_Dirt": 4
+ },
+ "source_to_material": {
+  "wood": "BH_Terracotta",
+  "woodBarkDark": "BH_Terracotta",
+  "_defaultMat": "BH_Dirt"
+ },
+ "triangles": 72,
+ "surfaces": 2,
+ "source_triangles": 72,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.664,
+  0.55,
+  0.575
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

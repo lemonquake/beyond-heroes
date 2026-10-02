@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:04.634Z",
+  "destination": {
+    "assetId": "kenney_furniture_tablecloth",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "a2986af53985c5b9c68cc13ea824653bd362f006fd95d6c5bfd244d048ecd876",
+  "packageId": "pkg_b85b2ce9bfdbeee44958068e",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 9920,
+    "fileName": "tableCloth.glb",
+    "sha256": "64de52b5c4370724c29feefd68a65b157c55c88592e2096987bbce007ae80bcb"
+  }
+}

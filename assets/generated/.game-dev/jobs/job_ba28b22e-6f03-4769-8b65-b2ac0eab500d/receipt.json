@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_urn_square\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_urn_square",
+      "category": "environment_prop",
+      "description": "Square funerary urn. Intended use: Burial chamber silhouette variation",
+      "displayName": "kenney_graveyard_urn_square",
+      "files": [
+        {
+          "bytes": 22460,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "1cebfae88912999cd1c23d18a6c3567be1bcc95ebd6f28636569491dd42d1a15"
+        },
+        {
+          "bytes": 1734,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "6638aa6c0d1a3ea6ee33b4533ae767104c7656ad875b7f728a9ee45ecb01fc6f"
+        },
+        {
+          "bytes": 808,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "78d8a6d04e4b87502fdec95c4fcbc905827c0dcf14cca893d45280f8c5ce327a"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "bebc0b4b588c84530fb3c7721bc0dee558f13752b0073e33e67d4c28be47cbcc"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_d8a0a5c8e280c52517864944",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:43.493Z"
+}

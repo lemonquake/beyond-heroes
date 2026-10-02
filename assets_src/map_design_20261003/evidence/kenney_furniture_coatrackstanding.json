@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\coatRackStanding.glb",
+    "fileBytes": 13288,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 300,
+    "triangleCount": 190,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.1363999992609024,
+        3.0776935281025807e-29,
+        -0.1363999992609024
+      ],
+      "max": [
+        0.1363999992609024,
+        0.7699999809265137,
+        0.1363999992609024
+      ],
+      "sizeMeters": [
+        0.2727999985218048,
+        0.7699999809265137,
+        0.2727999985218048
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\furniture-kit\\Models\\GLTF format\\coatRackStanding.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 190,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.2727999985218048,
+        0.7699999809265137,
+        0.2727999985218048
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_coatrackstanding\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_furniture_coatrackstanding",
+        "category": "environment_prop",
+        "description": "Standing coat rack. Intended use: Tavern vestibule and guild reception",
+        "displayName": "kenney_furniture_coatrackstanding",
+        "files": [
+          {
+            "bytes": 13288,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91"
+          },
+          {
+            "bytes": 1623,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "36431593922a8feb5db7f18a12c48dbd091a8f2958a7c78b6be61206ab056833"
+          },
+          {
+            "bytes": 854,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "5c85f9da4626f8ebfe7a27d630bdf6d732ec59b0264f64456deaf5b0cd831a97"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "75504cc42f31280fb13aac80ff6873f1e58734e05a0d152c0c4df970e012fdb0"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_2b35cacbc798193213a84065",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+  "embedded_textures": []
+}

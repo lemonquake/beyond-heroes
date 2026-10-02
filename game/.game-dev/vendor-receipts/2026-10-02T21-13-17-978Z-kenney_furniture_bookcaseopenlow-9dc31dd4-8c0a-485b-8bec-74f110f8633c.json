@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e65a06adfc7d5e3b0a08dc24",
+  "assetId": "kenney_furniture_bookcaseopenlow",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_bookcaseopenlow",
+  "modelSha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+  "manifestSha256": "af6aea261bfd15fa2e8db19cbabbf9b47cf859d867d6c6f930a2c6217746973b",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:17.978Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseopenlow\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

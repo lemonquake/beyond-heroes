@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_lantern_candle\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_lantern_candle",
+      "category": "environment_prop",
+      "description": "Candle lantern housing. Intended use: Crypt route accents and flooded cistern pier",
+      "displayName": "kenney_graveyard_lantern_candle",
+      "files": [
+        {
+          "bytes": 22124,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "c78da0717e38ea019617a39a2ad263c54ecc3b0efbdcd3da124db6550657e90e"
+        },
+        {
+          "bytes": 1757,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "ec69d02b7716c1e66f6fd7ba0ad455abf86db2be1aa016cfc74403ef37deb8a5"
+        },
+        {
+          "bytes": 816,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d775dedbcc17a1baa1b124675d96f9135665f70b4abdff179cc7b15382f1c2cb"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e27e7ef0328ca4163ffd4e7f7b42f2d3d90db705684cef224855bb941746f00f"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f4a8233947e4d4e5a48a45ac",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:40.719Z"
+}

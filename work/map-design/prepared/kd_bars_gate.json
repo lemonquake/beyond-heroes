@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_modular-dungeon_gate_metal_bars",
+ "kit": "modular-dungeon-kit",
+ "runtime": "res://assets/environment/kd_bars_gate.glb",
+ "package": "canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0",
+ "source_sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620",
+ "derived_sha256": "d79ce3c06525eb8b2ae27f951dc83cbe0abe757f0eda235ca33aa9eb0b088e07",
+ "scale": 0.9,
+ "scale_rule": [
+  "s",
+  0.9
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Iron",
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Iron": 280,
+  "BH_Stone": 440
+ },
+ "source_to_material": {
+  "grey_dark": "BH_Iron",
+  "grey": "BH_Stone"
+ },
+ "triangles": 720,
+ "surfaces": 2,
+ "source_triangles": 720,
+ "source_meshes": 2,
+ "bounds_m": [
+  3.96,
+  3.96,
+  1.26
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

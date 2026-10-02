@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_eaf2e903-098d-4835-8e8e-79aa592e58d5",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_gate\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:14:49.574Z",
+  "updatedAt": "2026-10-02T20:14:49.605Z",
+  "startedAt": "2026-10-02T20:14:49.580Z",
+  "completedAt": "2026-10-02T20:14:49.605Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_eaf2e903-098d-4835-8e8e-79aa592e58d5\\receipt.json"
+}

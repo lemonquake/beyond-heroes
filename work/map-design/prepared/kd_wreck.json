@@ -1,0 +1,44 @@
+{
+ "source_id": "kenney_pirate_ship_wreck",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_wreck.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0",
+ "source_sha256": "28c2ca697025ebdb0adc1a7a4b143d40cb2ca474d96b1db51d9cc2f6af7c16c2",
+ "derived_sha256": "77ca119705d47c6cf9b81f8d7893120f462ffc10057a26025fe15a62e57d8bde",
+ "scale": 1.15,
+ "scale_rule": [
+  "s",
+  1.15
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_WoodDark",
+  "BH_Iron",
+  "BH_Wood",
+  "BH_Kelp"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 678,
+  "BH_Iron": 26,
+  "BH_Wood": 454,
+  "BH_Kelp": 1124
+ },
+ "source_to_material": {
+  "wood_dark": "BH_WoodDark",
+  "grey": "BH_Iron",
+  "wood": "BH_Wood",
+  "dark": "BH_Iron",
+  "teal": "BH_Kelp"
+ },
+ "triangles": 2282,
+ "surfaces": 4,
+ "source_triangles": 2282,
+ "source_meshes": 16,
+ "bounds_m": [
+  5.52,
+  11.458,
+  12.19
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

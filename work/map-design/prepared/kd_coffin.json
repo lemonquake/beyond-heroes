@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_graveyard_coffin",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_coffin.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0",
+ "source_sha256": "4dcfb3534eb7767a65ac5991827d1b89e913d25a1192da84119113c219f644c7",
+ "derived_sha256": "782a4f7fca02abb69e3792cd1203985c98ad89ac1b0c4d45b0bfeab2b941325f",
+ "scale": 2.3,
+ "scale_rule": [
+  "s",
+  2.3
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 256
+ },
+ "source_to_material": {
+  "wood_dark": "BH_WoodDark",
+  "wood": "BH_WoodDark"
+ },
+ "triangles": 256,
+ "surfaces": 1,
+ "source_triangles": 256,
+ "source_meshes": 2,
+ "bounds_m": [
+  1.32,
+  0.747,
+  1.927
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

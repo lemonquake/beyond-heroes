@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bedsingle\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_bedsingle",
+      "category": "environment_prop",
+      "description": "Single bed. Intended use: Existing domestic interiors after linen and wood restyle",
+      "displayName": "kenney_furniture_bedsingle",
+      "files": [
+        {
+          "bytes": 18636,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1"
+        },
+        {
+          "bytes": 1565,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "940380d028925df473a3357bd89b76460e1a73814b396b127d9ce7b8674715c7"
+        },
+        {
+          "bytes": 840,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "61577a863050f581d0dacbc4938eb6de150c005103342a42a4a47cd7079d921a"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "1f79a5f52d513066fdb71686e03f8fee8dad38f58e6efadc56002a1b01b9de4a"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_319616bc8c0ea5dc7fb66f7a",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:17.241Z"
+}

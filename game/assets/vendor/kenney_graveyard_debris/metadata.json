@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_graveyard_debris",
+  "category": "environment_prop",
+  "description": "Stone debris pile. Intended use: Collapsed crypt wall or exhausted mine edge",
+  "displayName": "kenney_graveyard_debris",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.2484707236289978,
+        0.1599999964237213,
+        0.23654921352863312
+      ],
+      "min": [
+        -0.2877454161643982,
+        0,
+        -0.3107205629348755
+      ],
+      "sizeMeters": [
+        0.536216139793396,
+        0.1599999964237213,
+        0.5472697764635086
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 36156,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10965,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 240,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 456,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

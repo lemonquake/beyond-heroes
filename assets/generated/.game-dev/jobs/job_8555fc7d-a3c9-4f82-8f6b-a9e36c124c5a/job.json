@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_8555fc7d-a3c9-4f82-8f6b-a9e36c124c5a",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_platform_planks\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:32.521Z",
+  "updatedAt": "2026-10-02T21:12:32.574Z",
+  "startedAt": "2026-10-02T21:12:32.528Z",
+  "completedAt": "2026-10-02T21:12:32.574Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-4c75e7e9-649f-4ca5-af25-4b709280f996' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_platform_planks\r'",
+    "retryable": false
+  }
+}

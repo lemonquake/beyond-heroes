@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_furniture_bookcaseclosed",
+  "category": "environment_prop",
+  "description": "Closed timber bookcase. Intended use: Keeper house and council archives",
+  "displayName": "kenney_furniture_bookcaseclosed",
+  "files": [
+    {
+      "bytes": 23132,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047"
+    },
+    {
+      "bytes": 1536,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "3d675dbc18ce7c3446a164566511163a467da8d6f6f706e26cb2cf457ed0f36b"
+    },
+    {
+      "bytes": 850,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "05213f9108356c07e2fc57264b19115bca2aa72ebb5e7e9b5a247dbe7455acae"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "2f1f3f70f60e059f520bbbe5c7812cb52d4bf5582ed4021910d7ca637f87bf1a"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_e58a9b3b99878a042a5efa14",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

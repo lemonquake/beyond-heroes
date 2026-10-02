@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_7a052ea4-d1e1-4061-ac4d-432a2c4e695a",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:03.660Z",
+  "updatedAt": "2026-10-02T21:12:03.695Z",
+  "startedAt": "2026-10-02T21:12:03.666Z",
+  "completedAt": "2026-10-02T21:12:03.695Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_7a052ea4-d1e1-4061-ac4d-432a2c4e695a\\receipt.json"
+}

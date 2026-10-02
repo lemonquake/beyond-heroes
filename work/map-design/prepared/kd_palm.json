@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_tree_palm",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_palm.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0",
+ "source_sha256": "27bbb23d26ed788d84de6df2f7fab0acc3fe0ff16c7d08cdcfa1fffcb11de324",
+ "derived_sha256": "b23fd886be24befbea470282559f064eb38b7a9e4a8067325bd4ea0b083a64ff",
+ "scale": 4.9518,
+ "scale_rule": [
+  "h",
+  7.5
+ ],
+ "origin": "trunk base",
+ "collision": "trunk",
+ "materials": [
+  "BH_Bark",
+  "BH_JungleLeaf"
+ ],
+ "part_faces": {
+  "BH_Bark": 18,
+  "BH_JungleLeaf": 168
+ },
+ "source_to_material": {
+  "woodBark": "BH_Bark",
+  "leafsGreen": "BH_JungleLeaf"
+ },
+ "triangles": 186,
+ "surfaces": 2,
+ "source_triangles": 186,
+ "source_meshes": 1,
+ "bounds_m": [
+  4.632,
+  7.5,
+  5.015
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

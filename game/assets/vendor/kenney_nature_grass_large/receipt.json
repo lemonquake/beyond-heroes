@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:30.661Z",
+  "destination": {
+    "assetId": "kenney_nature_grass_large",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "a8849a4e8dda40f14c8095d12355b3c35cdb9e470ca16454c44f953d02cee91d",
+  "packageId": "pkg_930d7ce0942d9cac7ac0d8c2",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 18504,
+    "fileName": "grass_large.glb",
+    "sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd"
+  }
+}

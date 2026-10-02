@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_pirate_structure_fence",
+  "category": "environment_prop",
+  "description": "Timber rail span. Intended use: Harbour railing repairs beside existing geometry",
+  "displayName": "kenney_pirate_structure_fence",
+  "files": [
+    {
+      "bytes": 45872,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "a973071d2097fb3a7317f0dc03c14f21687dd49081432cbe03b790e8f0be344a"
+    },
+    {
+      "bytes": 1657,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "ecca0468f6d3c98f2e1d0de079596d46414aaa8afce85f720076299de43f9b1e"
+    },
+    {
+      "bytes": 1090,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "0fa8b8e290788b9ceb475365e7f13d2c9ac4d743430b2b56129ca97f082fc2fe"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "a5bca63c2f2213bde9e273656195c7194a05206ffae2a0d9510419e24017e164"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_399a886e575edc7e945d6c58",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_3bc5c64c-bb5f-4354-bd29-ff08cbd13586",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_rock_smallflata\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:52.939Z",
+  "updatedAt": "2026-10-02T21:11:52.994Z",
+  "startedAt": "2026-10-02T21:11:52.945Z",
+  "completedAt": "2026-10-02T21:11:52.994Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-4e560061-a28c-4f43-81fa-697198d7d02c' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_rock_smallflata\r'",
+    "retryable": false
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_stump_rounddetailed",
+  "category": "environment_prop",
+  "description": "Cut stump with irregular surface. Intended use: Westreach woodcutting patch and Wyman firewood corner",
+  "displayName": "kenney_nature_stump_rounddetailed",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.19587929546833038,
+        0.15649999380111695,
+        0.18549999594688416
+      ],
+      "min": [
+        -0.1606477051973343,
+        -0.05,
+        -0.18549999594688416
+      ],
+      "sizeMeters": [
+        0.3565270006656647,
+        0.20649999380111694,
+        0.3709999918937683
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 8188,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 96,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 320,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

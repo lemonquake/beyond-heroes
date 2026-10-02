@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_2bb4fde4-0605-430c-9b77-d7a7f01a06bc",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_tablecross"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:15.674Z",
+  "updatedAt": "2026-10-02T21:13:15.732Z",
+  "startedAt": "2026-10-02T21:13:15.681Z",
+  "completedAt": "2026-10-02T21:13:15.732Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_2bb4fde4-0605-430c-9b77-d7a7f01a06bc\\receipt.json"
+}

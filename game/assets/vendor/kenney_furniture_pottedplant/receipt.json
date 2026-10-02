@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:20.679Z",
+  "destination": {
+    "assetId": "kenney_furniture_pottedplant",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "9df9eea366d99bf4fdf4fbbbb60060bd11d3a11b5fa57c9e68400ff666f2f157",
+  "packageId": "pkg_5ca1bce6e8cc60adeab735a8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7576,
+    "fileName": "pottedPlant.glb",
+    "sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15"
+  }
+}

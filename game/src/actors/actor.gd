@@ -15,8 +15,12 @@ const KNOCKED_THRESHOLD := 3.5       # above this knock speed the actor loses co
 const HEAVY_KNOCK := 9.0             # above this the full knockback animation plays
 const IMPACT_MIN_SPEED := 5.5        # m/s into a surface before an impact deals damage
 const IMPACT_COOLDOWN := 0.3
-const IMPACT_HP_CAP := 0.35          # impact damage never exceeds 35% of the victim's max HP per collision
-const IMPACT_TRANSFER := 0.6         # share of momentum passed to a body we crash into
+const IMPACT_HP_CAP := 0.20          # impact damage never exceeds 20% of the victim's max HP per collision
+const IMPACT_TRANSFER := 0.4         # share of momentum passed to a body we crash into
+const MAX_KNOCK_DISTANCE := 3.0      # total horizontal travel in one knockback episode
+const MAX_KNOCK_DURATION := 0.75     # repeated hits cannot extend this episode
+const KNOCK_RECOVERY := 0.6          # brief protection against another push/throw after an episode
+const MAX_LAUNCH_HEIGHT := 1.0       # upward travel from the original launch position
 const MAX_CHAIN_DEPTH := 1           # a transferred knock cannot transfer again (no chain reactions)
 const SURFACE_SEVERITY := {&"stone": 1.0, &"wood": 0.7, &"flesh": 0.55, &"metal": 1.1, &"earth": 0.8}
 
@@ -38,6 +42,10 @@ var knock_velocity := Vector3.ZERO
 var knock_source: DerivedStats            # stats of whoever launched us (for impact damage scaling)
 var knock_source_node: Node
 var knock_depth := 0
+var _knock_remaining := 0.0
+var _knock_distance := 0.0
+var _knock_recovery := 0.0
+var _launch_origin_y := 0.0
 var _impact_cd := 0.0
 var _enemy_retaliation_cd := 0.0
 const ENEMY_RETALIATION_HP_CAP := 0.08
@@ -362,21 +370,25 @@ func die(killer: Node) -> void:
 # ---- Knockback & impact physics ---------------------------------------------------------------------------
 
 func apply_knockback(dir: Vector3, speed: float, source: DerivedStats, source_node: Node, depth := 0, launch := 0.0) -> void:
-	if not is_finite(speed) or speed <= 0.0:
+	if not is_finite(speed) or speed <= 0.0 or not dir.is_finite() or _knock_recovery > 0.0:
 		return
+	if not is_finite(launch):
+		launch = 0.0
+	if _knock_remaining <= 0.0:
+		_knock_remaining = MAX_KNOCK_DURATION
+		_knock_distance = MAX_KNOCK_DISTANCE
 	if stats and stats.has_flag(&"unstaggerable"):
 		speed *= 0.4
-	var v := dir.normalized() * minf(speed, DamagePipeline.MAX_KNOCKBACK)
-	# Replace rather than accumulate beyond the cap: the stronger push wins.
-	var combined := knock_velocity + v
-	if combined.length() > DamagePipeline.MAX_KNOCKBACK:
-		combined = combined.normalized() * DamagePipeline.MAX_KNOCKBACK
-	knock_velocity = combined
+	var v := dir.slide(Vector3.UP).normalized() * minf(speed, DamagePipeline.MAX_KNOCKBACK)
+	# A fresh hit may redirect a stronger push, but cannot add momentum or reset the budget.
+	if v.length() >= knock_velocity.length():
+		knock_velocity = v
 	knock_source = source
 	knock_source_node = source_node
 	knock_depth = depth
-	if launch > 0.0 and weight < 4.0:
-		_vertical = maxf(_vertical, launch / sqrt(maxf(weight, 0.5)))
+	if launch > 0.0 and weight < 4.0 and not _airborne_from_launch:
+		_vertical = maxf(_vertical, minf(DamagePipeline.MAX_LAUNCH, launch / sqrt(maxf(weight, 0.5))))
+		_launch_origin_y = global_position.y
 		_airborne_from_launch = true
 	if visual and alive:
 		if speed >= HEAVY_KNOCK or launch > 0.0:
@@ -388,6 +400,11 @@ func apply_knockback(dir: Vector3, speed: float, source: DerivedStats, source_no
 func physics_move(delta: float, desired: Vector3) -> void:
 	if not is_finite(delta) or delta <= 0.0:
 		return
+	_knock_recovery = maxf(0.0, _knock_recovery - delta)
+	if _knock_remaining > 0.0:
+		_knock_remaining = maxf(0.0, _knock_remaining - delta)
+		if _knock_remaining <= 0.0 or _knock_distance <= 0.0:
+			_end_knockback()
 	_impact_cd = maxf(0.0, _impact_cd - delta)
 	_enemy_retaliation_cd = maxf(0.0, _enemy_retaliation_cd - delta)
 	# Knockback decay: constant friction + drag, so strong hits travel far but settle predictably.
@@ -397,6 +414,9 @@ func physics_move(delta: float, desired: Vector3) -> void:
 		knock_velocity = knock_velocity * maxf(0.0, ks - dec) / ks
 		if knock_velocity.length() < 0.05:
 			knock_velocity = Vector3.ZERO
+	# Limit the next step before moving; large frame times cannot overshoot the travel budget.
+	if knock_velocity.length() * delta > _knock_distance:
+		knock_velocity = knock_velocity.normalized() * maxf(0.0, _knock_distance) / delta
 	var control := 0.0 if knock_velocity.length() > KNOCKED_THRESHOLD else 1.0
 	var horiz := desired * control + knock_velocity
 	if is_on_floor() and _vertical <= 0.0:
@@ -406,19 +426,35 @@ func physics_move(delta: float, desired: Vector3) -> void:
 			_on_landed()
 	else:
 		_vertical -= GRAVITY * delta
+	if _airborne_from_launch and _vertical > 0.0:
+		_vertical = minf(_vertical, maxf(0.0, _launch_origin_y + MAX_LAUNCH_HEIGHT - global_position.y) / delta)
 	velocity = Vector3(horiz.x, _vertical, horiz.z)
 	if not velocity.is_finite():
 		velocity = Vector3.ZERO
 		knock_velocity = Vector3.ZERO
 		_vertical = 0.0
 	var pre_knock := knock_velocity
+	var before_move := global_position
 	if rest_skip and _resting(horiz):
 		return
 	move_and_slide()
+	if pre_knock.length() > 0.0:
+		# Charge only displacement in the push direction; controlled movement is not part of the budget.
+		_knock_distance = maxf(0.0, _knock_distance - maxf(0.0, (global_position - before_move).dot(pre_knock.normalized())))
 	if pre_knock.length() > 1.0:
 		_process_impacts(pre_knock)
+	if _knock_remaining > 0.0 and (_knock_distance <= 0.001 or (knock_velocity.is_zero_approx() and not _airborne_from_launch)):
+		_end_knockback()
 	if global_position.y < -40.0:
 		_fell_out()
+
+func _end_knockback() -> void:
+	knock_velocity = Vector3.ZERO
+	_knock_remaining = 0.0
+	_knock_distance = 0.0
+	_knock_recovery = KNOCK_RECOVERY
+	if _airborne_from_launch:
+		_vertical = minf(_vertical, 0.0)
 
 func _on_landed() -> void:
 	if visual and alive:

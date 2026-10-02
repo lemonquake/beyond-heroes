@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_pirate_tool_paddle",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_paddle.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0",
+ "source_sha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1",
+ "derived_sha256": "8271a8c6630d8e6732d69c69cdb59ef6ba265768b817de6aba8d3c95768de244",
+ "scale": 0.6811,
+ "scale_rule": [
+  "h",
+  1.6
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Wood": 60
+ },
+ "source_to_material": {
+  "wood": "BH_Wood"
+ },
+ "triangles": 60,
+ "surfaces": 1,
+ "source_triangles": 60,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.448,
+  1.6,
+  0.141
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

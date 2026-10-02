@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_plantsmall1",
+  "category": "environment_prop",
+  "description": "Small potted plant. Intended use: House windows and Agdao market counters",
+  "displayName": "kenney_furniture_plantsmall1",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.04733036459135887,
+        0.14000000059604645,
+        0.04733036546563366
+      ],
+      "min": [
+        -0.04733036459135887,
+        0,
+        -0.04733036546563366
+      ],
+      "sizeMeters": [
+        0.09466072918271774,
+        0.14000000059604645,
+        0.09466073093126733
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 8224,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 102,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 320,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

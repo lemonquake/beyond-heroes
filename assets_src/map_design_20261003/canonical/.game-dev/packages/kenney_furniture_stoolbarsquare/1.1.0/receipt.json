@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:01.164Z",
+  "destination": {
+    "assetId": "kenney_furniture_stoolbarsquare",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "6aded95317b782bdfc6eaf11b7845c581c3b311ed8deb60f270d4dff4e7fc2f6",
+  "packageId": "pkg_1a2f4ca245f1ee867b253657",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 9784,
+    "fileName": "stoolBarSquare.glb",
+    "sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b"
+  }
+}

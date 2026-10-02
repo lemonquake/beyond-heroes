@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_gate_metal_bars\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_modular_dungeon_gate_metal_bars",
+      "category": "environment_prop",
+      "description": "Metal barred gate. Intended use: Visual side-cell gate, preserve existing sealed-door state logic",
+      "displayName": "kenney_modular-dungeon_gate_metal_bars",
+      "files": [
+        {
+          "bytes": 68172,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "e3a2228906e1601c6d4fbb53d615f03541094177a624168e77b1ab0220e081f4"
+        },
+        {
+          "bytes": 1776,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "2cd2f35cd38c9738bf50f6011a18a4fa391798a683d4b8ae20fa2e7bdb1ae415"
+        },
+        {
+          "bytes": 848,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "249bbae062f9eca325e348b9eab2c2e90e649eb252e9b4ea0958e0b5626abcc6"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c1855c40aff454291f33ba6c70bc6e8ec32bd1f3d88ed0003c2c61fc921357b0"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_8e03ed3a87aa8b44133b9ac1",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:51.072Z"
+}

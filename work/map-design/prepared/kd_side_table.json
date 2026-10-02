@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_furniture_sidetable",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_side_table.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0",
+ "source_sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+ "derived_sha256": "6de7955ccc1280112f635a0be127228c1a018029b32df0c1a5ce2c5b7c311cf2",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_Wood": 116,
+  "BH_WoodDark": 2
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "_defaultMat": "BH_WoodDark"
+ },
+ "triangles": 118,
+ "surfaces": 2,
+ "source_triangles": 118,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.203,
+  0.865,
+  0.495
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

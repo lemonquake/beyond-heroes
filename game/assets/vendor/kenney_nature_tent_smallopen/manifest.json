@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_tent_smallopen",
+  "category": "environment_prop",
+  "description": "Small open tent. Intended use: Wyman and survivor camp edge, preserve entrances",
+  "displayName": "kenney_nature_tent_smallopen",
+  "files": [
+    {
+      "bytes": 13604,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd"
+    },
+    {
+      "bytes": 1622,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "446a8b37b114a6b5d908151eb16ee56d6258a0f8d79797d16eec0b4b72e43e13"
+    },
+    {
+      "bytes": 835,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "e14dd7eb0d3b3e5946b3964ef754b8a891debba0a568b472596d0abae55ed353"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "5f85508847158a6b147408d3858348d162e85d987fcff0b324fe9777bcdf4f8e"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_812d87960ee97b0deb0f8cee",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

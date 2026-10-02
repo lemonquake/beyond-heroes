@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_crop_pumpkin",
+  "category": "environment_prop",
+  "description": "Pumpkin produce. Intended use: Market baskets and farm storage clusters",
+  "displayName": "kenney_nature_crop_pumpkin",
+  "files": [
+    {
+      "bytes": 10840,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077"
+    },
+    {
+      "bytes": 1597,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "37e7799880f4c8d7a791ad9e12860f69f3264fe0c4a905942cce6f441279d0f2"
+    },
+    {
+      "bytes": 831,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "55abe47213d0d7897b8f375e593116e90349d5881ab531d1b0a84a6adfc95ae3"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "8e424d6e9c03ab6966c41b4ce8931de9485cfe89077e567c38ac9b9dfc4bf116"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_11fbdd63f46c808d7354656d",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

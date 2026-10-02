@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_platform_planks\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_pirate_platform_planks",
+      "category": "environment_prop",
+      "description": "Plank deck piece. Intended use: Dock repair vignette, visual only unless navigation updated",
+      "displayName": "kenney_pirate_platform_planks",
+      "files": [
+        {
+          "bytes": 16644,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e"
+        },
+        {
+          "bytes": 1753,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "3d6cf8abe49512ffe8edb923ee2c663db2eb4553a61f26d92f8d53259df1420b"
+        },
+        {
+          "bytes": 1090,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "ba4c422923858520d7324390116a1301feec4e0ad52f9a62e5ff70f6e0c46463"
+        },
+        {
+          "bytes": 3649,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7671cad45dbe944567bb083ece859d4705474deaa12a97ee054bad454a141363"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_09c99d408a37fba51cefdb0c",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:34.156Z"
+}

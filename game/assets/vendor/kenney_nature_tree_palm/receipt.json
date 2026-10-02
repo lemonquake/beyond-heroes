@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:22.702Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_palm",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "082467c1c37d121bff6a36bc658020bb1be086bbcce4063497d887d5cf7668cf",
+  "packageId": "pkg_ea48ee188a5dd65b515e294f",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 13616,
+    "fileName": "tree_palm.glb",
+    "sha256": "27bbb23d26ed788d84de6df2f7fab0acc3fe0ff16c7d08cdcfa1fffcb11de324"
+  }
+}

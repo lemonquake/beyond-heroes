@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_bbeba123-1606-48f2-8ee2-5eea4d47c802",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:52.563Z",
+  "updatedAt": "2026-10-02T21:11:52.602Z",
+  "startedAt": "2026-10-02T21:11:52.569Z",
+  "completedAt": "2026-10-02T21:11:52.602Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_bbeba123-1606-48f2-8ee2-5eea4d47c802\\receipt.json"
+}

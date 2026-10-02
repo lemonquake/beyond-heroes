@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_6909a4b768ebe6e7e6d829c0",
+  "assetId": "kenney_graveyard_candle_multiple",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_candle_multiple",
+  "modelSha256": "5b8d03622b1e99dfb2d492acfc1b9a22c9dd9a669f5a87009e7426573e3495ca",
+  "manifestSha256": "3b21fa9652661c2564183c27693796e0855167f5da5d97b150e9f6e9dc3bf72f",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:29.777Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_candle_multiple\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

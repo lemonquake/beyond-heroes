@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_8dd847ba-7212-4ef3-8f1f-308ac30b01c4",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:22.444Z",
+  "updatedAt": "2026-10-02T21:12:22.478Z",
+  "startedAt": "2026-10-02T21:12:22.450Z",
+  "completedAt": "2026-10-02T21:12:22.478Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_8dd847ba-7212-4ef3-8f1f-308ac30b01c4\\receipt.json"
+}

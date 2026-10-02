@@ -1,0 +1,41 @@
+{
+ "source_id": "kenney_graveyard_lantern_candle",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_lantern_candle.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0",
+ "source_sha256": "0bb7aa2c7b40162e5ceb7f16d60f8e3c1942637483e9a58948f9374f051badfa",
+ "derived_sha256": "6285672bd3334aa57aeaa8bb01498642c8db1184186511c9aa51918158d24461",
+ "scale": 1.6,
+ "scale_rule": [
+  "s",
+  1.6
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Iron",
+  "BH_Candle",
+  "BH_Wood"
+ ],
+ "part_faces": {
+  "BH_Iron": 170,
+  "BH_Candle": 44,
+  "BH_Wood": 10
+ },
+ "source_to_material": {
+  "grey": "BH_Iron",
+  "cream": "BH_Candle",
+  "teal": "BH_Iron",
+  "wood": "BH_Wood"
+ },
+ "triangles": 224,
+ "surfaces": 3,
+ "source_triangles": 224,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.384,
+  0.62,
+  0.384
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

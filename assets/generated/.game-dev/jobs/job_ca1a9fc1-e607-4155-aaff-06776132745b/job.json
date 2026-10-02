@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_ca1a9fc1-e607-4155-aaff-06776132745b",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:24.648Z",
+  "updatedAt": "2026-10-02T21:12:24.681Z",
+  "startedAt": "2026-10-02T21:12:24.654Z",
+  "completedAt": "2026-10-02T21:12:24.681Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_ca1a9fc1-e607-4155-aaff-06776132745b\\receipt.json"
+}

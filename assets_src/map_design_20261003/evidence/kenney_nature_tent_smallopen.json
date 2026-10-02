@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tent_smallOpen.glb",
+    "fileBytes": 13604,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 3,
+    "vertexCount": 804,
+    "triangleCount": 224,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 3,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.27379998564720154,
+        -0.05000000000000026,
+        -0.3481999933719635
+      ],
+      "max": [
+        0.27379998564720154,
+        0.5111308217048645,
+        0.3181999921798706
+      ],
+      "sizeMeters": [
+        0.5475999712944031,
+        0.5611308217048647,
+        0.6663999855518341
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\tent_smallOpen.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 224,
+      "materials": 3,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.5475999712944031,
+        0.5611308217048647,
+        0.6663999855518341
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tent_smallopen\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_tent_smallopen",
+        "category": "environment_prop",
+        "description": "Small open tent. Intended use: Wyman and survivor camp edge, preserve entrances",
+        "displayName": "kenney_nature_tent_smallopen",
+        "files": [
+          {
+            "bytes": 13604,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd"
+          },
+          {
+            "bytes": 1622,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "446a8b37b114a6b5d908151eb16ee56d6258a0f8d79797d16eec0b4b72e43e13"
+          },
+          {
+            "bytes": 835,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "e14dd7eb0d3b3e5946b3964ef754b8a891debba0a568b472596d0abae55ed353"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "5f85508847158a6b147408d3858348d162e85d987fcff0b324fe9777bcdf4f8e"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_812d87960ee97b0deb0f8cee",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd",
+  "embedded_textures": []
+}

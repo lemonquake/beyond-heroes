@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_mushroom_tangroup\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_mushroom_tangroup",
+      "category": "foliage",
+      "description": "Cluster of pale mushrooms. Intended use: Damp forest logs and crypt threshold edges",
+      "displayName": "kenney_nature_mushroom_tangroup",
+      "files": [
+        {
+          "bytes": 14956,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e"
+        },
+        {
+          "bytes": 1611,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "eb1a3a518a211e7f490fd6f0b449f69426df65939c0a0e6c12835a304e4fec6a"
+        },
+        {
+          "bytes": 804,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "7d564b8d27e375e0efc183c9259e9331516a72afa0cd36543958ce20240acc08"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c406d13e0b16eae6f7850bc61854ef81ba4de8bcaa36d472cf46eec058752f82"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_be88b910ef1c1c8732861f84",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:26.411Z"
+}

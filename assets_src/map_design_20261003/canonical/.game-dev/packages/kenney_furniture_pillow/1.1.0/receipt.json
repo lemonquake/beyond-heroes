@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:15.487Z",
+  "destination": {
+    "assetId": "kenney_furniture_pillow",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "d6324a589fe917089e4354aa74aba4476911b9673ed82068e552c075706ab0fb",
+  "packageId": "pkg_cbd9d58b7c2933157863966d",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 5044,
+    "fileName": "pillow.glb",
+    "sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_bdc817fa-927f-4df9-92d5-b989fb907b0f",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_pirate_tool_paddle\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:27.968Z",
+  "updatedAt": "2026-10-02T21:12:28.013Z",
+  "startedAt": "2026-10-02T21:12:27.973Z",
+  "completedAt": "2026-10-02T21:12:28.013Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-fbc47e23-2427-4b02-8320-b699bfd15d67' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_pirate_tool_paddle\r'",
+    "retryable": false
+  }
+}

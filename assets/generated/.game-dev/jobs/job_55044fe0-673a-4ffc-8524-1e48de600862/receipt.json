@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_debris\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_debris",
+      "category": "environment_prop",
+      "description": "Stone debris pile. Intended use: Collapsed crypt wall or exhausted mine edge",
+      "displayName": "kenney_graveyard_debris",
+      "files": [
+        {
+          "bytes": 36156,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "64a7536b6fc9dc3ec913c6fa187096ecd483e6e2d2bbda7556c0ba43dfdce2c8"
+        },
+        {
+          "bytes": 1729,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "fa3a78ac7a1c05165f4606edafe01bc02f145e12b4b86affc252d797e3afd82e"
+        },
+        {
+          "bytes": 1094,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "7f62b43aa025295f7fe786a13872a86fcbd3bbf23f00aef6340c2b41d4c75f6c"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "ab484fec6d3b5051d42059e4ed5f97792664d6393da746ced73aa8835ccbb579"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_5fcccccd6808ae8795ca96d1",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:42.781Z"
+}

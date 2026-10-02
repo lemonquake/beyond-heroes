@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_mushroom_tangroup",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_mushrooms_pale.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0",
+ "source_sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e",
+ "derived_sha256": "699a2539c44b9e10d5254c8020bae9ffb79b203004c5dc53141100ff46692cb9",
+ "scale": 1.3973,
+ "scale_rule": [
+  "h",
+  0.35
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Fungus",
+  "BH_MushroomPale"
+ ],
+ "part_faces": {
+  "BH_Fungus": 96,
+  "BH_MushroomPale": 48
+ },
+ "source_to_material": {
+  "_defaultMat": "BH_Fungus",
+  "colorTan": "BH_MushroomPale"
+ },
+ "triangles": 144,
+ "surfaces": 2,
+ "source_triangles": 144,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.377,
+  0.35,
+  0.355
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

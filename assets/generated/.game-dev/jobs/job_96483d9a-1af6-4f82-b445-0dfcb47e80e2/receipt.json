@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_platform_dock_small\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_structure_platform_dock_small",
+      "category": "environment_prop",
+      "description": "Small dock platform. Intended use: Supplemental mooring beside existing traversable pier",
+      "displayName": "kenney_pirate_structure_platform_dock_small",
+      "files": [
+        {
+          "bytes": 32156,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "63fb708c20db73860da2380ba6c13e4725930c07535bb2ed5958a2f30eeea36c"
+        },
+        {
+          "bytes": 1778,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "548914c05d3a83fd2e5a0c62f579bb1dddc592e35fb1af9117bc2056a6e82fb0"
+        },
+        {
+          "bytes": 827,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d7c891d5c1717a546a02ddca269bb91b26fe0966e7fde8eebba16df080feeded"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "2aabfc2bb57c90ff6a0ae9c731290560fb86fdbe7dc17de171eb71222eb1f010"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_8dfe72a60df6006f96237b3b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:32.225Z"
+}

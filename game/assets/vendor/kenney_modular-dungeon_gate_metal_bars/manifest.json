@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_modular_dungeon_gate_metal_bars",
+  "category": "environment_prop",
+  "description": "Metal barred gate. Intended use: Visual side-cell gate, preserve existing sealed-door state logic",
+  "displayName": "kenney_modular-dungeon_gate_metal_bars",
+  "files": [
+    {
+      "bytes": 96532,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620"
+    },
+    {
+      "bytes": 1776,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "eff18a118ce21f32e7ef6a07333cb843a8ffa44a50bc32473333724f2d733e28"
+    },
+    {
+      "bytes": 1148,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "ffce523e5b5012cbfcf3b4944a724ff795ae74f66ffa2a51b72e63060691ab1c"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "c1855c40aff454291f33ba6c70bc6e8ec32bd1f3d88ed0003c2c61fc921357b0"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_2ceafe1ff64b759b23199be3",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

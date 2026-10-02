@@ -24,6 +24,7 @@ func compose() -> void:
 	_plaza()
 	_rim()
 	_void()
+	_map_design()
 	for gid in DataDungeons.gates_on(def.id):
 		var gs: Dictionary = DataDungeons.get_def(gid).surface
 		dungeon_gate(gid, gs.pos, gs.yaw)
@@ -94,3 +95,20 @@ func _void() -> void:
 	for i in 7:
 		var a := TAU * i / 7.0 + 0.3
 		light(Vector3(cos(a) * (R + 10.0), rng.randf_range(-3.0, 4.0), sin(a) * (R + 10.0)), RIM, 1.6, 14.0, false, true)
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): the Reach is not a village — no trees, no furniture. A few blocks broken from the old
+# fortress lie where pilgrims land (the arrival dais) and beside each gate's approach, never across it.
+
+func _map_design() -> void:
+	for c in [[Vector3(-5.5, 0, 24.0), 20.0], [Vector3(6.2, 0, 25.0), 140.0]]:
+		kit("kd_debris_stone", c[0], c[1], 1.3, deco)
+	kit("kd_column", Vector3(-7.8, 0, 19.5), 0.0, 0.9, props).rotation.z = deg_to_rad(6.0)
+	kit("kd_floor_inlay", Vector3(0, 0.012, 15.0), 0.0, 1.0, deco)
+	for gid in DataDungeons.gates_on(def.id):
+		var gs: Dictionary = DataDungeons.get_def(gid).surface
+		var gp := Vector2(gs.pos.x, gs.pos.y)
+		var inward := -gp.normalized()
+		var side := Vector2(-inward.y, inward.x)
+		var q := gp + inward * 4.5 + side * 4.2
+		kit("kd_debris_stone", Vector3(q.x, 0, q.y), rng.randf() * 360.0, 1.0, deco)

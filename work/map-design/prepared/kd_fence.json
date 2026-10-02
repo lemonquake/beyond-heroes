@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_nature_fence_planks",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_fence.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0",
+ "source_sha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9",
+ "derived_sha256": "3686dbbe2a38b6072aebda77309e963b19bd0eb76c6b164a03e59bb568068c0b",
+ "scale": 2.6,
+ "scale_rule": [
+  "s",
+  2.6
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 96
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark"
+ },
+ "triangles": 96,
+ "surfaces": 1,
+ "source_triangles": 96,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.6,
+  0.897,
+  0.249
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

@@ -99,6 +99,9 @@ func test_recipes_and_ingredients_are_consistent() -> void:
 		for inp in r.inputs:
 			used[inp[0]] = true
 	for e: EnemyDef in DB.enemies.values():
+		# Summoned hazards such as Rot Buds deliberately grant no XP or loot.
+		if e.xp_mult <= 0.0 and e.drop_chance <= 0.0 and e.loot.is_empty():
+			continue
 		fams.get_or_add(e.family, false)
 		for l in e.loot:
 			if used.has(l[0]):

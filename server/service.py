@@ -14,8 +14,10 @@ import ipaddress
 import json
 import logging
 import math
+import os
 import re
 import secrets
+import signal
 import sqlite3
 import ssl
 import threading
@@ -24,8 +26,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-PROTOCOL = 16
+PROTOCOL = 17
 SAVE_VERSION = 4
+SERVER_VERSION = os.environ.get("BH_BUILD", "dev")   # a release id (git commit) set by the deployment; shown by /health
 MAX_PLAYERS = 12
 MAX_BODY = 2 * 1024 * 1024
 SESSION_LIFE = 24 * 3600
@@ -33,6 +36,38 @@ LEASE_LIFE = 90
 TICKET_LIFE = 45
 USER_ID = re.compile(r"[A-Za-z0-9_]{3,32}\Z")
 HASH_LIMIT = threading.BoundedSemaphore(2)
+
+
+def client_address(peer, forwarded, trusted):
+    """The caller's address and whether a trusted reverse proxy vouched for it.
+
+    X-Forwarded-For is honoured only when the TCP peer is one of `trusted` (the local proxy in front of the service); the
+    right-most entry is the one the proxy itself appended. From anyone else the header is ignored, so a client cannot choose
+    the address its rate limits are counted against. A proxied request is never an internal (game coordinator) request."""
+    if forwarded and peer in trusted:
+        try:
+            return str(ipaddress.ip_address(forwarded.split(",")[-1].strip())), True
+        except ValueError:
+            pass
+    return peer, False
+
+
+def audit_progress(old_hero, new_hero, seconds):
+    """Names of implausible jumps between two confirmed saves of one character. Informational: the client simulates combat, so
+    a modified game can claim any reward; these flags let the operator notice and review it (see docs/OFFICIAL_SERVER.md)."""
+    flags = []
+    old_progress, new_progress = old_hero.get("progress", {}), new_hero.get("progress", {})
+    gained_levels = new_progress.get("level", 1) - old_progress.get("level", 1)
+    if gained_levels > 10:
+        flags.append("level+%d" % gained_levels)
+    if new_progress.get("total_xp", 0) < old_progress.get("total_xp", 0) - 1:
+        flags.append("xp_decreased")
+    gained_gold = new_hero.get("gold", 0) - old_hero.get("gold", 0)
+    if gained_gold > 20000000:
+        flags.append("gold+%d" % gained_gold)
+    if seconds > 0 and (new_progress.get("total_xp", 0) - old_progress.get("total_xp", 0)) / max(seconds, 1.0) > 1000000:
+        flags.append("xp_rate")
+    return flags
 
 
 class ApiError(Exception):
@@ -290,6 +325,7 @@ class Store:
                 count = db.execute("SELECT count(*) FROM leases").fetchone()[0]
             return {"name": "Official Beyond Heroes", "protocol": PROTOCOL, "save_version": SAVE_VERSION,
                     "max_players": MAX_PLAYERS, "players": count, "game_online": self.clock() - self.heartbeat_at < 25,
+                    "version": SERVER_VERSION,
                     "game_host": self.host, "game_port": self.game_port, "progress_mode": "friends_test"}
         if method != "POST":
             raise ApiError(404, "Unknown request.", "not_found")
@@ -485,8 +521,12 @@ class Store:
                 revision = integer(body.get("revision"), 0, 2**53-1, "revision")
                 if revision != row["revision"]:
                     raise ApiError(409, "The character changed on the server. Reload it before playing again.", "revision_conflict")
-                if json.loads(data)["hero"]["class"] != json.loads(row["data"])["hero"]["class"]:
+                before, after = json.loads(row["data"])["hero"], json.loads(data)["hero"]
+                if after["class"] != before["class"]:
                     raise ApiError(400, "Character class cannot change.", "invalid_save")
+                flags = audit_progress(before, after, self.clock() - row["saved"])
+                if flags:
+                    self.audit(db, aid, "suspicious_progress:" + ",".join(flags), cid)
                 # Never acknowledge before SQLite has committed. Returning from this
                 # transaction commits before the HTTP handler serializes the reply.
                 now = self.clock()
@@ -555,7 +595,7 @@ class Store:
                 return result
             raise ApiError(404, "Unknown character request.")
 
-    def backup(self, keep=14):
+    def backup(self, keep=16, keep_days=30):
         folder = self.directory / "backups"
         folder.mkdir(exist_ok=True)
         target = folder / (time.strftime("%Y%m%d-%H%M%S", time.gmtime()) + "-" + secrets.token_hex(3) + ".sqlite3")
@@ -563,19 +603,53 @@ class Store:
             source.backup(destination)
             if destination.execute("PRAGMA integrity_check").fetchone()[0] != "ok":
                 raise RuntimeError("Backup integrity check failed")
-        for old in sorted(folder.glob("*.sqlite3"), key=lambda p: p.stat().st_mtime, reverse=True)[keep:]:
-            old.unlink()
+        prune_backups(folder, keep, keep_days)
         return target
+
+
+def prune_backups(folder, keep=16, keep_days=30):
+    """Keep the newest `keep` backups, plus the newest one of each UTC day for `keep_days` days; delete the rest.
+
+    Names start with a UTC timestamp, so sorting by name is sorting by age. The disk use is bounded:
+    at most keep + keep_days files."""
+    names = sorted(Path(folder).glob("[0-9]" * 8 + "-*.sqlite3"), key=lambda p: p.name, reverse=True)
+    survivors, days = set(names[:keep]), set()
+    for path in names[keep:]:
+        day = path.name[:8]
+        if day not in days and len(days) < keep_days:
+            days.add(day)
+            survivors.add(path)
+    for path in names:
+        if path not in survivors:
+            path.unlink()
+    return len(survivors)
 
 
 class HttpServer(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 32
 
-    def __init__(self, address, store, secret):
+    WORKERS = 24
+
+    def __init__(self, address, store, secret, trusted_proxies=()):
         super().__init__(address, Handler)
         self.store, self.secret = store, secret
-        self.workers = threading.BoundedSemaphore(24)
+        self.trusted_proxies = frozenset(trusted_proxies)
+        self.workers = threading.BoundedSemaphore(self.WORKERS)
+
+    def drain(self, timeout=8.0):
+        """Wait for in-flight requests to finish (each is one atomic SQLite transaction); False if some did not."""
+        deadline = time.monotonic() + timeout
+        taken = 0
+        try:
+            while taken < self.WORKERS:
+                if not self.workers.acquire(timeout=max(0.0, deadline - time.monotonic())):
+                    return False
+                taken += 1
+            return True
+        finally:
+            for _ in range(taken):
+                self.workers.release()
 
     def process_request(self, request, client_address):
         if not self.workers.acquire(blocking=False):
@@ -611,6 +685,16 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         self.dispatch("POST")
 
+    def do_PUT(self):
+        self.dispatch("PUT")
+
+    do_DELETE = do_PATCH = do_PUT
+
+    def do_HEAD(self):
+        self.dispatch("HEAD")
+
+    do_OPTIONS = do_HEAD
+
     def dispatch(self, method):
         try:
             if self.headers.get("Transfer-Encoding"):
@@ -628,8 +712,9 @@ class Handler(BaseHTTPRequestHandler):
             path = urlsplit(self.path).path
             authorization = self.headers.get("Authorization", "")
             token = authorization[7:] if authorization.startswith("Bearer ") else ""
-            internal = hmac.compare_digest(self.headers.get("X-Server-Key", ""), self.server.secret)
-            result = self.server.store.handle(method, path, body, token=token, ip=self.client_address[0], internal=internal)
+            ip, proxied = client_address(self.client_address[0], self.headers.get("X-Forwarded-For", ""), self.server.trusted_proxies)
+            internal = not proxied and hmac.compare_digest(self.headers.get("X-Server-Key", ""), self.server.secret)
+            result = self.server.store.handle(method, path, body, token=token, ip=ip, internal=internal)
             self.reply(200, result)
         except ApiError as error:
             self.reply(error.status, {"error": error.message, "code": error.code})
@@ -667,7 +752,8 @@ def main():
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     context.minimum_version = ssl.TLSVersion.TLSv1_2
     context.load_cert_chain(config["certificate"], config["private_key"])
-    server = HttpServer((config.get("bind", "0.0.0.0"), config.get("api_port", 8443)), store, config["server_key"])
+    server = HttpServer((config.get("bind", "0.0.0.0"), config.get("api_port", 8443)), store, config["server_key"],
+                        config.get("trusted_proxies", []))
     server.socket = context.wrap_socket(server.socket, server_side=True, do_handshake_on_connect=False)
     stop = threading.Event()
 
@@ -680,15 +766,25 @@ def main():
 
     store.backup()
     threading.Thread(target=backups, daemon=True).start()
-    print(f"Beyond Heroes account service listening on HTTPS port {server.server_port}; data: {store.path}", flush=True)
+    print(f"Beyond Heroes account service {SERVER_VERSION} (protocol {PROTOCOL}) listening on HTTPS port {server.server_port}; data: {store.path}", flush=True)
+
+    def request_stop(signum, _frame):
+        # serve_forever() must be stopped from another thread; the cleanup below then runs on the main thread
+        print(f"Stop requested (signal {signum}); finishing requests and saving a backup.", flush=True)
+        threading.Thread(target=server.shutdown, daemon=True).start()
+
+    for name in ("SIGTERM", "SIGINT", "SIGBREAK"):
+        if hasattr(signal, name):
+            signal.signal(getattr(signal, name), request_stop)
     try:
         server.serve_forever(poll_interval=0.5)
-    except KeyboardInterrupt:
-        pass
     finally:
         stop.set()
         server.server_close()
+        if not server.drain():
+            logging.warning("Some requests were still running at shutdown; clients retry them with their save request identity")
         store.backup()
+        print("Account service stopped cleanly.", flush=True)
 
 
 if __name__ == "__main__":

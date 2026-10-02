@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_detail_bowl\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_detail_bowl",
+      "category": "environment_prop",
+      "description": "Offering bowl. Intended use: Temple and tomb ritual table composition",
+      "displayName": "kenney_graveyard_detail_bowl",
+      "files": [
+        {
+          "bytes": 28488,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "63e0bf23875f080a69cbbaf7b748c6980400887c1f2624b8229e008337cd8eb1"
+        },
+        {
+          "bytes": 1703,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "df22e65a6701a11a9bcde2229829d24beff8bac26c25156212db6354f6674a20"
+        },
+        {
+          "bytes": 1104,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "9f7664050c075d2535ca3047e740f09d2c4ab9fa1a77734655c83f7f2f40e820"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "8f924905059c26e1f56529db25c252431698c1e8464a9ac2b9a27060f13185fd"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_e2f1b5a2156621eab4d6a8b9",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:42.061Z"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_1e423f60-030a-4844-8ec9-5d8433c2dd8a",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:53.332Z",
+  "updatedAt": "2026-10-02T21:11:53.373Z",
+  "startedAt": "2026-10-02T21:11:53.338Z",
+  "completedAt": "2026-10-02T21:11:53.373Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_1e423f60-030a-4844-8ec9-5d8433c2dd8a\\receipt.json"
+}

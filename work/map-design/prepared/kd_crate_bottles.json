@@ -1,0 +1,43 @@
+{
+ "source_id": "kenney_pirate_crate_bottles",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_crate_bottles.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0",
+ "source_sha256": "3f856e1a9bb78ae9cf69c5d3ed57a4367e4e0856623d275dd99bae23e80886c1",
+ "derived_sha256": "00c95d3da73cfdb6e1476ae306e9f683b09d4941b9f972195a9eddcca02d16bb",
+ "scale": 0.9,
+ "scale_rule": [
+  "s",
+  0.9
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_WoodDark",
+  "BH_Thatch",
+  "BH_Bottle"
+ ],
+ "part_faces": {
+  "BH_Wood": 40,
+  "BH_WoodDark": 36,
+  "BH_Thatch": 64,
+  "BH_Bottle": 432
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "wood_dark": "BH_WoodDark",
+  "cream": "BH_Thatch",
+  "teal": "BH_Bottle"
+ },
+ "triangles": 572,
+ "surfaces": 4,
+ "source_triangles": 572,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.97,
+  0.951,
+  1.178
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

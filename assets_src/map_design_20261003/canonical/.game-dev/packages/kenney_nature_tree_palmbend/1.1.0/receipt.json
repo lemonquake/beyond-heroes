@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:23.603Z",
+  "destination": {
+    "assetId": "kenney_nature_tree_palmbend",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "bf9b43611168e2e05945337b8eb4971c447443323d30391500ac2feb11d63f97",
+  "packageId": "pkg_6d118650739a3b717105c9a0",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 14820,
+    "fileName": "tree_palmBend.glb",
+    "sha256": "8af9dae16ce3c03183f9457996ebdd135167199514e8f4f944ee2bd82828d5c9"
+  }
+}

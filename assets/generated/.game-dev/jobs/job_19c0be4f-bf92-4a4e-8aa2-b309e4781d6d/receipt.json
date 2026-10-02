@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_tableround\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_tableround",
+      "category": "environment_prop",
+      "description": "Round table. Intended use: Small tavern seating groups",
+      "displayName": "kenney_furniture_tableround",
+      "files": [
+        {
+          "bytes": 6444,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b"
+        },
+        {
+          "bytes": 1556,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "be45570f3527124da6a6b7387d917f3576f92dc1edcb050c10094249fba4f316"
+        },
+        {
+          "bytes": 841,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d61293d5a2809ef3cd3028788a529b06323bcbaaa3bf71ed0a5578d736b50861"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "1149e22a2b25db6e01709605723329174a872d59ef375b83f5286304f62608fb"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f8584ecb16718669f1a7df05",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:03.129Z"
+}

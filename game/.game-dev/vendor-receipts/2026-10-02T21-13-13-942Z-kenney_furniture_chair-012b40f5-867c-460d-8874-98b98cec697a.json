@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_64ec9e112cf4fbc0973d5a9d",
+  "assetId": "kenney_furniture_chair",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_chair",
+  "modelSha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883",
+  "manifestSha256": "b08037120383c4b3ca94d7b80c84d72fab1fa289ec48ede734f3f944b35865b5",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:13.942Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_chair\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

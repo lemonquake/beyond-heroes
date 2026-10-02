@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_774bb27c8f586964c9a16d0a",
+  "assetId": "kenney_nature_tree_oak",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_tree_oak",
+  "modelSha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3",
+  "manifestSha256": "9b55b0f01f018cc8ff13f1f4688a8aa609e8479c60473c8dcf45354801ba5e36",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:12:56.466Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_oak\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

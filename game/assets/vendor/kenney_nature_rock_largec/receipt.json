@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:38.565Z",
+  "destination": {
+    "assetId": "kenney_nature_rock_largec",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "03d74aff6bf56dd6fd32c3bde4f8f0765ca18839ab572d2f5e86bdb4b0d8930b",
+  "packageId": "pkg_a1cac19e953d1b736f8d297b",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 7004,
+    "fileName": "rock_largeC.glb",
+    "sha256": "23aee8b727adeaf260207af3e0615dc69aa766c6d87de1d44cbc8c2711d74dd1"
+  }
+}

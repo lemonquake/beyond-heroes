@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_table\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_table",
+      "category": "environment_prop",
+      "description": "Rectangular table. Intended use: Tavern eating group and netmender work area",
+      "displayName": "kenney_furniture_table",
+      "files": [
+        {
+          "bytes": 8196,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61"
+        },
+        {
+          "bytes": 1552,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "ce5722a59528658bd691106f8a5db96b27b28cb12e41723c063cb8cfcf59f6be"
+        },
+        {
+          "bytes": 831,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "944f8627c71adec4b1944c1f61f16d2af50207da60b44dbbc1770bd5c97afc0d"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7492eec2581f6f32c764d2d331a7675e2ad892ebe71b9b80c8f4190f282a38d0"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_f0c7867e55d132c1dbcff6e3",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:02.255Z"
+}

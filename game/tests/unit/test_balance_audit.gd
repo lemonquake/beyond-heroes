@@ -199,6 +199,10 @@ func test_item_preview_matches_pipeline() -> void:
 		var req := DamageRequest.new()
 		req.attacker = st
 		req.target = blank_stats(49)
+		# The preview is target-independent; penetration below a target's 0% resistance is not part of it. A target
+		# that resists exactly the attacker's penetration leaves the hit at its untargeted value.
+		for e in Elements.ELEMENTAL:
+			req.target.values[Elements.res_key(e)] = st.get_stat(Elements.pen_key(e))
 		req.can_crit = false
 		req.evadable = false
 		if st.loadout.main_type.ranged:

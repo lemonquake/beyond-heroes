@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_rocks_c.glb",
+    "fileBytes": 34688,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 444,
+    "triangleCount": 232,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -1.624382495880127,
+        0,
+        -1.8812979459762573
+      ],
+      "max": [
+        2.018326997756958,
+        2.299999952316284,
+        1.7879022359848022
+      ],
+      "sizeMeters": [
+        3.642709493637085,
+        2.299999952316284,
+        3.6692001819610596
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_rocks_c.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 232,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        3.642709493637085,
+        2.299999952316284,
+        3.6692001819610596
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_rocks_c\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_rocks_c",
+        "category": "environment_prop",
+        "description": "Third grouped shoreline rocks. Intended use: Cliff-to-water boundary",
+        "displayName": "kenney_pirate_rocks_c",
+        "files": [
+          {
+            "bytes": 34688,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "8bd8ebbf275540047f4f4f44765c04b1813ef0000e40db7ce5c99cb40ffdb913"
+          },
+          {
+            "bytes": 1712,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "62aceb9d1338e1ab498fc97a1adcafd258a6591d966cf4106093f536a5862337"
+          },
+          {
+            "bytes": 1074,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "eb7fde41546678798e17cb76a1b628b0870674a4b11cd464d6c6753097d9c8b0"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "c8f9c957ce0bbf998478a4194d9dc2aa38b36ac4222fc665d69fef517be3340a"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_3044095204d8b678c3c6d3c0",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "67c086e5d522fda43f3c84b34092ae88c4b142ad23c11be9cf9743659a138032",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

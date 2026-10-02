@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_stump_rounddetailed",
+  "category": "environment_prop",
+  "description": "Cut stump with irregular surface. Intended use: Westreach woodcutting patch and Wyman firewood corner",
+  "displayName": "kenney_nature_stump_rounddetailed",
+  "files": [
+    {
+      "bytes": 8188,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768"
+    },
+    {
+      "bytes": 1640,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "1a7914269a6087c3753de16648ab4e5bbbaf616b8cbf9d267af0c31c57f49433"
+    },
+    {
+      "bytes": 844,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "4b94fef9c3d3a6e50ca1304ac7b829e70f1e7be77f615c0b85ef5c0516c50f83"
+    },
+    {
+      "bytes": 2997,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "9e6db9a0da7c2478e7000a1e5281fa030e4867e056d3edd747f14df092ba27d1"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_bfdc3da7ae0f0a76086e637d",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:42.965Z",
+  "destination": {
+    "assetId": "kenney_graveyard_candle_multiple",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "3b21fa9652661c2564183c27693796e0855167f5da5d97b150e9f6e9dc3bf72f",
+  "packageId": "pkg_6909a4b768ebe6e7e6d829c0",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 28320,
+    "fileName": "kenney_graveyard_candle_multiple.glb",
+    "sha256": "5b8d03622b1e99dfb2d492acfc1b9a22c9dd9a669f5a87009e7426573e3495ca"
+  }
+}

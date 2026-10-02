@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_furniture_bookcaseclosedwide",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_bookcase_wide.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0",
+ "source_sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+ "derived_sha256": "c26fef8e9215c0c4498696a011551373c6e5fbf794b28fb64843c598ee9b57ba",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 372
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark"
+ },
+ "triangles": 372,
+ "surfaces": 1,
+ "source_triangles": 372,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.8,
+  1.777,
+  0.562
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

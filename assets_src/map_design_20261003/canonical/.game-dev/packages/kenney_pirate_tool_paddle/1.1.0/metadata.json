@@ -1,0 +1,66 @@
+{
+  "assetId": "kenney_pirate_tool_paddle",
+  "category": "environment_prop",
+  "description": "Wooden paddle. Intended use: Olivar boathouse and harbour boat-rest area",
+  "displayName": "kenney_pirate_tool_paddle",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.32891544699668884,
+        2.3491265773773193,
+        0.1037655919790268
+      ],
+      "min": [
+        -0.32891544699668884,
+        0,
+        -0.1037655919790268
+      ],
+      "sizeMeters": [
+        0.6578308939933777,
+        2.3491265773773193,
+        0.2075311839580536
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 16980,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 10061,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "colormap",
+        "width": 512
+      }
+    ],
+    "triangleCount": 60,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 102,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

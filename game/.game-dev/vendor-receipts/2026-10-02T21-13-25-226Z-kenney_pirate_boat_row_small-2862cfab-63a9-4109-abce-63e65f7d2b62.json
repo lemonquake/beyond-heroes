@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_e9f130ce8073f6b9b12f60bb",
+  "assetId": "kenney_pirate_boat_row_small",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_boat_row_small",
+  "modelSha256": "5963b12af7466ca99f0c31fe7fb2ccfd08ae710f5c91e8aae73412fded399e6d",
+  "manifestSha256": "7f8ece5bd4fad6ae4830665ffb089288d0e46cf736648d4aec37411cde6a83d4",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:25.226Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_boat_row_small\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

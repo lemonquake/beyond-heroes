@@ -99,7 +99,7 @@ func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authori
 	if epoch != _endpoint_epoch:
 		return {"error": "Server selection changed.", "code": "cancelled"}
 	if int(result[0]) != HTTPRequest.RESULT_SUCCESS:
-		return {"error": "Could not reach the official server over a verified encrypted connection. Check its address, certificate and whether the server PC is running.", "code": "connection_failed"}
+		return {"error": describe_failure(int(result[0]), url, certificate_path != ""), "code": "connection_failed"}
 	var parsed = JSON.parse_string((result[3] as PackedByteArray).get_string_from_utf8())
 	if not parsed is Dictionary:
 		return {"error": "The server returned an unreadable response.", "code": "invalid_response"}
@@ -107,11 +107,36 @@ func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authori
 		parsed = {"error": "The server could not complete the request.", "code": "server_error"}
 	return parsed
 
+## What went wrong with a connection, in words a player can act on. `result` is an HTTPRequest.Result.
+static func describe_failure(result: int, address: String, has_certificate_file: bool) -> String:
+	var host := address.trim_prefix("https://").get_slice("/", 0)
+	match result:
+		HTTPRequest.RESULT_CANT_RESOLVE:
+			return "The server name %s could not be found. Check the address for typing mistakes and that this device is online." % host
+		HTTPRequest.RESULT_CANT_CONNECT, HTTPRequest.RESULT_CONNECTION_ERROR:
+			return "Could not connect to %s. The server may be turned off, or a firewall or network may be blocking the connection. Try again in a minute, or ask the server owner if it is running." % host
+		HTTPRequest.RESULT_TLS_HANDSHAKE_ERROR:
+			if has_certificate_file:
+				return "The secure connection to %s was refused: its certificate does not match the file chosen in Server Settings. Ask the server owner for their current certificate file." % host
+			return "The secure connection to %s was refused. If the server owner gave you a certificate file, add it in Server Settings under Advanced. Otherwise check the address." % host
+		HTTPRequest.RESULT_TIMEOUT, HTTPRequest.RESULT_NO_RESPONSE:
+			return "%s did not answer in time. Check this device's internet connection, then try again." % host
+		_:
+			return "The connection to %s failed (code %d). Check the address and your internet connection, then try again." % [host, result]
+
+## Plain explanation when the server's game version is not this game's version (server_protocol is what /health reported).
+static func describe_version_mismatch(server_protocol: int, game_protocol: int, build := "") -> String:
+	var tail := " (server %s)" % build if build != "" else ""
+	if server_protocol > game_protocol:
+		return "Your game is older than this server%s. Update the game, then try again." % tail
+	return "This server is running an older version of the game%s. Ask the server owner to update it. You can keep playing offline meanwhile." % tail
+
 func check_server() -> Dictionary:
 	var result := await request("/health", {}, HTTPClient.METHOD_GET, false)
 	if not result.has("error"):
 		if int(result.get("protocol", -1)) != Net.PROTOCOL:
-			result = {"error": "The official server and your game have different versions. Update both.", "code": "version_mismatch"}
+			result = {"error": describe_version_mismatch(int(result.get("protocol", -1)), Net.PROTOCOL, String(result.get("version", ""))), "code": "version_mismatch",
+				"server_protocol": int(result.get("protocol", -1))}
 		else:
 			health = result
 	changed.emit()

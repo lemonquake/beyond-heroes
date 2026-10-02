@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_75bb6e3fd64efc2c62e38584",
+  "assetId": "kenney_nature_tree_detailed",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_tree_detailed",
+  "modelSha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b",
+  "manifestSha256": "95c5a864c2d32db2786ef2435c55082f42ca6caf87c71d4497284c10324bd4c2",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:12:57.225Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_tree_detailed\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

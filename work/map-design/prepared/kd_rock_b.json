@@ -1,0 +1,38 @@
+{
+ "source_id": "kenney_nature_rock_largeb",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_rock_b.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0",
+ "source_sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b",
+ "derived_sha256": "3ff72490b203d818014b75d3fc4c60dcbb1756fbbc1eb4f3fb52a56191b00a49",
+ "scale": 3.0,
+ "scale_rule": [
+  "s",
+  3.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Rock",
+  "BH_Moss"
+ ],
+ "part_faces": {
+  "BH_Rock": 76,
+  "BH_Moss": 9
+ },
+ "source_to_material": {
+  "dirt": "BH_Rock",
+  "_defaultMat": "BH_Rock",
+  "grass": "BH_Moss"
+ },
+ "triangles": 85,
+ "surfaces": 2,
+ "source_triangles": 85,
+ "source_meshes": 1,
+ "bounds_m": [
+  2.3,
+  1.291,
+  3.046
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

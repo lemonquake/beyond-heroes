@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_canoe\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_canoe",
+      "category": "environment_prop",
+      "description": "Simple canoe hull. Intended use: Olivar dock or cove mooring, not a new travel mechanic",
+      "displayName": "kenney_nature_canoe",
+      "files": [
+        {
+          "bytes": 15780,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941"
+        },
+        {
+          "bytes": 1596,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "8531f5f1ff1a0ee5f88eeff37bb62eba999b6e2371046717ea5ed831e6c0ad69"
+        },
+        {
+          "bytes": 817,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "d3d4fbeee9298723bf2d45cfb72423f147a2269e0c4c72dc1bcbbdb04a714523"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "c0b9f077c2c9abe2739c32b520d1ed21dd264cdedba6d4b5284f4b7bac63c398"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_0dfc868f843cf35e40344096",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T21:12:04.488Z"
+}

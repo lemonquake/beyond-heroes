@@ -1,0 +1,156 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_bottle.glb",
+    "fileBytes": 23908,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 240,
+    "triangleCount": 124,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "colormap",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 10061
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.18216043710708618,
+        0,
+        -0.18216043710708618
+      ],
+      "max": [
+        0.18216043710708618,
+        0.8904509544372559,
+        0.18216043710708618
+      ],
+      "sizeMeters": [
+        0.36432087421417236,
+        0.8904509544372559,
+        0.36432087421417236
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\.preparation\\kenney_pirate_bottle.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 124,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        0.36432087421417236,
+        0.8904509544372559,
+        0.36432087421417236
+      ]
+    },
+    "failures": [],
+    "checksRun": 10,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_texture_transform\".",
+      "texture is below 1024px on an axis and will blur at close range: colormap (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_bottle\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_pirate_bottle",
+        "category": "environment_prop",
+        "description": "Small bottle. Intended use: Tavern tables and apothecary shelves",
+        "displayName": "kenney_pirate_bottle",
+        "files": [
+          {
+            "bytes": 23908,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "0d176bdb350ad7b6d29ac60f7064c0f84c645105e33276c24dc81c97e8dc5a6c"
+          },
+          {
+            "bytes": 1717,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "1f38842b28a039558b3fa63f5da07e532c387c73188f3a08a8c194aaf3d5b22a"
+          },
+          {
+            "bytes": 1072,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "ebac8bd7cd76bc88c5868575ea47f390636de580df43a7c33043521d50a17332"
+          },
+          {
+            "bytes": 3651,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "1ac6cd376802bb10d42ff9c3af9037dda3d7e4321b05535b9240e01d13bdf008"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_e8c9373f5fe106feff8757dd",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "b59ff617014ace27dacf2909bba94f3ad3a9a9d1660c6ae4d468b5e8561637ae",
+  "embedded_textures": [
+    {
+      "uri": "Textures/colormap.png",
+      "sha256": "451e1d7a53b8e76f4b2ee58742e241509fee5f82cf2cee6e3f7aca86ba718abe",
+      "bytes": 10061
+    }
+  ]
+}

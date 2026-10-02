@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_f025d874-3e1a-4203-9ee8-41231c88985d",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:27.597Z",
+  "updatedAt": "2026-10-02T21:12:27.638Z",
+  "startedAt": "2026-10-02T21:12:27.605Z",
+  "completedAt": "2026-10-02T21:12:27.638Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_f025d874-3e1a-4203-9ee8-41231c88985d\\receipt.json"
+}

@@ -122,7 +122,8 @@ func test_c_seals_and_bosses() -> void:
 # ---- monsters ------------------------------------------------------------------------------------------------------
 
 func test_d_dungeon_monsters() -> void:
-	var defs := DataEnemiesDungeon.defs()
+	# bh-033: Verdigast's rot buds are a boss mechanic (they neither fight nor move), not one of the dungeon monsters
+	var defs := DataEnemiesDungeon.defs().filter(func(d: EnemyDef): return not d.traits.has(&"rot_bud"))
 	eq(defs.size(), 25, "25 dungeon monsters")
 	var ids := {}
 	var missing := []

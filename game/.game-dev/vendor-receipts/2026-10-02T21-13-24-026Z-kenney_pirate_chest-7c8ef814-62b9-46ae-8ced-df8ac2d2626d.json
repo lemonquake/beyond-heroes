@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_8524e1bd47070a4dfd2a7e20",
+  "assetId": "kenney_pirate_chest",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_pirate_chest",
+  "modelSha256": "67765386e504069b85b33cfcb7b13504a49c64d206d8b8302c420f72e0ba6631",
+  "manifestSha256": "de24cfe042a84afa165740cf3ad8fc35359572bfaf5e594570910fbed4ed7089",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:24.026Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_chest\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

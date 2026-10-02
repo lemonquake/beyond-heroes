@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_tool_shovel\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_tool_shovel",
+      "category": "environment_prop",
+      "description": "Hand shovel. Intended use: Farm shed and garden work corner",
+      "displayName": "kenney_pirate_tool_shovel",
+      "files": [
+        {
+          "bytes": 16144,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "b468372526e419c712f50b824eff50d6e7838de646eaa5a6aacfc4dcdfcfa265"
+        },
+        {
+          "bytes": 1721,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "9f39018dda223d4a4da3a9a635fd47572aba25c63bdad931b1726d17989ffcd0"
+        },
+        {
+          "bytes": 791,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "0b7a2627ccafb4af1f1a49b8e3f540e0fe98f6ccd97d89c88add314a6ab71f3d"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e9fac7f3728ac30f6d2416973e51167449b661cc8daf1a9864084d787e4d2b1d"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_0d8c475c77225ed068e06de8",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:22.712Z"
+}

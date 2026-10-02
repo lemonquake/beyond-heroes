@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_82ee8930ac58b1b252a2f4bf",
+  "assetId": "kenney_nature_rock_smallflata",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_rock_smallflata",
+  "modelSha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21",
+  "manifestSha256": "c1e511ed257f4703bcf011ebf72650562bcceb94788978aa6ea0b486b1880fa6",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:07.269Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_rock_smallflata\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

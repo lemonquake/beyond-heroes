@@ -1,0 +1,5 @@
+RESTORE DRILL PASSED
+ - account and character created on the live database
+ - verified backup written: 20261002-161025-c793f4.sqlite3
+ - backup restored into an empty staging directory and re-verified
+ - the restored service signed the account in and lists the character

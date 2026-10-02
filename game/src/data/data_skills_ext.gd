@@ -314,7 +314,7 @@ static func ranger_tree() -> TreeDef:
 		{"name": "Fox", "x": 7.0, "color": Color(0.95, 0.55, 0.35), "page": 1}]
 	t.nodes = [
 		_sk(&"power_shot", Vector2(1, 0), 0, [], 1, [[&"deadeye", 5.0]]),
-		_up(&"power_pierce", "Punch Through", &"power_shot", Vector2(0, 1), 0, [&"power_shot"], 4, 1, 2, {"pierce": 1.0, "knockback": 2.0}, "+1 pierce and harder knockback per rank."),
+		_up(&"power_pierce", "Punch Through", &"power_shot", Vector2(0, 1), 0, [&"power_shot"], 4, 1, 2, {"pierce": 1.0, "knockback": 1.0}, "+1 pierce and +1 knockback per rank. Knockback is capped at 12 m/s."),
 		_sk(&"multishot", Vector2(2, 1), 0, [&"power_shot"], 3, [[&"arrow_rain", 5.0]]),
 		_sk(&"frost_arrow", Vector2(0, 2), 0, [&"power_shot"], 5, [[&"multishot", 4.0]]),
 		_sk(&"arrow_rain", Vector2(2, 3), 0, [&"multishot"], 9, [[&"multishot", 5.0]]),
@@ -323,7 +323,7 @@ static func ranger_tree() -> TreeDef:
 		_sk(&"snare_trap", Vector2(4, 0), 0, [], 2),
 		_sk(&"blast_arrow", Vector2(3, 1), 0, [&"snare_trap"], 4, [[&"blast_trap", 5.0]]),
 		_sk(&"blast_trap", Vector2(5, 2), 0, [&"snare_trap"], 6, [[&"snare_trap", 6.0], [&"blast_arrow", 4.0]]),
-		_up(&"trap_cluster", "Cluster Charges", &"blast_trap", Vector2(5, 4), 0, [&"blast_trap"], 14, 2, 1, {"radius": 1.0, "launch": 2.0}, "Blast Trap explodes wider and launches enemies."),
+		_up(&"trap_cluster", "Cluster Charges", &"blast_trap", Vector2(5, 4), 0, [&"blast_trap"], 14, 2, 1, {"radius": 0.6, "launch": 1.0}, "Blast Trap gains +0.6 m radius and +1 launch speed. Throws are capped at 6 m/s and 1 m upward travel."),
 		_sk(&"storm_javelin", Vector2(3, 3), 0, [&"blast_arrow"], 8, [[&"power_shot", 4.0]]),
 		_sk(&"vault", Vector2(7, 0), 0, [], 3),
 		_sk(&"hunters_mark", Vector2(7, 2), 0, [&"vault"], 7),
@@ -396,7 +396,7 @@ static func shadowblade_tree() -> TreeDef:
 
 ## Description of a passive node at a rank: {0}, {1}... = mod values (percent for fractions), {f0}... = flag values.
 static func passive_text(n: Dictionary, rank: int) -> String:
-	var r := TreeDef.rank_power(maxi(rank, 1), int(n.get("base_rank", n.get("max_rank", 1))))
+	var r := TreeDef.rank_power(clampi(rank, 1, int(n.get("max_rank", TreeDef.LEVEL_MAX))), int(n.get("base_rank", n.get("max_rank", 1))))
 	var text := String(n.get("desc", ""))
 	var mods: Array = n.get("mods", [])
 	for i in mods.size():

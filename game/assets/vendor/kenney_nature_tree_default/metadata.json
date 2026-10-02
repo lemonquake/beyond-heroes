@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_tree_default",
+  "category": "foliage",
+  "description": "Compact broadleaf tree. Intended use: Residential gardens and Westreach hedgerow breaks",
+  "displayName": "kenney_nature_tree_default",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.3775000274181366,
+        1.6578874111175537,
+        0.32692450284957886
+      ],
+      "min": [
+        -0.3775000274181366,
+        -0.05,
+        -0.32692450284957886
+      ],
+      "sizeMeters": [
+        0.7550000548362732,
+        1.7078874111175537,
+        0.6538490056991577
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 9428,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 114,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 384,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:07.376Z",
+  "destination": {
+    "assetId": "kenney_furniture_desk",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "dcc66822a3b7dc9b53f7c0719fb169b82ff0ef7dcf8513a727e83573c877acfc",
+  "packageId": "pkg_482e5ef30f7d289aa87fa725",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 15048,
+    "fileName": "desk.glb",
+    "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42"
+  }
+}

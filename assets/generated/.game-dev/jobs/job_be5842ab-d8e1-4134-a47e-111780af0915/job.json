@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_be5842ab-d8e1-4134-a47e-111780af0915",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_candle_multiple\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:37.803Z",
+  "updatedAt": "2026-10-02T21:12:37.854Z",
+  "startedAt": "2026-10-02T21:12:37.809Z",
+  "completedAt": "2026-10-02T21:12:37.854Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-8d1c2c9d-791d-4b8a-97a1-d04d367a422d' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_candle_multiple\r'",
+    "retryable": false
+  }
+}

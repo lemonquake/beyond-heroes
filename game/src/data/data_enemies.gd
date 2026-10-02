@@ -262,7 +262,9 @@ static func _defs() -> Array:
 				{"id": &"slam", "anim": &"boss_slam", "range": 6.0, "mult": 1.7, "knockback": 16.0, "poise": 60.0, "cooldown": 6.0, "kind": "aoe",
 					"radius": 4.0, "windup": 1.2, "telegraph": "circle", "offset": 3.0, "element": Elements.EARTH},
 				{"id": &"charge", "anim": &"boss_charge", "range": 22.0, "min_range": 6.0, "mult": 1.5, "knockback": 18.0, "poise": 50.0, "cooldown": 10.0, "kind": "charge",
-					"width": 3.0, "windup": 1.3, "telegraph": "line", "speed": 16.0},
+					"width": 3.0, "windup": 1.3, "telegraph": "line", "speed": 16.0,
+					# bh-033: as the Hollow Crown (phase 3) his charge leaves burning ground behind him
+					"trail": {"phase": 3, "every": 3.5, "radius": 1.5, "duration": 5.0, "max": 5}},
 				{"id": &"dark_orbs", "anim": &"cast_heavy", "range": 24.0, "mult": 0.8, "element": Elements.DARK, "knockback": 3.0, "poise": 10.0,
 					"cooldown": 7.0, "kind": "projectile", "speed": 11.0, "projectile": "dark", "count": 7, "spread": 70.0, "phase": 2},
 				{"id": &"corruption", "anim": &"boss_roar", "range": 30.0, "mult": 0.5, "element": Elements.DARK, "cooldown": 14.0, "kind": "pools",

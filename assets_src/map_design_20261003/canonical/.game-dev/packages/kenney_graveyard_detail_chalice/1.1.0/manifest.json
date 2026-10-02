@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_graveyard_detail_chalice",
+  "category": "environment_prop",
+  "description": "Ritual chalice. Intended use: Altar grouping and ruined temple offering table",
+  "displayName": "kenney_graveyard_detail_chalice",
+  "files": [
+    {
+      "bytes": 24828,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8"
+    },
+    {
+      "bytes": 1754,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "e980f276e713b62135995b874552e462e37de3855428463bd27c15f90940bafe"
+    },
+    {
+      "bytes": 1110,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "06634cf8a7cbb213277adb38489eb6cf0cd3e26e2e9364f77b085b2a1c51bf6d"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "f201959fd9ade6526644e323e0a7e969ce36a6b4a1c804e8b837e63770ef6e03"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_caa38c4ef9a6cf47ac518a4f",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

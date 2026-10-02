@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_6ae1c769-ca8d-4a56-9665-9d6f32d94240",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_platform_planks\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:34.132Z",
+  "updatedAt": "2026-10-02T20:15:34.158Z",
+  "startedAt": "2026-10-02T20:15:34.137Z",
+  "completedAt": "2026-10-02T20:15:34.158Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_6ae1c769-ca8d-4a56-9665-9d6f32d94240\\receipt.json"
+}

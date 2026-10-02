@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_c6a70c66-cef0-48ba-95f5-6189a7bfac53",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_pottedplant\\1.0.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:02:16.029Z",
+  "updatedAt": "2026-10-02T20:02:16.054Z",
+  "startedAt": "2026-10-02T20:02:16.033Z",
+  "completedAt": "2026-10-02T20:02:16.054Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_c6a70c66-cef0-48ba-95f5-6189a7bfac53\\receipt.json"
+}

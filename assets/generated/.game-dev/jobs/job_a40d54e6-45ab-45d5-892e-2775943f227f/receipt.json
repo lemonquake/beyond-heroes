@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_rocks_b\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_rocks_b",
+      "category": "environment_prop",
+      "description": "Second grouped shoreline rocks. Intended use: Coastal silhouette variety",
+      "displayName": "kenney_pirate_rocks_b",
+      "files": [
+        {
+          "bytes": 31316,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "218cf9bfbe51228c78c9fa48a8543bef1037a695024f8fd5f3c47eec4c3a26d4"
+        },
+        {
+          "bytes": 1718,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "960cef887d0ef4e4c1c2128cb144932e5da279d2b5221f332913b199212d5361"
+        },
+        {
+          "bytes": 783,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "8a2bfdb51db1124b6b3d04c62ca1b1b7d6fd61c2ffdebc576f153d050a5230ff"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "ae0a53e647a467546ce53ec4be1b60e3e8c20a692910b8c6a57c936d803970e0"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_fd620804c7be0a4519c97d3b",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:28.420Z"
+}

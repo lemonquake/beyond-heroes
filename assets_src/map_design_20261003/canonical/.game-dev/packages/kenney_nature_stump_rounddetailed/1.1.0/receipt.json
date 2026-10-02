@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:45.746Z",
+  "destination": {
+    "assetId": "kenney_nature_stump_rounddetailed",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4e48ebda384dd0dab957ebf38f88a05086b356dba71d9ec106bb9f9d3671b44a",
+  "packageId": "pkg_bfdc3da7ae0f0a76086e637d",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 8188,
+    "fileName": "stump_roundDetailed.glb",
+    "sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768"
+  }
+}

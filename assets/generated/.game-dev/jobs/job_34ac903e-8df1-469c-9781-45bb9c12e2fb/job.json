@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_34ac903e-8df1-469c-9781-45bb9c12e2fb",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_plant_bushlarge"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:01.341Z",
+  "updatedAt": "2026-10-02T21:13:01.411Z",
+  "startedAt": "2026-10-02T21:13:01.348Z",
+  "completedAt": "2026-10-02T21:13:01.411Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_34ac903e-8df1-469c-9781-45bb9c12e2fb\\receipt.json"
+}

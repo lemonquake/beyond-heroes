@@ -57,6 +57,7 @@ func compose() -> void:
 		dungeon_gate(gid, bg.pos, bg.yaw)
 	enemy_zone("rime_spill", Vector3(-40, 0, -22), 4.0, [&"rime_husk", &"hollow_soldier", &"rime_husk"], 3, 0.1, true)
 	_forest()
+	_map_design()
 	set_bounds(AABB(Vector3(-72, -8, -48), Vector3(144, 20, 96)))
 	view("overview", Vector3(0, 0, 0), 0.0, 70.0, 150.0, 50.0)
 	view("arrival", Vector3(-60, 0, 10), 0.0, 48.0, 26.0)
@@ -401,8 +402,9 @@ func _forest() -> void:
 			if p.distance_to(c[0]) < float(c[1]):
 				return true
 		return absf(x) > W * 0.5 - 6.0 or absf(z) > D * 0.5 - 6.0
+	# map-design pass: fewer loose trees; _map_design() frames the clearings with grouped canopies instead
 	var trees := scatter(["tree_pine", "tree_pine", "tree_oak_twisted", "tree_dead_a", "tree_dead_b"], Rect2(-74, -50, 148, 100),
-		190, 4.6, Vector2(0.75, 1.3), clear, true, true)
+		150, 4.6, Vector2(0.75, 1.3), clear, true, true)
 	# trees near the walkable area get real collision (the rest are background batches)
 	for t in trees:
 		if _poly_dist(Vector2(t.x, t.z), ROAD) < 16.0 or Vector2(t.x, t.z).distance_to(Vector2(CAMP.x, CAMP.z)) < 16.0 \
@@ -420,3 +422,54 @@ func _herbs() -> void:
 	for p in [Vector3(-17, 0, -7), Vector3(36, 0, -13)]:
 		herb_patch(&"brightcap", p)
 	herb_patch(&"emberroot", Vector3(50, 0, 8))
+
+# ------------------------------------------------------------------------------------------------------------
+# Map-design pass (2026-10-03): canopy groups frame the clearings; fallen trunks, stumps and pale fungi gather where it is
+# damp; broken markers stand only at the graveyard; the burnt lots keep charred timber and salvage while the camp's
+# store is stacked and kept. Roads, trails, the ravine and every encounter ring stay clear (enemies stay visible).
+
+const CLEARINGS := [[Vector2(-60, 11), 10.0], [Vector2(-30, 8), 17.0], [Vector2(-48, -13), 7.0], [Vector2(-44, 31), 10.0],
+	[Vector2(20, -15), 10.0], [Vector2(31, 24), 11.0], [Vector2(52, 6), 11.0], [Vector2(62, -4), 11.0],
+	[Vector2(-26, -18), 8.0], [Vector2(21, 28), 8.0], [Vector2(40, 25), 6.0], [Vector2(-14, -30), 5.0], [Vector2(42, -26), 5.0]]
+
+func _clear_here(x: float, z: float, r: float) -> bool:
+	var p := Vector2(x, z)
+	if _poly_dist(p, ROAD) < r + 3.0 or _poly_dist(p, SOUTH_ROAD) < r + 2.5 or _poly_dist(p, TOWER_PATH) < r + 1.8 			or _poly_dist(p, CAMP_PATH) < r + 1.8 or _poly_dist(p, BARROW_PATH) < r + 2.0 or _xtrail_dist(p) < r + 2.0:
+		return false
+	if p.distance_to(BARROW) < r + 7.0 or _xgates.any(func(g): return p.distance_to(g) < r + 7.0) or absf(x - _ravine_x(z)) < r + 6.0:
+		return false
+	for c in CLEARINGS:
+		if p.distance_to(c[0]) < float(c[1]) + r * 0.5:
+			return false
+	return absf(x) < W * 0.5 - 6.0 - r and absf(z) < D * 0.5 - 6.0 - r
+
+func _map_design() -> void:
+	clear_fn = _clear_here
+	# canopy groups round the clearings: each faces the open ground it frames
+	for c in [[Vector2(-60, 11), 14.0, [0.6, 2.4, 4.4]], [Vector2(-30, 8), 21.0, [0.9, 2.2, 3.7, 5.3]], [Vector2(20, -15), 14.0, [1.0, 2.6, 4.6]],
+			[Vector2(31, 24), 15.0, [2.0, 3.6, 5.4]], [Vector2(52, 6), 15.0, [0.4, 4.6]]]:
+		var ctr: Vector2 = c[0]
+		for a: float in c[2]:
+			if sin(a) > 0.25:
+				continue          # a canopy south of a clearing would stand between the camera and the fight
+			var q := ctr + Vector2(cos(a), sin(a)) * float(c[1])
+			place_near("pine_group", Vector3(q.x, 0, q.y), Vector3(q.x, 0, q.y), 0.0, 4.0, rad_to_deg(a))
+	# damp hollows: fallen trunks with fungi, old stumps
+	for q in [Vector3(-8, 0, -20), Vector3(10, 0, 20), Vector3(-55, 0, -30), Vector3(46, 0, -14), Vector3(-12, 0, 30), Vector3(58, 0, 24)]:
+		place_near("fallen_tree", q, q, 0.0, 6.0, rng.randf() * 360.0)
+	for q in [Vector3(-62, 0, -6), Vector3(-6, 0, 36), Vector3(30, 0, -32)]:
+		place_near("rock_cluster_m", q, q, 0.0, 6.0, rng.randf() * 360.0)
+	# the graveyard: broken markers and the last offerings, at its edge (burial context only)
+	var g := Vector3(-48, 0, 28)
+	vignette("grave_cluster", g + Vector3(10.5, 0, -1.5), 15.0, {"check": false})
+	vignette("offering", g + Vector3(3.0, 0, 8.6), 0.0, {"check": false})
+	# the burnt lots: charred timber and salvage against the ruined walls (not on the road)
+	for h in [[Vector3(-38, 0, -4), 15.0], [Vector3(-22, 0, -6), -10.0], [Vector3(-40, 0, 20), 170.0], [Vector3(-20, 0, 19), 195.0]]:
+		var hp: Vector3 = h[0]
+		var back := Vector3(0, 0, -1).rotated(Vector3.UP, deg_to_rad(h[1]))
+		var d := hp + back * 4.0
+		if not touches_solid(Vector3(d.x, ground(d.x, d.z), d.z), 0.8):
+			kit("kd_debris_wood", d, h[1] + 20.0, 1.2, deco, true)
+	vignette("salvage", Vector3(-15.0, 0, -9.0), 30.0)
+	# the camp keeps an orderly store: fuel stacked and dry, beyond the fight's ring
+	place_near("woodpile", CAMP + Vector3(-9.5, 0, -4.0), CAMP, 9.5, 13.0, 40.0, {"check": false})

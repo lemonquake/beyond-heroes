@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_nature_plant_bush",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_bush.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0",
+ "source_sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+ "derived_sha256": "ee774789646c728e31e2ec90c04b8bf57c09a5d4d23b7ca8cd61ea27d81489ad",
+ "scale": 3.6818,
+ "scale_rule": [
+  "h",
+  0.9
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Foliage"
+ ],
+ "part_faces": {
+  "BH_Foliage": 32
+ },
+ "source_to_material": {
+  "grass": "BH_Foliage"
+ },
+ "triangles": 32,
+ "surfaces": 1,
+ "source_triangles": 32,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.458,
+  0.9,
+  1.458
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

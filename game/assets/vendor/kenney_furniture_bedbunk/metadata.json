@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_furniture_bedbunk",
+  "category": "environment_prop",
+  "description": "Bunk bed. Intended use: Wyman lodging only if an existing interior supports it",
+  "displayName": "kenney_furniture_bedbunk",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.5709999920426173,
+        0.8499999642372131,
+        0
+      ],
+      "min": [
+        2.50536452695016e-9,
+        0,
+        -1.0950000286102295
+      ],
+      "sizeMeters": [
+        0.5709999895372528,
+        0.8499999642372131,
+        1.0950000286102295
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 40784,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 3,
+    "meshCount": 5,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 5,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 580,
+    "undrawnMeshCount": 2,
+    "undrawnPrimitiveCount": 3,
+    "undrawnTriangleCount": 114,
+    "vertexCount": 1512,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

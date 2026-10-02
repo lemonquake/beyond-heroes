@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_flag_pennant\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_flag_pennant",
+      "category": "environment_prop",
+      "description": "Plain pennant flag. Intended use: Town accents with canon colours and no pirate markings",
+      "displayName": "kenney_pirate_flag_pennant",
+      "files": [
+        {
+          "bytes": 13640,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "05956b9389135492e0644bd7d49711d1e4f865cd67808f7da5709a23e02d7d6f"
+        },
+        {
+          "bytes": 1751,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "71fbe8acdae6ba6141df2236be207b6e8c4a92b3d72dbfdacf275f5a52646b25"
+        },
+        {
+          "bytes": 793,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "df893f2ffbe118fd06cc4a28b4d22ce5e23d53a05ac98bde9fffb4a649d6c36d"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "984d68cc1bcb0578e26782d4f1719f6d987ea2c8b29e420e064c2e3e6ffe5ebd"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_8acd4e30ba09a88d9ad9b8b9",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:34.153Z"
+}

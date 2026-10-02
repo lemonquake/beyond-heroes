@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_4a962e1c-ab36-40fd-ae2e-75a11949c2b7",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_wall_half\\1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T20:15:54.801Z",
+  "updatedAt": "2026-10-02T20:15:54.828Z",
+  "startedAt": "2026-10-02T20:15:54.807Z",
+  "completedAt": "2026-10-02T20:15:54.828Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_4a962e1c-ab36-40fd-ae2e-75a11949c2b7\\receipt.json"
+}

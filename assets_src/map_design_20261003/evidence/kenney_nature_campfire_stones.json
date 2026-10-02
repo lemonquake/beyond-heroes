@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\campfire_stones.glb",
+    "fileBytes": 17344,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 396,
+    "triangleCount": 264,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.24997441470623016,
+        -0.050000000000000114,
+        -0.25775352120399475
+      ],
+      "max": [
+        0.2908634841442108,
+        0.027751003205776212,
+        0.25775352120399475
+      ],
+      "sizeMeters": [
+        0.540837898850441,
+        0.07775100320577633,
+        0.5155070424079895
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\campfire_stones.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 264,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.540837898850441,
+        0.07775100320577633,
+        0.5155070424079895
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_campfire_stones\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_campfire_stones",
+        "category": "environment_prop",
+        "description": "Stone campfire ring. Intended use: Camp seating group; reuse existing fire effects",
+        "displayName": "kenney_nature_campfire_stones",
+        "files": [
+          {
+            "bytes": 17344,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35"
+          },
+          {
+            "bytes": 1631,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "eb063e92e994f6efe68bb4f05d753a68d4661230a0c03872048a60419fc99d87"
+          },
+          {
+            "bytes": 837,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "37b215335cdd69a214671c1156f48ebaa3ac7c1827115bfbc9f281ea7cd787fa"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "d7a3235cae06f2e4f105d9a7b0beae558686b8a94ee2f448688f62965fc6a7ad"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_8e7cb954ca65fc75726cbdf8",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+  "embedded_textures": []
+}

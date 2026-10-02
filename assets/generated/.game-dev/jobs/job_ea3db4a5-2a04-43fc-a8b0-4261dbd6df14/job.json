@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_ea3db4a5-2a04-43fc-a8b0-4261dbd6df14",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_urn_square\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:40.861Z",
+  "updatedAt": "2026-10-02T21:12:40.910Z",
+  "startedAt": "2026-10-02T21:12:40.867Z",
+  "completedAt": "2026-10-02T21:12:40.910Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-043aaef0-4d69-48a2-aa1f-f3ba496d129d' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_urn_square\r'",
+    "retryable": false
+  }
+}

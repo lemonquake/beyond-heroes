@@ -1,0 +1,142 @@
+{
+  "inspection": {
+    "filePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\crops_bambooStageB.glb",
+    "fileBytes": 40144,
+    "generator": "glTF-Transform v4.4.2",
+    "meshCount": 1,
+    "primitiveCount": 1,
+    "vertexCount": 996,
+    "triangleCount": 564,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "boundingBox": {
+      "min": [
+        -0.17681777477264404,
+        -0.05,
+        -0.161227747797966
+      ],
+      "max": [
+        0.163276806473732,
+        0.8399999260902404,
+        0.14678002893924713
+      ],
+      "sizeMeters": [
+        0.34009458124637604,
+        0.8899999260902405,
+        0.30800777673721313
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": false,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": false,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "validation": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\sources\\nature-kit\\Models\\GLTF format\\crops_bambooStageB.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 564,
+      "materials": 1,
+      "textures": 0,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": false,
+      "sizeMeters": [
+        0.34009458124637604,
+        0.8899999260902405,
+        0.30800777673721313
+      ]
+    },
+    "failures": [],
+    "checksRun": 8,
+    "inspectorWarnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ],
+    "nextStep": "Passes cleanly."
+  },
+  "package_verification": {
+    "schema": "game_dev.result.v1",
+    "operation": "package.verify",
+    "ok": true,
+    "data": {
+      "schema": "game_dev.package_verification.v1",
+      "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_crops_bamboostageb\\1.1.0",
+      "manifest": {
+        "assetId": "kenney_nature_crops_bamboostageb",
+        "category": "environment_prop",
+        "description": "Mature bamboo patch. Intended use: Sparse Agdao back gardens and Coilwood framing",
+        "displayName": "kenney_nature_crops_bamboostageb",
+        "files": [
+          {
+            "bytes": 40144,
+            "kind": "model",
+            "path": "model.glb",
+            "sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6"
+          },
+          {
+            "bytes": 1617,
+            "kind": "metadata",
+            "path": "metadata.json",
+            "sha256": "bebd04f0bbb889283196bbe09528c15dc49dfd4935887d63e9fdf98db7bd2640"
+          },
+          {
+            "bytes": 843,
+            "kind": "provenance",
+            "path": "provenance.json",
+            "sha256": "9b3bbeed2bf9e66f66962d87b4cc1c5b9ba278c5552cd9807d23a59432e527bf"
+          },
+          {
+            "bytes": 2999,
+            "kind": "validation",
+            "path": "validation.json",
+            "sha256": "a16d725776e332105bc5c72ed155b704bf63106700616c15b4c66676829d2a6e"
+          }
+        ],
+        "license": "CC0-1.0",
+        "model": "model.glb",
+        "packageId": "pkg_0cd47a3397ee30b0dedf2c43",
+        "provenance": {
+          "origin": "imported",
+          "provider": "Kenney"
+        },
+        "schema": "game_dev.asset_package.v1",
+        "validation": {
+          "errorCount": 0,
+          "passed": true,
+          "warningCount": 0
+        },
+        "version": "1.1.0"
+      },
+      "hashesVerified": true,
+      "evidence": {
+        "packageBytesVerified": true,
+        "gpuImportTestPerformed": false,
+        "humanVisualReviewPerformed": false
+      }
+    }
+  },
+  "original_source_sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6",
+  "embedded_textures": []
+}

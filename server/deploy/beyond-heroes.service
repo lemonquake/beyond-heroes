@@ -1,9 +1,10 @@
-# Draft; validate on the chosen Linux VPS before enabling.
+# Beyond Heroes: account service + game coordinator, supervised as one unit.
+# Installed by deploy/install.sh. Not verified on a live Linux host from this repository: see deploy/README.md "Verification".
 [Unit]
 Description=Beyond Heroes account service and game coordinator
 After=network-online.target
 Wants=network-online.target
-StartLimitIntervalSec=120
+StartLimitIntervalSec=300
 StartLimitBurst=5
 
 [Service]
@@ -11,20 +12,39 @@ Type=simple
 User=beyond-heroes
 Group=beyond-heroes
 WorkingDirectory=/opt/beyond-heroes/current
+# Godot writes its own logs and caches under HOME; keep them inside the state directory
+Environment=PYTHONUNBUFFERED=1 HOME=/var/lib/beyond-heroes/home
+EnvironmentFile=-/etc/beyond-heroes/build.env
+ExecStart=/opt/beyond-heroes/current/.venv/bin/python -m server.run_server --stdio --godot /opt/godot/godot --config /var/lib/beyond-heroes/server.json
+# run_server exits non-zero when either child dies, so on-failure restarts the whole pair; a requested stop exits 0
+Restart=on-failure
+RestartSec=5
+# SIGTERM goes to run_server only; it stops the coordinator, lets the account service finish requests, then backs up.
+# 'mixed' kills anything left in the cgroup if that takes longer than TimeoutStopSec.
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=60
 StateDirectory=beyond-heroes
 StateDirectoryMode=0700
-Environment=PYTHONUNBUFFERED=1
 UMask=0077
-ExecStart=/opt/beyond-heroes/current/.venv/bin/python -m server.run_server --godot /opt/godot/godot --config /var/lib/beyond-heroes/server.json
-Restart=always
-RestartSec=5
-KillMode=mixed
-KillSignal=SIGINT
-TimeoutStopSec=45
 StandardOutput=journal
 StandardError=journal
+SyslogIdentifier=beyond-heroes
+# Hardening (the service needs only the network, its state directory and the read-only release)
 NoNewPrivileges=true
 PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+ReadWritePaths=/var/lib/beyond-heroes
+ReadOnlyPaths=/opt/beyond-heroes /opt/godot
+MemoryMax=1536M
+TasksMax=256
 
 [Install]
 WantedBy=multi-user.target

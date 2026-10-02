@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_sidetabledrawers\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_furniture_sidetabledrawers",
+      "category": "environment_prop",
+      "description": "Drawer side table. Intended use: Keeper and cartographer storage",
+      "displayName": "kenney_furniture_sidetabledrawers",
+      "files": [
+        {
+          "bytes": 19072,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf"
+        },
+        {
+          "bytes": 1604,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "1a7224e35e9d44df7cbeaa1b27af894a7ac0af5cf7d9cb1ea8ebc151d3846f69"
+        },
+        {
+          "bytes": 854,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "5761ce61d35fe47d2786839fd620920208e0c0e0c48bfe7342b8c452504125a0"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "6e0e8bad3fb874259cf7081eb3aaba6c6f85414fcdfbe8822cc1baf85e3a64e5"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_56e6b8030c33ff467ea6a9e5",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:15:06.731Z"
+}

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:10.954Z",
+  "destination": {
+    "assetId": "kenney_furniture_bookcaseclosedwide",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "a7e7e0577819a459949c09a06116aaa8a155749ed71814e993ff6459ebbe08c7",
+  "packageId": "pkg_954fc0e2975349273e5e7aff",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 23140,
+    "fileName": "bookcaseClosedWide.glb",
+    "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a"
+  }
+}

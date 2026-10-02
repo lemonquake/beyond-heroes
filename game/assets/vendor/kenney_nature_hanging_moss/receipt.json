@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:35.880Z",
+  "destination": {
+    "assetId": "kenney_nature_hanging_moss",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "762335d88839c8107d5467246bf3d0642c8b5d624fcf02aefe927145f7c7c727",
+  "packageId": "pkg_ce7ffd1716bd47c85245b0d6",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 4776,
+    "fileName": "hanging_moss.glb",
+    "sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0"
+  }
+}

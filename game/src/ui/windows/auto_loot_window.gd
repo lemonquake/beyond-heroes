@@ -81,7 +81,7 @@ func refresh() -> void:
 	for name in BH.RARITY_NAMES: rarity.add_item(name + " and better")
 	rarity.select(clampi(int(Settings.auto_loot_rules.get("min_rarity", Settings.auto_loot_rarity)), 0, BH.RARITY_COUNT - 1))
 	rarity.item_selected.connect(func(i: int) -> void: _set_rule("min_rarity", i))
-	_row(right, "Minimum rarity (all categories)", rarity)
+	_row(right, "Minimum equipment rarity", rarity)
 	_number(right, "Minimum equipment level", "min_level", 0, 100, 1, 0)
 	_number(right, "Minimum equipment sockets", "min_sockets", 0, 6, 1, 0)
 	_check(right, "Only gear meeting my level and attributes", "usable_only")

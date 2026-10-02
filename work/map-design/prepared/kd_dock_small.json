@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_pirate_structure_platform_dock_small",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_dock_small.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0",
+ "source_sha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f",
+ "derived_sha256": "aabb0b6e4299d0ab40bb02e4b2b3048e2c1f64a0da37868ba1c989f93b6273a4",
+ "scale": 1.0,
+ "scale_rule": [
+  "s",
+  1.0
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_WoodDark"
+ ],
+ "part_faces": {
+  "BH_WoodDark": 312
+ },
+ "source_to_material": {
+  "wood": "BH_WoodDark",
+  "wood_dark": "BH_WoodDark"
+ },
+ "triangles": 312,
+ "surfaces": 1,
+ "source_triangles": 312,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.9,
+  1.312,
+  2.512
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

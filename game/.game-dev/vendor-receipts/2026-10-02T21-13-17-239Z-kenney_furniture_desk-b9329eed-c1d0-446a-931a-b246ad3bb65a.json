@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_482e5ef30f7d289aa87fa725",
+  "assetId": "kenney_furniture_desk",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_desk",
+  "modelSha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+  "manifestSha256": "dcc66822a3b7dc9b53f7c0719fb169b82ff0ef7dcf8513a727e83573c877acfc",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:17.239Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_desk\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

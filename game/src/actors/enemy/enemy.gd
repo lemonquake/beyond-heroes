@@ -177,7 +177,8 @@ func _ready() -> void:
 		visual.setup(Persona.MODEL, sc * float(persona.get("size", 1.0)), def.tint, &"")
 		Persona.apply(visual, persona)
 	else:
-		visual.setup(def.model, sc, def.tint, &"")
+		visual.setup(CreatureSwaps.model(def.model), sc, def.tint, &"")
+		visual.clip_alias = CreatureSwaps.aliases(def.model)
 	if def.weapon != "":
 		visual.attach_weapon(&"main", def.weapon)
 	visual.float_hover = float(def.anim_map.get("hover", 1.2))
@@ -832,7 +833,7 @@ func _atk_element(a: Dictionary) -> int:
 
 func _start_attack(a: Dictionary) -> void:
 	var S := EnemyBrain.State
-	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "dash", "tongue", "bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
+	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "bud", "dash", "tongue", "bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
 	var st: int = S.CAST if def.archetype in [&"caster", &"support"] and a.kind != "melee" else (S.SPECIAL if special else S.ATTACK)
 	if not brain.go(st):
 		return
@@ -910,6 +911,18 @@ func _start_attack(a: Dictionary) -> void:
 		"charge":
 			var dir := (aim_at - global_position).slide(Vector3.UP).normalized()
 			var length := minf(float(a.get("range", 20.0)), _dist + 4.0)
+			# bh-033: a standing impact pillar just behind the baiting hero is where the charge ends (the warning line
+			# shows it), so standing in front of a pillar always works as bait
+			if is_boss:
+				var all := ArenaState.pillars(Game.current_map)
+				var gone := ArenaState.broken(Game.current_map)
+				for i in all.size():
+					if gone.has(i):
+						continue
+					var off: Vector3 = ((all[i] as Node3D).global_position - global_position).slide(Vector3.UP)
+					var along := off.dot(dir)
+					if along > _dist and along < float(a.get("range", 20.0)) + 8.0 and (off - dir * along).length() < body_radius + 1.0:
+						length = maxf(length, along)
 			var tele := VFXLib.telegraph("line", Vector2(length, float(a.get("width", 2.5))), windup, Color(1.0, 0.25, 0.1, 0.75))
 			FX.spawn(tele, global_position)
 			tele.rotation.y = atan2(dir.x, dir.z)
@@ -923,6 +936,8 @@ func _start_attack(a: Dictionary) -> void:
 				visual.hold_action(StringName(a.get("hold_anim", &"boss_charge" if is_boss or def.archetype == &"brute" else &"run_combat")))
 		"pools":
 			act.on_release = func() -> void: _pools(a)
+		"bud":
+			act.on_release = func() -> void: _plant_buds(a)
 		"summon":
 			act.on_release = func() -> void: _summon(a)
 		"chain":
@@ -1066,6 +1081,38 @@ func _pools(a: Dictionary) -> void:
 		blast.on_blast = func(pos: Vector3, _h: Array) -> void:
 			AreaEffects.hazard(FX.world, pos, float(a.get("radius", 2.5)), float(a.get("duration", 6.0)), req, self, BH.LAYER_PLAYER, hc, 0.5)
 
+## bh-033 (Verdigast): rot buds on open ground around her, away from each other and from rot already there. At most
+## `max_alive` buds at once; `count` is per phase. Each bud warns where it will rot (ArenaState-style shared warning).
+func _plant_buds(a: Dictionary) -> void:
+	var bdef := DB.enemy(&"rot_bud")
+	if bdef == null:
+		return
+	var alive := get_tree().get_nodes_in_group(&"rot_bud").filter(func(b): return is_instance_valid(b) and (b as Enemy).alive)
+	var counts: Array = a.get("count_by_phase", [int(a.get("count", 2))])
+	var want := mini(int(counts[clampi(phase - 1, 0, counts.size() - 1)]), int(a.get("max_alive", 3)) - alive.size())
+	var spots := []
+	var tries := 0
+	while spots.size() < want and tries < 40:
+		tries += 1
+		var ang := rng.randf() * TAU
+		var p := global_position + Vector3(cos(ang), 0, sin(ang)) * rng.randf_range(6.0, 12.0)
+		p = CombatQuery.reachable_point(get_world_3d(), global_position, p)
+		if p.distance_to(global_position) < 4.5 or spots.any(func(q): return q.distance_to(p) < 6.0):
+			continue
+		if alive.any(func(b): return (b as Node3D).global_position.distance_to(p) < 6.0):
+			continue
+		if get_tree().get_nodes_in_group(&"rot_patch").any(func(h): return (h as Node3D).global_position.distance_to(p) < 5.0):
+			continue
+		spots.append(p)
+	for p in spots:
+		var b := Spawner.spawn_enemy(get_parent(), bdef, maxi(1, level - 2), [], CombatQuery.ground_at(get_world_3d(), p), difficulty)
+		b.add_to_group(&"rot_bud")
+		b.set_meta(&"bud_req", _attack_request(a))
+		b.set_meta(&"bud_mother", self)
+		FX.spawn(VFXLib.particles(Color(0.55, 0.85, 0.2, 0.8), 24, 0.8, true, 0.5, 3.0, 60.0, Vector3(0, 2, 0), 0.6), p)
+	if not spots.is_empty():
+		Audio.play_at(&"dark_cast", global_position)
+
 func _summon(a: Dictionary) -> void:
 	var edef := DB.enemy(a.get("summon", &"hollow_soldier"))
 	if edef == null:
@@ -1100,12 +1147,26 @@ func _charge_step(delta: float) -> Vector3:
 		return Vector3.ZERO
 	_charge.left -= delta
 	var v: Vector3 = _charge.dir * float(_charge.speed)
+	_charge_trail()
 	if not _charge.hit and target and target.alive and not _charge.get("lunge", false):
 		if target.global_position.distance_to(global_position) < body_radius + target.body_radius + 0.8:
 			_charge.hit = true
 			var req := _attack_request(_charge.a)
 			req.tags[&"push_dir"] = _charge.dir
 			target.receive_hit(req, self, target.center())
+	# bh-033: a charging boss that reaches a standing impact pillar ahead of him crashes into it, even at a corner
+	# (the pillars are turned boxes: the slide normal alone missed glancing hits and he slid past)
+	if is_boss and not _charge.get("lunge", false) and not net_replica:
+		var map := Game.current_map
+		var all := ArenaState.pillars(map)
+		var gone := ArenaState.broken(map)
+		for i in all.size():
+			if gone.has(i):
+				continue
+			var off: Vector3 = ((all[i] as Node3D).global_position - global_position).slide(Vector3.UP)
+			if off.length() < body_radius + 1.1 and off.dot(_charge.dir) > 0.0:
+				_charge_crash(_pillar_collider(all[i]), (all[i] as Node3D).global_position)
+				return Vector3.ZERO
 	# A charging boss that slams into a wall or an impact pillar stuns itself.
 	if not _charge.get("lunge", false):
 		for i in get_slide_collision_count():
@@ -1120,10 +1181,55 @@ func _charge_step(delta: float) -> Vector3:
 		return Vector3.ZERO
 	return v
 
+## bh-033: a charge's trail (attack key "trail": {phase, every, radius, duration, max}) — burning ground left behind
+## along the line, a few patches at most, each warned for every player before it burns. The line stays crossable.
+func _charge_trail() -> void:
+	var tr: Dictionary = (_charge.get("a", {}) as Dictionary).get("trail", {})
+	if tr.is_empty() or phase < int(tr.get("phase", 1)) or net_replica:
+		return
+	var last: Vector3 = _charge.get("trail_at", global_position)
+	var n := int(_charge.get("trail_n", 0))
+	if not _charge.has("trail_at"):
+		_charge["trail_at"] = global_position
+		return
+	if n >= int(tr.get("max", 5)) or last.distance_to(global_position) < float(tr.get("every", 3.0)):
+		return
+	_charge["trail_at"] = global_position
+	_charge["trail_n"] = n + 1
+	var a: Dictionary = _charge.a
+	var req := _attack_request(a)
+	req.kind = DamageRequest.Kind.SPELL
+	req.base_min *= 0.25
+	req.base_max *= 0.25
+	req.knockback = 0.0
+	var at := CombatQuery.ground_at(get_world_3d(), global_position)
+	var hc := Color(0.55, 0.15, 0.85)
+	var r := float(tr.get("radius", 1.5))
+	var blast := AreaEffects.delayed(FX.world, at, r, 0.6, null, self, BH.LAYER_PLAYER, Color(hc.r, hc.g, hc.b, 0.7))
+	Net.share_telegraph(at, r, 0.6, Color(hc.r, hc.g, hc.b, 0.7), "circle", 0.0, self)
+	blast.on_blast = func(pos: Vector3, _h: Array) -> void:
+		AreaEffects.hazard(FX.world, pos, r, float(tr.get("duration", 5.0)), req, self, BH.LAYER_PLAYER, hc, 0.5)
+
+## bh-033: an arena-control boss takes her ground hazards and growing buds with her (no leftovers after a kill).
+func _clear_arena_hazards() -> void:
+	for n in get_tree().get_nodes_in_group(&"rot_patch") + get_tree().get_nodes_in_group(&"rot_bud"):
+		if is_instance_valid(n) and n != self:
+			if n is Enemy:
+				(n as Enemy).remove_from_group(&"enemy")
+			n.queue_free()
+
+static func _pillar_collider(p: Node) -> Node:
+	var bodies := p.find_children("*", "StaticBody3D", true, false)
+	return bodies[0] if not bodies.is_empty() else p
+
 func _charge_crash(other: Object, point: Vector3) -> void:
 	_charge = {}
 	visual.stop_action()
-	var pillar := other is Node and (other as Node).is_in_group(&"arena_pillar")
+	# the collider is the pillar kit's StaticBody child; the group sits on the kit root (bh-033: this never matched)
+	var pillar_node: Node = other as Node
+	while pillar_node != null and not pillar_node.is_in_group(&"arena_pillar") and not (pillar_node is MapRoot):
+		pillar_node = pillar_node.get_parent()
+	var pillar := pillar_node != null and pillar_node.is_in_group(&"arena_pillar")
 	if other != null and other.has_method(&"take_hit"):
 		other.take_hit(200.0, forward() * 8.0)
 	Events.camera_shake.emit(0.6)
@@ -1134,7 +1240,20 @@ func _charge_crash(other: Object, point: Vector3) -> void:
 		status.apply(&"stunned", 3.0)
 		status.apply(&"stagger_window", 5.0)
 		status.immunities[&"stunned"] = true
-		Events.notify.emit("The Warden is stunned!", &"info")
+		# bh-033: the pillar does not survive it — cover shrinks as the fight goes on (shared with every player)
+		var map := Game.current_map
+		var idx := ArenaState.index_of(map, pillar_node)
+		if not net_replica and ArenaState.break_pillar(map, idx):
+			Net.arena_event(&"pillar", idx)
+		var left := ArenaState.intact_count(map)
+		Events.notify.emit("The Warden is stunned! The pillar shatters — %s." % ("%d left" % left if left > 0 else "none left; the walls will still stop him"), &"info")
+	elif is_boss and ArenaState.has_pillars(Game.current_map) and ArenaState.intact_count(Game.current_map) == 0:
+		# bh-033 fallback once every pillar is down: a wall still stops him, briefly
+		status.immunities.erase(&"stunned")
+		status.apply(&"stunned", 1.6)
+		status.apply(&"stagger_window", 3.0)
+		status.immunities[&"stunned"] = true
+		Events.notify.emit("The Warden reels against the wall!", &"info")
 	else:
 		status.apply(&"staggered", 1.2)
 
@@ -1520,6 +1639,8 @@ func die(killer: Node) -> void:
 	if not alive:
 		return
 	_interrupt()
+	if is_boss and def.attacks.any(func(at): return String(at.get("kind", "")) == "bud"):
+		_clear_arena_hazards()
 	_death_clip = _choose_death_clip(killer)
 	super.die(killer)
 	brain.go(EnemyBrain.State.DEAD)

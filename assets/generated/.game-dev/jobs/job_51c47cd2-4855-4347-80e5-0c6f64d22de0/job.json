@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_51c47cd2-4855-4347-80e5-0c6f64d22de0",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:11:47.999Z",
+  "updatedAt": "2026-10-02T21:11:48.039Z",
+  "startedAt": "2026-10-02T21:11:48.005Z",
+  "completedAt": "2026-10-02T21:11:48.039Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_51c47cd2-4855-4347-80e5-0c6f64d22de0\\receipt.json"
+}

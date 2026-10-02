@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:26.876Z",
+  "destination": {
+    "assetId": "kenney_pirate_tool_shovel",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "5e1b3370eadc1f1e38bdfc7120614be66cdc1b45e9ed4a71eb06f500725ba40c",
+  "packageId": "pkg_6d1b4d0e8c0d1e8d7d0a2971",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 26264,
+    "fileName": "kenney_pirate_tool_shovel.glb",
+    "sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5"
+  }
+}

@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_pillar_obelisk",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_obelisk.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0",
+ "source_sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1",
+ "derived_sha256": "d86849cb847effe4096d66e1727b09967346ff106b0424813904e16743abbb9d",
+ "scale": 2.6,
+ "scale_rule": [
+  "s",
+  2.6
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Stone": 76
+ },
+ "source_to_material": {
+  "grey": "BH_Stone"
+ },
+ "triangles": 76,
+ "surfaces": 1,
+ "source_triangles": 76,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.91,
+  2.631,
+  0.91
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

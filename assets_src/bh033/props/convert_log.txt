@@ -1,0 +1,350 @@
+03:34:31 | INFO: Data are loaded, start creating Blender stuff
+03:34:31 | INFO: Blender create Mesh node Cube.005
+03:34:31 | INFO: Blender create Mesh node Cube.020
+03:34:31 | INFO: Blender create Mesh node Cube.001
+03:34:31 | INFO: glTF import finished in 0.03s
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+03:34:31 | INFO: Starting glTF 2.0 export
+03:34:31 | INFO: Extracting primitive: Cube
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Cube.020
+03:34:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Cube.001
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Cube.005
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Finished glTF 2.0 export in 0.13395953178405762 s
+
+PROP wooden_crate_01 6576 -> 6576 tex 512 col True
+03:34:31 | INFO: Data are loaded, start creating Blender stuff
+03:34:31 | INFO: Blender create Mesh node Cube.006
+03:34:31 | INFO: Blender create Mesh node Cube.008
+03:34:31 | INFO: glTF import finished in 0.02s
+03:34:31 | INFO: Starting glTF 2.0 export
+03:34:31 | INFO: Extracting primitive: Cube
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Cube.006
+03:34:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Cube.008
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Finished glTF 2.0 export in 0.026887178421020508 s
+
+PROP wooden_crate_02 5176 -> 5176 tex 1024 col True
+03:34:31 | INFO: Data are loaded, start creating Blender stuff
+03:34:31 | INFO: Blender create Mesh node Cylinder
+03:34:31 | INFO: Blender create Mesh node Plane
+03:34:31 | INFO: glTF import finished in 0.02s
+03:34:31 | INFO: Starting glTF 2.0 export
+03:34:31 | INFO: Extracting primitive: Cylinder
+03:34:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Extracting primitive: Plane
+03:34:31 | INFO: Primitives created: 1
+03:34:31 | INFO: Finished glTF 2.0 export in 0.08886051177978516 s
+
+PROP wooden_bucket_01 5116 -> 5116 tex 512 col False
+03:34:31 | INFO: Data are loaded, start creating Blender stuff
+03:34:31 | INFO: Blender create Mesh node Plane.002
+03:34:31 | INFO: Blender create Mesh node Plane.003
+03:34:31 | INFO: Blender create Mesh node Plane.004
+03:34:31 | INFO: glTF import finished in 0.02s
+03:34:32 | INFO: Starting glTF 2.0 export
+03:34:32 | INFO: Extracting primitive: Cube
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Extracting primitive: Plane.002
+03:34:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Extracting primitive: Plane.004
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Extracting primitive: Plane.003
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Finished glTF 2.0 export in 0.09786462783813477 s
+
+PROP wooden_bucket_02 7252 -> 5197 tex 512 col True
+03:34:32 | INFO: Data are loaded, start creating Blender stuff
+03:34:32 | INFO: Blender create Mesh node Cube.001
+03:34:32 | INFO: Blender create Mesh node Cube.004
+03:34:32 | INFO: Blender create Mesh node Cylinder.031
+03:34:32 | INFO: glTF import finished in 0.03s
+03:34:32 | INFO: Starting glTF 2.0 export
+03:34:32 | INFO: Extracting primitive: Cube.001
+03:34:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:32 | INFO: Primitives created: 2
+03:34:32 | INFO: Extracting primitive: Cube.004
+03:34:32 | INFO: Primitives created: 2
+03:34:32 | INFO: Extracting primitive: Cylinder.031
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Finished glTF 2.0 export in 0.2295527458190918 s
+
+PROP wooden_lantern_01 8321 -> 5998 tex 512 col False
+03:34:32 | INFO: Data are loaded, start creating Blender stuff
+03:34:32 | INFO: Blender create Mesh node Vert.001
+03:34:32 | INFO: glTF import finished in 0.06s
+03:34:32 | INFO: Starting glTF 2.0 export
+03:34:32 | INFO: Extracting primitive: Vert.001
+03:34:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:32 | INFO: Primitives created: 1
+03:34:32 | INFO: Finished glTF 2.0 export in 0.07110309600830078 s
+
+PROP wicker_basket_01 22276 -> 3999 tex 512 col False
+03:34:32 | INFO: Data are loaded, start creating Blender stuff
+03:34:32 | INFO: Blender create Mesh node mesh
+03:34:32 | INFO: Blender create Mesh node mesh.001
+03:34:32 | INFO: glTF import finished in 0.03s
+03:34:33 | INFO: Starting glTF 2.0 export
+03:34:33 | INFO: Extracting primitive: mesh
+03:34:33 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: mesh.001
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Finished glTF 2.0 export in 0.07513976097106934 s
+
+PROP wicker_basket_02 17850 -> 2999 tex 512 col False
+03:34:33 | INFO: Data are loaded, start creating Blender stuff
+03:34:33 | INFO: Blender create Mesh node DiameterSmall.012
+03:34:33 | INFO: Blender create Mesh node Cylinder.014
+03:34:33 | INFO: Blender create Mesh node Plane.006
+03:34:33 | INFO: Blender create Mesh node DiameterSmall.004
+03:34:33 | INFO: glTF import finished in 0.03s
+03:34:33 | INFO: Starting glTF 2.0 export
+03:34:33 | INFO: Extracting primitive: Cube
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: Plane.006
+03:34:33 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: DiameterSmall.004
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: Cylinder.014
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: DiameterSmall.012
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Finished glTF 2.0 export in 0.019037485122680664 s
+
+PROP wine_barrel_01 10820 -> 5998 tex 1024 col True
+03:34:33 | INFO: Data are loaded, start creating Blender stuff
+03:34:33 | INFO: Blender create Mesh node bench.002
+03:34:33 | INFO: glTF import finished in 0.01s
+03:34:33 | INFO: Starting glTF 2.0 export
+03:34:33 | INFO: Extracting primitive: bench.002
+03:34:33 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: Cube
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Finished glTF 2.0 export in 0.01109933853149414 s
+
+PROP painted_wooden_bench 630 -> 630 tex 1024 col True
+03:34:33 | INFO: Data are loaded, start creating Blender stuff
+03:34:33 | INFO: Blender create Mesh node Plane.003
+03:34:33 | INFO: glTF import finished in 0.02s
+03:34:33 | INFO: Starting glTF 2.0 export
+03:34:33 | INFO: Extracting primitive: Cube
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Extracting primitive: Plane.003
+03:34:33 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:33 | INFO: Primitives created: 1
+03:34:33 | INFO: Finished glTF 2.0 export in 0.017461538314819336 s
+
+PROP planter_box_01 8094 -> 6000 tex 1024 col True
+03:34:33 | INFO: Data are loaded, start creating Blender stuff
+03:34:33 | INFO: Blender create Mesh node tt_01_rep.001
+03:34:33 | INFO: glTF import finished in 0.07s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: Cube
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: tt_01_rep.001
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.0183260440826416 s
+
+PROP tree_stump_01 41046 -> 6000 tex 1024 col True
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node Mesh
+03:34:34 | INFO: glTF import finished in 0.01s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: Cube
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: Mesh
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.008466243743896484 s
+
+PROP WoodenTable_01 952 -> 952 tex 1024 col True
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node Cylinder
+03:34:34 | INFO: Blender create Mesh node Cylinder.007
+03:34:34 | INFO: glTF import finished in 0.02s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: Cube
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: Cylinder
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: Cylinder.007
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.016875743865966797 s
+
+PROP round_wooden_table_01 8640 -> 5999 tex 1024 col True
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node Slice.003
+03:34:34 | INFO: glTF import finished in 0.02s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: Cube
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: Slice.003
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.05887126922607422 s
+
+PROP wooden_stool_01 10946 -> 4000 tex 512 col True
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node mesh
+03:34:34 | INFO: glTF import finished in 0.02s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: mesh
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.09171152114868164 s
+
+PROP wooden_stool_02 11146 -> 2999 tex 512 col False
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node Plane
+03:34:34 | INFO: glTF import finished in 0.02s
+03:34:34 | INFO: Starting glTF 2.0 export
+03:34:34 | INFO: Extracting primitive: Plane
+03:34:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Extracting primitive: Cube
+03:34:34 | INFO: Primitives created: 1
+03:34:34 | INFO: Finished glTF 2.0 export in 0.07702279090881348 s
+
+PROP folding_wooden_stool 6324 -> 3999 tex 512 col True
+03:34:34 | INFO: Data are loaded, start creating Blender stuff
+03:34:34 | INFO: Blender create Mesh node Plane.004
+03:34:35 | INFO: glTF import finished in 0.05s
+03:34:35 | INFO: Starting glTF 2.0 export
+03:34:35 | INFO: Extracting primitive: Plane.004
+03:34:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Cube
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Finished glTF 2.0 export in 0.01967597007751465 s
+
+PROP GothicBed_01 18745 -> 10000 tex 1024 col True
+03:34:35 | INFO: Data are loaded, start creating Blender stuff
+03:34:35 | INFO: Blender create Mesh node Plane.004
+03:34:35 | INFO: Blender create Mesh node Plane.008
+03:34:35 | INFO: Blender create Mesh node Plane.007
+03:34:35 | INFO: Blender create Mesh node Plane.001
+03:34:35 | INFO: Blender create Mesh node Plane.000
+03:34:35 | INFO: glTF import finished in 0.04s
+03:34:35 | INFO: Starting glTF 2.0 export
+03:34:35 | INFO: Extracting primitive: Plane.004
+03:34:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Plane.000
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Plane.001
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Plane.007
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Plane.008
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Cube
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Finished glTF 2.0 export in 0.024092674255371094 s
+
+PROP GothicCabinet_01 12170 -> 7998 tex 1024 col True
+03:34:35 | INFO: Data are loaded, start creating Blender stuff
+03:34:35 | INFO: Blender create Mesh node Cube.009
+03:34:35 | INFO: glTF import finished in 0.02s
+03:34:35 | INFO: Starting glTF 2.0 export
+03:34:35 | INFO: Extracting primitive: Cube
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Extracting primitive: Cube.009
+03:34:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Finished glTF 2.0 export in 0.024438858032226562 s
+
+PROP wooden_bookshelf_worn 10106 -> 8000 tex 1024 col True
+03:34:35 | INFO: Data are loaded, start creating Blender stuff
+03:34:35 | INFO: Blender create Mesh node PRL_CERAMIC_POT_COMBINED
+03:34:35 | INFO: glTF import finished in 0.01s
+03:34:35 | INFO: Starting glTF 2.0 export
+03:34:35 | INFO: Extracting primitive: PRL_CERAMIC_POT_COMBINED
+03:34:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Finished glTF 2.0 export in 0.06608295440673828 s
+
+PROP ceramic_pot 3592 -> 3592 tex 512 col False
+03:34:35 | INFO: Data are loaded, start creating Blender stuff
+03:34:35 | INFO: Blender create Mesh node wood_root_bowl_50k_uv.001
+03:34:35 | INFO: glTF import finished in 0.02s
+03:34:35 | INFO: Starting glTF 2.0 export
+03:34:35 | INFO: Extracting primitive: wood_root_bowl_50k_uv.001
+03:34:35 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:35 | INFO: Primitives created: 1
+03:34:35 | INFO: Finished glTF 2.0 export in 0.07318997383117676 s
+
+PROP wooden_bowl_01 14122 -> 1999 tex 512 col False
+03:34:35 | INFO: Data are loaded, start creating Blender stuff
+03:34:35 | INFO: Blender create Mesh node Circle.002
+03:34:35 | INFO: glTF import finished in 0.01s
+03:34:36 | INFO: Starting glTF 2.0 export
+03:34:36 | INFO: Extracting primitive: Circle.002
+03:34:36 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:36 | INFO: Primitives created: 1
+03:34:36 | INFO: Finished glTF 2.0 export in 0.07456588745117188 s
+
+PROP carved_wooden_plate 2112 -> 2112 tex 512 col False
+03:34:36 | INFO: Data are loaded, start creating Blender stuff
+03:34:36 | INFO: Blender create Mesh node Cube.002
+03:34:36 | INFO: glTF import finished in 0.01s
+03:34:36 | INFO: Starting glTF 2.0 export
+03:34:36 | INFO: Extracting primitive: Cube.002
+03:34:36 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:36 | INFO: Primitives created: 1
+03:34:36 | INFO: Finished glTF 2.0 export in 0.06746673583984375 s
+
+PROP wooden_cutting_board 3520 -> 1999 tex 512 col False
+03:34:36 | INFO: Data are loaded, start creating Blender stuff
+03:34:36 | INFO: Blender create Mesh node Plane.008
+03:34:36 | INFO: glTF import finished in 0.01s
+03:34:36 | INFO: Starting glTF 2.0 export
+03:34:36 | INFO: Extracting primitive: Plane.008
+03:34:36 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:36 | INFO: Primitives created: 1
+03:34:36 | INFO: Finished glTF 2.0 export in 0.06889629364013672 s
+
+PROP wooden_axe 3348 -> 2500 tex 512 col False
+03:34:36 | INFO: Data are loaded, start creating Blender stuff
+03:34:36 | INFO: Blender create Mesh node Plane.020
+03:34:36 | INFO: Blender create Mesh node Plane.002
+03:34:36 | INFO: Blender create Mesh node Plane.005
+03:34:36 | INFO: Blender create Mesh node Plane.006
+03:34:36 | INFO: Blender create Mesh node Plane.007
+03:34:36 | INFO: glTF import finished in 0.19s
+03:34:37 | INFO: Starting glTF 2.0 export
+03:34:37 | INFO: Extracting primitive: Cube
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Extracting primitive: Plane.020
+03:34:37 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Extracting primitive: Plane.005
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Extracting primitive: Plane.006
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Extracting primitive: Plane.002
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Extracting primitive: Plane.007
+03:34:37 | INFO: Primitives created: 1
+03:34:37 | INFO: Finished glTF 2.0 export in 0.0254971981048584 s
+
+PROP treasure_chest 103330 -> 7997 tex 1024 col True
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

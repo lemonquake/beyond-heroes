@@ -13,7 +13,7 @@ const QUALITY_NAMES := ["Low", "Medium", "High", "Ultra"]
 const AA_NAMES := ["Off", "FXAA", "MSAA 2x", "MSAA 4x", "TAA"]
 ## Auto-loot filter (the on/off switch is `auto_loot_enabled`, the HUD checkbox beside the HP orb). Gold is always
 ## collected on contact.
-const AUTO_LOOT_NAMES := ["All items", "Common and better", "Basic and better", "Advanced and better", "Elite and better"]
+const AUTO_LOOT_NAMES := ["All items", "Equipment: Common and better", "Equipment: Basic and better", "Equipment: Advanced and better", "Equipment: Elite and better"]
 
 # ---- VIDEO
 var resolution := 2                 # index into RESOLUTIONS (windowed size)
@@ -52,6 +52,7 @@ var first_person := false           # bh-030: play in first-person view (V toggl
 var fp_fov := 80.0                  # bh-030: first-person field of view (degrees)
 var reduced_motion := false
 var ui_scale := 1.0
+var ui_auto := true                 # bh-032: windows smaller than 1920x1080 enlarge the interface so text stays readable
 var show_minimap := true
 var minimap_zoom := 1                # bh-015: 0 close, 1 normal, 2 wide (MiniMap.ZOOMS)
 # ---- PLATFORM (bh-008): asked once on the first launch, changeable in Settings > Controls
@@ -67,7 +68,7 @@ var efficiency_mode := false
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "combat_music", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "first_person", "fp_fov", "reduced_motion", "ui_scale", "show_minimap",
+	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "first_person", "fp_fov", "reduced_motion", "ui_scale", "ui_auto", "show_minimap",
 	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
@@ -100,6 +101,7 @@ var fps_limit_index: int:
 
 func _ready() -> void:
 	load_file()
+	get_window().size_changed.connect(_on_window_resized)
 	apply()
 	apply.call_deferred()  # again once every autoload (audio buses, input map, window) exists
 
@@ -112,7 +114,7 @@ func to_dict() -> Dictionary:
 ## Settings that belong to the device, not to the hero (bh-009): a save carries its settings along, but loading it on
 ## a phone must not bring back a desktop's shadows and uncapped frame rate (or turn a PC into touch play).
 const DEVICE_KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
-	"anti_aliasing", "render_scale", "efficiency_mode", "ui_scale", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim",
+	"anti_aliasing", "render_scale", "efficiency_mode", "ui_scale", "ui_auto", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim",
 	"touch_fixed_stick"]
 
 func from_dict(d: Dictionary) -> void:
@@ -307,7 +309,37 @@ func _apply_video() -> void:
 	RenderingServer.positional_soft_shadow_filter_set_quality([RenderingServer.SHADOW_QUALITY_HARD, RenderingServer.SHADOW_QUALITY_SOFT_LOW,
 		RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM, RenderingServer.SHADOW_QUALITY_SOFT_HIGH][sq])
 	vp.positional_shadow_atlas_size = [1024, 2048, 4096, 8192][sq]
-	vp.content_scale_factor = clampf(ui_scale, 0.75, 1.5)
+	vp.content_scale_factor = effective_ui_scale()
+
+## bh-032: the scale the interface is drawn at. Interface Scale is a multiplier on an automatic one. The interface is drawn for a
+## 1920x1080 window; in a smaller window the engine shrinks every pixel with it, so at 1280x720 the 15-pixel quest, party and
+## map labels came out about 10 pixels tall. The automatic part enlarges the interface as the window shrinks (up to the 1.5 the
+## Interface Scale slider already allowed) so text keeps about the size it has at 1080p. A phone screen is read from close but is
+## physically small, so touch play keeps its own scale (see TouchText for its labels).
+func effective_ui_scale(window_size := Vector2i.ZERO) -> float:
+	if window_size == Vector2i.ZERO:
+		var w := get_window()
+		window_size = w.size if w else Vector2i(1920, 1080)
+	if not ui_auto or _fixed_layouts > 0:
+		return clampf(ui_scale, 0.75, 1.5)
+	var native := minf(float(window_size.x) / 1920.0, float(window_size.y) / 1080.0)
+	var auto := clampf(1.0 / maxf(native, 0.01), 1.0, 1.5)
+	if touch_mode or is_mobile_device():
+		auto = 1.0       # touch layouts are drawn for the 1.25 phone scale (a larger one makes the stick and buttons crowd the HUD); TouchText enlarges small labels instead
+	return clampf(ui_scale * auto, 0.75, 1.5)
+
+var _fixed_layouts := 0
+
+## Full-screen menus placed in pixels for a 1920x1080 canvas (hero choice and creator) call this with true while they are on screen
+## and false when they leave: they keep the engine's own scaling, as before the automatic interface scale, instead of
+## overflowing a canvas that is now smaller.
+func hold_design_scale(on: bool) -> void:
+	_fixed_layouts = maxi(0, _fixed_layouts + (1 if on else -1))
+	_on_window_resized()
+
+func _on_window_resized() -> void:
+	if is_inside_tree():
+		get_viewport().content_scale_factor = effective_ui_scale()
 
 ## Re-applies world-affecting switches to the loaded map without rebuilding it.
 func _apply_world() -> void:

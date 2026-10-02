@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_modular_dungeon_template_floor_detail_a\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_modular_dungeon_template_floor_detail_a",
+      "category": "environment_prop",
+      "description": "Detailed stone floor insert. Intended use: Sparse threshold accent and repaired temple paving",
+      "displayName": "kenney_modular-dungeon_template_floor_detail_a",
+      "files": [
+        {
+          "bytes": 22668,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "403a357e1d59760f171d9def9db4ff01859372bde885dad2322e1519dafa4351"
+        },
+        {
+          "bytes": 1692,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "b114fdd1512b5eadafdcab0fec31daab5c01521c6bd6a15fd94580e3e32f03ba"
+        },
+        {
+          "bytes": 864,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "ffd24ace057f4816a76ba1e3c4913a6fc90c611348ff4a70a530a277633f9d55"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "6a386e43f86e33cdd7f8c21ba5c22c0f001bb1916117c84a1f160654eb944d55"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_67584150eee744e505610ee0",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:53.926Z"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_052ed724-a5c6-4d1d-93e4-2b68eaa807c2",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_chairrounded\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:06.958Z",
+  "updatedAt": "2026-10-02T21:12:07.024Z",
+  "startedAt": "2026-10-02T21:12:06.965Z",
+  "completedAt": "2026-10-02T21:12:07.024Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-45245f6b-1977-4cc7-8b92-88046a0aa012' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_chairrounded\r'",
+    "retryable": false
+  }
+}

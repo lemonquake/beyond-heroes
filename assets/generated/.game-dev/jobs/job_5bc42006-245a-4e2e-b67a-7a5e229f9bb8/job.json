@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_5bc42006-245a-4e2e-b67a-7a5e229f9bb8",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_graveyard_pillar_obelisk\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:46.141Z",
+  "updatedAt": "2026-10-02T21:12:46.193Z",
+  "startedAt": "2026-10-02T21:12:46.148Z",
+  "completedAt": "2026-10-02T21:12:46.193Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-f6ee926c-efc1-4490-94a0-92b05d9830e0' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_graveyard_pillar_obelisk\r'",
+    "retryable": false
+  }
+}

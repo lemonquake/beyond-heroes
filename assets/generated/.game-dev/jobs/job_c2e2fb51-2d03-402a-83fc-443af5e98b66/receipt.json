@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_structure_roof\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_structure_roof",
+      "category": "environment_prop",
+      "description": "Small timber canopy roof. Intended use: Cargo shelter; restyle and preserve camera visibility",
+      "displayName": "kenney_pirate_structure_roof",
+      "files": [
+        {
+          "bytes": 34480,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "d7518ffa7cf209b91dc07920e762f28706a367742edc45c27ae45c434b089329"
+        },
+        {
+          "bytes": 1754,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "15436e33ceb2e141c31865f2a97fcb80fce19623dcb8ccf2019ef94dc74e7030"
+        },
+        {
+          "bytes": 797,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "5b43e650b63dff5aa60aed1c682709a803d455f7bd23468f0c52a7ffb6e5a45b"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "67955b56a3b264682b6bc9347141895c8d954ddd68a74f5c60a1d026819c1765"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_aa0adf8d343c5e5ed02087ef",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:33.125Z"
+}

@@ -1,0 +1,140 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "effective_ui_scale": 1.5,
+  "engine": "4.7.2-stable (official)",
+  "interface_scale_setting": 1.0,
+  "quality": {
+    "effects": 2,
+    "efficiency": false,
+    "render_scale": 1.0,
+    "shadows": 2
+  },
+  "renderer": "forward_plus",
+  "shots": [
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "01_town_hud",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "02_chat_open",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "03_pause",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_inventory",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_character",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_skills",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_multiplayer",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_settings",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "1_world_map",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    },
+    {
+      "image_size": [
+        1280,
+        720
+      ],
+      "name": "20_back_to_play",
+      "ui_scale": 1.5,
+      "window": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "touch": false,
+  "window": [
+    1280,
+    720
+  ]
+}

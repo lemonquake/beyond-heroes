@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_gate\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_fence_gate",
+      "category": "environment_prop",
+      "description": "Farm fence gate. Intended use: Garden and field entrances with a clear passage",
+      "displayName": "kenney_nature_fence_gate",
+      "files": [
+        {
+          "bytes": 27652,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436"
+        },
+        {
+          "bytes": 1555,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "b74a94ba5e486847f01565944bcec5789995ee1e26ccaf0fbdce4b567b19d0fc"
+        },
+        {
+          "bytes": 827,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "e8efbc00364b36ea352f41e514ff7df45a864c7db2f6be7f2967bb486df1c2f2"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "44be93803231e62c311e1a0d18124a907dad205c8c697f418efec03e83d2e78f"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_21388b31dbf28730c2f2edcc",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:49.602Z"
+}

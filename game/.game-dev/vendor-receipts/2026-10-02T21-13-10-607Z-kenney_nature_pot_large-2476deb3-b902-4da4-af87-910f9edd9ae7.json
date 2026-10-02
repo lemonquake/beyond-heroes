@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_be8ca0dee8e8568a3c3abea9",
+  "assetId": "kenney_nature_pot_large",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_nature_pot_large",
+  "modelSha256": "57e60214bc6ab1dc3764c9ffe80091ff45f2bfd49fbc313c1b68dcaab1537aef",
+  "manifestSha256": "5f7d2c6a1372ab9dabd33b64f1749d237f54da6e21b6cd0866058cd30ef64441",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:10.607Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_pot_large\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

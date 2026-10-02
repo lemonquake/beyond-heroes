@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_95ceff76-1a28-4362-ba59-5bc5eb56b041",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_tree_thin"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:57.576Z",
+  "updatedAt": "2026-10-02T21:12:57.642Z",
+  "startedAt": "2026-10-02T21:12:57.583Z",
+  "completedAt": "2026-10-02T21:12:57.642Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_95ceff76-1a28-4362-ba59-5bc5eb56b041\\receipt.json"
+}

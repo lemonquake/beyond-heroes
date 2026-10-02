@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:300)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:58)
+       [2] test_trade_refuses_bad_offers_and_changes_nothing (res://tests/unit/test_bh016.gd:412)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_guild_house_builds (res://tests/unit/test_bh016.gd:318)
+[PASS] test_bh016.gd — 15 tests, 1560 checks, 0 failures (3035.7 ms)
+[PASS] test_class_rework.gd — 12 tests, 77 checks, 0 failures (4414.5 ms)
+[PASS] test_control_limits.gd — 4 tests, 181 checks, 0 failures (3.6 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (234.4 ms)
+[PASS] test_net_guard.gd — 6 tests, 44 checks, 0 failures (0.9 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (14.8 ms)
+[PASS] test_skills.gd — 11 tests, 3519 checks, 0 failures (47711.9 ms)
+SURVIVAL L40 strongest elite critical 1181 / mage HP 3608
+SURVIVAL L50 strongest elite critical 1435 / mage HP 4507
+SURVIVAL L60 strongest elite critical 1689 / mage HP 5408
+SURVIVAL L100 strongest elite critical 2704 / mage HP 9008
+SURVIVAL L200 strongest elite critical 5244 / mage HP 18008
+SURVIVAL L300 strongest elite critical 7783 / mage HP 27008
+[PASS] test_survival_balance.gd — 6 tests, 872 checks, 0 failures (451.8 ms)
+TOTAL: 6364 checks, 0 failures
+WARNING: 31 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

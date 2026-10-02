@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_fence_planks\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_nature_fence_planks",
+      "category": "environment_prop",
+      "description": "Plank fence span. Intended use: Westreach farm boundaries and house lots",
+      "displayName": "kenney_nature_fence_planks",
+      "files": [
+        {
+          "bytes": 7720,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9"
+        },
+        {
+          "bytes": 1549,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "330c3de9341e16158aec0a42587a09573c07c8547767f0dd74f75df7c92688ab"
+        },
+        {
+          "bytes": 793,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c7ac7d76d534d50ba651bb05a156f618ef09dd334c17af2f467b1c5bfb8ca858"
+        },
+        {
+          "bytes": 2997,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "d46776a15cc14d444726f6693b84705999230c1eb6ecf93b7aec54ac0156c401"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_3a95f50b269108808f4e215f",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:01:41.083Z"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_column_large\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_graveyard_column_large",
+      "category": "environment_prop",
+      "description": "Large stone column. Intended use: Ruined Temple side arcade and sparse tomb focal structure",
+      "displayName": "kenney_graveyard_column_large",
+      "files": [
+        {
+          "bytes": 37540,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "1665820bc039aced692d15cb763dc73ca6c67515044b9d2106134e2951a33fd2"
+        },
+        {
+          "bytes": 1762,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "079cf610df2e7e67a1926eb44cf031b371e0ea18b202c0d556d92ec952f1716e"
+        },
+        {
+          "bytes": 812,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "3cadbfd9102d7a197b8cc7cd9b45b83d377810c4f9d5b00cdcaf6905a350fb07"
+        },
+        {
+          "bytes": 3651,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e39098aa2825cbe03e4ad1663ce8c2d0c77f6787e701e421aa9e1da36ffad79e"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_2c2686d63aa7f544203f1b93",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:49.164Z"
+}

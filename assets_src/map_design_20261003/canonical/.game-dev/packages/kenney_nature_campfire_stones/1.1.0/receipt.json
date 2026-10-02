@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:56.645Z",
+  "destination": {
+    "assetId": "kenney_nature_campfire_stones",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "00c32ab3325d9c7ae54d604844bc874aa488c292170acdd422bea651c5c708c2",
+  "packageId": "pkg_8e7cb954ca65fc75726cbdf8",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 17344,
+    "fileName": "campfire_stones.glb",
+    "sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35"
+  }
+}

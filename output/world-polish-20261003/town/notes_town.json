@@ -1,0 +1,165 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "dressing_skipped": [
+    "ph_wine_barrel_01 at (25.6, 22.6)"
+  ],
+  "engine": "4.7.2-stable (official)",
+  "fish_corner": [
+    -17.7265396118164,
+    7.12566709518433
+  ],
+  "renderer": "forward_plus",
+  "revision": "f7109cfd + bh-033 working tree",
+  "route": [
+    [
+      "01_south_gate",
+      [
+        0.0,
+        0.0,
+        34.5
+      ]
+    ],
+    [
+      "02_gate_road",
+      [
+        0.0,
+        0.0,
+        24.0
+      ]
+    ],
+    [
+      "03_plaza_south",
+      [
+        0.0,
+        0.0,
+        13.0
+      ]
+    ],
+    [
+      "04_fountain_east",
+      [
+        6.5,
+        0.0,
+        5.5
+      ]
+    ],
+    [
+      "05_plaza_north_stair",
+      [
+        0.0,
+        0.0,
+        -5.0
+      ]
+    ],
+    [
+      "06_terrace",
+      [
+        0.0,
+        2.0,
+        -21.5
+      ]
+    ],
+    [
+      "07_market_north",
+      [
+        12.5,
+        0.0,
+        17.0
+      ]
+    ],
+    [
+      "08_smithy_forge",
+      [
+        18.0,
+        0.0,
+        23.5
+      ]
+    ],
+    [
+      "09_market_south",
+      [
+        14.5,
+        0.0,
+        28.0
+      ]
+    ]
+  ],
+  "shots": [
+    {
+      "name": "town_after_desktop_01_south_gate",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_02_gate_road",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_03_plaza_south",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_04_fountain_east",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_05_plaza_north_stair",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_06_terrace",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_07_market_north",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_08_smithy_forge",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_09_market_south",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "name": "town_after_desktop_10_fishmonger_corner",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "tag": "after",
+  "touch": false,
+  "window": [
+    1600,
+    900
+  ]
+}

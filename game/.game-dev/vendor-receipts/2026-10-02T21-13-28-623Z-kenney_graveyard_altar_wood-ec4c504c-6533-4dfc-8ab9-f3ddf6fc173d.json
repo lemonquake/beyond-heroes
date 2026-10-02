@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_7d8032e7d9e6348bba861953",
+  "assetId": "kenney_graveyard_altar_wood",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_altar_wood",
+  "modelSha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60",
+  "manifestSha256": "2dd4ad3e08f036528f36e520256894bba472c0d0034aada4e78c49a79f7fd759",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:28.623Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_altar_wood\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

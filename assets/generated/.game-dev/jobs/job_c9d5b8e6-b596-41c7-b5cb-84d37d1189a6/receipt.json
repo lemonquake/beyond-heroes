@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_bookcaseopenlow\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_furniture_bookcaseopenlow",
+      "category": "environment_prop",
+      "description": "Low open bookcase. Intended use: Guild room divider without camera obstruction",
+      "displayName": "kenney_furniture_bookcaseopenlow",
+      "files": [
+        {
+          "bytes": 11520,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75"
+        },
+        {
+          "bytes": 1545,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "7fe2629e635922d8d9c20f15bc17cb19222d5225a05b05cd623472da45056f08"
+        },
+        {
+          "bytes": 815,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "bd3fd8a76306052d184ce021d81274a37cbb4ab9ca50049bb832e9c58aed33be"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "7dd96ab8f0be8f1c4579537ab9d36bf5ccc78d0f2d8b8e30e25bdd731fb772b1"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_54fbd2d60364b1e80c9690b0",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:03.687Z"
+}

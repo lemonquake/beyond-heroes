@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_2a24e5ba7bc7ea2083785ecd",
+  "assetId": "kenney_graveyard_pillar_obelisk",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_graveyard_pillar_obelisk",
+  "modelSha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1",
+  "manifestSha256": "5123f6ad4422a249219e45c6b1d79a3ab6682944cbb8451b20add5618bb6dd18",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:33.896Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_graveyard_pillar_obelisk\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

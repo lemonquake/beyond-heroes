@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_modular_dungeon_template_wall_half",
+  "category": "environment_prop",
+  "description": "Half-height stone wall. Intended use: Cutaway dungeon side alcoves after scale and collision audit",
+  "displayName": "kenney_modular-dungeon_template_wall_half",
+  "files": [
+    {
+      "bytes": 55584,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "706e286aaa725028cdebb70825f55cc3f7a6bc75c864e4f27935f41739b17eaf"
+    },
+    {
+      "bytes": 1735,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "447606ecd2db056cd4081169998e64af0df91741fcce0bd18a78eae55f9d58fc"
+    },
+    {
+      "bytes": 1154,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "76600947e8e325a5f6ca40fcdad99f41ae5e59e3b7b4e5eedc9b07960a9504ac"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "92b62996caf62cbfa0373e70ebb5cdf0cea892cbed1143b59bfa19199fa6a42c"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_ac199b21b9db9c5d02611f5d",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_4d45d78f-4f52-48da-9676-333f8c07425b",
+  "operation": "vendor.admit",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_plant_flattall"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:13:02.036Z",
+  "updatedAt": "2026-10-02T21:13:02.093Z",
+  "startedAt": "2026-10-02T21:13:02.042Z",
+  "completedAt": "2026-10-02T21:13:02.093Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_4d45d78f-4f52-48da-9676-333f8c07425b\\receipt.json"
+}

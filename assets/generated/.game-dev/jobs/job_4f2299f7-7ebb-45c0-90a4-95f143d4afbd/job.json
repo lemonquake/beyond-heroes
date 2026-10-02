@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_4f2299f7-7ebb-45c0-90a4-95f143d4afbd",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_nature_crop_carrot\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:00.303Z",
+  "updatedAt": "2026-10-02T21:12:00.354Z",
+  "startedAt": "2026-10-02T21:12:00.309Z",
+  "completedAt": "2026-10-02T21:12:00.354Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-57b480bd-86ed-4643-abaa-2b1d88267b63' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_nature_crop_carrot\r'",
+    "retryable": false
+  }
+}

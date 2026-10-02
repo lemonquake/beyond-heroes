@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_be5ee490-a3b6-45d1-8d95-329e3cbb5758",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_books/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:16.411Z",
+  "updatedAt": "2026-10-02T21:12:16.452Z",
+  "startedAt": "2026-10-02T21:12:16.417Z",
+  "completedAt": "2026-10-02T21:12:16.452Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_be5ee490-a3b6-45d1-8d95-329e3cbb5758\\receipt.json"
+}

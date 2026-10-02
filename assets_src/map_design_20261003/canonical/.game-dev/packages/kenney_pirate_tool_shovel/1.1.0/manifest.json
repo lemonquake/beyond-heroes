@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_pirate_tool_shovel",
+  "category": "environment_prop",
+  "description": "Hand shovel. Intended use: Farm shed and garden work corner",
+  "displayName": "kenney_pirate_tool_shovel",
+  "files": [
+    {
+      "bytes": 26264,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5"
+    },
+    {
+      "bytes": 1721,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "c921421e51e09c481a96d9bb1602fb7d05da89dd5517175c39870fe0b0a52d16"
+    },
+    {
+      "bytes": 1082,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "b8a4516f9c0b00f5b43bd68f08ccb6a404f2a7cf63d977dd673dfbc96a7f5d69"
+    },
+    {
+      "bytes": 3651,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "e9fac7f3728ac30f6d2416973e51167449b661cc8daf1a9864084d787e4d2b1d"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_6d1b4d0e8c0d1e8d7d0a2971",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

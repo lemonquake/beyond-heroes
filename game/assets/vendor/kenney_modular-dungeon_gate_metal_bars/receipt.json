@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:53.659Z",
+  "destination": {
+    "assetId": "kenney_modular_dungeon_gate_metal_bars",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "41eaa27848bf588717c7e2fa0aff1d9dbe71ac4536ea40825a3441dd2a28e782",
+  "packageId": "pkg_2ceafe1ff64b759b23199be3",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 96532,
+    "fileName": "kenney_modular-dungeon_gate_metal_bars.glb",
+    "sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620"
+  }
+}

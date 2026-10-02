@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_nature_grass\\1.1.0",
+    "manifest": {
+      "assetId": "kenney_nature_grass",
+      "category": "foliage",
+      "description": "Small grass tuft. Intended use: Sparse path-to-ground transitions",
+      "displayName": "kenney_nature_grass",
+      "files": [
+        {
+          "bytes": 11496,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7"
+        },
+        {
+          "bytes": 1566,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "1df3bdc7671d80102e36de3e6559d9c3482ffdf07bb8d9bcd3f42bc2a6ab5e7f"
+        },
+        {
+          "bytes": 817,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "6cc4411d7b208b297c82b11a8a599fed421cc495826c0122f05953b671723c81"
+        },
+        {
+          "bytes": 2999,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "06c598b82492df87d823a8c2802a4a373a93ecb6074193b0e85e86843b1b5af5"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_265a18a96963c134984c271d",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.1.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:14:30.062Z"
+}

@@ -1,0 +1,34 @@
+{
+ "source_id": "kenney_graveyard_gravestone_broken",
+ "kit": "graveyard-kit",
+ "runtime": "res://assets/environment/kd_grave_broken.glb",
+ "package": "canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0",
+ "source_sha256": "c8650f83629f12c4b177a7b6b63e62fd5646c276767d9df0b16398403dd7b6e5",
+ "derived_sha256": "06c90fcb14897cb9551d236306e4ab729de680673469176a2c7e2930f9b31279",
+ "scale": 2.0,
+ "scale_rule": [
+  "s",
+  2.0
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Stone"
+ ],
+ "part_faces": {
+  "BH_Stone": 134
+ },
+ "source_to_material": {
+  "grey": "BH_Stone"
+ },
+ "triangles": 134,
+ "surfaces": 1,
+ "source_triangles": 134,
+ "source_meshes": 1,
+ "bounds_m": [
+  1.018,
+  0.682,
+  0.783
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

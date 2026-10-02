@@ -1,0 +1,29 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_d6b88871-13f2-4855-bff4-b3d895f4fd8b",
+  "operation": "vendor.admit",
+  "status": "failed",
+  "request": {
+    "positionals": [
+      "vendor",
+      "admit",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0"
+    ],
+    "flags": {
+      "project": "A:\\Python\\beyond-heroes\\game",
+      "destination": "assets/vendor/kenney_furniture_sidetable\r"
+    }
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:11.513Z",
+  "updatedAt": "2026-10-02T21:12:11.568Z",
+  "startedAt": "2026-10-02T21:12:11.520Z",
+  "completedAt": "2026-10-02T21:12:11.568Z",
+  "error": {
+    "error": "UNKNOWN",
+    "message": "ENOENT: no such file or directory, rename 'A:\\Python\\beyond-heroes\\game\\.game-dev\\.vendor-staging-e1b3b5aa-d8d8-402a-b9c8-387a0f09995b' -> 'A:\\Python\\beyond-heroes\\game\\assets\\vendor\\kenney_furniture_sidetable\r'",
+    "retryable": false
+  }
+}

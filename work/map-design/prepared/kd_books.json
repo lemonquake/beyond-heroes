@@ -1,0 +1,43 @@
+{
+ "source_id": "kenney_furniture_books",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_books.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_books/1.1.0",
+ "source_sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+ "derived_sha256": "5402a580102d4e414d0003860f111792848826eef7c897d96e6d5dc8fa751091",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Leather",
+  "BH_Paper",
+  "BH_ClothGreen",
+  "BH_Brass"
+ ],
+ "part_faces": {
+  "BH_Leather": 37,
+  "BH_Paper": 4,
+  "BH_ClothGreen": 11,
+  "BH_Brass": 10
+ },
+ "source_to_material": {
+  "carpetDarker": "BH_Leather",
+  "carpetWhite": "BH_Paper",
+  "plant": "BH_ClothGreen",
+  "metal": "BH_Brass"
+ },
+ "triangles": 62,
+ "surfaces": 4,
+ "source_triangles": 62,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.339,
+  0.234,
+  0.213
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

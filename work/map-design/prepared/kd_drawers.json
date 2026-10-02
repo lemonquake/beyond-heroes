@@ -1,0 +1,40 @@
+{
+ "source_id": "kenney_furniture_sidetabledrawers",
+ "kit": "furniture-kit",
+ "runtime": "res://assets/environment/kd_drawers.glb",
+ "package": "canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0",
+ "source_sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+ "derived_sha256": "e950a87a97e409831607e83430ad7b5c1779a7fda349a81dfc28655050d18102",
+ "scale": 2.25,
+ "scale_rule": [
+  "s",
+  2.25
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Wood",
+  "BH_WoodDark",
+  "BH_Iron"
+ ],
+ "part_faces": {
+  "BH_Wood": 216,
+  "BH_WoodDark": 2,
+  "BH_Iron": 20
+ },
+ "source_to_material": {
+  "wood": "BH_Wood",
+  "_defaultMat": "BH_WoodDark",
+  "metal": "BH_Iron"
+ },
+ "triangles": 238,
+ "surfaces": 3,
+ "source_triangles": 238,
+ "source_meshes": 3,
+ "bounds_m": [
+  1.203,
+  0.865,
+  0.5
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

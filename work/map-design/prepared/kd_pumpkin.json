@@ -1,0 +1,37 @@
+{
+ "source_id": "kenney_nature_crop_pumpkin",
+ "kit": "nature-kit",
+ "runtime": "res://assets/environment/kd_pumpkin.glb",
+ "package": "canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0",
+ "source_sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+ "derived_sha256": "532074712e584b526b335cb950e155a98b585eebe5390b5135bd563f84807ebc",
+ "scale": 1.348,
+ "scale_rule": [
+  "h",
+  0.45
+ ],
+ "origin": "bottom centre",
+ "collision": "none",
+ "materials": [
+  "BH_Produce",
+  "BH_Foliage"
+ ],
+ "part_faces": {
+  "BH_Produce": 100,
+  "BH_Foliage": 20
+ },
+ "source_to_material": {
+  "leafsFall": "BH_Produce",
+  "grass": "BH_Foliage"
+ },
+ "triangles": 120,
+ "surfaces": 2,
+ "source_triangles": 120,
+ "source_meshes": 1,
+ "bounds_m": [
+  0.595,
+  0.45,
+  0.609
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

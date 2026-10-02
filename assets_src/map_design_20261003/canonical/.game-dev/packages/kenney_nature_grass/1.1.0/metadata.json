@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_grass",
+  "category": "foliage",
+  "description": "Small grass tuft. Intended use: Sparse path-to-ground transitions",
+  "displayName": "kenney_nature_grass",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.1822374016046524,
+        0.2040000081062317,
+        0.15284404158592224
+      ],
+      "min": [
+        -0.19883659482002258,
+        -0.05,
+        -0.23933875560760498
+      ],
+      "sizeMeters": [
+        0.381073996424675,
+        0.2540000081062317,
+        0.3921827971935272
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 11496,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 1,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 132,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 264,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

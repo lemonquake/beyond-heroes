@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:46.461Z",
+  "destination": {
+    "assetId": "kenney_graveyard_urn_square",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "1afdaf902497182b6cc7c077068a25f539fe33ace84cc0411a052543fd264140",
+  "packageId": "pkg_de787d3dd6bfaf24f1642539",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 33484,
+    "fileName": "kenney_graveyard_urn_square.glb",
+    "sha256": "bc29468805e87aa233d0e6177cdf9cb7244df6abbede7001789e0ef438c4d013"
+  }
+}

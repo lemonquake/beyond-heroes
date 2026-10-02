@@ -1,0 +1,46 @@
+{
+  "assetId": "kenney_nature_mushroom_tangroup",
+  "category": "foliage",
+  "description": "Cluster of pale mushrooms. Intended use: Damp forest logs and crypt threshold edges",
+  "displayName": "kenney_nature_mushroom_tangroup",
+  "files": [
+    {
+      "bytes": 14956,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e"
+    },
+    {
+      "bytes": 1611,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "eb1a3a518a211e7f490fd6f0b449f69426df65939c0a0e6c12835a304e4fec6a"
+    },
+    {
+      "bytes": 841,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "3e63f3803d0e6129e36268bf7364d104ecd7b116a24b683afaec1cd6f0454e3a"
+    },
+    {
+      "bytes": 2999,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "c406d13e0b16eae6f7850bc61854ef81ba4de8bcaa36d472cf46eec058752f82"
+    }
+  ],
+  "license": "CC0-1.0",
+  "model": "model.glb",
+  "packageId": "pkg_3f77431dab70dd610362a87f",
+  "provenance": {
+    "origin": "imported",
+    "provider": "Kenney"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.1.0"
+}

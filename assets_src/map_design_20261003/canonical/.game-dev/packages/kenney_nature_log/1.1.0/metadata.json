@@ -1,0 +1,58 @@
+{
+  "assetId": "kenney_nature_log",
+  "category": "environment_prop",
+  "description": "Fallen log. Intended use: Forest floor composition and simple camp seating",
+  "displayName": "kenney_nature_log",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.12471715360879898,
+        0.12320509254932403,
+        0.35499998927116394
+      ],
+      "min": [
+        -0.10924385488033295,
+        -0.050000000000563656,
+        -0.35499998927116394
+      ],
+      "sizeMeters": [
+        0.23396100848913193,
+        0.1732050925498877,
+        0.7099999785423279
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 14288,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.4.2",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 200,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 624,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_unlit\".",
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC0-1.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

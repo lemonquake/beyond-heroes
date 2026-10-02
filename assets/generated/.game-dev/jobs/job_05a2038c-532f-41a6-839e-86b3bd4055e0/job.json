@@ -1,0 +1,22 @@
+{
+  "schema": "game_dev.job.v1",
+  "id": "job_05a2038c-532f-41a6-839e-86b3bd4055e0",
+  "operation": "package.verify",
+  "status": "completed",
+  "request": {
+    "positionals": [
+      "package",
+      "verify",
+      "assets_src/map_design_20261003/canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0"
+    ],
+    "flags": {}
+  },
+  "attempts": 1,
+  "eventCount": 1,
+  "artifacts": [],
+  "createdAt": "2026-10-02T21:12:32.929Z",
+  "updatedAt": "2026-10-02T21:12:32.963Z",
+  "startedAt": "2026-10-02T21:12:32.935Z",
+  "completedAt": "2026-10-02T21:12:32.963Z",
+  "receiptPath": "A:\\Python\\beyond-heroes\\assets\\generated\\.game-dev\\jobs\\job_05a2038c-532f-41a6-839e-86b3bd4055e0\\receipt.json"
+}

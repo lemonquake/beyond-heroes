@@ -1,0 +1,35 @@
+{
+ "source_id": "kenney_pirate_rocks_b",
+ "kit": "pirate-kit",
+ "runtime": "res://assets/environment/kd_shore_rocks_b.glb",
+ "package": "canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0",
+ "source_sha256": "99e962600fb419faa6e9a2c8d36bb89313f6ffb9f8da2ab5b5a81c6e467a12f8",
+ "derived_sha256": "a23df33bdaa1c09c033913bc300974ec6b5a723935272d8df4bf35a678953cc2",
+ "scale": 1.2,
+ "scale_rule": [
+  "s",
+  1.2
+ ],
+ "origin": "bottom centre",
+ "collision": "box",
+ "materials": [
+  "BH_Rock"
+ ],
+ "part_faces": {
+  "BH_Rock": 300
+ },
+ "source_to_material": {
+  "grey_dark": "BH_Rock",
+  "grey": "BH_Rock"
+ },
+ "triangles": 300,
+ "surfaces": 1,
+ "source_triangles": 300,
+ "source_meshes": 1,
+ "bounds_m": [
+  5.324,
+  4.385,
+  5.645
+ ],
+ "dropped": "animations, armatures, skins, palette texture (parts mapped to shared materials)"
+}

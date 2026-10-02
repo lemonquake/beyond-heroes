@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:15:43.793Z",
+  "destination": {
+    "assetId": "kenney_graveyard_lantern_candle",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "4fd77006a1bfbc9e274b16ba7461edc368cac9277677719040c436df96183d37",
+  "packageId": "pkg_7b991b57d960b7ea8fb83d72",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 33148,
+    "fileName": "kenney_graveyard_lantern_candle.glb",
+    "sha256": "0bb7aa2c7b40162e5ceb7f16d60f8e3c1942637483e9a58948f9374f051badfa"
+  }
+}

@@ -1,0 +1,12 @@
+BANDWIDTH bw2_0 role=map-owner players=2 monsters=54 sent_kbps=139.4 received_kbps=543.8 over=38s
+BANDWIDTH bw2_1 role=map-owner players=2 monsters=54 sent_kbps=899.3 received_kbps=64.3 over=35s
+BANDWIDTH bw4_0 role=member players=4 monsters=0 sent_kbps=242.8 received_kbps=735.9 over=35s
+BANDWIDTH bw4_1 role=member players=4 monsters=0 sent_kbps=241.0 received_kbps=724.9 over=35s
+BANDWIDTH bw4_2 role=map-owner players=4 monsters=54 sent_kbps=269.5 received_kbps=651.5 over=39s
+BANDWIDTH bw4_3 role=map-owner players=4 monsters=54 sent_kbps=2162.8 received_kbps=188.6 over=35s
+BANDWIDTH bw6_0 role=member players=6 monsters=0 sent_kbps=363.7 received_kbps=870.9 over=35s
+BANDWIDTH bw6_1 role=map-owner players=6 monsters=54 sent_kbps=3489.7 received_kbps=314.8 over=35s
+BANDWIDTH bw6_2 role=member players=6 monsters=28 sent_kbps=369.3 received_kbps=891.3 over=35s
+BANDWIDTH bw6_3 role=member players=6 monsters=0 sent_kbps=363.0 received_kbps=864.8 over=35s
+BANDWIDTH bw6_4 role=member players=6 monsters=28 sent_kbps=369.7 received_kbps=925.6 over=35s
+BANDWIDTH bw6_5 role=member players=6 monsters=0 sent_kbps=363.1 received_kbps=889.4 over=35s

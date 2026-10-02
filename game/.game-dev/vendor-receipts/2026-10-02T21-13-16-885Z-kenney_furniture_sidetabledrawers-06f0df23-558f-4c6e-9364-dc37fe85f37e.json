@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_56e6b8030c33ff467ea6a9e5",
+  "assetId": "kenney_furniture_sidetabledrawers",
+  "version": "1.1.0",
+  "destination": "assets\\vendor\\kenney_furniture_sidetabledrawers",
+  "modelSha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+  "manifestSha256": "47ee052ee57d37a26dae2f85a379ae811fc5cd2c5baa93f0a1a91acc746ee407",
+  "license": "CC0-1.0",
+  "admittedAt": "2026-10-02T21:13:16.885Z",
+  "sourcePackagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_furniture_sidetabledrawers\\1.1.0",
+  "projectRoot": "A:\\Python\\beyond-heroes\\game",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

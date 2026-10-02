@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-02T20:14:34.113Z",
+  "destination": {
+    "assetId": "kenney_nature_mushroom_tangroup",
+    "version": "1.1.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "ead2e765d9c205d747f42b9fd2abc95a34b534c0f6ddc3c2de5e61bb721dcb82",
+  "packageId": "pkg_3f77431dab70dd610362a87f",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 14956,
+    "fileName": "mushroom_tanGroup.glb",
+    "sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e"
+  }
+}

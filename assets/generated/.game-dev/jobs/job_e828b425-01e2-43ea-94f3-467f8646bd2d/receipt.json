@@ -1,0 +1,61 @@
+{
+  "schema": "game_dev.receipt.v1",
+  "operation": "package.verify",
+  "result": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "A:\\Python\\beyond-heroes\\assets_src\\map_design_20261003\\canonical\\.game-dev\\packages\\kenney_pirate_ship_wreck\\1.0.0",
+    "manifest": {
+      "assetId": "kenney_pirate_ship_wreck",
+      "category": "environment_prop",
+      "description": "Broken ship hull. Intended use: Tideglass Cove story vignette, no collision across approach",
+      "displayName": "kenney_pirate_ship_wreck",
+      "files": [
+        {
+          "bytes": 223676,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "0b2cac74f23ffdc3bf5020880126338287a0a0317d6a98ce4250123d8821ad2b"
+        },
+        {
+          "bytes": 1746,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "1810b66f64fc5fd17ffd2cd81a742e8a3b724c1dc470ac9ab99986999a3308da"
+        },
+        {
+          "bytes": 790,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "78d5bfab6d9a89f0da939d9c29d37bf7a77f12b193a188b0cbb2538d2bf329ef"
+        },
+        {
+          "bytes": 3655,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "4abc1a0ad2106f8c1c0b31ca4e76aff31cfe817a99593fbabcf3bb5959cf3e6c"
+        }
+      ],
+      "license": "CC0-1.0",
+      "model": "model.glb",
+      "packageId": "pkg_a68a59a97918ac3869017be6",
+      "provenance": {
+        "origin": "imported",
+        "provider": "Kenney"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  },
+  "completedAt": "2026-10-02T20:02:26.521Z"
+}
