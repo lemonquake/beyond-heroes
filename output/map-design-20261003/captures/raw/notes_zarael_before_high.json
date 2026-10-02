@@ -1,0 +1,40 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4060",
+  "engine": "4.7.2-stable (official)",
+  "lite": false,
+  "renderer": "forward_plus",
+  "shots": [
+    "ag_01_pier__before_high_hud",
+    "ag_01_pier__before_high_clean",
+    "ag_02_harbour__before_high_hud",
+    "ag_02_harbour__before_high_clean",
+    "ag_03_market__before_high_hud",
+    "ag_03_market__before_high_clean",
+    "ag_04_middle__before_high_hud",
+    "ag_04_middle__before_high_clean",
+    "ag_05_upper__before_high_hud",
+    "ag_05_upper__before_high_clean",
+    "ag_06_crown__before_high_hud",
+    "ag_06_crown__before_high_clean",
+    "ag_07_gate__before_high_hud",
+    "ag_07_gate__before_high_clean",
+    "zc_01_shrine__before_high_hud",
+    "zc_01_shrine__before_high_clean",
+    "zc_02_aqueduct__before_high_hud",
+    "zc_02_aqueduct__before_high_clean",
+    "zb_01_camp__before_high_hud",
+    "zb_01_camp__before_high_clean",
+    "zb_02_colossus__before_high_hud",
+    "zb_02_colossus__before_high_clean",
+    "bd_01_south__before_high_hud",
+    "bd_01_south__before_high_clean",
+    "hc_01_siege__before_high_hud",
+    "hc_01_siege__before_high_clean",
+    "hc_02_avenue__before_high_hud",
+    "hc_02_avenue__before_high_clean"
+  ],
+  "window": [
+    1600,
+    900
+  ]
+}
