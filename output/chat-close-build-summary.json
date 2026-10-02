@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-02",
+  "engine": "4.7.2.stable",
+  "source_base": "32bac473366e5f534c971f026faea7b68facc830",
+  "chat_source_sha256": "50aebc13eeebfaf72972bb7ca857f0944813d0fc817cb813d70f4e3e06d2cc10",
+  "artifacts": {
+    "build/windows/BeyondHeroes.exe": {
+      "bytes": 558737168,
+      "sha256": "3ef1f56f962f7df9ebab68821e09ad6b2bc380c32cd1bf8632cef4579e71c9cf"
+    },
+    "build/BeyondHeroes.apk": {
+      "bytes": 507530688,
+      "sha256": "d15c5b1d542a88b4c41aa5714f9770551c8fa1ac7bb823e32dd7fad1f505301f"
+    }
+  },
+  "focused_tests": {
+    "suites": [
+      "test_chat",
+      "test_chat_upgrade",
+      "test_net"
+    ],
+    "checks": 1150,
+    "failures": 0
+  },
+  "rendered_checks": "Desktop and touch layout verified; X clicked using actual GUI mouse input; keyboard focus released",
+  "windows": "Release export; packaged EXE headless startup smoke passed",
+  "android": "Debug-signed ARM64 and ARMv7 APK; v2 and v3 signatures verified; no connected device for install testing"
+}

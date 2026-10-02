@@ -138,6 +138,52 @@ func test_completion_keys_emoji_and_touch_submit() -> void:
 	Net.mode = mode
 	done()
 
+func test_close_and_fade_in_offline_host_and_client_modes() -> void:
+	var mode := Net.mode
+	var control_mode := Settings.control_mode
+	for net_mode in [Net.Mode.OFFLINE, Net.Mode.HOST, Net.Mode.CLIENT]:
+		Net.mode = net_mode
+		for touch_mode in [false, true]:
+			Settings.control_mode = "mobile" if touch_mode else "pc"
+			var chat := ChatBox.new()
+			host.add_child(chat)
+			eq(chat._touch_layout, touch_mode, "requested control layout applied")
+			ok(not chat.visible and not chat.is_open(), "starts fully hidden")
+			chat.open()
+			await host.get_tree().process_frame
+			ok(chat.visible and chat._close_button.is_visible_in_tree(), "X available in either layout")
+			ok(chat._line.has_focus(), "typing has focus")
+			chat._emoji_grid.show()
+			chat._close_button.pressed.emit()
+			ok(not chat.visible and not chat.is_open(), "X immediately hides the whole box")
+			ok(not chat._line.has_focus(), "X releases keyboard focus")
+			ok(not chat._row.visible and not chat._emoji_grid.visible, "input and emoji picker close")
+			chat._process(1.0)
+			ok(not chat.visible and chat.modulate.a == 0.0, "network mode cannot force it back on")
+			chat.open()
+			chat._on_submit("")
+			ok(not chat.visible and not chat.is_open(), "empty Enter dismisses the box")
+			chat.add_line("New message")
+			ok(chat.visible and not chat.is_open(), "incoming log appears without blocking gameplay")
+			chat._process(ChatBox.FADE_AFTER + 2.0)
+			ok(not chat.visible and chat.modulate.a == 0.0, "idle log fades in every network mode")
+			chat.add_line("Another message")
+			chat._close_button.pressed.emit()
+			ok(not chat.visible, "X dismisses the log even when not typing")
+			chat.open()
+			var escape := InputEventKey.new()
+			escape.keycode = KEY_ESCAPE
+			escape.physical_keycode = KEY_ESCAPE
+			escape.pressed = true
+			Input.parse_input_event(escape)
+			await host.get_tree().process_frame
+			ok(not chat.visible and not chat.is_open(), "Escape hides the whole box")
+			eq(chat.lines().size(), 2, "dismissal preserves chat history")
+			chat.free()
+	Settings.control_mode = control_mode
+	Net.mode = mode
+	done()
+
 func test_stat_all_respects_other_pending_allocations() -> void:
 	var w := CharacterWindow.new()
 	var old := Game.hero

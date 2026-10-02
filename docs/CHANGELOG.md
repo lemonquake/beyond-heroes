@@ -2,6 +2,12 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## Chatbox close fix - 2 October 2026
+
+- Chat has a visible X button in desktop and touch layouts. X, Escape and an empty send hide the whole box immediately and release keyboard focus.
+- Multiplayer no longer forces a dismissed chatbox to stay visible. New messages briefly show the log, which fades after inactivity; reopening chat keeps its history.
+- Chat and network regression suites pass 1,150 checks. Rendered mouse-click checks pass in both layouts. Windows EXE and debug-signed Android APK exports are rebuilt; Android device testing was unavailable.
+
 ## Official server and offline/custom game choices - 2 October 2026
 
 - The first menu now offers Official Server, Offline Play and Custom Games. Multiplayer supports 12 players.

@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+CHAT_CLOSE desktop control layout applied: true
+CHAT_CLOSE desktop X fits viewport: true
+CHAT_CLOSE desktop mouse click closes box: true
+CHAT_CLOSE desktop keyboard focus released: true
+CHAT_CLOSE touch control layout applied: true
+CHAT_CLOSE touch X fits viewport: true
+CHAT_CLOSE touch mouse click closes box: true
+CHAT_CLOSE touch keyboard focus released: true
+CHAT_CLOSE failures: []

@@ -95,7 +95,7 @@ func _run() -> void:
 	for actor in Net.avatars():
 		check(actor.get_node_or_null("ChatBubble") == null, "remote bubble expires")
 	chat._process(20)
-	check(chat.modulate.a == 1.0, "multiplayer log stays visible")
+	check(not chat.visible and chat.modulate.a == 0.0, "multiplayer log fades when idle")
 	if role == "host":
 		chat.open()
 		chat._line.text = "@Cl"

@@ -1,0 +1,27 @@
+{
+  "checks": 1150,
+  "elapsed_ms": 2875,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_chat.gd": {
+      "checks": 52,
+      "failures": [],
+      "ms": 2311.423,
+      "tests": 9
+    },
+    "test_chat_upgrade.gd": {
+      "checks": 253,
+      "failures": [],
+      "ms": 327.346,
+      "tests": 7
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.314,
+      "tests": 4
+    }
+  },
+  "timestamp": "2026-10-02T09:51:53"
+}

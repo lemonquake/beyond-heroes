@@ -1,7 +1,7 @@
 class_name ChatBox
 extends Control
 ## The chat box, bottom-left. Enter (action `chat`) opens a text line; Enter again sends it, Escape or an empty send
-## closes it. Messages stay in a short log that fades out a few seconds after the line closes. A message that is a
+## closes the whole box. Incoming messages show a short log that fades out after a few seconds. A message that is a
 ## cheat code (Cheats) is applied instead of said. While the line is open gameplay input is blocked.
 
 const MAX_LINES := 60
@@ -23,6 +23,7 @@ var _completion := {}
 var _ping: Label
 var _ping_tween: Tween
 var _heading: Label
+var _close_button: Button
 var _pending_bubbles := {}
 
 static func chat_font() -> Font:
@@ -49,8 +50,17 @@ func _ready() -> void:
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	col.add_theme_constant_override("separation", 6)
 	add_child(col)
-	_heading = UITheme.label("Party chat", 18, UITheme.GOLD)
-	col.add_child(_heading)
+	var header := HBoxContainer.new()
+	header.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_child(header)
+	_heading = UITheme.label("Chat", 18, UITheme.GOLD)
+	_heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(_heading)
+	_close_button = UIWindow.button("X", close, &"", 44)
+	_close_button.name = "CloseChat"
+	_close_button.tooltip_text = "Close chat (Esc)"
+	_close_button.focus_mode = Control.FOCUS_NONE
+	header.add_child(_close_button)
 	_ping = UITheme.label("", 20, UITheme.GOLD)
 	_ping.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_ping.add_theme_font_override("font", chat_font())
@@ -109,6 +119,7 @@ func _ready() -> void:
 		_touch_buttons.append(b)
 	col.add_child(_row)
 	modulate.a = 0.0
+	hide()
 	Settings.changed.connect(_apply_mode)
 	Net.chat_received.connect(receive_message)
 	_apply_mode()
@@ -117,6 +128,7 @@ func _ready() -> void:
 func _apply_mode() -> void:
 	var m := Settings.touch_mode
 	_touch_layout = m
+	_close_button.custom_minimum_size = Vector2(56, 56) if m else Vector2(44, 44)
 	for b in _touch_buttons:
 		b.visible = m
 	if m:
@@ -149,13 +161,12 @@ func open() -> void:
 	_completion = {}
 	_suggestions.hide()
 	_row.visible = true
+	show()
 	_line.grab_focus()
 	_idle = 0.0
 	modulate.a = 1.0
 
 func close() -> void:
-	if not _open:
-		return
 	_open = false
 	_line.release_focus()
 	_row.visible = false
@@ -163,6 +174,8 @@ func close() -> void:
 	_emoji_grid.hide()
 	_completion = {}
 	_idle = 0.0
+	modulate.a = 0.0
+	hide()
 
 ## bh-027: put text on the open line (the player menu's Whisper starts "/w <name> ").
 func prefill(text: String) -> void:
@@ -255,6 +268,7 @@ func add_line(text: String, color := UITheme.TEXT) -> void:
 		old.queue_free()
 	_idle = 0.0
 	modulate.a = 1.0
+	show()
 	_scroll.set_deferred("scroll_vertical", int(_scroll.get_v_scroll_bar().max_value))
 
 func lines() -> PackedStringArray:
@@ -279,8 +293,8 @@ func _input(e: InputEvent) -> void:
 			_accept_completion(_completion.names[0])
 			get_viewport().set_input_as_handled()
 			return
-	# Escape closes the line before the pause menu sees it.
-	if _open and e is InputEventKey and e.pressed and not e.echo and e.physical_keycode == KEY_ESCAPE:
+	# Escape also dismisses the message log before the pause menu sees it.
+	if visible and e is InputEventKey and e.pressed and not e.echo and (e.physical_keycode == KEY_ESCAPE or e.keycode == KEY_ESCAPE):
 		close()
 		get_viewport().set_input_as_handled()
 
@@ -295,13 +309,15 @@ func _process(delta: float) -> void:
 			ChatBubble.say(actor, pending.text)
 			(actor.get_node("ChatBubble") as ChatBubble).remaining = left
 			_pending_bubbles.erase(peer)
-	_heading.visible = Net.is_active()
-	if _open or Net.is_active():
+	_heading.text = "Party chat" if Net.is_active() else "Chat"
+	if _open:
 		modulate.a = 1.0
 		return
 	_idle += delta
 	if _idle > FADE_AFTER:
 		modulate.a = maxf(0.0, modulate.a - delta * 0.8)
+		if modulate.a == 0.0:
+			hide()
 
 func _update_completion() -> void:
 	var names: Array = ["everyone"]
