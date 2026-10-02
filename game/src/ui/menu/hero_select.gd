@@ -242,8 +242,10 @@ func _build_footer() -> void:
 	_slot = OptionButton.new()
 	_slot.custom_minimum_size = Vector2(300, 48)
 	for s in SaveSystem.SLOTS:
-		var sum := SaveSystem.slot_summary(s)
+		var sum := _slot_summary(s)
 		_slot.add_item("Slot %d — %s" % [s + 1, "Empty" if sum.is_empty() else "%s, level %d" % [sum["name"], sum["level"]]])
+		if SaveSystem.scope == "official" and not sum.is_empty():
+			_slot.set_item_disabled(s, true)
 	_slot.selected = _first_empty_slot()
 	_slot.item_selected.connect(func(_i): _validate())
 	slv.add_child(_slot)
@@ -255,9 +257,12 @@ func _build_footer() -> void:
 
 static func _first_empty_slot() -> int:
 	for s in SaveSystem.SLOTS:
-		if SaveSystem.slot_summary(s).is_empty():
+		if _slot_summary(s).is_empty():
 			return s
 	return 0
+
+static func _slot_summary(slot: int) -> Dictionary:
+	return Official.slot_summary(slot) if SaveSystem.scope == "official" else SaveSystem.slot_summary(slot)
 
 func _select(id: StringName) -> void:
 	class_id = id
@@ -331,9 +336,9 @@ func _bullet(t: String, col: Color) -> Control:
 	return l
 
 func _validate() -> void:
-	var occupied := not SaveSystem.slot_summary(_slot.selected).is_empty()
+	var occupied := not _slot_summary(_slot.selected).is_empty()
 	_slot_warn.text = "This will replace the saved hero in this slot." if occupied else ""
-	_begin_btn.disabled = _name.text.strip_edges().length() < 2
+	_begin_btn.disabled = _name.text.strip_edges().length() < 2 or (SaveSystem.scope == "official" and occupied)
 
 ## The creator takes over the screen; Back returns here with the look kept, Begin Journey starts the game.
 func _open_creator() -> void:
@@ -363,7 +368,10 @@ func go_back() -> void:
 
 func _begin() -> void:
 	var go := func() -> void: begin.emit(class_id, _name.text.strip_edges(), _slot.selected, _difficulty.selected, look)
-	if not SaveSystem.slot_summary(_slot.selected).is_empty():
+	if SaveSystem.scope == "official" and not _slot_summary(_slot.selected).is_empty():
+		_slot_warn.text = "Choose an empty official slot. Existing official characters are never overwritten."
+		return
+	if not _slot_summary(_slot.selected).is_empty():
 		var dlg := ConfirmDialog.new()
 		add_child(dlg)
 		dlg.ask("Replace Save", "Slot %d already holds a hero. Replace it with a new %s?" % [_slot.selected + 1, DB.class_def(class_id).display_name],

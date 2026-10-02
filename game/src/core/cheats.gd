@@ -57,6 +57,8 @@ static func is_code(text: String) -> bool:
 static func apply(text: String, hero: HeroData, player: Node = null) -> String:
 	if not is_code(text):
 		return ""
+	if Official.active:
+		return "Cheats are unavailable for official characters."
 	if Net.is_active() and not Net.is_host():
 		return "Only the host can use cheats in Multiplayer."
 	if hero == null:

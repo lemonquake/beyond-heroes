@@ -1,284 +1,69 @@
 {
-  "checks": 57594,
-  "elapsed_ms": 285743,
+  "checks": 26834,
+  "elapsed_ms": 91326,
   "engine": "4.7.2-stable (official)",
-  "failures": [
-    "test_auto_loot_filters.test_magnet_rechecks_load_before_pickup: matching item can auto-loot",
-    "test_balance.test_power_is_within_band_at_every_level: L1 knight power 437.6 is within 20% of the mean 608.9 (-28%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1182.6 is within 20% of the mean 608.9 (+94%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 815.6 is within 20% of the mean 608.9 (+34%)",
-    "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 608.9 (-100%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 knight power 2920.6 is within 20% of the mean 2427.4 (+20%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 mage power 5296.6 is within 20% of the mean 2427.4 (+118%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 ranger power 1492.5 is within 20% of the mean 2427.4 (-39%)",
-    "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2427.4 (-100%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 knight power 9183.0 is within 20% of the mean 4827.1 (+90%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 mage power 7565.1 is within 20% of the mean 4827.1 (+57%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 ranger power 1885.0 is within 20% of the mean 4827.1 (-61%)",
-    "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 675.1 is within 20% of the mean 4827.1 (-86%)",
-    "test_balance.test_power_is_within_band_at_every_level: L30 knight power 18625.4 is within 20% of the mean 8567.6 (+117%)",
-    "test_balance.test_power_is_within_band_at_every_level: L30 ranger power 3155.2 is within 20% of the mean 8567.6 (-63%)",
-    "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 4753.7 is within 20% of the mean 8567.6 (-45%)",
-    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
-    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
-    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
-    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
-    "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
-    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
-    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed",
-    "test_tempos.test_enemies_turn_on_a_tempo_that_hurts_them_more: the monster turns on the spirit that out-damages the hero"
-  ],
+  "failures": [],
   "suites": {
-    "test_auto_loot_filters.gd": {
-      "checks": 30,
-      "failures": [
-        "test_auto_loot_filters.test_magnet_rechecks_load_before_pickup: matching item can auto-loot"
-      ],
-      "ms": 7.099,
+    "test_armory_cheats.gd": {
+      "checks": 144,
+      "failures": [],
+      "ms": 5.824,
       "tests": 4
     },
-    "test_balance.gd": {
-      "checks": 16,
-      "failures": [
-        "test_balance.test_power_is_within_band_at_every_level: L1 knight power 437.6 is within 20% of the mean 608.9 (-28%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 mage power 1182.6 is within 20% of the mean 608.9 (+94%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 ranger power 815.6 is within 20% of the mean 608.9 (+34%)",
-        "test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 608.9 (-100%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 knight power 2920.6 is within 20% of the mean 2427.4 (+20%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 mage power 5296.6 is within 20% of the mean 2427.4 (+118%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 ranger power 1492.5 is within 20% of the mean 2427.4 (-39%)",
-        "test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 0.0 is within 20% of the mean 2427.4 (-100%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 knight power 9183.0 is within 20% of the mean 4827.1 (+90%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 mage power 7565.1 is within 20% of the mean 4827.1 (+57%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 ranger power 1885.0 is within 20% of the mean 4827.1 (-61%)",
-        "test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 675.1 is within 20% of the mean 4827.1 (-86%)",
-        "test_balance.test_power_is_within_band_at_every_level: L30 knight power 18625.4 is within 20% of the mean 8567.6 (+117%)",
-        "test_balance.test_power_is_within_band_at_every_level: L30 ranger power 3155.2 is within 20% of the mean 8567.6 (-63%)",
-        "test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 4753.7 is within 20% of the mean 8567.6 (-45%)"
-      ],
-      "ms": 93955.327,
-      "tests": 1
-    },
-    "test_bh011.gd": {
-      "checks": 45,
+    "test_character_skills_layout.gd": {
+      "checks": 255,
       "failures": [],
-      "ms": 5377.69,
-      "tests": 6
-    },
-    "test_bh012.gd": {
-      "checks": 1142,
-      "failures": [],
-      "ms": 2650.659,
-      "tests": 11
-    },
-    "test_bh013.gd": {
-      "checks": 1017,
-      "failures": [],
-      "ms": 9756.198,
-      "tests": 11
-    },
-    "test_bh014.gd": {
-      "checks": 30,
-      "failures": [],
-      "ms": 166.108,
-      "tests": 10
-    },
-    "test_bh015.gd": {
-      "checks": 10107,
-      "failures": [],
-      "ms": 1006.667,
-      "tests": 11
-    },
-    "test_bh016.gd": {
-      "checks": 1394,
-      "failures": [],
-      "ms": 888.081,
-      "tests": 15
-    },
-    "test_bh017.gd": {
-      "checks": 803,
-      "failures": [],
-      "ms": 14031.644,
-      "tests": 27
-    },
-    "test_bh018.gd": {
-      "checks": 474,
-      "failures": [],
-      "ms": 1704.903,
-      "tests": 18
-    },
-    "test_bh019.gd": {
-      "checks": 397,
-      "failures": [],
-      "ms": 3630.131,
-      "tests": 11
-    },
-    "test_bh020.gd": {
-      "checks": 41,
-      "failures": [],
-      "ms": 684.761,
+      "ms": 10708.442,
       "tests": 2
     },
-    "test_bh021.gd": {
-      "checks": 378,
+    "test_chat_upgrade.gd": {
+      "checks": 169,
       "failures": [],
-      "ms": 1409.788,
-      "tests": 13
-    },
-    "test_chat.gd": {
-      "checks": 44,
-      "failures": [],
-      "ms": 1119.138,
-      "tests": 8
-    },
-    "test_combat_growth.gd": {
-      "checks": 134,
-      "failures": [],
-      "ms": 1600.453,
+      "ms": 282.522,
       "tests": 6
     },
-    "test_crafting.gd": {
-      "checks": 680,
+    "test_class_rework.gd": {
+      "checks": 77,
       "failures": [],
-      "ms": 18699.48,
-      "tests": 11
-    },
-    "test_damage.gd": {
-      "checks": 60,
-      "failures": [],
-      "ms": 223.614,
-      "tests": 13
-    },
-    "test_enemies.gd": {
-      "checks": 464,
-      "failures": [],
-      "ms": 507.378,
-      "tests": 6
-    },
-    "test_enemies2.gd": {
-      "checks": 598,
-      "failures": [
-        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
-        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
-        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (167 -> 184)",
-        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
-        "test_enemies2.test_chain_lightning_strikes: and hurts (167 -> 167)",
-        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
-        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
-      ],
-      "ms": 36438.714,
-      "tests": 19
-    },
-    "test_guide.gd": {
-      "checks": 140,
-      "failures": [],
-      "ms": 371.105,
-      "tests": 5
+      "ms": 4240.857,
+      "tests": 12
     },
     "test_guilds.gd": {
       "checks": 100,
       "failures": [],
-      "ms": 22.283,
+      "ms": 39.87,
       "tests": 8
-    },
-    "test_inventory_overhaul.gd": {
-      "checks": 1917,
-      "failures": [],
-      "ms": 56.555,
-      "tests": 6
-    },
-    "test_island.gd": {
-      "checks": 1204,
-      "failures": [],
-      "ms": 5433.157,
-      "tests": 13
-    },
-    "test_items.gd": {
-      "checks": 2477,
-      "failures": [],
-      "ms": 500.319,
-      "tests": 17
-    },
-    "test_loot.gd": {
-      "checks": 1843,
-      "failures": [],
-      "ms": 13781.05,
-      "tests": 17
-    },
-    "test_maps.gd": {
-      "checks": 558,
-      "failures": [],
-      "ms": 9814.196,
-      "tests": 14
     },
     "test_net.gd": {
       "checks": 845,
       "failures": [],
-      "ms": 3.404,
+      "ms": 5.802,
       "tests": 4
     },
-    "test_npcs.gd": {
-      "checks": 440,
+    "test_official_server.gd": {
+      "checks": 29,
       "failures": [],
-      "ms": 15884.856,
-      "tests": 3
-    },
-    "test_perf.gd": {
-      "checks": 243,
-      "failures": [],
-      "ms": 6751.281,
-      "tests": 7
-    },
-    "test_progression.gd": {
-      "checks": 51,
-      "failures": [],
-      "ms": 7.947,
-      "tests": 7
-    },
-    "test_shops_dialogue.gd": {
-      "checks": 1174,
-      "failures": [],
-      "ms": 517.024,
-      "tests": 10
+      "ms": 156.538,
+      "tests": 6
     },
     "test_skills.gd": {
-      "checks": 3285,
+      "checks": 3519,
       "failures": [],
-      "ms": 10643.391,
+      "ms": 48052.89,
       "tests": 11
     },
-    "test_stats.gd": {
-      "checks": 159,
-      "failures": [],
-      "ms": 22.371,
-      "tests": 8
-    },
-    "test_status.gd": {
-      "checks": 24,
-      "failures": [],
-      "ms": 88.793,
-      "tests": 8
-    },
     "test_team_loot.gd": {
-      "checks": 21729,
+      "checks": 21683,
       "failures": [],
-      "ms": 14690.797,
+      "ms": 26312.275,
       "tests": 3
     },
-    "test_tempos.gd": {
-      "checks": 3537,
-      "failures": [
-        "test_tempos.test_enemies_turn_on_a_tempo_that_hurts_them_more: the monster turns on the spirit that out-damages the hero"
-      ],
-      "ms": 5544.775,
-      "tests": 16
-    },
-    "test_westreach_bridges.gd": {
-      "checks": 14,
+    "test_tempo_layout.gd": {
+      "checks": 13,
       "failures": [],
-      "ms": 3625.576,
+      "ms": 801.839,
       "tests": 1
     }
   },
-  "timestamp": "2026-09-29T21:27:52"
+  "timestamp": "2026-10-02T09:11:52"
 }

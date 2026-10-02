@@ -1,136 +1,93 @@
 # Playing Beyond Heroes Together
 
-This guide shows you how to play Beyond Heroes with your friends. Up to **4 heroes** can play in one world.
-It works PC to PC, phone to phone, and PC to phone.
+Up to **12 players** can play together. Everyone needs the same game version.
 
-You can read this guide inside the game too: press **H** to open the Field Guide, then pick **Play Together**.
+## Choose how to play
 
----
+The first menu offers **Official Server**, **Offline Play**, and **Custom Games**.
 
-## The two jobs: Host and Friend
+| Choice | Characters and progress |
+| --- | --- |
+| Official Server | Sign in with your account. Characters and confirmed progress are stored on the server PC. |
+| Offline Play | No internet or account needed. Play all your existing local characters and create new ones. |
+| Custom Games | A new room starts fresh. Each player saves its characters locally, separately for that room. |
 
-One person is the **Host**. The Host's world is where everyone plays.
-The Host's monsters, the Host's map, and the Host decides where the party goes.
+Characters and rewards stay separate between these choices. Importing an offline character copies it
+to the official server; the offline original stays on your device and can still be played.
+Later changes to either copy do not update the other.
 
-Everyone else is a **Friend**. Friends bring their own hero, with their own gear and their own bag.
+## Join the Official Server
 
-> Tip: pick the player with the fastest computer or the best Wi-Fi to be the Host.
+1. Choose **Official Server** and read the progress notice.
+2. Register a UserID and password, or sign in to your existing account.
+3. Save the recovery code shown during registration. You need it to reset a forgotten password.
+4. Create an official character or choose an existing offline character to import to an empty slot.
+5. Select your official character and play. You can explore independently while your friends play.
 
----
+Official progress saves every five seconds, on experience rewards and other save triggers.
+Save, Main Menu and Quit wait for server confirmation. A connection failure pauses official play.
+You can retry or explicitly return to your last confirmed server save.
 
-## Before you start (everyone)
+When the server PC shuts down, confirmed progress remains in its database. The official server is
+unavailable until that PC and both services start again. **Offline Play remains available.**
 
-1. Everyone needs the game, and it must be the **same version**. If one game is newer, update the other one.
-2. Everyone starts or continues their **own** hero first. Walk into the world, so you can see your hero.
-3. For the easy way, everyone uses the **same Wi-Fi** (the same home network).
+For server addresses, certificates and hosting instructions, read [Official Server setup](OFFICIAL_SERVER.md).
 
----
+## Host a Custom Game
 
-## Easy way: in the same house (same Wi-Fi)
+1. At the first menu, enter a name and press **Create Custom Game**.
+2. Read the notice explaining that this room uses separate characters.
+3. Create a new custom character. The game starts hosting when your character enters the world.
+4. Friends select your room from their first menu and create their own room characters.
 
-### The Host does this
+The room appears in the LAN list and in the shared directory when the official account service is
+reachable. Listing a room does not make its port reachable through a router. On the same network,
+allow the game through Windows Firewall on the network you use with friends. Custom games need
+no official account, and LAN games work without internet.
 
-1. Press **Esc** to open the Pause menu. (On a phone, tap the **Menu** button at the top.)
-2. Press **Multiplayer**.
-3. Press the big **Host Game** button.
-4. Big gold letters appear, like **Room code: K7QM-2XF**. That is your **room code**.
-5. Read the room code out loud to your friends. Then close the window and play. Your friends pop in beside you.
+Use **Host Again** under saved custom games to reopen a room with its existing room characters.
+A newly created room has a new identity and starts fresh. Offline and official characters cannot
+enter a custom room.
 
-> The first time you host, Windows may ask **"Allow access?"** Ask a grown-up to click **Allow**.
-> Without it, your friends cannot find your world.
+## Friends in different houses
 
-### Each Friend does this
+For testing, players can use the same LAN VPN network. The host's game port must be reachable.
+The default custom game port is **24680 UDP**. The official service uses **8443 TCP** for accounts
+and saves and **24680 UDP** for the game.
 
-1. Press **Esc** to open the Pause menu. (On a phone, tap **Menu**.)
-2. Press **Multiplayer**.
-3. Look at the **Join** list on the right. You should see the Host's world, like **"Mira's world"**.
-4. Press **Join** next to it.
-5. Your screen goes to the Host's map and you appear next to the Host. That's it!
+Friends can set the official address in **Server Settings**. For a custom room code or direct
+address, enter a custom game first, then open **Pause → Multiplayer**. Hosts can share the room
+code shown there. The shared room list provides addresses; it does not relay connections.
 
-**Is the Host's world not in the list?** Type the room code instead:
+## While playing together
 
-1. Click the box under **Join with a Room Code**.
-2. Type the code, like `K7QM-2XF`. Big or small letters are both fine, and the dash is optional.
-3. Press **Join**.
+- Explore separately or meet on the same map. Nearby allies share combat and experience.
+- Loot is personal. Another player cannot take your drops.
+- Knight auras help nearby friends. Approach a fallen friend and use **Interact** to revive them.
+- Use **Team Portal** to visit other players. Official players can choose anyone in the roster.
+- Four detailed party frames fit on the HUD. Open the complete player list for the rest.
+- Press **Enter** to chat; on a phone use **Chat**. The Multiplayer list shows connection latency.
+- Request a trade through a player's party frame or the Multiplayer window. Both players must
+  accept the same offers. Changing an offer clears acceptance. Locked, favorite and quest items
+  cannot be traded. Official trades save both inventories and gold balances together on the server.
 
----
+## Leaving
 
-## Far away: in different houses
+Use **Main Menu** or **Quit** to save and leave. Official play waits for a confirmed server save;
+custom characters save on each player's device in that room's folder. Closing a custom host
+disconnects its guests. They can continue those room characters when the same room returns.
 
-When you are not on the same Wi-Fi, the game cannot find your friend by itself. You need a
-**LAN VPN** program. It makes computers far apart act like they are on the same Wi-Fi.
-**Ask a grown-up to help with this part.**
+## Connection problems
 
-1. Everyone installs the **same** LAN VPN program (for example **Radmin VPN**).
-2. The Host makes a network in that program. Everyone else joins that network.
-3. Start the game and your heroes, like before.
-4. The Host presses **Host Game**. Under the big code, the Host sees a line that starts with **VPN: code ...**.
-   Tell your friends **that** code (the VPN one).
-5. Friends type the VPN code under **Join with a Room Code** and press **Join**.
+| What you see | What to check |
+| --- | --- |
+| Different game versions | Update everyone's game to the same version. |
+| Room missing | Check the LAN/VPN connection, refresh the list, or use its room code. |
+| Room listed but cannot connect | The host must still be playing, with a reachable UDP port. |
+| Room full | Twelve players are already connected. Wait for a free space. |
+| Official account service offline | Start both server services. Offline and LAN custom games still work. |
+| Certificate error | Use the host address included in the certificate and the matching public certificate. |
+| Official save unconfirmed | Retry while connected. Discard only if you accept losing changes after the last confirmed save. |
 
-> Grown-up note: instead of a VPN, the Host can forward **port 24680 (UDP)** on the home router to the Host's PC.
-> Friends then type the Host's internet address in the same box.
-
----
-
-## While you play together
-
-- **Who goes where:** when you join you arrive next to the Host. After that **everyone explores on their own**: take
-  any door, waypoint or scroll you like. On the Host's map you all fight the same monsters; anywhere else the world is
-  yours alone, with your own monsters.
-- **Summon Party:** the Host presses **P** (or **Summon Party** under the party boxes, in the Multiplayer window, or the
-  waypoint-swirl button on a phone). Every friend who is away sees **"Taicho summons the party to Westreach"** with
-  **Go** (you land next to the Host) or **Stay**. No answer in 30 seconds counts as Stay.
-- **Where is everyone?** On the minimap your friends are arrows in their colour with their name. When they are out of
-  sight they sit on the edge of the minimap with how many metres away they are. The Map (**M**) shows every friend,
-  on any map. Their party box says which map they are on.
-- **Lost the group?** Press **Regroup** (in the Multiplayer window, or the waypoint-swirl button on a phone), or click
-  the Host's box on the left of the screen. You jump right next to the Host.
-- **Party boxes:** on the left of the screen, under your Tempos, every friend has a box with their picture, their
-  health bar, how far away they are, and their ping.
-- **Monsters:** everyone fights the same monsters. Everyone who is on the map gets experience when a monster dies.
-- **Loot:** everyone gets their **own** loot. Nobody can take your drops.
-- **Your stuff stays yours:** your bag, gold, shops and saves stay on your own game.
-- **Helping each other:** a Knight's **aura** (like Aura of Might) also helps friends who stand close to the Knight.
-- **A friend fell down?** Walk next to them. The button says **Revive Mira**. Press **R** (on a phone, tap the
-  **Interact** button) and they stand up right there. If you fall, wait for a friend, or press **Respawn**
-  (a Friend can also pick **Respawn beside** the Host).
-- **"Look here!"** Press **G** (on a phone, tap the **!** button) to put a glowing marker with your name on the
-  ground. Everybody sees it for 5 seconds.
-- **Trading:** click a friend in the world (or press **Trade** on their party frame or in **Multiplayer**) and
-  choose **Send Request**. When they accept, the Trade window opens: click items in your bag to put them on the
-  table, type an amount of gold, then press **Accept Trade**. Nothing changes hands until **both** of you have
-  accepted the same two offers, and changing an offer clears both acceptances. Locked and favorite items and
-  quest items cannot be traded. If your bag is too full for what you would receive, the window tells you.
-- **Talking:** press **Enter** to open the chat, type, and press **Enter** again to send.
-  On a phone, tap **Chat**, type, and tap **Send**.
-- **Who is who:** real players have a name like **◆ Mira ◆** in their own colour, a glowing ring at their feet, and a
-  coloured dot on the minimap. Tempos (spirit helpers) have a plain name like "Tobren (Mira's Tempo)".
-- **Is it slow?** Open **Multiplayer** and look at the Party list. Each player shows a number like **45 ms**.
-  Small numbers are good. A **red** number (over 250 ms) means the connection is slow.
-
----
-
-## Stopping
-
-- **A Friend leaving:** open **Multiplayer** and press **Leave**. You go back to your own world with your own monsters.
-- **The Host stopping:** open **Multiplayer** and press **Close World**. Everyone goes back to their own world.
-- Your hero is saved on your own game, like always.
-
----
-
-## If something goes wrong
-
-| What you see | What to do |
-|---|---|
-| "Different game versions" | Update the game on both computers so they match, then try again. |
-| The Host's world is not in the Join list | Type the room code instead. Check that you are both on the same Wi-Fi. |
-| "No answer from K7QM-2XF" (after 10 seconds) | The code may be wrong, or the Host has not pressed **Host Game**, or you are not on the same Wi-Fi / VPN. Check and press **Join** again. |
-| You played together yesterday | Open **Multiplayer** and press **Rejoin** with the old code (it only works if the Host's address did not change). |
-| The Host wants someone to leave | The Host presses **Send Home** next to their name in the Party list. |
-| "Could not connect to the host" | Check the code. Make sure the Host pressed **Host Game** and is still playing. Ask a grown-up to check the Windows "Allow access" question on the Host's PC. |
-| "Could not open port 24680" | Another copy of the game is already hosting on that PC. Close it and try again. |
-| The Join button says **Full** | 4 heroes are already playing. Wait for someone to leave. |
-| Everything is jumpy | Look at the ping numbers. Move closer to the Wi-Fi, or let the player with the best connection host. |
-
-Have fun, heroes!
+This official version is for a trusted friends group. Accounts and storage are centralized, while
+combat and rewards still use the existing player map simulation. See the setup guide for its limits.

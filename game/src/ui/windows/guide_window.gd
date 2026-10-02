@@ -130,21 +130,23 @@ func _dungeons() -> void:
 func _together() -> void:
 	var touch := Settings.touch_mode
 	var menu := "tap Menu at the top" if touch else "press %s" % Settings.binding_text(&"pause")
-	_heading("Two jobs: Host and Friend")
-	_para("One player is the Host. You arrive at the Host's side, then everyone explores on their own: on the Host's map you fight the Host's monsters together, anywhere else the world is yours. Everyone else is a Friend and brings their own hero, gear and bag. Up to 4 heroes, on PCs and phones together.")
+	_heading("Choose how to play")
+	_para("The main menu offers Official Server, Offline Play and Custom Games. Up to 12 players can play together on the same game version. Official characters need an account and save to the server. Offline Play needs no internet or account and keeps your existing local characters. A new custom room starts with fresh characters, saved locally for that room.")
+	_heading("Official Server")
+	_para("Register a UserID and password, keep your recovery code, and create an official character or import a copy of an existing offline one. The original offline character stays on this device; later progress is separate. Official progress is saved every five seconds and when you leave. If the server loses connection, play pauses until you reconnect or return to the last confirmed save.")
 	_heading("Before you start")
 	_para("1.  Everyone has the same version of the game.
-2.  Everyone starts or continues their own hero and walks into the world.
+2.  Choose a server or Offline Play at the main menu.
 3.  For the easy way, everyone is on the same Wi-Fi.")
-	_heading("The Host")
-	_para("1.  %s, then Multiplayer.
-2.  Press Host Game.
+	_heading("Host a custom game")
+	_para("1.  At the main menu, choose Create Custom Game and enter its name.
+2.  Create a fresh custom character, or continue one with Host Again.
 3.  Big gold letters show your room code, like K7QM-2XF. Read it out to your friends.
-4.  The first time, Windows may ask \"Allow access?\" Ask a grown-up to click Allow." % menu.capitalize())
+4.  The first time, Windows may ask \"Allow access?\" Allow the game on the network you use with friends.")
 	_heading("A Friend")
-	_para("1.  %s, then Multiplayer.
-2.  Find the Host's world in the Join list and press Join.
-3.  Not in the list? Type the room code under \"Join with a Room Code\" and press Join." % menu.capitalize())
+	_para("1.  At the main menu, find the custom room beside the Official Server choices and press Join.
+2.  Create a new character for that room, or continue your saved room character.
+3.  For a room code or address, first enter a custom game, then %s and choose Multiplayer." % menu)
 	_heading("Far away, in different houses")
 	_para("Ask a grown-up to install the same LAN VPN program on every computer (for example Radmin VPN) and join the same network in it. Then the Host tells everyone the code on the line that starts with \"VPN\". (Or the Host forwards port %d, UDP, on the router.)" % Net.PORT)
 	_heading("Playing together")
@@ -153,7 +155,7 @@ func _together() -> void:
 		"the portal button" if touch else Settings.binding_text(&"summon_party"), "Interact" if touch else Settings.binding_text(&"interact"),
 		"The ! button" if touch else Settings.binding_text(&"ping")])
 	_heading("Stopping")
-	_para("A Friend presses Leave in the Multiplayer window and goes back to their own world. The Host presses Close World and everyone goes home. Each hero is saved on their own game.")
+	_para("Use Main Menu or Quit to save before leaving. Official characters wait for the server to confirm their save; custom characters save in their room folder on this device. The host closing a custom room disconnects its guests. When the official server PC is off, confirmed progress remains stored, and Offline Play is still available.")
 	var open_mp := button("Open Multiplayer", func() -> void:
 		close_window()
 		if Game.ui_root and Game.ui_root.has_method(&"open"):

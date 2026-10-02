@@ -2,6 +2,14 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## Official server and offline/custom game choices - 2 October 2026
+
+- The first menu now offers Official Server, Offline Play and Custom Games. Multiplayer supports 12 players.
+- Official accounts use HTTPS, password hashes, recovery codes and server-owned character slots. Existing offline characters can be imported once without changing their local originals.
+- Official progress is stored in SQLite with verified backups, exclusive play sessions, revision checks and confirmed save acknowledgements. Official trades commit both players together.
+- New custom rooms start with separate local characters, appear through LAN discovery and the shared directory, and can be reopened with Host Again. Existing offline play remains available without internet or an account.
+- See `docs/OFFICIAL_SERVER.md` for hosting, backups and the current trusted-friends gameplay scope.
+
 ## BH-029 - Zarael Island, the corrupted
 
 Prepared 2 October 2026. Story and geography: docs/LORE.md §11, docs/MAPS.md (Zarael Island); contract and evidence:

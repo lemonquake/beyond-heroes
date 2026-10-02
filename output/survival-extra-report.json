@@ -1,0 +1,97 @@
+{
+  "checks": 35689,
+  "elapsed_ms": 120938,
+  "engine": "4.7.2-stable (official)",
+  "failures": [
+    "test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength",
+    "test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength",
+    "test_balance_audit.test_milestones_and_full_progression: shadowblade level 29 regular TTK 0.5",
+    "test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445",
+    "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+    "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+    "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 273)",
+    "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 278)",
+    "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+    "test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)",
+    "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+    "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+  ],
+  "suites": {
+    "test_balance_audit.gd": {
+      "checks": 4453,
+      "failures": [
+        "test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength",
+        "test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength",
+        "test_balance_audit.test_milestones_and_full_progression: shadowblade level 29 regular TTK 0.5"
+      ],
+      "ms": 2171.181,
+      "tests": 9
+    },
+    "test_bh017.gd": {
+      "checks": 803,
+      "failures": [
+        "test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445"
+      ],
+      "ms": 36506.701,
+      "tests": 27
+    },
+    "test_boss_set_network.gd": {
+      "checks": 6,
+      "failures": [],
+      "ms": 83.387,
+      "tests": 1
+    },
+    "test_dungeon_growth.gd": {
+      "checks": 22335,
+      "failures": [],
+      "ms": 6647.278,
+      "tests": 6
+    },
+    "test_enemies.gd": {
+      "checks": 464,
+      "failures": [],
+      "ms": 2259.238,
+      "tests": 6
+    },
+    "test_enemies2.gd": {
+      "checks": 598,
+      "failures": [
+        "test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)",
+        "test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)",
+        "test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 273)",
+        "test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 278)",
+        "test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero",
+        "test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)",
+        "test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic",
+        "test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed"
+      ],
+      "ms": 38008.897,
+      "tests": 19
+    },
+    "test_items.gd": {
+      "checks": 2479,
+      "failures": [],
+      "ms": 729.607,
+      "tests": 17
+    },
+    "test_net.gd": {
+      "checks": 845,
+      "failures": [],
+      "ms": 3.432,
+      "tests": 4
+    },
+    "test_status.gd": {
+      "checks": 24,
+      "failures": [],
+      "ms": 108.819,
+      "tests": 8
+    },
+    "test_tempos.gd": {
+      "checks": 3682,
+      "failures": [],
+      "ms": 33345.529,
+      "tests": 16
+    }
+  },
+  "timestamp": "2026-10-01T05:42:13"
+}

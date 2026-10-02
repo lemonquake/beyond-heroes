@@ -1,0 +1,226 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:132)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:133)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:134)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:269)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+[FAIL] test_bh017.gd — 27 tests, 803 checks, 1 failures (34511.2 ms)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 8 failures (32306.3 ms)
+  FAIL test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (173 -> 185)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (173 -> 190)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (173 -> 173)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+TOTAL: 1401 checks, 9 failures

@@ -205,10 +205,11 @@ static func theme() -> Theme:
 	t.set_icon("grabber_highlight", "HSlider", _scaled_icon("frames/slider_grabber_hover.png"))
 	t.set_icon("grabber_disabled", "HSlider", _scaled_icon("frames/slider_grabber.png"))
 	# Scrollbars
-	t.set_stylebox("scroll", "VScrollBar", UIArt.style("frames/scroll_track.png", [0, 0, 0, 0]))
-	t.set_stylebox("scroll_focus", "VScrollBar", UIArt.style("frames/scroll_track.png", [0, 0, 0, 0]))
+	# Nonzero style margins give vertical scrollbars a visible, draggable width.
+	t.set_stylebox("scroll", "VScrollBar", UIArt.style("frames/scroll_track.png", [7, 8, 7, 8]))
+	t.set_stylebox("scroll_focus", "VScrollBar", UIArt.style("frames/scroll_track.png", [7, 8, 7, 8]))
 	for st in ["grabber", "grabber_highlight", "grabber_pressed"]:
-		t.set_stylebox(st, "VScrollBar", UIArt.style("frames/scroll_grabber.png", [0, 0, 0, 0], Color(1, 1, 1) if st == "grabber" else Color(1.25, 1.15, 0.95)))
+		t.set_stylebox(st, "VScrollBar", UIArt.style("frames/scroll_grabber.png", [7, 8, 7, 8], Color(1, 1, 1) if st == "grabber" else Color(1.25, 1.15, 0.95)))
 	var hs := StyleBoxFlat.new()
 	hs.bg_color = Color(0.05, 0.04, 0.035, 0.7)
 	hs.set_corner_radius_all(4)

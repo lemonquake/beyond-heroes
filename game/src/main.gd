@@ -12,6 +12,9 @@ var prompt: PlatformPrompt
 var title_intro: TitleIntro
 var menu_layer: CanvasLayer
 var args := {}
+var play_mode := "offline"
+var custom_room := {}
+var _starting := false
 
 func _ready() -> void:
 	get_tree().root.theme = UITheme.theme()
@@ -19,6 +22,20 @@ func _ready() -> void:
 	for a in OS.get_cmdline_user_args() + OS.get_cmdline_args():
 		if a.begins_with("--") and "=" in a:
 			args[a.substr(2).get_slice("=", 0)] = a.get_slice("=", 1)
+	if args.has("official-server"):
+		get_tree().auto_accept_quit = false
+		var config = JSON.parse_string(FileAccess.get_file_as_string(String(args["official-server"])))
+		if not config is Dictionary:
+			push_error("Official server configuration could not be read.")
+			get_tree().quit(1)
+			return
+		var error := await Net.host_dedicated(config)
+		if error != "":
+			push_error(error)
+			get_tree().quit(1)
+		return
+	get_tree().auto_accept_quit = false
+	Official.connection_lost.connect(_on_official_connection_lost)
 	if args.has("touch"):                   # --touch=1 / 0: this run only, not saved (tests, captures)
 		Settings.control_mode = "mobile" if String(args.touch) == "1" else "pc"
 		Settings.apply()
@@ -60,6 +77,8 @@ func _notification(what: int) -> void:
 			# a phone may close a backgrounded game without warning: keep the progress
 			if Game.in_session and Game.hero and Game.player and is_instance_valid(Game.player):
 				Game.save_now()
+		NOTIFICATION_WM_CLOSE_REQUEST:
+			_quit_safely()
 
 ## Android reports Back as a window request and/or as a KEY_BACK key press, depending on the device: take either,
 ## once per press.
@@ -122,6 +141,10 @@ func show_menu(with_intro := false) -> void:
 	menu.build_backdrop(world)
 	menu.new_game.connect(_show_select)
 	menu.load_slot.connect(_load)
+	menu.server_selected.connect(func(mode: String, room: Dictionary) -> void:
+		play_mode = mode
+		custom_room = room)
+	menu.official_play.connect(_load_official)
 	if intro:
 		menu_layer.move_child(intro, -1)
 		intro.target_logo = menu.logo_rect()
@@ -162,9 +185,26 @@ func _make_ui() -> void:
 	add_child(ui)
 
 func _start_new(class_id: StringName, hero_name: String, slot: int, difficulty: int, look := {}) -> void:
+	if _starting:
+		return
+	if play_mode == "official":
+		_starting = true
+		var hero := Game.new_hero(class_id, hero_name)
+		hero.look = HeroLook.to_save(HeroLook.sanitize(look))
+		hero.difficulty = difficulty
+		TempoRules.grant_starter(hero)
+		var result := await Official.add_character(hero, slot)
+		_starting = false
+		if result.has("error"):
+			if select:
+				select._slot_warn.text = String(result.error)
+			return
+		await _load_official(String(result.character.id))
+		return
 	_clear_menus()
 	_make_ui()
 	await Game.start_new_game(class_id, hero_name, slot, difficulty, look)
+	_connect_custom()
 
 func _load(slot: int) -> void:
 	if menu:
@@ -176,6 +216,62 @@ func _load(slot: int) -> void:
 		ui.queue_free()
 		ui = null
 		show_menu()
+	else:
+		_connect_custom()
+
+func _connect_custom() -> void:
+	if play_mode != "custom":
+		return
+	Net.room_name = String(custom_room.get("name", "Friends' Game"))
+	var error := Net.host_game() if custom_room.get("host", false) else Net.join_game(String(custom_room.get("address", "")), int(custom_room.get("port", Net.PORT)))
+	if error != "":
+		Events.notify.emit(error, &"error")
+
+func _load_official(id: String) -> void:
+	if _starting:
+		return
+	_starting = true
+	var result := await Official.begin_character(id)
+	if result.has("error"):
+		_starting = false
+		if menu and menu._server_menu:
+			menu._server_menu.show_error(String(result.error))
+		return
+	play_mode = "official"
+	_clear_menus()
+	_make_ui()
+	Game.hero = HeroData.from_dict(result.get("save", {}).get("hero", {}))
+	Game.save_slot = -1
+	Game.difficulty = Game.hero.difficulty
+	await Game._begin_session(Game.hero.current_map, Game.hero.current_spawn)
+	get_tree().paused = true
+	Game.ui_blocking = true
+	var error := Net.join_game(String(result.get("game_host", "localhost")), int(result.get("game_port", Net.PORT)))
+	_starting = false
+	if error != "":
+		Events.notify.emit(error, &"error")
+		Official.game_disconnected(error)
+
+func _on_official_connection_lost(reason: String) -> void:
+	if not ui or not is_instance_valid(ui):
+		return
+	ui.ask("Official Server Disconnected", reason + "\nGameplay is paused. Return to the menu to reconnect. Only saves confirmed by the server are durable.", func() -> void:
+		await Game.end_session(), "Main Menu")
+
+func _quit_safely() -> void:
+	if Official.active:
+		get_tree().paused = true
+		if not await Official.flush():
+			if ui:
+				var extra := UIWindow.button("Quit Using Last Server Save", func() -> void:
+					await Official.release_character()
+					get_tree().quit(), &"", 400.0)
+				ui.confirm.ask("Progress Not Yet Saved", "The server has not confirmed your latest progress. Retry after restoring the connection, or quit using your last confirmed save and discard the unconfirmed changes.", func() -> void: _quit_safely(), "Retry Save", false, extra)
+			return
+		await Official.release_character()
+	elif Game.in_session:
+		Game.save_now()
+	get_tree().quit()
 
 func _on_session_ended() -> void:
 	if ui and is_instance_valid(ui):

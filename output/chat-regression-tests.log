@@ -1,0 +1,59 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_armory_cheats.gd — 4 tests, 144 checks, 0 failures (5.2 ms)
+[PASS] test_bh018.gd — 18 tests, 474 checks, 0 failures (1757.6 ms)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:188)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Unreadable vault file user://saves/vault_unit_test.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:193)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Vault restored from vault_unit_test.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:191)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+[PASS] test_bh019.gd — 11 tests, 397 checks, 0 failures (2752.7 ms)
+[PASS] test_bh024.gd — 14 tests, 1223 checks, 0 failures (361.6 ms)
+[PASS] test_bh026.gd — 10 tests, 105 checks, 0 failures (1018.7 ms)
+[PASS] test_boss_set_network.gd — 1 tests, 6 checks, 0 failures (131.4 ms)
+[PASS] test_chat.gd — 9 tests, 52 checks, 0 failures (2593.1 ms)
+[PASS] test_chat_upgrade.gd — 6 tests, 168 checks, 0 failures (387.0 ms)
+[PASS] test_class_rework.gd — 12 tests, 77 checks, 0 failures (4107.4 ms)
+[PASS] test_guilds.gd — 8 tests, 100 checks, 0 failures (41.4 ms)
+[FAIL] test_inventory_overhaul.gd — 6 tests, 2035 checks, 15 failures (60.8 ms)
+[PASS] test_items.gd — 17 tests, 2479 checks, 0 failures (565.6 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.4 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (14.8 ms)
+[PASS] test_stats.gd — 8 tests, 160 checks, 0 failures (20.4 ms)
+[PASS] test_team_loot.gd — 3 tests, 21673 checks, 0 failures (31403.9 ms)
+[PASS] test_tempos.gd — 16 tests, 3682 checks, 0 failures (31666.1 ms)
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625
+TOTAL: 33671 checks, 15 failures

@@ -20,6 +20,7 @@ var in_session := false
 var _loading: LoadingScreen
 var _autosave_t := 0.0
 var _was_rested := false
+var _ending := false
 
 # UI / interaction state
 var ui_blocking := false              # a modal panel is open: gameplay input is ignored
@@ -141,8 +142,23 @@ func _begin_session(map_id: StringName, spawn_id: StringName) -> void:
 	await get_tree().process_frame
 	await _loading.hide_screen()
 
-func end_session() -> void:
-	if in_session:
+func end_session(discard_official := false) -> void:
+	if _ending:
+		return
+	_ending = true
+	var was_official := Official.active
+	if was_official:
+		get_tree().paused = true
+		if not discard_official and not await Official.flush():
+			_ending = false
+			if ui_root:
+				var extra := UIWindow.button("Return Using Last Server Save", func() -> void:
+					ui_root.confirm.cancel()
+					end_session(true), &"", 400.0)
+				ui_root.confirm.ask("Progress Not Yet Saved", "The server has not confirmed your latest progress. Retry after restoring the connection, or return using your last confirmed save and discard the unconfirmed changes.", func() -> void: end_session(), "Retry Save", false, extra)
+			return
+		await Official.release_character()
+	if in_session and not was_official:
 		save_now()
 	in_session = false
 	_end_player()
@@ -152,6 +168,7 @@ func end_session() -> void:
 	current_map_id = &""
 	FX.world = null
 	ui_blocking = false
+	_ending = false
 	session_ended.emit()
 
 ## Pause menu "Main Menu": save, tear the session down; the boot scene listens to session_ended.
@@ -168,6 +185,9 @@ func save_now() -> bool:
 	if hero == null:
 		return false
 	TempoParty.sync_all()
+	if Official.active:
+		Official.queue_save(hero)
+		return false # Server acknowledgement arrives asynchronously; never report a queued save as durable.
 	var ok := SaveSystem.save_hero(hero, save_slot)
 	if ok:
 		Events.notify.emit("Game saved", &"save")

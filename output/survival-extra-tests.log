@@ -1,0 +1,252 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BOSS_CRIT {"hp":251728,"max_hit":11477,"rarity":5}
+BOSS_CRIT {"hp":254431,"max_hit":12000,"rarity":6}
+BOSS_CRIT {"hp":271940,"max_hit":12000,"rarity":8}
+STORY_BOSS {"hp":254431,"level":49}
+AUDIT {"boss_hp":110169,"class":"knight","dps":4896,"enemy_hp":3140,"level":30,"seconds":0.6}
+AUDIT {"boss_hp":71091,"class":"mage","dps":3160,"enemy_hp":3140,"level":30,"seconds":1.0}
+AUDIT {"boss_hp":98937,"class":"ranger","dps":4397,"enemy_hp":3140,"level":30,"seconds":0.7}
+AUDIT {"boss_hp":137590,"class":"shadowblade","dps":6115,"enemy_hp":3140,"level":30,"seconds":0.5}
+AUDIT {"boss_hp":196253,"class":"knight","dps":8722,"enemy_hp":10759,"level":45,"seconds":1.2}
+AUDIT {"boss_hp":166596,"class":"mage","dps":7404,"enemy_hp":10759,"level":45,"seconds":1.5}
+AUDIT {"boss_hp":231387,"class":"ranger","dps":10284,"enemy_hp":10759,"level":45,"seconds":1.0}
+AUDIT {"boss_hp":262284,"class":"shadowblade","dps":11657,"enemy_hp":10759,"level":45,"seconds":0.9}
+AUDIT {"boss_hp":421150,"class":"knight","dps":18718,"enemy_hp":27531,"level":60,"seconds":1.5}
+AUDIT {"boss_hp":264165,"class":"mage","dps":11741,"enemy_hp":27531,"level":60,"seconds":2.3}
+AUDIT {"boss_hp":416494,"class":"ranger","dps":18511,"enemy_hp":27531,"level":60,"seconds":1.5}
+AUDIT {"boss_hp":452900,"class":"shadowblade","dps":20129,"enemy_hp":27531,"level":60,"seconds":1.4}
+AUDIT {"boss_hp":650088,"class":"knight","dps":28893,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":402781,"class":"mage","dps":17901,"enemy_hp":44713,"level":75,"seconds":2.5}
+AUDIT {"boss_hp":677493,"class":"ranger","dps":30111,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":712358,"class":"shadowblade","dps":31660,"enemy_hp":44713,"level":75,"seconds":1.4}
+AUDIT {"boss_hp":959796,"class":"knight","dps":42658,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":586824,"class":"mage","dps":26081,"enemy_hp":68062,"level":90,"seconds":2.6}
+AUDIT {"boss_hp":984183,"class":"ranger","dps":43741,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":1055658,"class":"shadowblade","dps":46918,"enemy_hp":68062,"level":90,"seconds":1.5}
+AUDIT {"boss_hp":1322154,"class":"knight","dps":58762,"enemy_hp":98597,"level":105,"seconds":1.7}
+AUDIT {"boss_hp":801479,"class":"mage","dps":35621,"enemy_hp":98597,"level":105,"seconds":2.8}
+AUDIT {"boss_hp":1382952,"class":"ranger","dps":61465,"enemy_hp":98597,"level":105,"seconds":1.6}
+AUDIT {"boss_hp":1442557,"class":"shadowblade","dps":64114,"enemy_hp":98597,"level":105,"seconds":1.5}
+AUDIT {"boss_hp":17864636,"class":"knight","dps":793984,"enemy_hp":1618143,"level":300,"seconds":2.0}
+AUDIT {"boss_hp":10197295,"class":"mage","dps":453213,"enemy_hp":1618143,"level":300,"seconds":3.6}
+AUDIT {"boss_hp":18826762,"class":"ranger","dps":836745,"enemy_hp":1618143,"level":300,"seconds":1.9}
+AUDIT {"boss_hp":17392644,"class":"shadowblade","dps":773006,"enemy_hp":1618143,"level":300,"seconds":2.1}
+RANGER burst=12000 boss_hp=332368.092095844
+RANGER marked boss critical=12000
+SCREENSHOT corrected bow=(318.4261, 657.6191) crossbow=(706.649, 1068.004) DPS ratio=1.40482885652424
+[FAIL] test_balance_audit.gd — 9 tests, 4453 checks, 3 failures (2171.2 ms)
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:132)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:133)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:134)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:269)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:183)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+[FAIL] test_bh017.gd — 27 tests, 803 checks, 1 failures (36506.7 ms)
+[PASS] test_boss_set_network.gd — 1 tests, 6 checks, 0 failures (83.4 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 22335 checks, 0 failures (6647.3 ms)
+[PASS] test_enemies.gd — 6 tests, 464 checks, 0 failures (2259.2 ms)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:189)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 8 failures (38008.9 ms)
+[PASS] test_items.gd — 17 tests, 2479 checks, 0 failures (729.6 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.4 ms)
+[PASS] test_status.gd — 8 tests, 24 checks, 0 failures (108.8 ms)
+[PASS] test_tempos.gd — 16 tests, 3682 checks, 0 failures (33345.5 ms)
+  FAIL test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength
+  FAIL test_balance_audit.test_boss_guard_extreme_hits_procs_and_lower_rarity: boss crit budget by equipment strength
+  FAIL test_balance_audit.test_milestones_and_full_progression: shadowblade level 29 regular TTK 0.5
+  FAIL test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 273)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 278)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+TOTAL: 35689 checks, 12 failures

@@ -7,6 +7,8 @@ extends Control
 
 signal new_game
 signal load_slot(slot: int)
+signal server_selected(mode: String, room: Dictionary)
+signal official_play(character: String)
 
 var backdrop: Node3D
 var _cam: Camera3D
@@ -21,6 +23,7 @@ var _buttons: Array[Button] = []
 var _heroes: Array[CharacterVisual] = []
 var _logo: TextureRect
 var _byline: Label
+var _server_menu: ServerMenu
 ## Set before adding: the boot title sequence (TitleIntro) plays over this menu and hands the wordmark to it; the
 ## wordmark, byline, buttons and music wait for `reveal()`.
 var wait_intro := false
@@ -77,10 +80,10 @@ func _ready() -> void:
 	_menu.alignment = BoxContainer.ALIGNMENT_CENTER
 	_menu.add_theme_constant_override("separation", 10 if get_viewport_rect().size.y >= 1000.0 else 4)
 	frame.add_child(_menu)
-	var has_save := _latest_slot() >= 0
-	_add(&"continue", "Continue", _continue, not has_save)
-	_add(&"new", "New Game", func() -> void: new_game.emit())
-	_add(&"load", "Load Game", _show_load, not has_save)
+	_add(&"continue", "Continue", _continue, true)
+	_add(&"new", "New Game", func() -> void: new_game.emit(), true)
+	_add(&"load", "Load Game", _show_load, true)
+	_add(&"servers", "Choose Server / Mode", show_servers)
 	_add(&"settings", "Settings", _show_settings)
 	_add(&"credits", "Credits", _show_credits)
 	_add(&"exit", "Exit", _ask_exit)
@@ -104,6 +107,7 @@ func _ready() -> void:
 	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_fade)
+	show_servers()
 	if wait_intro:
 		_fade.modulate.a = 0.0
 		_logo.visible = false
@@ -118,10 +122,46 @@ func _ready() -> void:
 func reveal() -> void:
 	_logo.visible = true
 	_byline.visible = true
-	_buttons[0 if _latest_slot() >= 0 else 1].grab_focus.call_deferred()
+	_buttons[3].grab_focus.call_deferred()
 	Audio.play_music(&"main_theme")
 	Audio.play_ambience(&"amb_town")
 	_animate_in()
+	if _server_menu:
+		_server_menu.move_to_front()
+
+func show_servers() -> void:
+	if _server_menu and is_instance_valid(_server_menu):
+		return
+	_server_menu = ServerMenu.new()
+	add_child(_server_menu)
+	_server_menu.official_play.connect(official_play.emit)
+	_server_menu.official_new.connect(func() -> void:
+		SaveSystem.scope = "official"
+		server_selected.emit("official", {})
+		new_game.emit())
+	_server_menu.selected.connect(func(mode: String, room: Dictionary) -> void:
+		if mode == "back":
+			_server_menu.queue_free()
+			_server_menu = null
+			return
+		if mode == "offline":
+			SaveSystem.scope = "legacy"
+		elif mode == "custom":
+			if not SaveSystem.choose_custom_room(String(room.get("room", ""))):
+				_server_menu.show_error("This custom room has an invalid identity.")
+				return
+			SaveSystem.remember_custom_room(room)
+		server_selected.emit(mode, room)
+		_server_menu.queue_free()
+		_server_menu = null
+		var has_save := _latest_slot() >= 0
+		for button in _buttons:
+			if button.name in ["continue", "load"]:
+				button.disabled = not has_save
+			if button.name == "new":
+				button.disabled = false
+				button.text = "New Offline Character" if mode == "offline" else "New Custom Character"
+		_byline.text = "Offline Play · local saves" if mode == "offline" else "Custom Game · " + String(room.get("name", "Friends' Game")))
 
 ## Where the wordmark and byline sit on this screen (canvas coordinates), for the title sequence's hand-off.
 func logo_rect() -> Rect2:
@@ -391,7 +431,9 @@ func _show_settings() -> void:
 
 ## Back (the phone's button): close the open panel, or ask before leaving the game.
 func go_back() -> void:
-	if _confirm.visible:
+	if _server_menu and is_instance_valid(_server_menu):
+		_server_menu.go_back()
+	elif _confirm.visible:
 		_confirm.cancel()
 	elif _settings.visible:
 		_settings.close_window()

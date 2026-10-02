@@ -142,19 +142,20 @@ func refresh() -> void:
 		Net.Mode.HOST:
 			_status.text = "Hosting · %d / %d heroes" % [Net.player_count(), Net.MAX_CLIENTS + 1]
 		Net.Mode.CLIENT:
-			_status.text = "Connecting..." if Net.connecting else "In %s's world · %d heroes" % [Net.peers.get(1, {}).get("name", "the host"), Net.player_count()]
+			_status.text = "Connecting..." if Net.connecting else ("Official Beyond Heroes · %d / 12 players" % Net.player_count() if Net.official_room else "In %s's world · %d heroes" % [Net.peers.get(1, {}).get("name", "the host"), Net.player_count()])
 	if Net.last_error != "" and not Net.is_active():
 		_status.text += "  " + Net.last_error
-	_host_btn.disabled = Net.is_active()
+	_host_btn.disabled = Net.is_active() or SaveSystem.scope != "custom"
+	_host_help.text = "Host or join a fresh Custom Game from the main menu. Offline characters stay in Offline Play." if SaveSystem.scope != "custom" else "Open this custom game to friends. Its characters stay in their own local saves."
 	_host_btn.visible = not Net.is_active()
 	_host_help.visible = not Net.is_active()
 	_host_heading.visible = not Net.is_active()
 	_leave_btn.visible = Net.is_active()
 	_leave_btn.text = "Close World" if Net.is_host() else "Leave"
-	_regroup.visible = Net.is_client() and not Net.connecting
+	_regroup.visible = Net.is_client() and not Net.official_room and not Net.connecting
 	_summon.visible = Net.is_host()
 	_summon.disabled = Net.player_count() < 2
-	_rejoin.visible = Net.last_room != "" and not Net.is_active()
+	_rejoin.visible = Net.last_room != "" and not Net.is_active() and SaveSystem.scope == "custom"
 	_rejoin.text = "Rejoin %s" % Net.last_room
 	_tips.visible = Net.is_active()
 	var lead := "Explore independently. Use Team Portal beside a member below to visit them. Summon Party is an invitation; each player chooses Go or Stay." \
@@ -162,10 +163,10 @@ func refresh() -> void:
 	var interact := "Interact" if Settings.touch_mode else Settings.binding_text(&"interact")
 	var ping := "The Ping button" if Settings.touch_mode else Settings.binding_text(&"ping")
 	_tips.text = "Playing together:\n• %s\n• A fallen friend: stand beside them and press %s to revive them.\n• %s marks a spot for everyone. Nearby heroes keep their own class-aware loot and experience." % [lead, interact, ping]
-	_join_box.visible = not Net.is_active()
+	_join_box.visible = not Net.is_active() and SaveSystem.scope == "custom"
 	_code.visible = Net.is_host()
 	_addr_info.visible = not Net.is_client()
-	var codes := Net.room_codes()
+	var codes := Net.room_codes(Net.host_port)
 	if codes.is_empty():
 		_code.text = ""
 		_addr_info.text = "No network connection found."
@@ -226,7 +227,7 @@ func _fill_party() -> void:
 			actions.add_child(kb)
 		var card := vbox(4)
 		card.add_child(h)
-		if id != Net.my_id() and (Net.is_host() or id == 1):
+		if id != Net.my_id() and (Net.is_host() or Net.official_room or id == 1):
 			var target: int = id
 			var portal := button("Team Portal", func() -> void:
 				if Net.team_portal(target):
@@ -276,6 +277,11 @@ func _on_join(address: String) -> void:
 	refresh()
 
 func _on_leave() -> void:
+	if Official.active:
+		Game.ui_root.ask("Leave Official Server", "Save your official character and return to the main menu?", func() -> void:
+			close_window()
+			await Game.end_session(), "Save and Leave")
+		return
 	Game.ui_root.ask("Close World" if Net.is_host() else "Leave", "Close your world? The others go back to their own games." if Net.is_host()
 		else "Leave the party and go back to your own world?", func() -> void:
 			Net.leave()

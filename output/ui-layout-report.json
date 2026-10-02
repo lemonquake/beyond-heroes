@@ -1,0 +1,33 @@
+{
+  "checks": 514,
+  "elapsed_ms": 16500,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_character_skills_layout.gd": {
+      "checks": 255,
+      "failures": [],
+      "ms": 10663.982,
+      "tests": 2
+    },
+    "test_chat_upgrade.gd": {
+      "checks": 169,
+      "failures": [],
+      "ms": 243.975,
+      "tests": 6
+    },
+    "test_class_rework.gd": {
+      "checks": 77,
+      "failures": [],
+      "ms": 4215.862,
+      "tests": 12
+    },
+    "test_tempo_layout.gd": {
+      "checks": 13,
+      "failures": [],
+      "ms": 843.419,
+      "tests": 1
+    }
+  },
+  "timestamp": "2026-10-02T07:31:39"
+}

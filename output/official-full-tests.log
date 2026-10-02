@@ -1,0 +1,1027 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_armory_cheats.gd — 4 tests, 144 checks, 0 failures (27.1 ms)
+[PASS] test_artisan_weapons.gd — 1 tests, 305 checks, 0 failures (780.5 ms)
+[PASS] test_auto_loot_filters.gd — 4 tests, 30 checks, 0 failures (10.6 ms)
+BALANCE L1 knight      single    11.2  aoe    22.7  ehp    2376  power    777.2
+BALANCE L1 mage        single    16.1  aoe    25.3  ehp     690  power    530.2
+BALANCE L1 ranger      single    14.7  aoe    15.7  ehp     926  power    462.3
+BALANCE L1 shadowblade single     0.2  aoe     0.0  ehp     916  power      0.0
+BALANCE L10 knight      single    27.0  aoe   142.0  ehp    5567  power   4620.0
+BALANCE L10 mage        single    37.6  aoe    80.1  ehp    2787  power   2897.0
+BALANCE L10 ranger      single    50.5  aoe    95.0  ehp    3046  power   3822.8
+BALANCE L10 shadowblade single    23.5  aoe    15.1  ehp    3042  power   1039.0
+BALANCE L20 knight      single   151.7  aoe   562.9  ehp    9653  power  28710.5
+BALANCE L20 mage        single   112.2  aoe   344.6  ehp    4934  power  13812.6
+BALANCE L20 ranger      single   130.9  aoe   471.4  ehp    5211  power  17932.7
+BALANCE L20 shadowblade single    52.7  aoe   119.4  ehp    5205  power   5723.0
+BALANCE L30 knight      single   229.6  aoe   699.2  ehp   13419  power  46413.3
+BALANCE L30 mage        single   272.1  aoe   852.9  ehp    7263  power  41055.2
+BALANCE L30 ranger      single   239.2  aoe  1166.2  ehp    8502  power  48699.6
+BALANCE L30 shadowblade single    87.6  aoe   270.0  ehp    7556  power  13368.0
+[FAIL] test_balance.gd — 1 tests, 16 checks, 10 failures (371369.6 ms)
+BOSS_CRIT {"hp":239739,"max_hit":10775,"rarity":5}
+BOSS_CRIT {"hp":245213,"max_hit":12000,"rarity":6}
+BOSS_CRIT {"hp":259916,"max_hit":12000,"rarity":8}
+STORY_BOSS {"hp":245213,"level":49}
+AUDIT {"boss_hp":107224,"class":"knight","dps":4766,"enemy_hp":3140,"level":30,"seconds":0.7}
+AUDIT {"boss_hp":69386,"class":"mage","dps":3084,"enemy_hp":3140,"level":30,"seconds":1.0}
+AUDIT {"boss_hp":94824,"class":"ranger","dps":4214,"enemy_hp":3140,"level":30,"seconds":0.7}
+AUDIT {"boss_hp":132939,"class":"shadowblade","dps":5908,"enemy_hp":3140,"level":30,"seconds":0.5}
+AUDIT {"boss_hp":196978,"class":"knight","dps":8755,"enemy_hp":10759,"level":45,"seconds":1.2}
+AUDIT {"boss_hp":166763,"class":"mage","dps":7412,"enemy_hp":10759,"level":45,"seconds":1.5}
+AUDIT {"boss_hp":226645,"class":"ranger","dps":10073,"enemy_hp":10759,"level":45,"seconds":1.1}
+AUDIT {"boss_hp":259125,"class":"shadowblade","dps":11517,"enemy_hp":10759,"level":45,"seconds":0.9}
+AUDIT {"boss_hp":433967,"class":"knight","dps":19287,"enemy_hp":27531,"level":60,"seconds":1.4}
+AUDIT {"boss_hp":269717,"class":"mage","dps":11987,"enemy_hp":27531,"level":60,"seconds":2.3}
+AUDIT {"boss_hp":425941,"class":"ranger","dps":18931,"enemy_hp":27531,"level":60,"seconds":1.5}
+AUDIT {"boss_hp":460527,"class":"shadowblade","dps":20468,"enemy_hp":27531,"level":60,"seconds":1.3}
+AUDIT {"boss_hp":649826,"class":"knight","dps":28881,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":402395,"class":"mage","dps":17884,"enemy_hp":44713,"level":75,"seconds":2.5}
+AUDIT {"boss_hp":677280,"class":"ranger","dps":30101,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":712135,"class":"shadowblade","dps":31650,"enemy_hp":44713,"level":75,"seconds":1.4}
+AUDIT {"boss_hp":944899,"class":"knight","dps":41996,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":577222,"class":"mage","dps":25654,"enemy_hp":68062,"level":90,"seconds":2.7}
+AUDIT {"boss_hp":984005,"class":"ranger","dps":43734,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":1040601,"class":"shadowblade","dps":46249,"enemy_hp":68062,"level":90,"seconds":1.5}
+AUDIT {"boss_hp":1342812,"class":"knight","dps":59681,"enemy_hp":98597,"level":105,"seconds":1.7}
+AUDIT {"boss_hp":810983,"class":"mage","dps":36044,"enemy_hp":98597,"level":105,"seconds":2.7}
+AUDIT {"boss_hp":1447025,"class":"ranger","dps":64312,"enemy_hp":98597,"level":105,"seconds":1.5}
+AUDIT {"boss_hp":1476725,"class":"shadowblade","dps":65632,"enemy_hp":98597,"level":105,"seconds":1.5}
+AUDIT {"boss_hp":17990491,"class":"knight","dps":799577,"enemy_hp":1618143,"level":300,"seconds":2.0}
+AUDIT {"boss_hp":10273235,"class":"mage","dps":456588,"enemy_hp":1618143,"level":300,"seconds":3.5}
+AUDIT {"boss_hp":18826307,"class":"ranger","dps":836725,"enemy_hp":1618143,"level":300,"seconds":1.9}
+AUDIT {"boss_hp":17499004,"class":"shadowblade","dps":777734,"enemy_hp":1618143,"level":300,"seconds":2.1}
+RANGER burst=12000 boss_hp=315826.802933367
+RANGER marked boss critical=12000
+SCREENSHOT corrected bow=(318.4261, 657.6191) crossbow=(706.649, 1068.004) DPS ratio=1.40482885652424
+[PASS] test_balance_audit.gd — 9 tests, 4474 checks, 0 failures (1916.5 ms)
+[PASS] test_bh011.gd — 6 tests, 45 checks, 0 failures (4046.4 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _floor (res://tests/unit/test_bh012.gd:29)
+       [2] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@36574' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@36575' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@36576' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@36711' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@36712' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@36713' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@36826' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@36827' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@36828' will make owner 'armillary_sphere_93' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_a' as child to '@Node3D@36949' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_b' as child to '@Node3D@36950' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+WARNING: Adding 'ring_c' as child to '@Node3D@36951' will make owner 'armillary_sphere_102' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:219)
+       [4] _floor (res://tests/unit/test_bh012.gd:26)
+       [5] test_a_every_floor_builds_with_portals_and_storeys (res://tests/unit/test_bh012.gd:51)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_waypoint_is_an_interactable_the_hero_can_use (res://tests/unit/test_bh011.gd:63)
+[PASS] test_bh012.gd — 11 tests, 1142 checks, 0 failures (1876.9 ms)
+[PASS] test_bh013.gd — 11 tests, 1025 checks, 0 failures (6503.8 ms)
+[PASS] test_bh014.gd — 10 tests, 30 checks, 0 failures (183.1 ms)
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:124)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:126)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Save restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:129)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:249)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [5] _begin (res://tests/unit/test_bh015.gd:30)
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:124)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] load_hero (res://src/autoload/save_system.gd:145)
+       [3] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [6] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Corrupt save file user://saves/slot_98.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:126)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] load_hero (res://src/autoload/save_system.gd:145)
+       [3] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [6] _begin (res://tests/unit/test_bh015.gd:30)
+WARNING: Save restored from slot_98.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _read_path (res://src/autoload/save_system.gd:129)
+       [1] read_slot (res://src/autoload/save_system.gd:118)
+       [2] load_hero (res://src/autoload/save_system.gd:145)
+       [3] test_saves_survive_a_bad_write (res://tests/unit/test_bh015.gd:251)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_quest_locator (res://tests/unit/test_bh015.gd:219)
+       [6] _begin (res://tests/unit/test_bh015.gd:30)
+[PASS] test_bh015.gd — 11 tests, 10107 checks, 0 failures (740.5 ms)
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:283)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:58)
+       [2] test_trade_refuses_bad_offers_and_changes_nothing (res://tests/unit/test_bh016.gd:407)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_guild_house_builds (res://tests/unit/test_bh016.gd:313)
+[PASS] test_bh016.gd — 15 tests, 1560 checks, 0 failures (795.1 ms)
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:135)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:136)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:137)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:349)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:185)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:185)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh017.gd:72)
+       [3] test_town_rows_build_in_the_world (res://tests/unit/test_bh017.gd:677)
+       [4] _begin (res://tests/unit/test_bh017.gd:75)
+[FAIL] test_bh017.gd — 27 tests, 885 checks, 1 failures (31462.1 ms)
+[PASS] test_bh018.gd — 18 tests, 602 checks, 0 failures (1113.4 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh019.gd:314)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:335)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:188)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Unreadable vault file user://saves/vault_unit_test.json
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:193)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+WARNING: Vault restored from vault_unit_test.json.bak
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] load_from (res://src/core/items/hero_vault.gd:191)
+       [1] test_vault_round_trip_keeps_positions_and_size (res://tests/unit/test_bh019.gd:291)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_every_safe_town_has_a_dummy_and_a_vault (res://tests/unit/test_bh019.gd:380)
+       [4] _begin (res://tests/unit/test_bh019.gd:317)
+[PASS] test_bh019.gd — 11 tests, 393 checks, 0 failures (2268.3 ms)
+[PASS] test_bh020.gd — 2 tests, 41 checks, 0 failures (655.3 ms)
+[PASS] test_bh021.gd — 13 tests, 382 checks, 0 failures (1129.0 ms)
+[PASS] test_bh022.gd — 7 tests, 949 checks, 0 failures (727.4 ms)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: String()
+   at: base64_to_utf8 (core/core_bind.cpp:1392)
+   GDScript backtrace (most recent call first):
+       [0] decode (res://src/ui/menu/hero_creator.gd:535)
+       [1] test_look_code_round_trip (res://tests/unit/test_bh023.gd:73)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_creator_edits_and_returns_a_look (res://tests/unit/test_bh023.gd:390)
+ERROR: Parse JSON failed. Error at line 0: Unknown error getting token
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] decode (res://src/ui/menu/hero_creator.gd:535)
+       [1] test_look_code_round_trip (res://tests/unit/test_bh023.gd:73)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_creator_edits_and_returns_a_look (res://tests/unit/test_bh023.gd:390)
+[PASS] test_bh023.gd — 16 tests, 1559 checks, 0 failures (868.5 ms)
+[PASS] test_bh024.gd — 14 tests, 1225 checks, 0 failures (282.6 ms)
+[PASS] test_bh025.gd — 13 tests, 956 checks, 0 failures (215.4 ms)
+[PASS] test_bh026.gd — 10 tests, 105 checks, 0 failures (750.8 ms)
+[PASS] test_bh027.gd — 13 tests, 1195 checks, 0 failures (3215.8 ms)
+[PASS] test_bh027_pickup.gd — 2 tests, 5 checks, 0 failures (6138.4 ms)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+   GDScript backtrace (most recent call first):
+       [0] test_special_floors_build_and_hit_hard (res://tests/unit/test_bh028.gd:309)
+       [1] _run (res://tests/run_tests.gd:45)
+       [2] test_every_boss_drop_can_be_picked_up (res://tests/unit/test_bh027_pickup.gd:100)
+       [3] _collect_all (res://tests/unit/test_bh027_pickup.gd:73)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+   GDScript backtrace (most recent call first):
+       [0] test_special_floors_build_and_hit_hard (res://tests/unit/test_bh028.gd:309)
+       [1] _run (res://tests/run_tests.gd:45)
+       [2] test_every_boss_drop_can_be_picked_up (res://tests/unit/test_bh027_pickup.gd:100)
+       [3] _collect_all (res://tests/unit/test_bh027_pickup.gd:73)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+   GDScript backtrace (most recent call first):
+       [0] test_special_floors_build_and_hit_hard (res://tests/unit/test_bh028.gd:309)
+       [1] _run (res://tests/run_tests.gd:45)
+       [2] test_every_boss_drop_can_be_picked_up (res://tests/unit/test_bh027_pickup.gd:100)
+       [3] _collect_all (res://tests/unit/test_bh027_pickup.gd:73)
+[PASS] test_bh028.gd — 13 tests, 920 checks, 0 failures (1380.8 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_a_fall_in_the_arena_costs_nothing (res://tests/unit/test_bh028_arena.gd:401)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_special_floors_build_and_hit_hard (res://tests/unit/test_bh028.gd:312)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_adventurers_fight_each_other_and_fall_back (res://tests/unit/test_bh028_arena.gd:343)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_a_fall_in_the_arena_costs_nothing (res://tests/unit/test_bh028_arena.gd:426)
+       [6] _frames (res://tests/unit/test_bh028_arena.gd:19)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_arena_layout_and_population (res://tests/unit/test_bh028_arena.gd:311)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_adventurers_fight_each_other_and_fall_back (res://tests/unit/test_bh028_arena.gd:371)
+       [6] _until (res://tests/unit/test_bh028_arena.gd:25)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:374)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_arena_layout_and_population (res://tests/unit/test_bh028_arena.gd:340)
+       [6] _until (res://tests/unit/test_bh028_arena.gd:25)
+BUDGET knight L10 hp 1316 normal 1.9% champion 8.3% boss 6.4%
+BUDGET knight L30 hp 3807 normal 1.5% champion 6.4% boss 5.0%
+BUDGET knight L40 hp 5205 normal 1.4% champion 6.0% boss 4.7%
+BUDGET knight L45 hp 5572 normal 1.5% champion 6.7% boss 5.2%
+BUDGET knight L50 hp 6158 normal 1.6% champion 6.9% boss 5.3%
+BUDGET knight L100 hp 12216 normal 1.4% champion 6.0% boss 4.7%
+BUDGET knight L300 hp 38069 normal 1.4% champion 6.1% boss 4.7%
+BUDGET mage L10 hp 993 normal 3.6% champion 15.7% boss 12.1%
+BUDGET mage L30 hp 2803 normal 2.9% champion 12.8% boss 9.8%
+BUDGET mage L40 hp 3922 normal 2.4% champion 10.8% boss 8.3%
+BUDGET mage L45 hp 4194 normal 2.7% champion 11.8% boss 9.1%
+BUDGET mage L50 hp 4657 normal 2.8% champion 12.2% boss 9.5%
+BUDGET mage L100 hp 9309 normal 2.7% champion 11.6% boss 9.0%
+BUDGET mage L300 hp 29313 normal 2.6% champion 11.5% boss 8.9%
+BUDGET ranger L10 hp 954 normal 3.9% champion 17.2% boss 13.3%
+BUDGET ranger L30 hp 2684 normal 3.0% champion 13.2% boss 10.2%
+BUDGET ranger L40 hp 3764 normal 2.4% champion 10.6% boss 8.2%
+BUDGET ranger L45 hp 3958 normal 3.0% champion 13.3% boss 10.3%
+BUDGET ranger L50 hp 4437 normal 2.9% champion 12.6% boss 9.7%
+BUDGET ranger L100 hp 8663 normal 2.8% champion 12.5% boss 9.6%
+BUDGET ranger L300 hp 27040 normal 2.8% champion 12.2% boss 9.4%
+BUDGET shadowblade L10 hp 948 normal 3.9% champion 17.3% boss 13.3%
+BUDGET shadowblade L30 hp 2811 normal 2.8% champion 12.4% boss 9.6%
+BUDGET shadowblade L40 hp 3860 normal 2.4% champion 10.3% boss 8.0%
+BUDGET shadowblade L45 hp 4131 normal 2.8% champion 12.3% boss 9.5%
+BUDGET shadowblade L50 hp 4600 normal 2.7% champion 11.9% boss 9.2%
+BUDGET shadowblade L100 hp 9028 normal 2.7% champion 11.7% boss 9.0%
+BUDGET shadowblade L300 hp 28123 normal 2.6% champion 11.3% boss 8.7%
+PVP L10 knight->mage hit 38 / hp 993 = 17.8 s
+PVP L10 ranger->shadowblade hit 56 / hp 948 = 18.8 s
+PVP L30 knight->mage hit 77 / hp 2803 = 21.3 s
+PVP L30 ranger->shadowblade hit 96 / hp 2811 = 24.9 s
+PVP L50 knight->mage hit 125 / hp 4657 = 22.9 s
+PVP L50 ranger->shadowblade hit 177 / hp 4600 = 20.7 s
+PVP L100 knight->mage hit 200 / hp 9309 = 25.2 s
+PVP L100 ranger->shadowblade hit 354 / hp 9028 = 18.4 s
+PVP L300 knight->mage hit 606 / hp 29313 = 22.2 s
+PVP L300 ranger->shadowblade hit 1137 / hp 28123 = 14.6 s
+[PASS] test_bh028_arena.gd — 12 tests, 849 checks, 0 failures (18897.7 ms)
+[PASS] test_bh029.gd — 12 tests, 562 checks, 0 failures (317.1 ms)
+[PASS] test_boss_set_network.gd — 1 tests, 6 checks, 0 failures (34.9 ms)
+[PASS] test_boss_set_visuals.gd — 2 tests, 1612 checks, 0 failures (312.7 ms)
+BOSS_SET_WEIGHTS seed=303015 samples=10000 sets={"ashfall_pilgrim":455,"crimson_glory":897,"dragonforge":895,"eclipse_dancer":440,"gale_nomad":477,"grievance_of_the_fairy":457,"obsidian_oath":890,"pale_requiem":457,"serpent_veil":452,"starfall_hunter":471,"sunken_crown":886,"thunder_abbot":448,"truth_of_raikuru":1821,"wailing_mistress":484,"winter_court":470} target_missing=1592 target_owned=229
+[PASS] test_boss_sets.gd — 7 tests, 6178 checks, 0 failures (5533.0 ms)
+[PASS] test_character_skills_layout.gd — 2 tests, 255 checks, 0 failures (10443.0 ms)
+[PASS] test_chat.gd — 9 tests, 52 checks, 0 failures (1714.8 ms)
+[PASS] test_chat_upgrade.gd — 6 tests, 170 checks, 0 failures (231.9 ms)
+[PASS] test_class_rework.gd — 12 tests, 77 checks, 0 failures (4104.8 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":19,"hits_to_kill":3.5,"level":5,"skill_hit":36,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":55,"hits_to_kill":3.7,"level":10,"skill_hit":104,"weapon":"artisan_copperleaf_sword","weapon_max":40,"weapon_min":22}
+GROWTH {"class":"knight","enemy_hp":472,"hit":106,"hits_to_kill":4.5,"level":15,"skill_hit":202,"weapon":"duelist_sabre","weapon_max":51,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":270,"hits_to_kill":3.4,"level":20,"skill_hit":514,"weapon":"runed_sword","weapon_max":111,"weapon_min":72}
+GROWTH {"class":"knight","enemy_hp":1773,"hit":340,"hits_to_kill":5.2,"level":25,"skill_hit":647,"weapon":"depth_copperleaf_backsword","weapon_max":167,"weapon_min":90}
+GROWTH {"class":"knight","enemy_hp":3140,"hit":377,"hits_to_kill":8.3,"level":30,"skill_hit":716,"weapon":"artisan_split_crown_sword","weapon_max":179,"weapon_min":96}
+GROWTH {"class":"knight","enemy_hp":10759,"hit":950,"hits_to_kill":11.3,"level":45,"skill_hit":1804,"weapon":"depth_hollowfin_estoc","weapon_max":416,"weapon_min":226}
+GROWTH {"class":"knight","enemy_hp":27531,"hit":1792,"hits_to_kill":15.4,"level":60,"skill_hit":3405,"weapon":"depth_crownless_longsword","weapon_max":578,"weapon_min":312}
+GROWTH {"class":"mage","enemy_hp":66,"hit":18,"hits_to_kill":3.6,"level":5,"skill_hit":42,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":65,"hits_to_kill":3.2,"level":10,"skill_hit":85,"weapon":"storm_staff","weapon_max":37,"weapon_min":22}
+GROWTH {"class":"mage","enemy_hp":472,"hit":178,"hits_to_kill":2.7,"level":15,"skill_hit":167,"weapon":"storm_staff","weapon_max":67,"weapon_min":39}
+GROWTH {"class":"mage","enemy_hp":920,"hit":268,"hits_to_kill":3.4,"level":20,"skill_hit":275,"weapon":"frost_staff","weapon_max":98,"weapon_min":59}
+GROWTH {"class":"mage","enemy_hp":1773,"hit":607,"hits_to_kill":2.9,"level":25,"skill_hit":435,"weapon":"depth_glowcap_crook","weapon_max":176,"weapon_min":96}
+GROWTH {"class":"mage","enemy_hp":3140,"hit":784,"hits_to_kill":4.0,"level":30,"skill_hit":558,"weapon":"depth_tidal_forkstaff","weapon_max":218,"weapon_min":116}
+GROWTH {"class":"mage","enemy_hp":10759,"hit":1587,"hits_to_kill":6.8,"level":45,"skill_hit":1010,"weapon":"depth_thornseed_branchstaff","weapon_max":368,"weapon_min":199}
+GROWTH {"class":"mage","enemy_hp":27531,"hit":5513,"hits_to_kill":5.0,"level":60,"skill_hit":1685,"weapon":"depth_dawnspire_staff","weapon_max":705,"weapon_min":382}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":31,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":53,"hits_to_kill":3.9,"level":10,"skill_hit":100,"weapon":"composite_bow","weapon_max":49,"weapon_min":25}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":105,"hits_to_kill":4.5,"level":15,"skill_hit":199,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":199,"hits_to_kill":4.6,"level":20,"skill_hit":378,"weapon":"warden_longbow","weapon_max":147,"weapon_min":77}
+GROWTH {"class":"ranger","enemy_hp":1773,"hit":319,"hits_to_kill":5.6,"level":25,"skill_hit":606,"weapon":"depth_rootbend_shortbow","weapon_max":233,"weapon_min":114}
+GROWTH {"class":"ranger","enemy_hp":3140,"hit":443,"hits_to_kill":7.1,"level":30,"skill_hit":842,"weapon":"depth_saltwind_recurve","weapon_max":291,"weapon_min":139}
+GROWTH {"class":"ranger","enemy_hp":10759,"hit":845,"hits_to_kill":12.7,"level":45,"skill_hit":1605,"weapon":"depth_thornwing_bow","weapon_max":492,"weapon_min":239}
+GROWTH {"class":"ranger","enemy_hp":27531,"hit":2347,"hits_to_kill":11.7,"level":60,"skill_hit":4459,"weapon":"depth_dawnfeather_bow","weapon_max":948,"weapon_min":457}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":8,"hits_to_kill":8.5,"level":5,"skill_hit":15,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":21,"hits_to_kill":9.8,"level":10,"skill_hit":40,"weapon":"shadow_kris","weapon_max":23,"weapon_min":12}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":62,"hits_to_kill":7.6,"level":15,"skill_hit":118,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":97,"hits_to_kill":9.5,"level":20,"skill_hit":185,"weapon":"aether_stiletto","weapon_max":64,"weapon_min":33}
+GROWTH {"class":"shadowblade","enemy_hp":1773,"hit":168,"hits_to_kill":10.5,"level":25,"skill_hit":320,"weapon":"depth_rootfang_skinner","weapon_max":108,"weapon_min":66}
+GROWTH {"class":"shadowblade","enemy_hp":3140,"hit":259,"hits_to_kill":12.1,"level":30,"skill_hit":491,"weapon":"depth_keelhook_knife","weapon_max":136,"weapon_min":79}
+GROWTH {"class":"shadowblade","enemy_hp":10759,"hit":461,"hits_to_kill":23.3,"level":45,"skill_hit":876,"weapon":"depth_briar_talon","weapon_max":230,"weapon_min":137}
+GROWTH {"class":"shadowblade","enemy_hp":27531,"hit":1340,"hits_to_kill":20.5,"level":60,"skill_hit":2546,"weapon":"depth_dawnthorn_knife","weapon_max":439,"weapon_min":266}
+[PASS] test_combat_growth.gd — 6 tests, 134 checks, 0 failures (1497.1 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_crafting.gd:36)
+       [3] test_new_places_are_reachable (res://tests/unit/test_crafting.gd:375)
+       [4] _begin (res://tests/unit/test_crafting.gd:39)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:242)
+       [2] _begin (res://tests/unit/test_crafting.gd:36)
+       [3] test_wyman_checkpoint_register_and_heroes (res://tests/unit/test_crafting.gd:340)
+       [4] _run (res://tests/run_tests.gd:45)
+       [5] test_westreach_champions_and_stage_clear (res://tests/unit/test_crafting.gd:335)
+[PASS] test_crafting.gd — 11 tests, 689 checks, 0 failures (15804.6 ms)
+[PASS] test_crossbow_pose.gd — 1 tests, 909 checks, 0 failures (33.5 ms)
+[PASS] test_crossbows.gd — 8 tests, 10766 checks, 0 failures (397.0 ms)
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (159.4 ms)
+[PASS] test_dungeon_growth.gd — 6 tests, 23123 checks, 0 failures (6117.8 ms)
+[PASS] test_enemies.gd — 6 tests, 464 checks, 0 failures (1920.6 ms)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+ERROR: Condition "slot >= slot_max" is true. Returning: nullptr
+   at: get_instance (./core/object/object.h:912)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:193)
+[FAIL] test_enemies2.gd — 19 tests, 598 checks, 8 failures (30825.7 ms)
+[PASS] test_guide.gd — 5 tests, 141 checks, 0 failures (724.2 ms)
+[PASS] test_guilds.gd — 8 tests, 100 checks, 0 failures (60.5 ms)
+[FAIL] test_inventory_overhaul.gd — 6 tests, 2087 checks, 15 failures (62.0 ms)
+WARNING: Navigation region synchronization had 32 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 97 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 20 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 32 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_aa_build_surface_maps (res://tests/unit/test_island.gd:56)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_opens_once_per_hero (res://tests/unit/test_guide.gd:149)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+WARNING: Navigation region synchronization had 57 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+WARNING: Navigation region synchronization had 22 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+WARNING: Navigation region synchronization had 7 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+WARNING: Navigation region synchronization had 28 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+[PASS] test_island.gd — 13 tests, 1669 checks, 0 failures (11280.4 ms)
+[PASS] test_items.gd — 17 tests, 2483 checks, 0 failures (506.3 ms)
+[PASS] test_loot.gd — 17 tests, 4060 checks, 0 failures (18069.5 ms)
+WARNING: Navigation region synchronization had 32 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_maps.gd:32)
+       [2] test_aa_build_and_sync_all_maps (res://tests/unit/test_maps.gd:53)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_using_consumables (res://tests/unit/test_loot.gd:263)
+WARNING: Navigation region synchronization had 97 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_maps.gd:32)
+       [2] test_aa_build_and_sync_all_maps (res://tests/unit/test_maps.gd:53)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_using_consumables (res://tests/unit/test_loot.gd:263)
+WARNING: Navigation region synchronization had 20 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_maps.gd:32)
+       [2] test_aa_build_and_sync_all_maps (res://tests/unit/test_maps.gd:53)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_using_consumables (res://tests/unit/test_loot.gd:263)
+WARNING: Navigation region synchronization had 3 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_maps.gd:32)
+       [2] test_aa_build_and_sync_all_maps (res://tests/unit/test_maps.gd:53)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_using_consumables (res://tests/unit/test_loot.gd:263)
+[PASS] test_maps.gd — 14 tests, 633 checks, 0 failures (8883.9 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.4 ms)
+[PASS] test_npcs.gd — 3 tests, 474 checks, 0 failures (14686.2 ms)
+[PASS] test_official_server.gd — 6 tests, 29 checks, 0 failures (168.4 ms)
+WARNING: Navigation region synchronization had 20 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_lite_navigation_matches (res://tests/unit/test_perf.gd:130)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_main_menu_requires_a_mode_and_enables_offline_immediately (res://tests/unit/test_official_server.gd:74)
+WARNING: Navigation region synchronization had 20 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_lite_navigation_matches (res://tests/unit/test_perf.gd:130)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_main_menu_requires_a_mode_and_enables_offline_immediately (res://tests/unit/test_official_server.gd:74)
+[PASS] test_perf.gd — 7 tests, 245 checks, 0 failures (6704.9 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (9.4 ms)
+[PASS] test_shops_dialogue.gd — 10 tests, 1401 checks, 0 failures (532.2 ms)
+[PASS] test_skills.gd — 11 tests, 3519 checks, 0 failures (46886.5 ms)
+[PASS] test_stats.gd — 8 tests, 162 checks, 0 failures (20.3 ms)
+[PASS] test_status.gd — 8 tests, 24 checks, 0 failures (71.0 ms)
+SURVIVAL L40 strongest elite critical 1181 / mage HP 3608
+SURVIVAL L50 strongest elite critical 1435 / mage HP 4507
+SURVIVAL L60 strongest elite critical 1689 / mage HP 5408
+SURVIVAL L100 strongest elite critical 2704 / mage HP 9008
+SURVIVAL L200 strongest elite critical 5244 / mage HP 18008
+SURVIVAL L300 strongest elite critical 7783 / mage HP 27008
+[PASS] test_survival_balance.gd — 6 tests, 866 checks, 0 failures (393.2 ms)
+[PASS] test_team_loot.gd — 3 tests, 21663 checks, 0 failures (27826.4 ms)
+[PASS] test_tempo_layout.gd — 1 tests, 13 checks, 0 failures (789.3 ms)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+   at: Hazard._physics_process (res://src/combat/area_effects.gd:124)
+   GDScript backtrace (most recent call first):
+       [0] _physics_process (res://src/combat/area_effects.gd:124)
+[PASS] test_tempos.gd — 16 tests, 3748 checks, 0 failures (29854.7 ms)
+WARNING: Navigation region synchronization had 97 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_both_bridges_walkable_in_both_directions (res://tests/unit/test_westreach_bridges.gd:16)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_every_skill_works_live (res://tests/unit/test_tempos.gd:646)
+       [4] _until (res://tests/unit/test_tempos.gd:96)
+[PASS] test_westreach_bridges.gd — 1 tests, 14 checks, 0 failures (58204.2 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 knight power 777.2 is within 20% of the mean 442.4 (+76%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 0.0 is within 20% of the mean 442.4 (-100%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 4620.0 is within 20% of the mean 3094.7 (+49%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 ranger power 3822.8 is within 20% of the mean 3094.7 (+24%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1039.0 is within 20% of the mean 3094.7 (-66%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 28710.5 is within 20% of the mean 16544.7 (+74%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5723.0 is within 20% of the mean 16544.7 (-65%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 knight power 46413.3 is within 20% of the mean 37384.0 (+24%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 ranger power 48699.6 is within 20% of the mean 37384.0 (+30%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 13368.0 is within 20% of the mean 37384.0 (-64%)
+  FAIL test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem HP 40 within 125% of goblin_skulker (24)
+  FAIL test_enemies2.test_balance_against_the_roster: war_totem defense 25 near goblin_skulker (4)
+  FAIL test_enemies2.test_bloater_burst_hurts_heroes_and_monsters: the burst hurts the hero (253 -> 310)
+  FAIL test_enemies2.test_bombardier_lights_its_keg: the blast hurts the hero (253 -> 328)
+  FAIL test_enemies2.test_chain_lightning_strikes: chain lightning reaches the hero
+  FAIL test_enemies2.test_chain_lightning_strikes: and hurts (253 -> 253)
+  FAIL test_enemies2.test_mimic_sleeps_then_ambushes: the tongue pulls the hero toward the Mimic
+  FAIL test_enemies2.test_web_spit_roots_the_hero: a web spit that connects applies Webbed
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625
+TOTAL: 118826 checks, 34 failures
+ERROR: 39 RID allocations of type '8NavMap3D' were leaked at exit.
+ERROR: 189 RID allocations of type 'P11JoltShape3D' were leaked at exit.
+ERROR: 1 RID allocations of type 'P10JoltBody3D' were leaked at exit.
+ERROR: 3562 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.
+ERROR: 49 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.
+ERROR: 1613 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.
+ERROR: 497 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 2 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: 43 RID allocations of type 'PN18TextServerAdvanced22ShapedTextDataAdvancedE' were leaked at exit.
+ERROR: 4 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
+ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: 8532 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4444 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketSmallE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

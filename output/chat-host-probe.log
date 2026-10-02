@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+CHAT_CHECK host connection started: true
+CHAT_CHECK host two peers connected: true
+CHAT_CHECK host host-only cheat: true
+CHAT_CHECK host cheat has no bubble: true
+CHAT_CHECK host exactly two visible messages, no cheats: true
+CHAT_CHECK host local speech bubble: true
+CHAT_CHECK host targeted mention flashes sender message: true
+CHAT_CHECK host local bubble expires at three seconds: true
+CHAT_CHECK host remote bubble expires: true
+CHAT_CHECK host multiplayer log stays visible: true
+CHAT_CHECK host hold plus repeats: true
+CHAT_CHECK host release stops repeat: true
+CHAT_PROBE_DONE host failures=[]

@@ -41,13 +41,17 @@ func _rebuild() -> void:
 		var p := PanelContainer.new()
 		p.theme_type_variation = &"GlassPanel"
 		p.custom_minimum_size = Vector2(W, 0)
-		var l := UITheme.label("Hosting · waiting for friends to join" if Net.is_host() else "Connecting…", 15, UITheme.TEXT_DIM, UITheme.body_font())
+		var l := UITheme.label("Official Server · playing alone" if Net.official_room else ("Hosting · waiting for friends to join" if Net.is_host() else "Connecting…"), 18, UITheme.TEXT_DIM, UITheme.body_font())
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		p.add_child(l)
 		add_child(p)
 		return
-	for id in ids:
+	for id in ids.slice(0, 4):
 		add_child(_row(id))
+	if ids.size() > 4:
+		var roster := UIWindow.button("View all %d players" % Net.player_count(), func() -> void: Game.ui_root.open(&"multiplayer"), &"", W)
+		roster.custom_minimum_size.y = 42
+		add_child(roster)
 	_summon_btn = null
 	if Net.is_active():
 		# Team Portal: the host calls everyone who is away to their side; each player chooses Go or Stay
@@ -111,7 +115,7 @@ func _row(id: int) -> Control:
 	v.add_child(sub)
 	TooltipLayer.attach(p, func() -> Control: return _tip(id))
 	p.gui_input.connect(func(e: InputEvent) -> void:
-		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT and (Net.is_host() or id == 1):
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT and (Net.is_host() or Net.official_room or id == 1):
 			Net.team_portal(id))
 	_rows[id] = {"root": p, "name": nm, "sub": sub, "hp": hp, "ping": ping}
 	return p
@@ -126,7 +130,7 @@ func _tip(id: int) -> Control:
 	var av := Net.avatar(id)
 	if av and not av.alive:
 		lines.append("Fallen. Stand beside them and press %s to revive them." % Settings.binding_text(&"interact"))
-	if Net.is_host() or id == 1:
+	if Net.is_host() or Net.official_room or id == 1:
 		lines.append("Click to cast Team Portal to their side.")
 	return Tips.text("\n".join(lines), String(info.get("name", "Hero")))
 
@@ -135,7 +139,7 @@ func _process(delta: float) -> void:
 	if _t > 0.0 or not visible:
 		return
 	_t = 0.12
-	if _others().size() != _rows.size() or not _rows.is_empty() and _summon_btn == null:
+	if mini(_others().size(), 4) != _rows.size() or not _rows.is_empty() and _summon_btn == null:
 		_rebuild()
 		return
 	var here := String(Game.current_map_id)

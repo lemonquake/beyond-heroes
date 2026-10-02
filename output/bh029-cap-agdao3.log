@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+BH029 SHOT 30_agdao_overview
+BH029 SHOT 31_agdao_topdown
+BH029 SHOT 32_agdao_harbour
+BH029 SHOT 33_agdao_market
+BH029 SHOT 34_agdao_terraces
+BH029 SHOT 35_agdao_crown
+BH029 SHOT 36_agdao_pyramid_top
+BH029 SHOT 37_agdao_gate
+BH029 SHOT 38_agdao_hero_grand_stair
+BH029 SHOT 39_agdao_wirekeeper_top
+BH029 CAPTURE DONE -> A:/Python/beyond-heroes/game/../work/lemondev/bh-029/evidence/captures
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

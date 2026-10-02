@@ -1,5 +1,5 @@
 extends Node
-## Multiplayer (autoload `Net`, bh-008). Co-op for up to four heroes over ENet, the same on PC and Android.
+## Multiplayer (autoload `Net`). Up to twelve heroes over ENet on PC and Android.
 ##
 ##   Host      the party leader opens a room and assigns one combat owner per occupied map.
 ##   Join      a hero joins at the leader's side once, then uses doors and waypoints independently.
@@ -26,7 +26,7 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 14                 # 2 (bh-010): Ranger / Shadowblade, auras; 3 (bh-011): travel requests, revive, ping;
+const PROTOCOL := 15                 # 15: official accounts, dedicated coordinator and separate custom rooms
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
@@ -39,7 +39,8 @@ const SUMMON_COOLDOWN := 8.0
 const BESIDE_M := 20.0               # a player this close to the host on the same map is not summoned
 const PORT := 24680
 const DISCOVERY_PORT := 24681
-const MAX_CLIENTS := 3
+const MAX_PLAYERS := 12
+const MAX_CLIENTS := MAX_PLAYERS - 1 # Custom host occupies one player slot; a dedicated server occupies none.
 const ALLY_RATE := 15.0
 const ENEMY_RATE := 12.0
 const ENEMY_RANGE := 70.0            # monsters farther than this from a client's hero are not streamed to it
@@ -61,6 +62,18 @@ var protocol_override := -1          # probes only: pretend to be another game v
 var following := false               # a client is loading the host's map: its own travel rules are lifted
 
 var _peer: ENetMultiplayerPeer
+var dedicated := false
+var official_room := false
+var room_name := "Friends' Game"
+var host_port := PORT
+var _server_config := {}
+var _server_leases := {}
+var _introductions := {}
+var _heartbeat_t := 0.0
+var _server_healthy := true
+var _directory_secret := ""
+var _directory_t := 0.0
+var _directory_busy := false
 var _udp: PacketPeerUDP              # host: broadcaster
 var _listen: PacketPeerUDP           # anyone: discovery listener
 var _bcast_t := 0.0
@@ -151,12 +164,84 @@ func _profile() -> Dictionary:
 	return {"name": h.hero_name if h else "Hero", "cls": String(h.cls.id) if h else "knight",
 		"level": h.progress.level if h else 1, "map": String(Game.current_map_id),
 		"dungeon_level": int(h.world_flags.get(DungeonGrowth.visit_key(DataDungeons.parse(h.current_map)[0]), h.progress.level)) if h else 1,
-		"device": "Mobile" if Settings.is_mobile_device() else "PC", "guild": guild_profile(h)}
+		"device": "Mobile" if Settings.is_mobile_device() else "PC", "guild": guild_profile(h),
+		"scope": SaveSystem.scope, "room": SaveSystem.custom_room}
+
+## Dedicated coordinator has no playable hero and does not consume one of the twelve slots.
+func host_dedicated(config: Dictionary) -> String:
+	_server_config = config
+	var result := {}
+	for attempt in 5:
+		result = await _server_request("/internal/start")
+		if not result.has("error"):
+			break
+		await get_tree().create_timer(1.0).timeout
+	if result.has("error"):
+		return "Account service unavailable: " + String(result.error)
+	_peer = ENetMultiplayerPeer.new()
+	var error := _peer.create_server(int(config.get("game_port", PORT)), MAX_PLAYERS)
+	if error != OK:
+		return "Could not open the official game port (error %d)." % error
+	multiplayer.multiplayer_peer = _peer
+	mode = Mode.HOST
+	dedicated = true
+	official_room = true
+	peers = {}
+	print("Official Beyond Heroes game server listening; maximum 12 players.")
+	return ""
+
+func _server_request(path: String, body := {}) -> Dictionary:
+	var http := HTTPRequest.new()
+	http.timeout = 5.0
+	http.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(http)
+	var ca := X509Certificate.new()
+	if ca.load(String(_server_config.get("certificate", ""))) != OK:
+		http.queue_free()
+		return {"error": "Server certificate missing."}
+	http.set_tls_options(TLSOptions.client(ca))
+	var error := http.request("https://127.0.0.1:%d%s" % [int(_server_config.get("api_port", 8443)), path],
+		PackedStringArray(["Content-Type: application/json", "X-Server-Key: " + String(_server_config.get("server_key", ""))]), HTTPClient.METHOD_POST, JSON.stringify(body))
+	if error != OK:
+		http.queue_free()
+		return {"error": "Could not start account service connection."}
+	var reply: Array = await http.request_completed
+	http.queue_free()
+	if int(reply[0]) != HTTPRequest.RESULT_SUCCESS:
+		return {"error": "Account service connection failed (HTTP result %d)." % int(reply[0])}
+	var parsed = JSON.parse_string((reply[3] as PackedByteArray).get_string_from_utf8())
+	return parsed if parsed is Dictionary else {"error": "Account service response unreadable."}
+
+func _server_heartbeat() -> void:
+	var result := await _server_request("/internal/heartbeat")
+	_server_healthy = not result.has("error")
+	if not _server_healthy:
+		for id in _server_leases.keys():
+			_reject_peer(int(id), "The official account service stopped. Gameplay is paused; reconnect when it returns.")
+		return
+	var valid: Array = result.get("leases", [])
+	for id in _server_leases.keys():
+		if not valid.has(_server_leases[id]):
+			_reject_peer(int(id), "Your official play session expired. Load your last server save to reconnect.")
+
+func _publish_custom() -> void:
+	if _directory_busy or dedicated or SaveSystem.scope != "custom":
+		return
+	_directory_busy = true
+	var result := await Official.request("/custom/register" if _directory_secret == "" else "/custom/heartbeat", {
+		"room": SaveSystem.custom_room, "name": room_name, "port": host_port, "players": player_count(), "secret": _directory_secret}, HTTPClient.METHOD_POST, false)
+	_directory_busy = false
+	if result.has("error"):
+		_directory_secret = ""
+	else:
+		_directory_secret = String(result.get("secret", _directory_secret))
 
 # ---- Host / join / leave ------------------------------------------------------------------------------------------
 
 ## Open this running game to others. Returns "" or an error to show.
 func host_game(port := PORT) -> String:
+	if Official.active:
+		return "Official characters cannot host custom games. Choose Custom Games from the main menu."
 	if is_active():
 		return "Already connected."
 	if not Game.in_session:
@@ -168,6 +253,7 @@ func host_game(port := PORT) -> String:
 		return "Could not open port %d (error %d). Is another game using it?" % [port, err]
 	multiplayer.multiplayer_peer = _peer
 	mode = Mode.HOST
+	host_port = port
 	peers = {1: _profile()}
 	_known.clear()
 	_host_enemies.clear()
@@ -178,6 +264,7 @@ func host_game(port := PORT) -> String:
 	_chat_system("%s opened the world to other heroes." % peers[1].name)
 	state_changed.emit()
 	peers_changed.emit()
+	_publish_custom()
 	return ""
 
 ## Join a hosted game at `address` (a room code, an IP or a host name). Returns "" or an error; the result arrives later.
@@ -201,6 +288,7 @@ func join_game(address: String, port := PORT) -> String:
 		return "Could not reach %s (error %d)." % [address, err]
 	multiplayer.multiplayer_peer = _peer
 	mode = Mode.CLIENT
+	official_room = Official.active
 	connecting = true
 	_connect_t = 0.0
 	_joining_addr = typed
@@ -210,6 +298,9 @@ func join_game(address: String, port := PORT) -> String:
 
 ## Leave the party. Restore shared combat locally at its latest checkpoint, keeping this map and its loot.
 func leave(reload := true) -> void:
+	if _directory_secret != "":
+		Official.request("/custom/remove", {"room": SaveSystem.custom_room, "secret": _directory_secret}, HTTPClient.METHOD_POST, false)
+		_directory_secret = ""
 	var was_shared := _host_shared
 	var state: Dictionary = _worlds.get(String(Game.current_map_id), {}).get("state", {}).duplicate(true)
 	if is_active() and not is_host():
@@ -221,6 +312,7 @@ func leave(reload := true) -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	_peer = null
 	mode = Mode.OFFLINE
+	official_room = false
 	connecting = false
 	following = false
 	peers.clear()
@@ -255,12 +347,17 @@ func leave(reload := true) -> void:
 			Spawner.populate(Game.current_map, Game.difficulty)
 
 func _on_peer_connected(_id: int) -> void:
-	pass                                     # the client introduces itself with _hello
+	if dedicated:
+		_introductions[_id] = Time.get_ticks_msec()
 
 func _on_peer_disconnected(id: int) -> void:
 	if not is_active():
 		return
 	var who: String = peers.get(id, {}).get("name", "A hero")
+	_introductions.erase(id)
+	if dedicated and _server_leases.has(id):
+		_server_request("/internal/disconnect", {"lease": _server_leases[id]})
+		_server_leases.erase(id)
 	peers.erase(id)
 	status.erase(id)
 	_known.erase(id)
@@ -283,9 +380,11 @@ func _on_peer_disconnected(id: int) -> void:
 	peers_changed.emit()
 
 func _on_connected() -> void:
-	connecting = false
 	_remember_room(_joining_addr)
-	_hello.rpc_id(1, protocol_override if protocol_override >= 0 else PROTOCOL, _profile())
+	var profile := _profile()
+	if Official.active:
+		profile["ticket"] = Official.ticket
+	_hello.rpc_id(1, protocol_override if protocol_override >= 0 else PROTOCOL, profile)
 
 ## Remember the room a join reached, for Multiplayer > Rejoin (never a probe's loopback address).
 func _remember_room(addr: String) -> void:
@@ -299,9 +398,15 @@ func _remember_room(addr: String) -> void:
 func _on_connection_failed() -> void:
 	last_error = "Could not connect to the host. Check the room code and that the host pressed Host Game."
 	Events.notify.emit(last_error, &"error")
+	if Official.active:
+		Official.game_disconnected(last_error)
 	leave(false)
 
 func _on_server_disconnected() -> void:
+	if Official.active:
+		Official.game_disconnected("The official game server disconnected. Your confirmed saves remain on the server.")
+		leave(false)
+		return
 	Events.notify.emit("The host closed the world. You are playing alone again.", &"info")
 	leave(true)
 
@@ -310,36 +415,83 @@ func _hello(proto: int, profile: Dictionary) -> void:
 	if not is_host():
 		return
 	var id := multiplayer.get_remote_sender_id()
+	if peers.has(id) or (dedicated and _introductions.get(id, -1) < 0):
+		return
 	if proto != PROTOCOL:
 		_rejected.rpc_id(id, "Different game versions (host %d, you %d). Update both games." % [PROTOCOL, proto])
 		get_tree().create_timer(0.5).timeout.connect(func() -> void:
 			if _peer:
 				_peer.disconnect_peer(id))
 		return
+	if dedicated:
+		_introductions[id] = -1 # One redemption per peer, even if it sends overlapping introductions.
+		var result := await _server_request("/internal/redeem", {"ticket": profile.get("ticket", ""), "peer": id})
+		if not _peer or not multiplayer.get_peers().has(id):
+			if not result.has("error"):
+				_server_request("/internal/disconnect", {"lease": result.get("lease", "")})
+			return
+		if result.has("error") or not _server_healthy:
+			_reject_peer(id, String(result.get("error", "Official account service unavailable.")))
+			return
+		var character: Dictionary = result.get("character", {})
+		profile["name"] = character.get("name", "Hero")
+		profile["cls"] = character.get("class", "knight")
+		profile["level"] = character.get("level", 1)
+		profile["userid"] = result.get("userid", "")
+		profile["character"] = character.get("id", "")
+		_server_leases[id] = result.get("lease", "")
+		_introductions.erase(id)
+	elif SaveSystem.scope == "custom" and (profile.get("scope", "") != "custom" or profile.get("room", "") != SaveSystem.custom_room):
+		_reject_peer(id, "This custom game needs a character created for its room. Join it from the main menu server list.")
+		return
+	profile.erase("ticket")
+	profile["name"] = String(profile.get("name", "Hero")).left(18)
+	profile["level"] = clampi(int(profile.get("level", 1)), 1, BH.LEVEL_CAP)
 	profile["map"] = "" # the joining hero has not arrived yet
 	peers[id] = profile
 	_known[id] = {}
 	var p := Game.player as Node3D
-	_welcome.rpc_id(id, {"map": String(Game.current_map_id), "pos": p.global_position if p else Vector3.ZERO,
+	_welcome.rpc_id(id, {"official": dedicated, "map": String(Game.current_map_id), "pos": p.global_position if p else Vector3.ZERO,
 		"yaw": p.rotation.y if p else 0.0, "peers": peers, "worlds": _worlds})
 	_chat_system("%s joined (%s)." % [profile.get("name", "A hero"), profile.get("device", "PC")], true)
 	_rpc_peers()
 	peers_changed.emit()
 
+func _reject_peer(id: int, reason: String) -> void:
+	if _peer and multiplayer.get_peers().has(id):
+		_rejected.rpc_id(id, reason)
+		get_tree().create_timer(0.5).timeout.connect(func() -> void:
+			if _peer:
+				_peer.disconnect_peer(id))
+
 @rpc("authority", "reliable")
 func _rejected(why: String) -> void:
 	last_error = why
 	Events.notify.emit(why, &"error")
+	if Official.active:
+		Official.game_disconnected(why)
 	leave(false)
 
 @rpc("authority", "reliable")
 func _welcome(info: Dictionary) -> void:
+	if bool(info.get("official", false)) != Official.active:
+		_rejected("Official characters cannot enter custom games. Choose the matching server from the main menu.")
+		return
+	connecting = false
+	official_room = bool(info.get("official", false))
 	peers = info.get("peers", {})
 	_worlds = info.get("worlds", {})
-	Events.notify.emit("Joined %s's world." % peers.get(1, {}).get("name", "the host"), &"info")
+	Events.notify.emit("Joined Official Beyond Heroes." if official_room else "Joined %s's world." % peers.get(1, {}).get("name", "the host"), &"info")
 	state_changed.emit()
 	peers_changed.emit()
-	_follow(StringName(info.map), info.pos, float(info.yaw))
+	if official_room:
+		_arrived = true
+		on_local_map_loaded(Game.current_map_id)
+		Official.game_connected()
+		Game.ui_blocking = false
+		get_tree().paused = false
+	else:
+		_follow(StringName(info.map), info.pos, float(info.yaw))
 
 func _rpc_peers() -> void:
 	_peers_update.rpc(peers, _worlds)
@@ -584,7 +736,9 @@ func _broadcast() -> void:
 	var h := Game.hero
 	var msg := {"bh": PROTOCOL, "host": h.hero_name if h else "Host", "level": h.progress.level if h else 1,
 		"map": String(DB.map_def(Game.current_map_id).display_name) if DB.map_def(Game.current_map_id) else "", "players": peers.size(),
-		"max": MAX_CLIENTS + 1, "port": PORT}
+		"max": MAX_CLIENTS + 1, "port": host_port}
+	msg["room"] = SaveSystem.custom_room if SaveSystem.scope == "custom" else ""
+	msg["name"] = room_name
 	_udp.put_packet(JSON.stringify(msg).to_utf8_buffer())
 
 func _poll_discovery() -> void:
@@ -631,6 +785,22 @@ func _process(delta: float) -> void:
 	_poll_discovery()
 	if not is_active():
 		return
+	if dedicated:
+		_heartbeat_t -= delta
+		if _heartbeat_t <= 0.0:
+			_heartbeat_t = 10.0
+			_server_heartbeat()
+		for id in _introductions.keys():
+			var stamp: int = _introductions[id]
+			if stamp >= 0 and Time.get_ticks_msec() - stamp > 15000:
+				_introductions.erase(id)
+				_peer.disconnect_peer(int(id))
+		return
+	if is_host():
+		_directory_t -= delta
+		if _directory_t <= 0.0:
+			_directory_t = 15.0
+			_publish_custom()
 	_portal_tick()
 	if is_host():
 		_bcast_t -= delta
@@ -642,6 +812,8 @@ func _process(delta: float) -> void:
 		if _connect_t > CONNECT_TIMEOUT:
 			last_error = "No answer from %s. Check the room code, that the host pressed Host Game, and that you are on the same network (or the same VPN)." % _joining_addr
 			Events.notify.emit(last_error, &"error")
+			if Official.active:
+				Official.game_disconnected(last_error)
 			leave(false)
 		return
 	if not Game.in_session or Game.travelling or following:
@@ -708,7 +880,6 @@ func _send_allies() -> void:
 				_app_sig[pair[0]] = sig
 				var app := a.visual.appearance.duplicate(true)
 				app["stance"] = String(a.visual._stance_idle)
-				e["a"] = app
 				appearances.append({"k": pair[0], "a": app})
 		pack.append(e)
 	if not appearances.is_empty():
@@ -1301,6 +1472,10 @@ func _profile_changed(profile: Dictionary) -> void:
 	if not is_host() or not peers.has(id):
 		return
 	var keep: String = peers[id].get("map", "")
+	if dedicated:
+		for field in ["name", "cls", "userid", "character"]:
+			profile[field] = peers[id].get(field, "")
+		profile["level"] = clampi(int(profile.get("level", 1)), 1, BH.LEVEL_CAP)
 	peers[id] = profile
 	if keep != "":
 		peers[id]["map"] = keep
@@ -1400,7 +1575,7 @@ var _portal_ready_at := 0.0
 
 ## Members travel to the leader. The leader chooses a member in Multiplayer (or clicks their party frame).
 func open_team_portal() -> void:
-	if is_host() and Game.ui_root:
+	if (is_host() or official_room) and Game.ui_root:
 		Game.ui_root.open(&"multiplayer")
 	else:
 		team_portal(1)
@@ -1410,7 +1585,7 @@ func portal_error(target: int) -> String:
 		return "Join a party first."
 	if target == my_id() or not peers.has(target):
 		return "Choose another party member."
-	if not is_host() and target != 1:
+	if not is_host() and not official_room and target != 1:
 		return "Team Portal takes you to the party leader."
 	if Game.travelling or following or not Game.in_session:
 		return "Finish travelling first."
@@ -1470,7 +1645,7 @@ func _finish_portal_cast(serial: int) -> void:
 @rpc("any_peer", "reliable")
 func _portal_request(serial: int) -> void:
 	var from := multiplayer.get_remote_sender_id()
-	if not peers.has(from) or (not is_host() and from != 1):
+	if not peers.has(from) or (not is_host() and not official_room and from != 1):
 		return
 	var p := Game.player as Player
 	var error := ""
@@ -1815,15 +1990,17 @@ func _trade_check() -> void:
 		trade_cancel(err)
 		return
 	trade.committing = true
-	_trade_ready.rpc_id(int(trade.peer))
+	trade["server_nonce"] = Crypto.new().generate_random_bytes(16).hex_encode() if Official.active else ""
+	_trade_ready.rpc_id(int(trade.peer), String(trade.server_nonce))
 	trade_changed.emit()
 	_trade_finish()
 
 @rpc("any_peer", "reliable")
-func _trade_ready() -> void:
+func _trade_ready(nonce := "") -> void:
 	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id():
 		return
 	trade.their_ready = true
+	trade["their_nonce"] = nonce
 	_trade_finish()
 
 func _trade_finish() -> void:
@@ -1832,6 +2009,31 @@ func _trade_finish() -> void:
 	var mine: Dictionary = trade.mine
 	var theirs: Dictionary = trade.theirs
 	var who: String = trade.name
+	if Official.active:
+		if trade.get("server_finishing", false):
+			return
+		trade["server_finishing"] = true
+		var other := String(peers.get(int(trade.peer), {}).get("character", ""))
+		var own_nonce := String(trade.get("server_nonce", ""))
+		var their_nonce := String(trade.get("their_nonce", ""))
+		if other == "" or own_nonce.length() != 32 or their_nonce.length() != 32:
+			trade_cancel("Official trade identity is missing.")
+			return
+		var identities := [Official.character_id + ":" + own_nonce, other + ":" + their_nonce]
+		identities.sort()
+		var trade_id := "|".join(identities).sha256_text()
+		var result := await Official.commit_trade(other, mine, theirs, trade_id)
+		if result.has("error"):
+			trade_cancel(String(result.error))
+			return
+		var confirmed := HeroData.from_dict(result.save.hero)
+		Game.hero.inventory.cells = confirmed.inventory.cells
+		Game.hero.inventory.gold = confirmed.inventory.gold
+		Game.hero.inventory.changed.emit()
+		Events.notify.emit("Trade saved on the official server with %s." % who, &"loot")
+		trade_reset("")
+		Game.save_now()
+		return
 	var err := TradeRules.swap(Game.hero, mine, theirs)
 	if err != "":
 		trade_cancel(err)

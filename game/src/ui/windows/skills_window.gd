@@ -9,7 +9,8 @@ var hero: HeroData
 var tree: TreeView
 var _points: Label
 var _detail: VBoxContainer
-var _learned: HBoxContainer
+var _learned: GridContainer
+var _learned_scroll: ScrollContainer
 var _sel_skill: StringName = &""
 var _tabs: HBoxContainer
 var _page_desc: Label
@@ -52,8 +53,16 @@ func _build() -> void:
 	side.custom_minimum_size = Vector2(430, 0)
 	row.add_child(side)
 	side.add_child(section("Learned Skills"))
-	_learned = hbox(6)
-	side.add_child(_learned)
+	# Keep quick access bounded, even when every spell is learned.
+	_learned_scroll = ScrollContainer.new()
+	_learned_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_learned_scroll.custom_minimum_size.y = 102
+	side.add_child(_learned_scroll)
+	_learned = GridContainer.new()
+	_learned.columns = 7
+	_learned.add_theme_constant_override("h_separation", 6)
+	_learned.add_theme_constant_override("v_separation", 6)
+	_learned_scroll.add_child(_learned)
 	side.add_child(section("Details"))
 	var dw := inset()
 	dw.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -73,9 +82,10 @@ func refresh() -> void:
 	_build_tabs()
 	_points.text = "%d skill point%s available" % [hero.progress.skill_points, "" if hero.progress.skill_points == 1 else "s"]
 	for c in _learned.get_children():
+		_learned.remove_child(c)
 		c.queue_free()
 	for sid in hero.learned_skills():
-		var b := SkillButton.new(&"", 60.0)
+		var b := SkillButton.new(&"", 48.0)
 		b.set_skill(sid)
 		b.activated.connect(func(_s): _show(sid))
 		TooltipLayer.attach(b, func() -> Control: return Tips.skill(sid, hero, Game.player as Player))
@@ -86,6 +96,7 @@ func refresh() -> void:
 
 func _build_tabs() -> void:
 	for c in _tabs.get_children():
+		_tabs.remove_child(c)
 		c.queue_free()
 	var t := hero.skill_tree.tree
 	_tabs.get_parent().visible = t.page_count() > 1
@@ -110,6 +121,7 @@ func _on_node(n: Dictionary) -> void:
 func _show(sid: StringName) -> void:
 	_sel_skill = sid
 	for c in _detail.get_children():
+		_detail.remove_child(c)
 		c.queue_free()
 	if sid == &"":
 		_detail.add_child(UITheme.label("Select a skill in the tree.", 16, UITheme.TEXT_DIM, UITheme.body_font()))

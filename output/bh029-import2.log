@@ -1,0 +1,129 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (44 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Player[39m[0m
+[   2% ] [90m[1mupdate_scripts_classes[22m | Tempo[39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | CutsceneActor[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | CutscenePlayer[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | AreaEffects[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | Projectile[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | SkillDef[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | StatCalculator[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | Objectives[39m[0m
+[  31% ] [90m[1mupdate_scripts_classes[22m | DataEnemiesZarael[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | DataMaps[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | DataNpcsZarael[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | FrostOrb[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | SpiralHammer[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | StormArea[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | Tips[39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | TreeView[39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | DialogueBox[39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | SkillsWindow[39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | TalentsWindow[39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | TempoCallerWindow[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | TempoWindow[39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | DawnEngine[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | RelayPylon[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | WardPylon[39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | ZaraelStory[39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | ZaraelVoyage[39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | MaterialLibrary[39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | WorldShaders[39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (5 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | coil_shaman.glb[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | glyphbound_warrior.glb[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | mossback_idol.glb[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | relay_mote.glb[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | wireback_stalker.glb[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (5 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mpreload_reimporting_scene[22m | Started Preparing scenes for reload (1 steps)[39m[0m
+[   0% ] [90m[1mpreload_reimporting_scene[22m | Analyzing scene [empty][39m[0m
+[  50% ] [90m[1mpreload_reimporting_scene[22m | Preparation done.[39m[0m
+[92m[ DONE ][39m [1mpreload_reimporting_scene[22m
+[0m
+[   0% ] [90m[1mreimport[22m | coil_shaman.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  16% ] [90m[1mreimport[22m | glyphbound_warrior.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  33% ] [90m[1mreimport[22m | mossback_idol.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  50% ] [90m[1mreimport[22m | relay_mote.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  66% ] [90m[1mreimport[22m | wireback_stalker.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  83% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (5 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

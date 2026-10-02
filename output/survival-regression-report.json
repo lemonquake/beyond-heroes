@@ -1,0 +1,81 @@
+{
+  "checks": 7483,
+  "elapsed_ms": 67019,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "suites": {
+    "test_armory_cheats.gd": {
+      "checks": 144,
+      "failures": [],
+      "ms": 5.743,
+      "tests": 4
+    },
+    "test_bh013.gd": {
+      "checks": 1017,
+      "failures": [],
+      "ms": 8798.13,
+      "tests": 11
+    },
+    "test_bh016.gd": {
+      "checks": 1453,
+      "failures": [],
+      "ms": 779.433,
+      "tests": 15
+    },
+    "test_chat.gd": {
+      "checks": 52,
+      "failures": [],
+      "ms": 1981.184,
+      "tests": 9
+    },
+    "test_chat_upgrade.gd": {
+      "checks": 169,
+      "failures": [],
+      "ms": 384.886,
+      "tests": 6
+    },
+    "test_class_rework.gd": {
+      "checks": 77,
+      "failures": [],
+      "ms": 4099.45,
+      "tests": 12
+    },
+    "test_combat_growth.gd": {
+      "checks": 134,
+      "failures": [],
+      "ms": 1754.384,
+      "tests": 6
+    },
+    "test_damage.gd": {
+      "checks": 60,
+      "failures": [],
+      "ms": 220.543,
+      "tests": 13
+    },
+    "test_progression.gd": {
+      "checks": 51,
+      "failures": [],
+      "ms": 11.914,
+      "tests": 7
+    },
+    "test_skills.gd": {
+      "checks": 3519,
+      "failures": [],
+      "ms": 47551.699,
+      "tests": 11
+    },
+    "test_stats.gd": {
+      "checks": 160,
+      "failures": [],
+      "ms": 23.155,
+      "tests": 8
+    },
+    "test_survival_balance.gd": {
+      "checks": 647,
+      "failures": [],
+      "ms": 468.917,
+      "tests": 6
+    }
+  },
+  "timestamp": "2026-10-01T05:39:51"
+}

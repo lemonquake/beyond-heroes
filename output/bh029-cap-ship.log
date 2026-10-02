@@ -1,0 +1,29 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] travel (res://src/autoload/game.gd:285)
+BH029 objective: zr_ship
+BH029 SHOT 01_wyman_jetty_arrival
+BH029 captain present: true
+BH029 SHOT 02_wyman_captain_ilsa
+BH029 SHOT 03_wyman_ship
+BH029 CAPTURE DONE -> A:/Python/beyond-heroes/game/../work/lemondev/bh-029/evidence/captures
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 7 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

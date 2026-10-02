@@ -6,6 +6,7 @@
 export.cfg
 export_presets.cfg
 godot.log
+*.import~*.TMP
 
 # Local test screenshots and logs
 /work/probe/
@@ -42,6 +43,11 @@ venv/
 .venv/
 env/
 ENV/
+
+# Official server secrets, player database, logs and generated client identity
+/server/data/
+/game/server/official.cfg
+/game/server/official_ca.crt
 
 # Operating System Files
 .DS_Store

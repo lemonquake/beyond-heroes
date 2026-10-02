@@ -1,0 +1,23 @@
+[glyphbound_warrior] mesh 19656 tris, 253 parts, 2.3s
+[glyphbound_warrior] baked 46 actions in 26.5s
+[glyphbound_warrior] clip lengths verified (46 clips)
+[glyphbound_warrior] -> A:\Python\beyond-heroes\game\assets\characters\glyphbound_warrior.glb (3.6 MB)
+[build] done in 33.6s
+[coil_shaman] mesh 17730 tris, 339 parts, 1.9s
+[coil_shaman] baked 46 actions in 26.1s
+[coil_shaman] clip lengths verified (46 clips)
+[coil_shaman] -> A:\Python\beyond-heroes\game\assets\characters\coil_shaman.glb (3.7 MB)
+[build] done in 33.5s
+[mossback_idol] mesh 17084 tris, 287 parts, 1.7s
+[mossback_idol] baked 46 actions in 26.0s
+[mossback_idol] clip lengths verified (46 clips)
+[mossback_idol] -> A:\Python\beyond-heroes\game\assets\characters\mossback_idol.glb (3.4 MB)
+[build] done in 32.7s
+[relay_mote] ring_2: 2432 tris
+[relay_mote] ring_3: 2312 tris
+[relay_mote] ribbons: 1244 tris
+[relay_mote] total 13388 tris
+[relay_mote] -> A:\Python\beyond-heroes\game\assets\characters\relay_mote.glb
+[wireback_stalker] mesh 14384 tris, 16 clips, 31 bones
+[wireback_stalker] -> A:\Python\beyond-heroes\game\assets\characters\wireback_stalker.glb (1.9 MB), 16 animations, length mismatches: []
+[wireback_stalker] meta merged ['cat_bite', 'cat_pounce', 'cat_roar', 'cat_swipe'] + models.wireback_stalker -> A:\Python\beyond-heroes\game\assets\characters\creature_meta.json (verified: True)

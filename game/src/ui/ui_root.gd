@@ -17,6 +17,7 @@ var touch: TouchControls
 var creator: HeroCreator
 var _paused_by_creator := false
 var _root: Control
+var _official_status: Label
 
 const HOTKEYS := {&"inventory": &"inventory", &"character": &"character", &"skills": &"skills", &"talents": &"talents",
 	&"world_map": &"world_map", &"tempos": &"tempos", &"guide": &"guide", &"guild": &"guild"}
@@ -33,6 +34,14 @@ func _ready() -> void:
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.theme = UITheme.theme()
 	add_child(_root)
+	_official_status = UITheme.label("", 20, UITheme.PARCHMENT, UITheme.body_bold())
+	_official_status.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	_official_status.offset_left = -520
+	_official_status.offset_right = 520
+	_official_status.offset_top = 16
+	_official_status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_official_status.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_root.add_child(_official_status)
 	hud = Hud.new()
 	hud.process_mode = Node.PROCESS_MODE_PAUSABLE
 	_root.add_child(hud)
@@ -264,6 +273,8 @@ func _unhandled_input(e: InputEvent) -> void:
 
 func _process(_d: float) -> void:
 	_update_blocking()
+	_official_status.visible = Official.active
+	_official_status.text = "Official Server · " + Official.save_state
 
 func _on_talk(npc: Node) -> void:
 	var n := npc as Npc

@@ -38,6 +38,7 @@ FX="*res://src/autoload/fx.gd"
 Dev="*res://src/autoload/dev_tools.gd"
 Routes="*res://src/autoload/routes.gd"
 Net="*res://src/net/net.gd"
+Official="*res://src/autoload/official_service.gd"
 Perf="*res://src/autoload/perf.gd"
 
 [display]

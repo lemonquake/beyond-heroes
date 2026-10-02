@@ -131,9 +131,9 @@ func _line(a: Vector2, b: Vector2, col: Color, width: float, tex: Texture2D) -> 
 	if tex:
 		var d := b - a
 		var len := d.length()
-		draw_set_transform(a, d.angle())
+		draw_set_transform(a * zoom, d.angle(), Vector2.ONE * zoom)
 		draw_texture_rect(tex, Rect2(Vector2(0, -width * 0.5), Vector2(len, width)), true, col)
-		draw_set_transform(Vector2.ZERO)
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE * zoom)
 	else:
 		draw_line(a, b, col, width * 0.5, true)
 

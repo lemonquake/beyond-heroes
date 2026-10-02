@@ -1,0 +1,93 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+BH029 SHOT 30_agdao_overview
+BH029 SHOT 31_agdao_topdown
+BH029 SHOT 32_agdao_harbour
+BH029 SHOT 33_agdao_market
+BH029 SHOT 34_agdao_terraces
+BH029 SHOT 35_agdao_crown
+BH029 SHOT 36_agdao_pyramid_top
+BH029 SHOT 37_agdao_gate
+BH029 SHOT 38_agdao_hero_grand_stair
+BH029 SHOT 39_agdao_wirekeeper_top
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _apply_camera (res://src/cinema/cutscene_player.gd:748)
+       [1] _process (res://src/cinema/cutscene_player.gd:418)
+ERROR: Node not inside tree. Use look_at_from_position() instead.
+   at: look_at (scene/3d/node_3d.cpp:1253)
+   GDScript backtrace (most recent call first):
+       [0] _apply_camera (res://src/cinema/cutscene_player.gd:750)
+       [1] _process (res://src/cinema/cutscene_player.gd:418)
+BH029 SHOT 50_zr_coilwood_overview
+BH029 SHOT 51_zr_coilwood_topdown
+BH029 SHOT 52_zr_coilwood_shrine
+BH029 SHOT 53_zr_coilwood_aqueduct
+BH029 SHOT 54_zr_coilwood_step_fields
+BH029 SHOT 55_zr_coilwood_relay_west
+BH029 SHOT 56_zr_coilwood_relay_south
+BH029 SHOT 57_zr_coilwood_relay_east
+BH029 SHOT 58_zr_coilwood_kharvenn_camp
+BH029 SHOT 59_zr_coilwood_jade_gate
+BH029 SHOT 60_zr_coilwood_east_road
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] travel (res://src/autoload/game.gd:285)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:649)
+   GDScript backtrace (most recent call first):
+       [0] _apply_camera (res://src/cinema/cutscene_player.gd:748)
+       [1] _process (res://src/cinema/cutscene_player.gd:418)
+ERROR: Node not inside tree. Use look_at_from_position() instead.
+   at: look_at (scene/3d/node_3d.cpp:1253)
+   GDScript backtrace (most recent call first):
+       [0] _apply_camera (res://src/cinema/cutscene_player.gd:750)
+       [1] _process (res://src/cinema/cutscene_player.gd:418)
+BH029 SHOT 61_zr_barrens_overview
+BH029 SHOT 62_zr_barrens_topdown
+BH029 SHOT 63_zr_barrens_camp
+BH029 SHOT 64_zr_barrens_colossus
+BH029 SHOT 65_zr_barrens_crossroads
+BH029 SHOT 66_zr_barrens_obsidian_gate
+BH029 SHOT 67_zr_barrens_vein_gate
+BH029 SHOT 68_zr_barrens_north_pass
+BH029 SHOT 69_zr_barrens_west_road
+BH029 SHOT 70_bridge_of_death_overview
+BH029 SHOT 71_bridge_of_death_topdown
+BH029 SHOT 72_bridge_of_death_south_gate
+BH029 SHOT 73_bridge_of_death_span
+BH029 SHOT 74_bridge_of_death_ward_pylons
+BH029 SHOT 75_bridge_of_death_platform
+BH029 SHOT 76_bridge_of_death_north_gate
+BH029 SHOT 77_bridge_of_death_gorge
+BH029 SHOT 78_bridge_of_death_game_south
+BH029 SHOT 79_bridge_of_death_game_span
+BH029 SHOT 80_bridge_of_death_game_pylon
+BH029 SHOT 81_bridge_of_death_game_platform
+BH029 SHOT 82_zr_citadel_overview
+BH029 SHOT 83_zr_citadel_topdown
+BH029 SHOT 84_zr_citadel_gate
+BH029 SHOT 85_zr_citadel_avenue
+BH029 SHOT 86_zr_citadel_engine
+BH029 SHOT 87_zr_citadel_arena
+BH029 SHOT 88_zr_citadel_siege_camp
+BH029 SHOT 89_zr_citadel_abbot_camp
+BH029 SHOT 90_zr_citadel_game_gate
+BH029 SHOT 91_zr_citadel_game_stairs
+BH029 SHOT 92_zr_citadel_game_arena
+BH029 CAPTURE DONE -> A:/Python/beyond-heroes/game/../work/lemondev/bh-029/evidence/captures
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

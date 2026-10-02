@@ -51,7 +51,7 @@ func _rebuild() -> void:
 	var items: Array
 	if _death:
 		items = [["Respawn", _respawn, &"PrimaryButton"]]
-		if Net.is_client():
+		if Net.is_client() and not Net.official_room:
 			items.append(["Respawn beside %s" % Net.host_name(), _respawn_beside_host, &""])
 		var cp := Game.checkpoint_name()
 		if cp != "":
@@ -111,7 +111,7 @@ func show_death() -> void:
 
 func close() -> void:
 	visible = false
-	get_tree().paused = false
+	get_tree().paused = Official.active and not Official.connected
 
 func _respawn() -> void:
 	visible = false
@@ -136,6 +136,10 @@ func _settings() -> void:
 	Game.ui_root.open(&"settings")
 
 func _save() -> void:
+	if Official.active:
+		_sub.text = "Saving to the official server…"
+		_sub.text = "Progress saved on the official server." if await Official.flush() else "The server has not confirmed your latest progress."
+		return
 	if Game.save_now():
 		_sub.text = "Game saved."
 
@@ -145,6 +149,10 @@ func _main_menu() -> void:
 		Game.return_to_menu(), "Main Menu")
 
 func _quit() -> void:
+	if Official.active:
+		Game.ui_root.ask("Quit Game", "Save your official character on the server and close Beyond Heroes?", func() -> void:
+			get_tree().current_scene.call("_quit_safely"), "Save and Quit")
+		return
 	# three ways out of the question: save and quit, quit without saving, or stay (Cancel / Back)
 	var extra := UIWindow.button("Quit Without Saving", func() -> void:
 		Game.ui_root.confirm.cancel()

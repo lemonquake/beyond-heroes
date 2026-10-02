@@ -99,6 +99,8 @@ func _ready() -> void:
 		_check("FPS", Dev.show_fps, func(on): Dev.show_fps = on)]))
 
 func toggle() -> void:
+	if Official.active:
+		return
 	visible = not visible
 
 func _head(t: String) -> Control:

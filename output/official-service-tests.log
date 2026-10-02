@@ -1,0 +1,28 @@
+test_production_scrypt_hash_is_salted_and_deterministic (server.test_service.PasswordTests.test_production_scrypt_hash_is_salted_and_deterministic) ... ok
+test_credentials_are_hashed_and_sessions_are_not_stored_plaintext (server.test_service.ServiceTests.test_credentials_are_hashed_and_sessions_are_not_stored_plaintext) ... ok
+test_directory_heartbeat_secret_and_expiry (server.test_service.ServiceTests.test_directory_heartbeat_secret_and_expiry) ... ok
+test_exclusive_account_lease_and_release (server.test_service.ServiceTests.test_exclusive_account_lease_and_release) ... ok
+test_game_offline_preserves_characters (server.test_service.ServiceTests.test_game_offline_preserves_characters) ... ok
+test_import_is_idempotent_and_never_replaces_progress (server.test_service.ServiceTests.test_import_is_idempotent_and_never_replaces_progress) ... ok
+test_malformed_saves_and_class_changes_are_rejected (server.test_service.ServiceTests.test_malformed_saves_and_class_changes_are_rejected) ... ok
+test_ownership_and_device_settings (server.test_service.ServiceTests.test_ownership_and_device_settings) ... ok
+test_password_rules_and_login (server.test_service.ServiceTests.test_password_rules_and_login) ... ok
+test_rate_limit_and_session_expiry (server.test_service.ServiceTests.test_rate_limit_and_session_expiry) ... ok
+test_recovery_revokes_sessions_and_is_single_use (server.test_service.ServiceTests.test_recovery_revokes_sessions_and_is_single_use) ... ok
+test_restart_preserves_data_and_invalidates_play_sessions (server.test_service.ServiceTests.test_restart_preserves_data_and_invalidates_play_sessions) ... ok
+test_save_retry_is_idempotent_and_revision_protected (server.test_service.ServiceTests.test_save_retry_is_idempotent_and_revision_protected) ... ok
+test_server_full_at_twelve_and_no_phantom_host (server.test_service.ServiceTests.test_server_full_at_twelve_and_no_phantom_host) ... ok
+test_slot_collision_and_new_character_rules (server.test_service.ServiceTests.test_slot_collision_and_new_character_rules) ... ok
+test_ticket_and_lease_expiry (server.test_service.ServiceTests.test_ticket_and_lease_expiry) ... ok
+test_ticket_requires_private_server_access_and_is_single_use (server.test_service.ServiceTests.test_ticket_requires_private_server_access_and_is_single_use) ... ok
+test_trade_blocks_overwriting_pending_inventories_and_release_cancels (server.test_service.ServiceTests.test_trade_blocks_overwriting_pending_inventories_and_release_cancels) ... ok
+test_trade_expiry_changes_neither_character (server.test_service.ServiceTests.test_trade_expiry_changes_neither_character) ... ok
+test_trade_needs_both_owners_and_commits_both_characters_atomically (server.test_service.ServiceTests.test_trade_needs_both_owners_and_commits_both_characters_atomically) ... ok
+test_trade_rejects_unapproved_rewards_and_inventory_creation (server.test_service.ServiceTests.test_trade_rejects_unapproved_rewards_and_inventory_creation) ... ok
+test_two_concurrent_saves_cannot_overwrite (server.test_service.ServiceTests.test_two_concurrent_saves_cannot_overwrite) ... ok
+test_validated_backup_contains_committed_progress (server.test_service.ServiceTests.test_validated_backup_contains_committed_progress) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 3.662s
+
+OK

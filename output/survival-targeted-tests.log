@@ -1,0 +1,24 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_damage.gd — 13 tests, 60 checks, 0 failures (175.0 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (9.0 ms)
+[PASS] test_stats.gd — 8 tests, 160 checks, 0 failures (20.4 ms)
+ERROR: Error constructing a GDScriptInstance: 'RefCounted(enemy_traits_x.gd)::_init': Method expected 1 argument(s), but called with 0
+   at: _create_instance (modules/gdscript/gdscript.cpp:203)
+   GDScript backtrace (most recent call first):
+       [0] test_enemy_retaliation_has_shared_limit_and_no_reflection_loop (res://tests/unit/test_survival_balance.gd:127)
+       [1] _run (res://tests/run_tests.gd:43)
+SCRIPT ERROR: Invalid call to function 'new' in base 'GDScript'. Expected 1 argument(s).
+   at: test_enemy_retaliation_has_shared_limit_and_no_reflection_loop (res://tests/unit/test_survival_balance.gd:127)
+   GDScript backtrace (most recent call first):
+       [0] test_enemy_retaliation_has_shared_limit_and_no_reflection_loop (res://tests/unit/test_survival_balance.gd:127)
+       [1] _run (res://tests/run_tests.gd:43)
+SURVIVAL L40 strongest elite critical 843 / mage HP 1098
+SURVIVAL L50 strongest elite critical 988 / mage HP 1337
+SURVIVAL L60 strongest elite critical 1142 / mage HP 1578
+SURVIVAL L100 strongest elite critical 1612 / mage HP 2538
+SURVIVAL L200 strongest elite critical 2786 / mage HP 4938
+SURVIVAL L300 strongest elite critical 3960 / mage HP 7338
+[FAIL] test_survival_balance.gd — 6 tests, 644 checks, 1 failures (421.9 ms)
+  FAIL test_survival_balance.test_enemy_retaliation_has_shared_limit_and_no_reflection_loop: aborted before done() (script error?)
+TOTAL: 915 checks, 1 failures

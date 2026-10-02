@@ -1,0 +1,218 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_bh013.gd — 11 tests, 1025 checks, 0 failures (10510.8 ms)
+ERROR: Signal 'stats_dirty' is already connected to given callable 'CharacterBody3D(Player)::_on_hero_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:135)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'inventory_changed' is already connected to given callable 'CharacterBody3D(Player)::_on_inventory_changed' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:136)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Signal 'leveled_up' is already connected to given callable 'CharacterBody3D(Player)::_on_level_up' in that object.
+   at: connect (core/object/object.cpp:1562)
+   GDScript backtrace (most recent call first):
+       [0] bind (res://src/actors/player/player.gd:137)
+       [1] test_allies_come_back_after_a_map_change (res://tests/unit/test_bh017.gd:609)
+ERROR: Condition "CryptoCore::b64_decode(&w[0], buf.size(), &arr_len, (unsigned char *)cstr.get_data(), strlen) != OK" is true. Returning: Vector<uint8_t>()
+   at: base64_to_raw (core/core_bind.cpp:1366)
+   GDScript backtrace (most recent call first):
+       [0] load_banner_bytes (res://src/core/guilds/guild_rules.gd:349)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:393)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:185)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] picture_from_bytes (res://src/ui/windows/guild_custom_window.gd:185)
+       [1] test_guild_banner_upload (res://tests/unit/test_bh017.gd:394)
+       [2] _run (res://tests/run_tests.gd:43)
+       [3] test_allies_walk_the_row_and_shop (res://tests/unit/test_bh017.gd:730)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] _begin (res://tests/unit/test_bh017.gd:72)
+       [3] test_town_rows_build_in_the_world (res://tests/unit/test_bh017.gd:677)
+       [4] _begin (res://tests/unit/test_bh017.gd:75)
+[FAIL] test_bh017.gd — 27 tests, 885 checks, 5 failures (82282.5 ms)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_a_fall_in_the_arena_costs_nothing (res://tests/unit/test_bh028_arena.gd:401)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_town_rows_build_in_the_world (res://tests/unit/test_bh017.gd:699)
+       [6] _begin (res://tests/unit/test_bh017.gd:75)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_adventurers_fight_each_other_and_fall_back (res://tests/unit/test_bh028_arena.gd:343)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_a_fall_in_the_arena_costs_nothing (res://tests/unit/test_bh028_arena.gd:426)
+       [6] _frames (res://tests/unit/test_bh028_arena.gd:19)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_arena_layout_and_population (res://tests/unit/test_bh028_arena.gd:311)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_adventurers_fight_each_other_and_fall_back (res://tests/unit/test_bh028_arena.gd:371)
+       [6] _until (res://tests/unit/test_bh028_arena.gd:25)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] _begin (res://tests/unit/test_bh028_arena.gd:282)
+       [3] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:374)
+       [4] _run (res://tests/run_tests.gd:43)
+       [5] test_arena_layout_and_population (res://tests/unit/test_bh028_arena.gd:340)
+       [6] _until (res://tests/unit/test_bh028_arena.gd:25)
+BUDGET knight L10 hp 1316 normal 1.9% champion 8.3% boss 6.4%
+BUDGET knight L30 hp 3807 normal 1.5% champion 6.4% boss 5.0%
+BUDGET knight L40 hp 5205 normal 1.4% champion 6.0% boss 4.7%
+BUDGET knight L45 hp 5572 normal 1.5% champion 6.7% boss 5.2%
+BUDGET knight L50 hp 6158 normal 1.6% champion 6.9% boss 5.3%
+BUDGET knight L100 hp 12216 normal 1.4% champion 6.0% boss 4.7%
+BUDGET knight L300 hp 38069 normal 1.4% champion 6.1% boss 4.7%
+BUDGET mage L10 hp 993 normal 3.6% champion 15.7% boss 12.1%
+BUDGET mage L30 hp 2803 normal 2.9% champion 12.8% boss 9.8%
+BUDGET mage L40 hp 3922 normal 2.4% champion 10.8% boss 8.3%
+BUDGET mage L45 hp 4194 normal 2.7% champion 11.8% boss 9.1%
+BUDGET mage L50 hp 4657 normal 2.8% champion 12.2% boss 9.5%
+BUDGET mage L100 hp 9309 normal 2.7% champion 11.6% boss 9.0%
+BUDGET mage L300 hp 29313 normal 2.6% champion 11.5% boss 8.9%
+BUDGET ranger L10 hp 954 normal 3.9% champion 17.2% boss 13.3%
+BUDGET ranger L30 hp 2684 normal 3.0% champion 13.2% boss 10.2%
+BUDGET ranger L40 hp 3764 normal 2.4% champion 10.6% boss 8.2%
+BUDGET ranger L45 hp 3958 normal 3.0% champion 13.3% boss 10.3%
+BUDGET ranger L50 hp 4437 normal 2.9% champion 12.6% boss 9.7%
+BUDGET ranger L100 hp 8663 normal 2.8% champion 12.5% boss 9.6%
+BUDGET ranger L300 hp 27040 normal 2.8% champion 12.2% boss 9.4%
+BUDGET shadowblade L10 hp 948 normal 3.9% champion 17.3% boss 13.3%
+BUDGET shadowblade L30 hp 2811 normal 2.8% champion 12.4% boss 9.6%
+BUDGET shadowblade L40 hp 3860 normal 2.4% champion 10.3% boss 8.0%
+BUDGET shadowblade L45 hp 4131 normal 2.8% champion 12.3% boss 9.5%
+BUDGET shadowblade L50 hp 4600 normal 2.7% champion 11.9% boss 9.2%
+BUDGET shadowblade L100 hp 9028 normal 2.7% champion 11.7% boss 9.0%
+BUDGET shadowblade L300 hp 28123 normal 2.6% champion 11.3% boss 8.7%
+PVP L10 knight->mage hit 38 / hp 993 = 17.8 s
+PVP L10 ranger->shadowblade hit 56 / hp 948 = 18.8 s
+PVP L30 knight->mage hit 77 / hp 2803 = 21.3 s
+PVP L30 ranger->shadowblade hit 96 / hp 2811 = 24.9 s
+PVP L50 knight->mage hit 125 / hp 4657 = 22.9 s
+PVP L50 ranger->shadowblade hit 177 / hp 4600 = 20.7 s
+PVP L100 knight->mage hit 200 / hp 9309 = 25.2 s
+PVP L100 ranger->shadowblade hit 354 / hp 9028 = 18.4 s
+PVP L300 knight->mage hit 606 / hp 29313 = 22.2 s
+PVP L300 ranger->shadowblade hit 1137 / hp 28123 = 14.6 s
+[FAIL] test_bh028_arena.gd — 12 tests, 849 checks, 1 failures (21566.4 ms)
+ERROR: Cannot open file 'res://.godot/imported/jade_sleeper.glb-8f398cc104e41b92c36cb8eb8f3fc979.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] test_monster_models_have_their_clips (res://tests/unit/test_bh029.gd:236)
+       [1] _run (res://tests/run_tests.gd:43)
+       [2] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:398)
+       [3] _until (res://tests/unit/test_bh028_arena.gd:25)
+ERROR: Failed loading resource: res://.godot/imported/jade_sleeper.glb-8f398cc104e41b92c36cb8eb8f3fc979.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] test_monster_models_have_their_clips (res://tests/unit/test_bh029.gd:236)
+       [1] _run (res://tests/run_tests.gd:43)
+       [2] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:398)
+       [3] _until (res://tests/unit/test_bh028_arena.gd:25)
+ERROR: Failed loading resource: res://assets/characters/jade_sleeper.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] test_monster_models_have_their_clips (res://tests/unit/test_bh029.gd:236)
+       [1] _run (res://tests/run_tests.gd:43)
+       [2] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:398)
+       [3] _until (res://tests/unit/test_bh028_arena.gd:25)
+SCRIPT ERROR: Cannot call method 'instantiate' on a null value.
+   at: test_monster_models_have_their_clips (res://tests/unit/test_bh029.gd:237)
+   GDScript backtrace (most recent call first):
+       [0] test_monster_models_have_their_clips (res://tests/unit/test_bh029.gd:237)
+       [1] _run (res://tests/run_tests.gd:43)
+       [2] test_companions_wait_outside_and_come_back (res://tests/unit/test_bh028_arena.gd:398)
+       [3] _until (res://tests/unit/test_bh028_arena.gd:25)
+[FAIL] test_bh029.gd — 12 tests, 494 checks, 1 failures (223.7 ms)
+[PASS] test_enemies.gd — 6 tests, 464 checks, 0 failures (1960.3 ms)
+[FAIL] test_inventory_overhaul.gd — 6 tests, 2087 checks, 15 failures (62.8 ms)
+[FAIL] test_loot.gd — 17 tests, 4060 checks, 1 failures (19237.9 ms)
+[FAIL] test_npcs.gd — 3 tests, 475 checks, 2 failures (16149.7 ms)
+  FAIL test_bh017.test_allies_appear_follow_and_heal: it followed (9.2 m away)
+  FAIL test_bh017.test_allies_walk_the_row_and_shop: the ally finished its round of the stands (3600 frames)
+  FAIL test_bh017.test_allies_walk_the_row_and_shop: and spent gold (4000 left)
+  FAIL test_bh017.test_allies_walk_the_row_and_shop: it does not go again straight away
+  FAIL test_bh017.test_fore_tech_refits_a_weapon: tempering adds 2% weapon damage per rank — expected 1.09433962264151 ± 0.0005, got 1.0846740835445
+  FAIL test_bh028_arena.test_arena_layout_and_population: a path from the Fen Road reaches the centre of the sand
+  FAIL test_bh029.test_monster_models_have_their_clips: aborted before done() (script error?)
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: bow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on bow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on bow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on bow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on bow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: crossbow
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on crossbow — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on crossbow — expected 0.1 ± 0.00001, got 0.4
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on crossbow — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on crossbow — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Strength increases physical damage: javelin
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change physical_attack on javelin — expected 0.0 ± 0.00001, got 6.71875
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change phys_damage on javelin — expected 0.15 ± 0.00001, got 0.45
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_min on javelin — expected 1.0 ± 0.00001, got 6.375
+  FAIL test_inventory_overhaul.test_strength_and_dexterity_for_every_weapon: Dexterity does not change weapon_max on javelin — expected 2.0 ± 0.00001, got 10.0625
+  FAIL test_loot.test_every_item_has_a_model_and_icon: quest_broken_link has its own model
+  FAIL test_npcs.test_data: Captain Ilsa Rhondar has a unique name
+  FAIL test_npcs.test_data: ysenne service heal is known
+TOTAL: 10339 checks, 25 failures
+ERROR: 1 RID allocations of type 'P10JoltBody3D' were leaked at exit.
+WARNING: 63 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 11 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,72 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_npcs.gd — 3 tests, 474 checks, 0 failures (16243.2 ms)
+ERROR: BUG: Unreferenced static string to 0: parameters/
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _exit_world
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: use_dynamic_gi
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: use_in_baked_light
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_state
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: prev_xfading
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: prev_index
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_index
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: transition_request
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: internal_active
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: fade_out_remaining
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: fade_in_remaining
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: time_to_restart
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: sub_amount
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: blend_amount
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: add_amount
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: seek_request
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_delta
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_position
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_length
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _compression
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _request_gizmo_for_id
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _enter_world
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: servers
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: .
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_restore
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_start
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_range
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @icon
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @tool
+   at: unref (core/string/string_name.cpp:118)
+WARNING: A Thread object is being destroyed without its completion having been realized.
+Please call wait_to_finish() on it to ensure correct cleanup.
+   at: ~Thread (core/os/thread.cpp:116)
+ERROR: 7 RID allocations of type '23NavMeshGeometryParser2D' were leaked at exit.
+ERROR: 6 RID allocations of type '23NavMeshGeometryParser3D' were leaked at exit.
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketLargeE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

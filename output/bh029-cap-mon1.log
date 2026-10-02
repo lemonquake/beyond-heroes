@@ -1,0 +1,55 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] load_map (res://src/autoload/game.gd:222)
+       [2] travel (res://src/autoload/game.gd:285)
+BH029 monster missing model: jade_sleeper
+BH029 monster missing model: serpent_oracle
+BH029 monster missing model: jade_guardian
+BH029 monster missing model: sepulchre_beetle
+BH029 monster missing model: jade_king
+BH029 monster missing model: obsidian_golem
+BH029 monster missing model: stoker_thrall
+BH029 monster missing model: shardcaster
+BH029 monster missing model: engine_heart
+BH029 monster missing model: vein_mother
+BH029 SHOT 90_monsters_lineup
+BH029 SHOT 91_monster_00_glyphbound_warrior
+BH029 SHOT 91_monster_01_coil_shaman
+BH029 SHOT 91_monster_02_mossback_idol
+BH029 SHOT 91_monster_03_wireback_stalker
+BH029 SHOT 91_monster_04_relay_mote
+BH029 SHOT 91_monster_05_wiresick_husk
+BH029 SHOT 91_monster_06_arc_sentinel
+BH029 SHOT 91_monster_07_chain_priest
+BH029 SHOT 91_monster_08_chain_bearer
+BH029 SHOT 91_monster_09_glasswire_scorpion
+BH029 SHOT 91_monster_10_span_warden
+BH029 SHOT 91_monster_11_wire_leaper
+BH029 SHOT 91_monster_12_ward_eye
+BH029 SHOT 91_monster_13_deathspan_colossus
+BH029 SHOT 91_monster_14_leash_knight
+BH029 SHOT 91_monster_15_gigas_spawn
+BH029 SHOT 91_monster_16_heartwire_wraith
+BH029 SHOT 91_monster_17_leash_abbot
+BH029 SHOT 91_monster_18_marrow_hound
+BH029 SHOT 91_monster_19_vein_knight
+BH029 CAPTURE DONE -> A:/Python/beyond-heroes/work/lemondev/bh-029/scratch/orch/mon1
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

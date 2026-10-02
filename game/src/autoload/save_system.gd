@@ -6,6 +6,8 @@ extends Node
 const CURRENT_VERSION := 4
 const SAVE_DIR := "user://saves"
 const SLOTS := 8
+var scope := "legacy" # Offline uses the original saves. Official never falls back to a local slot.
+var custom_room := ""
 
 ## version -> Callable(dict) -> dict  (upgrades from `version` to `version + 1`)
 var MIGRATIONS := {
@@ -18,7 +20,57 @@ func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 
 func slot_path(slot: int) -> String:
+	if scope == "custom":
+		return "%s/custom/%s/slot_%d.json" % [SAVE_DIR, custom_room, slot]
 	return "%s/slot_%d.json" % [SAVE_DIR, slot]
+
+func choose_custom_room(room: String) -> bool:
+	if room.length() != 32:
+		return false
+	for character in room.to_lower():
+		if not "0123456789abcdef".contains(character):
+			return false
+	custom_room = room.to_lower()
+	scope = "custom"
+	DirAccess.make_dir_recursive_absolute(slot_path(0).get_base_dir())
+	return true
+
+func remember_custom_room(room: Dictionary) -> void:
+	var cfg := ConfigFile.new()
+	var path := SAVE_DIR.path_join("custom_rooms.cfg")
+	cfg.load(path)
+	cfg.set_value("rooms", custom_room, room)
+	cfg.save(path)
+
+func saved_custom_rooms() -> Array:
+	var cfg := ConfigFile.new()
+	if cfg.load(SAVE_DIR.path_join("custom_rooms.cfg")) != OK:
+		return []
+	var rooms := []
+	for key in cfg.get_section_keys("rooms"):
+		var room = cfg.get_value("rooms", key, {})
+		if room is Dictionary:
+			rooms.append(room)
+	return rooms
+
+func legacy_path(slot: int) -> String:
+	return "%s/slot_%d.json" % [SAVE_DIR, slot]
+
+func read_legacy_slot(slot: int) -> Dictionary:
+	return _read_path(legacy_path(slot))
+
+## Stable import identity, separate from evolving XP and save timestamps.
+func legacy_identity(slot: int, hero: HeroData) -> String:
+	var cfg := ConfigFile.new()
+	var path := SAVE_DIR.path_join("import_identities.cfg")
+	cfg.load(path)
+	var key := "%d:%s:%s" % [slot, hero.hero_name, hero.cls.id]
+	var value := String(cfg.get_value("characters", key, ""))
+	if value == "":
+		value = Crypto.new().generate_random_bytes(16).hex_encode()
+		cfg.set_value("characters", key, value)
+		cfg.save(path)
+	return value
 
 func serialize(hero: HeroData) -> Dictionary:
 	return {"version": CURRENT_VERSION, "saved_at": int(Time.get_unix_time_from_system()), "hero": hero.to_dict(),
@@ -28,6 +80,8 @@ func serialize(hero: HeroData) -> Dictionary:
 ## back; only a file that parses to this hero replaces the save, and the previous save is kept as slot_<n>.json.bak.
 ## A crash at any point leaves either the old save, the backup, or the checked new file.
 func save_hero(hero: HeroData, slot: int) -> bool:
+	if scope == "official" or slot < 0:
+		return false
 	if hero == null or hero.cls == null:
 		return false
 	var data := serialize(hero)
@@ -62,15 +116,20 @@ static func _valid(d) -> bool:
 ## The slot's data, from the save itself or — when it is missing or unreadable — from its backup, or from a checked
 ## new file a crash left behind.
 func read_slot(slot: int) -> Dictionary:
-	for path in [slot_path(slot), slot_path(slot) + ".bak", slot_path(slot) + ".tmp"]:
+	if scope == "official":
+		return {}
+	return _read_path(slot_path(slot))
+
+func _read_path(base: String) -> Dictionary:
+	for path in [base, base + ".bak", base + ".tmp"]:
 		if not FileAccess.file_exists(path):
 			continue
 		var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
 		if not _valid(parsed):
 			push_warning("Corrupt save file %s" % path)
 			continue
-		if path != slot_path(slot):
-			push_warning("Slot %d restored from %s" % [slot, path.get_file()])
+		if path != base:
+			push_warning("Save restored from %s" % path.get_file())
 		return migrate(parsed)
 	return {}
 
@@ -102,6 +161,8 @@ func slot_summary(slot: int) -> Dictionary:
 		"map": h.get("map", "sanctuary"), "saved_at": data.get("saved_at", 0), "play_time": h.get("play_time", 0.0)}
 
 func delete_slot(slot: int) -> void:
+	if scope == "official":
+		return
 	for path in [slot_path(slot), slot_path(slot) + ".bak", slot_path(slot) + ".tmp"]:
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(path)

@@ -1,0 +1,39 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BOSS_CRIT {"hp":251728,"max_hit":11477,"rarity":5}
+BOSS_CRIT {"hp":254431,"max_hit":12000,"rarity":6}
+BOSS_CRIT {"hp":271940,"max_hit":12000,"rarity":8}
+STORY_BOSS {"hp":254431,"level":49}
+AUDIT {"boss_hp":110169,"class":"knight","dps":4896,"enemy_hp":3140,"level":30,"seconds":0.6}
+AUDIT {"boss_hp":71091,"class":"mage","dps":3160,"enemy_hp":3140,"level":30,"seconds":1.0}
+AUDIT {"boss_hp":98937,"class":"ranger","dps":4397,"enemy_hp":3140,"level":30,"seconds":0.7}
+AUDIT {"boss_hp":137590,"class":"shadowblade","dps":6115,"enemy_hp":3140,"level":30,"seconds":0.5}
+AUDIT {"boss_hp":196253,"class":"knight","dps":8722,"enemy_hp":10759,"level":45,"seconds":1.2}
+AUDIT {"boss_hp":166596,"class":"mage","dps":7404,"enemy_hp":10759,"level":45,"seconds":1.5}
+AUDIT {"boss_hp":231387,"class":"ranger","dps":10284,"enemy_hp":10759,"level":45,"seconds":1.0}
+AUDIT {"boss_hp":262284,"class":"shadowblade","dps":11657,"enemy_hp":10759,"level":45,"seconds":0.9}
+AUDIT {"boss_hp":421150,"class":"knight","dps":18718,"enemy_hp":27531,"level":60,"seconds":1.5}
+AUDIT {"boss_hp":264165,"class":"mage","dps":11741,"enemy_hp":27531,"level":60,"seconds":2.3}
+AUDIT {"boss_hp":416494,"class":"ranger","dps":18511,"enemy_hp":27531,"level":60,"seconds":1.5}
+AUDIT {"boss_hp":452900,"class":"shadowblade","dps":20129,"enemy_hp":27531,"level":60,"seconds":1.4}
+AUDIT {"boss_hp":650088,"class":"knight","dps":28893,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":402781,"class":"mage","dps":17901,"enemy_hp":44713,"level":75,"seconds":2.5}
+AUDIT {"boss_hp":677493,"class":"ranger","dps":30111,"enemy_hp":44713,"level":75,"seconds":1.5}
+AUDIT {"boss_hp":712358,"class":"shadowblade","dps":31660,"enemy_hp":44713,"level":75,"seconds":1.4}
+AUDIT {"boss_hp":959796,"class":"knight","dps":42658,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":586824,"class":"mage","dps":26081,"enemy_hp":68062,"level":90,"seconds":2.6}
+AUDIT {"boss_hp":984183,"class":"ranger","dps":43741,"enemy_hp":68062,"level":90,"seconds":1.6}
+AUDIT {"boss_hp":1055658,"class":"shadowblade","dps":46918,"enemy_hp":68062,"level":90,"seconds":1.5}
+AUDIT {"boss_hp":1322154,"class":"knight","dps":58762,"enemy_hp":98597,"level":105,"seconds":1.7}
+AUDIT {"boss_hp":801479,"class":"mage","dps":35621,"enemy_hp":98597,"level":105,"seconds":2.8}
+AUDIT {"boss_hp":1382952,"class":"ranger","dps":61465,"enemy_hp":98597,"level":105,"seconds":1.6}
+AUDIT {"boss_hp":1442557,"class":"shadowblade","dps":64114,"enemy_hp":98597,"level":105,"seconds":1.5}
+AUDIT {"boss_hp":17864636,"class":"knight","dps":793984,"enemy_hp":1618143,"level":300,"seconds":2.0}
+AUDIT {"boss_hp":10197295,"class":"mage","dps":453213,"enemy_hp":1618143,"level":300,"seconds":3.6}
+AUDIT {"boss_hp":18826762,"class":"ranger","dps":836745,"enemy_hp":1618143,"level":300,"seconds":1.9}
+AUDIT {"boss_hp":17392644,"class":"shadowblade","dps":773006,"enemy_hp":1618143,"level":300,"seconds":2.1}
+RANGER burst=12000 boss_hp=332368.092095844
+RANGER marked boss critical=12000
+SCREENSHOT corrected bow=(318.4261, 657.6191) crossbow=(706.649, 1068.004) DPS ratio=1.40482885652424
+[PASS] test_balance_audit.gd — 9 tests, 4467 checks, 0 failures (1879.5 ms)
+TOTAL: 4467 checks, 0 failures

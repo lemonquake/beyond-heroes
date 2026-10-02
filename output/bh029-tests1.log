@@ -1,0 +1,159 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_bh029.gd — 12 tests, 434 checks, 1 failures (128.1 ms)
+WARNING: Navigation region synchronization had 32 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 97 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 20 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_aa_build_surface_maps (res://tests/unit/test_island.gd:48)
+       [3] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 32 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] test_aa_build_surface_maps (res://tests/unit/test_island.gd:56)
+       [2] _run (res://tests/run_tests.gd:43)
+WARNING: Navigation region synchronization had 6 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+ROAD NAV agd_quay from=(-20.0, 2.080117, 47.0) to=(-46.0, 6.080116, 37.0) end=(-46.5, 2.080117, 38.25)
+ROAD NAV agd_gate_road from=(0.0, 14.08012, -30.0) to=(80.0, 20.33012, -26.0) end=(80.0, 14.08012, -26.0)
+ROAD NAV agd_crown_stair from=(0.0, 14.08012, -30.0) to=(0.0, 38.83012, -62.25) end=(15.75, 21.08012, -61.25)
+WARNING: Navigation region synchronization had 57 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+ROAD NAV zc_jade_trail from=(66.18243, 7.75, -29.09459) to=(96.0, 14.25, -54.0) end=(95.75, 9.75, -56.25)
+WARNING: Navigation region synchronization had 22 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+ROAD NAV zb_obsidian_trail from=(-39.99687, 1.337355, 29.99374) to=(-70.2607, 9.5, -59.27585) end=(-68.55499, 2.999644, -62.75178)
+WARNING: Navigation region synchronization had 7 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+WARNING: Navigation region synchronization had 28 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:87)
+       [1] _map (res://tests/unit/test_island.gd:36)
+       [2] test_roads_are_walkable_on_the_navmesh (res://tests/unit/test_island.gd:136)
+       [3] _run (res://tests/run_tests.gd:43)
+       [4] test_aa_build_surface_maps (res://tests/unit/test_island.gd:61)
+[FAIL] test_island.gd — 13 tests, 1669 checks, 11 failures (14119.4 ms)
+  FAIL test_bh029.test_monster_models_have_their_clips: every Zarael monster has a model (missing: [&"wiresick_husk", &"arc_sentinel", &"chain_priest", &"chain_bearer", &"glasswire_scorpion", &"span_warden", &"wire_leaper", &"ward_eye", &"deathspan_colossus", &"leash_knight", &"gigas_spawn", &"heartwire_wraith", &"leash_abbot", &"jade_sleeper", &"serpent_oracle", &"jade_guardian", &"sepulchre_beetle", &"jade_king", &"obsidian_golem", &"stoker_thrall", &"shardcaster", &"engine_heart", &"marrow_hound", &"vein_knight", &"vein_mother"])
+  FAIL test_island.test_data_is_consistent: zc_jade_trail ends on zc_jade
+  FAIL test_island.test_data_is_consistent: zb_obsidian_trail ends on zb_obsidian
+  FAIL test_island.test_data_is_consistent: zb_vein_trail ends on zb_vein
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: agd_quay: agd_pier reaches agd_harbour on foot
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: agd_upper_stair: the walked way (89 m) matches the road (22 m)
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: agd_gate_road: agd_upper reaches agd_gate on foot
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: agd_crown_stair: agd_upper reaches agd_crown on foot
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: agd_crown_stair: the walked way (136 m) matches the road (32 m)
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: zc_jade_trail: zc_relay_3 reaches zc_jade on foot
+  FAIL test_island.test_roads_are_walkable_on_the_navmesh: zb_obsidian_trail: zb_camp reaches zb_obsidian on foot
+  FAIL test_island.test_topology_loops_and_early_choices: town, Westreach and the forest are one walkable network (2 components)
+TOTAL: 2103 checks, 12 failures
+ERROR: 13 RID allocations of type '8NavMap3D' were leaked at exit.

@@ -27,6 +27,7 @@ var _tier_text: Label
 var _guild_text: Label
 var _guild_crest: TextureRect
 var _promotion_text: Label
+var _promotion_scroll: ScrollContainer
 var _points: Label
 var _attr_rows := {}              # attr -> {value: Label, plus: Button, pending: Label}
 var _pending := {}                # attr -> points not yet committed
@@ -119,9 +120,16 @@ func _build() -> void:
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	mid.add_child(note)
 	mid.add_child(section("Next Class Rank"))
+	# Long promotion checklists must scroll instead of increasing the window's minimum height.
+	_promotion_scroll = ScrollContainer.new()
+	_promotion_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_promotion_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_promotion_scroll.custom_minimum_size.y = 80
+	mid.add_child(_promotion_scroll)
 	_promotion_text = UITheme.label("", 17, UITheme.TEXT, UITheme.body_font())
 	_promotion_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	mid.add_child(_promotion_text)
+	_promotion_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_promotion_scroll.add_child(_promotion_text)
 	# right: derived stats (scrolling)
 	var right := vbox(6)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL

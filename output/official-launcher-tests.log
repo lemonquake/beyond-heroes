@@ -1,0 +1,6 @@
+Official Beyond Heroes server started. Keep this process running; Ctrl+C stops both services.
+Data and logs: A:\Python\beyond-heroes\server\data
+LAUNCHER SMOKE: verified HTTPS and dedicated game heartbeat
+Stopping server and backing up saved characters�
+Saved database backup: A:\Python\beyond-heroes\server\data\backups\20261002-010029-ba6673.sqlite3
+LAUNCHER SMOKE: stopped both services and made a final verified backup
