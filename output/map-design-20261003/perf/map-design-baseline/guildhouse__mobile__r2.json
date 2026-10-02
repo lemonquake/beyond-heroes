@@ -1,0 +1,119 @@
+{
+  "lights_in_map": 31,
+  "lite": true,
+  "map": "int_guildhouse",
+  "nodes": 3400,
+  "render_scale": 0.699999988079071,
+  "renderer": "gl_compatibility",
+  "spots": {
+    "start": {
+      "cpu_render": {
+        "avg": 3.11,
+        "median": 2.85,
+        "p95": 4.99,
+        "samples": 300
+      },
+      "draws": {
+        "avg": 540.33,
+        "median": 540.0,
+        "p95": 549.0,
+        "samples": 300
+      },
+      "frame": {
+        "avg": 5.09,
+        "max": 8.68,
+        "median": 4.74,
+        "p95": 7.75,
+        "p99": 8.57,
+        "samples": 300
+      },
+      "gpu": {
+        "avg": 3.75,
+        "median": 3.55,
+        "p95": 4.53,
+        "samples": 300
+      },
+      "lights": {
+        "avg": 6.0,
+        "median": 6.0,
+        "p95": 6.0,
+        "samples": 300
+      },
+      "objects": {
+        "avg": 943.89,
+        "median": 927.0,
+        "p95": 1120.0,
+        "samples": 300
+      },
+      "prims": {
+        "avg": 204472.53,
+        "median": 204450.0,
+        "p95": 204678.0,
+        "samples": 300
+      },
+      "script": {
+        "avg": 25.67,
+        "median": 11.77,
+        "p95": 11.77,
+        "samples": 300
+      }
+    }
+  },
+  "total": {
+    "cpu_render": {
+      "avg": 3.11,
+      "median": 2.85,
+      "p95": 4.99,
+      "samples": 300
+    },
+    "draws": {
+      "avg": 540.33,
+      "median": 540.0,
+      "p95": 549.0,
+      "samples": 300
+    },
+    "frame": {
+      "avg": 5.09,
+      "max": 8.68,
+      "median": 4.74,
+      "p95": 7.75,
+      "p99": 8.57,
+      "samples": 300
+    },
+    "gpu": {
+      "avg": 3.75,
+      "median": 3.55,
+      "p95": 4.53,
+      "samples": 300
+    },
+    "lights": {
+      "avg": 6.0,
+      "median": 6.0,
+      "p95": 6.0,
+      "samples": 300
+    },
+    "objects": {
+      "avg": 943.89,
+      "median": 927.0,
+      "p95": 1120.0,
+      "samples": 300
+    },
+    "prims": {
+      "avg": 204472.53,
+      "median": 204450.0,
+      "p95": 204678.0,
+      "samples": 300
+    },
+    "script": {
+      "avg": 25.67,
+      "median": 11.77,
+      "p95": 11.77,
+      "samples": 300
+    }
+  },
+  "video_mem_mb": 167.0,
+  "window": [
+    1280,
+    720
+  ]
+}

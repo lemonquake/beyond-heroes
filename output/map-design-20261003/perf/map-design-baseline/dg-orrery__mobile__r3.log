@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+WARNING: Adding 'ring_a' as child to '@Node3D@2690' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _begin_session (res://src/autoload/game.gd:146)
+WARNING: Adding 'ring_b' as child to '@Node3D@2691' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _begin_session (res://src/autoload/game.gd:146)
+WARNING: Adding 'ring_c' as child to '@Node3D@2692' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:613)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] load_map (res://src/autoload/game.gd:233)
+       [5] _begin_session (res://src/autoload/game.gd:146)
+PERF {"cpu_render":{"avg":3.75,"median":3.57,"p95":6.76,"samples":900},"draws":{"avg":554.93,"median":480.0,"p95":743.0,"samples":900},"frame":{"avg":7.74,"max":18.97,"median":6.89,"p95":14.33,"p99":15.98,"samples":900},"gpu":{"avg":3.84,"median":3.2,"p95":5.91,"samples":900},"lights":{"avg":6.0,"median":6.0,"p95":6.0,"samples":900},"objects":{"avg":1004.44,"median":948.0,"p95":1285.0,"samples":900},"prims":{"avg":253439.04,"median":170816.0,"p95":435208.0,"samples":900},"script":{"avg":20.07,"median":21.46,"p95":30.35,"samples":900}} renderer=gl_compatibility lite=true map=dg_orrery_2 lights_in_map=67 vmem=211.9
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.
+ERROR: Texture with GL ID of 72: leaked 12280 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

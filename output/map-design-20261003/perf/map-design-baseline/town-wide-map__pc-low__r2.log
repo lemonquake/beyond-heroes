@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PERF {"cpu_render":{"avg":0.87,"median":0.82,"p95":1.38,"samples":900},"draws":{"avg":411.06,"median":412.0,"p95":439.0,"samples":900},"frame":{"avg":3.59,"max":10.15,"median":3.4,"p95":5.55,"p99":6.95,"samples":900},"gpu":{"avg":1.47,"median":1.36,"p95":1.84,"samples":900},"lights":{"avg":91.0,"median":91.0,"p95":91.0,"samples":900},"objects":{"avg":837.98,"median":806.0,"p95":946.0,"samples":900},"prims":{"avg":271162.57,"median":247923.0,"p95":339543.0,"samples":900},"script":{"avg":27.8,"median":21.46,"p95":54.82,"samples":900}} renderer=forward_plus lite=false map=sanctuary lights_in_map=84 vmem=568.0
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
