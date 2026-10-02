@@ -1,0 +1,3133 @@
+[
+ {
+  "number": 1,
+  "source": "kenney_nature_tree_oak",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tree_oak",
+  "used_in": [
+   "olivar",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 196,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_Bark"
+  ],
+  "scale": 5.3008,
+  "bounds_m": [
+   3.395,
+   6.5,
+   3.921
+  ],
+  "collision": "trunk",
+  "source_sha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3",
+  "derived_sha256": "ae5c6ff443230e993b77820ef59f364a36add2102b90ee13889d29cd60d0fbc5",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_oak/1.1.0"
+ },
+ {
+  "number": 2,
+  "source": "kenney_nature_tree_default",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tree_broadleaf",
+  "used_in": [
+   "olivar",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 114,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_Foliage"
+  ],
+  "scale": 3.5131,
+  "bounds_m": [
+   2.652,
+   6.0,
+   2.297
+  ],
+  "collision": "trunk",
+  "source_sha256": "562d29638c902de3c7bee465d3a53bb77117efbc392ae04ed894faf6b5dc691d",
+  "derived_sha256": "da5e33d05412d0da82e054c9d66f0fa487c88a3478fded7c5c07a82a6e942fb6",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_default/1.1.0"
+ },
+ {
+  "number": 3,
+  "source": "kenney_nature_tree_detailed",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tree_detailed",
+  "used_in": [
+   "sanctuary"
+  ],
+  "triangles": 402,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_Bark"
+  ],
+  "scale": 5.1035,
+  "bounds_m": [
+   4.323,
+   6.8,
+   3.887
+  ],
+  "collision": "trunk",
+  "source_sha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b",
+  "derived_sha256": "718eed55b44711aa74c328548ab91639a803b9ae86bdf4cb687482952cb33138",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_detailed/1.1.0"
+ },
+ {
+  "number": 4,
+  "source": "kenney_nature_tree_thin",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tree_thin",
+  "used_in": [
+   "olivar"
+  ],
+  "triangles": 228,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_Bark"
+  ],
+  "scale": 4.2944,
+  "bounds_m": [
+   2.922,
+   6.4,
+   2.648
+  ],
+  "collision": "trunk",
+  "source_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+  "derived_sha256": "58ef254b3ffa504d608c54ae9889df98001103e8121bc8e4195747790e2bb4ae",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_thin/1.1.0"
+ },
+ {
+  "number": 5,
+  "source": "kenney_nature_tree_small",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tree_small",
+  "used_in": [
+   "agdao",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 62,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_Foliage"
+  ],
+  "scale": 3.2431,
+  "bounds_m": [
+   1.15,
+   3.6,
+   1.328
+  ],
+  "collision": "trunk",
+  "source_sha256": "d26c0eeed65cc681667f50042ef23ec72ce47ae3b39837bfeec170b05ba6ab6a",
+  "derived_sha256": "45645cf72183676ae81d8834a56bc64139824c625eaa21f7f017341361f4289e",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_small/1.1.0"
+ },
+ {
+  "number": 6,
+  "source": "kenney_nature_tree_pinedefaulta",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_pine",
+  "used_in": [
+   "ruined_forest",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 230,
+  "surfaces": 2,
+  "materials": [
+   "BH_FoliageDark",
+   "BH_Bark"
+  ],
+  "scale": 5.4986,
+  "bounds_m": [
+   2.925,
+   8.5,
+   2.925
+  ],
+  "collision": "trunk",
+  "source_sha256": "60d8f352fa3659ed275e06cbddfecf8f92c8effe2977c2f2d7b29b6c9b582e46",
+  "derived_sha256": "ecd2eca31786551487610e049feaa31cc75c3c1976ba73655129295af2bd7ff9",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_pinedefaulta/1.1.0"
+ },
+ {
+  "number": 7,
+  "source": "kenney_nature_tree_pinerounda",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_pine_round",
+  "used_in": [
+   "ruined_forest",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 204,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_FoliageDark"
+  ],
+  "scale": 5.2692,
+  "bounds_m": [
+   3.251,
+   7.2,
+   3.754
+  ],
+  "collision": "trunk",
+  "source_sha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+  "derived_sha256": "07ba34dcd1edd2b41f6a5b4e2d6f0d689c4918713ef586580e71febea209988e",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_pinerounda/1.1.0"
+ },
+ {
+  "number": 8,
+  "source": "kenney_nature_tree_pinetalla",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_pine_tall",
+  "used_in": [
+   "ruined_forest",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 78,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_FoliageDark"
+  ],
+  "scale": 7.1914,
+  "bounds_m": [
+   2.778,
+   11.0,
+   2.819
+  ],
+  "collision": "trunk",
+  "source_sha256": "e0a56eb196d8a64ba86c7304d607136e17e6f9ad748dffcf86bd53b18b91b196",
+  "derived_sha256": "6234e0af8a02c886e420f5dfc192d8066ee63345a773a61a33146c403dacc961",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_pinetalla/1.1.0"
+ },
+ {
+  "number": 9,
+  "source": "kenney_nature_tree_palm",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_palm",
+  "used_in": [
+   "agdao",
+   "zr_coilwood"
+  ],
+  "triangles": 186,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_JungleLeaf"
+  ],
+  "scale": 4.9518,
+  "bounds_m": [
+   4.632,
+   7.5,
+   5.015
+  ],
+  "collision": "trunk",
+  "source_sha256": "27bbb23d26ed788d84de6df2f7fab0acc3fe0ff16c7d08cdcfa1fffcb11de324",
+  "derived_sha256": "b23fd886be24befbea470282559f064eb38b7a9e4a8067325bd4ea0b083a64ff",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_palm/1.1.0"
+ },
+ {
+  "number": 10,
+  "source": "kenney_nature_tree_palmbend",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_palm_bend",
+  "used_in": [
+   "agdao",
+   "westreach",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 200,
+  "surfaces": 2,
+  "materials": [
+   "BH_JungleLeaf",
+   "BH_Bark"
+  ],
+  "scale": 5.0728,
+  "bounds_m": [
+   4.746,
+   7.0,
+   5.138
+  ],
+  "collision": "trunk",
+  "source_sha256": "8af9dae16ce3c03183f9457996ebdd135167199514e8f4f944ee2bd82828d5c9",
+  "derived_sha256": "a963fb42b279baa106ceb499bd6bcb3263606c1356a8d2e21adcb53065db264a",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_palmbend/1.1.0"
+ },
+ {
+  "number": 11,
+  "source": "kenney_nature_tree_palmshort",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_palm_short",
+  "used_in": [
+   "agdao",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 190,
+  "surfaces": 2,
+  "materials": [
+   "BH_JungleLeaf",
+   "BH_Bark"
+  ],
+  "scale": 3.219,
+  "bounds_m": [
+   3.329,
+   3.4,
+   3.329
+  ],
+  "collision": "none",
+  "source_sha256": "d2526ca31c144a238820aa5c0f6183c5b9cf37fd3cc037932e637cf7c473ba27",
+  "derived_sha256": "97fedbc7d846d659dadbb34f918147f1a0339d9ece29c0abf9f1ef0946f0d53c",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_palmshort/1.1.0"
+ },
+ {
+  "number": 12,
+  "source": "kenney_nature_tree_palmdetailedtall",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_palm_tall",
+  "used_in": [
+   "agdao",
+   "zr_coilwood"
+  ],
+  "triangles": 336,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_JungleLeaf"
+  ],
+  "scale": 6.6738,
+  "bounds_m": [
+   6.903,
+   9.5,
+   6.903
+  ],
+  "collision": "trunk",
+  "source_sha256": "2cbea0f9621cde884c63a7b4ad787bda1d051fa27ef3c66b9f2b65328dc53683",
+  "derived_sha256": "f0850fc58e6982514e27c084c2be44336aa21dbc29fa9d5580f5fa4b4d96ec4a",
+  "package": "canonical/.game-dev/packages/kenney_nature_tree_palmdetailedtall/1.1.0"
+ },
+ {
+  "number": 13,
+  "source": "kenney_nature_plant_bush",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_bush",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 32,
+  "surfaces": 1,
+  "materials": [
+   "BH_Foliage"
+  ],
+  "scale": 3.6818,
+  "bounds_m": [
+   1.458,
+   0.9,
+   1.458
+  ],
+  "collision": "none",
+  "source_sha256": "ae7b1beb39e242b13f5f29e3ec23ef21034b814f82297b8aa00a9bf4e1b09590",
+  "derived_sha256": "ee774789646c728e31e2ec90c04b8bf57c09a5d4d23b7ca8cd61ea27d81489ad",
+  "package": "canonical/.game-dev/packages/kenney_nature_plant_bush/1.1.0"
+ },
+ {
+  "number": 14,
+  "source": "kenney_nature_plant_bushlarge",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_bush_large",
+  "used_in": [
+   "olivar",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 60,
+  "surfaces": 1,
+  "materials": [
+   "BH_Foliage"
+  ],
+  "scale": 4.9396,
+  "bounds_m": [
+   1.849,
+   1.2,
+   1.658
+  ],
+  "collision": "none",
+  "source_sha256": "10e1d9fbf29d96d1d1a56fb2ce25ae66537505101759229afe01ae22c6c45e02",
+  "derived_sha256": "7fa53dcf92fd4614b1ef1737031baf0f1f18a51e195908e70d3e8370efbddb5c",
+  "package": "canonical/.game-dev/packages/kenney_nature_plant_bushlarge/1.1.0"
+ },
+ {
+  "number": 15,
+  "source": "kenney_nature_plant_bushsmall",
+  "kit": "nature-kit",
+  "decision": "rejected after in-game review",
+  "reason": "its 8 triangles read as a flat dark star from the gameplay camera; the kit's own bushes take its places",
+  "package": "canonical/.game-dev/packages/kenney_nature_plant_bushsmall/1.1.0"
+ },
+ {
+  "number": 16,
+  "source": "kenney_nature_plant_flattall",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_plant_leafy",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "zr_coilwood"
+  ],
+  "triangles": 32,
+  "surfaces": 1,
+  "materials": [
+   "BH_JungleLeaf"
+  ],
+  "scale": 2.8138,
+  "bounds_m": [
+   0.764,
+   0.8,
+   0.764
+  ],
+  "collision": "none",
+  "source_sha256": "b192523736f32754788de4dc7a5dcf30a58322b260ec8969120c91432a10b633",
+  "derived_sha256": "007d428c7496226876adfaa1aa54247fdebc7eec3194e32ffec595e6ba23f447",
+  "package": "canonical/.game-dev/packages/kenney_nature_plant_flattall/1.1.0"
+ },
+ {
+  "number": 17,
+  "source": "kenney_nature_grass",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_grass",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "ruined_forest",
+   "sanctuary",
+   "zr_citadel"
+  ],
+  "triangles": 132,
+  "surfaces": 1,
+  "materials": [
+   "BH_Foliage"
+  ],
+  "scale": 1.378,
+  "bounds_m": [
+   0.525,
+   0.35,
+   0.54
+  ],
+  "collision": "none",
+  "source_sha256": "260e41d3e5f2472492ed7b475c5b92a30b13ce2bad408535b5ff50574d4575e7",
+  "derived_sha256": "e7575928c4866f09cb1447b4dfaab8a65ae8ce9b1eccf727d2772c04b7a3a060",
+  "package": "canonical/.game-dev/packages/kenney_nature_grass/1.1.0"
+ },
+ {
+  "number": 18,
+  "source": "kenney_nature_grass_large",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_grass_large",
+  "used_in": [
+   "agdao",
+   "dungeon:mire",
+   "olivar",
+   "sanctuary",
+   "weeping_causeway",
+   "wyman_outpost"
+  ],
+  "triangles": 224,
+  "surfaces": 1,
+  "materials": [
+   "BH_Foliage"
+  ],
+  "scale": 1.7717,
+  "bounds_m": [
+   0.725,
+   0.45,
+   0.723
+  ],
+  "collision": "none",
+  "source_sha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd",
+  "derived_sha256": "3d684099296d43eebbf95dce42bfe3da91bb00d537cf58b04ba91daeb2f4f709",
+  "package": "canonical/.game-dev/packages/kenney_nature_grass_large/1.1.0"
+ },
+ {
+  "number": 19,
+  "source": "kenney_nature_grass_leafs",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_ground_leaves",
+  "used_in": [
+   "agdao",
+   "dungeon:fungal",
+   "dungeon:hive",
+   "dungeon:jade",
+   "dungeon:mire",
+   "dungeon:thorn",
+   "ruined_forest",
+   "zr_coilwood"
+  ],
+  "triangles": 36,
+  "surfaces": 1,
+  "materials": [
+   "BH_JungleLeaf"
+  ],
+  "scale": 2.1053,
+  "bounds_m": [
+   0.494,
+   0.3,
+   0.542
+  ],
+  "collision": "none",
+  "source_sha256": "8bc4c0b17c2e64c34e1acbf7c4a2fd8c04cfcd7155328e61767887b2ced112c7",
+  "derived_sha256": "11ebe5a2f55f7d0794198b4a8031b07d2767eeeb35c227a761c8ce8b5214c1c5",
+  "package": "canonical/.game-dev/packages/kenney_nature_grass_leafs/1.1.0"
+ },
+ {
+  "number": 20,
+  "source": "kenney_nature_flower_yellowa",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_flower_yellow",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "sanctuary",
+   "zr_citadel"
+  ],
+  "triangles": 76,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_FlowerYellow"
+  ],
+  "scale": 2.3377,
+  "bounds_m": [
+   0.372,
+   0.45,
+   0.423
+  ],
+  "collision": "none",
+  "source_sha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+  "derived_sha256": "8e373cce2ac274b3c9071ef8376ac14c7d986eee189ac595b1ac5f52c807e1db",
+  "package": "canonical/.game-dev/packages/kenney_nature_flower_yellowa/1.1.0"
+ },
+ {
+  "number": 21,
+  "source": "kenney_nature_flower_purplea",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_flower_purple",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "sanctuary",
+   "zr_citadel"
+  ],
+  "triangles": 76,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_FlowerViolet"
+  ],
+  "scale": 2.0619,
+  "bounds_m": [
+   0.328,
+   0.5,
+   0.373
+  ],
+  "collision": "none",
+  "source_sha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+  "derived_sha256": "b47abdb9fa80dd29ffd0ee8f0ad986195b04f00acb0bc6d343c56001903b2a07",
+  "package": "canonical/.game-dev/packages/kenney_nature_flower_purplea/1.1.0"
+ },
+ {
+  "number": 22,
+  "source": "kenney_nature_mushroom_tangroup",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_mushrooms_pale",
+  "used_in": [
+   "dungeon:fungal",
+   "dungeon:hive",
+   "dungeon:jade",
+   "dungeon:mire",
+   "ruined_forest",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 144,
+  "surfaces": 2,
+  "materials": [
+   "BH_Fungus",
+   "BH_MushroomPale"
+  ],
+  "scale": 1.3973,
+  "bounds_m": [
+   0.377,
+   0.35,
+   0.355
+  ],
+  "collision": "none",
+  "source_sha256": "2dc979485f164d7dce34329096271f44e0c9ea329c104251d94bcfbc8f8fe05e",
+  "derived_sha256": "699a2539c44b9e10d5254c8020bae9ffb79b203004c5dc53141100ff46692cb9",
+  "package": "canonical/.game-dev/packages/kenney_nature_mushroom_tangroup/1.1.0"
+ },
+ {
+  "number": 23,
+  "source": "kenney_nature_lily_large",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_lily",
+  "used_in": [
+   "olivar",
+   "wyman_outpost"
+  ],
+  "triangles": 86,
+  "surfaces": 3,
+  "materials": [
+   "BH_Foliage",
+   "BH_FlowerWhite",
+   "BH_FoliageDark"
+  ],
+  "scale": 3.0,
+  "bounds_m": [
+   0.816,
+   0.294,
+   0.942
+  ],
+  "collision": "none",
+  "source_sha256": "c8f7080df0ae3166e9d33f523b66360c2ac7556dff36cc9c8ee78b6a676c7db2",
+  "derived_sha256": "e32f5c514b317fe6ecde8c7d17d2b54c9126bc8d8f69198f16b1f67986602a76",
+  "package": "canonical/.game-dev/packages/kenney_nature_lily_large/1.1.0"
+ },
+ {
+  "number": 24,
+  "source": "kenney_nature_hanging_moss",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_hanging_moss",
+  "used_in": [
+   "catacombs",
+   "dungeon:drowned",
+   "dungeon:fungal",
+   "dungeon:hive",
+   "dungeon:mire",
+   "dungeon:solar",
+   "forgotten_temple"
+  ],
+  "triangles": 52,
+  "surfaces": 1,
+  "materials": [
+   "BH_Moss"
+  ],
+  "scale": 2.9259,
+  "bounds_m": [
+   0.468,
+   1.4,
+   0.102
+  ],
+  "collision": "none",
+  "source_sha256": "2124c2d038054f1ea89d470a6095d35c2fbdb2674916db93400ea6ed5f499cb0",
+  "derived_sha256": "c12e1bd177c7bad20340991fd8c24af02c70c43fbdb2aa8e71399b5f15d7a010",
+  "package": "canonical/.game-dev/packages/kenney_nature_hanging_moss/1.1.0"
+ },
+ {
+  "number": 25,
+  "source": "kenney_nature_rock_largea",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_a",
+  "used_in": [
+   "agdao",
+   "ruined_forest",
+   "zr_coilwood"
+  ],
+  "triangles": 80,
+  "surfaces": 2,
+  "materials": [
+   "BH_Rock",
+   "BH_Moss"
+  ],
+  "scale": 3.0,
+  "bounds_m": [
+   2.355,
+   0.779,
+   3.046
+  ],
+  "collision": "box",
+  "source_sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+  "derived_sha256": "d2d9cead096dec2d9eb2b8118ac8bbf588cfe518f384dcde6ba4461020ebeff9",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_largea/1.1.0"
+ },
+ {
+  "number": 26,
+  "source": "kenney_nature_rock_largeb",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_b",
+  "used_in": [
+   "agdao",
+   "sanctuary"
+  ],
+  "triangles": 85,
+  "surfaces": 2,
+  "materials": [
+   "BH_Rock",
+   "BH_Moss"
+  ],
+  "scale": 3.0,
+  "bounds_m": [
+   2.3,
+   1.291,
+   3.046
+  ],
+  "collision": "box",
+  "source_sha256": "caa8b025833d4dabf6d98fe2e96cf2fbd886693ac990df0db75f9d827194374b",
+  "derived_sha256": "3ff72490b203d818014b75d3fc4c60dcbb1756fbbc1eb4f3fb52a56191b00a49",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_largeb/1.1.0"
+ },
+ {
+  "number": 27,
+  "source": "kenney_nature_rock_largec",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_c",
+  "used_in": [
+   "agdao",
+   "sanctuary"
+  ],
+  "triangles": 72,
+  "surfaces": 2,
+  "materials": [
+   "BH_Rock",
+   "BH_Moss"
+  ],
+  "scale": 3.0,
+  "bounds_m": [
+   3.193,
+   0.963,
+   3.047
+  ],
+  "collision": "box",
+  "source_sha256": "23aee8b727adeaf260207af3e0615dc69aa766c6d87de1d44cbc8c2711d74dd1",
+  "derived_sha256": "d803bbb985e6d4e67d139a747e0b9937b32a4672b0aa18f5c35e9a8a415e83f0",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_largec/1.1.0"
+ },
+ {
+  "number": 28,
+  "source": "kenney_nature_rock_smalla",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_small_a",
+  "used_in": [
+   "agdao",
+   "westreach"
+  ],
+  "triangles": 16,
+  "surfaces": 2,
+  "materials": [
+   "BH_Moss",
+   "BH_Rock"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   0.722,
+   0.382,
+   0.722
+  ],
+  "collision": "none",
+  "source_sha256": "df9fff9d711e61370e8df0caa2514c89b8f8a8dc6c6fafaf4eb2ec79c5ae07c1",
+  "derived_sha256": "df6dc333e4c4402543e130db1a732fa91ed16b78de1ad68f3ff33e7bd2859d19",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_smalla/1.1.0"
+ },
+ {
+  "number": 29,
+  "source": "kenney_nature_rock_smallb",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_small_b",
+  "used_in": [
+   "ruined_forest",
+   "sanctuary",
+   "zr_coilwood"
+  ],
+  "triangles": 24,
+  "surfaces": 2,
+  "materials": [
+   "BH_Moss",
+   "BH_Rock"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   0.722,
+   0.354,
+   0.722
+  ],
+  "collision": "none",
+  "source_sha256": "11b26bc0a12e971a3b69df1401e530e24432d528c262df94b99c412e7f372763",
+  "derived_sha256": "8561eeaf7fdf7a6c017f4f7f424d48c9cdc8b775664e4d6a72bee752d0e0366b",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_smallb/1.1.0"
+ },
+ {
+  "number": 30,
+  "source": "kenney_nature_rock_smallflata",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_flat",
+  "used_in": [
+   "agdao",
+   "westreach",
+   "zr_coilwood"
+  ],
+  "triangles": 20,
+  "surfaces": 2,
+  "materials": [
+   "BH_Rock",
+   "BH_Moss"
+  ],
+  "scale": 2.4,
+  "bounds_m": [
+   1.19,
+   0.156,
+   1.031
+  ],
+  "collision": "none",
+  "source_sha256": "40ceafacfaabb0f04f93688fd8696c1464c65512bef219e1459c1f238cbbbe21",
+  "derived_sha256": "4cc73bbbc42de7212baece851845a096ad17615224c0224d08f4b8cb278a5800",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_smallflata/1.1.0"
+ },
+ {
+  "number": 31,
+  "source": "kenney_nature_rock_talla",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_rock_tall",
+  "used_in": [
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 136,
+  "surfaces": 2,
+  "materials": [
+   "BH_Rock",
+   "BH_Moss"
+  ],
+  "scale": 2.8115,
+  "bounds_m": [
+   2.764,
+   2.8,
+   1.921
+  ],
+  "collision": "box",
+  "source_sha256": "88250f236a3b75f8b55c1d8afb6af020f8a91b1e81f9fb51f7ef513420d45a2d",
+  "derived_sha256": "1436c2025b0e17a3a822ed36f6263f81297cba67435177dcb0f1478efea8acf4",
+  "package": "canonical/.game-dev/packages/kenney_nature_rock_talla/1.1.0"
+ },
+ {
+  "number": 32,
+  "source": "kenney_nature_stone_largea",
+  "kit": "nature-kit",
+  "decision": "rejected",
+  "reason": "recolour of rock_largeA (same geometry); not a distinct source model",
+  "package": "canonical/.game-dev/packages/kenney_nature_stone_largea/1.1.0"
+ },
+ {
+  "number": 33,
+  "source": "kenney_nature_stone_smallflata",
+  "kit": "nature-kit",
+  "decision": "rejected",
+  "reason": "recolour of rock_smallFlatA (same geometry)",
+  "package": "canonical/.game-dev/packages/kenney_nature_stone_smallflata/1.1.0"
+ },
+ {
+  "number": 34,
+  "source": "kenney_nature_stump_old",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_stump_old",
+  "used_in": [
+   "dungeon:fungal",
+   "dungeon:hive",
+   "dungeon:mire",
+   "dungeon:thorn",
+   "ruined_forest",
+   "westreach",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 120,
+  "surfaces": 1,
+  "materials": [
+   "BH_Bark"
+  ],
+  "scale": 2.2514,
+  "bounds_m": [
+   0.803,
+   0.6,
+   0.835
+  ],
+  "collision": "box",
+  "source_sha256": "4c2d2da34804c1662c6a776a9d60fe4449e6f6fdd50914bfec7d5cca3e9ceddb",
+  "derived_sha256": "d587df9c15f5fb668710f1bdfb91834cd2aa872126efd0f12b0cbaed28195c5d",
+  "package": "canonical/.game-dev/packages/kenney_nature_stump_old/1.1.0"
+ },
+ {
+  "number": 35,
+  "source": "kenney_nature_stump_rounddetailed",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_stump_cut",
+  "used_in": [
+   "agdao",
+   "ruined_forest",
+   "sanctuary",
+   "westreach",
+   "wyman_outpost"
+  ],
+  "triangles": 96,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_Wood"
+  ],
+  "scale": 2.1792,
+  "bounds_m": [
+   0.777,
+   0.45,
+   0.808
+  ],
+  "collision": "box",
+  "source_sha256": "3017359bd0bdf84fa137f8aca33b31b1a54c3a3f11d36e1d0995868dedd53768",
+  "derived_sha256": "b9f3e86fb0325b0c91e757702e1af138ff368e595eb4fcbb5ab4ba852baa77c3",
+  "package": "canonical/.game-dev/packages/kenney_nature_stump_rounddetailed/1.1.0"
+ },
+ {
+  "number": 36,
+  "source": "kenney_nature_log",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_log",
+  "used_in": [
+   "agdao",
+   "dungeon:cavern",
+   "dungeon:fungal",
+   "dungeon:hideout",
+   "dungeon:hive",
+   "dungeon:mire",
+   "dungeon:thorn",
+   "ruined_forest",
+   "sanctuary",
+   "weeping_causeway",
+   "westreach",
+   "wyman_outpost",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 200,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_Wood"
+  ],
+  "scale": 3.6,
+  "bounds_m": [
+   0.842,
+   0.624,
+   2.556
+  ],
+  "collision": "box",
+  "source_sha256": "8c8fe8f6adfc03a3c0cd6cb24961ff74be96c2da284d70322f05797d049972d6",
+  "derived_sha256": "5c61bcec503297a79566c3a615ae3e15d838735f618c0107de5c2c2821a444b2",
+  "package": "canonical/.game-dev/packages/kenney_nature_log/1.1.0"
+ },
+ {
+  "number": 37,
+  "source": "kenney_nature_log_stack",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_log_stack",
+  "used_in": [
+   "agdao",
+   "catacombs",
+   "dungeon:cavern",
+   "dungeon:ember",
+   "dungeon:hideout",
+   "dungeon:obsidian",
+   "dungeon:storm",
+   "dungeon:thorn",
+   "dungeon:vein",
+   "ruined_forest",
+   "sanctuary",
+   "westreach",
+   "wyman_outpost",
+   "zr_barrens",
+   "zr_citadel"
+  ],
+  "triangles": 184,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bark",
+   "BH_Wood"
+  ],
+  "scale": 2.6,
+  "bounds_m": [
+   1.104,
+   0.901,
+   1.846
+  ],
+  "collision": "box",
+  "source_sha256": "90eaae4a01ba1f25c2f0c6d83087e4a7a8fac684f2452615245333968d118d68",
+  "derived_sha256": "05e848078f9cfa0a6803fcf18f38caa0068b26705df9064b7b6811e4facd04bb",
+  "package": "canonical/.game-dev/packages/kenney_nature_log_stack/1.1.0"
+ },
+ {
+  "number": 38,
+  "source": "kenney_nature_fence_planks",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_fence",
+  "used_in": [
+   "agdao",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 96,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.6,
+  "bounds_m": [
+   2.6,
+   0.897,
+   0.249
+  ],
+  "collision": "box",
+  "source_sha256": "2db68f60d24443dbeab05dedd92fcc665d0e21bd261c6a668ea9022a732a06a9",
+  "derived_sha256": "3686dbbe2a38b6072aebda77309e963b19bd0eb76c6b164a03e59bb568068c0b",
+  "package": "canonical/.game-dev/packages/kenney_nature_fence_planks/1.1.0"
+ },
+ {
+  "number": 39,
+  "source": "kenney_nature_fence_gate",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_fence_gate",
+  "used_in": [
+   "agdao",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 524,
+  "surfaces": 2,
+  "materials": [
+   "BH_WoodDark",
+   "BH_Stone"
+  ],
+  "scale": 2.6,
+  "bounds_m": [
+   2.6,
+   0.897,
+   0.182
+  ],
+  "collision": "none",
+  "source_sha256": "34d10d5620179b8a211a01eea837caa828c0782422f0b408e1a5838788888436",
+  "derived_sha256": "4bb776f96efc57f109146c0fcc881db075a7add1b2cc2c3e201ef3144372e59f",
+  "package": "canonical/.game-dev/packages/kenney_nature_fence_gate/1.1.0"
+ },
+ {
+  "number": 40,
+  "source": "kenney_nature_pot_small",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_pot_small",
+  "used_in": [
+   "agdao",
+   "int_refugee",
+   "int_widow"
+  ],
+  "triangles": 72,
+  "surfaces": 2,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Dirt"
+  ],
+  "scale": 2.0522,
+  "bounds_m": [
+   0.664,
+   0.55,
+   0.575
+  ],
+  "collision": "none",
+  "source_sha256": "1141d9e16099c2103f1a177de0cae4ea979a3246439e33074923e4cfe3098df8",
+  "derived_sha256": "8f6370b651aa0fcbf5523e3da9d2e6b7aaf050dd5137373234c798f26b6430ee",
+  "package": "canonical/.game-dev/packages/kenney_nature_pot_small/1.1.0"
+ },
+ {
+  "number": 41,
+  "source": "kenney_nature_pot_large",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_planter",
+  "used_in": [
+   "agdao",
+   "olivar",
+   "sanctuary"
+  ],
+  "triangles": 68,
+  "surfaces": 2,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Dirt"
+  ],
+  "scale": 2.2,
+  "bounds_m": [
+   1.24,
+   0.44,
+   1.074
+  ],
+  "collision": "box",
+  "source_sha256": "57e60214bc6ab1dc3764c9ffe80091ff45f2bfd49fbc313c1b68dcaab1537aef",
+  "derived_sha256": "5c102faf6d9b27193e630d28bd87ac2974dec8da18ca8089852388c2efafbdbf",
+  "package": "canonical/.game-dev/packages/kenney_nature_pot_large/1.1.0"
+ },
+ {
+  "number": 42,
+  "source": "kenney_nature_crop_carrot",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_carrots",
+  "used_in": [
+   "agdao",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 148,
+  "surfaces": 2,
+  "materials": [
+   "BH_Foliage",
+   "BH_Produce"
+  ],
+  "scale": 0.7265,
+  "bounds_m": [
+   0.249,
+   0.45,
+   0.249
+  ],
+  "collision": "none",
+  "source_sha256": "2a3641c609dd837a4feebb4f5c95d4cd43c3046e800acd416f4f6a3b923ba9d8",
+  "derived_sha256": "39af1b869f0f2bdcccaa3629d0f6a226e4441c1bdfa84eb8a3e4d3d3368f7418",
+  "package": "canonical/.game-dev/packages/kenney_nature_crop_carrot/1.1.0"
+ },
+ {
+  "number": 43,
+  "source": "kenney_nature_crop_pumpkin",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_pumpkin",
+  "used_in": [
+   "agdao",
+   "sanctuary",
+   "westreach"
+  ],
+  "triangles": 120,
+  "surfaces": 2,
+  "materials": [
+   "BH_Produce",
+   "BH_Foliage"
+  ],
+  "scale": 1.348,
+  "bounds_m": [
+   0.595,
+   0.45,
+   0.609
+  ],
+  "collision": "none",
+  "source_sha256": "5b4878c5996033629419c26ac32153ce8ac06bbbdac98e4fa8a5cbab98f78077",
+  "derived_sha256": "532074712e584b526b335cb950e155a98b585eebe5390b5135bd563f84807ebc",
+  "package": "canonical/.game-dev/packages/kenney_nature_crop_pumpkin/1.1.0"
+ },
+ {
+  "number": 44,
+  "source": "kenney_nature_crops_wheatstageb",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_wheat",
+  "used_in": [
+   "westreach"
+  ],
+  "triangles": 360,
+  "surfaces": 1,
+  "materials": [
+   "BH_Thatch"
+  ],
+  "scale": 1.8694,
+  "bounds_m": [
+   1.009,
+   1.0,
+   0.835
+  ],
+  "collision": "none",
+  "source_sha256": "589db4d6fe0bd7616c1f1c2f10a335704b2dad5d24638dc08a5b2e5334c68852",
+  "derived_sha256": "82f5815ead4f77bf1218ea72291b64eda0a9bf9cd35f888acbdf069c2f93b570",
+  "package": "canonical/.game-dev/packages/kenney_nature_crops_wheatstageb/1.1.0"
+ },
+ {
+  "number": 45,
+  "source": "kenney_nature_crops_bamboostageb",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_bamboo",
+  "used_in": [
+   "agdao"
+  ],
+  "triangles": 564,
+  "surfaces": 1,
+  "materials": [
+   "BH_Foliage"
+  ],
+  "scale": 3.5955,
+  "bounds_m": [
+   1.223,
+   3.2,
+   1.107
+  ],
+  "collision": "none",
+  "source_sha256": "238c4cbeedf747dea96d579cf63301d35bb8709310f0405596c8f988dcc366e6",
+  "derived_sha256": "807b133e418d4a35ec6a803afee5fad0ab8e2665b4c688ec7820d28ae1728385",
+  "package": "canonical/.game-dev/packages/kenney_nature_crops_bamboostageb/1.1.0"
+ },
+ {
+  "number": 46,
+  "source": "kenney_nature_tent_smallopen",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_tent",
+  "used_in": [
+   "wyman_outpost"
+  ],
+  "triangles": 224,
+  "surfaces": 3,
+  "materials": [
+   "BH_ClothCream",
+   "BH_Cloth",
+   "BH_Wood"
+  ],
+  "scale": 3.9207,
+  "bounds_m": [
+   2.147,
+   2.2,
+   2.613
+  ],
+  "collision": "box",
+  "source_sha256": "d32c3f7a5926de03521a012774316d38e09c27bd6dbae7cefdb01debe003ecdd",
+  "derived_sha256": "d91396552281f79996bd49f314ec4a09e35627dcf18c95bffe48cab327a3ce74",
+  "package": "canonical/.game-dev/packages/kenney_nature_tent_smallopen/1.1.0"
+ },
+ {
+  "number": 47,
+  "source": "kenney_nature_campfire_stones",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_fire_ring",
+  "used_in": [
+   "wyman_outpost"
+  ],
+  "triangles": 264,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.2,
+  "bounds_m": [
+   1.19,
+   0.171,
+   1.134
+  ],
+  "collision": "none",
+  "source_sha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+  "derived_sha256": "f95a67aa29eac1ed8f00b8f96dd6104809af32b00759c7b56fc737760c0a0e51",
+  "package": "canonical/.game-dev/packages/kenney_nature_campfire_stones/1.1.0"
+ },
+ {
+  "number": 48,
+  "source": "kenney_nature_canoe",
+  "kit": "nature-kit",
+  "decision": "accepted",
+  "runtime": "kd_canoe",
+  "used_in": [
+   "olivar"
+  ],
+  "triangles": 200,
+  "surfaces": 2,
+  "materials": [
+   "BH_WoodDark",
+   "BH_Wood"
+  ],
+  "scale": 3.0,
+  "bounds_m": [
+   0.9,
+   0.548,
+   3.45
+  ],
+  "collision": "none",
+  "source_sha256": "ad9c7a315f55accbce8d1ee3dc853f919f01f97ab4e3096bb235d1815aed6941",
+  "derived_sha256": "e698c20cb1c8b462e5fe2cceb3217f34c6e2588d0a80fd3001a06fe1c119c215",
+  "package": "canonical/.game-dev/packages/kenney_nature_canoe/1.1.0"
+ },
+ {
+  "number": 49,
+  "source": "kenney_furniture_bench",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bench",
+  "used_in": [
+   "agdao",
+   "int_tavern",
+   "olivar",
+   "sanctuary",
+   "wyman_outpost"
+  ],
+  "triangles": 170,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.1,
+  "bounds_m": [
+   0.84,
+   0.987,
+   0.42
+  ],
+  "collision": "box",
+  "source_sha256": "ba05a6d23a5a5a44da016757632070e47ff7587ce10e2f6d6d52328b4cf5489b",
+  "derived_sha256": "99ea4ec193790ef6fa47c6beda62fad4312a48de80ce920d97e05b96576e5180",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bench/1.1.0"
+ },
+ {
+  "number": 50,
+  "source": "kenney_furniture_chair",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_chair",
+  "used_in": [
+   "dungeon:hideout",
+   "int_tavern",
+   "int_widow"
+  ],
+  "triangles": 170,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.45,
+   1.058,
+   0.45
+  ],
+  "collision": "box",
+  "source_sha256": "c8a11eec93e89e31250ba91afc1b8d56c3bec7ae86640fd1239f595ff4180883",
+  "derived_sha256": "b0d242aaeed5b3c52f80affbe504753890b229cb76f9db3807f1e42a812db1eb",
+  "package": "canonical/.game-dev/packages/kenney_furniture_chair/1.1.0"
+ },
+ {
+  "number": 51,
+  "source": "kenney_furniture_chairrounded",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_chair_round",
+  "used_in": [
+   "dungeon:aether",
+   "dungeon:orrery",
+   "int_lantern",
+   "int_swordfin"
+  ],
+  "triangles": 280,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.45,
+   1.024,
+   0.45
+  ],
+  "collision": "box",
+  "source_sha256": "53f4933ec547179c499f04dbda1231cf44b83ec82c7f4ab981cdf680aee5c973",
+  "derived_sha256": "9a00efc04e795103ddeafd7babfe796d827459d7a5276350e20029b5bd1ba8e3",
+  "package": "canonical/.game-dev/packages/kenney_furniture_chairrounded/1.1.0"
+ },
+ {
+  "number": 52,
+  "source": "kenney_furniture_stoolbarsquare",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_stool_square",
+  "used_in": [
+   "agdao",
+   "dungeon:hideout"
+  ],
+  "triangles": 142,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_Leather"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   0.307,
+   0.81,
+   0.295
+  ],
+  "collision": "none",
+  "source_sha256": "a7e1099d64eb35416d4d8c9b16921ef12ae7c1c1e6fff5ea75f3ae19cc934a8b",
+  "derived_sha256": "3e17c355413877ad6426dd7194dd3736781a89132d7ec5f00efa7254a14a3dde",
+  "package": "canonical/.game-dev/packages/kenney_furniture_stoolbarsquare/1.1.0"
+ },
+ {
+  "number": 53,
+  "source": "kenney_furniture_table",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_table",
+  "used_in": [
+   "dungeon:hideout"
+  ],
+  "triangles": 120,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.893,
+   0.735,
+   1.007
+  ],
+  "collision": "box",
+  "source_sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+  "derived_sha256": "66797cfdd5ceac679e465a544c6304fa910bb98b31daaa6f3b842337a48b6d5a",
+  "package": "canonical/.game-dev/packages/kenney_furniture_table/1.1.0"
+ },
+ {
+  "number": 54,
+  "source": "kenney_furniture_tableround",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_table_round",
+  "used_in": [
+   "agdao"
+  ],
+  "triangles": 80,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.559,
+   0.825,
+   1.8
+  ],
+  "collision": "box",
+  "source_sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+  "derived_sha256": "7413cb2f6e314e4664a4901d26b13e37ae6d9fa48b38680b4b8789caa10c6de7",
+  "package": "canonical/.game-dev/packages/kenney_furniture_tableround/1.1.0"
+ },
+ {
+  "number": 55,
+  "source": "kenney_furniture_tablecross",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_table_cross",
+  "used_in": [
+   "dungeon:hideout"
+  ],
+  "triangles": 178,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.917,
+   0.782,
+   1.007
+  ],
+  "collision": "box",
+  "source_sha256": "f0d83392aff5df82f6c9585cadff694643dbd30a4ff2b8bb01a00a7a161338a3",
+  "derived_sha256": "2dfd4e4164f503e6e760d391e1da8a4fe63dd113ccc368134988fb9dc2cf347b",
+  "package": "canonical/.game-dev/packages/kenney_furniture_tablecross/1.1.0"
+ },
+ {
+  "number": 56,
+  "source": "kenney_furniture_tablecloth",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_table_cloth",
+  "used_in": [
+   "dungeon:gilded"
+  ],
+  "triangles": 144,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_ClothCream"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.893,
+   0.735,
+   1.007
+  ],
+  "collision": "box",
+  "source_sha256": "64de52b5c4370724c29feefd68a65b157c55c88592e2096987bbce007ae80bcb",
+  "derived_sha256": "18e60546e44b0c92c165e781d484e049725c51083dcd5a97f7787be964778bdf",
+  "package": "canonical/.game-dev/packages/kenney_furniture_tablecloth/1.1.0"
+ },
+ {
+  "number": 57,
+  "source": "kenney_furniture_sidetable",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_side_table",
+  "used_in": [
+   "agdao",
+   "dungeon:hideout",
+   "int_cartographer",
+   "int_keeper",
+   "int_lantern",
+   "int_netmender"
+  ],
+  "triangles": 118,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_WoodDark"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.203,
+   0.865,
+   0.495
+  ],
+  "collision": "box",
+  "source_sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+  "derived_sha256": "6de7955ccc1280112f635a0be127228c1a018029b32df0c1a5ce2c5b7c311cf2",
+  "package": "canonical/.game-dev/packages/kenney_furniture_sidetable/1.1.0"
+ },
+ {
+  "number": 58,
+  "source": "kenney_furniture_sidetabledrawers",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_drawers",
+  "used_in": [
+   "int_guildhouse",
+   "int_swordfin"
+  ],
+  "triangles": 238,
+  "surfaces": 3,
+  "materials": [
+   "BH_Wood",
+   "BH_WoodDark",
+   "BH_Iron"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.203,
+   0.865,
+   0.5
+  ],
+  "collision": "box",
+  "source_sha256": "911145653c11b103b2c2e84f3d019205d1886186015c3b52aceddc3801ae8fdf",
+  "derived_sha256": "e950a87a97e409831607e83430ad7b5c1779a7fda349a81dfc28655050d18102",
+  "package": "canonical/.game-dev/packages/kenney_furniture_sidetabledrawers/1.1.0"
+ },
+ {
+  "number": 59,
+  "source": "kenney_furniture_desk",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_desk",
+  "used_in": [
+   "dungeon:aether",
+   "dungeon:orrery"
+  ],
+  "triangles": 198,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_Iron"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.653,
+   0.865,
+   0.883
+  ],
+  "collision": "box",
+  "source_sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+  "derived_sha256": "0070b4812932200b5f0c5f4158f472a8350d122088c365e7e2e7560d097bb456",
+  "package": "canonical/.game-dev/packages/kenney_furniture_desk/1.1.0"
+ },
+ {
+  "number": 60,
+  "source": "kenney_furniture_bookcaseopen",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bookcase_open",
+  "used_in": [
+   "dungeon:aether",
+   "dungeon:orrery",
+   "forgotten_temple"
+  ],
+  "triangles": 320,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.9,
+   1.98,
+   0.562
+  ],
+  "collision": "box",
+  "source_sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+  "derived_sha256": "8e837176db55bb82ecd43b15df35e83696fcf7f249bb89a6b044b78b0719b7af",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseopen/1.1.0"
+ },
+ {
+  "number": 61,
+  "source": "kenney_furniture_bookcaseopenlow",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bookcase_low",
+  "used_in": [
+   "int_cartographer",
+   "int_guildhouse"
+  ],
+  "triangles": 184,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.9,
+   0.9,
+   0.562
+  ],
+  "collision": "box",
+  "source_sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+  "derived_sha256": "6172836be9c73962e78a59dc7362f725890c2f313b61aaaa3d6e886fe9aa9d5e",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseopenlow/1.1.0"
+ },
+ {
+  "number": 62,
+  "source": "kenney_furniture_bookcaseclosed",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bookcase_closed",
+  "used_in": [
+   "dungeon:orrery",
+   "int_keeper"
+  ],
+  "triangles": 372,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.9,
+   1.912,
+   0.562
+  ],
+  "collision": "box",
+  "source_sha256": "9d210448de5e1179541da895450bbc7a39f4cd673d677654cd6b134e4ea0e047",
+  "derived_sha256": "8b3e750accb91f8d693d1fb0e815a41c78eed354cd510352e459dde05c71e8a1",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosed/1.1.0"
+ },
+ {
+  "number": 63,
+  "source": "kenney_furniture_bookcaseclosedwide",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bookcase_wide",
+  "used_in": [
+   "dungeon:aether",
+   "dungeon:crypt",
+   "dungeon:gilded",
+   "dungeon:orrery"
+  ],
+  "triangles": 372,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   1.8,
+   1.777,
+   0.562
+  ],
+  "collision": "box",
+  "source_sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+  "derived_sha256": "c26fef8e9215c0c4498696a011551373c6e5fbf794b28fb64843c598ee9b57ba",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bookcaseclosedwide/1.1.0"
+ },
+ {
+  "number": 64,
+  "source": "kenney_furniture_books",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_books",
+  "used_in": [
+   "dungeon:aether",
+   "dungeon:gilded",
+   "dungeon:orrery",
+   "dungeon:storm",
+   "forgotten_temple",
+   "int_cartographer",
+   "int_guildhouse",
+   "int_keeper",
+   "int_lantern",
+   "int_swordfin"
+  ],
+  "triangles": 62,
+  "surfaces": 4,
+  "materials": [
+   "BH_Leather",
+   "BH_Paper",
+   "BH_ClothGreen",
+   "BH_Brass"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.339,
+   0.234,
+   0.213
+  ],
+  "collision": "none",
+  "source_sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+  "derived_sha256": "5402a580102d4e414d0003860f111792848826eef7c897d96e6d5dc8fa751091",
+  "package": "canonical/.game-dev/packages/kenney_furniture_books/1.1.0"
+ },
+ {
+  "number": 65,
+  "source": "kenney_furniture_bedsingle",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bed_single",
+  "used_in": [
+   "dungeon:hideout"
+  ],
+  "triangles": 214,
+  "surfaces": 4,
+  "materials": [
+   "BH_ClothCream",
+   "BH_Wood",
+   "BH_Iron",
+   "BH_ClothRed"
+  ],
+  "scale": 1.9,
+  "bounds_m": [
+   1.085,
+   0.712,
+   2.138
+  ],
+  "collision": "box",
+  "source_sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+  "derived_sha256": "03a4e522156245966328203e20d1952a5a2c78a25a4288ceaf6f0c561ce31c9e",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bedsingle/1.1.0"
+ },
+ {
+  "number": 66,
+  "source": "kenney_furniture_beddouble",
+  "kit": "furniture-kit",
+  "decision": "deferred",
+  "reason": "the existing bed_double already fits every room that needs one",
+  "package": "canonical/.game-dev/packages/kenney_furniture_beddouble/1.1.0"
+ },
+ {
+  "number": 67,
+  "source": "kenney_furniture_bedbunk",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_bed_bunk",
+  "used_in": [
+   "catacombs",
+   "dungeon:hideout",
+   "int_refugee"
+  ],
+  "triangles": 580,
+  "surfaces": 3,
+  "materials": [
+   "BH_Wood",
+   "BH_ClothCream",
+   "BH_Cloth"
+  ],
+  "scale": 1.9,
+  "bounds_m": [
+   1.085,
+   1.615,
+   2.081
+  ],
+  "collision": "box",
+  "source_sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+  "derived_sha256": "8b26e5992e8f33207e81e3ab4f022faaa18faf4f4c6f4d7409d1824d6d8b9193",
+  "package": "canonical/.game-dev/packages/kenney_furniture_bedbunk/1.1.0"
+ },
+ {
+  "number": 68,
+  "source": "kenney_furniture_pillow",
+  "kit": "furniture-kit",
+  "decision": "deferred",
+  "reason": "the prepared beds include pillows; a loose modern pillow adds nothing",
+  "package": "canonical/.game-dev/packages/kenney_furniture_pillow/1.1.0"
+ },
+ {
+  "number": 69,
+  "source": "kenney_furniture_rugrectangle",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_rug_long",
+  "used_in": [
+   "int_swordfin"
+  ],
+  "triangles": 28,
+  "surfaces": 2,
+  "materials": [
+   "BH_ClothRed",
+   "BH_ClothOchre"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   3.14,
+   0.02,
+   1.84
+  ],
+  "collision": "none",
+  "source_sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+  "derived_sha256": "b5ba2aa342b664f04f4d64ccc923f0269638a9893569d006e64b9b0773c68b31",
+  "package": "canonical/.game-dev/packages/kenney_furniture_rugrectangle/1.1.0"
+ },
+ {
+  "number": 70,
+  "source": "kenney_furniture_ruground",
+  "kit": "furniture-kit",
+  "decision": "deferred",
+  "reason": "the existing rug_round fills this role",
+  "package": "canonical/.game-dev/packages/kenney_furniture_ruground/1.1.0"
+ },
+ {
+  "number": 71,
+  "source": "kenney_furniture_coatrackstanding",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_coat_rack",
+  "used_in": [
+   "int_guildhouse",
+   "int_tavern"
+  ],
+  "triangles": 190,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.614,
+   1.732,
+   0.614
+  ],
+  "collision": "box",
+  "source_sha256": "d8231c22dab63ceb9fc8678f6c8ceafc62afa8726b51a73b4ce349043d3cdc91",
+  "derived_sha256": "856b4f20c3b333ef69e8916a5bdb826cf4ced31b0d3b675dadde4acec2923eb9",
+  "package": "canonical/.game-dev/packages/kenney_furniture_coatrackstanding/1.1.0"
+ },
+ {
+  "number": 72,
+  "source": "kenney_furniture_plantsmall1",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_plant_pot_a",
+  "used_in": [
+   "int_widow",
+   "olivar",
+   "sanctuary"
+  ],
+  "triangles": 102,
+  "surfaces": 2,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Foliage"
+  ],
+  "scale": 2.4,
+  "bounds_m": [
+   0.227,
+   0.336,
+   0.227
+  ],
+  "collision": "none",
+  "source_sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+  "derived_sha256": "137a19189d8af25190e7c7925a6962447991532a9c052a3bbbb1650c439eda39",
+  "package": "canonical/.game-dev/packages/kenney_furniture_plantsmall1/1.1.0"
+ },
+ {
+  "number": 73,
+  "source": "kenney_furniture_plantsmall2",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_plant_pot_b",
+  "used_in": [
+   "int_cartographer"
+  ],
+  "triangles": 158,
+  "surfaces": 2,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Foliage"
+  ],
+  "scale": 2.4,
+  "bounds_m": [
+   0.227,
+   0.336,
+   0.227
+  ],
+  "collision": "none",
+  "source_sha256": "d7c8ff42c66dd4f9238a73570549813d1ca6c5f6f661d7af9cb764c4fce314b9",
+  "derived_sha256": "3ac220145e191675768dbf8d7f9136802a7f232b4ceb8450baccfa878654f2b1",
+  "package": "canonical/.game-dev/packages/kenney_furniture_plantsmall2/1.1.0"
+ },
+ {
+  "number": 74,
+  "source": "kenney_furniture_pottedplant",
+  "kit": "furniture-kit",
+  "decision": "accepted",
+  "runtime": "kd_plant_tall",
+  "used_in": [
+   "agdao",
+   "int_guildhouse",
+   "sanctuary"
+  ],
+  "triangles": 60,
+  "surfaces": 3,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Dirt",
+   "BH_Foliage"
+  ],
+  "scale": 2.25,
+  "bounds_m": [
+   0.477,
+   1.472,
+   0.543
+  ],
+  "collision": "none",
+  "source_sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+  "derived_sha256": "640a5ce067fe41dff8c03bf23bf31fc6bbfa36742aec8141c9de3151c774b70e",
+  "package": "canonical/.game-dev/packages/kenney_furniture_pottedplant/1.1.0"
+ },
+ {
+  "number": 75,
+  "source": "kenney_pirate_barrel",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_barrel",
+  "used_in": [
+   "agdao",
+   "dungeon:drowned",
+   "dungeon:ember",
+   "dungeon:fungal",
+   "dungeon:hideout",
+   "dungeon:mire",
+   "dungeon:obsidian",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:storm",
+   "dungeon:vein",
+   "olivar",
+   "sanctuary",
+   "weeping_causeway",
+   "westreach",
+   "wyman_outpost",
+   "zr_barrens",
+   "zr_citadel"
+  ],
+  "triangles": 148,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_Iron"
+  ],
+  "scale": 0.7729,
+  "bounds_m": [
+   1.033,
+   0.95,
+   1.033
+  ],
+  "collision": "box",
+  "source_sha256": "fa80c76d56fb301c377b01a5864360dc71804e098081a8b10afbd2e3ba188fd2",
+  "derived_sha256": "d497ce3a40ec9eee2b30aac6f7eac23431ede5cc009bed81d7bd4d613ea82c59",
+  "package": "canonical/.game-dev/packages/kenney_pirate_barrel/1.1.0"
+ },
+ {
+  "number": 76,
+  "source": "kenney_pirate_crate",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_crate",
+  "used_in": [
+   "agdao",
+   "dungeon:cavern",
+   "dungeon:crystal",
+   "dungeon:drowned",
+   "dungeon:ember",
+   "dungeon:fungal",
+   "dungeon:hideout",
+   "dungeon:mire",
+   "dungeon:obsidian",
+   "dungeon:prism",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:storm",
+   "dungeon:thorn",
+   "dungeon:vein",
+   "int_netmender",
+   "olivar",
+   "sanctuary",
+   "weeping_causeway",
+   "westreach",
+   "wyman_outpost",
+   "zr_barrens",
+   "zr_citadel"
+  ],
+  "triangles": 76,
+  "surfaces": 2,
+  "materials": [
+   "BH_WoodDark",
+   "BH_Wood"
+  ],
+  "scale": 0.9,
+  "bounds_m": [
+   0.97,
+   0.693,
+   1.178
+  ],
+  "collision": "box",
+  "source_sha256": "000d22f877d2a6f766d07d8cb3ea2b798c940b3480304d973e94e93069dd3a83",
+  "derived_sha256": "47d3803176c66902321d247339252d7b2d298c93a4ebbad7bdf8d18c1a0bd062",
+  "package": "canonical/.game-dev/packages/kenney_pirate_crate/1.1.0"
+ },
+ {
+  "number": 77,
+  "source": "kenney_pirate_crate_bottles",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_crate_bottles",
+  "used_in": [
+   "catacombs",
+   "dungeon:hideout",
+   "int_tavern",
+   "sanctuary"
+  ],
+  "triangles": 572,
+  "surfaces": 4,
+  "materials": [
+   "BH_Wood",
+   "BH_WoodDark",
+   "BH_Thatch",
+   "BH_Bottle"
+  ],
+  "scale": 0.9,
+  "bounds_m": [
+   0.97,
+   0.951,
+   1.178
+  ],
+  "collision": "box",
+  "source_sha256": "3f856e1a9bb78ae9cf69c5d3ed57a4367e4e0856623d275dd99bae23e80886c1",
+  "derived_sha256": "00c95d3da73cfdb6e1476ae306e9f683b09d4941b9f972195a9eddcca02d16bb",
+  "package": "canonical/.game-dev/packages/kenney_pirate_crate_bottles/1.1.0"
+ },
+ {
+  "number": 78,
+  "source": "kenney_pirate_bottle",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_bottle",
+  "used_in": [
+   "dungeon:hideout",
+   "int_refugee",
+   "int_tavern"
+  ],
+  "triangles": 124,
+  "surfaces": 2,
+  "materials": [
+   "BH_Bottle",
+   "BH_Rope"
+  ],
+  "scale": 0.3369,
+  "bounds_m": [
+   0.123,
+   0.3,
+   0.123
+  ],
+  "collision": "none",
+  "source_sha256": "0d176bdb350ad7b6d29ac60f7064c0f84c645105e33276c24dc81c97e8dc5a6c",
+  "derived_sha256": "e8bdb1d565aef821273a788a7835e851d85a788ff5ef8e216d332f0019d9d84f",
+  "package": "canonical/.game-dev/packages/kenney_pirate_bottle/1.1.0"
+ },
+ {
+  "number": 79,
+  "source": "kenney_pirate_bottle_large",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_bottle_large",
+  "used_in": [
+   "dungeon:drowned",
+   "dungeon:hideout",
+   "dungeon:obsidian",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:storm",
+   "int_netmender",
+   "int_tavern"
+  ],
+  "triangles": 108,
+  "surfaces": 2,
+  "materials": [
+   "BH_Terracotta",
+   "BH_Rope"
+  ],
+  "scale": 0.5054,
+  "bounds_m": [
+   0.235,
+   0.45,
+   0.235
+  ],
+  "collision": "none",
+  "source_sha256": "36f8604a2cf0a50215b91610a2d28634e57afc9992908072000208a2ee20c77c",
+  "derived_sha256": "7c5dd95a52fb13e2c43b7fbb7d5087998c56f77e8239fab2d6586f87cd7b6662",
+  "package": "canonical/.game-dev/packages/kenney_pirate_bottle_large/1.1.0"
+ },
+ {
+  "number": 80,
+  "source": "kenney_pirate_chest",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_chest",
+  "used_in": [
+   "dungeon:crypt",
+   "dungeon:gilded",
+   "dungeon:hideout"
+  ],
+  "triangles": 232,
+  "surfaces": 2,
+  "materials": [
+   "BH_Iron",
+   "BH_Wood"
+  ],
+  "scale": 0.5194,
+  "bounds_m": [
+   0.662,
+   0.7,
+   0.682
+  ],
+  "collision": "box",
+  "source_sha256": "67765386e504069b85b33cfcb7b13504a49c64d206d8b8302c420f72e0ba6631",
+  "derived_sha256": "11bdf4ddd175309f01b254e928f72368382a40a6a186fbe01a2130e4c4072e05",
+  "package": "canonical/.game-dev/packages/kenney_pirate_chest/1.1.0"
+ },
+ {
+  "number": 81,
+  "source": "kenney_pirate_tool_shovel",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_shovel",
+  "used_in": [
+   "catacombs",
+   "dungeon:cavern",
+   "dungeon:crystal",
+   "dungeon:ember",
+   "dungeon:hideout",
+   "dungeon:obsidian",
+   "dungeon:prism",
+   "dungeon:storm",
+   "dungeon:vein"
+  ],
+  "triangles": 168,
+  "surfaces": 2,
+  "materials": [
+   "BH_Iron",
+   "BH_Wood"
+  ],
+  "scale": 0.5534,
+  "bounds_m": [
+   0.364,
+   1.3,
+   0.157
+  ],
+  "collision": "none",
+  "source_sha256": "91525c2179a0af1d341c7f9a23d06a383fc89a252758de470b9d5266f96fbce5",
+  "derived_sha256": "d94b5eb7ffbd04eaaf83e65625d4e24b6d8f6cb4934419d16a221fc57c3dff77",
+  "package": "canonical/.game-dev/packages/kenney_pirate_tool_shovel/1.1.0"
+ },
+ {
+  "number": 82,
+  "source": "kenney_pirate_tool_paddle",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_paddle",
+  "used_in": [
+   "agdao",
+   "dungeon:drowned",
+   "int_netmender",
+   "olivar"
+  ],
+  "triangles": 60,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 0.6811,
+  "bounds_m": [
+   0.448,
+   1.6,
+   0.141
+  ],
+  "collision": "none",
+  "source_sha256": "6acd0882ef6bd767780d50b346bbb7b97465b914a27209a07f4f62287e1dbbb1",
+  "derived_sha256": "8271a8c6630d8e6732d69c69cdb59ef6ba265768b817de6aba8d3c95768de244",
+  "package": "canonical/.game-dev/packages/kenney_pirate_tool_paddle/1.1.0"
+ },
+ {
+  "number": 83,
+  "source": "kenney_pirate_boat_row_small",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_rowboat",
+  "used_in": [
+   "agdao",
+   "dungeon:drowned",
+   "wyman_outpost"
+  ],
+  "triangles": 168,
+  "surfaces": 1,
+  "materials": [
+   "BH_Wood"
+  ],
+  "scale": 1.3,
+  "bounds_m": [
+   3.573,
+   1.102,
+   3.084
+  ],
+  "collision": "none",
+  "source_sha256": "5963b12af7466ca99f0c31fe7fb2ccfd08ae710f5c91e8aae73412fded399e6d",
+  "derived_sha256": "312d2f07c6af29d2de988be52a6f2111181fbaba21410a9418079fdbe5e0fc55",
+  "package": "canonical/.game-dev/packages/kenney_pirate_boat_row_small/1.1.0"
+ },
+ {
+  "number": 84,
+  "source": "kenney_pirate_boat_row_large",
+  "kit": "pirate-kit",
+  "decision": "deferred",
+  "reason": "kd_rowboat and the existing boat_rowing cover every mooring",
+  "package": "canonical/.game-dev/packages/kenney_pirate_boat_row_large/1.1.0"
+ },
+ {
+  "number": 85,
+  "source": "kenney_pirate_ship_wreck",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_wreck",
+  "used_in": [
+   "westreach"
+  ],
+  "triangles": 2282,
+  "surfaces": 4,
+  "materials": [
+   "BH_WoodDark",
+   "BH_Iron",
+   "BH_Wood",
+   "BH_Kelp"
+  ],
+  "scale": 1.15,
+  "bounds_m": [
+   5.52,
+   11.458,
+   12.19
+  ],
+  "collision": "none",
+  "source_sha256": "28c2ca697025ebdb0adc1a7a4b143d40cb2ca474d96b1db51d9cc2f6af7c16c2",
+  "derived_sha256": "77ca119705d47c6cf9b81f8d7893120f462ffc10057a26025fe15a62e57d8bde",
+  "package": "canonical/.game-dev/packages/kenney_pirate_ship_wreck/1.1.0"
+ },
+ {
+  "number": 86,
+  "source": "kenney_pirate_rocks_a",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_shore_rocks_a",
+  "used_in": [
+   "westreach"
+  ],
+  "triangles": 264,
+  "surfaces": 1,
+  "materials": [
+   "BH_Rock"
+  ],
+  "scale": 1.2,
+  "bounds_m": [
+   6.135,
+   3.478,
+   5.264
+  ],
+  "collision": "box",
+  "source_sha256": "e38a431e7c6efea635555aadc0a53770dd19219044aeaa5514e8a770ea1f710a",
+  "derived_sha256": "02198fef111c23b04f61e8c1c6dfe755b4611650712e46cc5ca0122569aa0e4f",
+  "package": "canonical/.game-dev/packages/kenney_pirate_rocks_a/1.1.0"
+ },
+ {
+  "number": 87,
+  "source": "kenney_pirate_rocks_b",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_shore_rocks_b",
+  "used_in": [
+   "westreach",
+   "zr_barrens"
+  ],
+  "triangles": 300,
+  "surfaces": 1,
+  "materials": [
+   "BH_Rock"
+  ],
+  "scale": 1.2,
+  "bounds_m": [
+   5.324,
+   4.385,
+   5.645
+  ],
+  "collision": "box",
+  "source_sha256": "99e962600fb419faa6e9a2c8d36bb89313f6ffb9f8da2ab5b5a81c6e467a12f8",
+  "derived_sha256": "a23df33bdaa1c09c033913bc300974ec6b5a723935272d8df4bf35a678953cc2",
+  "package": "canonical/.game-dev/packages/kenney_pirate_rocks_b/1.1.0"
+ },
+ {
+  "number": 88,
+  "source": "kenney_pirate_rocks_c",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_shore_rocks_c",
+  "used_in": [
+   "dungeon:cavern",
+   "dungeon:hideout",
+   "westreach"
+  ],
+  "triangles": 232,
+  "surfaces": 1,
+  "materials": [
+   "BH_Rock"
+  ],
+  "scale": 1.2,
+  "bounds_m": [
+   4.371,
+   2.76,
+   4.403
+  ],
+  "collision": "box",
+  "source_sha256": "8bd8ebbf275540047f4f4f44765c04b1813ef0000e40db7ce5c99cb40ffdb913",
+  "derived_sha256": "7fccae02becb2f10256efb3a1bb00844a41d31494eda13746ac14933a266d904",
+  "package": "canonical/.game-dev/packages/kenney_pirate_rocks_c/1.1.0"
+ },
+ {
+  "number": 89,
+  "source": "kenney_pirate_platform_planks",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_planks",
+  "used_in": [
+   "agdao",
+   "bridge_of_death",
+   "catacombs",
+   "dungeon:cavern",
+   "dungeon:fungal",
+   "dungeon:hideout",
+   "dungeon:hive",
+   "dungeon:mire",
+   "dungeon:thorn",
+   "olivar",
+   "zr_barrens",
+   "zr_citadel"
+  ],
+  "triangles": 48,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_WoodDark"
+  ],
+  "scale": 1.0,
+  "bounds_m": [
+   1.894,
+   0.428,
+   2.702
+  ],
+  "collision": "none",
+  "source_sha256": "1a4e99760fbc20b617b07a93158beba7c02fd78eae45cdf3b8656f724cc6bd7e",
+  "derived_sha256": "caaef662929b1b29bf35ea5762daf894cc5f2f2ab18f17b82d0a81c9d9995b6d",
+  "package": "canonical/.game-dev/packages/kenney_pirate_platform_planks/1.1.0"
+ },
+ {
+  "number": 90,
+  "source": "kenney_pirate_structure_fence",
+  "kit": "pirate-kit",
+  "decision": "deferred",
+  "reason": "repeated railing spans are what the brief warns against on long bridges",
+  "package": "canonical/.game-dev/packages/kenney_pirate_structure_fence/1.1.0"
+ },
+ {
+  "number": 91,
+  "source": "kenney_pirate_structure_platform_dock_small",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_dock_small",
+  "used_in": [
+   "olivar"
+  ],
+  "triangles": 312,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 1.0,
+  "bounds_m": [
+   1.9,
+   1.312,
+   2.512
+  ],
+  "collision": "none",
+  "source_sha256": "d0d0e660db996261f4ecf0e6d9fd717d87383e8232b95aed5ac186a3680b899f",
+  "derived_sha256": "aabb0b6e4299d0ab40bb02e4b2b3048e2c1f64a0da37868ba1c989f93b6273a4",
+  "package": "canonical/.game-dev/packages/kenney_pirate_structure_platform_dock_small/1.1.0"
+ },
+ {
+  "number": 92,
+  "source": "kenney_pirate_structure_roof",
+  "kit": "pirate-kit",
+  "decision": "accepted",
+  "runtime": "kd_canopy",
+  "used_in": [
+   "agdao"
+  ],
+  "triangles": 348,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_ClothCream"
+  ],
+  "scale": 1.0,
+  "bounds_m": [
+   3.085,
+   3.4,
+   3.234
+  ],
+  "collision": "none",
+  "source_sha256": "15b65f3a387e5de0b1d432c877272f2d8d758d98b08273515e80b1617f0f1781",
+  "derived_sha256": "cbdee26c6515d883024036c016a6f38e4d6d62b3e2be82fc446a5f94a2a7978f",
+  "package": "canonical/.game-dev/packages/kenney_pirate_structure_roof/1.1.0"
+ },
+ {
+  "number": 93,
+  "source": "kenney_pirate_flag_pennant",
+  "kit": "pirate-kit",
+  "decision": "rejected",
+  "reason": "flags and pennants were rejected by the user (medieval, in-theme art only)",
+  "package": "canonical/.game-dev/packages/kenney_pirate_flag_pennant/1.1.0"
+ },
+ {
+  "number": 94,
+  "source": "kenney_pirate_mast_ropes",
+  "kit": "pirate-kit",
+  "decision": "deferred",
+  "reason": "no harbour scene needs a free-standing rigged mast; the wreck carries one",
+  "package": "canonical/.game-dev/packages/kenney_pirate_mast_ropes/1.1.0"
+ },
+ {
+  "number": 95,
+  "source": "kenney_graveyard_altar_stone",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_altar_stone",
+  "used_in": [
+   "dungeon:crypt",
+   "dungeon:eclipse",
+   "dungeon:jade",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:umbral"
+  ],
+  "triangles": 166,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   2.079,
+   0.975,
+   1.306
+  ],
+  "collision": "box",
+  "source_sha256": "58262d4d073e3be67286fa7f4cd59c3719073475cff69423f41722894c8f6bd0",
+  "derived_sha256": "3ccf812b994bdfd5ca671c2db897070ada891368c4ddb32490cc75a2f5630f66",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_altar_stone/1.1.0"
+ },
+ {
+  "number": 96,
+  "source": "kenney_graveyard_altar_wood",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_altar_wood",
+  "used_in": [
+   "dungeon:thorn"
+  ],
+  "triangles": 306,
+  "surfaces": 2,
+  "materials": [
+   "BH_Wood",
+   "BH_Iron"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   2.09,
+   1.075,
+   1.317
+  ],
+  "collision": "box",
+  "source_sha256": "3dc61f8dac633f937dedf9203a1f10e16679a9200dcc5a442e8702530cd8ac60",
+  "derived_sha256": "e8cb69f2252d5b58c2323c16d2ddc4c4ea8084b89f7204a6681a21b1d7bd6822",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_altar_wood/1.1.0"
+ },
+ {
+  "number": 97,
+  "source": "kenney_graveyard_coffin_old",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_coffin_old",
+  "used_in": [
+   "dungeon:crypt",
+   "dungeon:drowned",
+   "dungeon:underworld"
+  ],
+  "triangles": 216,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.3,
+  "bounds_m": [
+   1.32,
+   0.46,
+   1.927
+  ],
+  "collision": "box",
+  "source_sha256": "d719c8f614074642af74f3edd8e56fa5adc73b325f0a21c30f21551f830dcd5e",
+  "derived_sha256": "1aadb041397652f124eed1f9e0536637daf2f9bd882e30072ab13135673e975e",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_coffin_old/1.1.0"
+ },
+ {
+  "number": 98,
+  "source": "kenney_graveyard_coffin",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_coffin",
+  "used_in": [
+   "dungeon:crypt"
+  ],
+  "triangles": 256,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.3,
+  "bounds_m": [
+   1.32,
+   0.747,
+   1.927
+  ],
+  "collision": "box",
+  "source_sha256": "4dcfb3534eb7767a65ac5991827d1b89e913d25a1192da84119113c219f644c7",
+  "derived_sha256": "782a4f7fca02abb69e3792cd1203985c98ad89ac1b0c4d45b0bfeab2b941325f",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_coffin/1.1.0"
+ },
+ {
+  "number": 99,
+  "source": "kenney_graveyard_candle_multiple",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_candles",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:aether",
+   "dungeon:crypt",
+   "dungeon:eclipse",
+   "dungeon:gilded",
+   "dungeon:hideout",
+   "dungeon:jade",
+   "dungeon:orrery",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:thorn",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "int_cartographer",
+   "int_netmender",
+   "zr_coilwood"
+  ],
+  "triangles": 162,
+  "surfaces": 2,
+  "materials": [
+   "BH_Candle",
+   "BH_Wood"
+  ],
+  "scale": 1.6,
+  "bounds_m": [
+   0.408,
+   0.32,
+   0.427
+  ],
+  "collision": "none",
+  "source_sha256": "5b8d03622b1e99dfb2d492acfc1b9a22c9dd9a669f5a87009e7426573e3495ca",
+  "derived_sha256": "7de2ff943127bac408dd53b578d0707f53eb79459ebe68d867864f8842138f06",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_candle_multiple/1.1.0"
+ },
+ {
+  "number": 100,
+  "source": "kenney_graveyard_lantern_candle",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_lantern_candle",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:cavern",
+   "dungeon:crypt",
+   "dungeon:crystal",
+   "dungeon:drowned",
+   "dungeon:eclipse",
+   "dungeon:ember",
+   "dungeon:hideout",
+   "dungeon:mire",
+   "dungeon:prism",
+   "dungeon:rime",
+   "dungeon:storm",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "int_keeper",
+   "wyman_outpost"
+  ],
+  "triangles": 224,
+  "surfaces": 3,
+  "materials": [
+   "BH_Iron",
+   "BH_Candle",
+   "BH_Wood"
+  ],
+  "scale": 1.6,
+  "bounds_m": [
+   0.384,
+   0.62,
+   0.384
+  ],
+  "collision": "none",
+  "source_sha256": "0bb7aa2c7b40162e5ceb7f16d60f8e3c1942637483e9a58948f9374f051badfa",
+  "derived_sha256": "6285672bd3334aa57aeaa8bb01498642c8db1184186511c9aa51918158d24461",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_lantern_candle/1.1.0"
+ },
+ {
+  "number": 101,
+  "source": "kenney_graveyard_fire_basket",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_fire_basket",
+  "used_in": [
+   "dungeon:ember",
+   "dungeon:hideout",
+   "dungeon:obsidian",
+   "zr_barrens"
+  ],
+  "triangles": 196,
+  "surfaces": 1,
+  "materials": [
+   "BH_Iron"
+  ],
+  "scale": 2.4,
+  "bounds_m": [
+   1.0,
+   0.403,
+   1.0
+  ],
+  "collision": "box",
+  "source_sha256": "4845ca01a53b2242acfbcfa2e856706c972a7345f2cbf01e3b87054f7f600916",
+  "derived_sha256": "86cd7a3fc362d5e3a8962c52139a818ebabc4a6025dd54ccaf0069649c471661",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_fire_basket/1.1.0"
+ },
+ {
+  "number": 102,
+  "source": "kenney_graveyard_urn_round",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_urn_round",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:crypt",
+   "dungeon:eclipse",
+   "dungeon:jade",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "forgotten_temple",
+   "zr_coilwood"
+  ],
+  "triangles": 230,
+  "surfaces": 2,
+  "materials": [
+   "BH_StoneDark",
+   "BH_Terracotta"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   0.529,
+   0.768,
+   0.529
+  ],
+  "collision": "box",
+  "source_sha256": "b59c015da7dce4ce236a9a967fcb058ca9cff4660c59edaf40768fec086cd437",
+  "derived_sha256": "8e5c5478b655621f1e3320a1533007205da6c529961446a46e62632c33f870c5",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_urn_round/1.1.0"
+ },
+ {
+  "number": 103,
+  "source": "kenney_graveyard_urn_square",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_urn_square",
+  "used_in": [
+   "catacombs",
+   "dungeon:crypt",
+   "dungeon:drowned",
+   "dungeon:eclipse",
+   "dungeon:jade",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "zr_coilwood"
+  ],
+  "triangles": 218,
+  "surfaces": 2,
+  "materials": [
+   "BH_Stone",
+   "BH_StoneDark"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   0.529,
+   0.768,
+   0.529
+  ],
+  "collision": "box",
+  "source_sha256": "bc29468805e87aa233d0e6177cdf9cb7244df6abbede7001789e0ef438c4d013",
+  "derived_sha256": "f6b33098007f38419056dea99a2fcd6b3b170ac9a7629771242cee662755eab4",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_urn_square/1.1.0"
+ },
+ {
+  "number": 104,
+  "source": "kenney_graveyard_detail_chalice",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_chalice",
+  "used_in": [
+   "catacombs",
+   "dungeon:crypt",
+   "dungeon:eclipse",
+   "dungeon:gilded",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:underworld",
+   "forgotten_temple"
+  ],
+  "triangles": 136,
+  "surfaces": 1,
+  "materials": [
+   "BH_Brass"
+  ],
+  "scale": 1.0,
+  "bounds_m": [
+   0.164,
+   0.249,
+   0.164
+  ],
+  "collision": "none",
+  "source_sha256": "1d49e06fabe4ad363d12b1308dc34ded08a135996968e2b110d8da9d2368eaf8",
+  "derived_sha256": "892488d49682e0fc204dc2040701e084db8b72914ccd72706526cccf935a8dae",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_detail_chalice/1.1.0"
+ },
+ {
+  "number": 105,
+  "source": "kenney_graveyard_detail_bowl",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_offering_bowl",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:crypt",
+   "dungeon:eclipse",
+   "dungeon:jade",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:underworld",
+   "forgotten_temple",
+   "ruined_forest",
+   "zr_coilwood"
+  ],
+  "triangles": 176,
+  "surfaces": 1,
+  "materials": [
+   "BH_Brass"
+  ],
+  "scale": 1.4,
+  "bounds_m": [
+   0.281,
+   0.182,
+   0.281
+  ],
+  "collision": "none",
+  "source_sha256": "63e0bf23875f080a69cbbaf7b748c6980400887c1f2624b8229e008337cd8eb1",
+  "derived_sha256": "eda005c3a0d8802df76ea88848187afe675a57d06fbb87e6a9afb8eb4390fab1",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_detail_bowl/1.1.0"
+ },
+ {
+  "number": 106,
+  "source": "kenney_graveyard_debris",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_debris_stone",
+  "used_in": [
+   "boss_arena",
+   "bridge_of_death",
+   "dungeon:abyss",
+   "dungeon:aether",
+   "dungeon:cavern",
+   "dungeon:crypt",
+   "dungeon:crystal",
+   "dungeon:drowned",
+   "dungeon:eclipse",
+   "dungeon:ember",
+   "dungeon:gilded",
+   "dungeon:obsidian",
+   "dungeon:orrery",
+   "dungeon:prism",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:storm",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "dungeon:vein",
+   "forgotten_temple",
+   "sundered_reach",
+   "weeping_causeway",
+   "zr_barrens",
+   "zr_citadel",
+   "zr_coilwood"
+  ],
+  "triangles": 240,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   1.072,
+   0.32,
+   1.095
+  ],
+  "collision": "none",
+  "source_sha256": "64a7536b6fc9dc3ec913c6fa187096ecd483e6e2d2bbda7556c0ba43dfdce2c8",
+  "derived_sha256": "05dd37413b98a572106f6e6728a18c73026210d2790a021136fa413a0102fd52",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_debris/1.1.0"
+ },
+ {
+  "number": 107,
+  "source": "kenney_graveyard_debris_wood",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_debris_wood",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:drowned",
+   "dungeon:fungal",
+   "dungeon:hideout",
+   "dungeon:hive",
+   "dungeon:mire",
+   "dungeon:solar",
+   "dungeon:thorn",
+   "dungeon:vein",
+   "forgotten_temple",
+   "ruined_forest",
+   "weeping_causeway",
+   "westreach",
+   "zr_citadel"
+  ],
+  "triangles": 108,
+  "surfaces": 1,
+  "materials": [
+   "BH_WoodDark"
+  ],
+  "scale": 2.2,
+  "bounds_m": [
+   1.009,
+   0.22,
+   1.109
+  ],
+  "collision": "none",
+  "source_sha256": "0ea00663b8634229d6126df5531524f972a658e1d4e74ee8453093229fa0b0c8",
+  "derived_sha256": "d1b597bff0b4237527da3c800e5d20a696036d3ffaa0bb335926b5a908abee52",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_debris_wood/1.1.0"
+ },
+ {
+  "number": 108,
+  "source": "kenney_graveyard_gravestone_broken",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_grave_broken",
+  "used_in": [
+   "catacombs",
+   "dungeon:abyss",
+   "dungeon:crypt",
+   "dungeon:underworld",
+   "ruined_forest"
+  ],
+  "triangles": 134,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.0,
+  "bounds_m": [
+   1.018,
+   0.682,
+   0.783
+  ],
+  "collision": "box",
+  "source_sha256": "c8650f83629f12c4b177a7b6b63e62fd5646c276767d9df0b16398403dd7b6e5",
+  "derived_sha256": "06c90fcb14897cb9551d236306e4ab729de680673469176a2c7e2930f9b31279",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_gravestone_broken/1.1.0"
+ },
+ {
+  "number": 109,
+  "source": "kenney_graveyard_column_large",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_column",
+  "used_in": [
+   "dungeon:abyss",
+   "dungeon:aether",
+   "dungeon:cavern",
+   "dungeon:crypt",
+   "dungeon:crystal",
+   "dungeon:eclipse",
+   "dungeon:ember",
+   "dungeon:gilded",
+   "dungeon:obsidian",
+   "dungeon:orrery",
+   "dungeon:prism",
+   "dungeon:rime",
+   "dungeon:sandtomb",
+   "dungeon:solar",
+   "dungeon:storm",
+   "dungeon:umbral",
+   "dungeon:underworld",
+   "dungeon:vein",
+   "forgotten_temple",
+   "sundered_reach",
+   "zr_coilwood"
+  ],
+  "triangles": 394,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.6,
+  "bounds_m": [
+   1.014,
+   2.938,
+   1.014
+  ],
+  "collision": "box",
+  "source_sha256": "71b3a1b0e84137eb27ce3ec8ffac599deab5a2ef038e6bc6a5fec6f06febeb9c",
+  "derived_sha256": "a7cf189a3cad7e0cd2231ee3129e0eea1ba0f8f203e6f4fba9a46f042207e40a",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_column_large/1.1.0"
+ },
+ {
+  "number": 110,
+  "source": "kenney_graveyard_pillar_obelisk",
+  "kit": "graveyard-kit",
+  "decision": "accepted",
+  "runtime": "kd_obelisk",
+  "used_in": [
+   "dungeon:abyss",
+   "dungeon:crypt"
+  ],
+  "triangles": 76,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 2.6,
+  "bounds_m": [
+   0.91,
+   2.631,
+   0.91
+  ],
+  "collision": "box",
+  "source_sha256": "4efa9ab9005cbc70e428a55a8f929488981e308be43aa2dcbb966ff7902b9fd1",
+  "derived_sha256": "d86849cb847effe4096d66e1727b09967346ff106b0424813904e16743abbb9d",
+  "package": "canonical/.game-dev/packages/kenney_graveyard_pillar_obelisk/1.1.0"
+ },
+ {
+  "number": 111,
+  "source": "kenney_modular-dungeon_gate_metal_bars",
+  "kit": "modular-dungeon-kit",
+  "decision": "accepted",
+  "runtime": "kd_bars_gate",
+  "used_in": [
+   "catacombs",
+   "dungeon:crypt"
+  ],
+  "triangles": 720,
+  "surfaces": 2,
+  "materials": [
+   "BH_Iron",
+   "BH_Stone"
+  ],
+  "scale": 0.9,
+  "bounds_m": [
+   3.96,
+   3.96,
+   1.26
+  ],
+  "collision": "box",
+  "source_sha256": "8993f75edec5a2d8e6d5e073279a5c9e47b85b9f1b21d15a33786dce79716620",
+  "derived_sha256": "d79ce3c06525eb8b2ae27f951dc83cbe0abe757f0eda235ca33aa9eb0b088e07",
+  "package": "canonical/.game-dev/packages/kenney_modular_dungeon_gate_metal_bars/1.1.0"
+ },
+ {
+  "number": 112,
+  "source": "kenney_modular-dungeon_template_wall_half",
+  "kit": "modular-dungeon-kit",
+  "decision": "deferred",
+  "reason": "the existing 4 m wall kit and low cutaway walls already do this",
+  "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_wall_half/1.1.0"
+ },
+ {
+  "number": 113,
+  "source": "kenney_modular-dungeon_template_floor_layer_raised",
+  "kit": "modular-dungeon-kit",
+  "decision": "accepted",
+  "runtime": "kd_dais",
+  "used_in": [
+   "dungeon:umbral"
+  ],
+  "triangles": 312,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 0.75,
+  "bounds_m": [
+   3.018,
+   2.25,
+   3.0
+  ],
+  "collision": "box",
+  "source_sha256": "579dcb0879a95c49fdbd337f021de32bebaf71c6593afa6fd5227a96f3e23e26",
+  "derived_sha256": "2c4784b6914839c1605f925e6fac4a214d9db7f1fb03b89b277c71168e674e50",
+  "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_layer_raised/1.1.0"
+ },
+ {
+  "number": 114,
+  "source": "kenney_modular-dungeon_template_floor_detail_a",
+  "kit": "modular-dungeon-kit",
+  "decision": "accepted",
+  "runtime": "kd_floor_inlay",
+  "used_in": [
+   "boss_arena",
+   "catacombs",
+   "forgotten_temple",
+   "sundered_reach"
+  ],
+  "triangles": 204,
+  "surfaces": 1,
+  "materials": [
+   "BH_Stone"
+  ],
+  "scale": 0.75,
+  "bounds_m": [
+   3.0,
+   0.075,
+   3.0
+  ],
+  "collision": "none",
+  "source_sha256": "5f3b0a69e6b477d00157140c0f0345503ba3a07b50d5af485879818bc0aeb833",
+  "derived_sha256": "91fb27d7a5412081da8e239618a4690334c64312f225481a446d440460ac6c90",
+  "package": "canonical/.game-dev/packages/kenney_modular_dungeon_template_floor_detail_a/1.1.0"
+ }
+]
