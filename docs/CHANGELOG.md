@@ -2,6 +2,28 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-035 - Big fights, multiplayer bandwidth, Shadowblade damage, QA - 3 October 2026
+
+- **No more freeze when monsters spawn**: every humanoid monster (and NPC or companion) that appeared rewrote the loop
+  settings of animations shared by everyone with that body, and every character rebuilt its animation caches on the next
+  frame: 75-140 ms each time. Spawning now costs about 5 ms plus a normal frame.
+- **Big fights run about twice as fast**: in a 40-monster brawl the monsters waiting for their turn to attack think and
+  collide every other physics step, and distant ordinary monsters and townsfolk animate every second or third frame. On
+  the development PC at Low settings the brawl went from 32 ms to 15.6 ms per frame (31 to 64 FPS) and its worst 1% of
+  frames from 183 ms to 35 ms. Bosses, heroes, companions and other players are never thinned.
+- **Multiplayer uses a quarter of the bandwidth**: hero snapshots go through the room host, which sends them at full rate
+  only to nearby heroes on the same map; snapshots are packed into about 45 bytes; unchanged monsters are not re-sent;
+  full world checkpoints go out less often. With six heroes on one map the map owner's upload fell from 3.4 Mbit/s to
+  0.5 Mbit/s, each member's download from 0.87 to 0.25 Mbit/s and the server's from 2.9 to about 1.1-1.4 Mbit/s. Network
+  protocol 19: update the official server with the game.
+- **Shadowblade weapons scale with Agility**: daggers, claws and knuckles drew their damage from Strength, so a
+  Shadowblade's weapon damage was about a third of the other classes' at level 30. Daggers now use Agility (70%) and
+  Dexterity (30%), claws Agility, knuckles Strength and Agility.
+- **Balance**: Knight Cleave +12% weapon damage per rank (was +18%); Mage Elemental Attunement 25% (was 10%).
+- **Fixes**: the Character window fits its frame with a long rank checklist; the fungal Warren no longer uses the
+  drowned Deeps' wet storage; touch-text resizing no longer logs an error for controls freed right after creation.
+- Details and measurements: [HANDOFF_bh-035.md](HANDOFF_bh-035.md).
+
 ## BH-034 - Ascendant tiers, free VPS hosting, fixes - 3 October 2026
 
 - **Four new rarities above Aether**: Cosmic, Divine, Eternal and Primordial, dropped only by dungeon bosses of level

@@ -15,6 +15,7 @@ var guild_tag := ""                  # bh-027: a Call to Arms fighter's guild (s
 var _target_pos := Vector3.ZERO
 var _target_yaw := 0.0
 var _vel := Vector3.ZERO
+var _age := 0.0                     # seconds since the last snapshot
 var _engaged := false
 var _serial := -1
 var _built := false
@@ -28,6 +29,8 @@ var _was_alive := true
 var interact_range := 2.4
 var arena_fighter := false            # bh-028: an adventurer of the Sand Arena, run on the world authority's machine
 var _arena_hostile := false
+
+var appearance_rev := -1            # Net: which received appearance this avatar last dressed in (bh-035)
 
 func _init() -> void:
 	team = BH.Team.PLAYER
@@ -183,6 +186,7 @@ func apply_state(s: Array) -> void:
 	_target_pos = s[0]
 	_target_yaw = s[1]
 	_vel = s[2]
+	_age = 0.0
 	hp = s[3]
 	var mhp: float = s[4]
 	if absf(mhp - _max_hp) > 0.5:
@@ -227,6 +231,10 @@ func snap_to(p: Vector3, yaw: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_finite(delta) or delta <= 0.0:
 		return
+	# far allies arrive at a few snapshots a second (bh-035): keep moving along the last known velocity in between
+	if _age < 0.4:
+		_target_pos += Vector3(_vel.x, 0.0, _vel.z) * delta
+	_age += delta
 	var k := 1.0 - exp(-LERP_RATE * delta)
 	if global_position.distance_to(_target_pos) > 8.0:
 		global_position = _target_pos       # teleported, respawned

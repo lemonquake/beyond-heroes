@@ -91,6 +91,7 @@ var _net_yaw := 0.0
 var _net_vel := Vector3.ZERO
 var _net_serial := -1
 var _net_engaged := false
+var _net_age := 0.0                 # seconds since the last snapshot (dead reckoning between snapshots, bh-035)
 ## bh-010: the new monsters' signature mechanics live in a helper (null for the older roster).
 const TraitsExt := preload("res://src/actors/enemy/enemy_traits_ext.gd")
 ## bh-013: the twenty-one new monsters' mechanics extend that helper (one `ext` serves both).
@@ -149,6 +150,7 @@ func _ready() -> void:
 	collision_mask = BH.LAYER_WORLD | BH.LAYER_GROUND | BH.LAYER_PROPS | BH.LAYER_PLAYER | BH.LAYER_ENEMY
 	rest_skip = true
 	_sep_phase = get_instance_id() % SEP_EVERY      # staggered: a third of the pack refreshes each step
+	_lod_skip = (hash(get_instance_id()) & 1) == 1     # half the crowd thinks on even steps, half on odd
 	# a jammed pack pushes into itself every step: 3 slide iterations instead of 6 halve that worst case, and nothing
 	# a monster walks along needs more (bh-014)
 	max_slides = 3
@@ -169,6 +171,7 @@ func _ready() -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	visual.full_sync = is_boss or is_miniboss()
+	visual.crowd_lod = not visual.full_sync      # bh-035: an ordinary monster may animate at a coarser rate in a crowd
 	add_child(visual)
 	var sc := def.model_scale * (1.12 if is_elite else 1.0) * float(miniboss.get("scale", 1.0)) * size_mult
 	# bh-031: humanoid monsters are the hero's own body in their family's look and gear (DataPersonas)
@@ -342,12 +345,21 @@ func _physics_process(delta: float) -> void:
 		return
 	if _sim_sleep(delta):
 		return
+	var step := delta                         # the physics step: what moves the body
+	if _crowd_half():
+		_lod_skip = not _lod_skip              # each monster alternates on its own (tests step monsters by hand)
+		if _lod_skip:
+			_lod_acc += delta
+			_coast(delta)
+			return
+		delta += _lod_acc                     # the thinking catches up with the step it skipped
+	_lod_acc = 0.0
 	status.tick(delta)
 	if not alive:
-		physics_move(delta, Vector3.ZERO)
+		physics_move(step, Vector3.ZERO)
 		return
 	if ext and ext.pre_tick(delta):
-		physics_move(delta, Vector3.ZERO)       # a dormant Mimic, a War Totem: no AI this frame
+		physics_move(step, Vector3.ZERO)       # a dormant Mimic, a War Totem: no AI this frame
 		return
 	brain.tick(delta)
 	_tick_cooldowns(delta)
@@ -365,13 +377,43 @@ func _physics_process(delta: float) -> void:
 	var desired := _steer(delta)
 	if not _charge.is_empty():
 		desired = _charge_step(delta)
-	physics_move(delta, desired)
+	physics_move(step, desired)
 	_face(delta, desired)
 	if visual:
 		var hv := Vector3(velocity.x, 0, velocity.z)
 		var local := global_transform.basis.inverse() * hv
 		visual.update_locomotion(Vector2(local.x, local.z), brain.is_engaged(), 0.0, delta)
 	_ambient_sound(delta)
+
+## Crowd LOD (bh-035). In a big fight most of the pack is waiting for one of the CombatDirector's few attack tokens:
+## circling at its slot, closing in, backing off. Those monsters think, steer and collide on every other physics step (each
+## half of the crowd on its own step, so the cost is spread evenly) and coast along their velocity in between. A monster that
+## attacks, casts, charges, is staggered, knocked back or airborne, holds a token, or is a boss always runs every step, and
+## small fights (CROWD_LOD_FROM awake monsters or fewer; half that in efficiency mode) are never thinned. A 40-monster brawl spent ~9 ms per physics step,
+## which pushed frames past 16.7 ms and made the engine run two steps per frame.
+const CROWD_LOD_FROM := 14
+var _lod_acc := 0.0
+var _lod_skip := false
+
+func _crowd_half() -> bool:
+	if _awake_n <= (CROWD_LOD_FROM if not Perf.lite else CROWD_LOD_FROM / 2) or not alive or is_boss or net_replica or not miniboss.is_empty() or action != null or not _charge.is_empty():
+		return false
+	if knock_velocity != Vector3.ZERO or _airborne_from_launch or not is_on_floor():
+		return false
+	var S := EnemyBrain.State
+	if brain.state in [S.ATTACK, S.SPECIAL, S.CAST, S.STAGGER, S.KNOCKBACK, S.DEAD]:
+		return false
+	if ext and (ext.fuse_lit or not ext.jobs.is_empty()):
+		return false
+	return CombatDirector.current == null or not CombatDirector.current.has_token(self)
+
+## The skipped step of a thinned monster: keep walking along the current velocity and keep turning, no collision test
+## (one step is a few centimetres; the next full step's move_and_slide resolves any overlap).
+func _coast(delta: float) -> void:
+	var hv := Vector3(velocity.x, 0.0, velocity.z)
+	if hv.length_squared() > 0.0025:
+		global_position += hv * delta
+	_face(delta, hv)
 
 ## Simulation LOD (bh-009 efficiency mode; every platform since bh-014): a calm monster far beyond sight of every hero
 ## dozes — standing on the ground, nothing to fight, nothing burning — and only checks twice a second whether a hero
@@ -1448,6 +1490,7 @@ static var _grid := {}
 static var _grid_frame := -1
 static var _grid_gen := 0
 static var _grid_tree: SceneTree
+static var _awake_n := 0                 # awake monsters at the last grid build (crowd LOD)
 var _grid_seen := -1
 
 ## Rebuilt at most once per physics step, and whenever a monster asks twice from the same build (tests step monsters
@@ -1463,8 +1506,10 @@ func _neighbours_grid() -> void:
 	_grid_gen += 1
 	_grid_seen = _grid_gen
 	_grid.clear()
+	_awake_n = 0
 	for e: Enemy in tree.get_nodes_in_group(&"enemy"):
 		if e.alive and e.is_inside_tree() and not e._asleep:
+			_awake_n += 1
 			var k := Vector2i(floori(e.global_position.x / SEP_CELL), floori(e.global_position.z / SEP_CELL))
 			if _grid.has(k):
 				(_grid[k] as Array).append(e)
@@ -1700,6 +1745,7 @@ func net_apply(s: Array) -> void:
 	_net_pos = s[1]
 	_net_yaw = s[2]
 	_net_vel = s[3]
+	_net_age = 0.0
 	hp = s[4]
 	shield_hp = s[11]
 	_net_engaged = s[10]
@@ -1721,6 +1767,10 @@ func _net_step(delta: float) -> void:
 	if not alive:
 		physics_move(delta, Vector3.ZERO)
 		return
+	# calm monsters arrive at a few snapshots a second (bh-035): keep walking along the last known velocity in between
+	if _net_age < 0.5:
+		_net_pos += Vector3(_net_vel.x, 0.0, _net_vel.z) * delta
+	_net_age += delta
 	var k := 1.0 - exp(-12.0 * delta)
 	if global_position.distance_to(_net_pos) > 6.0:
 		global_position = _net_pos

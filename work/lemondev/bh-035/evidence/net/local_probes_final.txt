@@ -1,0 +1,83 @@
+ARENA[host] PASS
+ARENA[join] PASS
+EXPLORE[host] PASS
+EXPLORE[join] PASS
+GUILD[host] PASS
+GUILD[join] PASS
+TEAM[ally] PASS join requested
+TEAM[ally] PASS travel
+TEAM[ally] PASS authority
+TEAM[ally] PASS replicas
+TEAM[ally] PASS kill
+TEAM[ally] PASS kill_reward
+TEAM[ally] PASS replicas
+TEAM[ally] PASS stale_packet
+TEAM[ally] PASS portal_guards
+TEAM[ally] PASS remember_stage
+TEAM[ally] PASS stage_award
+TEAM[ally] PASS travel
+TEAM[ally] PASS bad_revive
+TEAM[ally] PASS stay
+TEAM[ally] PASS travel
+TEAM[ally] PASS authority
+TEAM[ally] PASS handoff_state
+TEAM[ally] PASS host closed: playable local world
+TEAM[host] PASS host opened
+TEAM[host] PASS three players connected
+TEAM[host] PASS travel on scout
+TEAM[host] PASS travel on ally
+TEAM[host] PASS leader remained in town
+TEAM[host] PASS first explorer owns remote map
+TEAM[host] PASS authority on scout
+TEAM[host] PASS authority on ally
+TEAM[host] PASS replicas on ally
+TEAM[host] PASS prepare_kill on scout
+TEAM[host] PASS kill on ally
+TEAM[host] PASS dead on scout
+TEAM[host] PASS kill_reward on ally
+TEAM[host] PASS leader portal begins
+TEAM[host] PASS leader portal changes map
+TEAM[host] PASS leader arrival preserves explorer authority
+TEAM[host] PASS selected member is visible after map transition
+TEAM[host] PASS leader lands beside selected member
+TEAM[host] PASS portal cooldown blocks repeat
+TEAM[host] PASS checkpoint on scout
+TEAM[host] PASS travel on scout
+TEAM[host] PASS leader takes over remaining map
+TEAM[host] PASS handoff keeps killed enemy dead
+TEAM[host] PASS replicas on ally
+TEAM[host] PASS portal_interrupted on scout
+TEAM[host] PASS portal on scout
+TEAM[host] PASS member portal reaches leader
+TEAM[host] PASS stale_packet on ally
+TEAM[host] PASS portal_guards on ally
+TEAM[host] PASS remember_stage on ally
+TEAM[host] PASS stage_award on ally
+TEAM[host] PASS travel on ally
+TEAM[host] PASS bad_revive on ally
+TEAM[host] PASS optional summon sent
+TEAM[host] PASS stay on ally
+TEAM[host] PASS travel on ally
+TEAM[host] PASS rejoin on 1243100587
+TEAM[host] PASS travel on scout
+TEAM[host] PASS leave on scout
+TEAM[host] PASS client disconnect leaves other players connected
+TEAM[host] PASS remote map gets a remaining owner
+TEAM[host] PASS authority on ally
+TEAM[host] PASS handoff_state on ally
+TEAM[host] PASS expect_shutdown on ally
+TEAM[host] SUMMARY 28 steps, 0 failures
+TEAM[scout] PASS join requested
+TEAM[scout] PASS travel
+TEAM[scout] PASS authority
+TEAM[scout] PASS prepare_kill
+TEAM[scout] PASS dead
+TEAM[scout] PASS checkpoint
+TEAM[scout] PASS travel
+TEAM[scout] PASS portal_interrupted
+TEAM[scout] PASS portal
+TEAM[scout] PASS rejoin
+TEAM[scout] PASS travel
+TEAM[scout] PASS leaving preserves current map
+TRADE[host] PASS
+TRADE[join] PASS

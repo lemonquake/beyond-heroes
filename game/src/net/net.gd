@@ -26,7 +26,8 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 18                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities
+const PROTOCOL := 19                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities
+                                     # 19 (bh-035): hero snapshots relayed by the room host per map and distance, light checkpoints, idle monsters not re-sent
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal
@@ -43,9 +44,21 @@ const MAX_PLAYERS := 12
 const MAX_CLIENTS := MAX_PLAYERS - 1 # Custom host occupies one player slot; a dedicated server occupies none.
 const ALLY_RATE := 15.0
 const ENEMY_RATE := 12.0
-const ENEMY_BATCH := 8              # monsters per unreliable state packet (about 130 bytes each: stays under the MTU)
+const ENEMY_BATCH := 20             # monsters per unreliable state packet (about 50 bytes each packed: stays under the MTU)
 const ENEMY_RANGE := 70.0            # monsters farther than this from a client's hero are not streamed to it
-const APPEARANCE_EVERY := 30         # full appearance every N ally snapshots (and whenever gear changes)
+## bh-035 interest management (MMO-style): a 6-hero map cost its owner 3.5 Mbit/s upstream and every member 0.9 Mbit/s
+## down, mostly snapshots nobody needed. A monster that has not moved or changed is re-sent only as a keep-alive; one far
+## from a hero streams at a third of the rate. Hero snapshots go to the room host, which forwards them at full rate only
+## to heroes close by on the same map and as a slim presence update to everyone else.
+const ENEMY_KEEPALIVE := 1.0         # seconds: an unchanged monster is still re-sent this often (replicas expire after GONE_AFTER)
+const ENEMY_FAR := 35.0              # metres: monsters farther than this from a hero go out at ENEMY_RATE / ENEMY_FAR_EVERY,
+const ENEMY_FAR_EVERY := 3           # and so do calm ones (patrolling, not fighting): replicas dead-reckon in between
+const ALLY_NEAR := 80.0              # metres: allies farther than this on the same map arrive at ALLY_RATE / ALLY_FAR_EVERY
+const ALLY_FAR_EVERY := 3
+const ALLY_AWAY_EVERY := 8           # heroes on another map get a slim presence snapshot (HP, map, place) at ALLY_RATE / 8
+const CHECKPOINT_HOST_EVERY := 2     # the room host gets the full checkpoint every 2 s (the camps part each second it changes),
+const CHECKPOINT_MEMBER_EVERY := 6   # members on the map every 6 s
+const APPEARANCE_EVERY := 150        # full appearance every N ally snapshots (10 s), whenever gear changes and when the roster changes
 const GONE_AFTER := 4.0
 const CONNECT_TIMEOUT := 10.0        # seconds a join may take before it is given up with a clear message
 const REVIVE_HP := 0.4               # a friend's revive stands you up with this share of your HP
@@ -89,7 +102,16 @@ var _replicas := {}                  # client: eid -> Enemy
 var _replica_seen := {}              # client: eid -> time of the last snapshot that carried it
 var _avatars := {}                   # "peer:key" -> NetAvatar
 var _appearance_cache := {}
+var _appearance_rev := {}            # "peer:key" -> times its appearance arrived (avatars re-dress only when it moves)
 var _app_sig := {}                   # local ally key -> appearance hash (resend on change)
+var _relay_n := {}                   # room host: "from>to" -> snapshots seen, for the reduced far / other-map rates
+var _enemy_tick := 0                 # world authority: snapshot rounds sent (far monsters go out every ENEMY_FAR_EVERY)
+var _enemy_last := {}                # world authority: eid -> the state last streamed (to spot idle monsters)
+var _enemy_sent := {}                # world authority: peer -> {eid: [msec, the _enemy_last entry that peer was last sent]}
+var _checkpoint_n := 0
+var _kill_checkpoint := false        # a monster died since the last checkpoint
+var _kill_checkpoint_t := 0.0
+var _light_sig := 0                  # hash of the camps / cleared / arena part members last received
 var _unloading := false              # the old map is leaving the tree: its monsters are not "gone", the map is
 var _connect_t := 0.0
 var _joining_addr := ""
@@ -131,6 +153,8 @@ func _ready() -> void:
 	Events.guild_changed.connect(_on_my_guild_changed)
 	Events.guild_joined.connect(func(_g: StringName, _f: bool) -> void: _on_my_guild_changed())
 	peers_changed.connect(_on_peers_for_guilds)
+	# someone joined, left or changed maps: send our looks again with the next snapshot, so newcomers see us at once
+	peers_changed.connect(func() -> void: _app_sig.clear())
 	var cfg := ConfigFile.new()
 	if cfg.load(RECENT_PATH) == OK:
 		last_room = String(cfg.get_value("net", "last_room", ""))
@@ -271,6 +295,8 @@ func host_game(port := PORT) -> String:
 	host_port = port
 	peers = {1: _profile()}
 	_known.clear()
+	_enemy_sent.clear()
+	_enemy_last.clear()
 	_host_enemies.clear()
 	_next_eid = 1
 	_reassign_worlds()
@@ -333,6 +359,8 @@ func leave(reload := true) -> void:
 	peers.clear()
 	status.clear()
 	_known.clear()
+	_enemy_sent.clear()
+	_enemy_last.clear()
 	_host_enemies.clear()
 	_host_shared = false
 	_worlds.clear()
@@ -379,6 +407,7 @@ func _on_peer_disconnected(id: int) -> void:
 	peers.erase(id)
 	status.erase(id)
 	_known.erase(id)
+	_enemy_sent.erase(id)
 	_remove_avatars_of(id)
 	for key in _appearance_cache.keys():
 		if key.begins_with("%d:" % id):
@@ -486,6 +515,7 @@ func _hello(proto: int, profile: Dictionary) -> void:
 	profile["map"] = "" # the joining hero has not arrived yet
 	peers[id] = profile
 	_known[id] = {}
+	_enemy_sent[id] = {}
 	var p := Game.player as Node3D
 	_welcome.rpc_id(id, {"official": dedicated, "map": String(Game.current_map_id), "pos": p.global_position if p else Vector3.ZERO,
 		"yaw": p.rotation.y if p else 0.0, "peers": peers, "worlds": _worlds})
@@ -537,7 +567,18 @@ func _welcome(info: Dictionary) -> void:
 
 func _rpc_peers() -> void:
 	for id in _live_peers():
-		_peers_update.rpc_id(id, peers, _worlds)
+		# bh-035: a map's saved combat state goes only to that map's owner (who restores from it); every roster change used
+		# to send every map's full monster list to every player, a burst of up to a megabyte with twelve on six maps
+		var worlds := {}
+		for map in _worlds:
+			var entry: Dictionary = _worlds[map]
+			if int(entry.get("owner", 0)) == int(id):
+				worlds[map] = entry
+			else:
+				var lean := entry.duplicate()
+				lean.erase("state")
+				worlds[map] = lean
+		_peers_update.rpc_id(id, peers, worlds)
 
 ## Peers this machine can still send to. ENet empties a lost client's channels a few frames before the engine reports
 ## the disconnect, so a broadcast made while handling one departure logs "max channels: 0" for every other client
@@ -558,6 +599,8 @@ func _peers_update(p: Dictionary, worlds: Dictionary) -> void:
 	for map in worlds:
 		if int(_worlds.get(map, {}).get("epoch", -1)) == int(worlds[map].get("epoch", 0)) and _worlds[map].get("rewarded", false):
 			worlds[map]["rewarded"] = true
+		if not worlds[map].has("state"):        # not this machine's map to restore: keep the copy its checkpoints left
+			worlds[map]["state"] = _worlds.get(map, {}).get("state", {})
 	_worlds = worlds
 	_check_shared()
 	peers_changed.emit()
@@ -580,6 +623,8 @@ func on_local_map_loaded(id: StringName) -> void:
 	_clear_replicas()
 	_app_sig.clear()
 	_known.clear()
+	_enemy_sent.clear()
+	_enemy_last.clear()
 	if peers.has(my_id()):
 		peers[my_id()]["map"] = String(id)
 	update_profile()
@@ -655,6 +700,8 @@ func _check_shared() -> void:
 	_clear_replicas()
 	_host_enemies.clear()
 	_known.clear()
+	_enemy_sent.clear()
+	_enemy_last.clear()
 	if _host_shared:
 		_drop_local_monsters(Game.current_map)
 	else:
@@ -669,19 +716,35 @@ func _check_shared() -> void:
 	if was_remote != _host_shared:
 		Events.notify.emit("Party combat synchronized. You can keep exploring independently.", &"info")
 
-func _send_checkpoint() -> void:
+## The map's combat state (every live monster, cleared camps, arena) for a hand-off. The room host keeps the latest copy
+## every second; members on the map hold one too (their own restore when they leave the party) but get the full copy only
+## when `full` (every CHECKPOINT_MEMBER_EVERY seconds) and otherwise just the small camps / arena part, when it changed
+## (bh-035: the full copy to every member every second was most of the map owner's upload).
+func _send_checkpoint(full := true, host_full := true) -> void:
 	if not is_world_authority() or Game.current_map == null:
 		return
 	var state := NetWorld.capture(_host_enemies)
 	var map := String(Game.current_map_id)
 	if is_host():
 		_worlds[map]["state"] = state
+	var light := {}
+	for k in state:
+		if k != "enemies":
+			light[k] = state[k]
+	var sig := hash(light)
+	var light_due := sig != _light_sig
+	if full or light_due:
+		_light_sig = sig
 	var targets := peers.keys()
 	if not is_host() and not peers.has(1):
 		targets.append(1)       # the dedicated coordinator is not on the roster but must hold the latest state for a hand-off
 	for pid in targets:
-		if int(pid) != my_id() and (int(pid) == 1 or _peer_map(pid) == map):
+		if int(pid) == my_id():
+			continue
+		if (int(pid) == 1 and (host_full or full)) or (full and _peer_map(pid) == map):
 			_world_checkpoint.rpc_id(pid, map, _world_epoch, state)
+		elif light_due and (int(pid) == 1 or _peer_map(pid) == map):
+			_world_checkpoint.rpc_id(pid, map, _world_epoch, light)
 
 @rpc("any_peer", "reliable")
 func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
@@ -690,7 +753,13 @@ func _world_checkpoint(map: String, epoch: int, state: Dictionary) -> void:
 		return
 	if not NetGuard.fits(state, NetGuard.MAX_CHECKPOINT_BYTES):
 		return
-	entry["state"] = state
+	if not state.has("enemies"):
+		# a light checkpoint (bh-035): camps, cleared camps and arena moved on; the monster list stays the last full one
+		var merged: Dictionary = (entry.get("state", {}) as Dictionary).duplicate()
+		merged.merge(state, true)
+		state = merged
+	if state.has("enemies"):              # no full copy yet: nothing a restore could use
+		entry["state"] = state
 	if _world_sender(map, epoch) and Game.current_map:
 		var sp := Spawner.current()
 		if sp == null:
@@ -754,6 +823,7 @@ func _in_map(map: String) -> void:
 		return
 	peers[id]["map"] = map
 	_known[id] = {}
+	_enemy_sent[id] = {}
 	_reassign_worlds()
 	_rpc_peers()
 
@@ -893,9 +963,16 @@ func _process(delta: float) -> void:
 	_check_shared()
 	if is_world_authority():
 		_checkpoint_t -= delta
+		_kill_checkpoint_t -= delta
 		if _checkpoint_t <= 0.0:
 			_checkpoint_t = 1.0
-			_send_checkpoint()
+			_checkpoint_n += 1
+			_send_checkpoint(_checkpoint_n % CHECKPOINT_MEMBER_EVERY == 0, _checkpoint_n % CHECKPOINT_HOST_EVERY == 0)
+		elif _kill_checkpoint and _kill_checkpoint_t <= 0.0:
+			# kills: the room host's copy (and the members' camps) catch up at most twice a second
+			_kill_checkpoint = false
+			_kill_checkpoint_t = 0.5
+			_send_checkpoint(false, true)
 		_enemy_t -= delta
 		if _enemy_t <= 0.0:
 			_enemy_t = 1.0 / ENEMY_RATE
@@ -942,7 +1019,8 @@ func _send_allies() -> void:
 		if a is ArenaFighter:
 			e["n"] = a.display_name
 			e["af"] = true
-		if a.visual:
+		# the look rarely changes: hashing the whole appearance 15 times a second per ally was wasted work, 3 times is plenty
+		if a.visual and (_ally_count % 5 == 1 or not _app_sig.has(pair[0])):
 			var sig := hash(str(a.visual.appearance)) ^ hash(String(a.visual._stance_idle))
 			if _ally_count % APPEARANCE_EVERY == 1 or _app_sig.get(pair[0], 0) != sig:
 				_app_sig[pair[0]] = sig
@@ -952,7 +1030,45 @@ func _send_allies() -> void:
 		pack.append(e)
 	if not appearances.is_empty():
 		_appearances.rpc(appearances)
-	_allies.rpc(String(Game.current_map_id), pack)
+	var map := String(Game.current_map_id)
+	var wire := NetCodec.pack_allies(pack)
+	if is_host():
+		_relay_allies(my_id(), map, wire)
+	elif _peer and _peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
+		_allies.rpc_id(1, map, wire)        # the room host forwards it to whoever needs it (bh-035)
+
+## Where a player's hero stands, as far as the room host knows.
+func _status_pos(id: int) -> Variant:
+	if id == my_id():
+		return (Game.player as Node3D).global_position if Game.player is Node3D and is_instance_valid(Game.player) else null
+	var s: Dictionary = status.get(id, {})
+	return s.get("pos", null)
+
+## Room host (bh-035): forward one player's snapshot. Heroes near them on the same map get every snapshot, heroes far
+## away on that map every ALLY_FAR_EVERY-th, and heroes elsewhere a slim presence update (their party frames, minimap
+## rim and world map only read the hero's place and health) every ALLY_AWAY_EVERY-th.
+func _relay_allies(from: int, map: String, wire: Array) -> void:
+	var here: Variant = _status_pos(from)
+	var slim: Array = []
+	for to in _live_peers():
+		if to == from or to == my_id() or not peers.has(to):
+			continue
+		var k := "%d>%d" % [from, to]
+		var n: int = _relay_n.get(k, 0) + 1
+		_relay_n[k] = n
+		if _peer_map(to) != map:
+			if n % ALLY_AWAY_EVERY != 1:
+				continue
+			if slim.is_empty():
+				for e in wire:
+					if e is Dictionary and e.get("k", "") == "p":
+						slim.append({"k": "p", "b": e.b, "n": e.get("n", "Hero")})
+			_ally_relay.rpc_id(to, from, map, slim)
+			continue
+		var there: Variant = _status_pos(to)
+		if here is Vector3 and there is Vector3 and (here as Vector3).distance_to(there) > ALLY_NEAR and n % ALLY_FAR_EVERY != 1:
+			continue
+		_ally_relay.rpc_id(to, from, map, wire)
 
 ## Appearance must arrive reliably even when a large snapshot is overtaken by enemy updates.
 @rpc("any_peer", "reliable")
@@ -962,13 +1078,36 @@ func _appearances(pack: Array) -> void:
 		return
 	for entry in pack:
 		if entry is Dictionary and entry.get("k", null) is String and entry.get("a", null) is Dictionary and NetGuard.fits(entry.a, NetGuard.MAX_APPEARANCE_BYTES):
-			_appearance_cache["%d:%s" % [from, entry.k]] = entry.a
+			var k := "%d:%s" % [from, entry.k]
+			_appearance_cache[k] = entry.a
+			_appearance_rev[k] = int(_appearance_rev.get(k, 0)) + 1
 
+## A player's snapshot of their hero, Tempos and arena fighters, sent to the room host (bh-035: no longer broadcast).
 @rpc("any_peer", "call_remote", "unreliable_ordered", 1)
-func _allies(map: String, pack: Array) -> void:
+func _allies(map: String, wire: Array) -> void:
 	var from := multiplayer.get_remote_sender_id()
-	if not peers.has(from) or _peer_map(from) != map or not NetGuard.allow(from, "allies", 30.0, 60.0) or not NetGuard.ally_pack_ok(pack):
+	if not is_host() or not peers.has(from) or _peer_map(from) != map or not NetGuard.allow(from, "allies", 30.0, 60.0) 			or not NetGuard.fits(wire, NetGuard.MAX_PACK_BYTES):
 		return
+	var pack := NetCodec.unpack_allies(wire)
+	if pack.size() != wire.size() or not NetGuard.ally_pack_ok(pack):
+		return
+	_take_allies(from, map, pack)
+	_relay_allies(from, map, wire)
+
+## The room host forwarding another player's snapshot (already checked there).
+@rpc("authority", "call_remote", "unreliable_ordered", 1)
+func _ally_relay(from: int, map: String, wire: Array) -> void:
+	if not peers.has(from) or from == my_id() or _peer_map(from) != map:
+		return
+	var pack := NetCodec.unpack_allies(wire)
+	if pack.size() != wire.size() or not NetGuard.ally_pack_ok(pack):
+		return
+	_take_allies(from, map, pack)
+
+func _take_allies(from: int, map: String, pack: Array) -> void:
+	for e in pack:
+		if not e is Dictionary or not e.get("s", null) is Array:
+			return
 	for e in pack:
 		if e.get("k", "") == "p" and (e.s as Array).size() >= 12:
 			status[from] = {"map": map, "pos": e.s[0], "yaw": e.s[1], "hp": e.s[3], "mhp": e.s[4], "alive": e.s[5], "lvl": e.s[11],
@@ -981,14 +1120,10 @@ func _allies(map: String, pack: Array) -> void:
 	var seen := {}
 	for e in pack:
 		var k := "%d:%s" % [from, e.k]
-		if e.has("a"):
-			_appearance_cache[k] = e.a
-		elif _appearance_cache.has(k):
-			e["a"] = _appearance_cache[k]
 		seen[k] = true
 		var av: NetAvatar = _avatars.get(k)
 		if av == null or not is_instance_valid(av):
-			if not e.has("a"):
+			if not _appearance_cache.has(k):
 				continue                       # wait for the appearance
 			var s: Array = e.s
 			av = NetAvatar.new().setup(from, String(e.k), {"name": e.get("n", "Hero"), "lvl": s[11], "mhp": s[4], "hp": s[3]})
@@ -996,8 +1131,11 @@ func _allies(map: String, pack: Array) -> void:
 			Game.current_map.add_child(av)
 			av.snap_to(s[0], s[1])
 			_avatars[k] = av
-		if e.has("a"):
-			av.set_appearance(e.a)
+		# re-dress only when a new appearance arrived (it used to rebuild the gear plan 15 times a second per ally)
+		var rev := int(_appearance_rev.get(k, 0))
+		if av.appearance_rev != rev and _appearance_cache.has(k):
+			av.appearance_rev = rev
+			av.set_appearance(_appearance_cache[k])
 		av.guild_tag = String(e.get("g", ""))
 		av.display_name = String(e.get("n", av.display_name))
 		av.apply_state(e.s)
@@ -1071,8 +1209,44 @@ static func enemy_info(e: Enemy) -> Dictionary:
 		"depth_guardian": e.miniboss if e.has_meta(&"depth_guardian") else {},
 		"dungeon_reward": float(e.get_meta(&"dungeon_reward_bonus", 0.0))}
 
+## One monster's snapshot: [id, pos, yaw, vel, hp, max_hp, action, serial, rate, loop, engaged, shield]
+static func enemy_state(id: int, e: Enemy) -> Array:
+	var v := e.visual
+	return [id, e.global_position, e.rotation.y, e.velocity, e.hp, e.max_hp(), String(v.current_action() if v else &""),
+		v.action_serial if v else 0, v.action_rate if v else 1.0, bool(v._action_loop) if v else false, e.brain.is_engaged(), e.shield_hp]
+
+## Has a monster changed enough since its last snapshot that the members would see the difference?
+static func enemy_changed(a: Array, b: Array) -> bool:
+	if a.size() != b.size():
+		return true
+	if (a[1] as Vector3).distance_squared_to(b[1]) > 0.0004 or absf(angle_difference(float(a[2]), float(b[2]))) > 0.02:
+		return true
+	if (a[3] as Vector3).distance_squared_to(b[3]) > 0.01:
+		return true
+	return a[4] != b[4] or a[5] != b[5] or a[6] != b[6] or a[7] != b[7] or a[9] != b[9] or a[10] != b[10] or a[11] != b[11]
+
+## Stream the monsters near each member (bh-035): each state is built once per round, not once per member. A member is
+## sent a monster when it changed since the snapshot that member last got (monsters beyond ENEMY_FAR of the member: on every
+## ENEMY_FAR_EVERY-th round only), and otherwise once per ENEMY_KEEPALIVE so its replica never goes stale.
 func _send_enemies() -> void:
 	var here := String(Game.current_map_id)
+	_enemy_tick += 1
+	var now := Time.get_ticks_msec()
+	var states := {}
+	for id in _host_enemies:
+		var e: Enemy = _host_enemies[id]
+		if not is_instance_valid(e) or not e.alive:
+			continue
+		var s := enemy_state(id, e)
+		states[id] = s
+		var last: Variant = _enemy_last.get(id)
+		if last == null or enemy_changed(last, s):
+			_enemy_last[id] = s                # a new reference: members holding the old one are behind
+	for id in _enemy_last.keys():
+		if not states.has(id):
+			_enemy_last.erase(id)
+			for pid in _enemy_sent:
+				(_enemy_sent[pid] as Dictionary).erase(id)
 	for pid in peers:
 		if pid == my_id() or _peer_map(pid) != here:
 			continue
@@ -1085,31 +1259,36 @@ func _send_enemies() -> void:
 		else:
 			continue                           # no hero on this machine and no avatar yet: nothing to measure range from
 		var known: Dictionary = _known.get_or_add(pid, {})
+		var sent: Dictionary = _enemy_sent.get_or_add(pid, {})
 		var infos := []
-		var states := []
-		for id in _host_enemies:
+		var out := []
+		for id in states:
 			var e: Enemy = _host_enemies[id]
-			if not is_instance_valid(e) or not e.alive:
-				continue
-			if e.global_position.distance_to(center) > ENEMY_RANGE:
+			var d := e.global_position.distance_to(center)
+			if d > ENEMY_RANGE:
 				continue
 			if not known.has(id):
 				known[id] = true
 				infos.append(enemy_info(e))
-			var v := e.visual
-			states.append([id, e.global_position, e.rotation.y, e.velocity, e.hp, e.max_hp(), String(v.current_action() if v else &""),
-				v.action_serial if v else 0, v.action_rate if v else 1.0, bool(v._action_loop) if v else false, e.brain.is_engaged(), e.shield_hp])
+			var had: Array = sent.get(id, [-100000, null])
+			var stale := now - int(had[0]) > ENEMY_KEEPALIVE * 1000.0
+			var behind := not is_same(had[1], _enemy_last[id])
+			var slow: bool = d > ENEMY_FAR or not (states[id][10] or states[id][6] != "")
+			if not stale and (not behind or (slow and _enemy_tick % ENEMY_FAR_EVERY != 0)):
+				continue
+			sent[id] = [now, _enemy_last[id]]
+			out.append(states[id])
 		if not infos.is_empty():
 			_enemy_spawn.rpc_id(pid, here, _world_epoch, infos)
 		# unreliable packets above the MTU (~1392 bytes) are fragmented and lost more often (and the engine warns, which
 		# costs the owner a frame), so a big snapshot goes out in packets of ENEMY_BATCH monsters
-		for i in range(0, states.size(), ENEMY_BATCH):
-			_enemy_states.rpc_id(pid, here, _world_epoch, states.slice(i, i + ENEMY_BATCH))
+		for i in range(0, out.size(), ENEMY_BATCH):
+			_enemy_states.rpc_id(pid, here, _world_epoch, NetCodec.pack_monsters(out.slice(i, i + ENEMY_BATCH)))
 
 func _on_actor_died(actor: Node, killer: Node) -> void:
 	if not is_world_authority() or not (actor is Enemy) or not actor.has_meta(&"net_id"):
 		return
-	_send_checkpoint.call_deferred()
+	_kill_checkpoint = true                    # one checkpoint for a whole AoE of kills, not one per monster
 	var kp := 0
 	if killer is NetAvatar:
 		kp = (killer as NetAvatar).owner_peer
@@ -1178,11 +1357,10 @@ func _enemy_spawn(map: String, epoch: int, infos: Array) -> void:
 			_replica_seen[id] = Time.get_ticks_msec() * 0.001
 
 @rpc("any_peer", "call_remote", "unreliable_ordered", 2)
-func _enemy_states(map: String, epoch: int, states: Array) -> void:
+func _enemy_states(map: String, epoch: int, blob) -> void:
 	if not _world_sender(map, epoch):
 		return
-	if states.size() > 512:
-		return
+	var states := NetCodec.unpack_monsters(blob)      # packed by the owner (bh-035); a malformed blob decodes to []
 	var now := Time.get_ticks_msec() * 0.001
 	for s in states:
 		if not s is Array or (s as Array).size() < 12 or not NetGuard.finite_vec(s[1]) or not NetGuard.finite(s[4]):
@@ -1234,6 +1412,7 @@ func _forget_on_host(eid: int) -> void:
 	var from := multiplayer.get_remote_sender_id()
 	if is_world_authority() and _known.has(from):
 		(_known[from] as Dictionary).erase(eid)
+		(_enemy_sent.get(from, {}) as Dictionary).erase(eid)
 
 func _clear_replicas() -> void:
 	for id in _replicas:

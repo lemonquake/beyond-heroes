@@ -58,7 +58,7 @@ static func build() -> Array:
 	mage.dodge_cooldown = 1.0
 	mage.resource_kind = &"arcane"
 	mage.class_modifiers = [
-		StatModifier.inc(&"elemental_damage", 0.10, "Mage: Elemental Attunement"),
+		StatModifier.inc(&"elemental_damage", 0.25, "Mage: Elemental Attunement"),
 		StatModifier.flat(&"mana_cost_reduction", 0.05, "Mage: Efficient Channeling"),
 	]
 	mage.weapon_mastery = {&"staff": 0.10, &"wand": 0.10}

@@ -182,7 +182,7 @@ class HttpBoundaryTests(unittest.TestCase):
     def test_health_reports_protocol_and_version(self):
         status, body, headers = self.call("GET", "/health")
         self.assertEqual(200, status)
-        self.assertEqual(18, body["protocol"])
+        self.assertEqual(19, body["protocol"])
         self.assertIn("version", body)
         self.assertEqual("no-store", headers["Cache-Control"])
 

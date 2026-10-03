@@ -48,6 +48,7 @@ func _ready() -> void:
 	rotation.y = _home_yaw
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
+	visual.crowd_lod = true                    # bh-035: a busy town square animates its far townsfolk at a coarser rate
 	add_child(visual)
 	# fidget set from the body: the hero models carry class idles; townsfolk only have idle_look / idle_adjust
 	var personality := &"townsfolk"

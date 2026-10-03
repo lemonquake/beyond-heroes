@@ -211,7 +211,13 @@ func _prepare_animations() -> void:
 		var lib := anim_player.get_animation_library(lib_name)
 		for an in lib.get_animation_list():
 			var meta := DB.anim(an)
-			lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if meta.get("loop", false) else Animation.LOOP_NONE
+			# the library is the model's shared one: every assignment emits `changed`, which cleared the caches of every
+			# character using it (each rebuilt them on its next frame: ~75 ms a spawn on the hero body, bh-035), so only
+			# the first character to load a model actually writes
+			var want := Animation.LOOP_LINEAR if meta.get("loop", false) else Animation.LOOP_NONE
+			var clip := lib.get_animation(an)
+			if clip.loop_mode != want:
+				clip.loop_mode = want
 
 func has_anim(n: StringName) -> bool:
 	if anim_player == null:
@@ -325,6 +331,35 @@ func _build_tree() -> void:
 var _anim_awake := true
 var _frozen_pose := false           # Frozen status: the body is ice, the tree holds its pose
 
+## Animation update-rate LOD (bh-035). In a crowd (Perf ranks every animated character on screen by distance) an ordinary
+## monster or townsperson beyond the nearest dozen evaluates its tree every 2nd or 3rd frame with the time that passed, so
+## clips stay in step and only the pose refresh is coarser; the pose, skeleton and skinning work of a big fight drops with
+## it. Bosses, the hero, other players and companions never take part (`crowd_lod` stays false).
+var crowd_lod := false
+var anim_stride := 1
+var _anim_acc := 0.0
+var _anim_tick := 0
+
+func set_anim_stride(n: int) -> void:
+	n = clampi(n, 1, 4)
+	if n == anim_stride or tree == null:
+		return
+	if n == 1 and _anim_acc > 0.0 and tree.active:
+		tree.advance(_anim_acc)           # catch up before handing the tree back to the engine
+	anim_stride = n
+	_anim_acc = 0.0
+	tree.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL if n > 1 else AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE
+
+func _step_anim(delta: float) -> void:
+	if not tree.active:
+		_anim_acc = 0.0
+		return
+	_anim_acc += delta
+	_anim_tick += 1
+	if (_anim_tick + get_instance_id()) % anim_stride == 0:
+		tree.advance(_anim_acc)
+		_anim_acc = 0.0
+
 ## Efficiency mode (bh-009, Perf): off screen or far away the tree stops evaluating and the pose freezes. Timers,
 ## action ends and every gameplay signal keep running in _process, so nothing waits on a sleeping tree.
 func set_anim_awake(on: bool) -> void:
@@ -409,6 +444,8 @@ func _process(delta: float) -> void:
 		tree.set(&"parameters/combat/blend_amount", _combat)
 		tree.set(&"parameters/hurt/blend_amount", _hurt)
 		tree.set(&"parameters/upper/blend_amount", _upper)
+		if anim_stride > 1:
+			_step_anim(delta)
 	if _in_action and not _action_loop:
 		_action_left -= delta
 		if _action_left <= 0.0:

@@ -16,6 +16,8 @@ var fails: Array = []
 const HOST_GOLD := 500
 const JOIN_GOLD := 100
 
+var _mine: ItemInstance
+
 func _ready() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--") and "=" in a:
@@ -62,6 +64,7 @@ func _run() -> void:
 	var mine := DB.make_item(&"health_potion" if role == "host" else &"mana_potion", BH.Rarity.COMMON, 1, 11)
 	mine.count = 3
 	h.inventory.add(mine)
+	_mine = mine
 	h.inventory.changed.emit()
 	if role == "host":
 		await _host()
@@ -128,7 +131,8 @@ func _host() -> void:
 	var opened := await _until(func() -> bool: return Net.in_trade() and Net.trade.phase == "open" and Game.ui_root.window(&"trade").visible, 25.0)
 	_check("accepted: the trade table is open", opened)
 	await _wait(1.0)
-	var bag_item: ItemInstance = Game.hero.inventory.cells[0]
+	# potions fill the belt first since the belt got its own cells (bh-030), so take the stack wherever it went
+	var bag_item: ItemInstance = Game.hero.inventory.cells[Game.hero.inventory.index_of(_mine)]
 	_check("offer 100 gold and the potions", Net.trade_set_offer(100, [bag_item]) == "")
 	await _wait(0.5)
 	await _shot("host_offer")
@@ -182,7 +186,7 @@ func _client() -> void:
 	# wait for the host's offer, then answer with ours
 	var seen := await _until(func() -> bool: return int(Net.trade.theirs.gold) == 100 and Net.trade.theirs.items.size() == 1, 25.0)
 	_check("the host's offer (100 gold + a stack) shows here", seen)
-	var bag_item: ItemInstance = Game.hero.inventory.cells[0]
+	var bag_item: ItemInstance = Game.hero.inventory.cells[Game.hero.inventory.index_of(_mine)]
 	_check("offer 30 gold and the mana potions", Net.trade_set_offer(30, [bag_item]) == "")
 	await _wait(1.0)
 	await _shot("client_table")

@@ -139,7 +139,7 @@ const M := {
 ## Role -> motif names, per theme. "boss": the arena's one silhouette (placed in its two farthest corners, nothing else);
 ## "edge": small single pieces along basin/gallery parapets; "decay": what replaces a work motif on deep floors.
 const T := {
-	&"fungal": {"arrival": ["fungal_log", "c_mushroom", "fungal_stump"], "work": ["storage_wet", "timber_fall"], "function": ["fungal_log", "pod_cluster", "c_mushroom"],
+	&"fungal": {"arrival": ["fungal_log", "c_mushroom", "fungal_stump"], "work": ["storage", "timber_fall", "fungal_stump"], "function": ["fungal_log", "pod_cluster", "c_mushroom"],
 		"traversal": ["fungal_stump"], "seal": ["fungal_log"], "boss": ["mushroom_giant", 0.6], "edge": ["kd_mushrooms_pale", "kd_ground_leaves"],
 		"decay": ["timber_fall"]},
 	&"drowned": {"arrival": ["wreck_rib", "service_corner"], "work": ["storage", "storage_wet"], "function": ["coffin_old", "wreck_rib", "sea_growth"],

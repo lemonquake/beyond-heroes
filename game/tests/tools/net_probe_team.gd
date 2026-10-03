@@ -167,6 +167,9 @@ func _command(serial: int, action: String, args: Dictionary) -> void:
 			e.global_position = Game.player.global_position + Vector3(2, 0, 2)
 			e.home = e.global_position
 			e.hp = 1.0
+			# out of the "enemy" group: the owner's own Tempo must not kill it before the other member has seen it (a race
+			# that failed this step now and then); Net streams it from _host_enemies all the same
+			e.remove_from_group(&"enemy")
 			await wait(2.0)
 			result = Net._host_enemies.has(900001)
 		"kill":

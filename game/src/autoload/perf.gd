@@ -16,6 +16,10 @@ const LIGHT_RADIUS := 32.0          # a light further than this from the hero ne
 const ANIM_RANGE := 40.0            # characters further than this from the camera focus stop animating
 const FRUSTUM_MARGIN := 3.0         # metres outside the screen edge that still count as on screen
 const TICK := 0.2
+## Animation update-rate LOD (bh-035): of the crowd-eligible characters animating on screen, the nearest CROWD_FULL animate
+## every frame, the next CROWD_HALF every 2nd frame and the rest every 3rd (CharacterVisual.set_anim_stride).
+const CROWD_FULL := 12
+const CROWD_HALF := 16
 
 ## Efficiency mode (Settings.lite), mirrored here so builders and effects have one short name to ask.
 var lite: bool:
@@ -27,7 +31,7 @@ var _off_lights := {}               # Light3D -> true while this governor keeps 
 var _t := 0.0
 var _was_lite := false
 ## Last tick's numbers (perf probe, tests).
-var stats := {"lights_total": 0, "lights_on": 0, "visuals": 0, "anim_awake": 0}
+var stats := {"lights_total": 0, "lights_on": 0, "visuals": 0, "anim_awake": 0, "anim_coarse": 0}
 
 func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
@@ -148,6 +152,7 @@ func _set_light(l: Light3D, on: bool) -> void:
 func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 	var planes := cam.get_frustum()
 	var awake := 0
+	var crowd: Array = []
 	var i := 0
 	while i < _visuals.size():
 		var v := _visuals[i]
@@ -171,8 +176,20 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 		v.set_anim_awake(show)
 		if show:
 			awake += 1
+			if v.crowd_lod:
+				crowd.append([p.distance_squared_to(focus), v])
+		elif v.anim_stride != 1:
+			v.set_anim_stride(1)
+	if crowd.size() > CROWD_FULL / 2:
+		crowd.sort_custom(func(a, b): return a[0] < b[0])
+	# efficiency mode (phones) keeps fewer characters at the full rate
+	var full := CROWD_FULL if not lite else CROWD_FULL / 2
+	var half := CROWD_HALF if not lite else CROWD_HALF / 2
+	for k in crowd.size():
+		(crowd[k][1] as CharacterVisual).set_anim_stride(1 if k < full else (2 if k < full + half else 3))
 	stats.visuals = _visuals.size()
 	stats.anim_awake = awake
+	stats.anim_coarse = maxi(0, crowd.size() - full)
 
 ## Efficiency mode was switched off: give every light back.
 func _restore_lights() -> void:
@@ -190,3 +207,4 @@ func _restore() -> void:
 	for v in _visuals:
 		if is_instance_valid(v):
 			v.set_anim_awake(true)
+			v.set_anim_stride(1)

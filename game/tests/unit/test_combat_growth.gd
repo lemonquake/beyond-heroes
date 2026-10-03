@@ -7,7 +7,8 @@ func _init() -> void:
 func _hero(cid: StringName, level: int) -> HeroData:
 	var h := Game.new_hero(cid, "Progression test")
 	h.progress.add_xp(XpCurve.total_xp_for_level(level))
-	var primary := &"int" if cid == &"mage" else &"str"
+	# the class's weapon attribute: Intelligence for staves, Agility for the Shadowblade's daggers (bh-035), else Strength
+	var primary: StringName = {&"mage": &"int", &"shadowblade": &"agi"}.get(cid, &"str")
 	h.progress.allocate(primary, (level - 1) * 2)
 	h.progress.allocate(&"wis" if cid == &"mage" else &"dex", level - 1)
 	return h

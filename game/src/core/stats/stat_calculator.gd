@@ -286,11 +286,11 @@ static func compute(cls: ClassDef, level: int, attributes: Dictionary, modifiers
 		"Agility %d: -%.1f%% (max %d%%)" % [AGI, minf(DODGE_CDR_CAP, AGI * DODGE_CDR_PER_AGI) * 100.0, roundi(DODGE_CDR_CAP * 100)]]))
 
 	# ---- Offense ------------------------------------------------------------------------------------------
-	var attack_attr := DEX if d.loadout.main_type != null and d.loadout.main_type.id in [&"bow", &"crossbow", &"javelin"] else STR
+	var attack_attr := finesse_attribute(d.loadout.main_type.id if d.loadout.main_type != null else &"", STR, AGI, DEX)
 	var attack := CombatGrowth.physical_attack(attack_attr, level)
 	d.set_stat(&"physical_attack", attack + agg.flat(&"physical_attack"), PackedStringArray([
 		"Weapon attribute above 15 adds 0.5 attack per point plus 0.0015 x points squared.",
-		"Bows, crossbows and javelins use Dexterity; melee weapons use Strength.",
+		"Bows, crossbows and javelins use Dexterity; daggers and claws Agility; knuckles the better of Strength and Agility; other melee weapons Strength.",
 		"Gradually enabled at levels 6-15. Added before damage bonuses."]))
 	var focus := 0.0
 	if d.loadout.main_type != null and d.loadout.main_type.id in [&"staff", &"wand"]:
@@ -385,6 +385,17 @@ static func load_move_mult(load: float) -> float:
 	if load <= LOAD_FREE:
 		return 1.0
 	return 1.0 - LOAD_SLOW_MAX * (load - LOAD_FREE) / (1.0 - LOAD_FREE)
+
+## The attribute a weapon type's flat attack grows with. bh-035: daggers, claws and knuckles (the Shadowblade's weapons)
+## drew it from Strength like a sword, so the Agility class reached a third of the other classes' weapon damage by level 30.
+static func finesse_attribute(weapon_type: StringName, str_v: float, agi_v: float, dex_v: float) -> float:
+	if weapon_type in [&"bow", &"crossbow", &"javelin"]:
+		return dex_v
+	if weapon_type in [&"dagger", &"claw"]:
+		return agi_v
+	if weapon_type == &"knuckles":
+		return maxf(str_v, agi_v)
+	return str_v
 
 ## Displayed and rolled weapon base range for one hand after flat added physical damage (before % bonuses).
 static func weapon_range(d: DerivedStats, hand: int) -> Vector2:

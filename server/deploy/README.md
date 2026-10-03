@@ -116,7 +116,7 @@ exits non-zero, and systemd restarts the pair (`Restart=on-failure`, at most fiv
 ## Verify on the VM (not done)
 
 - [ ] `systemd-analyze verify /etc/systemd/system/beyond-heroes.service`, `caddy validate`
-- [ ] `https://HOST/health` from another network: valid public certificate, protocol 18, `game_online: true`
+- [ ] `https://HOST/health` from another network: valid public certificate, protocol 19, `game_online: true`
 - [ ] `https://HOST/internal/start` returns 404; `nc -vz HOST 8443` fails from outside
 - [ ] Two game clients on **different networks** join the server over UDP 24680, see each other and trade; one on mobile data
 - [ ] `python -m server.integration_probe` against the VM with test accounts, then the log scan is clean

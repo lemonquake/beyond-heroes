@@ -1,0 +1,26 @@
+BALANCE L1 knight      single     9.2  aoe    17.8  ehp    2376  power    623.7
+BALANCE L1 mage        single    15.7  aoe    26.3  ehp     690  power    533.9
+BALANCE L1 ranger      single    12.2  aoe    15.2  ehp     926  power    414.4
+BALANCE L1 shadowblade single    19.5  aoe    33.2  ehp     916  power    770.2
+BALANCE L10 knight      single    36.6  aoe   156.2  ehp    5567  power   5641.5
+BALANCE L10 mage        single    34.5  aoe    72.0  ehp    2787  power   2631.0
+BALANCE L10 ranger      single    40.6  aoe    92.0  ehp    3046  power   3373.1
+BALANCE L10 shadowblade single    25.7  aoe    46.2  ehp    3042  power   1900.6
+BALANCE L20 knight      single   162.5  aoe   545.7  ehp    9653  power  29257.4
+BALANCE L20 mage        single   115.9  aoe   328.5  ehp    4934  power  13706.6
+BALANCE L20 ranger      single   117.9  aoe   481.0  ehp    5211  power  17191.4
+BALANCE L20 shadowblade single    49.2  aoe   168.7  ehp    5205  power   6572.9
+BALANCE L30 knight      single   156.2  aoe   688.7  ehp   13419  power  37993.7
+BALANCE L30 mage        single   294.8  aoe   824.0  ehp    7263  power  42003.1
+BALANCE L30 ranger      single   253.0  aoe  1247.7  ehp    8502  power  51805.3
+BALANCE L30 shadowblade single    91.6  aoe   379.1  ehp    7556  power  16197.8
+[FAIL] test_balance.gd — 1 tests, 16 checks, 9 failures (382154.2 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 ranger power 414.4 is within 20% of the mean 585.6 (-29%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 770.2 is within 20% of the mean 585.6 (+32%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 5641.5 is within 20% of the mean 3386.6 (+67%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 mage power 2631.0 is within 20% of the mean 3386.6 (-22%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1900.6 is within 20% of the mean 3386.6 (-44%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 29257.4 is within 20% of the mean 16682.1 (+75%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 6572.9 is within 20% of the mean 16682.1 (-61%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 ranger power 51805.3 is within 20% of the mean 37000.0 (+40%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 16197.8 is within 20% of the mean 37000.0 (-56%)

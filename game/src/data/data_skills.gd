@@ -23,7 +23,7 @@ static func skills() -> Array:
 			"mana_cost": 4.0, "mana_per_rank": 0.5, "cooldown": 0.0, "requires": &"melee",
 			"description": "A wide, heavy sweep dealing {weapon_pct}% weapon damage to all enemies in a {arc}° arc and knocking them back.",
 			"params": {"weapon_pct": 150.0, "arc": 170.0, "range": 3.0, "knockback": 9.0, "poise": 22.0, "valor_gain": 4.0},
-			"per_rank": {"weapon_pct": 18.0}, "sound_cast": &"cleave", "sound_hit": &"hit_heavy", "vfx": &"slash_wide"}),
+			"per_rank": {"weapon_pct": 12.0}, "sound_cast": &"cleave", "sound_hit": &"hit_heavy", "vfx": &"slash_wide"}),
 		_s(&"shield_bash", "Shield Bash", &"knight", &"dash_strike", {"kind": ATK, "anim": &"shield_bash", "anim_speed_stat": &"attack_speed",
 			"mana_cost": 6.0, "cooldown": 5.0, "requires": &"", "on_hit_status": {&"sundered": [5.0, 0.0]},
 			"description": "Charge {dash} m and slam your shield into the first enemy: {weapon_pct}% weapon damage, stun and a violent knockback. Sunders the target (25% less Defense). Without a shield, uses the pommel for half the stun.",

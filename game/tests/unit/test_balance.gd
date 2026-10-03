@@ -7,7 +7,8 @@ extends TestCase
 ## Power score = sqrt(single x aoe) x sqrt(ehp). Gates (contract bh-010): every class within +-20% of the mean power at
 ## each level. Results are printed as BALANCE lines and written to work/lemondev/bh-010/evidence/balance.json.
 ## The bot presses the same controls a player would: skills in priority order (longest cooldown first), otherwise the
-## basic attack. Knights switch on their learned offensive aura. Numbers are simulation results, not a player study.
+## basic attack; finishers wait for a full bar (bh-035). Knights switch on their learned offensive aura. Numbers are
+## simulation results, not a player study.
 
 const CLASSES := [&"knight", &"mage", &"ranger", &"shadowblade"]
 const LEVELS := [1, 10, 20, 30]
@@ -163,6 +164,8 @@ func _dps(h: HeroData, lvl: int, n: int) -> float:
 		if _player.action == null and _player.channel_skill == &"":
 			var cast := false
 			for sid in order:
+				if not _ready_to_spend(sid):
+					continue
 				if _player.skill_block_reason(sid) == "":
 					if holding:
 						Input.action_release(&"primary")
@@ -183,6 +186,20 @@ func _dps(h: HeroData, lvl: int, n: int) -> float:
 			push_warning("balance dummy died")
 	_end()
 	return dealt / SIM_SECONDS
+
+## bh-035: a player spends a finisher on a full bar, not on an empty one. Finishers (Combo) wait for 4 pips and Focus shots
+## for Steady (60); until then the bot keeps building with its other skills and basic attacks. Before this the bot fired
+## Shadowblade finishers the moment they were off cooldown, at 0-1 pips, which measured the class far below the others.
+func _ready_to_spend(sid: StringName) -> bool:
+	var s := DB.skill(sid)
+	var res = _player.resource
+	if s == null or res == null:
+		return true
+	if float(s.params.get("consume_combo", 0.0)) > 0.0 and res.kind == &"combo":
+		return res.value >= 4.0
+	if float(s.params.get("consume_focus", 0.0)) > 0.0 and res.kind == &"focus":
+		return res.value >= ClassResource.STEADY_AT
+	return true
 
 ## Effective HP against a standard level-appropriate physical monster blow (evasion, block and armour all count).
 func _ehp(h: HeroData, lvl: int) -> float:

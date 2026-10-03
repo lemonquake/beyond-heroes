@@ -83,10 +83,11 @@ func test_old_levels_keep_old_numbers() -> void:
 	# a real skill and a real talent
 	var h := _hero()
 	var cleave := DB.skill(&"cleave")
-	near(float(cleave.resolve(3).weapon_pct), 150.0 + 18.0 * 2.0, 0.001, "Cleave rank 3 as before")
-	near(float(cleave.resolve(5).weapon_pct), 150.0 + 18.0 * 4.0, 0.001, "Cleave rank 5 as before")
+	# bh-035 rebalanced Cleave to +12% per rank (was +18%); ranks 1-5 still follow the authored per-rank step exactly
+	near(float(cleave.resolve(3).weapon_pct), 150.0 + 12.0 * 2.0, 0.001, "Cleave rank 3 follows its per-rank step")
+	near(float(cleave.resolve(5).weapon_pct), 150.0 + 12.0 * 4.0, 0.001, "Cleave rank 5 follows its per-rank step")
 	ok(float(cleave.resolve(25).weapon_pct) > float(cleave.resolve(5).weapon_pct), "Cleave keeps growing to level 25")
-	ok(float(cleave.resolve(25).weapon_pct) < 150.0 + 18.0 * 24.0, "...but slower than a straight line")
+	ok(float(cleave.resolve(25).weapon_pct) < 150.0 + 12.0 * 24.0, "...but slower than a straight line")
 	near(cleave.mana_at(3), 4.0 + 0.5 * 2.0, 0.001, "mana cost at rank 3 as before")
 	# what the extra 20 levels buy: a real gain, but nowhere near a straight line (which would be 3.5x here)
 	var fb := DB.skill(&"firebolt")

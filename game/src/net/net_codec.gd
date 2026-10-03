@@ -91,3 +91,126 @@ static func parse_room_code(code: String, default_port: int) -> Array:
 	var ip := "%d.%d.%d.%d" % [(v >> 24) & 255, (v >> 16) & 255, (v >> 8) & 255, v & 255]
 	var port := default_port if c.length() == 7 else (v >> 32) & 0xFFFF
 	return [ip, port]
+
+# ---- Compact snapshots (bh-035) -------------------------------------------------------------------------------------
+# A hero or monster snapshot sent as generic Variants cost 136-192 bytes (every float a typed 8-byte value, every field
+# its own header). Packed by hand it is about 40: position as three 32-bit floats, yaw and velocity quantised to 16 bits,
+# flags in one byte. The decoded Array has the same layout as before, so everything that reads a snapshot is unchanged.
+#   actor   [pos, yaw, vel, hp, max_hp, alive, action, serial, rate, loop, combat, level]
+#   monster [id, pos, yaw, vel, hp, max_hp, action, serial, rate, loop, engaged, shield]
+
+const _YAW_Q := 32767.0 / PI
+const _VEL_Q := 100.0                # centimetres per second
+
+static func _put_core(b: StreamPeerBuffer, pos: Vector3, yaw: float, vel: Vector3, hp: float, max_hp: float, action: String,
+		serial: int, rate: float, flags: int) -> void:
+	b.put_float(pos.x)
+	b.put_float(pos.y)
+	b.put_float(pos.z)
+	b.put_16(int(clampf(wrapf(yaw, -PI, PI) * _YAW_Q, -32767.0, 32767.0)))
+	b.put_16(int(clampf(vel.x * _VEL_Q, -32767.0, 32767.0)))
+	b.put_16(int(clampf(vel.y * _VEL_Q, -32767.0, 32767.0)))
+	b.put_16(int(clampf(vel.z * _VEL_Q, -32767.0, 32767.0)))
+	b.put_float(hp)
+	b.put_float(max_hp)
+	b.put_u8(flags)
+	b.put_u16(serial & 0xFFFF)
+	b.put_u16(int(clampf(rate * 1000.0, 0.0, 65535.0)))
+	var name := action.to_utf8_buffer()
+	b.put_u8(mini(name.size(), 64))
+	b.put_data(name.slice(0, 64))
+
+## Reads one core block, or returns [] when the buffer is too short (a malformed packet is simply dropped).
+static func _get_core(b: StreamPeerBuffer) -> Array:
+	if b.get_available_bytes() < 34:
+		return []
+	var pos := Vector3(b.get_float(), b.get_float(), b.get_float())
+	var yaw := b.get_16() / _YAW_Q
+	var vel := Vector3(b.get_16() / _VEL_Q, b.get_16() / _VEL_Q, b.get_16() / _VEL_Q)
+	var hp := b.get_float()
+	var max_hp := b.get_float()
+	var flags := b.get_u8()
+	var serial := b.get_u16()
+	var rate := b.get_u16() / 1000.0
+	var n := b.get_u8()
+	if n > 64 or b.get_available_bytes() < n:
+		return []
+	var action := (b.get_data(n)[1] as PackedByteArray).get_string_from_utf8() if n > 0 else ""
+	return [pos, yaw, vel, hp, max_hp, flags, action, serial, rate]
+
+## A hero / Tempo / arena fighter snapshot (Net.actor_state) as bytes.
+static func pack_actor(s: Array) -> PackedByteArray:
+	var b := StreamPeerBuffer.new()
+	var flags := (1 if s[5] else 0) | (2 if s[9] else 0) | (4 if s[10] else 0)
+	_put_core(b, s[0], s[1], s[2], s[3], s[4], String(s[6]), int(s[7]), float(s[8]), flags)
+	b.put_u16(clampi(int(s[11]), 0, 65535))
+	return b.data_array
+
+static func unpack_actor(bytes: Variant) -> Array:
+	if not bytes is PackedByteArray or (bytes as PackedByteArray).size() > 160:
+		return []
+	var b := StreamPeerBuffer.new()
+	b.data_array = bytes
+	var c := _get_core(b)
+	if c.is_empty() or b.get_available_bytes() < 2:
+		return []
+	var f: int = c[5]
+	return [c[0], c[1], c[2], c[3], c[4], (f & 1) != 0, c[6], c[7], c[8], (f & 2) != 0, (f & 4) != 0, b.get_u16()]
+
+## Monster snapshots (Net.enemy_state) packed back to back: [u16 count, (u32 id, core, f32 shield)...].
+static func pack_monsters(states: Array) -> PackedByteArray:
+	var b := StreamPeerBuffer.new()
+	b.put_u16(states.size())
+	for s in states:
+		b.put_u32(int(s[0]))
+		var flags := (2 if s[9] else 0) | (4 if s[10] else 0)
+		_put_core(b, s[1], s[2], s[3], s[4], s[5], String(s[6]), int(s[7]), float(s[8]), flags)
+		b.put_float(float(s[11]))
+	return b.data_array
+
+static func unpack_monsters(bytes: Variant, max_count := 512) -> Array:
+	var out := []
+	if not bytes is PackedByteArray or (bytes as PackedByteArray).size() < 2:
+		return out
+	var b := StreamPeerBuffer.new()
+	b.data_array = bytes
+	var n := b.get_u16()
+	if n > max_count:
+		return out
+	for i in n:
+		if b.get_available_bytes() < 4:
+			return out
+		var id := b.get_u32()
+		var c := _get_core(b)
+		if c.is_empty() or b.get_available_bytes() < 4:
+			return out
+		var f: int = c[5]
+		out.append([id, c[0], c[1], c[2], c[3], c[4], c[6], c[7], c[8], (f & 2) != 0, (f & 4) != 0, b.get_float()])
+	return out
+
+## An ally pack on the wire: each entry's state Array becomes bytes ("b"); everything else (key, name, guild) stays.
+static func pack_allies(pack: Array) -> Array:
+	var out := []
+	for e in pack:
+		var w: Dictionary = (e as Dictionary).duplicate()
+		w.erase("s")
+		w["b"] = pack_actor(e.s)
+		out.append(w)
+	return out
+
+## The other way; entries that do not decode are dropped (NetGuard.ally_pack_ok then checks what is left).
+static func unpack_allies(wire: Variant) -> Array:
+	var out := []
+	if not wire is Array or (wire as Array).size() > 48:
+		return out
+	for e in wire:
+		if not e is Dictionary:
+			return []
+		var s := unpack_actor((e as Dictionary).get("b", null))
+		if s.is_empty():
+			return []
+		var d: Dictionary = (e as Dictionary).duplicate()
+		d.erase("b")
+		d["s"] = s
+		out.append(d)
+	return out

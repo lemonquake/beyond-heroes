@@ -168,15 +168,18 @@ func _build() -> void:
 	ab.add_child(_reset)
 	_apply = button("Apply Points", _commit, &"PrimaryButton", 200.0)
 	ab.add_child(_apply)
-	var note := UITheme.label("Hold + to keep adding points. All assigns remaining points to that attribute. Apply Points saves your choices.", 16, UITheme.TEXT_MUTED, UITheme.body_font())
+	# one line (bh-035): two lines plus a long rank checklist pushed the window 33 px past its 900 px frame
+	var note := UITheme.label("Hold + to repeat. All spends every point. Apply Points saves.", 15, UITheme.TEXT_MUTED, UITheme.body_font())
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.tooltip_text = "Hold + to keep adding points. All assigns the remaining points to that attribute. Apply Points saves your choices."
+	note.mouse_filter = Control.MOUSE_FILTER_PASS
 	mid.add_child(note)
 	mid.add_child(section("Next Class Rank"))
 	# Long promotion checklists must scroll instead of increasing the window's minimum height.
 	_promotion_scroll = ScrollContainer.new()
 	_promotion_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_promotion_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_promotion_scroll.custom_minimum_size.y = 80
+	_promotion_scroll.custom_minimum_size.y = 64
 	mid.add_child(_promotion_scroll)
 	_promotion_text = UITheme.label("", 17, UITheme.TEXT, UITheme.body_font())
 	_promotion_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

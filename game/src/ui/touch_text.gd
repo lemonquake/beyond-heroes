@@ -10,8 +10,15 @@ const SHORT_BADGE := 6               # labels this short are icons' captions, no
 
 static func install(root: Node) -> void:
 	root.get_tree().node_added.connect(func(n: Node) -> void:
-		if n is Control and is_instance_valid(root) and root.is_ancestor_of(n):
-			enlarge.call_deferred(n))
+		# only in touch mode, and by id: a control freed before the deferred call (a tooltip, a rebuilt list row) used to
+		# reach a typed Control parameter as a dead object, and the engine logged an error for each one (bh-035)
+		if Settings.touch_mode and n is Control and is_instance_valid(root) and root.is_ancestor_of(n):
+			_enlarge_later.call_deferred(n.get_instance_id()))
+
+static func _enlarge_later(id: int) -> void:
+	var n := instance_from_id(id) as Control
+	if n != null:
+		enlarge(n)
 
 static func enlarge(n: Control) -> void:
 	if not is_instance_valid(n) or not Settings.touch_mode or n.has_meta(&"touch_text_skip"):

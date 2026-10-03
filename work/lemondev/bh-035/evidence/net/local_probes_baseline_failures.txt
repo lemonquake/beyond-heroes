@@ -1,0 +1,17 @@
+EXPLORE[join] FAIL the host came back: its monsters replace this machine's own
+EXPLORE[join] FAIL (1)
+TRADE[host] FAIL offer 100 gold and the potions
+TRADE[host] FAIL the client's offer (30 gold + a stack) shows here
+TRADE[host] FAIL a changed offer clears our acceptance
+TRADE[host] FAIL gold: 500 -> 500 gave 100 got 35
+TRADE[host] FAIL the potions left, the client's mana potions arrived (3 / 0)
+TRADE[host] FAIL a third trade opens
+TRADE[host] FAIL (6)
+TRADE[join] FAIL the host's offer (100 gold + a stack) shows here
+TRADE[join] FAIL offer 30 gold and the mana potions
+TRADE[join] FAIL raise our gold offer by 5
+TRADE[join] FAIL both acceptances cleared
+TRADE[join] FAIL gold: 100 -> 100 gave 35 got 100
+TRADE[join] FAIL the mana potions left, the host's health potions arrived (3 / 0)
+TRADE[join] FAIL the third request arrived
+TRADE[join] FAIL (7)

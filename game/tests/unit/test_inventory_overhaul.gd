@@ -85,19 +85,27 @@ func test_strength_and_dexterity_for_every_weapon() -> void:
 		lo.main_type = type
 		lo.has_shield = true
 		lo.shield_block = 0.2
-		var base := StatCalculator.compute(cls, 10, {&"str": 10, &"dex": 10}, [], lo)
-		var dex := StatCalculator.compute(cls, 10, {&"str": 10, &"dex": 40}, [], lo)
-		var strength := StatCalculator.compute(cls, 10, {&"str": 40, &"dex": 10}, [], lo)
+		var base := StatCalculator.compute(cls, 10, {&"str": 10, &"dex": 10, &"agi": 10}, [], lo)
+		var dex := StatCalculator.compute(cls, 10, {&"str": 10, &"dex": 40, &"agi": 10}, [], lo)
+		var strength := StatCalculator.compute(cls, 10, {&"str": 40, &"dex": 10, &"agi": 10}, [], lo)
+		var agility := StatCalculator.compute(cls, 10, {&"str": 10, &"dex": 10, &"agi": 40}, [], lo)
 		var ranged: bool = type.id in RANGED_WEAPONS
+		# bh-035: finesse weapons take their damage from Agility (daggers also a little from Dexterity; knuckles share it
+		# with Strength); every other melee weapon from Strength
+		var finesse: bool = type.id in [&"dagger", &"claw"]
+		var dex_scaled: bool = ranged or float(type.scaling.get(&"dex", 0.0)) > 0.0
 		if ranged:
 			ok(dex.get_stat(&"phys_damage") > base.get_stat(&"phys_damage"), "Dexterity increases physical damage: %s" % type.id)
+			near(strength.get_stat(&"phys_damage"), base.get_stat(&"phys_damage"), 0.00001, "Strength does not add to %s damage" % type.id)
+		elif finesse:
+			ok(agility.get_stat(&"phys_damage") > base.get_stat(&"phys_damage"), "Agility increases physical damage: %s" % type.id)
 			near(strength.get_stat(&"phys_damage"), base.get_stat(&"phys_damage"), 0.00001, "Strength does not add to %s damage" % type.id)
 		else:
 			ok(strength.get_stat(&"phys_damage") > base.get_stat(&"phys_damage"), "Strength increases physical damage: %s" % type.id)
 		ok(dex.get_stat(&"accuracy") > base.get_stat(&"accuracy"), "Dexterity improves accuracy")
 		ok(dex.get_stat(&"crit_chance") > base.get_stat(&"crit_chance"), "Dexterity improves critical chance")
 		for stat in base.values:
-			if stat in [&"dex", &"accuracy", &"crit_chance", &"accuracy_chance"] or (ranged and stat in WEAPON_STATS):
+			if stat in [&"dex", &"accuracy", &"crit_chance", &"accuracy_chance"] or (dex_scaled and stat in WEAPON_STATS):
 				continue
 			near(dex.get_stat(stat), base.get_stat(stat), 0.00001, "Dexterity does not change %s on %s" % [stat, type.id])
 		near(base.get_stat(&"carry_capacity"), 2.0 * (110.0 + 10.0 * 3.2), 0.001, "weight limit doubled")

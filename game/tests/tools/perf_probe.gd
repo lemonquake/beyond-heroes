@@ -135,10 +135,72 @@ func _ready() -> void:
 		await _first_hit(map)
 		get_tree().quit()
 		return
+	if args.has("persona_bench"):           # bh-035: which step of dressing a persona costs the frame after it appears
+		Game.place_player(StringName(args.get("spawn", "start")))
+		await _wait(30)
+		var d := DB.enemy(StringName(args.persona_bench))
+		var p := Persona.for_enemy(d)
+		var variants := ["setup", "look", "look+dress", "all", "setup", "all"]
+		if args.has("persona_parts"):
+			variants = ["setup", "freed", "instance_only", "setup"]
+		for variant in variants:
+			for rep in 2:
+				var cv := CharacterVisual.new()
+				map.add_child(cv)
+				cv.global_position = Game.player.global_position + Vector3(3, 0, 0)
+				var t0 := Time.get_ticks_usec()
+				if variant == "instance_only":
+					var inst: Node = (load(Persona.MODEL) as PackedScene).instantiate()
+					cv.add_child(inst)
+				else:
+					cv.setup(Persona.MODEL, 1.0, d.tint, &"")
+				if variant == "freed":
+					cv.free()
+					var tf := Time.get_ticks_usec()
+					await get_tree().process_frame
+					print("PERSONA freed      build %.1f ms, next frame %.1f ms" % [(tf - t0) / 1000.0, (Time.get_ticks_usec() - tf) / 1000.0])
+					await _wait(4)
+					continue
+				if variant != "setup" and variant != "instance_only":
+					cv.set_look(Persona.look_of(p))
+				if variant == "look+dress" or variant == "all":
+					cv.set_dyes(p.get("dye", {}))
+					cv.hero.merge_key = "persona"
+					cv.hero._wear_sig = "-"
+					cv.dress_equipment(Persona.equipment_of(p))
+				if variant == "all":
+					Persona.apply(cv, p)
+				match variant:
+					"tree_off":
+						if cv.tree: cv.tree.active = false
+					"skel_off":
+						for sk in cv.find_children("*", "Skeleton3D", true, false):
+							sk.set_process_internal(false)
+					"player_off":
+						for ap in cv.find_children("*", "AnimationPlayer", true, false):
+							ap.active = false
+					"hidden":
+						cv.visible = false
+					"proc_off":
+						cv.process_mode = Node.PROCESS_MODE_DISABLED
+				var t1 := Time.get_ticks_usec()
+				await get_tree().process_frame
+				var t2 := Time.get_ticks_usec()
+				print("PERSONA %-10s build %.1f ms, next frame %.1f ms" % [variant, (t1 - t0) / 1000.0, (t2 - t1) / 1000.0])
+				cv.queue_free()
+				await _wait(4)
+		get_tree().quit()
+		return
 	if args.has("spawn_bench"):
 		Game.place_player(StringName(args.get("spawn", "start")))
 		await _wait(30)
-		for id in String(args.spawn_bench).split(","):
+		var bench_ids: Array = Array(String(args.spawn_bench).split(","))
+		if args.spawn_bench == "map":         # bh-035: every kind of monster already on this map
+			bench_ids = []
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				if not bench_ids.has(String(e.def.id)):
+					bench_ids.append(String(e.def.id))
+		for id in bench_ids:
 			var d := DB.enemy(StringName(id))
 			for i in 2:
 				var a0 := Time.get_ticks_usec()
@@ -150,8 +212,26 @@ func _ready() -> void:
 				var cv := CharacterVisual.new()
 				map.add_child(cv)
 				var a3 := Time.get_ticks_usec()
-				cv.setup(d.model, 1.0, Color.WHITE)
+				var persona := Persona.for_enemy(d)
+				if not persona.is_empty():
+					cv.setup(Persona.MODEL, 1.0, d.tint, &"")
+					Persona.apply(cv, persona)
+				else:
+					cv.setup(d.model, 1.0, Color.WHITE)
 				var a4 := Time.get_ticks_usec()
+				var adv := -1.0
+				if cv.tree:                     # bh-035: the first evaluation builds the mixer's track caches
+					var b0 := Time.get_ticks_usec()
+					cv.tree.advance(0.0)
+					adv = (Time.get_ticks_usec() - b0) / 1000.0
+					var b1 := Time.get_ticks_usec()
+					cv.tree.advance(0.016)
+					print("PIECES %s first tree.advance %.1f ms, second %.1f ms, anims %d" % [id, adv, (Time.get_ticks_usec() - b1) / 1000.0, cv.anim_player.get_animation_list().size() if cv.anim_player else -1])
+				var c0 := Time.get_ticks_usec()
+				await get_tree().process_frame
+				var c1 := Time.get_ticks_usec()
+				await get_tree().process_frame
+				print("PIECES %s visual alone: next frame %.1f ms, the one after %.1f ms" % [id, (c1 - c0) / 1000.0, (Time.get_ticks_usec() - c1) / 1000.0])
 				cv.queue_free()
 				var en := Enemy.new()
 				en.setup(d, 5, [], {})
@@ -162,15 +242,38 @@ func _ready() -> void:
 				print("PIECES %s load %.1f inst %.1f visual.setup %.1f enemy.setup %.1f enemy.add_child %.1f" % [id, (a1-a0)/1000.0, (a2-a1)/1000.0, (a4-a3)/1000.0, (a5-a4)/1000.0, (a6-a5)/1000.0])
 				await _wait(2)
 			var ts: Array = []
+			var marks: Array = []
+			var mark := func(tag: String) -> void: marks.append([tag, Time.get_ticks_usec()])
+			var cb_phys := func() -> void: mark.call("phys")
+			var cb_proc := func() -> void: mark.call("proc")
+			var cb_pre := func() -> void: mark.call("pre_draw")
+			var cb_post := func() -> void: mark.call("post_draw")
+			get_tree().physics_frame.connect(cb_phys)
+			get_tree().process_frame.connect(cb_proc)
+			RenderingServer.frame_pre_draw.connect(cb_pre)
+			RenderingServer.frame_post_draw.connect(cb_post)
 			for i in 6:
+				marks.clear()
 				var t0 := Time.get_ticks_usec()
+				mark.call("spawn")
 				var e := Spawner.spawn_enemy(map, d, 5, [], Game.player.global_position + Vector3(8, 0, 0), {})
 				var t1 := Time.get_ticks_usec()
 				await get_tree().process_frame
 				var t2 := Time.get_ticks_usec()
-				ts.append("%.1f+%.1f" % [(t1 - t0) / 1000.0, (t2 - t1) / 1000.0])
+				var vpr := get_viewport().get_viewport_rid()
+				ts.append("%.1f+%.1f(proc %.1f phys %.1f rcpu %.1f gpu %.1f)" % [(t1 - t0) / 1000.0, (t2 - t1) / 1000.0, Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
+					Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0, RenderingServer.viewport_get_measured_render_time_cpu(vpr), RenderingServer.viewport_get_measured_render_time_gpu(vpr)])
+				await get_tree().process_frame
+				var phases := []
+				for m in range(1, marks.size()):
+					phases.append("%s+%.1f" % [marks[m][0], (marks[m][1] - marks[m - 1][1]) / 1000.0])
+				print("PHASES %s: %s" % [id, " ".join(phases)])
 				e.queue_free()
 				await _wait(3)
+			get_tree().physics_frame.disconnect(cb_phys)
+			get_tree().process_frame.disconnect(cb_proc)
+			RenderingServer.frame_pre_draw.disconnect(cb_pre)
+			RenderingServer.frame_post_draw.disconnect(cb_post)
 			print("SPAWN %s ms (spawn+next frame): %s" % [id, ", ".join(ts)])
 		get_tree().quit()
 		return
@@ -335,6 +438,27 @@ func _stress(map: MapRoot) -> void:
 			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
 				e.set_physics_process(false)
 				e.visible = false
+		"skel":                             # bh-035: skeleton pose updates of the monsters
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				for sk in e.find_children("*", "Skeleton3D", true, false):
+					sk.set_process_internal(false)
+					sk.set_physics_process_internal(false)
+		"visual":                           # bh-035: CharacterVisual._process of the monsters (blends, flinch, motion layer)
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				if e.visual:
+					e.visual.set_process(false)
+		"lowres":                           # bh-035: a quarter of the pixels (is the brawl bound by the GPU's pixel work?)
+			get_viewport().scaling_3d_scale = 0.5
+		"nominimap":                        # bh-035: the minimap's top-down render never refreshes
+			for mm in Game.ui_root.find_children("*", "MiniMap", true, false):
+				mm._vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
+				mm.set_process(false)
+		"norender":                         # bh-035: no drawing at all (what the frame costs without the renderer)
+			RenderingServer.render_loop_enabled = false
+		"shadows":                          # bh-035: monsters cast no shadows
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				for m in e.find_children("*", "GeometryInstance3D", true, false):
+					(m as GeometryInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	if args.has("no_bars"):                 # experiment: monster health bars hidden
 		for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
 			if e.bar:
@@ -356,10 +480,27 @@ func _stress(map: MapRoot) -> void:
 		get_viewport().get_texture().get_image().save_png(String(args.shot))
 		print("SHOT ", args.shot, " fps=", Engine.get_frames_per_second())
 		return
+	if args.has("strip"):                   # bh-035: N consecutive frames of the brawl (blind visual review of the crowd LODs)
+		# the same moment in every build: a fixed time into the fight, not a frame count (a faster build reached a frame count
+		# while the map was still fading in)
+		await get_tree().create_timer(float(args.get("strip_after", "6.0"))).timeout
+		DirAccess.make_dir_recursive_absolute(String(args.strip))
+		for i in int(args.get("strip_n", "8")):
+			if i % 4 == 0:
+				hero.call(&"_request", &"light")
+			await RenderingServer.frame_post_draw
+			get_viewport().get_texture().get_image().save_png(String(args.strip).path_join("f%02d.png" % i))
+		return
 	if args.has("census"):
 		var cls := {}
-		for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
-			for d in e.find_children("*", "", true, false):
+		var pool: Array = []
+		if args.census == "all":              # bh-035: every processing node in the tree, not just the monsters
+			pool = get_tree().root.find_children("*", "", true, false).filter(func(d): return d.is_processing() or d.is_physics_processing() or d.is_processing_internal() or d.is_physics_processing_internal())
+		else:
+			for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+				pool.append_array(e.find_children("*", "", true, false))
+		for d in pool:
+			if true:
 				var k: String = d.get_class() + ("(" + d.get_script().resource_path.get_file() + ")" if d.get_script() else "")
 				var flags := ("P" if d.is_processing() else "") + ("F" if d.is_physics_processing() else "") + ("p" if d.is_processing_internal() else "") + ("f" if d.is_physics_processing_internal() else "")
 				k += " [" + flags + "]"
@@ -371,6 +512,9 @@ func _stress(map: MapRoot) -> void:
 		return
 	if args.has("enemy_cost"):
 		await _enemy_cost()
+		return
+	if args.has("anim_cost"):
+		await _anim_cost()
 		return
 	if args.has("ablate_process"):
 		await _ablate_process()
@@ -389,6 +533,18 @@ func _stress(map: MapRoot) -> void:
 		added[k] = added.get(k, 0) + 1
 	if args.has("spikes"):
 		get_tree().node_added.connect(on_add)
+	if ResourceLoader.exists("res://src/actors/enemy/enemy_prof_x.gd"):
+		load("res://src/actors/enemy/enemy_prof_x.gd").us.clear()
+	var pf0 := Engine.get_physics_frames()
+	var ph_marks: Array = []
+	var ph_cbs := []
+	if args.has("phases"):                  # bh-035: where a frame goes (physics steps / process / draw / the rest)
+		for pair in [[get_tree().physics_frame, "phys"], [get_tree().process_frame, "proc"], [RenderingServer.frame_pre_draw, "pre"], [RenderingServer.frame_post_draw, "post"]]:
+			var tag: String = pair[1]
+			var cb := func() -> void: ph_marks.append([tag, Time.get_ticks_usec()])
+			(pair[0] as Signal).connect(cb)
+			ph_cbs.append([pair[0], cb])
+	last = Time.get_ticks_usec()
 	for f in frames:
 		await get_tree().process_frame
 		var now := Time.get_ticks_usec()
@@ -398,13 +554,14 @@ func _stress(map: MapRoot) -> void:
 				print("SPIKE f=%d %.1f ms added=%s" % [f, dt, added])
 			added.clear()
 		swing += dt
-		if swing > 500.0:
+		if swing > 500.0 and not args.has("no_swing"):
 			swing = 0.0
 			hero.call(&"_request", &"light")
 		rows.append({
 			"frame": dt,
 			"gpu": RenderingServer.viewport_get_measured_render_time_gpu(vp),
 			"cpu_render": RenderingServer.viewport_get_measured_render_time_cpu(vp),
+			"setup": RenderingServer.get_frame_setup_time_cpu(),
 			"script": Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 			"physics": Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0,
 			"nav": Performance.get_monitor(Performance.TIME_NAVIGATION_PROCESS) * 1000.0,
@@ -414,6 +571,17 @@ func _stress(map: MapRoot) -> void:
 			"lights": 0,
 		})
 		last = now
+	print("PSTEPS physics steps per frame %.2f" % [float(Engine.get_physics_frames() - pf0) / maxf(1.0, frames)])
+	if args.has("phases"):
+		for c in ph_cbs:
+			(c[0] as Signal).disconnect(c[1])
+		var sums := {}
+		for i in range(1, ph_marks.size()):
+			var k: String = ph_marks[i - 1][0] + ">" + ph_marks[i][0]
+			sums[k] = float(sums.get(k, 0.0)) + (ph_marks[i][1] - ph_marks[i - 1][1]) / 1000.0
+		var keys := sums.keys()
+		keys.sort_custom(func(a, b): return sums[a] > sums[b])
+		print("PHASES per frame: ", ", ".join(keys.map(func(k): return "%s %.2f ms" % [k, sums[k] / frames])))
 	var engaged := 0
 	for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
 		if e.alive and e.brain.is_engaged():
@@ -437,7 +605,7 @@ func _stress(map: MapRoot) -> void:
 			parts.append("%s=%.1fms/frame" % [k, float(prof.us[k]) / 1000.0 / maxf(1.0, float(rows.size()))])
 		print("EPROF ", ", ".join(parts))
 	report["enemies_in_map"] = get_tree().get_nodes_in_group(&"enemy").size()
-	print("STRESS ", JSON.stringify(report.total.frame), " gpu=", JSON.stringify(report.total.gpu), " process=", JSON.stringify(report.total.script),
+	print("STRESS setup=", report.total.setup.median if report.total.has("setup") else -1, " cpu_render=", report.total.cpu_render.median, " ", JSON.stringify(report.total.frame), " gpu=", JSON.stringify(report.total.gpu), " process=", JSON.stringify(report.total.script),
 		" physics=", JSON.stringify(report.total.physics), " nav=", JSON.stringify(report.total.nav), " engaged=", engaged, " map=", report.map, " lite=", report.lite)
 	if args.has("out"):
 		var fo := FileAccess.open(String(args.out), FileAccess.WRITE)
@@ -469,6 +637,35 @@ func _enemy_cost() -> void:
 		es.size(), phys_ms[n / 2], phys_ms[int(n * 0.95)], phys_ms[n / 2] * 1000.0 / es.size()])
 	var ticks := Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0
 	print("ENEMYCOST engine physics step with enemies idle: %.2f ms; objects=%d bodies=%d active=%d" % [ticks, Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.PHYSICS_3D_COLLISION_PAIRS), Performance.get_monitor(Performance.PHYSICS_3D_ACTIVE_OBJECTS)])
+
+## Animation cost (bh-035): every monster's AnimationTree is driven by hand for 120 frames and timed (advance = blend
+## evaluation + applying the pose to the skeleton). Also reports the tree shape so a slow tree can be read.
+func _anim_cost() -> void:
+	var trees: Array = []
+	for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
+		if e.visual and e.visual.tree and e.visual.tree.active:
+			trees.append(e.visual.tree)
+	for t: AnimationTree in trees:
+		t.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+	await _wait(5)
+	var ms: Array[float] = []
+	for i in 120:
+		var t0 := Time.get_ticks_usec()
+		for t: AnimationTree in trees:
+			if is_instance_valid(t):
+				t.advance(1.0 / 60.0)
+		ms.append((Time.get_ticks_usec() - t0) / 1000.0)
+		await get_tree().process_frame
+	ms.sort()
+	var sk: Skeleton3D = (trees[0] as AnimationTree).get_node(trees[0].root_node).find_children("*", "Skeleton3D", true, false)[0] if not trees.is_empty() else null
+	var ap: AnimationPlayer = (trees[0] as AnimationTree).get_node(trees[0].anim_player)
+	var tracks := 0
+	for an in ap.get_animation_list():
+		tracks += ap.get_animation(an).get_track_count()
+	print("ANIMCOST trees=%d advance median %.2f ms p95 %.2f ms (%.0f us per tree); bones=%d clips=%d tracks/clip=%.0f deterministic=%s" % [trees.size(), ms[60], ms[114],
+		ms[60] * 1000.0 / maxf(1.0, trees.size()), sk.get_bone_count() if sk else -1, ap.get_animation_list().size(), float(tracks) / maxf(1.0, ap.get_animation_list().size()), trees[0].deterministic])
+	for t: AnimationTree in trees:
+		t.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE
 
 ## Per-script attribution (bh-014): for each script (or engine class with internal processing), switch its per-frame
 ## callbacks off, take the median frame, switch them back on. The drop is that group's share of the frame.
@@ -577,7 +774,7 @@ func _active_lights() -> int:
 
 func _summary(rows: Array[Dictionary]) -> Dictionary:
 	var out := {}
-	for k in ["frame", "gpu", "cpu_render", "script", "physics", "nav", "draws", "prims", "objects", "lights"]:
+	for k in ["frame", "gpu", "cpu_render", "setup", "script", "physics", "nav", "draws", "prims", "objects", "lights"]:
 		if not rows.is_empty() and not rows[0].has(k):
 			continue
 		var v: Array[float] = []

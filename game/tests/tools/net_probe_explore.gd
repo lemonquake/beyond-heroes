@@ -6,7 +6,8 @@ extends Node
 ##   the client arrives at the host's side once, sharing the host's monsters; it then travels on its own (no request)
 ##   and gets its own monsters there; both see where the other is (Net.status, party frames, minimap, world map); the
 ##   host summons, the client says Go and lands beside the host; the host leaves: the client stays and its map fills
-##   with its own monsters; the host comes back: they share again; a second summons answered Stay keeps the client put.
+##   with its own monsters; the host comes back and shares the client's monsters (bh-032: the first explorer stays in
+##   charge of a map); a second summons answered Stay keeps the client put.
 
 var args := {}
 var role := "host"
@@ -192,14 +193,15 @@ func _client() -> void:
 	_check("the host left: the forest filled with its own monsters (%d)" % _local_monsters(), own)
 	_check("and it did not have to move (%s)" % Game.current_map_id, Game.current_map_id == &"ruined_forest")
 	await _shot("host_left_minimap")
-	# the host comes back: shared again
+	# the host comes back. Since bh-032 a map keeps its first explorer in charge: this machine still runs the forest
+	# and the host shares its monsters (until bh-032 the host's monsters replaced this machine's own)
 	var shared := false
 	for i in 400:
-		if Net._host_shared and _local_monsters() == 0:
+		if Net.avatar(1) != null and Net.status.get(1, {}).get("map", "") == "ruined_forest" and not Net._host_shared 				and _local_monsters() > 0 and Net.world_owner(&"ruined_forest") == Net.my_id():
 			shared = true
 			break
 		await _wait(0.1)
-	_check("the host came back: its monsters replace this machine's own", shared)
+	_check("the host came back: this machine keeps running the forest and the host shares it", shared)
 	await _wait(3.0)
 	var hav2 := Net.avatar(1)
 	if hav2:
