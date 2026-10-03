@@ -1,0 +1,350 @@
+[
+ {
+  "id": "asc_starfall_vanguard_helm",
+  "tris": 6124,
+  "objects": [
+   "asc_starfall_vanguard_helm"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_armor",
+  "tris": 15860,
+  "objects": [
+   "asc_starfall_vanguard_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_inner",
+  "tris": 5468,
+  "objects": [
+   "asc_starfall_vanguard_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_leggings",
+  "tris": 7576,
+  "objects": [
+   "asc_starfall_vanguard_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_gloves",
+  "tris": 3904,
+  "objects": [
+   "asc_starfall_vanguard_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_gloves_R",
+  "tris": 3904,
+  "objects": [
+   "asc_starfall_vanguard_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_boots",
+  "tris": 5204,
+  "objects": [
+   "asc_starfall_vanguard_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_boots_R",
+  "tris": 5204,
+  "objects": [
+   "asc_starfall_vanguard_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_accessory",
+  "tris": 756,
+  "objects": [
+   "asc_starfall_vanguard_accessory"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_shield",
+  "tris": 3836,
+  "objects": [
+   "asc_starfall_vanguard_shield"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_weapon",
+  "tris": 1608,
+  "objects": [
+   "asc_starfall_vanguard_weapon"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_helm",
+  "tris": 7272,
+  "objects": [
+   "asc_seraph_paladin_helm"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_armor",
+  "tris": 17476,
+  "objects": [
+   "asc_seraph_paladin_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_inner",
+  "tris": 5828,
+  "objects": [
+   "asc_seraph_paladin_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_leggings",
+  "tris": 8296,
+  "objects": [
+   "asc_seraph_paladin_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_gloves",
+  "tris": 4264,
+  "objects": [
+   "asc_seraph_paladin_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_gloves_R",
+  "tris": 4264,
+  "objects": [
+   "asc_seraph_paladin_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_boots",
+  "tris": 5564,
+  "objects": [
+   "asc_seraph_paladin_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_boots_R",
+  "tris": 5564,
+  "objects": [
+   "asc_seraph_paladin_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_accessory",
+  "tris": 1184,
+  "objects": [
+   "asc_seraph_paladin_accessory"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_shield",
+  "tris": 4436,
+  "objects": [
+   "asc_seraph_paladin_shield"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_weapon",
+  "tris": 1976,
+  "objects": [
+   "asc_seraph_paladin_weapon"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_helm",
+  "tris": 8500,
+  "objects": [
+   "asc_chronoguard_helm"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_armor",
+  "tris": 17068,
+  "objects": [
+   "asc_chronoguard_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_inner",
+  "tris": 7372,
+  "objects": [
+   "asc_chronoguard_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_leggings",
+  "tris": 11384,
+  "objects": [
+   "asc_chronoguard_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_gloves",
+  "tris": 5808,
+  "objects": [
+   "asc_chronoguard_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_gloves_R",
+  "tris": 5808,
+  "objects": [
+   "asc_chronoguard_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_boots",
+  "tris": 7108,
+  "objects": [
+   "asc_chronoguard_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_boots_R",
+  "tris": 7108,
+  "objects": [
+   "asc_chronoguard_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_accessory",
+  "tris": 2620,
+  "objects": [
+   "asc_chronoguard_accessory"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_shield",
+  "tris": 5728,
+  "objects": [
+   "asc_chronoguard_shield"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_weapon",
+  "tris": 2488,
+  "objects": [
+   "asc_chronoguard_weapon"
+  ]
+ },
+ {
+  "id": "asc_worldforger_helm",
+  "tris": 6056,
+  "objects": [
+   "asc_worldforger_helm"
+  ]
+ },
+ {
+  "id": "asc_worldforger_armor",
+  "tris": 14808,
+  "objects": [
+   "asc_worldforger_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_inner",
+  "tris": 5016,
+  "objects": [
+   "asc_worldforger_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_leggings",
+  "tris": 6816,
+  "objects": [
+   "asc_worldforger_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_gloves",
+  "tris": 3284,
+  "objects": [
+   "asc_worldforger_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_worldforger_gloves_R",
+  "tris": 3284,
+  "objects": [
+   "asc_worldforger_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_boots",
+  "tris": 4536,
+  "objects": [
+   "asc_worldforger_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_worldforger_boots_R",
+  "tris": 4536,
+  "objects": [
+   "asc_worldforger_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_accessory",
+  "tris": 836,
+  "objects": [
+   "asc_worldforger_accessory"
+  ]
+ },
+ {
+  "id": "asc_worldforger_shield",
+  "tris": 3516,
+  "objects": [
+   "asc_worldforger_shield"
+  ]
+ },
+ {
+  "id": "asc_worldforger_weapon",
+  "tris": 1632,
+  "objects": [
+   "asc_worldforger_weapon"
+  ]
+ }
+]

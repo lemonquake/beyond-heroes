@@ -213,6 +213,8 @@ func refresh_equipment_visuals() -> void:
 		if w != null and w.sockets > 0 and visual.has_weapon(pair[0]):
 			visual.set_weapon_infusion(pair[0], CrystalNames.color_for(w.gems), CrystalNames.power(w.gems),
 				0.45 if w.base.category == &"shield" else 0.9)
+		if w != null and visual.has_weapon(pair[0]):
+			visual.set_weapon_ascendant(pair[0], w.rarity, 0.45 if w.base.category == &"shield" else 0.9)
 	visual.set_stance(stance_idle())
 
 ## The model held in the hand: the item's own model (every base has one since bh-006); a random Aether-tier roll of a
@@ -1940,6 +1942,8 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 			_crit_lightning(target, res)
 		if stats.has_flag(&"crit_sunflare") and (req == null or not req.tags.has(&"proc")):
 			_crit_sunflare(target, res)
+	if req == null or not req.tags.has(&"proc"):
+		_ascendant_procs(target, res)
 	if stats.has_flag(&"hit_ignite") and rng.randf() < stats.flag(&"hit_ignite") and target.alive:
 		target.status.apply(&"burning", -1.0, 0.0, maxf(1.0, res.total * 0.25), Elements.FIRE)
 	if stats.has_flag(&"burn_spread") and res.components.get(Elements.FIRE, 0.0) > 0.0 and target.status.has(&"burning"):
@@ -1960,6 +1964,88 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 			_overload_hits.clear()
 	for rx in res.reactions:
 		FX.text_popup(target.center() + Vector3.UP * 0.9, DamageResult.REACTION_NAMES.get(rx, String(rx)), Elements.color(res.dominant_element), 0.9)
+
+# ---- bh-034: the Ascendant signature powers (DataAscendant) ------------------------------------------------------------
+## Every Cosmic / Divine / Eternal / Primordial piece worn adds 1 to its tier's flag (a 6-piece set 2 more); the sum sets
+## the chance and the strength (DataAscendant.proc_chance / proc_power). Each power rests 0.35 s after it answers.
+const ASCENDANT_FLAGS := [&"asc_starfall", &"asc_judgement", &"asc_echo", &"asc_eruption"]
+var _asc_ready := {}
+
+func _ascendant_procs(target: Actor, res: DamageResult) -> void:
+	for flag: StringName in ASCENDANT_FLAGS:
+		if not stats.has_flag(flag) or _time < float(_asc_ready.get(flag, 0.0)) or not is_instance_valid(target):
+			continue
+		var n := stats.flag(flag)
+		if rng.randf() >= DataAscendant.proc_chance(flag, n):
+			continue
+		_asc_ready[flag] = _time + 0.35
+		var amount := res.total * DataAscendant.proc_power(flag, n)
+		var at := target.global_position
+		match flag:
+			&"asc_starfall":
+				# a star falls on the target: Light to everything within 3 m
+				var c := AscendantFx.color(BH.Rarity.COSMIC)
+				FX.spawn(VFXLib.beam_flash(Color(0.85, 0.85, 1.0), 9.0, 0.16, 0.35), at)
+				FX.spawn(VFXLib.ring_wave(c, 3.0, 0.45, 0.4), at + Vector3.UP * 0.05)
+				FX.spawn(VFXLib.particles(Color(0.8, 0.82, 1.0), 26, 0.6, true, 0.08, 4.0, 70.0, Vector3(0, -6, 0), 0.2), at + Vector3.UP * 0.3)
+				FX.spawn(VFXLib.light_flash(c, 5.0, 7.0, 0.3), at + Vector3.UP)
+				for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), at, 3.0, BH.LAYER_ENEMY):
+					_asc_hit(a, amount, {Elements.LIGHT: 1.0}, "Starfall")
+				Audio.play_at(&"lightning_zap", at, -4.0)
+			&"asc_judgement":
+				# a pillar of holy light: Light around the target, and the hero is healed
+				var c := AscendantFx.color(BH.Rarity.DIVINE)
+				FX.spawn(VFXLib.beam_flash(c, 7.0, 0.55, 0.6), at)
+				FX.spawn(VFXLib.ring_wave(c, 2.5, 0.5, 0.45), at + Vector3.UP * 0.05)
+				FX.spawn(VFXLib.light_flash(c, 6.0, 8.0, 0.4), at + Vector3.UP)
+				for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), at, 2.5, BH.LAYER_ENEMY):
+					_asc_hit(a, amount, {Elements.LIGHT: 1.0}, "Judgement")
+				heal(max_hp() * (0.01 + 0.0025 * n))
+			&"asc_echo":
+				# the blow lands again, and every cooldown slips a little
+				var c := AscendantFx.color(BH.Rarity.ETERNAL)
+				var conv := {}
+				var tot := 0.0
+				for e in res.components:
+					tot += float(res.components[e])
+				for e in res.components:
+					if tot > 0.0 and float(res.components[e]) > 0.0:
+						conv[e] = float(res.components[e]) / tot
+				if conv.is_empty():
+					conv = {Elements.PHYSICAL: 1.0}
+				FX.spawn(VFXLib.ring_wave(c, 1.6, 0.5, 0.25), target.center())
+				FX.text_popup(target.center() + Vector3.UP * 0.6, "Echo", c, 0.85)
+				if target.alive:
+					_asc_hit(target, amount, conv, "Echo")
+				for k in cooldowns.keys():
+					cooldowns[k] = maxf(0.0, cooldowns[k] - 0.15)
+				cooldowns_changed.emit()
+			&"asc_eruption":
+				# the ground splits: Fire and Earth around the target, and it burns
+				var c := AscendantFx.color(BH.Rarity.PRIMORDIAL)
+				FX.spawn(VFXLib.particles(c, 40, 0.9, true, 0.12, 6.0, 35.0, Vector3(0, -9, 0), 0.6), at + Vector3.UP * 0.1)
+				FX.spawn(VFXLib.ring_wave(c, 4.0, 0.6, 0.6), at + Vector3.UP * 0.05)
+				FX.spawn(VFXLib.light_flash(c, 7.0, 9.0, 0.5), at + Vector3.UP * 0.5)
+				Events.camera_shake.emit(0.12)
+				for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), at, 4.0, BH.LAYER_ENEMY):
+					_asc_hit(a, amount, {Elements.FIRE: 0.6, Elements.EARTH: 0.4}, "Eruption")
+					if a.alive:
+						a.status.apply(&"burning", -1.0, 0.0, maxf(1.0, amount * 0.2), Elements.FIRE)
+
+func _asc_hit(a: Actor, amount: float, conversion: Dictionary, label: String) -> void:
+	if not is_instance_valid(a) or not a.alive:
+		return
+	var req := DamageRequest.new()
+	req.kind = DamageRequest.Kind.SPELL
+	req.attacker = stats
+	req.base_min = amount
+	req.base_max = amount
+	req.conversion = conversion
+	req.can_crit = false
+	req.evadable = false
+	req.tags[&"proc"] = true
+	req.label = label
+	a.receive_hit(req, self, a.center())
 
 func _crit_lightning(from_target: Actor, res: DamageResult) -> void:
 	var n := 0

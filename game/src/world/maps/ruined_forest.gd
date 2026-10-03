@@ -445,15 +445,6 @@ func _clear_here(x: float, z: float, r: float) -> bool:
 
 func _map_design() -> void:
 	clear_fn = _clear_here
-	# canopy groups round the clearings: each faces the open ground it frames
-	for c in [[Vector2(-60, 11), 14.0, [0.6, 2.4, 4.4]], [Vector2(-30, 8), 21.0, [0.9, 2.2, 3.7, 5.3]], [Vector2(20, -15), 14.0, [1.0, 2.6, 4.6]],
-			[Vector2(31, 24), 15.0, [2.0, 3.6, 5.4]], [Vector2(52, 6), 15.0, [0.4, 4.6]]]:
-		var ctr: Vector2 = c[0]
-		for a: float in c[2]:
-			if sin(a) > 0.25:
-				continue          # a canopy south of a clearing would stand between the camera and the fight
-			var q := ctr + Vector2(cos(a), sin(a)) * float(c[1])
-			place_near("pine_group", Vector3(q.x, 0, q.y), Vector3(q.x, 0, q.y), 0.0, 4.0, rad_to_deg(a))
 	# damp hollows: fallen trunks with fungi, old stumps
 	for q in [Vector3(-8, 0, -20), Vector3(10, 0, 20), Vector3(-55, 0, -30), Vector3(46, 0, -14), Vector3(-12, 0, 30), Vector3(58, 0, 24)]:
 		place_near("fallen_tree", q, q, 0.0, 6.0, rng.randf() * 360.0)

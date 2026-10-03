@@ -1,0 +1,19 @@
+{
+  "builds": {
+    "Windows": {
+      "path": "A:\\Python\\beyond-heroes\\build\\windows\\BeyondHeroes.exe",
+      "bytes": 715549120,
+      "sha256": "aabfe807b46a04c89b805a9ac5a425407533192b2202578190729f126469f920",
+      "mode": "--export-release",
+      "export_exit": 0
+    },
+    "Android": {
+      "path": "A:\\Python\\beyond-heroes\\build\\BeyondHeroes.apk",
+      "bytes": 664951395,
+      "sha256": "0692fc496fd5f9158d19d9dd52c3bc4c0d0000895601b53ad47416922f57365e",
+      "mode": "--export-debug",
+      "export_exit": 0
+    }
+  },
+  "source_commit": "5aa9739387e5775908c7d35f5e254b37b1ef3cc7"
+}

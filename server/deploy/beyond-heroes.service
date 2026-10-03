@@ -42,7 +42,7 @@ ProtectControlGroups=true
 RestrictSUIDSGID=true
 LockPersonality=true
 ReadWritePaths=/var/lib/beyond-heroes
-ReadOnlyPaths=/opt/beyond-heroes /opt/godot
+ReadOnlyPaths=/opt/beyond-heroes -/opt/godot
 MemoryMax=1536M
 TasksMax=256
 

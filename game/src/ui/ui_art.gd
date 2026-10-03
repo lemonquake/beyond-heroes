@@ -107,7 +107,7 @@ static func node_icon(n: Dictionary) -> Texture2D:
 	return null
 
 static func rarity_frame(r: int) -> Texture2D:
-	return tex("slots/rarity_%d.png" % clampi(r, 0, 9))
+	return tex("slots/rarity_%d.png" % clampi(r, 0, BH.RARITY_COUNT - 1))
 
 static func rarity_glow(r: int) -> Texture2D:
 	return tex("slots/rarity_glow_%d.png" % r) if r >= 5 else null

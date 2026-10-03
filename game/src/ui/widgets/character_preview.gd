@@ -220,6 +220,9 @@ func dress(hero: HeroData) -> void:
 			visual.attach_weapon(&"off", sub.base.model_path())
 		elif lo.off_type != null:
 			visual.attach_weapon(&"off", _weapon_model(sub, lo.off_type), lo.off_type.grip_offset)
+	for pair in [[&"main", main], [&"off", sub]]:
+		if pair[1] != null and visual.has_weapon(pair[0]):
+			visual.set_weapon_ascendant(pair[0], (pair[1] as ItemInstance).rarity, 0.45 if (pair[1] as ItemInstance).base.category == &"shield" else 0.9)
 	var stance: StringName = &"idle_1h"
 	if lo.is_unarmed():
 		stance = &"idle"

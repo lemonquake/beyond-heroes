@@ -263,7 +263,7 @@ const LITE_KEEP := {"fern": 0.2, "grass_clump": 0.35, "mushrooms": 0.3, "roots":
 	# map-design pass: every prepared Kenney piece that can be batched. Canopy keeps ~80 % of its silhouettes, tiny
 	# clutter and undergrowth thin to 20-35 %, mid-size pieces sit between (brief: Low keeps landmarks, thins detail).
 	"kd_tree_oak": 0.8, "kd_tree_broadleaf": 0.8, "kd_tree_detailed": 0.85, "kd_tree_thin": 0.8, "kd_tree_small": 0.7,
-	"kd_pine": 0.8, "kd_pine_round": 0.8, "kd_pine_tall": 0.85, "kd_palm": 0.8, "kd_palm_bend": 0.8, "kd_palm_short": 0.7,
+	"kd_palm": 0.8, "kd_palm_bend": 0.8, "kd_palm_short": 0.7,
 	"kd_palm_tall": 0.85, "kd_bamboo": 0.6, "kd_bush": 0.5, "kd_bush_large": 0.6, "kd_plant_leafy": 0.35,
 	"kd_grass": 0.25, "kd_grass_large": 0.3, "kd_ground_leaves": 0.25, "kd_flower_yellow": 0.3, "kd_flower_purple": 0.3,
 	"kd_mushrooms_pale": 0.3, "kd_lily": 0.5, "kd_hanging_moss": 0.3, "kd_rock_small_a": 0.35, "kd_rock_small_b": 0.35,

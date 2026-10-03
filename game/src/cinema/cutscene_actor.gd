@@ -39,10 +39,7 @@ static func make(id_or_path: String, scale_factor := 1.0, tint := Color.WHITE) -
 	a._collect(a.model, a._meshes)
 	MaterialLibrary.apply_character(a._meshes, tint)
 	if a.anim:
-		for lib_name in a.anim.get_animation_library_list():
-			var lib := a.anim.get_animation_library(lib_name)
-			for an in lib.get_animation_list():
-				lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
+		own_clips(a.anim)
 	return a
 
 ## bh-029: the hero's own body as it looks right now: the HeroLook (face, hair, height, build) and every worn piece
@@ -70,10 +67,7 @@ static func make_hero(app: Dictionary, look: Dictionary, equipment: Equipment) -
 	a.skeleton = cv.skeleton
 	a._collect(cv, a._meshes)
 	if a.anim:
-		for lib_name in a.anim.get_animation_library_list():
-			var lib := a.anim.get_animation_library(lib_name)
-			for an in lib.get_animation_list():
-				lib.get_animation(an).loop_mode = Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
+		own_clips(a.anim)
 		a.anim.play(&"idle" if a.anim.has_animation(&"idle") else a.anim.current_animation)
 	return a
 
@@ -115,6 +109,24 @@ static func make_persona(persona: Dictionary, clips_from := "", scale_factor := 
 				lib.add_animation(an, anim)
 		node.free()
 	return a
+
+## The cutscene's own loop settings, on the actor's own copies. A GLB's Animation resources are shared by every
+## instance of it, the live player's included: setting loop_mode on them in place left the hero's run, strafe and
+## sprint clips playing once and freezing after every cutscene. Clips whose setting already matches stay shared; the
+## libraries themselves are always the actor's own (make_persona adds cinematic clips to them).
+static func own_clips(ap: AnimationPlayer) -> void:
+	for lib_name in ap.get_animation_library_list():
+		var src := ap.get_animation_library(lib_name)
+		var lib := AnimationLibrary.new()
+		for an in src.get_animation_list():
+			var clip_res := src.get_animation(an)
+			var want := Animation.LOOP_LINEAR if LOOPS.has(StringName(an)) else Animation.LOOP_NONE
+			if clip_res.loop_mode != want:
+				clip_res = clip_res.duplicate() as Animation
+				clip_res.loop_mode = want
+			lib.add_animation(an, clip_res)
+		ap.remove_animation_library(lib_name)
+		ap.add_animation_library(lib_name, lib)
 
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:

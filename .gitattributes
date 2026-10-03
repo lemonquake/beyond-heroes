@@ -1,0 +1,6 @@
+# shell scripts and systemd units run on Linux: always LF, also in a Windows checkout
+*.sh text eol=lf
+*.service text eol=lf
+*.timer text eol=lf
+server/deploy/Caddyfile.example text eol=lf
+server/deploy/*.conf text eol=lf

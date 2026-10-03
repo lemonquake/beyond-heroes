@@ -2,6 +2,23 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-034 - Ascendant tiers, free VPS hosting, fixes - 3 October 2026
+
+- **Four new rarities above Aether**: Cosmic, Divine, Eternal and Primordial, dropped only by dungeon bosses of level
+  70/80/90/100+ (5 %, 2.5 %, 1.2 %, 0.5 % per kill). Forty nine-piece collections, ten of every equipment type per tier,
+  each with its own Blender model, icon, animated surface light, motes, ground sigil and light column, a tier signature
+  power (Starfall, Judgement, Echo, Eruption) and 2/4/6-piece set bonuses. Class S, SS and SSS guild ranks gate them.
+  See [ASCENDANT_TIERS.md](ASCENDANT_TIERS.md). Network protocol 18.
+- **Free VPS hosting**: `tools/export_server.py` builds stripped dedicated-server packages (Linux arm64 and x86_64);
+  `server/deploy/free-vps.sh` installs them on Oracle Always Free or Google e2-micro in one command. See
+  [FREE_VPS_HOSTING.md](FREE_VPS_HOSTING.md).
+- **Removed** the stacked-cone pine trees (Ruined Forest, Sanctuary, Westreach).
+- **Agdao**: the Crown of Steps stood on the last steps of the terrace stairs, and the hero stuck where the two flights
+  met; the pyramid moved 3 m north, leaving a landing. The terrain under the terraces' retaining blocks sat at the
+  paving's height and flickered through it all along every terrace edge; it now stays below.
+- **Animations after cutscenes**: cutscene actors rewrote the loop settings of animations shared with the player, so the
+  hero's run (and walk, strafe, sprint) stopped looping after any cutscene. Actors now use their own copies.
+
 ## Chatbox close fix - 2 October 2026
 
 - Chat has a visible X button in desktop and touch layouts. X, Escape and an empty send hide the whole box immediately and release keyboard focus.

@@ -10,6 +10,9 @@ class_name ItemGenerator
 ##   Master     4, masterwork base quality, one perfected enchantment
 ##   Mythical   4-5 + one mythical power                   Legendary 5 + one legendary (build-defining) power
 ##   Aether     5-6 top tier + one legendary power + one Aether power (alters an ability)
+##   Cosmic, Divine, Eternal, Primordial (bh-034, DataAscendant): 6-7 top-tier enchantments at their highest rolls, a
+##              legendary and an Aether power, the tier's signature power and a set; only the Ascendant collections
+##              carry these rarities and only dungeon bosses of level 70+ drop them
 
 # [min affixes, max affixes, tier bias (0 uniform, 1 upper half, 2 top only), min value roll, min quality, max quality]
 const RULES := [
@@ -23,11 +26,15 @@ const RULES := [
 	[4, 5, 1, 0.45, 0.08, 0.15],   # Mythical
 	[5, 5, 2, 0.55, 0.10, 0.18],   # Legendary
 	[5, 6, 2, 0.70, 0.12, 0.20],   # Aether
+	[6, 6, 2, 0.78, 0.14, 0.22],   # Cosmic
+	[6, 6, 2, 0.84, 0.16, 0.24],   # Divine
+	[6, 7, 2, 0.90, 0.18, 0.26],   # Eternal
+	[7, 7, 2, 0.95, 0.20, 0.30],   # Primordial
 ]
 # Relative drop weights at 0% magic find (Beginner never drops from monsters).
-const WEIGHTS := [0.0, 520.0, 250.0, 130.0, 55.0, 28.0, 11.0, 4.0, 1.6, 0.25]
+const WEIGHTS := [0.0, 520.0, 250.0, 130.0, 55.0, 28.0, 11.0, 4.0, 1.6, 0.25, 0.0, 0.0, 0.0, 0.0]   # Ascendant: never rolled
 # Minimum item level for a tier to drop at all (keeps the first minutes of the game grounded).
-const MIN_ILVL := [1, 1, 1, 1, 2, 3, 4, 5, 6, 8]
+const MIN_ILVL := [1, 1, 1, 1, 2, 3, 4, 5, 6, 8, 70, 80, 90, 100]
 
 const RARE_NAME_A := ["Grim", "Ash", "Dusk", "Iron", "Blood", "Storm", "Hollow", "Rune", "Gloom", "Ember", "Raven", "Bone",
 	"Frost", "Doom", "Sorrow", "Night", "Warden", "Oath", "Wraith", "Thorn"]
@@ -67,6 +74,9 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 	elif base.set_id != &"":
 		rarity = maxi(rarity, BH.Rarity.MASTER)
 	rarity = clampi(rarity, 0, BH.RARITY_COUNT - 1)
+	# the Ascendant rarities belong to the Ascendant collections only (a forced debug drop never makes a Cosmic sword)
+	if rarity >= BH.Rarity.COSMIC and base.fixed_rarity < BH.Rarity.COSMIC:
+		rarity = BH.Rarity.AETHER
 	it.rarity = rarity
 	var rule: Array = RULES[rarity]
 	it.quality = snappedf(rng.randf_range(float(rule[4]), float(rule[5])), 0.01)
@@ -83,7 +93,7 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 			_add_power(it, &"mythical", rng)
 		BH.Rarity.LEGENDARY:
 			_add_power(it, &"legendary", rng)
-		BH.Rarity.AETHER:
+		BH.Rarity.AETHER, BH.Rarity.COSMIC, BH.Rarity.DIVINE, BH.Rarity.ETERNAL, BH.Rarity.PRIMORDIAL:
 			_add_power(it, &"legendary", rng)
 			_add_power(it, &"aether", rng)
 	# bh-012: a relic power — a signature utility passive — on some Licensed-or-better pieces
@@ -143,8 +153,9 @@ static func _forge_weapon_name(it: ItemInstance) -> void:
 			if not has_suf and r.randf() < 0.75:
 				it.name_suffix = NameForge.weapon_suffix(r)
 
-## Chance of a relic power by rarity from Licensed up (Licensed, Elite, Master, Mythical, Legendary, Aether).
-const RELIC_CHANCE := [0.15, 0.3, 0.45, 0.6, 0.6, 0.6]
+## Chance of a relic power by rarity from Licensed up (Licensed, Elite, Master, Mythical, Legendary, Aether, then the
+## four Ascendant tiers).
+const RELIC_CHANCE := [0.15, 0.3, 0.45, 0.6, 0.6, 0.6, 0.7, 0.75, 0.8, 0.9]
 
 ## The gear inside a Relic Cache of `tier` (DataRelics.CACHES) opened by a hero of `level`: one piece at least the
 ## cache's floor rarity, the rest rolled with a strong rarity bonus; a Radiant cache has a small chance of more.
@@ -227,7 +238,7 @@ const WIDE_AFFIXES := {&"res_all": 2}
 const AFFIX_COST := {&"res_all": 2.0, &"skill_levels": 2.0}
 ## Total affix strength a piece may carry by rarity (sum of cost x value / best value). Rolls above it are pulled down
 ## toward their tier minimum; a masterwork enchantment is never reduced.
-const RARITY_BUDGET := [0.0, 0.0, 1.0, 2.0, 2.6, 3.5, 4.0, 4.6, 5.0, 5.8]
+const RARITY_BUDGET := [0.0, 0.0, 1.0, 2.0, 2.6, 3.5, 4.0, 4.6, 5.0, 5.8, 6.6, 7.2, 8.0, 9.0]
 const RANGED_WEAPONS := [&"bow", &"crossbow", &"javelin"]
 
 static func affix_family(a: AffixDef) -> StringName:

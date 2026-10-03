@@ -196,11 +196,6 @@ const V := {
 		["kd_bush_large", Vector3(1.4, 0, 2.0), 0.0, 1.0, "b"],
 		["kd_bush", Vector3(-1.8, 0, 1.2), 0.0, 1.0, "b"],
 		["kd_grass_large", Vector3(2.4, 0, -1.4), 0.0, 1.0, "b"]]},
-	"pine_group": {"r": 4.0, "pieces": [
-		["kd_pine", Vector3(0, 0, 0), 0.0, 1.0, "k"],
-		["kd_pine_round", Vector3(2.8, 0, 1.2), 40.0, 1.0, "k"],
-		["kd_pine_tall", Vector3(-1.4, 0, -2.4), 0.0, 1.0, "k"],
-		["kd_rock_small_b", Vector3(1.2, 0, 2.2), 0.0, 1.0, "b"]]},
 	"palm_group": {"r": 3.8, "pieces": [
 		["kd_palm_tall", Vector3(-2.2, 0, -2.4), 30.0, 1.0, "k"],
 		["kd_palm", Vector3(0, 0, 0), 0.0, 1.0, "k"],

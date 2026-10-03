@@ -4,7 +4,7 @@ extends RefCounted
 
 static var _uid_counter := 0
 
-const SELL_MULT := [0.5, 1.0, 1.6, 2.4, 3.4, 5.0, 7.5, 11.0, 16.0, 26.0]   # per rarity tier
+const SELL_MULT := [0.5, 1.0, 1.6, 2.4, 3.4, 5.0, 7.5, 11.0, 16.0, 26.0, 40.0, 60.0, 90.0, 140.0]   # per rarity tier
 
 var uid := 0
 var base: ItemBaseDef
@@ -155,7 +155,7 @@ func damage_range() -> Vector2:
 		var authored_avg := maxf(1.0, (damage.x + damage.y) * 0.5)
 		damage *= (budget.x + budget.y) * 0.5 / authored_avg
 	# Quality, tempering and the local damage affix add, rather than multiply.
-	return damage * CombatGrowth.weapon_factor(level) * (q + _local(&"local_phys"))
+	return damage * CombatGrowth.weapon_factor(level) * (q + _local(&"local_phys")) * DataAscendant.mult(rarity)
 
 func equipment_level() -> int:
 	return maxi(base.level_req, clampi(ilvl, 1, BH.LEVEL_CAP + 5)) if rarity != BH.Rarity.BEGINNER else base.level_req
@@ -164,7 +164,7 @@ func required_level() -> int:
 	return maxi(base.level_req, mini(BH.LEVEL_CAP, equipment_level() - 3)) if is_equipment() else base.level_req
 
 func defense_value() -> float:
-	return (GearScaling.defense(base, equipment_level()) * (1.0 + quality) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
+	return (GearScaling.defense(base, equipment_level()) * (1.0 + quality) * DataAscendant.mult(rarity) + _local(&"local_def_flat")) * (1.0 + _local(&"local_def"))
 
 ## bh-017: the element the weapon deals (an Enchantment replaces the blade's own) and the share of its damage that is elemental.
 func weapon_element() -> int:

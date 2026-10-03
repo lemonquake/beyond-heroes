@@ -857,8 +857,6 @@ func _map_design() -> void:
 	# ---- clifftop and roadside: a few strong rock silhouettes, grouped trees where the woods begin --------------
 	for c in [Vector3(-118.0, 0, 135.0), Vector3(-60.0, 0, 138.0), Vector3(8.0, 0, 136.5)]:
 		vignette("rock_tall", c, rng.randf() * 360.0, {"check": false})
-	for c in [Vector3(-30.0, 0, -20.0), Vector3(30.0, 0, -40.0), Vector3(-90.0, 0, -30.0)]:
-		place_near("pine_group", c, c, 0.0, 10.0, rng.randf() * 360.0)
 	for c in [Vector3(-75.0, 0, 60.0), Vector3(70.0, 0, 40.0)]:
 		place_near("tree_group", c, c, 0.0, 10.0, rng.randf() * 360.0)
 	place_near("fallen_tree", Vector3(-10.0, 0, -36.0), Vector3(-10.0, 0, -36.0), 0.0, 10.0, 30.0)

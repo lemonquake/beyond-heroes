@@ -96,7 +96,7 @@ const CELESTIAL_PRICE_MULT := 4
 const CELESTIAL_LEVEL := 40
 
 ## Maximum sockets per equipment tier (rarity): Beginner and Common 1 ... Aether 7.
-const MAX_SOCKETS := [1, 1, 2, 3, 3, 4, 5, 6, 6, 7]
+const MAX_SOCKETS := [1, 1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 8, 8]
 
 const ICON := "res://assets/ui/icons/crystals/%s.png"
 

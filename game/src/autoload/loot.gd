@@ -5,7 +5,8 @@ const BossSets = preload("res://src/data/data_boss_sets.gd")
 ## Drops per rank (before Magic Find):
 ##   normal  drop_chance -> 1 item; 10% health / 6% mana potion; family materials
 ##   elite   2-3 items, one guaranteed Advanced or better; 4% set piece, 1.5% Aether unique; 3x XP
-##   boss    5-6 class items, all Master or better; 40% set piece, 15% Aether unique; boss materials
+##   boss    5-6 class items, all Master or better; 40% set piece, 15% Aether unique; boss materials; a dungeon boss of
+##           level 70+ rarely an Ascendant piece (Cosmic 70+, Divine 80+, Eternal 90+, Primordial 100+; DataAscendant)
 ## Item level = monster level (+1 elite, +2 boss). Rarity uses ItemGenerator.roll_rarity with a rank bonus.
 
 var rng := RandomNumberGenerator.new()
@@ -188,6 +189,13 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 		var sb := ItemGenerator.random_special(rng, ilvl, true, cls, fit)
 		if sb:
 			drops.append(ItemGenerator.generate(sb, ilvl, BH.Rarity.MASTER, _item_rng()))
+	# bh-034: a dungeon lord of level 70+ may leave a Cosmic, Divine, Eternal or Primordial piece (DataAscendant). The
+	# debug drop floor (Debug console) set to an Ascendant tier forces one from any boss.
+	var dungeon_boss: bool = e.is_boss and DataDungeons.parse(Game.current_map_id)[0] != &""
+	var forced := Game.debug_min_drop if Game.debug_min_drop >= BH.Rarity.COSMIC and e.is_boss else -1
+	var asc := DataAscendant.roll_drop(e.level, dungeon_boss, cls, mf, rng, forced)
+	if asc:
+		drops.append(asc)
 	if e.has_meta(&"depth_guardian"):
 		uniq_p = 0.35 if e.level < 50 else 0.65
 	if rng.randf() < uniq_p * (1.0 + mf):

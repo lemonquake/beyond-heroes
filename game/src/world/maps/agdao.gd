@@ -22,7 +22,8 @@ const TIERS := [
 const STAIRS := [[-22.0, 0], [-18.0, 0], [40.0, 0], [-2.0, 1], [2.0, 1], [-50.0, 1], [-2.0, 2], [2.0, 2], [40.0, 2],
 	[-2.0, 3], [2.0, 3], [-28.0, 3]]
 const SEA_Y := 0.0
-const PYRAMID := Vector3(0, 0, -70)     # its stair's foot lands on the upper terrace's front edge (z -44)
+const PYRAMID := Vector3(0, 0, -73)     # its stair's foot (z -46.6) stands 2.6 m back from the terrace stairs' top (z -44):
+                                        # a landing between the two flights (they met edge to edge and the hero stuck there)
 const FOUNTAIN := Vector2(0, 20)
 const LIFT_X := 52.0
 const HALL := Vector2(-30, -14)
@@ -54,9 +55,10 @@ func compose() -> void:
 		"exposure": 1.1, "contrast": 1.08, "saturation": 0.95,
 	})
 	prepare(-110.0, -110.0, 220, 230, _landform, _shape)
-	terrain(Vector2i(W, D), Vector3(X0 + W * 0.5, 0, Z0 + D * 0.5), height_at, _splat,
+	terrain(Vector2i(W, D), Vector3(X0 + W * 0.5, 0, Z0 + D * 0.5), _terrain_h, _splat,
 		{"grass": "jungle_floor", "moss": "jungle_floor", "dirt": "red_clay", "path": "terrace_paving", "rock": "cliff_ochre"},
 		Color(0.92, 0.9, 0.88))
+	height_fn = height_at           # placement stands on the landform (block tops), not on the dipped terrain mesh
 	_sea()
 	_terrace_walls()
 	_stairs()
@@ -81,7 +83,7 @@ func compose() -> void:
 	view("market", Vector3(0, 6, 16), 0.0, 46.0, 34.0)
 	view("terraces", Vector3(0, 10, -6), 20.0, 30.0, 60.0, 45.0)
 	view("crown", Vector3(0, 20, -56), 0.0, 32.0, 48.0, 45.0)
-	view("pyramid_top", Vector3(0, 34, -70), 0.0, 40.0, 20.0, 45.0)
+	view("pyramid_top", Vector3(0, 34, -73), 0.0, 40.0, 20.0, 45.0)
 	view("gate", Vector3(74, 14, -26), -50.0, 40.0, 26.0, 45.0)
 
 # ------------------------------------------------------------------------------------------------------------
@@ -116,6 +118,30 @@ func _landform(x: float, z: float) -> float:
 	if z < -84.0:
 		y += (-84.0 - z) * 1.2
 	return y
+
+## The terrain mesh: the landform, except under the retaining blocks (8 m deep, their paved tops at the terrace's
+## height), where the ground stays below the paving. Level with it, it showed through and flickered along every
+## terrace edge. Placement keeps using height_at (props on a block top stand on the block, not in the dip).
+func _terrain_h(x: float, z: float) -> float:
+	var y := height_at(x, z)
+	for k in range(1, TIERS.size()):
+		var up: Dictionary = TIERS[k]
+		if z <= float(up.z1) - 7.75 or z >= float(up.z1) + 0.5:
+			continue
+		var span := _wall_span(k)
+		if x > span.x + 0.25 and x < span.y - 0.25:
+			y = minf(y, float(up.y) - 0.35)
+	return y
+
+## West and east ends of terrace `i`'s row of retaining blocks, exactly as _terrace_walls lays them (8 m blocks from
+## the west end; the row can stop short of the east end).
+func _wall_span(i: int) -> Vector2:
+	var up: Dictionary = TIERS[i]
+	var lo: Dictionary = TIERS[i - 1]
+	var x0 := maxf(float(up.x0), float(lo.x0) - 2.0)
+	var x1 := minf(float(up.x1), float(lo.x1) + 2.0)
+	var n := floori((x1 - 4.0 + 0.01 - (x0 + 4.0)) / 8.0) + 1
+	return Vector2(x0, x0 + 8.0 * float(maxi(n, 0)))
 
 func _shape(_x: float, _z: float, b: float, _rd: float, _rt: int) -> float:
 	return b

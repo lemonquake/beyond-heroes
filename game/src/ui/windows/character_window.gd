@@ -373,11 +373,12 @@ func _guild_tip() -> String:
 		for f in g.get("features", []):
 			lines.append(f)
 	lines.append("")
+	# (the Ascendant gates of Class S, SS and SSS are named where they apply: on the item and when equipping it)
 	for r in range(1, DataGuilds.MAX_RANK + 1):
 		var t := DataGuilds.tier(r)
 		var gate := int(t.gate)
 		lines.append("%s Class %s — %s: level %d%s%s" % ["▶" if r == hero.tier else " ", t.letter, t.title, t.level,
-			(", " + GuildRules.requirements_text(hero, r)) if r > 1 else "", (" · equips %s" % BH.rarity_name(gate)) if gate >= 0 else ""])
+			(", " + GuildRules.requirements_text(hero, r)) if r > 1 else "", (" · equips %s" % BH.rarity_name(gate)) if gate >= 0 and gate <= BH.Rarity.AETHER else ""])
 	return "\n".join(lines)
 
 func _on_dirty() -> void:

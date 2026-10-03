@@ -2,21 +2,26 @@ extends TestCase
 ## Item generation (ten rarity tiers), licenses, masterwork, powers, sets, uniques, inventory tools, save/load, migrations.
 
 func test_exact_rarity_tiers() -> void:
-	eq(BH.RARITY_COUNT, 10, "ten tiers")
-	eq(BH.RARITY_NAMES, ["Beginner", "Common", "Basic", "Advanced", "Licensed", "Elite", "Master", "Mythical", "Legendary", "Aether"], "exact names in order")
-	eq(BH.Rarity.AETHER, 9, "Aether is the highest")
-	eq(ItemGenerator.RULES.size(), 10, "one rule per tier")
-	eq(ItemGenerator.WEIGHTS.size(), 10, "one weight per tier")
-	eq(BH.RARITY_COLORS.size(), 10, "one color per tier")
+	# the ten tiers of the design spec, then (bh-034) the four Ascendant tiers that only the Ascendant collections carry
+	eq(BH.RARITY_COUNT, 14, "ten tiers and four Ascendant ones")
+	eq(BH.RARITY_NAMES, ["Beginner", "Common", "Basic", "Advanced", "Licensed", "Elite", "Master", "Mythical", "Legendary", "Aether",
+		"Cosmic", "Divine", "Eternal", "Primordial"], "exact names in order")
+	eq(BH.Rarity.AETHER, 9, "Aether is the highest rolled tier")
+	eq(BH.Rarity.PRIMORDIAL, 13, "Primordial is the highest")
+	eq(ItemGenerator.RULES.size(), 14, "one rule per tier")
+	eq(ItemGenerator.WEIGHTS.size(), 14, "one weight per tier")
+	eq(BH.RARITY_COLORS.size(), 14, "one color per tier")
 	var seen := {}
 	for c in BH.RARITY_COLORS:
 		seen[c.to_html()] = true
-	eq(seen.size(), 10, "every tier has a distinct color")
+	eq(seen.size(), 14, "every tier has a distinct color")
 
 func test_generation_rules_per_rarity() -> void:
 	var r := rng(11)
 	var base := DB.item_base(&"knights_arming_sword")
-	for rarity in BH.RARITY_COUNT:
+	for rarity in range(BH.Rarity.COSMIC, BH.RARITY_COUNT):
+		eq(ItemGenerator.generate(base, 30, rarity, r).rarity, BH.Rarity.AETHER, "a plain base never takes an Ascendant rarity")
+	for rarity in BH.Rarity.AETHER + 1:
 		for i in 40:
 			var it := ItemGenerator.generate(base, 30, rarity, r)
 			var rule: Array = ItemGenerator.RULES[rarity]

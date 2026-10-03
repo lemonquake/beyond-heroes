@@ -67,6 +67,8 @@ def main():
     parser.add_argument("--managed", action="store_true", help="Allow desktop controls to stop this server gracefully (Windows)")
     parser.add_argument("--stdio", action="store_true", help="Children write to this process's output (journald under systemd) instead of log files")
     parser.add_argument("--keep-logs", type=int, default=24, help="Log files to keep when writing log files")
+    parser.add_argument("--exported", action="store_true",
+                        help="--godot is an exported dedicated-server build with its game embedded (tools/export_server.py), not the editor")
     args = parser.parse_args()
     if os.name == "nt" and args.godot.stem.endswith("_console"):
         native = args.godot.with_name(args.godot.stem.removesuffix("_console") + ".exe")
@@ -120,7 +122,9 @@ def main():
             handles += [accounts_out, game_out]
         children.append(("account service", subprocess.Popen([sys.executable, "-m", "server.service", "--config", str(config)], cwd=root,
                                                               stdout=accounts_out, stderr=subprocess.STDOUT if accounts_out else None, creationflags=flags)))
-        children.append(("game coordinator", subprocess.Popen([str(args.godot.resolve()), "--headless", "--max-fps", "30", "--path", str(root / "game"),
+        # the editor runs the project from source; an exported server build carries its own stripped game (no --path)
+        project = [] if args.exported else ["--path", str(root / "game")]
+        children.append(("game coordinator", subprocess.Popen([str(args.godot.resolve()), "--headless", "--max-fps", "30", *project,
                                                                "--", "--official-server=" + str(coordinator_config)], cwd=root,
                                                               stdout=game_out, stderr=subprocess.STDOUT if game_out else None, creationflags=flags)))
         print("Official Beyond Heroes server started. Send SIGTERM or press Ctrl+C to stop both services.", flush=True)

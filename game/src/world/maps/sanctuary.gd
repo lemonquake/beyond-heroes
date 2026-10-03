@@ -512,15 +512,10 @@ func _map_design() -> void:
 	var tfwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(tv[2]))
 	var tside := tfwd.cross(Vector3.UP)
 	place_near("tavern_stock", tv[1] - tside * 7.0 + tfwd * 1.0, tv[1], 6.0, 11.0, tv[2])
-	# ---- greenery: grouped trees inside the walls where lots leave room, pine stands outside the palisade --------
+	# ---- greenery: grouped trees inside the walls where lots leave room -----------------------------------------
 	for c in [Vector3(-34.5, 0, -1.0), Vector3(33.5, 0, 12.5), Vector3(-6.0, 0, -33.5), Vector3(14.0, 0, -31.0)]:
 		if _clear_spot(c, 2.0):
 			vignette("tree_group", c, rng.randf() * 360.0, {"scale": 0.85, "check": false})
-	for i in 7:
-		var a := TAU * (i + 0.3) / 7.0
-		if sin(a) > 0.2:
-			continue          # nothing tall south of the town: the camera looks north over it (and the road stays open)
-		vignette("pine_group", Vector3(cos(a) * 44.0, 0, sin(a) * 44.0), rad_to_deg(a), {"check": false})
 	vignette("rock_cluster_l", Vector3(-41.0, 0, 20.0), 30.0, {"check": false})
 	# one focal tree in the open lot between the Guild House and Swordfin Hall
 	for c in [Vector3(18.0, 0, -6.0), Vector3(16.0, 0, -9.0), Vector3(-36.0, 0, 10.0)]:

@@ -189,8 +189,8 @@ func _wearables() -> Array:
 func test_every_wearable_has_a_worn_model() -> void:
 	var own := 0
 	for b: ItemBaseDef in _wearables():
-		if BossSetVisuals.has_theme(b.set_id):
-			ok(b.model_path() != "", "boss piece %s keeps its regalia" % b.id)
+		if BossSetVisuals.is_regalia(b):
+			ok(b.model_path() != "", "boss or Ascendant piece %s keeps its regalia" % b.id)
 			continue
 		ok(HeroWear.has_model(String(b.id)), "%s has its own worn model" % b.id)
 		own += 1

@@ -27,6 +27,18 @@ static var _pieces := {}
 static func has_theme(id: StringName) -> bool:
 	return THEMES.has(String(id))
 
+## bh-034: pieces worn as bone-bound regalia: the boss collections and the Ascendant collections (DataAscendant).
+static func is_regalia(base: ItemBaseDef) -> bool:
+	return base != null and (has_theme(base.set_id) or DataAscendant.is_ascendant(base))
+
+## The under-layer colour beneath a regalia piece (the set's cloth).
+const ASCENDANT_CLOTH := {BH.Rarity.COSMIC: "1b1840", BH.Rarity.DIVINE: "e8e2d0", BH.Rarity.ETERNAL: "4a1630", BH.Rarity.PRIMORDIAL: "3a0e0c"}
+
+static func under_tint(base: ItemBaseDef) -> Color:
+	if DataAscendant.is_ascendant(base):
+		return Color(String(ASCENDANT_CLOTH.get(base.fixed_rarity, "302838"))).darkened(0.2)
+	return Color(String(THEMES[String(base.set_id)][1])).darkened(0.35)
+
 static func material(id: String, part: int) -> StandardMaterial3D:
 	var key := id + str(part)
 	if _materials.has(key):
@@ -412,8 +424,17 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 	for slot in SLOTS:
 		if slot == "main_weapon" or (slot == "helm" and skip_helm): continue
 		var item := equipment.get_item(StringName(slot))
-		if item == null or not has_theme(item.base.set_id): continue
+		if item == null or not is_regalia(item.base): continue
 		var id := String(item.base.set_id)
+		var model := item.base.model_path()
+		var asc := DataAscendant.is_ascendant(item.base)
+		# bh-034: one Ascendant gauntlet or boot fits either side; the right one has its own mirrored model
+		if asc and slot.ends_with("_2") and (slot.begins_with("gloves") or slot.begins_with("boots")):
+			var right := model.get_basename() + "_R.glb"
+			if ResourceLoader.exists(right):
+				model = right
+		if asc and not ResourceLoader.exists(model):
+			continue
 		var bone := "chest"
 		if slot == "helm": bone = "head"
 		elif slot == "inner_garment" or slot == "leggings": bone = "hips"
@@ -443,10 +464,14 @@ static func wear(visual: Node3D, equipment: Equipment, hero := false, skip_helm 
 			target = Transform3D(target.basis, target.origin + _hero_fit(slot).origin) * Transform3D(_hero_fit(slot).basis, Vector3.ZERO)
 		elif slot == "leggings":
 			target = target * Transform3D(Basis.from_scale(CLASS_LEGS_FIT), Vector3.ZERO)
-		var piece := _worn_piece(id, slot, item.base.model_path())
+		var piece := _worn_piece(id, slot, model)
 		ba.add_child(piece)
 		piece.transform = rest.affine_inverse() * target
 		result.append(ba)
+		if asc:
+			AscendantFx.dress(piece, item.base.fixed_rarity)
+			if slot in ["helm", "armor"] or slot.begins_with("gloves") or slot.begins_with("accessory_3"):
+				ba.add_child(AscendantFx.aura(item.base.fixed_rarity, 0.22 if slot == "armor" else 0.14))
 		# bh-022: parts that follow another bone (pauldrons, hand plates, sabatons, tassets) ride their own attachment
 		for child in piece.get_children():
 			var nm := String(child.name)

@@ -138,11 +138,30 @@ func _on_land() -> void:
 	if r == BH.Rarity.AETHER:
 		_aether_presentation()
 		Events.notify.emit("An Aether item has appeared!", &"aether")
+	if DataAscendant.is_ascendant_rarity(r):
+		_ascendant_presentation(r, rad)
 	# bh-012: a five-star roll gets its own flourish, whatever its rarity
 	if item.stars() == 5 and r >= BH.Rarity.BASIC:
 		add_child(VFXLib.ring_wave(Color(1.0, 0.82, 0.3), 1.8, 0.7, 0.4))
 		FX.spawn(VFXLib.particles(Color(1.0, 0.85, 0.35, 1.0), 22, 0.9, true, 0.1, 3.0, 80.0, Vector3(0, -2.5, 0), 0.15), global_position + Vector3.UP * 0.4)
 		Events.notify.emit("★★★★★ %s — %s!" % [item.short_name(), "perfect rolls" if item.is_perfect() else "a five-star find"], &"loot")
+
+## bh-034: a Cosmic, Divine, Eternal or Primordial piece: its own animated sigil on the ground, a column of its light
+## seen from across the map, the tier's light moving over the model, a burst and a shout in the log.
+func _ascendant_presentation(r: int, rad: float) -> void:
+	add_child(AscendantFx.sigil(r, rad + 1.1))
+	add_child(AscendantFx.pillar(r, BH.RARITY_BEAM[r]))
+	AscendantFx.dress(_model, r, 1.1)
+	var aura := AscendantFx.aura(r, rad + 0.15)
+	aura.position.y = 0.35
+	add_child(aura)
+	var c := AscendantFx.color(r)
+	FX.spawn(VFXLib.light_flash(c, 10.0, 14.0, 1.2), global_position + Vector3.UP)
+	FX.spawn(VFXLib.particles(c, 60, 1.2, true, 0.14, 5.0, 80.0, Vector3(0, -2.0, 0), 0.3), global_position + Vector3.UP * 0.4)
+	add_child(VFXLib.ring_wave(c, 4.0, 1.2, 0.6))
+	Events.camera_shake.emit(0.18)
+	_hum = Audio.make_loop(&"teleporter_hum", self, -12.0, 14.0)
+	Events.notify.emit("A %s item has appeared: %s!" % [BH.rarity_name(r), item.display_name()], &"ascendant")
 
 func _aether_presentation() -> void:
 	var prism := [Color(0.55, 0.98, 1.0), Color(0.85, 0.7, 1.0), Color(1.0, 0.95, 0.75)]

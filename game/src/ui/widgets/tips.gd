@@ -140,6 +140,14 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	band.color = Color(col, 0.8)
 	band.custom_minimum_size = Vector2(0, 2)
 	v.add_child(band)
+	# bh-034: an Ascendant piece says what it is: the tier, its power over Aether, where it comes from; its name breathes
+	if DataAscendant.is_ascendant_rarity(it.rarity):
+		v.add_child(lbl("ASCENDANT · %s   ×%.2f base power" % [it.rarity_name().to_upper(), DataAscendant.mult(it.rarity)], 16, col, UITheme.body_bold()))
+		v.add_child(lbl(BH.RARITY_DESC[clampi(it.rarity, 0, BH.RARITY_COUNT - 1)], 14, Color(col, 0.85)))
+		name_l.tree_entered.connect(func() -> void:
+			var tw := name_l.create_tween().set_loops()
+			tw.tween_property(name_l, "modulate", Color(1.4, 1.4, 1.4), 0.9).set_trans(Tween.TRANS_SINE)
+			tw.tween_property(name_l, "modulate", Color.WHITE, 0.9).set_trans(Tween.TRANS_SINE), CONNECT_ONE_SHOT)
 	# core numbers
 	if it.base.is_weapon():
 		var wt := DB.weapon_type(it.base.weapon_type)

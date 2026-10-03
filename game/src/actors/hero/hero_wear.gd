@@ -31,7 +31,9 @@ const SKIRT_HIP := 0.80
 const SKIRT_KNEE := 0.45
 const FAR := Vector2(9.0, 9.0)
 ## Boss helms that are open crowns (the hair stays).
-const BOSS_HELM_KEEPS_HAIR := ["grievance_of_the_fairy", "winter_court"]
+const BOSS_HELM_KEEPS_HAIR := ["grievance_of_the_fairy", "winter_court",
+	# bh-034: the Ascendant crowns and circlets
+	"voidweaver", "lightbinder", "zenith_archer", "penitent_talon", "timeweaver", "evertide_hunter", "magma_oracle", "wildroot_hunter"]
 
 static var _manifest := {}
 static var _loaded := false
@@ -93,9 +95,9 @@ static func plan(equipment: Equipment, show_helm := true) -> Dictionary:
 		var base := item.base
 		var side := _side(slot)
 		sig.append("%s:%s" % [slot, base.id])
-		if BossSetVisuals.has_theme(base.set_id) and not has_model(String(base.id)):
-			# regalia plates over a plain under-layer in the set's colour
-			var tint := Color(String(BossSetVisuals.THEMES[String(base.set_id)][1])).darkened(0.35)
+		if BossSetVisuals.is_regalia(base) and not has_model(String(base.id)):
+			# regalia plates over a plain under-layer in the set's colour (boss and Ascendant collections)
+			var tint := BossSetVisuals.under_tint(base)
 			var under := ""
 			if slot == &"armor" or slot == &"inner_garment":
 				under = UNDER_BODY

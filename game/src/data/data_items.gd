@@ -135,6 +135,7 @@ static func bases() -> Array:
 	# ---- Leggings (bh-024) ----
 	out.append_array(DataLeggings.bases())
 	out.append_array(DataSpecialWeapons.bases())       # bh-026: the Ember Dragon set (Aljay's, knights only)
+	out.append_array(DataAscendant.bases())            # bh-034: the forty Ascendant collections (Cosmic .. Primordial)
 	# ---- Accessories ----
 	out.append(_b(&"copper_ring", "Copper Ring", &"accessory", "ring", {"level_req": 1, "value": 20}))
 	out.append(_b(&"silver_ring", "Silver Ring", &"accessory", "ring_2", {"level_req": 8, "value": 40, "implicit": [StatModifier.flat(&"res_all", 0.03)]}))
@@ -550,7 +551,7 @@ static func sets() -> Array:
 		6: {"desc": "+8% Cast Speed and +1.5 Mana Regeneration", "mods": [StatModifier.inc(&"cast_speed", 0.08), StatModifier.flat(&"mana_regen", 1.5)]},
 	}
 	sage.lore = "The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea."
-	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets() + DataSpecialWeapons.sets()
+	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets() + DataSpecialWeapons.sets() + DataAscendant.sets()
 
 ## Faction licenses for Licensed-tier items: fixed specialization bonus [stat, op, base, per item level].
 static func licenses() -> Dictionary:
@@ -706,4 +707,4 @@ static func powers() -> Array:
 		_p(&"a_cleave_wave", "Aether-edged", "Cleave releases a travelling Aether wave (80% of Cleave's damage as Light).", &"cleave_wave", 0.8, [&"weapon", &"gloves"], &"knight", [], &"aether"),
 		_p(&"a_blink_nova", "Riftwalker's", "Blink leaves a Frost Nova at the point you left.", &"blink_nova", 1.0, [&"boots", &"helm", &"accessory", &"leggings"], &"mage", [], &"aether"),
 		_p(&"a_overflow_pulse", "Aetherheart", "Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.", &"aether_heartbeat", 1.2, [&"accessory", &"armor"], &"", [], &"aether"),
-	]
+	] + DataAscendant.powers()     # bh-034: the four Ascendant signature powers (Starfall, Judgement, Echo, Eruption)

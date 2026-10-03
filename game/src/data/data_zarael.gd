@@ -45,7 +45,7 @@ const AG_SHIP := Vector3(-9.5, 0.0, 64.0)           # the ship's waterline centr
 const AG_SPAWN := Vector3(-20.0, 0.0, 66.0)         # spawn `pier` (where the gangplank meets the pier)
 const AG_TERAX := Vector3(-20.0, 0.0, 47.0)         # Terax waits at the head of the pier
 const AG_SHRINE := Vector2(26.0, 18.0)              # the waypoint on the Market Terrace
-const AG_WIREKEEPER := Vector3(0.0, 0.0, -67.0)     # Wirekeeper Halvessa Orn, at the top of the Crown of Steps
+const AG_WIREKEEPER := Vector3(0.0, 0.0, -70.0)     # Wirekeeper Halvessa Orn, at the top of the Crown of Steps
 const AG_GATE := Vector2(80.0, -26.0)               # the Coilwood Gate (east side, upper town)
 const AG_GATE_SPAWN := Vector3(72.0, 0.0, -26.0)    # spawn `coil_gate` (inside the gate, facing west)
 

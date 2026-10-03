@@ -297,7 +297,8 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	# bh-022: the boss collections ("BH_HolyPlate__it_boss_crimson_glory_plate") wear the legends' texture sets too
 	var pal := nm.get_slice("__", 1)
 	# bh-023: and so does everything the hero wears ("BH_Mail__it_hw_mail", tools/blender/hero/hero_wear_kit.py)
-	if (LEGEND_PALETTES.has(pal) or pal.begins_with("it_boss_") or pal.begins_with("it_hw_")) and LEGEND.has(base):
+	# bh-034: and the Ascendant collections ("BH_DragonPlate__it_asc_worldforger_plate")
+	if (LEGEND_PALETTES.has(pal) or pal.begins_with("it_boss_") or pal.begins_with("it_hw_") or pal.begins_with("it_asc_")) and LEGEND.has(base):
 		_char[ck] = _legend_mat(base, src as BaseMaterial3D, lite)
 		return _char[ck]
 	var imported := src as BaseMaterial3D

@@ -960,6 +960,7 @@ func _on_notify(text: String, kind: StringName) -> void:
 		&"save": col = UITheme.TEXT_DIM; icon = "save"
 		&"discovery": col = Color(0.6, 0.97, 1.0); icon = "map"
 		&"aether": col = Color(0.6, 0.97, 1.0); icon = "aether"
+		&"ascendant": col = Color(1.0, 0.86, 0.55); icon = "aether"
 		&"locked": col = Color(1.0, 0.75, 0.45); icon = "lock"
 	_feed_line(text, col, UIArt.ui_icon(icon))
 

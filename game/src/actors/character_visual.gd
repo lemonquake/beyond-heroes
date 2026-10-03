@@ -768,7 +768,7 @@ func dress_equipment(equipment: Equipment) -> void:
 	var worn := {}
 	for slot in equipment.slots:
 		var item := equipment.get_item(slot)
-		if item and (preload("res://src/actors/boss_set_visuals.gd").has_theme(item.base.set_id) or DataSpecialWeapons.is_special(item.base)):
+		if item and (preload("res://src/actors/boss_set_visuals.gd").is_regalia(item.base) or DataSpecialWeapons.is_special(item.base)):
 			parts.append("%s:%s" % [slot,item.base.id])
 			worn[slot] = String(item.base.id)
 	var signature := ",".join(parts)
@@ -850,6 +850,17 @@ func set_weapon_infusion(hand: StringName, color: Color, power: int, length := 0
 	pm.emission_box_extents = Vector3(0.03, length * 0.5, 0.03)
 	motes.position = Vector3(0, length * 0.55, 0)
 	fx.add_child(motes)
+
+## bh-034: an Ascendant weapon or shield in this hand carries its tier's moving light (AscendantFx): the surface shader
+## and motes along its length. Below Cosmic it does nothing.
+func set_weapon_ascendant(hand: StringName, rarity: int, length := 0.9) -> void:
+	if not _weapon_nodes.has(hand) or not is_instance_valid(_weapon_nodes[hand]) or not AscendantFx.has_look(rarity):
+		return
+	var holder: Node3D = _weapon_nodes[hand]
+	AscendantFx.dress(holder, rarity)
+	var aura := AscendantFx.aura(rarity, 0.06, length)
+	aura.name = "Ascendant"
+	holder.add_child(aura)
 
 func _collect_into(n: Node, out: Array[MeshInstance3D]) -> void:
 	if n is MeshInstance3D:

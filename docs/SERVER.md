@@ -1,5 +1,12 @@
 # 24/7 Hosting Guide for Godot Multiplayer Games
 
+> **Implemented for Beyond Heroes (bh-034):** follow [FREE_VPS_HOSTING.md](FREE_VPS_HOSTING.md). `python tools/export_server.py`
+> makes the headless dedicated-server build of step 1 (visuals stripped, packed with the account service);
+> `sudo ./server/deploy/free-vps.sh` on an Oracle Always Free (ARM) or Google e2-micro VM does steps 2-4: firewall (ufw or
+> Oracle's iptables, plus the console rules it prints), the systemd services that restart on failure and on boot, and in
+> addition HTTPS for accounts through Caddy with a free host name (sslip.io or DuckDNS). The game starts in server mode
+> with `--official-server=<config>` (game/src/main.gd), on UDP 24680 rather than 7777, for twelve players.
+
 Godot does not offer official hosting servers. Because Godot is an open-source engine, running an online game 24/7 requires deploying a **headless dedicated server build** to a remote Virtual Private Server (VPS), container service, or changing your network model to peer-to-peer (P2P).
 
 ## 1. Hosting Architecture Overview

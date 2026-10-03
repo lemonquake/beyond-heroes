@@ -26,7 +26,7 @@ signal chat_received(peer: int, text: String)
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 17                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events
+const PROTOCOL := 18                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
                                      # 8: item-level combat growth; 9: per-map combat owners, checkpoints and Team Portal

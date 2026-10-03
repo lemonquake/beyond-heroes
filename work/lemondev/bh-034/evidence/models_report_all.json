@@ -1,0 +1,3410 @@
+[
+ {
+  "id": "asc_starfall_vanguard_helm",
+  "tris": 6124,
+  "objects": [
+   "asc_starfall_vanguard_helm"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_armor",
+  "tris": 14692,
+  "objects": [
+   "asc_starfall_vanguard_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_inner",
+  "tris": 5468,
+  "objects": [
+   "asc_starfall_vanguard_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_leggings",
+  "tris": 7576,
+  "objects": [
+   "asc_starfall_vanguard_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_gloves",
+  "tris": 3904,
+  "objects": [
+   "asc_starfall_vanguard_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_gloves_R",
+  "tris": 3904,
+  "objects": [
+   "asc_starfall_vanguard_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_boots",
+  "tris": 5204,
+  "objects": [
+   "asc_starfall_vanguard_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_boots_R",
+  "tris": 5204,
+  "objects": [
+   "asc_starfall_vanguard_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_accessory",
+  "tris": 756,
+  "objects": [
+   "asc_starfall_vanguard_accessory"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_shield",
+  "tris": 3836,
+  "objects": [
+   "asc_starfall_vanguard_shield"
+  ]
+ },
+ {
+  "id": "asc_starfall_vanguard_weapon",
+  "tris": 1608,
+  "objects": [
+   "asc_starfall_vanguard_weapon"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_helm",
+  "tris": 6724,
+  "objects": [
+   "asc_nebula_warlord_helm"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_armor",
+  "tris": 16108,
+  "objects": [
+   "asc_nebula_warlord_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_inner",
+  "tris": 6340,
+  "objects": [
+   "asc_nebula_warlord_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_leggings",
+  "tris": 9320,
+  "objects": [
+   "asc_nebula_warlord_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_gloves",
+  "tris": 4776,
+  "objects": [
+   "asc_nebula_warlord_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_gloves_R",
+  "tris": 4776,
+  "objects": [
+   "asc_nebula_warlord_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_boots",
+  "tris": 6076,
+  "objects": [
+   "asc_nebula_warlord_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_boots_R",
+  "tris": 6076,
+  "objects": [
+   "asc_nebula_warlord_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_accessory",
+  "tris": 1628,
+  "objects": [
+   "asc_nebula_warlord_accessory"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_shield",
+  "tris": 4696,
+  "objects": [
+   "asc_nebula_warlord_shield"
+  ]
+ },
+ {
+  "id": "asc_nebula_warlord_weapon",
+  "tris": 1744,
+  "objects": [
+   "asc_nebula_warlord_weapon"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_helm",
+  "tris": 6924,
+  "objects": [
+   "asc_orbit_sentinel_helm"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_armor",
+  "tris": 16752,
+  "objects": [
+   "asc_orbit_sentinel_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_inner",
+  "tris": 7332,
+  "objects": [
+   "asc_orbit_sentinel_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_leggings",
+  "tris": 11304,
+  "objects": [
+   "asc_orbit_sentinel_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_gloves",
+  "tris": 5768,
+  "objects": [
+   "asc_orbit_sentinel_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_gloves_R",
+  "tris": 5768,
+  "objects": [
+   "asc_orbit_sentinel_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_boots",
+  "tris": 7068,
+  "objects": [
+   "asc_orbit_sentinel_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_boots_R",
+  "tris": 7068,
+  "objects": [
+   "asc_orbit_sentinel_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_accessory",
+  "tris": 2620,
+  "objects": [
+   "asc_orbit_sentinel_accessory"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_shield",
+  "tris": 5700,
+  "objects": [
+   "asc_orbit_sentinel_shield"
+  ]
+ },
+ {
+  "id": "asc_orbit_sentinel_weapon",
+  "tris": 1604,
+  "objects": [
+   "asc_orbit_sentinel_weapon"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_helm",
+  "tris": 6460,
+  "objects": [
+   "asc_astral_magister_helm"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_armor",
+  "tris": 6556,
+  "objects": [
+   "asc_astral_magister_armor"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_inner",
+  "tris": 3340,
+  "objects": [
+   "asc_astral_magister_inner"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_leggings",
+  "tris": 5804,
+  "objects": [
+   "asc_astral_magister_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_gloves",
+  "tris": 2448,
+  "objects": [
+   "asc_astral_magister_gloves"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_gloves_R",
+  "tris": 2448,
+  "objects": [
+   "asc_astral_magister_gloves"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_boots",
+  "tris": 4696,
+  "objects": [
+   "asc_astral_magister_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_boots_R",
+  "tris": 4696,
+  "objects": [
+   "asc_astral_magister_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_accessory",
+  "tris": 756,
+  "objects": [
+   "asc_astral_magister_accessory"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_shield",
+  "tris": 3824,
+  "objects": [
+   "asc_astral_magister_shield"
+  ]
+ },
+ {
+  "id": "asc_astral_magister_weapon",
+  "tris": 1974,
+  "objects": [
+   "asc_astral_magister_weapon"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_helm",
+  "tris": 3848,
+  "objects": [
+   "asc_voidweaver_helm"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_armor",
+  "tris": 7428,
+  "objects": [
+   "asc_voidweaver_armor"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_inner",
+  "tris": 5084,
+  "objects": [
+   "asc_voidweaver_inner"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_leggings",
+  "tris": 6676,
+  "objects": [
+   "asc_voidweaver_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_gloves",
+  "tris": 3320,
+  "objects": [
+   "asc_voidweaver_gloves"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_gloves_R",
+  "tris": 3320,
+  "objects": [
+   "asc_voidweaver_gloves"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_boots",
+  "tris": 5568,
+  "objects": [
+   "asc_voidweaver_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_boots_R",
+  "tris": 5568,
+  "objects": [
+   "asc_voidweaver_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_accessory",
+  "tris": 5276,
+  "objects": [
+   "asc_voidweaver_accessory"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_shield",
+  "tris": 4696,
+  "objects": [
+   "asc_voidweaver_shield"
+  ]
+ },
+ {
+  "id": "asc_voidweaver_weapon",
+  "tris": 1488,
+  "objects": [
+   "asc_voidweaver_weapon"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_helm",
+  "tris": 7828,
+  "objects": [
+   "asc_eclipse_oracle_helm"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_armor",
+  "tris": 11764,
+  "objects": [
+   "asc_eclipse_oracle_armor"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_inner",
+  "tris": 7068,
+  "objects": [
+   "asc_eclipse_oracle_inner"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_leggings",
+  "tris": 7668,
+  "objects": [
+   "asc_eclipse_oracle_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_gloves",
+  "tris": 4312,
+  "objects": [
+   "asc_eclipse_oracle_gloves"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_gloves_R",
+  "tris": 4312,
+  "objects": [
+   "asc_eclipse_oracle_gloves"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_boots",
+  "tris": 6560,
+  "objects": [
+   "asc_eclipse_oracle_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_boots_R",
+  "tris": 6560,
+  "objects": [
+   "asc_eclipse_oracle_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_accessory",
+  "tris": 6268,
+  "objects": [
+   "asc_eclipse_oracle_accessory"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_shield",
+  "tris": 5700,
+  "objects": [
+   "asc_eclipse_oracle_shield"
+  ]
+ },
+ {
+  "id": "asc_eclipse_oracle_weapon",
+  "tris": 1974,
+  "objects": [
+   "asc_eclipse_oracle_weapon"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_helm",
+  "tris": 7344,
+  "objects": [
+   "asc_comet_strider_helm"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_armor",
+  "tris": 12156,
+  "objects": [
+   "asc_comet_strider_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_inner",
+  "tris": 6648,
+  "objects": [
+   "asc_comet_strider_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_leggings",
+  "tris": 10216,
+  "objects": [
+   "asc_comet_strider_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_gloves",
+  "tris": 5444,
+  "objects": [
+   "asc_comet_strider_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_gloves_R",
+  "tris": 5444,
+  "objects": [
+   "asc_comet_strider_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_boots",
+  "tris": 6436,
+  "objects": [
+   "asc_comet_strider_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_boots_R",
+  "tris": 6436,
+  "objects": [
+   "asc_comet_strider_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_accessory",
+  "tris": 5636,
+  "objects": [
+   "asc_comet_strider_accessory"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_shield",
+  "tris": 5056,
+  "objects": [
+   "asc_comet_strider_shield"
+  ]
+ },
+ {
+  "id": "asc_comet_strider_weapon",
+  "tris": 1440,
+  "objects": [
+   "asc_comet_strider_weapon"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_helm",
+  "tris": 5692,
+  "objects": [
+   "asc_meteor_marksman_helm"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_armor",
+  "tris": 10388,
+  "objects": [
+   "asc_meteor_marksman_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_inner",
+  "tris": 3988,
+  "objects": [
+   "asc_meteor_marksman_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_leggings",
+  "tris": 7408,
+  "objects": [
+   "asc_meteor_marksman_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_gloves",
+  "tris": 4200,
+  "objects": [
+   "asc_meteor_marksman_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_gloves_R",
+  "tris": 4200,
+  "objects": [
+   "asc_meteor_marksman_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_boots",
+  "tris": 5500,
+  "objects": [
+   "asc_meteor_marksman_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_boots_R",
+  "tris": 5500,
+  "objects": [
+   "asc_meteor_marksman_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_accessory",
+  "tris": 1452,
+  "objects": [
+   "asc_meteor_marksman_accessory"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_shield",
+  "tris": 4120,
+  "objects": [
+   "asc_meteor_marksman_shield"
+  ]
+ },
+ {
+  "id": "asc_meteor_marksman_weapon",
+  "tris": 2716,
+  "objects": [
+   "asc_meteor_marksman_weapon"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_helm",
+  "tris": 7060,
+  "objects": [
+   "asc_nightsky_reaver_helm"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_armor",
+  "tris": 8976,
+  "objects": [
+   "asc_nightsky_reaver_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_inner",
+  "tris": 6288,
+  "objects": [
+   "asc_nightsky_reaver_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_leggings",
+  "tris": 9192,
+  "objects": [
+   "asc_nightsky_reaver_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_gloves",
+  "tris": 4776,
+  "objects": [
+   "asc_nightsky_reaver_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_gloves_R",
+  "tris": 4776,
+  "objects": [
+   "asc_nightsky_reaver_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_boots",
+  "tris": 6076,
+  "objects": [
+   "asc_nightsky_reaver_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_boots_R",
+  "tris": 6076,
+  "objects": [
+   "asc_nightsky_reaver_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_accessory",
+  "tris": 2028,
+  "objects": [
+   "asc_nightsky_reaver_accessory"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_shield",
+  "tris": 4696,
+  "objects": [
+   "asc_nightsky_reaver_shield"
+  ]
+ },
+ {
+  "id": "asc_nightsky_reaver_weapon",
+  "tris": 1644,
+  "objects": [
+   "asc_nightsky_reaver_weapon"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_helm",
+  "tris": 6308,
+  "objects": [
+   "asc_starless_stalker_helm"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_armor",
+  "tris": 9220,
+  "objects": [
+   "asc_starless_stalker_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_inner",
+  "tris": 4352,
+  "objects": [
+   "asc_starless_stalker_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_leggings",
+  "tris": 8556,
+  "objects": [
+   "asc_starless_stalker_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_gloves",
+  "tris": 4636,
+  "objects": [
+   "asc_starless_stalker_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_gloves_R",
+  "tris": 4636,
+  "objects": [
+   "asc_starless_stalker_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_boots",
+  "tris": 5864,
+  "objects": [
+   "asc_starless_stalker_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_boots_R",
+  "tris": 5864,
+  "objects": [
+   "asc_starless_stalker_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_accessory",
+  "tris": 1816,
+  "objects": [
+   "asc_starless_stalker_accessory"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_shield",
+  "tris": 4484,
+  "objects": [
+   "asc_starless_stalker_shield"
+  ]
+ },
+ {
+  "id": "asc_starless_stalker_weapon",
+  "tris": 1660,
+  "objects": [
+   "asc_starless_stalker_weapon"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_helm",
+  "tris": 7272,
+  "objects": [
+   "asc_seraph_paladin_helm"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_armor",
+  "tris": 17476,
+  "objects": [
+   "asc_seraph_paladin_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_inner",
+  "tris": 5828,
+  "objects": [
+   "asc_seraph_paladin_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_leggings",
+  "tris": 8296,
+  "objects": [
+   "asc_seraph_paladin_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_gloves",
+  "tris": 4264,
+  "objects": [
+   "asc_seraph_paladin_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_gloves_R",
+  "tris": 4264,
+  "objects": [
+   "asc_seraph_paladin_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_boots",
+  "tris": 5564,
+  "objects": [
+   "asc_seraph_paladin_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_boots_R",
+  "tris": 5564,
+  "objects": [
+   "asc_seraph_paladin_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_accessory",
+  "tris": 1184,
+  "objects": [
+   "asc_seraph_paladin_accessory"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_shield",
+  "tris": 4436,
+  "objects": [
+   "asc_seraph_paladin_shield"
+  ]
+ },
+ {
+  "id": "asc_seraph_paladin_weapon",
+  "tris": 1976,
+  "objects": [
+   "asc_seraph_paladin_weapon"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_helm",
+  "tris": 6632,
+  "objects": [
+   "asc_archon_crusader_helm"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_armor",
+  "tris": 14832,
+  "objects": [
+   "asc_archon_crusader_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_inner",
+  "tris": 5400,
+  "objects": [
+   "asc_archon_crusader_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_leggings",
+  "tris": 7440,
+  "objects": [
+   "asc_archon_crusader_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_gloves",
+  "tris": 3836,
+  "objects": [
+   "asc_archon_crusader_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_gloves_R",
+  "tris": 3836,
+  "objects": [
+   "asc_archon_crusader_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_boots",
+  "tris": 5136,
+  "objects": [
+   "asc_archon_crusader_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_boots_R",
+  "tris": 5136,
+  "objects": [
+   "asc_archon_crusader_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_accessory",
+  "tris": 756,
+  "objects": [
+   "asc_archon_crusader_accessory"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_shield",
+  "tris": 3756,
+  "objects": [
+   "asc_archon_crusader_shield"
+  ]
+ },
+ {
+  "id": "asc_archon_crusader_weapon",
+  "tris": 2984,
+  "objects": [
+   "asc_archon_crusader_weapon"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_helm",
+  "tris": 7852,
+  "objects": [
+   "asc_dawnward_templar_helm"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_armor",
+  "tris": 17632,
+  "objects": [
+   "asc_dawnward_templar_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_inner",
+  "tris": 6632,
+  "objects": [
+   "asc_dawnward_templar_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_leggings",
+  "tris": 9904,
+  "objects": [
+   "asc_dawnward_templar_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_gloves",
+  "tris": 5376,
+  "objects": [
+   "asc_dawnward_templar_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_gloves_R",
+  "tris": 5376,
+  "objects": [
+   "asc_dawnward_templar_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_boots",
+  "tris": 6368,
+  "objects": [
+   "asc_dawnward_templar_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_boots_R",
+  "tris": 6368,
+  "objects": [
+   "asc_dawnward_templar_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_accessory",
+  "tris": 1988,
+  "objects": [
+   "asc_dawnward_templar_accessory"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_shield",
+  "tris": 5000,
+  "objects": [
+   "asc_dawnward_templar_shield"
+  ]
+ },
+ {
+  "id": "asc_dawnward_templar_weapon",
+  "tris": 2168,
+  "objects": [
+   "asc_dawnward_templar_weapon"
+  ]
+ },
+ {
+  "id": "asc_hierophant_helm",
+  "tris": 7556,
+  "objects": [
+   "asc_hierophant_helm"
+  ]
+ },
+ {
+  "id": "asc_hierophant_armor",
+  "tris": 7124,
+  "objects": [
+   "asc_hierophant_armor"
+  ]
+ },
+ {
+  "id": "asc_hierophant_inner",
+  "tris": 4128,
+  "objects": [
+   "asc_hierophant_inner"
+  ]
+ },
+ {
+  "id": "asc_hierophant_leggings",
+  "tris": 6096,
+  "objects": [
+   "asc_hierophant_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_hierophant_gloves",
+  "tris": 2808,
+  "objects": [
+   "asc_hierophant_gloves"
+  ]
+ },
+ {
+  "id": "asc_hierophant_gloves_R",
+  "tris": 2808,
+  "objects": [
+   "asc_hierophant_gloves"
+  ]
+ },
+ {
+  "id": "asc_hierophant_boots",
+  "tris": 5056,
+  "objects": [
+   "asc_hierophant_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_hierophant_boots_R",
+  "tris": 5056,
+  "objects": [
+   "asc_hierophant_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_hierophant_accessory",
+  "tris": 1184,
+  "objects": [
+   "asc_hierophant_accessory"
+  ]
+ },
+ {
+  "id": "asc_hierophant_shield",
+  "tris": 4424,
+  "objects": [
+   "asc_hierophant_shield"
+  ]
+ },
+ {
+  "id": "asc_hierophant_weapon",
+  "tris": 2230,
+  "objects": [
+   "asc_hierophant_weapon"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_helm",
+  "tris": 3756,
+  "objects": [
+   "asc_lightbinder_helm"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_armor",
+  "tris": 7488,
+  "objects": [
+   "asc_lightbinder_armor"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_inner",
+  "tris": 3272,
+  "objects": [
+   "asc_lightbinder_inner"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_leggings",
+  "tris": 5668,
+  "objects": [
+   "asc_lightbinder_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_gloves",
+  "tris": 2380,
+  "objects": [
+   "asc_lightbinder_gloves"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_gloves_R",
+  "tris": 2380,
+  "objects": [
+   "asc_lightbinder_gloves"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_boots",
+  "tris": 4628,
+  "objects": [
+   "asc_lightbinder_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_boots_R",
+  "tris": 4628,
+  "objects": [
+   "asc_lightbinder_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_accessory",
+  "tris": 4336,
+  "objects": [
+   "asc_lightbinder_accessory"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_shield",
+  "tris": 3756,
+  "objects": [
+   "asc_lightbinder_shield"
+  ]
+ },
+ {
+  "id": "asc_lightbinder_weapon",
+  "tris": 1972,
+  "objects": [
+   "asc_lightbinder_weapon"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_helm",
+  "tris": 8808,
+  "objects": [
+   "asc_cantor_of_dawn_helm"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_armor",
+  "tris": 7928,
+  "objects": [
+   "asc_cantor_of_dawn_armor"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_inner",
+  "tris": 5736,
+  "objects": [
+   "asc_cantor_of_dawn_inner"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_leggings",
+  "tris": 6900,
+  "objects": [
+   "asc_cantor_of_dawn_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_gloves",
+  "tris": 3920,
+  "objects": [
+   "asc_cantor_of_dawn_gloves"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_gloves_R",
+  "tris": 3920,
+  "objects": [
+   "asc_cantor_of_dawn_gloves"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_boots",
+  "tris": 5860,
+  "objects": [
+   "asc_cantor_of_dawn_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_boots_R",
+  "tris": 5860,
+  "objects": [
+   "asc_cantor_of_dawn_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_accessory",
+  "tris": 5568,
+  "objects": [
+   "asc_cantor_of_dawn_accessory"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_shield",
+  "tris": 5000,
+  "objects": [
+   "asc_cantor_of_dawn_shield"
+  ]
+ },
+ {
+  "id": "asc_cantor_of_dawn_weapon",
+  "tris": 2230,
+  "objects": [
+   "asc_cantor_of_dawn_weapon"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_helm",
+  "tris": 5596,
+  "objects": [
+   "asc_zenith_archer_helm"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_armor",
+  "tris": 12660,
+  "objects": [
+   "asc_zenith_archer_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_inner",
+  "tris": 6596,
+  "objects": [
+   "asc_zenith_archer_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_leggings",
+  "tris": 10080,
+  "objects": [
+   "asc_zenith_archer_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_gloves",
+  "tris": 5376,
+  "objects": [
+   "asc_zenith_archer_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_gloves_R",
+  "tris": 5376,
+  "objects": [
+   "asc_zenith_archer_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_boots",
+  "tris": 6368,
+  "objects": [
+   "asc_zenith_archer_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_boots_R",
+  "tris": 6368,
+  "objects": [
+   "asc_zenith_archer_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_accessory",
+  "tris": 5568,
+  "objects": [
+   "asc_zenith_archer_accessory"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_shield",
+  "tris": 4988,
+  "objects": [
+   "asc_zenith_archer_shield"
+  ]
+ },
+ {
+  "id": "asc_zenith_archer_weapon",
+  "tris": 1584,
+  "objects": [
+   "asc_zenith_archer_weapon"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_helm",
+  "tris": 6136,
+  "objects": [
+   "asc_verdict_arbalist_helm"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_armor",
+  "tris": 10656,
+  "objects": [
+   "asc_verdict_arbalist_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_inner",
+  "tris": 5644,
+  "objects": [
+   "asc_verdict_arbalist_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_leggings",
+  "tris": 7272,
+  "objects": [
+   "asc_verdict_arbalist_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_gloves",
+  "tris": 4132,
+  "objects": [
+   "asc_verdict_arbalist_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_gloves_R",
+  "tris": 4132,
+  "objects": [
+   "asc_verdict_arbalist_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_boots",
+  "tris": 5432,
+  "objects": [
+   "asc_verdict_arbalist_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_boots_R",
+  "tris": 5432,
+  "objects": [
+   "asc_verdict_arbalist_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_accessory",
+  "tris": 1452,
+  "objects": [
+   "asc_verdict_arbalist_accessory"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_shield",
+  "tris": 4052,
+  "objects": [
+   "asc_verdict_arbalist_shield"
+  ]
+ },
+ {
+  "id": "asc_verdict_arbalist_weapon",
+  "tris": 3168,
+  "objects": [
+   "asc_verdict_arbalist_weapon"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_helm",
+  "tris": 7940,
+  "objects": [
+   "asc_sanctified_shade_helm"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_armor",
+  "tris": 8640,
+  "objects": [
+   "asc_sanctified_shade_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_inner",
+  "tris": 4168,
+  "objects": [
+   "asc_sanctified_shade_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_leggings",
+  "tris": 8072,
+  "objects": [
+   "asc_sanctified_shade_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_gloves",
+  "tris": 4380,
+  "objects": [
+   "asc_sanctified_shade_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_gloves_R",
+  "tris": 4380,
+  "objects": [
+   "asc_sanctified_shade_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_boots",
+  "tris": 5680,
+  "objects": [
+   "asc_sanctified_shade_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_boots_R",
+  "tris": 5680,
+  "objects": [
+   "asc_sanctified_shade_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_accessory",
+  "tris": 1700,
+  "objects": [
+   "asc_sanctified_shade_accessory"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_shield",
+  "tris": 4300,
+  "objects": [
+   "asc_sanctified_shade_shield"
+  ]
+ },
+ {
+  "id": "asc_sanctified_shade_weapon",
+  "tris": 2012,
+  "objects": [
+   "asc_sanctified_shade_weapon"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_helm",
+  "tris": 5596,
+  "objects": [
+   "asc_penitent_talon_helm"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_armor",
+  "tris": 10568,
+  "objects": [
+   "asc_penitent_talon_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_inner",
+  "tris": 6580,
+  "objects": [
+   "asc_penitent_talon_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_leggings",
+  "tris": 10136,
+  "objects": [
+   "asc_penitent_talon_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_gloves",
+  "tris": 5376,
+  "objects": [
+   "asc_penitent_talon_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_gloves_R",
+  "tris": 5376,
+  "objects": [
+   "asc_penitent_talon_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_boots",
+  "tris": 6368,
+  "objects": [
+   "asc_penitent_talon_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_boots_R",
+  "tris": 6368,
+  "objects": [
+   "asc_penitent_talon_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_accessory",
+  "tris": 2388,
+  "objects": [
+   "asc_penitent_talon_accessory"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_shield",
+  "tris": 4988,
+  "objects": [
+   "asc_penitent_talon_shield"
+  ]
+ },
+ {
+  "id": "asc_penitent_talon_weapon",
+  "tris": 1804,
+  "objects": [
+   "asc_penitent_talon_weapon"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_helm",
+  "tris": 8500,
+  "objects": [
+   "asc_chronoguard_helm"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_armor",
+  "tris": 17748,
+  "objects": [
+   "asc_chronoguard_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_inner",
+  "tris": 7372,
+  "objects": [
+   "asc_chronoguard_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_leggings",
+  "tris": 11384,
+  "objects": [
+   "asc_chronoguard_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_gloves",
+  "tris": 5808,
+  "objects": [
+   "asc_chronoguard_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_gloves_R",
+  "tris": 5808,
+  "objects": [
+   "asc_chronoguard_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_boots",
+  "tris": 7108,
+  "objects": [
+   "asc_chronoguard_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_boots_R",
+  "tris": 7108,
+  "objects": [
+   "asc_chronoguard_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_accessory",
+  "tris": 2620,
+  "objects": [
+   "asc_chronoguard_accessory"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_shield",
+  "tris": 5728,
+  "objects": [
+   "asc_chronoguard_shield"
+  ]
+ },
+ {
+  "id": "asc_chronoguard_weapon",
+  "tris": 2488,
+  "objects": [
+   "asc_chronoguard_weapon"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_helm",
+  "tris": 6820,
+  "objects": [
+   "asc_everlasting_bulwark_helm"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_armor",
+  "tris": 18172,
+  "objects": [
+   "asc_everlasting_bulwark_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_inner",
+  "tris": 6356,
+  "objects": [
+   "asc_everlasting_bulwark_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_leggings",
+  "tris": 9352,
+  "objects": [
+   "asc_everlasting_bulwark_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_gloves",
+  "tris": 4792,
+  "objects": [
+   "asc_everlasting_bulwark_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_gloves_R",
+  "tris": 4792,
+  "objects": [
+   "asc_everlasting_bulwark_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_boots",
+  "tris": 6092,
+  "objects": [
+   "asc_everlasting_bulwark_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_boots_R",
+  "tris": 6092,
+  "objects": [
+   "asc_everlasting_bulwark_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_accessory",
+  "tris": 1604,
+  "objects": [
+   "asc_everlasting_bulwark_accessory"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_shield",
+  "tris": 5012,
+  "objects": [
+   "asc_everlasting_bulwark_shield"
+  ]
+ },
+ {
+  "id": "asc_everlasting_bulwark_weapon",
+  "tris": 2352,
+  "objects": [
+   "asc_everlasting_bulwark_weapon"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_helm",
+  "tris": 6224,
+  "objects": [
+   "asc_aeonbreaker_helm"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_armor",
+  "tris": 16344,
+  "objects": [
+   "asc_aeonbreaker_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_inner",
+  "tris": 5584,
+  "objects": [
+   "asc_aeonbreaker_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_leggings",
+  "tris": 7952,
+  "objects": [
+   "asc_aeonbreaker_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_gloves",
+  "tris": 3932,
+  "objects": [
+   "asc_aeonbreaker_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_gloves_R",
+  "tris": 3932,
+  "objects": [
+   "asc_aeonbreaker_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_boots",
+  "tris": 5108,
+  "objects": [
+   "asc_aeonbreaker_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_boots_R",
+  "tris": 5108,
+  "objects": [
+   "asc_aeonbreaker_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_accessory",
+  "tris": 832,
+  "objects": [
+   "asc_aeonbreaker_accessory"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_shield",
+  "tris": 3952,
+  "objects": [
+   "asc_aeonbreaker_shield"
+  ]
+ },
+ {
+  "id": "asc_aeonbreaker_weapon",
+  "tris": 2840,
+  "objects": [
+   "asc_aeonbreaker_weapon"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_helm",
+  "tris": 5624,
+  "objects": [
+   "asc_timeweaver_helm"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_armor",
+  "tris": 11748,
+  "objects": [
+   "asc_timeweaver_armor"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_inner",
+  "tris": 7108,
+  "objects": [
+   "asc_timeweaver_inner"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_leggings",
+  "tris": 7748,
+  "objects": [
+   "asc_timeweaver_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_gloves",
+  "tris": 4352,
+  "objects": [
+   "asc_timeweaver_gloves"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_gloves_R",
+  "tris": 4352,
+  "objects": [
+   "asc_timeweaver_gloves"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_boots",
+  "tris": 6600,
+  "objects": [
+   "asc_timeweaver_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_boots_R",
+  "tris": 6600,
+  "objects": [
+   "asc_timeweaver_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_accessory",
+  "tris": 2620,
+  "objects": [
+   "asc_timeweaver_accessory"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_shield",
+  "tris": 5728,
+  "objects": [
+   "asc_timeweaver_shield"
+  ]
+ },
+ {
+  "id": "asc_timeweaver_weapon",
+  "tris": 2358,
+  "objects": [
+   "asc_timeweaver_weapon"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_helm",
+  "tris": 8388,
+  "objects": [
+   "asc_hourglass_sage_helm"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_armor",
+  "tris": 9292,
+  "objects": [
+   "asc_hourglass_sage_armor"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_inner",
+  "tris": 4468,
+  "objects": [
+   "asc_hourglass_sage_inner"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_leggings",
+  "tris": 6428,
+  "objects": [
+   "asc_hourglass_sage_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_gloves",
+  "tris": 3032,
+  "objects": [
+   "asc_hourglass_sage_gloves"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_gloves_R",
+  "tris": 3032,
+  "objects": [
+   "asc_hourglass_sage_gloves"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_boots",
+  "tris": 5280,
+  "objects": [
+   "asc_hourglass_sage_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_boots_R",
+  "tris": 5280,
+  "objects": [
+   "asc_hourglass_sage_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_accessory",
+  "tris": 4988,
+  "objects": [
+   "asc_hourglass_sage_accessory"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_shield",
+  "tris": 4408,
+  "objects": [
+   "asc_hourglass_sage_shield"
+  ]
+ },
+ {
+  "id": "asc_hourglass_sage_weapon",
+  "tris": 2232,
+  "objects": [
+   "asc_hourglass_sage_weapon"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_helm",
+  "tris": 7964,
+  "objects": [
+   "asc_undying_seer_helm"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_armor",
+  "tris": 8852,
+  "objects": [
+   "asc_undying_seer_armor"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_inner",
+  "tris": 5124,
+  "objects": [
+   "asc_undying_seer_inner"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_leggings",
+  "tris": 6756,
+  "objects": [
+   "asc_undying_seer_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_gloves",
+  "tris": 3360,
+  "objects": [
+   "asc_undying_seer_gloves"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_gloves_R",
+  "tris": 3360,
+  "objects": [
+   "asc_undying_seer_gloves"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_boots",
+  "tris": 5608,
+  "objects": [
+   "asc_undying_seer_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_boots_R",
+  "tris": 5608,
+  "objects": [
+   "asc_undying_seer_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_accessory",
+  "tris": 5316,
+  "objects": [
+   "asc_undying_seer_accessory"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_shield",
+  "tris": 4748,
+  "objects": [
+   "asc_undying_seer_shield"
+  ]
+ },
+ {
+  "id": "asc_undying_seer_weapon",
+  "tris": 2358,
+  "objects": [
+   "asc_undying_seer_weapon"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_helm",
+  "tris": 6788,
+  "objects": [
+   "asc_evertide_hunter_helm"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_armor",
+  "tris": 13968,
+  "objects": [
+   "asc_evertide_hunter_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_inner",
+  "tris": 6404,
+  "objects": [
+   "asc_evertide_hunter_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_leggings",
+  "tris": 9396,
+  "objects": [
+   "asc_evertide_hunter_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_gloves",
+  "tris": 5104,
+  "objects": [
+   "asc_evertide_hunter_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_gloves_R",
+  "tris": 5104,
+  "objects": [
+   "asc_evertide_hunter_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_boots",
+  "tris": 6176,
+  "objects": [
+   "asc_evertide_hunter_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_boots_R",
+  "tris": 6176,
+  "objects": [
+   "asc_evertide_hunter_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_accessory",
+  "tris": 5376,
+  "objects": [
+   "asc_evertide_hunter_accessory"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_shield",
+  "tris": 4796,
+  "objects": [
+   "asc_evertide_hunter_shield"
+  ]
+ },
+ {
+  "id": "asc_evertide_hunter_weapon",
+  "tris": 1932,
+  "objects": [
+   "asc_evertide_hunter_weapon"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_helm",
+  "tris": 6524,
+  "objects": [
+   "asc_endless_volley_helm"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_armor",
+  "tris": 11884,
+  "objects": [
+   "asc_endless_volley_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_inner",
+  "tris": 3732,
+  "objects": [
+   "asc_endless_volley_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_leggings",
+  "tris": 6600,
+  "objects": [
+   "asc_endless_volley_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_gloves",
+  "tris": 3944,
+  "objects": [
+   "asc_endless_volley_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_gloves_R",
+  "tris": 3944,
+  "objects": [
+   "asc_endless_volley_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_boots",
+  "tris": 5244,
+  "objects": [
+   "asc_endless_volley_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_boots_R",
+  "tris": 5244,
+  "objects": [
+   "asc_endless_volley_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_accessory",
+  "tris": 1156,
+  "objects": [
+   "asc_endless_volley_accessory"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_shield",
+  "tris": 3864,
+  "objects": [
+   "asc_endless_volley_shield"
+  ]
+ },
+ {
+  "id": "asc_endless_volley_weapon",
+  "tris": 3124,
+  "objects": [
+   "asc_endless_volley_weapon"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_helm",
+  "tris": 8016,
+  "objects": [
+   "asc_stillhour_assassin_helm"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_armor",
+  "tris": 10828,
+  "objects": [
+   "asc_stillhour_assassin_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_inner",
+  "tris": 6328,
+  "objects": [
+   "asc_stillhour_assassin_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_leggings",
+  "tris": 9272,
+  "objects": [
+   "asc_stillhour_assassin_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_gloves",
+  "tris": 4816,
+  "objects": [
+   "asc_stillhour_assassin_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_gloves_R",
+  "tris": 4816,
+  "objects": [
+   "asc_stillhour_assassin_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_boots",
+  "tris": 6116,
+  "objects": [
+   "asc_stillhour_assassin_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_boots_R",
+  "tris": 6116,
+  "objects": [
+   "asc_stillhour_assassin_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_accessory",
+  "tris": 2028,
+  "objects": [
+   "asc_stillhour_assassin_accessory"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_shield",
+  "tris": 4736,
+  "objects": [
+   "asc_stillhour_assassin_shield"
+  ]
+ },
+ {
+  "id": "asc_stillhour_assassin_weapon",
+  "tris": 2388,
+  "objects": [
+   "asc_stillhour_assassin_weapon"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_helm",
+  "tris": 7264,
+  "objects": [
+   "asc_ouroboros_fang_helm"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_armor",
+  "tris": 10344,
+  "objects": [
+   "asc_ouroboros_fang_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_inner",
+  "tris": 4392,
+  "objects": [
+   "asc_ouroboros_fang_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_leggings",
+  "tris": 8636,
+  "objects": [
+   "asc_ouroboros_fang_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_gloves",
+  "tris": 4676,
+  "objects": [
+   "asc_ouroboros_fang_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_gloves_R",
+  "tris": 4676,
+  "objects": [
+   "asc_ouroboros_fang_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_boots",
+  "tris": 5904,
+  "objects": [
+   "asc_ouroboros_fang_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_boots_R",
+  "tris": 5904,
+  "objects": [
+   "asc_ouroboros_fang_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_accessory",
+  "tris": 1816,
+  "objects": [
+   "asc_ouroboros_fang_accessory"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_shield",
+  "tris": 4524,
+  "objects": [
+   "asc_ouroboros_fang_shield"
+  ]
+ },
+ {
+  "id": "asc_ouroboros_fang_weapon",
+  "tris": 2152,
+  "objects": [
+   "asc_ouroboros_fang_weapon"
+  ]
+ },
+ {
+  "id": "asc_worldforger_helm",
+  "tris": 6056,
+  "objects": [
+   "asc_worldforger_helm"
+  ]
+ },
+ {
+  "id": "asc_worldforger_armor",
+  "tris": 14808,
+  "objects": [
+   "asc_worldforger_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_inner",
+  "tris": 5016,
+  "objects": [
+   "asc_worldforger_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_leggings",
+  "tris": 6816,
+  "objects": [
+   "asc_worldforger_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_gloves",
+  "tris": 3284,
+  "objects": [
+   "asc_worldforger_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_worldforger_gloves_R",
+  "tris": 3284,
+  "objects": [
+   "asc_worldforger_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_boots",
+  "tris": 4536,
+  "objects": [
+   "asc_worldforger_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_worldforger_boots_R",
+  "tris": 4536,
+  "objects": [
+   "asc_worldforger_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_worldforger_accessory",
+  "tris": 836,
+  "objects": [
+   "asc_worldforger_accessory"
+  ]
+ },
+ {
+  "id": "asc_worldforger_shield",
+  "tris": 3516,
+  "objects": [
+   "asc_worldforger_shield"
+  ]
+ },
+ {
+  "id": "asc_worldforger_weapon",
+  "tris": 1632,
+  "objects": [
+   "asc_worldforger_weapon"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_helm",
+  "tris": 7902,
+  "objects": [
+   "asc_titanblood_champion_helm"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_armor",
+  "tris": 14782,
+  "objects": [
+   "asc_titanblood_champion_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_inner",
+  "tris": 5446,
+  "objects": [
+   "asc_titanblood_champion_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_leggings",
+  "tris": 7532,
+  "objects": [
+   "asc_titanblood_champion_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_gloves",
+  "tris": 3882,
+  "objects": [
+   "asc_titanblood_champion_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_gloves_R",
+  "tris": 3882,
+  "objects": [
+   "asc_titanblood_champion_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_boots",
+  "tris": 5182,
+  "objects": [
+   "asc_titanblood_champion_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_boots_R",
+  "tris": 5182,
+  "objects": [
+   "asc_titanblood_champion_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_accessory",
+  "tris": 1266,
+  "objects": [
+   "asc_titanblood_champion_accessory"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_shield",
+  "tris": 3814,
+  "objects": [
+   "asc_titanblood_champion_shield"
+  ]
+ },
+ {
+  "id": "asc_titanblood_champion_weapon",
+  "tris": 1496,
+  "objects": [
+   "asc_titanblood_champion_weapon"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_helm",
+  "tris": 4980,
+  "objects": [
+   "asc_firstflame_warlord_helm"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_armor",
+  "tris": 16172,
+  "objects": [
+   "asc_firstflame_warlord_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_inner",
+  "tris": 5012,
+  "objects": [
+   "asc_firstflame_warlord_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_leggings",
+  "tris": 6808,
+  "objects": [
+   "asc_firstflame_warlord_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_gloves",
+  "tris": 3360,
+  "objects": [
+   "asc_firstflame_warlord_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_gloves_R",
+  "tris": 3360,
+  "objects": [
+   "asc_firstflame_warlord_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_boots",
+  "tris": 4536,
+  "objects": [
+   "asc_firstflame_warlord_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_boots_R",
+  "tris": 4536,
+  "objects": [
+   "asc_firstflame_warlord_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_accessory",
+  "tris": 832,
+  "objects": [
+   "asc_firstflame_warlord_accessory"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_shield",
+  "tris": 3380,
+  "objects": [
+   "asc_firstflame_warlord_shield"
+  ]
+ },
+ {
+  "id": "asc_firstflame_warlord_weapon",
+  "tris": 2516,
+  "objects": [
+   "asc_firstflame_warlord_weapon"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_helm",
+  "tris": 8186,
+  "objects": [
+   "asc_ashborn_archmage_helm"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_armor",
+  "tris": 7182,
+  "objects": [
+   "asc_ashborn_archmage_armor"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_inner",
+  "tris": 3828,
+  "objects": [
+   "asc_ashborn_archmage_inner"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_leggings",
+  "tris": 5250,
+  "objects": [
+   "asc_ashborn_archmage_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_gloves",
+  "tris": 2426,
+  "objects": [
+   "asc_ashborn_archmage_gloves"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_gloves_R",
+  "tris": 2426,
+  "objects": [
+   "asc_ashborn_archmage_gloves"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_boots",
+  "tris": 4674,
+  "objects": [
+   "asc_ashborn_archmage_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_boots_R",
+  "tris": 4674,
+  "objects": [
+   "asc_ashborn_archmage_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_accessory",
+  "tris": 1266,
+  "objects": [
+   "asc_ashborn_archmage_accessory"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_shield",
+  "tris": 3802,
+  "objects": [
+   "asc_ashborn_archmage_shield"
+  ]
+ },
+ {
+  "id": "asc_ashborn_archmage_weapon",
+  "tris": 1850,
+  "objects": [
+   "asc_ashborn_archmage_weapon"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_helm",
+  "tris": 6384,
+  "objects": [
+   "asc_primeval_shaman_helm"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_armor",
+  "tris": 8576,
+  "objects": [
+   "asc_primeval_shaman_armor"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_inner",
+  "tris": 4344,
+  "objects": [
+   "asc_primeval_shaman_inner"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_leggings",
+  "tris": 5508,
+  "objects": [
+   "asc_primeval_shaman_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_gloves",
+  "tris": 2684,
+  "objects": [
+   "asc_primeval_shaman_gloves"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_gloves_R",
+  "tris": 2684,
+  "objects": [
+   "asc_primeval_shaman_gloves"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_boots",
+  "tris": 4932,
+  "objects": [
+   "asc_primeval_shaman_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_boots_R",
+  "tris": 4932,
+  "objects": [
+   "asc_primeval_shaman_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_accessory",
+  "tris": 4640,
+  "objects": [
+   "asc_primeval_shaman_accessory"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_shield",
+  "tris": 4060,
+  "objects": [
+   "asc_primeval_shaman_shield"
+  ]
+ },
+ {
+  "id": "asc_primeval_shaman_weapon",
+  "tris": 1384,
+  "objects": [
+   "asc_primeval_shaman_weapon"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_helm",
+  "tris": 2724,
+  "objects": [
+   "asc_magma_oracle_helm"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_armor",
+  "tris": 6444,
+  "objects": [
+   "asc_magma_oracle_armor"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_inner",
+  "tris": 2960,
+  "objects": [
+   "asc_magma_oracle_inner"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_leggings",
+  "tris": 4816,
+  "objects": [
+   "asc_magma_oracle_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_gloves",
+  "tris": 1832,
+  "objects": [
+   "asc_magma_oracle_gloves"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_gloves_R",
+  "tris": 1832,
+  "objects": [
+   "asc_magma_oracle_gloves"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_boots",
+  "tris": 4028,
+  "objects": [
+   "asc_magma_oracle_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_boots_R",
+  "tris": 4028,
+  "objects": [
+   "asc_magma_oracle_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_accessory",
+  "tris": 3948,
+  "objects": [
+   "asc_magma_oracle_accessory"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_shield",
+  "tris": 3380,
+  "objects": [
+   "asc_magma_oracle_shield"
+  ]
+ },
+ {
+  "id": "asc_magma_oracle_weapon",
+  "tris": 1850,
+  "objects": [
+   "asc_magma_oracle_weapon"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_helm",
+  "tris": 3172,
+  "objects": [
+   "asc_wildroot_hunter_helm"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_armor",
+  "tris": 10552,
+  "objects": [
+   "asc_wildroot_hunter_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_inner",
+  "tris": 5668,
+  "objects": [
+   "asc_wildroot_hunter_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_leggings",
+  "tris": 7760,
+  "objects": [
+   "asc_wildroot_hunter_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_gloves",
+  "tris": 4140,
+  "objects": [
+   "asc_wildroot_hunter_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_gloves_R",
+  "tris": 4140,
+  "objects": [
+   "asc_wildroot_hunter_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_boots",
+  "tris": 5440,
+  "objects": [
+   "asc_wildroot_hunter_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_boots_R",
+  "tris": 5440,
+  "objects": [
+   "asc_wildroot_hunter_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_accessory",
+  "tris": 4640,
+  "objects": [
+   "asc_wildroot_hunter_accessory"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_shield",
+  "tris": 4060,
+  "objects": [
+   "asc_wildroot_hunter_shield"
+  ]
+ },
+ {
+  "id": "asc_wildroot_hunter_weapon",
+  "tris": 1172,
+  "objects": [
+   "asc_wildroot_hunter_weapon"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_helm",
+  "tris": 5436,
+  "objects": [
+   "asc_cinderbolt_ballista_helm"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_armor",
+  "tris": 10624,
+  "objects": [
+   "asc_cinderbolt_ballista_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_inner",
+  "tris": 4964,
+  "objects": [
+   "asc_cinderbolt_ballista_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_leggings",
+  "tris": 5696,
+  "objects": [
+   "asc_cinderbolt_ballista_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_gloves",
+  "tris": 3284,
+  "objects": [
+   "asc_cinderbolt_ballista_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_gloves_R",
+  "tris": 3284,
+  "objects": [
+   "asc_cinderbolt_ballista_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_boots",
+  "tris": 4536,
+  "objects": [
+   "asc_cinderbolt_ballista_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_boots_R",
+  "tris": 4536,
+  "objects": [
+   "asc_cinderbolt_ballista_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_accessory",
+  "tris": 1236,
+  "objects": [
+   "asc_cinderbolt_ballista_accessory"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_shield",
+  "tris": 3516,
+  "objects": [
+   "asc_cinderbolt_ballista_shield"
+  ]
+ },
+ {
+  "id": "asc_cinderbolt_ballista_weapon",
+  "tris": 2828,
+  "objects": [
+   "asc_cinderbolt_ballista_weapon"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_helm",
+  "tris": 6020,
+  "objects": [
+   "asc_abyssal_fang_helm"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_armor",
+  "tris": 8732,
+  "objects": [
+   "asc_abyssal_fang_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_inner",
+  "tris": 5544,
+  "objects": [
+   "asc_abyssal_fang_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_leggings",
+  "tris": 7492,
+  "objects": [
+   "asc_abyssal_fang_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_gloves",
+  "tris": 4104,
+  "objects": [
+   "asc_abyssal_fang_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_gloves_R",
+  "tris": 4104,
+  "objects": [
+   "asc_abyssal_fang_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_boots",
+  "tris": 5332,
+  "objects": [
+   "asc_abyssal_fang_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_boots_R",
+  "tris": 5332,
+  "objects": [
+   "asc_abyssal_fang_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_accessory",
+  "tris": 1816,
+  "objects": [
+   "asc_abyssal_fang_accessory"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_shield",
+  "tris": 3952,
+  "objects": [
+   "asc_abyssal_fang_shield"
+  ]
+ },
+ {
+  "id": "asc_abyssal_fang_weapon",
+  "tris": 1532,
+  "objects": [
+   "asc_abyssal_fang_weapon"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_helm",
+  "tris": 6392,
+  "objects": [
+   "asc_elder_wyrm_talon_helm"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_armor",
+  "tris": 8768,
+  "objects": [
+   "asc_elder_wyrm_talon_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_inner",
+  "tris": 3240,
+  "objects": [
+   "asc_elder_wyrm_talon_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_leggings",
+  "tris": 5752,
+  "objects": [
+   "asc_elder_wyrm_talon_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_gloves",
+  "tris": 3284,
+  "objects": [
+   "asc_elder_wyrm_talon_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_gloves_R",
+  "tris": 3284,
+  "objects": [
+   "asc_elder_wyrm_talon_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_boots",
+  "tris": 4536,
+  "objects": [
+   "asc_elder_wyrm_talon_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_boots_R",
+  "tris": 4536,
+  "objects": [
+   "asc_elder_wyrm_talon_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_accessory",
+  "tris": 1236,
+  "objects": [
+   "asc_elder_wyrm_talon_accessory"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_shield",
+  "tris": 3516,
+  "objects": [
+   "asc_elder_wyrm_talon_shield"
+  ]
+ },
+ {
+  "id": "asc_elder_wyrm_talon_weapon",
+  "tris": 1392,
+  "objects": [
+   "asc_elder_wyrm_talon_weapon"
+  ]
+ }
+]

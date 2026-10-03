@@ -65,6 +65,29 @@ func _process(delta: float) -> void:
 		_t += delta
 		queue_redraw()
 
+## A point at fraction `u` (0..1) of the way round rectangle `rr`, clockwise from its top-left corner.
+static func _perimeter(rr: Rect2, u: float) -> Vector2:
+	var w := rr.size.x
+	var h := rr.size.y
+	var d := fposmod(u, 1.0) * 2.0 * (w + h)
+	if d < w:
+		return rr.position + Vector2(d, 0.0)
+	d -= w
+	if d < h:
+		return rr.position + Vector2(w, d)
+	d -= h
+	if d < w:
+		return rr.position + Vector2(w - d, h)
+	return rr.position + Vector2(0.0, h - (d - w))
+
+func _draw_orbit(rr: Rect2, c: Color, a: float) -> void:
+	for k in 2:
+		var u := _t * 0.18 + 0.5 * k
+		for tail in 6:
+			var p := _perimeter(rr, u - tail * 0.012)
+			var f := 1.0 - tail / 6.0
+			draw_circle(p, maxf(1.0, size.x * 0.035 * f), Color(c.lightened(0.35), 0.85 * f * a))
+
 func _draw() -> void:
 	var r := Rect2(Vector2.ZERO, size)
 	var bg := "slots/slot.png"
@@ -108,6 +131,9 @@ func _draw() -> void:
 		draw_texture_rect(fr, r, false, Color(1, 1, 1, a))
 	elif item.rarity >= BH.Rarity.BASIC:
 		draw_rect(r.grow(-3), Color(item.color(), 0.6 * a), false, 2.0)
+	# bh-034: an Ascendant piece has two motes of its tier's light running round its frame
+	if DataAscendant.is_ascendant_rarity(item.rarity) and item.is_equipment():
+		_draw_orbit(r.grow(-size.x * 0.06), AscendantFx.color(item.rarity), a)
 	# bh-022: its sockets, empty or holding their crystals
 	SocketArt.draw_sockets(self, item, r.grow(-size.x * (0.1 if kind == Kind.EQUIPMENT else 0.04)), a)
 	# stack count

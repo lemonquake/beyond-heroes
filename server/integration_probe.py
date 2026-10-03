@@ -46,6 +46,8 @@ def log_problems(folder, prefixes):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--godot", type=Path, required=True)
+    parser.add_argument("--coordinator", type=Path,
+                        help="An exported dedicated-server build to run as the coordinator (tools/export_server.py); clients still use --godot")
     parser.add_argument("--stages", default="all", help="comma list of: capacity,restart,custom,world,version,hostile,bandwidth (default all except bandwidth)")
     parser.add_argument("--allow-log-errors", action="store_true", help="report log problems without failing (diagnosis only)")
     args = parser.parse_args()
@@ -128,7 +130,8 @@ def main():
             config = {**source, "api_port": 18443, "game_port": 24690, "game_host": "127.0.0.1"}
             config_path.write_text(json.dumps(config), encoding="utf-8")
             service_command = [sys.executable, "-m", "server.service", "--config", str(config_path)]
-            game_command = [godot, "--headless", "--max-fps", "30", "--path", str(root / "game"), "--", "--official-server=" + str(config_path)]
+            game_command = ([str(args.coordinator.resolve()), "--headless", "--max-fps", "30"] if args.coordinator else
+                            [godot, "--headless", "--max-fps", "30", "--path", str(root / "game")]) + ["--", "--official-server=" + str(config_path)]
             service = spawn(service_command, "accounts")
             wait(lambda: api("/health"))
             game = spawn(game_command, "dedicated")

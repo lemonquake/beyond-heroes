@@ -12,9 +12,9 @@ const TIERS := [
 	{"letter": "C", "title": "Silver Crest", "level": 12, "flag": "catacombs_ritual_seen", "deed": "Witness the Catacombs ritual", "jobs": 5, "dungeons": 1, "champions": 1, "dungeon_tier": 0, "fee": 400, "gate": BH.Rarity.MYTHICAL, "color": Color(0.82, 0.85, 0.9), "key": "c"},
 	{"letter": "B", "title": "Gold Laurel", "level": 20, "flag": "boss_kethrax_defeated", "deed": "Defeat Kethrax", "jobs": 10, "dungeons": 2, "champions": 3, "dungeon_tier": 0, "fee": 900, "gate": BH.Rarity.LEGENDARY, "color": Color(1.0, 0.8, 0.3), "key": "b"},
 	{"letter": "A", "title": "Azure Star", "level": 32, "flag": "boss_warden_defeated", "deed": "Defeat Morthar, the Hollow Warden", "jobs": 20, "dungeons": 4, "champions": 5, "dungeon_tier": 0, "fee": 1800, "gate": BH.Rarity.AETHER, "color": Color(0.35, 0.65, 1.0), "key": "a"},
-	{"letter": "S", "title": "Crimson Sun", "level": 45, "flag": "boss_warden_defeated", "deed": "Complete the story and conquer a tier 4 dungeon", "jobs": 40, "dungeons": 8, "champions": 8, "dungeon_tier": 4, "fee": 4000, "gate": -1, "color": Color(1.0, 0.3, 0.25), "key": "s"},
-	{"letter": "SS", "title": "Twin Moon", "level": 55, "flag": "boss_warden_defeated", "deed": "Conquer a tier 5 dungeon", "jobs": 75, "dungeons": 12, "champions": 12, "dungeon_tier": 5, "fee": 9000, "gate": -1, "color": Color(0.8, 0.65, 1.0), "key": "ss"},
-	{"letter": "SSS", "title": "Aether Crown", "level": 60, "flag": "boss_warden_defeated", "deed": "Clear all twenty dungeons", "jobs": 120, "dungeons": 20, "champions": 16, "dungeon_tier": 5, "fee": 20000, "gate": -1, "color": Color(0.6, 0.98, 1.0), "key": "sss"},
+	{"letter": "S", "title": "Crimson Sun", "level": 45, "flag": "boss_warden_defeated", "deed": "Complete the story and conquer a tier 4 dungeon", "jobs": 40, "dungeons": 8, "champions": 8, "dungeon_tier": 4, "fee": 4000, "gate": BH.Rarity.COSMIC, "color": Color(1.0, 0.3, 0.25), "key": "s"},
+	{"letter": "SS", "title": "Twin Moon", "level": 55, "flag": "boss_warden_defeated", "deed": "Conquer a tier 5 dungeon", "jobs": 75, "dungeons": 12, "champions": 12, "dungeon_tier": 5, "fee": 9000, "gate": BH.Rarity.DIVINE, "color": Color(0.8, 0.65, 1.0), "key": "ss"},
+	{"letter": "SSS", "title": "Aether Crown", "level": 60, "flag": "boss_warden_defeated", "deed": "Clear all twenty dungeons", "jobs": 120, "dungeons": 20, "champions": 16, "dungeon_tier": 5, "fee": 20000, "gate": BH.Rarity.ETERNAL, "color": Color(0.6, 0.98, 1.0), "key": "sss"},
 ]
 const MAX_RANK := 8
 
@@ -67,6 +67,8 @@ static func guild(id: StringName) -> Dictionary:
 
 ## Lowest tier rank that may equip an item of `rarity` (0 = anyone).
 static func rank_for_rarity(rarity: int) -> int:
+	if rarity >= BH.Rarity.PRIMORDIAL:
+		return MAX_RANK                 # bh-034: Primordial, like Eternal, is for Class SSS heroes
 	for r in range(1, MAX_RANK + 1):
 		if int(TIERS[r].gate) == rarity:
 			return r

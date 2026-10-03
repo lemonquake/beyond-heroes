@@ -178,6 +178,14 @@ const TIER := [
 		"Legendary. It has changed the ending of a war before. Possibly two.", "Hm. Legendary. My staff just stopped humming to listen."],
 	["Aether. I have not seen Aether-touched work in four hundred years.", "This is Aether. It is not entirely in this world. Neither am I.",
 		"Aether. My hands are shaking and I am not ashamed of it.", "Aether-work. Whatever you pay for this, it will not be enough."],
+	["Cosmic. There is a night sky inside this metal, {hero}. Look. No, look properly.", "Cosmic work. It was forged under stars that have since moved.",
+		"Hm. Cosmic. The stars on it are still turning. Slowly. Patiently.", "A Cosmic piece. I would put my lamp out, but it would light the room anyway."],
+	["Divine. I took my hat off. I am not a hat person. I took it off.", "This is Divine. Somebody prayed this into the world, and somebody answered.",
+		"Hm. Divine. It is warm, the way a hearth is warm when someone you love has just left the room.", "Divine work. Keep it close, and keep it clean."],
+	["Eternal. It does not age. I checked. I have been checking for some time now.", "An Eternal piece. My clock stopped when you put it down.",
+		"Hm. Eternal. Whoever made this is long dead, and this has not noticed.", "Eternal. It will outlast you, me, and the bridge we never rebuilt."],
+	["Primordial. Older than the mountains, {hero}. Older than the word for mountain.", "This is Primordial. The world was still soft and hot when this was made.",
+		"Hm. Primordial. Do not set it on the wooden table. Please. The stone one.", "Primordial. I have read about these in books that were themselves only rumours."],
 ]
 
 ## What he finds when he identifies it.

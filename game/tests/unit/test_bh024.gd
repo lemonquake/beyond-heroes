@@ -8,7 +8,8 @@ func _init() -> void:
 func _leggings(boss := false) -> Array:
 	var out := []
 	for b: ItemBaseDef in DB.item_bases.values():
-		if b.category == &"leggings" and b.boss_exclusive == boss:
+		# bh-034: the Ascendant legguards are regalia with their own suite (test_bh034)
+		if b.category == &"leggings" and b.boss_exclusive == boss and not DataAscendant.is_ascendant(b):
 			out.append(b)
 	return out
 
