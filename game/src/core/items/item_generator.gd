@@ -421,8 +421,17 @@ const CLASS_ARMOR := {&"knight": [&"heavy"], &"mage": [&"cloth"], &"ranger": [&"
 
 ## Whether `base` is gear meant for `class_id`: a weapon the class has mastery in, armor of the class's weight, a shield
 ## for a knight. Accessories suit everyone, so they are never "class gear".
+## Class Transcendence: `class_id` may be a starting class or an advanced one (Royal Guard ...): the family decides the
+## weapon / armor fit, and a piece the class may not wear (another branch's) is never its own gear. It can still drop
+## as off-class loot to trade or sell.
 static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 	if class_id == &"" or base == null:
+		return false
+	if DataTranscendence.is_advanced(class_id):
+		if not ClassRequirements.allows_class(base, class_id):
+			return false
+		class_id = DataTranscendence.family_of(class_id)
+	elif DataTranscendence.is_family(class_id) and not ClassRequirements.allows_class(base, class_id):
 		return false
 	# A class set's cloth weight alone must not make mage sets ranger/shadowblade loot.
 	if (base.set_id != &"" or base.unique_name != "") and base.class_hint != &"" and base.class_hint != class_id:
@@ -444,7 +453,12 @@ static func class_fit(base: ItemBaseDef, class_id: StringName) -> bool:
 
 ## bh-027: an accessory any hero of `class_id` may wear (unlabelled, or labelled for that class).
 static func accessory_fits(base: ItemBaseDef, class_id: StringName) -> bool:
-	return base != null and base.category == &"accessory" and (base.class_hint == &"" or base.class_hint == class_id)
+	if base == null or base.category != &"accessory":
+		return false
+	var fam := DataTranscendence.family_of(class_id) if DataTranscendence.is_identity(class_id) else class_id
+	if DataTranscendence.is_identity(class_id) and not ClassRequirements.allows_class(base, class_id):
+		return false
+	return base.class_hint == &"" or base.class_hint == fam
 
 ## Random base eligible at an item level (weighted), optionally restricted to categories. Set pieces and uniques are
 ## excluded — they come from dedicated drop rolls (elites/bosses) and special merchant stock. With a `class_hint`,
@@ -536,7 +550,7 @@ static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool
 	if pool.is_empty():
 		return null
 	if class_hint != &"" and rng.randf() < fit_chance:
-		var mine := pool.filter(func(b): return class_fit(b, class_hint) or (b.category == &"accessory" and b.class_hint == &""))
+		var mine := pool.filter(func(b): return class_fit(b, class_hint) or (b.category == &"accessory" and b.class_hint == &"" and ClassRequirements.allows_class(b, class_hint)))
 		if not mine.is_empty():
 			pool = mine
 		elif fit_chance >= 1.0:
@@ -548,6 +562,8 @@ static func random_special(rng: RandomNumberGenerator, ilvl: int, want_set: bool
 ## its intended class; elemental stats remain valid for converted attacks.
 static func affix_fits(base: ItemBaseDef, affix: AffixDef) -> bool:
 	var cls := base.class_hint
+	if DataTranscendence.is_advanced(cls):
+		cls = DataTranscendence.family_of(cls)
 	if cls == &"":
 		return true
 	if cls != &"mage" and affix.stat in [&"int", &"magic_damage", &"cast_speed"]:

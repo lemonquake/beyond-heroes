@@ -61,7 +61,7 @@ func _build(at: Vector2) -> void:
 	nv.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	head.add_child(nv)
 	nv.add_child(UITheme.label("◆ %s" % info.get("name", "Hero"), 22, Net.player_color(peer).lightened(0.3), UITheme.body_bold()))
-	nv.add_child(UITheme.label("Level %d %s" % [int(info.get("level", 1)), cls.display_name if cls else "Hero"], 15, UITheme.TEXT_DIM, UITheme.body_font()))
+	nv.add_child(UITheme.label("Level %d %s" % [int(info.get("level", 1)), Net.peer_class_name(peer) if cls else "Hero"], 15, UITheme.TEXT_DIM, UITheme.body_font()))
 	var g: Dictionary = info.get("guild", {})
 	if not g.is_empty():
 		v.add_child(UITheme.label("⚑ %s" % g.get("name", "Guild"), 15, Color(String(g.get("color", "c9a24a"))).lightened(0.3), UITheme.body_bold()))

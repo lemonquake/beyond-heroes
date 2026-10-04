@@ -196,7 +196,7 @@ func receive_hit(result: DamageResult) -> void:
 				_add_buildup(sid, amt)
 				if buildup[sid] >= StatusRules.THRESHOLD:
 					buildup[sid] = 0.0
-					apply(&"bleeding", -1.0, 0.0, maxf(1.0, comp.get(Elements.PHYSICAL, 0.0) * BLEED_DPS_FRACTION * result.dot_mult), Elements.PHYSICAL)
+					apply(&"bleeding", -1.0, 0.0, maxf(1.0, comp.get(Elements.PHYSICAL, 0.0) * BLEED_DPS_FRACTION * result.dot_mult * result.bleed_mult), Elements.PHYSICAL)
 			&"poisoned":
 				_add_buildup(sid, amt)
 				if buildup[sid] >= StatusRules.THRESHOLD:

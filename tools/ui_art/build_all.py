@@ -35,6 +35,9 @@ CATS = {
     "status10": ("icons/status", "bh010_status", "STATUS10"),
     "classes10": ("icons/classes", "bh010_classes", "CLASSES10"),
     "portraits10": ("portraits", "bh010_classes", "PORTRAITS10"),
+    # Class Transcendence: the twelve advanced classes' skills and talents
+    "transcend": ("icons/skills", "icons_transcend", "TRANSCEND"),
+    "transcend_talents": ("icons/talents", "icons_transcend", "TRANSCEND_TALENTS"),
 }
 
 

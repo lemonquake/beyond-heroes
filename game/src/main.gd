@@ -244,6 +244,7 @@ func _load_official(id: String) -> void:
 	Game.save_slot = -1
 	Game.difficulty = Game.hero.difficulty
 	await Game._begin_session(Game.hero.current_map, Game.hero.current_spawn)
+	Game.transcend_notice(Game.hero)
 	get_tree().paused = true
 	Game.ui_blocking = true
 	var error := Net.join_game(String(result.get("game_host", "localhost")), int(result.get("game_port", Net.PORT)))

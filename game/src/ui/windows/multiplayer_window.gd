@@ -204,7 +204,7 @@ func _fill_party() -> void:
 		var you := " (you)" if id == Net.my_id() else ""
 		var host := " · Leader" if id == 1 else ""
 		h.add_child(details)
-		details.add_child(UITheme.label("◆ %s%s — Level %d %s%s" % [p.get("name", "Hero"), you, int(p.get("level", 1)), cls.display_name if cls else "", host],
+		details.add_child(UITheme.label("◆ %s%s — Level %d %s%s" % [p.get("name", "Hero"), you, int(p.get("level", 1)), Net.peer_class_name(id), host],
 			20 if Settings.touch_mode else 17, Net.player_color(id).lightened(0.2), UITheme.body_bold()))
 		var ping := Net.ping_ms(id) if id != Net.my_id() else -1
 		var ping_txt := (" · %d ms" % ping) if ping >= 0 else ""

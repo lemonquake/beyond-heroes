@@ -72,6 +72,11 @@ static func clean_profile(p: Variant) -> Dictionary:
 		"userid": text(d.get("userid", ""), 32),
 		"character": text(d.get("character", ""), 64),
 	}
+	# Class Transcendence: only a path that is valid for this family and level survives (the longest valid prefix);
+	# anything else reads as the starting class. Labels, colours and effects are never taken from a peer.
+	var fam := StringName(String(out.cls))
+	var path := ClassTranscendence.peer_path(fam, int(out.level), text(d.get("path", ""), 64)) if DataTranscendence.is_family(fam) else []
+	out["path"] = ",".join(path.map(func(x): return String(x)))
 	return out
 
 ## An ally snapshot is an Array of {"k": key, "s": 12-element state, ...}. False when it is not that or is oversized.

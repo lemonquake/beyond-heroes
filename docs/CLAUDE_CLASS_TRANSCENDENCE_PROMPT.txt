@@ -1,0 +1,17 @@
+Implement the major Class Transcendence milestone in A:\Python\beyond-heroes. Read docs/CLAUDE_CLASS_TRANSCENDENCE_BRIEF.md completely and use it as the implementation specification. This is VERY HIGH PRIORITY required gameplay work: complete the real feature, not a naming/recolor pass or placeholders.
+
+Preserve all current uncommitted work and existing beta/world/gear/multiplayer improvements. Follow the brief's five implementation stages and acceptance gates. Make the implementation concrete and reviewable; do not commit, push, publish, or update a production server as part of this handoff.
+
+Implement four starting families and twelve new identities:
+Knight -> Royal Guard -> Dark General / Grand Paladin.
+Hunter (keep saved/internal ranger ID) -> Tracker -> Wildwarden / Starstrider.
+Mage -> Arcanist -> Archmage / Void Sovereign.
+Shadowblade -> Nightstalker -> Phantom Reaper / Blood Sovereign.
+
+Advance at levels 60 and 120 through a Grand Master in any Guild House, without requiring guild membership. Each advancement grants three new active skills and three talents at rank 1 exactly once, preserving earlier skills and progress. Old level-121 saves can take both steps immediately; do not auto-select a master or reset level/XP. Keep earned free ranks safe through respec/refunds and all save/account paths.
+
+Audit every equipment base, show and enforce shared/family/lineage/exact-class requirements, and add the thirty-six specified new gear pieces with real acquisition routes. Preserve legacy owned items, Tempo permissions, upgrades, and Unbound class restrictions. Prepare the reusable requirement query for future Transcendent Dungeons without inventing restrictions on existing dungeons.
+
+Multiplayer presentation is a required part of this feature: update each remote human hero's current class in the EXISTING floating display BENEATH their character name. Preserve its current positioning; the user explicitly clarified that it must not be moved. Give every transcendence a distinct theme and every master class a subtle visible glow, including low graphics/no bloom. Preserve custom appearance and current appearance-revision/set effects. Verify real custom and official clients, same-session advancement, save acknowledgment, late join, reconnect, map change and world-host handoff. Keep base class immutable and synchronize validated effective identity; coordinate protocol changes.
+
+Read the brief for all 36 skills, 36 talents, 36 gear pieces, exact state/requirement semantics, themes, numerical authoring, source integration and tests. Produce actual implementation, full equipment/class catalogues, balance measurements, save tests, both clients' screenshots, regression results and performance evidence in output/class-transcendence/. Return output/class-transcendence/CLAUDE_REPORT.md with completed work, exact evidence and unresolved blockers. Do not call this complete while any required area is missing.

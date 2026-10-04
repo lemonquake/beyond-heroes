@@ -26,7 +26,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-PROTOCOL = 19
+PROTOCOL = 20
 SAVE_VERSION = 4
 SERVER_VERSION = os.environ.get("BH_BUILD", "dev")   # a release id (git commit) set by the deployment; shown by /health
 MAX_PLAYERS = 12
@@ -68,6 +68,61 @@ def audit_progress(old_hero, new_hero, seconds):
     if seconds > 0 and (new_progress.get("total_xp", 0) - old_progress.get("total_xp", 0)) / max(seconds, 1.0) > 1000000:
         flags.append("xp_rate")
     return flags
+
+
+# Class Transcendence (game: src/data/data_transcendence.gd; tests cross-check the two). identity -> (family, stage, parent).
+# A character's saved "class" is its starting family and never changes; the advancement is the optional
+# hero["transcendence"] = {"schema": 1, "path": [first transcendence, master]}.
+TRANSCENDENCE_SCHEMA = 1
+TRANSCENDENCE = {
+    "royal_guard": ("knight", 1, "knight"), "dark_general": ("knight", 2, "royal_guard"), "grand_paladin": ("knight", 2, "royal_guard"),
+    "tracker": ("ranger", 1, "ranger"), "wildwarden": ("ranger", 2, "tracker"), "starstrider": ("ranger", 2, "tracker"),
+    "arcanist": ("mage", 1, "mage"), "archmage": ("mage", 2, "arcanist"), "void_sovereign": ("mage", 2, "arcanist"),
+    "nightstalker": ("shadowblade", 1, "shadowblade"), "phantom_reaper": ("shadowblade", 2, "nightstalker"),
+    "blood_sovereign": ("shadowblade", 2, "nightstalker"),
+}
+TRANSCENDENCE_LEVELS = {1: 60, 2: 120}
+CLASS_NAMES = {"knight": "Knight", "ranger": "Hunter", "mage": "Mage", "shadowblade": "Shadowblade",
+               "royal_guard": "Royal Guard", "dark_general": "Dark General", "grand_paladin": "Grand Paladin",
+               "tracker": "Tracker", "wildwarden": "Wildwarden", "starstrider": "Starstrider",
+               "arcanist": "Arcanist", "archmage": "Archmage", "void_sovereign": "Void Sovereign",
+               "nightstalker": "Nightstalker", "phantom_reaper": "Phantom Reaper", "blood_sovereign": "Blood Sovereign"}
+
+
+def transcendence_path(hero):
+    """The validated advancement path of a hero dictionary. Raises ApiError with an actionable message when the record
+    is malformed (official saves are rejected, never silently repaired)."""
+    record = hero.get("transcendence")
+    if record is None or record == {}:
+        return []
+    if not isinstance(record, dict) or record.get("schema") != TRANSCENDENCE_SCHEMA:
+        raise ApiError(400, "The class advancement record is not readable by this server. Update the game and load your last server save.", "invalid_save")
+    path = record.get("path", [])
+    if not isinstance(path, list) or len(path) > 2 or any(not isinstance(step, str) for step in path):
+        raise ApiError(400, "The class advancement record is malformed. Load your last server save.", "invalid_save")
+    dormant = record.get("dormant", {})
+    if not isinstance(dormant, dict) or len(json.dumps(dormant)) > 8192:
+        raise ApiError(400, "The class advancement record is malformed. Load your last server save.", "invalid_save")
+    level = hero.get("progress", {}).get("level", 1) if isinstance(hero.get("progress"), dict) else 1
+    previous = hero.get("class")
+    for step in path:
+        entry = TRANSCENDENCE.get(step)
+        if entry is None:
+            raise ApiError(400, "Unknown advanced class %s." % step[:32], "invalid_save")
+        family, stage, parent = entry
+        if family != hero.get("class") or parent != previous:
+            raise ApiError(400, "%s cannot follow %s." % (CLASS_NAMES.get(step, step), CLASS_NAMES.get(previous, previous)), "invalid_save")
+        if not isinstance(level, (int, float)) or level < TRANSCENDENCE_LEVELS[stage]:
+            raise ApiError(400, "%s requires level %d." % (CLASS_NAMES[step], TRANSCENDENCE_LEVELS[stage]), "invalid_save")
+        previous = step
+    return list(path)
+
+
+def check_transition(before, after):
+    """A confirmed save may only keep the path or extend it by valid steps: no reversal, sibling switch or skip."""
+    old, new = transcendence_path(before), transcendence_path(after)
+    if new[:len(old)] != old:
+        raise ApiError(400, "A class advancement cannot be undone or changed.", "invalid_save")
 
 
 class ApiError(Exception):
@@ -127,6 +182,7 @@ def validate_save(data):
         raise ApiError(400, "Invalid inventory.", "invalid_save")
     if not isinstance(hero.get("map", "sanctuary"), str) or len(hero.get("map", "")) > 128:
         raise ApiError(400, "Invalid map.", "invalid_save")
+    transcendence_path(hero)
     # Account tokens, passwords and device settings never enter character storage.
     save = {"version": SAVE_VERSION, "hero": hero}
     try:
@@ -304,7 +360,13 @@ class Store:
     @staticmethod
     def summary(row):
         hero = json.loads(row["data"])["hero"]
+        try:
+            path = transcendence_path(hero)
+        except ApiError:
+            path = []
         return {"id": row["id"], "slot": row["slot"], "name": hero["name"], "class": hero["class"],
+                # Class Transcendence: the stored advancement (the base "class" stays the starting family)
+                "path": ",".join(path), "current_class": path[-1] if path else hero["class"],
                 "level": hero["progress"].get("level", 1), "map": hero.get("map", "sanctuary"),
                 "saved_at": row["saved"], "revision": row["revision"], "imported": bool(row["imported"]),
                 # bh-031: the character card's picture (profile picture, else the ID shot of their model)
@@ -437,6 +499,12 @@ class Store:
                     row = self.character(db, lease["account"], lease["character"])
                     uid = db.execute("SELECT userid FROM accounts WHERE id=?", (lease["account"],)).fetchone()[0]
                     return {"lease": lease["id"], "userid": uid, "character": self.summary(row)}
+                if path == "/internal/character":
+                    # the coordinator refreshes a player's shown class from their last acknowledged save
+                    lease = db.execute("SELECT * FROM leases WHERE id=? AND connected=1", (body.get("lease", ""),)).fetchone()
+                    if lease is None:
+                        raise ApiError(404, "No connected character for this lease.", "not_found")
+                    return {"character": self.summary(self.character(db, lease["account"], lease["character"]))}
                 if path == "/internal/disconnect":
                     # Allow a short save window after the ENet disconnect; no new game can reuse it.
                     db.execute("UPDATE leases SET connected=0,expires=min(expires,?) WHERE id=?", (self.clock()+15, body.get("lease", "")))
@@ -460,6 +528,8 @@ class Store:
                     hero = json.loads(data)["hero"]
                     if hero["progress"].get("level", 1) != 1 or hero["progress"].get("total_xp", 0) != 0:
                         raise ApiError(400, "Use Import Existing Progress for an existing character.", "invalid_save")
+                    if transcendence_path(hero):
+                        raise ApiError(400, "A new character starts with its starting class.", "invalid_save")
                 imported = path.endswith("import")
                 source = body.get("source", "")
                 if imported:
@@ -524,6 +594,7 @@ class Store:
                 before, after = json.loads(row["data"])["hero"], json.loads(data)["hero"]
                 if after["class"] != before["class"]:
                     raise ApiError(400, "Character class cannot change.", "invalid_save")
+                check_transition(before, after)
                 flags = audit_progress(before, after, self.clock() - row["saved"])
                 if flags:
                     self.audit(db, aid, "suspicious_progress:" + ",".join(flags), cid)

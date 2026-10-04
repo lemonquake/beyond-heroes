@@ -201,6 +201,22 @@ func _positional_bonuses(req: DamageRequest, attacker: Node) -> void:
 		to_att.y = 0.0
 		if to_att.length() > 0.05 and forward().dot(to_att.normalized()) < -0.3:
 			req.more.append(["Opportunist", 1.0 + st.flag(&"backstab")])
+	# Class Transcendence (Tracker): Quarry Mark helps only its caster's own arrows, bolts and javelins
+	if req.tags.has(&"projectile") and status.has(&"quarry") and attacker != null and is_instance_valid(attacker) \
+			and int(get_meta(&"quarry_by", 0)) == attacker.get_instance_id():
+		req.more.append(["Quarry", 1.0 + clampf(status.magnitude(&"quarry"), 0.0, 0.20)])
+	# Celestial Sight (Starstrider): projectiles that land on enemies more than 12 m from the shooter
+	if req.tags.has(&"projectile") and st.has_flag(&"ss_far") and attacker is Node3D \
+			and (attacker as Node3D).global_position.distance_to(global_position) > CELESTIAL_RANGE:
+		req.more.append(["Celestial Sight", 1.0 + DataTranscendence.cap(&"ss_far", st.flag(&"ss_far"))])
+	# Hunter's Opening (Tracker signature): the first shot on an enemy at full health
+	if req.tags.has(&"projectile") and attacker != null and is_instance_valid(attacker):
+		var sig = attacker.get(&"signature")
+		if sig is ClassSignature:
+			(sig as ClassSignature).opening(self, req)
+
+## Celestial Sight's distance (it never changes how far a shot reaches).
+const CELESTIAL_RANGE := 12.0
 
 ## bh-028: hero-against-hero scaling and the lethal-blow guard (CombatBudget). Heroes, their companions and arena
 ## combatants are guarded; monsters are not.
@@ -359,6 +375,9 @@ func die(killer: Node) -> void:
 	hp = 0.0
 	set_meta(&"died_frozen", status.has(&"frozen"))
 	set_meta(&"died_burning", status.has(&"burning"))
+	# Blood Price (Blood Sovereign signature) reads the bleed the victim died with: [damage per second, time left]
+	var bleed = status.statuses.get(&"bleeding")
+	set_meta(&"died_bleed", [float(bleed.dps), float(bleed.remaining)] if bleed != null else [])
 	status.clear()
 	if visual:
 		visual.play_death(death_clip())
@@ -372,6 +391,8 @@ func die(killer: Node) -> void:
 func apply_knockback(dir: Vector3, speed: float, source: DerivedStats, source_node: Node, depth := 0, launch := 0.0) -> void:
 	if not is_finite(speed) or speed <= 0.0 or not dir.is_finite() or _knock_recovery > 0.0:
 		return
+	if stats != null and stats.has_flag(&"rg_unbroken"):     # Unbroken Line (Royal Guard), after Knockback Resistance
+		speed *= 1.0 - DataTranscendence.cap(&"rg_unbroken", stats.flag(&"rg_unbroken"))
 	if not is_finite(launch):
 		launch = 0.0
 	if _knock_remaining <= 0.0:
@@ -417,7 +438,7 @@ func physics_move(delta: float, desired: Vector3) -> void:
 	# Limit the next step before moving; large frame times cannot overshoot the travel budget.
 	if knock_velocity.length() * delta > _knock_distance:
 		knock_velocity = knock_velocity.normalized() * maxf(0.0, _knock_distance) / delta
-	var control := 0.0 if knock_velocity.length() > KNOCKED_THRESHOLD else 1.0
+	var control := 0.0 if knock_velocity.length() > KNOCKED_THRESHOLD or status.has(&"rooted") else 1.0
 	var horiz := desired * control + knock_velocity
 	if is_on_floor() and _vertical <= 0.0:
 		_vertical = -1.0

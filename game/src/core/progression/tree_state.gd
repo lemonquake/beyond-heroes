@@ -6,6 +6,9 @@ signal changed
 
 var tree: TreeDef
 var ranks := {}          # node id -> rank
+## Class Transcendence: free ranks a hero earned (node id -> rank). They count as learned for prerequisites, are never
+## paid points (points_spent, refunds, tree-point gates) and survive reset(). Set by HeroData from the hero's path.
+var floors := {}
 
 func _init(p_tree: TreeDef = null) -> void:
 	tree = p_tree
@@ -13,11 +16,31 @@ func _init(p_tree: TreeDef = null) -> void:
 func rank(id: StringName) -> int:
 	return ranks.get(id, 0)
 
+## Free ranks of a node (0 for ordinary nodes).
+func floor_of(id: StringName) -> int:
+	return int(floors.get(id, 0))
+
+## Ranks bought with points.
+func paid_rank(id: StringName) -> int:
+	return maxi(0, rank(id) - floor_of(id))
+
+## Points actually paid into this tree (granted free ranks excluded).
 func points_spent() -> int:
 	var t := 0
 	for id in ranks:
-		t += ranks[id] * int(tree.node(id).get("cost", 1))
+		t += maxi(0, int(ranks[id]) - floor_of(id)) * int(tree.node(id).get("cost", 1))
 	return t
+
+## Replace the free ranks; every floored node is raised to at least its floor. Idempotent: never awards points.
+func set_floors(f: Dictionary) -> void:
+	floors.clear()
+	for id in f:
+		if tree.node(id).is_empty():
+			continue
+		floors[id] = clampi(int(f[id]), 0, int(tree.node(id).get("max_rank", 1)))
+		if rank(id) < int(floors[id]):
+			ranks[id] = int(floors[id])
+	changed.emit()
 
 ## Empty string when the node can gain a rank; otherwise the reason.
 func can_rank_up(id: StringName, available_points: int, hero_level: int) -> String:
@@ -68,6 +91,9 @@ func rank_up(id: StringName, available_points: int, hero_level: int) -> int:
 func can_refund(id: StringName) -> String:
 	if rank(id) <= 0:
 		return "Not learned"
+	if rank(id) <= floor_of(id):
+		var by := StringName(tree.node(id).get("granted_by", &""))
+		return "Granted by %s; it cannot be unlearned" % DataTranscendence.name_of(by) if by != &"" else "Granted rank; it cannot be unlearned"
 	if rank(id) == 1:
 		for dep in tree.dependents_of(id):
 			if rank(dep.id) <= 0:
@@ -94,9 +120,13 @@ func refund(id: StringName) -> int:
 	changed.emit()
 	return int(tree.node(id).get("cost", 1))
 
+## Refund every paid rank (returns the points); granted free ranks stay.
 func reset() -> int:
 	var p := points_spent()
 	ranks.clear()
+	for id in floors:
+		if int(floors[id]) > 0:
+			ranks[id] = int(floors[id])
 	changed.emit()
 	return p
 

@@ -1,0 +1,200 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:300)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:58)
+       [2] test_trade_refuses_bad_offers_and_changes_nothing (res://tests/unit/test_bh016.gd:413)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_guild_house_builds (res://tests/unit/test_bh016.gd:319)
+[FAIL] test_bh016.gd — 15 tests, 1560 checks, 1 failures (2574.4 ms)
+[FAIL] test_bh024.gd — 14 tests, 1260 checks, 6 failures (366.6 ms)
+  [gear] iron gauntlet L53 defense 103.5 (old 8.8)
+  [gear] helm            L10   23  L20   47  L30   66  L53  124  L100  328
+  [gear] inner_garment   L10   18  L20   39  L30   55  L53  103  L100  273
+  [gear] armor           L10   42  L20   78  L30  110  L53  207  L100  547
+  [gear] gloves          L10   16  L20   39  L30   55  L53  103  L100  273
+  [gear] boots           L10   16  L20   39  L30   55  L53  103  L100  277
+  [gear] leggings        L10   19  L20   43  L30   62  L53  120  L100  301
+  [gear] heavy kit L16: 242 Defense, 51.1% vs same level
+  [gear] heavy kit L50: 707 Defense, 52.5% vs same level
+  [gear] heavy kit L120: 2716 Defense, 64.7% vs same level
+  [gear] heavy kit L300: 9350 Defense, 72.0% vs same level
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:113)
+   GDScript backtrace (most recent call first):
+       [0] valid (res://src/core/profile_picture.gd:61)
+       [1] test_profile_picture_and_alt_keys (res://tests/unit/test_bh030.gd:208)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4559)
+   GDScript backtrace (most recent call first):
+       [0] valid (res://src/core/profile_picture.gd:61)
+       [1] test_profile_picture_and_alt_keys (res://tests/unit/test_bh030.gd:208)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+[FAIL] test_bh030.gd — 8 tests, 151 checks, 5 failures (492.1 ms)
+WARNING: Adding 'AT_thigh_L' as child to 'SetPart_inner_garment_thigh_L' will make owner 'boss_obsidian_oath_inner_garment2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_thigh_R' as child to 'SetPart_inner_garment_thigh_R' will make owner 'boss_obsidian_oath_inner_garment2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_upper_arm_L' as child to 'SetPart_armor_upper_arm_L' will make owner 'boss_obsidian_oath_armor2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_upper_arm_R' as child to 'SetPart_armor_upper_arm_R' will make owner 'boss_obsidian_oath_armor2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_thigh_L' as child to 'SetPart_leggings_thigh_L' will make owner 'boss_obsidian_oath_leggings2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_thigh_R' as child to 'SetPart_leggings_thigh_R' will make owner 'boss_obsidian_oath_leggings2' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_hand_L' as child to 'SetPart_gloves_1_hand_L' will make owner 'boss_obsidian_oath_gloves_12' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_hand_R' as child to 'SetPart_gloves_2_hand_R' will make owner 'boss_obsidian_oath_gloves_22' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_foot_L' as child to 'SetPart_boots_1_foot_L' will make owner 'boss_obsidian_oath_boots_12' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+WARNING: Adding 'AT_foot_R' as child to 'SetPart_boots_2_foot_R' will make owner 'boss_obsidian_oath_boots_22' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] wear (res://src/actors/boss_set_visuals.gd:492)
+       [1] dress_equipment (res://src/actors/character_visual.gd:829)
+       [2] apply (res://src/core/hero/persona.gd:73)
+       [3] make_persona (res://src/cinema/cutscene_actor.gd:87)
+       [4] test_cutscene_extras_are_people (res://tests/unit/test_bh031.gd:212)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_debug_console_builds_every_page (res://tests/unit/test_bh030.gd:197)
+[FAIL] test_bh031.gd — 12 tests, 3720 checks, 1 failures (332.2 ms)
+[FAIL] test_loot.gd — 17 tests, 6114 checks, 40 failures (18942.2 ms)
+  FAIL test_bh016.test_guild_house_builds: the steward and the two clerks stand in the room — expected 3, got 4
+  FAIL test_bh024.test_merchants_sell_leggings: grand_master_armory deals in leggings too
+  FAIL test_bh024.test_merchants_sell_leggings: grand_master_armory stocks leggings
+  FAIL test_bh024.test_unbound_items_have_no_requirements: bh-026: Unbound gear asks for Class E
+  FAIL test_bh024.test_unbound_items_have_no_requirements: Unbound: no level or attribute requirement, Class E is enough — expected , got For Knight class
+  FAIL test_bh024.test_unbound_items_have_no_requirements: a level-1 mage wears it — expected , got For Knight class
+  FAIL test_bh024.test_unbound_items_have_no_requirements: in the Leggings slot — expected <RefCounted#-9223371332161362378>, got <RefCounted#-9223371332329134844>
+  FAIL test_bh030.test_high_level_armor_is_strong: a plain level 53 gauntlet has at least 120 Defense (old 9, now 103)
+  FAIL test_bh030.test_high_level_armor_is_strong: a level 53 plate inner_garment is above 110 Defense
+  FAIL test_bh030.test_high_level_armor_is_strong: a level 53 plate gloves is above 110 Defense
+  FAIL test_bh030.test_high_level_armor_is_strong: a level 53 plate boots is above 110 Defense
+  FAIL test_bh030.test_high_level_armor_is_strong: a heavy kit at level 300 reduces same-level hits 40-66% (got 72.0%)
+  FAIL test_bh031.test_npc_portraits_are_baked: grand_master_edran's portrait is the baked ID shot (res://assets/ui/portraits/keeper.svg)
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_crownward_longsword has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_royal_guard_cuirass has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_oathkeeper_seal has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_dreadmarshal_greatsword has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_black_dominion_plate has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_dread_command_signet has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_dawnstar_longsword has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_sanctified_plate has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_sunward_reliquary has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_trailkeeper_bow has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_trailkeeper_bow rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_trackers_leathers has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_quarry_compass has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_briarheart_bow has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_briarheart_bow rendered icon exists
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_livingwood_leathers has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_wildroot_pendant has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_starfall_crossbow has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_constellation_leathers has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_comet_lens has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_runebound_staff has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_arcanist_vestments has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_runic_focus has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_prismatic_staff has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_archmage_robes has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_convergence_prism has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_eventide_staff has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_riftwoven_robes has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_horizon_core has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_gloamfang_dagger has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_nightstalker_leathers has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_silent_trail_charm has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_wraithedge_dagger has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_afterimage_mantle has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_reapers_glass has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_crimson_oath_dagger has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_sanguine_leathers has its own model
+  FAIL test_loot.test_every_item_has_a_model_and_icon: tc_bloodmoon_signet has its own model
+  FAIL test_loot.test_weapon_roster: tc_crownward_longsword: attack speed + weight differ from iron_longsword
+  FAIL test_loot.test_weapon_roster: tc_gloamfang_dagger: attack speed + weight differ from rondel_dagger
+TOTAL: 12805 checks, 53 failures
+WARNING: 12 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -59,8 +59,9 @@ func _side(pack: Dictionary, mine: bool) -> Control:
 	var nm := UITheme.title("%s%s" % [h.hero_name, "  (you)" if mine else ""], 30, UITheme.GOLD)
 	nm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(nm)
-	col.add_child(UITheme.label("Level %d %s · %s" % [int(pack.get("level", 1)), cd.display_name if cd else "Hero", DataGuilds.tier_name(int(pack.get("tier", 0)))],
-		17, UITheme.TEXT_DIM, UITheme.body_bold()))
+	var scid := ClassTranscendence.peer_class_id(StringName(String(pack.get("cls", "knight"))), int(pack.get("level", 1)), pack.get("path", ""))
+	col.add_child(UITheme.label("Level %d %s · %s" % [int(pack.get("level", 1)), ClassTranscendence.class_name_of(scid) if cd else "Hero", DataGuilds.tier_name(int(pack.get("tier", 0)))],
+		17, ClassTranscendence.label_color(scid) if cd else UITheme.TEXT_DIM, UITheme.body_bold()))
 	col.add_child(_guild_row(pack.get("guild", {})))
 	var row := hbox(16)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL

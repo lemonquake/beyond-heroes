@@ -85,7 +85,7 @@ func open() -> void:
 	_title.text = "Paused"
 	_title.add_theme_color_override("font_color", UITheme.GOLD)
 	var h := Game.hero
-	_sub.text = "%s · Level %d %s · %s" % [h.hero_name, h.progress.level, h.cls.display_name, _time(h.play_time)] if h else ""
+	_sub.text = "%s · Level %d %s · %s" % [h.hero_name, h.progress.level, ClassTranscendence.current_class_name(h), _time(h.play_time)] if h else ""
 	if Settings.touch_mode:
 		_sub.text += "\nPress Back again to resume."
 	_rebuild()

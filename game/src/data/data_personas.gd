@@ -8,6 +8,12 @@ class_name DataPersonas
 
 # ---------------------------------------------------------------------------------------------------- townsfolk
 const NPCS := {
+	# Class Transcendence: Grand Master Edran Vale of the Guild House
+	"grand_master_edran": {"look": {"hair": "slick", "hair_color": "c9c6bf", "beard": "full", "beard_color": "bdb9b0", "skin": "c8916d",
+		"eye": "keen", "eye_color": "4a5a6a", "brow": "bushy", "brow_color": "bdb9b0", "height": 1.03, "build": 0.2, "muscle": 0.3,
+		"jaw_wide": 0.4, "marking": "scar", "marking_color": "7a4a3a"},
+		"wear": ["magister_robe", "chain_shirt", "warden_greave", "gold_amulet"],
+		"dye": {"cloth": "2b3550", "trim": "1d2236", "gold": "d8b46a", "metal": "c8c8cc", "leather": "3a2a1e"}, "main": "runed_sword"},
 	"maelis": {"f": true, "look": {"hair": "topknot", "hair_color": "d8d6d0", "brow": "thin", "brow_color": "bdbab2", "skin": "c8916d",
 		"eye": "sleepy", "eye_color": "5b4a3a", "cheeks": -0.6, "chin_long": 0.3, "nose_long": 0.4, "height": 0.9, "build": -0.5,
 		"muscle": -0.6, "mouth_smile": 0.3},

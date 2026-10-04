@@ -112,6 +112,16 @@ var remote_guild := {}
 var starter_name := ""                   # bh-015: the first Tempo's rolled name (the guide quotes it)
 ## The Knight's active aura (bh-010): a learned aura skill id, or &"" (auras are toggled; one at a time).
 var active_aura: StringName = &""
+## Class Transcendence: the advancements taken, in order ([first transcendence, master]; empty = the starting class).
+## `cls` stays the starting family. ClassTranscendence derives identity, granted ranks, theme and glow from this path.
+var transcendence_path: Array[StringName] = []
+## Ranks a save held for nodes of an identity this hero does not have (a damaged path): kept, never active, never
+## refunded, so damaged data can neither grant a sibling class nor mint points. Optional in a save.
+var dormant_ranks := {}
+## What loading repaired in the advancement record ("" = nothing), for the one-time notice.
+var transcend_note := ""
+## Gear the class rules took off on load ("" = none), for the one-time notice (the pieces wait in the bag / recovery).
+var gear_note := ""
 var _loading_equipment := false
 var _checking_promotions := false
 
@@ -121,6 +131,7 @@ const RESTED_REGEN := 0.5
 func setup(p_cls: ClassDef, p_name: String) -> void:
 	equipment.tier_rank = tier
 	equipment.wearer = p_cls.id if p_cls else &""
+	equipment.wearer_line = [p_cls.id] if p_cls else []
 	cls = p_cls
 	hero_name = p_name
 	progress.setup(cls)
@@ -129,6 +140,39 @@ func setup(p_cls: ClassDef, p_name: String) -> void:
 	skill_bar.resize(SKILL_BAR_SIZE)
 	skill_bar.fill(&"")
 	_connect()
+
+## Rebuild the skill and talent trees for the current identity (the family's trees plus a page per advancement), keep
+## every rank, and restore the free ranks the path has earned. Safe to call any number of times.
+func apply_identity() -> void:
+	if cls == null:
+		return
+	var path: Array = transcendence_path
+	var st := TreeState.new(ClassTranscendence.compose_tree(DB.tree(cls.skill_tree_id), path, false))
+	var tt := TreeState.new(ClassTranscendence.compose_tree(DB.tree(cls.talent_tree_id), path, true))
+	if skill_tree != null:
+		for id in skill_tree.ranks:
+			if not st.tree.node(id).is_empty():
+				st.ranks[id] = skill_tree.ranks[id]
+		if skill_tree.changed.is_connected(_skills_changed):
+			skill_tree.changed.disconnect(_skills_changed)
+	if talent_tree != null:
+		for id in talent_tree.ranks:
+			if not tt.tree.node(id).is_empty():
+				tt.ranks[id] = talent_tree.ranks[id]
+		if talent_tree.changed.is_connected(_dirty):
+			talent_tree.changed.disconnect(_dirty)
+	skill_tree = st
+	talent_tree = tt
+	skill_tree.changed.connect(_skills_changed)
+	talent_tree.changed.connect(_dirty)
+	equipment.wearer_line = ClassTranscendence.lineage(self)
+	_apply_floors()
+
+## Raise every granted node to its earned free rank (idempotent; awards no points).
+func _apply_floors() -> void:
+	var f := ClassTranscendence.earned_rank_floors(self)
+	skill_tree.set_floors(f.skills)
+	talent_tree.set_floors(f.talents)
 
 # Bound methods (not lambdas) so the RefCounted children never hold a strong reference back to this object.
 func _connect() -> void:
@@ -242,8 +286,13 @@ func carried_weight() -> float:
 
 # ---- Skills -----------------------------------------------------------------------------------------------
 
+## A skill's learned rank. A transcendence skill of a class the hero is not (a sibling master, another family) is
+## never usable, whatever a save or a forged rank says.
 func skill_rank(skill_id: StringName) -> int:
-	return skill_tree.rank(skill_id)
+	var r := skill_tree.rank(skill_id)
+	if r > 0 and DataTranscendence.owner_of(skill_id) != &"" and not ClassTranscendence.skill_allowed(self, skill_id):
+		return 0
+	return r
 
 ## "+N to all skills" from equipment (raises learned passives too, like actives).
 static func item_skill_levels(mods: Array) -> int:
@@ -485,7 +534,7 @@ func to_dict() -> Dictionary:
 		"guild_world": GuildRegistry.world_to_plain(self), "own_guild": OwnGuild.to_plain(own_guild),
 		"remote_guild": GuildRegistry.remote_to_plain(remote_guild) if not remote_guild.is_empty() else {},
 		"look": HeroLook.to_save(HeroLook.sanitize(look)),
-	}
+	}.merged({"transcendence": ClassTranscendence.to_save(self)} if not transcendence_path.is_empty() or not dormant_ranks.is_empty() else {})
 
 static func _keyed_plain(src: Dictionary) -> Dictionary:
 	var d := {}
@@ -524,11 +573,26 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.setup(c, String(d.get("name", "Hero")))
 	h._loading_equipment = true
 	h.progress.from_dict(d.get("progress", {}))
+	# Class Transcendence: the advancement is read and validated (against the family and the loaded level) before the
+	# trees and the equipment, so granted pages exist when their ranks load and class gear can be checked.
+	var tr := ClassTranscendence.from_save(c.id, h.progress.level, d.get("transcendence", null))
+	h.transcendence_path = tr.path
+	h.transcend_note = String(tr.error)
+	if h.transcend_note != "":
+		push_warning("Hero %s: %s" % [h.hero_name, h.transcend_note])
+	h.dormant_ranks = (tr.dormant as Dictionary).duplicate(true)
+	h.apply_identity()
 	h.equipment.from_dict(d.get("equipment", {}))
+	# pieces this class may not wear come off (kept, never deleted) before they can add any stats
+	var taken := h.equipment.repair_class_requirements()
+	if not taken.is_empty():
+		h.gear_note = "%d equipped piece%s did not fit your class and moved to your bag: %s." % [taken.size(), "" if taken.size() == 1 else "s",
+			", ".join(taken.map(func(it): return (it as ItemInstance).display_name()))]
 	h.inventory.from_array(d.get("inventory", []))
 	h.inventory.gold = int(d.get("gold", 0))
-	h.progress.skill_points += h.skill_tree.from_dict(d.get("skills", {}))
-	h.progress.talent_points += h.talent_tree.from_dict(d.get("talents", {}))
+	h.progress.skill_points += h.skill_tree.from_dict(h._split_dormant(d.get("skills", {}), "skills"))
+	h.progress.talent_points += h.talent_tree.from_dict(h._split_dormant(d.get("talents", {}), "talents"))
+	h._apply_floors()
 	var bar: Array = d.get("skill_bar", [])
 	for i in SKILL_BAR_SIZE:
 		h.skill_bar[i] = StringName(bar[i]) if i < bar.size() else &""
@@ -662,6 +726,29 @@ static func from_dict(d: Dictionary) -> HeroData:
 	h.recover_unequipped_gear()
 	h.check_promotions()
 	return h
+
+## Ranks of transcendence nodes this hero's trees do not hold (another identity's) are set aside in `dormant_ranks`
+## instead of being dropped or refunded; ranks for nodes the trees do hold come back from the stash.
+func _split_dormant(src: Variant, kind: String) -> Dictionary:
+	var out := {}
+	var tree: TreeState = skill_tree if kind == "skills" else talent_tree
+	var stash: Dictionary = dormant_ranks.get(kind, {})
+	if src is Dictionary:
+		for k in src:
+			var id := StringName(String(k))
+			if DataTranscendence.owner_of(id) != &"" and tree.tree.node(id).is_empty():
+				stash[String(id)] = clampi(int(src[k]), 0, TreeDef.LEVEL_MAX)
+			else:
+				out[k] = src[k]
+	for k in stash.keys():
+		if not tree.tree.node(StringName(k)).is_empty() and not out.has(k):
+			out[k] = stash[k]
+			stash.erase(k)
+	if stash.is_empty():
+		dormant_ranks.erase(kind)
+	else:
+		dormant_ranks[kind] = stash
+	return out
 
 # ---- Potion belt (bh-011) ---------------------------------------------------------------------------------------
 

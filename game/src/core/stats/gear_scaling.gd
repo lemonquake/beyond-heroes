@@ -56,6 +56,8 @@ static func curve(category: StringName, weight: StringName) -> Array:
 	for b: ItemBaseDef in DB.item_bases.values():
 		if b.category != category or b.defense <= 0.0 or b.set_id != &"" or b.unique_name != "" or b.drop_weight <= 0:
 			continue
+		if not b.class_req.is_empty():         # class pieces (Class Transcendence) are measured against the roster, not part of it
+			continue
 		if weight != &"*" and b.weight_class != weight:
 			continue
 		best[b.level_req] = maxf(float(best.get(b.level_req, 0.0)), b.defense)

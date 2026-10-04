@@ -23,10 +23,13 @@ extends Node
 signal state_changed
 signal peers_changed
 signal chat_received(peer: int, text: String)
+## A player's profile changed (level, map, class advancement ...) on this machine's copy of the roster. Unlike
+## peers_changed it does not resend appearances; name plates listen to it (Class Transcendence).
+signal roster_updated
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 19                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities
+const PROTOCOL := 20                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects)
                                      # 19 (bh-035): hero snapshots relayed by the room host per map and distance, light checkpoints, idle monsters not re-sent
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
@@ -200,11 +203,35 @@ func pop_traffic() -> Dictionary:
 
 func _profile() -> Dictionary:
 	var h: HeroData = Game.hero
-	return {"name": h.hero_name if h else "Hero", "cls": String(h.cls.id) if h else "knight",
+	return {"name": h.hero_name if h else "Hero", "cls": String(h.cls.id) if h else "knight", "path": profile_path(h),
 		"level": h.progress.level if h else 1, "map": String(Game.current_map_id),
 		"dungeon_level": int(h.world_flags.get(DungeonGrowth.visit_key(DataDungeons.parse(h.current_map)[0]), h.progress.level)) if h else 1,
 		"device": "Mobile" if Settings.is_mobile_device() else "PC", "guild": guild_profile(h),
 		"scope": SaveSystem.scope, "room": SaveSystem.custom_room}
+
+## Class Transcendence: the advancement this hero shows other players. An official character shows only what the server
+## has confirmed (the last acknowledged save), never an advancement still waiting for its save.
+static func profile_path(h: HeroData) -> String:
+	if h == null:
+		return ""
+	if Official.active:
+		var saved: Variant = Official._confirmed_save.get("hero", {}).get("transcendence", {}) if Official._confirmed_save.get("hero", {}) is Dictionary else {}
+		var lvl := int(Official._confirmed_save.get("hero", {}).get("progress", {}).get("level", h.progress.level)) if Official._confirmed_save.get("hero", {}) is Dictionary else h.progress.level
+		var res := ClassTranscendence.from_save(h.cls.id, lvl, saved)
+		return ",".join((res.path as Array).map(func(x): return String(x)))
+	return ClassTranscendence.path_text(h)
+
+## A player's current class id (Grand Paladin, Hunter ...) from the roster: their family and their advancement, checked
+## against each other and their level. Never free text from the peer.
+func peer_class_id(peer: int) -> StringName:
+	var info: Dictionary = peers.get(peer, {})
+	var fam := StringName(String(info.get("cls", "knight")))
+	if not DataTranscendence.is_family(fam):
+		return &""
+	return ClassTranscendence.peer_class_id(fam, int(info.get("level", 1)), info.get("path", ""))
+
+func peer_class_name(peer: int) -> String:
+	return ClassTranscendence.class_name_of(peer_class_id(peer))
 
 ## Dedicated coordinator has no playable hero and does not consume one of the twelve slots.
 func host_dedicated(config: Dictionary) -> String:
@@ -502,6 +529,7 @@ func _hello(proto: int, profile: Dictionary) -> void:
 		profile["name"] = character.get("name", "Hero")
 		profile["cls"] = character.get("class", "knight")
 		profile["level"] = character.get("level", 1)
+		profile["path"] = String(character.get("path", ""))       # the server's stored advancement, never the client's claim
 		profile["userid"] = result.get("userid", "")
 		profile["character"] = character.get("id", "")
 		_server_leases[id] = result.get("lease", "")
@@ -604,6 +632,7 @@ func _peers_update(p: Dictionary, worlds: Dictionary) -> void:
 	_worlds = worlds
 	_check_shared()
 	peers_changed.emit()
+	roster_updated.emit()
 
 # ---- Following the host between maps ------------------------------------------------------------------------------
 
@@ -1613,6 +1642,60 @@ func _ally_aura(key: String, sid: String, time: float, mag: float, vals: Array) 
 			mods.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, clampf(float(vals[i]), -5.0, 5.0), s.display_name))
 		(pair[1] as Actor).status.apply(s.id, clampf(time, 0.0, 5.0), clampf(mag, 0.0, 2.0), 0.0, Elements.PHYSICAL, mods)
 
+## Class Transcendence support (Bulwark Standard, Warden's Refuge, Sanctified Ground, Oath of Mercy) reaching another
+## player's hero: the skill id, its status values, a heal share of their Maximum HP, a barrier share and a cleanse.
+## The owner checks the skill and clamps everything (TranscendSkills.BARRIER_CAP, at most 3% healing per message).
+func send_support(av: NetAvatar, sid: StringName, extra: Dictionary) -> void:
+	if not is_active() or av == null or not is_instance_valid(av):
+		return
+	_ally_support.rpc_id(av.owner_peer, av.key, String(sid), extra)
+
+@rpc("any_peer", "unreliable")
+func _ally_support(key: String, sid: String, extra: Dictionary) -> void:
+	var from := multiplayer.get_remote_sender_id()
+	if not Game.in_session or _peer_map(from) != String(Game.current_map_id) or not NetGuard.allow(from, "support", 12.0, 24.0):
+		return
+	if not NetGuard.fits(extra, 400):
+		return
+	if sid == "sig_dawn":
+		_sig_dawn_heal(from, key, extra)
+		return
+	var s := DB.skill(StringName(sid))
+	if s == null or not SUPPORT_SKILLS.has(s.id):
+		return
+	for pair in _local_allies():
+		if pair[0] != key or not (pair[1] as Actor).alive:
+			continue
+		var a: Actor = pair[1]
+		var time := clampf(float(extra.get("time", 0.0)), 0.0, 5.0)
+		var vals: Variant = extra.get("vals", [])
+		if vals is Array and (vals as Array).size() == s.aura_mods.size() and time > 0.0:
+			var mods: Array = []
+			for i in s.aura_mods.size():
+				var m: Array = s.aura_mods[i]
+				mods.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, clampf(float(vals[i]), -1.0, 1.0), s.display_name))
+			a.status.apply(s.id, time, 1.0, 0.0, Elements.PHYSICAL, mods)
+		var heal := clampf(float(extra.get("heal_pct", 0.0)), 0.0, 0.03)
+		if heal > 0.0:
+			a.heal(a.max_hp() * heal)
+		var bar := clampf(float(extra.get("barrier_pct", 0.0)), 0.0, TranscendSkills.BARRIER_CAP)
+		if bar > 0.0:
+			TranscendSkills.give_barrier(a, a.max_hp() * bar, clampf(float(extra.get("time_b", extra.get("time", 6.0))), 0.5, 15.0), s)
+		if int(extra.get("cleanse", 0)) > 0:
+			TranscendSkills.cleanse_one(a)
+
+## Dawnbringer (Grand Paladin signature) healing this machine's hero: only from a Grand Paladin, at most its share.
+func _sig_dawn_heal(from: int, key: String, extra: Dictionary) -> void:
+	if not DataTranscendence.ancestry(peer_class_id(from)).has(&"grand_paladin"):
+		return
+	var heal := clampf(float(extra.get("heal_pct", 0.0)), 0.0, DataTranscendence.sig(&"grand_paladin", "heal") / 100.0)
+	for pair in _local_allies():
+		if pair[0] == key and (pair[1] as Actor).alive and heal > 0.0:
+			(pair[1] as Actor).heal((pair[1] as Actor).max_hp() * heal)
+
+## Skills whose effects another player's machine accepts through _ally_support.
+const SUPPORT_SKILLS := [&"rg_bulwark_standard", &"ww_wardens_refuge", &"gp_sanctified_ground", &"gp_oath_of_mercy"]
+
 ## Round-trip time to a peer in ms (the host sees every client; a client sees the host). -1 when unknown.
 func ping_ms(peer: int) -> int:
 	if _peer == null or not is_active():
@@ -1692,10 +1775,48 @@ func _remote_skill_fx(map: String, kind: String, at: Vector3, dir: Vector3, extr
 				float(extra.get("r", 14.0)), int(extra.get("e", 0)), 99)
 		"trap":
 			SkillTrap.create(FX.world, at, String(extra.get("s", "snare")), null, null, 0, float(extra.get("r", 2.5)), 99)
+		"tzone":
+			TranscendZone.remote(FX.world, at, String(extra.get("z", "")), float(extra.get("r", 4.0)), float(extra.get("d", 5.0)), StringName(String(extra.get("c", ""))))
+		"tsnare":
+			var pts: Variant = extra.get("pts", [])
+			if pts is Array:
+				SnareLine.remote(FX.world, pts, float(extra.get("d", 10.0)), float(extra.get("t", 1.1)))
+		"tring":
+			var th := ClassTranscendence.class_theme(StringName(String(extra.get("c", ""))))
+			FX.spawn(VFXLib.ring_wave(Color(th.accent, 0.85), clampf(float(extra.get("r", 6.0)), 0.5, 10.0), 0.5, 0.8), at)
+		"tpatch":
+			AreaEffects.hazard(FX.world, at, clampf(float(extra.get("r", 3.0)), 0.5, 6.0), clampf(float(extra.get("d", 4.0)), 0.5, 10.0), null, null, 0, Color(0.4, 0.62, 0.32), 0.5)
 		"veil":
 			var radius := float(extra.get("r", 6.0))
 			FX.spawn(VFXLib.particles(Color(0.35, 0.33, 0.38, 0.75), 70, 2.2, true, 1.6, 2.5, 180.0, Vector3(0, 0.4, 0), radius * 0.5, false), at + Vector3.UP * 0.6)
 			FX.spawn(VFXLib.ring_wave(Color(0.5, 0.4, 0.65, 0.7), radius, 0.5), at)
+
+## Class Transcendence signature bursts (ClassSignature): Royal Retort, Dawnbringer, Collapse ... happened. Only the kind
+## and two points travel; the receiver draws them and accepts only the bursts of a trait the sender's validated class
+## line has.
+func share_class_sig(kind: String, n: int, at: Vector3, to: Vector3) -> void:
+	if not is_active():
+		return
+	_remote_class_sig.rpc(String(Game.current_map_id), kind, n, at, to)
+
+@rpc("any_peer", "unreliable")
+func _remote_class_sig(map: String, kind: String, n: int, at: Vector3, to: Vector3) -> void:
+	if map != String(Game.current_map_id) or FX.world == null or Game.travelling:
+		return
+	if not _fx_allowed() or kind.length() > 16 or not (at.is_finite() and to.is_finite()):
+		return
+	var from := multiplayer.get_remote_sender_id()
+	var av := avatar(from)
+	if av == null or av.arena_fighter:
+		return
+	var k := StringName(kind)
+	if not ClassSignature.allowed(peer_class_id(from), k):
+		return
+	var sig := av.get_node_or_null(^"ClassSignature") as ClassSignature
+	if sig == null:
+		return
+	if at.distance_to(av.global_position) <= 40.0 and to.distance_to(av.global_position) <= 60.0:
+		sig.burst(k, at, to)
 
 ## bh-033: an arena fixture changed on the map owner's machine (a pillar broke): every player on the map applies it.
 func arena_event(kind: StringName, idx: int, data: Dictionary = {}) -> void:
@@ -1793,6 +1914,7 @@ func update_profile() -> void:
 	if is_host():
 		peers[1] = _profile()
 		_rpc_peers()
+		roster_updated.emit()
 	else:
 		_profile_changed.rpc_id(1, _profile())
 
@@ -1806,14 +1928,33 @@ func _profile_changed(profile: Dictionary) -> void:
 		return
 	profile.erase("ticket")
 	var keep: String = peers[id].get("map", "")
+	var claimed_path := String(profile.get("path", ""))
 	if dedicated:
-		for field in ["name", "cls", "userid", "character"]:
+		for field in ["name", "cls", "userid", "character", "path"]:
 			profile[field] = peers[id].get(field, "")
 		profile["level"] = clampi(int(profile.get("level", 1)), 1, BH.LEVEL_CAP)
 	peers[id] = profile
 	if keep != "":
 		peers[id]["map"] = keep
 	_rpc_peers()
+	roster_updated.emit()
+	# Official: a new class advancement shows once the account service holds it in an acknowledged save (the client
+	# sends its profile after the save is confirmed; the coordinator reads the stored character, not the claim)
+	if dedicated and claimed_path != String(peers[id].get("path", "")):
+		_refresh_official_identity(id)
+
+func _refresh_official_identity(id: int) -> void:
+	var lease := String(_server_leases.get(id, ""))
+	if lease == "":
+		return
+	var result := await _server_request("/internal/character", {"lease": lease})
+	if result.has("error") or not peers.has(id):
+		return
+	var character: Dictionary = result.get("character", {})
+	peers[id]["path"] = String(character.get("path", ""))
+	peers[id]["level"] = clampi(int(character.get("level", peers[id].get("level", 1))), 1, BH.LEVEL_CAP)
+	_rpc_peers()
+	roster_updated.emit()
 
 # ---- Party travel requests (bh-011; unused since bh-015, when clients started travelling on their own) ---------------
 
@@ -2178,9 +2319,8 @@ func trade_prompt(peer: int) -> void:
 		Events.notify.emit(err, &"error")
 		return
 	var info: Dictionary = peers[peer]
-	var cls := DB.class_def(StringName(info.get("cls", "knight")))
 	Game.ui_root.ask("Trade", "Send %s (Level %d %s) a Trade Request?\nYou each choose items and gold; nothing changes hands until you both accept." % [
-			info.get("name", "this hero"), int(info.get("level", 1)), cls.display_name if cls else "Hero"],
+			info.get("name", "this hero"), int(info.get("level", 1)), peer_class_name(peer)],
 		func() -> void: request_trade(peer), "Send Request")
 
 ## Send `peer` a Trade Request. Returns "" or the reason it was not sent.
@@ -2773,7 +2913,7 @@ static func showcase_pack(h: HeroData) -> Dictionary:
 		var bytes = h.remote_guild.get("banner", PackedByteArray()) if h.guild == GuildRegistry.REMOTE else h.guild_banner
 		g["banner"] = bytes if bytes is PackedByteArray else PackedByteArray()
 		g["id"] = String(h.guild)
-	return {"name": h.hero_name, "cls": String(h.cls.id), "level": h.progress.level, "tier": h.tier, "look": h.look.duplicate(true),
+	return {"name": h.hero_name, "cls": String(h.cls.id), "path": profile_path(h), "level": h.progress.level, "tier": h.tier, "look": h.look.duplicate(true),
 		"equipment": h.equipment.to_dict(), "guild": g}
 
 func showcase_error(peer: int) -> String:

@@ -34,8 +34,12 @@ PROBES = {
         ("host", ["--role=host", "--class=knight", "--name=host", "--map=sanctuary", "--slot=90"]),
         ("scout", ["--role=scout", "--class=knight", "--name=scout", "--map=sanctuary", "--slot=91"]),
         ("ally", ["--role=ally", "--class=knight", "--name=ally", "--map=sanctuary", "--slot=92"])]},
+    # Class Transcendence: the class line under the name, themes and class armour between two real clients
+    "transcend": {"scene": "net_probe_transcend", "headless": False, "roles": [
+        ("host", ["--role=host", "--class=knight", "--level=121", "--slot=94", "--map=sanctuary", "--spawn=waypoint"]),
+        ("join", ["--role=join", "--class=ranger", "--level=121", "--slot=93", "--map=sanctuary", "--spawn=waypoint"])]},
 }
-RESULT = re.compile(r"^(EXPLORE|TRADE|ARENA|GUILD|TEAM)\[|SCRIPT ERROR|Parse Error")
+RESULT = re.compile(r"^(EXPLORE|TRADE|ARENA|GUILD|TEAM|TRANSCEND)\[|SCRIPT ERROR|Parse Error")
 
 
 def run(godot, name, out, limit):

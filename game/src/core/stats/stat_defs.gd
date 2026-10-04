@@ -74,7 +74,7 @@ const DEFS := {
 	&"res_cap": ["Resistance Cap", Fmt.PCT, ""],
 	&"accuracy_flat": ["Accuracy", Fmt.INT, ""],
 	# bh-010
-	&"focus_gain": ["Focus Gain", Fmt.PCT, "Faster Focus (Ranger)."],
+	&"focus_gain": ["Focus Gain", Fmt.PCT, "Faster Focus (Hunter)."],
 	&"combo_max": ["Maximum Combo", Fmt.INT, "Extra Combo pips (Shadowblade)."],
 	&"trap_damage": ["Trap Damage", Fmt.PCT, "Increased damage of traps and sentinels."],
 	&"aura_effect": ["Aura Effect", Fmt.PCT, "Stronger auras."],
@@ -141,6 +141,10 @@ static func _num(x: float) -> String:
 
 ## Human-readable modifier line for tooltips.
 static func format_modifier(stat: StringName, op: int, v: float) -> String:
+	# Class Transcendence signature weapons: "+12% Dawn Verdict damage"
+	if String(stat).begins_with("flag_tskill_dmg_"):
+		var sk := DB.skill(StringName(String(stat).trim_prefix("flag_tskill_dmg_")))
+		return "+%s%% %s damage" % [_num(v * 100.0), sk.display_name if sk else "skill"]
 	var n := name_of(stat)
 	var sgn := "+" if v >= 0.0 else "-"
 	var av := absf(v)

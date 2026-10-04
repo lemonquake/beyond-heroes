@@ -26,7 +26,9 @@ var max_value := 100.0
 var _since_combat := 99.0
 var _since_cast := 99.0
 var _decay_acc := 0.0
-var decay_delay_bonus := 0.0          # Shadow Discipline: pips linger longer
+var decay_delay_bonus := 0.0          # Shadow Discipline / Patient Blade: pips linger longer; Charge Discipline: charges
+## Steady Constellation (Starstrider): Focus fades this much slower out of combat (1 = normal). It never builds Focus.
+var decay_mult := 1.0
 
 const VALOR_DECAY_DELAY := 3.0
 const VALOR_DECAY := 6.0
@@ -46,6 +48,8 @@ const STEADY_CRIT := 0.10
 const COMBO_MAX := 5.0
 const COMBO_DECAY_DELAY := 5.0
 const COMBO_DECAY_STEP := 1.5
+## All Combo lingering together (Shadow Discipline, Patient Blade) never adds more than this.
+const COMBO_LINGER_CAP := 4.0
 
 func _init(p_kind: StringName) -> void:
 	kind = p_kind
@@ -116,7 +120,7 @@ func tick(delta: float, in_combat: bool, hold := false, calm := false, pressed :
 			else:
 				_since_combat += delta
 				if _since_combat > FOCUS_DECAY_DELAY and value > 0.0 and not hold:
-					drain(FOCUS_DECAY * delta)
+					drain(FOCUS_DECAY * delta * clampf(decay_mult, 0.5, 1.0))
 		&"combo":
 			_since_combat += delta
 			if _since_combat > COMBO_DECAY_DELAY + decay_delay_bonus and value > 0.0 and not hold:
@@ -126,7 +130,7 @@ func tick(delta: float, in_combat: bool, hold := false, calm := false, pressed :
 					drain(1.0)
 		_:
 			_since_cast += delta
-			if _since_cast > ARCANE_DECAY_DELAY and value > 0.0:
+			if _since_cast > ARCANE_DECAY_DELAY + decay_delay_bonus and value > 0.0:
 				_decay_acc += delta
 				if _decay_acc >= ARCANE_DECAY_STEP:
 					_decay_acc = 0.0

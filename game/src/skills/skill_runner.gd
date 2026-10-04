@@ -48,7 +48,10 @@ func make_request(skill: SkillDef, p: Dictionary) -> DamageRequest:
 	if p.has("_pips"):
 		var pips := float(p._pips)
 		req.tags[&"finisher"] = true
-		if req.kind == DamageRequest.Kind.ATTACK:
+		if float(p.get("pip_more", 0.0)) > 0.0:
+			# Class Transcendence finishers: each pip is a share of more damage (see the Valor note below)
+			req.more.append(["Combo x%d" % roundi(pips), 1.0 + float(p.pip_more) / 100.0 * pips])
+		elif req.kind == DamageRequest.Kind.ATTACK:
 			req.weapon_mult += float(p.get("per_pip", 0.0)) / 100.0 * pips
 		else:
 			req.more.append(["Combo x%d" % roundi(pips), 1.0 + float(p.get("per_pip", 0.0)) / 100.0 * pips])
@@ -56,12 +59,34 @@ func make_request(skill: SkillDef, p: Dictionary) -> DamageRequest:
 			req.force_crit = true
 	if p.has("_focus"):
 		var focus := float(p._focus)
-		req.weapon_mult += float(p.get("per_focus", 0.0)) / 100.0 * focus
+		if float(p.get("focus_more", 0.0)) > 0.0:
+			req.more.append(["Focus x%d" % roundi(focus), 1.0 + float(p.get("per_focus", 0.0)) / 100.0 * focus])
+		else:
+			req.weapon_mult += float(p.get("per_focus", 0.0)) / 100.0 * focus
 		if focus >= float(p.get("crit_focus", 999.0)):
 			req.force_crit = true
 	if bool(p.get("_echo", false)):
 		req.skill_mult *= float(p.get("echo_mult", 0.5))
 		req.label = "%s (Echo)" % skill.display_name
+	# Class Transcendence: Valor / Arcane Charge spent once at cast (_consume), extra penetration, Spellweave repeats
+	# spent Valor is a multiplier of its own (weapon effectiveness above 200% has steep diminishing returns, so a
+	# weapon bonus would barely register on these heavy blows)
+	if p.has("_valor") and float(p._valor) > 0.0:
+		req.more.append(["Valor x%d" % roundi(float(p._valor)), 1.0 + float(p.get("per_valor", 0.0)) / 100.0 * float(p._valor)])
+	if p.has("_charges") and not bool(p.get("_weave", false)):
+		var ch := float(p._charges)
+		if ch > 0.0:
+			req.more.append(["Arcane Charge spent x%d" % roundi(ch), 1.0 + float(p.get("per_charge", 0.0)) / 100.0 * ch])
+	if float(p.get("pen_extra", 0.0)) > 0.0:
+		req.pen_extra = clampf(float(p.pen_extra), 0.0, 0.5)
+	if bool(p.get("_weave", false)):
+		req.skill_mult *= clampf(float(p.get("_weave_mult", 0.55)), 0.0, 0.7)
+		req.label = "%s (Spellweave)" % skill.display_name
+	# a class signature weapon's bonus to one of its class's skills (DataTranscendenceGear; two copies at most +25%)
+	if caster.stats and caster.stats.has_flag(StringName("tskill_dmg_" + String(skill.id))):
+		req.more.append(["Signature weapon", 1.0 + minf(0.25, caster.stats.flag(StringName("tskill_dmg_" + String(skill.id))))])
+	if req.tags.get(&"finisher", false) and caster.stats and caster.stats.has_flag(&"pr_finisher"):
+		req.more.append(["Reaping Edge", 1.0 + DataTranscendence.cap(&"pr_finisher", caster.stats.flag(&"pr_finisher"))])
 	if caster.has_method(&"decorate_request"):
 		caster.decorate_request(req, skill)
 	return req
@@ -101,11 +126,26 @@ func _consume(p: Dictionary) -> void:
 		p["_pips"] = res.spend_all()
 	if float(p.get("consume_focus", 0.0)) > 0.0 and res.kind == &"focus":
 		p["_focus"] = res.spend_all()
+	if float(p.get("consume_valor", 0.0)) > 0.0 and res.kind == &"valor":
+		p["_valor"] = res.spend_all()
+		if caster.has_method(&"on_valor_spent"):
+			caster.on_valor_spent(float(p._valor))
+	if float(p.get("spend_charge", 0.0)) > 0.0 and res.kind == &"arcane":
+		p["_charges"] = res.spend_all()
+		if caster.has_method(&"on_charge_spent"):
+			caster.on_charge_spent(float(p._charges))
 
 ## Configure `action` so the skill's effects fire at the right moments. Returns false if the skill cannot start now.
 func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 	var aim: Vector3 = caster.aim_point
 	var dir: Vector3 = caster.aim_dir()
+	# Class Transcendence: an advanced class's skill runs only for a hero on that lineage (never a sibling master's or
+	# another family's, whatever ranks were forged)
+	var owner_hero = caster.get(&"hero")
+	if owner_hero is HeroData and DataTranscendence.owner_of(skill.id) != &"" and not ClassTranscendence.skill_allowed(owner_hero, skill.id):
+		return false
+	if skill.behavior == &"ground_aoe" and float(p.get("visible", 0.0)) > 0.0:
+		aim = TranscendSkills._visible_point(self, _ground_target(aim, float(p.get("range", 18.0))))
 	action.data["skill"] = skill.id
 	action.data["hits"] = {}
 	_consume(p)
@@ -205,11 +245,16 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 			action.on_release = func() -> void:
 				_mark(skill, p, at_m)
 		_:
-			push_warning("Unknown skill behaviour %s" % skill.behavior)
-			return false
+			if TranscendSkills.handles(skill.behavior):
+				if not TranscendSkills.setup(self, skill, p, action, aim):
+					return false
+			else:
+				push_warning("Unknown skill behaviour %s" % skill.behavior)
+				return false
 	# Clips without a release frame or hit window (Iron Bulwark's block_impact) would never fire on_release.
 	if action.on_release.is_valid() and action.release_t < 0.0:
 		action.release_t = minf(0.12, action.duration * 0.3)
+	var unwrapped_release := action.on_release
 	# Spell Echo (Mage passive): damaging spells may repeat themselves at half strength.
 	if skill.kind == DamageRequest.Kind.SPELL and action.on_release.is_valid() and caster.stats.has_flag(&"spell_echo") \
 			and skill.behavior in [&"projectile", &"ground_aoe", &"self_aoe", &"chain", &"wave", &"storm", &"orb"]:
@@ -224,7 +269,34 @@ func setup(skill: SkillDef, p: Dictionary, action: TimedAction) -> bool:
 					first_release.call()
 					p.erase("_echo")
 					FX.text_popup(caster.center() + Vector3.UP * 1.0, "Echo", Color(0.75, 0.6, 1.0), 0.8))
+	# Spellweave (Archmage): the next paid damaging spell repeats once, weaker. The repeat runs the raw release (no Echo),
+	# costs and refunds nothing, and cannot weave again.
+	if skill.kind == DamageRequest.Kind.SPELL and unwrapped_release.is_valid() and caster.status.has(&"spellweave") \
+			and skill.behavior in WEAVE_BEHAVIOURS and skill.mana_cost > 0.0:
+		var weave_mult := caster.status.magnitude(&"spellweave", 0.55)
+		caster.status.remove(&"spellweave")
+		var raw_release := unwrapped_release
+		var woven := action.on_release
+		action.on_release = func() -> void:
+			woven.call()
+			TranscendSkills.later(caster, 0.35, func() -> void:
+				if not caster.alive:
+					return
+				p["_weave"] = true
+				p["_weave_mult"] = weave_mult
+				raw_release.call()
+				p.erase("_weave")
+				FX.text_popup(caster.center() + Vector3.UP * 1.0, "Spellweave", Color(0.6, 0.8, 1.0), 0.8))
+	# a short buff on the caster as the skill starts (Warbound Advance, Gloom Veil, Phantom Crossing)
+	if p.has("self_status") and p.has("self_mods"):
+		var mods: Array = []
+		for m in p.self_mods:
+			mods.append(StatModifier.new(StringName(m[0]), int(m[1]) as StatModifier.Op, float(m[2]), skill.display_name))
+		caster.status.apply(StringName(p.self_status), float(p.get("self_dur", 2.0)), 1.0, 0.0, Elements.PHYSICAL, mods)
 	return true
+
+## Spells a Spellweave can repeat: one-shot damage (persistent areas, sentries and buffs would only replace themselves).
+const WEAVE_BEHAVIOURS := [&"projectile", &"ground_aoe", &"self_aoe", &"chain", &"wave", &"orb", &"gravity_pull", &"spike_tentacle", &"dark_arts"]
 
 # ---- Behaviours ---------------------------------------------------------------------------------------------
 
@@ -243,11 +315,19 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 	if float(p.get("max_targets", 0.0)) > 0.0:
 		victims.sort_custom(func(x, y): return x.global_position.distance_squared_to(caster.global_position) < y.global_position.distance_squared_to(caster.global_position))
 		victims = victims.slice(0, int(p.max_targets))
+	var secondary := float(p.get("secondary_mult", 1.0))
+	if secondary < 1.0:
+		victims.sort_custom(func(x, y): return x.global_position.distance_squared_to(caster.global_position) < y.global_position.distance_squared_to(caster.global_position))
+	var n_hit := 0
 	for a: Actor in victims:
 		if not action.mark_hit(0, a):
 			continue
 		var r := req.clone()
 		r.tags[&"push_dir"] = (a.global_position - caster.global_position).slide(Vector3.UP).normalized()
+		if n_hit > 0 and secondary < 1.0:
+			r.skill_mult *= secondary
+		target_bonuses(r, a, p)
+		n_hit += 1
 		_hit(skill, a, a.receive_hit(r, caster, a.center()))
 	if caster.stats.has_flag(&"cleave_wave") and skill.id == &"cleave":
 		var wreq := make_request(skill, p)
@@ -257,6 +337,13 @@ func _arc(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 		sw.trail_fx = func(pos: Vector3) -> void:
 			FX.spawn_facing(VFXLib.slash_arc(Color(0.6, 0.95, 1.0, 0.8), 1.6, 120.0, 0.6, 0.2, 0.5), pos, f)
 	Audio.play_at(skill.sound_hit if skill.sound_hit != &"" else &"swing_heavy", caster.global_position)
+
+## Class Transcendence bonuses that depend on the target: Marked (or Quarry-marked) and Bleeding enemies.
+func target_bonuses(r: DamageRequest, a: Actor, p: Dictionary) -> void:
+	if float(p.get("vs_marked_pct", 0.0)) > 0.0 and (a.status.has(&"marked") or a.status.has(&"quarry")):
+		r.more.append(["Marked", 1.0 + float(p.vs_marked_pct) / 100.0])
+	if float(p.get("vs_bleeding_pct", 0.0)) > 0.0 and a.status.has(&"bleeding"):
+		r.more.append(["Bleeding", 1.0 + float(p.vs_bleeding_pct) / 100.0])
 
 func _front_strike(skill: SkillDef, p: Dictionary, action: TimedAction) -> void:
 	var radius := float(p.get("radius", 1.6))
@@ -367,6 +454,13 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 	var from: Vector3 = caster.cast_point()
 	var req := make_request(skill, p)
 	req.tags[&"projectile"] = true
+	if caster.has_method(&"take_comet"):
+		var comet: float = caster.take_comet()
+		if comet > 0.0:
+			req.more.append(["Comet Step", 1.0 + comet])
+	var volley = {} if float(p.get("shared_hits", 0.0)) > 0.0 else null
+	if float(p.get("patch_radius", 0.0)) > 0.0:
+		_briar_patch(skill, p, _ground_target(caster.aim_point, float(p.get("range", 20.0))))
 	if p.has("ignite"):
 		req.direct_status[&"burning"] = float(p.ignite)
 	var st_keys := {"chill": &"chilled", "bleed": &"bleeding", "poison": &"poisoned", "shock_buildup": &"shocked"}
@@ -398,6 +492,9 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 		pr.radius = float(p.get("width", 0.35)) * 0.5 if p.has("width") else 0.35
 		pr.explode_radius = float(p.get("explode_radius", 0.0))
 		pr.hit_sound = skill.sound_hit
+		if volley != null:
+			pr.volley_hits = volley
+		pr.pierce_falloff = clampf(float(p.get("pierce_falloff", 1.0)), 0.0, 1.0)
 		pr.on_hit = func(a: Actor, res: DamageResult, pt: Vector3) -> void:
 			_hit(skill, a, res)
 		if pr.explode_radius > 0.0:
@@ -408,6 +505,13 @@ func _projectiles(skill: SkillDef, p: Dictionary) -> void:
 		if float(p.get("deflect", 0.0)) > 0.0:
 			_deflect_path(from, d, pr.max_range, float(p.get("width", 1.6)))
 	Audio.play_at(skill.sound_cast, from)
+
+## Briar Volley: a slowing patch at the aim. It slows only (no damage), so overlapping patches never add damage.
+func _briar_patch(skill: SkillDef, p: Dictionary, at: Vector3) -> void:
+	var h := AreaEffects.hazard(parent(), at, float(p.get("patch_radius", 3.0)), float(p.get("patch_dur", 4.0)), null, caster, mask(),
+		Color(0.4, 0.62, 0.32), 0.5)
+	h.status_id = &"slowed"
+	Net.share_skill_fx("tpatch", at, Vector3.ZERO, {"r": h.radius, "d": h.duration})
 
 ## Gale Burst destroys enemy projectiles along its path.
 func _deflect_path(from: Vector3, dir: Vector3, length: float, width: float) -> void:
@@ -428,6 +532,8 @@ func _self_aoe(skill: SkillDef, p: Dictionary) -> void:
 		req.direct_status[&"chilled"] = float(p.chill_direct)
 	if float(p.get("consume_charge", 0.0)) > 0.0 and caster.resource != null:
 		var charges: float = caster.resource.spend_all()
+		if caster.has_method(&"on_charge_spent"):
+			caster.on_charge_spent(charges)
 		req.more.append(["Arcane Surge charges", 1.0 + float(p.get("per_charge", 30.0)) / 100.0 * charges])
 		caster.restore_mana(float(p.get("mana_per_charge", 0.0)) * charges)
 	if float(p.get("pull", 0.0)) > 0.0:
@@ -435,8 +541,14 @@ func _self_aoe(skill: SkillDef, p: Dictionary) -> void:
 			var d := at - a.global_position
 			d.y = 0.0
 			a.apply_knockback(d.normalized(), clampf(d.length() * 2.5, 2.0, 14.0), caster.stats, caster)
-	for h in AreaEffects.burst(caster, at, radius, mask(), req, caster):
+	var dealt := 0
+	for h in AreaEffects.burst(caster, at, radius, mask(), req, caster, [], func(a: Actor, r: DamageRequest) -> void: target_bonuses(r, a, p)):
 		_hit(skill, h[0], h[1])
+		if h[1] != null and not (h[1] as DamageResult).evaded:
+			dealt += (h[1] as DamageResult).total
+	# Blood Eclipse: heal from the damage actually dealt, at most heal_cap of Maximum HP per cast
+	if float(p.get("heal_from_damage", 0.0)) > 0.0 and dealt > 0:
+		caster.heal(minf(float(dealt) * float(p.heal_from_damage), caster.max_hp() * clampf(float(p.get("heal_cap", 0.12)), 0.0, 0.25)))
 	FX.spawn(VFXLib.ring_wave(_elem_color(skill), radius, 0.5, 0.9), at)
 	FX.spawn(VFXLib.particles(_elem_color(skill), 40, 0.6, true, 0.5, 9.0, 90.0, Vector3.ZERO, 0.5), at + Vector3.UP * 0.6)
 	FX.spawn(VFXLib.light_flash(_elem_color(skill), 4.0, radius * 1.5, 0.3), at + Vector3.UP)
@@ -617,6 +729,8 @@ func _judgment(skill: SkillDef, p: Dictionary) -> void:
 	var valor := 0.0
 	if caster.resource != null:
 		valor = caster.resource.spend_all()
+		if caster.has_method(&"on_valor_spent"):
+			caster.on_valor_spent(valor)
 	var req := make_request(skill, p)
 	req.weapon_mult += float(p.get("per_valor", 3.0)) / 100.0 * valor
 	var f: Vector3 = caster.forward()

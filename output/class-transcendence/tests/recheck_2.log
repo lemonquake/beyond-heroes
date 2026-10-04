@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_class_rework.gd — 12 tests, 77 checks, 1 failures (4312.7 ms)
+[FAIL] test_skills.gd — 11 tests, 3519 checks, 1 failures (55963.9 ms)
+  FAIL test_class_rework.test_orb_and_sentinel_keep_elevation_and_manual_aim: manual aim overrides an older hovered enemy
+  FAIL test_skills.test_cast_every_shadowblade_skill: shadowblade: shadow_step damaged a target in front (9420 -> 9420)
+TOTAL: 3596 checks, 2 failures
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

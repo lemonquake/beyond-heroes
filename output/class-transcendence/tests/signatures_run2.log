@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DBG stealth=false alive=true fp=true pres=0.0 vis=false
+[FAIL] test_transcendence_signatures.gd — 17 tests, 389 checks, 5 failures (1489.3 ms)
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: the collapse strikes enemies around the fallen
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: and pulls them in
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: at most once every 2 s — expected 1, got 0
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: weapon kills never collapse — expected 1, got 0
+  FAIL test_transcendence_signatures.test_marks_hide_and_clean_up: shown again
+TOTAL: 389 checks, 5 failures
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

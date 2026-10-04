@@ -31,7 +31,7 @@ func _init() -> void:
 	for st in DataItems.sets():
 		item_sets[st.id] = st
 	licenses = DataItems.licenses()
-	for s in DataSkills.skills():
+	for s in DataSkills.skills() + DataTranscendenceSkills.skills():
 		skills[s.id] = s
 	for t in [DataSkills.knight_tree(), DataSkills.mage_tree(), DataTalents.knight(), DataTalents.mage(),
 			DataSkillsExt.ranger_tree(), DataSkillsExt.shadowblade_tree(), DataTalentsExt.ranger(), DataTalentsExt.shadowblade()]:

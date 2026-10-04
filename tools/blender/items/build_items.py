@@ -31,6 +31,7 @@ import artisan_weapons as AW  # noqa: E402
 import item_gear as IG  # noqa: E402
 import item_goods as IGo  # noqa: E402
 import item_crystals as IC  # noqa: E402  (bh-018 socket crystals; not in items.json)
+import transcend_items  # noqa: E402,F401  (Class Transcendence pieces: registers their specs)
 
 sys.path.insert(0, K.CHARS)
 from build import export_glb, reset  # noqa: E402

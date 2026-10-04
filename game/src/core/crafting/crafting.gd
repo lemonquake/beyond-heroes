@@ -104,7 +104,7 @@ static func pick_base(hero: HeroData, r: Dictionary, variant: int, rng: RandomNu
 		return null
 	# the best tier the hero can wear: bases within 4 levels of the highest requirement found
 	pool = pool.filter(func(b): return b.level_req >= best - 4)
-	var mine := pool.filter(func(b): return b.class_hint == hero.cls.id)
+	var mine := pool.filter(func(b): return b.class_hint == hero.cls.id and ClassRequirements.allows(b, hero))
 	if not mine.is_empty():
 		pool = mine
 	pool.sort_custom(func(a, b): return String(a.id) < String(b.id))

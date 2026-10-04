@@ -45,7 +45,7 @@ func _write_back() -> void:
 
 func _ensure_infinite_stock(hero: HeroData) -> void:
 	for f in def.fixed:
-		if not f.get("infinite", false) or hero.progress.level < int(f.get("level_min", 1)):
+		if not f.get("infinite", false) or hero.progress.level < int(f.get("level_min", 1)) or not _class_ok(f, hero):
 			continue
 		var base_id := StringName(f.base)
 		var present := false
@@ -57,6 +57,14 @@ func _ensure_infinite_stock(hero: HeroData) -> void:
 			var it := DB.make_item(base_id, int(f.get("rarity", BH.Rarity.COMMON)), hero.progress.level, hash(base_id) | 1)
 			if it:
 				stock.append({"item": it, "infinite": true, "special": ""})
+
+## Class Transcendence: a fixed entry marked `requires_class` is stocked only for heroes whose class may wear it (the
+## Grand Master's armory shows each hero their own class's pieces).
+static func _class_ok(f: Dictionary, hero: HeroData) -> bool:
+	if not bool(f.get("requires_class", false)):
+		return true
+	var b := DB.item_base(StringName(f.base))
+	return b != null and ClassRequirements.allows(b, hero)
 
 func refresh_due(hero: HeroData) -> bool:
 	if def.restock_on_clears:
@@ -86,7 +94,7 @@ func generate(hero: HeroData) -> void:
 	rng.seed = hash("%s|%d|%s" % [def.id, refresh_index, hero.hero_name])
 	stock.clear()
 	for f in def.fixed:
-		if lvl < int(f.get("level_min", 1)):
+		if lvl < int(f.get("level_min", 1)) or not _class_ok(f, hero):
 			continue
 		var it := DB.make_item(StringName(f.base), int(f.get("rarity", BH.Rarity.COMMON)), lvl, rng.randi() | 1)
 		if it:
@@ -118,7 +126,7 @@ func _child_rng(rng: RandomNumberGenerator) -> RandomNumberGenerator:
 func _pool_base(p: Dictionary, lvl: int, rng: RandomNumberGenerator, hero: HeroData) -> ItemBaseDef:
 	var cats: Array = p.get("categories", [])
 	var wtypes: Array = p.get("weapon_types", [])
-	var hint: StringName = hero.cls.id if p.get("class_hint", false) else &""
+	var hint: StringName = ClassTranscendence.current_class_id(hero) if p.get("class_hint", false) else &""
 	for attempt in 16:
 		var b := ItemGenerator.random_base(rng, lvl, cats, hint)
 		if b == null:

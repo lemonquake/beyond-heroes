@@ -230,6 +230,7 @@ func _begin(cls: StringName) -> void:
 	_player.bind(Game.hero)
 	Engine.time_scale = 3.0
 	await _frames(2)
+	_player.first_person = false         # the player's own camera setting (settings.cfg) turns it on after spawning
 
 func _end() -> void:
 	Engine.time_scale = float(_saved.get("ts", 1.0))

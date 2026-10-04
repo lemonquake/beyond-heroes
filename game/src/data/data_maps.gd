@@ -76,7 +76,7 @@ static func interiors() -> Array:
 	var out := []
 	for d in [
 		[&"int_tavern", "The Salted Marlin", "Tavern and inn", &"dirt", "Rest here for a fee: you wake fully restored and Well Rested."],
-		[&"int_guildhouse", "The Guild House", "Swordfin and Lantern job boards", &"stone", "Both guilds keep a counter here. Register with one, then take its jobs from the board: miniquests that pay gold."],
+		[&"int_guildhouse", "The Guild House", "Swordfin and Lantern job boards", &"stone", "Both guilds keep a counter here. Register with one, then take its jobs from the board: miniquests that pay gold. Grand Master Edran Vale, by the west wall, teaches class advancement."],
 		[&"int_swordfin", "Swordfin Hall", "The Swordfin Company", &"stone", "Strike first. Strike true. Register with Quartermaster Dax to join the Company."],
 		[&"int_lantern", "Lantern House", "The Lantern Covenant", &"stone", "We keep the light between things. Scribe Lio keeps the Covenant's register."],
 		[&"int_netmender", "The Net-mender's House", "Home of Tessaly Grane", &"dirt", "Fishers of Malasugue read the tides the way heroes read the Aether."],

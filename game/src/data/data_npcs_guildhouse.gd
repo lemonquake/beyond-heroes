@@ -7,7 +7,46 @@ const CHAR := "res://assets/characters/%s.glb"
 const IDLES := [&"idle", &"idle_look", &"idle_adjust"]
 
 static func build() -> Array:
-	return [_hollis(), _bram(), _sabeth()]
+	return [_hollis(), _bram(), _sabeth(), grand_master(&"grand_master_edran", &"int_guildhouse", GRAND_MASTER_SPOT, 90.0)]
+
+## Class Transcendence: where Grand Master Edran Vale stands in the Guild House (west of the benches, clear of the
+## steward's table, the doors, the counters and the walkways).
+const GRAND_MASTER_SPOT := Vector3(-8.6, 0, 2.8)
+
+## A Grand Master: the public Class Transcendence service (no guild, rank, quest, gold or item asked). Any Guild House
+## map can place one with its own id and spot; the services and the conversation are the same everywhere.
+static func grand_master(id: StringName, map: StringName, pos: Vector3, yaw: float) -> NpcDef:
+	var n := NpcDef.make(id, "Edran Vale", {"title": "Grand Master", "portrait": PORTRAIT % "keeper", "map": map,
+		"position": pos, "yaw": yaw, "model": CHAR % "matron", "tint": Color(0.62, 0.58, 0.48), "idle_anims": IDLES,
+		"services": [&"transcend"], "shop": &"grand_master_armory",
+		"graph": {
+			"entries": [[[{"not_visited": "first"}], "first"], [[], "hub"]],
+			"nodes": {
+				"first": {"text": [
+						"I am **Edran Vale**, Grand Master of this House. Knights, Hunters, Mages and Shadowblades come to me when their training has carried them as far as it can.",
+						"At **level 60** I can teach you your **first advancement**. At **level 120** you choose one of **two master classes**. You keep everything you have learned; you gain three new skills and three new talents each time.",
+						"You need no guild seal, no rank and no gold for this. Only the level."],
+					"next": "hub"},
+				"hub": {"text": "What do you need, {hero}?",
+					"choices": [
+						{"text": "Advancement. Show me my Class.", "next": "end", "actions": [{"service": "transcend"}]},
+						{"text": "Show me the armory.", "next": "end", "actions": [{"open_shop": "grand_master_armory"}]},
+						{"text": "How does advancing work?", "next": "how"},
+						{"text": "Is a master choice permanent?", "next": "permanent"},
+						_end("Thank you, Grand Master."),
+					]},
+				"how": {"text": [
+						"Each advancement adds a page to your Skills and to your Talents: three skills and three talents, each already at level 1. Further levels cost points as usual.",
+						"Your skill bar is never rearranged. New skills go into empty slots; the rest wait in your Skills window.",
+						"If you reached level 120 without advancing, you may take both advancements here, one after the other."],
+					"next": "hub"},
+				"permanent": {"text": [
+						"Yes. A master class is chosen once. Resetting skills or talents does not change it.",
+						"I will show you both masters side by side, and you confirm before anything is written down."],
+					"next": "hub"},
+			},
+		}})
+	return n
 
 static func _end(text := "Farewell.") -> Dictionary:
 	return {"text": text, "next": "end"}
@@ -44,6 +83,7 @@ static func _hollis() -> NpcDef:
 						{"text": "Tell me about the Swordfin Company.", "next": "swordfin"},
 						{"text": "Tell me about the Lantern Covenant.", "next": "lantern"},
 						{"text": "Which guild should I choose?", "next": "choose"},
+						{"text": "Who teaches class advancement?", "next": "grand_master"},
 						_end("Thank you, steward."),
 					]},
 				"found": {"text": [
@@ -71,6 +111,8 @@ static func _hollis() -> NpcDef:
 				"swordfin": {"text": "Steel work. Culling, camps, elites and champions. **Bram Ostler** keeps their counter, on the left. The Company posts what it needs killed and pays promptly.",
 					"next": "hub"},
 				"lantern": {"text": "Legwork and care. Herbs, surveys, ledgers carried to other towns, things made rather than bought. **Sabeth Wynn** keeps their counter, on the right. The Covenant pays less per hour and asks fewer of you to bleed.",
+					"next": "hub"},
+				"grand_master": {"text": "**Grand Master Edran Vale**, by the west wall. Any hero of level 60 or more may ask him; you need no guild for it. Advancement gives you new skills and talents and keeps everything you have.",
 					"next": "hub"},
 				"choose": {"text": [
 						"Swordfin if you want to stand in front: physical and impact damage, cheaper steel at Brannoc's forge and better bounty gold from elites.",

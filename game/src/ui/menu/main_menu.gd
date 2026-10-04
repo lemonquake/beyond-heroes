@@ -401,9 +401,9 @@ static func slot_card(s: int, on_load: Callable, on_delete: Callable, action_tex
 	if sum.is_empty():
 		v.add_child(UITheme.label("Slot %d — Empty" % (s + 1), 20, UITheme.TEXT_MUTED, UITheme.title_font()))
 	else:
-		var cls := DB.class_def(StringName(sum["class"]))
+		var cls_id := ClassTranscendence.class_of_save(sum.get("hero", {}))
 		var md := DB.map_def(StringName(sum["map"]))
-		v.add_child(UITheme.label("%s — Level %d %s" % [sum["name"], sum["level"], cls.display_name if cls else sum["class"]], 20, UITheme.PARCHMENT, UITheme.title_font()))
+		v.add_child(UITheme.label("%s — Level %d %s" % [sum["name"], sum["level"], ClassTranscendence.class_name_of(cls_id) if cls_id != &"" else sum["class"]], 20, UITheme.PARCHMENT, UITheme.title_font()))
 		var when := Time.get_datetime_string_from_unix_time(int(sum["saved_at"]), true)
 		v.add_child(UITheme.label("%s · %s · saved %s" % [md.display_name if md else sum["map"], PauseMenu._time(float(sum["play_time"])), when],
 			15, UITheme.TEXT_DIM, UITheme.body_font()))

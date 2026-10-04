@@ -27,9 +27,9 @@ static func _later(node: Node, t: float, fn: Callable) -> void:
 		return
 	if not is_instance_valid(node) or not node.is_inside_tree():
 		return
-	node.get_tree().create_timer(t, false).timeout.connect(func() -> void:
-		if is_instance_valid(node):
-			fn.call())
+	# a Timer owned by the node: freed with it, so a freed caster never reaches the callback (a scene-tree timer's
+	# lambda used to fire with the node already gone and log "Lambda capture ... was freed")
+	TranscendSkills.later(node, t, fn)
 
 ## Called when a skill starts (after it was paid). `a` is null for channels (Whirlwind).
 static func cast(caster: Actor, skill: SkillDef, a: TimedAction) -> void:

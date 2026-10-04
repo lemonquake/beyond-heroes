@@ -334,6 +334,7 @@ func test_orb_and_sentinel_keep_elevation_and_manual_aim() -> void:
 			ok(child.velocity.y > 0.0, "Flame Sentinel aims at the elevated target")
 	ok(found, "sentinel fires at visible target")
 	Game.hover_target = a
+	player.first_person = false          # the player's own camera setting (settings.cfg) turns it on after spawning
 	player.aim_point = Vector3(-10, 0, 0)
 	ok(player.projectile_dir().x < 0.0, "manual aim overrides an older hovered enemy")
 	Game.hover_target = null

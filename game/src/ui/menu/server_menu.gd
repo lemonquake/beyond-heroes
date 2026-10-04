@@ -826,7 +826,8 @@ func _show_characters() -> void:
 		tv.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(tv)
 		tv.add_child(UITheme.label(String(character.get("name", "Hero")), _fs(26), UITheme.PARCHMENT, UITheme.body_bold()))
-		tv.add_child(UITheme.label("Level %d %s" % [int(character.get("level", 1)), String(character.get("class", "")).capitalize()], _fs(18), UITheme.GOLD, UITheme.body_font()))
+		var ccls := ClassTranscendence.peer_class_id(StringName(String(character.get("class", "knight")).to_lower()), int(character.get("level", 1)), String(character.get("path", "")))
+		tv.add_child(UITheme.label("Level %d %s" % [int(character.get("level", 1)), ClassTranscendence.class_name_of(ccls)], _fs(18), ClassTranscendence.label_color(ccls), UITheme.body_font()))
 		tv.add_child(UITheme.label(String(character.get("map", "")).capitalize(), _fs(16), UITheme.TEXT_DIM, UITheme.body_font()))
 		var go := UITheme.label("Play  ›", _fs(22), OFFICIAL_COLOR, UITheme.body_bold())
 		go.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT

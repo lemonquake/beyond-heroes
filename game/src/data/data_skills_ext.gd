@@ -305,7 +305,7 @@ static func mage_nodes() -> Array:
 static func ranger_tree() -> TreeDef:
 	var t := TreeDef.new()
 	t.id = &"ranger_skills"
-	t.display_name = "Ranger Skills"
+	t.display_name = "Hunter Skills"
 	t.points_kind = &"skill"
 	t.pages = [{"name": "Techniques", "desc": "Bow shots, traps and tricks."}, {"name": "Instincts", "desc": "Passive skills: always on."}]
 	t.branches = [{"name": "Marksman", "x": 1.0, "color": Color(0.55, 0.85, 0.45)}, {"name": "Wildcraft", "x": 4.0, "color": Color(0.9, 0.6, 0.3)},

@@ -31,6 +31,9 @@ var arena_fighter := false            # bh-028: an adventurer of the Sand Arena,
 var _arena_hostile := false
 
 var appearance_rev := -1            # Net: which received appearance this avatar last dressed in (bh-035)
+## Class Transcendence: the current class shown in the class line under the name (and its trait bursts), derived from the
+## roster's family + path + level (Net.peer_class_id). Rebuilt only when it changes.
+var class_id: StringName = &""
 
 func _init() -> void:
 	team = BH.Team.PLAYER
@@ -132,6 +135,9 @@ func _ready() -> void:
 	_bar.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(_bar)
 	_refresh_tag()
+	if is_hero and not arena_fighter:
+		Net.peers_changed.connect(_refresh_tag)
+		Net.roster_updated.connect(_refresh_tag)
 
 func rebuild_stats() -> void:
 	stats = DerivedStats.new()
@@ -178,6 +184,7 @@ func set_appearance(app: Dictionary) -> void:
 		var dye = app.get("dye", {})
 		visual.set_dyes(dye if dye is Dictionary else {})
 	visual.dress_equipment(equipment)
+	_sync_class_fx()
 	if app.has("stance"):
 		visual.set_stance(StringName(app.stance))
 
@@ -257,8 +264,14 @@ func _refresh_tag() -> void:
 	if is_hero:
 		_tag.text = ("◆ %s ◆" % display_name) if alive else ("◆ %s · Fallen ◆" % display_name)
 		if _sub:
-			var cls := DB.class_def(StringName(p.get("cls", "")))
-			_sub.text = "Level %d %s · %s%s" % [level, cls.display_name if cls else "Hero", p.get("device", "PC"), " · Host" if owner_peer == 1 else ""]
+			# the class line keeps its place under the name; only its words (and colour, for an advanced class) change
+			var cid := Net.peer_class_id(owner_peer) if not arena_fighter else StringName(String(p.get("cls", "")))
+			_sub.text = "Level %d %s · %s%s" % [level, ClassTranscendence.class_name_of(cid), p.get("device", "PC"), " · Host" if owner_peer == 1 else ""]
+			if cid != class_id:
+				class_id = cid
+				_sub.modulate = ClassTranscendence.label_color(cid)
+				_sub.outline_modulate = Color(0.04, 0.03, 0.05, 0.95)
+				_sync_class_fx()
 	elif arena_fighter:
 		_tag.text = "%s  Lv %d (Sand Arena)" % [display_name, level]
 		_tag.modulate = ArenaFighter.TAG_COLOR
@@ -266,6 +279,12 @@ func _refresh_tag() -> void:
 		_tag.text = "%s (%s · %s)" % [display_name, guild_tag, p.get("name", "Ally")]
 	else:
 		_tag.text = "%s (%s's Tempo)" % [display_name, p.get("name", "Ally")]
+
+## The trait node of another player's hero (it draws their trait bursts), rebuilt only when the class changes.
+func _sync_class_fx() -> void:
+	if not is_hero or arena_fighter or visual == null:
+		return
+	ClassSignature.sync(self, DataTranscendence.ancestry(class_id), true)
 
 func _process(delta: float) -> void:
 	if _ring:

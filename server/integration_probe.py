@@ -48,7 +48,7 @@ def main():
     parser.add_argument("--godot", type=Path, required=True)
     parser.add_argument("--coordinator", type=Path,
                         help="An exported dedicated-server build to run as the coordinator (tools/export_server.py); clients still use --godot")
-    parser.add_argument("--stages", default="all", help="comma list of: capacity,restart,custom,world,version,hostile,bandwidth (default all except bandwidth)")
+    parser.add_argument("--stages", default="all", help="comma list of: capacity,restart,custom,world,version,hostile,bandwidth,transcend (default all except bandwidth and transcend)")
     parser.add_argument("--allow-log-errors", action="store_true", help="report log problems without failing (diagnosis only)")
     args = parser.parse_args()
     wanted = {"capacity", "restart", "custom", "world", "version", "hostile"} if args.stages == "all" else set(args.stages.split(","))
@@ -208,6 +208,32 @@ def main():
                                 rows.append(line)
                 (output / "bandwidth-summary.txt").write_text(chr(10).join(rows) + chr(10), encoding="utf-8")
                 passed("bandwidth", "per-client traffic measured with 2, 4 and 6 heroes on one map (see bandwidth-summary.txt)", ("bandwidth-", "dedicated"))
+
+            if "transcend" in wanted:
+                # Class Transcendence: two windowed clients; B joins late, sees each class only after A's save is acknowledged,
+                # changes map and reconnects; A's forged sibling switch is refused (screenshots in output/class-transcendence/official)
+                shots = root / "output/class-transcendence/official"
+                shots.mkdir(parents=True, exist_ok=True)
+                for old in (shots / "marks").glob("*") if (shots / "marks").exists() else []:
+                    old.unlink()
+                def windowed(role):
+                    return spawn([godot, "--resolution", "960x540", "--path", str(root / "game"), "res://tests/tools/net_probe_transcend_official.tscn",
+                                  "--", "--role=" + role, "--userid=tc_%s_%d" % (role, int(time.time()) % 100000), "--out=" + str(shots),
+                                  "--certificate=" + source["certificate"]], "transcend-" + role)
+                pair = [windowed("a")]
+                time.sleep(4.0)
+                pair.append(windowed("b"))
+                finish(pair, 600, "Class Transcendence official probe failed")
+                logs = {r: (output / ("transcend-%s.log" % r)).read_text(encoding="utf-8", errors="replace") for r in "ab"}
+                ack = int(re.search(r"TCO\[a\] ACK grand_paladin (\d+)", logs["a"]).group(1))
+                local = int(re.search(r"TCO\[a\] LOCAL grand_paladin (\d+)", logs["a"]).group(1))
+                seen = int(re.search(r"TCO\[b\] SEEN grand_paladin (\d+)", logs["b"]).group(1))
+                assert seen >= ack, "B saw Grand Paladin %d ms before the server acknowledged A's save" % (ack - seen)
+                (shots / "timing.txt").write_text(
+                    "A advanced locally at %d, server acknowledged at %d (+%d ms), B first saw it at %d (+%d ms after the acknowledgement)" % (local, ack, ack - local, seen, seen - ack) + chr(10),
+                    encoding="utf-8")
+                passed("transcend", "official class advancement: late join, shown only after the acknowledged save (+%d ms), map change, reconnect, forged switch refused" % (seen - ack),
+                       ("transcend-", "dedicated"))
 
             if "version" in wanted:
                 old = [client("res://tests/tools/net_probe_world.tscn", ["--scenario=version", "--userid=version_a"], "version-a")]

@@ -119,7 +119,22 @@ func continue_game(slot: int) -> bool:
 	difficulty = h.difficulty
 	await _begin_session(h.current_map, h.current_spawn)
 	_rebalance_notice(h)
+	transcend_notice(h)
 	return true
+
+## Class Transcendence, once per load: what loading repaired (a damaged advancement record, gear that did not fit the
+## class) and, for a hero who may advance (an old save above level 60 or 120 included), where to go.
+func transcend_notice(h: HeroData) -> void:
+	if h == null:
+		return
+	if h.transcend_note != "":
+		Events.notify.emit("Class record repaired: %s" % h.transcend_note, &"error")
+		h.transcend_note = ""
+	if h.gear_note != "":
+		Events.notify.emit(h.gear_note, &"info")
+		h.gear_note = ""
+	if ClassTranscendence.available_steps(h) > 0:
+		Events.notify.emit("Class advancement available (level %d). Visit the Grand Master in the Guild House." % ClassTranscendence.next_level(h), &"discovery")
 
 ## bh-027: an old save was brought up to the survival rebalance on load: say so once, with the new pools.
 func _rebalance_notice(h: HeroData) -> void:

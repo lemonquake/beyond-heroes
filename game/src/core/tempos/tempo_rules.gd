@@ -167,6 +167,8 @@ static func equip_error(hero: HeroData, t: TempoData, item: ItemInstance, slot: 
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
 	if not DataSpecialWeapons.can_wear(item.base, t.class_id):
 		return DataSpecialWeapons.wearers_text(item.base)
+	if not ClassRequirements.tempo_allows(item.base):
+		return "%s; not for Tempos" % ClassRequirements.text(item.base)
 	if not item.unbound and hero.progress.level < item.required_level():
 		return "Requires level %d" % item.required_level()
 	if item.unbound:

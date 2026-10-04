@@ -104,6 +104,15 @@ var _aura_ring: MeshInstance3D
 var _second_wind_cd := 0.0
 var _cast_serial := 0
 var _combo_cast := -1
+# Class Transcendence talent timers (internal cooldowns)
+var _tyrant_cd := 0.0
+var _shelter_cd := 0.0
+var _rhythm_cd := 0.0
+var _block_valor_t := -99.0
+var _comet_rhythm_t := -99.0
+var _was_stealthed := false
+## Class Transcendence signature traits (ClassSignature; null before the first advancement).
+var signature: ClassSignature
 
 func _ready() -> void:
 	super._ready()
@@ -153,6 +162,7 @@ func bind(h: HeroData) -> void:
 	visual.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else h.cls.model_path, 1.0, h.cls.tint, h.cls.id)
 	visual.set_look(h.look)
 	refresh_equipment_visuals()
+	refresh_class_look()
 	mark_stats_dirty()
 	ensure_stats()
 	hp = max_hp()
@@ -186,6 +196,9 @@ func _on_level_up(new_level: int, gained: int) -> void:
 	FX.spawn(VFXLib.ring_wave(Color(1.0, 0.85, 0.4, 0.9), 4.0, 0.9, 0.8), global_position)
 	FX.spawn(VFXLib.beam_flash(Color(1.0, 0.85, 0.45), 6.0, 0.9, 1.4), global_position)
 	FX.text_popup(center() + Vector3.UP * 0.8, "Level %d" % new_level, UITheme.GOLD, 1.5)
+	# Class Transcendence: crossing level 60 or 120 opens an advancement (it is never taken automatically)
+	if ClassTranscendence.eligible_steps_at(new_level) > ClassTranscendence.eligible_steps_at(new_level - gained) and ClassTranscendence.available_steps(hero) > 0:
+		Events.notify.emit("Class advancement available. Visit the Grand Master in the Guild House to choose it.", &"discovery")
 
 func refresh_equipment_visuals() -> void:
 	if visual == null or hero == null:
@@ -261,10 +274,15 @@ func rebuild_stats() -> void:
 	level = hero.progress.level
 	if resource:
 		match resource.kind:
-			&"arcane": resource.set_max(stats.get_stat(&"arcane_max", 5.0))
+			&"arcane":
+				resource.set_max(stats.get_stat(&"arcane_max", 5.0))
+				resource.decay_delay_bonus = DataTranscendence.cap(&"ar_charge_linger", stats.flag(&"ar_charge_linger"))   # Charge Discipline
 			&"combo":
 				resource.set_max(stats.get_stat(&"combo_max", ClassResource.COMBO_MAX))
-				resource.decay_delay_bonus = stats.flag(&"combo_linger")
+				resource.decay_delay_bonus = minf(ClassResource.COMBO_LINGER_CAP, stats.flag(&"combo_linger"))
+			&"focus":
+				resource.set_max(100.0)
+				resource.decay_mult = 1.0 - DataTranscendence.cap(&"ss_focus_hold", stats.flag(&"ss_focus_hold"))      # Steady Constellation
 			_: resource.set_max(100.0)
 	if mana > max_mana():
 		mana = max_mana()
@@ -516,6 +534,10 @@ func _tick_timers(delta: float) -> void:
 	_riposte_t = maxf(0.0, _riposte_t - delta)
 	_pulse_cd = maxf(0.0, _pulse_cd - delta)
 	_shockwave_cd = maxf(0.0, _shockwave_cd - delta)
+	_tyrant_cd = maxf(0.0, _tyrant_cd - delta)
+	_shelter_cd = maxf(0.0, _shelter_cd - delta)
+	_rhythm_cd = maxf(0.0, _rhythm_cd - delta)
+	_transcend_tick()
 	_combat_t += delta
 	if _haste_t > 0.0:
 		_haste_t -= delta
@@ -799,6 +821,8 @@ func _weapon_request(a: TimedAction, heavy: bool, mult: float) -> DamageRequest:
 	req.tags[&"weapon"] = true
 	req.tags[&"attack_id"] = a.get_instance_id()
 	decorate_request(req, null)
+	if signature:
+		signature.weapon_request(req, a, wt != null and wt.ranged)
 	return req
 
 func _melee_window(a: TimedAction, w: int, first: bool) -> void:
@@ -812,8 +836,9 @@ func _melee_window(a: TimedAction, w: int, first: bool) -> void:
 		reach *= 1.1
 		arc = minf(arc * 1.2, 220.0)
 	if first:
-		visual.set_trail(true, wt.trail_color if wt else Color(1, 1, 1, 0.5), wt.length if wt else 1.0)
-		var c := Color(1.0, 0.95, 0.85, 0.75)
+		var sig_c := ClassSignature.swing_color(ClassTranscendence.lineage(hero)) if signature else Color(0, 0, 0, 0)
+		visual.set_trail(true, sig_c if sig_c.a > 0.0 else (wt.trail_color if wt else Color(1, 1, 1, 0.5)), wt.length if wt else 1.0)
+		var c := sig_c if sig_c.a > 0.0 else Color(1.0, 0.95, 0.85, 0.75)
 		if stats.loadout.elem_share_for(int(a.data.get("hand", 0))) > 0.0:
 			c = Elements.color(stats.loadout.element_for(int(a.data.get("hand", 0))))
 			c.a = 0.8
@@ -909,6 +934,9 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 	var req := _weapon_request(a, heavy, mult)
 	req.tags[&"projectile"] = true
 	_apply_attack_powers(req, a)
+	var comet := take_comet()
+	if comet > 0.0:
+		req.more.append(["Comet Step", 1.0 + comet])
 	var el := stats.loadout.element_for(int(a.data.get("hand", 0)))
 	var look := "bolt" if wt.id == &"crossbow" else ("arrow" if wt.id == &"bow" else "orb")
 	if wt.id == &"javelin":
@@ -923,6 +951,8 @@ func _fire_weapon_projectile(a: TimedAction, heavy: bool, mult: float) -> void:
 		pr.pierce = 2
 	if stats.has_flag(&"pierce_chance") and randf() < stats.flag(&"pierce_chance"):
 		pr.pierce += 1
+	if signature and req.tags.has(&"sig_shoot"):
+		signature.shooting_star(pr, cast_point(), projectile_dir(), wt.reach)
 	if (heavy and wt.id == &"staff") or (a.data.get("finisher", false) and wt.id == &"staff"):
 		pr.explode_radius = 2.2
 		pr.on_end = func(pt: Vector3, _w: bool) -> void:
@@ -1027,6 +1057,13 @@ func _start_dodge() -> void:
 		mark_stats_dirty()
 	if stats.has_flag(&"dodge_stealth"):
 		status.apply(&"stealth", stats.flag(&"dodge_stealth"))   # bh-028: Phantom Veil (the flag was never read)
+	# Untouchable Rhythm (Phantom Reaper): a dodge gives a brief Evasion boost, once every 6 s
+	if stats.has_flag(&"pr_rhythm") and _rhythm_cd <= 0.0:
+		_rhythm_cd = 6.0
+		var ev := DataTranscendence.cap(&"pr_rhythm", stats.flag(&"pr_rhythm"))
+		status.apply(&"untouchable_rhythm", 1.5, ev, 0.0, Elements.PHYSICAL, [StatModifier.more(&"evasion", ev, "Untouchable Rhythm")])
+	if signature:
+		signature.on_dodge()
 	chain_step = 0
 
 # ---- Guard ------------------------------------------------------------------------------------------------------
@@ -1073,7 +1110,10 @@ func mana_cost(sid: StringName) -> float:
 		return 0.0
 	if resource and stats.has_flag(&"arcane_free") and resource.is_overcharged():
 		return 0.0
-	var c := s.mana_at(hero.skill_rank(sid)) * (1.0 - stats.get_stat(&"mana_cost_reduction"))
+	var full := s.mana_at(hero.skill_rank(sid))
+	var c := full * (1.0 - minf(MANA_COST_REDUCTION_CAP, stats.get_stat(&"mana_cost_reduction")))
+	if stats.has_flag(&"ar_mana_eff"):          # Runic Efficiency (Arcanist): its own share, never below half the cost
+		c = maxf(full * (1.0 - MANA_COST_REDUCTION_CAP), c * (1.0 - DataTranscendence.cap(&"ar_mana_eff", stats.flag(&"ar_mana_eff"))))
 	if resource:
 		c *= resource.mana_cost_mult()
 	return maxf(0.0, c)
@@ -1144,6 +1184,11 @@ func _pay_skill(s: SkillDef) -> void:
 	var paid := mana_cost(s.id)
 	if spend_mana(paid):
 		class_passives.refund(s, paid)
+		set_meta(&"last_paid_mana", paid)      # Mana Ward sizes its barrier from what was actually paid
+		if signature:
+			signature.on_spell_paid(s, paid)
+	else:
+		set_meta(&"last_paid_mana", 0.0)
 	var cd := skill_cooldown(s.id) if not Game.debug_no_cooldowns else 0.0
 	if cd > 0.0:
 		cooldowns[s.id] = cd
@@ -1456,6 +1501,7 @@ func consume_item(item: ItemInstance) -> bool:
 		potion_cd = POTION_COOLDOWN
 	var potion := 1.0 + stats.get_stat(&"potion_power")
 	var heal_mult := (1.0 + stats.get_stat(&"healing") + GuildRules.potion_healing_bonus(hero)) * potion
+	heal_mult *= 1.0 + DataTranscendence.cap(&"potion_heal", stats.flag(&"potion_heal"))     # Verdant Reserve
 	if fx.get("instant", 0.0) > 0.0:
 		heal(max_hp() * float(fx.get("heal", 0.0)) * heal_mult)
 		restore_mana(max_mana() * float(fx.get("mana", 0.0)) * potion)
@@ -1786,6 +1832,12 @@ func _on_blocked(result: DamageResult, attacker: Node) -> void:
 	var gain := 15.0 if result.perfect_block else 8.0
 	if status.has(&"bulwark"):
 		gain *= 2.0
+	# Guardian's Resolve (Royal Guard): a little extra Valor per block, at most once every 0.5 s
+	if stats.has_flag(&"rg_block_valor") and _time - _block_valor_t >= 0.5:
+		_block_valor_t = _time
+		gain += DataTranscendence.cap(&"rg_block_valor", stats.flag(&"rg_block_valor"))
+	if signature:
+		signature.on_block()
 	if resource and resource.kind == &"valor":
 		resource.gain(gain, 1.0 + stats.get_stat(&"valor_gain"))
 	visual.play_reaction(&"parry" if result.perfect_block else &"block")
@@ -1841,6 +1893,59 @@ func _on_blocked(result: DamageResult, attacker: Node) -> void:
 		FX.spawn(VFXLib.ring_wave(Color(0.55, 0.98, 1.0, 0.95), 4.0, 0.5, 0.9), global_position)
 		Audio.play_at(&"arcane_surge", global_position)
 
+# ---- Class Transcendence hooks --------------------------------------------------------------------------------------
+
+## Most Mana cost reduction can achieve: a spell always costs at least half.
+const MANA_COST_REDUCTION_CAP := 0.5
+
+## Comet Step's empowered shot: the bonus (and the status is spent), or 0.
+func take_comet() -> float:
+	if not status.has(&"comet_ready"):
+		return 0.0
+	var v := clampf(status.magnitude(&"comet_ready"), 0.0, 0.8)
+	status.remove(&"comet_ready")
+	return v
+
+## A skill spent Valor (Judgment, Dawn Verdict, Black Dominion): Iron Tyrant's barrier.
+func on_valor_spent(amount: float) -> void:
+	if signature:
+		signature.on_valor_spent(amount)
+	if amount >= 20.0 and stats.has_flag(&"dg_iron_tyrant") and _tyrant_cd <= 0.0:
+		_tyrant_cd = 15.0
+		add_shield(max_hp() * DataTranscendence.cap(&"dg_iron_tyrant", stats.flag(&"dg_iron_tyrant")), 6.0)
+		FX.text_popup(center() + Vector3.UP * 0.9, "Iron Tyrant", Color(0.79, 0.34, 0.42), 0.8)
+
+## A skill spent Arcane Charge (Arcane Surge, Grand Convergence, Rift Collapse): Prismatic Shelter.
+func on_charge_spent(amount: float) -> void:
+	if amount >= 1.0 and stats.has_flag(&"am_shelter") and _shelter_cd <= 0.0:
+		_shelter_cd = 12.0
+		var v := DataTranscendence.cap(&"am_shelter", stats.flag(&"am_shelter"))
+		status.apply(&"prismatic_shelter", 4.0, v, 0.0, Elements.PHYSICAL, [StatModifier.flat(&"res_all", v, "Prismatic Shelter")])
+
+## The hero's class traits (ClassSignature), rebuilt after an advancement or a load.
+func refresh_class_look() -> void:
+	if hero == null:
+		return
+	signature = ClassSignature.sync(self, ClassTranscendence.lineage(hero), false)
+
+## Every frame: Relentless March (in combat), Ambush Training (just out of Stealth).
+func _transcend_tick() -> void:
+	if stats == null:
+		return
+	var march := stats.has_flag(&"dg_march") and in_combat()
+	if march != status.has(&"relentless_march"):
+		if march:
+			var v := DataTranscendence.cap(&"dg_march", stats.flag(&"dg_march"))
+			status.apply(&"relentless_march", 0.0, v, 0.0, Elements.PHYSICAL, [StatModifier.more(&"move_speed", v, "Relentless March")])
+		else:
+			status.remove(&"relentless_march")
+		mark_stats_dirty()
+	var hidden := status.has(&"stealth")
+	if _was_stealthed and not hidden and stats.has_flag(&"ns_ambush"):
+		var c := DataTranscendence.cap(&"ns_ambush", stats.flag(&"ns_ambush"))
+		status.apply(&"ambush_ready", 3.0, c, 0.0, Elements.PHYSICAL, [StatModifier.flat(&"crit_chance", c, "Ambush Training")])
+	_was_stealthed = hidden
+
 func add_shield(amount: float, duration: float) -> void:
 	shield_hp = maxf(shield_hp, amount)
 	shield_t = maxf(shield_t, duration)
@@ -1890,6 +1995,11 @@ func decorate_request(req: DamageRequest, skill: SkillDef) -> void:
 			req.more.append(["Elemental Overload", 1.0 + stats.flag(&"overload", 0.4)])
 	if _riposte_t > 0.0 and req.kind == DamageRequest.Kind.ATTACK:
 		req.force_crit = true
+	# Runic Circle (Arcanist): spells you pay Mana for, cast while standing in your circle
+	if status.has(&"runic_circle") and req.kind == DamageRequest.Kind.SPELL and skill != null and skill.mana_cost > 0.0:
+		req.more.append(["Runic Circle", 1.0 + clampf(status.magnitude(&"runic_circle"), 0.0, 0.25)])
+	if signature:
+		signature.decorate(req)
 	if status.has(&"stealth") and req.kind != DamageRequest.Kind.DOT:
 		req.more.append(["Ambush", 1.5 + stats.flag(&"ambush")])
 		req.force_crit = true
@@ -1905,6 +2015,8 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 		_riposte_t = 0.0
 	if status.has(&"stealth"):
 		status.remove(&"stealth")                  # the ambush is spent
+	if status.has(&"gloom_veil"):
+		status.remove(&"gloom_veil")               # attacking ends Gloom Veil's evasion too
 	if res.total <= 0:
 		return
 	if resource and resource.kind == &"valor":
@@ -1931,6 +2043,13 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 	if skill and skill.kind == DamageRequest.Kind.SPELL and stats.has_flag(&"mana_on_spell_hit"):
 		restore_mana(stats.flag(&"mana_on_spell_hit"))
 	if res.is_crit:
+		# Comet Rhythm (Starstrider): a crit trims every cooldown a little, at most once per second
+		if stats.has_flag(&"ss_comet_rhythm") and _time - _comet_rhythm_t >= 1.0 and (req == null or not req.tags.has(&"proc")):
+			_comet_rhythm_t = _time
+			var cut := DataTranscendence.cap(&"ss_comet_rhythm", stats.flag(&"ss_comet_rhythm"))
+			for k in cooldowns.keys():
+				cooldowns[k] = maxf(0.0, cooldowns[k] - cut)
+			cooldowns_changed.emit()
 		if stats.has_flag(&"crit_cdr"):
 			var cut := stats.flag(&"crit_cdr")
 			for k in cooldowns.keys():
@@ -1964,6 +2083,37 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 			_overload_hits.clear()
 	for rx in res.reactions:
 		FX.text_popup(target.center() + Vector3.UP * 0.9, DamageResult.REACTION_NAMES.get(rx, String(rx)), Elements.color(res.dominant_element), 0.9)
+	if signature:
+		signature.on_hit_dealt(target, res, req, skill)
+	if status.has(&"sanguine_pact") and (req == null or not req.tags.has(&"proc")):
+		_pact_heal()
+
+## A signature trait's own hit (Royal Retort, Dawnbringer): resource gains and the usual bookkeeping, tagged as a proc
+## so it triggers no other procs or traits.
+func on_proc_hit(target: Actor, res: DamageResult, req: DamageRequest) -> void:
+	_on_hit_dealt(target, res, req)
+
+## Sanguine Pact (Blood Sovereign): each hit heals a share of Maximum HP, at most a capped share in any one second.
+var _pact_window := -1.0
+var _pact_healed := 0.0
+
+func _pact_heal() -> void:
+	var share: Array = get_meta(&"pact_heal", [0.005, 0.04])
+	if _time - _pact_window >= 1.0:
+		_pact_window = _time
+		_pact_healed = 0.0
+	var room := max_hp() * float(share[1]) - _pact_healed
+	var amount := minf(max_hp() * float(share[0]), room)
+	if amount > 0.0:
+		_pact_healed += amount
+		heal(amount, false)
+
+## Which skill cast is running (one cast = one serial; repeats and multi-hit casts share it).
+func cast_serial() -> int:
+	return _cast_serial
+
+func is_dodging() -> bool:
+	return action_kind == &"dodge"
 
 # ---- bh-034: the Ascendant signature powers (DataAscendant) ------------------------------------------------------------
 ## Every Cosmic / Divine / Eternal / Primordial piece worn adds 1 to its tier's flag (a 6-piece set 2 more); the sum sets
@@ -2120,6 +2270,8 @@ func _on_actor_died(victim: Node, killer: Node) -> void:
 	if killer != self or not (victim is Actor):
 		return
 	var v := victim as Actor
+	if signature:
+		signature.on_kill(v)
 	if stats.has_flag(&"kill_heal"):
 		heal(max_hp() * stats.flag(&"kill_heal"))
 	if stats.has_flag(&"frozen_explode") and v.get_meta(&"died_frozen", false):

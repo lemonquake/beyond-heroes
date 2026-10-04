@@ -2,6 +2,23 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-036 - Class Transcendence - 4 October 2026
+
+- **Twelve new classes**: every starting class advances at level 60 (Royal Guard, Tracker, Arcanist, Nightstalker) and
+  chooses one of two master classes at level 120 (Dark General or Grand Paladin, Wildwarden or Starstrider, Archmage or
+  Void Sovereign, Phantom Reaper or Blood Sovereign). Grand Master Edran Vale in any Guild House teaches it; no guild,
+  gold or quest is needed. Old heroes above level 121 can take both steps at once. The Ranger is now called Hunter.
+- Each advancement gives three skills and three talents at level 1 (free levels, never refunded) and a **signature
+  trait**: Royal Aegis, Conqueror's Dread, Dawnbringer, Hunter's Opening, Rooted Stance, Star Chart, Runescript,
+  Elemental Attunement, Collapse, From the Shadows, Soul Harvest, Blood Price.
+- **Class armour with its own look** for all twelve classes (Grand Paladin: white and gold plate with a gold cape), plus
+  a class weapon and accessory each, sold by the Grand Master's armory and found as loot from level 60 / 120.
+- **Who can wear what**: every equipment piece now states its class rule ("For any class", "For Knight class", "For
+  Royal Guard and its master classes", "For Grand Paladin only") and the rule is enforced.
+- Other players see your current class under your name in its colour. Network protocol 20: update the official server
+  with the game.
+- Details: [CLASS_TRANSCENDENCE.md](CLASS_TRANSCENDENCE.md).
+
 ## BH-035 - Big fights, multiplayer bandwidth, Shadowblade damage, QA - 3 October 2026
 
 - **No more freeze when monsters spawn**: every humanoid monster (and NPC or companion) that appeared rewrote the loop

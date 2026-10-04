@@ -15,6 +15,8 @@ signal player_spawned(player: Node)
 signal player_died
 signal player_respawned
 signal player_leveled(level: int, gained: int)
+## Class Transcendence: the local hero advanced (ClassTranscendence.transcend). `class_id` is their new current class.
+signal class_changed(class_id: StringName)
 signal xp_gained(amount: int)
 # Loot / items
 signal loot_dropped(item: ItemInstance, position: Vector3)

@@ -40,6 +40,9 @@ var projectile_look := "orb"
 var _travelled := 0.0
 var _hit := {}
 var volley_hits: Dictionary = {}    # shared only by a Split Shot volley
+## Class Transcendence (Astral Pierce): the share of damage every enemy after the first one takes (1 = no falloff).
+var pierce_falloff := 1.0
+var _fell := false
 var _done := false
 
 const MAX_LIFETIME := 8.0
@@ -133,6 +136,10 @@ func _physics_process(delta: float) -> void:
 		_hit[a.get_instance_id()] = true
 		volley_hits[a.get_instance_id()] = true
 		_hit_target(a, h[1])
+		if pierce_falloff < 1.0 and not _fell and request != null:
+			_fell = true
+			request = request.clone()
+			request.skill_mult *= pierce_falloff
 		if _done:
 			return
 		if pierce <= 0:

@@ -1,0 +1,81 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[FAIL] test_class_rework.gd — 12 tests, 77 checks, 1 failures (4324.3 ms)
+GROWTH {"class":"knight","enemy_hp":66,"hit":16,"hits_to_kill":4.1,"level":5,"skill_hit":30,"weapon":"wayfarer_blade","weapon_max":16,"weapon_min":9}
+GROWTH {"class":"knight","enemy_hp":205,"hit":51,"hits_to_kill":4.0,"level":10,"skill_hit":97,"weapon":"artisan_copperleaf_sword","weapon_max":36,"weapon_min":20}
+GROWTH {"class":"knight","enemy_hp":472,"hit":106,"hits_to_kill":4.4,"level":15,"skill_hit":202,"weapon":"duelist_sabre","weapon_max":51,"weapon_min":29}
+GROWTH {"class":"knight","enemy_hp":920,"hit":243,"hits_to_kill":3.8,"level":20,"skill_hit":463,"weapon":"runed_sword","weapon_max":95,"weapon_min":62}
+GROWTH {"class":"knight","enemy_hp":1773,"hit":342,"hits_to_kill":5.2,"level":25,"skill_hit":650,"weapon":"depth_copperleaf_backsword","weapon_max":167,"weapon_min":90}
+GROWTH {"class":"knight","enemy_hp":3140,"hit":377,"hits_to_kill":8.3,"level":30,"skill_hit":716,"weapon":"artisan_split_crown_sword","weapon_max":179,"weapon_min":96}
+GROWTH {"class":"knight","enemy_hp":10759,"hit":950,"hits_to_kill":11.3,"level":45,"skill_hit":1804,"weapon":"depth_hollowfin_estoc","weapon_max":416,"weapon_min":226}
+GROWTH {"class":"knight","enemy_hp":27531,"hit":2142,"hits_to_kill":12.9,"level":60,"skill_hit":4070,"weapon":"depth_crownless_longsword","weapon_max":715,"weapon_min":386}
+GROWTH {"class":"mage","enemy_hp":66,"hit":27,"hits_to_kill":2.4,"level":5,"skill_hit":46,"weapon":"pilgrims_staff","weapon_max":18,"weapon_min":9}
+GROWTH {"class":"mage","enemy_hp":205,"hit":83,"hits_to_kill":2.5,"level":10,"skill_hit":88,"weapon":"storm_staff","weapon_max":42,"weapon_min":24}
+GROWTH {"class":"mage","enemy_hp":472,"hit":211,"hits_to_kill":2.2,"level":15,"skill_hit":173,"weapon":"storm_staff","weapon_max":76,"weapon_min":44}
+GROWTH {"class":"mage","enemy_hp":920,"hit":325,"hits_to_kill":2.8,"level":20,"skill_hit":287,"weapon":"frost_staff","weapon_max":118,"weapon_min":71}
+GROWTH {"class":"mage","enemy_hp":1773,"hit":623,"hits_to_kill":2.8,"level":25,"skill_hit":443,"weapon":"depth_glowcap_crook","weapon_max":211,"weapon_min":114}
+GROWTH {"class":"mage","enemy_hp":3140,"hit":800,"hits_to_kill":3.9,"level":30,"skill_hit":569,"weapon":"depth_tidal_forkstaff","weapon_max":261,"weapon_min":139}
+GROWTH {"class":"mage","enemy_hp":10759,"hit":1778,"hits_to_kill":6.1,"level":45,"skill_hit":1050,"weapon":"depth_thornseed_branchstaff","weapon_max":468,"weapon_min":254}
+GROWTH {"class":"mage","enemy_hp":27531,"hit":6443,"hits_to_kill":4.3,"level":60,"skill_hit":1775,"weapon":"depth_dawnspire_staff","weapon_max":898,"weapon_min":486}
+GROWTH {"class":"ranger","enemy_hp":66,"hit":17,"hits_to_kill":3.8,"level":5,"skill_hit":32,"weapon":"fowling_bow","weapon_max":20,"weapon_min":9}
+GROWTH {"class":"ranger","enemy_hp":205,"hit":55,"hits_to_kill":3.7,"level":10,"skill_hit":105,"weapon":"composite_bow","weapon_max":49,"weapon_min":25}
+GROWTH {"class":"ranger","enemy_hp":472,"hit":110,"hits_to_kill":4.3,"level":15,"skill_hit":209,"weapon":"hornbow","weapon_max":82,"weapon_min":39}
+GROWTH {"class":"ranger","enemy_hp":920,"hit":207,"hits_to_kill":4.4,"level":20,"skill_hit":394,"weapon":"warden_longbow","weapon_max":147,"weapon_min":77}
+GROWTH {"class":"ranger","enemy_hp":1773,"hit":332,"hits_to_kill":5.3,"level":25,"skill_hit":630,"weapon":"depth_rootbend_shortbow","weapon_max":233,"weapon_min":114}
+GROWTH {"class":"ranger","enemy_hp":3140,"hit":434,"hits_to_kill":7.2,"level":30,"skill_hit":825,"weapon":"depth_saltwind_recurve","weapon_max":291,"weapon_min":139}
+GROWTH {"class":"ranger","enemy_hp":10759,"hit":894,"hits_to_kill":12.0,"level":45,"skill_hit":1698,"weapon":"depth_thornwing_bow","weapon_max":492,"weapon_min":239}
+GROWTH {"class":"ranger","enemy_hp":27531,"hit":2321,"hits_to_kill":11.9,"level":60,"skill_hit":4410,"weapon":"depth_dawnfeather_bow","weapon_max":948,"weapon_min":457}
+GROWTH {"class":"shadowblade","enemy_hp":66,"hit":9,"hits_to_kill":7.5,"level":5,"skill_hit":17,"weapon":"cutpurse_knife","weapon_max":10,"weapon_min":6}
+GROWTH {"class":"shadowblade","enemy_hp":205,"hit":27,"hits_to_kill":7.7,"level":10,"skill_hit":50,"weapon":"shadow_kris","weapon_max":23,"weapon_min":12}
+GROWTH {"class":"shadowblade","enemy_hp":472,"hit":84,"hits_to_kill":5.6,"level":15,"skill_hit":160,"weapon":"kukri","weapon_max":43,"weapon_min":25}
+GROWTH {"class":"shadowblade","enemy_hp":920,"hit":129,"hits_to_kill":7.2,"level":20,"skill_hit":244,"weapon":"aether_stiletto","weapon_max":64,"weapon_min":33}
+GROWTH {"class":"shadowblade","enemy_hp":1773,"hit":216,"hits_to_kill":8.2,"level":25,"skill_hit":411,"weapon":"depth_rootfang_skinner","weapon_max":108,"weapon_min":66}
+GROWTH {"class":"shadowblade","enemy_hp":3140,"hit":284,"hits_to_kill":11.0,"level":30,"skill_hit":540,"weapon":"depth_keelhook_knife","weapon_max":136,"weapon_min":79}
+GROWTH {"class":"shadowblade","enemy_hp":10759,"hit":607,"hits_to_kill":17.7,"level":45,"skill_hit":1154,"weapon":"depth_briar_talon","weapon_max":230,"weapon_min":137}
+GROWTH {"class":"shadowblade","enemy_hp":27531,"hit":1494,"hits_to_kill":18.4,"level":60,"skill_hit":2838,"weapon":"depth_dawnthorn_knife","weapon_max":439,"weapon_min":266}
+[PASS] test_combat_growth.gd — 6 tests, 134 checks, 0 failures (1588.6 ms)
+[PASS] test_crossbows.gd — 8 tests, 10766 checks, 0 failures (443.0 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.4 ms)
+[PASS] test_net_guard.gd — 6 tests, 44 checks, 0 failures (1.2 ms)
+[PASS] test_progression.gd — 7 tests, 51 checks, 0 failures (15.2 ms)
+[FAIL] test_skills.gd — 11 tests, 3519 checks, 1 failures (56692.1 ms)
+WARNING: Hero Trans knight: Grand Paladin needs level 120; it was dropped.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:582)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:258)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_cast_every_shadowblade_skill (res://tests/unit/test_skills.gd:374)
+       [4] _cast_all (res://tests/unit/test_skills.gd:330)
+       [5] _until (res://tests/unit/test_skills.gd:355)
+WARNING: Hero Trans knight: Unknown class advancement format; the hero keeps the starting class.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:582)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:268)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_cast_every_shadowblade_skill (res://tests/unit/test_skills.gd:374)
+       [4] _cast_all (res://tests/unit/test_skills.gd:330)
+       [5] _until (res://tests/unit/test_skills.gd:355)
+WARNING: Hero Trans knight: The class advancement record could not be read; the hero keeps the starting class.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:582)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:270)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_cast_every_shadowblade_skill (res://tests/unit/test_skills.gd:374)
+       [4] _cast_all (res://tests/unit/test_skills.gd:330)
+       [5] _until (res://tests/unit/test_skills.gd:355)
+[PASS] test_transcendence.gd — 19 tests, 4250 checks, 0 failures (18287.9 ms)
+[PASS] test_transcendence_net.gd — 5 tests, 52 checks, 0 failures (56.3 ms)
+[PASS] test_transcendence_signatures.gd — 17 tests, 389 checks, 0 failures (1141.6 ms)
+[PASS] test_transcendence_skills.gd — 12 tests, 350 checks, 0 failures (30080.5 ms)
+  FAIL test_class_rework.test_orb_and_sentinel_keep_elevation_and_manual_aim: manual aim overrides an older hovered enemy
+  FAIL test_skills.test_cast_every_shadowblade_skill: shadowblade: shadow_step damaged a target in front (9420 -> 9420)
+TOTAL: 20477 checks, 2 failures
+WARNING: 61 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

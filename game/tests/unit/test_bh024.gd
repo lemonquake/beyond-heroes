@@ -158,7 +158,8 @@ func test_loot_and_affixes() -> void:
 func test_merchants_sell_leggings() -> void:
 	var sellers := 0
 	for def: ShopDef in DB.shops.values():
-		if def.specialties.has(&"armor"):
+		# the Grand Master's armory sells only the Class Transcendence pieces (no leggings among them)
+		if def.specialties.has(&"armor") and def.id != &"grand_master_armory":
 			ok(def.specialties.has(&"leggings"), "%s deals in leggings too" % def.id)
 			var pools: Array = def.pools
 			ok(pools.any(func(p): return (p.get("categories", []) as Array).has(&"leggings")), "%s stocks leggings" % def.id)
@@ -277,7 +278,9 @@ func test_boss_legguards_on_the_hero() -> void:
 # ---- Unbound items and "alj" --------------------------------------------------------------------------------------
 
 func test_unbound_items_have_no_requirements() -> void:
-	var h := Game.new_hero(&"mage", "Unbound")
+	# the Oathbound Cuisses carry a Knight power, so they are Knight-family gear: Unbound skips level and attributes,
+	# never the class rule (Class Transcendence)
+	var h := Game.new_hero(&"knight", "Unbound")
 	h.equipment.tier_rank = 0
 	var it := DB.make_item(&"u_oathbound_cuisses", BH.Rarity.LEGENDARY, 40, 9)
 	var attrs := h.progress.base_attributes()
@@ -291,7 +294,10 @@ func test_unbound_items_have_no_requirements() -> void:
 	ok(back.unbound, "Unbound survives a save")
 	ok(not ItemInstance.from_dict(DB.make_item(&"iron_cuisses", BH.Rarity.COMMON, 1, 1).to_dict()).unbound, "ordinary items are not")
 	h.inventory.add(it)
-	eq(h.equip_from_inventory(it), "", "a level-1 mage wears it")
+	eq(h.equip_from_inventory(it), "", "a level-1 knight wears it")
+	var mage := Game.new_hero(&"mage", "Unbound mage")
+	mage.equipment.tier_rank = 1
+	ok(mage.equipment.check(it, &"leggings", 1, mage.progress.base_attributes()).contains("Knight"), "a mage cannot, Unbound or not")
 	eq(h.equipment.get_item(&"leggings"), it, "in the Leggings slot")
 	var sw := DataSpecialWeapons.unbound(&"u_riftblade", 1)
 	ok(sw != null and sw.unbound and sw.base.is_weapon(), "any base can be made Unbound")

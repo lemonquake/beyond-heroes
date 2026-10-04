@@ -186,7 +186,7 @@ static func facts(it: ItemInstance) -> PackedStringArray:
 ## Three crafted offers: a weapon, an armour piece and a piece of jewellery, all fitted to the hero's class and
 ## every one with a faction license.
 static func make_offers(hero: HeroData, tier: int, ilvl: int, rng: RandomNumberGenerator) -> Array:
-	var cid: StringName = hero.cls.id if hero and hero.cls else &""
+	var cid: StringName = ClassTranscendence.current_class_id(hero) if hero and hero.cls else &""
 	var out := []
 	var used := {}
 	for cats in [[&"weapon"], ARMOR_CATS, [&"accessory"]]:
@@ -219,7 +219,10 @@ static func requirements(hero: HeroData, it: ItemInstance) -> Array:
 			mods.append(StatDefs.format_modifier(m.stat, m.op, m.value))
 		out.append(["Licensed: %s. %s License bonus: %s." % [lic.get("name", ""), lic.get("desc", ""), ", ".join(mods)], null])
 	if hero == null:
+		out.append([ClassRequirements.text(it.base), null])
 		return out
+	for line in ClassRequirements.lines(it.base, hero):
+		out.append(line)
 	if not it.base.wearers.is_empty():
 		out.append([DataSpecialWeapons.wearers_text(it.base) + ".", hero.cls == null or DataSpecialWeapons.can_wear(it.base, hero.cls.id)])
 	if it.unbound:
@@ -236,7 +239,7 @@ static func requirements(hero: HeroData, it: ItemInstance) -> Array:
 	for a in it.base.requirements:
 		out.append(["Requires %d %s (you have %d)" % [it.base.requirements[a], BH.ATTRIBUTE_NAMES[a], int(attrs.get(a, 0))],
 			int(attrs.get(a, 0)) >= int(it.base.requirements[a])])
-	var cid: StringName = hero.cls.id if hero.cls else &""
+	var cid: StringName = ClassTranscendence.current_class_id(hero) if hero.cls else &""
 	if it.base.category != &"accessory":
 		out.append(["Made for your class" if ItemGenerator.class_fit(it.base, cid) else "Not your class's usual gear", ItemGenerator.class_fit(it.base, cid)])
 	var err := hero.equipment.check(it, hero.equipment.auto_slot(it), lvl, attrs)

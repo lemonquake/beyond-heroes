@@ -832,6 +832,227 @@
    "hide": {},
    "sides": false
   },
+  "tc_afterimage_mantle": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "tc_arcanist_vestments": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.24
+  },
+  "tc_archmage_robes": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.2
+  },
+  "tc_black_dominion_plate": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.29
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "tc_bloodmoon_signet": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "tc_comet_lens": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_constellation_leathers": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.42
+  },
+  "tc_convergence_prism": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_dread_command_signet": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "tc_horizon_core": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_livingwood_leathers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false,
+   "skirt": 0.62
+  },
+  "tc_nightstalker_leathers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "tc_oathkeeper_seal": {
+   "hair": "hide",
+   "hide": {},
+   "sides": true
+  },
+  "tc_quarry_compass": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_reapers_glass": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_riftwoven_robes": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.22
+  },
+  "tc_royal_guard_cuirass": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.29
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "tc_runic_focus": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_sanctified_plate": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.29
+    ],
+    "z": [
+     0.865,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.8
+  },
+  "tc_sanguine_leathers": {
+   "hair": "hide",
+   "hide": {
+    "sleeve": [
+     0.23,
+     0.7
+    ],
+    "z": [
+     0.885,
+     1.49
+    ]
+   },
+   "sides": false,
+   "skirt": 0.32
+  },
+  "tc_silent_trail_charm": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_sunward_reliquary": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
+  "tc_trackers_leathers": {
+   "hair": "hide",
+   "hide": {
+    "z": [
+     0.865,
+     1.46
+    ]
+   },
+   "sides": false
+  },
+  "tc_wildroot_pendant": {
+   "hair": "hide",
+   "hide": {},
+   "sides": false
+  },
   "thornbrand_ring": {
    "hair": "hide",
    "hide": {},

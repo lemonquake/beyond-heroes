@@ -89,6 +89,7 @@ func _row(id: int) -> Control:
 	var nh := HBoxContainer.new()
 	v.add_child(nh)
 	var nm := UITheme.label("◆ %s%s" % [info.get("name", "Hero"), "  (Host)" if id == 1 else ""], 16, col.lightened(0.25), UITheme.body_bold())
+	TooltipLayer.attach(nm, func() -> Control: return Tips.text("Level %d %s" % [int(Net.peers.get(id, {}).get("level", 1)), Net.peer_class_name(id)]))
 	nm.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	nm.add_theme_constant_override("outline_size", 4)
 	nm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -124,7 +125,7 @@ func _row(id: int) -> Control:
 func _tip(id: int) -> Control:
 	var info: Dictionary = Net.peers.get(id, {})
 	var cls := DB.class_def(StringName(info.get("cls", "knight")))
-	var lines := ["Level %d %s · playing on %s" % [int(info.get("level", 1)), cls.display_name if cls else "Hero", info.get("device", "PC")]]
+	var lines := ["Level %d %s · playing on %s" % [int(info.get("level", 1)), Net.peer_class_name(id) if cls else "Hero", info.get("device", "PC")]]
 	var st: Dictionary = Net.status.get(id, {})
 	if not st.is_empty():
 		lines.append("In %s" % Net.place_name(StringName(st.map)))
@@ -162,7 +163,7 @@ func _process(delta: float) -> void:
 			bar.fill_color = Color(0.92, 0.32, 0.25) if f < 0.3 else Color(0.3, 0.88, 0.4)
 			if av.alive:
 				var d := (Game.player as Node3D).global_position.distance_to(av.global_position) if Game.player else 0.0
-				sub.text = "Level %d %s · %d m away" % [av.level, cls.display_name if cls else "", roundi(d)]
+				sub.text = "Level %d %s · %d m away" % [av.level, Net.peer_class_name(id) if cls else "", roundi(d)]
 				sub.add_theme_color_override("font_color", UITheme.TEXT_DIM)
 				root.modulate = Color.WHITE
 			else:
@@ -183,7 +184,7 @@ func _process(delta: float) -> void:
 				bar.text = ""
 			var lv := int(st.get("lvl", info.get("level", 1)))
 			if m == "" or m == here:
-				sub.text = "Level %d %s · travelling…" % [lv, cls.display_name if cls else ""]
+				sub.text = "Level %d %s · travelling…" % [lv, Net.peer_class_name(id) if cls else ""]
 			else:
 				sub.text = "Level %d · in %s%s" % [lv, Net.place_name(StringName(m)), "" if st.get("alive", true) else " · fallen"]
 			sub.add_theme_color_override("font_color", UITheme.TEXT_DIM)

@@ -99,20 +99,29 @@ func _build_tabs() -> void:
 		_tabs.remove_child(c)
 		c.queue_free()
 	var t := hero.skill_tree.tree
-	_tabs.get_parent().visible = t.page_count() > 1
-	if t.page_count() <= 1:
-		return
+	var previews := TranscendPages.preview_ids(hero)
+	_tabs.get_parent().visible = t.page_count() > 1 or not previews.is_empty()
 	for i in t.page_count():
 		var idx := i
 		var learned := 0
 		for n in t.nodes_on_page(i):
 			learned += hero.skill_tree.rank(n.id)
-		var label := String(t.pages[i].name) + ("  (%d)" % learned if learned > 0 else "")
+		var label := String(t.pages[i].name if not t.pages.is_empty() else "Skills") + ("  (%d)" % learned if learned > 0 else "")
 		_tabs.add_child(button(label, func() -> void:
 			Audio.play_ui(&"ui_click")
 			tree.set_page(idx)
-			_build_tabs(), &"PrimaryButton" if tree.page == i else &"", 190.0))
-	_page_desc.text = String(t.pages[tree.page].get("desc", ""))
+			_build_tabs(), &"PrimaryButton" if tree.page == i and not tree.preview else &"", 190.0))
+	# Class Transcendence: the next advancement's page(s), locked, to look at before choosing
+	for id in previews:
+		var pid: StringName = id
+		_tabs.add_child(button("%s (preview)" % DataTranscendence.name_of(pid), func() -> void:
+			Audio.play_ui(&"ui_click")
+			tree.bind_preview(hero, false, pid)
+			_build_tabs(), &"PrimaryButton" if tree.preview and tree.preview_class == pid else &"", 220.0))
+	if tree.preview:
+		_page_desc.text = "Locked preview. %s" % TranscendPages.preview_hint(hero, tree.preview_class)
+	elif not t.pages.is_empty():
+		_page_desc.text = String(t.pages[tree.page].get("desc", ""))
 
 func _on_node(n: Dictionary) -> void:
 	if n.has("skill"):

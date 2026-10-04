@@ -63,7 +63,7 @@ static func build() -> Array:
 			"heavy_knockback": 10.0, "charge_max": 0.8, "charge_bonus": 0.65, "scaling": {&"dex": 1.0}, "idle_anim": &"idle_crossbow",
 			"length": 0.9, "move_mult": 0.30, "light_anims": [&"crossbow_fire", &"crossbow_fire", &"crossbow_fire", &"crossbow_fire"], "heavy_anim": &"crossbow_heavy",
 			"chain_mults": [1.0, 1.0, 1.0, 1.35], "swing_sound": &"crossbow_fire", "hit_sound": &"arrow_impact", "rep": &"ashwood_crossbow",
-			"description": "Two-handed bolt launcher. Slower reloads, faster bolts and stronger impact. Hold heavy to aim a piercing shot; uses Ranger shot skills."}),
+			"description": "Two-handed bolt launcher. Slower reloads, faster bolts and stronger impact. Hold heavy to aim a piercing shot; uses Hunter shot skills."}),
 		_w(&"staff", "Staff", {"two_handed": true, "ranged": true, "projectile_speed": 20.0, "attacks_per_second": 1.0, "reach": 18.0,
 			"arc_degrees": 0.0, "crit_chance": 0.05, "impact": 1.1, "knockback": 3.5, "poise_damage": 10.0, "heavy_multiplier": 2.0,
 			"heavy_knockback": 8.0, "charge_max": 1.0, "charge_bonus": 0.8, "scaling": {&"str": 1.0}, "idle_anim": &"idle_staff",

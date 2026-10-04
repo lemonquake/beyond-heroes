@@ -124,7 +124,7 @@ const PLACES := [
 	{"id": "town_lantern", "name": "Lantern House", "kind": "service", "map": "sanctuary", "pos": Vector2(-24.9, -9.5), "listed": true, "public": true,
 		"door": "int_lantern", "levels": "Safe haven", "text": "The Lantern Covenant. Join, register and request promotion."},
 	{"id": "town_guildhouse", "name": "The Guild House", "kind": "service", "map": "sanctuary", "pos": Vector2(-11, -4.4), "listed": true, "public": true,
-		"door": "int_guildhouse", "levels": "Safe haven", "text": "Both guilds keep a counter here. Pick a guild and take paid odd jobs from its board."},
+		"door": "int_guildhouse", "levels": "Safe haven", "text": "Both guilds keep a counter here. Pick a guild and take paid odd jobs from its board. Grand Master Edran Vale teaches class advancement at levels 60 and 120."},
 	{"id": "town_market", "name": "Merchant Quarter", "kind": "service", "map": "sanctuary", "pos": Vector2(15.0, 21.0), "listed": true, "public": true,
 		"levels": "Safe haven", "text": "The cobbled square off the plaza's south-east corner: Anton's Provisions, Seris' Arcana, Marr's Lapidary (sockets and crystals), Brannoc's Smithy and forge, the Stranger's Wagon, the Shrine of the Fallen, the Alchemy Table and the Workbench."},
 	{"id": "town_forge", "name": "Brannoc's Smithy", "kind": "service", "map": "sanctuary", "pos": Vector2(21.2, 22.4), "listed": true, "public": true,

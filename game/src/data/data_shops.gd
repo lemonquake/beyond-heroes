@@ -228,6 +228,12 @@ static func build() -> Array:
 			"pools": [{"categories": [&"accessory"], "count": 2}],
 			"rare_chance": 0.1,
 		}),
+		# Class Transcendence: the Grand Master's armory in the Guild House. Each hero sees the pieces their class may
+		# wear (first-transcendence pieces from level 60, master pieces from 120), never sold out, at merchant prices.
+		ShopDef.make(&"grand_master_armory", "Grand Master's Armory", {"npc": &"grand_master_edran", "kind": &"premium",
+			"specialties": [&"weapon", &"armor", &"accessory"], "markup": 1.0, "sell_rate": 0.9, "refresh_minutes": 60.0,
+			"fixed": DataTranscendenceGear.armory_fixed(), "rare_chance": 0.0,
+		}),
 	]
 
 ## bh-018: a Socket Specialist's crystals: every common family at each grade from the given hero level (99 = never), the

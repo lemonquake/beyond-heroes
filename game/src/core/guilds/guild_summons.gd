@@ -154,7 +154,7 @@ static func _gear_up(h: HeroData, lvl: int, rng: RandomNumberGenerator) -> void:
 	if h.cls.id == &"knight":
 		cats.append(&"shield")
 	for cat in cats:
-		var base := ItemGenerator.random_base(rng, lvl, [cat], h.cls.id, 1.0)
+		var base := ItemGenerator.random_base(rng, lvl, [cat], ClassTranscendence.current_class_id(h), 1.0)
 		if base == null:
 			continue
 		var it := ItemGenerator.generate(base, lvl, rarity, rng)

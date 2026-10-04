@@ -42,6 +42,9 @@ extends Resource
 # (loot, merchants, crafting): it exists only where the story or a code puts it (DataSpecialWeapons)
 @export var wearers: Array = []
 @export var story := false
+## Class Transcendence: which classes may wear it ({"kind": any|family|lineage|exact|alternatives, "ids": [...]}).
+## Empty = the audited rule for existing gear (ClassRequirements.of). Never a loot preference: that is class_hint.
+@export var class_req := {}
 
 const ITEM_MODEL := "res://assets/items/%s.glb"
 

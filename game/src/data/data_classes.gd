@@ -76,7 +76,7 @@ static func build() -> Array:
 	mage.major_attributes = [&"int", &"wis", &"spi"]
 	var ranger := ClassDef.new()
 	ranger.id = &"ranger"
-	ranger.display_name = "Ranger"
+	ranger.display_name = "Hunter"
 	ranger.description = "A ranged fighter using bows, crossbows, javelins and traps. Learn Knee Shot to stun enemies and Split Shot to fire additional arrows. Builds Focus at a distance and spends it on stronger shots."
 	ranger.model_path = "res://assets/characters/ranger.glb"
 	ranger.base_attributes = {&"str": 8, &"agi": 13, &"int": 6, &"wis": 8, &"spi": 7, &"dex": 14}
@@ -93,8 +93,8 @@ static func build() -> Array:
 	ranger.dodge_cooldown = 1.0
 	ranger.resource_kind = &"focus"
 	ranger.class_modifiers = [
-		StatModifier.inc(&"projectile_damage", 0.10, "Ranger: Fletching"),
-		StatModifier.inc(&"evasion", 0.10, "Ranger: Woodcraft"),
+		StatModifier.inc(&"projectile_damage", 0.10, "Hunter: Fletching"),
+		StatModifier.inc(&"evasion", 0.10, "Hunter: Woodcraft"),
 	]
 	ranger.weapon_mastery = {&"bow": 0.12, &"crossbow": 0.12, &"javelin": 0.10, &"spear": 0.05, &"dagger": 0.05}
 	ranger.starting_items = [&"hunters_bow", &"padded_gambeson", &"hide_leggings", &"linen_hood", &"soft_boot"]

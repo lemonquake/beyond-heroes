@@ -68,6 +68,7 @@ func _ready() -> void:
 	_add_window(&"mobile_menu", MobileMenuWindow.new())
 	_add_window(&"multiplayer", MultiplayerWindow.new())
 	_add_window(&"guild_jobs", GuildJobsWindow.new())
+	_add_window(&"transcend", TranscendWindow.new())          # Class Transcendence: the Grand Master
 	_add_window(&"guild_custom", GuildCustomWindow.new())
 	_add_window(&"guild", GuildWindow.new())                 # bh-027: Z
 	_add_window(&"guild_detail", GuildDetailWindow.new())

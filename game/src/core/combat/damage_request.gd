@@ -34,13 +34,16 @@ var target_weight := 1.0
 var positional_mult := 1.0          # weak point / backstab multiplier (already decided by caller)
 var tags := {}                      # &"melee", &"projectile", &"aoe", &"spell_school_*"
 var label := ""                     # debug label (skill name)
+## Class Transcendence (Null Lance): extra armor and resistance penetration of this hit, added to the attacker's own
+## before the usual limits (armor penetration at most 100%, resistances never below the floor).
+var pen_extra := 0.0
 
 ## Shallow copy with independent containers (one request per target for AoE / projectiles).
 func clone() -> DamageRequest:
 	var r := DamageRequest.new()
 	for p in ["kind", "attacker", "base_min", "base_max", "hand", "use_weapon", "weapon_mult", "skill_mult", "bonus_inc",
 			"can_crit", "force_crit", "crit_bonus", "evadable", "graze", "blockable", "guarding", "perfect_block", "knockback", "poise",
-			"status_power", "heavy", "target_weight", "positional_mult", "label"]:
+			"status_power", "heavy", "target_weight", "positional_mult", "label", "pen_extra"]:
 		r.set(p, get(p))
 	r.conversion = conversion.duplicate()
 	r.more = more.duplicate(true)

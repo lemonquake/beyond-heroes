@@ -26,6 +26,9 @@ var _bg: Texture2D
 var zoom := 1.0
 var _content := Vector2.ZERO
 var _fit_width := 0.0
+## Class Transcendence: a locked preview of an advancement the hero has not taken (another tree state, read only).
+var preview := false
+var preview_class: StringName = &""
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -34,7 +37,34 @@ func _init() -> void:
 func bind(p_hero: HeroData, talents: bool) -> void:
 	hero = p_hero
 	is_talent = talents
-	tree_state = hero.talent_tree if talents else hero.skill_tree
+	if not preview:
+		tree_state = hero.talent_tree if talents else hero.skill_tree
+	_layout()
+
+## Show `identity`'s page of a tree composed for the hero plus that advancement: a locked preview (nothing can be
+## learned or refunded here; it is granted at the Grand Master).
+func bind_preview(p_hero: HeroData, talents: bool, identity: StringName) -> void:
+	hero = p_hero
+	is_talent = talents
+	preview = true
+	preview_class = identity
+	var path: Array = DataTranscendence.ancestry(identity).slice(1)
+	var base := DB.tree(hero.cls.talent_tree_id if talents else hero.cls.skill_tree_id)
+	tree_state = TreeState.new(ClassTranscendence.compose_tree(base, path, talents))
+	page = maxi(0, ClassTranscendence.page_index(tree_state.tree, identity))
+	_layout()
+
+## Back to the hero's own tree.
+func end_preview() -> void:
+	if not preview:
+		return
+	preview = false
+	preview_class = &""
+	page = 0
+	if hero:
+		bind(hero, is_talent)
+
+func _layout() -> void:
 	_bg = UIArt.tex("tree/tree_bg_%s.png" % hero.cls.id)
 	page = clampi(page, 0, tree_state.tree.page_count() - 1)
 	var max_p := Vector2.ZERO
@@ -55,6 +85,8 @@ func _apply_zoom() -> void:
 
 ## Show another page of the tree.
 func set_page(p: int) -> void:
+	if preview:
+		end_preview()
 	page = p
 	_hover_id = &""
 	if hero:
@@ -71,6 +103,8 @@ func node_center(n: Dictionary) -> Vector2:
 	return MARGIN + Vector2(n.pos) * UNIT + Vector2(40, 30)
 
 func state_of(n: Dictionary) -> String:
+	if preview and StringName(n.get("granted_by", &"")) != &"":
+		return "locked"
 	if tree_state.rank(n.id) > 0:
 		return "allocated"
 	var why := tree_state.can_rank_up(n.id, 999, hero.progress.level)
@@ -167,13 +201,21 @@ func _draw_node(n: Dictionary) -> void:
 		draw_arc(c, sz * 0.62, 0.0, TAU, 40, Color(1.0, 0.9, 0.6, 0.9 if n.id == selected_id else 0.5), 2.0)
 	# rank pips / text
 	var mr := int(n.get("max_rank", 1))
-	if mr > 1:
+	var granted := tree_state.floor_of(n.id)
+	if mr > 1 or granted > 0:
 		var font := UITheme.number_font()
 		var t := "%d/%d" % [tree_state.rank(n.id), mr]
 		var w := font.get_string_size(t, HORIZONTAL_ALIGNMENT_LEFT, -1, 15).x
 		var p := Vector2(c.x - w * 0.5, rect.end.y + 15)
 		draw_string_outline(font, p, t, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color(0, 0, 0, 0.9))
 		draw_string(font, p, t, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, UITheme.GOLD if tree_state.rank(n.id) > 0 else UITheme.TEXT_DIM)
+		if granted > 0:
+			# a granted rank: learned for free at the Grand Master, never refunded
+			var g := "%d granted" % granted
+			var gw := font.get_string_size(g, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+			var gp := Vector2(c.x - gw * 0.5, rect.end.y + 31)
+			draw_string_outline(font, gp, g, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, Color(0, 0, 0, 0.9))
+			draw_string(font, gp, g, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.6, 0.97, 1.0))
 
 var _touch_down_id: StringName = &""
 var _touch_down_t := 0
@@ -201,7 +243,7 @@ func _gui_input(e: InputEvent) -> void:
 	elif e is InputEventMouseButton and not e.pressed and e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
 		# touch play: a quick tap learns; a long press is a right-click (TouchControls) and refunds instead
 		var n := _node_at(e.position / zoom)
-		if not n.is_empty() and n.id == _touch_down_id and Time.get_ticks_msec() - _touch_down_t < 450:
+		if not n.is_empty() and n.id == _touch_down_id and Time.get_ticks_msec() - _touch_down_t < 450 and not preview:
 			_learn(n)
 			queue_redraw()
 			TooltipLayer.refresh()
@@ -213,6 +255,11 @@ func _gui_input(e: InputEvent) -> void:
 			return
 		selected_id = n.id
 		node_selected.emit(n)
+		if preview:
+			queue_redraw()
+			TooltipLayer.refresh()
+			accept_event()
+			return
 		if e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
 			_touch_down_id = n.id
 			_touch_down_t = Time.get_ticks_msec()
@@ -252,6 +299,19 @@ func _tip(n: Dictionary) -> Control:
 		return tip
 	var f := Tips.frame(360.0)
 	var v: VBoxContainer = f[1]
+	if n.get("transcend_talent", false):
+		# Class Transcendence talents: the text with this level's numbers, and the next level's
+		var trk := tree_state.rank(n.id)
+		var tdef: Dictionary = DataTranscendence.TALENTS.get(n.id, {})
+		v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD, UITheme.title_font()))
+		v.add_child(Tips.lbl("%s talent · %s · Level %d / %d" % [DataTranscendence.name_of(StringName(n.get("granted_by", &""))),
+			"one level" if tdef.get("kind", "") == "major" else "ranked", trk, int(n.get("max_rank", 1))], 14, UITheme.TEXT_DIM))
+		v.add_child(Tips.rule(UITheme.BRONZE))
+		v.add_child(Tips.lbl(DataTranscendence.talent_text(n.id, maxi(trk, 1)), 16, UITheme.TEXT))
+		if trk > 0 and trk < int(n.get("max_rank", 1)):
+			v.add_child(Tips.lbl("Next level: " + DataTranscendence.talent_text(n.id, trk + 1), 15, Tips.AFFIX))
+		_append_requirements(v, n)
+		return f[0]
 	if n.get("kind") == "passive":
 		var rk := tree_state.rank(n.id)
 		v.add_child(Tips.lbl(String(n.name), 20, UITheme.GOLD, UITheme.title_font()))
@@ -296,6 +356,17 @@ func _append_synergies(v: VBoxContainer, n: Dictionary) -> void:
 
 func _append_requirements(v: VBoxContainer, n: Dictionary) -> void:
 	v.add_child(Tips.rule())
+	var by := StringName(n.get("granted_by", &""))
+	if preview and by != &"":
+		var need := ClassTranscendence.can_transcend(hero, by)
+		v.add_child(Tips.lbl("Granted at level 1 when you become a %s at the Grand Master (Guild House)." % DataTranscendence.name_of(by), 14, Color(0.6, 0.97, 1.0)))
+		if need != "":
+			v.add_child(Tips.lbl(need, 14, UITheme.BAD))
+		return
+	var granted := tree_state.floor_of(n.id)
+	if granted > 0:
+		v.add_child(Tips.lbl("%d granted by %s (free, kept through every reset) · %d bought" % [granted, DataTranscendence.name_of(by), tree_state.paid_rank(n.id)],
+			14, Color(0.6, 0.97, 1.0)))
 	var why := tree_state.can_rank_up(n.id, _points(), hero.progress.level)
 	if why == "":
 		v.add_child(Tips.lbl("Click to learn (%d point%s)" % [int(n.get("cost", 1)), "s" if int(n.get("cost", 1)) > 1 else ""], 14, UITheme.GOOD))

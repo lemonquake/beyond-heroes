@@ -11,6 +11,9 @@ var tier_rank := DataGuilds.MAX_RANK
 ## bh-026: the wearer's class id, for pieces only some classes may wear (ItemBaseDef.wearers). "" = ungated (a bare
 ## Equipment); HeroData sets the hero's class, TempoRules checks a Tempo's class itself.
 var wearer: StringName = &""
+## Class Transcendence: the wearer's lineage ([family, first transcendence, master]) for ClassRequirements. Empty = not
+## class-gated (a bare Equipment). HeroData keeps it in step with the hero's path.
+var wearer_line: Array = []
 ## Invalid legacy hand combinations are removed from combat and retained until bag space is available.
 var recovered_items: Array = []
 
@@ -35,6 +38,10 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 		return "Does not fit in %s" % BH.SLOT_NAMES[slot]
 	if wearer != &"" and not DataSpecialWeapons.can_wear(item.base, wearer):
 		return DataSpecialWeapons.wearers_text(item.base)
+	# the class rule binds Unbound gear too
+	var cls_err := ClassRequirements.check(item.base, wearer_line)
+	if cls_err != "":
+		return cls_err
 	if item.unbound:             # bh-024/026: Unbound pieces ask for no level or attributes, and Class E at most
 		if tier_rank < DataSpecialWeapons.UNBOUND_RANK:
 			return "Requires a Class %s hero (Unbound gear)" % DataGuilds.letter(DataSpecialWeapons.UNBOUND_RANK)
@@ -61,6 +68,29 @@ func check(item: ItemInstance, slot: StringName, level: int, attrs: Dictionary) 
 		if main_wt.two_handed or not main_wt.dual_wieldable:
 			return "%s cannot be dual wielded" % main_wt.display_name
 	return ""
+
+## Class Transcendence: worn pieces the wearer's class may not wear (a damaged path, or a class set worn by another
+## class before the class rules) leave the slots: no stats while unworn, and the exact instance is kept in
+## `recovered_items` (HeroData moves it to the bag as space allows; nothing is deleted, rerolled or duplicated).
+## Returns the pieces taken off.
+func repair_class_requirements() -> Array:
+	var out: Array = []
+	if wearer_line.is_empty():
+		return out
+	for s in BH.SLOTS:
+		var it: ItemInstance = slots[s]
+		if it != null and not ClassRequirements.allows_line(ClassRequirements.of(it.base), wearer_line):
+			slots[s] = null
+			recovered_items.append(it)
+			out.append(it)
+	var orphan := orphaned_sub()
+	if orphan != null:
+		slots[&"sub_weapon"] = null
+		recovered_items.append(orphan)
+		out.append(orphan)
+	if not out.is_empty():
+		changed.emit()
+	return out
 
 ## Best slot for an item: first empty accepted slot, otherwise the first accepted slot.
 func auto_slot(item: ItemInstance) -> StringName:

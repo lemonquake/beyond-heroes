@@ -19,6 +19,7 @@ const GROUPS := [
 var hero: HeroData
 var preview: CharacterPreview
 var _class_label: Label
+var _advance_label: Label                 # Class Transcendence: the quiet "advancement available" reminder
 var _level_label: Label
 var _xp_bar: ArtBar
 var _xp_text: Label
@@ -82,10 +83,19 @@ func _build() -> void:
 	pw.add_child(preview)
 	_class_label = UITheme.title("", 26, UITheme.GOLD)
 	_class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_class_label.mouse_filter = Control.MOUSE_FILTER_PASS
+	TooltipLayer.attach(_class_label, _class_tip)
 	left.add_child(_class_label)
 	_level_label = UITheme.label("", 18, UITheme.PARCHMENT, UITheme.body_bold())
 	_level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	left.add_child(_level_label)
+	_advance_label = UITheme.label("", 15, Color(0.6, 0.97, 1.0), UITheme.body_font())
+	_advance_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_advance_label.clip_text = true
+	_advance_label.custom_minimum_size.x = 380
+	TooltipLayer.attach(_advance_label, func() -> Control: return Tips.text(
+		"Class advancement is available at levels 60 and 120. Grand Master Edran Vale in the Guild House (Malasugue) teaches it; no guild is needed.", "Class"))
+	left.add_child(_advance_label)
 	_xp_bar = ArtBar.new("hud/bar_frame_xp.png", Color(0.95, 0.75, 0.3), 20.0)
 	left.add_child(_xp_bar)
 	_xp_text = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.number_font())
@@ -333,8 +343,12 @@ func refresh() -> void:
 	preview.show_class(hero.cls.id, hero)
 	_pic.texture = ProfilePicture.portrait(hero)
 	_pic_clear.disabled = hero.profile_pic.is_empty()
-	_class_label.text = "%s — %s" % [hero.hero_name, hero.cls.display_name]
-	_level_label.text = "Level %d" % hero.progress.level
+	_class_label.text = "%s — %s" % [hero.hero_name, ClassTranscendence.current_class_name(hero)]
+	_class_label.add_theme_color_override("font_color", ClassTranscendence.label_color(ClassTranscendence.current_class_id(hero)))
+	_level_label.text = "Level %d%s" % [hero.progress.level, (" · %s family" % DataTranscendence.name_of(hero.cls.id)) if not hero.transcendence_path.is_empty() else ""]
+	var avail := ClassTranscendence.available_steps(hero)
+	_advance_label.text = "Advancement available: visit the Grand Master in the Guild House" if avail > 0 else ""
+	_advance_label.visible = avail > 0
 	var need := XpCurve.xp_to_next(hero.progress.level)
 	_xp_bar.set_ratio(float(hero.progress.xp) / float(maxi(1, need)) if need > 0 else 1.0, true)
 	_xp_text.text = "%d / %d experience" % [hero.progress.xp, need] if need > 0 else "Maximum level"
@@ -461,3 +475,22 @@ func _refresh_stats() -> void:
 			grid.add_child(n)
 			grid.add_child(vl)
 		_stats_box.add_child(Tips.gap(6))
+
+## The class name's tooltip: the class line and its signature traits (Class Transcendence).
+func _class_tip() -> Control:
+	if hero == null:
+		return null
+	var names: Array[String] = []
+	for id in ClassTranscendence.lineage(hero):
+		names.append(DataTranscendence.name_of(id))
+	var text := "Path: %s" % "  >  ".join(names)
+	for id in ClassTranscendence.lineage(hero):
+		if DataTranscendence.SIGNATURES.has(id):
+			text += "
+
+%s: %s" % [String(DataTranscendence.SIGNATURES[id].name), DataTranscendence.signature_text(id)]
+	if hero.transcendence_path.is_empty():
+		text += "
+
+Advanced classes gain a signature trait at levels 60 and 120."
+	return Tips.text(text, ClassTranscendence.current_class_name(hero))

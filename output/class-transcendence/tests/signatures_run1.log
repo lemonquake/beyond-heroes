@@ -1,0 +1,24 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Out of bounds get index '0' (on base: 'Array')
+   at: test_elemental_attunement_turns_and_bolts_once_per_cast (res://tests/unit/test_transcendence_signatures.gd:400)
+   GDScript backtrace (most recent call first):
+       [0] test_elemental_attunement_turns_and_bolts_once_per_cast (res://tests/unit/test_transcendence_signatures.gd:400)
+       [1] frames (res://tests/unit/test_transcendence_signatures.gd:81)
+[FAIL] test_transcendence_signatures.gd — 17 tests, 385 checks, 11 failures (865.9 ms)
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: the collapse strikes enemies around the fallen
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: and pulls them in
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: at most once every 2 s — expected 1, got 0
+  FAIL test_transcendence_signatures.test_collapse_pulls_and_damages_with_cooldown: weapon kills never collapse — expected 1, got 0
+  FAIL test_transcendence_signatures.test_dawnbringer_every_fifth_hit_with_cooldown: the fifth hit breaks the dawn on every enemy around
+  FAIL test_transcendence_signatures.test_dawnbringer_every_fifth_hit_with_cooldown: at most once every 3 s — expected 1, got 0
+  FAIL test_transcendence_signatures.test_dawnbringer_every_fifth_hit_with_cooldown: ready again after the cooldown — expected 2, got 0
+  FAIL test_transcendence_signatures.test_elemental_attunement_turns_and_bolts_once_per_cast: the first enemy struck takes an attuned bolt — expected 1, got 0
+  FAIL test_transcendence_signatures.test_elemental_attunement_turns_and_bolts_once_per_cast: aborted before done() (script error?)
+  FAIL test_transcendence_signatures.test_marks_hide_and_clean_up: shown again
+  FAIL test_transcendence_signatures.test_royal_aegis_crests_and_retort: the shield wave strikes enemies ahead
+TOTAL: 385 checks, 11 failures
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

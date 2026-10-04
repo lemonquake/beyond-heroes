@@ -44,14 +44,16 @@ func finalize_levels() -> void:
 				n["max_rank"] = LEVEL_MAX
 
 ## Effective number of "ranks worth" of effect at `rank`: identical to `rank` up to `base`, then diminishing.
-static func rank_power(rank: int, base: int) -> float:
+## `tail` (>= 0) overrides the share of an extra level (Class Transcendence talents use 0.25).
+static func rank_power(rank: int, base: int, tail := -1.0) -> float:
 	if rank <= base:
 		return float(maxi(rank, 0))
-	return float(base) + float(rank - base) * (TAIL_SINGLE if base <= 1 else TAIL)
+	var t := tail if tail >= 0.0 else (TAIL_SINGLE if base <= 1 else TAIL)
+	return float(base) + float(rank - base) * t
 
 func power_of(id: StringName, rank: int) -> float:
 	var n := node(id)
-	return rank_power(clampi(rank, 0, int(n.get("max_rank", 1))), int(n.get("base_rank", n.get("max_rank", 1))))
+	return rank_power(clampi(rank, 0, int(n.get("max_rank", 1))), int(n.get("base_rank", n.get("max_rank", 1))), float(n.get("tail", -1.0)))
 
 func index() -> Dictionary:
 	if _index.is_empty():

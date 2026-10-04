@@ -12,7 +12,7 @@ static func _n(id: StringName, name: String, kind: String, icon: String, pos: Ve
 static func ranger() -> TreeDef:
 	var t := TreeDef.new()
 	t.id = &"ranger_talents"
-	t.display_name = "Ranger Talents"
+	t.display_name = "Hunter Talents"
 	t.points_kind = &"talent"
 	t.branches = [{"name": "Hawkeye", "x": 1.0, "color": Color(0.9, 0.85, 0.5)}, {"name": "Pathfinder", "x": 4.0, "color": Color(0.55, 0.85, 0.45)},
 		{"name": "Trapwright", "x": 7.0, "color": Color(0.95, 0.55, 0.3)}]

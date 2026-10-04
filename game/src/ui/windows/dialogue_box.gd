@@ -9,7 +9,7 @@ const CPS := 55.0             # characters per second
 const SERVICES := [&"respec", &"rest", &"mystic_heal", &"promote", &"join_swordfin", &"join_lantern", &"tempo_hire",
 	&"tempo_revive", &"tempo_renowned", &"field_guide", &"craft_forge", &"craft_alchemy", &"craft_workbench", &"hero_roster", &"camp_rest",
 	&"guild_jobs", &"guild_jobs_swordfin", &"guild_jobs_lantern", &"socketing", &"lape_trade", &"guild_window", &"found_guild",
-	&"sail_zarael", &"sail_wyman"]
+	&"sail_zarael", &"sail_wyman", &"transcend"]
 
 var session: DialogueSession
 var npc: Npc
@@ -254,6 +254,8 @@ func _on_request(kind: StringName, arg: Variant) -> void:
 				# bh-029: Agdao's ship between Wyman Outpost and Zarael
 				&"sail_zarael": (func() -> void: ZaraelVoyage.sail(true)).call_deferred()
 				&"sail_wyman": (func() -> void: ZaraelVoyage.sail(false)).call_deferred()
+				# Class Transcendence: the Grand Master's window (any Guild House)
+				&"transcend": (func() -> void: Game.ui_root.open(&"transcend")).call_deferred()
 
 func _play_cutscene(id: StringName, who: Npc, resume: String, def: NpcDef) -> void:
 	close()

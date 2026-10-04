@@ -1,0 +1,5127 @@
+{
+  "identities": [
+    {
+      "id": "knight",
+      "name": "Knight",
+      "family": "knight",
+      "stage": 0,
+      "parent": "",
+      "lineage": [
+        "knight"
+      ],
+      "level": 1,
+      "primary": "#c83a33",
+      "accent": "#e2c48a",
+      "label_color": "#f5cc75"
+    },
+    {
+      "id": "ranger",
+      "name": "Hunter",
+      "family": "ranger",
+      "stage": 0,
+      "parent": "",
+      "lineage": [
+        "ranger"
+      ],
+      "level": 1,
+      "primary": "#4f8c47",
+      "accent": "#d8c48e",
+      "label_color": "#f5cc75"
+    },
+    {
+      "id": "mage",
+      "name": "Mage",
+      "family": "mage",
+      "stage": 0,
+      "parent": "",
+      "lineage": [
+        "mage"
+      ],
+      "level": 1,
+      "primary": "#5242c7",
+      "accent": "#c9b8f2",
+      "label_color": "#f5cc75"
+    },
+    {
+      "id": "shadowblade",
+      "name": "Shadowblade",
+      "family": "shadowblade",
+      "stage": 0,
+      "parent": "",
+      "lineage": [
+        "shadowblade"
+      ],
+      "level": 1,
+      "primary": "#73339a",
+      "accent": "#c0a6d8",
+      "label_color": "#f5cc75"
+    },
+    {
+      "id": "royal_guard",
+      "name": "Royal Guard",
+      "family": "knight",
+      "stage": 1,
+      "parent": "knight",
+      "lineage": [
+        "knight",
+        "royal_guard"
+      ],
+      "level": 60,
+      "primary": "#527ed6",
+      "accent": "#d8b46a",
+      "label_color": "#6c91dc",
+      "role": "Defensive melee and protection",
+      "desc": "Holds the line with a shield. Charges through enemies, draws them away from allies, and plants a standard that steadies everyone near it.",
+      "limit": "Most of its strength is in defense; Bastion Rush needs a shield.",
+      "signature": {
+        "name": "Royal Aegis",
+        "text": "Each block adds a crest (up to 3; they fade 10 s after your last block). With 3 crests your next weapon attack is a Royal Retort: it deals 30% more damage and sends a shield wave 4 m ahead that deals 80% weapon damage and staggers.",
+        "values": {
+          "max": 3,
+          "fade": 10.0,
+          "bonus": 30.0,
+          "reach": 4.0,
+          "wave": 80.0
+        }
+      },
+      "armor_look": "Royal-blue plate with gold trim, great pauldrons, a crown on the breast, a blue tabard and a short blue cape.",
+      "skills": [
+        {
+          "id": "rg_bastion_rush",
+          "name": "Bastion Rush",
+          "behavior": "dash_strike",
+          "kind": "attack",
+          "cooldown": 10.0,
+          "requires": "shield",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 22.0
+          },
+          "anim": "shield_bash",
+          "sound_cast": "dodge_roll",
+          "sound_hit": "block",
+          "vfx": "impact_ring",
+          "ranks": {
+            "1": {
+              "mana": 14.0,
+              "params": {
+                "weapon_pct": 210.0,
+                "dash": 6.5,
+                "radius": 2.0,
+                "knockback": 11.0,
+                "poise": 90.0,
+                "valor_gain": 10.0,
+                "rank": 1.0
+              },
+              "text": "Charge 6.5 m behind your shield and slam everything at the end of the charge: 210% weapon damage, a heavy knockback, and a stagger. The charge stops at walls. Requires a shield."
+            },
+            "5": {
+              "mana": 17.2,
+              "params": {
+                "weapon_pct": 298.0,
+                "dash": 6.5,
+                "radius": 2.0,
+                "knockback": 11.0,
+                "poise": 90.0,
+                "valor_gain": 10.0,
+                "rank": 5.0
+              },
+              "text": "Charge 6.5 m behind your shield and slam everything at the end of the charge: 298% weapon damage, a heavy knockback, and a stagger. The charge stops at walls. Requires a shield."
+            },
+            "25": {
+              "mana": 25.2,
+              "params": {
+                "weapon_pct": 518.0,
+                "dash": 6.5,
+                "radius": 2.0,
+                "knockback": 11.0,
+                "poise": 90.0,
+                "valor_gain": 10.0,
+                "rank": 25.0
+              },
+              "text": "Charge 6.5 m behind your shield and slam everything at the end of the charge: 518% weapon damage, a heavy knockback, and a stagger. The charge stops at walls. Requires a shield."
+            },
+            "30": {
+              "mana": 25.2,
+              "params": {
+                "weapon_pct": 573.0,
+                "dash": 6.5,
+                "radius": 2.0,
+                "knockback": 11.0,
+                "poise": 90.0,
+                "valor_gain": 10.0,
+                "rank": 30.0
+              },
+              "text": "Charge 6.5 m behind your shield and slam everything at the end of the charge: 573% weapon damage, a heavy knockback, and a stagger. The charge stops at walls. Requires a shield."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "rg_sovereigns_challenge",
+          "name": "Sovereign's Challenge",
+          "behavior": "t_challenge",
+          "kind": "spell",
+          "cooldown": 18.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "dr": 1.0,
+            "duration": 0.2
+          },
+          "anim": "war_cry",
+          "sound_cast": "war_cry",
+          "sound_hit": "",
+          "vfx": "war_cry",
+          "ranks": {
+            "1": {
+              "mana": 16.0,
+              "params": {
+                "radius": 7.0,
+                "taunt": 4.0,
+                "dr": 20.0,
+                "duration": 5.0,
+                "valor_gain": 12.0,
+                "rank": 1.0
+              },
+              "text": "Challenge every enemy within 7 m: for 4 s they attack you instead of your allies, and you take 20% less damage for 5 s. Bosses ignore the challenge but you keep the protection."
+            },
+            "5": {
+              "mana": 18.4,
+              "params": {
+                "radius": 7.0,
+                "taunt": 4.0,
+                "dr": 24.0,
+                "duration": 5.8,
+                "valor_gain": 12.0,
+                "rank": 5.0
+              },
+              "text": "Challenge every enemy within 7 m: for 4 s they attack you instead of your allies, and you take 24% less damage for 5.8 s. Bosses ignore the challenge but you keep the protection."
+            },
+            "25": {
+              "mana": 24.4,
+              "params": {
+                "radius": 7.0,
+                "taunt": 4.0,
+                "dr": 34.0,
+                "duration": 7.8,
+                "valor_gain": 12.0,
+                "rank": 25.0
+              },
+              "text": "Challenge every enemy within 7 m: for 4 s they attack you instead of your allies, and you take 34% less damage for 7.8 s. Bosses ignore the challenge but you keep the protection."
+            },
+            "30": {
+              "mana": 24.4,
+              "params": {
+                "radius": 7.0,
+                "taunt": 4.0,
+                "dr": 36.5,
+                "duration": 8.3,
+                "valor_gain": 12.0,
+                "rank": 30.0
+              },
+              "text": "Challenge every enemy within 7 m: for 4 s they attack you instead of your allies, and you take 36.5% less damage for 8.3 s. Bosses ignore the challenge but you keep the protection."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "rg_bulwark_standard",
+          "name": "Bulwark Standard",
+          "behavior": "t_zone",
+          "kind": "spell",
+          "cooldown": 24.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "block": 0.6,
+            "duration": 0.2
+          },
+          "anim": "cast_area",
+          "sound_cast": "holy_chime",
+          "sound_hit": "",
+          "vfx": "aura",
+          "ranks": {
+            "1": {
+              "mana": 20.0,
+              "params": {
+                "range": 10.0,
+                "radius": 5.0,
+                "duration": 8.0,
+                "interval": 0.5,
+                "block": 15.0,
+                "kb": 25.0,
+                "poise_inc": 30.0,
+                "rank": 1.0
+              },
+              "text": "Plant a standard at the target for 8 s. You and every ally within 5 m gain +15% Block Chance, +25% Knockback Resistance and +30% Poise. No shield needed. One standard at a time; several Royal Guards' standards do not stack."
+            },
+            "5": {
+              "mana": 24.0,
+              "params": {
+                "range": 10.0,
+                "radius": 5.0,
+                "duration": 8.8,
+                "interval": 0.5,
+                "block": 17.4,
+                "kb": 25.0,
+                "poise_inc": 30.0,
+                "rank": 5.0
+              },
+              "text": "Plant a standard at the target for 8.8 s. You and every ally within 5 m gain +17.4% Block Chance, +25% Knockback Resistance and +30% Poise. No shield needed. One standard at a time; several Royal Guards' standards do not stack."
+            },
+            "25": {
+              "mana": 34.0,
+              "params": {
+                "range": 10.0,
+                "radius": 5.0,
+                "duration": 10.8,
+                "interval": 0.5,
+                "block": 23.4,
+                "kb": 25.0,
+                "poise_inc": 30.0,
+                "rank": 25.0
+              },
+              "text": "Plant a standard at the target for 10.8 s. You and every ally within 5 m gain +23.4% Block Chance, +25% Knockback Resistance and +30% Poise. No shield needed. One standard at a time; several Royal Guards' standards do not stack."
+            },
+            "30": {
+              "mana": 34.0,
+              "params": {
+                "range": 10.0,
+                "radius": 5.0,
+                "duration": 11.3,
+                "interval": 0.5,
+                "block": 24.9,
+                "kb": 25.0,
+                "poise_inc": 30.0,
+                "rank": 30.0
+              },
+              "text": "Plant a standard at the target for 11.3 s. You and every ally within 5 m gain +24.9% Block Chance, +25% Knockback Resistance and +30% Poise. No shield needed. One standard at a time; several Royal Guards' standards do not stack."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "rg_crown_discipline",
+          "name": "Crown Discipline",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% Block Strength (at most 100%) and +1% Block Chance (at most 75%).",
+          "rank25": "+21% Block Strength (at most 100%) and +7% Block Chance (at most 75%).",
+          "mods": [
+            {
+              "stat": "block_strength",
+              "op": "flat",
+              "rank1": 0.03
+            },
+            {
+              "stat": "block_chance",
+              "op": "flat",
+              "rank1": 0.01
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "rg_unbroken_line",
+          "name": "Unbroken Line",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+4% Poise, and blows push you back 3% less far after Knockback Resistance (at most 25%).",
+          "rank25": "+28% Poise, and blows push you back 21% less far after Knockback Resistance (at most 25%).",
+          "mods": [
+            {
+              "stat": "poise",
+              "op": "inc",
+              "rank1": 0.04
+            }
+          ],
+          "flags": {
+            "rg_unbroken": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "rg_guardians_resolve",
+          "name": "Guardian's Resolve",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "Each successful block gives 4 extra Valor (at most once every 0.5 s).",
+          "rank25": "Each successful block gives 12 extra Valor (at most once every 0.5 s).",
+          "mods": [],
+          "flags": {
+            "rg_block_valor": {
+              "rank1": 4.0,
+              "cap": 12.0
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_crownward_longsword",
+          "name": "Crownward Longsword",
+          "category": "weapon",
+          "weapon_type": "sword",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "royal_guard"
+            ]
+          },
+          "text": "For Royal Guard and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_royal_guard_cuirass",
+          "name": "Royal Guard Cuirass",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "royal_guard"
+            ]
+          },
+          "text": "For Royal Guard and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_oathkeeper_seal",
+          "name": "Oathkeeper Seal",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "royal_guard"
+            ]
+          },
+          "text": "For Royal Guard and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dark_general",
+      "name": "Dark General",
+      "family": "knight",
+      "stage": 2,
+      "parent": "royal_guard",
+      "lineage": [
+        "knight",
+        "royal_guard",
+        "dark_general"
+      ],
+      "level": 120,
+      "primary": "#343444",
+      "accent": "#c9566c",
+      "label_color": "#d16f82",
+      "role": "Aggressive armored melee with Dark damage",
+      "desc": "Turns the Knight's armor into a weapon. Wide Dark sweeps weaken enemies, a heavy advance breaks lines, and a zone of Dark pulses spends Valor for a stronger first strike.",
+      "limit": "Highest Knight damage; protects allies far less than the Grand Paladin.",
+      "signature": {
+        "name": "Conqueror's Dread",
+        "text": "Defeating an enemy, or spending Valor on a skill, adds Dread (up to 5, 10 s): each Dread gives 2% more damage and 2% less damage taken.",
+        "values": {
+          "max": 5,
+          "dur": 10.0,
+          "dmg": 2.0,
+          "dr": 2.0
+        }
+      },
+      "armor_look": "Blackened plate with crimson trim, spiked pauldrons, a tall gorget, crimson tassets and a long torn crimson cape.",
+      "skills": [
+        {
+          "id": "dg_dread_cleave",
+          "name": "Dread Cleave",
+          "behavior": "melee_arc",
+          "kind": "attack",
+          "cooldown": 9.0,
+          "requires": "melee",
+          "conversion": {
+            "8": 0.4
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 24.0
+          },
+          "anim": "sword_heavy",
+          "sound_cast": "cleave",
+          "sound_hit": "hit_heavy",
+          "vfx": "slash_wide",
+          "ranks": {
+            "1": {
+              "mana": 10.0,
+              "params": {
+                "weapon_pct": 240.0,
+                "arc": 200.0,
+                "range": 3.6,
+                "knockback": 7.0,
+                "poise": 30.0,
+                "valor_gain": 6.0,
+                "rank": 1.0
+              },
+              "text": "A wide sweep of 200° and 3.6 m: 240% weapon damage, 40% of it as Dark, and every enemy struck is Weakened (20% less damage) for 3 s."
+            },
+            "5": {
+              "mana": 12.4,
+              "params": {
+                "weapon_pct": 336.0,
+                "arc": 200.0,
+                "range": 3.6,
+                "knockback": 7.0,
+                "poise": 30.0,
+                "valor_gain": 6.0,
+                "rank": 5.0
+              },
+              "text": "A wide sweep of 200° and 3.6 m: 336% weapon damage, 40% of it as Dark, and every enemy struck is Weakened (20% less damage) for 3 s."
+            },
+            "25": {
+              "mana": 18.4,
+              "params": {
+                "weapon_pct": 576.0,
+                "arc": 200.0,
+                "range": 3.6,
+                "knockback": 7.0,
+                "poise": 30.0,
+                "valor_gain": 6.0,
+                "rank": 25.0
+              },
+              "text": "A wide sweep of 200° and 3.6 m: 576% weapon damage, 40% of it as Dark, and every enemy struck is Weakened (20% less damage) for 3 s."
+            },
+            "30": {
+              "mana": 18.4,
+              "params": {
+                "weapon_pct": 636.0,
+                "arc": 200.0,
+                "range": 3.6,
+                "knockback": 7.0,
+                "poise": 30.0,
+                "valor_gain": 6.0,
+                "rank": 30.0
+              },
+              "text": "A wide sweep of 200° and 3.6 m: 636% weapon damage, 40% of it as Dark, and every enemy struck is Weakened (20% less damage) for 3 s."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "dg_warbound_advance",
+          "name": "Warbound Advance",
+          "behavior": "dash_strike",
+          "kind": "attack",
+          "cooldown": 14.0,
+          "requires": "melee",
+          "conversion": {
+            "8": 0.25
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 28.0
+          },
+          "anim": "axe_heavy",
+          "sound_cast": "swing_heavy",
+          "sound_hit": "hit_heavy",
+          "vfx": "impact_ring",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 280.0,
+                "dash": 7.0,
+                "radius": 2.6,
+                "knockback": 12.0,
+                "poise": 70.0,
+                "valor_gain": 10.0,
+                "self_dur": 3.0,
+                "rank": 1.0
+              },
+              "text": "Advance 7 m and bring down a heavy blow around the end of the advance: 280% weapon damage. For 3 s you gain +50% Knockback Resistance and 50% more Poise."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "weapon_pct": 392.0,
+                "dash": 7.0,
+                "radius": 2.6,
+                "knockback": 12.0,
+                "poise": 70.0,
+                "valor_gain": 10.0,
+                "self_dur": 3.0,
+                "rank": 5.0
+              },
+              "text": "Advance 7 m and bring down a heavy blow around the end of the advance: 392% weapon damage. For 3 s you gain +50% Knockback Resistance and 50% more Poise."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 672.0,
+                "dash": 7.0,
+                "radius": 2.6,
+                "knockback": 12.0,
+                "poise": 70.0,
+                "valor_gain": 10.0,
+                "self_dur": 3.0,
+                "rank": 25.0
+              },
+              "text": "Advance 7 m and bring down a heavy blow around the end of the advance: 672% weapon damage. For 3 s you gain +50% Knockback Resistance and 50% more Poise."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 742.0,
+                "dash": 7.0,
+                "radius": 2.6,
+                "knockback": 12.0,
+                "poise": 70.0,
+                "valor_gain": 10.0,
+                "self_dur": 3.0,
+                "rank": 30.0
+              },
+              "text": "Advance 7 m and bring down a heavy blow around the end of the advance: 742% weapon damage. For 3 s you gain +50% Knockback Resistance and 50% more Poise."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "dg_black_dominion",
+          "name": "Black Dominion",
+          "behavior": "t_zone",
+          "kind": "attack",
+          "cooldown": 30.0,
+          "requires": "",
+          "conversion": {
+            "8": 0.7
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 6.0,
+            "initial_pct": 18.0
+          },
+          "anim": "cast_weapon",
+          "sound_cast": "dark_cast",
+          "sound_hit": "dark_curse",
+          "vfx": "curse",
+          "ranks": {
+            "1": {
+              "mana": 18.0,
+              "params": {
+                "range": 12.0,
+                "radius": 4.5,
+                "duration": 3.0,
+                "interval": 0.5,
+                "weapon_pct": 55.0,
+                "initial_pct": 180.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.5,
+                "knockback": 0.0,
+                "poise": 8.0,
+                "rank": 1.0
+              },
+              "text": "Darken the ground at the target (4.5 m) for 3 s. It strikes once on landing for 180% weapon damage, 0.5% more per Valor (all Valor is spent once), then pulses every 0.5 s for 55% weapon damage, 70% as Dark."
+            },
+            "5": {
+              "mana": 22.0,
+              "params": {
+                "range": 12.0,
+                "radius": 4.5,
+                "duration": 3.0,
+                "interval": 0.5,
+                "weapon_pct": 79.0,
+                "initial_pct": 252.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.5,
+                "knockback": 0.0,
+                "poise": 8.0,
+                "rank": 5.0
+              },
+              "text": "Darken the ground at the target (4.5 m) for 3 s. It strikes once on landing for 252% weapon damage, 0.5% more per Valor (all Valor is spent once), then pulses every 0.5 s for 79% weapon damage, 70% as Dark."
+            },
+            "25": {
+              "mana": 32.0,
+              "params": {
+                "range": 12.0,
+                "radius": 4.5,
+                "duration": 3.0,
+                "interval": 0.5,
+                "weapon_pct": 139.0,
+                "initial_pct": 432.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.5,
+                "knockback": 0.0,
+                "poise": 8.0,
+                "rank": 25.0
+              },
+              "text": "Darken the ground at the target (4.5 m) for 3 s. It strikes once on landing for 432% weapon damage, 0.5% more per Valor (all Valor is spent once), then pulses every 0.5 s for 139% weapon damage, 70% as Dark."
+            },
+            "30": {
+              "mana": 32.0,
+              "params": {
+                "range": 12.0,
+                "radius": 4.5,
+                "duration": 3.0,
+                "interval": 0.5,
+                "weapon_pct": 154.0,
+                "initial_pct": 477.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.5,
+                "knockback": 0.0,
+                "poise": 8.0,
+                "rank": 30.0
+              },
+              "text": "Darken the ground at the target (4.5 m) for 3 s. It strikes once on landing for 477% weapon damage, 0.5% more per Valor (all Valor is spent once), then pulses every 0.5 s for 154% weapon damage, 70% as Dark."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "dg_dreadsteel",
+          "name": "Dreadsteel",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% increased Dark damage and +3% Physical damage (one shared damage budget).",
+          "rank25": "+21% increased Dark damage and +21% Physical damage (one shared damage budget).",
+          "mods": [
+            {
+              "stat": "dmg_dark",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "phys_damage",
+              "op": "flat",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "dg_relentless_march",
+          "name": "Relentless March",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "1.2% more Movement Speed while in combat (at most 6%).",
+          "rank25": "6% more Movement Speed while in combat (at most 6%).",
+          "mods": [],
+          "flags": {
+            "dg_march": {
+              "rank1": 0.012,
+              "cap": 0.06
+            }
+          }
+        },
+        {
+          "id": "dg_iron_tyrant",
+          "name": "Iron Tyrant",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "Spending 20 or more Valor on a skill grants a barrier of 8% of Maximum HP for 6 s. Once every 15 s.",
+          "rank25": "Spending 20 or more Valor on a skill grants a barrier of 15% of Maximum HP for 6 s. Once every 15 s.",
+          "mods": [],
+          "flags": {
+            "dg_iron_tyrant": {
+              "rank1": 0.08,
+              "cap": 0.15
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_dreadmarshal_greatsword",
+          "name": "Dreadmarshal Greatsword",
+          "category": "weapon",
+          "weapon_type": "greatsword",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "dark_general"
+            ]
+          },
+          "text": "For Dark General only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_black_dominion_plate",
+          "name": "Black Dominion Plate",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "dark_general"
+            ]
+          },
+          "text": "For Dark General only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_dread_command_signet",
+          "name": "Dread Command Signet",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "dark_general"
+            ]
+          },
+          "text": "For Dark General only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grand_paladin",
+      "name": "Grand Paladin",
+      "family": "knight",
+      "stage": 2,
+      "parent": "royal_guard",
+      "lineage": [
+        "knight",
+        "royal_guard",
+        "grand_paladin"
+      ],
+      "level": 120,
+      "primary": "#e8e0c6",
+      "accent": "#e5bd64",
+      "label_color": "#e8e0c6",
+      "role": "Light melee and team protection",
+      "desc": "Fights with Light and protects the party. A heavy Light strike spends Valor, sanctified ground hurts enemies and heals allies, and an oath cleanses and shields everyone nearby.",
+      "limit": "Strong support and defense; less damage than the Dark General.",
+      "signature": {
+        "name": "Dawnbringer",
+        "text": "Every 5th weapon hit breaks the dawn around you (4 m): enemies take 60% weapon damage as Light, and you and your allies inside recover 2% of Maximum HP. At most once every 3 s.",
+        "values": {
+          "hits": 5,
+          "radius": 4.0,
+          "pct": 60.0,
+          "heal": 2.0,
+          "icd": 3.0
+        }
+      },
+      "armor_look": "White plate with gold trim, sun pauldrons, a sun on the breast, a white tabard edged in gold and a long gold cape with a white sun.",
+      "skills": [
+        {
+          "id": "gp_dawn_verdict",
+          "name": "Dawn Verdict",
+          "behavior": "melee_arc",
+          "kind": "attack",
+          "cooldown": 10.0,
+          "requires": "melee",
+          "conversion": {
+            "7": 0.5
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 30.0
+          },
+          "anim": "gs_heavy",
+          "sound_cast": "holy_chime",
+          "sound_hit": "holy_strike",
+          "vfx": "judgment",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 300.0,
+                "arc": 70.0,
+                "range": 3.2,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.6,
+                "rank": 1.0
+              },
+              "text": "A heavy radiant blow (70°, 3.2 m): 300% weapon damage, half as Light, and 0.6% more damage per Valor spent (all Valor is spent once)."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "weapon_pct": 420.0,
+                "arc": 70.0,
+                "range": 3.2,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.6,
+                "rank": 5.0
+              },
+              "text": "A heavy radiant blow (70°, 3.2 m): 420% weapon damage, half as Light, and 0.6% more damage per Valor spent (all Valor is spent once)."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 720.0,
+                "arc": 70.0,
+                "range": 3.2,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.6,
+                "rank": 25.0
+              },
+              "text": "A heavy radiant blow (70°, 3.2 m): 720% weapon damage, half as Light, and 0.6% more damage per Valor spent (all Valor is spent once)."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 795.0,
+                "arc": 70.0,
+                "range": 3.2,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "consume_valor": 1.0,
+                "per_valor": 0.6,
+                "rank": 30.0
+              },
+              "text": "A heavy radiant blow (70°, 3.2 m): 795% weapon damage, half as Light, and 0.6% more damage per Valor spent (all Valor is spent once)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "gp_sanctified_ground",
+          "name": "Sanctified Ground",
+          "behavior": "t_zone",
+          "kind": "attack",
+          "cooldown": 24.0,
+          "requires": "",
+          "conversion": {
+            "7": 1.0
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 4.0,
+            "heal_pct": 0.05
+          },
+          "anim": "cast_area",
+          "sound_cast": "heal",
+          "sound_hit": "holy_strike",
+          "vfx": "aura",
+          "ranks": {
+            "1": {
+              "mana": 22.0,
+              "params": {
+                "range": 10.0,
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 1.0,
+                "weapon_pct": 40.0,
+                "heal_pct": 1.2,
+                "heal_cap": 8.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 1.0
+              },
+              "text": "Sanctify 4.5 m of ground at the target for 6 s. Every 1 s enemies inside take 40% weapon damage as Light, and you and your allies inside recover 1.2% of Maximum HP (each ally at most 8% per cast)."
+            },
+            "5": {
+              "mana": 26.0,
+              "params": {
+                "range": 10.0,
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 1.0,
+                "weapon_pct": 56.0,
+                "heal_pct": 1.4,
+                "heal_cap": 8.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 5.0
+              },
+              "text": "Sanctify 4.5 m of ground at the target for 6 s. Every 1 s enemies inside take 56% weapon damage as Light, and you and your allies inside recover 1.4% of Maximum HP (each ally at most 8% per cast)."
+            },
+            "25": {
+              "mana": 36.0,
+              "params": {
+                "range": 10.0,
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 1.0,
+                "weapon_pct": 96.0,
+                "heal_pct": 1.9,
+                "heal_cap": 8.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 25.0
+              },
+              "text": "Sanctify 4.5 m of ground at the target for 6 s. Every 1 s enemies inside take 96% weapon damage as Light, and you and your allies inside recover 1.9% of Maximum HP (each ally at most 8% per cast)."
+            },
+            "30": {
+              "mana": 36.0,
+              "params": {
+                "range": 10.0,
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 1.0,
+                "weapon_pct": 106.0,
+                "heal_pct": 2.03,
+                "heal_cap": 8.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 30.0
+              },
+              "text": "Sanctify 4.5 m of ground at the target for 6 s. Every 1 s enemies inside take 106% weapon damage as Light, and you and your allies inside recover 2% of Maximum HP (each ally at most 8% per cast)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "gp_oath_of_mercy",
+          "name": "Oath of Mercy",
+          "behavior": "t_mercy",
+          "kind": "spell",
+          "cooldown": 28.0,
+          "requires": "",
+          "conversion": {},
+          "element": 7,
+          "per_rank": {
+            "barrier": 0.5
+          },
+          "anim": "cast_area",
+          "sound_cast": "heal",
+          "sound_hit": "",
+          "vfx": "ward",
+          "ranks": {
+            "1": {
+              "mana": 25.0,
+              "params": {
+                "radius": 8.0,
+                "barrier": 12.0,
+                "duration": 6.0,
+                "rank": 1.0
+              },
+              "text": "Speak the oath: you and every ally within 8 m lose one harmful ailment (the worst first) and gain a barrier of 12% of your Maximum HP for 6 s (at most a quarter of their own Maximum HP)."
+            },
+            "5": {
+              "mana": 29.0,
+              "params": {
+                "radius": 8.0,
+                "barrier": 14.0,
+                "duration": 6.0,
+                "rank": 5.0
+              },
+              "text": "Speak the oath: you and every ally within 8 m lose one harmful ailment (the worst first) and gain a barrier of 14% of your Maximum HP for 6 s (at most a quarter of their own Maximum HP)."
+            },
+            "25": {
+              "mana": 39.0,
+              "params": {
+                "radius": 8.0,
+                "barrier": 19.0,
+                "duration": 6.0,
+                "rank": 25.0
+              },
+              "text": "Speak the oath: you and every ally within 8 m lose one harmful ailment (the worst first) and gain a barrier of 19% of your Maximum HP for 6 s (at most a quarter of their own Maximum HP)."
+            },
+            "30": {
+              "mana": 39.0,
+              "params": {
+                "radius": 8.0,
+                "barrier": 20.25,
+                "duration": 6.0,
+                "rank": 30.0
+              },
+              "text": "Speak the oath: you and every ally within 8 m lose one harmful ailment (the worst first) and gain a barrier of 20.3% of your Maximum HP for 6 s (at most a quarter of their own Maximum HP)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "gp_radiant_steel",
+          "name": "Radiant Steel",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% increased Light damage and +2% Physical damage.",
+          "rank25": "+21% increased Light damage and +14% Physical damage.",
+          "mods": [
+            {
+              "stat": "dmg_light",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "phys_damage",
+              "op": "flat",
+              "rank1": 0.02
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "gp_merciful_oath",
+          "name": "Merciful Oath",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% increased healing, and your barriers are 3% stronger (at most 25%).",
+          "rank25": "+21% increased healing, and your barriers are 21% stronger (at most 25%).",
+          "mods": [
+            {
+              "stat": "healing",
+              "op": "inc",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {
+            "gp_barrier": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "gp_hallowed_armor",
+          "name": "Hallowed Armor",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% Defense, +2% Light Resistance and +2% Dark Resistance (resistance caps still apply).",
+          "rank25": "+21% Defense, +14% Light Resistance and +14% Dark Resistance (resistance caps still apply).",
+          "mods": [
+            {
+              "stat": "defense",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "res_light",
+              "op": "flat",
+              "rank1": 0.02
+            },
+            {
+              "stat": "res_dark",
+              "op": "flat",
+              "rank1": 0.02
+            }
+          ],
+          "flags": {}
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_dawnstar_longsword",
+          "name": "Dawnstar Longsword",
+          "category": "weapon",
+          "weapon_type": "sword",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "grand_paladin"
+            ]
+          },
+          "text": "For Grand Paladin only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_sanctified_plate",
+          "name": "Sanctified Plate",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "grand_paladin"
+            ]
+          },
+          "text": "For Grand Paladin only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_sunward_reliquary",
+          "name": "Sunward Reliquary",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "grand_paladin"
+            ]
+          },
+          "text": "For Grand Paladin only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tracker",
+      "name": "Tracker",
+      "family": "ranger",
+      "stage": 1,
+      "parent": "ranger",
+      "lineage": [
+        "ranger",
+        "tracker"
+      ],
+      "level": 60,
+      "primary": "#688c53",
+      "accent": "#d5b86a",
+      "label_color": "#688c53",
+      "role": "Marks, pursuit and traps",
+      "desc": "Marks one quarry for its own shots, lays a line of snares, and looses a fan of arrows that strikes each enemy once.",
+      "limit": "Rewards focusing one target; its bonuses apply only to its own ranged hits.",
+      "signature": {
+        "name": "Hunter's Opening",
+        "text": "Your first arrow, bolt or javelin to strike an enemy at full health is a critical hit and deals 25% more damage.",
+        "values": {
+          "bonus": 25.0
+        }
+      },
+      "armor_look": "A moss-green riveted jerkin, a bandolier of pouches, a fur-edged hood worn down and a short green cape.",
+      "skills": [
+        {
+          "id": "tr_quarry_mark",
+          "name": "Quarry Mark",
+          "behavior": "t_mark_one",
+          "kind": "spell",
+          "cooldown": 12.0,
+          "requires": "",
+          "conversion": {},
+          "element": 7,
+          "per_rank": {
+            "mark_pct": 0.5
+          },
+          "anim": "cast_quick",
+          "sound_cast": "dark_cast",
+          "sound_hit": "",
+          "vfx": "mark",
+          "ranks": {
+            "1": {
+              "mana": 8.0,
+              "params": {
+                "range": 24.0,
+                "duration": 10.0,
+                "mark_pct": 12.0,
+                "rank": 1.0
+              },
+              "text": "Mark the visible enemy nearest your aim (within 24 m) as your quarry for 10 s: your own arrows, bolts and javelins deal 12% more damage to it. Other players' hits are unaffected."
+            },
+            "5": {
+              "mana": 8.0,
+              "params": {
+                "range": 24.0,
+                "duration": 10.0,
+                "mark_pct": 14.0,
+                "rank": 5.0
+              },
+              "text": "Mark the visible enemy nearest your aim (within 24 m) as your quarry for 10 s: your own arrows, bolts and javelins deal 14% more damage to it. Other players' hits are unaffected."
+            },
+            "25": {
+              "mana": 8.0,
+              "params": {
+                "range": 24.0,
+                "duration": 10.0,
+                "mark_pct": 19.0,
+                "rank": 25.0
+              },
+              "text": "Mark the visible enemy nearest your aim (within 24 m) as your quarry for 10 s: your own arrows, bolts and javelins deal 19% more damage to it. Other players' hits are unaffected."
+            },
+            "30": {
+              "mana": 8.0,
+              "params": {
+                "range": 24.0,
+                "duration": 10.0,
+                "mark_pct": 20.25,
+                "rank": 30.0
+              },
+              "text": "Mark the visible enemy nearest your aim (within 24 m) as your quarry for 10 s: your own arrows, bolts and javelins deal 20.3% more damage to it. Other players' hits are unaffected."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "tr_snareline",
+          "name": "Snareline",
+          "behavior": "t_snareline",
+          "kind": "attack",
+          "cooldown": 16.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 13.0,
+            "root": 0.03
+          },
+          "anim": "cast_quick",
+          "sound_cast": "armor_rustle",
+          "sound_hit": "block",
+          "vfx": "trap",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "count": 5.0,
+                "spacing": 1.6,
+                "trigger": 1.1,
+                "root": 1.6,
+                "duration": 12.0,
+                "weapon_pct": 130.0,
+                "knockback": 0.0,
+                "poise": 15.0,
+                "rank": 1.0
+              },
+              "text": "Lay 5 snares in a line toward your aim. The first time each enemy steps on one it takes 130% weapon damage and is rooted for 1.6 s (bosses and root-immune enemies are slowed instead). Snares last 12 s."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "count": 5.0,
+                "spacing": 1.6,
+                "trigger": 1.1,
+                "root": 1.72,
+                "duration": 12.0,
+                "weapon_pct": 182.0,
+                "knockback": 0.0,
+                "poise": 15.0,
+                "rank": 5.0
+              },
+              "text": "Lay 5 snares in a line toward your aim. The first time each enemy steps on one it takes 182% weapon damage and is rooted for 1.7 s (bosses and root-immune enemies are slowed instead). Snares last 12 s."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "count": 5.0,
+                "spacing": 1.6,
+                "trigger": 1.1,
+                "root": 2.02,
+                "duration": 12.0,
+                "weapon_pct": 312.0,
+                "knockback": 0.0,
+                "poise": 15.0,
+                "rank": 25.0
+              },
+              "text": "Lay 5 snares in a line toward your aim. The first time each enemy steps on one it takes 312% weapon damage and is rooted for 2 s (bosses and root-immune enemies are slowed instead). Snares last 12 s."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "count": 5.0,
+                "spacing": 1.6,
+                "trigger": 1.1,
+                "root": 2.1,
+                "duration": 12.0,
+                "weapon_pct": 344.5,
+                "knockback": 0.0,
+                "poise": 15.0,
+                "rank": 30.0
+              },
+              "text": "Lay 5 snares in a line toward your aim. The first time each enemy steps on one it takes 344.5% weapon damage and is rooted for 2.1 s (bosses and root-immune enemies are slowed instead). Snares last 12 s."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "tr_trail_volley",
+          "name": "Trail Volley",
+          "behavior": "projectile",
+          "kind": "attack",
+          "cooldown": 10.0,
+          "requires": "bow",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 15.0
+          },
+          "anim": "bow_release",
+          "sound_cast": "bow_release",
+          "sound_hit": "arrow_impact",
+          "vfx": "multishot",
+          "ranks": {
+            "1": {
+              "mana": 10.0,
+              "params": {
+                "weapon_pct": 150.0,
+                "count": 7.0,
+                "spread": 30.0,
+                "speed": 40.0,
+                "range": 24.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "knockback": 3.0,
+                "poise": 8.0,
+                "rank": 1.0
+              },
+              "text": "Loose a fan of 7 shots, each 150% weapon damage. Each enemy can be struck by only one shot of the fan."
+            },
+            "5": {
+              "mana": 12.4,
+              "params": {
+                "weapon_pct": 210.0,
+                "count": 7.0,
+                "spread": 30.0,
+                "speed": 40.0,
+                "range": 24.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "knockback": 3.0,
+                "poise": 8.0,
+                "rank": 5.0
+              },
+              "text": "Loose a fan of 7 shots, each 210% weapon damage. Each enemy can be struck by only one shot of the fan."
+            },
+            "25": {
+              "mana": 18.4,
+              "params": {
+                "weapon_pct": 360.0,
+                "count": 7.0,
+                "spread": 30.0,
+                "speed": 40.0,
+                "range": 24.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "knockback": 3.0,
+                "poise": 8.0,
+                "rank": 25.0
+              },
+              "text": "Loose a fan of 7 shots, each 360% weapon damage. Each enemy can be struck by only one shot of the fan."
+            },
+            "30": {
+              "mana": 18.4,
+              "params": {
+                "weapon_pct": 397.5,
+                "count": 7.0,
+                "spread": 30.0,
+                "speed": 40.0,
+                "range": 24.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "knockback": 3.0,
+                "poise": 8.0,
+                "rank": 30.0
+              },
+              "text": "Loose a fan of 7 shots, each 397.5% weapon damage. Each enemy can be struck by only one shot of the fan."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "tr_keen_trail",
+          "name": "Keen Trail",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% Accuracy and +0.6% Critical Chance.",
+          "rank25": "+21% Accuracy and +4.2% Critical Chance.",
+          "mods": [
+            {
+              "stat": "accuracy",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "crit_chance",
+              "op": "flat",
+              "rank1": 0.006
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "tr_patient_aim",
+          "name": "Patient Aim",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+4% Focus gained (Focus still builds only at a safe distance or from ranged hits).",
+          "rank25": "+28% Focus gained (Focus still builds only at a safe distance or from ranged hits).",
+          "mods": [
+            {
+              "stat": "focus_gain",
+              "op": "inc",
+              "rank1": 0.04
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "tr_fieldcraft",
+          "name": "Fieldcraft",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+4% trap damage; snares hold 4% longer (at most 25%).",
+          "rank25": "+28% trap damage; snares hold 25% longer (at most 25%).",
+          "mods": [
+            {
+              "stat": "trap_damage",
+              "op": "inc",
+              "rank1": 0.04
+            }
+          ],
+          "flags": {
+            "tr_trap_dur": {
+              "rank1": 0.04,
+              "cap": 0.25
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_trailkeeper_bow",
+          "name": "Trailkeeper Bow",
+          "category": "weapon",
+          "weapon_type": "bow",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "tracker"
+            ]
+          },
+          "text": "For Tracker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_trackers_leathers",
+          "name": "Tracker's Leathers",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "tracker"
+            ]
+          },
+          "text": "For Tracker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_quarry_compass",
+          "name": "Quarry Compass",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "tracker"
+            ]
+          },
+          "text": "For Tracker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "starstrider",
+      "name": "Starstrider",
+      "family": "ranger",
+      "stage": 2,
+      "parent": "tracker",
+      "lineage": [
+        "ranger",
+        "tracker",
+        "starstrider"
+      ],
+      "level": 120,
+      "primary": "#495db7",
+      "accent": "#a5dcec",
+      "label_color": "#6475c2",
+      "role": "Long-range precision and repositioning",
+      "desc": "Strikes from far away. A piercing star shot spends Focus, an evasive vault empowers the next shot, and a rain of starlit arrows covers a chosen area.",
+      "limit": "Highest Hunter damage at range; little control or protection for allies.",
+      "signature": {
+        "name": "Star Chart",
+        "text": "Each arrow, bolt or javelin that strikes an enemy more than 10 m away adds a star (up to 5; they fade 12 s after the last). With 5 stars your next shot is a Shooting Star: 60% more damage, and it pierces every enemy in line (enemies after the first take 60%).",
+        "values": {
+          "far": 10.0,
+          "max": 5,
+          "fade": 12.0,
+          "bonus": 60.0,
+          "falloff": 60.0
+        }
+      },
+      "armor_look": "A midnight-blue long coat scattered with silver stars, a star on the breast and a high collar.",
+      "skills": [
+        {
+          "id": "ss_astral_pierce",
+          "name": "Astral Pierce",
+          "behavior": "projectile",
+          "kind": "attack",
+          "cooldown": 12.0,
+          "requires": "bow",
+          "conversion": {
+            "7": 0.4
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 26.0
+          },
+          "anim": "bow_release",
+          "sound_cast": "bow_release",
+          "sound_hit": "crit_hit",
+          "vfx": "deadeye",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 260.0,
+                "per_focus": 0.5,
+                "focus_more": 1.0,
+                "consume_focus": 1.0,
+                "speed": 70.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 34.0,
+                "width": 0.6,
+                "pierce_falloff": 0.6,
+                "falloff_pct": 60.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 1.0
+              },
+              "text": "A narrow starlit shot that pierces every enemy in line: 260% weapon damage (40% Light), 0.5% more per Focus spent (all Focus is spent once). Enemies after the first take 60%."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "weapon_pct": 364.0,
+                "per_focus": 0.5,
+                "focus_more": 1.0,
+                "consume_focus": 1.0,
+                "speed": 70.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 34.0,
+                "width": 0.6,
+                "pierce_falloff": 0.6,
+                "falloff_pct": 60.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 5.0
+              },
+              "text": "A narrow starlit shot that pierces every enemy in line: 364% weapon damage (40% Light), 0.5% more per Focus spent (all Focus is spent once). Enemies after the first take 60%."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 624.0,
+                "per_focus": 0.5,
+                "focus_more": 1.0,
+                "consume_focus": 1.0,
+                "speed": 70.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 34.0,
+                "width": 0.6,
+                "pierce_falloff": 0.6,
+                "falloff_pct": 60.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 25.0
+              },
+              "text": "A narrow starlit shot that pierces every enemy in line: 624% weapon damage (40% Light), 0.5% more per Focus spent (all Focus is spent once). Enemies after the first take 60%."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 689.0,
+                "per_focus": 0.5,
+                "focus_more": 1.0,
+                "consume_focus": 1.0,
+                "speed": 70.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 34.0,
+                "width": 0.6,
+                "pierce_falloff": 0.6,
+                "falloff_pct": 60.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 30.0
+              },
+              "text": "A narrow starlit shot that pierces every enemy in line: 689% weapon damage (40% Light), 0.5% more per Focus spent (all Focus is spent once). Enemies after the first take 60%."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ss_comet_step",
+          "name": "Comet Step",
+          "behavior": "t_comet_step",
+          "kind": "attack",
+          "cooldown": 18.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "bonus": 1.5
+          },
+          "anim": "dodge_step",
+          "sound_cast": "dodge_roll",
+          "sound_hit": "",
+          "vfx": "vault",
+          "ranks": {
+            "1": {
+              "mana": 10.0,
+              "params": {
+                "range": 7.0,
+                "window": 5.0,
+                "bonus": 45.0,
+                "rank": 1.0
+              },
+              "text": "Vault 7 m away from your aim (you cannot be hit while in the air). For 5 s your next arrow, bolt or javelin deals 45% more damage."
+            },
+            "5": {
+              "mana": 10.0,
+              "params": {
+                "range": 7.0,
+                "window": 5.0,
+                "bonus": 51.0,
+                "rank": 5.0
+              },
+              "text": "Vault 7 m away from your aim (you cannot be hit while in the air). For 5 s your next arrow, bolt or javelin deals 51% more damage."
+            },
+            "25": {
+              "mana": 10.0,
+              "params": {
+                "range": 7.0,
+                "window": 5.0,
+                "bonus": 66.0,
+                "rank": 25.0
+              },
+              "text": "Vault 7 m away from your aim (you cannot be hit while in the air). For 5 s your next arrow, bolt or javelin deals 66% more damage."
+            },
+            "30": {
+              "mana": 10.0,
+              "params": {
+                "range": 7.0,
+                "window": 5.0,
+                "bonus": 69.75,
+                "rank": 30.0
+              },
+              "text": "Vault 7 m away from your aim (you cannot be hit while in the air). For 5 s your next arrow, bolt or javelin deals 69.8% more damage."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ss_constellation_rain",
+          "name": "Constellation Rain",
+          "behavior": "t_constellation",
+          "kind": "attack",
+          "cooldown": 30.0,
+          "requires": "bow",
+          "conversion": {
+            "7": 0.3
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 10.0
+          },
+          "anim": "bow_release",
+          "sound_cast": "bow_release",
+          "sound_hit": "arrow_impact",
+          "vfx": "arrow_rain",
+          "ranks": {
+            "1": {
+              "mana": 22.0,
+              "params": {
+                "range": 22.0,
+                "radius": 5.0,
+                "impacts": 12.0,
+                "duration": 2.4,
+                "impact_radius": 1.6,
+                "weapon_pct": 100.0,
+                "hit_cap": 4.0,
+                "knockback": 1.0,
+                "poise": 6.0,
+                "rank": 1.0
+              },
+              "text": "12 starlit shots fall over 2.4 s in a 5 m area at a visible point: each deals 100% weapon damage (30% Light) within 1.6 m. One enemy is struck at most 4 times."
+            },
+            "5": {
+              "mana": 26.0,
+              "params": {
+                "range": 22.0,
+                "radius": 5.0,
+                "impacts": 12.0,
+                "duration": 2.4,
+                "impact_radius": 1.6,
+                "weapon_pct": 140.0,
+                "hit_cap": 4.0,
+                "knockback": 1.0,
+                "poise": 6.0,
+                "rank": 5.0
+              },
+              "text": "12 starlit shots fall over 2.4 s in a 5 m area at a visible point: each deals 140% weapon damage (30% Light) within 1.6 m. One enemy is struck at most 4 times."
+            },
+            "25": {
+              "mana": 36.0,
+              "params": {
+                "range": 22.0,
+                "radius": 5.0,
+                "impacts": 12.0,
+                "duration": 2.4,
+                "impact_radius": 1.6,
+                "weapon_pct": 240.0,
+                "hit_cap": 4.0,
+                "knockback": 1.0,
+                "poise": 6.0,
+                "rank": 25.0
+              },
+              "text": "12 starlit shots fall over 2.4 s in a 5 m area at a visible point: each deals 240% weapon damage (30% Light) within 1.6 m. One enemy is struck at most 4 times."
+            },
+            "30": {
+              "mana": 36.0,
+              "params": {
+                "range": 22.0,
+                "radius": 5.0,
+                "impacts": 12.0,
+                "duration": 2.4,
+                "impact_radius": 1.6,
+                "weapon_pct": 265.0,
+                "hit_cap": 4.0,
+                "knockback": 1.0,
+                "poise": 6.0,
+                "rank": 30.0
+              },
+              "text": "12 starlit shots fall over 2.4 s in a 5 m area at a visible point: each deals 265% weapon damage (30% Light) within 1.6 m. One enemy is struck at most 4 times."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "ss_celestial_sight",
+          "name": "Celestial Sight",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Your projectiles deal 3% more damage to enemies more than 12 m away (at most 25%). Reach is unchanged.",
+          "rank25": "Your projectiles deal 21% more damage to enemies more than 12 m away (at most 25%). Reach is unchanged.",
+          "mods": [],
+          "flags": {
+            "ss_far": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "ss_comet_rhythm",
+          "name": "Comet Rhythm",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "A critical hit shortens every skill cooldown by 0.4 s, at most once per second.",
+          "rank25": "A critical hit shortens every skill cooldown by 0.5 s, at most once per second.",
+          "mods": [],
+          "flags": {
+            "ss_comet_rhythm": {
+              "rank1": 0.4,
+              "cap": 0.5
+            }
+          }
+        },
+        {
+          "id": "ss_steady_constellation",
+          "name": "Steady Constellation",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Focus fades 5% slower out of combat (at most 50%). It never builds out of combat.",
+          "rank25": "Focus fades 35% slower out of combat (at most 50%). It never builds out of combat.",
+          "mods": [],
+          "flags": {
+            "ss_focus_hold": {
+              "rank1": 0.05,
+              "cap": 0.5
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_starfall_crossbow",
+          "name": "Starfall Crossbow",
+          "category": "weapon",
+          "weapon_type": "crossbow",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "starstrider"
+            ]
+          },
+          "text": "For Starstrider only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_constellation_leathers",
+          "name": "Constellation Leathers",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "starstrider"
+            ]
+          },
+          "text": "For Starstrider only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_comet_lens",
+          "name": "Comet Lens",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "starstrider"
+            ]
+          },
+          "text": "For Starstrider only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wildwarden",
+      "name": "Wildwarden",
+      "family": "ranger",
+      "stage": 2,
+      "parent": "tracker",
+      "lineage": [
+        "ranger",
+        "tracker",
+        "wildwarden"
+      ],
+      "level": 120,
+      "primary": "#39876a",
+      "accent": "#a3cf9c",
+      "label_color": "#579980",
+      "role": "Terrain control and nature-themed defense",
+      "desc": "Shapes the ground. Briar volleys leave slowing patches, a living thicket roots and wears down enemies, and a refuge shields allies against slows.",
+      "limit": "Controls the field and protects allies; lower single-target damage than the Starstrider.",
+      "signature": {
+        "name": "Rooted Stance",
+        "text": "Stand still for 1 s in a fight and roots hold you: +10% Defense, +30% Knockback Resistance, and your arrows and bolts Slow what they hit for 2 s. Moving breaks the roots.",
+        "values": {
+          "delay": 1.0,
+          "def": 10.0,
+          "kb": 30.0,
+          "slow": 2.0
+        }
+      },
+      "armor_look": "A deep-green jerkin and skirt, bark pauldrons with leaves, a collar of leaves and a split green cape.",
+      "skills": [
+        {
+          "id": "ww_briar_volley",
+          "name": "Briar Volley",
+          "behavior": "projectile",
+          "kind": "attack",
+          "cooldown": 12.0,
+          "requires": "bow",
+          "conversion": {
+            "4": 0.3
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 14.0,
+            "patch_dur": 0.1
+          },
+          "anim": "bow_release",
+          "sound_cast": "bow_release",
+          "sound_hit": "arrow_impact",
+          "vfx": "multishot",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 140.0,
+                "count": 5.0,
+                "spread": 22.0,
+                "speed": 38.0,
+                "range": 22.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "patch_radius": 3.0,
+                "patch_dur": 4.0,
+                "knockback": 2.0,
+                "poise": 6.0,
+                "rank": 1.0
+              },
+              "text": "Loose 5 briar shots (140% weapon damage each, 30% Earth; one per enemy) and seed a 3 m briar patch at your aim that Slows enemies for 4 s. Overlapping patches slow but never add damage."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "weapon_pct": 196.0,
+                "count": 5.0,
+                "spread": 22.0,
+                "speed": 38.0,
+                "range": 22.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "patch_radius": 3.0,
+                "patch_dur": 4.4,
+                "knockback": 2.0,
+                "poise": 6.0,
+                "rank": 5.0
+              },
+              "text": "Loose 5 briar shots (196% weapon damage each, 30% Earth; one per enemy) and seed a 3 m briar patch at your aim that Slows enemies for 4.4 s. Overlapping patches slow but never add damage."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 336.0,
+                "count": 5.0,
+                "spread": 22.0,
+                "speed": 38.0,
+                "range": 22.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "patch_radius": 3.0,
+                "patch_dur": 5.4,
+                "knockback": 2.0,
+                "poise": 6.0,
+                "rank": 25.0
+              },
+              "text": "Loose 5 briar shots (336% weapon damage each, 30% Earth; one per enemy) and seed a 3 m briar patch at your aim that Slows enemies for 5.4 s. Overlapping patches slow but never add damage."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 371.0,
+                "count": 5.0,
+                "spread": 22.0,
+                "speed": 38.0,
+                "range": 22.0,
+                "pierce": 0.0,
+                "shared_hits": 1.0,
+                "patch_radius": 3.0,
+                "patch_dur": 5.65,
+                "knockback": 2.0,
+                "poise": 6.0,
+                "rank": 30.0
+              },
+              "text": "Loose 5 briar shots (371% weapon damage each, 30% Earth; one per enemy) and seed a 3 m briar patch at your aim that Slows enemies for 5.7 s. Overlapping patches slow but never add damage."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ww_living_thicket",
+          "name": "Living Thicket",
+          "behavior": "t_zone",
+          "kind": "attack",
+          "cooldown": 24.0,
+          "requires": "",
+          "conversion": {
+            "4": 1.0
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 5.5,
+            "duration": 0.1
+          },
+          "anim": "cast_area",
+          "sound_cast": "cast_earth",
+          "sound_hit": "rock_impact",
+          "vfx": "trap",
+          "ranks": {
+            "1": {
+              "mana": 18.0,
+              "params": {
+                "range": 14.0,
+                "radius": 4.0,
+                "duration": 7.0,
+                "interval": 1.0,
+                "weapon_pct": 55.0,
+                "root": 0.8,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 1.0
+              },
+              "text": "Raise a thicket (4 m) at the target for 7 s. Every 1 s it deals 55% weapon damage as Earth and Slows enemies inside; the first touch of each cast roots them for 0.8 s (bosses are only slowed)."
+            },
+            "5": {
+              "mana": 22.0,
+              "params": {
+                "range": 14.0,
+                "radius": 4.0,
+                "duration": 7.4,
+                "interval": 1.0,
+                "weapon_pct": 77.0,
+                "root": 0.8,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 5.0
+              },
+              "text": "Raise a thicket (4 m) at the target for 7.4 s. Every 1 s it deals 77% weapon damage as Earth and Slows enemies inside; the first touch of each cast roots them for 0.8 s (bosses are only slowed)."
+            },
+            "25": {
+              "mana": 32.0,
+              "params": {
+                "range": 14.0,
+                "radius": 4.0,
+                "duration": 8.4,
+                "interval": 1.0,
+                "weapon_pct": 132.0,
+                "root": 0.8,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 25.0
+              },
+              "text": "Raise a thicket (4 m) at the target for 8.4 s. Every 1 s it deals 132% weapon damage as Earth and Slows enemies inside; the first touch of each cast roots them for 0.8 s (bosses are only slowed)."
+            },
+            "30": {
+              "mana": 32.0,
+              "params": {
+                "range": 14.0,
+                "radius": 4.0,
+                "duration": 8.65,
+                "interval": 1.0,
+                "weapon_pct": 145.75,
+                "root": 0.8,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "rank": 30.0
+              },
+              "text": "Raise a thicket (4 m) at the target for 8.7 s. Every 1 s it deals 145.8% weapon damage as Earth and Slows enemies inside; the first touch of each cast roots them for 0.8 s (bosses are only slowed)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ww_wardens_refuge",
+          "name": "Warden's Refuge",
+          "behavior": "t_zone",
+          "kind": "spell",
+          "cooldown": 28.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "barrier": 0.4,
+            "slow_res": 1.0
+          },
+          "anim": "cast_area",
+          "sound_cast": "heal",
+          "sound_hit": "",
+          "vfx": "ward",
+          "ranks": {
+            "1": {
+              "mana": 20.0,
+              "params": {
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 0.5,
+                "barrier": 10.0,
+                "slow_res": 30.0,
+                "at_feet": 1.0,
+                "rank": 1.0
+              },
+              "text": "Grow a refuge around you (4.5 m) for 6 s. You and each ally inside gain a barrier of 10% of their Maximum HP (once per cast) and +30% Status Resistance against Slows, Chill and Roots while inside."
+            },
+            "5": {
+              "mana": 24.0,
+              "params": {
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 0.5,
+                "barrier": 11.6,
+                "slow_res": 34.0,
+                "at_feet": 1.0,
+                "rank": 5.0
+              },
+              "text": "Grow a refuge around you (4.5 m) for 6 s. You and each ally inside gain a barrier of 11.6% of their Maximum HP (once per cast) and +34% Status Resistance against Slows, Chill and Roots while inside."
+            },
+            "25": {
+              "mana": 34.0,
+              "params": {
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 0.5,
+                "barrier": 15.6,
+                "slow_res": 44.0,
+                "at_feet": 1.0,
+                "rank": 25.0
+              },
+              "text": "Grow a refuge around you (4.5 m) for 6 s. You and each ally inside gain a barrier of 15.6% of their Maximum HP (once per cast) and +44% Status Resistance against Slows, Chill and Roots while inside."
+            },
+            "30": {
+              "mana": 34.0,
+              "params": {
+                "radius": 4.5,
+                "duration": 6.0,
+                "interval": 0.5,
+                "barrier": 16.6,
+                "slow_res": 46.5,
+                "at_feet": 1.0,
+                "rank": 30.0
+              },
+              "text": "Grow a refuge around you (4.5 m) for 6 s. You and each ally inside gain a barrier of 16.6% of their Maximum HP (once per cast) and +46.5% Status Resistance against Slows, Chill and Roots while inside."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "ww_thorncraft",
+          "name": "Thorncraft",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% trap damage; your Wildwarden areas deal 3% more damage (at most 25%).",
+          "rank25": "+21% trap damage; your Wildwarden areas deal 21% more damage (at most 25%).",
+          "mods": [
+            {
+              "stat": "trap_damage",
+              "op": "inc",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {
+            "ww_area": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "ww_rootbound_guard",
+          "name": "Rootbound Guard",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "10% more Defense while you stand in your own Living Thicket or Warden's Refuge (one bonus, however many overlap).",
+          "rank25": "10% more Defense while you stand in your own Living Thicket or Warden's Refuge (one bonus, however many overlap).",
+          "mods": [],
+          "flags": {
+            "ww_rootbound": {
+              "rank1": 0.1,
+              "cap": 0.1
+            }
+          }
+        },
+        {
+          "id": "ww_verdant_reserve",
+          "name": "Verdant Reserve",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+2% Maximum HP; health draughts restore 3% more (at most 25%).",
+          "rank25": "+14% Maximum HP; health draughts restore 21% more (at most 25%).",
+          "mods": [
+            {
+              "stat": "max_hp",
+              "op": "inc",
+              "rank1": 0.02
+            }
+          ],
+          "flags": {
+            "potion_heal": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_briarheart_bow",
+          "name": "Briarheart Bow",
+          "category": "weapon",
+          "weapon_type": "bow",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "wildwarden"
+            ]
+          },
+          "text": "For Wildwarden only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_livingwood_leathers",
+          "name": "Livingwood Leathers",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "wildwarden"
+            ]
+          },
+          "text": "For Wildwarden only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_wildroot_pendant",
+          "name": "Wildroot Pendant",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "wildwarden"
+            ]
+          },
+          "text": "For Wildwarden only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arcanist",
+      "name": "Arcanist",
+      "family": "mage",
+      "stage": 1,
+      "parent": "mage",
+      "lineage": [
+        "mage",
+        "arcanist"
+      ],
+      "level": 60,
+      "primary": "#946bd3",
+      "accent": "#c7d0e6",
+      "label_color": "#a481da",
+      "role": "Controlled casting, Mana use and spell geometry",
+      "desc": "Casts with precision. A piercing lance of Light and Dark, a runic circle that strengthens spells cast inside it, and a ward paid for with Mana.",
+      "limit": "Its circle rewards standing still; its ward costs a large amount of Mana.",
+      "signature": {
+        "name": "Runescript",
+        "text": "Each spell you pay Mana for writes a rune (up to 3, 8 s): your spells deal 4% more damage for each rune.",
+        "values": {
+          "max": 3,
+          "dur": 8.0,
+          "per": 4.0
+        }
+      },
+      "armor_look": "A violet robe with silver trim, a rune-stitched stole and an amethyst clasp.",
+      "skills": [
+        {
+          "id": "ar_aether_lance",
+          "name": "Aether Lance",
+          "behavior": "projectile",
+          "kind": "spell",
+          "cooldown": 8.0,
+          "requires": "",
+          "conversion": {
+            "7": 0.6,
+            "8": 0.4
+          },
+          "element": 0,
+          "per_rank": {
+            "damage_min": 9.0,
+            "damage_max": 12.0
+          },
+          "anim": "cast_heavy",
+          "sound_cast": "arcane_surge",
+          "sound_hit": "holy_strike",
+          "vfx": "arcane_surge",
+          "ranks": {
+            "1": {
+              "mana": 16.0,
+              "params": {
+                "damage_min": 56.0,
+                "damage_max": 76.0,
+                "speed": 46.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 28.0,
+                "width": 1.0,
+                "knockback": 4.0,
+                "poise": 16.0,
+                "rank": 1.0
+              },
+              "text": "An aimed lance of Aether that pierces every enemy in line: 56-76 damage, 60% Light and 40% Dark."
+            },
+            "5": {
+              "mana": 20.0,
+              "params": {
+                "damage_min": 92.0,
+                "damage_max": 124.0,
+                "speed": 46.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 28.0,
+                "width": 1.0,
+                "knockback": 4.0,
+                "poise": 16.0,
+                "rank": 5.0
+              },
+              "text": "An aimed lance of Aether that pierces every enemy in line: 92-124 damage, 60% Light and 40% Dark."
+            },
+            "25": {
+              "mana": 30.0,
+              "params": {
+                "damage_min": 182.0,
+                "damage_max": 244.0,
+                "speed": 46.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 28.0,
+                "width": 1.0,
+                "knockback": 4.0,
+                "poise": 16.0,
+                "rank": 25.0
+              },
+              "text": "An aimed lance of Aether that pierces every enemy in line: 182-244 damage, 60% Light and 40% Dark."
+            },
+            "30": {
+              "mana": 30.0,
+              "params": {
+                "damage_min": 204.5,
+                "damage_max": 274.0,
+                "speed": 46.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 28.0,
+                "width": 1.0,
+                "knockback": 4.0,
+                "poise": 16.0,
+                "rank": 30.0
+              },
+              "text": "An aimed lance of Aether that pierces every enemy in line: 204.5-274 damage, 60% Light and 40% Dark."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ar_runic_circle",
+          "name": "Runic Circle",
+          "behavior": "t_zone",
+          "kind": "spell",
+          "cooldown": 22.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "spell_pct": 0.6
+          },
+          "anim": "cast_area",
+          "sound_cast": "arcane_surge",
+          "sound_hit": "",
+          "vfx": "aura",
+          "ranks": {
+            "1": {
+              "mana": 20.0,
+              "params": {
+                "radius": 4.0,
+                "duration": 10.0,
+                "interval": 0.25,
+                "spell_pct": 15.0,
+                "at_feet": 1.0,
+                "rank": 1.0
+              },
+              "text": "Draw a runic circle (4 m) at your feet for 10 s. While you stand in it, spells you pay Mana for deal 15% more damage. One circle at a time; it never stacks with itself."
+            },
+            "5": {
+              "mana": 24.0,
+              "params": {
+                "radius": 4.0,
+                "duration": 10.0,
+                "interval": 0.25,
+                "spell_pct": 17.4,
+                "at_feet": 1.0,
+                "rank": 5.0
+              },
+              "text": "Draw a runic circle (4 m) at your feet for 10 s. While you stand in it, spells you pay Mana for deal 17.4% more damage. One circle at a time; it never stacks with itself."
+            },
+            "25": {
+              "mana": 34.0,
+              "params": {
+                "radius": 4.0,
+                "duration": 10.0,
+                "interval": 0.25,
+                "spell_pct": 23.4,
+                "at_feet": 1.0,
+                "rank": 25.0
+              },
+              "text": "Draw a runic circle (4 m) at your feet for 10 s. While you stand in it, spells you pay Mana for deal 23.4% more damage. One circle at a time; it never stacks with itself."
+            },
+            "30": {
+              "mana": 34.0,
+              "params": {
+                "radius": 4.0,
+                "duration": 10.0,
+                "interval": 0.25,
+                "spell_pct": 24.9,
+                "at_feet": 1.0,
+                "rank": 30.0
+              },
+              "text": "Draw a runic circle (4 m) at your feet for 10 s. While you stand in it, spells you pay Mana for deal 24.9% more damage. One circle at a time; it never stacks with itself."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ar_mana_ward",
+          "name": "Mana Ward",
+          "behavior": "t_mana_ward",
+          "kind": "spell",
+          "cooldown": 24.0,
+          "requires": "",
+          "conversion": {},
+          "element": 7,
+          "per_rank": {
+            "per_mana": 0.15,
+            "cap": 0.4
+          },
+          "anim": "cast_area",
+          "sound_cast": "heal",
+          "sound_hit": "",
+          "vfx": "ward",
+          "ranks": {
+            "1": {
+              "mana": 30.0,
+              "params": {
+                "per_mana": 3.0,
+                "cap": 30.0,
+                "duration": 8.0,
+                "rank": 1.0
+              },
+              "text": "Pour Mana into a ward: it absorbs 3 damage for each point of Mana paid, at most 30% of your Maximum HP, for 8 s. The ward never drains more Mana after it forms."
+            },
+            "5": {
+              "mana": 38.0,
+              "params": {
+                "per_mana": 3.6,
+                "cap": 31.6,
+                "duration": 8.0,
+                "rank": 5.0
+              },
+              "text": "Pour Mana into a ward: it absorbs 3.6 damage for each point of Mana paid, at most 31.6% of your Maximum HP, for 8 s. The ward never drains more Mana after it forms."
+            },
+            "25": {
+              "mana": 58.0,
+              "params": {
+                "per_mana": 5.1,
+                "cap": 35.6,
+                "duration": 8.0,
+                "rank": 25.0
+              },
+              "text": "Pour Mana into a ward: it absorbs 5.1 damage for each point of Mana paid, at most 35.6% of your Maximum HP, for 8 s. The ward never drains more Mana after it forms."
+            },
+            "30": {
+              "mana": 58.0,
+              "params": {
+                "per_mana": 5.48,
+                "cap": 36.6,
+                "duration": 8.0,
+                "rank": 30.0
+              },
+              "text": "Pour Mana into a ward: it absorbs 5.5 damage for each point of Mana paid, at most 36.6% of your Maximum HP, for 8 s. The ward never drains more Mana after it forms."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "ar_runic_efficiency",
+          "name": "Runic Efficiency",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Spells cost 1.5% less Mana, on top of Mana cost reduction (at most 15%; a spell never costs less than half).",
+          "rank25": "Spells cost 10.5% less Mana, on top of Mana cost reduction (at most 15%; a spell never costs less than half).",
+          "mods": [],
+          "flags": {
+            "ar_mana_eff": {
+              "rank1": 0.015,
+              "cap": 0.15
+            }
+          }
+        },
+        {
+          "id": "ar_charge_discipline",
+          "name": "Charge Discipline",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Arcane Charge lasts 0.3 s longer before it fades (at most 2 s).",
+          "rank25": "Arcane Charge lasts 1.8 s longer before it fades (at most 2 s).",
+          "mods": [],
+          "flags": {
+            "ar_charge_linger": {
+              "rank1": 0.25,
+              "cap": 2.0
+            }
+          }
+        },
+        {
+          "id": "ar_aether_precision",
+          "name": "Aether Precision",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+0.6% Critical Chance and +3% Critical Damage.",
+          "rank25": "+4.2% Critical Chance and +21% Critical Damage.",
+          "mods": [
+            {
+              "stat": "crit_chance",
+              "op": "flat",
+              "rank1": 0.006
+            },
+            {
+              "stat": "crit_damage",
+              "op": "flat",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {}
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_runebound_staff",
+          "name": "Runebound Staff",
+          "category": "weapon",
+          "weapon_type": "staff",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "arcanist"
+            ]
+          },
+          "text": "For Arcanist and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_arcanist_vestments",
+          "name": "Arcanist Vestments",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "arcanist"
+            ]
+          },
+          "text": "For Arcanist and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_runic_focus",
+          "name": "Runic Focus",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "arcanist"
+            ]
+          },
+          "text": "For Arcanist and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "archmage",
+      "name": "Archmage",
+      "family": "mage",
+      "stage": 2,
+      "parent": "arcanist",
+      "lineage": [
+        "mage",
+        "arcanist",
+        "archmage"
+      ],
+      "level": 120,
+      "primary": "#497ec9",
+      "accent": "#e0e7f3",
+      "label_color": "#6491d1",
+      "role": "Elemental combinations and broad areas",
+      "desc": "Combines the elements. A tempest cycles Fire, Water and Lightning, a convergence spends Arcane Charge on one great blast, and Spellweave repeats the next spell.",
+      "limit": "Wide elemental damage; less control and less Dark damage than the Void Sovereign.",
+      "signature": {
+        "name": "Elemental Attunement",
+        "text": "Every damaging spell you pay Mana for turns your attunement Fire > Ice > Lightning and sends an attuned bolt at the first enemy it strikes: 20% of that hit as the attuned element. The bolt cannot repeat, echo or trigger other effects.",
+        "values": {
+          "pct": 20.0
+        }
+      },
+      "armor_look": "A sapphire robe, a white mantle set with three gems and a long sapphire cape.",
+      "skills": [
+        {
+          "id": "am_prismatic_tempest",
+          "name": "Prismatic Tempest",
+          "behavior": "t_zone",
+          "kind": "spell",
+          "cooldown": 30.0,
+          "requires": "",
+          "conversion": {},
+          "element": 3,
+          "per_rank": {
+            "damage_min": 1.4,
+            "damage_max": 1.8
+          },
+          "anim": "cast_area",
+          "sound_cast": "chain_lightning",
+          "sound_hit": "lightning_zap",
+          "vfx": "lightning",
+          "ranks": {
+            "1": {
+              "mana": 30.0,
+              "params": {
+                "range": 18.0,
+                "radius": 5.0,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 10.0,
+                "damage_max": 14.0,
+                "hit_cap": 6.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "ignite": 40.0,
+                "rank": 1.0
+              },
+              "text": "A tempest (5 m) at the target for 4 s. Every 0.5 s it strikes with Fire, then Water, then Lightning: 10-14 damage. Water leaves enemies Wet, so the next Lightning pulse conducts (+25%) and Fire is dampened. One enemy is struck at most 6 times."
+            },
+            "5": {
+              "mana": 36.0,
+              "params": {
+                "range": 18.0,
+                "radius": 5.0,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 15.6,
+                "damage_max": 21.2,
+                "hit_cap": 6.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "ignite": 40.0,
+                "rank": 5.0
+              },
+              "text": "A tempest (5 m) at the target for 4 s. Every 0.5 s it strikes with Fire, then Water, then Lightning: 15.6-21.2 damage. Water leaves enemies Wet, so the next Lightning pulse conducts (+25%) and Fire is dampened. One enemy is struck at most 6 times."
+            },
+            "25": {
+              "mana": 51.0,
+              "params": {
+                "range": 18.0,
+                "radius": 5.0,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 29.6,
+                "damage_max": 39.2,
+                "hit_cap": 6.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "ignite": 40.0,
+                "rank": 25.0
+              },
+              "text": "A tempest (5 m) at the target for 4 s. Every 0.5 s it strikes with Fire, then Water, then Lightning: 29.6-39.2 damage. Water leaves enemies Wet, so the next Lightning pulse conducts (+25%) and Fire is dampened. One enemy is struck at most 6 times."
+            },
+            "30": {
+              "mana": 51.0,
+              "params": {
+                "range": 18.0,
+                "radius": 5.0,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 33.1,
+                "damage_max": 43.7,
+                "hit_cap": 6.0,
+                "knockback": 0.0,
+                "poise": 4.0,
+                "ignite": 40.0,
+                "rank": 30.0
+              },
+              "text": "A tempest (5 m) at the target for 4 s. Every 0.5 s it strikes with Fire, then Water, then Lightning: 33.1-43.7 damage. Water leaves enemies Wet, so the next Lightning pulse conducts (+25%) and Fire is dampened. One enemy is struck at most 6 times."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "am_grand_convergence",
+          "name": "Grand Convergence",
+          "behavior": "ground_aoe",
+          "kind": "spell",
+          "cooldown": 24.0,
+          "requires": "",
+          "conversion": {
+            "1": 0.34,
+            "2": 0.33,
+            "3": 0.33
+          },
+          "element": 0,
+          "per_rank": {
+            "damage_min": 6.5,
+            "damage_max": 8.5
+          },
+          "anim": "cast_heavy",
+          "sound_cast": "meteor_cast",
+          "sound_hit": "meteor_hit",
+          "vfx": "meteor",
+          "ranks": {
+            "1": {
+              "mana": 28.0,
+              "params": {
+                "damage_min": 48.0,
+                "damage_max": 64.0,
+                "radius": 4.5,
+                "delay": 0.5,
+                "range": 20.0,
+                "spend_charge": 1.0,
+                "per_charge": 18.0,
+                "knockback": 8.0,
+                "poise": 40.0,
+                "status_power": 1.2,
+                "rank": 1.0
+              },
+              "text": "Fire, Ice and Lightning converge on the target after 0.5 s: 48-64 damage within 4.5 m, 18% more per Arcane Charge (all charge is spent once)."
+            },
+            "5": {
+              "mana": 34.0,
+              "params": {
+                "damage_min": 74.0,
+                "damage_max": 98.0,
+                "radius": 4.5,
+                "delay": 0.5,
+                "range": 20.0,
+                "spend_charge": 1.0,
+                "per_charge": 18.0,
+                "knockback": 8.0,
+                "poise": 40.0,
+                "status_power": 1.2,
+                "rank": 5.0
+              },
+              "text": "Fire, Ice and Lightning converge on the target after 0.5 s: 74-98 damage within 4.5 m, 18% more per Arcane Charge (all charge is spent once)."
+            },
+            "25": {
+              "mana": 49.0,
+              "params": {
+                "damage_min": 139.0,
+                "damage_max": 183.0,
+                "radius": 4.5,
+                "delay": 0.5,
+                "range": 20.0,
+                "spend_charge": 1.0,
+                "per_charge": 18.0,
+                "knockback": 8.0,
+                "poise": 40.0,
+                "status_power": 1.2,
+                "rank": 25.0
+              },
+              "text": "Fire, Ice and Lightning converge on the target after 0.5 s: 139-183 damage within 4.5 m, 18% more per Arcane Charge (all charge is spent once)."
+            },
+            "30": {
+              "mana": 49.0,
+              "params": {
+                "damage_min": 155.25,
+                "damage_max": 204.25,
+                "radius": 4.5,
+                "delay": 0.5,
+                "range": 20.0,
+                "spend_charge": 1.0,
+                "per_charge": 18.0,
+                "knockback": 8.0,
+                "poise": 40.0,
+                "status_power": 1.2,
+                "rank": 30.0
+              },
+              "text": "Fire, Ice and Lightning converge on the target after 0.5 s: 155.3-204.3 damage within 4.5 m, 18% more per Arcane Charge (all charge is spent once)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "am_spellweave",
+          "name": "Spellweave",
+          "behavior": "t_spellweave",
+          "kind": "spell",
+          "cooldown": 28.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weave_pct": 0.8
+          },
+          "anim": "cast_quick",
+          "sound_cast": "arcane_surge",
+          "sound_hit": "",
+          "vfx": "arcane_surge",
+          "ranks": {
+            "1": {
+              "mana": 18.0,
+              "params": {
+                "duration": 10.0,
+                "weave_pct": 55.0,
+                "rank": 1.0
+              },
+              "text": "Weave the next damaging spell you pay Mana for within 10 s: it repeats once at 55% strength. The repeat costs nothing, refunds nothing and cannot repeat or echo again."
+            },
+            "5": {
+              "mana": 21.2,
+              "params": {
+                "duration": 10.0,
+                "weave_pct": 58.2,
+                "rank": 5.0
+              },
+              "text": "Weave the next damaging spell you pay Mana for within 10 s: it repeats once at 58.2% strength. The repeat costs nothing, refunds nothing and cannot repeat or echo again."
+            },
+            "25": {
+              "mana": 29.2,
+              "params": {
+                "duration": 10.0,
+                "weave_pct": 66.2,
+                "rank": 25.0
+              },
+              "text": "Weave the next damaging spell you pay Mana for within 10 s: it repeats once at 66.2% strength. The repeat costs nothing, refunds nothing and cannot repeat or echo again."
+            },
+            "30": {
+              "mana": 29.2,
+              "params": {
+                "duration": 10.0,
+                "weave_pct": 68.2,
+                "rank": 30.0
+              },
+              "text": "Weave the next damaging spell you pay Mana for within 10 s: it repeats once at 68.2% strength. The repeat costs nothing, refunds nothing and cannot repeat or echo again."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "am_elemental_concord",
+          "name": "Elemental Concord",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Spells deal 3% more damage to enemies with two or more different elemental ailments (counted once; at most 20%).",
+          "rank25": "Spells deal 20% more damage to enemies with two or more different elemental ailments (counted once; at most 20%).",
+          "mods": [],
+          "flags": {
+            "am_concord": {
+              "rank1": 0.03,
+              "cap": 0.2
+            }
+          }
+        },
+        {
+          "id": "am_master_channeling",
+          "name": "Master Channeling",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+1.5% Cast Speed.",
+          "rank25": "+10.5% Cast Speed.",
+          "mods": [
+            {
+              "stat": "cast_speed",
+              "op": "inc",
+              "rank1": 0.015
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "am_prismatic_shelter",
+          "name": "Prismatic Shelter",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "Spending Arcane Charge grants +10% to every Resistance for 4 s. Once every 12 s. Resistance caps still apply.",
+          "rank25": "Spending Arcane Charge grants +10% to every Resistance for 4 s. Once every 12 s. Resistance caps still apply.",
+          "mods": [],
+          "flags": {
+            "am_shelter": {
+              "rank1": 0.1,
+              "cap": 0.1
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_prismatic_staff",
+          "name": "Prismatic Staff",
+          "category": "weapon",
+          "weapon_type": "staff",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "archmage"
+            ]
+          },
+          "text": "For Archmage only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_archmage_robes",
+          "name": "Archmage Robes",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "archmage"
+            ]
+          },
+          "text": "For Archmage only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_convergence_prism",
+          "name": "Convergence Prism",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "archmage"
+            ]
+          },
+          "text": "For Archmage only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "void_sovereign",
+      "name": "Void Sovereign",
+      "family": "mage",
+      "stage": 2,
+      "parent": "arcanist",
+      "lineage": [
+        "mage",
+        "arcanist",
+        "void_sovereign"
+      ],
+      "level": 120,
+      "primary": "#5446a6",
+      "accent": "#b292ea",
+      "label_color": "#b292ea",
+      "role": "Dark gravity control and deliberate burst",
+      "desc": "Bends space. A gravity well pulls enemies together, a Dark lance pierces armor and resistance, and a telegraphed rift spends Arcane Charge on a heavy explosion.",
+      "limit": "Strong control and burst; slow to set up and almost only Dark damage.",
+      "signature": {
+        "name": "Collapse",
+        "text": "An enemy defeated by your spell collapses: enemies within 4 m are pulled up to 1.5 m toward it (walls stop the pull; bosses are not pulled) and take 30% of the defeating hit as Dark damage. At most once every 2 s.",
+        "values": {
+          "radius": 4.0,
+          "pull": 1.5,
+          "pct": 30.0,
+          "icd": 2.0
+        }
+      },
+      "armor_look": "An indigo robe, a tall flared collar, a dark mantle and a torn indigo cape.",
+      "skills": [
+        {
+          "id": "vs_event_horizon",
+          "name": "Event Horizon",
+          "behavior": "t_zone",
+          "kind": "spell",
+          "cooldown": 28.0,
+          "requires": "",
+          "conversion": {},
+          "element": 8,
+          "per_rank": {
+            "damage_min": 2.2,
+            "damage_max": 3.0
+          },
+          "anim": "cast_area",
+          "sound_cast": "arcane_surge",
+          "sound_hit": "dark_curse",
+          "vfx": "curse",
+          "ranks": {
+            "1": {
+              "mana": 28.0,
+              "params": {
+                "range": 16.0,
+                "radius": 5.5,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 16.0,
+                "damage_max": 22.0,
+                "pull": 1.6,
+                "knockback": 0.0,
+                "poise": 6.0,
+                "rank": 1.0
+              },
+              "text": "Open a gravity well (5.5 m) at the target for 4 s. Every 0.5 s it pulls enemies toward its center (walls stop the pull; Knockback Resistance shortens it; bosses are not pulled) and deals 16-22 Dark damage."
+            },
+            "5": {
+              "mana": 34.0,
+              "params": {
+                "range": 16.0,
+                "radius": 5.5,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 24.8,
+                "damage_max": 34.0,
+                "pull": 1.6,
+                "knockback": 0.0,
+                "poise": 6.0,
+                "rank": 5.0
+              },
+              "text": "Open a gravity well (5.5 m) at the target for 4 s. Every 0.5 s it pulls enemies toward its center (walls stop the pull; Knockback Resistance shortens it; bosses are not pulled) and deals 24.8-34 Dark damage."
+            },
+            "25": {
+              "mana": 49.0,
+              "params": {
+                "range": 16.0,
+                "radius": 5.5,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 46.8,
+                "damage_max": 64.0,
+                "pull": 1.6,
+                "knockback": 0.0,
+                "poise": 6.0,
+                "rank": 25.0
+              },
+              "text": "Open a gravity well (5.5 m) at the target for 4 s. Every 0.5 s it pulls enemies toward its center (walls stop the pull; Knockback Resistance shortens it; bosses are not pulled) and deals 46.8-64 Dark damage."
+            },
+            "30": {
+              "mana": 49.0,
+              "params": {
+                "range": 16.0,
+                "radius": 5.5,
+                "duration": 4.0,
+                "interval": 0.5,
+                "damage_min": 52.3,
+                "damage_max": 71.5,
+                "pull": 1.6,
+                "knockback": 0.0,
+                "poise": 6.0,
+                "rank": 30.0
+              },
+              "text": "Open a gravity well (5.5 m) at the target for 4 s. Every 0.5 s it pulls enemies toward its center (walls stop the pull; Knockback Resistance shortens it; bosses are not pulled) and deals 52.3-71.5 Dark damage."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "vs_null_lance",
+          "name": "Null Lance",
+          "behavior": "projectile",
+          "kind": "spell",
+          "cooldown": 12.0,
+          "requires": "",
+          "conversion": {},
+          "element": 8,
+          "per_rank": {
+            "damage_min": 12.5,
+            "damage_max": 16.5
+          },
+          "anim": "cast_heavy",
+          "sound_cast": "dark_cast",
+          "sound_hit": "dark_curse",
+          "vfx": "curse",
+          "ranks": {
+            "1": {
+              "mana": 18.0,
+              "params": {
+                "damage_min": 84.0,
+                "damage_max": 114.0,
+                "speed": 44.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 26.0,
+                "width": 0.9,
+                "pen_extra": 0.15,
+                "pen_pct": 15.0,
+                "knockback": 3.0,
+                "poise": 14.0,
+                "rank": 1.0
+              },
+              "text": "A lance of nothing that pierces every enemy in line: 84-114 Dark damage that ignores 15% more of their armor and Dark Resistance (penetration limits still apply)."
+            },
+            "5": {
+              "mana": 22.0,
+              "params": {
+                "damage_min": 134.0,
+                "damage_max": 180.0,
+                "speed": 44.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 26.0,
+                "width": 0.9,
+                "pen_extra": 0.15,
+                "pen_pct": 15.0,
+                "knockback": 3.0,
+                "poise": 14.0,
+                "rank": 5.0
+              },
+              "text": "A lance of nothing that pierces every enemy in line: 134-180 Dark damage that ignores 15% more of their armor and Dark Resistance (penetration limits still apply)."
+            },
+            "25": {
+              "mana": 32.0,
+              "params": {
+                "damage_min": 259.0,
+                "damage_max": 345.0,
+                "speed": 44.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 26.0,
+                "width": 0.9,
+                "pen_extra": 0.15,
+                "pen_pct": 15.0,
+                "knockback": 3.0,
+                "poise": 14.0,
+                "rank": 25.0
+              },
+              "text": "A lance of nothing that pierces every enemy in line: 259-345 Dark damage that ignores 15% more of their armor and Dark Resistance (penetration limits still apply)."
+            },
+            "30": {
+              "mana": 32.0,
+              "params": {
+                "damage_min": 290.25,
+                "damage_max": 386.25,
+                "speed": 44.0,
+                "count": 1.0,
+                "spread": 0.0,
+                "pierce": 99.0,
+                "range": 26.0,
+                "width": 0.9,
+                "pen_extra": 0.15,
+                "pen_pct": 15.0,
+                "knockback": 3.0,
+                "poise": 14.0,
+                "rank": 30.0
+              },
+              "text": "A lance of nothing that pierces every enemy in line: 290.3-386.3 Dark damage that ignores 15% more of their armor and Dark Resistance (penetration limits still apply)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "vs_rift_collapse",
+          "name": "Rift Collapse",
+          "behavior": "ground_aoe",
+          "kind": "spell",
+          "cooldown": 30.0,
+          "requires": "",
+          "conversion": {},
+          "element": 8,
+          "per_rank": {
+            "damage_min": 16.0,
+            "damage_max": 22.0
+          },
+          "anim": "cast_heavy",
+          "sound_cast": "dark_cast",
+          "sound_hit": "dark_curse",
+          "vfx": "curse",
+          "ranks": {
+            "1": {
+              "mana": 32.0,
+              "params": {
+                "damage_min": 117.0,
+                "damage_max": 162.0,
+                "radius": 5.0,
+                "delay": 1.6,
+                "range": 22.0,
+                "spend_charge": 1.0,
+                "per_charge": 20.0,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "visible": 1.0,
+                "rank": 1.0
+              },
+              "text": "Tear a rift at a visible point. After a clear 1.6 s warning it collapses: 117-162 Dark damage within 5 m, 20% more per Arcane Charge (all charge is spent once)."
+            },
+            "5": {
+              "mana": 38.0,
+              "params": {
+                "damage_min": 181.0,
+                "damage_max": 250.0,
+                "radius": 5.0,
+                "delay": 1.6,
+                "range": 22.0,
+                "spend_charge": 1.0,
+                "per_charge": 20.0,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "visible": 1.0,
+                "rank": 5.0
+              },
+              "text": "Tear a rift at a visible point. After a clear 1.6 s warning it collapses: 181-250 Dark damage within 5 m, 20% more per Arcane Charge (all charge is spent once)."
+            },
+            "25": {
+              "mana": 53.0,
+              "params": {
+                "damage_min": 341.0,
+                "damage_max": 470.0,
+                "radius": 5.0,
+                "delay": 1.6,
+                "range": 22.0,
+                "spend_charge": 1.0,
+                "per_charge": 20.0,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "visible": 1.0,
+                "rank": 25.0
+              },
+              "text": "Tear a rift at a visible point. After a clear 1.6 s warning it collapses: 341-470 Dark damage within 5 m, 20% more per Arcane Charge (all charge is spent once)."
+            },
+            "30": {
+              "mana": 53.0,
+              "params": {
+                "damage_min": 381.0,
+                "damage_max": 525.0,
+                "radius": 5.0,
+                "delay": 1.6,
+                "range": 22.0,
+                "spend_charge": 1.0,
+                "per_charge": 20.0,
+                "knockback": 10.0,
+                "poise": 50.0,
+                "visible": 1.0,
+                "rank": 30.0
+              },
+              "text": "Tear a rift at a visible point. After a clear 1.6 s warning it collapses: 381-525 Dark damage within 5 m, 20% more per Arcane Charge (all charge is spent once)."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "vs_void_geometry",
+          "name": "Void Geometry",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Void Sovereign areas are 2% larger (at most 15%).",
+          "rank25": "Void Sovereign areas are 14% larger (at most 15%).",
+          "mods": [],
+          "flags": {
+            "vs_area": {
+              "rank1": 0.02,
+              "cap": 0.15
+            }
+          }
+        },
+        {
+          "id": "vs_entropy",
+          "name": "Entropy",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Your Dark damage is 3% higher against Cursed enemies (at most 25%).",
+          "rank25": "Your Dark damage is 21% higher against Cursed enemies (at most 25%).",
+          "mods": [],
+          "flags": {
+            "vs_entropy": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "vs_sovereigns_reserve",
+          "name": "Sovereign's Reserve",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% Maximum Mana and +3% Mana Regeneration.",
+          "rank25": "+21% Maximum Mana and +21% Mana Regeneration.",
+          "mods": [
+            {
+              "stat": "max_mana",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "mana_regen",
+              "op": "inc",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {}
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_eventide_staff",
+          "name": "Eventide Staff",
+          "category": "weapon",
+          "weapon_type": "staff",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "void_sovereign"
+            ]
+          },
+          "text": "For Void Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_riftwoven_robes",
+          "name": "Riftwoven Robes",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "void_sovereign"
+            ]
+          },
+          "text": "For Void Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_horizon_core",
+          "name": "Horizon Core",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "void_sovereign"
+            ]
+          },
+          "text": "For Void Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nightstalker",
+      "name": "Nightstalker",
+      "family": "shadowblade",
+      "stage": 1,
+      "parent": "shadowblade",
+      "lineage": [
+        "shadowblade",
+        "nightstalker"
+      ],
+      "level": 60,
+      "primary": "#8655a8",
+      "accent": "#adb3c6",
+      "label_color": "#986fb5",
+      "role": "Mobile melee, ambushes and Combo control",
+      "desc": "Moves through shadow. A lunge that builds Combo, a veil that hides and protects, and an execution finisher that hits marked enemies harder.",
+      "limit": "Needs Combo and good positioning; little area damage.",
+      "signature": {
+        "name": "From the Shadows",
+        "text": "After a dodge, your next weapon attack within 2 s strikes from the shadows: 25% more damage and +1 Combo.",
+        "values": {
+          "window": 2.0,
+          "bonus": 25.0,
+          "combo": 1
+        }
+      },
+      "armor_look": "A plum leather harness with crossed straps, a cowl, one pauldron and a trailing scarf.",
+      "skills": [
+        {
+          "id": "ns_umbral_lunge",
+          "name": "Umbral Lunge",
+          "behavior": "dash_strike",
+          "kind": "attack",
+          "cooldown": 10.0,
+          "requires": "melee",
+          "conversion": {
+            "8": 0.3
+          },
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 23.0
+          },
+          "anim": "dagger_2",
+          "sound_cast": "blink",
+          "sound_hit": "hit_flesh",
+          "vfx": "shadow_step",
+          "ranks": {
+            "1": {
+              "mana": 10.0,
+              "params": {
+                "weapon_pct": 230.0,
+                "dash": 7.0,
+                "radius": 1.8,
+                "combo_gain": 1.0,
+                "knockback": 4.0,
+                "poise": 14.0,
+                "rank": 1.0
+              },
+              "text": "Lunge 7 m through the shadows and strike: 230% weapon damage, 30% as Dark. A cast that lands adds 1 Combo once, however many enemies it strikes."
+            },
+            "5": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 322.0,
+                "dash": 7.0,
+                "radius": 1.8,
+                "combo_gain": 1.0,
+                "knockback": 4.0,
+                "poise": 14.0,
+                "rank": 5.0
+              },
+              "text": "Lunge 7 m through the shadows and strike: 322% weapon damage, 30% as Dark. A cast that lands adds 1 Combo once, however many enemies it strikes."
+            },
+            "25": {
+              "mana": 17.0,
+              "params": {
+                "weapon_pct": 552.0,
+                "dash": 7.0,
+                "radius": 1.8,
+                "combo_gain": 1.0,
+                "knockback": 4.0,
+                "poise": 14.0,
+                "rank": 25.0
+              },
+              "text": "Lunge 7 m through the shadows and strike: 552% weapon damage, 30% as Dark. A cast that lands adds 1 Combo once, however many enemies it strikes."
+            },
+            "30": {
+              "mana": 17.0,
+              "params": {
+                "weapon_pct": 609.5,
+                "dash": 7.0,
+                "radius": 1.8,
+                "combo_gain": 1.0,
+                "knockback": 4.0,
+                "poise": 14.0,
+                "rank": 30.0
+              },
+              "text": "Lunge 7 m through the shadows and strike: 609.5% weapon damage, 30% as Dark. A cast that lands adds 1 Combo once, however many enemies it strikes."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ns_gloom_veil",
+          "name": "Gloom Veil",
+          "behavior": "veil",
+          "kind": "spell",
+          "cooldown": 22.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "duration": 0.05
+          },
+          "anim": "cast_quick",
+          "sound_cast": "shade_hiss",
+          "sound_hit": "",
+          "vfx": "smoke",
+          "ranks": {
+            "1": {
+              "mana": 14.0,
+              "params": {
+                "radius": 5.0,
+                "duration": 2.5,
+                "evasion": 50.0,
+                "self_dur": 2.5,
+                "rank": 1.0
+              },
+              "text": "Wrap yourself in gloom: enemies within 5 m lose you, and you gain Stealth and 50% more Evasion for 2.5 s. Attacking ends both."
+            },
+            "5": {
+              "mana": 14.0,
+              "params": {
+                "radius": 5.0,
+                "duration": 2.7,
+                "evasion": 50.0,
+                "self_dur": 2.5,
+                "rank": 5.0
+              },
+              "text": "Wrap yourself in gloom: enemies within 5 m lose you, and you gain Stealth and 50% more Evasion for 2.7 s. Attacking ends both."
+            },
+            "25": {
+              "mana": 14.0,
+              "params": {
+                "radius": 5.0,
+                "duration": 3.2,
+                "evasion": 50.0,
+                "self_dur": 2.5,
+                "rank": 25.0
+              },
+              "text": "Wrap yourself in gloom: enemies within 5 m lose you, and you gain Stealth and 50% more Evasion for 3.2 s. Attacking ends both."
+            },
+            "30": {
+              "mana": 14.0,
+              "params": {
+                "radius": 5.0,
+                "duration": 3.33,
+                "evasion": 50.0,
+                "self_dur": 2.5,
+                "rank": 30.0
+              },
+              "text": "Wrap yourself in gloom: enemies within 5 m lose you, and you gain Stealth and 50% more Evasion for 3.3 s. Attacking ends both."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "ns_marked_execution",
+          "name": "Marked Execution",
+          "behavior": "melee_arc",
+          "kind": "attack",
+          "cooldown": 16.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 20.0,
+            "pip_more": 0.6
+          },
+          "anim": "dual_heavy",
+          "sound_cast": "swing_heavy",
+          "sound_hit": "crit_hit",
+          "vfx": "eviscerate",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 220.0,
+                "pip_more": 18.0,
+                "consume_combo": 1.0,
+                "max_targets": 1.0,
+                "vs_marked_pct": 25.0,
+                "arc": 80.0,
+                "range": 2.6,
+                "knockback": 8.0,
+                "poise": 30.0,
+                "rank": 1.0
+              },
+              "text": "Finisher. Spend all Combo on one enemy: 220% weapon damage, 18% more per pip, and 25% more against a Marked or Quarry-marked enemy. Poised: always a critical hit."
+            },
+            "5": {
+              "mana": 14.4,
+              "params": {
+                "weapon_pct": 300.0,
+                "pip_more": 20.4,
+                "consume_combo": 1.0,
+                "max_targets": 1.0,
+                "vs_marked_pct": 25.0,
+                "arc": 80.0,
+                "range": 2.6,
+                "knockback": 8.0,
+                "poise": 30.0,
+                "rank": 5.0
+              },
+              "text": "Finisher. Spend all Combo on one enemy: 300% weapon damage, 20.4% more per pip, and 25% more against a Marked or Quarry-marked enemy. Poised: always a critical hit."
+            },
+            "25": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 500.0,
+                "pip_more": 26.4,
+                "consume_combo": 1.0,
+                "max_targets": 1.0,
+                "vs_marked_pct": 25.0,
+                "arc": 80.0,
+                "range": 2.6,
+                "knockback": 8.0,
+                "poise": 30.0,
+                "rank": 25.0
+              },
+              "text": "Finisher. Spend all Combo on one enemy: 500% weapon damage, 26.4% more per pip, and 25% more against a Marked or Quarry-marked enemy. Poised: always a critical hit."
+            },
+            "30": {
+              "mana": 20.4,
+              "params": {
+                "weapon_pct": 550.0,
+                "pip_more": 27.9,
+                "consume_combo": 1.0,
+                "max_targets": 1.0,
+                "vs_marked_pct": 25.0,
+                "arc": 80.0,
+                "range": 2.6,
+                "knockback": 8.0,
+                "poise": 30.0,
+                "rank": 30.0
+              },
+              "text": "Finisher. Spend all Combo on one enemy: 550% weapon damage, 27.9% more per pip, and 25% more against a Marked or Quarry-marked enemy. Poised: always a critical hit."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "ns_ambush_training",
+          "name": "Ambush Training",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+1% Critical Chance for 3 s after Stealth ends (at most 8%).",
+          "rank25": "+7% Critical Chance for 3 s after Stealth ends (at most 8%).",
+          "mods": [],
+          "flags": {
+            "ns_ambush": {
+              "rank1": 0.01,
+              "cap": 0.08
+            }
+          }
+        },
+        {
+          "id": "ns_silent_footwork",
+          "name": "Silent Footwork",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+3% Evasion and +3% Dodge Distance.",
+          "rank25": "+21% Evasion and +21% Dodge Distance.",
+          "mods": [
+            {
+              "stat": "evasion",
+              "op": "inc",
+              "rank1": 0.03
+            },
+            {
+              "stat": "dodge_distance",
+              "op": "inc",
+              "rank1": 0.03
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "ns_patient_blade",
+          "name": "Patient Blade",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Combo lasts 0.3 s longer before it fades (all Combo lingering together at most 4 s).",
+          "rank25": "Combo lasts 1.8 s longer before it fades (all Combo lingering together at most 4 s).",
+          "mods": [],
+          "flags": {
+            "combo_linger": {
+              "rank1": 0.25,
+              "cap": null
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_gloamfang_dagger",
+          "name": "Gloamfang Dagger",
+          "category": "weapon",
+          "weapon_type": "dagger",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "nightstalker"
+            ]
+          },
+          "text": "For Nightstalker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_nightstalker_leathers",
+          "name": "Nightstalker Leathers",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "nightstalker"
+            ]
+          },
+          "text": "For Nightstalker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_silent_trail_charm",
+          "name": "Silent Trail Charm",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "lineage",
+            "ids": [
+              "nightstalker"
+            ]
+          },
+          "text": "For Nightstalker and its master classes",
+          "level": 60,
+          "drop_level": 60,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 60
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 60,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blood_sovereign",
+      "name": "Blood Sovereign",
+      "family": "shadowblade",
+      "stage": 2,
+      "parent": "nightstalker",
+      "lineage": [
+        "shadowblade",
+        "nightstalker",
+        "blood_sovereign"
+      ],
+      "level": 120,
+      "primary": "#ad4b64",
+      "accent": "#df9c9c",
+      "label_color": "#b9667b",
+      "role": "Bleeding melee and bounded self-healing",
+      "desc": "Lives on what it takes. Rending cuts cause Bleeding, a pact trades Health for damage and lifesteal, and an eclipse finisher heals from the damage it deals.",
+      "limit": "Durable in long fights; lower burst than the Phantom Reaper.",
+      "signature": {
+        "name": "Blood Price",
+        "text": "When an enemy dies while Bleeding, its blood bursts: enemies within 3 m start Bleeding at 40% of its bleed, and you recover 2% of Maximum HP. At most once a second.",
+        "values": {
+          "radius": 3.0,
+          "share": 40.0,
+          "heal": 2.0,
+          "icd": 1.0
+        }
+      },
+      "armor_look": "A garnet long coat with tails, a crimson sash, a high collar and a blood-moon clasp.",
+      "skills": [
+        {
+          "id": "bs_crimson_rend",
+          "name": "Crimson Rend",
+          "behavior": "melee_arc",
+          "kind": "attack",
+          "cooldown": 10.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 21.0,
+            "bleed": 6.0
+          },
+          "anim": "dagger_heavy",
+          "sound_cast": "swing_dagger",
+          "sound_hit": "hit_flesh",
+          "vfx": "venom",
+          "ranks": {
+            "1": {
+              "mana": 10.0,
+              "params": {
+                "weapon_pct": 210.0,
+                "arc": 120.0,
+                "range": 2.8,
+                "bleed": 160.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 10.0,
+                "rank": 1.0
+              },
+              "text": "A rending cut (120°, 2.8 m): 210% weapon damage and heavy Bleeding (160). +1 Combo."
+            },
+            "5": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 294.0,
+                "arc": 120.0,
+                "range": 2.8,
+                "bleed": 184.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 10.0,
+                "rank": 5.0
+              },
+              "text": "A rending cut (120°, 2.8 m): 294% weapon damage and heavy Bleeding (184). +1 Combo."
+            },
+            "25": {
+              "mana": 17.0,
+              "params": {
+                "weapon_pct": 504.0,
+                "arc": 120.0,
+                "range": 2.8,
+                "bleed": 244.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 10.0,
+                "rank": 25.0
+              },
+              "text": "A rending cut (120°, 2.8 m): 504% weapon damage and heavy Bleeding (244). +1 Combo."
+            },
+            "30": {
+              "mana": 17.0,
+              "params": {
+                "weapon_pct": 556.5,
+                "arc": 120.0,
+                "range": 2.8,
+                "bleed": 259.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 10.0,
+                "rank": 30.0
+              },
+              "text": "A rending cut (120°, 2.8 m): 556.5% weapon damage and heavy Bleeding (259). +1 Combo."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "bs_sanguine_pact",
+          "name": "Sanguine Pact",
+          "behavior": "t_pact",
+          "kind": "spell",
+          "cooldown": 26.0,
+          "requires": "",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "dmg": 0.4,
+            "duration": 0.1
+          },
+          "anim": "cast_quick",
+          "sound_cast": "dark_curse",
+          "sound_hit": "",
+          "vfx": "blossom",
+          "ranks": {
+            "1": {
+              "mana": 0.0,
+              "params": {
+                "hp_cost": 12.0,
+                "dmg": 12.0,
+                "leech": 2.5,
+                "duration": 8.0,
+                "rank": 1.0
+              },
+              "text": "Pay 12% of your current HP (never your last point of HP) to deal 12% more damage and gain +2.5% Life Leech for 8 s."
+            },
+            "5": {
+              "mana": 0.0,
+              "params": {
+                "hp_cost": 12.0,
+                "dmg": 13.6,
+                "leech": 2.5,
+                "duration": 8.4,
+                "rank": 5.0
+              },
+              "text": "Pay 12% of your current HP (never your last point of HP) to deal 13.6% more damage and gain +2.5% Life Leech for 8.4 s."
+            },
+            "25": {
+              "mana": 0.0,
+              "params": {
+                "hp_cost": 12.0,
+                "dmg": 17.6,
+                "leech": 2.5,
+                "duration": 9.4,
+                "rank": 25.0
+              },
+              "text": "Pay 12% of your current HP (never your last point of HP) to deal 17.6% more damage and gain +2.5% Life Leech for 9.4 s."
+            },
+            "30": {
+              "mana": 0.0,
+              "params": {
+                "hp_cost": 12.0,
+                "dmg": 18.6,
+                "leech": 2.5,
+                "duration": 9.65,
+                "rank": 30.0
+              },
+              "text": "Pay 12% of your current HP (never your last point of HP) to deal 18.6% more damage and gain +2.5% Life Leech for 9.7 s."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "bs_blood_eclipse",
+          "name": "Blood Eclipse",
+          "behavior": "self_aoe",
+          "kind": "attack",
+          "cooldown": 30.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 17.0,
+            "pip_more": 0.4
+          },
+          "anim": "whirlwind",
+          "sound_cast": "dark_curse",
+          "sound_hit": "hit_flesh",
+          "vfx": "blossom",
+          "ranks": {
+            "1": {
+              "mana": 16.0,
+              "params": {
+                "weapon_pct": 170.0,
+                "pip_more": 12.0,
+                "consume_combo": 1.0,
+                "radius": 4.5,
+                "vs_bleeding_pct": 35.0,
+                "heal_from_damage": 0.1,
+                "heal_pct": 10.0,
+                "heal_cap": 0.12,
+                "heal_cap_pct": 12.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 1.0
+              },
+              "text": "Finisher. Spend all Combo in an eclipse of blood around you (4.5 m): 170% weapon damage, 12% more per pip, and 35% more to Bleeding enemies. You heal 10% of the damage actually dealt, at most 12% of your Maximum HP per cast."
+            },
+            "5": {
+              "mana": 19.2,
+              "params": {
+                "weapon_pct": 238.0,
+                "pip_more": 13.6,
+                "consume_combo": 1.0,
+                "radius": 4.5,
+                "vs_bleeding_pct": 35.0,
+                "heal_from_damage": 0.1,
+                "heal_pct": 10.0,
+                "heal_cap": 0.12,
+                "heal_cap_pct": 12.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 5.0
+              },
+              "text": "Finisher. Spend all Combo in an eclipse of blood around you (4.5 m): 238% weapon damage, 13.6% more per pip, and 35% more to Bleeding enemies. You heal 10% of the damage actually dealt, at most 12% of your Maximum HP per cast."
+            },
+            "25": {
+              "mana": 27.2,
+              "params": {
+                "weapon_pct": 408.0,
+                "pip_more": 17.6,
+                "consume_combo": 1.0,
+                "radius": 4.5,
+                "vs_bleeding_pct": 35.0,
+                "heal_from_damage": 0.1,
+                "heal_pct": 10.0,
+                "heal_cap": 0.12,
+                "heal_cap_pct": 12.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 25.0
+              },
+              "text": "Finisher. Spend all Combo in an eclipse of blood around you (4.5 m): 408% weapon damage, 17.6% more per pip, and 35% more to Bleeding enemies. You heal 10% of the damage actually dealt, at most 12% of your Maximum HP per cast."
+            },
+            "30": {
+              "mana": 27.2,
+              "params": {
+                "weapon_pct": 450.5,
+                "pip_more": 18.6,
+                "consume_combo": 1.0,
+                "radius": 4.5,
+                "vs_bleeding_pct": 35.0,
+                "heal_from_damage": 0.1,
+                "heal_pct": 10.0,
+                "heal_cap": 0.12,
+                "heal_cap_pct": 12.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 30.0
+              },
+              "text": "Finisher. Spend all Combo in an eclipse of blood around you (4.5 m): 450.5% weapon damage, 18.6% more per pip, and 35% more to Bleeding enemies. You heal 10% of the damage actually dealt, at most 12% of your Maximum HP per cast."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "bs_hemomancy",
+          "name": "Hemomancy",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Bleeding you cause deals 4% more damage (at most 40%).",
+          "rank25": "Bleeding you cause deals 28% more damage (at most 40%).",
+          "mods": [],
+          "flags": {
+            "bs_bleed": {
+              "rank1": 0.04,
+              "cap": 0.4
+            }
+          }
+        },
+        {
+          "id": "bs_sovereigns_hunger",
+          "name": "Sovereign's Hunger",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Life Leech and Bloodsucker heal 3% more (at most 25%; Life Leech never returns more than 30% of a hit).",
+          "rank25": "Life Leech and Bloodsucker heal 21% more (at most 25%; Life Leech never returns more than 30% of a hit).",
+          "mods": [],
+          "flags": {
+            "bs_hunger": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "bs_crimson_endurance",
+          "name": "Crimson Endurance",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "+2% Maximum HP and +2% increased healing. Bloodcurse still reduces healing as usual.",
+          "rank25": "+14% Maximum HP and +14% increased healing. Bloodcurse still reduces healing as usual.",
+          "mods": [
+            {
+              "stat": "max_hp",
+              "op": "inc",
+              "rank1": 0.02
+            },
+            {
+              "stat": "healing",
+              "op": "inc",
+              "rank1": 0.02
+            }
+          ],
+          "flags": {}
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_crimson_oath_dagger",
+          "name": "Crimson Oath Dagger",
+          "category": "weapon",
+          "weapon_type": "dagger",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "blood_sovereign"
+            ]
+          },
+          "text": "For Blood Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_sanguine_leathers",
+          "name": "Sanguine Leathers",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "blood_sovereign"
+            ]
+          },
+          "text": "For Blood Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_bloodmoon_signet",
+          "name": "Bloodmoon Signet",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "blood_sovereign"
+            ]
+          },
+          "text": "For Blood Sovereign only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phantom_reaper",
+      "name": "Phantom Reaper",
+      "family": "shadowblade",
+      "stage": 2,
+      "parent": "nightstalker",
+      "lineage": [
+        "shadowblade",
+        "nightstalker",
+        "phantom_reaper"
+      ],
+      "level": 120,
+      "primary": "#7a77c9",
+      "accent": "#beddeb",
+      "label_color": "#8e8bd1",
+      "role": "Precise repositioning and finishing burst",
+      "desc": "Strikes and vanishes. Crosses behind enemies, reaps a wide arc with Combo, and leaves afterimages that strike again.",
+      "limit": "High burst and evasion; no healing and fragile when caught.",
+      "signature": {
+        "name": "Soul Harvest",
+        "text": "Each enemy you defeat releases a soul: +1 Combo and Phantom Crossing recovers 2 s sooner. At most once a second.",
+        "values": {
+          "combo": 1,
+          "cd": 2.0,
+          "icd": 1.0
+        }
+      },
+      "armor_look": "A grey-violet mantle over a dark harness, a crescent clasp and a long pale torn cape.",
+      "skills": [
+        {
+          "id": "pr_phantom_crossing",
+          "name": "Phantom Crossing",
+          "behavior": "shadow_step",
+          "kind": "attack",
+          "cooldown": 18.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 22.0
+          },
+          "anim": "dagger_2",
+          "sound_cast": "blink",
+          "sound_hit": "hit_flesh",
+          "vfx": "shadow_step",
+          "ranks": {
+            "1": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 220.0,
+                "range": 9.0,
+                "arc": 90.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 12.0,
+                "self_dur": 1.0,
+                "rank": 1.0
+              },
+              "text": "Cross to the far side of the enemy nearest your aim (up to 9 m; walls stop you) and strike for 220% weapon damage. For 1 s afterwards you have 60% more Evasion. +1 Combo."
+            },
+            "5": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 308.0,
+                "range": 9.0,
+                "arc": 90.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 12.0,
+                "self_dur": 1.0,
+                "rank": 5.0
+              },
+              "text": "Cross to the far side of the enemy nearest your aim (up to 9 m; walls stop you) and strike for 308% weapon damage. For 1 s afterwards you have 60% more Evasion. +1 Combo."
+            },
+            "25": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 528.0,
+                "range": 9.0,
+                "arc": 90.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 12.0,
+                "self_dur": 1.0,
+                "rank": 25.0
+              },
+              "text": "Cross to the far side of the enemy nearest your aim (up to 9 m; walls stop you) and strike for 528% weapon damage. For 1 s afterwards you have 60% more Evasion. +1 Combo."
+            },
+            "30": {
+              "mana": 12.0,
+              "params": {
+                "weapon_pct": 583.0,
+                "range": 9.0,
+                "arc": 90.0,
+                "combo_gain": 1.0,
+                "knockback": 3.0,
+                "poise": 12.0,
+                "self_dur": 1.0,
+                "rank": 30.0
+              },
+              "text": "Cross to the far side of the enemy nearest your aim (up to 9 m; walls stop you) and strike for 583% weapon damage. For 1 s afterwards you have 60% more Evasion. +1 Combo."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "pr_reapers_arc",
+          "name": "Reaper's Arc",
+          "behavior": "melee_arc",
+          "kind": "attack",
+          "cooldown": 20.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 22.0,
+            "pip_more": 0.4
+          },
+          "anim": "whirlwind",
+          "sound_cast": "whirlwind_loop",
+          "sound_hit": "crit_hit",
+          "vfx": "blossom",
+          "ranks": {
+            "1": {
+              "mana": 14.0,
+              "params": {
+                "weapon_pct": 220.0,
+                "pip_more": 12.0,
+                "consume_combo": 1.0,
+                "arc": 240.0,
+                "range": 3.6,
+                "secondary_mult": 0.55,
+                "secondary_pct": 55.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 1.0
+              },
+              "text": "Finisher. Spend all Combo on a 240° reaping arc (3.6 m): 220% weapon damage, 12% more per pip, to the nearest enemy and 55% of that to the others."
+            },
+            "5": {
+              "mana": 16.4,
+              "params": {
+                "weapon_pct": 308.0,
+                "pip_more": 13.6,
+                "consume_combo": 1.0,
+                "arc": 240.0,
+                "range": 3.6,
+                "secondary_mult": 0.55,
+                "secondary_pct": 55.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 5.0
+              },
+              "text": "Finisher. Spend all Combo on a 240° reaping arc (3.6 m): 308% weapon damage, 13.6% more per pip, to the nearest enemy and 55% of that to the others."
+            },
+            "25": {
+              "mana": 22.4,
+              "params": {
+                "weapon_pct": 528.0,
+                "pip_more": 17.6,
+                "consume_combo": 1.0,
+                "arc": 240.0,
+                "range": 3.6,
+                "secondary_mult": 0.55,
+                "secondary_pct": 55.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 25.0
+              },
+              "text": "Finisher. Spend all Combo on a 240° reaping arc (3.6 m): 528% weapon damage, 17.6% more per pip, to the nearest enemy and 55% of that to the others."
+            },
+            "30": {
+              "mana": 22.4,
+              "params": {
+                "weapon_pct": 583.0,
+                "pip_more": 18.6,
+                "consume_combo": 1.0,
+                "arc": 240.0,
+                "range": 3.6,
+                "secondary_mult": 0.55,
+                "secondary_pct": 55.0,
+                "knockback": 6.0,
+                "poise": 20.0,
+                "rank": 30.0
+              },
+              "text": "Finisher. Spend all Combo on a 240° reaping arc (3.6 m): 583% weapon damage, 18.6% more per pip, to the nearest enemy and 55% of that to the others."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        },
+        {
+          "id": "pr_afterimage_flurry",
+          "name": "Afterimage Flurry",
+          "behavior": "t_afterimage",
+          "kind": "attack",
+          "cooldown": 28.0,
+          "requires": "melee",
+          "conversion": {},
+          "element": 0,
+          "per_rank": {
+            "weapon_pct": 9.5
+          },
+          "anim": "dual_4",
+          "sound_cast": "swing_dagger",
+          "sound_hit": "hit_flesh",
+          "vfx": "twin_fang",
+          "ranks": {
+            "1": {
+              "mana": 16.0,
+              "params": {
+                "strikes": 5.0,
+                "span": 1.0,
+                "reach": 4.5,
+                "weapon_pct": 95.0,
+                "knockback": 1.0,
+                "poise": 5.0,
+                "rank": 1.0
+              },
+              "text": "Leave 5 afterimages that strike from where you stand over 1 s: each hits the nearest enemy within 4.5 m for 95% weapon damage. Afterimage hits cannot trigger Double Attack or other repeat attacks."
+            },
+            "5": {
+              "mana": 19.2,
+              "params": {
+                "strikes": 5.0,
+                "span": 1.0,
+                "reach": 4.5,
+                "weapon_pct": 133.0,
+                "knockback": 1.0,
+                "poise": 5.0,
+                "rank": 5.0
+              },
+              "text": "Leave 5 afterimages that strike from where you stand over 1 s: each hits the nearest enemy within 4.5 m for 133% weapon damage. Afterimage hits cannot trigger Double Attack or other repeat attacks."
+            },
+            "25": {
+              "mana": 27.2,
+              "params": {
+                "strikes": 5.0,
+                "span": 1.0,
+                "reach": 4.5,
+                "weapon_pct": 228.0,
+                "knockback": 1.0,
+                "poise": 5.0,
+                "rank": 25.0
+              },
+              "text": "Leave 5 afterimages that strike from where you stand over 1 s: each hits the nearest enemy within 4.5 m for 228% weapon damage. Afterimage hits cannot trigger Double Attack or other repeat attacks."
+            },
+            "30": {
+              "mana": 27.2,
+              "params": {
+                "strikes": 5.0,
+                "span": 1.0,
+                "reach": 4.5,
+                "weapon_pct": 251.75,
+                "knockback": 1.0,
+                "poise": 5.0,
+                "rank": 30.0
+              },
+              "text": "Leave 5 afterimages that strike from where you stand over 1 s: each hits the nearest enemy within 4.5 m for 251.8% weapon damage. Afterimage hits cannot trigger Double Attack or other repeat attacks."
+            }
+          },
+          "note": "rank 30 = level 25 plus +5 item skill levels"
+        }
+      ],
+      "talents": [
+        {
+          "id": "pr_ghoststep",
+          "name": "Ghoststep",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Dodge recovers 0 s faster (never below 0.3 s).",
+          "rank25": "Dodge recovers 0.2 s faster (never below 0.3 s).",
+          "mods": [
+            {
+              "stat": "dodge_cooldown",
+              "op": "flat",
+              "rank1": -0.03
+            }
+          ],
+          "flags": {}
+        },
+        {
+          "id": "pr_reaping_edge",
+          "name": "Reaping Edge",
+          "kind": "minor",
+          "max_rank": 25,
+          "rank1": "Finishers deal 3% more damage (at most 25%).",
+          "rank25": "Finishers deal 21% more damage (at most 25%).",
+          "mods": [],
+          "flags": {
+            "pr_finisher": {
+              "rank1": 0.03,
+              "cap": 0.25
+            }
+          }
+        },
+        {
+          "id": "pr_untouchable_rhythm",
+          "name": "Untouchable Rhythm",
+          "kind": "major",
+          "max_rank": 1,
+          "rank1": "A dodge grants 25% more Evasion for 1.5 s. Once every 6 s.",
+          "rank25": "A dodge grants 25% more Evasion for 1.5 s. Once every 6 s.",
+          "mods": [],
+          "flags": {
+            "pr_rhythm": {
+              "rank1": 0.25,
+              "cap": 0.25
+            }
+          }
+        }
+      ],
+      "gear": [
+        {
+          "id": "tc_wraithedge_dagger",
+          "name": "Wraithedge Dagger",
+          "category": "weapon",
+          "weapon_type": "dagger",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "phantom_reaper"
+            ]
+          },
+          "text": "For Phantom Reaper only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_afterimage_mantle",
+          "name": "Afterimage Mantle",
+          "category": "armor",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "phantom_reaper"
+            ]
+          },
+          "text": "For Phantom Reaper only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        },
+        {
+          "id": "tc_reapers_glass",
+          "name": "Reaper's Glass",
+          "category": "accessory",
+          "weapon_type": "",
+          "requirement": {
+            "kind": "exact",
+            "ids": [
+              "phantom_reaper"
+            ]
+          },
+          "text": "For Phantom Reaper only",
+          "level": 120,
+          "drop_level": 120,
+          "sources": [
+            {
+              "kind": "shop",
+              "id": "grand_master_armory",
+              "npc": "grand_master_edran",
+              "map": "int_guildhouse",
+              "rarity": "Elite",
+              "level": 120
+            },
+            {
+              "kind": "loot",
+              "id": "ItemGenerator.random_base",
+              "drop_level": 120,
+              "weight": 25,
+              "note": "monster drops, dungeon chests, Lape's offers and relic caches roll it like any base of its level"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "talent_tail": 0.25,
+  "flag_caps": {
+    "rg_block_valor": 12.0,
+    "dg_march": 0.06,
+    "dg_iron_tyrant": 0.15,
+    "gp_barrier": 0.25,
+    "tr_trap_dur": 0.25,
+    "ww_area": 0.25,
+    "ww_rootbound": 0.1,
+    "potion_heal": 0.25,
+    "ss_far": 0.25,
+    "ss_comet_rhythm": 0.5,
+    "ss_focus_hold": 0.5,
+    "ar_charge_linger": 2.0,
+    "am_concord": 0.2,
+    "am_shelter": 0.1,
+    "vs_area": 0.15,
+    "ar_mana_eff": 0.15,
+    "rg_unbroken": 0.25,
+    "vs_entropy": 0.25,
+    "ns_ambush": 0.08,
+    "pr_finisher": 0.25,
+    "pr_rhythm": 0.25,
+    "bs_bleed": 0.4,
+    "bs_hunger": 0.25
+  }
+}

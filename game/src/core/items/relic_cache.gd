@@ -11,7 +11,7 @@ static func open(hero: HeroData, tier: int, player: Node3D = null, rng: RandomNu
 	var mf := 0.0
 	if player is Player:
 		mf = (player as Player).stats.get_stat(&"magic_find")
-	var items := ItemGenerator.relic_items(tier, hero.progress.level, rng, mf, hero.cls.id if hero.cls else &"")
+	var items := ItemGenerator.relic_items(tier, hero.progress.level, rng, mf, ClassTranscendence.current_class_id(hero) if hero.cls else &"")
 	for it: ItemInstance in items:
 		if hero.inventory.add(it) > 0 and player != null and player.is_inside_tree():
 			Loot.spawn_item(it, player.global_position, rng.randf() * TAU, 1.2)

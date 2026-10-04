@@ -250,6 +250,9 @@ func _guildhouse() -> void:
 		fg.on_wall = true
 		fg.position = Vector3(wx, 2.4, z0 + HALF_WALL + 0.06)
 		markers.add_child(fg)
+	# Class Transcendence: the Grand Master's lectern by the west wall (DataNpcsGuildHouse.GRAND_MASTER_SPOT)
+	item("lectern", Vector3(-9.8, 0, 1.7), 90.0)
+	candles(Vector3(-9.8, 1.15, 1.7), 0.6)
 	# waiting benches and hanging lanterns
 	item("bench", Vector3(-4.2, 0, 5.6))
 	item("bench", Vector3(4.2, 0, 5.6))

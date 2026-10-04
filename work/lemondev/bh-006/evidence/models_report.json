@@ -1,0 +1,122 @@
+[
+ {
+  "id": "tc_royal_guard_cuirass",
+  "tris": 2146,
+  "size": [
+   0.599,
+   0.31,
+   0.66
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_black_dominion_plate",
+  "tris": 2146,
+  "size": [
+   0.599,
+   0.31,
+   0.66
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_sanctified_plate",
+  "tris": 2146,
+  "size": [
+   0.599,
+   0.31,
+   0.66
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_trackers_leathers",
+  "tris": 1690,
+  "size": [
+   0.392,
+   0.282,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_livingwood_leathers",
+  "tris": 1690,
+  "size": [
+   0.392,
+   0.282,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_constellation_leathers",
+  "tris": 2390,
+  "size": [
+   0.934,
+   0.313,
+   0.844
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_arcanist_vestments",
+  "tris": 2174,
+  "size": [
+   0.934,
+   0.331,
+   0.995
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_archmage_robes",
+  "tris": 2174,
+  "size": [
+   0.934,
+   0.331,
+   0.995
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_riftwoven_robes",
+  "tris": 2174,
+  "size": [
+   0.934,
+   0.331,
+   0.995
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_nightstalker_leathers",
+  "tris": 1690,
+  "size": [
+   0.392,
+   0.282,
+   0.54
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_afterimage_mantle",
+  "tris": 2150,
+  "size": [
+   0.934,
+   0.313,
+   0.894
+  ],
+  "fallback": false
+ },
+ {
+  "id": "tc_sanguine_leathers",
+  "tris": 2174,
+  "size": [
+   0.934,
+   0.331,
+   0.844
+  ],
+  "fallback": false
+ }
+]

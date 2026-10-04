@@ -136,6 +136,7 @@ static func bases() -> Array:
 	out.append_array(DataLeggings.bases())
 	out.append_array(DataSpecialWeapons.bases())       # bh-026: the Ember Dragon set (Aljay's, knights only)
 	out.append_array(DataAscendant.bases())            # bh-034: the forty Ascendant collections (Cosmic .. Primordial)
+	out.append_array(DataTranscendenceGear.bases())    # Class Transcendence: three pieces for each of the twelve advanced classes
 	# ---- Accessories ----
 	out.append(_b(&"copper_ring", "Copper Ring", &"accessory", "ring", {"level_req": 1, "value": 20}))
 	out.append(_b(&"silver_ring", "Silver Ring", &"accessory", "ring_2", {"level_req": 8, "value": 40, "implicit": [StatModifier.flat(&"res_all", 0.03)]}))

@@ -287,6 +287,15 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			var active: bool = owned >= int(n)
 			v.add_child(lbl("(%d) %s" % [n, sd.bonuses[n].get("desc", "")], 15, SET_ON if active else SET_OFF))
 	# requirements
+	if it.is_equipment():
+		# Class Transcendence: every piece says which classes may wear it (words and colour, not colour alone)
+		v.add_child(gap(2))
+		for line in ClassRequirements.lines(it.base, hero if hero != null and hero.cls != null else null):
+			var ok = line[1]
+			var txt := String(line[0])
+			if ok == false:
+				txt += " (not your class)"
+			v.add_child(lbl(txt, 14, UITheme.TEXT_DIM if ok == null else (Tips.AFFIX if ok else UITheme.BAD)))
 	if it.is_equipment() and not it.base.wearers.is_empty():
 		# bh-026: pieces only some classes may wear (the Ember Dragon set: knights)
 		var fits := hero == null or hero.cls == null or DataSpecialWeapons.can_wear(it.base, hero.cls.id)
@@ -480,6 +489,12 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 		extra.append("Requires a melee weapon")
 	elif s.requires == &"shield":
 		extra.append("Requires a shield")
+	elif s.requires == &"bow":
+		extra.append("Requires a bow, crossbow or javelin")
+	# Class Transcendence: which advanced class teaches it
+	var owner := DataTranscendence.owner_of(sid)
+	if owner != &"":
+		extra.append("%s skill (granted at level %d)" % [DataTranscendence.name_of(owner), DataTranscendence.level_for_stage(DataTranscendence.stage_of(owner))])
 	for e in extra:
 		v.add_child(lbl(e, 14, UITheme.TEXT_DIM))
 	if player and rank > 0:

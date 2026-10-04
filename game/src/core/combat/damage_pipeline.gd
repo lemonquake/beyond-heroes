@@ -33,6 +33,10 @@ const MELT_MULT := 1.5               # fire into a frozen target
 const UMBRAL_MULT := 1.3             # dark into a purged target (light/dark opposition)
 const MAX_KNOCKBACK := 12.0          # m/s hard cap after all impact/critical/weight modifiers
 const MAX_LAUNCH := 6.0             # m/s upward throw cap after weight scaling
+## Sovereign's Hunger never raises Life Leech past this share of a hit.
+const LEECH_SHARE_CAP := 0.30
+## The elemental ailments Elemental Concord counts (each kind once).
+const CONCORD_AILMENTS := [&"burning", &"chilled", &"frozen", &"shocked", &"wet", &"windswept", &"armor_broken", &"cursed", &"purged"]
 static var debug_enabled := false
 
 static func evade_chance(evasion: float, accuracy: float, graze := false) -> float:
@@ -52,6 +56,8 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	var tgt := req.target
 	if atk != null:
 		r.dot_mult = 1.0 + atk.get_stat(&"dot_damage")
+		if atk.has_flag(&"bs_bleed"):          # Hemomancy (Blood Sovereign): Bleeding only
+			r.bleed_mult = 1.0 + DataTranscendence.cap(&"bs_bleed", atk.flag(&"bs_bleed"))
 	var atk_level := atk.level if atk != null else tgt.level
 	var st := req.target_status
 	var inherited := req.kind == DamageRequest.Kind.SPELL and (req.tags.has(&"proc") or req.tags.has(&"thorns"))
@@ -159,7 +165,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	# 8. Target defense (physical) with armor penetration.
 	var armor_dr := 0.0
 	if mitigated:
-		var pen_armor := atk.get_stat(&"pen_armor") if atk != null else 0.0
+		var pen_armor := (atk.get_stat(&"pen_armor") if atk != null else 0.0) + req.pen_extra
 		var eff_def := tgt.get_stat(&"defense") * (1.0 - clampf(pen_armor, 0.0, 1.0))
 		if req.kind == DamageRequest.Kind.IMPACT:
 			eff_def *= IMPACT_ARMOR_FACTOR
@@ -186,7 +192,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 				continue
 			var aff := Elements.affinity(e, tgt.affinity)
 			var res := tgt.get_stat(Elements.res_key(e))
-			var pen := atk.get_stat(Elements.pen_key(e)) if atk != null else 0.0
+			var pen := (atk.get_stat(Elements.pen_key(e)) if atk != null else 0.0) + req.pen_extra
 			var eff_res := clampf(res - pen, StatCalculator.RES_FLOOR, 1.0)
 			comp[e] *= aff * (1.0 - eff_res)
 			r.log_step("%s: affinity x%.2f, resistance %.0f%% - pen %.0f%% -> %.1f" % [Elements.NAMES[e], aff, res * 100.0, pen * 100.0, comp[e]])
@@ -224,6 +230,22 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 			r.reactions.append(&"extinguish")
 		if st.has(&"burning") and comp.get(Elements.WIND, 0.0) > 0.0:
 			r.reactions.append(&"fan")
+		# Class Transcendence: Entropy (Dark against the Cursed) and Elemental Concord (spells against two or more
+		# different elemental ailments, counted once). Both are capped.
+		if atk != null and not inherited:
+			if atk.has_flag(&"vs_entropy") and st.has(&"cursed") and comp.get(Elements.DARK, 0.0) > 0.0:
+				var em := 1.0 + DataTranscendence.cap(&"vs_entropy", atk.flag(&"vs_entropy"))
+				comp[Elements.DARK] *= em
+				r.log_step("Entropy x%.2f" % em)
+			if atk.has_flag(&"am_concord") and req.kind == DamageRequest.Kind.SPELL:
+				var kinds := 0
+				for sid in CONCORD_AILMENTS:
+					if st.has(sid):
+						kinds += 1
+				if kinds >= 2:
+					var cm := 1.0 + DataTranscendence.cap(&"am_concord", atk.flag(&"am_concord"))
+					_scale_all(comp, cm)
+					r.log_step("Elemental Concord (%d ailments) x%.2f" % [kinds, cm])
 		var taken := 0.0
 		if st.has(&"shocked"):
 			taken += st.magnitude(&"shocked", SHOCK_TAKEN)
@@ -341,7 +363,10 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if pb > 0.0:
 			r.buildup[&"poisoned"] = r.buildup.get(&"poisoned", 0.0) + pb * spow * (1.0 - sres * 0.5)
 	if atk != null and r.total > 0:
-		r.leech = r.total * atk.get_stat(&"life_leech") + comp.get(Elements.DARK, 0.0) * DARK_DRAIN
+		var leech_share := atk.get_stat(&"life_leech")
+		if atk.has_flag(&"bs_hunger"):          # Sovereign's Hunger: more leech, never more than 30% of the hit
+			leech_share = minf(maxf(leech_share, LEECH_SHARE_CAP), leech_share * (1.0 + DataTranscendence.cap(&"bs_hunger", atk.flag(&"bs_hunger"))))
+		r.leech = r.total * leech_share + comp.get(Elements.DARK, 0.0) * DARK_DRAIN
 		r.mana_leech = r.total * atk.get_stat(&"mana_leech")
 	_debug(r)
 	return r

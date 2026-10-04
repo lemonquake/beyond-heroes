@@ -311,10 +311,13 @@ func test_guild_house_builds() -> void:
 			counters += 1
 	ok(counters >= 6, "bh-027: at least six guilds keep a counter in the hall (%d)" % counters)
 	var npcs := 0
+	var master := false
 	for n in host.get_tree().get_nodes_in_group(&"npc"):
 		if is_instance_valid(n) and n is Npc and room.is_ancestor_of(n):
 			npcs += 1
-	eq(npcs, 3, "the steward and the two clerks stand in the room")
+			master = master or ((n as Npc).def != null and String((n as Npc).def.id) == "grand_master_edran")
+	eq(npcs, 4, "the steward, the two clerks and (Class Transcendence) the Grand Master stand in the room")
+	ok(master, "the Grand Master is one of them")
 	_end()
 	done()
 
