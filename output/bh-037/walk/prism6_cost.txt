@@ -1,0 +1,11 @@
+COST awake=17 enemies=28 steps=179 physics_step_avg=17.26 ms nav=0.01 ms
+COST   1.333 ms/step  enemy.gd                           x29 (46 us each)
+COST   0.817 ms/step  tempo.gd                           x5 (163 us each)
+COST   0.512 ms/step  quake_ally.gd                      x3 (171 us each)
+COST   0.428 ms/step                                     x2 (214 us each)
+COST   0.339 ms/step  guild_fighter.gd                   x2 (169 us each)
+COST   0.335 ms/step  player.gd                          x1 (335 us each)
+COST   0.011 ms/step  routes.gd                          x1 (11 us each)
+COST   0.005 ms/step  combat_director.gd                 x1 (5 us each)
+COST   0.003 ms/step  projectile.gd                      x2 (2 us each)
+COST scripts 3.78 ms/step, engine rest 13.48 ms/step

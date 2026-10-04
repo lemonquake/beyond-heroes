@@ -336,6 +336,10 @@ var _frozen_pose := false           # Frozen status: the body is ice, the tree h
 ## clips stay in step and only the pose refresh is coarser; the pose, skeleton and skinning work of a big fight drops with
 ## it. Bosses, the hero, other players and companions never take part (`crowd_lod` stays false).
 var crowd_lod := false
+## bh-037: companions (Tempos, Quake Team and guild allies) join the crowd ranking only in efficiency mode, the mode that
+## takes every cheaper path: a party of a dozen fighting a pack paid full-rate poses for all of them. The player's own
+## hero, other players and arena opponents never do.
+var ally_lod := false
 var anim_stride := 1
 var _anim_acc := 0.0
 var _anim_tick := 0
@@ -437,6 +441,45 @@ func update_locomotion(local_velocity: Vector2, combat_stance: bool, hurt_amount
 func _process(delta: float) -> void:
 	if not is_finite(delta) or delta <= 0.0:
 		return
+	# this frame's smoothing offset first, so weapon trails and anything else sampled below see the drawn pose; the
+	# motion layer keeps it (transform = _sm_applied * _rest * pose)
+	var base := _sm_applied.affine_inverse() * transform
+	_sm_applied = Transform3D.IDENTITY
+	if smooth_motion and _anim_awake and get_parent() is CharacterBody3D:
+		_sm_applied = (get_parent() as Node3D).global_transform.affine_inverse() * smoothed_body_transform()
+	transform = _sm_applied * base
+	_process_visual(delta)
+
+# ---- Motion smoothing (bh-037) ------------------------------------------------------------------------------------
+# Actors move in _physics_process at 60 Hz. Drawn at 75, 120 or 144 Hz the body only moves on some frames (at 300 fps on
+# 1 frame in 5), which reads as judder however high the frame rate is. The visual is drawn between the body's last two
+# physics steps instead (Engine.get_physics_interpolation_fraction), one step behind the simulation; gameplay never reads
+# it. A jump of more than 2 m in one step (teleport, waypoint, blink) snaps instead of sliding.
+
+var smooth_motion := true
+var _sm_prev := Transform3D.IDENTITY
+var _sm_cur := Transform3D.IDENTITY
+var _sm_tick := -1
+var _sm_applied := Transform3D.IDENTITY
+
+## Where the parent body should be drawn this frame (the follow camera uses it too, so hero and camera move together).
+func smoothed_body_transform() -> Transform3D:
+	var body := get_parent() as Node3D
+	if body == null or not body.is_inside_tree():
+		return global_transform
+	var g := body.global_transform
+	var tick := Engine.get_physics_frames()
+	if tick != _sm_tick:
+		_sm_prev = _sm_cur if _sm_tick >= 0 else g
+		_sm_cur = g
+		_sm_tick = tick
+	elif g != _sm_cur:
+		_sm_cur = g                             # moved outside a physics step (a teleport from a menu or a script)
+	if _sm_prev.origin.distance_squared_to(_sm_cur.origin) > 4.0:
+		_sm_prev = _sm_cur
+	return _sm_prev.interpolate_with(_sm_cur, clampf(Engine.get_physics_interpolation_fraction(), 0.0, 1.0))
+
+func _process_visual(delta: float) -> void:
 	_combat = move_toward(_combat, _combat_target, delta * 3.5)
 	_hurt = move_toward(_hurt, _hurt_target, delta * 1.5)
 	_upper = move_toward(_upper, _upper_target, delta * 8.0)
@@ -486,7 +529,7 @@ var _rest := Transform3D.IDENTITY   # the node's own transform before the layer 
 
 func _wake_motion() -> void:
 	if not _motion_on:
-		_rest = transform
+		_rest = _sm_applied.affine_inverse() * transform     # never bake this frame's smoothing offset into the rest pose
 		_motion_on = true
 
 ## Knock the body away from a blow. `world_dir` is the direction the blow travelled (attacker -> target);
@@ -579,12 +622,12 @@ func _update_motion(delta: float) -> void:
 	if pose_pivot != 0.0:
 		var piv := Vector3.UP * pose_pivot
 		pos += piv - b * piv
-	transform = _rest * Transform3D(b, pos)
+	transform = _sm_applied * _rest * Transform3D(b, pos)
 	var posing := _pose_tw != null and _pose_tw.is_running()
 	if not posing and _flinch.length() < 0.002 and _flinch_v.length() < 0.01 and _squash <= 0.0 and _shake <= 0.0 and pose_pos == Vector3.ZERO and pose_rot == Vector3.ZERO and pose_scale == Vector3.ONE:
 		_flinch = Vector3.ZERO
 		_flinch_v = Vector3.ZERO
-		transform = _rest
+		transform = _sm_applied * _rest
 		_motion_on = false
 
 func _end_action() -> void:
@@ -1077,12 +1120,29 @@ func _ensure_local_materials() -> void:
 			if src is ShaderMaterial:
 				arr.append(src)                        # the hero's skin: already one per hero, driven through HeroBody
 				continue
+			if src is BaseMaterial3D:
+				MaterialLibrary.faded(src)             # bh-037: keeps this see-through shader alive (warm_see_through)
 			var c: Material = src.duplicate() if src else StandardMaterial3D.new()
 			if c is BaseMaterial3D:
 				(c as BaseMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_HASH
 			m.set_surface_override_material(i, c)
 			arr.append(c)
 		_local_mats[m] = arr
+
+## bh-037: see-through copies (mirror images, stealth, a corpse's decay: _ensure_local_materials) need the alpha-hash
+## variant of each material's shader. Godot builds it when a material's RID is first used and drops it with the last
+## material that uses it: ~20 ms on the frame an image appeared or a corpse began to fade. MaterialLibrary.faded keeps one see-through copy of each
+## (shared, cached) material for the session; Spawner calls this on one visual of every kind while the map loads.
+func warm_see_through() -> void:
+	for m in _meshes:
+		if not is_instance_valid(m) or m.mesh == null or m.material_override is ShaderMaterial:
+			continue
+		for i in m.mesh.get_surface_count():
+			var src := m.get_surface_override_material(i)
+			if src == null:
+				src = m.mesh.surface_get_material(i)
+			if src is BaseMaterial3D:
+				MaterialLibrary.faded(src).get_rid()     # a material builds its shader when its RID is first asked for
 
 ## 1 = solid, 0 = gone. Dithered (alpha hash), so it stays depth-sorted and cheap.
 func set_opacity(a: float) -> void:

@@ -97,6 +97,24 @@ func warm_up() -> void:
 	fx.append(VFXLib.orb(Color.WHITE, 0.3))
 	for shape in ["circle", "cone", "line", "ring"]:
 		fx.append(VFXLib.telegraph(shape, Vector2(2, 2), 1.0))
+	# bh-037: what still compiled mid-fight (walk_probe spike origins): bursts with a sphere emitter or a plain blend (an
+	# image vanishing, a corpse imploding, smoke), lasting emitters, a frozen body's ice and stun stars, and loot landing
+	# (sparkles, ground glow, motes, the glint overlay): 5-9 pipelines and 50-85 ms frames
+	for rad in [0.0, 0.4]:
+		for add in [true, false]:
+			fx.append(VFXLib.particles(Color.WHITE, 4, 0.5, true, 0.2, 1.0, 180.0, Vector3.ZERO, rad, add))
+			fx.append(VFXLib.particles(Color.WHITE, 4, 0.5, false, 0.2, 1.0, 180.0, Vector3.ZERO, rad, add))
+	fx.append(VFXLib.light_flash(Color.WHITE, 1.0, 2.0, 0.1))
+	fx.append(VFXLib.ice_block(1.8, 1.0))
+	fx.append(VFXLib.stun_stars(1.8))
+	fx.append(LootFx.sparkles(BH.Rarity.ELITE, 0.3, 0.3))
+	fx.append(LootFx.sparkles(BH.Rarity.AETHER, 0.3, 0.3))
+	fx.append(LootFx.ground_glow(BH.Rarity.ELITE, 0.4))
+	fx.append(LootFx.motes(BH.Rarity.MYTHICAL, 0.3))
+	var glint := MeshInstance3D.new()
+	glint.mesh = BoxMesh.new()
+	glint.material_overlay = LootFx.glint_material(BH.Rarity.ELITE)
+	fx.append(glint)
 	for n in fx:
 		if n.get_parent():
 			n.get_parent().remove_child(n)
@@ -105,8 +123,11 @@ func warm_up() -> void:
 	# seen by the main camera only: the minimap renders the new map during these frames (bh-015)
 	for v in holder.find_children("*", "VisualInstance3D", true, false):
 		(v as VisualInstance3D).layers = Perf.FX_LAYER
+	var fades := _warm_fades(at)
 	for i in WARM_FRAMES:
 		await get_tree().process_frame
+	if is_instance_valid(fades):
+		fades.queue_free()      # the faded materials stay alive in MaterialLibrary's cache; the map keeps its own meshes
 	if is_instance_valid(holder):
 		# keep every material (and mesh) the effects used: an engine shader lives only while a material with its
 		# feature set exists, so freeing the last one would throw the compiled shader away again
@@ -119,6 +140,41 @@ func warm_up() -> void:
 				tw.kill()
 			l.visible = false
 	_next = 0
+
+## bh-037: the see-through copies the follow camera swaps in when architecture hides the hero (PlayerCamera's occlusion
+## fade, MaterialLibrary.faded) are another shader. The first fade of each compiled it mid-walk: 27 pipelines and a 58 ms
+## frame on Agdao's middle terrace. Behind the loading screen every mesh under the map's Geometry and Props is drawn once,
+## tiny, wearing its faded materials (the real mesh, so the vertex format matches too).
+func _warm_fades(at: Vector3) -> Node3D:
+	var map := Game.current_map
+	if map == null or not is_instance_valid(map):
+		return null
+	var holder := Node3D.new()
+	holder.name = "WarmFades"
+	world.add_child(holder)
+	holder.global_position = at
+	var seen := {}
+	for group in map.find_children("Geometry", "Node3D", true, false) + map.find_children("Props", "Node3D", true, false):
+		for mi: MeshInstance3D in group.find_children("*", "MeshInstance3D", true, false):
+			if mi.mesh == null:
+				continue
+			var key := str(mi.mesh.get_instance_id())
+			var mats: Array[Material] = []
+			for s in mi.mesh.get_surface_count():
+				var m := mi.get_active_material(s)
+				mats.append(m)
+				key += ":" + (str(m.get_instance_id()) if m else "-")
+			if seen.has(key):
+				continue
+			seen[key] = true
+			var w := MeshInstance3D.new()
+			w.mesh = mi.mesh
+			for s in mats.size():
+				w.set_surface_override_material(s, MaterialLibrary.faded(mats[s]))
+			w.layers = Perf.FX_LAYER          # never in the minimap's render
+			holder.add_child(w)
+			w.scale = Vector3.ONE * 0.02
+	return holder
 
 var _warm_keep := {}                 # Resource -> true, alive for the session (see warm_up)
 

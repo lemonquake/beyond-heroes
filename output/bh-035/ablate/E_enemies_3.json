@@ -1,0 +1,94 @@
+{
+  "enemies_in_map": 94,
+  "engaged_at_end": 40,
+  "lite": false,
+  "map": "ruined_forest",
+  "renderer": "forward_plus",
+  "stress": 40,
+  "timeline_ms": [
+    8.9,
+    9.0,
+    9.2,
+    8.9,
+    9.7,
+    9.1,
+    8.8,
+    8.7,
+    10.5,
+    9.0
+  ],
+  "total": {
+    "cpu_render": {
+      "avg": 2.25,
+      "median": 2.14,
+      "p95": 3.35,
+      "samples": 300
+    },
+    "draws": {
+      "avg": 1275.76,
+      "median": 1277.0,
+      "p95": 1283.0,
+      "samples": 300
+    },
+    "frame": {
+      "avg": 9.66,
+      "max": 19.06,
+      "median": 8.99,
+      "p95": 12.56,
+      "p99": 17.38,
+      "samples": 300
+    },
+    "gpu": {
+      "avg": 2.24,
+      "median": 2.21,
+      "p95": 2.94,
+      "samples": 300
+    },
+    "lights": {
+      "avg": 0.0,
+      "median": 0.0,
+      "p95": 0.0,
+      "samples": 300
+    },
+    "nav": {
+      "avg": 0.02,
+      "median": 0.01,
+      "p95": 0.07,
+      "samples": 300
+    },
+    "objects": {
+      "avg": 1873.59,
+      "median": 1910.0,
+      "p95": 1915.0,
+      "samples": 300
+    },
+    "physics": {
+      "avg": 7.25,
+      "median": 8.77,
+      "p95": 12.02,
+      "samples": 300
+    },
+    "prims": {
+      "avg": 909790.69,
+      "median": 909404.0,
+      "p95": 912007.0,
+      "samples": 300
+    },
+    "script": {
+      "avg": 64.03,
+      "median": 15.92,
+      "p95": 202.07,
+      "samples": 300
+    },
+    "setup": {
+      "avg": 0.59,
+      "median": 0.57,
+      "p95": 0.92,
+      "samples": 300
+    }
+  },
+  "window": [
+    1280,
+    720
+  ]
+}

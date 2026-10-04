@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BALANCE L1 knight      single     9.4  aoe    19.9  ehp    2376  power    666.6
+BALANCE L1 mage        single    15.7  aoe    27.6  ehp     690  power    546.9
+BALANCE L1 ranger      single    13.2  aoe    16.0  ehp     926  power    442.2
+BALANCE L1 shadowblade single    19.4  aoe    33.9  ehp     916  power    776.3
+BALANCE L10 knight      single    36.5  aoe   145.1  ehp    5567  power   5429.9
+BALANCE L10 mage        single    47.6  aoe    96.8  ehp    2787  power   3583.3
+BALANCE L10 ranger      single    44.8  aoe   112.1  ehp    3046  power   3911.2
+BALANCE L10 shadowblade single    41.8  aoe    88.4  ehp    3042  power   3352.9
+BALANCE L20 knight      single   159.5  aoe   526.0  ehp    9653  power  28458.0
+BALANCE L20 mage        single   130.2  aoe   360.9  ehp    4934  power  15227.2
+BALANCE L20 ranger      single   114.3  aoe   507.2  ehp    5211  power  17381.8
+BALANCE L20 shadowblade single   141.6  aoe   442.7  ehp    5205  power  18063.5
+BALANCE L30 knight      single   201.3  aoe   658.0  ehp   13419  power  42159.0
+BALANCE L30 mage        single   324.3  aoe   900.2  ehp    7263  power  46046.6
+BALANCE L30 ranger      single   221.8  aoe  1186.4  ehp    8502  power  47299.3
+BALANCE L30 shadowblade single   260.8  aoe  1033.2  ehp    7556  power  45121.0
+[FAIL] test_balance.gd — 1 tests, 16 checks, 5 failures (383819.8 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 ranger power 442.2 is within 20% of the mean 608.0 (-27%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 776.3 is within 20% of the mean 608.0 (+28%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 5429.9 is within 20% of the mean 4069.3 (+33%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 28458.0 is within 20% of the mean 19782.6 (+44%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 mage power 15227.2 is within 20% of the mean 19782.6 (-23%)
+TOTAL: 16 checks, 5 failures
+WARNING: 363 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_1 tempos=1
+WALK map=dg_undercroft_1 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd)":2,"CollisionShape3D":2,"MeshInstance3D":15,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":17,"cpu_render":1.0,"fades":0,"frame":58.2,"gpu":1.8,"lights_switched":2,"minimap":false,"phases":"pre>post 1.5, phys>proc 55.5","phys":2.6,"pipelines":0,"pos":"17,0.0,-5","proc":8.7,"steps":1,"stop":"random_3","t_ms":6454}
+SPIKE {"added":{"GPUParticles3D":3,"MeshInstance3D":2,"Node3D":2,"OmniLight3D":1,"Timer":4},"awake":21,"cpu_render":1.7,"fades":0,"frame":31.7,"gpu":1.8,"lights_switched":1,"minimap":false,"phases":"pre>post 3.6, phys>proc 26.1","phys":3.4,"pipelines":0,"pos":"17,4.0,-20","proc":11.6,"steps":1,"stop":"random_4","t_ms":9955}
+SPIKE {"added":{"GPUParticles3D":3,"MeshInstance3D":2,"Node3D":3,"OmniLight3D":2,"Timer":6},"awake":23,"cpu_render":1.4,"fades":0,"frame":32.2,"gpu":2.0,"lights_switched":2,"minimap":false,"phases":"pre>post 2.6, phys>proc 27.2","phys":15.7,"pipelines":0,"pos":"9,4.0,-24","proc":11.7,"steps":1,"stop":"descent","t_ms":11856}
+SPIKE {"added":{"GPUParticles3D":1,"MeshInstance3D":1},"awake":30,"cpu_render":1.8,"fades":0,"frame":48.1,"gpu":1.9,"lights_switched":0,"minimap":false,"phases":"pre>post 5.2, phys>phys 4.2, phys>proc 2.0","phys":5.7,"pipelines":3,"pos":"4,0.0,-2","proc":11.9,"steps":2,"stop":"random_0","t_ms":29770}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":21.56,"avg_cpu_render":1.25,"avg_draws":890.14,"avg_fps":201.0,"avg_gpu":1.86,"avg_objects":1950.16,"avg_phys":8.44,"avg_proc":11.47,"avg_steps":0.3,"drawn_speed_unevenness":0.541,"drawn_still_while_walking":1,"frames":6030,"hero_moving_frames":1729,"hero_still_frames":4301,"lite":true,"low1_fps":61.0,"map":"dg_undercroft_1","max_ms":58.2,"median_ms":4.54,"minimap_renders":10,"multi_step_frames":4,"nodes_end":5430,"nodes_start":5303,"over_17ms":9,"over_25ms":4,"over_33ms":2,"over_50ms":1,"p99_ms":12.2,"particles_end":48,"particles_start":43,"seconds":30.0,"spike_causes":{"fades":0,"lights":3,"minimap":0,"multi_step":1,"nodes_added":4,"pipelines":1},"stuck":0,"vsync":false,"walking_frames":5797,"zero_step_frames":4235}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 32 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

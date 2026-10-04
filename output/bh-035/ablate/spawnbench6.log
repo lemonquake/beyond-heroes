@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PIECES orc_reaver first tree.advance 0.4 ms, second 0.0 ms, anims 136
+PIECES orc_reaver visual alone: next frame 76.8 ms, the one after 9.6 ms
+PIECES orc_reaver load 10.7 inst 0.1 visual.setup 6.2 enemy.setup 90.6 enemy.add_child 6.9
+PIECES orc_reaver first tree.advance 0.6 ms, second 0.0 ms, anims 136
+PIECES orc_reaver visual alone: next frame 73.7 ms, the one after 9.6 ms
+PIECES orc_reaver load 0.0 inst 0.2 visual.setup 6.4 enemy.setup 87.7 enemy.add_child 7.1
+PHASES orc_reaver: pre_draw+71.5 post_draw+4.9 phys+0.1 phys+3.2 phys+2.8 phys+2.6 proc+2.6 pre_draw+2.8 post_draw+2.2 phys+0.1 proc+2.6
+PHASES orc_reaver: pre_draw+69.5 post_draw+2.2 phys+0.1 phys+2.9 phys+2.5 proc+2.7 pre_draw+2.6 post_draw+2.1 phys+0.1 phys+2.5 proc+2.5
+PHASES orc_reaver: pre_draw+68.6 post_draw+2.1 phys+0.1 phys+3.2 phys+2.5 phys+2.5 proc+2.5 pre_draw+2.7 post_draw+2.1 phys+0.1 phys+2.5 proc+2.4
+PHASES orc_reaver: pre_draw+68.6 post_draw+2.1 phys+0.1 phys+3.0 phys+2.5 proc+2.6 pre_draw+2.8 post_draw+2.1 phys+0.1 phys+2.6 proc+2.4
+PHASES orc_reaver: pre_draw+68.4 post_draw+2.1 phys+0.1 phys+3.0 phys+3.1 proc+2.4 pre_draw+2.5 post_draw+2.1 phys+0.1 phys+2.6 proc+2.7
+PHASES orc_reaver: pre_draw+68.5 post_draw+2.1 phys+0.1 phys+3.0 phys+2.8 phys+2.6 proc+2.3 pre_draw+2.7 post_draw+2.0 phys+0.1 phys+2.9 proc+2.8
+SPAWN orc_reaver ms (spawn+next frame): 6.9+80.7(proc 83.6 phys 8.0 rcpu 0.7 gpu 1.5), 7.2+72.7(proc 83.6 phys 8.0 rcpu 0.9 gpu 1.5), 7.0+74.4(proc 83.6 phys 8.0 rcpu 0.6 gpu 1.5), 7.2+71.6(proc 83.6 phys 8.0 rcpu 0.6 gpu 1.5), 6.9+72.1(proc 83.6 phys 8.0 rcpu 0.5 gpu 1.5), 6.8+74.7(proc 83.6 phys 8.0 rcpu 0.5 gpu 1.5)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

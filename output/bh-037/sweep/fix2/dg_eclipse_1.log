@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_eclipse_1 tempos=1
+WALK map=dg_eclipse_1 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{},"awake":26,"cpu_render":1.3,"fades":0,"frame":26.2,"gpu":2.0,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 5.3, phys>proc 3.2","phys":4.6,"pipelines":0,"pos":"-22,4.0,-20","proc":10.3,"steps":1,"stop":"descent","t_ms":23195}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":15.63,"avg_cpu_render":1.15,"avg_draws":809.48,"avg_fps":227.4,"avg_gpu":1.79,"avg_objects":1850.19,"avg_phys":4.89,"avg_proc":9.72,"avg_steps":0.26,"drawn_speed_unevenness":0.614,"drawn_still_while_walking":0,"frames":6822,"hero_moving_frames":1700,"hero_still_frames":5122,"lite":true,"low1_fps":80.8,"map":"dg_eclipse_1","max_ms":26.2,"median_ms":4.09,"minimap_renders":9,"multi_step_frames":0,"nodes_end":5275,"nodes_start":5182,"over_17ms":3,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":10.44,"particles_end":40,"particles_start":41,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":6299,"zero_step_frames":5022}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 29 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

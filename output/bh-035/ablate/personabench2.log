@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PERSONA setup      build 4.1 ms, next frame 74.5 ms
+PERSONA setup      build 4.2 ms, next frame 73.8 ms
+PERSONA tree_off   build 4.7 ms, next frame 75.0 ms
+PERSONA tree_off   build 4.9 ms, next frame 72.7 ms
+PERSONA skel_off   build 4.8 ms, next frame 74.9 ms
+PERSONA skel_off   build 4.8 ms, next frame 74.6 ms
+PERSONA player_off build 4.7 ms, next frame 74.8 ms
+PERSONA player_off build 4.7 ms, next frame 74.9 ms
+PERSONA hidden     build 4.8 ms, next frame 75.6 ms
+PERSONA hidden     build 4.6 ms, next frame 74.6 ms
+PERSONA proc_off   build 4.7 ms, next frame 89.4 ms
+PERSONA proc_off   build 4.8 ms, next frame 72.6 ms
+PERSONA setup      build 4.8 ms, next frame 73.0 ms
+PERSONA setup      build 4.2 ms, next frame 72.8 ms
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

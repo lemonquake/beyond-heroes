@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=sanctuary tempos=1
+WALK map=sanctuary stops=31 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (-18.7509, 0.00088, -14.29652) heading for town_portal: hop to the next path point
+SPIKE {"added":{},"awake":0,"cpu_render":1.2,"fades":0,"frame":29.6,"gpu":2.3,"lights_switched":0,"minimap":false,"phases":"pre>post 2.6","phys":1.3,"pipelines":0,"pos":"-1,0.0,-14","proc":7.6,"steps":1,"stop":"town_portal","t_ms":19718}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.86,"avg_draws":798.74,"avg_fps":335.8,"avg_gpu":2.01,"avg_objects":1283.94,"avg_phys":1.21,"avg_proc":7.57,"avg_steps":0.18,"drawn_speed_unevenness":0.859,"drawn_still_while_walking":0,"frames":10074,"hero_moving_frames":1621,"hero_still_frames":8453,"lite":true,"low1_fps":120.7,"map":"sanctuary","max_ms":29.6,"median_ms":2.72,"minimap_renders":7,"multi_step_frames":0,"nodes_end":4556,"nodes_start":4558,"over_17ms":1,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":7.28,"particles_end":15,"particles_start":16,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":1,"vsync":false,"walking_frames":8807,"zero_step_frames":8274}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

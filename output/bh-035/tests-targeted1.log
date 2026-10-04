@@ -1,0 +1,175 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[PASS] test_bh014.gd — 10 tests, 30 checks, 0 failures (577.2 ms)
+[FAIL] test_bh035.gd — 8 tests, 56 checks, 1 failures (445.6 ms)
+[FAIL] test_character_skills_layout.gd — 2 tests, 255 checks, 3 failures (11721.3 ms)
+[PASS] test_enemies.gd — 6 tests, 464 checks, 0 failures (2335.2 ms)
+[PASS] test_enemies2.gd — 19 tests, 595 checks, 0 failures (26758.0 ms)
+WARNING: Adding 'ring_a' as child to '@Node3D@20474' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:270)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_web_spit_roots_the_hero (res://tests/unit/test_enemies2.gd:474)
+       [7] _frames (res://tests/unit/test_enemies2.gd:35)
+WARNING: Adding 'ring_b' as child to '@Node3D@20475' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:270)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_web_spit_roots_the_hero (res://tests/unit/test_enemies2.gd:474)
+       [7] _frames (res://tests/unit/test_enemies2.gd:35)
+WARNING: Adding 'ring_c' as child to '@Node3D@20476' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:270)
+       [5] _run (res://tests/run_tests.gd:45)
+       [6] test_web_spit_roots_the_hero (res://tests/unit/test_enemies2.gd:474)
+       [7] _frames (res://tests/unit/test_enemies2.gd:35)
+ERROR: Failed to create underlying Jolt Physics body for 'teleporter_platform:<StaticBody3D#5544886732065>'. Consider increasing maximum number of bodies in project settings. Maximum number of bodies is currently set to 10240.
+   at: add_object (modules/jolt_physics/spaces/jolt_space_3d.cpp:391)
+   GDScript backtrace (most recent call first):
+       [0] _build (res://src/world/teleporter.gd:53)
+       [1] _ready (res://src/world/teleporter.gd:47)
+       [2] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:271)
+       [3] _run (res://tests/run_tests.gd:45)
+       [4] test_web_spit_roots_the_hero (res://tests/unit/test_enemies2.gd:474)
+       [5] _frames (res://tests/unit/test_enemies2.gd:35)
+WARNING: Adding 'ring_a' as child to '@Node3D@25485' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Adding 'ring_b' as child to '@Node3D@25486' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Adding 'ring_c' as child to '@Node3D@25487' will make owner 'armillary_sphere_113' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Adding 'ring_a' as child to '@Node3D@25607' will make owner 'armillary_sphere_109' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Adding 'ring_b' as child to '@Node3D@25608' will make owner 'armillary_sphere_109' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Adding 'ring_c' as child to '@Node3D@25609' will make owner 'armillary_sphere_109' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:228)
+       [4] _build (res://tests/unit/test_map_design.gd:120)
+       [5] test_dungeon_rooms_have_roles_and_keep_markers_clear (res://tests/unit/test_map_design.gd:218)
+       [6] _run (res://tests/run_tests.gd:45)
+       [7] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+[PASS] test_map_design.gd — 10 tests, 3210 checks, 0 failures (16643.5 ms)
+[PASS] test_net.gd — 4 tests, 845 checks, 0 failures (3.3 ms)
+[PASS] test_net_guard.gd — 6 tests, 44 checks, 0 failures (0.7 ms)
+WARNING: Navigation region synchronization had 16 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] test_lite_navigation_matches (res://tests/unit/test_perf.gd:134)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+WARNING: Navigation region synchronization had 16 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] test_lite_navigation_matches (res://tests/unit/test_perf.gd:134)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_dungeon_dressing_never_blocks_a_room (res://tests/unit/test_map_design.gd:298)
+[PASS] test_perf.gd — 7 tests, 278 checks, 0 failures (7387.9 ms)
+  FAIL test_bh035.test_crowd_lod_thins_only_waiting_monsters: a thinned monster still thinks every other step (1 of 6)
+  FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1920, 1080) — expected (1560.0, 900.0), got (1560.0, 933.0)
+  FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1600, 900) — expected (1560.0, 900.0), got (1560.0, 933.0)
+  FAIL test_character_skills_layout.test_character_checklist_and_statistics_are_reachable: character content preserves frame at (1280, 720) — expected (1560.0, 900.0), got (1560.0, 933.0)
+TOTAL: 5777 checks, 4 failures
+ERROR: 2 RID allocations of type '8NavMap3D' were leaked at exit.
+ERROR: 2 RID allocations of type 'P11JoltShape3D' were leaked at exit.
+ERROR: 3 RID allocations of type 'P10JoltBody3D' were leaked at exit.
+ERROR: 5 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.
+ERROR: 3 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.
+ERROR: 12 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.
+ERROR: 6 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: 150 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 32 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

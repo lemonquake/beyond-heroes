@@ -1,0 +1,30 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] load_map (res://src/autoload/game.gd:280)
+       [2] _begin_session (res://src/autoload/game.gd:166)
+WALKINFO hero=Wanderer level=1 map=wyman_outpost tempos=1
+WALK map=wyman_outpost stops=21 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":1,"AnimationTree":1,"BoneAttachment3D":3,"CharacterBody3D(arena_fighter.gd)":1,"CollisionShape3D":1,"GPUParticles3D":1,"Label3D":1,"MeshInstance3D":14,"NavigationAgent3D":1,"Node3D":4,"Node3D(character_visual.gd)":1,"Node3D(tempo_bar.gd)":1,"PhysicalBoneSimulator3D":1,"Skeleton3D":1,"Timer":1},"awake":2,"cpu_render":1.4,"fades":0,"frame":27.8,"gpu":2.0,"lights_switched":0,"minimap":false,"origins":["fx.gd:211 spawn < arena_grounds.gd:191 spawn_fighter < arena_grounds.gd:171 _keep_fighters < arena_grounds.gd:128 _physics_process"],"phases":"pre>post 2.7, phys>proc 23.4","phys":4.0,"pipelines":0,"pos":"-12,1.0,10","proc":9.3,"steps":1,"stop":"wyman_shrine","t_ms":3598}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":2.0,"avg_cpu_render":1.2,"avg_draws":831.77,"avg_fps":203.4,"avg_gpu":1.67,"avg_objects":1418.92,"avg_phys":8.41,"avg_proc":9.11,"avg_steps":0.3,"drawn_speed_unevenness":0.51,"drawn_still_while_walking":0,"frames":6103,"hero_moving_frames":1800,"hero_still_frames":4303,"lite":true,"low1_fps":75.8,"map":"wyman_outpost","max_ms":27.8,"median_ms":4.62,"minimap_renders":10,"multi_step_frames":0,"nodes_end":5623,"nodes_start":5506,"over_17ms":3,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":11.09,"particles_end":48,"particles_start":49,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":1,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":6012,"zero_step_frames":4302}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 162 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

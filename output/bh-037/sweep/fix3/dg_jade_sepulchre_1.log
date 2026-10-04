@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_jade_sepulchre_1 tempos=1
+WALK map=dg_jade_sepulchre_1 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{},"awake":20,"cpu_render":2.0,"fades":0,"frame":25.0,"gpu":1.8,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 4.5, phys>proc 2.6","phys":11.9,"pipelines":0,"pos":"-8,0.0,6","proc":6.0,"steps":1,"stop":"descent","t_ms":9249}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":15.4,"avg_cpu_render":1.01,"avg_draws":767.79,"avg_fps":262.8,"avg_gpu":1.8,"avg_objects":1897.86,"avg_phys":3.13,"avg_proc":9.77,"avg_steps":0.23,"drawn_speed_unevenness":0.668,"drawn_still_while_walking":0,"frames":7884,"hero_moving_frames":1727,"hero_still_frames":6157,"lite":true,"low1_fps":96.7,"map":"dg_jade_sepulchre_1","max_ms":25.0,"median_ms":3.58,"minimap_renders":10,"multi_step_frames":0,"nodes_end":5080,"nodes_start":5107,"over_17ms":1,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":8.71,"particles_end":36,"particles_start":38,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":7398,"zero_step_frames":6083}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 20 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

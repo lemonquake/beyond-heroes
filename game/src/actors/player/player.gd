@@ -211,6 +211,13 @@ func refresh_equipment_visuals() -> void:
 	# bh-023: a great axe's heavy attack is the player's own two-handed smash (same timing as the clip it replaces)
 	visual.clip_alias = {&"gs_heavy": &"hero_axe_smash"} if lo.main_type != null and lo.main_type.id == &"greataxe" else {}
 	var sub := hero.equipment.get_item(&"sub_weapon")
+	# bh-037: HeroData reports every level-up and point spent as a change too; re-making the same weapons cost ~40 ms
+	# mid-fight. They are rebuilt only when what is held (item, model, crystals, rarity) differs.
+	var wkey := [_weapon_sig(main, lo.main_type), _weapon_sig(sub, lo.off_type)]
+	if wkey == _weapon_key and visual.has_weapon(&"main") == (main != null and lo.main_type != null):
+		visual.set_stance(stance_idle())
+		return
+	_weapon_key = wkey
 	visual.detach_weapon(&"main")
 	visual.detach_weapon(&"off")
 	if main != null and lo.main_type != null:
@@ -229,6 +236,14 @@ func refresh_equipment_visuals() -> void:
 		if w != null and visual.has_weapon(pair[0]):
 			visual.set_weapon_ascendant(pair[0], w.rarity, 0.45 if w.base.category == &"shield" else 0.9)
 	visual.set_stance(stance_idle())
+
+var _weapon_key: Array = []
+
+func _weapon_sig(item: ItemInstance, wt: WeaponTypeDef) -> String:
+	if item == null:
+		return ""
+	var model := item.base.model_path() if item.base.category == &"shield" or wt == null else _weapon_model(item, wt)
+	return "%d|%s|%s|%d|%d" % [item.get_instance_id(), model, str(item.gems), item.sockets, item.rarity]
 
 ## The model held in the hand: the item's own model (every base has one since bh-006); a random Aether-tier roll of a
 ## plain base shows the type's crystalline Aether variant instead.

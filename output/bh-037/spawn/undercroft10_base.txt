@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_10 tempos=1
+SPAWN void_seer              persona=true  new 0.09 ms  add/_ready 5.79 ms  next 2 frames 14.6 ms  | visual alone 6.64 ms
+SPAWN shade_stalker          persona=true  new 0.11 ms  add/_ready 6.91 ms  next 2 frames 19.7 ms  | visual alone 5.73 ms
+SPAWN mirage_weaver          persona=true  new 0.10 ms  add/_ready 6.45 ms  next 2 frames 10.5 ms  | visual alone 6.40 ms
+SPAWN bloodbinder            persona=true  new 0.14 ms  add/_ready 7.81 ms  next 2 frames 17.3 ms  | visual alone 5.41 ms
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

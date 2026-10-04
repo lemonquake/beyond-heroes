@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_dunemourn_10 tempos=1
+WALK map=dg_dunemourn_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+WALKNOTE left the map or time is up
+TOGGLE census skeletons=51 bone_sims=51 active_sims=51 attachments=76 meshes_under_skeletons=174
+TOGGLE physics_server       on 12.56 ms  off 11.77 ms  (saves 0.79) runs on=[11.876, 12.557, 13.494] off=[11.763, 11.766, 12.348] | physics step median on 9.23 off 10.64
+TOGGLE nav_server           on 13.47 ms  off 13.68 ms  (saves -0.22) runs on=[12.441, 13.465, 13.617] off=[11.534, 13.681, 13.789] | physics step median on 6.55 off 18.82
+TOGGLE anim                 on 15.28 ms  off 12.72 ms  (saves 2.56) runs on=[15.002, 15.275, 15.935] off=[12.324, 12.715, 13.035] | physics step median on 10.67 off 11.24
+TOGGLE attachments          on 16.58 ms  off 16.41 ms  (saves 0.17) runs on=[15.665, 16.582, 16.801] off=[16.166, 16.412, 16.892] | physics step median on 11.37 off 6.37
+TOGGLE bone_sims_detach     on 17.11 ms  off 17.15 ms  (saves -0.04) runs on=[16.38, 17.114, 17.148] off=[15.972, 17.153, 17.412] | physics step median on 6.78 off 6.78
+TOGGLE particles_internal   on 17.67 ms  off 17.49 ms  (saves 0.18) runs on=[17.126, 17.668, 17.685] off=[17.46, 17.488, 17.683] | physics step median on 10.77 off 7.12
+TOGGLE bars                 on 18.55 ms  off 18.00 ms  (saves 0.55) runs on=[17.987, 18.546, 19.54] off=[17.653, 18.0, 18.708] | physics step median on 6.56 off 7.30
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 81 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

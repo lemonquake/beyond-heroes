@@ -1,0 +1,124 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_10 tempos=1
+SPAWNMATS mirror_image hero:ShaderMaterial, Hair:StandardMaterial3D ovr, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached
+SPAWNPER mirror_image
+  WearMerged/0  dup 0.18 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.09 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/3  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  moonshard_dagger/0  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/1  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/2  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/3  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  moonshard_dagger/4  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+SPAWNOP2 mirror_image ensure_local 0.93 ms, hero.set_opacity 0.02 ms
+SPAWNOP mirror_image rep 0 set_opacity 0.02 ms (14 local materials, previous copy none)
+SPAWNOP2 mirror_image ensure_local 1.03 ms, hero.set_opacity 0.01 ms
+SPAWNOP mirror_image rep 1 set_opacity 0.03 ms (14 local materials, previous copy none)
+SPAWN mirror_image           persona=true  new 0.08  add/_ready 7.11  first anim advance 0.54  skeleton 0.01  next 2 frames 13.4 ms | visual alone 5.40 (outfit 2.18) set_opacity 0.02
+SPAWNMATS mirage_weaver hero:ShaderMaterial, Hair:StandardMaterial3D ovr, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached
+SPAWNPER mirage_weaver
+  WearMerged/0  dup 0.13 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.08 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/3  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/8  dup 0.05 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/9  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  moonshard_dagger/0  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/1  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/2  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/3  dup 0.05 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  moonshard_dagger/4  dup 0.05 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+SPAWNOP2 mirage_weaver ensure_local 1.04 ms, hero.set_opacity 0.01 ms
+SPAWNOP mirage_weaver rep 0 set_opacity 0.02 ms (16 local materials, previous copy none)
+SPAWNOP2 mirage_weaver ensure_local 1.17 ms, hero.set_opacity 0.01 ms
+SPAWNOP mirage_weaver rep 1 set_opacity 0.02 ms (16 local materials, previous copy none)
+SPAWN mirage_weaver          persona=true  new 0.12  add/_ready 8.03  first anim advance 0.68  skeleton 0.01  next 2 frames 13.9 ms | visual alone 5.36 (outfit 2.24) set_opacity 0.02
+SPAWNMATS shade_stalker hero:ShaderMaterial, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, bonebite:StandardMaterial3D cached, bonebite:StandardMaterial3D cached
+SPAWNPER shade_stalker
+  WearMerged/0  dup 0.15 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/3  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/8  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/9  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/10  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  bonebite/0  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  bonebite/1  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+SPAWNOP2 shade_stalker ensure_local 0.93 ms, hero.set_opacity 0.01 ms
+SPAWNOP shade_stalker rep 0 set_opacity 0.02 ms (14 local materials, previous copy none)
+SPAWNOP2 shade_stalker ensure_local 1.00 ms, hero.set_opacity 0.01 ms
+SPAWNOP shade_stalker rep 1 set_opacity 0.02 ms (14 local materials, previous copy none)
+SPAWN shade_stalker          persona=true  new 0.08  add/_ready 6.21  first anim advance 0.55  skeleton 0.01  next 2 frames 11.2 ms | visual alone 4.98 (outfit 2.00) set_opacity 0.02
+SPAWNMATS void_seer hero:ShaderMaterial, Hair:StandardMaterial3D ovr, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, depth_orrery_starstaff:StandardMaterial3D cached, depth_orrery_starstaff:StandardMaterial3D cached, depth_orrery_starstaff:StandardMaterial3D cached, depth_orrery_starstaff:StandardMaterial3D cached
+SPAWNPER void_seer
+  WearMerged/0  dup 0.19 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.09 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.07 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  WearMerged/3  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/8  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/9  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/10  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/11  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/12  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  WearMerged/13  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  WearMerged/14  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/15  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  depth_orrery_starstaff/0  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  depth_orrery_starstaff/1  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  depth_orrery_starstaff/2  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  depth_orrery_starstaff/3  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+SPAWNOP2 void_seer ensure_local 1.66 ms, hero.set_opacity 0.01 ms
+SPAWNOP void_seer rep 0 set_opacity 0.03 ms (21 local materials, previous copy none)
+SPAWNOP2 void_seer ensure_local 2.91 ms, hero.set_opacity 0.01 ms
+SPAWNOP void_seer rep 1 set_opacity 0.03 ms (21 local materials, previous copy none)
+SPAWN void_seer              persona=true  new 0.10  add/_ready 8.17  first anim advance 0.66  skeleton 0.01  next 2 frames 13.5 ms | visual alone 7.49 (outfit 3.38) set_opacity 0.03
+SPAWNMATS bloodbinder hero:ShaderMaterial, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, kukri:StandardMaterial3D cached, kukri:StandardMaterial3D cached, kukri:StandardMaterial3D cached
+SPAWNPER bloodbinder
+  WearMerged/0  dup 0.18 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.08 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/3  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/8  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/9  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/10  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  kukri/0  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  kukri/1  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  kukri/2  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+SPAWNOP2 bloodbinder ensure_local 1.03 ms, hero.set_opacity 0.01 ms
+SPAWNOP bloodbinder rep 0 set_opacity 0.02 ms (15 local materials, previous copy none)
+SPAWNOP2 bloodbinder ensure_local 1.07 ms, hero.set_opacity 0.01 ms
+SPAWNOP bloodbinder rep 1 set_opacity 0.03 ms (15 local materials, previous copy none)
+SPAWN bloodbinder            persona=true  new 0.08  add/_ready 6.08  first anim advance 0.55  skeleton 0.00  next 2 frames 8.5 ms | visual alone 5.20 (outfit 2.13) set_opacity 0.02
+SPAWN baseline 2 frames 6.6 ms
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

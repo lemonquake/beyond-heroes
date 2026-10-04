@@ -16,8 +16,26 @@ var MIGRATIONS := {
 	3: _migrate_3_to_4,
 }
 
+## bh-037: a background save finished (true = written and checked).
+signal background_saved(ok: bool)
+
+var _task := -1                       # WorkerThreadPool task of the background save in flight, -1 when none
+
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+
+func _exit_tree() -> void:
+	finish_pending()
+
+## Wait for a background save still writing (every other save, load and delete goes through here first: never two
+## writers on one slot, never a read of a half-replaced file).
+func finish_pending() -> void:
+	if _task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_task)
+		_task = -1
+
+func is_saving() -> bool:
+	return _task >= 0 and not WorkerThreadPool.is_task_completed(_task)
 
 func slot_path(slot: int) -> String:
 	if scope == "custom":
@@ -79,13 +97,43 @@ func serialize(hero: HeroData) -> Dictionary:
 ## Write the slot without ever leaving it unreadable (bh-015): the new file is written beside the old one and read
 ## back; only a file that parses to this hero replaces the save, and the previous save is kept as slot_<n>.json.bak.
 ## A crash at any point leaves either the old save, the backup, or the checked new file.
-func save_hero(hero: HeroData, slot: int) -> bool:
+## bh-037: `background` (the autosave) gathers the hero on this thread, then writes, reads back and swaps the file on a
+## worker thread and returns true at once; `background_saved` reports the result. A big hero (a 790 KB save with a
+## hired Quake Team) froze the game ~70 ms every two minutes while the JSON was written and checked here.
+func save_hero(hero: HeroData, slot: int, background := false) -> bool:
 	if scope == "official" or slot < 0:
 		return false
 	if hero == null or hero.cls == null:
 		return false
 	var data := serialize(hero)
 	var path := slot_path(slot)
+	if background:
+		_stage(data, path, hero.hero_name, slot)
+		return true
+	_staged += 1                        # a save made now supersedes a background save still waiting for its snapshot
+	finish_pending()
+	return _write_checked(data, path, hero.hero_name, slot)
+
+var _staged := 0                      # generation of the newest save; a staged background save checks it is still newest
+
+## The background half: next frame, a binary snapshot (the worker must never read a dictionary or array the game may still
+## change: some come straight from live state), then the worker writes it. Gathering (~8 ms for a big hero) and the snapshot
+## (~5 ms) land on different frames so neither pushes a frame past a 60 Hz refresh.
+func _stage(data: Dictionary, path: String, hero_name: String, slot: int) -> void:
+	_staged += 1
+	var gen := _staged
+	await get_tree().process_frame
+	if gen != _staged:
+		return
+	var snap := var_to_bytes(data)
+	finish_pending()
+	_task = WorkerThreadPool.add_task(func() -> void:
+		var ok := _write_checked(bytes_to_var(snap), path, hero_name, slot)
+		background_saved.emit.call_deferred(ok), false, "save")
+
+## Write `data` beside the slot's file, read it back, and only a file that parses to this hero replaces the save.
+## Touches no game state (runs on a worker thread for background saves).
+func _write_checked(data: Dictionary, path: String, hero_name: String, slot: int) -> bool:
 	var tmp := path + ".tmp"
 	var f := FileAccess.open(tmp, FileAccess.WRITE)
 	if f == null:
@@ -95,7 +143,7 @@ func save_hero(hero: HeroData, slot: int) -> bool:
 	f.store_string(text)
 	f.close()
 	var back = JSON.parse_string(FileAccess.get_file_as_string(tmp))
-	if not _valid(back) or String(back.hero.get("name", "")) != hero.hero_name:
+	if not _valid(back) or String(back.hero.get("name", "")) != hero_name:
 		push_error("Save check failed for slot %d: the previous save is kept" % slot)
 		DirAccess.remove_absolute(tmp)
 		return false
@@ -118,6 +166,7 @@ static func _valid(d) -> bool:
 func read_slot(slot: int) -> Dictionary:
 	if scope == "official":
 		return {}
+	finish_pending()
 	return _read_path(slot_path(slot))
 
 func _read_path(base: String) -> Dictionary:
@@ -165,6 +214,8 @@ func slot_summary(slot: int) -> Dictionary:
 func delete_slot(slot: int) -> void:
 	if scope == "official":
 		return
+	_staged += 1                        # a staged background save must not write the slot back
+	finish_pending()
 	for path in [slot_path(slot), slot_path(slot) + ".bak", slot_path(slot) + ".tmp"]:
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(path)

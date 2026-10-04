@@ -60,6 +60,29 @@ static func particles(color: Color, amount: int, lifetime: float, one_shot: bool
 	p.explosiveness = 0.9 if one_shot else 0.0
 	p.local_coords = false
 	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	if one_shot:
+		# bh-037: a one-shot burst shares its material and quad with every identical burst (see shared())
+		var key := "pp|%s|%.2f|%.2f|%.0f|%s|%.2f" % [color.to_html(), snappedf(size, 0.01), snappedf(velocity, 0.25), spread, gravity, emission_radius]
+		p.process_material = shared(key, func() -> Resource: return _particle_pm(color, size, velocity, spread, gravity, emission_radius))
+		p.draw_pass_1 = shared("quad|%s" % additive, func() -> Resource:
+			var sq := QuadMesh.new()
+			sq.size = Vector2.ONE * 0.5
+			sq.material = particle_material(additive)
+			return sq)
+	else:
+		p.process_material = _particle_pm(color, size, velocity, spread, gravity, emission_radius)
+		var q := QuadMesh.new()
+		q.size = Vector2.ONE * 0.5
+		q.material = particle_material(additive)
+		p.draw_pass_1 = q
+	p.visibility_aabb = AABB(Vector3(-6, -2, -6), Vector3(12, 10, 12))
+	if one_shot:
+		p.emitting = true
+		p.finished.connect(p.queue_free)
+		_autofree(p, lifetime + 0.5)       # bh-037: `finished` never fires here in Godot 4.7 (see _autofree)
+	return p
+
+static func _particle_pm(color: Color, size: float, velocity: float, spread: float, gravity: Vector3, emission_radius: float) -> ParticleProcessMaterial:
 	var pm := ParticleProcessMaterial.new()
 	pm.direction = Vector3.UP
 	pm.spread = spread
@@ -80,16 +103,33 @@ static func particles(color: Color, amount: int, lifetime: float, one_shot: bool
 	if emission_radius > 0.0:
 		pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
 		pm.emission_sphere_radius = emission_radius
-	p.process_material = pm
-	var q := QuadMesh.new()
-	q.size = Vector2.ONE * 0.5
-	q.material = particle_material(additive)
-	p.draw_pass_1 = q
-	p.visibility_aabb = AABB(Vector3(-6, -2, -6), Vector3(12, 10, 12))
-	if one_shot:
-		p.emitting = true
-		p.finished.connect(p.queue_free)
-	return p
+	return pm
+
+## bh-037: resources one-shot effects share. Every blow used to build each burst's ParticleProcessMaterial, colour-ramp and
+## curve textures, quad (and for sparks a SurfaceTool mesh) from scratch: ~0.7 ms of building per hit plus ~0.6 ms of render
+## setup the next frame, so a party's volley of 20 hits stalled a frame by ~25 ms. Identical bursts now share them (sizes
+## and speeds keyed to a few significant digits, directions to 16 compass steps). Never mutate a material from here: callers
+## that tweak one duplicate it first. Bounded: the cache is dropped and rebuilt past SHARED_MAX entries.
+const SHARED_MAX := 768
+static var _shared := {}
+
+static func shared(key: String, build: Callable) -> Resource:
+	var r: Resource = _shared.get(key)
+	if r == null:
+		if _shared.size() >= SHARED_MAX:
+			_shared.clear()
+		r = build.call()
+		_shared[key] = r
+	return r
+
+## A direction rounded for shared() keys: 16 steps around, 9 of height.
+static func qdir(d: Vector3) -> Vector3:
+	if d.length() < 0.01:
+		return Vector3.UP
+	d = d.normalized()
+	var yaw := snappedf(atan2(d.x, d.z), TAU / 16.0)
+	var pitch := snappedf(asin(clampf(d.y, -1.0, 1.0)), PI / 8.0)
+	return Vector3(sin(yaw) * cos(pitch), sin(pitch), cos(yaw) * cos(pitch))
 
 static func status_particles(element: int, height: float) -> GPUParticles3D:
 	var c := Elements.color(element)
@@ -114,17 +154,19 @@ static func ice_block(h: float, s: float) -> Node3D:
 	m.rings = 1
 	mi.mesh = m
 	mi.position.y = h * 0.5
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.65, 0.88, 1.0, 0.35)
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.roughness = 0.05
-	mat.metallic_specular = 1.0
-	mat.rim_enabled = true
-	mat.rim = 1.0
-	mat.emission_enabled = true
-	mat.emission = Color(0.3, 0.6, 0.9)
-	mat.emission_energy_multiplier = 0.4
-	mi.material_override = mat
+	# bh-037: one shared material (FX.warm_up builds its shader): a fresh one per freeze rebuilt the shader, ~30 ms + ~30 ms
+	mi.material_override = shared("ice_block", func() -> Resource:
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.65, 0.88, 1.0, 0.35)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.roughness = 0.05
+		mat.metallic_specular = 1.0
+		mat.rim_enabled = true
+		mat.rim = 1.0
+		mat.emission_enabled = true
+		mat.emission = Color(0.3, 0.6, 0.9)
+		mat.emission_energy_multiplier = 0.4
+		return mat)
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return mi
 
@@ -137,10 +179,11 @@ static func stun_stars(h: float) -> Node3D:
 		sm.radius = 0.07
 		sm.height = 0.14
 		s.mesh = sm
-		var mat := StandardMaterial3D.new()
-		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		mat.albedo_color = Color(1.0, 0.9, 0.4)
-		s.material_override = mat
+		s.material_override = shared("stun_star", func() -> Resource:      # bh-037: shared (see ice_block)
+			var mat := StandardMaterial3D.new()
+			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			mat.albedo_color = Color(1.0, 0.9, 0.4)
+			return mat)
 		var a := TAU * i / 3.0
 		s.position = Vector3(cos(a), 0, sin(a)) * 0.35
 		root.add_child(s)
@@ -441,6 +484,7 @@ static func hit_burst(pos: Vector3, element: int, strength: float, crit: bool) -
 		root.add_child(particles(Color(1.0, 0.95, 0.8, 1.0), 10, 0.18, true, 0.9, 0.5, 180.0))
 	if strength > 0.6 or crit:
 		root.add_child(light_flash(c, 2.0 + strength * 3.0, 3.0 + strength * 2.0, 0.15))
+	_autofree(root, 1.0)                    # the holder too: it used to stay in the map, empty, after every blow
 	return root
 
 static func dust_puff(strength := 1.0) -> GPUParticles3D:
@@ -485,6 +529,10 @@ static var _crack_shader: Shader
 static var _shield_shader: Shader
 static var _streak_mat_cache := {}
 
+## Frees `root` after `after` seconds. bh-037: one-shot GPUParticles3D never emit `finished` in Godot 4.7.2 (a probe spawned
+## 40 hit bursts and dust puffs: all 40 were still in the map 4 s later, emitting=false, the signal never fired). Every blow
+## left its particle systems behind, each still processed every physics step and drawn every frame: after half a minute of
+## a dungeon fight ~500 had piled up and the physics step had grown past 10 ms. Every one-shot effect frees on a timer.
 static func _autofree(root: Node3D, after: float) -> void:
 	var t := Timer.new()
 	t.wait_time = after
@@ -561,42 +609,46 @@ static func spark_spray(dir: Vector3, c: Color, amount: int, speed: float, sprea
 	p.explosiveness = 1.0
 	p.local_coords = false
 	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	var pm := ParticleProcessMaterial.new()
-	pm.direction = dir.normalized() if dir.length() > 0.01 else Vector3.UP
-	pm.spread = spread
-	pm.initial_velocity_min = speed * 0.45
-	pm.initial_velocity_max = speed
-	pm.gravity = Vector3(0, -12, 0)
-	pm.damping_min = 4.0
-	pm.damping_max = 8.0
-	pm.particle_flag_align_y = true
-	pm.scale_min = 0.6
-	pm.scale_max = 1.2
-	pm.color_ramp = _ramp(c)
-	var curve := CurveTexture.new()
-	var cv := Curve.new()
-	cv.add_point(Vector2(0, 1))
-	cv.add_point(Vector2(1, 0.0))
-	curve.curve = cv
-	pm.scale_curve = curve
-	p.process_material = pm
-	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var w := 0.035
-	for axis: Vector3 in [Vector3.RIGHT, Vector3.BACK]:
-		var s := axis * w
-		var up := Vector3.UP * length
-		var v := [[-s, Vector2(0, 1)], [s, Vector2(1, 1)], [s + up, Vector2(1, 0)], [-s + up, Vector2(0, 0)]]
-		for idx in [0, 1, 2, 0, 2, 3]:
-			st.set_uv(v[idx][1])
-			st.set_color(Color.WHITE)
-			st.add_vertex(v[idx][0] - up * 0.5)
-	var mesh := st.commit()
-	mesh.surface_set_material(0, _streak_material())
-	p.draw_pass_1 = mesh
+	var qd := qdir(dir)
+	p.process_material = shared("spark|%s|%s|%.2f|%.0f" % [qd, c.to_html(), snappedf(speed, 0.25), spread], func() -> Resource:
+		var pm := ParticleProcessMaterial.new()
+		pm.direction = qd
+		pm.spread = spread
+		pm.initial_velocity_min = speed * 0.45
+		pm.initial_velocity_max = speed
+		pm.gravity = Vector3(0, -12, 0)
+		pm.damping_min = 4.0
+		pm.damping_max = 8.0
+		pm.particle_flag_align_y = true
+		pm.scale_min = 0.6
+		pm.scale_max = 1.2
+		pm.color_ramp = _ramp(c)
+		var curve := CurveTexture.new()
+		var cv := Curve.new()
+		cv.add_point(Vector2(0, 1))
+		cv.add_point(Vector2(1, 0.0))
+		curve.curve = cv
+		pm.scale_curve = curve
+		return pm)
+	p.draw_pass_1 = shared("spark_mesh|%.2f" % length, func() -> Resource:
+		var st := SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var w := 0.035
+		for axis: Vector3 in [Vector3.RIGHT, Vector3.BACK]:
+			var sv := axis * w
+			var up := Vector3.UP * length
+			var v := [[-sv, Vector2(0, 1)], [sv, Vector2(1, 1)], [sv + up, Vector2(1, 0)], [-sv + up, Vector2(0, 0)]]
+			for idx in [0, 1, 2, 0, 2, 3]:
+				st.set_uv(v[idx][1])
+				st.set_color(Color.WHITE)
+				st.add_vertex(v[idx][0] - up * 0.5)
+		var mesh := st.commit()
+		mesh.surface_set_material(0, _streak_material())
+		return mesh)
 	p.visibility_aabb = AABB(Vector3(-6, -3, -6), Vector3(12, 9, 12))
 	p.emitting = true
 	p.finished.connect(p.queue_free)
+	_autofree(p, lifetime + 0.5)
 	return p
 
 ## Standard contact effect for a landed blow: star flash, directional sparks, optional crit / heavy extras.

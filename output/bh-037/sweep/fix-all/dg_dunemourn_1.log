@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_dunemourn_1 tempos=1
+WALK map=dg_dunemourn_1 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd)":2,"CollisionShape3D":2,"MeshInstance3D":15,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":14,"cpu_render":1.1,"fades":0,"frame":57.8,"gpu":2.0,"lights_switched":2,"minimap":false,"phases":"pre>post 1.7, phys>proc 54.9","phys":2.5,"pipelines":0,"pos":"10,0.0,12","proc":9.4,"steps":1,"stop":"random_1","t_ms":13069}
+SPIKE {"added":{"GPUParticles3D":3,"MeshInstance3D":3},"awake":21,"cpu_render":0.8,"fades":0,"frame":42.6,"gpu":1.9,"lights_switched":0,"minimap":false,"phases":"pre>post 3.5, phys>phys 2.0, phys>phys 1.7, phys>proc 1.4","phys":12.5,"pipelines":5,"pos":"-6,8.0,-21","proc":7.8,"steps":3,"stop":"descent","t_ms":25501}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":16.88,"avg_cpu_render":1.08,"avg_draws":886.96,"avg_fps":251.3,"avg_gpu":1.8,"avg_objects":2124.32,"avg_phys":6.22,"avg_proc":10.2,"avg_steps":0.24,"drawn_speed_unevenness":0.628,"drawn_still_while_walking":0,"frames":7539,"hero_moving_frames":1790,"hero_still_frames":5749,"lite":true,"low1_fps":82.1,"map":"dg_dunemourn_1","max_ms":57.8,"median_ms":3.65,"minimap_renders":10,"multi_step_frames":3,"nodes_end":5127,"nodes_start":5000,"over_17ms":7,"over_25ms":2,"over_33ms":2,"over_50ms":1,"p99_ms":9.01,"particles_end":43,"particles_start":33,"seconds":30.0,"spike_causes":{"fades":0,"lights":1,"minimap":0,"multi_step":1,"nodes_added":2,"pipelines":1},"stuck":0,"vsync":false,"walking_frames":7443,"zero_step_frames":5744}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 41 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,1524 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+TRADE[host] ok   hosted ()
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+TRADE[host] ok   the client joined
+TRADE[host] ok   the client's avatar is here
+TRADE[host] ok   the avatar is on screen at (963.2504, 554.4251)
+TRADE[host] ok   a click on the ally picks the ally
+TRADE[host] ok   a click beside them picks nobody
+TRADE[host] ok   clicking an ally asks 'Send a Trade Request?': 'Send Wanderer (Level 1 Ranger) a Trade Request?
+You each choose items and gold; nothing changes hands until you both accept.'
+TRADE[host] ok   the request is out
+TRADE[host] ok   a declined request opens nothing
+TRADE[host] ok   accepted: the trade table is open
+TRADE[host] FAIL offer 100 gold and the potions
+TRADE[host] FAIL the client's offer (30 gold + a stack) shows here
+TRADE[host] ok   accepted here: waiting for them
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+SCRIPT ERROR: Invalid access to property or key 'theirs' on a base object of type 'Dictionary'.
+   at: <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://tests/tools/net_probe_trade.gd:141)
+       [1] _until (res://tests/tools/net_probe_trade.gd:45)
+       [2] _wait (res://tests/tools/net_probe_trade.gd:35)
+TRADE[host] FAIL a changed offer clears our acceptance
+TRADE[host] ok   both accepted: the trade closed
+TRADE[host] FAIL gold: 500 -> 500 gave 100 got 35
+TRADE[host] FAIL the potions left, the client's mana potions arrived (3 / 0)
+TRADE[host] ok   the trade window closed
+TRADE[host] FAIL a third trade opens
+TRADE[host] ok   the client cancelled: it closed here too
+TRADE[host] FAIL (6)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

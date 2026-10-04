@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=zr_coilwood tempos=1
+WALK map=zr_coilwood stops=15 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{},"awake":5,"cpu_render":0.6,"fades":0,"frame":26.3,"gpu":1.3,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 23.6, phys>proc 1.4","phys":3.0,"pipelines":30,"pos":"-121,0.9,20","proc":4.6,"steps":1,"stop":"coil_shrine","t_ms":2866}
+STUCK near (-110.026, 1.009171, 13.49812) heading for coil_shrine: hop to the next path point
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":4.11,"avg_cpu_render":0.69,"avg_draws":472.77,"avg_fps":380.6,"avg_gpu":1.37,"avg_objects":938.4,"avg_phys":2.72,"avg_proc":7.26,"avg_steps":0.16,"drawn_speed_unevenness":0.854,"drawn_still_while_walking":0,"frames":11416,"hero_moving_frames":1647,"hero_still_frames":9769,"lite":true,"low1_fps":160.9,"map":"zr_coilwood","max_ms":26.3,"median_ms":2.39,"minimap_renders":8,"multi_step_frames":0,"nodes_end":5681,"nodes_start":5683,"over_17ms":1,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":5.19,"particles_end":18,"particles_start":19,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":1},"stuck":1,"vsync":false,"walking_frames":10192,"zero_step_frames":9615}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

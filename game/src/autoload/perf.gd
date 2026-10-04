@@ -176,7 +176,7 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 		v.set_anim_awake(show)
 		if show:
 			awake += 1
-			if v.crowd_lod:
+			if v.crowd_lod or (lite and v.ally_lod):
 				crowd.append([p.distance_squared_to(focus), v])
 		elif v.anim_stride != 1:
 			v.set_anim_stride(1)

@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PSTEPS physics steps per frame 0.57
+EPROF music=0.0ms/frame, game=0.0ms/frame, fx=0.0ms/frame, perf=0.0ms/frame, v_process=0.1ms/frame, bar=0.2ms/frame, hud=0.1ms/frame, minimap=0.0ms/frame, orb=0.0ms/frame, party=0.0ms/frame, n_slide=0.0ms/frame, player_phys=0.2ms/frame, e_pre=0.4ms/frame, e_action=0.1ms/frame, e_think=0.1ms/frame, e_steer=0.4ms/frame, e_move=1.3ms/frame, e_loco=0.2ms/frame, e_sound=0.0ms/frame, e_TOTAL=2.9ms/frame, tempo_phys=0.1ms/frame, n_rest=0.0ms/frame
+STRESS {"avg":9.55,"max":24.09,"median":9.49,"p95":16.88,"p99":22.54,"samples":300} gpu={"avg":1.99,"median":1.96,"p95":2.45,"samples":300} process={"avg":68.34,"median":12.78,"p95":174.63,"samples":300} physics={"avg":10.88,"median":9.85,"p95":14.68,"samples":300} nav={"avg":0.03,"median":0.01,"p95":0.08,"samples":300} engaged=51 map=ruined_forest lite=false
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

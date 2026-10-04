@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+SCRIPT ERROR: Parse Error: Identifier "_detached" not declared in the current scope.
+   at: GDScript::reload (res://tests/tools/walk_probe.gd:760)
+SCRIPT ERROR: Parse Error: Identifier "_detached" not declared in the current scope.
+   at: GDScript::reload (res://tests/tools/walk_probe.gd:764)
+SCRIPT ERROR: Parse Error: Identifier "_detached" not declared in the current scope.
+   at: GDScript::reload (res://tests/tools/walk_probe.gd:766)
+SCRIPT ERROR: Parse Error: Identifier "_detached" not declared in the current scope.
+   at: GDScript::reload (res://tests/tools/walk_probe.gd:769)
+ERROR: Failed to load script "res://tests/tools/walk_probe.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

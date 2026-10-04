@@ -558,10 +558,12 @@ func test_verdigast_buds_bloom_or_break() -> void:
 	var bud_atk: Dictionary = DB.enemy(&"rot_mother").attacks.filter(func(a): return a.id == &"bud")[0]
 	mother.phase = 1
 	mother._plant_buds(bud_atk)
+	await host.get_tree().create_timer(0.7).timeout      # bh-037: buds sprout a few frames apart
 	var buds := host.get_tree().get_nodes_in_group(&"rot_bud")
 	eq(buds.size(), 2, "phase 1 plants two buds")
 	mother.phase = 2
 	mother._plant_buds(bud_atk)
+	await host.get_tree().create_timer(0.7).timeout
 	buds = host.get_tree().get_nodes_in_group(&"rot_bud").filter(func(b): return is_instance_valid(b) and b.alive)
 	eq(buds.size(), 3, "never more than three buds at once")
 	for b in buds:

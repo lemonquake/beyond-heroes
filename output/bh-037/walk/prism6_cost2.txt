@@ -1,0 +1,13 @@
+COST awake=17 enemies=28 steps=179 physics_step_avg=14.33 ms nav=0.01 ms
+COST   1.410 ms/step  enemy.gd                           x29 (49 us each)
+COST   0.825 ms/step  tempo.gd                           x5 (165 us each)
+COST   0.637 ms/step  quake_ally.gd                      x3 (212 us each)
+COST   0.322 ms/step  player.gd                          x1 (322 us each)
+COST   0.287 ms/step                                     x3 (96 us each)
+COST   0.252 ms/step  guild_fighter.gd                   x2 (126 us each)
+COST   0.011 ms/step  routes.gd                          x1 (11 us each)
+COST   0.005 ms/step  combat_director.gd                 x1 (5 us each)
+COST scripts 3.75 ms/step, engine rest 10.58 ms/step
+COST census { "StaticBody3D": 346, "CollisionShape3D": 388, "GPUParticles3D": 570, "Area3D": 2, "Area3D_monitoring": 2, "CharacterBody3D": 40, "PhysicalBoneSimulator3D": 28, "NavigationAgent3D": 39 }
+COST physics-internal nodes { "AudioStreamPlayer3D": 28, "GPUParticles3D": 570, "NavigationAgent3D": 39 }
+COST server: active=0 pairs=0 islands=0

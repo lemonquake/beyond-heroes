@@ -1,0 +1,6 @@
+COST scripts 3.25 ms/step, engine rest 19.27 ms/step
+COST particles by owner map_root.gd idle visible=348, map_root.gd emitting visible=34, character_visual.gd emitting visible=22, enemy.gd emitting visible=5, tempo.gd emitting visible=5, character_visual.gd idle visible=4, teleporter.gd emitting visible=2, treasure_chest.gd emitting visible=2, town_portal.gd emitting visible=2, loot_drop.gd emitting visible=2, parent:@Node3D@6336 emitting visible=1
+COST experiment base step median 226.12 ms
+COST without GPUParticles3D internal physics (378): median 14.69 ms (base again 13.25)
+COST without NavigationAgent3D internal physics (38): median 10.74 ms (base again 17.68)
+COST without AudioStreamPlayer3D internal physics (29): median 23.04 ms (base again 9.28)

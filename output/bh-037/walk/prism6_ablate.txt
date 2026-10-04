@@ -1,0 +1,27 @@
+ABL awake monsters 17, enemies in tree 28
+ABL all_on 11.76 ms (57 groups) physics 23.79 ms/step
+ABL   1.12 ms  script:loot_labels.gd                        x1
+ABL   0.91 ms  script:guild_window.gd                       x1
+ABL   0.90 ms  script:hud.gd                                x1
+ABL   0.87 ms  script:debug_window.gd                       x1
+ABL   0.86 ms  script:dialogue_box.gd                       x1
+ABL   0.84 ms  script:atlas_view.gd                         x1
+ABL   0.82 ms  script:touch_button.gd                       x25
+ABL   0.75 ms  script:touch_controls.gd                     x1
+ABL   0.75 ms  script:tooltip_layer.gd                      x1
+ABL   0.75 ms  script:ui_root.gd                            x1
+ABL   0.74 ms  script:tempo_window.gd                       x1
+ABL   0.73 ms  script:chat_box.gd                           x1
+ABL   0.69 ms  script:shop_window.gd                        x1
+ABL   0.68 ms  script:tempo_caller_window.gd                x1
+ABL   0.66 ms  script:party_frames.gd                       x1
+ABL   0.66 ms  script:gacha_reveal_window.gd                x1
+ABL   0.65 ms  script:tree_view.gd                          x2
+ABL   0.64 ms  script:stage_tracker.gd                      x1
+ABL   0.62 ms  script:character_preview.gd                  x3
+ABL   0.62 ms  script:multiplayer_window.gd                 x1
+ABL   0.60 ms  script:minimap.gd                            x1
+ABL   0.57 ms  script:character_window.gd                   x1
+ABL   0.52 ms  script:skill_button.gd                       x18
+ABL   0.48 ms  script:art_bar.gd                            x11
+ABL   0.46 ms  script:directions_panel.gd                   x1

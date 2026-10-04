@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_dunemourn_10 tempos=1
+WALK map=dg_dunemourn_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+WALKNOTE left the map or time is up
+ABL awake monsters 45, enemies in tree 45
+ABL all_on 9.79 ms (56 groups) physics 7.42 ms/step
+ABL  -0.65 ms  script:enemy.gd                              x49
+ABL  -0.82 ms  script:fx.gd                                 x1
+ABL  -1.33 ms  script:game.gd                               x1
+ABL  -1.78 ms  script:routes.gd                             x1
+ABL  -2.15 ms  script:treasure_chest.gd                     x2
+ABL  -2.21 ms  script:loot_drop.gd                          x15
+ABL  -2.22 ms  internal:GPUParticles3D                      x56
+ABL  -2.24 ms  script:dev_tools.gd                          x1
+ABL  -2.37 ms  internal:AudioStreamPlayer                   x2
+ABL  -2.38 ms  internal:AudioStreamPlayer3D                 x19
+ABL  -2.42 ms  script:character_visual.gd                   x52
+ABL  -2.51 ms  script:ambient_accents.gd                    x1
+ABL  -2.69 ms  script:tempo_bar.gd                          x1
+ABL  -2.77 ms  script:perf.gd                               x1
+ABL  -2.77 ms  script:net.gd                                x1
+ABL  -2.79 ms  internal:AnimationTree                       x7
+ABL  -2.88 ms  internal:Skeleton3D                          x52
+ABL  -2.91 ms  script:music_director.gd                     x1
+ABL  -2.91 ms  script:flicker_light.gd                      x19
+ABL  -2.92 ms  script:player.gd                             x1
+ABL  -2.92 ms  script:loot_labels.gd                        x1
+ABL  -3.12 ms  script:tempo.gd                              x1
+ABL  -3.23 ms  script:minimap.gd                            x1
+ABL  -3.32 ms  internal:NavigationAgent3D                   x50
+ABL  -3.35 ms  script:enemy_bar.gd                          x45
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 79 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

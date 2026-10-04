@@ -1,0 +1,46 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+GUILD[host] ok   founded a guild
+GUILD[host] ok   uploaded a banner picture
+GUILD[host] ok   hosted ()
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+GUILD[host] ok   the client joined
+GUILD[host] ok   invite error is empty: ''
+GUILD[host] ok   the client accepted and is a Sworn Hero here
+GUILD[host] ok   the client's profile now carries our guild
+GUILD[host] ok   trained Sharpened Steel
+GUILD[host] ok   a Showcase request arrived and was accepted
+GUILD[host] ok   the Showcase opened here
+GUILD[host] ok   it shows the client's guild
+GUILD[host] ok   Call to Arms (Call to Arms! Dorwick of Tideridge answers the banner of The Golden Keys for 15:00.)
+GUILD[host] ok   dismissed the client
+GUILD[host] PASS
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

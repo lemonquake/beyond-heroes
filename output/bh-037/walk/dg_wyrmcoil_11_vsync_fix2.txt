@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_wyrmcoil_11 tempos=1
+WALK map=dg_wyrmcoil_11 stops=8 refresh=60 Hz window=(1920, 1080) vsync=true cap=144 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":1,"AnimationTree":1,"BoneAttachment3D":2,"CharacterBody3D(enemy.gd):goblin_skulker":1,"CollisionShape3D":1,"GPUParticles3D":3,"MeshInstance3D":6,"NavigationAgent3D":1,"Node3D":3,"Node3D(character_visual.gd)":1,"Node3D(enemy_bar.gd)":1,"PhysicalBoneSimulator3D":1,"Skeleton3D":1},"awake":35,"cpu_render":1.6,"fades":0,"frame":27.0,"gpu":6.0,"lights_switched":0,"minimap":false,"origins":["character_visual.gd:1020 set_status_visual < actor.gd:338 _on_status_added < status_controller.gd:108 apply < enemy_traits_ext.gd:514 pulse"],"phases":"pre>post 5.0, phys>proc 15.1","phys":5.7,"pipelines":0,"pos":"14,0.0,1","proc":14.6,"steps":1,"stop":"random_3","t_ms":6746}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):goblin_skulker":2,"CollisionShape3D":2,"GPUParticles3D":2,"MeshInstance3D":11,"NavigationAgent3D":2,"Node3D":6,"Node3D()":1,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2,"Timer":2},"awake":38,"cpu_render":1.5,"fades":0,"frame":27.6,"gpu":5.4,"lights_switched":0,"minimap":false,"origins":["fx.gd:211 spawn < enemy_traits_ext.gd:444 <anonymous lambda> < enemy_traits_ext.gd:210 _run_jobs < enemy_traits_ext.gd:166 tick","fx.gd:211 spawn < enemy_traits_ext.gd:446 <anonymous lambda> < enemy_traits_ext.gd:210 _run_jobs < enemy_traits_ext.gd:166 tick"],"phases":"pre>post 11.3, phys>proc 13.9","phys":4.2,"pipelines":0,"pos":"-1,0.0,-5","proc":14.4,"steps":1,"stop":"random_4","t_ms":10607}
+SPIKE {"added":{"GPUParticles3D":1,"MeshInstance3D":1,"Node3D":1,"Node3D(lob.gd)":1},"awake":42,"cpu_render":2.7,"fades":0,"frame":33.1,"gpu":6.0,"lights_switched":0,"minimap":false,"origins":["lob.gd:29 throw < enemy.gd:946 <anonymous lambda>"],"phases":"pre>post 3.2, phys>phys 3.3, phys>proc 3.0","phys":8.3,"pipelines":4,"pos":"-10,0.0,-5","proc":14.9,"steps":2,"stop":"random_1","t_ms":12366}
+STUCK near (-3.760303, 0.000907, -17.14095) heading for random_1: hop to the next path point
+SPIKE {"added":{},"awake":49,"cpu_render":4.9,"fades":0,"frame":26.4,"gpu":5.9,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 8.9, phys>proc 7.2","phys":6.2,"pipelines":0,"pos":"-7,0.0,-7","proc":14.0,"steps":1,"stop":"random_1","t_ms":28642}
+SPIKE {"added":{"GPUParticles3D":8,"MeshInstance3D":1},"awake":49,"cpu_render":2.7,"fades":0,"frame":28.4,"gpu":5.9,"lights_switched":0,"minimap":false,"origins":["character_visual.gd:1020 set_status_visual < actor.gd:338 _on_status_added < status_controller.gd:108 apply < enemy.gd:1356 <anonymous lambda>"],"phases":"pre>post 9.6, phys>proc 15.1","phys":9.4,"pipelines":0,"pos":"-7,0.0,-7","proc":19.1,"steps":1,"stop":"random_1","t_ms":29791}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":42.54,"avg_cpu_render":2.07,"avg_draws":1338.23,"avg_fps":60.0,"avg_gpu":5.88,"avg_objects":3021.69,"avg_phys":6.83,"avg_proc":15.49,"avg_steps":1.0,"drawn_speed_unevenness":0.202,"drawn_still_while_walking":0,"frames":1801,"hero_moving_frames":1297,"hero_still_frames":504,"lite":true,"low1_fps":40.6,"map":"dg_wyrmcoil_11","max_ms":33.1,"median_ms":16.68,"minimap_renders":8,"multi_step_frames":1,"nodes_end":6109,"nodes_start":5743,"over_17ms":285,"over_25ms":5,"over_33ms":0,"over_50ms":0,"p99_ms":22.0,"particles_end":94,"particles_start":31,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":1,"nodes_added":4,"pipelines":1},"stuck":1,"vsync":true,"walking_frames":1189,"zero_step_frames":0}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

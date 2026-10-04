@@ -212,6 +212,33 @@ func _run_jobs(delta: float) -> void:
 func later(seconds: float, fn: Callable) -> void:
 	jobs.append([seconds, fn])
 
+## bh-037: a minion of a group comes in its own spawn slot (Enemy.spawn_wait: one per SUMMON_STAGGER across every caller).
+## A living caller runs the wait as its own job; a dead one (parasites bursting out on death) on a scene timer. Until it
+## comes it counts toward the caps (alive_minions, global_minions), or a caster would call more while the first wait.
+var _pending := {}                    # minion kind -> spawns waiting for their slot
+
+func in_spawn_slot(id: StringName, fn: Callable) -> void:
+	var w := Enemy.spawn_wait()
+	if w <= 0.0:
+		fn.call()
+		return
+	_pending[id] = int(_pending.get(id, 0)) + 1
+	var run := func() -> void:
+		_pending[id] = maxi(0, int(_pending.get(id, 0)) - 1)
+		fn.call()
+	if e.alive or not e.is_inside_tree():
+		later(w, run)
+	else:
+		e.get_tree().create_timer(w, false).timeout.connect(run)
+
+func pending_minions(id := &"") -> int:
+	if id != &"":
+		return int(_pending.get(id, 0))
+	var n := 0
+	for k in _pending:
+		n += int(_pending[k])
+	return n
+
 ## Combat decisions that replace the normal ones. Returns true when it handled this think.
 func think() -> bool:
 	if fuse_lit and not exploded:
@@ -293,14 +320,17 @@ func alive_minions(id := &"") -> int:
 			keep.append(m)
 	minions = keep
 	if id == &"":
-		return minions.size()
-	return minions.filter(func(m): return (m as Enemy).def.id == id).size()
+		return minions.size() + pending_minions()
+	return minions.filter(func(m): return (m as Enemy).def.id == id).size() + pending_minions(id)
 
 static func global_minions(tree: SceneTree) -> int:
 	var n := 0
 	for m in tree.get_nodes_in_group(&"bh_minion"):
 		if (m as Enemy).alive:
 			n += 1
+	for c in tree.get_nodes_in_group(&"enemy"):            # bh-037: and those still waiting for a spawn slot
+		if (c as Enemy).ext and (c as Enemy).alive:
+			n += (c as Enemy).ext.pending_minions()
 	return n
 
 func spawn_minion(def_id: StringName, at: Vector3, is_risen := false) -> Enemy:
@@ -429,7 +459,7 @@ func summon_at(spot: Vector3, id: StringName, n: int, delay: float, fx := "burro
 			var p := spot + Vector3(cos(ang), 0, sin(ang)) * 0.9
 			if e.is_inside_tree():
 				p = CombatQuery.reachable_point(e.get_world_3d(), spot, p, 0.3)
-			spawn_minion(id, p)
+			in_spawn_slot(id, spawn_minion.bind(id, p))
 		FX.spawn(VFXLib.dust_puff(1.2), spot)
 		if fx == "burrow":
 			FX.spawn(VFXLib.debris(0.8, Color(0.4, 0.32, 0.22)), spot))

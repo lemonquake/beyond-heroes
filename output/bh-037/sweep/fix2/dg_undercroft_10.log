@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_10 tempos=1
+WALK map=dg_undercroft_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"GPUParticles3D":2,"MeshInstance3D":3,"Node3D":10,"Node3D(loot_drop.gd)":2,"OmniLight3D":1,"Timer":2},"awake":35,"cpu_render":2.8,"fades":0,"frame":29.6,"gpu":2.9,"lights_switched":1,"minimap":false,"origins":["fx.gd:209 spawn < enemy_traits_x.gd:539 _vanish < enemy_traits_x.gd:154 <anonymous lambda> < enemy_traits_ext.gd:210 _run_jobs","fx.gd:209 spawn < enemy.gd:1929 _implode < enemy.gd:1849 _begin_corpse < enemy.gd:1757 die"],"phases":"pre>post 5.1, phys>proc 21.2","phys":4.3,"pipelines":0,"pos":"-2,0.0,-21","proc":11.9,"steps":1,"stop":"exit","t_ms":29226}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":28.05,"avg_cpu_render":1.86,"avg_draws":1308.47,"avg_fps":142.4,"avg_gpu":2.27,"avg_objects":2778.09,"avg_phys":6.33,"avg_proc":11.84,"avg_steps":0.42,"drawn_speed_unevenness":0.451,"drawn_still_while_walking":1,"frames":4272,"hero_moving_frames":1594,"hero_still_frames":2678,"lite":true,"low1_fps":55.5,"map":"dg_undercroft_10","max_ms":29.6,"median_ms":6.56,"minimap_renders":7,"multi_step_frames":1,"nodes_end":5916,"nodes_start":5789,"over_17ms":17,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":16.11,"particles_end":49,"particles_start":31,"seconds":30.0,"spike_causes":{"fades":0,"lights":1,"minimap":0,"multi_step":0,"nodes_added":1,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":3764,"zero_step_frames":2472}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 15 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

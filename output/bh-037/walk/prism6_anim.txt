@@ -1,0 +1,6 @@
+ANIM   0.08 ms/frame  player.gd                  x1 (85 us each)
+ANIM   0.13 ms/frame  enemy.gd                   x4 (32 us each)
+ANIM   0.09 ms/frame  tempo.gd                   x2 (44 us each)
+ANIM   0.11 ms/frame  quake_ally.gd              x3 (37 us each)
+ANIM   0.07 ms/frame  guild_fighter.gd           x2 (34 us each)
+ANIM total 0.48 ms/frame over 12 active trees (strided crowd trees not counted)

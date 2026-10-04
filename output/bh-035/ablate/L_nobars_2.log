@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PSTEPS physics steps per frame 1.21
+PHASES per frame: proc>pre 6.24 ms, pre>post 6.16 ms, phys>proc 6.09 ms, phys>phys 1.55 ms, post>phys 0.12 ms, post>proc 0.00 ms
+EPROF music=0.0ms/frame, game=0.0ms/frame, fx=0.0ms/frame, perf=0.0ms/frame, v_process=0.3ms/frame, hud=0.3ms/frame, minimap=0.1ms/frame, orb=0.0ms/frame, party=0.0ms/frame, n_slide=0.1ms/frame, player_phys=0.6ms/frame, e_TOTAL=5.5ms/frame, e_pre=0.7ms/frame, e_action=0.2ms/frame, e_think=0.2ms/frame, e_steer=0.7ms/frame, e_move=2.1ms/frame, e_loco=0.4ms/frame, e_sound=0.0ms/frame, tempo_phys=0.4ms/frame, n_rest=0.0ms/frame, bar=0.0ms/frame
+STRESS setup=0.95 cpu_render=2.71 {"avg":20.17,"max":44.8,"median":18.91,"p95":30.08,"p99":38.94,"samples":300} gpu={"avg":3.96,"median":4.0,"p95":5.94,"samples":300} process={"avg":22.47,"median":17.5,"p95":33.07,"samples":300} physics={"avg":14.21,"median":11.56,"p95":21.95,"samples":300} nav={"avg":0.01,"median":0.01,"p95":0.02,"samples":300} engaged=51 map=ruined_forest lite=false
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 17 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

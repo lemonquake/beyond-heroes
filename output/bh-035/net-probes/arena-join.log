@@ -1,0 +1,44 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] load_map (res://src/autoload/game.gd:251)
+       [2] _begin_session (res://src/autoload/game.gd:146)
+WARNING: Navigation region synchronization had 2 edge error(s).
+More than 2 edges tried to occupy the same map rasterization space.
+This causes a logical error in the navigation mesh geometry and is commonly caused by overlap or too densely placed edges.
+Consider baking with a higher 'cell_size', greater geometry margin, and less detailed bake objects to cause fewer edges.
+Consider lowering the 'navigation/3d/merge_rasterizer_cell_scale' in the project settings.
+This warning can be toggled under 'navigation/3d/warnings/navmesh_edge_merge_errors' in the project settings.
+   at: _build_step_find_edge_connection_pairs (modules/navigation_3d/3d/nav_region_builder_3d.cpp:219)
+   GDScript backtrace (most recent call first):
+       [0] bake_navigation (res://src/world/map_builder.gd:89)
+       [1] load_map (res://src/autoload/game.gd:251)
+       [2] net_follow (res://src/autoload/game.gd:444)
+ARENA[join] ok   joined the host at the outpost
+ARENA[join] ok   no adventurers of our own (the host runs them)
+ARENA[join] ok   the host's adventurers are here (2)
+ARENA[join] ok   at level 40
+ARENA[join] ok   as rivals (enemy layer, targetable)
+ARENA[join] ok   our blows on the host's adventurer came back as numbers (3)
+ARENA[join] ok   the host's hero is a rival while we both stand on the sand
+ARENA[join] ok   the host's blows (or an adventurer's) reached us (worst 14 of 3140 max HP)
+ARENA[join] ok   no single blow took more than 20%
+ARENA[join] ok   outside, the host's hero is a friend again
+ARENA[join] hp before 3140 after 3123
+ARENA[join] PASS
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

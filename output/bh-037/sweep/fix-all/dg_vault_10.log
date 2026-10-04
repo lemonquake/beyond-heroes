@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_vault_10 tempos=1
+WALK map=dg_vault_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (-0.688295, 0.00088, -6.95168) heading for exit: hop to the next path point
+SPIKE {"added":{"GPUParticles3D":7,"MeshInstance3D":6,"Node3D":4,"OmniLight3D":2,"Timer":9},"awake":19,"cpu_render":1.1,"fades":0,"frame":29.9,"gpu":1.9,"lights_switched":2,"minimap":false,"phases":"pre>post 2.1, phys>proc 24.6","phys":3.5,"pipelines":0,"pos":"-26,0.0,-23","proc":6.6,"steps":1,"stop":"exit","t_ms":18976}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":28.4,"avg_cpu_render":1.3,"avg_draws":952.94,"avg_fps":196.9,"avg_gpu":1.98,"avg_objects":2585.92,"avg_phys":5.42,"avg_proc":11.45,"avg_steps":0.3,"drawn_speed_unevenness":0.499,"drawn_still_while_walking":0,"frames":5907,"hero_moving_frames":1622,"hero_still_frames":4285,"lite":true,"low1_fps":72.4,"map":"dg_vault_10","max_ms":29.9,"median_ms":4.67,"minimap_renders":8,"multi_step_frames":0,"nodes_end":5724,"nodes_start":5745,"over_17ms":3,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":12.02,"particles_end":33,"particles_start":34,"seconds":30.0,"spike_causes":{"fades":0,"lights":1,"minimap":0,"multi_step":0,"nodes_added":1,"pipelines":0},"stuck":1,"vsync":false,"walking_frames":5357,"zero_step_frames":4106}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 9 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

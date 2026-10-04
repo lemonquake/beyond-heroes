@@ -40,8 +40,55 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 	dir.configure(s.difficulty)
 	p_map.add_child(dir)
 	s._spawn_all()
+	s._warm_summons()
 	Events.actor_died.connect(s._on_actor_died)
 	return s
+
+## bh-037: monsters that call others into the fight (summons, burrows, eggs, mirror images, rifts, nests, parasites,
+## Verdigast's rot buds: Enemy.TraitsX.minion_kinds) spawned a kind the map
+## had never shown: its model read from disk and its outfit baked on the blow, 40-60 ms frames mid-fight. While the map
+## loads, every kind a monster here can call gets one hidden, idle visual built the way Enemy builds it, kept until the map
+## goes, so its model, weapon and baked outfit stay loaded.
+func _warm_summons() -> void:
+	var present := {}
+	for e in spawned:
+		if is_instance_valid(e) and not present.has(e.def.id):
+			present[e.def.id] = true
+			if e.visual:
+				e.visual.warm_see_through()       # its corpse will fade (and some kinds go see-through alive)
+	var want := {}
+	for id in present:
+		var d := DB.enemy(id)
+		if d == null:
+			continue
+		for k in Enemy.TraitsX.minion_kinds(d):
+			want[k] = true
+			var kd := DB.enemy(k)             # a rift's shades, a nest's drones: what a called kind calls in turn
+			if kd:
+				for k2 in Enemy.TraitsX.minion_kinds(kd):
+					want[k2] = true
+	var holder := Node3D.new()
+	holder.name = "WarmSummons"
+	holder.visible = false
+	holder.process_mode = Node.PROCESS_MODE_DISABLED
+	add_child(holder)
+	for id in want:
+		var d := DB.enemy(id)
+		if d == null or present.has(id):
+			continue
+		var v := CharacterVisual.new()
+		holder.add_child(v)
+		var persona := Persona.for_enemy(d)
+		if not persona.is_empty():
+			v.setup(Persona.MODEL, d.model_scale * float(persona.get("size", 1.0)), d.tint, &"")
+			Persona.apply(v, persona)
+		else:
+			v.setup(CreatureSwaps.model(d.model), d.model_scale, d.tint, &"")
+		if d.weapon != "":
+			v.attach_weapon(&"main", d.weapon)
+		v.warm_see_through()
+		if v.tree:
+			v.tree.active = false
 
 func _spawn_all() -> void:
 	var def := map.def

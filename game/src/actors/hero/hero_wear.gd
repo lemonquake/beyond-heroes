@@ -207,7 +207,7 @@ static func build(piece: Dictionary, skeleton: Skeleton3D) -> Array[MeshInstance
 			continue
 		var mi := MeshInstance3D.new()
 		mi.mesh = part[1]
-		mi.skin = part[2]
+		mi.skin = canonical_skin(part[2])
 		mi.name = "Wear_%s%s" % [piece.id, ("_" + side) if side != "" else ""]
 		skeleton.add_child(mi)
 		mi.skeleton = NodePath("..")
@@ -218,6 +218,27 @@ static func build(piece: Dictionary, skeleton: Skeleton3D) -> Array[MeshInstance
 	if not dye.is_empty():
 		_dye(out, dye)
 	return out
+
+## bh-037: every wear GLB carries its own copy of the body's Skin (same 24 binds, names and poses; checked for all 129
+## pieces). A Skeleton3D keeps one skin binding per distinct Skin resource and pushes every bone to each of them on every
+## pose update, so a dressed hero paid for its skeleton once per worn piece. Identical skins are folded onto one resource
+## (the body uses it too, HeroBody), so a hero's whole outfit shares a single binding.
+static var _skin_by_sig := {}         # bind signature -> the canonical Skin
+static var _skin_of := {}             # Skin instance id -> its canonical Skin
+
+static func canonical_skin(s: Skin) -> Skin:
+	if s == null:
+		return null
+	var id := s.get_instance_id()
+	if _skin_of.has(id):
+		return _skin_of[id]
+	var sig := ""
+	for i in s.get_bind_count():
+		sig += "%s|%d|%s;" % [s.get_bind_name(i), s.get_bind_bone(i), s.get_bind_pose(i)]
+	var c: Skin = _skin_by_sig.get(sig, s)
+	_skin_by_sig[sig] = c
+	_skin_of[id] = c
+	return c
 
 ## bh-031: a piece's meshes are read from its GLB once ([name, mesh, skin] each); every wearer after that gets new
 ## MeshInstance3Ds on the shared resources instead of instancing the scene again (a pack of 40 dressed monsters).

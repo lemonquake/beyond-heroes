@@ -1,0 +1,82 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=catacombs tempos=1
+WALK map=catacombs stops=3 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SPIKE {"added":{},"awake":39,"cpu_render":3.1,"fades":0,"frame":26.7,"gpu":2.6,"lights_switched":0,"minimap":false,"phases":"pre>post 8.1, post>phys 4.9, phys>proc 4.9","phys":11.5,"pipelines":0,"pos":"-1,0.0,-16","proc":16.1,"steps":1,"stop":"entrance","t_ms":27210}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":34.04,"avg_cpu_render":2.01,"avg_draws":1469.65,"avg_fps":128.2,"avg_gpu":2.26,"avg_objects":3170.52,"avg_phys":6.39,"avg_proc":13.89,"avg_steps":0.47,"drawn_speed_unevenness":0.501,"drawn_still_while_walking":0,"frames":3846,"hero_moving_frames":1606,"hero_still_frames":2240,"lite":true,"low1_fps":50.1,"map":"catacombs","max_ms":26.7,"median_ms":7.12,"minimap_renders":10,"multi_step_frames":0,"nodes_end":6362,"nodes_start":6325,"over_17ms":40,"over_25ms":1,"over_33ms":0,"over_50ms":0,"p99_ms":17.72,"particles_end":60,"particles_start":44,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":3213,"zero_step_frames":2045}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 39 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

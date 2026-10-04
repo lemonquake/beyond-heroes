@@ -1,0 +1,19 @@
+COST awake=18 enemies=29 steps=119 physics_step_avg=16.68 ms nav=0.01 ms
+COST   1.286 ms/step  enemy.gd                           x29 (44 us each)
+COST   0.786 ms/step  tempo.gd                           x5 (157 us each)
+COST   0.514 ms/step  quake_ally.gd                      x3 (171 us each)
+COST   0.386 ms/step                                     x5 (77 us each)
+COST   0.327 ms/step  player.gd                          x1 (327 us each)
+COST   0.256 ms/step  guild_fighter.gd                   x2 (128 us each)
+COST   0.012 ms/step  projectile.gd                      x3 (4 us each)
+COST   0.011 ms/step  routes.gd                          x1 (11 us each)
+COST   0.005 ms/step  combat_director.gd                 x1 (5 us each)
+COST scripts 3.58 ms/step, engine rest 13.10 ms/step
+COST census { "StaticBody3D": 346, "CollisionShape3D": 388, "GPUParticles3D": 212, "Area3D": 2, "Area3D_monitoring": 2, "CharacterBody3D": 40, "PhysicalBoneSimulator3D": 28, "NavigationAgent3D": 39 }
+COST physics-internal nodes { "AudioStreamPlayer3D": 31, "GPUParticles3D": 212, "NavigationAgent3D": 39 }
+COST particles by owner map_root.gd idle visible=134, map_root.gd emitting visible=34, character_visual.gd emitting visible=16, character_visual.gd idle visible=9, enemy.gd emitting visible=5, tempo.gd emitting visible=5, teleporter.gd emitting visible=2, treasure_chest.gd emitting visible=2, town_portal.gd emitting visible=2, parent:@Node3D@7119 emitting visible=1, parent:@Node3D@7128 emitting visible=1, projectile.gd idle visible=1
+COST experiment base step median 239.26 ms
+COST without GPUParticles3D internal physics (193): median 16.36 ms (base again 10.72)
+COST without NavigationAgent3D internal physics (39): median 15.85 ms (base again 20.04)
+COST without AudioStreamPlayer3D internal physics (22): median 7.62 ms (base again 8.81)
+COST server: active=0 pairs=0 islands=0

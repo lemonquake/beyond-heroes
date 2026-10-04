@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PERF {"cpu_render":{"avg":0.61,"median":0.56,"p95":0.99,"samples":900},"draws":{"avg":396.61,"median":393.0,"p95":429.0,"samples":900},"frame":{"avg":2.56,"max":7.29,"median":2.34,"p95":3.89,"p99":4.79,"samples":900},"gpu":{"avg":1.49,"median":1.3,"p95":1.9,"samples":900},"lights":{"avg":91.0,"median":91.0,"p95":91.0,"samples":900},"objects":{"avg":872.66,"median":838.0,"p95":938.0,"samples":900},"prims":{"avg":268042.93,"median":250337.0,"p95":317607.0,"samples":900},"script":{"avg":302.35,"median":28.54,"p95":3926.13,"samples":900}} renderer=forward_plus lite=false map=sanctuary lights_in_map=84 vmem=579.7
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

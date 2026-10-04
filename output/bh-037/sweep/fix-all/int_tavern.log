@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=int_tavern tempos=1
+WALK map=int_tavern stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (-0.900099, 0.000986, -3.498778) heading for random_6: hop to the next path point
+STUCK near (-0.899879, 0.000983, -3.499398) heading for random_6: hop to the next path point
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.79,"avg_draws":718.49,"avg_fps":386.9,"avg_gpu":1.32,"avg_objects":1130.04,"avg_phys":0.98,"avg_proc":6.16,"avg_steps":0.16,"drawn_speed_unevenness":0.925,"drawn_still_while_walking":0,"frames":8318,"hero_moving_frames":932,"hero_still_frames":7386,"lite":true,"low1_fps":146.4,"map":"int_tavern","max_ms":9.4,"median_ms":2.31,"minimap_renders":3,"multi_step_frames":0,"nodes_end":3263,"nodes_start":3265,"over_17ms":0,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":6.18,"particles_end":2,"particles_start":3,"seconds":21.5,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":2,"vsync":false,"walking_frames":5494,"zero_step_frames":7027}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

@@ -30,6 +30,44 @@ const X_TRAITS := [&"bound_summoner", &"void_rift", &"hive_nest", &"splitter", &
 const X_KINDS := ["bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
 const X_ABILITIES := ["images", "link", "mirror", "rally"]
 
+## bh-037: every kind this monster can bring into a fight (summons, bone circles, rifts and the shades they release,
+## mirror images, the risen, totems, nest drones, parasites, rot buds). Spawner warms each one while the map loads.
+static func minion_kinds(d: EnemyDef) -> Array:
+	var out := []
+	for a in d.attacks:
+		if a is Dictionary:
+			_kinds_of(a, &"hollow_soldier", out)
+	for a in d.abilities:
+		if a is Dictionary:
+			_kinds_of(a, &"goblin_skulker", out)
+	if d.traits.has(&"hive_nest"):
+		out.append(&"hive_drone")
+	if d.traits.has(&"parasite_host"):
+		out.append(&"leechling")
+	if d.traits.has(&"void_rift"):
+		out.append(&"shade_stalker")
+	return out
+
+static func _kinds_of(a: Dictionary, summon_default: StringName, out: Array) -> void:
+	match String(a.get("kind", "")):
+		"summon":
+			out.append(StringName(a.get("summon", summon_default)))
+		"bone_circle":
+			out.append(StringName(a.get("summon", &"bone_thrall")))
+		"rift":
+			out.append_array([&"void_rift", StringName(a.get("summon", &"shade_stalker"))])
+		"raise":
+			out.append(&"hollow_soldier")
+		"totem":
+			out.append(&"war_totem")
+		"images":
+			out.append(&"mirror_image")
+		"bud":
+			out.append(&"rot_bud")
+		_:
+			if a.has("summon"):
+				out.append(StringName(a.summon))
+
 const RIFT_PERIOD := 6.0
 const HIVE_PERIOD := 5.0
 const SPLIT_GENERATIONS := 2
@@ -347,9 +385,10 @@ func bone_circle(a: Dictionary) -> void:
 			var p := spot + Vector3(cos(ang), 0, sin(ang)) * 1.8
 			if e.is_inside_tree():
 				p = CombatQuery.reachable_point(e.get_world_3d(), spot, p, 0.3)
-			var m := spawn_minion(id, p)
-			if m and m.visual:
-				m.visual.play_action(&"revive")
+			in_spawn_slot(id, func() -> void:
+				var m := spawn_minion(id, p)
+				if m and m.visual:
+					m.visual.play_action(&"revive"))
 		FX.spawn(VFXLib.particles(Color(0.5, 1.0, 0.65, 0.9), 30, 1.0, true, 0.2, 2.5, 180.0, Vector3(0, 1.5, 0), 1.2), spot + Vector3.UP)
 		Audio.play_at(&"skeleton_rattle", spot, 2.0))
 
@@ -413,7 +452,7 @@ func shed_parasites(n: int) -> void:
 		var ang := TAU * float(i) / float(maxi(room, 1))
 		var p := e.global_position + Vector3(cos(ang), 0, sin(ang)) * (e.body_radius + 0.8)
 		p = CombatQuery.reachable_point(e.get_world_3d(), e.global_position, p, 0.2)
-		spawn_minion(&"leechling", p)
+		in_spawn_slot(&"leechling", spawn_minion.bind(&"leechling", p))
 
 # ---- Splitter -------------------------------------------------------------------------------------------------------
 
@@ -465,20 +504,21 @@ func _try_images(ab: Dictionary) -> bool:
 	var t := _cast(ab, func() -> void: conjure_images(n))
 	return t >= 0.0
 
-func conjure_images(n: int) -> Array:
-	var out := []
+## The images step out one after another, each in its own spawn slot (`in_spawn_slot`).
+func conjure_images(n: int) -> void:
 	if not e.alive or not e.is_inside_tree():
-		return out
+		return
 	for i in n:
 		var side := e.forward().cross(Vector3.UP) * (2.4 if i % 2 == 0 else -2.4) + e.forward() * randf_range(-1.0, 1.0)
 		var p := CombatQuery.reachable_point(e.get_world_3d(), e.global_position, e.global_position + side, 0.3)
-		var m := spawn_minion(&"mirror_image", p)
-		if m:
-			m.display_name = e.display_name
-			out.append(m)
-			FX.spawn(VFXLib.light_flash(Color(0.8, 0.95, 1.0), 3.0, 4.0, 0.25), p + Vector3.UP)
+		in_spawn_slot(&"mirror_image", func() -> void:
+			if not e.alive:
+				return
+			var m := spawn_minion(&"mirror_image", p)
+			if m:
+				m.display_name = e.display_name
+				FX.spawn(VFXLib.light_flash(Color(0.8, 0.95, 1.0), 3.0, 4.0, 0.25), p + Vector3.UP))
 	Audio.play_at(&"blink", e.global_position)
-	return out
 
 ## Struck: swap places with one of its images.
 func _try_swap() -> bool:

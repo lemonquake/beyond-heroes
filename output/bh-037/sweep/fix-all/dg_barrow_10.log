@@ -1,0 +1,64 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_barrow_10 tempos=1
+WALK map=dg_barrow_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+STUCK near (-6.953523, 0.00088, -4.709572) heading for random_3: hop to the next path point
+SPIKE {"added":{"GPUParticles3D":6,"MeshInstance3D":3,"Node3D":6,"OmniLight3D":4,"Timer":12},"awake":31,"cpu_render":1.5,"fades":0,"frame":28.9,"gpu":2.0,"lights_switched":4,"minimap":false,"phases":"pre>post 2.4, phys>proc 24.7","phys":12.3,"pipelines":0,"pos":"-21,0.0,-6","proc":9.5,"steps":1,"stop":"random_1","t_ms":11705}
+SPIKE {"added":{"AnimationPlayer":3,"AnimationTree":3,"BoneAttachment3D":6,"CharacterBody3D(enemy.gd)":3,"CollisionShape3D":3,"GPUParticles3D":1,"MeshInstance3D":21,"NavigationAgent3D":3,"Node3D":9,"Node3D(character_visual.gd)":3,"Node3D(enemy_bar.gd)":3,"PhysicalBoneSimulator3D":3,"Skeleton3D":3,"Timer":1},"awake":19,"cpu_render":1.2,"fades":0,"frame":42.6,"gpu":1.8,"lights_switched":0,"minimap":false,"phases":"pre>post 2.2, phys>proc 38.6","phys":4.4,"pipelines":4,"pos":"-26,0.0,-18","proc":10.3,"steps":1,"stop":"exit","t_ms":23120}
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2119)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SPIKE {"added":{"GPUParticles3D":1,"MeshInstance3D":3,"Node3D":1,"OmniLight3D":1,"Timer":2},"awake":33,"cpu_render":1.7,"fades":0,"frame":28.8,"gpu":2.3,"lights_switched":1,"minimap":false,"phases":"pre>post 3.0, phys>proc 23.3","phys":5.6,"pipelines":0,"pos":"-11,0.0,-21","proc":9.8,"steps":1,"stop":"exit","t_ms":27739}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":26.3,"avg_cpu_render":1.32,"avg_draws":1003.83,"avg_fps":195.5,"avg_gpu":1.87,"avg_objects":2564.37,"avg_phys":7.24,"avg_proc":9.96,"avg_steps":0.31,"drawn_speed_unevenness":0.549,"drawn_still_while_walking":0,"frames":5867,"hero_moving_frames":1229,"hero_still_frames":4638,"lite":true,"low1_fps":67.8,"map":"dg_barrow_10","max_ms":42.6,"median_ms":4.72,"minimap_renders":6,"multi_step_frames":1,"nodes_end":5889,"nodes_start":5771,"over_17ms":6,"over_25ms":3,"over_33ms":1,"over_50ms":0,"p99_ms":11.75,"particles_end":44,"particles_start":43,"seconds":30.0,"spike_causes":{"fades":0,"lights":2,"minimap":0,"multi_step":0,"nodes_added":3,"pipelines":1},"stuck":1,"vsync":false,"walking_frames":3927,"zero_step_frames":4067}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 11 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

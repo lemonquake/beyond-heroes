@@ -54,6 +54,7 @@ func _init(v: CharacterVisual) -> void:
 			break
 	if body == null:
 		return
+	body.skin = HeroWear.canonical_skin(body.skin)     # bh-037: one skin binding for the body and everything worn
 	skin = ShaderMaterial.new()
 	skin.shader = SKIN_SHADER
 	skin.set_shader_parameter(&"skin_tex", load(SKIN_TEX))

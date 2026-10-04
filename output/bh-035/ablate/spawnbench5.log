@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+PIECES orc_reaver first tree.advance 0.5 ms, second 0.0 ms, anims 136
+PIECES orc_reaver load 9.6 inst 0.1 visual.setup 6.3 enemy.setup 2.4 enemy.add_child 6.4
+PIECES orc_reaver first tree.advance 0.4 ms, second 0.0 ms, anims 136
+PIECES orc_reaver load 0.0 inst 0.2 visual.setup 6.5 enemy.setup 2.3 enemy.add_child 6.3
+PHASES orc_reaver: pre_draw+69.4 post_draw+5.1 phys+0.1 phys+3.2 phys+2.7 phys+3.3 proc+2.3 pre_draw+2.7 post_draw+2.1 phys+0.1 phys+2.5 proc+2.5
+PHASES orc_reaver: pre_draw+70.0 post_draw+2.1 phys+0.1 phys+2.8 phys+2.6 proc+2.5 pre_draw+2.5 post_draw+2.0 phys+0.1 phys+2.5 proc+2.5
+PHASES orc_reaver: pre_draw+68.8 post_draw+2.0 phys+0.1 phys+2.9 phys+2.4 phys+2.2 proc+2.3 pre_draw+2.8 post_draw+2.0 phys+0.1 proc+2.9
+PHASES orc_reaver: pre_draw+69.5 post_draw+2.0 phys+0.1 phys+2.9 phys+3.1 phys+2.2 proc+2.3 pre_draw+2.8 post_draw+2.0 phys+0.1 phys+2.5 proc+2.4
+PHASES orc_reaver: pre_draw+68.6 post_draw+2.0 phys+0.1 phys+2.9 phys+2.6 phys+2.5 proc+2.3 pre_draw+3.8 post_draw+2.0 phys+0.1 phys+2.9 proc+2.6
+PHASES orc_reaver: pre_draw+69.6 post_draw+2.0 phys+0.1 phys+2.9 phys+2.3 phys+2.2 proc+2.2 pre_draw+2.7 post_draw+2.0 phys+0.1 phys+2.6 proc+2.2
+SPAWN orc_reaver ms (spawn+next frame): 7.3+78.8(proc 152.6 phys 8.5 rcpu 0.7 gpu 1.5), 7.0+73.2(proc 152.6 phys 8.5 rcpu 0.5 gpu 1.5), 7.0+73.8(proc 152.6 phys 8.5 rcpu 0.5 gpu 1.5), 6.9+75.2(proc 152.6 phys 8.5 rcpu 0.5 gpu 1.5), 6.9+74.3(proc 152.6 phys 8.5 rcpu 0.4 gpu 1.5), 7.7+73.6(proc 152.6 phys 8.5 rcpu 0.4 gpu 1.5)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

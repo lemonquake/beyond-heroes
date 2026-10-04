@@ -75,32 +75,37 @@ static func _spray(c: Color, amount: int, dir: Vector3, spread: float, speed: fl
 	p.explosiveness = 0.95
 	p.local_coords = false
 	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	var pm := ParticleProcessMaterial.new()
-	pm.direction = dir
-	pm.spread = spread
-	pm.initial_velocity_min = speed * 0.45
-	pm.initial_velocity_max = speed
-	pm.gravity = Vector3(0, -18.0, 0)
-	pm.scale_min = size * 0.5
-	pm.scale_max = size * 1.4
-	var g := Gradient.new()
-	g.set_color(0, Color(c.r * 1.2, c.g * 1.2, c.b * 1.2, 1.0))
-	g.set_color(1, Color(c.r * 0.6, c.g * 0.6, c.b * 0.6, 0.0))
-	g.add_point(0.75, Color(c.r, c.g, c.b, 0.95))
-	var gt := GradientTexture1D.new()
-	gt.gradient = g
-	pm.color_ramp = gt
-	p.process_material = pm
-	var q := SphereMesh.new()
-	q.radius = 0.5
-	q.height = 1.0
-	q.radial_segments = 6
-	q.rings = 3
-	q.material = _drop_material()
-	p.draw_pass_1 = q
+	var qd := VFXLib.qdir(dir)
+	# bh-037: shared with every identical spray (VFXLib.shared)
+	p.process_material = VFXLib.shared("gore_spray|%s|%s|%.0f|%.2f|%.2f" % [c.to_html(), qd, spread, snappedf(speed, 0.25), snappedf(size, 0.01)], func() -> Resource:
+		var pm := ParticleProcessMaterial.new()
+		pm.direction = qd
+		pm.spread = spread
+		pm.initial_velocity_min = speed * 0.45
+		pm.initial_velocity_max = speed
+		pm.gravity = Vector3(0, -18.0, 0)
+		pm.scale_min = size * 0.5
+		pm.scale_max = size * 1.4
+		var g := Gradient.new()
+		g.set_color(0, Color(c.r * 1.2, c.g * 1.2, c.b * 1.2, 1.0))
+		g.set_color(1, Color(c.r * 0.6, c.g * 0.6, c.b * 0.6, 0.0))
+		g.add_point(0.75, Color(c.r, c.g, c.b, 0.95))
+		var gt := GradientTexture1D.new()
+		gt.gradient = g
+		pm.color_ramp = gt
+		return pm)
+	p.draw_pass_1 = VFXLib.shared("gore_drop_mesh", func() -> Resource:
+		var q := SphereMesh.new()
+		q.radius = 0.5
+		q.height = 1.0
+		q.radial_segments = 6
+		q.rings = 3
+		q.material = _drop_material()
+		return q)
 	p.visibility_aabb = AABB(Vector3(-5, -3, -5), Vector3(10, 8, 10))
 	p.emitting = true
 	p.finished.connect(p.queue_free)
+	VFXLib._autofree(p, p.lifetime + 0.5)   # bh-037: `finished` never fires in Godot 4.7
 	return p
 
 static func _mist(c: Color, s: float) -> GPUParticles3D:
@@ -114,25 +119,29 @@ static func _chips(c: Color, amount: int, dir: Vector3, speed: float, size: floa
 	p.one_shot = true
 	p.explosiveness = 0.95
 	p.local_coords = false
-	var pm := ParticleProcessMaterial.new()
-	pm.direction = dir
-	pm.spread = 50.0
-	pm.initial_velocity_min = speed * 0.4
-	pm.initial_velocity_max = speed
-	pm.gravity = Vector3(0, -16.0, 0)
-	pm.angular_velocity_min = -540.0
-	pm.angular_velocity_max = 540.0
-	pm.scale_min = size * 0.5
-	pm.scale_max = size * 1.3
-	pm.color = c
-	p.process_material = pm
-	var b := BoxMesh.new()
-	b.size = Vector3(1.0, 0.6, 1.4)
-	b.material = _chip_material()
-	p.draw_pass_1 = b
+	var qd := VFXLib.qdir(dir)
+	p.process_material = VFXLib.shared("gore_chips|%s|%s|%.2f|%.2f" % [c.to_html(), qd, snappedf(speed, 0.25), snappedf(size, 0.01)], func() -> Resource:
+		var pm := ParticleProcessMaterial.new()
+		pm.direction = qd
+		pm.spread = 50.0
+		pm.initial_velocity_min = speed * 0.4
+		pm.initial_velocity_max = speed
+		pm.gravity = Vector3(0, -16.0, 0)
+		pm.angular_velocity_min = -540.0
+		pm.angular_velocity_max = 540.0
+		pm.scale_min = size * 0.5
+		pm.scale_max = size * 1.3
+		pm.color = c
+		return pm)
+	p.draw_pass_1 = VFXLib.shared("gore_chip_mesh", func() -> Resource:
+		var bx := BoxMesh.new()
+		bx.size = Vector3(1.0, 0.6, 1.4)
+		bx.material = _chip_material()
+		return bx)
 	p.visibility_aabb = AABB(Vector3(-5, -3, -5), Vector3(10, 8, 10))
 	p.emitting = true
 	p.finished.connect(p.queue_free)
+	VFXLib._autofree(p, p.lifetime + 0.5)   # bh-037: `finished` never fires in Godot 4.7
 	return p
 
 static func _drop_material() -> StandardMaterial3D:

@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=sundered_reach tempos=1
+WALK map=sundered_reach stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.55,"avg_draws":510.37,"avg_fps":426.7,"avg_gpu":1.87,"avg_objects":1138.9,"avg_phys":1.03,"avg_proc":5.81,"avg_steps":0.14,"drawn_speed_unevenness":0.981,"drawn_still_while_walking":0,"frames":12800,"hero_moving_frames":1801,"hero_still_frames":10999,"lite":true,"low1_fps":207.6,"map":"sundered_reach","max_ms":11.3,"median_ms":2.22,"minimap_renders":11,"multi_step_frames":0,"nodes_end":4172,"nodes_start":4182,"over_17ms":0,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":3.85,"particles_end":21,"particles_start":22,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":12755,"zero_step_frames":10999}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

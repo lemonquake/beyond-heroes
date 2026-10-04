@@ -71,7 +71,7 @@ static func valid_endpoint(address: String) -> bool:
 	var host := address.substr(8)
 	return host != "" and not host.contains("/") and not host.contains("@") and not host.contains("?") and not host.contains("#") and not host.contains(" ") and not host.contains("\n") and not host.contains("\r")
 
-func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authorized := true) -> Dictionary:
+func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authorized := true, body := "") -> Dictionary:
 	if not valid_endpoint(url):
 		return {"error": "Configure a valid HTTPS official server address.", "code": "invalid_endpoint"}
 	var epoch := _endpoint_epoch
@@ -90,7 +90,9 @@ func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authori
 	var headers := PackedStringArray(["Content-Type: application/json"])
 	if authorized and token != "":
 		headers.append("Authorization: Bearer " + token)
-	var err := http.request(url + path, headers, method, "" if method == HTTPClient.METHOD_GET else JSON.stringify(data))
+	if body == "" and method != HTTPClient.METHOD_GET:
+		body = JSON.stringify(data)
+	var err := http.request(url + path, headers, method, "" if method == HTTPClient.METHOD_GET else body)
 	if err != OK:
 		http.queue_free()
 		return {"error": "Could not start the server connection.", "code": "connection_failed"}
@@ -254,7 +256,22 @@ func _send_save() -> void:
 		_retry = {"character": character_id, "lease": lease, "revision": revision,
 			"request_id": Crypto.new().generate_random_bytes(16).hex_encode(), "save": _pending}
 		_pending = {}
-	var result := await request("/characters/save", _retry)
+	# bh-037: this runs every 5 s while playing online. The hero was gathered (to_dict) on an earlier frame; here, one frame
+	# later, a binary snapshot, and the JSON is written on a worker thread. Encoding a big hero here cost ~25 ms a time.
+	await get_tree().process_frame
+	if _retry.is_empty() or not active:      # disconnected or reset meanwhile
+		saving = false
+		return
+	var snap := var_to_bytes(_retry)
+	var enc := {}
+	var task := WorkerThreadPool.add_task(func() -> void:
+		var copy = bytes_to_var(snap)
+		enc["copy"] = copy
+		enc["json"] = JSON.stringify(copy), false, "official save")
+	while not WorkerThreadPool.is_task_completed(task):
+		await get_tree().process_frame
+	WorkerThreadPool.wait_for_task_completion(task)
+	var result := await request("/characters/save", {}, HTTPClient.METHOD_POST, true, String(enc.get("json", "")))
 	saving = false
 	if result.has("error"):
 		last_error = String(result.error)
@@ -266,7 +283,7 @@ func _send_save() -> void:
 		save_finished.emit(false)
 	else:
 		revision = int(result.get("revision", revision))
-		_confirmed_save = _retry.get("save", {}).duplicate(true)
+		_confirmed_save = (enc.get("copy", {}) as Dictionary).get("save", {})     # already a deep copy (decoded on the worker)
 		last_saved_at = float(result.get("saved_at", 0.0))
 		last_error = ""
 		_retry = {}

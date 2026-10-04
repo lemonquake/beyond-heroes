@@ -1,0 +1,48 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+EXPLORE[host] ok   hosted ()
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+EXPLORE[host] ok   the client joined beside the host
+EXPLORE[host] ok   the host knows the client went to Westreach by itself (westreach)
+EXPLORE[host] ok   the host stayed in the Ruined Forest
+EXPLORE[host] ok   Summon Party asked 1 player(s)
+EXPLORE[host] ok   the summoned client arrived at the host's side
+EXPLORE[host] ok   the client stayed in the forest while the host left (ruined_forest)
+EXPLORE[host] ok   second summons asked the client
+EXPLORE[host] ok   a client who says Stay stays in westreach
+EXPLORE[host] PASS
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: Error calling deferred method: 'GDScript::enlarge': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

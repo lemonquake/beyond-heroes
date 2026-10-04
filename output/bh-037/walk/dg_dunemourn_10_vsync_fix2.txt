@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_dunemourn_10 tempos=1
+WALK map=dg_dunemourn_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=true cap=144 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AudioStreamPlayer":1},"awake":31,"cpu_render":1.5,"fades":0,"frame":31.0,"gpu":5.8,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 5.9, phys>proc 3.1","phys":2.9,"pipelines":0,"pos":"2,0.0,-5","proc":14.6,"steps":1,"stop":"random_3","t_ms":6559}
+SPIKE {"added":{"MeshInstance3D":1,"MeshInstance3D(weapon_trail.gd)":1},"awake":35,"cpu_render":1.7,"fades":0,"frame":27.6,"gpu":6.0,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 11.6, phys>proc 13.9","phys":11.2,"pipelines":0,"pos":"11,0.0,-6","proc":14.5,"steps":1,"stop":"random_3","t_ms":8223}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":35,"cpu_render":2.0,"fades":0,"frame":31.3,"gpu":6.0,"lights_switched":2,"minimap":false,"origins":[],"phases":"pre>post 10.7, phys>proc 17.7","phys":4.7,"pipelines":0,"pos":"-16,0.0,-7","proc":15.4,"steps":1,"stop":"random_4","t_ms":24477}
+SPIKE {"added":{"AnimationPlayer":3,"AnimationTree":3,"BoneAttachment3D":6,"CharacterBody3D(enemy.gd):mirror_image":3,"CollisionShape3D":3,"MeshInstance3D":15,"NavigationAgent3D":3,"Node3D":9,"Node3D(character_visual.gd)":3,"Node3D(enemy_bar.gd)":3,"OmniLight3D":3,"PhysicalBoneSimulator3D":3,"Skeleton3D":3},"awake":37,"cpu_render":2.6,"fades":0,"frame":56.6,"gpu":6.1,"lights_switched":3,"minimap":false,"origins":[],"phases":"pre>post 8.2, phys>proc 39.3","phys":4.7,"pipelines":0,"pos":"-15,0.0,-7","proc":15.4,"steps":1,"stop":"random_4","t_ms":24569}
+SPIKE {"added":{},"awake":43,"cpu_render":4.3,"fades":0,"frame":28.3,"gpu":6.0,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 11.6, phys>proc 7.1","phys":6.7,"pipelines":0,"pos":"-10,0.0,-7","proc":17.9,"steps":1,"stop":"random_4","t_ms":27474}
+SPIKE {"added":{},"awake":43,"cpu_render":3.1,"fades":0,"frame":27.3,"gpu":5.8,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 10.0, phys>proc 6.6","phys":7.1,"pipelines":0,"pos":"-8,0.0,-7","proc":21.1,"steps":1,"stop":"random_4","t_ms":28577}
+SPIKE {"added":{},"awake":43,"cpu_render":4.8,"fades":0,"frame":25.2,"gpu":5.9,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 7.6, phys>proc 6.6","phys":7.1,"pipelines":0,"pos":"-8,0.0,-7","proc":21.1,"steps":1,"stop":"random_4","t_ms":28676}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":37.38,"avg_cpu_render":2.15,"avg_draws":1449.73,"avg_fps":60.0,"avg_gpu":5.88,"avg_objects":3092.14,"avg_phys":7.34,"avg_proc":15.73,"avg_steps":1.0,"drawn_speed_unevenness":0.194,"drawn_still_while_walking":0,"frames":1800,"hero_moving_frames":1668,"hero_still_frames":132,"lite":true,"low1_fps":36.9,"map":"dg_dunemourn_10","max_ms":56.6,"median_ms":16.65,"minimap_renders":7,"multi_step_frames":3,"nodes_end":6017,"nodes_start":5751,"over_17ms":190,"over_25ms":7,"over_33ms":1,"over_50ms":1,"p99_ms":22.98,"particles_end":36,"particles_start":30,"seconds":30.0,"spike_causes":{"fades":0,"lights":2,"minimap":0,"multi_step":0,"nodes_added":4,"pipelines":0},"stuck":0,"vsync":true,"walking_frames":1585,"zero_step_frames":0}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 23 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

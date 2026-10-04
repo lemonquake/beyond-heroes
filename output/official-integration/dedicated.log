@@ -1,9 +1,4 @@
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 Official Beyond Heroes game server listening; maximum 12 players.
-NET_STATS players=2 sent_kbps=461.3 received_kbps=644.9 over=30s
-NET_STATS players=0 sent_kbps=516.9 received_kbps=819.0 over=30s
-NET_STATS players=4 sent_kbps=1641.6 received_kbps=1602.4 over=30s
-NET_STATS players=0 sent_kbps=1885.4 received_kbps=2220.7 over=30s
-NET_STATS players=6 sent_kbps=2989.8 received_kbps=2543.9 over=30s
-NET_STATS players=0 sent_kbps=4255.0 received_kbps=4645.0 over=30s
+NET_STATS players=2 sent_kbps=23.5 received_kbps=39.6 over=30s

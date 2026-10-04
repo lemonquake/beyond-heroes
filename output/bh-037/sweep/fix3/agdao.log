@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=agdao tempos=1
+WALK map=agdao stops=13 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (-20.0, 1.600999, 46.21966) heading for pier: hop to the next path point
+STUCK near (-11.29068, 5.600965, 23.651) heading for agdao_shrine: hop to the next path point
+STUCK near (-1.397439, 5.600906, 22.45991) heading for agdao_shrine: hop to the next path point
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.83,"avg_draws":706.45,"avg_fps":354.5,"avg_gpu":1.62,"avg_objects":1186.12,"avg_phys":1.15,"avg_proc":12.02,"avg_steps":0.17,"drawn_speed_unevenness":0.897,"drawn_still_while_walking":0,"frames":10634,"hero_moving_frames":1284,"hero_still_frames":9350,"lite":true,"low1_fps":139.0,"map":"agdao","max_ms":12.8,"median_ms":2.51,"minimap_renders":8,"multi_step_frames":0,"nodes_end":4676,"nodes_start":4678,"over_17ms":0,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":6.4,"particles_end":9,"particles_start":10,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":3,"vsync":false,"walking_frames":7423,"zero_step_frames":8833}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

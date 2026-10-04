@@ -347,8 +347,10 @@ func test_g_summoners() -> void:
 	var bh := _spawn(&"broodhost", _at(-6.0, 5.0))
 	_hit(bh, bh.max_hp() * 0.6)
 	bh.ext.tick(DT)
+	_tick(bh, 0.6)                                  # bh-037: parasites come out a few frames apart
 	eq(bh.ext.alive_minions(&"leechling"), 2, "a badly hurt broodhost sheds two leechlings")
 	bh.die(_player)
+	await _tree().create_timer(0.8).timeout         # (a dead host's on a scene timer)
 	eq(bh.ext.alive_minions(&"leechling"), 6, "its death releases four more")
 	await _end()
 	done()
@@ -366,7 +368,9 @@ func test_h_splitter_and_images() -> void:
 	eq(last.size(), 0, "the third generation does not split")
 	var w := _spawn(&"mirage_weaver", _at(6.0, -4.0))
 	_engage(w, _player)
-	var imgs: Array = w.ext.conjure_images(2)
+	w.ext.conjure_images(2)
+	_tick(w, 0.6)                                   # bh-037: each image in its own spawn slot (Enemy.spawn_wait)
+	var imgs: Array = w.ext.minions.filter(func(m): return is_instance_valid(m) and m.def.id == &"mirror_image")
 	eq(imgs.size(), 2, "the weaver conjures two images")
 	var before := w.global_position
 	ok(w.ext._try_swap(), "struck, the weaver swaps with an image")

@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+PERF {"cpu_render":{"avg":4.84,"median":6.56,"p95":8.71,"samples":1200},"draws":{"avg":1396.37,"median":2331.5,"p95":2529.0,"samples":1200},"frame":{"avg":6.82,"max":62.28,"median":8.64,"p95":11.53,"p99":17.19,"samples":1200},"gpu":{"avg":4.83,"median":6.03,"p95":8.25,"samples":1200},"lights":{"avg":5.75,"median":6.0,"p95":6.0,"samples":1200},"objects":{"avg":1478.45,"median":2518.0,"p95":2668.0,"samples":1200},"prims":{"avg":684374.27,"median":1163486.0,"p95":1179441.0,"samples":1200},"script":{"avg":35.28,"median":18.84,"p95":61.96,"samples":1200}} renderer=gl_compatibility lite=true map=agdao lights_in_map=67 vmem=295.3
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.
+ERROR: Texture with GL ID of 72: leaked 12280 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 362: leaked 21844 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 363: leaked 21844 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)

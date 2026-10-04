@@ -1,0 +1,24 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_eclipse_1 tempos=1
+WALK map=dg_eclipse_1 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":15,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":13,"cpu_render":1.0,"fades":0,"frame":65.0,"gpu":1.8,"lights_switched":2,"minimap":false,"phases":"pre>post 2.0, phys>proc 61.6","phys":2.2,"pipelines":0,"pos":"29,0.0,1","proc":12.3,"steps":1,"stop":"random_1","t_ms":5335}
+SPIKE {"added":{"MeshInstance3D":1,"MeshInstance3D(weapon_trail.gd)":1},"awake":13,"cpu_render":2.4,"fades":0,"frame":25.8,"gpu":1.7,"lights_switched":0,"minimap":false,"phases":"pre>post 4.5, phys>proc 19.0","phys":61.6,"pipelines":0,"pos":"29,0.0,1","proc":10.9,"steps":1,"stop":"random_1","t_ms":6838}
+SPIKE {"added":{},"awake":13,"cpu_render":1.2,"fades":0,"frame":42.9,"gpu":1.7,"lights_switched":0,"minimap":false,"phases":"pre>post 3.8, phys>proc 36.8","phys":19.0,"pipelines":0,"pos":"29,0.0,1","proc":9.5,"steps":1,"stop":"random_1","t_ms":8026}
+STUCK near (29.05129, 0.00088, 1.358049) heading for random_1: hop to the next path point
+STUCK near (3.442119, 0.000914, -4.949094) heading for random_4: hop to the next path point
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":16,"cpu_render":1.1,"fades":0,"frame":25.7,"gpu":1.6,"lights_switched":2,"minimap":false,"phases":"pre>post 1.9, phys>proc 22.2","phys":3.2,"pipelines":0,"pos":"1,3.7,-17","proc":16.7,"steps":1,"stop":"random_0","t_ms":19323}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":18,"cpu_render":2.6,"fades":0,"frame":34.4,"gpu":1.9,"lights_switched":2,"minimap":false,"phases":"pre>post 4.9, phys>proc 26.1","phys":22.2,"pipelines":0,"pos":"-5,4.0,-19","proc":9.0,"steps":1,"stop":"random_0","t_ms":20874}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":26,"cpu_render":1.9,"fades":0,"frame":27.5,"gpu":1.9,"lights_switched":2,"minimap":false,"phases":"pre>post 2.9, phys>proc 22.5","phys":3.2,"pipelines":0,"pos":"-38,4.0,-9","proc":11.1,"steps":1,"stop":"random_0","t_ms":28015}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":15.85,"avg_cpu_render":1.37,"avg_draws":808.17,"avg_fps":189.7,"avg_gpu":1.79,"avg_objects":1887.2,"avg_phys":8.26,"avg_proc":10.53,"avg_steps":0.32,"drawn_speed_unevenness":0.547,"drawn_still_while_walking":0,"frames":5692,"hero_moving_frames":1441,"hero_still_frames":4251,"lite":true,"low1_fps":62.9,"map":"dg_eclipse_1","max_ms":65.0,"median_ms":4.82,"minimap_renders":9,"multi_step_frames":3,"nodes_end":5244,"nodes_start":5161,"over_17ms":8,"over_25ms":6,"over_33ms":3,"over_50ms":1,"p99_ms":11.9,"particles_end":39,"particles_start":41,"seconds":30.0,"spike_causes":{"fades":0,"lights":4,"minimap":0,"multi_step":0,"nodes_added":5,"pipelines":0},"stuck":2,"vsync":false,"walking_frames":4526,"zero_step_frames":3895}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 24 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

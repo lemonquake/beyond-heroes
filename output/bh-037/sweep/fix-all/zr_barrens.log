@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=zr_barrens tempos=1
+WALK map=zr_barrens stops=14 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (-119.0269, 0.577991, 2.561203) heading for zb_west: hop to the next path point
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":5.48,"avg_cpu_render":0.51,"avg_draws":446.89,"avg_fps":474.5,"avg_gpu":1.32,"avg_objects":902.56,"avg_phys":2.5,"avg_proc":7.11,"avg_steps":0.13,"drawn_speed_unevenness":0.972,"drawn_still_while_walking":0,"frames":14236,"hero_moving_frames":1620,"hero_still_frames":12616,"lite":true,"low1_fps":166.5,"map":"zr_barrens","max_ms":14.6,"median_ms":1.77,"minimap_renders":11,"multi_step_frames":0,"nodes_end":5099,"nodes_start":5076,"over_17ms":0,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":5.13,"particles_end":26,"particles_start":23,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":1,"vsync":false,"walking_frames":12466,"zero_step_frames":12436}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 7 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

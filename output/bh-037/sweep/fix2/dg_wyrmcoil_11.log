@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_wyrmcoil_11 tempos=1
+WALK map=dg_wyrmcoil_11 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"Control(status_icon.gd)":1},"awake":30,"cpu_render":1.4,"fades":0,"frame":25.3,"gpu":1.9,"lights_switched":0,"minimap":false,"origins":["hud.gd:877 _update_target < hud.gd:762 _process"],"phases":"pre>post 3.8, phys>proc 2.3","phys":4.3,"pipelines":1,"pos":"24,0.0,-17","proc":9.3,"steps":1,"stop":"random_1","t_ms":12125}
+SPIKE {"added":{"MeshInstance3D":1},"awake":37,"cpu_render":2.0,"fades":0,"frame":28.1,"gpu":2.3,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 3.2, phys>proc 22.4","phys":6.0,"pipelines":0,"pos":"23,0.0,-10","proc":18.6,"steps":1,"stop":"exit","t_ms":19002}
+SPIKE {"added":{"Control(status_icon.gd)":7},"awake":36,"cpu_render":2.0,"fades":0,"frame":37.9,"gpu":3.1,"lights_switched":0,"minimap":false,"origins":["hud.gd:843 _rebuild_statuses < hud.gd:831 _refresh_statuses < hud.gd:757 _process"],"phases":"pre>post 4.1, phys>phys 2.7, phys>proc 2.8","phys":22.4,"pipelines":0,"pos":"23,0.0,-10","proc":19.6,"steps":2,"stop":"exit","t_ms":20006}
+SPIKE {"added":{"Control(status_icon.gd)":7},"awake":38,"cpu_render":3.5,"fades":0,"frame":26.4,"gpu":3.0,"lights_switched":0,"minimap":false,"origins":["hud.gd:843 _rebuild_statuses < hud.gd:831 _refresh_statuses < hud.gd:757 _process"],"phases":"pre>post 4.0, phys>proc 3.2","phys":6.3,"pipelines":0,"pos":"22,0.0,-11","proc":15.2,"steps":1,"stop":"exit","t_ms":23769}
+STUCK near (22.09538, 0.000308, -11.28487) heading for exit: hop to the next path point
+SPIKE {"added":{"GPUParticles3D":2,"MeshInstance3D":3,"Node3D":1,"OmniLight3D":1,"Timer":2},"awake":41,"cpu_render":2.1,"fades":0,"frame":45.6,"gpu":3.5,"lights_switched":1,"minimap":false,"origins":["character_visual.gd:1020 set_status_visual < actor.gd:338 _on_status_added < status_controller.gd:108 apply < status_controller.gd:176 receive_hit","fx.gd:209 spawn < fx.gd:446 _block_feedback < fx.gd:346 _on_damage < actor.gd:272 _apply_result"],"phases":"pre>post 4.2, phys>proc 38.4","phys":6.8,"pipelines":0,"pos":"18,0.0,-15","proc":23.1,"steps":1,"stop":"exit","t_ms":25018}
+SPIKE {"added":{},"awake":41,"cpu_render":2.2,"fades":0,"frame":25.1,"gpu":3.1,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 8.8, phys>phys 4.2, phys>proc 2.9","phys":6.8,"pipelines":3,"pos":"18,0.0,-15","proc":23.1,"steps":2,"stop":"exit","t_ms":25043}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":33.52,"avg_cpu_render":1.69,"avg_draws":1157.93,"avg_fps":142.7,"avg_gpu":2.22,"avg_objects":2652.22,"avg_phys":6.94,"avg_proc":14.07,"avg_steps":0.42,"drawn_speed_unevenness":0.49,"drawn_still_while_walking":0,"frames":4280,"hero_moving_frames":1421,"hero_still_frames":2859,"lite":true,"low1_fps":46.6,"map":"dg_wyrmcoil_11","max_ms":45.6,"median_ms":6.33,"minimap_renders":7,"multi_step_frames":3,"nodes_end":6089,"nodes_start":5745,"over_17ms":49,"over_25ms":6,"over_33ms":2,"over_50ms":0,"p99_ms":17.84,"particles_end":71,"particles_start":32,"seconds":30.0,"spike_causes":{"fades":0,"lights":1,"minimap":0,"multi_step":2,"nodes_added":5,"pipelines":2},"stuck":1,"vsync":false,"walking_frames":3523,"zero_step_frames":2483}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 7 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=int_netmender tempos=1
+WALK map=int_netmender stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+STUCK near (0.206045, 0.000986, 2.040596) heading for random_4: hop to the next path point
+STUCK near (1.646289, 0.000986, -1.378764) heading for random_5: hop to the next path point
+STUCK near (1.160504, 0.000986, -1.222482) heading for random_1: hop to the next path point
+SPIKE {"added":{},"awake":0,"cpu_render":0.7,"fades":0,"frame":53.5,"gpu":1.1,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 2.0","phys":0.9,"pipelines":0,"pos":"-1,0.7,-1","proc":4.5,"steps":3,"stop":"random_6","t_ms":12219}
+STUCK near (0.154221, 0.000738, 2.041896) heading for random_4: hop to the next path point
+STUCK near (1.646593, 0.000983, -1.379035) heading for random_5: hop to the next path point
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.63,"avg_draws":717.49,"avg_fps":508.9,"avg_gpu":0.95,"avg_objects":1065.85,"avg_phys":0.92,"avg_proc":8.19,"avg_steps":0.12,"drawn_speed_unevenness":1.149,"drawn_still_while_walking":0,"frames":10987,"hero_moving_frames":401,"hero_still_frames":10586,"lite":true,"low1_fps":176.1,"map":"int_netmender","max_ms":53.5,"median_ms":1.84,"minimap_renders":2,"multi_step_frames":1,"nodes_end":3058,"nodes_start":3060,"over_17ms":1,"over_25ms":1,"over_33ms":1,"over_50ms":1,"p99_ms":4.58,"particles_end":2,"particles_start":3,"seconds":21.6,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":1,"nodes_added":0,"pipelines":0},"stuck":5,"vsync":false,"walking_frames":2959,"zero_step_frames":9693}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

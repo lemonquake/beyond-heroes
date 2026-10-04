@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=forgotten_temple tempos=1
+WALK map=forgotten_temple stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":28.6,"avg_cpu_render":1.99,"avg_draws":1640.59,"avg_fps":139.2,"avg_gpu":2.36,"avg_objects":2962.42,"avg_phys":5.0,"avg_proc":12.54,"avg_steps":0.43,"drawn_speed_unevenness":0.427,"drawn_still_while_walking":0,"frames":4175,"hero_moving_frames":1673,"hero_still_frames":2502,"lite":true,"low1_fps":60.5,"map":"forgotten_temple","max_ms":20.3,"median_ms":6.76,"minimap_renders":8,"multi_step_frames":0,"nodes_end":4900,"nodes_start":4863,"over_17ms":8,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":14.9,"particles_end":44,"particles_start":27,"seconds":30.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":3774,"zero_step_frames":2375}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 18 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,30 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+TRADE[join] ok   join sent ()
+TRADE[join] ok   the first request arrived and was declined
+TRADE[join] ok   nothing open after declining
+TRADE[join] ok   the second request arrived and was accepted
+TRADE[join] ok   the trade table is open here too
+TRADE[join] FAIL the host's offer (100 gold + a stack) shows here
+TRADE[join] FAIL offer 30 gold and the mana potions
+TRADE[join] ok   the host accepted
+TRADE[join] FAIL raise our gold offer by 5
+TRADE[join] FAIL both acceptances cleared
+TRADE[join] ok   both accepted: the trade closed
+TRADE[join] FAIL gold: 100 -> 100 gave 35 got 100
+TRADE[join] FAIL the mana potions left, the host's health potions arrived (3 / 0)
+TRADE[join] FAIL the third request arrived
+TRADE[join] ok   closing the window cancelled the trade
+TRADE[join] FAIL (7)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

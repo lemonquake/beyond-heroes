@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_10 tempos=1
+WALK map=dg_undercroft_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":15,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":31,"cpu_render":1.5,"fades":0,"frame":72.5,"gpu":2.0,"lights_switched":2,"minimap":false,"phases":"pre>post 2.5, phys>proc 68.2","phys":4.9,"pipelines":0,"pos":"13,0.0,10","proc":11.0,"steps":1,"stop":"random_2","t_ms":5252}
+SPIKE {"added":{"GPUParticles3D":13,"MeshInstance3D":9,"MeshInstance3D(weapon_trail.gd)":1,"Node3D":7,"OmniLight3D":6,"Timer":19},"awake":33,"cpu_render":2.0,"fades":0,"frame":40.4,"gpu":2.1,"lights_switched":6,"minimap":false,"phases":"pre>post 3.2, phys>proc 34.9","phys":4.5,"pipelines":0,"pos":"6,0.0,4","proc":12.2,"steps":1,"stop":"random_2","t_ms":7056}
+SPIKE {"added":{},"awake":32,"cpu_render":1.5,"fades":0,"frame":26.1,"gpu":2.0,"lights_switched":0,"minimap":false,"phases":"pre>post 3.3, phys>proc 18.6","phys":4.5,"pipelines":0,"pos":"-1,0.0,-3","proc":12.6,"steps":1,"stop":"random_2","t_ms":9546}
+SPIKE {"added":{"MeshInstance3D":1},"awake":32,"cpu_render":1.9,"fades":0,"frame":28.8,"gpu":2.0,"lights_switched":0,"minimap":false,"phases":"pre>post 3.4, phys>proc 20.4","phys":4.5,"pipelines":0,"pos":"-1,0.0,-4","proc":12.6,"steps":1,"stop":"exit","t_ms":9648}
+SPIKE {"added":{"AudioStreamPlayer":1,"MeshInstance3D":1,"OmniLight3D":1},"awake":32,"cpu_render":1.9,"fades":0,"frame":26.0,"gpu":2.0,"lights_switched":1,"minimap":false,"phases":"pre>post 3.5, phys>proc 3.3","phys":20.4,"pipelines":0,"pos":"-1,0.0,-5","proc":9.9,"steps":1,"stop":"exit","t_ms":9921}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":32,"cpu_render":3.2,"fades":0,"frame":38.0,"gpu":2.4,"lights_switched":2,"minimap":false,"phases":"pre>post 6.3, phys>proc 28.4","phys":20.4,"pipelines":0,"pos":"-1,0.0,-11","proc":9.9,"steps":1,"stop":"exit","t_ms":10859}
+SPIKE {"added":{},"awake":34,"cpu_render":3.3,"fades":0,"frame":27.5,"gpu":2.4,"lights_switched":0,"minimap":false,"phases":"pre>post 8.4, phys>phys 5.4, phys>proc 3.2","phys":20.4,"pipelines":1,"pos":"-1,0.0,-11","proc":9.9,"steps":2,"stop":"exit","t_ms":10886}
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SPIKE {"added":{"Control(status_icon.gd)":1},"awake":36,"cpu_render":2.7,"fades":0,"frame":53.0,"gpu":2.7,"lights_switched":0,"minimap":false,"phases":"pre>post 4.7, phys>phys 4.1, phys>phys 3.0, phys>proc 2.8","phys":11.1,"pipelines":0,"pos":"-2,0.0,-16","proc":14.7,"steps":3,"stop":"exit","t_ms":13660}
+SPIKE {"added":{"Control(status_icon.gd)":1},"awake":35,"cpu_render":1.7,"fades":0,"frame":45.2,"gpu":2.7,"lights_switched":0,"minimap":false,"phases":"pre>post 4.7, phys>phys 3.3, phys>proc 4.0","phys":7.8,"pipelines":0,"pos":"6,0.0,-22","proc":13.9,"steps":2,"stop":"random_3","t_ms":17300}
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SPIKE {"added":{"GPUParticles3D":4,"MeshInstance3D":3,"Node3D":5,"Node3D(loot_drop.gd)":1,"OmniLight3D":2,"Timer":4},"awake":32,"cpu_render":2.1,"fades":0,"frame":28.0,"gpu":2.6,"lights_switched":2,"minimap":false,"phases":"pre>post 4.0, phys>proc 21.4","phys":15.8,"pipelines":8,"pos":"12,0.0,-19","proc":13.1,"steps":1,"stop":"random_1","t_ms":22860}
+SPIKE {"added":{"GPUParticles3D":3,"MeshInstance3D":1,"Timer":2},"awake":34,"cpu_render":1.9,"fades":0,"frame":85.1,"gpu":2.6,"lights_switched":0,"minimap":false,"phases":"pre>post 6.2, phys>phys 4.3, phys>phys 3.5, phys>proc 4.0","phys":21.4,"pipelines":9,"pos":"9,0.0,-19","proc":14.0,"steps":3,"stop":"random_1","t_ms":23377}
+SPIKE {"added":{"Control(status_icon.gd)":1},"awake":35,"cpu_render":2.1,"fades":0,"frame":30.8,"gpu":3.0,"lights_switched":0,"minimap":false,"phases":"pre>post 5.7, phys>proc 3.5","phys":21.4,"pipelines":0,"pos":"7,0.0,-18","proc":14.0,"steps":1,"stop":"random_1","t_ms":23852}
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+   at: Enemy._attack_request (res://src/actors/enemy/enemy.gd:840)
+   GDScript backtrace (most recent call first):
+       [0] _attack_request (res://src/actors/enemy/enemy.gd:840)
+       [1] _fire (res://src/actors/enemy/enemy.gd:1049)
+       [2] _elite_tick (res://src/actors/enemy/enemy.gd:2132)
+       [3] _physics_process (res://src/actors/enemy/enemy.gd:366)
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":35,"cpu_render":2.1,"fades":0,"frame":29.7,"gpu":3.3,"lights_switched":2,"minimap":false,"phases":"pre>post 4.0, phys>proc 22.7","phys":5.3,"pipelines":0,"pos":"1,0.0,-17","proc":73.2,"steps":1,"stop":"random_1","t_ms":24869}
+SPIKE {"added":{"GPUParticles3D":5,"MeshInstance3D":6,"Node3D":11,"Node3D(loot_drop.gd)":2,"Node3D(projectile.gd)":1,"OmniLight3D":2,"Timer":4},"awake":37,"cpu_render":2.6,"fades":0,"frame":39.2,"gpu":3.1,"lights_switched":2,"minimap":false,"phases":"pre>post 3.8, phys>proc 32.6","phys":22.7,"pipelines":0,"pos":"-1,0.0,-17","proc":15.8,"steps":1,"stop":"random_1","t_ms":25499}
+SPIKE {"added":{"Control(status_icon.gd)":1,"MeshInstance3D":1,"OmniLight3D":1},"awake":35,"cpu_render":2.3,"fades":0,"frame":28.1,"gpu":3.1,"lights_switched":1,"minimap":false,"phases":"pre>post 5.2, phys>proc 5.7","phys":6.2,"pipelines":0,"pos":"-7,0.0,-7","proc":16.7,"steps":1,"stop":"random_1","t_ms":27550}
+SPIKE {"added":{"AnimationPlayer":2,"AnimationTree":2,"BoneAttachment3D":4,"CharacterBody3D(enemy.gd):mirror_image":2,"CollisionShape3D":2,"MeshInstance3D":10,"NavigationAgent3D":2,"Node3D":6,"Node3D(character_visual.gd)":2,"Node3D(enemy_bar.gd)":2,"OmniLight3D":2,"PhysicalBoneSimulator3D":2,"Skeleton3D":2},"awake":35,"cpu_render":5.8,"fades":0,"frame":43.8,"gpu":3.1,"lights_switched":2,"minimap":false,"phases":"pre>post 7.9, phys>proc 30.1","phys":10.5,"pipelines":0,"pos":"-14,0.0,-6","proc":18.6,"steps":1,"stop":"random_1","t_ms":28915}
+SPIKE {"added":{},"awake":37,"cpu_render":4.8,"fades":0,"frame":29.8,"gpu":3.1,"lights_switched":0,"minimap":false,"phases":"pre>post 9.6, phys>phys 5.2, phys>phys 3.8, phys>proc 3.2","phys":10.5,"pipelines":0,"pos":"-14,0.0,-6","proc":18.6,"steps":3,"stop":"random_1","t_ms":28945}
+SPIKE {"added":{},"awake":37,"cpu_render":4.7,"fades":0,"frame":26.2,"gpu":3.1,"lights_switched":0,"minimap":false,"phases":"pre>post 10.8, phys>phys 5.4, phys>proc 3.7","phys":10.5,"pipelines":0,"pos":"-14,0.0,-6","proc":18.6,"steps":2,"stop":"random_1","t_ms":28971}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":32.61,"avg_cpu_render":2.05,"avg_draws":1213.07,"avg_fps":118.6,"avg_gpu":2.44,"avg_objects":2739.19,"avg_phys":13.13,"avg_proc":16.8,"avg_steps":0.51,"drawn_speed_unevenness":0.495,"drawn_still_while_walking":1,"frames":3560,"hero_moving_frames":1676,"hero_still_frames":1884,"lite":true,"low1_fps":32.4,"map":"dg_undercroft_10","max_ms":85.1,"median_ms":7.6,"minimap_renders":10,"multi_step_frames":13,"nodes_end":5933,"nodes_start":5773,"over_17ms":75,"over_25ms":18,"over_33ms":8,"over_50ms":3,"p99_ms":20.92,"particles_end":37,"particles_start":30,"seconds":30.0,"spike_causes":{"fades":0,"lights":9,"minimap":0,"multi_step":6,"nodes_added":14,"pipelines":3},"stuck":0,"vsync":false,"walking_frames":3281,"zero_step_frames":1778}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 23 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

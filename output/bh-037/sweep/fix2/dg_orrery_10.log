@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WARNING: Adding 'ring_a' as child to '@Node3D@2705' will make owner 'armillary_sphere_97' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:257)
+       [4] load_map (res://src/autoload/game.gd:262)
+       [5] _begin_session (res://src/autoload/game.gd:166)
+WARNING: Adding 'ring_b' as child to '@Node3D@2706' will make owner 'armillary_sphere_97' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:257)
+       [4] load_map (res://src/autoload/game.gd:262)
+       [5] _begin_session (res://src/autoload/game.gd:166)
+WARNING: Adding 'ring_c' as child to '@Node3D@2707' will make owner 'armillary_sphere_97' inconsistent. Consider unsetting the owner beforehand.
+   at: add_child (scene/main/node.cpp:1728)
+   GDScript backtrace (most recent call first):
+       [0] _light_and_dress (res://src/world/maps/dungeon.gd:579)
+       [1] compose (res://src/world/maps/dungeon.gd:96)
+       [2] build (res://src/world/map_builder.gd:62)
+       [3] build_map (res://src/autoload/game.gd:257)
+       [4] load_map (res://src/autoload/game.gd:262)
+       [5] _begin_session (res://src/autoload/game.gd:166)
+WALKINFO hero=Wanderer level=1 map=dg_orrery_10 tempos=1
+WALK map=dg_orrery_10 stops=8 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+SPIKE {"added":{"MeshInstance3D":3,"Node3D":6,"Node3D(projectile.gd)":3},"awake":25,"cpu_render":2.7,"fades":0,"frame":31.4,"gpu":1.9,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 4.8, phys>proc 22.8","phys":4.3,"pipelines":8,"pos":"-21,0.0,1","proc":9.5,"steps":1,"stop":"random_4","t_ms":8185}
+STUCK near (-21.05154, 0.000726, 0.547035) heading for random_4: hop to the next path point
+SPIKE {"added":{"BoneAttachment3D":4,"GPUParticles3D":4,"MeshInstance3D":10,"Node3D":12,"Node3D(loot_drop.gd)":2,"OmniLight3D":1,"Timer":4},"awake":33,"cpu_render":1.4,"fades":0,"frame":33.6,"gpu":2.1,"lights_switched":1,"minimap":false,"origins":["fx.gd:209 spawn < enemy.gd:1099 <anonymous lambda> < area_effects.gd:202 _physics_process","fx.gd:209 spawn < fx.gd:535 _on_impact < enemy.gd:1101 <anonymous lambda> < area_effects.gd:202 _physics_process","fx.gd:209 spawn < fx.gd:537 _on_impact < enemy.gd:1101 <anonymous lambda> < area_effects.gd:202 _physics_process"],"phases":"pre>post 2.1, phys>proc 29.9","phys":13.2,"pipelines":4,"pos":"-7,0.0,-1","proc":11.1,"steps":1,"stop":"random_4","t_ms":10376}
+SPIKE {"added":{"AudioStreamPlayer":1},"awake":32,"cpu_render":3.3,"fades":0,"frame":40.1,"gpu":2.3,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 6.5, phys>phys 6.9, phys>proc 2.1","phys":29.9,"pipelines":0,"pos":"-7,0.0,-6","proc":14.8,"steps":2,"stop":"random_4","t_ms":11227}
+SPIKE {"added":{"BoneAttachment3D":4,"GPUParticles3D":4,"HBoxContainer":1,"Label":1,"MeshInstance3D":11,"Node3D":14,"Node3D(loot_drop.gd)":2,"OmniLight3D":1,"PanelContainer":1,"TextureRect":1,"Timer":4},"awake":32,"cpu_render":3.1,"fades":0,"frame":58.6,"gpu":2.1,"lights_switched":1,"minimap":false,"origins":["fx.gd:209 spawn < enemy.gd:1099 <anonymous lambda> < area_effects.gd:202 _physics_process","fx.gd:209 spawn < fx.gd:535 _on_impact < enemy.gd:1101 <anonymous lambda> < area_effects.gd:202 _physics_process","fx.gd:209 spawn < fx.gd:537 _on_impact < enemy.gd:1101 <anonymous lambda> < area_effects.gd:202 _physics_process"],"phases":"pre>post 4.2, phys>proc 51.2","phys":6.8,"pipelines":0,"pos":"-6,0.0,-17","proc":14.7,"steps":1,"stop":"exit","t_ms":14701}
+SPIKE {"added":{"MeshInstance3D":1,"Node3D()":1},"awake":31,"cpu_render":2.2,"fades":0,"frame":28.9,"gpu":2.1,"lights_switched":0,"minimap":false,"origins":[],"phases":"pre>post 6.6, phys>phys 6.6, phys>phys 5.6, phys>proc 3.3","phys":6.8,"pipelines":0,"pos":"-6,0.0,-17","proc":14.7,"steps":3,"stop":"exit","t_ms":14730}
+WALKNOTE left the map or time is up
+WALKSUM {"avg_awake":29.19,"avg_cpu_render":1.72,"avg_draws":1101.63,"avg_fps":141.2,"avg_gpu":2.14,"avg_objects":2622.67,"avg_phys":8.38,"avg_proc":13.44,"avg_steps":0.43,"drawn_speed_unevenness":0.498,"drawn_still_while_walking":0,"frames":4237,"hero_moving_frames":1493,"hero_still_frames":2744,"lite":true,"low1_fps":48.1,"map":"dg_orrery_10","max_ms":58.6,"median_ms":6.45,"minimap_renders":9,"multi_step_frames":5,"nodes_end":5870,"nodes_start":5770,"over_17ms":30,"over_25ms":5,"over_33ms":2,"over_50ms":1,"p99_ms":16.38,"particles_end":47,"particles_start":33,"seconds":30.0,"spike_causes":{"fades":0,"lights":2,"minimap":0,"multi_step":2,"nodes_added":5,"pipelines":2},"stuck":1,"vsync":false,"walking_frames":3463,"zero_step_frames":2442}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 15 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=int_keeper tempos=1
+WALK map=int_keeper stops=1 refresh=60 Hz window=(1920, 1080) vsync=false cap=0 lite=true shadows=2 effects=2 aa=1 scale=1.00 renderer=forward_plus
+WALKSUM {"avg_awake":0.0,"avg_cpu_render":0.0,"avg_draws":0.0,"avg_fps":1000.0,"avg_gpu":0.0,"avg_objects":0.0,"avg_phys":0.0,"avg_proc":0.0,"avg_steps":0.0,"drawn_speed_unevenness":0.0,"drawn_still_while_walking":0,"frames":1,"hero_moving_frames":0,"hero_still_frames":0,"lite":true,"low1_fps":100000.0,"map":"int_keeper","max_ms":0.0,"median_ms":0.0,"minimap_renders":0,"multi_step_frames":0,"nodes_end":3049,"nodes_start":3049,"over_17ms":0,"over_25ms":0,"over_33ms":0,"over_50ms":0,"p99_ms":0.0,"particles_end":2,"particles_start":2,"seconds":0.0,"spike_causes":{"fades":0,"lights":0,"minimap":0,"multi_step":0,"nodes_added":0,"pipelines":0},"stuck":0,"vsync":false,"walking_frames":0,"zero_step_frames":0}
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)

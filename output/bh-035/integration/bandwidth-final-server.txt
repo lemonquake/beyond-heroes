@@ -1,0 +1,5 @@
+NET_STATS players=2 sent_kbps=139.2 received_kbps=185.4 over=30s
+NET_STATS players=0 sent_kbps=100.6 received_kbps=187.4 over=30s
+NET_STATS players=4 sent_kbps=709.6 received_kbps=492.7 over=30s
+NET_STATS players=6 sent_kbps=695.9 received_kbps=436.9 over=30s
+NET_STATS players=6 sent_kbps=1427.2 received_kbps=747.3 over=30s

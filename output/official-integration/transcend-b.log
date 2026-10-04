@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+TCO[b] ok   signed in ()
+TCO[b] ok   imported a level-121 character ()
+TCO[b] ok   the account card shows the starting class
+TCO[b] ok   A's Royal Guard was saved before B joins
+TCO[b] ok   play ticket ()
+TCO[b] ok   joined the official game ()
+TCO[b] ok   handshake
+TCO[b] ok   A's avatar arrived
+TCO[b] ok   late join: Royal Guard under A's name (Level 121 Royal Guard · PC)
+TCO[b] ok   a first transcendence is not a master class
+TCO[b] shot 01_late_join_royal_guard
+TCO[b] ok   Grand Paladin shows after A's save (Level 121 Royal Guard · PC)
+TCO[b] SEEN grand_paladin 1791063574934
+TCO[b] ok   as a Grand Paladin
+TCO[b] shot 02_sees_grand_paladin
+TCO[b] ok   after a map change: Grand Paladin (Level 121 Grand Paladin · PC)
+TCO[b] ok   after a map change: the class
+TCO[b] ok   saved before leaving
+TCO[b] ok   a new play ticket after releasing ()
+TCO[b] ok   rejoined ()
+TCO[b] ok   handshake again
+TCO[b] ok   after reconnecting: Grand Paladin at once ()
+TCO[b] ok   after reconnecting: the class
+TCO[b] shot 03_after_reconnect
+TCO[b] ok   A tried a forged switch
+TCO[b] ok   the refused switch never shows Dark General ()
+TCO[b] ok   final save
+TCO[b] PASS
+WARNING: 12 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

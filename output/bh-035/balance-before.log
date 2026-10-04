@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BALANCE L1 knight      single     9.7  aoe    18.6  ehp    2376  power    654.7
+BALANCE L1 mage        single    13.1  aoe    26.5  ehp     690  power    489.5
+BALANCE L1 ranger      single    13.4  aoe    15.1  ehp     926  power    432.9
+BALANCE L1 shadowblade single    15.5  aoe    34.4  ehp     916  power    699.0
+BALANCE L10 knight      single    39.1  aoe   144.6  ehp    5567  power   5610.3
+BALANCE L10 mage        single    45.2  aoe    77.5  ehp    2787  power   3124.4
+BALANCE L10 ranger      single    49.6  aoe    95.1  ehp    3046  power   3790.6
+BALANCE L10 shadowblade single    25.0  aoe    30.7  ehp    3042  power   1528.1
+BALANCE L20 knight      single   153.2  aoe   549.7  ehp    9653  power  28511.8
+BALANCE L20 mage        single   117.2  aoe   327.9  ehp    4934  power  13770.7
+BALANCE L20 ranger      single   114.6  aoe   501.7  ehp    5211  power  17309.9
+BALANCE L20 shadowblade single    47.6  aoe   125.4  ehp    5205  power   5574.0
+BALANCE L30 knight      single   205.3  aoe   661.9  ehp   13419  power  42701.8
+BALANCE L30 mage        single   295.0  aoe   828.5  ehp    7263  power  42132.0
+BALANCE L30 ranger      single   288.4  aoe  1221.3  ehp    8502  power  54722.7
+BALANCE L30 shadowblade single    93.4  aoe   314.2  ehp    7556  power  14890.5
+[FAIL] test_balance.gd — 1 tests, 16 checks, 8 failures (383125.7 ms)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 ranger power 432.9 is within 20% of the mean 569.0 (-24%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L1 shadowblade power 699.0 is within 20% of the mean 569.0 (+23%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 knight power 5610.3 is within 20% of the mean 3513.3 (+60%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L10 shadowblade power 1528.1 is within 20% of the mean 3513.3 (-57%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 knight power 28511.8 is within 20% of the mean 16291.6 (+75%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L20 shadowblade power 5574.0 is within 20% of the mean 16291.6 (-66%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 ranger power 54722.7 is within 20% of the mean 38611.7 (+42%)
+  FAIL test_balance.test_power_is_within_band_at_every_level: L30 shadowblade power 14890.5 is within 20% of the mean 38611.7 (-61%)
+TOTAL: 16 checks, 8 failures
+WARNING: 318 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

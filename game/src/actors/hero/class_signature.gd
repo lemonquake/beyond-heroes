@@ -134,6 +134,7 @@ func burst(kind: StringName, at: Vector3, to := Vector3.ZERO) -> void:
 		&"collapse":
 			var r2 := DataTranscendence.sig(&"void_sovereign", "radius")
 			var pc := VFXLib.particles(Color(c, 1.0), 40, 0.6, true, 0.08, 0.2, 180.0, Vector3.ZERO, r2 * 0.8)
+			pc.process_material = pc.process_material.duplicate()     # one-shot materials are shared (VFXLib.shared)
 			(pc.process_material as ParticleProcessMaterial).radial_accel_min = -14.0
 			(pc.process_material as ParticleProcessMaterial).radial_accel_max = -10.0
 			FX.spawn(pc, at + Vector3.UP * 0.9)

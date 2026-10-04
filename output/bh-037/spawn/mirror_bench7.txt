@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+WALKINFO hero=Wanderer level=1 map=dg_undercroft_10 tempos=1
+SPAWNMATS mirror_image hero:ShaderMaterial, Hair:StandardMaterial3D ovr, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, WearMerged:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached, moonshard_dagger:StandardMaterial3D cached
+SPAWNPER mirror_image
+  WearMerged/0  dup 0.16 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/1  dup 0.07 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/2  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/3  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/4  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/5  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  WearMerged/6  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  WearMerged/7  dup 0.06 hash 0.00 (tex true, nm false, emis false, shading 1, next false)
+  moonshard_dagger/0  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/1  dup 0.06 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/2  dup 0.05 hash 0.00 (tex false, nm false, emis false, shading 1, next false)
+  moonshard_dagger/3  dup 0.05 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+  moonshard_dagger/4  dup 0.05 hash 0.00 (tex false, nm false, emis true, shading 1, next false)
+SPAWNOP2 mirror_image ensure_local 18.62 ms, hero.set_opacity 0.02 ms
+SPAWNOP mirror_image rep 0 set_opacity 0.03 ms (14 local materials, previous copy none)
+SPAWN mirror_image           persona=true  new 0.07  add/_ready 23.98  first anim advance 0.55  skeleton 0.01  next 2 frames 18.9 ms | visual alone 4.86 (outfit 1.97) set_opacity 0.03
+SPAWN baseline 2 frames 8.7 ms
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

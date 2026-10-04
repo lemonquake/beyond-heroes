@@ -42,6 +42,7 @@ var debug_gold_mult := 1.0            # gold from kills
 var debug_min_drop := -1              # drops are at least this rarity (-1 = off)
 
 const AUTOSAVE_INTERVAL := 120.0
+const AUTOSAVE_GRACE := 60.0
 
 func _ready() -> void:
 	_loading = LoadingScreen.new()
@@ -62,9 +63,13 @@ func _process(delta: float) -> void:
 		hero.play_time += delta
 		OwnGuild.tick(hero, delta)
 		_autosave_t += delta
-		if _autosave_t >= AUTOSAVE_INTERVAL and not travelling and player and (player as Player) and (player as Player).alive:
+		# bh-037: once due, the autosave waits (up to AUTOSAVE_GRACE) for a moment the hero stands still: gathering a big
+		# hero still takes a few ms on this thread, and one late frame is invisible when nothing on screen moves
+		var pl := player as Player
+		var still: bool = pl != null and pl._still_t > 0.3
+		if _autosave_t >= AUTOSAVE_INTERVAL and not travelling and pl and pl.alive and (still or _autosave_t >= AUTOSAVE_INTERVAL + AUTOSAVE_GRACE):
 			_autosave_t = 0.0
-			save_now()
+			save_now(true)
 		# the inn's Well Rested bonus ends: refresh derived stats once
 		var r := hero.is_rested()
 		if r != _was_rested:
@@ -205,17 +210,26 @@ func _end_player() -> void:
 		player.queue_free()
 	player = null
 
-func save_now() -> bool:
+## `background` (the autosave, bh-037): the file is written on a worker thread; "Game saved" shows when it is done.
+func save_now(background := false) -> bool:
 	if hero == null:
 		return false
 	TempoParty.sync_all()
 	if Official.active:
 		Official.queue_save(hero)
 		return false # Server acknowledgement arrives asynchronously; never report a queued save as durable.
+	if background:
+		if not SaveSystem.background_saved.is_connected(_on_background_saved):
+			SaveSystem.background_saved.connect(_on_background_saved)
+		return SaveSystem.save_hero(hero, save_slot, true)
 	var ok := SaveSystem.save_hero(hero, save_slot)
 	if ok:
 		Events.notify.emit("Game saved", &"save")
 	return ok
+
+func _on_background_saved(ok: bool) -> void:
+	if ok:
+		Events.notify.emit("Game saved", &"save")
 
 # ---- Maps -----------------------------------------------------------------------------------------------------
 

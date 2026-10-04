@@ -90,10 +90,10 @@
   {
     "class": "mage",
     "enemy_hp": 66,
-    "hit": 24,
-    "hits_to_kill": 2.7,
+    "hit": 27,
+    "hits_to_kill": 2.4,
     "level": 5,
-    "skill_hit": 42,
+    "skill_hit": 46,
     "weapon": "pilgrims_staff",
     "weapon_max": 18,
     "weapon_min": 9
@@ -101,10 +101,10 @@
   {
     "class": "mage",
     "enemy_hp": 205,
-    "hit": 76,
-    "hits_to_kill": 2.7,
+    "hit": 83,
+    "hits_to_kill": 2.5,
     "level": 10,
-    "skill_hit": 82,
+    "skill_hit": 88,
     "weapon": "storm_staff",
     "weapon_max": 42,
     "weapon_min": 24
@@ -112,10 +112,10 @@
   {
     "class": "mage",
     "enemy_hp": 472,
-    "hit": 197,
-    "hits_to_kill": 2.4,
+    "hit": 211,
+    "hits_to_kill": 2.2,
     "level": 15,
-    "skill_hit": 162,
+    "skill_hit": 173,
     "weapon": "storm_staff",
     "weapon_max": 76,
     "weapon_min": 44
@@ -123,10 +123,10 @@
   {
     "class": "mage",
     "enemy_hp": 920,
-    "hit": 306,
-    "hits_to_kill": 3.0,
+    "hit": 325,
+    "hits_to_kill": 2.8,
     "level": 20,
-    "skill_hit": 270,
+    "skill_hit": 287,
     "weapon": "frost_staff",
     "weapon_max": 118,
     "weapon_min": 71
@@ -134,10 +134,10 @@
   {
     "class": "mage",
     "enemy_hp": 1773,
-    "hit": 590,
-    "hits_to_kill": 3.0,
+    "hit": 623,
+    "hits_to_kill": 2.8,
     "level": 25,
-    "skill_hit": 419,
+    "skill_hit": 443,
     "weapon": "depth_glowcap_crook",
     "weapon_max": 211,
     "weapon_min": 114
@@ -145,10 +145,10 @@
   {
     "class": "mage",
     "enemy_hp": 3140,
-    "hit": 762,
-    "hits_to_kill": 4.1,
+    "hit": 800,
+    "hits_to_kill": 3.9,
     "level": 30,
-    "skill_hit": 542,
+    "skill_hit": 569,
     "weapon": "depth_tidal_forkstaff",
     "weapon_max": 261,
     "weapon_min": 139
@@ -156,10 +156,10 @@
   {
     "class": "mage",
     "enemy_hp": 10759,
-    "hit": 1732,
-    "hits_to_kill": 6.2,
+    "hit": 1778,
+    "hits_to_kill": 6.1,
     "level": 45,
-    "skill_hit": 1022,
+    "skill_hit": 1050,
     "weapon": "depth_thornseed_branchstaff",
     "weapon_max": 468,
     "weapon_min": 254
@@ -167,10 +167,10 @@
   {
     "class": "mage",
     "enemy_hp": 27531,
-    "hit": 6344,
+    "hit": 6443,
     "hits_to_kill": 4.3,
     "level": 60,
-    "skill_hit": 1746,
+    "skill_hit": 1775,
     "weapon": "depth_dawnspire_staff",
     "weapon_max": 898,
     "weapon_min": 486
@@ -266,10 +266,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 66,
-    "hit": 8,
-    "hits_to_kill": 7.9,
+    "hit": 9,
+    "hits_to_kill": 7.5,
     "level": 5,
-    "skill_hit": 16,
+    "skill_hit": 17,
     "weapon": "cutpurse_knife",
     "weapon_max": 10,
     "weapon_min": 6
@@ -277,10 +277,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 205,
-    "hit": 22,
-    "hits_to_kill": 9.4,
+    "hit": 27,
+    "hits_to_kill": 7.7,
     "level": 10,
-    "skill_hit": 42,
+    "skill_hit": 50,
     "weapon": "shadow_kris",
     "weapon_max": 23,
     "weapon_min": 12
@@ -288,10 +288,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 472,
-    "hit": 66,
-    "hits_to_kill": 7.2,
+    "hit": 84,
+    "hits_to_kill": 5.6,
     "level": 15,
-    "skill_hit": 125,
+    "skill_hit": 160,
     "weapon": "kukri",
     "weapon_max": 43,
     "weapon_min": 25
@@ -299,10 +299,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 920,
-    "hit": 103,
-    "hits_to_kill": 9.0,
+    "hit": 129,
+    "hits_to_kill": 7.2,
     "level": 20,
-    "skill_hit": 195,
+    "skill_hit": 244,
     "weapon": "aether_stiletto",
     "weapon_max": 64,
     "weapon_min": 33
@@ -310,10 +310,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 1773,
-    "hit": 177,
-    "hits_to_kill": 10.0,
+    "hit": 216,
+    "hits_to_kill": 8.2,
     "level": 25,
-    "skill_hit": 337,
+    "skill_hit": 411,
     "weapon": "depth_rootfang_skinner",
     "weapon_max": 108,
     "weapon_min": 66
@@ -321,10 +321,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 3140,
-    "hit": 233,
-    "hits_to_kill": 13.4,
+    "hit": 284,
+    "hits_to_kill": 11.0,
     "level": 30,
-    "skill_hit": 444,
+    "skill_hit": 540,
     "weapon": "depth_keelhook_knife",
     "weapon_max": 136,
     "weapon_min": 79
@@ -332,10 +332,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 10759,
-    "hit": 495,
-    "hits_to_kill": 21.7,
+    "hit": 607,
+    "hits_to_kill": 17.7,
     "level": 45,
-    "skill_hit": 940,
+    "skill_hit": 1154,
     "weapon": "depth_briar_talon",
     "weapon_max": 230,
     "weapon_min": 137
@@ -343,10 +343,10 @@
   {
     "class": "shadowblade",
     "enemy_hp": 27531,
-    "hit": 1234,
-    "hits_to_kill": 22.3,
+    "hit": 1494,
+    "hits_to_kill": 18.4,
     "level": 60,
-    "skill_hit": 2344,
+    "skill_hit": 2838,
     "weapon": "depth_dawnthorn_knife",
     "weapon_max": 439,
     "weapon_min": 266

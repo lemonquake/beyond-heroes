@@ -1,0 +1,70 @@
+{
+  "avg_awake": 17.0,
+  "avg_cpu_render": 0.95,
+  "avg_draws": 779.39,
+  "avg_fps": 276.4,
+  "avg_gpu": 1.73,
+  "avg_objects": 2034.16,
+  "avg_phys": 4.06,
+  "avg_proc": 9.15,
+  "avg_steps": 0.22,
+  "drawn_speed_unevenness": 0.718,
+  "drawn_still_while_walking": 0,
+  "frames": 8293,
+  "hero_moving_frames": 1482,
+  "hero_still_frames": 6811,
+  "lite": true,
+  "low1_fps": 93.8,
+  "map": "dg_sump_1",
+  "max_ms": 25.6,
+  "median_ms": 3.36,
+  "minimap_renders": 7,
+  "multi_step_frames": 0,
+  "nodes_end": 5068,
+  "nodes_start": 5063,
+  "over_17ms": 1,
+  "over_25ms": 1,
+  "over_33ms": 0,
+  "over_50ms": 0,
+  "p99_ms": 9.16,
+  "particles_end": 54,
+  "particles_start": 44,
+  "seconds": 30.0,
+  "spike_causes": {
+    "fades": 0,
+    "lights": 0,
+    "minimap": 0,
+    "multi_step": 0,
+    "nodes_added": 1,
+    "pipelines": 0
+  },
+  "spikes": [
+    {
+      "added": {
+        "Control(status_icon.gd)": 3
+      },
+      "awake": 15,
+      "cpu_render": 0.8,
+      "fades": 0,
+      "frame": 25.6,
+      "gpu": 1.9,
+      "lights_switched": 0,
+      "minimap": false,
+      "origins": [
+        "hud.gd:877 _update_target < hud.gd:762 _process"
+      ],
+      "phases": "pre>post 3.0, phys>proc 2.3",
+      "phys": 11.0,
+      "pipelines": 0,
+      "pos": "26,4.0,-22",
+      "proc": 6.0,
+      "steps": 1,
+      "stop": "random_1",
+      "t_ms": 28190
+    }
+  ],
+  "stuck": 1,
+  "vsync": false,
+  "walking_frames": 6778,
+  "zero_step_frames": 6493
+}

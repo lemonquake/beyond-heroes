@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Official Beyond Heroes game server listening; maximum 12 players.
+ERROR: Unable to send packet on channel 0, max channels: 0
+   at: send (modules/enet/enet_packet_peer.cpp:64)

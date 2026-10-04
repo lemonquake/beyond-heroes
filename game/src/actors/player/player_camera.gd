@@ -125,10 +125,11 @@ func _process(delta: float) -> void:
 		_apply_first_person()
 		return
 	dist = lerpf(dist, _dist_target, 1.0 - exp(-10.0 * delta))
-	var want := target.global_position + Vector3.UP * 1.1
+	var tp := _target_pos()
+	var want := tp + Vector3.UP * 1.1
 	if target.get("aim_point") != null:
 		var ap: Vector3 = target.aim_point
-		var lean := (ap - target.global_position) * LOOK_AHEAD
+		var lean := (ap - tp) * LOOK_AHEAD
 		lean.y = 0.0
 		if lean.length() > MAX_LOOK_AHEAD:
 			lean = lean.normalized() * MAX_LOOK_AHEAD
@@ -140,6 +141,14 @@ func _process(delta: float) -> void:
 	if _fade_timer <= 0.0:
 		_fade_timer = 0.1
 		_update_occlusion()
+
+## bh-037: where the hero is drawn this frame (between its last two physics steps, CharacterVisual.smoothed_body_transform).
+## Following the raw body made the camera step at 60 Hz on a faster screen.
+func _target_pos() -> Vector3:
+	var v = target.get(&"visual")
+	if v is CharacterVisual and is_instance_valid(v) and (v as CharacterVisual).smooth_motion:
+		return (v as CharacterVisual).smoothed_body_transform().origin
+	return target.global_position
 
 func _apply(_delta: float) -> void:
 	var off := offset_dir() * dist
@@ -155,7 +164,7 @@ func _apply(_delta: float) -> void:
 
 func _apply_first_person() -> void:
 	var flat := Vector3(-sin(fp_yaw), 0.0, -cos(fp_yaw))
-	var pos: Vector3 = target.global_position + Vector3.UP * EYE + flat * EYE_FORWARD
+	var pos: Vector3 = _target_pos() + Vector3.UP * EYE + flat * EYE_FORWARD
 	if _trauma > 0.0 and not Settings.reduced_motion:
 		var s := _trauma * _trauma * 0.25
 		pos += Vector3(_noise.get_noise_2d(_t * 23.0, 1.0), _noise.get_noise_2d(_t * 23.0, 50.0), 0.0) * SHAKE_MAX_OFFSET * s

@@ -837,7 +837,7 @@ func _choose_attack() -> Dictionary:
 
 func _attack_request(a: Dictionary) -> DamageRequest:
 	var req := DamageRequest.new()
-	req.kind = DamageRequest.Kind.ATTACK if a.kind in ["melee", "dash", "charge"] else DamageRequest.Kind.SPELL
+	req.kind = DamageRequest.Kind.ATTACK if String(a.get("kind", "")) in ["melee", "dash", "charge"] else DamageRequest.Kind.SPELL
 	req.attacker = stats
 	req.use_weapon = false
 	var rr := EnemyStats.attack_range(def, stats, float(a.get("mult", 1.0)))
@@ -1131,7 +1131,7 @@ func _plant_buds(a: Dictionary) -> void:
 		return
 	var alive := get_tree().get_nodes_in_group(&"rot_bud").filter(func(b): return is_instance_valid(b) and (b as Enemy).alive)
 	var counts: Array = a.get("count_by_phase", [int(a.get("count", 2))])
-	var want := mini(int(counts[clampi(phase - 1, 0, counts.size() - 1)]), int(a.get("max_alive", 3)) - alive.size())
+	var want := mini(int(counts[clampi(phase - 1, 0, counts.size() - 1)]), int(a.get("max_alive", 3)) - alive.size() - int(_slot_pending.get(&"rot_bud", 0)))
 	var spots := []
 	var tries := 0
 	while spots.size() < want and tries < 40:
@@ -1146,12 +1146,8 @@ func _plant_buds(a: Dictionary) -> void:
 		if get_tree().get_nodes_in_group(&"rot_patch").any(func(h): return (h as Node3D).global_position.distance_to(p) < 5.0):
 			continue
 		spots.append(p)
-	for p in spots:
-		var b := Spawner.spawn_enemy(get_parent(), bdef, maxi(1, level - 2), [], CombatQuery.ground_at(get_world_3d(), p), difficulty)
-		b.add_to_group(&"rot_bud")
-		b.set_meta(&"bud_req", _attack_request(a))
-		b.set_meta(&"bud_mother", self)
-		FX.spawn(VFXLib.particles(Color(0.55, 0.85, 0.2, 0.8), 24, 0.8, true, 0.5, 3.0, 60.0, Vector3(0, 2, 0), 0.6), p)
+	for sp in spots:                            # bh-037: each bud in its own spawn slot
+		_in_spawn_slot(&"rot_bud", _bud_one.bind(bdef, CombatQuery.ground_at(get_world_3d(), sp), a))
 	if not spots.is_empty():
 		Audio.play_at(&"dark_cast", global_position)
 
@@ -1163,10 +1159,52 @@ func _summon(a: Dictionary) -> void:
 		var ang := TAU * float(i) / float(a.get("count", 2))
 		var p := global_position + Vector3(cos(ang), 0, sin(ang)) * 4.0
 		p = CombatQuery.reachable_point(get_world_3d(), global_position, p)
-		var e := Spawner.spawn_enemy(get_parent(), edef, maxi(1, level - 2), [], CombatQuery.ground_at(get_world_3d(), p), difficulty)
-		e.alert_to(target.global_position if target else global_position)
-		FX.spawn(VFXLib.particles(Color(0.5, 0.2, 0.8, 0.8), 24, 0.8, true, 0.5, 3.0, 60.0, Vector3(0, 2, 0), 0.6), p)
+		p = CombatQuery.ground_at(get_world_3d(), p)
+		_in_spawn_slot(edef.id, _summon_one.bind(edef, p))
 	Audio.play_at(&"dark_cast", global_position)
+
+## bh-037: monsters called into a fight come one per spawn slot, SUMMON_STAGGER apart, across every caller (a weaver's
+## images, two weavers casting together, a nest and a rift...). A spawn costs ~7 ms on this thread (its body, outfit and
+## bar) plus a few ms in its first frames; a group in one frame stacked into 40-70 ms hitches. No spawn waits longer than
+## SPAWN_WAIT_MAX.
+const SUMMON_STAGGER := 0.06
+const SPAWN_WAIT_MAX := 0.5
+static var _spawn_slot_ms := 0
+
+## How long the next spawn waits for its slot (0 = now); takes the slot.
+static func spawn_wait() -> float:
+	var now := Time.get_ticks_msec()
+	var wait := mini(maxi(0, _spawn_slot_ms - now), int(SPAWN_WAIT_MAX * 1000.0))
+	_spawn_slot_ms = now + wait + int(SUMMON_STAGGER * 1000.0)
+	return wait / 1000.0
+
+var _slot_pending := {}               # kind -> spawns of this monster waiting for their slot (count toward its caps)
+
+func _in_spawn_slot(id: StringName, fn: Callable) -> void:
+	var w := spawn_wait()
+	if w <= 0.0:
+		fn.call()
+		return
+	_slot_pending[id] = int(_slot_pending.get(id, 0)) + 1
+	get_tree().create_timer(w, false).timeout.connect(func() -> void:
+		_slot_pending[id] = maxi(0, int(_slot_pending.get(id, 0)) - 1)
+		fn.call())
+
+func _bud_one(bdef: EnemyDef, p: Vector3, a: Dictionary) -> void:
+	if not alive or not is_inside_tree():
+		return
+	var b := Spawner.spawn_enemy(get_parent(), bdef, maxi(1, level - 2), [], p, difficulty)
+	b.add_to_group(&"rot_bud")
+	b.set_meta(&"bud_req", _attack_request(a))
+	b.set_meta(&"bud_mother", self)
+	FX.spawn(VFXLib.particles(Color(0.55, 0.85, 0.2, 0.8), 24, 0.8, true, 0.5, 3.0, 60.0, Vector3(0, 2, 0), 0.6), p)
+
+func _summon_one(edef: EnemyDef, p: Vector3) -> void:
+	if not alive or not is_inside_tree():
+		return
+	var e := Spawner.spawn_enemy(get_parent(), edef, maxi(1, level - 2), [], p, difficulty)
+	e.alert_to(target.global_position if target and is_instance_valid(target) else global_position)
+	FX.spawn(VFXLib.particles(Color(0.5, 0.2, 0.8, 0.8), 24, 0.8, true, 0.5, 3.0, 60.0, Vector3(0, 2, 0), 0.6), p)
 
 func _end_attack(completed: bool) -> void:
 	if visual and visual.current_action() == &"devour":
@@ -2116,7 +2154,7 @@ func _elite_tick(delta: float) -> void:
 			global_position = CombatQuery.ground_at(get_world_3d(), side)
 			Audio.play_at(&"blink", global_position)
 		if int(_elite_t) % 6 == 3 and int(_elite_t - delta) % 6 != 3 and stats.has_flag(&"aether_bolts"):
-			_fire({"id": &"aether_bolt", "mult": 0.6, "element": Elements.LIGHT, "count": 3, "spread": 30.0, "speed": 15.0, "range": 16.0, "projectile": "orb", "knockback": 1.0, "poise": 4.0})
+			_fire({"id": &"aether_bolt", "kind": "projectile", "mult": 0.6, "element": Elements.LIGHT, "count": 3, "spread": 30.0, "speed": 15.0, "range": 16.0, "projectile": "orb", "knockback": 1.0, "poise": 4.0})
 
 func _boss_phase_check() -> void:
 	if def.phases.is_empty() or _phase_lock > 0.0:

@@ -1,0 +1,60 @@
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+ABL awake monsters 35, enemies in tree 39
+ABL all_on 9.59 ms (55 groups) physics 8.98 ms/step
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+SCRIPT ERROR: Invalid access to property or key 'kind' on a base object of type 'Dictionary'.
+ABL   1.95 ms  script:enemy.gd                              x40
+ABL   0.70 ms  script:enemy_bar.gd                          x39
+ABL   0.68 ms  script:minimap.gd                            x1
+ABL   0.66 ms  script:game.gd                               x1
+ABL   0.55 ms  script:art_bar.gd                            x9
+ABL   0.54 ms  script:hud.gd                                x1
+ABL   0.45 ms  script:directions_panel.gd                   x1
+ABL   0.44 ms  script:ui_root.gd                            x1
+ABL   0.34 ms  script:flicker_light.gd                      x52
+ABL   0.29 ms  script:music_director.gd                     x1
+ABL   0.27 ms  script:character_visual.gd                   x38
+ABL   0.22 ms  script:tempo.gd                              x1
+ABL   0.22 ms  internal:AudioStreamPlayer3D                 x9
+ABL   0.22 ms  internal:AnimationTree                       x8
+ABL   0.21 ms  internal:Timer                               x1
+ABL   0.16 ms  script:orb.gd                                x2
+ABL   0.16 ms  script:tempo_bar.gd                          x1
+ABL   0.16 ms  script:fx.gd                                 x1
+ABL   0.12 ms  script:                                      x2
+ABL   0.10 ms  script:ambient_accents.gd                    x1
+ABL   0.06 ms  internal:AudioStreamPlayer                   x2
+ABL   0.05 ms  script:projectile.gd                         x2
+ABL   0.01 ms  script:tempo_frames.gd                       x1
+ABL  -0.02 ms  script:dev_tools.gd                          x1
+ABL  -0.04 ms  script:status_icon.gd                        x3

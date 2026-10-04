@@ -1,0 +1,6 @@
+TOGGLE particles_internal   on 13.75 ms  off 11.79 ms  (saves 1.96) runs on=[12.75, 13.748, 13.893] off=[11.383, 11.788, 13.169]
+TOGGLE particles_hidden     on 11.14 ms  off 11.69 ms  (saves -0.55) runs on=[11.09, 11.141, 12.574] off=[11.493, 11.691, 11.816]
+TOGGLE nav_agents           on 11.68 ms  off 11.79 ms  (saves -0.11) runs on=[11.64, 11.68, 12.409] off=[11.646, 11.792, 11.899]
+TOGGLE audio3d              on 11.48 ms  off 12.05 ms  (saves -0.57) runs on=[11.427, 11.481, 12.792] off=[11.212, 12.052, 13.204]
+TOGGLE anim                 on 12.62 ms  off 11.07 ms  (saves 1.55) runs on=[12.003, 12.616, 13.624] off=[10.428, 11.066, 11.152]
+TOGGLE bars                 on 10.41 ms  off 10.23 ms  (saves 0.18) runs on=[10.393, 10.407, 12.339] off=[10.143, 10.23, 11.294]

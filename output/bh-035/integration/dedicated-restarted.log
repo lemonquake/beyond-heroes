@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Official Beyond Heroes game server listening; maximum 12 players.
+NET_STATS players=0 sent_kbps=19.3 received_kbps=20.8 over=30s
+NET_STATS players=0 sent_kbps=67.4 received_kbps=81.0 over=30s
+NET_STATS players=0 sent_kbps=40.3 received_kbps=83.7 over=30s
+ERROR: Condition "!_is_active() || !peers.has(p_peer)" is true.
+   at: disconnect_peer (modules/enet/enet_multiplayer_peer.cpp:272)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://src/net/net.gd:485)

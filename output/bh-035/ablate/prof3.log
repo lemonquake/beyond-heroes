@@ -1,0 +1,47 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+SPIKE f=37 47.5 ms added={ "Control(status_icon.gd)": 2, "GPUParticles3D": 25, "MeshInstance3D": 8, "CharacterBody3D(enemy.gd)": 3, "CollisionShape3D": 3, "NavigationAgent3D": 3, "Node3D(character_visual.gd)": 3, "Node3D": 6, "PhysicalBoneSimulator3D": 3, "Skeleton3D": 3, "AnimationPlayer": 3, "AnimationTree": 3, "Node3D(enemy_bar.gd)": 3 }
+SPIKE f=38 41.2 ms added={ "MeshInstance3D": 2, "Node3D(projectile.gd)": 1, "Node3D": 2 }
+SPIKE f=39 43.8 ms added={ "MeshInstance3D(weapon_trail.gd)": 1, "MeshInstance3D": 12, "CharacterBody3D(enemy.gd)": 2, "CollisionShape3D": 2, "NavigationAgent3D": 2, "Node3D(character_visual.gd)": 2, "Node3D": 6, "PhysicalBoneSimulator3D": 2, "Skeleton3D": 2, "AnimationPlayer": 2, "AnimationTree": 2, "BoneAttachment3D": 4, "Node3D(enemy_bar.gd)": 2, "GPUParticles3D": 5 }
+SPIKE f=40 45.4 ms added={ "MeshInstance3D": 3, "GPUParticles3D": 8 }
+SPIKE f=133 40.4 ms added={ "MeshInstance3D": 10, "Node3D": 11, "GPUParticles3D": 16, "Timer": 10, "Decal": 2, "Node3D()": 1 }
+SPIKE f=156 41.9 ms added={ "Control(status_icon.gd)": 5, "MeshInstance3D": 3, "Node3D": 2, "GPUParticles3D": 5, "Timer": 2, "Decal": 1 }
+SPIKE f=184 42.8 ms added={ "MeshInstance3D": 1 }
+SPIKE f=190 65.0 ms added={  }
+SPIKE f=191 44.3 ms added={  }
+SPIKE f=193 62.2 ms added={ "Node3D(projectile.gd)": 1, "Node3D": 4, "MeshInstance3D": 7, "GPUParticles3D": 1, "OmniLight3D": 1, "Timer": 1 }
+SPIKE f=194 53.7 ms added={ "Node3D": 2, "GPUParticles3D": 4, "Timer": 2, "MeshInstance3D": 1 }
+SPIKE f=195 46.9 ms added={ "Control(status_icon.gd)": 6, "Node3D(projectile.gd)": 1, "Node3D": 1, "MeshInstance3D": 2, "GPUParticles3D": 1, "OmniLight3D": 1 }
+SPIKE f=196 45.8 ms added={ "Node3D()": 1, "MeshInstance3D": 1 }
+SPIKE f=198 42.0 ms added={  }
+SPIKE f=205 43.1 ms added={  }
+SPIKE f=213 41.9 ms added={ "Node3D(projectile.gd)": 1, "Node3D": 2, "MeshInstance3D": 1 }
+SPIKE f=214 40.6 ms added={ "Node3D(lob.gd)": 1, "Node3D": 1, "MeshInstance3D": 1, "GPUParticles3D": 2 }
+SPIKE f=237 47.3 ms added={ "Node3D(projectile.gd)": 2, "Node3D": 4, "MeshInstance3D": 2 }
+SPIKE f=241 47.4 ms added={ "Control(status_icon.gd)": 4 }
+SPIKE f=244 45.7 ms added={  }
+SPIKE f=245 42.1 ms added={  }
+SPIKE f=250 47.6 ms added={ "MeshInstance3D": 4, "Node3D": 1 }
+SPIKE f=251 41.7 ms added={ "Control(status_icon.gd)": 9, "MeshInstance3D": 1, "GPUParticles3D": 3 }
+SPIKE f=253 41.7 ms added={  }
+SPIKE f=256 50.9 ms added={ "MeshInstance3D": 1, "GPUParticles3D": 3 }
+SPIKE f=257 41.3 ms added={  }
+SPIKE f=263 43.7 ms added={ "Node3D(lob.gd)": 1, "Node3D": 1, "MeshInstance3D": 1, "GPUParticles3D": 2 }
+SPIKE f=273 48.1 ms added={ "Control(status_icon.gd)": 5 }
+SPIKE f=282 48.9 ms added={ "Control(status_icon.gd)": 7, "MeshInstance3D": 5, "Node3D": 6, "GPUParticles3D": 6, "Timer": 4, "Node3D(projectile.gd)": 1 }
+SPIKE f=293 41.7 ms added={  }
+PSTEPS physics steps per frame 1.82
+EPROF music=0.0ms/frame, game=0.0ms/frame, fx=0.0ms/frame, perf=0.0ms/frame, v_process=0.3ms/frame, bar=0.3ms/frame, hud=0.4ms/frame, minimap=0.1ms/frame, orb=0.0ms/frame, party=0.0ms/frame, n_slide=0.2ms/frame, player_phys=1.0ms/frame, e_pre=1.5ms/frame, e_action=0.2ms/frame, e_think=0.4ms/frame, e_steer=1.8ms/frame, e_move=6.2ms/frame, e_loco=0.9ms/frame, e_sound=0.1ms/frame, e_TOTAL=12.5ms/frame, tempo_phys=0.5ms/frame, n_rest=0.0ms/frame
+STRESS {"avg":30.36,"max":64.99,"median":31.65,"p95":44.34,"p99":53.7,"samples":300} gpu={"avg":6.46,"median":5.94,"p95":10.78,"samples":300} process={"avg":25.6,"median":19.72,"p95":36.26,"samples":300} physics={"avg":16.18,"median":14.23,"p95":25.03,"samples":300} nav={"avg":0.01,"median":0.01,"p95":0.02,"samples":300} engaged=50 map=ruined_forest lite=false
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/compressed_texture.cpp:464)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

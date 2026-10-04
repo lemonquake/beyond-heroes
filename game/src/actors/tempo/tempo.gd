@@ -120,6 +120,7 @@ func _ready() -> void:
 	add_child(agent)
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
+	visual.ally_lod = not (self is ArenaFighter)     # bh-037: efficiency mode may pose far companions at a coarser rate
 	add_child(visual)
 	# bh-031: a Tempo is the hero's own body with a face of its own (Persona.setup_tempo)
 	# (a fellow hero — QuakeAlly — already asks for the hero body and dresses it in that hero's own look)
@@ -318,8 +319,8 @@ func _regen(delta: float) -> void:
 	var mr := stats.get_stat(&"mana_regen")
 	if status.has(&"regen"):
 		hr += status.magnitude(&"regen")
-	var near := _nearest_enemy_dist()
-	if mode == Mode.RETREAT and near > 6.0:
+	# bh-037: only a retreat reads the nearest enemy (it scanned every monster on every physics step for every companion)
+	if mode == Mode.RETREAT and _nearest_enemy_dist() > 6.0:
 		_rest_t += delta
 		if _rest_t > 0.6:
 			hr += max_hp() * _rest_regen()

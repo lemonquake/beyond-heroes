@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Sending 9116 bytes unreliably which is above the MTU (1392), this will result in higher packet loss
+   at: put_packet (modules/enet/enet_multiplayer_peer.cpp:365)
+   GDScript backtrace (most recent call first):
+       [0] _hostile (res://tests/tools/net_probe_world.gd:252)
+       [1] _enter (res://tests/tools/net_probe_world.gd:68)
+       [2] _wait_until (res://tests/tools/net_probe_world.gd:33)
+WORLD_PROBE HOSTILE hostile_a survived; roster name 'World_a' (honest 'World_a')
+WORLD_PROBE PASS hostile_a
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

@@ -1,0 +1,26 @@
+A first run per scenario is a warm-up for the disk cache and is kept in the folder but not summarised separately.
+  combat    pc-low  r1:    21 s
+  combat    mobile  r1:    26 s
+  combat-12 pc-low  r1:    17 s
+  combat-12 mobile  r1:    16 s
+  forest    pc-low  r1:    18 s
+  forest    mobile  r1:    18 s
+  town      pc-low  r1:    17 s
+  town      mobile  r1:    17 s
+  dungeon   pc-low  r1:    16 s
+  dungeon   mobile  r1:    17 s
+  agdao     pc-low  r1:    20 s
+  agdao     mobile  r1:    22 s
+  combat    pc-low  r2:    22 s
+  combat    mobile  r2:    26 s
+  combat-12 pc-low  r2:    18 s
+  combat-12 mobile  r2:    17 s
+  forest    pc-low  r2:    18 s
+  forest    mobile  r2:    19 s
+  town      pc-low  r2:    17 s
+  town      mobile  r2:    17 s
+  dungeon   pc-low  r2:    16 s
+  dungeon   mobile  r2:    17 s
+  agdao     pc-low  r2:    21 s
+  agdao     mobile  r2:    22 s
+summary: A:\Python\beyond-heroes\output\bh-035\perf\final\summary.json

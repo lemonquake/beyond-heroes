@@ -1,0 +1,6 @@
+COST scripts 3.10 ms/step, engine rest 5.89 ms/step
+COST census { "StaticBody3D": 346, "CollisionShape3D": 388, "GPUParticles3D": 358, "Area3D": 2, "Area3D_monitoring": 2, "CharacterBody3D": 40, "PhysicalBoneSimulator3D": 28, "NavigationAgent3D": 39 }
+COST experiment base step 116.39 ms
+COST without GPUParticles3D internal physics (375): 38.51 ms (base again 12.40)
+COST without NavigationAgent3D internal physics (38): 15.18 ms (base again 24.36)
+COST without AudioStreamPlayer3D internal physics (21): 14.14 ms (base again 14.78)
