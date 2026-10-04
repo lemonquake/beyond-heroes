@@ -1,5 +1,5 @@
 extends MapBuilder
-## MAP — The Bridge of Death (bh-029; levels 42–46). "Three hundred paces over nothing."
+## MAP — The Bridge of Death (bh-029; levels 62–66). "Three hundred paces over nothing."
 ##
 ## The Wirewrights' great span over the gorge between the Glasswire Barrens and the Heart Citadel. A cliff ledge in the
 ## south (the Bridge Road from the Barrens) ends at the south gatehouse; from there 29 deck segments run end to end,
@@ -36,12 +36,12 @@ const WARD := Color(1.0, 1.0, 1.0)
 const GLYPH := Color(0.3, 0.95, 0.85)
 ## Camps on the span: [id, z, enemies, count, levels, elite chance] (the road near the south gate stays quiet).
 const CAMPS := [
-	["span_south", 102.0, [&"span_warden", &"wire_leaper"], 3, Vector2i(42, 43), 0.1],
-	["span_first_ward", 62.0, [&"ward_eye", &"span_warden", &"wire_leaper"], 4, Vector2i(43, 44), 0.12],
-	["span_middle", 24.0, [&"wire_leaper", &"wire_leaper", &"ward_eye"], 4, Vector2i(44, 45), 0.15],
-	["span_second_ward", -22.0, [&"span_warden", &"ward_eye", &"span_warden"], 5, Vector2i(44, 45), 0.18],
-	["span_north", -54.0, [&"span_warden", &"wire_leaper", &"ward_eye"], 5, Vector2i(45, 46), 0.2],
-	["span_last", -88.0, [&"ward_eye", &"ward_eye", &"wire_leaper"], 4, Vector2i(45, 46), 0.22],
+	["span_south", 102.0, [&"span_warden", &"wire_leaper"], 3, Vector2i(62, 63), 0.1],
+	["span_first_ward", 62.0, [&"ward_eye", &"span_warden", &"wire_leaper"], 4, Vector2i(63, 64), 0.12],
+	["span_middle", 24.0, [&"wire_leaper", &"wire_leaper", &"ward_eye"], 4, Vector2i(64, 65), 0.15],
+	["span_second_ward", -22.0, [&"span_warden", &"ward_eye", &"span_warden"], 5, Vector2i(64, 65), 0.18],
+	["span_north", -54.0, [&"span_warden", &"wire_leaper", &"ward_eye"], 5, Vector2i(65, 66), 0.2],
+	["span_last", -88.0, [&"ward_eye", &"ward_eye", &"wire_leaper"], 4, Vector2i(65, 66), 0.22],
 ]
 
 func compose() -> void:

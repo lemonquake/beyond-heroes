@@ -327,11 +327,13 @@ def obsidian(seed=2903):
     joint = (1 - sstep(gap - 0.5, gap + 3.5, edge)) * (1 - copper)
     h = np.clip(0.3 + sstep(gap, gap + 18, edge) * (0.62 + 0.04 * cloud) - 0.05 * bowl + 0.025 * shell
                 - frac * 0.06 - copper * 0.22, 0, 1)
-    alb = mul(fill([0.058, 0.055, 0.064]), tone[i1] * (1 + 0.15 * cloud + 0.05 * fine))
-    alb = lerp(alb, col([0.19, 0.18, 0.21]), np.clip(shell * 0.7 + frac * 0.5, 0, 1))
+    # bh-038: lifted from near-black (mean ~0.07): in the Barrens' dusk light the flags rendered as flat black
+    # holes with no texture. Still the darkest stone on Zarael, but the shells and fractures now read.
+    alb = mul(fill([0.15, 0.142, 0.17]), tone[i1] * (1 + 0.15 * cloud + 0.05 * fine))
+    alb = lerp(alb, col([0.36, 0.34, 0.41]), np.clip(shell * 0.7 + frac * 0.5, 0, 1))
     sheen = sstep(1.0, 2.2, noise(seed + 7, 2.0, 5)) * 0.2
-    alb = lerp(alb, col([0.15, 0.13, 0.16]), sheen)
-    alb = lerp(alb, col([0.035, 0.03, 0.03]), joint)
+    alb = lerp(alb, col([0.3, 0.27, 0.33]), sheen)
+    alb = lerp(alb, col([0.07, 0.06, 0.065]), joint)
     alb = lerp(alb, col([0.42, 0.22, 0.11]) * (1 + 0.12 * fine[..., None]), copper * 0.9)
     rough = 0.07 + 0.03 * sstep(-1, 1, cloud) + frac * 0.1 + joint * 0.6 + copper * 0.3
     return alb, h, rough, 4.0

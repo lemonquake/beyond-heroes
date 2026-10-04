@@ -25,7 +25,7 @@ const THEMES := {
 			"fog": Color(0.12, 0.06, 0.03), "fog_density": 0.004, "fog_height": 0.5, "fog_height_density": 0.12,
 			"sun": Color(1.0, 0.72, 0.45), "sun_energy": 0.5, "sun_rot": Vector3(-58, 30, 0), "glow": 1.15,
 			"exposure": 1.08, "contrast": 1.12, "saturation": 0.92},
-		"stone": {"BH_Stone": ["obsidian", Color(0.8, 0.78, 0.8)], "BH_StoneDark": ["obsidian", Color(0.42, 0.38, 0.38)]},
+		"stone": {"BH_Stone": ["obsidian", Color(0.8, 0.78, 0.8)], "BH_StoneDark": ["obsidian", Color(0.62, 0.57, 0.58)]},
 		"liquid": [Color(1.0, 0.45, 0.12), Color(0.12, 0.02, 0.0), 2.2], "mist": Color(1.0, 0.6, 0.35),
 		"glow": Color(1.0, 1.0, 1.0), "torch": Color(1.0, 0.65, 0.35), "rune": Color(1.0, 1.0, 1.0),
 	},
@@ -66,7 +66,7 @@ const GATE_DRESS := {
 
 const LIST := {
 	&"jade_sepulchre": {
-		"name": "The Jade Sepulchre", "theme": &"jade", "orb": &"sora", "material": &"aether_shard", "span": [33, 40],
+		"name": "The Jade Sepulchre", "theme": &"jade", "orb": &"sora", "material": &"aether_shard", "span": [73, 80],
 		"blurb": "The Wirewright kings sleep here in jade, where the first of the Heartwire's great lines crosses. They did not sleep quietly before the chains came; now they do not sleep at all.",
 		"pools": {"a": [&"jade_sleeper", &"serpent_oracle", &"sepulchre_beetle", &"jade_sleeper"],
 			"b": [&"jade_guardian", &"glyphbound_warrior", &"coil_shaman", &"serpent_oracle"],
@@ -81,7 +81,7 @@ const LIST := {
 			"lore": "The king's last guard picked up the crown when Quorrath fell. It does not fit. It wears it anyway."},
 	},
 	&"obsidian_engine": {
-		"name": "The Obsidian Engine", "theme": &"obsidian", "orb": &"sol", "material": &"ember_core", "span": [39, 46],
+		"name": "The Obsidian Engine", "theme": &"obsidian", "orb": &"sol", "material": &"ember_core", "span": [79, 86],
 		"blurb": "The machine halls where the Wirewrights spun the Heartwire's current up from the island's heat. The chain-priests stoked the furnaces until the glass ran.",
 		"pools": {"a": [&"stoker_thrall", &"shardcaster", &"relay_mote", &"wiresick_husk"],
 			"b": [&"obsidian_golem", &"arc_sentinel", &"chain_priest", &"shardcaster"],
@@ -96,7 +96,7 @@ const LIST := {
 			"lore": "Kalvex's last stoker climbed into the dead furnace to keep warm. Something in it caught."},
 	},
 	&"veinworks": {
-		"name": "The Veinworks", "theme": &"vein", "orb": &"luna", "material": &"shadow_silk", "span": [45, 53],
+		"name": "The Veinworks", "theme": &"vein", "orb": &"luna", "material": &"shadow_silk", "span": [85, 93],
 		"blurb": "Where the Wirewrights' tunnels reach the giant itself. The Heartwire runs here through bone, and the chains were driven into something that still has a pulse.",
 		"pools": {"a": [&"marrow_hound", &"gigas_spawn", &"heartwire_wraith", &"wiresick_husk"],
 			"b": [&"vein_knight", &"chain_bearer", &"chain_priest", &"gigas_spawn"],

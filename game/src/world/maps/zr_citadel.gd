@@ -1,5 +1,5 @@
 extends SettlementBuilder
-## MAP — The Heart Citadel (bh-029; levels 46–52). "The Dawn Engine."
+## MAP — The Heart Citadel (bh-029; levels 66–72). "The Dawn Engine."
 ##
 ## The Wirewrights' temple-fortress beyond the Bridge of Death, built on a stepped rise: an outer court behind the south
 ## gate, a middle terrace 4 m up and the Engine Plaza 8 m up, each held by a row of carved retaining blocks
@@ -23,16 +23,16 @@ const ARENA := Vector2(0.0, -28.0)       # the arena's centre (DataIsland hc_eng
 const WARD := Color(1.0, 1.0, 1.0)
 ## Camps: [id, x, z, enemies, count, levels, elite chance]; levels climb from the gate to the Engine.
 const CAMPS := [
-	["siege_west", -20.0, 66.0, [&"chain_bearer", &"chain_priest", &"leash_knight"], 4, Vector2i(46, 47), 0.1],
-	["siege_east", 21.0, 70.0, [&"leash_knight", &"chain_priest"], 3, Vector2i(46, 47), 0.1],
-	["court_west", -42.0, 42.0, [&"gigas_spawn", &"chain_bearer", &"chain_priest"], 4, Vector2i(47, 48), 0.12],
-	["court_east", 42.0, 40.0, [&"chain_bearer", &"chain_priest", &"heartwire_wraith"], 4, Vector2i(47, 48), 0.12],
-	["terrace_west", -32.0, 14.0, [&"leash_knight", &"chain_priest", &"heartwire_wraith"], 4, Vector2i(48, 49), 0.15],
-	["terrace_east", 32.0, 13.0, [&"gigas_spawn", &"chain_bearer", &"leash_knight"], 5, Vector2i(48, 49), 0.15],
-	["plaza_west", -44.0, -16.0, [&"heartwire_wraith", &"chain_priest", &"leash_knight"], 5, Vector2i(49, 50), 0.18],
-	["plaza_east", 44.0, -18.0, [&"leash_knight", &"chain_priest", &"gigas_spawn"], 5, Vector2i(49, 50), 0.18],
-	["abbot_camp_west", -40.0, -58.0, [&"gigas_spawn", &"heartwire_wraith", &"leash_knight"], 5, Vector2i(50, 52), 0.22],
-	["abbot_camp_east", 40.0, -58.0, [&"leash_knight", &"heartwire_wraith", &"chain_bearer"], 6, Vector2i(50, 52), 0.25],
+	["siege_west", -20.0, 66.0, [&"chain_bearer", &"chain_priest", &"leash_knight"], 4, Vector2i(66, 67), 0.1],
+	["siege_east", 21.0, 70.0, [&"leash_knight", &"chain_priest"], 3, Vector2i(66, 67), 0.1],
+	["court_west", -42.0, 42.0, [&"gigas_spawn", &"chain_bearer", &"chain_priest"], 4, Vector2i(67, 68), 0.12],
+	["court_east", 42.0, 40.0, [&"chain_bearer", &"chain_priest", &"heartwire_wraith"], 4, Vector2i(67, 68), 0.12],
+	["terrace_west", -32.0, 14.0, [&"leash_knight", &"chain_priest", &"heartwire_wraith"], 4, Vector2i(68, 69), 0.15],
+	["terrace_east", 32.0, 13.0, [&"gigas_spawn", &"chain_bearer", &"leash_knight"], 5, Vector2i(68, 69), 0.15],
+	["plaza_west", -44.0, -16.0, [&"heartwire_wraith", &"chain_priest", &"leash_knight"], 5, Vector2i(69, 70), 0.18],
+	["plaza_east", 44.0, -18.0, [&"leash_knight", &"chain_priest", &"gigas_spawn"], 5, Vector2i(69, 70), 0.18],
+	["abbot_camp_west", -40.0, -58.0, [&"gigas_spawn", &"heartwire_wraith", &"leash_knight"], 5, Vector2i(70, 72), 0.22],
+	["abbot_camp_east", 40.0, -58.0, [&"leash_knight", &"heartwire_wraith", &"chain_bearer"], 6, Vector2i(70, 72), 0.25],
 ]
 
 func compose() -> void:

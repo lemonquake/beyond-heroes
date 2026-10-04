@@ -75,8 +75,8 @@ func test_act_three_still_leads_on_salmonan_for_a_young_hero() -> void:
 	_flags(h, BEFORE_ZARAEL + ["boss_kethrax_defeated", "mq_kethrax_reported"])
 	h.progress.level = 8
 	eq(Objectives.current(h).id, "forest", "a level-8 hero is sent to the Hollow Warden first")
-	h.progress.level = 30
-	eq(Objectives.current(h).id, "zr_ship", "a level-30 hero is pointed at the ship")
+	h.progress.level = 50
+	eq(Objectives.current(h).id, "zr_ship", "a level-50 hero is pointed at the ship (bh-038: Zarael +20)")
 	h.progress.level = 8
 	h.current_map = &"agdao"
 	eq(Objectives.current(h).id, "zr_ship", "on Zarael the island's own quest leads")
@@ -158,7 +158,7 @@ func test_maps_and_routes() -> void:
 		ok(d != null, "%s is registered" % m)
 		ok(ResourceLoader.exists(d.builder), "%s has a builder" % m)
 		if m != &"agdao":
-			ok(d.level_min >= 30 and d.level_max <= 53, "%s levels within 30-53 (%d-%d)" % [m, d.level_min, d.level_max])
+			ok(d.level_min >= 50 and d.level_max <= 72, "%s levels within 50-72 (%d-%d)" % [m, d.level_min, d.level_max])
 	ok(DB.map_def(&"agdao").is_town, "Agdao is a safe town")
 	# the route from Wyman's camp to the Heart Citadel crosses the sea and every boundary
 	var h := _hero()
@@ -184,7 +184,7 @@ func test_three_vaults() -> void:
 		var d := DataDungeons.get_def(id)
 		eq(DataDungeons.floor_count(id), 7, "%s has seven floors" % id)
 		for lv in d.levels:
-			ok(int(lv[0]) >= 33 and int(lv[1]) <= 53, "%s floor levels within 33-53 (%s)" % [id, lv])
+			ok(int(lv[0]) >= 73 and int(lv[1]) <= 93, "%s floor levels within 73-93 (%s)" % [id, lv])
 		eq(DataDungeons.min_tier(id), 0, "%s has no tier lock" % id)
 		ok(DataZarael.is_zarael_map(DataDungeons.map_id(id, 1)), "%s counts as Zarael" % id)
 		eq(StringName(d.surface.map), (DataDungeonsZarael.GATES[id] as Dictionary).map, "%s gate on its map" % id)

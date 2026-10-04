@@ -196,7 +196,7 @@ func _update_occlusion() -> void:
 			var orig := {}
 			for s in mi.mesh.get_surface_count():
 				orig[s] = mi.get_surface_override_material(s)
-				mi.set_surface_override_material(s, MaterialLibrary.faded(mi.get_active_material(s)))
+				mi.set_surface_override_material(s, MaterialLibrary.see_through(mi.get_active_material(s)))
 			_faded[mi] = orig
 	for mi in _faded.keys():
 		if not still.has(mi):

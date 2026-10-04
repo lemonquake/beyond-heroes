@@ -50,7 +50,7 @@ const ENV := {
 	"BH_Starglass": ["", Color(0.72, 0.55, 1.0), 0.15, 0.0, 1.0, Color(0.7, 0.5, 1.0), 3.5],
 	"BH_Brass": ["", Color(0.78, 0.6, 0.3), 0.35, 0.95, 1.0, Color.BLACK, 0.0],
 	"BH_Coral": ["", Color(0.86, 0.46, 0.4), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
-	"BH_Basalt": ["basalt", Color(0.42, 0.4, 0.4), 0.9, 0.0, 0.5, Color.BLACK, 0.0],
+	"BH_Basalt": ["basalt", Color(0.78, 0.75, 0.75), 0.9, 0.0, 0.5, Color.BLACK, 0.0],     # bh-038: was 0.42 (read black)
 	"BH_Marble": ["marble", Color(0.9, 0.88, 0.86), 0.5, 0.0, 0.5, Color.BLACK, 0.0],
 	"BH_MushroomCap": ["", Color(0.42, 0.24, 0.36), 0.8, 0.0, 1.0, Color.BLACK, 0.0],
 	"BH_Fungus": ["", Color(0.84, 0.8, 0.66), 0.85, 0.0, 1.0, Color.BLACK, 0.0],
@@ -80,7 +80,9 @@ const ENV := {
 	"BH_GlyphStone": ["glyph_stone", Color(0.86, 0.8, 0.7), 0.88, 0.0, 0.5, Color.BLACK, 0.0],
 	"BH_GlyphStoneDark": ["glyph_stone", Color(0.5, 0.48, 0.42), 0.9, 0.0, 0.5, Color.BLACK, 0.0],
 	"BH_Jade": ["jade_stone", Color(0.62, 0.86, 0.68), 0.35, 0.0, 0.5, Color.BLACK, 0.0],
-	"BH_Obsidian": ["obsidian", Color(0.42, 0.4, 0.46), 0.22, 0.1, 0.5, Color.BLACK, 0.0],
+	# bh-038: obsidian and basalt are near-black textures; at a 0.42 tint they drew as untextured black holes in the
+	# Barrens dusk (glass growths, the Obsidian Engine's gate). Full tint keeps them the darkest stones, but textured.
+	"BH_Obsidian": ["obsidian", Color(0.96, 0.93, 1.0), 0.3, 0.1, 0.5, Color.BLACK, 0.0],
 	"BH_LimePlaster": ["lime_plaster", Color(0.9, 0.66, 0.4), 0.92, 0.0, 0.6, Color.BLACK, 0.0],
 	"BH_LimePlasterRed": ["lime_plaster", Color(0.66, 0.26, 0.18), 0.92, 0.0, 0.6, Color.BLACK, 0.0],
 	"BH_TerracePave": ["terrace_paving", Color(0.84, 0.8, 0.72), 0.9, 0.0, 0.4, Color.BLACK, 0.0],
@@ -446,6 +448,28 @@ static func _char_mat(nm: String, primary: Color) -> Material:
 	return m
 
 ## Dithered see-through variant used when geometry blocks the camera's view of the player.
+## bh-038: the follow camera's see-through copy of architecture hiding the hero (PlayerCamera's occlusion fade). Smoothly
+## blended: the dithered alpha-hash copy (faded) dropped 72% of the pixels at random, and on a roof or terrace seen
+## from above it crawled like static over the ground as the camera moved. Depth is still written, so a faded house
+## sorts its own walls and roof.
+static var _see_through := {}
+
+static func see_through(mat: Material) -> Material:
+	if mat == null:
+		return null
+	if _see_through.has(mat):
+		return _see_through[mat]
+	var f: Material = mat.duplicate()
+	if f is BaseMaterial3D:
+		var b := f as BaseMaterial3D
+		b.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		b.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+		b.albedo_color.a = 0.3
+	_see_through[mat] = f
+	return f
+
+## A see-through copy with dithered transparency (alpha hash): characters' mirror images, stealth and corpse decay
+## (CharacterVisual keeps it alive so their shader variant stays built).
 static func faded(mat: Material) -> Material:
 	if mat == null:
 		return null

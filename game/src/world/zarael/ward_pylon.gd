@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 func _strike(p: Node3D) -> void:
 	var vel: Vector3 = p.get("velocity") if "velocity" in p else Vector3.ZERO
 	var at := p.global_position + Vector3(vel.x, 0.0, vel.z) * 0.45
-	var level := Game.current_map.def.level_max if Game.current_map and Game.current_map.def else 44
+	var level := Game.current_map.def.level_max if Game.current_map and Game.current_map.def else 64
 	var dmg := CombatBudget.hero_hp_ref(level) * HIT
 	var req := DamageRequest.new()
 	req.kind = DamageRequest.Kind.ENVIRONMENT

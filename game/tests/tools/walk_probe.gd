@@ -498,7 +498,7 @@ func _fade_all(map: MapRoot, hero: Player) -> void:
 			var orig := {}
 			for si in mi.mesh.get_surface_count():
 				orig[si] = mi.get_surface_override_material(si)
-				mi.set_surface_override_material(si, MaterialLibrary.faded(mi.get_active_material(si)))
+				mi.set_surface_override_material(si, MaterialLibrary.see_through(mi.get_active_material(si)))
 			saved.append([mi, orig])
 		# stand the hero just south of the piece so the camera sees it, as when it hides the hero
 		hero.global_position = r.global_position + Vector3(0, 0.5, 4.0)

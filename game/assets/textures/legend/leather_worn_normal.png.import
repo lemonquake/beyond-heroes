@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6gck82rnxrh2"
-path="res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.ctex"
+path.s3tc="res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.s3tc.ctex"
+path.etc2="res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/legend/leather_worn_normal.png"
-dest_files=["res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.ctex"]
+dest_files=["res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.s3tc.ctex", "res://.godot/imported/leather_worn_normal.png-66b6432175ba369663040701db0b4e3d.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +25,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

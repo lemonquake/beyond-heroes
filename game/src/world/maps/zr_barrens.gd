@@ -1,5 +1,5 @@
 extends SettlementBuilder
-## MAP — The Glasswire Barrens (bh-029; Zarael, levels 36–42). "Where the Blackwire broke the ground."
+## MAP — The Glasswire Barrens (bh-029; Zarael, levels 56–62). "Where the Blackwire broke the ground."
 ##
 ## East of the Coilwood the trees give out on a red cracked plain. Where the Blackwire broke through, the ground split in
 ## long fissures of dark soil and violet glass grew out of them; they all run back to the fallen Wirewright colossus, face
@@ -34,19 +34,19 @@ const FISSURES := [
 const PADS := [[-40.0, 30.0, 22.0], [-70.0, -64.0, 10.0], [84.0, 40.0, 10.0], [52.0, -40.0, 18.0]]
 ## Encounter camps: [id, centre, radius, monsters, count, levels, elite chance]. Levels rise from the west road.
 const CAMPS := [
-	["gb_west_husks", Vector2(-96, -4), 5.0, [&"wiresick_husk", &"wiresick_husk", &"wiresick_husk", &"relay_mote"], 4, Vector2i(36, 37), 0.1],
-	["gb_southwest", Vector2(-92, 50), 5.0, [&"glasswire_scorpion", &"wiresick_husk", &"wiresick_husk"], 3, Vector2i(36, 38), 0.1],
-	["gb_south_husks", Vector2(-18, 76), 6.0, [&"wiresick_husk", &"wiresick_husk", &"relay_mote", &"wiresick_husk", &"wiresick_husk"], 5, Vector2i(36, 38), 0.1],
-	["gb_glass_trail", Vector2(-48, -22), 5.0, [&"arc_sentinel", &"wiresick_husk", &"wiresick_husk"], 4, Vector2i(37, 39), 0.15],
-	["gb_red_flats", Vector2(14, 48), 5.0, [&"wiresick_husk", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(37, 39), 0.15],
-	["gb_scorpions", Vector2(-14, -32), 5.5, [&"glasswire_scorpion", &"glasswire_scorpion", &"wiresick_husk"], 3, Vector2i(38, 40), 0.15],
-	["gb_obsidian", Vector2(-86, -56), 5.0, [&"arc_sentinel", &"chain_priest", &"arc_sentinel"], 4, Vector2i(39, 41), 0.2],
-	["gb_colossus", Vector2(72, -24), 5.0, [&"arc_sentinel", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(40, 42), 0.2],
-	["gb_colossus_chains", Vector2(42, -62), 5.5, [&"chain_priest", &"chain_bearer", &"wiresick_husk", &"chain_priest"], 5, Vector2i(40, 42), 0.2],
-	["gb_bridge_road", Vector2(8, -80), 5.0, [&"chain_priest", &"chain_bearer", &"arc_sentinel"], 4, Vector2i(40, 42), 0.2],
-	["gb_vein", Vector2(64, 56), 5.0, [&"glasswire_scorpion", &"chain_bearer", &"wiresick_husk"], 4, Vector2i(40, 42), 0.2],
-	["gb_east", Vector2(104, 8), 5.0, [&"arc_sentinel", &"arc_sentinel", &"relay_mote"], 3, Vector2i(41, 42), 0.2],
-	["gb_east_glass", Vector2(100, -58), 5.0, [&"glasswire_scorpion", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(41, 42), 0.25],
+	["gb_west_husks", Vector2(-96, -4), 5.0, [&"wiresick_husk", &"wiresick_husk", &"wiresick_husk", &"relay_mote"], 4, Vector2i(56, 57), 0.1],
+	["gb_southwest", Vector2(-92, 50), 5.0, [&"glasswire_scorpion", &"wiresick_husk", &"wiresick_husk"], 3, Vector2i(56, 58), 0.1],
+	["gb_south_husks", Vector2(-18, 76), 6.0, [&"wiresick_husk", &"wiresick_husk", &"relay_mote", &"wiresick_husk", &"wiresick_husk"], 5, Vector2i(56, 58), 0.1],
+	["gb_glass_trail", Vector2(-48, -22), 5.0, [&"arc_sentinel", &"wiresick_husk", &"wiresick_husk"], 4, Vector2i(57, 59), 0.15],
+	["gb_red_flats", Vector2(14, 48), 5.0, [&"wiresick_husk", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(57, 59), 0.15],
+	["gb_scorpions", Vector2(-14, -32), 5.5, [&"glasswire_scorpion", &"glasswire_scorpion", &"wiresick_husk"], 3, Vector2i(58, 60), 0.15],
+	["gb_obsidian", Vector2(-86, -56), 5.0, [&"arc_sentinel", &"chain_priest", &"arc_sentinel"], 4, Vector2i(59, 61), 0.2],
+	["gb_colossus", Vector2(72, -24), 5.0, [&"arc_sentinel", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(60, 62), 0.2],
+	["gb_colossus_chains", Vector2(42, -62), 5.5, [&"chain_priest", &"chain_bearer", &"wiresick_husk", &"chain_priest"], 5, Vector2i(60, 62), 0.2],
+	["gb_bridge_road", Vector2(8, -80), 5.0, [&"chain_priest", &"chain_bearer", &"arc_sentinel"], 4, Vector2i(60, 62), 0.2],
+	["gb_vein", Vector2(64, 56), 5.0, [&"glasswire_scorpion", &"chain_bearer", &"wiresick_husk"], 4, Vector2i(60, 62), 0.2],
+	["gb_east", Vector2(104, 8), 5.0, [&"arc_sentinel", &"arc_sentinel", &"relay_mote"], 3, Vector2i(61, 62), 0.2],
+	["gb_east_glass", Vector2(100, -58), 5.0, [&"glasswire_scorpion", &"relay_mote", &"glasswire_scorpion"], 4, Vector2i(61, 62), 0.25],
 ]
 const WEST_EXIT := [Vector2(-144, 10.0), Vector2(-126, 10.0)]
 const NORTH_EXIT := [Vector2(30, -96.0), Vector2(31.0, -128.0)]

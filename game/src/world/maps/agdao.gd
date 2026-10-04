@@ -131,7 +131,24 @@ func _terrain_h(x: float, z: float) -> float:
 		var span := _wall_span(k)
 		if x > span.x + 0.25 and x < span.y - 0.25:
 			y = minf(y, float(up.y) - 0.35)
+	# bh-038: the same under the quay wall's blocks along the harbour edge (z 42-50, a gap for the pier) and under the
+	# pier's root: their paving met the harbour floor level and the two patterns fought along the whole quay
+	var quay := _quay_span()
+	if z > 42.25 and z < 50.75 and x > quay.x + 0.25 and x < quay.y - 0.25 and (x < DataZarael.AG_PIER_X - 2.25 or x > DataZarael.AG_PIER_X + 5.75):
+		y = minf(y, tier_y(0) - 0.35)
+	if z > DataZarael.AG_PIER_Z.x + 0.25 and z < 50.75 and absf(x - DataZarael.AG_PIER_X) < 2.25:
+		y = minf(y, tier_y(0) - 0.35)
 	return y
+
+## West and east ends of the quay wall's row of 8 m blocks, exactly as _sea lays them.
+func _quay_span() -> Vector2:
+	var t: Dictionary = TIERS[0]
+	var x := float(t.x0) + 4.0
+	var last := x
+	while x < float(t.x1) - 2.0:
+		last = x
+		x += 8.0
+	return Vector2(float(t.x0), last + 4.0)
 
 ## West and east ends of terrace `i`'s row of retaining blocks, exactly as _terrace_walls lays them (8 m blocks from
 ## the west end; the row can stop short of the east end).

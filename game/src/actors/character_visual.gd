@@ -909,27 +909,27 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 		_meshes.append(m)
 	_weapon_nodes[hand] = holder
 
-## bh-022: crystals set in a held weapon make it shed motes of their colour along the blade (stronger with more
-## crystal power). `power` 0 removes it. `length` = how far along the weapon's +Y the motes rise.
-func set_weapon_infusion(hand: StringName, color: Color, power: int, length := 0.9) -> void:
+## bh-038: every crystal set in a held weapon or shield becomes its own spirit circling it (GemSpirits: one per
+## crystal, each family drawn and moving its own way). Replaces bh-022's single mixed-colour mote stream. An empty
+## list removes them. `trails`: whether the spirits shed particle trails (companions go without).
+func set_weapon_gems(hand: StringName, gems: Array, length := 0.9, trails := true) -> void:
 	if not _weapon_nodes.has(hand) or not is_instance_valid(_weapon_nodes[hand]):
 		return
 	var holder: Node3D = _weapon_nodes[hand]
-	var old := holder.get_node_or_null(^"Infusion")
+	if appearance.has("weapons"):
+		# other players see them too (NetAvatar re-applies this from the synced appearance)
+		if not appearance.has("gems"):
+			appearance["gems"] = {}
+		appearance.gems[hand] = [gems.map(func(g): return String(g)), length]
+	var old := holder.get_node_or_null(^"GemSpirits")
 	if old:
+		holder.remove_child(old)
 		old.queue_free()
-	if power <= 0:
+	var spirits := GemSpirits.make(gems, length, trails)
+	if spirits.count() == 0:
+		spirits.free()
 		return
-	var fx := Node3D.new()
-	fx.name = "Infusion"
-	holder.add_child(fx)
-	var motes := VFXLib.particles(Color(color, 0.85), clampi(6 + power, 8, 22), 0.9, false, 0.07, 0.25, 40.0,
-		Vector3(0, 0.25, 0), 0.0, true)
-	var pm := motes.process_material as ParticleProcessMaterial
-	pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
-	pm.emission_box_extents = Vector3(0.03, length * 0.5, 0.03)
-	motes.position = Vector3(0, length * 0.55, 0)
-	fx.add_child(motes)
+	holder.add_child(spirits)
 
 ## bh-034: an Ascendant weapon or shield in this hand carries its tier's moving light (AscendantFx): the surface shader
 ## and motes along its length. Below Cosmic it does nothing.
@@ -951,6 +951,8 @@ func _collect_into(n: Node, out: Array[MeshInstance3D]) -> void:
 func detach_weapon(hand: StringName) -> void:
 	if appearance.has("weapons"):
 		(appearance.weapons as Dictionary).erase(hand)
+	if appearance.has("gems"):
+		(appearance.gems as Dictionary).erase(hand)
 	if _weapon_nodes.has(hand):
 		var n: Node = _weapon_nodes[hand]
 		for m in _meshes.duplicate():

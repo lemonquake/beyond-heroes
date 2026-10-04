@@ -168,6 +168,13 @@ func set_appearance(app: Dictionary) -> void:
 			visual.detach_weapon(hand)
 		elif w != null and (have == null or String(have[0]) != String(w[0])):
 			visual.attach_weapon(hand, String(w[0]), w[1])
+	# bh-038: the crystal spirits circling their weapons (absent from older peers: none)
+	var gems = app.get("gems", {})
+	for hand in [&"main", &"off"]:
+		var g = gems.get(hand) if gems is Dictionary else null
+		var have_g = visual.appearance.get("gems", {}).get(hand)
+		if visual.has_weapon(hand) and str(g) != str(have_g):
+			visual.set_weapon_gems(hand, g[0] if g is Array and g.size() == 2 else [], float(g[1]) if g is Array and g.size() == 2 else 0.9)
 	# Reconstruct presentation-only pieces from known base IDs. Missing data from
 	# an older peer also clears any previous set appearance without changing stats.
 	var gear = app.get("set_gear", {})

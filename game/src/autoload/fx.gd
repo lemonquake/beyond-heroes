@@ -142,7 +142,7 @@ func warm_up() -> void:
 	_next = 0
 
 ## bh-037: the see-through copies the follow camera swaps in when architecture hides the hero (PlayerCamera's occlusion
-## fade, MaterialLibrary.faded) are another shader. The first fade of each compiled it mid-walk: 27 pipelines and a 58 ms
+## fade, MaterialLibrary.see_through) are another shader. The first fade of each compiled it mid-walk: 27 pipelines and a 58 ms
 ## frame on Agdao's middle terrace. Behind the loading screen every mesh under the map's Geometry and Props is drawn once,
 ## tiny, wearing its faded materials (the real mesh, so the vertex format matches too).
 func _warm_fades(at: Vector3) -> Node3D:
@@ -170,7 +170,7 @@ func _warm_fades(at: Vector3) -> Node3D:
 			var w := MeshInstance3D.new()
 			w.mesh = mi.mesh
 			for s in mats.size():
-				w.set_surface_override_material(s, MaterialLibrary.faded(mats[s]))
+				w.set_surface_override_material(s, MaterialLibrary.see_through(mats[s]))
 			w.layers = Perf.FX_LAYER          # never in the minimap's render
 			holder.add_child(w)
 			w.scale = Vector3.ONE * 0.02

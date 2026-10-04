@@ -1,5 +1,5 @@
 extends SettlementBuilder
-## MAP — The Coilwood (bh-029; Zarael, levels 30–36). "Jungle over the Wirewrights' fields."
+## MAP — The Coilwood (bh-029; Zarael, levels 50–56). "Jungle over the Wirewrights' fields."
 ##
 ## The road from Agdao's east gate runs east through a jungle of giant buttress trees and palms that has swallowed the
 ## Wirewrights' step-fields: low terraced earth banks held by ruined glyph walls, and a broken aqueduct that once fed
@@ -39,20 +39,20 @@ const PADS := [[-108.0, 7.5, 9.5], [-58.0, -42.0, 7.0], [18.0, 52.0, 7.0], [66.0
 	[96.0, -58.0, 10.0], [10.0, 0.0, 8.0]]
 ## Encounter camps: [id, centre, radius, monsters, count, levels, elite chance]. Levels rise with distance from Agdao.
 const CAMPS := [
-	["cw_road_south", Vector2(-86, 38), 5.0, [&"glyphbound_warrior", &"coil_shaman", &"glyphbound_warrior"], 3, Vector2i(30, 31), 0.1],
-	["cw_aqueduct", Vector2(-100, -22), 5.0, [&"glyphbound_warrior", &"wireback_stalker", &"glyphbound_warrior"], 4, Vector2i(30, 32), 0.1],
-	["cw_relay_west", Vector2(-49, -46), 5.0, [&"chain_priest", &"chain_bearer", &"glyphbound_warrior"], 4, Vector2i(30, 32), 0.15],
-	["cw_fields", Vector2(-75, -36), 5.0, [&"mossback_idol", &"glyphbound_warrior", &"coil_shaman"], 3, Vector2i(31, 33), 0.15],
-	["cw_lines", Vector2(-18, 18), 5.0, [&"relay_mote", &"wireback_stalker", &"relay_mote", &"relay_mote"], 4, Vector2i(32, 33), 0.1],
-	["cw_relay_south", Vector2(8, 60), 5.0, [&"chain_priest", &"chain_bearer", &"coil_shaman"], 4, Vector2i(32, 34), 0.15],
-	["cw_cistern", Vector2(-14, 64), 5.0, [&"mossback_idol", &"coil_shaman", &"glyphbound_warrior"], 3, Vector2i(32, 34), 0.15],
-	["cw_north", Vector2(-16, -48), 5.0, [&"relay_mote", &"coil_shaman", &"relay_mote"], 4, Vector2i(33, 34), 0.15],
-	["cw_south_wood", Vector2(58, 52), 5.5, [&"wireback_stalker", &"mossback_idol", &"wireback_stalker"], 4, Vector2i(33, 35), 0.15],
-	["cw_relay_east", Vector2(56, -38), 5.0, [&"chain_priest", &"chain_bearer", &"wireback_stalker", &"chain_priest"], 5, Vector2i(34, 36), 0.2],
-	["cw_camp", Vector2(28, -60), 7.0, [&"chain_priest", &"chain_bearer", &"chain_priest", &"chain_bearer", &"glyphbound_warrior"], 6, Vector2i(34, 36), 0.25],
-	["cw_camp_pens", Vector2(16, -66), 4.5, [&"chain_bearer", &"wireback_stalker", &"chain_priest"], 4, Vector2i(34, 36), 0.2],
-	["cw_jade", Vector2(76, -58), 5.0, [&"mossback_idol", &"glyphbound_warrior", &"coil_shaman"], 4, Vector2i(35, 36), 0.2],
-	["cw_east_road", Vector2(110, 24), 5.0, [&"glyphbound_warrior", &"coil_shaman", &"relay_mote"], 4, Vector2i(34, 35), 0.15],
+	["cw_road_south", Vector2(-86, 38), 5.0, [&"glyphbound_warrior", &"coil_shaman", &"glyphbound_warrior"], 3, Vector2i(50, 51), 0.1],
+	["cw_aqueduct", Vector2(-100, -22), 5.0, [&"glyphbound_warrior", &"wireback_stalker", &"glyphbound_warrior"], 4, Vector2i(50, 52), 0.1],
+	["cw_relay_west", Vector2(-49, -46), 5.0, [&"chain_priest", &"chain_bearer", &"glyphbound_warrior"], 4, Vector2i(50, 52), 0.15],
+	["cw_fields", Vector2(-75, -36), 5.0, [&"mossback_idol", &"glyphbound_warrior", &"coil_shaman"], 3, Vector2i(51, 53), 0.15],
+	["cw_lines", Vector2(-18, 18), 5.0, [&"relay_mote", &"wireback_stalker", &"relay_mote", &"relay_mote"], 4, Vector2i(52, 53), 0.1],
+	["cw_relay_south", Vector2(8, 60), 5.0, [&"chain_priest", &"chain_bearer", &"coil_shaman"], 4, Vector2i(52, 54), 0.15],
+	["cw_cistern", Vector2(-14, 64), 5.0, [&"mossback_idol", &"coil_shaman", &"glyphbound_warrior"], 3, Vector2i(52, 54), 0.15],
+	["cw_north", Vector2(-16, -48), 5.0, [&"relay_mote", &"coil_shaman", &"relay_mote"], 4, Vector2i(53, 54), 0.15],
+	["cw_south_wood", Vector2(58, 52), 5.5, [&"wireback_stalker", &"mossback_idol", &"wireback_stalker"], 4, Vector2i(53, 55), 0.15],
+	["cw_relay_east", Vector2(56, -38), 5.0, [&"chain_priest", &"chain_bearer", &"wireback_stalker", &"chain_priest"], 5, Vector2i(54, 56), 0.2],
+	["cw_camp", Vector2(28, -60), 7.0, [&"chain_priest", &"chain_bearer", &"chain_priest", &"chain_bearer", &"glyphbound_warrior"], 6, Vector2i(54, 56), 0.25],
+	["cw_camp_pens", Vector2(16, -66), 4.5, [&"chain_bearer", &"wireback_stalker", &"chain_priest"], 4, Vector2i(54, 56), 0.2],
+	["cw_jade", Vector2(76, -58), 5.0, [&"mossback_idol", &"glyphbound_warrior", &"coil_shaman"], 4, Vector2i(55, 56), 0.2],
+	["cw_east_road", Vector2(110, 24), 5.0, [&"glyphbound_warrior", &"coil_shaman", &"relay_mote"], 4, Vector2i(54, 55), 0.15],
 ]
 const WEST_EXIT := [Vector2(-152, 30.0), Vector2(-136, 30.0), Vector2(-120, 24.0)]
 const EAST_EXIT := [Vector2(100, 2.0), Vector2(136, 8.0), Vector2(152, 10.5)]

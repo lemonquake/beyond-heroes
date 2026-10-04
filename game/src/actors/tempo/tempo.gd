@@ -212,6 +212,7 @@ func refresh_equipment_visuals() -> void:
 	for pair in [[&"main", main], [&"off", sub]]:
 		if pair[1] != null and visual.has_weapon(pair[0]):
 			visual.set_weapon_ascendant(pair[0], (pair[1] as ItemInstance).rarity, 0.45 if (pair[1] as ItemInstance).base.category == &"shield" else 0.9)
+			visual.set_weapon_gems(pair[0], (pair[1] as ItemInstance).gems, 0.45 if (pair[1] as ItemInstance).base.category == &"shield" else 0.9, false)
 	visual.set_stance(_stance_idle())
 	visual.set_opacity(0.84)
 

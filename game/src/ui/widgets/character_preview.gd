@@ -223,6 +223,7 @@ func dress(hero: HeroData) -> void:
 	for pair in [[&"main", main], [&"off", sub]]:
 		if pair[1] != null and visual.has_weapon(pair[0]):
 			visual.set_weapon_ascendant(pair[0], (pair[1] as ItemInstance).rarity, 0.45 if (pair[1] as ItemInstance).base.category == &"shield" else 0.9)
+			visual.set_weapon_gems(pair[0], (pair[1] as ItemInstance).gems, 0.45 if (pair[1] as ItemInstance).base.category == &"shield" else 0.9, true)
 	var stance: StringName = &"idle_1h"
 	if lo.is_unarmed():
 		stance = &"idle"

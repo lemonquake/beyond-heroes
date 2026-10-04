@@ -1,6 +1,6 @@
 class_name DataEnemiesZarael
 ## bh-029: the thirty monsters of Zarael Island (docs/LORE.md §11): the Coilwood, the Glasswire Barrens, the Bridge of
-## Death, the Heart Citadel and the three Vaults (DataDungeonsZarael). They live at levels 30-53; base stats sit beside
+## Death, the Heart Citadel and the three Vaults (DataDungeonsZarael). They live at levels 50-93 (bh-038: overworld +20, Vaults +40); base stats sit beside
 ## the existing monster of the same role and level scaling (CombatBudget) does the rest.
 ## Families: wirewright (the island's ancient constructs), wiresick (people and beasts the Blackwire changed), kharvenn
 ## (the chain-priests and their soldiers), gigas (grown from the sleeping giant), jade (the Sepulchre's dead).
