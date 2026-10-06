@@ -1,0 +1,22 @@
+WARN: capacity: 1 error line(s) in process logs (allowed)
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: 12 real HTTPS/ENet clients; thirteenth refused; committed saves confirmed; process logs clean
+PASS: server restart; two real map clients resumed progress, traded atomically and saved on exit; process logs clean (4 engine shutdown messages ignored)
+PASS: custom host and client; separate fresh characters; shared directory listing; process logs clean (4 engine shutdown messages ignored)
+WARN: world-handoff: 1 error line(s) in process logs (allowed)
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: map owner left; the other hero took over its live monsters; process logs clean
+WARN: world-separate: 1 error line(s) in process logs (allowed)
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: heroes on different maps each ran their own map; process logs clean (2 engine shutdown messages ignored)
+WARN: world-reconnect: 1 error line(s) in process logs (allowed)
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: dropped connection, refused duplicate play, release, reload with progress, rejoin; process logs clean (2 engine shutdown messages ignored)
+WARN: version: 1 error line(s) in process logs (allowed)
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: a game with another protocol number was refused with both versions named; process logs clean
+WARN: hostile: 2 error line(s) in process logs (allowed)
+    dedicated-restarted.log:7: ERROR: Condition "!_is_active() || !peers.has(p_peer)" is true.
+    dedicated.log:4: ERROR: Unable to send packet on channel 0, max channels: 0
+PASS: malformed, oversized, non-finite and flooding messages were absorbed; process logs clean (2 engine shutdown messages ignored)
+STAGES PASSED: capacity, restart, custom, world-handoff, world-separate, world-reconnect, version, hostile

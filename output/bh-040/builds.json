@@ -15,5 +15,26 @@
       "export_exit": 0
     }
   },
-  "source_commit": "8fbef57a6b029213bda79ead68d5e2b28ff6e3e6"
+  "source_commit": "8fbef57a6b029213bda79ead68d5e2b28ff6e3e6",
+  "server_packages": {
+    "source_commit": "92e16ae8b9",
+    "protocol": 21,
+    "files": [
+      {
+        "path": "build\\server\\beyond-heroes-server-92e16ae8b9-linux-arm64.tar.gz",
+        "bytes": 107925092,
+        "sha256": "f8e80f6c25536cd75ba0120d9f0129e8feb837c6b336da90dc650d0dd21fd07b"
+      },
+      {
+        "path": "build\\server\\beyond-heroes-server-92e16ae8b9-linux-x86_64.tar.gz",
+        "bytes": 108716150,
+        "sha256": "52b634ccc39646ec32d5264855f88c86b61868d7c38b50584361a43382d49b00"
+      },
+      {
+        "path": "build\\server\\beyond-heroes-server-92e16ae8b9-windows.zip",
+        "bytes": 118677874,
+        "sha256": "1d5ae64d77e137f3c42e641a846efca1dd599104fe9fd29b5ea15b27264e232c"
+      }
+    ]
+  }
 }
