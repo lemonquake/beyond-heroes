@@ -163,14 +163,8 @@ func test_debug_console_builds_every_page() -> void:
 		ok(w._page_box.get_child_count() > 2, "page %s has controls" % p[0])
 	# the Item Summoner: a perfect legendary helm with 3 sockets and 30% quality
 	w.show_page("items")
-	var idx := w._base_ids.find(&"visored_greathelm")
-	if idx < 0:
-		w._search.text = "Visored"
-		w._fill_bases()
-		idx = w._base_ids.find(&"visored_greathelm")
-	ok(idx >= 0, "the helm is in the summoner list")
-	w._base.selected = maxi(0, idx)
-	w._rarity.selected = BH.Rarity.LEGENDARY
+	ok(w._select_base(&"visored_greathelm"), "the helm is in the summoner list")
+	w._set_rarity(BH.Rarity.LEGENDARY)
 	w._ilvl.value = 60
 	w._quality.value = 30
 	w._sockets.value = 3

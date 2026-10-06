@@ -2,6 +2,17 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-039 - Fabled Arms and the new Item Summoner - 6 October 2026
+
+- **Fifty-four Fabled Arms**: named weapons from Legendary to Primordial, each with its own model, icon, lore and a
+  signature strike. Every Divine and Primordial arm has a strike animation of its own: seraph wings, a descending
+  halo, a serpent of fire, a titan's fist, meteor swarms and more. Held arms carry moving pieces such as halos, wings,
+  orbiting stones and serpent coils.
+- **Item Summoner rebuilt** (Debug console): filters, a full catalogue, exact rarity (a Primordial sword is Primordial),
+  chosen enchantments and powers, crystals, Unbound, equip at once, a live preview, and shortcuts for full gear and
+  Fabled sets.
+- Details: [FABLED_ARMS.md](FABLED_ARMS.md).
+
 ## BH-036 - Class Transcendence - 4 October 2026
 
 - **Twelve new classes**: every starting class advances at level 60 (Royal Guard, Tracker, Arcanist, Nightstalker) and

@@ -3,7 +3,8 @@ extends UIWindow
 ## bh-030: the Debug console. Unlocked per hero by the `azrin azrael` cheat (a Debug button on the HUD, F2). Pages:
 ##   Cheats     every chat cheat code as a button (Cheats.DESCRIPTIONS)
 ##   Hero       set gold, level, experience, points, attributes, class rank, embers, Well Rested; restore, revive, resets
-##   Items      the Item Summoner: any base, rarity, item level, quality, sockets, stack count, perfect rolls, an extra power
+##   Items      the Item Summoner: filters, a full catalogue, any rarity forced exactly, item level, quality, sockets and
+##              crystals, chosen enchantments and powers, Unbound, equip at once, a live preview (bh-039)
 ##   Tempos     the Tempo Summoner: nameless spirits by class and grade or renowned spirits, stars, resonance; and the
 ##              Unsummoner: rest, bind, revive or remove any bound or hall spirit
 ##   Combat     god mode, infinite Mana, no cooldowns, one-hit kills; damage, speed, XP, gold multipliers; drop rarity floor
@@ -23,18 +24,13 @@ var _log: RichTextLabel
 var _live: Label
 var _live_t := 0.0
 # item summoner
-var _cat: OptionButton
 var _search: LineEdit
-var _base: OptionButton
 var _base_ids: Array = []
-var _rarity: OptionButton
 var _ilvl: SpinBox
 var _quality: SpinBox
 var _sockets: SpinBox
 var _count: SpinBox
 var _perfect: CheckBox
-var _power: OptionButton
-var _power_ids: Array = []
 const CATEGORIES := ["all", "weapon", "shield", "helm", "armor", "inner_garment", "leggings", "gloves", "boots", "accessory",
 	"consumable", "material", "crystal"]
 # tempo summoner
@@ -341,68 +337,401 @@ func _hurt(v: float) -> void:
 	say("You took %d damage." % r.total)
 
 # ---- Items: the Item Summoner ---------------------------------------------------------------------------------------
+## bh-039: the summoner is a catalogue with filters (category, weapon type, source, class, element, native rarity, level
+## range, a search), a full scrolling list with icons, and a forge: any rarity is exactly that rarity (a Primordial
+## sword is a Primordial sword), item level, quality, sockets and their crystals, up to three chosen enchantments and
+## three chosen powers, perfect rolls, Unbound (no requirements), equip at once, lock. A live preview card shows the
+## exact item that will be summoned; Reroll draws another.
 
 func _page_items() -> void:
 	_head("Item Summoner")
-	_cat = _opt(CATEGORIES.map(func(c): return "All categories" if c == "all" else String(c).capitalize()), 0, 230)
 	_search = LineEdit.new()
-	_search.placeholder_text = "Search item names"
-	_search.custom_minimum_size = Vector2(320, 52 if Settings.touch_mode else 40)
+	_search.placeholder_text = "Search names, ids, powers or lore (e.g. serpent, fa_, primordial)"
+	_search.custom_minimum_size = Vector2(760, 52 if Settings.touch_mode else 40)
 	_search.clear_button_enabled = true
-	_base = _opt([], 0, 520)
-	_cat.item_selected.connect(func(_i: int) -> void: _fill_bases())
 	_search.text_changed.connect(func(_t: String) -> void: _fill_bases())
-	_row([_cap("Base", 110), _cat, _search])
-	_row([_cap("", 110), _base])
+	_row([_cap("Find", 110), _search, _b("Clear Filters", _clear_filters, 180.0)])
+	_chip_rows.clear()
+	_chip_row("category", "Category", CATEGORIES.map(func(c): return ["all", "All"] if c == "all" else [c, CAT_NAMES.get(c, String(c).capitalize())]))
+	var wts := [["any", "Any"]]
+	for id in WEAPON_TYPES:
+		wts.append([String(id), DB.weapon_type(id).display_name if DB.weapon_type(id) else String(id).capitalize()])
+	_chip_row("wtype", "Weapon", wts)
+	_chip_row("source", "Source", SOURCES)
+	var cls := ["Any class", "My class"] + CLASS_IDS.map(func(c): return String(c).capitalize())
+	_class_opt = _opt(cls, int(_f.get("class", 0)), 200)
+	_class_opt.item_selected.connect(func(i: int) -> void:
+		_f["class"] = i
+		_fill_bases())
+	_elem_opt = _opt(["Any element"] + Array(Elements.NAMES), int(_f.get("element", 0)), 180)
+	_elem_opt.item_selected.connect(func(i: int) -> void:
+		_f["element"] = i
+		_fill_bases())
+	_native_opt = _opt(["Any native rarity"] + BH.RARITY_NAMES, int(_f.get("native", 0)), 220)
+	_native_opt.item_selected.connect(func(i: int) -> void:
+		_f["native"] = i
+		_fill_bases())
+	_lvl_lo = _spin(0, BH.LEVEL_CAP + 5, int(_f.get("lo", 0)), 1, 110)
+	_lvl_hi = _spin(0, BH.LEVEL_CAP + 5, int(_f.get("hi", BH.LEVEL_CAP + 5)), 1, 110)
+	_lvl_lo.value_changed.connect(func(v: float) -> void:
+		_f["lo"] = int(v)
+		_fill_bases())
+	_lvl_hi.value_changed.connect(func(v: float) -> void:
+		_f["hi"] = int(v)
+		_fill_bases())
+	_row([_cap("Also", 110), _class_opt, _elem_opt, _native_opt, _cap("Level", 70), _lvl_lo, _cap("to", 30), _lvl_hi])
+	# catalogue (left) and forge (right)
+	var cols := hbox(14)
+	_page_box.add_child(cols)
+	var left := vbox(6)
+	left.custom_minimum_size.x = 560
+	cols.add_child(left)
+	_count_lbl = _text("", 15, UITheme.TEXT_DIM)
+	left.add_child(_count_lbl)
+	_list = ItemList.new()
+	_list.custom_minimum_size = Vector2(560, 640)
+	_list.fixed_icon_size = Vector2i(40, 40)
+	_list.add_theme_font_size_override("font_size", 16)
+	_list.item_selected.connect(func(i: int) -> void: _pick_base(i))
+	_list.item_activated.connect(func(i: int) -> void:
+		_pick_base(i)
+		_summon_item())
+	left.add_child(_list)
+	var right := vbox(8)
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cols.add_child(right)
+	_build_forge(right)
 	_fill_bases()
-	_rarity = _opt(BH.RARITY_NAMES, BH.Rarity.LEGENDARY, 230)
-	_ilvl = _spin(1, BH.LEVEL_CAP + 5, _hero().progress.level)
-	_row([_cap("Rarity", 110), _rarity, _cap("Item level", 110), _ilvl])
-	_quality = _spin(0, 50, 20)
-	_sockets = _spin(0, 6, 0)
-	_count = _spin(1, 9999, 1)
-	_row([_cap("Quality %", 110), _quality, _cap("Sockets", 110), _sockets, _cap("Count", 80), _count])
-	var pnames := ["No extra power"]
-	_power_ids = [&""]
-	var plist: Array = DB.power_defs.values()
-	plist.sort_custom(func(a, b): return String(a.display_name) < String(b.display_name))
-	for p in plist:
-		_power_ids.append(p.id)
-		pnames.append("%s (%s)" % [p.display_name, p.tier])
-	_power = _opt(pnames, 0, 420)
-	_perfect = _check("Perfect rolls (every enchantment at its best)", false, func(_on: bool) -> void: pass)
-	_row([_cap("Power", 110), _power, _perfect])
-	_row([_b("Summon Item", _summon_item, 220.0, &"PrimaryButton"), _b("Summon 5 Random", func() -> void: _summon_random(5), 220.0),
-		_b("Random Set Piece", func() -> void: _summon_special(true), 220.0), _b("Random Unique", func() -> void: _summon_special(false), 220.0)])
-	_page_box.add_child(_text("Gear is generated exactly like a drop of that rarity and item level, then the quality, sockets, power and perfect rolls you chose are applied. Requirements still apply when you equip it.", 15, UITheme.TEXT_DIM))
+
+const CAT_NAMES := {"weapon": "Weapons", "shield": "Shields", "helm": "Helms", "armor": "Armour", "inner_garment": "Inner", "leggings": "Leggings",
+	"gloves": "Gloves", "boots": "Boots", "accessory": "Jewellery", "consumable": "Consumables", "material": "Materials", "crystal": "Crystals"}
+const WEAPON_TYPES := [&"sword", &"greatsword", &"axe", &"greataxe", &"spear", &"javelin", &"dagger", &"claw", &"knuckles", &"club", &"bow",
+	&"crossbow", &"staff", &"wand"]
+const SOURCES := [["any", "Any"], ["plain", "Ordinary"], ["unique", "Uniques"], ["set", "Set pieces"], ["ascendant", "Ascendant"],
+	["fabled", "Fabled Arms"], ["story", "Story"]]
+const CLASS_IDS := [&"knight", &"mage", &"ranger", &"shadowblade"]
+
+var _f := {"category": "all", "wtype": "any", "source": "any"}
+var _chip_rows := {}
+var _class_opt: OptionButton
+var _elem_opt: OptionButton
+var _native_opt: OptionButton
+var _lvl_lo: SpinBox
+var _lvl_hi: SpinBox
+var _list: ItemList
+var _count_lbl: Label
+var _rar_btns: Array = []
+var _rarity_sel := BH.Rarity.LEGENDARY
+var _unbound: CheckBox
+var _equip_now: CheckBox
+var _lock: CheckBox
+var _gem_opt: OptionButton
+var _gem_ids: Array = []
+var _affix_opts: Array = []
+var _affix_ids: Array = []
+var _power_opts: Array = []
+var _power_ids2: Array = []
+var _preview_box: VBoxContainer
+var _preview: ItemInstance
+var _picked: StringName = &""
+var _recent: Array = []
+var _recent_box: HBoxContainer
+var _seed := 0
+
+func _chip_row(key: String, title: String, chips: Array) -> void:
+	var h := hbox(4)
+	h.add_child(_cap(title, 110))
+	var flow := HFlowContainer.new()
+	flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	flow.add_theme_constant_override("h_separation", 4)
+	flow.add_theme_constant_override("v_separation", 4)
+	h.add_child(flow)
+	for c in chips:
+		var val: String = c[0]
+		var b := Button.new()
+		b.text = c[1]
+		b.toggle_mode = true
+		b.button_pressed = String(_f.get(key, "")) == val
+		b.custom_minimum_size = Vector2(0, 46 if Settings.touch_mode else 34)
+		b.set_meta(&"val", val)
+		b.pressed.connect(func() -> void:
+			_set_chip(key, val)
+			if key == "wtype" and val != "any":
+				_set_chip("category", "weapon")
+			_fill_bases())
+		flow.add_child(b)
+	_chip_rows[key] = flow
+	_page_box.add_child(h)
+
+func _set_chip(key: String, val: String) -> void:
+	_f[key] = val
+	if _chip_rows.has(key):
+		for o in (_chip_rows[key] as Node).get_children():
+			(o as Button).set_pressed_no_signal(String(o.get_meta(&"val")) == val)
+
+func _clear_filters() -> void:
+	_f = {"category": "all", "wtype": "any", "source": "any"}
+	show_page("items")
+
+func _build_forge(box: VBoxContainer) -> void:
+	box.add_child(_cap("Rarity (always exactly this one)"))
+	var grid := GridContainer.new()
+	grid.columns = 7
+	grid.add_theme_constant_override("h_separation", 4)
+	grid.add_theme_constant_override("v_separation", 4)
+	box.add_child(grid)
+	_rar_btns.clear()
+	for r in BH.RARITY_COUNT:
+		var rr: int = r
+		var b := Button.new()
+		b.text = BH.RARITY_NAMES[r]
+		b.toggle_mode = true
+		b.custom_minimum_size = Vector2(118, 44 if Settings.touch_mode else 34)
+		b.add_theme_color_override("font_color", BH.rarity_color(r))
+		b.add_theme_color_override("font_pressed_color", Color.WHITE)
+		b.pressed.connect(func() -> void: _set_rarity(rr))
+		grid.add_child(b)
+		_rar_btns.append(b)
+	_set_rarity(_rarity_sel, false)
+	_ilvl = _spin(1, BH.LEVEL_CAP + 5, _hero().progress.level, 1, 120)
+	_ilvl.value_changed.connect(func(_v: float) -> void: _reroll())
+	var mine := _b("My Level", func() -> void: _ilvl.value = _hero().progress.level, 120.0)
+	var top := _b("Max", func() -> void: _ilvl.value = BH.LEVEL_CAP + 5, 80.0)
+	_quality = _spin(0, 50, 20, 1, 100)
+	_quality.value_changed.connect(func(_v: float) -> void: _reroll(false))
+	box.add_child(_row_of([_cap("Item level", 100), _ilvl, mine, top, _cap("Quality %", 100), _quality]))
+	_sockets = _spin(0, 7, 0, 1, 90)
+	_sockets.value_changed.connect(func(_v: float) -> void: _reroll(false))
+	_gem_ids = [""]
+	var gnames := ["Empty sockets"]
+	var crystals := DB.item_bases.values().filter(func(b): return b.category == &"crystal")
+	crystals.sort_custom(func(a, b): return [a.fixed_rarity, String(a.display_name)] < [b.fixed_rarity, String(b.display_name)])
+	for c in crystals:
+		_gem_ids.append(String(c.id))
+		gnames.append(c.display_name)
+	_gem_opt = _opt(gnames, 0, 260)
+	_gem_opt.item_selected.connect(func(_i: int) -> void: _reroll(false))
+	_count = _spin(1, 9999, 1, 1, 100)
+	box.add_child(_row_of([_cap("Sockets", 100), _sockets, _gem_opt, _cap("Count", 70), _count]))
+	_affix_opts.clear()
+	_power_opts.clear()
+	var arow := hbox(6)
+	arow.add_child(_cap("Enchant", 100))
+	for i in 3:
+		var o := _opt(["(random)"], 0, 200)
+		o.item_selected.connect(func(_i: int) -> void: _reroll(false))
+		_affix_opts.append(o)
+		arow.add_child(o)
+	box.add_child(arow)
+	var prow := hbox(6)
+	prow.add_child(_cap("Powers", 100))
+	for i in 3:
+		var o := _opt(["(none)"], 0, 200)
+		o.item_selected.connect(func(_i: int) -> void: _reroll(false))
+		_power_opts.append(o)
+		prow.add_child(o)
+	box.add_child(prow)
+	_perfect = _check("Perfect rolls", false, func(_on: bool) -> void: _reroll(false))
+	_unbound = _check("Unbound (no level or attribute needs; Class E)", false, func(_on: bool) -> void: _reroll(false))
+	_equip_now = _check("Equip at once", false, func(_on: bool) -> void: pass)
+	_lock = _check("Lock", false, func(_on: bool) -> void: _reroll(false))
+	box.add_child(_row_of([_perfect, _unbound]))
+	box.add_child(_row_of([_equip_now, _lock]))
+	box.add_child(_row_of([_b("Summon", _summon_item, 170.0, &"PrimaryButton"), _b("Reroll", func() -> void: _reroll(), 110.0),
+		_b("Strike Test", _strike_test, 140.0)]))
+	box.add_child(_row_of([_b("Full Gear for My Class", _summon_full_set, 250.0), _b("Every Weapon Type", _summon_every_type, 220.0)]))
+	box.add_child(_row_of([_b("Random Fabled Arm", func() -> void: _summon_fabled(false), 220.0), _b("All Fabled of This Rarity", func() -> void: _summon_fabled(true), 250.0)]))
+	box.add_child(_row_of([_b("5 Random (this rarity)", func() -> void: _summon_random(5), 230.0), _b("Random Set Piece", func() -> void: _summon_special(true), 200.0),
+		_b("Random Unique", func() -> void: _summon_special(false), 180.0)]))
+	box.add_child(_cap("Recent"))
+	_recent_box = hbox(4)
+	box.add_child(_recent_box)
+	_fill_recent()
+	box.add_child(_cap("Preview (what Summon gives)"))
+	_preview_box = vbox(4)
+	box.add_child(_preview_box)
+
+func _row_of(ctrls: Array) -> HBoxContainer:
+	var h := hbox(8)
+	for c in ctrls:
+		h.add_child(c)
+	return h
+
+func _set_rarity(r: int, reroll := true) -> void:
+	_rarity_sel = clampi(r, 0, BH.RARITY_COUNT - 1)
+	for i in _rar_btns.size():
+		(_rar_btns[i] as Button).set_pressed_no_signal(i == _rarity_sel)
+	if reroll:
+		_reroll()
+
+## The base passes every filter and the search (every word must appear).
+func _matches(b: ItemBaseDef, q: String) -> bool:
+	var cat: String = _f.get("category", "all")
+	if cat != "all":
+		if cat == "material":
+			if BH.CATEGORY_SLOTS.has(b.category) or b.category in [&"consumable", &"crystal"]:
+				return false
+		elif String(b.category) != cat:
+			return false
+	var wt: String = _f.get("wtype", "any")
+	if wt != "any" and (not b.is_weapon() or String(b.weapon_type) != wt):
+		return false
+	match String(_f.get("source", "any")):
+		"plain":
+			if b.unique_name != "" or b.set_id != &"" or b.story:
+				return false
+		"unique":
+			if b.unique_name == "" or DataFabled.is_fabled(b):
+				return false
+		"set":
+			if b.set_id == &"" or DataAscendant.is_ascendant(b):
+				return false
+		"ascendant":
+			if not DataAscendant.is_ascendant(b):
+				return false
+		"fabled":
+			if not DataFabled.is_fabled(b):
+				return false
+		"story":
+			if not b.story:
+				return false
+	var ci := int(_f.get("class", 0))
+	if ci > 0 and BH.CATEGORY_SLOTS.has(b.category):
+		var cid: StringName = _hero().cls.id if ci == 1 else CLASS_IDS[ci - 2]
+		if not (ItemGenerator.class_fit(b, cid) or ItemGenerator.accessory_fits(b, cid)):
+			return false
+	var ei := int(_f.get("element", 0))
+	if ei > 0 and (not b.is_weapon() or b.element != ei - 1):
+		return false
+	var ni := int(_f.get("native", 0))
+	if ni > 0 and b.fixed_rarity != ni - 1:
+		return false
+	if b.level_req < int(_f.get("lo", 0)) or b.level_req > int(_f.get("hi", BH.LEVEL_CAP + 5)):
+		return false
+	if q != "":
+		var hay := ("%s %s %s %s %s %s" % [b.display_name, b.unique_name, b.id, b.weapon_type, b.lore,
+			BH.rarity_name(b.fixed_rarity) if b.fixed_rarity >= 0 else ""]).to_lower()
+		for pid in b.fixed_powers:
+			var p := DB.power(StringName(pid))
+			if p:
+				hay += " " + p.display_name.to_lower()
+		for word in q.split(" ", false):
+			if not hay.contains(word):
+				return false
+	return true
 
 func _fill_bases() -> void:
-	if _base == null:
+	if _list == null:
 		return
-	_base.clear()
+	var keep := _picked
+	_list.clear()
 	_base_ids.clear()
-	var cat: String = CATEGORIES[_cat.selected]
-	var q := _search.text.strip_edges().to_lower()
-	var bases := DB.item_bases.values().filter(func(b): return (cat == "all" or String(b.category) == cat or (cat == "material" and not BH.CATEGORY_SLOTS.has(b.category) and b.category not in [&"consumable", &"crystal"])) \
-		and (q == "" or String(b.display_name).to_lower().contains(q) or String(b.unique_name).to_lower().contains(q) or String(b.id).contains(q)))
-	bases.sort_custom(func(a, b): return [a.level_req, String(a.display_name)] < [b.level_req, String(b.display_name)])
-	for b in bases.slice(0, 400):
+	var q := _search.text.strip_edges().to_lower() if _search else ""
+	var bases := DB.item_bases.values().filter(func(b): return _matches(b, q))
+	bases.sort_custom(func(a, b): return [String(a.category), a.level_req, String(a.unique_name if a.unique_name != "" else a.display_name)] \
+		< [String(b.category), b.level_req, String(b.unique_name if b.unique_name != "" else b.display_name)])
+	for b: ItemBaseDef in bases:
 		_base_ids.append(b.id)
-		_base.add_item("%s  ·  %s · L%d" % [b.unique_name if b.unique_name != "" else b.display_name, String(b.category).capitalize(), b.level_req])
-	if _base_ids.is_empty():
-		_base.add_item("(nothing matches)")
+		var nm := b.unique_name if b.unique_name != "" else b.display_name
+		var kind: String = String(b.weapon_type).capitalize() if b.is_weapon() else String(CAT_NAMES.get(String(b.category), String(b.category).capitalize()))
+		var i := _list.add_item("%s   ·  %s · L%d%s" % [nm, kind, b.level_req, ("  · " + BH.rarity_name(b.fixed_rarity)) if b.fixed_rarity >= 0 else ""])
+		var ip := b.icon_path()
+		if ip != "" and ResourceLoader.exists(ip):
+			_list.set_item_icon(i, load(ip))
+		if b.fixed_rarity >= 0:
+			_list.set_item_custom_fg_color(i, BH.rarity_color(b.fixed_rarity))
+	if _count_lbl:
+		_count_lbl.text = "%d items match. Click to preview; double-click to summon at once." % _base_ids.size()
+	var idx := _base_ids.find(keep)
+	var fresh := idx < 0
+	if idx < 0 and not _base_ids.is_empty():
+		idx = 0
+	if idx >= 0:
+		_list.select(idx)
+		_list.ensure_current_is_visible()
+		_pick_base(idx, fresh)
+	else:
+		_picked = &""
+		_preview = null
+		_show_preview()
+
+## Select a base: the rarity jumps to the base's own when it has one (pick any other afterwards to force it); the
+## enchantment and power pickers list what fits it.
+func _pick_base(i: int, new_pick := true) -> void:
+	if i < 0 or i >= _base_ids.size():
+		return
+	var b := DB.item_base(_base_ids[i])
+	if b == null:
+		return
+	var changed := _picked != b.id
+	_picked = b.id
+	if changed and new_pick and b.fixed_rarity >= 0 and BH.CATEGORY_SLOTS.has(b.category):
+		_set_rarity(b.fixed_rarity, false)
+	if changed:
+		_fill_pickers(b)
+	_reroll()
+
+func _select_base(id: StringName) -> bool:
+	var idx := _base_ids.find(id)
+	if idx < 0:
+		_search.text = String(id)
+		_fill_bases()
+		idx = _base_ids.find(id)
+	if idx < 0:
+		return false
+	_list.select(idx)
+	_pick_base(idx)
+	return true
+
+func _fill_pickers(b: ItemBaseDef) -> void:
+	_affix_ids = [&""]
+	var an := ["(random)"]
+	if BH.CATEGORY_SLOTS.has(b.category):
+		for a: AffixDef in DB.affixes_for(b.category):
+			if ItemGenerator.affix_fits(b, a) and not a.tiers.is_empty():
+				_affix_ids.append(a.id)
+				an.append(StatDefs.format_modifier(a.stat, a.op, float(a.tiers[-1][2])))
+	for o: OptionButton in _affix_opts:
+		o.clear()
+		for n in an:
+			o.add_item(String(n))
+		o.selected = 0
+	_power_ids2 = [&""]
+	var pn := ["(none)"]
+	if BH.CATEGORY_SLOTS.has(b.category):
+		var plist: Array = DB.powers_for(b.category).filter(func(p): return p.tier != &"fabled" or p.id == DataFabled.sig_power_id(b.id))
+		plist.sort_custom(func(x, y): return [String(x.tier), x.display_name] < [String(y.tier), y.display_name])
+		for p in plist:
+			_power_ids2.append(p.id)
+			pn.append("%s (%s)" % [p.display_name, String(p.tier).capitalize()])
+	for o: OptionButton in _power_opts:
+		o.clear()
+		for n in pn:
+			o.add_item(String(n))
+		o.selected = 0
+
+## A new roll of the picked base with everything chosen (fresh=false keeps the seed: only the settings change).
+func _reroll(fresh := true) -> void:
+	if _picked == &"" or _ilvl == null:
+		return
+	if fresh or _seed == 0:
+		_seed = randi()
+	_preview = _make(DB.item_base(_picked), _seed)
+	_show_preview()
+
+func _make(base: ItemBaseDef, seed_value: int) -> ItemInstance:
+	if base == null:
+		return null
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	return _finish_item(ItemGenerator.generate(base, int(_ilvl.value), _rarity_sel, rng, true))
 
 func _finish_item(it: ItemInstance) -> ItemInstance:
 	if it == null:
 		return null
 	if it.is_equipment():
 		it.quality = _quality.value / 100.0
-		var want := int(_sockets.value)
-		if want > 0:
-			it.sockets = mini(want, maxi(want, Sockets.max_sockets(it)))
-			it.gems.clear()
-			for i in it.sockets:
-				it.gems.append("")
+		_force_affixes(it)
 		if _perfect.button_pressed:
 			for a in it.affixes:
 				var def := DB.affix(StringName(a.id))
@@ -411,12 +740,59 @@ func _finish_item(it: ItemInstance) -> ItemInstance:
 					var top: int = tiers[-1] if not tiers.is_empty() else def.tiers.size() - 1
 					a["tier"] = top
 					a["value"] = roundf(float(def.tiers[top][2])) if def.integer else float(def.tiers[top][2])
-		var pid: StringName = _power_ids[_power.selected]
-		if pid != &"" and not it.powers.has(String(pid)):
-			it.powers.append(String(pid))
+		for o: OptionButton in _power_opts:
+			var pid: StringName = _power_ids2[o.selected] if o.selected >= 0 and o.selected < _power_ids2.size() else &""
+			if pid != &"" and not it.powers.has(String(pid)):
+				it.powers.append(String(pid))
+		var want := int(_sockets.value)
+		if want > 0:
+			it.sockets = want
+			it.gems.clear()
+			var gid: String = _gem_ids[_gem_opt.selected] if _gem_opt and _gem_opt.selected >= 0 and _gem_opt.selected < _gem_ids.size() else ""
+			for i in it.sockets:
+				it.gems.append(gid)
+		it.unbound = _unbound != null and _unbound.button_pressed
+		it.locked = _lock != null and _lock.button_pressed
 	elif it.base.is_stackable():
 		it.count = clampi(int(_count.value), 1, maxi(1, it.base.stack_max) * 20)
 	return it
+
+## The chosen enchantments replace random ones (from the last); a chosen one that already rolled stays.
+func _force_affixes(it: ItemInstance) -> void:
+	var chosen := []
+	for o: OptionButton in _affix_opts:
+		var aid: StringName = _affix_ids[o.selected] if o.selected >= 0 and o.selected < _affix_ids.size() else &""
+		if aid != &"" and not chosen.has(aid):
+			chosen.append(aid)
+	if chosen.is_empty():
+		return
+	var groups := {}
+	for aid in chosen:
+		groups[DB.affix(aid).group] = true
+	var keep := it.affixes.filter(func(a): return chosen.has(StringName(a.id)))
+	var others := it.affixes.filter(func(a): return not chosen.has(StringName(a.id)) and DB.affix(StringName(a.id)) != null \
+		and not groups.has(DB.affix(StringName(a.id)).group))
+	for aid in chosen:
+		if keep.any(func(a): return StringName(a.id) == aid):
+			continue
+		var def := DB.affix(aid)
+		var tiers := def.allowed_tiers(it.ilvl)
+		var top: int = tiers[-1] if not tiers.is_empty() else def.tiers.size() - 1
+		var v := lerpf(float(def.tiers[top][1]), float(def.tiers[top][2]), randf_range(0.6, 1.0))
+		keep.append({"id": String(aid), "tier": top, "value": roundf(v) if def.integer else snappedf(v, 0.001)})
+	var room := maxi(0, it.affixes.size() - keep.size())
+	it.affixes = keep + others.slice(0, room)
+
+func _show_preview() -> void:
+	if _preview_box == null:
+		return
+	for c in _preview_box.get_children():
+		_preview_box.remove_child(c)
+		c.queue_free()
+	if _preview == null:
+		_preview_box.add_child(_text("Pick an item from the list.", 15, UITheme.TEXT_DIM))
+		return
+	_preview_box.add_child(Tips.item(_preview, {"compare": false}))
 
 func _give(it: ItemInstance) -> void:
 	if it == null:
@@ -427,17 +803,57 @@ func _give(it: ItemInstance) -> void:
 	var left := _hero().inventory.add(it)
 	if left > 0:
 		say("No room for %s (%d did not fit)." % [name, left], true)
-	else:
-		Events.loot_picked.emit(it)
-		say("Summoned: %s%s (%s, item level %d)." % ["%d x " % n if n > 1 else "", name, BH.rarity_name(it.rarity), it.ilvl])
+		return
+	Events.loot_picked.emit(it)
+	var msg := "Summoned: %s%s (%s, item level %d)." % ["%d x " % n if n > 1 else "", name, BH.rarity_name(it.rarity), it.ilvl]
+	if _equip_now != null and _equip_now.button_pressed and it.is_equipment():
+		var err := _hero().equip_from_inventory(it)
+		msg += " Equipped." if err == "" else " Not equipped: %s." % err
+	say(msg)
+	_remember(it.base.id)
+
+func _remember(id: StringName) -> void:
+	_recent.erase(id)
+	_recent.push_front(id)
+	_recent = _recent.slice(0, 8)
+	_fill_recent()
+
+func _fill_recent() -> void:
+	if _recent_box == null:
+		return
+	for c in _recent_box.get_children():
+		_recent_box.remove_child(c)
+		c.queue_free()
+	if _recent.is_empty():
+		_recent_box.add_child(_text("Nothing summoned yet.", 14, UITheme.TEXT_DIM))
+	for id in _recent:
+		var b := DB.item_base(id)
+		if b == null:
+			continue
+		var rid: StringName = id
+		var btn := _b("", func() -> void: _select_base(rid), 52.0)
+		var ip := b.icon_path()
+		if ip != "" and ResourceLoader.exists(ip):
+			btn.icon = load(ip)
+			btn.expand_icon = true
+		btn.tooltip_text = b.unique_name if b.unique_name != "" else b.display_name
+		btn.custom_minimum_size = Vector2(52, 52)
+		_recent_box.add_child(btn)
 
 func _summon_item() -> void:
-	if _base_ids.is_empty():
+	if _picked == &"":
 		return
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var base := DB.item_base(_base_ids[_base.selected])
-	_give(_finish_item(ItemGenerator.generate(base, int(_ilvl.value), _rarity.selected, rng)))
+	if _preview == null:
+		_reroll()
+	var it := _preview.clone()
+	it.unbound = _preview.unbound
+	it.locked = _preview.locked
+	_give(it)
+	var base := DB.item_base(_picked)
+	if base and BH.CATEGORY_SLOTS.has(base.category):
+		for i in range(1, int(_count.value)):
+			_give(_make(base, randi()))
+	_reroll()
 
 func _summon_random(n: int) -> void:
 	var rng := RandomNumberGenerator.new()
@@ -445,7 +861,7 @@ func _summon_random(n: int) -> void:
 	for i in n:
 		var b := ItemGenerator.random_base(rng, int(_ilvl.value), [], _hero().cls.id)
 		if b:
-			_give(_finish_item(ItemGenerator.generate(b, int(_ilvl.value), _rarity.selected, rng)))
+			_give(_make(b, rng.randi()))
 
 func _summon_special(want_set: bool) -> void:
 	var rng := RandomNumberGenerator.new()
@@ -454,7 +870,55 @@ func _summon_special(want_set: bool) -> void:
 	if b == null:
 		say("No such item in this build.", true)
 		return
-	_give(_finish_item(ItemGenerator.generate(b, int(_ilvl.value), maxi(_rarity.selected, BH.Rarity.MASTER), rng)))
+	_give(_make(b, rng.randi()))
+
+## One piece for every slot the hero's class wears (and a weapon it masters), at the chosen rarity and level.
+func _summon_full_set() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var cid := _hero().cls.id
+	for cat in [&"weapon", &"helm", &"armor", &"inner_garment", &"leggings", &"gloves", &"boots", &"accessory"]:
+		var b := ItemGenerator.random_base(rng, int(_ilvl.value), [cat], cid, 1.0)
+		if b:
+			_give(_make(b, rng.randi()))
+	if cid == &"knight" or DataTranscendence.family_of(cid) == &"knight":
+		var s := ItemGenerator.random_base(rng, int(_ilvl.value), [&"shield"], cid, 1.0)
+		if s:
+			_give(_make(s, rng.randi()))
+
+## The newest ordinary weapon of every type the item level allows.
+func _summon_every_type() -> void:
+	for wt in WEAPON_TYPES:
+		var pool := DB.item_bases.values().filter(func(b): return b.is_weapon() and b.weapon_type == wt and b.unique_name == "" and b.set_id == &"" \
+			and b.drop_weight > 0 and b.level_req <= int(_ilvl.value))
+		if pool.is_empty():
+			continue
+		pool.sort_custom(func(a, b): return a.level_req > b.level_req)
+		_give(_make(pool[0], randi()))
+
+## A random Fabled arm, or every Fabled arm whose own rarity is the chosen one.
+func _summon_fabled(all_of_rarity: bool) -> void:
+	var ids := DataFabled.ids_of(_rarity_sel) if all_of_rarity else DataFabled.ids()
+	if ids.is_empty():
+		say("No Fabled arm is %s; pick Legendary to Primordial." % BH.rarity_name(_rarity_sel), true)
+		return
+	if not all_of_rarity:
+		ids = [ids[randi() % ids.size()]]
+	for id in ids:
+		_give(_make(DB.item_base(id), randi()))
+
+## Fire the picked Fabled arm's signature strike at the nearest monster without equipping it.
+func _strike_test() -> void:
+	var p := _player()
+	if p == null or _picked == &"" or not DataFabled.is_fabled(DB.item_base(_picked)):
+		say("Pick a Fabled arm first (Source: Fabled Arms).", true)
+		return
+	var near := CombatQuery.nearest(CombatQuery.actors_in_radius(p.get_world_3d(), p.global_position, 20.0, BH.LAYER_ENEMY), p.global_position)
+	if near == null:
+		say("No monster within 20 m. Spawn one on the World page.", true)
+		return
+	FabledProcs.strike(p, _picked, near, 50.0 + 10.0 * p.hero.progress.level)
+	say("%s: %s." % [DB.item_base(_picked).unique_name, String(DataFabled.row(_picked)[8])])
 
 # ---- Tempos: summoner and unsummoner ----------------------------------------------------------------------------------
 

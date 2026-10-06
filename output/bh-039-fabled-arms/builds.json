@@ -1,0 +1,12 @@
+{
+  "builds": {
+    "Windows": {
+      "path": "A:\\Python\\beyond-heroes\\build\\windows\\BeyondHeroes.exe",
+      "bytes": 649067344,
+      "sha256": "0c4a70f9ee197d76f37eb0bbd76f95196597e819ad08538a6fba541031b892ee",
+      "mode": "--export-release",
+      "export_exit": 0
+    }
+  },
+  "source_commit": "3ba1863119cdf697702d663320f25e65821f44fe"
+}

@@ -333,6 +333,11 @@ static func roll_drop(level: int, is_dungeon_boss: bool, class_id: StringName, m
 	if class_id != &"" and StringName(picked[3]) != class_id:
 		pieces.erase("weapon")          # another class's weapon is no reward
 	var piece: String = pieces[rng.randi_range(0, pieces.size() - 1)]
+	# bh-039: half the time a weapon is one of the tier's Fabled arms instead (one the hero's class uses, if any)
+	if piece == "weapon" and rng.randf() < 0.5:
+		var arms := DataFabled.ids_of(rarity).filter(func(id): return class_id == &"" or ItemGenerator.class_fit(DB.item_base(id), class_id))
+		if not arms.is_empty():
+			return DB.make_item(arms[rng.randi_range(0, arms.size() - 1)], rarity, maxi(level + 2, int(TIER[rarity].item_level)), rng.randi())
 	return DB.make_item(piece_id(StringName(picked[0]), piece), rarity, maxi(level + 2, int(TIER[rarity].item_level)), rng.randi())
 
 static func _weighted(weights: Array, rng: RandomNumberGenerator) -> int:

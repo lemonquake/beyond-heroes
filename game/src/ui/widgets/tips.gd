@@ -253,7 +253,9 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 			continue
 		v.add_child(gap(2))
 		var pc_col := AETHER if p.tier == &"aether" else (Color(0.86, 0.55, 1.0) if p.tier == &"mythical" else (Color(0.55, 0.9, 0.75) if p.tier == &"relic" else POWER))
-		v.add_child(lbl(p.display_name + ("  (Relic passive)" if p.tier == &"relic" else ""), 16, pc_col, UITheme.body_bold()))
+		if p.tier == &"fabled":
+			pc_col = DataFabled.colors(it.base.id)[0]
+		v.add_child(lbl(p.display_name + ("  (Relic passive)" if p.tier == &"relic" else ("  (Signature strike)" if p.tier == &"fabled" else "")), 16, pc_col, UITheme.body_bold()))
 		v.add_child(lbl(p.description, 15, Color(pc_col, 0.9)))
 	# set
 	var sd := it.set_def()

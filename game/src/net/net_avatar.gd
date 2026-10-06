@@ -175,6 +175,13 @@ func set_appearance(app: Dictionary) -> void:
 		var have_g = visual.appearance.get("gems", {}).get(hand)
 		if visual.has_weapon(hand) and str(g) != str(have_g):
 			visual.set_weapon_gems(hand, g[0] if g is Array and g.size() == 2 else [], float(g[1]) if g is Array and g.size() == 2 else 0.9)
+	# bh-039: a Fabled arm's moving pieces (absent from older peers: none)
+	var fab = app.get("fabled", {})
+	for hand in [&"main", &"off"]:
+		var f = fab.get(hand) if fab is Dictionary else null
+		var have_f = visual.appearance.get("fabled", {}).get(hand)
+		if visual.has_weapon(hand) and f != null and str(f) != str(have_f):
+			visual.set_weapon_ascendant(hand, -1, 0.9, StringName(str(f)))
 	# Reconstruct presentation-only pieces from known base IDs. Missing data from
 	# an older peer also clears any previous set appearance without changing stats.
 	var gear = app.get("set_gear", {})

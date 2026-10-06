@@ -233,7 +233,7 @@ func refresh_equipment_visuals() -> void:
 		if w != null and w.sockets > 0 and visual.has_weapon(pair[0]):
 			visual.set_weapon_gems(pair[0], w.gems, 0.45 if w.base.category == &"shield" else 0.9)
 		if w != null and visual.has_weapon(pair[0]):
-			visual.set_weapon_ascendant(pair[0], w.rarity, 0.45 if w.base.category == &"shield" else 0.9)
+			visual.set_weapon_ascendant(pair[0], w.rarity, 0.45 if w.base.category == &"shield" else 0.9, w.base.id)
 	visual.set_stance(stance_idle())
 
 var _weapon_key: Array = []
@@ -2077,6 +2077,7 @@ func _on_hit_dealt(target: Actor, res: DamageResult, req: DamageRequest, skill: 
 			_crit_sunflare(target, res)
 	if req == null or not req.tags.has(&"proc"):
 		_ascendant_procs(target, res)
+		FabledProcs.on_hit(self, target, res)        # bh-039: a held Fabled arm's signature strike
 	if stats.has_flag(&"hit_ignite") and rng.randf() < stats.flag(&"hit_ignite") and target.alive:
 		target.status.apply(&"burning", -1.0, 0.0, maxf(1.0, res.total * 0.25), Elements.FIRE)
 	if stats.has_flag(&"burn_spread") and res.components.get(Elements.FIRE, 0.0) > 0.0 and target.status.has(&"burning"):

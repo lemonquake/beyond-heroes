@@ -933,10 +933,21 @@ func set_weapon_gems(hand: StringName, gems: Array, length := 0.9, trails := tru
 
 ## bh-034: an Ascendant weapon or shield in this hand carries its tier's moving light (AscendantFx): the surface shader
 ## and motes along its length. Below Cosmic it does nothing.
-func set_weapon_ascendant(hand: StringName, rarity: int, length := 0.9) -> void:
-	if not _weapon_nodes.has(hand) or not is_instance_valid(_weapon_nodes[hand]) or not AscendantFx.has_look(rarity):
+## bh-039: a Fabled arm (`base_id`, DataFabled) also carries its own moving pieces (FabledFx.held).
+func set_weapon_ascendant(hand: StringName, rarity: int, length := 0.9, base_id := &"") -> void:
+	if not _weapon_nodes.has(hand) or not is_instance_valid(_weapon_nodes[hand]):
 		return
 	var holder: Node3D = _weapon_nodes[hand]
+	if base_id != &"" and not DataFabled.row(base_id).is_empty():
+		var wt := DB.weapon_type(DB.item_base(base_id).weapon_type) if DB.item_base(base_id) else null
+		var fx := FabledFx.held(base_id, wt.length if wt else length)
+		holder.add_child(fx)
+		if appearance.has("weapons"):
+			if not appearance.has("fabled"):
+				appearance["fabled"] = {}
+			appearance.fabled[hand] = String(base_id)
+	if not AscendantFx.has_look(rarity):
+		return
 	AscendantFx.dress(holder, rarity)
 	var aura := AscendantFx.aura(rarity, 0.06, length)
 	aura.name = "Ascendant"
@@ -953,6 +964,8 @@ func detach_weapon(hand: StringName) -> void:
 		(appearance.weapons as Dictionary).erase(hand)
 	if appearance.has("gems"):
 		(appearance.gems as Dictionary).erase(hand)
+	if appearance.has("fabled"):
+		(appearance.fabled as Dictionary).erase(hand)
 	if _weapon_nodes.has(hand):
 		var n: Node = _weapon_nodes[hand]
 		for m in _meshes.duplicate():

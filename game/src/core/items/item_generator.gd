@@ -60,7 +60,9 @@ static func roll_rarity(rng: RandomNumberGenerator, magic_find := 0.0, rank_bonu
 			return i
 	return BH.Rarity.COMMON
 
-static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumberGenerator) -> ItemInstance:
+## `force`: the rarity is exactly `rarity`, whatever the base (the Debug console's Item Summoner): a fixed-rarity unique or
+## set piece takes it too, and a plain base may be Cosmic .. Primordial, carrying that tier's signature power.
+static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumberGenerator, force := false) -> ItemInstance:
 	var it := ItemInstance.new()
 	it.base = base
 	it.ilvl = maxi(1, ilvl)
@@ -69,13 +71,16 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 		# bh-018: crystals keep their grade's colour tier; everything else in the bag is Common
 		it.rarity = base.fixed_rarity if base.category == &"crystal" and base.fixed_rarity >= 0 else BH.Rarity.COMMON
 		return it
-	if base.fixed_rarity >= 0:
+	if force:
+		pass
+	elif base.fixed_rarity >= 0:
 		rarity = base.fixed_rarity
 	elif base.set_id != &"":
 		rarity = maxi(rarity, BH.Rarity.MASTER)
 	rarity = clampi(rarity, 0, BH.RARITY_COUNT - 1)
-	# the Ascendant rarities belong to the Ascendant collections only (a forced debug drop never makes a Cosmic sword)
-	if rarity >= BH.Rarity.COSMIC and base.fixed_rarity < BH.Rarity.COSMIC:
+	# the Ascendant rarities belong to the Ascendant collections (and the Fabled Arms) only: a drop never makes a
+	# Cosmic sword of a plain base. Only the Item Summoner forces one.
+	if rarity >= BH.Rarity.COSMIC and base.fixed_rarity < BH.Rarity.COSMIC and not force:
 		rarity = BH.Rarity.AETHER
 	it.rarity = rarity
 	var rule: Array = RULES[rarity]
@@ -88,6 +93,10 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 		it.license = _pick_license(base, rng)
 	for pid in base.fixed_powers:
 		it.powers.append(String(pid))
+	if force and DataAscendant.TIER.has(rarity):
+		var sig := String(DataAscendant.TIER[rarity].power)
+		if not it.powers.has(sig):
+			it.powers.append(sig)
 	match rarity:
 		BH.Rarity.MYTHICAL:
 			_add_power(it, &"mythical", rng)
