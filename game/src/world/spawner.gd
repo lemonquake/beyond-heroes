@@ -34,6 +34,8 @@ static func populate(p_map: MapRoot, diff_index: int) -> Spawner:
 		s.difficulty = s.difficulty.duplicate()
 		s.difficulty["hp"] = float(s.difficulty.get("hp", 1.0)) * float(power.get("hp", 1.0))
 		s.difficulty["damage"] = float(s.difficulty.get("damage", 1.0)) * float(power.get("damage", 1.0))
+	# bh-040: in the Descent monsters fight harder: more of them swing at once, sooner and more often (Descent.fight)
+	s.difficulty = Descent.fight(s.difficulty, s.scaling_level())
 	p_map.add_child(s)
 	var dir := CombatDirector.new()
 	dir.name = "CombatDirector"
@@ -89,6 +91,12 @@ func _warm_summons() -> void:
 		v.warm_see_through()
 		if v.tree:
 			v.tree.active = false
+
+## The level this visit's monsters are scaled to: the hero's, or the level a dungeon visit was recorded at.
+func scaling_level() -> int:
+	if dungeon != &"":
+		return int(growth.level)
+	return Game.hero.progress.level if Game.hero != null else 1
 
 func _spawn_all() -> void:
 	var def := map.def
@@ -184,7 +192,8 @@ func _spawn_zone(m: Marker3D) -> void:
 		p = _nav_point(p)
 		var mods: Array = []
 		if i == elite_idx and edef.can_be_elite:
-			mods = roll_elite_mods(rng, lvl)
+			# bh-040: the affix count follows the level the elite will really have (Descent.extra_affixes)
+			mods = roll_elite_mods(rng, CombatGrowth.encounter_level(lvl, scaling_level()))
 			if int(growth.stage) == 2:
 				for extra in [&"shielded", &"swift"]:
 					if not mods.has(extra) and mods.size() < 3:
@@ -244,6 +253,7 @@ static func roll_elite_mods(r: RandomNumberGenerator, lvl: int) -> Array:
 	var keys := DB.elite_mods.keys()
 	keys.sort()
 	var n := 2 if lvl >= 6 and r.randf() < 0.45 else 1
+	n = mini(keys.size(), n + Descent.extra_affixes(lvl))
 	var out := []
 	while out.size() < n:
 		var k: StringName = keys[r.randi_range(0, keys.size() - 1)]

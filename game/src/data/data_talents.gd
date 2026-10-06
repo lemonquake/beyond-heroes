@@ -98,7 +98,7 @@ static func mage() -> TreeDef:
 		_n(&"m_crit_cd", "Temporal Flux", "major", "crit_cooldown", Vector2(8, 3), 1, [&"m_regen"], "Critical hits reduce all skill cooldowns by 0.3 s.",
 			{"flags": {&"crit_cdr": 0.3}, "req_tree_points": 4}),
 		_n(&"m_archmage", "Archmage", "keystone", "keystone_archmage", Vector2(7, 5), 1, [&"m_block_mana", &"m_crit_cd"],
-			"+30% Maximum Mana and +1 maximum Arcane Charge. Spells deal 1% more damage per 25 Maximum Mana. Spells cost 15% more.",
+			"+30% Maximum Mana and +1 maximum Arcane Charge. Spells deal 1% more damage per 25 Maximum Mana (at most 50% more). Spells cost 15% more.",
 			{"mods": [[&"max_mana", I, 0.30], [&"arcane_max", F, 1.0], [&"mana_cost_reduction", F, -0.15]], "flags": {&"archmage": 25.0},
 			"req_tree_points": 10, "exclusive": "mage_keystone"}),
 	]

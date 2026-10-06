@@ -1,0 +1,171 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 35.2495227706572,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 16,
+    "damage_taken": 63771.0,
+    "deaths": 0,
+    "hit_limit": 116648.493985848,
+    "hits": 132,
+    "hp_min_frac": 0.421951960068939,
+    "id": "astrarch",
+    "killed": true,
+    "level": 141,
+    "max_hp": 6128433.40479818,
+    "seconds": 115.7,
+    "sources": {
+      "@CharacterBody3D@20888:": {
+        "evaded": 0,
+        "max_pct": 8.05563130624489,
+        "n": 1,
+        "sum": 1477.0
+      },
+      "Enemy_astrarch_242:": {
+        "evaded": 25,
+        "max_pct": 35.2495227706572,
+        "n": 127,
+        "sum": 59652.0
+      },
+      "Enemy_clockwork_sentry_218:": {
+        "evaded": 1,
+        "max_pct": 3.88328333787837,
+        "n": 3,
+        "sum": 1197.0
+      },
+      "Enemy_star_mote_231:": {
+        "evaded": 0,
+        "max_pct": 2.65612217071175,
+        "n": 2,
+        "sum": 710.0
+      },
+      "Enemy_star_mote_242:": {
+        "evaded": 0,
+        "max_pct": 3.125170439051,
+        "n": 2,
+        "sum": 735.0
+      }
+    },
+    "states": {
+      "Alert": 1.08333333333333,
+      "Chase": 0.966666666666668,
+      "Idle": 1.36666666666667,
+      "Position": 10.1166666666667,
+      "Special": 102.149999999995
+    },
+    "status_s": {
+      "chilled": 26.7999999999998
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 512684.0,
+    "biggest_hit_taken_pct": 15.8167439323698,
+    "casts": 104,
+    "damage_taken": 19127.0,
+    "damage_taken_per_min_pct": 26.0799018270976,
+    "deaths": 0,
+    "elite_kills": 2,
+    "elite_ttk": [
+      16.65,
+      46.05
+    ],
+    "first_kill_s": 9.43333333333338,
+    "hits_taken": 32,
+    "hp_min_frac": 0.7785449265994,
+    "kills": 26,
+    "kills_per_min": 6.49999999999775,
+    "left_alive": 25,
+    "levels_gained": 0,
+    "median_elite_ttk": 46.05,
+    "median_ttk": 10.7,
+    "minutes_per_level": 34.1687832472807,
+    "monster_levels": {
+      "139": 26
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "am_grand_convergence": {
+        "max": 512684.0,
+        "n": 23,
+        "steps": "== Grand Convergence (SPELL) ==\nBase roll 125.5\nAttribute increase +1664.6% joins the shared damage budget\nWeapon modifier x1.00 -> 15448.6\nSkill modifier x1.00 -> 15448.6\nFire modifier x5.61 -> 29452.5\nIce modifier x5.60 -> 28532.4\nLightning modifier x5.61 -> 28606.6\nCritical chance 53.3% (roll 0.171)\nCRITICAL x1.93 -> 167035.1\nArcane Charge spent x5 x1.90 -> 317366.6\nArcane Charge x1 x1.06 -> 336408.6\nRunescript x3 x1.12 -> 376777.7\nChampion-slaying x1.50 -> 566296.8\nFire: affinity x1.00, resistance 0% - pen 31% -> 251362.9\nIce: affinity x1.00, resistance 0% - pen 17% -> 218319.8\nLightning: affinity x0.50, resistance 50% - pen 17% -> 62673.0\nWet conducts Lightning x1.25\nWet dampens Fire x0.80\nElemental Concord (2 ailments) x1.03\nFINAL 512684\nKnockback 4.9 m/s (weight 2.6)",
+        "sum": 4979483.0,
+        "target_hp": 3504795.2587355
+      },
+      "am_prismatic_tempest": {
+        "max": 122332.0,
+        "n": 96,
+        "steps": "== Prismatic Tempest (SPELL) ==\nBase roll 26.5\nAttribute increase +1664.6% joins the shared damage budget\nWeapon modifier x1.00 -> 3262.4\nSkill modifier x1.00 -> 3262.4\nLightning modifier x5.61 -> 18306.1\nCritical chance 53.3% (roll 0.235)\nCRITICAL x1.93 -> 35312.5\nSignature weapon x1.12 -> 39550.0\nArcane Charge x5 x1.30 -> 51414.9\nRunescript x3 x1.12 -> 57584.7\nLightning: affinity x1.00, resistance -15% - pen 17% -> 76011.8\nWet conducts Lightning x1.25\nElemental Concord (2 ailments) x1.03\nStatus: +25% damage taken -> 122331.6\nFINAL 122332",
+        "sum": 4619648.0,
+        "target_hp": 3369995.44109182
+      },
+      "ar_aether_lance": {
+        "max": 504993.0,
+        "n": 25,
+        "steps": "== Aether Lance (SPELL) ==\nBase roll 150.2\nAttribute increase +1664.6% joins the shared damage budget\nWeapon modifier x1.00 -> 18496.8\nSkill modifier x1.00 -> 18496.8\nLight modifier x5.59 -> 62053.0\nDark modifier x5.60 -> 41431.5\nCritical chance 53.3% (roll 0.181)\nCRITICAL x1.93 -> 199621.6\nArcane Charge x5 x1.30 -> 259508.1\nRunic Circle x1.16 -> 299991.4\nRunescript x3 x1.12 -> 335990.4\nChampion-slaying x1.50 -> 504993.5\nLight: affinity x1.00, resistance 0% - pen 0% -> 302812.3\nDark: affinity x1.00, resistance 0% - pen 0% -> 202181.2\nFINAL 504993\nKnockback 2.4 m/s (weight 2.6)",
+        "sum": 7030725.0,
+        "target_hp": 3504795.2587355
+      },
+      "basic": {
+        "max": 252937.0,
+        "n": 259,
+        "steps": "== Riftborn lightning (SPELL) ==\nBase roll 138358.5\nAttribute increase +0.0% joins the shared damage budget\nWeapon modifier x1.00 -> 138358.5\nSkill modifier x1.00 -> 138358.5\nLightning: affinity x1.00, resistance 0% - pen 17% -> 161879.4\nWet conducts Lightning x1.25\nStatus: +25% damage taken -> 252936.6\nFINAL 252937",
+        "sum": 8567593.0,
+        "target_hp": 814415.564930524
+      },
+      "chain_lightning": {
+        "max": 341523.0,
+        "n": 67,
+        "steps": "== Chain Lightning (SPELL) ==\nBase roll 98.7\nAttribute increase +1664.6% joins the shared damage budget\nWeapon modifier x1.00 -> 12151.9\nSkill modifier x1.00 -> 12151.9\nLightning modifier x5.61 -> 68188.1\nCritical chance 53.3% (roll 0.020)\nCRITICAL x1.93 -> 131534.9\nArcane Charge x3 x1.18 -> 155211.2\nRunic Circle x1.16 -> 179424.1\nRunescript x3 x1.12 -> 200955.0\nLightning: affinity x1.00, resistance -15% - pen 17% -> 265260.6\nElemental Concord (2 ailments) x1.03\nStatus: +25% damage taken -> 341523.1\nFINAL 341523\nKnockback 0.3 m/s (weight 4.2)",
+        "sum": 3670158.0,
+        "target_hp": 3369995.44109182
+      },
+      "firebolt": {
+        "max": 322800.0,
+        "n": 52,
+        "steps": "== Firebolt (SPELL) ==\nBase roll 73.4\nAttribute increase +1664.6% joins the shared damage budget\nWeapon modifier x1.00 -> 9033.5\nSkill modifier x1.00 -> 9033.5\nFire modifier x5.61 -> 50688.9\nCritical chance 53.3% (roll 0.326)\nCRITICAL x1.93 -> 97778.8\nArcane Charge x5 x1.30 -> 127112.4\nRunic Circle x1.16 -> 146942.0\nRunescript x3 x1.12 -> 164575.0\nChampion-slaying x1.50 -> 247356.3\nFire: affinity x1.00, resistance 0% - pen 31% -> 322799.9\nFINAL 322800\nKnockback 1.2 m/s (weight 2.6)",
+        "sum": 6971853.0,
+        "target_hp": 3504795.2587355
+      },
+      "sig_archmage": {
+        "max": 111422.0,
+        "n": 90,
+        "steps": "== Attuned bolt (SPELL) ==\nBase roll 68304.6\nAttribute increase +0.0% joins the shared damage budget\nWeapon modifier x1.00 -> 68304.6\nSkill modifier x1.00 -> 68304.6\nFire: affinity x1.00, resistance 0% - pen 31% -> 89137.5\nStatus: +25% damage taken -> 111421.9\nFINAL 111422",
+        "sum": 1779033.0,
+        "target_hp": 3369995.44109182
+      }
+    },
+    "ttk": [
+      6.08,
+      6.75,
+      10.7,
+      16.37,
+      5.65,
+      21.88,
+      3.97,
+      11.72,
+      15.33,
+      23.15,
+      5.7,
+      25.4,
+      29.3,
+      1.55,
+      2.4,
+      18.1,
+      4.22,
+      4.22,
+      4.22,
+      9.5,
+      16.4,
+      7.65,
+      15.97,
+      25.7
+    ],
+    "xp": 192685,
+    "xp_per_min": 48171.2499999833
+  },
+  "hero": "Budget",
+  "level0": 141,
+  "level1": 141,
+  "map": "zr_barrens",
+  "max_hp": 18335.0
+}

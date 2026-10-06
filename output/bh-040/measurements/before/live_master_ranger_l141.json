@@ -1,0 +1,147 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 1.42689183411714,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 0,
+    "damage_taken": 1024.0,
+    "deaths": 0,
+    "hit_limit": 118698.581305125,
+    "hits": 63,
+    "hp_min_frac": 0.985731081658829,
+    "id": "astrarch",
+    "killed": true,
+    "level": 142,
+    "max_hp": 3215363.56993774,
+    "seconds": 98.7,
+    "states": {
+      "Alert": 3.01666666666666,
+      "Chase": 0.2,
+      "Idle": 1.06666666666667,
+      "Position": 12.8000000000002,
+      "Special": 81.5999999999967
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 799260.0,
+    "biggest_hit_taken_pct": 0.870780477316706,
+    "casts": 107,
+    "damage_taken": 693.0,
+    "damage_taken_per_min_pct": 0.925876442924006,
+    "deaths": 0,
+    "elite_kills": 3,
+    "elite_ttk": [
+      11.75,
+      18.82,
+      0.0
+    ],
+    "first_kill_s": 5.34999999999999,
+    "hits_taken": 25,
+    "hp_min_frac": 0.986641445861209,
+    "kills": 44,
+    "kills_per_min": 10.9999999999962,
+    "left_alive": 7,
+    "levels_gained": 1,
+    "median_elite_ttk": 11.75,
+    "median_ttk": 2.02,
+    "minutes_per_level": 2.48338982008074,
+    "monster_levels": {
+      "139": 44
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "basic": {
+        "max": 122812.0,
+        "n": 3,
+        "steps": "== Attack 1 (ATTACK) ==\nEvasion: 6.9% (roll 0.669)\nBase weapon roll 10072.4 (range 6904.4-10356.7)\nAttribute increase +1100.0% joins the shared damage budget\nWeapon modifier x1.00 -> 10072.4\nSkill modifier x1.00 -> 10072.4\nPhysical modifier x5.40 -> 43545.8\nLight modifier x5.44 -> 10949.4\nLightning modifier x5.42 -> 343.8\nDark modifier x5.43 -> 265.5\nCritical chance 80.0% (roll 0.629)\nCRITICAL x2.14 -> 117923.7\nDefense 433 (pen 14%) vs level 141: -20.0% physical -> 74541.6\nLight: affinity x1.50, resistance -25% - pen 9% -> 47133.1\nLightning: affinity x1.00, resistance -15% - pen 9% -> 913.1\nDark: affinity x0.50, resistance 30% - pen 9% -> 224.7\nFINAL 122812\nKnockback 1.1 m/s (weight 4.2)",
+        "sum": 208011.0,
+        "target_hp": 1141805.82168435
+      },
+      "multishot": {
+        "max": 172108.0,
+        "n": 27,
+        "steps": "== Multishot (ATTACK) ==\nEvasion: 7.1% (roll 0.884)\nBase weapon roll 8921.8 (range 6904.4-10356.7)\nAttribute increase +1100.0% joins the shared damage budget\nWeapon modifier x1.13 -> 10081.6\nSkill modifier x1.00 -> 10081.6\nPhysical modifier x5.40 -> 43585.6\nLight modifier x5.44 -> 10959.5\nLightning modifier x5.42 -> 444.9\nDark modifier x5.43 -> 334.6\nCritical chance 80.0% (roll 0.741) — forced\nCRITICAL x2.14 -> 118394.5\nHunter's Opening x1.25 -> 147993.1\nDefense 153 (pen 14%) vs level 141: -8.1% physical -> 107133.0\nLight: affinity x1.50, resistance -35% - pen 9% -> 63367.7\nLightning: affinity x1.00, resistance 0% - pen 9% -> 1298.4\nDark: affinity x0.50, resistance 40% - pen 9% -> 309.2\nFINAL 172108\nKnockback 5.7 m/s (weight 1.0)",
+        "sum": 2240755.0,
+        "target_hp": 275936.406907051
+      },
+      "power_shot": {
+        "max": 309976.0,
+        "n": 38,
+        "steps": "== Power Shot (ATTACK) ==\nEvasion: 7.6% (roll 0.484)\nBase weapon roll 9170.0 (range 6904.4-10356.7)\nAttribute increase +1100.0% joins the shared damage budget\nWeapon modifier x2.41 -> 22066.4\nSkill modifier x1.00 -> 22066.4\nPhysical modifier x5.40 -> 95399.0\nLight modifier x5.44 -> 23987.8\nLightning modifier x5.42 -> 1007.3\nDark modifier x5.43 -> 503.6\nCritical chance 80.0% (roll 0.719) — forced\nCRITICAL x2.14 -> 258720.8\nHunter's Opening x1.25 -> 323401.0\nDefense 127 (pen 14%) vs level 141: -6.9% physical -> 237703.7\nLight: affinity x1.00, resistance 0% - pen 9% -> 70006.5\nLightning: affinity x0.50, resistance 50% - pen 9% -> 796.2\nDark: affinity x1.00, resistance 0% - pen 9% -> 1469.6\nFINAL 309976\nKnockback 12.0 m/s (weight 0.5)",
+        "sum": 6963317.0,
+        "target_hp": 190300.970280725
+      },
+      "ss_astral_pierce": {
+        "max": 799260.0,
+        "n": 21,
+        "steps": "== Astral Pierce (ATTACK) ==\nEvasion: 7.1% (roll 0.557)\nBase weapon roll 9132.9 (range 6904.4-10356.7)\nAttribute increase +1100.0% joins the shared damage budget\nWeapon modifier x2.45 -> 22350.5\nSkill modifier x1.00 -> 22350.5\nPhysical modifier x5.40 -> 57976.3\nLight modifier x5.44 -> 63171.1\nLightning modifier x5.42 -> 964.2\nDark modifier x5.43 -> 642.5\nCritical chance 80.0% (roll 0.254)\nCRITICAL x2.14 -> 262693.7\nFocus x93 x1.47 -> 385228.2\nSignature weapon x1.12 -> 431455.6\nQuarry x1.19 -> 513432.1\nDefense 153 (pen 14%) vs level 141: -8.1% physical -> 222819.9\nLight: affinity x1.50, resistance -35% - pen 9% -> 571111.4\nLightning: affinity x1.00, resistance 0% - pen 9% -> 4399.8\nDark: affinity x0.50, resistance 40% - pen 9% -> 928.5\nFINAL 799260\nKnockback 12.0 m/s (weight 1.0)",
+        "sum": 9311437.0,
+        "target_hp": 275936.406907051
+      },
+      "tr_snareline": {
+        "max": 248321.0,
+        "n": 10,
+        "steps": "== Snareline (ATTACK) ==\nBase weapon roll 10301.9 (range 6907.4-10361.1)\nAttribute increase +1101.0% joins the shared damage budget\nWeapon modifier x2.35 -> 24164.9\nSkill modifier x1.00 -> 24164.9\nPhysical modifier x5.32 -> 102873.4\nLight modifier x5.36 -> 25912.9\nLightning modifier x5.34 -> 857.1\nDark modifier x5.35 -> 594.0\nCritical chance 80.0% (roll 0.388)\nCRITICAL x2.14 -> 278708.0\nTrap mastery x1.04 -> 289856.3\nDefense 433 (pen 14%) vs level 142: -19.9% physical -> 183394.9\nLight: affinity x1.00, resistance 0% - pen 9% -> 62919.9\nLightning: affinity x0.50, resistance 50% - pen 9% -> 563.7\nDark: affinity x1.00, resistance 0% - pen 9% -> 1442.3\nFINAL 248321",
+        "sum": 1780781.0,
+        "target_hp": 456722.32867374
+      },
+      "tr_trail_volley": {
+        "max": 361115.0,
+        "n": 25,
+        "steps": "== Trail Volley (ATTACK) ==\nEvasion: 7.1% (roll 0.246)\nBase weapon roll 8888.6 (range 6904.4-10356.7)\nAttribute increase +1100.0% joins the shared damage budget\nWeapon modifier x2.38 -> 21163.3\nSkill modifier x1.00 -> 21163.3\nPhysical modifier x5.40 -> 91494.8\nLight modifier x5.44 -> 23006.1\nLightning modifier x5.42 -> 866.0\nDark modifier x5.43 -> 728.3\nCritical chance 80.0% (roll 0.865) — forced\nCRITICAL x2.14 -> 248443.5\nHunter's Opening x1.25 -> 310554.4\nDefense 153 (pen 14%) vs level 141: -8.1% physical -> 224893.3\nLight: affinity x1.50, resistance -35% - pen 9% -> 133021.3\nLightning: affinity x1.00, resistance 0% - pen 9% -> 2527.2\nDark: affinity x0.50, resistance 40% - pen 9% -> 673.1\nFINAL 361115\nKnockback 6.8 m/s (weight 1.0)",
+        "sum": 5569371.0,
+        "target_hp": 275936.406907051
+      }
+    },
+    "ttk": [
+      1.83,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      4.58,
+      0.0,
+      0.0,
+      1.87,
+      3.72,
+      0.0,
+      2.93,
+      7.58,
+      0.0,
+      3.23,
+      13.67,
+      1.88,
+      0.0,
+      4.08,
+      0.0,
+      10.45,
+      2.02,
+      0.0,
+      2.92,
+      7.08,
+      2.23,
+      5.43,
+      7.32,
+      15.42,
+      4.88,
+      10.43,
+      0.0,
+      4.55,
+      10.35,
+      19.85,
+      0.0,
+      0.0,
+      6.47,
+      1.68,
+      0.0,
+      0.0
+    ],
+    "xp": 780124,
+    "xp_per_min": 195030.999999932
+  },
+  "hero": "Budget",
+  "level0": 141,
+  "level1": 143,
+  "map": "zr_barrens",
+  "max_hp": 18604.0
+}

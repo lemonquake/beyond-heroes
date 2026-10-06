@@ -24,6 +24,8 @@ var _tier_label: Label
 var _tier_key := ""
 var _guild_icon: TextureRect
 var _rested_label: Label
+var _descent_label: Label            # bh-040: "Descent · Circle III · The Ember Halls" past level 80
+var _descent_level := -1
 var _portrait: TextureRect
 var _crosshair: Control
 var _debug_btn: Button
@@ -223,6 +225,13 @@ func _build_top_left() -> void:
 	_rested_label.visible = false
 	th.add_child(_rested_label)
 	TooltipLayer.attach(th, func() -> Control: return Tips.text(_tier_tooltip(), "Hero tier") if player else null)
+	_descent_label = UITheme.label("", 14, Color(1.0, 0.55, 0.3), UITheme.body_bold())
+	_descent_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	_descent_label.add_theme_constant_override("outline_size", 4)
+	_descent_label.mouse_filter = Control.MOUSE_FILTER_PASS
+	_descent_label.visible = false
+	v.add_child(_descent_label)
+	TooltipLayer.attach(_descent_label, func() -> Control: return Tips.text(Descent.summary(player.hero.progress.level), "The Descent") if player else null)
 	_buffs = HBoxContainer.new()
 	_buffs.add_theme_constant_override("separation", 4)
 	v.add_child(_buffs)
@@ -1013,11 +1022,19 @@ func _xp_tip() -> Control:
 		return null
 	var prog := player.hero.progress
 	var need := XpCurve.xp_to_next(prog.level)
-	return Tips.text("%d / %d experience to level %d (%d%%).\nTotal experience: %d" % [prog.xp, need, prog.level + 1,
-		roundi(100.0 * float(prog.xp) / float(maxi(1, need))), prog.total_xp], "Experience")
+	var descent := ""
+	if Descent.active(prog.level):
+		descent = "\nThe Descent: x%.1f experience to level, monsters give %d%%; a fall costs %d%% of this level." % [
+			Descent.xp_requirement_mult(prog.level), roundi(100.0 * Descent.kill_xp_mult(prog.level)), roundi(100.0 * Descent.death_xp_share(prog.level))]
+	return Tips.text("%d / %d experience to level %d (%d%%).\nTotal experience: %d%s" % [prog.xp, need, prog.level + 1,
+		roundi(100.0 * float(prog.xp) / float(maxi(1, need))), prog.total_xp, descent], "Experience")
 
 func _update_tier(h: HeroData) -> void:
 	_rested_label.visible = h.is_rested()
+	if h.progress.level != _descent_level:
+		_descent_level = h.progress.level
+		_descent_label.text = Descent.badge(_descent_level)
+		_descent_label.visible = _descent_label.text != ""
 	var key := "%d/%s" % [h.tier, h.guild]
 	if key == _tier_key:
 		return

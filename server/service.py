@@ -26,7 +26,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-PROTOCOL = 20
+PROTOCOL = 21
 SAVE_VERSION = 4
 SERVER_VERSION = os.environ.get("BH_BUILD", "dev")   # a release id (git commit) set by the deployment; shown by /health
 MAX_PLAYERS = 12

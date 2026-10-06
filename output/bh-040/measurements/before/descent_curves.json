@@ -1,0 +1,1044 @@
+{
+  "rows": [
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 11.0,
+          "best_rate": 16.3730353634578,
+          "boss_hp": 470.657685396121,
+          "boss_seconds_est": 79.0512330858359,
+          "hits_to_kill_elite": 9.92727272727273,
+          "hits_to_kill_normal": 3.81818181818182,
+          "hp": 289.0,
+          "normal_blow_pct": 0.692041522491349
+        },
+        "mage": {
+          "best_hit": 18.0,
+          "best_rate": 19.5202893991821,
+          "boss_hp": 481.679047301593,
+          "boss_seconds_est": 49.3516297275567,
+          "hits_to_kill_elite": 6.06666666666667,
+          "hits_to_kill_normal": 2.33333333333333,
+          "hp": 202.0,
+          "normal_blow_pct": 1.48514851485149
+        },
+        "ranger": {
+          "best_hit": 23.0,
+          "best_rate": 20.6777604491578,
+          "boss_hp": 687.559471911786,
+          "boss_seconds_est": 84.9751805829906,
+          "hits_to_kill_elite": 4.74782608695652,
+          "hits_to_kill_normal": 1.82608695652174,
+          "hp": 233.0,
+          "normal_blow_pct": 1.28755364806867
+        },
+        "shadowblade": {
+          "best_hit": 8.0,
+          "best_rate": 19.2038834951456,
+          "boss_hp": 576.592073832734,
+          "boss_seconds_est": 80.0660378898168,
+          "hits_to_kill_elite": 13.65,
+          "hits_to_kill_normal": 5.25,
+          "hp": 231.0,
+          "normal_blow_pct": 1.2987012987013
+        }
+      },
+      "elite_hp": 109.2,
+      "kills_per_level": 16.6666666666667,
+      "level": 1,
+      "monster_level": 1,
+      "normal_defense": 12.0,
+      "normal_hp": 42.0,
+      "xp_per_kill": 12.0,
+      "xp_to_next": 200
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 78.0,
+          "best_rate": 112.93079766537,
+          "boss_hp": 3533.37710381549,
+          "boss_seconds_est": 93.8639550112469,
+          "hits_to_kill_elite": 6.84215,
+          "hits_to_kill_normal": 2.63159615384615,
+          "hp": 1293.0,
+          "normal_blow_pct": 0.386697602474865
+        },
+        "mage": {
+          "best_hit": 102.0,
+          "best_rate": 116.996392062538,
+          "boss_hp": 2690.15406079203,
+          "boss_seconds_est": 45.0232811428122,
+          "hits_to_kill_elite": 5.23223235294118,
+          "hits_to_kill_normal": 2.01239705882353,
+          "hp": 989.0,
+          "normal_blow_pct": 0.808897876643074
+        },
+        "ranger": {
+          "best_hit": 119.0,
+          "best_rate": 105.61035971223,
+          "boss_hp": 3648.6289734278,
+          "boss_seconds_est": 97.8860607950529,
+          "hits_to_kill_elite": 4.4847705882353,
+          "hits_to_kill_normal": 1.72491176470588,
+          "hp": 937.0,
+          "normal_blow_pct": 0.853788687299893
+        },
+        "shadowblade": {
+          "best_hit": 44.0,
+          "best_rate": 127.752286432161,
+          "boss_hp": 4570.35096421854,
+          "boss_seconds_est": 58.3001647727997,
+          "hits_to_kill_elite": 12.1292659090909,
+          "hits_to_kill_normal": 4.66510227272727,
+          "hp": 996.0,
+          "normal_blow_pct": 0.803212851405622
+        }
+      },
+      "elite_hp": 533.6877,
+      "kills_per_level": 21.182156133829,
+      "level": 10,
+      "monster_level": 10,
+      "normal_defense": 22.8,
+      "normal_hp": 205.2645,
+      "xp_per_kill": 269.0,
+      "xp_to_next": 5698
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 547.0,
+          "best_rate": 819.393352601156,
+          "boss_hp": 19792.8239716264,
+          "boss_seconds_est": 107.423065308611,
+          "hits_to_kill_elite": 4.37483747714808,
+          "hits_to_kill_normal": 1.68262979890311,
+          "hp": 2606.0,
+          "normal_blow_pct": 0.268610897927859
+        },
+        "mage": {
+          "best_hit": 611.0,
+          "best_rate": 558.508620689655,
+          "boss_hp": 16319.0837610049,
+          "boss_seconds_est": 52.7993115297623,
+          "hits_to_kill_elite": 3.91658936170213,
+          "hits_to_kill_normal": 1.50638052373159,
+          "hp": 1864.0,
+          "normal_blow_pct": 0.590128755364807
+        },
+        "ranger": {
+          "best_hit": 519.0,
+          "best_rate": 533.162542372881,
+          "boss_hp": 19583.3244208645,
+          "boss_seconds_est": 96.2784203052639,
+          "hits_to_kill_elite": 4.61085953757225,
+          "hits_to_kill_normal": 1.77340751445087,
+          "hp": 1880.0,
+          "normal_blow_pct": 0.478723404255319
+        },
+        "shadowblade": {
+          "best_hit": 270.0,
+          "best_rate": 865.554357798165,
+          "boss_hp": 26746.7013854916,
+          "boss_seconds_est": 94.8106172049795,
+          "hits_to_kill_elite": 8.86309666666667,
+          "hits_to_kill_normal": 3.40888333333333,
+          "hp": 1946.0,
+          "normal_blow_pct": 0.513874614594039
+        }
+      },
+      "elite_hp": 2393.0361,
+      "kills_per_level": 25.592700729927,
+      "level": 20,
+      "monster_level": 20,
+      "normal_defense": 34.8,
+      "normal_hp": 920.3985,
+      "xp_per_kill": 685.0,
+      "xp_to_next": 17531
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 724.0,
+          "best_rate": 1236.4372519084,
+          "boss_hp": 45677.4626027342,
+          "boss_seconds_est": 66.8664804326633,
+          "hits_to_kill_elite": 9.19759997930254,
+          "hits_to_kill_normal": 3.5375384535779,
+          "hp": 3821.0,
+          "normal_blow_pct": 0.235540434441246
+        },
+        "mage": {
+          "best_hit": 1226.0,
+          "best_rate": 1228.46137667304,
+          "boss_hp": 34484.7551149217,
+          "boss_seconds_est": 56.1430025717446,
+          "hits_to_kill_elite": 5.43153538745109,
+          "hits_to_kill_normal": 2.08905207209657,
+          "hp": 2795.0,
+          "normal_blow_pct": 0.465116279069767
+        },
+        "ranger": {
+          "best_hit": 916.0,
+          "best_rate": 1065.83556962025,
+          "boss_hp": 46864.7334636362,
+          "boss_seconds_est": 80.2320147705246,
+          "hits_to_kill_elite": 7.26971876093345,
+          "hits_to_kill_normal": 2.7960456772821,
+          "hp": 3072.0,
+          "normal_blow_pct": 0.423177083333333
+        },
+        "shadowblade": {
+          "best_hit": 647.0,
+          "best_rate": 2096.64145251397,
+          "boss_hp": 59608.4999108295,
+          "boss_seconds_est": 74.774445004417,
+          "hits_to_kill_elite": 10.2922138871948,
+          "hits_to_kill_normal": 3.95854380276723,
+          "hp": 2810.0,
+          "normal_blow_pct": 0.462633451957295
+        }
+      },
+      "elite_hp": 6659.06238501504,
+      "kills_per_level": 31.8480074142725,
+      "level": 30,
+      "monster_level": 28,
+      "normal_defense": 44.4,
+      "normal_hp": 2561.1778403904,
+      "xp_per_kill": 1079.0,
+      "xp_to_next": 34364
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 2048.0,
+          "best_rate": 3734.2533903482,
+          "boss_hp": 92548.1424551642,
+          "boss_seconds_est": 112.542700726699,
+          "hits_to_kill_elite": 8.05923752314236,
+          "hits_to_kill_normal": 3.09970673967014,
+          "hp": 5255.0,
+          "normal_blow_pct": 0.190294957183635
+        },
+        "mage": {
+          "best_hit": 1804.0,
+          "best_rate": 1216.12691736764,
+          "boss_hp": 57687.0776305805,
+          "boss_seconds_est": 29.6643378944756,
+          "hits_to_kill_elite": 9.14928960498645,
+          "hits_to_kill_normal": 3.5189575403794,
+          "hp": 3911.0,
+          "normal_blow_pct": 0.383533623114293
+        },
+        "ranger": {
+          "best_hit": 2471.0,
+          "best_rate": 2743.82064617619,
+          "boss_hp": 82284.9979292813,
+          "boss_seconds_est": 126.456184015351,
+          "hits_to_kill_elite": 6.67961086499213,
+          "hits_to_kill_normal": 2.56908110192005,
+          "hp": 4310.0,
+          "normal_blow_pct": 0.324825986078886
+        },
+        "shadowblade": {
+          "best_hit": 991.0,
+          "best_rate": 3585.26632907415,
+          "boss_hp": 104164.142908093,
+          "boss_seconds_est": 74.0151929090257,
+          "hits_to_kill_elite": 16.6552153858684,
+          "hits_to_kill_normal": 6.40585207148783,
+          "hp": 3906.0,
+          "normal_blow_pct": 0.3584229390681
+        }
+      },
+      "elite_hp": 16505.3184473956,
+      "kills_per_level": 34.1909146715777,
+      "level": 40,
+      "monster_level": 38,
+      "normal_defense": 56.4,
+      "normal_hp": 6348.19940284444,
+      "xp_per_kill": 1629.0,
+      "xp_to_next": 55697
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 2237.0,
+          "best_rate": 3617.49440677966,
+          "boss_hp": 117600.180116351,
+          "boss_seconds_est": 96.7048514427195,
+          "hits_to_kill_elite": 15.3708759590626,
+          "hits_to_kill_normal": 5.91187536887023,
+          "hp": 7185.0,
+          "normal_blow_pct": 0.180932498260264
+        },
+        "mage": {
+          "best_hit": 5089.0,
+          "best_rate": 6356.62083080655,
+          "boss_hp": 102750.994108955,
+          "boss_seconds_est": 115.84620359399,
+          "hits_to_kill_elite": 6.75666133236845,
+          "hits_to_kill_normal": 2.59871589706479,
+          "hp": 4653.0,
+          "normal_blow_pct": 0.42983021706426
+        },
+        "ranger": {
+          "best_hit": 3506.0,
+          "best_rate": 4402.58862722704,
+          "boss_hp": 166098.399155992,
+          "boss_seconds_est": 100.663931003712,
+          "hits_to_kill_elite": 9.80737293794155,
+          "hits_to_kill_normal": 3.7720665145929,
+          "hp": 5143.0,
+          "normal_blow_pct": 0.369434182383823
+        },
+        "shadowblade": {
+          "best_hit": 2243.0,
+          "best_rate": 8805.26786338904,
+          "boss_hp": 205129.21760585,
+          "boss_seconds_est": 104.298124552194,
+          "hits_to_kill_elite": 15.3297590371926,
+          "hits_to_kill_normal": 5.89606116815101,
+          "hp": 4575.0,
+          "normal_blow_pct": 0.415300546448087
+        }
+      },
+      "elite_hp": 34384.6495204231,
+      "kills_per_level": 36.3690103000448,
+      "level": 50,
+      "monster_level": 48,
+      "normal_defense": 68.4,
+      "normal_hp": 13224.8652001627,
+      "xp_per_kill": 2233.0,
+      "xp_to_next": 81212
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 3130.0,
+          "best_rate": 5938.77395165987,
+          "boss_hp": 195149.404004948,
+          "boss_seconds_est": 83.1467105233139,
+          "hits_to_kill_elite": 20.420092117345,
+          "hits_to_kill_normal": 7.85388158359425,
+          "hp": 8990.0,
+          "normal_blow_pct": 0.144605116796441
+        },
+        "mage": {
+          "best_hit": 7751.0,
+          "best_rate": 8650.45968494749,
+          "boss_hp": 138833.064017153,
+          "boss_seconds_est": 111.291282086625,
+          "hits_to_kill_elite": 8.24601836244226,
+          "hits_to_kill_normal": 3.17154552401626,
+          "hp": 5586.0,
+          "normal_blow_pct": 0.411743644826352
+        },
+        "ranger": {
+          "best_hit": 4830.0,
+          "best_rate": 6128.70152413209,
+          "boss_hp": 243231.470136507,
+          "boss_seconds_est": 100.361017825509,
+          "hits_to_kill_elite": 13.2328961340145,
+          "hits_to_kill_normal": 5.08957543615942,
+          "hp": 5933.0,
+          "normal_blow_pct": 0.387662228215068
+        },
+        "shadowblade": {
+          "best_hit": 3476.0,
+          "best_rate": 13182.3220768137,
+          "boss_hp": 299581.476262424,
+          "boss_seconds_est": 99.867993078202,
+          "hits_to_kill_elite": 18.3874822575633,
+          "hits_to_kill_normal": 7.07210856060127,
+          "hp": 5354.0,
+          "normal_blow_pct": 0.429585356742622
+        }
+      },
+      "elite_hp": 63914.88832729,
+      "kills_per_level": 38.3902185223725,
+      "level": 60,
+      "monster_level": 58,
+      "normal_defense": 80.4,
+      "normal_hp": 24582.64935665,
+      "xp_per_kill": 2883.0,
+      "xp_to_next": 110679
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 4339.0,
+          "best_rate": 7760.34935661765,
+          "boss_hp": 259013.855061379,
+          "boss_seconds_est": 84.2472040022876,
+          "hits_to_kill_elite": 21.5655115054496,
+          "hits_to_kill_normal": 8.29442750209598,
+          "hp": 10916.0,
+          "normal_blow_pct": 0.137412971784536
+        },
+        "mage": {
+          "best_hit": 10493.0,
+          "best_rate": 11035.0417127072,
+          "boss_hp": 178611.811904311,
+          "boss_seconds_est": 85.0758533744312,
+          "hits_to_kill_elite": 8.91763598800587,
+          "hits_to_kill_normal": 3.42985999538687,
+          "hp": 6839.0,
+          "normal_blow_pct": 0.394794560608276
+        },
+        "ranger": {
+          "best_hit": 6801.0,
+          "best_rate": 8680.89905660377,
+          "boss_hp": 355211.507753816,
+          "boss_seconds_est": 103.299329933329,
+          "hits_to_kill_elite": 13.7586758450442,
+          "hits_to_kill_normal": 5.29179840194008,
+          "hp": 7392.0,
+          "normal_blow_pct": 0.324675324675325
+        },
+        "shadowblade": {
+          "best_hit": 4869.0,
+          "best_rate": 18723.0439285714,
+          "boss_hp": 436768.356386865,
+          "boss_seconds_est": 101.959874892281,
+          "hits_to_kill_elite": 19.218064165567,
+          "hits_to_kill_normal": 7.39156314060268,
+          "hp": 6709.0,
+          "normal_blow_pct": 0.372633775525414
+        }
+      },
+      "elite_hp": 93572.7544221456,
+      "kills_per_level": 40.2804366078925,
+      "level": 70,
+      "monster_level": 68,
+      "normal_defense": 92.4,
+      "normal_hp": 35989.5209315945,
+      "xp_per_kill": 3573.0,
+      "xp_to_next": 143922
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 5717.0,
+          "best_rate": 11052.4712435604,
+          "boss_hp": 369855.057485702,
+          "boss_seconds_est": 84.315198040614,
+          "hits_to_kill_elite": 22.2194659223804,
+          "hits_to_kill_normal": 8.54594843168475,
+          "hp": 11872.0,
+          "normal_blow_pct": 0.143194070080863
+        },
+        "mage": {
+          "best_hit": 13728.0,
+          "best_rate": 15612.4513761468,
+          "boss_hp": 249365.466318557,
+          "boss_seconds_est": 86.7786196946134,
+          "hits_to_kill_elite": 9.25325514847381,
+          "hits_to_kill_normal": 3.55894428787454,
+          "hp": 7444.0,
+          "normal_blow_pct": 0.3895754970446
+        },
+        "ranger": {
+          "best_hit": 8534.0,
+          "best_rate": 11450.4658349328,
+          "boss_hp": 476850.925015824,
+          "boss_seconds_est": 104.929333925746,
+          "hits_to_kill_elite": 14.8850113285972,
+          "hits_to_kill_normal": 5.72500435715277,
+          "hp": 7901.0,
+          "normal_blow_pct": 0.367042146563726
+        },
+        "shadowblade": {
+          "best_hit": 6295.0,
+          "best_rate": 25195.2930773455,
+          "boss_hp": 588229.726234842,
+          "boss_seconds_est": 101.637738876242,
+          "hits_to_kill_elite": 20.1792989163222,
+          "hits_to_kill_normal": 7.76126881397009,
+          "hp": 7133.0,
+          "normal_blow_pct": 0.406561054254872
+        }
+      },
+      "elite_hp": 127028.686678249,
+      "kills_per_level": 42.0458139534884,
+      "level": 80,
+      "monster_level": 78,
+      "normal_defense": 104.4,
+      "normal_hp": 48857.1871839417,
+      "xp_per_kill": 4300.0,
+      "xp_to_next": 180797
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 7338.0,
+          "best_rate": 13415.3607400722,
+          "boss_hp": 462178.27005181,
+          "boss_seconds_est": 86.6956595817429,
+          "hits_to_kill_elite": 22.8734029515928,
+          "hits_to_kill_normal": 8.79746267368955,
+          "hp": 13453.0,
+          "normal_blow_pct": 0.141232438861221
+        },
+        "mage": {
+          "best_hit": 17598.0,
+          "best_rate": 18920.2367088608,
+          "boss_hp": 311378.308123038,
+          "boss_seconds_est": 87.3938070100586,
+          "hits_to_kill_elite": 9.5377333139441,
+          "hits_to_kill_normal": 3.66835896690158,
+          "hp": 8375.0,
+          "normal_blow_pct": 0.394029850746269
+        },
+        "ranger": {
+          "best_hit": 11851.0,
+          "best_rate": 15983.9855758267,
+          "boss_hp": 691974.419898775,
+          "boss_seconds_est": 108.927880249505,
+          "hits_to_kill_elite": 14.1629424401981,
+          "hits_to_kill_normal": 5.44728555392236,
+          "hp": 9103.0,
+          "normal_blow_pct": 0.340547072393716
+        },
+        "shadowblade": {
+          "best_hit": 8274.0,
+          "best_rate": 33573.7840463215,
+          "boss_hp": 816436.327080047,
+          "boss_seconds_est": 105.674596969194,
+          "hits_to_kill_elite": 20.2858388758506,
+          "hits_to_kill_normal": 7.80224572148102,
+          "hp": 8211.0,
+          "normal_blow_pct": 0.389721105833638
+        }
+      },
+      "elite_hp": 167845.030858788,
+      "kills_per_level": 43.7036158861885,
+      "level": 90,
+      "monster_level": 88,
+      "normal_defense": 116.4,
+      "normal_hp": 64555.7810995339,
+      "xp_per_kill": 5061.0,
+      "xp_to_next": 221184
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 9275.0,
+          "best_rate": 17135.728421288,
+          "boss_hp": 594632.236431272,
+          "boss_seconds_est": 87.0347909589575,
+          "hits_to_kill_elite": 23.3755133375283,
+          "hits_to_kill_normal": 8.99058205289551,
+          "hp": 14830.0,
+          "normal_blow_pct": 0.141604855023601
+        },
+        "mage": {
+          "best_hit": 22535.0,
+          "best_rate": 24485.6102150538,
+          "boss_hp": 397054.561922292,
+          "boss_seconds_est": 51.5854267483296,
+          "hits_to_kill_elite": 9.62094014668627,
+          "hits_to_kill_normal": 3.70036159487934,
+          "hp": 9305.0,
+          "normal_blow_pct": 0.386888769478775
+        },
+        "ranger": {
+          "best_hit": 15166.0,
+          "best_rate": 20918.9913849509,
+          "boss_hp": 898344.442289831,
+          "boss_seconds_est": 107.775637811321,
+          "hits_to_kill_elite": 14.2956538444926,
+          "hits_to_kill_normal": 5.49832840172793,
+          "hp": 10115.0,
+          "normal_blow_pct": 0.336134453781513
+        },
+        "shadowblade": {
+          "best_hit": 10521.0,
+          "best_rate": 43556.94,
+          "boss_hp": 1069965.44045728,
+          "boss_seconds_est": 106.751655747444,
+          "hits_to_kill_elite": 20.6071558032103,
+          "hits_to_kill_normal": 7.92582915508087,
+          "hp": 9124.0,
+          "normal_blow_pct": 0.383603682595353
+        }
+      },
+      "elite_hp": 216807.886205575,
+      "kills_per_level": 45.2805878332194,
+      "level": 100,
+      "monster_level": 98,
+      "normal_defense": 128.4,
+      "normal_hp": 83387.6485406058,
+      "xp_per_kill": 5852.0,
+      "xp_to_next": 264982
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 11357.0,
+          "best_rate": 21197.7196808511,
+          "boss_hp": 752913.025652347,
+          "boss_seconds_est": 89.2246359537454,
+          "hits_to_kill_elite": 24.1882481614583,
+          "hits_to_kill_normal": 9.30317236979166,
+          "hp": 16313.0,
+          "normal_blow_pct": 0.140991846993196
+        },
+        "mage": {
+          "best_hit": 27055.0,
+          "best_rate": 29700.4311722913,
+          "boss_hp": 496817.876655729,
+          "boss_seconds_est": 42.92163081259,
+          "hits_to_kill_elite": 10.153610584723,
+          "hits_to_kill_normal": 3.90523484027809,
+          "hp": 10233.0,
+          "normal_blow_pct": 0.390892211472686
+        },
+        "ranger": {
+          "best_hit": 18759.0,
+          "best_rate": 26413.3769311065,
+          "boss_hp": 1140406.94555846,
+          "boss_seconds_est": 108.467456610902,
+          "hits_to_kill_elite": 14.6439540684302,
+          "hits_to_kill_normal": 5.63229002631931,
+          "hp": 11113.0,
+          "normal_blow_pct": 0.34194186988212
+        },
+        "shadowblade": {
+          "best_hit": 12857.0,
+          "best_rate": 54162.629367863,
+          "boss_hp": 1359023.4166691,
+          "boss_seconds_est": 108.437594362148,
+          "hits_to_kill_elite": 21.3662545204699,
+          "hits_to_kill_normal": 8.21779020018075,
+          "hp": 10027.0,
+          "normal_blow_pct": 0.3889498354443
+        }
+      },
+      "elite_hp": 274705.934369682,
+      "kills_per_level": 46.7705679604376,
+      "level": 110,
+      "monster_level": 108,
+      "normal_defense": 140.4,
+      "normal_hp": 105656.128603724,
+      "xp_per_kill": 6673.0,
+      "xp_to_next": 312100
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 22485.0,
+          "best_rate": 37736.4688049209,
+          "boss_hp": 1078580.63009996,
+          "boss_seconds_est": 125.031986421535,
+          "hits_to_kill_elite": 15.224805541493,
+          "hits_to_kill_normal": 5.85569443903578,
+          "hp": 17635.0,
+          "normal_blow_pct": 0.141763538417919
+        },
+        "mage": {
+          "best_hit": 18047.0,
+          "best_rate": 21694.7000848896,
+          "boss_hp": 636241.048714669,
+          "boss_seconds_est": 46.6650987902418,
+          "hits_to_kill_elite": 18.9687899706583,
+          "hits_to_kill_normal": 7.2956884502532,
+          "hp": 11166.0,
+          "normal_blow_pct": 0.394053376320974
+        },
+        "ranger": {
+          "best_hit": 27420.0,
+          "best_rate": 40769.7522522522,
+          "boss_hp": 1501096.20680793,
+          "boss_seconds_est": 149.788340434081,
+          "hits_to_kill_elite": 12.4846736907538,
+          "hits_to_kill_normal": 4.80179757336686,
+          "hp": 12320.0,
+          "normal_blow_pct": 0.324675324675325
+        },
+        "shadowblade": {
+          "best_hit": 9952.0,
+          "best_rate": 44664.576,
+          "boss_hp": 1809323.00954444,
+          "boss_seconds_est": 109.999137280706,
+          "hits_to_kill_elite": 34.3980860731984,
+          "hits_to_kill_normal": 13.2300331050763,
+          "hp": 10982.0,
+          "normal_blow_pct": 0.37333818976507
+        }
+      },
+      "elite_hp": 342329.752600471,
+      "kills_per_level": 48.1997340425532,
+      "level": 120,
+      "monster_level": 118,
+      "normal_defense": 152.4,
+      "normal_hp": 131665.289461719,
+      "xp_per_kill": 7520.0,
+      "xp_to_next": 362462
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 27048.0,
+          "best_rate": 45835.5219512195,
+          "boss_hp": 1334953.75261229,
+          "boss_seconds_est": 127.182686966629,
+          "hits_to_kill_elite": 15.5453761852689,
+          "hits_to_kill_normal": 5.97899084048805,
+          "hp": 20084.0,
+          "normal_blow_pct": 0.134435371439952
+        },
+        "mage": {
+          "best_hit": 21639.0,
+          "best_rate": 26329.8704697987,
+          "boss_hp": 781783.167213866,
+          "boss_seconds_est": 48.5987111686113,
+          "hits_to_kill_elite": 19.431181434408,
+          "hits_to_kill_normal": 7.47353132092614,
+          "hp": 12851.0,
+          "normal_blow_pct": 0.365730293362384
+        },
+        "ranger": {
+          "best_hit": 33145.0,
+          "best_rate": 50115.8774038461,
+          "boss_hp": 1773025.08051375,
+          "boss_seconds_est": 143.685911159871,
+          "hits_to_kill_elite": 12.6858149059935,
+          "hits_to_kill_normal": 4.87915957922826,
+          "hp": 14038.0,
+          "normal_blow_pct": 0.306311440376122
+        },
+        "shadowblade": {
+          "best_hit": 11903.0,
+          "best_rate": 53420.664,
+          "boss_hp": 2072127.09981726,
+          "boss_seconds_est": 105.243651526389,
+          "hits_to_kill_elite": 35.3248202183612,
+          "hits_to_kill_normal": 13.5864693147543,
+          "hp": 12589.0,
+          "normal_blow_pct": 0.349511478274684
+        }
+      },
+      "elite_hp": 420471.335059154,
+      "kills_per_level": 49.5647563445729,
+      "level": 130,
+      "monster_level": 128,
+      "normal_defense": 164.4,
+      "normal_hp": 161719.744253521,
+      "xp_per_kill": 8393.0,
+      "xp_to_next": 415997
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 32862.0,
+          "best_rate": 56214.4523316062,
+          "boss_hp": 1664255.9946751,
+          "boss_seconds_est": 129.099704314859,
+          "hits_to_kill_elite": 15.8091914328519,
+          "hits_to_kill_normal": 6.08045824340457,
+          "hp": 21773.0,
+          "normal_blow_pct": 0.137785330455151
+        },
+        "mage": {
+          "best_hit": 25978.0,
+          "best_rate": 31981.3736318408,
+          "boss_hp": 958023.623790482,
+          "boss_seconds_est": 50.4760015823295,
+          "hits_to_kill_elite": 19.9985237072284,
+          "hits_to_kill_normal": 7.69173988739553,
+          "hp": 13939.0,
+          "normal_blow_pct": 0.365879905301672
+        },
+        "ranger": {
+          "best_hit": 40333.0,
+          "best_rate": 62009.6641705069,
+          "boss_hp": 2192326.66549218,
+          "boss_seconds_est": 143.427574623503,
+          "hits_to_kill_elite": 12.8808084909721,
+          "hits_to_kill_normal": 4.95415711191236,
+          "hp": 15220.0,
+          "normal_blow_pct": 0.302233902759527
+        },
+        "shadowblade": {
+          "best_hit": 14303.0,
+          "best_rate": 64191.864,
+          "boss_hp": 2465296.71521081,
+          "boss_seconds_est": 104.134319859206,
+          "hits_to_kill_elite": 36.3225651168551,
+          "hits_to_kill_normal": 13.9702173526366,
+          "hp": 13647.0,
+          "normal_blow_pct": 0.351725653989888
+        }
+      },
+      "elite_hp": 519521.648866379,
+      "kills_per_level": 51.0045837330775,
+      "level": 141,
+      "monster_level": 139,
+      "normal_defense": 177.6,
+      "normal_hp": 199816.018794761,
+      "xp_per_kill": 9381.0,
+      "xp_to_next": 478474
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 44477.0,
+          "best_rate": 77472.2888794567,
+          "boss_hp": 2356609.5947389,
+          "boss_seconds_est": 132.394011501088,
+          "hits_to_kill_elite": 16.3216345041378,
+          "hits_to_kill_normal": 6.27755173236071,
+          "hp": 24696.0,
+          "normal_blow_pct": 0.133624878522838
+        },
+        "mage": {
+          "best_hit": 34962.0,
+          "best_rate": 43940.8772727273,
+          "boss_hp": 1333753.50948858,
+          "boss_seconds_est": 51.1453258275919,
+          "hits_to_kill_elite": 20.7636101435999,
+          "hits_to_kill_normal": 7.98600390138457,
+          "hp": 15815.0,
+          "normal_blow_pct": 0.366740436294657
+        },
+        "ranger": {
+          "best_hit": 54940.0,
+          "best_rate": 86606.1488812392,
+          "boss_hp": 3059293.02757693,
+          "boss_seconds_est": 143.067571950506,
+          "hits_to_kill_elite": 13.2132751700135,
+          "hits_to_kill_normal": 5.08202891154363,
+          "hp": 17263.0,
+          "normal_blow_pct": 0.312807739095175
+        },
+        "shadowblade": {
+          "best_hit": 19084.0,
+          "best_rate": 85648.992,
+          "boss_hp": 3238482.50114548,
+          "boss_seconds_est": 102.425409518687,
+          "hits_to_kill_elite": 38.0390556403552,
+          "hits_to_kill_normal": 14.6304060155212,
+          "hp": 15484.0,
+          "normal_blow_pct": 0.361663652802893
+        }
+      },
+      "elite_hp": 725937.337840539,
+      "kills_per_level": 53.3569763271162,
+      "level": 160,
+      "monster_level": 158,
+      "normal_defense": 200.4,
+      "normal_hp": 279206.668400207,
+      "xp_per_kill": 11152.0,
+      "xp_to_next": 595037
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 59317.0,
+          "best_rate": 105111.902587646,
+          "boss_hp": 3287565.44852921,
+          "boss_seconds_est": 135.915515642107,
+          "hits_to_kill_elite": 16.8034239107066,
+          "hits_to_kill_normal": 6.46285535027177,
+          "hp": 27765.0,
+          "normal_blow_pct": 0.136862956960202
+        },
+        "mage": {
+          "best_hit": 46318.0,
+          "best_rate": 59355.5228934817,
+          "boss_hp": 1826684.8450732,
+          "boss_seconds_est": 51.859096531251,
+          "hits_to_kill_elite": 21.5192516108507,
+          "hits_to_kill_normal": 8.27663523494259,
+          "hp": 17792.0,
+          "normal_blow_pct": 0.36533273381295
+        },
+        "ranger": {
+          "best_hit": 73713.0,
+          "best_rate": 118865.175241158,
+          "boss_hp": 4196091.10963938,
+          "boss_seconds_est": 142.779818032634,
+          "hits_to_kill_elite": 13.5217491638026,
+          "hits_to_kill_normal": 5.20067275530871,
+          "hp": 19404.0,
+          "normal_blow_pct": 0.314368171511029
+        },
+        "shadowblade": {
+          "best_hit": 25105.0,
+          "best_rate": 112671.24,
+          "boss_hp": 4194833.09169445,
+          "boss_seconds_est": 100.763001843603,
+          "hits_to_kill_elite": 39.7023977738054,
+          "hits_to_kill_normal": 15.2701529899251,
+          "hp": 17408.0,
+          "normal_blow_pct": 0.361902573529412
+        }
+      },
+      "elite_hp": 996728.696111384,
+      "kills_per_level": 55.6719596915795,
+      "level": 180,
+      "monster_level": 178,
+      "normal_defense": 224.4,
+      "normal_hp": 383357.190812071,
+      "xp_per_kill": 13099.0,
+      "xp_to_next": 729247
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 77226.0,
+          "best_rate": 139101.90591133,
+          "boss_hp": 4409741.71800956,
+          "boss_seconds_est": 137.584663873941,
+          "hits_to_kill_elite": 17.2048629003106,
+          "hits_to_kill_normal": 6.61725496165791,
+          "hp": 30845.0,
+          "normal_blow_pct": 0.136164694439942
+        },
+        "mage": {
+          "best_hit": 59851.0,
+          "best_rate": 78220.5098755832,
+          "boss_hp": 2442712.71668162,
+          "boss_seconds_est": 52.6214040355599,
+          "hits_to_kill_elite": 22.1995078167346,
+          "hits_to_kill_normal": 8.53827223720563,
+          "hp": 19765.0,
+          "normal_blow_pct": 0.364280293448014
+        },
+        "ranger": {
+          "best_hit": 96324.0,
+          "best_rate": 158343.933962264,
+          "boss_hp": 5586987.64125827,
+          "boss_seconds_est": 142.562249037913,
+          "hits_to_kill_elite": 13.7936832185061,
+          "hits_to_kill_normal": 5.30526277634851,
+          "hp": 21565.0,
+          "normal_blow_pct": 0.315325759332251
+        },
+        "shadowblade": {
+          "best_hit": 32164.0,
+          "best_rate": 144352.032,
+          "boss_hp": 5300482.08319025,
+          "boss_seconds_est": 99.3049972472581,
+          "hits_to_kill_elite": 41.3090020625353,
+          "hits_to_kill_normal": 15.8880777163597,
+          "hp": 19345.0,
+          "normal_blow_pct": 0.361850607392091
+        }
+      },
+      "elite_hp": 1328662.74233938,
+      "kills_per_level": 57.8502380322666,
+      "level": 200,
+      "monster_level": 198,
+      "normal_defense": 248.4,
+      "normal_hp": 511024.131668994,
+      "xp_per_kill": 15124.0,
+      "xp_to_next": 874927
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 136546.0,
+          "best_rate": 255366.86466877,
+          "boss_hp": 8111598.37850874,
+          "boss_seconds_est": 137.548413940169,
+          "hits_to_kill_elite": 18.0730506154159,
+          "hits_to_kill_normal": 6.95117331362151,
+          "hp": 38528.0,
+          "normal_blow_pct": 0.134966777408638
+        },
+        "mage": {
+          "best_hit": 104351.0,
+          "best_rate": 142201.392307692,
+          "boss_hp": 4586150.45667866,
+          "boss_seconds_est": 54.3443014474511,
+          "hits_to_kill_elite": 23.649057213947,
+          "hits_to_kill_normal": 9.09579123613345,
+          "hp": 24703.0,
+          "normal_blow_pct": 0.364328219244626
+        },
+        "ranger": {
+          "best_hit": 171746.0,
+          "best_rate": 293399.416666667,
+          "boss_hp": 10344215.3798256,
+          "boss_seconds_est": 142.179732935085,
+          "hits_to_kill_elite": 14.3689097232691,
+          "hits_to_kill_normal": 5.5265037397189,
+          "hp": 26931.0,
+          "normal_blow_pct": 0.311908209869667
+        },
+        "shadowblade": {
+          "best_hit": 55329.0,
+          "best_rate": 248316.552,
+          "boss_hp": 8831615.99598088,
+          "boss_seconds_est": 96.0666313273688,
+          "hits_to_kill_elite": 44.6023381830971,
+          "hits_to_kill_normal": 17.1547454550374,
+          "hp": 24164.0,
+          "normal_blow_pct": 0.360039728521768
+        }
+      },
+      "elite_hp": 2467802.76933258,
+      "kills_per_level": 62.8108015807191,
+      "level": 250,
+      "monster_level": 248,
+      "normal_defense": 308.4,
+      "normal_hp": 949154.911281762,
+      "xp_per_kill": 20497.0,
+      "xp_to_next": 1287433
+    },
+    {
+      "classes": {
+        "knight": {
+          "best_hit": 219870.0,
+          "best_rate": 425209.896054628,
+          "boss_hp": 13526786.5983201,
+          "boss_seconds_est": 137.546395281717,
+          "hits_to_kill_elite": 18.7769407018422,
+          "hits_to_kill_normal": 7.2219002699393,
+          "hp": 46209.0,
+          "normal_blow_pct": 0.134172996602393
+        },
+        "mage": {
+          "best_hit": 166675.0,
+          "best_rate": 235809.911971831,
+          "boss_hp": 7854822.20469149,
+          "boss_seconds_est": 56.1283934203374,
+          "hits_to_kill_elite": 24.7696772288228,
+          "hits_to_kill_normal": 9.52679893416261,
+          "hp": 29644.0,
+          "normal_blow_pct": 0.364323303197949
+        },
+        "ranger": {
+          "best_hit": 278581.0,
+          "best_rate": 489565.139705882,
+          "boss_hp": 17252506.8726184,
+          "boss_seconds_est": 141.936560592637,
+          "hits_to_kill_elite": 14.8196967923657,
+          "hits_to_kill_normal": 5.69988338167913,
+          "hp": 32304.0,
+          "normal_blow_pct": 0.312654779593858
+        },
+        "shadowblade": {
+          "best_hit": 87178.0,
+          "best_rate": 391254.864,
+          "boss_hp": 13557686.8789658,
+          "boss_seconds_est": 93.5168551847074,
+          "hits_to_kill_elite": 47.3569702460946,
+          "hits_to_kill_normal": 18.214219325421,
+          "hp": 28983.0,
+          "normal_blow_pct": 0.358831038884864
+        }
+      },
+      "elite_hp": 4128485.95211404,
+      "kills_per_level": 0.0,
+      "level": 300,
+      "monster_level": 298,
+      "normal_defense": 368.4,
+      "normal_hp": 1587879.21235155,
+      "xp_per_kill": 26265.0,
+      "xp_to_next": 0
+    }
+  ]
+}

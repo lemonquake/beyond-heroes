@@ -117,14 +117,17 @@ func test_vitality_and_its_explanation() -> void:
 	eq(CombatBudget.vitality(50), 720.0, "16 per level after 5")
 	done()
 
-## The heart of the fix: the share of an average hero's health a monster blow takes is the same at every level, and a
-## boss's heaviest critical leaves an average hero standing for at least five such blows.
+## The heart of the fix: the share of an average hero's health a monster blow takes is the same at every level up to
+## the Descent, and a boss's heaviest critical leaves an average hero standing for at least five such blows. bh-040: past
+## level 80 the Descent raises every share on purpose (Descent.damage_mult, the resistance penalty, uncompressed boss
+## slams): there the shares must climb with depth instead.
 func test_hits_to_kill_are_flat_across_levels() -> void:
 	var diff: Dictionary = DataEnemies.DIFFICULTY[1]
 	var boss_ids := [&"astrarch", &"kethrax", &"boss_warden"]
 	for cid in CLASSES:
 		var shares := []
-		for level in [10, 30, 40, 45, 50, 100, 300]:
+		var deep := {}
+		for level in [10, 30, 40, 45, 50, 80, 100, 141, 300]:
 			var st := geared(cid, level).compute_stats()
 			var hp := st.get_stat(&"max_hp")
 			var normal := 0.0
@@ -146,15 +149,25 @@ func test_hits_to_kill_are_flat_across_levels() -> void:
 				if def.archetype == &"boss" and not def.attacks.is_empty():
 					var bs := EnemyStats.build(def, level, diff, [], false, true)
 					boss_heavy = maxf(boss_heavy, blow(bs, def, heaviest(def), st, true))
+			print("BUDGET %s L%d hp %d normal %.1f%% champion %.1f%% boss %.1f%%" % [cid, level, hp, normal / hp * 100.0, heavy / hp * 100.0, boss_heavy / hp * 100.0])
+			if Descent.active(level):
+				deep[level] = [normal / hp, heavy / hp, boss_heavy / hp]
+				continue
 			ok(boss_heavy <= hp * 0.205, "%s L%d: a boss's heaviest critical takes %.1f%% (five hits at least)" % [cid, level, boss_heavy / hp * 100.0])
 			ok(heavy < hp * 0.4, "%s L%d: an elite champion's heaviest critical takes %.1f%%" % [cid, level, heavy / hp * 100.0])
 			ok(normal < hp * 0.08, "%s L%d: an ordinary monster's plain blow takes %.1f%%" % [cid, level, normal / hp * 100.0])
-			shares.append(boss_heavy / hp)
-			print("BUDGET %s L%d hp %d normal %.1f%% champion %.1f%% boss %.1f%%" % [cid, level, hp, normal / hp * 100.0, heavy / hp * 100.0, boss_heavy / hp * 100.0])
-		# the same share from level 30 to 300 (gear rolls differ a little level to level)
-		var lo: float = shares.slice(1).min()
-		var hi: float = shares.slice(1).max()
-		ok(hi / lo < 1.45, "%s: the boss share stays within a narrow band from level 30 to 300 (%.1f%%-%.1f%%)" % [cid, lo * 100.0, hi * 100.0])
+			shares.append([normal / hp, heavy / hp, boss_heavy / hp])
+		# the same share from level 30 to 80 (gear rolls differ a little level to level)
+		var bosses: Array = shares.slice(1).map(func(x): return x[2])
+		var lo: float = bosses.min()
+		var hi: float = bosses.max()
+		ok(hi / lo < 1.45, "%s: the boss share stays within a narrow band from level 30 to 80 (%.1f%%-%.1f%%)" % [cid, lo * 100.0, hi * 100.0])
+		# the Descent: every share climbs with depth, and by level 141 a plain blow hurts several times as much as at 80
+		var at80: Array = shares[shares.size() - 1]
+		for k in 3:
+			ok(deep[100][k] > at80[k] and deep[141][k] > deep[100][k] and deep[300][k] > deep[141][k],
+				"%s: share %d climbs through the Descent (%.2f%% at 80, %.2f%% at 141, %.2f%% at 300)" % [cid, k, at80[k] * 100.0, deep[141][k] * 100.0, deep[300][k] * 100.0])
+		ok(deep[141][0] > at80[0] * 4.0, "%s: a plain blow at 141 takes over four times its level-80 share" % cid)
 	done()
 
 ## The lethal-blow guard: whatever the build, no single monster hit takes more than its rank's share.

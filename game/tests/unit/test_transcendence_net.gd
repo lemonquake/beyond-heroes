@@ -93,5 +93,5 @@ func test_showcase_and_cards_use_the_saved_class() -> void:
 	eq(ClassTranscendence.class_of_save(d), &"arcanist", "and never more than the level allows")
 	d.erase("transcendence")
 	eq(ClassTranscendence.class_of_save(d), &"mage", "an old save reads Mage")
-	eq(Net.PROTOCOL, 20, "the online version moved with the new profile field")
+	ok(Net.PROTOCOL >= 20, "the online version moved with the new profile field (bh-040 moved it again, to 21)")
 	done()

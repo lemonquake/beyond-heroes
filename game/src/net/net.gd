@@ -29,7 +29,7 @@ signal roster_updated
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 20                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects)
+const PROTOCOL := 21                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects); 21 (bh-040): the Descent (combat and experience rules past level 80)
                                      # 19 (bh-035): hero snapshots relayed by the room host per map and distance, light checkpoints, idle monsters not re-sent
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules

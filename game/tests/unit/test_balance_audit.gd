@@ -74,8 +74,11 @@ func test_milestones_and_full_progression() -> void:
 			var boss := EnemyStats.build(DB.enemy(&"boss_warden"), level, {}, [], false, true)
 			var hp := EnemyStats.boss_health(h, boss)
 			var seconds := enemy.get_stat(&"max_hp") / st.get_stat(&"weapon_dps")
-			# Ten stat points per level allow an all-offense build to kill ordinary foes quickly.
-			ok(is_finite(seconds) and seconds > 0.0 and seconds < 25.0, "%s level %d regular TTK %.1f" % [cid, level, seconds])
+			# Ten stat points per level allow an all-offense build to kill ordinary foes quickly. bh-040: past level 80 the
+			# Descent makes monsters tougher on purpose (Descent.health_mult); the hero's growth must still keep pace with
+			# the curve underneath it.
+			var plain_seconds := seconds / Descent.health_mult(level)
+			ok(is_finite(seconds) and seconds > 0.0 and plain_seconds < 25.0, "%s level %d regular TTK %.1f (%.1f before the Descent)" % [cid, level, seconds, plain_seconds])
 			ok(hp > ItemCompare.basic_hit(st) * st.get_stat(&"crit_damage") * 3.0, "boss survives a critical hit")
 			if level in [30, 45, 60, 75, 90, 105, 300]:
 				print("AUDIT ", JSON.stringify({"class": cid, "level": level, "dps": roundi(st.get_stat(&"weapon_dps")), "enemy_hp": roundi(enemy.get_stat(&"max_hp")), "seconds": snappedf(seconds, 0.1), "boss_hp": roundi(hp)}))

@@ -187,9 +187,12 @@ func test_enemy_retaliation_has_shared_limit_and_no_reflection_loop() -> void:
 func test_level_40_plus_enemy_damage_budget() -> void:
 	for level in [40, 50, 60, 100, 200, 300]:
 		var highest := 0.0
+		# bh-040: past level 80 the Descent raises monster damage on purpose (Descent.damage_mult); the budget below it holds
+		var descent := Descent.damage_mult(level)
 		for def: EnemyDef in DB.enemies.values():
 			var stats := EnemyStats.build(def, level, DataEnemies.DIFFICULTY[1], [], true)
-			ok(stats.get_stat(&"damage_mult") < def.scaled(level) * 1.3 * (1.0 + 0.04 * CombatGrowth.milestone(level)), "reduced late damage: %s L%d" % [def.id, level])
+			ok(stats.get_stat(&"damage_mult") < def.scaled(level) * 1.3 * (1.0 + 0.04 * CombatGrowth.milestone(level)) * descent,
+				"reduced late damage (before the Descent's x%.2f): %s L%d" % [descent, def.id, level])
 			for attack in def.attacks:
 				highest = maxf(highest, EnemyStats.attack_range(def, stats, float(attack.get("mult", 1.0))).y * 1.5)
 		# Strongest authored attack, elite multiplier and critical included; no armor/block/evasion.
@@ -197,6 +200,8 @@ func test_level_40_plus_enemy_damage_budget() -> void:
 		hero.progress.add_xp(XpCurve.total_xp_for_level(level))
 		hero.progress.allocate(&"wis", (level - 1) * 3)
 		var hp := hero.compute_stats().get_stat(&"max_hp")
-		ok(highest < hp * 0.8, "L%d strongest elite critical %.0f leaves room to react against %.0f HP" % [level, highest, hp])
+		ok(highest / descent < hp * 0.8, "L%d strongest elite critical %.0f (before the Descent) leaves room to react against %.0f HP" % [level, highest / descent, hp])
+		# deep in the Descent the raw blow may exceed that: the lethal-blow guard still leaves room to react
+		ok(CombatBudget.blow_cap(CombatBudget.Rank.ELITE, level) < 0.5, "L%d the guard keeps any elite blow under half the hero's health" % level)
 		print("SURVIVAL L%d strongest elite critical %.0f / mage HP %.0f" % [level, highest, hp])
 	done()

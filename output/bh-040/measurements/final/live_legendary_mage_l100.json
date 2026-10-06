@@ -1,0 +1,165 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 7.92318085311716,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 3,
+    "damage_taken": 7134.0,
+    "deaths": 0,
+    "hit_limit": 51611.59725285,
+    "hits": 63,
+    "hp_min_frac": 0.914341923024029,
+    "id": "astrarch",
+    "killed": true,
+    "level": 100,
+    "max_hp": 1223342.16610513,
+    "seconds": 105.08,
+    "sources": {
+      "@CharacterBody3D@9892:": {
+        "evaded": 0,
+        "max_pct": 1.20633082416522,
+        "n": 1,
+        "sum": 125.0
+      },
+      "Enemy_astrarch_223:": {
+        "evaded": 16,
+        "max_pct": 7.92318085311716,
+        "n": 83,
+        "sum": 6485.0
+      },
+      "Enemy_clockwork_sentry_206:": {
+        "evaded": 0,
+        "max_pct": 0.405327156919514,
+        "n": 1,
+        "sum": 42.0
+      },
+      "Enemy_star_mote_192:": {
+        "evaded": 0,
+        "max_pct": 0.357073923952905,
+        "n": 1,
+        "sum": 37.0
+      },
+      "Enemy_star_mote_200:": {
+        "evaded": 2,
+        "max_pct": 3.89886122370199,
+        "n": 4,
+        "sum": 445.0
+      },
+      "Enemy_star_mote_201:": {
+        "evaded": 2,
+        "max_pct": 0.0,
+        "n": 2,
+        "sum": 0.0
+      }
+    },
+    "states": {
+      "Alert": 0.6,
+      "Chase": 0.2,
+      "Idle": 0.750000000000001,
+      "Position": 17.0000000000003,
+      "Special": 86.516666666663
+    },
+    "status_s": {
+      "chilled": 3.69999999999999
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 172386.0,
+    "biggest_hit_taken_pct": 2.81798880524995,
+    "casts": 112,
+    "damage_taken": 2277.0,
+    "damage_taken_per_min_pct": 5.4936305732465,
+    "deaths": 0,
+    "elite_kills": 2,
+    "elite_ttk": [
+      23.35,
+      38.07
+    ],
+    "first_kill_s": 10.7833333333334,
+    "hits_taken": 51,
+    "hp_min_frac": 0.966979108183748,
+    "kills": 28,
+    "kills_per_min": 6.99999999999758,
+    "left_alive": 23,
+    "levels_gained": 0,
+    "median_elite_ttk": 38.07,
+    "median_ttk": 11.6,
+    "minutes_per_level": 8.62402871259232,
+    "monster_levels": {
+      "98": 28
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "ar_aether_lance": {
+        "max": 172386.0,
+        "n": 32,
+        "steps": "== Aether Lance (SPELL) ==\nBase roll 143.8\nAttribute increase +997.7% joins the shared damage budget\nWeapon modifier x1.00 -> 6942.3\nSkill modifier x1.00 -> 6942.3\nLight modifier x5.37 -> 22360.0\nDark modifier x5.35 -> 14848.5\nCritical chance 57.3% (roll 0.027)\nCRITICAL x1.88 -> 70026.4\nArcane Charge x5 x1.30 -> 91034.3\nRunic Circle x1.16 -> 105235.7\nRunescript x1 x1.04 -> 109445.1\nLight: affinity x1.50, resistance -35% - pen 3% -> 136143.3\nDark: affinity x0.50, resistance 40% - pen 3% -> 13757.7\nStatus: +15% damage taken -> 172386.2\nFINAL 172386\nKnockback 6.3 m/s (weight 1.0)",
+        "sum": 3177370.0,
+        "target_hp": 176038.328278628
+      },
+      "basic": {
+        "max": 71559.0,
+        "n": 20,
+        "steps": "== Attack 1 (ATTACK) ==\nEvasion: 21.5% (roll 0.364)\nBase weapon roll 3587.9 (range 2273.2-3840.4)\nAttribute increase +997.7% joins the shared damage budget\nWeapon modifier x1.00 -> 3587.9\nSkill modifier x1.00 -> 3587.9\nPhysical modifier x5.20 -> 0.0\nLight modifier x5.38 -> 19301.8\nFire modifier x5.42 -> 227.7\nLightning modifier x5.41 -> 511.3\nCritical chance 57.3% (roll 0.458)\nCRITICAL x1.88 -> 37716.8\nDefense 256 (pen 30%) vs level 100: -17.1% physical -> 0.0\nLight: affinity x1.50, resistance -25% - pen 3% -> 69745.7\nFire: affinity x1.00, resistance 0% - pen 20% -> 514.3\nLightning: affinity x1.00, resistance -15% - pen 20% -> 1299.1\nFINAL 71559\nKnockback 0.7 m/s (weight 4.2)",
+        "sum": 395142.0,
+        "target_hp": 728434.461842597
+      },
+      "chain_lightning": {
+        "max": 89671.0,
+        "n": 74,
+        "steps": "== Chain Lightning (SPELL) ==\nBase roll 111.4\nAttribute increase +997.7% joins the shared damage budget\nWeapon modifier x1.00 -> 5374.1\nSkill modifier x0.90 -> 4836.7\nLightning modifier x5.40 -> 26104.9\nCritical chance 57.3% (roll 0.028)\nCRITICAL x1.88 -> 49129.4\nArcane Charge x5 x1.30 -> 63868.2\nRunescript x1 x1.04 -> 66423.0\nLightning: affinity x1.00, resistance -15% - pen 20% -> 89671.0\nFINAL 89671\nKnockback 0.2 m/s (weight 4.2)",
+        "sum": 1618995.0,
+        "target_hp": 728434.461842597
+      },
+      "firebolt": {
+        "max": 102304.0,
+        "n": 46,
+        "steps": "== Firebolt (SPELL) ==\nBase roll 74.1\nAttribute increase +997.7% joins the shared damage budget\nWeapon modifier x1.00 -> 3573.9\nSkill modifier x1.00 -> 3573.9\nFire modifier x5.41 -> 19322.7\nCritical chance 57.3% (roll 0.381)\nCRITICAL x1.88 -> 36365.3\nArcane Charge x5 x1.30 -> 47274.9\nRunic Circle x1.16 -> 54649.8\nRunescript x1 x1.04 -> 56835.8\nFire: affinity x1.00, resistance 0% - pen 20% -> 68203.0\nMELT x1.50 (Fire thaws Frozen)\nFINAL 102304\nKnockback 0.6 m/s (weight 2.8)",
+        "sum": 2347059.0,
+        "target_hp": 388498.379649385
+      },
+      "frost_nova": {
+        "max": 60363.0,
+        "n": 11,
+        "steps": "== Frost Nova (SPELL) ==\nBase roll 56.6\nAttribute increase +997.7% joins the shared damage budget\nWeapon modifier x1.00 -> 2732.5\nSkill modifier x1.00 -> 2732.5\nIce modifier x5.34 -> 14584.5\nCritical chance 57.3% (roll 0.360)\nCRITICAL x1.88 -> 27447.9\nArcane Charge x5 x1.30 -> 35682.3\nRunic Circle x1.16 -> 41248.8\nRunescript x2 x1.08 -> 44548.7\nIce: affinity x1.00, resistance -20% - pen 16% -> 60363.4\nFINAL 60363\nKnockback 0.9 m/s (weight 2.8)",
+        "sum": 424676.0,
+        "target_hp": 388498.379649385
+      }
+    },
+    "ttk": [
+      6.03,
+      5.32,
+      7.57,
+      7.53,
+      14.5,
+      13.58,
+      2.68,
+      7.73,
+      17.6,
+      20.7,
+      7.88,
+      14.82,
+      20.83,
+      5.03,
+      15.7,
+      20.12,
+      1.9,
+      3.6,
+      3.98,
+      11.6,
+      19.25,
+      11.72,
+      9.73,
+      22.92,
+      26.45,
+      2.48
+    ],
+    "xp": 221227,
+    "xp_per_min": 55306.7499999808
+  },
+  "hero": "Budget",
+  "level0": 100,
+  "level1": 100,
+  "map": "zr_barrens",
+  "max_hp": 10362.0
+}

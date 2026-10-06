@@ -52,7 +52,11 @@ func _ready() -> void:
 	Events.player_leveled.connect(func(level: int, gained: int) -> void:
 		var notice := DungeonGrowth.level_notice(level, gained)
 		if notice != "":
-			Events.notify.emit(notice, &"discovery"))
+			Events.notify.emit(notice, &"discovery")
+		# bh-040: entering the Descent, or a deeper Circle of it
+		var descent := Descent.level_notice(level, gained)
+		if descent != "":
+			Events.notify.emit(descent, &"discovery"))
 	GuildJobs.connect_events()
 	QuakeTeam.connect_events()
 	OwnGuild.connect_events()
@@ -413,20 +417,23 @@ func checkpoint_name() -> String:
 	return String(hero.checkpoint.get("name", "your checkpoint"))
 
 ## After death: respawn at the current map's entry (towns: the plaza), or at the checkpoint bonfire when asked (bh-007).
-## Costs a little gold, never items.
+## Costs a little gold, never items; in the Descent (bh-040) also part of the current level's experience, never a level.
+## A friend's revive (NetAvatar) costs nothing.
 func respawn_player(at_checkpoint := false) -> void:
 	var p := player as Player
 	if p == null:
 		return
 	var lost := int(hero.inventory.gold * 0.05)
 	hero.inventory.gold -= lost
+	var xp_lost := hero.progress.lose_xp(Descent.death_xp_loss(hero))
+	var cost := _fall_cost_text(lost, xp_lost)
 	if Net.is_client():
 		# in someone else's world: get up at this map's entrance, the party's map stays loaded
 		place_player(&"start")
 		p.respawn()
 		Events.player_respawned.emit()
-		if lost > 0:
-			Events.notify.emit("You lost %d gold." % lost, &"info")
+		if cost != "":
+			Events.notify.emit(cost, &"info")
 		return
 	var map_id := current_map_id
 	var spawn := &"start"
@@ -440,8 +447,8 @@ func respawn_player(at_checkpoint := false) -> void:
 		place_player(spawn)
 		p.respawn()
 		Events.player_respawned.emit()
-		if lost > 0:
-			Events.notify.emit("You lost %d gold." % lost, &"info")
+		if cost != "":
+			Events.notify.emit(cost, &"info")
 		return
 	if at_checkpoint and checkpoint_name() != "":
 		map_id = StringName(hero.checkpoint.map)
@@ -456,9 +463,18 @@ func respawn_player(at_checkpoint := false) -> void:
 	load_map(map_id, spawn)
 	p.respawn()
 	Events.player_respawned.emit()
-	if lost > 0:
-		Events.notify.emit("You lost %d gold." % lost, &"info")
+	if cost != "":
+		Events.notify.emit(cost, &"info")
 	await _loading.hide_screen()
+
+## "You lost 120 gold and 41,000 experience." ("" when the fall cost nothing).
+static func _fall_cost_text(gold: int, xp: int) -> String:
+	var parts := PackedStringArray()
+	if gold > 0:
+		parts.append("%s gold" % GuideWindow._thousands(gold))
+	if xp > 0:
+		parts.append("%s experience" % GuideWindow._thousands(xp))
+	return "You lost %s." % " and ".join(parts) if not parts.is_empty() else ""
 
 # ---- Multiplayer (bh-008) ---------------------------------------------------------------------------------------
 

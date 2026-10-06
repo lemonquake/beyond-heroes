@@ -23,7 +23,7 @@ func _on_stage_cleared(map_id: StringName) -> void:
 	if player == null or not is_instance_valid(player) or def == null or Game.hero == null:
 		return
 	var lvl := def.level_max
-	var xp := maxi(1, int(round(XpCurve.monster_xp(lvl, 8.0) * XpCurve.level_diff_mult(Game.hero.progress.level, lvl))))
+	var xp := XpCurve.kill_xp(lvl, 8.0, Game.hero.progress.level)
 	Game.hero.progress.add_xp(xp)
 	Events.xp_gained.emit(xp)
 	var gold := 25 + 15 * lvl
@@ -64,9 +64,7 @@ func miniboss_down(e: Enemy, hero: HeroData) -> void:
 
 func xp_for(e: Enemy, player: Player) -> int:
 	var rank := 3.0 if e.is_elite else 1.0
-	var base := XpCurve.monster_xp(e.level, e.def.xp_mult * rank)
-	var mult := XpCurve.level_diff_mult(player.hero.progress.level, e.level) * (1.0 + player.stats.get_stat(&"xp_gain"))
-	return maxi(1, int(round(base * mult)))
+	return XpCurve.kill_xp(e.level, e.def.xp_mult * rank, player.hero.progress.level, player.stats.get_stat(&"xp_gain"))
 
 func award_xp(e: Enemy, player: Player) -> void:
 	var xp := maxi(1, roundi(float(xp_for(e, player)) * Game.debug_xp_mult))

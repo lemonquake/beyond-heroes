@@ -1,0 +1,182 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 28.9867525957752,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 30,
+    "damage_taken": 57653.0,
+    "deaths": 0,
+    "disabled_s": 3.46666666666666,
+    "hit_limit": 283649.983873658,
+    "hits": 293,
+    "hp_min_frac": 0.547370026494801,
+    "id": "astrarch",
+    "killed": true,
+    "level": 200,
+    "max_hp": 30011180.7531628,
+    "seconds": 116.52,
+    "sources": {
+      "Enemy_arc_sentinel_35:": {
+        "evaded": 0,
+        "max_pct": 0.708915145005371,
+        "n": 1,
+        "sum": 198.0
+      },
+      "Enemy_astrarch_494:": {
+        "evaded": 12,
+        "max_pct": 28.9867525957752,
+        "n": 100,
+        "sum": 57455.0
+      }
+    },
+    "states": {
+      "Alert": 1.43333333333333,
+      "Chase": 0.466666666666667,
+      "Idle": 0.3,
+      "Position": 5.51666666666665,
+      "Special": 100.883333333329,
+      "Stagger": 7.89999999999998
+    },
+    "status_s": {
+      "chilled": 51.7333333333317,
+      "stagger_window": 16.4500000000003,
+      "staggered": 3.46666666666666
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 5237673.0,
+    "biggest_hit_taken_pct": 5.55674901539563,
+    "casts": 95,
+    "damage_taken": 8351.0,
+    "damage_taken_per_min_pct": 8.01542168026861,
+    "deaths": 0,
+    "elite_kills": 5,
+    "elite_ttk": [
+      9.7,
+      10.05,
+      27.45,
+      12.12,
+      7.38
+    ],
+    "first_kill_s": 4.51666666666666,
+    "hits_taken": 22,
+    "hp_min_frac": 0.944432509846044,
+    "kills": 51,
+    "kills_per_min": 13.6719040881631,
+    "left_alive": 0,
+    "levels_gained": 0,
+    "median_elite_ttk": 10.05,
+    "median_ttk": 2.07,
+    "minutes_per_level": 32.2260015645291,
+    "monster_levels": {
+      "198": 51
+    },
+    "potions": 0,
+    "seconds": 223.8,
+    "top_hits": {
+      "ar_aether_lance": {
+        "max": 565986.0,
+        "n": 3,
+        "steps": "== Aether Lance (SPELL) ==\nBase roll 195.0\nAttribute increase +1712.3% joins the shared damage budget\nWeapon modifier x1.00 -> 33554.9\nSkill modifier x1.00 -> 33554.9\nLight modifier x5.63 -> 113290.7\nDark modifier x5.63 -> 75527.2\nCritical chance 48.9% (roll 0.649)\nDamage dealt x1.20 (buffs/debuffs) -> 226581.5\nArcane Charge x2 x1.12 -> 253771.2\nArchmage x1.50 -> 380656.8\nRunescript x3 x1.12 -> 426335.7\nChampion-slaying x1.48 -> 630976.8\nLight: affinity x1.00, resistance 0% - pen 10% -> 415308.9\nDark: affinity x1.00, resistance 50% - pen 10% -> 150677.3\nFINAL 565986\nKnockback 1.7 m/s (weight 2.6)",
+        "sum": 1189949.0,
+        "target_hp": 15740624.6653892
+      },
+      "arcane_surge": {
+        "max": 1563065.0,
+        "n": 25,
+        "steps": "== Arcane Surge (SPELL) ==\nBase roll 157.0\nAttribute increase +1712.3% joins the shared damage budget\nWeapon modifier x1.00 -> 27010.9\nSkill modifier x1.00 -> 27010.9\nLight modifier x5.62 -> 75890.6\nDark modifier x5.62 -> 75890.6\nCritical chance 48.9% (roll 0.043)\nCRITICAL x2.39 -> 363212.2\nArcane Charge x1 x1.06 -> 385004.9\nArchmage x1.50 -> 577507.4\nRunescript x3 x1.12 -> 646808.3\nArcane Surge charges x1.35 -> 873191.1\nChampion-slaying x1.48 -> 1292322.9\nLight: affinity x1.50, resistance -25% - pen 10% -> 1305569.2\nDark: affinity x0.50, resistance 30% - pen 10% -> 257495.3\nFINAL 1563065\nKnockback 2.2 m/s (weight 5.0)",
+        "sum": 16874566.0,
+        "target_hp": 39351561.663473
+      },
+      "basic": {
+        "max": 5237673.0,
+        "n": 420,
+        "steps": "== Eruption (SPELL) ==\nBase roll 5226608.7\nAttribute increase +0.0% joins the shared damage budget\nWeapon modifier x1.00 -> 5226608.7\nSkill modifier x1.00 -> 5226608.7\nEarth crushes armor x1.11\nFire: affinity x1.00, resistance 50% - pen 36% -> 2687522.2\nEarth: affinity x1.00, resistance 0% - pen 10% -> 2550150.7\nFINAL 5237673",
+        "sum": 177330967.0,
+        "target_hp": 39351561.663473
+      },
+      "frost_orb": {
+        "max": 366930.0,
+        "n": 3,
+        "steps": "== Frost Orb (SPELL) ==\nBase roll 26.2\nAttribute increase +1712.3% joins the shared damage budget\nWeapon modifier x1.00 -> 4501.9\nSkill modifier x1.00 -> 4501.9\nIce modifier x5.64 -> 25409.6\nCritical chance 48.9% (roll 0.214)\nCRITICAL x2.39 -> 60805.2\nDamage dealt x1.20 (buffs/debuffs) -> 72966.2\nArcane Charge x4 x1.24 -> 90478.1\nArchmage x1.50 -> 135717.1\nRunescript x3 x1.12 -> 152003.2\nChampion-slaying x1.48 -> 224964.7\nIce: affinity x1.00, resistance 0% - pen 38% -> 309776.4\nElemental Concord (2 ailments) x1.03\nStatus: +15% damage taken -> 366930.2\nFINAL 366930\nKnockback 2.0 m/s (weight 1.1)",
+        "sum": 827708.0,
+        "target_hp": 7214452.97163672
+      },
+      "gravity_pull": {
+        "max": 500129.0,
+        "n": 54,
+        "steps": "== Gravity Pull (SPELL) ==\nBase roll 47.9\nAttribute increase +1712.3% joins the shared damage budget\nWeapon modifier x1.00 -> 8246.2\nSkill modifier x1.00 -> 8246.2\nDark modifier x5.62 -> 46337.4\nCritical chance 48.9% (roll 0.467)\nCRITICAL x2.39 -> 110885.3\nDamage dealt x1.20 (buffs/debuffs) -> 133062.4\nArcane Charge x1 x1.06 -> 141046.2\nArchmage x1.50 -> 211569.2\nRunescript x3 x1.12 -> 236957.6\nChampion-slaying x1.48 -> 350697.2\nDark: affinity x1.00, resistance 0% - pen 10% -> 384714.8\nStatus: +30% damage taken -> 500129.3\nFINAL 500129",
+        "sum": 8288672.0,
+        "target_hp": 6558593.61057884
+      },
+      "meteor": {
+        "max": 3146540.0,
+        "n": 91,
+        "steps": "== Meteor Strike (SPELL) ==\nBase roll 586.3\nAttribute increase +1712.3% joins the shared damage budget\nWeapon modifier x1.00 -> 100874.6\nSkill modifier x1.00 -> 100874.6\nFire modifier x5.63 -> 340531.9\nEarth modifier x5.61 -> 226489.9\nCritical chance 48.9% (roll 0.024)\nCRITICAL x2.39 -> 1356883.2\nArcane Charge x1 x1.06 -> 1438296.2\nArchmage x1.50 -> 2157444.3\nRunescript x3 x1.12 -> 2416337.6\nEarth crushes armor x1.11\nFire: affinity x1.00, resistance 0% - pen 36% -> 1969226.0\nEarth: affinity x1.00, resistance 0% - pen 10% -> 1177314.5\nFINAL 3146540\nKnockback 3.1 m/s (weight 4.2)",
+        "sum": 136789051.0,
+        "target_hp": 15135216.0244127
+      },
+      "sig_archmage": {
+        "max": 845319.0,
+        "n": 42,
+        "steps": "== Attuned bolt (SPELL) ==\nBase roll 472218.8\nAttribute increase +0.0% joins the shared damage budget\nWeapon modifier x1.00 -> 472218.8\nSkill modifier x1.00 -> 472218.8\nIce: affinity x1.00, resistance 0% - pen 38% -> 650245.3\nStatus: +30% damage taken -> 845318.9\nFINAL 845319",
+        "sum": 11614517.0,
+        "target_hp": 15740624.6653892
+      }
+    },
+    "ttk": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      2.87,
+      8.95,
+      0.0,
+      0.0,
+      1.13,
+      1.13,
+      1.2,
+      8.78,
+      9.15,
+      0.0,
+      0.0,
+      1.05,
+      2.07,
+      2.07,
+      3.65,
+      3.65,
+      1.02,
+      1.02,
+      5.5,
+      1.65,
+      3.83,
+      3.83,
+      3.83,
+      3.95,
+      3.95,
+      0.53,
+      3.7,
+      7.0,
+      9.8,
+      1.08,
+      1.08,
+      1.08,
+      4.95,
+      0.4,
+      1.97,
+      2.05,
+      2.27,
+      2.57,
+      0.0,
+      4.62,
+      5.28,
+      5.68
+    ],
+    "xp": 587401,
+    "xp_per_min": 157468.4339861
+  },
+  "hero": "Hehe",
+  "level0": 200,
+  "level1": 200,
+  "map": "zr_barrens",
+  "max_hp": 27930.0
+}

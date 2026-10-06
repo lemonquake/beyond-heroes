@@ -99,10 +99,12 @@ func show_death() -> void:
 	_title.text = "You Have Fallen"
 	_title.add_theme_color_override("font_color", Color(0.9, 0.25, 0.2))
 	var lost := int(Game.hero.inventory.gold * 0.05) if Game.hero else 0
+	# bh-040: in the Descent a fall also costs part of the current level's experience
+	var cost := Game._fall_cost_text(lost, Descent.death_xp_loss(Game.hero)).replace("You lost", "You will lose")
 	var cp := Game.checkpoint_name()
 	_sub.text = "Respawn at this area's entrance%s%s" % [
 		(",\nor wake at %s." % cp) if cp != "" else ".\nRest at a camp bonfire to set a checkpoint.",
-		("\nYou will lose %d gold." % lost) if lost > 0 else ""]
+		("\n" + cost) if cost != "" else ""]
 	if Net.is_active() and Net.player_count() > 1:
 		_sub.text = "A friend can revive you right here: they stand beside you and press Interact.\n" + _sub.text
 	# bh-033: fallen to a boss — what happened and what to try next

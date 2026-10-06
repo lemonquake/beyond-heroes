@@ -1,0 +1,510 @@
+{
+  "boss": {
+    "hit_limit": 116648.493985848,
+    "hp": 3890857.00518096,
+    "id": "astrarch"
+  },
+  "class": "mage",
+  "level": 141,
+  "name": "Hehe",
+  "path": [
+    "arcanist",
+    "archmage"
+  ],
+  "stats": {
+    "attack_speed": 1.41304347826087,
+    "cast_speed": 1.60197565356216,
+    "cdr": 0.5,
+    "crit_chance": 0.4649,
+    "crit_damage": 2.393,
+    "damage": 0.1,
+    "defense": 5984.0,
+    "elemental_damage": 4.484,
+    "evasion": 619.0,
+    "int": 1437.0,
+    "life_leech": 0.04,
+    "magic_damage": 16.101,
+    "max_hp": 20818.0,
+    "max_mana": 10461.0,
+    "spell_power": 154.684738608398,
+    "str": 113.0,
+    "wis": 367.0,
+    "xp_gain": 0.808
+  },
+  "targets": {
+    "coil_shaman": {
+      "elite_hits": 1.22500543647998,
+      "elite_hp": 643217.27954885,
+      "hits_to_kill": 0.471155937107683,
+      "hp": 247391.261364942,
+      "skills": [
+        {
+          "hit": 68455.0,
+          "interval": 0.687079910380881,
+          "per_s": 99631.7880434783,
+          "skill": "basic attack"
+        },
+        {
+          "count": 1.0,
+          "hit": 12151.0,
+          "interval": 0.624229212083463,
+          "per_s": 19465.6061664338,
+          "rank": 1,
+          "skill": "firebolt"
+        },
+        {
+          "count": 1.0,
+          "hit": 5497.0,
+          "interval": 0.624229212083463,
+          "per_s": 8806.06016763121,
+          "rank": 3,
+          "skill": "chain_lightning"
+        },
+        {
+          "count": 1.0,
+          "hit": 525073.0,
+          "interval": 12.0,
+          "per_s": 43756.0833333333,
+          "rank": 25,
+          "skill": "meteor"
+        },
+        {
+          "count": 1.0,
+          "hit": 16230.0,
+          "interval": 3.0,
+          "per_s": 5410.0,
+          "rank": 1,
+          "skill": "frost_nova"
+        },
+        {
+          "count": 1.0,
+          "hit": 32042.0,
+          "interval": 2.5,
+          "per_s": 12816.8,
+          "rank": 8,
+          "skill": "tidal_wave"
+        },
+        {
+          "count": 1.0,
+          "hit": 161637.0,
+          "interval": 1.5,
+          "per_s": 107758.0,
+          "rank": 17,
+          "skill": "stone_spear"
+        },
+        {
+          "count": 1.0,
+          "hit": 19113.0,
+          "interval": 1.0,
+          "per_s": 19113.0,
+          "rank": 5,
+          "skill": "gale_burst"
+        },
+        {
+          "count": 1.0,
+          "hit": 6700.0,
+          "interval": 3.0,
+          "per_s": 2233.33333333333,
+          "rank": 1,
+          "skill": "shadow_curse"
+        },
+        {
+          "count": 1.0,
+          "hit": 108096.0,
+          "interval": 5.0,
+          "per_s": 21619.2,
+          "rank": 25,
+          "skill": "arcane_surge"
+        },
+        {
+          "count": 1.0,
+          "hit": 41773.0,
+          "interval": 2.0,
+          "per_s": 20886.5,
+          "rank": 25,
+          "skill": "blizzard"
+        },
+        {
+          "count": 1.0,
+          "hit": 20152.0,
+          "interval": 3.0,
+          "per_s": 6717.33333333333,
+          "rank": 5,
+          "skill": "flame_sentinel"
+        },
+        {
+          "count": 1.0,
+          "hit": 28131.0,
+          "interval": 1.25,
+          "per_s": 22504.8,
+          "rank": 25,
+          "skill": "frost_orb"
+        },
+        {
+          "count": 1.0,
+          "hit": 19135.0,
+          "interval": 4.5,
+          "per_s": 4252.22222222222,
+          "rank": 1,
+          "skill": "gravity_pull"
+        },
+        {
+          "count": 1.0,
+          "hit": 16026.0,
+          "interval": 3.0,
+          "per_s": 5342.0,
+          "rank": 1,
+          "skill": "spike_tentacle"
+        },
+        {
+          "count": 1.0,
+          "hit": 87663.0,
+          "interval": 2.0,
+          "per_s": 43831.5,
+          "rank": 20,
+          "skill": "dark_arts"
+        },
+        {
+          "count": 1.0,
+          "hit": 113200.0,
+          "interval": 4.0,
+          "per_s": 28300.0,
+          "rank": 25,
+          "skill": "ar_aether_lance"
+        },
+        {
+          "count": 1.0,
+          "hit": 3031.0,
+          "interval": 15.0,
+          "per_s": 202.066666666667,
+          "rank": 1,
+          "skill": "am_prismatic_tempest"
+        },
+        {
+          "count": 1.0,
+          "hit": 86006.0,
+          "interval": 12.0,
+          "per_s": 7167.16666666667,
+          "rank": 25,
+          "skill": "am_grand_convergence"
+        }
+      ]
+    },
+    "glyphbound_warrior": {
+      "elite_hits": 1.46058340503382,
+      "elite_hp": 766912.910231321,
+      "hits_to_kill": 0.561762848089929,
+      "hp": 294966.503935123,
+      "skills": [
+        {
+          "hit": 68455.0,
+          "interval": 0.687079910380881,
+          "per_s": 99631.7880434783,
+          "skill": "basic attack"
+        },
+        {
+          "count": 1.0,
+          "hit": 12151.0,
+          "interval": 0.624229212083463,
+          "per_s": 19465.6061664338,
+          "rank": 1,
+          "skill": "firebolt"
+        },
+        {
+          "count": 1.0,
+          "hit": 13761.0,
+          "interval": 0.624229212083463,
+          "per_s": 22044.7869686689,
+          "rank": 3,
+          "skill": "chain_lightning"
+        },
+        {
+          "count": 1.0,
+          "hit": 525073.0,
+          "interval": 12.0,
+          "per_s": 43756.0833333333,
+          "rank": 25,
+          "skill": "meteor"
+        },
+        {
+          "count": 1.0,
+          "hit": 16230.0,
+          "interval": 3.0,
+          "per_s": 5410.0,
+          "rank": 1,
+          "skill": "frost_nova"
+        },
+        {
+          "count": 1.0,
+          "hit": 42723.0,
+          "interval": 2.5,
+          "per_s": 17089.2,
+          "rank": 8,
+          "skill": "tidal_wave"
+        },
+        {
+          "count": 1.0,
+          "hit": 37084.0,
+          "interval": 1.5,
+          "per_s": 24722.6666666667,
+          "rank": 17,
+          "skill": "stone_spear"
+        },
+        {
+          "count": 1.0,
+          "hit": 28669.0,
+          "interval": 1.0,
+          "per_s": 28669.0,
+          "rank": 5,
+          "skill": "gale_burst"
+        },
+        {
+          "count": 1.0,
+          "hit": 6700.0,
+          "interval": 3.0,
+          "per_s": 2233.33333333333,
+          "rank": 1,
+          "skill": "shadow_curse"
+        },
+        {
+          "count": 1.0,
+          "hit": 108096.0,
+          "interval": 5.0,
+          "per_s": 21619.2,
+          "rank": 25,
+          "skill": "arcane_surge"
+        },
+        {
+          "count": 1.0,
+          "hit": 41773.0,
+          "interval": 2.0,
+          "per_s": 20886.5,
+          "rank": 25,
+          "skill": "blizzard"
+        },
+        {
+          "count": 1.0,
+          "hit": 20152.0,
+          "interval": 3.0,
+          "per_s": 6717.33333333333,
+          "rank": 5,
+          "skill": "flame_sentinel"
+        },
+        {
+          "count": 1.0,
+          "hit": 28131.0,
+          "interval": 1.25,
+          "per_s": 22504.8,
+          "rank": 25,
+          "skill": "frost_orb"
+        },
+        {
+          "count": 1.0,
+          "hit": 19135.0,
+          "interval": 4.5,
+          "per_s": 4252.22222222222,
+          "rank": 1,
+          "skill": "gravity_pull"
+        },
+        {
+          "count": 1.0,
+          "hit": 16026.0,
+          "interval": 3.0,
+          "per_s": 5342.0,
+          "rank": 1,
+          "skill": "spike_tentacle"
+        },
+        {
+          "count": 1.0,
+          "hit": 87663.0,
+          "interval": 2.0,
+          "per_s": 43831.5,
+          "rank": 20,
+          "skill": "dark_arts"
+        },
+        {
+          "count": 1.0,
+          "hit": 104816.0,
+          "interval": 4.0,
+          "per_s": 26204.0,
+          "rank": 25,
+          "skill": "ar_aether_lance"
+        },
+        {
+          "count": 1.0,
+          "hit": 7588.0,
+          "interval": 15.0,
+          "per_s": 505.866666666667,
+          "rank": 1,
+          "skill": "am_prismatic_tempest"
+        },
+        {
+          "count": 1.0,
+          "hit": 79637.0,
+          "interval": 12.0,
+          "per_s": 6636.41666666667,
+          "rank": 25,
+          "skill": "am_grand_convergence"
+        }
+      ]
+    },
+    "hollow_soldier": {
+      "elite_hits": 0.989427467926134,
+      "elite_hp": 519521.648866379,
+      "hits_to_kill": 0.380549026125436,
+      "hp": 199816.018794761,
+      "skills": [
+        {
+          "hit": 126084.0,
+          "interval": 0.687079910380881,
+          "per_s": 183507.039130435,
+          "skill": "basic attack"
+        },
+        {
+          "count": 1.0,
+          "hit": 12151.0,
+          "interval": 0.624229212083463,
+          "per_s": 19465.6061664338,
+          "rank": 1,
+          "skill": "firebolt"
+        },
+        {
+          "count": 1.0,
+          "hit": 15896.0,
+          "interval": 0.624229212083463,
+          "per_s": 25465.0049890242,
+          "rank": 3,
+          "skill": "chain_lightning"
+        },
+        {
+          "count": 1.0,
+          "hit": 525073.0,
+          "interval": 12.0,
+          "per_s": 43756.0833333333,
+          "rank": 25,
+          "skill": "meteor"
+        },
+        {
+          "count": 1.0,
+          "hit": 15051.0,
+          "interval": 3.0,
+          "per_s": 5017.0,
+          "rank": 1,
+          "skill": "frost_nova"
+        },
+        {
+          "count": 1.0,
+          "hit": 42723.0,
+          "interval": 2.5,
+          "per_s": 17089.2,
+          "rank": 8,
+          "skill": "tidal_wave"
+        },
+        {
+          "count": 1.0,
+          "hit": 88992.0,
+          "interval": 1.5,
+          "per_s": 59328.0,
+          "rank": 17,
+          "skill": "stone_spear"
+        },
+        {
+          "count": 1.0,
+          "hit": 19113.0,
+          "interval": 1.0,
+          "per_s": 19113.0,
+          "rank": 5,
+          "skill": "gale_burst"
+        },
+        {
+          "count": 1.0,
+          "hit": 2586.0,
+          "interval": 3.0,
+          "per_s": 862.0,
+          "rank": 1,
+          "skill": "shadow_curse"
+        },
+        {
+          "count": 1.0,
+          "hit": 199096.0,
+          "interval": 5.0,
+          "per_s": 39819.2,
+          "rank": 25,
+          "skill": "arcane_surge"
+        },
+        {
+          "count": 1.0,
+          "hit": 38740.0,
+          "interval": 2.0,
+          "per_s": 19370.0,
+          "rank": 25,
+          "skill": "blizzard"
+        },
+        {
+          "count": 1.0,
+          "hit": 20152.0,
+          "interval": 3.0,
+          "per_s": 6717.33333333333,
+          "rank": 5,
+          "skill": "flame_sentinel"
+        },
+        {
+          "count": 1.0,
+          "hit": 26088.0,
+          "interval": 1.25,
+          "per_s": 20870.4,
+          "rank": 25,
+          "skill": "frost_orb"
+        },
+        {
+          "count": 1.0,
+          "hit": 7387.0,
+          "interval": 4.5,
+          "per_s": 1641.55555555556,
+          "rank": 1,
+          "skill": "gravity_pull"
+        },
+        {
+          "count": 1.0,
+          "hit": 6187.0,
+          "interval": 3.0,
+          "per_s": 2062.33333333333,
+          "rank": 1,
+          "skill": "spike_tentacle"
+        },
+        {
+          "count": 1.0,
+          "hit": 33843.0,
+          "interval": 2.0,
+          "per_s": 16921.5,
+          "rank": 20,
+          "skill": "dark_arts"
+        },
+        {
+          "count": 1.0,
+          "hit": 109690.0,
+          "interval": 4.0,
+          "per_s": 27422.5,
+          "rank": 25,
+          "skill": "ar_aether_lance"
+        },
+        {
+          "count": 1.0,
+          "hit": 8766.0,
+          "interval": 15.0,
+          "per_s": 584.4,
+          "rank": 1,
+          "skill": "am_prismatic_tempest"
+        },
+        {
+          "count": 1.0,
+          "hit": 83340.0,
+          "interval": 12.0,
+          "per_s": 6945.0,
+          "rank": 25,
+          "skill": "am_grand_convergence"
+        }
+      ]
+    }
+  }
+}

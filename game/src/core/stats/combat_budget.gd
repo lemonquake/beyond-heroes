@@ -85,13 +85,17 @@ static func rank_of(elite: bool, champion: bool, boss: bool) -> int:
 		return Rank.CHAMPION
 	return Rank.ELITE if elite else Rank.NORMAL
 
-## A boss attack multiplier after compression of the heaviest attacks.
-static func boss_attack_mult(mult: float) -> float:
-	var m := mult if mult <= BOSS_MULT_KNEE else BOSS_MULT_KNEE + (mult - BOSS_MULT_KNEE) * BOSS_MULT_SLOPE
-	return m * BOSS_DAMAGE
+## A boss attack multiplier after compression of the heaviest attacks. bh-040: a boss of the Descent (`level` past
+## Descent.FROM) loses the compression gradually (Descent.boss_ramp).
+static func boss_attack_mult(mult: float, level := 0) -> float:
+	var k := Descent.boss_ramp(level)
+	var slope := lerpf(BOSS_MULT_SLOPE, Descent.BOSS_SLOPE_TO, k)
+	var m := mult if mult <= BOSS_MULT_KNEE else BOSS_MULT_KNEE + (mult - BOSS_MULT_KNEE) * slope
+	return m * lerpf(BOSS_DAMAGE, Descent.BOSS_DAMAGE_TO, k)
 
-static func blow_cap(rank: int) -> float:
-	return float(BLOW_CAP.get(rank, BLOW_CAP[Rank.NORMAL]))
+## The lethal-blow guard of an attacker of `rank`; bh-040: an attacker of the Descent (`level`) is held back less.
+static func blow_cap(rank: int, level := 0) -> float:
+	return float(BLOW_CAP.get(rank, BLOW_CAP[Rank.NORMAL])) + Descent.guard_bonus(level, rank)
 
 static var _ref_hits := {}
 

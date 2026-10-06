@@ -1,0 +1,144 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 3.11160192282708,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 0,
+    "damage_taken": 2606.0,
+    "deaths": 0,
+    "hit_limit": 118698.581305125,
+    "hits": 70,
+    "hp_min_frac": 0.908330785178031,
+    "id": "astrarch",
+    "killed": true,
+    "level": 142,
+    "max_hp": 1493917.54698559,
+    "seconds": 74.05,
+    "states": {
+      "Alert": 2.78333333333333,
+      "Chase": 0.35,
+      "Idle": 0.0166666666666667,
+      "Position": 2.65,
+      "Special": 68.2333333333307
+    },
+    "status_s": {
+      "chilled": 45.5499999999987
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 281753.0,
+    "biggest_hit_taken_pct": 0.849007314524556,
+    "casts": 89,
+    "damage_taken": 1282.0,
+    "damage_taken_per_min_pct": 2.08197999220403,
+    "deaths": 0,
+    "elite_kills": 2,
+    "elite_ttk": [
+      15.85,
+      33.7
+    ],
+    "first_kill_s": 12.0000000000002,
+    "hits_taken": 30,
+    "hp_min_frac": 0.991509926854754,
+    "kills": 31,
+    "kills_per_min": 7.74999999999732,
+    "left_alive": 20,
+    "levels_gained": 1,
+    "median_elite_ttk": 33.7,
+    "median_ttk": 13.63,
+    "minutes_per_level": 3.45060405768724,
+    "monster_levels": {
+      "139": 31
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "am_grand_convergence": {
+        "max": 240133.0,
+        "n": 27,
+        "steps": "== Grand Convergence (SPELL) ==\nBase roll 105.4\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 8632.9\nSkill modifier x1.00 -> 8632.9\nFire modifier x5.54 -> 16255.1\nIce modifier x5.52 -> 15717.0\nLightning modifier x5.53 -> 15759.9\nCritical chance 58.9% (roll 0.535)\nCRITICAL x1.53 -> 73029.9\nArcane Charge spent x5 x1.90 -> 138756.9\nArcane Charge x1 x1.06 -> 147082.3\nRunic Circle x1.16 -> 170027.1\nRunescript x3 x1.12 -> 190430.4\nFire: affinity x1.00, resistance 0% - pen 26% -> 81777.1\nIce: affinity x1.00, resistance 0% - pen 26% -> 79069.8\nLightning: affinity x1.00, resistance 0% - pen 26% -> 79285.8\nFINAL 240133\nKnockback 12.0 m/s (weight 1.0)",
+        "sum": 4080475.0,
+        "target_hp": 275936.406907051
+      },
+      "am_prismatic_tempest": {
+        "max": 40672.0,
+        "n": 77,
+        "steps": "== Prismatic Tempest (SPELL) ==\nBase roll 24.6\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 2019.3\nSkill modifier x1.00 -> 2019.3\nFire modifier x5.54 -> 11182.7\nCritical chance 58.9% (roll 0.181)\nCRITICAL x1.53 -> 17109.6\nSignature weapon x1.12 -> 19162.8\nArcane Charge x5 x1.30 -> 24911.6\nRunic Circle x1.16 -> 28797.8\nRunescript x3 x1.12 -> 32253.5\nFire: affinity x1.00, resistance 0% - pen 26% -> 40671.7\nFINAL 40672",
+        "sum": 1539742.0,
+        "target_hp": 608963.104898319
+      },
+      "ar_aether_lance": {
+        "max": 281753.0,
+        "n": 20,
+        "steps": "== Aether Lance (SPELL) ==\nBase roll 150.1\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 12294.9\nSkill modifier x1.00 -> 12294.9\nLight modifier x5.50 -> 40598.5\nDark modifier x5.50 -> 27065.7\nCritical chance 58.9% (roll 0.365)\nCRITICAL x1.53 -> 103526.2\nArcane Charge x5 x1.30 -> 134584.1\nRunic Circle x1.16 -> 155579.2\nRunescript x3 x1.12 -> 174248.7\nLight: affinity x1.50, resistance -25% - pen 9% -> 210300.8\nDark: affinity x0.50, resistance 30% - pen 9% -> 27566.1\nElemental Concord (2 ailments) x1.03\nStatus: +15% damage taken -> 281753.4\nFINAL 281753\nKnockback 0.8 m/s (weight 4.2)",
+        "sum": 3063892.0,
+        "target_hp": 1141805.82168435
+      },
+      "basic": {
+        "max": 80228.0,
+        "n": 24,
+        "steps": "== Attack 2 (ATTACK) ==\nEvasion: 20.4% (roll 0.622)\nBase weapon roll 6551.7 (range 4309.4-7396.1)\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 6551.7\nSkill modifier x1.00 -> 6551.7\nPhysical modifier x5.41 -> 0.0\nLightning modifier x5.54 -> 36685.9\nIce modifier x5.53 -> 440.8\nDark modifier x5.51 -> 294.9\nCritical chance 58.9% (roll 0.187)\nCRITICAL x1.53 -> 57255.1\nDefense 503 (pen 0%) vs level 141: -22.5% physical -> 0.0\nLightning: affinity x1.00, resistance -15% - pen 26% -> 79198.6\nIce: affinity x1.00, resistance 0% - pen 26% -> 850.5\nDark: affinity x0.50, resistance 30% - pen 9% -> 178.5\nFINAL 80228\nKnockback 0.7 m/s (weight 4.2)",
+        "sum": 514943.0,
+        "target_hp": 1141805.82168435
+      },
+      "chain_lightning": {
+        "max": 146381.0,
+        "n": 62,
+        "steps": "== Chain Lightning (SPELL) ==\nBase roll 93.3\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 7643.6\nSkill modifier x0.90 -> 6879.2\nLightning modifier x5.53 -> 38056.0\nCritical chance 58.9% (roll 0.527)\nCRITICAL x1.53 -> 58225.7\nArcane Charge x5 x1.30 -> 75693.5\nRunic Circle x1.16 -> 87501.7\nRunescript x3 x1.12 -> 98001.9\nLightning: affinity x1.00, resistance 0% - pen 26% -> 123580.3\nElemental Concord (2 ailments) x1.03\nStatus: +15% damage taken -> 146380.9\nFINAL 146381\nKnockback 1.6 m/s (weight 1.0)",
+        "sum": 2004540.0,
+        "target_hp": 275936.406907051
+      },
+      "firebolt": {
+        "max": 132476.0,
+        "n": 43,
+        "steps": "== Firebolt (SPELL) ==\nBase roll 75.3\nAttribute increase +1376.6% joins the shared damage budget\nWeapon modifier x1.00 -> 6172.8\nSkill modifier x1.00 -> 6172.8\nFire modifier x5.54 -> 34185.3\nCritical chance 58.9% (roll 0.041)\nCRITICAL x1.53 -> 52303.6\nArcane Charge x5 x1.30 -> 67994.6\nRunic Circle x1.16 -> 78601.8\nRunescript x3 x1.12 -> 88034.0\nFire: affinity x1.00, resistance -20% - pen 26% -> 128617.7\nWet dampens Fire x0.80\nElemental Concord (2 ailments) x1.03\nStatus: +25% damage taken -> 132476.2\nFINAL 132476\nKnockback 3.6 m/s (weight 0.9)",
+        "sum": 3157810.0,
+        "target_hp": 209331.067308797
+      },
+      "sig_archmage": {
+        "max": 91437.0,
+        "n": 70,
+        "steps": "== Attuned bolt (SPELL) ==\nBase roll 56350.6\nAttribute increase +0.0% joins the shared damage budget\nWeapon modifier x1.00 -> 56350.6\nSkill modifier x1.00 -> 56350.6\nLightning: affinity x1.00, resistance -15% - pen 26% -> 79510.7\nStatus: +15% damage taken -> 91437.3\nFINAL 91437",
+        "sum": 835624.0,
+        "target_hp": 1141805.82168435
+      }
+    },
+    "ttk": [
+      8.68,
+      9.82,
+      12.12,
+      14.08,
+      1.9,
+      17.63,
+      7.9,
+      12.87,
+      22.08,
+      24.02,
+      0.0,
+      13.8,
+      19.4,
+      1.42,
+      4.97,
+      13.63,
+      1.9,
+      3.43,
+      7.4,
+      14.02,
+      14.02,
+      5.93,
+      16.03,
+      17.32,
+      20.17,
+      15.13,
+      12.88,
+      17.32,
+      30.7
+    ],
+    "xp": 561453,
+    "xp_per_min": 140363.249999951
+  },
+  "hero": "Budget",
+  "level0": 141,
+  "level1": 142,
+  "map": "zr_barrens",
+  "max_hp": 15312.0
+}

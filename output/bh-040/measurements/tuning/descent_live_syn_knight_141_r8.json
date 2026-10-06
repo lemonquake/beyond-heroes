@@ -1,0 +1,138 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 13.342888570381,
+    "boss_hp_left_frac": 0.655379091076703,
+    "capped_hits": 13,
+    "damage_taken": 27182.0,
+    "deaths": 0,
+    "disabled_s": 37.4499999999992,
+    "hit_limit": 116648.493985848,
+    "hits": 77,
+    "hp_min_frac": 0.86657111429619,
+    "id": "astrarch",
+    "killed": false,
+    "level": 141,
+    "max_hp": 16691270.0964404,
+    "seconds": 180.0,
+    "sources": {
+      "Enemy_astrarch_161:": {
+        "evaded": 10,
+        "max_pct": 13.342888570381,
+        "n": 42,
+        "sum": 27182.0
+      }
+    },
+    "states": {
+      "Alert": 0.6,
+      "Attack": 16.366666666667,
+      "Chase": 0.2,
+      "Idle": 0.1,
+      "Position": 6.11666666666665,
+      "Special": 99.6499999999956,
+      "Stagger": 56.9666666666647
+    },
+    "status_s": {
+      "stagger_window": 48.7999999999985,
+      "staggered": 37.4499999999992
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 450407.0,
+    "biggest_hit_taken_pct": 6.26979100696643,
+    "casts": 117,
+    "damage_taken": 13709.0,
+    "damage_taken_per_min_pct": 11.4237858738002,
+    "deaths": 0,
+    "elite_kills": 1,
+    "elite_ttk": [
+      59.5
+    ],
+    "first_kill_s": 7.09999999999998,
+    "hits_taken": 70,
+    "hp_min_frac": 0.937302089930336,
+    "kills": 20,
+    "kills_per_min": 4.99999999999827,
+    "left_alive": 31,
+    "levels_gained": 0,
+    "median_elite_ttk": 59.5,
+    "median_ttk": 15.12,
+    "minutes_per_level": 49.0388732058833,
+    "monster_levels": {
+      "139": 20
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "basic": {
+        "max": 187754.0,
+        "n": 12,
+        "steps": "== Attack 1 (ATTACK) ==\nEvasion: 0.0% (roll 0.424)\nBase weapon roll 9237.8 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x1.00 -> 9237.8\nSkill modifier x1.00 -> 9237.8\nPhysical modifier x5.35 -> 37098.8\nLight modifier x5.42 -> 12516.2\nFire modifier x5.38 -> 415.3\nLightning modifier x5.38 -> 746.4\nCritical chance 80.0% (roll 0.373)\nCRITICAL x2.50 -> 126941.6\nDamage dealt x1.06 (buffs/debuffs) -> 134558.1\nResolute x1.10 -> 148014.0\nRoyal Retort x1.30 -> 192418.1\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 120973.9\nLight: affinity x1.00, resistance 0% - pen 0% -> 47430.2\nFire: affinity x1.00, resistance 0% - pen 0% -> 1573.8\nLightning: affinity x0.50, resistance 50% - pen 0% -> 707.1\nDamage taken x1.10 -> 187753.6\nFINAL 187754\nKnockback 10.2 m/s (weight 2.6)",
+        "sum": 624791.0,
+        "target_hp": 3504795.2587355
+      },
+      "cleave": {
+        "max": 450407.0,
+        "n": 12,
+        "steps": "== Cleave (ATTACK) ==\nEvasion: 10.0% (roll 0.282)\nBase weapon roll 9250.1 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x2.35 -> 21748.7\nSkill modifier x1.00 -> 21748.7\nPhysical modifier x5.44 -> 88676.8\nLight modifier x5.49 -> 29831.6\nFire modifier x5.46 -> 1111.3\nLightning modifier x5.46 -> 1745.2\nCritical chance 80.0% (roll 0.008)\nCRITICAL x2.50 -> 303412.3\nDamage dealt x1.10 (buffs/debuffs) -> 333753.6\nResolute x1.10 -> 367128.9\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 230826.6\nLight: affinity x1.50, resistance -25% - pen 0% -> 169201.2\nFire: affinity x1.00, resistance 0% - pen 0% -> 3361.7\nLightning: affinity x1.00, resistance -15% - pen 0% -> 6071.1\nDamage taken x1.10 -> 450406.6\nFINAL 450407\nKnockback 12.0 m/s (weight 4.2)",
+        "sum": 3075282.0,
+        "target_hp": 3369995.44109182
+      },
+      "dg_dread_cleave": {
+        "max": 383865.0,
+        "n": 41,
+        "steps": "== Dread Cleave (ATTACK) ==\nEvasion: 0.0% (roll 0.217)\nBase weapon roll 9573.8 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x2.46 -> 23561.6\nSkill modifier x1.00 -> 23561.6\nPhysical modifier x5.44 -> 57641.0\nLight modifier x5.49 -> 32318.2\nDark modifier x5.48 -> 38736.6\nFire modifier x5.46 -> 896.1\nLightning modifier x5.46 -> 1863.9\nCritical chance 80.0% (roll 0.752)\nCRITICAL x2.50 -> 328639.8\nDamage dealt x1.04 (buffs/debuffs) -> 341785.4\nResolute x1.10 -> 375963.9\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 141856.2\nLight: affinity x1.00, resistance 0% - pen 0% -> 92430.1\nDark: affinity x1.00, resistance 0% - pen 0% -> 110786.6\nFire: affinity x1.00, resistance 0% - pen 0% -> 2563.0\nLightning: affinity x0.50, resistance 50% - pen 0% -> 1332.7\nDamage taken x1.10 -> 383865.4\nFINAL 383865\nKnockback 12.0 m/s (weight 2.2)",
+        "sum": 8320674.0,
+        "target_hp": 1347998.17643673
+      },
+      "rg_bastion_rush": {
+        "max": 389662.0,
+        "n": 52,
+        "steps": "== Bastion Rush (ATTACK) ==\nEvasion: 10.0% (roll 0.290)\nBase weapon roll 8078.6 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x2.45 -> 19826.5\nSkill modifier x1.00 -> 19826.5\nPhysical modifier x5.44 -> 80839.2\nLight modifier x5.49 -> 27195.0\nFire modifier x5.46 -> 1219.2\nLightning modifier x5.46 -> 1815.2\nCritical chance 80.0% (roll 0.041)\nCRITICAL x2.50 -> 277671.6\nDamage dealt x1.04 (buffs/debuffs) -> 288778.5\nResolute x1.10 -> 317656.3\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 198947.4\nLight: affinity x1.50, resistance -25% - pen 0% -> 145833.1\nFire: affinity x1.00, resistance 0% - pen 0% -> 3487.0\nLightning: affinity x1.00, resistance -15% - pen 0% -> 5970.3\nDamage taken x1.10 -> 389661.6\nFINAL 389662\nKnockback 12.0 m/s (weight 4.2)",
+        "sum": 11988567.0,
+        "target_hp": 3369995.44109182
+      },
+      "shield_bash": {
+        "max": 433063.0,
+        "n": 20,
+        "steps": "== Shield Bash (ATTACK) ==\nEvasion: 10.0% (roll 0.753)\nBase weapon roll 9341.9 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x2.37 -> 22125.7\nSkill modifier x1.00 -> 22125.7\nPhysical modifier x5.44 -> 90213.7\nLight modifier x5.49 -> 30348.6\nFire modifier x5.46 -> 914.6\nLightning modifier x5.46 -> 1920.1\nCritical chance 80.0% (roll 0.505)\nCRITICAL x2.50 -> 308492.7\nDamage dealt x1.04 (buffs/debuffs) -> 320832.4\nResolute x1.10 -> 352915.6\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 222018.4\nLight: affinity x1.50, resistance -25% - pen 0% -> 162744.6\nFire: affinity x1.00, resistance 0% - pen 0% -> 2615.7\nLightning: affinity x1.00, resistance -15% - pen 0% -> 6315.4\nDamage taken x1.10 -> 433063.4\nFINAL 433063\nKnockback 11.2 m/s (weight 4.2)",
+        "sum": 4264974.0,
+        "target_hp": 3369995.44109182
+      },
+      "sig_royal_guard": {
+        "max": 109820.0,
+        "n": 1,
+        "steps": "== Royal Retort (ATTACK) ==\nEvasion: 10.1% (roll 0.195)\nBase weapon roll 8773.9 (range 5599.1-9630.1)\nAttribute increase +1186.0% joins the shared damage budget\nWeapon modifier x1.00 -> 8773.9\nSkill modifier x1.00 -> 8773.9\nPhysical modifier x5.35 -> 35235.4\nLight modifier x5.42 -> 11887.6\nFire modifier x5.38 -> 428.0\nLightning modifier x5.38 -> 703.3\nCritical chance 80.0% (roll 0.753)\nCRITICAL x2.50 -> 120635.7\nDamage dealt x1.06 (buffs/debuffs) -> 127873.8\nResolute x1.10 -> 140661.2\nRoyal Retort wave x0.80 -> 112528.9\nDefense 281 (pen 26%) vs level 141: -14.0% physical -> 70706.3\nLight: affinity x1.00, resistance 0% - pen 0% -> 27721.8\nFire: affinity x1.00, resistance 0% - pen 0% -> 998.2\nLightning: affinity x0.50, resistance 50% - pen 0% -> 410.0\nDamage taken x1.10 -> 109819.9\nFINAL 109820\nKnockback 10.2 m/s (weight 2.6)",
+        "sum": 109820.0,
+        "target_hp": 3504795.2587355
+      }
+    },
+    "ttk": [
+      1.07,
+      9.35,
+      14.23,
+      15.12,
+      7.2,
+      11.33,
+      21.43,
+      33.07,
+      12.58,
+      26.65,
+      41.32,
+      6.93,
+      9.98,
+      29.45,
+      5.98,
+      18.9,
+      20.37,
+      23.33,
+      46.6
+    ],
+    "xp": 134257,
+    "xp_per_min": 33564.2499999884
+  },
+  "hero": "Budget",
+  "level0": 141,
+  "level1": 141,
+  "map": "zr_barrens",
+  "max_hp": 30001.0
+}

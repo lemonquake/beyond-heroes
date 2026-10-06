@@ -125,6 +125,17 @@ const ADDITIVE_INCREASE := {
 static func is_additive_increase(k: StringName) -> bool:
 	return ADDITIVE_INCREASE.has(k) or String(k).begins_with("dmg_")
 
+## bh-040: the Archmage keystone ("1% more spell damage per 25 Maximum Mana") had no bound: 10,461 Mana made every
+## spell 5.2 times stronger. It stops at ARCHMAGE_MAX more (1,250 Mana), as strong as the other mage keystone at its best.
+const ARCHMAGE_MAX := 0.5
+
+static func archmage_more(d: DerivedStats, mana := -1.0) -> float:
+	if d == null or not d.has_flag(&"archmage"):
+		return 1.0
+	var per := maxf(1.0, d.flag(&"archmage"))
+	var bonus := 0.01 * floorf((mana if mana >= 0.0 else d.get_stat(&"max_mana")) / per)
+	return 1.0 + (minf(ARCHMAGE_MAX, bonus) if Descent.enabled else bonus)
+
 static func armor_reduction(defense: float, attacker_level: int) -> float:
 	if defense <= 0.0:
 		return 0.0

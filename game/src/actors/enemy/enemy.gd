@@ -498,7 +498,9 @@ func _update_interrupts() -> void:
 			brain.go(S.KNOCKBACK)
 		return
 	if brain.state == S.STAGGER or brain.state == S.KNOCKBACK:
-		if brain.time_in_state > 0.25 and (visual == null or not visual.is_busy()):
+		# bh-040: in the Descent a playing hit reaction no longer holds a monster down past STAGGER_HOLD_MAX
+		var held := brain.time_in_state > Descent.STAGGER_HOLD_MAX and Descent.active(level)
+		if brain.time_in_state > 0.25 and (visual == null or not visual.is_busy() or held):
 			brain.go(S.POSITION if target and target.alive else S.CHASE)
 
 func _interrupt() -> void:
@@ -1635,10 +1637,18 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 	if bar:
 		bar.touch()
 
+## bh-040: a monster of the Descent is harder to shove around, whatever pushes it (Descent.knock_taken).
+func apply_knockback(dir: Vector3, speed: float, source: DerivedStats, source_node: Node, depth := 0, launch := 0.0) -> void:
+	var k := Descent.knock_taken(level, int(stats.get_stat(&"threat_rank")) if stats else CombatBudget.Rank.NORMAL)
+	super.apply_knockback(dir, speed * k, source, source_node, depth, launch * k)
+
 func _on_damaged(result: DamageResult, req: DamageRequest) -> void:
 	if result.total <= 0 or visual == null:
 		return
 	if knock_velocity.length() >= KNOCKED_THRESHOLD or status.is_disabled():
+		return
+	# bh-040: hit recovery. In the Descent only a blow that takes a real share of its health makes a monster flinch
+	if float(result.total) < max_hp() * Descent.flinch_share(level, int(stats.get_stat(&"threat_rank"))):
 		return
 	var heavy := result.poise_damage > stats.get_stat(&"poise", 30.0) * 0.4 or result.is_crit
 	if action == null or heavy and not is_boss:
@@ -1829,7 +1839,7 @@ func _net_hit(result: DamageResult, req: DamageRequest, attacker: Node, hit_poin
 	hp = maxf(1.0, hp - float(result.total))          # a guess until the host answers; never dies on its own
 	health_changed.emit(hp, max_hp())
 	if attacker is Actor and result.leech > 0.0 and attacker.alive:
-		attacker.heal(result.leech, false)
+		attacker.heal(attacker.leech_allowance(result.leech), false)
 	_on_damaged(result, req)
 	if bar:
 		bar.touch()

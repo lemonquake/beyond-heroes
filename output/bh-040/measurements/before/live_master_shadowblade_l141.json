@@ -1,0 +1,143 @@
+{
+  "boss": {
+    "biggest_hit_taken_pct": 2.48627917741189,
+    "boss_hp_left_frac": 0.0,
+    "capped_hits": 0,
+    "damage_taken": 1155.0,
+    "deaths": 0,
+    "disabled_s": 2.89999999999999,
+    "hit_limit": 116648.493985848,
+    "hits": 115,
+    "hp_min_frac": 0.975137208225881,
+    "id": "astrarch",
+    "killed": true,
+    "level": 141,
+    "max_hp": 3362661.72235523,
+    "seconds": 159.2,
+    "states": {
+      "Alert": 0.6,
+      "Attack": 8.16666666666665,
+      "Chase": 0.2,
+      "Idle": 0.15,
+      "Position": 7.53333333333331,
+      "Special": 121.349999999994,
+      "Stagger": 21.1833333333334
+    },
+    "status_s": {
+      "stagger_window": 21.1833333333334,
+      "staggered": 2.89999999999999
+    }
+  },
+  "camps": {
+    "biggest_hit_dealt": 225234.0,
+    "biggest_hit_taken_pct": 1.83825960457581,
+    "casts": 97,
+    "damage_taken": 1920.0,
+    "damage_taken_per_min_pct": 3.17397341797153,
+    "deaths": 0,
+    "elite_kills": 1,
+    "elite_ttk": [
+      39.28
+    ],
+    "first_kill_s": 8.23333333333332,
+    "hits_taken": 41,
+    "hp_min_frac": 0.981617403954242,
+    "kills": 26,
+    "kills_per_min": 6.49999999999775,
+    "left_alive": 25,
+    "levels_gained": 0,
+    "median_elite_ttk": 39.28,
+    "median_ttk": 11.55,
+    "minutes_per_level": 4.01453196907481,
+    "monster_levels": {
+      "139": 26
+    },
+    "potions": 0,
+    "seconds": 240.0,
+    "top_hits": {
+      "basic": {
+        "max": 106363.0,
+        "n": 14,
+        "steps": "== Attack 1 (ATTACK) ==\nEvasion: 9.4% (roll 0.577)\nBase weapon roll 4032.0 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x1.00 -> 4032.0\nSkill modifier x1.00 -> 4032.0\nPhysical modifier x5.24 -> 17963.2\nWind modifier x5.25 -> 3175.9\nLightning modifier x5.25 -> 393.5\nDark modifier x5.27 -> 210.8\nCritical chance 80.0% (roll 0.009)\nCRITICAL x2.50 -> 54358.5\nRuthless x1.68 -> 91322.3\nDefense 178 (pen 0%) vs level 141: -9.3% physical -> 68428.7\nWind: affinity x1.00, resistance 0% - pen 9% -> 14552.8\nLightning: affinity x1.00, resistance 0% - pen 9% -> 1802.9\nDark: affinity x0.50, resistance 40% - pen 9% -> 305.9\nPositional x1.25\nFINAL 106363\nKnockback 5.1 m/s (weight 1.0)",
+        "sum": 195432.0,
+        "target_hp": 275936.406907051
+      },
+      "crippling_star": {
+        "max": 142289.0,
+        "n": 77,
+        "steps": "== Crippling Star (ATTACK) ==\nEvasion: 4.9% (roll 0.613)\nBase weapon roll 4286.1 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x1.54 -> 6600.6\nSkill modifier x1.00 -> 6600.6\nPhysical modifier x5.24 -> 29406.7\nWind modifier x5.25 -> 5199.2\nLightning modifier x5.25 -> 608.6\nDark modifier x5.27 -> 403.5\nCritical chance 80.0% (roll 0.210)\nCRITICAL x2.50 -> 89044.9\nRuthless x1.68 -> 149595.4\nDefense 118 (pen 0%) vs level 141: -6.4% physical -> 115605.1\nWind: affinity x1.00, resistance 0% - pen 9% -> 23823.6\nLightning: affinity x0.50, resistance 30% - pen 9% -> 1011.0\nDark: affinity x1.00, resistance 0% - pen 9% -> 1849.0\nFINAL 142289\nKnockback 5.7 m/s (weight 0.9)",
+        "sum": 4126768.0,
+        "target_hp": 209331.067308797
+      },
+      "eviscerate": {
+        "max": 194480.0,
+        "n": 20,
+        "steps": "== Eviscerate (ATTACK) ==\nEvasion: 9.3% (roll 0.154)\nBase weapon roll 4113.5 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x2.46 -> 10129.8\nSkill modifier x1.00 -> 10129.8\nPhysical modifier x5.29 -> 45590.3\nWind modifier x5.30 -> 8058.3\nLightning modifier x5.30 -> 787.9\nDark modifier x5.32 -> 554.5\nCritical chance 80.0% (roll 0.638)\nCRITICAL x2.50 -> 137477.5\nReaping Edge x1.03 -> 141601.8\nRuthless x1.68 -> 237891.1\nDefense 503 (pen 0%) vs level 141: -22.5% physical -> 152823.5\nWind: affinity x1.00, resistance 0% - pen 9% -> 38032.4\nLightning: affinity x0.50, resistance 50% - pen 9% -> 1007.3\nDark: affinity x1.00, resistance 0% - pen 9% -> 2617.1\nFINAL 194480\nKnockback 8.2 m/s (weight 2.2)",
+        "sum": 2112864.0,
+        "target_hp": 456722.32867374
+      },
+      "ns_marked_execution": {
+        "max": 225234.0,
+        "n": 6,
+        "steps": "== Marked Execution (ATTACK) ==\nEvasion: 9.4% (roll 0.141)\nBase weapon roll 4021.8 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x2.43 -> 9767.3\nSkill modifier x1.00 -> 9767.3\nPhysical modifier x5.24 -> 43514.8\nWind modifier x5.25 -> 7693.5\nLightning modifier x5.25 -> 712.4\nDark modifier x5.27 -> 499.2\nCritical chance 80.0% (roll 0.081)\nCRITICAL x2.50 -> 131049.7\nCombo x3 x1.79 -> 234841.1\nReaping Edge x1.03 -> 241886.3\nDefense 178 (pen 0%) vs level 141: -9.3% physical -> 182120.0\nWind: affinity x1.00, resistance 0% - pen 9% -> 38731.5\nLightning: affinity x1.00, resistance 0% - pen 9% -> 3586.5\nDark: affinity x0.50, resistance 40% - pen 9% -> 795.8\nFINAL 225234\nKnockback 12.0 m/s (weight 1.0)",
+        "sum": 694173.0,
+        "target_hp": 275936.406907051
+      },
+      "ns_umbral_lunge": {
+        "max": 148836.0,
+        "n": 19,
+        "steps": "== Umbral Lunge (ATTACK) ==\nEvasion: 9.4% (roll 0.927)\nBase weapon roll 4582.2 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x2.44 -> 11170.5\nSkill modifier x1.00 -> 11170.5\nPhysical modifier x5.24 -> 34836.3\nWind modifier x5.25 -> 8798.8\nDark modifier x5.27 -> 15594.3\nLightning modifier x5.25 -> 794.8\nCritical chance 80.0% (roll 0.558)\nCRITICAL x2.50 -> 150060.4\nDefense 118 (pen 0%) vs level 141: -6.4% physical -> 81518.2\nWind: affinity x1.00, resistance 0% - pen 9% -> 23998.6\nDark: affinity x1.00, resistance 0% - pen 9% -> 42533.5\nLightning: affinity x0.50, resistance 30% - pen 9% -> 785.9\nFINAL 148836\nKnockback 12.0 m/s (weight 0.9)",
+        "sum": 1780019.0,
+        "target_hp": 209331.067308797
+      },
+      "pr_phantom_crossing": {
+        "max": 179797.0,
+        "n": 15,
+        "steps": "== Phantom Crossing (ATTACK) ==\nEvasion: 10.0% (roll 0.963)\nBase weapon roll 3467.3 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x2.43 -> 8439.0\nSkill modifier x1.00 -> 8439.0\nPhysical modifier x5.24 -> 37596.9\nWind modifier x5.25 -> 6647.2\nLightning modifier x5.25 -> 1021.6\nDark modifier x5.27 -> 566.2\nCritical chance 80.0% (roll 0.297)\nCRITICAL x2.50 -> 114579.9\nRuthless x1.68 -> 192494.2\nDefense 148 (pen 0%) vs level 141: -7.9% physical -> 145475.9\nWind: affinity x1.00, resistance 0% - pen 9% -> 30458.8\nLightning: affinity x0.50, resistance 50% - pen 9% -> 1267.9\nDark: affinity x1.00, resistance 0% - pen 9% -> 2594.6\nFINAL 179797\nKnockback 12.0 m/s (weight 0.5)",
+        "sum": 1158114.0,
+        "target_hp": 190300.970280725
+      },
+      "twin_fang": {
+        "max": 160584.0,
+        "n": 61,
+        "steps": "== Twin Fang (ATTACK) ==\nEvasion: 9.4% (roll 0.267)\nBase weapon roll 4040.3 (range 2897.3-4596.5)\nAttribute increase +911.0% joins the shared damage budget\nWeapon modifier x1.84 -> 7434.2\nSkill modifier x1.00 -> 7434.2\nPhysical modifier x5.24 -> 33120.4\nWind modifier x5.25 -> 5855.8\nLightning modifier x5.25 -> 762.6\nDark modifier x5.27 -> 497.6\nCritical chance 80.0% (roll 0.752)\nCRITICAL x2.50 -> 100590.8\nRuthless x1.68 -> 168992.5\nDefense 118 (pen 0%) vs level 141: -6.4% physical -> 130204.9\nWind: affinity x1.00, resistance 0% - pen 9% -> 26832.3\nLightning: affinity x0.50, resistance 30% - pen 9% -> 1266.7\nDark: affinity x1.00, resistance 0% - pen 9% -> 2279.9\nFINAL 160584\nKnockback 3.8 m/s (weight 0.9)",
+        "sum": 4101172.0,
+        "target_hp": 209331.067308797
+      }
+    },
+    "ttk": [
+      4.33,
+      2.28,
+      10.57,
+      10.52,
+      1.27,
+      8.7,
+      11.55,
+      12.97,
+      0.4,
+      11.3,
+      24.1,
+      21.85,
+      27.02,
+      3.17,
+      3.55,
+      5.2,
+      18.52,
+      14.72,
+      20.9,
+      4.55,
+      18.73,
+      21.28,
+      23.55,
+      14.0,
+      24.52
+    ],
+    "xp": 476742,
+    "xp_per_min": 119185.499999959
+  },
+  "hero": "Budget",
+  "level0": 141,
+  "level1": 142,
+  "map": "zr_barrens",
+  "max_hp": 15123.0
+}

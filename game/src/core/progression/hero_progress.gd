@@ -57,6 +57,17 @@ func add_xp(amount: int) -> int:
 		leveled_up.emit(level, gained)
 	return gained
 
+## bh-040: the Descent's price of a fall: experience from the progress inside the current level, never a level.
+## Returns the experience taken.
+func lose_xp(amount: int) -> int:
+	var n := clampi(amount, 0, xp)
+	if n <= 0:
+		return 0
+	xp -= n
+	total_xp = maxi(0, total_xp - n)
+	xp_changed.emit()
+	return n
+
 func allocate(attr: StringName, n := 1) -> bool:
 	if n <= 0 or free_points < n or not allocated.has(attr):
 		return false

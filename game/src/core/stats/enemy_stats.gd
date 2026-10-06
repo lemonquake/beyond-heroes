@@ -25,9 +25,12 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 			continue
 		agg.add(sm)
 	var scale := def.scaled(level)
+	# bh-028: the rank the lethal-blow guard reads (champions add theirs through Enemy.rebuild_stats)
+	var rank := maxi(CombatBudget.rank_of(elite, agg.flat(&"threat_rank") > 0.0, boss), int(agg.flat(&"threat_rank")))
 	var hp_mult := float(difficulty.get("hp", 1.0)) * (2.6 if elite else 1.0)
 	var dmg_mult := float(difficulty.get("damage", 1.0)) * (1.3 if elite else 1.0)
-	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level) * CombatGrowth.enemy_health_bonus(level), 1.0)
+	# bh-040: past level 80 the Descent makes monsters tougher than the hero grows (Descent.health_mult)
+	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level) * CombatGrowth.enemy_health_bonus(level) * Descent.health_mult(level), 1.0)
 	_set_stat(d, agg, &"max_mana", 30.0 + level * 3.0, 0.0)
 	_set_stat(d, agg, &"defense", def.defense * (1.0 + LEVEL_DEFENSE * float(level - 1)), 0.0)
 	_set_stat(d, agg, &"evasion", def.evasion + LEVEL_EVASION * float(level - 1), 0.0)
@@ -48,9 +51,14 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	if boss:
 		d.set_stat(&"boss_damage_taken", CombatGrowth.BOSS_DAMAGE_TAKEN)
 		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level)))
-	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling))
-	# bh-028: the rank the lethal-blow guard reads (champions add theirs through Enemy.rebuild_stats)
-	d.set_stat(&"threat_rank", float(maxi(CombatBudget.rank_of(elite, agg.flat(&"threat_rank") > 0.0, boss), int(agg.flat(&"threat_rank")))))
+	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling) * Descent.damage_mult(level))
+	d.set_stat(&"threat_rank", float(rank))
+	# bh-040: an elite or champion of the Descent cannot be felled by one blow, deep down not even a plain monster
+	# (DamagePipeline reads hit_limit)
+	if not boss:
+		var share := Descent.hit_share(level, rank)
+		if share < 1.0:
+			d.set_stat(&"hit_limit", maxf(1.0, d.get_stat(&"max_hp") * share))
 	d.set_stat(&"phys_res_flat", agg.flat(&"phys_res"))
 	var od := agg.more(&"outgoing_damage") * (1.0 + agg.inc(&"outgoing_damage"))
 	d.set_stat(&"outgoing_damage", maxf(0.05, od))
@@ -76,7 +84,7 @@ static func _set_stat(d: DerivedStats, agg: StatCalculator.Aggregate, k: StringN
 ## bh-028: a boss's heaviest attacks are compressed (CombatBudget.boss_attack_mult).
 static func attack_range(def: EnemyDef, stats: DerivedStats, mult: float) -> Vector2:
 	if int(stats.get_stat(&"threat_rank")) == CombatBudget.Rank.BOSS:
-		mult = CombatBudget.boss_attack_mult(mult)
+		mult = CombatBudget.boss_attack_mult(mult, stats.level)
 	var m := stats.get_stat(&"damage_mult", 1.0) * mult
 	return Vector2(def.damage_min * m, def.damage_max * m)
 
@@ -86,6 +94,7 @@ static func boss_health(hero: HeroData, baseline: DerivedStats) -> float:
 	var stats := hero.compute_stats()
 	ItemCompare._add_weapon_rows(stats)
 	var dps := stats.get_stat(&"weapon_dps")
+	var spell_dps := 0.0
 	var burst := ItemCompare.basic_hit(stats) * stats.get_stat(&"crit_damage", 1.5)
 	for id in hero.learned_skills():
 		var skill := DB.skill(id)
@@ -101,10 +110,20 @@ static func boss_health(hero: HeroData, baseline: DerivedStats) -> float:
 		req.conversion = {skill.element: 1.0}
 		var hit := float(DamagePipeline.preview(req).total)
 		var interval := maxf(1.0 / stats.get_stat(&"cast_speed", 1.0), skill.cooldown * (1.0 - stats.get_stat(&"cdr")))
-		dps = maxf(dps, hit / interval)
+		spell_dps = maxf(spell_dps, hit / interval)
 		burst = maxf(burst, hit * stats.get_stat(&"crit_damage", 1.5))
 	var difficulty_hp := baseline.get_stat(&"difficulty_hp", 1.0)
+	# bh-040: the spell estimate leaves out critical hits and the Archmage keystone (weapon_dps already counts crits), and
+	# the best single source ignores the rest of a rotation, so a strong caster cut through the "25-45 seconds" in a few
+	# (a level-141 Archmage: 27 s). In the Descent both count (blended in over Descent.BOSS_RAMP levels: no step at 81),
+	# and the boss is built to last Descent.boss_time_mult times as long.
+	var ramp := Descent.boss_ramp(baseline.level)
+	var crit_avg := 1.0 + clampf(stats.get_stat(&"crit_chance"), 0.0, StatCalculator.CRIT_CAP) * maxf(0.0, stats.get_stat(&"crit_damage", 1.5) - 1.0)
+	spell_dps *= lerpf(1.0, crit_avg * StatCalculator.archmage_more(stats), ramp)
+	# a hero weaves weapon blows between spells: in the Descent half of the weaker source is added to the stronger one
+	dps = maxf(dps, spell_dps) + 0.5 * ramp * minf(dps, spell_dps)
+	var span := Descent.boss_time_mult(baseline.level)
 	dps *= CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp
 	burst *= CombatGrowth.BOSS_DAMAGE_TAKEN
 	var reference_dps := CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp * (9.0 + 1.9 * baseline.level) * CombatGrowth.weapon_factor(baseline.level) * (1.0 + CombatGrowth.damage_increase(baseline.level * 0.04)) * 1.5
-	return maxf(reference_dps * 20.0, maxf(burst * 4.0, clampf(baseline.get_stat(&"max_hp"), dps * 25.0, dps * 45.0)))
+	return maxf(reference_dps * 20.0, maxf(burst * 4.0, clampf(baseline.get_stat(&"max_hp"), dps * 25.0 * span, dps * 45.0 * span)))

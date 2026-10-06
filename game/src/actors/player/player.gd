@@ -2004,7 +2004,7 @@ func decorate_request(req: DamageRequest, skill: SkillDef) -> void:
 		if status.has(&"arcane_amp"):
 			req.more.append(["Arcane Amplification", 1.0 + stats.flag(&"arcane_amp", 0.08) * status.stacks(&"arcane_amp")])
 		if stats.has_flag(&"archmage"):
-			req.more.append(["Archmage", 1.0 + 0.01 * floorf(max_mana() / stats.flag(&"archmage"))])
+			req.more.append(["Archmage", StatCalculator.archmage_more(stats, max_mana())])
 		if status.has(&"overload"):
 			req.more.append(["Elemental Overload", 1.0 + stats.flag(&"overload", 0.4)])
 	if _riposte_t > 0.0 and req.kind == DamageRequest.Kind.ATTACK:

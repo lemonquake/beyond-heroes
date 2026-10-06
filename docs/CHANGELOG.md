@@ -2,6 +2,48 @@
 
 Prepared 29 September 2026. Versions here are the repository's BH development update numbers, not invented release tags. This record covers the two latest earlier Git updates (BH-016 and BH-017), the continued BH-018 and BH-019 work, and the BH-020 completion fixes. Earlier history is outside this document's scope.
 
+## BH-040 - The Descent: a real climb past level 80 - 7 October 2026
+
+- **Why**: past level 100 the game was over. A level-141 Archmage killed every monster and elite with its first hit,
+  took 9 damage clearing the Glasswire Barrens, gained a level every 44 seconds and killed a level-144 boss in 27 s
+  while the boss dealt 5 damage.
+- **Levels 1-80 do not change.** From level 81 on, every level makes the world a little harder than it makes the hero,
+  smoothly, with no steps. Every 20 levels starts a new **Circle of the Descent** (I The Threshold at 81, IV The
+  Weeping Deep at 141, XI The Bottom of the World at 281). The Circle is only a name: the numbers never jump.
+- **Monsters get tougher and hit harder**: health ×1.6 at level 100, ×3.0 at 141, ×5.2 at 200; damage ×2.1 at 100,
+  ×5.5 at 141, ×10.4 at 200. Their blows cut up to 35% off the hero's armour and every resistance, after the 75% caps
+  (33% at level 141), as in Diablo II's Hell.
+- **No more one-hit kills**: one blow takes at most 15% of an elite's health and 6% of a champion's, and deep down 34% of
+  a normal monster's. Bosses keep their 8% limit.
+- **Monsters stop flinching from every hit**: a blow makes a monster flinch only if it takes 8% of its health (elites
+  16%, champions 25%). Bosses never flinch from damage alone. Breaking poise still staggers anything, and a stagger now
+  ends after 1.2 s at most, so bosses can no longer be held helpless.
+- **Monsters resist being pushed**: blows, pulls and pulses (Gravity Pull, Aether Pulse) move Descent monsters 20% less,
+  elites 50%, champions 60% and bosses 80% less.
+- **They fight harder**: one more monster may attack at once for every 25 levels past 80 (up to 4 more), attacks and
+  skills come up to 1.6× faster, monsters hesitate less, elite packs are more common, and elites carry one more affix
+  from level 120 and another from 180.
+- **Bosses**: their heaviest attacks lose the softening added in BH-028 over 60 levels. The most of a hero's health one
+  hit can take rises from 35% (25% for bosses) by 10-20 points over 120 levels, but no blow ever kills from full
+  health. Adaptive boss health now counts critical hits, the Archmage keystone and weapon blows woven between spells, and
+  bosses last longer (2.2× at level 141).
+- **Hero limits**: life leech heals at most 6% of Maximum HP per second (phased in over 40 levels). The Archmage keystone
+  stops at +50% spell damage, reached at 1,250 Mana (it was ×5.18 at 10,461 Mana); the talent text says so.
+- **Levelling slows down**: each level needs ×1.8 the experience at level 100, ×3.4 at 141 and ×5.8 at 200; monsters
+  give less experience past level 90 (75% at 100, 37% at 141, 21% at 200). Kills per level: 42 at level 80, 109 at 100,
+  474 at 141, 1,566 at 200.
+- **A fall costs experience**: 2% of the level's requirement at level 81, rising to 10% at 140. It only comes out of
+  progress inside the current level, so a hero never loses a level. A revive from a friend costs nothing, and neither
+  does the Sand Arena. The death screen shows the price before you respawn.
+- **What you see**: a "Descent · Circle IV · The Weeping Deep" badge on the HUD with every current number in its tooltip,
+  announcements when the Descent and each Circle begin, the experience multiplier and fall price in the experience
+  tooltip, and a Descent section in the Field Guide (Dungeons & Relics page).
+- **Measured on the same level-141 Archmage**: normal monsters now take 1.6 s, elites 5.3 s, a level 7.7 minutes, and the
+  boss 90 s with 12.1 million health. A plain monster blow takes 2.75% of the Archmage's health (was 0.23%), a boss's
+  heaviest critical up to 31.5% (was 1.5%). At level 200 with the same gear: 17 s per elite, 39 minutes per level.
+- Network protocol 21: update the official server with the game.
+- Details and all measurements: [THE_DESCENT.md](THE_DESCENT.md).
+
 ## BH-039 - Fabled Arms and the new Item Summoner - 6 October 2026
 
 - **Fifty-four Fabled Arms**: named weapons from Legendary to Primordial, each with its own model, icon, lore and a

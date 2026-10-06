@@ -162,6 +162,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 	r.pre_mitigation = _sum(comp)
 
 	var mitigated := req.kind != DamageRequest.Kind.DOT
+	# bh-040: the Descent's resistance penalty (Diablo II's Hell): a monster of the Descent strips this much off a hero's
+	# armour reduction and resistances, after their caps. Capped heroes lose the most.
+	var penalty := 0.0
+	if atk != null and atk.get_stat(&"hero_source") <= 0.0 and tgt.get_stat(&"hero_source") > 0.0:
+		penalty = Descent.res_penalty(atk.level)
 	# 8. Target defense (physical) with armor penetration.
 	var armor_dr := 0.0
 	if mitigated:
@@ -170,7 +175,7 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if req.kind == DamageRequest.Kind.IMPACT:
 			eff_def *= IMPACT_ARMOR_FACTOR
 		armor_dr = StatCalculator.armor_reduction(eff_def, atk_level)
-		var pdr := clampf(armor_dr + tgt.get_stat(&"phys_res_flat"), -1.0, StatCalculator.RES_CAP)
+		var pdr := maxf(-1.0, clampf(armor_dr + tgt.get_stat(&"phys_res_flat"), -1.0, StatCalculator.RES_CAP) - penalty)
 		if comp.has(Elements.PHYSICAL):
 			comp[Elements.PHYSICAL] *= (1.0 - pdr)
 			r.log_step("Defense %d (pen %.0f%%) vs level %d: -%.1f%% physical -> %.1f" % [roundi(eff_def), pen_armor * 100.0, atk_level, pdr * 100.0, comp[Elements.PHYSICAL]])
@@ -193,9 +198,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 			var aff := Elements.affinity(e, tgt.affinity)
 			var res := tgt.get_stat(Elements.res_key(e))
 			var pen := (atk.get_stat(Elements.pen_key(e)) if atk != null else 0.0) + req.pen_extra
-			var eff_res := clampf(res - pen, StatCalculator.RES_FLOOR, 1.0)
+			var eff_res := maxf(StatCalculator.RES_FLOOR, clampf(res - pen, StatCalculator.RES_FLOOR, 1.0) - penalty)
 			comp[e] *= aff * (1.0 - eff_res)
 			r.log_step("%s: affinity x%.2f, resistance %.0f%% - pen %.0f%% -> %.1f" % [Elements.NAMES[e], aff, res * 100.0, pen * 100.0, comp[e]])
+	if penalty > 0.0:
+		r.log_step("The Descent: -%.0f%% armour reduction and resistances" % (penalty * 100.0))
 
 	# 10. Status modifiers.
 	if st != null:
@@ -287,6 +294,11 @@ static func compute(req: DamageRequest, rng: RandomNumberGenerator) -> DamageRes
 		if before_guard > limit:
 			_scale_all(comp, limit / before_guard)
 		r.log_step("Boss defenses x%.2f; burst limit %.0f -> %.1f" % [boss_taken, limit, _sum(comp)])
+	# bh-040: an elite or champion of the Descent loses at most a set share of its health to one blow
+	var hit_limit := tgt.get_stat(&"hit_limit", INF)
+	if _sum(comp) > hit_limit:
+		_scale_all(comp, hit_limit / _sum(comp))
+		r.log_step("Unyielding (the Descent): at most %.0f per blow -> %.1f" % [hit_limit, _sum(comp)])
 
 	# Enemy retaliation is bounded after all bonuses, vulnerabilities and defenses.
 	var retaliation_limit := float(req.tags.get(&"retaliation_limit", INF))

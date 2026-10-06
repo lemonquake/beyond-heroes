@@ -235,7 +235,8 @@ func _threat_guard(req: DamageRequest) -> void:
 			req.more.append(["Arena", CombatBudget.pvp_mult(atk.level)])
 		req.tags[&"blow_cap"] = maxf(1.0, max_hp() * CombatBudget.PVP_BLOW_CAP)
 	else:
-		req.tags[&"blow_cap"] = maxf(1.0, max_hp() * CombatBudget.blow_cap(int(atk.get_stat(&"threat_rank"))))
+		# bh-040: the Descent loosens the guard by the attacker's level
+		req.tags[&"blow_cap"] = maxf(1.0, max_hp() * CombatBudget.blow_cap(int(atk.get_stat(&"threat_rank")), atk.level))
 
 ## True for a hero fighting in the Sand Arena (bh-028): blows between such heroes are scaled and capped.
 func is_arena_hero() -> bool:
@@ -271,7 +272,7 @@ func _apply_result(result: DamageResult, req: DamageRequest, attacker: Node, hit
 	hit_taken.emit(result)
 	Events.damage_dealt.emit(self, result, pos, attacker)
 	if attacker is Actor and result.leech > 0.0 and attacker.alive:
-		attacker.heal(result.leech, false)
+		attacker.heal(attacker.leech_allowance(result.leech), false)
 	# Aura of Thorns and Thorns gear (bh-012): melee attackers take damage back (never from projectiles, spells or
 	# reflections).
 	var thorn_flat := stats.get_stat(&"thorns") if stats else 0.0
@@ -340,6 +341,27 @@ func _on_status_added(id: StringName) -> void:
 func _on_status_removed(id: StringName) -> void:
 	if visual:
 		visual.set_status_visual(id, false)
+
+var _leech_budget := -1.0
+var _leech_frame := 0
+
+## bh-040: the Descent's leech-rate cap. Life leech is a share of damage dealt, and late-game damage dwarfs a hero's
+## health (4% of one 116,000 hit healed 22% of a level-141 mage). In the Descent a hero (or companion) regains at most
+## Descent.leech_cap(level) of Maximum HP per second from leech; the budget refills continuously (one second's worth).
+func leech_allowance(amount: float) -> float:
+	var cap := Descent.leech_cap(level)
+	if cap <= 0.0 or team == BH.Team.ENEMY:
+		return amount
+	var per_s := cap * max_hp()
+	var frame := Engine.get_physics_frames()
+	if _leech_budget < 0.0:
+		_leech_budget = per_s
+	else:
+		_leech_budget = minf(per_s, _leech_budget + per_s * float(frame - _leech_frame) / float(Engine.physics_ticks_per_second))
+	_leech_frame = frame
+	var got := minf(amount, _leech_budget)
+	_leech_budget -= got
+	return got
 
 func heal(amount: float, show := true) -> void:
 	if not alive or amount <= 0.0:
