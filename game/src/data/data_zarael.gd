@@ -42,6 +42,7 @@ const AG_PIER_X := -20.0                            # the pier runs north-south 
 const AG_PIER_Z := Vector2(44.0, 76.0)              # from the harbour wall to the pier end
 const AG_DECK_Y := 1.6                              # the pier and harbour quay deck height
 const AG_SHIP := Vector3(-9.5, 0.0, 64.0)           # the ship's waterline centre, moored east of the pier
+const AG_CAPTAIN := Vector3(-18.8, 0.0, 60.0)       # Captain Ilsa, on the pier deck by the Sunwake (inside the rails at ±2.7: on x −17.4 she stood on the rail)
 const AG_SPAWN := Vector3(-20.0, 0.0, 66.0)         # spawn `pier` (where the gangplank meets the pier)
 const AG_TERAX := Vector3(-20.0, 0.0, 47.0)         # Terax waits at the head of the pier
 const AG_SHRINE := Vector2(26.0, 18.0)              # the waypoint on the Market Terrace

@@ -13,7 +13,7 @@ const IDLES := [&"idle", &"idle_look", &"idle_adjust"]
 const C_TERAX := Color(0.95, 0.78, 0.4)
 
 static func build() -> Array:
-	return [_ilsa(&"ilsa", &"wyman_outpost", DataZarael.WY_CAPTAIN, -100.0), _ilsa(&"ilsa_agdao", &"agdao", Vector3(-17.4, 0.0, 61.0), 90.0),
+	return [_ilsa(&"ilsa", &"wyman_outpost", DataZarael.WY_CAPTAIN, -100.0), _ilsa(&"ilsa_agdao", &"agdao", DataZarael.AG_CAPTAIN, 90.0),
 		_terax(), _wirekeeper(), _dorrit(), _brisa(), _ysenne(), _toma(), _caius(), _quillan(), _sorrel()]
 
 static func _end(text := "Farewell.") -> Dictionary:
