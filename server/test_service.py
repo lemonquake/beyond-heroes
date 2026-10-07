@@ -283,7 +283,7 @@ class ServiceTests(unittest.TestCase):
         mismatch = copy.deepcopy(right)
         mismatch["mine"]["gold"] = 6
         mismatch["save"]["hero"]["gold"] = 119
-        self.error(409, lambda: self.post("/characters/trade_prepare", mismatch, other_token))
+        self.assertEqual("cancelled", self.post("/characters/trade_prepare", mismatch, other_token)["state"])
         with contextlib.closing(self.store.connect()) as db:
             self.assertEqual([100, 100], sorted(json.loads(row[0])["hero"]["gold"] for row in db.execute("SELECT data FROM characters")))
 
@@ -302,6 +302,60 @@ class ServiceTests(unittest.TestCase):
         self.error(409, lambda: self.post("/characters/trade_status", left))
         with contextlib.closing(self.store.connect()) as db:
             self.assertEqual([0, 0], [row[0] for row in db.execute("SELECT revision FROM characters")])
+
+
+    def test_the_slower_player_can_still_save_before_approving(self):
+        # bh-041: the first approval used to block both characters' saves, so the slower player's pre-trade save failed,
+        # it never approved, and the faster one waited out the expiry and was disconnected.
+        other_token, left, right = self.trade_pair()
+        self.assertEqual("pending", self.post("/characters/trade_prepare", left)["state"])
+        late = save()
+        late["hero"]["xp"] = 5
+        body = {"character": right["character"], "lease": right["lease"], "revision": 0, "request_id": "late-save-1", "save": late}
+        self.assertEqual(1, self.post("/characters/save", body, other_token)["revision"])
+        right = copy.deepcopy(right)
+        right["revision"] = 1
+        right["save"]["hero"]["xp"] = 5
+        # the side that already approved stays held until the trade ends
+        held = {"character": left["character"], "lease": left["lease"], "revision": 0, "request_id": "held-save", "save": save()}
+        self.error(409, lambda: self.post("/characters/save", held))
+        self.assertEqual("committed", self.post("/characters/trade_prepare", right, other_token)["state"])
+
+    def test_either_side_can_cancel_a_pending_trade(self):
+        other_token, left, right = self.trade_pair()
+        self.post("/characters/trade_prepare", left)
+        result = self.post("/characters/trade_cancel", right, other_token)
+        self.assertEqual("cancelled", result["state"])
+        self.error(409, lambda: self.post("/characters/trade_status", left))
+        with contextlib.closing(self.store.connect()) as db:
+            self.assertEqual([0, 0], [row[0] for row in db.execute("SELECT revision FROM characters")])
+        body = {"character": left["character"], "lease": left["lease"], "revision": 0, "request_id": "after-cancel", "save": save()}
+        self.assertEqual(1, self.post("/characters/save", body)["revision"])
+
+    def test_a_trade_withdrawn_before_anyone_approved_cannot_start_later(self):
+        other_token, left, right = self.trade_pair()
+        self.assertEqual("cancelled", self.post("/characters/trade_cancel", right, other_token)["state"])
+        self.error(409, lambda: self.post("/characters/trade_prepare", left))
+        with contextlib.closing(self.store.connect()) as db:
+            self.assertEqual([0, 0], [row[0] for row in db.execute("SELECT revision FROM characters")])
+
+    def test_cancel_after_commit_reports_the_commit(self):
+        other_token, left, right = self.trade_pair()
+        self.post("/characters/trade_prepare", left)
+        self.post("/characters/trade_prepare", right, other_token)
+        result = self.post("/characters/trade_cancel", left)
+        self.assertEqual("committed", result["state"])
+        self.assertEqual(80, result["save"]["hero"]["gold"])
+
+    def test_mismatched_offers_end_the_trade_at_once(self):
+        other_token, left, right = self.trade_pair()
+        self.post("/characters/trade_prepare", left)
+        mismatch = copy.deepcopy(right)
+        mismatch["mine"]["gold"] = 6
+        mismatch["save"]["hero"]["gold"] = 119
+        result = self.post("/characters/trade_prepare", mismatch, other_token)
+        self.assertEqual("cancelled", result["state"])
+        self.error(409, lambda: self.post("/characters/trade_status", left))
 
 
 class PasswordTests(unittest.TestCase):

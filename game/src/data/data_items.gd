@@ -136,6 +136,7 @@ static func bases() -> Array:
 	out.append_array(DataLeggings.bases())
 	out.append_array(DataSpecialWeapons.bases())       # bh-026: the Ember Dragon set (Aljay's, knights only)
 	out.append_array(DataAscendant.bases())            # bh-034: the forty Ascendant collections (Cosmic .. Primordial)
+	out.append_array(DataEschaton.bases())             # bh-041: Eschaton, Lape's tier past Primordial (40 collections, 180 weapons)
 	out.append_array(DataFabled.bases())               # bh-039: the fifty-four Fabled Arms (Legendary .. Primordial)
 	out.append_array(DataTranscendenceGear.bases())    # Class Transcendence: three pieces for each of the twelve advanced classes
 	# ---- Accessories ----
@@ -553,7 +554,7 @@ static func sets() -> Array:
 		6: {"desc": "+8% Cast Speed and +1.5 Mana Regeneration", "mods": [StatModifier.inc(&"cast_speed", 0.08), StatModifier.flat(&"mana_regen", 1.5)]},
 	}
 	sage.lore = "The robes of the observatory-keepers, stitched with the paths of stars that fell into the sea."
-	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets() + DataSpecialWeapons.sets() + DataAscendant.sets()
+	return [guardian, sage] + preload("res://src/data/data_boss_sets.gd").sets() + DataSpecialWeapons.sets() + DataAscendant.sets() + DataEschaton.sets()
 
 ## Faction licenses for Licensed-tier items: fixed specialization bonus [stat, op, base, per item level].
 static func licenses() -> Dictionary:
@@ -709,4 +710,4 @@ static func powers() -> Array:
 		_p(&"a_cleave_wave", "Aether-edged", "Cleave releases a travelling Aether wave (80% of Cleave's damage as Light).", &"cleave_wave", 0.8, [&"weapon", &"gloves"], &"knight", [], &"aether"),
 		_p(&"a_blink_nova", "Riftwalker's", "Blink leaves a Frost Nova at the point you left.", &"blink_nova", 1.0, [&"boots", &"helm", &"accessory", &"leggings"], &"mage", [], &"aether"),
 		_p(&"a_overflow_pulse", "Aetherheart", "Every 10 s, your next skill releases an Aether pulse dealing 120% weapon or spell damage around you.", &"aether_heartbeat", 1.2, [&"accessory", &"armor"], &"", [], &"aether"),
-	] + DataAscendant.powers() + DataFabled.powers()     # bh-034: the four Ascendant signature powers; bh-039: one per Fabled arm
+	] + DataAscendant.powers() + DataFabled.powers() + DataEschaton.powers()     # bh-034: the four Ascendant signature powers; bh-039: one per Fabled arm

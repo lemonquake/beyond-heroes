@@ -29,7 +29,7 @@ signal roster_updated
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 21                 # 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects); 21 (bh-040): the Descent (combat and experience rules past level 80)
+const PROTOCOL := 22                 # 22 (bh-041): trades confirm through the server without stalling, Eschaton rarity, Tempo commands; 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects); 21 (bh-040): the Descent (combat and experience rules past level 80)
                                      # 19 (bh-035): hero snapshots relayed by the room host per map and distance, light checkpoints, idle monsters not re-sent
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
@@ -2358,22 +2358,33 @@ func _trade_ask(who: String) -> void:
 	_trade_incoming = {"peer": from, "name": who, "t": serial}
 	Audio.play_ui(&"ui_open")
 	var info: Dictionary = peers[from]
-	Game.ui_root.confirm.ask("Trade Request", "%s (Level %d) wants to trade with you. Gold and items are swapped only when you both accept the same offers." % [
+	var box: ConfirmDialog = _request_box()
+	_drop_request_hooks(box)
+	box.ask("Trade Request", "%s (Level %d) wants to trade with you. Gold and items are swapped only when you both accept the same offers." % [
 			who, int(info.get("level", 1))],
 		func() -> void: _trade_answer(true, serial), "Accept", false, null, "Decline")
-	var c: Node = Game.ui_root.confirm
-	if c.has_signal(&"cancelled"):
-		c.connect(&"cancelled", func() -> void: _trade_answer(false, serial), CONNECT_ONE_SHOT)
+	box.connect(&"cancelled", func() -> void: _trade_answer(false, serial), CONNECT_ONE_SHOT)
 	Events.notify.emit("%s wants to trade." % who, &"info")
 	get_tree().create_timer(30.0).timeout.connect(func() -> void:
 		if _trade_incoming.get("t", -1) == serial:
-			if Game.ui_root and is_instance_valid(Game.ui_root) and Game.ui_root.confirm.visible:
-				Game.ui_root.confirm.visible = false
+			if Game.ui_root and is_instance_valid(Game.ui_root) and _request_box().visible:
+				_request_box().visible = false
 			_trade_answer(false, serial))
+
+## bh-041: the box that asks about other players' requests (its own, so no other question can replace it).
+func _request_box() -> ConfirmDialog:
+	return Game.ui_root.request_box if Game.ui_root.get(&"request_box") != null else Game.ui_root.confirm
+
+## Forget a previous request's "Decline" hook (a request that was accepted never fired its one-shot).
+func _drop_request_hooks(box: ConfirmDialog) -> void:
+	for c in box.cancelled.get_connections():
+		box.cancelled.disconnect(c.callable)
 
 func _trade_answer(go: bool, serial: int) -> void:
 	if _trade_incoming.get("t", -1) != serial:
 		return
+	if Game.ui_root and is_instance_valid(Game.ui_root):
+		_drop_request_hooks(_request_box())
 	var from: int = _trade_incoming.peer
 	var who: String = _trade_incoming.name
 	_trade_incoming = {}
@@ -2413,6 +2424,7 @@ func trade_set_offer(gold: int, items: Array) -> String:
 	trade.my_ok = false
 	trade.their_ok = false
 	trade.sent = TradeRules.to_wire(offer)
+	trade.mine["wire"] = trade.sent
 	_trade_offer.rpc_id(int(trade.peer), int(trade.rev), trade.sent)
 	trade_changed.emit()
 	return ""
@@ -2420,6 +2432,8 @@ func trade_set_offer(gold: int, items: Array) -> String:
 @rpc("any_peer", "reliable")
 func _trade_offer(rev: int, wire: Dictionary) -> void:
 	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id() or trade.phase != "open" or trade.committing:
+		return
+	if not NetGuard.fits(wire, NetGuard.MAX_TRADE_BYTES):
 		return
 	trade.theirs = TradeRules.read_incoming(wire)
 	trade.their_rev = rev
@@ -2496,16 +2510,30 @@ func _trade_finish() -> void:
 		var identities := [Official.character_id + ":" + own_nonce, other + ":" + their_nonce]
 		identities.sort()
 		var trade_id := "|".join(identities).sha256_text()
-		var result := await Official.commit_trade(other, mine, theirs, trade_id)
+		trade["trade_id"] = trade_id
+		trade["other_character"] = other
+		# where each offered item sits in the bag (the confirmed save is a copy of this bag)
+		var index := {}
+		var items: Array = mine.get("items", [])
+		for i in items.size():
+			index[i] = Game.hero.inventory.index_of(items[i])
+		trade_changed.emit()
+		var result := await Official.commit_trade(other, mine, theirs, trade_id, index)
 		if result.has("error"):
-			trade_cancel(String(result.error))
+			# nothing changed hands; the other player is told (unless they cancelled first)
+			if in_trade() and String(trade.get("trade_id", "")) == trade_id:
+				trade_cancel(String(result.error))
+			else:
+				Events.notify.emit(String(result.error), &"info")
 			return
 		var confirmed := HeroData.from_dict(result.save.hero)
 		Game.hero.inventory.cells = confirmed.inventory.cells
 		Game.hero.inventory.gold = confirmed.inventory.gold
 		Game.hero.inventory.changed.emit()
-		Events.notify.emit("Trade saved on the official server with %s." % who, &"loot")
-		trade_reset("")
+		Events.notify.emit("Trade complete with %s, saved on the official server: you gave %s and received %s." % [who, TradeRules.describe(mine), TradeRules.describe(theirs)], &"loot")
+		Audio.play_ui(&"level_up")
+		if in_trade() and String(trade.get("trade_id", "")) == trade_id:
+			trade_reset("")
 		Game.save_now()
 		return
 	var err := TradeRules.swap(Game.hero, mine, theirs)
@@ -2522,6 +2550,8 @@ func trade_cancel(why := "") -> void:
 	if not in_trade():
 		return
 	var peer := int(trade.peer)
+	if Official.active and trade.has("trade_id"):
+		Official.abort_trade(String(trade.trade_id), String(trade.get("other_character", "")))
 	if peers.has(peer) and is_active():
 		_trade_cancelled.rpc_id(peer, "%s cancelled the trade." % String(peers.get(my_id(), {}).get("name", "The other hero")) if why == "" else why)
 	trade_reset(why if why != "" else "You cancelled the trade.")
@@ -2530,6 +2560,9 @@ func trade_cancel(why := "") -> void:
 func _trade_cancelled(why: String) -> void:
 	if not in_trade() or int(trade.peer) != multiplayer.get_remote_sender_id():
 		return
+	if Official.active and trade.has("trade_id"):
+		# this side may already be waiting on the server: withdraw there too, so nobody waits out the expiry
+		Official.abort_trade(String(trade.trade_id), String(trade.get("other_character", "")))
 	trade_reset(why)
 
 ## Drop the trade state and close the window; `why` (if any) is shown as a notice.

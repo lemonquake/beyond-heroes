@@ -81,18 +81,18 @@ func _client_id() -> int:
 
 func _auto_answer(go: bool) -> bool:
 	# the prompt on the receiving machine: answer it like a click on Accept / Decline
-	var got := await _until(func() -> bool: return not Net._trade_incoming.is_empty() and Game.ui_root.confirm.visible, 20.0)
+	var got := await _until(func() -> bool: return not Net._trade_incoming.is_empty() and Game.ui_root.request_box.visible, 20.0)
 	if not got:
 		return false
 	await _shot("request_prompt")
 	if go:
-		Game.ui_root.confirm._confirm()
+		Game.ui_root.request_box._confirm()
 	else:
-		Game.ui_root.confirm.cancel()
+		Game.ui_root.request_box.cancel()
 	return true
 
 func _host() -> void:
-	var err := Net.host_game()
+	var err := Net.host_game(int(args.get("port", Net.PORT)))
 	_check("hosted (%s)" % err, err == "")
 	await _until(func() -> bool: return Net.player_count() >= 2 and Net.avatars().size() > 0, 40.0)
 	var cid := _client_id()
@@ -169,7 +169,7 @@ func _host() -> void:
 
 func _client() -> void:
 	await _wait(3.0)
-	var err := Net.join_game(NetCodec.room_code("127.0.0.1", Net.PORT, Net.PORT))
+	var err := Net.join_game("127.0.0.1", int(args.get("port", Net.PORT)))
 	_check("join sent (%s)" % err, err == "")
 	await _until(func() -> bool: return Net.is_client() and not Net.connecting and not Net.following and not Game.travelling, 40.0)
 	await _wait(5.0)

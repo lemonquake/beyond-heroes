@@ -10,7 +10,7 @@ var _standing: Label
 var _promo: Label
 
 func _init() -> void:
-	super._init("Hero Register", Vector2(1240, 860))
+	super._init("Hero Register", Vector2(1320, 860))      # bh-041: its content always needed ~1298
 
 func open_camp(p_camp: StringName) -> void:
 	camp = p_camp

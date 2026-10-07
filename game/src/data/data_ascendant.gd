@@ -29,6 +29,9 @@ const TIER := {
 		"sig": "Echo", "item_level": 90, "dmg": 0.16, "hp": 0.10},
 	BH.Rarity.PRIMORDIAL: {"key": &"primordial", "level": 100, "chance": 0.005, "mult": 1.85, "power": &"asc_eruption", "flag": &"asc_eruption",
 		"sig": "Eruption", "item_level": 100, "dmg": 0.20, "hp": 0.12},
+	# bh-041: Eschaton never drops (chance 0): Lape the Ancient makes it (DataEschaton, LapeTrade)
+	BH.Rarity.ESCHATON: {"key": &"eschaton", "level": 110, "chance": 0.0, "mult": 2.3, "power": &"esc_unmaking", "flag": &"esc_unmaking",
+		"sig": "Unmaking", "item_level": 120, "dmg": 0.26, "hp": 0.16},     # = DataEschaton.SET_DMG / SET_HP
 }
 const C := BH.Rarity.COSMIC
 const D := BH.Rarity.DIVINE
@@ -144,6 +147,7 @@ const LORE := {
 	&"divine": "Blessed in a temple that no map remembers. It hums like a held note.",
 	&"eternal": "Its maker stopped every clock in the forge. Time passes around it, never through it.",
 	&"primordial": "Older than the first kings and the first fires. The world was still soft when this was made.",
+	&"eschaton": "The last thing its maker ever made. It was finished on the day the forge went out for good, and it remembers that day.",
 }
 
 static func row(collection: StringName) -> Array:
@@ -159,7 +163,7 @@ static func is_ascendant_rarity(rarity: int) -> bool:
 	return rarity >= BH.Rarity.COSMIC
 
 static func is_ascendant(base: ItemBaseDef) -> bool:
-	return base != null and String(base.id).begins_with("asc_") and base.fixed_rarity >= BH.Rarity.COSMIC
+	return base != null and (String(base.id).begins_with("asc_") or DataEschaton.is_eschaton(base)) and base.fixed_rarity >= BH.Rarity.COSMIC
 
 ## The tier key (&"cosmic" ...) of a rarity, &"" below Cosmic.
 static func tier_key(rarity: int) -> StringName:
@@ -287,6 +291,7 @@ static func proc_chance(flag: StringName, n: float) -> float:
 		&"asc_judgement": return minf(0.04 + 0.04 * n, 0.4)
 		&"asc_echo": return minf(0.05 + 0.05 * n, 0.45)
 		&"asc_eruption": return minf(0.03 + 0.035 * n, 0.35)
+		&"esc_unmaking": return minf(0.05 + 0.035 * n, 0.45)
 	return 0.0
 
 static func proc_power(flag: StringName, n: float) -> float:
@@ -295,6 +300,7 @@ static func proc_power(flag: StringName, n: float) -> float:
 		&"asc_judgement": return minf(0.7 + 0.08 * n, 1.5)
 		&"asc_echo": return minf(0.5 + 0.06 * n, 1.1)
 		&"asc_eruption": return minf(1.0 + 0.12 * n, 2.2)
+		&"esc_unmaking": return minf(1.4 + 0.15 * n, 3.2)
 	return 0.0
 
 # ---- drops ----------------------------------------------------------------------------------------------------------
@@ -306,6 +312,8 @@ static func roll_drop(level: int, is_dungeon_boss: bool, class_id: StringName, m
 		force_rarity := -1) -> ItemInstance:
 	if not is_dungeon_boss and force_rarity < 0:
 		return null
+	if force_rarity == BH.Rarity.ESCHATON:
+		return DataEschaton.roll(class_id, rng, maxi(level + 2, DataEschaton.ITEM_LEVEL))
 	var rarity := force_rarity
 	if rarity < 0:
 		if level < MIN_LEVEL:

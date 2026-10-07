@@ -32,7 +32,7 @@ static func is_regalia(base: ItemBaseDef) -> bool:
 	return base != null and (has_theme(base.set_id) or DataAscendant.is_ascendant(base))
 
 ## The under-layer colour beneath a regalia piece (the set's cloth).
-const ASCENDANT_CLOTH := {BH.Rarity.COSMIC: "1b1840", BH.Rarity.DIVINE: "e8e2d0", BH.Rarity.ETERNAL: "4a1630", BH.Rarity.PRIMORDIAL: "3a0e0c"}
+const ASCENDANT_CLOTH := {BH.Rarity.COSMIC: "1b1840", BH.Rarity.DIVINE: "e8e2d0", BH.Rarity.ETERNAL: "4a1630", BH.Rarity.PRIMORDIAL: "3a0e0c", BH.Rarity.ESCHATON: "0e0e14"}
 
 static func under_tint(base: ItemBaseDef) -> Color:
 	if DataAscendant.is_ascendant(base):

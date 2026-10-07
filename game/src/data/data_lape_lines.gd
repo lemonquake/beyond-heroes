@@ -186,6 +186,10 @@ const TIER := [
 		"Hm. Eternal. Whoever made this is long dead, and this has not noticed.", "Eternal. It will outlast you, me, and the bridge we never rebuilt."],
 	["Primordial. Older than the mountains, {hero}. Older than the word for mountain.", "This is Primordial. The world was still soft and hot when this was made.",
 		"Hm. Primordial. Do not set it on the wooden table. Please. The stone one.", "Primordial. I have read about these in books that were themselves only rumours."],
+	["Eschaton. ...Where did you get this? No. Do not tell me. I made it. I remember making it, and I remember why.",
+		"This is Eschaton work, {hero}. The last fire's work. It is cold to the touch and it should not be.",
+		"Hm. Eschaton. I can see my own face in it, and I look older than I feel. That is saying something.",
+		"An Eschaton piece, back on my table. Things come home at the end. So it is said. So it is."],
 ]
 
 ## What he finds when he identifies it.
@@ -372,6 +376,102 @@ const OFFER := [
 	["Aether. The rarest thing I can shape. Three pieces, one choice, no second chances.",
 		"Aether-work, for Aether-work. Choose carefully, {hero}. These do not come twice.",
 		"Three pieces of Aether. My hands will need a century to recover."],
+	["Cosmic work for Cosmic work. Starlight in, starlight out. Choose.",
+		"You brought me the night sky, so I give you pieces of it. Look closely; the stars move.",
+		"Cosmic pieces. The forge still smells of falling stars."],
+	["Divine. I will not pretend I made these without help. Choose with a clean heart.",
+		"For this lot, Divine pieces. I lit a candle before I began. I suggest you do the same.",
+		"These were blessed. Not by me. I only held the hammer."],
+	["Eternal pieces. They will outlast the choosing, and the chooser.",
+		"For this lot I stopped every clock in the forge. Here is what came out.",
+		"Eternal work. Choose slowly. They have all the time in the world. You do not."],
+	["Primordial. The world was soft when the first of these was made. I made these harder.",
+		"Old things for old things. Primordial, every one. Do not drop them; the floor will crack.",
+		"Hm. Primordial pieces. My forge has not been this hot since before the mountains."],
+	["Eschaton. I swore I would never make another. I am a liar, it seems. Look at them.",
+		"For this lot... Eschaton. The last work. Choose, {hero}, and do not make me regret it.",
+		"I opened the old door for you. What came through it is on the table. Eschaton."],
+]
+
+## bh-041: what he says about the whole lot when its pieces have something in common (LapeTrade.combos).
+const COMBO := {
+	&"same_kind": [
+		"Three of a kind. You came with a purpose. I like a purpose.",
+		"All of one sort. You are telling me what you want without saying it. Very well.",
+		"A matched lot. The forge listens to matched lots.",
+	],
+	&"same_set": [
+		"Pieces of one set. They miss each other. I can hear it.",
+		"These belong together, {hero}. Perhaps I can find what is missing.",
+		"Hm. One collection, scattered. Collections want to be whole.",
+	],
+	&"element": [
+		"This lot hums with one element. I will let it lead the hammer.",
+		"Everything here leans the same way, like trees in one wind. I will follow the wind.",
+		"One element runs through all of it. It will run through what I make, too.",
+	],
+	&"ascendant": [
+		"Ascendant work on my table. The lamp is brighter. You see it too.",
+		"You bring me the heavens and the deep earth. Now the forge will have to work for its supper.",
+		"Hm. Ascendant pieces. My hands remember these weights.",
+	],
+	&"fabled": [
+		"A Fabled arm. Its story is not over. It wants to become another one.",
+		"Fabled steel. The tale goes into the fire, and a new tale comes out.",
+	],
+	&"socketed": [
+		"So many crystals set in these. I will not waste them. Nothing is wasted at my table.",
+		"Sockets full of stones. They sing, faintly. I will make something that sings louder.",
+	],
+	&"mixed": [
+		"A little of everything. A traveller's lot. Travellers make the best stories.",
+		"Nothing here agrees with anything else. That makes the forge curious.",
+		"Hm. A scattered lot. Scattered things can still be gathered.",
+	],
+	&"omen": [
+		"Wait. ...Something in this lot is very old, and something is very new. They are pulling at each other.",
+		"The dishes are cold, {hero}. They are never cold. Something has noticed us.",
+		"Hm. I have felt this weight on my table only a few times. Each time, the ending came close enough to touch.",
+	],
+}
+
+## bh-041: what each kind of offer is called on its card.
+const OFFER_KIND := {
+	&"crafted": "Special-crafted by Lape",
+	&"reforged": "Reforged: your own piece, one tier higher",
+	&"mended": "Set-mending: a missing piece of your collection",
+	&"fabled": "A Fabled arm, retold",
+	&"ascendant": "Ascendant work",
+	&"hoard": "A hoard of crystals",
+	&"eschaton": "ESCHATON — the last work",
+}
+
+## bh-041: the revelation, when an Eschaton piece is among the offers.
+const ESCHATON_REVEAL := [
+	"Stand back from the table. Further. ...There. The last fire has made something.",
+	"Do you hear that? The silence. Every forge in the world just went quiet for a breath.",
+	"I made this. My hands made this. I did not know they still could.",
+	"Look at it and see yourself, {hero}. That is the only mercy the end has ever offered.",
+	"Eschaton. The last work. When it is gone from my table, I will be a little more mortal.",
+	"Hm. My staff has stopped humming. It is afraid. I have never seen it afraid.",
+]
+
+## bh-041: when he is paid to look again (LapeTrade.redraw).
+const REDRAW := [
+	"Again? Hm. Coin first. The forge does not burn for free twice.",
+	"Very well, another look. The metal will not lie, but it may say something else.",
+	"You want a second opinion. From me. Fine; I am many people, after all these years.",
+	"Again the hammer. Again the fire. Let us see what it thinks of you this time.",
+	"Patience is a virtue. Gold is a better one. Let me look again.",
+	"Hm. The same lot, a different morning. Things change in the night.",
+]
+
+## bh-041: after an Eschaton piece leaves with the hero.
+const AFTER_ESCHATON := [
+	"Go. Carry the end of all things carefully, and do not let it carry you.",
+	"It chose you. I watched it choose. Do not make it reconsider.",
+	"The last work leaves my table. The room is darker. Go, before I ask for it back.",
+	"Remember this day, {hero}. Things like that do not happen twice. Not even to me.",
 ]
 
 ## A word after his offer about the requirements he has told you about.
@@ -427,7 +527,9 @@ const IDLE := [
 ]
 
 static func pools() -> Array:
-	var out := [OPEN, TIER, WORTH, DECLINE, OFFER, REQS, AFTER_ITEM, AFTER_GOLD, IDLE]
+	var out := [OPEN, TIER, WORTH, DECLINE, OFFER, REQS, AFTER_ITEM, AFTER_GOLD, IDLE, ESCHATON_REVEAL, REDRAW, AFTER_ESCHATON]
+	for k in COMBO:
+		out.append(COMBO[k])
 	for k in KIND:
 		out.append(KIND[k])
 	for k in FIND:

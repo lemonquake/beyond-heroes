@@ -71,7 +71,12 @@ static func valid_endpoint(address: String) -> bool:
 	var host := address.substr(8)
 	return host != "" and not host.contains("/") and not host.contains("@") and not host.contains("?") and not host.contains("#") and not host.contains(" ") and not host.contains("\n") and not host.contains("\r")
 
+## Probes only (bh-041): extra seconds before every request, to play a distant player (a friend over a VPN) on one PC.
+var probe_latency := 0.0
+
 func request(path: String, data := {}, method := HTTPClient.METHOD_POST, authorized := true, body := "") -> Dictionary:
+	if probe_latency > 0.0:
+		await get_tree().create_timer(probe_latency, true).timeout
 	if not valid_endpoint(url):
 		return {"error": "Configure a valid HTTPS official server address.", "code": "invalid_endpoint"}
 	var epoch := _endpoint_epoch
@@ -311,51 +316,129 @@ func flush() -> bool:
 	return true
 
 ## Both authenticated owners approve matching offers. The service commits both inventories in one transaction.
-func commit_trade(other: String, mine: Dictionary, theirs: Dictionary, trade_id: String) -> Dictionary:
+## bh-041: a trade that ends without committing (either side withdrew, the offers did not match, it expired) changed
+## nothing on the server, so it is an ordinary "the trade was cancelled" and play goes on. Only an outcome that stays
+## unknown after asking the server again (the connection is gone) still sends the player back to the menu.
+## `aborted` (Net) is checked between the steps: once the other player cancels, this side withdraws as well.
+func commit_trade(other: String, mine: Dictionary, theirs: Dictionary, trade_id: String, mine_index := {}) -> Dictionary:
 	if not connected or not await flush():
-		return {"error": "Confirm your server save before trading."}
+		return {"error": "Your progress could not be confirmed by the server before trading. Try the trade again in a moment."}
+	if _trade_aborted.has(trade_id):
+		return {"error": "The trade was cancelled.", "code": "trade_cancelled"}
 	_transacting = true
 	var trial := HeroData.from_dict(_confirmed_save.get("hero", {}))
 	var outgoing := {"gold": int(mine.get("gold", 0)), "items": []}
 	var mine_wire := TradeRules.to_wire(mine)
-	var theirs_wire := TradeRules.to_wire(theirs)
 	var used := {}
-	for raw: Dictionary in mine_wire.items:
-		var found := false
-		for index in trial.inventory.cells.size():
-			var item: ItemInstance = trial.inventory.cells[index]
-			if item and not used.has(index) and item.to_dict() == raw:
-				outgoing.items.append(item)
-				used[index] = true
-				found = true
-				break
-		if not found:
+	for i in mine_wire.items.size():
+		var raw: Dictionary = mine_wire.items[i]
+		var hit := -1
+		# the bag cell the offered item sits in (the confirmed save is a copy of this very bag), then any equal item
+		var at := int(mine_index.get(i, -1))
+		if at >= 0 and at < trial.inventory.cells.size() and not used.has(at):
+			var cand: ItemInstance = trial.inventory.cells[at]
+			if cand and String(cand.base.id) == String(raw.get("base", "")) and cand.count == int(raw.get("count", 1)):
+				hit = at
+		if hit < 0:
+			for index in trial.inventory.cells.size():
+				var item: ItemInstance = trial.inventory.cells[index]
+				if item and not used.has(index) and item.to_dict() == raw:
+					hit = index
+					break
+		if hit < 0:
 			_transacting = false
 			return {"error": "Your bag changed while confirming the trade. Review the offers again."}
+		outgoing.items.append(trial.inventory.cells[hit])
+		used[hit] = true
+	# what this side sends as "mine" must be exactly what the other side received as "theirs" (and the reverse): the wire
+	# form this machine sent over the network, and the other player's offer exactly as it arrived
+	mine_wire = mine.get("wire", TradeRules.to_wire(outgoing))
+	var theirs_wire: Dictionary = theirs.get("wire", TradeRules.to_wire(theirs))
 	var incoming := TradeRules.read_incoming(theirs_wire)
-	var error := TradeRules.swap(trial, outgoing, incoming)
+	var error := TradeRules.swap_error(trial, outgoing, incoming)
 	if error != "":
 		_transacting = false
 		return {"error": error}
 	var proposed: Dictionary = _confirmed_save.duplicate(true)
-	proposed.hero["inventory"] = trial.inventory.to_array()
-	proposed.hero["gold"] = trial.inventory.gold
+	var bag := trade_bag(proposed.hero.get("inventory", []), used.keys(), theirs_wire.get("items", []), trial.inventory.bag_capacity)
+	if bag.is_empty():
+		# no room without merging stacks: let the rules place them (merging into stacks already in the bag)
+		TradeRules.swap(trial, outgoing, incoming)
+		bag = trial.inventory.to_array()
+	proposed.hero["inventory"] = bag
+	proposed.hero["gold"] = int(proposed.hero.get("gold", 0)) - int(mine_wire.get("gold", 0)) + int(theirs_wire.get("gold", 0))
 	var body := {"character": character_id, "lease": lease, "trade_id": trade_id,
 		"other": other, "revision": revision, "mine": mine_wire, "theirs": theirs_wire, "save": proposed}
 	var result := await request("/characters/trade_prepare", body)
-	var deadline := Time.get_ticks_msec() + 45000
-	while not result.has("error") and result.get("state", "") == "pending" and Time.get_ticks_msec() < deadline:
+	var deadline := Time.get_ticks_msec() + 50000
+	var asked := {"character": character_id, "lease": lease, "trade_id": trade_id, "other": other}
+	while Time.get_ticks_msec() < deadline:
+		if result.get("state", "") in ["committed", "cancelled"] or result.get("code", "") in ["trade_cancelled", "revision_conflict", "lease_expired"]:
+			break
+		if _trade_aborted.has(trade_id) or (result.has("error") and result.get("code", "") != "connection_failed"):
+			# withdraw: this side's approval was refused or the other player left the table
+			result = await request("/characters/trade_cancel", asked)
+			continue
 		await get_tree().create_timer(0.4, true).timeout
-		result = await request("/characters/trade_status", {"character": character_id, "lease": lease, "trade_id": trade_id})
+		result = await request("/characters/trade_status", asked)
+	if not result.get("state", "") in ["committed", "cancelled"] and result.get("code", "") != "trade_cancelled":
+		# out of time or out of touch: one last withdrawal, which also reports a commit that did happen
+		for attempt in 3:
+			var last := await request("/characters/trade_cancel", asked)
+			if last.get("state", "") in ["committed", "cancelled"]:
+				result = last
+				break
+			await get_tree().create_timer(1.0, true).timeout
 	_transacting = false
-	if result.has("error") or result.get("state", "") != "committed":
+	_trade_aborted.erase(trade_id)
+	if result.get("state", "") == "committed" and result.get("save", null) is Dictionary:
+		revision = int(result.revision)
+		_confirmed_save = result.save.duplicate(true)
+		_pending = {}
+		return result
+	if result.get("state", "") == "cancelled" or result.get("code", "") == "trade_cancelled":
+		return {"error": String(result.get("error", "The trade was cancelled. Nothing changed hands.")), "code": "trade_cancelled"}
+	if result.get("code", "") == "revision_conflict" or result.get("code", "") == "lease_expired":
 		_fatal = true
-		game_disconnected("The trade could not be confirmed. Return to the menu and load the server's saved character before playing again. " + String(result.get("error", "The trade timed out.")))
+		game_disconnected(String(result.get("error", "Your character changed on the server.")) + " Return to the menu and load the server's saved character.")
 		return {"error": "The trade was not confirmed. Reload your character's server save."}
-	revision = int(result.revision)
-	_confirmed_save = result.save.duplicate(true)
-	_pending = {}
-	return result
+	_fatal = true
+	game_disconnected("The trade could not be confirmed because the server stopped answering. Return to the menu and load the server's saved character before playing again. " + String(result.get("error", "")))
+	return {"error": "The trade was not confirmed. Reload your character's server save."}
+
+## bh-041: the bag after a trade, written straight from the saved one: the offered cells emptied and the arriving items
+## (exactly as they arrived, minus the sender's locks and marks) placed in free bag cells. Nothing is decoded and encoded
+## again, so the server sees the very same item records on both sides. [] when they do not fit without merging stacks.
+static func trade_bag(saved: Array, leaving: Array, arriving: Array, bag_capacity: int) -> Array:
+	var bag := saved.duplicate(true)
+	for i in leaving:
+		if int(i) < bag.size():
+			bag[int(i)] = null
+	for raw in arriving:
+		if not raw is Dictionary:
+			continue
+		var item: Dictionary = (raw as Dictionary).duplicate(true)
+		for flag in ["locked", "favorite", "junk"]:
+			item.erase(flag)
+		var placed := false
+		for i in mini(bag_capacity, bag.size()):
+			if bag[i] == null:
+				bag[i] = item
+				placed = true
+				break
+		if not placed:
+			return []
+	return bag
+
+## bh-041: the other player cancelled (or this side gave up) while `trade_id` was being confirmed: stop waiting for it and
+## withdraw it on the server, so neither player waits out the expiry.
+var _trade_aborted := {}
+
+func abort_trade(trade_id: String, other := "") -> void:
+	if trade_id == "" or not active:
+		return
+	_trade_aborted[trade_id] = true
+	request("/characters/trade_cancel", {"character": character_id, "lease": lease, "trade_id": trade_id, "other": other})
 
 func release_character() -> void:
 	if active:

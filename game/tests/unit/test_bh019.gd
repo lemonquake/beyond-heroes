@@ -49,7 +49,7 @@ func test_lape_has_more_than_three_hundred_remarks() -> void:
 		ok((DataLapeLines.KIND[k] as Array).size() >= 5, "remarks on %s" % k)
 	eq(DataLapeLines.TIER.size(), BH.RARITY_COUNT, "a remark set for every tier")
 	eq(DataLapeLines.WORTH.size(), LapeTrade.VALUE_BANDS.size() + 1, "a remark set for every worth band")
-	eq(DataLapeLines.OFFER.size(), BH.Rarity.AETHER - BH.Rarity.LICENSED + 1, "an offer line for every craftable tier")
+	eq(DataLapeLines.OFFER.size(), BH.Rarity.ESCHATON - BH.Rarity.LICENSED + 1, "an offer line for every tier he can offer (bh-041: up to Eschaton)")
 	done()
 
 func test_lape_stands_in_malasugue() -> void:
@@ -120,13 +120,19 @@ func test_lape_offers_three_licensed_class_pieces() -> void:
 			h.inventory.add(it)
 		var a := LapeTrade.appraise(h, lot)
 		ok(a.craft, "%s: a good lot is crafted for" % cls)
-		eq((a.offers as Array).size(), 3, "%s: three offers" % cls)
+		# bh-041: three to five offers of several kinds; the crafted ones are licensed class pieces near the lot's tier
+		var count := (a.offers as Array).size()
+		ok(count >= 3 and count <= LapeTrade.MAX_OFFERS, "%s: three to five offers (%d)" % [cls, count])
 		eq(int(a.tier), BH.Rarity.MYTHICAL, "%s: three Elite-or-better pieces with a Master among them -> one tier up (Mythical)" % cls)
 		var cats := {}
-		for it: ItemInstance in a.offers:
+		for i in count:
+			var it: ItemInstance = a.offers[i]
+			if a.kinds[i] != &"crafted":
+				cats[it.base.category] = true
+				continue
 			ok(it.license != &"", "%s: %s is licensed" % [cls, it.display_name()])
 			ok(it.crafted, "%s: %s is special-crafted" % [cls, it.display_name()])
-			eq(it.rarity, int(a.tier), "%s: %s is of the offered tier" % [cls, it.display_name()])
+			ok(absi(it.rarity - int(a.tier)) <= 1, "%s: %s is within a tier of the lot's (%s)" % [cls, it.display_name(), it.rarity_name()])
 			ok(it.ilvl >= 22 and it.ilvl <= 24, "%s: item level near the hero's (%d)" % [cls, it.ilvl])
 			if it.base.category != &"accessory":
 				ok(ItemGenerator.class_fit(it.base, cls), "%s: %s is %s gear" % [cls, it.base.display_name, cls])

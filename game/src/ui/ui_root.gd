@@ -10,6 +10,9 @@ var dialogue: DialogueBox
 var pause_menu: PauseMenu
 var dev_panel: DevPanel
 var confirm: ConfirmDialog
+## bh-041: questions from other players (a Trade Request) get their own box, so another question on screen (a waypoint,
+## a purchase, a party summons) can no longer replace one and leave the asking player waiting for an answer.
+var request_box: ConfirmDialog
 var tooltips: TooltipLayer
 var chat: ChatBox
 var touch: TouchControls
@@ -84,6 +87,8 @@ func _ready() -> void:
 	_root.add_child(pause_menu)
 	confirm = ConfirmDialog.new()
 	_root.add_child(confirm)
+	request_box = ConfirmDialog.new()
+	_root.add_child(request_box)
 	dev_panel = DevPanel.new()
 	_root.add_child(dev_panel)
 	tooltips = TooltipLayer.new()
@@ -209,7 +214,7 @@ func any_window_open() -> bool:
 	for w in windows.values():
 		if w.visible:
 			return true
-	return dialogue.visible or pause_menu.visible or confirm.visible or chat.is_open()
+	return dialogue.visible or pause_menu.visible or confirm.visible or request_box.visible or chat.is_open()
 
 func close_all() -> bool:
 	var closed_any := false
@@ -221,6 +226,9 @@ func close_all() -> bool:
 		return true
 	if confirm.visible:
 		confirm.cancel()
+		return true
+	if request_box.visible:
+		request_box.cancel()
 		return true
 	if dialogue.visible:
 		dialogue.close()
@@ -243,6 +251,8 @@ func back() -> void:
 		return
 	if confirm.visible:
 		confirm.cancel()
+	elif request_box.visible:
+		request_box.cancel()
 	elif not close_all():
 		pause_menu.toggle()
 	_update_blocking()
@@ -270,6 +280,10 @@ func _unhandled_input(e: InputEvent) -> void:
 			toggle(HOTKEYS[action])
 			get_viewport().set_input_as_handled()
 			return
+	if e.is_action_pressed(&"tempo_command") and Game.hero and not Game.hero.tempos.is_empty():
+		TempoRules.cycle_command(Game.hero)
+		get_viewport().set_input_as_handled()
+		return
 	if e.is_action_pressed(&"debug_console") and Game.hero and Game.hero.debug_unlocked:
 		toggle(&"debug")
 		get_viewport().set_input_as_handled()

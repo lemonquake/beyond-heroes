@@ -8,7 +8,7 @@ var tree: TreeView
 var _points: Label
 var _summary: VBoxContainer
 ## Class Transcendence: a tab per page (Talents, then one per advancement) and locked previews of the next one
-var _tabs: HBoxContainer
+var _tabs: HFlowContainer
 var _page_desc: Label
 
 func _init() -> void:
@@ -21,12 +21,18 @@ func _build() -> void:
 	_points.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_points)
 	top.add_child(UITheme.label("Left-click: learn · Right-click: refund · Keystones exclude each other", 15, UITheme.TEXT_MUTED, UITheme.body_font()))
-	var pages := hbox(12)
+	# bh-041: the page tabs wrap onto a second row and the page text sits under them, wrapped: with Class Transcendence's
+	# pages and locked previews a single row ran past the window edge and pushed the whole window off the screen
+	var pages := vbox(4)
 	body.add_child(pages)
-	_tabs = hbox(6)
+	_tabs = HFlowContainer.new()
+	_tabs.add_theme_constant_override("h_separation", 6)
+	_tabs.add_theme_constant_override("v_separation", 6)
 	pages.add_child(_tabs)
 	_page_desc = UITheme.label("", 15, UITheme.TEXT_DIM, UITheme.body_font())
-	_page_desc.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_page_desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_page_desc.custom_minimum_size.x = 200.0
+	_page_desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	pages.add_child(_page_desc)
 	var row := hbox(16)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL

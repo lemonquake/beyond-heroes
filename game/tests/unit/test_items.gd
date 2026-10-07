@@ -3,18 +3,20 @@ extends TestCase
 
 func test_exact_rarity_tiers() -> void:
 	# the ten tiers of the design spec, then (bh-034) the four Ascendant tiers that only the Ascendant collections carry
-	eq(BH.RARITY_COUNT, 14, "ten tiers and four Ascendant ones")
+	# bh-041: and Eschaton above them, made only by Lape the Ancient
+	eq(BH.RARITY_COUNT, 15, "ten tiers, four Ascendant ones and Eschaton")
 	eq(BH.RARITY_NAMES, ["Beginner", "Common", "Basic", "Advanced", "Licensed", "Elite", "Master", "Mythical", "Legendary", "Aether",
-		"Cosmic", "Divine", "Eternal", "Primordial"], "exact names in order")
+		"Cosmic", "Divine", "Eternal", "Primordial", "Eschaton"], "exact names in order")
 	eq(BH.Rarity.AETHER, 9, "Aether is the highest rolled tier")
-	eq(BH.Rarity.PRIMORDIAL, 13, "Primordial is the highest")
-	eq(ItemGenerator.RULES.size(), 14, "one rule per tier")
-	eq(ItemGenerator.WEIGHTS.size(), 14, "one weight per tier")
-	eq(BH.RARITY_COLORS.size(), 14, "one color per tier")
+	eq(BH.Rarity.PRIMORDIAL, 13, "Primordial is the highest Ascendant tier")
+	eq(BH.Rarity.ESCHATON, 14, "Eschaton is the highest")
+	eq(ItemGenerator.RULES.size(), 15, "one rule per tier")
+	eq(ItemGenerator.WEIGHTS.size(), 15, "one weight per tier")
+	eq(BH.RARITY_COLORS.size(), 15, "one color per tier")
 	var seen := {}
 	for c in BH.RARITY_COLORS:
 		seen[c.to_html()] = true
-	eq(seen.size(), 14, "every tier has a distinct color")
+	eq(seen.size(), 15, "every tier has a distinct color")
 
 func test_generation_rules_per_rarity() -> void:
 	var r := rng(11)

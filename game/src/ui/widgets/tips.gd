@@ -141,7 +141,15 @@ static func _item_card(it: ItemInstance, hero: HeroData, opts: Dictionary) -> Pa
 	band.custom_minimum_size = Vector2(0, 2)
 	v.add_child(band)
 	# bh-034: an Ascendant piece says what it is: the tier, its power over Aether, where it comes from; its name breathes
-	if DataAscendant.is_ascendant_rarity(it.rarity):
+	if it.rarity == BH.Rarity.ESCHATON:
+		# bh-041: the last work: its own header, and its name runs through the spectrum like light on chrome
+		v.add_child(lbl("ESCHATON · THE LAST WORK   ×%.2f base power" % DataAscendant.mult(it.rarity), 16, col, UITheme.body_bold()))
+		v.add_child(lbl(BH.RARITY_DESC[it.rarity], 14, Color(col, 0.85)))
+		name_l.tree_entered.connect(func() -> void:
+			var tw := name_l.create_tween().set_loops()
+			for c in [Color(1.25, 1.25, 1.35), Color(1.0, 0.85, 1.25), Color(0.85, 1.1, 1.3), Color(1.2, 1.15, 0.9)]:
+				tw.tween_property(name_l, "modulate", c, 0.7).set_trans(Tween.TRANS_SINE), CONNECT_ONE_SHOT)
+	elif DataAscendant.is_ascendant_rarity(it.rarity):
 		v.add_child(lbl("ASCENDANT · %s   ×%.2f base power" % [it.rarity_name().to_upper(), DataAscendant.mult(it.rarity)], 16, col, UITheme.body_bold()))
 		v.add_child(lbl(BH.RARITY_DESC[clampi(it.rarity, 0, BH.RARITY_COUNT - 1)], 14, Color(col, 0.85)))
 		name_l.tree_entered.connect(func() -> void:

@@ -304,6 +304,10 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 		_char[ck] = _legend_mat(base, src as BaseMaterial3D, lite)
 		return _char[ck]
 	var imported := src as BaseMaterial3D
+	# bh-041: Eschaton chrome ("BH_Chrome__it_esc_doomsday_paragon_plate"): polished mirror metal with a clear coat
+	if base == "BH_Chrome" or base == "BH_BlackChrome":
+		_char[ck] = _chrome_mat(base, imported, lite)
+		return _char[ck]
 	if base == "BH_Baked":
 		_char[ck] = _baked_mat(imported, lite)
 		return _char[ck]
@@ -343,6 +347,30 @@ static func _palette_mat(nm: String, src: Material) -> Material:
 	m.rim = 0.25
 	m.rim_tint = 0.6
 	_char[ck] = m
+	return m
+
+## bh-041: mirror chrome for the Eschaton pieces. The colour comes from the model (near-white plate, near-black trim);
+## the surface is fully metallic and nearly smooth, under a clear coat, with a cool rim so it reads in dim places too.
+static func _chrome_mat(base: String, imported: BaseMaterial3D, lite: bool) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = imported.albedo_color if imported else (Color(0.9, 0.92, 0.96) if base == "BH_Chrome" else Color(0.05, 0.05, 0.07))
+	var bright := base == "BH_Chrome"
+	# mirror metal shows only what it reflects, and dungeons give it little: a touch less metal and a faint light of
+	# its own keep the plate reading as silver (black chrome stays dark, with its rim)
+	m.metallic = 0.86 if bright else 1.0
+	m.metallic_specular = 0.9
+	m.roughness = clampf(imported.roughness if imported else 0.08, 0.06, 0.18)
+	if bright:
+		m.emission_enabled = true
+		m.emission = m.albedo_color
+		m.emission_energy_multiplier = 0.06
+	if not lite:
+		m.clearcoat_enabled = true
+		m.clearcoat = 0.8
+		m.clearcoat_roughness = 0.05
+		m.rim_enabled = true
+		m.rim = 0.5 if bright else 0.35
+		m.rim_tint = 0.1
 	return m
 
 ## bh-029: the palettes whose glows are forced white: the Zarael monsters and Agdao's people (their models).

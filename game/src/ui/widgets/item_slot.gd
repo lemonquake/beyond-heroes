@@ -88,6 +88,29 @@ func _draw_orbit(rr: Rect2, c: Color, a: float) -> void:
 			var f := 1.0 - tail / 6.0
 			draw_circle(p, maxf(1.0, size.x * 0.035 * f), Color(c.lightened(0.35), 0.85 * f * a))
 
+## bh-041: Eschaton chrome: a white sheen sweeping across the cell, and star glints that flare in turn round the frame.
+func _draw_chrome(rr: Rect2, a: float) -> void:
+	var u := fmod(_t * 0.45, 1.6) - 0.3
+	var w := rr.size.x
+	for i in 7:
+		var o := (u + i * 0.018) * w * 2.0
+		var f := 1.0 - absf(float(i) - 3.0) / 4.0
+		var p0 := rr.position + Vector2(clampf(o - w * 0.4, 0.0, w), clampf(w * 0.4 + w * 0.6 - o, 0.0, w))
+		var p1 := rr.position + Vector2(clampf(o, 0.0, w), clampf(w - o, 0.0, w))
+		if o > 0.0 and o < w * 1.4:
+			draw_line(p0, p1, Color(1, 1, 1, 0.16 * f * a), maxf(1.0, w * 0.02))
+	for k in 4:
+		var ph := fmod(_t * 0.9 + k * 0.25, 1.0)
+		var flare := pow(maxf(0.0, sin(ph * PI)), 6.0)
+		if flare < 0.05:
+			continue
+		var p := _perimeter(rr, k * 0.25 + 0.06)
+		var s := w * 0.11 * flare
+		var col := Color(1, 1, 1, 0.95 * flare * a)
+		draw_line(p - Vector2(s, 0), p + Vector2(s, 0), col, maxf(1.0, w * 0.018))
+		draw_line(p - Vector2(0, s), p + Vector2(0, s), col, maxf(1.0, w * 0.018))
+		draw_circle(p, maxf(1.0, w * 0.02 * flare), col)
+
 func _draw() -> void:
 	var r := Rect2(Vector2.ZERO, size)
 	var bg := "slots/slot.png"
@@ -134,6 +157,8 @@ func _draw() -> void:
 	# bh-034: an Ascendant piece has two motes of its tier's light running round its frame
 	if DataAscendant.is_ascendant_rarity(item.rarity) and item.is_equipment():
 		_draw_orbit(r.grow(-size.x * 0.06), AscendantFx.color(item.rarity), a)
+		if item.rarity == BH.Rarity.ESCHATON:
+			_draw_chrome(r.grow(-size.x * 0.06), a)
 	# bh-022: its sockets, empty or holding their crystals
 	SocketArt.draw_sockets(self, item, r.grow(-size.x * (0.1 if kind == Kind.EQUIPMENT else 0.04)), a)
 	# stack count

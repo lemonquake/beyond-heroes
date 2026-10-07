@@ -1,0 +1,4192 @@
+[
+ {
+  "id": "esc_doomsday_paragon_helm",
+  "tris": 8504,
+  "objects": [
+   "esc_doomsday_paragon_helm"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_armor",
+  "tris": 18796,
+  "objects": [
+   "esc_doomsday_paragon_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_inner",
+  "tris": 6596,
+  "objects": [
+   "esc_doomsday_paragon_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_leggings",
+  "tris": 9832,
+  "objects": [
+   "esc_doomsday_paragon_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_gloves",
+  "tris": 5032,
+  "objects": [
+   "esc_doomsday_paragon_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_gloves_R",
+  "tris": 5032,
+  "objects": [
+   "esc_doomsday_paragon_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_boots",
+  "tris": 6332,
+  "objects": [
+   "esc_doomsday_paragon_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_boots_R",
+  "tris": 6332,
+  "objects": [
+   "esc_doomsday_paragon_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_accessory",
+  "tris": 1184,
+  "objects": [
+   "esc_doomsday_paragon_accessory"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_shield",
+  "tris": 5204,
+  "objects": [
+   "esc_doomsday_paragon_shield"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_helm",
+  "tris": 7628,
+  "objects": [
+   "esc_worldsend_bulwark_helm"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_armor",
+  "tris": 16380,
+  "objects": [
+   "esc_worldsend_bulwark_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_inner",
+  "tris": 6244,
+  "objects": [
+   "esc_worldsend_bulwark_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_leggings",
+  "tris": 9272,
+  "objects": [
+   "esc_worldsend_bulwark_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_gloves",
+  "tris": 4592,
+  "objects": [
+   "esc_worldsend_bulwark_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_gloves_R",
+  "tris": 4592,
+  "objects": [
+   "esc_worldsend_bulwark_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_boots",
+  "tris": 5768,
+  "objects": [
+   "esc_worldsend_bulwark_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_boots_R",
+  "tris": 5768,
+  "objects": [
+   "esc_worldsend_bulwark_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_accessory",
+  "tris": 832,
+  "objects": [
+   "esc_worldsend_bulwark_accessory"
+  ]
+ },
+ {
+  "id": "esc_worldsend_bulwark_shield",
+  "tris": 4600,
+  "objects": [
+   "esc_worldsend_bulwark_shield"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_helm",
+  "tris": 7464,
+  "objects": [
+   "esc_endbringer_sovereign_helm"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_armor",
+  "tris": 16456,
+  "objects": [
+   "esc_endbringer_sovereign_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_inner",
+  "tris": 6248,
+  "objects": [
+   "esc_endbringer_sovereign_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_leggings",
+  "tris": 9280,
+  "objects": [
+   "esc_endbringer_sovereign_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_gloves",
+  "tris": 4516,
+  "objects": [
+   "esc_endbringer_sovereign_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_gloves_R",
+  "tris": 4516,
+  "objects": [
+   "esc_endbringer_sovereign_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_boots",
+  "tris": 5768,
+  "objects": [
+   "esc_endbringer_sovereign_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_boots_R",
+  "tris": 5768,
+  "objects": [
+   "esc_endbringer_sovereign_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_accessory",
+  "tris": 836,
+  "objects": [
+   "esc_endbringer_sovereign_accessory"
+  ]
+ },
+ {
+  "id": "esc_endbringer_sovereign_shield",
+  "tris": 4760,
+  "objects": [
+   "esc_endbringer_sovereign_shield"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_helm",
+  "tris": 7864,
+  "objects": [
+   "esc_last_crown_marshal_helm"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_armor",
+  "tris": 16580,
+  "objects": [
+   "esc_last_crown_marshal_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_inner",
+  "tris": 6168,
+  "objects": [
+   "esc_last_crown_marshal_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_leggings",
+  "tris": 8976,
+  "objects": [
+   "esc_last_crown_marshal_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_gloves",
+  "tris": 4604,
+  "objects": [
+   "esc_last_crown_marshal_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_gloves_R",
+  "tris": 4604,
+  "objects": [
+   "esc_last_crown_marshal_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_boots",
+  "tris": 5904,
+  "objects": [
+   "esc_last_crown_marshal_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_boots_R",
+  "tris": 5904,
+  "objects": [
+   "esc_last_crown_marshal_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_accessory",
+  "tris": 756,
+  "objects": [
+   "esc_last_crown_marshal_accessory"
+  ]
+ },
+ {
+  "id": "esc_last_crown_marshal_shield",
+  "tris": 4536,
+  "objects": [
+   "esc_last_crown_marshal_shield"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_helm",
+  "tris": 9310,
+  "objects": [
+   "esc_ruinmarch_herald_helm"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_armor",
+  "tris": 16430,
+  "objects": [
+   "esc_ruinmarch_herald_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_inner",
+  "tris": 6678,
+  "objects": [
+   "esc_ruinmarch_herald_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_leggings",
+  "tris": 9996,
+  "objects": [
+   "esc_ruinmarch_herald_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_gloves",
+  "tris": 5114,
+  "objects": [
+   "esc_ruinmarch_herald_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_gloves_R",
+  "tris": 5114,
+  "objects": [
+   "esc_ruinmarch_herald_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_boots",
+  "tris": 6414,
+  "objects": [
+   "esc_ruinmarch_herald_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_boots_R",
+  "tris": 6414,
+  "objects": [
+   "esc_ruinmarch_herald_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_accessory",
+  "tris": 1266,
+  "objects": [
+   "esc_ruinmarch_herald_accessory"
+  ]
+ },
+ {
+  "id": "esc_ruinmarch_herald_shield",
+  "tris": 5034,
+  "objects": [
+   "esc_ruinmarch_herald_shield"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_helm",
+  "tris": 9284,
+  "objects": [
+   "esc_oblivion_warden_helm"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_armor",
+  "tris": 19224,
+  "objects": [
+   "esc_oblivion_warden_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_inner",
+  "tris": 8032,
+  "objects": [
+   "esc_oblivion_warden_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_leggings",
+  "tris": 12704,
+  "objects": [
+   "esc_oblivion_warden_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_gloves",
+  "tris": 6468,
+  "objects": [
+   "esc_oblivion_warden_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_gloves_R",
+  "tris": 6468,
+  "objects": [
+   "esc_oblivion_warden_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_boots",
+  "tris": 7768,
+  "objects": [
+   "esc_oblivion_warden_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_boots_R",
+  "tris": 7768,
+  "objects": [
+   "esc_oblivion_warden_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_accessory",
+  "tris": 2620,
+  "objects": [
+   "esc_oblivion_warden_accessory"
+  ]
+ },
+ {
+  "id": "esc_oblivion_warden_shield",
+  "tris": 6400,
+  "objects": [
+   "esc_oblivion_warden_shield"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_helm",
+  "tris": 9704,
+  "objects": [
+   "esc_final_dawn_executor_helm"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_armor",
+  "tris": 19744,
+  "objects": [
+   "esc_final_dawn_executor_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_inner",
+  "tris": 7400,
+  "objects": [
+   "esc_final_dawn_executor_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_leggings",
+  "tris": 11440,
+  "objects": [
+   "esc_final_dawn_executor_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_gloves",
+  "tris": 6144,
+  "objects": [
+   "esc_final_dawn_executor_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_gloves_R",
+  "tris": 6144,
+  "objects": [
+   "esc_final_dawn_executor_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_boots",
+  "tris": 7136,
+  "objects": [
+   "esc_final_dawn_executor_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_boots_R",
+  "tris": 7136,
+  "objects": [
+   "esc_final_dawn_executor_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_accessory",
+  "tris": 1988,
+  "objects": [
+   "esc_final_dawn_executor_accessory"
+  ]
+ },
+ {
+  "id": "esc_final_dawn_executor_shield",
+  "tris": 5768,
+  "objects": [
+   "esc_final_dawn_executor_shield"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_helm",
+  "tris": 7844,
+  "objects": [
+   "esc_starless_throne_helm"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_armor",
+  "tris": 17568,
+  "objects": [
+   "esc_starless_throne_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_inner",
+  "tris": 7040,
+  "objects": [
+   "esc_starless_throne_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_leggings",
+  "tris": 10720,
+  "objects": [
+   "esc_starless_throne_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_gloves",
+  "tris": 5476,
+  "objects": [
+   "esc_starless_throne_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_gloves_R",
+  "tris": 5476,
+  "objects": [
+   "esc_starless_throne_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_boots",
+  "tris": 6776,
+  "objects": [
+   "esc_starless_throne_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_boots_R",
+  "tris": 6776,
+  "objects": [
+   "esc_starless_throne_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_accessory",
+  "tris": 1628,
+  "objects": [
+   "esc_starless_throne_accessory"
+  ]
+ },
+ {
+  "id": "esc_starless_throne_shield",
+  "tris": 5396,
+  "objects": [
+   "esc_starless_throne_shield"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_helm",
+  "tris": 7988,
+  "objects": [
+   "esc_ashen_apocalypse_helm"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_armor",
+  "tris": 16804,
+  "objects": [
+   "esc_ashen_apocalypse_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_inner",
+  "tris": 6464,
+  "objects": [
+   "esc_ashen_apocalypse_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_leggings",
+  "tris": 9568,
+  "objects": [
+   "esc_ashen_apocalypse_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_gloves",
+  "tris": 4900,
+  "objects": [
+   "esc_ashen_apocalypse_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_gloves_R",
+  "tris": 4900,
+  "objects": [
+   "esc_ashen_apocalypse_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_boots",
+  "tris": 6200,
+  "objects": [
+   "esc_ashen_apocalypse_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_boots_R",
+  "tris": 6200,
+  "objects": [
+   "esc_ashen_apocalypse_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_accessory",
+  "tris": 1052,
+  "objects": [
+   "esc_ashen_apocalypse_accessory"
+  ]
+ },
+ {
+  "id": "esc_ashen_apocalypse_shield",
+  "tris": 4832,
+  "objects": [
+   "esc_ashen_apocalypse_shield"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_helm",
+  "tris": 7144,
+  "objects": [
+   "esc_unmaker_vanguard_helm"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_armor",
+  "tris": 17300,
+  "objects": [
+   "esc_unmaker_vanguard_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_inner",
+  "tris": 6828,
+  "objects": [
+   "esc_unmaker_vanguard_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_leggings",
+  "tris": 10296,
+  "objects": [
+   "esc_unmaker_vanguard_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_gloves",
+  "tris": 5336,
+  "objects": [
+   "esc_unmaker_vanguard_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_gloves_R",
+  "tris": 5336,
+  "objects": [
+   "esc_unmaker_vanguard_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_boots",
+  "tris": 6564,
+  "objects": [
+   "esc_unmaker_vanguard_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_boots_R",
+  "tris": 6564,
+  "objects": [
+   "esc_unmaker_vanguard_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_accessory",
+  "tris": 1416,
+  "objects": [
+   "esc_unmaker_vanguard_accessory"
+  ]
+ },
+ {
+  "id": "esc_unmaker_vanguard_shield",
+  "tris": 5196,
+  "objects": [
+   "esc_unmaker_vanguard_shield"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_0",
+  "tris": 2424,
+  "objects": [
+   "esc_w_knight_sword_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_1",
+  "tris": 2332,
+  "objects": [
+   "esc_w_knight_sword_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_2",
+  "tris": 2600,
+  "objects": [
+   "esc_w_knight_sword_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_3",
+  "tris": 2544,
+  "objects": [
+   "esc_w_knight_sword_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_4",
+  "tris": 2566,
+  "objects": [
+   "esc_w_knight_sword_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_5",
+  "tris": 2408,
+  "objects": [
+   "esc_w_knight_sword_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_6",
+  "tris": 2808,
+  "objects": [
+   "esc_w_knight_sword_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_7",
+  "tris": 2412,
+  "objects": [
+   "esc_w_knight_sword_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_8",
+  "tris": 2316,
+  "objects": [
+   "esc_w_knight_sword_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_sword_9",
+  "tris": 2420,
+  "objects": [
+   "esc_w_knight_sword_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_0",
+  "tris": 2556,
+  "objects": [
+   "esc_w_knight_greatsword_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_1",
+  "tris": 2408,
+  "objects": [
+   "esc_w_knight_greatsword_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_2",
+  "tris": 2712,
+  "objects": [
+   "esc_w_knight_greatsword_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_3",
+  "tris": 2660,
+  "objects": [
+   "esc_w_knight_greatsword_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_4",
+  "tris": 2308,
+  "objects": [
+   "esc_w_knight_greatsword_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_5",
+  "tris": 2492,
+  "objects": [
+   "esc_w_knight_greatsword_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_6",
+  "tris": 2640,
+  "objects": [
+   "esc_w_knight_greatsword_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_7",
+  "tris": 2456,
+  "objects": [
+   "esc_w_knight_greatsword_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_8",
+  "tris": 2772,
+  "objects": [
+   "esc_w_knight_greatsword_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greatsword_9",
+  "tris": 2364,
+  "objects": [
+   "esc_w_knight_greatsword_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_0",
+  "tris": 2544,
+  "objects": [
+   "esc_w_knight_axe_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_1",
+  "tris": 2860,
+  "objects": [
+   "esc_w_knight_axe_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_2",
+  "tris": 2644,
+  "objects": [
+   "esc_w_knight_axe_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_3",
+  "tris": 2888,
+  "objects": [
+   "esc_w_knight_axe_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_4",
+  "tris": 2692,
+  "objects": [
+   "esc_w_knight_axe_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_5",
+  "tris": 2944,
+  "objects": [
+   "esc_w_knight_axe_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_6",
+  "tris": 2984,
+  "objects": [
+   "esc_w_knight_axe_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_7",
+  "tris": 2788,
+  "objects": [
+   "esc_w_knight_axe_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_8",
+  "tris": 2744,
+  "objects": [
+   "esc_w_knight_axe_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_axe_9",
+  "tris": 2944,
+  "objects": [
+   "esc_w_knight_axe_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_0",
+  "tris": 3440,
+  "objects": [
+   "esc_w_knight_greataxe_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_1",
+  "tris": 3428,
+  "objects": [
+   "esc_w_knight_greataxe_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_2",
+  "tris": 3108,
+  "objects": [
+   "esc_w_knight_greataxe_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_3",
+  "tris": 3440,
+  "objects": [
+   "esc_w_knight_greataxe_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_4",
+  "tris": 3416,
+  "objects": [
+   "esc_w_knight_greataxe_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_5",
+  "tris": 3088,
+  "objects": [
+   "esc_w_knight_greataxe_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_6",
+  "tris": 3440,
+  "objects": [
+   "esc_w_knight_greataxe_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_7",
+  "tris": 3432,
+  "objects": [
+   "esc_w_knight_greataxe_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_8",
+  "tris": 3100,
+  "objects": [
+   "esc_w_knight_greataxe_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_greataxe_9",
+  "tris": 3416,
+  "objects": [
+   "esc_w_knight_greataxe_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_0",
+  "tris": 2384,
+  "objects": [
+   "esc_w_knight_spear_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_1",
+  "tris": 2472,
+  "objects": [
+   "esc_w_knight_spear_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_2",
+  "tris": 2652,
+  "objects": [
+   "esc_w_knight_spear_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_3",
+  "tris": 2624,
+  "objects": [
+   "esc_w_knight_spear_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_4",
+  "tris": 2384,
+  "objects": [
+   "esc_w_knight_spear_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_5",
+  "tris": 2472,
+  "objects": [
+   "esc_w_knight_spear_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_6",
+  "tris": 2652,
+  "objects": [
+   "esc_w_knight_spear_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_7",
+  "tris": 2624,
+  "objects": [
+   "esc_w_knight_spear_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_8",
+  "tris": 2384,
+  "objects": [
+   "esc_w_knight_spear_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_spear_9",
+  "tris": 2472,
+  "objects": [
+   "esc_w_knight_spear_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_0",
+  "tris": 2524,
+  "objects": [
+   "esc_w_knight_club_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_1",
+  "tris": 2776,
+  "objects": [
+   "esc_w_knight_club_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_2",
+  "tris": 2612,
+  "objects": [
+   "esc_w_knight_club_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_3",
+  "tris": 2872,
+  "objects": [
+   "esc_w_knight_club_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_4",
+  "tris": 2776,
+  "objects": [
+   "esc_w_knight_club_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_5",
+  "tris": 2568,
+  "objects": [
+   "esc_w_knight_club_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_6",
+  "tris": 2776,
+  "objects": [
+   "esc_w_knight_club_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_7",
+  "tris": 2656,
+  "objects": [
+   "esc_w_knight_club_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_8",
+  "tris": 2872,
+  "objects": [
+   "esc_w_knight_club_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_club_9",
+  "tris": 2776,
+  "objects": [
+   "esc_w_knight_club_9"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_0",
+  "tris": 2336,
+  "objects": [
+   "esc_w_knight_javelin_0"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_1",
+  "tris": 2384,
+  "objects": [
+   "esc_w_knight_javelin_1"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_2",
+  "tris": 2336,
+  "objects": [
+   "esc_w_knight_javelin_2"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_3",
+  "tris": 2372,
+  "objects": [
+   "esc_w_knight_javelin_3"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_4",
+  "tris": 2528,
+  "objects": [
+   "esc_w_knight_javelin_4"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_5",
+  "tris": 2372,
+  "objects": [
+   "esc_w_knight_javelin_5"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_6",
+  "tris": 2420,
+  "objects": [
+   "esc_w_knight_javelin_6"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_7",
+  "tris": 2372,
+  "objects": [
+   "esc_w_knight_javelin_7"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_8",
+  "tris": 2408,
+  "objects": [
+   "esc_w_knight_javelin_8"
+  ]
+ },
+ {
+  "id": "esc_w_knight_javelin_9",
+  "tris": 2564,
+  "objects": [
+   "esc_w_knight_javelin_9"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_helm",
+  "tris": 8800,
+  "objects": [
+   "esc_void_unwritten_helm"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_armor",
+  "tris": 8888,
+  "objects": [
+   "esc_void_unwritten_armor"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_inner",
+  "tris": 5784,
+  "objects": [
+   "esc_void_unwritten_inner"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_leggings",
+  "tris": 8076,
+  "objects": [
+   "esc_void_unwritten_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_gloves",
+  "tris": 4020,
+  "objects": [
+   "esc_void_unwritten_gloves"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_gloves_R",
+  "tris": 4020,
+  "objects": [
+   "esc_void_unwritten_gloves"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_boots",
+  "tris": 6268,
+  "objects": [
+   "esc_void_unwritten_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_boots_R",
+  "tris": 6268,
+  "objects": [
+   "esc_void_unwritten_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_void_unwritten_accessory",
+  "tris": 1628,
+  "objects": [
+   "esc_void_unwritten_accessory"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_helm",
+  "tris": 8788,
+  "objects": [
+   "esc_last_word_archon_helm"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_armor",
+  "tris": 9236,
+  "objects": [
+   "esc_last_word_archon_armor"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_inner",
+  "tris": 4896,
+  "objects": [
+   "esc_last_word_archon_inner"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_leggings",
+  "tris": 7632,
+  "objects": [
+   "esc_last_word_archon_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_gloves",
+  "tris": 3576,
+  "objects": [
+   "esc_last_word_archon_gloves"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_gloves_R",
+  "tris": 3576,
+  "objects": [
+   "esc_last_word_archon_gloves"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_boots",
+  "tris": 5824,
+  "objects": [
+   "esc_last_word_archon_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_boots_R",
+  "tris": 5824,
+  "objects": [
+   "esc_last_word_archon_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_last_word_archon_accessory",
+  "tris": 5532,
+  "objects": [
+   "esc_last_word_archon_accessory"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_helm",
+  "tris": 4752,
+  "objects": [
+   "esc_entropy_magus_helm"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_armor",
+  "tris": 8092,
+  "objects": [
+   "esc_entropy_magus_armor"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_inner",
+  "tris": 4192,
+  "objects": [
+   "esc_entropy_magus_inner"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_leggings",
+  "tris": 7280,
+  "objects": [
+   "esc_entropy_magus_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_gloves",
+  "tris": 3064,
+  "objects": [
+   "esc_entropy_magus_gloves"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_gloves_R",
+  "tris": 3064,
+  "objects": [
+   "esc_entropy_magus_gloves"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_boots",
+  "tris": 5260,
+  "objects": [
+   "esc_entropy_magus_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_boots_R",
+  "tris": 5260,
+  "objects": [
+   "esc_entropy_magus_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_entropy_magus_accessory",
+  "tris": 832,
+  "objects": [
+   "esc_entropy_magus_accessory"
+  ]
+ },
+ {
+  "id": "esc_null_choir_helm",
+  "tris": 6408,
+  "objects": [
+   "esc_null_choir_helm"
+  ]
+ },
+ {
+  "id": "esc_null_choir_armor",
+  "tris": 11784,
+  "objects": [
+   "esc_null_choir_armor"
+  ]
+ },
+ {
+  "id": "esc_null_choir_inner",
+  "tris": 7768,
+  "objects": [
+   "esc_null_choir_inner"
+  ]
+ },
+ {
+  "id": "esc_null_choir_leggings",
+  "tris": 9068,
+  "objects": [
+   "esc_null_choir_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_null_choir_gloves",
+  "tris": 5012,
+  "objects": [
+   "esc_null_choir_gloves"
+  ]
+ },
+ {
+  "id": "esc_null_choir_gloves_R",
+  "tris": 5012,
+  "objects": [
+   "esc_null_choir_gloves"
+  ]
+ },
+ {
+  "id": "esc_null_choir_boots",
+  "tris": 7260,
+  "objects": [
+   "esc_null_choir_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_null_choir_boots_R",
+  "tris": 7260,
+  "objects": [
+   "esc_null_choir_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_null_choir_accessory",
+  "tris": 6968,
+  "objects": [
+   "esc_null_choir_accessory"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_helm",
+  "tris": 8200,
+  "objects": [
+   "esc_unmade_sky_sage_helm"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_armor",
+  "tris": 8444,
+  "objects": [
+   "esc_unmade_sky_sage_armor"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_inner",
+  "tris": 4040,
+  "objects": [
+   "esc_unmade_sky_sage_inner"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_leggings",
+  "tris": 7204,
+  "objects": [
+   "esc_unmade_sky_sage_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_gloves",
+  "tris": 3148,
+  "objects": [
+   "esc_unmade_sky_sage_gloves"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_gloves_R",
+  "tris": 3148,
+  "objects": [
+   "esc_unmade_sky_sage_gloves"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_boots",
+  "tris": 5396,
+  "objects": [
+   "esc_unmade_sky_sage_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_boots_R",
+  "tris": 5396,
+  "objects": [
+   "esc_unmade_sky_sage_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_unmade_sky_sage_accessory",
+  "tris": 756,
+  "objects": [
+   "esc_unmade_sky_sage_accessory"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_helm",
+  "tris": 9120,
+  "objects": [
+   "esc_silent_star_conclave_helm"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_armor",
+  "tris": 9328,
+  "objects": [
+   "esc_silent_star_conclave_armor"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_inner",
+  "tris": 5128,
+  "objects": [
+   "esc_silent_star_conclave_inner"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_leggings",
+  "tris": 7748,
+  "objects": [
+   "esc_silent_star_conclave_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_gloves",
+  "tris": 3692,
+  "objects": [
+   "esc_silent_star_conclave_gloves"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_gloves_R",
+  "tris": 3692,
+  "objects": [
+   "esc_silent_star_conclave_gloves"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_boots",
+  "tris": 5940,
+  "objects": [
+   "esc_silent_star_conclave_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_boots_R",
+  "tris": 5940,
+  "objects": [
+   "esc_silent_star_conclave_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_silent_star_conclave_accessory",
+  "tris": 5648,
+  "objects": [
+   "esc_silent_star_conclave_accessory"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_helm",
+  "tris": 7054,
+  "objects": [
+   "esc_ender_of_tomes_helm"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_armor",
+  "tris": 8830,
+  "objects": [
+   "esc_ender_of_tomes_armor"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_inner",
+  "tris": 5060,
+  "objects": [
+   "esc_ender_of_tomes_inner"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_leggings",
+  "tris": 7714,
+  "objects": [
+   "esc_ender_of_tomes_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_gloves",
+  "tris": 3658,
+  "objects": [
+   "esc_ender_of_tomes_gloves"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_gloves_R",
+  "tris": 3658,
+  "objects": [
+   "esc_ender_of_tomes_gloves"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_boots",
+  "tris": 5906,
+  "objects": [
+   "esc_ender_of_tomes_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_boots_R",
+  "tris": 5906,
+  "objects": [
+   "esc_ender_of_tomes_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_ender_of_tomes_accessory",
+  "tris": 1266,
+  "objects": [
+   "esc_ender_of_tomes_accessory"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_helm",
+  "tris": 4728,
+  "objects": [
+   "esc_mirrorless_oracle_helm"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_armor",
+  "tris": 12280,
+  "objects": [
+   "esc_mirrorless_oracle_armor"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_inner",
+  "tris": 5736,
+  "objects": [
+   "esc_mirrorless_oracle_inner"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_leggings",
+  "tris": 8052,
+  "objects": [
+   "esc_mirrorless_oracle_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_gloves",
+  "tris": 3996,
+  "objects": [
+   "esc_mirrorless_oracle_gloves"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_gloves_R",
+  "tris": 3996,
+  "objects": [
+   "esc_mirrorless_oracle_gloves"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_boots",
+  "tris": 6244,
+  "objects": [
+   "esc_mirrorless_oracle_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_boots_R",
+  "tris": 6244,
+  "objects": [
+   "esc_mirrorless_oracle_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_mirrorless_oracle_accessory",
+  "tris": 5952,
+  "objects": [
+   "esc_mirrorless_oracle_accessory"
+  ]
+ },
+ {
+  "id": "esc_final_equation_helm",
+  "tris": 8324,
+  "objects": [
+   "esc_final_equation_helm"
+  ]
+ },
+ {
+  "id": "esc_final_equation_armor",
+  "tris": 8312,
+  "objects": [
+   "esc_final_equation_armor"
+  ]
+ },
+ {
+  "id": "esc_final_equation_inner",
+  "tris": 4632,
+  "objects": [
+   "esc_final_equation_inner"
+  ]
+ },
+ {
+  "id": "esc_final_equation_leggings",
+  "tris": 7500,
+  "objects": [
+   "esc_final_equation_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_final_equation_gloves",
+  "tris": 3444,
+  "objects": [
+   "esc_final_equation_gloves"
+  ]
+ },
+ {
+  "id": "esc_final_equation_gloves_R",
+  "tris": 3444,
+  "objects": [
+   "esc_final_equation_gloves"
+  ]
+ },
+ {
+  "id": "esc_final_equation_boots",
+  "tris": 5692,
+  "objects": [
+   "esc_final_equation_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_final_equation_boots_R",
+  "tris": 5692,
+  "objects": [
+   "esc_final_equation_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_final_equation_accessory",
+  "tris": 1052,
+  "objects": [
+   "esc_final_equation_accessory"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_helm",
+  "tris": 5200,
+  "objects": [
+   "esc_eclipse_sovereign_helm"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_armor",
+  "tris": 9576,
+  "objects": [
+   "esc_eclipse_sovereign_armor"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_inner",
+  "tris": 5576,
+  "objects": [
+   "esc_eclipse_sovereign_inner"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_leggings",
+  "tris": 7972,
+  "objects": [
+   "esc_eclipse_sovereign_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_gloves",
+  "tris": 3916,
+  "objects": [
+   "esc_eclipse_sovereign_gloves"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_gloves_R",
+  "tris": 3916,
+  "objects": [
+   "esc_eclipse_sovereign_gloves"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_boots",
+  "tris": 6164,
+  "objects": [
+   "esc_eclipse_sovereign_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_boots_R",
+  "tris": 6164,
+  "objects": [
+   "esc_eclipse_sovereign_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_eclipse_sovereign_accessory",
+  "tris": 5872,
+  "objects": [
+   "esc_eclipse_sovereign_accessory"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_0",
+  "tris": 2674,
+  "objects": [
+   "esc_w_mage_staff_0"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_1",
+  "tris": 2786,
+  "objects": [
+   "esc_w_mage_staff_1"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_2",
+  "tris": 2426,
+  "objects": [
+   "esc_w_mage_staff_2"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_3",
+  "tris": 2774,
+  "objects": [
+   "esc_w_mage_staff_3"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_4",
+  "tris": 2270,
+  "objects": [
+   "esc_w_mage_staff_4"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_5",
+  "tris": 2438,
+  "objects": [
+   "esc_w_mage_staff_5"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_6",
+  "tris": 2330,
+  "objects": [
+   "esc_w_mage_staff_6"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_7",
+  "tris": 2674,
+  "objects": [
+   "esc_w_mage_staff_7"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_8",
+  "tris": 2786,
+  "objects": [
+   "esc_w_mage_staff_8"
+  ]
+ },
+ {
+  "id": "esc_w_mage_staff_9",
+  "tris": 2270,
+  "objects": [
+   "esc_w_mage_staff_9"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_0",
+  "tris": 2300,
+  "objects": [
+   "esc_w_mage_wand_0"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_1",
+  "tris": 2416,
+  "objects": [
+   "esc_w_mage_wand_1"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_2",
+  "tris": 2308,
+  "objects": [
+   "esc_w_mage_wand_2"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_3",
+  "tris": 2580,
+  "objects": [
+   "esc_w_mage_wand_3"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_4",
+  "tris": 2304,
+  "objects": [
+   "esc_w_mage_wand_4"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_5",
+  "tris": 2206,
+  "objects": [
+   "esc_w_mage_wand_5"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_6",
+  "tris": 2204,
+  "objects": [
+   "esc_w_mage_wand_6"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_7",
+  "tris": 2416,
+  "objects": [
+   "esc_w_mage_wand_7"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_8",
+  "tris": 2300,
+  "objects": [
+   "esc_w_mage_wand_8"
+  ]
+ },
+ {
+  "id": "esc_w_mage_wand_9",
+  "tris": 2580,
+  "objects": [
+   "esc_w_mage_wand_9"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_helm",
+  "tris": 9084,
+  "objects": [
+   "esc_endtime_stalker_helm"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_armor",
+  "tris": 13616,
+  "objects": [
+   "esc_endtime_stalker_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_inner",
+  "tris": 7348,
+  "objects": [
+   "esc_endtime_stalker_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_leggings",
+  "tris": 11616,
+  "objects": [
+   "esc_endtime_stalker_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_gloves",
+  "tris": 6144,
+  "objects": [
+   "esc_endtime_stalker_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_gloves_R",
+  "tris": 6144,
+  "objects": [
+   "esc_endtime_stalker_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_boots",
+  "tris": 7136,
+  "objects": [
+   "esc_endtime_stalker_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_boots_R",
+  "tris": 7136,
+  "objects": [
+   "esc_endtime_stalker_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_endtime_stalker_accessory",
+  "tris": 6336,
+  "objects": [
+   "esc_endtime_stalker_accessory"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_helm",
+  "tris": 7432,
+  "objects": [
+   "esc_last_arrow_helm"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_armor",
+  "tris": 11848,
+  "objects": [
+   "esc_last_arrow_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_inner",
+  "tris": 4688,
+  "objects": [
+   "esc_last_arrow_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_leggings",
+  "tris": 8808,
+  "objects": [
+   "esc_last_arrow_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_gloves",
+  "tris": 4900,
+  "objects": [
+   "esc_last_arrow_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_gloves_R",
+  "tris": 4900,
+  "objects": [
+   "esc_last_arrow_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_boots",
+  "tris": 6200,
+  "objects": [
+   "esc_last_arrow_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_boots_R",
+  "tris": 6200,
+  "objects": [
+   "esc_last_arrow_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_last_arrow_accessory",
+  "tris": 2852,
+  "objects": [
+   "esc_last_arrow_accessory"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_helm",
+  "tris": 7572,
+  "objects": [
+   "esc_horizon_breaker_helm"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_armor",
+  "tris": 14004,
+  "objects": [
+   "esc_horizon_breaker_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_inner",
+  "tris": 7064,
+  "objects": [
+   "esc_horizon_breaker_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_leggings",
+  "tris": 10716,
+  "objects": [
+   "esc_horizon_breaker_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_gloves",
+  "tris": 5764,
+  "objects": [
+   "esc_horizon_breaker_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_gloves_R",
+  "tris": 5764,
+  "objects": [
+   "esc_horizon_breaker_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_boots",
+  "tris": 6836,
+  "objects": [
+   "esc_horizon_breaker_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_boots_R",
+  "tris": 6836,
+  "objects": [
+   "esc_horizon_breaker_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_horizon_breaker_accessory",
+  "tris": 6036,
+  "objects": [
+   "esc_horizon_breaker_accessory"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_helm",
+  "tris": 8412,
+  "objects": [
+   "esc_doomwind_hunter_helm"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_armor",
+  "tris": 11772,
+  "objects": [
+   "esc_doomwind_hunter_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_inner",
+  "tris": 6884,
+  "objects": [
+   "esc_doomwind_hunter_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_leggings",
+  "tris": 10224,
+  "objects": [
+   "esc_doomwind_hunter_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_gloves",
+  "tris": 5372,
+  "objects": [
+   "esc_doomwind_hunter_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_gloves_R",
+  "tris": 5372,
+  "objects": [
+   "esc_doomwind_hunter_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_boots",
+  "tris": 6672,
+  "objects": [
+   "esc_doomwind_hunter_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_boots_R",
+  "tris": 6672,
+  "objects": [
+   "esc_doomwind_hunter_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_doomwind_hunter_accessory",
+  "tris": 3324,
+  "objects": [
+   "esc_doomwind_hunter_accessory"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_helm",
+  "tris": 7008,
+  "objects": [
+   "esc_extinction_volley_helm"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_armor",
+  "tris": 12200,
+  "objects": [
+   "esc_extinction_volley_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_inner",
+  "tris": 4468,
+  "objects": [
+   "esc_extinction_volley_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_leggings",
+  "tris": 8148,
+  "objects": [
+   "esc_extinction_volley_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_gloves",
+  "tris": 4592,
+  "objects": [
+   "esc_extinction_volley_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_gloves_R",
+  "tris": 4592,
+  "objects": [
+   "esc_extinction_volley_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_boots",
+  "tris": 5768,
+  "objects": [
+   "esc_extinction_volley_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_boots_R",
+  "tris": 5768,
+  "objects": [
+   "esc_extinction_volley_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_extinction_volley_accessory",
+  "tris": 5180,
+  "objects": [
+   "esc_extinction_volley_accessory"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_helm",
+  "tris": 4988,
+  "objects": [
+   "esc_skys_end_warden_helm"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_armor",
+  "tris": 11620,
+  "objects": [
+   "esc_skys_end_warden_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_inner",
+  "tris": 6132,
+  "objects": [
+   "esc_skys_end_warden_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_leggings",
+  "tris": 7920,
+  "objects": [
+   "esc_skys_end_warden_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_gloves",
+  "tris": 4604,
+  "objects": [
+   "esc_skys_end_warden_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_gloves_R",
+  "tris": 4604,
+  "objects": [
+   "esc_skys_end_warden_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_boots",
+  "tris": 5904,
+  "objects": [
+   "esc_skys_end_warden_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_boots_R",
+  "tris": 5904,
+  "objects": [
+   "esc_skys_end_warden_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_skys_end_warden_accessory",
+  "tris": 2556,
+  "objects": [
+   "esc_skys_end_warden_accessory"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_helm",
+  "tris": 9374,
+  "objects": [
+   "esc_ashfall_pathfinder_helm"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_armor",
+  "tris": 11688,
+  "objects": [
+   "esc_ashfall_pathfinder_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_inner",
+  "tris": 6626,
+  "objects": [
+   "esc_ashfall_pathfinder_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_leggings",
+  "tris": 9450,
+  "objects": [
+   "esc_ashfall_pathfinder_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_gloves",
+  "tris": 5114,
+  "objects": [
+   "esc_ashfall_pathfinder_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_gloves_R",
+  "tris": 5114,
+  "objects": [
+   "esc_ashfall_pathfinder_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_boots",
+  "tris": 6414,
+  "objects": [
+   "esc_ashfall_pathfinder_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_boots_R",
+  "tris": 6414,
+  "objects": [
+   "esc_ashfall_pathfinder_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_ashfall_pathfinder_accessory",
+  "tris": 5614,
+  "objects": [
+   "esc_ashfall_pathfinder_accessory"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_helm",
+  "tris": 9172,
+  "objects": [
+   "esc_requiem_marksman_helm"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_armor",
+  "tris": 11388,
+  "objects": [
+   "esc_requiem_marksman_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_inner",
+  "tris": 4936,
+  "objects": [
+   "esc_requiem_marksman_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_leggings",
+  "tris": 9552,
+  "objects": [
+   "esc_requiem_marksman_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_gloves",
+  "tris": 5148,
+  "objects": [
+   "esc_requiem_marksman_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_gloves_R",
+  "tris": 5148,
+  "objects": [
+   "esc_requiem_marksman_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_boots",
+  "tris": 6448,
+  "objects": [
+   "esc_requiem_marksman_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_boots_R",
+  "tris": 6448,
+  "objects": [
+   "esc_requiem_marksman_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_requiem_marksman_accessory",
+  "tris": 3100,
+  "objects": [
+   "esc_requiem_marksman_accessory"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_helm",
+  "tris": 7844,
+  "objects": [
+   "esc_final_twilight_helm"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_armor",
+  "tris": 12956,
+  "objects": [
+   "esc_final_twilight_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_inner",
+  "tris": 7004,
+  "objects": [
+   "esc_final_twilight_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_leggings",
+  "tris": 10536,
+  "objects": [
+   "esc_final_twilight_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_gloves",
+  "tris": 5476,
+  "objects": [
+   "esc_final_twilight_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_gloves_R",
+  "tris": 5476,
+  "objects": [
+   "esc_final_twilight_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_boots",
+  "tris": 6776,
+  "objects": [
+   "esc_final_twilight_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_boots_R",
+  "tris": 6776,
+  "objects": [
+   "esc_final_twilight_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_final_twilight_accessory",
+  "tris": 5976,
+  "objects": [
+   "esc_final_twilight_accessory"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_helm",
+  "tris": 7208,
+  "objects": [
+   "esc_worldscar_tracker_helm"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_armor",
+  "tris": 12536,
+  "objects": [
+   "esc_worldscar_tracker_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_inner",
+  "tris": 6776,
+  "objects": [
+   "esc_worldscar_tracker_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_leggings",
+  "tris": 9900,
+  "objects": [
+   "esc_worldscar_tracker_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_gloves",
+  "tris": 5336,
+  "objects": [
+   "esc_worldscar_tracker_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_gloves_R",
+  "tris": 5336,
+  "objects": [
+   "esc_worldscar_tracker_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_boots",
+  "tris": 6564,
+  "objects": [
+   "esc_worldscar_tracker_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_boots_R",
+  "tris": 6564,
+  "objects": [
+   "esc_worldscar_tracker_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_worldscar_tracker_accessory",
+  "tris": 3216,
+  "objects": [
+   "esc_worldscar_tracker_accessory"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_0",
+  "tris": 5304,
+  "objects": [
+   "esc_w_ranger_bow_0"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_1",
+  "tris": 4980,
+  "objects": [
+   "esc_w_ranger_bow_1"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_2",
+  "tris": 5308,
+  "objects": [
+   "esc_w_ranger_bow_2"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_3",
+  "tris": 5448,
+  "objects": [
+   "esc_w_ranger_bow_3"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_4",
+  "tris": 5304,
+  "objects": [
+   "esc_w_ranger_bow_4"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_5",
+  "tris": 5472,
+  "objects": [
+   "esc_w_ranger_bow_5"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_6",
+  "tris": 5688,
+  "objects": [
+   "esc_w_ranger_bow_6"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_7",
+  "tris": 5472,
+  "objects": [
+   "esc_w_ranger_bow_7"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_8",
+  "tris": 3184,
+  "objects": [
+   "esc_w_ranger_bow_8"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_bow_9",
+  "tris": 4080,
+  "objects": [
+   "esc_w_ranger_bow_9"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_0",
+  "tris": 3836,
+  "objects": [
+   "esc_w_ranger_crossbow_0"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_1",
+  "tris": 3872,
+  "objects": [
+   "esc_w_ranger_crossbow_1"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_2",
+  "tris": 3932,
+  "objects": [
+   "esc_w_ranger_crossbow_2"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_3",
+  "tris": 3444,
+  "objects": [
+   "esc_w_ranger_crossbow_3"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_4",
+  "tris": 3676,
+  "objects": [
+   "esc_w_ranger_crossbow_4"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_5",
+  "tris": 4296,
+  "objects": [
+   "esc_w_ranger_crossbow_5"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_6",
+  "tris": 3908,
+  "objects": [
+   "esc_w_ranger_crossbow_6"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_7",
+  "tris": 3528,
+  "objects": [
+   "esc_w_ranger_crossbow_7"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_8",
+  "tris": 4100,
+  "objects": [
+   "esc_w_ranger_crossbow_8"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_crossbow_9",
+  "tris": 4904,
+  "objects": [
+   "esc_w_ranger_crossbow_9"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_0",
+  "tris": 2336,
+  "objects": [
+   "esc_w_ranger_javelin_0"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_1",
+  "tris": 2384,
+  "objects": [
+   "esc_w_ranger_javelin_1"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_2",
+  "tris": 2336,
+  "objects": [
+   "esc_w_ranger_javelin_2"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_3",
+  "tris": 2372,
+  "objects": [
+   "esc_w_ranger_javelin_3"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_4",
+  "tris": 2528,
+  "objects": [
+   "esc_w_ranger_javelin_4"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_5",
+  "tris": 2372,
+  "objects": [
+   "esc_w_ranger_javelin_5"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_6",
+  "tris": 2420,
+  "objects": [
+   "esc_w_ranger_javelin_6"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_7",
+  "tris": 2372,
+  "objects": [
+   "esc_w_ranger_javelin_7"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_8",
+  "tris": 2408,
+  "objects": [
+   "esc_w_ranger_javelin_8"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_javelin_9",
+  "tris": 2564,
+  "objects": [
+   "esc_w_ranger_javelin_9"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_0",
+  "tris": 2384,
+  "objects": [
+   "esc_w_ranger_spear_0"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_1",
+  "tris": 2472,
+  "objects": [
+   "esc_w_ranger_spear_1"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_2",
+  "tris": 2652,
+  "objects": [
+   "esc_w_ranger_spear_2"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_3",
+  "tris": 2624,
+  "objects": [
+   "esc_w_ranger_spear_3"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_4",
+  "tris": 2384,
+  "objects": [
+   "esc_w_ranger_spear_4"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_5",
+  "tris": 2472,
+  "objects": [
+   "esc_w_ranger_spear_5"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_6",
+  "tris": 2652,
+  "objects": [
+   "esc_w_ranger_spear_6"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_7",
+  "tris": 2624,
+  "objects": [
+   "esc_w_ranger_spear_7"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_8",
+  "tris": 2384,
+  "objects": [
+   "esc_w_ranger_spear_8"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_spear_9",
+  "tris": 2472,
+  "objects": [
+   "esc_w_ranger_spear_9"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_0",
+  "tris": 2480,
+  "objects": [
+   "esc_w_ranger_dagger_0"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_1",
+  "tris": 2456,
+  "objects": [
+   "esc_w_ranger_dagger_1"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_2",
+  "tris": 2616,
+  "objects": [
+   "esc_w_ranger_dagger_2"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_3",
+  "tris": 2456,
+  "objects": [
+   "esc_w_ranger_dagger_3"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_4",
+  "tris": 2570,
+  "objects": [
+   "esc_w_ranger_dagger_4"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_5",
+  "tris": 2456,
+  "objects": [
+   "esc_w_ranger_dagger_5"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_6",
+  "tris": 2828,
+  "objects": [
+   "esc_w_ranger_dagger_6"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_7",
+  "tris": 2456,
+  "objects": [
+   "esc_w_ranger_dagger_7"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_8",
+  "tris": 2412,
+  "objects": [
+   "esc_w_ranger_dagger_8"
+  ]
+ },
+ {
+  "id": "esc_w_ranger_dagger_9",
+  "tris": 2456,
+  "objects": [
+   "esc_w_ranger_dagger_9"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_helm",
+  "tris": 8048,
+  "objects": [
+   "esc_nihil_fang_helm"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_armor",
+  "tris": 10380,
+  "objects": [
+   "esc_nihil_fang_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_inner",
+  "tris": 6776,
+  "objects": [
+   "esc_nihil_fang_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_leggings",
+  "tris": 9956,
+  "objects": [
+   "esc_nihil_fang_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_gloves",
+  "tris": 5336,
+  "objects": [
+   "esc_nihil_fang_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_gloves_R",
+  "tris": 5336,
+  "objects": [
+   "esc_nihil_fang_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_boots",
+  "tris": 6564,
+  "objects": [
+   "esc_nihil_fang_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_boots_R",
+  "tris": 6564,
+  "objects": [
+   "esc_nihil_fang_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_nihil_fang_accessory",
+  "tris": 3216,
+  "objects": [
+   "esc_nihil_fang_accessory"
+  ]
+ },
+ {
+  "id": "esc_last_breath_helm",
+  "tris": 9172,
+  "objects": [
+   "esc_last_breath_helm"
+  ]
+ },
+ {
+  "id": "esc_last_breath_armor",
+  "tris": 9960,
+  "objects": [
+   "esc_last_breath_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_last_breath_inner",
+  "tris": 4936,
+  "objects": [
+   "esc_last_breath_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_breath_leggings",
+  "tris": 9608,
+  "objects": [
+   "esc_last_breath_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_last_breath_gloves",
+  "tris": 5148,
+  "objects": [
+   "esc_last_breath_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_last_breath_gloves_R",
+  "tris": 5148,
+  "objects": [
+   "esc_last_breath_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_last_breath_boots",
+  "tris": 6448,
+  "objects": [
+   "esc_last_breath_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_last_breath_boots_R",
+  "tris": 6448,
+  "objects": [
+   "esc_last_breath_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_last_breath_accessory",
+  "tris": 3100,
+  "objects": [
+   "esc_last_breath_accessory"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_helm",
+  "tris": 4752,
+  "objects": [
+   "esc_mirror_death_helm"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_armor",
+  "tris": 10472,
+  "objects": [
+   "esc_mirror_death_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_inner",
+  "tris": 6192,
+  "objects": [
+   "esc_mirror_death_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_leggings",
+  "tris": 8204,
+  "objects": [
+   "esc_mirror_death_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_gloves",
+  "tris": 4592,
+  "objects": [
+   "esc_mirror_death_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_gloves_R",
+  "tris": 4592,
+  "objects": [
+   "esc_mirror_death_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_boots",
+  "tris": 5768,
+  "objects": [
+   "esc_mirror_death_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_boots_R",
+  "tris": 5768,
+  "objects": [
+   "esc_mirror_death_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_mirror_death_accessory",
+  "tris": 2632,
+  "objects": [
+   "esc_mirror_death_accessory"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_helm",
+  "tris": 7908,
+  "objects": [
+   "esc_void_silhouette_helm"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_armor",
+  "tris": 10436,
+  "objects": [
+   "esc_void_silhouette_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_inner",
+  "tris": 5264,
+  "objects": [
+   "esc_void_silhouette_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_leggings",
+  "tris": 10592,
+  "objects": [
+   "esc_void_silhouette_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_gloves",
+  "tris": 5476,
+  "objects": [
+   "esc_void_silhouette_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_gloves_R",
+  "tris": 5476,
+  "objects": [
+   "esc_void_silhouette_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_boots",
+  "tris": 6776,
+  "objects": [
+   "esc_void_silhouette_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_boots_R",
+  "tris": 6776,
+  "objects": [
+   "esc_void_silhouette_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_void_silhouette_accessory",
+  "tris": 3428,
+  "objects": [
+   "esc_void_silhouette_accessory"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_helm",
+  "tris": 9988,
+  "objects": [
+   "esc_ending_whisper_helm"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_armor",
+  "tris": 11760,
+  "objects": [
+   "esc_ending_whisper_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_inner",
+  "tris": 7348,
+  "objects": [
+   "esc_ending_whisper_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_leggings",
+  "tris": 11672,
+  "objects": [
+   "esc_ending_whisper_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_gloves",
+  "tris": 6144,
+  "objects": [
+   "esc_ending_whisper_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_gloves_R",
+  "tris": 6144,
+  "objects": [
+   "esc_ending_whisper_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_boots",
+  "tris": 7136,
+  "objects": [
+   "esc_ending_whisper_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_boots_R",
+  "tris": 7136,
+  "objects": [
+   "esc_ending_whisper_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_ending_whisper_accessory",
+  "tris": 3788,
+  "objects": [
+   "esc_ending_whisper_accessory"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_helm",
+  "tris": 9620,
+  "objects": [
+   "esc_hollow_eclipse_helm"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_armor",
+  "tris": 9660,
+  "objects": [
+   "esc_hollow_eclipse_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_inner",
+  "tris": 6256,
+  "objects": [
+   "esc_hollow_eclipse_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_leggings",
+  "tris": 13568,
+  "objects": [
+   "esc_hollow_eclipse_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_gloves",
+  "tris": 6468,
+  "objects": [
+   "esc_hollow_eclipse_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_gloves_R",
+  "tris": 6468,
+  "objects": [
+   "esc_hollow_eclipse_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_boots",
+  "tris": 7768,
+  "objects": [
+   "esc_hollow_eclipse_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_boots_R",
+  "tris": 7768,
+  "objects": [
+   "esc_hollow_eclipse_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_hollow_eclipse_accessory",
+  "tris": 4420,
+  "objects": [
+   "esc_hollow_eclipse_accessory"
+  ]
+ },
+ {
+  "id": "esc_severance_helm",
+  "tris": 5112,
+  "objects": [
+   "esc_severance_helm"
+  ]
+ },
+ {
+  "id": "esc_severance_armor",
+  "tris": 10248,
+  "objects": [
+   "esc_severance_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_severance_inner",
+  "tris": 6412,
+  "objects": [
+   "esc_severance_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_severance_leggings",
+  "tris": 8864,
+  "objects": [
+   "esc_severance_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_severance_gloves",
+  "tris": 4900,
+  "objects": [
+   "esc_severance_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_severance_gloves_R",
+  "tris": 4900,
+  "objects": [
+   "esc_severance_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_severance_boots",
+  "tris": 6200,
+  "objects": [
+   "esc_severance_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_severance_boots_R",
+  "tris": 6200,
+  "objects": [
+   "esc_severance_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_severance_accessory",
+  "tris": 2852,
+  "objects": [
+   "esc_severance_accessory"
+  ]
+ },
+ {
+  "id": "esc_quietus_helm",
+  "tris": 7048,
+  "objects": [
+   "esc_quietus_helm"
+  ]
+ },
+ {
+  "id": "esc_quietus_armor",
+  "tris": 9960,
+  "objects": [
+   "esc_quietus_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_quietus_inner",
+  "tris": 5240,
+  "objects": [
+   "esc_quietus_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_quietus_leggings",
+  "tris": 10520,
+  "objects": [
+   "esc_quietus_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_quietus_gloves",
+  "tris": 5452,
+  "objects": [
+   "esc_quietus_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_quietus_gloves_R",
+  "tris": 5452,
+  "objects": [
+   "esc_quietus_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_quietus_boots",
+  "tris": 6752,
+  "objects": [
+   "esc_quietus_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_quietus_boots_R",
+  "tris": 6752,
+  "objects": [
+   "esc_quietus_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_quietus_accessory",
+  "tris": 3404,
+  "objects": [
+   "esc_quietus_accessory"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_helm",
+  "tris": 8368,
+  "objects": [
+   "esc_null_reaper_helm"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_armor",
+  "tris": 10116,
+  "objects": [
+   "esc_null_reaper_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_inner",
+  "tris": 6196,
+  "objects": [
+   "esc_null_reaper_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_leggings",
+  "tris": 8216,
+  "objects": [
+   "esc_null_reaper_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_gloves",
+  "tris": 4516,
+  "objects": [
+   "esc_null_reaper_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_gloves_R",
+  "tris": 4516,
+  "objects": [
+   "esc_null_reaper_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_boots",
+  "tris": 5768,
+  "objects": [
+   "esc_null_reaper_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_boots_R",
+  "tris": 5768,
+  "objects": [
+   "esc_null_reaper_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_null_reaper_accessory",
+  "tris": 2636,
+  "objects": [
+   "esc_null_reaper_accessory"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_helm",
+  "tris": 8200,
+  "objects": [
+   "esc_shroud_of_last_night_helm"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_armor",
+  "tris": 10320,
+  "objects": [
+   "esc_shroud_of_last_night_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_inner",
+  "tris": 4392,
+  "objects": [
+   "esc_shroud_of_last_night_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_leggings",
+  "tris": 7976,
+  "objects": [
+   "esc_shroud_of_last_night_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_gloves",
+  "tris": 4604,
+  "objects": [
+   "esc_shroud_of_last_night_gloves",
+   "AT_hand_L"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_gloves_R",
+  "tris": 4604,
+  "objects": [
+   "esc_shroud_of_last_night_gloves",
+   "AT_hand_R"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_boots",
+  "tris": 5904,
+  "objects": [
+   "esc_shroud_of_last_night_boots",
+   "AT_foot_L"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_boots_R",
+  "tris": 5904,
+  "objects": [
+   "esc_shroud_of_last_night_boots",
+   "AT_foot_R"
+  ]
+ },
+ {
+  "id": "esc_shroud_of_last_night_accessory",
+  "tris": 2556,
+  "objects": [
+   "esc_shroud_of_last_night_accessory"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_0",
+  "tris": 2480,
+  "objects": [
+   "esc_w_shadowblade_dagger_0"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_1",
+  "tris": 2456,
+  "objects": [
+   "esc_w_shadowblade_dagger_1"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_2",
+  "tris": 2616,
+  "objects": [
+   "esc_w_shadowblade_dagger_2"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_3",
+  "tris": 2456,
+  "objects": [
+   "esc_w_shadowblade_dagger_3"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_4",
+  "tris": 2570,
+  "objects": [
+   "esc_w_shadowblade_dagger_4"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_5",
+  "tris": 2456,
+  "objects": [
+   "esc_w_shadowblade_dagger_5"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_6",
+  "tris": 2828,
+  "objects": [
+   "esc_w_shadowblade_dagger_6"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_7",
+  "tris": 2456,
+  "objects": [
+   "esc_w_shadowblade_dagger_7"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_8",
+  "tris": 2412,
+  "objects": [
+   "esc_w_shadowblade_dagger_8"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_dagger_9",
+  "tris": 2456,
+  "objects": [
+   "esc_w_shadowblade_dagger_9"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_0",
+  "tris": 2232,
+  "objects": [
+   "esc_w_shadowblade_claw_0"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_1",
+  "tris": 2424,
+  "objects": [
+   "esc_w_shadowblade_claw_1"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_2",
+  "tris": 2712,
+  "objects": [
+   "esc_w_shadowblade_claw_2"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_3",
+  "tris": 2184,
+  "objects": [
+   "esc_w_shadowblade_claw_3"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_4",
+  "tris": 2472,
+  "objects": [
+   "esc_w_shadowblade_claw_4"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_5",
+  "tris": 2664,
+  "objects": [
+   "esc_w_shadowblade_claw_5"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_6",
+  "tris": 2232,
+  "objects": [
+   "esc_w_shadowblade_claw_6"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_7",
+  "tris": 2424,
+  "objects": [
+   "esc_w_shadowblade_claw_7"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_8",
+  "tris": 2712,
+  "objects": [
+   "esc_w_shadowblade_claw_8"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_claw_9",
+  "tris": 2184,
+  "objects": [
+   "esc_w_shadowblade_claw_9"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_0",
+  "tris": 2472,
+  "objects": [
+   "esc_w_shadowblade_knuckles_0"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_1",
+  "tris": 3628,
+  "objects": [
+   "esc_w_shadowblade_knuckles_1"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_2",
+  "tris": 2520,
+  "objects": [
+   "esc_w_shadowblade_knuckles_2"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_3",
+  "tris": 2544,
+  "objects": [
+   "esc_w_shadowblade_knuckles_3"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_4",
+  "tris": 3628,
+  "objects": [
+   "esc_w_shadowblade_knuckles_4"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_5",
+  "tris": 2496,
+  "objects": [
+   "esc_w_shadowblade_knuckles_5"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_6",
+  "tris": 2520,
+  "objects": [
+   "esc_w_shadowblade_knuckles_6"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_7",
+  "tris": 3628,
+  "objects": [
+   "esc_w_shadowblade_knuckles_7"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_8",
+  "tris": 2472,
+  "objects": [
+   "esc_w_shadowblade_knuckles_8"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_knuckles_9",
+  "tris": 2496,
+  "objects": [
+   "esc_w_shadowblade_knuckles_9"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_0",
+  "tris": 2424,
+  "objects": [
+   "esc_w_shadowblade_sword_0"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_1",
+  "tris": 2332,
+  "objects": [
+   "esc_w_shadowblade_sword_1"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_2",
+  "tris": 2600,
+  "objects": [
+   "esc_w_shadowblade_sword_2"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_3",
+  "tris": 2544,
+  "objects": [
+   "esc_w_shadowblade_sword_3"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_4",
+  "tris": 2566,
+  "objects": [
+   "esc_w_shadowblade_sword_4"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_5",
+  "tris": 2408,
+  "objects": [
+   "esc_w_shadowblade_sword_5"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_6",
+  "tris": 2808,
+  "objects": [
+   "esc_w_shadowblade_sword_6"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_7",
+  "tris": 2412,
+  "objects": [
+   "esc_w_shadowblade_sword_7"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_8",
+  "tris": 2316,
+  "objects": [
+   "esc_w_shadowblade_sword_8"
+  ]
+ },
+ {
+  "id": "esc_w_shadowblade_sword_9",
+  "tris": 2420,
+  "objects": [
+   "esc_w_shadowblade_sword_9"
+  ]
+ }
+]

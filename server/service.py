@@ -26,7 +26,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-PROTOCOL = 21
+PROTOCOL = 22
 SAVE_VERSION = 4
 SERVER_VERSION = os.environ.get("BH_BUILD", "dev")   # a release id (git commit) set by the deployment; shown by /health
 MAX_PLAYERS = 12
@@ -576,7 +576,10 @@ class Store:
             if path == "/characters/save":
                 if lease["peer"] is None:
                     raise ApiError(409, "Connect to the official game server before saving.", "not_connected")
-                if db.execute("SELECT 1 FROM trades WHERE state='pending' AND (a=? OR b=?)", (cid, cid)).fetchone():
+                # bh-041: only a character that has already approved a pending trade is held. Blocking both parties from the
+                # moment the first approval arrived stopped the slower player's pre-trade save, so that side never approved
+                # and the faster one waited out the 45 s expiry and was disconnected.
+                if db.execute("SELECT 1 FROM trade_approvals ap JOIN trades t ON t.id=ap.trade_id WHERE t.state='pending' AND ap.character=?", (cid,)).fetchone():
                     raise ApiError(409, "Finish the pending trade before saving.", "trade_pending")
                 request_id = body.get("request_id")
                 if not isinstance(request_id, str) or not 8 <= len(request_id) <= 128:
@@ -604,11 +607,29 @@ class Store:
                 db.execute("UPDATE characters SET data=?,revision=revision+1,saved=? WHERE id=?", (data, now, cid))
                 db.execute("UPDATE leases SET expires=?,last_save=?,last_payload=? WHERE id=?", (now+LEASE_LIFE, request_id, payload, lease_id))
                 return {"revision": revision+1, "saved_at": now, "duplicate": False}
-            if path in ("/characters/trade_prepare", "/characters/trade_status"):
+            if path in ("/characters/trade_prepare", "/characters/trade_status", "/characters/trade_cancel"):
                 trade_id = body.get("trade_id", "")
                 if not isinstance(trade_id, str) or not re.fullmatch(r"[a-f0-9]{64}", trade_id):
                     raise ApiError(400, "Invalid trade identity.")
                 trade = db.execute("SELECT * FROM trades WHERE id=?", (trade_id,)).fetchone()
+                if path.endswith("cancel"):
+                    # bh-041: either party may withdraw while the trade is still pending (its own check failed, the other player
+                    # cancelled, the window closed). A committed trade stays committed; nothing was changed otherwise.
+                    other = body.get("other", "")
+                    if trade is None and isinstance(other, str) and 0 < len(other) <= 64 and other != cid:
+                        # withdrawn before it was prepared: record it, so a late approval cannot start it again
+                        a, b = sorted((cid, other))
+                        db.execute("INSERT INTO trades VALUES(?,?,?,'cancelled',?)", (trade_id, a, b, self.clock()))
+                        trade = db.execute("SELECT * FROM trades WHERE id=?", (trade_id,)).fetchone()
+                    if trade is not None and cid in (trade["a"], trade["b"]) and trade["state"] == "pending":
+                        db.execute("UPDATE trades SET state='cancelled' WHERE id=?", (trade_id,))
+                        trade = db.execute("SELECT * FROM trades WHERE id=?", (trade_id,)).fetchone()
+                    if trade is None or cid not in (trade["a"], trade["b"]):
+                        return {"state": "cancelled", "revision": row["revision"]}
+                    result = {"state": trade["state"], "revision": self.character(db, aid, cid)["revision"]}
+                    if trade["state"] == "committed":
+                        result["save"] = json.loads(self.character(db, aid, cid)["data"])
+                    return result
                 if path.endswith("prepare"):
                     other = body.get("other", "")
                     if not isinstance(other, str) or other == cid:
@@ -642,7 +663,10 @@ class Store:
                         if len(approvals) == 2:
                             first, second = approvals
                             if first["mine"] != second["theirs"] or first["theirs"] != second["mine"]:
-                                raise ApiError(409, "The two trade offers do not match.", "trade_cancelled")
+                                # bh-041: end it here (an error would roll back and leave it pending for the full 45 s)
+                                db.execute("UPDATE trades SET state='cancelled' WHERE id=?", (trade_id,))
+                                return {"state": "cancelled", "revision": row["revision"], "error": "The two trade offers do not match. Nothing was traded.",
+                                        "code": "trade_cancelled"}
                             for approval in approvals:
                                 current = self.character(db, approval["account"], approval["character"])
                                 if current["revision"] != approval["revision"]:

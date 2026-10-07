@@ -52,17 +52,23 @@ static func fit_error(hero: HeroData, offer: Dictionary, incoming: int) -> Strin
 ## malformed items are dropped; the receiver's own locks and favorites are never inherited.
 static func read_incoming(d: Dictionary) -> Dictionary:
 	var out := {"gold": clampi(int(d.get("gold", 0)), 0, MAX_GOLD), "items": []}
-	for raw in d.get("items", []):
+	var kept := []
+	var raw_items = d.get("items", [])
+	for raw in (raw_items if raw_items is Array else []):
 		if out.items.size() >= MAX_ITEMS or not (raw is Dictionary):
 			continue
 		var it := ItemInstance.from_dict(raw)
 		if it == null:
 			continue
+		kept.append(raw)
 		it.count = clampi(it.count, 1, maxi(1, it.base.stack_max))
 		it.locked = false
 		it.favorite = false
 		it.junk = false
 		out.items.append(it)
+	# bh-041: the offer exactly as it arrived (only the items that could be read): an official trade hands the server
+	# this very record, so both sides describe the same exchange to it without decoding and encoding the items again
+	out["wire"] = {"gold": out.gold, "items": kept}
 	return out
 
 ## What travels: {"gold", "items": [dict]}.

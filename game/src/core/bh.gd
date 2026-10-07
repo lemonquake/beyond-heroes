@@ -53,15 +53,16 @@ const CATEGORY_SLOTS := {
 
 # Item rarity — the ten exact tiers from the design spec, lowest to highest, and (bh-034) the four Ascendant tiers above
 # them: Cosmic, Divine, Eternal and Primordial, found only on dungeon bosses of level 70+ (DataAscendant).
-enum Rarity { BEGINNER, COMMON, BASIC, ADVANCED, LICENSED, ELITE, MASTER, MYTHICAL, LEGENDARY, AETHER, COSMIC, DIVINE, ETERNAL, PRIMORDIAL }
-const RARITY_COUNT := 14
+enum Rarity { BEGINNER, COMMON, BASIC, ADVANCED, LICENSED, ELITE, MASTER, MYTHICAL, LEGENDARY, AETHER, COSMIC, DIVINE, ETERNAL, PRIMORDIAL, ESCHATON }
+const RARITY_COUNT := 15
 const RARITY_NAMES := ["Beginner", "Common", "Basic", "Advanced", "Licensed", "Elite", "Master", "Mythical", "Legendary", "Aether",
-	"Cosmic", "Divine", "Eternal", "Primordial"]
+	"Cosmic", "Divine", "Eternal", "Primordial", "Eschaton"]
 const RARITY_COLORS := [
 	Color(0.64, 0.60, 0.54), Color(0.90, 0.89, 0.86), Color(0.47, 0.86, 0.40), Color(0.38, 0.64, 1.00),
 	Color(0.27, 0.87, 0.80), Color(1.00, 0.84, 0.30), Color(1.00, 0.58, 0.20), Color(0.86, 0.42, 1.00),
 	Color(1.00, 0.33, 0.22), Color(0.58, 0.98, 1.00),
 	Color(0.55, 0.47, 1.00), Color(1.00, 0.95, 0.66), Color(1.00, 0.52, 0.76), Color(1.00, 0.16, 0.26),
+	Color(0.86, 0.91, 1.00),   # bh-041 Eschaton: mirror chrome (its names and frames also shimmer through the spectrum)
 ]
 ## One-line identity of each tier (tooltips, codex, docs).
 const RARITY_DESC := [
@@ -79,12 +80,13 @@ const RARITY_DESC := [
 	"Ascendant. Blessed relics of a forgotten heaven, from dungeon lords of level 80 and above. Brings down holy Judgement.",
 	"Ascendant. Pieces outside of time, from dungeon lords of level 90 and above. Every blow may Echo.",
 	"Ascendant. The oldest things in the world, from dungeon lords of level 100 and above. The ground Erupts at your hand.",
+	"Beyond Ascendant. The last things the world will make. No monster carries them: only Lape the Ancient, from the greatest treasures laid in his dishes. What it strikes is Unmade.",
 ]
 ## Loot presentation per tier: beam height (m, 0 = none), drop sound, label scale.
-const RARITY_BEAM := [0.0, 0.0, 0.0, 1.2, 1.6, 2.4, 3.2, 4.2, 5.5, 8.0, 10.0, 11.0, 12.0, 14.0]
+const RARITY_BEAM := [0.0, 0.0, 0.0, 1.2, 1.6, 2.4, 3.2, 4.2, 5.5, 8.0, 10.0, 11.0, 12.0, 14.0, 18.0]
 const RARITY_DROP_SOUND := [&"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop", &"loot_drop_rare", &"loot_drop_rare",
 	&"loot_drop_rare", &"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary",
-	&"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary"]
+	&"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary", &"loot_drop_legendary"]
 
 const LEVEL_CAP := 300
 

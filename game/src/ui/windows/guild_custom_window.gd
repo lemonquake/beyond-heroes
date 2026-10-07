@@ -18,7 +18,7 @@ var _clear: Button
 var _dialog: FileDialog
 
 func _init() -> void:
-	super._init("Your Guild", Vector2(1080, 700))
+	super._init("Your Guild", Vector2(1220, 700))      # bh-041: its content always needed ~1196
 
 func _build() -> void:
 	Events.guild_customised.connect(_on_changed)

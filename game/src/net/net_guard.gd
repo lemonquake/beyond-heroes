@@ -12,6 +12,7 @@ const MAX_CHECKPOINT_BYTES := 400000
 const MAX_ALLIES_PER_PACK := 48
 const MAX_APPEARANCE_BYTES := 16000
 const MAX_TEXT := 240
+const MAX_TRADE_BYTES := 64000        # one trade offer: ten items and gold
 const HIT_REACH := 60.0              # a reported hit must land this close to the hero that claims it
 const HIT_DAMAGE_CAP := 2.0e6        # no single blow is larger than this; real damage stays far below it
 

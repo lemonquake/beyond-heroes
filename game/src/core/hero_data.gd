@@ -96,8 +96,14 @@ var guild_alias := ""
 ## bh-017: the AI allies the `quake team` cheat called (QuakeMate), at most QuakeTeam.MAX; optional in a save.
 var quake_team: Array = []
 var guild_banner := PackedByteArray()
+## bh-041: what the hero told its Tempos to do (TempoRules.COMMANDS: aggro, defend, passive). Optional in a save.
+var tempo_command := &"defend"
 ## bh-030: the `azrin azrael` cheat unlocked the Debug console for this hero (optional in a save).
 var debug_unlocked := false
+## bh-041: every save made before this sweep loses its Debug unlock once (the console's switches spoiled shared games);
+## typing `azrin azrael` again brings it back for good. Raise DEBUG_SWEEP to sweep again.
+const DEBUG_SWEEP := 1
+var debug_sweep := DEBUG_SWEEP
 ## bh-030: the hero's profile picture (a square JPEG, empty = the class portrait). Optional in a save; travels to
 ## other players in multiplayer (Net) like a guild banner.
 var profile_pic := PackedByteArray()
@@ -529,7 +535,7 @@ func to_dict() -> Dictionary:
 		"guild_jobs": GuildJobs.to_dict(self),
 		"quake_team": quake_team.map(func(m): return (m as QuakeMate).to_dict()),
 		"guild_alias": guild_alias, "guild_banner": Marshalls.raw_to_base64(guild_banner) if not guild_banner.is_empty() else "",
-		"debug_unlocked": debug_unlocked, "profile_pic": Marshalls.raw_to_base64(profile_pic) if not profile_pic.is_empty() else "",
+		"debug_unlocked": debug_unlocked, "debug_sweep": debug_sweep, "tempo_command": String(tempo_command), "profile_pic": Marshalls.raw_to_base64(profile_pic) if not profile_pic.is_empty() else "",
 		"id_pic": Marshalls.raw_to_base64(id_pic) if not id_pic.is_empty() else "",
 		"guild_world": GuildRegistry.world_to_plain(self), "own_guild": OwnGuild.to_plain(own_guild),
 		"remote_guild": GuildRegistry.remote_to_plain(remote_guild) if not remote_guild.is_empty() else {},
@@ -710,6 +716,10 @@ static func from_dict(d: Dictionary) -> HeroData:
 				h.quake_team.append(qm)
 	h.guild_banner = GuildRules.load_banner_bytes(String(d.get("guild_banner", "")))
 	h.debug_unlocked = bool(d.get("debug_unlocked", false))
+	if int(d.get("debug_sweep", 0)) < DEBUG_SWEEP:
+		h.debug_unlocked = false
+	h.debug_sweep = DEBUG_SWEEP
+	h.tempo_command = TempoRules.clean_command(d.get("tempo_command", "defend"))
 	h.profile_pic = ProfilePicture.load_bytes(String(d.get("profile_pic", "")))
 	h.id_pic = ProfilePicture.load_bytes(String(d.get("id_pic", "")))
 	var lk = d.get("look", {})

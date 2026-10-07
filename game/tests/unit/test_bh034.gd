@@ -9,8 +9,8 @@ func _init() -> void:
 	strict = true
 
 func test_rarity_tables_cover_every_tier() -> void:
-	eq(BH.RARITY_COUNT, 14, "four tiers above Aether")
-	eq(BH.RARITY_NAMES.slice(10), ["Cosmic", "Divine", "Eternal", "Primordial"], "tier names in order")
+	eq(BH.RARITY_COUNT, 15, "four tiers above Aether, and Eschaton (bh-041) above them")
+	eq(BH.RARITY_NAMES.slice(10), ["Cosmic", "Divine", "Eternal", "Primordial", "Eschaton"], "tier names in order")
 	for t in [BH.RARITY_NAMES, BH.RARITY_COLORS, BH.RARITY_DESC, BH.RARITY_BEAM, BH.RARITY_DROP_SOUND, ItemGenerator.RULES,
 			ItemGenerator.WEIGHTS, ItemGenerator.MIN_ILVL, ItemGenerator.RARITY_BUDGET, ItemInstance.SELL_MULT, LootFx.SPARKLE_COUNT,
 			LootFx.SPARKLE_SIZE, LootFx.SPARKLE_ALPHA, LootFx.GLOW_STRENGTH, LootFx.GLINT_STRENGTH, DataCrystals.MAX_SOCKETS,

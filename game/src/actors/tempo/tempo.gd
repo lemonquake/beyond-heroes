@@ -19,6 +19,8 @@ extends Actor
 ##      Skills are data (DataTempos.SKILLS): each names a handler (`use`) — strike, charge, shot, bolt, chain, nova,
 ##      volley, trap, ward, rally, challenge, heal ... — and the AI picks one when its situation fits.
 ##   6. Follow — out of combat it walks at the hero's side and teleports back if it is left far behind or gets stuck.
+## The hero's command (bh-041, TempoRules.COMMANDS) shapes 4 and 5: Aggro also hunts idle monsters near the hero (and
+## ranges a little further), Defend is the behaviour above, Passive never picks a target (it still dodges, heals, follows).
 ## All damage goes through Actor.receive_hit / DamagePipeline; skills cost mana and have cooldowns.
 
 signal decided(what: String)        # every notable decision (tests, the combat bot and the dev overlay listen)
@@ -31,6 +33,8 @@ const DANGER_SCAN := 0.08
 const LEASH := 20.0                  # never fight a monster this far from the hero
 const TELEPORT_DIST := 30.0          # left further behind than this: rejoin the hero at once
 const AGGRO_ASSIST := 11.0           # idle monsters this close to the hero are engaged pre-emptively (when the hero fights)
+const AGGRO_HUNT := 16.0             # bh-041 Aggro: any living monster this close to the hero is hunted, fighting or not
+const AGGRO_LEASH := 24.0            # bh-041 Aggro: how far from the hero an Aggro spirit will chase
 const ACCEL := 38.0
 const TURN_RATE := 12.0
 const COMBAT_LINGER := 4.0
@@ -418,9 +422,19 @@ func _retreat_point() -> Vector3:
 	var goal := p + dir * 6.0
 	return CombatQuery.reachable_point(get_world_3d(), p, goal, body_radius)
 
+## bh-041: the hero's standing order for its Tempos (companions of other kinds always defend).
+func command() -> StringName:
+	if hero == null or self is QuakeAlly:
+		return &"defend"
+	return TempoRules.clean_command(hero.tempo_command)
+
 ## Monster scoring — see the class comment.
 func _choose_target() -> Actor:
 	var p := owner_player
+	var cmd := command()
+	if cmd == &"passive":
+		return null
+	var leash := AGGRO_LEASH if cmd == &"aggro" else LEASH
 	var hero_fighting: bool = p.has_method(&"in_combat") and p.in_combat()
 	var best: Actor = null
 	var best_s := -INF
@@ -429,10 +443,10 @@ func _choose_target() -> Actor:
 		if en == null or not en.alive:
 			continue
 		var dp := en.global_position.distance_to(p.global_position)
-		if dp > LEASH:
+		if dp > leash:
 			continue
 		var threat: bool = en.is_aggressive() or _hero_hits.has(en.get_instance_id()) or en.last_attacker == self
-		if not threat and not (hero_fighting and dp < AGGRO_ASSIST):
+		if not threat and not (hero_fighting and dp < AGGRO_ASSIST) and not (cmd == &"aggro" and dp < AGGRO_HUNT):
 			continue
 		var dt := _flat(en.global_position)
 		var s := -dt * 0.35 - dp * 0.25

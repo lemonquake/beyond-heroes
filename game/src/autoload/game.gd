@@ -156,7 +156,22 @@ func _rebalance_notice(h: HeroData) -> void:
 	h.progress.auto_allocated = 0
 	save_now()
 
+## bh-041: every Debug console switch back to normal (a new session, and the bh-041 sweep). They were never saved, but
+## they lived on between characters and into shared games within one run of the program.
+func reset_debug() -> void:
+	god_mode = false
+	infinite_mana = false
+	debug_damage_mult = 1.0
+	debug_one_hit = false
+	debug_no_cooldowns = false
+	debug_speed_mult = 1.0
+	debug_freeze_ai = false
+	debug_xp_mult = 1.0
+	debug_gold_mult = 1.0
+	debug_min_drop = -1
+
 func _begin_session(map_id: StringName, spawn_id: StringName) -> void:
+	reset_debug()
 	_end_player()
 	var p := Player.new()
 	p.name = "Player"

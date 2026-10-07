@@ -4,6 +4,8 @@ class_name AscendantFx
 ##   Divine      a radiant sweep up the surface and a golden rim; rising golden motes; a sunburst of rays
 ##   Eternal     slow ripples of time over pearl and rose-gold; motes that spiral; a clock dial whose hands turn
 ##   Primordial  molten cracks that pulse in the obsidian; rising embers; cracked ground glowing like a forge
+##   Eschaton    (bh-041) mirror chrome: a thin film of every colour sliding over it with the view, hard white glints
+##               that sweep and flash; star sparkles that burst and twinkle; an eclipse with a turning corona of blades
 ## overlay(): the surface shader, laid as a next pass on a piece's own materials (dress()). aura(): particles for a
 ## worn piece or a held weapon. sigil() and pillar(): the ground presentation of a dropped piece (LootDrop).
 
@@ -55,6 +57,19 @@ void fragment() {
 		float r = length(opos.xz) * 12.0 + opos.y * 16.0 - TIME * 1.6;
 		float ring = pow(0.5 + 0.5 * sin(r), 28.0) * 0.6;
 		col = c1.rgb * (ring * 0.55 + fres * 0.25) + c2.rgb * ring * 0.2;
+	} else if (mode == 4) {
+		// Eschaton: mirror chrome — a thin film of the spectrum sliding with the view, sweeping glints, flashing sparkles
+		float film = dot(NORMAL, VIEW) * 3.0 + opos.y * 2.0 + TIME * 0.25;
+		vec3 spectrum = 0.5 + 0.5 * cos(6.28318 * (film + vec3(0.0, 0.33, 0.67)));
+		float band = fract(opos.y * 0.9 + opos.x * 0.6 - TIME * 0.55);
+		float glint = smoothstep(0.0, 0.025, band) * smoothstep(0.07, 0.025, band);
+		vec3 cell = floor(p * 4.0);
+		float h = hash(cell);
+		float flash = step(0.975, h) * pow(max(0.0, sin(TIME * 4.0 + h * 60.0)), 12.0);
+		float d = length(fract(p * 4.0) - 0.5);
+		float star = flash * (smoothstep(0.22, 0.0, d) + smoothstep(0.035, 0.0, abs(fract(p.x * 4.0) - 0.5)) * smoothstep(0.4, 0.0, d)
+			+ smoothstep(0.035, 0.0, abs(fract(p.y * 4.0) - 0.5)) * smoothstep(0.4, 0.0, d));
+		col = spectrum * fres * 0.55 + c1.rgb * glint * 0.9 + vec3(star) * 2.6 + c2.rgb * fres * 0.15;
 	} else {
 		// Primordial: molten cracks breathing in the obsidian
 		float n = noise(p * 1.1 + vec3(0.0, -TIME * 0.25, 0.0));
@@ -97,6 +112,14 @@ void fragment() {
 		float h1 = smoothstep(0.03, 0.0, abs(sin(a - TIME * 0.5))) * step(r, 0.58) * step(0.0, cos(a - TIME * 0.5));
 		float h2 = smoothstep(0.02, 0.0, abs(sin(a - TIME * 2.0))) * step(r, 0.74) * step(0.0, cos(a - TIME * 2.0));
 		col += c2.rgb * (marks * 1.6 + h1 * 1.4 + h2 * 1.1) + c1.rgb * smoothstep(0.5, 0.0, r) * 0.2;
+	} else if (mode == 4) {
+		// an eclipse: a black disc in a white corona, blade rays turning one way, the spectrum the other
+		float disc = smoothstep(0.36, 0.33, r);
+		float corona = exp(-pow((r - 0.38) * 18.0, 2.0)) * 1.6;
+		float blades = pow(max(0.0, cos(a * 8.0 + TIME * 0.5)), 24.0) * smoothstep(0.95, 0.4, r) * step(0.38, r);
+		vec3 spec = 0.5 + 0.5 * cos(6.28318 * (a / TAU - TIME * 0.12 + vec3(0.0, 0.33, 0.67)));
+		col = c1.rgb * (corona + blades * 1.4) + spec * ring * 0.8 - vec3(disc) * 0.0;
+		col *= (1.0 - disc * 0.85);
 	} else {
 		// cracked ground glowing like a forge
 		vec2 g = p * 5.0;
@@ -125,6 +148,7 @@ const LOOK := {
 	BH.Rarity.DIVINE: [1, Color(1.0, 0.86, 0.5), Color(1.0, 0.98, 0.85)],
 	BH.Rarity.ETERNAL: [2, Color(1.0, 0.55, 0.78), Color(0.65, 1.0, 0.92)],
 	BH.Rarity.PRIMORDIAL: [3, Color(1.0, 0.32, 0.08), Color(0.55, 0.05, 0.02)],
+	BH.Rarity.ESCHATON: [4, Color(0.92, 0.95, 1.0), Color(0.72, 0.56, 1.0)],
 }
 
 static var _shaders := {}
@@ -215,6 +239,11 @@ static func aura(rarity: int, size := 0.25, length := 0.0) -> Node3D:
 			spin.speed = 1.4
 			root.add_child(spin)
 			spin.add_child(p)
+		4:
+			# white star sparkles bursting in place, and a slower spectrum of motes
+			p = LootFx.small_particles(Color(1, 1, 1, 1.0), amount + 6, 0.7, 0.07, 0.05, 180.0, Vector3.ZERO, size * 1.1)
+			var tint := LootFx.small_particles(Color(c2, 0.85), amount, 1.8, 0.045, 0.12, 180.0, Vector3(0, 0.2, 0), size)
+			root.add_child(tint)
 		_:
 			p = LootFx.small_particles(Color(c1, 0.95), amount + 2, 1.0, 0.045, 0.35, 25.0, Vector3(0, 1.4, 0), size)
 	p.local_coords = mode == 2

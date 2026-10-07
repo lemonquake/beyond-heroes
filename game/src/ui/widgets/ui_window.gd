@@ -16,6 +16,15 @@ var _title_label: Label
 var _dim: ColorRect
 var _tw: Tween
 var _built := false
+var _outer: VBoxContainer
+
+## How far the content asks to reach past the window (0, 0 = it fits). Tests and the UI capture sweep read it.
+func overflow() -> Vector2:
+	if _outer == null or _outer.get_parent() == null:
+		return Vector2.ZERO
+	var room := (_outer.get_parent() as Control).size
+	var want := _outer.get_combined_minimum_size()
+	return Vector2(maxf(0.0, want.x - room.x), maxf(0.0, want.y - room.y))
 
 func _init(p_title := "", p_size := Vector2(1100, 720)) -> void:
 	title = p_title
@@ -56,9 +65,17 @@ func _make_frame() -> void:
 	_frame.custom_minimum_size = window_size
 	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
 	_root.add_child(_frame)
-	var outer := VBoxContainer.new()
+	# bh-041: the content sits in a clipping holder, so it can never stretch the frame past its size (an over-long row of
+	# tabs once pushed the Skills window's right half off the screen); each window still lays its content out to fit
+	var holder := Control.new()
+	holder.clip_contents = true
+	holder.mouse_filter = Control.MOUSE_FILTER_PASS
+	_frame.add_child(holder)
+	_outer = VBoxContainer.new()
+	var outer := _outer
 	outer.add_theme_constant_override("separation", 6)
-	_frame.add_child(outer)
+	holder.add_child(outer)
+	outer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(0, 22)
 	outer.add_child(spacer)

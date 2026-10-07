@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+OFFICIAL_PROBE READY trade_cancel_b roster=2 revision=2
+OFFICIAL_PROBE TRADE_OUTCOME trade_cancel_b cancelled
+OFFICIAL_PROBE TRADE PASS trade_cancel_b
+OFFICIAL_PROBE PASS trade_cancel_b
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 3 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

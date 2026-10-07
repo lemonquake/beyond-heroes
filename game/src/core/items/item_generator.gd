@@ -30,11 +30,12 @@ const RULES := [
 	[6, 6, 2, 0.84, 0.16, 0.24],   # Divine
 	[6, 7, 2, 0.90, 0.18, 0.26],   # Eternal
 	[7, 7, 2, 0.95, 0.20, 0.30],   # Primordial
+	[8, 8, 3, 1.0, 0.28, 0.38],    # Eschaton (bh-041)
 ]
 # Relative drop weights at 0% magic find (Beginner never drops from monsters).
-const WEIGHTS := [0.0, 520.0, 250.0, 130.0, 55.0, 28.0, 11.0, 4.0, 1.6, 0.25, 0.0, 0.0, 0.0, 0.0]   # Ascendant: never rolled
+const WEIGHTS := [0.0, 520.0, 250.0, 130.0, 55.0, 28.0, 11.0, 4.0, 1.6, 0.25, 0.0, 0.0, 0.0, 0.0, 0.0]   # Ascendant: never rolled
 # Minimum item level for a tier to drop at all (keeps the first minutes of the game grounded).
-const MIN_ILVL := [1, 1, 1, 1, 2, 3, 4, 5, 6, 8, 70, 80, 90, 100]
+const MIN_ILVL := [1, 1, 1, 1, 2, 3, 4, 5, 6, 8, 70, 80, 90, 100, 120]
 
 const RARE_NAME_A := ["Grim", "Ash", "Dusk", "Iron", "Blood", "Storm", "Hollow", "Rune", "Gloom", "Ember", "Raven", "Bone",
 	"Frost", "Doom", "Sorrow", "Night", "Warden", "Oath", "Wraith", "Thorn"]
@@ -104,6 +105,12 @@ static func generate(base: ItemBaseDef, ilvl: int, rarity: int, rng: RandomNumbe
 			_add_power(it, &"legendary", rng)
 		BH.Rarity.AETHER, BH.Rarity.COSMIC, BH.Rarity.DIVINE, BH.Rarity.ETERNAL, BH.Rarity.PRIMORDIAL:
 			_add_power(it, &"legendary", rng)
+			_add_power(it, &"aether", rng)
+		BH.Rarity.ESCHATON:
+			# bh-041: two Legendary powers and two Aether powers beside Unmaking
+			_add_power(it, &"legendary", rng)
+			_add_power(it, &"legendary", rng)
+			_add_power(it, &"aether", rng)
 			_add_power(it, &"aether", rng)
 	# bh-012: a relic power — a signature utility passive — on some Licensed-or-better pieces
 	if rarity >= BH.Rarity.LICENSED and base.unique_name == "" and rng.randf() < RELIC_CHANCE[clampi(rarity - BH.Rarity.LICENSED, 0, RELIC_CHANCE.size() - 1)]:
@@ -247,7 +254,7 @@ const WIDE_AFFIXES := {&"res_all": 2}
 const AFFIX_COST := {&"res_all": 2.0, &"skill_levels": 2.0}
 ## Total affix strength a piece may carry by rarity (sum of cost x value / best value). Rolls above it are pulled down
 ## toward their tier minimum; a masterwork enchantment is never reduced.
-const RARITY_BUDGET := [0.0, 0.0, 1.0, 2.0, 2.6, 3.5, 4.0, 4.6, 5.0, 5.8, 6.6, 7.2, 8.0, 9.0]
+const RARITY_BUDGET := [0.0, 0.0, 1.0, 2.0, 2.6, 3.5, 4.0, 4.6, 5.0, 5.8, 6.6, 7.2, 8.0, 9.0, 10.5]
 const RANGED_WEAPONS := [&"bow", &"crossbow", &"javelin"]
 
 static func affix_family(a: AffixDef) -> StringName:

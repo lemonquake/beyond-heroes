@@ -54,7 +54,11 @@ func _build() -> void:
 		if hero and i >= 0 and i < hero.tempos.size():
 			current = hero.tempos[i]
 			refresh())
-	body.add_child(_tabs)
+	var top := hbox(18)
+	body.add_child(top)
+	_tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top.add_child(_tabs)
+	top.add_child(TempoCommandBar.make(false))         # bh-041: Aggro / Defend / Passive for every Tempo
 	_empty = UITheme.label("", 20, UITheme.TEXT_DIM, UITheme.body_font())
 	_empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

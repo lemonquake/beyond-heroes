@@ -1,0 +1,36 @@
+[
+ {
+  "id": "esc_doomsday_paragon_helm",
+  "tris": 8504,
+  "objects": [
+   "esc_doomsday_paragon_helm"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_armor",
+  "tris": 18796,
+  "objects": [
+   "esc_doomsday_paragon_armor",
+   "AT_upper_arm_L",
+   "AT_upper_arm_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_inner",
+  "tris": 6596,
+  "objects": [
+   "esc_doomsday_paragon_inner",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ },
+ {
+  "id": "esc_doomsday_paragon_leggings",
+  "tris": 9832,
+  "objects": [
+   "esc_doomsday_paragon_leggings",
+   "AT_thigh_L",
+   "AT_thigh_R"
+  ]
+ }
+]

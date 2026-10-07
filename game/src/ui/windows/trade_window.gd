@@ -16,6 +16,7 @@ var _my_state: Label
 var _their_state: Label
 var _summary: Label
 var _accept: Button
+var _cancel: Button
 var _busy := false
 
 func _init() -> void:
@@ -104,9 +105,9 @@ func _build() -> void:
 	_accept = button("Accept Trade", _on_accept, &"PrimaryButton", 340.0)
 	_accept.custom_minimum_size.y = 60 if Settings.touch_mode else 50
 	br.add_child(_accept)
-	var cancel := button("Cancel Trade", func() -> void: close_window(), &"", 260.0)
-	cancel.custom_minimum_size.y = _accept.custom_minimum_size.y
-	br.add_child(cancel)
+	_cancel = button("Cancel Trade", func() -> void: close_window(), &"", 260.0)
+	_cancel.custom_minimum_size.y = _accept.custom_minimum_size.y
+	br.add_child(_cancel)
 
 func _offer_panel(into: Array[ItemSlot], editable: bool) -> Control:
 	var p := inset()
@@ -130,6 +131,11 @@ func open() -> void:
 	super.open()
 
 func close_window() -> void:
+	# bh-041: both players accepted and the exchange is being made (on the official server this takes a moment): it can no
+	# longer be called off from one side, and the window closes by itself when it is done
+	if Net.in_trade() and bool(Net.trade.get("committing", false)):
+		Events.notify.emit("Both of you accepted: the trade is being completed.", &"info")
+		return
 	if Net.in_trade():
 		Net.trade_cancel("You closed the trade.")
 	super.close_window()
@@ -176,6 +182,11 @@ func refresh() -> void:
 	_summary.add_theme_color_override("font_color", UITheme.BAD if err != "" else UITheme.TEXT)
 	_accept.text = "Accepted — click to undo" if t.my_ok else "Accept Trade"
 	_accept.disabled = bool(t.committing) or (err != "" and not t.my_ok)
+	_cancel.disabled = bool(t.committing)
+	if bool(t.committing):
+		_accept.text = "Completing the trade…"
+		_summary.text = ("Both accepted. Confirming the exchange with the official server…" if Official.active else "Both accepted. Exchanging…") 			+ "  You give %s and receive %s." % [TradeRules.describe(t.mine), TradeRules.describe(t.theirs)]
+		_summary.add_theme_color_override("font_color", UITheme.GOOD)
 
 func _on_bag_clicked(s: ItemSlot, button_index: int, _shift: bool, _ctrl: bool) -> void:
 	if s.item == null or not Net.in_trade():

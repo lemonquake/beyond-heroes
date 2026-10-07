@@ -2133,7 +2133,7 @@ func is_dodging() -> bool:
 # ---- bh-034: the Ascendant signature powers (DataAscendant) ------------------------------------------------------------
 ## Every Cosmic / Divine / Eternal / Primordial piece worn adds 1 to its tier's flag (a 6-piece set 2 more); the sum sets
 ## the chance and the strength (DataAscendant.proc_chance / proc_power). Each power rests 0.35 s after it answers.
-const ASCENDANT_FLAGS := [&"asc_starfall", &"asc_judgement", &"asc_echo", &"asc_eruption"]
+const ASCENDANT_FLAGS := [&"asc_starfall", &"asc_judgement", &"asc_echo", &"asc_eruption", &"esc_unmaking"]
 var _asc_ready := {}
 
 func _ascendant_procs(target: Actor, res: DamageResult) -> void:
@@ -2196,6 +2196,27 @@ func _ascendant_procs(target: Actor, res: DamageResult) -> void:
 					_asc_hit(a, amount, {Elements.FIRE: 0.6, Elements.EARTH: 0.4}, "Eruption")
 					if a.alive:
 						a.status.apply(&"burning", -1.0, 0.0, maxf(1.0, amount * 0.2), Elements.FIRE)
+			&"esc_unmaking":
+				# bh-041: a chrome rift opens on the target and implodes: every element at once to all within 4.5 m, and
+				# their armour breaks
+				var c := AscendantFx.color(BH.Rarity.ESCHATON)
+				var c2: Color = AscendantFx.LOOK[BH.Rarity.ESCHATON][2]
+				FX.spawn(VFXLib.beam_flash(Color(1, 1, 1), 11.0, 0.12, 0.3), at)
+				FX.spawn(VFXLib.ring_wave(c, 4.5, 0.35, 0.5), at + Vector3.UP * 0.06)
+				FX.spawn(VFXLib.ring_wave(c2, 3.0, 0.5, 0.3), at + Vector3.UP * 0.9)
+				FX.spawn(VFXLib.particles(Color(1, 1, 1), 34, 0.55, true, 0.06, -7.0, 180.0, Vector3.ZERO, 2.2), at + Vector3.UP * 0.9)
+				FX.spawn(VFXLib.particles(c2, 22, 0.8, true, 0.09, 3.0, 180.0, Vector3(0, 2.0, 0), 0.4), at + Vector3.UP * 0.9)
+				FX.spawn(VFXLib.light_flash(c, 8.0, 10.0, 0.35), at + Vector3.UP)
+				FX.text_popup(target.center() + Vector3.UP * 0.8, "Unmade", c, 1.0)
+				Events.camera_shake.emit(0.16)
+				var split := {}
+				for e in Elements.ELEMENTAL:
+					split[e] = 1.0 / float(Elements.ELEMENTAL.size())
+				for a: Actor in CombatQuery.actors_in_radius(get_world_3d(), at, 4.5, BH.LAYER_ENEMY):
+					_asc_hit(a, amount, split, "Unmaking")
+					if a.alive:
+						a.status.apply(&"armor_broken", 4.0)
+				Audio.play_at(&"lightning_zap", at, -2.0)
 
 func _asc_hit(a: Actor, amount: float, conversion: Dictionary, label: String) -> void:
 	if not is_instance_valid(a) or not a.alive:

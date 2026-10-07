@@ -54,12 +54,26 @@ func _show(anchor: Control, builder: Callable) -> void:
 	_place.call_deferred()
 
 func _place() -> void:
+	# one frame for the content to lay out (wrapped lines know their height only then)
+	await get_tree().process_frame
 	if _panel == null or not is_instance_valid(_panel) or _anchor == null or not is_instance_valid(_anchor):
 		return
+	_panel.scale = Vector2.ONE
 	_panel.reset_size()
 	var vp := _panel.get_viewport_rect().size
-	var a := _anchor.get_global_rect()
+	var max_h := vp.y - 16.0
+	# bh-041: a tooltip taller than the screen (an Ascendant set piece with every socket filled, a Fabled weapon beside
+	# the one it would replace) flows into more columns; only if it still does not fit is it drawn smaller
+	if _panel.size.y > max_h and fit_columns(_panel, max_h):
+		await get_tree().process_frame
+		if _panel == null or not is_instance_valid(_panel) or _anchor == null or not is_instance_valid(_anchor):
+			return
+		_panel.reset_size()
 	var s := _panel.size
+	var k := minf(1.0, minf(max_h / maxf(1.0, s.y), (vp.x - 16.0) / maxf(1.0, s.x)))
+	_panel.scale = Vector2(k, k)
+	s *= k
+	var a := _anchor.get_global_rect()
 	var p := Vector2(a.end.x + 10.0, a.position.y)
 	if p.x + s.x > vp.x - 8.0:
 		p.x = a.position.x - s.x - 10.0
@@ -67,10 +81,46 @@ func _place() -> void:
 		p = Vector2(clampf(a.get_center().x - s.x * 0.5, 8.0, vp.x - s.x - 8.0), a.position.y - s.y - 10.0)
 		if p.y < 8.0:
 			p.y = a.end.y + 10.0
+	p.x = clampf(p.x, 8.0, maxf(8.0, vp.x - s.x - 8.0))
 	p.y = clampf(p.y, 8.0, maxf(8.0, vp.y - s.y - 8.0))
 	_panel.position = p.round()
 	_fade = _panel.create_tween()
 	_fade.tween_property(_panel, "modulate:a", 1.0, 0.08)
+
+## Split every tooltip card (a TooltipFrame panel holding a column of lines) that is taller than `max_h` into side-by-side
+## columns, keeping the reading order. Returns whether anything moved. Also used by windows that show tooltip cards inline.
+static func fit_columns(root: Control, max_h: float) -> bool:
+	var cards: Array = root.find_children("*", "PanelContainer", true, false)
+	if root is PanelContainer:
+		cards.push_front(root)
+	var moved := false
+	for card: PanelContainer in cards:
+		if card.theme_type_variation != &"TooltipFrame" or card.get_child_count() == 0 or not card.get_child(0) is VBoxContainer:
+			continue
+		var v := card.get_child(0) as VBoxContainer
+		if card.size.y <= max_h or v.get_child_count() < 4:
+			continue
+		var limit := max_h - (card.size.y - v.size.y) - 8.0
+		var sep := float(v.get_theme_constant("separation"))
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 18)
+		var col := VBoxContainer.new()
+		col.add_theme_constant_override("separation", int(sep))
+		var used := 0.0
+		for kid in v.get_children():
+			var h := (kid as Control).size.y + sep
+			if used + h > limit and col.get_child_count() > 0:
+				row.add_child(col)
+				col = VBoxContainer.new()
+				col.add_theme_constant_override("separation", int(sep))
+				used = 0.0
+			v.remove_child(kid)
+			col.add_child(kid)
+			used += h
+		row.add_child(col)
+		v.add_child(row)
+		moved = true
+	return moved
 
 func _clear() -> void:
 	if _panel and is_instance_valid(_panel):

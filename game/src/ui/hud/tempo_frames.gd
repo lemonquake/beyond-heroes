@@ -26,6 +26,8 @@ func _rebuild() -> void:
 	var hero := Game.hero
 	if hero == null:
 		return
+	if not hero.tempos.is_empty():
+		add_child(TempoCommandBar.make(true))      # bh-041: Aggro / Defend / Passive
 	for t in hero.tempos:
 		add_child(_row(t))
 

@@ -28,7 +28,7 @@ var _gold: Label
 const SOCKET_PX := 78.0
 
 func _init() -> void:
-	super._init("Sockets and Crystals", Vector2(1480, 940))
+	super._init("Sockets and Crystals", Vector2(1600, 940))      # bh-041: its content always needed ~1580
 
 func open_for(p_specialist: String, p_shop: StringName = &"") -> void:
 	specialist = p_specialist

@@ -580,3 +580,38 @@ static func restore_all(hero: HeroData) -> void:
 			t.hp_frac = 1.0
 			t.mana_frac = 1.0
 	Events.tempo_changed.emit(0)
+
+# ---- Commands (bh-041) ------------------------------------------------------------------------------------------------
+## What the hero tells every Tempo to do. One toggle (the button over the Tempo frames, the Tempo window, or Y) steps
+## Aggro -> Defend -> Passive. Defend is how Tempos have always fought.
+const COMMANDS := [&"aggro", &"defend", &"passive"]
+const COMMAND_INFO := {
+	&"aggro": {"name": "Aggro", "color": Color(1.0, 0.45, 0.32),
+		"desc": "Hunt every monster near you, even ones that have not noticed you yet."},
+	&"defend": {"name": "Defend", "color": Color(0.45, 0.8, 1.0),
+		"desc": "Stay at your side and fight whatever threatens you or attacks them."},
+	&"passive": {"name": "Passive", "color": Color(0.7, 0.95, 0.6),
+		"desc": "Never attack. Follow you, dodge danger and still heal."},
+}
+
+static func clean_command(v: Variant) -> StringName:
+	var c := StringName(String(v)) if (v is String or v is StringName) else &"defend"
+	return c if COMMANDS.has(c) else &"defend"
+
+static func command_name(c: StringName) -> String:
+	return String(COMMAND_INFO.get(clean_command(c), {}).get("name", "Defend"))
+
+static func command_color(c: StringName) -> Color:
+	return COMMAND_INFO.get(clean_command(c), {}).get("color", Color.WHITE)
+
+## Step the hero's command to the next one (Aggro -> Defend -> Passive -> Aggro). Returns the new command.
+static func cycle_command(hero: HeroData) -> StringName:
+	var i := COMMANDS.find(clean_command(hero.tempo_command))
+	return set_command(hero, COMMANDS[(i + 1) % COMMANDS.size()])
+
+static func set_command(hero: HeroData, c: StringName) -> StringName:
+	hero.tempo_command = clean_command(c)
+	Events.tempo_command_changed.emit(hero.tempo_command)
+	if not hero.tempos.is_empty():
+		Events.notify.emit("Tempos: %s. %s" % [command_name(hero.tempo_command), COMMAND_INFO[hero.tempo_command].desc], &"info")
+	return hero.tempo_command

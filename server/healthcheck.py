@@ -1,6 +1,6 @@
 """Health check for monitoring and systemd timers. Exit 0 healthy, 1 unhealthy, 2 warning only.
 
-    python -m server.healthcheck --url https://game.example.com --expect-protocol 21
+    python -m server.healthcheck --url https://game.example.com --expect-protocol 22
     python -m server.healthcheck --config /var/lib/beyond-heroes/server.json      # local: loopback URL and certificate
 
 Checks (all with normal certificate verification for a public URL):
@@ -32,7 +32,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--url", help="public account address, e.g. https://game.example.com")
     parser.add_argument("--config", type=Path, help="server.json of a local setup (checks the loopback address and its certificate)")
-    parser.add_argument("--expect-protocol", type=int, default=21)
+    parser.add_argument("--expect-protocol", type=int, default=22)
     parser.add_argument("--warn-days", type=float, default=14.0, help="warn when a certificate expires sooner than this")
     args = parser.parse_args(argv)
     if not args.url and not args.config:

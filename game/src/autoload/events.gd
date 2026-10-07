@@ -55,6 +55,7 @@ signal shop_opened(shop_id: StringName)
 signal shop_closed(shop_id: StringName)
 signal guild_joined(guild_id: StringName, first_time: bool)
 signal profile_picture_changed(peer: int)          # bh-030: a hero's picture changed (0 = this machine's own hero)
+signal tempo_command_changed(command: StringName)   # bh-041: Aggro / Defend / Passive
 signal debug_unlocked                            # bh-030: `azrin azrael` unlocked the Debug console for this hero
 signal quake_team_changed                       # a Quake Team ally was called or dismissed (bh-017)
 signal guild_customised                          # the hero renamed their guild or changed its banner (bh-017)

@@ -48,18 +48,19 @@ def main():
     parser.add_argument("--godot", type=Path, required=True)
     parser.add_argument("--coordinator", type=Path,
                         help="An exported dedicated-server build to run as the coordinator (tools/export_server.py); clients still use --godot")
-    parser.add_argument("--stages", default="all", help="comma list of: capacity,restart,custom,world,version,hostile,bandwidth,transcend (default all except bandwidth and transcend)")
+    parser.add_argument("--stages", default="all", help="comma list of: capacity,restart,trade,custom,world,version,hostile,bandwidth,transcend (default all except bandwidth and transcend)")
+    parser.add_argument("--output", type=Path, help="folder for the process logs (default output/official-integration)")
     parser.add_argument("--allow-log-errors", action="store_true", help="report log problems without failing (diagnosis only)")
     args = parser.parse_args()
-    wanted = {"capacity", "restart", "custom", "world", "version", "hostile"} if args.stages == "all" else set(args.stages.split(","))
+    wanted = {"capacity", "restart", "trade", "custom", "world", "version", "hostile"} if args.stages == "all" else set(args.stages.split(","))
     if os.name == "nt" and args.godot.stem.endswith("_console"):
         native = args.godot.with_name(args.godot.stem.removesuffix("_console") + ".exe")
         if native.is_file():
             args.godot = native
     root = Path(__file__).resolve().parent.parent
     source = json.loads((root / "server/data/server.json").read_text())
-    output = root / "output/official-integration"
-    output.mkdir(exist_ok=True)
+    output = args.output.resolve() if args.output else root / "output/official-integration"
+    output.mkdir(parents=True, exist_ok=True)
     for old in output.glob("*.log"):
         old.unlink()
     context = ssl.create_default_context(cafile=source["certificate"])
@@ -169,6 +170,24 @@ def main():
                     passed("restart", "server restart; two real map clients resumed progress, traded atomically and saved on exit", ("resumed-", "dedicated-restarted", "accounts-restarted"))
                 else:
                     print("SKIP: restart stage needs the capacity stage's accounts", flush=True)
+
+            if "trade" in wanted:
+                # bh-041: two real-map heroes trade equipment through the trade table. b accepts late with an unsaved
+                # change (its save reaches the server after a's approval: this used to disconnect a); then a pair where
+                # a withdraws mid-confirmation: both must agree on the outcome and stay connected.
+                for mode in ("items", "cancel"):
+                    pair = [client("res://tests/tools/net_probe_official.tscn", ["--userid=trade_%s_%s" % (mode, n), "--full=1", "--trade=" + mode,
+                                    "--expected=2", "--hold=2"], "trade-%s-%s" % (mode, n)) for n in "ab"]
+                    finish(pair, 150, "Official trade probe (%s) failed" % mode)
+                    outcomes = set()
+                    for n in "ab":
+                        found = re.search(r"OFFICIAL_PROBE TRADE_OUTCOME \S+ (\w+)", (output / ("trade-%s-%s.log" % (mode, n))).read_text(encoding="utf-8", errors="replace"))
+                        assert found, "trade outcome missing for " + n
+                        outcomes.add(found.group(1))
+                    assert len(outcomes) == 1, "the two players disagree about the trade: %s" % outcomes
+                    if mode == "items":
+                        assert outcomes == {"committed"}
+                    passed("trade-" + mode, "official trade (%s): both players %s it and stayed connected" % (mode, outcomes.pop()), ("trade-%s" % mode, "dedicated", "accounts"))
 
             if "custom" in wanted:
                 custom = []

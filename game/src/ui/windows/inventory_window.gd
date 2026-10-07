@@ -76,10 +76,10 @@ func _build() -> void:
 func _build_paper_doll() -> Control:
 	var col := vbox(10)
 	col.custom_minimum_size = Vector2(620, 0)
-	var well := inset(Vector2(620, 600))
+	var well := inset(Vector2(620, 574))
 	col.add_child(well)
 	var doll := Control.new()
-	doll.custom_minimum_size = Vector2(590, 570)
+	doll.custom_minimum_size = Vector2(590, 564)
 	well.add_child(doll)
 	preview = CharacterPreview.new(Vector2i(640, 900))
 	preview.position = Vector2(150, 10)
@@ -103,8 +103,12 @@ func _build_paper_doll() -> Control:
 		l.size = Vector2(112, 20)
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		doll.add_child(l)
+	# bh-041: the statistics and the worn sets share the space under the doll; the set list scrolls inside it (each
+	# Ascendant set adds six lines of bonuses, and three or four worn sets used to push the belt off the window)
 	var info := hbox(14)
+	info.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	col.add_child(info)
+	col.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var sum_box := inset(Vector2(330, 0))
 	info.add_child(sum_box)
 	_summary = GridContainer.new()
@@ -114,8 +118,14 @@ func _build_paper_doll() -> Control:
 	sum_box.add_child(_summary)
 	var set_box := inset(Vector2(270, 0))
 	info.add_child(set_box)
+	var set_scroll := ScrollContainer.new()
+	set_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	set_scroll.custom_minimum_size = Vector2(250, 96)
+	set_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	set_box.add_child(set_scroll)
 	_sets = vbox(2)
-	set_box.add_child(_sets)
+	_sets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	set_scroll.add_child(_sets)
 	return col
 
 ## bh-030: the Potion & Scroll Belt, always at the bottom of the window: its 16 cells and the six belt keys (Q, E and
@@ -290,7 +300,7 @@ func _build_bag() -> Control:
 	_results = UITheme.label("", 17, UITheme.TEXT_DIM, UITheme.body_font())
 	col.add_child(_results)
 	_grid_scroll = ScrollContainer.new()
-	_grid_scroll.custom_minimum_size.y = 310
+	_grid_scroll.custom_minimum_size.y = 280
 	_grid_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_grid_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	col.add_child(_grid_scroll)

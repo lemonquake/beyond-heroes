@@ -4,7 +4,7 @@ extends RefCounted
 
 static var _uid_counter := 0
 
-const SELL_MULT := [0.5, 1.0, 1.6, 2.4, 3.4, 5.0, 7.5, 11.0, 16.0, 26.0, 40.0, 60.0, 90.0, 140.0]   # per rarity tier
+const SELL_MULT := [0.5, 1.0, 1.6, 2.4, 3.4, 5.0, 7.5, 11.0, 16.0, 26.0, 40.0, 60.0, 90.0, 140.0, 240.0]   # per rarity tier
 
 var uid := 0
 var base: ItemBaseDef
@@ -335,7 +335,7 @@ static func from_dict(d: Dictionary) -> ItemInstance:
 		it.foretech_rank = clampi(int(te[1]), 1, DataUpgrades.TECH_MAX)
 	# bh-018 (optional keys): sockets and their crystals; unknown crystals become empty sockets
 	if b.category in BH.CATEGORY_SLOTS:
-		it.sockets = clampi(int(d.get("sk", 0)), 0, 7)
+		it.sockets = clampi(int(d.get("sk", 0)), 0, 8)      # bh-041: Divine and above take eight (was cut to seven on loading)
 		var gs = d.get("gems", [])
 		for i in it.sockets:
 			var gid := String(gs[i]) if gs is Array and i < (gs as Array).size() else ""
