@@ -101,7 +101,8 @@ func compose() -> void:
 	_greenery()
 	_map_design()
 	spawn(&"start", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
-	spawn(&"town_gate", Vector3(GATE.x, 0, GATE.y + 4.0), 0.0, true)
+	# arriving from Malasugue: a few steps below its gate, close enough to see the glowing way back behind you
+	spawn(&"town_gate", Vector3(GATE.x, 0, GATE.y - 3.0), 0.0, true)
 	spawn(&"forest_road", Vector3(-49, 0, -45), 140.0, true)
 	spawn(&"cove_shrine", Vector3(SHRINE.x + 3.2, 0, SHRINE.y + 1.2), 90.0, true)
 	spawn(&"gate_shrine", Vector3(GATE_SHRINE.x + 3.0, 0, GATE_SHRINE.y + 1.4), 70.0, true)

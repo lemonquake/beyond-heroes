@@ -228,7 +228,8 @@ const DELVERS_YAW := -36.0
 
 func _delvers_entrance() -> void:
 	var p := DELVERS_AT
-	p.y = ground(p.x, p.z)
+	# the paving sits a hand above the grass: level with it, the two fought over every pixel (and grass came through)
+	p.y = ground(p.x, p.z) + 0.07
 	var fwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(DELVERS_YAW))
 	var side := fwd.cross(Vector3.UP)
 	apron(Vector2(p.x, p.z), p.y, 3.0)
@@ -239,6 +240,7 @@ func _delvers_entrance() -> void:
 	var portal := DoorPortal.new().setup(&"int_delvers", &"start", "the Delvers' Undercroft", true)
 	portal.position = p
 	portal.rotation.y = deg_to_rad(DELVERS_YAW)
+	portal.plate_at = Vector3(0, 2.9, 1.4)     # out in front of the arch's keystones, not inside them
 	markers.add_child(portal)
 	var sp := p + fwd * 2.2
 	spawn(&"door_int_delvers", Vector3(sp.x, 0, sp.z), DELVERS_YAW, true)
@@ -349,6 +351,8 @@ func _greenery() -> void:
 			if Vector2(x, z).distance_to(lot) < 7.5:
 				return true
 		if Rect2(4.0, 9.0, 22.0, 26.0).has_point(Vector2(x, z)):
+			return true
+		if Vector2(x, z).distance_to(Vector2(DELVERS_AT.x, DELVERS_AT.z)) < 5.2:   # bh-042: the Undercroft's paving
 			return true
 		return d > FENCE_R - 1.5
 	scatter(["grass_clump"], Rect2(-40, -40, 80, 80), 520, 1.1, Vector2(0.8, 1.3), avoid)

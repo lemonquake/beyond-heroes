@@ -8,6 +8,7 @@ var destination_spawn: StringName
 var label := ""                     # "the Salted Marlin", "Swordfin Hall", "Malasugue"
 var entering := true                # false: this is an exit back outside
 var interact_range := 2.4
+var plate_at := Vector3(0, 2.7, 0)  # local: a door under a deep arch sets it out in front, clear of the stone
 var _plate: Label3D
 
 func setup(p_map: StringName, p_spawn: StringName, p_label: String, p_entering := true) -> DoorPortal:
@@ -37,7 +38,8 @@ func _ready() -> void:
 	_plate.outline_size = 8
 	_plate.outline_modulate = Color(0, 0, 0, 0.85)
 	_plate.modulate = UITheme.PARCHMENT
-	_plate.position.y = 2.7
+	_plate.no_depth_test = true          # a lintel or eave in front never cuts the name in half
+	_plate.position = plate_at
 	_plate.visible = false
 	add_child(_plate)
 

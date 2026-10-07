@@ -1,0 +1,36 @@
+Exit thresholds + Undercroft entrance fix — test results (Godot 4.7.2, 2026-10-07)
+[PASS] test_bh014.gd — 10 tests, 30 checks, 0 failures (412.9 ms)
+[PASS] test_bh016.gd — 15 tests, 1561 checks, 0 failures (2025.5 ms)
+[PASS] test_bh021.gd — 13 tests, 382 checks, 0 failures (2311.6 ms)
+[PASS] test_bh042.gd — 11 tests, 1417 checks, 0 failures (31.9 ms)
+[PASS] test_crafting.gd — 11 tests, 977 checks, 0 failures (16834.9 ms)
+[PASS] test_island.gd — 13 tests, 1669 checks, 0 failures (10622.4 ms)
+[PASS] test_loot.gd — 17 tests, 9076 checks, 0 failures (14998.4 ms)
+[PASS] test_npcs.gd — 3 tests, 506 checks, 0 failures (14490.8 ms)
+[PASS] test_perf.gd — 7 tests, 278 checks, 0 failures (6502.2 ms)
+[PASS] test_map_design.gd — 10 tests, 3600 checks, 0 failures (16136.5 ms)
+[PASS] test_maps.gd — 14 tests, 877 checks, 0 failures (8085.4 ms)
+
+Arrival audit (--audit=1):
+AUDIT sanctuary exit sanctuary_south_gate -> westreach/town_gate | nearest spawn here gate at 17.1 m
+AUDIT westreach exit westreach_south_gate -> sanctuary/gate | nearest spawn here start at 15.2 m
+AUDIT westreach exit westreach_lake_road -> olivar/west_road | nearest spawn here olivar_road at 9.2 m
+AUDIT westreach exit westreach_fen_road -> wyman_outpost/west_road | nearest spawn here fen_road at 9.3 m
+AUDIT westreach exit westreach_forest_road -> ruined_forest/south_road | nearest spawn here forest_road at 10.9 m
+AUDIT olivar exit olivar_west_road -> westreach/olivar_road | nearest spawn here west_road at 10.0 m
+AUDIT olivar exit olivar_watch_road -> wyman_outpost/north_road | nearest spawn here south_road at 10.5 m
+AUDIT wyman_outpost exit wyman_marsh_gate -> weeping_causeway/arrival | nearest spawn here marsh_gate at 9.3 m
+AUDIT wyman_outpost exit wyman_watch_road -> olivar/south_road | nearest spawn here north_road at 10.7 m
+AUDIT wyman_outpost exit wyman_fen_road -> westreach/fen_road | nearest spawn here west_road at 10.4 m
+AUDIT ruined_forest exit forest_south_road -> westreach/forest_road | nearest spawn here south_road at 11.2 m
+AUDIT weeping_causeway exit causeway_marsh_gate -> wyman_outpost/marsh_gate | nearest spawn here arrival at 5.9 m
+AUDIT agdao exit agdao_coil_gate -> zr_coilwood/agdao_road | nearest spawn here coil_gate at 13.2 m
+AUDIT zr_coilwood exit coilwood_agdao_road -> agdao/coil_gate | nearest spawn here agdao_road at 6.9 m
+AUDIT zr_coilwood exit coilwood_barrens_road -> zr_barrens/coil_road | nearest spawn here barrens_road at 6.7 m
+AUDIT zr_barrens exit barrens_coil_road -> zr_coilwood/barrens_road | nearest spawn here coil_road at 5.4 m
+AUDIT zr_barrens exit barrens_bridge_road -> bridge_of_death/barrens_road | nearest spawn here bridge_road at 6.9 m
+AUDIT bridge_of_death exit bridge_south_road -> zr_barrens/bridge_road | nearest spawn here barrens_road at 11.6 m
+AUDIT bridge_of_death exit bridge_north_road -> zr_citadel/bridge_road | nearest spawn here citadel_road at 13.5 m
+AUDIT zr_citadel exit citadel_south_road -> bridge_of_death/citadel_road | nearest spawn here bridge_road at 6.3 m
+
+Windows export: exit 0, build/windows/BeyondHeroes.exe 917380096 bytes; headless boot smoke exit 0, no script errors.
