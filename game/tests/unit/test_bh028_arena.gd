@@ -90,7 +90,8 @@ func test_no_difficulty_steps() -> void:
 	var prev := EnemyStats.build(def, 5, DataEnemies.DIFFICULTY[1], [])
 	for level in range(6, 301):
 		var cur := EnemyStats.build(def, level, DataEnemies.DIFFICULTY[1], [])
-		var dmg := cur.get_stat(&"damage_mult") / prev.get_stat(&"damage_mult")
+		# bh-042: the Abyss's x8 (asked for at level 90) eases in over levels 86-90; that one ramp is deliberate
+		var dmg := cur.get_stat(&"damage_mult") / prev.get_stat(&"damage_mult") / (Abyss.damage_mult(level) / Abyss.damage_mult(level - 1))
 		var hp := cur.get_stat(&"max_hp") / prev.get_stat(&"max_hp")
 		ok(dmg > 1.0 and dmg < 1.13, "L%d damage step %.3f" % [level, dmg])
 		# (levels 6-14 keep the opening's original steep health ramp)

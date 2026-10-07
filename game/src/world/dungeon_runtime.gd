@@ -8,13 +8,42 @@ extends Node
 var dungeon: StringName
 var floor_n := 1
 
+## bh-042: on an Abyss floor the hero carries a small warm lantern (the floor itself has only a few lit torches).
+const LANTERN_NAME := "AbyssLantern"
+var _lantern: OmniLight3D
+
 func _ready() -> void:
+	_lantern_on.call_deferred()
+	Events.player_spawned.connect(_on_player_spawned)
 	Events.camp_cleared.connect(_on_camp_cleared)
 	Events.miniboss_defeated.connect(_on_miniboss)
 	Events.actor_died.connect(_on_died)
 	_quiet_notice.call_deferred()
 
+func _on_player_spawned(_p: Node) -> void:
+	_lantern_on.call_deferred()
+
+func _lantern_on() -> void:
+	if not DataDungeons.is_abyss(dungeon) or not is_inside_tree():
+		return
+	var p := Game.player as Node3D
+	if p == null or not is_instance_valid(p) or p.get_node_or_null(LANTERN_NAME):
+		return
+	_lantern = OmniLight3D.new()
+	_lantern.name = LANTERN_NAME
+	_lantern.light_color = Color(1.0, 0.78, 0.52)
+	_lantern.light_energy = 1.25
+	_lantern.omni_range = 9.5
+	_lantern.omni_attenuation = 1.4
+	_lantern.shadow_enabled = false
+	_lantern.position = Vector3(0.35, 2.3, 0.2)
+	p.add_child(_lantern)
+
 func _exit_tree() -> void:
+	if _lantern and is_instance_valid(_lantern):
+		_lantern.queue_free()
+	if Events.player_spawned.is_connected(_on_player_spawned):
+		Events.player_spawned.disconnect(_on_player_spawned)
 	if Events.camp_cleared.is_connected(_on_camp_cleared):
 		Events.camp_cleared.disconnect(_on_camp_cleared)
 	if Events.miniboss_defeated.is_connected(_on_miniboss):

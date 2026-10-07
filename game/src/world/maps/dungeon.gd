@@ -65,6 +65,8 @@ var height := {}            # Vector2i -> float: walking height of floors and br
 var stair := {}             # Vector2i -> [dir char, base height]
 var _joints := {}           # vertex key -> {x: n, z: n, low: bool, y: float, p: Vector3}
 var _torches := 0
+var max_torches := MAX_TORCHES      # bh-042: an Abyss floor carries only a handful of lit torches
+var dark := false                   # bh-042: no fill light anywhere (the Abyss)
 var _used := {}             # cells holding a gameplay marker or a big prop
 
 func compose() -> void:
@@ -78,6 +80,8 @@ func compose() -> void:
 		fd["exit"] = fd.descent
 		fd.erase("descent")
 	th = DataDungeons.theme(dungeon)
+	dark = bool(th.get("dark", false))
+	max_torches = int(th.get("max_torches", MAX_TORCHES))
 	var tid := StringName(dd.get("theme", &"drowned"))
 	dress = DRESS.get(tid, DataDungeons.theme_table("DRESS", tid, DRESS[&"drowned"]))
 	plan = fd.get("plan", [])
@@ -115,7 +119,11 @@ func ch(c: Vector2i) -> String:
 	return String(plan[c.y])[c.x]
 
 func is_floor(c: Vector2i) -> bool:
-	return ch(c) in ["0", "1", "2"]
+	return ch(c) in ["0", "1", "2", "3", "#"]
+
+## bh-042: a cracked wall cell ('#'): floor at the height of the cells beside it, closed by a SecretWall.
+func is_secret(c: Vector2i) -> bool:
+	return ch(c) == "#"
 
 func is_stair(c: Vector2i) -> bool:
 	return STAIR_DIR.has(ch(c))
@@ -140,10 +148,21 @@ func _read() -> void:
 		for cc in cols:
 			var c := Vector2i(cc, r)
 			var k := ch(c)
-			if k in ["0", "1", "2"]:
+			if k in ["0", "1", "2", "3"]:
 				height[c] = float(int(k)) * STOREY
 			elif k == "=":
 				height[c] = 0.0
+	# bh-042: a cracked wall stands at the height of the floor it closes
+	for r in rows:
+		for cc in cols:
+			var c := Vector2i(cc, r)
+			if ch(c) != "#":
+				continue
+			var hs := 0.0
+			for d in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]:
+				if height.has(c + d) and ch(c + d) != "#":
+					hs = maxf(hs, height[c + d])
+			height[c] = hs
 	for r in rows:
 		for cc in cols:
 			var c := Vector2i(cc, r)
@@ -214,8 +233,8 @@ func _basins() -> void:
 				n += 1
 				if n % 4 == 1:
 					accent(Vector3(p.x, LIQUID_Y + 0.3, p.z), &"water_wave", -20.0)
-				if n % 3 == 0:
-					light(Vector3(p.x, LIQUID_Y + 1.4, p.z), th.glow, 3.0, 12.0, false, false)
+				if n % (12 if dark else 3) == 0:
+					light(Vector3(p.x, LIQUID_Y + 1.4, p.z), th.glow, 1.6 if dark else 3.0, 12.0, false, false)
 				# arches standing in the water, away from the bridges (the reference's cistern)
 				if n % 5 == 2 and not _near_bridge(c) and _has("arch_quoin"):
 					arch("arch_quoin", Vector3(p.x, BASIN_FLOOR, p.z), 0.0 if (c.x + c.y) % 2 == 0 else 90.0)
@@ -383,6 +402,8 @@ func _gameplay() -> void:
 		var flag := DataDungeons.seal_flag(dungeon, floor_n)
 		var hint := "Sealed. Defeat the Seal Keepers of this floor to open the way down." if floor_n != DataDungeons.champion_floor(dungeon) else \
 			"Sealed. %s holds the seal." % dd.miniboss.name
+		if fd.has("gatekeeper") and dd.has("gatekeeper") and DB.enemy(StringName(dd.gatekeeper)):
+			hint = "Sealed. %s holds the seal." % DB.enemy(StringName(dd.gatekeeper)).display_name
 		var dt := teleporter(StringName("dg_%s_%d_down" % [dungeon, floor_n]), gp, DataDungeons.map_id(dungeon, floor_n + 1), &"arrival",
 			DataDungeons.floor_title(dungeon, floor_n + 1), 0.0, true, flag, hint)
 		dt.rune_tint = th.rune
@@ -429,6 +450,37 @@ func _gameplay() -> void:
 		markers.add_child(m)
 	if fd.has("miniboss"):
 		_used[fd.miniboss] = true
+	# bh-042: the Abyss gatekeeper (floor 11): a boss whose fall sets this floor's seal flag (Loot, boss_flag)
+	if fd.has("gatekeeper") and dd.has("gatekeeper"):
+		var gc2: Vector2i = fd.gatekeeper
+		_used[gc2] = true
+		var gm := Marker3D.new()
+		gm.name = "GatekeeperSpawn"
+		gm.position = cell_pos(gc2)
+		gm.add_to_group(&"boss_spawn")
+		gm.set_meta(&"boss", String(dd.gatekeeper))
+		gm.set_meta(&"flag", String(DataDungeons.seal_flag(dungeon, floor_n)))
+		markers.add_child(gm)
+	if fd.has("warden"):
+		_used[fd.warden] = true
+	# bh-042: cracked walls closing the secret rooms
+	var si := 0
+	for sd: Dictionary in fd.get("secrets", []):
+		var wc: Vector2i = sd.wall
+		_used[wc] = true
+		var sw := SecretWall.new()
+		sw.flag = StringName("%s_secret_%d" % [def.id, si])
+		sw.across_x = String(sd.get("side", "north")) == "north"
+		sw.tint = th.torch
+		sw.position = cell_pos(wc)
+		props.add_child(sw)
+		# the themed masonry it is made of (while the theme's stone is active), freed with the wall
+		if not Game.has_flag(sw.flag) and _has("wall_stone_capped"):
+			var wv := kit("wall_stone_capped", Vector3.ZERO, 0.0 if sw.across_x else 90.0, 1.0, sw)
+			# on the props layer: it blocks bodies but stays out of the navmesh, so once broken the way is open to pathing
+			for sb in wv.find_children("*", "StaticBody3D", true, false):
+				(sb as StaticBody3D).collision_layer = BH.LAYER_PROPS
+		si += 1
 	# treasure
 	var n := 0
 	for cp in fd.get("chests", []):
@@ -504,7 +556,7 @@ func _light_and_dress() -> void:
 		# torches on north walls (every other cell of a run), themed wall pieces between them
 		if north_void:
 			var wall_z := p.z - 2.0 + 0.42
-			if (c.x + c.y) % 2 == 0 and _torches < MAX_TORCHES:
+			if (c.x + c.y) % 2 == 0 and _torches < max_torches and (not dark or (c.x * 7 + c.y * 3) % 5 == 0):
 				_torches += 1
 				_sconce(Vector3(p.x, h + 2.7, wall_z))
 			elif rng.randf() < 0.55:
@@ -514,11 +566,11 @@ func _light_and_dress() -> void:
 					kit(wp, Vector3(p.x + rng.randf_range(-0.8, 0.8), h + (4.0 if hang else 2.4), wall_z - 0.05), 0.0, 1.0, deco)
 		# the tall back wall of a lower room: a raised terrace to the north
 		var nb_n: Vector2i = c + SIDES.north
-		if height.has(nb_n) and height[nb_n] > h + 0.5 and (c.x + c.y) % 2 == 1 and _torches < MAX_TORCHES:
+		if height.has(nb_n) and height[nb_n] > h + 0.5 and (c.x + c.y) % 2 == 1 and _torches < max_torches and not dark:
 			_torches += 1
 			_sconce(Vector3(p.x, h + 2.6, p.z - 2.0 + 0.42))
 		for side in ["west", "east"]:
-			if ch(c + SIDES[side]) == "." and c.y % 3 == 0 and _torches < MAX_TORCHES:
+			if ch(c + SIDES[side]) == "." and c.y % 3 == 0 and _torches < max_torches and not dark:
 				_torches += 1
 				var sx := -1.0 if side == "west" else 1.0
 				_sconce_side(Vector3(p.x + sx * (2.0 - 0.42), h + 2.7, p.z), sx)
@@ -579,8 +631,11 @@ func _light_and_dress() -> void:
 				sp.add_child(ring)
 				ring.transform = Transform3D.IDENTITY
 		light(Vector3(ctr.x, 1.5, ctr.z), th.glow, 3.0, 14.0, false, true)
-	if DataDungeons.is_special(dungeon):
+	if DataDungeons.is_special(dungeon) and not dark:
 		_special_centrepiece(basin_cells)
+	if dark:
+		AbyssDress.dress(self)
+		return
 	# a little theme light floating over each storey so the upper galleries never sink into darkness
 	for c: Vector2i in cells:
 		if height[c] > 0.1 and (c.x * 3 + c.y * 5) % 7 == 0:

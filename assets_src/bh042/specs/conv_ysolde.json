@@ -1,0 +1,59 @@
+{
+ "height": 3.5,
+ "rough": 0.3,
+ "glow": [
+  {
+   "match": "OLHO",
+   "color": [
+    0.55,
+    1.0,
+    0.95
+   ],
+   "energy": 6.0
+  }
+ ],
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/out/ysolde.glb",
+ "out": "res://assets/characters/bh042/ysolde.scn",
+ "all_clips": true,
+ "loops": [
+  "idle",
+  "idle_1h",
+  "idle_2h",
+  "idle_bow",
+  "idle_dagger",
+  "idle_dual",
+  "idle_shield",
+  "idle_spear",
+  "idle_staff",
+  "idle_wand",
+  "idle_hurt",
+  "idle_combat_hurt",
+  "idle_knight",
+  "idle_mage",
+  "idle_ranger",
+  "idle_shadowblade",
+  "idle_look",
+  "walk",
+  "walk_back",
+  "walk_hurt",
+  "run",
+  "run_combat",
+  "run_hurt",
+  "strafe_l",
+  "strafe_r",
+  "block_loop",
+  "charge_hold",
+  "cast_channel",
+  "bow_draw_hold",
+  "fem_idle",
+  "fem_walk",
+  "fem_run",
+  "fem_stroll",
+  "hero_walk",
+  "hero_run",
+  "hero_stroll"
+ ],
+ "drop": [
+  "Icosphere"
+ ]
+}

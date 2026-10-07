@@ -92,7 +92,7 @@ func _check_grounded(map: MapRoot, where: String) -> void:
 
 func test_data() -> void:
 	var interiors := _interior_ids()
-	eq(interiors.size(), 9, "nine interiors (bh-016: the Guild House)")
+	eq(interiors.size(), 10, "ten interiors (bh-016: the Guild House; bh-042: the Delvers' Undercroft)")
 	for id in interiors:
 		var d := DB.map_def(id)
 		ok(d != null and d.interior and d.is_town and d.parent_map == &"sanctuary", "%s is a town interior of sanctuary" % id)
@@ -116,6 +116,8 @@ func test_data() -> void:
 					ok(DialogueBox.SERVICES.has(StringName(a.service)), "%s dialogue service %s is known" % [n.id, a.service])
 	# every interior has somebody at home
 	for id in interiors:
+		if id == &"int_delvers":
+			continue                  # bh-042: a hall of gates, not a home
 		ok(DB.npcs.values().any(func(n): return n.map == id), "%s has at least one resident" % id)
 	done()
 
@@ -134,7 +136,7 @@ func test_npcs_stand_on_ground_after_travel() -> void:
 		var room := _load(id, &"start")
 		await _frames(2)
 		ok(room.spawns.has(&"start"), "%s has a start spawn" % id)
-		ok(not _npcs_in(room).is_empty(), "%s has its residents" % id)
+		ok(id == &"int_delvers" or not _npcs_in(room).is_empty(), "%s has its residents" % id)
 		_check_grounded(room, id)
 	town = _load(&"sanctuary", &"waypoint")
 	await _frames(2)

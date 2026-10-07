@@ -1,0 +1,262 @@
+{
+ "large_castle_door": {
+  "glb": "ph_large_castle_door.glb",
+  "triangles_before": 12640,
+  "triangles_after": 5997,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   2.012,
+   2.965,
+   0.34
+  ],
+  "bytes": 3097044
+ },
+ "large_iron_gate": {
+  "glb": "ph_large_iron_gate.glb",
+  "triangles_before": 38140,
+  "triangles_after": 8996,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   2.95,
+   2.929,
+   0.098
+  ],
+  "bytes": 2424276
+ },
+ "gothic_statue": {
+  "glb": "ph_gothic_statue.glb",
+  "triangles_before": 27739,
+  "triangles_after": 9000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.475,
+   1.74,
+   1.564
+  ],
+  "bytes": 3466912
+ },
+ "lion_head": {
+  "glb": "ph_lion_head.glb",
+  "triangles_before": 47214,
+  "triangles_after": 5999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.321,
+   0.436,
+   0.207
+  ],
+  "bytes": 279204
+ },
+ "Chandelier_02": {
+  "glb": "ph_chandelier_02.glb",
+  "triangles_before": 21514,
+  "triangles_after": 9000,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.679,
+   0.848,
+   0.619
+  ],
+  "bytes": 425000
+ },
+ "lantern_chandelier_01": {
+  "glb": "ph_lantern_chandelier_01.glb",
+  "triangles_before": 5971,
+  "triangles_after": 5000,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.579,
+   0.878,
+   0.575
+  ],
+  "bytes": 512828
+ },
+ "brass_candleholders": {
+  "glb": "ph_brass_candleholders.glb",
+  "triangles_before": 41936,
+  "triangles_after": 5999,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   1.056,
+   0.835,
+   0.366
+  ],
+  "bytes": 884700
+ },
+ "wooden_candlestick": {
+  "glb": "ph_wooden_candlestick.glb",
+  "triangles_before": 212992,
+  "triangles_after": 4259,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.097,
+   0.22,
+   0.099
+  ],
+  "bytes": 257120
+ },
+ "stone_fire_pit": {
+  "glb": "ph_stone_fire_pit.glb",
+  "triangles_before": 3887,
+  "triangles_after": 3800,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.448,
+   0.388,
+   1.433
+  ],
+  "bytes": 2534692
+ },
+ "kite_shield": {
+  "glb": "ph_kite_shield.glb",
+  "triangles_before": 10306,
+  "triangles_after": 3997,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.543,
+   1.394,
+   0.135
+  ],
+  "bytes": 342140
+ },
+ "ornate_medieval_mace": {
+  "glb": "ph_ornate_medieval_mace.glb",
+  "triangles_before": 14762,
+  "triangles_after": 4000,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.095,
+   0.63,
+   0.102
+  ],
+  "bytes": 297088
+ },
+ "ornate_medieval_dagger": {
+  "glb": "ph_ornate_medieval_dagger.glb",
+  "triangles_before": 6290,
+  "triangles_after": 2998,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.12,
+   0.349,
+   0.025
+  ],
+  "bytes": 204880
+ },
+ "marble_bust_01": {
+  "glb": "ph_marble_bust_01.glb",
+  "triangles_before": 17456,
+  "triangles_after": 6000,
+  "texture": 512,
+  "collider": true,
+  "size_m": [
+   0.272,
+   0.515,
+   0.3
+  ],
+  "bytes": 264160
+ },
+ "rock_moss_set_01": {
+  "glb": "ph_rock_moss_set_01.glb",
+  "triangles_before": 63127,
+  "triangles_after": 8995,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   7.994,
+   1.775,
+   6.958
+  ],
+  "bytes": 722108
+ },
+ "rock_07": {
+  "glb": "ph_rock_07.glb",
+  "triangles_before": 14844,
+  "triangles_after": 6000,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   0.169,
+   0.144,
+   0.32
+  ],
+  "bytes": 1903596
+ },
+ "vintage_oil_lamp": {
+  "glb": "ph_vintage_oil_lamp.glb",
+  "triangles_before": 7208,
+  "triangles_after": 3997,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.22,
+   0.802,
+   0.22
+  ],
+  "bytes": 352996
+ },
+ "Lantern_01": {
+  "glb": "ph_lantern_01.glb",
+  "triangles_before": 33902,
+  "triangles_after": 5997,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.123,
+   0.294,
+   0.097
+  ],
+  "bytes": 654684
+ },
+ "GothicCommode_01": {
+  "glb": "ph_gothiccommode_01.glb",
+  "triangles_before": 3897,
+  "triangles_after": 3897,
+  "texture": 1024,
+  "collider": true,
+  "size_m": [
+   1.201,
+   1.212,
+   0.581
+  ],
+  "bytes": 603648
+ },
+ "brass_goblets": {
+  "glb": "ph_brass_goblets.glb",
+  "triangles_before": 9600,
+  "triangles_after": 3998,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.454,
+   0.273,
+   0.298
+  ],
+  "bytes": 416960
+ },
+ "metal_jug": {
+  "glb": "ph_metal_jug.glb",
+  "triangles_before": 6040,
+  "triangles_after": 3000,
+  "texture": 512,
+  "collider": false,
+  "size_m": [
+   0.197,
+   0.288,
+   0.196
+  ],
+  "bytes": 147724
+ }
+}

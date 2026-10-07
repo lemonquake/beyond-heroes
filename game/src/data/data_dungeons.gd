@@ -634,6 +634,10 @@ static func defs() -> Dictionary:
 		var zr := DataDungeonsZarael.list()
 		for id in zr:
 			_defs[id] = zr[id]
+		# bh-042: the five Abyss dungeons under Malasugue
+		var ab := DataDungeonsAbyss.list()
+		for id in ab:
+			_defs[id] = ab[id]
 	return _defs
 
 ## Every dungeon id, easiest (lowest first floor) first.
@@ -670,15 +674,19 @@ static func tier_stars(id: StringName) -> String:
 static func is_special(id: StringName) -> bool:
 	return bool(get_def(id).get("special", false))
 
+## bh-042: one of the five Abyss dungeons (DataDungeonsAbyss): special, darker, secret rooms, a gatekeeper on floor 11.
+static func is_abyss(id: StringName) -> bool:
+	return bool(get_def(id).get("abyss", false))
+
 ## bh-029: one of the three Vaults of Zarael (DataDungeonsZarael): special (fixed levels) but no tier lock.
 static func is_zarael(id: StringName) -> bool:
 	return bool(get_def(id).get("zarael", false))
 
 ## Room dressing / clutter / gate dressing for a theme, whichever data file defines it.
 static func theme_table(key: String, tid: StringName, fallback: Variant) -> Variant:
-	var srcs := {"DRESS": [DataDungeonsX.DRESS, DataDungeonsSpecial.DRESS, DataDungeonsZarael.DRESS],
-		"CLUTTER": [DataDungeonsX.CLUTTER, DataDungeonsSpecial.CLUTTER, DataDungeonsZarael.CLUTTER],
-		"GATE_DRESS": [DataDungeonsX.GATE_DRESS, DataDungeonsSpecial.GATE_DRESS, DataDungeonsZarael.GATE_DRESS]}
+	var srcs := {"DRESS": [DataDungeonsX.DRESS, DataDungeonsSpecial.DRESS, DataDungeonsZarael.DRESS, DataDungeonsAbyss.DRESS],
+		"CLUTTER": [DataDungeonsX.CLUTTER, DataDungeonsSpecial.CLUTTER, DataDungeonsZarael.CLUTTER, DataDungeonsAbyss.CLUTTER],
+		"GATE_DRESS": [DataDungeonsX.GATE_DRESS, DataDungeonsSpecial.GATE_DRESS, DataDungeonsZarael.GATE_DRESS, DataDungeonsAbyss.GATE_DRESS]}
 	for src: Dictionary in srcs.get(key, []):
 		if src.has(tid):
 			return src[tid]
@@ -741,6 +749,8 @@ static func theme(dungeon: StringName) -> Dictionary:
 		return DataDungeonsSpecial.THEMES[t]
 	if DataDungeonsZarael.THEMES.has(t):
 		return DataDungeonsZarael.THEMES[t]
+	if DataDungeonsAbyss.themes().has(t):
+		return DataDungeonsAbyss.themes()[t]
 	return DataDungeonsX.THEMES.get(t, THEMES[&"drowned"])
 
 ## World flag set when floor `n`'s seal breaks (its descent portal opens for good).
@@ -877,9 +887,15 @@ static func _hint(id: StringName, n: int) -> String:
 		return "The lord of %s waits below. Defeat it to wake the portal home and claim its Relic Cache. A raided dungeon recovers in 30 minutes to 2 hours; its lord does not." % d.name
 	if n == champion_floor(id):
 		return "%s guards the portal to the last floor. Beat the champion to break the seal." % d.miniboss.name
+	if is_abyss(id) and n == DataDungeonsAbyss.GATEKEEPER_FLOOR:
+		return "%s holds this hall. Its fall breaks the seal on the way down." % String(DataEnemiesAbyss.NAMES.get(StringName(d.get("gatekeeper", &"")), "The gatekeeper"))
+	if is_abyss(id) and n in DataDungeonsAbyss.WARDEN_FLOORS:
+		return "%s walks this floor. Look for cracked walls: the Abyss hides its best treasure behind them." % String(DataDungeonsAbyss.warden_of(d, n).get("name", "A warden"))
 	if n == 1:
 		if is_zarael(id):
 			return "%s One of the three Vaults of Zarael: its lord holds a ward on the Bridge of Death. The way down is sealed by Seal Keepers on every floor." % d.blurb
+		if is_abyss(id):
+			return "%s An Abyss dungeon: the darkest place on Salmonan. Its monsters hit eight times as hard as anything above level 90, and cracked walls hide secret rooms. Break them." % d.blurb
 		if is_special(id):
 			return "%s An Ascendant dungeon: its monsters are far stronger than anywhere on Salmonan, and only Class A heroes may pass its gate." % d.blurb
 		return "%s The way down is sealed: defeat the Seal Keepers of each floor to open its descent portal." % d.blurb
@@ -907,6 +923,22 @@ static func minibosses() -> Array:
 		u["dungeon"] = id
 		u["raid_only"] = id
 		out.append(u)
+		# bh-042: the Abyss wardens of floors 5, 10, 15 and 20
+		if bool(d.get("abyss", false)):
+			for n in DataDungeonsAbyss.WARDEN_FLOORS:
+				if n > floor_count(id):
+					continue
+				var wf: Dictionary = d.floors[n - 1]
+				if not wf.has("warden"):
+					continue
+				var w: Dictionary = DataDungeonsAbyss.warden_of(d, n).duplicate()
+				if w.is_empty():
+					continue
+				w["map"] = map_id(id, n)
+				w["pos"] = cell_xz(wf.plan, wf.warden)
+				w["y"] = float(int(String(wf.plan[wf.warden.y])[wf.warden.x])) * 4.0
+				w["dungeon"] = id
+				out.append(w)
 	return out
 
 ## Map-local XZ of a plan cell's centre (the plan is centred on the origin).

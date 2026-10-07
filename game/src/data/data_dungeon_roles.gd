@@ -202,6 +202,17 @@ const T := {
 	&"vein": {"arrival": ["c_glass", "vein_maintenance"], "work": ["vein_maintenance", "tool_store"], "function": ["c_glass", "rubble_fall", "bone_midden"],
 		"traversal": ["vein_maintenance"], "seal": ["vein_maintenance"], "boss": ["zr_glass_growth", 0.7], "edge": ["kd_debris_wood", "kd_debris_stone"],
 		"decay": ["rubble_fall"]},
+	# bh-042: the five Abyss themes (DataDungeonsAbyss)
+	&"hollow": {"arrival": ["knight_niche", "candle_niche"], "work": ["urn_niche", "bone_midden"], "function": ["coffin_bay", "sarcophagus_bay", "memorial", "altar"],
+		"traversal": ["urn_niche"], "seal": ["memorial"], "boss": ["obelisk_corrupted", 1.0], "edge": ["kd_candles", "kd_urn_round"], "decay": ["rubble_fall"]},
+	&"sunless": {"arrival": ["wreck_rib", "candle_niche"], "work": ["storage_wet", "cargo_spill"], "function": ["coffin_old", "sea_growth", "memorial"],
+		"traversal": ["cargo_spill"], "seal": ["coffin_old"], "boss": ["statue_collapsed", 1.0], "edge": ["kd_debris_stone", "kd_lantern_candle"], "decay": ["rubble_fall"]},
+	&"ashgrave": {"arrival": ["forge_station", "chain_service"], "work": ["tool_store", "fuel_store", "ore_haul"], "function": ["forge_station", "c_furnace", "c_crucible"],
+		"traversal": ["ore_haul"], "seal": ["tool_store"], "boss": ["basalt_column", 0.7], "edge": ["kd_debris_stone"], "decay": ["rubble_fall"]},
+	&"weeping": {"arrival": ["knight_niche", "frost_burial"], "work": ["urn_niche", "storage"], "function": ["frost_burial", "sarcophagus_bay", "knight_niche"],
+		"traversal": ["urn_niche"], "seal": ["candle_niche"], "boss": ["ice_crystal_large", 1.0], "edge": ["kd_candles", "kd_urn_round"], "decay": ["rubble_fall"]},
+	&"throne": {"arrival": ["obelisk_pair", "knight_niche"], "work": ["bone_midden", "rubble_fall"], "function": ["altar", "c_obelisk", "memorial", "plinth"],
+		"traversal": ["rubble_fall"], "seal": ["altar"], "boss": ["obelisk_corrupted", 1.2], "edge": ["kd_candles", "kd_chalice"], "decay": ["rubble_fall"]},
 }
 
 ## Dungeons that share a theme but must not be copies of each other.

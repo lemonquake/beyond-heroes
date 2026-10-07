@@ -1,0 +1,36 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/3d-horror-game-monster/Poses/Idle.fbx",
+ "map": {
+  "joint1": "hips",
+  "joint2": "spine",
+  "joint3": "chest",
+  "joint4": "neck",
+  "joint15": "head",
+  "Clav_L": "shoulder.L",
+  "joint14": "upper_arm.L",
+  "joint11": "forearm.L",
+  "joint12": "hand.L",
+  "Clav_R": "shoulder.R",
+  "joint14.001": "upper_arm.R",
+  "joint11.001": "forearm.R",
+  "joint12.001": "hand.R",
+  "joint5": "thigh.L",
+  "joint6": "shin.L",
+  "joint7": "foot.L",
+  "joint8": "toe.L",
+  "joint64": "thigh.R",
+  "joint6.001": "shin.R",
+  "joint7.001": "foot.R",
+  "joint8.001": "toe.R"
+ },
+ "objects": [
+  "Creature1"
+ ],
+ "material": {
+  "albedo": "A:/Python/beyond-heroes/assets_src/bh042/oga/3d-horror-game-monster/Colors/Black/test_StingrayPBS1SG_AlbedoTransparency.png",
+  "normal": "A:/Python/beyond-heroes/assets_src/bh042/oga/3d-horror-game-monster/Colors/Black/test_StingrayPBS1SG_Normal.png",
+  "rough": 0.45
+ },
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/flayed_archivist.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/flayed_archivist.blend"
+}

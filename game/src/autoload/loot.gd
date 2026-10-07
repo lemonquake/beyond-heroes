@@ -158,6 +158,13 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 		n = rng.randi_range(2, 3)
 	elif rng.randf() < e.def.drop_chance * 0.6:
 		n = 1
+	# bh-042: the Abyss always pays well: every monster a fair chance of a piece, elites three, and nothing below
+	# Legendary (Aether from elites and champions)
+	var abyss := DataDungeons.is_abyss(DataDungeons.parse(Game.current_map_id)[0])
+	if abyss and not e.is_boss and not e.is_miniboss() and not e.is_elite and rng.randf() < ABYSS_NORMAL_DROP:
+		n = maxi(n, 1)
+	if abyss and e.is_elite:
+		n = maxi(n, 3)
 	var cls: StringName = player.hero.cls.id
 	var fit_id := ClassTranscendence.current_class_id(player.hero)   # class-fit weighting knows Royal Guard from Knight
 	var guaranteed := e.is_boss or e.is_miniboss()
@@ -171,6 +178,8 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 			rarity = maxi(rarity, BH.Rarity.ELITE)
 		elif i == 0 and e.is_elite:
 			rarity = maxi(rarity, BH.Rarity.ADVANCED)
+		if abyss:
+			rarity = maxi(rarity, BH.Rarity.AETHER if (e.is_boss or e.is_miniboss() or e.is_elite) else BH.Rarity.LEGENDARY)
 		var cats := [&"weapon"] if guaranteed and i == 0 else ([&"accessory"] if accessory_slot(e, i) else [])
 		var base := ItemGenerator.random_base(rng, ilvl, cats, fit_id, fit, used_bases)
 		if base == null and not cats.is_empty():
@@ -195,6 +204,13 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 	var asc := DataAscendant.roll_drop(e.level, dungeon_boss, cls, mf, rng, forced)
 	if asc:
 		drops.append(asc)
+	# bh-042: an Abyss boss always leaves an Ascendant piece of the highest tiers (the lord: Eternal or Primordial, a
+	# gatekeeper: Divine or Eternal), a champion or warden a Cosmic or Divine one
+	if abyss and (e.is_boss or e.is_miniboss()):
+		var tier_r := abyss_tier(e, rng)
+		var extra := DataAscendant.roll_drop(e.level, true, cls, mf, rng, tier_r)
+		if extra:
+			drops.append(extra)
 	if e.has_meta(&"depth_guardian"):
 		uniq_p = 0.35 if e.level < 50 else 0.65
 	if rng.randf() < uniq_p * (1.0 + mf):
@@ -202,6 +218,18 @@ func equipment_for(e: Enemy, player: Player) -> Array:
 		if ub:
 			drops.append(ItemGenerator.generate(ub, ilvl, BH.Rarity.AETHER, _item_rng()))
 	return drops
+
+## bh-042: the chance an ordinary Abyss monster leaves a piece of equipment (always Legendary or better).
+const ABYSS_NORMAL_DROP := 0.32
+
+## The Ascendant tier an Abyss boss or champion is sure to leave.
+func abyss_tier(e: Enemy, r: RandomNumberGenerator) -> int:
+	var dg: StringName = DataDungeons.parse(Game.current_map_id)[0]
+	if e.is_boss and e.def.id == DataDungeons.get_def(dg).get("boss", &""):
+		return BH.Rarity.PRIMORDIAL if r.randf() < 0.45 else BH.Rarity.ETERNAL
+	if e.is_boss:
+		return BH.Rarity.ETERNAL if r.randf() < 0.45 else BH.Rarity.DIVINE
+	return BH.Rarity.DIVINE if r.randf() < 0.35 else BH.Rarity.COSMIC
 
 ## bh-027: accessories drop alongside weapons. Champions and bosses always add a ring, amulet or charm (their second
 ## piece), elites often, and an ordinary monster's single drop is sometimes one. (Monster drops are 100% class gear, and

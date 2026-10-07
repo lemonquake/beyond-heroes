@@ -84,8 +84,12 @@ static func interiors() -> Array:
 		[&"int_widow", "The Hald House", "Home of Ilvena Hald", &"dirt", "The first raid took the forest garrison. Malasugue has not forgotten them."],
 		[&"int_keeper", "The Keeper's House", "Home of Keeper Thadric Moll", &"dirt", "Gigas, Tyrants and Oros: the keeper writes down what nobody alive has seen."],
 		[&"int_refugee", "The Refugee's House", "Home of Zerin Ven", &"dirt", "News from Emberhal travels with those who flee it."],
+		[&"int_delvers", "The Delvers' Undercroft", "Five gates to the Abyss", &"stone", "Five gates to the Abyss, for heroes of level 140 and above. Below, every monster hits eight times as hard; cracked walls hide the best treasure."],
 	]:
 		out.append(_interior(d[0], d[1], d[2], d[3], d[4]))
+	# bh-042: the Undercroft sounds like what lies under it
+	out.back().music = &"dungeon_theme"
+	out.back().ambience = &"amb_catacombs"
 	return out
 
 static func _interior(id: StringName, name: String, sub: String, floor_sound: StringName, hint: String) -> MapDef:

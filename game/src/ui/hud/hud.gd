@@ -1025,7 +1025,7 @@ func _xp_tip() -> Control:
 	var descent := ""
 	if Descent.active(prog.level):
 		descent = "\nThe Descent: x%.1f experience to level, monsters give %d%%; a fall costs %d%% of this level." % [
-			Descent.xp_requirement_mult(prog.level), roundi(100.0 * Descent.kill_xp_mult(prog.level)), roundi(100.0 * Descent.death_xp_share(prog.level))]
+			Descent.xp_requirement_mult(prog.level), roundi(100.0 * Abyss.kill_xp_mult(prog.level)), roundi(100.0 * Descent.death_xp_share(prog.level))]
 	return Tips.text("%d / %d experience to level %d (%d%%).\nTotal experience: %d%s" % [prog.xp, need, prog.level + 1,
 		roundi(100.0 * float(prog.xp) / float(maxi(1, need))), prog.total_xp, descent], "Experience")
 

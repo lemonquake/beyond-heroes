@@ -264,8 +264,10 @@ static func summary(level: int) -> String:
 		lines.append("Life leech restores at most %d%% of your Maximum HP per second." % roundi(100.0 * leech_cap(level)))
 	if extra_affixes(level) > 0:
 		lines.append("Elites carry %d more affix%s." % [extra_affixes(level), "" if extra_affixes(level) == 1 else "es"])
+	if Abyss.active(level):
+		lines.append(Abyss.summary(level))
 	lines.append("Experience to the next level %s; monsters give %d%% experience." % [_x(xp_requirement_mult(level)),
-		roundi(100.0 * kill_xp_mult(level))])
+		roundi(100.0 * Abyss.kill_xp_mult(level))])
 	lines.append("A fall costs %d%% of this level's experience (never a level). A friend's revive costs nothing." % roundi(100.0 * death_xp_share(level)))
 	return "\n".join(lines)
 

@@ -26,7 +26,8 @@ static func build() -> Array:
 		for k in d:
 			e.set(k, d[k])
 	# bh-028: the special dungeons' lords are re-cast copies of existing bosses (looks and traits included)
-	return out + DataEnemiesSpecial.defs(out)
+	# bh-042: the ten bosses of the Abyss
+	return out + DataEnemiesSpecial.defs(out) + DataEnemiesAbyss.defs()
 
 ## Presentation and signature traits per enemy (docs/LORE.md §7; Enemy implements the traits).
 const LOOK := {

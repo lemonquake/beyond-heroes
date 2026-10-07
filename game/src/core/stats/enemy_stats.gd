@@ -30,9 +30,10 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	var hp_mult := float(difficulty.get("hp", 1.0)) * (2.6 if elite else 1.0)
 	var dmg_mult := float(difficulty.get("damage", 1.0)) * (1.3 if elite else 1.0)
 	# bh-040: past level 80 the Descent makes monsters tougher than the hero grows (Descent.health_mult)
-	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level) * CombatGrowth.enemy_health_bonus(level) * Descent.health_mult(level), 1.0)
+	_set_stat(d, agg, &"max_hp", def.hp * scale * hp_mult * CombatGrowth.health_factor(level) * CombatGrowth.enemy_health_bonus(level) * Descent.health_mult(level) * Abyss.health_mult(level), 1.0)
 	_set_stat(d, agg, &"max_mana", 30.0 + level * 3.0, 0.0)
-	_set_stat(d, agg, &"defense", def.defense * (1.0 + LEVEL_DEFENSE * float(level - 1)), 0.0)
+	# bh-042: the Abyss adds +50% Defense from level 90 (Abyss.defense_mult)
+	_set_stat(d, agg, &"defense", def.defense * (1.0 + LEVEL_DEFENSE * float(level - 1)) * Abyss.defense_mult(level), 0.0)
 	_set_stat(d, agg, &"evasion", def.evasion + LEVEL_EVASION * float(level - 1), 0.0)
 	_set_stat(d, agg, &"accuracy", def.accuracy + LEVEL_ACCURACY * float(level - 1), 1.0)
 	_set_stat(d, agg, &"crit_chance", def.crit_chance, 0.0, StatCalculator.CRIT_CAP)
@@ -50,8 +51,9 @@ static func build(def: EnemyDef, level: int, difficulty: Dictionary, modifiers: 
 	_set_stat(d, agg, &"block_strength", 0.7 if def.blocks_front else 0.4, 0.0, 1.0)
 	if boss:
 		d.set_stat(&"boss_damage_taken", CombatGrowth.BOSS_DAMAGE_TAKEN)
-		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level)))
-	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling) * Descent.damage_mult(level))
+		d.set_stat(&"boss_hit_limit", minf(d.get_stat(&"max_hp") * CombatGrowth.BOSS_HIT_SHARE, CombatGrowth.boss_hit_ceiling(level) * Abyss.health_mult(level)))
+	# bh-042: and 8 times the damage from level 90 (Abyss.damage_mult)
+	d.set_stat(&"damage_mult", dmg_mult * CombatGrowth.enemy_damage_scale(level, def.level_scaling) * Descent.damage_mult(level) * Abyss.damage_mult(level))
 	d.set_stat(&"threat_rank", float(rank))
 	# bh-040: an elite or champion of the Descent cannot be felled by one blow, deep down not even a plain monster
 	# (DamagePipeline reads hit_limit)
@@ -126,4 +128,7 @@ static func boss_health(hero: HeroData, baseline: DerivedStats) -> float:
 	dps *= CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp
 	burst *= CombatGrowth.BOSS_DAMAGE_TAKEN
 	var reference_dps := CombatGrowth.BOSS_DAMAGE_TAKEN * difficulty_hp * (9.0 + 1.9 * baseline.level) * CombatGrowth.weapon_factor(baseline.level) * (1.0 + CombatGrowth.damage_increase(baseline.level * 0.04)) * 1.5
-	return maxf(reference_dps * 20.0, maxf(burst * 4.0, clampf(baseline.get_stat(&"max_hp"), dps * 25.0 * span, dps * 45.0 * span)))
+	# bh-042: the adaptive span is measured in the hero's damage; the Abyss's health growth comes on top of it (a level-200
+	# Abyss lord lands near 300 million)
+	var abyss := Abyss.health_mult(baseline.level)
+	return abyss * maxf(reference_dps * 20.0, maxf(burst * 4.0, clampf(baseline.get_stat(&"max_hp") / abyss, dps * 25.0 * span, dps * 45.0 * span)))

@@ -4,6 +4,7 @@ class_name XpCurve
 ## Monster XP grows ~ L^1.35 so kills-per-level rises gently (about 16 at L1, ~40 at L20, ~60 at L50 for fodder).
 ## bh-040: past level 80 the Descent multiplies the requirement (Descent.xp_requirement_mult) and, past 90, divides what
 ## monsters give (Descent.kill_xp_mult): kills per level climb from 42 at L80 to 474 at L141 instead of 51.
+## bh-042: past level 90 the Abyss's steeper fall-off replaces the Descent's (Abyss.kill_xp_mult).
 
 const A := 80.0
 const P := 1.75
@@ -29,7 +30,7 @@ static func monster_xp(monster_level: int, rank_mult := 1.0) -> int:
 ## own multiplier x rank), the level difference, the hero's Experience Gain and the Descent's fall-off past level 90.
 static func kill_xp(monster_level: int, rank_mult: float, hero_level: int, gain := 0.0) -> int:
 	var base := float(monster_xp(monster_level, rank_mult))
-	return maxi(1, int(round(base * level_diff_mult(hero_level, monster_level) * (1.0 + gain) * Descent.kill_xp_mult(hero_level))))
+	return maxi(1, int(round(base * level_diff_mult(hero_level, monster_level) * (1.0 + gain) * Abyss.kill_xp_mult(hero_level))))
 
 ## Level-difference scaling applied to kill XP: full within 3 levels, falling off beyond.
 static func level_diff_mult(player_level: int, monster_level: int) -> float:

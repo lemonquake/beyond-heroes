@@ -1,0 +1,27 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/darsh-undead-creature/Darsh.glb",
+ "map": {
+  "Bone": "hips",
+  "Bone.001": "spine",
+  "Bone.002": "chest",
+  "Bone.003": "head",
+  "Bone.004": "shoulder.L",
+  "Bone.005": "upper_arm.L",
+  "Bone.006": "forearm.L",
+  "Bone.007": "hand.L",
+  "Bone.008": "shoulder.R",
+  "Bone.009": "upper_arm.R",
+  "Bone.010": "forearm.R",
+  "Bone.011": "hand.R",
+  "Bone.013": "thigh.R",
+  "Bone.014": "shin.R",
+  "Bone.016": "thigh.L",
+  "Bone.017": "shin.L"
+ },
+ "objects": [
+  "Undead"
+ ],
+ "yaw": 180.0,
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/morvhaal.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/morvhaal.blend"
+}

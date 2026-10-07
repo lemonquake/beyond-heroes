@@ -60,7 +60,7 @@ func is_disabled() -> bool:
 	return has(&"frozen") or has(&"stunned") or has(&"staggered") or has(&"petrified")
 
 func is_silenced() -> bool:
-	return has(&"silenced") or is_disabled()
+	return has(&"silenced") or has(&"stilled") or is_disabled()
 
 func is_immune(id: StringName) -> bool:
 	return immunities.has(id)

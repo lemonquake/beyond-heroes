@@ -244,7 +244,10 @@ static func npc(id: StringName) -> Dictionary:
 # ---------------------------------------------------------------------------------------------------- monsters
 const NOT_PEOPLE := ["aether_sentinel", "rune_golem", "magma_golem", "obsidian_golem", "clockwork_sentry", "astrarch", "nocthea",
 	"sporeling", "rootweaver", "mycelid_hulk", "rot_mother", "briar_lasher", "thornmother", "broodhost", "oblivore", "barnacle_hulk",
-	"mossback_idol", "arc_sentinel", "span_warden", "deathspan_colossus", "engine_heart", "gigas_spawn", "vein_mother", "jade_guardian"]
+	"mossback_idol", "arc_sentinel", "span_warden", "deathspan_colossus", "engine_heart", "gigas_spawn", "vein_mother", "jade_guardian",
+	# bh-042: the Abyss bosses wear the downloaded creatures they were made from (the user's call); only the Fallen
+	# Necro-Knight is drawn on the hero body
+	"morvhaal", "flayed_archivist", "ysolde", "thalassor", "kharzul", "gorehelm", "rimehorn"]
 ## Families from Zarael: every glow there is pure white (bh-029).
 const ZARAEL := ["wiresick", "wirewright", "kharvenn", "jade", "gigas"]
 ## Height of each humanoid monster's own model (m, before its def.model_scale): the hero body is sized to match.
@@ -258,7 +261,8 @@ const OLD_HEIGHT := {"hollow_soldier": 1.84, "bonewarden": 1.97, "grave_archer":
 	"warband_chieftain": 3.46, "soulbound_twin": 1.95, "goblin_sapper": 1.26, "treasure_gremlin": 1.04, "kethrax": 2.0,
 	"glyphbound_warrior": 2.24, "coil_shaman": 2.11, "wiresick_husk": 1.77, "chain_priest": 2.17, "chain_bearer": 2.82,
 	"wire_leaper": 2.06, "leash_knight": 2.14, "leash_abbot": 3.63, "jade_sleeper": 1.83, "serpent_oracle": 2.2, "jade_king": 4.54,
-	"stoker_thrall": 2.23, "shardcaster": 2.17, "vein_knight": 2.1}
+	"stoker_thrall": 2.23, "shardcaster": 2.17, "vein_knight": 2.1,
+	"fallen_necro_knight": 2.1}
 
 ## Each monster's own touches over its family's (look overrides, clothes, colours, what it holds).
 const ENEMIES := {
@@ -360,6 +364,11 @@ const ENEMIES := {
 	"kethrax": {"set": "obsidian_oath", "look": {"eye": "glowing", "eye_color": "ff3020", "eye_glow": 1.0, "skin": "3a3438"}},
 	"voltaric": {"set": "thunder_abbot"},
 	"zephyrion": {"set": "gale_nomad", "main": "storm_staff"},
+	# bh-042: the Fallen Necro-Knight — a hero gone down into the Abyss: the black Obsidian Oath regalia, an Eschaton blade and shield, ash-grey
+	# skin, eyes burning teal; the pulsing teal aura is NecroKnight's
+	"fallen_necro_knight": {"set": "obsidian_oath", "look": {"hair": "shaved", "skin": "8d9698", "eye": "glowing", "eye_color": "39f2e0",
+		"eye_glow": 1.0, "marking": "scar", "marking_color": "2a3a3c", "jaw_wide": 0.6, "brow_heavy": 0.7, "muscle": 0.9, "height": 1.05},
+		"main": "esc_w_knight_sword_3", "off": "esc_endbringer_sovereign_shield", "stance": "idle_shield"},
 }
 
 ## What a monster holds when it has no weapon of its own: by the clip family of its attacks (first match wins).

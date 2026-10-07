@@ -60,6 +60,12 @@ const THEME := {
 	&"aether": [[&"arcane_dust", 0.14, 1, 2], [&"wisp_mote", 0.06, 1, 1]],
 	&"eclipse": [[&"shadow_silk", 0.06, 1, 1], [&"wisp_mote", 0.05, 1, 1]],
 	&"solar": [[&"ember_core", 0.05, 1, 1], [&"emberroot", 0.08, 1, 1]],
+	# bh-042: the Abyss themes
+	&"hollow": [[&"grave_dust", 0.14, 1, 2], [&"bone_fragment", 0.12, 1, 2], [&"shadow_silk", 0.06, 1, 1]],
+	&"sunless": [[&"mirebloom", 0.10, 1, 2], [&"tide_pearl", 0.06, 1, 1], [&"shadow_silk", 0.05, 1, 1]],
+	&"ashgrave": [[&"iron_shard", 0.18, 1, 2], [&"ember_core", 0.07, 1, 1], [&"slag_ember", 0.06, 1, 1]],
+	&"weeping": [[&"frost_crystal", 0.08, 1, 1], [&"rime_shard", 0.08, 1, 1], [&"grave_dust", 0.08, 1, 2]],
+	&"throne": [[&"shadow_silk", 0.07, 1, 1], [&"aether_shard", 0.05, 1, 1], [&"wisp_mote", 0.06, 1, 1]],
 	&"jade": [[&"arcane_dust", 0.10, 1, 1], [&"iron_shard", 0.10, 1, 1]],
 	&"obsidian": [[&"iron_shard", 0.18, 1, 2], [&"ember_core", 0.04, 1, 1]],
 	&"vein": [[&"shadow_silk", 0.05, 1, 1], [&"iron_shard", 0.10, 1, 1]],

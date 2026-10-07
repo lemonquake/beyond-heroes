@@ -32,6 +32,7 @@ func compose() -> void:
 		&"int_widow": _widow()
 		&"int_keeper": _keeper()
 		&"int_refugee": _refugee()
+		&"int_delvers": _delvers()
 		_:
 			push_error("interior.gd has no room for %s" % def.id)
 			_room(8.0, 8.0, PLASTER, 0, {})
@@ -115,6 +116,34 @@ func lamp(n: Node3D, c := WARM, energy := 1.8, range_m := 7.0) -> void:
 ## A guild banner hung flat on the north wall (origin at the rod, the cloth hangs ~2.5 m down).
 func banner(piece: String, x: float) -> void:
 	kit(piece, Vector3(x, 3.3, z0 + HALF_WALL + 0.1), 0.0, 1.0, deco)
+
+# ------------------------------------------------------------------------------------------------------------
+# bh-042: the Delvers' Undercroft — the vault under the Sanctuary Terrace where the five Abyss gates stand. Dim on
+# purpose: two braziers by the way in, each gate's own torches and rune glow, a chandelier over the middle, candles.
+
+func _delvers() -> void:
+	_room(32.0, 24.0, STONE, 3, {}, true, Color(0.3, 0.28, 0.36), 0.22)
+	for id in DataDungeonsAbyss.ORDER:
+		var g: Array = DataDungeonsAbyss.GATES[id]
+		dungeon_gate(id, g[0], float(g[1]))
+	# the middle: a worn mosaic, a chandelier over it, pillars at the corners of the hall
+	kit("rug", Vector3(0, 0.004, 0.5), 0.0, 2.4, deco)
+	if ResourceLoader.exists(ENV_DIR % "ph_chandelier_02"):
+		kit("ph_chandelier_02", Vector3(0, 3.1, 0.5), 0.0, AbyssDress.sc("ph_chandelier_02"), deco)
+	light(Vector3(0, 3.0, 0.5), WARM, 1.4, 10.0, false, true)
+	for c in [Vector2(-6.5, -5.5), Vector2(6.5, -5.5), Vector2(-6.5, 5.5), Vector2(6.5, 5.5)]:
+		arch("pillar_quoin", Vector3(c.x, 0, c.y))
+	for x in [-2.6, 2.6]:
+		brazier(Vector3(exit_x + x, 0, z1 - 2.4), 2.4, false)
+	# the delvers' ledger by the door: who went down, and who came back
+	item("lectern", Vector3(exit_x + 4.2, 0, z1 - 3.2), 200.0)
+	candles(Vector3(exit_x + 4.0, 1.05, z1 - 3.0), 0.7)
+	for p in [Vector3(-14.4, 0, 10.0), Vector3(14.4, 0, 10.0)]:
+		kit("ph_gothic_statue" if ResourceLoader.exists(ENV_DIR % "ph_gothic_statue") else "statue_knight", p, 180.0, 1.25)
+	for x in [-6.0, 6.0]:
+		kit("banner_torn", Vector3(x, 3.75, z0 + HALF_WALL + 0.1), 0.0, 1.0, deco)
+	decor("cobweb", Vector3(x0 + 0.45, 3.4, z0 + 0.45), -90.0, 0.9, false)
+	decor("cobweb", Vector3(x1 - 0.45, 3.4, z0 + 0.45), 180.0, 0.9, false)
 
 # ------------------------------------------------------------------------------------------------------------
 # The Salted Marlin — Hesta behind the bar, Fennick by the fire, Old Marrow at a table, Venna Kail by the hearth

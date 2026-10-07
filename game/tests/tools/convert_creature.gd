@@ -46,12 +46,18 @@ func convert_model(spec: Dictionary) -> String:
 		return "listed"
 	var lib := AnimationLibrary.new()
 	var report := {}
+	# bh-042: a model already carrying the game's clip names (rigged on the hero skeleton) keeps all of them
+	if spec.get("all_clips", false):
+		var ident := {}
+		for n in src_lib.get_animation_list():
+			ident[String(n)] = String(n)
+		spec["clips"] = ident
 	for game in spec.clips:
 		var source := String(spec.clips[game])
 		if not src_lib.has_animation(source):
 			return "missing clip %s" % source
 		var a := src_lib.get_animation(source).duplicate(true) as Animation
-		a.loop_mode = Animation.LOOP_LINEAR if game in ["idle", "idle_look", "walk", "run", "run_combat"] else Animation.LOOP_NONE
+		a.loop_mode = Animation.LOOP_LINEAR if game in ["idle", "idle_look", "walk", "run", "run_combat"] or game in spec.get("loops", []) else Animation.LOOP_NONE
 		lib.add_animation(StringName(game), a)
 		report[game] = [source, snappedf(a.length, 0.01)]
 	# poses the source lacks: a copy of a source clip with a whole-body tilt keyed on the model root (hit recoil, lunge)
@@ -74,6 +80,13 @@ func convert_model(spec: Dictionary) -> String:
 		report[game] = ["synth:" + base_clip, ln]
 	ap.remove_animation_library(&"")
 	ap.add_animation_library(&"", lib)
+	# bh-042: helper meshes the source ships (Quaternius' hidden Icosphere) are dropped
+	for m in model.find_children("*", "MeshInstance3D", true, false):
+		for d in spec.get("drop", []):
+			if String(m.name).begins_with(String(d)):
+				m.get_parent().remove_child(m)
+				m.free()
+				break
 	# ---- scale: idle pose height ----------------------------------------------------------------------------------
 	ap.play(&"idle")
 	ap.seek(0.0, true)
@@ -110,14 +123,49 @@ func convert_model(spec: Dictionary) -> String:
 									break
 							var o := Color.from_hsv(hue, hsv_s, hsv_v, c.a)
 							img.set_pixel(x, y, Color(o.r * tint.r, o.g * tint.g, o.b * tint.b, o.a))
+					_fit(img, int(spec.get("max_tex", 1024)))
 					img.generate_mipmaps()
 					nm.albedo_texture = ImageTexture.create_from_image(img)
 				else:
 					nm.albedo_color = nm.albedo_color * tint
+				# bh-042: downloaded normal maps arrive at 2-4k; the game draws these at a few hundred pixels
+				for slot in ["normal_texture", "roughness_texture", "metallic_texture", "ao_texture", "emission_texture"]:
+					var t: Texture2D = nm.get(slot)
+					if t:
+						var ti := t.get_image()
+						if ti:
+							if ti.is_compressed():
+								ti.decompress()
+							_fit(ti, int(spec.get("max_tex", 1024)))
+							ti.generate_mipmaps()
+							nm.set(slot, ImageTexture.create_from_image(ti))
 				nm.roughness = float(spec.get("rough", 0.85))
 				nm.metallic = 0.0
 				done[mat] = nm
-			mi.set_surface_override_material(si, done[mat])
+			var use: StandardMaterial3D = done[mat]
+			# bh-042: glowing parts (eyes, runes) by mesh name: {"match": "Eyes", "color": [r, g, b], "energy": 4}; a
+			# glowing part gets its own material (the source often shares one atlas material across every part)
+			for g in spec.get("glow", []):
+				if String(mi.name).contains(String(g.match)) or String(mat.resource_name).contains(String(g.match)):
+					use = use.duplicate() as StandardMaterial3D
+					use.emission_enabled = true
+					use.emission = Color(g.color[0], g.color[1], g.color[2])
+					use.emission_energy_multiplier = float(g.get("energy", 3.0))
+					use.albedo_color = Color(g.color[0], g.color[1], g.color[2])
+					use.albedo_texture = null
+					break
+			# bh-042: a shader skin over the whole model (the lava golem's basalt and molten seams) except glowing parts
+			if spec.has("shader") and not use.emission_enabled:
+				var sm := ShaderMaterial.new()
+				sm.shader = load(String(spec.shader))
+				for k in spec.get("params", {}):
+					var v: Variant = spec.params[k]
+					sm.set_shader_parameter(k, Color(v[0], v[1], v[2]) if v is Array and v.size() == 3 else v)
+				if use.albedo_texture and sm.shader.get_shader_uniform_list().any(func(u): return u.name == "albedo_tex"):
+					sm.set_shader_parameter("albedo_tex", use.albedo_texture)
+				mi.set_surface_override_material(si, sm)
+				continue
+			mi.set_surface_override_material(si, use)
 	# ---- save ---------------------------------------------------------------------------------------------------------
 	_own(root, root)
 	var ps := PackedScene.new()
@@ -126,6 +174,12 @@ func convert_model(spec: Dictionary) -> String:
 	var e := ResourceSaver.save(ps, String(spec.out))
 	print("CLIPS ", JSON.stringify(report), " height_src ", snappedf(h, 0.01), " scale ", snappedf(s, 0.0001))
 	return "" if e == OK else "save failed %d" % e
+
+static func _fit(img: Image, most: int) -> void:
+	var big := maxi(img.get_width(), img.get_height())
+	if big > most:
+		var f := float(most) / float(big)
+		img.resize(maxi(1, int(img.get_width() * f)), maxi(1, int(img.get_height() * f)), Image.INTERPOLATE_LANCZOS)
 
 static func _own(n: Node, owner: Node) -> void:
 	for c in n.get_children():

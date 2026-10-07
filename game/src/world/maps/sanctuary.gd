@@ -56,6 +56,7 @@ func compose() -> void:
 	_houses()
 	_merchant_row()
 	_halls()
+	_delvers_entrance()
 	_greenery()
 	_background()
 	_bh033_dressing()
@@ -219,6 +220,34 @@ func _terrace() -> void:
 	kit("candles_cluster", Vector3(-8.6, y, -28.6), 0.0, 1.0, deco)
 	kit("altar", Vector3(3.8, y, -28.6), 0.0)                  # bh-028: moved west for the rift
 	decor("cobweb", Vector3(r.position.x + 0.45, y + 3.9, r.position.y + 0.45), -90.0, 0.9, false)
+
+## bh-042: the way down to the Delvers' Undercroft (int_delvers) and its five Abyss gates: a crypt arch on the grass east
+## of the terrace stair, facing the plaza, flanked by statues and two braziers.
+const DELVERS_AT := Vector3(14.5, 0, -19.5)
+const DELVERS_YAW := -36.0
+
+func _delvers_entrance() -> void:
+	var p := DELVERS_AT
+	p.y = ground(p.x, p.z)
+	var fwd := Vector3(0, 0, 1).rotated(Vector3.UP, deg_to_rad(DELVERS_YAW))
+	var side := fwd.cross(Vector3.UP)
+	apron(Vector2(p.x, p.z), p.y, 3.0)
+	kit("arch_quoin", p, DELVERS_YAW, 1.0, props)
+	# the crypt door under the arch (Poly Haven CC0 "Large Castle Door")
+	if ResourceLoader.exists(ENV_DIR % "ph_large_castle_door"):
+		kit("ph_large_castle_door", p - fwd * 0.15, DELVERS_YAW, 1.2, props)
+	var portal := DoorPortal.new().setup(&"int_delvers", &"start", "the Delvers' Undercroft", true)
+	portal.position = p
+	portal.rotation.y = deg_to_rad(DELVERS_YAW)
+	markers.add_child(portal)
+	var sp := p + fwd * 2.2
+	spawn(&"door_int_delvers", Vector3(sp.x, 0, sp.z), DELVERS_YAW, true)
+	for sx in [-1.0, 1.0]:
+		kit("statue_knight", p + side * sx * 2.9 - fwd * 0.4, DELVERS_YAW, 0.9, props, true)
+		brazier(p + side * sx * 1.9 + fwd * 1.4, 2.6, false, true)
+	var sg := p + fwd * 2.8 - side * 3.4
+	signpost(Vector2(sg.x, sg.z), [["The Delvers' Undercroft
+The Abyss · Level 140+", Vector2(fwd.x, fwd.z)]])
 
 func _houses() -> void:
 	for lot in HOUSE_LOTS:

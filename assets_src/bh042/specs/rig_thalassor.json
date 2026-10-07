@@ -1,0 +1,41 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/forest-monster/forest-monster-final.blend",
+ "map": {
+  "Hips": "hips",
+  "Spine1": "spine",
+  "Spine2": "chest",
+  "Spine3": "chest",
+  "Neck": "neck",
+  "Head": "head",
+  "Shoulder_L": "shoulder.L",
+  "Arm_L": "upper_arm.L",
+  "Forearm_L": "forearm.L",
+  "Hand_L": "hand.L",
+  "Thigh_L": "thigh.L",
+  "Leg_L": "shin.L",
+  "Foot_L": "foot.L",
+  "IK-Foot_L": "foot.L",
+  "Shoulder_R": "shoulder.R",
+  "Arm_R": "upper_arm.R",
+  "Forearm_R": "forearm.R",
+  "Hand_R": "hand.R",
+  "Thigh_R": "thigh.R",
+  "Leg_R": "shin.R",
+  "Foot_R": "foot.R",
+  "IK-Foot_R": "foot.R"
+ },
+ "objects": [
+  "Monster"
+ ],
+ "keep": [
+  "Neck",
+  "Head"
+ ],
+ "material": {
+  "albedo": "A:/Python/beyond-heroes/assets_src/bh042/oga/forest-monster/texture/forest-monster-skin.png",
+  "normal": "A:/Python/beyond-heroes/assets_src/bh042/oga/forest-monster/texture/forest-monster-norm.png",
+  "rough": 0.75
+ },
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/thalassor.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/thalassor.blend"
+}

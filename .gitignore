@@ -65,3 +65,15 @@ desktop.ini
 *.swp
 *.swo
 *~
+
+# bh-042: downloaded originals (re-fetched by assets_src/bh042/*.py; provenance in assets_src/bh042/sources.json)
+assets_src/bh042/oga/
+assets_src/bh042/itch/
+assets_src/bh042/extracted/
+assets_src/bh042/polyhaven/
+assets_src/bh042/out/
+assets_src/bh042/*.zip
+assets_src/bh042/previews/*.png
+assets_src/bh042/previews/*_s.jpg
+assets_src/bh042/previews/outfit_urls.txt
+assets_src/bh042/shots/_pose_*.png

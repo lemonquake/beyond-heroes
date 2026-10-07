@@ -26,8 +26,9 @@ extends "res://src/actors/enemy/enemy_traits_ext.gd"
 ##   "beam"          Prism Sentinel: a sweeping light beam
 
 const X_TRAITS := [&"bound_summoner", &"void_rift", &"hive_nest", &"splitter", &"illusionist", &"mirror_image", &"burrower",
-	&"ward_link", &"mirror_stance", &"rally", &"twin", &"thorn_hide", &"parasite_host", &"loot_runner", &"phase_shift", &"curl"]
-const X_KINDS := ["bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
+	&"ward_link", &"mirror_stance", &"rally", &"twin", &"thorn_hide", &"parasite_host", &"loot_runner", &"phase_shift", &"curl",
+	&"player_like"]
+const X_KINDS := ["bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam", "barrage", "curse_zone", "armor_rip"]
 const X_ABILITIES := ["images", "link", "mirror", "rally"]
 
 ## bh-037: every kind this monster can bring into a fight (summons, bone circles, rifts and the shades they release,
@@ -121,6 +122,7 @@ var curled := false
 var _flipped_t := 0.0
 var _beam: Dictionary = {}
 var mines: Array = []
+var necro: NecroKnight                  # bh-042: the Fallen Necro-Knight's player-like brain (trait player_like)
 
 static func wants_x(d: EnemyDef) -> bool:
 	for t in d.traits:
@@ -138,6 +140,9 @@ static func wants_x(d: EnemyDef) -> bool:
 
 func setup() -> void:
 	super.setup()
+	if has(&"player_like"):
+		necro = NecroKnight.new(e)
+		necro.setup()
 	if has(&"thorn_hide"):
 		e.status.apply(&"aura_thorns", 0.0, THORNS)
 	if has(&"void_rift") or has(&"hive_nest"):
@@ -195,6 +200,8 @@ func tick(delta: float) -> void:
 	super.tick(delta)
 	if not e.alive:
 		return
+	if necro:
+		necro.tick(delta)
 	_swap_cd = maxf(0.0, _swap_cd - delta)
 	_gold_cd = maxf(0.0, _gold_cd - delta)
 	if has(&"burrower") and e.brain.is_engaged() and e.action == null and not _erupting:
@@ -236,6 +243,8 @@ func tick(delta: float) -> void:
 func think() -> bool:
 	if super.think():
 		return true
+	if necro and necro.think():
+		return true
 	if has(&"loot_runner"):
 		return _runner_think()
 	if not _tether.is_empty() or not _gaze.is_empty() or not _beam.is_empty():
@@ -267,6 +276,8 @@ func on_hit(result: DamageResult, req: DamageRequest, attacker: Node) -> void:
 
 func on_death(killer: Node) -> void:
 	super.on_death(killer)
+	if necro:
+		necro.on_death()
 	_end_link()
 	_end_tether()
 	_end_beam()
@@ -301,6 +312,8 @@ func stat_mods(mods: Array) -> void:
 
 ## Before the damage pipeline runs (Enemy._prepare_incoming): ethereal, curled, mirror guard.
 func prepare_incoming(req: DamageRequest, attacker: Node) -> void:
+	if necro:
+		necro.prepare_incoming(req, attacker)
 	if req.kind == DamageRequest.Kind.DOT:
 		return
 	if ethereal:
@@ -323,6 +336,11 @@ func prepare_incoming(req: DamageRequest, attacker: Node) -> void:
 
 # ---- Attacks the base AI does not know (Enemy._start_attack falls through to here) ----------------------------------
 
+## bh-042: any attack began (Enemy._start_attack): the Necro-Knight opens his combo window on the first cut.
+func attack_started(a: Dictionary) -> void:
+	if necro:
+		necro.on_attack(a)
+
 func start_special(a: Dictionary, act: TimedAction) -> void:
 	match String(a.kind):
 		"bone_circle":
@@ -339,6 +357,8 @@ func start_special(a: Dictionary, act: TimedAction) -> void:
 			act.on_release = func() -> void: start_gaze(a)
 		"beam":
 			act.on_release = func() -> void: start_beam(a)
+		"barrage", "curse_zone", "armor_rip":
+			AbyssMoves.start(e, a, act)
 
 func _has_kind(k: String) -> bool:
 	for a in e.def.attacks:

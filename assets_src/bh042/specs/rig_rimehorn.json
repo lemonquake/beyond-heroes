@@ -1,0 +1,32 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/giant-mutant/Giant Mutant.glb",
+ "map": {
+  "mixamorigHips": "hips",
+  "mixamorigSpine": "spine",
+  "mixamorigSpine1": "chest",
+  "mixamorigSpine2": "chest",
+  "mixamorigNeck": "neck",
+  "mixamorigHead": "head",
+  "mixamorigLeftShoulder": "shoulder.L",
+  "mixamorigLeftArm": "upper_arm.L",
+  "mixamorigLeftForeArm": "forearm.L",
+  "mixamorigLeftHand": "hand.L",
+  "mixamorigLeftUpLeg": "thigh.L",
+  "mixamorigLeftLeg": "shin.L",
+  "mixamorigLeftFoot": "foot.L",
+  "mixamorigLeftToeBase": "toe.L",
+  "mixamorigRightShoulder": "shoulder.R",
+  "mixamorigRightArm": "upper_arm.R",
+  "mixamorigRightForeArm": "forearm.R",
+  "mixamorigRightHand": "hand.R",
+  "mixamorigRightUpLeg": "thigh.R",
+  "mixamorigRightLeg": "shin.R",
+  "mixamorigRightFoot": "foot.R",
+  "mixamorigRightToeBase": "toe.R"
+ },
+ "objects": [
+  "Giant_Mesh"
+ ],
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/rimehorn.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/rimehorn.blend"
+}

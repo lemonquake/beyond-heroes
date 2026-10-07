@@ -1,0 +1,42 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/golem_clean.blend",
+ "map": {
+  "hips": "hips",
+  "spine": "spine",
+  "ribs": "chest",
+  "spine1": "chest",
+  "neck": "neck",
+  "head": "head",
+  "shoulder.L": "shoulder.L",
+  "upper_arm.L": "upper_arm.L",
+  "forearm.L": "forearm.L",
+  "hand.L": "hand.L",
+  "IKhand.L": "hand.L",
+  "elbow.L": "forearm.L",
+  "thigh.L": "thigh.L",
+  "shin.L": "shin.L",
+  "knee.L": "shin.L",
+  "heel.L": "foot.L",
+  "foot.L": "foot.L",
+  "IKheel.L": "foot.L",
+  "toe.L": "toe.L",
+  "shoulder.R": "shoulder.R",
+  "upper_arm.R": "upper_arm.R",
+  "forearm.R": "forearm.R",
+  "hand.R": "hand.R",
+  "IKhand.R": "hand.R",
+  "elbow.R": "forearm.R",
+  "thigh.R": "thigh.R",
+  "shin.R": "shin.R",
+  "knee.R": "shin.R",
+  "heel.R": "foot.R",
+  "foot.R": "foot.R",
+  "IKheel.R": "foot.R",
+  "toe.R": "toe.R"
+ },
+ "objects": [
+  "golem"
+ ],
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/kharzul.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/kharzul.blend"
+}

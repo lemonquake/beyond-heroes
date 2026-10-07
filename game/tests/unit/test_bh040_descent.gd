@@ -67,8 +67,9 @@ func test_monster_stats_follow_the_descent() -> void:
 		var def := DB.enemy(id)
 		for level in [81, 100, 141, 200, 300]:
 			var st := EnemyStats.build(def, level, diff, [])
-			near(st.get_stat(&"max_hp"), old_enemy_hp(def, level) * Descent.health_mult(level), 0.5, "%s L%d health" % [id, level])
-			near(st.get_stat(&"damage_mult"), CombatGrowth.enemy_damage_scale(level, def.level_scaling) * Descent.damage_mult(level), 0.0001,
+			# bh-042: the Abyss multiplies on top of the Descent from level 86 (Abyss)
+			near(st.get_stat(&"max_hp"), old_enemy_hp(def, level) * Descent.health_mult(level) * Abyss.health_mult(level), 0.5, "%s L%d health" % [id, level])
+			near(st.get_stat(&"damage_mult"), CombatGrowth.enemy_damage_scale(level, def.level_scaling) * Descent.damage_mult(level) * Abyss.damage_mult(level), 0.0001,
 				"%s L%d damage" % [id, level])
 	done()
 
@@ -163,7 +164,7 @@ func test_monsters_fight_harder_deep_down() -> void:
 	done()
 
 func test_experience_from_monsters_falls_off_past_90() -> void:
-	eq(XpCurve.kill_xp(100, 1.0, 100, 0.0), maxi(1, int(round(XpCurve.monster_xp(100) * Descent.kill_xp_mult(100)))), "kill experience carries the Descent")
+	eq(XpCurve.kill_xp(100, 1.0, 100, 0.0), maxi(1, int(round(XpCurve.monster_xp(100) * Abyss.kill_xp_mult(100)))), "kill experience carries the Abyss fall-off (bh-042)")
 	ok(XpCurve.kill_xp(139, 1.0, 141, 0.0) < XpCurve.monster_xp(139) * 0.45, "a level-141 hero gets under half")
 	eq(XpCurve.kill_xp(88, 1.0, 90, 0.0), XpCurve.monster_xp(88), "a level-90 hero gets it all")
 	ok(XpCurve.kill_xp(139, 3.0, 141, 0.5) > XpCurve.kill_xp(139, 1.0, 141, 0.0) * 4.0, "rank and Experience Gain still count")

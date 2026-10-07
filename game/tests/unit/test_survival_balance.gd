@@ -188,7 +188,7 @@ func test_level_40_plus_enemy_damage_budget() -> void:
 	for level in [40, 50, 60, 100, 200, 300]:
 		var highest := 0.0
 		# bh-040: past level 80 the Descent raises monster damage on purpose (Descent.damage_mult); the budget below it holds
-		var descent := Descent.damage_mult(level)
+		var descent := Descent.damage_mult(level) * Abyss.damage_mult(level)   # bh-042: and the Abyss's x8 from level 90
 		for def: EnemyDef in DB.enemies.values():
 			var stats := EnemyStats.build(def, level, DataEnemies.DIFFICULTY[1], [], true)
 			ok(stats.get_stat(&"damage_mult") < def.scaled(level) * 1.3 * (1.0 + 0.04 * CombatGrowth.milestone(level)) * descent,

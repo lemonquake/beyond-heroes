@@ -532,7 +532,8 @@ func _skill_ready(sid: StringName) -> bool:
 	if not data.skills.has(sid) or cooldowns.has(sid):
 		return false
 	var sk := DataTempos.skill(sid)
-	return mana + 0.001 >= float(sk.get("mana", 0.0)) and not (status.is_silenced() and sk.kind == "heal")
+	# silenced (or standing in a Curse of Stillness, bh-042): no heals and no Mystic spells; weapon skills still work
+	return mana + 0.001 >= float(sk.get("mana", 0.0)) and not (status.is_silenced() and (sk.kind == "heal" or sk.get("class", &"") == &"mystic"))
 
 ## Offensive / tactical skill choice for the current target.
 func _try_skill() -> bool:

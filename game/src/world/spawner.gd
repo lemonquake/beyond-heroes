@@ -134,6 +134,37 @@ func _spawn_all() -> void:
 				e.set_meta(&"boss_flag", flag)
 			spawned.append(e)
 	_spawn_minibosses()
+	if dg != &"" and not quiet:
+		_abyss_invasion(dg)
+
+## bh-042: on an Abyss floor (not the gatekeeper's hall or the sanctum) the Fallen Necro-Knight sometimes invades:
+## he walks in at the camp farthest from the arrival portal, five levels above the strongest hero here.
+const INVASION_CHANCE := 0.14
+
+func _abyss_invasion(dg: StringName) -> void:
+	if not DataDungeons.is_abyss(dg) or Game.hero == null:
+		return
+	var n := int(DataDungeons.parse(map.def.id)[1])
+	if n <= 1 or n == DataDungeonsAbyss.GATEKEEPER_FLOOR or n >= DataDungeons.floor_count(dg):
+		return
+	var r := RandomNumberGenerator.new()
+	r.seed = hash("%s/%d" % [map.def.id, int(Time.get_unix_time_from_system() / 600.0)])
+	if r.randf() >= INVASION_CHANCE and not Game.has_flag(&"debug_force_invasion"):
+		return
+	var edef := DB.enemy(&"fallen_necro_knight")
+	var zones := map.find_children("EnemyZone_camp_*", "Marker3D", true, false)
+	if edef == null or zones.is_empty():
+		return
+	var arrival := map.find_child("arrival", true, false) as Node3D
+	var from := arrival.global_position if arrival else Vector3.ZERO
+	var best: Node3D = zones[0]
+	for z: Node3D in zones:
+		if z.global_position.distance_to(from) > best.global_position.distance_to(from):
+			best = z
+	var e := spawn_enemy(map, edef, map.def.level_max, [], best.global_position + Vector3(1.5, 0, 0), difficulty)
+	e.set_meta(&"abyss_invader", true)
+	spawned.append(e)
+	Events.notify.emit("You feel a cold, familiar presence. Someone else is walking this floor.", &"warning")
 
 ## Named champions of this map (DataMinibosses) that are not resting after a recent defeat.
 func _spawn_minibosses() -> void:
@@ -268,6 +299,9 @@ static func spawn_enemy(parent: Node, def: EnemyDef, lvl: int, mods: Array, pos:
 	if spawner != null and spawner.dungeon != &"":
 		visit_level = int(spawner.growth.level)
 	lvl = CombatGrowth.encounter_level(lvl, visit_level, def.archetype == &"boss")
+	# bh-042: the Fallen Necro-Knight is always five levels above the strongest hero on the map
+	if def.traits.has(&"player_like"):
+		lvl = NecroKnight.level_for(Game.hero.progress.level if Game.hero else lvl)
 	e.setup(def, lvl, mods, diff)
 	if e.is_boss and Game.hero != null:
 		var baseline := EnemyStats.build(def, lvl, diff, [], false, true)

@@ -203,7 +203,8 @@ func test_celestial_orbs_drop_from_level_forty_bosses() -> void:
 # ---- Special dungeons ---------------------------------------------------------------------------------------------
 
 func test_special_dungeons_data() -> void:
-	var ids: Array = DataDungeons.order().filter(func(id): return DataDungeons.is_special(id) and not DataDungeons.is_zarael(id))
+	# bh-042: the Abyss dungeons are special too (fixed levels, no growth) but have their own suite (test_bh042)
+	var ids: Array = DataDungeons.order().filter(func(id): return DataDungeons.is_special(id) and not DataDungeons.is_zarael(id) and not DataDungeons.is_abyss(id))
 	eq(ids.size(), 5, "five special dungeons")
 	eq(DataDungeons.gates_on(&"sundered_reach").size(), 5, "all five gates stand on The Sundered Reach")
 	var lords := {}

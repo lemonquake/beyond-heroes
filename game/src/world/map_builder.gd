@@ -1188,6 +1188,7 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	t.dungeon_gate = dungeon
 	t.rune_tint = th.rune
 	t.min_tier = DataDungeons.min_tier(dungeon)
+	t.min_level = int(dd.get("min_level", 0))
 	var tid := StringName(dd.theme)
 	var dress: Array = GATE_DRESS.get(tid, DataDungeons.theme_table("GATE_DRESS", tid, GATE_DRESS[&"drowned"]))
 	var have := func(n: String) -> bool: return ResourceLoader.exists(ENV_DIR % n)
@@ -1215,6 +1216,8 @@ func dungeon_gate(dungeon: StringName, p: Vector2, yaw := 0.0) -> Teleporter:
 	var sign_text := "%s\n%s" % [dd.name, DataDungeons.recommended_levels(dungeon)]
 	if t.min_tier > 0:
 		sign_text += "\nClass %s heroes only" % DataGuilds.letter(t.min_tier)
+	if t.min_level > 0:
+		sign_text += "\nLevel %d and above" % t.min_level
 	signpost(Vector2(sg.x, sg.z), [[sign_text, Vector2(-fwd.x, -fwd.z)]])
 	return t
 

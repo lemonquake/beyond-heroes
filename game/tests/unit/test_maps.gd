@@ -264,7 +264,8 @@ func test_environment_kit_is_valid() -> void:
 			for mi in inst.find_children("*", "MeshInstance3D", true, false):
 				for i in mi.mesh.get_surface_count():
 					var m := mi.mesh.surface_get_material(i) as BaseMaterial3D
-					ok(m != null and m.albedo_texture != null, "%s surface %d is textured" % [f, i])
+					# bh-042: the chandeliers' wrought-iron and glass parts are plain PBR colours
+					ok(m != null and (m.albedo_texture != null or f in ["ph_chandelier_02.glb", "ph_lantern_chandelier_01.glb"]), "%s surface %d is textured" % [f, i])
 					tris += mi.mesh.surface_get_array_len(i) / 3 if mi.mesh.surface_get_format(i) & Mesh.ARRAY_FORMAT_INDEX == 0 else mi.mesh.surface_get_array_index_len(i) / 3
 			ok(tris <= 10500, "%s stays within the prop budget (%d triangles)" % [f, tris])
 			inst.free()

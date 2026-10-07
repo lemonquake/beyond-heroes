@@ -37,6 +37,11 @@ const DEFS := {
 	&"slowed": {"name": "Slowed", "debuff": true, "duration": 3.0, "icon": "slowed", "desc": "30% slower movement.",
 		"mods": [[&"move_speed", StatModifier.Op.MORE, -0.3]]},
 	&"silenced": {"name": "Silenced", "debuff": true, "duration": 2.5, "icon": "silenced", "desc": "Cannot cast spells. Weapon skills still work."},
+	# bh-042: the Abyss bosses' Curse of Stillness (a ground sigil; refreshed while the hero stands in it) and Armour Rip
+	&"stilled": {"name": "Curse of Stillness", "debuff": true, "duration": 0.6, "icon": "silenced", "fixed_duration": true,
+		"desc": "Standing in a Curse of Stillness: no spell can be cast. Weapon skills still work. Step out of the sigil."},
+	&"armor_ripped": {"name": "Armour Ripped", "debuff": true, "duration": 8.0, "icon": "armor_broken", "fixed_duration": true,
+		"desc": "Your armour was torn away: 60% less Defense.", "mods": [[&"defense", StatModifier.Op.MORE, -0.6]]},
 	&"weakened": {"name": "Weakened", "debuff": true, "duration": 5.0, "icon": "weakened", "desc": "Deals 20% less damage.",
 		"mods": [[&"outgoing_damage", StatModifier.Op.MORE, -0.2]]},
 	&"armor_broken": {"name": "Armor Broken", "debuff": true, "duration": 5.0, "icon": "armor_broken", "desc": "40% less Defense. Built up by Earth damage.",

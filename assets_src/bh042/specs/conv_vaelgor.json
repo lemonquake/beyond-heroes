@@ -1,0 +1,56 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/out/vaelgor_src.glb",
+ "out": "res://assets/characters/bh042/vaelgor.scn",
+ "height": 4.6,
+ "tint": [
+  0.62,
+  0.42,
+  0.4
+ ],
+ "saturation": 0.8,
+ "value": 0.35,
+ "rough": 0.6,
+ "clips": {
+  "idle": "Idle",
+  "idle_look": "Idle",
+  "alert": "Attack",
+  "walk": "Walk",
+  "run": "Walk",
+  "run_combat": "Walk",
+  "death": "Die",
+  "death_back": "Die",
+  "cast_quick": "Attack",
+  "cast_area": "Attack",
+  "cast_heavy": "Attack",
+  "cast_channel": "Idle",
+  "cast_ultimate": "Attack",
+  "boss_slam": "Attack",
+  "boss_sweep": "Attack",
+  "boss_charge": "Walk",
+  "boss_summon": "Attack",
+  "boss_roar": "Attack",
+  "charge_hold": "Idle"
+ },
+ "synth": {
+  "hit_light": {
+   "base": "Idle",
+   "length": 0.35,
+   "tilt": -0.18
+  },
+  "hit_heavy": {
+   "base": "Idle",
+   "length": 0.5,
+   "tilt": -0.32
+  },
+  "stagger_small": {
+   "base": "Idle",
+   "length": 0.45,
+   "tilt": -0.25
+  },
+  "knockback": {
+   "base": "Idle",
+   "length": 0.6,
+   "tilt": -0.4
+  }
+ }
+}

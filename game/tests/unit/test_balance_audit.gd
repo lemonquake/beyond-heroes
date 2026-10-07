@@ -77,7 +77,7 @@ func test_milestones_and_full_progression() -> void:
 			# Ten stat points per level allow an all-offense build to kill ordinary foes quickly. bh-040: past level 80 the
 			# Descent makes monsters tougher on purpose (Descent.health_mult); the hero's growth must still keep pace with
 			# the curve underneath it.
-			var plain_seconds := seconds / Descent.health_mult(level)
+			var plain_seconds := seconds / (Descent.health_mult(level) * Abyss.health_mult(level))   # bh-042: the Abyss too
 			ok(is_finite(seconds) and seconds > 0.0 and plain_seconds < 25.0, "%s level %d regular TTK %.1f (%.1f before the Descent)" % [cid, level, seconds, plain_seconds])
 			ok(hp > ItemCompare.basic_hit(st) * st.get_stat(&"crit_damage") * 3.0, "boss survives a critical hit")
 			if level in [30, 45, 60, 75, 90, 105, 300]:

@@ -31,6 +31,7 @@ var interact_range := 2.1
 var rune_tint := RUNE_ACTIVE                    # dungeon portals glow in their theme's colour (bh-012)
 ## bh-028: the hero tier this teleporter asks for (5 = Class A, DataGuilds.TIERS); 0 = none.
 var min_tier := 0
+var min_level := 0                     # bh-042: an Abyss gate turns away heroes below this level
 var dungeon_gate: StringName = &""             # a dungeon's surface gate: also offers every floor the hero has reached                       # flat metres from the dais centre (the dais is 1.3 m across the runes)
 
 var _area: Area3D
@@ -108,10 +109,14 @@ func is_locked() -> bool:
 
 ## The local hero's tier is below `min_tier`.
 func tier_locked() -> bool:
+	if min_level > 0 and Game.hero != null and Game.hero.progress.level < min_level:
+		return true
 	return min_tier > 0 and Game.hero != null and Game.hero.tier < min_tier
 
 ## What the hero is told at a locked dais.
 func lock_text() -> String:
+	if min_level > 0 and Game.hero != null and Game.hero.progress.level < min_level:
+		return "The Abyss turns away heroes below level %d. You are level %d." % [min_level, Game.hero.progress.level]
 	if tier_locked():
 		return "Only a Class %s hero may pass this gate. You are %s." % [DataGuilds.letter(min_tier), DataGuilds.tier_name(Game.hero.tier)]
 	return locked_hint

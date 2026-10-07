@@ -29,7 +29,7 @@ signal roster_updated
 signal lan_games_changed
 signal trade_changed                 # the trade window's state moved: opened, an offer changed, accepted, closed
 
-const PROTOCOL := 22                 # 22 (bh-041): trades confirm through the server without stalling, Eschaton rarity, Tempo commands; 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects); 21 (bh-040): the Descent (combat and experience rules past level 80)
+const PROTOCOL := 23                 # 23 (bh-042): the Abyss (level-90+ rules, bullet patterns, Curse of Stillness and Armour Rip shared as FX, the Abyss dungeons and bosses); 22 (bh-041): trades confirm through the server without stalling, Eschaton rarity, Tempo commands; 15: official accounts, dedicated coordinator and separate custom rooms; 16 (bh-030): profile pictures; 17 (bh-033): arena events; 18 (bh-034): Ascendant rarities; 20: Class Transcendence (profile "path", ally support, new skill effects); 21 (bh-040): the Descent (combat and experience rules past level 80)
                                      # 19 (bh-035): hero snapshots relayed by the room host per map and distance, light checkpoints, idle monsters not re-sent
                                      # 4 (bh-015): independent exploring, party summons; 5 (bh-016): player trades;
                                      # 6 (bh-018): socketed items and crystals; 7: separate belt capacity and stat rules
@@ -1786,6 +1786,10 @@ func _remote_skill_fx(map: String, kind: String, at: Vector3, dir: Vector3, extr
 			FX.spawn(VFXLib.ring_wave(Color(th.accent, 0.85), clampf(float(extra.get("r", 6.0)), 0.5, 10.0), 0.5, 0.8), at)
 		"tpatch":
 			AreaEffects.hazard(FX.world, at, clampf(float(extra.get("r", 3.0)), 0.5, 6.0), clampf(float(extra.get("d", 4.0)), 0.5, 10.0), null, null, 0, Color(0.4, 0.62, 0.32), 0.5)
+		"barrage":
+			AbyssMoves.remote_barrage(at, dir, extra)
+		"curse":
+			AbyssMoves.remote_curse(at, extra)
 		"veil":
 			var radius := float(extra.get("r", 6.0))
 			FX.spawn(VFXLib.particles(Color(0.35, 0.33, 0.38, 0.75), 70, 2.2, true, 1.6, 2.5, 180.0, Vector3(0, 0.4, 0), radius * 0.5, false), at + Vector3.UP * 0.6)

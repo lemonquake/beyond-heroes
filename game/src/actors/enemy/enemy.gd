@@ -195,6 +195,15 @@ func _ready() -> void:
 		status.immunities[&"feared"] = true
 	if TraitsExt.wants(def) or TraitsX.wants_x(def):
 		ext = TraitsX.new(self)
+	# bh-042: the Abyss bosses carry a dim light of their own (their floors are nearly dark)
+	if DataEnemiesAbyss.NAMES.has(def.id):
+		AbyssMoves.presence(self)
+	# bh-042: every other boss met at level 90 or deeper learns the Abyss's moves (Curse of Stillness, Armour Rip and a
+	# bullet pattern of its own), from its second phase
+	elif is_boss and level >= Abyss.FULL and not net_replica:
+		extra_attacks.append_array(AbyssMoves.overhaul(def))
+		if ext == null:
+			ext = TraitsX.new(self)
 	status.grants_stagger_window = is_elite or is_boss
 	mark_stats_dirty()
 	ensure_stats()
@@ -818,7 +827,7 @@ func _choose_attack() -> Dictionary:
 		var rng_m := float(a.get("range", 2.0)) + body_radius
 		if _dist > rng_m or _dist < float(a.get("min_range", 0.0)):
 			continue
-		if a.kind in ["projectile", "aoe", "charge", "dash", "chain", "tongue", "tether", "gaze", "beam", "strikes"] and not _has_los:
+		if a.kind in ["projectile", "aoe", "charge", "dash", "chain", "tongue", "tether", "gaze", "beam", "strikes", "barrage", "armor_rip"] and not _has_los:
 			continue
 		var w := float(a.get("weight", 1.0))
 		if a.kind in ["aoe", "charge", "pools", "summon"]:
@@ -877,7 +886,7 @@ func _atk_element(a: Dictionary) -> int:
 
 func _start_attack(a: Dictionary) -> void:
 	var S := EnemyBrain.State
-	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "bud", "dash", "tongue", "bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam"]
+	var special: bool = a.kind in ["aoe", "charge", "pools", "summon", "bud", "dash", "tongue", "bone_circle", "rift", "tether", "strikes", "mines", "gaze", "beam", "barrage", "curse_zone", "armor_rip"]
 	var st: int = S.CAST if def.archetype in [&"caster", &"support"] and a.kind != "melee" else (S.SPECIAL if special else S.ATTACK)
 	if not brain.go(st):
 		return
@@ -996,6 +1005,8 @@ func _start_attack(a: Dictionary) -> void:
 			if ext:
 				ext.start_special(a, act)
 	Audio.play_at(&"swing_heavy" if special else &"swing_light", global_position, -4.0)
+	if ext:
+		ext.attack_started(a)
 
 ## Clips without timing metadata (a creature model that has not been delivered yet) still hit: a release at mid-clip and,
 ## for melee, a short window around it.

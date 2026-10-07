@@ -1,0 +1,29 @@
+{
+ "src": "A:/Python/beyond-heroes/assets_src/bh042/oga/glutton-demon/glutton_final_0.blend",
+ "map": {
+  "core": "hips",
+  "core.001": "spine",
+  "core.002": "chest",
+  "head": "neck",
+  "head.001": "head",
+  "Bone.002_L": "shoulder.L",
+  "Bone.002_L.001": "upper_arm.L",
+  "Bone.002_L.002": "forearm.L",
+  "leg_L.001": "thigh.L",
+  "leg_L.002": "shin.L",
+  "Bone.002_R": "shoulder.R",
+  "Bone.002_R.001": "upper_arm.R",
+  "Bone.002_R.002": "forearm.R",
+  "leg_R.001": "thigh.R",
+  "leg_R.002": "shin.R"
+ },
+ "objects": [
+  "glutton.lopoly"
+ ],
+ "keep": [
+  "head",
+  "head.001"
+ ],
+ "out": "A:/Python/beyond-heroes/assets_src/bh042/out/gorehelm.glb",
+ "save_blend": "A:/Python/beyond-heroes/assets_src/bh042/out/gorehelm.blend"
+}
