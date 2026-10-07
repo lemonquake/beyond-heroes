@@ -2,21 +2,21 @@
 
 Multiplayer trades fixed, Debug access swept, Tempo commands, Lape's new table and the Eschaton tier (470 new
 pieces), Inventory/Skills/Talents windows that stay on screen. **Online version (protocol) 22**: everyone needs this
-build, and the official server must be restarted with it.
+`build, and the official server must be restarted with it.
 
 ## What you need to do now
 
 1. **Restart the official server** so it loads the trade fix and protocol 22 (it runs from this folder's source):
    double-click **Stop Official Server.cmd**, wait for it to finish, then **Start Official Server.cmd**.
    - Players still on the old game will be refused with "Your game is older than this one (online version 22 ...)".
-   - A separate `build\server\beyond-heroes-server-92e16ae8b9-windows\bin\beyond_heroes_server.exe` was also running on
+   - A separate ``build\server\beyond-heroes-server-92e16ae8b9-windows\bin\beyond_heroes_server.exe` was also running on
      this PC (opened from Explorer). It is the old packaged server, not the one your friends use. Close it if you
      don't need it.
-2. **Give your friends the new game**: ``build\windows\BeyondHeroes.exe` (741 MB, single file). Send it to them; it replaces their old one`.
+2. **Give your friends the new game**: `build\windows\BeyondHeroes.exe` (741 MB, single file). Send it to them; it replaces their old one.
 3. **Trade once with a friend to confirm**: click their hero → Trade, both put something on the table, both press
    Accept. On the official server the window now says "Completing the trade…" for a moment, then both bags update.
    If one of you cancels or anything goes wrong, the trade is simply cancelled and neither player is disconnected.
-4. **Debug access**: every character's Debug console was turned off once (on first load of this build). Type
+4. **Debug access**: every character's Debug console was turned off once (on first load of this `build). Type
    `azrin azrael` again on a character that should have it; it stays from then on.
 
 ## 1. Trading (the bug and the fix)
@@ -52,7 +52,7 @@ rejoined a minute later. A friend playing over a VPN (the 26.x address in the lo
 
 ## 2. Debug sweep
 
-`HeroData.DEBUG_SWEEP` / save key `debug_sweep`: a save from before this build loads with the Debug console locked.
+`HeroData.DEBUG_SWEEP` / save key `debug_sweep`: a save from before this `build loads with the Debug console locked.
 `Game.reset_debug()` also turns every Debug switch (God Mode, One-Hit, Freeze Monsters, multipliers, drop floor) off at
 the start of every session. To sweep again in a future update, raise `DEBUG_SWEEP`.
 
@@ -96,11 +96,11 @@ Full design: **docs/ESCHATON_AND_LAPE.md**. In short:
   (4 checks), which is inside its known flaky baseline of up to 10. The suites after the 60th were not run.
   Results are in `output/bh-041/tests_final.txt`.
 - Server: `python -m unittest server.test_service server.test_hardening server.test_control` passes (49 tests, 1 skipped).
-- Not done: an Android build and new VPS server packages (your server runs from source, so it doesn't need them).
+- Not done: an Android `build and new VPS server packages (your server runs from source, so it doesn't need them).
 
 ## Builds
 
-- Windows: `build\windows\BeyondHeroes.exe`, 741,040,904 bytes, sha256
+- Windows: ``build\windows\BeyondHeroes.exe`, 741,040,904 bytes, sha256
   `2455354fbb06aff52ae82969770269466452c213168ed9c04d1c28f884c710d6` (`--export-release "Windows"`, exit 0; log
   `output/bh-041/export-windows.log`).
 
