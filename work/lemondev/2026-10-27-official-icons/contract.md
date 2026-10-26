@@ -1,0 +1,7 @@
+# Official icons — 27 October 2026
+
+Scope: audit live Beyond Heroes definitions, establish painted dark-fantasy icons for every exposed icon route, retain unique model-rendered equipment icons, and layer a customizable transparent border independently of art. Build Windows EXE and Android APK; commit only this task and push main.
+
+Baseline: main at start of run; unrelated working-tree edits are preserved. Engine: installed Godot 4.7.2. Targets: desktop 1920x1080 and 3840x2160 plus existing touch layout. No gameplay values or names change. Border cosmetics do not affect stats or rarity. Existing model renders are accepted project references; no commercial superiority claim. Independent comparison to commercial evidence is unverified (none supplied); compare raw before/after project render evidence for readability and consistency.
+
+Mandatory invariants: real border alpha, separable art and border, data-driven texture/aperture/tint/style IDs, safe missing-style fallback, persistent selection, complete live icon-route coverage including alias skill identities and all upgrades, runtime import and focused tests, cold Windows start, both export receipts. Check readability at32/44/64px, cooldown and disabled states. Preserve provenance, prompts and source sheets. Maximum8 passes per component, no stated user cost cap. Built-in imagegen per game-icons; deterministic crop/resize only for packaging.

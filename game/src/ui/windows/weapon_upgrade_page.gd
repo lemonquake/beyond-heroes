@@ -200,14 +200,26 @@ func _fill_detail() -> void:
 		var ob := Button.new()
 		ob.toggle_mode = true
 		ob.button_pressed = id == _choice
-		ob.custom_minimum_size = Vector2(228, 58)
+		ob.custom_minimum_size = Vector2(228, 86)
 		ob.focus_mode = Control.FOCUS_ALL
 		var rk := WeaponUpgrades.current_rank(_sel, kind) if id == cur else 0
-		ob.text = "%s%s%s" % ["▶ " if id == _choice else "", d.name, ("  (%s)" % (DataUpgrades.roman(rk) if kind == WeaponUpgrades.ENCHANT else "+%d" % rk)) if rk > 0 else ""]
-		var oc: Color = (d.color as Color).lightened(0.4)
-		ob.add_theme_color_override("font_color", oc)
-		ob.add_theme_color_override("font_hover_color", oc.lightened(0.3))
-		ob.add_theme_color_override("font_pressed_color", Color.WHITE)
+		var icon_id := ("enchant_" if kind == WeaponUpgrades.ENCHANT else "tech_") + String(id)
+		var content := HBoxContainer.new()
+		content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		content.offset_left = 8
+		content.offset_right = -8
+		content.add_theme_constant_override("separation", 8)
+		content.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		ob.add_child(content)
+		var preview := FramedIcon.new(UIArt.icon("upgrades", icon_id), 46.0)
+		preview.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		content.add_child(preview)
+		var label := UITheme.label("%s%s%s" % ["> " if id == _choice else "", d.name, ("  (%s)" % (DataUpgrades.roman(rk) if kind == WeaponUpgrades.ENCHANT else "+%d" % rk)) if rk > 0 else ""], 17, (d.color as Color).lightened(0.4), UITheme.body_bold())
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		content.add_child(label)
 		ob.pressed.connect(func() -> void:
 			Audio.play_ui(&"ui_click")
 			_choice = id

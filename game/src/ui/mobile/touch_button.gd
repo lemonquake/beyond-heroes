@@ -27,10 +27,14 @@ var hit_scale := 1.15
 var _flash := 0.0
 
 func _init(p_id := &"", p_radius := 50.0) -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	id = p_id
 	radius = p_radius
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_resize()
+
+func _ready() -> void:
+	Settings.changed.connect(queue_redraw)
 
 func _resize() -> void:
 	size = Vector2(radius, radius) * 2.0
@@ -110,7 +114,8 @@ func _draw_disc(c: Vector2, r: float) -> void:
 	if icon:
 		var side := r * 1.34
 		var ir := Rect2(c - Vector2(side, side) * 0.5, Vector2(side, side))
-		draw_texture_rect(icon, ir, false, content)
+		draw_texture_rect(icon, IconBorders.content_rect(ir), false, content)
+		IconBorders.draw_frame(self, ir, content)
 	elif glyph != "":
 		_draw_glyph(c, r, content)
 	if inner_text != "":

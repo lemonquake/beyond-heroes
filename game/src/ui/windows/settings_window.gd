@@ -211,6 +211,19 @@ func _controls(v: VBoxContainer) -> void:
 		_bind_buttons[action] = b
 		_row(v, pair[1], b)
 
+func _icon_border_option(v: VBoxContainer) -> void:
+	var choices := IconBorders.styles()
+	var option := OptionButton.new()
+	var selected := IconBorders.current().style_id
+	for i in choices.size():
+		var style: IconBorder = choices[i]
+		option.add_item(style.display_name)
+		if style.style_id == selected:
+			option.selected = i
+	option.custom_minimum_size.y = 44
+	option.item_selected.connect(func(i: int) -> void: Settings.set_value("icon_border_style", String(choices[i].style_id)))
+	_row(v, "Icon Border", option, "The frame around items, skills and upgrades.")
+
 func _gameplay(v: VBoxContainer) -> void:
 	v.add_child(section("Combat"))
 	_check(v, "Damage Numbers", "damage_numbers")
@@ -232,6 +245,7 @@ func _gameplay(v: VBoxContainer) -> void:
 		filters.open()))
 	_check(v, "Always Show Loot Labels", "loot_labels_always", "Off: labels appear only while the Show Loot key is held.")
 	v.add_child(section("Interface"))
+	_icon_border_option(v)
 	_slider(v, "Camera Distance", "camera_zoom", 0.7, 1.4, 0.05, "%.2f×", 1.0)
 	_check(v, "First-Person View", "first_person", "Play from your hero's eyes: the mouse looks around, attacks go to the crosshair. %s switches any time." % Settings.binding_text(&"view_toggle"))
 	_slider(v, "First-Person Field of View", "fp_fov", 60.0, 110.0, 1.0, "%d°", 1.0)

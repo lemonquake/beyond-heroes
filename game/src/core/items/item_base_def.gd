@@ -65,6 +65,9 @@ func is_consumable() -> bool:
 
 ## Icon with graceful fallback: a tiered icon that is not (yet) authored falls back to the category/type icon.
 func icon_path() -> String:
+	var painted := OfficialIcons.path(icon)
+	if painted != icon and ResourceLoader.exists(painted):
+		return painted
 	if icon != "" and ResourceLoader.exists(icon):
 		return icon
 	var fb := ""

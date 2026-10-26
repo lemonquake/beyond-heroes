@@ -304,10 +304,13 @@ func _crystal_button(c: ItemInstance) -> Control:
 	b.toggle_mode = true
 	b.button_pressed = c == _crystal
 	b.custom_minimum_size = Vector2(84, 84)
-	b.icon = c.icon()
-	b.expand_icon = true
-	b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	b.add_theme_constant_override("icon_max_width", 64)
+	var preview := FramedIcon.new(c.icon(), 64.0)
+	b.add_child(preview)
+	preview.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	preview.offset_left = -32
+	preview.offset_top = -32
+	preview.offset_right = 32
+	preview.offset_bottom = 32
 	b.focus_mode = Control.FOCUS_ALL
 	var n := Label.new()
 	n.text = "x%d" % c.count
@@ -418,6 +421,8 @@ class SocketRing extends Control:
 	var _tex: Texture2D
 
 	func _ready() -> void:
+		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		Settings.changed.connect(queue_redraw)
 		mouse_filter = Control.MOUSE_FILTER_STOP
 		if crystal != &"":
 			var b := DB.item_base(crystal)
@@ -439,7 +444,9 @@ class SocketRing extends Control:
 				draw_circle(c, r * (0.95 - k * 0.12), Color(glow, 0.1 + 0.05 * k))
 		if _tex:
 			var s := r * 1.75
-			draw_texture_rect(_tex, Rect2(c - Vector2(s, s) * 0.5, Vector2(s, s)), false)
+			var bounds := Rect2(c - Vector2(s, s) * 0.5, Vector2(s, s))
+			draw_texture_rect(_tex, IconBorders.content_rect(bounds), false)
+			IconBorders.draw_frame(self, bounds)
 		else:
 			draw_circle(c, r * 0.55, Color(0, 0, 0, 0.6))
 			draw_arc(c, r * 0.55, PI * 1.1, PI * 1.6, 16, Color(1, 1, 1, 0.12), 2.0, true)

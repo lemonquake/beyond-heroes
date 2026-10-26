@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IconBorder" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/ui/icon_border.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+style_id = &"aether_forged"
+display_name = "Aether Forged"
+texture_path = "res://assets/ui/borders/aether_forged.png"
+aperture = Rect2(0.09, 0.09, 0.82, 0.82)

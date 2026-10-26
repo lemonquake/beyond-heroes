@@ -1,0 +1,40 @@
+WARNING: Unknown item base in save: no_such_item
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/items/item_instance.gd:300)
+       [1] read_incoming (res://src/core/trade/trade_rules.gd:60)
+       [2] test_an_official_trade_hands_the_server_the_exact_records (res://tests/unit/test_bh041.gd:35)
+       [3] _run (res://tests/run_tests.gd:45)
+WARNING: Hero Trans knight: Grand Paladin needs level 120; it was dropped.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:588)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:258)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_native_and_raw_first_orders_require_one_matching_contact (res://tests/unit/test_touch_parity.gd:204)
+       [4] _hold (res://tests/unit/test_touch_parity.gd:81)
+       [5] _frames (res://tests/unit/test_touch_parity.gd:73)
+WARNING: Hero Trans knight: Unknown class advancement format; the hero keeps the starting class.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:588)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:268)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_native_and_raw_first_orders_require_one_matching_contact (res://tests/unit/test_touch_parity.gd:204)
+       [4] _hold (res://tests/unit/test_touch_parity.gd:81)
+       [5] _frames (res://tests/unit/test_touch_parity.gd:73)
+WARNING: Hero Trans knight: The class advancement record could not be read; the hero keeps the starting class.
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] from_dict (res://src/core/hero_data.gd:588)
+       [1] test_corrupt_paths_recover_to_longest_valid_prefix (res://tests/unit/test_transcendence.gd:270)
+       [2] _run (res://tests/run_tests.gd:45)
+       [3] test_native_and_raw_first_orders_require_one_matching_contact (res://tests/unit/test_touch_parity.gd:204)
+       [4] _hold (res://tests/unit/test_touch_parity.gd:81)
+       [5] _frames (res://tests/unit/test_touch_parity.gd:73)
+WARNING: 31 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)

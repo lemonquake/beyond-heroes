@@ -33,12 +33,14 @@ static func play(parent: Node, p_item: ItemInstance, on_done := Callable(), p_ta
 	return r
 
 func _init() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	z_index = 50
 
 func _ready() -> void:
+	Settings.changed.connect(queue_redraw)
 	_rng.seed = hash(item.base.id) if item else 41
 	_icon = item.icon() if item else null
 	Audio.play_ui(&"boss_charge" if not taken else &"teleport_whoosh", -4.0)
@@ -144,7 +146,9 @@ func _draw() -> void:
 		var isz := R * 1.35 * ov * (1.0 - pow(1.0 - k2, 3.0))
 		for g in 5:
 			draw_circle(c, isz * (0.5 - g * 0.07), Color(0.8, 0.86, 1.0, 0.09 * k2))
-		draw_texture_rect(_icon, Rect2(c - Vector2(isz, isz) * 0.5, Vector2(isz, isz)), false)
+		var bounds := Rect2(c - Vector2(isz, isz) * 0.5, Vector2(isz, isz))
+		draw_texture_rect(_icon, IconBorders.content_rect(bounds), false)
+		IconBorders.draw_frame(self, bounds)
 	# star glints
 	for s in _sparks:
 		var f: float = clampf(float(s[2]), 0.0, 1.0)

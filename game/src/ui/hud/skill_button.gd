@@ -27,12 +27,14 @@ var _aura: SkillDef                 # set when the slot holds an aura
 var _aura_on := false
 
 func _init(p_action := &"", size_px := 64.0) -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	action = p_action
 	custom_minimum_size = Vector2(size_px, size_px)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _ready() -> void:
 	TouchGesture.register(self)
+	Settings.changed.connect(queue_redraw)
 	mouse_entered.connect(func() -> void:
 		_hover = true
 		queue_redraw())
@@ -82,10 +84,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	var r := Rect2(Vector2.ZERO, size)
-	var m := UIArt.meta("slots/skill_slot.png")
-	var ir_px: Array = m.get("icon_rect", [16, 16, 96, 96])
-	var k := size.x / 128.0
-	var ir := Rect2(Vector2(ir_px[0], ir_px[1]) * k, Vector2(ir_px[2], ir_px[3]) * k)
+	var ir := IconBorders.content_rect(r)
 	var empty := (_icon == null)
 	if not empty:
 		var mod := Color(1, 1, 1)
@@ -96,9 +95,9 @@ func _draw() -> void:
 		elif _block != "" and _block != "Cooldown":
 			mod = Color(0.45, 0.45, 0.45)
 		draw_texture_rect(_icon, ir, false, mod)
-	var bez := UIArt.tex("slots/skill_slot_empty.png" if empty else "slots/skill_slot.png")
-	if bez:
-		draw_texture_rect(bez, r, false)
+	if empty:
+		draw_rect(ir, Color(0.06, 0.05, 0.07, 0.9))
+	IconBorders.draw_frame(self, r)
 	if _aura and _aura_on:
 		var hc := Color(1.0, 0.62, 0.3) if _aura.aura_kind == &"offense" else Color(0.55, 0.78, 1.0)
 		var a0 := Time.get_ticks_msec() * 0.0015

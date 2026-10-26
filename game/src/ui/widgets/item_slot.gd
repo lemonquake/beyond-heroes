@@ -32,6 +32,7 @@ var _t := 0.0
 const BADGE := 18.0
 
 func _init(p_kind := Kind.INVENTORY, size_px := 64.0) -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	kind = p_kind
 	custom_minimum_size = Vector2(size_px, size_px)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -39,6 +40,7 @@ func _init(p_kind := Kind.INVENTORY, size_px := 64.0) -> void:
 
 func _ready() -> void:
 	TouchGesture.register(self)
+	Settings.changed.connect(queue_redraw)
 	set_process(_shimmers())
 	mouse_entered.connect(func() -> void:
 		_hover = true
@@ -136,8 +138,7 @@ func _draw() -> void:
 		var hv := UIArt.tex("slots/slot_hover.png")
 		if hv:
 			draw_texture_rect(hv, r.grow(-size.x * 0.08), false, Color(1, 1, 1, 0.55))
-	var inset := size.x * (0.16 if kind == Kind.EQUIPMENT else 0.12)
-	var ir := r.grow(-inset)
+	var ir := IconBorders.content_rect(r)
 	if item == null:
 		if glyph:
 			draw_texture_rect(glyph, r.grow(-size.x * 0.14), false, Color(1, 1, 1, 0.55))
@@ -159,6 +160,10 @@ func _draw() -> void:
 		draw_texture_rect(fr, r, false, Color(1, 1, 1, a))
 	elif item.rarity >= BH.Rarity.BASIC:
 		draw_rect(r.grow(-3), Color(item.color(), 0.6 * a), false, 2.0)
+	IconBorders.draw_frame(self, r, Color(1, 1, 1, a))
+	# Keep rarity information visible independently of the cosmetic frame.
+	if item.is_equipment():
+		draw_rect(ir, Color(item.color(), 0.85 * a), false, maxf(1.0, size.x * 0.025))
 	# bh-034: an Ascendant piece has two motes of its tier's light running round its frame
 	if DataAscendant.is_ascendant_rarity(item.rarity) and item.is_equipment():
 		_draw_orbit(r.grow(-size.x * 0.06), AscendantFx.color(item.rarity), a)

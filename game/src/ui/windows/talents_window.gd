@@ -138,7 +138,14 @@ func _add_traits() -> void:
 			_summary.add_child(UITheme.label("Class traits", 17, UITheme.GOLD, UITheme.body_bold()))
 			shown = true
 		var sg: Dictionary = DataTranscendence.SIGNATURES[id]
-		_summary.add_child(UITheme.label("%s  (%s)" % [String(sg.name), DataTranscendence.name_of(id)], 16, ClassTranscendence.label_color(id), UITheme.body_bold()))
+		var trait_row := HBoxContainer.new()
+		trait_row.add_theme_constant_override("separation", 8)
+		trait_row.add_child(FramedIcon.new(UIArt.icon("traits", String(id)), 36.0))
+		var trait_name := UITheme.label("%s  (%s)" % [String(sg.name), DataTranscendence.name_of(id)], 16, ClassTranscendence.label_color(id), UITheme.body_bold())
+		trait_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		trait_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		trait_row.add_child(trait_name)
+		_summary.add_child(trait_row)
 		var d := UITheme.label("  " + DataTranscendence.signature_text(id), 14, UITheme.TEXT_DIM, UITheme.body_font())
 		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		d.custom_minimum_size = Vector2(330, 0)

@@ -437,10 +437,7 @@ static func skill(sid: StringName, hero: HeroData, player: Player = null, next_r
 	var v: VBoxContainer = f[1]
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 10)
-	var ic := TextureRect.new()
-	ic.texture = UIArt.skill_icon(sid)
-	ic.custom_minimum_size = Vector2(52, 52)
-	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	var ic := FramedIcon.new(UIArt.skill_icon(sid), 52.0)
 	head.add_child(ic)
 	var hv := VBoxContainer.new()
 	hv.add_theme_constant_override("separation", 0)

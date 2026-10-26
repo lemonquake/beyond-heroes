@@ -51,6 +51,7 @@ var camera_zoom := 1.0
 var first_person := false           # bh-030: play in first-person view (V toggles)
 var fp_fov := 80.0                  # bh-030: first-person field of view (degrees)
 var reduced_motion := false
+var icon_border_style := "aether_forged" # device cosmetic preference; stable IDs survive missing content packs
 var ui_scale := 1.0
 var ui_auto := true                 # bh-032: windows smaller than 1920x1080 enlarge the interface so text stays readable
 var show_minimap := true
@@ -68,7 +69,7 @@ var efficiency_mode := false
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
 	"anti_aliasing", "render_scale", "master_volume", "music_volume", "sfx_volume", "voice_volume", "ambience_volume",
 	"ui_volume", "combat_music", "bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "damage_numbers", "blood", "screen_shake",
-	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "first_person", "fp_fov", "reduced_motion", "ui_scale", "ui_auto", "show_minimap",
+	"auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom", "first_person", "fp_fov", "reduced_motion", "icon_border_style", "ui_scale", "ui_auto", "show_minimap",
 	"minimap_zoom", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim", "touch_fixed_stick", "efficiency_mode"]
 
 # Derived switches read by the world builders.
@@ -120,7 +121,7 @@ func to_dict() -> Dictionary:
 ## Settings that belong to the device, not to the hero (bh-009): a save carries its settings along, but loading it on
 ## a phone must not bring back a desktop's shadows and uncapped frame rate (or turn a PC into touch play).
 const DEVICE_KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
-	"anti_aliasing", "render_scale", "efficiency_mode", "ui_scale", "ui_auto", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim",
+	"anti_aliasing", "render_scale", "efficiency_mode", "icon_border_style", "ui_scale", "ui_auto", "control_mode", "touch_opacity", "touch_size", "touch_auto_aim",
 	"touch_fixed_stick"]
 
 func from_dict(d: Dictionary) -> void:
@@ -247,7 +248,7 @@ const GROUPS := {
 	"controls": ["bindings", "mouse_sensitivity", "guard_toggle", "attack_hold_repeat", "touch_opacity", "touch_size", "touch_auto_aim",
 		"touch_fixed_stick"],
 	"gameplay": ["damage_numbers", "blood", "screen_shake", "auto_loot_enabled", "auto_loot_mode", "auto_loot_rules", "show_enemy_bars", "loot_labels_always", "camera_zoom",
-		"reduced_motion", "ui_scale", "show_minimap", "minimap_zoom"],
+		"reduced_motion", "icon_border_style", "ui_scale", "show_minimap", "minimap_zoom"],
 }
 
 # ---- Apply ------------------------------------------------------------------------------------------------------

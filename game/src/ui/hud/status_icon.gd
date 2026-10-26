@@ -7,12 +7,14 @@ var controller: StatusController
 var status_id: StringName
 
 func _init(p_controller: StatusController, p_id: StringName, size_px := 34.0) -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	controller = p_controller
 	status_id = p_id
 	custom_minimum_size = Vector2(size_px, size_px + 12.0)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _ready() -> void:
+	Settings.changed.connect(queue_redraw)
 	TooltipLayer.attach(self, func() -> Control:
 		var inst = controller.statuses.get(status_id)
 		return Tips.status(inst) if inst else null)
@@ -27,16 +29,16 @@ func _draw() -> void:
 	var s := size.x
 	var r := Rect2(Vector2.ZERO, Vector2(s, s))
 	var bad := StatusRules.is_debuff(status_id)
+	var inner := IconBorders.content_rect(r)
 	var ic := UIArt.status_icon(status_id)
 	if ic:
-		draw_texture_rect(ic, r.grow(-s * 0.1), false)
+		draw_texture_rect(ic, inner, false)
 	# remaining duration: a dark curtain rising from the bottom
 	if not inst.infinite and inst.duration > 0.0:
 		var frac := clampf(1.0 - inst.remaining / inst.duration, 0.0, 1.0)
-		draw_rect(Rect2(Vector2(s * 0.1, s * 0.1), Vector2(s * 0.8, s * 0.8 * frac)), Color(0, 0, 0, 0.55))
-	var fr := UIArt.tex("hud/debuff_frame.png" if bad else "hud/buff_frame.png")
-	if fr:
-		draw_texture_rect(fr, r, false)
+		draw_rect(Rect2(inner.position, Vector2(inner.size.x, inner.size.y * frac)), Color(0, 0, 0, 0.55))
+	IconBorders.draw_frame(self, r)
+	draw_rect(inner, Color(0.9, 0.25, 0.2) if bad else Color(0.45, 0.8, 0.55), false, 1.5)
 	var font := UITheme.number_font()
 	if inst.stacks > 1:
 		var t := str(inst.stacks)

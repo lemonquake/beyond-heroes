@@ -509,7 +509,7 @@ func _build_credits() -> PanelContainer:
 	t.text = "[center][b][color=#f5cc75]BEYOND HEROES[/color][/b]\nby Aljay Leodones\n\n" \
 		+ "[b][color=#ebdcbd]Design & Direction[/color][/b]\nAljay Leodones\n\n" \
 		+ "[b][color=#ebdcbd]Engine[/color][/b]\nGodot Engine (MIT licence)\n\n" \
-		+ "[b][color=#ebdcbd]Art, Audio & Code[/color][/b]\nProject artwork, audio and code by Aljay Leodones, with credited third-party assets.\nSee ASSET_CREDITS.md for the project asset record.\n\n" \
+		+ "[b][color=#ebdcbd]Art, Audio & Code[/color][/b]\nProject artwork, audio and code by Aljay Leodones, with credited third-party assets.\nOfficial icon artwork created with OpenAI image generation.\nSee ASSET_CREDITS.md for the project asset record.\n\n" \
 		+ "[b][color=#ebdcbd]Class Hero Models[/color][/b]\nKnight: Bulky Knight by OptiCube (Arthur Krut).\nhttps://sketchfab.com/3d-models/002a90cbf12941b792f9685546a7502c\n\n" \
 		+ "Mage: Dark Fantasy Sorceress, Crystal Staff by s8819296.\nhttps://sketchfab.com/3d-models/a307ea3800d748c487d26235bb43ecc0\n\n" \
 		+ "Shadowblade: Corrupted Fallen Priest - Dark Fantasy by s8819296.\nhttps://sketchfab.com/3d-models/1ab734d8c4464ae49d5b5091f3ea2afc\n\n" \

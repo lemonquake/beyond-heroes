@@ -31,11 +31,13 @@ var preview := false
 var preview_class: StringName = &""
 
 func _init() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_NONE
 
 func _ready() -> void:
 	TouchGesture.register(self)
+	Settings.changed.connect(queue_redraw)
 
 func bind(p_hero: HeroData, talents: bool) -> void:
 	if p_hero != hero or talents != is_talent:
@@ -186,19 +188,14 @@ func _draw_node(n: Dictionary) -> void:
 	var c := node_center(n)
 	var rect := Rect2(c - Vector2(sz, sz) * 0.5, Vector2(sz, sz))
 	var icon := UIArt.node_icon(n)
-	var inner := rect.grow(-sz * (0.2 if kind != "skill" else 0.14))
-	if kind == "passive":
-		inner = rect.grow(-sz * 0.08)            # the passive icon is its own round medallion
+	var inner := IconBorders.content_rect(rect)
 	var mod := Color(1, 1, 1) if st == "allocated" else (Color(0.8, 0.8, 0.8) if st == "available" else Color(0.35, 0.35, 0.38))
 	if icon:
 		draw_texture_rect(icon, inner, false, mod)
 	var sd: SkillDef = DB.skill(n.skill) if kind == "skill" and n.has("skill") else null
-	if kind == "passive":
-		draw_arc(c, sz * 0.5, 0.0, TAU, 48, Color(UITheme.GOLD, 0.95) if st == "allocated" else Color(0.55, 0.5, 0.45, 0.9), 3.0, true)
-	else:
-		var frame := UIArt.tex("tree/%s_%s.png" % [art[0], st])
-		if frame:
-			draw_texture_rect(frame, rect, false)
+	IconBorders.draw_frame(self, rect, mod)
+	if st == "allocated":
+		draw_rect(inner, Color(UITheme.GOLD, 0.8), false, 1.5)
 	if sd and sd.is_aura():
 		# auras wear a halo: warm for offense, cool for defense; brighter while it is the active aura
 		var hc := Color(1.0, 0.62, 0.3) if sd.aura_kind == &"offense" else Color(0.55, 0.78, 1.0)

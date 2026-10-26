@@ -23,6 +23,7 @@ static func meta(path: String) -> Dictionary:
 static func tex(path: String) -> Texture2D:
 	if not _tex.has(path):
 		var p := path if path.begins_with("res://") else ROOT + path
+		p = OfficialIcons.path(p)
 		_tex[path] = load(p) if ResourceLoader.exists(p) else null
 	return _tex[path]
 
@@ -70,6 +71,9 @@ static func image(path: String, size := Vector2.ZERO) -> TextureRect:
 # ---- Icons ---------------------------------------------------------------------------------------------------------
 
 static func icon(category: String, id: String) -> Texture2D:
+	var painted := "res://assets/ui/official/%s/%s.png" % [category, id]
+	if ResourceLoader.exists(painted):
+		return tex(painted)
 	for ext in [".svg", ".png"]:
 		var p := ROOT + "icons/%s/%s%s" % [category, id, ext]
 		if ResourceLoader.exists(p):
@@ -92,6 +96,9 @@ static func attribute_icon(attr: StringName) -> Texture2D:
 	return icon("attributes", BH.ATTRIBUTE_ICONS.get(attr, String(attr)))
 
 static func skill_icon(skill_id: StringName) -> Texture2D:
+	var painted := OfficialIcons.identity("skills", String(skill_id))
+	if painted != "":
+		return tex(painted)
 	var s := DB.skill(skill_id)
 	if s != null and s.icon != "" and ResourceLoader.exists(s.icon):
 		return tex(s.icon)
@@ -99,6 +106,10 @@ static func skill_icon(skill_id: StringName) -> Texture2D:
 
 ## Icon of a tree node ({"icon": res path}) with the skill icon as fallback.
 static func node_icon(n: Dictionary) -> Texture2D:
+	if n.has("skill") and String(n.get("kind", "")) == "skill":
+		var painted := OfficialIcons.identity("skills", String(n.skill))
+		if painted != "":
+			return tex(painted)
 	var p := String(n.get("icon", ""))
 	if p != "" and ResourceLoader.exists(p):
 		return tex(p)

@@ -239,7 +239,13 @@ func _card(id: StringName, available: bool, locked: bool, selected := false) -> 
 	if DataTranscendence.SIGNATURES.has(id):
 		var sg: Dictionary = DataTranscendence.SIGNATURES[id]
 		v.add_child(section("Signature trait"))
-		_para(v, String(sg.name), 17, ClassTranscendence.label_color(id), true)
+		var trait_row := hbox(10)
+		trait_row.add_child(FramedIcon.new(UIArt.icon("traits", String(id)), 44.0))
+		var trait_name := UITheme.label(String(sg.name), 17, ClassTranscendence.label_color(id), UITheme.body_bold())
+		trait_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		trait_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		trait_row.add_child(trait_name)
+		v.add_child(trait_row)
 		_para(v, DataTranscendence.signature_text(id), 15, UITheme.TEXT)
 		if stage >= 2:
 			_para(v, "You keep %s from your first advancement." % String(DataTranscendence.SIGNATURES.get(DataTranscendence.parent_of(id), {}).get("name", "its trait")), 14, UITheme.TEXT_DIM)
@@ -250,11 +256,7 @@ func _card(id: StringName, available: bool, locked: bool, selected := false) -> 
 			continue
 		var r := hbox(8)
 		v.add_child(r)
-		var ic := TextureRect.new()
-		ic.texture = UIArt.skill_icon(sid)
-		ic.custom_minimum_size = Vector2(40, 40)
-		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		var ic := FramedIcon.new(UIArt.skill_icon(sid), 40.0)
 		r.add_child(ic)
 		var col := vbox(1)
 		col.size_flags_horizontal = Control.SIZE_EXPAND_FILL

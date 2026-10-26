@@ -22,3 +22,5 @@ body the project author supplied, and the CC0 downloads listed below: Poly Haven
 | Fonts | not bundled | System fonts referenced through Godot `SystemFont` (Book Antiqua, Palatino Linotype, Felix Titling, Georgia) | Host OS | Host OS licence | — |
 
 When a third-party asset is added, record its name, creator, source, licence, URL and modifications here.
+
+Official painted icon set (27 October 2026): 519 images in `game/assets/ui/official/` and the transparent `game/assets/ui/borders/aether_forged.png` overlay were created for this project using OpenAI's built-in image generation tool. Prompts, row-major mappings and generated originals are preserved in `output/official-icons-20261027/plan.json` and `sheets/`. Icons were cropped and resized to 256 pixels; the frame retains its generated alpha. The 1,536 existing equipment/crystal renders retain their original provenance and are recorded by hash in the icon manifest. This entry records generation provenance and does not assign a third-party stock-art licence.
