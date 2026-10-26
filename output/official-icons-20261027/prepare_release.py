@@ -6,7 +6,7 @@ p=subprocess.Popen(['git','archive','--format=tar',commit,'game','tools/export_b
 with tarfile.open(fileobj=p.stdout,mode='r|') as archive:
     archive.extractall(dest,filter='data')
 if p.wait(): raise SystemExit('git archive failed')
-for name in ['export_presets.cfg','assets/characters/roles/blood_ranger_bow.res']:
+for name in ['export_presets.cfg','assets/characters/roles/blood_ranger_bow.res','server/official.cfg','server/official_ca.crt']:
     f=dest/'game'/name;f.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(root/'game'/name,f)
 cache=root/'game/.godot/imported'
 if cache.is_dir():shutil.copytree(cache,dest/'game/.godot/imported')
