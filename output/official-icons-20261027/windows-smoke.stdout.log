@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 596.36 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060
+
+Movie Maker mode enabled, recording movie in 1600×900 @ 60 FPS...
+--------------------------------------------------------------------------------
+Done recording movie at path: A:/Python/beyond-heroes/output/official-icons-20261027/windows-smoke.avi
+360 frames at 60 FPS (movie length: 00:00:06:00), recorded in 00:00:47 (12% of real-time speed).
+CPU render time: 6.18 seconds (average: 17.16 ms/frame)
+GPU render time: 6.73 seconds (average: 18.68 ms/frame)
+Encoding time: 7.30 seconds (average: 20.29 ms/frame)
+--------------------------------------------------------------------------------
+ERROR: 1 RID allocations of type 'N5GLES37TextureE' were leaked at exit.

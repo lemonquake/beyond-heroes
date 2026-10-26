@@ -1,0 +1,12 @@
+{
+  "apk": "build\\BeyondHeroes.apk",
+  "sha256": "51424e3d587532a571e45e343ebf9987a70ceac26b27728c7d9300336a340393",
+  "official_icons": 519,
+  "retained_icons": 1536,
+  "border": true,
+  "architectures": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "failures": []
+}

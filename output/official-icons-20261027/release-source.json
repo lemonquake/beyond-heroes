@@ -1,0 +1,12 @@
+{
+  "commit": "d1ca242801f1f527e3dc0d55ce858d794d4a9ce5",
+  "path": "A:\\Python\\beyond-heroes\\build\\icon-release-20261027",
+  "source": "git archive HEAD game tools/export_builds.py",
+  "local_build_inputs": [
+    "export_presets.cfg",
+    "blood_ranger_bow.res",
+    "game/server/official.cfg",
+    "game/server/official_ca.crt"
+  ],
+  "unrelated_working_tree_changes": "excluded"
+}

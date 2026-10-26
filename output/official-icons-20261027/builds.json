@@ -1,0 +1,36 @@
+{
+  "builds": {
+    "Windows": {
+      "path": "A:\\Python\\beyond-heroes\\build\\windows\\BeyondHeroes.exe",
+      "bytes": 1016119432,
+      "sha256": "2dce13726a0c756a3ebf412985fb3ef31eda432149c6a77a84ed8b986c22f5e8",
+      "mode": "--export-release",
+      "export_exit": 0,
+      "export_path": "A:\\Python\\beyond-heroes\\build\\icon-release-20261027\\build\\windows\\BeyondHeroes.exe"
+    },
+    "Android": {
+      "path": "A:\\Python\\beyond-heroes\\build\\BeyondHeroes.apk",
+      "bytes": 965543647,
+      "sha256": "51424e3d587532a571e45e343ebf9987a70ceac26b27728c7d9300336a340393",
+      "mode": "--export-debug",
+      "export_exit": 0,
+      "export_path": "A:\\Python\\beyond-heroes\\build\\icon-release-20261027\\build\\BeyondHeroes.apk"
+    }
+  },
+  "source_commit": "d1ca242801f1f527e3dc0d55ce858d794d4a9ce5",
+  "validation": {
+    "source_checks": 29186,
+    "source_failures": 0,
+    "isolated_icon_border_checks": 11384,
+    "isolated_icon_border_failures": 0,
+    "windows_pack_checks": 8380,
+    "windows_pack_failures": 0,
+    "apk_signature_exit": 0,
+    "apk_zip_icon_audit": "passed",
+    "windows_cold_start_exit": 0,
+    "windows_movie_frames": 360,
+    "windows_movie_resolution": "1600x900",
+    "android_device_testing": "not run",
+    "shutdown_warnings": "resource cleanup warnings in Windows smoke; see windows-smoke.stderr.log"
+  }
+}
