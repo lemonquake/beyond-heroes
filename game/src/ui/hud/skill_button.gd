@@ -32,6 +32,7 @@ func _init(p_action := &"", size_px := 64.0) -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _ready() -> void:
+	TouchGesture.register(self)
 	mouse_entered.connect(func() -> void:
 		_hover = true
 		queue_redraw())
@@ -40,6 +41,8 @@ func _ready() -> void:
 		queue_redraw())
 
 func set_skill(sid: StringName) -> void:
+	if sid != skill_id:
+		TouchGesture.cancel_for(self)
 	skill_id = sid
 	_icon = UIArt.skill_icon(sid) if sid != &"" else null
 	var s := DB.skill(sid) if sid != &"" else null
@@ -47,6 +50,8 @@ func set_skill(sid: StringName) -> void:
 	queue_redraw()
 
 func set_potion(base_id: StringName) -> void:
+	if base_id != potion_base:
+		TouchGesture.cancel_for(self)
 	kind = &"potion"
 	potion_base = base_id
 	var b := DB.item_base(base_id)
@@ -150,12 +155,20 @@ func _draw() -> void:
 			key, HORIZONTAL_ALIGNMENT_LEFT, -1, fs5, UITheme.PARCHMENT)
 
 func _gui_input(e: InputEvent) -> void:
+	if TouchGesture.consume(self, e, _touch_click):
+		return
 	if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 		activated.emit(self)
 		accept_event()
 	elif e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_RIGHT:
 		context.emit(self)
 		accept_event()
+
+func _touch_click(button: int, _at: Vector2, _double: bool) -> void:
+	if button == MOUSE_BUTTON_RIGHT:
+		context.emit(self)
+	else:
+		activated.emit(self)
 
 func _can_drop_data(_at: Vector2, data: Variant) -> bool:
 	if kind == &"potion":

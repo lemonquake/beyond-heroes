@@ -114,7 +114,7 @@ func _build() -> void:
 	var hint_m := MarginContainer.new()
 	hint_m.add_theme_constant_override("margin_left", 18)
 	left.add_child(hint_m)
-	hint_m.add_child(UITheme.label("Click or tap: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
+	hint_m.add_child(UITheme.label("Tap: buy one · Hold a stack: choose quantity" if Settings.touch_mode else "Click: buy one · Shift+click: choose quantity · Hover to compare with your gear", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
 	# player side
 	var right := vbox(8)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -154,7 +154,7 @@ func _build() -> void:
 	foot.add_child(_gold)
 	_junk_btn = button("Sell Marked Items", _sell_junk, &"", 230.0)
 	foot.add_child(_junk_btn)
-	right.add_child(UITheme.label("Right-click or Ctrl+click an item to sell it. Locked and favorite items are never sold.", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
+	right.add_child(UITheme.label("Hold an item to sell it. Locked and favorite items are never sold." if Settings.touch_mode else "Right-click or Ctrl+click an item to sell it. Locked and favorite items are never sold.", 14, UITheme.TEXT_MUTED, UITheme.body_font()))
 
 func refresh() -> void:
 	hero = Game.hero
@@ -233,10 +233,11 @@ func _refresh_stock() -> void:
 		s.price = e.price
 		s.price_ok = hero.inventory.gold >= e.price
 		s.drag_enabled = false
+		s.touch_hold_shift = mode == "buy" and it.base.is_stackable()
 		s.clicked.connect(_on_stock_clicked)
 		s.hovered.connect(func(sl: ItemSlot, inside: bool) -> void:
 			if inside:
-				var hint := "Click or tap to buy" + (" · Shift+click to choose quantity" if it.base.is_stackable() else "")
+				var hint := "Click or tap to buy" + ((" · Hold to choose quantity" if Settings.touch_mode else " · Shift+click to choose quantity") if it.base.is_stackable() else "")
 				if e.special:
 					hint = "One of a kind. " + hint
 				TooltipLayer.show_for(sl, func() -> Control: return Tips.item(it, {"hero": hero, "price": e.price, "hint": hint if mode == "buy" else "Click or tap to buy back"}))
@@ -327,7 +328,7 @@ func _on_bag_hover(s: ItemSlot, inside: bool) -> void:
 		return
 	var it := s.item
 	var sell := shop.sell_price(it, hero)
-	var hint := "Right-click to sell" if not it.is_protected() and it.base.sellable else ("Locked" if it.is_protected() else "")
+	var hint := ("Hold to sell" if Settings.touch_mode else "Right-click to sell") if not it.is_protected() and it.base.sellable else ("Locked" if it.is_protected() else "")
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(it, {"hero": hero, "sell": sell, "hint": hint}))
 
 func _sell_junk() -> void:

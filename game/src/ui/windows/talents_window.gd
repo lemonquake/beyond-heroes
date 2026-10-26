@@ -20,7 +20,7 @@ func _build() -> void:
 	_points = UITheme.label("", 20, UITheme.GOLD, UITheme.body_bold())
 	_points.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_points)
-	top.add_child(UITheme.label("Left-click: learn · Right-click: refund · Keystones exclude each other", 15, UITheme.TEXT_MUTED, UITheme.body_font()))
+	top.add_child(UITheme.label("Tap: learn · Hold: refund · Keystones exclude each other" if Settings.touch_mode else "Left-click: learn · Right-click: refund · Keystones exclude each other", 15, UITheme.TEXT_MUTED, UITheme.body_font()))
 	# bh-041: the page tabs wrap onto a second row and the page text sits under them, wrapped: with Class Transcendence's
 	# pages and locked previews a single row ran past the window edge and pushed the whole window off the screen
 	var pages := vbox(4)

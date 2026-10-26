@@ -260,7 +260,10 @@ func dress(equipment: Equipment) -> void:
 			return
 	for piece in plan.pieces:
 		if not dyes.is_empty():
-			piece["dye"] = layer_dye(dyes, String(piece.get("slot", "")))
+			var slot := String(piece.get("slot", ""))
+			# Fixed source outfits may dye each piece independently; personas keep
+			# their existing global palette and layered cloth rule.
+			piece["dye"] = dyes[slot] if dyes.get(slot) is Dictionary else layer_dye(dyes, slot)
 		for m in HeroWear.build(piece, visual.skeleton):
 			visual.adopt_mesh(m)
 			_wear.append(m)

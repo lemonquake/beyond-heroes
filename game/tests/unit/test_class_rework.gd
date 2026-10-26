@@ -141,23 +141,29 @@ func test_double_attack_cooldown_and_no_recursion() -> void:
 	a.receive_hit(attack(1), player)
 	var hp0 := a.hp
 	near(player.class_passives.double_cd, 1.2, 0.001, "repeat starts cooldown immediately")
-	await frames(15)
+	await _passive_timer_window()
 	ok(a.hp < hp0, "delayed second hit lands")
 	eq(player.class_passives.landed_attacks, 1, "repeat does not count for Bloodsucker")
 	var repeat_hp := a.hp
-	await frames(15)
+	await _passive_timer_window()
 	near(a.hp, repeat_hp, 0.001, "repeat does not recurse")
 	a.receive_hit(attack(2), player)
 	var hp1 := a.hp
-	await frames(15)
+	await _passive_timer_window()
 	near(a.hp, hp1, 0.001, "no repeat during cooldown")
 	player.class_passives.tick(1.2)
 	a.receive_hit(attack(3), player)
 	var hp2 := a.hp
-	await frames(15)
+	await _passive_timer_window()
 	ok(a.hp < hp2, "repeat is ready after cooldown")
 	cleanup()
 	done()
+
+func _passive_timer_window() -> void:
+	# Double Attack uses a process timer. Several catch-up physics steps may
+	# occur before that timer is processed, so count time on the same clock.
+	await host.get_tree().create_timer(0.25, false).timeout
+	await host.get_tree().process_frame
 
 func test_knight_regen_return_and_proc_guard() -> void:
 	setup(&"knight")

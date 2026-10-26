@@ -128,15 +128,15 @@ func _video(v: VBoxContainer) -> void:
 		Settings.set_efficiency(on)
 		_rebuild_pages())            # the preset changes the quality options below
 	_row(v, "Efficiency Mode", eff, "For phones and low-end PCs: lighter maps and shaders, a few nearby lights, no shadows or post effects, "
-		+ "30 fps. On with Mobile. Maps change from the next area you enter.")
+		+ "and lower rendering resolution. Keeps your frame rate limit. Maps change from the next area you enter.")
 	v.add_child(section("Quality"))
 	_option(v, "Shadow Quality", "shadows_quality", Settings.QUALITY_NAMES, "Low disables torch and lamp shadows.")
 	_option(v, "Texture Quality", "texture_quality", Settings.QUALITY_NAMES, "Texture filtering (anisotropy) and sharpness.")
 	_option(v, "Effects Quality", "effects_quality", Settings.QUALITY_NAMES, "Ambient occlusion, glow, volumetric fog and detail.")
 	_option(v, "Anti-Aliasing", "anti_aliasing", Settings.AA_NAMES)
-	_slider(v, "Render Scale", "render_scale", 0.5, 1.0, 0.05, "%d%%", 100.0, "Renders the 3D world at a lower resolution and upscales it (FSR). Lower is faster.")
+	_slider(v, "Render Scale", "render_scale", 0.5, 1.0, 0.05, "%d%%", 100.0, "Renders the 3D world at a lower resolution and upscales it. Uses FSR with Forward+ and bilinear upscaling with Mobile or Compatibility. Lower is faster.")
 	if Settings.is_mobile_device():
-		_option(v, "Frame Rate Limit", "fps_limit_index", ["Unlimited", "30", "60", "120", "144"], "30 saves battery; 60 is smoother.")
+		_frame_rate(v)
 
 func _display(v: VBoxContainer) -> void:
 	v.add_child(section("Display"))
@@ -146,7 +146,23 @@ func _display(v: VBoxContainer) -> void:
 	_option(v, "Resolution", "resolution", res, "Window size in windowed mode. Fullscreen uses your monitor's resolution.")
 	_option(v, "Window Mode", "window_mode", Settings.WINDOW_MODES)
 	_check(v, "Vertical Sync", "vsync", "Prevents tearing; caps the frame rate to the monitor's refresh rate.")
-	_option(v, "Frame Rate Limit", "fps_limit_index", ["Unlimited", "30", "60", "120", "144"])
+	_frame_rate(v)
+
+func _frame_rate(v: VBoxContainer) -> void:
+	var rates: Array = Settings.FPS_LIMITS.duplicate()
+	if not rates.has(Settings.fps_limit):
+		rates.append(Settings.fps_limit)    # preserve a cap from an older build or a custom settings file
+	var o := OptionButton.new()
+	for rate in rates:
+		o.add_item("Unlimited" if int(rate) == 0 else "%d FPS" % int(rate))
+	o.selected = rates.find(Settings.fps_limit)
+	o.custom_minimum_size.y = 44
+	o.item_selected.connect(func(i: int) -> void: Settings.set_value("fps_limit", rates[i]))
+	_row(v, "Frame Rate Limit", o, "30 FPS saves battery. 90–240 FPS can feel smoother on a supported display. Actual frame rate depends on the scene, device, display mode, battery and temperature.")
+	var hz := DisplayServer.screen_get_refresh_rate() if DisplayServer.get_name() != "headless" else -1.0
+	var info := UITheme.label("Current display: %.0f Hz" % hz if hz > 0.0 else "Display refresh rate unavailable", 18, UITheme.TEXT_MUTED, UITheme.body_font())
+	info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	v.add_child(info)
 
 func _audio(v: VBoxContainer) -> void:
 	v.add_child(section("Volume"))

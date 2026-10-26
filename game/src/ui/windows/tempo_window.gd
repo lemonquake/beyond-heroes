@@ -181,7 +181,7 @@ func _build_bag() -> Control:
 	var col := vbox(8)
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	col.add_child(section("Your bag"))
-	var hint := UITheme.label("Right-click an item (or drag it onto a slot) to give it to your Tempo. Right-click an equipped piece to take it back.", 14, UITheme.TEXT_DIM, UITheme.body_font())
+	var hint := UITheme.label("Hold an item to give it to your Tempo. Hold an equipped piece to take it back." if Settings.touch_mode else "Right-click an item (or drag it onto a slot) to give it to your Tempo. Right-click an equipped piece to take it back.", 14, UITheme.TEXT_DIM, UITheme.body_font())
 	_bag_hint = hint
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.custom_minimum_size = Vector2.ZERO
@@ -448,10 +448,10 @@ func _on_hover(s: ItemSlot, inside: bool) -> void:
 			TooltipLayer.show_for(s, func() -> Control: return Tips.text("Empty. Drag an item here from your bag.", BH.SLOT_NAMES[s.equip_slot]))
 		return
 	var equipped := s.kind == ItemSlot.Kind.EQUIPMENT
-	var hint := "Right-click to take it back" if equipped else ""
+	var hint := ("Hold to take it back" if Settings.touch_mode else "Right-click to take it back") if equipped else ""
 	if not equipped and s.item.is_equipment() and current:
 		var err := TempoRules.equip_error(hero, current, s.item)
-		hint = ("Right-click to give it to %s" % current.tempo_name) if err == "" else "%s cannot use this: %s" % [current.tempo_name, err]
+		hint = (("Hold to give it to %s" if Settings.touch_mode else "Right-click to give it to %s") % current.tempo_name) if err == "" else "%s cannot use this: %s" % [current.tempo_name, err]
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(s.item, {"hero": hero, "equipped": equipped, "compare": false, "hint": hint}))
 
 func _release() -> void:

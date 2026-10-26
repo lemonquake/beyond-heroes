@@ -1,0 +1,13 @@
+{
+  "clips": [
+    "bow_idle",
+    "bow_shoot",
+    "bow_hold",
+    "bow_loose"
+  ],
+  "output_sha256": "5dd81162e919837fa6b2302007b7dd91a5f115e39c6b2ea7f7a7a2a4d3b2dd3f",
+  "source_collision": "WOA assets/characters/hero/mocap/collide/hero.res",
+  "source_collision_sha256": "c01385a284f68381406a53d714403c5a7de02d171cc58071c6f49e71b2c81380",
+  "source_library": "WOA assets/characters/hero/mocap/hero_mocap.res",
+  "source_library_sha256": "0f5ec66f77cf4e56a5f1fc223c40326fd5bb6a55e90fe59f73628ccaf43fb54c"
+}

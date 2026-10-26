@@ -124,8 +124,16 @@ func warm_up() -> void:
 	for v in holder.find_children("*", "VisualInstance3D", true, false):
 		(v as VisualInstance3D).layers = Perf.FX_LAYER
 	var fades := _warm_fades(at)
+	var overlay_visuals: Array[CharacterVisual] = []
+	for visual in Perf._visuals:
+		if is_instance_valid(visual) and visual.is_inside_tree() and visual._overlay != null:
+			visual.warm_overlay(true)
+			overlay_visuals.append(visual)
 	for i in WARM_FRAMES:
 		await get_tree().process_frame
+	for visual in overlay_visuals:
+		if is_instance_valid(visual):
+			visual.warm_overlay(false)
 	if is_instance_valid(fades):
 		fades.queue_free()      # the faded materials stay alive in MaterialLibrary's cache; the map keeps its own meshes
 	if is_instance_valid(holder):

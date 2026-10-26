@@ -8,6 +8,7 @@ signal clicked(slot: ItemSlot, button: int, shift: bool, ctrl: bool)
 signal double_clicked(slot: ItemSlot)
 signal dropped(from: ItemSlot, to: ItemSlot)
 signal hovered(slot: ItemSlot, inside: bool)
+signal touch_context(slot: ItemSlot) # inventory exposes its action menu; other owners use their secondary click
 
 enum Kind { INVENTORY, EQUIPMENT, SHOP, BUYBACK, DISPLAY }
 
@@ -24,6 +25,7 @@ var dim := false                   # filtered out by search / category
 var price := -1                    # shop label under the icon (-1 = none)
 var price_ok := true
 var drag_enabled := true
+var touch_hold_shift := false       # merchant stacks: hold opens the quantity chooser
 var _hover := false
 var _t := 0.0
 
@@ -36,6 +38,7 @@ func _init(p_kind := Kind.INVENTORY, size_px := 64.0) -> void:
 	focus_mode = Control.FOCUS_NONE
 
 func _ready() -> void:
+	TouchGesture.register(self)
 	set_process(_shimmers())
 	mouse_entered.connect(func() -> void:
 		_hover = true
@@ -47,6 +50,8 @@ func _ready() -> void:
 		queue_redraw())
 
 func set_item(it: ItemInstance, p_unusable := false) -> void:
+	if item != it:
+		TouchGesture.cancel_for(self)
 	item = it
 	unusable = p_unusable
 	# only an elite item shimmers; every other slot (hundreds across the inventory, stash and shops) sleeps (bh-014)
@@ -190,12 +195,22 @@ func _draw() -> void:
 		draw_string(font, pp, pt, HORIZONTAL_ALIGNMENT_LEFT, -1, fs2, UITheme.GOLD if price_ok else UITheme.BAD)
 
 func _gui_input(e: InputEvent) -> void:
+	if TouchGesture.consume(self, e, _touch_click):
+		return
 	if e is InputEventMouseButton and e.pressed:
 		if e.double_click and e.button_index == MOUSE_BUTTON_LEFT:
 			double_clicked.emit(self)
 		else:
 			clicked.emit(self, e.button_index, e.shift_pressed, e.ctrl_pressed or e.meta_pressed)
 		accept_event()
+
+func _touch_click(button: int, _at: Vector2, double: bool) -> void:
+	if button == MOUSE_BUTTON_RIGHT and not touch_context.get_connections().is_empty():
+		touch_context.emit(self)
+	elif double and button == MOUSE_BUTTON_LEFT:
+		double_clicked.emit(self)
+	else:
+		clicked.emit(self, button, touch_hold_shift and button == MOUSE_BUTTON_RIGHT, false)
 
 func _get_drag_data(_at: Vector2) -> Variant:
 	if item == null or not drag_enabled:

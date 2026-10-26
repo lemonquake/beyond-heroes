@@ -63,6 +63,10 @@ var _fidget_at := 8.0
 var _loco_pos := Vector2.ZERO
 var _overlay: ShaderMaterial
 var _flash_tw: Tween
+var _flash_amount := 0.0
+var _rim_amount := 0.0
+var _overlay_attached := false
+var _overlay_warmups := 0
 var _status_nodes := {}
 var _weapon_nodes := {}
 var _set_nodes: Array[Node3D] = []
@@ -76,6 +80,8 @@ static var _overlay_shader: Shader
 var appearance := {}                        # model, scale, tint, pers, weapons {hand: [path, offset]}, look (heroes)
 ## bh-023: set when the model is the hero's own body (HeroLook.MODEL): the look and the worn equipment live there.
 var hero: HeroBody
+var _role_body: HeroBody                # fixed Blood Ranger outfit; receives fade/decay too
+var _hero_class: StringName = &""        # only local hero/preview setup enables body switching
 var action_serial := 0                      # bumps on every new action (the same clip twice still restarts remotely)
 var action_rate := 1.0
 
@@ -113,6 +119,49 @@ func setup(model_path: String, scale_factor := 1.0, primary_tint := Color.WHITE,
 		hero = HeroBody.new(self)
 		if not hero.ok():
 			hero = null
+	elif model_path == HeroModels.HUNTER and not fallback:
+		_role_body = HeroModels.blood_ranger(self)
+		if _role_body:
+			_female = float(_role_body.look.get("female", 0.0)) >= 0.5
+			_refresh_loco()
+
+## Class models are optional presentation data. Legacy looks remain fully editable.
+func setup_hero(class_id: StringName, look: Dictionary, primary_tint := Color.WHITE) -> void:
+	_hero_class = class_id
+	setup(HeroModels.model_for(class_id, look), 1.0, primary_tint, class_id)
+	set_look(look)
+
+func _replace_hero_model(path: String) -> void:
+	# Look changes happen in the creator. Keep this node (combat/status effects and
+	# class signatures refer to it); equipment is reapplied by Player/Preview.
+	if model:
+		remove_child(model)
+		model.queue_free()
+	model = null
+	anim_player = null
+	tree = null
+	skeleton = null
+	hero = null
+	_role_body = null
+	fallback = false
+	_female = false
+	_in_action = false
+	_action = &""
+	_upper = 0.0
+	_upper_target = 0.0
+	_meshes.clear()
+	_local_mats.clear()
+	_weapon_nodes.clear()
+	_set_nodes.clear()
+	_set_appearance = ""
+	setup(path, 1.0, tint_primary, _hero_class)
+	_refresh_rim()
+	if _opacity < 0.999:
+		var opacity := _opacity
+		_opacity = -1.0
+		set_opacity(opacity)
+	if _dead:
+		play_death(&"death")
 
 func _set_ground_speeds(scale_factor: float) -> void:
 	ground_speed_walk = float(DB.anim(_loco_clip(&"walk")).get("ground_speed", 1.6)) * scale_factor
@@ -150,6 +199,11 @@ func _refresh_loco() -> void:
 
 ## bh-023: a hero's look (HeroLook). Ignored by every other model.
 func set_look(look: Dictionary) -> void:
+	if _hero_class != &"":
+		var path := HeroModels.model_for(_hero_class, look)
+		if path != String(appearance.get("model", "")):
+			_replace_hero_model(path)
+		appearance["look"] = HeroLook.to_save(HeroLook.sanitize(look))
 	if hero == null:
 		return
 	hero.apply(look)
@@ -180,13 +234,15 @@ func set_model_scale(s: float) -> void:
 func adopt_mesh(m: MeshInstance3D) -> void:
 	m.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	m.layers = 2
-	m.material_overlay = _overlay
+	m.material_overlay = _overlay if _overlay_attached else null
 	if not _meshes.has(m):
 		_meshes.append(m)
 
 func release_mesh(m: MeshInstance3D) -> void:
 	_meshes.erase(m)
 	_local_mats.erase(m)
+	if is_instance_valid(m) and m.material_overlay == _overlay:
+		m.material_overlay = null
 
 func _find(n: Node, cls: String) -> Node:
 	if n.get_class() == cls:
@@ -207,6 +263,7 @@ func _collect_meshes(n: Node) -> void:
 
 func _prepare_animations() -> void:
 	preload("res://src/actors/crossbow_animations.gd").install(anim_player)
+	HeroAnimations.install(anim_player, skeleton, String(appearance.get("model", "")))
 	for lib_name in anim_player.get_animation_library_list():
 		var lib := anim_player.get_animation_library(lib_name)
 		for an in lib.get_animation_list():
@@ -819,15 +876,38 @@ void fragment() {
 	ALPHA = 1.0;
 }
 """
-	_overlay = ShaderMaterial.new()
-	_overlay.shader = _overlay_shader
-	for m in _meshes:
-		m.material_overlay = _overlay
+	if _overlay == null:
+		_overlay = ShaderMaterial.new()
+		_overlay.shader = _overlay_shader
+	_sync_overlay(true)  # a replacement model inherits a flash/rim already in progress
+
+func _sync_overlay(force := false) -> void:
+	var active := _flash_amount != 0.0 or _rim_amount != 0.0 or _overlay_warmups > 0
+	if not force and active == _overlay_attached:
+		return
+	_overlay_attached = active
+	for mesh in _meshes:
+		if is_instance_valid(mesh):
+			mesh.material_overlay = _overlay if active else null
+
+## FX.warm_up attaches the black pass during its existing loading frames so its shader variants compile before
+## the first hit. A counter permits overlapping warmups; ending one never removes an active flash or status rim.
+func warm_overlay(on: bool) -> void:
+	_overlay_warmups = maxi(0, _overlay_warmups + (1 if on else -1))
+	_sync_overlay()
+
+func _set_flash_amount(amount: float) -> void:
+	_flash_amount = amount
+	if _overlay:
+		_overlay.set_shader_parameter("flash", amount)
+	_sync_overlay()
 
 func set_rim(color: Color, amount: float) -> void:
+	_rim_amount = amount
 	if _overlay:
 		_overlay.set_shader_parameter("rim_color", color)
 		_overlay.set_shader_parameter("rim", amount)
+	_sync_overlay()
 
 func flash(color := Color(1, 1, 1), strength := 1.0, time := 0.14) -> void:
 	if _overlay == null:
@@ -835,9 +915,9 @@ func flash(color := Color(1, 1, 1), strength := 1.0, time := 0.14) -> void:
 	if _flash_tw:
 		_flash_tw.kill()
 	_overlay.set_shader_parameter("flash_color", color)
-	_overlay.set_shader_parameter("flash", strength)
+	_set_flash_amount(strength)
 	_flash_tw = create_tween()
-	_flash_tw.tween_method(func(v): _overlay.set_shader_parameter("flash", v), strength, 0.0, time)
+	_flash_tw.tween_method(_set_flash_amount, strength, 0.0, maxf(0.0, time))
 
 # ---- Weapons ------------------------------------------------------------------------------------------------
 
@@ -866,7 +946,10 @@ func dress_equipment(equipment: Equipment) -> void:
 	_set_appearance = signature
 	for old in _set_nodes:
 		for mesh in _meshes.duplicate():
-			if not is_instance_valid(mesh) or old.is_ancestor_of(mesh): _meshes.erase(mesh)
+			if not is_instance_valid(mesh):
+				_meshes.erase(mesh)
+			elif old.is_ancestor_of(mesh):
+				release_mesh(mesh)
 		old.get_parent().remove_child(old)
 		old.queue_free()
 	_set_nodes = preload("res://src/actors/boss_set_visuals.gd").wear(self, equipment, hero != null,
@@ -876,7 +959,7 @@ func dress_equipment(equipment: Equipment) -> void:
 		_collect_into(attachment,meshes)
 		for mesh in meshes:
 			mesh.layers = 2
-			mesh.material_overlay = _overlay
+			mesh.material_overlay = _overlay if _overlay_attached else null
 			_meshes.append(mesh)
 
 func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.IDENTITY) -> void:
@@ -885,7 +968,7 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 		return
 	if appearance.has("weapons"):
 		appearance.weapons[hand] = [model_path, offset]
-	var bone := "weapon.R" if hand == &"main" else "weapon.L"
+	var bone := HeroModels.weapon_bone(hand, model_path)
 	var holder: Node3D
 	if skeleton and skeleton.find_bone(bone) >= 0:
 		var ba := BoneAttachment3D.new()
@@ -905,7 +988,7 @@ func attach_weapon(hand: StringName, model_path: String, offset := Transform3D.I
 	_collect_into(w, ms)
 	MaterialLibrary.apply_character(ms, tint_primary)
 	for m in ms:
-		m.material_overlay = _overlay
+		m.material_overlay = _overlay if _overlay_attached else null
 		_meshes.append(m)
 	_weapon_nodes[hand] = holder
 
@@ -969,8 +1052,10 @@ func detach_weapon(hand: StringName) -> void:
 	if _weapon_nodes.has(hand):
 		var n: Node = _weapon_nodes[hand]
 		for m in _meshes.duplicate():
-			if not is_instance_valid(m) or n.is_ancestor_of(m):
+			if not is_instance_valid(m):
 				_meshes.erase(m)
+			elif n.is_ancestor_of(m):
+				release_mesh(m)
 		n.queue_free()
 		_weapon_nodes.erase(hand)
 
@@ -1172,6 +1257,8 @@ func set_opacity(a: float) -> void:
 				(c as BaseMaterial3D).albedo_color.a = a
 	if hero:
 		hero.set_opacity(a)
+	if _role_body:
+		_role_body.set_opacity(a)
 
 ## Meshes changed (the hero put something on): give the new ones their own materials if stealth or decay is active.
 func refresh_local_materials() -> void:
@@ -1187,6 +1274,8 @@ func set_decay(amount: float, tint := Color(0.16, 0.14, 0.12)) -> void:
 	_ensure_local_materials()
 	if hero:
 		hero.set_decay(amount)
+	if _role_body:
+		_role_body.set_decay(amount)
 	for arr in _local_mats.values():
 		for c in arr:
 			if not c is BaseMaterial3D:

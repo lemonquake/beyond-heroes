@@ -21,6 +21,10 @@ def main():
     parser.add_argument("--preset", choices=["Windows", "Android", "All"], default="All")
     parser.add_argument("--label", default="balance-20261003")
     args = parser.parse_args()
+    bow_motion = ROOT / "game/assets/characters/roles/blood_ranger_bow.res"
+    if not bow_motion.is_file():
+        raise SystemExit("Missing Blood Ranger bow motion. Run the local source extraction described in "
+                         "game/assets/characters/roles/CREDITS.md before exporting.")
     evidence = ROOT / "output" / args.label
     evidence.mkdir(parents=True, exist_ok=True)
     receipt = evidence / "builds.json"

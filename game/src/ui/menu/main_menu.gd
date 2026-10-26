@@ -481,17 +481,17 @@ static func hero_picture(por: TextureRect, hero: Dictionary, cls: String) -> voi
 	por.texture = t if t else UIArt.portrait(cls)
 	if t != null or not hero.has("progress"):      # a server summary carries no look to shoot
 		return
-	var key := hash([hero.get("look", {}), hero.get("equipment", {})])
+	var key := hash([cls, hero.get("look", {}), hero.get("equipment", {})])
 	if _card_shots.has(key):
 		por.texture = _card_shots[key]
 		return
-	_shoot_card(por, hero, key)
+	_shoot_card(por, hero, key, cls)
 
-static func _shoot_card(por: TextureRect, hero: Dictionary, key: int) -> void:
+static func _shoot_card(por: TextureRect, hero: Dictionary, key: int, cls: String) -> void:
 	var eq := Equipment.new()
 	eq.from_dict(hero.get("equipment", {}))
 	var lk = hero.get("look", {})
-	var img := await PortraitStudio.render_hero(lk if lk is Dictionary else {}, eq, ProfilePicture.SIZE)
+	var img := await PortraitStudio.render_hero(lk if lk is Dictionary else {}, eq, ProfilePicture.SIZE, StringName(cls))
 	if img == null:
 		return
 	var tex := ImageTexture.create_from_image(img)

@@ -14,6 +14,7 @@ the worst per-run p95/p99, so one slow run cannot hide).
 """
 import argparse
 import json
+import re
 import statistics
 import subprocess
 import sys
@@ -69,14 +70,23 @@ ALL = {**SCENARIOS, **MAP_DESIGN}
 GAME = ROOT / "game"
 
 
-def run_one(godot, label, scenario, profile, repeat):
+def run_one(godot, label, scenario, profile, repeat, options=None):
     spec, prof = ALL[scenario], PROFILES[profile]
     folder = OUT / label
     folder.mkdir(parents=True, exist_ok=True)
     report = folder / f"{scenario}__{profile}__r{repeat}.json"
+    options = options or {}
+    spec = {**spec}
+    if options.get("frames"):
+        spec["frames"] = str(options["frames"])
+    if options.get("seconds"):
+        spec["seconds"] = str(options["seconds"])
     command = [str(godot), "--path", str(GAME), "--rendering-method", prof["renderer"], "--resolution", "1280x720",
-               "res://tests/tools/beta_release_perf.tscn", "--", "--class=knight", "--slot=97", f"--profile={profile}",
+               options.get("scene") or "res://tests/tools/beta_release_perf.tscn", "--", "--class=knight", "--slot=97", f"--profile={profile}",
                f"--out={report}"] + [f"--{key}={value}" for key, value in spec.items()]
+    for key in ("body", "touch"):
+        if options.get(key) is not None:
+            command.append(f"--{key}={options[key]}")
     log = folder / f"{scenario}__{profile}__r{repeat}.log"
     started = time.time()
     with log.open("w", encoding="utf-8") as handle:
@@ -95,6 +105,8 @@ def run_one(godot, label, scenario, profile, repeat):
 def summarise(label):
     rows = {}
     for path in sorted((OUT / label).glob("*__r*.json")):
+        if not re.search(r"__r\d+\.json$", path.name):
+            continue  # optional raw-frame sidecars belong to the report, not to the summary input
         scenario, profile, _ = path.stem.rsplit("__", 2)
         total = json.loads(path.read_text())["total"]
         rows.setdefault((scenario, profile), []).append(total)
@@ -141,6 +153,11 @@ def main():
     run.add_argument("--root", default="", help="output root (default output/beta-20261002/perf)")
     run.add_argument("--keep-going", action="store_true", help="record a failed run and continue")
     run.add_argument("--game", default="", help="game project folder (default game/; a frozen copy measures a baseline)")
+    run.add_argument("--scene", default="", help="optional compatible probe scene")
+    run.add_argument("--frames", type=int, default=0, help="override sampled frames per scenario/spot")
+    run.add_argument("--seconds", type=float, default=0, help="minimum sampled wall time per scenario, divided across normal-map spots")
+    run.add_argument("--body", choices=("custom", "class"), default=None)
+    run.add_argument("--touch", choices=("0", "1"), default=None)
     cmp_ = sub.add_parser("compare")
     cmp_.add_argument("a")
     cmp_.add_argument("b")
@@ -159,7 +176,7 @@ def main():
         for scenario in (args.only.split(",") if args.only else list(SETS[args.set])):
             for profile in args.profiles.split(","):
                 try:
-                    run_one(args.godot, args.label, scenario, profile, repeat)
+                    run_one(args.godot, args.label, scenario, profile, repeat, vars(args))
                 except SystemExit as failure:
                     if not args.keep_going:
                         raise

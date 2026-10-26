@@ -14,10 +14,10 @@ static func signature(hero: HeroData) -> int:
 	for slot in HeroWear.SLOTS:
 		var it := hero.equipment.get_item(slot) if hero.equipment else null
 		worn.append(String(it.base.id) if it and it.base else "")
-	return hash([HeroLook.signature(hero.look), worn])
+	return hash([hero.cls.id if hero.cls else &"", HeroLook.signature(hero.look), worn])
 
 static func refresh(hero: HeroData, force := false) -> void:
-	if hero == null or not Persona.available() or DisplayServer.get_name() == "headless":
+	if hero == null or DisplayServer.get_name() == "headless":
 		return
 	if not force and not hero.id_pic.is_empty() and int(_last.get(hero.get_instance_id(), 0)) == signature(hero):
 		return
@@ -29,7 +29,7 @@ static func refresh(hero: HeroData, force := false) -> void:
 		var h := _pending
 		_pending = null
 		var sig := signature(h)
-		var img := await PortraitStudio.render_hero(h.look, h.equipment, ProfilePicture.SIZE)
+		var img := await PortraitStudio.render_hero(h.look, h.equipment, ProfilePicture.SIZE, h.cls.id if h.cls else &"")
 		if img == null:
 			continue
 		h.id_pic = img.save_jpg_to_buffer(0.88)

@@ -61,11 +61,15 @@ var _belt_names: Array[Label] = []
 var _btn_belt: Array[Button] = []
 var _belt_keys: Array[Button] = []
 var _hover_slot: ItemSlot
+var _touch_menu: PopupMenu
 
 func _init() -> void:
 	super._init("Inventory", Vector2(1680, 1040))
 
 func _build() -> void:
+	visibility_changed.connect(func() -> void:
+		if not is_visible_in_tree():
+			_close_touch_menu())
 	var row := hbox(22)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(row)
@@ -205,6 +209,7 @@ func _equip_slot(slot: StringName, px := 76.0) -> ItemSlot:
 	s.glyph = UIArt.tex("slots/glyph_%s.png" % GLYPH[slot])
 	s.size = Vector2(px, px)
 	s.clicked.connect(_on_equip_clicked)
+	s.touch_context.connect(_on_touch_context)
 	s.double_clicked.connect(func(sl): _unequip(sl.equip_slot))
 	s.dropped.connect(_on_drop)
 	s.hovered.connect(_on_hover)
@@ -404,7 +409,7 @@ func _build_bag() -> Control:
 		b.add_theme_font_override("font", UITheme.body_bold())
 		b.custom_minimum_size.y = 46
 		belt_row.add_child(b)
-	var hint := UITheme.label("Hold: equip or use · Drag onto a slot to equip · Double-tap an equipped item to remove it · Split with the Split button" if Settings.touch_mode else "Right-click: equip or use · Shift+click: split stack · Drag onto a slot to equip · Double-click an equipped item to remove it",
+	var hint := UITheme.label("Tap: select · Hold: item options · Drag onto a slot to equip · Double-tap: equip or remove" if Settings.touch_mode else "Right-click: equip or use · Shift+click: split stack · Drag onto a slot to equip · Double-click an equipped item to remove it",
 		14, UITheme.TEXT_MUTED, UITheme.body_font())
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	col.add_child(hint)
@@ -481,6 +486,7 @@ func _add_grid(parent: Control, start: int, end: int, columns: int) -> void:
 		var c := ItemSlot.new(ItemSlot.Kind.INVENTORY, CELL)
 		c.index = i
 		c.clicked.connect(_on_cell_clicked)
+		c.touch_context.connect(_on_touch_context)
 		c.double_clicked.connect(func(sl): _use(sl.item))
 		c.dropped.connect(_on_drop)
 		c.hovered.connect(_on_hover)
@@ -574,6 +580,59 @@ static func _fmt_gold(n: int) -> String:
 func _sel_item() -> ItemInstance:
 	return selected.item if selected and is_instance_valid(selected) else null
 
+func close_window() -> void:
+	_close_touch_menu()
+	super.close_window()
+
+func _close_touch_menu() -> void:
+	var menu := _touch_menu
+	_touch_menu = null
+	if is_instance_valid(menu):
+		menu.hide()
+		menu.queue_free()
+
+## Use the action bar's current labels, enabled states and handlers so touch and mouse offer the same actions.
+func _on_touch_context(slot: ItemSlot) -> void:
+	if slot.item == null:
+		return
+	_close_touch_menu()
+	_select(slot)
+	TooltipLayer.hide_for(slot) # Item options take priority over the large comparison tooltip on a phone.
+	var item := slot.item
+	var actions: Array[Button] = [_btn_use, _btn_split, _btn_lock, _btn_fav, _btn_junk, _btn_drop, _btn_destroy]
+	for belt_button in _btn_belt:
+		if belt_button.visible:
+			actions.append(belt_button)
+	var menu := PopupMenu.new()
+	_touch_menu = menu
+	menu.name = "ItemOptions"
+	menu.theme = UITheme.theme()
+	menu.add_theme_font_size_override("font_size", 24)
+	menu.add_theme_constant_override("v_separation", 14)
+	for i in actions.size():
+		menu.add_item(actions[i].text, i)
+		menu.set_item_disabled(i, actions[i].disabled)
+	menu.id_pressed.connect(func(index: int) -> void:
+		if visible and is_instance_valid(slot) and slot.item == item and index >= 0 and index < actions.size():
+			_select(slot)
+			if not actions[index].disabled:
+				actions[index].pressed.emit())
+	menu.popup_hide.connect(func() -> void:
+		TouchGesture.reset()
+		if _touch_menu == menu:
+			_touch_menu = null
+		menu.queue_free())
+	add_child(menu)
+	menu.reset_size()
+	# Popup windows use window pixels; GUI events and the item rectangle use viewport canvas coordinates.
+	var final := get_viewport().get_final_transform()
+	var rect := slot.get_global_rect()
+	var at := final * Vector2(rect.end.x + 12.0, rect.position.y)
+	var bounds := Rect2(Vector2.ZERO, Vector2(get_window().size))
+	at.x = clampf(at.x, 0.0, maxf(0.0, bounds.size.x - menu.size.x))
+	at.y = clampf(at.y, 0.0, maxf(0.0, bounds.size.y - menu.size.y))
+	menu.popup(Rect2i(Vector2i(at.round()), Vector2i.ZERO))
+
 func _select(s: ItemSlot) -> void:
 	if selected and is_instance_valid(selected):
 		selected.selected = false
@@ -641,6 +700,10 @@ func _on_hover(s: ItemSlot, inside: bool) -> void:
 		return
 	var equipped := s.kind == ItemSlot.Kind.EQUIPMENT
 	var hint := "Right-click to unequip" if equipped else ("Right-click to use" if s.item.base.is_consumable() else ("Right-click to equip" if s.item.is_equipment() else ""))
+	if Settings.touch_mode:
+		hint = "Hold for item options"
+	if Settings.touch_mode:
+		hint = "Hold for item options"
 	if not equipped and s.item.base.is_consumable() and not Settings.touch_mode:
 		hint += " · %s / %s / %s...: put on that belt key" % [BeltPicker.slot_name(0), BeltPicker.slot_name(1), BeltPicker.slot_name(2)]
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(s.item, {"hero": hero, "equipped": equipped, "hint": hint}))

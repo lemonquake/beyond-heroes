@@ -1,0 +1,56 @@
+[
+  {
+    "path": "hero_skin.png",
+    "identical": true,
+    "source_sha256": "0b6a383b8da77e2375f3f9a70d1c6ae1e3538452f43186236cee8e62e9f277c1",
+    "local_sha256": "0b6a383b8da77e2375f3f9a70d1c6ae1e3538452f43186236cee8e62e9f277c1"
+  },
+  {
+    "path": "hero_masks.png",
+    "identical": true,
+    "source_sha256": "f2e1c1e9148dc0fde4cbc66e8b430e9ed47d4d7aa3bf7381a3b109a0efa08b92",
+    "local_sha256": "f2e1c1e9148dc0fde4cbc66e8b430e9ed47d4d7aa3bf7381a3b109a0efa08b92"
+  },
+  {
+    "path": "hair/long.glb",
+    "identical": true,
+    "source_sha256": "23e841c5f6351e34c96104e0d8719d71146aa38e91c061ab950db295906500ec",
+    "local_sha256": "23e841c5f6351e34c96104e0d8719d71146aa38e91c061ab950db295906500ec"
+  },
+  {
+    "path": "wear/silk_undershirt.glb",
+    "identical": true,
+    "source_sha256": "64fb154dc5e4883637ec9045de11be2acebee2c7d1cbfbcc709e4d00d57915f5",
+    "local_sha256": "64fb154dc5e4883637ec9045de11be2acebee2c7d1cbfbcc709e4d00d57915f5"
+  },
+  {
+    "path": "wear/tc_trackers_leathers.glb",
+    "identical": true,
+    "source_sha256": "4591341f90ce32ff1aef03b3f93f15eb65c1e6f1b189e92524835ab991f3b008",
+    "local_sha256": "4591341f90ce32ff1aef03b3f93f15eb65c1e6f1b189e92524835ab991f3b008"
+  },
+  {
+    "path": "wear/trackers_breeches.glb",
+    "identical": true,
+    "source_sha256": "3442e9ecdbb8c380f7d6d191737b5974228ce9bd30d0e0ec5111217ac8b6a888",
+    "local_sha256": "3442e9ecdbb8c380f7d6d191737b5974228ce9bd30d0e0ec5111217ac8b6a888"
+  },
+  {
+    "path": "wear/wayfarer_boot.glb",
+    "identical": true,
+    "source_sha256": "609c615163c3c7755b6ffcbbd0e0189dcf629440f8b554f88bc2bf05cdb3a46e",
+    "local_sha256": "609c615163c3c7755b6ffcbbd0e0189dcf629440f8b554f88bc2bf05cdb3a46e"
+  },
+  {
+    "path": "wear/silk_glove.glb",
+    "identical": true,
+    "source_sha256": "3da59dc1f3bd17121ea82e83ccfbcb07d10771f5baceef5819591a3c9a78f112",
+    "local_sha256": "3da59dc1f3bd17121ea82e83ccfbcb07d10771f5baceef5819591a3c9a78f112"
+  },
+  {
+    "path": "wear/tc_bloodmoon_signet.glb",
+    "identical": true,
+    "source_sha256": "e0dd8aa516675e6403d52d9c2d138a2121302412f5583b3fe54fe2e70c5ac8fb",
+    "local_sha256": "e0dd8aa516675e6403d52d9c2d138a2121302412f5583b3fe54fe2e70c5ac8fb"
+  }
+]

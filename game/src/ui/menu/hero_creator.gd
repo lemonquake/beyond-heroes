@@ -14,7 +14,7 @@ signal back
 ## [page id, label, camera ("body" | "face"), controls]. Controls: ["choice", key, title], ["color", key, title,
 ## tones, follow label], ["slider", key, label, low word, high word], ["flag", key, label], ["presets"], ["tools"].
 const PAGES := [
-	["looks", "Looks", "body", [["presets"], ["tools"]]],
+	["looks", "Looks", "body", [["choice", "body", "Model"], ["presets"], ["tools"]]],
 	["body", "Body", "body", [
 		["slider", "female", "Figure", "Masculine", "Feminine"],
 		["slider", "height", "Height", "Short", "Towering"], ["slider", "build", "Build", "Lean", "Stout"],
@@ -311,6 +311,9 @@ func _heading(text: String) -> void:
 	_content.add_child(UITheme.label(text, 19, UITheme.BRONZE, UITheme.body_bold()))
 
 func _add_presets() -> void:
+	var help := UITheme.label("Class models use a fixed outfit. Equipped weapons and special item effects still show. Choose Custom hero to edit the body and show all worn equipment.", 17, UITheme.TEXT_DIM, UITheme.body_font())
+	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_content.add_child(help)
 	_heading("Ready-made looks")
 	var flow := HFlowContainer.new()
 	flow.add_theme_constant_override("h_separation", 8)
@@ -472,6 +475,8 @@ func _change(key: String, value: Variant) -> void:
 		return
 	_remember(key)
 	look[key] = value
+	if key != "body":
+		look["body"] = "custom"
 	preview.set_look(look)
 
 func _set_look(new_look: Dictionary, why: String) -> void:
@@ -577,6 +582,9 @@ func _pose(anim: StringName) -> void:
 
 func _toggle_gear() -> void:
 	preview.bare = not _gear_btn.button_pressed
+	if preview.bare and String(look.get("body", "custom")) == "class":
+		_change("body", "custom")
+		_fill_page()
 	preview.dress(hero)
 
 # ---- Colour mixer -----------------------------------------------------------------------------------------------

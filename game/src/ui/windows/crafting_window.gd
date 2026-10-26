@@ -198,7 +198,7 @@ func _build_salvage() -> Control:
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(right)
 	right.add_child(section("Salvage"))
-	var t := UITheme.label("Right-click a weapon, armor piece or accessory to break it down. Heavy gear gives iron, light gear hide, cloth gives linen; Advanced and better also give Arcane Dust, Elite and better Wisp Motes. Locked and favorite items are never salvaged.", 18, UITheme.TEXT, UITheme.body_font())
+	var t := UITheme.label(("Hold" if Settings.touch_mode else "Right-click") + " a weapon, armor piece or accessory to break it down. Heavy gear gives iron, light gear hide, cloth gives linen; Advanced and better also give Arcane Dust, Elite and better Wisp Motes. Locked and favorite items are never salvaged.", 18, UITheme.TEXT, UITheme.body_font())
 	t.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	right.add_child(t)
 	_salvage_info = UITheme.label("", 19, UITheme.GOLD, UITheme.body_font())
@@ -532,7 +532,7 @@ func _on_salvage_hover(s: ItemSlot, inside: bool) -> void:
 		TooltipLayer.hide_for(s)
 		return
 	var it := s.item
-	var hint := ("Right-click to salvage: " + yield_text(it)) if it.is_equipment() and not it.is_protected() else ("Locked" if it.is_protected() else "Cannot be salvaged")
+	var hint := (("Hold to salvage: " if Settings.touch_mode else "Right-click to salvage: ") + yield_text(it)) if it.is_equipment() and not it.is_protected() else ("Locked" if it.is_protected() else "Cannot be salvaged")
 	_salvage_info.text = ("%s → %s" % [it.display_name(), yield_text(it)]) if it.is_equipment() else ""
 	TooltipLayer.show_for(s, func() -> Control: return Tips.item(it, {"hero": hero, "hint": hint}))
 

@@ -19,6 +19,7 @@ const DRAG_AIM_MIN := 26.0          # px a skill must be dragged before it aims 
 const DRAG_AIM_FULL := 170.0        # px of drag for the skill's full range
 const TAP_TIME := 0.09              # how long a tapped action is held down
 const AIM_HOLD := 0.45              # the hand-aimed direction outlives the tap (the skill may wait in the input buffer)
+const REFRESH_INTERVAL := 1.0 / 30.0 # cooldown/status painting; input remains at the engine's event rate
 
 var player: Player
 var hud: Hud
@@ -36,11 +37,19 @@ var _aim_touch := -99                # touch dragging a skill
 var _aim_clear_at := 0.0
 var _pinch_d := -1.0
 var _was_active := false
+var _active_synced := false
 var _interact_text := ""
 var _attack_center := Vector2.ZERO
 var _layout_size := Vector2.ZERO
-var _long := {}                      # windows open: a held first finger becomes a right-click (use, equip, sell, refund)
-const LONG_PRESS := 0.5
+var _refresh_elapsed := REFRESH_INTERVAL
+var _shown_hero: HeroData
+var _belt_dirty := true
+var _belt_bindings: Array = []
+var _belt_previews: Array = []
+var _orb_rects: Array = []
+var _shown_interact := "\u0001"
+var _focused := true
+var _popup_open := false
 
 func _init() -> void:
 	name = "TouchControls"
@@ -90,13 +99,35 @@ func _ready() -> void:
 	var mm := _make(&"minimap", 80.0)
 	mm.style = &"area"
 	mm.hit_scale = 1.0
-	Events.player_spawned.connect(func(p: Node) -> void: player = p as Player)
+	Events.player_spawned.connect(_on_player_spawned)
 	Events.interact_prompt.connect(func(t: String) -> void: _interact_text = t)
 	Settings.changed.connect(_on_settings)
 	get_viewport().size_changed.connect(_layout)
 	if Game.player is Player:
 		player = Game.player
 	_on_settings()
+	visibility_changed.connect(func() -> void:
+		if not is_visible_in_tree():
+			_release_all()
+			TouchGesture.reset())
+
+func _on_player_spawned(p: Node) -> void:
+	_release_all()
+	TouchGesture.reset()
+	player = p as Player
+	_refresh_elapsed = REFRESH_INTERVAL
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
+		_focused = false
+		_release_all()
+		TouchGesture.reset()
+	elif what == NOTIFICATION_WM_WINDOW_FOCUS_IN or what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_APPLICATION_RESUMED:
+		_focused = true
+	elif what == NOTIFICATION_EXIT_TREE:
+		_release_all()
+		TouchGesture.reset()
+		_bind_hero(null)
 
 func _make(id: StringName, r: float) -> TouchButton:
 	var b := TouchButton.new(id, r)
@@ -113,6 +144,7 @@ func _on_settings() -> void:
 	_k = clampf(Settings.touch_size, 0.7, 1.4)
 	modulate.a = clampf(Settings.touch_opacity, 0.25, 1.0)
 	_layout_size = Vector2.ZERO
+	_orb_rects.clear()
 	_layout()
 
 # ---- Layout -------------------------------------------------------------------------------------------------------
@@ -178,19 +210,25 @@ static func _polar(deg: float, r: float) -> Vector2:
 
 ## Touch play, in a session, hero alive, nothing modal open.
 func is_active() -> bool:
-	return Settings.touch_mode and Game.in_session and player != null and is_instance_valid(player) and player.alive \
-		and not Game.ui_blocking and not get_tree().paused
+	return _focused and is_visible_in_tree() and Settings.touch_mode and Game.in_session and player != null and is_instance_valid(player) and player.alive \
+		and not Game.ui_blocking and not get_tree().paused and not TouchGesture.has_popup(get_viewport())
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var on := Settings.touch_mode and Game.in_session
 	visible = on
 	if not on:
-		if _was_active:
+		if _was_active or not _touches.is_empty() or not _taps.is_empty():
 			_release_all()
+			TouchGesture.reset()
 		_was_active = false
 		return
 	var active := is_active()
+	var popup := TouchGesture.has_popup(get_viewport())
+	if popup != _popup_open:
+		_popup_open = popup
+		TouchGesture.reset()
 	_sync_active(active)
+	TouchGesture.update()
 	if size != _layout_size:
 		_layout()
 	var now := Time.get_ticks_msec() * 0.001
@@ -202,41 +240,25 @@ func _process(_delta: float) -> void:
 		_aim_clear_at = 0.0
 		if player:
 			player.touch_aim_dir = Vector3.ZERO
-	if active:
+	_refresh_elapsed += delta
+	if active and (_refresh_elapsed >= REFRESH_INTERVAL or player.hero != _shown_hero):
+		_refresh_elapsed = 0.0
 		_refresh()
-	elif not _long.is_empty() and not _long.fired and now - _long.t0 >= LONG_PRESS:
-		_long.fired = true
-		for down in [true, false]:
-			var mb := InputEventMouseButton.new()
-			mb.button_index = MOUSE_BUTTON_RIGHT
-			mb.pressed = down
-			mb.position = _long.pos
-			mb.global_position = _long.pos
-			mb.device = InputEvent.DEVICE_ID_EMULATION
-			Input.parse_input_event(mb)
-		Input.vibrate_handheld(35)
-	queue_redraw()
-
-## Keyboard + mouse windows read right-clicks (use, equip, unequip, sell, salvage, refund a point). With a window open
-## in touch play, holding a finger still on something for half a second sends that right-click.
-func _track_long_press(e: InputEvent) -> void:
-	if is_active() or not Game.ui_blocking:
-		_long = {}
-		return
-	if e is InputEventScreenTouch and e.index == 0:
-		_long = {"pos": e.position, "t0": _now(), "fired": false} if e.pressed else {}
-	elif e is InputEventScreenDrag and e.index == 0 and not _long.is_empty() and e.position.distance_to(_long.pos) > 24.0:
-		_long = {}
-	elif e is InputEventScreenTouch and e.index != 0:
-		_long = {}
+	if active and (_stick_touch != -99 or _aim_touch != -99):
+		queue_redraw()
 
 func _sync_active(active: bool) -> void:
-	if active != _was_active:
+	if not _active_synced or active != _was_active:
 		if not active:
 			_release_all()
+			TouchGesture.reset()
 		_was_active = active
-	for b in _buttons:
-		b.visible = active
+		_active_synced = true
+		for b in _buttons:
+			b.visible = active
+		_refresh_elapsed = REFRESH_INTERVAL
+		_shown_interact = "\u0001"
+		queue_redraw()
 	# party-only buttons
 	button(&"ping").visible = active and Net.is_active()
 	button(&"regroup").visible = active and (Net.is_client() or Net.is_host() and Net.player_count() > 1)   # the host: Summon
@@ -246,14 +268,20 @@ func _refresh() -> void:
 	var hero := p.hero
 	if hero == null:
 		return
+	_bind_hero(hero)
 	# attack shows the main weapon
 	var main := hero.equipment.get_item(&"main_weapon")
-	button(&"attack").set_icon(main.icon() if main else UIArt.icon("items", "sword"))
+	var attack := button(&"attack")
+	var main_id: StringName = main.base.id if main else &""
+	if attack.get_meta(&"base", &"-") != main_id:
+		attack.set_meta(&"base", main_id)
+		attack.set_icon(main.icon() if main else UIArt.icon("items", "sword"))
 	for i in HeroData.SKILL_BAR_SIZE:
 		var b := button(StringName("skill_%d" % (i + 1)))
 		var sid: StringName = hero.skill_bar[i]
-		b.set_icon(UIArt.skill_icon(sid) if sid != &"" else null)
-		b.set_meta(&"skill", sid)
+		if b.get_meta(&"skill", &"-") != sid:
+			b.set_icon(UIArt.skill_icon(sid) if sid != &"" else null)
+			b.set_meta(&"skill", sid)
 		if sid == &"":
 			b.set_state(0.0, 0.0, true)
 			b.modulate.a = 0.35
@@ -265,31 +293,52 @@ func _refresh() -> void:
 	var dmax: float = p.stats.get_stat(&"dodge_cooldown", 1.0) if p.stats else 1.0
 	button(&"dodge").set_state(p.dodge_cd, dmax)
 	button(&"roll").set_state(p.dodge_cd, dmax)
+	if _belt_dirty or _belt_bindings != hero.potion_belt:
+		_belt_bindings = hero.potion_belt.duplicate()
+		_belt_previews.clear()
+		for i in HeroData.BELT_SIZE:
+			_belt_previews.append(hero.belt_preview(i))
+		_belt_dirty = false
 	for i in HeroData.ORB_SLOTS:
 		# the orbs use whatever the potion belt holds (bh-011: any consumable, chosen in the Bag)
 		var pb := button(&"potion_health" if i == 0 else &"potion_mana")
-		var bp := hero.belt_preview(i)
+		var bp: Dictionary = _belt_previews[i]
 		var best: StringName = bp.base
-		var base := DB.item_base(best)
-		if base and pb.get_meta(&"base", &"") != best:
+		if pb.get_meta(&"base", &"-") != best:
 			pb.set_meta(&"base", best)
-			pb.set_icon(load(base.icon_path()) if ResourceLoader.exists(base.icon_path()) else null)
+			var base := DB.item_base(best)
+			pb.set_icon(load(base.icon_path()) if base and ResourceLoader.exists(base.icon_path()) else null)
 		pb.set_state(p.potion_cd, Player.POTION_COOLDOWN, false, int(bp.count))
 	for q in range(HeroData.ORB_SLOTS, HeroData.BELT_SIZE):
 		var qb := button(HeroData.belt_action(q))
-		var qp := hero.belt_preview(q)
-		var qbase := DB.item_base(qp.base)
+		var qp: Dictionary = _belt_previews[q]
 		if qb.get_meta(&"base", &"-") != qp.base:
 			qb.set_meta(&"base", qp.base)
+			var qbase := DB.item_base(qp.base)
 			qb.set_icon(load(qbase.icon_path()) if qbase and ResourceLoader.exists(qbase.icon_path()) else UIArt.ui_icon("plus"))
 		qb.set_state(0.0, 1.0, false, int(qp.count) if qp.base != &"" else -1)
 	_place_potions()
 	var it := button(&"interact")
-	it.visible = _interact_text != ""
-	if it.visible:
+	if _shown_interact != _interact_text:
+		_shown_interact = _interact_text
+		it.visible = _interact_text != ""
 		it.caption = _short(_interact_text)
-		it.icon = UIArt.ui_icon(_interact_icon(_interact_text))
+		it.set_icon(UIArt.ui_icon(_interact_icon(_interact_text)))
 		it.queue_redraw()
+
+func _bind_hero(hero: HeroData) -> void:
+	if hero == _shown_hero:
+		return
+	if _shown_hero and _shown_hero.inventory_changed.is_connected(_on_inventory_changed):
+		_shown_hero.inventory_changed.disconnect(_on_inventory_changed)
+	_shown_hero = hero
+	if hero:
+		hero.inventory_changed.connect(_on_inventory_changed)
+	_belt_dirty = true
+
+func _on_inventory_changed() -> void:
+	_belt_dirty = true
+	_refresh_elapsed = REFRESH_INTERVAL
 
 ## The Interact button's picture for the verb on offer.
 static func _interact_icon(t: String) -> String:
@@ -311,6 +360,9 @@ func _place_potions() -> void:
 	var rs: Array = hud.orb_rects()
 	if rs.size() < 2:
 		return
+	if rs == _orb_rects:
+		return
+	_orb_rects = rs.duplicate()
 	for i in 2:
 		var r: Rect2 = rs[i]
 		var b := button(&"potion_health" if i == 0 else &"potion_mana")
@@ -333,9 +385,9 @@ func _place_potions() -> void:
 # ---- Touches ------------------------------------------------------------------------------------------------------
 
 func _input(e: InputEvent) -> void:
-	if not visible:
+	if not is_visible_in_tree() or not _focused:
 		return
-	_track_long_press(e)
+	TouchGesture.observe(e)
 	# a real mouse (not the one emulated from touches) drives the controls too, for testing touch play on a PC
 	if e is InputEventMouseButton and e.device != InputEvent.DEVICE_ID_EMULATION and e.button_index == MOUSE_BUTTON_LEFT \
 			and not DisplayServer.is_touchscreen_available():
@@ -343,7 +395,10 @@ func _input(e: InputEvent) -> void:
 	elif e is InputEventMouseMotion and e.device != InputEvent.DEVICE_ID_EMULATION and _touches.has(100):
 		_drag(100, e.position)
 	elif e is InputEventScreenTouch:
-		_touch(e.index, e.position, e.pressed)
+		if e.canceled:
+			_release_all()
+		else:
+			_touch(e.index, e.position, e.pressed)
 	elif e is InputEventScreenDrag:
 		_drag(e.index, e.position)
 
@@ -362,7 +417,7 @@ func _touch(idx: int, pos: Vector2, pressed: bool) -> void:
 			get_viewport().set_input_as_handled()
 		elif _in_stick_zone(pos) and _stick_touch == -99:
 			_stick_touch = idx
-			_stick_base = _stick_home if Settings.touch_fixed_stick else pos
+			_stick_base = _stick_home if Settings.touch_fixed_stick else get_global_transform_with_canvas().affine_inverse() * pos
 			_touches[idx] = {"btn": null, "stick": true, "start": pos, "pos": pos, "t0": _now()}
 			_drag(idx, pos)
 			get_viewport().set_input_as_handled()
@@ -393,10 +448,10 @@ func _drag(idx: int, pos: Vector2) -> void:
 	t.pos = pos
 	if t.get("stick", false):
 		var r := STICK_RADIUS * _k
-		var v := pos - _stick_base
+		var v := get_global_transform_with_canvas().affine_inverse() * pos - _stick_base
 		if v.length() > r and not Settings.touch_fixed_stick:
 			_stick_base += v.normalized() * (v.length() - r)     # the stick follows a thumb that slides past its rim
-			v = pos - _stick_base
+			v = get_global_transform_with_canvas().affine_inverse() * pos - _stick_base
 		v = v.limit_length(r)
 		_stick_knob = _stick_base + v
 		var n := v / r
@@ -409,9 +464,12 @@ func _drag(idx: int, pos: Vector2) -> void:
 		_pinch()
 
 func _in_stick_zone(p: Vector2) -> bool:
+	p = get_global_transform_with_canvas().affine_inverse() * p
 	return p.x < size.x * 0.42 and p.y > size.y * 0.32
 
 func _set_stick(v: Vector2) -> void:
+	if v != _stick_vec:
+		queue_redraw()
 	_stick_vec = v
 	for pair in [[&"move_left", -v.x], [&"move_right", v.x], [&"move_up", -v.y], [&"move_down", v.y]]:
 		if pair[1] > 0.0:
@@ -455,7 +513,15 @@ func _press(b: TouchButton, idx: int) -> void:
 					Input.action_press(b.id)
 
 func _release(b: TouchButton, idx: int, pos: Vector2) -> void:
+	for other in _touches:
+		var t: Dictionary = _touches[other]
+		if t.get("btn") == b:
+			if idx == _aim_touch:
+				_aim_touch = other
+				_update_drag_aim(t)
+			return # Another finger is still holding this action.
 	b.set_held(false)
+	queue_redraw()
 	match b.id:
 		&"attack": Input.action_release(&"primary")
 		&"heavy": Input.action_release(&"secondary")
@@ -534,6 +600,8 @@ func _pinch() -> void:
 		_pinch_d = d
 
 func _release_all() -> void:
+	for a in _taps:
+		Input.action_release(a)
 	for a in [&"primary", &"secondary", &"guard", &"move_left", &"move_right", &"move_up", &"move_down", &"dodge",
 			&"potion_health", &"potion_mana", &"interact"]:
 		Input.action_release(a)
@@ -548,8 +616,11 @@ func _release_all() -> void:
 	_stick_base = _stick_home
 	_stick_knob = _stick_home
 	_aim_touch = -99
+	_aim_clear_at = 0.0
+	_pinch_d = -1.0
 	if player and is_instance_valid(player):
 		player.touch_aim_dir = Vector3.ZERO
+	queue_redraw()
 
 static func _now() -> float:
 	return Time.get_ticks_msec() * 0.001

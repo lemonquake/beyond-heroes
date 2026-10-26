@@ -149,11 +149,18 @@ func rebuild_stats() -> void:
 func set_appearance(app: Dictionary) -> void:
 	if app.is_empty():
 		return
+	if visual != null and String(visual.appearance.get("model", "")) != String(app.get("model", "")):
+		remove_child(visual)
+		visual.queue_free()
+		visual = null
+		_serial = -1
 	if visual == null:
 		visual = CharacterVisual.new()
 		visual.name = "Visual"
 		add_child(visual)
 		visual.setup(String(app.get("model", "")), float(app.get("scale", 1.0)), app.get("tint", Color.WHITE), StringName(app.get("pers", &"")))
+		if not alive:
+			visual.play_death(&"death")
 		_built = true
 	# bh-023: another player's hero wears their own look (cleaned by HeroLook before use)
 	if visual.hero:

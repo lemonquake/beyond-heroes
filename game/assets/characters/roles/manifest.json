@@ -1,0 +1,158 @@
+{
+  "emelrich": {
+    "source": "A:\\Python\\woa\\assets\\characters\\heroes17\\emelrich.glb",
+    "source_sha256": "adfa423d7991d9cd6ab47647496164c58ff1dee3379b1126bba79371e71b6e87",
+    "output_sha256": "9bf7059eca944bebdcad667f5e75e82bbb4477998086e11d1b6d2086be6cc804",
+    "bytes": 9083544,
+    "triangles": 26947,
+    "animations": 132,
+    "maps": [
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          1024,
+          1024
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "azrin": {
+    "source": "A:\\Python\\woa\\assets\\characters\\heroes17\\azrin.glb",
+    "source_sha256": "4a25f3c5324d6d005a74f36215b2b19a42dcf1d10f458e7ac1de68350a1dbd99",
+    "output_sha256": "afe3fb030fc6dc05c96a20e66329a0b8e273d969e2d5a8c944bb1ea1880ad4a0",
+    "bytes": 10759100,
+    "triangles": 52000,
+    "animations": 133,
+    "maps": [
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "caziel": {
+    "source": "A:\\Python\\woa\\assets\\characters\\heroes17\\caziel.glb",
+    "source_sha256": "ecffdd079bd167e8c89052fab8890fbc40e0eb8e1915db2d607933faedc759ae",
+    "output_sha256": "e866ad98a298840dfb3e69be6a1ae669b3497b2626764d7cdc3990efa45b08be",
+    "bytes": 9882500,
+    "triangles": 40000,
+    "animations": 132,
+    "maps": [
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          2048,
+          2048
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "blood_ranger": {
+    "source": "A:/Python/woa/assets/characters/hero/hero.glb",
+    "shared": "res://assets/characters/hero.glb",
+    "sha256": "47232c8e834b3b0447d21953bbe2a1b97d0505140040690cacc99a099a1f2d0c",
+    "bytes": 8010444
+  }
+}

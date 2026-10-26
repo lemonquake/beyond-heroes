@@ -39,6 +39,7 @@ const COLORS := {
 ## Styles: key -> [[id, label], ...]; the first is the default. The order of "pattern", "eye", "brow" and "marking"
 ## is the shader's numbering (hero_skin.gdshader).
 const CHOICES := {
+	"body": [["custom", "Custom hero"], ["class", "Class model"]],
 	"pattern": [["none", "Plain"], ["stripes", "Stripes"], ["spots", "Spots"], ["scales", "Scales"], ["stone", "Cracked Stone"],
 		["chequers", "Chequers"], ["halves", "Two Halves"], ["stars", "Starlight"], ["molten", "Molten"], ["metal", "Cast Metal"],
 		["camo", "Mottled"], ["spectral", "Spectral"]],

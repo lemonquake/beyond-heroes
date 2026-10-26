@@ -805,12 +805,15 @@ func _belt_tip(slot: int) -> Control:
 	var key := BeltPicker.slot_name(slot)
 	var what := HeroData.belt_label(id)
 	if id == &"":
+		if Settings.touch_mode:
+			return Tips.text("Tap or hold to choose a potion or scroll for this slot.", "%s: empty" % key)
 		return Tips.text("Click or right-click to choose a potion or scroll for this key, or drag one from your bag onto it. The key itself can be changed from the same menu, or in Settings.", "%s: empty" % key)
 	var body := (DB.item_base(id).flavor if DB.item_base(id) else "")
 	if HeroData.belt_is_auto(id):
 		body = "Drinks your strongest %s draught. Restores over 2 seconds; shared cooldown %.1f s." % [
 			"health" if id == HeroData.BELT_AUTO_HEAL else "mana", Player.POTION_COOLDOWN]
-	return Tips.text("%s\n\nRight-click to choose what %s uses, or drag a consumable from your bag onto it." % [body, key],
+	var instruction := "Hold to choose what %s uses." if Settings.touch_mode else "Right-click to choose what %s uses, or drag a consumable from your bag onto it."
+	return Tips.text("%s\n\n%s" % [body, instruction % key],
 		"%s: %s" % [key, what])
 
 func _update_pips(v: int, m: int) -> void:

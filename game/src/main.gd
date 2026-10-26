@@ -291,6 +291,8 @@ func _quick_start() -> void:
 	Game.hero = Game.new_hero(cls, String(args.get("name", "Wanderer")))
 	if args.has("look"):                    # --look=<preset id>: a HeroLook preset for captures and probes
 		Game.hero.look = HeroLook.to_save(HeroLook.preset(String(args.look)))
+	if args.has("body"):                    # run-only model selection for reproducible captures and performance probes
+		Game.hero.look["body"] = "class" if String(args.body) == "class" else "custom"
 	var lvl := int(args.get("level", "1"))
 	if lvl > 1:
 		Game.hero.progress.add_xp(XpCurve.total_xp_for_level(lvl))

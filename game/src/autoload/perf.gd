@@ -164,6 +164,7 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 			continue
 		if v.get_viewport() != cam.get_viewport():
 			v.set_anim_awake(true)          # a portrait in its own viewport (character preview): always posed
+			v.set_anim_stride(1)
 			awake += 1
 			continue
 		var p := v.global_position + Vector3.UP
@@ -178,6 +179,8 @@ func _sleep_animations(cam: Camera3D, focus: Vector3) -> void:
 			awake += 1
 			if v.crowd_lod or (lite and v.ally_lod):
 				crowd.append([p.distance_squared_to(focus), v])
+			elif v.anim_stride != 1:
+				v.set_anim_stride(1)    # leaving efficiency mode or the crowd ranking restores full-rate poses
 		elif v.anim_stride != 1:
 			v.set_anim_stride(1)
 	if crowd.size() > CROWD_FULL / 2:

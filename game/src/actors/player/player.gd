@@ -158,9 +158,7 @@ func bind(h: HeroData) -> void:
 	visual = CharacterVisual.new()
 	visual.name = "Visual"
 	add_child(visual)
-	# bh-023: every class wears its gear on the hero's own body (the class models remain for spirits and townsfolk)
-	visual.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else h.cls.model_path, 1.0, h.cls.tint, h.cls.id)
-	visual.set_look(h.look)
+	visual.setup_hero(h.cls.id, h.look, h.cls.tint)
 	refresh_equipment_visuals()
 	refresh_class_look()
 	mark_stats_dirty()
@@ -214,7 +212,8 @@ func refresh_equipment_visuals() -> void:
 	# bh-037: HeroData reports every level-up and point spent as a change too; re-making the same weapons cost ~40 ms
 	# mid-fight. They are rebuilt only when what is held (item, model, crystals, rarity) differs.
 	var wkey := [_weapon_sig(main, lo.main_type), _weapon_sig(sub, lo.off_type)]
-	if wkey == _weapon_key and visual.has_weapon(&"main") == (main != null and lo.main_type != null):
+	if wkey == _weapon_key and visual.has_weapon(&"main") == (main != null and lo.main_type != null) \
+			and visual.has_weapon(&"off") == (sub != null and (sub.base.category == &"shield" or lo.off_type != null)):
 		visual.set_stance(stance_idle())
 		return
 	_weapon_key = wkey

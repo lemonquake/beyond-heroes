@@ -39,21 +39,28 @@ func _resize() -> void:
 
 ## Centre the disc on `c` (canvas coordinates of the parent).
 func place(c: Vector2, r := -1.0) -> void:
+	var changed := false
 	if r > 0.0 and r != radius:
 		radius = r
 		_resize()
-	position = c - Vector2(radius, radius)
-	queue_redraw()
+		changed = true
+	var at := c - Vector2(radius, radius)
+	if position != at:
+		position = at
+		changed = true
+	if changed:
+		queue_redraw()
 
 func center() -> Vector2:
-	return global_position + Vector2(radius, radius)
+	return get_global_transform_with_canvas() * Vector2(radius, radius)
 
 func hit(p: Vector2) -> bool:
 	if not is_visible_in_tree():
 		return false
-	if (p - center()).length() <= radius * hit_scale:
+	var local := get_global_transform_with_canvas().affine_inverse() * p - Vector2(radius, radius)
+	if local.length() <= radius * hit_scale:
 		return true
-	return style == &"badge" and (p - center() - badge_offset).length() <= badge_radius * 1.3
+	return style == &"badge" and (local - badge_offset).length() <= badge_radius * 1.3
 
 func set_held(on: bool) -> void:
 	if held != on:

@@ -51,6 +51,8 @@ ENV/
 
 # Generated diagnostic log exceeds GitHub's per-file size limit; preserve locally.
 /output/world-polish-20261003/baseline/full-suite-raw.log
+/output/hero-port-20261026/
+/output/hero-port-import-*.log
 /output/balance-full-tests.log
 /output/balance-full-final-tests.log
 
@@ -67,6 +69,8 @@ desktop.ini
 *~
 
 # bh-042: downloaded originals (re-fetched by assets_src/bh042/*.py; provenance in assets_src/bh042/sources.json)
+# Mixamo-derived Blood Ranger clips: ship inside the game, not as loose public assets.
+/game/assets/characters/roles/blood_ranger_bow.res
 assets_src/bh042/oga/
 assets_src/bh042/itch/
 assets_src/bh042/extracted/

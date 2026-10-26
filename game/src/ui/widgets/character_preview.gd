@@ -180,8 +180,7 @@ func show_class(class_id: StringName, hero: HeroData = null) -> void:
 		visual.queue_free()
 	visual = CharacterVisual.new()
 	pivot.add_child(visual)
-	visual.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else cls.model_path, 1.0, cls.tint, cls.id)
-	visual.set_look(look)
+	visual.setup_hero(cls.id, look, cls.tint)
 	_light_for_hero(visual.hero != null)
 	visual.set_stance(&"idle")
 	dress(hero)
@@ -192,8 +191,10 @@ func set_look(p_look: Dictionary) -> void:
 	look = p_look
 	if visual:
 		var helm_before := bool(visual.hero.look.get("show_helm", true)) if visual.hero else true
+		var model_before := visual.model
 		visual.set_look(look)
-		if visual.hero and bool(visual.hero.look.get("show_helm", true)) != helm_before:
+		if visual.model != model_before or (visual.hero and bool(visual.hero.look.get("show_helm", true)) != helm_before):
+			_light_for_hero(visual.hero != null)
 			dress(_hero)
 
 ## Attach the weapons the hero (or, without a hero, the class's starting kit) holds.

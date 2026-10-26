@@ -15,7 +15,7 @@ const DEFAULT_NAMES := {&"knight": "Aldric", &"mage": "Seraphine", &"ranger": "T
 var class_id: StringName = &"knight"
 var preview: CharacterPreview
 ## bh-023: the look made in the creator (HeroLook; empty = the plain hero). Kept while the player goes back and forth.
-var look := {}
+var look := {"body": "class"}
 var creator: HeroCreator
 var _cards := {}
 var _title: Label

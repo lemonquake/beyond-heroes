@@ -34,7 +34,12 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_NONE
 
+func _ready() -> void:
+	TouchGesture.register(self)
+
 func bind(p_hero: HeroData, talents: bool) -> void:
+	if p_hero != hero or talents != is_talent:
+		TouchGesture.cancel_for(self)
 	hero = p_hero
 	is_talent = talents
 	if not preview:
@@ -44,6 +49,7 @@ func bind(p_hero: HeroData, talents: bool) -> void:
 ## Show `identity`'s page of a tree composed for the hero plus that advancement: a locked preview (nothing can be
 ## learned or refunded here; it is granted at the Grand Master).
 func bind_preview(p_hero: HeroData, talents: bool, identity: StringName) -> void:
+	TouchGesture.cancel_for(self)
 	hero = p_hero
 	is_talent = talents
 	preview = true
@@ -85,6 +91,7 @@ func _apply_zoom() -> void:
 
 ## Show another page of the tree.
 func set_page(p: int) -> void:
+	TouchGesture.cancel_for(self)
 	if preview:
 		end_preview()
 	page = p
@@ -217,9 +224,6 @@ func _draw_node(n: Dictionary) -> void:
 			draw_string_outline(font, gp, g, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, Color(0, 0, 0, 0.9))
 			draw_string(font, gp, g, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.6, 0.97, 1.0))
 
-var _touch_down_id: StringName = &""
-var _touch_down_t := 0
-
 func _node_at(p: Vector2) -> Dictionary:
 	for n in _nodes():
 		var sz: float = (ART.get(String(n.get("kind", "minor")), ART.minor) as Array)[1]
@@ -229,6 +233,8 @@ func _node_at(p: Vector2) -> Dictionary:
 
 func _gui_input(e: InputEvent) -> void:
 	if hero == null:
+		return
+	if TouchGesture.consume(self, e, _touch_click):
 		return
 	if e is InputEventMouseMotion:
 		var n := _node_at(e.position / zoom)
@@ -240,15 +246,6 @@ func _gui_input(e: InputEvent) -> void:
 				TooltipLayer.hide_for(self)
 			else:
 				TooltipLayer.show_for(self, func() -> Control: return _tip(n))
-	elif e is InputEventMouseButton and not e.pressed and e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
-		# touch play: a quick tap learns; a long press is a right-click (TouchControls) and refunds instead
-		var n := _node_at(e.position / zoom)
-		if not n.is_empty() and n.id == _touch_down_id and Time.get_ticks_msec() - _touch_down_t < 450 and not preview:
-			_learn(n)
-			queue_redraw()
-			TooltipLayer.refresh()
-		_touch_down_id = &""
-		accept_event()
 	elif e is InputEventMouseButton and e.pressed:
 		var n := _node_at(e.position / zoom)
 		if n.is_empty():
@@ -260,16 +257,21 @@ func _gui_input(e: InputEvent) -> void:
 			TooltipLayer.refresh()
 			accept_event()
 			return
-		if e.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode:
-			_touch_down_id = n.id
-			_touch_down_t = Time.get_ticks_msec()
-		elif e.button_index == MOUSE_BUTTON_LEFT:
+		if e.button_index == MOUSE_BUTTON_LEFT:
 			_learn(n)
 		elif e.button_index == MOUSE_BUTTON_RIGHT:
 			_refund(n)
 		queue_redraw()
 		TooltipLayer.refresh()
 		accept_event()
+
+func _touch_click(button: int, at: Vector2, _double: bool) -> void:
+	# Reuse the mouse path with the original local point, including the tree's own zoom.
+	var event := InputEventMouseButton.new()
+	event.position = at
+	event.button_index = button
+	event.pressed = true
+	_gui_input(event)
 
 func _learn(n: Dictionary) -> void:
 	var err := hero.spend_talent_point(n.id) if is_talent else hero.spend_skill_point(n.id)

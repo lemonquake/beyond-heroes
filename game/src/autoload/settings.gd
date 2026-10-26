@@ -19,7 +19,7 @@ const AUTO_LOOT_NAMES := ["All items", "Equipment: Common and better", "Equipmen
 var resolution := 2                 # index into RESOLUTIONS (windowed size)
 var window_mode := 0                # 0 windowed, 1 borderless, 2 exclusive fullscreen
 var vsync := true
-var fps_limit := 0                  # 0 = unlimited
+var fps_limit := 0                  # 0 = unlimited; stored as a value, never as an option index
 var shadows_quality := 2            # 0 low (no local shadows) .. 3 ultra
 var texture_quality := 2            # anisotropy + mip bias
 var effects_quality := 2            # 0 low: no SSAO/volumetric/extra particles .. 3 ultra
@@ -62,7 +62,7 @@ var touch_size := 1.0               # scale of the on-screen buttons and stick
 var touch_auto_aim := true          # attacks and tapped skills turn toward the nearest enemy
 var touch_fixed_stick := false      # false: the stick appears where the left thumb lands
 # ---- EFFICIENCY (bh-009): on with Mobile. Low-end phones: the OpenGL renderer, a light budget, lighter shaders and maps,
-# sleeping far actors, 30 fps. Read by the map builders (applies from the next map load) and by `Perf`.
+# sleeping far actors. Read by the map builders (applies from the next map load) and by `Perf`.
 var efficiency_mode := false
 
 const KEYS := ["resolution", "window_mode", "vsync", "fps_limit", "shadows_quality", "texture_quality", "effects_quality",
@@ -94,10 +94,16 @@ var touch_mode: bool:
 ## Running on a phone or tablet (the export, not the chosen control mode).
 static func is_mobile_device() -> bool:
 	return OS.has_feature("mobile") or OS.has_feature("android") or OS.has_feature("ios")
-const FPS_LIMITS := [0, 30, 60, 120, 144]
+const FPS_LIMITS := [0, 30, 60, 90, 120, 144, 165, 240]
+var _has_frame_limit_preference := false
+var _android_refresh_limit := -1
+var _android_refresh_generation := 0
+const AndroidRefresh := preload("res://src/core/android_refresh.gd")
 var fps_limit_index: int:
 	get: return maxi(0, FPS_LIMITS.find(fps_limit))
-	set(v): fps_limit = FPS_LIMITS[clampi(v, 0, FPS_LIMITS.size() - 1)]
+	set(v):
+		fps_limit = FPS_LIMITS[clampi(v, 0, FPS_LIMITS.size() - 1)]
+		_has_frame_limit_preference = true
 
 func _ready() -> void:
 	load_file()
@@ -132,9 +138,9 @@ func _coerce(k: String, v: Variant) -> Variant:
 		TYPE_DICTIONARY: return v if v is Dictionary else {}
 	return v
 
-func load_file() -> void:
+func load_file(path := PATH) -> void:
 	var cfg := ConfigFile.new()
-	if cfg.load(PATH) != OK:
+	if cfg.load(path) != OK:
 		if is_mobile_device():
 			_mobile_defaults()
 		return
@@ -147,9 +153,10 @@ func load_file() -> void:
 	for k in d:
 		if k in KEYS:
 			set(k, _coerce(k, d[k]))
+	_has_frame_limit_preference = d.has("fps_limit")
 	# a phone that saved its settings before efficiency mode existed (or a PC that picked Mobile): switch it on once
 	if not d.has("efficiency_mode") and (is_mobile_device() or control_mode == "mobile"):
-		_efficiency_preset()
+		_efficiency_preset(not _has_frame_limit_preference)
 
 ## First launch on a phone or tablet: settings a mobile GPU and a small screen are comfortable with.
 func _mobile_defaults() -> void:
@@ -158,25 +165,27 @@ func _mobile_defaults() -> void:
 	auto_loot_enabled = true
 	auto_loot_mode = 1
 
-## The Mobile video preset: no shadows, no post effects, no anti-aliasing, 3D drawn at 70 % and scaled up, 30 fps.
-func _efficiency_preset() -> void:
+## The Mobile video preset. First launch targets 60 fps; quality changes keep an existing frame-limit choice.
+func _efficiency_preset(reset_frame_limit := true) -> void:
 	efficiency_mode = true
 	shadows_quality = 0
 	texture_quality = 0
 	effects_quality = 0
 	anti_aliasing = 0
 	render_scale = 0.7
-	fps_limit = 30
+	if reset_frame_limit:
+		fps_limit = 60
 
 ## Back to the desktop defaults when leaving efficiency mode.
-func _desktop_preset() -> void:
+func _desktop_preset(reset_frame_limit := true) -> void:
 	efficiency_mode = false
 	shadows_quality = 2
 	texture_quality = 2
 	effects_quality = 2
 	anti_aliasing = 2
 	render_scale = 1.0
-	fps_limit = 0
+	if reset_frame_limit:
+		fps_limit = 0
 
 ## Switch between keyboard + mouse and touch play (the first-launch question and Settings > Controls). Mobile turns
 ## on total efficiency; PC turns it off again (a phone always keeps it: its GPU is the reason it exists).
@@ -184,11 +193,11 @@ func set_control_mode(mode: String) -> void:
 	control_mode = mode
 	if mode == "mobile":
 		if not efficiency_mode:
-			_efficiency_preset()
+			_efficiency_preset(not _has_frame_limit_preference)
 		if ui_scale < 1.2 and is_mobile_device():
 			ui_scale = 1.25
 	elif efficiency_mode and not is_mobile_device():
-		_desktop_preset()
+		_desktop_preset(false)
 	apply()
 	save_file()
 
@@ -197,9 +206,9 @@ func set_efficiency(on: bool) -> void:
 	if on == efficiency_mode:
 		return
 	if on:
-		_efficiency_preset()
+		_efficiency_preset(false)
 	else:
-		_desktop_preset()
+		_desktop_preset(false)
 	apply()
 	save_file()
 	changed.emit()
@@ -211,6 +220,8 @@ func save_file() -> void:
 	cfg.save(PATH)
 
 func set_value(key: String, value) -> void:
+	if key == "fps_limit":
+		_has_frame_limit_preference = true
 	if key == "auto_loot_mode":
 		auto_loot_rules.erase("min_rarity")
 	set(key, value)
@@ -222,6 +233,10 @@ func reset_group(group: String) -> void:
 	for k in GROUPS.get(group, []):
 		set(k, defaults.get(k))
 	defaults.free()
+	if group == "video":
+		_has_frame_limit_preference = false
+		if is_mobile_device():
+			_efficiency_preset()    # restoring defaults on a phone keeps the safe first-launch video settings
 	apply()
 	save_file()
 
@@ -278,9 +293,10 @@ func _apply_video() -> void:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			2:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	if not headless and not Engine.is_editor_hint():
+	if not headless and not Engine.is_editor_hint() and DisplayServer.has_feature(DisplayServer.FEATURE_SWAP_BUFFERS):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if vsync else DisplayServer.VSYNC_DISABLED)
-	Engine.max_fps = fps_limit
+	Engine.max_fps = maxi(0, fps_limit)
+	_apply_android_refresh()
 	# anti-aliasing
 	vp.msaa_3d = [Viewport.MSAA_DISABLED, Viewport.MSAA_DISABLED, Viewport.MSAA_2X, Viewport.MSAA_4X, Viewport.MSAA_DISABLED][clampi(anti_aliasing, 0, 4)]
 	if RenderingServer.get_current_rendering_method() != "gl_compatibility":   # no FXAA in the OpenGL fallback
@@ -353,12 +369,34 @@ func _apply_world() -> void:
 		env.glow_enabled = glow
 		if not env.has_meta(&"volumetric_built"):
 			env.set_meta(&"volumetric_built", env.volumetric_fog_enabled)
-		env.volumetric_fog_enabled = bool(env.get_meta(&"volumetric_built")) and effects_quality >= 2
+		env.volumetric_fog_enabled = bool(env.get_meta(&"volumetric_built")) and effects_quality >= 2 and not efficiency_mode
 	if m.sun:
 		m.sun.shadow_enabled = shadows_quality > 0
 	for l in m.find_children("*", "OmniLight3D", true, false):
 		if l.has_meta(&"wants_shadow"):
 			l.shadow_enabled = bool(l.get_meta(&"wants_shadow")) and shadows_quality > 1
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_RESUMED:
+		_android_refresh_limit = -1   # Android may have recreated the rendering surface while paused.
+		_apply_android_refresh.call_deferred()
+
+func _apply_android_refresh(retry_generation := -1) -> void:
+	if not is_inside_tree() or not OS.has_feature("android") or Engine.is_editor_hint():
+		return
+	if retry_generation >= 0:
+		if retry_generation != _android_refresh_generation:
+			return
+	elif fps_limit == _android_refresh_limit:
+		return
+	else:
+		_android_refresh_limit = fps_limit
+		_android_refresh_generation += 1
+	if not AndroidRefresh.request(fps_limit) and retry_generation < 0:
+		# At startup/resume the surface can lag the scene by a few frames. Retry once; a later cap change makes
+		# this callback obsolete. Unrelated quality/audio changes do not send more native requests.
+		var generation := _android_refresh_generation
+		get_tree().create_timer(0.5).timeout.connect(func() -> void: _apply_android_refresh(generation))
 
 # ---- Key bindings ------------------------------------------------------------------------------------------------
 

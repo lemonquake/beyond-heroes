@@ -306,7 +306,9 @@ func _ready() -> void:
 						(l as OmniLight3D).omni_range if l is OmniLight3D else 0.0, l.light_energy, not Perf._off_lights.has(l), l.get_parent().name])
 		var rows: Array[Dictionary] = []
 		var last := Time.get_ticks_usec()
-		for f in frames:
+		var started := last
+		var minimum_us := int(float(args.get("seconds", "0")) * 1000000.0 / maxi(1, n_spots))
+		while rows.size() < frames or Time.get_ticks_usec() - started < minimum_us:
 			await get_tree().process_frame
 			var now := Time.get_ticks_usec()
 			rows.append({
@@ -468,6 +470,14 @@ func _stress(map: MapRoot) -> void:
 		for e: Enemy in get_tree().get_nodes_in_group(&"enemy"):
 			e.collision_mask &= ~BH.LAYER_ENEMY
 	await _wait(90)
+	if args.has("no_overlay"):
+		# Explicit render-cost ablation only: the normal game keeps hit flashes and status rims unchanged.
+		# Apply after the stress pack exists, then clear newly adopted gear/bodies as they enter the tree.
+		var cleared := _clear_character_overlays()
+		get_tree().node_added.connect(_clear_overlay_added)
+		print("OVERLAY_ABLATION cleared=%d" % cleared)
+	if args.has("overlay_settle"):
+		await _wait(maxi(0, int(args.overlay_settle)))  # pass the same settle count to both ablation variants
 	if args.has("shot"):
 		# a real frame of the brawl with the F3 overlay (frame rate, frame time) for the user (bh-014)
 		Dev.show_fps = true
@@ -545,7 +555,10 @@ func _stress(map: MapRoot) -> void:
 			(pair[0] as Signal).connect(cb)
 			ph_cbs.append([pair[0], cb])
 	last = Time.get_ticks_usec()
-	for f in frames:
+	var started := last
+	var minimum_us := int(float(args.get("seconds", "0")) * 1000000.0)
+	var f := 0
+	while f < frames or Time.get_ticks_usec() - started < minimum_us:
 		await get_tree().process_frame
 		var now := Time.get_ticks_usec()
 		var dt := (now - last) / 1000.0
@@ -571,6 +584,8 @@ func _stress(map: MapRoot) -> void:
 			"lights": 0,
 		})
 		last = now
+		f += 1
+	frames = rows.size()
 	print("PSTEPS physics steps per frame %.2f" % [float(Engine.get_physics_frames() - pf0) / maxf(1.0, frames)])
 	if args.has("phases"):
 		for c in ph_cbs:
@@ -771,6 +786,30 @@ func _active_lights() -> int:
 		if l.is_visible_in_tree() and l.light_energy > 0.0 and not (l is DirectionalLight3D):
 			n += 1
 	return n
+
+func _clear_character_overlays() -> int:
+	var count := 0
+	for v in get_tree().root.find_children("*", "CharacterVisual", true, false):
+		for mesh in v.find_children("*", "MeshInstance3D", true, false):
+			if mesh.material_overlay != null:
+				mesh.material_overlay = null
+				count += 1
+	return count
+
+func _clear_overlay_added(n: Node) -> void:
+	if n is MeshInstance3D:
+		# Equipment owners apply their overlay after adding the mesh; defer until setup has completed.
+		_clear_added_character_overlay.call_deferred(n)
+
+func _clear_added_character_overlay(n: Node) -> void:
+	if not is_instance_valid(n) or not n.is_inside_tree():
+		return
+	var parent := n.get_parent()
+	while parent != null:
+		if parent is CharacterVisual:
+			n.material_overlay = null
+			return
+		parent = parent.get_parent()
 
 func _summary(rows: Array[Dictionary]) -> Dictionary:
 	var out := {}

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/characters/hero.glb" id="1_body"]
+
+; This is the same author-owned body used by WOA's Blood Ranger. CharacterVisual
+; adds the source look and red leather outfit; equipped weapons remain separate.
+[node name="BloodRanger" instance=ExtResource("1_body")]

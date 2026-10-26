@@ -168,8 +168,10 @@ static func fit_columns(root: Control, max_h: float) -> bool:
 		var limit := max_h - (card.size.y - v.size.y) - 8.0
 		var sep := float(v.get_theme_constant("separation"))
 		var row := HBoxContainer.new()
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_theme_constant_override("separation", 18)
 		var col := VBoxContainer.new()
+		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_theme_constant_override("separation", int(sep))
 		var used := 0.0
 		for kid in v.get_children():
@@ -177,6 +179,7 @@ static func fit_columns(root: Control, max_h: float) -> bool:
 			if used + h > limit and col.get_child_count() > 0:
 				row.add_child(col)
 				col = VBoxContainer.new()
+				col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 				col.add_theme_constant_override("separation", int(sep))
 				used = 0.0
 			v.remove_child(kid)

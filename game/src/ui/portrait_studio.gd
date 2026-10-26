@@ -11,11 +11,13 @@ const SIZE := 256
 const BG_INNER := Color("47382c")
 const BG_OUTER := Color("0c0a09")
 
-## Render a portrait. `dress` is called with the CharacterVisual (already set up on the hero body) to put the look and
+## Render a portrait. `dress` is called with the CharacterVisual (already set up on the selected body) to put the look and
 ## clothes on it. Returns null when nothing can be drawn (headless, no tree, no model).
-static func render(dress: Callable, size := SIZE, yaw_deg := 14.0) -> Image:
+static func render(dress: Callable, size := SIZE, yaw_deg := 14.0, model_path := Persona.MODEL) -> Image:
 	var tree := Engine.get_main_loop() as SceneTree
-	if tree == null or DisplayServer.get_name() == "headless" or not Persona.available():
+	if tree == null or DisplayServer.get_name() == "headless" or not ResourceLoader.exists(model_path):
+		return null
+	if model_path == Persona.MODEL and not Persona.available():
 		return null
 	var vp := SubViewport.new()
 	vp.size = Vector2i(size, size)
@@ -50,8 +52,8 @@ static func render(dress: Callable, size := SIZE, yaw_deg := 14.0) -> Image:
 	var v := CharacterVisual.new()
 	vp.add_child(v)
 	tree.root.add_child(vp)
-	v.setup(Persona.MODEL, 1.0, Color.WHITE, &"")
-	if v.hero == null:
+	v.setup(model_path, 1.0, Color.WHITE, &"")
+	if v.hero == null and (not HeroModels.is_role(model_path) or v.skeleton == null):
 		vp.queue_free()
 		return null
 	dress.call(v)
@@ -123,12 +125,12 @@ static func render_persona(p: Dictionary, size := SIZE) -> Image:
 	return await render(dress, size)
 
 ## A hero's look and worn equipment as a portrait (the player's ID picture).
-static func render_hero(look: Dictionary, equipment: Equipment, size := SIZE) -> Image:
+static func render_hero(look: Dictionary, equipment: Equipment, size := SIZE, class_id: StringName = &"") -> Image:
 	var dress := func(v: CharacterVisual) -> void:
 		v.set_look(look)
 		if equipment:
 			v.dress_equipment(equipment)
-	return await render(dress, size)
+	return await render(dress, size, 14.0, HeroModels.model_for(class_id, look))
 
 static func _lin(c: Color) -> Color:
 	return c.srgb_to_linear()
