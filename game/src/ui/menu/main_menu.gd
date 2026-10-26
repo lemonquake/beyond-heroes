@@ -509,7 +509,12 @@ func _build_credits() -> PanelContainer:
 	t.text = "[center][b][color=#f5cc75]BEYOND HEROES[/color][/b]\nby Aljay Leodones\n\n" \
 		+ "[b][color=#ebdcbd]Design & Direction[/color][/b]\nAljay Leodones\n\n" \
 		+ "[b][color=#ebdcbd]Engine[/color][/b]\nGodot Engine (MIT licence)\n\n" \
-		+ "[b][color=#ebdcbd]Art, Audio & Code[/color][/b]\nAll models, textures, interface art, icons, sound effects and music are produced for this project by its own generation scripts (Blender, Python).\nSee ASSET_CREDITS.md for the full record.\n\n" \
+		+ "[b][color=#ebdcbd]Art, Audio & Code[/color][/b]\nProject artwork, audio and code by Aljay Leodones, with credited third-party assets.\nSee ASSET_CREDITS.md for the project asset record.\n\n" \
+		+ "[b][color=#ebdcbd]Class Hero Models[/color][/b]\nKnight: Bulky Knight by OptiCube (Arthur Krut).\nhttps://sketchfab.com/3d-models/002a90cbf12941b792f9685546a7502c\n\n" \
+		+ "Mage: Dark Fantasy Sorceress, Crystal Staff by s8819296.\nhttps://sketchfab.com/3d-models/a307ea3800d748c487d26235bb43ecc0\n\n" \
+		+ "Shadowblade: Corrupted Fallen Priest - Dark Fantasy by s8819296.\nhttps://sketchfab.com/3d-models/1ab734d8c4464ae49d5b5091f3ea2afc\n\n" \
+		+ "These three models use CC BY 4.0: https://creativecommons.org/licenses/by/4.0/\nAdapted in Warriors of Aether with colour, weapon and rig changes; texture sizes reduced for Beyond Heroes.\n\n" \
+		+ "Hunter: Jayla / Blood Ranger body, outfit and hero animation work by Aljay Leodones. Bow motion ported from Warriors of Aether's Mixamo-derived library.\n\n" \
 		+ "[b][color=#ebdcbd]Fonts[/color][/b]\nSystem fonts of the host operating system.\n\n" \
 		+ "[color=#9a8f80]Thank you for playing.[/color][/center]"
 	pv[1].add_child(t)
