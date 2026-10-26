@@ -526,7 +526,13 @@ static func binding_text(action: StringName) -> String:
 		if e is InputEventKey:
 			var code: Key = e.physical_keycode if e.physical_keycode != 0 else e.keycode
 			var mods := ("Ctrl+" if e.ctrl_pressed else "") + ("Alt+" if e.alt_pressed else "") + ("Shift+" if e.shift_pressed and code != KEY_SHIFT else "")
-			return mods + OS.get_keycode_string(DisplayServer.keyboard_get_label_from_physical(code) if e.physical_keycode != 0 and DisplayServer.get_name() != "headless" else code)
+			# Android and iOS have no physical-key label translation in their display servers. Keep the portable
+			# position label there (including external keyboards); desktop still uses the user's keyboard layout.
+			if e.physical_keycode != 0 and not is_mobile_device() and DisplayServer.get_name() != "headless":
+				var label := DisplayServer.keyboard_get_label_from_physical(code)
+				if label != KEY_NONE:
+					code = label
+			return mods + OS.get_keycode_string(code)
 		if e is InputEventMouseButton:
 			return {MOUSE_BUTTON_LEFT: "LMB", MOUSE_BUTTON_RIGHT: "RMB", MOUSE_BUTTON_MIDDLE: "MMB",
 				MOUSE_BUTTON_WHEEL_UP: "Wheel Up", MOUSE_BUTTON_WHEEL_DOWN: "Wheel Down"}.get(e.button_index, "Mouse %d" % e.button_index)

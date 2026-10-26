@@ -21,6 +21,7 @@ var _confirm: ConfirmDialog
 var _fade: ColorRect
 var _buttons: Array[Button] = []
 var _heroes: Array[CharacterVisual] = []
+var _backdrop_lite := false
 var _logo: TextureRect
 var _byline: Label
 var _server_menu: ServerMenu
@@ -215,41 +216,22 @@ func _animate_in() -> void:
 		tw.tween_property(b, "modulate:a", 1.0, 0.35)
 		i += 1
 
-## The 3D backdrop is built by the boot scene into the world (so the same map can host the game later).
+## Efficiency mode reaches the menus without building a complete gameplay map.
+## The small stage has one class model, no navigation/colliders and no particles.
 func build_backdrop(world: Node3D) -> void:
 	backdrop = Node3D.new()
 	backdrop.name = "MenuBackdrop"
 	world.add_child(backdrop)
+	_backdrop_lite = Perf.lite
+	if _backdrop_lite:
+		_build_light_backdrop()
+		return
 	var map := Game.build_map(&"sanctuary")
 	backdrop.add_child(map)
 	# the heroes by the fountain, facing the camera's orbit centre (a class joins once its model is built)
 	for pair in [[&"knight", Vector3(-1.6, 0, 8.6), 200.0], [&"mage", Vector3(1.7, 0, 8.4), 160.0],
 			[&"ranger", Vector3(-3.7, 0, 7.5), 215.0], [&"shadowblade", Vector3(3.8, 0, 7.3), 145.0]]:
-		var cls := DB.class_def(pair[0])
-		if cls == null or not ResourceLoader.exists(cls.model_path):
-			continue
-		var v := CharacterVisual.new()
-		backdrop.add_child(v)
-		# bh-023: the four by the fountain are heroes like the player's: one body, a face each, their starting kit
-		v.setup(HeroLook.MODEL if ResourceLoader.exists(HeroLook.MODEL) else cls.model_path, 1.0, cls.tint, cls.id)
-		v.set_look(HeroLook.preset(MENU_LOOKS.get(pair[0], "plain")))
-		v.position = pair[1]
-		v.rotation_degrees.y = pair[2]
-		var eq := Equipment.new()
-		for bid in cls.starting_items:
-			var it := DB.make_item(bid, BH.Rarity.BEGINNER, 1, 1)
-			if it and not it.base.is_weapon() and it.base.category != &"shield":
-				eq.slots[eq.auto_slot(it)] = it
-			if it and it.base.is_weapon():
-				var wt := DB.weapon_type(it.base.weapon_type)
-				if wt:
-					v.attach_weapon(&"main", wt.model, wt.grip_offset)
-					v.set_stance(wt.idle_anim if v.has_anim(wt.idle_anim) else &"idle")
-			elif it and it.base.category == &"shield":
-				v.attach_weapon(&"off", "res://assets/weapons/shield.glb")
-				v.set_stance(&"idle_shield" if v.has_anim(&"idle_shield") else &"idle")
-		v.dress_equipment(eq)
-		_heroes.append(v)
+		_add_menu_hero(pair[0], pair[1], pair[2])
 	# drifting embers and aether motes
 	backdrop.add_child(_particles(UIArt.tex("hud/ember.png"), Color(1.0, 0.65, 0.3), 90, Vector3(0, 0.6, 0), 0.16))
 	backdrop.add_child(_particles(UIArt.tex("hud/mote.png"), Color(0.55, 0.95, 1.0), 60, Vector3(0, 0.25, 0), 0.1))
@@ -259,6 +241,97 @@ func build_backdrop(world: Node3D) -> void:
 	backdrop.add_child(_cam)
 	_cam.make_current()
 	_place_cam()
+
+func _add_menu_hero(class_id: StringName, at: Vector3, yaw: float) -> void:
+	var cls := DB.class_def(class_id)
+	if cls == null or not ResourceLoader.exists(HeroModels.model_for(class_id, {"body": "class"})):
+		return
+	var hero := Game.new_hero(class_id, "Preview")
+	hero.look = HeroLook.preset(MENU_LOOKS.get(class_id, "plain"))
+	hero.look["body"] = "class"
+	var v := CharacterVisual.new()
+	backdrop.add_child(v)
+	v.setup_hero(class_id, hero.look, cls.tint)
+	v.position = at
+	v.rotation_degrees.y = yaw
+	v.dress_equipment(hero.equipment)
+	var loadout := hero.equipment.loadout()
+	var main := hero.equipment.get_item(&"main_weapon")
+	var off := hero.equipment.get_item(&"sub_weapon")
+	if main:
+		v.attach_weapon(&"main", main.base.model_path(), loadout.main_type.grip_offset if loadout.main_type else Transform3D.IDENTITY)
+	if off:
+		v.attach_weapon(&"off", off.base.model_path(), loadout.off_type.grip_offset if loadout.off_type else Transform3D.IDENTITY)
+	var stance := &"idle_shield" if loadout.has_shield else (loadout.main_type.idle_anim if loadout.main_type else &"idle")
+	v.set_stance(stance if v.has_anim(stance) else &"idle")
+	_heroes.append(v)
+
+func _build_light_backdrop() -> void:
+	var world_env := WorldEnvironment.new()
+	var env := Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color("101923")
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color("a4b4c8")
+	env.ambient_light_energy = 0.7
+	env.tonemap_mode = Environment.TONE_MAPPER_ACES
+	env.fog_enabled = true
+	env.fog_light_color = env.background_color
+	env.fog_density = 0.045
+	world_env.environment = env
+	backdrop.add_child(world_env)
+	var sun := DirectionalLight3D.new()
+	sun.rotation_degrees = Vector3(-42, -30, 0)
+	sun.light_color = Color("ffe3ba")
+	sun.light_energy = 1.3
+	sun.shadow_enabled = false
+	backdrop.add_child(sun)
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color("273443")
+	stone.roughness = 0.9
+	var gold := StandardMaterial3D.new()
+	gold.albedo_color = Color("957043")
+	gold.metallic = 0.55
+	gold.roughness = 0.45
+	var floor_mesh := PlaneMesh.new()
+	floor_mesh.size = Vector2(40, 30)
+	_stage_mesh(floor_mesh, stone, Vector3.ZERO)
+	# The untextured architectural pieces share two materials. There are no
+	# local lights, shadow passes or gameplay scene dependencies on this path.
+	for x in [-6.0, 6.0]:
+		var pillar := CylinderMesh.new()
+		pillar.top_radius = 0.36
+		pillar.bottom_radius = 0.5
+		pillar.height = 5.0
+		pillar.radial_segments = 8
+		_stage_mesh(pillar, stone, Vector3(x, 2.5, 1.0))
+	var base := CylinderMesh.new()
+	base.top_radius = 1.55
+	base.bottom_radius = 1.7
+	base.height = 0.28
+	base.radial_segments = 32
+	_stage_mesh(base, stone, Vector3(2.5, 0.14, 7.0))
+	var rim := TorusMesh.new()
+	rim.inner_radius = 1.49
+	rim.outer_radius = 1.61
+	rim.rings = 32
+	rim.ring_segments = 8
+	_stage_mesh(rim, gold, Vector3(2.5, 0.27, 7.0))
+	_add_menu_hero(&"knight", Vector3(2.5, 0.295, 7.0), -12.0)
+	_cam = Camera3D.new()
+	_cam.fov = 42.0
+	_cam.far = 55.0
+	backdrop.add_child(_cam)
+	_cam.make_current()
+	_place_cam()
+
+func _stage_mesh(mesh: Mesh, material: Material, at: Vector3) -> void:
+	var instance := MeshInstance3D.new()
+	instance.mesh = mesh
+	instance.material_override = material
+	instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	instance.position = at
+	backdrop.add_child(instance)
 
 func _particles(tex: Texture2D, col: Color, n: int, vel: Vector3, size: float) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
@@ -302,6 +375,11 @@ func _particles(tex: Texture2D, col: Color, n: int, vel: Vector3, size: float) -
 	return p
 
 func _place_cam() -> void:
+	if _backdrop_lite:
+		var sway := sin(_orbit * 0.7) * 0.12
+		_cam.global_position = Vector3(sway * 9.0, 3.0, 14.5)
+		_cam.look_at(Vector3(0.4, 1.3, 7.0))
+		return
 	var a := _orbit
 	_cam.global_position = CENTER + Vector3(sin(a) * 15.0, 5.5 + sin(a * 0.7) * 0.6, cos(a) * 15.0)
 	_cam.look_at(CENTER + Vector3(0, 0.2, 0))

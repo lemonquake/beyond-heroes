@@ -95,3 +95,38 @@ func test_native_refresh_is_optional_on_desktop() -> void:
 	if not OS.has_feature("android"):
 		ok(not Settings.AndroidRefresh.request(120), "desktop has no Android native request")
 	done()
+
+func test_binding_labels_on_portable_and_desktop_backends() -> void:
+	const ACTION := &"refresh_settings_binding_fixture"
+	InputMap.add_action(ACTION)
+	var key := InputEventKey.new()
+	key.physical_keycode = KEY_W
+	key.ctrl_pressed = true
+	key.alt_pressed = true
+	key.shift_pressed = true
+	InputMap.action_add_event(ACTION, key)
+	var physical := Settings.binding_text(ACTION)
+	ok(physical.begins_with("Ctrl+Alt+Shift+"), "physical bindings retain modifiers on every backend")
+	ok(physical.length() > "Ctrl+Alt+Shift+".length(), "a physical binding always has a readable key label")
+	if Settings.is_mobile_device() or DisplayServer.get_name() == "headless":
+		eq(physical, "Ctrl+Alt+Shift+W", "backends without layout translation use the portable physical-position label")
+	InputMap.action_erase_events(ACTION)
+	key = InputEventKey.new()
+	key.keycode = KEY_F
+	key.ctrl_pressed = true
+	InputMap.action_add_event(ACTION, key)
+	eq(Settings.binding_text(ACTION), "Ctrl+F", "logical bindings retain their named key")
+	InputMap.action_erase_events(ACTION)
+	var mouse := InputEventMouseButton.new()
+	mouse.button_index = MOUSE_BUTTON_RIGHT
+	InputMap.action_add_event(ACTION, mouse)
+	eq(Settings.binding_text(ACTION), "RMB", "mouse binding labels remain available on touch devices")
+	InputMap.erase_action(ACTION)
+	eq(Settings.binding_text(ACTION), "", "removed or missing actions have no binding label")
+	done()
+
+func test_mobile_startup_aa_matches_compatibility_renderer() -> void:
+	eq(ProjectSettings.get_setting("rendering/renderer/rendering_method.mobile"), "gl_compatibility", "mobile starts with the compatibility renderer")
+	eq(ProjectSettings.get_setting("rendering/anti_aliasing/quality/screen_space_aa.mobile"), 0, "mobile startup does not request unsupported screen-space AA")
+	eq(ProjectSettings.get_setting("rendering/anti_aliasing/quality/screen_space_aa"), 1, "desktop startup keeps its FXAA setting")
+	done()
