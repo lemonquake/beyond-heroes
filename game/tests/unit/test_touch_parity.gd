@@ -10,6 +10,21 @@ var _hero: HeroData
 var _player: Player
 var _clicks: Array = []
 
+class EngineInputBridge extends Node:
+	var target: SubViewport
+	var target_position := Vector2.ZERO
+	var order: Array[String] = []
+	func _input(event: InputEvent) -> void:
+		if event is InputEventScreenTouch or event is InputEventMouseButton and event.device == InputEvent.DEVICE_ID_EMULATION:
+			order.append("touch" if event is InputEventScreenTouch else "mouse")
+			# This viewport is not displayed in the root window. Rebase the already
+			# synthesized pair to its fixture, retaining the real engine's event order/device.
+			var local_event := event.duplicate()
+			local_event.position = target_position
+			if local_event is InputEventMouseButton:
+				local_event.global_position = target_position
+			target.push_input(local_event, true)
+
 func _init() -> void:
 	strict = true
 
@@ -78,22 +93,26 @@ func _slot(parent: Node = null) -> ItemSlot:
 func _point(control: Control) -> Vector2:
 	return control.get_global_transform_with_canvas() * (control.size * 0.5)
 
-## push_input bypasses Input's OS emulation, so send the same pair of events an Android contact generates.
-func _touch(position: Vector2, down: bool, index := 0, canceled := false) -> void:
+## push_input bypasses Input's OS emulation. Godot 4.7.2 dispatches the synthesized mouse before the raw touch.
+func _touch(position: Vector2, down: bool, index := 0, canceled := false, mouse_first := true) -> void:
 	var raw := InputEventScreenTouch.new()
 	raw.position = position
 	raw.index = index
 	raw.pressed = down
 	raw.canceled = canceled
-	_vp.push_input(raw, true)
+	var mouse: InputEventMouseButton
 	if index == 0:
-		var mouse := InputEventMouseButton.new()
+		mouse = InputEventMouseButton.new()
 		mouse.position = position
 		mouse.global_position = position
 		mouse.device = InputEvent.DEVICE_ID_EMULATION
 		mouse.button_index = MOUSE_BUTTON_LEFT
 		mouse.button_mask = MOUSE_BUTTON_MASK_LEFT if down else 0
 		mouse.pressed = down
+		if mouse_first:
+			_vp.push_input(mouse, true)
+	_vp.push_input(raw, true)
+	if mouse != null and not mouse_first:
 		_vp.push_input(mouse, true)
 
 func _drag(position: Vector2, relative := Vector2(40, 0)) -> void:
@@ -133,6 +152,96 @@ func test_a_tap_and_hold_have_one_result_and_mouse_keeps_quick_use() -> void:
 	mouse.button_index = MOUSE_BUTTON_RIGHT
 	_vp.push_input(mouse, true)
 	eq(_clicks.size(), 2, "real mouse right-click still acts immediately in touch mode")
+	_cleanup()
+	done()
+
+func test_native_and_raw_first_orders_require_one_matching_contact() -> void:
+	await _setup()
+	var slot := _slot()
+	await _frames()
+	var at := _point(slot)
+	for mouse_first in [true, false]:
+		_clicks.clear()
+		_touch(at, true, 0, false, mouse_first)
+		eq(_clicks.size(), 0, "neither event order performs an action on press")
+		_touch(at, false, 0, false, mouse_first)
+		eq(_clicks, [[MOUSE_BUTTON_LEFT, false]], "both event orders tap exactly once on release")
+		_clicks.clear()
+		_touch(at, true, 0, false, mouse_first)
+		await _hold()
+		_touch(at, false, 0, false, mouse_first)
+		eq(_clicks, [[MOUSE_BUTTON_RIGHT, false]], "both event orders hold exactly once without a primary action")
+	# A synthetic GUI press cannot borrow an unrelated or later raw contact.
+	_clicks.clear()
+	var mouse := InputEventMouseButton.new()
+	mouse.position = at
+	mouse.global_position = at
+	mouse.device = InputEvent.DEVICE_ID_EMULATION
+	mouse.button_index = MOUSE_BUTTON_LEFT
+	mouse.button_mask = MOUSE_BUTTON_MASK_LEFT
+	mouse.pressed = true
+	_vp.push_input(mouse, true)
+	await _frames()
+	await _hold()
+	eq(_clicks.size(), 0, "an emulated mouse press without a raw contact cannot fire")
+	var raw := InputEventScreenTouch.new()
+	raw.position = at
+	raw.index = 0
+	raw.pressed = true
+	_vp.push_input(raw, true)
+	await _hold()
+	_touch(at, false)
+	eq(_clicks.size(), 0, "a later raw contact cannot revive an expired GUI press")
+	mouse.pressed = true
+	_vp.push_input(mouse, true)
+	raw.position = at + Vector2(2, 0)
+	raw.pressed = true
+	_vp.push_input(raw, true)
+	await _hold()
+	_touch(raw.position, false)
+	eq(_clicks.size(), 0, "a different raw position cannot claim the pending GUI target")
+	_cleanup()
+	done()
+
+func test_actual_engine_mouse_synthesis_routes_tap_and_hold() -> void:
+	await _setup()
+	var slot := _slot()
+	await _frames()
+	var bridge := EngineInputBridge.new()
+	bridge.target = _vp
+	bridge.target_position = _point(slot)
+	host.add_child(bridge)
+	var prior_mouse := Input.emulate_mouse_from_touch
+	var prior_touch := Input.emulate_touch_from_mouse
+	Input.emulate_mouse_from_touch = true
+	Input.emulate_touch_from_mouse = false
+	var raw := InputEventScreenTouch.new()
+	raw.index = 19
+	raw.position = _point(slot)
+	raw.pressed = true
+	Input.parse_input_event(raw)
+	Input.flush_buffered_events()
+	eq(bridge.order, ["mouse", "touch"], "the installed engine dispatches synthesized mouse before the original touch")
+	eq(_clicks.size(), 0, "the real engine pair does not select on press")
+	raw = raw.duplicate()
+	raw.pressed = false
+	Input.parse_input_event(raw)
+	Input.flush_buffered_events()
+	eq(_clicks, [[MOUSE_BUTTON_LEFT, false]], "actual Input synthesis selects once on release")
+	_clicks.clear()
+	raw = raw.duplicate()
+	raw.pressed = true
+	Input.parse_input_event(raw)
+	Input.flush_buffered_events()
+	await _hold()
+	raw = raw.duplicate()
+	raw.pressed = false
+	Input.parse_input_event(raw)
+	Input.flush_buffered_events()
+	eq(_clicks, [[MOUSE_BUTTON_RIGHT, false]], "actual Input synthesis holds once without selecting or repeating")
+	bridge.free()
+	Input.emulate_mouse_from_touch = prior_mouse
+	Input.emulate_touch_from_mouse = prior_touch
 	_cleanup()
 	done()
 

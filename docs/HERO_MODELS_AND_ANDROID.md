@@ -13,6 +13,8 @@ Class outfits are fixed cosmetics. Equipped weapons, shield crystals and special
 
 In touch mode, tap an inventory item to select it and hold it for its options. Options use the same availability rules as the action bar. Hold a shop stack to choose a quantity. Hold a skill or talent node to refund a rank. Hold a belt slot to choose its consumable. Sliding, a second finger, closing a window or losing application focus cancels a pending hold. Moving and aiming can use different fingers, and held actions release when play is interrupted.
 
+Efficiency Mode uses a small scene with one class hero for the main menu, avoiding the full town and its gameplay objects before Play. The desktop backdrop retains the town and all four class models.
+
 Video settings offer 30, 60, 90, 120, 144, 165 and 240 FPS caps, plus Unlimited. Quality changes retain the selected cap. A new mobile installation targets 60 FPS with lighter rendering; an existing saved cap is preserved. Choose 30 FPS to reduce power use or a higher cap for a faster display. On compatible Android versions the game also requests the chosen display rate; Android still decides according to the display, battery and temperature. A cap is a limit, not a promised measured speed.
 
 The Windows and Android build scripts require the local Blood Ranger animation resource. It is kept out of loose public source distribution. See [asset credits and extraction instructions](../game/assets/characters/roles/CREDITS.md). Model and source-motion hashes are recorded beside the assets. Build products are in `build/`; QA reports and screenshots are in `output/hero-port-20261026/`.

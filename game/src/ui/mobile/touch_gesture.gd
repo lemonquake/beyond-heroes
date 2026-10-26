@@ -16,6 +16,7 @@ static var _local_start := Vector2.ZERO
 static var _transform := Transform2D.IDENTITY
 static var _started := 0.0
 static var _finger := -1
+static var _pending_frame := -1
 static var _fired := false
 static var _double := false
 static var _modal := ""
@@ -33,14 +34,23 @@ static func consume(control: Control, event: InputEvent, callback: Callable) -> 
 		return false
 	if event.pressed:
 		cancel()
-		if _contacts.size() == 1 and _pointer >= 0:
+		if _contacts.size() <= 1:
 			_owner = weakref(control)
 			_callback = callback
 			_local_start = event.position
 			_transform = control.get_global_transform_with_canvas()
 			_start = _transform * event.position
 			_started = _now()
-			_finger = _pointer
+			if _contacts.size() == 1 and _contacts.has(_pointer) and (_contacts[_pointer] as Vector2).is_equal_approx(_start):
+				_finger = _pointer
+			elif _contacts.is_empty():
+				# Godot dispatches the emulated mouse press before its original raw touch.
+				# Keep this GUI target only until that matching contact arrives in this frame.
+				_pending_frame = Engine.get_process_frames()
+			else:
+				cancel()
+				control.accept_event()
+				return true
 			_double = event.double_click
 			_modal = _modal_signature()
 	# The raw release finishes the gesture even if it is outside the original GUI control.
@@ -55,6 +65,12 @@ static func observe(event: InputEvent) -> void:
 			_contacts[event.index] = event.position
 			if _contacts.size() > 1:
 				cancel()
+			elif _control() != null and _finger < 0:
+				if _pending_frame == Engine.get_process_frames() and event.position.is_equal_approx(_start) and _valid(_control()):
+					_finger = event.index
+					_pending_frame = -1
+				else:
+					cancel()
 		else:
 			if event.index == _finger:
 				if event.canceled:
@@ -78,6 +94,10 @@ static func update() -> void:
 	if not _valid(control):
 		cancel()
 		return
+	if _finger < 0:
+		if Engine.get_process_frames() != _pending_frame:
+			cancel()
+		return # An emulated GUI press alone is never enough to fire an action.
 	if not _fired and _now() - _started >= HOLD_SECONDS:
 		_fired = true # Set this before the callback: its refresh may replace or hide the target.
 		_callback.call(MOUSE_BUTTON_RIGHT, _local_start, false)
@@ -111,6 +131,7 @@ static func cancel() -> void:
 	_owner = null
 	_callback = Callable()
 	_finger = -1
+	_pending_frame = -1
 	_fired = false
 
 static func reset() -> void:

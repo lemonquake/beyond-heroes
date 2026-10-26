@@ -311,7 +311,9 @@ func start_intro() -> void:
 
 func _on_flag(flag: StringName, _v: Variant) -> void:
 	if flag == DataGuide.DONE_FLAG:
-		Events.notify.emit("Press %s any time to open the Field Guide." % Settings.binding_text(&"guide"), &"info")
+		var hint := "Open Menu > Field Guide any time for help." if Settings.touch_mode \
+			else "Press %s any time to open the Field Guide." % Settings.binding_text(&"guide")
+		Events.notify.emit(hint, &"info")
 
 func _on_player_died() -> void:
 	if ArenaGrounds.handles_death(Game.player):

@@ -101,7 +101,6 @@ func _touch(at: Vector2, pressed: bool) -> void:
 	raw.index = 0
 	raw.position = at
 	raw.pressed = pressed
-	get_viewport().push_input(raw, true)
 	var mouse := InputEventMouseButton.new()
 	mouse.position = at
 	mouse.global_position = at
@@ -109,7 +108,9 @@ func _touch(at: Vector2, pressed: bool) -> void:
 	mouse.button_index = MOUSE_BUTTON_LEFT
 	mouse.button_mask = MOUSE_BUTTON_MASK_LEFT if pressed else 0
 	mouse.pressed = pressed
+	# Godot synthesizes this mouse event before delivering its original raw contact.
 	get_viewport().push_input(mouse, true)
+	get_viewport().push_input(raw, true)
 
 func _wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds, true, false, true).timeout
